@@ -1,0 +1,283 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+.main-footer {
+	background:@footer-background;
+	padding: 0;
+	width: 100%;
+	font-family: 'Alegreya Sans', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.42857143;
+    padding-top: 50px;
+    position: absolute;
+    bottom:0;
+    height:290px;
+
+    .social-links {
+    	margin-top: -10px;
+    	padding: 0 0 30px;
+		ul {
+	    	&, li {
+	      	width: auto;
+	      	display: inline-block;
+	    	}
+		}
+	}
+
+   .footer__top {
+     .footer__nav--container {
+        .footer__nav--links {
+        a {
+    	   font-size:16px;
+    	   &:focus {
+    	   		outline: 3px solid @brand-primary;
+				background-color: @brand-primary;
+				color: @color-black;
+				text-decoration:none;
+				padding:1px;
+    	   	}
+    	}
+       }
+      }
+   }
+	.follow-us-Pinterest {
+		.custom-icon("@{url-img}/pinterest.gif", 27px, 27px); 
+	}
+	.follow-us-Instagram {
+		.custom-icon("@{url-img}/instagram.gif", 27px, 27px); 
+	}
+	.follow-us-LinkedIn {
+		.custom-icon("@{url-img}/linkedin.gif", 27px, 27px); 
+	}
+	.follow-us-YouTube {
+		.custom-icon("@{url-img}/youtube.gif", 27px, 27px); 
+	}
+	.follow-us-facebook {
+		.custom-icon("@{url-img}/facebook.gif", 27px, 27px); 
+	}
+	.follow-us-Twitter {
+		.custom-icon("@{url-img}/twitter.gif", 27px, 27px); 
+	}
+	.follow-us-googleplus {
+		.custom-icon("@{url-img}/gplus.gif", 27px, 27px); 
+	}
+	.social-lang-links {
+		padding:10px;
+	}
+	.links {
+		background: @footer-background;
+		margin-bottom: 1em;
+		padding-left:50px;
+	}
+	.footer-logo {
+    	margin-top:-10px;
+    	margin-bottom:20px;	
+    	padding-left:15px;
+    }
+	.footer-dropdown {
+		padding-top:30px;
+	}
+
+	.copyright {
+		background: @copyright-background; 
+		width: 100%;
+		text-align:center;
+		height:auto;
+		min-height:60px;
+		.copyright-text {
+	    	text-align:center;
+	    }
+		.container {
+    		  display: inline-block;
+    	}
+	}
+	#currency-form {
+		select {
+			border-color:@currency-form-border-color;
+			height:32px;
+			&:focus{  
+	          	outline: 3px solid @brand-primary;
+	        } 
+		}
+	}
+	#lang-form {
+		select {
+			border-color:@lang-form-border-color;
+			height:32px;
+			&:focus{  
+	          	outline: 3px solid @brand-primary;
+	        } 
+		}
+	}
+	
+	 select.form-control{
+	   padding: 2px 1px;
+	}
+	
+	.footer__right {
+	    border-top:none; 
+	    padding-top: 0;
+	    margin-top: 0;
+	}
+	
+   .footer__copyright {
+      padding: 17px 0;
+   }
+
+}
+
+.footer-left ul li a:visited{
+  	color:@color-white;
+}
+
+.footer-left ul li a:focus{
+  	outline: 3px solid @brand-primary;
+}
+
+.footer-left .form-control:focus{
+  	border-color:@color-white;
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px 
+@media (max-width: @screen-xs-max) {
+	.main-footer {
+	    padding-top:25px;
+	    height:420px;
+	    box-sizing: border-box;
+		a {
+	    	font-size:16px;
+	    }
+		.links {
+			text-align:center;
+			padding-left:20px;
+		}
+		.icon {
+			float:left;
+		}
+		.social-links {
+			display: inline-block;
+		}
+		.copyright {
+	    	.copyright-text {
+	    		text-align:center;
+	    		margin-top:-5px;
+	    	}	
+		}
+		#currency-form {
+			float:left;
+			width:100%;
+		}
+		#lang-form {
+			padding-bottom: 15px;
+			width:100%;
+		}
+		.lang-currency-section {
+			display:inline-block;
+			padding: 10px;
+			
+		} 
+		
+		.footer__right {
+		 	.footer__dropdown select.form-control {
+            	padding: 2px 1px;
+           	}
+        }
+      
+        .footer__top {
+         padding-bottom: 5px;
+      }
+         
+	}
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          TABLET STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 640px - 1023px 
+@media (min-width: @screen-sm-min) {
+
+	.main-footer {
+		.links {
+			text-align:left;
+		}
+		.icon {
+			float:left;
+		}
+		.copyright {
+			.copyright-logo {
+				text-align:right;
+    			margin-top:-10px;	
+    		}
+		}
+		#currency-form {
+			float:left;
+			width:100%;
+		}
+		#lang-form {
+			padding-bottom: 15px;
+			width:100%;
+		}
+	   .social-links {
+			ul {
+	    	&, li {
+	      	padding: 0 10px;
+            margin-left:-8px;
+	    	}
+	     }
+	   }
+	}
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          DESKTOP STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 1024px - 1400px 
+@media (min-width: @screen-md-min) {
+
+ .main-footer {
+    .social-links {
+ 			ul {
+	    	&, li {
+	        padding: 0 10.5px;
+            margin-left: -2px;
+	    	}
+	      }
+	    }
+     }
+}

@@ -1,0 +1,122 @@
+#
+# Import the Solr configuration for the Public Sector store
+#
+$productCatalog=sdhProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=sdhSolrServerConfig
+$indexConfigName=sdhSolrIndexConfig
+$searchConfigName=sdhPageSize
+$facetSearchConfigName=sdhIndex
+$facetSearchConfigDescription=Public Sector Solr Index
+$searchIndexNamePrefix=sdh
+$solrIndexedType=sdhProductType
+$indexBaseSite=sdh
+$indexLanguages=en,de,fr,es
+$indexCurrencies=GBP,EUR,USD,JPY,CNY,CAD
+
+# Setup the indexed types, their properties, and the update queries
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
+;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
+;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;Default;Default;Default;$solrIndexedType;true;$productCatalog:Online,$productCatalog:Staged
+
+UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
+;$indexBaseSite;$facetSearchConfigName
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
+;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;
+;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;
+;$solrIndexedType; description            ;text   ;            ;    ;true;    ;    ;    ;
+;$solrIndexedType; summary                ;text   ;            ;    ;true;    ;    ;    ;
+;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider
+;$solrIndexedType; img-80Wx80H            ;string ;            ;    ;    ;    ;    ;    ;image80ValueProvider
+;$solrIndexedType; url                    ;string ;            ;    ;true;    ;    ;    ;productUrlValueProvider
+;$solrIndexedType; addToCartLabelText     ;string ;            ;    ;true;    ;true;true;
+;$solrIndexedType; shortDescription       ;string ;            ;    ;true;    ;true;true;
+;$solrIndexedType; yFormDefinitionExists  ;boolean;            ;    ;    ;    ;    ;    ;psYFormDefinitionExistsValueProvider
+;$solrIndexedType; applyOnlineForUserTypes;string ;            ;    ;    ;true;    ;    ;psApplyOnlineForUserTypesValueProvider
+
+
+# Category fields
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider
+;$solrIndexedType;categoryName;text   ;true;;;true;true;apparelCategoryNameValueProvider
+
+# Category facets
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
+;$solrIndexedType;allCategories ;string;;;Refine;Alpha;-9999;false;;categoryCodeValueProvider                 ;
+;$solrIndexedType;categoryPath  ;string;;;Refine;Alpha;-9999;false;false;categoryPathValueProvider                 ;
+;$solrIndexedType;category;string;;;Refine;Alpha; 6000;false;;apparelCategoryCodeValueProvider          ;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+
+# Other facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
+;$solrIndexedType;departments;string;;;;true;;MultiSelectOr;Alpha;10000;true;;;psDepartmentFacetValueProvider;psDepartmentFacetValueDisplayNameProvider;;
+;$solrIndexedType;transactionTypes	;string;;;;true;;MultiSelectOr;Alpha;9000;true;;;psTransactionTypeValueProvider;psTransactionTypeFacetValueDisplayNameProvider;;
+;$solrIndexedType;topics;string;;;;true;;MultiSelectOr;Alpha;8000;true;;;psTopicFacetValueProvider;psTopicFacetValueDisplayNameProvider;;
+;$solrIndexedType;vehicleTypes;string;;;;true;;MultiSelectOr;Alpha;7000;true;;;psVehicleTypeFacetValueProvider;psVehicleTypeFacetValueDisplayNameProvider;;
+
+	
+# Create the queries that will be used to extract data for Solr
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
+;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"SELECT {p:PK} FROM {PSServiceProduct AS p} WHERE {p:varianttype} IS NULL";anonymous
+;$solrIndexedType;$searchIndexNamePrefix-updateQuery;update;;;;"
+SELECT DISTINCT tbl.pk, tbl.code FROM (
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {PSServiceProduct AS p}
+		WHERE {p:varianttype} IS NULL AND ({p:modifiedtime} >= ?lastIndexTime)
+	}}
+) tbl ORDER BY tbl.code
+";anonymous
+
+# Define the available sorts
+INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost;name
+;sortRef1;$solrIndexedType;relevance;true
+;sortRef2;$solrIndexedType;name-asc;false;A-Z
+;sortRef3;$solrIndexedType;name-desc;false;Z-A
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:relevance;score;false
+;$solrIndexedType:name-asc;name;true
+;$solrIndexedType:name-desc;name;false
+
+# Search query template
+INSERT_UPDATE SolrSearchQueryTemplate;name[unique=true];indexedType(identifier)[unique=true];ftsQueryBuilder
+;DEFAULT;$solrIndexedType;defaultFreeTextQueryBuilder
+
+# Non-facet search query properties
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;ftsWildcardQuery[default=false];ftsWildcardQueryType(code)[default=POSTFIX];ftsWildcardQueryBoost;ftsWildcardQueryMinTermLength;includeInResponse[default=true]
+;itemtype:$solrIndexedType 				  ;    ;   ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;code:$solrIndexedType                   ;    ;   ;TRUE;90 ;    ;  ;TRUE;	 ;  ;POSTFIX;45;3;
+;name:$solrIndexedType                   ;	 ;	  ;TRUE;100;TRUE;50;TRUE;25 ;  ;   	   ;  ;
+;description:$solrIndexedType            ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;summary:$solrIndexedType                ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;keywords:$solrIndexedType               ;	 ;   ;TRUE;40 ;TRUE;20;TRUE;10 ;  ;       ;  ;
+;img-80Wx80H:$solrIndexedType          ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;url:$solrIndexedType                    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;addToCartLabelText:$solrIndexedType   ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;shortDescription:$solrIndexedType ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;yFormDefinitionExists:$solrIndexedType       ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+;applyOnlineForUserTypes:$solrIndexedType    ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
+
+# Category search query fields
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet;ftsPhraseQuery[default=false];ftsPhraseQueryBoost;ftsQuery[default=false];ftsQueryBoost;ftsFuzzyQuery[default=false];ftsFuzzyQueryBoost;includeInResponse[default=true]
+;categoryName:$solrIndexedType       ;    ;   ;true;40;true;20;true;10;
+
+# Category search query facets
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType];facet[default=true];facetType(code);includeInResponse[default=true];facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider
+;allCategories:$solrIndexedType  ;;;Refine;;;;;
+;categoryPath:$solrIndexedType 	;;;Refine;;;;;
+;category:$solrIndexedType 		;;;Refine;;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+
+# Other search query facets
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true];facet[default=true];facetType(code);priority;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+ ;departments:$solrIndexedType								 ;					 ;MultiSelectOr	 ;10000	  ;	psDepartmentFacetValueDisplayNameProvider					   						;				 			  ;defaultTopValuesProvider	;;
+ ;transactionTypes:$solrIndexedType							 ;					 ;MultiSelectOr	 ;9000	  ;	psTransactionTypeFacetValueDisplayNameProvider					   						;				 			  ;							;;
+ ;topics:$solrIndexedType									 ;					 ;MultiSelectOr	 ;80	00	  ;psTopicFacetValueDisplayNameProvider				;			 				  ;						  	;;
+ ;vehicleTypes:$solrIndexedType								 ;					 ;MultiSelectOr	 ;7000	  ;	psVehicleTypeFacetValueDisplayNameProvider					   						;	  ;				  			;;

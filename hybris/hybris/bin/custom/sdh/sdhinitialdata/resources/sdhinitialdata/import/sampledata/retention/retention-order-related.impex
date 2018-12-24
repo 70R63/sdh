@@ -1,0 +1,50 @@
+#### SAMPLE CUSTOMERS FOR DEMO PURPOSES ####
+
+$defaultPassword = Rosebud$
+
+$copyFile = isCopyFile[translator = de.hybris.platform.publicsectordocmanagement.service.impex.impl.PSFileCopyTranslator](order(code), fileName, filePath, isThumbnail, isAbsoluteFilePath)
+$siteResource = jar:de.hybris.platform.publicsectordocmanagement.constants.PublicsectordocmanagementConstants&/publicsectordocmanagement/import/sampledata/
+
+INSERT_UPDATE Customer; groups(uid); uid[unique = true]; name; password[default = $defaultPassword]; title(code); type(code); &customerId
+; customergroup ; jane.retention@stateofrosebud.com ; Jane Retention ; ; miss ; REGISTERED ; jane.retention@stateofrosebud.com
+
+INSERT_UPDATE Address; &addId; owner(Customer.uid)[unique = true]; streetname[unique = true]; postalcode[unique = true]; duplicate[unique = true]; town; country(isocode); billingAddress; contactAddress; shippingAddress; unloadingAddress; firstname; lastname; email; gender(code); middlename; phone1; title(code); url; company; fax; department
+; primary address ; jane.retention@stateofrosebud.com ; 230 Primary Street ; 1000 ; false ; Rosebud ; GB ; true ; true ; true ; true ; Jane ; Retention ; jane.retention@stateofrosebud.com ; FEMALE ; ; 0011234567 ; miss ; ; ; ;
+
+INSERT_UPDATE Address; &addId; owner(Order.code)[unique = true]; streetname[unique = true]; streetnumber[unique = true]; postalcode[unique = true]; duplicate[unique = true]; town; country(isocode); billingAddress; contactAddress; shippingAddress; unloadingAddress; firstname; lastname; email; gender(code); middlename; phone1; url; company; fax; department
+; otbrPaymentAddress  ; orderToBeRemoved ; 230 Payment Street  ; 1 ; 1000 ; false ; Rosebud ; GB ; true ; true ; true ; true ; Jane ; Retention ; jane.retention@stateofrosebud.com ; FEMALE ; ; 0011234567 ; ; hybris ; 0011234567 ;
+; otbrDeliveryAddress ; orderToBeRemoved ; 230 Delivery Street ; 2 ; 1000 ; false ; Rosebud ; GB ; true ; true ; true ; true ; Jane ; Retention ; jane.retention@stateofrosebud.com ; FEMALE ; ; 0011234567 ; ; hybris ; 0011234567 ;
+
+INSERT_UPDATE CreditCardPaymentInfo; code[unique = true]; owner(Order.code); user(Customer.uid)[unique = true]; ccOwner; number; type(code); validFromMonth; validFromYear; validToMonth; validToYear; subscriptionId; duplicate[default = false]; saved[default = true]
+; otbrccid ; orderToBeRemoved ; jane.retention@stateofrosebud.com ; Jane Retention ; 4012888888881881 ; visa ; 1 ; 2010 ; 12 ; 2020 ; 1231 ;
+
+INSERT_UPDATE StandardPaymentMode; code[unique = true]; name[lang = en]; description[lang = en]; active; paymentinfotype(code)
+; advance ; Advance ; payment in advance ; true ; AdvancePaymentInfo
+
+INSERT_UPDATE Order; code[unique = true]; user(uid); date[dateformat = dd.MM.yyyy HH:mm]; expirationTime[dateformat = dd.MM.yyyy HH:mm]; currency(isocode); net; calculated; store(uid); placedBy(uid); status(code); paymentAddress(&addId); deliveryAddress(&addId); paymentInfo(code); paymentMode(code)
+; orderToBeRemoved ; jane.retention@stateofrosebud.com ; 31.05.2016 07:56 ; 26.09.2007 10:58 ; GBP ; false ; false ; sdh ; jane.retention@stateofrosebud.com ; COMPLETED ; otbrPaymentAddress ; otbrDeliveryAddress ; otbrccid ; advance
+
+INSERT_UPDATE OrderEntry; order(code)[unique = true]; product(code, catalogVersion(catalog(id), version)); quantity; calculated; unit(code); entryNumber;
+; orderToBeRemoved ; register-birth:sdhProductCatalog:Online ; 1 ; false ; pieces ; 0
+
+INSERT_UPDATE PaymentTransaction; code[unique = true]; currency(isocode); info(code); paymentSource; paidBy(uid); outstandingAmount; order(code)
+; otbr-pt-001 ; GBP ; hpsapayer ; internal ; jane.retention@stateofrosebud.com ; 150.97 ; orderToBeRemoved
+
+INSERT_UPDATE PaymentTransactionEntry; code[unique = true]; type(code); amount; currency(isocode); time[dateformat = dd/MM/yyyy]; transactionStatus; transactionStatusDetails; paymentTransaction(code)
+; otbr-pte-001 ; AUTHORIZATION ; 400.0 ; GBP ; 20/12/2016 ; ACCEPTED ; SUCCESFULL ; otbr-pt-001
+; otbr-pte-002  ; CAPTURE       ; 400.0 ; GBP ; 20/12/2016 ; ACCEPTED ; SUCCESFULL ; otbr-pt-001
+
+INSERT_UPDATE Consignment;code[unique=true];shippingAddress(&addId);warehouse(code);status(code);order(code)
+;otbr-con-001;otbrDeliveryAddress;ap_warehouse_w;READY;orderToBeRemoved
+
+INSERT_UPDATE ConsignmentEntry;quantity;shippedQuantity;orderEntry(order(code), entryNumber)[unique=true];consignment(code)
+;1;1;orderToBeRemoved:0;otbr-con-001
+
+INSERT_UPDATE ConsignmentProcess;code[unique=true];processDefinitionName;consignment(Consignment.code);parentProcess(OrderProcess.code)
+;consignmentProcess_orderToBeRemoved;consignmentProcess;otbr-con-001;orderProcess_orderToBeRemoved
+
+INSERT_UPDATE OrderProcess; code[unique = true]; processDefinitionName; order(Order.code)
+; orderProcess_orderToBeRemoved ; orderProcess ; orderToBeRemoved
+
+INSERT_UPDATE OrderModificationProcess; code[unique = true]; processDefinitionName; order(Order.code)
+; orderModificationProcess_orderToBeRemoved ; orderModificationProcess ; orderToBeRemoved

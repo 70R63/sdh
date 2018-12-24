@@ -1,0 +1,29 @@
+#
+# Import Access Rights for CMS Cockpit
+# 
+
+$START_USERRIGHTS;;;;;;;;;
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+UserGroup;cmsmanagergroup;cockpitgroup,employeegroup;;;;;;;
+
+# general
+;;;;Item;+;;;;;
+;;;;UserGroup;+;;;;;
+
+# cms2 items
+;;;;PSShareThisPageComponent;+;+;+;+;+;
+;;;;PSHelpDeskComponent;+;+;+;+;+;
+;;;;PSFeaturedLinksComponent;+;+;+;+;+;
+;;;;PSFooterComponent;+;+;+;+;+;
+;;;;PSProductGridComponent;+;+;+;+;+;
+;;;;PSSearchResultsGridComponent;+;+;+;+;+;
+;;;;PSBannerComponent;+;+;+;+;+;
+;;;;PSSimpleBannerComponent;+;+;+;+;+;
+;;;;PSCMSLinkComponent;+;+;+;+;+;
+;;;;PSNavigationComponent;+;+;+;+;+;
+
+
+# Access Rights for Products & Catalog;;;;;;;;;
+
+
+$END_USERRIGHTS;;;;;

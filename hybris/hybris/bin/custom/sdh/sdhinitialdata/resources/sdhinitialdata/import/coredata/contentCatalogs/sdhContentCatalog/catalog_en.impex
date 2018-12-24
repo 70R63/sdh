@@ -1,0 +1,5 @@
+$lang=en
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+;sdhContentCatalog;"Public Sector Content Catalog"

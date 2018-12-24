@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="content-elements">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="content-element" type="content-element" minOccurs="0" maxOccurs="unbounded"/> 			
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+    
+	<xs:complexType name="content-element">
+		<xs:attribute name="type" type="xs:string" use="required"/>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="description" type="xs:string" use="optional"/>
+		<xs:attribute name="image" type="xs:string" use="optional"/>
+		<xs:attribute name="refImage" type="xs:string" use="optional"/>
+		<xs:attribute name="imageSmall" type="xs:string" use="optional"/>
+	</xs:complexType>
+</xs:schema>

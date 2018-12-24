@@ -1,0 +1,5 @@
+### Overriding OOTB Cleanup Action in order to retain the customer in case there is any reference to the customer ###
+
+######### Item Cleanup CronJobs START #########
+UPDATE FlexibleSearchRetentionRule;code[unique=true];actionReference
+ ;customersWithoutOrdersFSRetentionRule;psCustomerWithoutOrdersRemoveCleanupAction

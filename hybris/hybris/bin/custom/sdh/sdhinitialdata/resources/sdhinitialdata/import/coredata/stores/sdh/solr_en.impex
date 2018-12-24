@@ -1,0 +1,22 @@
+$solrIndexedType=sdhProductType
+$lang=en
+
+# Solr Indexed Property
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
+;$solrIndexedType;category;"Category" 
+;$solrIndexedType;code;"Code"
+;$solrIndexedType;departments;Departments
+;$solrIndexedType;description;"Description"
+;$solrIndexedType;itemtype;"Type"
+;$solrIndexedType;name;"Name"
+;$solrIndexedType;summary;"Summary"
+;$solrIndexedType;topics;Topic
+;$solrIndexedType;transactionTypes;Transaction Type
+;$solrIndexedType;vehicleTypes;Vehicle Type
+
+# Define the available solr sorts
+UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang]
+;$solrIndexedType;name-asc;"A-Z"
+;$solrIndexedType;name-desc;"Z-A"
+;$solrIndexedType;relevance;"Relevance"
+

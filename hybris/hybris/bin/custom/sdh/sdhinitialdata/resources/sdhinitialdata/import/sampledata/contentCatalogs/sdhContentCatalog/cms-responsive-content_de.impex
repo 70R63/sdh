@@ -1,0 +1,168 @@
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default=Staged])[unique=true,default=$contentCatalog:Staged]
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/cockpits/cmscockpit
+$medias=medias(code, $contentCV)
+$lang=de
+$picture=media(code, $contentCV)[lang=$lang]
+$mediaContainer = media(qualifier, $contentCV)[lang=$lang]
+$addonExtensionName=publicsectoracceleratoraddon
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# CMS Navigation Nodes 
+UPDATE CMSNavigationNode;$contentCV;uid[unique=true];title[lang=$lang]
+ ;;AboutUsNavNode;""
+ ;;AcceleratorNavNode;"Accelerator"
+ ;;BirthsDeathsAndMarriagesPopularCategoriesNavNodeMenu;"Beliebte Kategorien"
+ ;;BirthsDeathsAndMarriagesPopularServiceRequestsNavNodeMenu;"Beliebte Serviceanfragen"
+ ;;CategoriesNavNode;"Kategorien"
+ ;;FollowUsNavNode;"Folgen Sie uns"
+ ;;HybrisNavNode;"Hybris"
+ ;;MyAccountNavNode;"Mein Konto"
+ ;;PermitsAndApplicationsPopularCategoriesNavNodeMenu;"Beliebte Kategorien"
+ ;;PermitsAndApplicationsPopularServiceRequestsNavNodeMenu;"Beliebte Serviceanfragen"
+ ;;PublicSectorNavNode;"Public-Sector-Site"
+ ;;ReportAnIssuePopularCategoriesNavNodeMenu;"Beliebte Kategorien"
+ ;;ReportAnIssuePopularServiceRequestsNavNodeMenu;"Beliebte Serviceanfragen"
+ ;;RoadsAndVehiclesPopularCategoriesNavNodeMenu;"Beliebte Kategorien"
+ ;;RoadsAndVehiclesPopularServiceRequestsNavNodeMenu;"Beliebte Serviceanfragen"
+ ;;ServicesNavNode;""
+ ;;SocialMediaNavNode;""
+
+# CMS Footer Component
+UPDATE PSFooterComponent;$contentCV;uid[unique=true];notice[lang=$lang]
+ ;;FooterComponent;"© 2015 SAP-Hybris-Software"
+
+# CMS ProductReferences Components
+UPDATE ProductReferencesComponent;$contentCV;uid[unique=true];title[lang=$lang]
+ ;;CrossSelling;"Den Look vervollständigen"
+ ;;Others;"Zubehör"
+ ;;Similar;"Das könnte Ihnen auch gefallen ..."
+ ;;accessories;"Zubehör"
+
+# CMS CartSuggestion Components
+UPDATE CartSuggestionComponent;$contentCV;uid[unique=true];title[lang=$lang]
+ ;;CartSuggestions;"Das könnte Ihnen auch gefallen ..."
+
+UPDATE CMSParagraphComponent;$contentCV;uid[unique=true];content[lang=$lang]
+ ;;EmptyCartParagraphComponent;"<h2>Ihr Warenkorb ist leer.</h2><p>Vorschläge</p><ul>	<li>Durchsuchen Sie unser Sortiment unter Auswahl einer Kategorie oben.</li></ul>"
+ ;;HelpParagraphComponent;"<strong>Benötigen Sie Hilfe beim Bezahlen?</strong> <span>Kontaktieren Sie uns oder rufen Sie <Telefonnummer> an.</span>"
+ ;;NoSearchResultsParagraphComponent;<h2>Zu Ihrer Suche wurden leider keine Ergebnisse gefunden.</h2><p>Vorschläge:</p><ul>    <li style="list-style-type:disc">Vielleicht haben Sie die Suchbegriffe falsch eingegeben. �€“ Bitte pr�fen Sie Ihre Eingabe auf Rechtschreibfehler.</li>  <li style="list-style-type:disc">Vielleicht war Ihre Suche zu spezifisch. �€“ Bitte erweitern Sie Ihre Suche, indem Sie weniger Suchbegriffe verwenden.</li>   <li style="list-style-type:disc">Durchsuchen Sie unsere Produkte, indem Sie eine der obenstehenden Kategorien auswählen.</li></ul>
+ ;;faqTextParagraph;"<div class=""global-alerts""><div class=""alert alert-info"" role=""alert""><strong>Information: </strong>Diese Seite befindet sich im Aufbau – Die Funktionen sind eingeschr�nkt</div></div><a name=""00""></a><div class=""textpage textpage-faqs""><div class=""item_container"">		<h2><a name=""a00""></a>R�cksendungen und R�ckerstattungen</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>		<div class=""item_container"">		<h2><a name=""b00""></a>Lieferinformationen</h2>		<a class=""faq-menulink"" href=""#b01"">Lief</a>		<a class=""faq-menulink"" href=""#b02"">Lieferzeiten und -geb�hren</a>		<a class=""faq-menulink"" href=""#b03"">Informationen zur Auftragsverfolgung</a>		<a class=""faq-menulink"" href=""#b04"">Informationen zum Kurierstatus</a>			<h3><a name=""b01""></a>Lieferoptionen</h3>		<p>			Die Ihnen zur Verf�gung stehenden Lieferoptionen finden Sie im Kassenbereich unter ""Lieferart"".<br><br>			Abh�ngig von Ihrer Lieferadresse stehen Ihnen ggf. nicht alle Optionen zur Verf�gung:			</p><ul>			<li>					<b>Lieferung nach Hause</b> - Kostenlose Standardlieferung nach Gro�britannien und Nordirland für alle Bestellungen �ber 50 GBP innerhalb von vier Werktagen (*es k�nnen Ausnahmen gelten)				</li>				<li>					<b>Standardlieferung</b> -  1 bis 2 Werktage				</li>				<li>					<b>Andere Lieferart</b>  &ndash; 3 bis 5 Werktage				</li>				<li>				<b>Internationale Lieferung</b> &ndash; 7 bis 10 Werktage (nicht alle L�nder sind verf�gbar)				</li>			</ul>		<p></p>		<h3><a name=""b02""></a>Lieferzeiten und -geb�hren</h3>		<p>			Wir liefern die meisten unserer Bestellungen innerhalb von 4 Werktagen* für 3,99 GBP oder KOSTENLOS  bei Bestellungen �ber 50 GBP (*es k�nnen Ausnahmen gelten, siehe nachfolgende Tabelle).			</p><ul>				<li>					Lieferungen an Adressen in Gro�britannien und Nordirland erfolgen von Montag bis Freitag zwischen 9:00 und 18:00 Uhr, gesetzliche Feiertage ausgenommen. 				</li>				<li>					Lieferungen an das Schottische Hochland und auf Inseln, der K�ste vorgelagerte Orte und Nordirland k�nnen etwas l�nger dauern.<br>					Informationen zu Lieferungen an Adressen in der Republik Irland finden Sie auf unserer irischen Website auf hybris.com				</li>				<li>					Mehrere Artikel k�nnen in mehreren Paketen und zu unterschiedlichen Zeiten zugestellt werden.				</li>			</ul>		<p></p>	<h3><a name=""b03""></a>Informationen zur Auftragsverfolgung</h3>		<p>			Sie erhalten von uns bei jeder �nderung des Auftragsstatus aktualisierte Informationen per E-Mail. Die einzelnen Auftragsstatus sind in der nachfolgenden Tabelle erl�utert. Wir liefern die meisten Pakete �ber unseren Kurier aus. Sie k�nnen diese Pakete verfolgen, indem Sie auf den Link mit der Paketreferenz in Ihrer E-Mail klicken. Nach Anklicken des Links werden Sie auf die Website des Kuriers weitergeleitet. für Informationen zu den Kurierstatus <a href=""#b04"">hier klicken</a>.		</p>		<table width=""100%"" cellspacing=""0"" cellpadding=""0"" border=""0"">			<tbody>				<tr>					<th>Status</th>					<th>Beschreibung</th>				</tr>				<!--ROW 1-->				<tr>					<td class=""blue3"">						<strong>In Bearbeitung</strong><br>					</td>					<td class=""grey3"">						Ihre Bestellung wird bearbeitet.<br>					</td>				</tr>				<!--ROW 2-->	<tr>					<td class=""blue3"">						<strong>Zum Versand �bergeben</strong><br>					</td>					<td class=""grey3"">						Ihre Bestellung wurde an den Kurier zum Versand �bergeben.<br><br>    Bei schweren und gro�en Produkten ist Ihre Bestellung für den Versand durch den Kurier vorbereitet. Der Kurier wird Sie kontaktieren, um einen Zustelltermin mit Ihnen zu vereinbaren.<br><br>Bei Bestellungen mit Abholung in einer Filiale erhalten Sie eine weitere Statusaktualisierung, sobald Ihre Artikel zur Abholung bereitliegen (weitere Informationen zu den Status für die Abholung in einer Filiale siehe unten)<br><br>					</td>				</tr>				<!--ROW 3-->				<tr>					<td class=""blue3"">						<strong>Storniert<br>Auftrag kann nicht ausgef�hrt werden<br> Zahlungsstornierung</strong><br>					</td>					<td class=""grey3"">						Ihre Bestellung wurde aufgrund der Warenverf�gbarkeit storniert; es wurde keine Zahlung angenommen.<br><br>					</td>				</tr>				<!--ROW 4-->				<tr>					<td class=""blue3"">						<strong>Storniert<br>Auftrag kann nicht ausgef�hrt werden<br>Zahlung zur�ckerstattet</strong><br>				</td>					<td class=""grey3"">						Ihr Auftrag wurde aufgrund der Warenverf�gbarkeit storniert. Wir haben eine R�ckerstattung auf Ihre Zahlungskarte veranlasst.<br><br>					</td>				</tr>				<!--ROW 5-->				<tr>					<td class=""blue3"">						<strong>R�cksendung erhalten</strong><br>					</td>					<td class=""grey3"">Wir haben Ihre R�cksendung erhalten. Die Waren wurden jedoch an das falsche Lager adressiert, sodass es zu einer kurzen Verz�gerung bei der Verarbeitung Ihrer R�ckerstattung kommen kann, w�hrend die Waren an das richtige Lager weitergesendet werden.<br><br>					</td>				</tr>				<!--ROW 6-->				<tr>					<td class=""blue3"">						<strong>Bestellung bereit zur Abholung</strong><br>					</td>					<td class=""grey3"">						Ihre Bestellung liegt in der von Ihnen gew�hlten Filiale zur Abholung bereit.<br><br><strong><i>Beachten Sie:</i></strong> Sie m�ssen Ihre Bestellung innerhalb von 14 Tagen nach Erhalt der E-Mail-Benachrichtigung abholen.<br><br>					</td>				</tr>				<!--ROW 7-->				<tr>					<td class=""blue3"">						<strong>Abgeholt</strong><br>					</td>					<td class=""grey3"">					Ihre Bestellung wurde abgeholt.<br><br>					</td>				</tr>				<!--ROW 8-->				<tr>					<td class=""blue3"">						<strong>R�cksendung wird bearbeitet</strong><br>					</td>					<td class=""grey3"">						Wir bearbeiten Ihre R�cksendung.<br><br>					</td>				</tr>				<!--ROW 9-->				<tr>					<td class=""blue3"">						<strong>R�ckerstattung der R�cksendung abgeschlossen</strong><br>					</td>					<td class=""grey3"">						Wir haben Ihre R�cksendung bearbeitet.<br><br><strong><i>Beachten Sie:</i></strong> Bei einigen Banken kann es l�nger dauern, bis R�ckerstattungen bearbeitet sind.<br><br>					</td>				</tr>			</tbody>		</table>		<p></p>		<h3><a name=""b04""></a>Informationen zum Kurierstatus</h3>		<p></p>		<table width=""100%"" cellspacing=""0"" cellpadding=""0"" border=""0"">			<tbody>				<tr>					<th>Status</th>					<th>Beschreibung</th>				</tr>			<!--ROW 1-->				<tr>					<td class=""blue3"">						<strong>Auftrag generiert</strong><br>					</td>					<td class=""grey3"">						Ihre Bestellung ist bereit für die Lieferung und wurde im Kuriersystem erfasst.<br>					</td>				</tr>				<!--ROW 2-->				<tr>					<td class=""blue3"">						<strong>Eingang im Depot </strong><br>					</td>					<td class=""grey3"">					Ihr Paket ist im Depot eingegangen. <br><br>					</td>				</tr>				<!--ROW 3-->				<tr>					<td class=""blue3"">						<strong>Im Depot bearbeitet</strong><br>					</td>					<td class=""grey3"">						Ihr Paket hat die Verarbeitungsschritte im Depot durchlaufen und ist jetzt bereit für die Versendung an den Kurier.<br><br>					</td>				</tr>				<!--ROW 4-->				<tr>					<td class=""blue3"">						<strong>Depot für Lieferung an Kurier verlassen</strong><br>					</td>					<td class=""grey3"">						Ihr Paket hat das Depot verlassen und ist auf dem Weg zum Kurier.<br><br>					</td>				</tr>				<!--ROW 5-->				<tr>					<td class=""blue3"">						<strong>Erneuter Zustellversuch durch Kurier</strong><br>					</td>					<td class=""grey3"">						Der Kurier hat versucht, Ihr Paket zuzustellen, und wird es erneut versuchen. Sie erhalten eine Karte, die belegt, dass versucht wurde, die Lieferung zuzustellen.<br><br>					</td>				</tr>			<!--ROW 6-->				<tr>					<td class=""blue3"">						<strong>Zugestellt</strong><br>					</td>					<td class=""grey3"">						Ihr Paket wurde zugestellt.<br><br>					</td>				</tr>			</tbody>		</table>		<p></p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>		<div class=""item_container"">		<h2><a name=""c00""></a>Registrierung</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>	<div class=""item_container"">		<h2><a name=""d00""></a>Ihr Online-Konto</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>	<div class=""item_container"">		<h2><a name=""e00""></a>Bestellungen</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>	<div class=""item_container"">		<h2><a name=""f00""></a>Aktionen und Rabatte	</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>	<div class=""item_container"">		<h2><a name=""g00""></a>Produktdaten und allgemeine Informationen</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>	<div class=""item_container"">		<h2><a name=""h00""></a>Filialinformationen</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>	<div class=""item_container"">		<h2><a name=""i00""></a>Gesch�ftskontakte</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>		<div class=""item_container"">		<h2><a name=""j00""></a>Kauftipps</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>		<div class=""item_container"">		<h2><a name=""k00""></a>Gr��enanleitungen</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div>		<div class=""item_container"">		<h2><a name=""l00""></a>Datenschutz und Sicherheit</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">zur�ck nach oben</a>	</div></div>"
+
+#public Sector start
+UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title[lang=$lang]
+ ;;AboutRosebudLink;"ÜBER ROSEBUD";"Klicken Sie hier, um den Menüeintrag ""Über Rosebud"" aufzurufen."
+ ;;ApplyForAMarriageCertificateLink;"Heiratsurkunde beantragen";"Klicken Sie hier, um den Menüeintrag ""Heiratsurkunde beantragen"" aufzurufen."
+ ;;Births&ChildrenLink;"Geburten & Kinder";"Klicken Sie hier, um den Menüeintrag ""Geburten & Kinder"" aufzurufen."
+ ;;BirthsDeathsAndMarriagesLink;"GEBURTEN, TODESFÄLLE & EHESCHLIESSUNGEN";"Klicken Sie hier, um den Menüeintrag ""Geburten, Todesfälle & Eheschließungen"" aufzurufen."
+ ;;BirthsDeathsAndMarriagesSeeAllCategoriesLink;"> Alle Kategorien anzeigen";"Klicken Sie hier, um alle Kategorien für Geburten, Todesfälle und Eheschließungen aufzurufen."
+ ;;BirthsDeathsAndMarriagesSeeAllServiceRequestsLink;"> Alle Serviceanfragen anzeigen";"Klicken Sie hier, um alle Serviceanfragen zu Geburten, Todesfällen und Eheschließungen aufzurufen"
+ ;;BlogAndNewsLink;"NEWS";"Klicken Sie hier, um den Menüeintrag ""Blogs & News"" aufzurufen."
+ ;;Building&PlanningLink;"Bau & Planung";"Klicken Sie hier, um den Menüeintrag ""Bau & Planung"" aufzurufen."
+ ;;DisabledParkingPermitLink;"Behindertenparkerlaubnis";"Klicken Sie hier, um den Menüeintrag ""Behindertenparkerlaubnis"" aufzurufen."
+ ;;DrivingLink;"Führen von Fahrzeugen";"Klicken Sie hier, um den Menüeintrag ""Führen von Fahrzeugen"" aufzurufen."
+ ;;Environment&GarbageLink;"Umwelt & Abfall";"Klicken Sie hier, um den Menüeintrag ""Umwelt & Abfall"" aufzurufen."
+ ;;EventPermitLink;"Veranstaltungsgenehmigung";"Klicken Sie hier, um den Menüeintrag ""Veranstaltungsgenehmigung"" aufzurufen."
+ ;;EventsLink;"VERANSTALTUNGEN";"Klicken Sie hier, um den Menüeintrag ""Veranstaltungen"" aufzurufen."
+ ;;InTheCommunityLink;"In der Gemeinde";"Klicken Sie hier, um den Menüeintrag ""In der Gemeinde"" aufzurufen."
+ ;;LearnerDriversLicenseLink;"Lizenz für begleitetes Fahren";"Klicken Sie hier, um den Menüeintrag ""Lizenz für begleitetes Fahren"" aufzurufen."
+ ;;MarriageCertificateLink;"Heiratsurkunde";"Klicken Sie hier, um den Menüeintrag ""Heiratsurkunde"" aufzurufen."
+ ;;MarriagesLink;"Eheschließungen";"Klicken Sie hier, um den Menüeintrag ""Eheschließungen"" aufzurufen."
+ ;;NewDriverLink;"Neuer Fahrer";"Klicken Sie hier, um den Menüeintrag ""Neuer Fahrer"" aufzurufen." 
+ ;;NewVehicleLink;"Neues Fahrzeug";"Klicken Sie hier, um den Menüeintrag ""Neues Fahrzeug"" aufzurufen."
+ ;;OnTheRoadLink;"Auf der Straße";"Klicken Sie hier, um den Menüeintrag ""In der Gemeinde"" aufzurufen."
+ ;;ParkingLink;"Parken";"Klicken Sie hier, um den Menüeintrag ""Parken"" aufzurufen."
+ ;;PermitsAndApplicationsLink;"GENEHMIGUNGEN & ANTRÄGE";"Klicken Sie hier, um den Menüeintrag ""Genehmigungen & Anträge"" aufzurufen."
+ ;;PermitsAndApplicationsSeeAllCategoriesLink;"> Alle Kategorien anzeigen";"Klicken Sie hier, um alle Genehmigungs- und Anfragenkategorien aufzurufen."
+ ;;PermitsAndApplicationsSeeAllServiceRequestsLink;"> Alle Serviceanfragen anzeigen";"Klicken Sie hier, um alle Serviceanfragen für Genehmigungen und Anträge aufzurufen"
+ ;;PetsLink;"Haustiere";"Klicken Sie hier, um den Menüeintrag ""Haustiere"" aufzurufen."
+ ;;PoolBuildingPermitLink;"Genehmigung zum Poolbau";"Klicken Sie hier, um den Menüeintrag ""Genehmigung zum Poolbau"" aufzurufen."
+ ;;RegisterABirthLink;"Geburt melden";"Klicken Sie hier, um den Menüeintrag ""Geburt melden"" aufzurufen."
+ ;;ReportAPotholeLink;"Schlagloch melden";"Klicken Sie hier, um den Menüeintrag ""Schlagloch melden"" aufzurufen."
+ ;;ReportAnIssueLink;"PROBLEM MELDEN";"Klicken Sie hier, um den Menüeintrag ""Problem melden"" aufzurufen."
+ ;;ReportAnIssueSeeAllCategoriesLink;"> Alle Kategorien anzeigen";"Klicken Sie hier, um ""Alle Kategorien"" aufzurufen."
+ ;;ReportAnIssueSeeAllServiceRequestsLink;"> Alle Serviceanfragen anzeigen";"Klicken Sie hier, um ""Alle Serviceanfragen anzeigen"" aufzurufen."
+ ;;ReportGraffitiLink;"Graffiti melden";"Klicken Sie hier, um den Menüeintrag ""Graffiti melden"" aufzurufen."
+ ;;RetrieveADraftLink;"> Entwurf abrufen";"Klicken Sie hier, um den Menüeintrag ""Entwurf abrufen"" aufzurufen."
+ ;;RoadsAndVehiclesLink;"STRASSEN & FAHRZEUGE";"Klicken Sie hier, um den Menüeintrag ""Straßen & Fahrzeuge"" aufzurufen."
+ ;;RoadsAndVehiclesSeeAllCategoriesLink;"> Alle Kategorien anzeigen";"Klicken Sie hier, um alle Straßen- und Fahrzeugkategorien aufzurufen."
+ ;;RoadsAndVehiclesSeeAllServiceRequestsLink;"> Alle Serviceanfragen anzeigen";"Klicken Sie hier, um alle Straßen- und Fahrzeug-Serviceanfragen aufzurufen"
+ ;;WorkingWithChildrenCheckLink;"Prüfung für die Arbeit mit Kindern";"Klicken Sie hier, um den Menüeintrag ""Prüfung für die Arbeit mit Kindern"" aufzurufen."
+
+UPDATE PSRetrieveADraftComponent; $contentCV; uid[unique = true];title[lang=$lang];description[lang=$lang];retrieveDraftButtonLabel[lang=$lang];
+ ;;PSRetrieveADraftComponent;Eigene Anfrageentwürfe abrufen;Sie haben bereits mit der Erfassung einer Serviceanfrage begonnen und diese als Entwurf gespeichert? Rufen Sie sie hier ab.;Anfrageentwurf abrufen;
+
+#CMS Link Components
+INSERT_UPDATE PSFeaturedLinksComponent;$contentCV;uid[unique=true];title[lang=$lang];
+;;FrequentlyUsedServices;Häufig genutzte Services;
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang]
+;;AboutUsRoseBudLink;"Über Rosebud"
+;;AllServiceRequestsLink;"Alle Serviceanfragen"
+;;ApplyCarLearnerPermitLink;"Genehmigung für begleitetes Fahren beantragen"
+;;ApplyEventPermitLink;"Veranstaltungsgenehmigung beantragen"
+;;ApplyMarriageCertificateLink;"Heiratsurkunde beantragen"
+;;ApplyWokringWithChildrenCheckLink;"Prüfung für die Arbeit mit Kindern beantragen"
+;;ContactUsLink;"Kontakt"
+;;FacebookLink;"Facebook"
+;;GooglePlusLink;"Google+"
+;;LinkedInLink;"LinkedIn"
+;;PinterestLink;"Pinterest"
+;;RegisterBirthLink;"Geburt melden"
+;;ReportPotholeLink;"Schlagloch melden"
+;;RetrieveDraftLink;"Entwurf abrufen"
+;;RoseBudsSenatorsLink;"Senatoren von Rosebud"
+;;TwitterLink;"Twitter"
+;;YouTubeLink;"YouTube"
+
+
+UPDATE PSBannerComponent;$contentCV;uid[unique=true];headline[lang=$lang];title[lang=$lang]
+;;PublicSectorHompageBannerComponent1;"Internationales Rodelfestival";;"Internationales Rodelfestival – Bild"
+;;PublicSectorHompageBannerComponent2;"Über uns";"Über uns – Bild"
+;;PublicSectorHompageBannerComponent3;"Aktuelles";"Aktuelles – Bild"
+;;PublicSectorHompageBannerComponent4;"Nächste Veranstaltungen" ;"Nächste Veranstaltungen – Bild"
+
+
+# Site Logo Component #
+UPDATE PSSimpleBannerComponent;$contentCV;uid[unique=true];$picture;title[lang=$lang]
+;;HybrisLogoComponent;/images/theme/hybris_logo.jpg;"Public Accelerator logo"
+;;SiteLogoComponent;/images/theme/publicSector_logo.jpg;"State of Rosebud – Logo"
+																																														
+# Create Content Slots for Page
+
+UPDATE PSHelpDeskComponent;$contentCV;uid[unique=true];title[lang=$lang];description[lang=$lang];&componentRef;;;
+;;ServiceHelpDeskComponent;Helpdesk;<div>Unser Helpdesk unterstützt Sie, wenn Sie Fragen zu dieser Anwendung haben. Unsere Kundendienstmitarbeiter sind zu folgenden Servicezeiten für Sie da:</div> <p><span class="strong">Montag bis Samstag von 7:00 bis 19:00 Uhr</span></p> <div ><span class="strong">Telefonnummer: +61 12345 678</span></div>;ServiceHelpDeskComponent;;;
+
+UPDATE PSShareThisPageComponent;$contentCV;uid[unique=true];title[lang=$lang];&componentRef;;;
+;;ServiceShareThisPageComponent;Diese Seite teilen;ServiceShareThisPageComponent;;;
+
+# Media
+INSERT_UPDATE Media;$contentCV;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+;;/images/theme/logo-hybris.png;logo-hybris.png;$siteResource/images/theme/logo-hybris.png;image/png;;"hybris Accelerator"
+;;Generic_788x120_FacebookOffers_EN_01.jpg;;$siteResource/images/banners/site/Generic_788x120_FacebookOffers_EN_01.jpg;;;"Up to 30% off! Sign up on facebook for exclusive offers"
+;;Generic_148x300_MobileApp_EN_01.jpg;;$siteResource/images/banners/site/Generic_148x300_MobileApp_EN_01.jpg;;;"Always up to date! Download our mobile app"
+
+# Generic Banners (banners are not localizable so we must create a separate banner per language)
+UPDATE SimpleBannerComponent;$contentCV;uid[unique=true];$picture
+;;FacebookOffersBanner;Generic_788x120_FacebookOffers_EN_01.jpg
+;;MobileAppBanner;Generic_148x300_MobileApp_EN_01.jpg
+
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV;uid[unique=true];name;&componentRef;$mediaContainer
+;;PublicSectorErrorpageBannerComponent;Public Sector Error Page Banner Component;PublicSectorErrorpageBannerComponent;public-sector-errorpage-pagenotfound
+;;publicSectorBannerHome;;;publicSector-homepage-Carousel-en
+
+# Create ContentSlots
+INSERT_UPDATE ContentSlot;$contentCV;uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;PublicSector-MiddleContent-Errorpage;PublicSector Middle Content Slot for Error Page;true;PublicSectorErrorpageBannerComponent;;;
+
+# Create Content Slots for Page
+INSERT_UPDATE ContentSlotForPage;$contentCV;uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='notFound'];contentSlot(uid,$contentCV)[unique=true]
+;;PublicSector-MiddleContent-Errorpage;MiddleContent;;PublicSector-MiddleContent-Errorpage;

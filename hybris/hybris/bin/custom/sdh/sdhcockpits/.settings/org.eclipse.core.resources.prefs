@@ -1,0 +1,18 @@
+#Mon Nov 28 19:03:13 CET 2011
+eclipse.preferences.version=1
+encoding//resources/localization/sdhcockpits-locales_de.properties=UTF-8
+encoding//resources/localization/sdhcockpits-locales_en.properties=UTF-8
+encoding//resources/localization/sdhcockpits-locales_fr.properties=UTF-8
+encoding//resources/localization/sdhcockpits-locales_it.properties=UTF-8
+encoding//resources/localization/sdhcockpits-locales_ja.properties=UTF-8
+encoding//resources/localization/sdhcockpits-locales_pt.properties=UTF-8
+encoding//resources/localization/sdhcockpits-locales_zh.properties=UTF-8
+encoding//resources/sdhcockpits/cockpit/localization/i3-label.properties=UTF-8
+encoding//resources/sdhcockpits/cockpit/localization/i3-label_de.properties=UTF-8
+encoding//resources/sdhcockpits/cockpit/localization/i3-label_fr.properties=UTF-8
+encoding//resources/sdhcockpits/cockpit/localization/i3-label_ja.properties=UTF-8
+encoding//resources/sdhcockpits/cscockpit/cscockpit-messages_it.properties=UTF-8
+encoding//resources/sdhcockpits/cscockpit/cscockpit-messages_pt.properties=UTF-8
+encoding//resources/sdhcockpits/cscockpit/cscockpit-messages_zh.properties=UTF-8
+
+encoding/<project>=UTF-8

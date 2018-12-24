@@ -1,0 +1,27 @@
+$catalogVersion=catalogVersion(catalog(id[default='sdhProductCatalog']),version[default='Staged'])[unique=true,default='sdhProductCatalog:Staged']
+$lang=en
+
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang];description[lang=$lang]
+;animals;;Animals;
+;births-&-children;;Births & Children;
+;births-deaths-and-marriages;;Births, Deaths & Marriages;
+;building-&-planning;;Building & Planning;
+;categories;;Categories;
+;deaths;;Deaths;
+;driving;;Driving;
+;environment-&-garbage;;Environment & Garbage;
+;in-the-community;;In the Community;
+;life-events;;Life Events;
+;marriages;;Marriages;
+;new-driver;;New Driver;
+;new-vehicle;;New Vehicle;
+;on-the-road;;On the Road;
+;other-service-requests;;Other Service Requests;
+;parking;;Parking;
+;permanent;;Permanent;
+;permits-and-applications;;Permits & Applications;
+;pets;;Pets;
+;recreational-licences;;Recreational Licences;
+;report-an-issue;;Report an Issue;
+;roads-and-vehicles;;Roads & Vehicles;
+;temporary;;Temporary;

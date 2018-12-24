@@ -1,0 +1,844 @@
+<xh:html xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:xxi="http://orbeon.org/oxf/xml/xinclude"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:sql="http://orbeon.org/oxf/xml/sql"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:exf="http://www.exforms.org/exf/1-0"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<xh:head>
+		<xh:title>Register a Birth</xh:title>
+		<xf:model id="fr-form-model" xxf:expose-xpath-types="true">
+			<!-- Main instance -->
+			<xf:instance id="fr-form-instance" xxf:exclude-result-prefixes="#all" xxf:index="id">
+				<form>
+					<section-1>
+						<control-18 />
+						<control-19 />
+						<first-name-1 />
+						<middle-name-1 />
+						<last-name-1 />
+						<tnc-1 />
+						<control-8 />
+						<birth-date-1 />
+						<birth-weight-1 />
+						<control-11 />
+						<control-12 />
+						<control-13>GB</control-13>
+						<hospital-name-1 />
+						<address-line1-1 />
+						<address-line2-1 />
+						<city-1 />
+						<post-code-1 />
+					</section-1>
+				</form>
+			</xf:instance>
+			<!-- Bindings -->
+			<xf:bind id="fr-form-binds" ref="instance('fr-form-instance')">
+				<xf:bind id="section-1-bind" name="section-1" ref="section-1">
+					<xf:bind id="first-name-1-bind" ref="first-name-1" name="first-name-1" required="true()">
+						<xf:constraint id="constraint-18-constraint" value="string-length($first-name-1)&lt;=240" />
+						<xf:constraint id="constraint-19-constraint" value="string-length($first-name-1)+string-length($last-name-1) &lt;= 255" />
+					</xf:bind>
+					<xf:bind id="control-19-bind" ref="control-19" name="control-19" />
+					<xf:bind id="middle-name-1-bind" ref="middle-name-1" name="middle-name-1">
+						<xf:constraint id="constraint-29-constraint" value="string-length($middle-name-1)&lt;=240" level="error" />
+					</xf:bind>
+					<xf:bind id="last-name-1-bind" ref="last-name-1" name="last-name-1" required="true()">
+						<xf:constraint id="constraint-30-constraint" value="string-length($last-name-1) &lt;= 240" />
+						<xf:constraint id="constraint-31-constraint" value="string-length(first-name-1)+string-length(last-name-1) &lt;= 255" />
+					</xf:bind>
+					<xf:bind id="control-8-bind" ref="control-8" name="control-8" />
+					<xf:bind id="birth-weight-1-bind" ref="birth-weight-1" name="birth-weight-1" required="true()">
+						<xf:type id="validation-20-validation">xs:integer</xf:type>
+					</xf:bind>
+					<xf:bind id="control-11-bind" ref="control-11" name="control-11" required="true()" />
+					<xf:bind id="control-12-bind" ref="control-12" name="control-12" />
+					<xf:bind id="control-13-bind" ref="control-13" name="control-13" required="true()" xxf:default="'united-kingdom'" />
+					<xf:bind id="hospital-name-1-bind" ref="hospital-name-1" name="hospital-name-1">
+						<xf:constraint id="constraint-33-constraint" value="string-length($hospital-name-1)&lt;=255" level="error" />
+					</xf:bind>
+					<xf:bind id="address-line1-1-bind" ref="address-line1-1" name="address-line1-1" required="true()">
+						<xf:constraint id="constraint-34-constraint" value="string-length(address-line2-1) &lt;= 255" level="error" />
+					</xf:bind>
+					<xf:bind id="address-line2-1-bind" ref="address-line2-1" name="address-line2-1">
+						<xf:constraint id="constraint-35-constraint" value="string-length(address-line2-1) &lt;= 255" level="error" />
+					</xf:bind>
+					<xf:bind id="city-1-bind" ref="city-1" name="city-1" required="true()">
+						<xf:constraint id="constraint-36-constraint" value="string-length(city-1) &lt;= 255" level="error" />
+					</xf:bind>
+					<xf:bind id="post-code-1-bind" ref="post-code-1" name="post-code-1" required="true()">
+						<xf:constraint id="constraint-37-constraint" value="string-length(fpost-code-1) &lt;= 10" level="error" />
+					</xf:bind>
+					<xf:bind id="tnc-1-bind" ref="tnc-1" name="tnc-1" required="true()" />
+					<xf:bind id="birth-date-1-bind" ref="birth-date-1" name="birth-date-1" required="true()">
+						<xf:type id="validation-22-validation">xs:date</xf:type>
+					</xf:bind>
+					<xf:bind id="control-18-bind" ref="control-18" name="control-18" />
+				</xf:bind>
+			</xf:bind>
+			<xf:instance xxf:readonly="true" id="fr-form-metadata" xxf:exclude-result-prefixes="#all">
+				<metadata>
+					<application-name>publicsector</application-name>
+					<form-name>Register-Birth-Form-Step-1</form-name>
+					<title xml:lang="en">Register a Birth</title>
+					<description xml:lang="en">Register a Birth</description>					
+					<title xml:lang="fr">Déclarer une naissance</title>
+					<description xml:lang="fr">Déclarer une naissance</description>					
+					<title xml:lang="de">Eine Geburt eintragen</title>
+					<description xml:lang="de">Eine Geburt eintragen</description>
+					<title xml:lang="es">Registrar un nacimiento</title>
+					<description xml:lang="es">Registrar un nacimiento</description>
+					<singleton>false</singleton>
+				</metadata>
+			</xf:instance>
+			<!-- Attachments -->
+			<xf:instance id="fr-form-attachments" xxf:exclude-result-prefixes="#all">
+				<attachments>
+					<css mediatype="text/css" filename="" size="" />
+					<pdf mediatype="application/pdf" filename="" size="" />
+				</attachments>
+			</xf:instance>
+			<!-- All form resources -->
+			<!-- Don't make readonly by default in case a service modifies the resources -->
+			<xf:instance id="fr-form-resources" xxf:readonly="false" xxf:exclude-result-prefixes="#all">
+				<resources>
+					<resource xml:lang="en">
+						<control-18>
+							<label>Fields marked * are required</label>
+							<hint />
+						</control-18>
+						<control-19>
+							<label>&lt;h3&gt;&lt;b&gt;Child Details&lt;/b&gt;&lt;/h3&gt;&lt;br&gt;Please type your child&apos;s name exactly how you would like it to show on their Birth Certificate (e.g. Charles instead of charles)</label>
+							<hint />
+						</control-19>
+						<section-1>
+							<label>Child Details</label>
+						</section-1>
+						<first-name-1>
+							<label>First Name</label>
+							<hint />
+							<alert>Please enter a first name that is less than 240 characters</alert>
+							<alert>Combined length of first name and last name must be less than 255 characters</alert>
+							<alert>Please enter a first name</alert>
+						</first-name-1>
+						<middle-name-1>
+							<label>Middle Name</label>
+							<hint />
+							<alert>Please enter a middle name less than 240 characters</alert>
+							<alert>Please enter a middle name</alert>
+						</middle-name-1>
+						<last-name-1>
+							<label>Last Name</label>
+							<hint />
+							<alert>Please enter a first name that is less than 240 characters</alert>
+							<alert>Combined length of first name and last name must be less than 255 characters</alert>
+							<alert>Please enter a first name</alert>
+						</last-name-1>
+						<tnc-1>
+							<label />
+							<hint />
+							<alert>Please agree to the Terms and Conditions</alert>
+							<item>
+								<label>I understand that as parents, we have the right to choose the given names and surname or family name of our child. However, the Registrar-General may refuse to register a name which is obscene, offensive, too long or is contrary to public interest.</label>
+								<hint />
+								<value>1</value>
+							</item>
+						</tnc-1>
+						<control-8>
+							<label>&lt;h3&gt;&lt;b&gt;Birth Details&lt;/b&gt;&lt;/h3&gt;</label>
+							<hint />
+						</control-8>
+						<birth-date-1>
+							<label>Date of Birth (example: 23/09/2016)</label>
+							<hint />
+							<alert>Please enter a valid date of birth</alert>
+							<alert>Please select a date of birth</alert>
+						</birth-date-1>
+						<birth-weight-1>
+							<label>Birth Weight</label>
+							<hint>Please enter the birth weight in grams</hint>
+							<alert>Please enter a valid birth weight using numbers only (example - 3450)</alert>
+							<alert>Please enter the birth weight</alert>
+						</birth-weight-1>
+						<control-11>
+							<label>Gender</label>
+							<hint />
+							<alert>Please select an option</alert>
+							<item>
+								<label>Male</label>
+								<value>male</value>
+							</item>
+							<item>
+								<label>Female</label>
+								<value>female</value>
+							</item>
+							<item>
+								<label>Other</label>
+								<value>other</value>
+							</item>
+							<item>
+								<label>Rather not say</label>
+								<value>rather-not-say</value>
+							</item>
+						</control-11>
+						<control-12>
+							<label>&lt;h3&gt;&lt;b&gt;Birth Address&lt;/h3&gt;&lt;/b&gt;</label>
+							<hint />
+						</control-12>
+						<control-13>
+							<label>Country</label>
+							<hint />
+							<item>
+								<label>United Kingdom</label>
+								<value>GB</value>
+							</item>
+							<item>
+								<label>Jersey</label>
+								<value>JE</value>
+							</item>
+							<item>
+								<label>Isle Of Man</label>
+								<value>IM</value>
+							</item>
+							<item>
+								<label>Guernsey</label>
+								<value>GG</value>
+							</item>
+						</control-13>
+						<hospital-name-1>
+							<label>Hospital Name</label>
+							<hint />
+							<alert>Please enter a hospital name less than 255 characters</alert>
+							<alert>Please enter a hospital name</alert>
+						</hospital-name-1>
+						<address-line1-1>
+							<label>Address Line 1</label>
+							<hint />
+							<alert>Please enter an address less than 255 characters</alert>
+							<alert>Please enter an address</alert>
+						</address-line1-1>
+						<address-line2-1>
+							<label>Address Line 2</label>
+							<hint />
+							<alert>Please enter an address that is less than 255 characters</alert>
+						</address-line2-1>
+						<city-1>
+							<label>City</label>
+							<hint />
+							<alert>Please enter a city less than 255 characters</alert>
+							<alert>Please enter a city</alert>
+						</city-1>
+						<post-code-1>
+							<label>Postcode</label>
+							<hint />
+							<alert>Please enter a post code less than 10 characters</alert>
+							<alert>Please enter a post code</alert>
+						</post-code-1>
+					</resource>	
+					<resource xml:lang="fr">
+						<control-18>
+							<label>Les zones signalées par * sont obligatoires.</label>
+							<hint />
+						</control-18>
+						<control-19>
+							<label>&lt;h3&gt;&lt;b&gt;Informations concernant l&apos;enfant&lt;/b&gt;&lt;/h3&gt;&lt;br&gt;Veuillez saisir le nom de votre enfant tel que vous voudriez qu&apos;il apparaisse sur son certificat de naissance (par ex., Charles plutôt que charles)</label>
+							<hint />
+						</control-19>
+						<section-1>
+							<label>Informations concernant l&apos;enfant</label>
+						</section-1>
+						<first-name-1>
+							<label>Prénom</label>
+							<hint />
+							<alert>Veuillez saisir un prénom de moins de 240 caractères</alert>
+							<alert>La longueur totale du prénom et du nom doit être inférieure à 255 caractères</alert>
+							<alert>Veuillez saisir un prénom</alert>
+						</first-name-1>
+						<middle-name-1>
+							<label>2e prénom</label>
+							<hint />
+							<alert>Veuillez saisir un 2e prénom de moins de 240 caractères</alert>
+							<alert>Veuillez saisir un 2e prénom</alert>
+						</middle-name-1>
+						<last-name-1>
+							<label>Nom de famille</label>
+							<hint />
+							<alert>Veuillez saisir un prénom de moins de 240 caractères</alert>
+							<alert>La longueur totale du prénom et du nom doit être inférieure à 255 caractères</alert>
+							<alert>Veuillez saisir un prénom</alert>
+						</last-name-1>
+						<tnc-1>
+							<label />
+							<hint />
+							<alert>Veuillez accepter les conditions</alert>
+							<item>
+								<label>Je comprends qu&apos;en tant que parents, nous avons le droit de choisir les prénoms et le nom de famille de notre enfant. Cependant, l&apos;officier de l&apos;état civil peut refuser d&apos;enregistrer un nom s&apos;il estime qu&apos;il est grossier, ridicule, trop long ou contraire à l&apos;intérêt général.</label>
+								<hint />
+								<value>1</value>
+							</item>
+						</tnc-1>
+						<control-8>
+							<label>&lt;h3&gt;&lt;b&gt;Informations concernant la naissance&lt;/b&gt;&lt;/h3&gt;</label>
+							<hint />
+						</control-8>
+						<birth-date-1>
+							<label>Date de naissance (exemple : 23/09/2016)</label>
+							<hint />
+							<alert>Veuillez saisir une date de naissance valide</alert>
+							<alert>Veuillez sélectionner une date de naissance</alert>
+						</birth-date-1>
+						<birth-weight-1>
+							<label>Poids à la naissance</label>
+							<hint>Veuillez saisir le poids à la naissance en grammes</hint>
+							<alert>Veuillez saisir un poids à la naissance valide, avec des chiffres uniquement (par ex., 3450)</alert>
+							<alert>Veuillez saisir le poids à la naissance</alert>
+						</birth-weight-1>
+						<control-11>
+							<label>Sexe</label>
+							<hint />
+							<alert>Veuillez sélectionner une option</alert>
+							<item>
+								<label>Masculin</label>
+								<value>male</value>
+							</item>
+							<item>
+								<label>Féminin</label>
+								<value>female</value>
+							</item>
+							<item>
+								<label>Autre</label>
+								<value>other</value>
+							</item>
+							<item>
+								<label>Ne souhaite pas l&apos;indiquer</label>
+								<value>rather-not-say</value>
+							</item>
+						</control-11>
+						<control-12>
+							<label>&lt;h3&gt;&lt;b&gt;Adresse de naissance&lt;/h3&gt;&lt;/b&gt;</label>
+							<hint />
+						</control-12>
+						<control-13>
+							<label>Pays</label>
+							<hint />
+							<item>
+								<label>Royaume-Uni</label>
+								<value>GB</value>
+							</item>
+							<item>
+								<label>Jersey</label>
+								<value>JE</value>
+							</item>
+							<item>
+								<label>Île de Man</label>
+								<value>IM</value>
+							</item>
+							<item>
+								<label>Guernesey</label>
+								<value>GG</value>
+							</item>
+						</control-13>
+						<hospital-name-1>
+							<label>Nom de l&apos;hôpital</label>
+							<hint />
+							<alert>Veuillez saisir un nom d&apos;hôpital de moins de 255 caractères</alert>
+							<alert>Veuillez saisir un nom d&apos;hôpital</alert>
+						</hospital-name-1>
+						<address-line1-1>
+							<label>Ligne d&apos;adresse 1</label>
+							<hint />
+							<alert>Veuillez saisir une adresse de moins de 255 caractères</alert>
+							<alert>Veuillez saisir une adresse</alert>
+						</address-line1-1>
+						<address-line2-1>
+							<label>Ligne d&apos;adresse 2</label>
+							<hint />
+							<alert>Veuillez saisir une adresse de moins de 255 caractères</alert>
+						</address-line2-1>
+						<city-1>
+							<label>Ville</label>
+							<hint />
+							<alert>Veuillez saisir une ville de moins de 255 caractères</alert>
+							<alert>Veuillez saisir une ville</alert>
+						</city-1>
+						<post-code-1>
+							<label>Code postal</label>
+							<hint />
+							<alert>Veuillez saisir un code postal de moins de 10 caractères</alert>
+							<alert>Veuillez saisir un code postal</alert>
+						</post-code-1>
+					</resource>
+					<resource xml:lang="de">
+						<control-18>
+							<label>Mit einem * gekennzeichnete Felder sind Pflichtfelder.</label>
+							<hint />
+						</control-18>
+						<control-19>
+							<label>&lt;h3&gt;&lt;b&gt;Details zum Kind&lt;/b&gt;&lt;/h3&gt;&lt;br&gt;Geben Sie den Namen Ihres Kindes so ein, wie er auf der Geburtsurkunde angezeigt werden soll (z.B. Max anstatt max).</label>
+							<hint />
+						</control-19>
+						<section-1>
+							<label>Details zum Kind</label>
+						</section-1>
+						<first-name-1>
+							<label>Vorname</label>
+							<hint />
+							<alert>Geben Sie einen Vornamen ein, der kürzer als 240 Zeichen ist.</alert>
+							<alert>Die Länge des Vor- und Nachnamens darf zusammen 255 Zeichen nicht überschreiten.</alert>
+							<alert>Geben Sie einen Vornamen ein.</alert>
+						</first-name-1>
+						<middle-name-1>
+							<label>Zweiter Vorname</label>
+							<hint />
+							<alert>Geben Sie einen zweiten Vornamen ein, der kürzer als 240 Zeichen ist.</alert>
+							<alert>Geben Sie einen zweiten Vornamen ein.</alert>
+						</middle-name-1>
+						<last-name-1>
+							<label>Nachname</label>
+							<hint />
+							<alert>Geben Sie einen Vornamen ein, der kürzer als 240 Zeichen ist.</alert>
+							<alert>Die Länge des Vor- und Nachnamens darf zusammen 255 Zeichen nicht überschreiten.</alert>
+							<alert>Geben Sie einen Vornamen ein.</alert>
+						</last-name-1>
+						<tnc-1>
+							<label />
+							<hint />
+							<alert>Akzeptieren Sie die allgemeinen Geschäftsbedingungen.</alert>
+							<item>
+								<label>Ich habe verstanden, dass wir als Eltern das Recht haben, den Vornamen und Nachnamen bzw. den Familiennamen unseres Kindes zu wählen. Der oberste Standesbeamte kann jedoch die Eintragung eines Namen verweigern, wenn dieser obszön, beleidigend oder zu lang ist oder dem öffentlichen Interesse widerspricht.</label>
+								<hint />
+								<value>1</value>
+							</item>
+						</tnc-1>
+						<control-8>
+							<label>&lt;h3&gt;&lt;b&gt;Details zur Geburt&lt;/b&gt;&lt;/h3&gt;</label>
+							<hint />
+						</control-8>
+						<birth-date-1>
+							<label>Geburtsdatum (Beispiel: 23.09.2016)</label>
+							<hint />
+							<alert>Geben Sie ein gültiges Geburtsdatum ein.</alert>
+							<alert>Wählen Sie ein Geburtsdatum aus.</alert>
+						</birth-date-1>
+						<birth-weight-1>
+							<label>Geburtsgewicht</label>
+							<hint>Geben Sie ein Geburtsgewicht in Gramm ein.</hint>
+							<alert>Geben Sie ein gültiges Geburtsgewicht ein, das nur aus Ziffern besteht (Beispiel: 3450).</alert>
+							<alert>Geben Sie das Geburtsgewicht ein.</alert>
+						</birth-weight-1>
+						<control-11>
+							<label>Geschlecht</label>
+							<hint />
+							<alert>Wählen Sie eine Option.</alert>
+							<item>
+								<label>Männlich</label>
+								<value>male</value>
+							</item>
+							<item>
+								<label>Weiblich</label>
+								<value>female</value>
+							</item>
+							<item>
+								<label>Andere</label>
+								<value>other</value>
+							</item>
+							<item>
+								<label>Keine Angabe</label>
+								<value>rather-not-say</value>
+							</item>
+						</control-11>
+						<control-12>
+							<label>&lt;h3&gt;&lt;b&gt;Geburtsadresse&lt;/h3&gt;&lt;/b&gt;</label>
+							<hint />
+						</control-12>
+						<control-13>
+							<label>Land</label>
+							<hint />
+							<item>
+								<label>Vereinigtes Königreich</label>
+								<value>GB</value>
+							</item>
+							<item>
+								<label>Jersey</label>
+								<value>JE</value>
+							</item>
+							<item>
+								<label>Isle of Man</label>
+								<value>IM</value>
+							</item>
+							<item>
+								<label>Guernsey</label>
+								<value>GG</value>
+							</item>
+						</control-13>
+						<hospital-name-1>
+							<label>Krankenhausname</label>
+							<hint />
+							<alert>Geben Sie einen Krankenhausnamen ein, der kürzer als 255 Zeichen ist.</alert>
+							<alert>Geben Sie einenKrankenhausnamen ein.</alert>
+						</hospital-name-1>
+						<address-line1-1>
+							<label>Adresse Zeile 1</label>
+							<hint />
+							<alert>Geben Sie eine Adresse ein, die kürzer als 255 Zeichen ist.</alert>
+							<alert>Geben Sie eine Adresse ein.</alert>
+						</address-line1-1>
+						<address-line2-1>
+							<label>Adresse Zeile 2</label>
+							<hint />
+							<alert>Geben Sie eine Adresse ein, die kürzer als 255 Zeichen ist.</alert>
+						</address-line2-1>
+						<city-1>
+							<label>Ort</label>
+							<hint />
+							<alert>Geben Sie einen Ort ein, die kürzer als 255 Zeichen ist.</alert>
+							<alert>Geben Sie einen Ort ein.</alert>
+						</city-1>
+						<post-code-1>
+							<label>Postleitzahl</label>
+							<hint />
+							<alert>Geben Sie eine Postleitzahl ein, der kürzer als 10 Zeichen ist.</alert>
+							<alert>Geben Sie eine Postleitzahl ein.</alert>
+						</post-code-1>
+					</resource>
+					<resource xml:lang="es">
+						<control-18>
+							<label>Los campos marcados con * son obligatorios</label>
+							<hint />
+						</control-18>
+						<control-19>
+							<label>&lt;h3&gt;&lt;b&gt;Datos del niño&lt;/b&gt;&lt;/h3&gt;&lt;br&gt;Escriba el nombre del niño exactamente como quiera que aparezca en el Certificado de nacimiento (p. ej. Carlos en lugar de Karlos)</label>
+							<hint />
+						</control-19>
+						<section-1>
+							<label>Datos del niño</label>
+						</section-1>
+						<first-name-1>
+							<label>Nombre</label>
+							<hint />
+							<alert>Introduzca un nombre que tenga menos de 240 caracteres</alert>
+							<alert>La longitud total del nombre y los apellidos debe ser inferior a 255 caracteres</alert>
+							<alert>Introduzca un nombre</alert>
+						</first-name-1>
+						<middle-name-1>
+							<label>Segundo nombre</label>
+							<hint />
+							<alert>Introduzca un segundo nombre que tenga menos de 240 caracteres</alert>
+							<alert>Introduzca un segundo nombre</alert>
+						</middle-name-1>
+						<last-name-1>
+							<label>Apellidos</label>
+							<hint />
+							<alert>Introduzca un nombre que tenga menos de 240 caracteres</alert>
+							<alert>La longitud total del nombre y los apellidos debe ser inferior a 255 caracteres</alert>
+							<alert>Introduzca un nombre</alert>
+						</last-name-1>
+						<tnc-1>
+							<label />
+							<hint />
+							<alert>Acepte los Términos y condiciones</alert>
+							<item>
+								<label>Entiendo que como padres tenemos derecho a elegir los nombres y los apellidos de nuestro hijo. Sin embargo, el oficial del registro puede negarse a registrar un nombre si es obsceno, ofensivo, demasiado largo o contrario al interés general.</label>
+								<hint />
+								<value>1</value>
+							</item>
+						</tnc-1>
+						<control-8>
+							<label>&lt;h3&gt;&lt;b&gt;Datos de nacimiento&lt;/b&gt;&lt;/h3&gt;</label>
+							<hint />
+						</control-8>
+						<birth-date-1>
+							<label>Fecha de nacimiento (ejemplo: 23/09/2016)</label>
+							<hint />
+							<alert>Introduzca una fecha de nacimiento válida</alert>
+							<alert>Seleccione una fecha de nacimiento</alert>
+						</birth-date-1>
+						<birth-weight-1>
+							<label>Peso al nacer</label>
+							<hint>Introduzca el peso al nacer en gramos</hint>
+							<alert>Introduzca un peso al nacer válido utilizando únicamente cifras (p. ej. 3450)</alert>
+							<alert>Introduzca el peso al nacer</alert>
+						</birth-weight-1>
+						<control-11>
+							<label>Sexo</label>
+							<hint />
+							<alert>Seleccione una opción</alert>
+							<item>
+								<label>Hombre</label>
+								<value>male</value>
+							</item>
+							<item>
+								<label>Mujer</label>
+								<value>female</value>
+							</item>
+							<item>
+								<label>Otro</label>
+								<value>other</value>
+							</item>
+							<item>
+								<label>Prefiero no contestar</label>
+								<value>rather-not-say</value>
+							</item>
+						</control-11>
+						<control-12>
+							<label>&lt;h3&gt;&lt;b&gt;Lugar de nacimiento&lt;/h3&gt;&lt;/b&gt;</label>
+							<hint />
+						</control-12>
+						<control-13>
+							<label>País</label>
+							<hint />
+							<item>
+								<label>Reino Unido</label>
+								<value>GB</value>
+							</item>
+							<item>
+								<label>Jersey</label>
+								<value>JE</value>
+							</item>
+							<item>
+								<label>Isla de Man</label>
+								<value>IM</value>
+							</item>
+							<item>
+								<label>Guernsey</label>
+								<value>GG</value>
+							</item>
+						</control-13>
+						<hospital-name-1>
+							<label>Hospital</label>
+							<hint />
+							<alert>Introduzca un hospital que tenga menos de 255 caracteres</alert>
+							<alert>Introduzca un hospital</alert>
+						</hospital-name-1>
+						<address-line1-1>
+							<label>Línea de dirección 1</label>
+							<hint />
+							<alert>Introduzca una dirección que tenga menos de 255 caracteres</alert>
+							<alert>Introduzca una dirección</alert>
+						</address-line1-1>
+						<address-line2-1>
+							<label>Línea de dirección 2</label>
+							<hint />
+							<alert>Introduzca una dirección que tenga menos de 255 caracteres</alert>
+						</address-line2-1>
+						<city-1>
+							<label>Ciudad</label>
+							<hint />
+							<alert>Introduzca una ciudad que tenga menos de 255 caracteres</alert>
+							<alert>Introduzca una ciudad</alert>
+						</city-1>
+						<post-code-1>
+							<label>Código postal</label>
+							<hint />
+							<alert>Introduzca un código postal que tenga menos de 10 caracteres</alert>
+							<alert>Introduzca un código postal</alert>
+						</post-code-1>
+					</resource>	
+				</resources>
+			</xf:instance>
+			<!-- Utility instances for services -->
+			<xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+				<request />
+			</xf:instance>
+			<xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+				<response />
+			</xf:instance>
+		</xf:model>
+	</xh:head>
+	<xh:body>
+		<fr:view>
+			<fr:body xmlns:xbl="http://www.w3.org/ns/xbl" xmlns:p="http://www.orbeon.com/oxf/pipeline" xmlns:oxf="http://www.orbeon.com/oxf/processors">
+				<fr:section id="section-1-control" bind="section-1-bind">
+					<xf:label ref="$form-resources/section-1/label" />
+					<fr:grid>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-18-control" bind="control-18-bind">
+									<xf:label ref="$form-resources/control-18/label" />
+									<xf:hint ref="$form-resources/control-18/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-19-control" bind="control-19-bind">
+									<xf:label ref="$form-resources/control-19/label" mediatype="text/html" />
+									<xf:hint ref="$form-resources/control-19/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="first-name-1-control" bind="first-name-1-bind" xxf:maxlength="240">
+									<xf:label ref="$form-resources/first-name-1/label" />
+									<xf:hint ref="$form-resources/first-name-1/hint" />
+									<xf:alert ref="$form-resources/first-name-1/alert[1]" validation="constraint-18-constraint" />
+									<xf:alert ref="$form-resources/first-name-1/alert[2]" validation="constraint-19-constraint" />
+									<xf:alert ref="$form-resources/first-name-1/alert[3]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="middle-name-1-control" bind="middle-name-1-bind" xxf:maxlength="240">
+									<xf:label ref="$form-resources/middle-name-1/label" />
+									<xf:hint ref="$form-resources/middle-name-1/hint" />
+									<xf:alert ref="$form-resources/middle-name-1/alert[1]" validation="constraint-29-constraint" />
+									<xf:alert ref="$form-resources/middle-name-1/alert[2]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="last-name-1-control" bind="last-name-1-bind" xxf:maxlength="240">
+									<xf:label ref="$form-resources/last-name-1/label" />
+									<xf:hint ref="$form-resources/last-name-1/hint" />
+									<xf:alert ref="$form-resources/last-name-1/alert[1]" validation="constraint-30-constraint" />
+									<xf:alert ref="$form-resources/last-name-1/alert[2]" validation="constraint-31-constraint" />
+									<xf:alert ref="$form-resources/last-name-1/alert[3]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:select id="tnc-1-control" appearance="full" bind="tnc-1-bind">
+									<xf:label ref="$form-resources/tnc-1/label" />
+									<xf:hint ref="$form-resources/tnc-1/hint" />
+									<xf:alert ref="$form-resources/tnc-1/alert" />
+									<xf:itemset ref="$form-resources/tnc-1/item">
+										<xf:label ref="label" />
+										<xf:value ref="value" />
+										<xf:hint ref="hint" />
+									</xf:itemset>
+								</xf:select>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-8-control" bind="control-8-bind">
+									<xf:label ref="$form-resources/control-8/label" mediatype="text/html" />
+									<xf:hint ref="$form-resources/control-8/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="birth-date-1-control" bind="birth-date-1-bind">
+									<xf:label ref="$form-resources/birth-date-1/label" />
+									<xf:hint ref="$form-resources/birth-date-1/hint" />
+									<xf:alert ref="$form-resources/birth-date-1/alert[1]" validation="validation-22-validation" />
+									<xf:alert ref="$form-resources/birth-date-1/alert[2]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="birth-weight-1-control" bind="birth-weight-1-bind" xxf:maxlength="4">
+									<xf:label ref="$form-resources/birth-weight-1/label" />
+									<xf:hint ref="$form-resources/birth-weight-1/hint" />
+									<xf:alert ref="$form-resources/birth-weight-1/alert[1]" validation="validation-20-validation" />
+									<xf:alert ref="$form-resources/birth-weight-1/alert[2]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<fr:dropdown-select1 xmlns:xxbl="http://orbeon.org/oxf/xml/xbl" id="control-11-control" bind="control-11-bind">
+									<xf:label ref="$form-resources/control-11/label" />
+									<xf:hint ref="$form-resources/control-11/hint" />
+									<xf:alert ref="$form-resources/control-11/alert" />
+									<xf:itemset ref="$form-resources/control-11/item">
+										<xf:label ref="label" />
+										<xf:value ref="value" />
+									</xf:itemset>
+								</fr:dropdown-select1>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:output id="control-12-control" bind="control-12-bind">
+									<xf:label ref="$form-resources/control-12/label" mediatype="text/html" />
+									<xf:hint ref="$form-resources/control-12/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:output>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<fr:dropdown-select1 xmlns:xxbl="http://orbeon.org/oxf/xml/xbl" id="control-13-control" bind="control-13-bind">
+									<xf:label ref="$form-resources/control-13/label" />
+									<xf:hint ref="$form-resources/control-13/hint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+									<xf:itemset ref="$form-resources/control-13/item">
+										<xf:label ref="label" />
+										<xf:value ref="value" />
+									</xf:itemset>
+								</fr:dropdown-select1>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="hospital-name-1-control" bind="hospital-name-1-bind" xxf:maxlength="255">
+									<xf:label ref="$form-resources/hospital-name-1/label" />
+									<xf:hint ref="$form-resources/hospital-name-1/hint" />
+									<xf:alert ref="$form-resources/hospital-name-1/alert[1]" validation="constraint-33-constraint" />
+									<xf:alert ref="$form-resources/hospital-name-1/alert[2]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="address-line1-1-control" bind="address-line1-1-bind" xxf:maxlength="255">
+									<xf:label ref="$form-resources/address-line1-1/label" />
+									<xf:hint ref="$form-resources/address-line1-1/hint" />
+									<xf:alert ref="$form-resources/address-line1-1/alert[1]" validation="constraint-34-constraint" />
+									<xf:alert ref="$form-resources/address-line1-1/alert[2]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="address-line2-1-control" bind="address-line2-1-bind" xxf:maxlength="255">
+									<xf:label ref="$form-resources/address-line2-1/label" />
+									<xf:hint ref="$form-resources/address-line2-1/hint" />
+									<xf:alert ref="$form-resources/address-line2-1/alert" validation="constraint-35-constraint" />
+									<xf:alert ref="$fr-resources/detail/labels/alert" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="city-1-control" bind="city-1-bind" xxf:maxlength="255">
+									<xf:label ref="$form-resources/city-1/label" />
+									<xf:hint ref="$form-resources/city-1/hint" />
+									<xf:alert ref="$form-resources/city-1/alert[1]" validation="constraint-36-constraint" />
+									<xf:alert ref="$form-resources/city-1/alert[2]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+						<xh:tr>
+							<xh:td>
+								<xf:input id="post-code-1-control" bind="post-code-1-bind" xxf:maxlength="10">
+									<xf:label ref="$form-resources/post-code-1/label" />
+									<xf:hint ref="$form-resources/post-code-1/hint" />
+									<xf:alert ref="$form-resources/post-code-1/alert[1]" validation="constraint-37-constraint" />
+									<xf:alert ref="$form-resources/post-code-1/alert[2]" />
+								</xf:input>
+							</xh:td>
+						</xh:tr>
+					</fr:grid>
+				</fr:section>
+			</fr:body>
+		</fr:view>
+	</xh:body>
+</xh:html>

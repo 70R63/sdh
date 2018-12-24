@@ -1,0 +1,832 @@
+<xh:html xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:xxi="http://orbeon.org/oxf/xml/xinclude"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:sql="http://orbeon.org/oxf/xml/sql"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:exf="http://www.exforms.org/exf/1-0"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <xh:head>
+        <xh:title>Apply For Tourist Visa</xh:title>
+        <xf:model id="fr-form-model" xxf:expose-xpath-types="true">
+            <!-- Main instance -->
+            <xf:instance id="fr-form-instance" xxf:exclude-result-prefixes="#all" xxf:index="id">
+                <form>
+                    <section-1>
+                        <control-13/>
+                        <control-15/>
+                    </section-1>
+                    <section-14>
+                        <convicted-1>no</convicted-1>
+                    </section-14>
+                    <section-15>
+                        <when-1/>
+                        <reason-1/>
+                        <penalty-1/>
+                    </section-15>
+                    <section-3>
+                        <charged-1/>
+                        <warrant-1/>
+                        <offender-1/>
+                        <military-1/>
+                        <excluded-1/>
+                    </section-3>
+                </form>
+            </xf:instance>
+            <!-- Bindings -->
+            <xf:bind id="fr-form-binds" ref="instance('fr-form-instance')">
+                <xf:bind id="section-1-bind" name="section-1" ref="section-1">
+                    <xf:bind id="control-13-bind" ref="control-13" name="control-13"/>
+                    <xf:bind id="control-15-bind" ref="control-15" name="control-15" required="true()"/>
+                </xf:bind>
+                <xf:bind id="section-15-bind" ref="section-15" name="section-15"
+                         relevant="$convicted-1='yes'">
+                    <xf:bind id="when-1-bind" ref="when-1" name="when-1" required="true()"
+                             relevant="$convicted-1='yes'"/>
+                    <xf:bind id="reason-1-bind" ref="reason-1" name="reason-1" required="true()"
+                             relevant="$convicted-1='yes'"/>
+                    <xf:bind id="penalty-1-bind" ref="penalty-1" name="penalty-1" required="true()"
+                             relevant="$convicted-1='yes'"/>
+                </xf:bind>
+                <xf:bind id="section-3-bind" ref="section-3" name="section-3">
+                    <xf:bind id="charged-1-bind" ref="charged-1" name="charged-1" required="true()"/>
+                    <xf:bind id="warrant-1-bind" ref="warrant-1" name="warrant-1" required="true()"/>
+                    <xf:bind id="offender-1-bind" ref="offender-1" name="offender-1" required="true()"/>
+                    <xf:bind id="military-1-bind" ref="military-1" name="military-1" required="true()"/>
+                    <xf:bind id="excluded-1-bind" ref="excluded-1" name="excluded-1" required="true()"/>
+                </xf:bind>
+                <xf:bind id="section-14-bind" ref="section-14" name="section-14">
+                    <xf:bind id="convicted-1-bind" ref="convicted-1" name="convicted-1" required="true()"/>
+                </xf:bind>
+            </xf:bind>
+            <!-- Metadata -->
+            <xf:instance xxf:readonly="true" id="fr-form-metadata" xxf:exclude-result-prefixes="#all">
+                <metadata>
+                    <application-name>publicsector</application-name>
+                    <form-name>Apply-For-Tourist-Visa-Form-Step-3</form-name>
+                    <title xml:lang="en">Apply for Tourist Visa</title>
+                    <description xml:lang="en">Apply for Tourist Visa</description>                 
+                    <title xml:lang="fr">Demander un visa de tourisme</title>
+                    <description xml:lang="fr">Demander un visa de tourisme</description>
+                    <title xml:lang="de">Touristenvisum beantragen</title>
+                    <description xml:lang="de">Touristenvisum beantragen</description>
+                    <title xml:lang="es">Solicitud de visado de turista</title>
+                    <description xml:lang="es">Solicitud de visado de turista</description>
+                    <singleton>false</singleton>
+                </metadata>
+            </xf:instance>
+            <!-- Attachments -->
+            <xf:instance id="fr-form-attachments" xxf:exclude-result-prefixes="#all">
+                <attachments>
+                    <css mediatype="text/css" filename="" size=""/>
+                    <pdf mediatype="application/pdf" filename="" size=""/>
+                </attachments>
+            </xf:instance>
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id="fr-form-resources" xxf:readonly="false" xxf:exclude-result-prefixes="#all">
+                <resources>
+                    <resource xml:lang="en">
+                        <when-1>
+                            <label>When and where?</label>
+                            <hint/>
+                            <alert>Please enter a time and place</alert>
+                        </when-1>
+                        <reason-1>
+                            <label>For what reason?</label>
+                            <hint/>
+                            <alert>Please enter a reason</alert>
+                        </reason-1>
+                        <penalty-1>
+                            <label>Nature and extent of penalty</label>
+                            <hint/>
+                            <alert>Please enter the nature and extend of penalty</alert>
+                        </penalty-1>
+                        <convicted-1>
+                            <label>Have you ever been convicted of an offence in any country (including any conviction which is now removed from official records?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </convicted-1>
+                        <section-15>
+                            <label/>
+                            <help/>
+                        </section-15>
+                        <control-13>
+                            <label>Fields marked * are required</label>
+                            <hint/>
+                        </control-13>
+                        <control-15>
+                            <label>Do you suffer from any of these diseases? Smallpox, tuberculosis, SARS, cholera, pneumonic plague, yellow fever)</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </control-15>
+                        <charged-1>
+                            <label>Have you ever been charged with any offence that is currently awaiting legal action?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </charged-1>
+                        <warrant-1>
+                            <label>Have you ever been the subject of an arrest warrant or Interpol notice?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </warrant-1>
+                        <offender-1>
+                            <label>Have you ever been named on a sex offender register?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </offender-1>
+                        <military-1>
+                            <label>Have you ever undergone any military/paramilitary training, been trained in weapons/explosives or in the manufacture of chemical/biological products?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </military-1>
+                        <excluded-1>
+                            <label>Have you ever been removed, deported or excluded from any country (including the State of Rosebud)?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </excluded-1>
+                        <section-1>
+                            <label>Health Details</label>
+                        </section-1>
+                        <section-14>
+                            <label/>
+                            <help/>
+                        </section-14>
+                        <section-3>
+                            <label>Character Details</label>
+                            <help/>
+                        </section-3>
+                    </resource>
+                    <resource xml:lang="fr">
+                         <when-1>
+                            <label>Quand et où ?</label>
+                            <hint/>
+                            <alert>Veuillez saisir une date et un lieu</alert>
+                        </when-1>
+                        <reason-1>
+                            <label>Pour quel motif ?</label>
+                            <hint/>
+                            <alert>Veuillez saisir un motif</alert>
+                        </reason-1>
+                        <penalty-1>
+                            <label>Nature et gravité de la sanction</label>
+                            <hint/>
+                            <alert>Veuillez saisir la nature et la gravité de la sanction</alert>
+                        </penalty-1>
+                        <convicted-1>
+                            <label>Avez-vous déjà été reconnu coupable d&apos;une infraction dans un pays quelconque (y compris une condamnation ne figurant plus dans les registres officiels) ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </convicted-1>
+                        <section-15>
+                            <label/>
+                            <help/>
+                        </section-15>
+                        <control-13>
+                            <label>Les zones signalées par * sont obligatoires.</label>
+                            <hint/>
+                        </control-13>
+                        <control-15>
+                            <label>Souffrez-vous de l&apos;une des maladies suivantes ? Variole, tuberculose, SRAS, choléra, peste pneumonique, fièvre jaune</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </control-15>
+                        <charged-1>
+                            <label>Êtes-vous accusé d&apos;une infraction en attente d&apos;action légale ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </charged-1>
+                        <warrant-1>
+                            <label>Avez-vous déjà fait l&apos;objet d&apos;un mandat d&apos;arrêt ou d&apos;une notice d&apos;Interpol ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </warrant-1>
+                        <offender-1>
+                            <label>Votre nom a-t-il déjà figuré dans un registre des délinquants sexuels ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </offender-1>
+                        <military-1>
+                            <label>Avez-vous déjà suivi des formations militaires/paramilitaires, été formé à l&apos;usage des armes/explosifs ou à la fabrication de produits chimiques/biologiques ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </military-1>
+                        <excluded-1>
+                            <label>Avez-vous déjà été expulsé d&apos;un pays (y compris l&apos;État de Rosebud) ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </excluded-1>
+                        <section-1>
+                            <label>Informations sur la santé</label>
+                        </section-1>
+                        <section-14>
+                            <label/>
+                            <help/>
+                        </section-14>
+                        <section-3>
+                            <label>Informations de moralité</label>
+                            <help/>
+                        </section-3>
+                    </resource>
+                    <resource xml:lang="de">
+                       <when-1>
+                            <label>Wann und wo?</label>
+                            <hint/>
+                            <alert>Geben Sie eine Zeit und einen Ort ein.</alert>
+                        </when-1>
+                        <reason-1>
+                            <label>Aus welchem Grund?</label>
+                            <hint/>
+                            <alert>Geben Sie einen Grund ein.</alert>
+                        </reason-1>
+                        <penalty-1>
+                            <label>Art und Ausmaß der Strafe</label>
+                            <hint/>
+                            <alert>Geben Sie die Art und das Ausmaß der Strafe ein.</alert>
+                        </penalty-1>
+                        <convicted-1>
+                            <label>Wurden Sie jemals in einem Land einer strafbaren Handlung wegen verurteilt (auch Verurteilungen, die mittlerweile aus den Akten gelöscht wurden)?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </convicted-1>
+                        <section-15>
+                            <label/>
+                            <help/>
+                        </section-15>
+                        <control-13>
+                            <label>Mit einem * gekennzeichnete Felder sind Pflichtfelder.</label>
+                            <hint/>
+                        </control-13>
+                        <control-15>
+                            <label>Leiden Sie an einer der folgenden Krankheiten? Pocken, Tuberkulose, SARS, Cholera, Lungenpest, Gelbfieber</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </control-15>
+                        <charged-1>
+                            <label>Wurden Sie jemals eines Vergehens angeklagt, für das ein Gerichtsverfahren aussteht?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </charged-1>
+                        <warrant-1>
+                            <label>Wurde gegen Sie jemals ein Haftbefehl ausgestellt oder durch Interpol nach Ihnen gefahndet?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </warrant-1>
+                        <offender-1>
+                            <label>Befindet sich Ihr Name in einem Register für Sexualstraftäter?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </offender-1>
+                        <military-1>
+                            <label>Haben Sie jemals an militärischem/paramilitärischem Training teilgenommen und/oder wurden im Umgang mit Waffen/Sprengstoffen bzw. der Herstellung chemischer/biologischer Produkte geschult?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </military-1>
+                        <excluded-1>
+                            <label>Wurden Sie jemals aus einem Land (einschließlich des State of Rosebud) ausgewiesen, abgeschoben oder ausgeschlossen?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </excluded-1>
+                        <section-1>
+                            <label>Gesundheitsdetails</label>
+                        </section-1>
+                        <section-14>
+                            <label/>
+                            <help/>
+                        </section-14>
+                        <section-3>
+                            <label>Charakterdetails</label>
+                            <help/>
+                        </section-3>
+                    </resource>  
+                    <resource xml:lang="es">
+                        <when-1>
+                            <label>¿Cuándo y dónde?</label>
+                            <hint/>
+                            <alert>Introduzca una fecha y un lugar</alert>
+                        </when-1>
+                        <reason-1>
+                            <label>¿Por qué motivo?</label>
+                            <hint/>
+                            <alert>Introduzca un motivo</alert>
+                        </reason-1>
+                        <penalty-1>
+                            <label>Naturaleza y alcance de la sanción</label>
+                            <hint/>
+                            <alert>Indique la naturaleza y el alcance de la sanción</alert>
+                        </penalty-1>
+                        <convicted-1>
+                            <label>¿Ha sido condenado alguna vez por algún delito en algún país (incluyendo cualquier condena que se haya eliminado de los registros oficiales)?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </convicted-1>
+                        <section-15>
+                            <label/>
+                            <help/>
+                        </section-15>
+                        <control-13>
+                            <label>Los campos marcados con * son obligatorios</label>
+                            <hint/>
+                        </control-13>
+                        <control-15>
+                            <label>¿Padece alguna de estas enfermedades? Viruela, tuberculosis, SRAS, cólera, peste neumónica, fiebre amarilla</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </control-15>
+                        <charged-1>
+                            <label>¿Se le ha acusado de algún delito que esté actualmente pendiente de acciones legales?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </charged-1>
+                        <warrant-1>
+                            <label>¿Ha sido alguna vez objeto de una orden de detención o buscado por Interpol?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </warrant-1>
+                        <offender-1>
+                            <label>¿Ha sido incluido alguna vez en un registro de delincuentes sexuales?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </offender-1>
+                        <military-1>
+                            <label>¿Ha sido alguna vez instruido en prácticas militares o paramilitares, en el manejo de armas o explosivos o en la fabricación de productos químicos o biológicos?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </military-1>
+                        <excluded-1>
+                            <label>¿Ha sido alguna vez expulsado o deportado de algún país (incluido el Estado de Rosebud)?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </excluded-1>
+                        <section-1>
+                            <label>Información sobre la salud</label>
+                        </section-1>
+                        <section-14>
+                            <label/>
+                            <help/>
+                        </section-14>
+                        <section-3>
+                            <label>Información sobre el carácter</label>
+                            <help/>
+                        </section-3>
+                    </resource>
+                </resources>
+            </xf:instance>
+            <!-- Utility instances for services -->
+            <xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+                <request/>
+            </xf:instance>
+            <xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+                <response/>
+            </xf:instance>
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl="http://www.w3.org/ns/xbl"
+                     xmlns:oxf="http://www.orbeon.com/oxf/processors"
+                     xmlns:p="http://www.orbeon.com/oxf/pipeline">
+                <fr:section id="section-1-control" bind="section-1-bind">
+                    <xf:label ref="$form-resources/section-1/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="control-13-control" bind="control-13-bind">
+                                    <xf:label ref="$form-resources/control-13/label"/>
+                                    <xf:hint ref="$form-resources/control-13/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="control-15-control" appearance="full" bind="control-15-bind">
+                                    <xf:label ref="$form-resources/control-15/label"/>
+                                    <xf:hint ref="$form-resources/control-15/hint"/>
+                                    <xf:alert ref="$form-resources/control-15/alert"/>
+                                    <xf:itemset ref="$form-resources/control-15/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+                <fr:section id="section-14-control" bind="section-14-bind">
+                    <xf:label ref="$form-resources/section-14/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="convicted-1-control" appearance="full" bind="convicted-1-bind">
+                                    <xf:label ref="$form-resources/convicted-1/label"/>
+                                    <xf:hint ref="$form-resources/convicted-1/hint"/>
+                                    <xf:alert ref="$form-resources/convicted-1/alert"/>
+                                    <xf:itemset ref="$form-resources/convicted-1/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+                <fr:section id="section-15-control" bind="section-15-bind">
+                    <xf:label ref="$form-resources/section-15/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="when-1-control" bind="when-1-bind">
+                                    <xf:label ref="$form-resources/when-1/label"/>
+                                    <xf:hint ref="$form-resources/when-1/hint"/>
+                                    <xf:alert ref="$form-resources/when-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="reason-1-control" bind="reason-1-bind">
+                                    <xf:label ref="$form-resources/reason-1/label"/>
+                                    <xf:hint ref="$form-resources/reason-1/hint"/>
+                                    <xf:alert ref="$form-resources/reason-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="penalty-1-control" bind="penalty-1-bind">
+                                    <xf:label ref="$form-resources/penalty-1/label"/>
+                                    <xf:hint ref="$form-resources/penalty-1/hint"/>
+                                    <xf:alert ref="$form-resources/penalty-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+                <fr:section id="section-3-control" bind="section-3-bind">
+                    <xf:label ref="$form-resources/section-3/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="charged-1-control" appearance="full" bind="charged-1-bind">
+                                    <xf:label ref="$form-resources/charged-1/label"/>
+                                    <xf:hint ref="$form-resources/charged-1/hint"/>
+                                    <xf:alert ref="$form-resources/charged-1/alert"/>
+                                    <xf:itemset ref="$form-resources/charged-1/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="warrant-1-control" appearance="full" bind="warrant-1-bind">
+                                    <xf:label ref="$form-resources/warrant-1/label"/>
+                                    <xf:hint ref="$form-resources/warrant-1/hint"/>
+                                    <xf:alert ref="$form-resources/warrant-1/alert"/>
+                                    <xf:itemset ref="$form-resources/warrant-1/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="offender-1-control" appearance="full" bind="offender-1-bind">
+                                    <xf:label ref="$form-resources/offender-1/label"/>
+                                    <xf:hint ref="$form-resources/offender-1/hint"/>
+                                    <xf:alert ref="$form-resources/offender-1/alert"/>
+                                    <xf:itemset ref="$form-resources/offender-1/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="military-1-control" appearance="full" bind="military-1-bind">
+                                    <xf:label ref="$form-resources/military-1/label"/>
+                                    <xf:hint ref="$form-resources/military-1/hint"/>
+                                    <xf:alert ref="$form-resources/military-1/alert"/>
+                                    <xf:itemset ref="$form-resources/military-1/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="excluded-1-control" appearance="full" bind="excluded-1-bind">
+                                    <xf:label ref="$form-resources/excluded-1/label"/>
+                                    <xf:hint ref="$form-resources/excluded-1/hint"/>
+                                    <xf:alert ref="$form-resources/excluded-1/alert"/>
+                                    <xf:itemset ref="$form-resources/excluded-1/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>

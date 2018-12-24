@@ -1,0 +1,28 @@
+$productCatalog=sdhProductCatalog
+$productCatalogName=SDH Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$lang=en
+
+UPDATE BundleTemplate;id[unique=true];name[lang=$lang];headerMessage[lang=$lang];version[default=1.0];$catalogVersion
+ ;EVENT_PERMIT;Event Permit;;;
+ ;EVENT_Permit_Service_Bundle;Event Permit Service Bundle;;;
+ ;EVENT_Permit_Size_AddOns_Bundle;Event Permit Size AddOns Bundle;"How many people will attend your event? <span class='required'></span>";;
+ ;EVENT_Permit_WithAlcohol_AddOns_Bundle;Event Permit With Alcohol AddOns Bundle;"Are you going to serve alcohol at this event? <span class='required'></span>";;
+ ;REGISTER_BIRTH;Register Birth;"You are registering a birth.</br><br/>";;
+ ;REGISTER_BirthCert_AddOns_Bundle;Register Birth AddOns Bundle;"How many printed birth certificates would you like to order with this registration?<span class='required'></span>";;
+ ;REGISTER_Birth_Service_Bundle;Register Birth Service Bundle;;;
+ ;WORKING_WITH_CHILDREN;Working With Children;"You are applying for a Working with Children check.</br>";;
+ ;WORKING_withChildren_ApplicationType_Bundle;Working With Children Application Type Bundle;"<br/>Purpose for check<span class='required'></span>";;
+ ;WORKING_withChildren_Service_Bundle;Working With Children Service Bundle;"You are applying for a Working with Children check.</br>";;
+
+UPDATE BundleTemplate;id[unique=true];$catalogVersion;checkoutStepLabel[lang=$lang]
+ ;EVENT_PERMIT;;"Event Permit"
+ ;EVENT_Permit_Service_Bundle;;"Event Permit"
+ ;EVENT_Permit_Size_AddOns_Bundle;;"Event Permit"
+ ;EVENT_Permit_WithAlcohol_AddOns_Bundle;;"Event Permit"
+ ;REGISTER_BIRTH;;"Registration Options"
+ ;REGISTER_BirthCert_AddOns_Bundle;;"Registration Options"
+ ;REGISTER_Birth_Service_Bundle;;"Registration Options"
+ ;WORKING_WITH_CHILDREN;;"Application Type"
+ ;WORKING_withChildren_ApplicationType_Bundle;;"Working with Children"
+ ;WORKING_withChildren_Service_Bundle;;"Working with Children"

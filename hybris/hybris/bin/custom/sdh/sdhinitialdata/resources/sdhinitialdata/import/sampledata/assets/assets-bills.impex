@@ -1,0 +1,87 @@
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# Macros / Replacement Parameter definitions
+$samplePDF=$storefrontContextRoot/_ui/addons/billaddon/responsive/common/images/pdf/Sample_Bill_PDF.pdf 
+
+
+INSERT_UPDATE PSBillType;code[unique=true];externalCode;name;description;sendReminderEmail;sendConfirmationEmail;reminderDaysLag
+;SPFN;EXT_SPFN;Speeding Fine;Speeding Fine;TRUE;TRUE;14
+;PKFN;EXT_PKFN;Parking Fine;Parking Fine;TRUE;TRUE;10
+;TVFN;EXT_TVFN;Traffic Violation Fine;Traffic Violation Fine;TRUE;TRUE;14
+;AOBIL;EXT_AOBIL;Accidental Offence Bill;Accidental Offence Bill;TRUE;TRUE;14
+;VIR;EXT_VIR;Vehicle Insurance Renewal;Vehicle Insurance Renewal;TRUE;TRUE;10
+
+INSERT_UPDATE PSBillPayment;&userBillId;code[unique=true];billId;billUnitId;billDescription;billPaymentStatus(code);billDate[dateformat=dd/MM/yyyy];billDueDate[dateformat=dd/MM/yyyy];totalBillAmount;outstandingBillAmount;lastName;emailOnRecord;fullBillURL;billType(code);currency(isocode);customer(uid);psAsset(code)
+;;10033;E-10033;;Parking Fine;UNPAID;28/04/2016;13/05/2018;972.95;972.95;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;jane.citizen@stateofrosebud.com;1
+;;10034;E-10034;;Parking Fine;PARTPAID;2/03/2016;14/03/2019;550.97;150.97;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;jane.citizen@stateofrosebud.com;2
+;;10035;E-10035;;Parking Fine;UNPAID;21/07/2016;07/11/2017;320.92;320.92;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;granny.citizen@stateofrosebud.com;2
+;;10036;E-10036;;Parking Fine;UNPAID;28/07/2016;14/04/2021;460.28;460.28;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;granny.citizen@stateofrosebud.com;3
+;;10037;E-10037;;Parking Fine;UNPAID;8/11/2016;22/05/2017;1244.54;1244.54;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;jane.citizen@stateofrosebud.com;3
+;;10038;E-10038;;Parking Fine;UNPAID;2/03/2016;14/03/2019;620.97;620.97;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;jane.citizen@stateofrosebud.com;3
+;;10039;E-10039;;Parking Fine;UNPAID;26/02/2016;18/04/2018;150.42;150.42;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;jason.citizen@stateofrosebud.com;3
+;;10040;E-10040;;Parking Fine;UNPAID;25/03/2016;20/06/2020;560.87;560.87;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;granny.citizen@stateofrosebud.com;3
+;;10041;E-10041;;Speeding Fine;UNPAID;4/04/2016;23/09/2018;1134.79;1134.79;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com;1
+;;10042;E-10042;;Speeding Fine;PARTPAID;4/04/2016;13/06/2019;444.79;400.79;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com
+;;10043;E-10043;;Speeding Fine;UNPAID;24/04/2016;03/09/2018;1104.80;1104.89;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jason.citizen@stateofrosebud.com
+;;10044;E-10044;;Speeding Fine;UNPAID;4/08/2016;14/03/2020;994.79;994.79;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com
+;;10045;E-10045;;Parking Fine;UNPAID;2/03/2016;27/09/2017;1160.87;1160.87;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;granny.citizen@stateofrosebud.com
+;;10046;E-10046;;Traffic Violation Fine;UNPAID;7/09/2016;20/09/2019;2060.87;2060.87;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";TVFN;USD;granny.citizen@stateofrosebud.com;2
+;;10047;E-10047;;Traffic Violation Fine;UNPAID;8/08/2016;20/02/2018;1160.97;1160.97;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";TVFN;USD;jane.citizen@stateofrosebud.com;1
+;;10048;E-10048;;Traffic Violation Fine;PARTPAID;2/04/2016;20/02/2019;860.67;370.67;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";TVFN;USD;jane.citizen@stateofrosebud.com;3
+;;10049;E-10049;;Traffic Violation Fine;PARTPAID;5/03/2016;06/02/2018;1460.27;460.27;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";TVFN;USD;jane.citizen@stateofrosebud.com;1
+;;10050;E-10050;;Traffic Violation Fine;PARTPAID;2/03/2016;11/02/2018;1460.27;460.27;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";TVFN;USD;jane.citizen@stateofrosebud.com;3
+;;10051;E-10051;;Traffic Violation Fine;UNPAID;11/03/2016;11/07/2018;1860.27;1860.27;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";TVFN;USD;jason.citizen@stateofrosebud.com;1
+;;10052;E-10052;;Traffic Violation Fine;UNPAID;2/05/2016;20/06/2018;1440.97;1440.97;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";TVFN;USD;jason.citizen@stateofrosebud.com;2
+;;10053;E-10053;;Traffic Violation Fine;UNPAID;2/02/2016;09/02/2019;2360.27;2360.27;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";TVFN;USD;jason.citizen@stateofrosebud.com;3
+;;10054;E-10054;;Accidental Offence Bill;UNPAID;2/10/2016;09/08/2019;2060.27;2060.27;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";AOBIL;USD;jane.citizen@stateofrosebud.com;1
+;;10055;E-10055;;Accidental Offence Bill;UNPAID;20/07/2016;19/02/2019;5060.20;5060.20;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";AOBIL;USD;jane.citizen@stateofrosebud.com;
+;;10056;E-10056;;Accidental Offence Bill;UNPAID;26/06/2016;28/09/2018;3360.95;3360.95;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";AOBIL;USD;jane.citizen@stateofrosebud.com;
+;;10057;E-10057;;Accidental Offence Bill;UNPAID;9/03/2016;07/07/2019;1960.95;1960.95;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";AOBIL;USD;granny.citizen@stateofrosebud.com;2
+;;10058;E-10058;;Vehicle Insurance Renewal;UNPAID;2/08/2016;17/04/2019;6060.27;6060.27;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";VIR;USD;jane.citizen@stateofrosebud.com;1
+;;10059;E-10059;;Vehicle Insurance Renewal;UNPAID;22/10/2016;12/02/2018;5060.20;5060.20;Citizen;;"$samplePDF";VIR;USD;
+;;10060;E-10060;;Vehicle Insurance Renewal;PARTPAID;14/03/2016;19/09/2019;3360.95;1860.95;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";VIR;USD;jane.citizen@stateofrosebud.com;3
+;;10061;E-10061;;Vehicle Insurance Renewal;UNPAID;15/09/2016;11/02/2020;4960.65;4960.65;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";VIR;USD;granny.citizen@stateofrosebud.com;2
+;;10062;E-10062;;Vehicle Insurance Renewal;UNPAID;11/11/2016;16/02/2020;4960.65;4960.65;Citizen;;"$samplePDF";VIR;USD;
+;;10063;E-10063;;Speeding Fine;UNPAID;2/03/2016;11/09/2017;750.21;750.21;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com;1
+;;10064;E-10064;;Speeding Fine;UNPAID;29/06/2016;10/10/2018;200.13;200.13;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com;3
+;;10065;E-10065;;Speeding Fine;UNPAID;14/03/2016;1/09/2019;890.60;890.60;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com;2
+;;10066;E-10066;;Speeding Fine;UNPAID;16/02/2016;2/11/2019;610.11;610.11;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;granny.citizen@stateofrosebud.com;2
+;;10067;E-10067;;Speeding Fine;PARTPAID;8/07/2016;16/06/2016;425.60;325.60;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;granny.citizen@stateofrosebud.com;1
+;;10068;E-10068;;Speeding Fine;UNPAID;24/05/2016;20/09/2016;734.79;734.79;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jason.citizen@stateofrosebud.com;1
+;;10069;E-10069;;Parking Fine;UNPAID;26/05/2016;14/06/2020;1299.97;1299.97;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;jason.citizen@stateofrosebud.com;2
+
+INSERT_UPDATE PaymentTransaction;code[unique=true];currency(isocode);info(code);paymentSource;paidBy(uid);outstandingAmount;psBillPayment(code)
+;R-10023;USD;hpsapayer;internal;jane.citizen@stateofrosebud.com;150.97;10034
+;R-10024;USD;hpsapayer;internal;jane.citizen@stateofrosebud.com;400.79;10042
+;R-10025;USD;hpsapayer;internal;jane.citizen@stateofrosebud.com;370.67;10048
+;R-10026;USD;hpsapayer;internal;jane.citizen@stateofrosebud.com;460.27;10049
+;R-10027;USD;hpsapayer;internal;jane.citizen@stateofrosebud.com;460.27;10050
+;R-10028;USD;hpsapayer;internal;jane.citizen@stateofrosebud.com;1860.95;10060
+;R-10029;USD;hpsapayer;internal;jane.citizen@stateofrosebud.com;325.60;10067
+
+INSERT_UPDATE PaymentTransactionEntry;code[unique=true];type(code);amount;currency(isocode);time[dateformat=MM/dd/yyyy];transactionStatus;transactionStatusDetails;paymentTransaction(code)
+;AUTH-10023;AUTHORIZATION;400.0;USD;12/20/2016;ACCEPTED;SUCCESFULL;R-10023
+;CAPT-10023;CAPTURE;400.0;USD;12/20/2016;ACCEPTED;SUCCESFULL;R-10023
+
+;AUTH-10024;AUTHORIZATION;44.0;USD;12/23/2016;ACCEPTED;SUCCESFULL;R-10024
+;CAPT-10024;CAPTURE;44.0;USD;12/23/2016;ACCEPTED;SUCCESFULL;R-10024
+
+;AUTH-10025;AUTHORIZATION;490.0;USD;06/14/2016;ACCEPTED;SUCCESFULL;R-10025
+;CAPT-10025;CAPTURE;490.0;USD;06/14/2016;ACCEPTED;SUCCESFULL;R-10025
+
+;AUTH-10026;AUTHORIZATION;1000.0;USD;12/07/2016;ACCEPTED;SUCCESFULL;R-10026
+;CAPT-10026;CAPTURE;1000.0;USD;12/07/2016;ACCEPTED;SUCCESFULL;R-10026
+
+;AUTH-10027;AUTHORIZATION;1000.0;USD;11/06/2016;ACCEPTED;SUCCESFULL;R-10027
+;CAPT-10027;CAPTURE;1000.0;USD;11/06/2016;ACCEPTED;SUCCESFULL;R-10027
+
+;AUTH-10028;AUTHORIZATION;1500.0;USD;10/07/2016;ACCEPTED;SUCCESFULL;R-10028
+;CAPT-10028;CAPTURE;1500.0;USD;10/07/2016;ACCEPTED;SUCCESFULL;R-10028
+
+;AUTH-10029;AUTHORIZATION;100.0;USD;18/08/2016;ACCEPTED;SUCCESFULL;R-10029
+;CAPT-10029;CAPTURE;100.0;USD;18/08/2016;ACCEPTED;SUCCESFULL;R-10029

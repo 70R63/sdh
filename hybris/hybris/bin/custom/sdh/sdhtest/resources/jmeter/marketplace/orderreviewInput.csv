@@ -1,0 +1,20 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+5,Great Product,3.5,5,3.5
+4,Very Good Product,2.5,4.5,3.5
+3,Good Product,1.5,3.5,2
+2,OK Product,3,4,5
+1,Poor Product,4,3,5
+4.5,Great Product,3.5,5,3.5
+3.5,Very Good Product,2.5,4.5,3.5
+2.5,Good Product,1.5,3.5,2
+1.5,OK Product,3,4,5
+0.5,Poor Product,4,3,5

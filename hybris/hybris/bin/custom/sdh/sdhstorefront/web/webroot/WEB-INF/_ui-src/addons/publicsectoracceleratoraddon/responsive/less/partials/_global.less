@@ -1,0 +1,343 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?kq31mg');
+  src:  url('../fonts/icomoon.eot?kq31mg#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?kq31mg') format('truetype'),
+    url('../fonts/icomoon.woff?kq31mg') format('woff'),
+    url('../fonts/icomoon.svg?kq31mg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon', sans-serif !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  color: @color-black;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-map:before {
+  content: "\e94b";
+}
+.icon-map2:before {
+  content: "\e94c";
+}
+.icon-menu:before {
+  content: "\e9bd";
+}
+.icon-file-pdf:before {
+  content: "\eadf";
+}
+.icon-file-word:before {
+  content: "\eae1";
+}
+.icon-file-excel:before {
+  content: "\eae2";
+}
+
+.icon-file-pdf:before {
+  content: "\eadf";
+}
+.icon-file-word:before {
+  content: "\eae1";
+}
+.icon-file-excel:before {
+  content: "\eae2";
+}
+
+html{
+  position:relative;
+  min-height:100%;
+}
+
+body {
+	font-family: 'Alegreya Sans', 'Helvetica', 'Arial', sans-serif;
+	font-size:16px;
+    position: static;
+    margin-bottom:320px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  line-height:1.2;  
+}
+
+h2{
+   font-size: 1.5em;
+}
+
+p {
+	margin: 20px 0 20px;
+}
+
+ol {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+li {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+ul.dashed {
+  list-style-type: none;
+  margin-top:8px;
+}
+
+ul.dashed > li:before {
+  content: "-";
+  text-indent: -5px;
+  padding: 0 10px 0 0;
+}
+
+.site-wrapper {
+	position: relative;
+}	
+
+.action-links {
+    color: #19212b;
+    padding-top: 0;
+    float:left;
+}
+
+.site-content {
+	padding-bottom:30px;
+}
+
+.icon-green { color:@color-green;}
+
+.gi-1\.5x {font-size: 1.5em;}
+.gi-2x{font-size: 2em;}
+.gi-2\.5x {font-size: 2.5em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+
+.step-body hr{
+ display:none;
+}
+
+.delete-draft-overlay, 
+.addressItem, .payment-removal-popup {
+  display: none;
+}
+
+#colorbox .delete-draft-overlay,
+#colorbox .addressItem {
+  display: block;
+}
+
+.page-homepage .js-toggle-xs-search{
+   display:none;
+}
+
+.acc_hidden{
+    height: 1px;
+    left: -10000px;
+    overflow: hidden;
+    position: absolute;
+    top: auto;
+    width: 1px;
+}
+
+legend{
+	font-size:16px;
+}
+
+
+/**
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  	position: relative;
+ 	min-height: 1px;
+  	padding-left: 15px;
+  	padding-right: 15px;
+}
+*/
+
+.back-link{
+    padding-left:0;
+    position:relative;
+    .glyphicon{
+        line-height: 30px;
+        top: 0;
+    }
+    .label {
+        padding: 0;
+        border-radius: 0;
+    } 
+}
+
+.custom-h1 {
+    margin: 0;
+    padding: 0 10px;
+    display: inline;
+}
+
+.searchEmptyPageMiddle{
+    text-align:center;
+}
+
+.global-alert.close{
+    position: relative;
+    top: 15px;
+    right: 12px;
+}
+
+h1>span, h1>span.label, h2>span, h3>span, h4>span, h5>span {
+
+  &:focus {
+    outline: 3px solid  @brand-primary;
+    background-color:  @brand-primary;
+    color: @color-black;
+  }
+
+}
+
+#cboxClose {
+    color: @color-black;
+}
+
+/* Jquery Tooltip css start*/
+
+	.ui-tooltip, .arrow:after {
+	    background: @color-white;
+	  }
+	  .ui-tooltip {
+	  	display:block;
+	    padding: 10px 20px;
+	    color: @color-black;
+	    font-size: 14px;
+	    box-shadow: 0 0 7px @color-black;
+	  }
+	  .arrow {
+	    width: 70px;
+	    height: 16px;
+	    overflow: hidden;
+	    position: absolute;
+	    left: 50%;
+	    margin-left: -35px;
+	    bottom: -16px;
+	  }
+	  .arrow.top {
+	    top: -16px;
+	    bottom: auto;
+	  }
+	  .arrow.left {
+	    left: 20%;
+	  }
+	  .arrow:after {
+	    content: "";
+	    position: absolute;
+	    left: 20px;
+	    top: -20px;
+	    width: 25px;
+	    height: 25px;
+	    border: 1px solid #c5c5c5;
+	    box-shadow: 2px 2px 5px #666666;
+	    -webkit-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	    transform: rotate(45deg);
+	  }
+	  .arrow.top:after {
+	    bottom: -20px;
+	    top: auto;
+	  }
+
+/* Jquery Tooltip css end*/  
+
+
+
+/* stickem css start */
+
+.stickem-container {
+  position: relative;
+}
+
+.stickit {
+	margin-left: 66%;
+	position: fixed;
+	top: 0;
+	width:100%;
+	padding: 0 80px 0 12px;
+	bottom: 350px;
+}
+
+.stickit-end {
+	top: 506px;
+    right: 0;
+    bottom: 350px;
+    position: relative;
+}
+/* stickem css end */
+
+
+.has-error .help-block{
+  font-weight: normal;
+  color: #b94a48;
+  font-size: 15px;
+  font-style: normal;
+}
+
+//override OOTB css
+#colorbox #cboxTitle .headline-text {
+    display: inline-block !important;
+}
+
+/* disable forgot password link */
+
+.forgot-password-disabled{ 
+  pointer-events: none;       
+  cursor: default;
+  }
+ 
+.register-section{
+ .form-group-uncased{
+   margin-bottom: 0;
+ .checkbox{
+    margin: 0; 
+    label{
+      margin-bottom: 8px;
+    }
+   }
+   }
+  .checkbox{
+    margin: 0; 
+    label{
+      margin: 24px 0 24px;
+    }
+  }
+}
+  
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px 
+@media (max-width: @screen-xs-max) {
+  body {
+    margin-bottom:440px;
+  }
+}

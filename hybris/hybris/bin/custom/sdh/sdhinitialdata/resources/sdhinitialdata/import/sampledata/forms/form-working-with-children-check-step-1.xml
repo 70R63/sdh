@@ -1,0 +1,1032 @@
+<xh:html xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:exf="http://www.exforms.org/exf/1-0"
+         xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+         xmlns:sql="http://orbeon.org/oxf/xml/sql"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:xxi="http://orbeon.org/oxf/xml/xinclude">
+    <xh:head>
+        <xh:title>Applicant Details</xh:title>
+        <xf:model id="fr-form-model" xxf:expose-xpath-types="true">
+            <!-- Main instance -->
+            <xf:instance id="fr-form-instance" xxf:exclude-result-prefixes="#all" xxf:index="id">
+                <form>
+                    <section-1>
+                        <control-17/>
+                        <control-3/>
+                        <child-sector/>
+                        <wwc-before/>
+                    </section-1>
+                    <section-18>
+                        <prev-wwc-number/>
+                    </section-18>
+                    <section-16>
+                        <control-6/>
+                        <control-7/>
+                        <organisation-known>no</organisation-known>
+                    </section-16>
+                    <section-17>
+                        <org-name/>
+                        <address-line1-1/>
+                        <address-line2-1/>
+                        <city-1/>
+                        <post-code-1/>
+                        <phone-number-1/>
+                    </section-17>
+                </form>
+            </xf:instance>
+            <!-- Bindings -->
+            <xf:bind id="fr-form-binds" ref="instance('fr-form-instance')">
+                <xf:bind id="section-1-bind" name="section-1" ref="section-1">
+                    <xf:bind id="control-3-bind" ref="control-3" name="control-3"/>
+                    <xf:bind id="child-sector-bind" ref="child-sector" name="child-sector" required="true()"/>
+                    <xf:bind id="wwc-before-bind" ref="wwc-before" name="wwc-before" required="true()"
+                             xxf:default="'no'"/>
+                    <xf:bind id="control-17-bind" ref="control-17" name="control-17"/>
+                </xf:bind>
+                <xf:bind id="section-18-bind" ref="section-18" name="section-18">
+                    <xf:bind id="prev-wwc-number-bind" ref="prev-wwc-number" name="prev-wwc-number"
+                             required="true()"
+                             relevant="$wwc-before='yes'"/>
+                </xf:bind>
+                <xf:bind id="section-16-bind" ref="section-16" name="section-16">
+                    <xf:bind id="organisation-known-bind" ref="organisation-known" name="organisation-known"
+                             required="true()"
+                             xxf:default="'no'"/>
+                    <xf:bind id="control-7-bind" ref="control-7" name="control-7"/>
+                    <xf:bind id="control-6-bind" ref="control-6" name="control-6"/>
+                </xf:bind>
+                <xf:bind id="section-17-bind" ref="section-17" name="section-17"
+                         relevant="$organisation-known='yes'">
+                    <xf:bind id="phone-number-1-bind" ref="phone-number-1" name="phone-number-1"
+                             relevant="$organisation-known='yes'"/>
+                    <xf:bind id="post-code-1-bind" ref="post-code-1" name="post-code-1" required="true()"
+                             relevant="$organisation-known='yes'"/>
+                    <xf:bind id="city-1-bind" ref="city-1" name="city-1" required="true()"
+                             relevant="$organisation-known='yes'"/>
+                    <xf:bind id="address-line2-1-bind" ref="address-line2-1" name="address-line2-1"
+                             relevant="$organisation-known='yes'"/>
+                    <xf:bind id="address-line1-1-bind" ref="address-line1-1" name="address-line1-1"
+                             required="true()"
+                             relevant="$organisation-known='yes'"/>
+                    <xf:bind id="org-name-bind" ref="org-name" name="org-name" required="true()"
+                             relevant="$organisation-known='yes'"/>
+                </xf:bind>
+            </xf:bind>
+			         <!-- Metadata -->
+            <xf:instance xxf:readonly="true" id="fr-form-metadata" xxf:exclude-result-prefixes="#all">
+                <metadata>
+                    <application-name>publicsector</application-name>
+                    <form-name>Working-With-Children-Check-Form-Step-1</form-name>
+                    <title xml:lang="en">Applicant Details</title>
+                    <description xml:lang="en">Applicant Details</description>                  
+                    <title xml:lang="fr">Informations concernant le demandeur</title>
+                    <description xml:lang="fr">Informations concernant le demandeur</description>
+                    <title xml:lang="de">Details zum Antragsteller</title>
+                    <description xml:lang="de">Details zum Antragsteller</description>
+                    <title xml:lang="es">Datos del solicitante</title>
+                    <description xml:lang="es">Datos del solicitante</description>
+                    <singleton>false</singleton>
+                </metadata>
+            </xf:instance>
+            <!-- Attachments -->
+            <xf:instance id="fr-form-attachments" xxf:exclude-result-prefixes="#all">
+                <attachments>
+                    <css mediatype="text/css" filename="" size=""/>
+                    <pdf mediatype="application/pdf" filename="" size=""/>
+                </attachments>
+            </xf:instance>
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id="fr-form-resources" xxf:readonly="false" xxf:exclude-result-prefixes="#all">
+                <resources>
+                   <resource xml:lang="en">
+                        <prev-wwc-number>
+                            <label>Your previous application or card number</label>
+                            <hint/>
+                            <alert>Please enter an application or card number</alert>
+                        </prev-wwc-number>
+                        <control-6>
+                            <label>&lt;h3&gt;&lt;b&gt;Organization Details</label>
+                            <hint/>
+                        </control-6>
+                        <control-7>
+                            <label>You are required to provide the details of the organizations where you intend to do child-related work. These organizations may be contacted by the Department of Justice while assessing your application and they will receive updates about your application’s status.</label>
+                            <hint/>
+                        </control-7>
+                        <organisation-known>
+                            <label>Do you know at which specific organization you will be using your Working with Children Check?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </organisation-known>
+                        <org-name>
+                            <label>Organisation Name</label>
+                            <hint/>
+                            <alert>Please enter an organisation name</alert>
+                        </org-name>
+                        <address-line1-1>
+                            <label>Address Line 1</label>
+                            <hint/>
+                            <alert>Please enter an address</alert>
+                        </address-line1-1>
+                        <address-line2-1>
+                            <label>Address Line 2</label>
+                            <hint/>
+                        </address-line2-1>
+                        <city-1>
+                            <label>City</label>
+                            <hint/>
+                            <alert>Please enter a town or city</alert>
+                        </city-1>
+                        <post-code-1>
+                            <label>Postcode</label>
+                            <hint/>
+                            <alert>Please enter a post code</alert>
+                        </post-code-1>
+                        <phone-number-1>
+                            <label>Phone Number</label>
+                            <hint/>
+                            <alert>Please enter a phone number</alert>
+                        </phone-number-1>
+                        <control-17>
+                            <text>&lt;div&gt;Fields marked * are required&lt;/div&gt;</text>
+                        </control-17>
+                        <control-3>
+                            <label>&lt;h3&gt;&lt;b&gt;Application Details</label>
+                            <hint/>
+                        </control-3>
+                        <child-sector>
+                            <label>Child-related sector</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Adult household member</label>
+                                <value>adult-household-member</value>
+                            </item>
+                            <item>
+                                <label>Authorized carer</label>
+                                <value>authorised-carer</value>
+                            </item>
+                            <item>
+                                <label>Child development</label>
+                                <value>child-development</value>
+                            </item>
+                            <item>
+                                <label>Child protection services</label>
+                                <value>child-protection-services</value>
+                            </item>
+                            <item>
+                                <label>Children&apos;s health services</label>
+                                <value>children&apos;s-health-services</value>
+                            </item>
+                            <item>
+                                <label>Clubs or other bodies providing services to children</label>
+                                <value>clubs-or-other-bodies-providing-services-to-children</value>
+                            </item>
+                            <item>
+                                <label>Disability services</label>
+                                <value>disability-services</value>
+                            </item>
+                            <item>
+                                <label>Early education and child care</label>
+                                <value>early-education-and-child-care</value>
+                            </item>
+                            <item>
+                                <label>Education</label>
+                                <value>education</value>
+                            </item>
+                            <item>
+                                <label>Entertainment for children</label>
+                                <value>entertainment-for-children</value>
+                            </item>
+                            <item>
+                                <label>Justice centres</label>
+                                <value>justice-centres</value>
+                            </item>
+                            <item>
+                                <label>Parent Volunteer - Disability</label>
+                                <value>parent-volunteer---disability</value>
+                            </item>
+                            <item>
+                                <label>Parent Volunteer - Mentoring</label>
+                                <value>parent-volunteer---mentoring</value>
+                            </item>
+                            <item>
+                                <label>Parent Volunteer - Other</label>
+                                <value>parent-volunteer---other</value>
+                            </item>
+                            <item>
+                                <label>Religious services</label>
+                                <value>religious-services</value>
+                            </item>
+                            <item>
+                                <label>Residential services</label>
+                                <value>residential-services</value>
+                            </item>
+                            <item>
+                                <label>Transport services for children</label>
+                                <value>transport-services-for-children</value>
+                            </item>
+                            <item>
+                                <label>Youth workers</label>
+                                <value>youth-workers</value>
+                            </item>
+                            <item>
+                                <label>School Cleaner</label>
+                                <value>school-cleaner</value>
+                            </item>
+                            <item>
+                                <label>Prospective Guardians</label>
+                                <value>prospective-guardians</value>
+                            </item>
+                            <item>
+                                <label>Prospective Adoptive Parents</label>
+                                <value>prospective-adoptive-parents</value>
+                            </item>
+                        </child-sector>
+                        <wwc-before>
+                            <label>Have you ever applied for a Working With Children Check before?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </wwc-before>
+                        <section-18>
+                            <label/>
+                            <help/>
+                        </section-18>
+                        <section-1>
+                            <label>Application &amp; Organisation Details</label>
+                        </section-1>
+                        <section-16>
+                            <label/>
+                            <help/>
+                        </section-16>
+                        <section-17>
+                            <label/>
+                            <help/>
+                        </section-17>
+                    </resource>
+                    <resource xml:lang="fr">
+                        <prev-wwc-number>
+                            <label>Votre numéro de demande ou de carte précédent</label>
+                            <hint/>
+                            <alert>Veuillez saisir un numéro de demande ou de carte</alert>
+                        </prev-wwc-number>
+                        <control-6>
+                            <label>&lt;h3&gt;&lt;b&gt;Informations sur le ou les organismes</label>
+                            <hint/>
+                        </control-6>
+                        <control-7>
+                            <label>Vous devez indiquer les organismes dans lesquels vous envisagez d&apos;effectuer un travail en rapport avec les enfants. Le Ministère de la justice se réserve le droit de contacter lesdits organismes lors de l&apos;évaluation de votre demande et ils seront eux-mêmes tenus informés de son statut.</label>
+                            <hint/>
+                        </control-7>
+                        <organisation-known>
+                            <label>Connaissez-vous l&apos;organisme précis dans lequel vous utiliserez votre certificat permettant de travailler avec des enfants ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </organisation-known>
+                        <org-name>
+                            <label>Nom de l&apos;organisme</label>
+                            <hint/>
+                            <alert>Veuillez saisir un nom d&apos;organisme</alert>
+                        </org-name>
+                        <address-line1-1>
+                            <label>Ligne d&apos;adresse 1</label>
+                            <hint/>
+                            <alert>Veuillez saisir une adresse</alert>
+                        </address-line1-1>
+                        <address-line2-1>
+                            <label>Ligne d&apos;adresse 2</label>
+                            <hint/>
+                        </address-line2-1>
+                        <city-1>
+                            <label>Ville</label>
+                            <hint/>
+                            <alert>Veuillez saisir une ville</alert>
+                        </city-1>
+                        <post-code-1>
+                            <label>Code postal</label>
+                            <hint/>
+                            <alert>Veuillez saisir un code postal</alert>
+                        </post-code-1>
+                        <phone-number-1>
+                            <label>Numéro de téléphone</label>
+                            <hint/>
+                            <alert>Veuillez saisir un numéro de téléphone</alert>
+                        </phone-number-1>
+                        <control-17>
+                            <text>&lt;div&gt;Les zones signalées par * sont obligatoires.&lt;/div&gt;</text>
+                        </control-17>
+                        <control-3>
+                            <label>&lt;h3&gt;&lt;b&gt;Détails de la demande</label>
+                            <hint/>
+                        </control-3>
+                        <child-sector>
+                            <label>Secteur relatif à l&apos;enfance</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Membre adulte du ménage</label>
+                                <value>adult-household-member</value>
+                            </item>
+                            <item>
+                                <label>Soignant habilité</label>
+                                <value>authorised-carer</value>
+                            </item>
+                            <item>
+                                <label>Développement de l&apos;enfant</label>
+                                <value>child-development</value>
+                            </item>
+                            <item>
+                                <label>Services de protection de l&apos;enfance</label>
+                                <value>child-protection-services</value>
+                            </item>
+                            <item>
+                                <label>Services de santé pour enfants</label>
+                                <value>children&apos;s-health-services</value>
+                            </item>
+                            <item>
+                                <label>Clubs ou autres organismes proposant des services destinés aux enfants</label>
+                                <value>clubs-or-other-bodies-providing-services-to-children</value>
+                            </item>
+                            <item>
+                                <label>Services aux personnes handicapées</label>
+                                <value>disability-services</value>
+                            </item>
+                            <item>
+                                <label>Éducation préscolaire et garde d&apos;enfants</label>
+                                <value>early-education-and-child-care</value>
+                            </item>
+                            <item>
+                                <label>Éducation</label>
+                                <value>education</value>
+                            </item>
+                            <item>
+                                <label>Animations pour les enfants</label>
+                                <value>entertainment-for-children</value>
+                            </item>
+                            <item>
+                                <label>Services juridiques</label>
+                                <value>justice-centres</value>
+                            </item>
+                            <item>
+                                <label>Parent bénévole - Handicap</label>
+                                <value>parent-volunteer---disability</value>
+                            </item>
+                            <item>
+                                <label>Parent bénévole - Mentorat</label>
+                                <value>parent-volunteer---mentoring</value>
+                            </item>
+                            <item>
+                                <label>Parent bénévole - Autre</label>
+                                <value>parent-volunteer---other</value>
+                            </item>
+                            <item>
+                                <label>Services religieux</label>
+                                <value>religious-services</value>
+                            </item>
+                            <item>
+                                <label>Services d&apos;hébergement</label>
+                                <value>residential-services</value>
+                            </item>
+                            <item>
+                                <label>Services de transport pour enfants</label>
+                                <value>transport-services-for-children</value>
+                            </item>
+                            <item>
+                                <label>Éducateur(trice)</label>
+                                <value>youth-workers</value>
+                            </item>
+                            <item>
+                                <label>Agent de nettoyage en milieu scolaire</label>
+                                <value>school-cleaner</value>
+                            </item>
+                            <item>
+                                <label>Tuteurs potentiels</label>
+                                <value>prospective-guardians</value>
+                            </item>
+                            <item>
+                                <label>Parents adoptifs potentiels</label>
+                                <value>prospective-adoptive-parents</value>
+                            </item>
+                        </child-sector>
+                        <wwc-before>
+                            <label>Avez-vous déjà déposé une demande de certificat permettant de travailler avec des enfants dans le passé ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Non</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </wwc-before>
+                        <section-18>
+                            <label/>
+                            <help/>
+                        </section-18>
+                        <section-1>
+                            <label>Détails sur la demande et le ou les organismes</label>
+                        </section-1>
+                        <section-16>
+                            <label/>
+                            <help/>
+                        </section-16>
+                        <section-17>
+                            <label/>
+                            <help/>
+                        </section-17>
+                    </resource>
+                    <resource xml:lang="de">
+                        <prev-wwc-number>
+                            <label>Ihre vorherige Antrags- oder Kartennummer</label>
+                            <hint/>
+                            <alert>Geben Sie eine Antrags- oder Kartennummer ein.</alert>
+                        </prev-wwc-number>
+                        <control-6>
+                            <label>&lt;h3&gt;&lt;b&gt;Details zur Organisation</label>
+                            <hint/>
+                        </control-6>
+                        <control-7>
+                            <label>Sie müssen die Details der Organisationen angeben, bei denen Sie mit Kindern arbeiten möchten. Diese Organisationen können während der Evaluierung Ihres Antrags vom Justizministerium kontaktiert werden und sie erhalten Updates über Ihren Antragsstatus.</label>
+                            <hint/>
+                        </control-7>
+                        <organisation-known>
+                            <label>Wissen Sie, bei welcher Organisation Sie Ihre Prüfung für die Arbeit mit Kindern vorlegen werden?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </organisation-known>
+                        <org-name>
+                            <label>Organisationsname</label>
+                            <hint/>
+                            <alert>Geben Sie einen Organisationsnamen ein.</alert>
+                        </org-name>
+                        <address-line1-1>
+                            <label>Adresse Zeile 1</label>
+                            <hint/>
+                            <alert>Geben Sie eine Adresse ein.</alert>
+                        </address-line1-1>
+                        <address-line2-1>
+                            <label>Adresse Zeile 2</label>
+                            <hint/>
+                        </address-line2-1>
+                        <city-1>
+                            <label>Ort</label>
+                            <hint/>
+                            <alert>Geben Sie einen Ort ein.</alert>
+                        </city-1>
+                        <post-code-1>
+                            <label>Postleitzahl</label>
+                            <hint/>
+                            <alert>Geben Sie eine Postleitzahl ein.</alert>
+                        </post-code-1>
+                        <phone-number-1>
+                            <label>Telefonnummer</label>
+                            <hint/>
+                            <alert>Geben Sie eine Telefonnummer ein.</alert>
+                        </phone-number-1>
+                        <control-17>
+                            <text>&lt;div&gt;Mit einem * gekennzeichnete Felder sind Pflichtfelder.&lt;/div&gt;</text>
+                        </control-17>
+                        <control-3>
+                            <label>&lt;h3&gt;&lt;b&gt;Antragsdetails</label>
+                            <hint/>
+                        </control-3>
+                        <child-sector>
+                            <label>Bereich für die Arbeit mit Kindern</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Erwachsenes Haushaltsmitglied</label>
+                                <value>adult-household-member</value>
+                            </item>
+                            <item>
+                                <label>Zugelassener Betreuer</label>
+                                <value>authorised-carer</value>
+                            </item>
+                            <item>
+                                <label>Entwicklung des Kindes</label>
+                                <value>child-development</value>
+                            </item>
+                            <item>
+                                <label>Kinderschutzdienste</label>
+                                <value>child-protection-services</value>
+                            </item>
+                            <item>
+                                <label>Kindergesundheitsdienste</label>
+                                <value>children&apos;s-health-services</value>
+                            </item>
+                            <item>
+                                <label>Klubs oder andere Einrichtungen, die Dienste für Kinder anbieten</label>
+                                <value>clubs-or-other-bodies-providing-services-to-children</value>
+                            </item>
+                            <item>
+                                <label>Dienste für Menschen mit Behinderung</label>
+                                <value>disability-services</value>
+                            </item>
+                            <item>
+                                <label>Frühkindliche Bildung und Kinderbetreuung</label>
+                                <value>early-education-and-child-care</value>
+                            </item>
+                            <item>
+                                <label>Ausbildung</label>
+                                <value>education</value>
+                            </item>
+                            <item>
+                                <label>Kinderunterhaltung</label>
+                                <value>entertainment-for-children</value>
+                            </item>
+                            <item>
+                                <label>Justizzentren</label>
+                                <value>justice-centres</value>
+                            </item>
+                            <item>
+                                <label>Freiwillige Eltern - Behinderung</label>
+                                <value>parent-volunteer---disability</value>
+                            </item>
+                            <item>
+                                <label>Freiwillige Eltern - Begleitung</label>
+                                <value>parent-volunteer---mentoring</value>
+                            </item>
+                            <item>
+                                <label>Freiwillige Eltern - Sonstige</label>
+                                <value>parent-volunteer---other</value>
+                            </item>
+                            <item>
+                                <label>Religiöse Dienste</label>
+                                <value>religious-services</value>
+                            </item>
+                            <item>
+                                <label>Haushaltsdienstleistungen</label>
+                                <value>residential-services</value>
+                            </item>
+                            <item>
+                                <label>Transportdienstleistungen für Kinder</label>
+                                <value>transport-services-for-children</value>
+                            </item>
+                            <item>
+                                <label>Jugendarbeiter</label>
+                                <value>youth-workers</value>
+                            </item>
+                            <item>
+                                <label>Reinigungskraft Schule</label>
+                                <value>school-cleaner</value>
+                            </item>
+                            <item>
+                                <label>Künftiger Betreuer</label>
+                                <value>prospective-guardians</value>
+                            </item>
+                            <item>
+                                <label>Künftige Adoptiveltern</label>
+                                <value>prospective-adoptive-parents</value>
+                            </item>
+                        </child-sector>
+                        <wwc-before>
+                            <label>Haben Sie sich schon einmal für eine Prüfung für die Arbeit mit Kindern beworben?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>Nein</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </wwc-before>
+                        <section-18>
+                            <label/>
+                            <help/>
+                        </section-18>
+                        <section-1>
+                            <label>Antrags- &amp; Organisationsdetails</label>
+                        </section-1>
+                        <section-16>
+                            <label/>
+                            <help/>
+                        </section-16>
+                        <section-17>
+                            <label/>
+                            <help/>
+                        </section-17>
+                    </resource> 
+                    <resource xml:lang="es">
+                       <prev-wwc-number>
+                            <label>Número de su tarjeta o solicitud anterior</label>
+                            <hint/>
+                            <alert>Introduzca un número de tarjeta o solicitud</alert>
+                        </prev-wwc-number>
+                        <control-6>
+                            <label>&lt;h3&gt;&lt;b&gt;Datos de la organización</label>
+                            <hint/>
+                        </control-6>
+                        <control-7>
+                            <label>Debe facilitar los datos de las organizaciones en las que tiene previsto trabajar con niños. El Departamento de Justicia puede ponerse en contacto con estas organizaciones durante la tramitación de su solicitud y estas recibirán actualizaciones sobre el estado de su solicitud.</label>
+                            <hint/>
+                        </control-7>
+                        <organisation-known>
+                            <label>¿Sabe en qué organización en concreto utilizará su certificado para trabajar con menores?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </organisation-known>
+                        <org-name>
+                            <label>Nombre de la organización</label>
+                            <hint/>
+                            <alert>Introduzca el nombre de una organización</alert>
+                        </org-name>
+                        <address-line1-1>
+                            <label>Línea de dirección 1</label>
+                            <hint/>
+                            <alert>Introduzca una dirección</alert>
+                        </address-line1-1>
+                        <address-line2-1>
+                            <label>Línea de dirección 2</label>
+                            <hint/>
+                        </address-line2-1>
+                        <city-1>
+                            <label>Ciudad</label>
+                            <hint/>
+                            <alert>Introduzca un pueblo o una ciudad</alert>
+                        </city-1>
+                        <post-code-1>
+                            <label>Código postal</label>
+                            <hint/>
+                            <alert>Introduzca un código postal</alert>
+                        </post-code-1>
+                        <phone-number-1>
+                            <label>Número de teléfono</label>
+                            <hint/>
+                            <alert>Introduzca un número de teléfono</alert>
+                        </phone-number-1>
+                        <control-17>
+                            <text>&lt;div&gt;Los campos marcados con * son obligatorios&lt;/div&gt;</text>
+                        </control-17>
+                        <control-3>
+                            <label>&lt;h3&gt;&lt;b&gt;Datos de la solicitud</label>
+                            <hint/>
+                        </control-3>
+                        <child-sector>
+                            <label>Sector relacionado con la infancia</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Miembro de un centro de adultos</label>
+                                <value>adult-household-member</value>
+                            </item>
+                            <item>
+                                <label>Cuidador autorizado</label>
+                                <value>authorised-carer</value>
+                            </item>
+                            <item>
+                                <label>Desarrollo de la infancia</label>
+                                <value>child-development</value>
+                            </item>
+                            <item>
+                                <label>Servicios de protección a menores</label>
+                                <value>child-protection-services</value>
+                            </item>
+                            <item>
+                                <label>Servicios pediátricos</label>
+                                <value>children&apos;s-health-services</value>
+                            </item>
+                            <item>
+                                <label>Clubs u otros organismos que prestan servicios a la infancia</label>
+                                <value>clubs-or-other-bodies-providing-services-to-children</value>
+                            </item>
+                            <item>
+                                <label>Servicios a discapacitados</label>
+                                <value>disability-services</value>
+                            </item>
+                            <item>
+                                <label>Educación temprana y cuidado de niños</label>
+                                <value>early-education-and-child-care</value>
+                            </item>
+                            <item>
+                                <label>Educación</label>
+                                <value>education</value>
+                            </item>
+                            <item>
+                                <label>Ocio para niños</label>
+                                <value>entertainment-for-children</value>
+                            </item>
+                            <item>
+                                <label>Centros de Justicia</label>
+                                <value>justice-centres</value>
+                            </item>
+                            <item>
+                                <label>Progenitor voluntario - Discapacidad</label>
+                                <value>parent-volunteer---disability</value>
+                            </item>
+                            <item>
+                                <label>Progenitor voluntario - Mentor</label>
+                                <value>parent-volunteer---mentoring</value>
+                            </item>
+                            <item>
+                                <label>Progenitor voluntario - Otros</label>
+                                <value>parent-volunteer---other</value>
+                            </item>
+                            <item>
+                                <label>Servicios religiosos</label>
+                                <value>religious-services</value>
+                            </item>
+                            <item>
+                                <label>Servicios residenciales</label>
+                                <value>residential-services</value>
+                            </item>
+                            <item>
+                                <label>Servicios de transporte para niños</label>
+                                <value>transport-services-for-children</value>
+                            </item>
+                            <item>
+                                <label>Monitor juvenil</label>
+                                <value>youth-workers</value>
+                            </item>
+                            <item>
+                                <label>Limpieza de colegios</label>
+                                <value>school-cleaner</value>
+                            </item>
+                            <item>
+                                <label>Familia de acogida eventual</label>
+                                <value>prospective-guardians</value>
+                            </item>
+                            <item>
+                                <label>Familia adoptiva eventual</label>
+                                <value>prospective-adoptive-parents</value>
+                            </item>
+                        </child-sector>
+                        <wwc-before>
+                            <label>¿Ha solicitado con anterioridad un certificado para trabajar con niños?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>yes</value>
+                            </item>
+                            <item>
+                                <label>No</label>
+                                <hint/>
+                                <value>no</value>
+                            </item>
+                        </wwc-before>
+                        <section-18>
+                            <label/>
+                            <help/>
+                        </section-18>
+                        <section-1>
+                            <label>Información sobre la solicitud y la organización</label>
+                        </section-1>
+                        <section-16>
+                            <label/>
+                            <help/>
+                        </section-16>
+                        <section-17>
+                            <label/>
+                            <help/>
+                        </section-17>
+                    </resource>
+                </resources>
+            </xf:instance>
+            <!-- Utility instances for services -->
+            <xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+                <request/>
+            </xf:instance>
+            <xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+                <response/>
+            </xf:instance>
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl="http://www.w3.org/ns/xbl"
+                     xmlns:oxf="http://www.orbeon.com/oxf/processors"
+                     xmlns:p="http://www.orbeon.com/oxf/pipeline">
+                <fr:section id="section-1-control" bind="section-1-bind">
+                    <xf:label ref="$form-resources/section-1/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <fr:explanation xmlns:xxbl="http://orbeon.org/oxf/xml/xbl"
+                                                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                                                id="control-17-control"
+                                                bind="control-17-bind">
+                                    <fr:text ref="$form-resources/control-17/text" mediatype="text/html"/>
+                                </fr:explanation>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="control-3-control" bind="control-3-bind">
+                                    <xf:label ref="$form-resources/control-3/label" mediatype="text/html"/>
+                                    <xf:hint ref="$form-resources/control-3/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <fr:dropdown-select1 xmlns:xxbl="http://orbeon.org/oxf/xml/xbl" id="child-sector-control"
+                                                     bind="child-sector-bind">
+                                    <xf:label ref="$form-resources/child-sector/label"/>
+                                    <xf:hint ref="$form-resources/child-sector/hint"/>
+                                    <xf:alert ref="$form-resources/child-sector/alert"/>
+                                    <xf:itemset ref="$form-resources/child-sector/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                    </xf:itemset>
+                                </fr:dropdown-select1>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="wwc-before-control" appearance="full" bind="wwc-before-bind">
+                                    <xf:label ref="$form-resources/wwc-before/label"/>
+                                    <xf:hint ref="$form-resources/wwc-before/hint"/>
+                                    <xf:alert ref="$form-resources/wwc-before/alert"/>
+                                    <xf:itemset ref="$form-resources/wwc-before/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+                <fr:section id="section-18-control" bind="section-18-bind">
+                    <xf:label ref="$form-resources/section-18/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="prev-wwc-number-control" bind="prev-wwc-number-bind" xxf:maxlength="240">
+                                    <xf:label ref="$form-resources/prev-wwc-number/label"/>
+                                    <xf:hint ref="$form-resources/prev-wwc-number/hint"/>
+                                    <xf:alert ref="$form-resources/prev-wwc-number/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+                <fr:section id="section-16-control" bind="section-16-bind">
+                    <xf:label ref="$form-resources/section-16/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="control-6-control" bind="control-6-bind">
+                                    <xf:label ref="$form-resources/control-6/label" mediatype="text/html"/>
+                                    <xf:hint ref="$form-resources/control-6/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="control-7-control" bind="control-7-bind">
+                                    <xf:label ref="$form-resources/control-7/label"/>
+                                    <xf:hint ref="$form-resources/control-7/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="organisation-known-control" appearance="full"
+                                            bind="organisation-known-bind">
+                                    <xf:label ref="$form-resources/organisation-known/label"/>
+                                    <xf:hint ref="$form-resources/organisation-known/hint"/>
+                                    <xf:alert ref="$form-resources/organisation-known/alert"/>
+                                    <xf:itemset ref="$form-resources/organisation-known/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+                <fr:section id="section-17-control" bind="section-17-bind">
+                    <xf:label ref="$form-resources/section-17/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="org-name-control" bind="org-name-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/org-name/label"/>
+                                    <xf:hint ref="$form-resources/org-name/hint"/>
+                                    <xf:alert ref="$form-resources/org-name/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="address-line1-1-control" bind="address-line1-1-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/address-line1-1/label"/>
+                                    <xf:hint ref="$form-resources/address-line1-1/hint"/>
+                                    <xf:alert ref="$form-resources/address-line1-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="address-line2-1-control" bind="address-line2-1-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/address-line2-1/label"/>
+                                    <xf:hint ref="$form-resources/address-line2-1/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="city-1-control" bind="city-1-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/city-1/label"/>
+                                    <xf:hint ref="$form-resources/city-1/hint"/>
+                                    <xf:alert ref="$form-resources/city-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="post-code-1-control" bind="post-code-1-bind" xxf:maxlength="10">
+                                    <xf:label ref="$form-resources/post-code-1/label"/>
+                                    <xf:hint ref="$form-resources/post-code-1/hint"/>
+                                    <xf:alert ref="$form-resources/post-code-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="phone-number-1-control" bind="phone-number-1-bind" xxf:maxlength="10">
+                                    <xf:label ref="$form-resources/phone-number-1/label"/>
+                                    <xf:hint ref="$form-resources/phone-number-1/hint"/>
+                                    <xf:alert ref="$form-resources/phone-number-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>

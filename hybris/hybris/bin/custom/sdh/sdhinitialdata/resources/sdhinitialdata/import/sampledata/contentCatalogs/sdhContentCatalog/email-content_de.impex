@@ -1,0 +1,21 @@
+
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default=Staged])[unique=true,default=$contentCatalog:Staged]
+$picture=media(code, $contentCV)[lang=$lang]
+$wideContent=CMSImageComponent,BannerComponent
+$jarResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import
+$siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+
+# Language
+$lang=de
+
+# Media
+INSERT_UPDATE Media;$contentCV;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']
+;;/images/email/banner-publicsector.jpg;banner-publicsector.jpg;$siteResource/images/email/banner-publicsector.jpg;
+;;/images/email/logo-hybris.png;logo-hybris.png;$siteResource/images/email/logo-hybris.png;
+
+# CMS Image Components
+UPDATE CMSImageComponent;$contentCV;uid[unique=true];$picture;
+;;EmailBannerPublicSectorBottomImage;
+;;EmailBannerPublicSectorTopImage;/images/email/banner-publicsector.jpg
+;;EmailSiteLogoImage;/images/email/logo-hybris.png

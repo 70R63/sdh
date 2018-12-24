@@ -1,0 +1,7 @@
+
+# Language
+$lang=en
+
+# Create CMS Site
+UPDATE CMSSite;uid[unique=true];name[lang=$lang];locale[lang=$lang]
+;sdh;"Public Sector Site";en_GB

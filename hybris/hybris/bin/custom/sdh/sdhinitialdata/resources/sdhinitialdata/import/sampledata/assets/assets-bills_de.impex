@@ -1,0 +1,17 @@
+
+
+$lang=de
+
+INSERT_UPDATE PSBillMessage;psBillType(code)[unique=true];shortMessage[lang=$lang];longMessage[lang=$lang];messageCondition(code)[unique=true]
+ ;AOBIL;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50).;OVER_PAYMENT_NOT_ALLOWED
+ ;AOBIL;;;PART_PAYMENT_NOT_ALLOWED
+ ;PKFN;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50).;OVER_PAYMENT_NOT_ALLOWED
+ ;PKFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;SPFN;"Überfällige Rechnung <br> Zahlung nicht zulässig";Diese Rechnung ist überfällig. Zahlung nicht möglich.;LATE_PAYMENT_NOT_ALLOWED
+ ;SPFN;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50).;OVER_PAYMENT_NOT_ALLOWED
+ ;SPFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;TVFN;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50).;OVER_PAYMENT_NOT_ALLOWED
+ ;TVFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;VIR;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50).;OVER_PAYMENT_NOT_ALLOWED
+ ;VIR;;;PART_PAYMENT_NOT_ALLOWED
+

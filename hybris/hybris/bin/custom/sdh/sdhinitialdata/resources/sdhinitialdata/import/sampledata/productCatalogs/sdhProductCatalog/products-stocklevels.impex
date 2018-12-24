@@ -1,0 +1,102 @@
+# ImpEx for Importing Products stock levels into Public Sector Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=sdhProductCatalog
+$productCatalogName=SDH Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$vendor=apparello
+
+INSERT_UPDATE Vendor;code[unique=true]
+;$vendor
+
+# Create some Warehouses for the Vendor
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code)[default='apparello'];default[default='true']
+;ap_warehouse_s
+;ap_warehouse_e
+;ap_warehouse_w
+;ap_warehouse_n
+;ap_us_warehouse_s
+;ap_us_warehouse_e
+;ap_us_warehouse_w
+;ap_us_warehouse_n
+
+# Create Stock levels at the Warehouses for Products
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='ap_warehouse_s',unique=true];inStockStatus(code)[default='forceInStock'];overSelling;preOrder;productCode[unique=true];reserved
+
+### Service products
+;100;;;0;0;report-graffiti;0
+;100;;;0;0;report-pothole;0
+;100;;;0;0;pool-building-permit;0
+;100;;;0;0;working-with-children-check;0
+;100;;;0;0;event-permit-application;0
+;100;;;0;0;register-birth;0
+;100;;;0;0;apply-for-death-certificate;0
+;100;;;0;0;apply-for-marriage-certificate;0
+;100;;;0;0;apply-disabled-parking-permit;0
+;100;;;0;0;apply-learner-driver-licence;0
+;100;;;0;0;apply-for-tourist-visa;0
+;100;;;0;0;building-permit-for-agricultural-building;0
+;100;;;0;0;building-permit-for-annex;0
+;100;;;0;0;building-permit-for-new-house;0
+;100;;;0;0;cancel-a-car-registration;0
+;100;;;0;0;cancel-a-motorcycle-registration;0
+;100;;;0;0;cancel-a-trailer-registration;0
+;100;;;0;0;cancel-a-truck-registration;0
+;100;;;0;0;change-of-name-certificate;0
+;100;;;0;0;child-name-change;0
+;100;;;0;0;correct-a-birth-certificate;0
+;100;;;0;0;correct-a-death-certificate;0
+;100;;;0;0;correct-a-marriage-certificate;0
+;100;;;0;0;day-care-place-application;0
+;100;;;0;0;fishing-licence;0
+;100;;;0;0;hunting-licence;0
+;100;;;0;0;import-permit-for-pets;0
+;100;;;0;0;maternity-pay;0
+;100;;;0;0;motorcycle-learner-driver-licence;0
+;100;;;0;0;parental-leave-pay;0
+;100;;;0;0;parking-permit-for-home-renovations;0
+;100;;;0;0;parking-permit-for-special-events;0
+;100;;;0;0;permit-for-demolition;0
+;100;;;0;0;permit-to-renovate-a-heritage-listed-house;0
+;100;;;0;0;register-a-car;0
+;100;;;0;0;register-a-fighting-dog;0
+;100;;;0;0;register-a-motorcycle;0
+;100;;;0;0;register-a-trailer;0
+;100;;;0;0;register-a-truck;0
+;100;;;0;0;register-your-pet;0
+;100;;;0;0;report-a-damaged-garbage-bin;0
+;100;;;0;0;report-a-missed-garbage-bin-collection;0
+;100;;;0;0;report-a-missing-or-stolen-garbage-bin;0
+;100;;;0;0;report-an-abandoned-vehicle;0
+;100;;;0;0;report-animal-hoarding;0
+;100;;;0;0;report-anti-social-behaviour;0
+;100;;;0;0;report-a-stray-or-injured-animal;0
+;100;;;0;0;report-a-street-cleaning-issue;0
+;100;;;0;0;report-dangerous-driving;0
+;100;;;0;0;report-environmental-pollution;0
+;100;;;0;0;report-illegal-rubbish-dumping;0
+;100;;;0;0;report-overgrowing-vegetation;0
+;100;;;0;0;resident-parking-permit;0
+;100;;;0;0;trailer-learner-driver-licence;0
+;100;;;0;0;transfer-a-car-registration;0
+;100;;;0;0;transfer-a-motorcycle-registration;0
+;100;;;0;0;transfer-a-trailer-registration;0
+;100;;;0;0;transfer-a-truck-registration;0
+;100;;;0;0;truck-learner-driver-licence;0
+
+###SERVICE PRODUCT ADDONS
+;100;;;0;0;apply-as-volunteer-addon;0
+;100;;;0;0;apply-as-paid-employee-addon;0
+;100;;;0;0;event-gather-below-50-addon;0
+;100;;;0;0;event-gather-50-149-addon;0
+;100;;;0;0;event-gather-150-999-addon;0
+;100;;;0;0;event-gather-1000-10000-addon;0
+;100;;;0;0;event-gather-10000up-addon;0
+;100;;;0;0;event-serve-alcohol-addon;0
+;100;;;0;0;none-eventpermit-alcohol-addon;0
+;100;;;0;0;none-birthcert-noprint-addon;0
+;100;;;0;0;birthcert-print1-addon;0
+;100;;;0;0;birthcert-print2-addon;0
+;100;;;0;0;birthcert-print3-addon;0
+;100;;;0;0;birthcert-print4-addon;0
+;100;;;0;0;birthcert-print5-addon;0

@@ -1,0 +1,11 @@
+#
+# Import the Solr CronJob Trigger configuration for the Public Sector store
+#
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+
+# Run the full-sdhIndex-cronJob at 3:05 AM every day
+;full-sdhIndex-cronJob;0;5;3;-1;-1;-1;false;false;-1
+
+# Run the update-sdhIndex-cronJob every 1 minutes
+;update-sdhIndex-cronJob;0;1;-1;-1;-1;-1;true;false;-1

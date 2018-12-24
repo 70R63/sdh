@@ -1,0 +1,17 @@
+# ImpEx for Importing Product taxes into Public Sector store
+
+# Insert Product taxes for GB
+
+INSERT_UPDATE ProductTaxCode;productCode[unique=true];taxCode;taxArea[unique=true]
+
+# PUBLIC SECTOR PRODUCTS TAX
+;report-graffiti;PC040400;GB
+;report-pothole;PC040400;GB
+;apply-learner-driver-licence;PC040400;GB
+;apply-disabled-parking-permit;PC040400;GB
+;working-with-children-check;PC040400;GB
+;pool-building-permit;PC040400;GB
+;event-permit-application;PC040400;GB
+;apply-for-marriage-certificate;PC040400;GB
+;register-birth;PC040400;GB
+;apply-for-death-certificate;PC040400;GB

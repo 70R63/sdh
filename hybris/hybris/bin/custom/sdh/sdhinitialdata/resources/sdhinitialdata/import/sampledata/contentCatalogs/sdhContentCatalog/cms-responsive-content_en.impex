@@ -1,0 +1,168 @@
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default=Staged])[unique=true,default=$contentCatalog:Staged]
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/cockpits/cmscockpit
+$medias=medias(code, $contentCV)
+$lang=en
+$picture=media(code, $contentCV)[lang=$lang]
+$mediaContainer = media(qualifier, $contentCV)[lang=$lang]
+$addonExtensionName=publicsectoracceleratoraddon
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# CMS Navigation Nodes 
+UPDATE CMSNavigationNode;$contentCV;uid[unique=true];title[lang=$lang]
+ ;;AboutUsNavNode;""
+ ;;AcceleratorNavNode;"Accelerator"
+ ;;BirthsDeathsAndMarriagesPopularCategoriesNavNodeMenu;"Popular Categories"
+ ;;BirthsDeathsAndMarriagesPopularServiceRequestsNavNodeMenu;"Popular Service Requests"
+ ;;CategoriesNavNode;"Categories"
+ ;;FollowUsNavNode;"Follow Us"
+ ;;HybrisNavNode;"Hybris"
+ ;;MyAccountNavNode;"My Account"
+ ;;PermitsAndApplicationsPopularCategoriesNavNodeMenu;"Popular Categories"
+ ;;PermitsAndApplicationsPopularServiceRequestsNavNodeMenu;"Popular Service Requests"
+ ;;PublicSectorNavNode;"Public Sector Site"
+ ;;ReportAnIssuePopularCategoriesNavNodeMenu;"Popular Categories"
+ ;;ReportAnIssuePopularServiceRequestsNavNodeMenu;"Popular Service Requests"
+ ;;RoadsAndVehiclesPopularCategoriesNavNodeMenu;"Popular Categories"
+ ;;RoadsAndVehiclesPopularServiceRequestsNavNodeMenu;"Popular Service Requests"
+ ;;ServicesNavNode;""
+ ;;SocialMediaNavNode;""
+
+# CMS Footer Component
+UPDATE PSFooterComponent;$contentCV;uid[unique=true];notice[lang=$lang]
+ ;;FooterComponent;"© 2015 hybris software"
+
+# CMS ProductReferences Components
+UPDATE ProductReferencesComponent;$contentCV;uid[unique=true];title[lang=$lang]
+ ;;CrossSelling;"Complete the look"
+ ;;Others;"Accessories"
+ ;;Similar;"You may also like..."
+ ;;accessories;"Accessories"
+
+# CMS CartSuggestion Components
+UPDATE CartSuggestionComponent;$contentCV;uid[unique=true];title[lang=$lang]
+ ;;CartSuggestions;"You may also like..."
+
+UPDATE CMSParagraphComponent;$contentCV;uid[unique=true];content[lang=$lang]
+ ;;EmptyCartParagraphComponent;"<h2>Your shopping bag is empty</h2><p>Suggestions</p><ul><li>Browse our products by selecting a category above</li></ul>" 
+ ;;HelpParagraphComponent;"<strong>Need Help with your checkout process?</strong> <span>Contact Us or Call phone number.</span>"
+ ;;NoSearchResultsParagraphComponent;<h2>Sorry, we couldn't find any results for your search</h2><p>Suggestions:</p><ul><li style="list-style-type:disc">You may have typed your keywords incorrectly - please check for misspellings.</li>  <li style="list-style-type:disc">You may have been too specific - please broaden your search by using fewer keywords.</li><li style="list-style-type:disc">Browse our products by selecting a category above.</li></ul>
+ ;;faqTextParagraph;"<div class=""global-alerts""><div class=""alert alert-info"" role=""alert""><strong>Information: </strong>Page Under Construction - Not Completely Functional</div></div><a name=""00""></a><div class=""textpage textpage-faqs""><div class=""item_container"">		<h2><a name=""a00""></a>Returns and refunds</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>		<div class=""item_container"">		<h2><a name=""b00""></a>Delivery information</h2>		<a class=""faq-menulink"" href=""#b01"">Delivery Options</a>		<a class=""faq-menulink"" href=""#b02"">Delivery times &amp; charges</a>		<a class=""faq-menulink"" href=""#b03"">Order tracking information</a>		<a class=""faq-menulink"" href=""#b04"">Courier status information</a>			<h3><a name=""b01""></a>Delivery Options</h3>		<p>			The delivery options available to you are shown in the Checkout area under Delivery Method.<br><br>			Based on your deliver address, these options may not all be available:			</p><ul>			<li>					<b>Home Delivery</b> - Free UK standard delivery on all orders over L50 within 4 working days (*exceptions may apply)				</li>				<li>					<b>Standard delivery</b> -  1 to 2 business days				</li>				<li>					<b>Other delivery method</b>  &ndash; 3 to 5 business days				</li>				<li>				<b>International delivery</b> &ndash; 7 to 10 business days (not all countries are available)				</li>			</ul>		<p></p>		<h3><a name=""b02""></a>Delivery times &amp; charges</h3>		<p>			We deliver the majority of our orders within 4 working days* for L3.99 or FREE on orders over L50 (*exceptions apply, see table below).			</p><ul>				<li>					Deliveries to UK addresses are made Monday to Friday between 9am to 6pm, excluding Bank Holidays. 				</li>				<li>					Deliveries to the Scottish Highlands and Islands, offshore locations and Northern Ireland may take a little longer.<br>					For delivery to ROI addresses please visit our Irish website at hybris.com				</li>				<li>					Multiple items may be delivered in more than one parcel and at different times.				</li>			</ul>		<p></p>	<h3><a name=""b03""></a>Order tracking information</h3>		<p>			We will send you email updates through every stage of your order. In each email your current order's status will be shown. Each order status is explained in the table below. We deliver most parcels via our courier. You can track these parcels by clicking on the parcel reference link on your email. Once you have clicked on the link you will be directed to the courier website. For information on courier statuses please <a href=""#b04"">click here</a>.		</p>		<table width=""100%"" cellspacing=""0"" cellpadding=""0"" border=""0"">			<tbody>				<tr>					<th>Status</th>					<th>Description</th>				</tr>				<!--ROW 1-->				<tr>					<td class=""blue3"">						<strong>Processing</strong><br>					</td>					<td class=""grey3"">						Your order is being processed.<br>					</td>				</tr>				<!--ROW 2-->	<tr>					<td class=""blue3"">						<strong>Despatched</strong><br>					</td>					<td class=""grey3"">						Your order has been despatched to the courier.<br><br>    For heavy and large products your order is ready to be despatched by our carrier. The carrier will contact you to arrange a suitable date for delivery.<br><br>For Collect from store orders you will receive a further order status update when your item(s) are ready to collect (see below for more information on collect from store statuses)<br><br>					</td>				</tr>				<!--ROW 3-->				<tr>					<td class=""blue3"">						<strong>Cancelled<br>Unable to fulfill<br> payment reversal</strong><br>					</td>					<td class=""grey3"">						Your order has been cancelled due to stock availability, no payment has been taken.<br><br>					</td>				</tr>				<!--ROW 4-->				<tr>					<td class=""blue3"">						<strong>Cancelled<br>Unable to fulfil<br>Payment refunded</strong><br>				</td>					<td class=""grey3"">						Your order has been cancelled due to stock availability. We have processed a refund to your payment card.<br><br>					</td>				</tr>				<!--ROW 5-->				<tr>					<td class=""blue3"">						<strong>Return received</strong><br>					</td>					<td class=""grey3"">Your return has been received. However, due to goods being addressed to the incorrect warehouse there may be a short delay in your refund being processes while the goods are being re-directed.<br><br>					</td>				</tr>				<!--ROW 6-->				<tr>					<td class=""blue3"">						<strong>Order ready for collection</strong><br>					</td>					<td class=""grey3"">						Your order is ready for collection at your chosen store.<br><br><strong><i>Please note:</i></strong> You must collect your order within 14 days of receiving your notification email.<br><br>					</td>				</tr>				<!--ROW 7-->				<tr>					<td class=""blue3"">						<strong>Collected</strong><br>					</td>					<td class=""grey3"">					Your order has been collected.<br><br>					</td>				</tr>				<!--ROW 8-->				<tr>					<td class=""blue3"">						<strong>Return in progress</strong><br>					</td>					<td class=""grey3"">						We are processing your return.<br><br>					</td>				</tr>				<!--ROW 9-->				<tr>					<td class=""blue3"">						<strong>Return refund complete</strong><br>					</td>					<td class=""grey3"">						We have processed your return.<br><br><strong><i>Please note:</i></strong>  Some banks may take longer than others to process refunds.<br><br>					</td>				</tr>			</tbody>		</table>		<p></p>		<h3><a name=""b04""></a>Courier status information</h3>		<p></p>		<table width=""100%"" cellspacing=""0"" cellpadding=""0"" border=""0"">			<tbody>				<tr>					<th>Status</th>					<th>Description</th>				</tr>			<!--ROW 1-->				<tr>					<td class=""blue3"">						<strong>Order generated</strong><br>					</td>					<td class=""grey3"">						Your order is ready for delivery and has entered into the courier system.<br>					</td>				</tr>				<!--ROW 2-->				<tr>					<td class=""blue3"">						<strong>Receipt at depot </strong><br>					</td>					<td class=""grey3"">					Your parcel has been received at the depot. <br><br>					</td>				</tr>				<!--ROW 3-->				<tr>					<td class=""blue3"">						<strong>Processed at depot</strong><br>					</td>					<td class=""grey3"">						Your parcel has processed through the depot operation and is ready for onward despatch to the courier.<br><br>					</td>				</tr>				<!--ROW 4-->				<tr>					<td class=""blue3"">						<strong>Out for delivery to courier</strong><br>					</td>					<td class=""grey3"">						Your parcel has left the depot for delivery to courier.<br><br>					</td>				</tr>				<!--ROW 5-->				<tr>					<td class=""blue3"">						<strong>Courier to re-attempt</strong><br>					</td>					<td class=""grey3"">						The courier has attempted to deliver your parcel and will try again. You will receive a card to confirm delivery has been attempted.<br><br>					</td>				</tr>			<!--ROW 6-->				<tr>					<td class=""blue3"">						<strong>Delivered to</strong><br>					</td>					<td class=""grey3"">						Your parcel has been delivered.<br><br>					</td>				</tr>			</tbody>		</table>		<p></p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>		<div class=""item_container"">		<h2><a name=""c00""></a>Registration</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>	<div class=""item_container"">		<h2><a name=""d00""></a>Your online account</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>	<div class=""item_container"">		<h2><a name=""e00""></a>Orders</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>	<div class=""item_container"">		<h2><a name=""f00""></a>Promotions and discounts</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>	<div class=""item_container"">		<h2><a name=""g00""></a>Product and general informations</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>	<div class=""item_container"">		<h2><a name=""h00""></a>Store information</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>	<div class=""item_container"">		<h2><a name=""i00""></a>Business contacts</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>		<div class=""item_container"">		<h2><a name=""j00""></a>Buying guides</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>		<div class=""item_container"">		<h2><a name=""k00""></a>Size guides</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div>		<div class=""item_container"">		<h2><a name=""l00""></a>Privacy and security</h2>		<p>Text</p>		<a class=""pagetop-link"" href=""#00"">back to top</a>	</div></div>"
+
+#public Sector start
+UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title[lang=$lang]
+ ;;AboutRosebudLink;"ABOUT ROSEBUD" ;"Click here for menu item About Rosebud"
+ ;;ApplyForAMarriageCertificateLink;"Apply for a Marriage Certificate";"Click here for menu item Apply for a Marriage Certificate"
+ ;;Births&ChildrenLink;"Births & Children";"Click here for menu item Birth and Children"
+ ;;BirthsDeathsAndMarriagesLink;"BIRTHS, DEATHS & MARRIAGES";"Click here for menu item Births Deaths And Marriage"
+ ;;BirthsDeathsAndMarriagesSeeAllCategoriesLink;"> See All Categories";"Click here for all Births Deaths and Marriages categories"
+ ;;BirthsDeathsAndMarriagesSeeAllServiceRequestsLink;"> See All Service Requests";"Click here for all Births Deaths and Marriages service requests"
+ ;;BlogAndNewsLink;"NEWS";"Click here for menu item Blogs & News"
+ ;;Building&PlanningLink;"Building & Planning";"Click here for menu item Building & Planning"
+ ;;DisabledParkingPermitLink;"Disabled parking permit";"Click here for menu item Disabled parking permit"
+ ;;DrivingLink;"Driving";"Click here for menu item Driving"
+ ;;Environment&GarbageLink;"Environment & Garbage";"Click here for menu item Environment & Garbage"
+ ;;EventPermitLink;"Event Permit";"Click here for menu item Event Permit"
+ ;;EventsLink;"EVENTS";"Click here for menu item Events"
+ ;;InTheCommunityLink;"In the Community";"Click here for menu item In the Community"
+ ;;LearnerDriversLicenseLink;"Learner driver's license";"Click here for menu item Learner driver's license"
+ ;;MarriageCertificateLink;"Marriage Certificate";"Click here for menu item Marriage Certificate"
+ ;;MarriagesLink;"Marriages";"Click here for menu item Marriages"
+ ;;NewDriverLink;"New Driver";"Click here for menu item New Driver" 
+ ;;NewVehicleLink;"New Vehicle";"Click here for menu item New Vehicle"
+ ;;OnTheRoadLink;"On the Road";"Click here for menu item In the Community"
+ ;;ParkingLink;"Parking";"Click here for menu item Parking"
+ ;;PermitsAndApplicationsLink;"PERMITS & APPLICATIONS";"Click here for menu item Permits And Applications"
+ ;;PermitsAndApplicationsSeeAllCategoriesLink;"> See All Categories";"Click here for for all Permits and Applications categories"
+ ;;PermitsAndApplicationsSeeAllServiceRequestsLink;"> See All Service Requests";"Click here for all Permits and Applications service requests"
+ ;;PetsLink;"Pets";"Click here for menu item Pets"
+ ;;PoolBuildingPermitLink;"Pool Building Permit";"Click here for menu item Pool Building Permit"
+ ;;RegisterABirthLink;"Register a Birth";"Click here for menu item Register a Birth"
+ ;;ReportAPotholeLink;"Report a pothole";"Click here for menu item Report a pothole"
+ ;;ReportAnIssueLink;"REPORT AN ISSUE";"Click here for menu item Report An Issue"
+ ;;ReportAnIssueSeeAllCategoriesLink;"> See All Categories";"Click here for all Report an Issue categories"
+ ;;ReportAnIssueSeeAllServiceRequestsLink;"> See All Service Requests";"Click here for all Report an Issue service requests"
+ ;;ReportGraffitiLink;"Report graffiti";"Click here for menu item Report graffiti"
+ ;;RetrieveADraftLink;"> Retrieve a Draft";"Click here for menu item Retrieve a Draft" 
+ ;;RoadsAndVehiclesLink;"ROADS & VEHICLES";"Click here for menu item Roads And Vehicles"
+ ;;RoadsAndVehiclesSeeAllCategoriesLink;"> See All Categories";"Click here for all Roads and Vehicles categories"
+ ;;RoadsAndVehiclesSeeAllServiceRequestsLink;"> See All Service Requests";"Click here for all Roads and Vehicles service requests"
+ ;;WorkingWithChildrenCheckLink;"Working with Children Check";"Click here for menu item Working with Children Check"
+
+UPDATE PSRetrieveADraftComponent; $contentCV; uid[unique = true];title[lang=$lang];description[lang=$lang];retrieveDraftButtonLabel[lang=$lang];
+ ;;PSRetrieveADraftComponent;Retrieve Your Draft Request;You have already started a service request and have saved it as a draft? Retrieve it here.;Retrieve Draft Request;
+
+#CMS Link Components
+INSERT_UPDATE PSFeaturedLinksComponent;$contentCV;uid[unique=true];title[lang=$lang];
+;;FrequentlyUsedServices;Frequently Used Services;
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang]
+;;AboutUsRoseBudLink;"About Rosebud"
+;;AllServiceRequestsLink;"All Service Requests"
+;;ApplyCarLearnerPermitLink;"Apply for a Car Learner Permit"
+;;ApplyEventPermitLink;"Apply for an Event Permit"
+;;ApplyMarriageCertificateLink;"Apply for a Marriage Certificate"
+;;ApplyWokringWithChildrenCheckLink;"Apply for a Working With Children Check"
+;;ContactUsLink;"Contact Us"
+;;FacebookLink;"Facebook"
+;;GooglePlusLink;"Google+"
+;;LinkedInLink;"LinkedIn"
+;;PinterestLink;"Pinterest"
+;;RegisterBirthLink;"Register a Birth"
+;;ReportPotholeLink;"Report a Pothole"
+;;RetrieveDraftLink;"Retrieve A Draft"
+;;RoseBudsSenatorsLink;"Rosebud's Senators"
+;;TwitterLink;"Twitter"
+;;YouTubeLink;"YouTube"
+
+
+UPDATE PSBannerComponent;$contentCV;uid[unique=true];headline[lang=$lang];title[lang=$lang]
+;;PublicSectorHompageBannerComponent1;"International Sled Festival";"International Sled Festival image"
+;;PublicSectorHompageBannerComponent2;"About Us";"About Us image"
+;;PublicSectorHompageBannerComponent3;"Latest News";"Latest News image"
+;;PublicSectorHompageBannerComponent4;"Up Coming Events"  ;"Upcoming Events image"
+
+
+# Site Logo Component #
+UPDATE PSSimpleBannerComponent;$contentCV;uid[unique=true];$picture;title[lang=$lang]
+;;HybrisLogoComponent;/images/theme/hybris_logo.jpg;"Public Accelerator logo"
+;;SiteLogoComponent;/images/theme/publicSector_logo.jpg;"State of Rosebud logo"
+																																														
+# Create Content Slots for Page
+
+UPDATE PSHelpDeskComponent;$contentCV;uid[unique=true];title[lang=$lang];description[lang=$lang];&componentRef;;;
+;;ServiceHelpDeskComponent;Helpdesk;<div>Our helpdesk will assist you should you have any questions about this application. Our Customer Service representatives are available during these hours:</div> <p><span class="strong">Mon - Sat: 7am - 7pm</span></p> <div ><span class="strong">on +61 12345 678</span></div>;ServiceHelpDeskComponent;;;
+
+UPDATE PSShareThisPageComponent;$contentCV;uid[unique=true];title[lang=$lang];&componentRef;;;
+;;ServiceShareThisPageComponent;Share this page;ServiceShareThisPageComponent;;;
+
+# Media
+INSERT_UPDATE Media;$contentCV;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+;;/images/theme/logo-hybris.png;logo-hybris.png;$siteResource/images/theme/logo-hybris.png;image/png;;"hybris Accelerator"
+;;Generic_788x120_FacebookOffers_EN_01.jpg;;$siteResource/images/banners/site/Generic_788x120_FacebookOffers_EN_01.jpg;;;"Up to 30% off! Sign up on facebook for exclusive offers"
+;;Generic_148x300_MobileApp_EN_01.jpg;;$siteResource/images/banners/site/Generic_148x300_MobileApp_EN_01.jpg;;;"Always up to date! Download our mobile app"
+
+# Generic Banners (banners are not localizable so we must create a separate banner per language)
+UPDATE SimpleBannerComponent;$contentCV;uid[unique=true];$picture
+;;FacebookOffersBanner;Generic_788x120_FacebookOffers_EN_01.jpg
+;;MobileAppBanner;Generic_148x300_MobileApp_EN_01.jpg
+
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV;uid[unique=true];name;&componentRef;$mediaContainer
+;;PublicSectorErrorpageBannerComponent;Public Sector Error Page Banner Component;PublicSectorErrorpageBannerComponent;public-sector-errorpage-pagenotfound
+;;publicSectorBannerHome;;;publicSector-homepage-Carousel-en
+
+# Create ContentSlots
+INSERT_UPDATE ContentSlot;$contentCV;uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;PublicSector-MiddleContent-Errorpage;PublicSector Middle Content Slot for Error Page;true;PublicSectorErrorpageBannerComponent;;;
+
+# Create Content Slots for Page
+INSERT_UPDATE ContentSlotForPage;$contentCV;uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='notFound'];contentSlot(uid,$contentCV)[unique=true]
+;;PublicSector-MiddleContent-Errorpage;MiddleContent;;PublicSector-MiddleContent-Errorpage;

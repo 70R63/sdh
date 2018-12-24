@@ -1,0 +1,437 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+
+.my-bill {
+	.panel-group {
+		.panel-default {
+			margin-top: -7px;
+		}
+	}
+	.download-receipt {
+		margin-top: 15px;
+	}
+	.bills-select{
+        text-transform: none;
+        font-size: 14px;
+    }
+	
+	.billType-message{
+	  	text-align: center;
+	  	color: #ff0f0f;
+	   .bill-more-info{
+	    	margin-top: 4px;
+	   }
+	}
+	
+	.bill-amount-due, .bill-total{
+	  	text-align:right;
+	}
+	
+	.same-line{
+	   	white-space: nowrap;
+	}
+	
+	.bill-seperator {
+	  	border-right: 1px solid #cccccc;
+	  	width: 1px;
+	  	top: 0;
+	  	right: 15px;
+	  	min-height: 45px;
+	  	box-sizing: border-box;
+   	}
+   
+   	hr {
+   		margin: 10px 0;
+   	}
+}
+
+.bill-section-content {
+   	.bills-steps {
+        padding-left: 30px;
+    }
+	hr {
+	  	border: 0;
+	  	clear: both;
+	  	display: block;
+	  	width: 100%;               
+	  	background-color: @color-black;
+	  	height: 1px;
+	}
+	
+	.hr-space{
+	  	margin-bottom:30px;
+	}
+
+	.bill-section{
+	  	padding: 20px;
+	}
+	.bill-amount, .bill-card{
+	  	padding: 0;
+	}
+	.bill-button{
+	  	padding: 6px;
+	}
+	.glyphicon-question-sign{
+	  	font-size: 35px;
+	  	cursor: pointer;
+	}
+	
+	.bill-requiredfield{
+	   	margin: 21px 32px 24px 0;
+	}
+	
+	.bill-helpIcon{
+	  	top: 12px;
+	}
+	
+	.bill-textbox{
+	 	position: relative;
+	}
+	
+	.bill-symbol{
+	  	position: absolute;
+	  	top: 15px;
+	}
+	
+	h2, h3{
+	 	font-size: 16px;
+	 	margin: 0;
+	}
+	
+	.bill-amount-input{
+	   	margin: 0 0 20px 30px;
+	}
+	
+	.bill-card-details{
+	   ul{
+	      margin: 20px;
+	   }
+	}
+	
+	.bill-hop{
+	  	margin-bottom: -40px;
+	}
+	
+	.checkout-cancel, .checkout-next{
+	  	margin:6px 0;
+	}
+}
+
+.saved-bill-help, .bill-address-book, .bill-saved-payments, .bill-card-content{
+   	display: none;
+}
+	
+.billOverdue{
+  	color: @color-blue-dark;
+  	font-weight: bold;
+}	
+
+.bill-popover{	
+	.popover > .arrow {
+	    display: block;
+	}
+	.popover-title {
+	    display: block;
+	}
+	.popover-content {
+       padding: 9px 14px;
+   }
+}
+
+#colorbox .bill-address-book, #colorbox .bill-saved-payments{
+  	display: block;
+}
+
+.retrieve-bill-request:before {
+    font-family: 'Glyphicons Halflings', sans-serif;
+    content: '\e086';
+    font-size: 35px;
+    padding: 5px;
+}
+
+.retrieve-bill-request {
+    border: 1px solid @color-gray-medium;
+    background-color: @color-gray-light;
+}
+
+.retrieve-bill-request.card-section {
+	margin-top:0;
+}
+
+.bills-table {
+   	vertical-align: initial;
+}
+
+.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a{
+	text-transform: none;
+}
+
+.all-bills .show{
+ 	display: none;
+}
+
+.divOuterTable .billhistory-list-table .divTableRow:nth-child(n+5){
+   	display: none;
+}
+
+.all-bills .divOuterTable .billhistory-list-table .divTableRow:nth-child(n+5){
+   	display: block;
+}
+
+.download_img_pdf {
+	background-image: url('@{url-billimg}/pdf_acc.png');
+	position: relative;
+	top: 5px;
+	display: inline-block;
+	height: 21px;
+	width: 21px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	-webkit-font-smoothing: antialiased;
+	text-indent: 100%;
+	overflow: hidden;
+}
+
+.account-billhistory {
+    margin: 20px 10px 10px 15px;
+}
+
+.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a.bill-download-pdf, 
+.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a.bill-receipt-download-pdf{
+  	text-transform: none;
+}
+
+.card-date label,.start-date label{
+  	font-size: 14px;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.all-bills{
+ 	.back-link.border {
+    	border-bottom: none;
+ 	}
+}
+
+.bill-confirmation{
+   	.card-section .card-section-h1{
+       	h1{
+	    	color: #104d83;
+	    	font-size: 28px;
+       	}
+	}
+	
+	.download-bill-pdf{
+	    font-size: 20px;
+        font-weight: 500;
+       	a{
+           	border-bottom:1px solid;
+           	margin-left: 13px;
+           	position: absolute;
+           	top: 28px;
+        }
+	}
+	
+	.glyphicon-download-alt{
+	    font-size: 14px;
+        top: -1px;
+	}
+	
+	.card-section-h2{
+	  	color: #156ab5;
+	}
+	
+	.card-50{
+	  	padding-bottom: 0;
+	}
+	
+	.card-section-h1.bill-summary{
+	  	color: @color-black;
+	}
+	
+	.bill-content{
+	  	padding-left: 0;
+	  	 a{      
+	  	 color:@color-blue-dark;    
+	  	 }
+	}
+	
+	.confirmation-receipt-no{
+	  	word-break: break-all;
+	}
+}
+
+.bill-payment.content-space{
+    min-height:670px;
+}
+
+.bill-payment{
+	.bills-buttons{
+	  	margin-left:-30px;
+	  	margin-right:-30px;
+	}
+	.bill-card-content{
+	  	margin-top:-40px;
+	}
+	.headline{
+	  	margin:15px -9px 2px;
+	}
+}
+
+.account-section-content .divOuterTable .divTableRow {
+   	a.bill-download-pdf, a.bill-receipt-download-pdf{
+        text-transform:none;
+   	}
+}
+
+.bill-more-info{
+  	.btn{
+    	font-size:16px;
+    	padding:10px 8px;
+   	}
+}   
+
+.my-bill .bills-relationship-text{
+  text-align: left; 
+  margin: 116px 0 0;
+}
+ 
+.removeBillPaymentButton{
+  padding: 5px 7px 4px 3px;
+}
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px 
+@media (max-width: @screen-xs-max) {
+
+	.bill-section-content {
+	  	.bills-steps {
+	    	padding-left: 20px;
+	    	padding-right: 20px;
+      	}
+	  	.bill-button{
+	    	padding:8px;
+	  	}
+	  	.label h1 {
+         	margin: 31px 9px;
+     	}
+    }
+	table.billhistory-list-table .responsive-table-item{ 
+	 	>.bills-table{
+			vertical-align: top;
+			width: 49%;
+		}
+	}
+		
+    .my-bill {
+	  	.bill-amount-due, .bill-total{
+	      	text-align:left;
+	   	}
+	   	.label h1{
+       		margin:30px 9px;
+     	}
+	}
+	
+  	.bill-confirmation{
+		.download-bill-pdf{
+	    	font-size: 20px;
+        	font-weight: 500;
+       		a{
+	           border-bottom: 1px solid;
+	           margin-left: 13px;
+	           position: absolute;
+	           top: 28px;
+	       	}
+		}	
+  	}
+  	
+  	.bill-payment{
+	  	.bills-buttons{
+	    	margin-left:-20px;
+	    	margin-right:-20px;
+		}
+   	} 
+   	
+   	.my-bill .bills-relationship-text{
+       text-align: left; 
+       margin: 45px 0 0;
+    }   	
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          TABLET STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 640px - 1023px 
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	.bill-section-content {
+	  	.bill-button{
+	    	padding:8px;
+	  	}
+
+      	.label h1 {
+        	margin: 12px 45px;
+      	}
+
+		.bills-steps {
+	        padding-left: 20px;
+	        padding-right: 20px;
+	    }
+    }
+    
+	.bill-confirmation{
+		.download-bill-pdf{
+		    font-size: 17px;
+	        font-weight: 500;
+	       	a{
+	           	text-decoration: underline;
+	           	border-bottom: none; 
+	           	margin-left: 6px;
+	           	position: absolute;
+	           	top: 25px;
+	       	}
+		}
+		.glyphicon-download-alt{
+		    font-size: 10px;
+	        top: -1px;
+		}	
+  	} 
+
+	.my-bill {
+	  	.bill-amount-due, .bill-total{
+		  	text-align:left;
+		}
+		.bill-seperator {
+		  	right: 2px;
+	   	}
+	}
+	.my-bill .bills-relationship-text{
+       text-align: left; 
+       margin: 45px 0 0;
+    }  
+}

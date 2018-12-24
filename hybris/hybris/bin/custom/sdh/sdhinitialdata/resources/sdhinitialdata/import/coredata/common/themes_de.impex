@@ -1,0 +1,6 @@
+
+$lang=de
+
+# SiteTheme
+UPDATE SiteTheme;code[unique=true];name[lang=$lang]
+;psalpha;"PS Alpha"

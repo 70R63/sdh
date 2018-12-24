@@ -1,0 +1,426 @@
+<xh:html xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:xxi="http://orbeon.org/oxf/xml/xinclude"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:sql="http://orbeon.org/oxf/xml/sql"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:exf="http://www.exforms.org/exf/1-0"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <xh:head>
+        <xh:title>Event Permit</xh:title>
+        <xf:model id="fr-form-model" xxf:expose-xpath-types="true">
+            <!-- Main instance -->
+            <xf:instance id="fr-form-instance" xxf:exclude-result-prefixes="#all" xxf:index="id">
+                <form>
+                    <section-1>
+                        <control-17/>
+                        <control-12/>
+                        <control-13/>
+                        <control-14/>
+                    </section-1>
+                </form>
+            </xf:instance>
+            <!-- Bindings -->
+            <xf:bind id="fr-form-binds" ref="instance('fr-form-instance')">
+                <xf:bind id="section-1-bind" name="section-1" ref="section-1">
+                    <xf:bind id="control-17-bind" ref="control-17" name="control-17"/>
+                    <xf:bind id="control-12-bind" ref="control-12" name="control-12" required="true()">
+                        
+                        
+                    </xf:bind>
+                    <xf:bind id="control-13-bind" ref="control-13" name="control-13" required="true()">
+                        
+                        
+                    </xf:bind>
+                    <xf:bind id="control-14-bind" ref="control-14" name="control-14" required="true()">
+                        
+                        
+                    </xf:bind>
+                </xf:bind>
+            </xf:bind>
+             <!-- Metadata -->
+            <xf:instance xxf:readonly="true" id="fr-form-metadata" xxf:exclude-result-prefixes="#all">
+                <metadata>
+                    <application-name>publicsector</application-name>
+                    <form-name>Event-Permit-Application-Form-Step-3</form-name>
+                     <title xml:lang="en">Event Permit</title>
+                    <description xml:lang="en">Event Permit</description>                  
+                    <title xml:lang="fr">Permis pour l&apos;organisation d&apos;un événement</title>
+                    <description xml:lang="fr">Permis pour l&apos;organisation d&apos;un événement</description>
+                    <title xml:lang="de">Veranstaltungsgenehmigung</title>
+                    <description xml:lang="de">Veranstaltungsgenehmigung</description>
+                    <title xml:lang="es">Permiso para evento</title>
+                    <description xml:lang="es">Permiso para evento</description>
+                    <singleton>false</singleton>
+                </metadata>
+            </xf:instance>
+            <!-- Attachments -->
+            <xf:instance id="fr-form-attachments" xxf:exclude-result-prefixes="#all">
+                <attachments>
+                    <css mediatype="text/css" filename="" size=""/>
+                    <pdf mediatype="application/pdf" filename="" size=""/>
+                </attachments>
+            </xf:instance>
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id="fr-form-resources" xxf:readonly="false" xxf:exclude-result-prefixes="#all">
+                <resources>
+                    <resource xml:lang="en">
+                        <control-17>
+                            <label>Fields marked * are required</label>
+                            <hint/>
+                        </control-17>
+                         <control-3>
+                            <label>&lt;b&gt;&lt;/b&gt;&lt;h3&gt;&lt;b&gt;Liquor License Details&lt;/b&gt;&lt;/h3&gt;</label>
+                            <hint/>
+                        </control-3>
+                        <section-1>
+                            <label>Liquor License Details</label>
+                        </section-1>
+                        <control-12>
+                            <label>Please select all types of alcohol you are going to serve</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Beer &amp; Cider</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Wine</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                            <item>
+                                <label>Spirits</label>
+                                <hint/>
+                                <value>3</value>
+                            </item>
+                             <item>
+                                <label>Cocktails</label>
+                                <hint/>
+                                <value>4</value>
+                            </item>
+                        </control-12>
+                        <control-13>
+                            <label>Do you have a waste management plan in place for your event?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>No - please contact me about this</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                        </control-13>
+                        <control-14>
+                            <label>Are you going to provide your own security team at the event?</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Yes</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>No - please contact me about this</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                        </control-14>
+                    </resource>
+                    <resource xml:lang="fr">
+                        <control-17>
+                            <label>Les zones signalées par * sont obligatoires.</label>
+                            <hint/>
+                        </control-17>
+                         <control-3>
+                            <label>&lt;b&gt;&lt;/b&gt;&lt;h3&gt;&lt;b&gt;Détails concernant la licence de débit de boissons&lt;/b&gt;&lt;/h3&gt;</label>
+                            <hint/>
+                        </control-3>
+                        <section-1>
+                            <label>Détails concernant la licence de débit de boissons</label>
+                        </section-1>
+                        <control-12>
+                            <label>Veuillez sélectionner tous les types d&apos;alcool que vous allez servir</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Bière et cidre</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Vin</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                            <item>
+                                <label>Spiritueux</label>
+                                <hint/>
+                                <value>3</value>
+                            </item>
+                             <item>
+                                <label>Cocktails</label>
+                                <hint/>
+                                <value>4</value>
+                            </item>
+                        </control-12>
+                        <control-13>
+                            <label>Avez-vous mis en place un plan de gestion des déchets pour votre événement ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Non - Veuillez me contacter à ce sujet</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                        </control-13>
+                        <control-14>
+                            <label>Allez-vous fournir votre propre équipe de sécurité lors de l&apos;événement ?</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Oui</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Non - Veuillez me contacter à ce sujet</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                        </control-14>
+                    </resource> 
+                    <resource xml:lang="de">
+                        <control-17>
+                            <label>Mit einem * gekennzeichnete Felder sind Pflichtfelder.</label>
+                            <hint/>
+                        </control-17>
+                         <control-3>
+                            <label>&lt;b&gt;&lt;/b&gt;&lt;h3&gt;&lt;b&gt;Details zur Schanklizenz&lt;/b&gt;&lt;/h3&gt;</label>
+                            <hint/>
+                        </control-3>
+                        <section-1>
+                            <label>Details zur Schanklizenz</label>
+                        </section-1>
+                        <control-12>
+                            <label>Wählen Sie alle Alkoholarten aus, die Sie ausschenken werden.</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Bier &amp; Most</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Wein</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                            <item>
+                                <label>Spirituosen</label>
+                                <hint/>
+                                <value>3</value>
+                            </item>
+                             <item>
+                                <label>Mischgetränke</label>
+                                <hint/>
+                                <value>4</value>
+                            </item>
+                        </control-12>
+                        <control-13>
+                            <label>Gibt es einen Abfallwirtschaftsplan für Ihre Veranstaltung?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Nein - bitte kontaktieren Sie mich hierzu.</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                        </control-13>
+                        <control-14>
+                            <label>Werden Sie für die Veranstaltung eigenes Sicherheitspersonal bereitstellen?</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Ja</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Nein - bitte kontaktieren Sie mich hierzu.</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                        </control-14>
+                    </resource>
+                    <resource xml:lang="es">
+                        <control-17>
+                            <label>Los campos marcados con * son obligatorios</label>
+                            <hint/>
+                        </control-17>
+                         <control-3>
+                            <label>&lt;b&gt;&lt;/b&gt;&lt;h3&gt;&lt;b&gt;Información sobre licencia para bebidas alcohólicas&lt;/b&gt;&lt;/h3&gt;</label>
+                            <hint/>
+                        </control-3>
+                        <section-1>
+                            <label>Información sobre licencia para bebidas alcohólicas</label>
+                        </section-1>
+                        <control-12>
+                            <label>Seleccione todos los tipos de bebidas alcohólicas que vaya a servir</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Cerveza y sidra</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Vino</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                            <item>
+                                <label>Licores</label>
+                                <hint/>
+                                <value>3</value>
+                            </item>
+                             <item>
+                                <label>Cocktails</label>
+                                <hint/>
+                                <value>4</value>
+                            </item>
+                        </control-12>
+                        <control-13>
+                            <label>¿Tiene un plan para la gestión de residuos en el lugar de celebración de su evento?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>No, póngase en contacto conmigo en relación a este asunto</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                        </control-13>
+                        <control-14>
+                            <label>¿Dispondrá de su propio equipo de seguridad en el evento?</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Sí</label>
+                                <hint/>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>No, póngase en contacto conmigo en relación a este asunto</label>
+                                <hint/>
+                                <value>2</value>
+                            </item>
+                        </control-14>
+                    </resource>
+                </resources>
+            </xf:instance>
+            <!-- Utility instances for services -->
+            <xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+                <request/>
+            </xf:instance>
+            <xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+                <response/>
+            </xf:instance>
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl="http://www.w3.org/ns/xbl"
+                     xmlns:oxf="http://www.orbeon.com/oxf/processors"
+                     xmlns:p="http://www.orbeon.com/oxf/pipeline">
+                <fr:section id="section-1-control" bind="section-1-bind">
+                    <xf:label ref="$form-resources/section-1/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:output id="control-17-control" bind="control-17-bind">
+                                    <xf:label ref="$form-resources/control-17/label"/>
+                                    <xf:hint ref="$form-resources/control-17/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select id="control-12-control" appearance="full" bind="control-12-bind">
+                                    <xf:label ref="$form-resources/control-12/label"/>
+                                    <xf:hint ref="$form-resources/control-12/hint"/>
+                                    <xf:alert ref="$form-resources/control-12/alert"/>
+                                  
+                                    <xf:itemset ref="$form-resources/control-12/item">
+                                        <xf:label ref="label" mediatype="text/html"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint" mediatype="text/html"/>
+                                    </xf:itemset>
+                                </xf:select>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="control-13-control" appearance="full" bind="control-13-bind">
+                                    <xf:label ref="$form-resources/control-13/label"/>
+                                    <xf:hint ref="$form-resources/control-13/hint"/>
+                                    <xf:alert ref="$form-resources/control-13/alert"/>
+                                   
+                                    <xf:itemset ref="$form-resources/control-13/item">
+                                        <xf:label ref="label" mediatype="text/html"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint" mediatype="text/html"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:select1 id="control-14-control" appearance="full" bind="control-14-bind">
+                                    <xf:label ref="$form-resources/control-14/label"/>
+                                    <xf:hint ref="$form-resources/control-14/hint"/>
+                                    <xf:alert ref="$form-resources/control-14/alert"/>
+                                    
+                                    <xf:itemset ref="$form-resources/control-14/item">
+                                        <xf:label ref="label" mediatype="text/html"/>
+                                        <xf:value ref="value"/>
+                                        <xf:hint ref="hint" mediatype="text/html"/>
+                                    </xf:itemset>
+                                </xf:select1>
+                            </xh:td>
+                        </xh:tr>
+       
+                    </fr:grid>
+                    
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>

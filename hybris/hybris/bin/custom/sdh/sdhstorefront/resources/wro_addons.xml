@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+   <group name="addons_responsive">
+      <js>/_ui/addons/xyformsstorefrontcommons/responsive/common/js/xyformsstorefrontcommons.js</js>
+      <css>/_ui/addons/xyformsstorefrontcommons/responsive/common/css/xyformsstorefrontcommons.css</css>
+      <js>/_ui/addons/relationshipaddon/responsive/common/js/relationshipaddon.js</js>
+      <js>/_ui/addons/relationshipaddon/responsive/common/js/acc.permissionselection.js</js>
+      <css>/_ui/addons/relationshipaddon/responsive/common/css/relationshipaddon.css</css>
+      <js>/_ui/addons/billaddon/responsive/common/js/billaddon.js</js>
+      <js>/_ui/addons/billaddon/responsive/common/js/acc.billaddress.js</js>
+      <js>/_ui/addons/billaddon/responsive/common/js/acc.billpaginationsort.js</js>
+      <css>/_ui/addons/billaddon/responsive/common/css/billaddon.css</css>
+      <js>/_ui/addons/smarteditaddon/shared/common/js/webApplicationInjector.js</js>
+      <js>/_ui/addons/smarteditaddon/shared/common/js/reprocessPage.js</js>
+      <js>/_ui/addons/smarteditaddon/shared/common/js/adjustComponentRenderingToSE.js</js>
+      <js>/_ui/addons/smarteditaddon/responsive/common/js/smarteditaddon.js</js>
+      <css>/_ui/addons/smarteditaddon/responsive/common/css/smarteditaddon.css</css>
+      <js>/_ui/addons/assistedservicestorefront/responsive/common/js/assistedservicestorefront.js</js>
+      <js>/_ui/addons/assistedservicestorefront/responsive/common/js/jquery.tablesorter.pager.js</js>
+      <js>/_ui/addons/assistedservicestorefront/responsive/common/js/jquery.tablesorter.min.js</js>
+      <js>/_ui/addons/assistedservicestorefront/responsive/common/js/Chart.min.js</js>
+      <js>/_ui/addons/assistedservicestorefront/responsive/common/js/asm.storefinder.js</js>
+      <css>/_ui/addons/assistedservicestorefront/responsive/common/css/assistedservicestorefront.css</css>
+      <css>/_ui/addons/assistedservicestorefront/responsive/common/css/storeFinder.css</css>
+      <css>/_ui/addons/assistedservicestorefront/responsive/common/css/customer360.css</css>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/publicsectoracceleratoraddon.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/publicsectoracceleratoraddon.form.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.product.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.navigation.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.account.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.checkoutsaveandclose.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.silentorderpost.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.address.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.checkoutsummary.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.checkoutbundleselection.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.autocomplete.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.psrefinements.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.global.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.yform.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.chat.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.relationship.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.forgottenpassword.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.storefinder.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/jquery-masonry.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.dashboard.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.consent.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/jquery.webui-popover.min.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/jquery.stickem.js</js>
+      <js>/_ui/addons/publicsectoracceleratoraddon/responsive/common/js/acc.closeaccount.js</js>
+   </group>
+</groups>
+

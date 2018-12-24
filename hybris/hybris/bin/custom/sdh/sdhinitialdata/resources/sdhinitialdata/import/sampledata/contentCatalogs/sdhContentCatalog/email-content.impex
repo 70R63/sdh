@@ -1,0 +1,20 @@
+#
+#	ImpEx for Public Sector Site Email CMS Content
+#
+
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# CMS Image Components
+INSERT_UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];name
+;;EmailBannerPublicSectorBottomImage;EmailBannerPublicSectorBottomImage
+;;EmailBannerPublicSectorTopImage;EmailBannerPublicSectorTopImage
+;;EmailSiteLogoImage;Email Site Logo Image;
+
+# Content Slots
+UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;EmailBottomSlot;EmailBannerPublicSectorBottomImage
+;;EmailTopSlot;EmailBannerPublicSectorTopImage
+;;EmailSiteLogoSlot;EmailSiteLogoImage
+
+

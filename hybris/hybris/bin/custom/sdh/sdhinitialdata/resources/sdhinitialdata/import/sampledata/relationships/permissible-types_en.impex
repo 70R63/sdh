@@ -1,0 +1,8 @@
+# Macros / Replacement Parameter definitions
+# Language
+$lang=en
+
+INSERT_UPDATE PSPermissibleAreaItemType;code[unique=true];name[lang=$lang]
+;bills;Bills
+;documents;Documents
+;serviceRequests;Service Requests

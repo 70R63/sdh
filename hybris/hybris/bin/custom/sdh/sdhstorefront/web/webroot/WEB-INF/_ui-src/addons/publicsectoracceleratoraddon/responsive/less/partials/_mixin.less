@@ -1,0 +1,92 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+
+
+.card(@background, @height)  {
+	margin: 15px 0 15px 0 ;
+	background: @background;
+	min-height:@height;
+	display:inline-block;
+	padding-bottom:20px;
+	@media (max-width: @screen-xs-max) {
+		height: auto;
+		// min-height:100px;
+	}
+	width:100%;
+}
+
+
+.card(@background) {
+	margin: 15px 15px 15px 15px ;
+	background: @background;
+	display:inline-block;
+	height: auto;
+	padding-bottom:20px;
+	width:100%;
+}
+
+
+.custom-icon(@img_url, @height, @width) {
+	background-image: url(@img_url);
+	position: relative;
+    top: 5px;
+    display: inline-block;
+    height: @height;
+    width: @width;
+    margin:0.5em 0 0 0.8em;
+    background-position: left center;
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+    text-indent:100%;
+    overflow:hidden;
+}
+
+// Mixin Card-Permission Class//
+.card-permission(@background-color, @border-color, @color)  {
+	border: 1px solid @border-color;
+	margin-bottom:30px;
+	.card-heading {
+		background-color: @background-color;
+		color: @color;
+		padding:15px;
+		font-weight: 600;
+	}
+	.card-content {
+		padding:15px 15px 15px 30px;
+		min-height:524px;
+		.card-content-subtitle {
+			min-height:50px;
+		}
+		.card-content-permissions {
+			border :1px solid @color-gray-light;
+			padding:10px;
+			margin: 15px -4px 15px -18px;
+			line-height: 2.2em;
+		}
+		.card-button-permissions {
+			margin: 15px -15px 15px -15px;
+		}
+		.card-button-desc {
+			margin-top:15px;
+		}
+		.card-icon-permissions {
+			margin-right:7px;
+			margin-left:0;
+		}
+		.card-link-permissions {
+			margin: 25px 0 15px 0;
+			font-weight:600;
+			.view-icon { margin: 5px 5px 0 5px;}
+			.edit-icon { margin: 5px 5px 0 5px;}
+		}
+	}
+}

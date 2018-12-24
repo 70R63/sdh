@@ -1,0 +1,390 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+
+//******* grid ***
+
+.dashboard {
+
+    .dashboard-header {
+        color: @link-hover-color;
+        line-height: 35px;
+        padding: 15px 0;
+        text-transform: capitalize;
+        border-bottom: 1px solid @border-color-3;
+        padding-left: 0;
+        padding-right: 0;
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+    }
+    .grid {
+        background: @color-white;
+        max-width: 100%;
+        margin: 15px 0;
+    }
+    
+    .content-space{
+      min-height: auto;
+    }
+
+    //*** clearfix *
+    .grid:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    // **** grid-item **********
+
+    //***** 1 columns by default ****
+    .grid-sizer, .grid-item { width: 100%; }
+    .gutter-sizer { width:0; }
+
+    .grid-item {
+    	box-sizing: border-box;
+        height: auto;
+        margin-bottom: 15px;
+        float: left;
+        background: @color-white;
+        border: 1px solid @color-gray-medium;
+    }
+
+    .grid-item-hide {
+        visibility: hidden;
+    }
+
+    .grid-item {
+        .header {
+            font-weight: 600;
+            padding: 15px;
+            margin: -1px;
+            font-size: 18px;
+            background-color: @color-blue-dark;
+            color: @color-white;
+        }
+        .sub-header {
+            font-weight: 600;
+            padding: 15px;
+            margin: 0;
+            font-size: 16px;
+            background-color: @color-gray-header;
+            color: @color-black;
+            border-top: 1px solid @border-color-3;
+            border-bottom: 1px solid @border-color-3;
+        }
+        .content {
+            padding: 0 15px;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .content .email-id{
+           margin-top: 7px;
+        }
+
+        .box {
+            border-bottom: 1px solid @border-color-3;
+            padding: 17px 5px;
+            margin: 0 -15px;
+            &:last-child {
+                 border-bottom: 0;
+            }
+        }
+
+        .button-box {
+            padding: 5px 10px;
+            margin: 10px 0;
+        }
+
+        .dashlet-list {
+            padding: 0 5px;
+            border-bottom: 1px solid @border-color-3;
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+
+        // bill & application dashlet //
+        .dashlet-list-item {
+            padding: 15px 5px;
+            line-height: 1.8em;
+            border-bottom: 1px solid @border-color-3;
+            .row {
+                padding: 0 0 10px;
+            }
+            .title, .title a {
+                color: @link-hover-color;
+                font-weight: 600;
+            }
+        }
+
+        .editIconForm, .deleteIconForm {
+            display: inline-block;
+            padding: 0;
+        }
+
+        .btn{
+            white-space: normal;
+        }
+
+        // end bill & Application dashlet//
+
+        .vertical-center {
+            -ms-transform: translateY(50%);
+            -webkit-transform: translateY(50%);
+            transform: translateY(50%);
+        }
+
+        .notification-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .notification-icon {
+            vertical-align: middle;
+            padding: 0 10px;
+        }
+        .text-right-receipt-pdf {
+            text-align: right;
+        }
+        .delete-draft, .draft-edit{
+           background-color: transparent;
+           border: none;
+           color: @color-black;
+           padding-top: 6px;
+        }
+        .profile-edit, .email-edit, .delete-address, .address-edit{
+           background-color: transparent;
+           border: none;
+           color: @color-black;
+        }
+        .delete-address-icon, .edit-address-icon, .edit-aboutMe-icon {
+            padding: 6px 0 8px;
+        }
+        .icon-file-pdf {
+            vertical-align: middle;
+        }
+        .about-me-redirect-btn a{
+          color: @color-black;
+        }
+        .bill-more-info-btn, .bill-pay-btn {
+            margin-top: 10px;
+        }
+        .notification-box {
+            padding: 15px;
+            margin: 0 -15px;
+        }
+        .notification-inner-box {
+            padding: 10px 5px;
+            border: 1px solid @border-color-3;
+        }
+        .or-text {
+            font-weight: 600;
+            display: block;
+            padding: 10px;
+        }
+        .text-relationship {
+           padding: 12px;
+        }
+        .btn-all-pending-request {
+            margin: 10px 0;
+        }
+    }
+     .grid-item .dashlet-document-pdf, .grid-item .change-password,
+     .grid-item .payment-details, .grid-item .dashlet-bills-pdf,
+     .grid-item .retrieveQuoteForm, .grid-item .dashlet-service-request{
+         & a:focus{
+           outline: 3px solid @brand-primary;
+           background-color: @brand-primary;
+           color: @color-black;
+           padding:0 3px;
+        }
+      }
+     .dashlet-billtype-message{
+        color: #ff0f0f;
+      }
+      .dashlet-bills-pdf br{
+        display: none;
+      }
+      .grid-item.dashlet-application-request {
+         form{
+             padding-left: 0;
+         }
+         .dashlet-list-item.draft-list{
+           border-bottom: none;
+         }
+     }
+     .grid-item.dashlet-application-request{
+        .dashletAllDraftsForm, .dashletAllApplicationsForm{
+            padding-left: 15px;
+            padding-right: 15px;
+       }
+     }
+      .dashlet-action-buttons button:focus{
+           border: 1px @color-black dotted;
+     }
+     .permission-relationships{
+     	.pending-request-number{
+          margin: 0 4px;
+        }
+        .notification-inner-box {
+             padding: 5px 0 10px;
+         }
+     }
+     
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px
+@media (max-width: @screen-xs-max) {
+    .dashboard {
+        .grid-item {
+            .list-item {
+                .btn-padding {
+                    padding-top: 10px;
+                }
+            }
+            .text-right-receipt-pdf {
+                text-align: left;
+            }
+            .content{
+                font-size: 15px;
+            }
+            .content .email-id{
+                word-break: break-all;
+            }
+            .dashlet-billtype-message{
+                text-align: left;
+                br{
+                    display: none;
+                }
+            }
+            .dashlet-bills-pdf{
+                margin-top: 8px;
+            }
+            .btn{
+                font-size: 16px;
+            }
+            .text-right.about-me-redirect-btn{
+                text-align: right;
+            }
+            .or-text {
+                padding: 0;
+            }
+            .button-box {
+                padding: 0 10px;
+            }
+            .text-noPermissionRelationship .text-center{
+              text-align: left;
+            }
+        }
+        .grid-item.dashlet-application-request .text-right{
+           text-align: right;
+        }
+    }
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          TABLET STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 640px - 1023px
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .dashboard {
+       //******* 2 columns for non-mobile screens *//
+       .grid-sizer, .grid-item { width: 49%; }
+       .gutter-sizer { width:1.5%; }
+       .grid-item {
+           margin-bottom: 1.5%;
+       }
+       .grid-item .content{
+             font-size: 15px;
+       }
+       .grid-item .content .email-id{
+            word-break: break-all;
+       }
+       .dashlet-bills-pdf{
+           margin-top: 8px;
+       }
+       .text-noPermissionRelationship .text-center{
+          text-align: left;
+       }
+    }
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          DESKTOP STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 1024px - 1400px
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .dashboard {
+       //***** 2 columns for non-mobile screens *//
+       .grid-sizer, .grid-item { width: 49%; }
+       .gutter-sizer { width:1.5%; }
+       .grid-item {
+           margin-bottom: 1.5%;
+       }
+        .grid-item .content .email-id{
+            word-break: break-all;
+       }
+    }
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          DESKTOP  WIDE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// beyond 1400px
+@media (min-width: @screen-lg-min) {
+    .dashboard {
+       //***** 2 columns for non-mobile screens *//
+       .grid-sizer, .grid-item { width: 49%; }
+       .gutter-sizer { width:1.5%; }
+       .grid-item {
+           margin-bottom: 1.5%;
+       }
+    }
+}

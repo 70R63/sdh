@@ -1,0 +1,279 @@
+## messageSource=classpath:/publicsectorstore/messages/email-orderConfirmation_$lang.properties
+
+<html>
+<head>
+</head>
+<body bgcolor="#ffffff">
+
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+<tr>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td align="center" valign="top">
+        <table width="610" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#fff">
+            <tr>
+                <td align="center" valign="top" bgcolor="#FFFFFF">
+                    <table width="570" cellpadding="0" cellspacing="0" border="0" align="center">
+                        <tr>
+                            <td valign="middle">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td valign="middle">
+                                ${ctx.cmsSlotContents.SiteLogo}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="left" valign="middle">
+                                <font color="#666666" size="2" face="Arial, Helvetica, sans-serif">
+                                    <a href="${ctx.baseUrl}"
+                                       style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.TopContent}</a>
+                                </font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td align="left" valign="top">
+										  <p style="margin:2px 0"><font color="#666666" size="3" 
+                                                              face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage(
+                                                                    'confirmationText', ${ctx.serviceProductName})}</font>
+                                </p><br/>
+                                
+                                <p style="margin:2px 0"><font color="#666666" size="2"
+                                                              face="Arial, Helvetica, sans-serif">${ctx.messages.thankYouForOrder}</font>
+                                </p><br/>
+
+                                <p style="margin:2px 0"><font color="#666666" size="2"
+                                                              face="Arial, Helvetica, sans-serif">${ctx.messages.notifyOrderMessage}</font>
+                                </p><br/>
+                                #if (!${ctx.order.guestCustomer} )
+                                    <p style="margin:2px 0"><font color="#666666" size="2"
+                                                                  face="Arial, Helvetica, sans-serif">${ctx.messages.orderFollowStepMesssage}</font>
+                                    </p><br/>
+
+                                    <p style="margin:2px 0"><font color="#666666" size="2"
+                                                                  face="Arial, Helvetica, sans-serif">${ctx.messages.orderStep1}</font>
+                                    </p>
+
+                                    <p style="margin:2px 0"><font color="#666666" size="2"
+                                                                  face="Arial, Helvetica, sans-serif">${ctx.messages.orderStep2}</font>
+                                    </p>
+
+                                    <p style="margin:2px 0"><font color="#666666" size="2"
+                                                                  face="Arial, Helvetica, sans-serif">${ctx.messages.orderStep3}</font>
+                                    </p>
+
+                                    <p style="margin:2px 0"><font color="#666666" size="2"
+                                                                  face="Arial, Helvetica, sans-serif">${ctx.messages.orderStep4}</font>
+                                    </p><br/>
+                                #end
+                                <p style="margin:2px 0"><font color="#666666" size="2"
+                                         face="Arial, Helvetica, sans-serif">${ctx.messages.instructionsContactUs}</font></p><br/>
+
+                                <p style="margin:2px 0"><font color="#666666" size="2"
+                                         face="Arial, Helvetica, sans-serif">${ctx.messages.complimentaryClosing}</font></p>
+
+                                <p><font color="#666666" size="2"
+                                         face="Arial, Helvetica, sans-serif">${ctx.messages.signature}</font></p><br/>
+
+                                #if(${ctx.order.paymentInfo} || ${ctx.order.deliveryAddress} || ${ctx.order.deliveryMode} || ${ctx.order.subTotal.value} > 0)
+                                    <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="products">
+                                        <tr>
+                                            <td align="left"><font color="#666666" size="3"
+                                                                   face="Arial, Helvetica, sans-serif">${ctx.messages.summary}</font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        #if(${ctx.order.paymentInfo})
+                                                            <td valign="top">
+
+                                                                <table>
+
+                                                                    <tr>
+                                                                        <td align="left"><font color="#666666" size="2"
+                                                                                               face="Arial, Helvetica, sans-serif"><b>${ctx.messages.paymentDetails}</b></font>
+                                                                            <br/></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <p style="margin:2px 0 0 0"><font color="#666666"
+                                                                                                              size="2"
+                                                                                                              face="Arial, Helvetica, sans-serif">
+
+                                                                                <b>${ctx.order.paymentInfo.accountHolderName}</b><br/>
+                                                                                ${ctx.order.paymentInfo.cardType} <br/>
+                                                                                <************${ctx.order.paymentInfo.cardNumber}>
+                                                                                <br/>
+                                                                                ${ctx.expiryCCMonth}
+                                                                                / ${ctx.expiryCCYear}<br/>
+                                                                                ${ctx.order.paymentInfo.billingAddress.line1}
+                                                                                <br/>
+                                                                                #if($ctx.order.paymentInfo.billingAddress.line2 && $ctx.order.paymentInfo.billingAddress.line2 !=
+                                                                                    '') ${ctx.order.paymentInfo.billingAddress.line2}
+                                                                                    <br/>#end
+                                                                                ${ctx.order.paymentInfo.billingAddress.town}<br/>
+                                                                                ${ctx.order.paymentInfo.billingAddress.postalCode}  ${ctx.order.paymentInfo.billingAddress.country.name}
+                                                                            </font></p>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        #end
+                                                        #if(${ctx.order.subTotal.value} > 0)
+                                                            <td valign="top">
+
+                                                                <table>
+                                                                    <tr>
+                                                                        <td align="left"><font color="#666666" size="2"
+                                                                                               face="Arial, Helvetica, sans-serif"><b>${ctx.messages.totals}</b></font><br/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    #if ($ctx.order.deliveryOrderGroups.size() > 0)
+                                                                        #foreach( $orderGroup in ${ctx.order.deliveryOrderGroups} )
+                                                                            #foreach( $entry in ${orderGroup.entries} )
+                                                                               #if (!${entry.product.code.contains("none")})
+	                                                                                <tr>
+	                                                                                    <td><p style="margin:3px 0"><font
+	                                                                                            color="#666666"
+	                                                                                            size="2"
+	                                                                                            face="Arial, Helvetica, sans-serif"> $entry.product.name
+	                                                                                    </td>
+	                                                                                    <td><p style="margin:3px 0"><font
+	                                                                                            color="#666666"
+	                                                                                            size="2"
+	                                                                                            face="Arial, Helvetica, sans-serif"> $entry.basePrice.formattedValue
+	                                                                                    </td>
+	                                                                                </tr>
+	                                                                             #end
+                                                                            #end
+                                                                        #end
+                                                                    #end
+                                                                    <tr>
+                                                                        <td><p style="margin:3px 0"><font color="#666666" size="2"
+                                                                                                          face="Arial, Helvetica, sans-serif"> ${ctx.messages.subtotal}
+                                                                        </td>
+                                                                        <td><p style="margin:3px 0"><font color="#666666" size="2"
+                                                                                                          face="Arial, Helvetica, sans-serif"> ${ctx.order.subTotal.formattedValue}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><p style="margin:3px 0"><font color="#666666" size="2"
+                                                                                                          face="Arial, Helvetica, sans-serif"> ${ctx.messages.delivery}
+                                                                        </td>
+                                                                        <td><p style="margin:3px 0"><font color="#666666" size="2"
+                                                                                                          face="Arial, Helvetica, sans-serif"> #if(${ctx.order.deliveryCost.value} > 0) ${ctx.order.deliveryCost.formattedValue} #else ${ctx.messages.free} #end
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <hr style="border: 1px dashed black;"/>
+                                                                        </td>
+                                                                        <td>
+                                                                            <hr style="border: 1px dashed black;"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><p style="margin:3px 0"><font color="#666666" size="2"
+                                                                                                          face="Arial, Helvetica, sans-serif">
+                                                                            <b>${ctx.messages.total}: </b></td>
+                                                                        <td><p style="margin:3px 0"><font color="#666666" size="2"
+                                                                                                          face="Arial, Helvetica, sans-serif">
+                                                                            <b>${ctx.order.totalPriceWithTax.formattedValue}</b>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"><p style="margin:3px 0"><font
+                                                                                color="#666666"
+                                                                                size="2"
+                                                                                face="Arial, Helvetica, sans-serif"> ${ctx.messages.getMessage(
+                                                                            'includesTax', ${ctx.order.totalTax.formattedValue})}</font>
+                                                                        </p></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        #end
+                                                    </tr>
+
+                                                    #if(${ctx.order.deliveryAddress})
+                                                        <tr>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+
+                                                    <tr>
+                                                        <td valign="top">
+                                                            <font color="#666666" size="2"
+                                                                  face="Arial, Helvetica, sans-serif"><b>${ctx.messages.deliveryDetails}</b></font><br/><br/>
+
+                                                            #if(${ctx.order.deliveryItemsQuantity} > 0)
+                                                                <p style="margin:3px 0">
+                                                                    <font color="#666666" size="2"
+                                                                          face="Arial, Helvetica, sans-serif">
+                                                                        ${ctx.order.deliveryAddress.title} ${ctx.order.deliveryAddress.firstName} ${ctx.order.deliveryAddress.lastName}
+                                                                        <br/>
+                                                                        ${ctx.order.deliveryAddress.line1}<br/>
+                                                                        #if($ctx.order.deliveryAddress.line2.line2 && $ctx.order.deliveryAddress.line2 !=
+                                                                            '')${ctx.order.deliveryAddress.line2}<br/>#end
+                                                                        ${ctx.order.deliveryAddress.town}<br/>
+                                                                        ${ctx.order.deliveryAddress.postalCode} ${ctx.order.deliveryAddress.country.name}
+                                                                    </font>
+                                                                </p>
+                                                            #else
+                                                                <p style="margin:3px 0"><font color="#666666" size="2"
+                                                                                              face="Arial, Helvetica, sans-serif">${ctx.messages.noDelivery}</font>
+                                                                </p>
+                                                            #end
+                                                        </td>
+                                                    #end
+                                                    #if(${ctx.order.deliveryMode})
+                                                        <td valign="top">
+                                                            <font color="#666666" size="2"
+                                                                  face="Arial, Helvetica, sans-serif"><b>${ctx.messages.deliveryMethod}</b></font><br/><br/>
+                                                            #if(${ctx.order.deliveryItemsQuantity} > 0 && ${ctx.order.deliveryMode})
+                                                                <p style="margin:3px 0"><font color="#666666" size="2"
+                                                                                              face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage(
+                                                                    'deliveryETA', ${ctx.order.deliveryMode.description})}&nbsp;-&nbsp;#if(${ctx.order.deliveryCost.value} > 0) ${ctx.order.deliveryCost.formattedValue} #else ${ctx.messages.free} #end</font>
+                                                                </p>
+                                                            #end
+                                                        </td>
+                                                    #end
+                                                </tr>
+                                                </table>
+                                                <br/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td height="30" align="left" valign="middle">
+                                                © <font color="#000000" size="2"
+                                                        face="Arial, Helvetica, sans-serif"> ${ctx.messages.year}  ${ctx.messages.name}
+                                                &nbsp;</font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                #end
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+</body>
+</html>

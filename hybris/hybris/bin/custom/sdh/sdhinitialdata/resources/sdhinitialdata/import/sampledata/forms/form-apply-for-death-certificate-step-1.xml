@@ -1,0 +1,735 @@
+<xh:html xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:xxi="http://orbeon.org/oxf/xml/xinclude"
+         xmlns:saxon="http://saxon.sf.net/"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:sql="http://orbeon.org/oxf/xml/sql"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:exf="http://www.exforms.org/exf/1-0"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:fb="http://orbeon.org/oxf/xml/form-builder"
+         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <xh:head>
+        <xh:title>Apply For Death Certificate</xh:title>
+        <xf:model id="fr-form-model" xxf:expose-xpath-types="true">
+            <!-- Main instance -->
+            <xf:instance id="fr-form-instance" xxf:exclude-result-prefixes="#all" xxf:index="id">
+                <form>
+                    <section-1>
+                        <control-14/>
+                        <dropdown-title/>
+                        <first-name-1/>
+                        <last-name-1/>
+                        <dropdown-gender/>
+                        <label-1/>
+                        <address-line1-1/>
+                        <address-line2-1/>
+                        <city-1/>
+                        <postcode-1/>
+                        <death-date-1/>
+                        <birth-date-1/>
+                        <control-15/>
+                    </section-1>
+                </form>
+            </xf:instance>
+            <!-- Bindings -->
+            <xf:bind id="fr-form-binds" ref="instance('fr-form-instance')">
+                <xf:bind id="section-1-bind" name="section-1" ref="section-1">
+                    <xf:bind id="dropdown-title-bind" ref="dropdown-title" name="dropdown-title"
+                             required="true()"/>
+                    <xf:bind id="last-name-1-bind" ref="last-name-1" name="last-name-1" required="true()">
+                        <xf:constraint id="constraint-7-constraint" value="string-length(last-name1)&lt;=240"
+                                       level="error"/>
+                        <xf:constraint id="constraint-8-constraint"
+                                       value="string-length($first-name-1)+string-length($last-name-1)&lt;=255"
+                                       level="error"/>
+                    </xf:bind>
+                    <xf:bind id="first-name-1-bind" ref="first-name-1" name="first-name-1" required="true()">
+                        <xf:constraint id="constraint-5-constraint" value="string-length(first-name-1)&lt;=240"
+                                       level="error"/>
+                        <xf:constraint id="constraint-6-constraint"
+                                       value="string-length($first-name-1)+string-length($last-name-1)&lt;=255"
+                                       level="error"/>
+                    </xf:bind>
+                    <xf:bind id="dropdown-gender-bind" ref="dropdown-gender" name="dropdown-gender"
+                             required="true()"/>
+                    <xf:bind id="label-1-bind" ref="label-1" name="label-1"/>
+                    <xf:bind id="address-line1-1-bind" ref="address-line1-1" name="address-line1-1"
+                             required="true()"/>
+                    <xf:bind id="address-line2-1-bind" ref="address-line2-1" name="address-line2-1"
+                             constraint="string-length($address-line2-1)&lt;=255"/>
+                    <xf:bind id="city-1-bind" ref="city-1" name="city-1" required="true()"
+                             constraint="string-length($city-1)&lt;=255"/>
+                    <xf:bind id="postcode-1-bind" ref="postcode-1" name="postcode-1" required="true()"/>
+                    <xf:bind id="death-date-1-bind" ref="death-date-1" name="death-date-1" type="xs:date"
+                             required="true()">
+                        <xf:constraint id="validation-17-validation" value=".&lt;=current-date()"/>
+                    </xf:bind>
+                    <xf:bind id="birth-date-1-bind" ref="birth-date-1" name="birth-date-1" required="true()">
+                        <xf:constraint id="validation-19-validation" value=".&lt;current-date()"/>
+                        <xf:constraint id="validation-21-validation" value=".&lt;$death-date-1"/>
+                        <xf:type id="validation-20-validation">xs:date</xf:type>
+                    </xf:bind>
+                    <xf:bind id="control-14-bind" ref="control-14" name="control-14"/>
+                    <xf:bind id="control-15-bind" ref="control-15" name="control-15" required="true()"
+                             constraint="string-length($city-1)&lt;=255"/>
+                </xf:bind>
+            </xf:bind>
+            <!-- Metadata -->
+            <xf:instance xxf:readonly="true" id="fr-form-metadata" xxf:exclude-result-prefixes="#all">
+                <metadata>
+                    <application-name>publicsector</application-name>
+                    <form-name>Apply-For-Death-Certificate-Form-Step-1</form-name>
+                     <title xml:lang="en">Apply for Death Certificate</title>
+                    <description xml:lang="en">Apply for Death Certificate</description>
+                    <title xml:lang="fr">Demander un certificat de décès</title>
+                    <description xml:lang="fr">Demander un certificat de décès</description>
+                    <title xml:lang="de">Sterbeurkunde beantragen</title>
+                    <description xml:lang="de">Sterbeurkunde beantragenle</description>
+                    <title xml:lang="es">Solicitud de certificado de defunción</title>
+                    <description xml:lang="es">Solicitud de certificado de defunción</description>
+                    <singleton>false</singleton>
+                </metadata>
+            </xf:instance>
+            <!-- Attachments -->
+            <xf:instance id="fr-form-attachments" xxf:exclude-result-prefixes="#all">
+                <attachments>
+                    <css mediatype="text/css" filename="" size=""/>
+                    <pdf mediatype="application/pdf" filename="" size=""/>
+                </attachments>
+            </xf:instance>
+            <!-- All form resources -->
+            <!-- Don't make readonly by default in case a service modifies the resources -->
+            <xf:instance id="fr-form-resources" xxf:readonly="false" xxf:exclude-result-prefixes="#all">
+                <resources>
+                   <resource xml:lang="en">
+                        <control-14>
+                            <text>&lt;div&gt;Fields marked * are required&lt;/div&gt;</text>
+                        </control-14>
+                        <section-1>
+                            <label>Deceased Details</label>
+                        </section-1>
+                        <dropdown-title>
+                            <label>Title</label>
+                            <hint/>
+                            <alert>Please select a title</alert>
+                            <item>
+                                <label>Mr</label>
+                                <value>mr</value>
+                            </item>
+                            <item>
+                                <label>Ms</label>
+                                <value>ms</value>
+                            </item>
+                            <item>
+                                <label>Mrs</label>
+                                <value>mrs</value>
+                            </item>
+                            <item>
+                                <label>Miss</label>
+                                <value>miss</value>
+                            </item>
+                            <item>
+                                <label>Dr.</label>
+                                <value>dr</value>
+                            </item>
+                            <item>
+                                <label>Rev</label>
+                                <value>rev</value>
+                            </item>
+                        </dropdown-title>
+                        <first-name-1>
+                            <label>First Name</label>
+                            <hint/>
+                            <alert>Please enter a first name that is less than 240 characters</alert>
+                            <alert>Combined length of first name and last name must be less than 255 characters</alert>
+                            <alert>Please enter a first name</alert>
+                        </first-name-1>
+                        <last-name-1>
+                            <label>Last Name</label>
+                            <hint/>
+                            <alert>Please enter a last name that is less than 240 characters</alert>
+                            <alert>Combined length of first name and last name must be less than 255 characters</alert>
+                            <alert>Please enter a first name</alert>
+                        </last-name-1>
+                        <dropdown-gender>
+                            <label>Gender</label>
+                            <hint/>
+                            <alert>Please select an option</alert>
+                            <item>
+                                <label>Male</label>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Female</label>
+                                <value>2</value>
+                            </item>
+                            <item>
+                                <label>Other</label>
+                                <value>other</value>
+                            </item>
+                            <item>
+                                <label>Rather not say</label>
+                                <value>rather-not-say</value>
+                            </item>
+                        </dropdown-gender>
+                        <label-1>
+                            <label>&lt;h3&gt;&lt;b&gt;Place of Death</label>
+                            <hint/>
+                        </label-1>
+                        <address-line1-1>
+                            <label>Address Line 1</label>
+                            <hint/>
+                            <alert>Please enter an address</alert>
+                        </address-line1-1>
+                        <address-line2-1>
+                            <label>Address Line 2</label>
+                            <hint/>
+                            <alert>Please enter an address</alert>
+                        </address-line2-1>
+                        <city-1>
+                            <label>City</label>
+                            <hint/>
+                            <alert>Please enter a town or city</alert>
+                        </city-1>
+                        <postcode-1>
+                            <label>Postcode</label>
+                            <hint/>
+                            <alert>Please enter a post code</alert>
+                        </postcode-1>
+                        <death-date-1>
+                            <label>Date of Death (example: 23/09/2016)</label>
+                            <hint/>
+                            <alert>Date of marriage must not be in the future</alert>
+                            <alert>Please select the date of death</alert>
+                        </death-date-1>
+                        <birth-date-1>
+                            <label>Date of Birth (example: 23/09/2016)</label>
+                            <hint/>
+                            <alert>Please enter a valid date of birth</alert>
+                            <alert>Date of Birth (example: 23/09/2016) must be in the past</alert>
+                            <alert>Date of death must be after the Date of Birth (example: 23/09/2016)</alert>
+                            <alert>Please select a date of birth</alert>
+                        </birth-date-1>
+                        <control-15>
+                            <label>Place of Birth</label>
+                            <hint/>
+                            <alert>Please enter a valid date of birth</alert>
+                        </control-15>
+                    </resource> 
+                    <resource xml:lang="fr">
+                        <control-14>
+                            <text>&lt;div&gt;Les zones signalées par * sont obligatoires.&lt;/div&gt;</text>
+                        </control-14>
+                        <section-1>
+                            <label>Informations concernant le ou la défunt(e)</label>
+                        </section-1>
+                        <dropdown-title>
+                            <label>Titre</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner un titre</alert>
+                            <item>
+                                <label>M.</label>
+                                <value>mr</value>
+                            </item>
+                            <item>
+                                <label>Mme</label>
+                                <value>ms</value>
+                            </item>
+                            <item>
+                                <label>Mme</label>
+                                <value>mrs</value>
+                            </item>
+                            <item>
+                                <label>Mlle</label>
+                                <value>miss</value>
+                            </item>
+                            <item>
+                                <label>Dr</label>
+                                <value>dr</value>
+                            </item>
+                            <item>
+                                <label>Révérend</label>
+                                <value>rev</value>
+                            </item>
+                        </dropdown-title>
+                        <first-name-1>
+                            <label>Prénom</label>
+                            <hint/>
+                            <alert>Veuillez saisir un prénom de moins de 240 caractères</alert>
+                            <alert>La longueur totale du prénom et du nom doit être inférieure à 255 caractères</alert>
+                            <alert>Veuillez saisir un prénom</alert>
+                        </first-name-1>
+                        <last-name-1>
+                            <label>Nom de famille</label>
+                            <hint/>
+                            <alert>Veuillez saisir un nom de famille de moins de 240 caractères</alert>
+                            <alert>La longueur totale du prénom et du nom doit être inférieure à 255 caractères</alert>
+                            <alert>Veuillez saisir un prénom</alert>
+                        </last-name-1>
+                        <dropdown-gender>
+                            <label>Sexe</label>
+                            <hint/>
+                            <alert>Veuillez sélectionner une option</alert>
+                            <item>
+                                <label>Masculin</label>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Féminin</label>
+                                <value>2</value>
+                            </item>
+                            <item>
+                                <label>Autre</label>
+                                <value>other</value>
+                            </item>
+                            <item>
+                                <label>Ne souhaite pas l&apos;indiquer</label>
+                                <value>rather-not-say</value>
+                            </item>
+                        </dropdown-gender>
+                        <label-1>
+                            <label>&lt;h3&gt;&lt;b&gt;Lieu du décès</label>
+                            <hint/>
+                        </label-1>
+                        <address-line1-1>
+                            <label>Ligne d&apos;adresse 1</label>
+                            <hint/>
+                            <alert>Veuillez saisir une adresse</alert>
+                        </address-line1-1>
+                        <address-line2-1>
+                            <label>Ligne d&apos;adresse 2</label>
+                            <hint/>
+                            <alert>Veuillez saisir une adresse</alert>
+                        </address-line2-1>
+                        <city-1>
+                            <label>Ville</label>
+                            <hint/>
+                            <alert>Veuillez saisir une ville</alert>
+                        </city-1>
+                        <postcode-1>
+                            <label>Code postal</label>
+                            <hint/>
+                            <alert>Veuillez saisir un code postal</alert>
+                        </postcode-1>
+                        <death-date-1>
+                            <label>Date de décès (exemple : 23/09/2016)</label>
+                            <hint/>
+                            <alert>La date de mariage ne doit pas être située dans le futur.</alert>
+                            <alert>Veuillez sélectionner la date de décès</alert>
+                        </death-date-1>
+                        <birth-date-1>
+                            <label>Date de naissance (exemple : 23/09/2016)</label>
+                            <hint/>
+                            <alert>Veuillez saisir une date de naissance valide</alert>
+                            <alert>La date de naissance (exemple : 23/09/2016) doit être passée.</alert>
+                            <alert>La date de décès doit être postérieure à la date de naissance (exemple : 23/09/2016)</alert>
+                            <alert>Veuillez sélectionner une date de naissance</alert>
+                        </birth-date-1>
+                        <control-15>
+                            <label>Lieu de naissance</label>
+                            <hint/>
+                            <alert>Veuillez saisir une date de naissance valide</alert>
+                        </control-15>
+                    </resource>
+                    <resource xml:lang="de">
+                        <control-14>
+                            <text>&lt;div&gt;Mit einem * gekennzeichnete Felder sind Pflichtfelder.&lt;/div&gt;</text>
+                        </control-14>
+                        <section-1>
+                            <label>Details zum Verstorbenen</label>
+                        </section-1>
+                        <dropdown-title>
+                            <label>Anrede</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Anrede aus.</alert>
+                            <item>
+                                <label>Herr</label>
+                                <value>mr</value>
+                            </item>
+                            <item>
+                                <label>Frau</label>
+                                <value>ms</value>
+                            </item>
+                            <item>
+                                <label>Frau</label>
+                                <value>mrs</value>
+                            </item>
+                            <item>
+                                <label>Frau</label>
+                                <value>miss</value>
+                            </item>
+                            <item>
+                                <label>Dr.</label>
+                                <value>dr</value>
+                            </item>
+                            <item>
+                                <label>Pfarrer</label>
+                                <value>rev</value>
+                            </item>
+                        </dropdown-title>
+                        <first-name-1>
+                            <label>Vorname</label>
+                            <hint/>
+                            <alert>Geben Sie einen Vornamen ein, der kürzer als 240 Zeichen ist.</alert>
+                            <alert>Die Länge des Vor- und Nachnamens darf zusammen 255 Zeichen nicht überschreiten.</alert>
+                            <alert>Geben Sie einen Vornamen ein.</alert>
+                        </first-name-1>
+                        <last-name-1>
+                            <label>Nachname</label>
+                            <hint/>
+                            <alert>Geben Sie einen Nachnamen ein, der kürzer als 240 Zeichen ist.</alert>
+                            <alert>Die Länge des Vor- und Nachnamens darf zusammen 255 Zeichen nicht überschreiten.</alert>
+                            <alert>Geben Sie einen Vornamen ein.</alert>
+                        </last-name-1>
+                        <dropdown-gender>
+                            <label>Geschlecht</label>
+                            <hint/>
+                            <alert>Wählen Sie eine Option.</alert>
+                            <item>
+                                <label>Männlich</label>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Weiblich</label>
+                                <value>2</value>
+                            </item>
+                            <item>
+                                <label>Andere</label>
+                                <value>other</value>
+                            </item>
+                            <item>
+                                <label>Keine Angabe</label>
+                                <value>rather-not-say</value>
+                            </item>
+                        </dropdown-gender>
+                        <label-1>
+                            <label>&lt;h3&gt;&lt;b&gt;Sterbeort</label>
+                            <hint/>
+                        </label-1>
+                        <address-line1-1>
+                            <label>Adresse Zeile 1</label>
+                            <hint/>
+                            <alert>Geben Sie eine Adresse ein.</alert>
+                        </address-line1-1>
+                        <address-line2-1>
+                            <label>Adresse Zeile 2</label>
+                            <hint/>
+                            <alert>Geben Sie eine Adresse ein.</alert>
+                        </address-line2-1>
+                        <city-1>
+                            <label>Ort</label>
+                            <hint/>
+                            <alert>Geben Sie einen Ort ein.</alert>
+                        </city-1>
+                        <postcode-1>
+                            <label>Postleitzahl</label>
+                            <hint/>
+                            <alert>Geben Sie eine Postleitzahl ein.</alert>
+                        </postcode-1>
+                        <death-date-1>
+                            <label>Sterbedatum (Beispiel: 23.09.2016)</label>
+                            <hint/>
+                            <alert>Das Datum der Eheschließung darf nicht in der Zukunft liegen.</alert>
+                            <alert>Wählen Sie das Sterbedatum aus.</alert>
+                        </death-date-1>
+                        <birth-date-1>
+                            <label>Geburtsdatum (Beispiel: 23.09.2016)</label>
+                            <hint/>
+                            <alert>Geben Sie ein gültiges Geburtsdatum ein.</alert>
+                            <alert>Geburtsdatum (Beispiel: 23/09/2016) muss in der Vergangenheit liegen</alert>
+                            <alert>Sterbedatum muss hinter dem Geburtsdatum liegen (Beispiel: 23.09.2016)</alert>
+                            <alert>Wählen Sie ein Geburtsdatum aus.</alert>
+                        </birth-date-1>
+                        <control-15>
+                            <label>Geburtsort</label>
+                            <hint/>
+                            <alert>Geben Sie ein gültiges Geburtsdatum ein.</alert>
+                        </control-15>
+                    </resource>
+                     <resource xml:lang="es">
+                        <control-14>
+                            <text>&lt;div&gt;Los campos marcados con * son obligatorios&lt;/div&gt;</text>
+                        </control-14>
+                        <section-1>
+                            <label>Datos del fallecido</label>
+                        </section-1>
+                        <dropdown-title>
+                            <label>Tratamiento</label>
+                            <hint/>
+                            <alert>Seleccione un tratamiento</alert>
+                            <item>
+                                <label>Sr.</label>
+                                <value>mr</value>
+                            </item>
+                            <item>
+                                <label>-</label>
+                                <value>ms</value>
+                            </item>
+                            <item>
+                                <label>Sra.</label>
+                                <value>mrs</value>
+                            </item>
+                            <item>
+                                <label>Srta.</label>
+                                <value>miss</value>
+                            </item>
+                            <item>
+                                <label>Dr.</label>
+                                <value>dr</value>
+                            </item>
+                            <item>
+                                <label>Rev.</label>
+                                <value>rev</value>
+                            </item>
+                        </dropdown-title>
+                        <first-name-1>
+                            <label>Nombre</label>
+                            <hint/>
+                            <alert>Introduzca un nombre que tenga menos de 240 caracteres</alert>
+                            <alert>La longitud total del nombre y los apellidos debe ser inferior a 255 caracteres</alert>
+                            <alert>Introduzca un nombre</alert>
+                        </first-name-1>
+                        <last-name-1>
+                            <label>Apellidos</label>
+                            <hint/>
+                            <alert>Introduzca unos apellidos que tengan menos de 240 caracteres</alert>
+                            <alert>La longitud total del nombre y los apellidos debe ser inferior a 255 caracteres</alert>
+                            <alert>Introduzca un nombre</alert>
+                        </last-name-1>
+                        <dropdown-gender>
+                            <label>Sexo</label>
+                            <hint/>
+                            <alert>Seleccione una opción</alert>
+                            <item>
+                                <label>Hombre</label>
+                                <value>1</value>
+                            </item>
+                            <item>
+                                <label>Mujer</label>
+                                <value>2</value>
+                            </item>
+                            <item>
+                                <label>Otro</label>
+                                <value>other</value>
+                            </item>
+                            <item>
+                                <label>Prefiero no contestar</label>
+                                <value>rather-not-say</value>
+                            </item>
+                        </dropdown-gender>
+                        <label-1>
+                            <label>&lt;h3&gt;&lt;b&gt;Lugar de defunción</label>
+                            <hint/>
+                        </label-1>
+                        <address-line1-1>
+                            <label>Línea de dirección 1</label>
+                            <hint/>
+                            <alert>Introduzca una dirección</alert>
+                        </address-line1-1>
+                        <address-line2-1>
+                            <label>Línea de dirección 2</label>
+                            <hint/>
+                            <alert>Introduzca una dirección</alert>
+                        </address-line2-1>
+                        <city-1>
+                            <label>Ciudad</label>
+                            <hint/>
+                            <alert>Introduzca un pueblo o una ciudad</alert>
+                        </city-1>
+                        <postcode-1>
+                            <label>Código postal</label>
+                            <hint/>
+                            <alert>Introduzca un código postal</alert>
+                        </postcode-1>
+                        <death-date-1>
+                            <label>Fecha de fallecimiento (ejemplo: 23/09/2016)</label>
+                            <hint/>
+                            <alert>La fecha de matrimonio no debe estar en el futuro</alert>
+                            <alert>Seleccione la fecha de fallecimiento</alert>
+                        </death-date-1>
+                        <birth-date-1>
+                            <label>Fecha de nacimiento (ejemplo: 23/09/2016)</label>
+                            <hint/>
+                            <alert>Introduzca una fecha de nacimiento válida</alert>
+                            <alert>Fecha de nacimiento (ejemplo: 23/09/2016) debe estar en el pasado</alert>
+                            <alert>Fecha de fallecimiento debe ser posterior a Fecha de nacimiento (ejemplo: 23/09/2016)</alert>
+                            <alert>Seleccione una fecha de nacimiento</alert>
+                        </birth-date-1>
+                        <control-15>
+                            <label>Lugar de nacimiento</label>
+                            <hint/>
+                            <alert>Introduzca una fecha de nacimiento válida</alert>
+                        </control-15>
+                    </resource>          
+                </resources>
+            </xf:instance>
+            <!-- Utility instances for services -->
+            <xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+                <request/>
+            </xf:instance>
+            <xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+                <response/>
+            </xf:instance>
+        </xf:model>
+    </xh:head>
+    <xh:body>
+        <fr:view>
+            <fr:body xmlns:xbl="http://www.w3.org/ns/xbl" xmlns:p="http://www.orbeon.com/oxf/pipeline"
+                     xmlns:oxf="http://www.orbeon.com/oxf/processors">
+                <fr:section id="section-1-control" bind="section-1-bind">
+                    <xf:label ref="$form-resources/section-1/label"/>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td>
+                                <fr:explanation xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                                                xmlns:xxbl="http://orbeon.org/oxf/xml/xbl"
+                                                id="control-14-control"
+                                                bind="control-14-bind">
+                                    <fr:text ref="$form-resources/control-14/text" mediatype="text/html"/>
+                                </fr:explanation>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <fr:dropdown-select1 xmlns:xxbl="http://orbeon.org/oxf/xml/xbl" id="dropdown-title-control"
+                                                     bind="dropdown-title-bind">
+                                    <xf:label ref="$form-resources/dropdown-title/label"/>
+                                    <xf:hint ref="$form-resources/dropdown-title/hint"/>
+                                    <xf:alert ref="$form-resources/dropdown-title/alert"/>
+                                    <xf:itemset ref="$form-resources/dropdown-title/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                    </xf:itemset>
+                                </fr:dropdown-select1>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="first-name-1-control" bind="first-name-1-bind" xxf:maxlength="240">
+                                    <xf:label ref="$form-resources/first-name-1/label"/>
+                                    <xf:hint ref="$form-resources/first-name-1/hint"/>
+                                    <xf:alert ref="$form-resources/first-name-1/alert[1]"
+                                              validation="constraint-5-constraint"/>
+                                    <xf:alert ref="$form-resources/first-name-1/alert[2]"
+                                              validation="constraint-6-constraint"/>
+                                    <xf:alert ref="$form-resources/first-name-1/alert[3]"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="last-name-1-control" bind="last-name-1-bind" xxf:maxlength="240">
+                                    <xf:label ref="$form-resources/last-name-1/label"/>
+                                    <xf:hint ref="$form-resources/last-name-1/hint"/>
+                                    <xf:alert ref="$form-resources/last-name-1/alert[1]" validation="constraint-7-constraint"/>
+                                    <xf:alert ref="$form-resources/last-name-1/alert[2]" validation="constraint-8-constraint"/>
+                                    <xf:alert ref="$form-resources/last-name-1/alert[3]"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <fr:dropdown-select1 xmlns:xxbl="http://orbeon.org/oxf/xml/xbl" id="dropdown-gender-control"
+                                                     bind="dropdown-gender-bind">
+                                    <xf:label ref="$form-resources/dropdown-gender/label"/>
+                                    <xf:hint ref="$form-resources/dropdown-gender/hint"/>
+                                    <xf:alert ref="$form-resources/dropdown-gender/alert"/>
+                                    <xf:itemset ref="$form-resources/dropdown-gender/item">
+                                        <xf:label ref="label"/>
+                                        <xf:value ref="value"/>
+                                    </xf:itemset>
+                                </fr:dropdown-select1>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                    <fr:grid>
+                        <xh:tr>
+                            <xh:td rowspan="1">
+                                <xf:output id="label-1-control" bind="label-1-bind">
+                                    <xf:label ref="$form-resources/label-1/label" mediatype="text/html"/>
+                                    <xf:hint ref="$form-resources/label-1/hint"/>
+                                    <xf:alert ref="$fr-resources/detail/labels/alert"/>
+                                </xf:output>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="address-line1-1-control" bind="address-line1-1-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/address-line1-1/label"/>
+                                    <xf:hint ref="$form-resources/address-line1-1/hint"/>
+                                    <xf:alert ref="$form-resources/address-line1-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="address-line2-1-control" bind="address-line2-1-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/address-line2-1/label"/>
+                                    <xf:hint ref="$form-resources/address-line2-1/hint"/>
+                                    <xf:alert ref="$form-resources/address-line2-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="city-1-control" bind="city-1-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/city-1/label"/>
+                                    <xf:hint ref="$form-resources/city-1/hint"/>
+                                    <xf:alert ref="$form-resources/city-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="postcode-1-control" bind="postcode-1-bind" xxf:maxlength="10">
+                                    <xf:label ref="$form-resources/postcode-1/label"/>
+                                    <xf:hint ref="$form-resources/postcode-1/hint"/>
+                                    <xf:alert ref="$form-resources/postcode-1/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="death-date-1-control" bind="death-date-1-bind">
+                                    <xf:label ref="$form-resources/death-date-1/label"/>
+                                    <xf:hint ref="$form-resources/death-date-1/hint"/>
+                                    <xf:alert ref="$form-resources/death-date-1/alert[1]"
+                                              validation="validation-17-validation"/>
+                                    <xf:alert ref="$form-resources/death-date-1/alert[2]"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="birth-date-1-control" bind="birth-date-1-bind">
+                                    <xf:label ref="$form-resources/birth-date-1/label"/>
+                                    <xf:hint ref="$form-resources/birth-date-1/hint"/>
+                                    <xf:alert ref="$form-resources/birth-date-1/alert[1]"
+                                              validation="validation-20-validation"/>
+                                    <xf:alert ref="$form-resources/birth-date-1/alert[2]"
+                                              validation="validation-19-validation"/>
+                                    <xf:alert ref="$form-resources/birth-date-1/alert[3]"
+                                              validation="validation-21-validation"/>
+                                    <xf:alert ref="$form-resources/birth-date-1/alert[4]"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                        <xh:tr>
+                            <xh:td>
+                                <xf:input id="control-15-control" bind="control-15-bind" xxf:maxlength="255">
+                                    <xf:label ref="$form-resources/control-15/label"/>
+                                    <xf:hint ref="$form-resources/control-15/hint"/>
+                                    <xf:alert ref="$form-resources/control-15/alert"/>
+                                </xf:input>
+                            </xh:td>
+                        </xh:tr>
+                    </fr:grid>
+                </fr:section>
+            </fr:body>
+        </fr:view>
+    </xh:body>
+</xh:html>
