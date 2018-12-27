@@ -2,9 +2,8 @@
 #
 $contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$addonExtensionName=publicsectoracceleratoraddon
-$jarResourceCmsPublicSector=jar:de.hybris.platform.publicsectorstore.constants.PublicsectorstoreConstants&/$addonExtensionName/import/cockpits/cmscockpit
-
+$addonExtensionName=sdhpsaddon
+$jarResourceCmsPublicSector=jar:de.hybris.platform.sdhpsaddon.constants.PublicsectoracceleratoraddonConstants&/$addonExtensionName/import/cockpits/cmscockpit
 # Import modulegen config properties into impex macros
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
 $jarResourceCms=$config-jarResourceCmsValue

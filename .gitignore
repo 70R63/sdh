@@ -155,3 +155,4 @@
 !/hybris/hybris/bin/ext-relationship/relationshipaddon
 /hybris/hybris/bin/ext-relationship/relationshipaddon/*
 !/hybris/hybris/bin/ext-relationship/relationshipaddon/project.properties.template
+hybris/hybris/bin/custom/sdh/sdhstorefront/web/addontestsrc/sdhbillsaddon/de/hybris/platform/sdhbillsaddon/controllers/pages/PSBillControllerTest.java

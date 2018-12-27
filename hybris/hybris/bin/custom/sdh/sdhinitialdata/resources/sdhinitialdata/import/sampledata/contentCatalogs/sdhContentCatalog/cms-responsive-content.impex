@@ -13,7 +13,7 @@ $jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&
 $medias=medias(code, $contentCV);
 $lang=en
 $mediaContainer=media(qualifier, $contentCV)[lang=$lang];
-$addonExtensionName=publicsectoracceleratoraddon
+$addonExtensionName=sdhpsaddon
 $siteUid=sdh
 
 # Load the storefront context root config param
