@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><project name="sdhbillsaddon_buildcallbacks">
+
+	<property location="${ext.sdhbillsaddon.path}" name="ext.sdhbillsaddon.mapperToPath"/>
+	<property name="addonStorefront" value="yacceleratorstorefront"/>
+
+	<if>
+		<os family="windows"/>
+		<then>
+			<propertyregex global="true" input="${ext.sdhbillsaddon.path}" override="yes" property="ext.sdhbillsaddon.mapperToPath" regexp="\\" replace="/"/>
+		</then>
+	</if>
+
+	<target description="Installing the sdhbillsaddon AddOn" name="install.sdhbillsaddon">
+		<sequential>
+			<set_bill_addon_storefront addonstorefrontname="${addonStorefront}"/>
+			<sdhbillsaddon_install_addons addonStorefrontAtt="${addonStorefront}"/>
+			<sdhbillsaddon_lesscss addonStorefrontAtt="${addonStorefront}"/>
+		</sequential>
+	</target>
+
+	<macrodef name="set_bill_addon_storefront">
+		<attribute name="addonstorefrontname"/>
+		<sequential>
+			<echo level="info" message="##### sdhbillsaddon set storefront #####"/>
+			<if>
+				<and>
+					<isset property="sdhbillsaddon.storefront"/>
+					<equals arg1="${sdhbillsaddon.storefront}" arg2="yacceleratorstorefront"/>
+					<not>
+						<equals arg1="@{addonstorefrontname}" arg2="yacceleratorstorefront"/>
+					</not>
+				</and>
+				<then>
+					<echo>Setting global flag for storefront extension @{addonstorefrontname} ...</echo>
+					<echo append="true" file="${HYBRIS_CONFIG_DIR}/local.properties">
+						#####################################################################################
+						# Global flag for an extension which will be a storefront extension 					#
+						#####################################################################################
+						sdhbillsaddon.storefront=@{addonstorefrontname}
+					</echo>
+				</then>
+				<else>
+					<if>
+						<and>
+							<isset property="sdhbillsaddon.storefront"/>
+							<not>
+								<equals arg1="@{addonstorefrontname}" arg2="yacceleratorstorefront"/>
+							</not>
+							<not>
+								<equals arg1="@{addonstorefrontname}" arg2="${sdhbillsaddon.storefront}"/>
+							</not>
+						</and>
+						<then>
+							<echo>!!!The sdhbillsaddon has already installed with ${sdhbillsaddon.storefront}!!!</echo>
+							<fail>
+								*************************************************************
+								There is already other extension	${sdhbillsaddon.storefront} defined as storefront,
+								please verify it and remove manually 'sdhbillsaddon.storefront' property from local.properties.
+								*************************************************************
+							</fail>
+						</then>
+					</if>
+				</else>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhbillsaddon_install_addons">
+		<attribute default="${sdhbillsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+			<echo level="info" message="##### Bill AddOn Installation : ${addonStorefrontAtt} #####"/>
+			<property file="${ext.sdhbillsaddon.path}/addons.properties"/>
+
+			<echo level="info" message="##### sdhbillsaddon storefront : ${sdhbillsaddon.storefront}"/>
+
+			<echo level="info" message="##### sdhbillsaddon storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<echo level="info" message="installing Bill AddOns : ${sdhbillsaddon.addons} for @{addonStorefrontAtt}"/>
+			<antcall target="addoninstall">
+				<param name="addonnames" value="${sdhbillsaddon.addons}"/>
+				<param name="addonStorefront.yacceleratorstorefront" value="@{addonStorefrontAtt}"/>
+			</antcall>
+		</sequential>
+	</macrodef>
+
+
+	<macrodef name="sdhbillsaddon_lesscss">
+		<attribute default="${sdhbillsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+
+			<echo level="info" message="##### sdhbillsaddon storefront : ${sdhbillsaddon.storefront}"/>
+
+			<echo level="info" message="##### sdhbillsaddon storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<echo level="info" message="Copy less files from ${ext.sdhbillsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/_ui-src/responsive/  to  ${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/_ui-src/addons/sdhbillsaddon/responsive/"/>
+
+			<copy todir="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/_ui-src/addons/sdhbillsaddon/responsive/">
+				<fileset dir="${ext.sdhbillsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/_ui-src/responsive/" includes="**/*.less"/>
+			</copy>
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhbillsaddon_after_build">
+		<attribute default="${sdhbillsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+			<echo message="sdhbillsaddon_after_build"/>
+
+			<echo level="info" message="##### sdhbillsaddon storefront : ${sdhbillsaddon.storefront}"/>
+
+			<echo level="info" message="##### sdhbillsaddon storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<sdhbillsaddon_lesscss addonStorefrontAtt="@{addonStorefrontAtt}"/>
+			<impexGenerate extname="sdhbillsaddon"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhbillsaddon_after_clean">
+		<sequential>
+			<delete failonerror="false" file="${ext.sdhbillsaddon.path}/resources-lang/touch_impexgen"/>
+		</sequential>
+	</macrodef>
+
+</project>

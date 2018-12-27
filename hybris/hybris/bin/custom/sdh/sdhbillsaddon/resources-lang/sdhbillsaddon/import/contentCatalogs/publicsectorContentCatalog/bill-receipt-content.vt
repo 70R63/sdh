@@ -1,0 +1,17 @@
+#set( $macroSiteUid = $esc.java('$siteUid') )
+#set( $siteUidVal = $esc.java('publicsector') )
+#set( $macroJarResourceXslFoBillReceipt = $esc.java('$jarResourceXslFoBillReceipt') )
+#set( $jarResourceXslFoBillReceiptVal = $esc.java('jar:de.hybris.platform.sdhbillsaddon.constants.BilladdonConstants&/sdhbillsaddon/import/document/pdf') )
+#set( $macroLang = $esc.java('$lang') )
+#set( $macrositeUidBillPaymentReceipt = $esc.java('$siteUid_billpayment_receipt') )
+#set( $templateScriptFileType = $esc.java('vm') )
+#set( $rendererTemplates = $query.load('bill-receipt-content') )
+$macroSiteUid=$siteUidVal
+$macroJarResourceXslFoBillReceipt=$jarResourceXslFoBillReceiptVal
+$macroLang=$lang
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$macroLang];templateScript[lang=$macroLang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+#foreach( $row in $rendererTemplates )
+#set( $templateScriptFile = "${row.values.templateScript}_$macroLang.$templateScriptFileType" )
+;$macrositeUidBillPaymentReceipt;$row.values.description;$macroJarResourceXslFoBillReceipt/$templateScriptFile
+#end
