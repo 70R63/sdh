@@ -1,0 +1,126 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+
+.consent-section-form{
+  label{
+    text-transform: none;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+.account-section .account-section-content {
+	.account-section-form .account-section-form__toggle-list li {
+      border: none;
+      .toggle-switch{
+        position: relative;
+      }
+      &:last-child {
+          border: none;
+      }
+   }
+    .consent-management-list__item {
+	    border: none;
+    }
+    .consent-management-list__title:before {
+      content: '';
+    }
+     .consent-management-list__title {
+       padding: 25px 15px 18px 10px;
+    }
+     .consent-management-list__label {
+       font-size: 16px;
+    }
+    .toggle-button {
+      position: relative;
+      top: -20px;
+      right: 0;
+    }
+   .toggle-button label .toggle-button__switch {
+      background-color: #777777;
+      border: 1px solid #777777;
+   }
+   .toggle-button label .toggle-button__switch:after {
+      background-color: @color-black;
+      top: 3px;
+      left: 5px;
+      border: 1px solid @color-black;
+   }
+   .toggle-button input[type="checkbox"]:checked ~ label .toggle-button__switch:after {
+     background-color: @color-black;
+   }
+   
+   .toggle-button input[type="checkbox"]:focus ~ label .toggle-button__switch, 
+   .toggle-button input[type="checkbox"]:hover ~ label .toggle-button__switch {
+    background-color: #777777;
+    border: 1px solid #777777;
+   }
+   
+   .toggle-button input[type="checkbox"]:checked:focus ~ label .toggle-button__switch, 
+   .toggle-button input[type="checkbox"]:checked:hover ~ label .toggle-button__switch {
+    background-color: @color-yellow;
+    border: 1px solid @color-yellow;
+  }
+  
+  .toggle-button input[type="checkbox"]:checked ~ label .toggle-button__switch {
+    background-color: @color-yellow;
+    border: 1px solid @color-yellow;
+  }
+
+  .toggle-button label{
+    width: 56px;
+    display: inline-block;
+  }
+
+
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          TABLET STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 640px - 1023px 
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	.account-section .account-section-content {
+	  .consent-management-list__item {
+	    margin-left: 0;
+      }
+    }
+
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px 
+@media (max-width: @screen-xs-max) {
+  .account-section .account-section-content {
+	  .consent-management-list__item {
+	    margin-left: 0;
+      }
+  }
+}

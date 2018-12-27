@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Aug 13 18:42:59 CEST 2015
+builddate=20160407 1842
+description=sdhpsaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=sdhpsaddon
+releasedate=20150804 1509
+vendor=hybris
+version=6.6
+version.api=6.6

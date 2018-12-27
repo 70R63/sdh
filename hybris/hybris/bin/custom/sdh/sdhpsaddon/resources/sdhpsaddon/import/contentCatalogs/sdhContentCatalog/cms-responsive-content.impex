@@ -1,0 +1,84 @@
+# 
+# ImpEx for Responsive Public Sector Site CMS Content 
+# 
+$contentCatalog=sdhContentCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$productCatalog=sdhProductCatalog 
+$productCatalogName=Public Sector Product Catalog 
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged] 
+$picture=media(code, $contentCV) ;
+$addonExtensionName=sdhpsaddon
+$jarResourceCmsCockpit=jar:de.hybris.platform.sdhbillsaddon.constants.BilladdonConstants&/sdhpsaddon/import/cockpits/cmscockpit
+
+$templatesPackageName=$config-assetTemplatesContextPackageName
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# redefining these components with the page path pointing to sdh addon
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
+;;AccountMyBillsComponent;Account Bills Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountMyBillsPage.jsp;;AccountMyBillsComponent
+;;AccountMyAllBillsComponent;Account All Bills Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountMyAllBillsPage.jsp;;AccountMyAllBillsComponent
+
+# redefining this link with the url path pointing to sdh addon
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;MyBillsLink;MyBillsLink;/my-account/my-bills;MyBillsLink;
+
+# CMS Navigation Nodes  
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); children(uid, $contentCV)[mode = append]; links(uid, $contentCV); &nodeRef
+; ServicesNavNode                        ; ; Service Pages                    ; PublicSectorNavNode   ; ; RetrieveDraftLink, RetrieveBillLink, AllServiceRequestsLink                                                      ; ServicesNavNode                           ;
+
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); target(code)[default = 'sameWindow'];;styleAttributes
+; ; RetrieveBillLink                ; Retrieve Bill Link              ; /bills/retrieve-bill ; ; ; ;
+
+###### Retrieve Bill Page
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents($contentCV,uid);;;
+; ; RightSideContent-retrievebill ; Side Content Slot for Retrieve Bill ; true ; ServiceHelpDeskComponent ; ; ;
+
+#ASM Changes
+############
+$addonExtensionName=assistedservicestorefront
+
+# CMS Assisted Service Component
+INSERT_UPDATE AssistedServiceComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;AssistedServiceComponent;Assisted Service Component;AssistedServiceComponent
+ 
+# CMS Assisted Service Sub-Components
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;ASMLoginComponent;Assisted Service Agent Login Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmLoginComponent.jsp;ASMLoginComponent
+;;ASMEmulateUserComponent;Assisted Service Agent Emulate User Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmEmulateUserComponent.jsp;ASMEmulateUserComponent
+;;ASMBindComponent;Assisted Service Bind User/Cart Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmBindComponent.jsp;ASMBindComponent
+;;ASMHeaderComponent;Assisted Service Header Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmHeaderComponent.jsp;ASMHeaderComponent
+;;ASMFooterComponent;Assisted Service Footer Component;/WEB-INF/views/addons/$addonExtensionName/responsive/fragments/asmFooterComponent.jsp;ASMFooterComponent
+
+INSERT_UPDATE ASMDevicesUsedComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ASMDevicesUsedComponent;Assisted Service Devices Used Component;ASMDevicesUsedComponent
+
+INSERT_UPDATE ASMFavoriteColorsComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ASMFavoriteColorsComponent;Assisted Service Favorite Colors Component;ASMFavoriteColorsComponent
+
+# CMS Assisted Service Extends
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef[mode=append]
+;;AccountOrderDetailsOverviewComponent;Account Order Details Overview Info Component;/WEB-INF/views/addons/$addonExtensionName/responsive/updates/accountOrderDetailOverview.jsp;;AccountOrderDetailsOverviewComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)[mode=append]
+;;TopHeaderSlot;true;AssistedServiceComponent
+
+INSERT_UPDATE AssistedServiceSessionRestriction;$contentCV[unique=true];uid[unique=true];name;&uid
+;;AssistedServiceSessionRestriction;ASM Session Restriction;AssistedServiceSessionRestriction
+
+INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&uid);uid[unique=true];
+;;Assisted Service Session Reversed Restriction;AssistedServiceSessionRestriction;AssistedServiceSessionReversedRestriction;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;restrictions(uid,$contentCV)
+;;AddMessageButtonComponent;Add Message Button Component;AddMessageButtonComponent;AssistedServiceSessionReversedRestriction
+
+
+# CMS components velocity templates
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;asset_details_attributes_car;de.hybris.platform.publicsectorservices.template.velocity.context.PSAssetAttributesContext;
+;asset_details_attributes_generic_template;de.hybris.platform.publicsectorservices.template.velocity.context.PSAssetAttributesContext;
+
+
+

@@ -1,0 +1,413 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+
+/* webuipopover css start */
+
+.webui-popover-content {
+    display: none;
+}
+.webui-popover-rtl {
+    direction: rtl;
+    text-align: right;
+}
+.webui-popover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: none;
+    margin-left:-6%;
+    text-align: left;
+    white-space: normal;
+    background-color: #fff;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+.webui-popover.top,
+.webui-popover.top-left,
+.webui-popover.top-right {
+      margin-top: 50px;
+}
+.webui-popover.right,
+.webui-popover.right-top,
+.webui-popover.right-bottom {
+    margin-left: 10px;
+}
+.webui-popover.bottom,
+.webui-popover.bottom-left,
+.webui-popover.bottom-right {
+    margin-top: 10px;
+}
+.webui-popover.left,
+.webui-popover.left-top,
+.webui-popover.left-bottom {
+    margin-left: -10px;
+}
+.webui-popover.pop {
+    transform: scale(0.8);
+    transition: transform .15s cubic-bezier(0.3, 0, 0, 1.5);
+    opacity: 0;
+}
+.webui-popover.pop-out {
+    transition: .15s linear;
+    opacity: 0;
+}
+.webui-popover.fade,
+.webui-popover.fade-out {
+    transition: opacity .15s linear;
+    opacity: 0;
+}
+.webui-popover.out {
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.webui-popover.in {
+    transform: none;
+    opacity: 1;
+}
+.webui-popover .webui-popover-content {
+    overflow: auto;
+    display: block;
+}
+.webui-popover .webui-popover-content>div:first-child {
+    width: 100%;
+}
+.webui-popover-title {
+    padding: 8px 14px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    background-color: #fff;
+    border-bottom: 1px solid #f2f2f2;
+    border-radius: 5px 5px 0 0;
+}
+.webui-popover-content {
+    overflow: auto;
+    display: none;
+}
+.webui-popover-inverse {
+    background-color: #333;
+    color: #eee;
+}
+.webui-popover-inverse .webui-popover-title {
+    background: #333;
+    border-bottom: 1px solid #3b3b3b;
+    color: #eee;
+}
+.webui-no-padding .webui-popover-content {
+    padding: 0;
+}
+.webui-no-padding .list-group-item {
+    border-right: none;
+    border-left: none;
+}
+.webui-no-padding .list-group-item:first-child {
+    border-top: 0;
+}
+.webui-no-padding .list-group-item:last-child {
+    border-bottom: 0;
+}
+
+.webui-popover i.icon-refresh:before {
+    content: "";
+}
+.webui-popover i.icon-refresh {
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin-left: -15px;
+    margin-right: -15px;
+    background: url(../img/loading.gif) no-repeat;
+}
+.webui-popover-backdrop {
+    background-color: rgba(0, 0, 0, .65);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+}
+.webui-popover .dropdown-menu {
+    display: block;
+    position: relative;
+    top: 0;
+    border: none;
+    box-shadow: none;
+    float: none;
+}
+
+/* webuipopover css end */
+
+.main-footer .copyright .pop-over-toggle{
+	bottom: 0;
+	position: fixed;
+	background-color: @color-blue-dark;
+	border-color: @color-blue-dark;
+	border-radius: 0;
+	color: @color-white;
+	border:2px solid @color-blue-dark;
+	right:0;
+	&:focus{
+		border:2px solid @brand-primary;
+	}
+}
+.popover {
+    border-radius: 0;
+    max-width: 320px;
+    top: 0;
+    width: 320px;
+	position: fixed;
+	padding:0;
+	 
+}
+.main-footer .copyright{
+	.popover-content {
+	   padding: 0;
+	 }
+	 .chat-container.popover-content {
+       display: none;
+     }
+}
+.popover.top {
+    margin-top: 60px;
+}
+.popover-title{
+	display:none;
+}
+
+.chat-message{
+	padding:10px 0;
+}
+.chat-name, .chat-email, .chat-message{
+	background-color:@color-white;
+	color:@color-black;
+	margin-bottom:10px;
+}
+.chat-name::-ms-value, .chat-email::-ms-value{
+	background-color:@color-white;
+}
+.btn-chat{
+	color: @color-white;
+	background-color: @color-black;
+	border-radius: 0;
+	margin-top: 10px;
+}
+.chat-module-container-window{
+	border: 1px solid @color-gray-medium;
+}
+.chat-module-container{
+	bottom: 0;
+	background-color: @color-white;
+	border-radius: 0;
+	color: @color-black;
+	right:0;
+	z-index: 9999;
+}
+.chat-module-content-window {
+    padding: 10px 15px;
+}
+.chat-module-content {
+    padding: 10px 30px;
+}
+.chat-module-header{
+	background-color: @color-blue-dark;
+	border-color: @color-blue-dark;
+	border-radius: 0;
+	text-align: center;
+	height: 40px;
+	font-weight: bold;
+	line-height: 35px;
+	color:@color-white;
+		.close {
+		    float: none;
+		    font-size: 18px;
+		    font-weight: 300;
+		    line-height: 1;
+		    color: @color-white;
+		   	text-shadow: 0 0 0;
+		    opacity: 1;
+		    padding: 0 0 0 4%;
+		    top: 2%;
+		    z-index: 9999;
+		    position: absolute;
+		}
+		.js-newWindow{
+			color:@color-white;
+			padding: 0 0 0 18%;
+			background-color:@color-blue-dark;
+			border:none;
+		}
+}	
+
+.webui-popover{
+	.chat-module-header .chat-glyphicon-open{
+			margin-left: 0;
+		}
+}
+
+.chat-module-header .chat-glyphicon-open{
+			margin-left: -37px;
+		}
+
+.close:focus, .close:hover, .js-newWindow:focus, .js-newWindow:hover {
+    color: @color-white;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.chat-glyphicon-close:before, .chat-glyphicon-open:before{
+	font-family: 'Glyphicons Halflings',sans-serif;
+	content:"\e111";
+	padding: 0 20px 0 0;
+}
+.chat-glyphicon-close:after{
+	font-family: 'Glyphicons Halflings', sans-serif;
+	content:"\e113";
+	padding: 0 0 0 20px;
+}
+.chat-glyphicon:after {
+    font-family: 'Glyphicons Halflings', sans-serif;
+    content: "\e114";
+    padding: 0 0 0 10px;
+}
+
+.mobile-chat{
+	display: none;
+}
+.no-space{
+	padding: 0 !important;
+}
+.btn-chat:hover, .btn-chat:focus{
+	color: @color-white;
+}
+.btn-chat:focus{
+	color: @color-white;
+	border-color: @color-blue;
+	border-width: 3px;
+}
+.popover > .arrow{
+	display: none;
+}
+
+.form-group {
+	.chat-textarea {
+		min-height: 140px;
+	}
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px 
+@media (max-width: @screen-xs-max) {
+
+	.main-footer .copyright{
+	 .pop-over-toggle{
+		display: none;
+	  }
+	  .mobile-chat{
+		display: inline-block;
+		bottom: 0;
+		position: fixed;
+		background-color: @color-blue-dark;
+		border-color: @color-blue-dark;
+		border-radius: 0;
+		color: @color-white;
+		right: 0;
+		width: 95px;
+	}
+	.mobile-chat:before{
+		font-family: 'Glyphicons Halflings', sans-serif;
+		content:"\e111";
+		padding: 0 10px 0 0;
+	}
+	.chat-module-container{
+		display: none;
+	}
+  }
+	
+}
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          TABLET STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 640px - 1023px 
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	.chat-module-container{
+		width: 100%;
+	}
+	.chat-module-content {
+      padding: 10px 20px;
+    }
+    .chat-module-header{
+    	font-size: 14px;
+    }
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          DESKTOP STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 1024px - 1400px 
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+	.chat-module-container{
+		width: 100%;
+	}
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          DESKTOP  WIDE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// beyond 1400px
+@media (min-width: @screen-lg-min) {
+	.chat-module-container{
+		width: 100%;
+	}
+}

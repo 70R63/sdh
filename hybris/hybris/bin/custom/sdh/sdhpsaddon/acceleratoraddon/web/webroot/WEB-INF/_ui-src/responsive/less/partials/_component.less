@@ -1,0 +1,831 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+
+/* Modal Dialog*/
+.modal-dialog, #cboxContent {
+	.modal-header, #cboxTitle {
+		box-sizing: border-box;
+		background-color: @brand-primary;
+		padding: 16px 0 3px 18px;
+		height: 60px;
+		font-size: 21px;
+		font-weight: bold;
+		.headline{
+		  font-size: 21px;
+		}
+    }
+  #cboxLoadedContent {
+      margin-top: 85px;
+      font-size: 16px;
+		  .draftNo{
+		    display: inline-block;
+		    font-weight: bold;
+		    margin: 15px 0;
+		    font-size: 29px;
+		  }
+     }
+      .cboxClose {
+        color: #000;
+        &:focus{ 
+        	border: 0;
+        }
+    }
+}
+.modal-dialog .colorBox-cboxClose, #cboxContent .colorBox-cboxClose {
+   &:focus{
+	border: 1px dotted;
+   }
+}
+.modal-footer{
+  border-top:none;
+}
+.account-sections-backButton{
+   .addressBackBtn:focus {
+    border: 1px @color-black dotted;
+    }
+    .add-address .label h1.pull-left {
+      bottom: 13px;
+    }
+  .back-link {
+    .addressBackBtn{
+     padding: 10px 3px 0 0;
+  }
+ }
+// 0 - 639px 
+@media (max-width: @screen-xs-max) {
+     .label h1{
+        margin: 30px 9px;
+      }
+     .label h1.pull-left {
+      bottom: -6px;
+      font-size: 24px;
+    }
+}
+}
+.account-sections-backIcon{
+ .label h1.pull-left {
+      bottom: 13px;
+    }
+  .back-link {
+    .addressBackBtn{
+     padding: 10px 3px 0 0;
+    }
+ }
+ // 0 - 639px 
+@media (max-width: @screen-xs-max) {
+     .label h1{
+        margin: 30px 9px;
+      }
+     .label h1.pull-left {
+      bottom: -6px;
+      font-size: 24px;
+    }
+}
+}
+.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a {
+	 font-weight: 500;
+	 font-size: 15px;
+     text-transform: uppercase;
+}	
+
+ .account-section .account-section-content form {
+    padding-left: 10px;
+    padding-right: 10px;
+ }
+   
+.draftEdit{
+    background-color: transparent;
+    border: none;
+    padding: 3px 6px 6px 6px;
+}
+
+.downloadLink{
+  font-weight: 500;
+   .download_img{
+     margin: 0.5em 0 0 0;
+   }
+   & a:focus {
+       outline: 3px solid @brand-primary;
+       background-color: @brand-primary;
+       color: @color-black;
+   }
+}
+
+.account-section {
+    .add-address .account-section-header{
+        padding: 20px 0 79px 0;
+       	.account-section-header-add {
+		 	margin: 8px 0 8px -11px;
+	    }
+   	}
+	.account-section-header{
+		margin: 20px 10px 0 15px;
+		padding: 0;
+	 	h1, h2{
+			font-size: 24px;
+			font-weight: 700;
+			margin: 0;
+		}
+		.account-section-header-add {
+			margin-top: -20px;
+		}
+	}
+	.label h1 {
+		 font-size: 24px;
+         font-weight: 700;
+         bottom: 24px;
+         position: absolute;
+         margin-left: 45px;
+	}
+	.account-section-subheader, .expired-documents{
+		h2{
+		 font-size: 18px;
+		 margin: 20px 0 0 10px;
+		 font-weight: 500;
+		}
+		h3{
+		  font-size: 18px;
+		}
+	}
+	.account-section-subheader-add {
+		margin: 10px 10px 0 19px;
+	}
+
+	.account-button {
+		padding: 0 0 15px 0;
+	}
+
+	.account-list {
+	  .account-cards-actions.payment-details {
+         float: right;
+         top: 15px;
+         right: 0;
+         position: absolute;
+       }
+       .account-cards-actions.address-details {
+         float: right;
+         right: 0;
+         top: 35px;
+         position: absolute;
+       }
+		.account-cards {
+			border: 0;
+			display: inline-block;
+			width: 100%;
+			font-size: 14px;
+			padding: 0;
+			.card {
+				border: 0;
+				background: @card-bg-color;
+				min-height: 300px;
+				padding: 15px 20px 0 20px;
+			 .action-links .glyphicon-remove{
+			    padding-top: 27px;
+			  }
+			   .glyphicon {
+                 font-size: 2em;
+              }
+			}
+		}
+		.account-cards.card-select {
+			border: 0;
+		}
+		ul {
+		   width: 100%;
+			&, li{
+				line-height: 1.7em;
+		    }
+		}
+	}
+	hr {
+		background-color: #d3d3d3;
+		height: 1px;
+		margin-top: 10px;
+	}
+	
+   .account-section-content form.set-primary-button {
+       padding-left: 0;
+   }
+      
+}
+
+.well {
+	border-bottom: 0;
+	padding: 15px 15px;
+	background-color: transparent;
+	margin-bottom: -18px;
+}
+
+.account-section {
+	.account-overview-table {
+		margin-left: 10px;
+		margin-right: 10px;
+		border: 1px solid @table-border-color;
+	}
+}
+@media (min-width: 640px){
+	.account-section-content .accountActions .accountButtons:last-child {
+    	padding-left: @grid-gutter-width/2;
+ 	}
+ 	.account-section-content .accountActions .accountButtons:first-child {
+   		 padding-right: @grid-gutter-width/2;
+ 	}
+ }
+ 
+// Place Holder Text Color //
+.js-store-finder-search-input::-webkit-input-placeholder, .js-site-search-input::-webkit-input-placeholder{ /* WebKit, Blink, Edge */
+    color: @color-black ;
+}
+.js-store-finder-search-input:-moz-placeholder, .js-site-search-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: @color-black ;
+}
+.js-store-finder-search-input::-moz-placeholder, .js-site-search-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: @color-black ;
+}
+.js-store-finder-search-input:-ms-input-placeholder, .js-site-search-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: @color-black ;
+}
+
+// Review Section Page //
+.card-section {
+	a {
+		color: @color-black;
+	}
+	.checkout-confirmation{
+	    background: none;
+	    .confirmation-content a{
+	      color: @link-color;
+	      text-decoration: underline;
+	    }
+	}
+	.card-list {
+		margin: 0 -18px 15px -5px;
+	}
+	.card-section-h1, h1,h2 {
+		margin: 10px 0 0 0;
+		font-size: 24px;
+		font-weight: 500;
+	}
+	.card-section-h2  {
+		font-size: 20px;
+		margin: 20px 15px 10px 15px ;
+		border-bottom: 1px solid #d3d3d3;
+		padding-bottom: 15px;
+		font-weight: 500;
+	  h2,h3{
+		 font-size: 20px;
+		 font-weight: 500;
+		 display: inline;
+		}
+	}
+
+	.card-section-h3 {
+		color: @link-color;
+		font-size: 16px;
+		margin: 20px 15px 0 15px ;
+		font-weight: 500;
+	}
+
+	.card-section-h4 {
+		font-size: 16px;
+		margin: 20px 15px 0 3px ;
+		font-weight: 500;
+	}
+	.product-department.card-section-h4{
+	   margin: 20px 15px 0 5px ;
+	}
+
+	.card-section-content {
+		margin: 5px 15px 0 15px ;
+		.totals {
+		    font-weight: 700;
+		    text-transform: uppercase;
+		    margin-top: 15px;
+		    padding: 10px 0;
+		    border-top: 1px solid #cccccc;
+		}
+		.extra-info {
+			font-size: 14px;
+		}
+		.card-pull-left{
+		    margin: 0 0 0 -32px;
+		}
+	}
+
+	.card-section-footer {
+		position: absolute;
+		bottom: 20px;
+		padding-right: 25px;
+	}
+}
+
+.plp-product-lists.card-section{
+  margin-top: -19px;
+}
+
+// END Review Section //
+.card-50 { .card(@card-bg-color, 50px); }
+.card-150 { .card(@card-bg-color, 150px); }
+.card-200 { .card(@card-bg-color, 210px); }
+.card-250 { .card(@card-bg-color, 250px); }
+.card-300 { .card(@card-bg-color, 300px); }
+.card-350 { .card(@card-bg-color, 350px); }
+.card-375 { .card(@card-bg-color, 375px); }
+.card-400 { .card(@card-bg-color, 400px); }
+.card-450 { .card(@card-bg-color, 450px); }
+.card-500 { .card(@card-bg-color, 500px); }
+.card-600 { .card(@card-bg-color, 600px); }
+.card-700 { .card(@card-bg-color, 700px); }
+.card-800 { .card(@card-bg-color, 800px); }
+
+.card-transparent { .card(transparent);}
+.card { .card(@card-bg-color, auto);}
+
+
+.social-icons {
+	margin-left: -30px;
+	ul {
+	   	&, li {
+	     	width: auto;
+	     	list-style: none !important;
+	   	}
+	}
+
+	a {
+    	font-size: 16px;
+    	&:hover, &:focus {
+    		outline: 3px solid @color-black;
+    	}
+    }
+}
+
+.icon {
+	height: 27px;
+	margin: 0.5em 0 0 0.8em;
+	width: 28px;
+	float: left;
+}
+
+.follow-us-LinkedIn { 
+	.custom-icon('@{url-img}/rr_in.png', 27px, 27px); 
+	&:hover, &:focus {
+		.custom-icon('@{url-img}/linkedin.gif', 27px, 27px);
+	}
+}
+.follow-us-Facebook { 
+	.custom-icon('@{url-img}/rr_facebook.png', 27px, 27px);
+	&:hover, &:focus {
+		.custom-icon('@{url-img}/facebook.gif', 27px, 27px);
+	}
+}
+.follow-us-Twitter { 
+	.custom-icon('@{url-img}/rr_twitter.png', 27px, 27px);
+	&:hover, &:focus {
+		.custom-icon('@{url-img}/twitter.gif', 27px, 27px);
+	}
+}
+.follow-us-Googleplus { 
+	.custom-icon('@{url-img}/rr_gplus.png', 27px, 27px);
+	&:hover, &:focus {
+		.custom-icon('@{url-img}/gplus.gif', 27px, 27px);
+	}
+}
+
+.download_img { .custom-icon('@{url-img}/pdf_acc.png', 21px, 21px); }
+.question_img { .custom-icon('@{url-img}/question.png', 29px, 29px); }
+.chat_img { .custom-icon('@{url-img}/chat_icon.png', 21px, 21px); }
+.arrow_up_img { .custom-icon('@{url-img}/arrow_up.png', 21px, 21px); }
+
+.affix {
+  	top: 0;
+  	padding: 0 20px 0 12px;
+  	margin: 0 10px 0 10px;
+}
+
+.checkout-affix {
+	right: 0;
+}
+
+.review-section{
+   	margin-left: -42px;
+   	margin-right: -10px;
+ 	.review-section-content{
+    	padding: 13px;
+  	}
+}
+
+.login-section .headline, .register-section .headline, .checkout-login .headline{
+    padding: 7px 0;
+	h2{
+	    color: #104d83;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 35px;
+	    padding: 0;
+	   }
+}
+
+.card-section-content .strong{
+   font-size: 20px;
+   font-weight: 500;
+   padding-top: 17px;
+}
+#storeFinder{
+   h1{
+    font-size: 28px;
+    font-weight: 500;
+   }
+    h2{
+    font-size: 20px;
+    line-height: 23px;
+    margin: 0;
+    font-weight: 500;
+    }
+}
+
+.content-space, .account-content-space, .global-content-space{
+   padding-left: 20px;
+   padding-right: 20px;
+}
+
+
+
+// Jquery Accordion start //
+
+.ui-widget, .ui-widget button {
+	font-family: 'Alegreya Sans', 'Helvetica', 'Arial', sans-serif;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background-color: transparent;
+    text-align: left;
+    color: @color-black;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+     color: @color-black;
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: @color-black;
+}
+
+.panel-heading .accordion-toggle.ui-icon-plus:after {
+    /* symbol for "collapsed" panels */
+    content: "\002b"; 
+}
+
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+    position: relative;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, 
+html .ui-button.ui-state-disabled:active {
+    border: none;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+   border: none;
+}
+
+.ui-widget-content {
+   border: none;
+   color: @color-black;
+   a {
+    color: @color-blue-dark;
+   }
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 0;
+    overflow: hidden;
+}
+
+.ui-widget{
+    button.glyphicon{
+     font-family: "Glyphicons Halflings", sans-serif;
+    }
+    button.gi-2x {
+       font-size: 2em;
+    }
+}
+// Jquery Accordion end //
+
+
+// Bootstrap Accordion //
+
+.panel-heading .accordion-toggle:after {
+    // symbol for "opening" panels 
+    font-family: 'Glyphicons Halflings', sans-serif;  // essential for enabling glyphicon 
+    content: '\2212';    // adjust as needed, taken from bootstrap.css 
+    float: right;        // adjust as needed 
+    color: @color-black;         // adjust as needed 
+    padding: 15px;
+    margin-top: -15px;
+    background-color: @color-gray-light;
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    // symbol for "collapsed" panels 
+    content: '\002b';    // adjust as needed, taken from bootstrap.css 
+}
+
+.panel-default > .panel-heading {
+	background-color: transparent;
+}
+
+.panel-group {
+	margin-top: 15px;
+}
+
+.panel-default {
+	border: 0;
+}
+
+.panel-title {
+	margin-bottom: 0;
+    margin-top: -19px;
+	font-size: 1.5em;
+	> a{
+      color: inherit;
+      display: block;
+      padding: 15px;
+      text-decoration: none;
+  }
+}
+
+.panel-body {
+	padding:15px 0;
+}
+
+.panel-group .panel-heading + .panel-collapse > .panel-body {
+	border: 0;
+}
+
+.panel {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.account-section .account-list {
+  .account-cards .card {
+    .action-links {
+     box-sizing: border-box;
+     margin: 5px 15px;
+     padding: 3px 6px 6px 4px;
+     width: 35px;
+     height: 35px;
+    }
+  }
+}
+
+.account-cards .card {
+   & a.action-links:focus, & a.action-links:hover  {
+      color: @color-black;
+    }
+ }
+
+.panel-group .panel {
+    margin-bottom: -33px;
+}
+
+.panel-heading{
+    & a:focus{
+       outline: 3px solid @brand-primary;
+       background-color: @brand-primary;
+       color: @color-black;
+     }
+     & a:focus::after {
+      background-color: @brand-primary;
+     }
+}
+
+.breadcrumb-section .breadcrumb{
+      a{
+        padding: 2px;
+      }
+     & a:focus{
+       outline: 3px solid @brand-primary;
+       background-color: @brand-primary;
+       color: @color-black;
+     }
+ }
+ 
+ .input-group-btn:last-child > .btn{
+	height: 48px;
+}
+ 
+ 
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px 
+@media (max-width: @screen-xs-max) {
+	.well {
+		margin: 0;
+		padding: 8px 15px;
+	}
+	.account-section {
+		.account-overview-table {
+			margin-left:15px;
+			margin-right:10px;
+			margin-bottom: 20px;
+			border: 1px solid @table-border-color;
+		}
+		.account-list {
+			.account-cards {
+				border: 0;
+				display: inline-block;
+				width: 100%;
+				.card {
+					border: 0;
+					background: @card-bg-color;
+					height: auto;
+					min-height: 100px;
+				}
+			}
+		}
+	.label h1{
+         font-size: 21px;
+         position: absolute;
+         line-height: 6px;
+         bottom: 4px;
+	}
+		.account-section-header-add {
+			padding: 10px;
+		}
+	}
+	
+  .modal-dialog, #cboxContent {
+	.modal-header, #cboxTitle {
+		.headline{
+		  font-size: 18px;
+		}
+      }
+    }
+	.account-section {
+	   .add-address .account-section-header {
+         .account-section-header-add {
+		    margin-top: 0;
+	     } 
+      }
+	  .account-section-subheader-add {
+		   margin: 10px 10px 0 7px;
+	  }
+	.account-section-header {
+		.account-section-header-add {
+			margin-top: -8px;
+		}
+	}
+}
+
+.retrieve-draft-request.card-section {
+    margin-top: 0;
+}
+
+.login-section .headline, .register-section .headline, .checkout-login .headline{
+	 h2{
+	     margin-left: 9px;
+	   }
+}
+
+.checkout-order-summary{
+  border:none;
+}
+
+#cboxLoadedContent {
+ .addressEntry ul {
+     margin-top: 0; 
+  }
+ }
+ 
+.panel-title {
+	font-size: 1.0em;
+}
+
+.account-sections-backButton{
+    .add-address .label h1.pull-left {
+      bottom: -5px;
+    }
+    .label h1.pull-left {
+      bottom: 5px;
+    }
+    .order-detail-items .label h1.pull-left {
+     bottom: -20px;
+   }
+ }
+
+.order-detail-items .label h1.pull-left {
+     bottom: -20px;
+ }
+ 
+.account-section .ui-widget .account-section-content.content-empty {
+       font-size: 15px;
+ }
+ 
+#storeFinder{
+	 h2{
+	   margin-top: 23px;
+	   }
+   }
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          TABLET STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 640px - 1023px 
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	
+	.retrieve-draft-request.card-section {
+       margin-top: 0;
+   }
+   
+   .retrieve-bill-request.card-section {
+       margin-top: 0;
+   }
+   
+   .card-section{
+      .card-section-content {
+		margin: 5px 15px 0 15px ;
+	  }	
+	}
+	
+	.review-section{
+      margin-right: -8px;
+      margin-left: -42px;
+    }
+    .content-space{
+        min-height: 1280px;
+    }
+    
+  .account-section {
+	  .account-section-subheader-add {
+		   margin: 10px 10px 0 8px;
+	    }
+	    .label h1{
+          font-size: 21px;
+	   }
+   }
+
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          DESKTOP STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 1024px - 1400px 
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .content-space{
+        min-height: 1280px;
+    }
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          DESKTOP  WIDE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// beyond 1400px
+@media (min-width: @screen-lg-min) {
+    .content-space{
+        min-height: 1280px;
+    }
+}									

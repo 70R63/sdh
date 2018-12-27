@@ -1,0 +1,850 @@
+/* Original CSS path: /forms/publicsector/_root/style.css */
+
+.orbeon .orbeon-portlet-div .xforms-disable-hint-as-tooltip .xforms-disable-alert-as-tooltip {width: 510px}
+
+.orbeon .navbar-inverse .navbar-inner .fr-language-choice{
+  display: none;
+}
+
+.orbeon .navbar-inverse .navbar-inner .badge, .orbeon .navbar-inverse .navbar-inner .fr-validity-icon{
+  display: none;
+}
+
+.orbeon span.fr-save-final-button button.btn{
+  display:none;
+}
+
+.orbeon span.fr-save-draft-button button.btn{
+  display:none;
+}
+
+.orbeon .fr-section-title{
+    display:none;
+}
+
+.orbeon span.fr-save-draft-button button.btn{
+  display:none;
+}
+
+.orbeon .alert {
+    margin-bottom: 10px;
+    display: none;
+}
+
+/* label and inputs*/
+
+.orbeon label{
+    font-size: 14px;
+    text-transform: none;
+}
+
+.orbeon .xforms-label {
+    display: block;
+    text-align: left;
+    width:auto;
+    box-sizing:border-box;
+}
+
+.orbeon .xforms-required .xforms-label {
+  display: inline-block;
+}
+
+.orbeon .xforms-input input.xforms-type-date {
+  display: block;
+}
+
+.orbeon .fr-mode-new .xforms-required.xforms-empty .xforms-label,
+.orbeon .fr-mode-edit .xforms-required.xforms-empty .xforms-label,
+.orbeon .fr-mode-test .xforms-required.xforms-empty .xforms-label,
+.orbeon .xforms-dialog .xforms-required.xforms-empty .xforms-label,
+.orbeon .fr-mode-new .fb-required-true .xforms-label,
+.orbeon .fr-mode-edit .fb-required-true .xforms-label,
+.orbeon .fr-mode-test .fb-required-true .xforms-label,
+.orbeon .xforms-dialog .fb-required-true .xforms-label{
+    background-position: right center;
+}
+
+.orbeon .fr-mode-new .xforms-required .xforms-label,
+.orbeon .fr-mode-edit .xforms-required .xforms-label,
+.orbeon .fr-mode-test .xforms-required .xforms-label,
+.orbeon .xforms-dialog .xforms-required .xforms-label{
+    background-position: right center;
+}
+
+.orbeon .fr-mode-new .xforms-required .xforms-label,
+.orbeon .fr-mode-edit .xforms-required .xforms-label,
+.orbeon .fr-mode-test .xforms-required .xforms-label,
+.orbeon .xforms-dialog .xforms-required .xforms-label,
+.orbeon .fr-mode-new .fb-required-true .xforms-label,
+.orbeon .fr-mode-edit .fb-required-true .xforms-label,
+.orbeon .fr-mode-test .fb-required-true .xforms-label,
+.orbeon .xforms-dialog .fb-required-true .xforms-label{
+    padding-left: 0;
+    padding-right: 16px;
+}
+
+
+.xforms-loading-loading {
+    display: none;
+}
+
+DIV.fr-form-description
+{
+    display: none;
+}
+
+DIV.xbl-fr-error-summary
+{
+    display: none;
+}
+
+[id*='calendar'] table th{
+  background: transparent;
+}
+
+.orbeon .yui-calendar .calyearleft {
+    overflow: hidden;
+    position: absolute;
+    text-indent: -10000em;
+    z-index: 1;
+    background: transparent url(images/calendar-left-double.png) no-repeat scroll;
+    bottom: 0;
+    cursor: pointer;
+    height: 15px;
+    left: -10px;
+    margin-left: 0.4em;
+    top: -7px;
+    width: 25px;
+}
+
+.orbeon .yui-calendar .calyearright {
+    overflow: hidden;
+    position: absolute;
+    text-indent: -10000em;
+    z-index: 1;
+    background: transparent url(images/calendar-right-double.png) no-repeat scroll;
+    bottom: 0;
+    cursor: pointer;
+    height: 15px;
+    right: -10px;
+    margin-right: 0.4em;
+    top: -7px;
+    width: 25px;
+}
+
+.yui-skin-sam .yui-calendar .calnavleft, .yui-skin-sam .yui-calendar .calnavright {
+  top: 7px;
+}
+
+.yui-skin-sam .yui-calendar .calweekdayrow th {
+  vertical-align: middle;
+  text-transform: none;
+}
+
+.yui-skin-sam .yui-calendar a.calnav {
+  text-transform: none;
+}
+
+.orbeon .fr-grid tbody tr td {
+  padding: 0px 10px 10px 0px;
+}
+
+.orbeon .xbl-fr-section .fr-section-title .fr-section-label.fr-section-open, .orbeon .xbl-fr-section .fr-section-title .fr-section-label.fr-section-closed {
+  background-image:none;
+}
+
+
+/*Multi step checkout CSS start*/
+
+.orbeon .fr-grid {
+  font-family: "Alegreya Sans",Helvetica,Arial,sans-serif;
+}
+
+.fr-grid  .xforms-control label.xforms-label {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-transform: none;
+}
+
+.fr-grid .xforms-required label.xforms-label, .fr-grid .xforms-control.xforms-input label.xforms-label, .label-required{
+    color: #000000;
+    float: left;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    width: 100%;
+}
+
+.fr-grid input[type="text"]{
+   height: 50px;
+   width: 580px;
+   border-radius: 0px;
+}   
+
+.orbeon .xforms-readonly span.xforms-field{
+   height: 50px;
+   border-radius: 0px;
+   padding: 14px 0 0 8px;
+}
+.orbeon .fr-grid .xforms-textarea textarea {
+   border-radius: 0px;
+   height: 85px;
+}
+
+.fr-grid select{
+  -webkit-appearance: none;
+  color: inherit;
+  font: inherit;
+}
+ 
+.fr-grid select option{
+   font-size: 0.875em;
+   line-height: 18px;
+   padding: 6px 13px;
+   width: 100%;
+}
+
+.orbeon label.checkbox input[type=checkbox], .orbeon span.checkbox input[type=checkbox]{
+  visibility: hidden;
+  left:-500px;
+}
+
+.orbeon label.checkbox, .orbeon span.checkbox  {
+  padding-left: 40px;
+  margin: 12px 0;
+}
+
+.orbeon label.checkbox, .orbeon span.checkbox  {
+   color: #000000;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 20px;
+   text-transform: none;
+}
+
+.orbeon label.checkbox:before, .orbeon span.checkbox:before {
+    border: 1px solid #cccccc;
+    content: "";
+    cursor: pointer;
+    height: 25px;
+    left: 0;
+    position: absolute;
+    top: -2px;
+    width: 25px;
+} 
+
+.orbeon .xforms-selected label.checkbox::before, .orbeon .xforms-selected span.checkbox::before{
+    background:url(images/checkbox_tick.png) no-repeat scroll 0 0;
+    border: 1px solid #cccccc;
+}
+  
+.orbeon h2, .orbeon h3{
+  background-color:#fff;
+  background-image:none;
+}  
+
+.fr-section-open{
+  display:none;
+}
+
+.orbeon-portlet-body .navbar, .orbeon .navbar{
+  display:none;
+}
+
+.fr-border, .orbeon .fr-body {
+    border: none;
+} 
+
+.xforms-required .xforms-label{
+  width:auto; 
+}
+
+.fr-section-title{
+  display:none;
+}
+
+.orbeon .fr-grid {
+    margin-bottom: 0px;
+    font-size: 1.02339vw;
+}
+
+.orbeon label.radio input[type=radio], .orbeon span.radio input[type=radio]{
+  visibility: hidden;
+  left:-500px;
+  min-height: 0;
+  position: absolute;
+}
+
+.orbeon label.radio, .orbeon span.radio{
+  padding-left: 2px;
+  margin: 7px 0;
+}
+
+.orbeon .xforms-selected label.radio::before, .orbeon .xforms-selected span.radio::before{
+   background: #cccccc none repeat scroll 0 0;
+    border: 1px solid #cccccc;
+}
+
+.orbeon label.radio, .orbeon span.radio {
+   color: #000000;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 20px;
+   text-transform: none;
+}
+
+.orbeon label.radio:before, .orbeon span.radio:before {
+    border: 1px solid #cccccc;
+    border-radius: 100%;
+    content: "";
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    margin-right: 10px;
+    vertical-align: bottom;
+    width: 25px;
+} 
+
+.xbl-fr-dropdown-date .fr-component-group select.xforms-select1-appearance-minimal, 
+.xbl-fr-dropdown-date .fr-component-group span.xforms-select1-appearance-minimal select {
+    width: 32%;  
+}
+
+.orbeon .span12 {
+    margin-left: 7px;
+}
+
+.fr-grid select{
+   -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #ffffff url(images/arrow_down_gray.png) no-repeat scroll 95% center;
+    height: 50px;
+    padding-left: 10px;
+    width: 580px;
+    border-radius:0px;
+}
+
+
+.fr-grid label.checkbox input[type=checkbox], .fr-grid span.checkbox input[type=checkbox]{
+  visibility: hidden;
+  left:-500px;
+}
+
+.fr-grid label.checkbox, .fr-grid span.checkbox{
+  padding-left: 40px;
+  margin: 12px 0;
+}
+
+.fr-grid label.checkbox, .fr-grid span.checkbox{
+   color: #000000;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 20px;
+   text-transform: none;
+}
+
+.fr-grid label.checkbox:before, fr-grid span.checkbox:before {
+    border: 1px solid #cccccc;
+    content: "";
+    cursor: pointer;
+    height: 25px;
+    left: 0;
+    display: inline-block;
+    width: 25px;
+} 
+ 
+ .fr-grid span.xforms-selected label.checkbox::before,  .fr-grid span.xforms-selected span.checkbox::before{
+    background:url(images/checkbox_tick.png) no-repeat scroll 0 0;
+    border: 1px solid #cccccc;
+}
+
+/*Multi step checkout CSS end*/
+
+
+/*Review page yForm CSS start*/
+
+.xforms-readonly tr td{
+    padding:0px; 
+}
+
+.xforms-readonly tr td .fr-grid-content > span {
+   padding:0px; 
+}
+
+.orbeon .fr-grid .xforms-textarea.xforms-static pre, .orbeon .fr-grid .xforms-mediatype-text-html.xforms-static{
+  clear:both;
+}
+ 
+.fr-mode-view .fr-buttons{
+  display:none;
+} 
+
+.fr-mode-view .navbar-inverse{
+  background-color:#fff ; 
+  border-color: #fff ; 
+  margin: -9px 0 11px -9px;
+}
+
+.fr-mode-view .navbar-inverse .navbar-inner{
+   background-color: #fff; 
+    background-image: none;
+    border: none;
+    box-shadow:none;
+    padding-left: 0px ; 
+}
+
+.fr-mode-view .navbar-inverse .navbar-inner img{
+  display:none;
+}
+
+.fr-mode-view .navbar-inverse .navbar-inner .container h1 {
+    color: #424242;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.xforms-readonly {
+  border:none;
+}
+
+.xforms-readonly .xforms-switch .fr-section-content{
+   padding:10px 0px;
+}
+
+.xforms-readonly .xforms-switch table tr td .fr-grid-content{
+  margin-top:-5px;
+}
+
+.xforms-readonly .xbl-fr-grid{
+  margin-top:-26px;
+}
+
+ .xforms-readonly table.fr-repeat-multiple-rows{
+  width:211px;
+  padding-right: 6px;
+} 
+
+.orbeon form {
+    margin: 0px -23px 20px;
+} 
+
+.xforms-readonly table tr td:nth-child(odd){
+  width:100% ; 
+} 
+
+.xforms-readonly table tr td:nth-child(even){
+  width:0% ;
+} 
+
+.xforms-readonly table.fr-repeat-multiple-rows{
+  width:652px;
+  padding-right: 6px;
+} 
+
+.orbeon-portlet-body {
+    width: 100%;
+} 
+
+ .orbeon .container, .orbeon .span12, .orbeon FORM {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*Review page yForm CSS end*/
+
+
+.orbeon .xforms-upload-info {
+  display: inline;
+}
+
+.orbeon .xforms-upload > label{
+  pointer-events: none;
+}
+
+.orbeon form {
+  margin: 10px;
+}
+.orbeon .fr-grid {
+  font-size: 14px;
+}
+.orbeon .fr-grid input[type="text"] {
+  height: 48px;
+}
+.orbeon .fr-grid .xforms-textarea textarea {
+  height: 200px;
+}
+.orbeon .fr-grid .xforms-input input.xforms-type-date {
+  display: inline-block;
+}
+.orbeon .fr-grid select {
+  height: 48px;
+}
+
+.orbeon .fr-grid label.checkbox, .orbeon .fr-grid span.checkbox {
+  font-size: 14px;
+}
+
+.orbeon .fr-grid .xforms-upload .xforms-upload-size {
+  float: left;
+  padding-left: 0px;
+}
+.orbeon .fr-grid .xforms-upload .xforms-upload-size:not(:empty):before {
+  content: "";
+}
+.orbeon .fr-grid .xforms-upload .xforms-upload-size:not(:empty):after {
+  content: "|";
+  padding-right:15px;
+}
+.orbeon .fr-grid .xforms-upload .xforms-upload-info {
+  background: none;
+  border-bottom: 1px solid #cccccc;
+  float: left;
+  padding: 15px 5px 15px 5px;
+  width: 97%;
+}
+
+.orbeon .fr-grid .xforms-upload .xforms-upload-remove {
+  float: right;
+}
+.orbeon .xforms-hint-appearance-inline .xforms-hint, .orbeon .xforms-hint-appearance-full .xforms-hint  {
+  padding-top: 15px;
+}
+
+.orbeon .input-append .add-on {
+  height: 48px;
+  width: 48px;
+  background-color: #fdda19;
+}
+
+.orbeon .input-prepend .add-on {
+  height: 48px;
+  width: 48px;
+  background-color: #fdda19;
+}
+
+.xbl-fr-autocomplete .fr-autocomplete-show-suggestions-button button {
+  height:48px;
+  width:48px;
+  background-color: #fdda19;
+}
+
+.orbeon .btn {
+    background: #fdda19;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 10px 15px;
+    font-size: 14px;
+    line-height: 1.375;
+    border:3px solid #fdda19;
+    text-shadow:none;
+    box-shadow:none;
+}
+
+.orbeon .btn:hover, .orbeon .btn:active, .orbeon .btn:focus  {
+  background-color: #fdda19;
+}
+
+.step-body .checkout-indent .xforms-selected label.radio::before, .step-body .checkout-indent .xforms-selected span.radio::before {
+  background: #cccccc none repeat scroll 0 0;
+  border: #cccccc 1px solid;
+}
+
+.orbeon .xforms-required label.xforms-label:after, .orbeon .xforms-required span.xforms-label:not(:empty):after {
+  line-height: 12px;
+  vertical-align: top;
+  margin:1px;
+  font-family:Glyphicons Halflings;
+  content:"\2a";
+  color:#ee0000;
+  font-size:10px;
+ }
+ 
+.orbeon .xforms-required label.xforms-label {
+  font-size:10px;
+ }
+
+.orbeon .xforms-required label.xforms-label:empty:after{
+  content:"";
+}
+
+.orbeon .xforms-required label.xforms-label:empty{
+  margin-top:-20px;
+}
+
+.orbeon .fr-mode-new .xforms-required.xforms-empty .xforms-label,
+.orbeon .fr-mode-edit .xforms-required.xforms-empty .xforms-label,
+.orbeon .fr-mode-test .xforms-required.xforms-empty .xforms-label,
+.orbeon .xforms-dialog .xforms-required.xforms-empty .xforms-label,
+.orbeon .fr-mode-new .fb-required-true .xforms-label,
+.orbeon .fr-mode-edit .fb-required-true .xforms-label,
+.orbeon .fr-mode-test .fb-required-true .xforms-label,
+.orbeon .xforms-dialog .fb-required-true .xforms-label {
+    background-image: none;
+}
+
+.orbeon .fr-mode-view .xforms-select-appearance-full.xforms-static .xforms-deselected,
+.orbeon .fr-mode-pdf .xforms-select-appearance-full.xforms-static .xforms-deselected,
+.orbeon .fr-mode-email .xforms-select-appearance-full.xforms-static .xforms-deselected,
+.orbeon .fr-mode-view .xforms-select1-appearance-full.xforms-static .xforms-deselected,
+.orbeon .fr-mode-pdf .xforms-select1-appearance-full.xforms-static .xforms-deselected,
+.orbeon .fr-mode-email .xforms-select1-appearance-full.xforms-static .xforms-deselected,
+.orbeon .fr-mode-view .xforms-input.xforms-type-boolean.xforms-static .xforms-deselected,
+.orbeon .fr-mode-pdf .xforms-input.xforms-type-boolean.xforms-static .xforms-deselected,
+.orbeon .fr-mode-email .xforms-input.xforms-type-boolean.xforms-static .xforms-deselected {
+    background-image: none;
+}
+
+.orbeon .fr-mode-view .xforms-select-appearance-full.xforms-static .xforms-selected,
+.orbeon .fr-mode-pdf .xforms-select-appearance-full.xforms-static .xforms-selected,
+.orbeon .fr-mode-email .xforms-select-appearance-full.xforms-static .xforms-selected,
+.orbeon .fr-mode-view .xforms-select1-appearance-full.xforms-static .xforms-selected,
+.orbeon .fr-mode-pdf .xforms-select1-appearance-full.xforms-static .xforms-selected,
+.orbeon .fr-mode-email .xforms-select1-appearance-full.xforms-static .xforms-selected,
+.orbeon .fr-mode-view .xforms-input.xforms-type-boolean.xforms-static .xforms-selected,
+.orbeon .fr-mode-pdf .xforms-input.xforms-type-boolean.xforms-static .xforms-selected,
+.orbeon .fr-mode-email .xforms-input.xforms-type-boolean.xforms-static .xforms-selected {
+   background-image: none;
+}
+
+.orbeon .fr-mode-new .xforms-required .xforms-label, .orbeon .fr-mode-edit .xforms-required .xforms-label,
+.orbeon .fr-mode-test .xforms-required .xforms-label, .orbeon .xforms-dialog .xforms-required .xforms-label{
+  background-image: none;
+}
+
+.orbeon select[multiple], .orbeon .xforms-select1-appearance-compact select, 
+.orbeon .xforms-select-appearance-compact select {
+   height:150px;
+}
+
+.xbl-fr-box-select .xforms-select-appearance-full .xforms-items {
+    height:150px;
+}
+
+ .orbeon .xforms-readonly .fr-grid{
+  margin-left:-50px;
+}
+ 
+.orbeon .xforms-label h3 b, .orbeon .xforms-label b{ 
+    color: #000;
+    font-size: 20px;
+    font-weight: 400;
+    padding-bottom: 15px;
+    padding-top: 30px;
+}  
+    
+.fr-grid .xforms-required label.xforms-label, .fr-grid .xforms-control.xforms-input label.xforms-label, .label-required {
+    font-size: 14px;
+    font-weight: 400;
+}
+    
+.orbeon .fr-grid-content select{    
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.orbeon .fr-grid input[type="file"] {
+    position: static;
+    display:inline-block;
+    width:100%;
+}
+
+.orbeon .fr-grid .fr-grid-content {
+	margin-left: 25px;
+   margin-right: 25px;
+}
+
+.orbeon .orbeon-portlet-body .fr-grid .fr-grid-content {
+	margin-left: 0px;
+   margin-right: 0px;
+}
+
+.orbeon .orbeon-portlet-body .fr-grid-content label.radio, .orbeon .orbeon-portlet-body .fr-grid-content span.radio{
+    clear:both;	
+}
+
+.orbeon .orbeon-portlet-body .fr-grid .hide-disabled-tr{
+  display:none;
+}
+
+.orbeon .orbeon-portlet-body .fr-grid .remove-ShippingAddress-Button{
+  color: #000;
+  top: 23px;
+  position: absolute;
+  right: 0px;
+}
+
+.orbeon .orbeon-portlet-body .fr-grid .address-card{
+  margin: -3px;	
+  width: 97%;
+}
+
+.orbeon .orbeon-portlet-body .xforms-readonly .fr-grid .address-card{
+  margin: 0 -27px 23px;
+}
+
+.orbeon .orbeon-portlet-body .fr-grid .card-section-content ul{
+  margin: 0 0 10px 6px;
+}
+
+/* Hpsa 6.4 css start*/
+
+.orbeon .fr-mode-new .xforms-required .xforms-label:before, 
+.orbeon .fr-mode-edit .xforms-required .xforms-label:before,
+.orbeon .fr-mode-test .xforms-required .xforms-label:before,
+.orbeon .xforms-dialog .xforms-required .xforms-label:before {
+   content: '';
+}
+
+.orbeon .xforms-select1-appearance-full label.radio > span,
+.orbeon .xforms-select-appearance-full label.radio > span, 
+.orbeon .xforms-select1-appearance-full label.checkbox > span, 
+.orbeon .xforms-select-appearance-full label.checkbox > span,
+.orbeon .xforms-select1-appearance-full span.radio > span,
+.orbeon .xforms-select-appearance-full span.radio > span, 
+.orbeon .xforms-select1-appearance-full span.checkbox > span, 
+.orbeon .xforms-select-appearance-full span.checkbox > span {
+   display: inline-block;
+   margin-left: 0;
+}
+
+.orbeon .fr-buttons{
+  display:none;
+}
+
+.orbeon-portlet-body .xforms-select1-appearance-full label.checkbox,
+.orbeon-portlet-body .xforms-select-appearance-full label.checkbox,
+.orbeon-portlet-body .xforms-select1-appearance-full span.checkbox,
+.orbeon-portlet-body .xforms-select-appearance-full span.checkbox {
+   padding-left:39px;
+}
+
+.fr-border {
+    background-color: #ffffff;
+}
+
+.orbeon h1, .orbeon h2 {
+    margin: 0;
+    line-height: 40%;
+}
+
+.orbeon h3, .orbeon h4, .orbeon h5, .orbeon h6{
+	 line-height: 80%;
+	 margin: 0;
+}
+
+.orbeon .fr-grid .xforms-mediatype-text-html.xforms-static.address-output-field {
+	background-color:#ffffff;
+	border:none;
+}
+
+.orbeon .orbeon-portlet-body .fr-grid .address-card.address-card-static {
+    margin: -15px 0 0 -31px;
+}
+
+.orbeon .fr-grid-tr-visible{
+	display:table-row;
+}
+
+.confirmation-page .orbeon .orbeon-portlet-body .fr-grid .address-card,
+.review-page .orbeon .orbeon-portlet-body .fr-grid .address-card{
+    margin: 0 -26px;
+}
+
+/* Hpsa 6.4 css end*/
+
+/*Hpsa 6.6 css start */
+
+.orbeon-portlet-div .container{
+    box-sizing: border-box !important;
+}
+
+.orbeon .xbl-fr-grid .fr-grid select, 
+.orbeon .xbl-fr-grid .fr-grid textarea, 
+.orbeon .xbl-fr-grid .fr-grid input[type="text"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="password"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="datetime"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="datetime-local"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="date"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="month"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="time"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="week"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="number"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="email"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="url"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="search"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="tel"], 
+.orbeon .xbl-fr-grid .fr-grid input[type="color"], 
+.orbeon .xbl-fr-grid .fr-grid .uneditable-input,
+.orbeon .xbl-fr-grid .fr-grid .xforms-textarea textarea{
+	width: 97%;
+}
+
+.orbeon-portlet-div .row .span12 {
+    margin-left: 0 !important;
+}
+
+@media (min-width: 980px){
+.orbeon-portlet-div .row .span12 {
+    width: 100%;
+}
+}
+
+.orbeon-portlet-div .checkbox input[type=checkbox], .orbeon-portlet-div .radio input[type=radio] {
+    position: absolute;
+}
+
+.orbeon-portlet-body .xforms-readonly .xforms-select1-appearance-full label.checkbox,
+.orbeon-portlet-body .xforms-readonly .xforms-select-appearance-full label.checkbox,
+.orbeon-portlet-body .xforms-readonly .xforms-select1-appearance-full span.checkbox,
+.orbeon-portlet-body .xforms-readonly .xforms-select-appearance-full span.checkbox {
+   padding-left:39px;
+   display: inline-block;
+}
+
+.orbeon .xforms-readonly .xforms-select1-appearance-full span.radio,
+.orbeon .xforms-readonly .xforms-select-appearance-full span.radio {
+   padding-left:0;
+   display: inline-block;
+}
+
+.orbeon-portlet-body .xforms-readonly .xbl-fr-section .fr-section-content {
+    padding: 5px;
+}
+
+/*Backoffice orbeon form css*/
+
+.orbeon-portlet-body .xbl-fr-section .fr-section-content {
+    padding: 0;
+}
+
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam label.checkbox:before, .orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam span.checkbox:before {
+    position: relative;
+    top: 7px;
+    margin-left: -12px;
+}
+
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select1-appearance-full label.checkbox, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select-appearance-full label.checkbox, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select1-appearance-full span.checkbox, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select-appearance-full span.checkbox {
+     padding-left: 0; 
+}
+
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select1-appearance-full label.radio > span, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select-appearance-full label.radio > span, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select1-appearance-full label.checkbox > span, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select-appearance-full label.checkbox > span, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select1-appearance-full span.radio > span, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select-appearance-full span.radio > span, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select1-appearance-full span.checkbox > span, 
+.orbeon.xforms-disable-alert-as-tooltip.yui-skin-sam .xforms-select-appearance-full span.checkbox > span {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+
+/*Hpsa 6.6 css end */
