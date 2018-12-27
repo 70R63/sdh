@@ -1,0 +1,66 @@
+#
+# Import the CMS content for emails
+#
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$wideContent=CMSImageComponent,BannerComponent
+
+# Import modulegen config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCmsRelationship=jar:de.hybris.platform.sdhrelationshipsaddon.constants.RelationshipaddonConstants&/sdhrelationshipsaddon/import/cockpits/cmscockpit
+$emailPSPackageName=de.hybris.platform.relationshipfacades.process.email.context
+$emailHybrisPackageName=$config-emailContextPackageName
+
+
+# Email page Template
+INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+;;RelationshipRequestEmailTemplate;Relationship Request Email Template;true;relationshipRequestEmailTemplate;publicsector_Relationship_Request_Subject;publicsector_Relationship_Request_Body;EmailPage
+
+
+# Templates for CMS Cockpit Page Edit
+UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;RelationshipRequestEmailTemplate;$jarResourceCmsRelationship/structure-view/structure_relationshipRequestEmailTemplate.vm
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='RelationshipRequestEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+
+# Bind Content Slots to Email Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RelationshipRequestEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-RelationshipRequestEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-RelationshipRequestEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-RelationshipRequestEmail;BottomContent;;EmailBottomSlot;true
+
+# Relationship Request Email Page
+INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;RelationshipRequestEmail;Relationship Request Email;RelationshipRequestEmailTemplate;true;
+
+# CMS components velocity templates
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;publicsector-CMSImageComponent-template;java.util.Map
+;publicsector-BannerComponent-template;java.util.Map
+;publicsector-SimpleBannerComponent-template;java.util.Map
+;publicsector-CMSLinkComponent-template;java.util.Map
+;publicsector-CMSParagraphComponent-template;java.util.Map
+
+# Email velocity templates
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;publicsector_Relationship_Request_Body;$emailPSPackageName.PSRelationshipRequestEmailContext
+;publicsector_Relationship_Request_Subject;$emailPSPackageName.PSRelationshipRequestEmailContext
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;RelationshipRequestEmail;EmailPageModel_preview
+
+# CMS Image Components
+INSERT_UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];name
+;;EmailBannerPublicSectorBottomImage;EmailBannerPublicSectorBottomImage
+;;EmailBannerPublicSectorTopImage;EmailBannerPublicSectorTopImage
+;;EmailSiteLogoImage;Email Site Logo Image;
+
+# Content Slots
+UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;EmailBottomSlot;EmailBannerPublicSectorBottomImage
+;;EmailTopSlot;EmailBannerPublicSectorTopImage
+;;EmailSiteLogoSlot;EmailSiteLogoImage

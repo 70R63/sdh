@@ -1,0 +1,86 @@
+# Macros / Replacement Parameter definitions
+
+#### SAMPLE RELATIONSHIPS ####
+
+INSERT_UPDATE PSRelationship;requestDateTime[dateformat=MM/dd/yyyy HH:mm];sourceUser(uid)[unique=true];targetUser(uid)[unique=true];targetEmail;isSourcePoaHolder;isTargetPoaHolder;approvalDateTime[dateformat=MM/dd/yyyy HH:mm];disApprovalDateTime[dateformat=dd/MM/yyyy HH:mm];relationshipStatus(code);title(code);firstName;lastName
+;1/1/16 8:32 ;elizabeth.miller@stateofrosebud.com;matthew.miller@stateofrosebud.com;;FALSE;FALSE;1/1/16 8:32;;ACTIVE;;
+;5/6/16 11:45 ;john.citizen@stateofrosebud.com;jason.citizen@stateofrosebud.com;;FALSE;FALSE;5/6/16 11:45;;ACTIVE;;
+;11/1/16 10:25 ;jane.citizen@stateofrosebud.com;amanda.smith@stateofrosebud.com;;FALSE;FALSE;11/1/16 10:25;12/1/16 23:04;INACTIVE;;
+;9/23/2016 10:23:00 ;elizabeth.miller@stateofrosebud.com;jane.citizen@stateofrosebud.com;;FALSE;FALSE;;;PENDING;;
+;1/1/16 8:35 ;carol.citizen@stateofrosebud.com;granny.citizen@stateofrosebud.com;;TRUE;FALSE;1/1/16 8:32;;ACTIVE;;
+;1/1/16 11:45 ;jane.citizen@stateofrosebud.com;jack.smith@stateofrosebud.com;;FALSE;FALSE;1/1/16 11:45;;ACTIVE;;
+;1/1/16 8:33 ;john.citizen@stateofrosebud.com;granny.citizen@stateofrosebud.com;;TRUE;FALSE;1/1/16 8:32;;ACTIVE;;
+;5/6/16 11:45 ;john.citizen@stateofrosebud.com;joey.citizen;;TRUE;FALSE;5/6/16 11:45;;ACTIVE;;
+;1/1/16 8:32 ;calvin.citizen@stateofrosebud.com;teresa.citizen@stateofrosebud.com;;FALSE;FALSE;1/1/16 8:32;;ACTIVE;;
+;11/1/16 10:23 ;jane.citizen@stateofrosebud.com;jack.smith@stateofrosebud.com;;FALSE;FALSE;11/1/16 10:23;11/25/16 12:55;INACTIVE;;
+;9/25/2016 12:23:00 ;jane.citizen@stateofrosebud.com;teresa.citizen@stateofrosebud.com;;FALSE;FALSE;;;PENDING;miss;Teresa;Citizen
+;5/6/16 11:45 ;john.citizen@stateofrosebud.com;jill.citizen;;TRUE;FALSE;5/6/16 11:45;;ACTIVE;;
+;1/1/16 8:32 ;calvin.citizen@stateofrosebud.com;carol.citizen@stateofrosebud.com;;FALSE;FALSE;1/1/16 8:32;;ACTIVE;;
+;1/1/16 8:34 ;calvin.citizen@stateofrosebud.com;granny.citizen@stateofrosebud.com;;TRUE;FALSE;1/1/16 8:32;;ACTIVE;;
+;1/1/16 8:32 ;jane.citizen@stateofrosebud.com;john.citizen@stateofrosebud.com;;FALSE;FALSE;1/1/16 8:32;11/1/16 10:23;ACTIVE;;
+;5/6/16 11:45 ;jane.citizen@stateofrosebud.com;jason.citizen@stateofrosebud.com;;FALSE;FALSE;5/6/16 11:45;11/1/16 10:25;ACTIVE;;
+;5/6/16 11:45 ;jane.citizen@stateofrosebud.com;jill.citizen;;TRUE;FALSE;5/6/16 11:45;;ACTIVE;;
+;5/6/16 11:45 ;jane.citizen@stateofrosebud.com;joey.citizen;;TRUE;FALSE;5/6/16 11:45;;ACTIVE;;
+;1/1/16 8:32 ;jane.citizen@stateofrosebud.com;granny.citizen@stateofrosebud.com;;TRUE;FALSE;1/1/16 8:32;;ACTIVE;;
+;1/1/16 12:00 PM;jane.citizen@stateofrosebud.com;calvin.citizen@stateofrosebud.com;;FALSE;FALSE;1/1/16 12:00;;ACTIVE;;
+;1/1/16 8:32 ;jane.citizen@stateofrosebud.com;carol.citizen@stateofrosebud.com;;FALSE;FALSE;1/1/16 8:32;;ACTIVE;;
+;9/25/16 12:23 PM;matthew.miller@stateofrosebud.com;jane.citizen@stateofrosebud.com;;FALSE;FALSE;9/25/16 12:23;;ACTIVE;;
+;1/1/16 8:32 ;elizabeth.miller@stateofrosebud.com;calvin.citizen@stateofrosebud.com;;FALSE;FALSE;1/1/16 8:32;;ACTIVE;;
+;1/1/16 11:45 ;jane.citizen@stateofrosebud.com;amanda.smith@stateofrosebud.com;;FALSE;FALSE;1/1/16 11:45;;ACTIVE;;
+;1/1/16 8:32 ;calvin.citizen@stateofrosebud.com;teresa.citizen@stateofrosebud.com;;FALSE;FALSE;;1/1/2016  8:32:00;ACTIVE
+## target user that does not exist in system
+;9/25/2016 12:23;jane.citizen@stateofrosebud.com;;josephine.citizen@stateofrosebud.com;FALSE;FALSE;;;PENDING;miss;Josephine;Citizen
+
+
+#####
+INSERT_UPDATE PSPermissibleAreaItemType;code[unique=true];visibleByUser;active;shareableType(code);&permissibleAreaItemType
+;addressBook;true;true;Address;Address Book
+
+## Permissible Area Item Type without shareableType
+;personalDetails;true;true;;
+;emailAddress;true;true;;
+;relationships;false;true;;
+
+
+INSERT_UPDATE PSPermission;approvalDateTime[dateformat=MM/dd/yyyy HH:mm];disApprovalDateTime[dateformat=dd/MM/yyyy HH:mm][unique=true];sourceUser(uid)[unique=true];targetUser(uid)[unique=true];permissionStatus(code);permissibleAreaItemType(&permissibleAreaItemType)[unique=true];isRequested
+;11/1/16 10:25;6/18/16 07:53:34;amanda.smith@stateofrosebud.com;jane.citizen@stateofrosebud.com;INACTIVE;Address Book;TRUE
+;1/28/16 07:49:36;5/12/17 07:58;jane.citizen@stateofrosebud.com;jason.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;2/20/16 08:32:36;5/12/17 07:58:21;jane.citizen@stateofrosebud.com;calvin.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;11/21/16 07:23:12;5/12/17 07:58:23;calvin.citizen@stateofrosebud.com;jane.citizen@stateofrosebud.com;INACTIVE;Address Book;TRUE
+;5/6/16 11:45; ;joey.citizen;jane.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;7/13/16 06:15:16;5/12/17 07:58:25;calvin.citizen@stateofrosebud.com;teresa.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;6/27/16 06:43:00;5/12/17 07:58:24;teresa.citizen@stateofrosebud.com;jane.citizen@stateofrosebud.com;INACTIVE;Address Book;TRUE
+;3/1/16 06:56:50;5/12/17 07:58:26;teresa.citizen@stateofrosebud.com;calvin.citizen@stateofrosebud.com;INACTIVE;Address Book;TRUE
+;1/18/16 08:15:35;5/12/17 07:58:27;jane.citizen@stateofrosebud.com;teresa.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;3/8/16 08:02:02;5/12/17 07:58:28;calvin.citizen@stateofrosebud.com;granny.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;11/12/16 08:38:14;5/12/17 07:58:29;jane.citizen@stateofrosebud.com;jack.smith@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;11/1/16 10:25;1/15/16 07:16:15;jane.citizen@stateofrosebud.com;amanda.smith@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;4/25/16 08:50:24;5/12/17 07:58:14;calvin.citizen@stateofrosebud.com;elizabeth.miller@stateofrosebud.com;INACTIVE;Address Book;TRUE
+;3/28/16 07:58:49;5/12/17 07:58:15;elizabeth.miller@stateofrosebud.com;jane.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;10/2/16 06:29:15;5/12/17 07:58:16;matthew.miller@stateofrosebud.com;jane.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;11/1/16 10:23;9/11/16 08:47:54;jane.citizen@stateofrosebud.com;jack.smith@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;12/12/16 08:30:24;5/12/17 07:58:24;carol.citizen@stateofrosebud.com;granny.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;1/3/16 08:39:03;5/12/17 07:58:24;elizabeth.miller@stateofrosebud.com;calvin.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;9/2/16 06:45:49;5/12/17 07:58:24;jane.citizen@stateofrosebud.com;matthew.miller@stateofrosebud.com;INACTIVE;Address Book;TRUE
+;1/1/16 8:32; ;matthew.miller@stateofrosebud.com;elizabeth.miller@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:32; ;elizabeth.miller@stateofrosebud.com;matthew.miller@stateofrosebud.com;ACTIVE;Address Book;FALSE
+;11/1/16 10:23;8/21/16 06:54:48;jack.smith@stateofrosebud.com;jane.citizen@stateofrosebud.com;INACTIVE;Address Book;TRUE
+;5/6/16 11:45; ;jill.citizen;jane.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;5/6/16 11:45; ;jason.citizen@stateofrosebud.com;jane.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:35; ;granny.citizen@stateofrosebud.com;carol.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:35; ;granny.citizen@stateofrosebud.com;calvin.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:32; ;granny.citizen@stateofrosebud.com;jane.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:32; ;carol.citizen@stateofrosebud.com;calvin.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;5/6/16 11:45; ;joey.citizen;john.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;5/6/16 11:45; ;jill.citizen;john.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:32; ;calvin.citizen@stateofrosebud.com;carol.citizen@stateofrosebud.com;ACTIVE;Address Book;FALSE
+;5/6/16 11:45; ;jason.citizen@stateofrosebud.com;john.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;12/16/16 06:53:35;5/12/17 07:58:24;jane.citizen@stateofrosebud.com;elizabeth.miller@stateofrosebud.com;INACTIVE;Address Book;TRUE
+;1/1/16 11:45; ;jack.smith@stateofrosebud.com;jane.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;11/19/16 06:42:17;5/12/17 07:58:24;jane.citizen@stateofrosebud.com;carol.citizen@stateofrosebud.com;INACTIVE;Address Book;FALSE
+;1/1/16 8:32; ;carol.citizen@stateofrosebud.com;jane.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:33; ;granny.citizen@stateofrosebud.com;john.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 11:45; ;amanda.smith@stateofrosebud.com;jane.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:32; ;john.citizen@stateofrosebud.com;jane.citizen@stateofrosebud.com;ACTIVE;Address Book;TRUE
+;1/1/16 8:32; ;jane.citizen@stateofrosebud.com;john.citizen@stateofrosebud.com;ACTIVE;Address Book;FALSE
+;5/17/16 08:06:50;5/12/17 07:58:24;jane.citizen@stateofrosebud.com;amanda.smith@stateofrosebud.com;INACTIVE;Address Book;FALSE

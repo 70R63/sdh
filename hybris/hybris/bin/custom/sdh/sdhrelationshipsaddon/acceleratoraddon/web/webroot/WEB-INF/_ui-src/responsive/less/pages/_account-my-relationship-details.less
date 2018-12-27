@@ -1,0 +1,191 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+
+.relationship-details {
+	h2{
+	   font-size: 16px;
+       font-weight: bold;
+       margin: 3px 0 1px;
+       text-transform: uppercase;
+    }
+	.card {
+		padding: 15px;
+		margin: 5px 0 5px 0;
+	}
+
+	.permissions-content {
+		margin: 5px;
+		line-height: 1.8em;
+
+		.permissions-content-title {
+			vertical-align: text-bottom;
+			padding-left: 10px;
+			font-weight: 500;
+		}
+		.permissions-content-title-no-padding {
+			vertical-align: text-bottom;
+			font-weight: 500;
+		}
+	}
+	.notification-section {
+		margin-top: 35px;
+		.notification-section-title {
+			padding: 0;
+			margin-top: 12px;
+		}
+	}
+	// boostrap collapse //
+	.panel-heading .accordion-toggle:after {
+	    font-family: 'Glyphicons Halflings', sans-serif;
+	    content: '\2212';
+	    float: right;
+	    color: @color-black;
+	    padding: 10px;
+	    margin-top: -12px;
+	}
+	.panel-heading .accordion-toggle.collapsed:after {
+	    content: '\002b';
+	}
+	.manage-relationDetail-accordion > .panel-heading {
+		background-color: @color-gray-light;
+		line-height: 0.1em;
+        margin-top: 20px;
+	}
+	
+	.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+      background-color: @color-gray-light;
+    }
+    
+    hr{
+    	display: none;
+    }
+    
+	.panel-group {
+		margin-top: 15px;
+	}
+	.panel-group .panel + .panel {
+		margin-top: 35px;
+	}
+	.panel-title {
+		margin: 10px 0 10px 0;
+		font-size: 1.5em;
+		@media (max-width: @screen-xs-max) {
+			font-size: 1.2em;
+		}
+	}
+	.panel-body {
+		padding: 15px 20px;
+	}
+	.panel-group .panel-collapse > .panel-body {
+	  border: 0;
+	}
+	.ui-accordion-content {
+		border: 1px solid @color-gray-light;
+	}
+	.new-tag {
+		color: @color-red;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+	.card-permission-transparent {
+		.card-permission(@color-white,#126ab5, @color-black);
+		.card-heading {
+			font-weight: 500;
+			padding: 15px 15px 0 25px;
+		}
+		.card-content{
+		  min-height: 0;
+		}
+	}
+	.card-button-desc {
+		font-size: 14px;
+	}
+	.manage-details-buttons{
+	  padding-left:2px;
+	  padding-right:2px;
+	}
+	.permission-relation-button{
+	  margin-left: 31px;
+    }
+    .cancel-pending-request{
+       margin-left: -27px;
+     }
+}
+.relationship-details {
+  .panel-group .panel {
+    margin-bottom: 0;
+  }
+  .panel-heading {
+    padding: 0;
+  }
+  .panel-title {
+    margin: 0;
+  }
+  .show{
+    float: none;
+  }
+}
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px
+@media (max-width: @screen-xs-max) {
+	.relationship-details  {
+		.label h1{
+		  margin: 31px 9px;
+		}
+		button {
+			margin-bottom: 15px;
+		}
+      	.panel-default > .panel-heading {
+			background-color: @color-gray-light;
+		}
+        .card-permission-transparent {
+            .card-content {
+                .card-content-permissions {
+                    padding: 5px;
+                }
+                .card-icon-permissions {
+                    margin-right: 5px;
+                }
+            }
+        }
+        .permission-relation-button{
+	        margin-left: 8px;
+     	 }
+     	  .cancel-pending-request{
+            margin-left: 0;
+         }
+	}
+    .card-content {
+        padding: 15px 15px 15px 20px;
+        .card-content-permissions {
+            .col-xs-12 {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+	}
+   .relationship-details {
+     .panel-group .panel-title > a {
+         padding: 22px;
+      }
+   }
+}

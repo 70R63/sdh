@@ -1,0 +1,233 @@
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          BASE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//
+
+.setup-permissions {
+    .relationship-steps {
+        padding-left: 30px;
+    }
+    .checkbox label {
+    	text-transform: uppercase;
+    }
+	.checkout-steps {
+	  padding-left: 0;
+      margin-left: 15px;
+		.step-head {
+			.relationship-edit {
+			    background:url('@{url-relationship-img}/edit.png') no-repeat scroll 0 0;
+			    content: '';
+			    height: 20px;
+			    position: absolute;
+			    right: 15px;
+			    top: 30%;
+			    width: 24px;
+			}
+		}
+		h3{
+	   		font-size: 16px;
+		}
+		.step-body {
+			hr {
+				display: block;
+				margin: 0;
+				height: 0;
+			}
+			.setup-btn {
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+		}
+	}
+	.card-section {
+		.card-section-h2 {
+			padding-bottom: 0;
+		}
+	}
+
+	.form-group .checkbox-label {
+		font-size: 18px;
+		font-weight: 500;
+		line-height: inherit;
+	}
+
+	.radio label {
+		margin :0;
+	}
+
+	.desc-text {
+		line-height: 2;
+	}
+
+	.card-button-desc {
+		font-size: 15px;
+		margin-top: 15px;
+	}
+	
+	.permissionType{
+	    display: none;
+	  	.request-permission{
+		    font-size: 14px;
+		    text-transform: none;
+	  	}
+	}
+	
+   .glyphicon-question-sign{
+	  font-size: 35px;
+	  cursor: pointer;
+	}
+	
+	.checkout-heading h1{
+       color: #104d83;
+       font-size: 24px;
+       font-weight: 700;
+       line-height: 35px;	
+	}
+}
+
+.relationship-popover{
+	.popover > .arrow {
+	    display: block;
+	}
+	
+	.popover-title {
+	    display: block;
+	}
+	
+	.popover-content {
+       padding: 9px 14px;
+   }
+}
+
+.saved-permission-help{
+   display: none;
+}
+
+.setup-permissions .checkout-heading {
+    margin-left: 22px;
+}
+
+
+.change-permissions, .request-more-permissions{
+    .glyphicon-question-sign{
+	  font-size: 35px;
+	  cursor: pointer;
+	   top: -5px;
+	}
+	.form-group .checkbox-label {
+		font-size: 18px;
+		font-weight: 500;
+		line-height: inherit;
+	}
+	.checkbox label {
+       text-transform: uppercase;
+    }
+      
+    .card-icon-permissions{
+       top:1px;
+    }
+    
+   .checkout-next {
+      margin: 6px 0;
+   }
+   
+   .continuous-text{
+     margin-top:20px;
+   }
+ 
+}
+.setup-permissions {
+  .radio label.permissionTypeLabel:before {
+    top:-3px;
+  }
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          MOBILE STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 0 - 639px 
+@media (max-width: @screen-xs-max) {
+
+.setup-permissions {
+	    .relationship-steps {
+	       	padding-left: 20px;
+	       	padding-right: 20px;
+	    }
+		.checkout-steps {
+          	padding-left: 0;
+          	padding-right: 0;
+          	margin-left: 0;
+			.step-head {
+				padding-top: 0;
+				padding-bottom: 0;
+			}
+			.step-body {
+				.setup-btn {
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
+			h2 a.step-head::before{
+              top: 10px;
+          }
+		}
+	}
+	.setup-permissions .checkout-heading{
+        margin-left: 0;
+    }
+    .setup-permissions {
+      .radio label.permissionTypeLabel:before {
+         top:auto;
+      }
+    }
+    .account-section {
+        .change-permissions, .request-more-permissions{
+           .label h1 {
+             bottom:26px; 
+           }
+         }
+      }
+}
+
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//                          TABLET STYLES
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+//************************************************************
+
+// 640px - 1023px 
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	.setup-permissions .checkout-heading {
+        margin-left: 0;
+    }
+    .setup-permissions {
+       	.relationship-steps {
+	       padding-left: 20px;
+	       padding-right: 20px;
+	    }
+		.checkout-steps {
+           margin-left: 0;
+           padding-right: 0;
+        }
+    }
+}

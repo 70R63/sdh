@@ -1,0 +1,8 @@
+#set( $macroLang = $esc.java('$lang') )
+#set( $psPermissibleAreaItemTypes = $query.load('relationships', 'PSPermissibleAreaItemType') )
+$macroLang=$lang
+
+INSERT_UPDATE PSPermissibleAreaItemType;code[unique=true];name[lang=$macroLang]
+#foreach( $row in $psPermissibleAreaItemTypes ) 
+ ;$row.key;$row.values.name
+#end
