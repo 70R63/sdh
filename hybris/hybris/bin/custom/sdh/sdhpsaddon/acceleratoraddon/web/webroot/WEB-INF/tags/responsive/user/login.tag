@@ -40,9 +40,18 @@
 		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="form-control" mandatory="true" />
 		<input type="hidden" id="registeredCheckout" name="registeredCheckout" value="${registeredCheckout}" />
 
+		<formElement:formCheckbox idKey="notARobot" labelKey="login.not.a.robot" path="notARobot"/>
+
 		<div class="forgotten-password">
 			<ycommerce:testId code="login_forgotPassword_link">
-				<a href="<c:url value='/login/pw/request'/>" class="forgot-password-disabled" data-cbox-title="<spring:theme code="forgottenPwd.title"/>"> <spring:theme code="login.link.forgottenPwd" />
+				<a href="<c:url value='/login/pw/request/external'/>" class="" data-cbox-title="<spring:theme code="forgottenPwd.title"/>"> <spring:theme code="login.link.forgottenPwd" />
+				</a>
+			</ycommerce:testId>
+		</div>
+		
+		<div class="forgotten-password">
+			<ycommerce:testId code="login_forgotPassword_link">
+				<a href="<c:url value='/register'/>" class="" data-cbox-title="<spring:theme code="forgottenPwd.title"/>"> <spring:theme code="login.link.getPassword" />
 				</a>
 			</ycommerce:testId>
 		</div>

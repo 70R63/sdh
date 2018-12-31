@@ -770,8 +770,8 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 
 ##  Remove the language currency component from the search and place a tag in the footer
 # CMS SearchBox Components
-INSERT_UPDATE PSSearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
-;;SearchBox;Search Box;SearchBox
+INSERT_UPDATE PSSearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;visible
+;;SearchBox;Search Box;SearchBox;false
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;SearchBoxSlot;SearchBox
@@ -866,7 +866,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 # CMS Footer Component 
 INSERT_UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef;showLanguageCurrency;navigationNodes(uid, $contentCV);socialNavigationNode(uid, $contentCV);
-;;FooterComponent;6;FooterComponent;true;AboutUsNavNode,ServicesNavNode;SocialMediaNavNode;
+;;FooterComponent;6;FooterComponent;true;NoticiasNavNode,CalendarioTributarioNavNode,IndiceRecaudacionNavNode,PredialNavNode;;
 
 # CMS Navigation Nodes  
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); children(uid, $contentCV)[mode = append]; links(uid, $contentCV); &nodeRef
@@ -875,6 +875,12 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; AboutUsNavNode                         ; ; Hybris Pages                     ; PublicSectorNavNode   ; ; ContactUsLink, AboutUsRoseBudLink, RoseBudsSenatorsLink                                          ; AboutUsNavNode                       ;
 ; ServicesNavNode                        ; ; Service Pages                    ; PublicSectorNavNode   ; ; RetrieveDraftLink, AllServiceRequestsLink                                                      ; ServicesNavNode                           ;
 ; SocialMediaNavNode                     ; ; Social media Pages               ; PublicSectorNavNode   ; ; PinterestLink, LinkedInLink, YouTubeLink, FacebookLink, TwitterLink, GooglePlusLink            ; SocialMediaNavNode                        ;
+; NoticiasNavNode                     ; ; Noticias Pages               ; PublicSectorNavNode   ; ; NoticiasLink																							; NoticiasNavNode                        ;
+; CalendarioTributarioNavNode         ; ; Calendario Tributario Pages               ; PublicSectorNavNode   ; ; CalendarioTributarioLink													; CalendarioTributarioNavNode                        ;
+; IndiceRecaudacionNavNode                     ; ; Indice RecaudacionLink Pages               ; PublicSectorNavNode   ; ; IndiceRecaudacionLink												; IndiceRecaudacionNavNode                        ;
+; PredialNavNode                     ; ; Predial Pages               ; PublicSectorNavNode   ; ; PredialLink																							; PredialNavNode                        ;
+
+
 ; SiteRootNode                           ; ; SiteRootNode                     ; root               ; ;                                                                                                ; SiteRootNode                           ;
 
 
@@ -891,6 +897,11 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; FacebookLink                    ; Facebook Link                   ; https://www.facebook.com ; ;newWindow; ;class="follow-us-facebook icon"
 ; ; TwitterLink                     ; Twitter Link                    ; https://twitter.com ; ;newWindow; ;class="follow-us-Twitter icon"
 ; ; GooglePlusLink                  ; Linked In Link                  ; https://plus.google.com/ ; ;newWindow; ;class="follow-us-googleplus icon"
+
+; ; NoticiasLink            		; Noticias Link          		  ; http://www.shd.gov.co/shd/informacion-prensa ; ;newWindow; ;
+; ; CalendarioTributarioLink            ; Calendario Tributario Link      ; http://www.shd.gov.co/shd/calendario-tributario; ;newWindow; ;
+; ; IndiceRecaudacionLink           ; Indice Recaudacion Link         ; http://www.shd.gov.co/shd/calendario-tributario; ;newWindow; ;
+; ; PredialLink               		; Predial Link             		  ; http://www.shd.gov.co/shd/calendario-tributario; ;newWindow; ;
 
 ### Header Start ####
 
@@ -953,8 +964,10 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 
 # Media
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
-;;/images/theme/hybris_logo.jpg;hybris_logo.jpg;$siteResource/images/theme/hybris_logo.jpg;image/png;;"Public Accelerator logo"
-;;/images/theme/publicSector_logo.jpg;publicSector_logo.jpg;$siteResource/images/theme/publicSector_logo.jpg;image/png;;"State of Rosebud logo"
+#;;/images/theme/hybris_logo.jpg;hybris_logo.jpg;$siteResource/images/theme/hybris_logo.jpg;image/png;;"Public Accelerator logo"
+#;;/images/theme/publicSector_logo.jpg;publicSector_logo.jpg;$siteResource/images/theme/publicSector_logo.jpg;image/png;;"State of Rosebud logo"
+
+;;/images/theme/oficina_virtual.png;oficina_virtual.png;$siteResource/images/theme/oficina_virtual.png;image/png;;"Bogota Mejor logo"
 
 # Remove view store action from store finder component
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];actions(uid,$contentCV);

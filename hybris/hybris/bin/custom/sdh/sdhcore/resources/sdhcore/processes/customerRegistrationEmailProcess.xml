@@ -10,7 +10,7 @@
  license agreement you entered into with SAP.
 -->
 <process xmlns="http://www.hybris.de/xsd/processdefinition" start="generateCustomerRegistrationEmail" name="customerRegistrationEmailProcess"
-		processClass="de.hybris.platform.commerceservices.model.process.StoreFrontCustomerProcessModel" onError="error">
+		processClass="de.hybris.sdh.core.model.SDHCustomerRegistrationProcessModel" onError="error">
 
 	<action id="generateCustomerRegistrationEmail" bean="generateCustomerRegistrationEmail">
 		<transition name="OK" to="sendEmail"/>

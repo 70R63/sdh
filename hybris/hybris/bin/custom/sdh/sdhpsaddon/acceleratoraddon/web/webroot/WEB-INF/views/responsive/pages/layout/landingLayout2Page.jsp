@@ -3,44 +3,79 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <template:page pageTitle="${pageTitle}">
-	<!-- Jumbotron -->
-	<div class="jumbotron no-space ng-scope">
-		<div class="row">
-			<div class="col-xs-12 no-space">
-				<cms:pageSlot position="Section1" var="feature">
-					<cms:component component="${feature}" />
-				</cms:pageSlot>
-			</div>
-		</div>
-		<!-- Site Search -->
-		<div class="row site-search-box">
-			<div class="col-xs-12 col-sm-12 col-md-12 no-space">
-				<div class="site-search">
-					<nav:searchBox></nav:searchBox>
-					<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-2" tabindex="0" style="display: none;"></ul>
+
+<div class="container">
+	<div class="row ">
+		
+		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
+			<a href="<c:url value='/contribuyentes' />">
+				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+					<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/contribuyentes.png">
 				</div>
-			</div>
-		</div>
-		<!-- FUS - Frequently Used Service -->
-		<div class="fus-features-box row">
-			<cms:pageSlot position="Section2A" var="feature">
-				<cms:component component="${feature}" element="" class="" />
-			</cms:pageSlot>
-		</div>
-	</div>
-	<!-- Hero Images -->
-	<div class="heroImages-box ng-scope row">
-		<div class="col-xs-12 col-sm-12 col-md-12 no-space">
-			<div class="hero-features">
-				<cms:pageSlot position="Section2B" var="feature">
-					<div class="col-xs-12 col-sm-6 col-md-3 no-space yComponentWrapper">
-						<cms:component component="${feature}" />
+				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
+					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="taxpayers.title" /></span></h2></div>
+					<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
+						<div id="helpSection"><div><spring:theme code="taxpayers.description" /></div></div>
 					</div>
-				</cms:pageSlot>
-			</div>
+				</div>
+			</a>
+		</div>
+		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
+			<a href="#">
+				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+					<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/agentes_autorizados.png">
+				</div>
+				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
+					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="authorizedAgents.title" /></span></h2></div>
+					<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
+						<div id="helpSection"><div><spring:theme code="authorizedAgents.description" /></div></div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
+			<a href="#">
+				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+					<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/terceros_autorizados.png">
+				</div>
+				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
+					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="thirdAutorized.title" /></span></h2></div>
+					<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
+						<div id="helpSection"><div><spring:theme code="thirdAutorized.description" /></div></div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
+			<a href="#">
+				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+					<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/agente_retenedor.png">
+				</div>
+				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
+					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="retainingAgent.title" /></span></h2></div>
+					<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
+						<div id="helpSection"><div><spring:theme code="retainingAgent.description" /></div></div>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
+			<a href="#">
+				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+					<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/reportante_de_informacion.png">
+				</div>
+				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
+					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="informationReporters.title" /></span></h2></div>
+					<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
+						<div id="helpSection"><div><spring:theme code="informationReporters.description" /></div></div>
+					</div>
+				</div>
+			</a>
 		</div>
 	</div>
+</div>
 
 </template:page>

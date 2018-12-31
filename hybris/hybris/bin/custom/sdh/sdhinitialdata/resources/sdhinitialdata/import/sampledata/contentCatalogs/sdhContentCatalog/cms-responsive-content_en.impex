@@ -122,6 +122,11 @@ UPDATE CMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang]
 ;;TwitterLink;"Twitter"
 ;;YouTubeLink;"YouTube"
 
+; ; NoticiasLink            		; "Noticias"
+; ; CalendarioTributarioLink            ; "Calendario Tributario"
+; ; IndiceRecaudacionLink           ; "Indice de Recaudo"
+; ; PredialLink               		; "1% Predial, aquí te decimos como"
+
 
 UPDATE PSBannerComponent;$contentCV;uid[unique=true];headline[lang=$lang];title[lang=$lang]
 ;;PublicSectorHompageBannerComponent1;"International Sled Festival";"International Sled Festival image"
@@ -132,8 +137,8 @@ UPDATE PSBannerComponent;$contentCV;uid[unique=true];headline[lang=$lang];title[
 
 # Site Logo Component #
 UPDATE PSSimpleBannerComponent;$contentCV;uid[unique=true];$picture;title[lang=$lang]
-;;HybrisLogoComponent;/images/theme/hybris_logo.jpg;"Public Accelerator logo"
-;;SiteLogoComponent;/images/theme/publicSector_logo.jpg;"State of Rosebud logo"
+;;HybrisLogoComponent;/images/theme/oficina_virtual.png;"Logotipo de Bogota Mejor"
+
 																																														
 # Create Content Slots for Page
 

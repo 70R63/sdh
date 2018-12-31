@@ -17,5 +17,6 @@
 	<classpathentry kind="src" path="/relationshipfacades"/>
 	<classpathentry kind="src" path="/relationshipservices"/>
 	<classpathentry kind="src" path="/assistedservicestorefront"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdhcore"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
 </classpath>

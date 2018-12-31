@@ -13,12 +13,20 @@
  */
 package de.hybris.platform.sdhpsaddon.controllers.pages;
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.GuestForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
+import de.hybris.platform.sdhpsaddon.forms.SDHLoginForm;
+import de.hybris.sdh.core.exceptions.NotARobotException;
+
+import java.util.Collections;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -96,6 +104,55 @@ public class LoginPageController extends AbstractLoginPageController
 			model.addAttribute("showloginBody", Boolean.FALSE);
 		}
 		return getDefaultLoginPage(loginError, session, model);
+	}
+
+
+
+	@Override
+	protected String getDefaultLoginPage(final boolean loginError, final HttpSession session, final Model model)
+			throws CMSItemNotFoundException
+	{
+		final SDHLoginForm loginForm = new SDHLoginForm();
+		model.addAttribute("loginForm", loginForm);
+		model.addAttribute(new RegisterForm());
+		model.addAttribute(new GuestForm());
+
+		final String username = (String) session.getAttribute(SPRING_SECURITY_LAST_USERNAME);
+		if (username != null)
+		{
+			session.removeAttribute(SPRING_SECURITY_LAST_USERNAME);
+		}
+
+		loginForm.setJ_username(username);
+		storeCmsPageInModel(model, getCmsPage());
+		setUpMetaDataForContentPage(model, (ContentPageModel) getCmsPage());
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.INDEX_NOFOLLOW);
+
+		addRegistrationConsentDataToModel(model);
+
+		final Breadcrumb loginBreadcrumbEntry = new Breadcrumb("#",
+				getMessageSource().getMessage("header.link.login", null, "header.link.login", getI18nService().getCurrentLocale()),
+				null);
+		model.addAttribute("breadcrumbs", Collections.singletonList(loginBreadcrumbEntry));
+
+		if (loginError)
+		{
+			final Object authenticationException = session.getAttribute("authenticationException");
+
+			if (authenticationException != null && authenticationException instanceof NotARobotException)
+			{
+				model.addAttribute("loginError", Boolean.valueOf(loginError));
+				GlobalMessages.addErrorMessage(model, "login.not.a.robot.exception");
+			}
+			else
+			{
+
+				model.addAttribute("loginError", Boolean.valueOf(loginError));
+				GlobalMessages.addErrorMessage(model, "login.error.account.not.found.title");
+			}
+		}
+
+		return getView();
 	}
 
 	protected void storeReferer(final String referer, final HttpServletRequest request, final HttpServletResponse response)

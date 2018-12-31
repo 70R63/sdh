@@ -41,15 +41,15 @@
 									<span class="glyphicon glyphicon-align-justify"></span>
 								</button>
 							</div>
-							<div class="mobile__nav__row--table-cell visible-xs hidden-sm ">
-									<div class="col-xs-12 no-space yComponentWrapper hpsa-logo-block ">
-										<cms:pageSlot position="SiteLogo" var="logo" limit="1">
-											<cms:component component="${logo}" element="div"
-												class="col-xs-12 no-space yComponentWrapper" />
-										</cms:pageSlot>
-									</div>
-								<%-- </button> --%>
-							</div>
+<!-- 							<div class="mobile__nav__row--table-cell visible-xs hidden-sm "> -->
+<!-- 									<div class="col-xs-12 no-space yComponentWrapper hpsa-logo-block "> -->
+<%-- 										<cms:pageSlot position="SiteLogo" var="logo" limit="1"> --%>
+<%-- 											<cms:component component="${logo}" element="div" --%>
+<%-- 												class="col-xs-12 no-space yComponentWrapper" /> --%>
+<%-- 										</cms:pageSlot> --%>
+<!-- 									</div> -->
+<%-- 								</button> --%>
+<!-- 							</div> -->
 
 							<c:if test="${empty hideHeaderLinks}">
 								<ycommerce:testId code="header_StoreFinder_link">
@@ -86,14 +86,14 @@
 				<div class="nav__left col-xs-12 col-sm-12 col-md-6">
 					<div class="row">
 
-						<div class="hidden-xs col-sm-12 col-md-6 hpsa-logo-block">
-							<div class="col-xs-12 no-space yComponentWrapper">
-								<cms:pageSlot position="SiteLogo" var="logo" limit="1">
-									<cms:component component="${logo}" element="div"
-										class="col-xs-12 no-space yComponentWrapper" />
-								</cms:pageSlot>
-							</div>
-						</div>
+<!-- 						<div class="hidden-xs col-sm-12 col-md-6 hpsa-logo-block"> -->
+<!-- 							<div class="col-xs-12 no-space yComponentWrapper"> -->
+<%-- 								<cms:pageSlot position="SiteLogo" var="logo" limit="1"> --%>
+<%-- 									<cms:component component="${logo}" element="div" --%>
+<%-- 										class="col-xs-12 no-space yComponentWrapper" /> --%>
+<%-- 								</cms:pageSlot> --%>
+<!-- 							</div> -->
+<!-- 						</div> -->
 
 						<div class="col-sm-1 hidden-xs visible-sm mobile-menu">
 							<button title="${textMegamenu}" aria-label="${megaMenuText}" class="js-toggle-sm-navigation header-menu-btn" type="button">
@@ -154,16 +154,16 @@
 								<li><cms:component component="${link}" element="" /></li>
 							</cms:pageSlot>
 
-							<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
-								<li class="liOffcanvas">
-									<ycommerce:testId code="header_Login_link">
-										<spring:theme code="signInRegister.acc.title" var="signInRegisterTitle" />
-										<a title="${signInRegisterTitle}" href="<c:url value='/login'/>">
-											<spring:theme code="header.link.login" />
-										</a>
-									</ycommerce:testId>
-								</li>
-							</sec:authorize>
+<%-- 							<sec:authorize access="hasRole('ROLE_ANONYMOUS')"> --%>
+<!-- 								<li class="liOffcanvas"> -->
+<%-- 									<ycommerce:testId code="header_Login_link"> --%>
+<%-- 										<spring:theme code="signInRegister.acc.title" var="signInRegisterTitle" /> --%>
+<%-- 										<a title="${signInRegisterTitle}" href="<c:url value='/login'/>"> --%>
+<%-- 											<spring:theme code="header.link.login" /> --%>
+<!-- 										</a> -->
+<%-- 									</ycommerce:testId> --%>
+<!-- 								</li> -->
+<%-- 							</sec:authorize> --%>
 
 							<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
 								<li class="liOffcanvas">

@@ -7,18 +7,19 @@
 
 <template:page pageTitle="${pageTitle}">
 	<div class="row">
-		<h1 class="acc_hidden"><span tabindex="0"><spring:theme code="text.signinregisterpage.label" /></span></h1>
+		
 		<c:if test="${showRegisterBody || showLoginBody}">
-			<div class="col-md-6" >
+			<div class="col-md-6  col-md-offset-3" >
+				<h1 class="acc_hidden"><span tabindex="0"><spring:theme code="text.signinregisterpage.label" /></span></h1>
 				<cms:pageSlot position="LeftContentSlot" var="feature" element="div" class="login-left-content-slot">
 					<cms:component component="${feature}" element="div" class="login-left-content-component"/>
 				</cms:pageSlot>
 			</div>
 		</c:if>
-		<div class="col-md-6">
-			<cms:pageSlot position="RightContentSlot" var="feature" element="div" class="login-right-content-slot">
-				<cms:component component="${feature}"  element="div" class="login-right-content-component"/>
-			</cms:pageSlot>
-		</div>
+<!-- 		<div class="col-md-6"> -->
+<%-- 			<cms:pageSlot position="RightContentSlot" var="feature" element="div" class="login-right-content-slot"> --%>
+<%-- 				<cms:component component="${feature}"  element="div" class="login-right-content-component"/> --%>
+<%-- 			</cms:pageSlot> --%>
+<!-- 		</div> -->
 	</div>
 </template:page>

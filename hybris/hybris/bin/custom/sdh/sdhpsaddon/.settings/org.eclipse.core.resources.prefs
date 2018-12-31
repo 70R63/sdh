@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//acceleratoraddon/web/webroot/WEB-INF/messages/base_en.properties=UTF-8
+encoding//acceleratoraddon/web/webroot/WEB-INF/messages/base_es.properties=UTF-8
 encoding/<project>=UTF-8

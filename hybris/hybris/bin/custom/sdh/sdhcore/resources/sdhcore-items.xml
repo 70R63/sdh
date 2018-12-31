@@ -110,6 +110,73 @@
                 </attributes>
             </itemtype>
         </typegroup>
-
+		        <typegroup name="SDH">
+        	<itemtype code="Customer" autocreate="false" generate="false">
+        		<description>Added to extend customer model for SDH model</description>
+        		<attributes>
+        			<attribute qualifier="numBP"  type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+<!--         			<attribute type="documentType" qualifier="IdentificationDocumentType"> -->
+<!--         				<persistence type="property"></persistence> -->
+<!--         			</attribute> -->
+        			<attribute qualifier="documentNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="middleName" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="secondLastName" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="documentExpeditionDate" type="java.util.Date">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="sex" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="nationality" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="birthDate" type="java.util.Date">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="birthPlace" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="originCountry" type="Country">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="useEmailForNotifications" type="java.lang.Boolean">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="useInformationForInstitutionalPurposes" type="java.lang.Boolean">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        		</attributes>
+        	</itemtype>
+        	
+        	<itemtype code="SDHCustomerRegistrationProcess" extends="StoreFrontCustomerProcess" autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="token" type="java.lang.String">
+						<persistence type="property" />
+						<description>Token to allow customers activate their accounts</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+        	
+<!--         	<itemtype code="IdentificationDocumentType" autocreate="true" generate="true"> -->
+<!--         		<description>Added to hold ID document type</description> -->
+<!--         		<attributes> -->
+<!--         			<attribute type="code" qualifier="java.lang.String"> -->
+<!--         				<persistence type="property"></persistence> -->
+<!--         				<modifiers unique="true"/> -->
+<!--         			</attribute> -->
+<!--         			<attribute type="description" qualifier="localized:java.lang.String"> -->
+<!--         				<persistence type="property"></persistence> -->
+<!--         			</attribute> -->
+<!--         		</attributes> -->
+<!--         	</itemtype> -->
+        </typegroup>
     </itemtypes>
 </items>

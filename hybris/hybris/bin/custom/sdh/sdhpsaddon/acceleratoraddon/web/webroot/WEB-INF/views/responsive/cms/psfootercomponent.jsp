@@ -10,7 +10,7 @@
 <div class="container-fluid">
 	<div class="footer__top">
 		<div class="row">
-			<div class="footer-left col-xs-12 col-sm-12 ">
+			<div class="footer-left col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
 				<div>
 					<c:forEach items="${footerComponent.navigationNodes}" var="node">
 						<c:if test="${node.visible}">
@@ -31,29 +31,29 @@
 							</c:forEach>
 						</c:if>
 					</c:forEach>
-					<div class="links col-xs-12 col-sm-6 col-md-6 col-lg-6">
-						<div class="col-xs-12 col-sm-12">
-							<div class="clearfix social-links">
-								<c:if test="${footerComponent.socialNavigationNode.visible}">
-									<c:forEach
-										items="${footerComponent.socialNavigationNode.links}"
-										step="${component.wrapAfter}" varStatus="i">
-										<c:if test="${component.wrapAfter > i.index}">
-											<div class="title">${ycommerce:encodeHTML(footerComponent.socialNavigationNode.title)}</div>
-										</c:if>
-										<ul>
-											<c:forEach
-												items="${footerComponent.socialNavigationNode.links}"
-												var="socialLink" begin="${i.index}"
-												end="${i.index + component.wrapAfter - 1}">
-												<cms:component component="${socialLink}"
-													evaluateRestriction="true" element="li" />
-											</c:forEach>
-										</ul>
-									</c:forEach>
-								</c:if>
-							</div>
-						</div>
+					<div class="links col-xs-12 col-sm-6 col-md-12 col-lg-12">
+<!-- 						<div class="col-xs-12 col-sm-12"> -->
+<!-- 							<div class="clearfix social-links"> -->
+<%-- 								<c:if test="${footerComponent.socialNavigationNode.visible}"> --%>
+<%-- 									<c:forEach --%>
+<%-- 										items="${footerComponent.socialNavigationNode.links}" --%>
+<%-- 										step="${component.wrapAfter}" varStatus="i"> --%>
+<%-- 										<c:if test="${component.wrapAfter > i.index}"> --%>
+<%-- 											<div class="title">${ycommerce:encodeHTML(footerComponent.socialNavigationNode.title)}</div> --%>
+<%-- 										</c:if> --%>
+<!-- 										<ul> -->
+<%-- 											<c:forEach --%>
+<%-- 												items="${footerComponent.socialNavigationNode.links}" --%>
+<%-- 												var="socialLink" begin="${i.index}" --%>
+<%-- 												end="${i.index + component.wrapAfter - 1}"> --%>
+<%-- 												<cms:component component="${socialLink}" --%>
+<%-- 													evaluateRestriction="true" element="li" /> --%>
+<%-- 											</c:forEach> --%>
+<!-- 										</ul> -->
+<%-- 									</c:forEach> --%>
+<%-- 								</c:if> --%>
+<!-- 							</div> -->
+<!-- 						</div> -->
 						<div class="footer__right col-xs-12 col-sm-12 col-md-12 col-lg-8">
 							<div class="lang-currency-section">
 								<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 footer__dropdown">
