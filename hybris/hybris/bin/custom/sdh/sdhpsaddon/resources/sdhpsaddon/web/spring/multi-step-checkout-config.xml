@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2016 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+	
+	<context:annotation-config />
+
+	<!-- Checkout flow validationAspect for entring a checkout step -->
+	<bean id='publicSectorCheckoutStepValidationAspect' class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.CheckoutStepValidationAspect">
+		<property name="checkoutFlowGroupMap" ref="publicSectorCheckoutFlowGroupMap" />
+		<property name="checkoutFacade" ref="acceleratorCheckoutFacade" />
+	</bean>
+
+	<!-- Pointcut definition with annotation -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="publicSectorEntryCheckoutStepPoint" expression="@annotation(de.hybris.platform.sdhpsaddon.annotations.PreValidateCheckoutStep)" />
+		<aop:aspect ref="publicSectorCheckoutStepValidationAspect">
+			<aop:around pointcut-ref="publicSectorEntryCheckoutStepPoint" method="validateCheckoutStep" />
+		</aop:aspect>
+	</aop:config>
+
+	<bean name="bundleCheckoutStepController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.BundleSelectionCheckoutStepController" />
+	<bean name="formCheckoutStepController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.FormCheckoutStepController" />
+	<bean name="deliveryAddressCheckoutStepController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.DeliveryAddressCheckoutStepController" />
+	<bean name="deliveryMethodCheckoutStepController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.DeliveryMethodCheckoutStepController" />
+	<bean name="hopPaymentResponseController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.HopPaymentResponseController" />
+	<bean name="multiStepCheckoutController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.MultiStepCheckoutController" />
+	<bean name="paymentMethodCheckoutStepController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.PaymentMethodCheckoutStepController" />
+	<bean name="pickupLocationCheckoutStepController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.PickupLocationCheckoutStepController" />
+	<bean name="sopPaymentResponseController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.SopPaymentResponseController" />
+	<bean name="summaryCheckoutStepController" class="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.SummaryCheckoutStepController" />
+
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/checkout/multi/bundle">bundleCheckoutStepController</prop>
+				<prop key="/checkout/multi/delivery-address">deliveryAddressCheckoutStepController</prop>
+				<prop key="/checkout/multi/delivery-method">deliveryMethodCheckoutStepController</prop>
+				<prop key="/checkout/multi/hop">hopPaymentResponseController</prop>
+				<prop key="/checkout/multi/form">formCheckoutStepController</prop>
+				<prop key="/checkout/multi/payment-method">paymentMethodCheckoutStepController</prop>
+				<prop key="/checkout/multi/pickup-location">pickupLocationCheckoutStepController</prop>
+				<prop key="/checkout/multi/sop">sopPaymentResponseController</prop>
+				<prop key="/checkout/multi/summary">summaryCheckoutStepController</prop>
+				<prop key="/checkout/multi/**">multiStepCheckoutController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<alias name="abstractPublicSectorCheckoutStep" alias="publicSectorCheckoutStep" />
+	<bean id="abstractPublicSectorCheckoutStep" class="de.hybris.platform.sdhpsaddon.checkout.steps.CheckoutStep"
+		abstract="true" >
+		<property name="psCheckoutFacade" ref="psCheckoutFacade"/>
+		<property name="cartService" ref="cartService"/>
+	</bean>
+
+	<!-- PublicSector Checkout Steps START -->
+
+	<alias name="defaultPublicSectorMultiStepCheckout" alias="publicSectorMultiStepCheckout" />
+	<bean id="defaultPublicSectorMultiStepCheckout" parent="publicSectorCheckoutStep">
+		<property name="checkoutGroup" ref="publicSectorCheckoutGroup" />
+		<property name="checkoutStepValidator" ref="defaultPublicSectorMultiStepCheckoutValidator" />
+		<property name="transitions">
+			<map>
+				<entry key="previous" value-ref="REDIRECT_TO_HOME" />
+				<entry key="current" value-ref="REDIRECT_MULTI_STEP_CHECKOUT" />
+				<entry key="next" value-ref="REDIRECT_TO_BUNDLE" />
+			</map>
+		</property>
+		<property name="progressBarId" value="multi" />
+	</bean>
+
+	<alias name="defaultPublicSectorBundleCheckoutStep" alias="publicSectorBundleCheckoutStep" />
+	<bean id="defaultPublicSectorBundleCheckoutStep" class="de.hybris.platform.sdhpsaddon.checkout.steps.BundleSelectionCheckoutStep"
+		parent="publicSectorCheckoutStep">
+		<property name="checkoutGroup" ref="publicSectorCheckoutGroup" />
+		<property name="checkoutStepValidator" ref="defaultPublicSectorBundleCheckoutStepValidator" />
+		<property name="bundleSelectionFacade" ref="bundleSelectionFacade" />
+		<property name="psProductFacade" ref="psProductFacade" />
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_MULTI_STEP_CHECKOUT" />
+				<entry key="current" value-ref="REDIRECT_TO_BUNDLE" />
+				<entry key="next" value-ref="REDIRECT_TO_FORM" />
+			</map>
+		</property>
+		<property name="progressBarId" value="bundle" />
+	</bean>
+
+	<alias name="defaultPublicSectorFormCheckoutStep" alias="FORMS_CHECKOUT_STEP_PLACEHOLDER" />
+	<alias name="defaultPublicSectorFormCheckoutStep" alias="publicSectorFormCheckoutStep" />
+	<bean id="defaultPublicSectorFormCheckoutStep" parent="publicSectorCheckoutStep">
+		<property name="checkoutGroup" ref="publicSectorCheckoutGroup" />
+		<property name="checkoutStepValidator" ref="defaultPublicSectorFormCheckoutStepValidator" />
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_HOME" />
+				<entry key="current" value-ref="REDIRECT_TO_FORM" />
+				<entry key="next" value-ref="REDIRECT_TO_DELIVERY_ADDRESS" />
+			</map>
+		</property>
+		<property name="progressBarId" value="serviceRequestForm" />
+	</bean>
+
+	<alias name="defaultPublicSectorDeliveryAddressCheckoutStep" alias="publicSectorDeliveryAddressCheckoutStep" />
+	<bean id="defaultPublicSectorDeliveryAddressCheckoutStep" class="de.hybris.platform.sdhpsaddon.checkout.steps.DeliveryAddressCheckoutStep"
+		parent="publicSectorCheckoutStep">
+		<property name="checkoutGroup" ref="publicSectorCheckoutGroup" />
+		<property name="checkoutStepValidator" ref="defaultPublicSectorDeliveryAddressCheckoutValidator" />
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_HOME" />
+				<entry key="current" value-ref="REDIRECT_TO_DELIVERY_ADDRESS" />
+				<entry key="next" value-ref="REDIRECT_TO_DELIVERY_METHOD" />
+			</map>
+		</property>
+		<property name="progressBarId" value="deliveryAddress" />
+	</bean>
+
+	<alias name="defaultPublicSectorDeliveryMethodCheckoutStep" alias="publicSectorDeliveryMethodCheckoutStep" />
+	<bean id="defaultPublicSectorDeliveryMethodCheckoutStep" class="de.hybris.platform.sdhpsaddon.checkout.steps.DeliveryMethodCheckoutStep"
+		parent="publicSectorCheckoutStep">
+		<property name="checkoutGroup" ref="publicSectorCheckoutGroup" />
+		<property name="checkoutStepValidator" ref="defaultPublicSectorDeliveryMethodCheckoutValidator" />
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_ADDRESS" />
+				<entry key="current" value-ref="REDIRECT_TO_DELIVERY_METHOD" />
+				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_METHOD" />
+			</map>
+		</property>
+		<property name="progressBarId" value="deliveryMethod" />
+	</bean>
+
+	<alias name="defaultPublicSectorPaymentMethodCheckoutStep" alias="publicSectorPaymentMethodCheckoutStep" />
+	<bean id="defaultPublicSectorPaymentMethodCheckoutStep" class="de.hybris.platform.sdhpsaddon.checkout.steps.PaymentMethodCheckoutStep"
+		parent="publicSectorCheckoutStep">
+		<property name="checkoutGroup" ref="publicSectorCheckoutGroup" />
+		<property name="checkoutStepValidator" ref="defaultPublicSectorPaymentMethodCheckoutValidator" />
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_METHOD" />
+				<!-- <entry key="previous" value-ref="REDIRECT_TO_FORM"/> -->
+				<entry key="current" value-ref="REDIRECT_TO_PAYMENT_METHOD" />
+				<entry key="next" value-ref="REDIRECT_TO_SUMMARY" />
+			</map>
+		</property>
+		<property name="progressBarId" value="paymentMethod" />
+	</bean>
+
+	<alias name="defaultPublicSectorSummaryCheckoutStep" alias="publicSectorSummaryCheckoutStep" />
+	<bean id="defaultPublicSectorSummaryCheckoutStep" class="de.hybris.platform.sdhpsaddon.checkout.steps.SummaryCheckoutStep" parent="publicSectorCheckoutStep">
+		<property name="checkoutGroup" ref="publicSectorCheckoutGroup" />
+		<property name="checkoutStepValidator" ref="defaultPublicSectorSummaryCheckoutValidator" />
+		<property name="psYFormsStrategy" ref="psYFormsStrategy" />
+		<property name="psProductFacade" ref="psProductFacade" />
+		<property name="checkoutFacade" ref="checkoutFacade" />
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_METHOD" />
+				<entry key="current" value-ref="REDIRECT_TO_SUMMARY" />
+				<entry key="next" value="redirect:/checkout/orderConfirmation/%s" />
+			</map>
+		</property>
+		<property name="progressBarId" value="confirmOrder" />
+		<property name="progressBarIdWithConsent" value="consent.declaration.confirmOrder" />
+
+	</bean>
+
+	<!-- PublicSector Checkout Steps END -->
+
+	<!---Default PublicSector checkout group START -->
+
+	<alias name="defaultPublicSectorMultiStepCheckoutGroup" alias="publicSectorCheckoutGroup" />
+	<bean id="defaultPublicSectorMultiStepCheckoutGroup" class="de.hybris.platform.sdhpsaddon.checkout.steps.CheckoutGroup">
+		<property name="groupId" value="publicSectorCheckoutGroup" />
+		<property name="checkoutStepMap">
+			<map merge="true">
+				<entry key="multi" value-ref="publicSectorMultiStepCheckout" />
+				<entry key="bundle" value-ref="publicSectorBundleCheckoutStep" />
+				<entry key="form" value-ref="publicSectorFormCheckoutStep" />
+				<entry key="delivery-address" value-ref="publicSectorDeliveryAddressCheckoutStep" />
+				<entry key="delivery-method" value-ref="publicSectorDeliveryMethodCheckoutStep" />
+				<entry key="payment-method" value-ref="publicSectorPaymentMethodCheckoutStep" />
+				<entry key="summary" value-ref="publicSectorSummaryCheckoutStep" />
+			</map>
+		</property>
+		<property name="validationResultsMap">
+			<map merge="true">
+				<entry key="FAILED" value-ref="REDIRECT_TO_HOME" />
+				<entry key="REDIRECT_TO_FORM" value-ref="REDIRECT_TO_FORM" />
+				<entry key="REDIRECT_TO_BUNDLE" value-ref="REDIRECT_TO_BUNDLE" />
+				<entry key="REDIRECT_TO_DELIVERY_ADDRESS" value-ref="REDIRECT_TO_DELIVERY_ADDRESS" />
+				<entry key="REDIRECT_TO_HOME" value-ref="REDIRECT_TO_HOME" />
+				<entry key="REDIRECT_TO_PAYMENT_METHOD" value-ref="REDIRECT_TO_PAYMENT_METHOD" />
+				<entry key="REDIRECT_TO_DELIVERY_METHOD" value-ref="REDIRECT_TO_DELIVERY_METHOD" />
+				<entry key="REDIRECT_TO_SUMMARY" value-ref="REDIRECT_TO_SUMMARY" />
+			</map>
+		</property>
+		<property name="checkoutProgressBar">
+			<map merge="true">
+				<entry key="1" value-ref="publicSectorBundleCheckoutStep" />
+				<entry key="2" value-ref="publicSectorFormCheckoutStep" />
+				<entry key="3" value-ref="publicSectorDeliveryAddressCheckoutStep" />
+				<entry key="4" value-ref="publicSectorDeliveryMethodCheckoutStep" />
+				<entry key="5" value-ref="publicSectorPaymentMethodCheckoutStep" />
+				<entry key="6" value-ref="publicSectorSummaryCheckoutStep" />
+			</map>
+		</property>
+	</bean>
+
+	<!---Default PublicSector checkout group END -->
+
+	<!--Validation -->
+
+	<bean id="abstractPublicSectorCheckoutStepValidator" class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.AbstractCheckoutStepValidator"
+		abstract="true">
+		<property name="checkoutFlowFacade" ref="checkoutFlowFacade" />
+		<property name="checkoutFacade" ref="checkoutFacade" />
+		<property name="psCheckoutFacade" ref="psCheckoutFacade"/>
+		<property name="cartService" ref="cartService"/>
+	</bean>
+	<bean id="defaultPublicSectorBundleCheckoutStepValidator" class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.impl.DefaultBundleCheckoutStepValidator"
+		parent="abstractPublicSectorCheckoutStepValidator" />
+	<bean id="defaultPublicSectorFormCheckoutStepValidator" class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.impl.DefaultFormCheckoutStepValidator"
+		parent="abstractPublicSectorCheckoutStepValidator" />
+	<bean id="defaultPublicSectorMultiStepCheckoutValidator"
+		class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.impl.DefaultMultiStepCheckoutStepValidator"
+		parent="abstractPublicSectorCheckoutStepValidator" />
+	<bean id="defaultPublicSectorDeliveryAddressCheckoutValidator"
+		class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.impl.DefaultDeliveryAddressCheckoutStepValidator"
+		parent="abstractPublicSectorCheckoutStepValidator" />
+	<bean id="defaultPublicSectorDeliveryMethodCheckoutValidator"
+		class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.impl.DefaultDeliveryMethodCheckoutStepValidator"
+		parent="abstractPublicSectorCheckoutStepValidator" />
+	<bean id="defaultPublicSectorPaymentMethodCheckoutValidator"
+		class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.impl.DefaultPaymentCheckoutStepValidator"
+		parent="abstractPublicSectorCheckoutStepValidator">
+	</bean>
+	<bean id="defaultPublicSectorSummaryCheckoutValidator"
+		class="de.hybris.platform.sdhpsaddon.checkout.steps.validation.impl.DefaultSummaryCheckoutStepValidator"
+		parent="abstractPublicSectorCheckoutStepValidator">
+	</bean>
+
+	<!--Checkout GroupMap -->
+	<util:map id="publicSectorCheckoutFlowGroupMap">
+		<entry key="publicSectorCheckoutGroup" value-ref="publicSectorCheckoutGroup" />
+	</util:map>
+	<!--Checkout GroupMap -->
+
+	<!-- Redirects -->
+
+	<bean id="REDIRECT_TO_HOME" class="java.lang.String">
+		<constructor-arg value="redirect:/" />
+	</bean>
+
+	<bean id="REDIRECT_MULTI_STEP_CHECKOUT" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi" />
+	</bean>
+
+	<bean id="REDIRECT_TO_BUNDLE" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/bundle" />
+	</bean>
+
+	<bean id="REDIRECT_TO_FORM" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/form" />
+	</bean>
+
+	<bean id="REDIRECT_TO_DELIVERY_ADDRESS" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/delivery-address/add" />
+	</bean>
+
+	<bean id="REDIRECT_TO_DELIVERY_METHOD" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/delivery-method/choose" />
+	</bean>
+
+	<bean id="REDIRECT_TO_PICKUP_LOCATION" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/pickup-location/choose" />
+	</bean>
+
+	<bean id="REDIRECT_TO_PAYMENT_METHOD" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/payment-method/add" />
+	</bean>
+
+	<bean id="REDIRECT_TO_SUMMARY" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/summary/view" />
+	</bean>
+
+	<alias name="defaultDynamicFormCheckoutStrategy" alias="dynamicFormCheckoutStrategy" />
+	<bean id="defaultDynamicFormCheckoutStrategy" class="de.hybris.platform.sdhpsaddon.checkout.steps.strategy.impl.DefaultDynamicFormCheckoutStrategy">
+		<property name="baseFormUrl" ref="REDIRECT_TO_FORM" />
+		<property name="checkoutFacade" ref="acceleratorCheckoutFacade" />
+		<property name="emptyYFormPreprocessorStrategy" ref="emptyYFormPreprocessorStrategy" />
+		<property name="referenceIdTransformerYFormPreprocessorStrategy" ref="referenceIdTransformerYFormPreprocessorStrategy" />
+		<property name="yFormFacade" ref="yFormFacade" />
+		<property name="yFormsHelper" ref="yFormsHelper" />
+		<property name="yFormsStrategy" ref="yFormsStrategy" />
+		<property name="psYFormsStrategy" ref="psYFormsStrategy" />
+		<property name="psProductFacade" ref="psProductFacade" />
+		<property name="yFormXmlParser" ref="yFormXmlParser" />
+		<property name="userService" ref="userService"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="configurationService" ref="configurationService"/>
+		<property name="userStrategy" ref="yFormUserStrategy" />
+		<property name="xyFormFacade" ref="xyFormFacade" />
+		<property name="psRelationshipFacade"  ref="psRelationshipfacade" />
+		<property name="psPermissionFacade"  ref="psPermissionFacade" />
+	</bean>
+
+</beans>

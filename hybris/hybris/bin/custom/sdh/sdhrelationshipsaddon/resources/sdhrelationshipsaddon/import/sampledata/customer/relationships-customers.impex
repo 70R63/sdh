@@ -1,0 +1,30 @@
+#### SAMPLE CUSTOMERS FOR DEMO PURPOSES ####
+
+$defaultPassword=Rosebud$
+
+
+
+INSERT_UPDATE Customer	;groups(uid)		;uid[unique=true]				;name					;password[default=$defaultPassword]	; title(code);&customerId;dob[dateformat=MM/dd/yyyy];isMinor[default=false];type (code)[default=REGISTERED]
+;customergroup	;jane.citizen@stateofrosebud.com	;Jane Citizen	;									;miss;jane.citizen@stateofrosebud.com;09/19/1977;;;
+;customergroup	;john.citizen@stateofrosebud.com	;John Citizen	;									;mr;john.citizen@stateofrosebud.com;04/16/1975;;;
+;customergroup	;granny.citizen@stateofrosebud.com	;Granny Citizen	;									;mrs;granny.citizen@stateofrosebud.com;11/29/1913;;;
+;customergroup	;jason.citizen@stateofrosebud.com	;Jason Citizen	;									;mr;jason.citizen@stateofrosebud.com;09/26/1998;;;
+
+;customergroup	;jill.citizen                       ;Jill Citizen	;									;miss;jill.citizen;09/20/2011;true;UNIDENTIFIED;
+;customergroup	;joey.citizen                       ;Joey Citizen	;									;mr;joey.citizen;11/13/2014;true;UNIDENTIFIED;
+;customergroup	;calvin.citizen@stateofrosebud.com	;Calvin Citizen	;									;mr;calvin.citizen@stateofrosebud.com;08/13/1943;;
+;customergroup	;carol.citizen@stateofrosebud.com	;Carol Citizen	;									;mrs;carol.citizen@stateofrosebud.com;12/02/1943;;
+;customergroup	;elizabeth.miller@stateofrosebud.com	;Elizabeth Miller	;							;mrs;elizabeth.miller@stateofrosebud.com;12/13/1975;;
+;customergroup	;mathew.miller@stateofrosebud.com	;Matthew Miller	;									;mr;mathew.miller@stateofrosebud.com;06/22/1977;;
+;customergroup	;teresa.citizen@stateofrosebud.com	;Teresa Citizen	;									;miss;teresa.citizen@stateofrosebud.com;11/26/1964;;
+;customergroup	;amanda.smith@stateofrosebud.com	;Amanda Smith	;									;miss;amanda.smith@stateofrosebud.com;10/11/1949;;
+;customergroup	;jack.smith@stateofrosebud.com	    ;Jack Smith	;									    ;mr;jack.smith@stateofrosebud.com;11/23/1946;;
+
+
+
+INSERT_UPDATE Address;&addId			;owner(Customer.uid)[unique=true]	;streetname[unique=true]	;postalcode[unique=true]	;duplicate[unique=true]	;town		;country(isocode)	;billingAddress	;contactAddress	;shippingAddress	;unloadingAddress	;firstname	;lastname		;email								;gender(code)	;middlename		;phone1			;title(code)	;url	;company;fax;department
+                    ;primary address	;jane.citizen@stateofrosebud.com	;230 Primary Street				;1000						;false					;Rosebud	;GB					;true			;true			;true				;true				;Jane	;Citizen			;jane.citizen@stateofrosebud.com	;FEMALE			;			;0011234567	;miss				;		;		;
+
+INSERT_UPDATE CreditCardPaymentInfo	;code[unique=true]	;&payId[unique=true]	;user(uid)[unique=true]				;ccOwner				;number				;type(code)	;validFromMonth	;validFromYear	;validToMonth	;validToYear	;subscriptionId	;duplicate[default=false];saved[default=true]
+									;hpsapayer			;hpsapayer				;jane.citizen@stateofrosebud.com	;Jane Citizen	;4111111111111112	;visa		;1				;2010			;12				;2020			;1231			;
+

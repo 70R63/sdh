@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2016 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:security="http://www.springframework.org/schema/security" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+		<security:http disable-url-rewriting="true" pattern="/drafts/**" use-expressions="true">
+		<security:session-management session-authentication-strategy-ref="fixation" />
+		
+		<security:anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS"/>
+		
+		<!-- This url should be https as we are setting guid in this request and those request should be https -->
+		<security:intercept-url pattern="/drafts/retrieve-draft" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')"
+			requires-channel="https" />
+			
+		<security:form-login
+				login-page="/login"
+				authentication-failure-handler-ref="loginAuthenticationFailureHandler"
+				authentication-success-handler-ref="loginGuidAuthenticationSuccessHandler"/>
+
+
+		<security:logout logout-url="/logout" success-handler-ref="logoutSuccessHandler"/>
+
+		<security:port-mappings>
+			<security:port-mapping http="#{configurationService.configuration.getProperty('tomcat.http.port')}"
+								   https="#{configurationService.configuration.getProperty('tomcat.ssl.port')}"/>
+			<security:port-mapping http="80" https="443"/>
+			<!--security:port-mapping http="#{configurationService.configuration.getProperty('proxy.http.port')}"
+				https="#{configurationService.configuration.getProperty('proxy.ssl.port')}" /-->
+		</security:port-mappings>
+
+		<security:request-cache ref="httpSessionRequestCache"/>
+		
+		<security:access-denied-handler ref="defaultAccessDeniedHandler"/>
+		
+	</security:http>
+	
+	<alias name="defaultPSGuestCheckoutCartCleanStrategy" alias="psGuestCheckoutCartCleanStrategy" />
+	<bean id="defaultPSGuestCheckoutCartCleanStrategy" class="de.hybris.platform.sdhpsaddon.security.impl.DefaultPSGuestCheckoutCartCleanStrategy">
+		<property name="checkoutCustomerStrategy" ref="checkoutCustomerStrategy" />
+		<property name="cartService" ref="cartService" />
+		<property name="psCartService" ref="psCartService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="userService" ref="userService" />
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+	
+	<bean id="anonymousCheckoutFilter" class="de.hybris.platform.sdhpsaddon.filters.PSAnonymousCheckoutFilter" >
+		<property name="psGuestCheckoutCartCleanStrategy"  ref="psGuestCheckoutCartCleanStrategy" />
+		<property name="psCartService"  ref="psCartService" />
+		<property name="cartService"  ref="cartService" />
+		<property name="userStrategy"  ref="yFormUserStrategy" />
+	</bean>
+	
+	<bean id="psCheckBillPermissionsFilter" class="de.hybris.platform.sdhpsaddon.filters.PSCheckBillPermissionsFilter" >
+		<property name="psBillPaymentFacade"  ref="psBillPaymentFacade" />
+		<property name="configurationService"  ref="configurationService" />
+		<property name="psRelationshipFacade"  ref="psRelationshipfacade" />
+		<property name="psPermissionFacade"  ref="psPermissionFacade" />
+		<property name="customerFacade"  ref="customerFacade" />
+		<property name="userFacade"  ref="userFacade" />
+		<property name = "patternsList">
+         <list>
+            <value>(^https\://.*/bills/receipt/.*)</value>
+            <value>(^https\://.*/bills/loadCustomerBills)</value>
+            <value>(^https\://.*/bills/payment)</value>
+         </list>
+      </property>
+	</bean>
+	
+	<bean id="psCheckBillPermissionsFilterListMergeDirective" depends-on="storefrontTenantDefaultFilterChainList" parent="listMergeDirective">
+		<property name="add" ref="psCheckBillPermissionsFilter"/>
+	</bean>
+
+</beans>

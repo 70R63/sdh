@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+
+--><project name="sdhpsaddon_buildcallbacks">
+
+	<property location="${ext.sdhpsaddon.path}" name="ext.sdhpsaddon.mapperToPath"/>
+	<property name="addonStorefront" value="yacceleratorstorefront"/>
+
+	<if>
+		<os family="windows"/>
+		<then>
+			<propertyregex global="true" input="${ext.sdhpsaddon.path}" override="yes" property="ext.sdhpsaddon.mapperToPath" regexp="\\" replace="/"/>
+		</then>
+	</if>
+
+	<target description="Installing the sdhpsaddon AddOn" name="install.sdhpsaddon">
+		<sequential>
+			<set_publicsector_addon_storefront addonstorefrontname="${addonStorefront}"/>
+			<sdhpsaddon_install_addons addonStorefrontAtt="${addonStorefront}"/>
+			<sdhpsaddon_copy_orbeon_config addonStorefrontAtt="${addonStorefront}"/>
+			<sdhpsaddon_compileuisrc_executor addonStorefrontAtt="${addonStorefront}"/>
+		</sequential>
+	</target>
+
+
+	<macrodef name="set_publicsector_addon_storefront">
+		<attribute name="addonstorefrontname"/>
+		<sequential>
+			<echo level="info" message="##### publicsector set storefront #####"/>
+			<if>
+				<and>
+					<isset property="sdhpsaddon.storefront"/>
+					<equals arg1="${sdhpsaddon.storefront}" arg2="yacceleratorstorefront"/>
+					<not>
+						<equals arg1="@{addonstorefrontname}" arg2="yacceleratorstorefront"/>
+					</not>
+				</and>
+				<then>
+					<echo>Setting global flag for a publicsector storefront extension @{addonstorefrontname} ...</echo>
+					<echo append="true" file="${HYBRIS_CONFIG_DIR}/local.properties">
+						#####################################################################################
+						# Global flag for an extension which will be a publicsector extension 					#
+						#####################################################################################
+						sdhpsaddon.storefront=@{addonstorefrontname}
+					</echo>
+				</then>
+				<else>
+					<if>
+						<and>
+							<isset property="sdhpsaddon.storefront"/>
+							<not>
+								<equals arg1="@{addonstorefrontname}" arg2="yacceleratorstorefront"/>
+							</not>
+							<not>
+								<equals arg1="@{addonstorefrontname}" arg2="${sdhpsaddon.storefront}"/>
+							</not>
+						</and>
+						<then>
+							<echo>!!!The sdhpsaddon has already installed with ${sdhpsaddon.storefront}!!!</echo>
+							<fail>
+								*************************************************************
+								There is already other extension	${sdhpsaddon.storefront} defined as publicsector storefront,
+								please verify it and remove manually 'sdhpsaddon.storefront' property from local.properties.
+								*************************************************************
+							</fail>
+						</then>
+					</if>
+				</else>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhpsaddon_install_addons">
+		<attribute default="${sdhpsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+            <echo level="info" message="##### Public Sector AddOn Installation : ${addonStorefrontAtt} #####"/>
+			<property file="${ext.sdhpsaddon.path}/addons.properties"/>
+
+			<echo level="info" message="##### publicsector storefront : ${sdhpsaddon.storefront}"/>
+
+			<echo level="info" message="##### publicsector storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<echo level="info" message="installing PS AddOns : ${sdhpsaddon.addons} for @{addonStorefrontAtt}"/>
+			<antcall target="addoninstall">
+				<param name="addonnames" value="${sdhpsaddon.addons}"/>
+				<param name="addonStorefront.yacceleratorstorefront" value="@{addonStorefrontAtt}"/>
+			</antcall>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhpsaddon_copy_orbeon_config">
+		<attribute default="${sdhpsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+
+			<echo level="info" message="##### publicsector storefront : ${sdhpsaddon.storefront}"/>
+
+			<echo level="info" message="##### publicsector storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<echo level="info" message="copy orbeon config to hybris config dir..."/>
+			<copy filtering="false" overwrite="true" todir="${HYBRIS_CONFIG_DIR}/orbeon" verbose="true">
+
+				<fileset dir="${ext.sdhpsaddon.path}/orbeon/resources">
+					<include name="**/**.*"/>
+					<exclude name="**/properties-*.xml"/>
+				</fileset>
+			</copy>
+
+			<pathconvert property="platformhome.unix" targetos="unix">
+				<path>
+					<pathelement path="${platformhome}"/>
+				</path>
+			</pathconvert>
+			<copy filtering="true" overwrite="false" todir="${HYBRIS_CONFIG_DIR}/orbeon" verbose="true">
+				<filterset begintoken="${" endtoken="}" recurse="true">
+					<filter token="platformhome" value="${platformhome.unix}"/>
+					<filtersfile file="${ext.sdhpsaddon.path}/project.properties"/>
+					<filtersfile file="${ext.@{addonStorefrontAtt}.path}/project.properties"/>
+					<filtersfile file="project.properties"/>
+					<filtersfile file="${HYBRIS_CONFIG_DIR}/local.properties"/>
+					<filtersfile file="${ext.xyformsstorefrontcommons.path}/project.properties"/>
+					<filtersfile file="${ext.orbeonweb.path}/project.properties"/>
+				</filterset>
+				<fileset dir="${ext.xyformsstorefrontcommons.path}/orbeon/resources">
+					<include name="**/**.*"/>
+				</fileset>
+			</copy>
+
+
+			<copy filtering="true" overwrite="true" todir="${HYBRIS_CONFIG_DIR}/orbeon" verbose="true">
+				<filterset begintoken="${" endtoken="}" recurse="true">
+					<filter token="platformhome" value="${platformhome.unix}"/>
+					<filtersfile file="${ext.sdhpsaddon.path}/project.properties"/>
+					<filtersfile file="${ext.@{addonStorefrontAtt}.path}/project.properties"/>
+					<filtersfile file="project.properties"/>
+					<filtersfile file="${HYBRIS_CONFIG_DIR}/local.properties"/>
+					<filtersfile file="${ext.xyformsstorefrontcommons.path}/project.properties"/>
+					<filtersfile file="${ext.orbeonweb.path}/project.properties"/>
+				</filterset>
+				<fileset dir="${ext.sdhpsaddon.path}/orbeon/resources">
+					<include name="**/properties-*.xml"/>
+				</fileset>
+			</copy>
+			<copy file="${ext.sdhpsaddon.path}/project.properties" filtering="false" overwrite="true" tofile="${ext.xyformsstorefrontcommons.path}/project.storefront.properties" verbose="true"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhpsaddon_lesscss">
+		<attribute default="${sdhpsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+
+			<echo level="info" message="##### publicsector storefront : ${sdhpsaddon.storefront}"/>
+
+			<echo level="info" message="##### publicsector storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<property location="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/lib/less-rhino-1.7.3.js" name="tool.less"/>
+			<property location="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/lib/lessc-rhino-1.7.3.js" name="tool.lessc"/>
+			<property location="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/lib/rhino1_7R4.jar" name="tool.rhino"/>
+
+			<copy todir="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/_ui-src/addons/sdhpsaddon/responsive/">
+				<fileset dir="${ext.sdhpsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/_ui-src/responsive/" includes="**/*.less"/>
+			</copy>
+
+			<copy todir="${ext.sdhpsaddon.path}/acceleratoraddon/web/webroot/_ui/responsive/">
+				<fileset dir="${ext.sdhpsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/*"/>
+				<regexpmapper from="themes/(.*)" handledirsep="yes" to="theme-\1/css"/>
+			</copy>
+
+			<copy todir="${ext.sdhpsaddon.path}/acceleratoraddon/web/webroot/_ui/responsive/">
+				<fileset dir="${ext.sdhpsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/*"/>
+				<regexpmapper from="themes/(.*)" handledirsep="yes" to="theme-\1/css"/>
+			</copy>
+
+			<copy todir="${ext.sdhpsaddon.path}/acceleratoraddon/web/webroot/_ui/responsive/">
+				<fileset dir="${ext.sdhpsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/_ui-src/responsive/" includes="themes/**/fonts/*"/>
+				<regexpmapper from="themes/(.*)/fonts/(.*)" handledirsep="yes" to="theme-\1/fonts/\2"/>
+			</copy>
+
+			<apply dir="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/_ui-src/addons/sdhpsaddon/responsive/themes/" executable="java" failonerror="true" force="true" parallel="false">
+				<!-- Give the input bundle of less files-->
+				<fileset dir="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/_ui-src/addons/sdhpsaddon/responsive/themes/">
+					<include name="**/style.less"/>
+				</fileset>
+				<arg value="-jar"/>
+				<arg path="${tool.rhino}"/>
+				<arg value="-f"/>
+				<arg path="${tool.less}"/>
+				<arg path="${tool.lessc}"/>
+				<srcfile/>
+				<!-- Output the compiled css file with corresponding name -->
+				<!-- <regexpmapper  from="(.*)/less/(.*)\.less$$" to="${ext.yacceleratorstorefront.mapperToPath}/web/webroot/_ui/addons/sdhpsaddon/responsive/theme-\1/css/\2.css" handledirsep="yes"/> -->
+				<regexpmapper from="(.*)/less/(.*)\.less$$" handledirsep="yes" to="${ext.sdhpsaddon.mapperToPath}/acceleratoraddon/web/webroot/_ui/responsive/theme-\1/css/\2.css"/>
+				<targetfile/>
+			</apply>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhpsaddon_after_build">
+		<attribute default="${sdhpsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+			<echo level="info" message="##### publicsector storefront : ${sdhpsaddon.storefront}"/>
+
+			<echo level="info" message="##### Copy public sector acceleratoraddon storefront page template for header and footer......@{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+			<copy overwrite="true" todir="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/tags/responsive/template" verbose="true">
+				<fileset dir="${ext.sdhpsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/tags/responsive/template">
+					<include name="page.tag"/>
+				</fileset>
+			</copy>
+
+			<echo message="sdhpsaddon_after_build"/>
+			<sdhpsaddon_compileuisrc_executor addonStorefrontAtt="@{addonStorefrontAtt}"/>
+			<impexGenerate extname="sdhpsaddon"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhpsaddon_compileuisrc_executor">
+		<attribute default="${sdhpsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+			<echo level="info" message="##### publicsector storefront : ${sdhpsaddon.storefront}"/>
+
+			<echo level="info" message="##### Before calling sdhpsaddon_lesscss : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+			<sdhpsaddon_lesscss addonStorefrontAtt="@{addonStorefrontAtt}"/>
+		</sequential>
+	</macrodef>
+
+	<target description="compile the _ui-src folder in _ui" name="sdhpsaddon_compileuisrc">
+		<sdhpsaddon_compileuisrc_executor/>
+	</target>
+
+	<target name="remove-orbeon-limiter-filter">
+		<sequential>
+			<echo level="info" message="Removing orbeon-limiter-filter definition from @{ext.orbeonweb.path}'s web.xml"/>
+			<xmltask dest="${ext.orbeonweb.path}/web/webroot/WEB-INF/web.xml" source="${ext.orbeonweb.path}/web/webroot/WEB-INF/web.xml">
+				<remove path="//*[name()='filter'][contains(.//*[name()='filter-name'], 'orbeon-limiter-filter')]"/>
+				<remove path="//*[name()='filter-mapping'][contains(.//*[name()='filter-name'], 'orbeon-limiter-filter')]"/>
+			</xmltask>
+		</sequential>
+	</target>
+
+	<macrodef name="sdhpsaddon_after_clean">
+		<sequential>
+			<delete failonerror="false" file="${ext.sdhpsaddon.path}/resources-lang/touch_impexgen"/>
+		</sequential>
+	</macrodef>
+
+</project>

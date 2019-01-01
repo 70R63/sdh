@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2016 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:annotation-config/> 
+    <context:component-scan base-package="de.hybris.platform.sdhbillsaddon" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver">
+	 </context:component-scan>
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultBilladdonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="sdhbillsaddon"/>
+	</bean>
+
+	<bean id="defaultBilladdonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultBilladdonJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getBilladdonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultBilladdonBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	
+	<bean id="BilladdonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getBilladdonBeforeViewHandler"/>
+	</bean>
+	
+	<bean id="psbillReceiptContext" class="de.hybris.platform.billfacades.process.xslfo.context.PSBillReceiptContext" parent="abstractPSBillReceiptContext"
+		scope="prototype">
+	</bean>
+	<import resource="spring-security-config.xml" />
+
+</beans>

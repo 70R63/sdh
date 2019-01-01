@@ -19,10 +19,13 @@
 	<classpathentry exported="false" kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
 	<classpathentry exported="false" kind="src" path="/platform"/>
 <classpathentry combineaccessrules="false" kind="src" path="/xyformsstorefrontcommons"/>
-<classpathentry combineaccessrules="false" kind="src" path="/relationshipaddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/billaddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/publicsectoracceleratoraddon"/>
+
+
+
 <classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
 <classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
+<classpathentry combineaccessrules="false" kind="src" path="/sdhpsaddon"/>
+<classpathentry combineaccessrules="false" kind="src" path="/sdhbillsaddon"/>
+<classpathentry combineaccessrules="false" kind="src" path="/sdhrelationshipsaddon"/>
 				
 </classpath>

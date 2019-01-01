@@ -19,7 +19,12 @@ import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.sdh.core.model.SDHCustomerRegistrationProcessModel;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 
@@ -28,6 +33,8 @@ import org.springframework.beans.factory.annotation.Required;
  */
 public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustomerProcessModel>
 {
+	private static final Logger LOG = Logger.getLogger(CustomerEmailContext.class);
+
 	private Converter<UserModel, CustomerData> customerConverter;
 	private CustomerData customerData;
 
@@ -36,6 +43,26 @@ public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustome
 	{
 		super.init(storeFrontCustomerProcessModel, emailPageModel);
 		customerData = getCustomerConverter().convert(getCustomer(storeFrontCustomerProcessModel));
+
+
+		try
+		{
+			put("activateAccountURL",
+					getSiteBaseUrlResolutionService().getWebsiteUrlForSite(getBaseSite(), getUrlEncodingAttributes(), true,
+							"/login/pw/activateAccount", "token=" + getURLEncodedToken(storeFrontCustomerProcessModel)));
+		}
+		catch (final UnsupportedEncodingException e)
+		{
+			LOG.error("Not able to generate token for customer resgistration: "
+					+ ((SDHCustomerRegistrationProcessModel) storeFrontCustomerProcessModel).getCustomer().getUid());
+		}
+
+	}
+
+	public String getURLEncodedToken(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel)
+			throws UnsupportedEncodingException
+	{
+		return URLEncoder.encode(((SDHCustomerRegistrationProcessModel) storeFrontCustomerProcessModel).getToken(), "UTF-8");
 	}
 
 	@Override

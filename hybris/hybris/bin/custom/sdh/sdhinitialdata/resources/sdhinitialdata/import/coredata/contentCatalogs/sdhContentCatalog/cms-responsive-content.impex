@@ -2,9 +2,8 @@
 #
 $contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$addonExtensionName=publicsectoracceleratoraddon
-$jarResourceCmsPublicSector=jar:de.hybris.platform.publicsectorstore.constants.PublicsectorstoreConstants&/$addonExtensionName/import/cockpits/cmscockpit
-
+$addonExtensionName=sdhpsaddon
+$jarResourceCmsPublicSector=jar:de.hybris.platform.sdhpsaddon.constants.PublicsectoracceleratoraddonConstants&/$addonExtensionName/import/cockpits/cmscockpit
 # Import modulegen config properties into impex macros
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
 $jarResourceCms=$config-jarResourceCmsValue
@@ -838,3 +837,607 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 
 INSERT_UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
 ;;serviceRequestDetails;Service Product Details;ServiceRequestDetailsPageTemplate;true;
+
+################# SDH Custom Pages #############################
+
+######### New Page for Register #####
+
+# Create PageTemplates
+# These define the layout for pages
+# "FrontendTemplateName" is used to define the JSP that should be used to render the page for pages with multiple possible layouts.
+# "RestrictedPageTypes" is used to restrict templates to page types
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;RegisterPageTemplate;Register Page Template;pages/account/accountRegisterPage;ContentPage
+
+# Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
+# The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;RegisterPageTemplate         ;$jarResourceCms/structure-view/structure_registerPageTemplate.vm
+
+# Register Page Template
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='RegisterPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;LeftContentSlot;;;wide
+;RightContentSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='RegisterPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-RegisterPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-RegisterPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-RegisterPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-RegisterPage;Footer;;FooterSlot;true
+;;HeaderLinks-RegisterPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-RegisterPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-RegisterPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-RegisterPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;LeftContentSlot-RegisterPage;LeftContentSlot;;LeftContentSlot;true
+;;RightContentSlot-RegisterPage;RightContentSlot;;RightContentSlot;true
+;;PlaceholderContentSlot-RegisterPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+# Functional Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
+;;register;Register Page;RegisterPageTemplate;register
+
+
+#new contribuyentes page
+
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;ContribuyentesPageTemplate;Contribuyentes Page Template;layout/contribuyentesPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContribuyentesPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContribuyentesPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ContribuyentesPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-ContribuyentesPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-ContribuyentesPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-ContribuyentesPage;Footer;;FooterSlot;true
+;;HeaderLinks-ContribuyentesPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ContribuyentesPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ContribuyentesPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ContribuyentesPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-ContribuyentesPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;ContribuyentesPage;Contribuyentes Page;ContribuyentesPageTemplate;Contribuyentes Page
+
+#end new contribuyentes page
+
+
+#new Mi RIT page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;MiRitPageTemplate;Mi Rit Page Template;layout/miRitPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='MiRitPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='MiRitPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-MiRitPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-MiRitPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-MiRitPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-MiRitPage;Footer;;FooterSlot;true
+;;HeaderLinks-MiRitPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-MiRitPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-MiRitPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-MiRitPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-MiRitPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;MiRitPage;Mi Rit Page;MiRitPageTemplate;Mi Rit Page
+
+#end  Mi RIT page
+
+
+
+
+#new delineacion urbana page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;DelineacionUrbanaPageTemplate;Delineacion Urbana Template;layout/delineacionUrbanaPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='DelineacionUrbanaPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='DelineacionUrbanaPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-DelineacionUrbanaPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-DelineacionUrbanaPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-DelineacionUrbanaPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-DelineacionUrbanaPage;Footer;;FooterSlot;true
+;;HeaderLinks-DelineacionUrbanaPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-DelineacionUrbanaPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-DelineacionUrbanaPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-DelineacionUrbanaPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-DelineacionUrbanaPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;DelineacionUrbanaPage;Delineacion Urbana Page;DelineacionUrbanaPageTemplate;Delineacion Urban Page
+
+#end  delineacion urbana page
+
+
+#new delineacion urbana correcciones page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;DelineacionUrbanaCorrecionesPageTemplate;Delineacion Urbana Correcciones Template;layout/delineacionUrbanaCorreccionesPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='DelineacionUrbanaCorrecionesPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='DelineacionUrbanaCorrecionesPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-DelineacionUrbanaCorrecionesPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-DelineacionUrbanaCorrecionesPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-DelineacionUrbanaCorrecionesPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-DelineacionUrbanaCorrecionesPage;Footer;;FooterSlot;true
+;;HeaderLinks-DelineacionUrbanaCorrecionesPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-DelineacionUrbanaCorrecionesPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-DelineacionUrbanaCorrecionesPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-DelineacionUrbanaCorrecionesPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-DelineacionUrbanaCorrecionesPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;DelineacionUrbanaCorrecionesPage;Delineacion Urbana Correcciones Page;DelineacionUrbanaCorrecionesPageTemplate;Delineacion Urban Correcciones Page
+
+#end  delineacion urbana correcciones page
+
+
+
+#new declaraciones page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;DelineacionUrbanaDeclaracionesPageTemplate;Delineacion Urbana Declaraciones Template;layout/delineacionUrbanaDeclaracionesPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='DelineacionUrbanaDeclaracionesPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='DelineacionUrbanaDeclaracionesPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-DelineacionUrbanaDeclaracionesPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-DelineacionUrbanaDeclaracionesPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-DelineacionUrbanaDeclaracionesPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-DelineacionUrbanaDeclaracionesPage;Footer;;FooterSlot;true
+;;HeaderLinks-DelineacionUrbanaDeclaracionesPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-DelineacionUrbanaDeclaracionesPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-DelineacionUrbanaDeclaracionesPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-DelineacionUrbanaDeclaracionesPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-DelineacionUrbanaDeclaracionesPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;DelineacionUrbanaDeclaracionesPage;Delineacion Urbana Declaraciones Page;DelineacionUrbanaDeclaracionesPageTemplate;Delineacion Urban Declaraciones Page
+
+#end  declaraciones page
+
+#new declaraciones pagos PSE page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;DelineacionUrbanaPagosPSEPageTemplate;Delineacion Urbana Pagos PSE Template;layout/delineacionUrbanaPagosPSEPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='DelineacionUrbanaPagosPSEPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='DelineacionUrbanaPagosPSEPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-DelineacionUrbanaPagosPSEPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-DelineacionUrbanaPagosPSEPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-DelineacionUrbanaPagosPSEPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-DelineacionUrbanaPagosPSEPage;Footer;;FooterSlot;true
+;;HeaderLinks-DelineacionUrbanaPagosPSEPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-DelineacionUrbanaPagosPSEPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-DelineacionUrbanaPagosPSEPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-DelineacionUrbanaPagosPSEPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-DelineacionUrbanaPagosPSEPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;DelineacionUrbanaPagosPSEPage;Delineacion Urbana Declaraciones Page;DelineacionUrbanaPagosPSEPageTemplate;Delineacion Urban Declaraciones Page
+
+#end  declaraciones pagos PSE page
+
+#new Sobre tasa Gasolina page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;SobretasaGasolinaPageTemplate;Sobretasa Gasolina Template;layout/sobretasaGasolinaPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SobretasaGasolinaPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SobretasaGasolinaPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SobretasaGasolinaPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-SobretasaGasolinaPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-SobretasaGasolinaPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-SobretasaGasolinaPage;Footer;;FooterSlot;true
+;;HeaderLinks-SobretasaGasolinaPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-SobretasaGasolinaPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-SobretasaGasolinaPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-SobretasaGasolinaPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-SobretasaGasolinaPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;SobretasaGasolinaPage;Sobretasa gasolina Page;SobretasaGasolinaPageTemplate;Delineacion Urban Declaraciones Page
+
+#end  Sobre tasa Gasolina  page
+
+
+#new predial unificado page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;PredialUnificadoPageTemplate;Predial Unificado Template;layout/predialUnificadoPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='PredialUnificadoPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='PredialUnificadoPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-PredialUnificadoPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-PredialUnificadoPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-PredialUnificadoPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-PredialUnificadoPage;Footer;;FooterSlot;true
+;;HeaderLinks-PredialUnificadoPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-PredialUnificadoPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-PredialUnificadoPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-PredialUnificadoPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-PredialUnificadoPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;PredialUnificadoPage;Predial  Unificado Page;PredialUnificadoPageTemplate;Predial Unificado Page
+
+#end  predial unificado page
+
+#new predial unificado correcciones page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;PredialUnificadoCorrecionesPageTemplate;Predial Unificado Correcciones Template;layout/predialUnificadoCorreccionesPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='PredialUnificadoCorrecionesPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='PredialUnificadoCorrecionesPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-PredialUnificadoCorrecionesPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-PredialUnificadoCorrecionesPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-PredialUnificadoCorrecionesPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-PredialUnificadoCorrecionesPage;Footer;;FooterSlot;true
+;;HeaderLinks-PredialUnificadoCorrecionesPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-PredialUnificadoCorrecionesPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-PredialUnificadoCorrecionesPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-PredialUnificadoCorrecionesPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-PredialUnificadoCorrecionesPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;PredialUnificadoCorrecionesPage;Predial Unificado Correcciones Page;PredialUnificadoCorrecionesPageTemplate;Predial Unificado Correcciones Page
+
+#end  predial unificado correcciones page
+
+#new predial unificado declaraciones page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;PredialUnificadoDeclaracionesPageTemplate;Predial Unificado Declaraciones Template;layout/predialUnificadoDeclaracionesPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='PredialUnificadoDeclaracionesPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='PredialUnificadoDeclaracionesPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-PredialUnificadoDeclaracionesPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-PredialUnificadoDeclaracionesPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-PredialUnificadoDeclaracionesPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-PredialUnificadoDeclaracionesPage;Footer;;FooterSlot;true
+;;HeaderLinks-PredialUnificadoDeclaracionesPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-PredialUnificadoDeclaracionesPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-PredialUnificadoDeclaracionesPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-PredialUnificadoDeclaracionesPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-PredialUnificadoaDeclaracionesPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;PredialUnificadoDeclaracionesPage;Predial Unificado Declaraciones Page;PredialUnificadoDeclaracionesPageTemplate;Predial Unificado Declaraciones Page
+
+#end predial unificado declaraciones page
+
+#new predial unificado pagos PSE page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;PredialUnificadoPagosPSEPageTemplate;Predial Unificado Pagos PSE Template;layout/predialUnificadoaPagosPSEPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='PredialUnificadoPagosPSEPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='PredialUnificadoPagosPSEPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-PredialUnificadoPagosPSEPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-PredialUnificadoPagosPSEPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-PredialUnificadoPagosPSEPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-PredialUnificadoPagosPSEPage;Footer;;FooterSlot;true
+;;HeaderLinks-PredialUnificadoPagosPSEPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-PredialUnificadoPagosPSEPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-PredialUnificadoPagosPSEPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-PredialUnificadoPagosPSEPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-PredialUnificadoPagosPSEPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;PredialUnificadoPagosPSEPage;Predial Unificado Declaraciones Page;PredialUnificadoPagosPSEPageTemplate;Predial Unificado Declaraciones Page
+
+#end  predial unificado pagos PSE page
+
+#new sobre vehiculos automotores page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;SobreVehiculosAutomotoresPageTemplate;Sobre Vehiculos Automotores Template;layout/sobreVehiculosAutomotoresPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='SobreVehiculosAutomotoresPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SobreVehiculosAutomotoresPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SobreVehiculosAutomotoresPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-SobreVehiculosAutomotoresPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-SobreVehiculosAutomotoresPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-SobreVehiculosAutomotoresPage;Footer;;FooterSlot;true
+;;HeaderLinks-SobreVehiculosAutomotoresPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-SobreVehiculosAutomotoresPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-SobreVehiculosAutomotoresPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-SobreVehiculosAutomotoresPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-SobreVehiculosAutomotoresPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;SobreVehiculosAutomotoresPage;Sobre Vehiculos Automotores Page;SobreVehiculosAutomotoresPageTemplate;Sobre Vehiculos Automotores Page
+
+#end sobre vehiculos automotores page
+
+#new ica y reteica page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;IcaReteIcaPageTemplate;Ica y ReteIca Template;layout/icaReteIcaPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='IcaReteIcaPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='IcaReteIcaPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-IcaReteIcaPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-IcaReteIcaPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-IcaReteIcaPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-IcaReteIcaPage;Footer;;FooterSlot;true
+;;HeaderLinks-IcaReteIcaPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-IcaReteIcaPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-IcaReteIcaPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-IcaReteIcaPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-IcaReteIcaPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;IcaReteIcaPage;Ica y ReteIca Page;IcaReteIcaPageTemplate;Ica y ReteIca
+
+#end ica y reteica page
+
+#new activeate account page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;ActivateAccountPageTemplate;Activate Account Page Template;account/accountActivateAccountPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ActivateAccountPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ActivateAccountPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ActivateAccountPageTemplate;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-ActivateAccountPageTemplate;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-ActivateAccountPageTemplate;NavigationBar;;NavigationBarSlot;true
+;;Footer-ActivateAccountPageTemplate;Footer;;FooterSlot;true
+;;HeaderLinks-ActivateAccountPageTemplate;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-ActivateAccountPageTemplate;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-ActivateAccountPageTemplate;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-ActivateAccountPageTemplate;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-ActivateAccountPageTemplate;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;ActivateAccountPage;Activate Account Page;ActivateAccountPageTemplate;Activate Account Page
+
+#end activeate account page
+
+
+

@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.method.HandlerMethod;
 
 
@@ -49,6 +50,9 @@ public class SecurityUserCheckBeforeControllerHandler implements BeforeControlle
 	@Resource(name = "timeService")
 	private TimeService timeService;
 
+	@Resource(name = "excludeRedirectUrlRequestMatcher")
+	RequestMatcher excludeRedirectUrlRequestMatcher;
+
 	@Override
 	public boolean beforeController(final HttpServletRequest request, final HttpServletResponse response,
 			final HandlerMethod handler) throws IOException
@@ -68,6 +72,17 @@ public class SecurityUserCheckBeforeControllerHandler implements BeforeControlle
 				final String springSecurityUserId = (String) principal;
 				final UserModel currentUser = userService.getCurrentUser();
 				final String hybrisUserId = currentUser.getUid();
+
+				if ("anonymous".equalsIgnoreCase(hybrisUserId))
+				{
+					if (excludeRedirectUrlRequestMatcher.matches(request))
+					{
+
+						invalidateSessionAndRedirect(request, response, "/login");
+						return false;
+
+					}
+				}
 
 				// check if the user is deactivated
 				if (isUserDeactivated(currentUser))

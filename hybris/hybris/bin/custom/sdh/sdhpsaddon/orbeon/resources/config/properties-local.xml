@@ -1,0 +1,18 @@
+<properties xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:oxf="http://www.orbeon.com/oxf/processors"
+            xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="oxf:/config/properties-common.xml"/>
+    <xi:include href="oxf:/config/properties-orbeon.xml"/>
+    <xi:include href="oxf:/config/properties-yforms.xml"/>
+    <xi:include href="oxf:/config/properties-publicsector.xml"/>
+
+	<property as="xs:boolean" name="oxf.xforms.show-error-dialog" value="false"/>
+	<property as="xs:integer" name="oxf.cache.size" value="1000" />
+	<property as="xs:boolean" name="oxf.xforms.cache.document" value="true" />
+	<property as="xs:integer" name="oxf.xforms.cache.documents.size" value="500" />
+
+    <!-- The following properties are used when dealing with SSL on the Persistence API side -->
+    <!--property as="xs:anyURI"  name="oxf.http.ssl.keystore.uri" value="file:/opt/hybris/bin/platform/tomcat/lib/keystore"/-->
+
+</properties>

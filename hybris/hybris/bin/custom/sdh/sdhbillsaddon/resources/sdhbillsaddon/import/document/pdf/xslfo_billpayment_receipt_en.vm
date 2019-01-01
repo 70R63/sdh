@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.1"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                exclude-result-prefixes="fo">                
+<xsl:template match="root">              
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
+   <!-- Creator="html2fo" Version="0.4.2" -->
+   <fo:layout-master-set>
+      <fo:simple-page-master margin-right="2.0cm" margin-left="2.0cm" margin-bottom="1.0cm" margin-top="1.0cm" page-width="21cm" page-height="29.7cm" master-name="first">
+         <fo:region-body margin-bottom="1.5cm" margin-top="1.5cm" />
+         <fo:region-before extent="1.5cm" />
+         <fo:region-after extent="1.0cm" />
+      </fo:simple-page-master>
+   </fo:layout-master-set>
+   <fo:page-sequence master-reference="first" language="en" hyphenate="true">
+      <fo:static-content flow-name="xsl-region-before">
+         #set ($logoUrl = "${ctx.receiptLogoMedia.url}")
+            <fo:block line-height="12pt" font-size="10pt" space-before.optimum="0" space-after.optimum="0">
+               <fo:external-graphic fox:alt-text="$ctx.esc.xml(${ctx.receiptLogoMedia.altText})" src="url(${ctx.mediaBaseUrl}$logoUrl)" width="100%" padding-left="3.5mm" content-height="scale-to-fit" content-width="scale-to-fit" height="1.00in" />
+            </fo:block>
+      </fo:static-content>
+      
+      <fo:static-content flow-name="xsl-region-after">
+         <!-- Slot for the Footer Page No -->
+         <fo:block text-align="end" background-color="#d3d3d3" width="90%" line-height="28pt" padding-right="3.5mm">
+            <fo:page-number />
+            of
+            <fo:page-number-citation ref-id="TheVeryLastPage" />
+         </fo:block>
+      </fo:static-content>
+      <fo:flow flow-name="xsl-region-body">
+         <fo:block line-height="12pt" space-before.optimum="1.5pt" space-after.optimum="1.5pt" keep-together="always">
+            <fo:block  role="H1" space-before.optimum="1.5pt" space-after.optimum="1.5pt" margin-top="80px" keep-together="always" line-height="32pt" font-size="16pt">Confirmation - Pay My Bill</fo:block>
+            <fo:block role="H2" space-before.optimum="1.5pt" space-after.optimum="1.5pt" keep-together="always" line-height="28pt" font-size="14pt">Bill ID $ctx.esc.xml(${ctx.billReceiptData.bill.billId})</fo:block>
+            <fo:block role="H3" space-before.optimum="1.5pt" space-after.optimum="1.5pt" keep-together="always" line-height="28pt" font-size="14pt">Receipt Number $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.receiptId})</fo:block>
+            <fo:block line-height="12pt" font-size="10pt" space-before.optimum="60.5pt" space-after.optimum="10.5pt" keep-together="always">
+               <fo:block role="H2" space-before.optimum="60.5pt" space-after.optimum="10.5pt" keep-together="always" font-weight="bold" line-height="28pt" font-size="14pt">Summary</fo:block>
+            </fo:block>
+            <fo:inline font-size="10pt">
+               <fo:block />
+            </fo:inline>
+            <fo:table table-layout="fixed" width="50%" border-width="" border-style="none" space-before.optimum="5.5pt" space-after.optimum="5.5pt">
+               <fo:table-column column-width="10cm" />
+               <fo:table-column column-width="10cm" />
+               <fo:table-body>
+                  <fo:table-row>
+                     <fo:table-cell padding=".5mm" border-width="" border-style="none">
+                        <fo:block role="H3" space-before.optimum="1.5pt" space-after.optimum="1.5pt" keep-together="always" font-weight="bold" line-height="24pt" font-size="14pt">Payment &amp; Billing Address</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell padding=".5mm" border-width="" border-style="none">
+                        <fo:block role="H3"  space-before.optimum="1.5pt" space-after.optimum="1.5pt" keep-together="always" font-weight="bold" line-height="24pt" font-size="14pt">Bill Details</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+                    #set($creditCardNumber= ${ctx.billReceiptData.receiptInfo.paymentInfo.cardNumber})
+                  <fo:table-row>
+                     <fo:table-cell padding=".5mm" border-width="" border-style="none">
+                       #if(${ctx.billReceiptData.receiptInfo})
+	                       #if(${ctx.billReceiptData.receiptInfo.paymentInfo.accountHolderName})
+	                       	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" font-weight="bold" line-height="20pt" font-size="10pt"> $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paymentInfo.accountHolderName})</fo:block>
+	                       #end
+	                       #if(${ctx.billReceiptData.receiptInfo.paymentInfo.cardType})
+	                       	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">$ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paymentInfo.cardType})</fo:block>
+	                       #end
+	                       #if($creditCardNumber)
+	                       	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">$ctx.esc.xml($creditCardNumber)</fo:block>
+	                       #end
+	                       #if(${ctx.billReceiptData.receiptInfo.paymentInfo.expiryMonth} && ${ctx.billReceiptData.receiptInfo.paymentInfo.expiryYear})
+	                       	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">$ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paymentInfo.expiryMonth})/$ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paymentInfo.expiryYear})</fo:block>
+	                       #end
+	                       #if(${ctx.billReceiptData.receiptInfo.paymentInfo.billingAddress.line1})
+	                       	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">$ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paymentInfo.billingAddress.line1})</fo:block>
+	                       #end
+	                       #if(${ctx.billReceiptData.receiptInfo.paymentInfo.billingAddress.town})
+	                       	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">$ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paymentInfo.billingAddress.town})</fo:block>
+	                       #end
+	                       #if(${ctx.billReceiptData.receiptInfo.paymentInfo.billingAddress.postalCode} && ${ctx.billReceiptData.receiptInfo.paymentInfo.billingAddress.country.name})
+	                       	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">$ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paymentInfo.billingAddress.postalCode}), $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paymentInfo.billingAddress.country.name})</fo:block>
+	                       #end
+                       #end
+                     </fo:table-cell>
+                    #set($paidDate = "${ctx.billReceiptData.receiptInfo.paidDate}")
+                    #set($String = "")
+                     <fo:table-cell padding=".5mm" border-width="" border-style="none">
+                        <fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" font-weight="bold" line-height="20pt" font-size="10pt">$ctx.esc.xml(${ctx.billReceiptData.bill.billDescription})</fo:block>
+                        <fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" font-weight="bold" line-height="20pt" font-size="10pt">Amount Paid: $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.currency}) $ctx.esc.xml($String.format("%.2f", ${ctx.billReceiptData.receiptInfo.paidAmount}))</fo:block>
+                        <fo:block space-before.optimum="1pt" space-after.optimum="1.5pt" keep-together="always" font-weight="bold" line-height="20pt" font-size="10pt">Amount Due: $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.currency}) $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.outstandingAmount})</fo:block>
+                        #if(${ctx.billReceiptData.receiptInfo.overPaidAmount} > 0)
+                        	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" font-weight="bold" line-height="20pt" font-size="10pt">Amount OverPaid: $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.currency}) $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.overPaidAmount})</fo:block>
+                        #end
+                        	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">Bill Total: $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.currency}) $ctx.esc.xml(${ctx.billReceiptData.bill.totalBillAmount})</fo:block>
+                        	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">Date Paid: $ctx.esc.xml(${ctx.dateFormatter.format(${ctx.billReceiptData.receiptInfo.paidDate})})</fo:block>
+                        #if(${ctx.billReceiptData.receiptInfo.outstandingAmount} > 0)
+                        	<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">Date Due: $ctx.esc.xml(${ctx.dateFormatter.format(${ctx.billReceiptData.bill.billDueDate})})</fo:block>
+                        #end
+                        #if(${ctx.isPaidByVisible} eq "true")
+                        	#if(${ctx.isPaidByGuestUser} eq "true")
+                        		<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">Paid By: $ctx.esc.xml(${ctx.guestUserEmail})</fo:block>
+                        	#else
+                        		<fo:block space-before.optimum="1pt" space-after.optimum="1pt" keep-together="always" line-height="20pt" font-size="10pt">Paid By: $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paidBy.title}) $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paidBy.firstName}) $ctx.esc.xml(${ctx.billReceiptData.receiptInfo.paidBy.lastName})</fo:block>
+                        	#end
+                        #end
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-body>
+            </fo:table>
+            <fo:block space-before.optimum="1.5pt" space-after.optimum="1.5pt" keep-together="always" id="LastPage" line-height="1pt" font-size="1pt" />
+         </fo:block>
+         <fo:block id="TheVeryLastPage" />
+      </fo:flow>
+   </fo:page-sequence>
+</fo:root>
+
+</xsl:template>
+
+</xsl:stylesheet>
