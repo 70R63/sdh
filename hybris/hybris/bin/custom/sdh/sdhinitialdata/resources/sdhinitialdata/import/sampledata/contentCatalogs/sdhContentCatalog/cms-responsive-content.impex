@@ -79,6 +79,71 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; BlogAndNewsLink                 ; BLOG & NEWS                        ; http://www.stateofrosebud.com/news ; ; ; newWindow;;
 ; ; EventsLink                      ; EVENTS                             ; http://www.stateofrosebud.com/events ; ; ; newWindow;;
 
+
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+#->INI dev-eduardo Agregar menu SDH 04/01/2019
+; ;MiRITLink; MI RIT LINK    ; "/" ;;;;;
+; ;MiBuzonLink; MI BUZON LINK    ; "/" ;;;;;
+; ;ImpuestosLink; IMPUESTOS LINK    ; "/" ;;;;;
+; ;TramitesLink; TRAMITES LINK    ; "/" ;;;;;
+; ;FacturacionLink; FACTURACION LINK    ; "/" ;;;;;
+; ;DeclaracionesLink; DECLARACIONES LINK    ; "/" ;;;;;
+; ;PagosLink; PAGOS LINK    ; "/" ;;;;;
+; ;ConsultasLink; CONSULTAS LINK    ; "/" ;;;;;
+#->FIN dev-eduardo Agregar menu SDH 04/01/2019
+
+
+#->INI dev-eduardo Agregar submenu MI RIT 04/01/2019
+; ; CertRitLink        ; CERTIFICACION RIT                             ; http://www.stateofrosebud.com/about ;;;;;
+#->FIN dev-eduardo Agregar submenu MI RIT 04/01/2019
+
+#->INI dev-eduardo Agregar submenu MI BUZON 04/01/2019
+#->FIN dev-eduardo Agregar submenu MI BUZON 04/01/2019
+
+#->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
+; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; http://www.stateofrosebud.com/about ;;;;;
+; ; ICALink                      ; ICA                                 ; http://www.stateofrosebud.com/about ;;;;;
+; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; http://www.stateofrosebud.com/about ;;;;;
+; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; http://www.stateofrosebud.com/about ;;;;;
+; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; http://www.stateofrosebud.com/about ;;;;;
+; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; http://www.stateofrosebud.com/about ;;;;;
+#->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
+
+#->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
+; ; AnulacionFacturaLink         ; ANULACION FACTURACION               ; http://www.stateofrosebud.com/about ;;;;;
+; ; ModificacionFacturaLink      ; MODIFICACION FACTURACION            ; http://www.stateofrosebud.com/about ;;;;;
+#->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
+
+#->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
+; ; DescargaFacturaLink          ; DESCARGA FACTURA                    ; http://www.stateofrosebud.com/about ;;;;;
+; ; ReexpedicionFacturaLink      ; REEXPEDICION FACTURA                ; http://www.stateofrosebud.com/about ;;;;;
+#->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
+
+#->INI dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
+; ; PresentarDeclaracionLink     ; PRESENTAR DECLARACION               ; http://www.stateofrosebud.com/about ;;;;;
+; ; ListaDeclaracionFirmaLink    ; LISTA DECLARACION FIRMA             ; http://www.stateofrosebud.com/about ;;;;;
+#->FIN dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
+
+#->INI dev-eduardo Agregar submenu PAGOS 04/01/2019
+; ; GeneracionROPLink            ; GENERACION ROP                      ; http://www.stateofrosebud.com/about ;;;;;
+; ; PagoLineaLink                ; PAGO LINEA                          ; http://www.stateofrosebud.com/about ;;;;;
+#->FIN dev-eduardo Agregar submenu PAGOS 04/01/2019
+
+#->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+; ; CertPagoLink                 ; CONSULTAS LINK                      ; http://www.stateofrosebud.com/about ;;;;;
+; ; ObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; http://www.stateofrosebud.com/about ;;;;;
+; ; RelPagosLink                 ; RELACION DE PAGOS LINK              ; http://www.stateofrosebud.com/about ;;;;;
+; ; EdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; http://www.stateofrosebud.com/about ;;;;;
+#->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+
+
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); product(code,$productCV);target(code)[default = 'sameWindow'];;
 ; ; BrowseAllAccessoriesLink        ; Accessories Link                ; ; roads-and-vehicles ; ; ;;
 
@@ -118,8 +183,22 @@ INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=tru
 ## level 1. SiteRoot ##
 ## level 2. children of SiteRoot ## 
 # the following order of children is the display order on the site
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+#->INI dev-eduardo Agregar menu SDH 04/01/2019
+#INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
+#;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;ReportAnIssueNavigationNode,RoadsAndVehiclesNavigationNode,PermitsAndApplicationsNavigationNode,BirthsDeathsAndMarriagesNavigationNode,RosebudNavigationNode,BlogAndNewsNavigationNode,EventsNavigationNode
+
+
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
-;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;ReportAnIssueNavigationNode,RoadsAndVehiclesNavigationNode,PermitsAndApplicationsNavigationNode,BirthsDeathsAndMarriagesNavigationNode,RosebudNavigationNode,BlogAndNewsNavigationNode,EventsNavigationNode
+;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode
+#->FIN dev-eduardo Agregar menu SDH 04/01/2019
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+
 
 ## level 3. children of Category Nav ##
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;children(uid,$contentCV);links(&linkRef);
@@ -131,6 +210,22 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;BlogAndNewsNavigationNode;;Blog And News Menu ;BlogAndNewsNavigationNode;
 ;EventsNavigationNode;;Events Menu;EventsNavigationNode;
 
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+#->INI dev-eduardo Agregar menu SDH 04/01/2019
+;MiRITNavigationNode;;Mi RIT Menu;MiRITNavigationNode;MiRITNavigationServiceRequestsNavNodeMenu
+#;MiBuzonNavigationNode;;Mi Buzon Menu;MiBuzonNavigationNode;MiBuzonNavigationServiceRequestsNavNodeMenu
+;ImpuestosNavigationNode;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosNavigationServiceRequestsNavNodeMenu
+;TramitesNavigationNode;;Tramites Menu;TramitesNavigationNode;TramitesNavigationServiceRequestsNavNodeMenu
+;FacturacionNavigationNode;;Facturacion Menu;FacturacionNavigationNode;FacturacionNavigationServiceRequestsNavNodeMenu
+;DeclaracionesNavigationNode;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesNavigationServiceRequestsNavNodeMenu
+;DeclaracionesNavigationNode;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesNavigationServiceRequestsNavNodeMenu
+;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
+;ConsultaNavigationNode;;Consultas Menu;ConsultaNavigationNode;ConsultaNavigationServiceRequestsNavNodeMenu
+#->FIN dev-eduardo Agregar menu SDH 04/01/2019
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+
 ## entries of the above navigation nodes ##
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(CMSLinkComponent.uid,CMSLinkComponent.$contentCV);
 ;ReportAnIssueNavigationNodeEntry;;Report An Issue Menu Entry;ReportAnIssueNavigationNode;ReportAnIssueLink;
@@ -140,6 +235,21 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;RosebudNavigationNodeEntry;;About Rosebud Menu Entry;RosebudNavigationNode;AboutRosebudLink;
 ;BlogAndNewsNavigationNodeEntry;;Blog And News Menu;BlogAndNewsNavigationNode;BlogAndNewsLink;
 ;EventsNavigationNodeEntry;;Blog And News Menu;EventsNavigationNode;EventsLink;
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+#->INI dev-eduardo Agregar menu SDH 04/01/2019
+;MiRITNavigationNodeEntry;;Mi RIT Menu;MiRITNavigationNode;MiRITLink;
+#;MiBuzonNavigationNodeEntry;;Mi Buzon Menu;MiBuzonNavigationNode;MiBuzonLink;
+;ImpuestosNavigationNodeEntry;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosLink;
+;TramitesNavigationNodeEntry;;Tramites Menu;TramitesNavigationNode;TramitesLink;
+;FacturacionNavigationNodeEntry;;Facturacion Menu;FacturacionNavigationNode;FacturacionLink;
+;DeclaracionesNavigationNodeEntry;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesLink;
+;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
+;ConsultaNavigationNodeEntry;;Consulta Menu;ConsultaNavigationNode;ConsultasLink;
+#->FIN dev-eduardo Agregar menu SDH 04/01/2019
+#*->-------------------------------------------------------------------------------------------------------------------------
+
 
 ## level 4. children of NavNode ## (the following order of children is the display order on the site)
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;children(uid,$contentCV);links(&linkRef);
@@ -158,6 +268,41 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 # children Births Deaths And Marriages
 ;BirthsDeathsAndMarriagesPopularServiceRequestsNavNodeMenu;;Births Deaths And Marriages Popular Service Requests Menu;BirthsDeathsAndMarriagesPopularServiceRequestsNavNodeMenu;RegisterABirthNavNode, MarriageCertificateNavNode, BirthsDeathsAndMarriagesSeeAllServiceRequestsNavNode
 ;BirthsDeathsAndMarriagesPopularCategoriesNavNodeMenu;;Births Deaths And Marriages Popular Categories Menu;BirthsDeathsAndMarriagesPopularCategoriesNavNodeMenu;Births&ChildrenNavNode, MarriagesNavNode, RetrieveADraftNavNode, BirthsDeathsAndMarriagesSeeAllCategoriesNavNode
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+#->INI dev-eduardo Agregar menu MI RIT 04/01/2019
+;MiRITNavigationServiceRequestsNavNodeMenu;;Mi RIT Service Requests Menu;MiRITNavigationServiceRequestsNavNodeMenu;CertRitNavNode
+#->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
+
+#->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
+#->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
+
+#->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
+;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,ICANavNode,PredialUnificadoNavNode,PublicidadExteriorNavNode,SobreVehiAutomotoresNavNode,SobreTasaGasolinaNavNode
+#->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
+
+#->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
+;TramitesNavigationServiceRequestsNavNodeMenu;;Tramites Service Requests Menu;TramitesNavigationServiceRequestsNavNodeMenu;AnulacionFacturaNavNode, ModificacionFacturaNavNode
+#->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
+
+#->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
+;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescargaFacturaNavNode,ReexpedicionFacturaNavNode
+#->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
+
+#->INI dev-eduardo Agregar menu DECLARACIONES 04/01/2019
+;DeclaracionesNavigationServiceRequestsNavNodeMenu;;Declaracion Service Requests Menu;DeclaracionesNavigationServiceRequestsNavNodeMenu;PresentarDeclaracionNavNode,ListaDeclaracionFirmaNavNode
+#->FIN dev-eduardo Agregar menu DECLARACIONES 04/01/2019
+
+#->INI dev-eduardo Agregar menu PAGOS 04/01/2019
+;PagosNavigationServiceRequestsNavNodeMenu;;Pagos Service Requests Menu;PagosNavigationServiceRequestsNavNodeMenu;GeneracionROPNavNode, PagoLineaNavNode
+#->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
+
+#->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
+;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode
+#->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
+#*->-------------------------------------------------------------------------------------------------------------------------
+
 
 ## level 5. children of above (level 4) nodes ##
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;links(&linkRef);
@@ -210,6 +355,56 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;RetrieveADraftNavNode;;Retrieve A Draft Link;RetrieveADraftNavNode
 ;BirthsDeathsAndMarriagesSeeAllCategoriesNavNode;;Births Deaths And Marriages Link;BirthsDeathsAndMarriagesSeeAllCategoriesNavNode
 
+
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+#->INI dev-eduardo Agregar menu MI RIT 04/01/2019
+;CertRitNavNode ;;Certificacion RIT Link;CertRitNavNode 
+#->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
+
+#->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
+#->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
+
+#->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
+;DelineacionUrbanaNavNode ;;Delineación Urbana Link;DelineacionUrbanaNavNode 
+;ICANavNode ;;ICA Link;ICANavNode 
+;PredialUnificadoNavNode ;;Predial unificado Link;PredialUnificadoNavNode 
+;PublicidadExteriorNavNode ;;Publicidad exterior Link;PublicidadExteriorNavNode 
+;SobreVehiAutomotoresNavNode ;;Sobre vehículos automotores Link;SobreVehiAutomotoresNavNode 
+;SobreTasaGasolinaNavNode ;;Sobre tasa a la gasolina Link;SobreTasaGasolinaNavNode 
+#->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
+
+#->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
+;AnulacionFacturaNavNode ;;Anulacion Factura Link;AnulacionFacturaNavNode 
+;ModificacionFacturaNavNode ;;Modificacion Factura Link;ModificacionFacturaNavNode 
+#->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
+
+#->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
+;DescargaFacturaNavNode ;;Descarga Factura Link;DescargaFacturaNavNode 
+;ReexpedicionFacturaNavNode ;;Reexpedicion Factura Link;ReexpedicionFacturaNavNode 
+#->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
+
+#->INI dev-eduardo Agregar menu DECLARACIONES 04/01/2019
+;PresentarDeclaracionNavNode ;;Presentar Declaracion Link;PresentarDeclaracionNavNode 
+;ListaDeclaracionFirmaNavNode ;;Lista Declaracion Firma Link;ListaDeclaracionFirmaNavNode 
+#->FIN dev-eduardo Agregar menu DECLARACIONES 04/01/2019
+
+#->INI dev-eduardo Agregar menu PAGOS 04/01/2019
+;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode 
+;PagoLineaNavNode ;;Pago Linea Link;PagoLineaNavNode
+#->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
+
+#->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
+;CertPagoNavNode;;Certificacion Pago Link;CertPagoNavNode
+;ObligacionesPendNavNode;;Obligaciones Pendientes Link;ObligacionesPendNavNode
+;RelPagosNavNode;;Relacion Pagos Link;RelPagosNavNode
+;EdoCuentaNavNode;;Estado Cuenta Link;EdoCuentaNavNode
+#->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+
+
 ## entries of the above Links ##
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(CMSLinkComponent.uid,CMSLinkComponent.$contentCV);
 #ReportAnIssue-PopularServiceRequests links
@@ -260,6 +455,54 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;MarriagesNavNodeEntry;;Marriages Navigation Node Entry;MarriagesNavNode;MarriagesLink
 ;RetrieveADraftNavNodeEntry;;Retrieve A Draft Navigation Node Entry;RetrieveADraftNavNode;RetrieveADraftLink
 ;BirthsDeathsAndMarriagesSeeAllCategoriesNavNodeEntry;;Births Deaths And Marriages See All Categories Navigation Node Entry;BirthsDeathsAndMarriagesSeeAllCategoriesNavNode;BirthsDeathsAndMarriagesSeeAllCategoriesLink
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+#->INI dev-eduardo Agregar menu MI RIT 04/01/2019
+;CertRitNavNodeEntry;;Certificacion RIT Navigation Node Entry;CertRitNavNode;CertRitLink
+#->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
+
+#->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
+#->FIN dev-eduardo Agregar menu MI BUZON  04/01/2019
+
+#->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
+;DelineacionUrbanaNavNodeEntry;;Delineacion Urbana Navigation Node Entry;DelineacionUrbanaNavNode;DelineacionUrbanaLink
+;ICANavNodeEntry;;ICA Navigation Node Entry;ICANavNode;ICALink
+;PredialUnificadoNavNodeEntry;;Predial unificado Navigation Node Entry;PredialUnificadoNavNode;PredialUnificadoLink
+;PublicidadExteriorNavNodeEntry;;Publicidad exterior Navigation Node Entry;PublicidadExteriorNavNode;PublicidadExteriorLink
+;SobreVehiAutomotoresNavNodeEntry;;Sobre vehiculos automotores Navigation Node Entry;SobreVehiAutomotoresNavNode;SobreVehiAutomotoresLink
+;SobreTasaGasolinaNavNodeEntry;;Sobre tasa gasolina Navigation Node Entry;SobreTasaGasolinaNavNode;SobreTasaGasolinaLink
+#->FIN dev-eduardo Agregar menu IMPUESTOS  04/01/2019
+
+#->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
+;AnulacionFacturaNavNodeEntry;;Anulacion factura Navigation Node Entry;AnulacionFacturaNavNode;AnulacionFacturaLink
+;ModificacionFacturaNavNodeEntry;;Modificacion factura Navigation Node Entry;ModificacionFacturaNavNode;ModificacionFacturaLink
+#->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
+
+#->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
+;DescargaFacturaNavNodeEntry;;Descarga factura Navigation Node Entry;DescargaFacturaNavNode;DescargaFacturaLink
+;ReexpedicionFacturaNavNodeEntry;;Reexpedicion factura Navigation Node Entry;ReexpedicionFacturaNavNode;ReexpedicionFacturaLink
+#->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
+
+#->INI dev-eduardo Agregar menu DECLARACION 04/01/2019
+;PresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;PresentarDeclaracionNavNode;PresentarDeclaracionLink
+;ListaDeclaracionFirmaNavNodeEntry;;Lista declaracion firma Navigation Node Entry;ListaDeclaracionFirmaNavNode;ListaDeclaracionFirmaLink
+#->FIN dev-eduardo Agregar menu DECLARACION 04/01/2019
+
+#->INI dev-eduardo Agregar menu PAGOS 04/01/2019
+;GeneracionROPNavNodeEntry;;Generacion ROP Navigation Node Entry;GeneracionROPNavNode;GeneracionROPLink
+;PagoLineaNavNodeEntry;;Pago linea Navigation Node Entry;PagoLineaNavNode;PagoLineaLink
+#->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
+
+#->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
+;CertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;CertPagoNavNode;CertPagoLink
+;ObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ObligacionesPendNavNode;ObligacionesPendLink
+;RelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;RelPagosNavNode;RelPagosLink
+;EdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;EdoCuentaNavNode;EdoCuentaLink
+#->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+
 
 # ContentSlot 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)

@@ -86,8 +86,9 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;AboutRosebudLink;"ACERCA DE ROSEBUD";"Haga clic aquí para acceder a la opción de menú Acerca de Rosebud"
 ;;BlogAndNewsLink;"NOTICIAS";"Haga clic aquí para acceder a la opción de menú Blogs y noticias"
 ;;EventsLink;"EVENTOS";"Haga clic aquí para acceder a la opción de menú Eventos"
-;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
-;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
+#;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
+#;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
+
 
 #Report An Issue
 ;;ReportGraffitiLink;"Informar sobre grafitis";"Haga clic aquí para acceder a la opción de menú Informar sobre grafitis"
@@ -126,6 +127,70 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;MarriagesLink;"Matrimonios";"Haga clic aquí para acceder a la opción de menú Matrimonios"
 ;;BirthsDeathsAndMarriagesSeeAllServiceRequestsLink;"> Ver todas las solicitudes de servicio";"Haga clic aquí para ver todas las solicitudes de servicio de nacimientos, defunciones y matrimonios"
 ;;BirthsDeathsAndMarriagesSeeAllCategoriesLink;"> Ver todas las categorías";"Haga clic aquí para ver todas las categorías de nacimientos, defunciones y matrimonios"
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+#->INI dev-eduardo Agregar menu SDH 04/01/2019
+;;MiRITLink;"Mi RIT";"Haga clic aquí para ir a Mi RIT"
+;;MiBuzonLink;"Mi Buzón";"Haga clic aquí para ir a Mi Buzón"
+;;ImpuestosLink;"Impuestos";"Haga clic aquí para ir a Impuestos"
+;;TramitesLink;"Trámites";"Haga clic aquí para ir a Trámites"
+;;FacturacionLink;"Facturación";"Haga clic aquí para ir a Facturación"
+;;DeclaracionesLink;"Declaraciones";"Haga clic aquí para ir a Declaraciones"
+;;PagosLink;"Pagos";"Haga clic aquí para ir a Pagos"
+;;ConsultasLink;"Consultas";"Haga clic aquí para ir a las consultas"
+#->FIN dev-eduardo Agregar menu SDH 04/01/2019
+
+
+#->INI dev-eduardo Agregar submenu MI RIT 04/01/2019
+;;CertRitLink;"Certificación RIT";"Haga clic aquí para acceder a la opción de menú Certifiación RIT"
+#->FIN dev-eduardo Agregar submenu MI RIT 04/01/2019
+
+#->INI dev-eduardo Agregar submenu MI BUZON 04/01/2019
+#->FIN dev-eduardo Agregar submenu MI BUZON 04/01/2019
+
+#->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
+;;DelineacionUrbanaLink;"Delineación Urbana";"Haga clic aquí para acceder a la opción de menú Delineación Urbana"
+;;ICALink;"ICA";"Haga clic aquí para acceder a la opción de menú ICA"
+;;PredialUnificadoLink;"Predial unificado";"Haga clic aquí para acceder a la opción de menú Predial unificado"
+;;PublicidadExteriorLink;"Publicidad exterior";"Haga clic aquí para acceder a la opción de menú Publicidad exterior"
+;;SobreVehiAutomotoresLink;"Sobre vehículos automotores";"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
+;;SobreTasaGasolinaLink;"Sobre tasa a la gasolina";"Haga clic aquí para acceder a la opción de menú Sobre tasa a la gasolina"
+#->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
+
+#->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
+;;AnulacionFacturaLink;"Anulación de factura";"Haga clic aquí para acceder a la opción de menú Anulación factura"
+;;ModificacionFacturaLink;"Modificación de factura";"Haga clic aquí para acceder a la opción de menú Modificación factura"
+#->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
+
+#->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
+;;DescargaFacturaLink;"Descarga de factura";"Haga clic aquí para acceder a la opción de menú Descarga de factura"
+;;ReexpedicionFacturaLink;"Reexpedición de factura";"Haga clic aquí para acceder a la opción de menú Reexpedición de factura"
+#->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
+
+#->INI dev-eduardo Agregar submenu DECLARACION 04/01/2019
+;;PresentarDeclaracionLink;"Presentar declaración";"Haga clic aquí para acceder a la opción de menú Presentar declaración"
+;;ListaDeclaracionFirmaLink;"Lista de declaraciones a firmar";"Haga clic aquí para acceder a la opción de menú Lista de declaraciones a firmar"
+#->FIN dev-eduardo Agregar submenu DECLARACION 04/01/2019
+
+#->INI dev-eduardo Agregar submenu PAGO 04/01/2019
+;;GeneracionROPLink;"Generación de ROP";"Haga clic aquí para acceder a la opción de menú Generación de ROP"
+;;PagoLineaLink;"Pago en línea";"Haga clic aquí para acceder a la opción de menú Pago en línea"
+#->FIN dev-eduardo Agregar submenu PAGO 04/01/2019
+
+#->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+;;CertPagoLink;"Certificaciones de pago";"Haga clic aquí para acceder a la opción de menú Certificaciones de pago"
+;;ObligacionesPendLink;"Obligaciones pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
+;;RelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
+;;EdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
+#->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 UPDATE PSRetrieveADraftComponent; $contentCV[unique = true]; uid[unique = true];title[lang=$lang];description[lang=$lang];retrieveDraftButtonLabel[lang=$lang];
 ;;PSRetrieveADraftComponent;Recuperar el borrador de su solicitud;¿Ya ha iniciado una solicitud de servicio y la ha grabado como borrador? Recupérela aquí.;Recuperar borrador de solicitud;
@@ -178,7 +243,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 # CMS Link Components
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
 ;;ContactUsLink;"Contacto"
-;;AboutRoseBudLink;"Acerca de Rosebud"
+#;;AboutRoseBudLink;"Acerca de Rosebud"
 ;;RoseBudsSenatorsLink;"Senadores de Rosebud"
 ;;RetrieveDraftLink;"Recuperar un borrador"
 ;;AllServiceRequestsLink;"Todas las solicitudes de servicios"
