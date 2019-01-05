@@ -10,6 +10,9 @@ import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.facades.SDHValidaContribuyenteFacade;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import javax.annotation.Resource;
 
@@ -42,6 +45,24 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 	@Override
 	public boolean existeContribuyente(final ValidaContribuyenteRequest request)
 	{
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		final String date = request.getExpeditionDate();
+
+		final LocalDate customerExpDate;
+
+		try
+		{
+			customerExpDate = LocalDate.parse(date, formatter);
+
+			request.setExpeditionDate(formatter.format(customerExpDate));
+		}
+		catch (final DateTimeParseException e1)
+		{
+			LOG.error("Error parsing expedition date: " + date);
+			return false;
+		}
+
 		final String response = sdhValidaContribuyenteService.validaContribuyente(request);
 
 		if (StringUtils.isBlank(response))
@@ -49,37 +70,31 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 			return false;
 		}
 
-		if (response.contains("Registro encontrado"))
+
+		try
 		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			final SDHValidaMailRolResponse sdhValidaMailRolResponse = mapper.readValue(response, SDHValidaMailRolResponse.class);
 
-			try
+			if (sdhValidaMailRolResponse != null && sdhValidaMailRolResponse.getIdmsj() == 0
+					&& sdhValidaMailRolResponse.getInfoContrib() != null
+					&& sdhValidaMailRolResponse.getInfoContrib().getNumBP() != null
+					&& sdhValidaMailRolResponse.getInfoContrib().getAdicionales() != null
+					&& sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR() != null)
 			{
-				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-				final SDHValidaMailRolResponse sdhValidaMailRolResponse = mapper.readValue(response, SDHValidaMailRolResponse.class);
+				sessionService.setAttribute("numBP", sdhValidaMailRolResponse.getInfoContrib().getNumBP());
 
-				if (sdhValidaMailRolResponse != null
-						&& sdhValidaMailRolResponse.getInfoContrib() != null
-						&& sdhValidaMailRolResponse.getInfoContrib().getAdicionales() != null
-						&& sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR() != null)
-				{
-					if (sdhValidaMailRolResponse.getInfoContrib().getNumBP() != null)
-					{
-						sessionService.setAttribute("numBP", sdhValidaMailRolResponse.getInfoContrib().getNumBP());
-					}
+				sessionService.setAttribute("SMTP_ADDR", sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
 
-					sessionService.setAttribute("SMTP_ADDR", sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
-				}
+				return true;
 			}
-			catch (final IOException e)
-			{
-				// XXX Auto-generated catch block
-				LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
-			}
-
-			return true;
 		}
-
+		catch (final IOException e)
+		{
+			// XXX Auto-generated catch block
+			LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
+		}
 		return false;
 	}
 

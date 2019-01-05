@@ -30,13 +30,23 @@
 									</span>
 							</label>
 								<div class="control">
+									
+							            
 									<select id="documentType" name="documentType" class="form-control" aria-required="true">
-										<option value="Seleccionar">Seleccionar</option>
-							            <option value="CC" se>Cedula de Ciudadania</option>
-							            <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
-							            <option value="Pasaporte ">Pasaporte </option>
-							            <option value="N.I.T">N.I.T</option>
+										<c:set var="selected" value="" />
+										<c:if test="${empty searchUserForm.documentType}">
+											<c:set var="selected" value="selected" />
+										</c:if>
+										<option value="Seleccionar" ${selected}>Seleccionar</option>
+									<c:forEach items="${idTypes }" var="eachType">
+										<c:set var="selected" value="" />
+										<c:if test="${eachType eq  searchUserForm.documentType}">
+											<c:set var="selected" value="selected" />
+										</c:if>
+										<option value="${ eachType}" ${selected }><spring:theme code="register.id.types.${eachType}" /></option>
+									</c:forEach>
 									</select>
+									
 								</div>
 						</div>
 						

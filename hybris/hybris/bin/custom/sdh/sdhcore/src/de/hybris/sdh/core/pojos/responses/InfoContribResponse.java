@@ -11,7 +11,7 @@ public class InfoContribResponse
 {
 	private String numBP;
 	private String tipoDoc;
-	private int numDoc;
+	private String numDoc;
 	private String fchExp;
 	private String primNom;
 	private String segNom;
@@ -86,7 +86,7 @@ public class InfoContribResponse
 	/**
 	 * @return the numDoc
 	 */
-	public int getNumDoc()
+	public String getNumDoc()
 	{
 		return numDoc;
 	}
@@ -95,7 +95,7 @@ public class InfoContribResponse
 	 * @param numDoc
 	 *           the numDoc to set
 	 */
-	public void setNumDoc(final int numDoc)
+	public void setNumDoc(final String numDoc)
 	{
 		this.numDoc = numDoc;
 	}

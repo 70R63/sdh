@@ -19,6 +19,9 @@ import de.hybris.sdh.storefront.controllers.ControllerConstants;
 import de.hybris.sdh.storefront.forms.SDHRegisterForm;
 import de.hybris.sdh.storefront.forms.SearchUserForm;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +30,7 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,6 +80,15 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		this.httpSessionRequestCache = accHttpSessionRequestCache;
 	}
 
+	@ModelAttribute("idTypes")
+	public List<String> getIdTipes()
+	{
+
+		final List<String> idTypes = Arrays.asList("CC", "CE", "NIT", "NITE", "NUIP", "PA", "TI");
+
+		return idTypes;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String doRegister(final Model model) throws CMSItemNotFoundException
 	{
@@ -103,6 +116,9 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 
 		request.setNumid(searchUserForm.getDocumentNumber());
 		request.setTipoid(searchUserForm.getDocumentType());
+		request.setExpeditionDate(searchUserForm.getExpeditionDate());
+
+
 
 		boolean userFound = false;
 

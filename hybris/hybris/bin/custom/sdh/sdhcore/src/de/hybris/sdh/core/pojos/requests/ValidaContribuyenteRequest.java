@@ -11,6 +11,24 @@ public class ValidaContribuyenteRequest
 {
 	private String numid;
 	private String tipoid;
+	private String expeditionDate;
+
+	/**
+	 * @return the expeditionDate
+	 */
+	public String getExpeditionDate()
+	{
+		return expeditionDate;
+	}
+
+	/**
+	 * @param expeditionDate
+	 *           the expeditionDate to set
+	 */
+	public void setExpeditionDate(final String expeditionDate)
+	{
+		this.expeditionDate = expeditionDate;
+	}
 
 	/**
 	 * @return the numid
@@ -59,7 +77,8 @@ public class ValidaContribuyenteRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"documentos\":{");
 		stringBuilder.append("\"numid\":\"" + this.getNumid() + "\",");
-		stringBuilder.append("\"tipoid\":\"" + this.getTipoid() + "\"");
+		stringBuilder.append("\"tipoid\":\"" + this.getTipoid() + "\",");
+		stringBuilder.append("\"fechExp\":\"" + this.getExpeditionDate() + "\"");
 		stringBuilder.append("}");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
