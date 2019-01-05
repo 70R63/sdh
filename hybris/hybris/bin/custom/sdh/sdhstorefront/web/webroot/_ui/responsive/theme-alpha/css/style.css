@@ -18522,1169 +18522,6 @@ select[multiple].input-sm {
   border: 0;
 }
 /* --------------------------------------------------------
-Style Sheet for Relationship  Addon
-
-version: 1.0
-last modified: 13 Dec 2016 by Vikas Gupta
-author: Vikas Gupta
-----------------------------------------------------------*/
-.account-section .account-section-subheader-relationship {
-  margin: 20px 0 20px 0;
-  padding-right: 10px;
-  padding-left: 10px;
-  font-weight: 500;
-}
-.account-section .account-section-subheader-relationship h2 {
-  font-size: 20px;
-}
-.account-section .account-section-subheader-relationship .pending-request-header {
-  float: right;
-  padding-top: 10px;
-}
-.account-section .pending-request-header a:focus {
-  outline: 3px solid #47b6b1;
-  background-color: #47b6b1;
-  color: #000000;
-}
-.account-section hr {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.account-section .btn-tbl-view {
-  color: #ffffff;
-  background-color: #000000;
-  margin-right: 5px;
-  width: auto;
-}
-.account-section .btn-map-view {
-  color: #000000;
-  background-color: #f2f2f2;
-  margin-left: 5px;
-  width: auto;
-}
-.account-section .empty-permissions-relationships.content-empty {
-  font-size: 16px;
-  margin: 0 0 45px;
-  padding-left: 8px;
-  text-align: left;
-  font-weight: normal;
-}
-.my-relationship .panel-heading .accordion-toggle:after {
-  font-family: 'Glyphicons Halflings', sans-serif;
-  content: '\2212';
-  float: right;
-  color: #000000;
-  padding: 15px;
-  margin-top: -12px;
-  background-color: #f2f2f2;
-}
-.my-relationship .panel-heading .accordion-toggle.collapsed:after {
-  content: '\002b';
-}
-.my-relationship .panel-default > .panel-heading {
-  background-color: transparent;
-}
-.my-relationship .panel-group {
-  margin-top: 15px;
-}
-.my-relationship .panel-default {
-  border: 0;
-}
-.my-relationship .panel-title {
-  margin-bottom: 10px;
-  font-size: 1.5em;
-}
-@media (max-width: 639px) {
-  .my-relationship .panel-title {
-    font-size: 1.2em;
-  }
-}
-.my-relationship .panel-body {
-  padding: 15px 0;
-}
-.my-relationship .panel-group .panel-heading + .panel-collapse > .panel-body {
-  border: 0;
-}
-@media (max-width: 639px) {
-  .account-section .account-section-subheader-relationship h2 {
-    font-size: 20px;
-  }
-  .account-section .account-section-subheader-relationship .pending-request-header {
-    float: none;
-    padding-top: 20px;
-  }
-  .account-section .btn-tbl-view {
-    margin-right: 0;
-  }
-  .account-section .btn-map-view {
-    margin-left: 0;
-  }
-}
-.pending-request-permissions .pending-request {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-.pending-request-permissions .new-tag {
-  color: #ee0000;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.pending-request-permissions .card-permission-blue {
-  border: 1px solid #126ab5;
-  margin-bottom: 30px;
-}
-.pending-request-permissions .card-permission-blue .card-heading {
-  background-color: #126ab5;
-  color: #ffffff;
-  padding: 15px;
-  font-weight: 600;
-}
-.pending-request-permissions .card-permission-blue .card-content {
-  padding: 15px 15px 15px 30px;
-  min-height: 524px;
-}
-.pending-request-permissions .card-permission-blue .card-content .card-content-subtitle {
-  min-height: 50px;
-}
-.pending-request-permissions .card-permission-blue .card-content .card-content-permissions {
-  border: 1px solid #f2f2f2;
-  padding: 10px;
-  margin: 15px -4px 15px -18px;
-  line-height: 2.2em;
-}
-.pending-request-permissions .card-permission-blue .card-content .card-button-permissions {
-  margin: 15px -15px 15px -15px;
-}
-.pending-request-permissions .card-permission-blue .card-content .card-button-desc {
-  margin-top: 15px;
-}
-.pending-request-permissions .card-permission-blue .card-content .card-icon-permissions {
-  margin-right: 7px;
-  margin-left: 0;
-}
-.pending-request-permissions .card-permission-blue .card-content .card-link-permissions {
-  margin: 25px 0 15px 0;
-  font-weight: 600;
-}
-.pending-request-permissions .card-permission-blue .card-content .card-link-permissions .view-icon {
-  margin: 5px 5px 0 5px;
-}
-.pending-request-permissions .card-permission-blue .card-content .card-link-permissions .edit-icon {
-  margin: 5px 5px 0 5px;
-}
-.pending-request-permissions .card-permission-yellow {
-  border: 1px solid #fdda19;
-  margin-bottom: 30px;
-}
-.pending-request-permissions .card-permission-yellow .card-heading {
-  background-color: #fdda19;
-  color: #000000;
-  padding: 15px;
-  font-weight: 600;
-}
-.pending-request-permissions .card-permission-yellow .card-content {
-  padding: 15px 15px 15px 30px;
-  min-height: 524px;
-}
-.pending-request-permissions .card-permission-yellow .card-content .card-content-subtitle {
-  min-height: 50px;
-}
-.pending-request-permissions .card-permission-yellow .card-content .card-content-permissions {
-  border: 1px solid #f2f2f2;
-  padding: 10px;
-  margin: 15px -4px 15px -18px;
-  line-height: 2.2em;
-}
-.pending-request-permissions .card-permission-yellow .card-content .card-button-permissions {
-  margin: 15px -15px 15px -15px;
-}
-.pending-request-permissions .card-permission-yellow .card-content .card-button-desc {
-  margin-top: 15px;
-}
-.pending-request-permissions .card-permission-yellow .card-content .card-icon-permissions {
-  margin-right: 7px;
-  margin-left: 0;
-}
-.pending-request-permissions .card-permission-yellow .card-content .card-link-permissions {
-  margin: 25px 0 15px 0;
-  font-weight: 600;
-}
-.pending-request-permissions .card-permission-yellow .card-content .card-link-permissions .view-icon {
-  margin: 5px 5px 0 5px;
-}
-.pending-request-permissions .card-permission-yellow .card-content .card-link-permissions .edit-icon {
-  margin: 5px 5px 0 5px;
-}
-.pending-request-permissions .card-button-desc {
-  font-size: 15px;
-  margin: 10px 0 10px 0;
-}
-.pending-request-permissions .permissible-Items {
-  display: inline-block;
-  white-space: nowrap;
-  font-weight: bold;
-}
-.modal-footer {
-  text-align: left;
-}
-.edit-Permission .form-group .checkbox-label,
-.view-details .form-group .checkbox-label {
-  font-size: 20px;
-  font-weight: bold !important;
-  line-height: inherit;
-}
-.edit-Permission .card-section .card-section-h2 {
-  padding-bottom: 0;
-}
-.view-details .card-section .card-section-h2 {
-  border-bottom: none;
-  margin: 20px 15px -21px;
-  font-size: 20px;
-}
-.view-details .permissible-item-name {
-  padding-left: 15px;
-  font-weight: bold;
-}
-.cancel-Pending-Request-content {
-  display: none;
-}
-.colorbox .cancel-Pending-Request-content {
-  display: block;
-}
-.cancel-pending-request-button {
-  margin: 25px -12px;
-}
-.cancel-pending-request-heading h1 {
-  font-size: 21px;
-  margin-top: 0;
-  font-weight: bold;
-}
-@media (max-width: 639px) {
-  .pending-request-permissions .pending-request {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .pending-request-permissions button {
-    margin-bottom: 15px;
-  }
-  .pending-request-permissions .card-button-desc {
-    margin: 0;
-  }
-  .pending-request-permissions .label h1 {
-    margin: 31px 9px;
-  }
-  .pending-request-permissions .card-permission-yellow .card-content .card-icon-permissions,
-  .pending-request-permissions .card-permission-blue .card-content .card-icon-permissions {
-    margin-right: 15px;
-    margin-left: 0;
-  }
-  .cancel-Pending-Request-content .btn-space {
-    margin-top: 12px;
-  }
-}
-@media (min-width: 640px) and (max-width: 1023px) {
-  .pending-request-permissions .pending-request {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .pending-request-permissions button {
-    margin-bottom: 15px;
-  }
-  .pending-request-permissions .card-button-desc {
-    margin: 0;
-  }
-  .pending-request-permissions .card-permission-yellow .card-content .card-icon-permissions,
-  .pending-request-permissions .card-permission-blue .card-content .card-icon-permissions {
-    margin-right: 7px;
-  }
-}
-.setup-permissions .relationship-steps {
-  padding-left: 30px;
-}
-.setup-permissions .checkbox label {
-  text-transform: uppercase;
-}
-.setup-permissions .checkout-steps {
-  padding-left: 0;
-  margin-left: 15px;
-}
-.setup-permissions .checkout-steps .step-head .relationship-edit {
-  background: url('../../../responsive/common/images/edit.png') no-repeat scroll 0 0;
-  content: '';
-  height: 20px;
-  position: absolute;
-  right: 15px;
-  top: 30%;
-  width: 24px;
-}
-.setup-permissions .checkout-steps h3 {
-  font-size: 16px;
-}
-.setup-permissions .checkout-steps .step-body hr {
-  display: block;
-  margin: 0;
-  height: 0;
-}
-.setup-permissions .checkout-steps .step-body .setup-btn {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.setup-permissions .card-section .card-section-h2 {
-  padding-bottom: 0;
-}
-.setup-permissions .form-group .checkbox-label {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: inherit;
-}
-.setup-permissions .radio label {
-  margin: 0;
-}
-.setup-permissions .desc-text {
-  line-height: 2;
-}
-.setup-permissions .card-button-desc {
-  font-size: 15px;
-  margin-top: 15px;
-}
-.setup-permissions .permissionType {
-  display: none;
-}
-.setup-permissions .permissionType .request-permission {
-  font-size: 14px;
-  text-transform: none;
-}
-.setup-permissions .glyphicon-question-sign {
-  font-size: 35px;
-  cursor: pointer;
-}
-.setup-permissions .checkout-heading h1 {
-  color: #104d83;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 35px;
-}
-.relationship-popover .popover > .arrow {
-  display: block;
-}
-.relationship-popover .popover-title {
-  display: block;
-}
-.relationship-popover .popover-content {
-  padding: 9px 14px;
-}
-.saved-permission-help {
-  display: none;
-}
-.setup-permissions .checkout-heading {
-  margin-left: 22px;
-}
-.change-permissions .glyphicon-question-sign,
-.request-more-permissions .glyphicon-question-sign {
-  font-size: 35px;
-  cursor: pointer;
-  top: -5px;
-}
-.change-permissions .form-group .checkbox-label,
-.request-more-permissions .form-group .checkbox-label {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: inherit;
-}
-.change-permissions .checkbox label,
-.request-more-permissions .checkbox label {
-  text-transform: uppercase;
-}
-.change-permissions .card-icon-permissions,
-.request-more-permissions .card-icon-permissions {
-  top: 1px;
-}
-.change-permissions .checkout-next,
-.request-more-permissions .checkout-next {
-  margin: 6px 0;
-}
-.change-permissions .continuous-text,
-.request-more-permissions .continuous-text {
-  margin-top: 20px;
-}
-.setup-permissions .radio label.permissionTypeLabel:before {
-  top: -3px;
-}
-@media (max-width: 639px) {
-  .setup-permissions .relationship-steps {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .setup-permissions .checkout-steps {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-  }
-  .setup-permissions .checkout-steps .step-head {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .setup-permissions .checkout-steps .step-body .setup-btn {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .setup-permissions .checkout-steps h2 a.step-head::before {
-    top: 10px;
-  }
-  .setup-permissions .checkout-heading {
-    margin-left: 0;
-  }
-  .setup-permissions .radio label.permissionTypeLabel:before {
-    top: auto;
-  }
-  .account-section .change-permissions .label h1,
-  .account-section .request-more-permissions .label h1 {
-    bottom: 26px;
-  }
-}
-@media (min-width: 640px) and (max-width: 1023px) {
-  .setup-permissions .checkout-heading {
-    margin-left: 0;
-  }
-  .setup-permissions .relationship-steps {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .setup-permissions .checkout-steps {
-    margin-left: 0;
-    padding-right: 0;
-  }
-}
-.relationship-details h2 {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 3px 0 1px;
-  text-transform: uppercase;
-}
-.relationship-details .card {
-  padding: 15px;
-  margin: 5px 0 5px 0;
-}
-.relationship-details .permissions-content {
-  margin: 5px;
-  line-height: 1.8em;
-}
-.relationship-details .permissions-content .permissions-content-title {
-  vertical-align: text-bottom;
-  padding-left: 10px;
-  font-weight: 500;
-}
-.relationship-details .permissions-content .permissions-content-title-no-padding {
-  vertical-align: text-bottom;
-  font-weight: 500;
-}
-.relationship-details .notification-section {
-  margin-top: 35px;
-}
-.relationship-details .notification-section .notification-section-title {
-  padding: 0;
-  margin-top: 12px;
-}
-.relationship-details .panel-heading .accordion-toggle:after {
-  font-family: 'Glyphicons Halflings', sans-serif;
-  content: '\2212';
-  float: right;
-  color: #000000;
-  padding: 10px;
-  margin-top: -12px;
-}
-.relationship-details .panel-heading .accordion-toggle.collapsed:after {
-  content: '\002b';
-}
-.relationship-details .manage-relationDetail-accordion > .panel-heading {
-  background-color: #f2f2f2;
-  line-height: 0.1em;
-  margin-top: 20px;
-}
-.relationship-details .ui-state-default,
-.relationship-details .ui-widget-content .ui-state-default,
-.relationship-details .ui-widget-header .ui-state-default {
-  background-color: #f2f2f2;
-}
-.relationship-details hr {
-  display: none;
-}
-.relationship-details .panel-group {
-  margin-top: 15px;
-}
-.relationship-details .panel-group .panel + .panel {
-  margin-top: 35px;
-}
-.relationship-details .panel-title {
-  margin: 10px 0 10px 0;
-  font-size: 1.5em;
-}
-@media (max-width: 639px) {
-  .relationship-details .panel-title {
-    font-size: 1.2em;
-  }
-}
-.relationship-details .panel-body {
-  padding: 15px 20px;
-}
-.relationship-details .panel-group .panel-collapse > .panel-body {
-  border: 0;
-}
-.relationship-details .ui-accordion-content {
-  border: 1px solid #f2f2f2;
-}
-.relationship-details .new-tag {
-  color: #ee0000;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.relationship-details .card-permission-transparent {
-  border: 1px solid #126ab5;
-  margin-bottom: 30px;
-}
-.relationship-details .card-permission-transparent .card-heading {
-  background-color: #ffffff;
-  color: #000000;
-  padding: 15px;
-  font-weight: 600;
-}
-.relationship-details .card-permission-transparent .card-content {
-  padding: 15px 15px 15px 30px;
-  min-height: 524px;
-}
-.relationship-details .card-permission-transparent .card-content .card-content-subtitle {
-  min-height: 50px;
-}
-.relationship-details .card-permission-transparent .card-content .card-content-permissions {
-  border: 1px solid #f2f2f2;
-  padding: 10px;
-  margin: 15px -4px 15px -18px;
-  line-height: 2.2em;
-}
-.relationship-details .card-permission-transparent .card-content .card-button-permissions {
-  margin: 15px -15px 15px -15px;
-}
-.relationship-details .card-permission-transparent .card-content .card-button-desc {
-  margin-top: 15px;
-}
-.relationship-details .card-permission-transparent .card-content .card-icon-permissions {
-  margin-right: 7px;
-  margin-left: 0;
-}
-.relationship-details .card-permission-transparent .card-content .card-link-permissions {
-  margin: 25px 0 15px 0;
-  font-weight: 600;
-}
-.relationship-details .card-permission-transparent .card-content .card-link-permissions .view-icon {
-  margin: 5px 5px 0 5px;
-}
-.relationship-details .card-permission-transparent .card-content .card-link-permissions .edit-icon {
-  margin: 5px 5px 0 5px;
-}
-.relationship-details .card-permission-transparent .card-heading {
-  font-weight: 500;
-  padding: 15px 15px 0 25px;
-}
-.relationship-details .card-permission-transparent .card-content {
-  min-height: 0;
-}
-.relationship-details .card-button-desc {
-  font-size: 14px;
-}
-.relationship-details .manage-details-buttons {
-  padding-left: 2px;
-  padding-right: 2px;
-}
-.relationship-details .permission-relation-button {
-  margin-left: 31px;
-}
-.relationship-details .cancel-pending-request {
-  margin-left: -27px;
-}
-.relationship-details .panel-group .panel {
-  margin-bottom: 0;
-}
-.relationship-details .panel-heading {
-  padding: 0;
-}
-.relationship-details .panel-title {
-  margin: 0;
-}
-.relationship-details .show {
-  float: none;
-}
-@media (max-width: 639px) {
-  .relationship-details .label h1 {
-    margin: 31px 9px;
-  }
-  .relationship-details button {
-    margin-bottom: 15px;
-  }
-  .relationship-details .panel-default > .panel-heading {
-    background-color: #f2f2f2;
-  }
-  .relationship-details .card-permission-transparent .card-content .card-content-permissions {
-    padding: 5px;
-  }
-  .relationship-details .card-permission-transparent .card-content .card-icon-permissions {
-    margin-right: 5px;
-  }
-  .relationship-details .permission-relation-button {
-    margin-left: 8px;
-  }
-  .relationship-details .cancel-pending-request {
-    margin-left: 0;
-  }
-  .card-content {
-    padding: 15px 15px 15px 20px;
-  }
-  .card-content .card-content-permissions .col-xs-12 {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .relationship-details .panel-group .panel-title > a {
-    padding: 22px;
-  }
-}
-.permission-setup-confirmation {
-  padding: 0 20px;
-}
-.permission-setup-confirmation h1 {
-  color: #104d83;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 22px;
-  padding: 0 0 25px 22px;
-}
-.permission-setup-confirmation .card {
-  padding: 15px;
-  margin: 5px 0 5px 0;
-}
-.permission-setup-confirmation .permissions-content {
-  margin: 5px;
-  line-height: 1.8em;
-}
-.permission-setup-confirmation .permissions-content .permissions-content-title {
-  vertical-align: text-bottom;
-  padding-left: 10px;
-  font-weight: 500;
-}
-.permission-setup-confirmation .permissions-content .permissions-content-title-no-padding {
-  vertical-align: text-bottom;
-  font-weight: 500;
-}
-.permission-setup-confirmation .notification-section {
-  margin-top: 35px;
-}
-.permission-setup-confirmation .notification-section .notification-section-title {
-  padding: 10px 0;
-  font-weight: 500;
-}
-.permission-setup-confirmation .new-tag {
-  color: #ee0000;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.permission-setup-confirmation .card-permission-white-gray-border {
-  margin: 25px 0 15px 0;
-  border: 1px solid #f2f2f2;
-  margin-bottom: 30px;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-heading {
-  background-color: #ffffff;
-  color: #000000;
-  padding: 15px;
-  font-weight: 600;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content {
-  padding: 15px 15px 15px 30px;
-  min-height: 524px;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-content-subtitle {
-  min-height: 50px;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-content-permissions {
-  border: 1px solid #f2f2f2;
-  padding: 10px;
-  margin: 15px -4px 15px -18px;
-  line-height: 2.2em;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-button-permissions {
-  margin: 15px -15px 15px -15px;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-button-desc {
-  margin-top: 15px;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-icon-permissions {
-  margin-right: 7px;
-  margin-left: 0;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-link-permissions {
-  margin: 25px 0 15px 0;
-  font-weight: 600;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-link-permissions .view-icon {
-  margin: 5px 5px 0 5px;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-link-permissions .edit-icon {
-  margin: 5px 5px 0 5px;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-heading {
-  font-weight: 500;
-  padding: 15px 0 15px 0;
-  font-size: 20px;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content-permissions {
-  padding: 10px;
-  margin: 15px 0 15px 0;
-  line-height: 2.2em;
-  font-weight: bold;
-}
-.permission-setup-confirmation .card-permission-white-gray-border .card-content-permissions .card-icon-permissions {
-  margin: 5px;
-}
-.permission-setup-confirmation .box-person {
-  border: 1px solid #f2f2f2;
-  padding: 25px;
-  margin: 20px 0 20px 0;
-  font-size: 20px;
-  font-weight: 600;
-}
-.permission-setup-confirmation .box-action {
-  border: 1px solid #f2f2f2;
-  padding: 25px;
-  margin: 20px 0 20px 0;
-  font-size: 20px;
-  font-weight: 600;
-}
-.permission-setup-confirmation .box-action .heading {
-  font-weight: 500;
-  padding: 15px 0 15px 0;
-  font-size: 20px;
-}
-.permission-setup-confirmation .card-button-desc {
-  font-size: 14px;
-}
-.permission-setup-confirmation .desc-text {
-  margin: 0 0 25px 0;
-  line-height: 1.5em;
-}
-.permission-setup-confirmation hr {
-  margin: 25px 0 25px 0;
-}
-.permission-setup-confirmation .permission-relation-button {
-  margin-left: 43px;
-}
-.permission-setup-confirmation .confirmation-box-action {
-  padding: 25px 0 17px 0;
-}
-.permission-setup-confirmation .confirmation-box-action {
-  padding: 25px 0 60px 0;
-}
-.permission-setup-confirmation .confirmation-box-action .heading {
-  padding: 0 0 20px 0;
-}
-@media (min-width: 1024px) and (max-width: 1399px) {
-  .permission-setup-confirmation {
-    padding: 0 30px;
-  }
-}
-@media (min-width: 1400px) {
-  .permission-setup-confirmation {
-    padding: 0 30px;
-  }
-}
-@media (max-width: 639px) {
-  .permission-setup-confirmation .permission-relation-button {
-    margin-left: 8px;
-  }
-  .permission-setup-confirmation .confirmation-box-action {
-    padding: 25px 0 17px 0;
-  }
-}
-/* --------------------------------------------------------
-Style Sheet for Bill Addon
-
-version: 1.0
-last modified: 30 Nov 2016 by Vikas Gupta
-author: Vikas Gupta
-----------------------------------------------------------*/
-.all-bills .pagination-bar .pagination {
-  border: 0;
-}
-.all-bills .pagination-bar .pagination-toolbar .sort-refine-bar {
-  padding: 0;
-}
-.all-bills .pagination-toolbar {
-  padding: 0 0 15px 0;
-  margin-right: -10px;
-}
-.all-bills .pagination-bar.bottom .form-group,
-.all-bills .pagination-bar.bottom .bill-seperator {
-  visibility: hidden;
-}
-@media (max-width: 639px) {
-  .all-bills .totalResults.top {
-    margin: 15px 0;
-  }
-  .all-bills .pagination > li > a,
-  .all-bills .pagination > li > span {
-    width: 20px;
-    font-size: 18px;
-  }
-  .all-bills .pagination-bar .pagination {
-    margin-top: -10px;
-    border: 0;
-  }
-}
-@media (min-width: 640px) and (max-width: 1023px) {
-  .all-bills .totalResults.top {
-    margin: 10px 0;
-  }
-  .all-bills .pagination > li > a,
-  .all-bills .pagination > li > span {
-    width: 20px;
-    font-size: 18px;
-  }
-  .all-bills .pagination-bar .pagination {
-    margin-top: 0;
-    border: 0;
-  }
-}
-@media (min-width: 1024px) and (max-width: 1399px) {
-  .all-bills .totalResults.top {
-    margin: 15px 0;
-  }
-  .all-bills .pagination-bar .pagination {
-    margin-top: 15px;
-  }
-}
-@media (min-width: 1400px) {
-  .all-bills .totalResults.top {
-    margin: 15px 0;
-  }
-  .all-bills .pagination-bar .pagination {
-    margin-top: 15px;
-  }
-}
-.my-bill .panel-group .panel-default {
-  margin-top: -7px;
-}
-.my-bill .download-receipt {
-  margin-top: 15px;
-}
-.my-bill .bills-select {
-  text-transform: none;
-  font-size: 14px;
-}
-.my-bill .billType-message {
-  text-align: center;
-  color: #ff0f0f;
-}
-.my-bill .billType-message .bill-more-info {
-  margin-top: 4px;
-}
-.my-bill .bill-amount-due,
-.my-bill .bill-total {
-  text-align: right;
-}
-.my-bill .same-line {
-  white-space: nowrap;
-}
-.my-bill .bill-seperator {
-  border-right: 1px solid #cccccc;
-  width: 1px;
-  top: 0;
-  right: 15px;
-  min-height: 45px;
-  box-sizing: border-box;
-}
-.my-bill hr {
-  margin: 10px 0;
-}
-.bill-section-content .bills-steps {
-  padding-left: 30px;
-}
-.bill-section-content hr {
-  border: 0;
-  clear: both;
-  display: block;
-  width: 100%;
-  background-color: #000000;
-  height: 1px;
-}
-.bill-section-content .hr-space {
-  margin-bottom: 30px;
-}
-.bill-section-content .bill-section {
-  padding: 20px;
-}
-.bill-section-content .bill-amount,
-.bill-section-content .bill-card {
-  padding: 0;
-}
-.bill-section-content .bill-button {
-  padding: 6px;
-}
-.bill-section-content .glyphicon-question-sign {
-  font-size: 35px;
-  cursor: pointer;
-}
-.bill-section-content .bill-requiredfield {
-  margin: 21px 32px 24px 0;
-}
-.bill-section-content .bill-helpIcon {
-  top: 12px;
-}
-.bill-section-content .bill-textbox {
-  position: relative;
-}
-.bill-section-content .bill-symbol {
-  position: absolute;
-  top: 15px;
-}
-.bill-section-content h2,
-.bill-section-content h3 {
-  font-size: 16px;
-  margin: 0;
-}
-.bill-section-content .bill-amount-input {
-  margin: 0 0 20px 30px;
-}
-.bill-section-content .bill-card-details ul {
-  margin: 20px;
-}
-.bill-section-content .bill-hop {
-  margin-bottom: -40px;
-}
-.bill-section-content .checkout-cancel,
-.bill-section-content .checkout-next {
-  margin: 6px 0;
-}
-.saved-bill-help,
-.bill-address-book,
-.bill-saved-payments,
-.bill-card-content {
-  display: none;
-}
-.billOverdue {
-  color: #156ab5;
-  font-weight: bold;
-}
-.bill-popover .popover > .arrow {
-  display: block;
-}
-.bill-popover .popover-title {
-  display: block;
-}
-.bill-popover .popover-content {
-  padding: 9px 14px;
-}
-#colorbox .bill-address-book,
-#colorbox .bill-saved-payments {
-  display: block;
-}
-.retrieve-bill-request:before {
-  font-family: 'Glyphicons Halflings', sans-serif;
-  content: '\e086';
-  font-size: 35px;
-  padding: 5px;
-}
-.retrieve-bill-request {
-  border: 1px solid #cacaca;
-  background-color: #f2f2f2;
-}
-.retrieve-bill-request.card-section {
-  margin-top: 0;
-}
-.bills-table {
-  vertical-align: initial;
-}
-.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a {
-  text-transform: none;
-}
-.all-bills .show {
-  display: none;
-}
-.divOuterTable .billhistory-list-table .divTableRow:nth-child(n+5) {
-  display: none;
-}
-.all-bills .divOuterTable .billhistory-list-table .divTableRow:nth-child(n+5) {
-  display: block;
-}
-.download_img_pdf {
-  background-image: url('../../../responsive/common/images/pdf_acc.png');
-  position: relative;
-  top: 5px;
-  display: inline-block;
-  height: 21px;
-  width: 21px;
-  background-position: left center;
-  background-repeat: no-repeat;
-  -webkit-font-smoothing: antialiased;
-  text-indent: 100%;
-  overflow: hidden;
-}
-.account-billhistory {
-  margin: 20px 10px 10px 15px;
-}
-.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a.bill-download-pdf,
-.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a.bill-receipt-download-pdf {
-  text-transform: none;
-}
-.card-date label,
-.start-date label {
-  font-size: 14px;
-  font-weight: 400;
-  text-transform: none;
-}
-.all-bills .back-link.border {
-  border-bottom: none;
-}
-.bill-confirmation .card-section .card-section-h1 h1 {
-  color: #104d83;
-  font-size: 28px;
-}
-.bill-confirmation .download-bill-pdf {
-  font-size: 20px;
-  font-weight: 500;
-}
-.bill-confirmation .download-bill-pdf a {
-  border-bottom: 1px solid;
-  margin-left: 13px;
-  position: absolute;
-  top: 28px;
-}
-.bill-confirmation .glyphicon-download-alt {
-  font-size: 14px;
-  top: -1px;
-}
-.bill-confirmation .card-section-h2 {
-  color: #156ab5;
-}
-.bill-confirmation .card-50 {
-  padding-bottom: 0;
-}
-.bill-confirmation .card-section-h1.bill-summary {
-  color: #000000;
-}
-.bill-confirmation .bill-content {
-  padding-left: 0;
-}
-.bill-confirmation .bill-content a {
-  color: #156ab5;
-}
-.bill-confirmation .confirmation-receipt-no {
-  word-break: break-all;
-}
-.bill-payment.content-space {
-  min-height: 670px;
-}
-.bill-payment .bills-buttons {
-  margin-left: -30px;
-  margin-right: -30px;
-}
-.bill-payment .bill-card-content {
-  margin-top: -40px;
-}
-.bill-payment .headline {
-  margin: 15px -9px 2px;
-}
-.account-section-content .divOuterTable .divTableRow a.bill-download-pdf,
-.account-section-content .divOuterTable .divTableRow a.bill-receipt-download-pdf {
-  text-transform: none;
-}
-.bill-more-info .btn {
-  font-size: 16px;
-  padding: 10px 8px;
-}
-.my-bill .bills-relationship-text {
-  text-align: left;
-  margin: 116px 0 0;
-}
-.removeBillPaymentButton {
-  padding: 5px 7px 4px 3px;
-}
-@media (max-width: 639px) {
-  .bill-section-content .bills-steps {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .bill-section-content .bill-button {
-    padding: 8px;
-  }
-  .bill-section-content .label h1 {
-    margin: 31px 9px;
-  }
-  table.billhistory-list-table .responsive-table-item > .bills-table {
-    vertical-align: top;
-    width: 49%;
-  }
-  .my-bill .bill-amount-due,
-  .my-bill .bill-total {
-    text-align: left;
-  }
-  .my-bill .label h1 {
-    margin: 30px 9px;
-  }
-  .bill-confirmation .download-bill-pdf {
-    font-size: 20px;
-    font-weight: 500;
-  }
-  .bill-confirmation .download-bill-pdf a {
-    border-bottom: 1px solid;
-    margin-left: 13px;
-    position: absolute;
-    top: 28px;
-  }
-  .bill-payment .bills-buttons {
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-  .my-bill .bills-relationship-text {
-    text-align: left;
-    margin: 45px 0 0;
-  }
-}
-@media (min-width: 640px) and (max-width: 1023px) {
-  .bill-section-content .bill-button {
-    padding: 8px;
-  }
-  .bill-section-content .label h1 {
-    margin: 12px 45px;
-  }
-  .bill-section-content .bills-steps {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .bill-confirmation .download-bill-pdf {
-    font-size: 17px;
-    font-weight: 500;
-  }
-  .bill-confirmation .download-bill-pdf a {
-    text-decoration: underline;
-    border-bottom: none;
-    margin-left: 6px;
-    position: absolute;
-    top: 25px;
-  }
-  .bill-confirmation .glyphicon-download-alt {
-    font-size: 10px;
-    top: -1px;
-  }
-  .my-bill .bill-amount-due,
-  .my-bill .bill-total {
-    text-align: left;
-  }
-  .my-bill .bill-seperator {
-    right: 2px;
-  }
-  .my-bill .bills-relationship-text {
-    text-align: left;
-    margin: 45px 0 0;
-  }
-}
-/* --------------------------------------------------------
 Style Sheet for Public Sector Accelaration
 
 version: 1.0
@@ -24029,5 +22866,1168 @@ fieldset.card-date .form-group .control-label {
 @media (max-width: 639px) {
   .account-section .account-section-content .consent-management-list__item {
     margin-left: 0;
+  }
+}
+/* --------------------------------------------------------
+Style Sheet for Bill Addon
+
+version: 1.0
+last modified: 30 Nov 2016 by Vikas Gupta
+author: Vikas Gupta
+----------------------------------------------------------*/
+.all-bills .pagination-bar .pagination {
+  border: 0;
+}
+.all-bills .pagination-bar .pagination-toolbar .sort-refine-bar {
+  padding: 0;
+}
+.all-bills .pagination-toolbar {
+  padding: 0 0 15px 0;
+  margin-right: -10px;
+}
+.all-bills .pagination-bar.bottom .form-group,
+.all-bills .pagination-bar.bottom .bill-seperator {
+  visibility: hidden;
+}
+@media (max-width: 639px) {
+  .all-bills .totalResults.top {
+    margin: 15px 0;
+  }
+  .all-bills .pagination > li > a,
+  .all-bills .pagination > li > span {
+    width: 20px;
+    font-size: 18px;
+  }
+  .all-bills .pagination-bar .pagination {
+    margin-top: -10px;
+    border: 0;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .all-bills .totalResults.top {
+    margin: 10px 0;
+  }
+  .all-bills .pagination > li > a,
+  .all-bills .pagination > li > span {
+    width: 20px;
+    font-size: 18px;
+  }
+  .all-bills .pagination-bar .pagination {
+    margin-top: 0;
+    border: 0;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .all-bills .totalResults.top {
+    margin: 15px 0;
+  }
+  .all-bills .pagination-bar .pagination {
+    margin-top: 15px;
+  }
+}
+@media (min-width: 1400px) {
+  .all-bills .totalResults.top {
+    margin: 15px 0;
+  }
+  .all-bills .pagination-bar .pagination {
+    margin-top: 15px;
+  }
+}
+.my-bill .panel-group .panel-default {
+  margin-top: -7px;
+}
+.my-bill .download-receipt {
+  margin-top: 15px;
+}
+.my-bill .bills-select {
+  text-transform: none;
+  font-size: 14px;
+}
+.my-bill .billType-message {
+  text-align: center;
+  color: #ff0f0f;
+}
+.my-bill .billType-message .bill-more-info {
+  margin-top: 4px;
+}
+.my-bill .bill-amount-due,
+.my-bill .bill-total {
+  text-align: right;
+}
+.my-bill .same-line {
+  white-space: nowrap;
+}
+.my-bill .bill-seperator {
+  border-right: 1px solid #cccccc;
+  width: 1px;
+  top: 0;
+  right: 15px;
+  min-height: 45px;
+  box-sizing: border-box;
+}
+.my-bill hr {
+  margin: 10px 0;
+}
+.bill-section-content .bills-steps {
+  padding-left: 30px;
+}
+.bill-section-content hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 100%;
+  background-color: #000000;
+  height: 1px;
+}
+.bill-section-content .hr-space {
+  margin-bottom: 30px;
+}
+.bill-section-content .bill-section {
+  padding: 20px;
+}
+.bill-section-content .bill-amount,
+.bill-section-content .bill-card {
+  padding: 0;
+}
+.bill-section-content .bill-button {
+  padding: 6px;
+}
+.bill-section-content .glyphicon-question-sign {
+  font-size: 35px;
+  cursor: pointer;
+}
+.bill-section-content .bill-requiredfield {
+  margin: 21px 32px 24px 0;
+}
+.bill-section-content .bill-helpIcon {
+  top: 12px;
+}
+.bill-section-content .bill-textbox {
+  position: relative;
+}
+.bill-section-content .bill-symbol {
+  position: absolute;
+  top: 15px;
+}
+.bill-section-content h2,
+.bill-section-content h3 {
+  font-size: 16px;
+  margin: 0;
+}
+.bill-section-content .bill-amount-input {
+  margin: 0 0 20px 30px;
+}
+.bill-section-content .bill-card-details ul {
+  margin: 20px;
+}
+.bill-section-content .bill-hop {
+  margin-bottom: -40px;
+}
+.bill-section-content .checkout-cancel,
+.bill-section-content .checkout-next {
+  margin: 6px 0;
+}
+.saved-bill-help,
+.bill-address-book,
+.bill-saved-payments,
+.bill-card-content {
+  display: none;
+}
+.billOverdue {
+  color: #156ab5;
+  font-weight: bold;
+}
+.bill-popover .popover > .arrow {
+  display: block;
+}
+.bill-popover .popover-title {
+  display: block;
+}
+.bill-popover .popover-content {
+  padding: 9px 14px;
+}
+#colorbox .bill-address-book,
+#colorbox .bill-saved-payments {
+  display: block;
+}
+.retrieve-bill-request:before {
+  font-family: 'Glyphicons Halflings', sans-serif;
+  content: '\e086';
+  font-size: 35px;
+  padding: 5px;
+}
+.retrieve-bill-request {
+  border: 1px solid #cacaca;
+  background-color: #f2f2f2;
+}
+.retrieve-bill-request.card-section {
+  margin-top: 0;
+}
+.bills-table {
+  vertical-align: initial;
+}
+.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a {
+  text-transform: none;
+}
+.all-bills .show {
+  display: none;
+}
+.divOuterTable .billhistory-list-table .divTableRow:nth-child(n+5) {
+  display: none;
+}
+.all-bills .divOuterTable .billhistory-list-table .divTableRow:nth-child(n+5) {
+  display: block;
+}
+.download_img_pdf {
+  background-image: url('../../../responsive/common/images/pdf_acc.png');
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  height: 21px;
+  width: 21px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased;
+  text-indent: 100%;
+  overflow: hidden;
+}
+.account-billhistory {
+  margin: 20px 10px 10px 15px;
+}
+.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a.bill-download-pdf,
+.account-section .account-section-content table > tbody > tr > td.responsive-table-cell a.bill-receipt-download-pdf {
+  text-transform: none;
+}
+.card-date label,
+.start-date label {
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: none;
+}
+.all-bills .back-link.border {
+  border-bottom: none;
+}
+.bill-confirmation .card-section .card-section-h1 h1 {
+  color: #104d83;
+  font-size: 28px;
+}
+.bill-confirmation .download-bill-pdf {
+  font-size: 20px;
+  font-weight: 500;
+}
+.bill-confirmation .download-bill-pdf a {
+  border-bottom: 1px solid;
+  margin-left: 13px;
+  position: absolute;
+  top: 28px;
+}
+.bill-confirmation .glyphicon-download-alt {
+  font-size: 14px;
+  top: -1px;
+}
+.bill-confirmation .card-section-h2 {
+  color: #156ab5;
+}
+.bill-confirmation .card-50 {
+  padding-bottom: 0;
+}
+.bill-confirmation .card-section-h1.bill-summary {
+  color: #000000;
+}
+.bill-confirmation .bill-content {
+  padding-left: 0;
+}
+.bill-confirmation .bill-content a {
+  color: #156ab5;
+}
+.bill-confirmation .confirmation-receipt-no {
+  word-break: break-all;
+}
+.bill-payment.content-space {
+  min-height: 670px;
+}
+.bill-payment .bills-buttons {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+.bill-payment .bill-card-content {
+  margin-top: -40px;
+}
+.bill-payment .headline {
+  margin: 15px -9px 2px;
+}
+.account-section-content .divOuterTable .divTableRow a.bill-download-pdf,
+.account-section-content .divOuterTable .divTableRow a.bill-receipt-download-pdf {
+  text-transform: none;
+}
+.bill-more-info .btn {
+  font-size: 16px;
+  padding: 10px 8px;
+}
+.my-bill .bills-relationship-text {
+  text-align: left;
+  margin: 116px 0 0;
+}
+.removeBillPaymentButton {
+  padding: 5px 7px 4px 3px;
+}
+@media (max-width: 639px) {
+  .bill-section-content .bills-steps {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .bill-section-content .bill-button {
+    padding: 8px;
+  }
+  .bill-section-content .label h1 {
+    margin: 31px 9px;
+  }
+  table.billhistory-list-table .responsive-table-item > .bills-table {
+    vertical-align: top;
+    width: 49%;
+  }
+  .my-bill .bill-amount-due,
+  .my-bill .bill-total {
+    text-align: left;
+  }
+  .my-bill .label h1 {
+    margin: 30px 9px;
+  }
+  .bill-confirmation .download-bill-pdf {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .bill-confirmation .download-bill-pdf a {
+    border-bottom: 1px solid;
+    margin-left: 13px;
+    position: absolute;
+    top: 28px;
+  }
+  .bill-payment .bills-buttons {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  .my-bill .bills-relationship-text {
+    text-align: left;
+    margin: 45px 0 0;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .bill-section-content .bill-button {
+    padding: 8px;
+  }
+  .bill-section-content .label h1 {
+    margin: 12px 45px;
+  }
+  .bill-section-content .bills-steps {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .bill-confirmation .download-bill-pdf {
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .bill-confirmation .download-bill-pdf a {
+    text-decoration: underline;
+    border-bottom: none;
+    margin-left: 6px;
+    position: absolute;
+    top: 25px;
+  }
+  .bill-confirmation .glyphicon-download-alt {
+    font-size: 10px;
+    top: -1px;
+  }
+  .my-bill .bill-amount-due,
+  .my-bill .bill-total {
+    text-align: left;
+  }
+  .my-bill .bill-seperator {
+    right: 2px;
+  }
+  .my-bill .bills-relationship-text {
+    text-align: left;
+    margin: 45px 0 0;
+  }
+}
+/* --------------------------------------------------------
+Style Sheet for Relationship  Addon
+
+version: 1.0
+last modified: 13 Dec 2016 by Vikas Gupta
+author: Vikas Gupta
+----------------------------------------------------------*/
+.account-section .account-section-subheader-relationship {
+  margin: 20px 0 20px 0;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-weight: 500;
+}
+.account-section .account-section-subheader-relationship h2 {
+  font-size: 20px;
+}
+.account-section .account-section-subheader-relationship .pending-request-header {
+  float: right;
+  padding-top: 10px;
+}
+.account-section .pending-request-header a:focus {
+  outline: 3px solid #47b6b1;
+  background-color: #47b6b1;
+  color: #000000;
+}
+.account-section hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.account-section .btn-tbl-view {
+  color: #ffffff;
+  background-color: #000000;
+  margin-right: 5px;
+  width: auto;
+}
+.account-section .btn-map-view {
+  color: #000000;
+  background-color: #f2f2f2;
+  margin-left: 5px;
+  width: auto;
+}
+.account-section .empty-permissions-relationships.content-empty {
+  font-size: 16px;
+  margin: 0 0 45px;
+  padding-left: 8px;
+  text-align: left;
+  font-weight: normal;
+}
+.my-relationship .panel-heading .accordion-toggle:after {
+  font-family: 'Glyphicons Halflings', sans-serif;
+  content: '\2212';
+  float: right;
+  color: #000000;
+  padding: 15px;
+  margin-top: -12px;
+  background-color: #f2f2f2;
+}
+.my-relationship .panel-heading .accordion-toggle.collapsed:after {
+  content: '\002b';
+}
+.my-relationship .panel-default > .panel-heading {
+  background-color: transparent;
+}
+.my-relationship .panel-group {
+  margin-top: 15px;
+}
+.my-relationship .panel-default {
+  border: 0;
+}
+.my-relationship .panel-title {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+@media (max-width: 639px) {
+  .my-relationship .panel-title {
+    font-size: 1.2em;
+  }
+}
+.my-relationship .panel-body {
+  padding: 15px 0;
+}
+.my-relationship .panel-group .panel-heading + .panel-collapse > .panel-body {
+  border: 0;
+}
+@media (max-width: 639px) {
+  .account-section .account-section-subheader-relationship h2 {
+    font-size: 20px;
+  }
+  .account-section .account-section-subheader-relationship .pending-request-header {
+    float: none;
+    padding-top: 20px;
+  }
+  .account-section .btn-tbl-view {
+    margin-right: 0;
+  }
+  .account-section .btn-map-view {
+    margin-left: 0;
+  }
+}
+.pending-request-permissions .pending-request {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.pending-request-permissions .new-tag {
+  color: #ee0000;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.pending-request-permissions .card-permission-blue {
+  border: 1px solid #126ab5;
+  margin-bottom: 30px;
+}
+.pending-request-permissions .card-permission-blue .card-heading {
+  background-color: #126ab5;
+  color: #ffffff;
+  padding: 15px;
+  font-weight: 600;
+}
+.pending-request-permissions .card-permission-blue .card-content {
+  padding: 15px 15px 15px 30px;
+  min-height: 524px;
+}
+.pending-request-permissions .card-permission-blue .card-content .card-content-subtitle {
+  min-height: 50px;
+}
+.pending-request-permissions .card-permission-blue .card-content .card-content-permissions {
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  margin: 15px -4px 15px -18px;
+  line-height: 2.2em;
+}
+.pending-request-permissions .card-permission-blue .card-content .card-button-permissions {
+  margin: 15px -15px 15px -15px;
+}
+.pending-request-permissions .card-permission-blue .card-content .card-button-desc {
+  margin-top: 15px;
+}
+.pending-request-permissions .card-permission-blue .card-content .card-icon-permissions {
+  margin-right: 7px;
+  margin-left: 0;
+}
+.pending-request-permissions .card-permission-blue .card-content .card-link-permissions {
+  margin: 25px 0 15px 0;
+  font-weight: 600;
+}
+.pending-request-permissions .card-permission-blue .card-content .card-link-permissions .view-icon {
+  margin: 5px 5px 0 5px;
+}
+.pending-request-permissions .card-permission-blue .card-content .card-link-permissions .edit-icon {
+  margin: 5px 5px 0 5px;
+}
+.pending-request-permissions .card-permission-yellow {
+  border: 1px solid #fdda19;
+  margin-bottom: 30px;
+}
+.pending-request-permissions .card-permission-yellow .card-heading {
+  background-color: #fdda19;
+  color: #000000;
+  padding: 15px;
+  font-weight: 600;
+}
+.pending-request-permissions .card-permission-yellow .card-content {
+  padding: 15px 15px 15px 30px;
+  min-height: 524px;
+}
+.pending-request-permissions .card-permission-yellow .card-content .card-content-subtitle {
+  min-height: 50px;
+}
+.pending-request-permissions .card-permission-yellow .card-content .card-content-permissions {
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  margin: 15px -4px 15px -18px;
+  line-height: 2.2em;
+}
+.pending-request-permissions .card-permission-yellow .card-content .card-button-permissions {
+  margin: 15px -15px 15px -15px;
+}
+.pending-request-permissions .card-permission-yellow .card-content .card-button-desc {
+  margin-top: 15px;
+}
+.pending-request-permissions .card-permission-yellow .card-content .card-icon-permissions {
+  margin-right: 7px;
+  margin-left: 0;
+}
+.pending-request-permissions .card-permission-yellow .card-content .card-link-permissions {
+  margin: 25px 0 15px 0;
+  font-weight: 600;
+}
+.pending-request-permissions .card-permission-yellow .card-content .card-link-permissions .view-icon {
+  margin: 5px 5px 0 5px;
+}
+.pending-request-permissions .card-permission-yellow .card-content .card-link-permissions .edit-icon {
+  margin: 5px 5px 0 5px;
+}
+.pending-request-permissions .card-button-desc {
+  font-size: 15px;
+  margin: 10px 0 10px 0;
+}
+.pending-request-permissions .permissible-Items {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.modal-footer {
+  text-align: left;
+}
+.edit-Permission .form-group .checkbox-label,
+.view-details .form-group .checkbox-label {
+  font-size: 20px;
+  font-weight: bold !important;
+  line-height: inherit;
+}
+.edit-Permission .card-section .card-section-h2 {
+  padding-bottom: 0;
+}
+.view-details .card-section .card-section-h2 {
+  border-bottom: none;
+  margin: 20px 15px -21px;
+  font-size: 20px;
+}
+.view-details .permissible-item-name {
+  padding-left: 15px;
+  font-weight: bold;
+}
+.cancel-Pending-Request-content {
+  display: none;
+}
+.colorbox .cancel-Pending-Request-content {
+  display: block;
+}
+.cancel-pending-request-button {
+  margin: 25px -12px;
+}
+.cancel-pending-request-heading h1 {
+  font-size: 21px;
+  margin-top: 0;
+  font-weight: bold;
+}
+@media (max-width: 639px) {
+  .pending-request-permissions .pending-request {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .pending-request-permissions button {
+    margin-bottom: 15px;
+  }
+  .pending-request-permissions .card-button-desc {
+    margin: 0;
+  }
+  .pending-request-permissions .label h1 {
+    margin: 31px 9px;
+  }
+  .pending-request-permissions .card-permission-yellow .card-content .card-icon-permissions,
+  .pending-request-permissions .card-permission-blue .card-content .card-icon-permissions {
+    margin-right: 15px;
+    margin-left: 0;
+  }
+  .cancel-Pending-Request-content .btn-space {
+    margin-top: 12px;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .pending-request-permissions .pending-request {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .pending-request-permissions button {
+    margin-bottom: 15px;
+  }
+  .pending-request-permissions .card-button-desc {
+    margin: 0;
+  }
+  .pending-request-permissions .card-permission-yellow .card-content .card-icon-permissions,
+  .pending-request-permissions .card-permission-blue .card-content .card-icon-permissions {
+    margin-right: 7px;
+  }
+}
+.setup-permissions .relationship-steps {
+  padding-left: 30px;
+}
+.setup-permissions .checkbox label {
+  text-transform: uppercase;
+}
+.setup-permissions .checkout-steps {
+  padding-left: 0;
+  margin-left: 15px;
+}
+.setup-permissions .checkout-steps .step-head .relationship-edit {
+  background: url('../../../responsive/common/images/edit.png') no-repeat scroll 0 0;
+  content: '';
+  height: 20px;
+  position: absolute;
+  right: 15px;
+  top: 30%;
+  width: 24px;
+}
+.setup-permissions .checkout-steps h3 {
+  font-size: 16px;
+}
+.setup-permissions .checkout-steps .step-body hr {
+  display: block;
+  margin: 0;
+  height: 0;
+}
+.setup-permissions .checkout-steps .step-body .setup-btn {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.setup-permissions .card-section .card-section-h2 {
+  padding-bottom: 0;
+}
+.setup-permissions .form-group .checkbox-label {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: inherit;
+}
+.setup-permissions .radio label {
+  margin: 0;
+}
+.setup-permissions .desc-text {
+  line-height: 2;
+}
+.setup-permissions .card-button-desc {
+  font-size: 15px;
+  margin-top: 15px;
+}
+.setup-permissions .permissionType {
+  display: none;
+}
+.setup-permissions .permissionType .request-permission {
+  font-size: 14px;
+  text-transform: none;
+}
+.setup-permissions .glyphicon-question-sign {
+  font-size: 35px;
+  cursor: pointer;
+}
+.setup-permissions .checkout-heading h1 {
+  color: #104d83;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 35px;
+}
+.relationship-popover .popover > .arrow {
+  display: block;
+}
+.relationship-popover .popover-title {
+  display: block;
+}
+.relationship-popover .popover-content {
+  padding: 9px 14px;
+}
+.saved-permission-help {
+  display: none;
+}
+.setup-permissions .checkout-heading {
+  margin-left: 22px;
+}
+.change-permissions .glyphicon-question-sign,
+.request-more-permissions .glyphicon-question-sign {
+  font-size: 35px;
+  cursor: pointer;
+  top: -5px;
+}
+.change-permissions .form-group .checkbox-label,
+.request-more-permissions .form-group .checkbox-label {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: inherit;
+}
+.change-permissions .checkbox label,
+.request-more-permissions .checkbox label {
+  text-transform: uppercase;
+}
+.change-permissions .card-icon-permissions,
+.request-more-permissions .card-icon-permissions {
+  top: 1px;
+}
+.change-permissions .checkout-next,
+.request-more-permissions .checkout-next {
+  margin: 6px 0;
+}
+.change-permissions .continuous-text,
+.request-more-permissions .continuous-text {
+  margin-top: 20px;
+}
+.setup-permissions .radio label.permissionTypeLabel:before {
+  top: -3px;
+}
+@media (max-width: 639px) {
+  .setup-permissions .relationship-steps {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .setup-permissions .checkout-steps {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+  }
+  .setup-permissions .checkout-steps .step-head {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .setup-permissions .checkout-steps .step-body .setup-btn {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .setup-permissions .checkout-steps h2 a.step-head::before {
+    top: 10px;
+  }
+  .setup-permissions .checkout-heading {
+    margin-left: 0;
+  }
+  .setup-permissions .radio label.permissionTypeLabel:before {
+    top: auto;
+  }
+  .account-section .change-permissions .label h1,
+  .account-section .request-more-permissions .label h1 {
+    bottom: 26px;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .setup-permissions .checkout-heading {
+    margin-left: 0;
+  }
+  .setup-permissions .relationship-steps {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .setup-permissions .checkout-steps {
+    margin-left: 0;
+    padding-right: 0;
+  }
+}
+.relationship-details h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 3px 0 1px;
+  text-transform: uppercase;
+}
+.relationship-details .card {
+  padding: 15px;
+  margin: 5px 0 5px 0;
+}
+.relationship-details .permissions-content {
+  margin: 5px;
+  line-height: 1.8em;
+}
+.relationship-details .permissions-content .permissions-content-title {
+  vertical-align: text-bottom;
+  padding-left: 10px;
+  font-weight: 500;
+}
+.relationship-details .permissions-content .permissions-content-title-no-padding {
+  vertical-align: text-bottom;
+  font-weight: 500;
+}
+.relationship-details .notification-section {
+  margin-top: 35px;
+}
+.relationship-details .notification-section .notification-section-title {
+  padding: 0;
+  margin-top: 12px;
+}
+.relationship-details .panel-heading .accordion-toggle:after {
+  font-family: 'Glyphicons Halflings', sans-serif;
+  content: '\2212';
+  float: right;
+  color: #000000;
+  padding: 10px;
+  margin-top: -12px;
+}
+.relationship-details .panel-heading .accordion-toggle.collapsed:after {
+  content: '\002b';
+}
+.relationship-details .manage-relationDetail-accordion > .panel-heading {
+  background-color: #f2f2f2;
+  line-height: 0.1em;
+  margin-top: 20px;
+}
+.relationship-details .ui-state-default,
+.relationship-details .ui-widget-content .ui-state-default,
+.relationship-details .ui-widget-header .ui-state-default {
+  background-color: #f2f2f2;
+}
+.relationship-details hr {
+  display: none;
+}
+.relationship-details .panel-group {
+  margin-top: 15px;
+}
+.relationship-details .panel-group .panel + .panel {
+  margin-top: 35px;
+}
+.relationship-details .panel-title {
+  margin: 10px 0 10px 0;
+  font-size: 1.5em;
+}
+@media (max-width: 639px) {
+  .relationship-details .panel-title {
+    font-size: 1.2em;
+  }
+}
+.relationship-details .panel-body {
+  padding: 15px 20px;
+}
+.relationship-details .panel-group .panel-collapse > .panel-body {
+  border: 0;
+}
+.relationship-details .ui-accordion-content {
+  border: 1px solid #f2f2f2;
+}
+.relationship-details .new-tag {
+  color: #ee0000;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.relationship-details .card-permission-transparent {
+  border: 1px solid #126ab5;
+  margin-bottom: 30px;
+}
+.relationship-details .card-permission-transparent .card-heading {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 15px;
+  font-weight: 600;
+}
+.relationship-details .card-permission-transparent .card-content {
+  padding: 15px 15px 15px 30px;
+  min-height: 524px;
+}
+.relationship-details .card-permission-transparent .card-content .card-content-subtitle {
+  min-height: 50px;
+}
+.relationship-details .card-permission-transparent .card-content .card-content-permissions {
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  margin: 15px -4px 15px -18px;
+  line-height: 2.2em;
+}
+.relationship-details .card-permission-transparent .card-content .card-button-permissions {
+  margin: 15px -15px 15px -15px;
+}
+.relationship-details .card-permission-transparent .card-content .card-button-desc {
+  margin-top: 15px;
+}
+.relationship-details .card-permission-transparent .card-content .card-icon-permissions {
+  margin-right: 7px;
+  margin-left: 0;
+}
+.relationship-details .card-permission-transparent .card-content .card-link-permissions {
+  margin: 25px 0 15px 0;
+  font-weight: 600;
+}
+.relationship-details .card-permission-transparent .card-content .card-link-permissions .view-icon {
+  margin: 5px 5px 0 5px;
+}
+.relationship-details .card-permission-transparent .card-content .card-link-permissions .edit-icon {
+  margin: 5px 5px 0 5px;
+}
+.relationship-details .card-permission-transparent .card-heading {
+  font-weight: 500;
+  padding: 15px 15px 0 25px;
+}
+.relationship-details .card-permission-transparent .card-content {
+  min-height: 0;
+}
+.relationship-details .card-button-desc {
+  font-size: 14px;
+}
+.relationship-details .manage-details-buttons {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.relationship-details .permission-relation-button {
+  margin-left: 31px;
+}
+.relationship-details .cancel-pending-request {
+  margin-left: -27px;
+}
+.relationship-details .panel-group .panel {
+  margin-bottom: 0;
+}
+.relationship-details .panel-heading {
+  padding: 0;
+}
+.relationship-details .panel-title {
+  margin: 0;
+}
+.relationship-details .show {
+  float: none;
+}
+@media (max-width: 639px) {
+  .relationship-details .label h1 {
+    margin: 31px 9px;
+  }
+  .relationship-details button {
+    margin-bottom: 15px;
+  }
+  .relationship-details .panel-default > .panel-heading {
+    background-color: #f2f2f2;
+  }
+  .relationship-details .card-permission-transparent .card-content .card-content-permissions {
+    padding: 5px;
+  }
+  .relationship-details .card-permission-transparent .card-content .card-icon-permissions {
+    margin-right: 5px;
+  }
+  .relationship-details .permission-relation-button {
+    margin-left: 8px;
+  }
+  .relationship-details .cancel-pending-request {
+    margin-left: 0;
+  }
+  .card-content {
+    padding: 15px 15px 15px 20px;
+  }
+  .card-content .card-content-permissions .col-xs-12 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .relationship-details .panel-group .panel-title > a {
+    padding: 22px;
+  }
+}
+.permission-setup-confirmation {
+  padding: 0 20px;
+}
+.permission-setup-confirmation h1 {
+  color: #104d83;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 22px;
+  padding: 0 0 25px 22px;
+}
+.permission-setup-confirmation .card {
+  padding: 15px;
+  margin: 5px 0 5px 0;
+}
+.permission-setup-confirmation .permissions-content {
+  margin: 5px;
+  line-height: 1.8em;
+}
+.permission-setup-confirmation .permissions-content .permissions-content-title {
+  vertical-align: text-bottom;
+  padding-left: 10px;
+  font-weight: 500;
+}
+.permission-setup-confirmation .permissions-content .permissions-content-title-no-padding {
+  vertical-align: text-bottom;
+  font-weight: 500;
+}
+.permission-setup-confirmation .notification-section {
+  margin-top: 35px;
+}
+.permission-setup-confirmation .notification-section .notification-section-title {
+  padding: 10px 0;
+  font-weight: 500;
+}
+.permission-setup-confirmation .new-tag {
+  color: #ee0000;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.permission-setup-confirmation .card-permission-white-gray-border {
+  margin: 25px 0 15px 0;
+  border: 1px solid #f2f2f2;
+  margin-bottom: 30px;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-heading {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 15px;
+  font-weight: 600;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content {
+  padding: 15px 15px 15px 30px;
+  min-height: 524px;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-content-subtitle {
+  min-height: 50px;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-content-permissions {
+  border: 1px solid #f2f2f2;
+  padding: 10px;
+  margin: 15px -4px 15px -18px;
+  line-height: 2.2em;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-button-permissions {
+  margin: 15px -15px 15px -15px;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-button-desc {
+  margin-top: 15px;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-icon-permissions {
+  margin-right: 7px;
+  margin-left: 0;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-link-permissions {
+  margin: 25px 0 15px 0;
+  font-weight: 600;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-link-permissions .view-icon {
+  margin: 5px 5px 0 5px;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content .card-link-permissions .edit-icon {
+  margin: 5px 5px 0 5px;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-heading {
+  font-weight: 500;
+  padding: 15px 0 15px 0;
+  font-size: 20px;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content-permissions {
+  padding: 10px;
+  margin: 15px 0 15px 0;
+  line-height: 2.2em;
+  font-weight: bold;
+}
+.permission-setup-confirmation .card-permission-white-gray-border .card-content-permissions .card-icon-permissions {
+  margin: 5px;
+}
+.permission-setup-confirmation .box-person {
+  border: 1px solid #f2f2f2;
+  padding: 25px;
+  margin: 20px 0 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.permission-setup-confirmation .box-action {
+  border: 1px solid #f2f2f2;
+  padding: 25px;
+  margin: 20px 0 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+.permission-setup-confirmation .box-action .heading {
+  font-weight: 500;
+  padding: 15px 0 15px 0;
+  font-size: 20px;
+}
+.permission-setup-confirmation .card-button-desc {
+  font-size: 14px;
+}
+.permission-setup-confirmation .desc-text {
+  margin: 0 0 25px 0;
+  line-height: 1.5em;
+}
+.permission-setup-confirmation hr {
+  margin: 25px 0 25px 0;
+}
+.permission-setup-confirmation .permission-relation-button {
+  margin-left: 43px;
+}
+.permission-setup-confirmation .confirmation-box-action {
+  padding: 25px 0 17px 0;
+}
+.permission-setup-confirmation .confirmation-box-action {
+  padding: 25px 0 60px 0;
+}
+.permission-setup-confirmation .confirmation-box-action .heading {
+  padding: 0 0 20px 0;
+}
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .permission-setup-confirmation {
+    padding: 0 30px;
+  }
+}
+@media (min-width: 1400px) {
+  .permission-setup-confirmation {
+    padding: 0 30px;
+  }
+}
+@media (max-width: 639px) {
+  .permission-setup-confirmation .permission-relation-button {
+    margin-left: 8px;
+  }
+  .permission-setup-confirmation .confirmation-box-action {
+    padding: 25px 0 17px 0;
   }
 }
