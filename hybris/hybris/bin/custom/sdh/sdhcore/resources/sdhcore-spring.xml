@@ -551,4 +551,10 @@
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
+	
+	<!-- SDH YForms Services -->
+	<alias name="defaultSdhYFormservice" alias="SdhYFormservice"/>
+	<bean id="defaultSdhYFormservice" class="de.hybris.sdh.core.formServices.impl.DefaultSdhYFormservice" parent="defaultYFormService">
+	</bean>
+	
 </beans>

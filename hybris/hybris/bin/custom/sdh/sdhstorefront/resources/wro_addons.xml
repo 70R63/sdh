@@ -2,8 +2,6 @@
 
 <groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
    <group name="addons_responsive">
-      <js>/_ui/addons/xyformsstorefrontcommons/responsive/common/js/xyformsstorefrontcommons.js</js>
-      <css>/_ui/addons/xyformsstorefrontcommons/responsive/common/css/xyformsstorefrontcommons.css</css>
       <js>/_ui/addons/relationshipaddon/responsive/common/js/relationshipaddon.js</js>
       <js>/_ui/addons/relationshipaddon/responsive/common/js/acc.permissionselection.js</js>
       <css>/_ui/addons/relationshipaddon/responsive/common/css/relationshipaddon.css</css>
@@ -11,6 +9,8 @@
       <js>/_ui/addons/billaddon/responsive/common/js/acc.billaddress.js</js>
       <js>/_ui/addons/billaddon/responsive/common/js/acc.billpaginationsort.js</js>
       <css>/_ui/addons/billaddon/responsive/common/css/billaddon.css</css>
+      <js>/_ui/addons/xyformsstorefrontcommons/responsive/common/js/xyformsstorefrontcommons.js</js>
+      <css>/_ui/addons/xyformsstorefrontcommons/responsive/common/css/xyformsstorefrontcommons.css</css>
       <js>/_ui/addons/smarteditaddon/shared/common/js/webApplicationInjector.js</js>
       <js>/_ui/addons/smarteditaddon/shared/common/js/reprocessPage.js</js>
       <js>/_ui/addons/smarteditaddon/shared/common/js/adjustComponentRenderingToSE.js</js>

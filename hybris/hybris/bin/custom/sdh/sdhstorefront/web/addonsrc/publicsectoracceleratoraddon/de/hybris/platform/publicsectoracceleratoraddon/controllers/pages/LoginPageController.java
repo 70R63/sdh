@@ -95,9 +95,6 @@ public class LoginPageController extends AbstractLoginPageController
 		{
 			model.addAttribute("showloginBody", Boolean.FALSE);
 		}
-
-		System.out.println("-----------> Public Sector <-----------");
-
 		return getDefaultLoginPage(loginError, session, model);
 	}
 

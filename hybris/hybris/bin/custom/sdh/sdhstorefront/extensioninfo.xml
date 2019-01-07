@@ -17,6 +17,12 @@
 <requires-extension name="billaddon"/>
 <requires-extension name="relationshipaddon"/>
 <requires-extension name="xyformsstorefrontcommons"/>
+
+
+
+
+
+
 <requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="sdhfacades"/>
 
