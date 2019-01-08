@@ -285,6 +285,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 ;;MyAccountNavNode;"Mi cuenta"
 
+
 ## Service Request Details page
 
 UPDATE PSHelpDeskComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description[lang=$lang];&componentRef;;;
