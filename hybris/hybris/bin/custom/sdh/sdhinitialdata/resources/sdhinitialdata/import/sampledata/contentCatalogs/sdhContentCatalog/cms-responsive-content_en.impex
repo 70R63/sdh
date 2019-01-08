@@ -95,6 +95,67 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
  ;;RoadsAndVehiclesSeeAllServiceRequestsLink;"> See All Service Requests";"Click here for all Roads and Vehicles service requests"
  ;;WorkingWithChildrenCheckLink;"Working with Children Check";"Click here for menu item Working with Children Check"
 
+ 
+#*->-------------------------------------------------------------------------------------------------------------------------
+#->INI dev-eduardo Agregar menu SDH 04/01/2019
+;;MiRITLink;"My RIT";"Click here for menu item My RIT"
+;;MiBuzonLink;"My Mailbox";"Click here for menu item My Mailbox"
+;;ImpuestosLink;"Taxes";"Click here for menu item Taxes"
+;;TramitesLink;"Formalites";"Click here for menu item Formalites"
+;;FacturacionLink;"Billing";"Click here for menu item Billing"
+;;DeclaracionesLink;"Declaratios";"Click here for menu item Declarations"
+;;PagosLink;"Payments";"Click here for menu item Payments"
+;;ConsultasLink;"Queries";"Click here for menu item Queries"
+#->FIN dev-eduardo Agregar menu SDH 04/01/2019
+
+
+#->INI dev-eduardo Agregar submenu MI RIT 04/01/2019
+;;CertRitLink;"Certification RIT";"Click here for menu item menu Certification RIT"
+#->FIN dev-eduardo Agregar submenu MI RIT 04/01/2019
+
+#->INI dev-eduardo Agregar submenu MI BUZON 04/01/2019
+#->FIN dev-eduardo Agregar submenu MI BUZON 04/01/2019
+
+#->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
+;;DelineacionUrbanaLink;"Delineation Urban";"Click here for menu item menu Delineation Urban"
+;;ICALink;"ICA";"Haga clic aquí para acceder a la opción de menú ICA"
+;;PredialUnificadoLink;"Predial unified";"Click here for menu item menu Predial unified"
+;;PublicidadExteriorLink;"Outside Publicity";"Click here for menu item menu Outside Publicity"
+;;SobreVehiAutomotoresLink;"Vehicles automotive";"Click here for menu item menu Vehicles automotive"
+;;SobreTasaGasolinaLink;"Gasoline Vehicle";"Click here for menu item menu Gasoline Vehicle"
+#->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
+
+#->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
+;;AnulacionFacturaLink;"Bill Cancellation";"Click here for menu item menu Bill Cancellation"
+;;ModificacionFacturaLink;"Bill Modification";"Click here for menu item menu Bill Modification"
+#->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
+
+#->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
+;;DescargaFacturaLink;"Bill Download";"Click here for menu item menu Bill Download"
+;;ReexpedicionFacturaLink;"Bill Reissue";"Click here for menu item menu Bill Reissue"
+#->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
+
+#->INI dev-eduardo Agregar submenu DECLARACION 04/01/2019
+;;PresentarDeclaracionLink;"Submit Statement";"Click here for menu item menu Submit Statement"
+;;ListaDeclaracionFirmaLink;"Declaration List to sign";"Click here for menu item menu Declaration List to sign"
+#->FIN dev-eduardo Agregar submenu DECLARACION 04/01/2019
+
+#->INI dev-eduardo Agregar submenu PAGO 04/01/2019
+;;GeneracionROPLink;"ROP Generation";"Click here for menu item menu ROP Generation"
+;;PagoLineaLink;"Online Payment";"Click here for menu item menu Online Payment"
+#->FIN dev-eduardo Agregar submenu PAGO 04/01/2019
+
+#->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+;;CertPagoLink;"Payment Certification";"Click here for menu item menu Payment Certification"
+;;ObligacionesPendLink;"Pending Obligations";"Click here for menu item menu Pending Obligations"
+;;RelPagosLink;"Payment Relation";"Click here for menu item menu Payment Relation"
+;;EdoCuentaLink;"Account Status";"Click here for menu item menu Account Status"
+#->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+#*->-------------------------------------------------------------------------------------------------------------------------
+ 
+ 
+ 
+ 
 UPDATE PSRetrieveADraftComponent; $contentCV; uid[unique = true];title[lang=$lang];description[lang=$lang];retrieveDraftButtonLabel[lang=$lang];
  ;;PSRetrieveADraftComponent;Retrieve Your Draft Request;You have already started a service request and have saved it as a draft? Retrieve it here.;Retrieve Draft Request;
 

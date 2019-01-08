@@ -283,7 +283,12 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 # update navigation node title
 UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
-;;MyAccountNavNode;"Mi cuenta"
+
+#->INI dev-eduardo Mi RIT 07/01/2019---------------------------------------------------
+#;;MyAccountNavNode;"Mi cuenta"
+;;MyAccountNavNode;"Mi RIT"
+#->INI dev-eduardo Mi RIT 07/01/2019---------------------------------------------------
+
 
 ## Service Request Details page
 
