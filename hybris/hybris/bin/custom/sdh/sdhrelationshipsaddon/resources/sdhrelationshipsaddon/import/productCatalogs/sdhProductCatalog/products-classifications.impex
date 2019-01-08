@@ -1,0 +1,6 @@
+#% impex.setLocale(Locale.ENGLISH);
+
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$clAttrModifiers=system='PublicSectorClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en

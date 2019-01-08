@@ -1,0 +1,1 @@
+$ctx.esc.html(${ctx.messages.emailSubject})

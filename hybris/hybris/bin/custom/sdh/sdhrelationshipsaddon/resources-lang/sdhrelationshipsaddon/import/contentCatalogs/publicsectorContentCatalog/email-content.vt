@@ -1,0 +1,44 @@
+#set( $macroContentCatalog = $esc.java('$contentCatalog') )
+#set( $contentCatalog = $esc.java('publicsectorContentCatalog') )
+#set( $macroContentCV = $esc.java('$contentCV') )
+#set( $contentCV = $esc.java('catalogVersion(catalog(id[default=$contentCatalog]),version[default=Staged])[unique=true,default=$contentCatalog:Staged]') )
+#set( $macroPicture = $esc.java('$picture') )
+#set( $picture = $esc.java('media(code, $contentCV)') )
+#set( $macroEmailResource = $esc.java('$emailResource') )
+#set( $emailResource = $esc.java('jar:de.hybris.platform.sdhrelationshipsaddon.constants.RelationshipaddonConstants&/sdhrelationshipsaddon/import/emails') )
+#set( $macroSiteResource = $esc.java('$siteResource') )
+#set( $siteResource = $esc.java('jar:de.hybris.platform.sdhrelationshipsaddon.constants.RelationshipaddonConstants&/sdhrelationshipsaddon/import/contentCatalogs/$contentCatalog') )
+#set( $rendererTemplates = $query.load('email-content','RendererTemplate') )
+#set( $emailPages = $query.load('email-content','EmailPage') )
+#set( $mediaTypes = $query.load('email-content','Media') )
+#set( $cmsImageComponents = $query.load('email-content','CMSImageComponent') )
+
+$macroContentCatalog=$contentCatalog
+$macroContentCV=$contentCV
+$macroPicture=$picture
+$macroEmailResource=$emailResource
+$macroSiteResource=$siteResource
+
+$macroLang=$lang
+
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$macroLang];templateScript[lang=$macroLang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+#foreach( $row in $rendererTemplates ) 
+;$row.key;$row.values.description;$macroEmailResource/$row.values.templateScript
+#end 
+
+INSERT_UPDATE EmailPage;$macroContentCV;uid[unique=true];fromEmail[lang=$macroLang];fromName[lang=$macroLang]
+#foreach( $row in $emailPages ) 
+;;$row.key;$row.values.fromEmail;$row.values.fromName
+#end 
+
+INSERT_UPDATE Media;$macroContentCV;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']
+#foreach( $row in $mediaTypes ) 
+;;$row.key;$row.values.realfilename;$macroSiteResource/$row.values.media
+#end 
+
+UPDATE CMSImageComponent;$macroContentCV;uid[unique=true];${macroPicture}[lang=$macroLang]
+#foreach( $row in $cmsImageComponents ) 
+;;$row.key;$row.values.picture
+#end 

@@ -1,0 +1,9 @@
+#set ( $macroLang = $esc.java('$lang') )
+#set ( $billMessages = $query.load('bills', 'PSBillMessage') )
+$macroLang=$lang
+
+INSERT_UPDATE PSBillMessage;psBillType(code)[unique=true];shortMessage[lang=$macroLang];longMessage[lang=$macroLang];messageCondition(code)[unique=true]
+#foreach( $row in $billMessages ) 
+#set ( $index = $row.key.indexOf('.') )
+ ;$row.key.substring(0, $index);$row.values.shortMessage;$row.values.longMessage;$row.values.messageCondition
+#end

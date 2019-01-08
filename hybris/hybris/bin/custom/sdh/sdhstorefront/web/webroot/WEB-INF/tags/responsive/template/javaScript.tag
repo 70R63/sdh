@@ -31,6 +31,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.syncheight.custom.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.tabs.custom.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-ui-1.12.1.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/datepicker-es.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.zoom.custom.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/owl.carousel.custom.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.tmpl-1.0.0pre.min.js"></script>
@@ -82,10 +83,13 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.consent.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cookienotification.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.closeaccount.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.register.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
+		
+		
 		
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">

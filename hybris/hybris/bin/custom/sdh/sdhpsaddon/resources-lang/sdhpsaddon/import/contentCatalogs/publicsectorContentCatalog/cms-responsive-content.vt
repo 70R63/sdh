@@ -1,0 +1,82 @@
+#set( $macroContentCatalog = $esc.java('$contentCatalog') )
+#set( $contentCatalog = $esc.java('publicsectorContentCatalog') )
+#set( $macroContentCV = $esc.java('$contentCV') )
+#set( $contentCV = $esc.java('catalogVersion(catalog(id[default=$contentCatalog]),version[default=Staged])[unique=true,default=$contentCatalog:Staged]') )
+#set( $macroPicture = $esc.java('$picture') )
+#set( $picture = $esc.java('media(code, $contentCV)') )
+#set( $macroMedias = $esc.java('$medias') )
+#set( $medias = $esc.java('medias(code, $contentCV)') )
+#set( $macroLang = $esc.java('$lang') )
+#set( $macroMediaContainer = $esc.java('$mediaContainer') )
+#set( $mediaContainer = $esc.java('media(qualifier, $contentCV)[lang=$lang]') )
+#set( $macroSiteUid = $esc.java('$siteUid') )
+#set( $siteUid = $esc.java('publicsector') )
+#set( $macroStoreFrontContextRoot = $esc.java('$storefrontContextRoot') )
+#set( $storefrontContextRoot = $esc.java('$config-storefrontContextRoot') )
+#set( $macroJarResourceAssetTemplates = $esc.java('$jarResourceAssetTemplates') )
+#set( $jarResourceAssetTemplates = $esc.java('jar:de.hybris.platform.sdhpsaddon.constants.PublicsectoracceleratoraddonConstants&/sdhpsaddon/import/asset/template' ) )
+#set( $cmsLinkComponents = $query.load('cms-responsive-content', 'CMSLinkComponent') )
+#set( $documentDashletComponents = $query.load('cms-responsive-content', 'PSDocumentDashletComponent') )
+#set( $aboutMeDashletComponents = $query.load('cms-responsive-content', 'PSAboutMeDashletComponent') )
+#set( $applicationsDashletComponents = $query.load('cms-responsive-content', 'PSApplicationsDashletComponent') )
+#set( $billsDashletComponents = $query.load('cms-responsive-content', 'PSBillsDashletComponent') )
+#set( $addressBookDashletComponents = $query.load('cms-responsive-content', 'PSAddressBookDashletComponent') )
+#set( $relationshipsDashletComponents = $query.load('cms-responsive-content', 'PSRelationshipsDashletComponent') )
+#set( $consentTemplates = $query.load('cms-responsive-content', 'ConsentTemplate') )
+#set( $rendererTemplates = $query.load('cms-responsive-content', 'RendererTemplate') )
+#set( $macrojarResourceAssetTemplate = $esc.java('$jarResourceAssetTemplates') )
+$macroContentCatalog=$contentCatalog
+$macroContentCV=$contentCV
+$macroPicture=$picture
+$macroMedias=$medias
+$macroLang=$lang
+$macroMediaContainer=$mediaContainer
+$macroSiteUid=$siteUid
+$macroStoreFrontContextRoot=$storefrontContextRoot
+$macroJarResourceAssetTemplates=$jarResourceAssetTemplates
+
+UPDATE CMSLinkComponent;$macroContentCV;uid[unique=true];linkName[lang=$macroLang]
+#foreach( $row in $cmsLinkComponents ) 
+ ;;$row.key;$row.values.linkName
+#end
+
+UPDATE PSDocumentDashletComponent;$macroContentCV;uid[unique = true];title[lang=$macroLang];summary[lang=$macroLang]
+#foreach( $row in $documentDashletComponents ) 
+ ;;$row.key;$row.values.title;$row.values.summary
+#end
+
+UPDATE PSAboutMeDashletComponent;$macroContentCV;uid[unique = true];title[lang=$macroLang]
+#foreach( $row in $aboutMeDashletComponents ) 
+ ;;$row.key;$row.values.title;$row.values.summary
+#end
+
+UPDATE PSApplicationsDashletComponent;$macroContentCV;uid[unique = true];title[lang=$macroLang];draftsSummary[lang=$macroLang];historySummary[lang=$macroLang];
+#foreach( $row in $applicationsDashletComponents ) 
+ ;;$row.key;$row.values.title;$row.values.draftsSummary;$row.values.historySummary
+#end
+
+UPDATE PSBillsDashletComponent;$macroContentCV;uid[unique = true];title[lang=$macroLang];summary[lang=$macroLang]
+#foreach( $row in $billsDashletComponents ) 
+ ;;$row.key;$row.values.title;$row.values.summary
+#end
+
+UPDATE PSAddressBookDashletComponent;$macroContentCV;uid[unique = true];title[lang=$macroLang];summary[lang=$macroLang]
+#foreach( $row in $addressBookDashletComponents ) 
+ ;;$row.key;$row.values.title;$row.values.summary
+#end
+
+UPDATE PSRelationshipsDashletComponent;$macroContentCV;uid[unique = true];title[lang=$macroLang]
+#foreach( $row in $relationshipsDashletComponents ) 
+ ;;$row.key;$row.values.title
+#end
+
+#Consent Management  
+INSERT_UPDATE ConsentTemplate;id[unique=true];name[lang=$macroLang];description[lang=$macroLang];version[unique=true];baseSite(uid)[unique=true,default=$macroSiteUid]
+#foreach( $row in $consentTemplates ) 
+ ;$row.key;$row.values.name;$row.values.description;$row.values.version;$row.values.baseSite;
+#end
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$macroLang];templateScript[lang=$macroLang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+#foreach( $row in $rendererTemplates ) 
+ ;$row.key;$row.values.description;$macrojarResourceAssetTemplate/$row.values.templateScript
+#end

@@ -1,0 +1,4 @@
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$classCatalogVersion=catalogversion(catalog(id[default='PublicSectorClassification']),version[default='1.0'])[unique=true,default='PublicSectorClassification:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='PublicSectorClassification']),version[default='1.0'])[unique=true]

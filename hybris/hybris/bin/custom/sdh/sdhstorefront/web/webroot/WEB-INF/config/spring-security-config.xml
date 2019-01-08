@@ -35,7 +35,7 @@
 		<security:intercept-url pattern="/**" requires-channel="https" />
 		<security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" />
 		<security:custom-filter before="CSRF_FILTER" ref="logoutFilter" />
-
+		<security:custom-filter before="FORM_LOGIN_FILTER" ref="notARobotFilter"/>
 		<security:form-login
 				login-page="/login/checkout"
 				authentication-failure-handler-ref="loginCheckoutAuthenticationFailureHandler"
@@ -81,7 +81,7 @@
 		<security:session-management session-authentication-strategy-ref="fixation" />
 		<security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" />
 		<security:custom-filter before="CSRF_FILTER" ref="logoutFilter" />
-
+		<security:custom-filter before="FORM_LOGIN_FILTER" ref="notARobotFilter"/>
 		<!-- RememberMe -->
 		<security:remember-me key="sdhstorefront" services-ref="rememberMeServices" />
 
@@ -177,7 +177,13 @@
 			<value>/guest/*</value>
 			<value>/orderConfirmation/*</value>
 			<value>/login</value>
-			<value>/login/checkout</value>
+			<value>/login/**</value>
+			<value>/_s/**</value>
+			<value>/punchout/**</value>
+			<value>/cart/rollover/MiniCart</value>
+			<value>/assisted-service/emulate</value>
+			<value>/register</value>
+			<value>/register/**</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />
@@ -264,6 +270,10 @@
 	<bean id="loginCheckoutAuthenticationFailureHandler" class="de.hybris.sdh.storefront.security.LoginAuthenticationFailureHandler" >
         <property name="bruteForceAttackCounter" ref="bruteForceAttackCounter" />
 		<property name="defaultFailureUrl" value="/login/checkout?error=true"/>
+	</bean>
+	
+	<bean id="notARobotFilter" class="de.hybris.sdh.storefront.filters.NotARobotLoginFilter" >
+		<property name="authenticationManager" ref="authenticationManager" />
 	</bean>
 
 	<!-- Logout Success Handler -->

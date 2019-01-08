@@ -86,7 +86,7 @@ INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemp
 
 # CMS components velocity templates
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
-;publicsector-CMSImageComponent-template;java.util.Map
+;sdh-CMSImageComponent-template;java.util.Map
 ;publicsector-BannerComponent-template;java.util.Map
 ;publicsector-SimpleBannerComponent-template;java.util.Map
 ;publicsector-CMSLinkComponent-template;java.util.Map

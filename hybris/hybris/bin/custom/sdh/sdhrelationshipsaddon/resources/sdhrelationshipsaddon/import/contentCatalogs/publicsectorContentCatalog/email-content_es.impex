@@ -1,0 +1,32 @@
+
+$contentCatalog=publicsectorContentCatalog
+$contentCV=catalogVersion(catalog(id[default=$contentCatalog]),version[default=Staged])[unique=true,default=$contentCatalog:Staged]
+$picture=media(code, $contentCV)
+$emailResource=jar:de.hybris.platform.sdhrelationshipsaddon.constants.RelationshipaddonConstants&/sdhrelationshipsaddon/import/emails
+$siteResource=jar:de.hybris.platform.sdhrelationshipsaddon.constants.RelationshipaddonConstants&/sdhrelationshipsaddon/import/contentCatalogs/$contentCatalog
+
+$lang=es
+
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;publicsector-BannerComponent-template;"CMSBannerComponent Template";$emailResource/email-bannerComponentTemplate.vm
+;sdh-CMSImageComponent-template;"CMSImageComponent Template";$emailResource/email-cmsImageComponentTemplate.vm
+;publicsector-CMSLinkComponent-template;"CMSLinkComponent Template";$emailResource/email-cmsLinkComponentTemplate.vm
+;publicsector-CMSParagraphComponent-template;"CMSParagraphComponent Template";$emailResource/email-cmsParagraphComponentTemplate.vm
+;publicsector-SimpleBannerComponent-template;"CMSSimpleBannerComponent Template";$emailResource/email-bannerComponentTemplate.vm
+;publicsector_Relationship_Request_Body;"Relationship Request Email Body";$emailResource/email-relationshipRequestEmailProcessBody.vm
+;publicsector_Relationship_Request_Subject;"Relationship Request Email Subject";$emailResource/email-relationshipRequestEmailProcessSubject.vm
+
+INSERT_UPDATE EmailPage;$contentCV;uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;RelationshipRequestEmail;customerservices@hybris.com;Customer Services Team
+
+INSERT_UPDATE Media;$contentCV;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']
+;;/images/email/banner-publicsector.jpg;banner-publicsector.jpg;$siteResource/images/email/banner-publicsector.jpg
+;;/images/email/logo-hybris.png;logo-hybris.png;$siteResource/images/email/logo-hybris.png
+
+UPDATE CMSImageComponent;$contentCV;uid[unique=true];$picture[lang=$lang]
+;;EmailBannerPublicSectorBottomImage;
+;;EmailBannerPublicSectorTopImage;/images/email/banner-publicsector.jpg
+;;EmailSiteLogoImage;/images/email/logo-hybris.png
+ 
