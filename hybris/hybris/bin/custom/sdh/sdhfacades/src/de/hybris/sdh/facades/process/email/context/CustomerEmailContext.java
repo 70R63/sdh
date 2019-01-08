@@ -44,17 +44,19 @@ public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustome
 		super.init(storeFrontCustomerProcessModel, emailPageModel);
 		customerData = getCustomerConverter().convert(getCustomer(storeFrontCustomerProcessModel));
 
-
-		try
+		if (storeFrontCustomerProcessModel instanceof SDHCustomerRegistrationProcessModel)
 		{
-			put("activateAccountURL",
-					getSiteBaseUrlResolutionService().getWebsiteUrlForSite(getBaseSite(), getUrlEncodingAttributes(), true,
-							"/login/pw/activateAccount", "token=" + getURLEncodedToken(storeFrontCustomerProcessModel)));
-		}
-		catch (final UnsupportedEncodingException e)
-		{
-			LOG.error("Not able to generate token for customer resgistration: "
-					+ ((SDHCustomerRegistrationProcessModel) storeFrontCustomerProcessModel).getCustomer().getUid());
+			try
+			{
+				put("activateAccountURL",
+						getSiteBaseUrlResolutionService().getWebsiteUrlForSite(getBaseSite(), getUrlEncodingAttributes(), true,
+								"/login/pw/activateAccount", "token=" + getURLEncodedToken(storeFrontCustomerProcessModel)));
+			}
+			catch (final UnsupportedEncodingException e)
+			{
+				LOG.error("Not able to generate token for customer resgistration: "
+						+ ((SDHCustomerRegistrationProcessModel) storeFrontCustomerProcessModel).getCustomer().getUid());
+			}
 		}
 
 	}
