@@ -37,6 +37,7 @@
     <extension name='xyformscommerceservices' />
     <extension name='xyformscommercefacades' />
     <extension name='xyformscommercecockpits' />
+    <extension name='xyformsservices' />
     <extension name='datahubadapter' />
     <extension name='datahubbackoffice' />
     <extension name='datahubclient' />
