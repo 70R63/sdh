@@ -20,6 +20,12 @@
 
 
 <requires-extension name="xyformsstorefrontcommons"/>
+
+
+
+
+
+
 <requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="sdhfacades"/>
 
