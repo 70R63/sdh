@@ -153,6 +153,7 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
 ;;RelPagosLink;"Payment Relation";"Click here for menu item menu Payment Relation"
 ;;EdoCuentaLink;"Account Status";"Click here for menu item menu Account Status"
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
 #*->-------------------------------------------------------------------------------------------------------------------------
  
  
