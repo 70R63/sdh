@@ -44,7 +44,8 @@
 							  <li><span class="glyphicon glyphicon-cog" aria-hidden="true" ></span>&nbsp;<a href="${delineacionUrbanaURL }"><spring:theme code="taxpayers.taxes.delineacionUrbana" /></a></li>
 							  <c:url value='/contribuyentes/sobretasa-gasolina' var="sobretasaGasolinaURL"/>
 							  <li><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;<a href="${sobretasaGasolinaURL }"><spring:theme code="taxpayers.taxes.sobretasaGasolina" /></a></li>
-							  <li><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;<a><spring:theme code="taxpayers.taxes.publicidadExterior" /></a></li>
+							  <c:url value='/contribuyentes2/publicidadexterior' var="publicidadExteriorURL"/>
+							  <li><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;<a href="${publicidadExteriorURL }"><spring:theme code="taxpayers.taxes.publicidadExterior" /></a></li>
 							</ul>
 						</div>					
 				</div>
