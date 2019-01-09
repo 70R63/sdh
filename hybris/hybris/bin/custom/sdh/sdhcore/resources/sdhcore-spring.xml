@@ -563,5 +563,11 @@
 	<alias alias="customerAccountService" name="sdhCustomerAccountService"/>
 	<bean id="sdhCustomerAccountService" parent="defaultCustomerAccountService"
 			class="de.hybris.sdh.core.services.impl.DefaultSDHCustomerAccountService"/>
+
+	<!-- SDH YForms Services -->
+	<alias name="defaultSdhYFormservice" alias="SdhYFormservice"/>
+	<bean id="defaultSdhYFormservice" class="de.hybris.sdh.core.formServices.impl.DefaultSdhYFormservice" parent="defaultYFormService">
+	</bean>
+
 	
 </beans>

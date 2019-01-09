@@ -178,6 +178,9 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; HybrisNavNode                          ; ; Hybris Pages                     ; PublicSectorNavNode   ; ; AboutHybrisLink, ContactUsLink                                                                 ; HybrisNavNode                          ;
 ; MyAccountNavNode                       ; ; My Account Nav                   ; SiteRootNode          ; ;                                                                                                ; MyAccountNavNode                       ;
 
+
+
+
 # Category Navigation Bar Component
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
 ;;CategoryNavComponent; Category Navigation Component;;CategoryNavComponent;CategoryNavNode;10
@@ -219,11 +222,10 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ;MiRITNavigationNode;;Mi RIT Menu;MiRITNavigationNode;MiRITNavigationServiceRequestsNavNodeMenu
-#;MiBuzonNavigationNode;;Mi Buzon Menu;MiBuzonNavigationNode;MiBuzonNavigationServiceRequestsNavNodeMenu
+;MiBuzonNavigationNode;;Mi Buzon Menu;MiBuzonNavigationNode;
 ;ImpuestosNavigationNode;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosNavigationServiceRequestsNavNodeMenu
 ;TramitesNavigationNode;;Tramites Menu;TramitesNavigationNode;TramitesNavigationServiceRequestsNavNodeMenu
 ;FacturacionNavigationNode;;Facturacion Menu;FacturacionNavigationNode;FacturacionNavigationServiceRequestsNavNodeMenu
-;DeclaracionesNavigationNode;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesNavigationServiceRequestsNavNodeMenu
 ;DeclaracionesNavigationNode;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesNavigationServiceRequestsNavNodeMenu
 ;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
 ;ConsultaNavigationNode;;Consultas Menu;ConsultaNavigationNode;ConsultaNavigationServiceRequestsNavNodeMenu
@@ -249,7 +251,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ;MiRITNavigationNodeEntry;;Mi RIT Menu;MiRITNavigationNode;MiRITLink;
-#;MiBuzonNavigationNodeEntry;;Mi Buzon Menu;MiBuzonNavigationNode;MiBuzonLink;
+;MiBuzonNavigationNodeEntry;;Mi Buzon Menu;MiBuzonNavigationNode;MiBuzonLink;
 ;ImpuestosNavigationNodeEntry;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosLink;
 ;TramitesNavigationNodeEntry;;Tramites Menu;TramitesNavigationNode;TramitesLink;
 ;FacturacionNavigationNodeEntry;;Facturacion Menu;FacturacionNavigationNode;FacturacionLink;

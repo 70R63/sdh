@@ -400,10 +400,25 @@ public class FormCheckoutStepController extends AbstractCheckoutStepController
 		final Boolean isCurrentCustomerSameAsUserInContext = userInContext == null
 				|| currentCustomer.getUid().equals(userInContext.getUid());
 
-		model.addAttribute("draftCode", cartData.getCode());
-		model.addAttribute("product", getPsYFormsStrategy().getYFormOrderEntry(cartData).getProduct());
-		model.addAttribute("userInContext", getCheckoutFacade().getCheckoutCart().getUserInContext());
-		model.addAttribute("isCurrentCustomerSameAsUserInContext", isCurrentCustomerSameAsUserInContext);
+		/*
+		 * System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+		 * System.out.println("publicsectoraddon"); System.out.println("cartData" + cartData);
+		 * System.out.println("cartData.code" + cartData.getCode()); System.out.println("cartData.code" +
+		 * cartData.getDescription()); System.out.println("cartData.code" + cartData.getName());
+		 * System.out.println("cartData.code" + cartData.getGuid()); System.out.println("cartData.code" + cartData.getSite());
+		 * System.out.println("cartData.code" + cartData.getStore()); System.out.println("cartData.code" +
+		 * cartData.getAllEntriesCount()); System.out.println("getPsYFormsStrategy()" + getPsYFormsStrategy());
+		 * System.out.println("getPsYFormsStrategy().getYFormOrderEntry(cartData)" +
+		 * getPsYFormsStrategy().getYFormOrderEntry(cartData));
+		 * System.out.println("getPsYFormsStrategy().getYFormOrderEntry(cartData).getProduct()" +
+		 * getPsYFormsStrategy().getYFormOrderEntry(cartData).getProduct());
+		 * System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+		 */
+
+		//model.addAttribute("draftCode", cartData.getCode());
+		//model.addAttribute("product", getPsYFormsStrategy().getYFormOrderEntry(cartData).getProduct());
+		//model.addAttribute("userInContext", getCheckoutFacade().getCheckoutCart().getUserInContext());
+		//Smodel.addAttribute("isCurrentCustomerSameAsUserInContext", isCurrentCustomerSameAsUserInContext);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DRAFT_CONFIRMATION_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DRAFT_CONFIRMATION_PAGE));
