@@ -24,6 +24,7 @@
 	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
 		<property name="numBP" type="String"/>
 		<property name="documentNumber" type="String"/>
+		<property name="documentType" type="String"/>
 		<property name="middleName" type="String"/>
 		<property name="secondLastName" type="String"/>
 		<property name="documentExpeditionDate" type="Date"/>
@@ -40,5 +41,7 @@
 		<property name="useEmailForNotifications" type="Boolean"></property>
 		<property name="useInformationForInstitutionalPurposes" type="Boolean"></property>
 		<property name="numBP" type="String"></property>
+		<property name="documentNumber" type="String"/>
+		<property name="documentType" type="String"/>
 	</bean>
 </beans>
