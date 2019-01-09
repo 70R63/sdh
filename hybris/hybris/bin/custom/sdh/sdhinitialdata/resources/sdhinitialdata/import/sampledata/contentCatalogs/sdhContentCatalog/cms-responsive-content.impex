@@ -79,6 +79,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; BlogAndNewsLink                 ; BLOG & NEWS                        ; http://www.stateofrosebud.com/news ; ; ; newWindow;;
 ; ; EventsLink                      ; EVENTS                             ; http://www.stateofrosebud.com/events ; ; ; newWindow;;
 
+; ; EscuelaVirtualLink                      ; ESCUELA VIRTUAL                             ; "#" ; ; ; newWindow;;
+; ; PreguntasFrecuentesLink                      ; PREGUNTAS FRECUENTES                             ; "#" ; ; ; newWindow;;
 
 
 
@@ -193,7 +195,7 @@ INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=tru
 
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
-;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode
+;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -209,6 +211,9 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;RosebudNavigationNode;;About Rosebud Menu;RosebudNavigationNode;
 ;BlogAndNewsNavigationNode;;Blog And News Menu ;BlogAndNewsNavigationNode;
 ;EventsNavigationNode;;Events Menu;EventsNavigationNode;
+
+;EscuelaVirtualNavigationNode;;Escuela Virtual Menu;EscuelaVirtualNavigationNode;
+;PreguntasFrecuentesNavigationNode;;Preguntas Frecuentes Menu;PreguntasFrecuentesNavigationNode;
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -235,6 +240,10 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;RosebudNavigationNodeEntry;;About Rosebud Menu Entry;RosebudNavigationNode;AboutRosebudLink;
 ;BlogAndNewsNavigationNodeEntry;;Blog And News Menu;BlogAndNewsNavigationNode;BlogAndNewsLink;
 ;EventsNavigationNodeEntry;;Blog And News Menu;EventsNavigationNode;EventsLink;
+
+;EscuelaVirtualNavigationNodeEntry;;Escuela Virtual Menu;EscuelaVirtualNavigationNode;EscuelaVirtualLink;
+;PreguntasFrecuentesNavigationNodeEntry;;Preguntas Frecuentes Menu;PreguntasFrecuentesNavigationNode;PreguntasFrecuentesLink;
+
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -1388,3 +1397,23 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
 ;;PSAssetDetailComponent;Account Asset Detail Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/asset/psAssetDetailPage.jsp;;PSAssetDetailComponent
+
+
+################# Restricciones para el menu #################
+
+# create a inverse restriction
+INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(uid,$contentCV)
+;;MiRitLink Logged in User;anonymousUserRestriction;MiRitloggedInUser;MiRITLink
+;;MiBuzonLink Logged in User;anonymousUserRestriction;MiBuzonLinkloggedInUser;MiBuzonLink
+;;ImpuestosLink Logged in User;anonymousUserRestriction;ImpuestosLinkloggedInUser;ImpuestosLink
+;;TramitesLink Logged in User;anonymousUserRestriction;TramitesLinkloggedInUser;TramitesLink
+;;FacturacionLink Logged in User;anonymousUserRestriction;FacturacionLinkloggedInUser;FacturacionLink
+;;DeclaracionesLink Logged in User;anonymousUserRestriction;DeclaracionesLinkloggedInUser;DeclaracionesLink
+;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
+;;ConsultasLink Logged in User;anonymousUserRestriction;ConsultasLinkloggedInUser;ConsultasLink
+
+INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];users(uid);components(uid,$contentCV)
+;;EscuelaVirtualLink Anonymous;EscuelaVirtualLinkAnonymousRestriction;anonymous;EscuelaVirtualLink
+;;PreguntasFrecuentesLink Anonymous;PreguntasFrecuentesLinkAnonymousRestriction;anonymous;PreguntasFrecuentesLink
+
+

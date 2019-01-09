@@ -94,6 +94,8 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
  ;;RoadsAndVehiclesSeeAllCategoriesLink;"> See All Categories";"Click here for all Roads and Vehicles categories"
  ;;RoadsAndVehiclesSeeAllServiceRequestsLink;"> See All Service Requests";"Click here for all Roads and Vehicles service requests"
  ;;WorkingWithChildrenCheckLink;"Working with Children Check";"Click here for menu item Working with Children Check"
+;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
+;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
 
 UPDATE PSRetrieveADraftComponent; $contentCV; uid[unique = true];title[lang=$lang];description[lang=$lang];retrieveDraftButtonLabel[lang=$lang];
  ;;PSRetrieveADraftComponent;Retrieve Your Draft Request;You have already started a service request and have saved it as a draft? Retrieve it here.;Retrieve Draft Request;

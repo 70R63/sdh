@@ -203,7 +203,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;SiteLogo;;;logo
 ;HeaderLinks;;;headerlinks
 ;SearchBox;;;searchbox
-;NavigationBar;;;navigation
+#;NavigationBar;;;navigation
 ;Section1;;;wide
 ;Section2A;;;narrow
 ;Section2B;;;narrow
@@ -519,7 +519,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-LandingPage2;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-LandingPage2;HomepageNavLink;;HomepageNavLinkSlot;true
-;;NavigationBar-LandingPage2;NavigationBar;;NavigationBarSlot;true
+#;;NavigationBar-LandingPage2;NavigationBar;;NavigationBarSlot;true
 ;;Footer-LandingPage2;Footer;;FooterSlot;true
 ;;HeaderLinks-LandingPage2;HeaderLinks;;HeaderLinksSlot;true
 ;;TopHeaderSlot-LandingPage2;TopHeaderSlot;;TopHeaderSlot;true
