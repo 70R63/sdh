@@ -24039,11 +24039,40 @@ author: Vikas Gupta
   margin-right: auto;
   width: 90%;
 }
+.nav__links--account {
+  display: inline-block;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  color: #0000ff;
+  font-weight: 400;
+  text-transform: uppercase;
+}
 .navigation--bottom .nav__links--products li a {
-  color: #AEB6BF;
+  font-family: Arial;
+  font-size: 13px;
+  font-weight: 400;
+  color: #ffffff;
 }
 .navigation--bottom {
-  background-color: #ffffff;
+  background-color: #00ccff;
+}
+.navigation--bottom ul.nav__links--products > li > span > a:hover,
+.navigation--bottom ul.nav__links--products > li > span > a:focus {
+  background: #00ccff;
+  text-decoration: none;
+}
+.navigation--bottom .show-sub .nav__link a:after {
+  border-bottom: 10px solid #3399ff;
+}
+.navigation--bottom .nav__links--primary .sub__navigation {
+  display: none;
+  background: #3399ff;
+}
+.navigation--bottom .nav__links--primary .sub-navigation-section ul.sub-navigation-list > li > a:hover,
+.navigation--bottom .nav__links--primary .sub-navigation-section ul.sub-navigation-list > li > a:focus {
+  background: #3399ff;
+  text-decoration: none;
 }
 .main-footer .footer__top .footer__nav--container .footer__nav--links a {
   color: #AEB6BF;
