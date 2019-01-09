@@ -11,12 +11,21 @@
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
 	<extension abstractclassprefix="Generated" classprefix="SdhStorefront" name="sdhstorefront" usemaven="false">		
-        <requires-extension name="assistedservicestorefront"/>
+        <requires-extension name="sdhrelationshipsaddon"/>
+<requires-extension name="sdhbillsaddon"/>
+<requires-extension name="sdhpsaddon"/>
+<requires-extension name="assistedservicestorefront"/>
 <requires-extension name="smarteditaddon"/>
-<requires-extension name="publicsectoracceleratoraddon"/>
-<requires-extension name="billaddon"/>
-<requires-extension name="relationshipaddon"/>
+
+
+
 <requires-extension name="xyformsstorefrontcommons"/>
+
+
+
+
+
+
 <requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="sdhfacades"/>
 

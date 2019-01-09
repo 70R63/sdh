@@ -1,0 +1,6 @@
+$siteUid=sdh
+$jarResourceXslFoBillReceipt=jar:de.hybris.platform.sdhbillsaddon.constants.BilladdonConstants&/sdhbillsaddon/import/document/pdf
+$lang=en
+
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;$siteUid_billpayment_receipt;"Bill Payment Receipt Template";$jarResourceXslFoBillReceipt/xslfo_billpayment_receipt_$lang.vm

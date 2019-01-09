@@ -1,0 +1,105 @@
+# 
+# ImpEx for Responsive Public Sector Site CMS Content 
+# 
+$contentCatalog=sdhContentCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$jarResourceCms=$config-jarResourceCmsValue
+$jarResourceCmsRelationship=jar:de.hybris.platform.sdhrelationshipsaddon.constants.RelationshipaddonConstants&/sdhrelationshipsaddon/import/cockpits/cmscockpit
+$picture=media(code, $contentCV) ;
+$addOnExtensionName=sdhrelationshipsaddon
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# Import modulegen config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Preview Image for use in the CMS Cockpit for special ContentPages
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;ContentPageModel__function_preview;text/gif;ContentPageModel__function_preview.gif;$jarResourceCmsRelationship/preview-images/ContentPageModel__function_preview.gif
+
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
+; ;AccountMyRelationshipsComponent    ;Account My Relationships Component      ;/WEB-INF/views/addons/$addOnExtensionName/responsive/pages/account/accountMyRelationshipsPage.jsp;;AccountMyRelationshipsComponent
+; ; AddRelationshipComponent          ; Add Relationship Component             ; /WEB-INF/views/addons/$addOnExtensionName/responsive/pages/relationship/addRelationshipPage.jsp; ; AddRelationshipComponent
+; ; AddPermissionComponent            ; Add Permission Component               ; /WEB-INF/views/addons/$addOnExtensionName/responsive/pages/relationship/addPermissionPage.jsp;  ; AddPermissionComponent
+; ; AccountPendingRequestsComponent   ; Account Pending Requests Component     ; /WEB-INF/views/addons/$addOnExtensionName/responsive/pages/account/accountPendingRequestsPage.jsp; ; AccountPendingRequestsComponent
+; ; RequestMorePermissionsComponent            ; Request More Permissions Component               ; /WEB-INF/views/addons/$addOnExtensionName/responsive/pages/relationship/requestMorePermissionsPage.jsp;  ; RequestMorePermissionsComponent
+; ; ChangePermissionsComponent            ; Change Permissions Component               ; /WEB-INF/views/addons/$addOnExtensionName/responsive/pages/relationship/changePermissionsPage.jsp;  ; ChangePermissionsComponent
+; ; AccountManageRelationshipDetailsComponent     ; Account Manage Relationship Details Component       ; /WEB-INF/views/addons/$addOnExtensionName/responsive/pages/account/accountManageRelationshipDetailsPage.jsp; ; AccountManageRelationshipDetailsComponent
+; ; AccountRelationshipConfirmationComponent     ; Account Relationship Confirmation Component       ; /WEB-INF/views/addons/$addOnExtensionName/responsive/pages/account/accountRelationshipConfirmationPage.jsp; ; AccountRelationshipConfirmationComponent
+
+###### My-Relationships ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; BodyContent-myrelationships ; Body Content Slot for My Account My Relationships ; true ; AccountMyRelationshipsComponent   ; ; ;
+; ; BodyContent-Relationship ; Body Content Slot for My Account add relationship ; true ; AddRelationshipComponent ; ; ;
+; ; BodyContent-Permission ; Body Content Slot for My Account add permission ; true ; AddPermissionComponent ; ; ;
+; ; SideContent-pending-requests ; Side Content Slot for My Account pending-requests ; true ; ; ; ;
+; ; BodyContent-pending-requests ; Body Content Slot for My Account pending-requests ; true ; AccountPendingRequestsComponent ; ; ;
+; ; BodyContent-RequestMorePermissions ; Body Content Slot for My Account request more permissions ; true ; RequestMorePermissionsComponent ; ; ;
+; ; BodyContent-ChangePermissions ; Body Content Slot for My Account change permissions ; true ; ChangePermissionsComponent ; ; ;
+; ; BodyContent-manage-details ; Body Content Slot for My Account My Relationships Manage Details ; true ; AccountManageRelationshipDetailsComponent ; ; ;
+; ; BodyContent-relationship-confirmation ; Body Content Slot for My Account Relationship Confirmation ; true ; AccountRelationshipConfirmationComponent ; ; ;
+
+# Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
+;;my-relationships;My Relationships Page;AccountPageTemplate;my-relationships
+;;addRelationshipPage;Relationship Summary Page;AccountPageTemplate;addRelationship
+;;addPermissionPage;Permission Summary Page;AccountPageTemplate;addPermission
+;;pending-requests;My Pending Requests Page;AccountPageTemplate;pending-requests
+;;requestMorePermissionsPage;Request More Permissions Summary Page;AccountPageTemplate;requestMorePermissions
+;;changePermissionsPage;Change Permissions Summary Page;AccountPageTemplate;changePermissions
+;;manage-details;Manage Relationship Details Page;AccountPageTemplate;manage-details
+;;relationship-confirmation;Relationship Confirmation Page;AccountPageTemplate;relationship-confirmation
+
+# My-Relationships ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'my-relationships']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-myrelationships ; BodyContent ; ; BodyContent-myrelationships ; ; ;
+
+# Relationship confirmation ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'relationship-confirmation']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-relationship-confirmation ; BodyContent ; ; BodyContent-relationship-confirmation ; ; ;
+
+###### Account Add Relationship page
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'addRelationshipPage']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-Relationship ; BodyContent ; ; BodyContent-Relationship ; ; ;
+
+###### Account Add Permission page
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'addPermissionPage']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-Permission ; BodyContent ; ; BodyContent-Permission ; ; ;
+
+###### Account pending requests page
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'pending-requests']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; SideContent-pending-requests ; SideContent ; ; SideContent-pending-requests ; ; ;
+; ; BodyContent-pending-requests ; BodyContent ; ; BodyContent-pending-requests ; ; ;
+
+###### Request More Permissions page
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'requestMorePermissionsPage']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-RequestMorePermissions ; BodyContent ; ; BodyContent-RequestMorePermissions ; ; ;
+
+###### Request Change Permissions page
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'changePermissionsPage']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-ChangePermissions ; BodyContent ; ; BodyContent-ChangePermissions ; ; ;
+
+###### Account Manage Relationship Details Page
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'manage-details']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; BodyContent-manage-details ; BodyContent ; ; BodyContent-manage-details ; ; ;
+
+# create cms link components for my account pages
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;MyRelationshipsLink;MyRelationshipsLink;/my-account/my-relationships;MyRelationshipsLink;
+
+# create navigation root node for my account & child nodes for the root node 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef;children(&nodeRef)[mode=append]
+;MyAccountNavNode;;My Account Nav;SiteRootNode;;MyAccountNavNode;MyRelationshipsNavNode
+;MyRelationshipsNavNode;;MyRelationshipsNavNode;;;MyRelationshipsNavNode
+
+# create cms navigation entry for navigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;MyRelationshipsNavNodeEntry;;MyRelationshipsNavNodeEntry;MyRelationshipsNavNode;MyRelationshipsLink;
+

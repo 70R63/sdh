@@ -2,7 +2,7 @@
 # Import the SDH Catalog
 #
 $contentCatalog=sdhContentCatalog
-$languages=en,de,fr,es
+$languages=en,es
 
 # Content catalog for CMS contents
 INSERT_UPDATE ContentCatalog;id[unique=true]

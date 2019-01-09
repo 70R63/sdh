@@ -13,11 +13,10 @@ package de.hybris.sdh.core.event;
 import de.hybris.platform.acceleratorservices.site.AbstractAcceleratorSiteEventListener;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.enums.SiteChannel;
-import de.hybris.platform.commerceservices.event.RegisterEvent;
-import de.hybris.platform.commerceservices.model.process.StoreFrontCustomerProcessModel;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.sdh.core.model.SDHCustomerRegistrationProcessModel;
 
 import org.springframework.beans.factory.annotation.Required;
 
@@ -25,7 +24,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Listener for customer registration events.
  */
-public class RegistrationEventListener extends AbstractAcceleratorSiteEventListener<RegisterEvent>
+public class RegistrationEventListener extends AbstractAcceleratorSiteEventListener<SDHRegistrationEvent>
 {
 
 	private ModelService modelService;
@@ -61,9 +60,9 @@ public class RegistrationEventListener extends AbstractAcceleratorSiteEventListe
 	}
 
 	@Override
-	protected void onSiteEvent(final RegisterEvent registerEvent)
+	protected void onSiteEvent(final SDHRegistrationEvent registerEvent)
 	{
-		final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel = (StoreFrontCustomerProcessModel) getBusinessProcessService()
+		final SDHCustomerRegistrationProcessModel storeFrontCustomerProcessModel = (SDHCustomerRegistrationProcessModel) getBusinessProcessService()
 				.createProcess(
 						"customerRegistrationEmailProcess-" + registerEvent.getCustomer().getUid() + "-" + System.currentTimeMillis(),
 						"customerRegistrationEmailProcess");
@@ -72,12 +71,13 @@ public class RegistrationEventListener extends AbstractAcceleratorSiteEventListe
 		storeFrontCustomerProcessModel.setLanguage(registerEvent.getLanguage());
 		storeFrontCustomerProcessModel.setCurrency(registerEvent.getCurrency());
 		storeFrontCustomerProcessModel.setStore(registerEvent.getBaseStore());
+		storeFrontCustomerProcessModel.setToken(registerEvent.getToken());
 		getModelService().save(storeFrontCustomerProcessModel);
 		getBusinessProcessService().startProcess(storeFrontCustomerProcessModel);
 	}
 
 	@Override
-	protected SiteChannel getSiteChannelForEvent(final RegisterEvent event)
+	protected SiteChannel getSiteChannelForEvent(final SDHRegistrationEvent event)
 	{
 		final BaseSiteModel site = event.getSite();
 		ServicesUtil.validateParameterNotNullStandardMessage("event.order.site", site);

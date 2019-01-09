@@ -1,0 +1,7 @@
+#set ($attributes = $ctx.assetAttributes)
+		#foreach ($attribute in $attributes)
+    		 <div class="col-md-6" tabindex="0">
+                  <div class="title">$ctx.esc.xml($attribute.attributeDisplayName)</div>
+                  <div class="description">$ctx.esc.xml($attribute.attributeValue)</div>
+             </div>
+		#end

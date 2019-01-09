@@ -1,0 +1,23 @@
+$lang=en
+
+INSERT_UPDATE PSBillMessage;psBillType(code)[unique=true];shortMessage[lang=$lang];longMessage[lang=$lang];messageCondition(code)[unique=true]
+ ;AGCA;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;AGCA;;;PART_PAYMENT_NOT_ALLOWED
+ ;BIREP;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;BIREP;;;PART_PAYMENT_NOT_ALLOWED
+ ;CORT;"Overdue Bill <br> Payment Not Allowed";This bill is overdue. Payment is not possible.;LATE_PAYMENT_NOT_ALLOWED
+ ;CORT;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;KGFE;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;KGFE;;;PART_PAYMENT_NOT_ALLOWED
+ ;PKFN;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;PKFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;SCTF;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;SCTF;;;PART_PAYMENT_NOT_ALLOWED
+ ;SPFN;"Overdue Bill <br> Payment Not Allowed";This bill is overdue. Payment is not possible.;LATE_PAYMENT_NOT_ALLOWED
+ ;SPFN;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;SPFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;TXRP;"Overdue Bill <br> Payment Not Allowed";This bill is overdue. Payment is not possible.;LATE_PAYMENT_NOT_ALLOWED
+ ;TXRP;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;TXRP;;;PART_PAYMENT_NOT_ALLOWED
+ ;WBIL;;Please enter an amount that equals or is less than the outstanding amount (example: 3456.50);OVER_PAYMENT_NOT_ALLOWED
+ ;WBIL;;;PART_PAYMENT_NOT_ALLOWED
