@@ -13,6 +13,8 @@
 				</h2>
 			</div>
 			
+			
+		<c:if test="${miRitForm.hasCORol }">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2 text-center">
 				<div class="form-group ">
@@ -23,6 +25,8 @@
 				</div>
 			</div>
 		</div>
+		</c:if>
+		<c:if test="${miRitForm.hasAARol }">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2 text-center">
 				<div class="form-group ">
@@ -33,6 +37,8 @@
 				</div>
 			</div>
 		</div>
+		</c:if>
+		<c:if test="${miRitForm.hasTARol }">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2 text-center">
 				<div class="form-group ">
@@ -43,6 +49,8 @@
 				</div>
 			</div>
 		</div>
+		</c:if>
+		<c:if test="${miRitForm.hasARRol }">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2 text-center">
 				<div class="form-group ">
@@ -53,6 +61,8 @@
 				</div>
 			</div>
 		</div>
+		</c:if>
+		<c:if test="${miRitForm.hasRIRol }">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2 text-center">
 				<div class="form-group ">
@@ -63,3 +73,4 @@
 				</div>
 			</div>
 		</div>
+		</c:if>

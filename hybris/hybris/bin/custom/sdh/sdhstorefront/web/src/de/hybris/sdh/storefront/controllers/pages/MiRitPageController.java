@@ -11,13 +11,25 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.ContribDireccion;
+import de.hybris.sdh.core.pojos.responses.ContribTelefono;
+import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiRitForm;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +45,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MiRitPageController extends AbstractPageController
 {
 
+	private static final Logger LOG = Logger.getLogger(MiRitPageController.class);
 
 	private static final String Mi_RIT_CMS_PAGE = "MiRitPage";
 
@@ -40,17 +53,178 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sessionService")
 	SessionService sessionService;
 
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String showView(final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		final MiRitForm miRitForm = new MiRitForm();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 
-		//		populateFormFromValidaMailResponeInSession(miRitForm);
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
-		model.addAttribute("miRitForm", miRitForm);
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
+			final MiRitForm miRitForm = new MiRitForm();
+
+			miRitForm.setPrimNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+			miRitForm.setPrimApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
+			miRitForm.setSegNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
+			miRitForm.setSegApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
+			miRitForm.setFchExp(sdhConsultaContribuyenteBPResponse.getInfoContrib().getFchExp());
+			miRitForm.setNumDoc(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumDoc());
+
+			if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getTITLE()))
+			{
+				miRitForm.setTratamiento(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getTITLE());
+			}
+			if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getTYPE()))
+			{
+				miRitForm.setClaseIC(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getTYPE());
+			}
+			if (0 != sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getXSEXU())
+			{
+				miRitForm.setSexo(
+						String.valueOf(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getXSEXU()));
+			}
+
+			if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNATIO()))
+			{
+				miRitForm.setNacionalidad(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNATIO());
+			}
+
+			miRitForm.setFechaNacimiento(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getBIRTHDT());
+
+			miRitForm.setLugarNacimiento(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getBIRTHPL());
+
+			if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getCNDSC()))
+			{
+				miRitForm.setPaisOrigen(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getCNDSC());
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getRoles() != null && !sdhConsultaContribuyenteBPResponse.getRoles().isEmpty())
+			{
+
+				for (final NombreRolResponse eachRolResponse : sdhConsultaContribuyenteBPResponse.getRoles())
+				{
+					if ("01".equals(eachRolResponse.getNombreRol()))
+					{
+						miRitForm.setHasCORol(Boolean.TRUE);
+					}
+					else if ("02".equals(eachRolResponse.getNombreRol()))
+					{
+						miRitForm.setHasAARol(Boolean.TRUE);
+					}
+					else if ("03".equals(eachRolResponse.getNombreRol()))
+					{
+						miRitForm.setHasTARol(Boolean.TRUE);
+					}
+					else if ("04".equals(eachRolResponse.getNombreRol()))
+					{
+						miRitForm.setHasARRol(Boolean.TRUE);
+					}
+					else if ("05".equals(eachRolResponse.getNombreRol()))
+					{
+						miRitForm.setHasRIRol(Boolean.TRUE);
+					}
+				}
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOUSOINF() == 1)
+			{
+				miRitForm.setUseInformationForInstitutionalPurposes(Boolean.TRUE);
+			}
+			else if (sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOUSOINF() == 2)
+			{
+				miRitForm.setUseInformationForInstitutionalPurposes(Boolean.FALSE);
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE() == 1)
+			{
+				miRitForm.setUseEmailForNotifications(Boolean.TRUE);
+			}
+			else if (sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZAUTOBUZONE() == 2)
+			{
+				miRitForm.setUseEmailForNotifications(Boolean.FALSE);
+			}
+
+
+			if (sdhConsultaContribuyenteBPResponse.getInfoContrib().getDireccion() != null
+					&& !sdhConsultaContribuyenteBPResponse.getInfoContrib().getDireccion().isEmpty())
+			{
+
+				for (final ContribDireccion eachDireccion : sdhConsultaContribuyenteBPResponse.getInfoContrib().getDireccion())
+				{
+
+					if ("01".equalsIgnoreCase(eachDireccion.getADR_KIND()))
+					{
+
+						miRitForm.setDireccionNotificacion(eachDireccion.getSTREET());
+
+					}
+					if ("02".equalsIgnoreCase(eachDireccion.getADR_KIND()))
+					{
+
+						miRitForm.setDireccionContacto(eachDireccion.getSTREET());
+
+					}
+
+
+				}
+
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono() != null
+					&& !sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono().isEmpty())
+			{
+
+				for (final ContribTelefono eachTelefono : sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono())
+				{
+
+					if ("1".equalsIgnoreCase(eachTelefono.getTEL_TIPO()))
+					{
+
+						miRitForm.setTelefonoFijo(eachTelefono.getTEL_NUMBER());
+						miRitForm.setExtensionTelefono(eachTelefono.getTEL_EXTENS());
+
+					}
+					else
+					{
+
+						miRitForm.setTelefonoCelular(eachTelefono.getTEL_NUMBER());
+
+					}
+
+
+				}
+
+			}
+
+
+			model.addAttribute("miRitForm", miRitForm);
+
+		}
+		catch (final Exception e)
+		{
+			// XXX Auto-generated catch block
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
+
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));

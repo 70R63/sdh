@@ -17,43 +17,40 @@
 			<!--  First column of form -->
 			<div class="col-md-4">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="tratamiento">
 						<spring:theme code="mirit.generalData.treatment"/>
 					</label> 
 <!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-					<select id="u5187_input" class="form-control" disabled="">
-		                <option value="Señor">Señor</option>
-		                <option value="Señora">Señora</option>
-		                <option value="Señores">Señores</option>
-		                <option value="Señor/a">Señor/a</option>
+					<select id="tratamiento" name="tratamiento" class="form-control" disabled="">
+		                <option value="${miRitForm.tratamiento}" ><spring:theme code="rit.tratamiento.t${miRitForm.tratamiento}" /></option>
 		              </select>
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
 				</div>
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="sexo">
 						<spring:theme code="mirit.generalData.gender" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="sexo" name="sexo" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="<spring:theme code="rit.sexo.s${miRitForm.tratamiento}" />" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
 				</div>
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="birthDate">
 						<spring:theme code="mirit.generalData.birthDate" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="birthDate" name="birthDate" class="form-control" disabled="disabled" aria-required="true" type="text" value="${miRitForm.fechaNacimiento}" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
 				</div>
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="paisOrigen">
 						<spring:theme code="mirit.generalData.originCountry" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="paisOrigen" name="paisOrigen" class="form-control " disabled="disabled" aria-required="true" type="text" value="<spring:theme code="rit.pais.p${miRitForm.paisOrigen}" />" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -65,32 +62,31 @@
 			<!--  Second column of form -->
 			<div class="col-md-4">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="claseIC">
 						<spring:theme code="mirit.generalData.classIC" />
 					</label> 
 <!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-					<select class="form-control" disabled="disabled">
-						 <option value="Persona Natural">Persona Natural</option>
-                <option value="Persona Jurídica">Persona Jurídica</option>
+					<select id="claseIC" name="claseIC" class="form-control" disabled="disabled">
+						 <option value="${miRitForm.claseIC}"><spring:theme code="rit.claseIC.c${miRitForm.claseIC}" /></option>
 					</select>
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
 				</div>
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="nacionalidad">
 						<spring:theme code="mirit.generalData.nationality" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="nacionalidad" name="nacionalidad" disabled="disabled" class="form-control  " aria-required="true" type="text" value="<spring:theme code="rit.pais.p${miRitForm.nacionalidad}" />" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
 				</div>
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="lugarNacimiento">
 						<spring:theme code="mirit.generalData.birthPlace" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="lugarNacimiento" name="lugarNacimiento" class="form-control  " disabled="disabled" aria-required="true" type="text" value="${miRitForm.lugarNacimiento}" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>

@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author hybris
  *
@@ -12,6 +15,7 @@ public class SDHValidaMailRolResponse
 	private int idmsj;
 	private String txtmsj;
 	private InfoContribResponse infoContrib;
+	private List<NombreRolResponse> roles;
 
 	/**
 	 * @return the infoContrib
@@ -62,6 +66,23 @@ public class SDHValidaMailRolResponse
 	public void setTxtmsj(final String txtmsj)
 	{
 		this.txtmsj = txtmsj;
+	}
+
+	/**
+	 * @return the roles
+	 */
+	public List<NombreRolResponse> getRoles()
+	{
+		return roles;
+	}
+
+	/**
+	 * @param roles
+	 *           the roles to set
+	 */
+	public void setRoles(final List<NombreRolResponse> roles)
+	{
+		this.roles = roles;
 	}
 
 
