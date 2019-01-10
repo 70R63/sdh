@@ -13,6 +13,7 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHValidaContribuyenteFacade;
 import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHRegistrationValidator;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
@@ -26,6 +27,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +53,9 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 
 	@Resource(name = "sdhRegistrationValidator")
 	SDHRegistrationValidator sdhRegistrationValidator;
+
+	@Resource(name = "sdhCustomerFacade")
+	private SDHCustomerFacade sdhCustomerFacade;
 
 	@Override
 	protected AbstractPageModel getCmsPage() throws CMSItemNotFoundException
@@ -119,6 +124,23 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		request.setExpeditionDate(searchUserForm.getExpeditionDate());
 
 
+		if (StringUtils.isNotBlank(request.getNumid()) && StringUtils.isNotBlank(request.getTipoid()))
+		{
+			final boolean userRegistered = sdhCustomerFacade.isUserRegistered(request.getNumid(), request.getTipoid());
+
+			if (userRegistered == true)
+			{
+				model.addAttribute("currentSection", "searchUserSection");
+
+				model.addAttribute(searchUserForm);
+
+				model.addAttribute("userRegistered", true);
+
+				return getDefaultRegistrationPage(model);
+			}
+
+
+		}
 
 		boolean userFound = false;
 

@@ -166,10 +166,22 @@ public abstract class SDHAbstractRegisterPageController extends AbstractPageCont
 		data.setUseInformationForInstitutionalPurposes(form.getUseInformationForInstitutionalPurposes());
 
 		final String numBP = getSessionService().getAttribute("numBP");
+		final String documentNumber = getSessionService().getAttribute("documentNumber");
+		final String documentType = getSessionService().getAttribute("documentType");
 
 		if (StringUtils.isNotBlank(numBP))
 		{
 			data.setNumBP(numBP);
+		}
+
+		if (StringUtils.isNotBlank(documentNumber))
+		{
+			data.setDocumentNumber(documentNumber);
+		}
+
+		if (StringUtils.isNotBlank(documentType))
+		{
+			data.setDocumentType(documentType);
 		}
 
 		try

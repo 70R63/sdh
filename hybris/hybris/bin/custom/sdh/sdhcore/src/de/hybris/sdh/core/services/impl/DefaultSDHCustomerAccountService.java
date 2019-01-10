@@ -18,6 +18,8 @@ import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.security.SecureToken;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.sdh.core.event.SDHRegistrationEvent;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateCustomerCommPrefsRequest;
@@ -29,6 +31,8 @@ import de.hybris.sdh.core.services.SDHUpdateCustomerCommPrefsService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -51,6 +55,8 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "flexibleSearchService")
+	private FlexibleSearchService flexibleSearchService;
 	/*
 	 * (non-Javadoc)
 	 *
@@ -181,6 +187,31 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		customer.setLoginDisabled(false);
 		getModelService().save(customer);
 
+
+	}
+
+
+	@Override
+	public boolean isUserRegistered(final String documentNumber, final String documentType)
+	{
+		final String query = "SELECT {pk} FROM {Customer AS C } WHERE {documentType} = ?documentType AND {documentNumber} = ?documentNumber";
+
+		final Map<String, Object> queryParams = new HashMap<String, Object>();
+		queryParams.put("documentType", documentType);
+		queryParams.put("documentNumber", documentNumber);
+
+		final SearchResult<CustomerModel> usersResults;
+
+		usersResults = flexibleSearchService.search(query, queryParams);
+
+		if (usersResults.getTotalCount() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 
 	}
 

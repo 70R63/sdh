@@ -22,6 +22,13 @@
 								</div>
 							</div>
 						</c:if>
+						<c:if test="${userRegistered eq true }">
+							<div class="has-error">
+								<div class="help-block">
+									<span id="lastName.errors"><spring:theme code="register.userAlreadyRegistered" /></span>
+								</div>
+							</div>
+						</c:if>
 						<div class="form-group">
 							<label class="control-label required" for="profile.title">
 							<spring:theme code="register.documentType"/><span class="mandatory">

@@ -6,6 +6,7 @@ package de.hybris.sdh.facades.impl;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.facades.SDHValidaContribuyenteFacade;
 
@@ -35,6 +36,9 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
+
+	@Resource(name = "sdhCustomerAccountService")
+	private SDHCustomerAccountService sdhCustomerAccountService;
 
 	/*
 	 * (non-Javadoc)
@@ -85,6 +89,10 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 			{
 				sessionService.setAttribute("numBP", sdhValidaMailRolResponse.getInfoContrib().getNumBP());
 
+				sessionService.setAttribute("documentNumber", request.getNumid());
+
+				sessionService.setAttribute("documentType", request.getTipoid());
+
 				sessionService.setAttribute("SMTP_ADDR", sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
 
 				return true;
@@ -97,6 +105,7 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 		}
 		return false;
 	}
+
 
 
 }

@@ -103,8 +103,8 @@ public class PasswordResetPageController extends AbstractPageController
 	public String getExternalPasswordRequest(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute(new ForgottenPwdForm());
-		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs(FORGOTTEN_PWD_TITLE));
 		return ControllerConstants.Views.Pages.Password.PasswordResetRequest;
 	}
@@ -112,8 +112,8 @@ public class PasswordResetPageController extends AbstractPageController
 	@RequestMapping(value = "/request/external/conf", method = RequestMethod.GET)
 	public String getExternalPasswordRequestConf(final Model model) throws CMSItemNotFoundException
 	{
-		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs(FORGOTTEN_PWD_TITLE));
 		return ControllerConstants.Views.Pages.Password.PasswordResetRequestConfirmation;
 	}
@@ -122,8 +122,8 @@ public class PasswordResetPageController extends AbstractPageController
 	public String externalPasswordRequest(@Valid final ForgottenPwdForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
-		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs(FORGOTTEN_PWD_TITLE));
 
 		if (bindingResult.hasErrors())

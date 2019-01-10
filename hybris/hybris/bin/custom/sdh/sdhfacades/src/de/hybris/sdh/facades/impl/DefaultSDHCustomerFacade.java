@@ -63,6 +63,8 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 		newCustomer.setUseInformationForInstitutionalPurposes(registerData.getUseInformationForInstitutionalPurposes());
 		newCustomer.setSessionLanguage(getCommonI18NService().getCurrentLanguage());
 		newCustomer.setSessionCurrency(getCommonI18NService().getCurrentCurrency());
+		newCustomer.setDocumentNumber(registerData.getDocumentNumber());
+		newCustomer.setDocumentType(registerData.getDocumentType());
 		getCustomerAccountService().register(newCustomer, registerData.getPassword());
 	}
 
@@ -80,6 +82,21 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 	{
 		sdhCustomerAccountService.activateAccount(token);
 
+	}
+
+
+
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.facades.SDHCustomerFacade#isUserRegistered(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean isUserRegistered(final String documentNumber, final String documentType)
+	{
+		return sdhCustomerAccountService.isUserRegistered(documentNumber, documentType);
 	}
 
 

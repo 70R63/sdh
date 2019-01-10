@@ -94,6 +94,8 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
  ;;RoadsAndVehiclesSeeAllCategoriesLink;"> See All Categories";"Click here for all Roads and Vehicles categories"
  ;;RoadsAndVehiclesSeeAllServiceRequestsLink;"> See All Service Requests";"Click here for all Roads and Vehicles service requests"
  ;;WorkingWithChildrenCheckLink;"Working with Children Check";"Click here for menu item Working with Children Check"
+;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
+;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
 
  
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -151,6 +153,7 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
 ;;RelPagosLink;"Payment Relation";"Click here for menu item menu Payment Relation"
 ;;EdoCuentaLink;"Account Status";"Click here for menu item menu Account Status"
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
 #*->-------------------------------------------------------------------------------------------------------------------------
  
  
