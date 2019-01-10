@@ -87,7 +87,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #*->-------------------------------------------------------------------------------------------------------------------------
 
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
-; ;MiRITLink; MI RIT LINK    ; "/" ;;;;;
+; ;MiRITLink; MI RIT LINK    ; "/contribuyentes/mirit" ;;;;;
 ; ;MiBuzonLink; MI BUZON LINK    ; "/" ;;;;;
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "/" ;;;;;
 ; ;TramitesLink; TRAMITES LINK    ; "/" ;;;;;
