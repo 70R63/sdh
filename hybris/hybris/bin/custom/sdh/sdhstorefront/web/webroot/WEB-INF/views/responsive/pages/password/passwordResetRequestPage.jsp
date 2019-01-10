@@ -4,7 +4,11 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template" %>
 
 <template:page pageTitle="${pageTitle}">
-	<c:if test="${not passwordRequestSent}">
-		<user:forgottenPwd />
-	</c:if>
+	<div class="row">
+		<div class="col-md-4  col-md-offset-4" >
+			<c:if test="${not passwordRequestSent}">
+				<user:forgottenPwd />
+			</c:if>
+		</div>
+	</div>
 </template:page>

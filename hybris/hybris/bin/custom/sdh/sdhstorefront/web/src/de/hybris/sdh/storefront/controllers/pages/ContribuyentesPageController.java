@@ -14,7 +14,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.servicelayer.session.SessionService;
-import de.hybris.sdh.storefront.forms.MiRitForm;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -62,22 +61,6 @@ public class ContribuyentesPageController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
-
-		return getViewForPage(model);
-	}
-
-	@RequestMapping(value = "/mirit", method = RequestMethod.GET)
-	public String mirit(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	{
-		final MiRitForm miRitForm = new MiRitForm();
-
-		//		populateFormFromValidaMailResponeInSession(miRitForm);
-
-		model.addAttribute("miRitForm", miRitForm);
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
-		updatePageTitle(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 
 		return getViewForPage(model);
 	}

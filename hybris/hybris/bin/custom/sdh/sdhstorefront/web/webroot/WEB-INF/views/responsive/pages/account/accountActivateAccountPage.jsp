@@ -16,7 +16,7 @@
 
 
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-4 col-md-offset-4">
 			<div class="item_container_holder ">
 				<div class="forgotten-password item_container ">
 					<c:choose>
@@ -35,6 +35,13 @@
 					</c:choose>
 
 				</div>
+			</div>
+			<div class="text-right">
+				<ycommerce:testId code="login_forgotPasswordSubmit_button">
+					<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href = '<c:url value="/" />'">
+						<spring:theme code="register.inicio" text="Inicio"/>
+					</button>
+				</ycommerce:testId>
 			</div>
 		</div>
 	</div>

@@ -169,7 +169,8 @@
 								<li class="liOffcanvas">
 									<ycommerce:testId code="header_myAcc_link">
 										<spring:theme code="myAccount.acc.title" var="myAccountTitle" />
-										<spring:url value="/my-account" htmlEscape="false" var="myAccUrl"/>
+										<%--<spring:url value="/my-account" htmlEscape="false" var="myAccUrl"/>--%>
+										<spring:url value="/contribuyentes/mirit" htmlEscape="false" var="myAccUrl"/>
 										<a title="${myAccountTitle}" href="${myAccUrl}">${myAccountTitle}</a>
 									</ycommerce:testId>
 								</li>

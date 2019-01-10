@@ -86,8 +86,8 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;AboutRosebudLink;"ACERCA DE ROSEBUD";"Haga clic aquí para acceder a la opción de menú Acerca de Rosebud"
 ;;BlogAndNewsLink;"NOTICIAS";"Haga clic aquí para acceder a la opción de menú Blogs y noticias"
 ;;EventsLink;"EVENTOS";"Haga clic aquí para acceder a la opción de menú Eventos"
-#;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
-#;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
+;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
+;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
 
 
 #Report An Issue
@@ -288,6 +288,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 #;;MyAccountNavNode;"Mi cuenta"
 ;;MyAccountNavNode;"Mi RIT"
 #->INI dev-eduardo Mi RIT 07/01/2019---------------------------------------------------
+
 
 
 ## Service Request Details page
