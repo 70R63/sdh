@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
-//@RequestMapping("/DeclaraPublicidad")
+@RequestMapping("/contribuyentes/publicidadexterior/declaracion")
 public class DeclaraPublicidadController extends AbstractPageController
 {
 	private static final String ERROR_CMS_PAGE = "notFound";
@@ -29,9 +29,10 @@ public class DeclaraPublicidadController extends AbstractPageController
 
 	//CMS PAGES
 	private static final String DECLARACION_PUBLICIDAD_CMS_PAGE = "DeclaraPublicidadPage";
-	private static final String REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE = REDIRECT_PREFIX + "/DeclaraPublicidad";
+	private static final String REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE = REDIRECT_PREFIX
+			+ "/contribuyentes/publicidadexterior/declaracion";
 
-	@RequestMapping(value = "/DeclaraPublicidad", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/publicidadexterior/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String declaraPublicidadpage(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
@@ -47,7 +48,7 @@ public class DeclaraPublicidadController extends AbstractPageController
 
 
 
-	@RequestMapping(value = "/DeclaraPublicidad", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/publicidadexterior/declaracion", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String updateEmail(final DeclaPublicidadController dataForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
