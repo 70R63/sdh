@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="src" path="/acceleratorfacades"/>
+	<classpathentry exported="true" kind="src" path="/sdhcore"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="src" path="/platform"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
-
-				
-				
-				
-				
-	<classpathentry exported="true" kind="src" path="/acceleratorfacades" />
-	<classpathentry exported="true" kind="src" path="/sdhcore" />
-	<classpathentry exported="true" kind="lib" path="resources" />
-	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
-	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
-	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
-	<classpathentry exported="false" kind="src" path="/platform" />
-				
 </classpath>
-				
