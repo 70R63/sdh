@@ -1244,7 +1244,7 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 
 # add my account navigation component to a content slot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
-;;HeaderLinksSlot;ContactUsLink,UserWelcomeMessageComponent
+;;HeaderLinksSlot;UserWelcomeMessageComponent
 
 # PUBLIC SECTOR SERVICE REQUEST DETAILS PAGE COMPONENTS
 INSERT_UPDATE PSApplyOnlineComponent;$contentCV[unique=true];uid[unique=true];actions(&actionRef);&componentRef;;;

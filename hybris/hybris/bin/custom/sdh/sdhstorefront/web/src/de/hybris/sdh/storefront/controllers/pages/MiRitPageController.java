@@ -25,6 +25,9 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiRitForm;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
@@ -84,7 +87,20 @@ public class MiRitPageController extends AbstractPageController
 			miRitForm.setPrimApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
 			miRitForm.setSegNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
 			miRitForm.setSegApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
-			miRitForm.setFchExp(sdhConsultaContribuyenteBPResponse.getInfoContrib().getFchExp());
+
+			final String feachExp = sdhConsultaContribuyenteBPResponse.getInfoContrib().getFchExp();
+			if (StringUtils.isNotBlank(feachExp) && !"00000000".equals(feachExp))
+			{
+				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+				final LocalDate localDate = LocalDate.parse(feachExp, formatter);
+
+				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+				miRitForm.setFchExp(localDate.format(formatter2));
+			}
+
+
 			miRitForm.setNumDoc(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumDoc());
 
 			if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getTITLE()))
