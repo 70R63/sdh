@@ -111,6 +111,14 @@
             </itemtype>
         </typegroup>
 		        <typegroup name="SDH">
+		        <itemtype code="User" autocreate="false" generate="false">
+		        	<description>Added to extend user model for SDH model</description>
+        			<attributes>
+        				<attribute qualifier="blockedSince" type="java.util.Date">
+	        				<persistence type="property"></persistence>
+	        			</attribute>
+        			</attributes>
+		        </itemtype>
         	<itemtype code="Customer" autocreate="false" generate="false">
         		<description>Added to extend customer model for SDH model</description>
         		<attributes>

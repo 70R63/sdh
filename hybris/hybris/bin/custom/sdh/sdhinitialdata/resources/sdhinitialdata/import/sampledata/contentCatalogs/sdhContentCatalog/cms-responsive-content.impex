@@ -1414,8 +1414,12 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 ;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
 ;;ConsultasLink Logged in User;anonymousUserRestriction;ConsultasLinkloggedInUser;ConsultasLink
 
+
 INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];users(uid);components(uid,$contentCV)
 ;;EscuelaVirtualLink Anonymous;EscuelaVirtualLinkAnonymousRestriction;anonymous;EscuelaVirtualLink
 ;;PreguntasFrecuentesLink Anonymous;PreguntasFrecuentesLinkAnonymousRestriction;anonymous;PreguntasFrecuentesLink
 
-
+;;NoticiasLink Anonymous;NoticiasLinkAnonymousRestriction;anonymous;NoticiasLink
+;;CalendarioTributarioLink Anonymous;CalendarioTributarioLinkAnonymousRestriction;anonymous;CalendarioTributarioLink
+;;IndiceRecaudacionLink Anonymous;IndiceRecaudacionLinkAnonymousRestriction;anonymous;IndiceRecaudacionLink
+;;PredialLink Anonymous;PredialLinkAnonymousRestriction;anonymous;PredialLink
