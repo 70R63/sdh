@@ -25,6 +25,7 @@ import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
 import de.hybris.platform.sdhpsaddon.forms.SDHLoginForm;
 import de.hybris.sdh.core.exceptions.NotARobotException;
+import de.hybris.sdh.core.exceptions.NotAValidEmailException;
 
 import java.util.Collections;
 
@@ -34,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -143,6 +145,21 @@ public class LoginPageController extends AbstractLoginPageController
 			{
 				model.addAttribute("loginError", Boolean.valueOf(loginError));
 				GlobalMessages.addErrorMessage(model, "login.not.a.robot.exception");
+			}
+			else if (authenticationException != null && authenticationException instanceof NotAValidEmailException)
+			{
+				model.addAttribute("loginError", Boolean.valueOf(loginError));
+				GlobalMessages.addErrorMessage(model, "login.not.a.validEmail.exception");
+			}
+			else if (authenticationException != null && authenticationException instanceof NotAValidEmailException)
+			{
+				model.addAttribute("loginError", Boolean.valueOf(loginError));
+				GlobalMessages.addErrorMessage(model, "login.not.a.validEmail.exception");
+			}
+			else if (authenticationException != null && authenticationException instanceof DisabledException)
+			{
+				model.addAttribute("loginError", Boolean.valueOf(loginError));
+				GlobalMessages.addErrorMessage(model, "login.user.disabled.exception");
 			}
 			else
 			{

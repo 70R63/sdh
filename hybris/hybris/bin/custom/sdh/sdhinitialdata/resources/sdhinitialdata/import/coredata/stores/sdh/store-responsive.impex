@@ -2,12 +2,12 @@
 # Create the Responsive Public Sector Store
 #
 $productCatalog=sdhProductCatalog
-$currencies=GBP,EUR,USD,JPY,CNY,CAD
+$currencies=USD
 $net=false
 $storeUid=sdh
-$defaultCurrency=GBP
-$languages=en,de,fr,es
-$defaultLanguage=en
+$defaultCurrency=USD
+$languages=es
+$defaultLanguage=es
 $unitedKingdom=GB,GG,IM,JE
 $deliveryCountries=$unitedKingdom
 $orderProcessCode=order-process

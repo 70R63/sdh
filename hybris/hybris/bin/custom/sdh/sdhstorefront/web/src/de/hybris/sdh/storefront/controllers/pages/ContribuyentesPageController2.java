@@ -51,6 +51,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 	private static final String ICA_Y_RETEICA_CORRECIONES_CMS_PAGE = "IcaReteIcaCorrecionesPage";
 
+	private static final String PUBLICIDAD_EXTERIOR_CMS_PAGE = "PublicidadExteriorPage";
 
 	//Se anexa el mapeo de la pagina predialunificado
 	//GRD
@@ -218,7 +219,34 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		return getViewForPage(model);
 	}
 
+	//Se anexa el mapeo de la pagina publicidadexterior
+	//GRD
+	@RequestMapping(value = "/publicidadexterior", method = RequestMethod.GET)
+	public String publicidadExterna(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		//model.addAttribute("action", "prueba");
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/publicidadexterior/detail", method = RequestMethod.GET)
+	public String publicidadExternaDetail(final Model model, final RedirectAttributes redirectModel,
+			final HttpServletRequest request)
+			throws CMSItemNotFoundException
+	{
+
+		//model.addAttribute("showDetail", true);
+		model.addAttribute("action", request.getParameter("action"));
+		System.out.println("action: " + request.getParameter("action"));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+
+		return getViewForPage(model);
+	}
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
 	{

@@ -27,6 +27,9 @@ public class ContribAdicionales
 	private String ZZFECHAAUTOU0003;
 	private int ZZAUTOBUZONE;
 	private String ZZFECHAAUTOB;
+	private String CNDSC;
+	private String BIRTHPL;
+
 	/**
 	 *
 	 */
@@ -303,6 +306,42 @@ public class ContribAdicionales
 	public void setZZFECHAAUTOB(final String zZFECHAAUTOB)
 	{
 		ZZFECHAAUTOB = zZFECHAAUTOB;
+	}
+
+	/**
+	 * @return the cNDSC
+	 */
+	public String getCNDSC()
+	{
+		return CNDSC;
+	}
+
+	/**
+	 * @param cNDSC
+	 *           the cNDSC to set
+	 */
+	@JsonProperty("CNDSC")
+	public void setCNDSC(final String cNDSC)
+	{
+		CNDSC = cNDSC;
+	}
+
+	/**
+	 * @return the bIRTHPL
+	 */
+	public String getBIRTHPL()
+	{
+		return BIRTHPL;
+	}
+
+	/**
+	 * @param bIRTHPL
+	 *           the bIRTHPL to set
+	 */
+	@JsonProperty("BIRTHPL")
+	public void setBIRTHPL(final String bIRTHPL)
+	{
+		BIRTHPL = bIRTHPL;
 	}
 
 

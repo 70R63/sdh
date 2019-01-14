@@ -15,7 +15,7 @@
 			</ycommerce:testId>
 			<ycommerce:testId code="login_forgotPasswordSubmit_button">
 				<button class="btn btn-primary btn-block" type="submit">
-					<spring:theme code="forgottenPwd.title"/>
+					<spring:theme code="forgottenPwd.send"/>
 				</button>
 			</ycommerce:testId>
 		</div>

@@ -20,7 +20,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.contactData.notificationAddress" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.direccionNotificacion }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -29,7 +29,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.contactData.anotherContactAddress" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.direccionContacto }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -42,7 +42,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.contactData.landPhone" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoFijo }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -53,7 +53,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.contactData.extension" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.extensionTelefono }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -66,7 +66,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.contactData.cellPhone" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoCelular }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>

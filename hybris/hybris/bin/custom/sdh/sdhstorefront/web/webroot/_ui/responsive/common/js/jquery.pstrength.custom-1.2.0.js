@@ -25,7 +25,7 @@
 				colors: 	["#ccc","#f00","#c06","#f60","#3c0","#3f0"],
 				values: 	[20,30,40,60,80,100],
 				scores: 	[10,15,30,40],
-				minchar:	6,
+				minchar:	8,
 				minCharText: "Minimum length is %d characters"
 			},options);
 			return this.each(function(){

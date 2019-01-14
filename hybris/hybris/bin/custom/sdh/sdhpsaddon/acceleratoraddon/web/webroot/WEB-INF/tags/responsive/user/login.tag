@@ -16,15 +16,6 @@
 	</h2>
 </div>
 
-<c:if test="${actionNameKey ne hideDescription}">
-	<spring:theme code="login.description" htmlEscape="false" var="loginDescription"/>
-	${ycommerce:sanitizeHTML(loginDescription)}
-</c:if>
-
-<p class="continuous-text">
-	<spring:theme code="form.required" htmlEscape="false" />
-</p>
-
 <form:form action="${action}" method="post" commandName="loginForm">
 	<fieldset>
 		<legend class="visuallyhidden">
@@ -51,8 +42,8 @@
 		
 		<div class="forgotten-password">
 			<ycommerce:testId code="login_forgotPassword_link">
-				<a href="<c:url value='/register'/>" class="" data-cbox-title="<spring:theme code="forgottenPwd.title"/>"> <spring:theme code="login.link.getPassword" />
-				</a>
+				<c:url value='/register' var="registerURL" />
+				<spring:theme code="login.link.getPassword" htmlEscape="false" arguments="${registerURL }" />
 			</ycommerce:testId>
 		</div>
 		<ycommerce:testId code="loginAndCheckoutButton">

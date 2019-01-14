@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author hybris
  *
@@ -21,8 +24,8 @@ public class InfoContribResponse
 	private String municipio;
 
 	private ContribAdicionales adicionales;
-	private ContribDireccion direccion;
-	private ContribTelefono telefono;
+	private List<ContribDireccion> direccion;
+	private List<ContribTelefono> telefono;
 
 	/**
 	 * @return the adicionales
@@ -202,10 +205,12 @@ public class InfoContribResponse
 		this.municipio = municipio;
 	}
 
+
+
 	/**
 	 * @return the direccion
 	 */
-	public ContribDireccion getDireccion()
+	public List<ContribDireccion> getDireccion()
 	{
 		return direccion;
 	}
@@ -214,7 +219,7 @@ public class InfoContribResponse
 	 * @param direccion
 	 *           the direccion to set
 	 */
-	public void setDireccion(final ContribDireccion direccion)
+	public void setDireccion(final List<ContribDireccion> direccion)
 	{
 		this.direccion = direccion;
 	}
@@ -222,7 +227,7 @@ public class InfoContribResponse
 	/**
 	 * @return the telefono
 	 */
-	public ContribTelefono getTelefono()
+	public List<ContribTelefono> getTelefono()
 	{
 		return telefono;
 	}
@@ -231,7 +236,7 @@ public class InfoContribResponse
 	 * @param telefono
 	 *           the telefono to set
 	 */
-	public void setTelefono(final ContribTelefono telefono)
+	public void setTelefono(final List<ContribTelefono> telefono)
 	{
 		this.telefono = telefono;
 	}

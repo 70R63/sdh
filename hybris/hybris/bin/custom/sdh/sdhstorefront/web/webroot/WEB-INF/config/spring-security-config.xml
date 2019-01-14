@@ -24,6 +24,16 @@
 		http://www.springframework.org/schema/util/spring-util.xsd">
 		
 	<context:annotation-config/>
+	
+    
+     <alias name="defaultSDHAcceleratorAuthenticationProvider" alias="abstractAcceleratorAuthenticationProvider"/>
+    <bean id="defaultSDHAbstractAcceleratorAuthenticationProvider" abstract="true" 
+    		class="de.hybris.sdh.storefront.security.SDHAbstractAcceleratorAuthenticationProvider">
+		<property name="bruteForceAttackCounter" ref="bruteForceAttackCounter" />
+		<property name="userService" ref="userService" />
+		<property name="modelService" ref="modelService" />
+		<property name="userDetailsService" ref="originalUidUserDetailsService" />
+	</bean>
 
 	<security:http pattern="/_ui/**" security="none" />
 
@@ -35,7 +45,7 @@
 		<security:intercept-url pattern="/**" requires-channel="https" />
 		<security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" />
 		<security:custom-filter before="CSRF_FILTER" ref="logoutFilter" />
-		<security:custom-filter before="FORM_LOGIN_FILTER" ref="notARobotFilter"/>
+		<security:custom-filter before="FORM_LOGIN_FILTER" ref="sdhLoginDataFilter"/>
 		<security:form-login
 				login-page="/login/checkout"
 				authentication-failure-handler-ref="loginCheckoutAuthenticationFailureHandler"
@@ -81,7 +91,7 @@
 		<security:session-management session-authentication-strategy-ref="fixation" />
 		<security:csrf token-repository-ref="csrfTokenRepository" request-matcher-ref="csrfProtectionMatcher" />
 		<security:custom-filter before="CSRF_FILTER" ref="logoutFilter" />
-		<security:custom-filter before="FORM_LOGIN_FILTER" ref="notARobotFilter"/>
+		<security:custom-filter before="FORM_LOGIN_FILTER" ref="sdhLoginDataFilter"/>
 		<!-- RememberMe -->
 		<security:remember-me key="sdhstorefront" services-ref="rememberMeServices" />
 
@@ -272,7 +282,7 @@
 		<property name="defaultFailureUrl" value="/login/checkout?error=true"/>
 	</bean>
 	
-	<bean id="notARobotFilter" class="de.hybris.sdh.storefront.filters.NotARobotLoginFilter" >
+	<bean id="sdhLoginDataFilter" class="de.hybris.sdh.storefront.filters.SDHLoginDataFilter" >
 		<property name="authenticationManager" ref="authenticationManager" />
 	</bean>
 
