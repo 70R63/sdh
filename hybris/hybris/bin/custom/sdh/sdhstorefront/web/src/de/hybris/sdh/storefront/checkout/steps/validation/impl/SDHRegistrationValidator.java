@@ -114,11 +114,11 @@ public class SDHRegistrationValidator implements Validator
 		}
 		if (!pwd.matches("(.*)[a-z](.*)"))
 		{
-			errors.rejectValue("pwd", "register.pwd.invalid.uppercase");
+			errors.rejectValue("pwd", "register.pwd.invalid.lowercase");
 		}
 		if (!pwd.matches("(.*)[A-Z](.*)"))
 		{
-			errors.rejectValue("pwd", "register.pwd.invalid.lowercase");
+			errors.rejectValue("pwd", "register.pwd.invalid.uppercase");
 		}
 	}
 
