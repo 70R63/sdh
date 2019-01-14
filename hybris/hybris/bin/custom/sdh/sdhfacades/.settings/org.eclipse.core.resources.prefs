@@ -1,5 +1,11 @@
-#Wed Jun 29 16:19:46 CEST 2011
 eclipse.preferences.version=1
+encoding//resources/mc_style/functions/soap/sap/document/sap_com/ZWS_HYSEND_MAIL_BindingStub.java=UTF-8
+encoding//resources/mc_style/functions/soap/sap/document/sap_com/ZWS_HYSEND_MAIL_PortType.java=UTF-8
+encoding//resources/mc_style/functions/soap/sap/document/sap_com/ZWS_HYSEND_MAIL_Service.java=UTF-8
+encoding//resources/mc_style/functions/soap/sap/document/sap_com/ZWS_HYSEND_MAIL_ServiceLocator.java=UTF-8
 encoding//resources/sdhfacades/test/testSimpleSuggestionFacade.csv=UTF-8
+encoding//src/de/hybris/sdh/facades/ZWS_HYSEND_MAIL_PortType.java=UTF-8
+encoding//src/de/hybris/sdh/facades/ZWS_HYSEND_MAIL_Service.java=UTF-8
+encoding//src/de/hybris/sdh/facades/impl/ZWS_HYSEND_MAIL_BindingStub.java=UTF-8
+encoding//src/de/hybris/sdh/facades/impl/ZWS_HYSEND_MAIL_ServiceLocator.java=UTF-8
 encoding/<project>=UTF-8
-
