@@ -233,16 +233,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	}
 
-	private String getEncodedURL(final String token){
-		String encodedURL = "";
-		try {
-			encodedURL = URLEncoder.encode(token , "UTF-8");
-		}catch(final UnsupportedEncodingException e) {
-			throw new AssertionError("UTF-8 not supported");
-		}
-		return encodedURL;
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 *
@@ -259,6 +250,28 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		customerModel.setToken(token);
 		getModelService().save(customerModel);
 		getEventService().publishEvent(initializeEvent(new ForgottenPwdEvent(token), customerModel));
+		
+		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- SDH Token reset [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+		LOG.info("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- SDH Token reset [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+
+		final StringHolder a = new StringHolder();
+		final StringHolder b = new StringHolder();
+		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/change?token=";
+		final String encodedToken = this.getEncodedURL(token);
+				
+		
+		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Recuperar</A>", "SDH Recuperar Cuenta - Hybris ", a, b);
+
+	}
+	
+	private String getEncodedURL(final String token){
+		String encodedURL = "";
+		try {
+			encodedURL = URLEncoder.encode(token , "UTF-8");
+		}catch(final UnsupportedEncodingException e) {
+			throw new AssertionError("UTF-8 not supported");
+		}
+		return encodedURL;
 	}
 
 }
