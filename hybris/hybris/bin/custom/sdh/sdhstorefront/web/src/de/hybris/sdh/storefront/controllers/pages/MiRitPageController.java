@@ -188,13 +188,13 @@ public class MiRitPageController extends AbstractPageController
 					if ("01".equalsIgnoreCase(eachDireccion.getADR_KIND()))
 					{
 
-						miRitForm.setDireccionNotificacion(eachDireccion.getSTREET());
+						miRitForm.setDireccionContacto(eachDireccion.getSTREET());
 
 					}
 					if ("02".equalsIgnoreCase(eachDireccion.getADR_KIND()))
 					{
 
-						miRitForm.setDireccionContacto(eachDireccion.getSTREET());
+						miRitForm.setDireccionNotificacion(eachDireccion.getSTREET());
 
 					}
 
