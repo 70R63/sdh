@@ -28,6 +28,10 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHUpdateCustomerCommPrefsService;
 
+
+
+import de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_INT;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -38,7 +42,10 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import javax.xml.rpc.holders.StringHolder;
 import org.springframework.util.Assert;
+import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
 
 
 /**
@@ -57,6 +64,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "flexibleSearchService")
 	private FlexibleSearchService flexibleSearchService;
+
+	@Resource(name = "DefaultZWS_HYBSEND_MAIL_CORE")
+	private ZWS_HYSEND_MAIL_INT crm_mail;
 	/*
 	 * (non-Javadoc)
 	 *
@@ -135,7 +145,16 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		event.setCurrency(getCommonI18NService().getCurrentCurrency());
 		event.setToken(token);
 
+		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- Token [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+		LOG.info("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- Token [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
 
+		final StringHolder a = new StringHolder();
+		final StringHolder b = new StringHolder();
+		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/en/login/pw/activateAccount?token=";
+		final String encodedToken = this.getEncodedURL(token);
+				
+		
+		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Activar Cuenta</A>", "SDH Activar Cuenta - Hybris ", a, b);
 
 		getEventService().publishEvent(event);
 	}
@@ -213,6 +232,16 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			return false;
 		}
 
+	}
+	
+	private String getEncodedURL(String token){
+		String encodedURL = "";
+		try {
+			encodedURL = URLEncoder.encode(token , "UTF-8");
+		}catch(UnsupportedEncodingException e) {
+			throw new AssertionError("UTF-8 not supported");
+		}
+		return encodedURL;
 	}
 
 }
