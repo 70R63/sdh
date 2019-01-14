@@ -22,7 +22,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.economicActivity"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -33,7 +33,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.description"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled"  name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -44,7 +44,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.startDate"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled"  name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -61,7 +61,7 @@
 						<spring:theme code="mirit.taxesData.economicActivity"/>
 					</label> 
 					<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled"  name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -72,7 +72,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.description"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled"  name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -83,7 +83,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.startDate"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled"  name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -104,7 +104,7 @@
 						<spring:theme code="mirit.taxesData.code"/>
 					</label> 
 					<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled"  name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -115,7 +115,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.select"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled"  name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -151,7 +151,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.chip"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled"  name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -162,7 +162,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.propertyLicence"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname"  disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -173,7 +173,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.propertyAddress"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -184,7 +184,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.propertyRelation"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -195,7 +195,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.propertyReponsabilityPercentage"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -208,7 +208,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.chip"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -219,7 +219,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.propertyLicence"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -230,7 +230,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.propertyAddress"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -241,7 +241,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.propertyRelation"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -252,7 +252,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.propertyReponsabilityPercentage"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -269,7 +269,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.vehicleLicense"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -280,7 +280,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.vehicleModel"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -291,7 +291,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.vehicleDescription"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -302,7 +302,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.vehicleRelation"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -313,7 +313,7 @@
 						<label class="control-label required" for="address.surname">
 							<spring:theme code="mirit.taxesData.vehicleResponsabilityPercetage"/>
 						</label> 
-						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+						<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -329,7 +329,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.vehicleLicense"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -340,7 +340,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.vehicleModel"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -351,7 +351,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.vehicleDescription"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -362,7 +362,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.taxesData.vehicleRelation"/>
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -373,7 +373,7 @@
 						<label class="control-label required" for="address.surname">
 							<spring:theme code="mirit.taxesData.vehicleResponsabilityPercetage"/>
 						</label> 
-						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+						<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
