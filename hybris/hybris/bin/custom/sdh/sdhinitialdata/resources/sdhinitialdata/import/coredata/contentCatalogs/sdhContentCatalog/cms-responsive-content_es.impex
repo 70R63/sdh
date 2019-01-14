@@ -53,3 +53,4 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];ke
  ;;DelineacionUrbanaPagosPSEPage;"Delineación Urbana - Pagos"
  ;;SobretasaGasolinaPage;"Sobretasa a la Gasolina Motor"
  ;;ActivateAccountPage;"Activar Cuenta"
+ ;;PublicidadExteriorPage;"Publicidad Exterior"

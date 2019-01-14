@@ -107,10 +107,10 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 ; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; http://www.stateofrosebud.com/about ;;;;;
-; ; ICALink                      ; ICA                                 ; http://www.stateofrosebud.com/about ;;;;;
-; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; http://www.stateofrosebud.com/about ;;;;;
-; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; http://www.stateofrosebud.com/about ;;;;;
-; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; http://www.stateofrosebud.com/about ;;;;;
+; ; ICALink                      ; ICA                                 ; "/contribuyentes2/icareteica" ;;;;;
+; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; "/contribuyentes2/predialunificado" ;;;;;
+; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes2/publicidadexterior" ;;;;;
+; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes2/sobrevehiculosautomotores" ;;;;;
 ; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; http://www.stateofrosebud.com/about ;;;;;
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
