@@ -42,7 +42,7 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
-import javax.xml.rpc.holders.StringHolder;
+import javax.xml.rpc.holders.StringHolder; 
 import org.springframework.util.Assert;
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
