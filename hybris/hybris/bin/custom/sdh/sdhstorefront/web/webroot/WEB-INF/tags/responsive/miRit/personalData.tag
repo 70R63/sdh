@@ -82,7 +82,7 @@
 					<label class="control-label required" for="numDoc">
 						<spring:theme code="mirit.personalData.documentNumber" />
 					</label> 
-					<input id="address.surname" name="numDoc" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.numDoc }" maxlength="240">
+					<input id="address.surname" name="numDoc" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.numDoc }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>

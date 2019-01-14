@@ -102,10 +102,23 @@ public class SDHRegistrationValidator implements Validator
 		if (StringUtils.isEmpty(pwd))
 		{
 			errors.rejectValue("pwd", "register.pwd.invalid");
+			return;
 		}
-		else if (StringUtils.length(pwd) < 6 || StringUtils.length(pwd) > 255)
+		if (StringUtils.length(pwd) < 8 || StringUtils.length(pwd) > 16)
 		{
-			errors.rejectValue("pwd", "register.pwd.invalid");
+			errors.rejectValue("pwd", "register.pwd.invalid.size");
+		}
+		if (!pwd.matches(".*\\d+.*"))
+		{
+			errors.rejectValue("pwd", "register.pwd.invalid.number");
+		}
+		if (!pwd.matches("(.*)[a-z](.*)"))
+		{
+			errors.rejectValue("pwd", "register.pwd.invalid.lowercase");
+		}
+		if (!pwd.matches("(.*)[A-Z](.*)"))
+		{
+			errors.rejectValue("pwd", "register.pwd.invalid.uppercase");
 		}
 	}
 

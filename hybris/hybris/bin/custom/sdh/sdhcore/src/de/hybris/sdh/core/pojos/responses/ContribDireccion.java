@@ -12,7 +12,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class ContribDireccion
 {
-
+	private String ADR_KIND;
+	private String HOUSE_NUM1;
 	private String STREET;
 	private int POST_CODE;
 	private String CITY1;
@@ -114,6 +115,42 @@ public class ContribDireccion
 	public void setREGION(final int rEGION)
 	{
 		REGION = rEGION;
+	}
+
+	/**
+	 * @return the aDR_KIND
+	 */
+	public String getADR_KIND()
+	{
+		return ADR_KIND;
+	}
+
+	/**
+	 * @param aDR_KIND
+	 *           the aDR_KIND to set
+	 */
+	@JsonProperty("ADR_KIND")
+	public void setADR_KIND(final String aDR_KIND)
+	{
+		ADR_KIND = aDR_KIND;
+	}
+
+	/**
+	 * @return the hOUSE_NUM1
+	 */
+	public String getHOUSE_NUM1()
+	{
+		return HOUSE_NUM1;
+	}
+
+	/**
+	 * @param hOUSE_NUM1
+	 *           the hOUSE_NUM1 to set
+	 */
+	@JsonProperty("HOUSE_NUM1")
+	public void setHOUSE_NUM1(final String hOUSE_NUM1)
+	{
+		HOUSE_NUM1 = hOUSE_NUM1;
 	}
 
 

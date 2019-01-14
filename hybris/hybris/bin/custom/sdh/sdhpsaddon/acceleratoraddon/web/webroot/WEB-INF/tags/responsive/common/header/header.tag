@@ -101,20 +101,20 @@
 							</button>
 						</div>
 
-						<c:if test="${empty hideHeaderLinks}">
-							<ycommerce:testId code="header_StoreFinder_link">
-								<div class="col-sm-1 hidden-xs visible-sm">
-									<spring:theme code="serviceFinder.acc.label"
-										var="serviceFinderLabel" />
-									<a href="<c:url value="/store-finder"/>"
-										aria-label="${serviceFinderLabel}"
-										class="js-toggle-sm-navigation" title="${serviceFinderTitle}"> <span
-										class="visuallyhidden">${ycommerce:encodeHTML(serviceFinderLabel)}</span><span
-										class="glyphicon glyphicon-map-marker gi-2x"></span>
-									</a>
-								</div>
-							</ycommerce:testId>
-						</c:if>
+<%-- 						<c:if test="${empty hideHeaderLinks}"> --%>
+<%-- 							<ycommerce:testId code="header_StoreFinder_link"> --%>
+<!-- 								<div class="col-sm-1 hidden-xs visible-sm"> -->
+<%-- 									<spring:theme code="serviceFinder.acc.label" --%>
+<%-- 										var="serviceFinderLabel" /> --%>
+<%-- 									<a href="<c:url value="/store-finder"/>" --%>
+<%-- 										aria-label="${serviceFinderLabel}" --%>
+<%-- 										class="js-toggle-sm-navigation" title="${serviceFinderTitle}"> <span --%>
+<%-- 										class="visuallyhidden">${ycommerce:encodeHTML(serviceFinderLabel)}</span><span --%>
+<!-- 										class="glyphicon glyphicon-map-marker gi-2x"></span> -->
+<!-- 									</a> -->
+<!-- 								</div> -->
+<%-- 							</ycommerce:testId> --%>
+<%-- 						</c:if> --%>
 
 						<div class="col-sm-10 col-md-6">
 							<div class="site-search js-toggle-xs-search">
@@ -139,16 +139,23 @@
 											code="text.backToMobileStore" />
 								</a></li>
 							</c:if>
-
-							<li><ycommerce:testId code="header_StoreFinder_link">
-									<div class="nav-location__modified hidden-xs">
-										<a title="${serviceFinderTitle}" href="<c:url value="/store-finder"/>"
-											class="service-point-btn"> <span
-											class="glyphicon glyphicon-map-marker gi-2x"></span>&nbsp;<spring:theme
-												code="serviceFinder.label" /></span>
-										</a>
-									</div>
-								</ycommerce:testId></li>
+							<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
+								<li>
+									<span class="logged_in js-logged_in">
+									<ycommerce:testId
+											code="header_tipo_doc">
+											<spring:theme code="header.tipo.doc" htmlEscape="true" />&nbsp;${ docTipe}
+										</ycommerce:testId></span>
+								</li>
+								<li>
+									<span class="logged_in js-logged_in">
+									<ycommerce:testId
+											code="header_num_doc">
+											<spring:theme code="header.num.doc" htmlEscape="true" />&nbsp;${ docNumber}
+										</ycommerce:testId></span>
+								</li>
+							</sec:authorize>
+							
 
 							<cms:pageSlot position="HeaderLinks" var="link">
 								<li><cms:component component="${link}" element="" /></li>
@@ -167,11 +174,13 @@
 
 							<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
 								<li class="liOffcanvas">
-									<ycommerce:testId code="header_myAcc_link">
-										<spring:theme code="myAccount.acc.title" var="myAccountTitle" />
-										<%--<spring:url value="/my-account" htmlEscape="false" var="myAccUrl"/>--%>
-										<spring:url value="/contribuyentes/mirit" htmlEscape="false" var="myAccUrl"/>
-										<a title="${myAccountTitle}" href="${myAccUrl}">${myAccountTitle}</a>
+									<ycommerce:testId code="header_tipo_doc_link">
+										<spring:theme code="header.tipo.doc" var="Tipo de Documento: " />
+									</ycommerce:testId>
+								</li>
+								<li class="liOffcanvas">
+									<ycommerce:testId code="header_num_doc_link">
+										<spring:theme code="header.num.doc" var="Número de Documento: " />
 									</ycommerce:testId>
 								</li>
 								<li class="liOffcanvas">

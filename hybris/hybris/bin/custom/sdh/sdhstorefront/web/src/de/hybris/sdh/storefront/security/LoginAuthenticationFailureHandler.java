@@ -31,8 +31,6 @@ public class LoginAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
 	public void onAuthenticationFailure(final HttpServletRequest request, final HttpServletResponse response,
 			final AuthenticationException exception) throws IOException, ServletException
 	{
-		// Register brute attacks
-		bruteForceAttackCounter.registerLoginFailure(request.getParameter("j_username"));
 
 		// Store the j_username in the session
 		request.getSession().setAttribute("SPRING_SECURITY_LAST_USERNAME", request.getParameter("j_username"));
