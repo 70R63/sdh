@@ -150,11 +150,11 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final StringHolder a = new StringHolder();
 		final StringHolder b = new StringHolder();
-		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/en/login/pw/activateAccount?token=";
+		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/activateAccount?token=";
 		final String encodedToken = this.getEncodedURL(token);
 				
 		
-		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Activar Cuenta</A>", "SDH Activar Cuenta - Hybris ", a, b);
+		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Activar</A>", "SDH Activar Cuenta - Hybris ", a, b);
 
 		getEventService().publishEvent(event);
 	}
