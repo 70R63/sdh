@@ -469,7 +469,7 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group ">
-						<select id="u5066_input" class="form-control" onchange="menuAutoSearch();">
+						<select id="u5066_input" class="form-control" onchange="menuAutoSearch();"> 
 							<option selected="" value="">Seleccionar</option>
 			                <option value="AP">Apartamento</option>
 							<option value="AG">Agrupación</option>
