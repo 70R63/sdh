@@ -32,7 +32,7 @@
 					<label class="control-label required" for="sexo">
 						<spring:theme code="mirit.generalData.gender" />
 					</label> 
-					<input id="sexo" name="sexo" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="<spring:theme code="rit.sexo.s${miRitForm.tratamiento}" />" maxlength="240">
+					<input id="sexo" name="sexo" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="<spring:theme code="rit.sexo.s${miRitForm.sexo}" />" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -41,7 +41,7 @@
 					<label class="control-label required" for="birthDate">
 						<spring:theme code="mirit.generalData.birthDate" />
 					</label> 
-					<input id="birthDate" name="birthDate" class="form-control" disabled="disabled" aria-required="true" type="text" value="${miRitForm.sexo}" maxlength="240">
+					<input id="birthDate" name="birthDate" class="form-control" disabled="disabled" aria-required="true" type="text" value="${miRitForm.fechaNacimiento}" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
