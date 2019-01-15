@@ -9,20 +9,22 @@
 
 <div class="container">
 	<div class="row ">
-		
-		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
-			<a href="<c:url value='/contribuyentes' />">
-				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
-					<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/contribuyentes.png">
-				</div>
-				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
-					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="taxpayers.title" /></span></h2></div>
-					<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
-						<div id="helpSection"><div><spring:theme code="taxpayers.description" /></div></div>
+		<c:if test="${hasCORol }">
+			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
+				<a href="<c:url value='/contribuyentes' />">
+					<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+						<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/contribuyentes.png">
 					</div>
-				</div>
-			</a>
-		</div>
+					<div class="card-section  col-xs-8 col-sm-10 col-md-10">
+						<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="taxpayers.title" /></span></h2></div>
+						<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
+							<div id="helpSection"><div><spring:theme code="taxpayers.description" /></div></div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</c:if>
+		<c:if test="${hasAARol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="#">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
@@ -36,6 +38,8 @@
 				</div>
 			</a>
 		</div>
+		</c:if>
+		<c:if test="${hasTARol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="#">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
@@ -49,6 +53,8 @@
 				</div>
 			</a>
 		</div>
+		</c:if>
+		<c:if test="${hasARRol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="#">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
@@ -62,6 +68,8 @@
 				</div>
 			</a>
 		</div>
+		</c:if>
+		<c:if test="${hasRIRol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="#">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
@@ -75,6 +83,7 @@
 				</div>
 			</a>
 		</div>
+		</c:if>
 	</div>
 </div>
 

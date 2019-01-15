@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #
 # Import the SPANISH CMS content for the Public Sector Site
 #
@@ -53,3 +54,61 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];ke
  ;;DelineacionUrbanaPagosPSEPage;"Delineación Urbana - Pagos"
  ;;SobretasaGasolinaPage;"Sobretasa a la Gasolina Motor"
  ;;ActivateAccountPage;"Activar Cuenta"
+=======
+#
+# Import the SPANISH CMS content for the Public Sector Site
+#
+
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=es
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];keywords[lang=$lang];description[lang=$lang]
+ ;;account;"Mi cuenta";"Cuenta";"Mi cuenta"
+ ;;add-edit-address;"Añadir/Tratar dirección";"Añadir/Tratar dirección";"Añadir/Tratar dirección"
+ ;;address-book;"Libreta de direcciones";"Libreta de direcciones";"Libreta de direcciones"
+ ;;checkout-login;"Efectuar check out";"Inicio sesión check out";"Efectuar check out"
+ ;;register-checkout-login;"Efectuar check out";"Inicio sesión check out / Registro";"Efectuar check out"
+ ;;faq;"Preguntas frecuentes";"FAQ";"Preguntas frecuentes"
+ ;;homepage;"Página de inicio";"Página de inicio";"Página de inicio"
+ ;;login;"Inicio de sesión";"Inicio de sesión";"Inicio de sesión"
+ ;;multiStepCheckoutSummaryPage;"Check out";"Página de resumen check out de varios pasos";"Check out"
+ ;;notFound;"No existe";"No existe";"No existe"
+ ;;order;"Detalles de aplicación";"Pedido";"Detalles de aplicación"
+ ;;orderConfirmationPage;"Confirmación de aplicación ";"Página de confirmación de pedido";"Confirmación de aplicación"
+ ;;orders;"Historial de aplicación";"Pedidos";"Historial de aplicación"
+ ;;payment-details;"Detalles de pago";"Detalles de pago";"Detalles de pago"
+ ;;searchEmpty;"Sin resultados";"Búsqueda vacía";"Sin resultados"
+ ;;storefinderPage;"Buscador de tiendas";"Página del buscador de tiendas";"Buscador de tiendas"
+ ;;termsAndConditions;"Términos y condiciones";"Términos y condiciones";"Términos y condiciones"
+ ;;updatePassword;"Actualizar contraseña olvidada";"Actualizar contraseña";"Actualizar contraseña olvidada"
+ ;;my-documents;"Documentos";"Mis documentos";"Documentos"
+ ;;drafts;"Servicios de borrador";"Borradores";"Servicios de borrador"
+ ;;allOrders;"Historial de aplicación";"Todos los pedidos";"Historial de aplicación"
+ ;;draftConfirmationPage;"Confirmación de borrador";"Página de confirmación de borrador";"Confirmación de borrador"
+ ;;retrieve-draft;"Recuperar borrador";"Recuperar borrador";"Recuperar borrador"
+ ;;update-email;"Actualizar dirección de correo electrónico";"Actualizar correo electrónico";"Actualizar dirección de correo electrónico"
+ ;;update-profile;"Actualizar detalles personales";"Actualizar perfil";"Actualizar detalles personales"
+ ;;dashboardPage;"Mi cuenta";"Página de dashboard";"Mi cuenta"
+ ;;my-assets;"Activos fijos";"Mis activos fijos";"Mis activos fijos"
+ ;;asset-detail;"Detalles de activos fijos";"Detalle de activo fijo";"Detalles de activos fijos"
+ ;;register;"Registro"
+ ;;ContribuyentesPage;"Contribuyentes"
+ ;;MiRitPage;"Contribuyentes"
+ ;;DelineacionUrbanaPage;"Delineación Urbana" 
+ ;;DelineacionUrbanaCorrecionesPage;"Delineación Urbana Correcciones"
+ ;;DelineacionUrbanaDeclaracionesPage;"Delineacion Urbana Declaraciones Page"
+ ;;PredialUnificadoPage;"Predial Unificado" 
+ ;;PredialUnificadoCorrecionesPage;"Predial Unificado Correcciones"
+ ;;PredialUnificadoDeclaracionesPage;"Predial Unificado Declaraciones Page"
+ ;;PredialUnificadoPagosPSEPage;"Predial Unificado - Pagos"
+ ;;SobreVehiculosAutomotoresPage;"Sobre Vehiculos Automotores"
+ ;;IcaReteIcaPage;"Ica ReteIca"
+ ;;DelineacionUrbanaPagosPSEPage;"Delineación Urbana - Pagos"
+ ;;SobretasaGasolinaPage;"Sobretasa a la Gasolina Motor"
+ ;;ActivateAccountPage;"Activar Cuenta"
+>>>>>>> 815eeda245090802b22fa24dca63cdcb94f896aa
+ ;;PublicidadExteriorPage;"Publicidad Exterior"

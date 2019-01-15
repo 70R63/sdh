@@ -87,7 +87,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #*->-------------------------------------------------------------------------------------------------------------------------
 
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
-; ;MiRITLink; MI RIT LINK    ; "/" ;;;;;
+; ;MiRITLink; MI RIT LINK    ; "/contribuyentes/mirit" ;;;;;
 ; ;MiBuzonLink; MI BUZON LINK    ; "/" ;;;;;
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "/" ;;;;;
 ; ;TramitesLink; TRAMITES LINK    ; "/" ;;;;;
@@ -107,10 +107,10 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 ; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; http://www.stateofrosebud.com/about ;;;;;
-; ; ICALink                      ; ICA                                 ; http://www.stateofrosebud.com/about ;;;;;
-; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; http://www.stateofrosebud.com/about ;;;;;
-; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; http://www.stateofrosebud.com/about ;;;;;
-; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; http://www.stateofrosebud.com/about ;;;;;
+; ; ICALink                      ; ICA                                 ; "/contribuyentes2/icareteica" ;;;;;
+; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; "/contribuyentes2/predialunificado" ;;;;;
+; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes2/publicidadexterior" ;;;;;
+; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes2/sobrevehiculosautomotores" ;;;;;
 ; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; http://www.stateofrosebud.com/about ;;;;;
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
@@ -1244,7 +1244,7 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 
 # add my account navigation component to a content slot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
-;;HeaderLinksSlot;ContactUsLink,UserWelcomeMessageComponent
+;;HeaderLinksSlot;UserWelcomeMessageComponent
 
 # PUBLIC SECTOR SERVICE REQUEST DETAILS PAGE COMPONENTS
 INSERT_UPDATE PSApplyOnlineComponent;$contentCV[unique=true];uid[unique=true];actions(&actionRef);&componentRef;;;
@@ -1414,8 +1414,12 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 ;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
 ;;ConsultasLink Logged in User;anonymousUserRestriction;ConsultasLinkloggedInUser;ConsultasLink
 
+
 INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];users(uid);components(uid,$contentCV)
 ;;EscuelaVirtualLink Anonymous;EscuelaVirtualLinkAnonymousRestriction;anonymous;EscuelaVirtualLink
 ;;PreguntasFrecuentesLink Anonymous;PreguntasFrecuentesLinkAnonymousRestriction;anonymous;PreguntasFrecuentesLink
 
-
+;;NoticiasLink Anonymous;NoticiasLinkAnonymousRestriction;anonymous;NoticiasLink
+;;CalendarioTributarioLink Anonymous;CalendarioTributarioLinkAnonymousRestriction;anonymous;CalendarioTributarioLink
+;;IndiceRecaudacionLink Anonymous;IndiceRecaudacionLinkAnonymousRestriction;anonymous;IndiceRecaudacionLink
+;;PredialLink Anonymous;PredialLinkAnonymousRestriction;anonymous;PredialLink

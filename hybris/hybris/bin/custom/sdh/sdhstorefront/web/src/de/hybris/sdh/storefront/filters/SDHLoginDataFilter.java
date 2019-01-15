@@ -10,10 +10,20 @@
  */
 package de.hybris.sdh.storefront.filters;
 
+import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.exceptions.NotARobotException;
+import de.hybris.sdh.core.exceptions.NotAValidEmailException;
+import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHRegistrationValidator;
 import de.hybris.sdh.storefront.security.LoginAuthenticationFailureHandler;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
@@ -23,6 +33,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,19 +43,31 @@ import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
-public class NotARobotLoginFilter extends AbstractAuthenticationProcessingFilter
-{
 
+public class SDHLoginDataFilter extends AbstractAuthenticationProcessingFilter
+{
+	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "j_username";
+	private final String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
+	private static final Logger LOG = Logger.getLogger(SDHLoginDataFilter.class);
 	@Resource(name = "loginAuthenticationFailureHandler")
 	LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
 
 	@Resource(name = "rememberMeServices")
 	RememberMeServices rememberMeServices;
 
+	@Resource(name = "sdhRegistrationValidator")
+	SDHRegistrationValidator sdhRegistrationValidator;
+
+	@Resource(name="userService")
+	UserService userService;
+
+	@Resource(name = "modelService")
+	ModelService modelService;
+
 	/**
 	 * @param defaultFilterProcessesUrl
 	 */
-	public NotARobotLoginFilter()
+	public SDHLoginDataFilter()
 	{
 		super(new AntPathRequestMatcher("/j_spring_security_check", "POST"));
 	}
@@ -67,7 +91,55 @@ public class NotARobotLoginFilter extends AbstractAuthenticationProcessingFilter
 		{
 			throw new NotARobotException("A Robot");
 		}
+
+
+		final String username = obtainUsername(request);
+		if (!Boolean.TRUE.equals(sdhRegistrationValidator.validateEmailAddress(username)))
+		{
+			throw new NotAValidEmailException("Not A Valid Email");
+		}
+
+		if(StringUtils.isNotBlank(username))
+		{
+			try
+			{
+				final UserModel userModel = userService.getUserForUID(username);
+
+				if (userModel.isLoginDisabled() && userModel.getBlockedSince() != null)
+				{
+					final Date nowDate = new Date();
+					final LocalDateTime noewLocalDateTime = LocalDateTime.ofInstant(nowDate.toInstant(), ZoneId.systemDefault());
+
+					final Date userBlockedSince = userModel.getBlockedSince();
+					final LocalDateTime userBlockedSinceDateTime = LocalDateTime.ofInstant(userBlockedSince.toInstant(),
+							ZoneId.systemDefault());
+
+					final Duration duration = Duration.between(userBlockedSinceDateTime, noewLocalDateTime);
+
+					LOG.info("user blocked during: " + duration.toMinutes() + " minutes");
+
+					if (duration.toMinutes() > 15)
+					{
+						userModel.setLoginDisabled(false);
+						userModel.setBlockedSince(null);
+						modelService.save(userModel);
+					}
+
+				}
+
+			}catch(final UnknownIdentifierException ex)
+			{
+				LOG.warn("User: " + username + " not found");
+			}
+		}
+
+
 		return null;
+	}
+
+	protected String obtainUsername(final HttpServletRequest request)
+	{
+		return request.getParameter(usernameParameter);
 	}
 
 	/*
@@ -111,6 +183,14 @@ public class NotARobotLoginFilter extends AbstractAuthenticationProcessingFilter
 
 			return;
 		}
+		catch (final NotAValidEmailException failed)
+		{
+			// Authentication failed
+			unsuccessfulAuthentication(request, response, failed);
+
+			return;
+		}
+
 
 		chain.doFilter(request, response);
 	}

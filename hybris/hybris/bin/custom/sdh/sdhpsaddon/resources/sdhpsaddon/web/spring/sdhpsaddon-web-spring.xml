@@ -122,6 +122,13 @@
 			<list></list>
 		</property>
 	</bean>
+	
+	<alias name="defaultSDHBruteForceAttackCounter" alias="bruteForceAttackCounter"/>
+    <bean id="defaultSDHBruteForceAttackCounter"  class="de.hybris.platform.sdhpsaddon.security.DefaultSDHBruteForceAttackCounter">
+        <constructor-arg name="maxFailedLogins" value="3" />
+        <constructor-arg name="cacheExpiration" value="60" />
+        <constructor-arg name="cacheSizeLimit" value="1000" />
+    </bean>
 
 	<!-- Login Failure Handlers -->
 	<alias name="defaulPublicsectorBruteForceAttackCounter" alias="publicsectorBruteForceAttackCounter"/>

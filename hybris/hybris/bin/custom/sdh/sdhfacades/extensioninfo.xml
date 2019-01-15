@@ -10,7 +10,7 @@
  license agreement you entered into with SAP.
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
-	<extension abstractclassprefix="Generated" classprefix="SdhFacades" name="sdhfacades">
+	<extension abstractclassprefix="Generated" classprefix="SdhFacades" name="sdhfacades" usemaven="true">
 
 		<!-- you should add all required extensions to this list, except platform 
 			extensions which are automatically required -->

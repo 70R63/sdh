@@ -16,6 +16,7 @@ import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
+import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -28,6 +29,8 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHUpdateCustomerCommPrefsService;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -35,10 +38,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.xml.rpc.holders.StringHolder;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.util.Assert;
+
+import de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_INT;
 
 
 /**
@@ -57,6 +63,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "flexibleSearchService")
 	private FlexibleSearchService flexibleSearchService;
+
+	@Resource(name = "DefaultZWS_HYBSEND_MAIL_CORE")
+	private ZWS_HYSEND_MAIL_INT crm_mail;
 	/*
 	 * (non-Javadoc)
 	 *
@@ -135,7 +144,16 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		event.setCurrency(getCommonI18NService().getCurrentCurrency());
 		event.setToken(token);
 
+		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- Token [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+		LOG.info("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- Token [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
 
+		final StringHolder a = new StringHolder();
+		final StringHolder b = new StringHolder();
+		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/activateAccount?token=";
+		final String encodedToken = this.getEncodedURL(token);
+
+
+		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Activar</A>", "SDH Activar Cuenta - Hybris ", a, b);
 
 		getEventService().publishEvent(event);
 	}
@@ -213,6 +231,47 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			return false;
 		}
 
+	}
+
+	
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService#forgottenPassword(de.hybris.
+	 * platform.core.model.user.CustomerModel)
+	 */
+	@Override
+	public void forgottenPassword(final CustomerModel customerModel)
+	{
+		validateParameterNotNullStandardMessage("customerModel", customerModel);
+		final long timeStamp = getTokenValiditySeconds() > 0L ? new Date().getTime() : 0L;
+		final SecureToken data = new SecureToken(customerModel.getUid(), timeStamp);
+		final String token = getSecureTokenService().encryptData(data);
+		customerModel.setToken(token);
+		getModelService().save(customerModel);
+		getEventService().publishEvent(initializeEvent(new ForgottenPwdEvent(token), customerModel));
+		
+		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- SDH Token reset [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+		LOG.info("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- SDH Token reset [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+
+		final StringHolder a = new StringHolder();
+		final StringHolder b = new StringHolder();
+		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/change?token=";
+		final String encodedToken = this.getEncodedURL(token);
+				
+		
+		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Recuperar</A>", "SDH Recuperar Cuenta - Hybris ", a, b);
+
+	}
+	
+	private String getEncodedURL(final String token){
+		String encodedURL = "";
+		try {
+			encodedURL = URLEncoder.encode(token , "UTF-8");
+		}catch(final UnsupportedEncodingException e) {
+			throw new AssertionError("UTF-8 not supported");
+		}
+		return encodedURL;
 	}
 
 }
