@@ -9,10 +9,17 @@
 <template:page pageTitle="${pageTitle}">
 	<div class="container">
 		<p><spring:theme code="mirit.description" /></p>
-					
-		<miRit:personalData/>
+			<c:choose>
+				<c:when test="${ PJUR eq true}">
+					<miRit:personalDataPJ/>
+				</c:when>
+				<c:otherwise>
+					<miRit:personalData/>
 		
-		<miRit:generalData/>
+					<miRit:generalData/>
+				</c:otherwise>
+			</c:choose>		
+		
 		
 		<miRit:contactData/>
 		
