@@ -66,7 +66,7 @@
 									<spring:theme code="register.cancel"/>
 								</button>
 							</ycommerce:testId>
-						</div>
+				</div>
 				
 			</div>
 		</div>

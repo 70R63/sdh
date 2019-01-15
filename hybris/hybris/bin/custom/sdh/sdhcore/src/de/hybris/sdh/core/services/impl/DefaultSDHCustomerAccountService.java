@@ -16,6 +16,7 @@ import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
+import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -28,10 +29,8 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHUpdateCustomerCommPrefsService;
 
-
-
-import de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_INT;
-
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -39,13 +38,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.xml.rpc.holders.StringHolder;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
-import javax.xml.rpc.holders.StringHolder;
 import org.springframework.util.Assert;
-import java.net.URLEncoder;
-import java.io.UnsupportedEncodingException;
+
+import de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_INT;
 
 
 /**
@@ -120,7 +119,16 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 					SDHValidaMailRolResponse.class);
 
-			customerModel.setName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
+			{
+				customerModel.setName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+			}
+			else
+			{
+				customerModel.setName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+			}
+
+
 			customerModel.setMiddleName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
 			customerModel.setSecondLastName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
 
@@ -150,11 +158,11 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final StringHolder a = new StringHolder();
 		final StringHolder b = new StringHolder();
-		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/en/login/pw/activateAccount?token=";
+		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/activateAccount?token=";
 		final String encodedToken = this.getEncodedURL(token);
-				
-		
-		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Activar Cuenta</A>", "SDH Activar Cuenta - Hybris ", a, b);
+
+
+		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Activar</A>", "SDH Activar Cuenta - Hybris ", a, b);
 
 		getEventService().publishEvent(event);
 	}
@@ -233,12 +241,43 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 
 	}
-	
-	private String getEncodedURL(String token){
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService#forgottenPassword(de.hybris.
+	 * platform.core.model.user.CustomerModel)
+	 */
+	@Override
+	public void forgottenPassword(final CustomerModel customerModel)
+	{
+		validateParameterNotNullStandardMessage("customerModel", customerModel);
+		final long timeStamp = getTokenValiditySeconds() > 0L ? new Date().getTime() : 0L;
+		final SecureToken data = new SecureToken(customerModel.getUid(), timeStamp);
+		final String token = getSecureTokenService().encryptData(data);
+		customerModel.setToken(token);
+		getModelService().save(customerModel);
+		getEventService().publishEvent(initializeEvent(new ForgottenPwdEvent(token), customerModel));
+
+		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- SDH Token reset [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+		LOG.info("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- SDH Token reset [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+
+		final StringHolder a = new StringHolder();
+		final StringHolder b = new StringHolder();
+		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/change?token=";
+		final String encodedToken = this.getEncodedURL(token);
+
+
+		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Recuperar</A>", "SDH Recuperar Cuenta - Hybris ", a, b);
+
+	}
+
+	private String getEncodedURL(final String token){
 		String encodedURL = "";
 		try {
 			encodedURL = URLEncoder.encode(token , "UTF-8");
-		}catch(UnsupportedEncodingException e) {
+		}catch(final UnsupportedEncodingException e) {
 			throw new AssertionError("UTF-8 not supported");
 		}
 		return encodedURL;

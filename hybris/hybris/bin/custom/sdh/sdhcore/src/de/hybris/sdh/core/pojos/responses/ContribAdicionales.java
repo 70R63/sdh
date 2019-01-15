@@ -29,6 +29,7 @@ public class ContribAdicionales
 	private String ZZFECHAAUTOB;
 	private String CNDSC;
 	private String BIRTHPL;
+	private String NAME_ORG1;
 
 	/**
 	 *
@@ -342,6 +343,24 @@ public class ContribAdicionales
 	public void setBIRTHPL(final String bIRTHPL)
 	{
 		BIRTHPL = bIRTHPL;
+	}
+
+	/**
+	 * @return the nAME_ORG1
+	 */
+	public String getNAME_ORG1()
+	{
+		return NAME_ORG1;
+	}
+
+	/**
+	 * @param nAME_ORG1
+	 *           the nAME_ORG1 to set
+	 */
+	@JsonProperty("NAME_ORG1")
+	public void setNAME_ORG1(final String nAME_ORG1)
+	{
+		NAME_ORG1 = nAME_ORG1;
 	}
 
 
