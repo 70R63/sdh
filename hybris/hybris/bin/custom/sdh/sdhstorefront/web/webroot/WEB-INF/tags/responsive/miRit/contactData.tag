@@ -7,6 +7,42 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<script > 
+    function menuAutoSearch(){ 
+    	var country = document.getElementById("u5070_input").value;
+    	var addressType = document.getElementById("u5067_input").value;
+    	var deparment = document.getElementById("u5056_input").value;
+    	var town = document.getElementById("u5058_input").value;
+    	var postCode = document.getElementById("u5073_input").value;
+    	var streetType = document.getElementById("u5059_input").value;
+    	var section1 = document.getElementById("u5060_input").value;
+    	var section2 = document.getElementById("u5062_input").value;
+    	var section3 = document.getElementById("u5061_input").value;
+    	var section4 = document.getElementById("u5063_input").value;
+    	var section5 = document.getElementById("u5064_input").value;
+    	var section6 = document.getElementById("u6064_input").value;
+    	var section7 = document.getElementById("u5065_input").value;
+    	var section8 = document.getElementById("u6065_input").value;
+    	var section9 = document.getElementById("u5079_input").value;
+    	var complement = document.getElementById("u5066_input").value;
+    	var complementText = document.getElementById("u6066_input").value;
+    	
+    	document.getElementById("address.assistant.output").value = streetType + " " + 
+    																section1 + " " + 
+    																section2 + " " + 
+    																section3 + " " + 
+    																section4 + " " + 
+    																section5 + " " + 
+    																section6 + " " + 
+    																section7 + " " + 
+    																section8 + " " + 
+    																section9 + " " + 
+    																complement + " " + 
+    																complementText;
+    	
+    }
+</script>
+
 			<div class="headline">
 				<h2>
 					<span tabindex="0"><spring:theme code="mirit.contactData.title" text="Datos Contacto"/></span>
@@ -111,14 +147,15 @@
 			<label class="control-label " >
 				<spring:theme code="mirit.contactData.note" />
 			</label> 
+			<input id="address.assistant.output" name="addressAssistantOutput" class="form-control form-control" aria-required="true" type="text" value="" maxlength="2000" width="90000" onkeyup="menuAutoSearch();" disabled>
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-group ">
+					
 					<label class="control-label " for="address.surname">
 						<spring:theme code="mirit.contactData.country" />
 					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-					<select id="u5070_input"  class="form-control">
+ 					<select id="u5070_input"  class="form-control" onchange="menuAutoSearch();">
 		                <option selected="" value="Colombia">Colombia</option>
 		                <option value="Argentina">Argentina</option>
 		                <option value="España">España</option>
@@ -139,8 +176,8 @@
 						<spring:theme code="mirit.contactData.addressType" />
 					</label> 
 <!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-					<select id="u5067_input" class="form-control">
-		                <option value="Seleccionar">Seleccionar</option>
+					<select id="u5067_input" class="form-control" onchange="menuAutoSearch();">
+		                <option value="">Seleccionar</option>
 		                <option value="Notificación">Notificación</option>
 		                <option value="Otra dirección">Otra dirección</option>
 		              </select>
@@ -158,8 +195,8 @@
 						<spring:theme code="mirit.contactData.department" />
 					</label> 
 <!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-					<select id="u5056_input" class="form-control">
-		                <option value="Seleccionar">Seleccionar</option>
+					<select id="u5056_input" class="form-control" onchange="menuAutoSearch();">
+		                <option value="">Seleccionar</option>
 		                <option value="Antioquia">Antioquia</option>
 		                <option value="Bogotá D.C.">Bogotá D.C.</option>
 		                <option value="Caldas">Caldas</option>
@@ -177,8 +214,8 @@
 							<spring:theme code="mirit.contactData.county" />
 						</label> 
 <!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5058_input" class="form-control">
-			                <option value="Seleccionar">Seleccionar</option>
+						<select id="u5058_input" class="form-control" onchange="menuAutoSearch();">
+			                <option value="">Seleccionar</option>
 			                <option value="Bogotá D.C.">Bogotá D.C.</option>
 			                <option value="Medellin">Medellin</option>
 			                <option value="Nariño">Nariño</option>
@@ -194,8 +231,8 @@
 							<spring:theme code="mirit.contactData.postalCode" />
 						</label> 
 <!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5073_input" class="form-control">
-			                <option value="Seleccionar">Seleccionar</option>
+						<select id="u5073_input" class="form-control" onchange="menuAutoSearch();">
+			                <option value="">Seleccionar</option>
 			                <option value="Bogotá D.C.">Bogotá D.C.</option>
 			                <option value="Medellin">Medellin</option>
 			                <option value="Nariño">Nariño</option>
@@ -213,13 +250,14 @@
 					<label class="control-label " for="address.surname">
 					</label> 
 <!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5059_input" class="form-control">
-			                <option selected="" value="Seleccionar">Seleccionar</option>
-			                <option value="Avenida">Avenida</option>
-			                <option value="Carrera">Carrera</option>
-			                <option value="Calle">Calle</option>
-			                <option value="Diagonal">Diagonal</option>
-			                <option value="Trasnversal">Trasnversal</option>
+						<select id="u5059_input" class="form-control" onchange="menuAutoSearch();">
+			                <option selected="" value="">Seleccionar</option>
+			                <option value="AC">Avenida Calle</option>
+			                <option value="AK">Avenida Carrera</option>
+			                <option value="CL">Calle</option>
+			                <option value="KR">Carrera</option>			                
+			                <option value="DG">Diagonal</option>
+			                <option value="TV">Trasnversal</option>
 			              </select>
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
@@ -231,7 +269,7 @@
 					<div class="form-group ">
 						<label class="control-label " for="address.surname">
 						</label> 
-						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+						<input id="u5060_input" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -242,8 +280,8 @@
 						<label class="control-label " for="address.surname">
 						</label> 
 <!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5062_input" class="form-control">
-			                <option selected="" value="Seleccionar">Seleccionar</option>
+						<select id="u5062_input" class="form-control" onchange="menuAutoSearch();">
+			                <option selected="" value="">Seleccionar</option>
 			                <option value="A">A</option>
 			                <option value="B">B</option>
 			                <option value="C">C</option>
@@ -282,8 +320,8 @@
 						<label class="control-label " for="address.surname">
 						</label> 
 <!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-							<select id="u5061_input" class="form-control">
-				                <option selected="" value="Seleccionar">Seleccionar</option>
+							<select id="u5061_input" class="form-control" onchange="menuAutoSearch();">
+				                <option selected="" value="">Seleccionar</option>
 				                <option value="Bis">Bis</option>
 				              </select>
 						<div class="help-block">
@@ -297,8 +335,8 @@
 						<label class="control-label " for="address.surname">
 						</label> 
 <!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5063_input" class="form-control">
-			                <option selected="" value="Seleccionar">Seleccionar</option>
+						<select id="u5063_input" class="form-control" onchange="menuAutoSearch();">
+			                <option selected="" value="">Seleccionar</option>
 			                <option value="A">A</option>
 			                <option value="B">B</option>
 			                <option value="C">C</option>
@@ -337,8 +375,8 @@
 						<label class="control-label " for="address.surname">
 						</label> 
 <!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5064_input" class="form-control">
-			                <option selected="" value="Seleccionar">Seleccionar</option>
+						<select id="u5064_input" class="form-control" onchange="menuAutoSearch();">
+			                <option selected="" value="">Seleccionar</option>
 			                <option value="Sur">Sur</option>
 			                <option value="Este">Este</option>
 			              </select>
@@ -352,7 +390,7 @@
 					<div class="form-group ">
 						<label class="control-label " for="address.surname">
 						</label> 
-						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+						<input id="u6064_input" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -364,8 +402,8 @@
 						<label class="control-label " for="address.surname">
 						</label> 
 <!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-							<select id="u5065_input"  class="form-control">
-				                <option selected="" value="Seleccionar">Seleccionar</option>
+							<select id="u5065_input"  class="form-control" onchange="menuAutoSearch();">
+				                <option selected="" value="">Seleccionar</option>
 				                <option value="A">A</option>
 				                <option value="B">B</option>
 				                <option value="C">C</option>
@@ -403,7 +441,7 @@
 					<div class="form-group ">
 						<label class="control-label " for="address.surname">
 						</label> 
-						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+						<input id="u6065_input" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -415,8 +453,8 @@
 						<label class="control-label " for="address.surname">
 						</label> 
 <!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5079_input" class="form-control">
-			                <option selected="" value="Seleccionar">Seleccionar</option>
+						<select id="u5079_input" class="form-control" onchange="menuAutoSearch();">
+			                <option selected="" value="">Seleccionar</option>
 			                <option value="Sur">Sur</option>
 			                <option value="Este">Este</option>
 			              </select>
@@ -431,57 +469,53 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group ">
-						<select id="u5066_input" class="form-control" disabled="disabled">
-			                <option value="Seleccionar">Seleccionar</option>
-			                <option value="Apartamento">Apartamento</option>
-			                <option value="Agrupación">Agrupación</option>
-			                <option value="Bloque">Bloque</option>
-			                <option value="Bodega">Bodega</option>
-			                <option value="Camino">Camino</option>
-			                <option value="Carretera">Carretera</option>
-			                <option value="Celula">Celula</option>
-			                <option value="Casa">Casa</option>
-			                <option value="Conjunto">Conjunto</option>
-			                <option value="Consultorio">Consultorio</option>
-			                <option value="Deposito">Deposito</option>
-			                <option value="Edificio">Edificio</option>
-			                <option value="Entrada">Entrada</option>
-			                <option value="Esquina">Esquina</option>
-			                <option value="Etapa">Etapa</option>
-			                <option value="Garage">Garage</option>
-			                <option value="Interior">Interior</option>
-			                <option value="Kilómetro">Kilómetro</option>
-			                <option value="Local">Local</option>
-			                <option value="Lote">Lote</option>
-			                <option value="Manzana">Manzana</option>
-			                <option value="Mezanine">Mezanine</option>
-			                <option value="Modula">Modula</option>
-			                <option value="Oficina">Oficina</option>
-			                <option value="Paseo">Paseo</option>
-			                <option value="Parcela">Parcela</option>
-			                <option value="Penthouse">Penthouse</option>
-			                <option value="Piso">Piso</option>
-			                <option value="Puente">Puente</option>
-			                <option value="Predio">Predio</option>
-			                <option value="Salón Comunal">Salón Comunal</option>
-			                <option value="Sector">Sector</option>
-			                <option value="Solar">Solar</option>
-			                <option value="Semi Sotano">Semi Sotano</option>
-			                <option value="Super Manzana">Super Manzana</option>
-			                <option value="Torre">Torre</option>
-			                <option value="Unidad">Unidad</option>
-			                <option value="Unidad Residencial">Unidad Residencial</option>
-			                <option value="Urbanización">Urbanización</option>
-			                <option value="Vereda">Vereda</option>
-			                <option value="Vía">Vía</option>
-			                <option value="Zona">Zona</option>
+						<select id="u5066_input" class="form-control" onchange="menuAutoSearch();">
+							<option selected="" value="">Seleccionar</option>
+			                <option value="AP">Apartamento</option>
+							<option value="AG">Agrupación</option>
+							<option value="BL">Bloque</option>
+							<option value="BG">Bodega</option>
+							<option value="CN">Camino</option>
+							<option value="CT">Carrera</option>
+							<option value="CEL">Celula</option>
+							<option value="CA">Casa</option>
+							<option value="CONJ">Conjunto</option>
+							<option value="CS">Consultorio</option>
+							<option value="ED">Edificio</option>
+							<option value="EN">Entrada</option>
+							<option value="ESQ">Esquina</option>
+							<option value="ET">Etapa</option>
+							<option value="IN">Interior</option>
+							<option value="KM">Kilómetro</option>
+							<option value="LC">Local</option>
+							<option value="MZ">Manzana</option>
+							<option value="MN">Mezanine</option>
+							<option value="MD">Modula</option>
+							<option value="OF">Oficina</option>
+							<option value="PS">Paseo</option>
+							<option value="PA">Parcela</option>
+							<option value="PH">Penthouse</option>
+							<option value="PI">Piso</option>
+							<option value="PN">Puente</option>
+							<option value="PD">Predio</option>
+							<option value="SC">Salón Comunal</option>
+							<option value="SR">Sector</option>
+							<option value="SL">Solar</option>
+							<option value="SM">Supermanzana</option>
+							<option value="TO">Torre</option>
+							<option value="UN">Unidad</option>
+							<option value="UR">Unidad Residencial</option>
+							<option value="URB">Urbanización</option>
+							<option value="VDA">Vereda</option>
+							<option value="VIA">Vía</option>
+							<option value="ZN">Zona</option>
 			              </select>
 			           </div>
 				</div>
 				<div class="col-md-3">
 					<div class="form-group ">
 
-						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+						<input id="u6066_input" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
