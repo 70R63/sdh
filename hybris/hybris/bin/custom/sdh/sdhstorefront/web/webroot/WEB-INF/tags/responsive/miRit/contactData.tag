@@ -144,9 +144,13 @@
 			</div>
 				
 			</div>
-			<label class="control-label " >
-				<spring:theme code="mirit.contactData.note" />
-			</label> 
+			<br>
+			<br>
+			<div class="form-group ">
+				<label class="control-label " >
+					<spring:theme code="mirit.contactData.note" />
+				</label>
+			</div>
 			<input id="address.assistant.output" name="addressAssistantOutput" class="form-control form-control" aria-required="true" type="text" value="" maxlength="2000" width="90000" onkeyup="menuAutoSearch();" disabled>
 			<div class="row">
 				<div class="col-md-2">
@@ -464,8 +468,11 @@
 					</div>
 				</div>
 			</div>
+			<br>
+			<div class="form-group ">
 			<label class="control-label " ><spring:theme code="mirit.contactData.selectRequieredFields" />
-			</label> 
+			</label>
+			</div>
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group ">

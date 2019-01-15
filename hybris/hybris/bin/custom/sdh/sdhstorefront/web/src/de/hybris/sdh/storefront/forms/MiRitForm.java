@@ -45,6 +45,16 @@ public class MiRitForm
 	private Boolean useEmailForNotifications;
 	private Boolean useInformationForInstitutionalPurposes;
 
+	private String nombreRazonSocial1;
+	private String nombreRazonSocial2;
+	private String nombreRazonSocial3;
+	private String nombreRazonSocial4;
+	private String formaJuridica;
+	private String numeroMatriculaMercantil;
+	private String fechaLiquidacion;
+	private String tipoRetenedor;
+
+
 	/**
 	 *
 	 */
@@ -545,6 +555,142 @@ public class MiRitForm
 	public void setTelefonoCelular(final String telefonoCelular)
 	{
 		this.telefonoCelular = telefonoCelular;
+	}
+
+	/**
+	 * @return the nombreRazonSocial1
+	 */
+	public String getNombreRazonSocial1()
+	{
+		return nombreRazonSocial1;
+	}
+
+	/**
+	 * @param nombreRazonSocial1
+	 *           the nombreRazonSocial1 to set
+	 */
+	public void setNombreRazonSocial1(final String nombreRazonSocial1)
+	{
+		this.nombreRazonSocial1 = nombreRazonSocial1;
+	}
+
+	/**
+	 * @return the nombreRazonSocial2
+	 */
+	public String getNombreRazonSocial2()
+	{
+		return nombreRazonSocial2;
+	}
+
+	/**
+	 * @param nombreRazonSocial2
+	 *           the nombreRazonSocial2 to set
+	 */
+	public void setNombreRazonSocial2(final String nombreRazonSocial2)
+	{
+		this.nombreRazonSocial2 = nombreRazonSocial2;
+	}
+
+	/**
+	 * @return the nombreRazonSocial3
+	 */
+	public String getNombreRazonSocial3()
+	{
+		return nombreRazonSocial3;
+	}
+
+	/**
+	 * @param nombreRazonSocial3
+	 *           the nombreRazonSocial3 to set
+	 */
+	public void setNombreRazonSocial3(final String nombreRazonSocial3)
+	{
+		this.nombreRazonSocial3 = nombreRazonSocial3;
+	}
+
+	/**
+	 * @return the nombreRazonSocial4
+	 */
+	public String getNombreRazonSocial4()
+	{
+		return nombreRazonSocial4;
+	}
+
+	/**
+	 * @param nombreRazonSocial4
+	 *           the nombreRazonSocial4 to set
+	 */
+	public void setNombreRazonSocial4(final String nombreRazonSocial4)
+	{
+		this.nombreRazonSocial4 = nombreRazonSocial4;
+	}
+
+	/**
+	 * @return the formaJuridica
+	 */
+	public String getFormaJuridica()
+	{
+		return formaJuridica;
+	}
+
+	/**
+	 * @param formaJuridica
+	 *           the formaJuridica to set
+	 */
+	public void setFormaJuridica(final String formaJuridica)
+	{
+		this.formaJuridica = formaJuridica;
+	}
+
+	/**
+	 * @return the numeroMatriculaMercantil
+	 */
+	public String getNumeroMatriculaMercantil()
+	{
+		return numeroMatriculaMercantil;
+	}
+
+	/**
+	 * @param numeroMatriculaMercantil
+	 *           the numeroMatriculaMercantil to set
+	 */
+	public void setNumeroMatriculaMercantil(final String numeroMatriculaMercantil)
+	{
+		this.numeroMatriculaMercantil = numeroMatriculaMercantil;
+	}
+
+	/**
+	 * @return the fechaLiquidacion
+	 */
+	public String getFechaLiquidacion()
+	{
+		return fechaLiquidacion;
+	}
+
+	/**
+	 * @param fechaLiquidacion
+	 *           the fechaLiquidacion to set
+	 */
+	public void setFechaLiquidacion(final String fechaLiquidacion)
+	{
+		this.fechaLiquidacion = fechaLiquidacion;
+	}
+
+	/**
+	 * @return the tipoRetenedor
+	 */
+	public String getTipoRetenedor()
+	{
+		return tipoRetenedor;
+	}
+
+	/**
+	 * @param tipoRetenedor
+	 *           the tipoRetenedor to set
+	 */
+	public void setTipoRetenedor(final String tipoRetenedor)
+	{
+		this.tipoRetenedor = tipoRetenedor;
 	}
 
 

@@ -86,7 +86,31 @@ public class MiRitPageController extends AbstractPageController
 			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
 			{
 				model.addAttribute("PJUR", true);
-				miRitForm.setPrimNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+				miRitForm.setNombreRazonSocial1(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+				miRitForm.setNombreRazonSocial2(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2());
+				miRitForm.setNombreRazonSocial3(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3());
+				miRitForm.setNombreRazonSocial4(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4());
+
+				miRitForm.setFormaJuridica(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getLEGAL_ENTY());
+				miRitForm.setNumeroMatriculaMercantil(
+						sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZNOMATRICUL());
+
+				final String feachLiq = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getLIQUIDATIONDATE();
+				if (StringUtils.isNotBlank(feachLiq) && !"00000000".equals(feachLiq))
+				{
+					//					final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+					//
+					//					final LocalDate localDate = LocalDate.parse(feachLiq, formatter);
+					//
+					//					final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					//
+					//					miRitForm.setFechaLiquidacion(localDate.format(formatter2));
+
+					miRitForm.setFechaLiquidacion(feachLiq);
+				}
+
+				miRitForm.setTipoRetenedor(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getLEGALORG());
+
 			}
 			else
 			{

@@ -30,6 +30,13 @@ public class ContribAdicionales
 	private String CNDSC;
 	private String BIRTHPL;
 	private String NAME_ORG1;
+	private String NAME_ORG2;
+	private String NAME_ORG3;
+	private String NAME_ORG4;
+	private String LEGAL_ENTY;
+	private String LIQUIDATIONDATE;
+	private String LEGALORG;
+
 
 	/**
 	 *
@@ -361,6 +368,114 @@ public class ContribAdicionales
 	public void setNAME_ORG1(final String nAME_ORG1)
 	{
 		NAME_ORG1 = nAME_ORG1;
+	}
+
+	/**
+	 * @return the nAME_ORG2
+	 */
+	public String getNAME_ORG2()
+	{
+		return NAME_ORG2;
+	}
+
+	/**
+	 * @param nAME_ORG2
+	 *           the nAME_ORG2 to set
+	 */
+	@JsonProperty("NAME_ORG2")
+	public void setNAME_ORG2(final String nAME_ORG2)
+	{
+		NAME_ORG2 = nAME_ORG2;
+	}
+
+	/**
+	 * @return the nAME_ORG3
+	 */
+	public String getNAME_ORG3()
+	{
+		return NAME_ORG3;
+	}
+
+	/**
+	 * @param nAME_ORG3
+	 *           the nAME_ORG3 to set
+	 */
+	@JsonProperty("NAME_ORG3")
+	public void setNAME_ORG3(final String nAME_ORG3)
+	{
+		NAME_ORG3 = nAME_ORG3;
+	}
+
+	/**
+	 * @return the nAME_ORG4
+	 */
+	public String getNAME_ORG4()
+	{
+		return NAME_ORG4;
+	}
+
+	/**
+	 * @param nAME_ORG4
+	 *           the nAME_ORG4 to set
+	 */
+	@JsonProperty("NAME_ORG4")
+	public void setNAME_ORG4(final String nAME_ORG4)
+	{
+		NAME_ORG4 = nAME_ORG4;
+	}
+
+	/**
+	 * @return the lEGAL_ENTY
+	 */
+	public String getLEGAL_ENTY()
+	{
+		return LEGAL_ENTY;
+	}
+
+	/**
+	 * @param lEGAL_ENTY
+	 *           the lEGAL_ENTY to set
+	 */
+	@JsonProperty("LEGAL_ENTY")
+	public void setLEGAL_ENTY(final String lEGAL_ENTY)
+	{
+		LEGAL_ENTY = lEGAL_ENTY;
+	}
+
+	/**
+	 * @return the lIQUIDATIONDATE
+	 */
+	public String getLIQUIDATIONDATE()
+	{
+		return LIQUIDATIONDATE;
+	}
+
+	/**
+	 * @param lIQUIDATIONDATE
+	 *           the lIQUIDATIONDATE to set
+	 */
+	@JsonProperty("FECHALIQUIDA")
+	public void setLIQUIDATIONDATE(final String lIQUIDATIONDATE)
+	{
+		LIQUIDATIONDATE = lIQUIDATIONDATE;
+	}
+
+	/**
+	 * @return the lEGALORG
+	 */
+	public String getLEGALORG()
+	{
+		return LEGALORG;
+	}
+
+	/**
+	 * @param lEGALORG
+	 *           the lEGALORG to set
+	 */
+	@JsonProperty("LEGAL_ORG")
+	public void setLEGALORG(final String lEGALORG)
+	{
+		LEGALORG = lEGALORG;
 	}
 
 

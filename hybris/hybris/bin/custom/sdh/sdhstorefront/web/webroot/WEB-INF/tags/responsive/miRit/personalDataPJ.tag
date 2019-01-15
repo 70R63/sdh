@@ -63,7 +63,7 @@
 					<label class="control-label required" for="nameOrganization">
 						<spring:theme code="mirit.pj.name" />
 					</label> 
-					<input id="name" name="name" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.primNom }" maxlength="240">
+					<input id="name" name="name" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.nombreRazonSocial1 }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -73,7 +73,7 @@
 		<div class="row">
 			<div class="col-md-10">
 				<div class="form-group ">
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.primApe }" maxlength="240">
+					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.nombreRazonSocial2 }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -83,7 +83,7 @@
 		<div class="row">
 			<div class="col-md-10">
 				<div class="form-group ">
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="" disabled="disabled" maxlength="240">
+					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.nombreRazonSocial3 }" disabled="disabled" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -93,7 +93,7 @@
 		<div class="row">
 			<div class="col-md-10">
 				<div class="form-group ">
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="" disabled="disabled" maxlength="240">
+					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.nombreRazonSocial4 }" disabled="disabled" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -107,7 +107,7 @@
 						<spring:theme code="mirit.pj.formajuridica" />
 					</label>
 					<select class="form-control">
-	                  <option value="FACEBOOK">S. Colectiva</option>
+	                  <option value="${miRitForm.formaJuridica }"><spring:theme code="rit.legal.entity.${miRitForm.formaJuridica}" /></option>
 	                </select>
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
@@ -119,7 +119,7 @@
 					<label class="control-label required" for="numDoc">
 						<spring:theme code="mirit.pj.licenseNumber" />
 					</label>
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="" disabled="disabled" maxlength="240">
+					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.numeroMatriculaMercantil}" disabled="disabled" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -133,7 +133,7 @@
 					<label class="control-label required" for="numDoc">
 						<spring:theme code="mirit.pj.liqDate" />
 					</label>
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="" disabled="disabled" maxlength="240">
+					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.fechaLiquidacion}" disabled="disabled" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -145,7 +145,7 @@
 						<spring:theme code="mirit.pj.retainerType" />
 					</label>
 					<select class="form-control">
-	                  <option value="FACEBOOK">Emp. públicas</option>
+	                  <option value="${miRitForm.tipoRetenedor}"><spring:theme code="rit.legal.org.${miRitForm.tipoRetenedor}" /></option>
 	                </select>
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>

@@ -269,7 +269,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final String encodedToken = this.getEncodedURL(token);
 
 
-		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Recuperar</A>", "SDH Recuperar Cuenta - Hybris ", a, b);
+		crm_mail.send(customerModel.getUid(),
+				"Para recuperar tu contraseña ingresa <A HREF='" + hybrisURL + encodedToken + "'>aquí</A>",
+				"SDH Recuperar Cuenta - Hybris ", a, b);
 
 	}
 

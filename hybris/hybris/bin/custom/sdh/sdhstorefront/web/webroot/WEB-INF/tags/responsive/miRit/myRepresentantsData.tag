@@ -12,15 +12,17 @@
 					<span tabindex="0"><spring:theme code="mirit.myRepresentants.title" text="Mis Representantes"/></span>
 				</h2>
 			</div>
+		<div class="form-group ">
 			<label class="control-label " >
-						<spring:theme code="mirit.myRepresentants.howRepresentsMe" />
-					</label> 
+				<spring:theme code="mirit.myRepresentants.howRepresentsMe" />
+			</label> 
+		</div>
 			<!--  First column of form -->
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group ">
 					<label class="control-label required" for="address.surname">
-						<spring:theme code="mirit.myRepresentants.howRepresentsMe" />
+						<spring:theme code="mirit.myRepresentants.documentType" />
 					</label> 
 					<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
@@ -77,10 +79,12 @@
 				</div>
 			</div>
 		</div>
-		
-		<label class="control-label " >
-						<spring:theme code="mirit.myRepresentants.iRepresentTo" />
-					</label> 
+		<br>
+		<div class="form-group ">
+			<label class="control-label " >
+				<spring:theme code="mirit.myRepresentants.iRepresentTo" />
+			</label>
+		</div>
 			<!--  First column of form -->
 		<div class="row">
 			<div class="col-md-4">

@@ -12,9 +12,11 @@
 					<span tabindex="0"><spring:theme code="mirit.taxesData.title" text="Mis Impuestos"/></span>
 				</h2>
 			</div>
-			<label class="control-label " >
-						<spring:theme code="mirit.ica"/>
-					</label> 
+			<div class="form-group ">
+				<label class="control-label " >
+							<spring:theme code="mirit.ica"/>
+				</label>
+			</div>
 			<!--  First column of form -->
 		<div class="row">
 			<div class="col-md-2">
@@ -93,9 +95,11 @@
 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 			</div>
 		</div>
-		<label class="control-label " >
+		<div class="form-group ">
+			<label class="control-label " >
 						<spring:theme code="mirit.taxesData.search"/>
 			</label>
+		</div>
 		<div class="row">
 			
 			<div class="col-md-2">
@@ -141,9 +145,13 @@
 				</div>
 			</div>
 		</div>
-		<label class="control-label " >
-						<spring:theme code="mirit.taxesData.unifiedPropertyTax"/>
-					</label> 
+		<br>
+		<br>
+		<div class="form-group ">
+			<label class="control-label " >
+				<spring:theme code="mirit.taxesData.unifiedPropertyTax"/>
+			</label>
+		</div>		 
 			<!--  First column of form -->
 		<div class="row">
 			<div class="col-md-1">
@@ -259,9 +267,13 @@
 				</div>
 			</div>
 		</div>
-		<label class="control-label " >
-						<spring:theme code="mirit.taxesData.VehiclesTax"/>
-					</label> 
+		<br>
+		<br>
+		<div class="form-group ">
+			<label class="control-label " >
+				<spring:theme code="mirit.taxesData.VehiclesTax"/>
+			</label> 
+		</div>
 			<!--  First column of form -->
 		<div class="row">
 			<div class="col-md-1">
