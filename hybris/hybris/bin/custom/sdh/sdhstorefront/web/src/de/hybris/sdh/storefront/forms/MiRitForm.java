@@ -3,6 +3,12 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+
+import java.util.List;
+
+
 /**
  * @author hybris
  *
@@ -53,6 +59,9 @@ public class MiRitForm
 	private String numeroMatriculaMercantil;
 	private String fechaLiquidacion;
 	private String tipoRetenedor;
+
+	private List<ImpuestoGasolina> gasolina;
+	private List<ImpuestoPublicidadExterior> publicidadExt;
 
 
 	/**
@@ -691,6 +700,40 @@ public class MiRitForm
 	public void setTipoRetenedor(final String tipoRetenedor)
 	{
 		this.tipoRetenedor = tipoRetenedor;
+	}
+
+	/**
+	 * @return the gasolina
+	 */
+	public List<ImpuestoGasolina> getGasolina()
+	{
+		return gasolina;
+	}
+
+	/**
+	 * @param gasolina
+	 *           the gasolina to set
+	 */
+	public void setGasolina(final List<ImpuestoGasolina> gasolina)
+	{
+		this.gasolina = gasolina;
+	}
+
+	/**
+	 * @return the publicidadExt
+	 */
+	public List<ImpuestoPublicidadExterior> getPublicidadExt()
+	{
+		return publicidadExt;
+	}
+
+	/**
+	 * @param publicidadExt
+	 *           the publicidadExt to set
+	 */
+	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
+	{
+		this.publicidadExt = publicidadExt;
 	}
 
 

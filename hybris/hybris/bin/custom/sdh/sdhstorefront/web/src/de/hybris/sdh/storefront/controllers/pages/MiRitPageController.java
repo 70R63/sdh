@@ -27,6 +27,7 @@ import de.hybris.sdh.storefront.forms.MiRitForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -261,6 +262,21 @@ public class MiRitPageController extends AbstractPageController
 
 				}
 
+			}
+
+
+			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
+					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+			{
+				miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
+					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+			{
+				miRitForm.setPublicidadExt(sdhConsultaContribuyenteBPResponse.getPublicidadExt().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumResolu())).collect(Collectors.toList()));
 			}
 
 
