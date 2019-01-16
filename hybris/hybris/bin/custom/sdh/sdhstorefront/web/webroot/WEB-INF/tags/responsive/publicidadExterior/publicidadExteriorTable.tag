@@ -95,9 +95,10 @@
 		<div class="row">				
 
 			<div class="col-md-2 ">
-				<c:url value='/contribuyentes/publicidadexterior/declaracion' var="pubExtDeclaURL"/>
-				<button class="btn btn-secondary btn-lg" type="button" onclick="'<c:url value="${pubExtDeclaURL }" />'">
-					<spring:theme code="publicidad.exterior.declarationpresent" />
+				<%-- <c:url value='/contribuyentes/publicidadexterior/declaracion' var="pubExtDeclaURL"/> --%>
+				<%-- <button class="btn btn-secondary btn-lg" type="button" onclick="'<c:url value="${pubExtDeclaURL }" />'"> --%>
+				<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion'">
+					<spring:theme code="publicidad.exterior.declarationpresent" />					
 				</button>
 			</div>
 		</div>

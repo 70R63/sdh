@@ -2960,3 +2960,23 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 #end Publicidad Exterior page
 
+
+#new Publicidad Exterior Declaracion page
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		            ;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;DeclaraPublicidadPage 		;Declarcion Publicidad 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/publicidadexterior/declaracion
+
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]			      	;position[unique=true]		;page(uid,$contentCV)[unique=true][default='DeclaraPublicidadPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-DeclaraPublicidadPage 	;SideContent		     	;																	;SideContent-DeclaraPublicidadPage				;;;
+								;						;BodyContent-DeclaraPublicidadPage 	;BodyContent			    ;																	;BodyContent-DeclaraPublicidadPage				;;;
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										    ;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-DeclaraPublicidadPage 	;Side Content Slot for Declaracion Publicidad	;true	;								;;;
+							;							;BodyContent-DeclaraPublicidadPage	;Body Content Slot for Declaracion Publicidad	;true	;DeclaraPublicidadPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							    ;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;DeclaraPublicidadPageComponent	;DeclaraPublicidadPage Component	;/WEB-INF/views/responsive/pages/layout/DeclaraPublicidadPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;DeclaraPublicidadPageComponent					
+
+#new Publicidad Exterior Declaracion page
