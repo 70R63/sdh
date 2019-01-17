@@ -279,6 +279,20 @@ public class MiRitPageController extends AbstractPageController
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumResolu())).collect(Collectors.toList()));
 			}
 
+			if (sdhConsultaContribuyenteBPResponse.getInfoContrib().getRedsocial() != null
+					&& !sdhConsultaContribuyenteBPResponse.getInfoContrib().getRedsocial().isEmpty())
+			{
+				miRitForm.setRedsocial(sdhConsultaContribuyenteBPResponse.getInfoContrib().getRedsocial().stream()
+						.filter(eachNet -> StringUtils.isNotBlank(eachNet.getRED_SOCIAL())).collect(Collectors.toList()));
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getAgentes() != null
+					&& !sdhConsultaContribuyenteBPResponse.getAgentes().isEmpty())
+			{
+				miRitForm.setAgentes(sdhConsultaContribuyenteBPResponse.getAgentes().stream()
+						.filter(eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc())).collect(Collectors.toList()));
+			}
+
 
 			model.addAttribute("miRitForm", miRitForm);
 

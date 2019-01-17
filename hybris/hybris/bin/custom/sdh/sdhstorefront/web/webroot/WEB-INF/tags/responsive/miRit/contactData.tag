@@ -109,41 +109,48 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
-						<spring:theme code="mirit.contactData.socialNetwork" />
-					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-					<select  class="form-control">
-                  <option value="FACEBOOK">FACEBOOK</option>
-                  <option value="INSTAGRAM">INSTAGRAM</option>
-                  <option value="LINKEDIN">LINKEDIN</option>
-                  <option value="SKYPE">SKYPE</option>
-                  <option value="TWITTER">TWITTER</option>
-                  <option value="WHATSAPP">WHATSAPP</option>
-                  <option value="YOUTUBE">YOUTUBE</option>
-                </select>
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+		<c:if test="${not empty miRitForm.redsocial }">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required" for="address.surname">
+							<spring:theme code="mirit.contactData.socialNetwork" />
+						</label> 
 					</div>
+					
 				</div>
-				
-			</div>
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
-						<spring:theme code="mirit.contactData.socialNetworkUser" />
-					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required" for="address.surname">
+							<spring:theme code="mirit.contactData.socialNetworkUser" />
+						</label> 
 					</div>
 				</div>
 			</div>
-				
-			</div>
+			<c:forEach items="${miRitForm.redsocial }" var="eachRedSocial">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group ">
+							<select  class="form-control">
+				                  <option value="FACEBOOK">${eachRedSocial.RED_SOCIAL }</option>
+				                </select>
+							<div class="help-block">
+								<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+							</div>
+						</div>
+						
+					</div>
+					<div class="col-md-4">
+						<div class="form-group ">
+							<input id="" name="" class="form-control form-control" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
+							<div class="help-block">
+								<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
 			<br>
 			<br>
 			<div class="form-group ">

@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 
@@ -62,7 +64,8 @@ public class MiRitForm
 
 	private List<ImpuestoGasolina> gasolina;
 	private List<ImpuestoPublicidadExterior> publicidadExt;
-
+	private List<ContribRedSocial> redsocial;
+	private List<ContribAgente> agentes;
 
 	/**
 	 *
@@ -735,6 +738,41 @@ public class MiRitForm
 	{
 		this.publicidadExt = publicidadExt;
 	}
+
+	/**
+	 * @return the redsocial
+	 */
+	public List<ContribRedSocial> getRedsocial()
+	{
+		return redsocial;
+	}
+
+	/**
+	 * @param redsocial
+	 *           the redsocial to set
+	 */
+	public void setRedsocial(final List<ContribRedSocial> redsocial)
+	{
+		this.redsocial = redsocial;
+	}
+
+	/**
+	 * @return the agentes
+	 */
+	public List<ContribAgente> getAgentes()
+	{
+		return agentes;
+	}
+
+	/**
+	 * @param agentes
+	 *           the agentes to set
+	 */
+	public void setAgentes(final List<ContribAgente> agentes)
+	{
+		this.agentes = agentes;
+	}
+
 
 
 
