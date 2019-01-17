@@ -7,7 +7,7 @@ $jarResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sd
 $siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 
 # Language
-$lang=en
+$lang=es
 
 # Media
 INSERT_UPDATE Media;$contentCV;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images']

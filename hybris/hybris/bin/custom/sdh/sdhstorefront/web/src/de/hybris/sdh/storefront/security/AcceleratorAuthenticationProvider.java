@@ -10,12 +10,13 @@
  */
 package de.hybris.sdh.storefront.security;
 
-import de.hybris.platform.acceleratorstorefrontcommons.security.AbstractAcceleratorAuthenticationProvider;
 import de.hybris.platform.core.Constants;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.LockedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,8 +34,10 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  * any login as admin disables SearchRestrictions and therefore no page can be viewed correctly
  */
-public class AcceleratorAuthenticationProvider extends AbstractAcceleratorAuthenticationProvider
+public class AcceleratorAuthenticationProvider extends SDHAbstractAcceleratorAuthenticationProvider
 {
+	private static final Logger LOG = Logger.getLogger(AcceleratorAuthenticationProvider.class);
+
 	private static final String ROLE_ADMIN_GROUP = "ROLE_" + Constants.USER.ADMIN_USERGROUP.toUpperCase();
 
 	private GrantedAuthority adminAuthority = new SimpleGrantedAuthority(ROLE_ADMIN_GROUP);
@@ -54,6 +57,14 @@ public class AcceleratorAuthenticationProvider extends AbstractAcceleratorAuthen
 		{
 			throw new LockedException("Login attempt as " + Constants.USER.ADMIN_USERGROUP + " is rejected");
 		}
+	}
+
+
+	@Override
+	public Authentication authenticate(final Authentication authentication) throws AuthenticationException
+	{
+
+		return super.authenticate(authentication);
 	}
 
 	public void setAdminGroup(final String adminGroup)

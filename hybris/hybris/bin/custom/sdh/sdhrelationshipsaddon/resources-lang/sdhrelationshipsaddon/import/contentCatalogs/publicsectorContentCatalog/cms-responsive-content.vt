@@ -1,0 +1,25 @@
+#set( $macroLang = $esc.java('$lang') )
+#set( $contentPage = $query.load('cms-responsive-content', 'ContentPage') )
+#set( $cmsLinkComponent = $query.load('cms-responsive-content', 'CMSLinkComponent') )
+#set( $macroContentCatalog = $esc.java('$contentCatalog') )
+#set( $contentCatalog = $esc.java('publicsectorContentCatalog') )
+#set( $macroCatalogVersion= $esc.java('$contentCV'))
+#set( $contentCV = $esc.java('catalogVersion(catalog(id[default=$contentCatalog]),version[default=''Staged''])[unique=true,default=$contentCatalog:Staged]') )
+#set( $macroStorefrontContextRoot = $esc.java('$storefrontContextRoot') )
+#set( $storefrontContextRoot = $esc.java('$config-storefrontContextRoot') )
+$macroContentCatalog=$contentCatalog
+$macroCatalogVersion=$contentCV
+$macroLang=$lang
+$macroStorefrontContextRoot=$storefrontContextRoot
+
+# Content Pages
+UPDATE ContentPage;$macroCatalogVersion;uid[unique=true];title[lang=$macroLang];keywords[lang=$macroLang];description[lang=$macroLang]
+#foreach( $row in $contentPage ) 
+;;$row.key;$row.values.title;$row.values.keywords;$row.values.description
+#end 
+ 
+# Update linkName
+UPDATE CMSLinkComponent;$macroCatalogVersion;uid[unique=true];linkName[lang=$macroLang]
+#foreach( $row in $cmsLinkComponent ) 
+;;$row.key;$row.values.linkName
+#end

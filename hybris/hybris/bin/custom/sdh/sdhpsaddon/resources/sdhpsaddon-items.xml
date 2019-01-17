@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	~ [y] hybris Platform
+	~
+	~ Copyright (c) 2000-2016 SAP SE
+	~ All rights reserved.
+	~
+	~ This software is the confidential and proprietary information of SAP
+	~ Hybris ("Confidential Information"). You shall not disclose such
+	~ Confidential Information and shall use it only in accordance with the
+	~ terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+	
+		<typegroup name="ServiceCMSActions">
+			
+			<itemtype code="PSAddToCartAction" autocreate="true" generate="true" extends="AddToCartAction"
+				jaloclass="de.hybris.platform.sdhpsaddon.jalo.PSAddToCartAction">
+				<description>Service product add to cart action component.</description>
+			</itemtype>
+
+			<itemtype code="PSListAddToCartAction" autocreate="true" generate="true" extends="ListAddToCartAction"
+				jaloclass="de.hybris.platform.sdhpsaddon.jalo.PSListAddToCartAction">
+				<description>Service product list add to cart action component.</description>
+			</itemtype>
+			
+		</typegroup>
+		
+	</itemtypes>
+	
+</items>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="gensrc"/>
+	<classpathentry exported="true" kind="src" path="/acceleratorstorefrontcommons"/>
+	<classpathentry kind="src" path="/acceleratorservices"/>
+	<classpathentry kind="src" path="acceleratoraddon/web/src"/>
+	<classpathentry kind="src" path="/relationshipservices"/>
+	<classpathentry kind="src" path="/relationshipfacades"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="src" path="/addonsupport"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdhpsaddon"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

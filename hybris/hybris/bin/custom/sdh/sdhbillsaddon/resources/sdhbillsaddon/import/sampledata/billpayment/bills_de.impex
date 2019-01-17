@@ -1,0 +1,23 @@
+$lang=de
+
+INSERT_UPDATE PSBillMessage;psBillType(code)[unique=true];shortMessage[lang=$lang];longMessage[lang=$lang];messageCondition(code)[unique=true]
+ ;AGCA;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;AGCA;;;PART_PAYMENT_NOT_ALLOWED
+ ;BIREP;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;BIREP;;;PART_PAYMENT_NOT_ALLOWED
+ ;CORT;"Überfällige Rechnung <br> Zahlung nicht zulässig";Diese Rechnung ist überfällig. Zahlung nicht möglich.  ;LATE_PAYMENT_NOT_ALLOWED
+ ;CORT;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;KGFE;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;KGFE;;;PART_PAYMENT_NOT_ALLOWED
+ ;PKFN;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;PKFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;SCTF;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;SCTF;;;PART_PAYMENT_NOT_ALLOWED
+ ;SPFN;"Überfällige Rechnung <br> Zahlung nicht zulässig";Diese Rechnung ist überfällig. Zahlung nicht möglich.;LATE_PAYMENT_NOT_ALLOWED
+ ;SPFN;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;SPFN;;;PART_PAYMENT_NOT_ALLOWED
+ ;TXRP;"Überfällige Rechnung <br> Zahlung nicht zulässig";Diese Rechnung ist überfällig. Zahlung nicht möglich.;LATE_PAYMENT_NOT_ALLOWED
+ ;TXRP;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;TXRP;;;PART_PAYMENT_NOT_ALLOWED
+ ;WBIL;;Geben Sie einen Betrag kleiner oder gleich dem ausstehenden Betrag ein (Beispiel: 3456,50);OVER_PAYMENT_NOT_ALLOWED
+ ;WBIL;;;PART_PAYMENT_NOT_ALLOWED

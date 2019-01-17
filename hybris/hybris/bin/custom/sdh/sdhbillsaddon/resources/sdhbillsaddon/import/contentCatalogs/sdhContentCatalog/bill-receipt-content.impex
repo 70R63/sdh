@@ -1,0 +1,22 @@
+#
+# ImpEx for Public Sector Site Bill Receipts Content 
+#
+
+$contentCatalog=sdhContentCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$siteResource=jar:de.hybris.platform.sdhbillsaddon.constants.BilladdonConstants&/sdhbillsaddon/import/contentCatalogs/$contentCatalog
+$siteUid=sdh
+
+# Import modulegen config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$xslfoPackageName=$config-xslfoContextPackageName
+
+
+# CMS components velocity templates
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;$siteUid_billpayment_receipt;$xslfoPackageName.PSBillReceiptContext;
+
+# Media
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+;;$siteUid_bill_receipt_logo;publicSector_logo.jpg;$siteResource/images/pdf/publicSector_logo.jpg;image/jpeg;;"Public Accelerator, State of Rosebud"
+

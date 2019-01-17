@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><project name="sdhrelationshipsaddon_buildcallbacks">
+
+	<property location="${ext.sdhrelationshipsaddon.path}" name="ext.sdhrelationshipsaddon.mapperToPath"/>
+	<property name="addonStorefront" value="yacceleratorstorefront"/>
+
+	<if>
+		<os family="windows"/>
+		<then>
+			<propertyregex global="true" input="${ext.sdhrelationshipsaddon.path}" override="yes" property="ext.sdhrelationshipsaddon.mapperToPath" regexp="\\" replace="/"/>
+		</then>
+	</if>
+
+	<target description="Installing the sdhrelationshipsaddon AddOn" name="install.sdhrelationshipsaddon">
+		<sequential>
+			<set_relationship_addon_storefront addonstorefrontname="${addonStorefront}"/>
+			<sdhrelationshipsaddon_install_addons addonStorefrontAtt="${addonStorefront}"/>
+			<sdhrelationshipsaddon_lesscss addonStorefrontAtt="${addonStorefront}"/>
+		</sequential>
+	</target>
+
+	<macrodef name="set_relationship_addon_storefront">
+		<attribute name="addonstorefrontname"/>
+		<sequential>
+			<echo level="info" message="##### sdhrelationshipsaddon set storefront #####"/>
+			<if>
+				<and>
+					<isset property="sdhrelationshipsaddon.storefront"/>
+					<equals arg1="${sdhrelationshipsaddon.storefront}" arg2="yacceleratorstorefront"/>
+					<not>
+						<equals arg1="@{addonstorefrontname}" arg2="yacceleratorstorefront"/>
+					</not>
+				</and>
+				<then>
+					<echo>Setting global flag for a storefront extension @{addonstorefrontname} ...</echo>
+					<echo append="true" file="${HYBRIS_CONFIG_DIR}/local.properties">
+						#####################################################################################
+						# Global flag for an extension which will be a storefront extension 					#
+						#####################################################################################
+						sdhrelationshipsaddon.storefront=@{addonstorefrontname}
+					</echo>
+				</then>
+				<else>
+					<if>
+						<and>
+							<isset property="sdhrelationshipsaddon.storefront"/>
+							<not>
+								<equals arg1="@{addonstorefrontname}" arg2="yacceleratorstorefront"/>
+							</not>
+							<not>
+								<equals arg1="@{addonstorefrontname}" arg2="${sdhrelationshipsaddon.storefront}"/>
+							</not>
+						</and>
+						<then>
+							<echo>!!!The sdhrelationshipsaddon has already installed with ${sdhrelationshipsaddon.storefront}!!!</echo>
+							<fail>
+								*************************************************************
+								There is already other extension	${sdhrelationshipsaddon.storefront} defined as storefront,
+								please verify it and remove manually 'sdhrelationshipsaddon.storefront' property from local.properties.
+								*************************************************************
+							</fail>
+						</then>
+					</if>
+				</else>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhrelationshipsaddon_install_addons">
+		<attribute default="${sdhrelationshipsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+			<echo level="info" message="##### Relationship AddOn Installation : ${addonStorefrontAtt} #####"/>
+			<property file="${ext.sdhrelationshipsaddon.path}/addons.properties"/>
+
+			<echo level="info" message="##### sdhrelationshipsaddon storefront : ${sdhrelationshipsaddon.storefront}"/>
+
+			<echo level="info" message="##### sdhrelationshipsaddon storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<echo level="info" message="installing Relationship AddOns : ${sdhrelationshipsaddon.addons} for @{addonStorefrontAtt}"/>
+			<antcall target="addoninstall">
+				<param name="addonnames" value="${sdhrelationshipsaddon.addons}"/>
+				<param name="addonStorefront.yacceleratorstorefront" value="@{addonStorefrontAtt}"/>
+			</antcall>
+		</sequential>
+	</macrodef>
+
+
+	<macrodef name="sdhrelationshipsaddon_lesscss">
+		<attribute default="${sdhrelationshipsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+
+			<echo level="info" message="##### sdhrelationshipsaddon storefront : ${sdhrelationshipsaddon.storefront}"/>
+
+			<echo level="info" message="##### sdhrelationshipsaddon storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<echo level="info" message="Copy less files from ${ext.sdhrelationshipsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/_ui-src/responsive/  to  ${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/_ui-src/addons/sdhrelationshipsaddon/responsive/"/>
+
+			<copy todir="${ext.@{addonStorefrontAtt}.path}/web/webroot/WEB-INF/_ui-src/addons/sdhrelationshipsaddon/responsive/">
+				<fileset dir="${ext.sdhrelationshipsaddon.path}/acceleratoraddon/web/webroot/WEB-INF/_ui-src/responsive/" includes="**/*.less"/>
+			</copy>
+
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhrelationshipsaddon_after_build">
+		<attribute default="${sdhrelationshipsaddon.storefront}" name="addonStorefrontAtt"/>
+		<sequential>
+
+			<echo level="info" message="##### sdhrelationshipsaddon storefront : ${sdhrelationshipsaddon.storefront}"/>
+
+			<echo level="info" message="##### sdhrelationshipsaddon storefront attribute : @{addonStorefrontAtt}"/>
+			<echo level="info" message="##### Path to storefront @{addonStorefrontAtt} : ${ext.@{addonStorefrontAtt}.path}"/>
+
+			<echo message="sdhrelationshipsaddon_after_build"/>
+			<sdhrelationshipsaddon_lesscss addonStorefrontAtt="@{addonStorefrontAtt}"/>
+			<impexGenerate extname="sdhrelationshipsaddon"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="sdhrelationshipsaddon_after_clean">
+		<sequential>
+			<delete failonerror="false" file="${ext.sdhrelationshipsaddon.path}/resources-lang/touch_impexgen"/>
+		</sequential>
+	</macrodef>
+
+</project>

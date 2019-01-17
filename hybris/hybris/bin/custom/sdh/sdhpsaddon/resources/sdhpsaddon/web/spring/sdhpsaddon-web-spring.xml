@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+	<context:annotation-config/> 
+   
+	<bean name="checkoutLoginController" class="de.hybris.platform.sdhpsaddon.controllers.pages.CheckoutLoginController"/>
+	<bean name="checkoutController" class="de.hybris.platform.sdhpsaddon.controllers.pages.CheckoutController"/>
+	<bean name="cartPageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.CartPageController"/>
+	<bean name="loginPageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.LoginPageController"/>
+	<bean name="accountPageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.AccountPageController"/>
+	<bean name="homePageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.HomePageController"/>
+	<bean name="acceleratorRegisteredCheckoutLoginController" class="de.hybris.platform.sdhpsaddon.controllers.imported.PSAcceleratorRegisteredCheckoutLoginController"/>
+	<bean name="accountDocumentsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountDocumentsController"/>
+	<bean name="accountDraftsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountDraftsController"/>
+	<bean name="accountRelationshipBillsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountRelationshipBillsController"/>
+	<bean name="accountAssetsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountAssetsController"/>
+	
+	<context:component-scan base-package="de.hybris.platform.sdhpsaddon" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver">
+		<context:exclude-filter type="regex" expression="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.*" />
+	</context:component-scan>
+
+ 	<import resource="multi-step-checkout-config.xml" />
+   <import resource="spring-security-config.xml" />
+	
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultPublicsectoracceleratoraddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="sdhpsaddon"/>
+	</bean>
+
+	<bean id="defaultPublicsectoracceleratoraddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultPublicsectoracceleratoraddonJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getPublicsectoracceleratoraddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultPublicsectoracceleratoraddonBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	
+	<bean id="pSUiThemeResourceBeforeViewHandler" class="de.hybris.platform.sdhpsaddon.interceptors.beforeview.PSUiThemeResourceBeforeViewHandler">
+	    <property name="defaultThemeName" value="blue"/>
+	    <property name="psThemes">
+	        <map>
+	            <entry key="psalpha" value="_ui/addons/sdhpsaddon"/>
+	        </map>
+	        
+	    </property>
+	</bean>
+	
+	<bean id="PublicsectoracceleratoraddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getPublicsectoracceleratoraddonBeforeViewHandler"/>
+	</bean>
+	
+	<bean id="loginCheckoutAuthenticationSuccessHandler" class="de.hybris.platform.sdhpsaddon.security.PublicsectorStorefrontAuthenticationSuccessHandler" >
+		<property name="customerFacade" ref="customerFacade" />
+		<property name="defaultTargetUrl" value="/checkout/multi/"/>
+		<property name="uiExperienceService" ref="uiExperienceService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="cartFacade" ref="cartFacade"/>
+		<property name="psCartFacade" ref="psCartFacade" />
+		<property name="forceDefaultTargetForUiExperienceLevel">
+			<map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel" value-type="java.lang.Boolean">
+				<entry key="DESKTOP" value="true"/>
+				<entry key="MOBILE" value="true"/>
+			</map>
+		</property>
+		<property name="bruteForceAttackCounter" ref="publicsectorBruteForceAttackCounter" />
+		<property name="redirectStrategy" ref="commerceRedirectStrategy"/>
+		<property name="restrictedPages">
+			<list>
+				<value>/login/checkout</value>
+			</list>
+		</property>
+		<property name="listRedirectUrlsForceDefaultTarget">
+			<list></list>
+		</property>
+	</bean>
+	
+	<bean id="loginAuthenticationSuccessHandler" class="de.hybris.platform.sdhpsaddon.security.PublicsectorStorefrontAuthenticationSuccessHandler" >
+		<property name="customerFacade" ref="customerFacade" />
+		<property name="defaultTargetUrl" value="#{'responsive' == '${commerceservices.default.desktop.ui.experience}' ? '/' : '/my-account'}"/>
+		<property name="useReferer" value="true"/>
+		<property name="requestCache" ref="httpSessionRequestCache" />
+		<property name="uiExperienceService" ref="uiExperienceService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="cartFacade" ref="cartFacade"/>
+		<property name="psCartFacade" ref="psCartFacade" />
+		<property name="forceDefaultTargetForUiExperienceLevel">
+			<map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel" value-type="java.lang.Boolean">
+				<entry key="DESKTOP" value="false"/>
+				<entry key="MOBILE" value="false"/>
+			</map>
+		</property>
+        <property name="bruteForceAttackCounter" ref="publicsectorBruteForceAttackCounter" />
+		<property name="restrictedPages">
+			<list>
+				<value>/login</value>
+			</list>
+		</property>
+		<property name="listRedirectUrlsForceDefaultTarget">
+			<list></list>
+		</property>
+	</bean>
+	
+	<alias name="defaultSDHBruteForceAttackCounter" alias="bruteForceAttackCounter"/>
+    <bean id="defaultSDHBruteForceAttackCounter"  class="de.hybris.platform.sdhpsaddon.security.DefaultSDHBruteForceAttackCounter">
+        <constructor-arg name="maxFailedLogins" value="3" />
+        <constructor-arg name="cacheExpiration" value="60" />
+        <constructor-arg name="cacheSizeLimit" value="1000" />
+    </bean>
+
+	<!-- Login Failure Handlers -->
+	<alias name="defaulPublicsectorBruteForceAttackCounter" alias="publicsectorBruteForceAttackCounter"/>
+	<bean id="defaulPublicsectorBruteForceAttackCounter" class="de.hybris.platform.sdhpsaddon.security.impl.DefaultBruteForceAttackCounter">
+		<constructor-arg name="maxFailedLogins" value="5" />
+		<constructor-arg name="cacheExpiration" value="60" />
+		<constructor-arg name="cacheSizeLimit" value="1000" />
+	</bean>
+
+	<bean id="PublicsectoracceleratoraddonUIThemeBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="pSUiThemeResourceBeforeViewHandler"/>
+	</bean>
+	
+	<!--  Checkout Authentication Failure Handler  -->
+	<bean id="loginCheckoutAuthenticationFailureHandler" class="de.hybris.platform.sdhpsaddon.security.PSLoginAuthenticationFailureHandler" >
+       <property name="bruteForceAttackCounter" ref="publicsectorBruteForceAttackCounter" />
+		 <property name="defaultFailureUrl" value="/login/checkout?error=true"/>
+		 <property name="registeredCheckoutDefaultFailureUrl" value="/login/registeredcheckout?error=true"/>
+		 <property name="checkoutDefaultFailureUrl" value="/login/checkout?error=true"/>
+	</bean>
+	
+	<bean id="psAssetAttributesContext" class="de.hybris.platform.publicsectorservices.template.velocity.context.PSAssetAttributesContext"
+		scope="prototype">
+	</bean>
+
+	<bean depends-on="previewUrlResolverPageMappings" parent="mapMergeDirective">
+		<property name="sourceMap">
+			<map>
+				<entry key="register-checkout-login" value="/login/registeredcheckout"/>
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean id="psMyAccountBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
+		<property name="i18nService" ref="i18nService" />
+		<property name="parentBreadcrumbLinkPath" value="/my-account"/>
+		<property name="parentBreadcrumbResourceKey" value="header.link.account"/>
+	</bean>
+
+</beans>

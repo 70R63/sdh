@@ -1,0 +1,142 @@
+# 
+# ImpEx for Responsive Public Sector Site CMS Content 
+# 
+$contentCatalog=sdhContentCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$addOnExtensionName=sdhbillsaddon
+$jarResourceCmsCockpit=jar:de.hybris.platform.sdhbillsaddon.constants.BilladdonConstants&/$addOnExtensionName/import/cockpits/cmscockpit
+$picture=media(code, $contentCV) ;
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# Add component type to group
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;narrow;PSRetrieveABillComponent
+
+# Preview Image for use in the CMS Cockpit for special ContentPages
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;ContentPageModel__function_preview;text/gif;ContentPageModel__function_preview.gif;$jarResourceCmsCockpit/preview-images/ContentPageModel__function_preview.gif
+
+# Public Sector frontendTemplates
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;BillPaymentPageTemplate;Bill Summary Page Template;addon:/$addOnExtensionName/pages/bills/billPaymentSOPPage;ContentPage;false
+;;BillConfirmationPageTemplate; Bill Confirmation Page Template;addon:/$addOnExtensionName/pages/bills/billConfirmationPage;ContentPage;false
+
+# Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
+# The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;BillPaymentPageTemplate       ;$jarResourceCmsCockpit/structure-view/structure_billPaymentPageTemplate.vm
+;;BillConfirmationPageTemplate  ;$jarResourceCmsCockpit/structure-view/structure_billConfirmationPageTemplate.vm
+
+###### My-Bills 
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; SideContent-mybills ; Side Content Slot for My Account Bills ; true ; ; ; ;
+; ; BodyContent-mybills ; Body Content Slot for My Account Bills ; true ; AccountMyBillsComponent   ; ; ;
+
+# My-Bills ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'my-bills']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; SideContent-mybills ; SideContent ; ; SideContent-mybills ; ; ;
+; ; BodyContent-mybills ; BodyContent ; ; BodyContent-mybills ; ; ;
+
+###### My-All-Bills 
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; SideContent-myallbills ; Side Content Slot for My Account All Bills ; true ; ; ; ;
+; ; BodyContent-myallbills ; Body Content Slot for My Account All Bills ; true ; AccountMyAllBillsComponent   ; ; ;
+
+# My-All-Bills ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'all-bills']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; SideContent-myallbills ; SideContent ; ; SideContent-myallbills ; ; ;
+; ; BodyContent-myallbills ; BodyContent ; ; BodyContent-myallbills ; ; ;
+
+###### Retrieve Bills Page
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; RightSideContent-retrievebill ; Right Side Content Slot for Retrieve Bill Page ; true ;  ; ; ;
+; ; BodyContent-retrievebill ; Body Content Slot for Retrieve Bills Page ; true ; RetrieveBillComponent   ; ; ;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'retrieve-bill']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; RightSideContent-retrievebill ; RightSideContent ; ; RightSideContent-retrievebill ; ; ;
+; ; BodyContent-retrievebill ; BodyContent ; ; BodyContent-retrievebill ; ; ;
+
+# Bill Summary Page Templates
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='BillPaymentPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;SideContent;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Bill Confirmation Page Templates
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='BillConfirmationPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;SideContent;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+# Bind Content Slots to Multi Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='BillPaymentPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-BillSummaryPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-BillSummaryPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-BillSummaryPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-BillSummaryPage;Footer;;FooterSlot;true
+;;HeaderLinks-BillSummaryPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-BillSummaryPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-BillSummaryPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-BillSummaryPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-BillSummaryPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+# Bind Content Slots to Bill Confirmation Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='BillConfirmationPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-BillConfirmationPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-BillConfirmationPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-BillConfirmationPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-BillConfirmationPage;Footer;;FooterSlot;true
+;;HeaderLinks-BillConfirmationPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-BillConfirmationPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-BillConfirmationPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-BillConfirmationPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-BillConfirmationPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+# Content Pages
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
+;;bill-payment;Bill Page;BillPaymentPageTemplate;bill-payment
+;;retrieve-bill;Retrieve Bill Page;ContentPage2Template;retrieve-bill
+;;my-bills;Bills Page;AccountPageTemplate;my-bills
+;;all-bills; All Bills Page;AccountPageTemplate;all-bills
+;;bills-confirmation;Bill Confirmation Page;BillConfirmationPageTemplate;my-bills-confirmationPage
+
+# CMS Components
+INSERT_UPDATE PSRetrieveABillComponent; $contentCV[unique = true]; uid[unique = true]; name;retrieveBillUrl;&componentRef
+; ; PSRetrieveABillComponent ; Retrieve a bill component ;/bills/retrieve-bill;PSRetrieveABillComponent
+
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
+;;RetrieveBillComponent;Retrieve Bills Component;/WEB-INF/views/addons/$addOnExtensionName/responsive/pages/bills/retrieveBillPage.jsp;;RetrieveBillComponent
+
+# removed page path as it should be driven by the sdh addon
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+;;AccountMyBillsComponent;Account Bills Component;AccountMyBillsComponent
+;;AccountMyAllBillsComponent;Account All Bills Component;AccountMyAllBillsComponent
+
+# removed the url path as it should be driven by sdh addon
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;&linkRef;target(code)[default='sameWindow']
+;;MyBillsLink;MyBillsLink;MyBillsLink;
+
+# create navigation root node for my account & child nodes for the root node 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef;children(&nodeRef)[mode=append]
+;MyAccountNavNode;;My Account Nav;SiteRootNode;;MyAccountNavNode;MyBillsNavNode
+;MyBillsNavNode;;MyBillsNavNode;;;MyBillsNavNode
+
+# create cms navigation entry for navigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;MyBillsNavNodeEntry;;MyBillsNavNodeEntry;MyBillsNavNode;MyBillsLink;
+

@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry exported="true" kind="src" path="/xyformsservices"/>
+	<classpathentry exported="true" kind="src" path="/acceleratorcms"/>
+	<classpathentry exported="true" kind="lib" path="lib/axis-1.4.jar"/>
+	<classpathentry exported="true" kind="src" path="/solrserver"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="lib" path="lib/wsdl4j-1.6.2.jar"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="gensrc"/>
+	<classpathentry exported="true" kind="lib" path="lib/jaxrpc-api-1.1.jar"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
-
-				
-				
-				
-				
-	<classpathentry exported="true" kind="src" path="/acceleratorcms" />
-	<classpathentry exported="true" kind="src" path="/solrserver" />
-	<classpathentry exported="true" kind="lib" path="resources" />
-	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
-	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
-	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
-	<classpathentry exported="false" kind="src" path="/platform" />
-				
 </classpath>
-				

@@ -1,0 +1,72 @@
+##### SAMPLE BILL PAYMENT FOR DEMO PURPOSES ####
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# Macros / Replacement Parameter definitions
+$samplePDF=$storefrontContextRoot/_ui/addons/sdhbillsaddon/responsive/common/images/pdf/Sample_Bill_PDF.pdf 
+
+INSERT_UPDATE PSBillType;code[unique=true];externalCode;name;description;sendReminderEmail;sendConfirmationEmail;reminderDaysLag
+;TXRP;EXT_TXRP;Tax Return Payment;Tax Return Payment;TRUE;TRUE;15
+;SPFN;EXT_SPFN;Speeding Fine;Speeding Fine;TRUE;TRUE;14
+;CORT;EXT_CORT;Council Rate;Council Rate;TRUE;TRUE;30
+;SCTF;EXT_SCTF;School Camping trip fee;School Camping trip fee;TRUE;TRUE;10
+;BIREP;EXT_BIREP;Building Inspection Report;Building Inspection Report;TRUE;TRUE;15
+;KGFE;EXT_KGFE;Kindergarten fees;Kindergarten fees;TRUE;TRUE;10
+;WBIL;EXT_WBIL;Water Bill;Water Bill;TRUE;TRUE;15
+;AGCA;EXT_AGCA;Aged Care;Aged Care;TRUE;TRUE;30
+;PKFN;EXT_PKFN;Parking Fine;Parking Fine;TRUE;TRUE;10
+
+INSERT_UPDATE PSBillPayment;&userBillId;code[unique=true];billId;billUnitId;billDescription;billPaymentStatus(code);billDate[dateformat=dd/MM/yyyy];billDueDate[dateformat=dd/MM/yyyy];totalBillAmount;outstandingBillAmount;lastName;emailOnRecord;fullBillURL;billType(code);currency(isocode);customer(uid)
+;;10001;E-10001;;Tax Return Payment;UNPAID;2/08/2016;1/10/2016;2322.89;2322.89;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";TXRP;USD;jane.citizen@stateofrosebud.com
+;;10002;E-10002;;Tax Return Payment;UNPAID;15/07/2016;15/09/2016;1748.96;1748.96;Citizen;;"$samplePDF";TXRP;USD;
+;;10003;E-10003;;Tax Return Payment;UNPAID;1/01/2016;1/01/2019;297.45;297.45;Citizen;;"$samplePDF";TXRP;USD;
+;;10004;E-10004;;Speeding Fine;UNPAID;2/03/2016;11/09/2016;150.21;150.21;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com
+;;10005;E-10005;;Speeding Fine;UNPAID;3/04/2016;10/10/2018;200.13;200.13;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com
+;;10006;E-10006;;Speeding Fine;PAID;1/03/2016;1/09/2016;150.60;0.00;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jane.citizen@stateofrosebud.com
+;;10007;E-10007;;Speeding Fine;UNPAID;4/05/2016;2/11/2019;110.11;110.11;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;granny.citizen@stateofrosebud.com
+;;10008;E-10008;;Speeding Fine;PARTPAID;6/07/2016;21/09/2016;225.60;25.60;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;granny.citizen@stateofrosebud.com
+;;10009;E-10009;;Council Rate;UNPAID;8/11/2016;12/10/2016;409.87;409.87;Citizen;;"$samplePDF";CORT;USD;
+;;10010;E-10010;;Council Rate;PAID;17/07/2016;12/09/2016;400.50;0.00;Citizen;;"$samplePDF";CORT;USD;
+;;10011;E-10011;;Council Rate;UNPAID;11/08/2016;22/02/2019;306.46;306.46;Citizen;;"$samplePDF";CORT;USD;
+;;10012;E-10012;;Council Rate;PARTPAID;12/02/2016;1/02/2018;455.46;155.46;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";CORT;USD;jane.citizen@stateofrosebud.com
+;homer bill add;10013;E-10013;;Council Rate;PARTPAID;11/07/2016;1/03/2019;130.64;60.64;Citizen;;"$samplePDF";CORT;USD;
+;josephine bill add;10014;E-10014;;Council Rate;PARTPAID;5/05/2016;6/10/2016;220.79;20.79;Citizen;;"$samplePDF";CORT;USD;
+;;10015;E-10015;;School Camping trip fee;UNPAID;18/01/2016;21/04/2019;25.00;25.00;Citizen;;"$samplePDF";SCTF;USD;
+;;10016;E-10016;;School Camping trip fee;UNPAID;11/08/2016;22/05/2019;32.00;32.00;Citizen;;"$samplePDF";SCTF;USD;
+;;10017;E-10017;;School Camping trip fee;UNPAID;2/03/2016;18/06/2019;27.00;27.00;Citizen;;"$samplePDF";SCTF;USD;
+;;10018;E-10018;;Building Inspection Report;UNPAID;3/03/2016;1/07/2019;474.56;474.56;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";BIREP;USD;jane.citizen@stateofrosebud.com
+;;10019;E-10019;;Building Inspection Report;PARTPAID;2/03/2016;12/08/2019;450.46;50.46;Citizen;;"$samplePDF";BIREP;USD;
+;;10020;E-10020;;Building Inspection Report;UNPAID;4/03/2016;16/09/2019;450.12;450.12;Citizen;;"$samplePDF";BIREP;USD;
+;;10021;E-10021;;Building Inspection Report;PARTPAID;2/02/2016;13/10/2019;346.13;146.13;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";BIREP;USD;granny.citizen@stateofrosebud.com
+;;10022;E-10022;;Kindergarten fees;UNPAID;1/01/2016;20/12/2019;44.68;44.68;Citizen;;"$samplePDF";KGFE;USD;
+;;10023;E-10023;;Kindergarten fees;UNPAID;15/07/2016;20/12/2019;56.87;56.87;Citizen;;"$samplePDF";KGFE;USD;
+;;10024;E-10024;;Water Bill;UNPAID;1/01/2016;15/10/2016;214.46;214.46;Citizen;;"$samplePDF";WBIL;USD;
+;;10025;E-10025;;Water Bill;UNPAID;2/03/2016;7/10/2016;114.23;114.23;Citizen;;"$samplePDF";WBIL;USD;
+;;10026;E-10026;;Water Bill;PAID;3/04/2016;18/08/2016;213.46;0.00;Citizen;;"$samplePDF";WBIL;USD;
+;;10027;E-10027;;Water Bill;UNPAID;4/05/2016;5/01/2019;95.12;95.12;Citizen;;"$samplePDF";WBIL;USD;
+;;10028;E-10028;;Aged Care;UNPAID;6/07/2016;6/02/2019;2786.60;2786.60;Citizen;jane.citizen@stateofrosebud.com;"$samplePDF";AGCA;USD;jane.citizen@stateofrosebud.com
+;;10029;E-10029;;Aged Care;PAID;8/11/2016;22/05/2016;1244.54;3197.46;Citizen;granny.citizen@stateofrosebud.com;"$samplePDF";AGCA;USD;granny.citizen@stateofrosebud.com
+;;10030;E-10030;;Aged Care;UNPAID;2/03/2016;6/02/2019;3197.46;3197.46;Citizen;;"$samplePDF";AGCA;USD;
+;;10031;E-10031;;Speeding Fine;UNPAID;4/04/2016;23/09/2016;134.79;134.79;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";SPFN;USD;jason.citizen@stateofrosebud.com
+;;10032;E-10032;;Parking Fine;UNPAID;16/05/2016;14/03/2019;1200.97;1200.97;Citizen;jason.citizen@stateofrosebud.com;"$samplePDF";PKFN;USD;jason.citizen@stateofrosebud.com
+
+INSERT_UPDATE Customer	;groups(uid)		;uid[unique=true]					;name					;password[default=$defaultPassword]	; title(code); type(code); &customerId
+;customergroup	;josephine.citizen@stateofrosebud.com	;Josephine Citizen	;									;mr;GUEST;josephine.citizen@stateofrosebud.com
+;customergroup	;homer.citizen@stateofrosebud.com	;Homer Citizen	;									;mr;GUEST;homer.citizen@stateofrosebud.com
+
+
+
+
+## Sample Address
+INSERT_UPDATE Address;&addId;owner(&userBillId)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;josephine avenue1;josephine bill add;city Street;2000;false;Sydney;AU;true;true;true;true;Enterprise;User;josephine.citizen@stateofrosebud.com;MALE;;+61 2888 31098;;Hybris;;
+;homer avenue1;homer bill add;city Street;2000;false;Sydney;AU;true;true;true;true;Enterprise;User;homer.citizen@stateofrosebud.com;MALE;;+61 2888 31098;;Hybris;;
+
+
+INSERT_UPDATE CreditCardPaymentInfo	;code[unique=true]	;&payId[unique=true]	;user(&customerId)[unique=true]				;ccOwner				;number				;type(code)	;validFromMonth	;validFromYear	;validToMonth	;validToYear	;subscriptionId	;duplicate[default=false];saved[default=true];billingAddress(&addId)
+									;hpsapayer_josephine	;hpsapayer_josephine		;josephine.citizen@stateofrosebud.com	;Josephine Citizen	;4111111111111112	;visa		;1				;2010			;12				;2020			;1231			;;;josephine avenue1
+									;hpsapayer_homer		;hpsapayer_homer			;homer.citizen@stateofrosebud.com	;Homer Citizen	;4111111111111112	;visa		;1				;2010			;12				;2020			;1231			;;;homer avenue1

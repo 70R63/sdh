@@ -1,0 +1,47 @@
+<properties xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:oxf="http://www.orbeon.com/oxf/processors">
+
+	<!-- buttons for publicsector forms -->
+	<property as="xs:string" name="oxf.fr.detail.buttons.publicsector.*" value="save-final save-draft" />
+	
+	<property
+	  as="xs:string"
+	  name="oxf.fr.resource.*.*.en.buttons.save-draft"
+	  value="Save Draft"/>
+
+	<!-- forms and data for publicsector are stored in hybris -->
+	<property as="xs:string" name="oxf.fr.persistence.provider.publicsector.*.form" value="hybris" />
+	<property as="xs:string" name="oxf.fr.persistence.provider.publicsector.*.data" value="hybris" />
+
+	<!-- Form localization for en, fr, de and es languages  -->
+	<property as="xs:string" name="oxf.fr.available-languages.publicsector.*" value="en fr de es" />
+	
+	<!-- Customized save-final process to dispatch the publicsector-submit-order event -->
+	<property as="xs:string"  name="oxf.fr.detail.process.save-final.publicsector.*">
+        require-uploads
+        then validate-all
+        then save
+        then success-message("save-success")
+        then xf:dispatch(name = "publicsector-submit-order", targetid = "fr-form-model")
+        then navigate(uri =  "javascript:formPageNextPage()")
+        recover error-message("database-error")
+    </property>
+    
+    <property as="xs:string"  name="oxf.fr.detail.process.save-draft.publicsector.*">
+        require-uploads
+        then save
+        then success-message("save-success")        
+        then navigate(uri = "javascript:formMoveToDraftConfirmation()")
+        recover error-message("database-error")
+    </property>
+
+	<!-- Form is going to have autosave -->
+	<property as="xs:integer" name="oxf.fr.detail.autosave-delay.publicsector.Report-Graffiti-Form" value="5000" />
+
+	<!-- general CSS for every form in publicsector -->
+	<property as="xs:string" name="oxf.fr.css.custom.uri.publicsector.*" value="/forms/publicsector/_root/style.css" />
+
+	<property as="xs:string" name="oxf.xforms.format.input.date" value="[D01]-[M01]-[Y]" />
+
+	<property as="xs:string" name="oxf.fr.js.custom.uri.publicsector.*" value="/forms/publicsector/yform-addressbook.js"/>
+
+</properties>

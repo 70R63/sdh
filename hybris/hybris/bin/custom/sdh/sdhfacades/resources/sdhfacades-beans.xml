@@ -19,4 +19,29 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+	
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="numBP" type="String"/>
+		<property name="documentNumber" type="String"/>
+		<property name="documentType" type="String"/>
+		<property name="middleName" type="String"/>
+		<property name="secondLastName" type="String"/>
+		<property name="documentExpeditionDate" type="Date"/>
+		<property name="sex" type="String"/>
+		<property name="nationality" type="String"/>
+		<property name="birthDate" type="Date"/>
+		<property name="birthPlace" type="String"/>
+		<property name="originCountry" type="de.hybris.platform.commercefacades.user.data.CountryData"/>
+		<property name="useEmailForNotifications" type="Boolean"/>
+		<property name="useInformationForInstitutionalPurposes" type="Boolean"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+		<property name="useEmailForNotifications" type="Boolean"></property>
+		<property name="useInformationForInstitutionalPurposes" type="Boolean"></property>
+		<property name="numBP" type="String"></property>
+		<property name="documentNumber" type="String"/>
+		<property name="documentType" type="String"/>
+	</bean>
 </beans>

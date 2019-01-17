@@ -1,0 +1,56 @@
+#### SAMPLE CUSTOMERS FOR DEMO PURPOSES ####
+
+$defaultPassword = Rosebud$
+
+# Load the storefront context root config param
+$storefrontContextRoot = $config-storefrontContextRoot
+
+# Macros / Replacement Parameter definitions
+$samplePDF = $storefrontContextRoot/_ui/addons/billaddon/responsive/common/images/pdf/Sample_Bill_PDF.pdf
+
+
+INSERT_UPDATE Customer; groups(uid); uid[unique = true]; name; password[default = $defaultPassword]; title(code); &customerId; dob[dateformat = MM/dd/yyyy]; deactivationDate[dateformat = MM/dd/yyyy]; isMinor[default = false]; type (code)[default = REGISTERED]
+; customergroup ; jane.retention@stateofrosebud.com ; Jane Retention ; ; miss ; jane.retention@stateofrosebud.com ; 09/19/1977 ; 07/15/2017 ; ; ;
+
+
+INSERT_UPDATE Address; &addId; owner(Customer.uid)[unique = true]; streetname[unique = true]; postalcode[unique = true]; duplicate[unique = true]; town; country(isocode); billingAddress; contactAddress; shippingAddress; unloadingAddress; firstname; lastname; email; gender(code); middlename; phone1; title(code); url; company; fax; department
+; primary address ; jane.retention@stateofrosebud.com ; 230 Primary Street ; 1000 ; false ; Rosebud ; GB ; true ; true ; true ; true ; Jane ; Retention ; jane.retention@stateofrosebud.com ; FEMALE ; ; 0011234567 ; miss ; ; ;
+
+
+INSERT_UPDATE CreditCardPaymentInfo; code[unique = true]; &payId[unique = true]; user(uid)[unique = true]; ccOwner; number; type(code); validFromMonth; validFromYear; validToMonth; validToYear; subscriptionId; duplicate[default = false]; saved[default = true]
+; hpsapayer ; hpsapayer ; jane.retention@stateofrosebud.com ; Jane Retention ; 4111111111111112 ; visa ; 1 ; 2010 ; 12 ; 2020 ; 1231 ;
+
+#####
+INSERT_UPDATE PSPermissibleAreaItemType; code[unique = true]; visibleByUser; active; shareableType(code); &permissibleAreaItemType
+; addressBook     ; true ; true ; Address ; Address Book
+
+## Permissible Area Item Type without shareableType
+; personalDetails ; true ; true ;         ;
+; emailAddress    ; true ; true ;         ;
+
+#### SAMPLE RELATIONSHIPS ####
+
+INSERT_UPDATE PSRelationship; requestDateTime[dateformat = MM/dd/yyyy HH:mm]; sourceUser(uid)[unique = true]; targetUser(uid)[unique = true]; targetEmail; isSourcePoaHolder; isTargetPoaHolder; approvalDateTime[dateformat = MM/dd/yyyy HH:mm]; disApprovalDateTime[dateformat = dd/MM/yyyy HH:mm]; relationshipStatus(code)
+; 11/1/16 10:25      ; jane.retention@stateofrosebud.com   ; amanda.smith@stateofrosebud.com   ; ; FALSE ; FALSE ; 11/1/16 10:25 ; 12/1/16 23:04  ; INACTIVE
+; 9/23/2016 10:23:00 ; elizabeth.miller@stateofrosebud.com ; jane.retention@stateofrosebud.com ; ; FALSE ; FALSE ;               ;                ; PENDING
+; 1/1/16 11:45       ; jane.retention@stateofrosebud.com   ; jack.smith@stateofrosebud.com     ; ; FALSE ; FALSE ; 1/1/16 11:45  ;                ; ACTIVE
+; 1/1/16 12:00 PM    ; calvin.citizen@stateofrosebud.com   ; jane.retention@stateofrosebud.com ; ; FALSE ; FALSE ; 1/1/16 12:00  ;                ; ACTIVE
+; 1/1/16 8:32        ; jane.retention@stateofrosebud.com   ; carol.citizen@stateofrosebud.com  ; ; FALSE ; FALSE ; 1/1/16 8:32   ;                ; ACTIVE
+; 9/25/16 12:23 PM   ; matthew.miller@stateofrosebud.com   ; jane.retention@stateofrosebud.com ; ; FALSE ; FALSE ; 9/25/16 12:23 ;                ; ACTIVE
+
+
+INSERT_UPDATE PSPermission; approvalDateTime[dateformat = MM/dd/yyyy HH:mm]; disApprovalDateTime[dateformat = dd/MM/yyyy HH:mm][unique = true]; sourceUser(uid)[unique = true]; targetUser(uid)[unique = true]; permissionStatus(code); permissibleAreaItemType(&permissibleAreaItemType)[unique = true]; isRequested
+; 11/1/16 10:25     ; 6/18/16 07:53:34 ; amanda.smith@stateofrosebud.com     ; jane.retention@stateofrosebud.com ; INACTIVE ; Address Book ; TRUE
+; 1/28/16 07:49:36  ; 5/12/17 07:58    ; jane.retention@stateofrosebud.com   ; jason.citizen@stateofrosebud.com  ; INACTIVE ; Address Book ; FALSE
+; 2/20/16 08:32:36  ; 5/12/17 07:58:21 ; jane.retention@stateofrosebud.com   ; calvin.citizen@stateofrosebud.com ; INACTIVE ; Address Book ; FALSE
+; 11/21/16 07:23:12 ; 5/12/17 07:58:23 ; calvin.citizen@stateofrosebud.com   ; jane.retention@stateofrosebud.com ; INACTIVE ; Address Book ; TRUE
+; 5/6/16 11:45      ;                  ; joey.citizen                        ; jane.retention@stateofrosebud.com ; ACTIVE   ; Address Book ; TRUE
+; 6/27/16 06:43:00  ; 5/12/17 07:58:24 ; teresa.citizen@stateofrosebud.com   ; jane.retention@stateofrosebud.com ; INACTIVE ; Address Book ; TRUE
+; 11/12/16 08:38:14 ; 5/12/17 07:58:29 ; jane.retention@stateofrosebud.com   ; jack.smith@stateofrosebud.com     ; INACTIVE ; Address Book ; FALSE
+; 11/1/16 10:25     ; 1/15/16 07:16:15 ; jane.retention@stateofrosebud.com   ; amanda.smith@stateofrosebud.com   ; INACTIVE ; Address Book ; FALSE
+; 3/28/16 07:58:49  ; 5/12/17 07:58:15 ; elizabeth.miller@stateofrosebud.com ; jane.retention@stateofrosebud.com ; INACTIVE ; Address Book ; FALSE
+; 10/2/16 06:29:15  ; 5/12/17 07:58:16 ; matthew.miller@stateofrosebud.com   ; jane.retention@stateofrosebud.com ; INACTIVE ; Address Book ; FALSE
+; 11/1/16 10:23     ; 9/11/16 08:47:54 ; jane.retention@stateofrosebud.com   ; jack.smith@stateofrosebud.com     ; INACTIVE ; Address Book ; FALSE
+; 9/2/16 06:45:49   ; 5/12/17 07:58:24 ; jane.retention@stateofrosebud.com   ; matthew.miller@stateofrosebud.com ; INACTIVE ; Address Book ; TRUE
+; 11/1/16 10:23     ; 8/21/16 06:54:48 ; jack.smith@stateofrosebud.com       ; jane.retention@stateofrosebud.com ; INACTIVE ; Address Book ; TRUE
+; 5/6/16 11:45      ;                  ; jill.citizen                        ; jane.retention@stateofrosebud.com ; ACTIVE   ; Address Book ; TRUE

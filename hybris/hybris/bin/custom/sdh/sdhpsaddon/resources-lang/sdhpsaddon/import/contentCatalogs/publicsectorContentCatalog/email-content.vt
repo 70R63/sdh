@@ -1,0 +1,13 @@
+#set( $macroLang = $esc.java('$Lang') )
+#set( $macroContentCatalog = $esc.java('$contentCatalog') )
+#set( $contentCatalogVal = $esc.java('publicsectorContentCatalog') )
+#set( $macroContentCV = $esc.java('$contentCV') )
+#set( $contentCatalogVersionVal = $esc.java('catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]') )
+$macroContentCatalog=$contentCatalogVal
+$macroContentCV=$contentCatalogVersionVal
+
+# Import config properties into impex macros for modulegen
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Language
+$macroLang=$lang

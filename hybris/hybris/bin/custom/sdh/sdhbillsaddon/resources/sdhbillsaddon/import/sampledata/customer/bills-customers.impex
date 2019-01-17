@@ -1,0 +1,18 @@
+#### SAMPLE CUSTOMERS FOR DEMO PURPOSES ####
+
+$defaultPassword=Rosebud$
+
+INSERT_UPDATE Customer	;groups(uid)		;uid[unique=true]					;name					;password[default=$defaultPassword]	; title(code); type(code); &customerId
+;customergroup	;jane.citizen@stateofrosebud.com	;Jane Citizen	;									;miss;REGISTERED;jane.citizen@stateofrosebud.com
+;customergroup	;granny.citizen@stateofrosebud.com	;Granny Citizen	;									;mrs;REGISTERED;granny.citizen@stateofrosebud.com
+;customergroup	;jason.citizen@stateofrosebud.com	;Jason Citizen	;									;mr;REGISTERED;jason.citizen@stateofrosebud.com
+;customergroup	;josephine.citizen@stateofrosebud.com	;Josephine Citizen	;							;mr;GUEST;josephine.citizen@stateofrosebud.com
+;customergroup	;homer.citizen@stateofrosebud.com	;Homer Citizen	;									;mr;GUEST;homer.citizen@stateofrosebud.com
+
+INSERT_UPDATE Address;&addId			;owner(Customer.uid)[unique=true]	;streetname[unique=true]	;postalcode[unique=true]	;duplicate[unique=true]	;town		;country(isocode)	;billingAddress	;contactAddress	;shippingAddress	;unloadingAddress	;firstname	;lastname		;email								;gender(code)	;middlename		;phone1			;title(code)	;url	;company;fax;department
+;primary address	;jane.citizen@stateofrosebud.com	;230 Primary Street				;1000						;false				;Rosebud	;GB					;true			;true			;true				;true				;Jane	;Citizen			;jane.citizen@stateofrosebud.com	;FEMALE			;			;0011234567		;miss			;		;		;
+;test_primary_address;automationtestuser@stateofrosebud.com	;230 Primary Street			;1000						;false				;Rosebud	;GB					;true			;true			;true				;true				;Automation	;Citizen		;automationtestuser@stateofrosebud.com;MALE			;			;0011234567		;mr				;		;		;
+
+INSERT_UPDATE CreditCardPaymentInfo	;code[unique=true]	;&payId[unique=true]	;user(uid)[unique=true]				;ccOwner				;number				;type(code)	;validFromMonth	;validFromYear	;validToMonth	;validToYear	;subscriptionId	;duplicate[default=false];saved[default=true]
+;hpsapayer			;hpsapayer				;jane.citizen@stateofrosebud.com	;Jane Citizen	;************1112	;visa		;1				;2010			;12				;2020			;1231			;
+;test_hpsapayer			;test_hpsapayer		;automationtestuser@stateofrosebud.com	;Automation Citizen	;************1112;visa	;1				;2010			;12				;2020			;1231			;

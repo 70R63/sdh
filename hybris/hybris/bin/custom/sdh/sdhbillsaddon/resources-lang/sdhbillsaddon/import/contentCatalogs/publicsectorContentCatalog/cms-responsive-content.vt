@@ -1,0 +1,40 @@
+#set( $macroLang=$esc.java('$lang') )
+#set( $contentPage = $query.load('cms-responsive-content', 'ContentPage') )
+#set( $psRetrieveABillComponent = $query.load('cms-responsive-content', 'PSRetrieveABillComponent') )
+#set( $cmsLinkComponent = $query.load('cms-responsive-content', 'CMSLinkComponent') )
+#set( $macroContentCatalog = $esc.java('$contentCatalog') )
+#set( $contentCatalog = $esc.java('publicsectorContentCatalog') )
+#set( $macroCatalogVersion= $esc.java('$contentCV') )
+#set( $contentCV = $esc.java('catalogVersion(catalog(id[default=''publicsectorContentCatalog'']),version[default=''Staged''])[unique=true,default=''publicsectorContentCatalog:Staged'']') )
+#set( $macroStorefrontContextRoot = $esc.java('$storefrontContextRoot') )
+#set( $storefrontContextRoot = $esc.java('$config-storefrontContextRoot') )
+#set( $macroPicture = $esc.java('$picture') )
+#set( $picture = $esc.java('media(code, $contentCV)') )
+#set( $macroMedias = $esc.java('$medias') )
+#set( $medias = $esc.java('medias(code, $contentCV)') )
+#set( $macroMediaContainer = $esc.java('$mediaContainer') )
+#set( $mediaContainer= $esc.java('media(qualifier, $contentCV)[lang=$macroLang])') )
+$macroContentCatalog=$contentCatalog
+$macroCatalogVersion = $contentCV
+$macroPicture = $picture
+$macroMedias = $medias
+$macroLang=$lang
+$macroMediaContainer = $mediaContainer
+# Load the storefront context root config param
+$macroStorefrontContextRoot=$storefrontContextRoot
+
+UPDATE ContentPage;$macroCatalogVersion;uid[unique=true];title[lang=$macroLang];keywords[lang=$macroLang];description[lang=$macroLang]
+#foreach( $row in $contentPage ) 
+;;$row.key;$row.values.title;$row.values.keywords;$row.values.description
+#end
+
+UPDATE PSRetrieveABillComponent;$macroCatalogVersion;uid[unique = true];title[lang=$macroLang];description[lang=$macroLang];retrieveBillButtonLabel[lang=$macroLang];
+#foreach( $row in $psRetrieveABillComponent ) 
+;;$row.values.uid;$row.values.title;$row.values.description;$row.values.retrieveBillButtonLabel;
+#end
+
+# update linkname
+UPDATE CMSLinkComponent;$macroCatalogVersion;uid[unique=true];linkName[lang=$macroLang]
+#foreach( $row in $cmsLinkComponent ) 
+;;$row.key;$row.values.linkName
+#end

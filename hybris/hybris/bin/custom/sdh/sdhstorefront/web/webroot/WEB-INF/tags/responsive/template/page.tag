@@ -3,11 +3,11 @@
 <%@ attribute name="pageCss" required="false" fragment="true"%>
 <%@ attribute name="pageScripts" required="false" fragment="true"%>
 <%@ attribute name="hideHeaderLinks" required="false"%>
-<%@ taglib prefix="template" tagdir="/WEB-INF/tags/addons/publicsectoracceleratoraddon/responsive/template"%>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/template"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="header" tagdir="/WEB-INF/tags//addons/publicsectoracceleratoraddon/responsive/common/header"%>
-<%@ taglib prefix="footer" tagdir="/WEB-INF/tags/addons/publicsectoracceleratoraddon/responsive/common/footer"%>
-<%@ taglib prefix="common" tagdir="/WEB-INF/tags/addons/publicsectoracceleratoraddon/responsive/common"%>
+<%@ taglib prefix="header" tagdir="/WEB-INF/tags//addons/sdhpsaddon/responsive/common/header"%>
+<%@ taglib prefix="footer" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/common/footer"%>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/common"%>
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/responsive/cart"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 

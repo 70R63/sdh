@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:n1="urn:sap-com:document:sap:rfc:functions">
+  <wsdl:documentation>
+    <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl"/>
+  </wsdl:documentation>
+  <wsp:UsingPolicy wsdl:required="true"/>
+  <wsp:Policy wsu:Id="BN__ZWS_HYSEND_MAIL">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedMimeSerialization wsp:Optional="true" xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+      </wsp:All>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" wsp:Optional="true" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BN__ZWS_HYSEND_MAIL_soap12">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedMimeSerialization wsp:Optional="true" xmlns:saptrnbnd="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+      </wsp:All>
+      <wsp:All>
+        <sapattahnd:Enabled xmlns:sapattahnd="http://www.sap.com/710/features/attachment/">false</sapattahnd:Enabled>
+        <saptrnbnd:OptimizedXMLTransfer uri="http://xml.sap.com/2006/11/esi/esp/binxml" wsp:Optional="true" xmlns:saptrnbnd="http://www.sap.com/webas/710/soap/features/transportbinding/"/>
+        <wsaw:UsingAddressing wsp:Optional="true" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="IF__ZWS_HYSEND_MAIL">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
+          <sapsession:enableSession>false</sapsession:enableSession>
+        </sapsession:Session>
+        <sapcentraladmin:CentralAdministration wsp:Optional="true" xmlns:sapcentraladmin="http://www.sap.com/webas/700/soap/features/CentralAdministration/">
+          <sapcentraladmin:BusinessApplicationID>0050568B758C1EE985B71E1D19CCC255</sapcentraladmin:BusinessApplicationID>
+        </sapcentraladmin:CentralAdministration>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="OP__ZcrmfHysendMail">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
+        <sapcomhnd:enableCommit xmlns:sapcomhnd="http://www.sap.com/NW05/soap/features/commit/">false</sapcomhnd:enableCommit>
+        <sapblock:enableBlocking xmlns:sapblock="http://www.sap.com/NW05/soap/features/blocking/">true</sapblock:enableBlocking>
+        <saprmnw05:enableWSRM xmlns:saprmnw05="http://www.sap.com/NW05/soap/features/wsrm/">false</saprmnw05:enableWSRM>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+      <xsd:simpleType name="char2">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="2"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char241">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="241"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string">
+        <xsd:restriction base="xsd:string"/>
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:n0="urn:sap-com:document:sap:rfc:functions">
+      <xsd:import namespace="urn:sap-com:document:sap:rfc:functions"/>
+      <xsd:element name="ZcrmfHysendMail">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="PiEmail" type="n0:char241"/>
+            <xsd:element name="PiMessage" type="n0:string"/>
+            <xsd:element name="PiSubject" type="n0:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZcrmfHysendMailResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EpCode" type="n0:char2"/>
+            <xsd:element name="EpMessage" type="n0:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ZcrmfHysendMail">
+    <wsdl:part name="parameters" element="tns:ZcrmfHysendMail"/>
+  </wsdl:message>
+  <wsdl:message name="ZcrmfHysendMailResponse">
+    <wsdl:part name="parameter" element="tns:ZcrmfHysendMailResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="ZWS_HYSEND_MAIL">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#IF__ZWS_HYSEND_MAIL"/>
+    </wsp:Policy>
+    <wsdl:operation name="ZcrmfHysendMail">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP__ZcrmfHysendMail"/>
+      </wsp:Policy>
+      <wsdl:input message="tns:ZcrmfHysendMail"/>
+      <wsdl:output message="tns:ZcrmfHysendMailResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZWS_HYSEND_MAIL" type="tns:ZWS_HYSEND_MAIL">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ZWS_HYSEND_MAIL"/>
+    </wsp:Policy>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="ZcrmfHysendMail">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZWS_HYSEND_MAIL:ZcrmfHysendMailRequest" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ZWS_HYSEND_MAIL_soap12" type="tns:ZWS_HYSEND_MAIL">
+    <wsp:Policy>
+      <wsp:PolicyReference URI="#BN__ZWS_HYSEND_MAIL_soap12"/>
+    </wsp:Policy>
+    <wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="ZcrmfHysendMail">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZWS_HYSEND_MAIL:ZcrmfHysendMailRequest" style="document"/>
+      <wsdl:input>
+        <wsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <wsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZWS_HYSEND_MAIL">
+    <wsdl:port name="ZWS_HYSEND_MAIL" binding="tns:ZWS_HYSEND_MAIL">
+      <soap:address location="http://SDHCICRMDEV.shd.gov.co:8000/sap/bc/srt/rfc/sap/zws_hysend_mail/100/zws_hysend_mail/zws_hysend_mail"/>
+    </wsdl:port>
+    <wsdl:port name="ZWS_HYSEND_MAIL_soap12" binding="tns:ZWS_HYSEND_MAIL_soap12">
+      <wsoap12:address location="http://SDHCICRMDEV.shd.gov.co:8000/sap/bc/srt/rfc/sap/zws_hysend_mail/100/zws_hysend_mail/zws_hysend_mail"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -13,6 +13,7 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.ForgottenPwdForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdatePwdForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.UpdatePasswordFormValidator;
@@ -20,8 +21,9 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHUpdatePasswordFormValidator;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -55,6 +57,8 @@ public class PasswordResetPageController extends AbstractPageController
 	private static final String REDIRECT_HOME = "redirect:/";
 	private static final String UPDATE_PWD_CMS_PAGE = "updatePassword";
 
+	private static final String ACTIVATE_ACCOUNT_CMS_PAGE = "ActivateAccountPage";
+
 	@Resource(name = "customerFacade")
 	private CustomerFacade customerFacade;
 
@@ -64,6 +68,11 @@ public class PasswordResetPageController extends AbstractPageController
 	@Resource(name = "updatePasswordFormValidator")
 	private UpdatePasswordFormValidator updatePasswordFormValidator;
 
+	@Resource(name = "sdhUpdatePasswordFormValidator")
+	private SDHUpdatePasswordFormValidator sdhUpdatePasswordFormValidator;
+
+	@Resource(name = "sdhCustomerFacade")
+	private SDHCustomerFacade sdhCustomerFacade;
 
 	@RequestMapping(value = "/request", method = RequestMethod.GET)
 	public String getPasswordRequest(final Model model) throws CMSItemNotFoundException
@@ -98,8 +107,8 @@ public class PasswordResetPageController extends AbstractPageController
 	public String getExternalPasswordRequest(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute(new ForgottenPwdForm());
-		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs(FORGOTTEN_PWD_TITLE));
 		return ControllerConstants.Views.Pages.Password.PasswordResetRequest;
 	}
@@ -107,8 +116,8 @@ public class PasswordResetPageController extends AbstractPageController
 	@RequestMapping(value = "/request/external/conf", method = RequestMethod.GET)
 	public String getExternalPasswordRequestConf(final Model model) throws CMSItemNotFoundException
 	{
-		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs(FORGOTTEN_PWD_TITLE));
 		return ControllerConstants.Views.Pages.Password.PasswordResetRequestConfirmation;
 	}
@@ -117,8 +126,8 @@ public class PasswordResetPageController extends AbstractPageController
 	public String externalPasswordRequest(@Valid final ForgottenPwdForm form, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
-		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs(FORGOTTEN_PWD_TITLE));
 
 		if (bindingResult.hasErrors())
@@ -158,11 +167,40 @@ public class PasswordResetPageController extends AbstractPageController
 		return ControllerConstants.Views.Pages.Password.PasswordResetChangePage;
 	}
 
+	@RequestMapping(value = "/activateAccount", method = RequestMethod.GET)
+	public String getActivateAccount(@RequestParam(required = false)
+	final String token, final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		boolean accountActivated = true;
+
+		if (StringUtils.isBlank(token))
+		{
+			accountActivated = false;
+		}
+		else
+		{
+			try
+			{
+				sdhCustomerFacade.activateAccount(token);
+			}
+			catch (final TokenInvalidatedException e)
+			{
+				accountActivated = false;
+			}
+		}
+
+		model.addAttribute("accountActivated", accountActivated);
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ACTIVATE_ACCOUNT_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ACTIVATE_ACCOUNT_CMS_PAGE));
+		model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs("activate.account.title"));
+		return getViewForPage(model);
+	}
+
 	@RequestMapping(value = "/change", method = RequestMethod.POST)
 	public String changePassword(@Valid final UpdatePwdForm form, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		getUpdatePasswordFormValidator().validate(form, bindingResult);
+		sdhUpdatePasswordFormValidator.validate(form, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			prepareErrorMessage(model, UPDATE_PWD_CMS_PAGE);
@@ -194,7 +232,7 @@ public class PasswordResetPageController extends AbstractPageController
 
 	/**
 	 * Prepares the view to display an error message
-	 * 
+	 *
 	 * @throws CMSItemNotFoundException
 	 */
 	protected void prepareErrorMessage(final Model model, final String page) throws CMSItemNotFoundException
