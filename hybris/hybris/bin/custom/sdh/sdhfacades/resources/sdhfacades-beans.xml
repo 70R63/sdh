@@ -44,4 +44,9 @@
 		<property name="documentNumber" type="String"/>
 		<property name="documentType" type="String"/>
 	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.OptionsData">	
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
 </beans>
