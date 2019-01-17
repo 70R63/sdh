@@ -46,9 +46,8 @@ public class MiRitForm
 	private String direccionNotificacion;
 	private String direccionContacto;
 
-	private String telefonoFijo;
+	private String telefonoPricipal;
 	private String extensionTelefono;
-	private String telefonoCelular;
 
 	private Boolean useEmailForNotifications;
 	private Boolean useInformationForInstitutionalPurposes;
@@ -518,22 +517,6 @@ public class MiRitForm
 		this.direccionContacto = direccionContacto;
 	}
 
-	/**
-	 * @return the telefonoFijo
-	 */
-	public String getTelefonoFijo()
-	{
-		return telefonoFijo;
-	}
-
-	/**
-	 * @param telefonoFijo
-	 *           the telefonoFijo to set
-	 */
-	public void setTelefonoFijo(final String telefonoFijo)
-	{
-		this.telefonoFijo = telefonoFijo;
-	}
 
 	/**
 	 * @return the extensionTelefono
@@ -552,21 +535,22 @@ public class MiRitForm
 		this.extensionTelefono = extensionTelefono;
 	}
 
+
 	/**
-	 * @return the telefonoCelular
+	 * @return the telefonoPricipal
 	 */
-	public String getTelefonoCelular()
+	public String getTelefonoPricipal()
 	{
-		return telefonoCelular;
+		return telefonoPricipal;
 	}
 
 	/**
-	 * @param telefonoCelular
-	 *           the telefonoCelular to set
+	 * @param telefonoPricipal
+	 *           the telefonoPricipal to set
 	 */
-	public void setTelefonoCelular(final String telefonoCelular)
+	public void setTelefonoPricipal(final String telefonoPricipal)
 	{
-		this.telefonoCelular = telefonoCelular;
+		this.telefonoPricipal = telefonoPricipal;
 	}
 
 	/**

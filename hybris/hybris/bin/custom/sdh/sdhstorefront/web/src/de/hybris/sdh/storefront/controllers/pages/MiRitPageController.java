@@ -27,6 +27,8 @@ import de.hybris.sdh.storefront.forms.MiRitForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -36,6 +38,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -62,6 +65,15 @@ public class MiRitPageController extends AbstractPageController
 
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@ModelAttribute("socialNetworks")
+	public List<String> getSocialNetworks()
+	{
+		final List<String> socialNetworks = Arrays.asList("FACEBOOK", "INSTAGRAM", "LINKEDIN", "SKYPE", "TWITTER", "WHATSAPP",
+				"YOUTUBE");
+
+		return socialNetworks;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String showView(final Model model,
@@ -244,22 +256,8 @@ public class MiRitPageController extends AbstractPageController
 
 				for (final ContribTelefono eachTelefono : sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono())
 				{
-
-					if ("1".equalsIgnoreCase(eachTelefono.getTEL_TIPO()))
-					{
-
-						miRitForm.setTelefonoFijo(eachTelefono.getTEL_NUMBER());
-						miRitForm.setExtensionTelefono(eachTelefono.getTEL_EXTENS());
-
-					}
-					else
-					{
-
-						miRitForm.setTelefonoCelular(eachTelefono.getTEL_NUMBER());
-
-					}
-
-
+					miRitForm.setTelefonoPricipal(eachTelefono.getTEL_NUMBER());
+					miRitForm.setExtensionTelefono(eachTelefono.getTEL_EXTENS());
 				}
 
 			}
@@ -273,7 +271,7 @@ public class MiRitPageController extends AbstractPageController
 			}
 
 			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
 			{
 				miRitForm.setPublicidadExt(sdhConsultaContribuyenteBPResponse.getPublicidadExt().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumResolu())).collect(Collectors.toList()));
