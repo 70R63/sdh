@@ -7,15 +7,8 @@
 
 package de.hybris.sdh.core.soap.impl;
 
-import de.hybris.platform.servicelayer.config.ConfigurationService;
-
-import javax.annotation.Resource;
-
 public class ZWS_HYSEND_MAIL_ServiceLocator extends org.apache.axis.client.Service implements de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_Service {
 
-	@Resource(name = "configurationService")
-	private ConfigurationService configurationService;
-	
     public ZWS_HYSEND_MAIL_ServiceLocator() {
     }
 
@@ -29,7 +22,7 @@ public class ZWS_HYSEND_MAIL_ServiceLocator extends org.apache.axis.client.Servi
     }
 
     // Use to get a proxy class for ZWS_HYSEND_MAIL
-    private java.lang.String ZWS_HYSEND_MAIL_address = configurationService.getConfiguration().getString("sdh.soapcrmsendemail.urlhttp");
+    private java.lang.String ZWS_HYSEND_MAIL_address = "http://SDHCICRMDEV.shd.gov.co:8000/sap/bc/srt/rfc/sap/zws_hysend_mail/100/zws_hysend_mail/zws_hysend_mail";
 
     public java.lang.String getZWS_HYSEND_MAILAddress() {
         return ZWS_HYSEND_MAIL_address;

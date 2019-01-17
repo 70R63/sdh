@@ -20,6 +20,8 @@
 
 		<coremodule generated="true" manager="de.hybris.sdh.core.jalo.SdhCoreManager" packageroot="de.hybris.sdh.core"/>
 
+		
+		
 		<meta key="backoffice-module" value="true"/>
 	</extension>
 

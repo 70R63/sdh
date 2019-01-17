@@ -17,7 +17,7 @@
 			<registration:registrationInstructionsSection/>
 		</c:when>
 		<c:when test="${currentSection eq 'questionsSection' }">
-			<registration:questionsSection />
+			<registration:questionsSection currentQuestion="${currentQuestion }" currentQuestionDescription="${currentQuestionDescription }" />
 		</c:when>
 		<c:when test="${currentSection eq 'personalDataSection' }">
 			<registration:personalDataSection/>
