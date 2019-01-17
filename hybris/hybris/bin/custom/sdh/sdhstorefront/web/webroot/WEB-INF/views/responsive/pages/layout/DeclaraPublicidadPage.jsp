@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="account-section-content">
 			<div class="account-section-form">
-				<c:out value="${action}" />
+			<!--	<c:out value="${action}" />-->
 				<form:form action="DeclaraPublicidadPage" method="post"
 					commandName="declaraPublicidadpage">
 					<DeclaraPubli:DecPuGeneral/>
