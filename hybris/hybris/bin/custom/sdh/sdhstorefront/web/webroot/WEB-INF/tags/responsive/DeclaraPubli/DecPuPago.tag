@@ -19,18 +19,12 @@
 <div class="row">
 	<div class="col-sm-6 col-sm-push-6">
 		<div class="accountActions">
-<<<<<<< HEAD
 			<button class="btn btn-primary btn-lg" type="button">
 				<spring:theme code="declaracion.publicidad.button.gendecl" />
-=======
-			<button type="button" class="btn btn-default btn-block">
-				<spring:theme code="declaracion.publicidad.button.gendecl"/>
->>>>>>> dev
 			</button>
 		</div>
 
 		<div class="accountActions">
-<<<<<<< HEAD
 			<button class="btn btn-primary btn-lg" type="button">
 				<spring:theme code="declaracion.publicidad.button.crenewdec" />
 			</button>
@@ -53,23 +47,8 @@
 		</div>
 
 	</div>
-=======
-			<button type="button" class="btn btn-default btn-block">
-				<spring:theme code="declaracion.publicidad.button.crenewdec"/>
-			</button>
-		</div>
-		<div class="accountActions">
-			<button type="button" class="btn btn-default btn-block">
-				<spring:theme code="declaracion.publicidad.button.presdec"/>
-			</button>
-		</div>
-		<div class="accountActions">
-			<button type="button" class="btn btn-default btn-block">
-				<spring:theme code="declaracion.publicidad.button.pag"/>
-			</button>
-		</div>
-	</div>
+
+
 
 </div>
 
->>>>>>> dev
