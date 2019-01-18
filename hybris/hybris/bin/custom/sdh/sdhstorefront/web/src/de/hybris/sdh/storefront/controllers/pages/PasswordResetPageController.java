@@ -22,6 +22,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHUpdatePasswordFormValidator;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
 
 import javax.annotation.Resource;
@@ -66,6 +67,9 @@ public class PasswordResetPageController extends AbstractPageController
 
 	@Resource(name = "updatePasswordFormValidator")
 	private UpdatePasswordFormValidator updatePasswordFormValidator;
+
+	@Resource(name = "sdhUpdatePasswordFormValidator")
+	private SDHUpdatePasswordFormValidator sdhUpdatePasswordFormValidator;
 
 	@Resource(name = "sdhCustomerFacade")
 	private SDHCustomerFacade sdhCustomerFacade;
@@ -196,7 +200,7 @@ public class PasswordResetPageController extends AbstractPageController
 	public String changePassword(@Valid final UpdatePwdForm form, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		getUpdatePasswordFormValidator().validate(form, bindingResult);
+		sdhUpdatePasswordFormValidator.validate(form, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			prepareErrorMessage(model, UPDATE_PWD_CMS_PAGE);

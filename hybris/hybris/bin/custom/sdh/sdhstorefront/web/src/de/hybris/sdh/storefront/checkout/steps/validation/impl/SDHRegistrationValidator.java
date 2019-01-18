@@ -64,6 +64,7 @@ public class SDHRegistrationValidator implements Validator
 		validateConfirmEmail(errors, confirmEmail);
 		validatePassword(errors, pwd);
 		compareEmails(errors, email, confirmEmail);
+		comparePasswords(errors, pwd, checkPwd);
 		//		validateTermsAndConditions(errors, termsCheck);
 	}
 
