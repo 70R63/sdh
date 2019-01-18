@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sobreTasaGasolina"
-	tagdir="/WEB-INF/tags/responsive/sobreTasaGasolina"%>
+	tagdir="/WEB-INF/tags/responsive/sobretasaGasolina"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
