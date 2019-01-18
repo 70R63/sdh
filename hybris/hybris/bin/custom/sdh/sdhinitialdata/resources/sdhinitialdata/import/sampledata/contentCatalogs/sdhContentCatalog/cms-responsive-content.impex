@@ -111,7 +111,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; "/contribuyentes2/predialunificado" ;;;;;
 ; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes2/publicidadexterior" ;;;;;
 ; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes2/sobrevehiculosautomotores" ;;;;;
-; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; http://www.stateofrosebud.com/about ;;;;;
+; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; "/contribuyentes/sobretasa-gasolina" ;;;;;
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
@@ -1427,3 +1427,47 @@ INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];u
 ;;CalendarioTributarioLink Anonymous;CalendarioTributarioLinkAnonymousRestriction;anonymous;CalendarioTributarioLink
 ;;IndiceRecaudacionLink Anonymous;IndiceRecaudacionLinkAnonymousRestriction;anonymous;IndiceRecaudacionLink
 ;;PredialLink Anonymous;PredialLinkAnonymousRestriction;anonymous;PredialLink
+
+
+
+
+#->INI dev-federico Agregar paginas para impuesto sobretasagasolina 17/01/2019
+# USE CTRL-SPACE for type-ahead support 
+$productCatalogSDH=sdhProductCatalog
+$contentCatalogSDH=sdhContentCatalog
+#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Staged])[default=$productCatalogSDH:Staged] 
+$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
+
+INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;sobretasa-gasolina 		;Sobretasa Gasolina 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/contribuyentes/sobretasa-gasolina
+
+INSERT_UPDATE ContentSlotForPage;$productCVSDH[unique=true];uid[unique=true]				;position[unique=true]	;page(uid,$productCVSDH)[unique=true][default='sobretasa-gasolina']		;contentSlot(uid,$productCVSDH)[unique=true]		;;;
+								;						;SideContent-SobretasaGasolina		;SideContent			;																		;SideContent-SobretasaGasolina						;;;
+								;						;BodyContent-SobretasaGasolina		;BodyContent			;																		;BodyContent-SobretasaGasolina						;;;
+
+INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-SobretasaGasolina	;Side Content Slot for Sobretasa Gasolina		;true	;								;;;
+			 				;							;BodyContent-SobretasaGasolina	;Body Content Slot for Sobretasa Gasolina		;true	;SobretasaGasolinaComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
+				 					;							;SobretasaGasolinaComponent	;SobretasaGasolinaComponent	;/WEB-INF/views/responsive/pages/impuestoGasolina/sobretasaGasolina.jsp					;ViewOrderAction:$contentCatalogSDH:Staged	;SobretasaGasolinaComponent
+
+#$productCatalogSDH=sdhProductCatalog
+#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Staged])[default=$productCatalogSDH:Staged] 
+#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
+
+INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;declaracion-gasolina 		;Declaracion Gasolina 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/contribuyentes/sobretasa-gasolina/declaracion-gasolina
+
+INSERT_UPDATE ContentSlotForPage;$productCVSDH[unique=true];uid[unique=true]				;position[unique=true]	;page(uid,$productCVSDH)[unique=true][default='declaracion-gasolina']	;contentSlot(uid,$productCVSDH)[unique=true]		;;;
+								;						;SideContent-DeclaracionGasolina	;SideContent			;																		;SideContent-DeclaracionGasolina					;;;
+								;						;BodyContent-DeclaracionGasolina	;BodyContent			;																		;BodyContent-DeclaracionGasolina					;;;
+
+INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-DeclaracionGasolina	;Side Content Slot for Declaracion Gasolina	;true	;								;;;
+			 				;							;BodyContent-DeclaracionGasolina	;Body Content Slot for Declaracion Gasolina	;true	;DeclaracionGasolinaComponent	;;;
+
+INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
+				 					;							;DeclaracionGasolinaComponent	;DeclaracionGasolinaComponent	;/WEB-INF/views/responsive/pages/impuestoGasolina/declaracionGasolina.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;DeclaracionGasolinaComponent
+									
+#->FIN dev-federico Agregar paginas para impuesto sobretasagasolina 17/01/2019
