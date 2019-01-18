@@ -26,6 +26,7 @@ import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
 import de.hybris.platform.sdhpsaddon.forms.SDHLoginForm;
 import de.hybris.sdh.core.exceptions.NotARobotException;
 import de.hybris.sdh.core.exceptions.NotAValidEmailException;
+import de.hybris.sdh.core.exceptions.UserNotExistsException;
 
 import java.util.Collections;
 
@@ -160,6 +161,11 @@ public class LoginPageController extends AbstractLoginPageController
 			{
 				model.addAttribute("loginError", Boolean.valueOf(loginError));
 				GlobalMessages.addErrorMessage(model, "login.user.disabled.exception");
+			}
+			else if (authenticationException != null && authenticationException instanceof UserNotExistsException)
+			{
+				model.addAttribute("loginError", Boolean.valueOf(loginError));
+				GlobalMessages.addErrorMessage(model, "login.user.not.exists");
 			}
 			else
 			{

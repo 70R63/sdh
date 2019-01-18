@@ -16,7 +16,9 @@ public class SDHValidaMailRolResponse
 	private String txtmsj;
 	private InfoContribResponse infoContrib;
 	private List<NombreRolResponse> roles;
-
+	private List<ImpuestoGasolina> gasolina;
+	private List<ImpuestoPublicidadExterior> publicidadExt;
+	private List<ContribAgente> agentes;
 	/**
 	 * @return the infoContrib
 	 */
@@ -83,6 +85,57 @@ public class SDHValidaMailRolResponse
 	public void setRoles(final List<NombreRolResponse> roles)
 	{
 		this.roles = roles;
+	}
+
+	/**
+	 * @return the gasolina
+	 */
+	public List<ImpuestoGasolina> getGasolina()
+	{
+		return gasolina;
+	}
+
+	/**
+	 * @param gasolina
+	 *           the gasolina to set
+	 */
+	public void setGasolina(final List<ImpuestoGasolina> gasolina)
+	{
+		this.gasolina = gasolina;
+	}
+
+	/**
+	 * @return the publicidadExt
+	 */
+	public List<ImpuestoPublicidadExterior> getPublicidadExt()
+	{
+		return publicidadExt;
+	}
+
+	/**
+	 * @param publicidadExt
+	 *           the publicidadExt to set
+	 */
+	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
+	{
+		this.publicidadExt = publicidadExt;
+	}
+
+	/**
+	 * @return the agentes
+	 */
+	public List<ContribAgente> getAgentes()
+	{
+		return agentes;
+	}
+
+	/**
+	 * @param agentes
+	 *           the agentes to set
+	 */
+	public void setAgentes(final List<ContribAgente> agentes)
+	{
+		this.agentes = agentes;
 	}
 
 

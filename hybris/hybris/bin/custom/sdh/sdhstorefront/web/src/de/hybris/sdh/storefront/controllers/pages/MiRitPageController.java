@@ -27,6 +27,9 @@ import de.hybris.sdh.storefront.forms.MiRitForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -35,6 +38,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -62,6 +66,15 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@ModelAttribute("socialNetworks")
+	public List<String> getSocialNetworks()
+	{
+		final List<String> socialNetworks = Arrays.asList("FACEBOOK", "INSTAGRAM", "LINKEDIN", "SKYPE", "TWITTER", "WHATSAPP",
+				"YOUTUBE");
+
+		return socialNetworks;
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String showView(final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
@@ -83,7 +96,43 @@ public class MiRitPageController extends AbstractPageController
 
 			final MiRitForm miRitForm = new MiRitForm();
 
-			miRitForm.setPrimNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
+			{
+				model.addAttribute("PJUR", true);
+				miRitForm.setNombreRazonSocial1(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+				miRitForm.setNombreRazonSocial2(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2());
+				miRitForm.setNombreRazonSocial3(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3());
+				miRitForm.setNombreRazonSocial4(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4());
+
+				miRitForm.setFormaJuridica(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getLEGAL_ENTY());
+				miRitForm.setNumeroMatriculaMercantil(
+						sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getZZNOMATRICUL());
+
+				final String feachLiq = sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getLIQUIDATIONDATE();
+				if (StringUtils.isNotBlank(feachLiq) && !"00000000".equals(feachLiq))
+				{
+					//					final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+					//
+					//					final LocalDate localDate = LocalDate.parse(feachLiq, formatter);
+					//
+					//					final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					//
+					//					miRitForm.setFechaLiquidacion(localDate.format(formatter2));
+
+					miRitForm.setFechaLiquidacion(feachLiq);
+				}
+
+				miRitForm.setTipoRetenedor(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getLEGALORG());
+
+			}
+			else
+			{
+				miRitForm.setPrimNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+			}
+			miRitForm.setTipoDoc(sdhConsultaContribuyenteBPResponse.getInfoContrib().getTipoDoc());
+
+			miRitForm.setEmail(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
+
 			miRitForm.setPrimApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
 			miRitForm.setSegNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
 			miRitForm.setSegApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
@@ -209,24 +258,43 @@ public class MiRitPageController extends AbstractPageController
 
 				for (final ContribTelefono eachTelefono : sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono())
 				{
-
-					if ("1".equalsIgnoreCase(eachTelefono.getTEL_TIPO()))
+					if (StringUtils.isNotBlank(eachTelefono.getTEL_NUMBER()))
 					{
-
-						miRitForm.setTelefonoFijo(eachTelefono.getTEL_NUMBER());
+						miRitForm.setTelefonoPricipal(eachTelefono.getTEL_NUMBER());
 						miRitForm.setExtensionTelefono(eachTelefono.getTEL_EXTENS());
-
+						break;
 					}
-					else
-					{
-
-						miRitForm.setTelefonoCelular(eachTelefono.getTEL_NUMBER());
-
-					}
-
-
 				}
 
+			}
+
+
+			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
+					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+			{
+				miRitForm.setGasolina(sdhConsultaContribuyenteBPResponse.getGasolina().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumDoc())).collect(Collectors.toList()));
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
+					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
+			{
+				miRitForm.setPublicidadExt(sdhConsultaContribuyenteBPResponse.getPublicidadExt().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumResolu())).collect(Collectors.toList()));
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getInfoContrib().getRedsocial() != null
+					&& !sdhConsultaContribuyenteBPResponse.getInfoContrib().getRedsocial().isEmpty())
+			{
+				miRitForm.setRedsocial(sdhConsultaContribuyenteBPResponse.getInfoContrib().getRedsocial().stream()
+						.filter(eachNet -> StringUtils.isNotBlank(eachNet.getRED_SOCIAL())).collect(Collectors.toList()));
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getAgentes() != null
+					&& !sdhConsultaContribuyenteBPResponse.getAgentes().isEmpty())
+			{
+				miRitForm.setAgentes(sdhConsultaContribuyenteBPResponse.getAgentes().stream()
+						.filter(eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc())).collect(Collectors.toList()));
 			}
 
 

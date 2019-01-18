@@ -10,15 +10,20 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.core.pojos.responses.QuestionForRegistrationResponse;
+import de.hybris.sdh.core.services.SDHGetQuestionsForRegistration;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHValidaContribuyenteFacade;
 import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHRegistrationValidator;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
 import de.hybris.sdh.storefront.forms.SDHRegisterForm;
 import de.hybris.sdh.storefront.forms.SearchUserForm;
+import de.hybris.sdh.storefront.forms.SecretAnswerForm;
 
 import java.util.Arrays;
 import java.util.List;
@@ -56,6 +61,9 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 
 	@Resource(name = "sdhCustomerFacade")
 	private SDHCustomerFacade sdhCustomerFacade;
+
+	@Resource(name = "SDHGetQuestionsForRegistration")
+	private SDHGetQuestionsForRegistration sdhGetQuestionsForRegistration;
 
 	@Override
 	protected AbstractPageModel getCmsPage() throws CMSItemNotFoundException
@@ -197,30 +205,83 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 	public String getQuestions(final Model model, @RequestParam(value = "currentQuestion", defaultValue = "0")
 	final int currentQuestion) throws CMSItemNotFoundException
 	{
-		model.addAttribute("currentSection", "questionsSection");
-		if (currentQuestion == 0)
-		{
-			//getQuestions from service and put it on session
-			model.addAttribute("currentQuestion", currentQuestion + 1);
-			model.addAttribute("currentQuestionDescription", "Pregunta " + (currentQuestion + 1));
-		}
-		else if (currentQuestion == 5)
-		{
-			//Evaluate answers and redirect to proper page
-			model.addAttribute("currentQuestion", currentQuestion + 1);
-			model.addAttribute("currentQuestionDescription", "Pregunta " + (currentQuestion + 1));
-			model.addAttribute("isFinalQuestion", true);
+		ConsultaContribuyenteBPRequest bp = new ConsultaContribuyenteBPRequest();
+		bp.setNumBP(getSessionService().getAttribute("numBP"));
 
-			return "redirect:/register/personalData";
-		}
-		else
-		{
-			//getQuestions from session
-			model.addAttribute("currentQuestion", currentQuestion + 1);
-			model.addAttribute("currentQuestionDescription", "Pregunta " + (currentQuestion + 1));
-		}
+		System.out.println(getSessionService().getAttribute("numBP"));
+
+		QuestionForRegistrationResponse response = sdhGetQuestionsForRegistration.getQuestionForRegistration(bp);
+
+		model.addAttribute("questionAndOptions", response.getQuestionAndOptions());
+		model.addAttribute("questionCatalog", response.getMapQuestionsCatalog());
+		model.addAttribute("currentSection", "questionsSection");
+		model.addAttribute("SecretAnswerForm", new SecretAnswerForm());
 
 		return getDefaultRegistrationPage(model);
+	}
+
+	@RequestMapping(value = "/validateAnswers", method = RequestMethod.POST)
+	public String validateAnswer(final SecretAnswerForm form, final BindingResult bindingResult, final Model model,
+			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
+			throws CMSItemNotFoundException
+	{
+		ConsultaContribuyenteBPRequest bp = new ConsultaContribuyenteBPRequest();
+		bp.setNumBP(getSessionService().getAttribute("numBP"));
+		System.out.println(getSessionService().getAttribute("numBP"));
+
+		QuestionForRegistrationResponse responseWS = sdhGetQuestionsForRegistration.getQuestionForRegistration(bp);
+
+		int i = 0;
+
+		if (form.getAGE() != null)
+		{
+			if (form.getAGE().equals(responseWS.getCorrectAnswer("AGE")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getDIR() != null)
+		{
+			if (form.getDIR().equals(responseWS.getCorrectAnswer("DIR")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getFNAM() != null)
+		{
+			if (form.getFNAM().equals(responseWS.getCorrectAnswer("FNAM")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREDS() != null)
+		{
+			if (form.getREDS().equals(responseWS.getCorrectAnswer("REDS")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getTELM() != null)
+		{
+			if (form.getTELM().equals(responseWS.getCorrectAnswer("TELM")))
+			{
+				i++;
+			}
+		}
+
+		if (i < 3)
+		{
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"form.error.not.enogh.correct.aswers");
+			return "redirect:/login";
+		}
+
+		return "redirect:/register/personalData";
+
 	}
 
 	@RequestMapping(value = "/newcustomer", method = RequestMethod.POST)

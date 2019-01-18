@@ -30,7 +30,11 @@
 		<label><spring:theme code="declaracion.publicidad.anogravable" /></label>
 	</div>
 	<div class="col-md-3">
+<<<<<<< HEAD
 		<select id="anograv" name="anios" class="form-control" disabled="disabled">
+=======
+		<select id="anograv" class="form-control" disabled="disabled">
+>>>>>>> dev
 			<option value="2019">2019</option>
 			<option value="2018">2018</option>
 			<option value="2017">2017</option>

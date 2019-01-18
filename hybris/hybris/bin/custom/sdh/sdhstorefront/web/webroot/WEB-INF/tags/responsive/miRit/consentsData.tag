@@ -21,9 +21,9 @@
 		<div class="row">
 			<div class="col-md-4  ">
 				<div class="form-group ">
-					<div class="checkbox" role="checkbox" aria-checked="${checkBuzon }">
-						<label tabindex="0" class="control-label uncased ${checked }"> 
-							<input id="consentForm.consentGiven1" name="consentForm.consentGiven" type="checkbox" value="true">
+					<div class="checkbox" role="checkbox" aria-checked="false">
+						<label tabindex="0" class="control-label  "> 
+							<input id="buzon" name="buzon" type="checkbox" ${ checked} value="true">
 							<input type="hidden" name="_consentForm.consentGiven" value="on"><spring:theme code="mirit.constents.notifications" />
 						</label>
 					</div>
@@ -39,9 +39,9 @@
 		<div class="row">
 			<div class="col-md-4  ">
 				<div class="form-group ">
-					<div class="checkbox" role="checkbox" aria-checked="${checkAutUsoInfo }">
-						<label tabindex="0" class="control-label uncased" ${checked }> 
-							<input id="consentForm.consentGiven1" name="consentForm.consentGiven" type="checkbox" value="true">
+					<div class="checkbox" role="checkbox" aria-checked="false">
+						<label tabindex="0" class="control-label "> 
+							<input id="usoInformacion" name="usoInformacion" type="checkbox" ${ checked} value="true">
 							<input type="hidden" name="_consentForm.consentGiven" value="on"><spring:theme code="mirit.constents.useOfInformation" />
 						</label>
 					</div>

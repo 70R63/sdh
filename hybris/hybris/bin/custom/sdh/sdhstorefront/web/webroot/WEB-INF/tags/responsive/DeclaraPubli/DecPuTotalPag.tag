@@ -71,7 +71,11 @@
 </div>
 <div class="row">
 	<div class="col-md-2">
+<<<<<<< HEAD
 		<button class="btn btn-primary btn-lg" type="button">
+=======
+		<button type="button" class="btn btn-default btn-block backToHome">
+>>>>>>> dev
 			<spring:theme code="declaracion.publicidad.button.calcular"  />
 		</button>
 	</div>

@@ -119,7 +119,16 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 					SDHValidaMailRolResponse.class);
 
-			customerModel.setName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
+			{
+				customerModel.setName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+			}
+			else
+			{
+				customerModel.setName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+			}
+
+
 			customerModel.setMiddleName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
 			customerModel.setSecondLastName(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
 
@@ -233,7 +242,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	}
 
-	
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -250,7 +259,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		customerModel.setToken(token);
 		getModelService().save(customerModel);
 		getEventService().publishEvent(initializeEvent(new ForgottenPwdEvent(token), customerModel));
-		
+
 		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- SDH Token reset [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
 		LOG.info("-+-+-+-+-+-+-+-+-+-+-+-+-+-+- SDH Token reset [" +token+"] -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
 
@@ -258,12 +267,14 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final StringHolder b = new StringHolder();
 		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/change?token=";
 		final String encodedToken = this.getEncodedURL(token);
-				
-		
-		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Recuperar</A>", "SDH Recuperar Cuenta - Hybris ", a, b);
+
+
+		crm_mail.send(customerModel.getUid(),
+				"Para recuperar tu contraseña ingresa <A HREF='" + hybrisURL + encodedToken + "'>aquí</A>",
+				"SDH Recuperar Cuenta - Hybris ", a, b);
 
 	}
-	
+
 	private String getEncodedURL(final String token){
 		String encodedURL = "";
 		try {

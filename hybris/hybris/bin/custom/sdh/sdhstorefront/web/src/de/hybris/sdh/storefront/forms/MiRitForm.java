@@ -3,6 +3,14 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
+import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+
+import java.util.List;
+
+
 /**
  * @author hybris
  *
@@ -29,6 +37,8 @@ public class MiRitForm
 	private String lugarNacimiento;
 	private String paisOrigen;
 
+	private String email;
+
 	private Boolean hasCORol;
 	private Boolean hasAARol;
 	private Boolean hasTARol;
@@ -38,12 +48,25 @@ public class MiRitForm
 	private String direccionNotificacion;
 	private String direccionContacto;
 
-	private String telefonoFijo;
+	private String telefonoPricipal;
 	private String extensionTelefono;
-	private String telefonoCelular;
 
 	private Boolean useEmailForNotifications;
 	private Boolean useInformationForInstitutionalPurposes;
+
+	private String nombreRazonSocial1;
+	private String nombreRazonSocial2;
+	private String nombreRazonSocial3;
+	private String nombreRazonSocial4;
+	private String formaJuridica;
+	private String numeroMatriculaMercantil;
+	private String fechaLiquidacion;
+	private String tipoRetenedor;
+
+	private List<ImpuestoGasolina> gasolina;
+	private List<ImpuestoPublicidadExterior> publicidadExt;
+	private List<ContribRedSocial> redsocial;
+	private List<ContribAgente> agentes;
 
 	/**
 	 *
@@ -496,22 +519,6 @@ public class MiRitForm
 		this.direccionContacto = direccionContacto;
 	}
 
-	/**
-	 * @return the telefonoFijo
-	 */
-	public String getTelefonoFijo()
-	{
-		return telefonoFijo;
-	}
-
-	/**
-	 * @param telefonoFijo
-	 *           the telefonoFijo to set
-	 */
-	public void setTelefonoFijo(final String telefonoFijo)
-	{
-		this.telefonoFijo = telefonoFijo;
-	}
 
 	/**
 	 * @return the extensionTelefono
@@ -530,22 +537,245 @@ public class MiRitForm
 		this.extensionTelefono = extensionTelefono;
 	}
 
+
 	/**
-	 * @return the telefonoCelular
+	 * @return the telefonoPricipal
 	 */
-	public String getTelefonoCelular()
+	public String getTelefonoPricipal()
 	{
-		return telefonoCelular;
+		return telefonoPricipal;
 	}
 
 	/**
-	 * @param telefonoCelular
-	 *           the telefonoCelular to set
+	 * @param telefonoPricipal
+	 *           the telefonoPricipal to set
 	 */
-	public void setTelefonoCelular(final String telefonoCelular)
+	public void setTelefonoPricipal(final String telefonoPricipal)
 	{
-		this.telefonoCelular = telefonoCelular;
+		this.telefonoPricipal = telefonoPricipal;
 	}
+
+	/**
+	 * @return the nombreRazonSocial1
+	 */
+	public String getNombreRazonSocial1()
+	{
+		return nombreRazonSocial1;
+	}
+
+	/**
+	 * @param nombreRazonSocial1
+	 *           the nombreRazonSocial1 to set
+	 */
+	public void setNombreRazonSocial1(final String nombreRazonSocial1)
+	{
+		this.nombreRazonSocial1 = nombreRazonSocial1;
+	}
+
+	/**
+	 * @return the nombreRazonSocial2
+	 */
+	public String getNombreRazonSocial2()
+	{
+		return nombreRazonSocial2;
+	}
+
+	/**
+	 * @param nombreRazonSocial2
+	 *           the nombreRazonSocial2 to set
+	 */
+	public void setNombreRazonSocial2(final String nombreRazonSocial2)
+	{
+		this.nombreRazonSocial2 = nombreRazonSocial2;
+	}
+
+	/**
+	 * @return the nombreRazonSocial3
+	 */
+	public String getNombreRazonSocial3()
+	{
+		return nombreRazonSocial3;
+	}
+
+	/**
+	 * @param nombreRazonSocial3
+	 *           the nombreRazonSocial3 to set
+	 */
+	public void setNombreRazonSocial3(final String nombreRazonSocial3)
+	{
+		this.nombreRazonSocial3 = nombreRazonSocial3;
+	}
+
+	/**
+	 * @return the nombreRazonSocial4
+	 */
+	public String getNombreRazonSocial4()
+	{
+		return nombreRazonSocial4;
+	}
+
+	/**
+	 * @param nombreRazonSocial4
+	 *           the nombreRazonSocial4 to set
+	 */
+	public void setNombreRazonSocial4(final String nombreRazonSocial4)
+	{
+		this.nombreRazonSocial4 = nombreRazonSocial4;
+	}
+
+	/**
+	 * @return the formaJuridica
+	 */
+	public String getFormaJuridica()
+	{
+		return formaJuridica;
+	}
+
+	/**
+	 * @param formaJuridica
+	 *           the formaJuridica to set
+	 */
+	public void setFormaJuridica(final String formaJuridica)
+	{
+		this.formaJuridica = formaJuridica;
+	}
+
+	/**
+	 * @return the numeroMatriculaMercantil
+	 */
+	public String getNumeroMatriculaMercantil()
+	{
+		return numeroMatriculaMercantil;
+	}
+
+	/**
+	 * @param numeroMatriculaMercantil
+	 *           the numeroMatriculaMercantil to set
+	 */
+	public void setNumeroMatriculaMercantil(final String numeroMatriculaMercantil)
+	{
+		this.numeroMatriculaMercantil = numeroMatriculaMercantil;
+	}
+
+	/**
+	 * @return the fechaLiquidacion
+	 */
+	public String getFechaLiquidacion()
+	{
+		return fechaLiquidacion;
+	}
+
+	/**
+	 * @param fechaLiquidacion
+	 *           the fechaLiquidacion to set
+	 */
+	public void setFechaLiquidacion(final String fechaLiquidacion)
+	{
+		this.fechaLiquidacion = fechaLiquidacion;
+	}
+
+	/**
+	 * @return the tipoRetenedor
+	 */
+	public String getTipoRetenedor()
+	{
+		return tipoRetenedor;
+	}
+
+	/**
+	 * @param tipoRetenedor
+	 *           the tipoRetenedor to set
+	 */
+	public void setTipoRetenedor(final String tipoRetenedor)
+	{
+		this.tipoRetenedor = tipoRetenedor;
+	}
+
+	/**
+	 * @return the gasolina
+	 */
+	public List<ImpuestoGasolina> getGasolina()
+	{
+		return gasolina;
+	}
+
+	/**
+	 * @param gasolina
+	 *           the gasolina to set
+	 */
+	public void setGasolina(final List<ImpuestoGasolina> gasolina)
+	{
+		this.gasolina = gasolina;
+	}
+
+	/**
+	 * @return the publicidadExt
+	 */
+	public List<ImpuestoPublicidadExterior> getPublicidadExt()
+	{
+		return publicidadExt;
+	}
+
+	/**
+	 * @param publicidadExt
+	 *           the publicidadExt to set
+	 */
+	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
+	{
+		this.publicidadExt = publicidadExt;
+	}
+
+	/**
+	 * @return the redsocial
+	 */
+	public List<ContribRedSocial> getRedsocial()
+	{
+		return redsocial;
+	}
+
+	/**
+	 * @param redsocial
+	 *           the redsocial to set
+	 */
+	public void setRedsocial(final List<ContribRedSocial> redsocial)
+	{
+		this.redsocial = redsocial;
+	}
+
+	/**
+	 * @return the agentes
+	 */
+	public List<ContribAgente> getAgentes()
+	{
+		return agentes;
+	}
+
+	/**
+	 * @param agentes
+	 *           the agentes to set
+	 */
+	public void setAgentes(final List<ContribAgente> agentes)
+	{
+		this.agentes = agentes;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail()
+	{
+		return email;
+	}
+
+	/**
+	 * @param email
+	 *           the email to set
+	 */
+	public void setEmail(final String email)
+	{
+		this.email = email;
+	}
+
 
 
 

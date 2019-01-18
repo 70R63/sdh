@@ -26,6 +26,7 @@ public class InfoContribResponse
 	private ContribAdicionales adicionales;
 	private List<ContribDireccion> direccion;
 	private List<ContribTelefono> telefono;
+	private List<ContribRedSocial> redsocial;
 
 	/**
 	 * @return the adicionales
@@ -257,6 +258,24 @@ public class InfoContribResponse
 	{
 		this.primApe = primApe;
 	}
+
+	/**
+	 * @return the redsocial
+	 */
+	public List<ContribRedSocial> getRedsocial()
+	{
+		return redsocial;
+	}
+
+	/**
+	 * @param redsocial
+	 *           the redsocial to set
+	 */
+	public void setRedsocial(final List<ContribRedSocial> redsocial)
+	{
+		this.redsocial = redsocial;
+	}
+
 
 
 }
