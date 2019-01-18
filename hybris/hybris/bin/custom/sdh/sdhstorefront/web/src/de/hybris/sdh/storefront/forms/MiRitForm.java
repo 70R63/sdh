@@ -37,6 +37,8 @@ public class MiRitForm
 	private String lugarNacimiento;
 	private String paisOrigen;
 
+	private String email;
+
 	private Boolean hasCORol;
 	private Boolean hasAARol;
 	private Boolean hasTARol;
@@ -755,6 +757,23 @@ public class MiRitForm
 	public void setAgentes(final List<ContribAgente> agentes)
 	{
 		this.agentes = agentes;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail()
+	{
+		return email;
+	}
+
+	/**
+	 * @param email
+	 *           the email to set
+	 */
+	public void setEmail(final String email)
+	{
+		this.email = email;
 	}
 
 

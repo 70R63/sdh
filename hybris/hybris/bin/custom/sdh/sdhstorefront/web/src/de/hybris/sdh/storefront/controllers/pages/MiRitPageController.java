@@ -131,6 +131,8 @@ public class MiRitPageController extends AbstractPageController
 			}
 			miRitForm.setTipoDoc(sdhConsultaContribuyenteBPResponse.getInfoContrib().getTipoDoc());
 
+			miRitForm.setEmail(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
+
 			miRitForm.setPrimApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
 			miRitForm.setSegNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
 			miRitForm.setSegApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
@@ -256,8 +258,12 @@ public class MiRitPageController extends AbstractPageController
 
 				for (final ContribTelefono eachTelefono : sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono())
 				{
-					miRitForm.setTelefonoPricipal(eachTelefono.getTEL_NUMBER());
-					miRitForm.setExtensionTelefono(eachTelefono.getTEL_EXTENS());
+					if (StringUtils.isNotBlank(eachTelefono.getTEL_NUMBER()))
+					{
+						miRitForm.setTelefonoPricipal(eachTelefono.getTEL_NUMBER());
+						miRitForm.setExtensionTelefono(eachTelefono.getTEL_EXTENS());
+						break;
+					}
 				}
 
 			}
