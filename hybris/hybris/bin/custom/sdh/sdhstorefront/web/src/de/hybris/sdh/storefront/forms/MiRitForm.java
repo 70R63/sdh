@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 
@@ -35,6 +37,8 @@ public class MiRitForm
 	private String lugarNacimiento;
 	private String paisOrigen;
 
+	private String email;
+
 	private Boolean hasCORol;
 	private Boolean hasAARol;
 	private Boolean hasTARol;
@@ -44,9 +48,8 @@ public class MiRitForm
 	private String direccionNotificacion;
 	private String direccionContacto;
 
-	private String telefonoFijo;
+	private String telefonoPricipal;
 	private String extensionTelefono;
-	private String telefonoCelular;
 
 	private Boolean useEmailForNotifications;
 	private Boolean useInformationForInstitutionalPurposes;
@@ -62,7 +65,8 @@ public class MiRitForm
 
 	private List<ImpuestoGasolina> gasolina;
 	private List<ImpuestoPublicidadExterior> publicidadExt;
-
+	private List<ContribRedSocial> redsocial;
+	private List<ContribAgente> agentes;
 
 	/**
 	 *
@@ -515,22 +519,6 @@ public class MiRitForm
 		this.direccionContacto = direccionContacto;
 	}
 
-	/**
-	 * @return the telefonoFijo
-	 */
-	public String getTelefonoFijo()
-	{
-		return telefonoFijo;
-	}
-
-	/**
-	 * @param telefonoFijo
-	 *           the telefonoFijo to set
-	 */
-	public void setTelefonoFijo(final String telefonoFijo)
-	{
-		this.telefonoFijo = telefonoFijo;
-	}
 
 	/**
 	 * @return the extensionTelefono
@@ -549,21 +537,22 @@ public class MiRitForm
 		this.extensionTelefono = extensionTelefono;
 	}
 
+
 	/**
-	 * @return the telefonoCelular
+	 * @return the telefonoPricipal
 	 */
-	public String getTelefonoCelular()
+	public String getTelefonoPricipal()
 	{
-		return telefonoCelular;
+		return telefonoPricipal;
 	}
 
 	/**
-	 * @param telefonoCelular
-	 *           the telefonoCelular to set
+	 * @param telefonoPricipal
+	 *           the telefonoPricipal to set
 	 */
-	public void setTelefonoCelular(final String telefonoCelular)
+	public void setTelefonoPricipal(final String telefonoPricipal)
 	{
-		this.telefonoCelular = telefonoCelular;
+		this.telefonoPricipal = telefonoPricipal;
 	}
 
 	/**
@@ -735,6 +724,58 @@ public class MiRitForm
 	{
 		this.publicidadExt = publicidadExt;
 	}
+
+	/**
+	 * @return the redsocial
+	 */
+	public List<ContribRedSocial> getRedsocial()
+	{
+		return redsocial;
+	}
+
+	/**
+	 * @param redsocial
+	 *           the redsocial to set
+	 */
+	public void setRedsocial(final List<ContribRedSocial> redsocial)
+	{
+		this.redsocial = redsocial;
+	}
+
+	/**
+	 * @return the agentes
+	 */
+	public List<ContribAgente> getAgentes()
+	{
+		return agentes;
+	}
+
+	/**
+	 * @param agentes
+	 *           the agentes to set
+	 */
+	public void setAgentes(final List<ContribAgente> agentes)
+	{
+		this.agentes = agentes;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail()
+	{
+		return email;
+	}
+
+	/**
+	 * @param email
+	 *           the email to set
+	 */
+	public void setEmail(final String email)
+	{
+		this.email = email;
+	}
+
 
 
 

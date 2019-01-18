@@ -18,7 +18,7 @@ public class SDHValidaMailRolResponse
 	private List<NombreRolResponse> roles;
 	private List<ImpuestoGasolina> gasolina;
 	private List<ImpuestoPublicidadExterior> publicidadExt;
-
+	private List<ContribAgente> agentes;
 	/**
 	 * @return the infoContrib
 	 */
@@ -119,6 +119,23 @@ public class SDHValidaMailRolResponse
 	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
 	{
 		this.publicidadExt = publicidadExt;
+	}
+
+	/**
+	 * @return the agentes
+	 */
+	public List<ContribAgente> getAgentes()
+	{
+		return agentes;
+	}
+
+	/**
+	 * @param agentes
+	 *           the agentes to set
+	 */
+	public void setAgentes(final List<ContribAgente> agentes)
+	{
+		this.agentes = agentes;
 	}
 
 

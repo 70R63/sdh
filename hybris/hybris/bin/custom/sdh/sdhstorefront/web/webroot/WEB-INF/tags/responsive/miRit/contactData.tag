@@ -56,7 +56,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.contactData.notificationAddress" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.direccionNotificacion }" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionNotificacion }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -65,7 +65,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.contactData.anotherContactAddress" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.direccionContacto }" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionContacto }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -78,7 +78,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.contactData.landPhone" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoFijo }" maxlength="240">
+					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoPricipal }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -96,54 +96,100 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
-						<spring:theme code="mirit.contactData.cellPhone" />
-					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoCelular }" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+		<c:choose>
+			<c:when test="${not empty miRitForm.redsocial }">
+			
+				<div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required" for="address.surname">
+							<spring:theme code="mirit.contactData.socialNetwork" />
+						</label> 
+					</div>
+					
+				</div>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required" for="address.surname">
+							<spring:theme code="mirit.contactData.socialNetworkUser" />
+						</label> 
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
-						<spring:theme code="mirit.contactData.socialNetwork" />
-					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-					<select  class="form-control">
-                  <option value="FACEBOOK">FACEBOOK</option>
-                  <option value="INSTAGRAM">INSTAGRAM</option>
-                  <option value="LINKEDIN">LINKEDIN</option>
-                  <option value="SKYPE">SKYPE</option>
-                  <option value="TWITTER">TWITTER</option>
-                  <option value="WHATSAPP">WHATSAPP</option>
-                  <option value="YOUTUBE">YOUTUBE</option>
-                </select>
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+				</div>
+				<c:forEach items="${miRitForm.redsocial }" var="eachRedSocial">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group ">
+								<select  class="form-control">
+					                  <c:forEach items="${socialNetworks }" var="eachSN">
+					                  	<c:set var="selected" value=""/>
+					                  	<c:if test="${eachSN eq  eachRedSocial.RED_SOCIAL}">
+					                  		<c:set var="selected" value="selected"/>
+					                  	</c:if>
+						                  <option value="${eachSN }" ${selected }>${eachSN}</option>
+										</c:forEach>			                  
+					                </select>
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-md-4">
+							<div class="form-group ">
+								<input id="" name="" class="form-control form-control" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required" for="address.surname">
+							<spring:theme code="mirit.contactData.socialNetwork" />
+						</label> 
+					</div>
+					
+				</div>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required" for="address.surname">
+							<spring:theme code="mirit.contactData.socialNetworkUser" />
+						</label> 
 					</div>
 				</div>
-				
-			</div>
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
-						<spring:theme code="mirit.contactData.socialNetworkUser" />
-					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
 				</div>
-			</div>
-				
-			</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group ">
+								<select  class="form-control">
+					                  <c:forEach items="${socialNetworks }" var="eachSN">
+						                  <option value="${eachSN }">${eachSN}</option>
+										</c:forEach>			                  
+					                </select>
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-md-4">
+							<div class="form-group ">
+								<input id="" name="" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+			</c:otherwise>
+		</c:choose>
+		
 			<br>
 			<br>
 			<div class="form-group ">

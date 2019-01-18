@@ -17,6 +17,7 @@ import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.spring.security.CoreAuthenticationProvider;
+import de.hybris.sdh.core.exceptions.UserNotExistsException;
 
 import java.util.Date;
 
@@ -71,7 +72,9 @@ public class SDHAbstractAcceleratorAuthenticationProvider extends CoreAuthentica
 			{
 				LOG.warn("Brute force attack attempt for non existing user name " + username);
 			}
-			throw new BadCredentialsException(messages.getMessage(CORE_AUTHENTICATION_PROVIDER_BAD_CREDENTIALS, BAD_CREDENTIALS), e);
+
+			throw new UserNotExistsException(messages.getMessage(CORE_AUTHENTICATION_PROVIDER_BAD_CREDENTIALS, BAD_CREDENTIALS),
+					e);
 		}
 
 
