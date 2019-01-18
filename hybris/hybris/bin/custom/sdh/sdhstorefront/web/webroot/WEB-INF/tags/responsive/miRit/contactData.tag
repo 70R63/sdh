@@ -10,7 +10,6 @@
 <script > 
     function menuAutoSearch(){ 
     	var country = document.getElementById("u5070_input").value;
-    	var addressType = document.getElementById("u5067_input").value;
     	var deparment = document.getElementById("u5056_input").value;
     	var town = document.getElementById("u5058_input").value;
     	var postCode = document.getElementById("u5073_input").value;
@@ -24,10 +23,13 @@
     	var section7 = document.getElementById("u5065_input").value;
     	var section8 = document.getElementById("u6065_input").value;
     	var section9 = document.getElementById("u5079_input").value;
-    	var complement = document.getElementById("u5066_input").value;
-    	var complementText = document.getElementById("u6066_input").value;
+//     	var complement = document.getElementById("u5066_input").value;
+//     	var complementText = document.getElementById("u6066_input").value;
     	
-    	document.getElementById("address.assistant.output").value = streetType + " " + 
+    	document.getElementById("address.assistant.output").value = deparment + " " + 
+															    	town + " " +  
+															    	town + " " + 
+    																streetType + " " + 
     																section1 + " " + 
     																section2 + " " + 
     																section3 + " " + 
@@ -36,9 +38,44 @@
     																section6 + " " + 
     																section7 + " " + 
     																section8 + " " + 
-    																section9 + " " + 
-    																complement + " " + 
-    																complementText;
+    																section9 + " " ;
+    	
+    }
+    
+    function setAddress(){
+    	var addressType = document.getElementById("u5067_input").value;
+    	
+    	if(addressType == "notificacion")
+   		{
+    		document.getElementById("direccionNotificacion").value = document.getElementById("address.assistant.output").value
+   		}else if(addressType == "contacto")
+   		{
+   			document.getElementById("direccionContacto").value = document.getElementById("address.assistant.output").value
+   		}
+    	
+    	
+    }
+    
+    function addComplement(){
+    	var complement = document.getElementById("u5066_input").value;
+    	var complementText = document.getElementById("u6066_input").value;
+    	
+    	document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    	
+    }
+    
+    function countryChanged()
+    {
+    	
+    	var country = document.getElementById("u5070_input").value;
+    	
+    	if(country == "colombia" || country == "Colombia"|| country == "Co"|| country == "co")
+    		{
+    			$(".addressHelperField").prop('disabled', false);
+    		}else
+    			{
+    			$(".addressHelperField").prop('disabled', true);
+    			}
     	
     }
 </script>
@@ -53,19 +90,19 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="direccionNotificacion">
 						<spring:theme code="mirit.contactData.notificationAddress" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionNotificacion }" maxlength="240">
+					<input id="direccionNotificacion" name="direccionNotificacion" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionNotificacion }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
 				</div>
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="direccionContacto">
 						<spring:theme code="mirit.contactData.anotherContactAddress" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionContacto }" maxlength="240">
+					<input id="direccionContacto" name="direccionContacto" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionContacto }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -75,10 +112,10 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="telefonoPricipal">
 						<spring:theme code="mirit.contactData.landPhone" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoPricipal }" maxlength="240">
+					<input id="telefonoPricipal" name="telefonoPricipal" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoPricipal }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -86,10 +123,10 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="extensionTelefono">
 						<spring:theme code="mirit.contactData.extension" />
 					</label> 
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.extensionTelefono }" maxlength="240">
+					<input id="extensionTelefono" name="extensionTelefono" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.extensionTelefono }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -102,7 +139,7 @@
 				<div class="row">
 				<div class="col-md-4">
 					<div class="form-group ">
-						<label class="control-label required" for="address.surname">
+						<label class="control-label required" for="">
 							<spring:theme code="mirit.contactData.socialNetwork" />
 						</label> 
 					</div>
@@ -110,17 +147,18 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group ">
-						<label class="control-label required" for="address.surname">
+						<label class="control-label required" for="">
 							<spring:theme code="mirit.contactData.socialNetworkUser" />
 						</label> 
 					</div>
 				</div>
 				</div>
-				<c:forEach items="${miRitForm.redsocial }" var="eachRedSocial">
+				<c:forEach items="${miRitForm.redsocial }" var="eachRedSocial" varStatus="status">
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group ">
-								<select  class="form-control">
+								<select  class="form-control" id="redsocial[${status.index }].RED_SOCIAL" name="redsocial[${status.index }].RED_SOCIAL">
+									<option value=""></option>
 					                  <c:forEach items="${socialNetworks }" var="eachSN">
 					                  	<c:set var="selected" value=""/>
 					                  	<c:if test="${eachSN eq  eachRedSocial.RED_SOCIAL}">
@@ -137,7 +175,7 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group ">
-								<input id="" name="" class="form-control form-control" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
+								<input id="redsocial[${status.index }].USUARIORED" id="redsocial[${status.index }].USUARIORED" class="form-control form-control" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 								</div>
@@ -150,7 +188,7 @@
 				<div class="row">
 				<div class="col-md-4">
 					<div class="form-group ">
-						<label class="control-label required" for="address.surname">
+						<label class="control-label required" for="">
 							<spring:theme code="mirit.contactData.socialNetwork" />
 						</label> 
 					</div>
@@ -158,7 +196,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group ">
-						<label class="control-label required" for="address.surname">
+						<label class="control-label required" for="">
 							<spring:theme code="mirit.contactData.socialNetworkUser" />
 						</label> 
 					</div>
@@ -167,7 +205,8 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group ">
-								<select  class="form-control">
+								<select  class="form-control" id="redsocial[0].RED_SOCIAL" name="redsocial[0].RED_SOCIAL">
+									<option value=""></option>
 					                  <c:forEach items="${socialNetworks }" var="eachSN">
 						                  <option value="${eachSN }">${eachSN}</option>
 										</c:forEach>			                  
@@ -202,10 +241,10 @@
 				<div class="col-md-2">
 					<div class="form-group ">
 					
-					<label class="control-label " for="address.surname">
+					<label class="control-label " for="u5070_input">
 						<spring:theme code="mirit.contactData.country" />
 					</label> 
- 					<select id="u5070_input"  class="form-control" onchange="menuAutoSearch();">
+ 					<select id="u5070_input"  class="form-control" onchange="countryChanged();">
 		                <option selected="" value="Colombia">Colombia</option>
 		                <option value="Argentina">Argentina</option>
 		                <option value="España">España</option>
@@ -222,14 +261,13 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-group ">
-					<label class="control-label " for="address.surname">
+					<label class="control-label " for="u5067_input">
 						<spring:theme code="mirit.contactData.addressType" />
 					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
 					<select id="u5067_input" class="form-control" onchange="menuAutoSearch();">
 		                <option value="">Seleccionar</option>
-		                <option value="Notificación">Notificación</option>
-		                <option value="Otra dirección">Otra dirección</option>
+		                <option value="notificacion">Notificación</option>
+		                <option value="contacto">Otra dirección</option>
 		              </select>
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
@@ -241,11 +279,10 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-group ">
-					<label class="control-label " for="address.surname">
+					<label class="control-label " for="u5056_input">
 						<spring:theme code="mirit.contactData.department" />
 					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-					<select id="u5056_input" class="form-control" onchange="menuAutoSearch();">
+					<select id="u5056_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 		                <option value="">Seleccionar</option>
 		                <option value="Antioquia">Antioquia</option>
 		                <option value="Bogotá D.C.">Bogotá D.C.</option>
@@ -260,11 +297,10 @@
 				</div>
 				<div class="col-md-2">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5058_input">
 							<spring:theme code="mirit.contactData.county" />
 						</label> 
-<!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5058_input" class="form-control" onchange="menuAutoSearch();">
+						<select id="u5058_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option value="">Seleccionar</option>
 			                <option value="Bogotá D.C.">Bogotá D.C.</option>
 			                <option value="Medellin">Medellin</option>
@@ -277,11 +313,10 @@
 				</div>
 				<div class="col-md-2">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5073_input">
 							<spring:theme code="mirit.contactData.postalCode" />
 						</label> 
-<!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5073_input" class="form-control" onchange="menuAutoSearch();">
+						<select id="u5073_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option value="">Seleccionar</option>
 			                <option value="Bogotá D.C.">Bogotá D.C.</option>
 			                <option value="Medellin">Medellin</option>
@@ -297,10 +332,9 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-group ">
-					<label class="control-label " for="address.surname">
+					<label class="control-label " for="u5059_input">
 					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5059_input" class="form-control" onchange="menuAutoSearch();">
+						<select id="u5059_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
 			                <option value="AC">Avenida Calle</option>
 			                <option value="AK">Avenida Carrera</option>
@@ -317,9 +351,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5060_input">
 						</label> 
-						<input id="u5060_input" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
+						<input id="u5060_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -327,10 +361,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5062_input">
 						</label> 
-<!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5062_input" class="form-control" onchange="menuAutoSearch();">
+						<select id="u5062_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
 			                <option value="A">A</option>
 			                <option value="B">B</option>
@@ -367,10 +400,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5061_input">
 						</label> 
-<!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-							<select id="u5061_input" class="form-control" onchange="menuAutoSearch();">
+							<select id="u5061_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 				                <option selected="" value="">Seleccionar</option>
 				                <option value="Bis">Bis</option>
 				              </select>
@@ -382,10 +414,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5063_input">
 						</label> 
-<!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5063_input" class="form-control" onchange="menuAutoSearch();">
+						<select id="u5063_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
 			                <option value="A">A</option>
 			                <option value="B">B</option>
@@ -422,10 +453,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5064_input">
 						</label> 
-<!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5064_input" class="form-control" onchange="menuAutoSearch();">
+						<select id="u5064_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
 			                <option value="Sur">Sur</option>
 			                <option value="Este">Este</option>
@@ -438,9 +468,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u6064_input">
 						</label> 
-						<input id="u6064_input" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
+						<input id="u6064_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -449,10 +479,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5065_input">
 						</label> 
-<!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-							<select id="u5065_input"  class="form-control" onchange="menuAutoSearch();">
+							<select id="u5065_input"  class="form-control addressHelperField" onchange="menuAutoSearch();">
 				                <option selected="" value="">Seleccionar</option>
 				                <option value="A">A</option>
 				                <option value="B">B</option>
@@ -489,9 +518,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u6065_input">
 						</label> 
-						<input id="u6065_input" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
+						<input id="u6065_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -500,10 +529,9 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
-						<label class="control-label " for="address.surname">
+						<label class="control-label " for="u5079_input">
 						</label> 
-<!-- 						<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
-						<select id="u5079_input" class="form-control" onchange="menuAutoSearch();">
+						<select id="u5079_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
 			                <option value="Sur">Sur</option>
 			                <option value="Este">Este</option>
@@ -522,7 +550,7 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group ">
-						<select id="u5066_input" class="form-control" onchange="menuAutoSearch();"> 
+						<select id="u5066_input" class="form-control addressHelperField" onchange=""> 
 							<option selected="" value="">Seleccionar</option>
 			                <option value="AP">Apartamento</option>
 							<option value="AG">Agrupación</option>
@@ -568,7 +596,7 @@
 				<div class="col-md-3">
 					<div class="form-group ">
 
-						<input id="u6066_input" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
+						<input id="u6066_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -576,9 +604,9 @@
 				
 				</div>
 				<div class="">
-							<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href = '/sdhstorefront/es/register/searchUser'">
+							<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="addComplement();">
 									<spring:theme code="mirit.contactData.acept" /></button>
-								<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '/sdhstorefront/es/'">
+								<button class="btn btn-secondary btn-lg addressHelperField" type="button" onclick="setAddress();">
 									<spring:theme code="mirit.contactData.addAddress" /></button>
 							</div>
 			</div>

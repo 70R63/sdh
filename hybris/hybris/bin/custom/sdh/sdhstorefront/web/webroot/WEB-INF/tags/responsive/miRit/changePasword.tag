@@ -19,7 +19,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.changePassword.password" />
 					</label> 
-					<input  id="address.surname"   name="lastName" class="form-control " aria-required="true" type="password" value="" maxlength="240">
+					<input  id="currentPassword"   name="currentPassword" class="form-control " aria-required="true" type="password" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -32,7 +32,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.changePassword.newPassword" />
 					</label>
-					<input  id="password"   name="password" class="form-control password-strength" aria-required="true" type="password" value="" maxlength="240">
+					<input  id="newPassword"   name="newPassword" class="form-control password-strength" aria-required="true" type="password" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -45,7 +45,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.changePassword.confirmPassword" />
 					</label>
-					<input  id="address.surname"   name="lastName" class="form-control " aria-required="true" type="password" value="" maxlength="240">
+					<input  id="confirmNewPassword"   name="confirmNewPassword" class="form-control " aria-required="true" type="password" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>

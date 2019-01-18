@@ -20,10 +20,9 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="tipoDoc">
 						<spring:theme code="mirit.personalData.documentType" text="Mis datos personales"/>
 					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
 					
 					<select  class="form-control" disabled="disabled">
 						<option value="${miRitForm.tipoDoc }"><spring:theme code="register.id.types.${miRitForm.tipoDoc}" /></option>
@@ -39,7 +38,7 @@
 					<label class="control-label required" for="numDoc">
 						<spring:theme code="mirit.personalData.documentNumber" />
 					</label> 
-					<input id="address.surname" name="numDoc" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.numDoc }" maxlength="240">
+					<input id="numDoc" name="numDoc" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.numDoc }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -50,7 +49,7 @@
 					<label class="control-label required" for="numDoc">
 						<spring:theme code="delineacion.urbana.detail.dv" />
 					</label> 
-					<input id="address.surname" name="numDoc" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="" maxlength="240">
+					<input id="dv" name="dv" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -63,7 +62,7 @@
 					<label class="control-label required" for="nameOrganization">
 						<spring:theme code="mirit.pj.name" />
 					</label> 
-					<input id="name" name="name" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.nombreRazonSocial1 }" maxlength="240">
+					<input id="nombreRazonSocial1" name="nombreRazonSocial1" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.nombreRazonSocial1 }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -73,7 +72,7 @@
 		<div class="row">
 			<div class="col-md-10">
 				<div class="form-group ">
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.nombreRazonSocial2 }" maxlength="240">
+					<input id="nombreRazonSocial2" name="nombreRazonSocial2" class="form-control form-control" aria-required="true" disabled="disabled" type="text" value="${miRitForm.nombreRazonSocial2 }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -83,7 +82,7 @@
 		<div class="row">
 			<div class="col-md-10">
 				<div class="form-group ">
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.nombreRazonSocial3 }" disabled="disabled" maxlength="240">
+					<input id="nombreRazonSocial3" name="nombreRazonSocial3" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.nombreRazonSocial3 }" disabled="disabled" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -93,7 +92,7 @@
 		<div class="row">
 			<div class="col-md-10">
 				<div class="form-group ">
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.nombreRazonSocial4 }" disabled="disabled" maxlength="240">
+					<input id="nombreRazonSocial4" name="nombreRazonSocial4" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.nombreRazonSocial4 }" disabled="disabled" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -106,7 +105,7 @@
 					<label class="control-label required" for="numDoc">
 						<spring:theme code="mirit.pj.formajuridica" />
 					</label>
-					<select class="form-control">
+					<select class="form-control" disabled="disabled" id="formaJuridica" name="formaJuridica">
 	                  <option value="${miRitForm.formaJuridica }"><spring:theme code="rit.legal.entity.${miRitForm.formaJuridica}" /></option>
 	                </select>
 					<div class="help-block">
@@ -116,10 +115,10 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group ">
-					<label class="control-label required" for="numDoc">
+					<label class="control-label required" for="numeroMatriculaMercantil">
 						<spring:theme code="mirit.pj.licenseNumber" />
 					</label>
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.numeroMatriculaMercantil}" disabled="disabled" maxlength="240">
+					<input id="numeroMatriculaMercantil" name="numeroMatriculaMercantil" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.numeroMatriculaMercantil}" disabled="disabled" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -130,10 +129,10 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group ">
-					<label class="control-label required" for="numDoc">
+					<label class="control-label required" for="fechaLiquidacion">
 						<spring:theme code="mirit.pj.liqDate" />
 					</label>
-					<input id="address.surname" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.fechaLiquidacion}" disabled="disabled" maxlength="240">
+					<input id="fechaLiquidacion" name="fechaLiquidacion" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.fechaLiquidacion}" disabled="disabled" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -141,10 +140,10 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group ">
-					<label class="control-label required" for="numDoc">
+					<label class="control-label required" for="tipoRetenedor">
 						<spring:theme code="mirit.pj.retainerType" />
 					</label>
-					<select class="form-control">
+					<select class="form-control" disabled="disabled" id="tipoRetenedor" name="tipoRetenedor">
 	                  <option value="${miRitForm.tipoRetenedor}"><spring:theme code="rit.legal.org.${miRitForm.tipoRetenedor}" /></option>
 	                </select>
 					<div class="help-block">
@@ -160,8 +159,8 @@
 					<label class="control-label required" for="numDoc">
 						<spring:theme code="mirit.pj.claseIC" />
 					</label>
-					<select class="form-control">
-	                  <option value="FACEBOOK">Persona Jurídica</option>
+					<select class="form-control" disabled="disabled" >
+	                  <option value="">Persona Jurídica</option>
 	                </select>
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>

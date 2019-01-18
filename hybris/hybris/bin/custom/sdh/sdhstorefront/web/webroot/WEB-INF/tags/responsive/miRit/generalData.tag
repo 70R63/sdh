@@ -20,7 +20,6 @@
 					<label class="control-label required" for="tratamiento">
 						<spring:theme code="mirit.generalData.treatment"/>
 					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
 					<select id="tratamiento" name="tratamiento" class="form-control" disabled="">
 		                <option value="${miRitForm.tratamiento}" ><spring:theme code="rit.tratamiento.t${miRitForm.tratamiento}" /></option>
 		              </select>
@@ -65,7 +64,6 @@
 					<label class="control-label required" for="claseIC">
 						<spring:theme code="mirit.generalData.classIC" />
 					</label> 
-<!-- 					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240"> -->
 					<select id="claseIC" name="claseIC" class="form-control" disabled="disabled">
 						 <option value="${miRitForm.claseIC}"><spring:theme code="rit.claseIC.c${miRitForm.claseIC}" /></option>
 					</select>
