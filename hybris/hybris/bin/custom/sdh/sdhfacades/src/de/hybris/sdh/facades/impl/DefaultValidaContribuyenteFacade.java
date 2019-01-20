@@ -83,9 +83,7 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 
 			if (sdhValidaMailRolResponse != null && sdhValidaMailRolResponse.getIdmsj() == 0
 					&& sdhValidaMailRolResponse.getInfoContrib() != null
-					&& sdhValidaMailRolResponse.getInfoContrib().getNumBP() != null
-					&& sdhValidaMailRolResponse.getInfoContrib().getAdicionales() != null
-					&& sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR() != null)
+					&& sdhValidaMailRolResponse.getInfoContrib().getNumBP() != null)
 			{
 				sessionService.setAttribute("numBP", sdhValidaMailRolResponse.getInfoContrib().getNumBP());
 
@@ -93,7 +91,12 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 
 				sessionService.setAttribute("documentType", request.getTipoid());
 
-				sessionService.setAttribute("SMTP_ADDR", sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
+				if (sdhValidaMailRolResponse.getInfoContrib().getAdicionales() != null
+						&& sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR() != null)
+				{
+					sessionService.setAttribute("SMTP_ADDR",
+							sdhValidaMailRolResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
+				}
 
 				return true;
 			}

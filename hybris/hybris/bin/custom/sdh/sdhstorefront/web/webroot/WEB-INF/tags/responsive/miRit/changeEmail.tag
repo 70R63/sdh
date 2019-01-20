@@ -19,7 +19,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.changeEmail.email" />
 					</label> 
-					<input  id="address.surname"   name="lastName" class="form-control " aria-required="true" type="text" value="${miRitForm.email }" maxlength="240">
+					<input  id="currentMail"   name="currentMail" class="form-control " aria-required="true" type="text" value="${miRitForm.email }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -32,7 +32,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.changeEmail.newEmail" />
 					</label>
-					<input  id="address.surname"   name="lastName" class="form-control " aria-required="true" type="text" value="" maxlength="240">
+					<input  id="newEmail"   name="newEmail" class="form-control " aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -45,7 +45,7 @@
 					<label class="control-label required" for="address.surname">
 						<spring:theme code="mirit.changeEmail.confirmNewEmail" />
 					</label>
-					<input  id="address.surname"   name="lastName" class="form-control " aria-required="true" type="text" value="" maxlength="240">
+					<input  id="confirmNewEmail"   name="confirmNewEmail" class="form-control " aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
