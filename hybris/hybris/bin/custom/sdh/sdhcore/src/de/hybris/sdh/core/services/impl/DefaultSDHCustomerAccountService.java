@@ -271,7 +271,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final StringHolder a = new StringHolder();
 		final StringHolder b = new StringHolder();
 		final String path = configurationService.getConfiguration().getString("website.sdh.https");
-		final String hybrisURL = path + "/es/login/pw/activateAccount?token=";
+		final String hybrisURL = path + "/es/login/pw/change?token="; 
 		final String encodedToken = this.getEncodedURL(token);
 
 
@@ -344,4 +344,4 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 }
-	
+
