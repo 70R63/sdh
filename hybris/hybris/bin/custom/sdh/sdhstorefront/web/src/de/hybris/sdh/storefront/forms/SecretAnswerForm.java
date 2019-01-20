@@ -14,6 +14,7 @@ public class SecretAnswerForm
 	private String TELM;
 	private String DIR;
 	private String AGE;
+	private String DIR2;
 
 	/**
 	 * @return the fNAM
@@ -99,6 +100,24 @@ public class SecretAnswerForm
 	{
 		AGE = aGE;
 	}
+
+	/**
+	 * @return the dIR2
+	 */
+	public String getDIR2()
+	{
+		return DIR2;
+	}
+
+	/**
+	 * @param dIR2
+	 *           the dIR2 to set
+	 */
+	public void setDIR2(final String dIR2)
+	{
+		DIR2 = dIR2;
+	}
+
 
 
 }
