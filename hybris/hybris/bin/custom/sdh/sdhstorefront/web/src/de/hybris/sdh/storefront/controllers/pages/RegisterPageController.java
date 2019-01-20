@@ -202,7 +202,10 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		}
 			
 		String uidUser = getSessionService().getAttribute("SMTP_ADDR");
-		sdhCustomerAccountService.validateToken(token,uidUser);
+		String bpNumbre = getSessionService().getAttribute("numBP");
+		
+		
+		sdhCustomerAccountService.validateToken(token,bpNumbre);
 		model.addAttribute("currentSection", "personalDataSection");
 		return getDefaultRegistrationPage(model);
 	}
@@ -262,8 +265,8 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		String uidUser = getSessionService().getAttribute("SMTP_ADDR");
 		
 		bp.setNumBP(bpNumbre);
-		System.out.println(bpNumbre);
-		System.out.println(uidUser);
+		System.out.println("bpNumbre ------>"+bpNumbre);
+		System.out.println("uidUser ------>"+uidUser);
 
 		QuestionForRegistrationResponse responseWS = sdhGetQuestionsForRegistration.getQuestionForRegistration(bp);
 		
@@ -325,8 +328,10 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			return "redirect:/login";
 		}
 
+		String token = sdhCustomerAccountService.generateCustomerSessionToken(bpNumbre);
+		System.out.println("generated token: " + token);
 
-		return "redirect:/register/personalData?token=" + sdhCustomerAccountService.generateCustomerSessionToken(uidUser)+ "";
+		return "redirect:/register/personalData?token=" +token;
 	}
 
 	@RequestMapping(value = "/newcustomer", method = RequestMethod.POST)

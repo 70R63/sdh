@@ -19,6 +19,7 @@ import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountS
 import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.sdh.core.event.SDHRegistrationEvent;
@@ -66,6 +67,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "DefaultZWS_HYBSEND_MAIL_CORE")
 	private ZWS_HYSEND_MAIL_INT crm_mail;
+	
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
 	/*
 	 * (non-Javadoc)
 	 *
@@ -158,7 +162,8 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final StringHolder a = new StringHolder();
 		final StringHolder b = new StringHolder();
-		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/activateAccount?token=";
+		final String path = configurationService.getConfiguration().getString("website.sdh.https");
+		final String hybrisURL = path+ "/es/login/pw/activateAccount?token=";
 		final String encodedToken = this.getEncodedURL(token);
 
 
@@ -265,7 +270,8 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final StringHolder a = new StringHolder();
 		final StringHolder b = new StringHolder();
-		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/change?token=";
+		final String path = configurationService.getConfiguration().getString("website.sdh.https");
+		final String hybrisURL = path + "/es/login/pw/activateAccount?token=";
 		final String encodedToken = this.getEncodedURL(token);
 
 
@@ -291,7 +297,10 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final SecureToken data = new SecureToken(bp, timeStamp);
 		final String token = getSecureTokenService().encryptData(data);
 
+		System.out.println("bp ---->:" + bp);
+		
 		return this.getEncodedURL(token);
+		//return "";
 	}
 	
 	@Override
