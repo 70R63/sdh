@@ -7,13 +7,18 @@ package de.hybris.sdh.core.pojos.requests;
  * @author hybris
  *
  */
-public class UpdateCustomerCommPrefsRequest
+public class UpdateRitRequest
 {
 	private String numBP;
 	private String email;
 	private Boolean useEmailForNotifications;
 	private Boolean useInformationForInstitutionalPurposes;
 	private String autoBuzonDate;
+
+	private String primNom;
+	private String segNom;
+	private String primApe;
+	private String segApe;
 
 	/**
 	 * @return the email
@@ -100,6 +105,76 @@ public class UpdateCustomerCommPrefsRequest
 		this.autoBuzonDate = autoBuzonDate;
 	}
 
+
+
+	/**
+	 * @return the primNom
+	 */
+	public String getPrimNom()
+	{
+		return primNom;
+	}
+
+	/**
+	 * @param primNom
+	 *           the primNom to set
+	 */
+	public void setPrimNom(final String primNom)
+	{
+		this.primNom = primNom;
+	}
+
+	/**
+	 * @return the segNom
+	 */
+	public String getSegNom()
+	{
+		return segNom;
+	}
+
+	/**
+	 * @param segNom
+	 *           the segNom to set
+	 */
+	public void setSegNom(final String segNom)
+	{
+		this.segNom = segNom;
+	}
+
+	/**
+	 * @return the primApe
+	 */
+	public String getPrimApe()
+	{
+		return primApe;
+	}
+
+	/**
+	 * @param primApe
+	 *           the primApe to set
+	 */
+	public void setPrimApe(final String primApe)
+	{
+		this.primApe = primApe;
+	}
+
+	/**
+	 * @return the segApe
+	 */
+	public String getSegApe()
+	{
+		return segApe;
+	}
+
+	/**
+	 * @param segApe
+	 *           the segApe to set
+	 */
+	public void setSegApe(final String segApe)
+	{
+		this.segApe = segApe;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -108,6 +183,10 @@ public class UpdateCustomerCommPrefsRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"personal\": {");
+		stringBuilder.append("\"primNom\":\"" + this.getPrimNom() + "\",");
+		stringBuilder.append("\"segNom\":\"" + this.getSegNom() + "\",");
+		stringBuilder.append("\"primApe\":\"" + this.getPrimApe() + "\",");
+		stringBuilder.append("\"segApe\":\"" + this.getSegApe() + "\",");
 		stringBuilder.append("\"SMTP_ADDR\":\"" + this.getEmail() + "\",");
 		stringBuilder.append("\"ZZAUTOUSOINF\":\""
 				+ String.valueOf((Boolean.TRUE.equals(this.getUseInformationForInstitutionalPurposes()) ? 1 : 2)) + "\",");
@@ -115,7 +194,7 @@ public class UpdateCustomerCommPrefsRequest
 				+ String.valueOf((Boolean.TRUE.equals(this.getUseEmailForNotifications()) ? this.getAutoBuzonDate() : 0)) + "\",");
 		stringBuilder.append(
 				"\"ZZAUTOBUZONE\":\"" + String.valueOf((Boolean.TRUE.equals(this.getUseEmailForNotifications()) ? 1 : 2)) + "\"");
-		stringBuilder.append("}");
+		stringBuilder.append("               }");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();

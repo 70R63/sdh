@@ -89,6 +89,7 @@
 		<js>/_ui/responsive/common/js/acc.quickorder.js</js>
 		<js>/_ui/responsive/common/js/acc.csv-import.js</js>
 		<js>/_ui/responsive/common/js/acc.register.js</js>
+		<js>/_ui/responsive/common/js/acc.mirit.js</js>
 		<js>/_ui/responsive/common/js/_autoload.js</js>
 		
 		<!-- Cms Action JavaScript files -->

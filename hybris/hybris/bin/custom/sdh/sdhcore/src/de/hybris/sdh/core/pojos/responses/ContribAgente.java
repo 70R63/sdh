@@ -13,6 +13,7 @@ public class ContribAgente
 	private String numDoc;
 	private String nomCompleto;
 	private String impuesto;
+	private String funcionInterl;
 
 	/**
 	 * @return the tipoDoc
@@ -80,6 +81,23 @@ public class ContribAgente
 	public void setImpuesto(final String impuesto)
 	{
 		this.impuesto = impuesto;
+	}
+
+	/**
+	 * @return the funcionInterl
+	 */
+	public String getFuncionInterl()
+	{
+		return funcionInterl;
+	}
+
+	/**
+	 * @param funcionInterl
+	 *           the funcionInterl to set
+	 */
+	public void setFuncionInterl(final String funcionInterl)
+	{
+		this.funcionInterl = funcionInterl;
 	}
 
 

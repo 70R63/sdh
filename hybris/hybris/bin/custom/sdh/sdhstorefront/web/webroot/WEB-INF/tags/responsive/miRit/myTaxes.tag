@@ -27,7 +27,7 @@
 						<label class="control-label " for="">
 							<spring:theme code="mirit.exterior.publicity.numRes"/>
 						</label> 
-						<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${eachPubExtTax.numResolu }" maxlength="240">
+						<input id="numResolu" disabled="disabled" name="numResolu" class="form-control form-control" aria-required="true" type="text" value="${eachPubExtTax.numResolu }" maxlength="240">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -38,7 +38,7 @@
 						<label class="control-label " for="">
 							<spring:theme code="mirit.exterior.publicity.tipoValla"/>
 						</label> 
-						<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${eachPubExtTax.tipoValla }" maxlength="240">
+						<input id="tipoValla" disabled="disabled" name="tipoValla" class="form-control form-control" aria-required="true" type="text" value="${eachPubExtTax.tipoValla }" maxlength="240">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -55,14 +55,14 @@
 						<spring:theme code="mirit.gas.tax.title"/>
 			</label>
 		</div>
-		<c:forEach items="${miRitForm.gasolina }" var="eachGasTax">	
+		<c:forEach items="${miRitForm.gasolina }" var="eachGasTax" varStatus="status">	
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group ">
 						<label class="control-label " for="">
 							<spring:theme code="mirit.gas.tax.tipoDoc"/>
 						</label> 
-						<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="<spring:theme code="register.id.types.${eachGasTax.tipoDoc }" />" maxlength="240">
+						<input id="gasolina[${status.index }].tipoDoc" disabled="disabled" name="gasolina[${status.index }].tipoDoc" class="form-control form-control" aria-required="true" type="text" value="<spring:theme code="register.id.types.${eachGasTax.tipoDoc }" />" maxlength="240">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
@@ -73,7 +73,7 @@
 						<label class="control-label " for="">
 							<spring:theme code="mirit.gas.tax.numDoc"/>
 						</label> 
-						<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${eachGasTax.numDoc }" maxlength="240">
+						<input id="gasolina[${status.index }].numDoc" disabled="gasolina[${status.index }].numDoc" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${eachGasTax.numDoc }" maxlength="240">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 						</div>
