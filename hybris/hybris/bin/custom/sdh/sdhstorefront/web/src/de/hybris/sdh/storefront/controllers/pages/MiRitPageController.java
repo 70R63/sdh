@@ -14,18 +14,40 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
+import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
+import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.event.EventService;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.PasswordEncoderService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.store.services.BaseStoreService;
+import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
+import de.hybris.sdh.core.pojos.responses.CertifNombResponse;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
+import de.hybris.sdh.core.pojos.responses.ValidEmailResponse;
+import de.hybris.sdh.core.pojos.responses.ValidPasswordResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHUpdateRitService;
+import de.hybris.sdh.facades.SDHCertifNombFacade;
+import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
+import de.hybris.sdh.storefront.forms.UpdateRitForm;
+import de.hybris.sdh.storefront.forms.ValidEmailForm;
+import de.hybris.sdh.storefront.forms.ValidPasswordForm;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -36,11 +58,15 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -65,6 +91,10 @@ public class MiRitPageController extends AbstractPageController
 
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "sdhCertifNombFacade")
+	private SDHCertifNombFacade sdhCertifNombFacade;
+
 
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
@@ -129,7 +159,11 @@ public class MiRitPageController extends AbstractPageController
 			{
 				miRitForm.setPrimNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
 			}
+
+			miRitForm.setDigVer(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getDIGVERIF());
 			miRitForm.setTipoDoc(sdhConsultaContribuyenteBPResponse.getInfoContrib().getTipoDoc());
+
+			miRitForm.setEmail(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getSMTP_ADDR());
 
 			miRitForm.setPrimApe(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
 			miRitForm.setSegNom(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
@@ -235,13 +269,13 @@ public class MiRitPageController extends AbstractPageController
 					if ("01".equalsIgnoreCase(eachDireccion.getADR_KIND()))
 					{
 
-						miRitForm.setDireccionContacto(eachDireccion.getSTREET());
+						miRitForm.setDireccionContacto(eachDireccion);
 
 					}
 					if ("02".equalsIgnoreCase(eachDireccion.getADR_KIND()))
 					{
 
-						miRitForm.setDireccionNotificacion(eachDireccion.getSTREET());
+						miRitForm.setDireccionNotificacion(eachDireccion);
 
 					}
 
@@ -256,8 +290,12 @@ public class MiRitPageController extends AbstractPageController
 
 				for (final ContribTelefono eachTelefono : sdhConsultaContribuyenteBPResponse.getInfoContrib().getTelefono())
 				{
-					miRitForm.setTelefonoPricipal(eachTelefono.getTEL_NUMBER());
-					miRitForm.setExtensionTelefono(eachTelefono.getTEL_EXTENS());
+					if (StringUtils.isNotBlank(eachTelefono.getTEL_NUMBER()))
+					{
+						miRitForm.setTelefonoPricipal(eachTelefono.getTEL_NUMBER());
+						miRitForm.setExtensionTelefono(eachTelefono.getTEL_EXTENS());
+						break;
+					}
 				}
 
 			}
@@ -309,6 +347,167 @@ public class MiRitPageController extends AbstractPageController
 		updatePageTitle(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 
 		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/certifNomb", method = RequestMethod.POST)
+	@ResponseBody
+	public CertifNombResponse certifNomb(final CertifNombForm certifNombForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final CertifNombRequest request = new CertifNombRequest();
+
+		request.setNumBP(customerModel.getNumBP());
+		request.setApellido1(certifNombForm.getApellido1());
+		request.setApellido2(certifNombForm.getApellido2());
+		request.setName1(certifNombForm.getName1());
+		request.setName2(certifNombForm.getName2());
+
+
+		return sdhCertifNombFacade.certifNomb(request);
+	}
+
+	@Resource(name = "passwordEncoderService")
+	private PasswordEncoderService passwordEncoderService;
+
+
+	@RequestMapping(value = "/validCurrentPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public ValidPasswordResponse validCurrentPassword(final ValidPasswordForm validPasswordForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final boolean isValid = passwordEncoderService.isValid(customerModel, validPasswordForm.getPassoword());
+
+		final ValidPasswordResponse response = new ValidPasswordResponse();
+
+		response.setIsValidPassword(isValid);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/validNewEmail", method = RequestMethod.POST)
+	@ResponseBody
+	public ValidEmailResponse validNewEmail(final ValidEmailForm validEmailForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final ValidEmailResponse response = new ValidEmailResponse();
+
+		try
+		{
+			userService.getUserForUID(validEmailForm.getMail());
+
+			response.setIsValidEmail(false);
+
+		}
+		catch (final UnknownIdentifierException ex)
+		{
+			response.setIsValidEmail(true);
+		}
+
+
+		return response;
+	}
+
+
+	@Resource(name = "customerFacade")
+	private CustomerFacade customerFacade;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
+
+	@Resource(name = "eventService")
+	private EventService eventService;
+
+	@Resource(name = "sdhUpdateRitService")
+	SDHUpdateRitService sdhUpdateRitService;
+
+
+	@RequestMapping(value = "/updateRit", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateRit(final UpdateRitForm updateRitForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		String email = customerModel.getUid();
+
+		final UpdateRitResponse response = new UpdateRitResponse();
+
+		if (StringUtils.isNotBlank(updateRitForm.getPassoword() ) && StringUtils.isNotBlank(updateRitForm.getConfirmNewPassword())
+				&& StringUtils.isNotBlank(updateRitForm.getNewPassword()))
+		{
+			customerFacade.changePassword(updateRitForm.getPassoword(), updateRitForm.getNewPassword());
+		}
+
+
+
+
+		if(StringUtils.isNotBlank(updateRitForm.getEmail()) && StringUtils.isNotBlank(updateRitForm.getConfirmNewEmailAddress())&& StringUtils.isNotBlank(updateRitForm.getNewEmailAddress()))
+		{
+			final String newUidLower = updateRitForm.getNewEmailAddress().toLowerCase();
+
+			customerModel.setOriginalUid(newUidLower);
+			customerModel.setUid(newUidLower);
+			modelService.save(customerModel);
+
+			eventService.publishEvent(initializeEvent(new ChangeUIDEvent(), customerModel));
+
+
+			// Replace the spring security authentication with the new UID
+			final String newUid = customerFacade.getCurrentCustomer().getUid().toLowerCase();
+			final Authentication oldAuthentication = SecurityContextHolder.getContext().getAuthentication();
+			final UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(newUid, null,
+					oldAuthentication.getAuthorities());
+			newAuthentication.setDetails(oldAuthentication.getDetails());
+			SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
+			email = newUidLower;
+		}
+
+		final UpdateRitRequest request = new UpdateRitRequest();
+
+		request.setNumBP(customerModel.getNumBP());
+		request.setEmail(email);
+		request.setPrimNom(updateRitForm.getPrimNom());
+		request.setSegNom(updateRitForm.getSegNom());
+		request.setPrimApe(updateRitForm.getPrimApe());
+		request.setSegApe(updateRitForm.getSegApe());
+		request.setUseEmailForNotifications(updateRitForm.getUsoBuzon());
+		request.setUseInformationForInstitutionalPurposes(updateRitForm.getAutoUsoInfo());
+
+		if (Boolean.TRUE.equals(updateRitForm.getUsoBuzon()))
+		{
+			final LocalDateTime now = LocalDateTime.now();
+
+			final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+			final String formatDateTime = now.format(formatter);
+
+			request.setAutoBuzonDate(formatDateTime);
+		}
+
+		sdhUpdateRitService.updateRit(request);
+
+		response.setRitUpdated(true);
+
+		return response;
+	}
+
+	@Resource(name = "commerceCommonI18NService")
+	private CommerceCommonI18NService commerceCommonI18NService;
+
+	@Resource(name = "baseStoreService")
+	private BaseStoreService baseStoreService;
+
+	protected AbstractCommerceUserEvent initializeEvent(final AbstractCommerceUserEvent event, final CustomerModel customerModel)
+	{
+		event.setBaseStore(baseStoreService.getCurrentBaseStore());
+		event.setSite(getBaseSiteService().getCurrentBaseSite());
+		event.setCustomer(customerModel);
+		event.setLanguage(commerceCommonI18NService.getCurrentLanguage());
+		event.setCurrency(commerceCommonI18NService.getCurrentCurrency());
+		return event;
 	}
 
 

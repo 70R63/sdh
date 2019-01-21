@@ -23,12 +23,8 @@
 						<input name="titleCode" id="titleCode" value="mr" type="hidden"/>
 						
 						<formElement:formInputBox idKey="register.email" labelKey="register.email" path="email" inputCSS="form-control" mandatory="true" />
-						<formElement:formInputBox idKey="register.confirmEmail" labelKey="register.confirmEmail" path="confirmEmail" inputCSS="form-control" mandatory="true" />
-						
-						
-						<formElement:formPasswordBox idKey="password" labelKey="register.pwd" path="pwd" inputCSS="form-control password-strength" mandatory="true" />
-						
-						
+						<formElement:formInputBox idKey="register.confirmEmail" labelKey="register.confirmEmail" path="confirmEmail" inputCSS="form-control" mandatory="true" />	
+						<formElement:formPasswordBox idKey="password" labelKey="register.pwd" path="pwd" inputCSS="form-control password-strength" mandatory="true" />					
 						<formElement:formPasswordBox idKey="register.checkPwd" labelKey="register.checkPwd" path="checkPwd" inputCSS="form-control" mandatory="true" />
 						
 						<div class="description"><spring:theme code="register.passwordRequirements" htmlEscape="false"/></div>

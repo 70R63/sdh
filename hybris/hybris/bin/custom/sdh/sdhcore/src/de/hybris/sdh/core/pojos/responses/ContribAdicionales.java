@@ -36,7 +36,7 @@ public class ContribAdicionales
 	private String LEGAL_ENTY;
 	private String LIQUIDATIONDATE;
 	private String LEGALORG;
-
+	private String DIGVERIF;
 
 	/**
 	 *
@@ -476,6 +476,24 @@ public class ContribAdicionales
 	public void setLEGALORG(final String lEGALORG)
 	{
 		LEGALORG = lEGALORG;
+	}
+
+	/**
+	 * @return the dIGVERIF
+	 */
+	public String getDIGVERIF()
+	{
+		return DIGVERIF;
+	}
+
+	/**
+	 * @param dIGVERIF
+	 *           the dIGVERIF to set
+	 */
+	@JsonProperty("DIGVERIF")
+	public void setDIGVERIF(final String dIGVERIF)
+	{
+		DIGVERIF = dIGVERIF;
 	}
 
 
