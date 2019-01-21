@@ -16,12 +16,12 @@
 		<div class="row">
 			<div class="col-md-4  ">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="currentPassword">
 						<spring:theme code="mirit.changePassword.password" />
 					</label> 
 					<input  id="currentPassword"   name="currentPassword" class="form-control " aria-required="true" type="password" value="" maxlength="240">
 					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+						<span id="currentPasswordErrors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
 				</div>
 			</div>
@@ -47,7 +47,7 @@
 					</label>
 					<input  id="confirmNewPassword"   name="confirmNewPassword" class="form-control " aria-required="true" type="password" value="" maxlength="240">
 					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+						<span id="confirmNewPasswordErrors" class="hidden"><spring:theme code="validation.checkPwd.equals" /></span>
 					</div>
 				</div>
 			</div>

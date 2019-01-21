@@ -45,7 +45,32 @@
 
 			<c:url var="authenticationStatusUrl" value="/authentication/status" />
 			ACC.config.authenticationStatusUrl = '${ycommerce:encodeJavaScript(authenticationStatusUrl)}';
-
+			
+			ACC.certifNombURL ="<c:url value='/contribuyentes/mirit/certifNomb' />";
+			ACC.validaCurrentPasswrodURL ="<c:url value='/contribuyentes/mirit/validCurrentPassword' />";
+			ACC.validaEmailURL ="<c:url value='/contribuyentes/mirit/validNewEmail' />";
+			ACC.updateRitURL ="<c:url value='/contribuyentes/mirit/updateRit' />";
+			
+			ACC.addressCountry = "";
+			<c:if test="${not empty miRitForm.direccionNotificacion.COUNTRY}">
+				ACC.addressCountry = "${ miRitForm.direccionNotificacion.COUNTRY}";
+			</c:if>
+			
+			ACC.addressDep = "";
+			<c:if test="${not empty miRitForm.direccionNotificacion.REGION}">
+				ACC.addressDep = "${ miRitForm.direccionNotificacion.REGION}";
+			</c:if>
+			
+			ACC.addressMun = "";
+			<c:if test="${not empty miRitForm.direccionNotificacion.CITY1}">
+				ACC.addressMun = "${ miRitForm.direccionNotificacion.CITY1}";
+			</c:if>
+			
+			ACC.addressPC = "";
+			<c:if test="${not empty miRitForm.direccionNotificacion.POST_CODE}">
+				ACC.addressPC = "${ miRitForm.direccionNotificacion.POST_CODE}";
+			</c:if>
+			
 			<c:forEach var="jsVar" items="${jsVariables}">
 				<c:if test="${not empty jsVar.qualifier}" >
 				ACC['${ycommerce:encodeJavaScript(jsVar.qualifier)}'] = '${ycommerce:encodeJavaScript(jsVar.value)}';

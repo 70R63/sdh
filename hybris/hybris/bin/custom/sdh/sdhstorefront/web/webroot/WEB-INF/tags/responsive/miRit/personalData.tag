@@ -74,6 +74,8 @@
 				
 			</div>
 			
+<div id="dialog" title="Certificación de Nombre" ><div id="textCertNom"></div></div>
+			
 			
 			<!--  Second column of form -->
 			<div class="col-md-4">
@@ -107,7 +109,7 @@
 				<div class="form-group ">
 							<label class="control-label " for="address.surname">
 					</label> 
-								<button class="btn btn-primary btn-block change_address_button show_processing_message" type="submit">
+								<button class="btn btn-primary btn-block change_address_button show_processing_message" type="button" id="certifNombButton">
 									<spring:theme code="mirit.personalData.updateName" />
 								</button>
 							
