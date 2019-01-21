@@ -160,4 +160,91 @@ public class SobreTasaGasolinaService
 		return elementos;
 	}
 
+	/**
+	 * @return
+	 */
+	public List<SobreTasaGasolinaTabla> prepararTablaDeclaracion()
+	{
+
+		final List<SobreTasaGasolinaTabla> gasolinaTabla = new ArrayList<SobreTasaGasolinaTabla>();
+
+		for (int i = 1; i < 20; i++)
+		{
+			gasolinaTabla.add(new SobreTasaGasolinaTabla("NIT" + Integer.toString(i), Integer.toString(i)));
+		}
+
+
+		return gasolinaTabla;
+
+	}
+
+	/**
+	 * @param bpMarcado
+	 * @return
+	 */
+	public SobreTasaGasolinaForm prepararInfoBP(final String bpMarcado, final String info)
+	{
+
+		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+
+		//datos en el formulario
+		final List<ItemSelectOption> listaCalidadResponsable = new ArrayList<ItemSelectOption>();
+		String numeroTanques;
+		String capaciadAlmacProd;
+		String capaciadAlmacTanques;
+		String ubicacionPlantaAbasto;
+		final List<ItemSelectOption> listaCodigoPostal = new ArrayList<ItemSelectOption>();
+		final List<ItemSelectOption> listaLocalidad = new ArrayList<ItemSelectOption>();
+		final List<ItemSelectOption> listaTipoId = new ArrayList<ItemSelectOption>();
+		String numeroId;
+		String nombre;
+		final List<ItemSelectOption> listaTipoRelacion = new ArrayList<ItemSelectOption>();
+		String fechaDesde;
+		final String fechaHasta;
+		final List<ItemSelectOption> listaFuenteDato = new ArrayList<ItemSelectOption>();
+		final RepresentanteSGasolina representante = new RepresentanteSGasolina();
+		final List<RepresentanteSGasolina> listaRepresentantes = new ArrayList<RepresentanteSGasolina>();
+
+
+		//Obtener los valores
+		listaCalidadResponsable.add(new ItemSelectOption(1, "Productor"));
+		numeroTanques = "10";
+		capaciadAlmacProd = "100";
+		capaciadAlmacTanques = "1000";
+		ubicacionPlantaAbasto = "10000";
+		listaCodigoPostal.add(new ItemSelectOption(1, "110111"));
+		listaLocalidad.add(new ItemSelectOption(1, "Antonio Nariño"));
+		listaTipoId.add(new ItemSelectOption(1, "Cédula de Ciudadania"));
+		numeroId = "12345";
+		nombre = "usuario";
+		listaTipoRelacion.add(new ItemSelectOption(1, "relacion1"));
+		fechaDesde = "01/01/2019";
+		fechaHasta = "31/12/2019";
+		listaFuenteDato.add(new ItemSelectOption(1, "fuenteDato1"));
+		representante.setTipoId(listaTipoId);
+		representante.setNumeroId(numeroId);
+		representante.setNombre(nombre);
+		representante.setTipoRelacion(listaTipoRelacion);
+		representante.setFechaDesde(fechaDesde);
+		representante.setFechaHasta(fechaHasta);
+		representante.setFuenteDato(listaFuenteDato);
+		listaRepresentantes.add(representante);
+
+
+		//Setear los valores
+		dataForm.setCalidadResponsable(listaCalidadResponsable);
+		dataForm.setNumeroTanques(numeroTanques);
+		dataForm.setCapaciadAlmacProd(capaciadAlmacProd);
+		dataForm.setCapaciadAlmacTanques(capaciadAlmacTanques);
+		dataForm.setUbicacionPlantaAbasto(ubicacionPlantaAbasto);
+		dataForm.setCodigoPostal(listaCodigoPostal);
+		dataForm.setLocalidad(listaLocalidad);
+		dataForm.setRepresentantes(listaRepresentantes);
+
+
+		// XXX Auto-generated method stub
+		return dataForm;
+	}
+
+
 }

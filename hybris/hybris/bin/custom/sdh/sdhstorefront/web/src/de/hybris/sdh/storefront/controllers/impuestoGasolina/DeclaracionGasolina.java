@@ -45,9 +45,9 @@ public class DeclaracionGasolina extends AbstractSearchPageController
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String updateExampleForm(final Model model) throws CMSItemNotFoundException
+	public String handleGET(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro a Declaracion gasolina GET --------------------------");
+		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
 		final DeclaracionGasolinaForm dataForm = new DeclaracionGasolinaForm();
 		final DeclaracionGasolinaCatalogos dataFormCatalogos = new DeclaracionGasolinaService().prepararCatalogos();
 
@@ -64,10 +64,11 @@ public class DeclaracionGasolina extends AbstractSearchPageController
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String updateEmail(final DeclaracionGasolinaForm dataForm, final BindingResult bindingResult, final Model model,
+	public String handlePOST(final DeclaracionGasolinaForm dataForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro a Declaracion gasolina POST --------------------------");
+		System.out.println("---------------- En Declaracion gasolina POST --------------------------");
+
 
 		return REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE;
 	}

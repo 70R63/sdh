@@ -4,9 +4,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<spring:url value="/contribuyentes/sobretasa-gasolina"
+	var="buscarUrl" htmlEscape="false" />
 
 <div class="row">
 	<div class="col-md-6">
@@ -47,11 +50,19 @@
 			</select>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<button class="btn btn-primary btn-block" type="button">
-			<spring:theme
-				code="impuestos.sobreTasaGasolina.DatosGenerales.buscar" />
-		</button>
+	<div class="col-md-12">
+		<div class="form-group ">
+			<sf:form action="${buscarUrl}"
+				id="buscarUrl1" commandName="buscarUrl"
+				method="POST">
+
+				<button id="buscarUrl" type="submit"
+					class="btn btn-primary btn-block">
+					<spring:theme
+						code="impuestos.sobreTasaGasolina.DatosGenerales.buscar" />
+				</button>
+			</sf:form>
+		</div>
 	</div>
 </div>
 

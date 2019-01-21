@@ -39,69 +39,79 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						<div class="form-group ">
-							<select id="tipoId" class="form-control">
-								<c:forEach items="${dataFormCatalogos.tipoId}"
-									var="elemento">
-									<option value="${elemento.key}"><c:out
-											value="${elemento.label}" /></option>
-								</c:forEach>
-							</select>
-						</div>
-					</td>
-					<td>
-						<div class="form-group ">
-							<input id="numId" name="numId"
-								class="form-control form-control" aria-required="true"
-								type="text" value="" maxlength="240">
-						</div>
-					</td>
-					<td>
-						<div class="form-group ">
-							<input id="nombre" name="nombre"
-								class="form-control form-control" aria-required="true"
-								type="text" value="" maxlength="240">
-						</div>
-					</td>
-					<td>
-						<div class="form-group ">
-							<select id="tipoRelacion" class="form-control">
-								<c:forEach items="${dataFormCatalogos.tipoRelacion}"
-									var="elemento">
-									<option value="${elemento.key}"><c:out
-											value="${elemento.label}" /></option>
-								</c:forEach>
-							</select>
-						</div>
-					</td>
-					<td>
-						<div class="form-group ">
-							<input id="fechaDesde" name="fechaDesde"
-								class="form-control form-control" aria-required="true"
-								type="text" value="" maxlength="240">
-						</div>
-					</td>
-					<td>
-						<div class="form-group ">
-							<input id="fechaHasta" name="fechaHasta"
-								class="form-control form-control" aria-required="true"
-								type="text" value="" maxlength="240">
-						</div>
-					</td>
-					<td>
-						<div class="form-group ">
-							<select id="fuenteDato" class="form-control">
-								<c:forEach items="${dataFormCatalogos.fuenteDato}"
-									var="elemento">
-									<option value="${elemento.key}"><c:out
-											value="${elemento.label}" /></option>
-								</c:forEach>
-							</select>
-						</div>
-					</td>
-				</tr>
+				<c:forEach items="${dataForm.representantes}" var="representante">
+					<tr>
+						<td>
+							<div class="form-group ">
+								<select id="tipoId" class="form-control">
+									<c:forEach items="${representante.tipoId}" var="elemento">
+										<option value="${elemento.key}"><c:out
+												value="${elemento.label}" /></option>
+									</c:forEach>
+								</select>
+							</div>
+						</td>
+						<td>
+							<div class="form-group ">
+								<input id="numId" name="numId" class="form-control form-control"
+									aria-required="true" type="text"
+									value='<c:out value="${representante.numeroId}"></c:out>'
+									maxlength="240">
+							</div>
+						</td>
+						<td>
+							<div class="form-group ">
+								<input id="nombre" name="nombre"
+									class="form-control form-control" aria-required="true"
+									type="text"
+									value='<c:out value="${representante.nombre}"></c:out>'
+									maxlength="240">
+							</div>
+						</td>
+						<td>
+							<div class="form-group ">
+								<select id="tipoRelacion" class="form-control">
+									<c:forEach items="${representante.tipoRelacion}" var="elemento">
+										<option value="${elemento.key}"><c:out
+												value="${elemento.label}" /></option>
+									</c:forEach>
+								</select>
+							</div>
+						</td>
+						<td>
+							<div class="form-group ">
+								<input id="fechaDesde" name="fechaDesde"
+									class="form-control form-control" aria-required="true"
+									type="text"
+									value='<c:out value="${representante.fechaDesde}"></c:out>'
+									maxlength="240">
+							</div>
+						</td>
+						<td>
+							<div class="form-group ">
+								<input id="fechaHasta" name="fechaHasta"
+									class="form-control form-control" aria-required="true"
+									type="text"
+									value='<c:out value="${representante.fechaHasta}"></c:out>'
+									maxlength="240">
+							</div>
+						</td>
+						<td>
+							<div class="form-group ">
+								<select id="fuenteDato" class="form-control">
+									<c:forEach items="${representante.fuenteDato}" var="elemento">
+										<option value="${elemento.key}"><c:out
+												value="${elemento.label}" /></option>
+									</c:forEach>
+								</select>
+							</div>
+						</td>
+					</tr>
+				</c:forEach>
+
+
+
+
 			</tbody>
 		</table>
 	</div>

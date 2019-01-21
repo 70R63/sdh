@@ -11,7 +11,22 @@
 <spring:url
 	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
-	
+
+
+
+<div class="col-md-12">
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<td><c:out value="${dataFormRes}"></c:out> </td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>
+
+
 <div class="col-md-12">
 	<div class="table-responsive">
 		<table class="table">
@@ -32,44 +47,13 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-2">
-		<label><spring:theme
-				code="impuestos.sobreTasaGasolina.menu.cantidadResultados1" /></label>
-	</div>
-	<div class="col-md-2">
-		<div class="form-group ">
-			<select id="anioGravable" class="form-control">
-				<c:forEach items="${dataFormCatalogos.opcionesCantidadMostrar}"
-					var="elemento">
-					<option value="${elemento.key}"><c:out
-							value="${elemento.label}" /></option>
-				</c:forEach>
-			</select>
-		</div>
-	</div>
-	<div class="col-md-2">
-		<label><spring:theme
-				code="impuestos.sobreTasaGasolina.menu.cantidadResultados2" /></label>
-	</div>
-	<div class="col-md-2">
-		<label><spring:theme
-				code="impuestos.sobreTasaGasolina.menu.buscar" /></label>
-	</div>
-	<div class="col-md-2">
-		<div class="form-group ">
-			<input id="infoBuscar" name="infoBuscar"
-				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
-		</div>
-	</div>
-</div>
+
 
 <div class="col-md-10">
 	<div class="table-responsive">
 		<sf:form action="/contribuyente" id="placeOrderForm1"
 			commandName="dataForm">
-			<table class="table">
+			<table class="table" id="example">
 				<thead>
 					<tr>
 						<td><spring:theme
@@ -81,20 +65,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>NIT</td>
-						<td>41261533</td>
-						<td>
-							<div class="checkbox">
-								<label> <sf:checkbox id="Terms1" path="seleccionar" />
-									<spring:theme var="algo"
-										code="impuestos.sobreTasaGasolina.menu.seleccionarCheckBox"
-										arguments="impuestos.sobreTasaGasolina.menu.seleccionarCheckBox"
-										htmlEscape="true" />
-								</label>
-							</div>
-						</td>
-					</tr>
+					<c:forEach items="${listaDocumentos}" var="item">
+						<tr>
+							<td><c:out value="${item.tipoDocumento}"></c:out></td>
+							<td><c:out value="${item.numeroDocumento}"></c:out></td>
+							<td><input id="action"
+								style="visibility: visible !important; margin: 0; min-height: 0;"
+								name="action" type="radio" value="Vehiculos"></td>
+						</tr>
+					</c:forEach>
+
 				</tbody>
 			</table>
 		</sf:form>
@@ -104,7 +84,8 @@
 <div class="col-md-12">
 	<div class="form-group ">
 		<sf:form action="${presentarDeclaracionUrl}"
-			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion" method="GET">
+			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
+			method="GET">
 
 			<button id="presentarDeclaracionUrl" type="submit"
 				class="btn btn-primary btn-block">

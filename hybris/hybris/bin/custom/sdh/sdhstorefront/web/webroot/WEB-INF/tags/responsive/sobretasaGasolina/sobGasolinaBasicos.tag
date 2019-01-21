@@ -26,7 +26,7 @@
 	<div class="col-md-2">
 		<div class="form-group ">
 			<select id="calidadResponsable" class="form-control">
-				<c:forEach items="${dataFormCatalogos.calidadResponsable}"
+				<c:forEach items="${dataForm.calidadResponsable}"
 					var="elemento">
 					<option value="${elemento.key}"><c:out
 							value="${elemento.label}" /></option>
@@ -42,7 +42,7 @@
 		<div class="form-group ">
 			<input id="numTanques" name="numTanques"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value='<c:out value="${dataForm.numeroTanques}"></c:out>' maxlength="240">
 		</div>
 	</div>
 </div>
@@ -56,7 +56,7 @@
 		<div class="form-group ">
 			<input id="capacidadAlmacProd" name="capacidadAlmacProd"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value='<c:out value="${dataForm.capaciadAlmacProd}"></c:out>' maxlength="240">
 		</div>
 	</div>
 	<div class="col-md-2">
@@ -65,9 +65,9 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<input id="capacAlmacTanques" name="capacAlmacTanques"
+			<input id="capaciadAlmacTanques" name="capaciadAlmacTanques"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value='<c:out value="${dataForm.capaciadAlmacTanques}"></c:out>' maxlength="240">
 		</div>
 	</div>
 </div>
@@ -81,7 +81,7 @@
 		<div class="form-group ">
 			<input id="ubicacionPlantaAbasto" name="ubicacionPlantaAbasto"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value='<c:out value="${dataForm.ubicacionPlantaAbasto}"></c:out>' maxlength="240">
 		</div>
 	</div>
 </div>
@@ -94,7 +94,7 @@
 	<div class="col-md-2">
 		<div class="form-group ">
 			<select id="codigoPostal" class="form-control">
-				<c:forEach items="${dataFormCatalogos.codigoPostal}" var="elemento">
+				<c:forEach items="${dataForm.codigoPostal}" var="elemento">
 					<option value="${elemento.key}"><c:out
 							value="${elemento.label}" /></option>
 				</c:forEach>
@@ -108,7 +108,7 @@
 	<div class="col-md-2">
 		<div class="form-group ">
 			<select id="localidad" class="form-control">
-				<c:forEach items="${dataFormCatalogos.localidad}" var="elemento">
+				<c:forEach items="${dataForm.localidad}" var="elemento">
 					<option value="${elemento.key}"><c:out
 							value="${elemento.label}" /></option>
 				</c:forEach>
