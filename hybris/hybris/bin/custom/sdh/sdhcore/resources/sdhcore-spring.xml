@@ -560,6 +560,9 @@
 	
 	<bean name="sdhConsultaContribuyenteBPService" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaContribuyenteBPService" />
 	
+	<bean name="sdhCertificaRITService" class="de.hybris.sdh.core.services.impl.DefaultSDHCertificaRITService" />
+	
+	
 	<alias alias="customerAccountService" name="sdhCustomerAccountService"/>
 	<bean id="sdhCustomerAccountService" parent="defaultCustomerAccountService"
 			class="de.hybris.sdh.core.services.impl.DefaultSDHCustomerAccountService"/>

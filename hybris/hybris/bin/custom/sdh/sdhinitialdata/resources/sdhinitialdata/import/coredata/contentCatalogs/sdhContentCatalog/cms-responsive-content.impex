@@ -1499,3 +1499,31 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;DeclaraPublicidadPageComponent	;DeclaraPublicidadPage Component	;/WEB-INF/views/responsive/pages/layout/DeclaraPublicidadPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;DeclaraPublicidadPageComponent					
 
 #new Publicidad Exterior Declaracion page
+
+
+
+
+
+#*->-----------------------------------------------------------------------------------------------------------
+#->INI dev-eduardo Pantalla de menu MiRIT->Certificacion 19/01/2019
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		            ;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;miRITCertificacionPage 		;Mi RIT Certificacion 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mirit/certificacion
+
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]			      	;position[unique=true]		;page(uid,$contentCV)[unique=true][default='miRITCertificacionPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-miRITCertificacionPage 	;SideContent		     	;																	;SideContent-miRITCertificacionPage				;;;
+								;						;BodyContent-miRITCertificacionPage 	;BodyContent			    ;																	;BodyContent-miRITCertificacionPage				;;;
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										    ;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-miRITCertificacionPage 	;Side Content Slot for Mi RIT Certificacion	;true	;								;;;
+							;							;BodyContent-miRITCertificacionPage  	;Body Content Slot for Mi RIT Certificacion	;true	;miRITCertificacionPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							    ;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;miRITCertificacionPageComponent	;miRITCertificacionPage Component	;/WEB-INF/views/responsive/pages/layout/miRITCertificacionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;miRITCertificacionPageComponent					
+
+									
+#->FIN dev-eduardo Pantalla de menu MiRIT->Certificacion 19/01/2019
+#*->-----------------------------------------------------------------------------------------------------------
