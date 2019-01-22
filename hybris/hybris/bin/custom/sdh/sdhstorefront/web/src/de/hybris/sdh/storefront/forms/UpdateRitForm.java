@@ -4,7 +4,6 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
-import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class UpdateRitForm
 	private String primApe;
 	private String segApe;
 
-	private String telfonoPrincipas;
+	private String telfonoPrincipal;
 	private String extension;
 	private String pais;
 	private String departamento;
@@ -39,25 +38,26 @@ public class UpdateRitForm
 	private Boolean usoBuzon;
 	private Boolean autoUsoInfo;
 
-	private List<ContribRedSocial> redsocial;
+	private String redsocial;
 	private List<ContribDireccion> direccion;
 	private List<ContribTelefono> telefono;
+	//	private List<ContribRedSocial> redsocial;
 
 	/**
 	 * @return the telfonoPrincipas
 	 */
-	public String getTelfonoPrincipas()
+	public String getTelfonoPrincipal()
 	{
-		return telfonoPrincipas;
+		return telfonoPrincipal;
 	}
 
 	/**
 	 * @param telfonoPrincipas
 	 *           the telfonoPrincipas to set
 	 */
-	public void setTelfonoPrincipas(final String telfonoPrincipas)
+	public void setTelfonoPrincipal(final String telfonoPrincipal)
 	{
-		this.telfonoPrincipas = telfonoPrincipas;
+		this.telfonoPrincipal = telfonoPrincipal;
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class UpdateRitForm
 		this.munipio = munipio;
 	}
 
-	
+
 
 	/**
 	 * @return the direccionContacto
@@ -141,7 +141,7 @@ public class UpdateRitForm
 	/**
 	 * @param direccionContacto the direccionContacto to set
 	 */
-	public void setDireccionContacto(ContribDireccion direccionContacto)
+	public void setDireccionContacto(final ContribDireccion direccionContacto)
 	{
 		this.direccionContacto = direccionContacto;
 	}
@@ -157,7 +157,7 @@ public class UpdateRitForm
 	/**
 	 * @param direccionNoficacion the direccionNoficacion to set
 	 */
-	public void setDireccionNoficacion(ContribDireccion direccionNoficacion)
+	public void setDireccionNoficacion(final ContribDireccion direccionNoficacion)
 	{
 		this.direccionNoficacion = direccionNoficacion;
 	}
@@ -318,19 +318,19 @@ public class UpdateRitForm
 	/**
 	 * @return the redsocial
 	 */
-	public List<ContribRedSocial> getRedsocial()
-	{
-		return redsocial;
-	}
+	//	public List<ContribRedSocial> getRedsocial()
+	//	{
+	//		return redsocial;
+	//	}
 
 	/**
 	 * @param redsocial
 	 *           the redsocial to set
 	 */
-	public void setRedsocial(final List<ContribRedSocial> redsocial)
-	{
-		this.redsocial = redsocial;
-	}
+	//	public void setRedsocial(final List<ContribRedSocial> redsocial)
+	//	{
+	//		this.redsocial = redsocial;
+	//	}
 
 	/**
 	 * @return the primNom
@@ -433,6 +433,25 @@ public class UpdateRitForm
 	{
 		this.telefono = telefono;
 	}
+
+	/**
+	 * @return the redsocial
+	 */
+	public String getRedsocial()
+	{
+		return redsocial;
+	}
+
+	/**
+	 * @param redsocial
+	 *           the redsocial to set
+	 */
+	public void setRedsocial(final String redsocial)
+	{
+		this.redsocial = redsocial;
+	}
+
+
 
 
 }

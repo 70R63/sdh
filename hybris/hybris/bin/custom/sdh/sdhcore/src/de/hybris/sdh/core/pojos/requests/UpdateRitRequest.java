@@ -3,6 +3,12 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import de.hybris.sdh.core.pojos.responses.ContribDireccion;
+import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
+
+import java.util.List;
+
+
 /**
  * @author hybris
  *
@@ -19,6 +25,14 @@ public class UpdateRitRequest
 	private String segNom;
 	private String primApe;
 	private String segApe;
+
+	private List<ContribRedSocial> redsocial;
+
+	private ContribDireccion direccionContacto;
+	private ContribDireccion direccionNoficacion;
+
+	private String telfonoPrincipal;
+	private String extension;
 
 	/**
 	 * @return the email
@@ -175,6 +189,26 @@ public class UpdateRitRequest
 		this.segApe = segApe;
 	}
 
+
+
+
+	/**
+	 * @return the redsocial
+	 */
+	public List<ContribRedSocial> getRedsocial()
+	{
+		return redsocial;
+	}
+
+	/**
+	 * @param redsocial
+	 *           the redsocial to set
+	 */
+	public void setRedsocial(final List<ContribRedSocial> redsocial)
+	{
+		this.redsocial = redsocial;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -194,10 +228,92 @@ public class UpdateRitRequest
 				+ String.valueOf((Boolean.TRUE.equals(this.getUseEmailForNotifications()) ? this.getAutoBuzonDate() : 0)) + "\",");
 		stringBuilder.append(
 				"\"ZZAUTOBUZONE\":\"" + String.valueOf((Boolean.TRUE.equals(this.getUseEmailForNotifications()) ? 1 : 2)) + "\"");
-		stringBuilder.append("               }");
+		stringBuilder.append("               },");
+		stringBuilder.append("\"redsocial\": [");
+
+		for (final ContribRedSocial eachRS : this.getRedsocial())
+		{
+			stringBuilder.append("{\"RED_SOCIAL\":\"" + eachRS.getRED_SOCIAL() + "\",");
+			stringBuilder.append("\"USUARIORED\":\"" + eachRS.getUSUARIORED() + "\"},");
+		}
+
+		if (",".equals(stringBuilder.substring(stringBuilder.length() - 1)))
+		{
+			stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+		}
+
+		stringBuilder.append("               ]");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
+	}
+
+	/**
+	 * @return the direccionContacto
+	 */
+	public ContribDireccion getDireccionContacto()
+	{
+		return direccionContacto;
+	}
+
+	/**
+	 * @param direccionContacto
+	 *           the direccionContacto to set
+	 */
+	public void setDireccionContacto(final ContribDireccion direccionContacto)
+	{
+		this.direccionContacto = direccionContacto;
+	}
+
+	/**
+	 * @return the direccionNoficacion
+	 */
+	public ContribDireccion getDireccionNoficacion()
+	{
+		return direccionNoficacion;
+	}
+
+	/**
+	 * @param direccionNoficacion
+	 *           the direccionNoficacion to set
+	 */
+	public void setDireccionNoficacion(final ContribDireccion direccionNoficacion)
+	{
+		this.direccionNoficacion = direccionNoficacion;
+	}
+
+	/**
+	 * @return the telfonoPrincipal
+	 */
+	public String getTelfonoPrincipal()
+	{
+		return telfonoPrincipal;
+	}
+
+	/**
+	 * @param telfonoPrincipal
+	 *           the telfonoPrincipal to set
+	 */
+	public void setTelfonoPrincipal(final String telfonoPrincipal)
+	{
+		this.telfonoPrincipal = telfonoPrincipal;
+	}
+
+	/**
+	 * @return the extension
+	 */
+	public String getExtension()
+	{
+		return extension;
+	}
+
+	/**
+	 * @param extension
+	 *           the extension to set
+	 */
+	public void setExtension(final String extension)
+	{
+		this.extension = extension;
 	}
 
 

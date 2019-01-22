@@ -71,7 +71,6 @@ ACC.mirit = {
     	        	{
     	        		$("#newEmailErrors").addClass("hidden");
         	        	$("#newEmail").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
         	        	
         	        	 var emailData = {};
              	        emailData.mail = confirmNewEmail;
@@ -110,7 +109,6 @@ ACC.mirit = {
     	        		{
         	        		$("#confirmNewEmailErrors").addClass("hidden");
             	        	$("#confirmNewEmail").parents(".form-group ").removeClass("has-error");
-            	        	hasErrors = false;
         	        	}
     	        	}
     	        	
@@ -120,11 +118,9 @@ ACC.mirit = {
 	       		{
     	       		$("#newEmailErrors").addClass("hidden");
     	        	$("#newEmail").parents(".form-group ").removeClass("has-error");
-    	        	hasErrors = false;
     	       		
     	       		$("#confirmNewEmailErrors").addClass("hidden");
     	        	$("#confirmNewEmail").parents(".form-group ").removeClass("has-error");
-    	        	hasErrors = false;
 	       		}
     	        
     	        var currentPassword = $("#currentPassword").val().trim();
@@ -143,7 +139,6 @@ ACC.mirit = {
         			{
 	        			$("#currentPasswordErrors").addClass("hidden");
         	        	$("#currentPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
         			}
         		
     	        	
@@ -154,7 +149,6 @@ ACC.mirit = {
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
     	        	}
     	        	
     	        	if(/[A-Z]/.test(newPassword) == false)
@@ -164,7 +158,6 @@ ACC.mirit = {
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
     	        	}
     	        	
     	        	if(/[0-9]/.test(newPassword) == false)
@@ -174,7 +167,6 @@ ACC.mirit = {
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
     	        	}
     	        	
     	        	if(newPassword.length <8 || newPassword.length>16)
@@ -184,7 +176,6 @@ ACC.mirit = {
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
     	        	}
     	        
     	        	if(newPassword != confirmNewPassword)
@@ -209,7 +200,6 @@ ACC.mirit = {
 	            		{
     	            		$("#currentPasswordErrors").addClass("hidden");
             	        	$("#currentPassword").parents(".form-group ").removeClass("has-error");
-            	        	hasErrors = false;
 	            		}else
     	            	{
 	            			$("#currentPasswordErrors").removeClass("hidden");
@@ -226,9 +216,34 @@ ACC.mirit = {
 	        } 	
     	        
     	        
+    	        var redSocialData = new Array();
+    	        
+    	        $.each($(".redSocial"),function(index,value){
+    	        	
+    	        	if($(value).val() != "")
+	        		{
+    	        		if($("#redsocial\\["+index+"\\]\\.USUARIORED").val()== "")
+	        			{
+    	        			$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").removeClass("hidden");
+	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").addClass("has-error");
+	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").html("Por favor introduce el nombre de usuario");
+	        	        	hasErrors = true;
+	        			}else
+	        			{
+	        				$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").addClass("hidden");
+	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").removeClass("has-error");
+	        			}
+	        		}
+    	        	var eachSocialNet=new Object();
+    	        	
+    	        	eachSocialNet.RED_SOCIAL= $(value).val();
+    	        	eachSocialNet.USUARIORED=$("#redsocial\\["+index+"\\]\\.USUARIORED").val();
+    	        	
+    	        	redSocialData.push(eachSocialNet);
+    	        	
+    	        });
     	        
     	        
-    	       
     	        if(hasErrors)
     	        {
     	        	$( "#dialog" ).dialog( "open" );
@@ -244,13 +259,16 @@ ACC.mirit = {
     	    	        updateRitData.primApe =  $("#primApe").val().trim();
     	    	        updateRitData.segApe =  $("#segApe").val().trim();
     	    	        updateRitData.usoBuzon = $("#buzon").is(":checked");
-    	    	        updateRitData.autoUsoInfo = $("#usoInformacion").is(":checked")
-    	    	        
+    	    	        updateRitData.autoUsoInfo = $("#usoInformacion").is(":checked");
+    	    	        updateRitData.telfonoPrincipal = $("#telefonoPricipal").val();
+    	    	        updateRitData.extension = $("#extensionTelefono").val();
+    	    	        updateRitData.redsocial =JSON.stringify(redSocialData);
     	    	        
     	    	        $.ajax({
     	    	            url: ACC.updateRitURL,
     	    	            data: updateRitData,
     	    	            type: "POST",
+    	    	            dataType : 'json',
     	    	            success: function (data) {
     	    	            	$( "#dialog" ).dialog( "open" );
     	    	            	if(data.ritUpdated == true)

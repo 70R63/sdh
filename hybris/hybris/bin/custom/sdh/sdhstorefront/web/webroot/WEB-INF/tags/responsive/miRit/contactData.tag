@@ -4972,7 +4972,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group ">
-								<select  class="form-control" id="redsocial[${status.index }].RED_SOCIAL" name="redsocial[${status.index }].RED_SOCIAL">
+								<select  class="form-control redSocial" id="redsocial[${status.index }].RED_SOCIAL" name="redsocial[${status.index }].RED_SOCIAL">
 									<option value=""></option>
 					                  <c:forEach items="${socialNetworks }" var="eachSN">
 					                  	<c:set var="selected" value=""/>
@@ -4990,7 +4990,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 						</div>
 						<div class="col-md-4">
 							<div class="form-group ">
-								<input id="redsocial[${status.index }].USUARIORED" id="redsocial[${status.index }].USUARIORED" class="form-control form-control" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
+								<input id="redsocial[${status.index }].USUARIORED" id="redsocial[${status.index }].USUARIORED" class="form-control usuarioRedSocial" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 								</div>
@@ -5020,7 +5020,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group ">
-								<select  class="form-control" id="redsocial[0].RED_SOCIAL" name="redsocial[0].RED_SOCIAL">
+								<select  class="form-control redSocial" id="redsocial[0].RED_SOCIAL" name="redsocial[0].RED_SOCIAL">
 									<option value=""></option>
 					                  <c:forEach items="${socialNetworks }" var="eachSN">
 						                  <option value="${eachSN }">${eachSN}</option>
@@ -5034,9 +5034,9 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 						</div>
 						<div class="col-md-4">
 							<div class="form-group ">
-								<input id="" name="" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+								<input id="redsocial[0].USUARIORED" name="redsocial[0].USUARIORED" class="form-control usuarioRedSocial" aria-required="true" type="text" value="" maxlength="240">
 								<div class="help-block">
-									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+									<span id="redsocial[0].USUARIORED.errors" class="hidden"></span>
 								</div>
 							</div>
 						</div>

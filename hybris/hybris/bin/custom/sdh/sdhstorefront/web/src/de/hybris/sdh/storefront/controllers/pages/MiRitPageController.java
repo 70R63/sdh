@@ -31,6 +31,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.responses.CertifNombResponse;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
+import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -485,6 +486,26 @@ public class MiRitPageController extends AbstractPageController
 			final String formatDateTime = now.format(formatter);
 
 			request.setAutoBuzonDate(formatDateTime);
+		}
+
+		if (StringUtils.isNotBlank(updateRitForm.getRedsocial()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			try
+			{
+				final List<ContribRedSocial> redesSociales = Arrays
+						.asList(mapper.readValue(updateRitForm.getRedsocial(), ContribRedSocial[].class));
+
+				request.setRedsocial(redesSociales);
+			}
+			catch (final Exception e)
+			{
+				// XXX Auto-generated catch block
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+
+
 		}
 
 		sdhUpdateRitService.updateRit(request);
