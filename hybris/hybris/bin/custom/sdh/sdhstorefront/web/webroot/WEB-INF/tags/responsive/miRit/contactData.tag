@@ -4908,7 +4908,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<label class="control-label required" for="direccionNotificacion">
 						<spring:theme code="mirit.contactData.notificationAddress" />
 					</label> 
-					<input id="direccionNotificacion" name="direccionNotificacion" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionNotificacion }" maxlength="240">
+					<input id="direccionNotificacion" name="direccionNotificacion" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionNotificacion.STREET }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -4917,7 +4917,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<label class="control-label required" for="direccionContacto">
 						<spring:theme code="mirit.contactData.anotherContactAddress" />
 					</label> 
-					<input id="direccionContacto" name="direccionContacto" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionContacto }" maxlength="240">
+					<input id="direccionContacto" name="direccionContacto" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionContacto.STREET }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -5693,10 +5693,13 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				
 				</div>
 				<div class="">
-							<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="addComplement();">
-									<spring:theme code="mirit.contactData.acept" /></button>
-								<button class="btn btn-secondary btn-lg addressHelperField" type="button" onclick="setAddress();">
-									<spring:theme code="mirit.contactData.addAddress" /></button>
-							</div>
+					<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="addComplement();">
+						<spring:theme code="mirit.contactData.acept" /></button>
+				</div>
+				<br>
+				<div>
+					<button class="btn btn-secondary btn-lg addressHelperField" type="button" onclick="setAddress();">
+						<spring:theme code="mirit.contactData.addAddress" /></button>
+				</div>
 			</div>
 			
