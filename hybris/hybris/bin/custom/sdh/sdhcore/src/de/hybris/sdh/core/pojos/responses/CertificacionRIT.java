@@ -11,12 +11,13 @@ public class CertificacionRIT
 {
 	private String tipoDoc;
 	private String numDoc;
-	private String[] stringRIT;
+	private String stringRIT;
+
 
 	/**
 	 * @return the stringRIT
 	 */
-	public String[] getStringRIT()
+	public String getStringRIT()
 	{
 		return stringRIT;
 	}
@@ -25,7 +26,7 @@ public class CertificacionRIT
 	 * @param stringRIT
 	 *           the stringRIT to set
 	 */
-	public void setStringRIT(final String[] stringRIT)
+	public void setStringRIT(final String stringRIT)
 	{
 		this.stringRIT = stringRIT;
 	}

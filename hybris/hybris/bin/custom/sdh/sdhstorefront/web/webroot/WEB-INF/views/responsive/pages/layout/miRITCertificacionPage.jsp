@@ -11,7 +11,7 @@
 	 	<div class="headline">
 			<h3>
 				<span tabindex="0"><spring:theme code="mirit.certificacion.titulo" /></span>
-				<iframe width='100%' height='600' width='15' src='data:application/pdf;/Certificación RIT#zoom=100&view=fitH&;base64,"${miRitCertificacionForm.setRit.rit}"'>	</iframe>
+				<iframe width='100%' height='600' width='15' src='data:application/pdf;/Certificación RIT#zoom=100&view=fitH&;base64,${miRitCertificacionForm.rit.stringRIT}'>	</iframe>
 			</h3>
 		</div>
 	</div>

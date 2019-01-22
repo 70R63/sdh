@@ -7,7 +7,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -75,9 +74,9 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			final StringBuilder stringBuilder = new StringBuilder();
 
 			stringBuilder.append(
-					"{ \\\"idmsj\\\": \\\"0\\\", \\\"txtmsj\\\": \\\"Exitoso\\\", \\\"rit\\\": {\\\"tipoDoc\\\": \\\"CC\\\", \\\"numDoc\\\": \\\"1010188123\\\", \\\"stringRIT\\\":");
+					"{ \"idmsj\": \"0\", \"txtmsj\": \"Exitoso\", \"rit\": {\"tipoDoc\": \"CC\", \"numDoc\": \"1010188123\", \"stringRIT\":");
 			stringBuilder.append(
-					" \\\"JVBERi0xLjMNCiXi48/TDQoNCjEgMCBvYmoNCjw8DQovVHlwZSAvQ2F0YWxvZw0KL091dGxpbmVzIDIgMCBSDQovUGFnZXMgMyAwIFINCj4+DQplbmRvYmoNCg0KMiAwIG9iag0KPDwNCi9UeXBlIC9P");
+					" \"JVBERi0xLjMNCiXi48/TDQoNCjEgMCBvYmoNCjw8DQovVHlwZSAvQ2F0YWxvZw0KL091dGxpbmVzIDIgMCBSDQovUGFnZXMgMyAwIFINCj4+DQplbmRvYmoNCg0KMiAwIG9iag0KPDwNCi9UeXBlIC9P");
 			stringBuilder.append(
 					"dXRsaW5lcw0KL0NvdW50IDANCj4+DQplbmRvYmoNCg0KMyAwIG9iag0KPDwNCi9UeXBlIC9QYWdlcw0KL0NvdW50IDINCi9LaWRzIFsgNCAwIFIgNiAwIFIgXSANCj4+DQplbmRvYmoNCg0KNCAwIG9iag0");
 			stringBuilder.append(
@@ -128,7 +127,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 					"DAwMDAwMTQ3IDAwMDAwIG4NCjAwMDAwMDAyMjIgMDAwMDAgbg0KMDAwMDAwMDM5MCAwMDAwMCBuDQowMDAwMDAxNTIyIDAwMDAwIG4NCjAwMDAwMDE2OTAgMDAwMDAgbg0KMDAwMDAwMjQyMyAwMDAwMCBu");
 			stringBuilder.append(
 					"DQowMDAwMDAyNDU2IDAwMDAwIG4NCjAwMDAwMDI1NzQgMDAwMDAgbg0KDQp0cmFpbGVyDQo8PA0KL1NpemUgMTENCi9Sb290IDEgMCBSDQovSW5mbyAxMCAwIFINCj4+DQoNCnN0YXJ0eHJlZg0KMjcxNA0");
-			stringBuilder.append("KJSVFT0YNCg==\\\" } }");
+			stringBuilder.append("KJSVFT0YNCg==\" } }");
 
 
 
