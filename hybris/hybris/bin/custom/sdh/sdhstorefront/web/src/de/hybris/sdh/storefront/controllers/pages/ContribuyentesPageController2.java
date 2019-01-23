@@ -13,9 +13,26 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHDetallePublicidadService;
+import de.hybris.sdh.storefront.forms.PublicidadForm;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +70,20 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 	private static final String PUBLICIDAD_EXTERIOR_CMS_PAGE = "PublicidadExteriorPage";
 
+	@Resource(name = "sessionService")
+	SessionService sessionService;
+
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "sdhDetallePublicidadService")
+	SDHDetallePublicidadService sdhDetallePublicidadService;
+
+
+
 	//Se anexa el mapeo de la pagina predialunificado
 	//GRD
 	@RequestMapping(value = "/predialunificado", method = RequestMethod.GET)
@@ -82,8 +113,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 	@RequestMapping(value = "/predialunificado/descuento", method = RequestMethod.GET)
 	public String predialUnidicadoDescuento(final Model model, final RedirectAttributes redirectModel,
-			final HttpServletRequest request)
-			throws CMSItemNotFoundException
+			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		model.addAttribute("action", request.getParameter("action"));
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNIFICADO_DECLARACIONES_CMS_PAGE));
@@ -95,8 +125,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 	@RequestMapping(value = "/predialunificado/declaraciones", method = RequestMethod.GET)
 	public String predialUnidicadoDeclaraciones(final Model model, final RedirectAttributes redirectModel,
-			final HttpServletRequest request)
-			throws CMSItemNotFoundException
+			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		model.addAttribute("action", request.getParameter("action"));
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNIFICADO_DECLARACIONES_CMS_PAGE));
@@ -224,7 +253,69 @@ public class ContribuyentesPageController2 extends AbstractPageController
 	@RequestMapping(value = "/publicidadexterior", method = RequestMethod.GET)
 	public String publicidadExterna(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
+			final PublicidadForm publicidadForm = new PublicidadForm();
+
+			//publicidadForm.setNumBP(sdhConsultaContribuyenteBPResponse.);
+
+			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
+					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
+			{
+				publicidadForm.setPublicidadExt(sdhConsultaContribuyenteBPResponse.getPublicidadExt().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumResolu())).collect(Collectors.toList()));
+
+				model.addAttribute("publicidadForm", publicidadForm);
+			}
+
+		}
+		catch (final Exception e)
+		{
+			// XXX Auto-generated catch block
+			//LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			//GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
+
+		//	final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
+
+		//consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+		//detallePublicidadRequest.setNumBP("537");
+		//detallePublicidadRequest.setNumResolu();
+		//detallePublicidadRequest.setAnoGravable();
+		//try
+		//	{
+		//	final ObjectMapper mapper = new ObjectMapper();
+		//	mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		//	final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
+		//			sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+		//}
+		//
+		//final MiRitForm miRitForm = new MiRitForm();
+
+		//catch (final Exception e)
+		//{
+		// XXX Auto-generated catch block
+		//	LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+		//	GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		//}
+
+
 		//model.addAttribute("action", "prueba");
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
@@ -232,10 +323,10 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		return getViewForPage(model);
 	}
 
+
 	@RequestMapping(value = "/publicidadexterior/detail", method = RequestMethod.GET)
 	public String publicidadExternaDetail(final Model model, final RedirectAttributes redirectModel,
-			final HttpServletRequest request)
-			throws CMSItemNotFoundException
+			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 
 		//model.addAttribute("showDetail", true);
