@@ -18,6 +18,18 @@
 
 <div class="row">
 	<div class="col-md-2">
+		<label><spring:theme code="declaracion.publicidad.luginst" /></label>
+	</div>
+	<div class="col-md-3">
+		<select id="luginst" class="form-control">
+			<option value="1">Predio</option>
+			<option value="2">Veh&iacuteculo</option>
+		</select>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
 		<label><spring:theme code="declaracion.publicidad.OrValla" /></label>
 	</div>
 	<div class="col-md-3">
@@ -32,20 +44,10 @@
 		</select>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.luginst" /></label>
-	</div>
-	<div class="col-md-3">
-		<select id="luginst" class="form-control">
-			<option value="1">Predio</option>
-			<option value="2">Veh&iacuteculo</option>
-		</select>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.basegrav" /></label>
+		<label><spring:theme code="declaracion.publicidad.tamvalla" /></label>
 	</div>
 	<div class="col-md-3">
 		<select id="basegrav" class="form-control">
@@ -58,17 +60,4 @@
 		</select>
 	</div>
 </div>
-
-<div class="row">
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.opuso" /></label>
-	</div>
-	<div class="col-md-3">
-		<select id="opuso" class="form-control">
-			<option value="1">Declaraci&oacuten</option>
-			<option value="2">Correcci&oacuten</option>
-			<option value="3">S&oacutelo Pago</option>
-			<option value="4">Acto Oficial</option>
-		</select>
-	</div>
 </div>

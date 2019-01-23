@@ -30,22 +30,35 @@
 		<label><spring:theme code="declaracion.publicidad.anogravable" /></label>
 	</div>
 	<div class="col-md-3">
-		
-			<select id="anograv" class="form-control" disabled="disabled">
 
-				<option value="2019">2019</option>
-				<option value="2018">2018</option>
-				<option value="2017">2017</option>
-				<option value="2016">2016</option>
-				<option value="2015">2015</option>
-				<option value="2014">2014</option>
-				<option value="2013">2013</option>
-				<option value="2012">2012</option>
-				<option value="2011">2011</option>
-				<option value="2010">2010</option>
+		<select id="anograv" class="form-control" disabled="disabled">
+
+			<option value="2019">2019</option>
+			<option value="2018">2018</option>
+			<option value="2017">2017</option>
+			<option value="2016">2016</option>
+			<option value="2015">2015</option>
+			<option value="2014">2014</option>
+			<option value="2013">2013</option>
+			<option value="2012">2012</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
+		</select>
+	</div>
+
+	<div class="col-md-2">
+		<label><spring:theme code="declaracion.publicidad.opuso" /></label>
+	</div>
+	<div class="col-md-3">
+		<select id="opuso" class="form-control">
+			<option value="1">Declaraci&oacuten</option>
+			<option value="2">Correcci&oacuten</option>
+			<option value="3">S&oacutelo Pago</option>
+			<option value="4">Acto Oficial</option>
 		</select>
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-md-2">
 		<label><spring:theme code="declaracion.publicidad.numresol" /></label>
@@ -55,11 +68,10 @@
 			aria-required="true" type="text" value="" maxlength="30"
 			disabled="disabled">
 	</div>
-</div>
 
-<div class="row">
+
 	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.fecresol" /></label>
+		<label><spring:theme code="declaracion.publicidad.fenoti" /></label>
 	</div>
 	<div class="col-md-3">
 		<input id="fecresol" name="fecresol" class="form-control form-control"

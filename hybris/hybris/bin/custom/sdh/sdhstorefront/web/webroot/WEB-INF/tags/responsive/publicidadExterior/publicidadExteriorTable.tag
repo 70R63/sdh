@@ -94,10 +94,10 @@
 		
 		<div class="row">				
 
-			<div class="col-md-2 ">
+			<div class="col-md-4 ">
 				<%-- <c:url value='/contribuyentes/publicidadexterior/declaracion' var="pubExtDeclaURL"/> --%>
 				<%-- <button class="btn btn-secondary btn-lg" type="button" onclick="'<c:url value="${pubExtDeclaURL }" />'"> --%>
-				<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion'">
+				<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href = '/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion'">
 					<spring:theme code="publicidad.exterior.declarationpresent" />					
 				</button>
 			</div>
@@ -106,7 +106,7 @@
 		<div class="row">				
 
 			<div class="col-md-2 ">
-				<button class="btn btn-secondary btn-lg" type="button">
+				<button class="btn btn-primary btn-lg" type="button">
 					<spring:theme code="publicidad.exterior.rop" />
 				</button>
 			</div>
@@ -114,7 +114,7 @@
 		<div class="row">				
 
 			<div class="col-md-2 ">
-				<button class="btn btn-secondary btn-lg" type="button">
+				<button class="btn btn-primary btn-lg" type="button">
 					<spring:theme code="publicidad.exterior.payonline" />
 				</button>
 			</div>
@@ -141,7 +141,7 @@
 			</div>
 			<div class="col-md-2 ">
 				<c:url value='/contribuyentes2/publicidadexterior/detail' var="pubExtDetailURL"/>
-				<button class="btn btn-secondary btn-lg" type="button"  onclick="'<c:url value="${pubExtDetailURL }" />'">
+				<button class="btn btn-primary btn-lg" type="button"  onclick="'<c:url value="${pubExtDetailURL }" />'">
 					<spring:theme code="publicidad.exterior.detail.search" />
 				</button>
 				<c:if test="${ empty action }">
