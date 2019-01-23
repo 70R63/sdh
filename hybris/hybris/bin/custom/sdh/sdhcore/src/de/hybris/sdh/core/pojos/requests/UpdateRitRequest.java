@@ -8,6 +8,8 @@ import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * @author hybris
@@ -229,6 +231,7 @@ public class UpdateRitRequest
 		stringBuilder.append(
 				"\"ZZAUTOBUZONE\":\"" + String.valueOf((Boolean.TRUE.equals(this.getUseEmailForNotifications()) ? 1 : 2)) + "\"");
 		stringBuilder.append("               },");
+
 		stringBuilder.append("\"redsocial\": [");
 
 		for (final ContribRedSocial eachRS : this.getRedsocial())
@@ -242,7 +245,96 @@ public class UpdateRitRequest
 			stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
 		}
 
+		stringBuilder.append("               ],");
+
+
+		stringBuilder.append("\"direcciones\": [");
+
+		if (this.getDireccionNoficacion() == null)
+		{
+			stringBuilder.append("{\"ADR_KIND\": \"2\",");
+			stringBuilder.append("\"STREET\": \" \",");
+			stringBuilder.append("\"STR_SUPPL1\": \" \",");
+			stringBuilder.append("\"STR_SUPPL2\": \" \",");
+			stringBuilder.append("\"POST_CODE1\": \" \",");
+			stringBuilder.append("\"CITY1\": \" \",");
+			stringBuilder.append("\"COUNTRY\": \" \",");
+			stringBuilder.append("\"REGION\": \" \"");
+			stringBuilder.append("    },");
+		}
+		else
+		{
+			final ContribDireccion address= this.getDireccionNoficacion();
+
+			stringBuilder.append("{\"ADR_KIND\": \" 2\",");
+			stringBuilder.append("\"STREET\": \""+ ((StringUtils.isBlank(address.getSTREET()))? "" : address.getSTREET() ) +"\",");
+			//stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTREET() ) +"\",");
+			//stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTREET() ) +"\",");
+			stringBuilder.append("\"POST_CODE1\": \""+ ((StringUtils.isBlank(address.getPOST_CODE()))? "" : address.getPOST_CODE() ) +"\",");
+			stringBuilder.append("\"CITY1\": \""+ ((StringUtils.isBlank(address.getCITY1()))? "" : address.getCITY1() ) +"\",");
+			stringBuilder.append("\"COUNTRY\": \""+ ((StringUtils.isBlank(address.getCOUNTRY()))? "" : address.getCOUNTRY() ) +"\",");
+			stringBuilder.append("\"REGION\": \""+ ((StringUtils.isBlank(address.getREGION()))? "" : address.getREGION() ) +"\"");
+			stringBuilder.append("    },");
+		}
+
+
+		if (this.getDireccionContacto() == null)
+		{
+			stringBuilder.append("{\"ADR_KIND\": \"1\",");
+			stringBuilder.append("\"STREET\": \" \",");
+			stringBuilder.append("\"STR_SUPPL1\": \" \",");
+			stringBuilder.append("\"STR_SUPPL2\": \" \",");
+			stringBuilder.append("\"POST_CODE1\": \" \",");
+			stringBuilder.append("\"CITY1\": \" \",");
+			stringBuilder.append("\"COUNTRY\": \" \",");
+			stringBuilder.append("\"REGION\": \" \"");
+			stringBuilder.append("    }");
+		}
+		else
+		{
+			final ContribDireccion address = this.getDireccionContacto();
+
+			stringBuilder.append("{\"ADR_KIND\": \" 1\",");
+			stringBuilder.append("\"STREET\": \"" + ((StringUtils.isBlank(address.getSTREET())) ? "" : address.getSTREET()) + "\",");
+			//stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTREET() ) +"\",");
+			//stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTREET() ) +"\",");
+			stringBuilder.append("\"POST_CODE1\": \"" + ((StringUtils.isBlank(address.getPOST_CODE())) ? "" : address.getPOST_CODE()) + "\",");
+			stringBuilder.append("\"CITY1\": \"" + ((StringUtils.isBlank(address.getCITY1())) ? "" : address.getCITY1()) + "\",");
+			stringBuilder.append("\"COUNTRY\": \"" + ((StringUtils.isBlank(address.getCOUNTRY())) ? "" : address.getCOUNTRY()) + "\",");
+			stringBuilder.append("\"REGION\": \"" + ((StringUtils.isBlank(address.getREGION())) ? "" : address.getREGION()) + "\"");
+			stringBuilder.append("    }");
+		}
+
+		stringBuilder.append("               ],");
+
+		stringBuilder.append("\"telefonos\": [");
+
+		if (this.getTelfonoPrincipal() == null)
+		{
+			stringBuilder.append("{\"TEL_TIPO\": \"1\",");
+			stringBuilder.append("\"TEL_NUMBER\": \" \",");
+			stringBuilder.append("\"TEL_EXTENS\": \" \",");
+			stringBuilder.append("\"MOB_NUMBER\": \" \"");
+			stringBuilder.append("    }");
+		}
+		else
+		{
+			final String tel= this.getTelfonoPrincipal();
+			final String ext= this.getExtension();
+
+			stringBuilder.append("{\"TEL_TIPO\": \" 1\",");
+			stringBuilder.append("\"TEL_NUMBER\": \"" + ((StringUtils.isBlank(tel)) ? "" : tel) + "\",");
+			//stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTREET() ) +"\",");
+			//stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTREET() ) +"\",");
+			stringBuilder.append("\"TEL_EXTENS\": \"" + ((StringUtils.isBlank(ext)) ? "" : ext) + "\",");
+			stringBuilder.append("\"MOB_NUMBER\": \" \"");
+			stringBuilder.append("    }");
+		}
+
+
 		stringBuilder.append("               ]");
+
+
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();

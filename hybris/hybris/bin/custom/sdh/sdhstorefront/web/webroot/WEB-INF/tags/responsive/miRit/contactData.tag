@@ -5350,8 +5350,8 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					</label> 
 					<select id="u5056_input" class="form-control addressHelperField" onchange="departmentChanged();">
 		                <option value="">Seleccionar</option>
-		                <option value="5">ANTIOQUIA</option>
-			<option value="8">ATLÁNTICO</option>
+		                <option value="05">ANTIOQUIA</option>
+			<option value="08">ATLÁNTICO</option>
 			<option value="11">BOGOTÁ</option>
 			<option value="13">BOLÍVAR</option>
 			<option value="15">BOYACA</option>

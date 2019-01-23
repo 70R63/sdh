@@ -25,8 +25,8 @@ public class UpdateRitForm
 	private String pais;
 	private String departamento;
 	private String munipio;
-	private ContribDireccion direccionContacto;
-	private ContribDireccion direccionNoficacion;
+	private String direccionContacto;
+	private String direccionNoficacion;
 	private String codigoPostal;
 	private String email;
 	private String newEmailAddress;
@@ -130,10 +130,11 @@ public class UpdateRitForm
 
 
 
+
 	/**
 	 * @return the direccionContacto
 	 */
-	public ContribDireccion getDireccionContacto()
+	public String getDireccionContacto()
 	{
 		return direccionContacto;
 	}
@@ -141,7 +142,7 @@ public class UpdateRitForm
 	/**
 	 * @param direccionContacto the direccionContacto to set
 	 */
-	public void setDireccionContacto(final ContribDireccion direccionContacto)
+	public void setDireccionContacto(final String direccionContacto)
 	{
 		this.direccionContacto = direccionContacto;
 	}
@@ -149,7 +150,7 @@ public class UpdateRitForm
 	/**
 	 * @return the direccionNoficacion
 	 */
-	public ContribDireccion getDireccionNoficacion()
+	public String getDireccionNoficacion()
 	{
 		return direccionNoficacion;
 	}
@@ -157,7 +158,7 @@ public class UpdateRitForm
 	/**
 	 * @param direccionNoficacion the direccionNoficacion to set
 	 */
-	public void setDireccionNoficacion(final ContribDireccion direccionNoficacion)
+	public void setDireccionNoficacion(final String direccionNoficacion)
 	{
 		this.direccionNoficacion = direccionNoficacion;
 	}

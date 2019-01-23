@@ -244,6 +244,24 @@ ACC.mirit = {
     	        });
     	        
     	        
+    	        var direccionNotificacion = {};
+    	        
+    	        direccionNotificacion.ADR_KIND = "02";
+    	        direccionNotificacion.STREET = $("#direccionNotificacion").val();
+    	        direccionNotificacion.POST_CODE = $("#u5073_input").val();
+    	        direccionNotificacion.REGION = $("#u5056_input").val();
+    	        direccionNotificacion.COUNTRY  = $("#u5070_input").val();
+    	        direccionNotificacion.CITY1   = $("#u5058_input").val();
+    	        
+    	        var direccionContacto = {};
+    	        
+    	        direccionContacto.ADR_KIND = "01";
+    	        direccionContacto.STREET = $("#direccionContacto").val();
+    	        direccionContacto.POST_CODE = $("#u5073_input").val();
+    	        direccionContacto.REGION = $("#u5056_input").val();
+    	        direccionContacto.COUNTRY  = $("#u5070_input").val();
+    	        direccionContacto.CITY1   = $("#u5058_input").val();
+    	        
     	        if(hasErrors)
     	        {
     	        	$( "#dialog" ).dialog( "open" );
@@ -263,6 +281,8 @@ ACC.mirit = {
     	    	        updateRitData.telfonoPrincipal = $("#telefonoPricipal").val();
     	    	        updateRitData.extension = $("#extensionTelefono").val();
     	    	        updateRitData.redsocial =JSON.stringify(redSocialData);
+    	    	        updateRitData.direccionNoficacion =JSON.stringify(direccionNotificacion);
+    	    	        updateRitData.direccionContacto =JSON.stringify(direccionContacto);
     	    	        
     	    	        $.ajax({
     	    	            url: ACC.updateRitURL,

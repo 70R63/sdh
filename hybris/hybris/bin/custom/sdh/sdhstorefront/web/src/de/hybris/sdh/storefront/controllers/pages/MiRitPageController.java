@@ -477,6 +477,47 @@ public class MiRitPageController extends AbstractPageController
 		request.setUseEmailForNotifications(updateRitForm.getUsoBuzon());
 		request.setUseInformationForInstitutionalPurposes(updateRitForm.getAutoUsoInfo());
 
+		if (StringUtils.isNotBlank(updateRitForm.getDireccionContacto()))
+		{
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				final ContribDireccion direccionContacto = mapper.readValue(updateRitForm.getDireccionContacto(),
+						ContribDireccion.class);
+
+				request.setDireccionContacto(direccionContacto);
+
+			}
+			catch (final Exception e)
+			{
+				// XXX Auto-generated catch block
+				LOG.error("there was an error while parsing redsocial JSON" + e.getMessage());
+			}
+		}
+
+		if (StringUtils.isNotBlank(updateRitForm.getDireccionNoficacion()))
+		{
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				final ContribDireccion direccionNoficacion = mapper.readValue(updateRitForm.getDireccionNoficacion(),
+						ContribDireccion.class);
+
+				request.setDireccionNoficacion(direccionNoficacion);
+
+			}
+			catch (final Exception e)
+			{
+				// XXX Auto-generated catch block
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+		//TODO:verificar llenado de telefono
+		request.setTelfonoPrincipal(updateRitForm.getTelfonoPrincipal());
+		request.setExtension(updateRitForm.getExtension());
+
 		if (Boolean.TRUE.equals(updateRitForm.getUsoBuzon()))
 		{
 			final LocalDateTime now = LocalDateTime.now();
@@ -492,6 +533,7 @@ public class MiRitPageController extends AbstractPageController
 		{
 
 			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			try
 			{
 				final List<ContribRedSocial> redesSociales = Arrays
@@ -508,7 +550,8 @@ public class MiRitPageController extends AbstractPageController
 
 		}
 
-		sdhUpdateRitService.updateRit(request);
+		//		sdhUpdateRitService.updateRit(request);
+		LOG.info(request.toString());
 
 		response.setRitUpdated(true);
 
