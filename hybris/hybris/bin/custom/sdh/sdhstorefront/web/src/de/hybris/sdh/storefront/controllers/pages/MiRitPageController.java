@@ -550,8 +550,8 @@ public class MiRitPageController extends AbstractPageController
 
 		}
 
-		//		sdhUpdateRitService.updateRit(request);
-		LOG.info(request.toString());
+		sdhUpdateRitService.updateRit(request);
+		//		LOG.info(request.toString());
 
 		response.setRitUpdated(true);
 

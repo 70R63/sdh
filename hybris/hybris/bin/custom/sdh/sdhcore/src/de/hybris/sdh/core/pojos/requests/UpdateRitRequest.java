@@ -253,21 +253,21 @@ public class UpdateRitRequest
 		if (this.getDireccionNoficacion() == null)
 		{
 			stringBuilder.append("{\"ADR_KIND\": \"2\",");
-			stringBuilder.append("\"STREET\": \" \",");
-			stringBuilder.append("\"STR_SUPPL1\": \" \",");
-			stringBuilder.append("\"STR_SUPPL2\": \" \",");
-			stringBuilder.append("\"STR_SUPPL3\": \" \",");
-			stringBuilder.append("\"POST_CODE1\": \" \",");
-			stringBuilder.append("\"CITY1\": \" \",");
-			stringBuilder.append("\"COUNTRY\": \" \",");
-			stringBuilder.append("\"REGION\": \" \"");
+			stringBuilder.append("\"STREET\": \"\",");
+			stringBuilder.append("\"STR_SUPPL1\": \"\",");
+			stringBuilder.append("\"STR_SUPPL2\": \"\",");
+			stringBuilder.append("\"STR_SUPPL3\": \"\",");
+			stringBuilder.append("\"POST_CODE1\": \"\",");
+			stringBuilder.append("\"CITY1\": \"\",");
+			stringBuilder.append("\"COUNTRY\": \"\",");
+			stringBuilder.append("\"REGION\": \"\"");
 			stringBuilder.append("    },");
 		}
 		else
 		{
 			final ContribDireccion address= this.getDireccionNoficacion();
 
-			stringBuilder.append("{\"ADR_KIND\": \" 2\",");
+			stringBuilder.append("{\"ADR_KIND\": \"2\",");
 			stringBuilder.append("\"STREET\": \""+ ((StringUtils.isBlank(address.getSTREET()))? "" : address.getSTREET() ) +"\",");
 			stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTR_SUPPL1() ) +"\",");
 			stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTR_SUPPL2() ) +"\",");
@@ -283,20 +283,20 @@ public class UpdateRitRequest
 		{
 			stringBuilder.append("{\"ADR_KIND\": \"1\",");
 			stringBuilder.append("\"STREET\": \" \",");
-			stringBuilder.append("\"STR_SUPPL1\": \" \",");
-			stringBuilder.append("\"STR_SUPPL2\": \" \",");
-			stringBuilder.append("\"STR_SUPPL3\": \" \",");
-			stringBuilder.append("\"POST_CODE1\": \" \",");
-			stringBuilder.append("\"CITY1\": \" \",");
-			stringBuilder.append("\"COUNTRY\": \" \",");
-			stringBuilder.append("\"REGION\": \" \"");
+			stringBuilder.append("\"STR_SUPPL1\": \"\",");
+			stringBuilder.append("\"STR_SUPPL2\": \"\",");
+			stringBuilder.append("\"STR_SUPPL3\": \"\",");
+			stringBuilder.append("\"POST_CODE1\": \"\",");
+			stringBuilder.append("\"CITY1\": \"\",");
+			stringBuilder.append("\"COUNTRY\": \"\",");
+			stringBuilder.append("\"REGION\": \"\"");
 			stringBuilder.append("    }");
 		}
 		else
 		{
 			final ContribDireccion address = this.getDireccionContacto();
 
-			stringBuilder.append("{\"ADR_KIND\": \" 1\",");
+			stringBuilder.append("{\"ADR_KIND\": \"1\",");
 			stringBuilder.append("\"STREET\": \"" + ((StringUtils.isBlank(address.getSTREET())) ? "" : address.getSTREET()) + "\",");
 			stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTR_SUPPL1() ) +"\",");
 			stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTR_SUPPL2() ) +"\",");
@@ -314,9 +314,9 @@ public class UpdateRitRequest
 		if (this.getTelfonoPrincipal() == null)
 		{
 			stringBuilder.append("{\"TEL_TIPO\": \"1\",");
-			stringBuilder.append("\"TEL_NUMBER\": \" \",");
-			stringBuilder.append("\"TEL_EXTENS\": \" \",");
-			stringBuilder.append("\"MOB_NUMBER\": \" \"");
+			stringBuilder.append("\"TEL_NUMBER\": \"\",");
+			stringBuilder.append("\"TEL_EXTENS\": \"\",");
+			stringBuilder.append("\"MOB_NUMBER\": \"\"");
 			stringBuilder.append("    }");
 		}
 		else
@@ -329,7 +329,7 @@ public class UpdateRitRequest
 			//stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTREET() ) +"\",");
 			//stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTREET() ) +"\",");
 			stringBuilder.append("\"TEL_EXTENS\": \"" + ((StringUtils.isBlank(ext)) ? "" : ext) + "\",");
-			stringBuilder.append("\"MOB_NUMBER\": \" \"");
+			stringBuilder.append("\"MOB_NUMBER\": \"\"");
 			stringBuilder.append("    }");
 		}
 

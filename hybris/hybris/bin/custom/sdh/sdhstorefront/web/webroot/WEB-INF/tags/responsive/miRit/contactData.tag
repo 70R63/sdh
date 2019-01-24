@@ -4777,10 +4777,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 //     	var complement = document.getElementById("u5066_input").value;
 //     	var complementText = document.getElementById("u6066_input").value;
     	
-    	document.getElementById("address.assistant.output").value = deparment + " " + 
-															    	town + " " +  
-															    	postCode + " " + 
-    																streetType + " " + 
+    	document.getElementById("address.assistant.output").value = streetType + " " + 
     																section1 + " " + 
     																section2 + " " + 
     																section3 + " " + 
@@ -4791,9 +4788,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     																section8 + " " + 
     																section9 + " " ;
     	
-    	document.getElementById("address.assistant.output.street").value =  deparment + " " + 
-    	town + " " +  
-    	postCode + " " + 
+    	document.getElementById("address.assistant.output.street").value = 
 		streetType + " " + 
 		section1 + " " + 
 		section2 + " " + 
@@ -4839,7 +4834,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     	    }
     	});
     	
-    	menuAutoSearch();
+//     	menuAutoSearch();
     }
     
     function cancelAddAddress()
@@ -4866,6 +4861,8 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 		document.getElementById("address.assistant.output.spl1").value  ="";
 		document.getElementById("address.assistant.output.spl2").value ="";
 		
+		complementos= 0;
+		
     }
     
     function municipioChanged()
@@ -4890,7 +4887,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     	    }
     	});
     	
-    	menuAutoSearch()
+//     	menuAutoSearch()
     }
     
     function setAddress(){
@@ -4951,13 +4948,22 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     	if(country == "CO")
    		{
    			$(".addressHelperField").prop('disabled', false);
-   			$("#direccionNotificacion").prop('disabled', true)
-			$("#direccionContacto").prop('disabled', true)
+   			$("#direccionNotificacion").prop('disabled', true);
+			$("#direccionContacto").prop('disabled', true);
+			
+			$("#u5056_input").prop('disabled', false);
+			$("#u5058_input").prop('disabled', false);
+			$("#u5073_input").prop('disabled', false);
+			
    		}else
 		{
 			$(".addressHelperField").prop('disabled', true);
-			$("#direccionNotificacion").prop('disabled', false)
-			$("#direccionContacto").prop('disabled', false)
+			$("#direccionNotificacion").prop('disabled', false);
+			$("#direccionContacto").prop('disabled', false);
+			
+			$("#u5056_input").prop('disabled', true);
+			$("#u5058_input").prop('disabled', true);
+			$("#u5073_input").prop('disabled', true);
 		}
     	
     }
@@ -5426,7 +5432,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<label class="control-label " for="u5056_input">
 						<spring:theme code="mirit.contactData.department" />
 					</label> 
-					<select id="u5056_input" class="form-control addressHelperField" onchange="departmentChanged();">
+					<select id="u5056_input" class="form-control " onchange="departmentChanged();">
 		                <option value="">Seleccionar</option>
 		                <option value="05">ANTIOQUIA</option>
 			<option value="08">ATLÁNTICO</option>
@@ -5473,7 +5479,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 						<label class="control-label " for="u5058_input">
 							<spring:theme code="mirit.contactData.county" />
 						</label> 
-						<select id="u5058_input" class="form-control addressHelperField" onchange="municipioChanged();">
+						<select id="u5058_input" class="form-control" onchange="municipioChanged();">
 			                <option value="">Seleccionar</option>
 			              </select>
 						<div class="help-block">
@@ -5486,7 +5492,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 						<label class="control-label " for="u5073_input">
 							<spring:theme code="mirit.contactData.postalCode" />
 						</label> 
-						<select id="u5073_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
+						<select id="u5073_input" class="form-control" onchange="">
 			                <option value="">Seleccionar</option>
 			              </select>
 						<div class="help-block">
@@ -5500,6 +5506,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-2">
 					<div class="form-group ">
 					<label class="control-label " for="u5059_input">
+						<spring:theme code="mirit.addresshelper.tipo" />
 					</label> 
 						<select id="u5059_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5519,6 +5526,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5060_input">
+							<spring:theme code="mirit.addresshelper.numero" />
 						</label> 
 						<input id="u5060_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
@@ -5529,6 +5537,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5062_input">
+							<spring:theme code="mirit.addresshelper.letra" />
 						</label> 
 						<select id="u5062_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5568,6 +5577,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5061_input">
+							<spring:theme code="mirit.addresshelper.bis" />
 						</label> 
 							<select id="u5061_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 				                <option selected="" value="">Seleccionar</option>
@@ -5582,6 +5592,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5063_input">
+							<spring:theme code="mirit.addresshelper.letra" />
 						</label> 
 						<select id="u5063_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5621,6 +5632,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5064_input">
+							<spring:theme code="mirit.addresshelper.zona" />
 						</label> 
 						<select id="u5064_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5636,6 +5648,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u6064_input">
+							<spring:theme code="mirit.addresshelper.numero" />
 						</label> 
 						<input id="u6064_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
@@ -5647,6 +5660,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5065_input">
+							<spring:theme code="mirit.addresshelper.letra" />
 						</label> 
 							<select id="u5065_input"  class="form-control addressHelperField" onchange="menuAutoSearch();">
 				                <option selected="" value="">Seleccionar</option>
@@ -5686,6 +5700,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u6065_input">
+							<spring:theme code="mirit.addresshelper.numero" />
 						</label> 
 						<input id="u6065_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
@@ -5697,6 +5712,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5079_input">
+							<spring:theme code="mirit.addresshelper.zona" />
 						</label> 
 						<select id="u5079_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5717,6 +5733,9 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group ">
+						<label class="control-label " for="u5066_input">
+							<spring:theme code="mirit.addresshelper.tipoComplemento" />
+						</label> 
 						<select id="u5066_input" class="form-control addressHelperField" onchange=""> 
 							<option selected="" value="">Seleccionar</option>
 			                <option value="AP">Apartamento</option>
@@ -5762,7 +5781,9 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				</div>
 				<div class="col-md-3">
 					<div class="form-group ">
-
+						<label class="control-label " for="u6066_input">
+							<spring:theme code="mirit.addresshelper.complemento" />
+						</label> 
 						<input id="u6066_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
@@ -5770,16 +5791,21 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					</div>
 				
 				</div>
-				<div class="">
+				<div class="col-md-2">
 					<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="addComplement();">
 						<spring:theme code="mirit.contactData.acept" /></button>
+				</div>
+				<div class="col-md-2">
 					<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="cancelAddAddress();">
 						<spring:theme code="mirit.contactData.cancel" /></button>
 				</div>
-				<br>
-				<div>
-					<button class="btn btn-secondary btn-lg addressHelperField" type="button" onclick="setAddress();">
-						<spring:theme code="mirit.contactData.addAddress" /></button>
+				</div>
+			<div class="row">
+				<div class="col-md-3">	
+					<div>
+						<button class="btn btn-secondary btn-lg addressHelperField" type="button" onclick="setAddress();">
+							<spring:theme code="mirit.contactData.addAddress" /></button>
+					</div>
 				</div>
 			</div>
 			

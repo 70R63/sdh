@@ -32,7 +32,15 @@ ACC.mirit = {
 	            async: false,
 	            success: function (data) {
 	            	$( "#dialog" ).dialog( "open" );
-	            	$("#textCertNom").html("No se puede certificar el nombre");
+	            	if(data.success == true)
+	            	{
+	            		$("#textCertNom").html("El nombre será actualizado una vez que des click en Actualizar RIT");
+	            	}else
+	            	{
+	            		$("#textCertNom").html("No se puede certificar el nombre. "+data.txtmsj);
+	            	}
+	            	
+	            	
 	            },
 	            error: function () {
 	            	$("#textCertNom").html("No se puede certificar el nombre");
@@ -321,10 +329,13 @@ ACC.mirit = {
     	
     	$( "#dialog" ).dialog({ 
     		autoOpen: false, 
+    		modal: true,
+			 draggable: false
     		buttons: {
     			Ok: function() {
     				$( this ).dialog( "close" );
-    			}
+    			},
+    			 
     	    } 
     	});
     	

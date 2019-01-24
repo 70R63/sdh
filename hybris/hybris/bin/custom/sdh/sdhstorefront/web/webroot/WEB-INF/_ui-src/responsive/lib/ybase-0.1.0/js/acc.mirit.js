@@ -321,6 +321,8 @@ ACC.mirit = {
     	
     	$( "#dialog" ).dialog({ 
     		autoOpen: false, 
+    		modal: true,
+			 draggable: false
     		buttons: {
     			Ok: function() {
     				$( this ).dialog( "close" );
