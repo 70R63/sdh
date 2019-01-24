@@ -256,6 +256,7 @@ public class UpdateRitRequest
 			stringBuilder.append("\"STREET\": \" \",");
 			stringBuilder.append("\"STR_SUPPL1\": \" \",");
 			stringBuilder.append("\"STR_SUPPL2\": \" \",");
+			stringBuilder.append("\"STR_SUPPL3\": \" \",");
 			stringBuilder.append("\"POST_CODE1\": \" \",");
 			stringBuilder.append("\"CITY1\": \" \",");
 			stringBuilder.append("\"COUNTRY\": \" \",");
@@ -268,9 +269,9 @@ public class UpdateRitRequest
 
 			stringBuilder.append("{\"ADR_KIND\": \" 2\",");
 			stringBuilder.append("\"STREET\": \""+ ((StringUtils.isBlank(address.getSTREET()))? "" : address.getSTREET() ) +"\",");
-			//stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTREET() ) +"\",");
-			//stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTREET() ) +"\",");
-			stringBuilder.append("\"POST_CODE1\": \""+ ((StringUtils.isBlank(address.getPOST_CODE()))? "" : address.getPOST_CODE() ) +"\",");
+			stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTR_SUPPL1() ) +"\",");
+			stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTR_SUPPL2() ) +"\",");
+			stringBuilder.append("\"POST_CODE1\": \""+ ((StringUtils.isBlank(address.getPOST_CODE()))? "" : StringUtils.leftPad(address.getCITY1(),6) ) +"\",");
 			stringBuilder.append("\"CITY1\": \""+ ((StringUtils.isBlank(address.getCITY1()))? "" : address.getCITY1() ) +"\",");
 			stringBuilder.append("\"COUNTRY\": \""+ ((StringUtils.isBlank(address.getCOUNTRY()))? "" : address.getCOUNTRY() ) +"\",");
 			stringBuilder.append("\"REGION\": \""+ ((StringUtils.isBlank(address.getREGION()))? "" : address.getREGION() ) +"\"");
@@ -284,6 +285,7 @@ public class UpdateRitRequest
 			stringBuilder.append("\"STREET\": \" \",");
 			stringBuilder.append("\"STR_SUPPL1\": \" \",");
 			stringBuilder.append("\"STR_SUPPL2\": \" \",");
+			stringBuilder.append("\"STR_SUPPL3\": \" \",");
 			stringBuilder.append("\"POST_CODE1\": \" \",");
 			stringBuilder.append("\"CITY1\": \" \",");
 			stringBuilder.append("\"COUNTRY\": \" \",");
@@ -296,10 +298,10 @@ public class UpdateRitRequest
 
 			stringBuilder.append("{\"ADR_KIND\": \" 1\",");
 			stringBuilder.append("\"STREET\": \"" + ((StringUtils.isBlank(address.getSTREET())) ? "" : address.getSTREET()) + "\",");
-			//stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTREET() ) +"\",");
-			//stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTREET() ) +"\",");
+			stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTR_SUPPL1() ) +"\",");
+			stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTR_SUPPL2() ) +"\",");
 			stringBuilder.append("\"POST_CODE1\": \"" + ((StringUtils.isBlank(address.getPOST_CODE())) ? "" : address.getPOST_CODE()) + "\",");
-			stringBuilder.append("\"CITY1\": \"" + ((StringUtils.isBlank(address.getCITY1())) ? "" : address.getCITY1()) + "\",");
+			stringBuilder.append("\"CITY1\": \"" + ((StringUtils.isBlank(address.getCITY1())) ? "" : StringUtils.leftPad(address.getCITY1(),6)) + "\",");
 			stringBuilder.append("\"COUNTRY\": \"" + ((StringUtils.isBlank(address.getCOUNTRY())) ? "" : address.getCOUNTRY()) + "\",");
 			stringBuilder.append("\"REGION\": \"" + ((StringUtils.isBlank(address.getREGION())) ? "" : address.getREGION()) + "\"");
 			stringBuilder.append("    }");

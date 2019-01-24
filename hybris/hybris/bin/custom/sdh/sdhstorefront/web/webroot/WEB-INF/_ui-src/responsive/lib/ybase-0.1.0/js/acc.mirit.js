@@ -11,6 +11,7 @@ ACC.mirit = {
 		    	}).attr('selected', true);
 		    	$("#u5058_input").trigger( "change" );
 		    	$("#u5073_input").val(ACC.addressPC);
+		    	$("#u5073_input").trigger( "change" );
 		    },
 
     bindUpdateButton: function () {
@@ -244,10 +245,15 @@ ACC.mirit = {
     	        });
     	        
     	        
+    	        
+    	        
+    	        
     	        var direccionNotificacion = {};
     	        
     	        direccionNotificacion.ADR_KIND = "02";
-    	        direccionNotificacion.STREET = $("#direccionNotificacion").val();
+    	        direccionNotificacion.STREET = $("#direccionNotificacionStreet").val();
+    	        direccionNotificacion.STR_SUPPL1 = $("#direccionNotificacionSuppl1").val();
+    	        direccionNotificacion.STR_SUPPL2 = $("#direccionNotificacionSuppl2").val();
     	        direccionNotificacion.POST_CODE = $("#u5073_input").val();
     	        direccionNotificacion.REGION = $("#u5056_input").val();
     	        direccionNotificacion.COUNTRY  = $("#u5070_input").val();
@@ -256,7 +262,9 @@ ACC.mirit = {
     	        var direccionContacto = {};
     	        
     	        direccionContacto.ADR_KIND = "01";
-    	        direccionContacto.STREET = $("#direccionContacto").val();
+    	        direccionContacto.STREET = $("#direccionContactoStreet").val();
+    	        direccionContacto.STR_SUPPL1 = $("#direccionContactoSuppl1").val();
+    	        direccionContacto.STR_SUPPL2 = $("#direccionContactoSuppl2").val();
     	        direccionContacto.POST_CODE = $("#u5073_input").val();
     	        direccionContacto.REGION = $("#u5056_input").val();
     	        direccionContacto.COUNTRY  = $("#u5070_input").val();

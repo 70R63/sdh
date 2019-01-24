@@ -19,6 +19,47 @@ public class ContribDireccion
 	private String CITY1;
 	private String COUNTRY;
 	private String REGION;
+
+	private String STR_SUPPL1;
+	private String STR_SUPPL2;
+
+	/**
+	 * @return the sTR_SUPPL1
+	 */
+	public String getSTR_SUPPL1()
+	{
+		return STR_SUPPL1;
+	}
+
+	/**
+	 * @param sTR_SUPPL1
+	 *           the sTR_SUPPL1 to set
+	 */
+	@JsonProperty("STR_SUPPL1")
+	public void setSTR_SUPPL1(final String sTR_SUPPL1)
+	{
+		STR_SUPPL1 = sTR_SUPPL1;
+	}
+
+	/**
+	 * @return the sTR_SUPPL2
+	 */
+	public String getSTR_SUPPL2()
+	{
+		return STR_SUPPL2;
+	}
+
+	/**
+	 * @param sTR_SUPPL2
+	 *           the sTR_SUPPL2 to set
+	 */
+	@JsonProperty("STR_SUPPL2")
+	public void setSTR_SUPPL2(final String sTR_SUPPL2)
+	{
+		STR_SUPPL2 = sTR_SUPPL2;
+	}
+
+
 	/**
 	 *
 	 */
@@ -131,7 +172,7 @@ public class ContribDireccion
 	 * @param pOST_CODE
 	 *           the pOST_CODE to set
 	 */
-	@JsonProperty("POST_CODE")
+	@JsonProperty("POST_CODE1")
 	public void setPOST_CODE(final String pOST_CODE)
 	{
 		POST_CODE = pOST_CODE;

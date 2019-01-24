@@ -4791,6 +4791,20 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     																section8 + " " + 
     																section9 + " " ;
     	
+    	document.getElementById("address.assistant.output.street").value =  deparment + " " + 
+    	town + " " +  
+    	postCode + " " + 
+		streetType + " " + 
+		section1 + " " + 
+		section2 + " " + 
+		section3 + " " + 
+		section4 + " " + 
+		section5 + " " + 
+		section6 + " " + 
+		section7 + " " + 
+		section8 + " " + 
+		section9 + " " ;
+    	
     }
     
     function departmentChanged()
@@ -4828,6 +4842,32 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     	menuAutoSearch();
     }
     
+    function cancelAddAddress()
+    {
+    	$(".form-control.addressHelperField").val("");
+    	document.getElementById("address.assistant.output").value ="";
+    	
+//     	document.getElementById("direccionNotificacionStreet").value = "";
+// 		document.getElementById("direccionNotificacionSuppl1").value = "";
+// 		document.getElementById("direccionNotificacionSuppl2").value = "";
+		
+// 		document.getElementById("direccionContactoStreet").value = "";
+// 		document.getElementById("direccionContactoSuppl1").value = "";
+// 		document.getElementById("direccionContactoSuppl2").value = "";
+		
+		
+		document.getElementById("address.assistant.output").value ="";
+		document.getElementById("address.assistant.output.street").value ="";
+		document.getElementById("address.assistant.output.spl1").value ="";
+		document.getElementById("address.assistant.output.spl2").value ="";
+		
+		document.getElementById("address.assistant.output").value  ="";
+		document.getElementById("address.assistant.output.street").value  ="";
+		document.getElementById("address.assistant.output.spl1").value  ="";
+		document.getElementById("address.assistant.output.spl2").value ="";
+		
+    }
+    
     function municipioChanged()
     {
     	var selectedMunicipio = $("#u5058_input").val();
@@ -4856,22 +4896,50 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     function setAddress(){
     	var addressType = document.getElementById("u5067_input").value;
     	
+    	
     	if(addressType == "notificacion")
    		{
-    		document.getElementById("direccionNotificacion").value = document.getElementById("address.assistant.output").value
+    		document.getElementById("direccionNotificacion").value = document.getElementById("address.assistant.output").value;
+    		document.getElementById("direccionNotificacionStreet").value = document.getElementById("address.assistant.output.street").value;
+    		document.getElementById("direccionNotificacionSuppl1").value = document.getElementById("address.assistant.output.spl1").value;
+    		document.getElementById("direccionNotificacionSuppl2").value = document.getElementById("address.assistant.output.spl2").value;
    		}else if(addressType == "contacto")
    		{
-   			document.getElementById("direccionContacto").value = document.getElementById("address.assistant.output").value
+   			document.getElementById("direccionContacto").value = document.getElementById("address.assistant.output").value;
+    		document.getElementById("direccionContactoStreet").value = document.getElementById("address.assistant.output.street").value;
+    		document.getElementById("direccionContactoSuppl1").value = document.getElementById("address.assistant.output.spl1").value;
+    		document.getElementById("direccionContactoSuppl2").value = document.getElementById("address.assistant.output.spl2").value;
    		}
     	
     	
     }
     
+    var complementos = 0;
+    
     function addComplement(){
     	var complement = document.getElementById("u5066_input").value;
     	var complementText = document.getElementById("u6066_input").value;
     	
-    	document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    	if(complementos == 0)
+    	{
+    		document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    		document.getElementById("address.assistant.output.spl1").value =  complement + " " + complementText;
+    		complementos ++;
+    	}else if(complementos == 1 )
+    	{
+    		document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    		document.getElementById("address.assistant.output.spl2").value = document.getElementById("address.assistant.output.spl2").value + complement + " " + complementText;
+    		complementos++;
+    	}else if(complementos == 2 )
+    	{
+    		document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    		document.getElementById("address.assistant.output.spl2").value = document.getElementById("address.assistant.output.spl2").value +" "+ complement + " " + complementText;
+    		complementos++;
+    	}else
+    	{
+    		alert("Solo se permiten hasta 3 complementos.");
+    	}
+    	
     	
     }
     
@@ -4908,7 +4976,10 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<label class="control-label required" for="direccionNotificacion">
 						<spring:theme code="mirit.contactData.notificationAddress" />
 					</label> 
-					<input id="direccionNotificacion" name="direccionNotificacion" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionNotificacion.STREET }" maxlength="240">
+					<input id="direccionNotificacion" name="direccionNotificacion" class="form-control" aria-required="true" type="text" data-original="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"" disabled="disabled" value="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }" maxlength="240">
+					<input id="direccionNotificacionStreet" name="direccionNotificacionStreet"  type="hidden" data-original="${miRitForm.direccionNotificacion.STREET}"  value="${miRitForm.direccionNotificacion.STREET}">
+					<input id="direccionNotificacionSuppl1" name="direccionNotificacionStreet"  type="hidden" data-original="${miRitForm.direccionNotificacion.STR_SUPPL1 }"  value="${miRitForm.direccionNotificacion.STR_SUPPL1}">
+					<input id="direccionNotificacionSuppl2" name="direccionNotificacionStreet"  type="hidden" data-original="${miRitForm.direccionNotificacion.STR_SUPPL2 }"  value="${miRitForm.direccionNotificacion.STR_SUPPL2 }">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -4917,7 +4988,10 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<label class="control-label required" for="direccionContacto">
 						<spring:theme code="mirit.contactData.anotherContactAddress" />
 					</label> 
-					<input id="direccionContacto" name="direccionContacto" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionContacto.STREET }" maxlength="240">
+					<input id="direccionContacto" name="direccionContacto" class="form-control" aria-required="true" type="text" disabled="disabled" data-original="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }" value="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }" maxlength="240">
+					<input id="direccionContactoStreet" name="direccionContactoStreet"  type="hidden" data-original="${miRitForm.direccionContacto.STREET}" value="${miRitForm.direccionContacto.STREET}">
+					<input id="direccionContactoSuppl1" name="direccionContactoSuppl1"  type="hidden" data-original="${miRitForm.direccionContacto.STR_SUPPL1 }" value=" ${miRitForm.direccionContacto.STR_SUPPL1 } ">
+					<input id="direccionContactoSuppl2" name="direccionContactoSuppl2"  type="hidden" data-original="${miRitForm.direccionContacto.STR_SUPPL2 }" value="${miRitForm.direccionContacto.STR_SUPPL2 }">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -5052,6 +5126,10 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				</label>
 			</div>
 			<input id="address.assistant.output" name="addressAssistantOutput" class="form-control form-control" aria-required="true" type="text" value="" maxlength="2000" width="90000" onkeyup="menuAutoSearch();" disabled>
+			<input id="address.assistant.output.street" name="address.assistant.output.street" class="form-control form-control" type="hidden" />
+			<input id="address.assistant.output.spl1" name="address.assistant.output.spl1" class="form-control form-control" type="hidden" />
+			<input id="address.assistant.output.spl2" name="address.assistant.output.spl2" class="form-control form-control" type="hidden" />
+			
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-group ">
@@ -5695,6 +5773,8 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="">
 					<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="addComplement();">
 						<spring:theme code="mirit.contactData.acept" /></button>
+					<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="cancelAddAddress();">
+						<spring:theme code="mirit.contactData.cancel" /></button>
 				</div>
 				<br>
 				<div>
