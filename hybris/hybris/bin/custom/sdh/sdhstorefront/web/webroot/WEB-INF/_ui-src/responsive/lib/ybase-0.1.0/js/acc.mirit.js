@@ -299,13 +299,10 @@ ACC.mirit = {
     	    	            dataType : 'json',
     	    	            success: function (data) {
     	    	            	$( "#dialog" ).dialog( "open" );
-    	    	            	if(data.ritUpdated == true)
-    		            		{
-    	    	            		$("#textCertNom").html("Tu RIT ha sido actualizado");
-    		            		}else
-    	    	            	{
-    		            			$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor intentalo mas tarde.");
-    	    	            	}
+    	    	            	$("#textCertNom").html("");
+    	    	            	$.each(data.errores, function( index, value ) {
+    	    	            		$("#textCertNom").html($("#textCertNom").html()+value.txtmsj+"<br>");
+    	    	            		});
     	    	            },
     	    	            error: function () {
     	    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
@@ -322,7 +319,7 @@ ACC.mirit = {
     	$( "#dialog" ).dialog({ 
     		autoOpen: false, 
     		modal: true,
-			 draggable: false
+			 draggable: false,
     		buttons: {
     			Ok: function() {
     				$( this ).dialog( "close" );

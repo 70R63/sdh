@@ -35,12 +35,13 @@ import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.responses.UpdateRitErrorResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
 import de.hybris.sdh.core.pojos.responses.ValidEmailResponse;
 import de.hybris.sdh.core.pojos.responses.ValidPasswordResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
-import de.hybris.sdh.core.services.SDHUpdateRitService;
 import de.hybris.sdh.facades.SDHCertifNombFacade;
+import de.hybris.sdh.facades.SDHUpdateRitFacade;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRitForm;
@@ -96,6 +97,8 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sdhCertifNombFacade")
 	private SDHCertifNombFacade sdhCertifNombFacade;
 
+	@Resource(name = "sdhUpdateRitFacade")
+	SDHUpdateRitFacade sdhUpdateRitFacade;
 
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
@@ -421,8 +424,7 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "eventService")
 	private EventService eventService;
 
-	@Resource(name = "sdhUpdateRitService")
-	SDHUpdateRitService sdhUpdateRitService;
+
 
 
 	@RequestMapping(value = "/updateRit", method = RequestMethod.POST)
@@ -510,7 +512,6 @@ public class MiRitPageController extends AbstractPageController
 			}
 			catch (final Exception e)
 			{
-				// XXX Auto-generated catch block
 				LOG.error("there was an error while parsing redsocial JSON");
 			}
 		}
@@ -550,12 +551,35 @@ public class MiRitPageController extends AbstractPageController
 
 		}
 
-		sdhUpdateRitService.updateRit(request);
-		//		LOG.info(request.toString());
+		request.setUpdateName(Boolean.FALSE);
 
-		response.setRitUpdated(true);
+		final CertifNombRequest certifNomRequest = new CertifNombRequest();
 
-		return response;
+		certifNomRequest.setNumBP(customerModel.getNumBP());
+		certifNomRequest.setApellido1(updateRitForm.getPrimApe());
+		certifNomRequest.setApellido2(updateRitForm.getSegApe());
+		certifNomRequest.setName1(updateRitForm.getPrimNom());
+		certifNomRequest.setName2(updateRitForm.getSegNom());
+
+		boolean nameUpdated = false;
+
+		final CertifNombResponse certifNombResponse = sdhCertifNombFacade.certifNomb(certifNomRequest);
+
+		if (certifNombResponse != null && Boolean.TRUE.equals(certifNombResponse.getSuccess()))
+		{
+			request.setUpdateName(Boolean.TRUE);
+			nameUpdated = true;
+		}
+
+		final UpdateRitResponse udpateRitResponse = sdhUpdateRitFacade.updateRit(request);
+
+		if (nameUpdated == false)
+		{
+			udpateRitResponse.getErrores().add(new UpdateRitErrorResponse("x",
+					"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud"));
+		}
+
+		return udpateRitResponse;
 	}
 
 	@Resource(name = "commerceCommonI18NService")

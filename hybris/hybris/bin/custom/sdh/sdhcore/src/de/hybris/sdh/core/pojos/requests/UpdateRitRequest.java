@@ -36,6 +36,8 @@ public class UpdateRitRequest
 	private String telfonoPrincipal;
 	private String extension;
 
+	private Boolean updateName;
+
 	/**
 	 * @return the email
 	 */
@@ -219,10 +221,13 @@ public class UpdateRitRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"personal\": {");
-		stringBuilder.append("\"primNom\":\"" + this.getPrimNom() + "\",");
-		stringBuilder.append("\"segNom\":\"" + this.getSegNom() + "\",");
-		stringBuilder.append("\"primApe\":\"" + this.getPrimApe() + "\",");
-		stringBuilder.append("\"segApe\":\"" + this.getSegApe() + "\",");
+		if (Boolean.TRUE.equals(this.getUpdateName()))
+		{
+			stringBuilder.append("\"primNom\":\"" + this.getPrimNom() + "\",");
+			stringBuilder.append("\"segNom\":\"" + this.getSegNom() + "\",");
+			stringBuilder.append("\"primApe\":\"" + this.getPrimApe() + "\",");
+			stringBuilder.append("\"segApe\":\"" + this.getSegApe() + "\",");
+		}
 		stringBuilder.append("\"SMTP_ADDR\":\"" + this.getEmail() + "\",");
 		stringBuilder.append("\"ZZAUTOUSOINF\":\""
 				+ String.valueOf((Boolean.TRUE.equals(this.getUseInformationForInstitutionalPurposes()) ? 1 : 2)) + "\",");
@@ -408,6 +413,23 @@ public class UpdateRitRequest
 	public void setExtension(final String extension)
 	{
 		this.extension = extension;
+	}
+
+	/**
+	 * @return the updateName
+	 */
+	public Boolean getUpdateName()
+	{
+		return updateName;
+	}
+
+	/**
+	 * @param updateName
+	 *           the updateName to set
+	 */
+	public void setUpdateName(final Boolean updateName)
+	{
+		this.updateName = updateName;
 	}
 
 
