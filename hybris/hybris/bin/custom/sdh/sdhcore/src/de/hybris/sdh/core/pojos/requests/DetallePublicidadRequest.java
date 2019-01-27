@@ -82,7 +82,9 @@ public class DetallePublicidadRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\"");
+		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
+		stringBuilder.append("\"numResolu\":\"" + this.getNumResolu() + "\",");
+		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();

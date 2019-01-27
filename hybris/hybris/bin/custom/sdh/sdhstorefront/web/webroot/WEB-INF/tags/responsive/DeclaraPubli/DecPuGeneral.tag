@@ -9,29 +9,29 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<h2>
-			<span tabindex="0"><spring:theme
+		<h3>
+			<span class="cintillo col-md-10"><spring:theme
 					code="declaracion.publicidad.titulo" /></span>
-		</h2>
+		</h3>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span tabindex="0"><spring:theme
+			<span class="cintillo col-md-10"><spring:theme
 					code="declaracion.publicidad.datgene" /></span>
 		</h3>
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.anogravable" /></label>
-	</div>
 	<div class="col-md-3">
+		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.anogravable" /></label>
+	</div>
+	<div class="col-md-2">
 
-		<select id="anograv" class="form-control" disabled="disabled">
+		<select id="anograv" class="inputlabelnew" disabled="disabled">
 
 			<option value="2019">2019</option>
 			<option value="2018">2018</option>
@@ -46,11 +46,11 @@
 		</select>
 	</div>
 
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.opuso" /></label>
-	</div>
 	<div class="col-md-3">
-		<select id="opuso" class="form-control">
+		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.opuso" /></label>
+	</div>
+	<div class="col-md-2">
+		<select id="opuso" class="inputdropdown">
 			<option value="1">Declaraci&oacuten</option>
 			<option value="2">Correcci&oacuten</option>
 			<option value="3">S&oacutelo Pago</option>
@@ -58,24 +58,25 @@
 		</select>
 	</div>
 </div>
-
+<br display: block;
+   margin: 5px 0;>
 <div class="row">
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.numresol" /></label>
-	</div>
 	<div class="col-md-3">
-		<input id="numresol" name="numresol" class="form-control form-control"
+		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.numresol" /></label>
+	</div>
+	<div class="col-md-2">
+		<input id="numresol" name="numresol" class="inputtextnew"
 			aria-required="true" type="text" value="" maxlength="30"
 			disabled="disabled">
 	</div>
 
 
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.fenoti" /></label>
-	</div>
 	<div class="col-md-3">
-		<input id="fecresol" name="fecresol" class="form-control form-control"
-			aria-required="true" type="date" value="" maxlength="30"
+		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.fenoti" /></label>
+	</div>
+	<div class="col-md-2">
+		<input id="fecresol" name="fecresol" class="inputtextnew"
+			aria-required="true" type="" value="${declaPublicidadForm.fechnotif}" maxlength="30"
 			disabled="disabled">
 	</div>
 </div>

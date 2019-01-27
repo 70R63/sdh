@@ -3,18 +3,17 @@
  */
 package de.hybris.sdh.storefront.forms;
 
-import java.util.Date;
-
-
 /**
  * @author Maria Luisa
  *
  */
 public class DeclaPublicidadController
 {
+	private String numBP;
 	private String anograv;
 	private String numresol;
-	private Date fecresol;
+	private String fecresol;
+	private String fechnotif;
 	private String OrValla;
 	private String luginst;
 	private String basegrav;
@@ -27,6 +26,24 @@ public class DeclaPublicidadController
 	private String tipiden;
 	private String numide;
 	private String name;
+
+
+
+	/**
+	 * @return the numBP
+	 */
+	public String getNumBP()
+	{
+		return numBP;
+	}
+
+	/**
+	 * @param numBP the numBP to set
+	 */
+	public void setNumBP(final String numBP)
+	{
+		this.numBP = numBP;
+	}
 
 	/**
 	 * @return the anograv
@@ -62,10 +79,12 @@ public class DeclaPublicidadController
 		this.numresol = numresol;
 	}
 
+
+
 	/**
 	 * @return the fecresol
 	 */
-	public Date getFecresol()
+	public String getFecresol()
 	{
 		return fecresol;
 	}
@@ -74,9 +93,26 @@ public class DeclaPublicidadController
 	 * @param fecresol
 	 *           the fecresol to set
 	 */
-	public void setFecresol(final Date fecresol)
+	public void setFecresol(final String fecresol)
 	{
 		this.fecresol = fecresol;
+	}
+
+	/**
+	 * @return the fechnotif
+	 */
+	public String getFechnotif()
+	{
+		return fechnotif;
+	}
+
+	/**
+	 * @param fechnotif
+	 *           the fechnotif to set
+	 */
+	public void setFechnotif(final String fechnotif)
+	{
+		this.fechnotif = fechnotif;
 	}
 
 	/**

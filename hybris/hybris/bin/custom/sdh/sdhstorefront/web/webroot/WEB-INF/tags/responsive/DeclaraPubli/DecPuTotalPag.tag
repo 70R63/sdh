@@ -4,25 +4,32 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+<spring:url
+	value="/calculo"
+	var="CalculodeclaracionUrl" htmlEscape="false" />
+	
 
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span tabindex="0"><spring:theme
+			<span class="cintillo col-md-10"><spring:theme
 					code="declaracion.publicidad.totpagar" /></span>
 		</h3>
 	</div>
 </div>
-
+<br display:block;
+   margin: 5px 0;>
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme
+		<label class="inputlabelnew"><spring:theme
 				code="declaracion.publicidad.impcargo" /></label>
 	</div>
 	<div class="col-md-3">
-		<input id="impCar" name="impCar" class="form-control form-control"
+		<input id="impCar" name="impCar" class="inputtextnew"
 			aria-required="true" type="number" value="0" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
@@ -30,49 +37,58 @@
 
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme
+		<label class="inputlabelnew"><spring:theme
 				code="declaracion.publicidad.valsan" /></label>
 	</div>
 	<div class="col-md-3">
-		<input id="valsan" name="valsan" class="form-control form-control"
+		<input id="valsan" name="valsan" class="inputtextnew"
 			aria-required="true" type="number" value="0" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
+
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.valpaga" /></label>
+		<label class="inputlabelnew"><spring:theme
+				code="declaracion.publicidad.valpaga" /></label>
 	</div>
 	<div class="col-md-3">
-		<input id="valpag" name="valpag" class="form-control form-control"
+		<input id="valpag" name="valpag" class="inputtextnew"
 			aria-required="true" type="number" value="0" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.intermora" /></label>
+		<label class="inputlabelnew"><spring:theme
+				code="declaracion.publicidad.intermora" /></label>
 	</div>
 	<div class="col-md-3">
-		<input id="intmora" name="intmora" class="form-control form-control"
+		<input id="intmora" name="intmora" class="inputtextnew"
 			aria-required="true" type="number" value="0" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.totalapagar" /></label>
+		<label class="inputlabelnew"><spring:theme
+				code="declaracion.publicidad.totalapagar" /></label>
 	</div>
 	<div class="col-md-3">
-		<input id="totpag" name="totpag" class="form-control form-control"
+		<input id="totpag" name="totpag" class="inputtextnew"
 			aria-required="true" type="number" value="0" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
+
 <div class="row">
-	<div class="col-md-2">
-		<button class="btn btn-primary btn-lg" type="button">
-			<spring:theme code="declaracion.publicidad.button.calcular"  />
-		</button>
-	</div>
+	<div class="col-md-3 col-md-offset-3 center">
+	<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1" commandName="calculo"
+			method="POST">
+			<button id="/contribuyentes/publicidadexterior/declaracion" type="submit"
+				class="botton">
+				<spring:theme code="declaracion.publicidad.button.calcular" />
+				</button>
+			</sf:form>
+				</div>
 </div>

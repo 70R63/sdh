@@ -7,9 +7,8 @@ package de.hybris.sdh.core.pojos.responses;
  * @author Maria Luisa
  *
  */
-public class detallePublicidad
+public class DetallePubli
 {
-
 	private String tipoElemento;
 	private String avisoLumino;
 	private String ubicacion;
@@ -478,7 +477,6 @@ public class detallePublicidad
 	{
 		this.tipoVia = tipoVia;
 	}
-
 
 
 }

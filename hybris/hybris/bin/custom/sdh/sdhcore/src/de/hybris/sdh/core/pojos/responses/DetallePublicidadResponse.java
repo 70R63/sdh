@@ -3,9 +3,6 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import java.util.List;
-
-
 /**
  * @author Maria Luisa
  *
@@ -21,8 +18,9 @@ public class DetallePublicidadResponse
    private String tipoSolicitud;
    private String anoGravable;
    private String numResolu;
-   private List<infoDeclaraPubli> infdeclara;
-	private List<detallePublicidad> detalle;
+	private InfoDeclaraPubli infodeclara;
+	private DetallePubli detalle;
+
 
 	/**
 	 * @return the fechResolu
@@ -144,26 +142,26 @@ public class DetallePublicidadResponse
 	}
 
 	/**
-	 * @return the infdeclara
+	 * @return the infodeclara
 	 */
-	public List<infoDeclaraPubli> getInfdeclara()
+	public InfoDeclaraPubli getInfodeclara()
 	{
-		return infdeclara;
+		return infodeclara;
 	}
 
 	/**
-	 * @param infdeclara
-	 *           the infdeclara to set
+	 * @param infodeclara
+	 *           the infodeclara to set
 	 */
-	public void setInfdeclara(final List<infoDeclaraPubli> infdeclara)
+	public void setInfodeclara(final InfoDeclaraPubli infodeclara)
 	{
-		this.infdeclara = infdeclara;
+		this.infodeclara = infodeclara;
 	}
 
 	/**
 	 * @return the detalle
 	 */
-	public List<detallePublicidad> getDetalle()
+	public DetallePubli getDetalle()
 	{
 		return detalle;
 	}
@@ -172,12 +170,10 @@ public class DetallePublicidadResponse
 	 * @param detalle
 	 *           the detalle to set
 	 */
-	public void setDetalle(final List<detallePublicidad> detalle)
+	public void setDetalle(final DetallePubli detalle)
 	{
 		this.detalle = detalle;
 	}
-
-
 
 
 }

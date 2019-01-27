@@ -7,7 +7,7 @@ package de.hybris.sdh.core.pojos.responses;
  * @author Maria Luisa
  *
  */
-public class infoDeclaraPubli
+public class InfoDeclaraPubli
 {
 	private String opcionUso;
 	private String lugarInstala;
@@ -243,5 +243,7 @@ public class infoDeclaraPubli
 	{
 		this.referencia = referencia;
 	}
+
+
 
 }

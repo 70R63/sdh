@@ -10,54 +10,66 @@
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span tabindex="0"><spring:theme
+			<span class="cintillo col-md-10"><spring:theme
 					code="declaracion.publicidad.infovalla" /></span>
 		</h3>
 	</div>
 </div>
-
+<br display:block;
+   margin: 5px 0;>
 <div class="row">
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.luginst" /></label>
+	<div class="col-md-3">
+		<label class="inputlabelnew"><spring:theme
+				code="declaracion.publicidad.luginst" /></label>
 	</div>
 	<div class="col-md-3">
-		<select id="luginst" class="form-control">
-			<option value="1">Predio</option>
-			<option value="2">Veh&iacuteculo</option>
+		<select id="luginst" class="inputdropdown"
+			onchange="ShowSelected(this);">
+			<option value="">Seleccionar</option>
+			<option value="0">Predio</option>
+			<option value="1">Veh&iacuteculo</option>
 		</select>
 	</div>
 </div>
 
+<br display:block;
+   margin: 5px 0;>
 <div class="row">
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.OrValla" /></label>
+	<div class="col-md-3">
+		<label class="inputlabelnew"><spring:theme
+				code="declaracion.publicidad.OrValla" /></label>
 	</div>
 	<div class="col-md-3">
-		<select id="OrValla" class="form-control">
-			<option value="1">Oriente/Occidente</option>
-			<option value="2">Occidente/Oriente</option>
-			<option value="3">Norte/sur</option>
-			<option value="4">Sur/Norte</option>
-			<option value="5">Derecha (Solo Vehiculos)</option>
-			<option value="6">Izquierda (Solo Vehiculos)</option>
-			<option value="7">Ambos Sentidos</option>
+		<select id="OrValla" class="inputdropdown">
+			<option value=" ">Seleccionar</option>
+
+		</select>
+	</div>
+</div>
+<br display:block;
+   margin: 5px 0;>
+
+<div class="row">
+	<div class="col-md-3">
+		<label class="inputlabelnew"><spring:theme
+				code="declaracion.publicidad.tamvalla" /></label>
+	</div>
+	<div class="col-md-3">
+		<select id="basegrav" class="inputdropdown">
+		<option value=" ">Seleccionar</option>
+
 		</select>
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-2">
-		<label><spring:theme code="declaracion.publicidad.tamvalla" /></label>
-	</div>
-	<div class="col-md-3">
-		<select id="basegrav" class="form-control">
-			<option value="1">Vallas de m&aacutes de 8 m2 hasta 24 m2</option>
-			<option value="2">Vallas de m&aacutes de 24 m2</option>
-			<option value="3">Vallas de propiedad de constructores de
-				m&aacutes de 8 m2</option>
-			<option value="4">Valla en Veh&iacuteculos automotores con
-				dimensi&oacuten superios a 8m2</option>
-		</select>
-	</div>
-</div>
-</div>
+</br>
+
+
+
+
+
+
+
+
+
+

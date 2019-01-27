@@ -394,9 +394,6 @@ public class CalcPublicidadRequest
 		IDdeclarante = iDdeclarante;
 	}
 
-
-
-
 	/*
 	 * (non-Javadoc)
 	 *
@@ -408,7 +405,21 @@ public class CalcPublicidadRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\"");
+		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
+		stringBuilder.append("\"numResolu\":\"" + this.getNumResolu() + "\",");
+		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\",");
+		stringBuilder.append("\"opcionUso\":\"" + this.getOpcionUso() + "\",");
+		stringBuilder.append("\"fechNotif\":\"" + this.getFechNotif() + "\",");
+		stringBuilder.append("\"lugarInstala\":\"" + this.getLugarInstala() + "\",");
+		stringBuilder.append("\"direccion\":\"" + this.getDireccion() + "\",");
+		stringBuilder.append("\"placa\":\"" + this.getPlaca() + "\",");
+		stringBuilder.append("\"orientacionValla\":\"" + this.getOrientacionValla() + "\",");
+		stringBuilder.append("\"tamanoValla\":\"" + this.getTamanoValla() + "\",");
+		stringBuilder.append("\"tipoIDcontrib\":\"" + this.getTipoIDcontrib() + "\",");
+		stringBuilder.append("\"IDcontrib\":\"" + this.getIDcontrib() + "\",");
+		stringBuilder.append("\"municipioContrib\":\"" + this.getMunicipioContrib() + "\",");
+		stringBuilder.append("\"tipoIDdeclara\":\"" + this.getTipoIDdeclara() + "\",");
+		stringBuilder.append("\"IDdeclarante\":\"" + this.getIDdeclarante() + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
