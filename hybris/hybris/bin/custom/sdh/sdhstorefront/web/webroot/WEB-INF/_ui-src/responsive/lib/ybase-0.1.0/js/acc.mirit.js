@@ -10,7 +10,7 @@ ACC.mirit = {
 		    	    return this.text == ACC.addressMun; 
 		    	}).attr('selected', true);
 		    	$("#u5058_input").trigger( "change" );
-		    	$("#u5073_input").val(ACC.addressPC);
+		    	$("#u5073_input").val(parseInt(ACC.addressPC));
 		    	$("#u5073_input").trigger( "change" );
 		    },
 
@@ -37,7 +37,7 @@ ACC.mirit = {
 	            		$("#textCertNom").html("Nombre válido. Tu nombre será acutalizado cuando clickes ACTUALIZAR RIT");
 	            	}else
 	            	{
-	            		$("#textCertNom").html("Nombre inválido.<br> El nuevo nombre tiene un porcentaje de "+data.porcentaje+"<br>El porcentaje mínimo necesario para actualizar tu nombre es "+data.minPercentage);
+	            		$("#textCertNom").html("Nombre inválido.<br> El nuevo nombre tiene un porcentaje de "+parseInt(100*data.porcentaje)+"%<br>El porcentaje mínimo necesario para actualizar tu nombre es "+parseInt(100*data.minPercentage)+"%");
 	            	}
 	            },
 	            error: function () {
@@ -61,8 +61,8 @@ ACC.mirit = {
     	        updateName = true;
     	        
     	        
-    	        var newEmail = $("#newEmail").val().trim();
-    	        var confirmNewEmail = $("#confirmNewEmail").val().trim();
+    	        var newEmail = $.trim($("#newEmail").val());
+    	        var confirmNewEmail = $.trim($("#confirmNewEmail").val());
     	        
     	        if(newEmail != "" || confirmNewEmail != "")
     	        {
@@ -130,9 +130,9 @@ ACC.mirit = {
     	        	$("#confirmNewEmail").parents(".form-group ").removeClass("has-error");
 	       		}
     	        
-    	        var currentPassword = $("#currentPassword").val().trim();
-    	        var newPassword = $("#newPassword").val().trim();
-    	        var confirmNewPassword = $("#confirmNewPassword").val().trim();
+    	        var currentPassword = $.trim($("#currentPassword").val());
+    	        var newPassword = $.trim($("#newPassword").val());
+    	        var confirmNewPassword = $.trim($("#confirmNewPassword").val());
     	        
     	        if(currentPassword != "" || newPassword != "" || confirmNewPassword !=  "" )
 	        	{
@@ -251,38 +251,39 @@ ACC.mirit = {
     	        });
     	        
     	        var updateName= false;
-    	        
-    	           if(($("#primNom").val().trim() != "" && $("#primNom").val().trim() !=  $("#primNom").attr("data-original"))
-    	        	||($("#primApe").val().trim() != "" && $("#primApe").val().trim() !=  $("#primApe").attr("data-original"))	
-    	        	||($("#segNom").val().trim() !=  $("#segNom").attr("data-original"))
-    	        	||($("#segApe").val().trim() != "" && $("#segApe").val().trim() !=  $("#segApe").attr("data-original")))
+    	        if($("#documentType").val() != "NIT" && $("#documentType").val() != "NITE")
+    	        {
+    	           if(($.trim($("#primNom").val()) != "" && $.trim($("#primNom").val()) !=  $("#primNom").attr("data-original"))
+    	        	||($.trim($("#primApe").val()) != "" && $.trim($("#primApe").val()) !=  $("#primApe").attr("data-original"))	
+    	        	||($.trim($("#segNom").val()) !=  $("#segNom").attr("data-original"))
+    	        	||($.trim($("#segApe").val()) != "" && $.trim($("#segApe").val()) !=  $("#segApe").attr("data-original")))
     	        	{
         				updateName=true;
     	        	}
-    	        
+    	        }
     	        
     	        
     	        var direccionNotificacion = {};
     	        
     	        direccionNotificacion.ADR_KIND = "02";
-    	        direccionNotificacion.STREET = $("#direccionNotificacionStreet").val().trim();
-    	        direccionNotificacion.STR_SUPPL1 = $("#direccionNotificacionSuppl1").val().trim();
-    	        direccionNotificacion.STR_SUPPL2 = $("#direccionNotificacionSuppl2").val().trim();
-    	        direccionNotificacion.POST_CODE1 = $("#u5073_input").val().trim();
-    	        direccionNotificacion.REGION = $("#u5056_input").val().trim();
-    	        direccionNotificacion.COUNTRY  = $("#u5070_input").val().trim();
-    	        direccionNotificacion.CITY1   = $("#u5058_input option:selected").text().trim()
+    	        direccionNotificacion.STREET = $.trim($("#direccionNotificacionStreet").val());
+    	        direccionNotificacion.STR_SUPPL1 = $.trim($("#direccionNotificacionSuppl1").val());
+    	        direccionNotificacion.STR_SUPPL2 = $.trim($("#direccionNotificacionSuppl2").val());
+    	        direccionNotificacion.POST_CODE1 = $.trim($("#u5073_input").val());
+    	        direccionNotificacion.REGION = $.trim($("#u5056_input").val());
+    	        direccionNotificacion.COUNTRY  = $.trim($("#u5070_input").val());
+    	        direccionNotificacion.CITY1   =$.trim( $("#u5058_input option:selected").text())
     	        
     	        var direccionContacto = {};
     	        
     	        direccionContacto.ADR_KIND = "01";
-    	        direccionContacto.STREET = $("#direccionContactoStreet").val().trim();
-    	        direccionContacto.STR_SUPPL1 = $("#direccionContactoSuppl1").val().trim();
-    	        direccionContacto.STR_SUPPL2 = $("#direccionContactoSuppl2").val().trim();
-    	        direccionContacto.POST_CODE1 = $("#u5073_input").val().trim();
-    	        direccionContacto.REGION = $("#u5056_input").val().trim();
-    	        direccionContacto.COUNTRY  = $("#u5070_input").val().trim();
-    	        direccionContacto.CITY1   = $("#u5058_input option:selected").text().trim();
+    	        direccionContacto.STREET = $.trim($("#direccionContactoStreet").val());
+    	        direccionContacto.STR_SUPPL1 = $.trim($("#direccionContactoSuppl1").val());
+    	        direccionContacto.STR_SUPPL2 = $.trim($("#direccionContactoSuppl2").val());
+    	        direccionContacto.POST_CODE1 = $.trim($("#u5073_input").val());
+    	        direccionContacto.REGION = $.trim($("#u5056_input").val());
+    	        direccionContacto.COUNTRY  = $.trim($("#u5070_input").val());
+    	        direccionContacto.CITY1   = $.trim($("#u5058_input option:selected").text());
     	        
     	        if(hasErrors)
     	        {
@@ -291,18 +292,18 @@ ACC.mirit = {
     	        }else
     	        {
     	        	 var updateRitData = {};
-    	    	        updateRitData.email = $("#currentMail").val().trim();
-    	    	        updateRitData.newEmailAddress =  $("#newEmail").val().trim();
-    	    	        updateRitData.confirmNewEmailAddress =  $("#confirmNewEmail").val().trim();
+    	    	        updateRitData.email = $.trim($("#currentMail").val());
+    	    	        updateRitData.newEmailAddress =  $.trim($("#newEmail").val());
+    	    	        updateRitData.confirmNewEmailAddress =  $.trim($("#confirmNewEmail").val());
     	    	        updateRitData.requestUpdateName =  updateName;
-    	    	        updateRitData.primNom =  $("#primNom").val().trim();
-    	    	        updateRitData.segNom =  $("#segNom").val().trim();
-    	    	        updateRitData.primApe =  $("#primApe").val().trim();
-    	    	        updateRitData.segApe =  $("#segApe").val().trim();
+    	    	        updateRitData.primNom = $.trim( $("#primNom").val());
+    	    	        updateRitData.segNom =  $.trim($("#segNom").val());
+    	    	        updateRitData.primApe =  $.trim($("#primApe").val());
+    	    	        updateRitData.segApe =  $.trim($("#segApe").val());
     	    	        updateRitData.usoBuzon = $("#buzon").is(":checked");
     	    	        updateRitData.autoUsoInfo = $("#usoInformacion").is(":checked");
-    	    	        updateRitData.telfonoPrincipal = $("#telefonoPricipal").val();
-    	    	        updateRitData.extension = $("#extensionTelefono").val();
+    	    	        updateRitData.telfonoPrincipal = $.trim($("#telefonoPricipal").val());
+    	    	        updateRitData.extension = $.trim($("#extensionTelefono").val());
     	    	        updateRitData.redsocial =JSON.stringify(redSocialData);
     	    	        updateRitData.direccionNoficacion =JSON.stringify(direccionNotificacion);
     	    	        updateRitData.direccionContacto =JSON.stringify(direccionContacto);
