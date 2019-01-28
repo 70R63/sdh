@@ -30,6 +30,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -73,7 +74,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina", method = RequestMethod.POST)
 	//	@RequireHardLogIn
-	public String handlePOST(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm, final BindingResult bindingResult,
+	public String handlePOST_ST(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm,
+			@RequestParam(value = "action") String accept, final BindingResult bindingResult,
 			final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Menu sobretasa gasolina POST --------------------------");
@@ -102,7 +104,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				}
 			}
 		}
-		anioGravable = dataForm.getAnioGravable();
+		anioGravable = dataForm.getAnoGravable();
 		periodo = dataForm.getPeriodo();
 
 		detalleGasolinaRequest.setNumBP(numBP);
@@ -144,7 +146,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina", method = RequestMethod.GET)
 	//	@RequireHardLogIn
 	//	 @ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm
-	public String handleGET(final Model model) throws CMSItemNotFoundException
+	public String handleGET_ST(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Menu sobretasa gasolina GET --------------------------");
 		//		SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
@@ -162,7 +164,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 		SobreTasaGasolinaForm dataForm2 = new SobreTasaGasolinaForm();
 		dataForm2.setListaDocumentos(listaDocumentos);
-		dataForm2.setCatalogos(gasolinaService.prepararCatalogos());
+		dataForm2.setCatalogosSo(gasolinaService.prepararCatalogos());
 
 
 		//		model.addAttribute("dataFormCatalogos", dataFormCatalogos);
@@ -183,11 +185,11 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.GET)
 	//	@RequireHardLogIn
-	public String handleGET(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataFormST, final Model model)
+	public String handleGET_DEC(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataFormST, final Model model)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
-		final DeclaracionGasolinaForm dataForm = new DeclaracionGasolinaForm();
+		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		//		final SobretasaGasolinaCatalogos dataFormCatalogos = new SobretasaGasolinaService().prepararCatalogos();
 		//		List<DetGasInfoDeclaraResponse> infoDeclaraDefault;
 		//		DetGasInfoDeclaraResponse valInfoDeclaraDefault;
@@ -203,7 +205,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		final DetGasResponse wsResponse;
-		//		DeclaracionGasolinaForm dataForm = new DeclaracionGasolinaForm();
+		//		SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		String tipoRevisor = "1";
 		String tipoDeclarante = "2";
 		List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
@@ -260,7 +262,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				}
 			}
 		}
-		dataForm.setCatalogos(gasolinaService.prepararCatalogosDeclaracion());
+		dataForm.setCatalogosDe(gasolinaService.prepararCatalogosDeclaracion());
 		System.out.println(dataForm);
 
 
@@ -283,13 +285,13 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.POST)
 	//	@RequireHardLogIn
-	public String handlePOST(@ModelAttribute("dataForm") DeclaracionGasolinaForm dataForm1, final BindingResult bindingResult,
+	public String handlePOST_DEC(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm1, final BindingResult bindingResult,
 			final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina POST --------------------------");
 
-		//		final DeclaracionGasolinaForm dataForm = new DeclaracionGasolinaForm();
+		//		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		//		final DeclaracionGasolinaCatalogos dataFormCatalogos = new DeclaracionGasolinaService().prepararCatalogos();
 		List<DetGasInfoDeclaraResponse> infoDeclaraDefault;
 		List<DetGasRevisorDeclaranteResponse> revisorDeclaranteDefault;
@@ -316,7 +318,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
 		final CalculaGasolinaResponse wsResponse;
-		DeclaracionGasolinaForm dataForm = new DeclaracionGasolinaForm();
+		SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		String tipoRevisor = "1";
 		String tipoDeclarante = "2";
 
@@ -373,7 +375,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				}
 			}
 		}
-		dataForm.setCatalogos(gasolinaService.prepararCatalogosDeclaracion());
+		dataForm.setCatalogosDe(gasolinaService.prepararCatalogosDeclaracion());
 		System.out.println(dataForm);
 
 

@@ -48,8 +48,8 @@
 						<td>
 							<div class="form-group ">
 								<sf:select path="dataForm.infoDeclara[${loop.index}].claseProd"
-									items="${dataForm.catalogos.claseProd}"
-									referenceData="${dataForm.catalogos.claseProd}" />
+									items="${dataForm.catalogosDe.claseProd}"
+									referenceData="${dataForm.catalogosDe.claseProd}" />
 							</div>
 						</td>
 						<td>
@@ -68,8 +68,8 @@
 							<div class="form-group ">
 								<sf:select
 									path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
-									items="${dataForm.catalogos.alcoholCarbu}"
-									referenceData="${dataForm.catalogos.alcoholCarbu}" />
+									items="${dataForm.catalogosDe.alcoholCarbu}"
+									referenceData="${dataForm.catalogosDe.alcoholCarbu}" />
 							</div>
 						</td>
 						<td>

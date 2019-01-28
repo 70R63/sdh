@@ -50,16 +50,8 @@
 					<td>
 						<div class="form-group ">
 							<sf:select path="dataForm.tipoIdRev"
-								items="${dataForm.catalogos.tipoIdRev}"
-								referenceData="${dataForm.catalogos.tipoIdRev}" />
-
-							<!-- 							<select id="tipoId" class="form-control"> -->
-							<%-- 								<c:forEach items="${dataForm.catalogos.tipoIdDec}" var="elemento"> --%>
-							<%-- 									<option value="${elemento.key}" --%>
-							<%-- 										${elemento.key == infoDeclara.tipoIdDec ? 'selected="selected"' : ''}><c:out --%>
-							<%-- 											value="${elemento.label}" /></option> --%>
-							<%-- 								</c:forEach> --%>
-							<!-- 							</select> -->
+								items="${dataForm.catalogosDe.tipoIdRev}"
+								referenceData="${dataForm.catalogosDe.tipoIdRev}" />
 						</div>
 					</td>
 					<td>

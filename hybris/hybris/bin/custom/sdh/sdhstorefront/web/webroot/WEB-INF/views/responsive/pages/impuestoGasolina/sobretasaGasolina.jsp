@@ -12,47 +12,20 @@
 
 <div class="container">
 	<sobreTasaGasolina:sobGasolinaMenu />
-<%-- 	<sobreTasaGasolina:sobGasolinaGen /> --%>
 	<sobreTasaGasolina:sobGasolinaBasicos />
 	<sobreTasaGasolina:sobGasolinaRep />
 </div>
 
 
-<script type="text/javascript">
-document.onreadystatechange = function () {
-    if (document.readyState == "complete") {
-    datatable();
-  }
-}
 
-function datatable(e){
-if ( $.fn.dataTable.isDataTable( '#example' ) ) {
-  table = $('#example').DataTable();
-  table.destroy();
-}
-var tabla =$("#example").DataTable({
-     "sPaginationType": "full_numbers",
-     "oLanguage": {
-         "oPaginate": {
-             "sPrevious": "Anterior",
-             "sNext": "Siguiente",
-             "sLast": "Última",
-             "sFirst": "Primera"
-         },
-         "sLengthMenu": 'Mostrar <select>' +
-          '<option value="5">5</option>' +
-          '<option value="10">10</option>' +
-         '<option value="15">15</option>' +
-         '<option value="20">20</option>' +
-         '<option value="30">30</option>' +
-          '</select> registros',
-         "sInfo": "Mostrando del _START_ a _END_ (Total: _TOTAL_ resultados)",
-         "sInfoFiltered": " Filtrados de MAX registros",
-         "sInfoEmpty": " ",
-         "sZeroRecords": "No se encontraron registros",
-         "sProcessing": "Espere, por favor...",
-         "sSearch": "Buscar:",
-     }
-  });
-}
+<script>
+	$('#modalAcceptTrigger').on('click', function() {
+		$('#action').val('decline');
+		$('#save-form').submit();
+	});
+	$('#modalDeclineTrigger').on('click', function() {
+		$('#action').val('accept');
+		$('#save-form').submit();
+	});
 </script>
+
