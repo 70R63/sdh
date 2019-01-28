@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <spring:url
-	value="/contribuyentes2/publicidadexterior"
+	value="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
 
 <div class="row">
@@ -125,10 +125,10 @@
 	</div>
 	<div class="col-md-1 col-md-offset-1">
 		<div>
-			<sf:form action="${presentarDeclaracionUrl}"
+			<sf:form action="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
 			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
 			method="post">
-				<button id="/contribuyentes2/publicidadexterior" type="submit" class = "botton"> <!-- onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
+				<button id="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle" type="submit" class = "botton" onclick="functionDos()"> <!-- onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
 					<spring:theme code="publicidad.exterior.detail.search" />
 				</button>
 			</sf:form>

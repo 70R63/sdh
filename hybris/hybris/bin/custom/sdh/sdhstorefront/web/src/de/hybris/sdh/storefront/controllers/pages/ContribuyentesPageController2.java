@@ -83,6 +83,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 
 
+
 	//Se anexa el mapeo de la pagina predialunificado
 	//GRD
 	@RequestMapping(value = "/predialunificado", method = RequestMethod.GET)
@@ -364,10 +365,11 @@ public class ContribuyentesPageController2 extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes2/publicidadexterior", method = RequestMethod.POST)
-	public String publicidadExternaDetail(final Model model, final RedirectAttributes redirectModel,
-			final BindingResult bindingResult)
-			throws CMSItemNotFoundException
+
+	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.POST)
+	//@RequireHardLogIn
+	public String publicidadExternaDetail(final PublicidadForm dataForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 
 		System.out.println("Action1 block called");
