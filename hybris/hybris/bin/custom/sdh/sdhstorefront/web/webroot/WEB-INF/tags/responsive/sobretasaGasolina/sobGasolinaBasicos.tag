@@ -25,13 +25,17 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<select id="calidadResponsable" class="form-control">
-				<c:forEach items="${dataForm.calidadResponsable}"
-					var="elemento">
-					<option value="${elemento.key}"><c:out
-							value="${elemento.label}" /></option>
-				</c:forEach>
-			</select>
+			<input id="calidResp" name="calidResp"
+				class="form-control form-control" aria-required="true" type="text"
+				value='<c:out value="${dataForm.dataForm.calidResp}"></c:out>'
+				maxlength="240">
+			<!-- 			<select id="calidResp" class="form-control"> -->
+			<%-- 				<c:forEach items="${dataForm.calidResp}" --%>
+			<%-- 					var="elemento"> --%>
+			<%-- 					<option value="${elemento.key}"><c:out --%>
+			<%-- 							value="${elemento.label}" /></option> --%>
+			<%-- 				</c:forEach> --%>
+			<!-- 			</select> -->
 		</div>
 	</div>
 	<div class="col-md-2">
@@ -42,7 +46,8 @@
 		<div class="form-group ">
 			<input id="numTanques" name="numTanques"
 				class="form-control form-control" aria-required="true" type="text"
-				value='<c:out value="${dataForm.numeroTanques}"></c:out>' maxlength="240">
+				value='<c:out value="${dataForm.dataForm.numTanques}"></c:out>'
+				maxlength="240">
 		</div>
 	</div>
 </div>
@@ -54,9 +59,10 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<input id="capacidadAlmacProd" name="capacidadAlmacProd"
+			<input id="almacProd" name="almacProd"
 				class="form-control form-control" aria-required="true" type="text"
-				value='<c:out value="${dataForm.capaciadAlmacProd}"></c:out>' maxlength="240">
+				value='<c:out value="${dataForm.dataForm.almacProd}"></c:out>'
+				maxlength="240">
 		</div>
 	</div>
 	<div class="col-md-2">
@@ -65,9 +71,10 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<input id="capaciadAlmacTanques" name="capaciadAlmacTanques"
+			<input id="almacTanque" name="almacTanque"
 				class="form-control form-control" aria-required="true" type="text"
-				value='<c:out value="${dataForm.capaciadAlmacTanques}"></c:out>' maxlength="240">
+				value='<c:out value="${dataForm.dataForm.almacTanque}"></c:out>'
+				maxlength="240">
 		</div>
 	</div>
 </div>
@@ -79,9 +86,10 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<input id="ubicacionPlantaAbasto" name="ubicacionPlantaAbasto"
+			<input id="ubicaPlanta" name="ubicaPlanta"
 				class="form-control form-control" aria-required="true" type="text"
-				value='<c:out value="${dataForm.ubicacionPlantaAbasto}"></c:out>' maxlength="240">
+				value='<c:out value="${dataForm.dataForm.ubicaPlanta}"></c:out>'
+				maxlength="240">
 		</div>
 	</div>
 </div>
@@ -93,26 +101,40 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<select id="codigoPostal" class="form-control">
-				<c:forEach items="${dataForm.codigoPostal}" var="elemento">
-					<option value="${elemento.key}"><c:out
-							value="${elemento.label}" /></option>
-				</c:forEach>
-			</select>
+			<input id="codPostal" name="codPostal"
+				class="form-control form-control" aria-required="true" type="text"
+				value='<c:out value="${dataForm.dataForm.codPostal}"></c:out>'
+				maxlength="240">
 		</div>
-	</div>
-	<div class="col-md-2">
-		<label><spring:theme
-				code="impuestos.sobreTasaGasolina.datosBasicos.localidad" /></label>
-	</div>
-	<div class="col-md-2">
-		<div class="form-group ">
-			<select id="localidad" class="form-control">
-				<c:forEach items="${dataForm.localidad}" var="elemento">
-					<option value="${elemento.key}"><c:out
-							value="${elemento.label}" /></option>
-				</c:forEach>
-			</select>
-		</div>
+		<!-- 			<select id="codigoPostal" class="form-control"> -->
+		<%-- 				<c:forEach items="${dataForm.codigoPostal}" var="elemento"> --%>
+		<%-- 					<option value="${elemento.key}"><c:out --%>
+		<%-- 							value="${elemento.label}" /></option> --%>
+		<%-- 				</c:forEach> --%>
+		<!-- 			</select> -->
 	</div>
 </div>
+<div class="col-md-2">
+	<label><spring:theme
+			code="impuestos.sobreTasaGasolina.datosBasicos.localidad" /></label>
+</div>
+
+<div class="col-md-2">
+	<div class="form-group ">
+		<div class="form-group ">
+			<input id="localidad" name="localidad"
+				class="form-control form-control" aria-required="true" type="text"
+				value='<c:out value="${dataForm.dataForm.localidad}"></c:out>'
+				maxlength="240">
+		</div>
+
+		<!-- 		<select id="localidad" class="form-control"> -->
+		<%-- 			<c:forEach items="${dataForm.localidad}" var="elemento"> --%>
+		<%-- 				<option value="${elemento.key}"><c:out --%>
+		<%-- 						value="${elemento.label}" /></option> --%>
+		<%-- 			</c:forEach> --%>
+		<!-- 		</select> -->
+	</div>
+</div>
+
+<div class="row"></div>

@@ -9,15 +9,17 @@ package de.hybris.sdh.storefront.controllers.impuestoGasolina;
  */
 public class ItemSelectOption
 {
-	private int key;
+	private String key;
 	private String label;
+
 
 	/**
 	 * @param key
 	 * @param label
 	 */
-	public ItemSelectOption(final int key, final String label)
+	public ItemSelectOption(final String key, final String label)
 	{
+		super();
 		this.key = key;
 		this.label = label;
 	}
@@ -25,7 +27,7 @@ public class ItemSelectOption
 	/**
 	 * @return the key
 	 */
-	public int getKey()
+	public String getKey()
 	{
 		return key;
 	}
@@ -34,11 +36,10 @@ public class ItemSelectOption
 	 * @param key
 	 *           the key to set
 	 */
-	public void setKey(final int key)
+	public void setKey(final String key)
 	{
 		this.key = key;
 	}
-
 	/**
 	 * @return the label
 	 */
@@ -55,6 +56,5 @@ public class ItemSelectOption
 	{
 		this.label = label;
 	}
-
 
 }

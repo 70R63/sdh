@@ -4,6 +4,7 @@
 package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -14,17 +15,15 @@ public class SobreTasaGasolinaCatalogos
 {
 
 	private List<ItemSelectOption> opcionesCantidadMostrar;
-	private List<ItemSelectOption> anioGravable;
-	private List<ItemSelectOption> periodo;
+	//	private List<ItemSelectOption> anioGravable;
+	private Map<String, String> anioGravable;
+	private Map<String, String> periodo;
 	private List<ItemSelectOption> calidadResponsable;
 	private List<ItemSelectOption> codigoPostal;
 	private List<ItemSelectOption> localidad;
-	private List<ItemSelectOption> tipoId;
+	private Map<String, String> tipoId;
 	private List<ItemSelectOption> tipoRelacion;
 	private List<ItemSelectOption> fuenteDato;
-
-
-
 	/**
 	 * @return the opcionesCantidadMostrar
 	 */
@@ -32,7 +31,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return opcionesCantidadMostrar;
 	}
-
+	
 	/**
 	 * @param opcionesCantidadMostrar
 	 *           the opcionesCantidadMostrar to set
@@ -41,41 +40,38 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.opcionesCantidadMostrar = opcionesCantidadMostrar;
 	}
-
 	/**
 	 * @return the anioGravable
 	 */
-	public List<ItemSelectOption> getAnioGravable()
+	public Map<String, String> getAnioGravable()
 	{
 		return anioGravable;
 	}
-
+	
 	/**
 	 * @param anioGravable
 	 *           the anioGravable to set
 	 */
-	public void setAnioGravable(final List<ItemSelectOption> anioGravable)
+	public void setAnioGravable(final Map<String, String> anioGravable)
 	{
 		this.anioGravable = anioGravable;
 	}
-
 	/**
 	 * @return the periodo
 	 */
-	public List<ItemSelectOption> getPeriodo()
+	public Map<String, String> getPeriodo()
 	{
 		return periodo;
 	}
-
+	
 	/**
 	 * @param periodo
 	 *           the periodo to set
 	 */
-	public void setPeriodo(final List<ItemSelectOption> periodo)
+	public void setPeriodo(final Map<String, String> periodo)
 	{
 		this.periodo = periodo;
 	}
-
 	/**
 	 * @return the calidadResponsable
 	 */
@@ -83,7 +79,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return calidadResponsable;
 	}
-
+	
 	/**
 	 * @param calidadResponsable
 	 *           the calidadResponsable to set
@@ -92,7 +88,6 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.calidadResponsable = calidadResponsable;
 	}
-
 	/**
 	 * @return the codigoPostal
 	 */
@@ -100,7 +95,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return codigoPostal;
 	}
-
+	
 	/**
 	 * @param codigoPostal
 	 *           the codigoPostal to set
@@ -109,7 +104,6 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.codigoPostal = codigoPostal;
 	}
-
 	/**
 	 * @return the localidad
 	 */
@@ -117,7 +111,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return localidad;
 	}
-
+	
 	/**
 	 * @param localidad
 	 *           the localidad to set
@@ -126,24 +120,22 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.localidad = localidad;
 	}
-
 	/**
 	 * @return the tipoId
 	 */
-	public List<ItemSelectOption> getTipoId()
+	public Map<String, String> getTipoId()
 	{
 		return tipoId;
 	}
-
+	
 	/**
 	 * @param tipoId
 	 *           the tipoId to set
 	 */
-	public void setTipoId(final List<ItemSelectOption> tipoId)
+	public void setTipoId(final Map<String, String> tipoId)
 	{
 		this.tipoId = tipoId;
 	}
-
 	/**
 	 * @return the tipoRelacion
 	 */
@@ -151,7 +143,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return tipoRelacion;
 	}
-
+	
 	/**
 	 * @param tipoRelacion
 	 *           the tipoRelacion to set
@@ -160,7 +152,6 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.tipoRelacion = tipoRelacion;
 	}
-
 	/**
 	 * @return the fuenteDato
 	 */
@@ -168,7 +159,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return fuenteDato;
 	}
-
+	
 	/**
 	 * @param fuenteDato
 	 *           the fuenteDato to set
@@ -177,5 +168,8 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.fuenteDato = fuenteDato;
 	}
+
+
+
 
 }

@@ -3,155 +3,106 @@
  */
 package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
+import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+
 import java.util.List;
 
 
 /**
- * @author fede
+ * @author Administrator
  *
  */
 public class SobreTasaGasolinaForm
 {
-
-	private List<ItemSelectOption> calidadResponsable;
-	private String numeroTanques;
-	private String capaciadAlmacProd;
-	private String capaciadAlmacTanques;
-	private String ubicacionPlantaAbasto;
-	private List<ItemSelectOption> codigoPostal;
-	private List<ItemSelectOption> localidad;
-	private List<RepresentanteSGasolina> representantes;
-
-
+	private List<SobreTasaGasolinaTabla> listaDocumentos;
+	private DetGasResponse dataForm;
+	private SobreTasaGasolinaCatalogos catalogos;
+	private String anioGravable;
+	private String periodo;
 
 	/**
-	 * @return the calidadResponsable
+	 * @return the listaDocumentos
 	 */
-	public List<ItemSelectOption> getCalidadResponsable()
+	public List<SobreTasaGasolinaTabla> getListaDocumentos()
 	{
-		return calidadResponsable;
+		return listaDocumentos;
 	}
-	
+
 	/**
-	 * @param calidadResponsable
-	 *           the calidadResponsable to set
+	 * @param listaDocumentos
+	 *           the listaDocumentos to set
 	 */
-	public void setCalidadResponsable(final List<ItemSelectOption> calidadResponsable)
+	public void setListaDocumentos(final List<SobreTasaGasolinaTabla> listaDocumentos)
 	{
-		this.calidadResponsable = calidadResponsable;
+		this.listaDocumentos = listaDocumentos;
 	}
+
 	/**
-	 * @return the numeroTanques
+	 * @return the dataForm
 	 */
-	public String getNumeroTanques()
+	public DetGasResponse getDataForm()
 	{
-		return numeroTanques;
+		return dataForm;
 	}
-	
+
 	/**
-	 * @param numeroTanques
-	 *           the numeroTanques to set
+	 * @param dataForm
+	 *           the dataForm to set
 	 */
-	public void setNumeroTanques(final String numeroTanques)
+	public void setDataForm(final DetGasResponse dataForm)
 	{
-		this.numeroTanques = numeroTanques;
+		this.dataForm = dataForm;
 	}
+
 	/**
-	 * @return the capaciadAlmacProd
+	 * @return the catalogos
 	 */
-	public String getCapaciadAlmacProd()
+	public SobreTasaGasolinaCatalogos getCatalogos()
 	{
-		return capaciadAlmacProd;
+		return catalogos;
 	}
-	
+
 	/**
-	 * @param capaciadAlmacProd
-	 *           the capaciadAlmacProd to set
+	 * @param catalogos
+	 *           the catalogos to set
 	 */
-	public void setCapaciadAlmacProd(final String capaciadAlmacProd)
+	public void setCatalogos(final SobreTasaGasolinaCatalogos catalogos)
 	{
-		this.capaciadAlmacProd = capaciadAlmacProd;
+		this.catalogos = catalogos;
 	}
+
 	/**
-	 * @return the capaciadAlmacTanques
+	 * @return the anioGravable
 	 */
-	public String getCapaciadAlmacTanques()
+	public String getAnioGravable()
 	{
-		return capaciadAlmacTanques;
+		return anioGravable;
 	}
-	
+
 	/**
-	 * @param capaciadAlmacTanques
-	 *           the capaciadAlmacTanques to set
+	 * @param anioGravable
+	 *           the anioGravable to set
 	 */
-	public void setCapaciadAlmacTanques(final String capaciadAlmacTanques)
+	public void setAnioGravable(final String anioGravable)
 	{
-		this.capaciadAlmacTanques = capaciadAlmacTanques;
+		this.anioGravable = anioGravable;
 	}
+
 	/**
-	 * @return the ubicacionPlantaAbasto
+	 * @return the periodo
 	 */
-	public String getUbicacionPlantaAbasto()
+	public String getPeriodo()
 	{
-		return ubicacionPlantaAbasto;
+		return periodo;
 	}
-	
+
 	/**
-	 * @param ubicacionPlantaAbasto
-	 *           the ubicacionPlantaAbasto to set
+	 * @param periodo
+	 *           the periodo to set
 	 */
-	public void setUbicacionPlantaAbasto(final String ubicacionPlantaAbasto)
+	public void setPeriodo(final String periodo)
 	{
-		this.ubicacionPlantaAbasto = ubicacionPlantaAbasto;
-	}
-	/**
-	 * @return the codigoPostal
-	 */
-	public List<ItemSelectOption> getCodigoPostal()
-	{
-		return codigoPostal;
-	}
-	
-	/**
-	 * @param codigoPostal
-	 *           the codigoPostal to set
-	 */
-	public void setCodigoPostal(final List<ItemSelectOption> codigoPostal)
-	{
-		this.codigoPostal = codigoPostal;
-	}
-	/**
-	 * @return the localidad
-	 */
-	public List<ItemSelectOption> getLocalidad()
-	{
-		return localidad;
-	}
-	
-	/**
-	 * @param localidad
-	 *           the localidad to set
-	 */
-	public void setLocalidad(final List<ItemSelectOption> localidad)
-	{
-		this.localidad = localidad;
-	}
-	
-	/**
-	 * @return the representantes
-	 */
-	public List<RepresentanteSGasolina> getRepresentantes()
-	{
-		return representantes;
-	}
-	
-	/**
-	 * @param representantes
-	 *           the representantes to set
-	 */
-	public void setRepresentantes(final List<RepresentanteSGasolina> representantes)
-	{
-		this.representantes = representantes;
+		this.periodo = periodo;
 	}
 
 

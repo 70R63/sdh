@@ -559,6 +559,8 @@
 	<bean name="sdhUpdateCommPrefsService" class="de.hybris.sdh.core.services.impl.DefaultSDHUpdateCustomerCommPrefsService" />
 	
 	<bean name="sdhConsultaContribuyenteBPService" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaContribuyenteBPService" />
+
+	<bean name="sdhDetalleGasolina" class="de.hybris.sdh.core.services.impl.DefaultSDHDetalleGasolina" />
 	
 	<alias alias="customerAccountService" name="sdhCustomerAccountService"/>
 	<bean id="sdhCustomerAccountService" parent="defaultCustomerAccountService"

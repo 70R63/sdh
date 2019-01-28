@@ -12,7 +12,7 @@
 
 <div class="container">
 	<sobreTasaGasolina:sobGasolinaMenu />
-	<sobreTasaGasolina:sobGasolinaGen />
+<%-- 	<sobreTasaGasolina:sobGasolinaGen /> --%>
 	<sobreTasaGasolina:sobGasolinaBasicos />
 	<sobreTasaGasolina:sobGasolinaRep />
 </div>

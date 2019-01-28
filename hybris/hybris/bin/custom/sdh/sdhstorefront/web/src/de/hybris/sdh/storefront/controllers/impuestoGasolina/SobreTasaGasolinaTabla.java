@@ -12,6 +12,8 @@ public class SobreTasaGasolinaTabla
 
 	private String tipoDocumento;
 	private String numeroDocumento;
+	private String seleccionado;
+
 
 	/**
 	 * @return the tipoDocumento
@@ -37,7 +39,7 @@ public class SobreTasaGasolinaTabla
 	{
 		return numeroDocumento;
 	}
-	
+
 	/**
 	 * @param numeroDocumento
 	 *           the numeroDocumento to set
@@ -46,17 +48,37 @@ public class SobreTasaGasolinaTabla
 	{
 		this.numeroDocumento = numeroDocumento;
 	}
-	
+
 	/**
-	 * @param tipoDocumento
-	 * @param numeroDocumento
+	 * @return the seleccionado
 	 */
+	public String getSeleccionado()
+	{
+		return seleccionado;
+	}
+
+	/**
+	 * @param seleccionado
+	 *           the seleccionado to set
+	 */
+	public void setSeleccionado(final String seleccionado)
+	{
+		this.seleccionado = seleccionado;
+	}
+
 	public SobreTasaGasolinaTabla(final String tipoDocumento, final String numeroDocumento)
 	{
 		this.tipoDocumento = tipoDocumento;
 		this.numeroDocumento = numeroDocumento;
 	}
 
+	/**
+	 *
+	 */
+	public SobreTasaGasolinaTabla()
+	{
+		super();
+	}
 
 
 }

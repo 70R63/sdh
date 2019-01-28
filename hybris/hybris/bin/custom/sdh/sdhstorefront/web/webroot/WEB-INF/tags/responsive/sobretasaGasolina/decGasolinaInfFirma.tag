@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -48,12 +49,17 @@
 				<tr>
 					<td>
 						<div class="form-group ">
-							<select id="tipoId" class="form-control">
-								<c:forEach items="${dataFormCatalogos.tipoIdDec}" var="elemento">
-									<option value="${elemento.key}"><c:out
-											value="${elemento.label}" /></option>
-								</c:forEach>
-							</select>
+							<sf:select path="dataForm.tipoIdRev"
+								items="${dataForm.catalogos.tipoIdRev}"
+								referenceData="${dataForm.catalogos.tipoIdRev}" />
+
+							<!-- 							<select id="tipoId" class="form-control"> -->
+							<%-- 								<c:forEach items="${dataForm.catalogos.tipoIdDec}" var="elemento"> --%>
+							<%-- 									<option value="${elemento.key}" --%>
+							<%-- 										${elemento.key == infoDeclara.tipoIdDec ? 'selected="selected"' : ''}><c:out --%>
+							<%-- 											value="${elemento.label}" /></option> --%>
+							<%-- 								</c:forEach> --%>
+							<!-- 							</select> -->
 						</div>
 					</td>
 					<td>

@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -25,12 +26,9 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<select id="anioGravable" class="form-control">
-				<c:forEach items="${dataFormCatalogos.anioGravable}" var="elemento">
-					<option value="${elemento.key}"><c:out
-							value="${elemento.label}" /></option>
-				</c:forEach>
-			</select>
+			<input id="anoGravable" name="anoGravable"
+				class="form-control form-control" aria-required="true" type="text"
+				value="${dataForm.anoGravable}" maxlength="240">
 		</div>
 	</div>
 	<div class="col-md-2">
@@ -39,12 +37,9 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<select id="periodo" class="form-control">
-				<c:forEach items="${dataFormCatalogos.periodo}" var="elemento">
-					<option value="${elemento.key}"><c:out
-							value="${elemento.label}" /></option>
-				</c:forEach>
-			</select>
+			<input id="periodo" name="periodo" class="form-control form-control"
+				aria-required="true" type="text" value="${dataForm.periodo}"
+				maxlength="240">
 		</div>
 	</div>
 </div>
@@ -56,9 +51,9 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<input id="numeroId" name="numeroId"
-				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+			<input id="numDoc" name="numDoc" class="form-control form-control"
+				aria-required="true" type="text" value="${dataForm.numDoc}"
+				maxlength="240">
 		</div>
 	</div>
 	<div class="col-md-2">
@@ -67,12 +62,16 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<select id="opcionesUso" class="form-control">
-				<c:forEach items="${dataFormCatalogos.opcionesUso}" var="elemento">
-					<option value="${elemento.key}"><c:out
-							value="${elemento.label}" /></option>
-				</c:forEach>
-			</select>
+						<sf:select path="dataForm.opcionesUso"
+							items="${dataForm.catalogos.opcionesUso}"
+							referenceData="${dataForm.catalogos.opcionesUso}" />
+<!-- 			<select id="opcionesUso" class="form-control"> -->
+<%-- 				<c:forEach items="${dataForm.catalogos.opcionesUso}" var="elemento"> --%>
+<%-- 					<option value="${elemento.key}" --%>
+<%-- 						${elemento.key == infoDeclara.opcionesUso ? 'selected="selected"' : ''}> --%>
+<%-- 						<c:out value="${elemento.label}" /></option> --%>
+<%-- 				</c:forEach> --%>
+<!-- 			</select> -->
 		</div>
 	</div>
 </div>

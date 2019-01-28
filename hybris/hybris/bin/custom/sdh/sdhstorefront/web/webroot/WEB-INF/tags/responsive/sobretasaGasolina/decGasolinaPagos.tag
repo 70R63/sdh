@@ -26,7 +26,7 @@
 		<div class="form-group ">
 			<input id="valorSobretasa" name="valorSobretasa"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value="${dataForm.valoresDeclara.vlrSobretasa}" maxlength="240">
 		</div>
 	</div>
 </div>
@@ -40,7 +40,7 @@
 		<div class="form-group ">
 			<input id="valorSansiones" name="valorSansiones"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value="${dataForm.valoresDeclara.vlrSancPagos}" maxlength="240">
 		</div>
 	</div>
 </div>
@@ -54,7 +54,7 @@
 		<div class="form-group ">
 			<input id="valorIntereses" name="valorIntereses"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value="${dataForm.valoresDeclara.interesMora}" maxlength="240">
 		</div>
 	</div>
 </div>
@@ -68,7 +68,7 @@
 		<div class="form-group ">
 			<input id="menosCompensaciones" name="menosCompensaciones"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value="${dataForm.valoresDeclara.menosCompensa}" maxlength="240">
 		</div>
 	</div>
 </div>
@@ -82,7 +82,7 @@
 		<div class="form-group ">
 			<input id="valorTotalPagar" name="valorTotalPagar"
 				class="form-control form-control" aria-required="true" type="text"
-				value="" maxlength="240">
+				value="${dataForm.valoresDeclara.totalPagar}" maxlength="240">
 		</div>
 	</div>
 </div>

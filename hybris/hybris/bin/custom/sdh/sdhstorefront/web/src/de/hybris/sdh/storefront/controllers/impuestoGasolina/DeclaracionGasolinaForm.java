@@ -3,82 +3,218 @@
  */
 package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
+import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
+import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
+import de.hybris.sdh.core.pojos.responses.DetGasValoresDeclaraResponse;
+
+import java.util.List;
+
+
 /**
  * @author fede
  *
  */
 public class DeclaracionGasolinaForm
 {
-	private String nombre;
-	private String apellidoPaterno;
-	private String apellidoMaterno;
-	private boolean acuerdo;
+	private String anoGravable;
+	private String periodo;
+	private String NumDoc;
+	private String opcionesUso;
+	private String tipoIdRev;
+	private String tipoIdDec;
+
+	private DetGasCatalogos catalogos;
+
+	private List<DetGasInfoDeclaraResponse> infoDeclara;
+	private DetGasValoresDeclaraResponse valoresDeclara;
+	private DetGasRevisorDeclaranteResponse revisor;
+	private DetGasRevisorDeclaranteResponse Declarante;
 
 	/**
-	 * @return the nombre
+	 * @return the anoGravable
 	 */
-	public String getNombre()
+	public String getAnoGravable()
 	{
-		return nombre;
+		return anoGravable;
 	}
 
 	/**
-	 * @param nombre
-	 *           the nombre to set
+	 * @param anoGravable
+	 *           the anoGravable to set
 	 */
-	public void setNombre(final String nombre)
+	public void setAnoGravable(final String anoGravable)
 	{
-		this.nombre = nombre;
+		this.anoGravable = anoGravable;
 	}
 
 	/**
-	 * @return the apellidoPaterno
+	 * @return the periodo
 	 */
-	public String getApellidoPaterno()
+	public String getPeriodo()
 	{
-		return apellidoPaterno;
+		return periodo;
 	}
 
 	/**
-	 * @param apellidoPaterno
-	 *           the apellidoPaterno to set
+	 * @param periodo
+	 *           the periodo to set
 	 */
-	public void setApellidoPaterno(final String apellidoPaterno)
+	public void setPeriodo(final String periodo)
 	{
-		this.apellidoPaterno = apellidoPaterno;
+		this.periodo = periodo;
 	}
 
 	/**
-	 * @return the apellidoMaterno
+	 * @return the numDoc
 	 */
-	public String getApellidoMaterno()
+	public String getNumDoc()
 	{
-		return apellidoMaterno;
+		return NumDoc;
 	}
 
 	/**
-	 * @return the acuerdo
+	 * @param numDoc
+	 *           the numDoc to set
 	 */
-	public boolean isAcuerdo()
+	public void setNumDoc(final String numDoc)
 	{
-		return acuerdo;
+		NumDoc = numDoc;
 	}
 
 	/**
-	 * @param acuerdo
-	 *           the acuerdo to set
+	 * @return the opcionesUso
 	 */
-	public void setAcuerdo(final boolean acuerdo)
+	public String getOpcionesUso()
 	{
-		this.acuerdo = acuerdo;
+		return opcionesUso;
 	}
 
 	/**
-	 * @param apellidoMaterno
-	 *           the apellidoMaterno to set
+	 * @param opcionesUso
+	 *           the opcionesUso to set
 	 */
-	public void setApellidoMaterno(final String apellidoMaterno)
+	public void setOpcionesUso(final String opcionesUso)
 	{
-		this.apellidoMaterno = apellidoMaterno;
+		this.opcionesUso = opcionesUso;
 	}
+
+	/**
+	 * @return the catalogos
+	 */
+	public DetGasCatalogos getCatalogos()
+	{
+		return catalogos;
+	}
+
+	/**
+	 * @param catalogos
+	 *           the catalogos to set
+	 */
+	public void setCatalogos(final DetGasCatalogos catalogos)
+	{
+		this.catalogos = catalogos;
+	}
+
+	/**
+	 * @return the tipoIdRev
+	 */
+	public String getTipoIdRev()
+	{
+		return tipoIdRev;
+	}
+
+	/**
+	 * @param tipoIdRev
+	 *           the tipoIdRev to set
+	 */
+	public void setTipoIdRev(final String tipoIdRev)
+	{
+		this.tipoIdRev = tipoIdRev;
+	}
+
+	/**
+	 * @return the tipoIdDec
+	 */
+	public String getTipoIdDec()
+	{
+		return tipoIdDec;
+	}
+
+	/**
+	 * @param tipoIdDec
+	 *           the tipoIdDec to set
+	 */
+	public void setTipoIdDec(final String tipoIdDec)
+	{
+		this.tipoIdDec = tipoIdDec;
+	}
+
+	/**
+	 * @return the infoDeclara
+	 */
+	public List<DetGasInfoDeclaraResponse> getInfoDeclara()
+	{
+		return infoDeclara;
+	}
+
+	/**
+	 * @param infoDeclara
+	 *           the infoDeclara to set
+	 */
+	public void setInfoDeclara(final List<DetGasInfoDeclaraResponse> infoDeclara)
+	{
+		this.infoDeclara = infoDeclara;
+	}
+
+	/**
+	 * @return the valoresDeclara
+	 */
+	public DetGasValoresDeclaraResponse getValoresDeclara()
+	{
+		return valoresDeclara;
+	}
+
+	/**
+	 * @param valoresDeclara
+	 *           the valoresDeclara to set
+	 */
+	public void setValoresDeclara(final DetGasValoresDeclaraResponse valoresDeclara)
+	{
+		this.valoresDeclara = valoresDeclara;
+	}
+
+	/**
+	 * @return the revisor
+	 */
+	public DetGasRevisorDeclaranteResponse getRevisor()
+	{
+		return revisor;
+	}
+
+	/**
+	 * @param revisor
+	 *           the revisor to set
+	 */
+	public void setRevisor(final DetGasRevisorDeclaranteResponse revisor)
+	{
+		this.revisor = revisor;
+	}
+
+	/**
+	 * @return the declarante
+	 */
+	public DetGasRevisorDeclaranteResponse getDeclarante()
+	{
+		return Declarante;
+	}
+
+	/**
+	 * @param declarante
+	 *           the declarante to set
+	 */
+	public void setDeclarante(final DetGasRevisorDeclaranteResponse declarante)
+	{
+		Declarante = declarante;
+	}
+
 }
