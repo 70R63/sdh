@@ -37,7 +37,7 @@ ACC.mirit = {
 	            		$("#textCertNom").html("Nombre válido. Tu nombre será acutalizado cuando clickes ACTUALIZAR RIT");
 	            	}else
 	            	{
-	            		$("#textCertNom").html("Nombre inválido.<br> El nuevo nombre tiene un porcentaje de "+data.porcentaje+"<br>El porcentaje mínimo necesario es de "+data.minPercentage);
+	            		$("#textCertNom").html("Nombre inválido.<br> El nuevo nombre tiene un porcentaje de "+data.porcentaje+"<br>El porcentaje mínimo necesario para actualizar tu nombre es "+data.minPercentage);
 	            	}
 	            },
 	            error: function () {
