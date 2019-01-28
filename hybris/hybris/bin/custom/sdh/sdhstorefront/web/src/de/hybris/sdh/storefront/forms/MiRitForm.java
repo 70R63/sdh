@@ -68,7 +68,8 @@ public class MiRitForm
 	private List<ImpuestoGasolina> gasolina;
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 	private List<ContribRedSocial> redsocial;
-	private List<ContribAgente> agentes;
+	private List<ContribAgente> representados;
+	private List<ContribAgente> representantes;
 
 	/**
 	 *
@@ -747,23 +748,6 @@ public class MiRitForm
 	}
 
 	/**
-	 * @return the agentes
-	 */
-	public List<ContribAgente> getAgentes()
-	{
-		return agentes;
-	}
-
-	/**
-	 * @param agentes
-	 *           the agentes to set
-	 */
-	public void setAgentes(final List<ContribAgente> agentes)
-	{
-		this.agentes = agentes;
-	}
-
-	/**
 	 * @return the email
 	 */
 	public String getEmail()
@@ -795,6 +779,40 @@ public class MiRitForm
 	public void setDigVer(final String digVer)
 	{
 		this.digVer = digVer;
+	}
+
+	/**
+	 * @return the representados
+	 */
+	public List<ContribAgente> getRepresentados()
+	{
+		return representados;
+	}
+
+	/**
+	 * @param representados
+	 *           the representados to set
+	 */
+	public void setRepresentados(final List<ContribAgente> representados)
+	{
+		this.representados = representados;
+	}
+
+	/**
+	 * @return the representantes
+	 */
+	public List<ContribAgente> getRepresentantes()
+	{
+		return representantes;
+	}
+
+	/**
+	 * @param representantes
+	 *           the representantes to set
+	 */
+	public void setRepresentantes(final List<ContribAgente> representantes)
+	{
+		this.representantes = representantes;
 	}
 
 

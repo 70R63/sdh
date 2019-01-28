@@ -11,6 +11,25 @@ public class CertifNombResponse
 {
 	private String numBP;
 	private String idmsj;
+	private Double minPercentage;
+
+
+	/**
+	 * @return the minPercentage
+	 */
+	public Double getMinPercentage()
+	{
+		return minPercentage;
+	}
+
+	/**
+	 * @param minPercentage
+	 *           the minPercentage to set
+	 */
+	public void setMinPercentage(final Double minPercentage)
+	{
+		this.minPercentage = minPercentage;
+	}
 
 	/**
 	 * @return the idmsj

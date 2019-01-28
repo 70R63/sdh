@@ -58,6 +58,8 @@ public class DefaultSDHCertifNombFacade implements SDHCertifNombFacade
 				certifNombResponse.setSuccess(Boolean.FALSE);
 			}
 
+			certifNombResponse.setMinPercentage(minPercentage);
+
 			return certifNombResponse;
 
 		}

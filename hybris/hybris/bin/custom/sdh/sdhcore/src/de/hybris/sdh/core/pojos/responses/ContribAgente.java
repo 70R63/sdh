@@ -9,6 +9,7 @@ package de.hybris.sdh.core.pojos.responses;
  */
 public class ContribAgente
 {
+	private String agente;
 	private String tipoDoc;
 	private String numDoc;
 	private String nomCompleto;
@@ -98,6 +99,23 @@ public class ContribAgente
 	public void setFuncionInterl(final String funcionInterl)
 	{
 		this.funcionInterl = funcionInterl;
+	}
+
+	/**
+	 * @return the agente
+	 */
+	public String getAgente()
+	{
+		return agente;
+	}
+
+	/**
+	 * @param agente
+	 *           the agente to set
+	 */
+	public void setAgente(final String agente)
+	{
+		this.agente = agente;
 	}
 
 

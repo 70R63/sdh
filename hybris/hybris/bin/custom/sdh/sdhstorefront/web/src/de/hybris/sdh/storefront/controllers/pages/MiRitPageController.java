@@ -329,8 +329,13 @@ public class MiRitPageController extends AbstractPageController
 			if (sdhConsultaContribuyenteBPResponse.getAgentes() != null
 					&& !sdhConsultaContribuyenteBPResponse.getAgentes().isEmpty())
 			{
-				miRitForm.setAgentes(sdhConsultaContribuyenteBPResponse.getAgentes().stream()
-						.filter(eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc())).collect(Collectors.toList()));
+				miRitForm.setRepresentantes(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
+						eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && "X".equalsIgnoreCase(eachAgente.getAgente()))
+						.collect(Collectors.toList()));
+
+				miRitForm.setRepresentados(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
+						eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && StringUtils.isBlank(eachAgente.getAgente()))
+						.collect(Collectors.toList()));
 			}
 
 
@@ -563,17 +568,21 @@ public class MiRitPageController extends AbstractPageController
 
 		boolean nameUpdated = false;
 
-		final CertifNombResponse certifNombResponse = sdhCertifNombFacade.certifNomb(certifNomRequest);
-
-		if (certifNombResponse != null && Boolean.TRUE.equals(certifNombResponse.getSuccess()))
+		if (Boolean.TRUE.equals(updateRitForm.getRequestUpdateName()))
 		{
-			request.setUpdateName(Boolean.TRUE);
-			nameUpdated = true;
+
+   		final CertifNombResponse certifNombResponse = sdhCertifNombFacade.certifNomb(certifNomRequest);
+
+   		if (certifNombResponse != null && Boolean.TRUE.equals(certifNombResponse.getSuccess()))
+   		{
+   			request.setUpdateName(Boolean.TRUE);
+   			nameUpdated = true;
+   		}
 		}
 
 		final UpdateRitResponse udpateRitResponse = sdhUpdateRitFacade.updateRit(request);
 
-		if (nameUpdated == false)
+		if (Boolean.TRUE.equals(updateRitForm.getRequestUpdateName()) && nameUpdated == false)
 		{
 			udpateRitResponse.getErrores().add(new UpdateRitErrorResponse("x",
 					"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud"));
