@@ -5,12 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<spring:url value="/publicidadexterior/detail"
-	var="CalculodeclaracionUrl" htmlEscape="false" />
-
+<spring:url
+	value="/contribuyentes2/publicidadexterior"
+	var="presentarDeclaracionUrl" htmlEscape="false" />
 
 <div class="row">
 	<div class="avisoheadline">
@@ -49,8 +50,8 @@
 						<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
 						<td><input id="action"
 							style="visibility: visible !important; margin: 0; min-height: 0;"
-							name="action" onchange="funcionUno(${loop.index})"
-							type="radio" value="VALLA VEHICULOS"></td>
+							name="action" onchange="funcionUno(${loop.index})" type="radio"
+							value="VALLA VEHICULOS"></td>
 					</tr>
 				</c:forEach>
 
@@ -124,9 +125,13 @@
 	</div>
 	<div class="col-md-1 col-md-offset-1">
 		<div>
-			<button onclick="functionDos()">
-				<spring:theme code="publicidad.exterior.detail.search" />
-			</button>
+			<sf:form action="${presentarDeclaracionUrl}"
+			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
+			method="post">
+				<button id="/contribuyentes2/publicidadexterior" type="submit" class = "botton"> <!-- onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
+					<spring:theme code="publicidad.exterior.detail.search" />
+				</button>
+			</sf:form>
 		</div>
 
 	</div>
