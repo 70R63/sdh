@@ -62,10 +62,16 @@
 							<input class=" form-control" type="text" id="documentNumber" name="documentNumber" value="${searchUserForm.documentNumber }">
 						</div>
 						
-						<div class="form-group">
+						<c:set var="hiddenStyle" value="" />
+						<c:if test="${empty searchUserForm.documentType  or searchUserForm.documentType ne 'CC' }">
+							<c:set var="hiddenStyle" value="display:none;" />
+						</c:if>
+						
+						<div id="expeditionDateDiv" class="form-group" style="${hiddenStyle}">
 							<label class="control-label " for="expeditionDate"><spring:theme code="register.expeditioDate"/></label>
 							<input class=" form-control datepicker"  type="text" id="expeditionDate" name="expeditionDate" value="${searchUserForm.expeditionDate }">
 						</div>
+						
 						<div class="text-right">
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<button class="btn btn-primary btn-lg" type="submit" >

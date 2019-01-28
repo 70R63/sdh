@@ -49,22 +49,30 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 	@Override
 	public boolean existeContribuyente(final ValidaContribuyenteRequest request)
 	{
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-		final String date = request.getExpeditionDate();
 
-		final LocalDate customerExpDate;
-
-		try
+		if ("CC".equalsIgnoreCase(request.getTipoid()))
 		{
-			customerExpDate = LocalDate.parse(date, formatter);
+			final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-			request.setExpeditionDate(formatter.format(customerExpDate));
-		}
-		catch (final DateTimeParseException e1)
-		{
-			LOG.error("Error parsing expedition date: " + date);
-			return false;
+			final String date = request.getExpeditionDate();
+
+			final LocalDate customerExpDate;
+
+			try
+			{
+				customerExpDate = LocalDate.parse(date, formatter);
+
+				request.setExpeditionDate(formatter.format(customerExpDate));
+			}
+			catch (final DateTimeParseException e1)
+			{
+				LOG.error("Error parsing expedition date: " + date);
+
+				return false;
+			}
+
+
 		}
 
 		final String response = sdhValidaContribuyenteService.validaContribuyente(request);
@@ -73,7 +81,6 @@ public class DefaultValidaContribuyenteFacade implements SDHValidaContribuyenteF
 		{
 			return false;
 		}
-
 
 		try
 		{
