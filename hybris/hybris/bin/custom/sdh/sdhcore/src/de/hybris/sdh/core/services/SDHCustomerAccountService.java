@@ -13,6 +13,7 @@ import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 public interface SDHCustomerAccountService
 {
 	void activateAccount(final String token) throws TokenInvalidatedException;
-
 	boolean isUserRegistered(String documentNumber, String documentType);
+	String generateCustomerSessionToken(String bp);
+	boolean validateToken(String token, String uidUser);
 }

@@ -18,11 +18,11 @@
 			
 				<form:form method="post" commandName="SecretAnswerForm" action="${action}">
 					<fieldset>
-						<div class="headline">
-							<h2>
-								<span tabindex="0"><spring:theme code="register.questions.title" /></span>
-							</h2>
-						</div>
+<!-- 						<div class="headline"> -->
+<!-- 							<h2> -->
+<%-- 								<span tabindex="0"><spring:theme code="register.questions.title" /></span> --%>
+<!-- 							</h2> -->
+<!-- 						</div> -->
 						
 						<c:set var = "question" value = "${questionCatalog['AGE']}"/>
 						

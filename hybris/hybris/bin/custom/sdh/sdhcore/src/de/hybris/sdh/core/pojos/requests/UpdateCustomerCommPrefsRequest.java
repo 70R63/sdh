@@ -107,7 +107,7 @@ public class UpdateCustomerCommPrefsRequest
 
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("personal: {");
+		stringBuilder.append("\"personal\": {");
 		stringBuilder.append("\"SMTP_ADDR\":\"" + this.getEmail() + "\",");
 		stringBuilder.append("\"ZZAUTOUSOINF\":\""
 				+ String.valueOf((Boolean.TRUE.equals(this.getUseInformationForInstitutionalPurposes()) ? 1 : 2)) + "\",");
