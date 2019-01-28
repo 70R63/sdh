@@ -11,6 +11,7 @@ ACC.mirit = {
 		    	}).attr('selected', true);
 		    	$("#u5058_input").trigger( "change" );
 		    	$("#u5073_input").val(ACC.addressPC);
+		    	$("#u5073_input").trigger( "change" );
 		    },
 
     bindUpdateButton: function () {
@@ -71,7 +72,6 @@ ACC.mirit = {
     	        	{
     	        		$("#newEmailErrors").addClass("hidden");
         	        	$("#newEmail").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
         	        	
         	        	 var emailData = {};
              	        emailData.mail = confirmNewEmail;
@@ -110,7 +110,6 @@ ACC.mirit = {
     	        		{
         	        		$("#confirmNewEmailErrors").addClass("hidden");
             	        	$("#confirmNewEmail").parents(".form-group ").removeClass("has-error");
-            	        	hasErrors = false;
         	        	}
     	        	}
     	        	
@@ -120,11 +119,9 @@ ACC.mirit = {
 	       		{
     	       		$("#newEmailErrors").addClass("hidden");
     	        	$("#newEmail").parents(".form-group ").removeClass("has-error");
-    	        	hasErrors = false;
     	       		
     	       		$("#confirmNewEmailErrors").addClass("hidden");
     	        	$("#confirmNewEmail").parents(".form-group ").removeClass("has-error");
-    	        	hasErrors = false;
 	       		}
     	        
     	        var currentPassword = $("#currentPassword").val().trim();
@@ -143,7 +140,6 @@ ACC.mirit = {
         			{
 	        			$("#currentPasswordErrors").addClass("hidden");
         	        	$("#currentPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
         			}
         		
     	        	
@@ -154,7 +150,6 @@ ACC.mirit = {
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
     	        	}
     	        	
     	        	if(/[A-Z]/.test(newPassword) == false)
@@ -164,7 +159,6 @@ ACC.mirit = {
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
     	        	}
     	        	
     	        	if(/[0-9]/.test(newPassword) == false)
@@ -174,7 +168,6 @@ ACC.mirit = {
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
     	        	}
     	        	
     	        	if(newPassword.length <8 || newPassword.length>16)
@@ -184,7 +177,6 @@ ACC.mirit = {
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-        	        	hasErrors = false;
     	        	}
     	        
     	        	if(newPassword != confirmNewPassword)
@@ -209,7 +201,6 @@ ACC.mirit = {
 	            		{
     	            		$("#currentPasswordErrors").addClass("hidden");
             	        	$("#currentPassword").parents(".form-group ").removeClass("has-error");
-            	        	hasErrors = false;
 	            		}else
     	            	{
 	            			$("#currentPasswordErrors").removeClass("hidden");
@@ -226,9 +217,59 @@ ACC.mirit = {
 	        } 	
     	        
     	        
+    	        var redSocialData = new Array();
+    	        
+    	        $.each($(".redSocial"),function(index,value){
+    	        	
+    	        	if($(value).val() != "")
+	        		{
+    	        		if($("#redsocial\\["+index+"\\]\\.USUARIORED").val()== "")
+	        			{
+    	        			$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").removeClass("hidden");
+	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").addClass("has-error");
+	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").html("Por favor introduce el nombre de usuario");
+	        	        	hasErrors = true;
+	        			}else
+	        			{
+	        				$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").addClass("hidden");
+	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").removeClass("has-error");
+	        			}
+	        		}
+    	        	var eachSocialNet=new Object();
+    	        	
+    	        	eachSocialNet.RED_SOCIAL= $(value).val();
+    	        	eachSocialNet.USUARIORED=$("#redsocial\\["+index+"\\]\\.USUARIORED").val();
+    	        	
+    	        	redSocialData.push(eachSocialNet);
+    	        	
+    	        });
     	        
     	        
-    	       
+    	        
+    	        
+    	        
+    	        var direccionNotificacion = {};
+    	        
+    	        direccionNotificacion.ADR_KIND = "02";
+    	        direccionNotificacion.STREET = $("#direccionNotificacionStreet").val();
+    	        direccionNotificacion.STR_SUPPL1 = $("#direccionNotificacionSuppl1").val();
+    	        direccionNotificacion.STR_SUPPL2 = $("#direccionNotificacionSuppl2").val();
+    	        direccionNotificacion.POST_CODE = $("#u5073_input").val();
+    	        direccionNotificacion.REGION = $("#u5056_input").val();
+    	        direccionNotificacion.COUNTRY  = $("#u5070_input").val();
+    	        direccionNotificacion.CITY1   = $("#u5058_input").val();
+    	        
+    	        var direccionContacto = {};
+    	        
+    	        direccionContacto.ADR_KIND = "01";
+    	        direccionContacto.STREET = $("#direccionContactoStreet").val();
+    	        direccionContacto.STR_SUPPL1 = $("#direccionContactoSuppl1").val();
+    	        direccionContacto.STR_SUPPL2 = $("#direccionContactoSuppl2").val();
+    	        direccionContacto.POST_CODE = $("#u5073_input").val();
+    	        direccionContacto.REGION = $("#u5056_input").val();
+    	        direccionContacto.COUNTRY  = $("#u5070_input").val();
+    	        direccionContacto.CITY1   = $("#u5058_input").val();
+    	        
     	        if(hasErrors)
     	        {
     	        	$( "#dialog" ).dialog( "open" );
@@ -244,22 +285,24 @@ ACC.mirit = {
     	    	        updateRitData.primApe =  $("#primApe").val().trim();
     	    	        updateRitData.segApe =  $("#segApe").val().trim();
     	    	        updateRitData.usoBuzon = $("#buzon").is(":checked");
-    	    	        updateRitData.autoUsoInfo = $("#usoInformacion").is(":checked")
-    	    	        
+    	    	        updateRitData.autoUsoInfo = $("#usoInformacion").is(":checked");
+    	    	        updateRitData.telfonoPrincipal = $("#telefonoPricipal").val();
+    	    	        updateRitData.extension = $("#extensionTelefono").val();
+    	    	        updateRitData.redsocial =JSON.stringify(redSocialData);
+    	    	        updateRitData.direccionNoficacion =JSON.stringify(direccionNotificacion);
+    	    	        updateRitData.direccionContacto =JSON.stringify(direccionContacto);
     	    	        
     	    	        $.ajax({
     	    	            url: ACC.updateRitURL,
     	    	            data: updateRitData,
     	    	            type: "POST",
+    	    	            dataType : 'json',
     	    	            success: function (data) {
     	    	            	$( "#dialog" ).dialog( "open" );
-    	    	            	if(data.ritUpdated == true)
-    		            		{
-    	    	            		$("#textCertNom").html("Tu RIT ha sido actualizado");
-    		            		}else
-    	    	            	{
-    		            			$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor intentalo mas tarde.");
-    	    	            	}
+    	    	            	$("#textCertNom").html("");
+    	    	            	$.each(data.errores, function( index, value ) {
+    	    	            		$("#textCertNom").html($("#textCertNom").html()+value.txtmsj+"<br>");
+    	    	            		});
     	    	            },
     	    	            error: function () {
     	    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
@@ -275,6 +318,8 @@ ACC.mirit = {
     	
     	$( "#dialog" ).dialog({ 
     		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
     		buttons: {
     			Ok: function() {
     				$( this ).dialog( "close" );

@@ -23,21 +23,8 @@
 						<spring:theme code="mirit.personalData.documentType" text="Mis datos personales"/>
 					</label> 
 					
-					<select  class="form-control" disabled="disabled" id="tipoDoc" name="tipoDoc">
-						<option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
-		                <option value="Carnet Diplomático">Carnet Diplomático</option>
-		                <option value="Cédula de Extranjería">Cédula de Extranjería</option>
-		                <option value="Número de Identificación Tributaria">Número de Identificación Tributaria</option>
-		                <option value="NIT Compuesto (Utilización Múltiple)">NIT Compuesto (Utilización Múltiple)</option>
-		                <option value="NIT Extranjero">NIT Extranjero</option>
-		                <option value="Número Único de Identificación Personal">Número Único de Identificación Personal</option>
-		                <option value="Pasaporte">Pasaporte</option>
-		                <option value="Registro Civil">Registro Civil</option>
-		                <option value="Persona Indeterminada">Persona Indeterminada</option>
-		                <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
-		                <option value="Tarjeta de Identidad de Extranjero">Tarjeta de Identidad de Extranjero</option>
-		                <option value="Tarjeta Profesional Abogacía">Tarjeta Profesional Abogacía</option>
-		                <option value="Tarjeta Profesional Contador Público">Tarjeta Profesional Contador Público</option>
+					<select  class="form-control" disabled="disabled">
+						<option value="${miRitForm.tipoDoc }"><spring:theme code="register.id.types.${miRitForm.tipoDoc}" /></option>
 					</select>
 					
 					<div class="help-block">

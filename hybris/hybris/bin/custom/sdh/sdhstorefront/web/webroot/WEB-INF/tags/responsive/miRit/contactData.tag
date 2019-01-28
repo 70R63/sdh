@@ -4777,10 +4777,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 //     	var complement = document.getElementById("u5066_input").value;
 //     	var complementText = document.getElementById("u6066_input").value;
     	
-    	document.getElementById("address.assistant.output").value = deparment + " " + 
-															    	town + " " +  
-															    	postCode + " " + 
-    																streetType + " " + 
+    	document.getElementById("address.assistant.output").value = streetType + " " + 
     																section1 + " " + 
     																section2 + " " + 
     																section3 + " " + 
@@ -4790,6 +4787,18 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     																section7 + " " + 
     																section8 + " " + 
     																section9 + " " ;
+    	
+    	document.getElementById("address.assistant.output.street").value = 
+		streetType + " " + 
+		section1 + " " + 
+		section2 + " " + 
+		section3 + " " + 
+		section4 + " " + 
+		section5 + " " + 
+		section6 + " " + 
+		section7 + " " + 
+		section8 + " " + 
+		section9 + " " ;
     	
     }
     
@@ -4825,7 +4834,35 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     	    }
     	});
     	
-    	menuAutoSearch();
+//     	menuAutoSearch();
+    }
+    
+    function cancelAddAddress()
+    {
+    	$(".form-control.addressHelperField").val("");
+    	document.getElementById("address.assistant.output").value ="";
+    	
+//     	document.getElementById("direccionNotificacionStreet").value = "";
+// 		document.getElementById("direccionNotificacionSuppl1").value = "";
+// 		document.getElementById("direccionNotificacionSuppl2").value = "";
+		
+// 		document.getElementById("direccionContactoStreet").value = "";
+// 		document.getElementById("direccionContactoSuppl1").value = "";
+// 		document.getElementById("direccionContactoSuppl2").value = "";
+		
+		
+		document.getElementById("address.assistant.output").value ="";
+		document.getElementById("address.assistant.output.street").value ="";
+		document.getElementById("address.assistant.output.spl1").value ="";
+		document.getElementById("address.assistant.output.spl2").value ="";
+		
+		document.getElementById("address.assistant.output").value  ="";
+		document.getElementById("address.assistant.output.street").value  ="";
+		document.getElementById("address.assistant.output.spl1").value  ="";
+		document.getElementById("address.assistant.output.spl2").value ="";
+		
+		complementos= 0;
+		
     }
     
     function municipioChanged()
@@ -4850,28 +4887,56 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     	    }
     	});
     	
-    	menuAutoSearch()
+//     	menuAutoSearch()
     }
     
     function setAddress(){
     	var addressType = document.getElementById("u5067_input").value;
     	
+    	
     	if(addressType == "notificacion")
    		{
-    		document.getElementById("direccionNotificacion").value = document.getElementById("address.assistant.output").value
+    		document.getElementById("direccionNotificacion").value = document.getElementById("address.assistant.output").value;
+    		document.getElementById("direccionNotificacionStreet").value = document.getElementById("address.assistant.output.street").value;
+    		document.getElementById("direccionNotificacionSuppl1").value = document.getElementById("address.assistant.output.spl1").value;
+    		document.getElementById("direccionNotificacionSuppl2").value = document.getElementById("address.assistant.output.spl2").value;
    		}else if(addressType == "contacto")
    		{
-   			document.getElementById("direccionContacto").value = document.getElementById("address.assistant.output").value
+   			document.getElementById("direccionContacto").value = document.getElementById("address.assistant.output").value;
+    		document.getElementById("direccionContactoStreet").value = document.getElementById("address.assistant.output.street").value;
+    		document.getElementById("direccionContactoSuppl1").value = document.getElementById("address.assistant.output.spl1").value;
+    		document.getElementById("direccionContactoSuppl2").value = document.getElementById("address.assistant.output.spl2").value;
    		}
     	
     	
     }
     
+    var complementos = 0;
+    
     function addComplement(){
     	var complement = document.getElementById("u5066_input").value;
     	var complementText = document.getElementById("u6066_input").value;
     	
-    	document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    	if(complementos == 0)
+    	{
+    		document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    		document.getElementById("address.assistant.output.spl1").value =  complement + " " + complementText;
+    		complementos ++;
+    	}else if(complementos == 1 )
+    	{
+    		document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    		document.getElementById("address.assistant.output.spl2").value = document.getElementById("address.assistant.output.spl2").value + complement + " " + complementText;
+    		complementos++;
+    	}else if(complementos == 2 )
+    	{
+    		document.getElementById("address.assistant.output").value = document.getElementById("address.assistant.output").value +" "+ complement + " " + complementText;
+    		document.getElementById("address.assistant.output.spl2").value = document.getElementById("address.assistant.output.spl2").value +" "+ complement + " " + complementText;
+    		complementos++;
+    	}else
+    	{
+    		alert("Solo se permiten hasta 3 complementos.");
+    	}
+    	
     	
     }
     
@@ -4883,13 +4948,22 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
     	if(country == "CO")
    		{
    			$(".addressHelperField").prop('disabled', false);
-   			$("#direccionNotificacion").prop('disabled', true)
-			$("#direccionContacto").prop('disabled', true)
+   			$("#direccionNotificacion").prop('disabled', true);
+			$("#direccionContacto").prop('disabled', true);
+			
+			$("#u5056_input").prop('disabled', false);
+			$("#u5058_input").prop('disabled', false);
+			$("#u5073_input").prop('disabled', false);
+			
    		}else
 		{
 			$(".addressHelperField").prop('disabled', true);
-			$("#direccionNotificacion").prop('disabled', false)
-			$("#direccionContacto").prop('disabled', false)
+			$("#direccionNotificacion").prop('disabled', false);
+			$("#direccionContacto").prop('disabled', false);
+			
+			$("#u5056_input").prop('disabled', true);
+			$("#u5058_input").prop('disabled', true);
+			$("#u5073_input").prop('disabled', true);
 		}
     	
     }
@@ -4908,7 +4982,10 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<label class="control-label required" for="direccionNotificacion">
 						<spring:theme code="mirit.contactData.notificationAddress" />
 					</label> 
-					<input id="direccionNotificacion" name="direccionNotificacion" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionNotificacion }" maxlength="240">
+					<input id="direccionNotificacion" name="direccionNotificacion" class="form-control" aria-required="true" type="text" data-original="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"" disabled="disabled" value="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }" maxlength="240">
+					<input id="direccionNotificacionStreet" name="direccionNotificacionStreet"  type="hidden" data-original="${miRitForm.direccionNotificacion.STREET}"  value="${miRitForm.direccionNotificacion.STREET}">
+					<input id="direccionNotificacionSuppl1" name="direccionNotificacionStreet"  type="hidden" data-original="${miRitForm.direccionNotificacion.STR_SUPPL1 }"  value="${miRitForm.direccionNotificacion.STR_SUPPL1}">
+					<input id="direccionNotificacionSuppl2" name="direccionNotificacionStreet"  type="hidden" data-original="${miRitForm.direccionNotificacion.STR_SUPPL2 }"  value="${miRitForm.direccionNotificacion.STR_SUPPL2 }">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -4917,7 +4994,10 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<label class="control-label required" for="direccionContacto">
 						<spring:theme code="mirit.contactData.anotherContactAddress" />
 					</label> 
-					<input id="direccionContacto" name="direccionContacto" class="form-control" aria-required="true" type="text" disabled="disabled" value="${miRitForm.direccionContacto }" maxlength="240">
+					<input id="direccionContacto" name="direccionContacto" class="form-control" aria-required="true" type="text" disabled="disabled" data-original="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }" value="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }" maxlength="240">
+					<input id="direccionContactoStreet" name="direccionContactoStreet"  type="hidden" data-original="${miRitForm.direccionContacto.STREET}" value="${miRitForm.direccionContacto.STREET}">
+					<input id="direccionContactoSuppl1" name="direccionContactoSuppl1"  type="hidden" data-original="${miRitForm.direccionContacto.STR_SUPPL1 }" value=" ${miRitForm.direccionContacto.STR_SUPPL1 } ">
+					<input id="direccionContactoSuppl2" name="direccionContactoSuppl2"  type="hidden" data-original="${miRitForm.direccionContacto.STR_SUPPL2 }" value="${miRitForm.direccionContacto.STR_SUPPL2 }">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -4972,7 +5052,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group ">
-								<select  class="form-control" id="redsocial[${status.index }].RED_SOCIAL" name="redsocial[${status.index }].RED_SOCIAL">
+								<select  class="form-control redSocial" id="redsocial[${status.index }].RED_SOCIAL" name="redsocial[${status.index }].RED_SOCIAL">
 									<option value=""></option>
 					                  <c:forEach items="${socialNetworks }" var="eachSN">
 					                  	<c:set var="selected" value=""/>
@@ -4990,7 +5070,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 						</div>
 						<div class="col-md-4">
 							<div class="form-group ">
-								<input id="redsocial[${status.index }].USUARIORED" id="redsocial[${status.index }].USUARIORED" class="form-control form-control" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
+								<input id="redsocial[${status.index }].USUARIORED" id="redsocial[${status.index }].USUARIORED" class="form-control usuarioRedSocial" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 								</div>
@@ -5020,7 +5100,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group ">
-								<select  class="form-control" id="redsocial[0].RED_SOCIAL" name="redsocial[0].RED_SOCIAL">
+								<select  class="form-control redSocial" id="redsocial[0].RED_SOCIAL" name="redsocial[0].RED_SOCIAL">
 									<option value=""></option>
 					                  <c:forEach items="${socialNetworks }" var="eachSN">
 						                  <option value="${eachSN }">${eachSN}</option>
@@ -5034,9 +5114,9 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 						</div>
 						<div class="col-md-4">
 							<div class="form-group ">
-								<input id="" name="" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+								<input id="redsocial[0].USUARIORED" name="redsocial[0].USUARIORED" class="form-control usuarioRedSocial" aria-required="true" type="text" value="" maxlength="240">
 								<div class="help-block">
-									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+									<span id="redsocial[0].USUARIORED.errors" class="hidden"></span>
 								</div>
 							</div>
 						</div>
@@ -5052,6 +5132,10 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				</label>
 			</div>
 			<input id="address.assistant.output" name="addressAssistantOutput" class="form-control form-control" aria-required="true" type="text" value="" maxlength="2000" width="90000" onkeyup="menuAutoSearch();" disabled>
+			<input id="address.assistant.output.street" name="address.assistant.output.street" class="form-control form-control" type="hidden" />
+			<input id="address.assistant.output.spl1" name="address.assistant.output.spl1" class="form-control form-control" type="hidden" />
+			<input id="address.assistant.output.spl2" name="address.assistant.output.spl2" class="form-control form-control" type="hidden" />
+			
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-group ">
@@ -5348,10 +5432,10 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					<label class="control-label " for="u5056_input">
 						<spring:theme code="mirit.contactData.department" />
 					</label> 
-					<select id="u5056_input" class="form-control addressHelperField" onchange="departmentChanged();">
+					<select id="u5056_input" class="form-control " onchange="departmentChanged();">
 		                <option value="">Seleccionar</option>
-		                <option value="5">ANTIOQUIA</option>
-			<option value="8">ATLÁNTICO</option>
+		                <option value="05">ANTIOQUIA</option>
+			<option value="08">ATLÁNTICO</option>
 			<option value="11">BOGOTÁ</option>
 			<option value="13">BOLÍVAR</option>
 			<option value="15">BOYACA</option>
@@ -5395,7 +5479,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 						<label class="control-label " for="u5058_input">
 							<spring:theme code="mirit.contactData.county" />
 						</label> 
-						<select id="u5058_input" class="form-control addressHelperField" onchange="municipioChanged();">
+						<select id="u5058_input" class="form-control" onchange="municipioChanged();">
 			                <option value="">Seleccionar</option>
 			              </select>
 						<div class="help-block">
@@ -5408,7 +5492,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 						<label class="control-label " for="u5073_input">
 							<spring:theme code="mirit.contactData.postalCode" />
 						</label> 
-						<select id="u5073_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
+						<select id="u5073_input" class="form-control" onchange="">
 			                <option value="">Seleccionar</option>
 			              </select>
 						<div class="help-block">
@@ -5422,6 +5506,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-2">
 					<div class="form-group ">
 					<label class="control-label " for="u5059_input">
+						<spring:theme code="mirit.addresshelper.tipo" />
 					</label> 
 						<select id="u5059_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5441,6 +5526,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5060_input">
+							<spring:theme code="mirit.addresshelper.numero" />
 						</label> 
 						<input id="u5060_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
@@ -5451,6 +5537,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5062_input">
+							<spring:theme code="mirit.addresshelper.letra" />
 						</label> 
 						<select id="u5062_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5490,6 +5577,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5061_input">
+							<spring:theme code="mirit.addresshelper.bis" />
 						</label> 
 							<select id="u5061_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 				                <option selected="" value="">Seleccionar</option>
@@ -5504,6 +5592,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5063_input">
+							<spring:theme code="mirit.addresshelper.letra" />
 						</label> 
 						<select id="u5063_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5543,6 +5632,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5064_input">
+							<spring:theme code="mirit.addresshelper.zona" />
 						</label> 
 						<select id="u5064_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5558,6 +5648,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u6064_input">
+							<spring:theme code="mirit.addresshelper.numero" />
 						</label> 
 						<input id="u6064_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
@@ -5569,6 +5660,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5065_input">
+							<spring:theme code="mirit.addresshelper.letra" />
 						</label> 
 							<select id="u5065_input"  class="form-control addressHelperField" onchange="menuAutoSearch();">
 				                <option selected="" value="">Seleccionar</option>
@@ -5608,6 +5700,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u6065_input">
+							<spring:theme code="mirit.addresshelper.numero" />
 						</label> 
 						<input id="u6065_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="menuAutoSearch();">
 						<div class="help-block">
@@ -5619,6 +5712,7 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				<div class="col-md-1">
 					<div class="form-group ">
 						<label class="control-label " for="u5079_input">
+							<spring:theme code="mirit.addresshelper.zona" />
 						</label> 
 						<select id="u5079_input" class="form-control addressHelperField" onchange="menuAutoSearch();">
 			                <option selected="" value="">Seleccionar</option>
@@ -5639,6 +5733,9 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group ">
+						<label class="control-label " for="u5066_input">
+							<spring:theme code="mirit.addresshelper.tipoComplemento" />
+						</label> 
 						<select id="u5066_input" class="form-control addressHelperField" onchange=""> 
 							<option selected="" value="">Seleccionar</option>
 			                <option value="AP">Apartamento</option>
@@ -5684,7 +5781,9 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 				</div>
 				<div class="col-md-3">
 					<div class="form-group ">
-
+						<label class="control-label " for="u6066_input">
+							<spring:theme code="mirit.addresshelper.complemento" />
+						</label> 
 						<input id="u6066_input" name="lastName" class="form-control form-control addressHelperField" aria-required="true" type="text" value="" maxlength="240" oninput="">
 						<div class="help-block">
 							<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
@@ -5692,11 +5791,21 @@ var cps = [	{'cp':	5243	, 'mun':	5250	},
 					</div>
 				
 				</div>
-				<div class="">
-							<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="addComplement();">
-									<spring:theme code="mirit.contactData.acept" /></button>
-								<button class="btn btn-secondary btn-lg addressHelperField" type="button" onclick="setAddress();">
-									<spring:theme code="mirit.contactData.addAddress" /></button>
-							</div>
+				<div class="col-md-2">
+					<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="addComplement();">
+						<spring:theme code="mirit.contactData.acept" /></button>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="cancelAddAddress();">
+						<spring:theme code="mirit.contactData.cancel" /></button>
+				</div>
+				</div>
+			<div class="row">
+				<div class="col-md-3">	
+					<div>
+						<button class="btn btn-secondary btn-lg addressHelperField" type="button" onclick="setAddress();">
+							<spring:theme code="mirit.contactData.addAddress" /></button>
+					</div>
+				</div>
 			</div>
 			
