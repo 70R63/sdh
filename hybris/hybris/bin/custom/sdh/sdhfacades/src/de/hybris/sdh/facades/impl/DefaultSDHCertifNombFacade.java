@@ -40,7 +40,7 @@ public class DefaultSDHCertifNombFacade implements SDHCertifNombFacade
 	{
 		final String response = sdhCertifNombService.certifNomb(request);
 
-		final Double minPercentage = configurationService.getConfiguration().getDouble("sdh.certifNomb.authorization.percentage", 90);
+		final Double minPercentage = configurationService.getConfiguration().getDouble("sdh.certifNomb.authorization.percentage", 0.90);
 
 		try
 		{
