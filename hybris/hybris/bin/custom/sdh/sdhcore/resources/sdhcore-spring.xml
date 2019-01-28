@@ -562,6 +562,10 @@
 	
 	<bean name="sdhCertificaRITService" class="de.hybris.sdh.core.services.impl.DefaultSDHCertificaRITService" />
 	
+	<bean name="sdhCalPublicidadService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcPublicidadService"/>
+	
+	<bean name="sdhDetallePublicidadService" class="de.hybris.sdh.core.services.impl.DefaultSDHDetallePublicidadService"/>
+	
 	
 	<alias alias="customerAccountService" name="sdhCustomerAccountService"/>
 	<bean id="sdhCustomerAccountService" parent="defaultCustomerAccountService"
