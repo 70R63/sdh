@@ -572,6 +572,8 @@
 	<alias name="defaultSdhYFormservice" alias="SdhYFormservice"/>
 	<bean id="defaultSdhYFormservice" class="de.hybris.sdh.core.formServices.impl.DefaultSdhYFormservice" parent="defaultYFormService">
 	</bean>
+	
+	<bean name="sdhCertificaRITService" class="de.hybris.sdh.core.services.impl.DefaultSDHCertificaRITService" />
 
 	<alias name="ZWS_HYSEND_MAIL_ServiceLocator" alias="ZWS_HYSEND_MAIL_locator"/>
 	<bean id="ZWS_HYSEND_MAIL_ServiceLocator" class="de.hybris.sdh.core.soap.impl.ZWS_HYSEND_MAIL_ServiceLocator" />
