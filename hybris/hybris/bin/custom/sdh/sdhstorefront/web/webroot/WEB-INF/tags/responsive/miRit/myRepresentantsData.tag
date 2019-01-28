@@ -82,7 +82,7 @@
 					</div>
 					<div class="col-md-2">
 						<div class="form-group ">
-							<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="" maxlength="240">
+							<input id="address.surname" name="lastName" class="form-control form-control" disabled="disabled" aria-required="true" type="text" value="${eachAgent.funcionInterl }" maxlength="240">
 							<div class="help-block">
 								<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 							</div>

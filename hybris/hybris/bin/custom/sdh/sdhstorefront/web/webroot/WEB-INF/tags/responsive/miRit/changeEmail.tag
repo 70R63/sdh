@@ -16,12 +16,12 @@
 		<div class="row">
 			<div class="col-md-4  ">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="currentMail">
 						<spring:theme code="mirit.changeEmail.email" />
 					</label> 
-					<input  id="address.surname"   name="lastName" class="form-control " aria-required="true" type="text" value="${miRitForm.email }" maxlength="240">
+					<input  id="currentMail"   name="currentMail" class="form-control " aria-required="true" type="text" value="${miRitForm.email }" maxlength="240">
 					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+						<span id="currentMailErrors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
 				</div>
 			</div>
@@ -29,12 +29,12 @@
 		<div class="row">
 			<div class="col-md-4  ">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="newEmail">
 						<spring:theme code="mirit.changeEmail.newEmail" />
 					</label>
-					<input  id="address.surname"   name="lastName" class="form-control " aria-required="true" type="text" value="" maxlength="240">
+					<input  id="newEmail"   name="newEmail" class="form-control " aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+						<span id="newEmailErrors" class="hidden"><spring:theme code="login.not.a.validEmail.exception" /></span>
 					</div>
 				</div>
 			</div>
@@ -42,12 +42,12 @@
 		<div class="row">
 			<div class="col-md-4  ">
 				<div class="form-group ">
-					<label class="control-label required" for="address.surname">
+					<label class="control-label required" for="confirmNewEmail">
 						<spring:theme code="mirit.changeEmail.confirmNewEmail" />
 					</label>
-					<input  id="address.surname"   name="lastName" class="form-control " aria-required="true" type="text" value="" maxlength="240">
+					<input  id="confirmNewEmail"   name="confirmNewEmail" class="form-control " aria-required="true" type="text" value="" maxlength="240">
 					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+						<span id="confirmNewEmailErrors" class="hidden"><spring:theme code="validation.confirmEmail.equals" /></span>
 					</div>
 				</div>
 			</div>

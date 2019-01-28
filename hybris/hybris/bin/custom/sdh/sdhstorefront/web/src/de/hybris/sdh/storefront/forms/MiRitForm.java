@@ -4,6 +4,7 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
@@ -45,8 +46,8 @@ public class MiRitForm
 	private Boolean hasARRol;
 	private Boolean hasRIRol;
 
-	private String direccionNotificacion;
-	private String direccionContacto;
+	private ContribDireccion direccionNotificacion;
+	private ContribDireccion direccionContacto;
 
 	private String telefonoPricipal;
 	private String extensionTelefono;
@@ -62,6 +63,7 @@ public class MiRitForm
 	private String numeroMatriculaMercantil;
 	private String fechaLiquidacion;
 	private String tipoRetenedor;
+	private String digVer;
 
 	private List<ImpuestoGasolina> gasolina;
 	private List<ImpuestoPublicidadExterior> publicidadExt;
@@ -485,10 +487,13 @@ public class MiRitForm
 		this.hasRIRol = hasRIRol;
 	}
 
+
+
+
 	/**
 	 * @return the direccionNotificacion
 	 */
-	public String getDireccionNotificacion()
+	public ContribDireccion getDireccionNotificacion()
 	{
 		return direccionNotificacion;
 	}
@@ -497,7 +502,7 @@ public class MiRitForm
 	 * @param direccionNotificacion
 	 *           the direccionNotificacion to set
 	 */
-	public void setDireccionNotificacion(final String direccionNotificacion)
+	public void setDireccionNotificacion(final ContribDireccion direccionNotificacion)
 	{
 		this.direccionNotificacion = direccionNotificacion;
 	}
@@ -505,7 +510,7 @@ public class MiRitForm
 	/**
 	 * @return the direccionContacto
 	 */
-	public String getDireccionContacto()
+	public ContribDireccion getDireccionContacto()
 	{
 		return direccionContacto;
 	}
@@ -514,11 +519,10 @@ public class MiRitForm
 	 * @param direccionContacto
 	 *           the direccionContacto to set
 	 */
-	public void setDireccionContacto(final String direccionContacto)
+	public void setDireccionContacto(final ContribDireccion direccionContacto)
 	{
 		this.direccionContacto = direccionContacto;
 	}
-
 
 	/**
 	 * @return the extensionTelefono
@@ -774,6 +778,23 @@ public class MiRitForm
 	public void setEmail(final String email)
 	{
 		this.email = email;
+	}
+
+	/**
+	 * @return the digVer
+	 */
+	public String getDigVer()
+	{
+		return digVer;
+	}
+
+	/**
+	 * @param digVer
+	 *           the digVer to set
+	 */
+	public void setDigVer(final String digVer)
+	{
+		this.digVer = digVer;
 	}
 
 
