@@ -36,6 +36,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -257,10 +258,9 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		//final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-		//	detallePublicidadRequest.setNumBP("0000000454");
-		//detallePublicidadRequest.setNumResolu("RES 1162");
-		//detallePublicidadRequest.setAnoGravable("2019");
+		//consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		consultaContribuyenteBPRequest.setNumBP("0000000546");
+
 
 		try
 		{
@@ -366,10 +366,11 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 
 
-	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.GET)
 	//@RequireHardLogIn
 	public String publicidadExternaDetail(final PublicidadForm dataForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			final RedirectAttributes redirectAttributes, @RequestParam("anio")
+			final String anio) throws CMSItemNotFoundException
 	{
 
 		System.out.println("Action1 block called");
@@ -377,9 +378,10 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 
-		detallePublicidadRequest.setNumBP("0000000454");
-		detallePublicidadRequest.setNumResolu("RES 1162");
-		detallePublicidadRequest.setAnoGravable("2019");
+		detallePublicidadRequest.setNumBP("0000000546");
+		detallePublicidadRequest.setNumResolu("RES 096");
+		detallePublicidadRequest.setAnoGravable("2018");
+		System.out.println(anio);
 
 
 		try

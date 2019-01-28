@@ -127,7 +127,7 @@
 		<div>
 			<sf:form action="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
 			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
-			method="post">
+			method="GET">
 				<button id="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle" type="submit" class = "botton" onclick="functionDos()"> <!-- onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
 					<spring:theme code="publicidad.exterior.detail.search" />
 				</button>
