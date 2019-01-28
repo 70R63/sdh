@@ -19,6 +19,7 @@ import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountS
 import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.sdh.core.event.SDHRegistrationEvent;
@@ -66,6 +67,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "DefaultZWS_HYBSEND_MAIL_CORE")
 	private ZWS_HYSEND_MAIL_INT crm_mail;
+	
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
 	/*
 	 * (non-Javadoc)
 	 *
@@ -158,11 +162,16 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final StringHolder a = new StringHolder();
 		final StringHolder b = new StringHolder();
-		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/activateAccount?token=";
+		final String path = configurationService.getConfiguration().getString("website.sdh.https");
+		final String hybrisURL = path+ "/es/login/pw/activateAccount?token=";
 		final String encodedToken = this.getEncodedURL(token);
 
 
-		crm_mail.send(customerModel.getUid(), "<A HREF='"+hybrisURL+encodedToken+"'>Activar</A>", "SDH Activar Cuenta - Hybris ", a, b);
+		crm_mail.send(customerModel.getUid(), 
+				"Para activar tu cuenta ingresa <A HREF='"+hybrisURL+encodedToken+"'>AQUÍ</A> <BR/>", 
+				"SDH Activar Cuenta - Hybris ", 
+				a, 
+				b);
 
 		getEventService().publishEvent(event);
 	}
@@ -265,12 +274,13 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final StringHolder a = new StringHolder();
 		final StringHolder b = new StringHolder();
-		final String hybrisURL = "https://publicsector.local:9002/sdhstorefront/es/login/pw/change?token=";
+		final String path = configurationService.getConfiguration().getString("website.sdh.https");
+		final String hybrisURL = path + "/es/login/pw/change?token="; 
 		final String encodedToken = this.getEncodedURL(token);
 
 
 		crm_mail.send(customerModel.getUid(),
-				"Para recuperar tu contraseña ingresa <A HREF='" + hybrisURL + encodedToken + "'>aquí</A>",
+				"Para recuperar tu contraseña ingresa <A HREF='" + hybrisURL + encodedToken + "'>AQUÍ</A> <BR/>",
 				"SDH Recuperar Cuenta - Hybris ", a, b);
 
 	}
@@ -284,5 +294,58 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 		return encodedURL;
 	}
+	
+	@Override
+	public String generateCustomerSessionToken(String bp) {
+		final long timeStamp = getTokenValiditySeconds() > 0L ? new Date().getTime() : 0L;
+		final SecureToken data = new SecureToken(bp, timeStamp);
+		final String token = getSecureTokenService().encryptData(data);
+
+		System.out.println("bp ---->:" + bp);
+		
+		return this.getEncodedURL(token);
+		//return "";
+	}
+	
+	@Override
+	public boolean validateToken(String token, String uidUser) {
+		
+		boolean isValidToken = false;
+		
+		try {
+			final SecureToken data = getSecureTokenService().decryptData(token);
+			if (getTokenValiditySeconds() > 0L)
+			{
+				final long delta = new Date().getTime() - data.getTimeStamp();
+				if (delta / 1000 > getTokenValiditySeconds())
+				{
+					throw new TokenInvalidatedException();
+				}
+			}
+
+		
+			System.out.println("data.getData() ----->" + data.getData());
+			System.out.println("uidUser ----->" + uidUser);
+		
+			if(!data.getData().equals(uidUser)) {
+				throw new TokenInvalidatedException();
+			}
+		
+			/*final CustomerModel customer = getUserService().getUserForUID(data.getData(), CustomerModel.class);
+			if (customer == null)
+			{
+				throw new TokenInvalidatedException();
+			}
+			if (!token.equals(customer.getToken()))
+			{
+				throw new TokenInvalidatedException();
+			}*/
+		
+		}catch(TokenInvalidatedException e) {
+			LOG.info(e.getStackTrace());
+		}
+		return true;
+	}
 
 }
+

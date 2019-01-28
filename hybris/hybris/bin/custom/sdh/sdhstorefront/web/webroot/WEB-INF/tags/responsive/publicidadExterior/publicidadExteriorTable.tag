@@ -114,7 +114,7 @@
 				code="publicidad.exterior.detail.selectYear" /></label>
 	</div>
 	<div class="col-md-1">
-		<select id="u5013_input" class="inputdropdown"
+		<select id="anio" class="inputdropdown"
 			onchange="ShowSelected(this);">
 			<option value="0">Selecciona un año</option>
 			<option value="2019">2019</option>
