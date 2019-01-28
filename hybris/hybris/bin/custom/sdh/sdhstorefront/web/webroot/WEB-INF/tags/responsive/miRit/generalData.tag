@@ -16,17 +16,17 @@
 			
 			<!--  First column of form -->
 			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required" for="tratamiento">
-						<spring:theme code="mirit.generalData.treatment"/>
-					</label> 
-					<select id="tratamiento" name="tratamiento" class="form-control" disabled="">
-		                <option value="${miRitForm.tratamiento}" ><spring:theme code="rit.tratamiento.t${miRitForm.tratamiento}" /></option>
-		              </select>
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
-				</div>
+<!-- 				<div class="form-group "> -->
+<!-- 					<label class="control-label required" for="tratamiento"> -->
+<%-- 						<spring:theme code="mirit.generalData.treatment"/> --%>
+<!-- 					</label>  -->
+<!-- 					<select id="tratamiento" name="tratamiento" class="form-control" disabled=""> -->
+<%-- 		                <option value="${miRitForm.tratamiento}" ><spring:theme code="rit.tratamiento.t${miRitForm.tratamiento}" /></option> --%>
+<!-- 		              </select> -->
+<!-- 					<div class="help-block"> -->
+<!-- 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 				<div class="form-group ">
 					<label class="control-label required" for="sexo">
 						<spring:theme code="mirit.generalData.gender" />

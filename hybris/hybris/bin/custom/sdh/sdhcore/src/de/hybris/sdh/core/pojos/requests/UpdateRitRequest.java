@@ -3,6 +3,14 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import de.hybris.sdh.core.pojos.responses.ContribDireccion;
+import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
+
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+
 /**
  * @author hybris
  *
@@ -19,6 +27,16 @@ public class UpdateRitRequest
 	private String segNom;
 	private String primApe;
 	private String segApe;
+
+	private List<ContribRedSocial> redsocial;
+
+	private ContribDireccion direccionContacto;
+	private ContribDireccion direccionNoficacion;
+
+	private String telfonoPrincipal;
+	private String extension;
+
+	private Boolean updateName;
 
 	/**
 	 * @return the email
@@ -175,6 +193,26 @@ public class UpdateRitRequest
 		this.segApe = segApe;
 	}
 
+
+
+
+	/**
+	 * @return the redsocial
+	 */
+	public List<ContribRedSocial> getRedsocial()
+	{
+		return redsocial;
+	}
+
+	/**
+	 * @param redsocial
+	 *           the redsocial to set
+	 */
+	public void setRedsocial(final List<ContribRedSocial> redsocial)
+	{
+		this.redsocial = redsocial;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -183,10 +221,13 @@ public class UpdateRitRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"personal\": {");
-		stringBuilder.append("\"primNom\":\"" + this.getPrimNom() + "\",");
-		stringBuilder.append("\"segNom\":\"" + this.getSegNom() + "\",");
-		stringBuilder.append("\"primApe\":\"" + this.getPrimApe() + "\",");
-		stringBuilder.append("\"segApe\":\"" + this.getSegApe() + "\",");
+		if (Boolean.TRUE.equals(this.getUpdateName()))
+		{
+			stringBuilder.append("\"primNom\":\"" + this.getPrimNom() + "\",");
+			stringBuilder.append("\"segNom\":\"" + this.getSegNom() + "\",");
+			stringBuilder.append("\"primApe\":\"" + this.getPrimApe() + "\",");
+			stringBuilder.append("\"segApe\":\"" + this.getSegApe() + "\",");
+		}
 		stringBuilder.append("\"SMTP_ADDR\":\"" + this.getEmail() + "\",");
 		stringBuilder.append("\"ZZAUTOUSOINF\":\""
 				+ String.valueOf((Boolean.TRUE.equals(this.getUseInformationForInstitutionalPurposes()) ? 1 : 2)) + "\",");
@@ -194,12 +235,201 @@ public class UpdateRitRequest
 				+ String.valueOf((Boolean.TRUE.equals(this.getUseEmailForNotifications()) ? this.getAutoBuzonDate() : 0)) + "\",");
 		stringBuilder.append(
 				"\"ZZAUTOBUZONE\":\"" + String.valueOf((Boolean.TRUE.equals(this.getUseEmailForNotifications()) ? 1 : 2)) + "\"");
-		stringBuilder.append("               }");
+		stringBuilder.append("               },");
+
+		stringBuilder.append("\"redsocial\": [");
+
+		for (final ContribRedSocial eachRS : this.getRedsocial())
+		{
+			stringBuilder.append("{\"RED_SOCIAL\":\"" + eachRS.getRED_SOCIAL() + "\",");
+			stringBuilder.append("\"USUARIORED\":\"" + eachRS.getUSUARIORED() + "\"},");
+		}
+
+		if (",".equals(stringBuilder.substring(stringBuilder.length() - 1)))
+		{
+			stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+		}
+
+		stringBuilder.append("               ],");
+
+
+		stringBuilder.append("\"direcciones\": [");
+
+		if (this.getDireccionNoficacion() == null)
+		{
+			stringBuilder.append("{\"ADR_KIND\": \"02\",");
+			stringBuilder.append("\"STREET\": \"\",");
+			stringBuilder.append("\"STR_SUPPL1\": \"\",");
+			stringBuilder.append("\"STR_SUPPL2\": \"\",");
+			stringBuilder.append("\"STR_SUPPL3\": \"\",");
+			stringBuilder.append("\"POST_CODE1\": \"\",");
+			stringBuilder.append("\"CITY1\": \"\",");
+			stringBuilder.append("\"COUNTRY\": \"\",");
+			stringBuilder.append("\"REGION\": \"\"");
+			stringBuilder.append("    },");
+		}
+		else
+		{
+			final ContribDireccion address= this.getDireccionNoficacion();
+
+			stringBuilder.append("{\"ADR_KIND\": \"02\",");
+			stringBuilder.append("\"STREET\": \""+ ((StringUtils.isBlank(address.getSTREET()))? "" : address.getSTREET() ) +"\",");
+			stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTR_SUPPL1() ) +"\",");
+			stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTR_SUPPL2() ) +"\",");
+			stringBuilder.append("\"POST_CODE1\": \""+ ((StringUtils.isBlank(address.getPOST_CODE()))? "" : StringUtils.leftPad(address.getPOST_CODE(),6,"0") ) +"\",");
+			stringBuilder.append("\"CITY1\": \""+ ((StringUtils.isBlank(address.getCITY1()))? "" : address.getCITY1() ) +"\",");
+			stringBuilder.append("\"COUNTRY\": \""+ ((StringUtils.isBlank(address.getCOUNTRY()))? "" : address.getCOUNTRY() ) +"\",");
+			stringBuilder.append("\"REGION\": \""+ ((StringUtils.isBlank(address.getREGION()))? "" : address.getREGION() ) +"\"");
+			stringBuilder.append("    },");
+		}
+
+
+		if (this.getDireccionContacto() == null)
+		{
+			stringBuilder.append("{\"ADR_KIND\": \"01\",");
+			stringBuilder.append("\"STREET\": \" \",");
+			stringBuilder.append("\"STR_SUPPL1\": \"\",");
+			stringBuilder.append("\"STR_SUPPL2\": \"\",");
+			stringBuilder.append("\"STR_SUPPL3\": \"\",");
+			stringBuilder.append("\"POST_CODE1\": \"\",");
+			stringBuilder.append("\"CITY1\": \"\",");
+			stringBuilder.append("\"COUNTRY\": \"\",");
+			stringBuilder.append("\"REGION\": \"\"");
+			stringBuilder.append("    }");
+		}
+		else
+		{
+			final ContribDireccion address = this.getDireccionContacto();
+
+			stringBuilder.append("{\"ADR_KIND\": \"01\",");
+			stringBuilder.append("\"STREET\": \"" + ((StringUtils.isBlank(address.getSTREET())) ? "" : address.getSTREET()) + "\",");
+			stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTR_SUPPL1() ) +"\",");
+			stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTR_SUPPL2() ) +"\",");
+			stringBuilder.append("\"POST_CODE1\": \"" + ((StringUtils.isBlank(address.getPOST_CODE())) ? "" : StringUtils.leftPad(address.getPOST_CODE(),6,"0")) + "\",");
+			stringBuilder.append("\"CITY1\": \"" + ((StringUtils.isBlank(address.getCITY1())) ? "" : address.getCITY1()) + "\",");
+			stringBuilder.append("\"COUNTRY\": \"" + ((StringUtils.isBlank(address.getCOUNTRY())) ? "" : address.getCOUNTRY()) + "\",");
+			stringBuilder.append("\"REGION\": \"" + ((StringUtils.isBlank(address.getREGION())) ? "" : address.getREGION()) + "\"");
+			stringBuilder.append("    }");
+		}
+
+		stringBuilder.append("               ],");
+
+		stringBuilder.append("\"telefonos\": [");
+
+		if (this.getTelfonoPrincipal() == null)
+		{
+			stringBuilder.append("{\"TEL_TIPO\": \"1\",");
+			stringBuilder.append("\"TEL_NUMBER\": \"\",");
+			stringBuilder.append("\"TEL_EXTENS\": \"\",");
+			stringBuilder.append("\"MOB_NUMBER\": \"\"");
+			stringBuilder.append("    }");
+		}
+		else
+		{
+			final String tel= this.getTelfonoPrincipal();
+			final String ext= this.getExtension();
+
+			stringBuilder.append("{\"TEL_TIPO\": \" 1\",");
+			stringBuilder.append("\"TEL_NUMBER\": \"" + ((StringUtils.isBlank(tel)) ? "" : tel) + "\",");
+			//stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTREET() ) +"\",");
+			//stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTREET() ) +"\",");
+			stringBuilder.append("\"TEL_EXTENS\": \"" + ((StringUtils.isBlank(ext)) ? "" : ext) + "\",");
+			stringBuilder.append("\"MOB_NUMBER\": \"\"");
+			stringBuilder.append("    }");
+		}
+
+
+		stringBuilder.append("               ]");
+
+
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
 	}
 
+	/**
+	 * @return the direccionContacto
+	 */
+	public ContribDireccion getDireccionContacto()
+	{
+		return direccionContacto;
+	}
 
+	/**
+	 * @param direccionContacto
+	 *           the direccionContacto to set
+	 */
+	public void setDireccionContacto(final ContribDireccion direccionContacto)
+	{
+		this.direccionContacto = direccionContacto;
+	}
+
+	/**
+	 * @return the direccionNoficacion
+	 */
+	public ContribDireccion getDireccionNoficacion()
+	{
+		return direccionNoficacion;
+	}
+
+	/**
+	 * @param direccionNoficacion
+	 *           the direccionNoficacion to set
+	 */
+	public void setDireccionNoficacion(final ContribDireccion direccionNoficacion)
+	{
+		this.direccionNoficacion = direccionNoficacion;
+	}
+
+	/**
+	 * @return the telfonoPrincipal
+	 */
+	public String getTelfonoPrincipal()
+	{
+		return telfonoPrincipal;
+	}
+
+	/**
+	 * @param telfonoPrincipal
+	 *           the telfonoPrincipal to set
+	 */
+	public void setTelfonoPrincipal(final String telfonoPrincipal)
+	{
+		this.telfonoPrincipal = telfonoPrincipal;
+	}
+
+	/**
+	 * @return the extension
+	 */
+	public String getExtension()
+	{
+		return extension;
+	}
+
+	/**
+	 * @param extension
+	 *           the extension to set
+	 */
+	public void setExtension(final String extension)
+	{
+		this.extension = extension;
+	}
+
+	/**
+	 * @return the updateName
+	 */
+	public Boolean getUpdateName()
+	{
+		return updateName;
+	}
+
+	/**
+	 * @param updateName
+	 *           the updateName to set
+	 */
+	public void setUpdateName(final Boolean updateName)
+	{
+		this.updateName = updateName;
+	}
 
 }
