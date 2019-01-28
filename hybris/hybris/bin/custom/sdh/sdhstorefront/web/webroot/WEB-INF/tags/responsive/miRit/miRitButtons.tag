@@ -15,4 +15,6 @@
 </div>
 
 
+<div id="dialog" title="Certificación de Nombre" ><div id="textCertNom"></div></div>
+
 

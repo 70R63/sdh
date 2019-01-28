@@ -23,7 +23,7 @@
 						<spring:theme code="mirit.personalData.documentType" text="Mis datos personales"/>
 					</label> 
 					
-					<select  class="form-control" disabled="disabled">
+					<select id="documentType"  class="form-control" disabled="disabled">
 						<option value="${miRitForm.tipoDoc }"><spring:theme code="register.id.types.${miRitForm.tipoDoc}" /></option>
 					</select>
 					
@@ -60,9 +60,6 @@
 				</div>
 				
 			</div>
-			
-<div id="dialog" title="Certificación de Nombre" ><div id="textCertNom"></div></div>
-			
 			
 			<!--  Second column of form -->
 			<div class="col-md-4">
