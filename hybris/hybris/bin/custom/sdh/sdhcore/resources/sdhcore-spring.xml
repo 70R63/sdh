@@ -560,8 +560,9 @@
 	
 	<bean name="sdhConsultaContribuyenteBPService" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaContribuyenteBPService" />
 
+<!-- INI Federico Flores Dimas - Impuesto Gasolina -->
 	<bean name="sdhDetalleGasolina" class="de.hybris.sdh.core.services.impl.DefaultSDHDetalleGasolina" />
-	
+<!-- FIN Federico Flores Dimas - Impuesto Gasolina -->
 
 	<bean name="sdhCalPublicidadService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcPublicidadService"/>
 	

@@ -1431,7 +1431,7 @@ INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];u
 
 
 
-#->INI dev-federico Agregar paginas para impuesto sobretasagasolina 17/01/2019
+#->INI dev-federico Agregar paginas para impuesto sobretasagasolina  17/01/2019
 # USE CTRL-SPACE for type-ahead support 
 $productCatalogSDH=sdhProductCatalog
 $contentCatalogSDH=sdhContentCatalog
@@ -1470,4 +1470,4 @@ INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;nam
 INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
 				 					;							;DeclaracionGasolinaComponent	;DeclaracionGasolinaComponent	;/WEB-INF/views/responsive/pages/impuestoGasolina/declaracionGasolina.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;DeclaracionGasolinaComponent
 									
-#->FIN dev-federico Agregar paginas para impuesto sobretasagasolina 17/01/2019
+#->FIN dev-federico Agregar paginas para impuesto sobretasagasolina  17/01/2019
