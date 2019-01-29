@@ -130,6 +130,8 @@ ACC.mirit = {
     	        	$("#confirmNewEmail").parents(".form-group ").removeClass("has-error");
 	       		}
     	        
+    	        var hasPasswordErrors=false;
+    	        
     	        var currentPassword = $.trim($("#currentPassword").val());
     	        var newPassword = $.trim($("#newPassword").val());
     	        var confirmNewPassword = $.trim($("#confirmNewPassword").val());
@@ -141,7 +143,7 @@ ACC.mirit = {
     	        		$("#currentPasswordErrors").removeClass("hidden");
         	        	$("#currentPassword").parents(".form-group ").addClass("has-error");
         	        	$("#currentPasswordErrors").html("Por favor introduce tu contraseña actual");
-        	        	hasErrors = true;
+        	        	hasPasswordErrors = true;
 	        		}else
         			{
 	        			$("#currentPasswordErrors").addClass("hidden");
@@ -149,37 +151,10 @@ ACC.mirit = {
         			}
         		
     	        	
-    	        	if(/[a-z]/.test(newPassword) == false)
+    	        	if(/[a-z]/.test(newPassword) == false || /[A-Z]/.test(newPassword) == false || /[0-9]/.test(newPassword) == false || (newPassword.length <8 || newPassword.length>16))
     	        	{
         	        	$("#newPassword").parents(".form-group ").addClass("has-error");
-        	        	hasErrors = true;
-    	        	}else
-    	        	{
-    	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-    	        	}
-    	        	
-    	        	if(/[A-Z]/.test(newPassword) == false)
-    	        	{
-        	        	$("#newPassword").parents(".form-group ").addClass("has-error");
-        	        	hasErrors = true;
-    	        	}else
-    	        	{
-    	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-    	        	}
-    	        	
-    	        	if(/[0-9]/.test(newPassword) == false)
-    	        	{
-        	        	$("#newPassword").parents(".form-group ").addClass("has-error");
-        	        	hasErrors = true;
-    	        	}else
-    	        	{
-    	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
-    	        	}
-    	        	
-    	        	if(newPassword.length <8 || newPassword.length>16)
-    	        	{
-        	        	$("#newPassword").parents(".form-group ").addClass("has-error");
-        	        	hasErrors = true;
+        	        	hasPasswordErrors = true;
     	        	}else
     	        	{
     	        		$("#newPassword").parents(".form-group ").removeClass("has-error");
@@ -189,36 +164,55 @@ ACC.mirit = {
     	        	{
     	        		$("#confirmNewPasswordErrors").removeClass("hidden");
         	        	$("#confirmNewPassword").parents(".form-group ").addClass("has-error");
-        	        	hasError = true;
+        	        	hasPasswordErrors = true;
+    	        	}else
+    	        	{
+    	        		$("#confirmNewPasswordErrors").addClass("hidden");
+        	        	$("#confirmNewPassword").parents(".form-group ").removeClass("has-error");
     	        	}
     	        	
-    	        	
-    	        	var passwordData = {};
-        	        passwordData.passoword = currentPassword;
-    	        	
-        	        $.ajax({
-    	            url: ACC.validaCurrentPasswrodURL,
-    	            data: passwordData,
-    	            type: "POST",
-    	            async: false,
-    	            success: function (data) {
-    	            	$( "#dialog" ).dialog( "open" );
-    	            	if(data.isValidPassword == true)
-	            		{
-    	            		$("#currentPasswordErrors").addClass("hidden");
-            	        	$("#currentPassword").parents(".form-group ").removeClass("has-error");
-	            		}else
-    	            	{
-	            			$("#currentPasswordErrors").removeClass("hidden");
-	        	        	$("#currentPassword").parents(".form-group ").addClass("has-error");
-	        	        	$("#currentPasswordErrors").html("Contraseña actual incorrecta.");
-	        	        	hasErrors = true;
-    	            	}
-    	            },
-    	            error: function () {
-    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
-    	            }
-    	        });
+    	        	if (hasPasswordErrors == false)
+    	        	{
+	    	        	var passwordData = {};
+	        	        passwordData.passoword = currentPassword;
+	        	        
+	    	        	
+	        	        $.ajax({
+		    	            url: ACC.validaCurrentPasswrodURL,
+		    	            data: passwordData,
+		    	            type: "POST",
+		    	            async: false,
+		    	            success: function (data) {
+		    	            	if(data.isValidPassword == true)
+			            		{
+		    	            		$("#currentPasswordErrors").addClass("hidden");
+		            	        	$("#currentPassword").parents(".form-group ").removeClass("has-error");
+		            	        	
+		            	        	  if( currentPassword == newPassword)
+		            	        	  {
+		            	        		  $("#newPassword").parents(".form-group ").addClass("has-error");
+		            	        		  $("#sameOldPasswordError").removeClass("hidden");
+		            	        		  hasPasswordErrors = true;
+		            	        	  }else
+		            	        	  {
+		            	        		  $("#newPassword").parents(".form-group ").removeClass("has-error");
+		            	        		  $("#sameOldPasswordError").addClass("hidden");
+		            	        	  }
+		            	        	
+		            	        	
+			            		}else
+		    	            	{
+			            			$("#currentPasswordErrors").removeClass("hidden");
+			        	        	$("#currentPassword").parents(".form-group ").addClass("has-error");
+			        	        	$("#currentPasswordErrors").html("Contraseña actual incorrecta.");
+			        	        	hasPasswordErrors = true;
+		    	            	}
+		    	            },
+		    	            error: function () {
+		    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+		    	            }
+	        	        });
+    	        	}
         		
 	        } 	
     	        
@@ -285,7 +279,7 @@ ACC.mirit = {
     	        direccionContacto.COUNTRY  = $.trim($("#u5070_input").val());
     	        direccionContacto.CITY1   = $.trim($("#u5058_input option:selected").text());
     	        
-    	        if(hasErrors)
+    	        if(hasErrors || hasPasswordErrors)
     	        {
     	        	$( "#dialog" ).dialog( "open" );
     	        	$("#textCertNom").html("Por favor corrije los errores señalados");
@@ -295,6 +289,9 @@ ACC.mirit = {
     	    	        updateRitData.email = $.trim($("#currentMail").val());
     	    	        updateRitData.newEmailAddress =  $.trim($("#newEmail").val());
     	    	        updateRitData.confirmNewEmailAddress =  $.trim($("#confirmNewEmail").val());
+    	    	        updateRitData.passoword=currentPassword;
+    	    	        updateRitData.newPassword=newPassword;
+    	    	        updateRitData.confirmNewPassword=confirmNewPassword;
     	    	        updateRitData.requestUpdateName =  updateName;
     	    	        updateRitData.primNom = $.trim( $("#primNom").val());
     	    	        updateRitData.segNom =  $.trim($("#segNom").val());
