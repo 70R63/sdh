@@ -12,23 +12,23 @@
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span tabindex="0"><spring:theme
+			<span tabindex="0" class="col-md-12 cintillo"><spring:theme
 					code="impuestos.decGasolina.DatosRevisor.titulo" /></span>
 		</h3>
 	</div>
 </div>
 
-<div class="col-md-12">
+<div class="col-md-10">
 	<div class="table-responsive">
 		<table class="table">
 			<thead>
 				<tr>
-					<td><spring:theme
-							code="impuestos.decGasolina.DatosRevisor.tipoId" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.DatosRevisor.numeroId" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.DatosRevisor.nombre" /></td>
+					<td><label class="inputlabelnew"><spring:theme
+								code="impuestos.decGasolina.DatosRevisor.tipoId" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+								code="impuestos.decGasolina.DatosRevisor.numeroId" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+								code="impuestos.decGasolina.DatosRevisor.nombre" /></label></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,16 +48,18 @@
 					</td>
 					<td>
 						<div class="form-group ">
-							<input id="numeroId" name="gnumeroId"
-								class="inputtextnew" aria-required="true"
-								type="text" value="" maxlength="240">
+							<input id="numeroId" name="gnumeroId" class="inputtextnew"
+								aria-required="true" type="text"
+								value="${dataForm.revisor.numDoc}" maxlength="240"
+								readonly="readonly">
 						</div>
 					</td>
 					<td>
 						<div class="form-group ">
-							<input id="nombre" name="nombre"
-								class="inputtextnew" aria-required="true"
-								type="text" value="" maxlength="240">
+							<input id="nombre" name="nombre" class="inputtextnew"
+								aria-required="true" type="text"
+								value="${dataForm.revisor.nombres}" maxlength="240"
+								readonly="readonly">
 						</div>
 					</td>
 				</tr>
@@ -65,7 +67,7 @@
 			<thead>
 				<tr>
 					<td><label class="inputlabelnew"><spring:theme
-							code="impuestos.decGasolina.DatosRevisor.numeroTarjetaProf" /></label></td>
+								code="impuestos.decGasolina.DatosRevisor.numeroTarjetaProf" /></label></td>
 					<td></td>
 					<td></td>
 				</tr>
@@ -75,8 +77,9 @@
 					<td>
 						<div class="form-group ">
 							<input id="numeroTarjetaProf" name="numeroTarjetaProf"
-								class="inputtextnew" aria-required="true"
-								type="text" value="" maxlength="240">
+								class="inputtextnew" aria-required="true" type="text"
+								value="${dataForm.revisor.tarjetaProf}" maxlength="240"
+								readonly="readonly">
 						</div>
 					</td>
 					<td></td>

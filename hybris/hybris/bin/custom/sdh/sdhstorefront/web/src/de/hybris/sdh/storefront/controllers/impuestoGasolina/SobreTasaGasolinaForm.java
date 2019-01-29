@@ -3,7 +3,6 @@
  */
 package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
-import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasValoresDeclaraResponse;
@@ -24,19 +23,39 @@ public class SobreTasaGasolinaForm
 	private SobreTasaGasolinaCatalogos catalogosSo;
 
 	private String NumDoc;
-	private String opcionesUso;
+	private String opcionUso;
 	private String tipoIdRev;
 	private String tipoIdDec;
+	private String numForm;
 
 	private DetGasCatalogos catalogosDe;
 
-	private List<DetGasInfoDeclaraResponse> infoDeclara;
+	//	private List<DetGasInfoDeclaraResponse> infoDeclara;
 	private DetGasValoresDeclaraResponse valoresDeclara;
 	private DetGasRevisorDeclaranteResponse revisor;
 	private DetGasRevisorDeclaranteResponse Declarante;
 
 	private String action;
 
+
+
+
+	/**
+	 * @return the numForm
+	 */
+	public String getNumForm()
+	{
+		return numForm;
+	}
+
+	/**
+	 * @param numForm
+	 *           the numForm to set
+	 */
+	public void setNumForm(final String numForm)
+	{
+		this.numForm = numForm;
+	}
 	/**
 	 * @return the action
 	 */
@@ -159,9 +178,9 @@ public class SobreTasaGasolinaForm
 	/**
 	 * @return the opcionesUso
 	 */
-	public String getOpcionesUso()
+	public String getOpcionUso()
 	{
-		return opcionesUso;
+		return opcionUso;
 	}
 
 	/**
@@ -170,7 +189,7 @@ public class SobreTasaGasolinaForm
 	 */
 	public void setOpcionesUso(final String opcionesUso)
 	{
-		this.opcionesUso = opcionesUso;
+		this.opcionUso = opcionesUso;
 	}
 
 	/**
@@ -224,22 +243,7 @@ public class SobreTasaGasolinaForm
 		this.catalogosDe = catalogosDe;
 	}
 
-	/**
-	 * @return the infoDeclara
-	 */
-	public List<DetGasInfoDeclaraResponse> getInfoDeclara()
-	{
-		return infoDeclara;
-	}
 
-	/**
-	 * @param infoDeclara
-	 *           the infoDeclara to set
-	 */
-	public void setInfoDeclara(final List<DetGasInfoDeclaraResponse> infoDeclara)
-	{
-		this.infoDeclara = infoDeclara;
-	}
 
 	/**
 	 * @return the valoresDeclara

@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span tabindex="0"><spring:theme
+			<span tabindex="0" class="col-md-12 cintillo"><spring:theme
 					code="impuestos.decGasolina.Pago.titulo" /></span>
 		</h3>
 	</div>
@@ -19,72 +19,35 @@
 
 <div class="col-md-12">
 	<div class="table-responsive">
-		<table class="table">
-			<tbody>
-				<tr>
-					<td></td>
-					<td><div class="form-group ">
-							<button class="btn btn-primary btn-block" type="button">
-								<spring:theme code="impuestos.decGasolina.Pago.GenerarDec" />
-							</button>
-						</div></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><div class="form-group ">
-							<button class="btn btn-primary btn-block" type="button">
-								<spring:theme code="impuestos.decGasolina.Pago.crearNuevaDec" />
-							</button>
-						</div></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><div class="form-group ">
-							<button class="btn btn-primary btn-block" type="button">
-								<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
-							</button>
-						</div></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><div class="form-group ">
-							<button class="btn btn-primary btn-block" type="button">
-								<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
-							</button>
-						</div></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><span tabindex="0"><spring:theme
-								code="impuestos.decGasolina.Pago.nota" /></span></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+
+		<div class="col-md-6 col-md-offset-4">
+			<button class="boton" type="button">
+				<spring:theme code="impuestos.decGasolina.Pago.GenerarDec" />
+			</button>
+		</div>
+		<div class="col-md-6 col-md-offset-4">
+			<button class="boton" type="button">
+				<spring:theme code="impuestos.decGasolina.Pago.crearNuevaDec" />
+			</button>
+		</div>
+		<div class="col-md-6 col-md-offset-4">
+			<button class="boton" type="button">
+				<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
+			</button>
+		</div>
+		<div class="col-md-6 col-md-offset-4">
+			<button class="boton" type="button">
+				<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
+			</button>
+		</div>
+	</div>
+</div>
+
+<br>
+<div class="col-md-12">
+	<div class="table-responsive">
+		<span tabindex="0"><spring:theme
+				code="impuestos.decGasolina.Pago.nota" /></span>
 	</div>
 </div>
 
