@@ -12,6 +12,7 @@
 <spring:url
 	value="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
+<<<<<<< HEAD
 
 <div class="row">
 	<div class="avisoheadline">

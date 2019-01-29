@@ -81,10 +81,14 @@
 <script>
 	function funcionUno(valor) {	
 		var x = document.getElementsByName("action")[valor].value;		
+<<<<<<< HEAD
 		document.getElementById("inIdVariable").value = x;
 		alert(x);
 
 				
+=======
+		document.getElementById("inIdVariable").value = x;				
+>>>>>>> dev
 	}
 </script>
 
