@@ -33,10 +33,9 @@ import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -251,15 +250,134 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 	//Se anexa el mapeo de la pagina publicidadexterior
 	//GRD
+	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.POST)
+	//@RequireHardLogIn
+	public String publicidadExternaDetail(final Model model, final RedirectAttributes redirectModel,
+			@ModelAttribute("publicidadForm")
+			final PublicidadForm miRitCertificacionFormDatos) throws CMSItemNotFoundException
+	{
+
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
+
+		detallePublicidadRequest.setNumBP("0000000546");
+		detallePublicidadRequest.setNumResolu(miRitCertificacionFormDatos.getNumResolu());
+		detallePublicidadRequest.setAnoGravable(miRitCertificacionFormDatos.getAnoGravable());
+
+		//detallePublicidadRequest.setNumBP("0000000546");
+		//detallePublicidadRequest.setNumResolu("RES 096");
+		//detallePublicidadRequest.setAnoGravable("2018");
+
+
+
+		try
+		{
+			final PublicidadForm publicidadForm = new PublicidadForm();
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
+					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+
+			//final PublicidadForm publicidadForm = new PublicidadForm();
+
+
+
+			//publicidadForm.setTipoElemento(detallePublicidadResponse.getTipoElemento());
+
+			//Datos Basicos
+			publicidadForm.setFechResolu(detallePublicidadResponse.getFechResolu());
+			publicidadForm.setFechNotif(detallePublicidadResponse.getFechNotif());
+			publicidadForm.setVigenDesde(detallePublicidadResponse.getVigenDesde());
+			publicidadForm.setVigenHasta(detallePublicidadResponse.getVigenHasta());
+			publicidadForm.setTipoSolicitud(detallePublicidadResponse.getTipoSolicitud());
+			//Datos Avisos
+			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());
+			publicidadForm.setAvisoLumino(detallePublicidadResponse.getDetalle().getAvisoLumino());
+			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());
+			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());
+			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());
+			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());
+			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());
+			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());
+			publicidadForm.setAreaElemento(detallePublicidadResponse.getDetalle().getAreaElemento());
+			publicidadForm.setAreaFachada(detallePublicidadResponse.getDetalle().getAreaFachada());
+			publicidadForm.setNumFracciones(detallePublicidadResponse.getDetalle().getNumFracciones());
+			//Datos Vehiculos
+			publicidadForm.setTipoPublici(detallePublicidadResponse.getDetalle().getTipoPublici());
+			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());
+			publicidadForm.setPeriodicidad(detallePublicidadResponse.getDetalle().getPeriodicidad());
+			publicidadForm.setModelo(detallePublicidadResponse.getDetalle().getModelo());
+			publicidadForm.setPlaca(detallePublicidadResponse.getDetalle().getPlaca());
+			publicidadForm.setNumLicenciaTrans(detallePublicidadResponse.getDetalle().getNumLicenciaTrans());
+			publicidadForm.setTipoServicio(detallePublicidadResponse.getDetalle().getTipoServicio());
+			//Datos Convencional
+			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());//repetidooo
+			publicidadForm.setLicenciaConstruc(detallePublicidadResponse.getDetalle().getLicenciaConstruc());
+			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());//repetido
+			publicidadForm.setAreaTotal(detallePublicidadResponse.getDetalle().getAreaTotal());
+			publicidadForm.setContratoObra(detallePublicidadResponse.getDetalle().getContratoObra());
+			publicidadForm.setOrientacion(detallePublicidadResponse.getDetalle().getOrientacion());
+			publicidadForm.setFiducia(detallePublicidadResponse.getDetalle().getFiducia());
+			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());//repetido
+			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
+			publicidadForm.setLicenciaUrb(detallePublicidadResponse.getDetalle().getLicenciaUrb());
+			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
+			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());//repetido
+			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());//repetido
+			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());//repetido
+			publicidadForm.setTipoPublici(detallePublicidadResponse.getDetalle().getTipoPublici());//repetido
+			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());//repetido
+			publicidadForm.setVigLicenConstruc(detallePublicidadResponse.getDetalle().getVigLicenConstruc());
+			publicidadForm.setPeriodicidad(detallePublicidadResponse.getDetalle().getPeriodicidad());//repetido
+			//DetalleTubular
+			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());//repetido
+			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());//repetido
+			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());//repetido
+			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
+			publicidadForm.setLicenciaConstruc(detallePublicidadResponse.getDetalle().getLicenciaConstruc());//repetido
+			publicidadForm.setVigLicenConstruc(detallePublicidadResponse.getDetalle().getVigLicenConstruc());//repetido
+			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());//repetido
+			publicidadForm.setTipoVia(detallePublicidadResponse.getDetalle().getTipoVia());
+			publicidadForm.setOrientacion(detallePublicidadResponse.getDetalle().getOrientacion());//repetido
+			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());//repetido
+			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());//repetido
+			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());//repetido
+
+			model.addAttribute("publicidadForm", publicidadForm);
+
+
+		}
+		catch (final Exception e)
+		{
+			// XXX Auto-generated catch block
+			//LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			//GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
+
+		//model.addAttribute("showDetail", true);
+		//	model.addAttribute("action", request.getParameter("action"));
+		//System.out.println("action: " + request.getParameter("action"));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+
+		return getViewForPage(model);
+	}
+
+
+
+
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior", method = RequestMethod.GET)
-	public String publicidadExterna(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String publicidadExterna(final Model model) throws CMSItemNotFoundException
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		//final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-		//consultaContribuyenteBPRequest.setNumBP("0000000546");
+		//consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		consultaContribuyenteBPRequest.setNumBP("0000000546");
 
 
 		try
@@ -366,119 +484,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 
 
-	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.GET)
-	//@RequireHardLogIn
-	public String publicidadExternaDetail(final PublicidadForm dataForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes, @RequestParam("anio")
-			final String anio) throws CMSItemNotFoundException
-	{
 
-		System.out.println("Action1 block called");
-		final PublicidadForm publicidadForm = new PublicidadForm();
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
-
-		detallePublicidadRequest.setNumBP("0000000546");
-		detallePublicidadRequest.setNumResolu("RES 096");
-		detallePublicidadRequest.setAnoGravable("2018");
-		System.out.println(anio);
-
-
-		try
-		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
-					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
-
-			//final PublicidadForm publicidadForm = new PublicidadForm();
-
-
-
-			//publicidadForm.setTipoElemento(detallePublicidadResponse.getTipoElemento());
-
-			//Datos Basicos
-			publicidadForm.setFechResolu(detallePublicidadResponse.getFechResolu());
-			publicidadForm.setFechNotif(detallePublicidadResponse.getFechNotif());
-			publicidadForm.setVigenDesde(detallePublicidadResponse.getVigenDesde());
-			publicidadForm.setVigenHasta(detallePublicidadResponse.getVigenHasta());
-			publicidadForm.setTipoSolicitud(detallePublicidadResponse.getTipoSolicitud());
-			//Datos Avisos
-			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());
-			publicidadForm.setAvisoLumino(detallePublicidadResponse.getDetalle().getAvisoLumino());
-			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());
-			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());
-			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());
-			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());
-			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());
-			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());
-			publicidadForm.setAreaElemento(detallePublicidadResponse.getDetalle().getAreaElemento());
-			publicidadForm.setAreaFachada(detallePublicidadResponse.getDetalle().getAreaFachada());
-			publicidadForm.setNumFracciones(detallePublicidadResponse.getDetalle().getNumFracciones());
-			//Datos Vehiculos
-			publicidadForm.setTipoPublici(detallePublicidadResponse.getDetalle().getTipoPublici());
-			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());
-			publicidadForm.setPeriodicidad(detallePublicidadResponse.getDetalle().getPeriodicidad());
-			publicidadForm.setModelo(detallePublicidadResponse.getDetalle().getModelo());
-			publicidadForm.setPlaca(detallePublicidadResponse.getDetalle().getPlaca());
-			publicidadForm.setNumLicenciaTrans(detallePublicidadResponse.getDetalle().getNumLicenciaTrans());
-			publicidadForm.setTipoServicio(detallePublicidadResponse.getDetalle().getTipoServicio());
-			//Datos Convencional
-			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());//repetidooo
-			publicidadForm.setLicenciaConstruc(detallePublicidadResponse.getDetalle().getLicenciaConstruc());
-			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());//repetido
-			publicidadForm.setAreaTotal(detallePublicidadResponse.getDetalle().getAreaTotal());
-			publicidadForm.setContratoObra(detallePublicidadResponse.getDetalle().getContratoObra());
-			publicidadForm.setOrientacion(detallePublicidadResponse.getDetalle().getOrientacion());
-			publicidadForm.setFiducia(detallePublicidadResponse.getDetalle().getFiducia());
-			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());//repetido
-			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
-			publicidadForm.setLicenciaUrb(detallePublicidadResponse.getDetalle().getLicenciaUrb());
-			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
-			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());//repetido
-			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());//repetido
-			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());//repetido
-			publicidadForm.setTipoPublici(detallePublicidadResponse.getDetalle().getTipoPublici());//repetido
-			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());//repetido
-			publicidadForm.setVigLicenConstruc(detallePublicidadResponse.getDetalle().getVigLicenConstruc());
-			publicidadForm.setPeriodicidad(detallePublicidadResponse.getDetalle().getPeriodicidad());//repetido
-			//DetalleTubular
-			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());//repetido
-			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());//repetido
-			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());//repetido
-			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
-			publicidadForm.setLicenciaConstruc(detallePublicidadResponse.getDetalle().getLicenciaConstruc());//repetido
-			publicidadForm.setVigLicenConstruc(detallePublicidadResponse.getDetalle().getVigLicenConstruc());//repetido
-			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());//repetido
-			publicidadForm.setTipoVia(detallePublicidadResponse.getDetalle().getTipoVia());
-			publicidadForm.setOrientacion(detallePublicidadResponse.getDetalle().getOrientacion());//repetido
-			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());//repetido
-			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());//repetido
-			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());//repetido
-
-			model.addAttribute("publicidadForm", publicidadForm);
-
-
-		}
-		catch (final Exception e)
-		{
-			// XXX Auto-generated catch block
-			//LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-			//GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
-
-		model.addAttribute("publicidadForm", publicidadForm);
-
-		//model.addAttribute("showDetail", true);
-		//	model.addAttribute("action", request.getParameter("action"));
-		//System.out.println("action: " + request.getParameter("action"));
-		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
-		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
-
-		return getViewForPage(model);
-	}
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
 	{

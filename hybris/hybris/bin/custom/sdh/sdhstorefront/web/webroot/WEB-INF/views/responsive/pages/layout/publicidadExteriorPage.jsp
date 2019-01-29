@@ -12,8 +12,13 @@
 	<div class="container">
 
 		<publicidadExterior:publicidadExteriorTable />
+		<publicidadExterior:publicidadExteriorDetail />
+		<publicidadExterior:publicidadExteriorAvisos />
+		<publicidadExterior:publicidadExteriorConvencional />
+		<publicidadExterior:publicidadExteriorVehiculos />
+		<publicidadExterior:publicidadExteriorTubular />
 
-		<div id="idAvisos" style="display: none;">
+		<!-- div id="idAvisos" style="display: none;">
 			<publicidadExterior:publicidadExteriorDetail />
 			<publicidadExterior:publicidadExteriorAvisos />
 		</div>
@@ -28,7 +33,7 @@
 		<div id="idTubular" style="display: none;">
 			<publicidadExterior:publicidadExteriorDetail />
 			<publicidadExterior:publicidadExteriorTubular />
-		</div>
+		</div-->
 
 
 
@@ -127,7 +132,7 @@
 
 <script>
 	function parametrosURL() {		
-		var x = document.getElementById("inIdAnio").value;
+		var x = document.getElementById("AnoGravable").value;
 		location.href="/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion?anio="+ x;
 	}
 </script>
@@ -138,7 +143,8 @@
 	function ShowSelected(selectObject)
 	{	 
 	  var value = selectObject.value;   
-	  document.getElementById("inIdAnio").value = value;
+	  document.getElementById("AnoGravable").value = value;
+	  
 	
 	}
 </script>

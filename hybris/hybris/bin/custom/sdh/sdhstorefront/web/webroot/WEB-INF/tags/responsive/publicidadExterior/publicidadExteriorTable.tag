@@ -10,8 +10,9 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <spring:url
-	value="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
-	var="presentarDeclaracionUrl" htmlEscape="false" />
+	value="/calculo"
+	var="CalculodeclaracionUrl" htmlEscape="false" />
+
 
 <div class="row">
 	<div class="avisoheadline">
@@ -51,22 +52,22 @@
 						<td><input id="action"
 							style="visibility: visible !important; margin: 0; min-height: 0;"
 							name="action" onchange="funcionUno(${loop.index})" type="radio"
-							value="VALLA VEHICULOS"></td>
+							value="(${eachPubExtTax.tipoValla}, ${eachPubExtTax.numResolu})"></td>
 					</tr>
 				</c:forEach>
 
 			</tbody>
 		</table>
-		<div id="divIdVariable" style="display: none;">
+		<div id="divIdVariable" style= "visibility: visible !important; margin: 0; min-height: 0;" > <!-- "display: none;" -->
 			<input id="inIdVariable" value="">
 		</div>
 
-		<div id="divIdResolucion" style="display: none;">
-			<input id="inIdResolucion" value="">
+		<div id="numResolu" style="visibility: visible !important; margin: 0; min-height: 0;">
+			<input id="numResolu" value="">
 		</div>
 
-		<div id="divIdAnio" style="display: none;">
-			<input id="inIdAnio" value="">
+		<div id="anoGravable" style="visibility: visible !important; margin: 0; min-height: 0;">
+			<input id="anoGravable" value="">
 		</div>
 	</div>
 </div>
@@ -125,13 +126,11 @@
 	</div>
 	<div class="col-md-1 col-md-offset-1">
 		<div>
-			<!-- sf:form action="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
-			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
-			method="GET"-->
-				<button id="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle" type="submit" class = "botton" onclick="functionDos()"> <!-- onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
+			<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadForm">
+				<button  type="submit" class = "botton"> <!-- /sdhstorefront/es onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
 					<spring:theme code="publicidad.exterior.detail.search" />
 				</button>
-			<!-- /sf:form-->
+			</form:form>
 		</div>
 
 	</div>
