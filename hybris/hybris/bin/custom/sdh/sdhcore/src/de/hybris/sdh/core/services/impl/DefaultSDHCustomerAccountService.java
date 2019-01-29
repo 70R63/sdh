@@ -23,6 +23,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.sdh.core.event.SDHRegistrationEvent;
+import de.hybris.sdh.core.exceptions.SameOldPasswordException;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateCustomerCommPrefsRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -67,7 +68,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "DefaultZWS_HYBSEND_MAIL_CORE")
 	private ZWS_HYSEND_MAIL_INT crm_mail;
-	
+
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 	/*
@@ -167,10 +168,10 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final String encodedToken = this.getEncodedURL(token);
 
 
-		crm_mail.send(customerModel.getUid(), 
-				"Para activar tu cuenta ingresa <A HREF='"+hybrisURL+encodedToken+"'>AQUÍ</A> <BR/>", 
-				"SDH Activar Cuenta - Hybris ", 
-				a, 
+		crm_mail.send(customerModel.getUid(),
+				"Para activar tu cuenta ingresa <A HREF='"+hybrisURL+encodedToken+"'>AQUÍ</A> <BR/>",
+				"SDH Activar Cuenta - Hybris ",
+				a,
 				b);
 
 		getEventService().publishEvent(event);
@@ -275,7 +276,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final StringHolder a = new StringHolder();
 		final StringHolder b = new StringHolder();
 		final String path = configurationService.getConfiguration().getString("website.sdh.https");
-		final String hybrisURL = path + "/es/login/pw/change?token="; 
+		final String hybrisURL = path + "/es/login/pw/change?token=";
 		final String encodedToken = this.getEncodedURL(token);
 
 
@@ -294,24 +295,24 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		}
 		return encodedURL;
 	}
-	
+
 	@Override
-	public String generateCustomerSessionToken(String bp) {
+	public String generateCustomerSessionToken(final String bp) {
 		final long timeStamp = getTokenValiditySeconds() > 0L ? new Date().getTime() : 0L;
 		final SecureToken data = new SecureToken(bp, timeStamp);
 		final String token = getSecureTokenService().encryptData(data);
 
 		System.out.println("bp ---->:" + bp);
-		
+
 		return this.getEncodedURL(token);
 		//return "";
 	}
-	
+
 	@Override
-	public boolean validateToken(String token, String uidUser) {
-		
-		boolean isValidToken = false;
-		
+	public boolean validateToken(final String token, final String uidUser) {
+
+		final boolean isValidToken = false;
+
 		try {
 			final SecureToken data = getSecureTokenService().decryptData(token);
 			if (getTokenValiditySeconds() > 0L)
@@ -323,14 +324,14 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 				}
 			}
 
-		
+
 			System.out.println("data.getData() ----->" + data.getData());
 			System.out.println("uidUser ----->" + uidUser);
-		
+
 			if(!data.getData().equals(uidUser)) {
 				throw new TokenInvalidatedException();
 			}
-		
+
 			/*final CustomerModel customer = getUserService().getUserForUID(data.getData(), CustomerModel.class);
 			if (customer == null)
 			{
@@ -340,12 +341,68 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			{
 				throw new TokenInvalidatedException();
 			}*/
-		
-		}catch(TokenInvalidatedException e) {
+
+		}catch(final TokenInvalidatedException e) {
 			LOG.info(e.getStackTrace());
 		}
 		return true;
 	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService#updatePassword(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void updatePassword(final String token, final String newPassword) throws TokenInvalidatedException
+	{
+		Assert.hasText(token, "The field [token] cannot be empty");
+		Assert.hasText(newPassword, "The field [newPassword] cannot be empty");
+
+		final SecureToken data = getSecureTokenService().decryptData(token);
+		if (getTokenValiditySeconds() > 0L)
+		{
+			final long delta = new Date().getTime() - data.getTimeStamp();
+			if (delta / 1000 > getTokenValiditySeconds())
+			{
+				throw new IllegalArgumentException("token expired");
+			}
+		}
+
+		final CustomerModel customer = getUserService().getUserForUID(data.getData(), CustomerModel.class);
+		if (customer == null)
+		{
+			throw new IllegalArgumentException("user for token not found");
+		}
+
+
+
+		if (!token.equals(customer.getToken()))
+		{
+			throw new TokenInvalidatedException();
+		}
+
+
+
+		validateParameterNotNullStandardMessage("customerModel", customer);
+		if (getPasswordEncoderService().isValid(customer, newPassword))
+		{
+			throw new SameOldPasswordException(customer.getUid());
+		}
+
+		customer.setToken(null);
+		customer.setLoginDisabled(false);
+		getModelService().save(customer);
+
+		getUserService().setPassword(data.getData(), newPassword, getPasswordEncoding());
+	}
+
+
+
+
 
 }
 
