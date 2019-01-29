@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+				
+				
+				
+				
+	<classpathentry exported="true" kind="src" path="/acceleratorfacades" />
+	<classpathentry exported="true" kind="src" path="/sdhcore" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+	<classpathentry exported="false" kind="src" path="/platform" />
+				
+</classpath>
+				
+=======
 	<classpathentry exported="true" kind="src" path="/acceleratorfacades"/>
 	<classpathentry exported="true" kind="src" path="/sdhcore"/>
 	<classpathentry exported="true" kind="lib" path="resources"/>
@@ -16,3 +34,4 @@
 	<classpathentry kind="lib" path="C:/Users/Consultor/.p2/pool/plugins/org.apache.commons.logging_1.1.1.v201101211721.jar"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
 </classpath>
+>>>>>>> 4fd4c47d6504c2ef7e371d3d51e25a34833bfb93

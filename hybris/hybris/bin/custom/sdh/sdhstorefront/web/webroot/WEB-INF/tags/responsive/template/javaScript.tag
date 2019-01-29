@@ -92,10 +92,17 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
+<<<<<<< HEAD
 		
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.dataTables.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-isloading.js"></script>
+=======
+		<script type="text/javascript" src="${commonResourcePath}/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/jquery-isloading.js"></script>
+		
+>>>>>>> dev
 		
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">

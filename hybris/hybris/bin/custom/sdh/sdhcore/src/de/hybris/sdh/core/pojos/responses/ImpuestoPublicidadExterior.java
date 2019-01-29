@@ -11,6 +11,7 @@ public class ImpuestoPublicidadExterior
 {
 	private String numResolu;
 	private String tipoValla;
+	private boolean seleccionado;
 
 	/**
 	 *
@@ -18,6 +19,7 @@ public class ImpuestoPublicidadExterior
 	public ImpuestoPublicidadExterior()
 	{
 		// XXX Auto-generated constructor stub
+		this.seleccionado = false;
 	}
 
 	/**
@@ -54,6 +56,22 @@ public class ImpuestoPublicidadExterior
 		this.tipoValla = tipoValla;
 	}
 
+	/**
+	 * @return the seleccionado
+	 */
+	public boolean isSeleccionado()
+	{
+		return seleccionado;
+	}
+
+	/**
+	 * @param seleccionado
+	 *           the seleccionado to set
+	 */
+	public void setSeleccionado(final boolean seleccionado)
+	{
+		this.seleccionado = seleccionado;
+	}
 
 
 

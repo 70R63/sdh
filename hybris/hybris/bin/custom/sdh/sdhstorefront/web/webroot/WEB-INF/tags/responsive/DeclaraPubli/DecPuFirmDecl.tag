@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span tabindex="0"><spring:theme
+			<span class="cintillo col-md-10"><spring:theme
 					code="declaracion.publicidad.FirmaDeclarante" /></span>
 		</h3>
 	</div>
@@ -18,34 +18,37 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<label><spring:theme
+		<label class="inputlabelnew"><spring:theme
 				code="declaracion.publicidad.tipoiden" /></label>
 	</div>
 
 	<div class="col-md-4">
-		<label><spring:theme code="declaracion.publicidad.numidenti" /></label>
+		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.numidenti" /></label>
 	</div>
 
 	<div class="col-md-4">
-		<label><spring:theme
+		<label class="inputlabelnew"><spring:theme
 				code="declaracion.publicidad.nombreyrazon" /></label>
 	</div>
+</div>
+
+<br display: block;
+   margin: 5px 0;>
+<div class="row">
 
 	<div class="col-md-4">
-		<select id="tipiden" class="form-control" disabled="disabled">
+		<select id="tipiden" class="inputdropdown2" disabled="disabled">
 			<option value="CC">Cedula de Ciudadania</option>
 		</select>
 	</div>
-
-
-
+	
 	<div class="col-md-4">
-		<input id="numide" name="numide" class="form-control form-control"
+		<input id="numide" name="numide" class="inputtextnew"
 			aria-required="true" type="text" value="" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 	<div class="col-md-4">
-		<input id="name" name="name" class="form-control form-control"
+		<input id="name" name="name" class="inputtextnew"
 			aria-required="true" type="text" value="" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
