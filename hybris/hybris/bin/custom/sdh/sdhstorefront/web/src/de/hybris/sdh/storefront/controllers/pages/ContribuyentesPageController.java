@@ -151,6 +151,8 @@ public class ContribuyentesPageController extends AbstractPageController
 	 * return getViewForPage(model); }
 	 */
 
+	/* 
+	//#->INI dev-federico 17/01/2019 comentado para usar otro controller para Sobretasa Gasolina
 	@RequestMapping(value = "/sobretasa-gasolina", method = RequestMethod.GET)
 	public String sobretasaGasoline(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
@@ -161,7 +163,9 @@ public class ContribuyentesPageController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
-
+	//#->FIN dev-federico 17/01/2019 comentado para usar otro controller para Sobretasa Gasolina
+	*/
+	
 	@RequestMapping(value = "/delineacion-urbana", method = RequestMethod.GET)
 	public String delineacionUrbana(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
