@@ -81,10 +81,7 @@
 <script>
 	function funcionUno(valor) {	
 		var x = document.getElementsByName("action")[valor].value;		
-		document.getElementById("inIdVariable").value = x;
-		alert(x);
-
-				
+		document.getElementById("inIdVariable").value = x;				
 	}
 </script>
 
@@ -96,7 +93,6 @@
 			 x = "VALLA VEHICULOS";
 			} else {x = x}
 		var x = document.getElementById("inIdVariable").value;
-		alert(x);
 		var a = document.getElementById('idAvisos');
 		var b = document.getElementById('idConvencional');
 		var c = document.getElementById('idVehicular');
@@ -124,7 +120,7 @@
 			b.style.display = 'none';
 			c.style.display = 'none';
 		} else {
-			alert("error");
+			alert("ERROR");
 		}
 	}
 </script>
