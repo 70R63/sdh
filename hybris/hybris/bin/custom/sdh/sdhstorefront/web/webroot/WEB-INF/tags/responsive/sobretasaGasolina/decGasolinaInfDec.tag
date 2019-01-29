@@ -26,18 +26,18 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionDec.claseProducto" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionDec.galones" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionDec.baseGravable" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionDec.claseProducto" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionDec.galones" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionDec.baseGravable" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label></td>
 					<td></td>
 				</tr>
 			</thead>

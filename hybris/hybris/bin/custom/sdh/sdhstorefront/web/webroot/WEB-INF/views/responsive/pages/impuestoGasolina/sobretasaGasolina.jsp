@@ -16,16 +16,3 @@
 	<sobreTasaGasolina:sobGasolinaRep />
 </div>
 
-
-
-<script>
-	$('#modalAcceptTrigger').on('click', function() {
-		$('#action').val('decline');
-		$('#save-form').submit();
-	});
-	$('#modalDeclineTrigger').on('click', function() {
-		$('#action').val('accept');
-		$('#save-form').submit();
-	});
-</script>
-

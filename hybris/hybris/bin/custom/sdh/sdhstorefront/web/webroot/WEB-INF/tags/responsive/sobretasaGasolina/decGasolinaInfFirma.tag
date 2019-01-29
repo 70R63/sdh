@@ -18,30 +18,30 @@
 	</div>
 </div>
 
-<div class="col-md-2">
-	<label><spring:theme
-			code="impuestos.decGasolina.InformacionFirma.agregarFirmas" /></label>
-</div>
+<!-- <div class="col-md-2"> -->
+<%-- 	<label><spring:theme --%>
+<%-- 			code="impuestos.decGasolina.InformacionFirma.agregarFirmas" /></label> --%>
+<!-- </div> -->
 
-<div class="col-md-4">
-	<div class="form-group ">
-		<button class="btn btn-primary btn-block" type="button">
-			<spring:theme code="impuestos.decGasolina.InformacionFirma.Agregar" />
-		</button>
-	</div>
-</div>
+<!-- <div class="col-md-4"> -->
+<!-- 	<div class="form-group "> -->
+<!-- 		<button class="btn btn-primary btn-block" type="button"> -->
+<%-- 			<spring:theme code="impuestos.decGasolina.InformacionFirma.Agregar" /> --%>
+<!-- 		</button> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 <div class="col-md-12">
 	<div class="table-responsive">
 		<table class="table">
 			<thead>
 				<tr>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionFirma.tipoId" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionFirma.numeroId" /></td>
-					<td><spring:theme
-							code="impuestos.decGasolina.InformacionFirma.denominacion" /></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionFirma.tipoId" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionFirma.numeroId" /></label></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.InformacionFirma.denominacion" /></label></td>
 					<td></td>
 				</tr>
 			</thead>
@@ -50,27 +50,27 @@
 					<td>
 						<div class="form-group ">
 							<sf:select path="dataForm.tipoIdRev"
-								items="${dataForm.catalogosDe.tipoIdRev}"
-								referenceData="${dataForm.catalogosDe.tipoIdRev}" />
+								items="${dataForm.catalogosSo.tipoIdRev}"
+								referenceData="${dataForm.catalogosSo.tipoIdRev}" class="inputdropdown"/>
 						</div>
 					</td>
 					<td>
 						<div class="form-group ">
 							<input id="numeroId" name="gnumeroId"
-								class="form-control form-control" aria-required="true"
+								class="inputtextnew" aria-required="true"
 								type="text" value="" maxlength="240">
 						</div>
 					</td>
 					<td>
 						<div class="form-group ">
 							<input id="nombre" name="nombre"
-								class="form-control form-control" aria-required="true"
+								class="inputtextnew" aria-required="true"
 								type="text" value="" maxlength="240">
 						</div>
 					</td>
 					<td>
 						<div class="form-group ">
-							<button class="btn btn-primary btn-block" type="button">
+							<button class="inputtextnew" type="button">
 								<spring:theme
 									code="impuestos.decGasolina.InformacionFirma.Firma" />
 							</button>

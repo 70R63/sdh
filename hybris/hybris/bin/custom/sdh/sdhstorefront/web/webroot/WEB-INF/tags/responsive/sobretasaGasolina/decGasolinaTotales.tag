@@ -19,13 +19,13 @@
 
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme
+		<label class="inputlabelnew"><spring:theme
 				code="impuestos.decGasolina.Totales.totalSobretasa" /></label>
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
 			<input id="totalSobretasa" name="totalSobretasa"
-				class="form-control form-control" aria-required="true" type="text"
+				class="inputtextnew" aria-required="true" type="text"
 				value="${dataForm.valoresDeclara.totalSobretasa}" maxlength="240">
 		</div>
 	</div>
@@ -33,13 +33,13 @@
 
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme
+		<label class="inputlabelnew"><spring:theme
 				code="impuestos.decGasolina.Totales.valorSansiones" /></label>
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
 			<input id="valorSansiones" name="valorSansiones"
-				class="form-control form-control" aria-required="true" type="text"
+				class="inputtextnew" aria-required="true" type="text"
 				value="${dataForm.valoresDeclara.vlrSancTotales}" maxlength="240">
 		</div>
 	</div>
@@ -47,13 +47,13 @@
 
 <div class="row">
 	<div class="col-md-2">
-		<label><spring:theme
+		<label class="inputlabelnew"><spring:theme
 				code="impuestos.decGasolina.Totales.totalCargo" /></label>
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
 			<input id="totalCargo" name="totalCargo"
-				class="form-control form-control" aria-required="true" type="text"
+				class="inputtextnew" aria-required="true" type="text"
 				value="${dataForm.valoresDeclara.totalCargo}" maxlength="240">
 		</div>
 	</div>

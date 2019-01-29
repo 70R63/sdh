@@ -24,6 +24,98 @@ public class SobreTasaGasolinaCatalogos
 	private Map<String, String> tipoId;
 	private List<ItemSelectOption> tipoRelacion;
 	private List<ItemSelectOption> fuenteDato;
+
+	private Map<String, String> opcionesUso;
+	private Map<String, String> claseProd;
+	private Map<String, String> alcoholCarbu;
+	private Map<String, String> tipoIdRev;
+	private Map<String, String> tipoIdDec;
+
+	/**
+	 * @return the claseProd
+	 */
+	public Map<String, String> getClaseProd()
+	{
+		return claseProd;
+	}
+
+	/**
+	 * @param claseProd
+	 *           the claseProd to set
+	 */
+	public void setClaseProd(final Map<String, String> claseProd)
+	{
+		this.claseProd = claseProd;
+	}
+
+	/**
+	 * @return the alcoholCarbu
+	 */
+	public Map<String, String> getAlcoholCarbu()
+	{
+		return alcoholCarbu;
+	}
+
+	/**
+	 * @param alcoholCarbu
+	 *           the alcoholCarbu to set
+	 */
+	public void setAlcoholCarbu(final Map<String, String> alcoholCarbu)
+	{
+		this.alcoholCarbu = alcoholCarbu;
+	}
+
+	/**
+	 * @return the tipoIdRev
+	 */
+	public Map<String, String> getTipoIdRev()
+	{
+		return tipoIdRev;
+	}
+
+	/**
+	 * @param tipoIdRev
+	 *           the tipoIdRev to set
+	 */
+	public void setTipoIdRev(final Map<String, String> tipoIdRev)
+	{
+		this.tipoIdRev = tipoIdRev;
+	}
+
+	/**
+	 * @return the tipoIdDec
+	 */
+	public Map<String, String> getTipoIdDec()
+	{
+		return tipoIdDec;
+	}
+
+	/**
+	 * @param tipoIdDec
+	 *           the tipoIdDec to set
+	 */
+	public void setTipoIdDec(final Map<String, String> tipoIdDec)
+	{
+		this.tipoIdDec = tipoIdDec;
+	}
+
+	/**
+	 * @return the opcionesUso
+	 */
+	public Map<String, String> getOpcionesUso()
+	{
+		return opcionesUso;
+	}
+
+	/**
+	 * @param opcionesUso
+	 *           the opcionesUso to set
+	 */
+	public void setOpcionesUso(final Map<String, String> opcionesUso)
+	{
+		this.opcionesUso = opcionesUso;
+	}
+
 	/**
 	 * @return the opcionesCantidadMostrar
 	 */
@@ -31,7 +123,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return opcionesCantidadMostrar;
 	}
-	
+
 	/**
 	 * @param opcionesCantidadMostrar
 	 *           the opcionesCantidadMostrar to set
@@ -40,6 +132,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.opcionesCantidadMostrar = opcionesCantidadMostrar;
 	}
+
 	/**
 	 * @return the anioGravable
 	 */
@@ -47,7 +140,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return anioGravable;
 	}
-	
+
 	/**
 	 * @param anioGravable
 	 *           the anioGravable to set
@@ -56,6 +149,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.anioGravable = anioGravable;
 	}
+
 	/**
 	 * @return the periodo
 	 */
@@ -63,7 +157,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return periodo;
 	}
-	
+
 	/**
 	 * @param periodo
 	 *           the periodo to set
@@ -72,6 +166,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.periodo = periodo;
 	}
+
 	/**
 	 * @return the calidadResponsable
 	 */
@@ -79,7 +174,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return calidadResponsable;
 	}
-	
+
 	/**
 	 * @param calidadResponsable
 	 *           the calidadResponsable to set
@@ -88,6 +183,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.calidadResponsable = calidadResponsable;
 	}
+
 	/**
 	 * @return the codigoPostal
 	 */
@@ -95,7 +191,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return codigoPostal;
 	}
-	
+
 	/**
 	 * @param codigoPostal
 	 *           the codigoPostal to set
@@ -104,6 +200,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.codigoPostal = codigoPostal;
 	}
+
 	/**
 	 * @return the localidad
 	 */
@@ -111,7 +208,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return localidad;
 	}
-	
+
 	/**
 	 * @param localidad
 	 *           the localidad to set
@@ -120,6 +217,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.localidad = localidad;
 	}
+
 	/**
 	 * @return the tipoId
 	 */
@@ -127,7 +225,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return tipoId;
 	}
-	
+
 	/**
 	 * @param tipoId
 	 *           the tipoId to set
@@ -136,6 +234,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.tipoId = tipoId;
 	}
+
 	/**
 	 * @return the tipoRelacion
 	 */
@@ -143,7 +242,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return tipoRelacion;
 	}
-	
+
 	/**
 	 * @param tipoRelacion
 	 *           the tipoRelacion to set
@@ -152,6 +251,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		this.tipoRelacion = tipoRelacion;
 	}
+
 	/**
 	 * @return the fuenteDato
 	 */
@@ -159,7 +259,7 @@ public class SobreTasaGasolinaCatalogos
 	{
 		return fuenteDato;
 	}
-	
+
 	/**
 	 * @param fuenteDato
 	 *           the fuenteDato to set

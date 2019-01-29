@@ -39,7 +39,7 @@
 <br>
 <div class="col-md-10">
 	<div>
-		<sf:form action="" method="POST" modelAttribute="dataForm">
+		<sf:form action="" method="POST" modelAttribute="dataForm" id="forma">
 			<div class="col-md-3 col-md-offset-3 centered">
 				<table class="table col-md-2 table-bordered" id="example">
 					<thead>
@@ -76,9 +76,8 @@
 			<br>
 			<div class="row col-md-10 centered">
 				<div class="col-md-10 col-md-offset-5 centered">
-					<sf:button id="accept" type="submit"
-						action="${presentarDeclaracionUrl}" class="boton col-md-3"
-						name="accept">
+					<sf:button action="${buscarUrl}" type="submit"
+						class="boton col-md-3" id="action" name="action" value="declarar">
 						<spring:theme
 							code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" />
 					</sf:button>
@@ -138,13 +137,13 @@
 					</div>
 				</div>
 				<div class="col-md-2">
-					<sf:button id="decline" type="submit" class="boton"
-						action="${buscarUrl}" name="decline">
+					<sf:button action="${buscarUrl}" type="submit" class="boton"
+						id="action" name="action" value="buscar">
 						<spring:theme
 							code="impuestos.sobreTasaGasolina.DatosGenerales.buscar" />
 					</sf:button>
 				</div>
-				<sf:input type="hidden" id="action" name="action" path="action" />
+				<%-- 				<sf:input type="hidden" id="action" name="action" path="action" /> --%>
 			</div>
 			<br>
 		</sf:form>

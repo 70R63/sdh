@@ -2,6 +2,7 @@
 
 package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
@@ -73,10 +74,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina", method = RequestMethod.POST)
-	//	@RequireHardLogIn
+	@RequireHardLogIn
 	public String handlePOST_ST(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm,
-			@RequestParam(value = "action") String accept, final BindingResult bindingResult,
-			final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			@RequestParam(value = "action") String action, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Menu sobretasa gasolina POST --------------------------");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
@@ -122,15 +123,30 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
 
 
-		model.addAttribute("dataFormCatalogos", dataFormCatalogos);
+		//		model.addAttribute("dataFormCatalogos", dataFormCatalogos);
 		model.addAttribute("dataForm", dataForm);
 		//		model.addAttribute("listaDocumentos", dataFormTabla);
 		//		model.addAttribute("dataForm", detalleGasolinaResponse);
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		if (action.equals("buscar"))
+		{
+			storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		}
+		else
+		{
+			if (action.equals("declarar"))
+			{
+				storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
+				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
+				model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+				model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+			}
+		}
 
 		return getViewForPage(model);
 	}
@@ -144,7 +160,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina", method = RequestMethod.GET)
-	//	@RequireHardLogIn
+	@RequireHardLogIn
 	//	 @ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm
 	public String handleGET_ST(final Model model) throws CMSItemNotFoundException
 	{
@@ -184,12 +200,12 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.GET)
-	//	@RequireHardLogIn
-	public String handleGET_DEC(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataFormST, final Model model)
+	@RequireHardLogIn
+	public String handleGET_DEC(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm, final Model model)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
-		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+		//		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		//		final SobretasaGasolinaCatalogos dataFormCatalogos = new SobretasaGasolinaService().prepararCatalogos();
 		//		List<DetGasInfoDeclaraResponse> infoDeclaraDefault;
 		//		DetGasInfoDeclaraResponse valInfoDeclaraDefault;
@@ -284,10 +300,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.POST)
-	//	@RequireHardLogIn
+	@RequireHardLogIn
 	public String handlePOST_DEC(@ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm1, final BindingResult bindingResult,
-			final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina POST --------------------------");
 

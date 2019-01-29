@@ -35,23 +35,28 @@
 				<tr>
 					<td>
 						<div class="form-group ">
-							<sf:select path="dataForm.tipoIdRev"
-								items="${dataForm.catalogosDe.tipoIdRev}"
-								 referenceData="${dataForm.catalogosDe.tipoIdRev}"/>
+							<sf:select path="dataForm.tipoIdDec"
+								items="${dataForm.catalogosSo.tipoIdDec}"
+								referenceData="${dataForm.catalogosSo.tipoIdDec}"
+								class="inputdropdown" />
+
+							<%-- 							<sf:select path="dataForm.tipoIdRev" --%>
+							<%-- 								items="${dataForm.catalogosDe.tipoIdRev}" --%>
+							<%-- 								 referenceData="${dataForm.catalogosDe.tipoIdRev}"/> --%>
 
 						</div>
 					</td>
 					<td>
 						<div class="form-group ">
 							<input id="numeroId" name="gnumeroId"
-								class="form-control form-control" aria-required="true"
+								class="inputtextnew" aria-required="true"
 								type="text" value="" maxlength="240">
 						</div>
 					</td>
 					<td>
 						<div class="form-group ">
 							<input id="nombre" name="nombre"
-								class="form-control form-control" aria-required="true"
+								class="inputtextnew" aria-required="true"
 								type="text" value="" maxlength="240">
 						</div>
 					</td>
@@ -59,8 +64,8 @@
 			</tbody>
 			<thead>
 				<tr>
-					<td><spring:theme
-							code="impuestos.decGasolina.DatosRevisor.numeroTarjetaProf" /></td>
+					<td><label class="inputlabelnew"><spring:theme
+							code="impuestos.decGasolina.DatosRevisor.numeroTarjetaProf" /></label></td>
 					<td></td>
 					<td></td>
 				</tr>
@@ -70,7 +75,7 @@
 					<td>
 						<div class="form-group ">
 							<input id="numeroTarjetaProf" name="numeroTarjetaProf"
-								class="form-control form-control" aria-required="true"
+								class="inputtextnew" aria-required="true"
 								type="text" value="" maxlength="240">
 						</div>
 					</td>

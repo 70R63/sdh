@@ -56,8 +56,12 @@ public class SobreTasaGasolinaService
 		catalogosForm.setCodigoPostal(obtenerListaCodigoPostal());
 		catalogosForm.setLocalidad(obtenerListaLocalidades());
 		catalogosForm.setTipoId(obtenerListaTipoId());
-		//		catalogosForm.setTipoRelacion(obtenerListaTipoRelacion());
-		//		catalogosForm.setFuenteDato(obtenerListaFuenteDato());
+
+		catalogosForm.setOpcionesUso(obtenerListaOpcionesUso());
+		catalogosForm.setClaseProd(obtenerListaClaseProd());
+		catalogosForm.setAlcoholCarbu(obtenerListaAlcoholCarbu());
+		catalogosForm.setTipoIdRev(obtenerListaTipoId());
+		catalogosForm.setTipoIdDec(obtenerListaTipoId());
 
 
 		return catalogosForm;

@@ -11,7 +11,7 @@
 
 <div class="container">
 	<sobreTasaGasolina:decGasolinaGen />
-	<sobreTasaGasolina:decGasolinaInfDec />
+<%-- 	<sobreTasaGasolina:decGasolinaInfDec /> --%>
 	<sobreTasaGasolina:decGasolinaTotales />
 	<sobreTasaGasolina:decGasolinaPagos />
 	<sobreTasaGasolina:decGasolinaDatRev />
