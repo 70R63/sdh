@@ -258,8 +258,8 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		//final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-		//consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-		consultaContribuyenteBPRequest.setNumBP("0000000546");
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		//consultaContribuyenteBPRequest.setNumBP("0000000546");
 
 
 		try
