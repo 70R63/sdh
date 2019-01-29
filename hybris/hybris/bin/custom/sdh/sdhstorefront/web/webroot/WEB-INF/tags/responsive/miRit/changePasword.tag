@@ -34,7 +34,7 @@
 					</label>
 					<input  id="newPassword"   name="newPassword" class="form-control password-strength" aria-required="true" type="password" value="" maxlength="240">
 					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+						<span id="sameOldPasswordError" class="hidden"><spring:theme code="updatePwd.token.sameOldPassword"></spring:theme></span>
 					</div>
 				</div>
 			</div>
