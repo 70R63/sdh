@@ -146,6 +146,12 @@ public class PasswordResetPageController extends AbstractPageController
 			catch (final UnknownIdentifierException unknownIdentifierException)
 			{
 				LOG.warn("Email: " + form.getEmail() + " does not exist in the database.");
+				GlobalMessages.addErrorMessage(model, "login.user.not.exists");
+				model.addAttribute(form);
+				storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+				model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs(FORGOTTEN_PWD_TITLE));
+				return ControllerConstants.Views.Pages.Password.PasswordResetRequest;
 			}
 			return REDIRECT_PWD_REQ_CONF;
 		}
