@@ -22,7 +22,7 @@ ACC.mirit = {
 	        
 	        data.name1 = $("#primNom").val();
 	        data.name2 = $("#segNom").val();
-	        data.apellido1 = $("#primNom").val();
+	        data.apellido1 = $("#primApe").val();
 	        data.apellido2 = $("#segApe").val();
 	        
 	        $.ajax({
