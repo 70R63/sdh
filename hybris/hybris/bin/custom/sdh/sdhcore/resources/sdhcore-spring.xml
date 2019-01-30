@@ -569,11 +569,20 @@
 	<bean id="defaultSdhYFormservice" class="de.hybris.sdh.core.formServices.impl.DefaultSdhYFormservice" parent="defaultYFormService">
 	</bean>
 
+	<!-- SOAP Web Services - SEND CRM MAIL -->
 	<alias name="ZWS_HYSEND_MAIL_ServiceLocator" alias="ZWS_HYSEND_MAIL_locator"/>
 	<bean id="ZWS_HYSEND_MAIL_ServiceLocator" class="de.hybris.sdh.core.soap.impl.ZWS_HYSEND_MAIL_ServiceLocator" />
 	
 	<alias name="DefaultZWS_HYBSEND_MAIL_INT" alias="DefaultZWS_HYBSEND_MAIL_CORE"/>
 	<bean id="DefaultZWS_HYBSEND_MAIL_INT" class="de.hybris.sdh.core.soap.impl.DefaultZWS_HYBSEND_MAIL_INT" />
+	
+	<!-- SOAP Web Services - PSE Comunication -->
+	<alias name="MainServicesImplLocator" alias="DefaultMainServicesImplLocator"/>
+	<bean id="MainServicesImplLocator" class="de.hybris.sdh.core.soap.pse.impl.MainServicesImplLocator" />
+	
+	<alias name="servicePSE" alias="DefaultServicePSE"/>
+	<bean id="servicePSE" class="de.hybris.sdh.core.soap.pse.impl.DefaultServicePSE" />
+	
 	
 	<alias name="DefaultSDHGetQuestionsForRegistration" alias="SDHGetQuestionsForRegistration"/>
 	<bean id="DefaultSDHGetQuestionsForRegistration" class="de.hybris.sdh.core.services.impl.DefaultSDHGetQuestionsForRegistration" />

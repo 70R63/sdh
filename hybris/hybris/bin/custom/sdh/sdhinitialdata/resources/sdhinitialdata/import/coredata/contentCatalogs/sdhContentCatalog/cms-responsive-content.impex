@@ -964,7 +964,42 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 #end  Mi RIT page
 
+#---------------- new Pago PSE page ---------------- 
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;PagoPSEPageTemplate;Pago PSE Page Template;layout/pagoPSEPage;ContentPage
 
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='PagoPSEPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='PagoPSEPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-PagoPSEPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-PagoPSEPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-PagoPSEPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-PagoPSEPage;Footer;;FooterSlot;true
+;;HeaderLinks-PagoPSEPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-PagoPSEPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-PagoPSEPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-PagoPSEPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-PagoPSEPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;PagoPSEPage;Pago PSE Page;PagoPSEPageTemplate;Pago PSE Page
+#----------------  end  Pago PSE page ---------------- 
 
 
 #new delineacion urbana page
