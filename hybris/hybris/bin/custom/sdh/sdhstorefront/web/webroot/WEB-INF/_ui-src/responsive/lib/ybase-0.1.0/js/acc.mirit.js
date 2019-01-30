@@ -1,6 +1,6 @@
 ACC.mirit = {
 
-		 _autoload: [ "bindUpdateButton","bindDialog","bindUpdateRitButton","bindAddressData"],
+		 _autoload: [ "bindUpdateButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton"],
 		    
 		    bindAddressData: function(){
 		    	$("#u5070_input").val(ACC.addressCountry);
@@ -13,6 +13,21 @@ ACC.mirit = {
 		    	$("#u5073_input").val(parseInt(ACC.addressPC));
 		    	$("#u5073_input").trigger( "change" );
 		    },
+		    
+		    bindAddSocialNetworkRowButton: function () {
+        $(document).on("click", "#addSocialNetworkButton", function (e) {
+    	        e.preventDefault();
+    	        
+    	        if($(".socialNetworkRow").length < 5)
+    	        {
+    	        	$($(".socialNetworkRow")[0]).parent().append($($(".socialNetworkRow")[0]).clone());
+    	        	
+    	        	$($(".socialNetworkRow")[0]).parent().children().last().find(".redSocial").val("")
+    	        	$($(".socialNetworkRow")[0]).parent().children().last().find(".usuarioRedSocial").val("")
+    	        }
+    	        
+    	    });
+        },
 
     bindUpdateButton: function () {
     $(document).on("click", "#certifNombButton", function (e) {
@@ -219,28 +234,36 @@ ACC.mirit = {
     	        
     	        var redSocialData = new Array();
     	        
-    	        $.each($(".redSocial"),function(index,value){
+    	        $.each($(".socialNetworkRow"),function(index,value){
     	        	
-    	        	if($(value).val() != "")
-	        		{
-    	        		if($("#redsocial\\["+index+"\\]\\.USUARIORED").val()== "")
-	        			{
-    	        			$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").removeClass("hidden");
-	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").addClass("has-error");
-	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").html("Por favor introduce el nombre de usuario");
-	        	        	hasErrors = true;
-	        			}else
-	        			{
-	        				$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").addClass("hidden");
-	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").removeClass("has-error");
-	        			}
-	        		}
-    	        	var eachSocialNet=new Object();
+//    	        	if($(value).val() != "")
+//	        		{
+//    	        		if($("#redsocial\\["+index+"\\]\\.USUARIORED").val()== "")
+//	        			{
+//    	        			$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").removeClass("hidden");
+//	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").addClass("has-error");
+//	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").html("Por favor introduce el nombre de usuario");
+//	        	        	hasErrors = true;
+//	        			}else
+//	        			{
+//	        				$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").addClass("hidden");
+//	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").removeClass("has-error");
+//	        			}
+//	        		}
     	        	
-    	        	eachSocialNet.RED_SOCIAL= $(value).val();
-    	        	eachSocialNet.USUARIORED=$("#redsocial\\["+index+"\\]\\.USUARIORED").val();
     	        	
-    	        	redSocialData.push(eachSocialNet);
+    	        	var redSocial = $(value).find(".redSocial").val();
+    	        	var usuarioRedSocial = $(value).find(".usuarioRedSocial").val();
+    	        	
+    	        	if(redSocial != "" && usuarioRedSocial != "")
+    	        	{
+	    	        	var eachSocialNet=new Object();
+	    	        	
+	    	        	eachSocialNet.RED_SOCIAL = redSocial;
+	    	        	eachSocialNet.USUARIORED = usuarioRedSocial;
+	    	        	
+	    	        	redSocialData.push(eachSocialNet);
+    	        	}
     	        	
     	        });
     	        
