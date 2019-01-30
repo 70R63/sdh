@@ -10,8 +10,9 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <spring:url
-	value="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
-	var="presentarDeclaracionUrl" htmlEscape="false" />
+	value="/calculo"
+	var="CalculodeclaracionUrl" htmlEscape="false" />
+
 
 <div class="row">
 	<div class="avisoheadline">
@@ -51,22 +52,22 @@
 						<td><input id="action"
 							style="visibility: visible !important; margin: 0; min-height: 0;"
 							name="action" onchange="funcionUno(${loop.index})" type="radio"
-							value="VALLA VEHICULOS"></td>
+							value="(${eachPubExtTax.tipoValla}, ${eachPubExtTax.numResolu})"></td>
 					</tr>
 				</c:forEach>
 
 			</tbody>
 		</table>
-		<div id="divIdVariable" style="display: none;">
+		<div id="divIdVariable" style= "visibility: visible !important; margin: 0; min-height: 0;" > <!-- "display: none;" -->
 			<input id="inIdVariable" value="">
 		</div>
 
-		<div id="divIdResolucion" style="display: none;">
-			<input id="inIdResolucion" value="">
+		<div id="numResolu" style="visibility: visible !important; margin: 0; min-height: 0;">
+			<input id="numResolu" value="">
 		</div>
 
-		<div id="divIdAnio" style="display: none;">
-			<input id="inIdAnio" value="">
+		<div id="anoGravable" style="visibility: visible !important; margin: 0; min-height: 0;">
+			<input id="anoGravable" value="">
 		</div>
 	</div>
 </div>
@@ -108,34 +109,31 @@
 </div>
 
 
-<div class="row">
-	<div class="col-md-4">
-		<label class="inputlabelnew"><spring:theme
-				code="publicidad.exterior.detail.selectYear" /></label>
-	</div>
-	<div class="col-md-1">
-		<select id="anio" class="inputdropdown"
-			onchange="ShowSelected(this);">
-			<option value="0">Selecciona un año</option>
-			<option value="2019">2019</option>
-			<option value="2018">2018</option>
-			<option value="2017">2017</option>
-			<option value="2016">2016</option>
-		</select>
-	</div>
-	<div class="col-md-1 col-md-offset-1">
-		<div>
-			<sf:form action="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
-			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
-			method="GET">
-				<button id="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle" type="submit" class = "botton" onclick="functionDos()"> <!-- onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
-					<spring:theme code="publicidad.exterior.detail.search" />
-				</button>
-			</sf:form>
+<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadForm">
+	<div class="row">
+		<div class="col-md-4">
+			<label class="inputlabelnew"><spring:theme
+					code="publicidad.exterior.detail.selectYear" /></label>
 		</div>
-
+		<div class="col-md-1">
+			<select id="anio" class="inputdropdown"
+				onchange="ShowSelected(this);">
+				<option value="0">Selecciona un año</option>
+				<option value="2019">2019</option>
+				<option value="2018">2018</option>
+				<option value="2017">2017</option>
+				<option value="2016">2016</option>
+			</select>
+		</div>
+		<div class="col-md-1 col-md-offset-1">
+			<div>
+				
+					<button  type="submit" class = "botton">
+						<spring:theme code="publicidad.exterior.detail.search" />
+					</button>
+			</div>
+		</div>
 	</div>
-</div>
-
+</form:form>
 
 
