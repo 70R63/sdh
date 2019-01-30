@@ -1,7 +1,7 @@
 ACC.register = {
 
 	_autoload: [
-		"bindCalendar"
+		"bindCalendar","bindDocumentType"
 	],
 
 	bindCalendar: function(){
@@ -12,6 +12,23 @@ ACC.register = {
 		    });
 		
 		$("#expeditionDate").datepicker( $.datepicker.regional[ "es" ] );
+	},
+	
+	bindDocumentType: function(){
+		$("#documentType").on("change",function(){
+			
+			if($(this).val() == "CC")
+			{
+				$("#expeditionDateDiv").show();
+			}else
+			{
+				$("#expeditionDateDiv").hide();
+			}
+			
+			
+		});
 	}
+
+
 
 };

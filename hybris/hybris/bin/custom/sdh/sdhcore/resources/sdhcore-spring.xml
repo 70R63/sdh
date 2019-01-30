@@ -559,7 +559,14 @@
 	<bean name="sdhUpdateCommPrefsService" class="de.hybris.sdh.core.services.impl.DefaultSDHUpdateCustomerCommPrefsService" />
 	
 	<bean name="sdhConsultaContribuyenteBPService" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaContribuyenteBPService" />
+
+<!-- INI Federico Flores Dimas - Impuesto Gasolina -->
+	<bean name="sdhDetalleGasolina" class="de.hybris.sdh.core.services.impl.DefaultSDHDetalleGasolina" />
+<!-- FIN Federico Flores Dimas - Impuesto Gasolina -->
+
+	<bean name="sdhCalPublicidadService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcPublicidadService"/>
 	
+	<bean name="sdhDetallePublicidadService" class="de.hybris.sdh.core.services.impl.DefaultSDHDetallePublicidadService"/>
 	<alias alias="customerAccountService" name="sdhCustomerAccountService"/>
 	<bean id="sdhCustomerAccountService" parent="defaultCustomerAccountService"
 			class="de.hybris.sdh.core.services.impl.DefaultSDHCustomerAccountService"/>
@@ -568,6 +575,8 @@
 	<alias name="defaultSdhYFormservice" alias="SdhYFormservice"/>
 	<bean id="defaultSdhYFormservice" class="de.hybris.sdh.core.formServices.impl.DefaultSdhYFormservice" parent="defaultYFormService">
 	</bean>
+	
+	<bean name="sdhCertificaRITService" class="de.hybris.sdh.core.services.impl.DefaultSDHCertificaRITService" />
 
 	<!-- SOAP Web Services - SEND CRM MAIL -->
 	<alias name="ZWS_HYSEND_MAIL_ServiceLocator" alias="ZWS_HYSEND_MAIL_locator"/>

@@ -35,12 +35,13 @@ import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.responses.UpdateRitErrorResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
 import de.hybris.sdh.core.pojos.responses.ValidEmailResponse;
 import de.hybris.sdh.core.pojos.responses.ValidPasswordResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
-import de.hybris.sdh.core.services.SDHUpdateRitService;
 import de.hybris.sdh.facades.SDHCertifNombFacade;
+import de.hybris.sdh.facades.SDHUpdateRitFacade;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRitForm;
@@ -50,6 +51,7 @@ import de.hybris.sdh.storefront.forms.ValidPasswordForm;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -96,6 +98,8 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sdhCertifNombFacade")
 	private SDHCertifNombFacade sdhCertifNombFacade;
 
+	@Resource(name = "sdhUpdateRitFacade")
+	SDHUpdateRitFacade sdhUpdateRitFacade;
 
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
@@ -326,8 +330,13 @@ public class MiRitPageController extends AbstractPageController
 			if (sdhConsultaContribuyenteBPResponse.getAgentes() != null
 					&& !sdhConsultaContribuyenteBPResponse.getAgentes().isEmpty())
 			{
-				miRitForm.setAgentes(sdhConsultaContribuyenteBPResponse.getAgentes().stream()
-						.filter(eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc())).collect(Collectors.toList()));
+				miRitForm.setRepresentantes(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
+						eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && "X".equalsIgnoreCase(eachAgente.getAgente()))
+						.collect(Collectors.toList()));
+
+				miRitForm.setRepresentados(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
+						eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && StringUtils.isBlank(eachAgente.getAgente()))
+						.collect(Collectors.toList()));
 			}
 
 
@@ -421,8 +430,7 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "eventService")
 	private EventService eventService;
 
-	@Resource(name = "sdhUpdateRitService")
-	SDHUpdateRitService sdhUpdateRitService;
+
 
 
 	@RequestMapping(value = "/updateRit", method = RequestMethod.POST)
@@ -510,7 +518,6 @@ public class MiRitPageController extends AbstractPageController
 			}
 			catch (final Exception e)
 			{
-				// XXX Auto-generated catch block
 				LOG.error("there was an error while parsing redsocial JSON");
 			}
 		}
@@ -550,12 +557,47 @@ public class MiRitPageController extends AbstractPageController
 
 		}
 
-		//		sdhUpdateRitService.updateRit(request);
-		LOG.info(request.toString());
+		request.setUpdateName(Boolean.FALSE);
 
-		response.setRitUpdated(true);
+		final CertifNombRequest certifNomRequest = new CertifNombRequest();
 
-		return response;
+		certifNomRequest.setNumBP(customerModel.getNumBP());
+		certifNomRequest.setApellido1(updateRitForm.getPrimApe());
+		certifNomRequest.setApellido2(updateRitForm.getSegApe());
+		certifNomRequest.setName1(updateRitForm.getPrimNom());
+		certifNomRequest.setName2(updateRitForm.getSegNom());
+
+		boolean nameUpdated = false;
+
+		if (Boolean.TRUE.equals(updateRitForm.getRequestUpdateName()))
+		{
+
+   		final CertifNombResponse certifNombResponse = sdhCertifNombFacade.certifNomb(certifNomRequest);
+
+   		if (certifNombResponse != null && Boolean.TRUE.equals(certifNombResponse.getSuccess()))
+   		{
+   			request.setUpdateName(Boolean.TRUE);
+   			nameUpdated = true;
+   		}
+		}
+
+		final UpdateRitResponse udpateRitResponse = sdhUpdateRitFacade.updateRit(request);
+
+		if (Boolean.TRUE.equals(updateRitForm.getRequestUpdateName()) && nameUpdated == false)
+		{
+			List<UpdateRitErrorResponse> errorsList = udpateRitResponse.getErrores();
+			if (errorsList == null)
+			{
+				errorsList = new ArrayList<UpdateRitErrorResponse>();
+			}
+
+			errorsList.add(new UpdateRitErrorResponse("x",
+					"El nombre no ha sido actualizado ya que no cumple con el porcentaje mínimo de similitud"));
+
+			udpateRitResponse.setErrores(errorsList);
+		}
+
+		return udpateRitResponse;
 	}
 
 	@Resource(name = "commerceCommonI18NService")

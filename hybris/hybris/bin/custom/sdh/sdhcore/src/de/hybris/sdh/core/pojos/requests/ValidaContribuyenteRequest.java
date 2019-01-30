@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author hybris
  *
@@ -78,7 +80,7 @@ public class ValidaContribuyenteRequest
 		stringBuilder.append("\"documentos\":{");
 		stringBuilder.append("\"numid\":\"" + this.getNumid() + "\",");
 		stringBuilder.append("\"tipoid\":\"" + this.getTipoid() + "\",");
-		stringBuilder.append("\"fechExp\":\"" + this.getExpeditionDate() + "\"");
+		stringBuilder.append("\"fechExp\":\"" + (StringUtils.isBlank(this.getExpeditionDate())?"":this.getExpeditionDate()) + "\"");
 		stringBuilder.append("}");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub

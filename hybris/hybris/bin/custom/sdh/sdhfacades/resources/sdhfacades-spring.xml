@@ -205,5 +205,7 @@
 	<bean id="sdhCustomerFacade" parent="defaultCustomerFacade" class="de.hybris.sdh.facades.impl.DefaultSDHCustomerFacade"/>
 		
 	<bean id="sdhCertifNombFacade" class="de.hybris.sdh.facades.impl.DefaultSDHCertifNombFacade" />	
+	
+	<bean id="sdhUpdateRitFacade" class="de.hybris.sdh.facades.impl.DefaultSDHUpdateRitFacade" />
 		
 </beans>

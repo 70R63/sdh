@@ -21,6 +21,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.sdh.core.exceptions.SameOldPasswordException;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHUpdatePasswordFormValidator;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
@@ -145,6 +146,12 @@ public class PasswordResetPageController extends AbstractPageController
 			catch (final UnknownIdentifierException unknownIdentifierException)
 			{
 				LOG.warn("Email: " + form.getEmail() + " does not exist in the database.");
+				GlobalMessages.addErrorMessage(model, "login.user.not.exists");
+				model.addAttribute(form);
+				storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+				model.addAttribute(WebConstants.BREADCRUMBS_KEY, resourceBreadcrumbBuilder.getBreadcrumbs(FORGOTTEN_PWD_TITLE));
+				return ControllerConstants.Views.Pages.Password.PasswordResetRequest;
 			}
 			return REDIRECT_PWD_REQ_CONF;
 		}
@@ -217,6 +224,13 @@ public class PasswordResetPageController extends AbstractPageController
 			catch (final TokenInvalidatedException e)
 			{
 				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "updatePwd.token.invalidated");
+			}
+			catch (final SameOldPasswordException e)
+			{
+				GlobalMessages.addErrorMessage(model, "updatePwd.token.sameOldPassword");
+				storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PWD_CMS_PAGE));
+				return ControllerConstants.Views.Pages.Password.PasswordResetChangePage;
 			}
 			catch (final RuntimeException e)
 			{

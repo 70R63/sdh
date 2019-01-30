@@ -37,6 +37,7 @@ public class UpdateRitForm
 
 	private Boolean usoBuzon;
 	private Boolean autoUsoInfo;
+	private Boolean requestUpdateName;
 
 	private String redsocial;
 	private List<ContribDireccion> direccion;
@@ -452,6 +453,22 @@ public class UpdateRitForm
 		this.redsocial = redsocial;
 	}
 
+	/**
+	 * @return the requestUpdateName
+	 */
+	public Boolean getRequestUpdateName()
+	{
+		return requestUpdateName;
+	}
+
+	/**
+	 * @param requestUpdateName
+	 *           the requestUpdateName to set
+	 */
+	public void setRequestUpdateName(final Boolean requestUpdateName)
+	{
+		this.requestUpdateName = requestUpdateName;
+	}
 
 
 

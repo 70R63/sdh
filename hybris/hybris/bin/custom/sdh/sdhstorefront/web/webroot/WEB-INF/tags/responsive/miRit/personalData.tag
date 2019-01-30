@@ -23,7 +23,7 @@
 						<spring:theme code="mirit.personalData.documentType" text="Mis datos personales"/>
 					</label> 
 					
-					<select  class="form-control" disabled="disabled">
+					<select id="documentType"  class="form-control" disabled="disabled">
 						<option value="${miRitForm.tipoDoc }"><spring:theme code="register.id.types.${miRitForm.tipoDoc}" /></option>
 					</select>
 					
@@ -35,7 +35,7 @@
 					<label class="control-label required" for="primNom">
 						<spring:theme code="mirit.personalData.firstName" />
 					</label> 
-					<input id="primNom" name="primNom" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.primNom }" maxlength="240">
+					<input id="primNom" name="primNom" class="form-control form-control" aria-required="true" type="text" data-original="${miRitForm.primNom }" value="${miRitForm.primNom }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -44,7 +44,7 @@
 					<label class="control-label required" for="primApe">
 						<spring:theme code="mirit.personalData.firstLastName" />
 					</label> 
-					<input id="primApe" name="primApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.primApe }" maxlength="240">
+					<input id="primApe" name="primApe" class="form-control form-control" aria-required="true" type="text" data-original="${miRitForm.primApe }" value="${miRitForm.primApe }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -61,9 +61,6 @@
 				
 			</div>
 			
-<div id="dialog" title="Certificación de Nombre" ><div id="textCertNom"></div></div>
-			
-			
 			<!--  Second column of form -->
 			<div class="col-md-4">
 				<div class="form-group ">
@@ -79,7 +76,7 @@
 					<label class="control-label required" for="segNom">
 						<spring:theme code="mirit.personalData.secondFirstName" />
 					</label> 
-					<input id="segNom" name="segNom" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.segNom }" maxlength="240">
+					<input id="segNom" name="segNom" class="form-control form-control" aria-required="true" type="text" data-original="${miRitForm.segNom }" value="${miRitForm.segNom }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>
@@ -88,7 +85,7 @@
 					<label class="control-label required" for="segApe">
 						<spring:theme code="mirit.personalData.secondLasName" />
 					</label> 
-					<input id="segApe" name="segApe" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.segApe }" maxlength="240">
+					<input id="segApe" name="segApe" class="form-control form-control" aria-required="true" type="text"  data-original="${miRitForm.segApe }" value="${miRitForm.segApe }" maxlength="240">
 					<div class="help-block">
 						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 					</div>

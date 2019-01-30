@@ -10,120 +10,119 @@
 		<div class="row">
 			<div class="headline">
 				<h3>
-					<span tabindex="0"><spring:theme code="publicidad.exterior.tubular" /></span>
+					<span class="cintillo col-md-10 "><spring:theme code="publicidad.exterior.tubular" /></span>
 				</h3>
 			</div>	
 		</div> 
 		<br/>
 		<div class="row">
-			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.elementtype" /></label>
+			<div class="col-md-3 ">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.elementtype" /></label>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.tipoElemento}" maxlength="240">
 				</div>
 			</div>	
-			<div class="col-md-1">
-				<label><spring:theme code="publicidad.exterior.tubular.address" /></label>
+			<div class="col-md-3">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.address" /></label>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.direccion}" maxlength="240">
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-1">
-				<label><spring:theme code="publicidad.exterior.tubular.location" /></label>
+			<div class="col-md-3 ">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.location" /></label>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.localidad}" maxlength="240">
 				</div>
 			</div>	
-			<div class="col-md-1">
-				<label><spring:theme code="publicidad.exterior.tubular.postalcode" /></label>
+			<div class="col-md-3">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.postalcode" /></label>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.codPostal}" maxlength="240">
 				</div>
 			</div>	
 		</div>		
 
 		<div class="row">
-			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.buildingpermit" /></label>
+			<div class="col-md-3 ">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.buildingpermit" /></label>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="" maxlength="240">
+				</div>
+					</div>
+	
+			<div class="col-md-3">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.licensevalidity" /></label>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group ">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.licenciaConstruc}" maxlength="240">
 				</div>
 			</div>			
 		</div>
 		<div class="row">
-			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.licensevalidity" /></label>
+			<div class="col-md-3 ">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.elementlocation" /></label>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="" maxlength="240">
 				</div>
 			</div>			
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.elementlocation" /></label>
+			<div class="col-md-3">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.typeroad" /></label>
 			</div>
-			<div class="col-md-4">
-				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
-				</div>
-			</div>			
 			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.typeroad" /></label>
-			</div>
-			<div class="col-md-4">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.tipoPublici}" maxlength="240">
 				</div>
 			</div>	
 		</div>
 		<div class="row">
-			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.visualorientation" /></label>
+			<div class="col-md-3 ">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.visualorientation" /></label>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.orientacion}" maxlength="240">
 				</div>
 			</div>			
-			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.chip" /></label>
+			<div class="col-md-3">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.chip" /></label>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.chip}" maxlength="240">
 				</div>
 			</div>	
 		</div>
 		
 		<div class="row">
-			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.propertyreg" /></label>
+			<div class="col-md-3 ">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.propertyreg" /></label>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.matricula}" maxlength="240">
 				</div>
 			</div>		
-			<div class="col-md-2">
-				<label><spring:theme code="publicidad.exterior.tubular.numberfaces" /></label>
+			<div class="col-md-3">
+				<label class="inputlabelnew vehiculos"><spring:theme code="publicidad.exterior.tubular.numberfaces" /></label>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
+					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.numCaras}" maxlength="240">
 				</div>
 			</div>	
 		</div>
