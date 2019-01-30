@@ -158,3 +158,22 @@
 	}
 </script>
 
+<script>
+	function functionAjaxDec(){
+	    $.ajax({
+	     // type : 'GET',
+	      url : "/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion",
+	      data : {"numResolu": $('input:radio[name=action]:checked').val().split(',')[0], "anoGravable": $("#anoGravable").val()},
+	      //dataType: 'json',
+	      success : function(data) {
+	        console.log(data);
+	        alert('Funciona el servicio : ' + data);
+	      },
+	      error : function(jqXHR, textStatus, errorThrown) {
+	        alert('Error ' + jqXHR +textStatus + errorThrown);
+	      }
+	    });
+	}
+
+</script>
+

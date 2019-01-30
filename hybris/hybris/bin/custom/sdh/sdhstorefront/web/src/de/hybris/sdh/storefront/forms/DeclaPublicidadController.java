@@ -10,6 +10,7 @@ package de.hybris.sdh.storefront.forms;
 public class DeclaPublicidadController
 {
 	private String numBP;
+	private String numform;
 	private String anograv;
 	private String numresol;
 	private String fecresol;
@@ -18,11 +19,11 @@ public class DeclaPublicidadController
 	private String luginst;
 	private String basegrav;
 	private String opuso;
-	private Float impCar;
-	private Float valsan;
-	private Float valpag;
-	private Float intmora;
-	private Float totpag;
+	private String impCar;
+	private String valsan;
+	private String valpag;
+	private String intmora;
+	private String totpag;
 	private String tipiden;
 	private String numide;
 	private String name;
@@ -43,6 +44,24 @@ public class DeclaPublicidadController
 	public void setNumBP(final String numBP)
 	{
 		this.numBP = numBP;
+	}
+
+
+	/**
+	 * @return the numform
+	 */
+	public String getNumform()
+	{
+		return numform;
+	}
+
+	/**
+	 * @param numform
+	 *           the numform to set
+	 */
+	public void setNumform(final String numform)
+	{
+		this.numform = numform;
 	}
 
 	/**
@@ -186,7 +205,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the impCar
 	 */
-	public Float getImpCar()
+	public String getImpCar()
 	{
 		return impCar;
 	}
@@ -195,7 +214,7 @@ public class DeclaPublicidadController
 	 * @param impCar
 	 *           the impCar to set
 	 */
-	public void setImpCar(final Float impCar)
+	public void setImpCar(final String impCar)
 	{
 		this.impCar = impCar;
 	}
@@ -203,7 +222,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the valsan
 	 */
-	public Float getValsan()
+	public String getValsan()
 	{
 		return valsan;
 	}
@@ -212,7 +231,7 @@ public class DeclaPublicidadController
 	 * @param valsan
 	 *           the valsan to set
 	 */
-	public void setValsan(final Float valsan)
+	public void setValsan(final String valsan)
 	{
 		this.valsan = valsan;
 	}
@@ -220,7 +239,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the valpag
 	 */
-	public Float getValpag()
+	public String getValpag()
 	{
 		return valpag;
 	}
@@ -229,7 +248,7 @@ public class DeclaPublicidadController
 	 * @param valpag
 	 *           the valpag to set
 	 */
-	public void setValpag(final Float valpag)
+	public void setValpag(final String valpag)
 	{
 		this.valpag = valpag;
 	}
@@ -237,7 +256,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the intmora
 	 */
-	public Float getIntmora()
+	public String getIntmora()
 	{
 		return intmora;
 	}
@@ -246,7 +265,7 @@ public class DeclaPublicidadController
 	 * @param intmora
 	 *           the intmora to set
 	 */
-	public void setIntmora(final Float intmora)
+	public void setIntmora(final String intmora)
 	{
 		this.intmora = intmora;
 	}
@@ -254,7 +273,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the totpag
 	 */
-	public Float getTotpag()
+	public String getTotpag()
 	{
 		return totpag;
 	}
@@ -263,7 +282,7 @@ public class DeclaPublicidadController
 	 * @param totpag
 	 *           the totpag to set
 	 */
-	public void setTotpag(final Float totpag)
+	public void setTotpag(final String totpag)
 	{
 		this.totpag = totpag;
 	}

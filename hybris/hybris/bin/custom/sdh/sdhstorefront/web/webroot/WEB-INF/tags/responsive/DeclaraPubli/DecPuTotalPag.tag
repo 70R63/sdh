@@ -30,7 +30,7 @@
 	</div>
 	<div class="col-md-3">
 		<input id="impCar" name="impCar" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
+			aria-required="true" type="number" value="${declaPublicidadForm.impCar}" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
@@ -42,7 +42,7 @@
 	</div>
 	<div class="col-md-3">
 		<input id="valsan" name="valsan" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
+			aria-required="true" type="number" value="${declaPublicidadForm.valsan}" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
@@ -54,7 +54,7 @@
 	</div>
 	<div class="col-md-3">
 		<input id="valpag" name="valpag" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
+			aria-required="true" type="number" value="${declaPublicidadForm.valsan}" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
@@ -65,7 +65,7 @@
 	</div>
 	<div class="col-md-3">
 		<input id="intmora" name="intmora" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
+			aria-required="true" type="number" value="${declaPublicidadForm.intmora}" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
@@ -76,7 +76,7 @@
 	</div>
 	<div class="col-md-3">
 		<input id="totpag" name="totpag" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
+			aria-required="true" type="number" value="${declaPublicidadForm.totpag}" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
