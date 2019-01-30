@@ -84,23 +84,24 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 			miRitCertificacionForm.setIdmsj(certificaRITResponse.getIdmsj());
 			miRitCertificacionForm.setTxtmsj(certificaRITResponse.getTxtmsj());
-			if (!certificaRITResponse.getRit().getStringRIT().isEmpty())
+			if (certificaRITResponse.getRit() != null)
 			{
 				miRitCertificacionForm.setRit(certificaRITResponse.getRit());
 				model.addAttribute("miRitCertificacionForm", miRitCertificacionForm);
 			}
 			else
 			{
-				GlobalMessages.addErrorMessage(model, "mirit.certificacion..error.pdfVacio");
+				redirectModel.addFlashAttribute("error", "sinPdf");
+				return "redirect:/contribuyentes/mirit/certificacion/datos";
 			}
-
 		}
 		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
+			return "redirect:/contribuyentes/mirit/certificacion/datos";
 
+		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_CMS_PAGE));
@@ -111,7 +112,8 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 
 	@RequestMapping(value = "/contribuyentes/mirit/certificacion/datos")
-	public String showCertificacionDatos(final Model model, final RedirectAttributes redirectModel)
+	public String showCertificacionDatos(final Model model, @ModelAttribute("error")
+	final String error)
 			throws CMSItemNotFoundException
 	{
 
@@ -120,6 +122,10 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CertificaRITRequest certificaRITRequest = new CertificaRITRequest();
 
+		if (error == "sinPdf")
+		{
+			GlobalMessages.addErrorMessage(model, "mirit.certificacion..error.pdfVacio");
+		}
 
 		try
 		{
