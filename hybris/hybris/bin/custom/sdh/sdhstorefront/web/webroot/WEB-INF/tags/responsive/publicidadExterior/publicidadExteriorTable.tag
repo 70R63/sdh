@@ -52,22 +52,22 @@
 						<td><input id="action"
 							style="visibility: visible !important; margin: 0; min-height: 0;"
 							name="action" onchange="funcionUno(${loop.index})" type="radio"
-							value="(${eachPubExtTax.tipoValla}, ${eachPubExtTax.numResolu})"></td>
+							value="${eachPubExtTax.numResolu},${eachPubExtTax.tipoValla}"></td>
 					</tr>
 				</c:forEach>
 
 			</tbody>
 		</table>
-		<div id="divIdVariable" style= "visibility: visible !important; margin: 0; min-height: 0;" > <!-- "display: none;" -->
+		<div id="divIdVariable" style= "display: none;" >
 			<input id="inIdVariable" value="">
 		</div>
 
-		<div id="numResolu" style="visibility: visible !important; margin: 0; min-height: 0;">
-			<input id="numResolu" value="">
+		<div id="inIdResolucion" style="display: none;">
+			<input id="inIdResolucion" value="">
 		</div>
 
-		<div id="anoGravable" style="visibility: visible !important; margin: 0; min-height: 0;">
-			<input id="anoGravable" value="">
+		<div id="inIdAnio" style="display: none;">
+			<input id="inIdAnio" value="">
 		</div>
 	</div>
 </div>
@@ -115,7 +115,7 @@
 				code="publicidad.exterior.detail.selectYear" /></label>
 	</div>
 	<div class="col-md-1">
-		<select id="anio" class="inputdropdown"
+		<select id="anoGravable" class="inputdropdown"
 			onchange="ShowSelected(this);">
 			<option value="0">Selecciona un año</option>
 			<option value="2019">2019</option>
@@ -126,11 +126,16 @@
 	</div>
 	<div class="col-md-1 col-md-offset-1">
 		<div>
-			<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadForm">
-				<button  type="submit" class = "botton"> <!-- /sdhstorefront/es onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
+			<!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadForm">
+				<button  type="submit" class = "botton" onclick="functionDos()">
 					<spring:theme code="publicidad.exterior.detail.search" />
 				</button>
-			</form:form>
+			</form:form> -->
+				<button  class = "botton" onclick="functionAjax()">
+					<spring:theme code="publicidad.exterior.detail.search" />
+				</button>
+			
+			<!-- Eliminar el type submit, reemplazar todo el form por un script ajax en funcion post, el resultado del servicio settearlo a los campos correspondientes -->
 		</div>
 
 	</div>

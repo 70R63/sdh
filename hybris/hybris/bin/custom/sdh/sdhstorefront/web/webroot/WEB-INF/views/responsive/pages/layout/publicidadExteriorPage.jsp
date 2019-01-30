@@ -12,13 +12,9 @@
 	<div class="container">
 
 		<publicidadExterior:publicidadExteriorTable />
-		<publicidadExterior:publicidadExteriorDetail />
-		<publicidadExterior:publicidadExteriorAvisos />
-		<publicidadExterior:publicidadExteriorConvencional />
-		<publicidadExterior:publicidadExteriorVehiculos />
-		<publicidadExterior:publicidadExteriorTubular />
+		
 
-		<!-- div id="idAvisos" style="display: none;">
+		<div id="idAvisos" style="display: none;">
 			<publicidadExterior:publicidadExteriorDetail />
 			<publicidadExterior:publicidadExteriorAvisos />
 		</div>
@@ -33,7 +29,7 @@
 		<div id="idTubular" style="display: none;">
 			<publicidadExterior:publicidadExteriorDetail />
 			<publicidadExterior:publicidadExteriorTubular />
-		</div-->
+		</div>
 
 
 
@@ -86,17 +82,30 @@
 <script>
 	function funcionUno(valor) {	
 		var x = document.getElementsByName("action")[valor].value;		
-		document.getElementById("inIdVariable").value = x;				
+		document.getElementById("inIdVariable").value = x.split(',')[1];				
 	}
 </script>
 
 
 <script>
+	function functionAjax(){
+	    $.ajax({
+	      type : 'POST',
+	      url : "${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle",
+	      data : {"numResolu": $('input:radio[name=action]:checked').val().split(',')[0], "anoGravable": $("#anoGravable").val()},
+	      //dataType: 'json',
+	      success : function(data) {
+	        console.log(data);
+	        alert('Funciona el servicio : ' + data);
+	        functionDos();
+	      },
+	      error : function(jqXHR, textStatus, errorThrown) {
+	        alert('Error ' + jqXHR +textStatus + errorThrown);
+	      }
+	    });
+	}
+
 	function functionDos() {
-		if (x == "VALLA VEHÍCULOS")
-			{
-			 x = "VALLA VEHICULOS";
-			} else {x = x}
 		var x = document.getElementById("inIdVariable").value;
 		var a = document.getElementById('idAvisos');
 		var b = document.getElementById('idConvencional');
@@ -114,7 +123,7 @@
 			c.style.display = 'none';
 			d.style.display = 'none';
 
-		} else if (x == "VALLA VEHICULOS") {
+		} else if (x == "VALLA VEHÍCULOS") {
 			c.style.display = 'block';
 			a.style.display = 'none';
 			b.style.display = 'none';
@@ -132,7 +141,7 @@
 
 <script>
 	function parametrosURL() {		
-		var x = document.getElementById("AnoGravable").value;
+		var x = document.getElementById("inIdAnio").value;
 		location.href="/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion?anio="+ x;
 	}
 </script>
@@ -143,7 +152,7 @@
 	function ShowSelected(selectObject)
 	{	 
 	  var value = selectObject.value;   
-	  document.getElementById("AnoGravable").value = value;
+	  document.getElementById("inIdAnio").value = value;
 	  
 	
 	}
