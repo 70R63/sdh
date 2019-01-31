@@ -82,8 +82,12 @@
 <script>
 	function funcionUno(valor) {	
 		var x = document.getElementsByName("action")[valor].value;		
-		document.getElementById("inIdVariable").value = x.split(',')[1];				
+		document.getElementById("inIdVariable").value = x.split(',')[1];
+		document.getElementById("inIdResolucion").value = x.split(',')[0];
 	}
+	$("#anoGravable").on('change', function() {
+		document.getElementById("inIdAnio").value = this.value;
+		});
 </script>
 
 
@@ -92,19 +96,21 @@
 	    $.ajax({
 	      type : 'POST',
 	      url : "${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle",
-	      data : {"numResolu": $('input:radio[name=action]:checked').val().split(',')[0], "anoGravable": $("#anoGravable").val()},
+	      data : {"numResolu": $("#inIdResolucion").val(), "anoGravable": $("#inIdAnio").val()},
 	      //dataType: 'json',
 	      success : function(data) {
 	        console.log(data);
+	        
 	        alert('Funciona el servicio : ' + data);
 	        functionDos();
+	        $( this ).html(data);
 	      },
 	      error : function(jqXHR, textStatus, errorThrown) {
 	        alert('Error ' + jqXHR +textStatus + errorThrown);
 	      }
 	    });
 	}
-
+	
 	function functionDos() {
 		var x = document.getElementById("inIdVariable").value;
 		var a = document.getElementById('idAvisos');

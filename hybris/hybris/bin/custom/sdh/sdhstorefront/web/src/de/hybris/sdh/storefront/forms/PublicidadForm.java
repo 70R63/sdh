@@ -3,7 +3,9 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.InfoDeclaraPubli;
 
 import java.util.List;
 
@@ -62,7 +64,10 @@ public class PublicidadForm
 	private String vigLicenConstruc;
 	private String tipoVia;
 
+
 	private List<ImpuestoPublicidadExterior> publicidadExt;
+	private InfoDeclaraPubli infodeclara;
+	private List<DetallePubli> detalle;
 
 	/**
 	 * @return the numBP
@@ -880,5 +885,41 @@ public class PublicidadForm
 	{
 		this.tipoVia = tipoVia;
 	}
+
+	/**
+	 * @return the infodeclara
+	 */
+	public InfoDeclaraPubli getInfodeclara()
+	{
+		return infodeclara;
+	}
+
+	/**
+	 * @param infodeclara
+	 *           the infodeclara to set
+	 */
+	public void setInfodeclara(final InfoDeclaraPubli infodeclara)
+	{
+		this.infodeclara = infodeclara;
+	}
+
+	/**
+	 * @return the detalle
+	 */
+	public List<DetallePubli> getDetalle()
+	{
+		return detalle;
+	}
+
+	/**
+	 * @param detalle
+	 *           the detalle to set
+	 */
+	public void setDetalle(final List<DetallePubli> detalle)
+	{
+		this.detalle = detalle;
+	}
+
+
 
 }

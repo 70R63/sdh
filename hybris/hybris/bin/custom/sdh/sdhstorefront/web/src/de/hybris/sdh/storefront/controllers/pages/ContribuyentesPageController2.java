@@ -265,7 +265,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		detallePublicidadRequest.setNumResolu(miRitCertificacionFormDatos.getNumResolu());
 		detallePublicidadRequest.setAnoGravable(miRitCertificacionFormDatos.getAnoGravable());
 
-		//detallePublicidadRequest.setNumBP("0000000546");
+		detallePublicidadRequest.setNumBP("0000000546");
 		//detallePublicidadRequest.setNumResolu("RES 096");
 		//detallePublicidadRequest.setAnoGravable("2018");
 
@@ -285,66 +285,74 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 
 			//publicidadForm.setTipoElemento(detallePublicidadResponse.getTipoElemento());
+			if (detallePublicidadResponse.getDetalle() != null && !detallePublicidadResponse.getDetalle().isEmpty())
+			{
+				publicidadForm.setDetalle(detallePublicidadResponse.getDetalle().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getTipoElemento())).collect(Collectors.toList()));
+			}
+
+
 
 			//Datos Basicos
 			publicidadForm.setFechResolu(detallePublicidadResponse.getFechResolu());
 			publicidadForm.setFechNotif(detallePublicidadResponse.getFechNotif());
 			publicidadForm.setVigenDesde(detallePublicidadResponse.getVigenDesde());
 			publicidadForm.setVigenHasta(detallePublicidadResponse.getVigenHasta());
-			publicidadForm.setTipoSolicitud(detallePublicidadResponse.getTipoSolicitud());
-			//Datos Avisos
-			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());
-			publicidadForm.setAvisoLumino(detallePublicidadResponse.getDetalle().getAvisoLumino());
-			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());
-			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());
-			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());
-			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());
-			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());
-			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());
-			publicidadForm.setAreaElemento(detallePublicidadResponse.getDetalle().getAreaElemento());
-			publicidadForm.setAreaFachada(detallePublicidadResponse.getDetalle().getAreaFachada());
-			publicidadForm.setNumFracciones(detallePublicidadResponse.getDetalle().getNumFracciones());
-			//Datos Vehiculos
-			publicidadForm.setTipoPublici(detallePublicidadResponse.getDetalle().getTipoPublici());
-			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());
-			publicidadForm.setPeriodicidad(detallePublicidadResponse.getDetalle().getPeriodicidad());
-			publicidadForm.setModelo(detallePublicidadResponse.getDetalle().getModelo());
-			publicidadForm.setPlaca(detallePublicidadResponse.getDetalle().getPlaca());
-			publicidadForm.setNumLicenciaTrans(detallePublicidadResponse.getDetalle().getNumLicenciaTrans());
-			publicidadForm.setTipoServicio(detallePublicidadResponse.getDetalle().getTipoServicio());
-			//Datos Convencional
-			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());//repetidooo
-			publicidadForm.setLicenciaConstruc(detallePublicidadResponse.getDetalle().getLicenciaConstruc());
-			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());//repetido
-			publicidadForm.setAreaTotal(detallePublicidadResponse.getDetalle().getAreaTotal());
-			publicidadForm.setContratoObra(detallePublicidadResponse.getDetalle().getContratoObra());
-			publicidadForm.setOrientacion(detallePublicidadResponse.getDetalle().getOrientacion());
-			publicidadForm.setFiducia(detallePublicidadResponse.getDetalle().getFiducia());
-			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());//repetido
-			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
-			publicidadForm.setLicenciaUrb(detallePublicidadResponse.getDetalle().getLicenciaUrb());
-			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
-			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());//repetido
-			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());//repetido
-			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());//repetido
-			publicidadForm.setTipoPublici(detallePublicidadResponse.getDetalle().getTipoPublici());//repetido
-			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());//repetido
-			publicidadForm.setVigLicenConstruc(detallePublicidadResponse.getDetalle().getVigLicenConstruc());
-			publicidadForm.setPeriodicidad(detallePublicidadResponse.getDetalle().getPeriodicidad());//repetido
-			//DetalleTubular
-			publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());//repetido
-			publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());//repetido
-			publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());//repetido
-			publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
-			publicidadForm.setLicenciaConstruc(detallePublicidadResponse.getDetalle().getLicenciaConstruc());//repetido
-			publicidadForm.setVigLicenConstruc(detallePublicidadResponse.getDetalle().getVigLicenConstruc());//repetido
-			publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());//repetido
-			publicidadForm.setTipoVia(detallePublicidadResponse.getDetalle().getTipoVia());
-			publicidadForm.setOrientacion(detallePublicidadResponse.getDetalle().getOrientacion());//repetido
-			publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());//repetido
-			publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());//repetido
-			publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());//repetido
+			publicidadForm.setTipoSolicitud(detallePublicidadResponse.getTipoSolicitud()); //Datos Avisos
+			/*
+			 * publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());
+			 * publicidadForm.setAvisoLumino(detallePublicidadResponse.getDetalle().getAvisoLumino());
+			 * publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());
+			 * publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());
+			 * publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());
+			 * publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());
+			 * publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());
+			 * publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());
+			 * publicidadForm.setAreaElemento(detallePublicidadResponse.getDetalle().getAreaElemento());
+			 * publicidadForm.setAreaFachada(detallePublicidadResponse.getDetalle().getAreaFachada());
+			 * publicidadForm.setNumFracciones(detallePublicidadResponse.getDetalle().getNumFracciones()); //Datos
+			 * //Vehiculos publicidadForm.setTipoPublici(detallePublicidadResponse.getDetalle().getTipoPublici());
+			 * publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());
+			 * publicidadForm.setPeriodicidad(detallePublicidadResponse.getDetalle().getPeriodicidad());
+			 * publicidadForm.setModelo(detallePublicidadResponse.getDetalle().getModelo());
+			 * publicidadForm.setPlaca(detallePublicidadResponse.getDetalle().getPlaca());
+			 * publicidadForm.setNumLicenciaTrans(detallePublicidadResponse.getDetalle().getNumLicenciaTrans());
+			 * publicidadForm.setTipoServicio(detallePublicidadResponse.getDetalle().getTipoServicio()); //Datos
+			 * //Convencional
+			 * publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());//repetidooo
+			 * publicidadForm.setLicenciaConstruc(detallePublicidadResponse.getDetalle().getLicenciaConstruc());
+			 * publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());//repetido
+			 * publicidadForm.setAreaTotal(detallePublicidadResponse.getDetalle().getAreaTotal());
+			 * publicidadForm.setContratoObra(detallePublicidadResponse.getDetalle().getContratoObra());
+			 * publicidadForm.setOrientacion(detallePublicidadResponse.getDetalle().getOrientacion());
+			 * publicidadForm.setFiducia(detallePublicidadResponse.getDetalle().getFiducia());
+			 * publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());//repetido
+			 * publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
+			 * publicidadForm.setLicenciaUrb(detallePublicidadResponse.getDetalle().getLicenciaUrb());
+			 * publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
+			 * publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());//repetido
+			 * publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());//repetido
+			 * publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());//repetido
+			 * publicidadForm.setTipoPublici(detallePublicidadResponse.getDetalle().getTipoPublici());//repetido
+			 * publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());//repetido
+			 * publicidadForm.setVigLicenConstruc(detallePublicidadResponse.getDetalle().getVigLicenConstruc());
+			 * publicidadForm.setPeriodicidad(detallePublicidadResponse.getDetalle().getPeriodicidad());//repetido
+			 * //DetalleTubular
+			 * publicidadForm.setTipoElemento(detallePublicidadResponse.getDetalle().getTipoElemento());//repetido
+			 * publicidadForm.setDireccion(detallePublicidadResponse.getDetalle().getDireccion());//repetido
+			 * publicidadForm.setLocalidad(detallePublicidadResponse.getDetalle().getLocalidad());//repetido
+			 * publicidadForm.setCodPostal(detallePublicidadResponse.getDetalle().getCodPostal());//repetido
+			 * publicidadForm.setLicenciaConstruc(detallePublicidadResponse.getDetalle().getLicenciaConstruc());//repetido
+			 * publicidadForm.setVigLicenConstruc(detallePublicidadResponse.getDetalle().getVigLicenConstruc());//repetido
+			 * publicidadForm.setUbicacion(detallePublicidadResponse.getDetalle().getUbicacion());//repetido
+			 * publicidadForm.setTipoVia(detallePublicidadResponse.getDetalle().getTipoVia());
+			 * publicidadForm.setOrientacion(detallePublicidadResponse.getDetalle().getOrientacion());//repetido
+			 * publicidadForm.setChip(detallePublicidadResponse.getDetalle().getChip());//repetido
+			 * publicidadForm.setMatricula(detallePublicidadResponse.getDetalle().getMatricula());//repetido
+			 * publicidadForm.setNumCaras(detallePublicidadResponse.getDetalle().getNumCaras());//repetido
+			 */
 
+			//return "publicidadForm";
 			model.addAttribute("publicidadForm", publicidadForm);
 
 

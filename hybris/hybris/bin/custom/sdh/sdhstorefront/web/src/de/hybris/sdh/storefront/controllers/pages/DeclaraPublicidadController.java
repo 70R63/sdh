@@ -12,16 +12,21 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.responses.CalcPublicidadResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
+import de.hybris.sdh.storefront.forms.PublicidadForm;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -64,26 +69,97 @@ public class DeclaraPublicidadController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "sdhDetallePublicidadService")
+	SDHDetallePublicidadService sdhDetallePublicidadService;
+
+
 	@RequestMapping(value = "/contribuyentes/publicidadexterior/declaracion")
 	//@RequireHardLogIn
 	public String declaraPublicidadpage(final Model model, final RedirectAttributes redirectModel, @RequestParam("anio")
 	final String anio) throws CMSItemNotFoundException
 	{
-		final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 
-		final String formato = "dd-MM-yyyy";
-		final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formato);
-		final String fecha = simpleDateFormat.format(new Date());
-		System.out.println(fecha);
+		/*
+		 * detallePublicidadRequest.setNumBP(customerModel.getNumBP()); detallePublicidadRequest.setNumResolu(anio);
+		 * detallePublicidadRequest.setAnoGravable(numResolu);
+		 */
+		detallePublicidadRequest.setNumBP("0000000546");
+		detallePublicidadRequest.setNumResolu("RES 096");
+		detallePublicidadRequest.setAnoGravable(anio);
 
-		declaPublicidadForm.setAnograv(anio);
-		declaPublicidadForm.setFechnotif(fecha);
-		model.addAttribute("declaPublicidadForm", declaPublicidadForm);
+		try
+		{
+			final PublicidadForm publicidadForm = new PublicidadForm();
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
+					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+
+			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
+
+			declaPublicidadForm.setAnograv(detallePublicidadResponse.getAnoGravable());
+
+			final String fechnotif = detallePublicidadResponse.getFechNotif();
+			if (StringUtils.isNotBlank(fechnotif) && !"00000000".equals(fechnotif))
+			{
+				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+				final LocalDate localDate = LocalDate.parse(fechnotif, formatter);
+
+				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+				declaPublicidadForm.setFechnotif(localDate.format(formatter2));
+			}
+
+			declaPublicidadForm.setNumresol(detallePublicidadResponse.getNumResolu());
+
+
+
+			if (detallePublicidadResponse.getInfoDeclara().getOpcionUso() == "01")
+			{
+				declaPublicidadForm.setOpuso("Declaración");
+			}
+			else if (detallePublicidadResponse.getInfoDeclara().getOpcionUso() == "02")
+			{
+				declaPublicidadForm.setOpuso("Corrección");
+			}
+
+
+			declaPublicidadForm.setImpCar(detallePublicidadResponse.getInfoDeclara().getImpCargo());
+			declaPublicidadForm.setValsan(detallePublicidadResponse.getInfoDeclara().getVlrSancion());
+			declaPublicidadForm.setValpag(detallePublicidadResponse.getInfoDeclara().getVlrPagar());
+			declaPublicidadForm.setIntmora(detallePublicidadResponse.getInfoDeclara().getInteresMora());
+			declaPublicidadForm.setTotpag(detallePublicidadResponse.getInfoDeclara().getTotalPagar());
+
+
+
+			model.addAttribute("declaPublicidadForm", declaPublicidadForm);
+
+
+
+		}
+		catch (final Exception e)
+		{
+			// XXX Auto-generated catch block
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
+
+
+
+
+		/*
+		 * final String formato = "dd-MM-yyyy"; final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formato);
+		 * final String fecha = simpleDateFormat.format(new Date()); declaPublicidadForm.setFechnotif(fecha);
+		 */
 
 		//model.addAttribute("dataForm", dataForm);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
-		/* updatePageTitle(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE)); */
+		//updatePageTitle(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE)); */
 
 		return getViewForPage(model);
 

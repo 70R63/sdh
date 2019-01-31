@@ -3,14 +3,16 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Maria Luisa
  *
  */
 public class DetallePublicidadResponse
 {
-
-
+	private InfoDeclaraPubli infoDeclara;
    private String fechResolu;
    private String fechNotif;
    private String vigenDesde;
@@ -18,9 +20,29 @@ public class DetallePublicidadResponse
    private String tipoSolicitud;
    private String anoGravable;
    private String numResolu;
-	private InfoDeclaraPubli infodeclara;
-	private DetallePubli detalle;
+	private List<DetallePubli> detalle;
 
+
+
+
+
+
+	/**
+	 * @return the infoDeclara
+	 */
+	public InfoDeclaraPubli getInfoDeclara()
+	{
+		return infoDeclara;
+	}
+
+	/**
+	 * @param infoDeclara
+	 *           the infoDeclara to set
+	 */
+	public void setInfoDeclara(final InfoDeclaraPubli infoDeclara)
+	{
+		this.infoDeclara = infoDeclara;
+	}
 
 	/**
 	 * @return the fechResolu
@@ -141,27 +163,12 @@ public class DetallePublicidadResponse
 		this.numResolu = numResolu;
 	}
 
-	/**
-	 * @return the infodeclara
-	 */
-	public InfoDeclaraPubli getInfodeclara()
-	{
-		return infodeclara;
-	}
 
-	/**
-	 * @param infodeclara
-	 *           the infodeclara to set
-	 */
-	public void setInfodeclara(final InfoDeclaraPubli infodeclara)
-	{
-		this.infodeclara = infodeclara;
-	}
 
 	/**
 	 * @return the detalle
 	 */
-	public DetallePubli getDetalle()
+	public List<DetallePubli> getDetalle()
 	{
 		return detalle;
 	}
@@ -170,10 +177,9 @@ public class DetallePublicidadResponse
 	 * @param detalle
 	 *           the detalle to set
 	 */
-	public void setDetalle(final DetallePubli detalle)
+	public void setDetalle(final List<DetallePubli> detalle)
 	{
 		this.detalle = detalle;
 	}
-
 
 }

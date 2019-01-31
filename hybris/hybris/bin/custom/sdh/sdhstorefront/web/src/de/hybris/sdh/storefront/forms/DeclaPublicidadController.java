@@ -3,6 +3,12 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.DetallePubli;
+import de.hybris.sdh.core.pojos.responses.InfoDeclaraPubli;
+
+import java.util.List;
+
+
 /**
  * @author Maria Luisa
  *
@@ -27,6 +33,14 @@ public class DeclaPublicidadController
 	private String tipiden;
 	private String numide;
 	private String name;
+	private String refe;
+
+
+	private String vigenDesde;
+	private String vigenHasta;
+
+	private InfoDeclaraPubli infoDeclara;
+	private List<DetallePubli> detalle;
 
 
 
@@ -336,6 +350,95 @@ public class DeclaPublicidadController
 	public void setName(final String name)
 	{
 		this.name = name;
+	}
+
+	/**
+	 * @return the refe
+	 */
+	public String getRefe()
+	{
+		return refe;
+	}
+
+	/**
+	 * @param refe
+	 *           the refe to set
+	 */
+	public void setRefe(final String refe)
+	{
+		this.refe = refe;
+	}
+
+	/**
+	 * @return the vigenDesde
+	 */
+	public String getVigenDesde()
+	{
+		return vigenDesde;
+	}
+
+	/**
+	 * @param vigenDesde
+	 *           the vigenDesde to set
+	 */
+	public void setVigenDesde(final String vigenDesde)
+	{
+		this.vigenDesde = vigenDesde;
+	}
+
+	/**
+	 * @return the vigenHasta
+	 */
+	public String getVigenHasta()
+	{
+		return vigenHasta;
+	}
+
+	/**
+	 * @param vigenHasta
+	 *           the vigenHasta to set
+	 */
+	public void setVigenHasta(final String vigenHasta)
+	{
+		this.vigenHasta = vigenHasta;
+	}
+
+
+
+
+
+	/**
+	 * @return the infoDeclara
+	 */
+	public InfoDeclaraPubli getInfoDeclara()
+	{
+		return infoDeclara;
+	}
+
+	/**
+	 * @param infoDeclara
+	 *           the infoDeclara to set
+	 */
+	public void setInfoDeclara(final InfoDeclaraPubli infoDeclara)
+	{
+		this.infoDeclara = infoDeclara;
+	}
+
+	/**
+	 * @return the detalle
+	 */
+	public List<DetallePubli> getDetalle()
+	{
+		return detalle;
+	}
+
+	/**
+	 * @param detalle
+	 *           the detalle to set
+	 */
+	public void setDetalle(final List<DetallePubli> detalle)
+	{
+		this.detalle = detalle;
 	}
 
 

@@ -26,8 +26,8 @@
 		<select id="luginst" class="inputdropdown"
 			onchange="ShowSelected(this);">
 			<option value="">Seleccionar</option>
-			<option value="0">Predio</option>
-			<option value="1">Veh&iacuteculo</option>
+			<option value="01">Predio</option>
+			<option value="02">Veh&iacuteculo</option>
 		</select>
 	</div>
 </div>

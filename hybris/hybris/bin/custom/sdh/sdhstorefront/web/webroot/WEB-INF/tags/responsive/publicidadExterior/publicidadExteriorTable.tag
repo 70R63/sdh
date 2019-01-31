@@ -55,20 +55,11 @@
 							value="${eachPubExtTax.numResolu},${eachPubExtTax.tipoValla}"></td>
 					</tr>
 				</c:forEach>
-
+				<div id="divIdVariable" style= "display: none;" >
+					<input id="inIdVariable" value="">
+				</div>
 			</tbody>
 		</table>
-		<div id="divIdVariable" style= "display: none;" >
-			<input id="inIdVariable" value="">
-		</div>
-
-		<div id="inIdResolucion" style="display: none;">
-			<input id="inIdResolucion" value="">
-		</div>
-
-		<div id="inIdAnio" style="display: none;">
-			<input id="inIdAnio" value="">
-		</div>
 	</div>
 </div>
 
@@ -126,16 +117,25 @@
 	</div>
 	<div class="col-md-1 col-md-offset-1">
 		<div>
-			<!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadForm">
-				<button  type="submit" class = "botton" onclick="functionDos()">
+			<form:form>
+		
+				<div id="inIdResolucion" style="display: none;">
+					<input id="inIdResolucion" value="">
+				</div>
+		
+				<div id="inIdAnio" style="display: none;">
+					<input id="inIdAnio" value="">
+				</div>
+				<!--<button  type="submit" class = "botton" onclick="functionDos()">
 					<spring:theme code="publicidad.exterior.detail.search" />
-				</button>
-			</form:form> -->
+				</button> -->
 				<button  class = "botton" onclick="functionAjax()">
 					<spring:theme code="publicidad.exterior.detail.search" />
-				</button>
+				</button> 
+			</form:form>
+				
 			
-			<!-- Eliminar el type submit, reemplazar todo el form por un script ajax en funcion post, el resultado del servicio settearlo a los campos correspondientes -->
+			 
 		</div>
 
 	</div>
