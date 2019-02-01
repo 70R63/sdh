@@ -23,17 +23,17 @@
 		
 		<miRit:contactData/>
 		
-		<miRit:myTaxes/>
-		
-		<miRit:myRepresentantsData/>
-		
-		<miRit:myTributaryRols/>
-		
 		<miRit:changeEmail/>
 		
 		<miRit:changePasword/>
 		
 		<miRit:consentsData/>
+		
+		<miRit:myTaxes/>
+		
+		<miRit:myRepresentantsData/>
+		
+		<miRit:myTributaryRols/>
 		
 		<miRit:miRitButtons/>
 		

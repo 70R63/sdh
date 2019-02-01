@@ -1,18 +1,201 @@
 ACC.mirit = {
 
-		 _autoload: [ "bindUpdateButton","bindDialog","bindUpdateRitButton","bindAddressData"],
+		 _autoload: [ "bindUpdateButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton"],
 		    
 		    bindAddressData: function(){
-		    	$("#u5070_input").val(ACC.addressCountry);
-		    	$("#u5056_input").val(ACC.addressDep);
-		    	$("#u5056_input").trigger( "change" );
-		    	$("#u5058_input option").filter(function() {
-		    	    return this.text == ACC.addressMun; 
-		    	}).attr('selected', true);
-		    	$("#u5058_input").trigger( "change" );
-		    	$("#u5073_input").val(parseInt(ACC.addressPC));
-		    	$("#u5073_input").trigger( "change" );
+		    	
+		    	
+		    	
+		    	//bind countries data
+		    	$('#countryDireccionNotificacion')
+		        .find('option')
+		        .remove();
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#countryDireccionNotificacion").append(o);
+		    	
+		    	countries.forEach(function (eachCountry) {
+		    	    	var o = new Option( eachCountry.name,eachCountry.isocode);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachCountry.name);
+		    	    	$("#countryDireccionNotificacion").append(o);
+		    	});
+		    	
+		    	$("#countryDireccionNotificacion").val(ACC.addressNotificationCountry);
+		    	
+		    	
+		    	$('#countryDireccionContacto')
+		        .find('option')
+		        .remove();
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#countryDireccionContacto").append(o);
+		    	
+		    	countries.forEach(function (eachCountry) {
+		    	    	var o = new Option( eachCountry.name,eachCountry.isocode);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachCountry.name);
+		    	    	$("#countryDireccionContacto").append(o);
+		    	});
+		    	
+		    	$("#countryDireccionContacto").val(ACC.addressNotificationCountry);
+		    	
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#deparmentDireccionNotificacion").append(o);
+		    	
+		    	departments.forEach(function (eachDep) {
+		    	    	var o = new Option( eachDep.name,eachDep.depId);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachDep.name);
+		    	    	$("#deparmentDireccionNotificacion").append(o);
+		    	});
+		    	
+		    	$("#deparmentDireccionNotificacion").val(ACC.addressNotificationDep);
+		    	
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#deparmentDireccionContacto").append(o);
+		    	
+		    	departments.forEach(function (eachDep) {
+		    	    	var o = new Option( eachDep.name,eachDep.depId);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachDep.name);
+		    	    	$("#deparmentDireccionContacto").append(o);
+		    	});
+		    	
+		    	$("#deparmentDireccionContacto").val(ACC.addressContactoDep);
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#municipioDireccionNotificacion").append(o);
+		    	
+		    	municipios.forEach(function (eachMun) {
+		    		if(eachMun.dep == ACC.addressNotificationDep)
+		    		{
+		    	    	var o = new Option( eachMun.desc,eachMun.desc);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachMun.desc);
+		    	    	$("#municipioDireccionNotificacion").append(o);
+		    		}
+		    	});
+		    	
+		    	$("#municipioDireccionNotificacion").val(ACC.addressNotificationMun);
+		    	
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#municipioDireccionContacto").append(o);
+		    	
+		    	municipios.forEach(function (eachMun) {
+		    		if(eachMun.dep == ACC.addressContactoDep)
+		    		{
+		    	    	var o = new Option( eachMun.desc,eachMun.desc);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachMun.desc);
+		    	    	$("#municipioDireccionContacto").append(o);
+		    		}
+		    	});
+		    	
+		    	$("#municipioDireccionContacto").val(ACC.addressContactoMun);
+		    	
+		    	
+		    	
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#postalCodeDireccionNotificacion").append(o);
+		    	
+		    	cps.forEach(function (eachCP) {
+		    		if(eachCP.mun == municipios.filter(item => item.desc == ACC.addressNotificationMun)[0].mun)
+		    		{
+		    	    	var o = new Option( eachCP.cp,eachCP.cp);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachCP.cp);
+		    	    	$("#postalCodeDireccionNotificacion").append(o);
+		    		}
+		    	});
+		    	
+		    	$("#postalCodeDireccionNotificacion").val(ACC.addressNotificationPC);
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#postalCodeDireccionContacto").append(o);
+		    	
+		    	cps.forEach(function (eachCP) {
+		    		if(eachCP.mun == municipios.filter(item => item.desc == ACC.addressContactoMun)[0].mun)
+		    		{
+		    	    	var o = new Option( eachCP.cp,eachCP.cp);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachCP.cp);
+		    	    	$("#postalCodeDireccionContacto").append(o);
+		    		}
+		    	});
+		    	
+		    	$("#postalCodeDireccionContacto").val(ACC.addressContactoPC);
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	$('#countrySelect')
+		        .find('option')
+		        .remove();
+		    	
+		    	var o = new Option( "SELECCIONAR","");
+		    	/// jquerify the DOM object 'o' so we can use the html method
+		    	$(o).html("SELECCIONAR");
+		    	$("#countrySelect").append(o);
+		    	
+		    	countries.forEach(function (eachCountry) {
+		    	    	var o = new Option( eachCountry.name,eachCountry.isocode);
+		    	    	/// jquerify the DOM object 'o' so we can use the html method
+		    	    	$(o).html(eachCountry.name);
+		    	    	$("#countrySelect").append(o);
+		    	});
+		    	
+		    	
+		    	$("#countrySelect").val("CO");
 		    },
+		    
+		    bindAddSocialNetworkRowButton: function () {
+        $(document).on("click", "#addSocialNetworkButton", function (e) {
+    	        e.preventDefault();
+    	        
+    	        if($(".socialNetworkRow").length < 5)
+    	        {
+    	        	$($(".socialNetworkRow")[0]).parent().append($($(".socialNetworkRow")[0]).clone());
+    	        	
+    	        	$($(".socialNetworkRow")[0]).parent().children().last().find(".redSocial").val("")
+    	        	$($(".socialNetworkRow")[0]).parent().children().last().find(".usuarioRedSocial").val("")
+    	        }
+    	        
+    	    });
+        },
 
     bindUpdateButton: function () {
     $(document).on("click", "#certifNombButton", function (e) {
@@ -219,28 +402,20 @@ ACC.mirit = {
     	        
     	        var redSocialData = new Array();
     	        
-    	        $.each($(".redSocial"),function(index,value){
+    	        $.each($(".socialNetworkRow"),function(index,value){
     	        	
-    	        	if($(value).val() != "")
-	        		{
-    	        		if($("#redsocial\\["+index+"\\]\\.USUARIORED").val()== "")
-	        			{
-    	        			$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").removeClass("hidden");
-	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").addClass("has-error");
-	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").html("Por favor introduce el nombre de usuario");
-	        	        	hasErrors = true;
-	        			}else
-	        			{
-	        				$("#redsocial\\["+index+"\\]\\.USUARIORED\\.errors").addClass("hidden");
-	        	        	$("#redsocial\\["+index+"\\]\\.USUARIORED").parents(".form-group ").removeClass("has-error");
-	        			}
-	        		}
-    	        	var eachSocialNet=new Object();
+    	        	var redSocial = $(value).find(".redSocial").val();
+    	        	var usuarioRedSocial = $(value).find(".usuarioRedSocial").val();
     	        	
-    	        	eachSocialNet.RED_SOCIAL= $(value).val();
-    	        	eachSocialNet.USUARIORED=$("#redsocial\\["+index+"\\]\\.USUARIORED").val();
-    	        	
-    	        	redSocialData.push(eachSocialNet);
+    	        	if(redSocial != "" && usuarioRedSocial != "")
+    	        	{
+	    	        	var eachSocialNet=new Object();
+	    	        	
+	    	        	eachSocialNet.RED_SOCIAL = redSocial;
+	    	        	eachSocialNet.USUARIORED = usuarioRedSocial;
+	    	        	
+	    	        	redSocialData.push(eachSocialNet);
+    	        	}
     	        	
     	        });
     	        
@@ -260,24 +435,41 @@ ACC.mirit = {
     	        var direccionNotificacion = {};
     	        
     	        direccionNotificacion.ADR_KIND = "02";
-    	        direccionNotificacion.STREET = $.trim($("#direccionNotificacionStreet").val());
-    	        direccionNotificacion.STR_SUPPL1 = $.trim($("#direccionNotificacionSuppl1").val());
-    	        direccionNotificacion.STR_SUPPL2 = $.trim($("#direccionNotificacionSuppl2").val());
-    	        direccionNotificacion.POST_CODE1 = $.trim($("#u5073_input").val());
-    	        direccionNotificacion.REGION = $.trim($("#u5056_input").val());
-    	        direccionNotificacion.COUNTRY  = $.trim($("#u5070_input").val());
-    	        direccionNotificacion.CITY1   =$.trim( $("#u5058_input option:selected").text())
+	        	 direccionNotificacion.COUNTRY  = $.trim($("#countryDireccionNotificacion").val());
+    	        
+    	        if($("#countryDireccionNotificacion").val()=="CO")
+	        	{
+    	        	 direccionNotificacion.STREET = $.trim($("#direccionNotificacionStreet").val());
+    	        	 direccionNotificacion.STR_SUPPL1 = $.trim($("#direccionNotificacionSuppl1").val());
+	    	        direccionNotificacion.STR_SUPPL2 = $.trim($("#direccionNotificacionSuppl2").val());
+	    	        direccionNotificacion.POST_CODE1 = $.trim($("#postalCodeDireccionNotificacion").val());
+	    	        direccionNotificacion.REGION = $.trim($("#deparmentDireccionNotificacion").val());
+	    	        direccionNotificacion.CITY1   =$.trim( $("#municipioDireccionNotificacion").val())
+	        	}else
+        		{
+	        		direccionNotificacion.STREET = $.trim($("#direccionNotificacion").val());
+        		}
+    	        
     	        
     	        var direccionContacto = {};
     	        
     	        direccionContacto.ADR_KIND = "01";
-    	        direccionContacto.STREET = $.trim($("#direccionContactoStreet").val());
-    	        direccionContacto.STR_SUPPL1 = $.trim($("#direccionContactoSuppl1").val());
-    	        direccionContacto.STR_SUPPL2 = $.trim($("#direccionContactoSuppl2").val());
-    	        direccionContacto.POST_CODE1 = $.trim($("#u5073_input").val());
-    	        direccionContacto.REGION = $.trim($("#u5056_input").val());
-    	        direccionContacto.COUNTRY  = $.trim($("#u5070_input").val());
-    	        direccionContacto.CITY1   = $.trim($("#u5058_input option:selected").text());
+    	        direccionContacto.COUNTRY  = $.trim($("#countryDireccionContacto").val());
+    	        
+    	        if($("#countryDireccionContacto").val()=="CO")
+	        	{
+    	        	direccionContacto.STREET = $.trim($("#direccionContactoStreet").val());
+	    	        direccionContacto.STR_SUPPL1 = $.trim($("#direccionContactoSuppl1").val());
+	    	        direccionContacto.STR_SUPPL2 = $.trim($("#direccionContactoSuppl2").val());
+	    	        direccionContacto.POST_CODE1 = $.trim($("#postalCodeDireccionContacto").val());
+	    	        direccionContacto.REGION = $.trim($("#deparmentDireccionContacto").val());
+	    	        direccionContacto.CITY1   = $.trim($("#municipioDireccionContacto").text());
+	        	}else
+        		{
+	        		direccionContacto.STREET = $.trim($("#direccionContacto").val());
+        		}
+    	        
+    	        
     	        
     	        if(hasErrors || hasPasswordErrors)
     	        {
