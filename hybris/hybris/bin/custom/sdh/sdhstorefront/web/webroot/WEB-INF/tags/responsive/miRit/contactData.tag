@@ -501,6 +501,12 @@
 						</label> 
 					</div>
 				</div>
+				<div class="col-md-4">
+						<div class="form-group ">
+						<button class="btn btn-secondary btn-lg " type="button" id="addSocialNetworkButton">
+							<spring:theme code="mirit.contactData.addSocialNetwork" /></button>
+						</div>
+					</div>
 				</div>
 					<div class="row socialNetworkRow">
 						<div class="col-md-4">
