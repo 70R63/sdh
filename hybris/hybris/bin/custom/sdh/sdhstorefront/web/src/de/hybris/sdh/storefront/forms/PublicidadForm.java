@@ -63,6 +63,7 @@ public class PublicidadForm
 	private String orientacion;
 	private String vigLicenConstruc;
 	private String tipoVia;
+	private String tipoValla;
 
 
 	private List<ImpuestoPublicidadExterior> publicidadExt;
@@ -128,14 +129,6 @@ public class PublicidadForm
 		return fechResolu;
 	}
 
-	/**
-	 * @param fechResolu
-	 *           the fechResolu to set
-	 */
-	public void setFechResolu(final String fechResolu)
-	{
-		this.fechResolu = fechResolu;
-	}
 
 	/**
 	 * @return the fechNotif
@@ -152,6 +145,15 @@ public class PublicidadForm
 	public void setFechNotif(final String fechNotif)
 	{
 		this.fechNotif = fechNotif;
+	}
+
+	/**
+	 * @param fechResolu
+	 *           the fechResolu to set
+	 */
+	public void setFechResolu(final String fechResolu)
+	{
+		this.fechResolu = fechResolu;
 	}
 
 	/**
@@ -884,6 +886,25 @@ public class PublicidadForm
 	public void setTipoVia(final String tipoVia)
 	{
 		this.tipoVia = tipoVia;
+	}
+
+
+
+	/**
+	 * @return the tipoValla
+	 */
+	public String getTipoValla()
+	{
+		return tipoValla;
+	}
+
+	/**
+	 * @param tipoValla
+	 *           the tipoValla to set
+	 */
+	public void setTipoValla(final String tipoValla)
+	{
+		this.tipoValla = tipoValla;
 	}
 
 	/**

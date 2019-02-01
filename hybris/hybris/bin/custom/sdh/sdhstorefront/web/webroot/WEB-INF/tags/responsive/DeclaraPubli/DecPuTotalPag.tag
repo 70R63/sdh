@@ -5,13 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
-<spring:url
-	value="/calculo"
-	var="CalculodeclaracionUrl" htmlEscape="false" />
-	
 
 <div class="row">
 	<div class="col-md-6">
@@ -21,6 +17,8 @@
 		</h3>
 	</div>
 </div>
+
+<sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="post" commandName="declaPublicidadForm">
 <br display:block;
    margin: 5px 0;>
 <div class="row">
@@ -84,11 +82,17 @@
 <div class="row">
 	<div class="col-md-3 col-md-offset-3 center">
 	
-	<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST">
+	<!-- sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST">
 			<button id="/contribuyentes/publicidadexterior/declaracion" type="submit"
 				class="botton">
 				<spring:theme code="declaracion.publicidad.button.calcular" />
 				</button>
-			</sf:form>
+			</sf:form-->
+			
+			<sf:button id="/contribuyentes/publicidadexterior/declaracion"  action = "/contribuyentes/publicidadexterior/declaracion" type="submit"
+				class="botton">
+				<spring:theme code="declaracion.publicidad.button.calcular" />
+				</sf:button>
 				</div>
 </div>
+</sf:form>

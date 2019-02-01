@@ -20,12 +20,44 @@ public class DetallePublicidadResponse
    private String tipoSolicitud;
    private String anoGravable;
    private String numResolu;
+	private String direccion;
+	private String placa;
 	private List<DetallePubli> detalle;
 
 
+	/**
+	 * @return the direccion
+	 */
+	public String getDireccion()
+	{
+		return direccion;
+	}
 
+	/**
+	 * @param direccion
+	 *           the direccion to set
+	 */
+	public void setDireccion(final String direccion)
+	{
+		this.direccion = direccion;
+	}
 
+	/**
+	 * @return the placa
+	 */
+	public String getPlaca()
+	{
+		return placa;
+	}
 
+	/**
+	 * @param placa
+	 *           the placa to set
+	 */
+	public void setPlaca(final String placa)
+	{
+		this.placa = placa;
+	}
 
 	/**
 	 * @return the infoDeclara

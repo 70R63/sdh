@@ -23,7 +23,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.fechResolu}" maxlength="240">
+				<input id="address.surname" name="fechResolu" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.fechResolu}" maxlength="240">
 			</div>
 		</div>
 		<div class="col-md-2">
@@ -31,7 +31,7 @@
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.tipoSolicitud}" maxlength="240">
+				<input id="address.surname" name="tipoSolicitud" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.tipoSolicitud}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -42,7 +42,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.fechNotif}" maxlength="240">
+				<input id="address.surname" name="fechNotif" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.fechNotif}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -52,7 +52,7 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.vigenDesde}" maxlength="240">
+			<input id="address.surname" name="vigenDesde" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.vigenDesde}" maxlength="240">
 		</div>
 	</div>
 </div>
@@ -63,7 +63,7 @@
 	</div>
 	<div class="col-md-2">
 		<div class="form-group ">
-			<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.vigenHasta}" maxlength="240">
+			<input id="address.surname" name="vigenHasta" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.vigenHasta}" maxlength="240">
 		</div>
 	</div>
 </div>

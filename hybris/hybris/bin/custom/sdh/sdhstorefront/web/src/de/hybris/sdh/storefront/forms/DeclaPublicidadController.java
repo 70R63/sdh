@@ -21,7 +21,7 @@ public class DeclaPublicidadController
 	private String numresol;
 	private String fecresol;
 	private String fechnotif;
-	private String OrValla;
+	private String orValla;
 	private String luginst;
 	private String basegrav;
 	private String opuso;
@@ -34,15 +34,68 @@ public class DeclaPublicidadController
 	private String numide;
 	private String name;
 	private String refe;
-
+	private String placa;
+	private String direccion;
 
 	private String vigenDesde;
 	private String vigenHasta;
 
 	private InfoDeclaraPubli infoDeclara;
 	private List<DetallePubli> detalle;
+	private PublicidadExteriorCatalogos catalogos;
 
 
+
+	/**
+	 * @return the catalogos
+	 */
+	public PublicidadExteriorCatalogos getCatalogos()
+	{
+		return catalogos;
+	}
+
+	/**
+	 * @param catalogos
+	 *           the catalogos to set
+	 */
+	public void setCatalogos(final PublicidadExteriorCatalogos catalogos)
+	{
+		this.catalogos = catalogos;
+	}
+
+	/**
+	 * @return the placa
+	 */
+	public String getPlaca()
+	{
+		return placa;
+	}
+
+	/**
+	 * @param placa
+	 *           the placa to set
+	 */
+	public void setPlaca(final String placa)
+	{
+		this.placa = placa;
+	}
+
+	/**
+	 * @return the direccion
+	 */
+	public String getDireccion()
+	{
+		return direccion;
+	}
+
+	/**
+	 * @param direccion
+	 *           the direccion to set
+	 */
+	public void setDireccion(final String direccion)
+	{
+		this.direccion = direccion;
+	}
 
 	/**
 	 * @return the numBP
@@ -148,12 +201,14 @@ public class DeclaPublicidadController
 		this.fechnotif = fechnotif;
 	}
 
+
+
 	/**
 	 * @return the orValla
 	 */
 	public String getOrValla()
 	{
-		return OrValla;
+		return orValla;
 	}
 
 	/**
@@ -162,7 +217,7 @@ public class DeclaPublicidadController
 	 */
 	public void setOrValla(final String orValla)
 	{
-		OrValla = orValla;
+		this.orValla = orValla;
 	}
 
 	/**

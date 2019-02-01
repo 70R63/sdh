@@ -6,13 +6,18 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="publicidadExterior"
 	tagdir="/WEB-INF/tags/responsive/publicidadExterior"%>
+	
 
 <template:page pageTitle="${pageTitle}">
 
 	<div class="container">
 
 		<publicidadExterior:publicidadExteriorTable />
-		
+		<!--publicidadExterior:publicidadExteriorDetail />
+		<publicidadExterior:publicidadExteriorAvisos />
+		<publicidadExterior:publicidadExteriorConvencional />
+		<publicidadExterior:publicidadExteriorVehiculos />
+		<publicidadExterior:publicidadExteriorTubular />-->
 
 		<div id="idAvisos" style="display: none;">
 			<publicidadExterior:publicidadExteriorDetail />
@@ -30,10 +35,6 @@
 			<publicidadExterior:publicidadExteriorDetail />
 			<publicidadExterior:publicidadExteriorTubular />
 		</div>
-
-
-
-
 	</div>
 </template:page>
 
@@ -82,42 +83,31 @@
 <script>
 	function funcionUno(valor) {	
 		var x = document.getElementsByName("action")[valor].value;		
-		document.getElementById("inIdVariable").value = x.split(',')[1];
-		document.getElementById("inIdResolucion").value = x.split(',')[0];
-	}
-	$("#anoGravable").on('change', function() {
-		document.getElementById("inIdAnio").value = this.value;
-		});
+		document.getElementById("inIdVariable").value = x;
+		
+		var temp = new Array();
+		temp = x.split(",");
+		document.getElementById("resol").value = temp[0];
+		document.getElementById("tValla").value = temp[1];	    
+	}	
 </script>
 
 
 <script>
-	function functionAjax(){
-	    $.ajax({
-	      type : 'POST',
-	      url : "${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle",
-	      data : {"numResolu": $("#inIdResolucion").val(), "anoGravable": $("#inIdAnio").val()},
-	      //dataType: 'json',
-	      success : function(data) {
-	        console.log(data);
-	        
-	        alert('Funciona el servicio : ' + data);
-	        functionDos();
-	        $( this ).html(data);
-	      },
-	      error : function(jqXHR, textStatus, errorThrown) {
-	        alert('Error ' + jqXHR +textStatus + errorThrown);
-	      }
-	    });
-	}
-	
 	function functionDos() {
-		var x = document.getElementById("inIdVariable").value;
+	
+		var x = document.getElementById("prueba").value;<!--inIdVariable-->
+		alert(x);
 		var a = document.getElementById('idAvisos');
 		var b = document.getElementById('idConvencional');
 		var c = document.getElementById('idVehicular');
 		var d = document.getElementById('idTubular');
-
+		
+		if (x == "VALLA VEHÍCULOS")
+		{
+		 x = "VALLA VEHICULOS";
+		} else {x = x}
+alert(x);
 		if (x == "VALLA AVISOS") {
 			a.style.display = 'block';
 			b.style.display = 'none';
@@ -129,7 +119,7 @@
 			c.style.display = 'none';
 			d.style.display = 'none';
 
-		} else if (x == "VALLA VEHÍCULOS") {
+		} else if (x == "prueba") {
 			c.style.display = 'block';
 			a.style.display = 'none';
 			b.style.display = 'none';
@@ -140,46 +130,26 @@
 			b.style.display = 'none';
 			c.style.display = 'none';
 		} else {
-			alert("ERROR");
+			alert("error");
 		}
 	}
 </script>
 
 <script>
 	function parametrosURL() {		
-		var x = document.getElementById("inIdAnio").value;
+		var x =  $("#anioGravable").val();
+		var y = document.getElementById("resol").value;
+		console.log("${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion?anio="+ x + "numResolu="+ y);
 		location.href="/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion?anio="+ x;
+		
 	}
 </script>
 
 
 
 <script type="text/javascript">
-	function ShowSelected(selectObject)
-	{	 
-	  var value = selectObject.value;   
-	  document.getElementById("inIdAnio").value = value;
-	  
+	$("#anio").change(function() {
+	  $("#anioGravable").val(this.value);
+	});
 	
-	}
 </script>
-
-<script>
-	function functionAjaxDec(){
-	    $.ajax({
-	     // type : 'GET',
-	      url : "/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion",
-	      data : {"numResolu": $('input:radio[name=action]:checked').val().split(',')[0], "anoGravable": $("#anoGravable").val()},
-	      //dataType: 'json',
-	      success : function(data) {
-	        console.log(data);
-	        alert('Funciona el servicio : ' + data);
-	      },
-	      error : function(jqXHR, textStatus, errorThrown) {
-	        alert('Error ' + jqXHR +textStatus + errorThrown);
-	      }
-	    });
-	}
-
-</script>
-
