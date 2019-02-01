@@ -22,7 +22,8 @@
 </div>
 
  <form:form action="/sdhstorefront/es/contribuyentes/mirit/certificacion" method="post" commandName="miRitCertificacionForm" >
- 
+    
+    <!--  
 	<div class="row">	
 	 	<div class="col-md-3">
 			<label class="inputlabelnew"><spring:theme code="mirit.certificacion.textImp" /></label>
@@ -40,8 +41,10 @@
 			</button>
 		</div>
 	</div>
+	-->
 	
-	<div id="myDIV"  style="display:none"> 
+	
+	<!-- <div id="myDIV"  style="display:none">  --> 
 		<div class="row">				
 			<div class="col-md-3">
 				<label class="inputlabelnew"><spring:theme code="mirit.certificacion.tituloImpuesto" /></label>
@@ -67,7 +70,7 @@
     		<input type="radio" name="tipoImp" id="tipoImp" value="6" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
     	</c:if>		
     	
-	</div>    
+	 <!-- </div> -->    
     
   </form:form>
 
