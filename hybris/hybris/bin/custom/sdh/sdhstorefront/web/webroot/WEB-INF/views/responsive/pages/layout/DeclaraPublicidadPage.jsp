@@ -13,8 +13,9 @@
 	<div class="container">
 		<div class="account-section-content">
 			<div class="account-section-form">
-<form:form action="DeclaraPublicidadPage" method="post"
-					commandName="declaraPublicidadpage">
+				<form:form
+					action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion"
+					method="post" commandName="declaPublicidadForm">
 					<DeclaraPubli:DecPuGeneral />
 					<DeclaraPubli:DecPuInfoValla />
 					<DeclaraPubli:DecPuTotalPag />
@@ -26,9 +27,7 @@
 	</div>
 </div>
 
-<!--<form:form
-					action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion"
-					method="post" commandName="declaPublicidadForm">-->
+
 
 <script type="text/javascript">
 	function ShowSelected(selectObject) {

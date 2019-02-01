@@ -10,6 +10,7 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
+
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -262,7 +263,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 	//GRD
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.POST)
 	//@RequireHardLogIn
-	public String publicidadExternaDetail(@ModelAttribute("publicidadForm")
+	public String publicidadExternaDetail(@ModelAttribute("publicidadFormReq")
 	final PublicidadForm miRitCertificacionFormDatos, final Model model, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
@@ -282,13 +283,6 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		{
 			String tipovalla = miRitCertificacionFormDatos.getTipoValla();
 
-			/*
-			 * String tipoV = " VALLA VEHICULOS"; tipovalla = Normalizer.normalize(tipovalla, Normalizer.Form.NFD);
-			 * tipovalla = tipovalla.replaceAll("[\\p{VALLAVEHICULOS}]", "");
-			 *
-			 * System.out.println("_________________________________"); System.out.println(tipovalla);
-			 * System.out.println("_________________________________");
-			 */
 			final PublicidadForm publicidadForm = new PublicidadForm();
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -681,15 +675,15 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
-		return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
-		//return getViewForPage(model);
+		//return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
+		return getViewForPage(model);
 	}
 
 
 
 
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior")
-	public String publicidadExterna(@ModelAttribute("publicidadForm")
+	public String publicidadExterna(@ModelAttribute("publicidadFormReq")
 	final PublicidadForm dataform1, final Model model) throws CMSItemNotFoundException
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();

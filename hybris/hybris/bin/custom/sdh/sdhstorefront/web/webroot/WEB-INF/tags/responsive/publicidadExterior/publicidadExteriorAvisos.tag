@@ -7,6 +7,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div id="divAvisos" style="display: none;">
 		<div class="row">
 			<div class="headline">
 				<h3>
@@ -116,4 +117,5 @@
 					<input id="address.surname" name="numFracciones" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.numFracciones}" maxlength="240">
 				</div>
 			</div>			
+		</div>
 		</div>

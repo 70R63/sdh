@@ -25,7 +25,7 @@
 
 <br>
 
-<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadForm">
+<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq">
 
 	<div class="col-md-6 col-md-offset-3">
 		<div class="table-responsive">
@@ -53,10 +53,9 @@
 			
 			<input name="numResolu" type="hidden" id="resol"/>
 			<input name="tipoValla" type="hidden" id="tValla"/>
-			<input name="anioGravable" type="hidden" id="anioGravable"/>
-            
-		  
-			<div id="divIdVariable" style= "display:none !important; margin: 0; min-height: 0;" > 
+			<input id="inIdVariable" type="hidden" value="">
+			
+			  <div id="divIdVariable" style= "display:none !important; margin: 0; min-height: 0;" > 
 				<input id="inIdVariable" value="">
 			</div>
 
@@ -67,6 +66,7 @@
 			<div id="anoGravable" style="display:none !important; margin: 0; min-height: 0;">
 				<input id="tValla" value="">
 			</div>
+			
 		</div>
 	</div>
 
@@ -109,21 +109,25 @@
 			<label class="inputlabelnew"><spring:theme	code="publicidad.exterior.detail.selectYear" /></label>
 		</div>
 		<div class="col-md-1">
-			<select id="anio" class="inputdropdown" name="anoGravable">
+			<select id="anio" class="inputdropdown" name="anoGravable" onchange="ShowSelected(this)">
 				<option value="0">Selecciona un año</option>
 				<option value="2019">2019</option>
 				<option value="2018">2018</option>
 				<option value="2017">2017</option>
 				<option value="2016">2016</option>
+
 			</select>
 		</div>
 		
 		<div class="col-md-1 col-md-offset-1">
 			<div>		
-				<button  type="submit" class = "botton" onclick="functionDos()">
+				<button  type="submit" class = "botton">
 					<spring:theme code="publicidad.exterior.detail.search" />
 				</button>
 			</div>
 		</div>
 	</div>
 </form:form>
+
+
+
