@@ -265,7 +265,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.POST)
 	//@RequireHardLogIn
 	public String publicidadExternaDetail(final Model model, final RedirectAttributes redirectModel,
-			@ModelAttribute("publicidadForm")
+			@ModelAttribute("publicidadFormReq")
 			final PublicidadForm miRitCertificacionFormDatos) throws CMSItemNotFoundException
 	{
 

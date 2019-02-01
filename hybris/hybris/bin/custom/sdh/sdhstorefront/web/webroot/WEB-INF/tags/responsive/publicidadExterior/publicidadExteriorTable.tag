@@ -9,115 +9,109 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<spring:url
-	value="/calculo"
-	var="CalculodeclaracionUrl" htmlEscape="false" />
+<spring:url	value="/calculo" var="CalculodeclaracionUrl" htmlEscape="false" />
 
 
 <div class="row">
 	<div class="avisoheadline">
 		<h3>
-			<span class="p"><spring:theme code="publicidad.exterior.title"
-					text="Publicidad Exterior" /></span>
+			<span class="p"><spring:theme code="publicidad.exterior.title"	text="Publicidad Exterior" /></span>
 		</h3>
 	</div>
 	<p class="avisobody">
 		<spring:theme code="publicidad.exterior.description" />
 	</p>
-
 </div>
 
-<br />
+<br>
 
+<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq">
 
-<div class="col-md-6 col-md-offset-3">
-	<div class="table-responsive">
-		<table class="table" id="example">
-			<thead>
-				<tr>
-					<th><label class="control-label " for=""><spring:theme
-								code="publicidad.exterior.resolutionnumber" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="publicidad.exterior.typefence" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="publicidad.exterior.select" /></label></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach varStatus="loop" items="${publicidadForm.publicidadExt}"
-					var="eachPubExtTax">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="table-responsive">
+			<table class="table" id="example">
+				<thead>
 					<tr>
-						<td><c:out value="${eachPubExtTax.numResolu}"></c:out></td>
-						<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
-						<td><input id="action"
-							style="visibility: visible !important; margin: 0; min-height: 0;"
-							name="action" onchange="funcionUno(${loop.index})" type="radio"
-							value="(${eachPubExtTax.tipoValla}, ${eachPubExtTax.numResolu})"></td>
+						<th><label class="control-label " for=""><spring:theme code="publicidad.exterior.resolutionnumber" /></label></th>
+						<th><label class="control-label " for=""> <spring:theme code="publicidad.exterior.typefence" /></label></th>
+						<th><label class="control-label " for=""> <spring:theme code="publicidad.exterior.select" /></label></th>
 					</tr>
-				</c:forEach>
+				</thead>
+				<tbody>
+					<c:forEach varStatus="loop" items="${publicidadForm.publicidadExt}"	var="eachPubExtTax">
+						<tr>
+							<td><c:out value="${eachPubExtTax.numResolu}"></c:out></td>
+							<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
+							<td><input id="action"	style="visibility: visible !important; margin: 0; min-height: 0;"
+								name="action" onchange="funcionUno(${loop.index})" type="radio"
+								value="${eachPubExtTax.numResolu}, ${eachPubExtTax.tipoValla}"></td>
+								
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			
+			<input name="numResolu" type="hidden" id="resol"/>
+			<input name="tipoValla" type="hidden" id="tValla"/>
+			<input id="inIdVariable" type="hidden" value="">
+			
+			<!-- 
+			<div id="divIdVariable" style= "visibility: visible !important; margin: 0; min-height: 0;" > 
+				<input id="inIdVariable" value="">
+			</div>
 
-			</tbody>
-		</table>
-		<div id="divIdVariable" style= "visibility: visible !important; margin: 0; min-height: 0;" > <!-- "display: none;" -->
-			<input id="inIdVariable" value="">
-		</div>
+			<div id="numResolu" style="visibility: visible !important; margin: 0; min-height: 0;">
+				<input id="resol" value="">
+			</div>
 
-		<div id="numResolu" style="visibility: visible !important; margin: 0; min-height: 0;">
-			<input id="numResolu" value="">
-		</div>
-
-		<div id="anoGravable" style="visibility: visible !important; margin: 0; min-height: 0;">
-			<input id="anoGravable" value="">
-		</div>
-	</div>
-</div>
-
-
-
-<div class="row">
-
-	<div class="col-md-2 col-md-offset-5 center">
-		<div class="boton" type="button" onclick="parametrosURL()">
-			<spring:theme code="publicidad.exterior.declarationpresent" />
-		</div>
-	</div>
-</div>
-
-<div class="row">
-
-	<div class="col-md-2 col-md-offset-5 center">
-		<div class="boton" type="button">
-			<spring:theme code="publicidad.exterior.rop" />
-		</div>
-	</div>
-</div>
-<div class="row">
-
-	<div class="col-md-2 col-md-offset-5 center">
-		<div class="boton" type="button">
-			<spring:theme code="publicidad.exterior.payonline" />
+			<div id="anoGravable" style="visibility: visible !important; margin: 0; min-height: 0;">
+				<input id="tValla" value="">
+			</div>
+			 -->
+			
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="headline">
-		<h3>
-			<span class="cintillo col-md-10"><spring:theme
-					code="publicidad.exterior.detail.outdooradvertising" /></span>
-		</h3>
+
+
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-5 center">
+			<div class="boton"  onclick="parametrosURL()">
+				<spring:theme code="publicidad.exterior.declarationpresent" />
+			</div>
+		</div>
 	</div>
-</div>
 
+	<div class="row">
+		<div class="col-md-2 col-md-offset-5 center">
+			<div class="boton">
+				<spring:theme code="publicidad.exterior.rop" />
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-2 col-md-offset-5 center">
+			<div class="boton">
+				<spring:theme code="publicidad.exterior.payonline" />
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="headline">
+			<h3>
+				<span class="cintillo col-md-10"><spring:theme	code="publicidad.exterior.detail.outdooradvertising" /></span>
+			</h3>
+		</div>
+	</div>
 
-<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadForm">
 	<div class="row">
 		<div class="col-md-4">
-			<label class="inputlabelnew"><spring:theme
-					code="publicidad.exterior.detail.selectYear" /></label>
+			<label class="inputlabelnew"><spring:theme	code="publicidad.exterior.detail.selectYear" /></label>
 		</div>
 		<div class="col-md-1">
-			<select id="anio" class="inputdropdown"
-				onchange="ShowSelected(this);">
+			<select id="anio" class="inputdropdown" name="anoGravable" onchange="ShowSelected(this);">
 				<option value="0">Selecciona un año</option>
 				<option value="2019">2019</option>
 				<option value="2018">2018</option>
@@ -125,12 +119,12 @@
 				<option value="2016">2016</option>
 			</select>
 		</div>
+		
 		<div class="col-md-1 col-md-offset-1">
-			<div>
-				
-					<button  type="submit" class = "botton">
-						<spring:theme code="publicidad.exterior.detail.search" />
-					</button>
+			<div>		
+				<button  type="submit" class = "botton">
+					<spring:theme code="publicidad.exterior.detail.search" />
+				</button>
 			</div>
 		</div>
 	</div>

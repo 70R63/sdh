@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
+	<div id="divTubular"  style="display:none">
 		<div class="row">
 			<div class="headline">
 				<h3>
@@ -126,7 +126,7 @@
 				</div>
 			</div>	
 		</div>
-		
+	</div>		
 
 		
 		

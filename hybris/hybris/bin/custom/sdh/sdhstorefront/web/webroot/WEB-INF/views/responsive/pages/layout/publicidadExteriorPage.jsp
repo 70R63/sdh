@@ -7,39 +7,28 @@
 <%@ taglib prefix="publicidadExterior"
 	tagdir="/WEB-INF/tags/responsive/publicidadExterior"%>
 
+<style>
+#divAvisos { }
+#divConvencional { }
+#divVehiculos { }
+#divTubular { }
+</style>
+
+
+
 <template:page pageTitle="${pageTitle}">
 
 	<div class="container">
-
 		<publicidadExterior:publicidadExteriorTable />
 		<publicidadExterior:publicidadExteriorDetail />
 		<publicidadExterior:publicidadExteriorAvisos />
 		<publicidadExterior:publicidadExteriorConvencional />
 		<publicidadExterior:publicidadExteriorVehiculos />
 		<publicidadExterior:publicidadExteriorTubular />
-
-		<!-- div id="idAvisos" style="display: none;">
-			<publicidadExterior:publicidadExteriorDetail />
-			<publicidadExterior:publicidadExteriorAvisos />
-		</div>
-		<div id="idConvencional" style="display: none;">
-			<publicidadExterior:publicidadExteriorDetail />
-			<publicidadExterior:publicidadExteriorConvencional />
-		</div>
-		<div id="idVehicular" style="display: none;">
-			<publicidadExterior:publicidadExteriorDetail />
-			<publicidadExterior:publicidadExteriorVehiculos />
-		</div>
-		<div id="idTubular" style="display: none;">
-			<publicidadExterior:publicidadExteriorDetail />
-			<publicidadExterior:publicidadExteriorTubular />
-		</div-->
-
-
-
-
 	</div>
 </template:page>
+
+
 
 <script type="text/javascript">
 	document.onreadystatechange = function() {
@@ -84,55 +73,58 @@
 </script>
 
 <script>
-	function funcionUno(valor) {	
-		var x = document.getElementsByName("action")[valor].value;		
+	function funcionUno(valor) {
+		
+		debugger;
+		
+		var x = document.getElementsByName("action")[valor].value;
 		document.getElementById("inIdVariable").value = x;
 		alert(x);
-
-				
-	}
+		
+		var temp = new Array();
+		temp = x.split(",");
+		document.getElementById("resol").value = temp[0];
+		document.getElementById("tValla").value = temp[1];
+		
+	    
+		var avisos       = document.getElementById("divAvisos");
+	    var convencional = document.getElementById("divConvencional");
+	    var vehiculos    = document.getElementById("divVehiculos");
+	    var tubular      = document.getElementById("divTubular");
+	    
+	    
+	    if(temp[1].includes("VALLA AVISOS")){
+	    	avisos.style.display = "block";	  
+	    }
+	    else{
+	    	avisos.style.display = "none";
+	    }
+	    
+	    if(temp[1].includes("VALLA CONVENCIONAL")){
+	    	convencional.style.display = "block";	  
+	    }
+	    else{
+	    	convencional.style.display = "none";
+	    }
+	    
+	    if(temp[1].includes("VALLA VEHÍCULOS")){
+	    	vehiculos.style.display = "block";	  
+	    }
+	    else{
+	    	vehiculos.style.display = "none";
+	    }
+	    
+	    if(temp[1].includes("VALLA TUBULAR")){
+	    	tubular.style.display = "block";	  
+	    }
+	    else{
+	    	tubular.style.display = "none";
+	    }
+	}	
 </script>
 
 
-<script>
-	function functionDos() {
-		if (x == "VALLA VEHÍCULOS")
-			{
-			 x = "VALLA VEHICULOS";
-			} else {x = x}
-		var x = document.getElementById("inIdVariable").value;
-		alert(x);
-		var a = document.getElementById('idAvisos');
-		var b = document.getElementById('idConvencional');
-		var c = document.getElementById('idVehicular');
-		var d = document.getElementById('idTubular');
 
-		if (x == "VALLA AVISOS") {
-			a.style.display = 'block';
-			b.style.display = 'none';
-			c.style.display = 'none';
-			d.style.display = 'none';
-		} else if (x == "VALLA CONVENCIONAL") {
-			b.style.display = 'block';
-			a.style.display = 'none';
-			c.style.display = 'none';
-			d.style.display = 'none';
-
-		} else if (x == "VALLA VEHICULOS") {
-			c.style.display = 'block';
-			a.style.display = 'none';
-			b.style.display = 'none';
-			d.style.display = 'none';
-		} else if (x == "VALLA TUBULAR") {
-			d.style.display = 'block';
-			a.style.display = 'none';
-			b.style.display = 'none';
-			c.style.display = 'none';
-		} else {
-			alert("error");
-		}
-	}
-</script>
 
 <script>
 	function parametrosURL() {		
@@ -140,7 +132,6 @@
 		location.href="/sdhstorefront/es/contribuyentes/publicidadexterior/declaracion?anio="+ x;
 	}
 </script>
-
 
 
 <script type="text/javascript">
