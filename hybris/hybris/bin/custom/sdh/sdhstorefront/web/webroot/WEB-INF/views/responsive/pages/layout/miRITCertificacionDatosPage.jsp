@@ -9,6 +9,13 @@
 
 <style>
 #myDIV { }
+
+input[type=radio] {
+    border: 0px;
+    width: 15pt;
+    height: 15pt;
+    vertical-align: -15pt;
+}
 </style>
 
 <div class="row">
@@ -50,6 +57,10 @@
 				<label class="inputlabelnew"><spring:theme code="mirit.certificacion.tituloImpuesto" /></label>
 			</div>
 		</div>
+        
+        <br>
+   		<br>
+        
 		
 		<c:if test="${miRitCertificacionForm.bPredial == 'X'}">
 			<input type="radio" name="tipoImp" id="tipoImp" value="1" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
