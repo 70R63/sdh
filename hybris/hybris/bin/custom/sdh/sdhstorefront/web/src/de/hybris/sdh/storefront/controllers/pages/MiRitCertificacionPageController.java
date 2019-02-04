@@ -37,8 +37,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
 
-	private static final String TIPO_CERTIFICACION = "1";
-	private static final String TIPO_IMPUESTO = "1";
+	private static final String TIPO_CERTIFICACION = "";
 
 	//CMS PAGES
 	private static final String MI_RIT_CERTIFICACION_CMS_PAGE = "miRITCertificacionPage";
@@ -66,7 +65,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 		certificaRITRequest.setNumBP(customerModel.getNumBP());
 
-		certificaRITRequest.setTipoCert(miRitCertificacionFormDatos.getTipoCert());
+		certificaRITRequest.setTipoCert(TIPO_CERTIFICACION);
 		certificaRITRequest.setTipoImp(miRitCertificacionFormDatos.getTipoImp());
 
 		try

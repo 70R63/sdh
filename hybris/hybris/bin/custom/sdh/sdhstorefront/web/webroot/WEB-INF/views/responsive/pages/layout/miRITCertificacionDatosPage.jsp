@@ -59,26 +59,32 @@ input[type=radio] {
 		</div>
         
         <br>
+		    <div class="row">	
+				<div class="col-md-2 ">
+					<button class="boton btn-secondary " type="submit" >
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+				</div>
+			</div>
    		<br>
         
-		
 		<c:if test="${miRitCertificacionForm.bPredial == 'X'}">
-			<input type="radio" name="tipoImp" id="tipoImp" value="1" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
+			<input type="radio" name="tipoImp" id="tipoImp" value="01" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
 		</c:if>
 		<c:if test="${miRitCertificacionForm.bVehicular == 'X'}">
-			<input type="radio" name="tipoImp" id="tipoImp" value="2" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
+			<input type="radio" name="tipoImp" id="tipoImp" value="02" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
 		</c:if>	
 		<c:if test="${miRitCertificacionForm.bIca == 'X'}">
-			<input type="radio" name="tipoImp" id="tipoImp" value="3" style="visibility: visible"><spring:theme code="mirit.certificacion.opICA"/><br>	
+			<input type="radio" name="tipoImp" id="tipoImp" value="03" style="visibility: visible"><spring:theme code="mirit.certificacion.opICA"/><br>	
     	</c:if>
     	<c:if test="${miRitCertificacionForm.bPublicidadExt == 'X'}">
-    		<input type="radio" name="tipoImp" id="tipoImp" value="7" style="visibility: visible"><spring:theme code="mirit.certificacion.opPublicidadExterior"/><br>
+    		<input type="radio" name="tipoImp" id="tipoImp" value="07" style="visibility: visible"><spring:theme code="mirit.certificacion.opPublicidadExterior"/><br>
     	</c:if>
     	<c:if test="${miRitCertificacionForm.bSobreGasolina == 'X'}">
-    		<input type="radio" name="tipoImp" id="tipoImp" value="5" style="visibility: visible"><spring:theme code="mirit.certificacion.opSobretasaGasolina"/><br>
+    		<input type="radio" name="tipoImp" id="tipoImp" value="05" style="visibility: visible"><spring:theme code="mirit.certificacion.opSobretasaGasolina"/><br>
     	</c:if>	
     	<c:if test="${miRitCertificacionForm.bDelineacionUrbana == 'X'}">
-    		<input type="radio" name="tipoImp" id="tipoImp" value="6" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
+    		<input type="radio" name="tipoImp" id="tipoImp" value="06" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
     	</c:if>		
     	
 	 <!-- </div> -->    
