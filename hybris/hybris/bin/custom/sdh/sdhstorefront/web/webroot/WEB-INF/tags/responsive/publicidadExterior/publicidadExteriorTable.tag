@@ -25,7 +25,7 @@
 
 <br>
 
-<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq">
+<!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq"> -->
 
 	<div class="col-md-6 col-md-offset-3">
 		<div class="table-responsive">
@@ -74,11 +74,13 @@
 
 	<div class="row">
 		<div class="col-md-2 col-md-offset-5 center">
-			<div class="boton"  onclick="parametrosURL()">
-				<spring:theme code="publicidad.exterior.declarationpresent" />
+			
+			<sf:button action="" class="boton" type="submit">
+			<spring:theme code="publicidad.exterior.declarationpresent" />
+		</sf:button> 
 			</div>
 		</div>
-	</div>
+
 
 	<div class="row">
 		<div class="col-md-2 col-md-offset-5 center">
@@ -121,13 +123,22 @@
 		
 		<div class="col-md-1 col-md-offset-1">
 			<div>		
-				<button  type="submit" class = "botton">
+		<!-- 	<sf:form action="/sdhstorefront/contribuyentes2/publicidadexterior/detalle" id="detalle"  method="POST">
+			<button action="/sdhstorefront/contribuyentes2/publicidadexterior/detalle" type="submit" class = "botton">
 					<spring:theme code="publicidad.exterior.detail.search" />
 				</button>
+			</sf:form> -->
+			
+			<form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadForm">
+				<button  type="submit" class = "botton"> <!-- /sdhstorefront/es onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
+					<spring:theme code="publicidad.exterior.detail.search" />
+				</button>
+			</form:form>
+				
 			</div>
 		</div>
 	</div>
-</form:form>
+<!-- </form:form> -->
 
 
 

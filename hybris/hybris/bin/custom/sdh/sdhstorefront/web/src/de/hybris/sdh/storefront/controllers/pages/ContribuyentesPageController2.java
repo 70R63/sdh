@@ -264,7 +264,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.POST)
 	//@RequireHardLogIn
 	public String publicidadExternaDetail(@ModelAttribute("publicidadFormReq")
-	final PublicidadForm miRitCertificacionFormDatos, final Model model, final RedirectAttributes redirectModel)
+	final PublicidadForm publicidadForm, final Model model, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
 
@@ -273,17 +273,17 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 
 		detallePublicidadRequest.setNumBP("0000000546");
-		detallePublicidadRequest.setNumResolu(miRitCertificacionFormDatos.getNumResolu());
-		detallePublicidadRequest.setAnoGravable(miRitCertificacionFormDatos.getAnoGravable());
+		detallePublicidadRequest.setNumResolu(publicidadForm.getNumResolu());
+		detallePublicidadRequest.setAnoGravable(publicidadForm.getAnoGravable());
 
 		//detallePublicidadRequest.setNumBP("0000000546");
 		//detallePublicidadRequest.setNumResolu("RES 096");
 		//detallePublicidadRequest.setAnoGravable("2018");
 		try
 		{
-			String tipovalla = miRitCertificacionFormDatos.getTipoValla();
+			String tipovalla = publicidadForm.getTipoValla();
 
-			final PublicidadForm publicidadForm = new PublicidadForm();
+			//final PublicidadForm publicidadForm = new PublicidadForm();
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -672,11 +672,11 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		//model.addAttribute("showDetail", true);
 		//	model.addAttribute("action", request.getParameter("action"));
 		//System.out.println("action: " + request.getParameter("action"));
-		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
-		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
-		//return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
-		return getViewForPage(model);
+		//storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		//setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		//updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
+		//return getViewForPage(model);
 	}
 
 
