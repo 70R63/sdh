@@ -4,7 +4,8 @@ ACC.mirit = {
 		    
 		    bindAddressData: function(){
 		    	
-		    	
+		    	if ( typeof(countries) == 'undefined' )
+		    		return;
 		    	
 		    	//bind countries data
 		    	$('#countryDireccionNotificacion')
@@ -121,8 +122,18 @@ ACC.mirit = {
 		    	$(o).html("SELECCIONAR");
 		    	$("#postalCodeDireccionNotificacion").append(o);
 		    	
+		    	var munId ="";
+		    	
+		    	municipios.forEach(function (eachMun){
+		    		
+		    		if(eachMun.desc == ACC.addressNotificationMun){
+		    			munId=eachMun.mun;
+		    		}
+		    		
+		    	});
+		    	
 		    	cps.forEach(function (eachCP) {
-		    		if(eachCP.mun == municipios.filter(item => item.desc == ACC.addressNotificationMun)[0].mun)
+		    		if(eachCP.mun == munId)
 		    		{
 		    	    	var o = new Option( eachCP.cp,eachCP.cp);
 		    	    	/// jquerify the DOM object 'o' so we can use the html method
@@ -143,8 +154,19 @@ ACC.mirit = {
 		    	$(o).html("SELECCIONAR");
 		    	$("#postalCodeDireccionContacto").append(o);
 		    	
+		    	munId ="";
+		    	
+		    	municipios.forEach(function (eachMun){
+		    		
+		    		if(eachMun.desc == ACC.addressContactoMun){
+		    			munId=eachMun.mun;
+		    		}
+		    		
+		    	});
+		    	
+		    	
 		    	cps.forEach(function (eachCP) {
-		    		if(eachCP.mun == municipios.filter(item => item.desc == ACC.addressContactoMun)[0].mun)
+		    		if(eachCP.mun == munId)
 		    		{
 		    	    	var o = new Option( eachCP.cp,eachCP.cp);
 		    	    	/// jquerify the DOM object 'o' so we can use the html method
