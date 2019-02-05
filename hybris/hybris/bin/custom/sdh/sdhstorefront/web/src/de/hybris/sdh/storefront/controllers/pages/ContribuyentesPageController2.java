@@ -53,7 +53,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-
 /**
  * Controller for home page 2
  */
