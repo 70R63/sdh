@@ -8,15 +8,13 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<spring:url value="/calculo" var="CalculodeclaracionUrl"
-	htmlEscape="false" />
+<spring:url value="/calculo" var="CalculodeclaracionUrl" htmlEscape="false" />
 
 
 <div class="row">
 	<div class="avisoheadline">
 		<h3>
-			<span class="p"><spring:theme code="publicidad.exterior.title"
-					text="Publicidad Exterior" /></span>
+			<span class="p"><spring:theme code="publicidad.exterior.title"	text="Publicidad Exterior" /></span>
 		</h3>
 	</div>
 	<p class="avisobody">
@@ -76,7 +74,6 @@
 		</div>
 
 	</div>
-</div>
 
 
 
@@ -90,8 +87,6 @@
 			<spring:theme code="publicidad.exterior.declarationpresent" />
 		</sf:button>
 	</div>
-</div>
-
 
 <div class="row">
 	<div class="col-md-2 col-md-offset-5 center">

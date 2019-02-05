@@ -289,9 +289,15 @@ public class ContribuyentesPageController2 extends AbstractPageController
 	//GRD
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.GET)
 	//@RequireHardLogIn
+<<<<<<< HEAD
 	public String publicidadExternaDetail(@ModelAttribute("publicidadInfo")
 	final PublicidadForm publicidadInfo, @ModelAttribute("publicidadFormReq")
 	final PublicidadForm publicidadForm, final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+=======
+	public String publicidadExternaDetail(final Model model, final RedirectAttributes redirectModel,
+			@ModelAttribute("publicidadFormReq")
+			final PublicidadForm miRitCertificacionFormDatos) throws CMSItemNotFoundException
+>>>>>>> dev
 	{
 
 
@@ -719,18 +725,27 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 
 
+<<<<<<< HEAD
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior", method = RequestMethod.GET)
 	public String publicidadExterna(final Model model, @ModelAttribute("publicidadFormReq")
 	final PublicidadForm dataform1) throws CMSItemNotFoundException
+=======
+	@RequestMapping(value = "/contribuyentes2/publicidadexterior")
+	public String publicidadExterna(final Model model) throws CMSItemNotFoundException
+>>>>>>> dev
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		//final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-		String numBP = "0000000546";
+<<<<<<< HEAD
+		final String numBP = "0000000546";
 		//		numBP = model.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
 
 		consultaContribuyenteBPRequest.setNumBP(numBP);
+=======
+		consultaContribuyenteBPRequest.setNumBP("0000000546");
+>>>>>>> dev
 
 
 		try
@@ -821,9 +836,9 @@ public class ContribuyentesPageController2 extends AbstractPageController
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
-		String numBP = "0000000546";
-		String anio = dataform1.getAnoGravable();
-		String numResolu = dataform1.getNumResolu();
+		final String numBP = "0000000546";
+		final String anio = dataform1.getAnoGravable();
+		final String numResolu = dataform1.getNumResolu();
 		//		numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
 
 		detallePublicidadRequest.setNumBP(numBP);

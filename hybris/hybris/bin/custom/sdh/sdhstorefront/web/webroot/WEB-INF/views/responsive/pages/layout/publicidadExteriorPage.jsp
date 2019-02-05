@@ -27,12 +27,12 @@
 		<publicidadExterior:publicidadExteriorConvencional />
 		<publicidadExterior:publicidadExteriorVehiculos />
 		<publicidadExterior:publicidadExteriorTubular />
-		
-
 	</div>
 	</sf:form>
 	
 </template:page>
+
+
 
 <script type="text/javascript">
 	document.onreadystatechange = function() {

@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class PublicidadForm
 {
+	private String tipoValla;
+
 	private String numBP;
 	private String numResolu;
 	private String anoGravable;
@@ -65,6 +67,25 @@ public class PublicidadForm
 	private String tipoVia;
 	private String tipoValla;
 
+
+
+
+	/**
+	 * @return the tipoValla
+	 */
+	public String getTipoValla()
+	{
+		return tipoValla;
+	}
+
+	/**
+	 * @param tipoValla
+	 *           the tipoValla to set
+	 */
+	public void setTipoValla(final String tipoValla)
+	{
+		this.tipoValla = tipoValla;
+	}
 
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 	private InfoDeclaraPubli infodeclara;
