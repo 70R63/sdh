@@ -288,15 +288,9 @@ public class ContribuyentesPageController2 extends AbstractPageController
 	//GRD
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior/detalle", method = RequestMethod.GET)
 	//@RequireHardLogIn
-<<<<<<< HEAD
 	public String publicidadExternaDetail(@ModelAttribute("publicidadInfo")
 	final PublicidadForm publicidadInfo, @ModelAttribute("publicidadFormReq")
 	final PublicidadForm publicidadForm, final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-=======
-	public String publicidadExternaDetail(final Model model, final RedirectAttributes redirectModel,
-			@ModelAttribute("publicidadFormReq")
-			final PublicidadForm miRitCertificacionFormDatos) throws CMSItemNotFoundException
->>>>>>> dev
 	{
 
 
@@ -724,27 +718,18 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 
 
-<<<<<<< HEAD
 	@RequestMapping(value = "/contribuyentes2/publicidadexterior", method = RequestMethod.GET)
 	public String publicidadExterna(final Model model, @ModelAttribute("publicidadFormReq")
 	final PublicidadForm dataform1) throws CMSItemNotFoundException
-=======
-	@RequestMapping(value = "/contribuyentes2/publicidadexterior")
-	public String publicidadExterna(final Model model) throws CMSItemNotFoundException
->>>>>>> dev
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		//final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-<<<<<<< HEAD
 		final String numBP = "0000000546";
 		//		numBP = model.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
 
 		consultaContribuyenteBPRequest.setNumBP(numBP);
-=======
-		consultaContribuyenteBPRequest.setNumBP("0000000546");
->>>>>>> dev
 
 
 		try
