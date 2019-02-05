@@ -17,7 +17,8 @@
 
 <template:page>
 
-<sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="POST" modelAttribute="publicidadForm" id="forma">
+<%-- <sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="POST" modelAttribute="publicidadForm" id="forma"> --%>
+<sf:form action="" method="POST" modelAttribute="publicidadForm" id="forma">
 	<div class="container">
 	
 	<publicidadExterior:publicidadExteriorTable />
