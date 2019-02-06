@@ -9,7 +9,7 @@
 
 <div class="row ">
 	<div class="col-md-8  text-right">
-		<button class="btn btn-primary btn-lg" type="button"><spring:theme code="mirit.buttons.certificate" /></button>
+		<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href = '<c:url value="/contribuyentes/mirit/certificacion" />'"><spring:theme code="mirit.buttons.certificate"  /></button>
 		<button class="btn btn-primary btn-lg" type="button" id="updateRitButton"><spring:theme code="mirit.buttons.update" /></button>
 	</div>
 </div>

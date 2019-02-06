@@ -75,27 +75,27 @@
 
 <div class="row">
 
-	<div class="col-md-2 col-md-offset-5 center">
-		<div class="boton" type="button" onclick="parametrosURL()">
+	<div class="col-md-3 col-md-offset-5 center">
+		<button class="boton" type="button" onclick="parametrosURL()">
 			<spring:theme code="publicidad.exterior.declarationpresent" />
-		</div>
+		</button>
 	</div>
 </div>
 
 <div class="row">
 
 	<div class="col-md-2 col-md-offset-5 center">
-		<div class="boton" type="button">
+		<button class="boton" type="button">
 			<spring:theme code="publicidad.exterior.rop" />
-		</div>
+		</button>
 	</div>
 </div>
 <div class="row">
 
 	<div class="col-md-2 col-md-offset-5 center">
-		<div class="boton" type="button">
+		<button class="boton" type="button">
 			<spring:theme code="publicidad.exterior.payonline" />
-		</div>
+		</button>
 	</div>
 </div>
 <div class="row">
@@ -125,13 +125,13 @@
 	</div>
 	<div class="col-md-1 col-md-offset-1">
 		<div>
-			<sf:form action="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
+			<!-- sf:form action="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
 			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
-			method="GET">
+			method="GET"-->
 				<button id="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle" type="submit" class = "botton" onclick="functionDos()"> <!-- onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
 					<spring:theme code="publicidad.exterior.detail.search" />
 				</button>
-			</sf:form>
+			<!-- /sf:form-->
 		</div>
 
 	</div>
