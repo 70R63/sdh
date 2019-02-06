@@ -94,8 +94,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-		final String numBP = "0000000546";
-		//		numBP = model.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
+		final String numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
 
 		consultaContribuyenteBPRequest.setNumBP(numBP);
 		try
@@ -152,8 +151,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
-		final String numBP = "0000000546";
-		//		numBP = customerModel.getNumBP();  //Pendiente descomentar para que se tome el BP que se logeo
+		final String numBP = customerModel.getNumBP();
 
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(publicidadInfo.getNumResolu());
@@ -490,7 +488,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						publicidadForm.setPeriodicidad(eachDetalle.getPeriodicidad());//repetido
 
 					}
-					else if (tipovalla.equals("VALLA TUBULAR"))
+					else if (tipovalla.equals("VALLA TUBULAR") || "Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
 					{
 
 						publicidadForm.setTipoElemento(eachDetalle.getTipoElemento());//repetido

@@ -61,11 +61,33 @@ ACC.publicidadexterior = {
 			            		$("#periodicidad").val(data.periodicidad);
 			            		$("#tipoServicio").val(data.tipoServicio);
 			            		$("#ubicacion").val(data.ubicacion);
+		            		}else if(tipoValla == "Valla Tubular Comercial")
+		            		{
+		            			$("#divTubular").show();
+			            		$(".inputtextnew").val();
+			            		
+			            		$("#fechResolu").val(data.fechResolu);
+			            		$("#fechNotif").val(data.fechNotif);
+			            		$("#tipoSolicitud").val(data.tipoSolicitud);
+			            		$("#vigenDesde").val(data.vigenDesde);
+			            		$("#vigenHasta").val(data.vigenHasta);
+			            		
+			            		$("#tipoElementoTubular").val(data.tipoElemento);
+			            		$("#direccionTubular").val(data.direccion);
+			            		$("#localidadTubular").val(data.localidad);
+			            		$("#codPostal").val(data.codPostal);
+			            		$("#licenciaConstruc").val(data.licenciaConstruc);
+			            		$("#vigLicenConstruc").val(data.vigLicenConstruc);
+			            		$("#ubicacionTubular").val(data.ubicacion);
+			            		$("#tipoVia").val(data.tipoVia);
+			            		$("#orientacion").val(data.orientacion);
+			            		$("#chipTubular").val(data.chip);
+			            		$("#matricula").val(data.matricula);
+			            		$("#numCarasTubular").val(data.numCaras);
 		            		}
 			            	
 			            },
 			            error: function () {
-			            	$("#textCertNom").html("No se puede certificar el nombre");
 			            }
 			        });
 		 	        
