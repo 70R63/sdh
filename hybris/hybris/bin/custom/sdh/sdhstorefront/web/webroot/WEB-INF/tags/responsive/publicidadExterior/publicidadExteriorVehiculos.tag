@@ -24,9 +24,9 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="tipoPublici" class="inputtextnew"
+				<input id="tipoPublici" name="tipoPublici" class="inputtextnew"
 					aria-required="true" type="text"
-					value="${publicidadForm.tipoPublici}" maxlength="240">
+					value="" maxlength="240">
 			</div>
 		</div>
 		<div class="col-md-3">
@@ -35,8 +35,8 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="modelo" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.modelo}"
+				<input id="modelo" name="modelo" class="inputtextnew"
+					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
 		</div>
@@ -48,9 +48,9 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="tipoElemento" class="inputtextnew"
+				<input id="tipoElemento" name="tipoElemento" class="inputtextnew"
 					aria-required="true" type="text"
-					value="${publicidadForm.tipoElemento}" maxlength="240">
+					value="" maxlength="240">
 			</div>
 		</div>
 		<div class="col-md-3">
@@ -59,8 +59,8 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="placa" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.placa}"
+				<input id="placa" name="placa" class="inputtextnew"
+					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
 		</div>
@@ -73,8 +73,8 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="numCaras" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.numCaras}"
+				<input id="numCaras" name="numCaras" class="inputtextnew"
+					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
 		</div>
@@ -84,9 +84,9 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="numLicenciaTrans"
+				<input id="numLicenciaTrans" name="numLicenciaTrans"
 					class="inputtextnew" aria-required="true" type="text"
-					value="${publicidadForm.numLicenciaTrans}" maxlength="240">
+					value="" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -97,9 +97,9 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="periodicidad" class="inputtextnew"
+				<input id="periodicidad" name="periodicidad" class="inputtextnew"
 					aria-required="true" type="text"
-					value="${publicidadForm.periodicidad}" maxlength="240">
+					value="" maxlength="240">
 			</div>
 		</div>
 		<div class="col-md-3">
@@ -108,7 +108,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="tipoServicio" class="inputtextnew"
+				<input id="tipoServicio" name="tipoServicio" class="inputtextnew"
 					aria-required="true" type="text"
 					value="${publicidadForm.tipoServicio}" maxlength="240">
 			</div>
@@ -121,7 +121,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="ubicacion" class="inputtextnew"
+				<input id="ubicacion" name="ubicacion" class="inputtextnew"
 					aria-required="true" type="text"
 					value="${publicidadForm.ubicacion}" maxlength="240">
 

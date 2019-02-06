@@ -47,8 +47,8 @@
 						<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
 						<td><input id="action"
 							style="visibility: visible !important; margin: 0; min-height: 0;"
-							name="action" onchange="funcionUno(${loop.index})" type="radio"
-							value="${eachPubExtTax.numResolu}, ${eachPubExtTax.tipoValla}"></td>
+							name="action"  type="radio"
+							value="${eachPubExtTax.numResolu}, ${eachPubExtTax.tipoValla}" data-numRes="${eachPubExtTax.numResolu}" data-tipoValla="${eachPubExtTax.tipoValla}"></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -87,7 +87,7 @@
 			<spring:theme code="publicidad.exterior.declarationpresent" />
 		</sf:button>
 	</div>
-
+</div>
 <div class="row">
 	<div class="col-md-2 col-md-offset-5 center">
 		<div class="boton">
@@ -119,8 +119,7 @@
 				code="publicidad.exterior.detail.selectYear" /></label>
 	</div>
 	<div class="col-md-1">
-		<select id="anio" class="inputdropdown" name="anoGravable"
-			onchange="ShowSelected(this)">
+		<select id="anio" class="inputdropdown" name="anoGravable">
 			<option value="0">Selecciona un año</option>
 			<option value="2019">2019</option>
 			<option value="2018">2018</option>
@@ -132,12 +131,14 @@
 
 	<div class="col-md-1 col-md-offset-1">
 		<div>
-			<sf:button
-				action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior"
-				type="submit" class="boton" id="accionBoton" name="accionBoton"
-				value="buscar">
-				<spring:theme code="publicidad.exterior.detail.search" />
-			</sf:button>
+<%-- 			<sf:button --%>
+<%-- 				action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior" --%>
+<%-- 				type="submit" class="boton" id="accionBoton" name="accionBoton" --%>
+<%-- 				value="buscar"> --%>
+<%-- 				<spring:theme code="publicidad.exterior.detail.search" /> --%>
+<%-- 			</sf:button> --%>
+			<button id="searchDetailButton" class="btn btn-primary btn-lg" type="button"><spring:theme code="publicdad.exterior.searchDetailButton" text="Buscar" /> </button>
+
 		</div>
 	</div>
 </div>
