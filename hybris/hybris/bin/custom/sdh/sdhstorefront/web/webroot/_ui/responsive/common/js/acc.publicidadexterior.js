@@ -84,6 +84,29 @@ ACC.publicidadexterior = {
 			            		$("#chipTubular").val(data.chip);
 			            		$("#matricula").val(data.matricula);
 			            		$("#numCarasTubular").val(data.numCaras);
+		            		}else if(tipoValla == "Valla de Obra Convencional")
+		            		{
+		            			$("#divConvencional").show();
+			            		$(".inputtextnew").val();
+			            		
+			            		$("#fechResolu").val(data.fechResolu);
+			            		$("#fechNotif").val(data.fechNotif);
+			            		$("#tipoSolicitud").val(data.tipoSolicitud);
+			            		$("#vigenDesde").val(data.vigenDesde);
+			            		$("#vigenHasta").val(data.vigenHasta);
+			            		
+			            		$("#tipoElementoTubular").val(data.tipoElemento);
+			            		$("#direccionTubular").val(data.direccion);
+			            		$("#localidadTubular").val(data.localidad);
+			            		$("#codPostal").val(data.codPostal);
+			            		$("#licenciaConstruc").val(data.licenciaConstruc);
+			            		$("#vigLicenConstruc").val(data.vigLicenConstruc);
+			            		$("#ubicacionTubular").val(data.ubicacion);
+			            		$("#tipoVia").val(data.tipoVia);
+			            		$("#orientacion").val(data.orientacion);
+			            		$("#chipTubular").val(data.chip);
+			            		$("#matricula").val(data.matricula);
+			            		$("#numCarasTubular").val(data.numCaras);
 		            		}
 			            	
 			            },

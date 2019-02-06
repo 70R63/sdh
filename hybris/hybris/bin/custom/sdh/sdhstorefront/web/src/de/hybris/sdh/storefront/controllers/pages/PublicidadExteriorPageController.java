@@ -424,7 +424,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						publicidadForm.setNumFracciones(eachDetalle.getNumFracciones());
 
 					}
-					else if (tipovalla.equals("VALLA CONVENCIONAL"))
+					else if (tipovalla.equals("VALLA CONVENCIONAL") || "Valla de Obra Convencional".equalsIgnoreCase(tipovalla))
 					{
 
 						if ("01".equals(eachDetalle.getTipoElemento()))
@@ -488,7 +488,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						publicidadForm.setPeriodicidad(eachDetalle.getPeriodicidad());//repetido
 
 					}
-					else if (tipovalla.equals("VALLA TUBULAR") || "Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
+					else if (tipovalla.equals("VALLA TUBULAR"))
 					{
 
 						publicidadForm.setTipoElemento(eachDetalle.getTipoElemento());//repetido
