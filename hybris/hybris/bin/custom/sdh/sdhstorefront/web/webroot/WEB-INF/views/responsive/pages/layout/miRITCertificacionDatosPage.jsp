@@ -61,7 +61,7 @@ input[type=radio] {
         <br>
 		    <div class="row">	
 				<div class="col-md-2 ">
-					<button class="boton btn-secondary " type="submit" >
+					<button class="boton btn-secondary " type="submit"  >
 						<spring:theme code="mirit.certificacion.btnGenerar" />
 					</button>
 				</div>
@@ -102,3 +102,4 @@ input[type=radio] {
 	  }
 	}
   </script>
+  
