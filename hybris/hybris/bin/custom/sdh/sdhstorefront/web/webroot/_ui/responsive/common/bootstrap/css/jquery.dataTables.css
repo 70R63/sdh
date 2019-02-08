@@ -16,7 +16,6 @@ table.dataTable {
 }
 table.dataTable thead th,
 table.dataTable tfoot th {
-  font-weight: bold;
   font-weight:normal;
 }
 table.dataTable thead th,

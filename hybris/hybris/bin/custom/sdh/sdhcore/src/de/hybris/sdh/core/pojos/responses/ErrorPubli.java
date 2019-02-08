@@ -7,7 +7,7 @@ package de.hybris.sdh.core.pojos.responses;
  * @author Maria Luisa
  *
  */
-public class errorPubli
+public class ErrorPubli
 {
 
 	private String idmsj;

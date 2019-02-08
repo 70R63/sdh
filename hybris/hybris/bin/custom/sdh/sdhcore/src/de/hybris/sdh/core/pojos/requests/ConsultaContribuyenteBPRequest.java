@@ -12,6 +12,7 @@ public class ConsultaContribuyenteBPRequest
 	private String numBP;
 
 
+	
 
 
 	/**

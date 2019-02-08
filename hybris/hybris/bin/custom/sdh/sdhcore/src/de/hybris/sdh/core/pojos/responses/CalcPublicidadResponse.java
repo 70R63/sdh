@@ -14,7 +14,7 @@ public class CalcPublicidadResponse
 {
 
 
-	private List<errorPubli> errores;
+	private List<ErrorPubli> errores;
 	private String numForm;
 	private String impCargo;
 	private String vlrSancion;
@@ -26,7 +26,7 @@ public class CalcPublicidadResponse
 	/**
 	 * @return the errores
 	 */
-	public List<errorPubli> getErrores()
+	public List<ErrorPubli> getErrores()
 	{
 		return errores;
 	}
@@ -35,7 +35,7 @@ public class CalcPublicidadResponse
 	 * @param errores
 	 *           the errores to set
 	 */
-	public void setErrores(final List<errorPubli> errores)
+	public void setErrores(final List<ErrorPubli> errores)
 	{
 		this.errores = errores;
 	}

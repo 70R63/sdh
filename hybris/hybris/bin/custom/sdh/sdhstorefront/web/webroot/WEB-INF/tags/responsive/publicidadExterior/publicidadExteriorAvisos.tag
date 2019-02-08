@@ -7,6 +7,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+	<div id="divAvisos"  style="display:none">
 		<div class="row">
 			<div class="headline">
 				<h3>
@@ -117,3 +118,4 @@
 				</div>
 			</div>			
 		</div>
+	</div>	
