@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.storefront.controllers.declaraciones;
 
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
@@ -77,7 +78,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
-	//	@RequireHardLogIn
+	@RequireHardLogIn
 	public String handleGET_PD(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Presentar Declaracion GET --------------------------");
@@ -100,7 +101,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.POST)
-	//	@RequireHardLogIn
+	@RequireHardLogIn
 	public String handlePOST_ST(final Model model, @ModelAttribute("dataForm")
 	final SobreTasaGasolinaForm dataFormResponse, @RequestParam(value = "action")
 	final String action) throws CMSItemNotFoundException
@@ -108,66 +109,80 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		System.out.println("---------------- En Presentar Declaracion POST --------------------------");
 
 
-		final CustomerModel customerModel;
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
-		final ConsultaContribuyenteBPRequest docsGasolinaRequest = new ConsultaContribuyenteBPRequest();
-		final String returnURL = "";
-		String numBP = "";
-		String numDoc = "";
-		String tipoDoc = "";
-		String anioGravable = "";
-		String periodo = "";
-		final int indiceSeleccionado = 0;
-		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
-		final DetGasResponse detalleResponse;
-		final SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
-		List<SobreTasaGasolinaTabla> tablaDocs;
-		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-		String returnUrl = "";
-
-
-		customerModel = (CustomerModel) userService.getCurrentUser();
-
-		numBP = customerModel.getNumBP();
-		docsGasolinaRequest.setNumBP(numBP);
-		tablaDocs = gasolinaService.prepararTablaDeclaracion(
-				gasolinaService.consultaDocsGasolina(docsGasolinaRequest, sdhConsultaContribuyenteBPService, LOG));
-		numBP = customerModel.getNumBP();
-		numDoc = customerModel.getDocumentNumber();
-		if (tablaDocs != null)
+		String URLdeterminada = "";
+		if (action.equals("presentarDeclaracion"))
 		{
-			for (int i = 0; i < tablaDocs.size(); i++)
+			if (dataFormResponse.getImpuesto().equals("5"))
 			{
-				if (!tablaDocs.get(i).toString().isEmpty())
+				final CustomerModel customerModel;
+				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+				final ConsultaContribuyenteBPRequest docsGasolinaRequest = new ConsultaContribuyenteBPRequest();
+				String numBP = "";
+				String numDoc = "";
+				String tipoDoc = "";
+				String anioGravable = "";
+				String periodo = "";
+				final int indiceSeleccionado = 0;
+				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+				final DetGasResponse detalleResponse;
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
+				List<SobreTasaGasolinaTabla> tablaDocs;
+				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+
+
+				customerModel = (CustomerModel) userService.getCurrentUser();
+
+				numBP = customerModel.getNumBP();
+				docsGasolinaRequest.setNumBP(numBP);
+				tablaDocs = gasolinaService.prepararTablaDeclaracion(
+						gasolinaService.consultaDocsGasolina(docsGasolinaRequest, sdhConsultaContribuyenteBPService, LOG));
+				numBP = customerModel.getNumBP();
+				numDoc = customerModel.getDocumentNumber();
+				if (tablaDocs != null)
 				{
-					tipoDoc = tablaDocs.get(indiceSeleccionado).getTipoDocumento();
-					break;
+					for (int i = 0; i < tablaDocs.size(); i++)
+					{
+						if (!tablaDocs.get(i).toString().isEmpty())
+						{
+							tipoDoc = tablaDocs.get(indiceSeleccionado).getTipoDocumento();
+							break;
+						}
+					}
 				}
+				anioGravable = dataFormResponse.getAnoGravable();
+				periodo = dataFormResponse.getPeriodo();
+
+				detalleGasolinaRequest.setNumBP(numBP);
+				detalleGasolinaRequest.setNumDoc(numDoc);
+				detalleGasolinaRequest.setTipoDoc(tipoDoc);
+				detalleGasolinaRequest.setAnoGravable(anioGravable);
+				detalleGasolinaRequest.setPeriodo(periodo);
+
+				detalleResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
+				dataForm.setDataForm(detalleResponse);
+
+				dataForm.setNumBP(numBP);
+				dataForm.setNumDoc(numDoc);
+				dataForm.setTipoDoc(tipoDoc);
+				dataForm.setAnoGravable(anioGravable);
+				dataForm.setPeriodo(periodo);
+
+				model.addAttribute("dataForm", dataForm);
+				URLdeterminada = gasolinaService.obtenerURL("presentar-declaracion", "impuesto", "sobretasa-gasolina");
+			}
+			else
+			{
+
+				storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+				model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+				model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+				URLdeterminada = getViewForPage(model);
 			}
 		}
-		anioGravable = dataFormResponse.getAnoGravable();
-		periodo = dataFormResponse.getPeriodo();
 
-		detalleGasolinaRequest.setNumBP(numBP);
-		detalleGasolinaRequest.setNumDoc(numDoc);
-		detalleGasolinaRequest.setTipoDoc(tipoDoc);
-		detalleGasolinaRequest.setAnoGravable(anioGravable);
-		detalleGasolinaRequest.setPeriodo(periodo);
-
-		detalleResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
-		dataForm.setDataForm(detalleResponse);
-
-		dataForm.setNumBP(numBP);
-		dataForm.setNumDoc(numDoc);
-		dataForm.setTipoDoc(tipoDoc);
-		dataForm.setAnoGravable(anioGravable);
-		dataForm.setPeriodo(periodo);
-
-		model.addAttribute("dataForm", dataForm);
-		returnUrl = gasolinaService.obtenerURL("presentar-declaracion", "impuesto", "sobretasa-gasolina");
-
-
-		return returnUrl;
+		return URLdeterminada;
 	}
 
 
