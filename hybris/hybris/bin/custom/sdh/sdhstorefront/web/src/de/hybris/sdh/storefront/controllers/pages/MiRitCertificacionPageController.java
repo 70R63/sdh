@@ -55,6 +55,10 @@ public class MiRitCertificacionPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+
+
+
+
 	@RequestMapping(value = "/contribuyentes/mirit/certificacion", method = RequestMethod.POST)
 	public String showView(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("miRitCertificacionForm")
 	final MiRitCertificacionForm miRitCertificacionFormDatos) throws CMSItemNotFoundException
@@ -65,7 +69,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 		certificaRITRequest.setNumBP(customerModel.getNumBP());
 
-		certificaRITRequest.setTipoCert(TIPO_CERTIFICACION);
+		certificaRITRequest.setTipoCert(miRitCertificacionFormDatos.getTipoCert());
 		certificaRITRequest.setTipoImp(miRitCertificacionFormDatos.getTipoImp());
 
 		try
@@ -108,6 +112,9 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
+
+
+
 
 
 	@RequestMapping(value = "/contribuyentes/mirit/certificacion/datos")
@@ -159,8 +166,6 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			{
 				miRitCertificacionForm.setbPublicidadExt("");
 			}
-			//private String bDelineacionUrbana;
-
 
 		}
 
@@ -179,6 +184,8 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
+
+
 
 
 
