@@ -26,7 +26,7 @@
 					<div class="form-group">
 						<label  class="control-label"><spring:theme
 								code="impuestos.sobreTasaGasolina.DatosGenerales.anioGravableConsultardisable" /></label>
-						<sf:select readonly="readonly" path="anoGravable"
+						<sf:select disabled="true" path="anoGravable"
 							items="${dataForm.catalogosSo.anioGravable}"
 							referenceData="${dataForm.catalogosSo.anioGravable}"
 							class="form-control"/>
