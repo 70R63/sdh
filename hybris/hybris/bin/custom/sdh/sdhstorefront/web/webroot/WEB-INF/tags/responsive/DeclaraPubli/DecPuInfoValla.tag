@@ -27,10 +27,10 @@
 	</div>
 	<div class="col-md-3">
 <!-- dev-federico INI cambio de control para visualizar la lista-->
-								<form:select path="luginst"
-							items="${declaPublicidadForm.catalogos.luginst}"
-							referenceData="${declaPublicidadForm.catalogos.luginst}"
-							class="inputdropdown" id="luginst" onchange="ShowSelected(luginst)"/>
+<%-- 								<form:select path="luginst" --%>
+<%-- 							items="${declaPublicidadForm.catalogos.luginst}" --%>
+<%-- 							referenceData="${declaPublicidadForm.catalogos.luginst}" --%>
+<%-- 							class="inputdropdown" id="luginst" onchange="ShowSelected(luginst)"/> --%>
 <!-- 		<select id="luginst" class="inputdropdown" -->
 <!-- 			onchange="ShowSelected(this);"> -->
 <!-- 			<option value="">Seleccionar</option> -->
@@ -38,6 +38,24 @@
 <!-- 			<option value="1">Veh&iacuteculo</option> -->
 <!-- 		</select> -->
 <!-- dev-federico FIN cambio de control para visualizar la lista-->
+<c:choose>
+	<c:when test="${declaPublicidadForm.luginst eq '01'}">
+		<input id="luginst" name="luginst" class="inputtextnew"
+			aria-required="true" type="text" value="Predio" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:when test="${declaPublicidadForm.luginst eq '02'}">
+		<input id="luginst" name="luginst" class="inputtextnew"
+			aria-required="true" type="text" value="Vehículo" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:otherwise>
+		<input id="luginst" name="luginst" class="inputtextnew"
+			aria-required="true" type="text" value="" maxlength="30"
+			disabled="disabled">
+	</c:otherwise>
+</c:choose>
+		
 	</div>
 </div>
 <br display:block;
@@ -49,15 +67,59 @@
 	</div>
 	<div class="col-md-3">
 <!-- dev-federico INI cambio de control para visualizar la lista-->
-								<form:select path="orValla"
- 							items="${declaPublicidadForm.catalogos.orientacionValla}"
- 							referenceData="${declaPublicidadForm.catalogos.orientacionValla}"
- 							class="inputdropdown" id="orValla"/> -
+<%-- 								<form:select path="orValla" --%>
+<%--  							items="${declaPublicidadForm.catalogos.orientacionValla}" --%>
+<%--  							referenceData="${declaPublicidadForm.catalogos.orientacionValla}" --%>
+<%--  							class="inputdropdown" id="orValla"/> - --%>
 <!-- 		<select id="OrValla" class="inputdropdown"> -->
 <!-- 			<option value=" ">Seleccionar</option> -->
 
 <!-- 		</select> -->
 <!-- dev-federico FIN -->
+
+<c:choose>
+	<c:when test="${declaPublicidadForm.orValla eq '01'}">
+		<input id="orValla" name="orValla" class="inputtextnew"
+			aria-required="true" type="text" value="Oriente-Occidente" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:when test="${declaPublicidadForm.orValla eq '02'}">
+		<input id="orValla" name="orValla" class="inputtextnew"
+			aria-required="true" type="text" value="Occidente-Oriente" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:when test="${declaPublicidadForm.orValla eq '03'}">
+		<input id="orValla" name="orValla" class="inputtextnew"
+			aria-required="true" type="text" value="Norte-Sur" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:when test="${declaPublicidadForm.orValla eq '04'}">
+		<input id="orValla" name="orValla" class="inputtextnew"
+			aria-required="true" type="text" value="Sur-Norte" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:when test="${declaPublicidadForm.orValla eq '05'}">
+		<input id="orValla" name="orValla" class="inputtextnew"
+			aria-required="true" type="text" value="Derecha" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:when test="${declaPublicidadForm.orValla eq '06'}">
+		<input id="orValla" name="orValla" class="inputtextnew"
+			aria-required="true" type="text" value="Izquierda" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:when test="${declaPublicidadForm.orValla eq '07'}">
+		<input id="orValla" name="orValla" class="inputtextnew"
+			aria-required="true" type="text" value="Ambos sentidos" maxlength="30"
+			disabled="disabled">
+	</c:when>
+	<c:otherwise>
+		<input id="orValla" name="orValla" class="inputtextnew"
+			aria-required="true" type="text" value="" maxlength="30"
+			disabled="disabled">
+	</c:otherwise>
+</c:choose>
+
 	</div>
 </div>
  <br display:block; 
@@ -70,10 +132,10 @@
 	</div>
 	<div class="col-md-3">
 <!-- dev-federico INI cambio de control para visualizar la lista-->
-									<form:select path="basegrav"
-							items="${declaPublicidadForm.catalogos.basegrav}"
-							referenceData="${declaPublicidadForm.catalogos.basegrav}"
-							class="inputdropdown" id="basegrav" />
+<%-- 									<form:select path="basegrav" --%>
+<%-- 							items="${declaPublicidadForm.catalogos.basegrav}" --%>
+<%-- 							referenceData="${declaPublicidadForm.catalogos.basegrav}" --%>
+<%-- 							class="inputdropdown" id="basegrav" /> --%>
 	
 	
 <!-- 		<select id="basegrav" class="inputdropdown"> -->
@@ -81,6 +143,38 @@
 
 <!-- 		</select> -->
 <!-- dev-federico FIN cambio de control para visualizar la lista-->
+
+<c:choose>
+	<c:when test="${declaPublicidadForm.luginst eq '01'}">
+		<select id="tamValla" class="inputdropdown">
+			<c:set var="selected" value="" />
+			<c:if test="${declaPublicidadForm.basegrav eq '01' }">
+				<c:set var="selected" value="selected" />
+			</c:if>
+			<option ${selected } value="01">Vallas de más de 8 m2 hasta 24 m2</option>
+			<c:set var="selected" value="" />
+			<c:if test="${declaPublicidadForm.basegrav eq '02' }">
+				<c:set var="selected" value="selected" />
+			</c:if>
+			<option ${selected } value="02">Vallas de más de 24 m2</option>
+				<c:set var="selected" value="" />
+			<c:if test="${declaPublicidadForm.basegrav eq '03' }">
+				<c:set var="selected" value="selected" />
+			</c:if>
+			<option ${selected } value="03">Vallas de propiedad de constructores de más de 8 m2</option>
+		</select>
+	</c:when>
+	<c:when test="${declaPublicidadForm.luginst eq '02'}">
+		<option value="04">Vallas en vehículos automotores con dimensión superior a 8 m2</option>
+	</c:when>
+	<c:otherwise>
+		<select id="tamValla" class="inputdropdown">
+		<option value=" ">Seleccionar</option>
+		</select>
+	</c:otherwise>
+</c:choose>
+
+
 	</div>
 </div>
 

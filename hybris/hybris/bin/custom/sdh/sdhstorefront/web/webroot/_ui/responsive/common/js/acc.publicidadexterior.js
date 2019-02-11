@@ -1,8 +1,30 @@
 ACC.publicidadexterior = {
 
-	 _autoload: [ "bindSearchButton","bindDialog","bindDataTable"],
-	    
-
+	 _autoload: [ "bindSearchButton","bindPresentarDeclaracionButton","bindDialog","bindDataTable"],
+	 bindPresentarDeclaracionButton: function () {
+		 $(document).on("click", "#presentarDeclaracionButton", function (e) {
+	 	        e.preventDefault();
+	 	        
+	 	       var anoGravable  = $.trim($("#anio").val());
+	 	       var numResolu = $.trim($("#example input[type='radio']:checked").attr("data-numRes"));
+	 	       
+	 	      if(anoGravable == "0")
+	 	        {	
+	 	        	alert("Por favor, selecciona el año a consultar");
+	 	        	return;
+	 	        }
+	 	        	
+	 	        if(numResolu == "" || numResolu == "")
+	 	        {
+	 	        	alert("Por favor, selecciona el impuesto a consultar");
+	 	        	return;
+	 	        }
+	 	       
+	 	      window.location.href = ACC.publicidadExteriorDeclararionURL+"?numResolu="+numResolu+"&anoGravable="+anoGravable;
+	 	       
+		 });
+	 },
+	 
 	    bindSearchButton: function () {
 	    	 $(document).on("click", "#searchDetailButton", function (e) {
 		 	        e.preventDefault();
@@ -42,48 +64,103 @@ ACC.publicidadexterior = {
 			            	$("#divVehiculos").hide();
 			            	$("#divTubular").hide();
 			            	
-			            	if(tipoValla == "Valla Vehículos")
+			            	if(tipoValla == "Valla Tubular Comercial")
 		            		{
-			            		$("#divVehiculos").show();
+			            		$("#divTubularComercial").show();
 			            		$(".inputtextnew").val();
 			            		
 			            		$("#fechResolu").val(data.fechResolu);
 			            		$("#fechNotif").val(data.fechNotif);
 			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		$("#vigenDesde").val(data.vigenDesde);
-			            		$("#vigenHasta").val(data.vigenHasta);
-			            		$("#tipoPublici").val(data.vigenHasta);
-			            		$("#modelo").val(data.modelo);
-			            		$("#tipoElemento").val(data.tipoElemento);
-			            		$("#placa").val(data.placa);
-			            		$("#numCaras").val(data.numCaras);
-			            		$("#numLicenciaTrans").val(data.numLicenciaTrans);
-			            		$("#periodicidad").val(data.periodicidad);
-			            		$("#tipoServicio").val(data.tipoServicio);
-			            		$("#ubicacion").val(data.ubicacion);
-		            		}else if(tipoValla == "Valla Tubular Comercial")
+			            		
+			            		$("#tubularComercialDireccion").val(data.direccion);
+			            		$("#tubularComercialAreaElemento").val(data.areaElemento);
+			            		$("#tubularComercialLocalidad").val(data.localidad);
+			            		$("#tubularComercialOrientacion").val(data.orientacion);
+			            		$("#tubularComercialCodPostal").val(data.codPostal);
+			            		$("#tubularComercialChip").val(data.chip);
+			            		$("#tubularComercialAvisoLumino").val(data.avisoLumino);
+			            		$("#tubularComercialUbicacion").val(data.ubicacion);
+			            		$("#tubularComercialMatricula").val(data.matricula);
+		            		}else if(tipoValla == "Valla Vehículos")
 		            		{
-		            			$("#divTubular").show();
+		            			$("#divVehiculos").show();
 			            		$(".inputtextnew").val();
 			            		
 			            		$("#fechResolu").val(data.fechResolu);
 			            		$("#fechNotif").val(data.fechNotif);
 			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		$("#vigenDesde").val(data.vigenDesde);
-			            		$("#vigenHasta").val(data.vigenHasta);
 			            		
-			            		$("#tipoElementoTubular").val(data.tipoElemento);
-			            		$("#direccionTubular").val(data.direccion);
-			            		$("#localidadTubular").val(data.localidad);
-			            		$("#codPostal").val(data.codPostal);
-			            		$("#licenciaConstruc").val(data.licenciaConstruc);
-			            		$("#vigLicenConstruc").val(data.vigLicenConstruc);
-			            		$("#ubicacionTubular").val(data.ubicacion);
-			            		$("#tipoVia").val(data.tipoVia);
-			            		$("#orientacion").val(data.orientacion);
-			            		$("#chipTubular").val(data.chip);
-			            		$("#matricula").val(data.matricula);
-			            		$("#numCarasTubular").val(data.numCaras);
+			            		$("#vehiculoModelo").val(data.modelo);
+			            		$("#vehiculoTipoPublici").val(data.tipoPublici);
+			            		$("#vehiculoPlaca").val(data.placa);
+			            		$("#vehiculoTipoElemento").val(data.tipoElemento);
+			            		$("#vehiculoNumLicenciaTrans").val(data.numLicenciaTrans);
+			            		$("#vehiculoOrientacion").val(data.orientacion);
+			            		$("#vehiculoTipoServicio").val(data.tipoServicio);
+			            		
+		            		}else if(tipoValla == "Valla Tubular de Obra")
+		            		{
+		            			$("#divTubularObra").show();
+			            		$(".inputtextnew").val();
+			            		
+			            		$("#fechResolu").val(data.fechResolu);
+			            		$("#fechNotif").val(data.fechNotif);
+			            		$("#tipoSolicitud").val(data.tipoSolicitud);
+			            		
+			            		$("#tubularObraDireccion").val(data.direccion);
+			            		$("#tubularObraLicenciaUrb").val(data.licenciaUrb);
+			            		$("#tubularObraLocalidad").val(data.localidad);
+			            		$("#tubularObraContratoObra").val(data.contratoObra);
+			            		$("#tubularObraCodPostal").val(data.codPostal);
+			            		$("#tubularObraLicenciaConstruc").val(data.licenciaContruc);
+			            		$("#tubularObraChip").val(data.chip);
+			            		$("#tubularObraVigLicenConstruc").val(data.vigLicenConstruc);
+			            		$("#tubularObraMatricula").val(data.matricula);
+			            		$("#tubularObraAreaTotal").val(data.areaTotal);
+			            		$("#tubularObraUbicacion").val(data.ubicacion);
+			            		$("#tubularObraPeriodicidad").val(data.periodicidad);
+			            		$("#tubularObraOrientacion").val(data.orientacion);
+			            		$("#tubularObraNumcaras").val(data.numCaras);
+		            			
+		            		}else if(tipoValla == "Valla de Obra Convencional")
+		            		{
+		            			
+		            			$("#divObraConvencional").show();
+			            		$(".inputtextnew").val();
+			            		
+			            		$("#fechResolu").val(data.fechResolu);
+			            		$("#fechNotif").val(data.fechNotif);
+			            		$("#tipoSolicitud").val(data.tipoSolicitud);
+			            		
+			            		$("#obraConvencionalDireccion").val(data.direccion);
+			            		$("#obraConvencionaltipoPublici").val(data.tipoPublici);
+			            		$("#obraConvencionalLocalidad").val(data.localidad);
+			            		$("#obraConvencionalUbicacion").val(data.ubicacion);
+			            		$("#obraConvencionalCodPostal").val(data.codPostal);
+			            		$("#obraConvencionalChip").val(data.chip);
+			            		$("#obraConvencionalAvisoLumino").val(data.avisoLumino);
+			            		$("#obraConvencionalMatricula").val(data.matricula);
+			            		$("#obraConvencionalOrientacion").val(data.orientacion);
+			            		$("#obraConvencionalTotalArea").val(data.areaTotal);
+		            		}else if(tipoValla == "Pantalla LED")
+		            		{
+		            			$("#divConvencional").show();
+			            		$(".inputtextnew").val();
+			            		
+			            		$("#fechResolu").val(data.fechResolu);
+			            		$("#fechNotif").val(data.fechNotif);
+			            		$("#tipoSolicitud").val(data.tipoSolicitud);
+			            		
+			            		$("#pantallaLedDireccion").val(data.direccion);
+			            		$("#pantallaLedMatricula").val(data.matricula);
+			            		$("#pantallaLedLocalidad").val(data.localidad);
+			            		$("#pantallaLedUbicacion").val(data.ubicacion);
+			            		$("#pantallaLedCodPostal").val(data.copPostal);
+			            		$("#pantallaLedTipoPublicidad").val(data.tipoPublici);
+			            		$("#pantallaLedChip").val(data.chip);
+			            		$("#pantallaLedOrientacionVisual").val(data.orientacion);
+			            		$("#pantallaLedAreaTotal").val(data.areaTotal);
 		            		}
 			            	
 			            },

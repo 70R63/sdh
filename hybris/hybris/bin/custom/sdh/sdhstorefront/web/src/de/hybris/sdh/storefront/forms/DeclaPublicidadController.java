@@ -44,6 +44,9 @@ public class DeclaPublicidadController
 	private List<DetallePubli> detalle;
 	private PublicidadExteriorCatalogos catalogos;
 
+	private String idNumber;
+	private String idType;
+
 
 
 	/**
@@ -494,6 +497,40 @@ public class DeclaPublicidadController
 	public void setDetalle(final List<DetallePubli> detalle)
 	{
 		this.detalle = detalle;
+	}
+
+	/**
+	 * @return the idNumber
+	 */
+	public String getIdNumber()
+	{
+		return idNumber;
+	}
+
+	/**
+	 * @param idNumber
+	 *           the idNumber to set
+	 */
+	public void setIdNumber(final String idNumber)
+	{
+		this.idNumber = idNumber;
+	}
+
+	/**
+	 * @return the idType
+	 */
+	public String getIdType()
+	{
+		return idType;
+	}
+
+	/**
+	 * @param idType
+	 *           the idType to set
+	 */
+	public void setIdType(final String idType)
+	{
+		this.idType = idType;
 	}
 
 
