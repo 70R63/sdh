@@ -5,13 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
-<spring:url
-	value="/calculo"
-	var="CalculodeclaracionUrl" htmlEscape="false" />
-	
 
 <div class="row">
 	<div class="col-md-6">
@@ -21,8 +17,10 @@
 		</h3>
 	</div>
 </div>
-<br display:block;
-   margin: 5px 0;>
+<br>
+
+<!--<sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="post" commandName="declaPublicidadForm"> -->
+
 <div class="row">
 	<div class="col-md-2">
 		<label class="inputlabelnew"><spring:theme
@@ -30,8 +28,8 @@
 	</div>
 	<div class="col-md-3">
 		<input id="impCar" name="impCar" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
-			disabled="disabled">
+			aria-required="true" type="" value="${declaPublicidadForm.impCar}"
+			maxlength="30" size="30" disabled="disabled">
 	</div>
 </div>
 
@@ -42,8 +40,8 @@
 	</div>
 	<div class="col-md-3">
 		<input id="valsan" name="valsan" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
-			disabled="disabled">
+			aria-required="true" type="" value="${declaPublicidadForm.valsan}"
+			maxlength="30" size="30" disabled="disabled">
 	</div>
 </div>
 
@@ -54,8 +52,8 @@
 	</div>
 	<div class="col-md-3">
 		<input id="valpag" name="valpag" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
-			disabled="disabled">
+			aria-required="true" type="" value="${declaPublicidadForm.valsan}"
+			maxlength="30" size="30" disabled="disabled">
 	</div>
 </div>
 <div class="row">
@@ -65,8 +63,8 @@
 	</div>
 	<div class="col-md-3">
 		<input id="intmora" name="intmora" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
-			disabled="disabled">
+			aria-required="true" type="" value="${declaPublicidadForm.intmora}"
+			maxlength="30" size="30" disabled="disabled">
 	</div>
 </div>
 <div class="row">
@@ -76,19 +74,26 @@
 	</div>
 	<div class="col-md-3">
 		<input id="totpag" name="totpag" class="inputtextnew"
-			aria-required="true" type="number" value="0" maxlength="30" size="30"
-			disabled="disabled">
+			aria-required="true" type="" value="${declaPublicidadForm.totpag}"
+			maxlength="30" size="30" disabled="disabled">
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-md-3 col-md-offset-3 center">
-	
-	<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST">
+
+		<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST">
 			<button id="/contribuyentes/publicidadexterior/declaracion" type="submit"
 				class="botton">
 				<spring:theme code="declaracion.publicidad.button.calcular" />
 				</button>
 			</sf:form>
-				</div>
+
+		<!-- <sf:button id="/contribuyentes/publicidadexterior/declaracion"
+			action="/contribuyentes/publicidadexterior/declaracion" type="submit"
+			class="botton">
+			<spring:theme code="declaracion.publicidad.button.calcular" />
+		</sf:button> -->
+	</div>
 </div>
+<!-- </sf:form> -->

@@ -91,6 +91,9 @@
 				ACC.addressContactoPC = "${ miRitForm.direccionContacto.POST_CODE}";
 			</c:if>
 			
+			ACC.publicidadExteriorDetalleURL = "<c:url value='/contribuyentes/publicidadexterior/detalle' />";
+			
+			
 			<c:forEach var="jsVar" items="${jsVariables}">
 				<c:if test="${not empty jsVar.qualifier}" >
 				ACC['${ycommerce:encodeJavaScript(jsVar.qualifier)}'] = '${ycommerce:encodeJavaScript(jsVar.value)}';
