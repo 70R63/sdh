@@ -23,9 +23,12 @@
 			
 		}
 		
+		
 		downloadPDF('${miRitCertificacionForm.rit.stringRIT}');
 	</script>
-
+	
+	
+    
 	<div class="container">
 	 	<div class="headline">
 			<h3>
