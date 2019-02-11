@@ -34,93 +34,90 @@
 		var value = selectObject.value;
 		eliminaCampos();
 		eliminaCampos2();
-		if (value == 0) {
-			llenacampo();
-			llenacampo2();
+		llenacampo(value);
+		llenacampoRes(value);
+	}
+</script>
 
-		} else {
-			llenacampoRes();
-			llenacampoRes2();
+<script type="text/javascript">
+	function llenacampo(luginst) {
+
+		var x = document.getElementById("orValla");
+		var y = document.getElementById("basegrav");
+
+		if (luginst == "01") { //Predio
+			var option1 = document.createElement("option");
+			option1.text = "Oriente/Occidente";
+			option1.value = "01";
+			x.add(option1);
+
+			var option2 = document.createElement("option");
+			option2.text = "Occidente/Oriente";
+			option2.value = "02";
+			x.add(option2);
+
+			var option3 = document.createElement("option");
+			option3.text = "Norte/sur";
+			option3.value = "03";
+			x.add(option3);
+
+			var option4 = document.createElement("option");
+			option4.text = "Sur/Norte";
+			option4.value = "04";
+			x.add(option4);
+		}
+		if (luginst == "02") { //Vehículo
+			var option5 = document.createElement("option");
+			option5.text = "Derecha";
+			option5.value = "05";
+			x.add(option5);
+
+			var option6 = document.createElement("option");
+			option6.text = "Izquierda";
+			option6.value = "06";
+			x.add(option6);
+
+			var option7 = document.createElement("option");
+			option7.text = "Ambos Sentidos";
+			option7.value = "07";
+			x.add(option7);
 		}
 
 	}
 </script>
 
 <script type="text/javascript">
-	function llenacampoRes() {
-
-		var x = document.getElementById("orValla");
-
-		var option = document.createElement("option");
-		option.text = "Derecha";
-		x.add(option);
-
-		var option = document.createElement("option");
-		option.text = "Izquierda";
-		x.add(option);
-
-		var option = document.createElement("option");
-		option.text = "Ambos Sentidos";
-		x.add(option);
-	}
-</script>
-
-
-<script type="text/javascript">
-	function llenacampo() {
-		var x = document.getElementById("orValla");
-
-		var option = document.createElement("option");
-		option.text = "Oriente/Occidente";
-		x.add(option);
-
-		var optionA = document.createElement("option");
-		optionA.text = "Occidente/Oriente";
-		x.add(optionA);
-
-		var optionB = document.createElement("option");
-		optionB.text = "Norte/sur";
-		x.add(optionB);
-
-		var optionC = document.createElement("option");
-		optionC.text = "Sur/Norte";
-		x.add(optionC);
-
-	}
-</script>
-
-<script type="text/javascript">
-	function llenacampoRes2() {
-		var x = document.getElementById("basegrav");
-
-		var option = document.createElement("option");
-		option.text = "Valla en Vehiculos automotores con "
-				+ "dimension superior a 8m2";
-		x.add(option);
-
-	}
-</script>
-
-
-<script type="text/javascript">
-	function llenacampo2() {
+	function llenacampoRes(luginst) {
 
 		var x = document.getElementById("basegrav");
 
-		var option = document.createElement("option");
-		option.text = "Vallas de mas de 8 m2 hasta 24 m2";
-		x.add(option);
+		if (luginst == "01") { //Predio
+			var option1 = document.createElement("option");
+			option1.text = "Vallas de mas de 8 m2 hasta 24 m2";
+			option1.value = "01";
+			x.add(option1);
 
-		var optionA = document.createElement("option");
-		optionA.text = "Vallas de mas de 24 m2";
-		x.add(optionA);
+			var option2 = document.createElement("option");
+			option2.text = "Vallas de mas de 24 m2";
+			option2.value = "02";
+			x.add(option2);
 
-		var optionB = document.createElement("option");
-		optionB.text = "Vallas de propiedad de constructores de mas de 8 m2";
-		x.add(optionB);
+			var option3 = document.createElement("option");
+			option3.text = "Vallas de propiedad de constructores de mas de 8 m2";
+			option3.value = "03";
+			x.add(option3);
+		}
+		if (luginst == "02") { //Vehículo
+			var option4 = document.createElement("option");
+			option4.text = "Valla en Vehiculos automotores con "
+					+ "dimension superior a 8m2";
+			option4.value = "04";
+			x.add(option4);
+		}
 
 	}
 </script>
+
 
 <script type="text/javascript">
 	function eliminaCampos() {

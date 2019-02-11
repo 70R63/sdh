@@ -30,7 +30,7 @@
 								<form:select path="luginst"
 							items="${declaPublicidadForm.catalogos.luginst}"
 							referenceData="${declaPublicidadForm.catalogos.luginst}"
-							class="inputdropdown" />
+							class="inputdropdown" id="luginst" onchange="ShowSelected(luginst)"/>
 <!-- 		<select id="luginst" class="inputdropdown" -->
 <!-- 			onchange="ShowSelected(this);"> -->
 <!-- 			<option value="">Seleccionar</option> -->
@@ -52,7 +52,7 @@
 								<form:select path="orValla"
  							items="${declaPublicidadForm.catalogos.orientacionValla}"
  							referenceData="${declaPublicidadForm.catalogos.orientacionValla}"
- 							class="inputdropdown" /> -
+ 							class="inputdropdown" id="orValla"/> -
 <!-- 		<select id="OrValla" class="inputdropdown"> -->
 <!-- 			<option value=" ">Seleccionar</option> -->
 
@@ -73,7 +73,7 @@
 									<form:select path="basegrav"
 							items="${declaPublicidadForm.catalogos.basegrav}"
 							referenceData="${declaPublicidadForm.catalogos.basegrav}"
-							class="inputdropdown" />
+							class="inputdropdown" id="basegrav" />
 	
 	
 <!-- 		<select id="basegrav" class="inputdropdown"> -->

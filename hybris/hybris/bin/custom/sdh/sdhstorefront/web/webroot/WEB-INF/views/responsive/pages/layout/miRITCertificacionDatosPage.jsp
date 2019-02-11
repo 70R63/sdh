@@ -9,6 +9,13 @@
 
 <style>
 #myDIV { }
+
+input[type=radio] {
+    border: 0px;
+    width: 15pt;
+    height: 15pt;
+    vertical-align: -15pt;
+}
 </style>
 
 <div class="row">
@@ -22,7 +29,8 @@
 </div>
 
  <form:form action="/sdhstorefront/es/contribuyentes/mirit/certificacion" method="post" commandName="miRitCertificacionForm" >
- 
+    
+    <!--  
 	<div class="row">	
 	 	<div class="col-md-3">
 			<label class="inputlabelnew"><spring:theme code="mirit.certificacion.textImp" /></label>
@@ -40,22 +48,46 @@
 			</button>
 		</div>
 	</div>
+	-->
 	
-	<div id="myDIV"  style="display:none"> 
+	
+	<!-- <div id="myDIV"  style="display:none">  --> 
 		<div class="row">				
 			<div class="col-md-3">
 				<label class="inputlabelnew"><spring:theme code="mirit.certificacion.tituloImpuesto" /></label>
 			</div>
 		</div>
-		
-		<input type="radio" name="tipoImp" id="tipoImp" value="1" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
-		<input type="radio" name="tipoImp" id="tipoImp" value="2" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
-    	<input type="radio" name="tipoImp" id="tipoImp" value="3" style="visibility: visible"><spring:theme code="mirit.certificacion.opICA"/><br>
-    	<input type="radio" name="tipoImp" id="tipoImp" value="4" style="visibility: visible"><spring:theme code="mirit.certificacion.opPublicidadExterior"/><br>
-    	<input type="radio" name="tipoImp" id="tipoImp" value="5" style="visibility: visible"><spring:theme code="mirit.certificacion.opSobretasaGasolina"/><br>
-    	<input type="radio" name="tipoImp" id="tipoImp" value="6" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
+        
+        <br>
+		    <div class="row">	
+				<div class="col-md-2 ">
+					<button class="boton btn-secondary " type="submit" >
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+				</div>
+			</div>
+   		<br>
+        
+		<c:if test="${miRitCertificacionForm.bPredial == 'X'}">
+			<input type="radio" name="tipoImp" id="tipoImp" value="01" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
+		</c:if>
+		<c:if test="${miRitCertificacionForm.bVehicular == 'X'}">
+			<input type="radio" name="tipoImp" id="tipoImp" value="02" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
+		</c:if>	
+		<c:if test="${miRitCertificacionForm.bIca == 'X'}">
+			<input type="radio" name="tipoImp" id="tipoImp" value="03" style="visibility: visible"><spring:theme code="mirit.certificacion.opICA"/><br>	
+    	</c:if>
+    	<c:if test="${miRitCertificacionForm.bPublicidadExt == 'X'}">
+    		<input type="radio" name="tipoImp" id="tipoImp" value="07" style="visibility: visible"><spring:theme code="mirit.certificacion.opPublicidadExterior"/><br>
+    	</c:if>
+    	<c:if test="${miRitCertificacionForm.bSobreGasolina == 'X'}">
+    		<input type="radio" name="tipoImp" id="tipoImp" value="05" style="visibility: visible"><spring:theme code="mirit.certificacion.opSobretasaGasolina"/><br>
+    	</c:if>	
+    	<c:if test="${miRitCertificacionForm.bDelineacionUrbana == 'X'}">
+    		<input type="radio" name="tipoImp" id="tipoImp" value="06" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
+    	</c:if>		
     	
-	</div>    
+	 <!-- </div> -->    
     
   </form:form>
 

@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class PublicidadForm
 {
+
 	private String numBP;
 	private String numResolu;
 	private String anoGravable;
@@ -64,6 +65,9 @@ public class PublicidadForm
 	private String vigLicenConstruc;
 	private String tipoVia;
 	private String tipoValla;
+
+
+
 
 
 	private List<ImpuestoPublicidadExterior> publicidadExt;

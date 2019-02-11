@@ -23,8 +23,8 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.tipoElemento}"
+				<input id="tipoElementoTubular" name="tipoElementoTubular" class="inputtextnew"
+					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
 		</div>
@@ -34,8 +34,8 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.direccion}"
+				<input id="direccionTubular" name="direccionTubular" class="inputtextnew"
+					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
+				<input id="localidadTubular" name="localidadTubular" class="inputtextnew"
 					aria-required="true" type="text" value="${publicidadForm.localidad}"
 					maxlength="240">
 			</div>
@@ -58,7 +58,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
+				<input id="codPostal" name="codPostal" class="inputtextnew"
 					aria-required="true" type="text" value="${publicidadForm.codPostal}"
 					maxlength="240">
 			</div>
@@ -72,7 +72,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
+				<input id="licenciaConstruc" name="licenciaConstruc" class="inputtextnew"
 					aria-required="true" type="text" value="" maxlength="240">
 			</div>
 		</div>
@@ -83,9 +83,9 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
+				<input id="vigLicenConstruc" name="vigLicenConstruc" class="inputtextnew"
 					aria-required="true" type="text"
-					value="${publicidadForm.licenciaConstruc}" maxlength="240">
+					value="" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -96,7 +96,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
+				<input id="ubicacionTubular" name="ubicacionTubular" class="inputtextnew"
 					aria-required="true" type="text" value="" maxlength="240">
 			</div>
 		</div>
@@ -106,8 +106,8 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.tipoPublici}"
+				<input id="tipoVia" name="tipoVia" class="inputtextnew"
+					aria-required="true" type="text" value="${publicidadForm.tipoVia}"
 					maxlength="240">
 			</div>
 		</div>
@@ -119,8 +119,8 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.orientacion}"
+				<input id="orientacion" name="orientacion" class="inputtextnew"
+					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
 		</div>
@@ -130,7 +130,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
+				<input id="chipTubular" name="chipTubular" class="inputtextnew"
 					aria-required="true" type="text" value="${publicidadForm.chip}"
 					maxlength="240">
 			</div>
@@ -144,8 +144,8 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.matricula}"
+				<input id="matricula" name="matricula" class="inputtextnew"
+					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
 		</div>
@@ -155,19 +155,12 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="address.surname" name="lastName" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.numCaras}"
+				<input id="numCarasTubular" name="numCarasTubular" class="inputtextnew"
+					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
 		</div>
 	</div>
 
 </div>
-
-
-
-
-
-
-
 
