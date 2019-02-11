@@ -43,7 +43,7 @@ ACC.mirit = {
 		    	    	$("#countryDireccionContacto").append(o);
 		    	});
 		    	
-		    	$("#countryDireccionContacto").val(ACC.addressNotificationCountry);
+		    	$("#countryDireccionContacto").val(ACC.addressContactoCountry);
 		    	
 		    	
 		    	var o = new Option( "SELECCIONAR","");

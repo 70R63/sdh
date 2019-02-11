@@ -75,7 +75,16 @@ ACC.publicidadexterior = {
 			            		
 			            		$("#tubularComercialDireccion").val(data.direccion);
 			            		$("#tubularComercialAreaElemento").val(data.areaElemento);
-			            		$("#tubularComercialLocalidad").val(data.localidad);
+			            		
+			            		var localidadText  = data.localidad;
+			            		
+			            		departments.forEach(function (eachDep) {
+					    	    	if(parseInt(eachDep.depId) == parseInt(data.localidad))
+					    	    		localidadText = eachDep.name;
+			            		});
+			            		
+			            		
+			            		$("#tubularComercialLocalidad").val(localidadText);
 			            		$("#tubularComercialOrientacion").val(data.orientacion);
 			            		$("#tubularComercialCodPostal").val(data.codPostal);
 			            		$("#tubularComercialChip").val(data.chip);
@@ -110,7 +119,15 @@ ACC.publicidadexterior = {
 			            		
 			            		$("#tubularObraDireccion").val(data.direccion);
 			            		$("#tubularObraLicenciaUrb").val(data.licenciaUrb);
-			            		$("#tubularObraLocalidad").val(data.localidad);
+			            		
+			            		var localidadText  = data.localidad;
+			            		
+			            		departments.forEach(function (eachDep) {
+					    	    	if(parseInt(eachDep.depId) == parseInt(data.localidad))
+					    	    		localidadText = eachDep.name;
+			            		});
+			            		
+			            		$("#tubularObraLocalidad").val(localidadText);
 			            		$("#tubularObraContratoObra").val(data.contratoObra);
 			            		$("#tubularObraCodPostal").val(data.codPostal);
 			            		$("#tubularObraLicenciaConstruc").val(data.licenciaContruc);
@@ -135,7 +152,15 @@ ACC.publicidadexterior = {
 			            		
 			            		$("#obraConvencionalDireccion").val(data.direccion);
 			            		$("#obraConvencionaltipoPublici").val(data.tipoPublici);
-			            		$("#obraConvencionalLocalidad").val(data.localidad);
+			            		
+			            		var localidadText  = data.localidad;
+			            		
+			            		departments.forEach(function (eachDep) {
+					    	    	if(parseInt(eachDep.depId) == parseInt(data.localidad))
+					    	    		localidadText = eachDep.name;
+			            		});
+			            		
+			            		$("#obraConvencionalLocalidad").val(localidadText);
 			            		$("#obraConvencionalUbicacion").val(data.ubicacion);
 			            		$("#obraConvencionalCodPostal").val(data.codPostal);
 			            		$("#obraConvencionalChip").val(data.chip);
@@ -145,7 +170,7 @@ ACC.publicidadexterior = {
 			            		$("#obraConvencionalTotalArea").val(data.areaTotal);
 		            		}else if(tipoValla == "Pantalla LED")
 		            		{
-		            			$("#divConvencional").show();
+		            			$("#divPantallaLed").show();
 			            		$(".inputtextnew").val();
 			            		
 			            		$("#fechResolu").val(data.fechResolu);
@@ -154,7 +179,15 @@ ACC.publicidadexterior = {
 			            		
 			            		$("#pantallaLedDireccion").val(data.direccion);
 			            		$("#pantallaLedMatricula").val(data.matricula);
-			            		$("#pantallaLedLocalidad").val(data.localidad);
+			            		
+			            		var localidadText  = data.localidad;
+			            		
+			            		departments.forEach(function (eachDep) {
+					    	    	if(parseInt(eachDep.depId) == parseInt(data.localidad))
+					    	    		localidadText = eachDep.name;
+			            		});
+			            		
+			            		$("#pantallaLedLocalidad").val(localidadText);
 			            		$("#pantallaLedUbicacion").val(data.ubicacion);
 			            		$("#pantallaLedCodPostal").val(data.copPostal);
 			            		$("#pantallaLedTipoPublicidad").val(data.tipoPublici);
