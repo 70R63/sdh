@@ -93,6 +93,7 @@
 			
 			ACC.publicidadExteriorDetalleURL = "<c:url value='/contribuyentes/publicidadexterior/detalle' />";
 			
+			ACC.publicidadExteriorDeclararionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion' />";
 			
 			<c:forEach var="jsVar" items="${jsVariables}">
 				<c:if test="${not empty jsVar.qualifier}" >

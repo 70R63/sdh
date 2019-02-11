@@ -23,10 +23,12 @@
 	
 		<publicidadExterior:publicidadExteriorTable />
 		<publicidadExterior:publicidadExteriorDetail />
-		<publicidadExterior:publicidadExteriorAvisos />
-		<publicidadExterior:publicidadExteriorConvencional />
+<%-- 		<publicidadExterior:publicidadExteriorAvisos /> --%>
+		<publicidadExterior:publicidadExteriorTubularComercial />
 		<publicidadExterior:publicidadExteriorVehiculos />
-		<publicidadExterior:publicidadExteriorTubular />
+		<publicidadExterior:publicidadExteriorTubularObra />
+		<publicidadExterior:publicidadExteriorObraConvencional />
+		<publicidadExterior:publicidadExteriorPantallaLed />
 	</div>
 	</sf:form>
 	
