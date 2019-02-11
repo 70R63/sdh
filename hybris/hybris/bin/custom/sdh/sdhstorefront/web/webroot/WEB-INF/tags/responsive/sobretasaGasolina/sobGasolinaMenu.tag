@@ -66,7 +66,7 @@
 										value="${item.numeroDocumento}" readonly="true"
 										class="inputtextnew" aria-required="true" maxlength="30"
 										size="30" disabled="disabled" type="text" /></td>
-								<td><sf:input path="" value="" readonly="true"
+								<td><sf:input path="NAME_ORG1" value="" readonly="true"
 										class="inputtextnew" aria-required="true" maxlength="30"
 										size="30" disabled="disabled" type="text" /></td>
 							</tr>

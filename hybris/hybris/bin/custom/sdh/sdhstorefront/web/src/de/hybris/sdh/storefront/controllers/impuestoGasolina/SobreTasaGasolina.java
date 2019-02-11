@@ -171,18 +171,18 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
-		final ConsultaContribuyenteBPRequest docsGasolinaRequest = new ConsultaContribuyenteBPRequest();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		String numBP = "";
 		SDHValidaMailRolResponse detalleContribuyente;
 
 
 		numBP = customerModel.getNumBP();
-		docsGasolinaRequest.setNumBP(numBP);
+		contribuyenteRequest.setNumBP(numBP);
 
-		detalleContribuyente = gasolinaService.consultaContribuyente(docsGasolinaRequest, sdhConsultaContribuyenteBPService, LOG);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
 		dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
-		dataForm.setNombre(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+		dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
 		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
 
 		model.addAttribute("dataForm", dataForm);

@@ -1615,7 +1615,7 @@ $contentCatalogSDH=sdhContentCatalog
 $productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
 
 INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name						;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;estado-de-cuenta 			;Estado de cuenta 			;AccountPageTemplate:$contentCatalogSDH:Staged				;/consultas/estado-de-cuenta
+			 				;							;estado-de-cuenta 			;Estado de cuenta 			;AccountPageTemplate:$contentCatalogSDH:Staged				;/contribuyentes/estado-de-cuenta
 
 INSERT_UPDATE ContentSlotForPage;$productCVSDH[unique=true];uid[unique=true]				;position[unique=true]	;page(uid,$productCVSDH)[unique=true][default='estado-de-cuenta']	;contentSlot(uid,$productCVSDH)[unique=true]		;;;
 								;						;SideContent-EstadoCuenta			;SideContent			;																		;SideContent-EstadoCuenta						;;;

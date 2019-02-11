@@ -13,6 +13,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
@@ -116,35 +117,38 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			{
 				final CustomerModel customerModel;
 				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
-				final ConsultaContribuyenteBPRequest docsGasolinaRequest = new ConsultaContribuyenteBPRequest();
+				final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 				String numBP = "";
 				String numDoc = "";
 				String tipoDoc = "";
 				String anioGravable = "";
 				String periodo = "";
-				final int indiceSeleccionado = 0;
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				final DetGasResponse detalleResponse;
 				final SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+				SDHValidaMailRolResponse detalleContribuyente;
 
 
 				customerModel = (CustomerModel) userService.getCurrentUser();
 
 				numBP = customerModel.getNumBP();
-				docsGasolinaRequest.setNumBP(numBP);
-				tablaDocs = gasolinaService.prepararTablaDeclaracion(
-						gasolinaService.consultaDocsGasolina(docsGasolinaRequest, sdhConsultaContribuyenteBPService, LOG));
-				numBP = customerModel.getNumBP();
 				numDoc = customerModel.getDocumentNumber();
+
+				contribuyenteRequest.setNumBP(numBP);
+
+				detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
+						LOG);
+				tablaDocs = gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina());
+
 				if (tablaDocs != null)
 				{
 					for (int i = 0; i < tablaDocs.size(); i++)
 					{
 						if (!tablaDocs.get(i).toString().isEmpty())
 						{
-							tipoDoc = tablaDocs.get(indiceSeleccionado).getTipoDocumento();
+							tipoDoc = tablaDocs.get(i).getTipoDocumento();
 							break;
 						}
 					}
@@ -166,6 +170,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				dataForm.setTipoDoc(tipoDoc);
 				dataForm.setAnoGravable(anioGravable);
 				dataForm.setPeriodo(periodo);
+				dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
 
 				model.addAttribute("dataForm", dataForm);
 				URLdeterminada = gasolinaService.obtenerURL("presentar-declaracion", "impuesto", "sobretasa-gasolina");

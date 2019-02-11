@@ -27,7 +27,7 @@ public class SobreTasaGasolinaForm
 	private String tipoIdRev;
 	private String tipoIdDec;
 	private String numForm;
-	private String nombre;
+	private String NAME_ORG1;
 	private String action;
 
 	private List<SobreTasaGasolinaTabla> listaDocumentos;
@@ -185,20 +185,20 @@ public class SobreTasaGasolinaForm
 	}
 	
 	/**
-	 * @return the nombre
+	 * @return the nAME_ORG1
 	 */
-	public String getNombre()
+	public String getNAME_ORG1()
 	{
-		return nombre;
+		return NAME_ORG1;
 	}
 
 	/**
-	 * @param nombre
-	 *           the nombre to set
+	 * @param nAME_ORG1
+	 *           the nAME_ORG1 to set
 	 */
-	public void setNombre(final String nombre)
+	public void setNAME_ORG1(final String nAME_ORG1)
 	{
-		this.nombre = nombre;
+		NAME_ORG1 = nAME_ORG1;
 	}
 
 	/**
