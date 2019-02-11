@@ -16,6 +16,7 @@ import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 
@@ -171,16 +172,20 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final ConsultaContribuyenteBPRequest docsGasolinaRequest = new ConsultaContribuyenteBPRequest();
+		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+		String numBP = "";
+		SDHValidaMailRolResponse detalleContribuyente;
 
-		final String numBP = customerModel.getNumBP();
+
+		numBP = customerModel.getNumBP();
 		docsGasolinaRequest.setNumBP(numBP);
 
-		final SobreTasaGasolinaForm dataForm2 = new SobreTasaGasolinaForm();
-		dataForm2.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(
-				gasolinaService.consultaDocsGasolina(docsGasolinaRequest, sdhConsultaContribuyenteBPService, LOG)));
-		dataForm2.setCatalogosSo(gasolinaService.prepararCatalogos());
+		detalleContribuyente = gasolinaService.consultaContribuyente(docsGasolinaRequest, sdhConsultaContribuyenteBPService, LOG);
+		dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
+		dataForm.setNombre(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
 
-		model.addAttribute("dataForm", dataForm2);
+		model.addAttribute("dataForm", dataForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));

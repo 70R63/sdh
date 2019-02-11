@@ -491,34 +491,32 @@ public class SobreTasaGasolinaService
 	}
 
 
-
-	public List<ImpuestoGasolina> consultaDocsGasolina(final ConsultaContribuyenteBPRequest requestInfo,
+	public SDHValidaMailRolResponse consultaContribuyente(final ConsultaContribuyenteBPRequest requestInfo,
 			final SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService, final Logger LOG)
 	{
 
-		List<ImpuestoGasolina> docsGasolina = new ArrayList<ImpuestoGasolina>();
+		final List<ImpuestoGasolina> docsGasolina = new ArrayList<ImpuestoGasolina>();
 		final String confUrl = "sdh.validacontribuyente.url";
 		final String confUser = "sdh.validacontribuyente.user";
 		final String confPass = "sdh.validacontribuyente.password";
 		final String wsNombre = "Valida_contribuyente";
 		final String wsReqMet = "POST";
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
 
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper
+			detalleContribuyente = mapper
 					.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(requestInfo), SDHValidaMailRolResponse.class);
-
-			docsGasolina = sdhConsultaContribuyenteBPResponse.getGasolina();
 		}
 		catch (final Exception e)
 		{
 			LOG.error("Error al llamar el WebService de valCont: " + e.getMessage());
 		}
 
-		return docsGasolina;
+		return detalleContribuyente;
 	}
 
 

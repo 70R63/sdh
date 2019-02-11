@@ -27,6 +27,7 @@ public class SobreTasaGasolinaForm
 	private String tipoIdRev;
 	private String tipoIdDec;
 	private String numForm;
+	private String nombre;
 	private String action;
 
 	private List<SobreTasaGasolinaTabla> listaDocumentos;
@@ -53,7 +54,7 @@ public class SobreTasaGasolinaForm
 	{
 		this.numBP = numBP;
 	}
-	
+
 	/**
 	 * @return the tipoDoc
 	 */
@@ -61,7 +62,7 @@ public class SobreTasaGasolinaForm
 	{
 		return tipoDoc;
 	}
-	
+
 	/**
 	 * @param tipoDoc
 	 *           the tipoDoc to set
@@ -182,6 +183,24 @@ public class SobreTasaGasolinaForm
 	{
 		this.numForm = numForm;
 	}
+	
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre()
+	{
+		return nombre;
+	}
+
+	/**
+	 * @param nombre
+	 *           the nombre to set
+	 */
+	public void setNombre(final String nombre)
+	{
+		this.nombre = nombre;
+	}
+
 	/**
 	 * @return the action
 	 */
