@@ -16,10 +16,13 @@ input[type=radio] {
     height: 15pt;
     vertical-align: -15pt;
 }
+<<<<<<< Updated upstream
 
 .inner2 {
    
 }
+=======
+>>>>>>> Stashed changes
 </style>
 
 
@@ -83,6 +86,7 @@ input[type=radio] {
 </div>
 
  <form:form action="/sdhstorefront/es/contribuyentes/mirit/certificacion" method="post" commandName="miRitCertificacionForm" >
+<<<<<<< Updated upstream
        
 	<br>
 	  <div class="row">  
@@ -95,6 +99,20 @@ input[type=radio] {
 			  		<form:option value="2"> <spring:theme code="mirit.certificacion.opSujeto"/> </form:option>
 				</form:select>
 			</div>
+=======
+    
+    <!--  
+	<div class="row">	
+	 	<div class="col-md-3">
+			<label class="inputlabelnew"><spring:theme code="mirit.certificacion.textImp" /></label>
+		</div>
+	    <div class="col-md-2">
+		    <form:select path="tipoCert" onchange="Hide(this.value);" cssClass="inputdropdown">
+		        <form:option value="0"> <spring:theme code="mirit.certificacion.opSeleccionar"/> </form:option>
+		  		<form:option value="1"> <spring:theme code="mirit.certificacion.opImpuesto"/> </form:option> 
+		  		<form:option value="2"> <spring:theme code="mirit.certificacion.opSujeto"/> </form:option>
+			</form:select>
+>>>>>>> Stashed changes
 		</div>
 		
 		<div class="col-md-2" >
@@ -102,6 +120,7 @@ input[type=radio] {
 				<spring:theme code="mirit.certificacion.btnGenerar" />
 			</button>
 		</div>
+<<<<<<< Updated upstream
 	  </div>	
 	
   	<br>
@@ -146,6 +165,50 @@ input[type=radio] {
 		    </div>    
 	    </div>
     </div>
+=======
+	</div>
+	-->
+	
+	
+	<!-- <div id="myDIV"  style="display:none">  --> 
+		<div class="row">				
+			<div class="col-md-3">
+				<label class="inputlabelnew"><spring:theme code="mirit.certificacion.tituloImpuesto" /></label>
+			</div>
+		</div>
+        
+        <br>
+		    <div class="row">	
+				<div class="col-md-2 ">
+					<button class="boton btn-secondary " type="submit" >
+						<spring:theme code="mirit.certificacion.btnGenerar" />
+					</button>
+				</div>
+			</div>
+   		<br>
+        
+		<c:if test="${miRitCertificacionForm.bPredial == 'X'}">
+			<input type="radio" name="tipoImp" id="tipoImp" value="01" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
+		</c:if>
+		<c:if test="${miRitCertificacionForm.bVehicular == 'X'}">
+			<input type="radio" name="tipoImp" id="tipoImp" value="02" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
+		</c:if>	
+		<c:if test="${miRitCertificacionForm.bIca == 'X'}">
+			<input type="radio" name="tipoImp" id="tipoImp" value="03" style="visibility: visible"><spring:theme code="mirit.certificacion.opICA"/><br>	
+    	</c:if>
+    	<c:if test="${miRitCertificacionForm.bPublicidadExt == 'X'}">
+    		<input type="radio" name="tipoImp" id="tipoImp" value="07" style="visibility: visible"><spring:theme code="mirit.certificacion.opPublicidadExterior"/><br>
+    	</c:if>
+    	<c:if test="${miRitCertificacionForm.bSobreGasolina == 'X'}">
+    		<input type="radio" name="tipoImp" id="tipoImp" value="05" style="visibility: visible"><spring:theme code="mirit.certificacion.opSobretasaGasolina"/><br>
+    	</c:if>	
+    	<c:if test="${miRitCertificacionForm.bDelineacionUrbana == 'X'}">
+    		<input type="radio" name="tipoImp" id="tipoImp" value="06" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
+    	</c:if>		
+    	
+	 <!-- </div> -->    
+    
+>>>>>>> Stashed changes
   </form:form>
 
   <script>

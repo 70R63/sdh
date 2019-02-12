@@ -32,7 +32,11 @@
 	<div class="col-md-2">
 
 		<select id="anograv" class="inputlabelnew" disabled="disabled">
+<<<<<<< Updated upstream
 			<option value="${declaPublicidadForm.anograv}">${declaPublicidadForm.anograv}</option>
+=======
+			<option value=" ">${declaPublicidadForm.anograv}</option>
+>>>>>>> Stashed changes
 		</select>
 	</div>
 

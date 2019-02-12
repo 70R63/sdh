@@ -43,7 +43,11 @@ ACC.mirit = {
 		    	    	$("#countryDireccionContacto").append(o);
 		    	});
 		    	
+<<<<<<< Updated upstream
 		    	$("#countryDireccionContacto").val(ACC.addressContactoCountry);
+=======
+		    	$("#countryDireccionContacto").val(ACC.addressNotificationCountry);
+>>>>>>> Stashed changes
 		    	
 		    	
 		    	var o = new Option( "SELECCIONAR","");

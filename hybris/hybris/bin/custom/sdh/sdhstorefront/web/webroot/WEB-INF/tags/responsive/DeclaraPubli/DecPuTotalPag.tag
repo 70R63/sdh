@@ -82,6 +82,7 @@
 <div class="row">
 	<div class="col-md-3 col-md-offset-3 center">
 
+<<<<<<< Updated upstream
 <%-- 		<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST"> --%>
 <!-- 			<button id="/contribuyentes/publicidadexterior/declaracion" type="submit" -->
 <!-- 				class="botton"> -->
@@ -93,6 +94,14 @@
 				class="botton">
 				<spring:theme code="declaracion.publicidad.button.calcular" />
 				</button>
+=======
+		<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST">
+			<button id="/contribuyentes/publicidadexterior/declaracion" type="submit"
+				class="botton">
+				<spring:theme code="declaracion.publicidad.button.calcular" />
+				</button>
+			</sf:form>
+>>>>>>> Stashed changes
 
 		<!-- <sf:button id="/contribuyentes/publicidadexterior/declaracion"
 			action="/contribuyentes/publicidadexterior/declaracion" type="submit"

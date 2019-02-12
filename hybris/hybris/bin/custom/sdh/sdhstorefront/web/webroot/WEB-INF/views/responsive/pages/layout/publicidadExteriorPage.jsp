@@ -23,6 +23,7 @@
 	
 		<publicidadExterior:publicidadExteriorTable />
 		<publicidadExterior:publicidadExteriorDetail />
+<<<<<<< Updated upstream
 <%-- 		<publicidadExterior:publicidadExteriorAvisos /> --%>
 		<publicidadExterior:publicidadExteriorTubularComercial />
 		<publicidadExterior:publicidadExteriorVehiculos />
@@ -37,4 +38,13 @@
 
 	
 	
+=======
+		<publicidadExterior:publicidadExteriorAvisos />
+		<publicidadExterior:publicidadExteriorConvencional />
+		<publicidadExterior:publicidadExteriorVehiculos />
+		<publicidadExterior:publicidadExteriorTubular />
+	</div>
+	</sf:form>
+	
+>>>>>>> Stashed changes
 </template:page>
