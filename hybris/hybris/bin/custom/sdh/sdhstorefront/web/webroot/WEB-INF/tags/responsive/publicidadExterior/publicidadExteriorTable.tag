@@ -80,7 +80,6 @@
 <div class="row">
 	<div class="col-md-2 col-md-offset-5 center">
 
-<<<<<<< Updated upstream
 <%-- 		<sf:button --%>
 <%-- 			action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior" --%>
 <%-- 			type="submit" class="boton" id="accionBoton" name="accionBoton" --%>
@@ -88,14 +87,6 @@
 <%-- 			<spring:theme code="publicidad.exterior.declarationpresent" /> --%>
 <%-- 		</sf:button> --%>
 	<button id="presentarDeclaracionButton" class="" type="button"><spring:theme code="publicdad.exterior.presentarDeclaracionButton" text="Presentar" /> </button>
-=======
-		<sf:button
-			action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior"
-			type="submit" class="boton" id="accionBoton" name="accionBoton"
-			value="declarar">
-			<spring:theme code="publicidad.exterior.declarationpresent" />
-		</sf:button>
->>>>>>> Stashed changes
 	</div>
 </div>
 <div class="row">
@@ -147,11 +138,7 @@
 <%-- 				value="buscar"> --%>
 <%-- 				<spring:theme code="publicidad.exterior.detail.search" /> --%>
 <%-- 			</sf:button> --%>
-<<<<<<< Updated upstream
 			<button id="searchDetailButton" class="" type="button"><spring:theme code="publicdad.exterior.searchDetailButton" text="Buscar" /> </button>
-=======
-			<button id="searchDetailButton" class="btn btn-primary btn-lg" type="button"><spring:theme code="publicdad.exterior.searchDetailButton" text="Buscar" /> </button>
->>>>>>> Stashed changes
 
 		</div>
 	</div>

@@ -15,10 +15,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-<<<<<<< Updated upstream
-import de.hybris.platform.core.GenericSearchConstants.LOG;
-=======
->>>>>>> Stashed changes
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -236,7 +232,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 				for (final DetallePubli eachDetalle : detallePublicidadResponse.getDetalle())
 					{
 
-<<<<<<< Updated upstream
 					if ("VALLA VEHICULOS".equalsIgnoreCase(tipovalla) || "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
 						{
 
@@ -265,11 +260,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 							publicidadForm.setTipoServicio("-");
 						}
 
-=======
-					if (" VALLA VEHICULOS".equalsIgnoreCase(tipovalla) || "VALLA VEHICULOS".equalsIgnoreCase(tipovalla)
-							|| "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla) || " VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
-						{
->>>>>>> Stashed changes
 						//publicidadForm.setTipoPublici(eachDetalle.getTipoPublici());
 						if ("01".equals(eachDetalle.getTipoPublici()))
 						{
@@ -285,11 +275,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						}
 						else
 						{
-<<<<<<< Updated upstream
 							publicidadForm.setTipoPublici("-");
-=======
-							publicidadForm.setTipoPublici(" ");
->>>>>>> Stashed changes
 						}
 
 						if ("01".equals(eachDetalle.getTipoElemento()))
@@ -322,7 +308,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						}
 						else
 						{
-<<<<<<< Updated upstream
 							publicidadForm.setTipoElemento("-");
 						}
 
@@ -501,63 +486,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						publicidadForm.setUbicacion(eachDetalle.getUbicacion());
 						publicidadForm.setTipoPublici(eachDetalle.getTipoPublici());
 
-=======
-							publicidadForm.setTipoElemento(" ");
-						}
-						publicidadForm.setNumCaras(eachDetalle.getNumCaras());
-
-						if ("01".equals(eachDetalle.getPeriodicidad()))
-						{
-							publicidadForm.setPeriodicidad("Permanente");
-						}
-						else if ("02".equals(eachDetalle.getPeriodicidad()))
-						{
-							publicidadForm.setPeriodicidad("Temporal");
-						}
-						else
-						{
-							publicidadForm.setPeriodicidad(" ");
-						}
-						publicidadForm.setModelo(eachDetalle.getModelo());
-						publicidadForm.setPlaca(eachDetalle.getPlaca());
-						publicidadForm.setNumLicenciaTrans(eachDetalle.getNumLicenciaTrans());
-						if ("01".equals(eachDetalle.getTipoServicio()))
-						{
-							publicidadForm.setTipoServicio("Publico");
-						}
-						else if ("02".equals(eachDetalle.getTipoServicio()))
-						{
-							publicidadForm.setTipoServicio("Particular");
-						}
-						else if ("03".equals(eachDetalle.getTipoServicio()))
-						{
-							publicidadForm.setTipoServicio("Publico colectivo");
-						}
-						else if ("04".equals(eachDetalle.getTipoServicio()))
-						{
-							publicidadForm.setTipoServicio("Publico individual");
-						}
-						else
-						{
-							publicidadForm.setTipoServicio(" ");
-						}
-						if ("01".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Costado del Vehiculo");
-						}
-						else if ("02".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Capota del Vehiculo");
-						}
-						else
-						{
-							publicidadForm.setUbicacion(" ");
-						}
-
-						}
-					else if ("VALLA AVISOS".equals(tipovalla))
-						{
->>>>>>> Stashed changes
 						if ("01".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Registro Nuevo");
@@ -579,7 +507,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 							publicidadForm.setTipoSolicitud(" ");
 						}
 
-<<<<<<< Updated upstream
 					}
 					else if ("Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
 					{
@@ -623,28 +550,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						else
 						{
 							publicidadForm.setOrientacion("-");
-=======
-
-						if ("01".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Avisos en fachada");
-						}
-						else if ("02".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Aviso separado de fachada tipo valla convencional");
-						}
-						else if ("03".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Zancudo");
-						}
-						else if ("04".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Aviso divisible");
-						}
-						else
-						{
-							publicidadForm.setTipoElemento(" ");
->>>>>>> Stashed changes
 						}
 
 						if ("01".equals(eachDetalle.getAvisoLumino()))
@@ -657,7 +562,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						}
 						else
 						{
-<<<<<<< Updated upstream
 							publicidadForm.setAvisoLumino("-");
 						}
 
@@ -714,68 +618,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						publicidadForm.setChip(eachDetalle.getChip());
 						publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
 						publicidadForm.setMatricula(eachDetalle.getMatricula());
-=======
-							publicidadForm.setAvisoLumino(" ");
-						}
-
-						if ("01".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Primer Piso");
-						}
-						else if ("02".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Parqueadero");
-						}
-						else if ("03".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Antepecho del segundo piso");
-						}
-						else if ("04".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Canopy porte superior del edificio(de 5 mas pisos)");
-						}
-						else
-						{
-							publicidadForm.setUbicacion(" ");
-						}
-						publicidadForm.setChip(eachDetalle.getChip());
-						publicidadForm.setMatricula(eachDetalle.getMatricula());
-						publicidadForm.setDireccion(eachDetalle.getDireccion());
-						publicidadForm.setLocalidad(eachDetalle.getLocalidad());
-						publicidadForm.setCodPostal(eachDetalle.getCodPostal());
-						publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
-						publicidadForm.setAreaFachada(eachDetalle.getAreaFachada());
-						publicidadForm.setNumFracciones(eachDetalle.getNumFracciones());
-
-					}
-					else if (tipovalla.equals("VALLA CONVENCIONAL"))
-					{
-
-						if ("01".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Valla convencional de obra comercial");
-						}
-						else if ("02".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Valla convencional de obra institucional");
-						}
-						else
-						{
-							publicidadForm.setTipoElemento("");
-						}
-
-						publicidadForm.setLicenciaConstruc(eachDetalle.getLicenciaConstruc());
-						publicidadForm.setDireccion(eachDetalle.getDireccion());//repetido
-						publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
-						publicidadForm.setContratoObra(eachDetalle.getContratoObra());
-						publicidadForm.setOrientacion(eachDetalle.getOrientacion());
-						publicidadForm.setFiducia(eachDetalle.getFiducia());
-						publicidadForm.setLocalidad(eachDetalle.getLocalidad());//repetido
-						publicidadForm.setCodPostal(eachDetalle.getCodPostal());//repetido
-						publicidadForm.setLicenciaUrb(eachDetalle.getLicenciaUrb());
-						publicidadForm.setCodPostal(eachDetalle.getCodPostal());//repetido
-						publicidadForm.setChip(eachDetalle.getChip());//repetido
->>>>>>> Stashed changes
 
 						if ("01".equals(eachDetalle.getUbicacion()))
 						{
@@ -783,7 +625,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						}
 						else if ("02".equals(eachDetalle.getUbicacion()))
 						{
-<<<<<<< Updated upstream
 							publicidadForm.setUbicacion("Lote privado");
 						}
 						else if ("03".equals(eachDetalle.getUbicacion()))
@@ -794,19 +635,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						{
 							publicidadForm.setUbicacion("-");
 						}
-=======
-							publicidadForm.setUbicacion("Lote Privado");
-						}
-						else if ("03".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Espacio Publico");
-						}
-						else
-						{
-							publicidadForm.setUbicacion(" ");
-						}
-						publicidadForm.setMatricula(eachDetalle.getMatricula());//repetido
->>>>>>> Stashed changes
 
 						if ("01".equals(eachDetalle.getTipoPublici()))
 						{
@@ -816,7 +644,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						{
 							publicidadForm.setTipoPublici("Institucional");
 						}
-<<<<<<< Updated upstream
 						else if ("03".equals(eachDetalle.getTipoPublici()))
 						{
 							publicidadForm.setTipoPublici("Cultural");
@@ -833,14 +660,11 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						{
 							publicidadForm.setTipoPublici("Otra");
 						}
-=======
->>>>>>> Stashed changes
 						else
 						{
 							publicidadForm.setTipoPublici(" ");
 						}
 
-<<<<<<< Updated upstream
 						if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
 						{
 							publicidadForm.setOrientacion("Oriente-Occidente");
@@ -896,63 +720,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						}
 
 
-=======
-						publicidadForm.setNumCaras(eachDetalle.getNumCaras());//repetido
-						publicidadForm.setVigLicenConstruc(eachDetalle.getVigLicenConstruc());
-						publicidadForm.setPeriodicidad(eachDetalle.getPeriodicidad());//repetido
-
-					}
-					else if (tipovalla.equals("VALLA TUBULAR") || "Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
-					{
-
-						publicidadForm.setTipoElemento(eachDetalle.getTipoElemento());//repetido
-						publicidadForm.setDireccion(eachDetalle.getDireccion());//repetido
-						publicidadForm.setLocalidad(eachDetalle.getLocalidad());//repetido
-						publicidadForm.setCodPostal(eachDetalle.getCodPostal());//repetido
-						publicidadForm.setLicenciaConstruc(eachDetalle.getLicenciaConstruc());//repetido
-						publicidadForm.setVigLicenConstruc(eachDetalle.getVigLicenConstruc());//repetido
-						if ("01".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Patio privado");
-						}
-						else if ("02".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Espacio publico");
-						}
-						else if ("03".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Edificacion Privada");
-						}
-						else if ("04".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Cubierta");
-						}
-						else if ("05".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Lote");
-						}
-						else if ("06".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Obra de construccion");
-						}
-						else if ("07".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Herramienta de lote sin urbanizar");
-						}
-						else if ("08".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Parqueadero");
-						}
-						else
-						{
-							publicidadForm.setUbicacion(" ");
-						}
-						publicidadForm.setTipoVia(eachDetalle.getTipoVia());
-						publicidadForm.setOrientacion(eachDetalle.getOrientacion());//repetido
-						publicidadForm.setChip(eachDetalle.getChip());//repetido
-						publicidadForm.setMatricula(eachDetalle.getMatricula());//repetido
-						publicidadForm.setNumCaras(eachDetalle.getNumCaras());//repetido
->>>>>>> Stashed changes
 					}
 					else
 					{
@@ -984,11 +751,4 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		return publicidadForm;
 		}
 
-
-
-
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 }
