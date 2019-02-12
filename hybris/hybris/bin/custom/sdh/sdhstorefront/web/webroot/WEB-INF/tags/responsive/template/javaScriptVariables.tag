@@ -46,31 +46,57 @@
 			<c:url var="authenticationStatusUrl" value="/authentication/status" />
 			ACC.config.authenticationStatusUrl = '${ycommerce:encodeJavaScript(authenticationStatusUrl)}';
 			
+<<<<<<< Updated upstream
+=======
 			ACC.certifNombURL ="<c:url value='/contribuyentes/mirit/certifNomb' />";
 			ACC.validaCurrentPasswrodURL ="<c:url value='/contribuyentes/mirit/validCurrentPassword' />";
 			ACC.validaEmailURL ="<c:url value='/contribuyentes/mirit/validNewEmail' />";
 			ACC.updateRitURL ="<c:url value='/contribuyentes/mirit/updateRit' />";
 			
-			ACC.addressCountry = "";
+			ACC.addressNotificationCountry = "";
 			<c:if test="${not empty miRitForm.direccionNotificacion.COUNTRY}">
-				ACC.addressCountry = "${ miRitForm.direccionNotificacion.COUNTRY}";
+				ACC.addressNotificationCountry = "${ miRitForm.direccionNotificacion.COUNTRY}";
 			</c:if>
 			
-			ACC.addressDep = "";
+			ACC.addressNotificationDep = "";
 			<c:if test="${not empty miRitForm.direccionNotificacion.REGION}">
-				ACC.addressDep = "${ miRitForm.direccionNotificacion.REGION}";
+				ACC.addressNotificationDep = "${ miRitForm.direccionNotificacion.REGION}";
 			</c:if>
 			
-			ACC.addressMun = "";
+			ACC.addressNotificationMun = "";
 			<c:if test="${not empty miRitForm.direccionNotificacion.CITY1}">
-				ACC.addressMun = "${ miRitForm.direccionNotificacion.CITY1}";
+				ACC.addressNotificationMun = "${ miRitForm.direccionNotificacion.CITY1}";
 			</c:if>
 			
-			ACC.addressPC = "";
+			ACC.addressNotificationPC = "";
 			<c:if test="${not empty miRitForm.direccionNotificacion.POST_CODE}">
-				ACC.addressPC = "${ miRitForm.direccionNotificacion.POST_CODE}";
+				ACC.addressNotificationPC = "${ miRitForm.direccionNotificacion.POST_CODE}";
+			</c:if>
+				
+			ACC.addressContactoCountry = "";
+			<c:if test="${not empty miRitForm.direccionContacto.COUNTRY}">
+				ACC.addressContactoCountry = "${ miRitForm.direccionContacto.COUNTRY}";
 			</c:if>
 			
+			ACC.addressContactoDep = "";
+			<c:if test="${not empty miRitForm.direccionContacto.REGION}">
+				ACC.addressContactoDep = "${ miRitForm.direccionContacto.REGION}";
+			</c:if>
+			
+			ACC.addressContactoMun = "";
+			<c:if test="${not empty miRitForm.direccionContacto.CITY1}">
+				ACC.addressContactoMun = "${ miRitForm.direccionContacto.CITY1}";
+			</c:if>
+			
+			ACC.addressContactoPC = "";
+			<c:if test="${not empty miRitForm.direccionContacto.POST_CODE}">
+				ACC.addressContactoPC = "${ miRitForm.direccionContacto.POST_CODE}";
+			</c:if>
+			
+			ACC.publicidadExteriorDetalleURL = "<c:url value='/contribuyentes/publicidadexterior/detalle' />";
+			
+			
+>>>>>>> Stashed changes
 			<c:forEach var="jsVar" items="${jsVariables}">
 				<c:if test="${not empty jsVar.qualifier}" >
 				ACC['${ycommerce:encodeJavaScript(jsVar.qualifier)}'] = '${ycommerce:encodeJavaScript(jsVar.value)}';
@@ -78,6 +104,9 @@
 			</c:forEach>
 		/*]]>*/
 	</script>
+	
+	<template:sdhJavascriptVariables/>
+	
 	<template:javaScriptAddOnsVariables/>
 	
 	<%-- generated variables from commonVariables.properties --%>

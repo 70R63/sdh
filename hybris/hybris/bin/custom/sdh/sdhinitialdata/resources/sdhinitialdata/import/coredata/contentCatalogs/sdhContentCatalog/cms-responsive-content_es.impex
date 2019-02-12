@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+<<<<<<< Updated upstream
 #
 # Import the SPANISH CMS content for the Public Sector Site
 #
@@ -110,5 +110,5 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];ke
  ;;DelineacionUrbanaPagosPSEPage;"Delineación Urbana - Pagos"
  ;;SobretasaGasolinaPage;"Sobretasa a la Gasolina Motor"
  ;;ActivateAccountPage;"Activar Cuenta"
->>>>>>> 815eeda245090802b22fa24dca63cdcb94f896aa
+>>>>>>> Stashed changes
  ;;PublicidadExteriorPage;"Publicidad Exterior"

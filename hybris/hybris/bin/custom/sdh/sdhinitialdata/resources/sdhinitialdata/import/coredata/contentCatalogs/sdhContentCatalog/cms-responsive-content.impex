@@ -964,7 +964,77 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 #end  Mi RIT page
 
+#---------------- new Pago PSE page ---------------- 
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;PagoPSEPageTemplate;Pago PSE Page Template;layout/pagoPSEPage;ContentPage
+<<<<<<< Updated upstream
+=======
 
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='PagoPSEPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='PagoPSEPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-PagoPSEPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-PagoPSEPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-PagoPSEPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-PagoPSEPage;Footer;;FooterSlot;true
+;;HeaderLinks-PagoPSEPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-PagoPSEPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-PagoPSEPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-PagoPSEPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-PagoPSEPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+>>>>>>> Stashed changes
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='PagoPSEPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='PagoPSEPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-PagoPSEPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-PagoPSEPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-PagoPSEPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-PagoPSEPage;Footer;;FooterSlot;true
+;;HeaderLinks-PagoPSEPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-PagoPSEPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-PagoPSEPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-PagoPSEPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-PagoPSEPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;PagoPSEPage;Pago PSE Page;PagoPSEPageTemplate;Pago PSE Page
+#----------------  end  Pago PSE page ---------------- 
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;PagoPSEPage;Pago PSE Page;PagoPSEPageTemplate;Pago PSE Page
+#----------------  end  Pago PSE page ---------------- 
 
 
 #new delineacion urbana page
@@ -1555,3 +1625,42 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 									
 #->FIN dev-eduardo Pantalla de menu MiRIT->Certificacion 23/01/2019
 #*->-----------------------------------------------------------------------------------------------------------
+#->INI dev-federico Agregar paginas para menu Declaraciones-Presentar declaracion  06/02/2019
+$productCatalogSDH=sdhProductCatalog
+$contentCatalogSDH=sdhContentCatalog
+$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
+
+INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;presentar-declaracion 		;Presentar declaración 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/contribuyentes/presentar-declaracion
+
+INSERT_UPDATE ContentSlotForPage;$productCVSDH[unique=true];uid[unique=true]				;position[unique=true]	;page(uid,$productCVSDH)[unique=true][default='presentar-declaracion']		;contentSlot(uid,$productCVSDH)[unique=true]		;;;
+								;						;SideContent-PresentarDeclaracion		;SideContent			;																		;SideContent-PresentarDeclaracion						;;;
+								;						;BodyContent-PresentarDeclaracion		;BodyContent			;																		;BodyContent-PresentarDeclaracion						;;;
+
+INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-PresentarDeclaracion	;Side Content Slot for PresentarDeclaracion		;true	;								;;;
+			 				;							;BodyContent-PresentarDeclaracion	;Body Content Slot for PresentarDeclaracion		;true	;PresentarDeclaracionComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
+				 					;							;PresentarDeclaracionComponent	;PresentarDeclaracionComponent	;/WEB-INF/views/responsive/pages/layout/presentarDeclaracion.jsp					;ViewOrderAction:$contentCatalogSDH:Staged	;PresentarDeclaracionComponent
+#->FIN dev-federico Agregar paginas para menu Declaraciones-Presentar declaracion  06/02/2019
+#->INI dev-federico Agregar paginas para menu Consultas - Estado de cuenta  11/02/2019
+$productCatalogSDH=sdhProductCatalog
+$contentCatalogSDH=sdhContentCatalog
+$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
+
+INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name						;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;estado-de-cuenta 			;Estado de cuenta 			;AccountPageTemplate:$contentCatalogSDH:Staged				;/contribuyentes/estado-de-cuenta
+
+INSERT_UPDATE ContentSlotForPage;$productCVSDH[unique=true];uid[unique=true]				;position[unique=true]	;page(uid,$productCVSDH)[unique=true][default='estado-de-cuenta']	;contentSlot(uid,$productCVSDH)[unique=true]		;;;
+								;						;SideContent-EstadoCuenta			;SideContent			;																		;SideContent-EstadoCuenta						;;;
+								;						;BodyContent-EstadoCuenta			;BodyContent			;																		;BodyContent-EstadoCuenta						;;;
+
+INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-EstadoCuenta			;Side Content Slot for Estado de Cuenta				;true	;								;;;
+			 				;							;BodyContent-EstadoCuenta			;Body Content Slot for Estado de Cuenta				;true	;EstadoCuentaComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																		;actions(uid,$productCVSDH)							;&componentRef
+				 					;							;EstadoCuentaComponent			;EstadoCuentaComponent			;/WEB-INF/views/responsive/pages/layout/estadoCuenta.jsp					;ViewOrderAction:$contentCatalogSDH:Staged			;EstadoCuentaComponent
+#->FIN dev-federico Agregar paginas para menu Consultas - Estado de cuenta  11/02/2019
+

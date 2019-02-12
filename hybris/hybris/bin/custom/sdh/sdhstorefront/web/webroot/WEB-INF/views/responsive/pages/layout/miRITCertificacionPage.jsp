@@ -12,7 +12,7 @@
 			<h3>
 				<span tabindex="0"><spring:theme code="mirit.certificacion.titulo" /></span>
 				<c:if test="${not empty miRitCertificacionForm.rit.stringRIT}">
-				  <iframe width='100%' height='600' width='15' src='data:application/pdf;/Certificación RIT#zoom=100&view=fitH&;base64,${miRitCertificacionForm.rit.stringRIT}'>	</iframe>
+				  <iframe width='100%' height='600' width='15' src=' data:application/pdf;/Certificación RIT#zoom=100&view=fitH&;base64,${miRitCertificacionForm.rit.stringRIT}'>	</iframe>
 				</c:if>  
 			</h3>
 		</div>

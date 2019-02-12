@@ -21,13 +21,13 @@
 		</h3>
 	</div>
 </div>
-
+<input type="hidden" id="numForm" name="numForm" />
 <div class="row">
 	<div class="col-md-3 col-md-offset-6 center">
 		<div class="accountActions">
-			<button class="boton" type="button">
+			<div class="boton" type="button">
 				<spring:theme code="declaracion.publicidad.button.gendecl" />
-			</button>
+			</div>
 		</div>
 		<div class="accountActions">
 			<sf:form action="${presentarDeclaracionUrl2}"
@@ -40,19 +40,19 @@
 			</sf:form>
 		</div>
 	<div class="accountActions">
-		<button class="boton" type="button">
+		<div class="boton" type="button">
 			<spring:theme code="declaracion.publicidad.button.presdec" />
-		</button>
+		</div>
 	</div>
 	<div class="accountActions">
-		<button class="boton" type="button">
+		<div class="boton" type="button">
 			<spring:theme code="declaracion.publicidad.button.pago.linea" />
-		</button>
+		</div>
 
 		<div class="accountActions">
-			<button class="boton" type="button">
+			<div class="boton" type="button">
 				<spring:theme code="declaracion.publicidad.button.rop" />
-			</button>
+			</div>
 		</div>
 	</div>
 </div>

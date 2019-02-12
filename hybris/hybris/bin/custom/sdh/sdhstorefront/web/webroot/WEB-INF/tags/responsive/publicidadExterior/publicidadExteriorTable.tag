@@ -5,29 +5,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<spring:url
-	value="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
-	var="presentarDeclaracionUrl" htmlEscape="false" />
+<spring:url value="/calculo" var="CalculodeclaracionUrl" htmlEscape="false" />
+
 
 <div class="row">
 	<div class="avisoheadline">
 		<h3>
-			<span class="p"><spring:theme code="publicidad.exterior.title"
-					text="Publicidad Exterior" /></span>
+			<span class="p"><spring:theme code="publicidad.exterior.title"	text="Publicidad Exterior" /></span>
 		</h3>
 	</div>
 	<p class="avisobody">
 		<spring:theme code="publicidad.exterior.description" />
 	</p>
-
 </div>
 
-<br />
+<br>
 
+<!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq"> -->
 
 <div class="col-md-6 col-md-offset-3">
 	<div class="table-responsive">
@@ -50,54 +47,73 @@
 						<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
 						<td><input id="action"
 							style="visibility: visible !important; margin: 0; min-height: 0;"
-							name="action" onchange="funcionUno(${loop.index})" type="radio"
-							value="VALLA VEHICULOS"></td>
+							name="action"  type="radio"
+							value="${eachPubExtTax.numResolu}, ${eachPubExtTax.tipoValla}" data-numRes="${eachPubExtTax.numResolu}" data-tipoValla="${eachPubExtTax.tipoValla}"></td>
 					</tr>
 				</c:forEach>
-
 			</tbody>
 		</table>
-		<div id="divIdVariable" style="display: none;">
+
+		<input name="numResolu" type="hidden" id="resol" /> <input
+			name="tipoValla" type="hidden" id="tValla" /> <input
+			id="inIdVariable" type="hidden" value="">
+
+		<div id="divIdVariable"
+			style="display: none !important; margin: 0; min-height: 0;">
 			<input id="inIdVariable" value="">
 		</div>
 
-		<div id="divIdResolucion" style="display: none;">
-			<input id="inIdResolucion" value="">
+		<div id="numResolu"
+			style="display: none !important; margin: 0; min-height: 0;">
+			<input id="resol" value="">
 		</div>
 
-		<div id="divIdAnio" style="display: none;">
-			<input id="inIdAnio" value="">
+		<div id="anoGravable"
+			style="display: none !important; margin: 0; min-height: 0;">
+			<input id="tValla" value="">
 		</div>
+
 	</div>
-</div>
 
 
 
 <div class="row">
+	<div class="col-md-2 col-md-offset-5 center">
 
-	<div class="col-md-3 col-md-offset-5 center">
-		<button class="boton" type="button" onclick="parametrosURL()">
+<<<<<<< Updated upstream
+<%-- 		<sf:button --%>
+<%-- 			action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior" --%>
+<%-- 			type="submit" class="boton" id="accionBoton" name="accionBoton" --%>
+<%-- 			value="declarar"> --%>
+<%-- 			<spring:theme code="publicidad.exterior.declarationpresent" /> --%>
+<%-- 		</sf:button> --%>
+	<button id="presentarDeclaracionButton" class="" type="button"><spring:theme code="publicdad.exterior.presentarDeclaracionButton" text="Presentar" /> </button>
+=======
+		<sf:button
+			action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior"
+			type="submit" class="boton" id="accionBoton" name="accionBoton"
+			value="declarar">
 			<spring:theme code="publicidad.exterior.declarationpresent" />
-		</button>
+		</sf:button>
+>>>>>>> Stashed changes
 	</div>
 </div>
-
 <div class="row">
-
 	<div class="col-md-2 col-md-offset-5 center">
-		<button class="boton" type="button">
+		<div class="boton">
 			<spring:theme code="publicidad.exterior.rop" />
-		</button>
+		</div>
 	</div>
 </div>
-<div class="row">
 
+<div class="row">
 	<div class="col-md-2 col-md-offset-5 center">
-		<button class="boton" type="button">
+		<div class="boton">
 			<spring:theme code="publicidad.exterior.payonline" />
-		</button>
+		</div>
 	</div>
 </div>
+
 <div class="row">
 	<div class="headline">
 		<h3>
@@ -107,35 +123,40 @@
 	</div>
 </div>
 
-
 <div class="row">
 	<div class="col-md-4">
 		<label class="inputlabelnew"><spring:theme
 				code="publicidad.exterior.detail.selectYear" /></label>
 	</div>
 	<div class="col-md-1">
-		<select id="anio" class="inputdropdown"
-			onchange="ShowSelected(this);">
+		<select id="anio" class="inputdropdown" name="anoGravable">
 			<option value="0">Selecciona un año</option>
 			<option value="2019">2019</option>
 			<option value="2018">2018</option>
 			<option value="2017">2017</option>
 			<option value="2016">2016</option>
+
 		</select>
 	</div>
+
 	<div class="col-md-1 col-md-offset-1">
 		<div>
-			<!-- sf:form action="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle"
-			id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
-			method="GET"-->
-				<button id="/sdhstorefront/es/contribuyentes2/publicidadexterior/detalle" type="submit" class = "botton" onclick="functionDos()"> <!-- onclick="functionDos()" id="/contribuyentes2/publicidadexterior/detalle -->
-					<spring:theme code="publicidad.exterior.detail.search" />
-				</button>
-			<!-- /sf:form-->
-		</div>
+<%-- 			<sf:button --%>
+<%-- 				action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior" --%>
+<%-- 				type="submit" class="boton" id="accionBoton" name="accionBoton" --%>
+<%-- 				value="buscar"> --%>
+<%-- 				<spring:theme code="publicidad.exterior.detail.search" /> --%>
+<%-- 			</sf:button> --%>
+<<<<<<< Updated upstream
+			<button id="searchDetailButton" class="" type="button"><spring:theme code="publicdad.exterior.searchDetailButton" text="Buscar" /> </button>
+=======
+			<button id="searchDetailButton" class="btn btn-primary btn-lg" type="button"><spring:theme code="publicdad.exterior.searchDetailButton" text="Buscar" /> </button>
+>>>>>>> Stashed changes
 
+		</div>
 	</div>
 </div>
+<!-- </form:form> -->
 
 
 

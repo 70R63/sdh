@@ -3,7 +3,9 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.InfoDeclaraPubli;
 
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
  */
 public class PublicidadForm
 {
+
 	private String numBP;
 	private String numResolu;
 	private String anoGravable;
@@ -61,8 +64,15 @@ public class PublicidadForm
 	private String orientacion;
 	private String vigLicenConstruc;
 	private String tipoVia;
+	private String tipoValla;
+
+
+
+
 
 	private List<ImpuestoPublicidadExterior> publicidadExt;
+	private InfoDeclaraPubli infodeclara;
+	private List<DetallePubli> detalle;
 
 	/**
 	 * @return the numBP
@@ -123,14 +133,6 @@ public class PublicidadForm
 		return fechResolu;
 	}
 
-	/**
-	 * @param fechResolu
-	 *           the fechResolu to set
-	 */
-	public void setFechResolu(final String fechResolu)
-	{
-		this.fechResolu = fechResolu;
-	}
 
 	/**
 	 * @return the fechNotif
@@ -147,6 +149,15 @@ public class PublicidadForm
 	public void setFechNotif(final String fechNotif)
 	{
 		this.fechNotif = fechNotif;
+	}
+
+	/**
+	 * @param fechResolu
+	 *           the fechResolu to set
+	 */
+	public void setFechResolu(final String fechResolu)
+	{
+		this.fechResolu = fechResolu;
 	}
 
 	/**
@@ -880,5 +891,60 @@ public class PublicidadForm
 	{
 		this.tipoVia = tipoVia;
 	}
+
+
+
+	/**
+	 * @return the tipoValla
+	 */
+	public String getTipoValla()
+	{
+		return tipoValla;
+	}
+
+	/**
+	 * @param tipoValla
+	 *           the tipoValla to set
+	 */
+	public void setTipoValla(final String tipoValla)
+	{
+		this.tipoValla = tipoValla;
+	}
+
+	/**
+	 * @return the infodeclara
+	 */
+	public InfoDeclaraPubli getInfodeclara()
+	{
+		return infodeclara;
+	}
+
+	/**
+	 * @param infodeclara
+	 *           the infodeclara to set
+	 */
+	public void setInfodeclara(final InfoDeclaraPubli infodeclara)
+	{
+		this.infodeclara = infodeclara;
+	}
+
+	/**
+	 * @return the detalle
+	 */
+	public List<DetallePubli> getDetalle()
+	{
+		return detalle;
+	}
+
+	/**
+	 * @param detalle
+	 *           the detalle to set
+	 */
+	public void setDetalle(final List<DetallePubli> detalle)
+	{
+		this.detalle = detalle;
+	}
+
+
 
 }

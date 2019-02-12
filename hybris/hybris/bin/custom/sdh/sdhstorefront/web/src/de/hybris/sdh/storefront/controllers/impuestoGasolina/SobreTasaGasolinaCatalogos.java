@@ -16,6 +16,7 @@ public class SobreTasaGasolinaCatalogos
 
 	private List<ItemSelectOption> opcionesCantidadMostrar;
 	//	private List<ItemSelectOption> anioGravable;
+	private Map<String, String> impuesto;
 	private Map<String, String> anioGravable;
 	private Map<String, String> periodo;
 	private List<ItemSelectOption> calidadResponsable;
@@ -30,6 +31,23 @@ public class SobreTasaGasolinaCatalogos
 	private Map<String, String> alcoholCarbu;
 	private Map<String, String> tipoIdRev;
 	private Map<String, String> tipoIdDec;
+
+	/**
+	 * @return the impuesto
+	 */
+	public Map<String, String> getImpuesto()
+	{
+		return impuesto;
+	}
+
+	/**
+	 * @param impuesto
+	 *           the impuesto to set
+	 */
+	public void setImpuesto(final Map<String, String> impuesto)
+	{
+		this.impuesto = impuesto;
+	}
 
 	/**
 	 * @return the claseProd

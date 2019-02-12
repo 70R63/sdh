@@ -16,6 +16,7 @@ import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 
@@ -73,6 +74,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+
+
+	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String handlePOST_ST(@ModelAttribute("dataForm")
@@ -118,17 +122,15 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 		detalleResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
 		System.out.println(detalleResponse);
+
+		dataForm.setNumBP(numBP);
+		dataForm.setNumDoc(numDoc);
+		dataForm.setTipoDoc(tipoDoc);
+		dataForm.setAnoGravable(anioGravable);
+		dataForm.setPeriodo(periodo);
 		dataForm.setDataForm(detalleResponse);
-		//		dataForm.setCatalogos(new SobreTasaGasolinaService().prepararCatalogos());
 
-
-		final SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
-
-
-		//		model.addAttribute("dataFormCatalogos", dataFormCatalogos);
 		model.addAttribute("dataForm", dataForm);
-		//		model.addAttribute("listaDocumentos", dataFormTabla);
-		//		model.addAttribute("dataForm", detalleGasolinaResponse);
 
 		if (action.equals("buscar"))
 		{
@@ -160,36 +162,30 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 
-
-
-
+	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina", method = RequestMethod.GET)
 	@RequireHardLogIn
-	//	 @ModelAttribute("dataForm") SobreTasaGasolinaForm dataForm
 	public String handleGET_ST(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Menu sobretasa gasolina GET --------------------------");
-		//		SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
-		List<SobreTasaGasolinaTabla> listaDocumentos;
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
-		final ConsultaContribuyenteBPRequest docsGasolinaRequest = new ConsultaContribuyenteBPRequest();
-		//		SobreTasaGasolinaTabla documentoDefault = new SobreTasaGasolinaTabla();
-
-		final String numBP = customerModel.getNumBP();
-		docsGasolinaRequest.setNumBP(numBP);
-		listaDocumentos = gasolinaService.prepararTablaDeclaracion(
-				gasolinaService.consultaDocsGasolina(docsGasolinaRequest, sdhConsultaContribuyenteBPService, LOG));
-
-		final SobreTasaGasolinaForm dataForm2 = new SobreTasaGasolinaForm();
-		dataForm2.setListaDocumentos(listaDocumentos);
-		dataForm2.setCatalogosSo(gasolinaService.prepararCatalogos());
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+		String numBP = "";
+		SDHValidaMailRolResponse detalleContribuyente;
 
 
-		//		model.addAttribute("dataFormCatalogos", dataFormCatalogos);
-		model.addAttribute("dataForm", dataForm2);
-		//		model.addAttribute("documento", documentoDefault);
+		numBP = customerModel.getNumBP();
+		contribuyenteRequest.setNumBP(numBP);
+
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
+		dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+
+		model.addAttribute("dataForm", dataForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
@@ -202,19 +198,13 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 
-
+	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String handleGET_DEC(@ModelAttribute("dataForm")
 	final SobreTasaGasolinaForm dataForm, final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
-		//		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-		//		final SobretasaGasolinaCatalogos dataFormCatalogos = new SobretasaGasolinaService().prepararCatalogos();
-		//		List<DetGasInfoDeclaraResponse> infoDeclaraDefault;
-		//		DetGasInfoDeclaraResponse valInfoDeclaraDefault;
-
-
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		String numBP = ""; //= customerModel.getNumBP();
@@ -227,23 +217,16 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		numBP = customerModel.getNumBP();
 		if (dataForm != null)
 		{
-			if (dataForm.getListaDocumentos() != null)
-			{
-				if (dataForm.getListaDocumentos().get(0) != null)
-				{
-					tipoDoc = dataForm.getListaDocumentos().get(0).getTipoDocumento();
-					numDoc = dataForm.getListaDocumentos().get(0).getNumeroDocumento();
-				}
-			}
 			anoGravable = dataForm.getAnoGravable();
 			periodo = dataForm.getPeriodo();
+			numDoc = dataForm.getNumDoc();
+			tipoDoc = dataForm.getTipoDoc();
 		}
 
 
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		final DetGasResponse wsResponse;
-		//		SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final String tipoRevisor = "1";
 		final String tipoDeclarante = "2";
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
@@ -256,7 +239,6 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		detalleGasolinaRequest.setAnoGravable(anoGravable);
 		detalleGasolinaRequest.setPeriodo(periodo);
 
-		//		dataForm = new gasolinaService().prepararInfoBP("537", "Info");
 		wsResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
 		dataForm.setAnoGravable(anoGravable);
 		dataForm.setPeriodo(periodo);
@@ -276,7 +258,6 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		}
 
 
-		//		dataForm.setInfoDeclara(valInfoDeclaraDefault);
 		dataForm.getDataForm().setInfoDeclara(infoDeclaraDefault);
 
 		dataForm.setValoresDeclara(wsResponse.getValoresDeclara());
@@ -305,7 +286,6 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 		model.addAttribute("dataForm", dataForm);
-		//		model.addAttribute("dataFormCatalogos", dataFormCatalogos);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
@@ -320,7 +300,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 
-
+	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String handlePOST_DEC(@ModelAttribute("dataForm")
@@ -355,6 +335,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		numBP = customerModel.getNumBP();
 		if (dataForm != null)
 		{
+			numDoc = dataForm.getNumDoc();
+			tipoDoc = dataForm.getTipoDoc();
 			if (dataForm.getListaDocumentos() != null)
 			{
 				if (dataForm.getListaDocumentos().get(0) != null)
