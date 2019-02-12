@@ -125,7 +125,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
-; ; PresentarDeclaracionLink     ; PRESENTAR DECLARACION               ; http://www.stateofrosebud.com/about ;;;;;
+; ; PresentarDeclaracionLink     ; PRESENTAR DECLARACION               ; "/contribuyentes/presentar-declaracion" ;;;;;
 ; ; ListaDeclaracionFirmaLink    ; LISTA DECLARACION FIRMA             ; http://www.stateofrosebud.com/about ;;;;;
 #->FIN dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 
