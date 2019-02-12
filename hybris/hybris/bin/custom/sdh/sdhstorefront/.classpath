@@ -11,11 +11,7 @@
 	<classpathentry exported="true" kind="lib" path="resources"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
-<<<<<<< Updated upstream
 	<classpathentry exported="true" kind="src" path="/platform"/>
-=======
-	<classpathentry kind="src" path="/platform"/>
->>>>>>> Stashed changes
 	<classpathentry combineaccessrules="false" kind="src" path="/xyformsstorefrontcommons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
