@@ -5,12 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="delineacionUrbana" tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
+<%@ taglib prefix="sobreTasaGasolina"
+	tagdir="/WEB-INF/tags/responsive/sobretasaGasolina"%>
 
-<template:page>
+
 	<div class="container">
-		<delineacionUrbana:delineacionUrbanaTable/>
-		<delineacionUrbana:delineacionUrbanaDetail/>
-		<delineacionUrbana:delineacionUrbanaBasicos/>
-		<delineacionUrbana:delineacionUrbanaAdicionales/>
+
+	<sobreTasaGasolina:decGasolinaGen />
+
+	
 	</div>	
-</template:page>
