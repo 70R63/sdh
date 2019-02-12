@@ -13,8 +13,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span class="cintillo col-md-10"><spring:theme
-					code="declaracion.publicidad.infovalla" /></span>
+			<span class="cintillo col-md-10"><spring:theme code="declaracion.publicidad.infovalla" /></span>
 		</h3>
 	</div>
 </div>
@@ -22,37 +21,18 @@
     margin: 5px 0;> 
 <div class="row">
 	<div class="col-md-3">
-		<label class="inputlabelnew"><spring:theme
-				code="declaracion.publicidad.luginst" /></label>
+		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.luginst" /></label>
 	</div>
 	<div class="col-md-3">
-<!-- dev-federico INI cambio de control para visualizar la lista-->
-<%-- 								<form:select path="luginst" --%>
-<%-- 							items="${declaPublicidadForm.catalogos.luginst}" --%>
-<%-- 							referenceData="${declaPublicidadForm.catalogos.luginst}" --%>
-<%-- 							class="inputdropdown" id="luginst" onchange="ShowSelected(luginst)"/> --%>
-<!-- 		<select id="luginst" class="inputdropdown" -->
-<!-- 			onchange="ShowSelected(this);"> -->
-<!-- 			<option value="">Seleccionar</option> -->
-<!-- 			<option value="0">Predio</option> -->
-<!-- 			<option value="1">Veh&iacuteculo</option> -->
-<!-- 		</select> -->
-<!-- dev-federico FIN cambio de control para visualizar la lista-->
 <c:choose>
 	<c:when test="${declaPublicidadForm.luginst eq '01'}">
-		<input id="luginst" name="luginst" class="inputtextnew"
-			aria-required="true" type="text" value="Predio" maxlength="30"
-			disabled="disabled">
+		<input id="luginst" name="luginst" class="inputtextnew" aria-required="true" type="text" value="Predio" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:when test="${declaPublicidadForm.luginst eq '02'}">
-		<input id="luginst" name="luginst" class="inputtextnew"
-			aria-required="true" type="text" value="Vehículo" maxlength="30"
-			disabled="disabled">
+		<input id="luginst" name="luginst" class="inputtextnew" aria-required="true" type="text" value="Vehículo" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:otherwise>
-		<input id="luginst" name="luginst" class="inputtextnew"
-			aria-required="true" type="text" value="" maxlength="30"
-			disabled="disabled">
+		<input id="luginst" name="luginst" class="inputtextnew" aria-required="true" type="text" value="" maxlength="30" disabled="disabled">
 	</c:otherwise>
 </c:choose>
 		
@@ -62,61 +42,33 @@
    margin: 5px 0;>
 <div class="row">
 	<div class="col-md-3">
-		<label class="inputlabelnew"><spring:theme
-				code="declaracion.publicidad.OrValla" /></label>
+		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.OrValla" /></label>
 	</div>
 	<div class="col-md-3">
-<!-- dev-federico INI cambio de control para visualizar la lista-->
-<%-- 								<form:select path="orValla" --%>
-<%--  							items="${declaPublicidadForm.catalogos.orientacionValla}" --%>
-<%--  							referenceData="${declaPublicidadForm.catalogos.orientacionValla}" --%>
-<%--  							class="inputdropdown" id="orValla"/> - --%>
-<!-- 		<select id="OrValla" class="inputdropdown"> -->
-<!-- 			<option value=" ">Seleccionar</option> -->
-
-<!-- 		</select> -->
-<!-- dev-federico FIN -->
-
 <c:choose>
 	<c:when test="${declaPublicidadForm.orValla eq '01'}">
-		<input id="orValla" name="orValla" class="inputtextnew"
-			aria-required="true" type="text" value="Oriente-Occidente" maxlength="30"
-			disabled="disabled">
+		<input id="orValla" name="orValla" class="inputtextnew" aria-required="true" type="text" value="Oriente-Occidente" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:when test="${declaPublicidadForm.orValla eq '02'}">
-		<input id="orValla" name="orValla" class="inputtextnew"
-			aria-required="true" type="text" value="Occidente-Oriente" maxlength="30"
-			disabled="disabled">
+		<input id="orValla" name="orValla" class="inputtextnew" aria-required="true" type="text" value="Occidente-Oriente" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:when test="${declaPublicidadForm.orValla eq '03'}">
-		<input id="orValla" name="orValla" class="inputtextnew"
-			aria-required="true" type="text" value="Norte-Sur" maxlength="30"
-			disabled="disabled">
+		<input id="orValla" name="orValla" class="inputtextnew" aria-required="true" type="text" value="Norte-Sur" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:when test="${declaPublicidadForm.orValla eq '04'}">
-		<input id="orValla" name="orValla" class="inputtextnew"
-			aria-required="true" type="text" value="Sur-Norte" maxlength="30"
-			disabled="disabled">
+		<input id="orValla" name="orValla" class="inputtextnew" aria-required="true" type="text" value="Sur-Norte" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:when test="${declaPublicidadForm.orValla eq '05'}">
-		<input id="orValla" name="orValla" class="inputtextnew"
-			aria-required="true" type="text" value="Derecha" maxlength="30"
-			disabled="disabled">
+		<input id="orValla" name="orValla" class="inputtextnew" aria-required="true" type="text" value="Derecha" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:when test="${declaPublicidadForm.orValla eq '06'}">
-		<input id="orValla" name="orValla" class="inputtextnew"
-			aria-required="true" type="text" value="Izquierda" maxlength="30"
-			disabled="disabled">
+		<input id="orValla" name="orValla" class="inputtextnew" aria-required="true" type="text" value="Izquierda" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:when test="${declaPublicidadForm.orValla eq '07'}">
-		<input id="orValla" name="orValla" class="inputtextnew"
-			aria-required="true" type="text" value="Ambos sentidos" maxlength="30"
-			disabled="disabled">
+		<input id="orValla" name="orValla" class="inputtextnew" aria-required="true" type="text" value="Ambos sentidos" maxlength="30" disabled="disabled">
 	</c:when>
 	<c:otherwise>
-		<input id="orValla" name="orValla" class="inputtextnew"
-			aria-required="true" type="text" value="" maxlength="30"
-			disabled="disabled">
+		<input id="orValla" name="orValla" class="inputtextnew" aria-required="true" type="text" value="" maxlength="30" disabled="disabled">
 	</c:otherwise>
 </c:choose>
 
@@ -127,22 +79,9 @@
 
 <div class="row">
 	<div class="col-md-3">
-		<label class="inputlabelnew"><spring:theme
-				code="declaracion.publicidad.tamvalla" /></label>
+		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.tamvalla" /></label>
 	</div>
 	<div class="col-md-3">
-<!-- dev-federico INI cambio de control para visualizar la lista-->
-<%-- 									<form:select path="basegrav" --%>
-<%-- 							items="${declaPublicidadForm.catalogos.basegrav}" --%>
-<%-- 							referenceData="${declaPublicidadForm.catalogos.basegrav}" --%>
-<%-- 							class="inputdropdown" id="basegrav" /> --%>
-	
-	
-<!-- 		<select id="basegrav" class="inputdropdown"> -->
-<!-- 		<option value=" ">Seleccionar</option> -->
-
-<!-- 		</select> -->
-<!-- dev-federico FIN cambio de control para visualizar la lista-->
 
 <c:choose>
 	<c:when test="${declaPublicidadForm.luginst eq '01'}">
@@ -183,6 +122,12 @@
 <br>
 
 
+<input type="hidden" value="${declaPublicidadForm.opuso }" id="opuso"/>
+<input type="hidden" value="${declaPublicidadForm.direccion }" id="direccion"/>
+<input type="hidden" value="${declaPublicidadForm.placa }" id="placa"/>
+<input type="hidden" value="${declaPublicidadForm.municipioContrib }" id="municipioContrib"/>
+<input type="hidden" value="${declaPublicidadForm.tipoIDdeclara }" id="tipoIDdeclara"/>
+<input type="hidden" value="${declaPublicidadForm.idDeclarante }" id="idDeclarante"/>
 
 
 

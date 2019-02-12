@@ -61,6 +61,8 @@
 			
 			ACC.publicidadExteriorDeclararionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion' />";
 			
+			ACC.publicidadExteriorCalculoURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion/calculo' />";
+			
 			
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},
@@ -5106,6 +5108,27 @@
 						{'depId':'95','name':'GUAVIARE'},
 						{'depId':'97','name':'VAUPES'},
 						{'depId':'99','name':'VICHADA'}];
+			
+			var localidades =[{'locId':'15','name':'Antonio Nariño'},
+				{'locId':'12','name':'Barrios Unidos'},
+				{'locId':'7','name':'Bosa'},
+				{'locId':'2','name':'Chapinero'},
+				{'locId':'19','name':'Ciudad Bolívar'},
+				{'locId':'10','name':'Engativa'},
+				{'locId':'9','name':'Fontibón'},
+				{'locId':'8','name':'Kennedy'},
+				{'locId':'17','name':'La Candelaria'},
+				{'locId':'14','name':'Los Mártires'},
+				{'locId':'16','name':'Puente Aranda'},
+				{'locId':'18','name':'Rafael Uribe Uribe'},
+				{'locId':'4','name':'San Cristóbal'},
+				{'locId':'3','name':'Santa Fé'},
+				{'locId':'11','name':'Suba'},
+				{'locId':'20','name':'Sumapaz'},
+				{'locId':'13','name':'Teusaquillo'},
+				{'locId':'6','name':'Tunjuelito'},
+				{'locId':'1','name':'Usaquén'},
+				{'locId':'5','name':'Usme'}];			
 			
 		/*]]>*/
 	</script>

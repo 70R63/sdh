@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author hybris
  *
@@ -405,21 +407,21 @@ public class CalcPublicidadRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"numResolu\":\"" + this.getNumResolu() + "\",");
-		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\",");
-		stringBuilder.append("\"opcionUso\":\"" + this.getOpcionUso() + "\",");
-		stringBuilder.append("\"fechNotif\":\"" + this.getFechNotif() + "\",");
-		stringBuilder.append("\"lugarInstala\":\"" + this.getLugarInstala() + "\",");
-		stringBuilder.append("\"direccion\":\"" + this.getDireccion() + "\",");
-		stringBuilder.append("\"placa\":\"" + this.getPlaca() + "\",");
-		stringBuilder.append("\"orientacionValla\":\"" + this.getOrientacionValla() + "\",");
-		stringBuilder.append("\"tamanoValla\":\"" + this.getTamanoValla() + "\",");
-		stringBuilder.append("\"tipoIDcontrib\":\"" + this.getTipoIDcontrib() + "\",");
-		stringBuilder.append("\"IDcontrib\":\"" + this.getIDcontrib() + "\",");
-		stringBuilder.append("\"municipioContrib\":\"" + this.getMunicipioContrib() + "\",");
-		stringBuilder.append("\"tipoIDdeclara\":\"" + this.getTipoIDdeclara() + "\",");
-		stringBuilder.append("\"IDdeclarante\":\"" + this.getIDdeclarante() + "\"");
+		stringBuilder.append("\"numBP\":\"" +((StringUtils.isBlank( this.getNumBP())) ? "" :  this.getNumBP()) + "\",");
+		stringBuilder.append("\"numResolu\":\"" +((StringUtils.isBlank( this.getNumResolu())) ? "" :  this.getNumResolu()) + "\",");
+		stringBuilder.append("\"anoGravable\":\"" +((StringUtils.isBlank(this.getAnoGravable())) ? "" : this.getAnoGravable())  + "\",");
+		stringBuilder.append("\"opcionUso\":\"" +((StringUtils.isBlank(this.getOpcionUso())) ? "" : this.getOpcionUso() ) + "\",");
+		stringBuilder.append("\"fechNotif\":\"" +((StringUtils.isBlank(this.getFechNotif())) ? "" :this.getFechNotif())  + "\",");
+		stringBuilder.append("\"lugarInstala\":\"" +((StringUtils.isBlank(this.getLugarInstala())) ? "" : this.getLugarInstala())  + "\",");
+		stringBuilder.append("\"direccion\":\"" + ((StringUtils.isBlank( this.getDireccion())) ? "" :  this.getDireccion()) + "\",");
+		stringBuilder.append("\"placa\":\"" +((StringUtils.isBlank(this.getPlaca())) ? "" : this.getPlaca())  + "\",");
+		stringBuilder.append("\"orientacionValla\":\"" +((StringUtils.isBlank(this.getOrientacionValla())) ? "" : this.getOrientacionValla())  + "\",");
+		stringBuilder.append("\"tamanoValla\":\"" +((StringUtils.isBlank(this.getTamanoValla())) ? "" : this.getTamanoValla())  + "\",");
+		stringBuilder.append("\"tipoIDcontrib\":\"" +((StringUtils.isBlank(this.getTipoIDcontrib())) ? "" : this.getTipoIDcontrib())  + "\",");
+		stringBuilder.append("\"IDcontrib\":\"" +((StringUtils.isBlank(this.getIDcontrib())) ? "" : this.getIDcontrib())  + "\",");
+		stringBuilder.append("\"municipioContrib\":\"" +((StringUtils.isBlank(this.getMunicipioContrib())) ? "" : this.getMunicipioContrib())  + "\",");
+		stringBuilder.append("\"tipoIDdeclara\":\"" +((StringUtils.isBlank(this.getTipoIDdeclara())) ? "" : this.getTipoIDdeclara())  + "\",");
+		stringBuilder.append("\"IDdeclarante\":\"" + ((StringUtils.isBlank(this.getIDdeclarante())) ? "" : this.getIDdeclarante())  + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();

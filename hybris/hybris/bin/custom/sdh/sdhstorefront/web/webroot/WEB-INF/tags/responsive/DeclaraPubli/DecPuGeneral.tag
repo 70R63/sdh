@@ -32,7 +32,7 @@
 	<div class="col-md-2">
 
 		<select id="anograv" class="inputlabelnew" disabled="disabled">
-			<option value=" ">${declaPublicidadForm.anograv}</option>
+			<option value="${declaPublicidadForm.anograv}">${declaPublicidadForm.anograv}</option>
 		</select>
 	</div>
 
@@ -64,7 +64,7 @@
 		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.fenoti" /></label>
 	</div>
 	<div class="col-md-2">
-		<input id="fecresol" name="fecresol" class="inputtextnew"
+		<input id="fechnotif" name="fechnotif" class="inputtextnew"
 			aria-required="true" type="" value="${declaPublicidadForm.fechnotif}" maxlength="30"
 			disabled="disabled">
 	</div>
