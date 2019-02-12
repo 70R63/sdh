@@ -16,79 +16,136 @@ input[type=radio] {
     height: 15pt;
     vertical-align: -15pt;
 }
+
+.inner2 {
+   
+}
 </style>
 
+
+
+<script>
+	function borrarMenu(bPredial, bVehicular, bIca, bPublicidadExt, bSobreGasolina, bDelineacionUrbana) {
+		debugger;
+		
+		var li_array = document.getElementsByTagName('li');
+		var atag;
+		var atag2;
+		var itext;
+		var borrar_index;
+		
+		
+	    
+		for( submenu_index = 1; submenu_index <= 6; submenu_index++ ) {
+	    	for( li_index = 11; li_index <= 16; li_index++ ) {
+	    		
+	    		a_array = li_array[li_index].getElementsByTagName('a');
+		    	
+	    		for( a_index = 0; a_index < a_array.length; a_index++ ) {
+		    		itext = a_array[a_index].getAttribute('href');
+		    		
+		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("http://www.stateofrosebud.com/about"))                 ) ||
+		    			( (bIca != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/icareteica"))                      ) ||
+		    			( (bPredial != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/predialunificado"))            ) ||
+		    			( (bPublicidadExt != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/publicidadexterior"))    ) ||
+		    			( (bVehicular != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/sobrevehiculosautomotores")) ) ||
+		    		    ( (bSobreGasolina != "X") && (itext.includes("/sdhstorefront/es/contribuyentes/sobretasa-gasolina"))     )
+		    		  )			
+		    		{
+		    			borrar_index = true;
+		    			break;
+		    		}
+		    		else{
+		    			borrar_index = false;
+		    			break;
+		    		}
+			    }
+	    		
+	    		if(borrar_index){
+	    			li_array[li_index].remove();
+	    		}
+	    	}
+		}	
+	}	
+	
+	borrarMenu("${miRitCertificacionForm.bPredial}", "${miRitCertificacionForm.bVehicular}", "${miRitCertificacionForm.bIca}", "${miRitCertificacionForm.bPublicidadExt}", "${miRitCertificacionForm.bSobreGasolina}", "${miRitCertificacionForm.bDelineacionUrbana}");
+</script>
+
+
+
+
 <div class="row">
-	<div class="container">
-	 	<div class=" headline">
-			<h3 class="cintillo">
-				<span tabindex="0"><spring:theme code="mirit.certificacion.titulo" /></span>
-			</h3>
-		</div>
+ 	<div class=" headline">
+		<h2>
+			<span tabindex="0"><spring:theme code="mirit.certificacion.titulo" /></span>
+		</h2>
 	</div>
 </div>
 
  <form:form action="/sdhstorefront/es/contribuyentes/mirit/certificacion" method="post" commandName="miRitCertificacionForm" >
-    
-    <!--  
-	<div class="row">	
-	 	<div class="col-md-3">
-			<label class="inputlabelnew"><spring:theme code="mirit.certificacion.textImp" /></label>
+       
+	<br>
+	  <div class="row">  
+	    <div class=" col-md-2">
+	    	<div class="form-group ">
+	    	    <label class="control-label" for="tipoCert"><spring:theme code="mirit.certificacion.textImp" /></label>
+	    	    <form:select  id="tipoCert" path="tipoCert" onchange="Hide(this.value);" cssClass="form-control">
+			        <form:option value="0"> <spring:theme code="mirit.certificacion.opSeleccionar"/> </form:option>
+			  		<form:option value="1"> <spring:theme code="mirit.certificacion.opImpuesto"/> </form:option> 
+			  		<form:option value="2"> <spring:theme code="mirit.certificacion.opSujeto"/> </form:option>
+				</form:select>
+			</div>
 		</div>
-	    <div class="col-md-2">
-		    <form:select path="tipoCert" onchange="Hide(this.value);" cssClass="inputdropdown">
-		        <form:option value="0"> <spring:theme code="mirit.certificacion.opSeleccionar"/> </form:option>
-		  		<form:option value="1"> <spring:theme code="mirit.certificacion.opImpuesto"/> </form:option> 
-		  		<form:option value="2"> <spring:theme code="mirit.certificacion.opSujeto"/> </form:option>
-			</form:select>
-		</div>
-		<div class="col-md-2 ">
-			<button class="boton btn-secondary " type="submit" >
+		
+		<div class="col-md-2" >
+			<button class="btn btn-primary btn-block" type="submit" style="margin-top: 30px;margin-left: 40px">
 				<spring:theme code="mirit.certificacion.btnGenerar" />
 			</button>
 		</div>
-	</div>
-	-->
+	  </div>	
 	
+  	<br>
+  		
 	
-	<!-- <div id="myDIV"  style="display:none">  --> 
-		<div class="row">				
-			<div class="col-md-3">
-				<label class="inputlabelnew"><spring:theme code="mirit.certificacion.tituloImpuesto" /></label>
+	<div class="row">
+		<div id="myDIV"  style="display:none">
+		
+		    <div class="headline">				
+				<h2>
+					<span tabindex="0"><spring:theme code="mirit.certificacion.tituloImpuesto" /></span>
+				</h2>			
 			</div>
-		</div>
-        
-        <br>
-		    <div class="row">	
-				<div class="col-md-2 ">
-					<button class="boton btn-secondary " type="submit" >
-						<spring:theme code="mirit.certificacion.btnGenerar" />
-					</button>
-				</div>
-			</div>
-   		<br>
-        
-		<c:if test="${miRitCertificacionForm.bPredial == 'X'}">
-			<input type="radio" name="tipoImp" id="tipoImp" value="01" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
-		</c:if>
-		<c:if test="${miRitCertificacionForm.bVehicular == 'X'}">
-			<input type="radio" name="tipoImp" id="tipoImp" value="02" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
-		</c:if>	
-		<c:if test="${miRitCertificacionForm.bIca == 'X'}">
-			<input type="radio" name="tipoImp" id="tipoImp" value="03" style="visibility: visible"><spring:theme code="mirit.certificacion.opICA"/><br>	
-    	</c:if>
-    	<c:if test="${miRitCertificacionForm.bPublicidadExt == 'X'}">
-    		<input type="radio" name="tipoImp" id="tipoImp" value="07" style="visibility: visible"><spring:theme code="mirit.certificacion.opPublicidadExterior"/><br>
-    	</c:if>
-    	<c:if test="${miRitCertificacionForm.bSobreGasolina == 'X'}">
-    		<input type="radio" name="tipoImp" id="tipoImp" value="05" style="visibility: visible"><spring:theme code="mirit.certificacion.opSobretasaGasolina"/><br>
-    	</c:if>	
-    	<c:if test="${miRitCertificacionForm.bDelineacionUrbana == 'X'}">
-    		<input type="radio" name="tipoImp" id="tipoImp" value="06" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
-    	</c:if>		
-    	
-	 <!-- </div> -->    
-    
+		
+			<br>
+		    
+			<div class=" col-md-2">
+				<c:if test="${miRitCertificacionForm.bPredial == 'X'}">
+					<input type="radio" name="tipoImp" id="tipoImp" value="01" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
+				</c:if>
+				
+				
+				<c:if test="${miRitCertificacionForm.bVehicular == 'X'}">
+					<input type="radio" name="tipoImp" id="tipoImp" value="02" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
+				</c:if>
+				
+				<c:if test="${miRitCertificacionForm.bIca == 'X'}">
+					<input type="radio" name="tipoImp" id="tipoImp" value="03" style="visibility: visible"><spring:theme code="mirit.certificacion.opICA"/><br>	
+		    	</c:if>
+		    	
+		    	<c:if test="${miRitCertificacionForm.bPublicidadExt == 'X'}">
+		    		<input type="radio" name="tipoImp" id="tipoImp" value="07" style="visibility: visible"><spring:theme code="mirit.certificacion.opPublicidadExterior"/><br>
+		    	</c:if>
+		    	
+		    	<c:if test="${miRitCertificacionForm.bSobreGasolina == 'X'}">
+		    		<input type="radio" name="tipoImp" id="tipoImp" value="05" style="visibility: visible"><spring:theme code="mirit.certificacion.opSobretasaGasolina"/><br>
+		    	</c:if>
+		    	
+		    	<c:if test="${miRitCertificacionForm.bDelineacionUrbana == 'X'}">
+		    		<input type="radio" name="tipoImp" id="tipoImp" value="06" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
+		    	</c:if>
+		    </div>    
+	    </div>
+    </div>
   </form:form>
 
   <script>
@@ -102,3 +159,4 @@ input[type=radio] {
 	  }
 	}
   </script>
+  
