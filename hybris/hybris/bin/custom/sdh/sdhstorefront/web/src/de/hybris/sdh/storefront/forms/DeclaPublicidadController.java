@@ -51,7 +51,6 @@ public class DeclaPublicidadController
 	private String idNumber;
 	private String idType;
 
-
 	/**
 	 * @return the catalogos
 	 */

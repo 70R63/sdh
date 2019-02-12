@@ -67,7 +67,6 @@
 	</div>
 
 	<div class="row">
-		
 		<div class="col-md-3">
 			<label class="inputlabelnew vehiculos"><spring:theme
 					code="publicidad.exterior.vehicles.licensenumber" /></label>
