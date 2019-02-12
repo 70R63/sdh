@@ -37,7 +37,7 @@ input[type=radio] {
 		
 	    
 		for( submenu_index = 1; submenu_index <= 6; submenu_index++ ) {
-	    	for( li_index = 7; li_index <= 16; li_index++ ) {
+	    	for( li_index = 7; li_index <= 19; li_index++ ) {
 	    		
 	    		a_array = li_array[li_index].getElementsByTagName('a');
 		    	
