@@ -16,63 +16,76 @@ import java.util.List;
  */
 public class SobreTasaGasolinaForm
 {
+
+	private String numBP;
+	private String tipoDoc;
+	private String impuesto;
 	private String anoGravable;
 	private String periodo;
-	private List<SobreTasaGasolinaTabla> listaDocumentos;
-	private DetGasResponse dataForm;
-	private SobreTasaGasolinaCatalogos catalogosSo;
-
-	private String NumDoc;
+	private String numDoc;
 	private String opcionUso;
 	private String tipoIdRev;
 	private String tipoIdDec;
 	private String numForm;
+	private String NAME_ORG1;
+	private String action;
+	private String tipoConsulta;
 
-	private DetGasCatalogos catalogosDe;
+	private List<SobreTasaGasolinaTabla> listaDocumentos;
+	private DetGasResponse dataForm;
+	private SobreTasaGasolinaCatalogos catalogosSo;
 
-	//	private List<DetGasInfoDeclaraResponse> infoDeclara;
 	private DetGasValoresDeclaraResponse valoresDeclara;
 	private DetGasRevisorDeclaranteResponse revisor;
 	private DetGasRevisorDeclaranteResponse Declarante;
 
-	private String action;
-
-
 
 
 	/**
-	 * @return the numForm
+	 * @return the numBP
 	 */
-	public String getNumForm()
+	public String getNumBP()
 	{
-		return numForm;
+		return numBP;
+	}
+	/**
+	 * @param numBP the numBP to set
+	 */
+	public void setNumBP(final String numBP)
+	{
+		this.numBP = numBP;
 	}
 
 	/**
-	 * @param numForm
-	 *           the numForm to set
+	 * @return the tipoDoc
 	 */
-	public void setNumForm(final String numForm)
+	public String getTipoDoc()
 	{
-		this.numForm = numForm;
-	}
-	/**
-	 * @return the action
-	 */
-	public String getAction()
-	{
-		return action;
+		return tipoDoc;
 	}
 
 	/**
-	 * @param action
-	 *           the action to set
+	 * @param tipoDoc
+	 *           the tipoDoc to set
 	 */
-	public void setAction(final String action)
+	public void setTipoDoc(final String tipoDoc)
 	{
-		this.action = action;
+		this.tipoDoc = tipoDoc;
 	}
-
+	/**
+	 * @return the impuesto
+	 */
+	public String getImpuesto()
+	{
+		return impuesto;
+	}
+	/**
+	 * @param impuesto the impuesto to set
+	 */
+	public void setImpuesto(final String impuesto)
+	{
+		this.impuesto = impuesto;
+	}
 	/**
 	 * @return the anoGravable
 	 */
@@ -80,16 +93,13 @@ public class SobreTasaGasolinaForm
 	{
 		return anoGravable;
 	}
-
 	/**
-	 * @param anoGravable
-	 *           the anoGravable to set
+	 * @param anoGravable the anoGravable to set
 	 */
 	public void setAnoGravable(final String anoGravable)
 	{
 		this.anoGravable = anoGravable;
 	}
-
 	/**
 	 * @return the periodo
 	 */
@@ -97,101 +107,41 @@ public class SobreTasaGasolinaForm
 	{
 		return periodo;
 	}
-
 	/**
-	 * @param periodo
-	 *           the periodo to set
+	 * @param periodo the periodo to set
 	 */
 	public void setPeriodo(final String periodo)
 	{
 		this.periodo = periodo;
 	}
-
-	/**
-	 * @return the listaDocumentos
-	 */
-	public List<SobreTasaGasolinaTabla> getListaDocumentos()
-	{
-		return listaDocumentos;
-	}
-
-	/**
-	 * @param listaDocumentos
-	 *           the listaDocumentos to set
-	 */
-	public void setListaDocumentos(final List<SobreTasaGasolinaTabla> listaDocumentos)
-	{
-		this.listaDocumentos = listaDocumentos;
-	}
-
-	/**
-	 * @return the dataForm
-	 */
-	public DetGasResponse getDataForm()
-	{
-		return dataForm;
-	}
-
-	/**
-	 * @param dataForm
-	 *           the dataForm to set
-	 */
-	public void setDataForm(final DetGasResponse dataForm)
-	{
-		this.dataForm = dataForm;
-	}
-
-	/**
-	 * @return the catalogosSo
-	 */
-	public SobreTasaGasolinaCatalogos getCatalogosSo()
-	{
-		return catalogosSo;
-	}
-
-	/**
-	 * @param catalogosSo
-	 *           the catalogosSo to set
-	 */
-	public void setCatalogosSo(final SobreTasaGasolinaCatalogos catalogosSo)
-	{
-		this.catalogosSo = catalogosSo;
-	}
-
 	/**
 	 * @return the numDoc
 	 */
 	public String getNumDoc()
 	{
-		return NumDoc;
+		return numDoc;
 	}
-
 	/**
-	 * @param numDoc
-	 *           the numDoc to set
+	 * @param numDoc the numDoc to set
 	 */
 	public void setNumDoc(final String numDoc)
 	{
-		NumDoc = numDoc;
+		this.numDoc = numDoc;
 	}
-
 	/**
-	 * @return the opcionesUso
+	 * @return the opcionUso
 	 */
 	public String getOpcionUso()
 	{
 		return opcionUso;
 	}
-
 	/**
-	 * @param opcionesUso
-	 *           the opcionesUso to set
+	 * @param opcionUso the opcionUso to set
 	 */
-	public void setOpcionesUso(final String opcionesUso)
+	public void setOpcionUso(final String opcionUso)
 	{
-		this.opcionUso = opcionesUso;
+		this.opcionUso = opcionUso;
 	}
-
 	/**
 	 * @return the tipoIdRev
 	 */
@@ -199,16 +149,13 @@ public class SobreTasaGasolinaForm
 	{
 		return tipoIdRev;
 	}
-
 	/**
-	 * @param tipoIdRev
-	 *           the tipoIdRev to set
+	 * @param tipoIdRev the tipoIdRev to set
 	 */
 	public void setTipoIdRev(final String tipoIdRev)
 	{
 		this.tipoIdRev = tipoIdRev;
 	}
-
 	/**
 	 * @return the tipoIdDec
 	 */
@@ -216,35 +163,101 @@ public class SobreTasaGasolinaForm
 	{
 		return tipoIdDec;
 	}
-
 	/**
-	 * @param tipoIdDec
-	 *           the tipoIdDec to set
+	 * @param tipoIdDec the tipoIdDec to set
 	 */
 	public void setTipoIdDec(final String tipoIdDec)
 	{
 		this.tipoIdDec = tipoIdDec;
 	}
-
 	/**
-	 * @return the catalogosDe
+	 * @return the numForm
 	 */
-	public DetGasCatalogos getCatalogosDe()
+	public String getNumForm()
 	{
-		return catalogosDe;
+		return numForm;
+	}
+	/**
+	 * @param numForm the numForm to set
+	 */
+	public void setNumForm(final String numForm)
+	{
+		this.numForm = numForm;
 	}
 
 	/**
-	 * @param catalogosDe
-	 *           the catalogosDe to set
+	 * @return the nAME_ORG1
 	 */
-	public void setCatalogosDe(final DetGasCatalogos catalogosDe)
+	public String getNAME_ORG1()
 	{
-		this.catalogosDe = catalogosDe;
+		return NAME_ORG1;
 	}
 
+	/**
+	 * @param nAME_ORG1
+	 *           the nAME_ORG1 to set
+	 */
+	public void setNAME_ORG1(final String nAME_ORG1)
+	{
+		NAME_ORG1 = nAME_ORG1;
+	}
 
-
+	/**
+	 * @return the action
+	 */
+	public String getAction()
+	{
+		return action;
+	}
+	/**
+	 * @param action the action to set
+	 */
+	public void setAction(final String action)
+	{
+		this.action = action;
+	}
+	/**
+	 * @return the listaDocumentos
+	 */
+	public List<SobreTasaGasolinaTabla> getListaDocumentos()
+	{
+		return listaDocumentos;
+	}
+	/**
+	 * @param listaDocumentos the listaDocumentos to set
+	 */
+	public void setListaDocumentos(final List<SobreTasaGasolinaTabla> listaDocumentos)
+	{
+		this.listaDocumentos = listaDocumentos;
+	}
+	/**
+	 * @return the dataForm
+	 */
+	public DetGasResponse getDataForm()
+	{
+		return dataForm;
+	}
+	/**
+	 * @param dataForm the dataForm to set
+	 */
+	public void setDataForm(final DetGasResponse dataForm)
+	{
+		this.dataForm = dataForm;
+	}
+	/**
+	 * @return the catalogosSo
+	 */
+	public SobreTasaGasolinaCatalogos getCatalogosSo()
+	{
+		return catalogosSo;
+	}
+	/**
+	 * @param catalogosSo the catalogosSo to set
+	 */
+	public void setCatalogosSo(final SobreTasaGasolinaCatalogos catalogosSo)
+	{
+		this.catalogosSo = catalogosSo;
+	}
 	/**
 	 * @return the valoresDeclara
 	 */
@@ -252,16 +265,13 @@ public class SobreTasaGasolinaForm
 	{
 		return valoresDeclara;
 	}
-
 	/**
-	 * @param valoresDeclara
-	 *           the valoresDeclara to set
+	 * @param valoresDeclara the valoresDeclara to set
 	 */
 	public void setValoresDeclara(final DetGasValoresDeclaraResponse valoresDeclara)
 	{
 		this.valoresDeclara = valoresDeclara;
 	}
-
 	/**
 	 * @return the revisor
 	 */
@@ -269,16 +279,13 @@ public class SobreTasaGasolinaForm
 	{
 		return revisor;
 	}
-
 	/**
-	 * @param revisor
-	 *           the revisor to set
+	 * @param revisor the revisor to set
 	 */
 	public void setRevisor(final DetGasRevisorDeclaranteResponse revisor)
 	{
 		this.revisor = revisor;
 	}
-
 	/**
 	 * @return the declarante
 	 */
@@ -286,14 +293,29 @@ public class SobreTasaGasolinaForm
 	{
 		return Declarante;
 	}
-
 	/**
-	 * @param declarante
-	 *           the declarante to set
+	 * @param declarante the declarante to set
 	 */
 	public void setDeclarante(final DetGasRevisorDeclaranteResponse declarante)
 	{
 		Declarante = declarante;
+	}
+
+	/**
+	 * @return the tipoConsulta
+	 */
+	public String getTipoConsulta()
+	{
+		return tipoConsulta;
+	}
+
+	/**
+	 * @param tipoConsulta
+	 *           the tipoConsulta to set
+	 */
+	public void setTipoConsulta(final String tipoConsulta)
+	{
+		this.tipoConsulta = tipoConsulta;
 	}
 
 

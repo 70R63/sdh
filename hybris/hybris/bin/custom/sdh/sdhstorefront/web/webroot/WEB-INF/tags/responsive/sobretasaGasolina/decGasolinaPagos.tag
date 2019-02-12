@@ -10,68 +10,59 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<h3>
-			<span tabindex="0" class="col-md-12 cintillo"><spring:theme
-					code="impuestos.decGasolina.Pagos.titulo" /></span>
-		</h3>
+		<div class="headline">
+			<h3>
+				<span tabindex="0"><spring:theme
+						code="impuestos.decGasolina.Pagos.titulo" /></span>
+			</h3>
+		</div>
 	</div>
 </div>
 
-<div class="col-md-10">
+<div class="row">
 	<div class="row">
-		<div class="col-md-2">
-			<label class="inputlabelnew"><spring:theme
-					code="impuestos.decGasolina.Pagos.valorSobretasa" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="valorSobretasa" name="valorSobretasa"
-					class="inputtextnew" aria-required="true" type="text"
-					readonly="readonly" value="${dataForm.valoresDeclara.vlrSobretasa}"
-					maxlength="240">
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.Pagos.valorSobretasa" /></label> <input
+					id="valorSobretasa" name="valorSobretasa" class="form-control"
+					aria-required="true" type="text" readonly="readonly"
+					value="${dataForm.valoresDeclara.vlrSobretasa}" maxlength="240">
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-2">
-			<label class="inputlabelnew"><spring:theme
-					code="impuestos.decGasolina.Pagos.valorSansiones" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="valorSansiones" name="valorSansiones"
-					class="inputtextnew" aria-required="true" type="text"
-					readonly="readonly" value="${dataForm.valoresDeclara.vlrSancPagos}"
-					maxlength="240">
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.Pagos.valorSansiones" /></label> <input
+					id="valorSansiones" name="valorSansiones" class="form-control"
+					aria-required="true" type="text" readonly="readonly"
+					value="${dataForm.valoresDeclara.vlrSancPagos}" maxlength="240">
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-2">
-			<label class="inputlabelnew"><spring:theme
-					code="impuestos.decGasolina.Pagos.valorIntereses" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="valorIntereses" name="valorIntereses"
-					class="inputtextnew" aria-required="true" type="text"
-					readonly="readonly" value="${dataForm.valoresDeclara.interesMora}"
-					maxlength="240">
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.Pagos.valorIntereses" /></label> <input
+					id="valorIntereses" name="valorIntereses" class="form-control"
+					aria-required="true" type="text" readonly="readonly"
+					value="${dataForm.valoresDeclara.interesMora}" maxlength="240">
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-2">
-			<label class="inputlabelnew"><spring:theme
-					code="impuestos.decGasolina.Pagos.menosCompensaciones" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="menosCompensaciones" name="menosCompensaciones"
-					readonly="readonly" class="inputtextnew" aria-required="true"
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.Pagos.menosCompensaciones" /></label> <input
+					id="menosCompensaciones" name="menosCompensaciones"
+					readonly="readonly" class="form-control" aria-required="true"
 					type="text" readonly="readonly"
 					value="${dataForm.valoresDeclara.menosCompensa}" maxlength="240">
 			</div>
@@ -79,18 +70,15 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-2">
-			<label class="inputlabelnew"><spring:theme
-					code="impuestos.decGasolina.Pagos.valorTotalPagar" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="valorTotalPagar" name="valorTotalPagar"
-					class="inputtextnew" aria-required="true" type="text"
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.Pagos.valorTotalPagar" /></label> <input
+					id="valorTotalPagar" name="valorTotalPagar" class="form-control"
+					aria-required="true" type="text"
 					value="${dataForm.valoresDeclara.totalPagar}" maxlength="240">
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="row"></div>

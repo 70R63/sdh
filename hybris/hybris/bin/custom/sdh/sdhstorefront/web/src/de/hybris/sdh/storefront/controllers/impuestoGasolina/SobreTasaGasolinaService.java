@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
@@ -32,23 +33,15 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class SobreTasaGasolinaService
 {
-	//	public List<TelefonoInfo> buscarTelefonosByID(final int id)
-	//	{
-	//		if (id == 1) // ejemplo de logica adicional en la capa de servicio, aca se pueden agregar validaciones o formateos adicionales para preparar la lista final
-	//		{
-	//			return new DeclaracionGasolinaDAOImpl().leerTelefonos();
-	//		}
-	//		else
-	//		{
-	//			return null;
-	//		}
-	//	}
+	private static final String REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE = AbstractController.REDIRECT_PREFIX
+			+ "/contribuyentes/sobretasa-gasolina/declaracion-gasolina";
 
 	public SobreTasaGasolinaCatalogos prepararCatalogos()
 	{
 
 		final SobreTasaGasolinaCatalogos catalogosForm = new SobreTasaGasolinaCatalogos();
 
+		//Sobretasa a gasolina
 		catalogosForm.setOpcionesCantidadMostrar(obtenerListaOpcionesCantidadMostrar());
 		catalogosForm.setAnioGravable(obtenerListaAnioGravable(2019, 4));
 		catalogosForm.setPeriodo(obtenerListaPeriodo());
@@ -57,30 +50,62 @@ public class SobreTasaGasolinaService
 		catalogosForm.setLocalidad(obtenerListaLocalidades());
 		catalogosForm.setTipoId(obtenerListaTipoId());
 
+		//Liquidador gasolina
 		catalogosForm.setOpcionesUso(obtenerListaOpcionesUso());
 		catalogosForm.setClaseProd(obtenerListaClaseProd());
 		catalogosForm.setAlcoholCarbu(obtenerListaAlcoholCarbu());
 		catalogosForm.setTipoIdRev(obtenerListaTipoId());
 		catalogosForm.setTipoIdDec(obtenerListaTipoId());
 
+		//Presentar declaracion
+		catalogosForm.setImpuesto(obtenerListaImpuesto());
+
+		//Consulta estado de cuenta
+		catalogosForm.setTipoConsulta(obtenerListaTipoConsulta());
+
 
 		return catalogosForm;
 	}
+
+
+	private Map<String, String> obtenerListaImpuesto()
+	{
+		final Map<String, String> elementos = new HashMap<String, String>();
+
+		elementos.put("0", "Seleccionar");
+		elementos.put("1", "Predial Unificado");
+		elementos.put("2", "Vehículos");
+		elementos.put("3", "ICA");
+		elementos.put("4", "Publicidad Exterior");
+		elementos.put("5", "Sobretasa Gasolina");
+		elementos.put("6", "Delineación Urbana");
+
+		return elementos;
+	}
+
+	private Map<String, String> obtenerListaTipoConsulta()
+	{
+		final Map<String, String> elementos = new HashMap<String, String>();
+
+		elementos.put("0", "Seleccionar");
+		elementos.put("1", "Impuesto");
+		elementos.put("2", "Sujeto");
+
+		return elementos;
+	}
+
 
 	/**
 	 * @param i
 	 * @param j
 	 * @return
 	 */
-	//	private List<ItemSelectOption> obtenerListaAnioGravable(final int anioBase, final int cantidadAnios)
 	private Map<String, String> obtenerListaAnioGravable(final int anioBase, final int cantidadAnios)
 	{
-		//		final List<ItemSelectOption> elementos = new ArrayList<ItemSelectOption>();
 		final Map<String, String> elementos = new HashMap<String, String>();
 
 		for (int i = 0; i < cantidadAnios; i++)
 		{
-			//			elementos.add(new ItemSelectOption(Integer.toString(i), Integer.toString(anioBase - i)));
 			elementos.put(Integer.toString(anioBase - i), Integer.toString(anioBase - i));
 		}
 
@@ -382,7 +407,6 @@ public class SobreTasaGasolinaService
 			final Logger LOG)
 	{
 
-		//		System.out.println(requestInfo);
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		DetGasResponse detalleGasolinaResponse = new DetGasResponse();
 		final String confUrl = "sdh.detalleGasolina.url";
@@ -464,7 +488,6 @@ public class SobreTasaGasolinaService
 			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
 	{
 
-		//		System.out.println(requestInfo);
 		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
 		CalculaGasolinaResponse responseInfo = new CalculaGasolinaResponse();
 		final String confUrl = "sdh.calculoGasolina.url";
@@ -486,43 +509,32 @@ public class SobreTasaGasolinaService
 	}
 
 
-
-	public List<ImpuestoGasolina> consultaDocsGasolina(final ConsultaContribuyenteBPRequest requestInfo,
+	public SDHValidaMailRolResponse consultaContribuyente(final ConsultaContribuyenteBPRequest requestInfo,
 			final SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService, final Logger LOG)
 	{
 
-		//		System.out.println(requestInfo);
-		//		final ConsultaContribuyenteBPRequest request = new ConsultaContribuyenteBPRequest();
-		//		final SDHConsultaContribuyenteBPResponse request = new ConsultaContribuyenteBPRequest();
-		//		DetalleGasolinaResponse detalleGasolinaResponse = new DetalleGasolinaResponse();
-		List<ImpuestoGasolina> docsGasolina = new ArrayList<ImpuestoGasolina>();
+		final List<ImpuestoGasolina> docsGasolina = new ArrayList<ImpuestoGasolina>();
 		final String confUrl = "sdh.validacontribuyente.url";
 		final String confUser = "sdh.validacontribuyente.user";
 		final String confPass = "sdh.validacontribuyente.password";
 		final String wsNombre = "Valida_contribuyente";
 		final String wsReqMet = "POST";
-
-
-
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
 
 		try
 		{
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper
+			detalleContribuyente = mapper
 					.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(requestInfo), SDHValidaMailRolResponse.class);
-
-			docsGasolina = sdhConsultaContribuyenteBPResponse.getGasolina();
 		}
 		catch (final Exception e)
 		{
-			// XXX Auto-generated catch block
 			LOG.error("Error al llamar el WebService de valCont: " + e.getMessage());
-			//			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
 
-		return docsGasolina;
+		return detalleContribuyente;
 	}
 
 
@@ -584,5 +596,21 @@ public class SobreTasaGasolinaService
 		return consultaGasolinaResponse;
 	}
 
+	public String obtenerURL(final String origen, final String accion, final String destino)
+	{
+		String returnURL = "";
+
+		if (origen.equals("presentar-declaracion"))
+		{
+			if (accion.equals("impuesto"))
+			{
+				if (destino.equals("sobretasa-gasolina"))
+				{
+					returnURL = REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE;
+				}
+			}
+		}
+		return returnURL;
+	}
 
 }

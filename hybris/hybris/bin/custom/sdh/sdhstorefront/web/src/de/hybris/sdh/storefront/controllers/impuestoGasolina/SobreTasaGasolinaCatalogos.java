@@ -16,6 +16,7 @@ public class SobreTasaGasolinaCatalogos
 
 	private List<ItemSelectOption> opcionesCantidadMostrar;
 	//	private List<ItemSelectOption> anioGravable;
+	private Map<String, String> impuesto;
 	private Map<String, String> anioGravable;
 	private Map<String, String> periodo;
 	private List<ItemSelectOption> calidadResponsable;
@@ -30,6 +31,28 @@ public class SobreTasaGasolinaCatalogos
 	private Map<String, String> alcoholCarbu;
 	private Map<String, String> tipoIdRev;
 	private Map<String, String> tipoIdDec;
+
+
+	private Map<String, String> tipoConsulta;
+
+
+
+	/**
+	 * @return the impuesto
+	 */
+	public Map<String, String> getImpuesto()
+	{
+		return impuesto;
+	}
+
+	/**
+	 * @param impuesto
+	 *           the impuesto to set
+	 */
+	public void setImpuesto(final Map<String, String> impuesto)
+	{
+		this.impuesto = impuesto;
+	}
 
 	/**
 	 * @return the claseProd
@@ -267,6 +290,23 @@ public class SobreTasaGasolinaCatalogos
 	public void setFuenteDato(final List<ItemSelectOption> fuenteDato)
 	{
 		this.fuenteDato = fuenteDato;
+	}
+
+	/**
+	 * @return the tipoConsulta
+	 */
+	public Map<String, String> getTipoConsulta()
+	{
+		return tipoConsulta;
+	}
+
+	/**
+	 * @param tipoConsulta
+	 *           the tipoConsulta to set
+	 */
+	public void setTipoConsulta(final Map<String, String> tipoConsulta)
+	{
+		this.tipoConsulta = tipoConsulta;
 	}
 
 
