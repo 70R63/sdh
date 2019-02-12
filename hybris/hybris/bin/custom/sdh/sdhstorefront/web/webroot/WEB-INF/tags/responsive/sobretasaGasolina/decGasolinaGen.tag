@@ -12,62 +12,65 @@
 <div class="row">
 	<div class="col-md-6">
 		<div class="headline">
-			<h3>
+			<h2>
 				<span tabindex="0"> <spring:theme
 						code="impuestos.decGasolina.DatosGenerales.titulo" />
 				</span>
-			</h3>
+			</h2>
 		</div>
 	</div>
 </div>
 
 <sf:form action="" method="POST" modelAttribute="dataForm" id="forma">
 	<div class="row">
-		<div class="col-md-2">
-			<label class="control-label"><spring:theme
-					code="impuestos.decGasolina.DatosGenerales.anioGravableConsultar" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<select class="form-control"></select>
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.DatosGenerales.anioGravableConsultar" /></label>
+				<sf:select path="anoGravable"
+					items="${dataForm.catalogosSo.anioGravable}"
+					referenceData="${dataForm.catalogosSo.anioGravable}"
+					class="form-control" />
 			</div>
 		</div>
-		<div class="col-md-2">
-			<label class="control-label"><spring:theme
-					code="impuestos.decGasolina.DatosGenerales.Periodo" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<select class="form-control"></select>
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.DatosGenerales.Periodo" /></label>
+				<sf:select path="periodo" items="${dataForm.catalogosSo.periodo}"
+					referenceData="${dataForm.catalogosSo.periodo}"
+					class="form-control" />
 			</div>
 		</div>
 	</div>
 	<br>
 
 	<div class="row">
-		<div class="col-md-2">
-			<label class="control-label"><spring:theme
-					code="impuestos.decGasolina.DatosGenerales.numeroIdentificacion" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input value="${dataForm.numDoc}"
-					class="form-control form-control" maxlength="30" size="20" disabled="disabled"></input>
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.DatosGenerales.numeroIdentificacion" /></label>
+				<sf:input path="numDoc" value="${dataForm.numDoc}"
+					class="form-control form-control" maxlength="30" size="20"
+					readonly="true" />
 				<!-- 				<input id="numeroId" name="numeroId" class="form-control form-control" -->
 				<!-- 					aria-required="true" type="text" value="" maxlength="240"> -->
 			</div>
 		</div>
-		<div class="col-md-2">
-			<label class="control-label"><spring:theme
-					code="impuestos.decGasolina.DatosGenerales.OpcionesUso" /></label>
-		</div>
-		<div class="col-md-2">
+
+		<div class="col-md-4">
 			<div class="form-group ">
-				<select class="form-control"></select>
+				<label class="control-label"><spring:theme
+						code="impuestos.decGasolina.DatosGenerales.OpcionesUso" /></label>
+				<div class="form-group ">
+					<sf:select path="opcionUso"
+					items="${dataForm.catalogosSo.opcionesUso}"
+					referenceData="${dataForm.catalogosSo.opcionesUso}"
+					class="form-control" />
+				</div>
 			</div>
 		</div>
 	</div>
-
 
 	<div class="row">
 		<div class="col-md-6">
@@ -103,18 +106,18 @@
 				<c:forEach items="${dataForm.dataForm.infoDeclara}" var="info"
 					varStatus="loop">
 					<tr>
-						<td><div class="col-md-1">
+						<td><div class="col-md-12">
 								<sf:select path="dataForm.infoDeclara[${loop.index}].claseProd"
 									items="${dataForm.catalogosSo.claseProd}"
 									referenceData="${dataForm.catalogosSo.claseProd}"
 									class="form-control" />
 							</div></td>
-						<td><div class="col-md-1 col-md-offset-8">
+						<td><div class="col-md-12">
 								<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
 									value="${info.galonesGra}" class="form-control form-control"
 									maxlength="30" size="20" />
 							</div></td>
-						<td><div class="col-md-1 col-md-offset-4">
+						<td><div class="col-md-12">
 								<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
 									value="${info.precioRef}" class="form-control form-control"
 									maxlength="30" size="20" readonly="true" />
@@ -126,13 +129,13 @@
 									referenceData="${dataForm.catalogosSo.alcoholCarbu}"
 									class="form-control" />
 							</div></td>
-						<td><div class="col-md-1 col-md-offset-2">
+						<td><div class="col-md-12">
 								<sf:input
 									path="dataForm.infoDeclara[${loop.index}].baseGravable"
 									value="${info.baseGravable}" class="form-control form-control"
 									maxlength="30" size="20" readonly="true" />
 							</div></td>
-						<td><div class="col-md-1">
+						<td><div class="col-md-12">
 								<sf:input
 									path="dataForm.infoDeclara[${loop.index}].vlrSobretasa"
 									value="${info.vlrSobretasa}" class="form-control form-control"
@@ -144,15 +147,7 @@
 		</table>
 	</div>
 
-	<br />
-	<br />
-
-	<div class="form-group ">
-		<sf:button action="${presentarDeclaracionUrl}" type="submit"
-			class="btn btn-primary btn-lg" id="action"
-			name="action" value="calcular">
-			<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
-		</sf:button>
+	
 
 		<!-- 		<button id="presentarDeclaracionUrl" type="submit" -->
 		<!-- 			class="btn btn-primary btn-block"> -->
@@ -163,8 +158,20 @@
 		<!-- 	<button class="btn btn-primary btn-block" type="button"> -->
 		<%-- 		<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" /> --%>
 		<!-- 	</button> -->
-	</div>
-
+	
+<br >
+	<br >
+<div class="row">
+<div class="col-md-12 col-md-offset-4">
+	<div class="form-group ">
+		<sf:button action="${presentarDeclaracionUrl}" type="submit"
+			class="btn btn-primary btn-lg" id="action" name="action"
+			value="calcular">
+			<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
+		</sf:button>
+		</div>
+		</div>
+		</div>
 
 
 </sf:form>

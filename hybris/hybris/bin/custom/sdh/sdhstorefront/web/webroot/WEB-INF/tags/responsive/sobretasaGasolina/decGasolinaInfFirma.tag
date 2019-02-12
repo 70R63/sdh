@@ -44,7 +44,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="form-group ">
+		<div class="form-group col-md-offset-4">
 			<button class="btn btn-primary btn-lg" type="button">
 				<spring:theme code="impuestos.decGasolina.InformacionFirma.Firma" />
 			</button>
