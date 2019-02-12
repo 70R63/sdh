@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.hybris.sdh.storefront.controllers.declaraciones;
+package de.hybris.sdh.storefront.controllers.consultas;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("dataForm")
 
-public class PresentarDeclaracion extends AbstractSearchPageController
+public class ConsultaEstado extends AbstractSearchPageController
 {
 
 
@@ -57,9 +57,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
 
 	// CMS Pages
-	private static final String PRESENTAR_DECLARACION_CMS_PAGE = "presentar-declaracion";
-	private static final String REDIRECT_TO_PRESENTAR_DECLARACION_PAGE = REDIRECT_PREFIX + "/contribuyentes/presentar-declaracion";
-	private static final String DECLARACIONES_GASOLINA_CMS_PAGE = "declaracion-gasolina";
+	private static final String ESTADO_DE_CUENTA_CMS_PAGE = "estado-de-cuenta";
+	private static final String REDIRECT_TO_ESTADO_DE_CUENTA_PAGE = REDIRECT_PREFIX + "/contribuyentes/estado-de-cuenta";
 
 
 	@Resource(name = "userService")
@@ -79,7 +78,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 
 	//-----------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/estado-de-cuenta", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String handleGET_PD(final Model model) throws CMSItemNotFoundException
 	{
@@ -87,14 +86,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService().prepararCatalogos());
-		dataForm.setAnoGravable("2019");
-		dataForm.setPeriodo("1");
-
 		model.addAttribute("dataForm", dataForm);
 
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
@@ -106,7 +101,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 
 	//-----------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/estado-de-cuenta", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String handlePOST_ST(final Model model, @ModelAttribute("dataForm")
 	final SobreTasaGasolinaForm dataFormResponse, @RequestParam(value = "action")
@@ -148,9 +143,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				if (detalleContribuyente.getIdmsj() != 0)
 				{
 					LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-					GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+					GlobalMessages.addErrorMessage(model, "error.consultas.estadoDeCuenta.error1");
 				}
-
 
 				tablaDocs = gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina());
 
@@ -190,8 +184,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			else
 			{
 
-				storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
-				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+				storeCmsPageInModel(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
+				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
 				model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 				model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 

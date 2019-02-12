@@ -23,6 +23,9 @@ public class DetGasResponse
 	private List<DetGasInfoDeclaraResponse> infoDeclara;
 	private DetGasValoresDeclaraResponse valoresDeclara;
 	private List<DetGasRevisorDeclaranteResponse> revisorDeclarante;
+
+	private List<ErrorEnWS> errores;
+
 	/**
 	 * @return the calidResp
 	 */
@@ -30,7 +33,7 @@ public class DetGasResponse
 	{
 		return calidResp;
 	}
-	
+
 	/**
 	 * @param calidResp
 	 *           the calidResp to set
@@ -46,7 +49,7 @@ public class DetGasResponse
 	{
 		return almacProd;
 	}
-	
+
 	/**
 	 * @param almacProd
 	 *           the almacProd to set
@@ -62,7 +65,7 @@ public class DetGasResponse
 	{
 		return ubicaPlanta;
 	}
-	
+
 	/**
 	 * @param ubicaPlanta
 	 *           the ubicaPlanta to set
@@ -78,7 +81,7 @@ public class DetGasResponse
 	{
 		return numTanques;
 	}
-	
+
 	/**
 	 * @param numTanques
 	 *           the numTanques to set
@@ -94,7 +97,7 @@ public class DetGasResponse
 	{
 		return almacTanque;
 	}
-	
+
 	/**
 	 * @param almacTanque
 	 *           the almacTanque to set
@@ -110,7 +113,7 @@ public class DetGasResponse
 	{
 		return localidad;
 	}
-	
+
 	/**
 	 * @param localidad
 	 *           the localidad to set
@@ -126,7 +129,7 @@ public class DetGasResponse
 	{
 		return codPostal;
 	}
-	
+
 	/**
 	 * @param codPostal
 	 *           the codPostal to set
@@ -142,7 +145,7 @@ public class DetGasResponse
 	{
 		return representantes;
 	}
-	
+
 	/**
 	 * @param representantes
 	 *           the representantes to set
@@ -158,7 +161,7 @@ public class DetGasResponse
 	{
 		return infoDeclara;
 	}
-	
+
 	/**
 	 * @param infoDeclara
 	 *           the infoDeclara to set
@@ -174,7 +177,7 @@ public class DetGasResponse
 	{
 		return valoresDeclara;
 	}
-	
+
 	/**
 	 * @param valoresDeclara
 	 *           the valoresDeclara to set
@@ -190,7 +193,7 @@ public class DetGasResponse
 	{
 		return revisorDeclarante;
 	}
-	
+
 	/**
 	 * @param revisorDeclarante
 	 *           the revisorDeclarante to set
@@ -198,6 +201,23 @@ public class DetGasResponse
 	public void setRevisorDeclarante(final List<DetGasRevisorDeclaranteResponse> revisorDeclarante)
 	{
 		this.revisorDeclarante = revisorDeclarante;
+	}
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorEnWS> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<ErrorEnWS> errores)
+	{
+		this.errores = errores;
 	}
 
 
