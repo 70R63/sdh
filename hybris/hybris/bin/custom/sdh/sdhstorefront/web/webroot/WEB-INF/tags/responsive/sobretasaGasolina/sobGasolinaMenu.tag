@@ -66,11 +66,7 @@
 										value="${item.numeroDocumento}" readonly="true"
 										class="inputtextnew" aria-required="true" maxlength="30"
 										size="30" disabled="disabled" type="text" /></td>
-<<<<<<< Updated upstream
 								<td><sf:input path="NAME_ORG1" value="" readonly="true"
-=======
-								<td><sf:input path="" value="" readonly="true"
->>>>>>> Stashed changes
 										class="inputtextnew" aria-required="true" maxlength="30"
 										size="30" disabled="disabled" type="text" /></td>
 							</tr>

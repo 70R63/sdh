@@ -1,6 +1,5 @@
 ACC.publicidadexterior = {
 
-<<<<<<< Updated upstream
 	 _autoload: [ "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior","bindDataTable"],
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#calculoButton", function (e) {
@@ -106,11 +105,6 @@ ACC.publicidadexterior = {
 		 });
 	 },
 	 
-=======
-	 _autoload: [ "bindSearchButton","bindDialog","bindDataTable"],
-	    
-
->>>>>>> Stashed changes
 	    bindSearchButton: function () {
 	    	 $(document).on("click", "#searchDetailButton", function (e) {
 		 	        e.preventDefault();
@@ -150,7 +144,6 @@ ACC.publicidadexterior = {
 			            	$("#divVehiculos").hide();
 			            	$("#divTubular").hide();
 			            	
-<<<<<<< Updated upstream
 			            	if(tipoValla == "Valla Tubular Comercial")
 		            		{
 			            		$("#divTubularComercial").show();
@@ -198,17 +191,11 @@ ACC.publicidadexterior = {
 		            		}else if(tipoValla == "Valla Tubular de Obra")
 		            		{
 		            			$("#divTubularObra").show();
-=======
-			            	if(tipoValla == "Valla Vehículos")
-		            		{
-			            		$("#divVehiculos").show();
->>>>>>> Stashed changes
 			            		$(".inputtextnew").val();
 			            		
 			            		$("#fechResolu").val(data.fechResolu);
 			            		$("#fechNotif").val(data.fechNotif);
 			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-<<<<<<< Updated upstream
 			            		
 			            		$("#tubularObraDireccion").val(data.direccion);
 			            		$("#tubularObraLicenciaUrb").val(data.licenciaUrb);
@@ -237,28 +224,11 @@ ACC.publicidadexterior = {
 		            		{
 		            			
 		            			$("#divObraConvencional").show();
-=======
-			            		$("#vigenDesde").val(data.vigenDesde);
-			            		$("#vigenHasta").val(data.vigenHasta);
-			            		$("#tipoPublici").val(data.vigenHasta);
-			            		$("#modelo").val(data.modelo);
-			            		$("#tipoElemento").val(data.tipoElemento);
-			            		$("#placa").val(data.placa);
-			            		$("#numCaras").val(data.numCaras);
-			            		$("#numLicenciaTrans").val(data.numLicenciaTrans);
-			            		$("#periodicidad").val(data.periodicidad);
-			            		$("#tipoServicio").val(data.tipoServicio);
-			            		$("#ubicacion").val(data.ubicacion);
-		            		}else if(tipoValla == "Valla Tubular Comercial")
-		            		{
-		            			$("#divTubular").show();
->>>>>>> Stashed changes
 			            		$(".inputtextnew").val();
 			            		
 			            		$("#fechResolu").val(data.fechResolu);
 			            		$("#fechNotif").val(data.fechNotif);
 			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-<<<<<<< Updated upstream
 			            		
 			            		$("#obraConvencionalDireccion").val(data.direccion);
 			            		$("#obraConvencionaltipoPublici").val(data.tipoPublici);
@@ -304,23 +274,6 @@ ACC.publicidadexterior = {
 			            		$("#pantallaLedChip").val(data.chip);
 			            		$("#pantallaLedOrientacionVisual").val(data.orientacion);
 			            		$("#pantallaLedAreaTotal").val(data.areaTotal);
-=======
-			            		$("#vigenDesde").val(data.vigenDesde);
-			            		$("#vigenHasta").val(data.vigenHasta);
-			            		
-			            		$("#tipoElementoTubular").val(data.tipoElemento);
-			            		$("#direccionTubular").val(data.direccion);
-			            		$("#localidadTubular").val(data.localidad);
-			            		$("#codPostal").val(data.codPostal);
-			            		$("#licenciaConstruc").val(data.licenciaConstruc);
-			            		$("#vigLicenConstruc").val(data.vigLicenConstruc);
-			            		$("#ubicacionTubular").val(data.ubicacion);
-			            		$("#tipoVia").val(data.tipoVia);
-			            		$("#orientacion").val(data.orientacion);
-			            		$("#chipTubular").val(data.chip);
-			            		$("#matricula").val(data.matricula);
-			            		$("#numCarasTubular").val(data.numCaras);
->>>>>>> Stashed changes
 		            		}
 			            	
 			            },
@@ -369,15 +322,9 @@ ACC.publicidadexterior = {
 	    },
     
     
-<<<<<<< Updated upstream
 	    bindDialogPublicidadExterior: function(){
     	
     	$( "#dialogPublicidadExterior" ).dialog({ 
-=======
-    bindDialog: function(){
-    	
-    	$( "#dialog" ).dialog({ 
->>>>>>> Stashed changes
     		autoOpen: false, 
     		modal: true,
 			 draggable: false,

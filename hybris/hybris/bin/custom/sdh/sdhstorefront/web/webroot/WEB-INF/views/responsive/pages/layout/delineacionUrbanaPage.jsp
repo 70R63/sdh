@@ -9,7 +9,6 @@
 <%@ taglib prefix="sobreTasaGasolina"
 	tagdir="/WEB-INF/tags/responsive/sobretasaGasolina"%>
 
-<<<<<<< Updated upstream
 
 <div class="container">
 
@@ -25,13 +24,3 @@
 
 
 </div>
-=======
-<template:page>
-	<div class="container">
-		<delineacionUrbana:delineacionUrbanaTable/>
-		<delineacionUrbana:delineacionUrbanaDetail/>
-		<delineacionUrbana:delineacionUrbanaBasicos/>
-		<delineacionUrbana:delineacionUrbanaAdicionales/>
-	</div>	
-</template:page>
->>>>>>> Stashed changes

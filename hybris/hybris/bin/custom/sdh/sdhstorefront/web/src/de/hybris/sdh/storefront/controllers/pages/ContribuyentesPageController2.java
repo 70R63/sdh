@@ -15,7 +15,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -296,11 +295,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
-<<<<<<< Updated upstream
 		final String numBP = "0000000546";
-=======
-		String numBP = "0000000546";
->>>>>>> Stashed changes
 		//		numBP = customerModel.getNumBP();  //Pendiente descomentar para que se tome el BP que se logeo
 
 		detallePublicidadRequest.setNumBP(numBP);
@@ -817,11 +812,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 
-<<<<<<< Updated upstream
 	@RequestMapping(value = "/contribuyentes/publicidadexterior/declaracion2", method = RequestMethod.GET)
-=======
-	@RequestMapping(value = "/contribuyentes/publicidadexterior/declaracion", method = RequestMethod.GET)
->>>>>>> Stashed changes
 	//@RequireHardLogIn
 	public String declaraPublicidadpage(final Model model, @ModelAttribute("publicidadInfo")
 	final PublicidadForm dataform1) throws CMSItemNotFoundException
@@ -910,11 +901,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 	}
 
-<<<<<<< Updated upstream
 	@RequestMapping(value = "/contribuyentes/publicidadexterior/declaracion2", method = RequestMethod.POST)
-=======
-	@RequestMapping(value = "/contribuyentes/publicidadexterior/declaracion", method = RequestMethod.POST)
->>>>>>> Stashed changes
 	//@RequireHardLogIn
 	public String declapost(@ModelAttribute("declaPublicidadForm")
 	final DeclaPublicidadController dataForm, @ModelAttribute("publicidadInfo")
