@@ -7,7 +7,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-	<div id="divAvisos"  style="display:none">
+<div id="divAvisos" style="display: none;">
 		<div class="row">
 			<div class="headline">
 				<h3>
@@ -22,7 +22,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.tipoElemento}" maxlength="240">
+					<input id="address.surname" name="tipoElemento" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.tipoElemento}" maxlength="240">
 				</div>
 			</div>	
 			<div class="col-md-3">
@@ -30,7 +30,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.direccion}" maxlength="240">
+					<input id="address.surname" name="direccion" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.direccion}" maxlength="240">
 				</div>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.avisoLumino}" maxlength="240">
+					<input id="address.surname" name="avisoLumino" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.avisoLumino}" maxlength="240">
 				</div>
 			</div>	
 			<div class="col-md-3">
@@ -48,7 +48,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.localidad}" maxlength="240">
+					<input id="address.surname" name="localidad" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.localidad}" maxlength="240">
 				</div>
 			</div>	
 		</div>		
@@ -59,7 +59,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.avisoLumino}" maxlength="240">
+					<input id="address.surname" name="areaElemento" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.areaElemento}" maxlength="240">
 				</div>
 			</div>			
 			<div class="col-md-3">
@@ -67,7 +67,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.ubicacion}" maxlength="240">
+					<input id="address.surname" name="ubicacion" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.ubicacion}" maxlength="240">
 				</div>
 			</div>
 		</div>			
@@ -77,7 +77,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.chip}" maxlength="240">
+					<input id="address.surname" name="chip" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.chip}" maxlength="240">
 				</div>
 			</div>			
 			<div class="col-md-3">
@@ -85,7 +85,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.areaElemento}" maxlength="240">
+					<input id="address.surname" name="areaElemento" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.areaElemento}" maxlength="240">
 				</div>
 			</div>	
 		</div>
@@ -103,7 +103,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.areaFachada}" maxlength="240">
+					<input id="address.surname" name="areaFachada" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.areaFachada}" maxlength="240">
 				</div>
 			</div>	
 		</div>
@@ -114,8 +114,8 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="inputtextnew" aria-required="true" type="text" value="${publicForm.numFracciones}" maxlength="240">
+					<input id="address.surname" name="numFracciones" class="inputtextnew" aria-required="true" type="text" value="${publicidadForm.numFracciones}" maxlength="240">
 				</div>
 			</div>			
 		</div>
-	</div>	
+		</div>

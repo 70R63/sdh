@@ -32,17 +32,7 @@
 	<div class="col-md-2">
 
 		<select id="anograv" class="inputlabelnew" disabled="disabled">
-
-			<option value="2019">2019</option>
-			<option value="2018">2018</option>
-			<option value="2017">2017</option>
-			<option value="2016">2016</option>
-			<option value="2015">2015</option>
-			<option value="2014">2014</option>
-			<option value="2013">2013</option>
-			<option value="2012">2012</option>
-			<option value="2011">2011</option>
-			<option value="2010">2010</option>
+			<option value="${declaPublicidadForm.anograv}">${declaPublicidadForm.anograv}</option>
 		</select>
 	</div>
 
@@ -51,10 +41,9 @@
 	</div>
 	<div class="col-md-2">
 		<select id="opuso" class="inputdropdown">
-			<option value="1">Declaraci&oacuten</option>
-			<option value="2">Correcci&oacuten</option>
-			<option value="3">S&oacutelo Pago</option>
-			<option value="4">Acto Oficial</option>
+		<option value="">${declaraPublidadForm.infodeclara.opcionUso}
+			<option value="01">Declaraci&oacuten</option>
+			<option value="02">Correcci&oacuten</option>
 		</select>
 	</div>
 </div>
@@ -66,7 +55,7 @@
 	</div>
 	<div class="col-md-2">
 		<input id="numresol" name="numresol" class="inputtextnew"
-			aria-required="true" type="text" value="" maxlength="30"
+			aria-required="true" type="text" value="${declaPublicidadForm.numresol}" maxlength="30"
 			disabled="disabled">
 	</div>
 
@@ -75,7 +64,7 @@
 		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.fenoti" /></label>
 	</div>
 	<div class="col-md-2">
-		<input id="fecresol" name="fecresol" class="inputtextnew"
+		<input id="fechnotif" name="fechnotif" class="inputtextnew"
 			aria-required="true" type="" value="${declaPublicidadForm.fechnotif}" maxlength="30"
 			disabled="disabled">
 	</div>
