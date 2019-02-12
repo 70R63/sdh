@@ -106,7 +106,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
-; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; http://www.stateofrosebud.com/about ;;;;;
+; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; "/contribuyentes/delineacion-urbana" ;;;;;
 ; ; ICALink                      ; ICA                                 ; "/contribuyentes2/icareteica" ;;;;;
 ; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; "/contribuyentes2/predialunificado" ;;;;;
 ; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes2/publicidadexterior" ;;;;;

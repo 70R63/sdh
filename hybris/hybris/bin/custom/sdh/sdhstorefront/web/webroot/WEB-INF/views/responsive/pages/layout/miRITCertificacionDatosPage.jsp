@@ -29,23 +29,23 @@ input[type=radio] {
 		debugger;
 		
 		var li_array = document.getElementsByTagName('li');
-		var atag;
-		var atag2;
-		var itext;
 		var borrar_index;
-		
+		var submenu_index;
+		var li_index;
+		var a_index;
+		var itext;
 		
 	    
 		for( submenu_index = 1; submenu_index <= 6; submenu_index++ ) {
-	    	for( li_index = 11; li_index <= 16; li_index++ ) {
+	    	for( li_index = 7; li_index <= 16; li_index++ ) {
 	    		
 	    		a_array = li_array[li_index].getElementsByTagName('a');
 		    	
 	    		for( a_index = 0; a_index < a_array.length; a_index++ ) {
 		    		itext = a_array[a_index].getAttribute('href');
 		    		
-		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("http://www.stateofrosebud.com/about"))                 ) ||
-		    			( (bIca != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/icareteica"))                      ) ||
+		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("/contribuyentes/delineacion-urbana"))                 ) ||
+		    			( (bIca != "X") && (itext.includes("/contribuyentes2/icareteica"))                      ) ||
 		    			( (bPredial != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/predialunificado"))            ) ||
 		    			( (bPublicidadExt != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/publicidadexterior"))    ) ||
 		    			( (bVehicular != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/sobrevehiculosautomotores")) ) ||
@@ -69,10 +69,16 @@ input[type=radio] {
 	}	
 	
 	borrarMenu("${miRitCertificacionForm.bPredial}", "${miRitCertificacionForm.bVehicular}", "${miRitCertificacionForm.bIca}", "${miRitCertificacionForm.bPublicidadExt}", "${miRitCertificacionForm.bSobreGasolina}", "${miRitCertificacionForm.bDelineacionUrbana}");
+	
 </script>
 
-
-
+ <!--
+<div class="col-md-2" >
+			<button class="btn btn-primary btn-block" type="button" style="margin-top: 30px;margin-left: 40px" onclick='borrarMenu("${miRitCertificacionForm.bPredial}", "${miRitCertificacionForm.bVehicular}", "${miRitCertificacionForm.bIca}", "${miRitCertificacionForm.bPublicidadExt}", "${miRitCertificacionForm.bSobreGasolina}", "${miRitCertificacionForm.bDelineacionUrbana}")'>
+				<spring:theme code="mirit.certificacion.btnGenerar" />
+			</button>
+		</div>
+-->
 
 <div class="row">
  	<div class=" headline">
