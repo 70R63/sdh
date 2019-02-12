@@ -3,7 +3,9 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.CalcPublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePubli;
+import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoDeclaraPubli;
 
@@ -14,30 +16,19 @@ import java.util.List;
  * @author Maria Luisa
  *
  */
-public class PublicidadForm
+public class PubliGeneralForm
 {
-
 	private String numBP;
 	private String numResolu;
-	private String anoGravable;
 	private String fechResolu;
 	private String fechNotif;
 	private String vigenDesde;
 	private String vigenHasta;
 	private String tipoSolicitud;
-	private String opcionUso;
-	private String lugarInstala;
-	private String orientacionValla;
 	private String tamanoValla;
 	private String tipoIDdeclara;
-	private String IDdeclarante;
+	private String iddeclarante;
 	private String numForm;
-	private String impCargo;
-	private String vlrSancion;
-	private String vlrPagar;
-	private String interesMora;
-	private String totalPagar;
-	private String referencia;
 	private String tipoElemento;
 	private String avisoLumino;
 	private String ubicacion;
@@ -65,15 +56,26 @@ public class PublicidadForm
 	private String vigLicenConstruc;
 	private String tipoVia;
 	private String tipoValla;
-
-
-
-
-
+	private String anograv;
+	private String orValla;
+	private String luginst;
+	private String basegrav;
+	private String opuso;
+	private String impCar;
+	private String valsan;
+	private String valpag;
+	private String intmora;
+	private String totpag;
+	private String tipiden;
+	private String numide;
+	private String name;
+	private String refe;
+	private List<DetallePubli> detalle;
+	private PublicidadExteriorCatalogos catalogos;
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 	private InfoDeclaraPubli infodeclara;
-	private List<DetallePubli> detalle;
-
+	private DetallePublicidadResponse detalleResponse;
+	private CalcPublicidadResponse calculoResponse;
 	/**
 	 * @return the numBP
 	 */
@@ -81,7 +83,7 @@ public class PublicidadForm
 	{
 		return numBP;
 	}
-
+	
 	/**
 	 * @param numBP
 	 *           the numBP to set
@@ -90,7 +92,6 @@ public class PublicidadForm
 	{
 		this.numBP = numBP;
 	}
-
 	/**
 	 * @return the numResolu
 	 */
@@ -98,7 +99,7 @@ public class PublicidadForm
 	{
 		return numResolu;
 	}
-
+	
 	/**
 	 * @param numResolu
 	 *           the numResolu to set
@@ -107,24 +108,6 @@ public class PublicidadForm
 	{
 		this.numResolu = numResolu;
 	}
-
-	/**
-	 * @return the anoGravable
-	 */
-	public String getAnoGravable()
-	{
-		return anoGravable;
-	}
-
-	/**
-	 * @param anoGravable
-	 *           the anoGravable to set
-	 */
-	public void setAnoGravable(final String anoGravable)
-	{
-		this.anoGravable = anoGravable;
-	}
-
 	/**
 	 * @return the fechResolu
 	 */
@@ -132,25 +115,7 @@ public class PublicidadForm
 	{
 		return fechResolu;
 	}
-
-
-	/**
-	 * @return the fechNotif
-	 */
-	public String getFechNotif()
-	{
-		return fechNotif;
-	}
-
-	/**
-	 * @param fechNotif
-	 *           the fechNotif to set
-	 */
-	public void setFechNotif(final String fechNotif)
-	{
-		this.fechNotif = fechNotif;
-	}
-
+	
 	/**
 	 * @param fechResolu
 	 *           the fechResolu to set
@@ -159,7 +124,22 @@ public class PublicidadForm
 	{
 		this.fechResolu = fechResolu;
 	}
-
+	/**
+	 * @return the fechNotif
+	 */
+	public String getFechNotif()
+	{
+		return fechNotif;
+	}
+	
+	/**
+	 * @param fechNotif
+	 *           the fechNotif to set
+	 */
+	public void setFechNotif(final String fechNotif)
+	{
+		this.fechNotif = fechNotif;
+	}
 	/**
 	 * @return the vigenDesde
 	 */
@@ -167,7 +147,7 @@ public class PublicidadForm
 	{
 		return vigenDesde;
 	}
-
+	
 	/**
 	 * @param vigenDesde
 	 *           the vigenDesde to set
@@ -176,7 +156,6 @@ public class PublicidadForm
 	{
 		this.vigenDesde = vigenDesde;
 	}
-
 	/**
 	 * @return the vigenHasta
 	 */
@@ -184,7 +163,7 @@ public class PublicidadForm
 	{
 		return vigenHasta;
 	}
-
+	
 	/**
 	 * @param vigenHasta
 	 *           the vigenHasta to set
@@ -193,7 +172,6 @@ public class PublicidadForm
 	{
 		this.vigenHasta = vigenHasta;
 	}
-
 	/**
 	 * @return the tipoSolicitud
 	 */
@@ -201,7 +179,7 @@ public class PublicidadForm
 	{
 		return tipoSolicitud;
 	}
-
+	
 	/**
 	 * @param tipoSolicitud
 	 *           the tipoSolicitud to set
@@ -210,76 +188,6 @@ public class PublicidadForm
 	{
 		this.tipoSolicitud = tipoSolicitud;
 	}
-
-
-	/**
-	 * @return the publicidadExt
-	 */
-	public List<ImpuestoPublicidadExterior> getPublicidadExt()
-	{
-		return publicidadExt;
-	}
-
-	/**
-	 * @param publicidadExt
-	 *           the publicidadExt to set
-	 */
-	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
-	{
-		this.publicidadExt = publicidadExt;
-	}
-
-	/**
-	 * @return the opcionUso
-	 */
-	public String getOpcionUso()
-	{
-		return opcionUso;
-	}
-
-	/**
-	 * @param opcionUso
-	 *           the opcionUso to set
-	 */
-	public void setOpcionUso(final String opcionUso)
-	{
-		this.opcionUso = opcionUso;
-	}
-
-	/**
-	 * @return the lugarInstala
-	 */
-	public String getLugarInstala()
-	{
-		return lugarInstala;
-	}
-
-	/**
-	 * @param lugarInstala
-	 *           the lugarInstala to set
-	 */
-	public void setLugarInstala(final String lugarInstala)
-	{
-		this.lugarInstala = lugarInstala;
-	}
-
-	/**
-	 * @return the orientacionValla
-	 */
-	public String getOrientacionValla()
-	{
-		return orientacionValla;
-	}
-
-	/**
-	 * @param orientacionValla
-	 *           the orientacionValla to set
-	 */
-	public void setOrientacionValla(final String orientacionValla)
-	{
-		this.orientacionValla = orientacionValla;
-	}
-
 	/**
 	 * @return the tamanoValla
 	 */
@@ -287,7 +195,7 @@ public class PublicidadForm
 	{
 		return tamanoValla;
 	}
-
+	
 	/**
 	 * @param tamanoValla
 	 *           the tamanoValla to set
@@ -296,7 +204,6 @@ public class PublicidadForm
 	{
 		this.tamanoValla = tamanoValla;
 	}
-
 	/**
 	 * @return the tipoIDdeclara
 	 */
@@ -304,7 +211,7 @@ public class PublicidadForm
 	{
 		return tipoIDdeclara;
 	}
-
+	
 	/**
 	 * @param tipoIDdeclara
 	 *           the tipoIDdeclara to set
@@ -313,24 +220,23 @@ public class PublicidadForm
 	{
 		this.tipoIDdeclara = tipoIDdeclara;
 	}
-
+	
 	/**
-	 * @return the iDdeclarante
+	 * @return the iddeclarante
 	 */
-	public String getIDdeclarante()
+	public String getIddeclarante()
 	{
-		return IDdeclarante;
+		return iddeclarante;
 	}
-
+	
 	/**
-	 * @param iDdeclarante
-	 *           the iDdeclarante to set
+	 * @param iddeclarante
+	 *           the iddeclarante to set
 	 */
-	public void setIDdeclarante(final String iDdeclarante)
+	public void setIddeclarante(final String iddeclarante)
 	{
-		IDdeclarante = iDdeclarante;
+		this.iddeclarante = iddeclarante;
 	}
-
 	/**
 	 * @return the numForm
 	 */
@@ -338,7 +244,7 @@ public class PublicidadForm
 	{
 		return numForm;
 	}
-
+	
 	/**
 	 * @param numForm
 	 *           the numForm to set
@@ -347,109 +253,6 @@ public class PublicidadForm
 	{
 		this.numForm = numForm;
 	}
-
-	/**
-	 * @return the impCargo
-	 */
-	public String getImpCargo()
-	{
-		return impCargo;
-	}
-
-	/**
-	 * @param impCargo
-	 *           the impCargo to set
-	 */
-	public void setImpCargo(final String impCargo)
-	{
-		this.impCargo = impCargo;
-	}
-
-	/**
-	 * @return the vlrSancion
-	 */
-	public String getVlrSancion()
-	{
-		return vlrSancion;
-	}
-
-	/**
-	 * @param vlrSancion
-	 *           the vlrSancion to set
-	 */
-	public void setVlrSancion(final String vlrSancion)
-	{
-		this.vlrSancion = vlrSancion;
-	}
-
-	/**
-	 * @return the vlrPagar
-	 */
-	public String getVlrPagar()
-	{
-		return vlrPagar;
-	}
-
-	/**
-	 * @param vlrPagar
-	 *           the vlrPagar to set
-	 */
-	public void setVlrPagar(final String vlrPagar)
-	{
-		this.vlrPagar = vlrPagar;
-	}
-
-	/**
-	 * @return the interesMora
-	 */
-	public String getInteresMora()
-	{
-		return interesMora;
-	}
-
-	/**
-	 * @param interesMora
-	 *           the interesMora to set
-	 */
-	public void setInteresMora(final String interesMora)
-	{
-		this.interesMora = interesMora;
-	}
-
-	/**
-	 * @return the totalPagar
-	 */
-	public String getTotalPagar()
-	{
-		return totalPagar;
-	}
-
-	/**
-	 * @param totalPagar
-	 *           the totalPagar to set
-	 */
-	public void setTotalPagar(final String totalPagar)
-	{
-		this.totalPagar = totalPagar;
-	}
-
-	/**
-	 * @return the referencia
-	 */
-	public String getReferencia()
-	{
-		return referencia;
-	}
-
-	/**
-	 * @param referencia
-	 *           the referencia to set
-	 */
-	public void setReferencia(final String referencia)
-	{
-		this.referencia = referencia;
-	}
-
 	/**
 	 * @return the tipoElemento
 	 */
@@ -457,7 +260,7 @@ public class PublicidadForm
 	{
 		return tipoElemento;
 	}
-
+	
 	/**
 	 * @param tipoElemento
 	 *           the tipoElemento to set
@@ -466,7 +269,6 @@ public class PublicidadForm
 	{
 		this.tipoElemento = tipoElemento;
 	}
-
 	/**
 	 * @return the avisoLumino
 	 */
@@ -474,7 +276,7 @@ public class PublicidadForm
 	{
 		return avisoLumino;
 	}
-
+	
 	/**
 	 * @param avisoLumino
 	 *           the avisoLumino to set
@@ -483,7 +285,6 @@ public class PublicidadForm
 	{
 		this.avisoLumino = avisoLumino;
 	}
-
 	/**
 	 * @return the ubicacion
 	 */
@@ -491,7 +292,7 @@ public class PublicidadForm
 	{
 		return ubicacion;
 	}
-
+	
 	/**
 	 * @param ubicacion
 	 *           the ubicacion to set
@@ -500,7 +301,6 @@ public class PublicidadForm
 	{
 		this.ubicacion = ubicacion;
 	}
-
 	/**
 	 * @return the chip
 	 */
@@ -508,7 +308,7 @@ public class PublicidadForm
 	{
 		return chip;
 	}
-
+	
 	/**
 	 * @param chip
 	 *           the chip to set
@@ -517,7 +317,6 @@ public class PublicidadForm
 	{
 		this.chip = chip;
 	}
-
 	/**
 	 * @return the matricula
 	 */
@@ -525,7 +324,7 @@ public class PublicidadForm
 	{
 		return matricula;
 	}
-
+	
 	/**
 	 * @param matricula
 	 *           the matricula to set
@@ -534,7 +333,6 @@ public class PublicidadForm
 	{
 		this.matricula = matricula;
 	}
-
 	/**
 	 * @return the direccion
 	 */
@@ -542,7 +340,7 @@ public class PublicidadForm
 	{
 		return direccion;
 	}
-
+	
 	/**
 	 * @param direccion
 	 *           the direccion to set
@@ -551,7 +349,6 @@ public class PublicidadForm
 	{
 		this.direccion = direccion;
 	}
-
 	/**
 	 * @return the localidad
 	 */
@@ -559,7 +356,7 @@ public class PublicidadForm
 	{
 		return localidad;
 	}
-
+	
 	/**
 	 * @param localidad
 	 *           the localidad to set
@@ -568,7 +365,6 @@ public class PublicidadForm
 	{
 		this.localidad = localidad;
 	}
-
 	/**
 	 * @return the codPostal
 	 */
@@ -576,7 +372,7 @@ public class PublicidadForm
 	{
 		return codPostal;
 	}
-
+	
 	/**
 	 * @param codPostal
 	 *           the codPostal to set
@@ -585,7 +381,6 @@ public class PublicidadForm
 	{
 		this.codPostal = codPostal;
 	}
-
 	/**
 	 * @return the areaElemento
 	 */
@@ -593,7 +388,7 @@ public class PublicidadForm
 	{
 		return areaElemento;
 	}
-
+	
 	/**
 	 * @param areaElemento
 	 *           the areaElemento to set
@@ -602,7 +397,6 @@ public class PublicidadForm
 	{
 		this.areaElemento = areaElemento;
 	}
-
 	/**
 	 * @return the areaFachada
 	 */
@@ -610,7 +404,7 @@ public class PublicidadForm
 	{
 		return areaFachada;
 	}
-
+	
 	/**
 	 * @param areaFachada
 	 *           the areaFachada to set
@@ -619,7 +413,6 @@ public class PublicidadForm
 	{
 		this.areaFachada = areaFachada;
 	}
-
 	/**
 	 * @return the numFracciones
 	 */
@@ -627,7 +420,7 @@ public class PublicidadForm
 	{
 		return numFracciones;
 	}
-
+	
 	/**
 	 * @param numFracciones
 	 *           the numFracciones to set
@@ -636,7 +429,6 @@ public class PublicidadForm
 	{
 		this.numFracciones = numFracciones;
 	}
-
 	/**
 	 * @return the tipoPublici
 	 */
@@ -644,7 +436,7 @@ public class PublicidadForm
 	{
 		return tipoPublici;
 	}
-
+	
 	/**
 	 * @param tipoPublici
 	 *           the tipoPublici to set
@@ -653,7 +445,6 @@ public class PublicidadForm
 	{
 		this.tipoPublici = tipoPublici;
 	}
-
 	/**
 	 * @return the numCaras
 	 */
@@ -661,7 +452,7 @@ public class PublicidadForm
 	{
 		return numCaras;
 	}
-
+	
 	/**
 	 * @param numCaras
 	 *           the numCaras to set
@@ -670,7 +461,6 @@ public class PublicidadForm
 	{
 		this.numCaras = numCaras;
 	}
-
 	/**
 	 * @return the periodicidad
 	 */
@@ -678,7 +468,7 @@ public class PublicidadForm
 	{
 		return periodicidad;
 	}
-
+	
 	/**
 	 * @param periodicidad
 	 *           the periodicidad to set
@@ -687,7 +477,6 @@ public class PublicidadForm
 	{
 		this.periodicidad = periodicidad;
 	}
-
 	/**
 	 * @return the modelo
 	 */
@@ -695,7 +484,7 @@ public class PublicidadForm
 	{
 		return modelo;
 	}
-
+	
 	/**
 	 * @param modelo
 	 *           the modelo to set
@@ -704,7 +493,6 @@ public class PublicidadForm
 	{
 		this.modelo = modelo;
 	}
-
 	/**
 	 * @return the placa
 	 */
@@ -712,7 +500,7 @@ public class PublicidadForm
 	{
 		return placa;
 	}
-
+	
 	/**
 	 * @param placa
 	 *           the placa to set
@@ -721,7 +509,6 @@ public class PublicidadForm
 	{
 		this.placa = placa;
 	}
-
 	/**
 	 * @return the numLicenciaTrans
 	 */
@@ -729,7 +516,7 @@ public class PublicidadForm
 	{
 		return numLicenciaTrans;
 	}
-
+	
 	/**
 	 * @param numLicenciaTrans
 	 *           the numLicenciaTrans to set
@@ -738,7 +525,6 @@ public class PublicidadForm
 	{
 		this.numLicenciaTrans = numLicenciaTrans;
 	}
-
 	/**
 	 * @return the tipoServicio
 	 */
@@ -746,7 +532,7 @@ public class PublicidadForm
 	{
 		return tipoServicio;
 	}
-
+	
 	/**
 	 * @param tipoServicio
 	 *           the tipoServicio to set
@@ -755,7 +541,6 @@ public class PublicidadForm
 	{
 		this.tipoServicio = tipoServicio;
 	}
-
 	/**
 	 * @return the contratoObra
 	 */
@@ -763,7 +548,7 @@ public class PublicidadForm
 	{
 		return contratoObra;
 	}
-
+	
 	/**
 	 * @param contratoObra
 	 *           the contratoObra to set
@@ -772,7 +557,6 @@ public class PublicidadForm
 	{
 		this.contratoObra = contratoObra;
 	}
-
 	/**
 	 * @return the fiducia
 	 */
@@ -780,7 +564,7 @@ public class PublicidadForm
 	{
 		return fiducia;
 	}
-
+	
 	/**
 	 * @param fiducia
 	 *           the fiducia to set
@@ -789,7 +573,6 @@ public class PublicidadForm
 	{
 		this.fiducia = fiducia;
 	}
-
 	/**
 	 * @return the licenciaUrb
 	 */
@@ -797,7 +580,7 @@ public class PublicidadForm
 	{
 		return licenciaUrb;
 	}
-
+	
 	/**
 	 * @param licenciaUrb
 	 *           the licenciaUrb to set
@@ -806,7 +589,6 @@ public class PublicidadForm
 	{
 		this.licenciaUrb = licenciaUrb;
 	}
-
 	/**
 	 * @return the licenciaConstruc
 	 */
@@ -814,7 +596,7 @@ public class PublicidadForm
 	{
 		return licenciaConstruc;
 	}
-
+	
 	/**
 	 * @param licenciaConstruc
 	 *           the licenciaConstruc to set
@@ -823,7 +605,6 @@ public class PublicidadForm
 	{
 		this.licenciaConstruc = licenciaConstruc;
 	}
-
 	/**
 	 * @return the areaTotal
 	 */
@@ -831,7 +612,7 @@ public class PublicidadForm
 	{
 		return areaTotal;
 	}
-
+	
 	/**
 	 * @param areaTotal
 	 *           the areaTotal to set
@@ -840,7 +621,6 @@ public class PublicidadForm
 	{
 		this.areaTotal = areaTotal;
 	}
-
 	/**
 	 * @return the orientacion
 	 */
@@ -848,7 +628,7 @@ public class PublicidadForm
 	{
 		return orientacion;
 	}
-
+	
 	/**
 	 * @param orientacion
 	 *           the orientacion to set
@@ -857,7 +637,6 @@ public class PublicidadForm
 	{
 		this.orientacion = orientacion;
 	}
-
 	/**
 	 * @return the vigLicenConstruc
 	 */
@@ -865,7 +644,7 @@ public class PublicidadForm
 	{
 		return vigLicenConstruc;
 	}
-
+	
 	/**
 	 * @param vigLicenConstruc
 	 *           the vigLicenConstruc to set
@@ -874,7 +653,6 @@ public class PublicidadForm
 	{
 		this.vigLicenConstruc = vigLicenConstruc;
 	}
-
 	/**
 	 * @return the tipoVia
 	 */
@@ -882,7 +660,7 @@ public class PublicidadForm
 	{
 		return tipoVia;
 	}
-
+	
 	/**
 	 * @param tipoVia
 	 *           the tipoVia to set
@@ -891,9 +669,6 @@ public class PublicidadForm
 	{
 		this.tipoVia = tipoVia;
 	}
-
-
-
 	/**
 	 * @return the tipoValla
 	 */
@@ -901,7 +676,7 @@ public class PublicidadForm
 	{
 		return tipoValla;
 	}
-
+	
 	/**
 	 * @param tipoValla
 	 *           the tipoValla to set
@@ -910,24 +685,230 @@ public class PublicidadForm
 	{
 		this.tipoValla = tipoValla;
 	}
-
 	/**
-	 * @return the infodeclara
+	 * @return the anograv
 	 */
-	public InfoDeclaraPubli getInfodeclara()
+	public String getAnograv()
 	{
-		return infodeclara;
+		return anograv;
 	}
-
+	
 	/**
-	 * @param infodeclara
-	 *           the infodeclara to set
+	 * @param anograv
+	 *           the anograv to set
 	 */
-	public void setInfodeclara(final InfoDeclaraPubli infodeclara)
+	public void setAnograv(final String anograv)
 	{
-		this.infodeclara = infodeclara;
+		this.anograv = anograv;
 	}
-
+	/**
+	 * @return the orValla
+	 */
+	public String getOrValla()
+	{
+		return orValla;
+	}
+	
+	/**
+	 * @param orValla
+	 *           the orValla to set
+	 */
+	public void setOrValla(final String orValla)
+	{
+		this.orValla = orValla;
+	}
+	/**
+	 * @return the luginst
+	 */
+	public String getLuginst()
+	{
+		return luginst;
+	}
+	
+	/**
+	 * @param luginst
+	 *           the luginst to set
+	 */
+	public void setLuginst(final String luginst)
+	{
+		this.luginst = luginst;
+	}
+	/**
+	 * @return the basegrav
+	 */
+	public String getBasegrav()
+	{
+		return basegrav;
+	}
+	
+	/**
+	 * @param basegrav
+	 *           the basegrav to set
+	 */
+	public void setBasegrav(final String basegrav)
+	{
+		this.basegrav = basegrav;
+	}
+	/**
+	 * @return the opuso
+	 */
+	public String getOpuso()
+	{
+		return opuso;
+	}
+	
+	/**
+	 * @param opuso
+	 *           the opuso to set
+	 */
+	public void setOpuso(final String opuso)
+	{
+		this.opuso = opuso;
+	}
+	/**
+	 * @return the impCar
+	 */
+	public String getImpCar()
+	{
+		return impCar;
+	}
+	
+	/**
+	 * @param impCar
+	 *           the impCar to set
+	 */
+	public void setImpCar(final String impCar)
+	{
+		this.impCar = impCar;
+	}
+	/**
+	 * @return the valsan
+	 */
+	public String getValsan()
+	{
+		return valsan;
+	}
+	
+	/**
+	 * @param valsan
+	 *           the valsan to set
+	 */
+	public void setValsan(final String valsan)
+	{
+		this.valsan = valsan;
+	}
+	/**
+	 * @return the valpag
+	 */
+	public String getValpag()
+	{
+		return valpag;
+	}
+	
+	/**
+	 * @param valpag
+	 *           the valpag to set
+	 */
+	public void setValpag(final String valpag)
+	{
+		this.valpag = valpag;
+	}
+	/**
+	 * @return the intmora
+	 */
+	public String getIntmora()
+	{
+		return intmora;
+	}
+	
+	/**
+	 * @param intmora
+	 *           the intmora to set
+	 */
+	public void setIntmora(final String intmora)
+	{
+		this.intmora = intmora;
+	}
+	/**
+	 * @return the totpag
+	 */
+	public String getTotpag()
+	{
+		return totpag;
+	}
+	
+	/**
+	 * @param totpag
+	 *           the totpag to set
+	 */
+	public void setTotpag(final String totpag)
+	{
+		this.totpag = totpag;
+	}
+	/**
+	 * @return the tipiden
+	 */
+	public String getTipiden()
+	{
+		return tipiden;
+	}
+	
+	/**
+	 * @param tipiden
+	 *           the tipiden to set
+	 */
+	public void setTipiden(final String tipiden)
+	{
+		this.tipiden = tipiden;
+	}
+	/**
+	 * @return the numide
+	 */
+	public String getNumide()
+	{
+		return numide;
+	}
+	
+	/**
+	 * @param numide
+	 *           the numide to set
+	 */
+	public void setNumide(final String numide)
+	{
+		this.numide = numide;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName()
+	{
+		return name;
+	}
+	
+	/**
+	 * @param name
+	 *           the name to set
+	 */
+	public void setName(final String name)
+	{
+		this.name = name;
+	}
+	/**
+	 * @return the refe
+	 */
+	public String getRefe()
+	{
+		return refe;
+	}
+	
+	/**
+	 * @param refe
+	 *           the refe to set
+	 */
+	public void setRefe(final String refe)
+	{
+		this.refe = refe;
+	}
 	/**
 	 * @return the detalle
 	 */
@@ -935,7 +916,7 @@ public class PublicidadForm
 	{
 		return detalle;
 	}
-
+	
 	/**
 	 * @param detalle
 	 *           the detalle to set
@@ -944,6 +925,88 @@ public class PublicidadForm
 	{
 		this.detalle = detalle;
 	}
+	/**
+	 * @return the catalogos
+	 */
+	public PublicidadExteriorCatalogos getCatalogos()
+	{
+		return catalogos;
+	}
+	
+	/**
+	 * @param catalogos
+	 *           the catalogos to set
+	 */
+	public void setCatalogos(final PublicidadExteriorCatalogos catalogos)
+	{
+		this.catalogos = catalogos;
+	}
+	/**
+	 * @return the publicidadExt
+	 */
+	public List<ImpuestoPublicidadExterior> getPublicidadExt()
+	{
+		return publicidadExt;
+	}
+	
+	/**
+	 * @param publicidadExt
+	 *           the publicidadExt to set
+	 */
+	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
+	{
+		this.publicidadExt = publicidadExt;
+	}
+	/**
+	 * @return the infodeclara
+	 */
+	public InfoDeclaraPubli getInfodeclara()
+	{
+		return infodeclara;
+	}
+	
+	/**
+	 * @param infodeclara
+	 *           the infodeclara to set
+	 */
+	public void setInfodeclara(final InfoDeclaraPubli infodeclara)
+	{
+		this.infodeclara = infodeclara;
+	}
+	/**
+	 * @return the detalleResponse
+	 */
+	public DetallePublicidadResponse getDetalleResponse()
+	{
+		return detalleResponse;
+	}
+	
+	/**
+	 * @param detalleResponse
+	 *           the detalleResponse to set
+	 */
+	public void setDetalleResponse(final DetallePublicidadResponse detalleResponse)
+	{
+		this.detalleResponse = detalleResponse;
+	}
+	/**
+	 * @return the calculoResponse
+	 */
+	public CalcPublicidadResponse getCalculoResponse()
+	{
+		return calculoResponse;
+	}
+	
+	/**
+	 * @param calculoResponse
+	 *           the calculoResponse to set
+	 */
+	public void setCalculoResponse(final CalcPublicidadResponse calculoResponse)
+	{
+		this.calculoResponse = calculoResponse;
+	}
+
+
 
 
 

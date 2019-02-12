@@ -57,10 +57,13 @@ public class MiRitCertificacionPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+<<<<<<< Updated upstream
 
 
 
 
+=======
+>>>>>>> Stashed changes
 	@RequestMapping(value = "/contribuyentes/mirit/certificacion", method = RequestMethod.POST)
 	public String showView(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("miRitCertificacionForm")
 	final MiRitCertificacionForm miRitCertificacionFormDatos) throws CMSItemNotFoundException
@@ -71,7 +74,11 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 		certificaRITRequest.setNumBP(customerModel.getNumBP());
 
+<<<<<<< Updated upstream
 		certificaRITRequest.setTipoCert(miRitCertificacionFormDatos.getTipoCert());
+=======
+		certificaRITRequest.setTipoCert(TIPO_CERTIFICACION);
+>>>>>>> Stashed changes
 		certificaRITRequest.setTipoImp(miRitCertificacionFormDatos.getTipoImp());
 
 		try
@@ -168,6 +175,11 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			{
 				miRitCertificacionForm.setbPublicidadExt("");
 			}
+<<<<<<< Updated upstream
+=======
+			//private String bDelineacionUrbana;
+
+>>>>>>> Stashed changes
 
 		}
 

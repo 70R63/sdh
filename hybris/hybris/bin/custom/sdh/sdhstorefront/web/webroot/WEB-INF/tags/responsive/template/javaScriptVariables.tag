@@ -46,6 +46,8 @@
 			<c:url var="authenticationStatusUrl" value="/authentication/status" />
 			ACC.config.authenticationStatusUrl = '${ycommerce:encodeJavaScript(authenticationStatusUrl)}';
 			
+<<<<<<< Updated upstream
+=======
 			ACC.certifNombURL ="<c:url value='/contribuyentes/mirit/certifNomb' />";
 			ACC.validaCurrentPasswrodURL ="<c:url value='/contribuyentes/mirit/validCurrentPassword' />";
 			ACC.validaEmailURL ="<c:url value='/contribuyentes/mirit/validNewEmail' />";
@@ -91,6 +93,10 @@
 				ACC.addressContactoPC = "${ miRitForm.direccionContacto.POST_CODE}";
 			</c:if>
 			
+			ACC.publicidadExteriorDetalleURL = "<c:url value='/contribuyentes/publicidadexterior/detalle' />";
+			
+			
+>>>>>>> Stashed changes
 			<c:forEach var="jsVar" items="${jsVariables}">
 				<c:if test="${not empty jsVar.qualifier}" >
 				ACC['${ycommerce:encodeJavaScript(jsVar.qualifier)}'] = '${ycommerce:encodeJavaScript(jsVar.value)}';
@@ -98,6 +104,9 @@
 			</c:forEach>
 		/*]]>*/
 	</script>
+	
+	<template:sdhJavascriptVariables/>
+	
 	<template:javaScriptAddOnsVariables/>
 	
 	<%-- generated variables from commonVariables.properties --%>

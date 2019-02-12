@@ -991,6 +991,8 @@
 		<br>
 		<br>
 		
+<<<<<<< Updated upstream
+=======
 		
 		<script > 
 
@@ -6040,3 +6042,4 @@ var departments = [{'depId':'05','name':'ANTIOQUIA'},
 			{'depId':'99','name':'VICHADA'}];
 			
 			</script>
+>>>>>>> Stashed changes

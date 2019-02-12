@@ -3,6 +3,12 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.responses.DetallePubli;
+import de.hybris.sdh.core.pojos.responses.InfoDeclaraPubli;
+
+import java.util.List;
+
+
 /**
  * @author Maria Luisa
  *
@@ -10,24 +16,149 @@ package de.hybris.sdh.storefront.forms;
 public class DeclaPublicidadController
 {
 	private String numBP;
+	private String numform;
 	private String anograv;
 	private String numresol;
 	private String fecresol;
 	private String fechnotif;
-	private String OrValla;
+	private String orValla;
 	private String luginst;
 	private String basegrav;
 	private String opuso;
-	private Float impCar;
-	private Float valsan;
-	private Float valpag;
-	private Float intmora;
-	private Float totpag;
+	private String impCar;
+	private String valsan;
+	private String valpag;
+	private String intmora;
+	private String totpag;
 	private String tipiden;
 	private String numide;
 	private String name;
+	private String refe;
+	private String placa;
+	private String direccion;
+<<<<<<< Updated upstream
+	private String tamValla;
+	private String municipioContrib;
+	private String tipoIDdeclara;
+	private String idDeclarante;
+=======
+>>>>>>> Stashed changes
+
+	private String vigenDesde;
+	private String vigenHasta;
+
+	private InfoDeclaraPubli infoDeclara;
+	private List<DetallePubli> detalle;
+	private PublicidadExteriorCatalogos catalogos;
+
+<<<<<<< Updated upstream
+	private String idNumber;
+	private String idType;
+=======
 
 
+	/**
+	 * @return the catalogos
+	 */
+	public PublicidadExteriorCatalogos getCatalogos()
+	{
+		return catalogos;
+	}
+
+	/**
+	 * @param catalogos
+	 *           the catalogos to set
+	 */
+	public void setCatalogos(final PublicidadExteriorCatalogos catalogos)
+	{
+		this.catalogos = catalogos;
+	}
+>>>>>>> Stashed changes
+
+	/**
+	 * @return the placa
+	 */
+	public String getPlaca()
+	{
+		return placa;
+	}
+
+	/**
+	 * @param placa
+	 *           the placa to set
+	 */
+	public void setPlaca(final String placa)
+	{
+		this.placa = placa;
+	}
+
+	/**
+	 * @return the direccion
+	 */
+	public String getDireccion()
+	{
+		return direccion;
+	}
+
+	/**
+	 * @param direccion
+	 *           the direccion to set
+	 */
+	public void setDireccion(final String direccion)
+	{
+		this.direccion = direccion;
+	}
+
+	/**
+	 * @return the catalogos
+	 */
+	public PublicidadExteriorCatalogos getCatalogos()
+	{
+		return catalogos;
+	}
+
+	/**
+	 * @param catalogos
+	 *           the catalogos to set
+	 */
+	public void setCatalogos(final PublicidadExteriorCatalogos catalogos)
+	{
+		this.catalogos = catalogos;
+	}
+
+	/**
+	 * @return the placa
+	 */
+	public String getPlaca()
+	{
+		return placa;
+	}
+
+	/**
+	 * @param placa
+	 *           the placa to set
+	 */
+	public void setPlaca(final String placa)
+	{
+		this.placa = placa;
+	}
+
+	/**
+	 * @return the direccion
+	 */
+	public String getDireccion()
+	{
+		return direccion;
+	}
+
+	/**
+	 * @param direccion
+	 *           the direccion to set
+	 */
+	public void setDireccion(final String direccion)
+	{
+		this.direccion = direccion;
+	}
 
 	/**
 	 * @return the numBP
@@ -43,6 +174,24 @@ public class DeclaPublicidadController
 	public void setNumBP(final String numBP)
 	{
 		this.numBP = numBP;
+	}
+
+
+	/**
+	 * @return the numform
+	 */
+	public String getNumform()
+	{
+		return numform;
+	}
+
+	/**
+	 * @param numform
+	 *           the numform to set
+	 */
+	public void setNumform(final String numform)
+	{
+		this.numform = numform;
 	}
 
 	/**
@@ -115,12 +264,14 @@ public class DeclaPublicidadController
 		this.fechnotif = fechnotif;
 	}
 
+
+
 	/**
 	 * @return the orValla
 	 */
 	public String getOrValla()
 	{
-		return OrValla;
+		return orValla;
 	}
 
 	/**
@@ -129,7 +280,7 @@ public class DeclaPublicidadController
 	 */
 	public void setOrValla(final String orValla)
 	{
-		OrValla = orValla;
+		this.orValla = orValla;
 	}
 
 	/**
@@ -186,7 +337,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the impCar
 	 */
-	public Float getImpCar()
+	public String getImpCar()
 	{
 		return impCar;
 	}
@@ -195,7 +346,7 @@ public class DeclaPublicidadController
 	 * @param impCar
 	 *           the impCar to set
 	 */
-	public void setImpCar(final Float impCar)
+	public void setImpCar(final String impCar)
 	{
 		this.impCar = impCar;
 	}
@@ -203,7 +354,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the valsan
 	 */
-	public Float getValsan()
+	public String getValsan()
 	{
 		return valsan;
 	}
@@ -212,7 +363,7 @@ public class DeclaPublicidadController
 	 * @param valsan
 	 *           the valsan to set
 	 */
-	public void setValsan(final Float valsan)
+	public void setValsan(final String valsan)
 	{
 		this.valsan = valsan;
 	}
@@ -220,7 +371,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the valpag
 	 */
-	public Float getValpag()
+	public String getValpag()
 	{
 		return valpag;
 	}
@@ -229,7 +380,7 @@ public class DeclaPublicidadController
 	 * @param valpag
 	 *           the valpag to set
 	 */
-	public void setValpag(final Float valpag)
+	public void setValpag(final String valpag)
 	{
 		this.valpag = valpag;
 	}
@@ -237,7 +388,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the intmora
 	 */
-	public Float getIntmora()
+	public String getIntmora()
 	{
 		return intmora;
 	}
@@ -246,7 +397,7 @@ public class DeclaPublicidadController
 	 * @param intmora
 	 *           the intmora to set
 	 */
-	public void setIntmora(final Float intmora)
+	public void setIntmora(final String intmora)
 	{
 		this.intmora = intmora;
 	}
@@ -254,7 +405,7 @@ public class DeclaPublicidadController
 	/**
 	 * @return the totpag
 	 */
-	public Float getTotpag()
+	public String getTotpag()
 	{
 		return totpag;
 	}
@@ -263,7 +414,7 @@ public class DeclaPublicidadController
 	 * @param totpag
 	 *           the totpag to set
 	 */
-	public void setTotpag(final Float totpag)
+	public void setTotpag(final String totpag)
 	{
 		this.totpag = totpag;
 	}
@@ -319,6 +470,200 @@ public class DeclaPublicidadController
 		this.name = name;
 	}
 
+	/**
+	 * @return the refe
+	 */
+	public String getRefe()
+	{
+		return refe;
+	}
+
+	/**
+	 * @param refe
+	 *           the refe to set
+	 */
+	public void setRefe(final String refe)
+	{
+		this.refe = refe;
+	}
+
+	/**
+	 * @return the vigenDesde
+	 */
+	public String getVigenDesde()
+	{
+		return vigenDesde;
+	}
+
+	/**
+	 * @param vigenDesde
+	 *           the vigenDesde to set
+	 */
+	public void setVigenDesde(final String vigenDesde)
+	{
+		this.vigenDesde = vigenDesde;
+	}
+
+	/**
+	 * @return the vigenHasta
+	 */
+	public String getVigenHasta()
+	{
+		return vigenHasta;
+	}
+
+	/**
+	 * @param vigenHasta
+	 *           the vigenHasta to set
+	 */
+	public void setVigenHasta(final String vigenHasta)
+	{
+		this.vigenHasta = vigenHasta;
+	}
+
+
+
+
+
+	/**
+	 * @return the infoDeclara
+	 */
+	public InfoDeclaraPubli getInfoDeclara()
+	{
+		return infoDeclara;
+	}
+
+	/**
+	 * @param infoDeclara
+	 *           the infoDeclara to set
+	 */
+	public void setInfoDeclara(final InfoDeclaraPubli infoDeclara)
+	{
+		this.infoDeclara = infoDeclara;
+	}
+
+	/**
+	 * @return the detalle
+	 */
+	public List<DetallePubli> getDetalle()
+	{
+		return detalle;
+	}
+
+	/**
+	 * @param detalle
+	 *           the detalle to set
+	 */
+	public void setDetalle(final List<DetallePubli> detalle)
+	{
+		this.detalle = detalle;
+	}
+
+<<<<<<< Updated upstream
+	/**
+	 * @return the idNumber
+	 */
+	public String getIdNumber()
+	{
+		return idNumber;
+	}
+
+	/**
+	 * @param idNumber
+	 *           the idNumber to set
+	 */
+	public void setIdNumber(final String idNumber)
+	{
+		this.idNumber = idNumber;
+	}
+
+	/**
+	 * @return the idType
+	 */
+	public String getIdType()
+	{
+		return idType;
+	}
+
+	/**
+	 * @param idType
+	 *           the idType to set
+	 */
+	public void setIdType(final String idType)
+	{
+		this.idType = idType;
+	}
+
+	/**
+	 * @return the tamValla
+	 */
+	public String getTamValla()
+	{
+		return tamValla;
+	}
+
+	/**
+	 * @param tamValla
+	 *           the tamValla to set
+	 */
+	public void setTamValla(final String tamValla)
+	{
+		this.tamValla = tamValla;
+	}
+
+	/**
+	 * @return the municipioContrib
+	 */
+	public String getMunicipioContrib()
+	{
+		return municipioContrib;
+	}
+
+	/**
+	 * @param municipioContrib
+	 *           the municipioContrib to set
+	 */
+	public void setMunicipioContrib(final String municipioContrib)
+	{
+		this.municipioContrib = municipioContrib;
+	}
+
+	/**
+	 * @return the tipoIDdeclara
+	 */
+	public String getTipoIDdeclara()
+	{
+		return tipoIDdeclara;
+	}
+
+	/**
+	 * @param tipoIDdeclara
+	 *           the tipoIDdeclara to set
+	 */
+	public void setTipoIDdeclara(final String tipoIDdeclara)
+	{
+		this.tipoIDdeclara = tipoIDdeclara;
+	}
+
+	/**
+	 * @return the idDeclarante
+	 */
+	public String getIdDeclarante()
+	{
+		return idDeclarante;
+	}
+
+	/**
+	 * @param idDeclarante
+	 *           the idDeclarante to set
+	 */
+	public void setIdDeclarante(final String idDeclarante)
+	{
+		this.idDeclarante = idDeclarante;
+	}
+
+=======
+>>>>>>> Stashed changes
 
 
 }

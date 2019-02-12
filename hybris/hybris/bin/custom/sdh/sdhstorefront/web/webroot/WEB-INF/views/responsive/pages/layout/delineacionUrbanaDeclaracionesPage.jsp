@@ -6,37 +6,13 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="delineacionUrbana" tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 
-<template:page pageTitle="${pageTitle}">
+<template:page>
 	<div class="container">
-		<div class="row">
-			<div class="headline">
-				<h3>
-					<span tabindex="0"><spring:theme code="delineacion.urbana.declaraciones" /></span>
-				</h3>
-			</div>			
-		</div>
-
-		<c:choose>
-			<c:when test="${ action eq 'initialDeclaration' }">
-				<delineacionUrbana:delineacionUrbanaInitailDeclaration/>
-			</c:when>
-			<c:when test="${ action eq 'retention' }">
-				<delineacionUrbana:delineacionUrbanaRetention/>
-			</c:when>
-			<c:when test="${ action eq 'correctionDeclaration' }">
-				<delineacionUrbana:delineacionUrbanaCorrection/>
-			</c:when>
-			<c:otherwise>
-				<delineacionUrbana:delineacionUrbanaDeclaracionesForm/>
-			</c:otherwise>
-		</c:choose>
+		<delineacionUrbana:delineacionUrbanaDecGenerales/>
+		<delineacionUrbana:delineacionUrbanaDecAreasUsos/>
+		<delineacionUrbana:delineacionUrbanaDecLiqPriva/>
+		<delineacionUrbana:delineacionUrbanaDecFirma/>	
 	</div>	
 </template:page>
-
-<script>
-  $( function() {
-    $( "#tabs" ).tabs();
-  } );
-  </script>
 
 

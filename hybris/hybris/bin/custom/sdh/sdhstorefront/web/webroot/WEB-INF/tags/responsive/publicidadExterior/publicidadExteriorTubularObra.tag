@@ -6,35 +6,38 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div id="divTubular" style="display: none;">
+<div id="divTubularObra" style="display: none;">
 	<div class="row">
 		<div class="headline">
 			<h3>
 				<span class="cintillo col-md-10 "><spring:theme
-						code="publicidad.exterior.tubular" /></span>
+						code="publicidad.exterior.tubularObra" text="Tubular de Obra"/></span>
 			</h3>
 		</div>
 	</div>
 	<br />
+	
+	
+	
 	<div class="row">
-		<div class="col-md-3 ">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.tubular.elementtype" /></label>
-		</div>
-		<div class="col-md-2">
-			<div class="form-group ">
-				<input id="tipoElementoTubular" name="tipoElementoTubular" class="inputtextnew"
-					aria-required="true" type="text" value=""
-					maxlength="240">
-			</div>
-		</div>
 		<div class="col-md-3">
 			<label class="inputlabelnew vehiculos"><spring:theme
 					code="publicidad.exterior.tubular.address" /></label>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="direccionTubular" name="direccionTubular" class="inputtextnew"
+				<input id="tubularObraDireccion" name="tubularObraDireccion" class="inputtextnew"
+					aria-required="true" type="text" value=""
+					maxlength="240">
+			</div>
+		</div>
+		<div class="col-md-3">
+			<label class="inputlabelnew vehiculos"><spring:theme
+					code="publicidad.exterior.tubular.licenciaUrb" text="Licencia Urbana"/></label>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group ">
+				<input id="tubularObraLicenciaUrb" name="tubularObraLicenciaUrb" class="inputtextnew"
 					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
@@ -47,45 +50,94 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="localidadTubular" name="localidadTubular" class="inputtextnew"
+				<input id="tubularObraLocalidad" name="tubularObraLocalidad" class="inputtextnew"
 					aria-required="true" type="text" value="${publicidadForm.localidad}"
 					maxlength="240">
 			</div>
 		</div>
 		<div class="col-md-3">
 			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.tubular.postalcode" /></label>
+					code="publicidad.exterior.tubular.contratoObra" text="Contrato de Obra" /></label>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="codPostal" name="codPostal" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.codPostal}"
+				<input id="tubularObraContratoObra" name="tubularObraContratoObra" class="inputtextnew"
+					aria-required="true" type="text" value="${publicidadForm.contratoObra}"
 					maxlength="240">
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
+		<div class="col-md-3">
+			<label class="inputlabelnew vehiculos"><spring:theme
+					code="publicidad.exterior.tubular.postalcode" /></label>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group ">
+				<input id="tubularObraCodPostal" name="tubularObraCodPostal" class="inputtextnew"
+					aria-required="true" type="text" value="${publicidadForm.codPostal}"
+					maxlength="240">
+			</div>
+		</div>
 		<div class="col-md-3 ">
 			<label class="inputlabelnew vehiculos"><spring:theme
 					code="publicidad.exterior.tubular.buildingpermit" /></label>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="licenciaConstruc" name="licenciaConstruc" class="inputtextnew"
+				<input id="tubularObraLicenciaConstruc" name="tubularObraLicenciaConstruc" class="inputtextnew"
 					aria-required="true" type="text" value="" maxlength="240">
 			</div>
 		</div>
 
+		
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<label class="inputlabelnew vehiculos"><spring:theme
+					code="publicidad.exterior.tubular.chip" /></label>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group ">
+				<input id="tubularObraChip" name="tubularObraChip" class="inputtextnew"
+					aria-required="true" type="text" value="${publicidadForm.chip}"
+					maxlength="240">
+			</div>
+		</div>
 		<div class="col-md-3">
 			<label class="inputlabelnew vehiculos"><spring:theme
 					code="publicidad.exterior.tubular.licensevalidity" /></label>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="vigLicenConstruc" name="vigLicenConstruc" class="inputtextnew"
+				<input id="tubularObraVigLicenConstruc" name="tubularObraVigLicenConstruc" class="inputtextnew"
 					aria-required="true" type="text"
 					value="" maxlength="240">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 ">
+			<label class="inputlabelnew vehiculos"><spring:theme
+					code="publicidad.exterior.tubular.propertyreg" /></label>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group ">
+				<input id="tubularObraMatricula" name="tubularObraMatricula" class="inputtextnew"
+					aria-required="true" type="text" value=""
+					maxlength="240">
+			</div>
+		</div>
+		<div class="col-md-3 ">
+			<label class="inputlabelnew vehiculos"><spring:theme
+					code="publicidad.exterior.tubular.areaTotal" text="Área Total"/></label>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group ">
+				<input id="tubularObraAreaTotal" name="tubularObraAreaTotal" class="inputtextnew"
+					aria-required="true" type="text" value=""
+					maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -96,43 +148,18 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="ubicacionTubular" name="ubicacionTubular" class="inputtextnew"
+				<input id="tubularObraUbicacion" name="tubularObraUbicacion" class="inputtextnew"
 					aria-required="true" type="text" value="" maxlength="240">
 			</div>
 		</div>
-		<div class="col-md-3">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.tubular.typeroad" /></label>
-		</div>
-		<div class="col-md-2">
-			<div class="form-group ">
-				<input id="tipoVia" name="tipoVia" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.tipoVia}"
-					maxlength="240">
-			</div>
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-md-3 ">
 			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.tubular.visualorientation" /></label>
+					code="publicidad.exterior.tubular.periodicidad" text="Periodicidad (duración de la obra)"/></label>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="orientacion" name="orientacion" class="inputtextnew"
-					aria-required="true" type="text" value=""
-					maxlength="240">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.tubular.chip" /></label>
-		</div>
-		<div class="col-md-2">
-			<div class="form-group ">
-				<input id="chipTubular" name="chipTubular" class="inputtextnew"
-					aria-required="true" type="text" value="${publicidadForm.chip}"
-					maxlength="240">
+				<input id="tubularObraPeriodicidad" name="tubularObraPeriodicidad" class="inputtextnew"
+					aria-required="true" type="text" value="" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -140,11 +167,11 @@
 	<div class="row">
 		<div class="col-md-3 ">
 			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.tubular.propertyreg" /></label>
+					code="publicidad.exterior.tubular.visualorientation" /></label>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="matricula" name="matricula" class="inputtextnew"
+				<input id="tubularObraOrientacion" name="tubularObraOrientacion" class="inputtextnew"
 					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
@@ -155,7 +182,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group ">
-				<input id="numCarasTubular" name="numCarasTubular" class="inputtextnew"
+				<input id="tubularObraNumcaras" name="tubularObraNumcaras" class="inputtextnew"
 					aria-required="true" type="text" value=""
 					maxlength="240">
 			</div>
