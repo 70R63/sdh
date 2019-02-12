@@ -29,6 +29,7 @@ public class SobreTasaGasolinaForm
 	private String numForm;
 	private String NAME_ORG1;
 	private String action;
+	private String tipoConsulta;
 
 	private List<SobreTasaGasolinaTabla> listaDocumentos;
 	private DetGasResponse dataForm;
@@ -183,7 +184,7 @@ public class SobreTasaGasolinaForm
 	{
 		this.numForm = numForm;
 	}
-	
+
 	/**
 	 * @return the nAME_ORG1
 	 */
@@ -298,6 +299,23 @@ public class SobreTasaGasolinaForm
 	public void setDeclarante(final DetGasRevisorDeclaranteResponse declarante)
 	{
 		Declarante = declarante;
+	}
+
+	/**
+	 * @return the tipoConsulta
+	 */
+	public String getTipoConsulta()
+	{
+		return tipoConsulta;
+	}
+
+	/**
+	 * @param tipoConsulta
+	 *           the tipoConsulta to set
+	 */
+	public void setTipoConsulta(final String tipoConsulta)
+	{
+		this.tipoConsulta = tipoConsulta;
 	}
 
 

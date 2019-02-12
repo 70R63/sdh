@@ -41,8 +41,8 @@ public class SobreTasaGasolinaService
 
 		final SobreTasaGasolinaCatalogos catalogosForm = new SobreTasaGasolinaCatalogos();
 
+		//Sobretasa a gasolina
 		catalogosForm.setOpcionesCantidadMostrar(obtenerListaOpcionesCantidadMostrar());
-		catalogosForm.setImpuesto(obtenerListaImpuesto());
 		catalogosForm.setAnioGravable(obtenerListaAnioGravable(2019, 4));
 		catalogosForm.setPeriodo(obtenerListaPeriodo());
 		catalogosForm.setCalidadResponsable(obtenerListaCalidadResponsable());
@@ -50,11 +50,18 @@ public class SobreTasaGasolinaService
 		catalogosForm.setLocalidad(obtenerListaLocalidades());
 		catalogosForm.setTipoId(obtenerListaTipoId());
 
+		//Liquidador gasolina
 		catalogosForm.setOpcionesUso(obtenerListaOpcionesUso());
 		catalogosForm.setClaseProd(obtenerListaClaseProd());
 		catalogosForm.setAlcoholCarbu(obtenerListaAlcoholCarbu());
 		catalogosForm.setTipoIdRev(obtenerListaTipoId());
 		catalogosForm.setTipoIdDec(obtenerListaTipoId());
+
+		//Presentar declaracion
+		catalogosForm.setImpuesto(obtenerListaImpuesto());
+
+		//Consulta estado de cuenta
+		catalogosForm.setTipoConsulta(obtenerListaTipoConsulta());
 
 
 		return catalogosForm;
@@ -72,6 +79,17 @@ public class SobreTasaGasolinaService
 		elementos.put("4", "Publicidad Exterior");
 		elementos.put("5", "Sobretasa Gasolina");
 		elementos.put("6", "Delineación Urbana");
+
+		return elementos;
+	}
+
+	private Map<String, String> obtenerListaTipoConsulta()
+	{
+		final Map<String, String> elementos = new HashMap<String, String>();
+
+		elementos.put("0", "Seleccionar");
+		elementos.put("1", "Impuesto");
+		elementos.put("2", "Sujeto");
 
 		return elementos;
 	}

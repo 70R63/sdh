@@ -7,7 +7,7 @@ import java.util.List;
 
 
 /**
- * @author hybris
+ * @author Federico Flores Dimas
  *
  */
 public class CalculaGasolinaResponse
@@ -17,6 +17,7 @@ public class CalculaGasolinaResponse
 	private List<DetGasInfoDeclaraResponse> infoDeclara;
 	private DetGasValoresDeclaraResponse valoresDeclara;
 	private List<DetGasRevisorDeclaranteResponse> revisorDeclarante;
+	private List<ErrorEnWS> errores;
 
 	/**
 	 * @return the numForm
@@ -84,6 +85,23 @@ public class CalculaGasolinaResponse
 	public void setRevisorDeclarante(final List<DetGasRevisorDeclaranteResponse> revisorDeclarante)
 	{
 		this.revisorDeclarante = revisorDeclarante;
+	}
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorEnWS> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<ErrorEnWS> errores)
+	{
+		this.errores = errores;
 	}
 
 

@@ -32,6 +32,11 @@ public class SobreTasaGasolinaCatalogos
 	private Map<String, String> tipoIdRev;
 	private Map<String, String> tipoIdDec;
 
+
+	private Map<String, String> tipoConsulta;
+
+
+
 	/**
 	 * @return the impuesto
 	 */
@@ -285,6 +290,23 @@ public class SobreTasaGasolinaCatalogos
 	public void setFuenteDato(final List<ItemSelectOption> fuenteDato)
 	{
 		this.fuenteDato = fuenteDato;
+	}
+
+	/**
+	 * @return the tipoConsulta
+	 */
+	public Map<String, String> getTipoConsulta()
+	{
+		return tipoConsulta;
+	}
+
+	/**
+	 * @param tipoConsulta
+	 *           the tipoConsulta to set
+	 */
+	public void setTipoConsulta(final Map<String, String> tipoConsulta)
+	{
+		this.tipoConsulta = tipoConsulta;
 	}
 
 
