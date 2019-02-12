@@ -39,7 +39,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
- * @author fede
+ * @author Federico Flores Dimas
  *
  */
 
@@ -173,7 +173,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String handleGET_ST(final Model model) throws CMSItemNotFoundException
+	public String handleGET_ST(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Menu sobretasa gasolina GET --------------------------");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
@@ -181,8 +181,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+		String[] mensajesError;
 		String numBP = "";
 		SDHValidaMailRolResponse detalleContribuyente;
+		String returnURL = "/";
 
 
 		numBP = customerModel.getNumBP();
@@ -192,9 +194,14 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		if (detalleContribuyente.getIdmsj() != 0)
 		{
 			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
 		}
 
+		if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
+		{
 		dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
 		dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
 		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
@@ -208,7 +215,12 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		return getViewForPage(model);
+			returnURL = getViewForPage(model);
+		}
+
+
+		return returnURL;
+
 	}
 
 
@@ -218,11 +230,13 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolina", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String handleGET_DEC(@ModelAttribute("dataForm")
-	final SobreTasaGasolinaForm dataForm, final Model model) throws CMSItemNotFoundException
+	final SobreTasaGasolinaForm dataForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		String[] mensajesError;
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -262,7 +276,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				&& !detalleGasolinaResponse.getErrores().get(0).getTxtmsj().equals(""))
 		{
 			LOG.error("Error al leer detalle de gasolina: " + detalleGasolinaResponse.getErrores().get(0).getTxtmsj());
-			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error1");
+			mensajesError = gasolinaService.prepararMensajesError(detalleGasolinaResponse.getErrores());
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error1", mensajesError);
 		}
 
 		dataForm.setAnoGravable(anoGravable);
@@ -340,6 +356,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
 		final CalculaGasolinaResponse calculaGasolinaResponse;
+		String[] mensajesError;
+		int claveError;
 
 		String numBP = customerModel.getNumBP();
 		String numDoc = customerModel.getDocumentNumber();
@@ -412,7 +430,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				&& !calculaGasolinaResponse.getErrores().get(0).getTxtmsj().equals(""))
 		{
 			LOG.error("Error al leer calculo de gasolina: " + calculaGasolinaResponse.getErrores().get(0).getTxtmsj());
-			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error3");
+			mensajesError = gasolinaService.prepararMensajesError(calculaGasolinaResponse.getErrores());
+			claveError = mensajesError.length <= 10 ? mensajesError.length : 10;
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error3.attrib" + Integer.toString(claveError), mensajesError);
 		}
 
 
