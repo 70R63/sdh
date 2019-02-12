@@ -82,12 +82,17 @@
 <div class="row">
 	<div class="col-md-3 col-md-offset-3 center">
 
-		<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST">
-			<button id="/contribuyentes/publicidadexterior/declaracion" type="submit"
+<%-- 		<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST"> --%>
+<!-- 			<button id="/contribuyentes/publicidadexterior/declaracion" type="submit" -->
+<!-- 				class="botton"> -->
+<%-- 				<spring:theme code="declaracion.publicidad.button.calcular" /> --%>
+<!-- 				</button> -->
+<%-- 			</sf:form> --%>
+
+				<button id="calculoButton" name="calculoButton" type="button"
 				class="botton">
 				<spring:theme code="declaracion.publicidad.button.calcular" />
 				</button>
-			</sf:form>
 
 		<!-- <sf:button id="/contribuyentes/publicidadexterior/declaracion"
 			action="/contribuyentes/publicidadexterior/declaracion" type="submit"

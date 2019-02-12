@@ -36,6 +36,10 @@ public class DeclaPublicidadController
 	private String refe;
 	private String placa;
 	private String direccion;
+	private String tamValla;
+	private String municipioContrib;
+	private String tipoIDdeclara;
+	private String idDeclarante;
 
 	private String vigenDesde;
 	private String vigenHasta;
@@ -531,6 +535,74 @@ public class DeclaPublicidadController
 	public void setIdType(final String idType)
 	{
 		this.idType = idType;
+	}
+
+	/**
+	 * @return the tamValla
+	 */
+	public String getTamValla()
+	{
+		return tamValla;
+	}
+
+	/**
+	 * @param tamValla
+	 *           the tamValla to set
+	 */
+	public void setTamValla(final String tamValla)
+	{
+		this.tamValla = tamValla;
+	}
+
+	/**
+	 * @return the municipioContrib
+	 */
+	public String getMunicipioContrib()
+	{
+		return municipioContrib;
+	}
+
+	/**
+	 * @param municipioContrib
+	 *           the municipioContrib to set
+	 */
+	public void setMunicipioContrib(final String municipioContrib)
+	{
+		this.municipioContrib = municipioContrib;
+	}
+
+	/**
+	 * @return the tipoIDdeclara
+	 */
+	public String getTipoIDdeclara()
+	{
+		return tipoIDdeclara;
+	}
+
+	/**
+	 * @param tipoIDdeclara
+	 *           the tipoIDdeclara to set
+	 */
+	public void setTipoIDdeclara(final String tipoIDdeclara)
+	{
+		this.tipoIDdeclara = tipoIDdeclara;
+	}
+
+	/**
+	 * @return the idDeclarante
+	 */
+	public String getIdDeclarante()
+	{
+		return idDeclarante;
+	}
+
+	/**
+	 * @param idDeclarante
+	 *           the idDeclarante to set
+	 */
+	public void setIdDeclarante(final String idDeclarante)
+	{
+		this.idDeclarante = idDeclarante;
 	}
 
 

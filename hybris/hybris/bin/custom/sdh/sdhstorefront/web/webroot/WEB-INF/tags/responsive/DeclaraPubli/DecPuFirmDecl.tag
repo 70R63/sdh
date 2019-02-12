@@ -38,13 +38,13 @@
 
 	<div class="col-md-4">
 		<select id="tipiden" class="inputdropdown2" disabled="disabled">
-			<option value="CC">Cedula de Ciudadania</option>
+			<option value="CC"><spring:theme code="register.id.types.${declaPublicidadForm.idType}" /></option>
 		</select>
 	</div>
 	
 	<div class="col-md-4">
 		<input id="numide" name="numide" class="inputtextnew"
-			aria-required="true" type="text" value="" maxlength="30" size="30"
+			aria-required="true" type="text" value="${declaPublicidadForm.idNumber}" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 	<div class="col-md-4">

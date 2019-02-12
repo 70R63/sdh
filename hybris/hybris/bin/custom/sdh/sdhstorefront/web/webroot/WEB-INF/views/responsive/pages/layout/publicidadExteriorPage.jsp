@@ -32,4 +32,9 @@
 	</div>
 	</sf:form>
 	
+	<div id="dialogPublicidadExterior" title="Publicidad Exterior" ><div id="publicidadExteriorDialogContent"></div></div>
+
+
+	
+	
 </template:page>
