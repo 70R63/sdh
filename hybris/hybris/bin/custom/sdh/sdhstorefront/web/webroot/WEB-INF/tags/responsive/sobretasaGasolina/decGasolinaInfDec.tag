@@ -27,17 +27,17 @@
 			<thead>
 				<tr>
 					<td><label class="inputlabelnew"><spring:theme
-							code="impuestos.decGasolina.InformacionDec.claseProducto" /></label></td>
+								code="impuestos.decGasolina.InformacionDec.claseProducto" /></label></td>
 					<td><label class="inputlabelnew"><spring:theme
-							code="impuestos.decGasolina.InformacionDec.galones" /></label></td>
+								code="impuestos.decGasolina.InformacionDec.galones" /></label></td>
 					<td><label class="inputlabelnew"><spring:theme
-							code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label></td>
+								code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label></td>
 					<td><label class="inputlabelnew"><spring:theme
-							code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label></td>
+								code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label></td>
 					<td><label class="inputlabelnew"><spring:theme
-							code="impuestos.decGasolina.InformacionDec.baseGravable" /></label></td>
+								code="impuestos.decGasolina.InformacionDec.baseGravable" /></label></td>
 					<td><label class="inputlabelnew"><spring:theme
-							code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label></td>
+								code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label></td>
 					<td></td>
 				</tr>
 			</thead>
@@ -99,22 +99,13 @@
 <br />
 <br />
 
-<div class="form-group ">
-	<sf:form action="${presentarDeclaracionUrl}"
-		id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
-		method="POST">
+<div class="col-md-12 text-right">
 
-		<button id="presentarDeclaracionUrl" type="submit"
-			class="btn btn-primary btn-block">
-			<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
-		</button>
-	</sf:form>
-
-	<!-- 	<button class="btn btn-primary btn-block" type="button"> -->
-	<%-- 		<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" /> --%>
-	<!-- 	</button> -->
+	<button id="presentarDeclaracionUrl" type="submit"
+		class="btn btn-primary btn-block">
+		<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
+	</button>
 </div>
-
 
 <div class="row"></div>
 

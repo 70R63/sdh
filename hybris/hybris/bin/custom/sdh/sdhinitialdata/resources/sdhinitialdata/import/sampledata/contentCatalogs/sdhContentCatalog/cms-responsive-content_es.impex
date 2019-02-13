@@ -156,7 +156,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;PredialUnificadoLink;"Predial unificado";"Haga clic aquí para acceder a la opción de menú Predial unificado"
 ;;PublicidadExteriorLink;"Publicidad exterior";"Haga clic aquí para acceder a la opción de menú Publicidad exterior"
 ;;SobreVehiAutomotoresLink;"Sobre vehículos automotores";"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
-;;SobreTasaGasolinaLink;"Sobre tasa a la gasolina";"Haga clic aquí para acceder a la opción de menú Sobre tasa a la gasolina"
+;;SobreTasaGasolinaLink;"Sobretasa a la gasolina";"Haga clic aquí para acceder a la opción de menú Sobretasa a la gasolina"
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019

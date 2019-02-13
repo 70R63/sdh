@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -13,26 +14,6 @@
 <spring:url value="/contribuyentes/sobretasa-gasolina" var="buscarUrl"
 	htmlEscape="false" />
 
-<div class="row">
-	<div class="col-md-4  ">
-		<div class="form-group ">
-			<div class="help-block">
-				<span id="errorLeerDetalle" class="hidden"><spring:theme
-						code="error.impuestoGasolina.sobretasa.error1"></spring:theme></span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-4  ">
-		<div class="form-group ">
-			<div class="help-block">
-				<span id="errorValidaContribuyente" class="hidden"><spring:theme
-						code="error.impuestoGasolina.sobretasa.error2"></spring:theme></span>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="col-md-9">
 	<div class="table-responsive">
 		<table class="table">
@@ -47,7 +28,7 @@
 
 					<td><spring:theme
 							code="impuestos.sobreTasaGasolina.menu.tituloNota" /><a
-						href="http://www.shd.gov.co/shd/">Mas información</a></td>
+						href="http://www.shd.gov.co/shd/"> Mas información</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -55,7 +36,7 @@
 </div>
 
 <br>
-<div class="col-md-10">
+<div class="col-md-9">
 	<div>
 		<div class="col-md-12">
 			<table class="table col-md-2 table-bordered">

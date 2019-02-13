@@ -10,13 +10,15 @@ import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +72,7 @@ public class SobreTasaGasolinaService
 
 	private Map<String, String> obtenerListaImpuesto()
 	{
-		final Map<String, String> elementos = new HashMap<String, String>();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		elementos.put("0", "Seleccionar");
 		elementos.put("1", "Predial Unificado");
@@ -85,7 +87,7 @@ public class SobreTasaGasolinaService
 
 	private Map<String, String> obtenerListaTipoConsulta()
 	{
-		final Map<String, String> elementos = new HashMap<String, String>();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		elementos.put("0", "Seleccionar");
 		elementos.put("1", "Impuesto");
@@ -102,7 +104,7 @@ public class SobreTasaGasolinaService
 	 */
 	private Map<String, String> obtenerListaAnioGravable(final int anioBase, final int cantidadAnios)
 	{
-		final Map<String, String> elementos = new HashMap<String, String>();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		for (int i = 0; i < cantidadAnios; i++)
 		{
@@ -132,7 +134,7 @@ public class SobreTasaGasolinaService
 	private Map<String, String> obtenerListaAlcoholCarbu()
 	{
 
-		final Map<String, String> elementos = new HashMap<String, String>();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		elementos.put("0.00", "0");
 		elementos.put("1.00", "0.01");
@@ -165,7 +167,7 @@ public class SobreTasaGasolinaService
 	 */
 	private Map<String, String> obtenerListaClaseProd()
 	{
-		final Map<String, String> elementos = new HashMap<String, String>();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		elementos.put("01", "Gasolina Corriente Básica");
 		elementos.put("02", "Gasolina Corriente Oxigenada");
@@ -181,7 +183,7 @@ public class SobreTasaGasolinaService
 	private Map<String, String> obtenerListaOpcionesUso()
 	{
 
-		final Map<String, String> elementos = new HashMap<String, String>();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		elementos.put("01", "Declaración");
 		elementos.put("02", "Corrección");
@@ -205,7 +207,7 @@ public class SobreTasaGasolinaService
 	{
 
 		//		final List<ItemSelectOption> elementos = new ArrayList<ItemSelectOption>();
-		final Map<String, String> elementos = new HashMap<String, String>();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		elementos.put("1", "Enero");
 		elementos.put("2", "Febrero");
@@ -260,7 +262,7 @@ public class SobreTasaGasolinaService
 	private Map<String, String> obtenerListaTipoId()
 	{
 
-		final Map<String, String> elementos = new HashMap<String, String>();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		elementos.put("CC", "Cédula de Ciudadanía");
 		elementos.put("CD", "Carnet Diplomático");
@@ -612,5 +614,126 @@ public class SobreTasaGasolinaService
 		}
 		return returnURL;
 	}
+
+
+	/**
+	 * @param errores
+	 * @return
+	 */
+	public String[] prepararMensajesError(final List<ErrorEnWS> errores)
+	{
+		final List<String> mensajes = new ArrayList<String>();
+		String[] listaMensajes;
+		String mensajeError;
+
+
+		for (int i = 0; i < errores.size(); i++)
+		{
+			mensajeError = "ID= " + errores.get(i).getIdmsj() + " Mensaje = " + errores.get(i).getTxtmsj();
+			mensajes.add(mensajeError);
+		}
+		listaMensajes = new String[mensajes.size()];
+		listaMensajes = mensajes.toArray(listaMensajes);
+
+		return listaMensajes;
+	}
+
+
+	/**
+	 * @param idmsj
+	 * @param txtmsj
+	 * @return
+	 */
+	public List<ErrorEnWS> convertirListaError(final int idmsj, final String txtmsj)
+	{
+		final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+		final ErrorEnWS errorConsulta = new ErrorEnWS();
+
+		errorConsulta.setIdmsj(Integer.toString(idmsj));
+		errorConsulta.setTxtmsj(txtmsj);
+		errores.add(errorConsulta);
+
+		return errores;
+	}
+
+	/**
+	 * @return
+	 */
+	public String obtenerAnoGravableActual()
+	{
+		final Calendar c = Calendar.getInstance();
+		final int year = c.get(Calendar.YEAR);
+		final String yearSTR = Integer.toString(year);
+
+
+		return yearSTR;
+	}
+
+
+	/**
+	 * @return
+	 */
+	public String obtenerPeriodoActual()
+	{
+		final Calendar c = Calendar.getInstance();
+		final int month = c.get(Calendar.MONTH);
+		final String monthSTR = Integer.toString(month);
+
+
+		return monthSTR;
+	}
+
+
+	/**
+	 * @param listaDocumentos
+	 * @return
+	 */
+	public String obtenerTipoDoc(final List<SobreTasaGasolinaTabla> listaDocumentos)
+	{
+		String tipoDoc = "";
+
+
+		if (listaDocumentos != null)
+		{
+			for (int i = 0; i < listaDocumentos.size(); i++)
+			{
+				if (!listaDocumentos.get(i).toString().isEmpty())
+				{
+					tipoDoc = listaDocumentos.get(i).getTipoDocumento();
+					break;
+				}
+			}
+		}
+
+
+		return tipoDoc;
+	}
+
+
+	/**
+	 * @param listaDocumentos
+	 * @return
+	 */
+	public String obtenerNumDoc(final List<SobreTasaGasolinaTabla> listaDocumentos)
+	{
+		String numDoc = "";
+
+
+		if (listaDocumentos != null)
+		{
+			for (int i = 0; i < listaDocumentos.size(); i++)
+			{
+				if (!listaDocumentos.get(i).toString().isEmpty())
+				{
+					numDoc = listaDocumentos.get(i).getNumeroDocumento();
+					break;
+				}
+			}
+		}
+
+
+		return numDoc;
+	}
+
 
 }

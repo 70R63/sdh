@@ -30,11 +30,13 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
@@ -108,9 +110,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String handlePOST_ST(final Model model, @ModelAttribute("dataForm")
+	public String handlePOST_ST(@ModelAttribute("dataForm")
 	final SobreTasaGasolinaForm dataFormResponse, @RequestParam(value = "action")
-	final String action) throws CMSItemNotFoundException
+	final String action, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Presentar Declaracion POST --------------------------");
 
@@ -134,6 +137,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;
+				String[] mensajesError;
 
 
 				customerModel = (CustomerModel) userService.getCurrentUser();
@@ -148,7 +152,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				if (detalleContribuyente.getIdmsj() != 0)
 				{
 					LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-					GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+					//					GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+					mensajesError = gasolinaService.prepararMensajesError(
+							gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"error.impuestoGasolina.sobretasa.error2", mensajesError);
 				}
 
 

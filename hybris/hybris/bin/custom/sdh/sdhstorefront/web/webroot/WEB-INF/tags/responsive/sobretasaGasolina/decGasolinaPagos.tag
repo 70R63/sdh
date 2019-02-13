@@ -36,7 +36,7 @@
 		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
-						code="impuestos.decGasolina.Pagos.valorSansiones" /></label> <input
+						code="impuestos.decGasolina.Pagos.valorSanciones" /></label> <input
 					id="valorSansiones" name="valorSansiones" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
 					value="${dataForm.valoresDeclara.vlrSancPagos}" maxlength="240">
@@ -62,8 +62,7 @@
 				<label class="control-label"><spring:theme
 						code="impuestos.decGasolina.Pagos.menosCompensaciones" /></label> <input
 					id="menosCompensaciones" name="menosCompensaciones"
-					readonly="readonly" class="form-control" aria-required="true"
-					type="text" readonly="readonly"
+					class="form-control" aria-required="true" type="text"
 					value="${dataForm.valoresDeclara.menosCompensa}" maxlength="240">
 			</div>
 		</div>
@@ -75,7 +74,7 @@
 				<label class="control-label"><spring:theme
 						code="impuestos.decGasolina.Pagos.valorTotalPagar" /></label> <input
 					id="valorTotalPagar" name="valorTotalPagar" class="form-control"
-					aria-required="true" type="text"
+					aria-required="true" type="text" readonly="readonly"
 					value="${dataForm.valoresDeclara.totalPagar}" maxlength="240">
 			</div>
 		</div>
