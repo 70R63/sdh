@@ -11,11 +11,9 @@
 
 
 <div class="container">
-	<sf:form action="${presentarDeclaracionUrl}"
-		id="presentarDeclaracionUrl1" commandName="dataForm"
-		method="POST">
+	<sf:form action="" method="POST" modelAttribute="dataForm" id="forma">
 		<sobreTasaGasolina:decGasolinaGen />
-		<%-- 	<sobreTasaGasolina:decGasolinaInfDec /> --%>
+		<sobreTasaGasolina:decGasolinaInfDec />
 		<sobreTasaGasolina:decGasolinaTotales />
 		<sobreTasaGasolina:decGasolinaPagos />
 		<sobreTasaGasolina:decGasolinaDatRev />
