@@ -603,4 +603,6 @@
 	
 	<bean id="sdhUpdateRitService" class="de.hybris.sdh.core.services.impl.DefaultSDHUpdateRitService" />
 	
+	<bean id="sdhGeneraDeclaracionService" class="de.hybris.sdh.core.services.impl.DefaultSDHGeneraDeclaracionService" />
+	
 </beans>
