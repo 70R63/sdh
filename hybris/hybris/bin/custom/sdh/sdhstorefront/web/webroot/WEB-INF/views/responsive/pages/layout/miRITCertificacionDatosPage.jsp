@@ -16,18 +16,12 @@ input[type=radio] {
     height: 15pt;
     vertical-align: -15pt;
 }
-
-.inner2 {
-   
-}
 </style>
 
 
 
 <script>
 	function borrarMenu(bPredial, bVehicular, bIca, bPublicidadExt, bSobreGasolina, bDelineacionUrbana) {
-		debugger;
-		
 		var li_array = document.getElementsByTagName('li');
 		var borrar_index;
 		var submenu_index;
@@ -68,11 +62,33 @@ input[type=radio] {
 		}	
 	}	
 	
-	borrarMenu("${miRitCertificacionForm.bPredial}", "${miRitCertificacionForm.bVehicular}", "${miRitCertificacionForm.bIca}", "${miRitCertificacionForm.bPublicidadExt}", "${miRitCertificacionForm.bSobreGasolina}", "${miRitCertificacionForm.bDelineacionUrbana}");
+	borrarMenu("${miRitCertificacionForm.bPredial}", "${miRitCertificacionForm.bVehicular}", "${miRitCertificacionForm.bIca}", "${miRitCertificacionForm.bPublicidadExt}", "${miRitCertificacionForm.bSobreGasolina}", "${miRitCertificacionForm.bDelineacionUrbana}");	
+</script>
+
+
+
+
+<script>
+	function downloadPDF(pdf) {
+		
+		if (pdf){
+			const linkSource = 'data:application/pdf;base64,' + pdf;
+		    const downloadLink = document.createElement("a");
+		    const fileName = "Certificación_RIT.pdf";
 	
+		    downloadLink.href = linkSource;
+		    downloadLink.download = fileName;
+		    downloadLink.click();
+		}    
+	}
+	
+	
+	downloadPDF('${miRitCertificacionForm.rit.stringRIT}');
 </script>
 
  <!--
+ 
+ 
 <div class="col-md-2" >
 			<button class="btn btn-primary btn-block" type="button" style="margin-top: 30px;margin-left: 40px" onclick='borrarMenu("${miRitCertificacionForm.bPredial}", "${miRitCertificacionForm.bVehicular}", "${miRitCertificacionForm.bIca}", "${miRitCertificacionForm.bPublicidadExt}", "${miRitCertificacionForm.bSobreGasolina}", "${miRitCertificacionForm.bDelineacionUrbana}")'>
 				<spring:theme code="mirit.certificacion.btnGenerar" />
@@ -88,7 +104,7 @@ input[type=radio] {
 	</div>
 </div>
 
- <form:form action="/sdhstorefront/es/contribuyentes/mirit/certificacion" method="post" commandName="miRitCertificacionForm" >
+ <form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/mirit/certificacion/datos" method="post" commandName="miRitCertificacionForm" >
        
 	<br>
 	  <div class="row">  
@@ -104,7 +120,7 @@ input[type=radio] {
 		</div>
 		
 		<div class="col-md-2" >
-			<button class="btn btn-primary btn-block" type="submit" style="margin-top: 30px;margin-left: 40px">
+			<button class="btn btn-primary btn-block" type="submit" style="margin-top: 30px;margin-left: 40px" >
 				<spring:theme code="mirit.certificacion.btnGenerar" />
 			</button>
 		</div>

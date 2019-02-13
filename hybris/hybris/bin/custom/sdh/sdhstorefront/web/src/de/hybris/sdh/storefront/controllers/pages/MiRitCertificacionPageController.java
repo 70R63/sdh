@@ -57,7 +57,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/contribuyentes/mirit/certificacion", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/mirit/certificacion/datos", method = RequestMethod.POST)
 	public String showView(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("miRitCertificacionForm")
 	final MiRitCertificacionForm miRitCertificacionFormDatos) throws CMSItemNotFoundException
 	{
@@ -127,11 +127,13 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 		}
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_CMS_PAGE));
-		updatePageTitle(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_CMS_PAGE));
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_DATOS_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_DATOS_CMS_PAGE));
+		updatePageTitle(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_DATOS_CMS_PAGE));
 
 		return getViewForPage(model);
+
 	}
 
 
