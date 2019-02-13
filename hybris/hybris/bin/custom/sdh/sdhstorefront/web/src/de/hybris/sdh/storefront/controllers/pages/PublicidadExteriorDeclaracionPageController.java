@@ -21,14 +21,18 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
+import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.responses.CalcPublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
+import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 
 import java.time.LocalDate;
@@ -83,6 +87,9 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 	@Resource(name = "sdhCalPublicidadService")
 	SDHCalPublicidadService sdhCalPublicidadService;
+
+	@Resource(name = "sdhGeneraDeclaracionService")
+	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
 
 
 	private static final String ERROR_CMS_PAGE = "notFound";
@@ -275,5 +282,49 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 	}
 
+	@RequestMapping(value = "/generar", method = RequestMethod.POST)
+	@ResponseBody
+	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm) throws CMSItemNotFoundException
+	{
+		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
+
+
+		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
+
+
+		generaDeclaracionRequest.setNumForm(dataForm.getNumForm());
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
+					GeneraDeclaracionResponse.class);
+
+
+		}
+
+
+		catch (final Exception e)
+		{
+			LOG.error("error generating declaration : " + e.getMessage());
+
+			final ErrorPubli error = new ErrorPubli();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al generar la declaración, por favor intentalo más tarde");
+
+			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
+
+			errores.add(error);
+
+			generaDeclaracionResponse.setErrores(errores);
+
+		}
+
+		return generaDeclaracionResponse;
+
+	}
 
 }

@@ -39,7 +39,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
 
-	private static final String TIPO_CERTIFICACION = "";
+	private static final String VACIO = "";
 
 	//CMS PAGES
 	private static final String MI_RIT_CERTIFICACION_CMS_PAGE = "miRITCertificacionPage";
@@ -64,11 +64,34 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CertificaRITRequest certificaRITRequest = new CertificaRITRequest();
 
+		if (customerModel.getNumBP() != null)
+		{
+			certificaRITRequest.setNumBP(customerModel.getNumBP());
+		}
+		else
+		{
+			certificaRITRequest.setNumBP(VACIO);
+		}
 
-		certificaRITRequest.setNumBP(customerModel.getNumBP());
 
-		certificaRITRequest.setTipoCert(miRitCertificacionFormDatos.getTipoCert());
-		certificaRITRequest.setTipoImp(miRitCertificacionFormDatos.getTipoImp());
+		if (miRitCertificacionFormDatos.getTipoCert() != null)
+		{
+			certificaRITRequest.setTipoCert(miRitCertificacionFormDatos.getTipoCert());
+		}
+		else
+		{
+			certificaRITRequest.setTipoCert(VACIO);
+		}
+
+		if (miRitCertificacionFormDatos.getTipoImp() != null)
+		{
+			certificaRITRequest.setTipoImp(miRitCertificacionFormDatos.getTipoImp());
+		}
+		else
+		{
+			certificaRITRequest.setTipoImp(VACIO);
+		}
+
 
 		try
 		{
@@ -147,7 +170,8 @@ public class MiRitCertificacionPageController extends AbstractPageController
 			//private String bPredial;
 			//private String bVehicular;
 			//private String bIca;
-			if (!sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
+					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
 			{
 				miRitCertificacionForm.setbSobreGasolina("X");
 			}
@@ -156,7 +180,8 @@ public class MiRitCertificacionPageController extends AbstractPageController
 				miRitCertificacionForm.setbSobreGasolina("");
 			}
 
-			if (!sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
+			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
+					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
 			{
 				miRitCertificacionForm.setbPublicidadExt("X");
 			}

@@ -63,6 +63,7 @@
 			
 			ACC.publicidadExteriorCalculoURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion/calculo' />";
 			
+			ACC.generaDeclaracionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion/generar' />";
 			
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},
