@@ -28,7 +28,7 @@
 
 					<td><spring:theme
 							code="impuestos.sobreTasaGasolina.menu.tituloNota" /><a
-						href="http://www.shd.gov.co/shd/">Mas información</a></td>
+						href="http://www.shd.gov.co/shd/"> Mas información</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -36,7 +36,7 @@
 </div>
 
 <br>
-<div class="col-md-10">
+<div class="col-md-9">
 	<div>
 		<div class="col-md-12">
 			<table class="table col-md-2 table-bordered">

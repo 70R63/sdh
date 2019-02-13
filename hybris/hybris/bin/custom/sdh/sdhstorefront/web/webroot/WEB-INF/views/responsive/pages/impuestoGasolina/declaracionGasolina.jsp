@@ -7,15 +7,20 @@
 <%@ taglib prefix="sobreTasaGasolina"
 	tagdir="/WEB-INF/tags/responsive/sobretasaGasolina"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <div class="container">
-	<sobreTasaGasolina:decGasolinaGen />
-<%-- 	<sobreTasaGasolina:decGasolinaInfDec /> --%>
-	<sobreTasaGasolina:decGasolinaTotales />
-	<sobreTasaGasolina:decGasolinaPagos />
-	<sobreTasaGasolina:decGasolinaDatRev />
-	<sobreTasaGasolina:decGasolinaInfFirma />
-	<sobreTasaGasolina:decGasolinaPago />
+	<sf:form action="${presentarDeclaracionUrl}"
+		id="presentarDeclaracionUrl1" commandName="dataForm"
+		method="POST">
+		<sobreTasaGasolina:decGasolinaGen />
+		<%-- 	<sobreTasaGasolina:decGasolinaInfDec /> --%>
+		<sobreTasaGasolina:decGasolinaTotales />
+		<sobreTasaGasolina:decGasolinaPagos />
+		<sobreTasaGasolina:decGasolinaDatRev />
+		<sobreTasaGasolina:decGasolinaInfFirma />
+		<sobreTasaGasolina:decGasolinaPago />
+	</sf:form>
 </div>
 

@@ -8,16 +8,16 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<sf:form action="" method="POST" modelAttribute="dataForm" id="forma">
-	<div class="row">
-		<div class="col-md-12">
-			<h2>
-				<span tabindex="0 headline"> <spring:theme
-						code="impuestos.decGasolina.InformacionFirma.titulo" />
-				</span>
-			</h2>
-		</div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>
+			<span tabindex="0 headline"> <spring:theme
+					code="impuestos.decGasolina.InformacionFirma.titulo" />
+			</span>
+		</h2>
 	</div>
+</div>
+<div class="row">
 	<div class="row">
 		<div class="col-md-4">
 			<div class="form-group ">
@@ -26,6 +26,10 @@
 					class="form-control" disabled="disabled"></select>
 			</div>
 		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="row">
 		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
@@ -34,6 +38,10 @@
 					maxlength="30" size="30" disabled="disabled" type="text" />
 			</div>
 		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="row">
 		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
@@ -43,13 +51,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="form-group col-md-offset-4">
-			<button class="btn btn-primary btn-lg" type="button">
-				<spring:theme code="impuestos.decGasolina.InformacionFirma.Firma" />
-			</button>
-		</div>
-	</div>
+</div>
 
-</sf:form>
 

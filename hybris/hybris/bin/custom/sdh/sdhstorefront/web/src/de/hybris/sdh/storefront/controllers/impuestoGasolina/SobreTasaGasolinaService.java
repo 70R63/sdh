@@ -17,6 +17,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -654,5 +655,85 @@ public class SobreTasaGasolinaService
 
 		return errores;
 	}
+
+	/**
+	 * @return
+	 */
+	public String obtenerAnoGravableActual()
+	{
+		final Calendar c = Calendar.getInstance();
+		final int year = c.get(Calendar.YEAR);
+		final String yearSTR = Integer.toString(year);
+
+
+		return yearSTR;
+	}
+
+
+	/**
+	 * @return
+	 */
+	public String obtenerPeriodoActual()
+	{
+		final Calendar c = Calendar.getInstance();
+		final int month = c.get(Calendar.MONTH);
+		final String monthSTR = Integer.toString(month);
+
+
+		return monthSTR;
+	}
+
+
+	/**
+	 * @param listaDocumentos
+	 * @return
+	 */
+	public String obtenerTipoDoc(final List<SobreTasaGasolinaTabla> listaDocumentos)
+	{
+		String tipoDoc = "";
+
+
+		if (listaDocumentos != null)
+		{
+			for (int i = 0; i < listaDocumentos.size(); i++)
+			{
+				if (!listaDocumentos.get(i).toString().isEmpty())
+				{
+					tipoDoc = listaDocumentos.get(i).getTipoDocumento();
+					break;
+				}
+			}
+		}
+
+
+		return tipoDoc;
+	}
+
+
+	/**
+	 * @param listaDocumentos
+	 * @return
+	 */
+	public String obtenerNumDoc(final List<SobreTasaGasolinaTabla> listaDocumentos)
+	{
+		String numDoc = "";
+
+
+		if (listaDocumentos != null)
+		{
+			for (int i = 0; i < listaDocumentos.size(); i++)
+			{
+				if (!listaDocumentos.get(i).toString().isEmpty())
+				{
+					numDoc = listaDocumentos.get(i).getNumeroDocumento();
+					break;
+				}
+			}
+		}
+
+
+		return numDoc;
+	}
+
 
 }

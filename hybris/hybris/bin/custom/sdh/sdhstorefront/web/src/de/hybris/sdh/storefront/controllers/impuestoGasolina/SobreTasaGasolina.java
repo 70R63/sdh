@@ -101,17 +101,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 		numBP = customerModel.getNumBP();
 		numDoc = customerModel.getDocumentNumber();
-		if (dataForm.getListaDocumentos() != null)
-		{
-			for (int i = 0; i < dataForm.getListaDocumentos().size(); i++)
-			{
-				if (!dataForm.getListaDocumentos().get(i).toString().isEmpty())
-				{
-					tipoDoc = dataForm.getListaDocumentos().get(indiceSeleccionado).getTipoDocumento();
-					break;
-				}
-			}
-		}
+		tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
+		numDoc = gasolinaService.obtenerNumDoc(dataForm.getListaDocumentos());
 		anioGravable = dataForm.getAnoGravable();
 		periodo = dataForm.getPeriodo();
 
@@ -181,8 +172,14 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+		final DetGasResponse detalleGasolinaResponse;
 		String[] mensajesError;
 		String numBP = "";
+		String tipoDoc = "";
+		String numDoc = "";
+		String anioGravable = "";
+		String periodo = "";
 		SDHValidaMailRolResponse detalleContribuyente;
 		String returnURL = "/";
 
@@ -199,14 +196,38 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error2", mensajesError);
 		}
+		tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
+		numDoc = gasolinaService.obtenerNumDoc(dataForm.getListaDocumentos());
+		anioGravable = gasolinaService.obtenerAnoGravableActual();
+		periodo = gasolinaService.obtenerPeriodoActual();
+
+		detalleGasolinaRequest.setNumBP(numBP);
+		detalleGasolinaRequest.setNumDoc(numDoc);
+		detalleGasolinaRequest.setTipoDoc(tipoDoc);
+		detalleGasolinaRequest.setAnoGravable(anioGravable);
+		detalleGasolinaRequest.setPeriodo(periodo);
+
+		detalleGasolinaResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println(detalleGasolinaResponse);
+		if (detalleGasolinaResponse.getErrores() != null && detalleGasolinaResponse.getErrores().get(0) != null
+				&& detalleGasolinaResponse.getErrores().get(0).getTxtmsj() != null
+				&& !detalleGasolinaResponse.getErrores().get(0).getTxtmsj().equals(""))
+		{
+			LOG.error("Error al leer detalle de gasolina: " + detalleGasolinaResponse.getErrores().get(0).getTxtmsj());
+			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error1");
+		}
 
 		if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
 		{
 		dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
 		dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
 		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
-		dataForm.setAnoGravable("2019");
-		dataForm.setPeriodo("1");
+			dataForm.setAnoGravable(gasolinaService.obtenerAnoGravableActual());
+			dataForm.setPeriodo(gasolinaService.obtenerPeriodoActual());
+			dataForm.setNumBP(numBP);
+			dataForm.setNumDoc(numDoc);
+			dataForm.setTipoDoc(tipoDoc);
+			dataForm.setDataForm(detalleGasolinaResponse);
 
 		model.addAttribute("dataForm", dataForm);
 

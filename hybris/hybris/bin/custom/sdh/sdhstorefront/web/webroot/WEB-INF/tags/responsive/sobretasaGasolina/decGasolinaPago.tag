@@ -4,61 +4,24 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="row">
-	<div class="col-md-6">
-		<div class="headline">
-			<h2>
-				<span tabindex="0"><spring:theme
-						code="impuestos.decGasolina.Pago.titulo" /></span>
-			</h2>
-		</div>
-	</div>
-</div>
 
-<div class="row">
-	<div class="row">
-		<div class="col-md-6 col-md-offset-4">
-			<div class="form-group">
-				<button class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="impuestos.decGasolina.Pago.GenerarDec" />
-				</button>
-			</div>
-		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-6 col-md-offset-4">
-			<div class="form-group">
-				<button class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="impuestos.decGasolina.Pago.crearNuevaDec" />
-				</button>
-			</div>
-		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-6 col-md-offset-4">
-			<div class="form-group">
-				<button class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
-				</button>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-6 col-md-offset-4">
-			<div class="form-group">
-				<button class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
-				</button>
-			</div>
-		</div>
-	</div>
+<div class="col-md-8 text-right">
+	<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
+		name="action">
+		<spring:theme code="impuestos.decGasolina.Pago.GenerarDec" />
+	</sf:button>
+	<div class="col-md-1"></div>
+	<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
+		name="action">
+		<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
+	</sf:button>
 </div>
 
 <br>

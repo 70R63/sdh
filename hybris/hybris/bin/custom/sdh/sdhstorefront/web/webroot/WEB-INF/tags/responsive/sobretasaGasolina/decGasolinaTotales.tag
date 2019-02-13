@@ -36,7 +36,7 @@
 		<div class="col-md-4">
 			<div class="form-group">
 				<label class="control-label "><spring:theme
-						code="impuestos.decGasolina.Totales.valorSansiones" /></label> <input
+						code="impuestos.decGasolina.Totales.valorSanciones" /></label> <input
 					id="valorSansiones" name="valorSansiones" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
 					value="${dataForm.valoresDeclara.vlrSancTotales}" maxlength="240">
