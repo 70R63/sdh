@@ -21,13 +21,13 @@
 		</h3>
 	</div>
 </div>
-<input type="hidden" id="numForm" name="numForm" />
+<input type="hidden" id="numForm" name="numForm" value="${declaPublicidadForm.numform }"/>
 <div class="row">
 	<div class="col-md-3 col-md-offset-6 center">
 		<div class="accountActions">
-			<div class="boton" type="button">
-				<spring:theme code="declaracion.publicidad.button.gendecl" />
-			</div>
+			<button id="generaDeclaracionButton" name="generaDeclaracionButton" type="button">
+				<spring:theme code="declaracion.publicidad.button.generar" text="Generar Declaración"/>
+				</button>
 		</div>
 		<div class="accountActions">
 			<sf:form action="${presentarDeclaracionUrl2}"
