@@ -250,8 +250,8 @@ public class CalculaGasolinaRequest extends ConsultaGasolinaRequest
 
 		stringBuilder.append("{");
 		stringBuilder.append(obtenerValorJson("\"numBP\":\"", this.getNumBP(), "\","));
-		stringBuilder.append(obtenerValorJson("\"numDoc\":\"", this.getTipoDoc(), "\","));
-		stringBuilder.append(obtenerValorJson("\"tipoDoc\":\"", this.getNumDoc(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numDoc\":\"", this.getNumDoc(), "\","));
+		stringBuilder.append(obtenerValorJson("\"tipoDoc\":\"", this.getTipoDoc(), "\","));
 		stringBuilder.append(obtenerValorJson("\"anoGravable\":\"", this.getAnoGravable(), "\","));
 		stringBuilder.append(obtenerValorJson("\"periodo\":\"", this.getPeriodo(), "\","));
 		stringBuilder.append(obtenerValorJson("\"numForm\":\"", this.getNumForm(), "\","));

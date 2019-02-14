@@ -4,7 +4,6 @@
 package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
-import de.hybris.sdh.core.pojos.requests.ConsultaGasolinaRequest;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 
 import java.io.BufferedReader;
@@ -34,7 +33,7 @@ public class DefaultSDHDetalleGasolina implements SDHDetalleGasolina
 
 
 	@Override
-	public String consultaWS(final ConsultaGasolinaRequest request, final String confUrl, final String confUser,
+	public String consultaWS(final Object request, final String confUrl, final String confUser,
 			final String confPassword, final String wsNombre, final String wsRequestMethod)
 	{
 		final String urlString = configurationService.getConfiguration().getString(confUrl);//"sdh.detalleGasolina.url");
