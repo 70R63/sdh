@@ -114,8 +114,8 @@ public class DetalleGasolinaRequest extends ConsultaGasolinaRequest
 
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"numDoc\":\"" + this.getTipoDoc() + "\",");
-		stringBuilder.append("\"tipoDoc\":\"" + this.getNumDoc() + "\",");
+		stringBuilder.append("\"numDoc\":\"" + this.getNumDoc() + "\",");
+		stringBuilder.append("\"tipoDoc\":\"" + this.getTipoDoc() + "\",");
 		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\",");
 		stringBuilder.append("\"periodo\":\"" + this.getPeriodo() + "\"");
 		stringBuilder.append("}");
