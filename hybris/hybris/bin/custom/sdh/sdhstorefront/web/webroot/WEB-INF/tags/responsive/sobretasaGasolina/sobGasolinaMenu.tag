@@ -28,7 +28,8 @@
 
 					<td><spring:theme
 							code="impuestos.sobreTasaGasolina.menu.tituloNota" /><a
-						href="http://www.shd.gov.co/shd/"> Mas información</a></td>
+						href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+							información</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -42,11 +43,11 @@
 			<table class="table col-md-2 table-bordered">
 				<thead>
 					<tr>
-						<td><label class="control-label"><spring:theme
+						<td><label class="control-label text-capitalize !important"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.tipoDocumento" /></label></td>
-						<td><label class="control-label"><spring:theme
+						<td><label class="control-label text-capitalize !important"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.numeroDocumento" /></label></td>
-						<td><label class="control-label"><spring:theme
+						<td><label class="control-label text-capitalize !important"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.nombre" /></label></td>
 					</tr>
 				</thead>

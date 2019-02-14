@@ -8,6 +8,7 @@ import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
+import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
@@ -206,18 +207,17 @@ public class SobreTasaGasolinaService
 	private Map<String, String> obtenerListaPeriodo()
 	{
 
-		//		final List<ItemSelectOption> elementos = new ArrayList<ItemSelectOption>();
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put("1", "Enero");
-		elementos.put("2", "Febrero");
-		elementos.put("3", "Marzo");
-		elementos.put("4", "Abril");
-		elementos.put("5", "Mayo");
-		elementos.put("6", "Junio");
-		elementos.put("7", "Julio");
-		elementos.put("8", "Agosto");
-		elementos.put("9", "Septiembre");
+		elementos.put("01", "Enero");
+		elementos.put("02", "Febrero");
+		elementos.put("03", "Marzo");
+		elementos.put("04", "Abril");
+		elementos.put("05", "Mayo");
+		elementos.put("06", "Junio");
+		elementos.put("07", "Julio");
+		elementos.put("08", "Agosto");
+		elementos.put("09", "Septiembre");
 		elementos.put("10", "Octubre");
 		elementos.put("11", "Noviembre");
 		elementos.put("12", "Diciembre");
@@ -490,7 +490,7 @@ public class SobreTasaGasolinaService
 			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
 	{
 
-		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
+		//		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
 		CalculaGasolinaResponse responseInfo = new CalculaGasolinaResponse();
 		final String confUrl = "sdh.calculoGasolina.url";
 		final String confUser = "sdh.calculoGasolina.user";
@@ -498,13 +498,15 @@ public class SobreTasaGasolinaService
 		final String wsNombre = "Calculo_Gasolina";
 		final String wsReqMet = "POST";
 
-		consultaGasolinaRequest.setNumBP(requestInfo.getNumBP());
-		consultaGasolinaRequest.setNumDoc(requestInfo.getNumDoc());
-		consultaGasolinaRequest.setTipoDoc(requestInfo.getTipoDoc());
-		consultaGasolinaRequest.setAnoGravable(requestInfo.getAnoGravable());
-		consultaGasolinaRequest.setPeriodo(requestInfo.getPeriodo());
+		//		consultaGasolinaRequest.setNumBP(requestInfo.getNumBP());
+		//		consultaGasolinaRequest.setNumDoc(requestInfo.getNumDoc());
+		//		consultaGasolinaRequest.setTipoDoc(requestInfo.getTipoDoc());
+		//		consultaGasolinaRequest.setAnoGravable(requestInfo.getAnoGravable());
+		//		consultaGasolinaRequest.setPeriodo(requestInfo.getPeriodo());
 
-		responseInfo = llamarWSCalGasolina(consultaGasolinaRequest, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
+
+
+		responseInfo = llamarWSCalGasolina(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
 				LOG);
 
 		return responseInfo;
@@ -528,8 +530,8 @@ public class SobreTasaGasolinaService
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			detalleContribuyente = mapper
-					.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(requestInfo), SDHValidaMailRolResponse.class);
+			detalleContribuyente = mapper.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(requestInfo),
+					SDHValidaMailRolResponse.class);
 		}
 		catch (final Exception e)
 		{
@@ -612,6 +614,7 @@ public class SobreTasaGasolinaService
 				}
 			}
 		}
+
 		return returnURL;
 	}
 
@@ -625,7 +628,6 @@ public class SobreTasaGasolinaService
 		final List<String> mensajes = new ArrayList<String>();
 		String[] listaMensajes;
 		String mensajeError;
-
 
 		for (int i = 0; i < errores.size(); i++)
 		{
@@ -665,7 +667,6 @@ public class SobreTasaGasolinaService
 		final int year = c.get(Calendar.YEAR);
 		final String yearSTR = Integer.toString(year);
 
-
 		return yearSTR;
 	}
 
@@ -676,9 +677,11 @@ public class SobreTasaGasolinaService
 	public String obtenerPeriodoActual()
 	{
 		final Calendar c = Calendar.getInstance();
-		final int month = c.get(Calendar.MONTH);
-		final String monthSTR = Integer.toString(month);
+		int month = c.get(Calendar.MONTH);
+		final String monthSTR;
 
+		month++;
+		monthSTR = month < 10 ? "0" + Integer.toString(month) : Integer.toString(month);
 
 		return monthSTR;
 	}
@@ -692,7 +695,6 @@ public class SobreTasaGasolinaService
 	{
 		String tipoDoc = "";
 
-
 		if (listaDocumentos != null)
 		{
 			for (int i = 0; i < listaDocumentos.size(); i++)
@@ -704,7 +706,6 @@ public class SobreTasaGasolinaService
 				}
 			}
 		}
-
 
 		return tipoDoc;
 	}
@@ -733,6 +734,46 @@ public class SobreTasaGasolinaService
 
 
 		return numDoc;
+	}
+
+
+	/**
+	 * @param i
+	 * @return
+	 */
+	public List<DetGasInfoDeclaraResponse> prepararInfoDeclaraDefault(final int cantidadRegistros)
+	{
+		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
+
+		for (int i = 0; i < cantidadRegistros; i++)
+		{
+			infoDeclaraDefault.add(new DetGasInfoDeclaraResponse());
+		}
+
+		return infoDeclaraDefault;
+	}
+
+
+	/**
+	 * @param infoDeclara
+	 * @return
+	 */
+	public List<DetGasInfoDeclaraResponse> prepararInfoDeclara(final List<DetGasInfoDeclaraResponse> infoDeclaraOriginal)
+	{
+		final List infoDeclara = new ArrayList<DetGasInfoDeclaraResponse>();
+
+		if (infoDeclaraOriginal != null)
+		{
+			for (int i = 0; i < infoDeclaraOriginal.size(); i++)
+			{
+				if (infoDeclaraOriginal.get(i).getClaseProd() != null && infoDeclaraOriginal.get(i).getClaseProd().equals("") != true)
+				{
+					infoDeclara.add(infoDeclaraOriginal.get(i));
+				}
+			}
+		}
+
+		return infoDeclara;
 	}
 
 
