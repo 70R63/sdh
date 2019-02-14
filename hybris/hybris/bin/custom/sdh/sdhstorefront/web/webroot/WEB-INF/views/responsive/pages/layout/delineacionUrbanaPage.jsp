@@ -6,21 +6,10 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
-<%@ taglib prefix="sobreTasaGasolina"
-	tagdir="/WEB-INF/tags/responsive/sobretasaGasolina"%>
 
-
-<div class="container">
-
-
+<div class="col-md-12">
 	<delineacionUrbana:delineacionUrbanaTable />
+</div>
+<div class="container">
 	<delineacionUrbana:delineacionUrbanaDetail />
-	<delineacionUrbana:delineacionUrbanaBasicos />
-	<delineacionUrbana:delineacionUrbanaAdicionales />
-	<delineacionUrbana:delineacionUrbanaDecGenerales />
-	<delineacionUrbana:delineacionUrbanaDecAreasUsos />
-	<delineacionUrbana:delineacionUrbanaDecLiqPriva />
-	<delineacionUrbana:delineacionUrbanaDecFirma />
-
-
 </div>

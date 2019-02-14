@@ -106,7 +106,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
-; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; "/contribuyentes/delineacion-urbana" ;;;;;
+; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; "/contribuyentes/delineacionurbana/detalle" ;;;;;
 ; ; ICALink                      ; ICA                                 ; "/contribuyentes2/icareteica" ;;;;;
 ; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; "/contribuyentes2/predialunificado" ;;;;;
 ; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes/publicidadexterior" ;;;;;
@@ -1471,3 +1471,50 @@ INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]	
 				 					;							;DeclaracionGasolinaComponent	;DeclaracionGasolinaComponent	;/WEB-INF/views/responsive/pages/impuestoGasolina/declaracionGasolina.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;DeclaracionGasolinaComponent
 									
 #->FIN dev-federico Agregar paginas para impuesto sobretasagasolina  17/01/2019
+
+#->INI dev-maria Agregar paginas para impuesto delineacionurbana  13/02/2019
+
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;delineacionUrbanaPage 		;Delineacion Urbana 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/delineacionurbana/detalle
+
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='delineacionUrbanaPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-delineacionUrbanaPage 	;SideContent			;																	;SideContent-delineacionUrbanaPage				;;;
+								;						;BodyContent-delineacionUrbanaPage 	;BodyContent			;																	;BodyContent-delineacionUrbanaPage				;;;
+								
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-delineacionUrbanaPage 	;Side Content Slot for Delineacion Urbana	;true	;								;;;
+							;							;BodyContent-delineacionUrbanaPage	;Body Content Slot for Delineacion Urbana	;true	;delineacionUrbanaPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;delineacionUrbanaPageComponent	;delineacionUrbanaPage Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaPageComponent	
+
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;delineacionUrbanaDeclaracionesPage 		;Declaracion Urbana	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/publicidadexterior/declaracion
+
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='delineacionUrbanaDeclaracionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-delineacionUrbanaDeclaracionesPage 	;SideContent			;																	;SideContent-delineacionUrbanaDeclaracionesPage				;;;
+								;						;BodyContent-delineacionUrbanaDeclaracionesPage 	;BodyContent			;																	;BodyContent-delineacionUrbanaDeclaracionesPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-delineacionUrbanaDeclaracionesPage 	;Side Content Slot for Declaracion Urbana	;true	;								;;;
+							;							;BodyContent-delineacionUrbanaDeclaracionesPage	;Body Content Slot for Declaracion Urbana	;true	;delineacionUrbanaDeclaracionesPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;delineacionUrbanaDeclaracionesPageComponent	;delineacionUrbanaDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaDeclaracionesPageComponent
+
+#->FIN dev-maria Agregar paginas para impuesto delineacionurbana  13/02/2019

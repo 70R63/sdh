@@ -9,10 +9,9 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-6 headline">
 		<h3>
-			<span class="cintillo col-md-10"><spring:theme
-					code="delineacion.urbana.dec.firm.title" /></span>
+			<span><spring:theme code="delineacion.urbana.dec.firm.title" /></span>
 		</h3>
 	</div>
 </div>
@@ -20,67 +19,63 @@
 <form:form>
 	<div class="row">
 		<div class="col-md-3">
-			<label class="inputlabelnew"><spring:theme
-					code="delineacion.urbana.dec.firm.tipiden" /></label>
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.firm.tipiden" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly" value="" maxlength="240">
+			</div>
 		</div>
 
-		<div class="col-md-4">
-			<label class="inputlabelnew"><spring:theme
-					code="delineacion.urbana.dec.firm.numide" /></label>
-		</div>
-		<div class="col-md-4">
-			<label class="inputlabelnew"><spring:theme
-					code="delineacion.urbana.dec.firm.nombraz" /></label>
-		</div>
-
-	</div>
-
-	<br>
-	<div class="row">
 		<div class="col-md-3">
 			<div class="form-group ">
-				<input id="" name="" class="inputtextnew" aria-required="true"
-					type="text" readonly="readonly" value="" maxlength="240">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.firm.numide" /></label> <input id="" name=""
+					class="form-control" aria-required="true" type="text"
+					readonly="readonly" value="" maxlength="240">
 			</div>
 		</div>
+
 		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="" name="" class="inputtextnew" aria-required="true"
-					type="text" readonly="readonly" value="" maxlength="240">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.firm.nombraz" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					value="" maxlength="240">
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="form-group ">
-				<input id="" name="" class="inputtextnew" aria-required="true"
-					type="text" value="" maxlength="240">
-			</div>
+		<div class="col-md-2">
+			<button action="" type="submit" class="btn btn-primary btn-lg" id=""
+				name="" value="calcular">
+				<spring:theme code="delineacion.urbana.dec.firm.firma" />
+			</button>
 		</div>
-		<button action="" type="submit" class="boton" id="" name=""
-			value="calcular">
-			<spring:theme code="delineacion.urbana.dec.firm.firma" />
-		</button>
 	</div>
+
+
+
+
 	<div class="container">
 		<div class="row">
-			<div class="accountActions">
-				<button action="" type="submit" class="boton" id="" name=""
-					value="calcular">
+			<div class="accountActions col-md-offset-4">
+				<button action="" type="submit" class="btn btn-primary btn-lg" id=""
+					name="" value="calcular">
 					<spring:theme code="delineacion.urbana.dec.firm.predec" />
 				</button>
 			</div>
 		</div>
 		<div class="row">
-			<div class="accountActions">
-				<button action="" type="submit" class="boton" id="" name=""
-					value="calcular">
+			<div class="accountActions col-md-offset-4">
+				<button action="" type="submit" class="btn btn-primary btn-lg" id=""
+					name="" value="calcular">
 					<spring:theme code="delineacion.urbana.dec.firm.paglin" />
 				</button>
 			</div>
 		</div>
 		<div class="row">
-			<div class="accountActions">
-				<button action="" type="submit" class="boton" id="" name=""
-					value="calcular">
+			<div class="accountActions col-md-offset-4">
+				<button action="" type="submit" class="btn btn-primary btn-lg" id=""
+					name="" value="calcular">
 					<spring:theme code="delineacion.urbana.dec.firm.genrop" />
 				</button>
 			</div>

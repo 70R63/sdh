@@ -6,13 +6,13 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="delineacionUrbana" tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 
-<template:page>
+
 	<div class="container">
 		<delineacionUrbana:delineacionUrbanaDecGenerales/>
 		<delineacionUrbana:delineacionUrbanaDecAreasUsos/>
 		<delineacionUrbana:delineacionUrbanaDecLiqPriva/>
 		<delineacionUrbana:delineacionUrbanaDecFirma/>	
 	</div>	
-</template:page>
+
 
 
