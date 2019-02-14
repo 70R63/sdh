@@ -109,52 +109,51 @@
 					<tbody>
 
 						<tr>
-							<td rowspan="3"><input id="CDU" name="" class="form-control"
+							<td rowspan="3"><input id="CDU" name="" class="inputtextnew"
 								aria-required="true" type="text" disabled
 								value="<c:out value="CDU-11111"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important; height: 144px; padding-top: 6px; border-top-width: -;"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="CHIP-111111"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name=""
-								class="form-control background-color: #fefefe;"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="matricula"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="Tv 1a 55-73"></c:out>" maxlength="240"
 								style="width: 150px !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="CódigoP"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="Localidad"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="Estrato"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="UnidadConstruir"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="Licencia"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="revalidacion"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="Prorroga"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="12/09/1990"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
@@ -194,47 +193,47 @@
 
 						<tr>
 
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="12/09/1990"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="12/09/1990"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="Derecobra"></c:out>" maxlength="240"
 								style="width: 150px !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="12/09/1990"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="Modalidad"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="tipomarca"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="marca"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="numradicado"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="12/09/1990"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="cant-unidades"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							<td><input id="" name="" class="form-control"
+							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
 								value="<c:out value="area-unidad"></c:out>" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
