@@ -43,12 +43,12 @@
 	    		for( a_index = 0; a_index < a_array.length; a_index++ ) {
 		    		itext = a_array[a_index].getAttribute('href');
 		    		
-		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("/contribuyentes/delineacion-urbana"))                 ) ||
-		    			( (bIca != "X") && (itext.includes("/contribuyentes2/icareteica"))                      ) ||
-		    			( (bPredial != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/predialunificado"))            ) ||
-		    			( (bPublicidadExt != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/publicidadexterior"))    ) ||
-		    			( (bVehicular != "X") && (itext.includes("/sdhstorefront/es/contribuyentes2/sobrevehiculosautomotores")) ) ||
-		    		    ( (bSobreGasolina != "X") && (itext.includes("/sdhstorefront/es/contribuyentes/sobretasa-gasolina"))     )
+		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("delineacion-urbana"))  ) ||
+		    			( (bIca != "X") && (itext.includes("icareteica"))                        ) ||
+		    			( (bPredial != "X") && (itext.includes("predialunificado"))              ) ||
+		    			( (bPublicidadExt != "X") && (itext.includes("publicidadexterior"))      ) ||
+		    			( (bVehicular != "X") && (itext.includes("sobrevehiculosautomotores"))   ) ||
+		    		    ( (bSobreGasolina != "X") && (itext.includes("sobretasa-gasolina"))      )
 		    		  )			
 		    		{
 		    			borrar_index = true;
