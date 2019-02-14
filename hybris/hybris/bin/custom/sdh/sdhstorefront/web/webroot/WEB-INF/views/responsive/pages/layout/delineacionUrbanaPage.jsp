@@ -6,9 +6,6 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
-<%@ taglib prefix="sobreTasaGasolina"
-	tagdir="/WEB-INF/tags/responsive/sobretasaGasolina"%>
-
 
 <div class="col-md-12">
 	<delineacionUrbana:delineacionUrbanaTable />
