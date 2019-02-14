@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
@@ -195,6 +196,32 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+
+
+			//*->INI dev-eduardo ajuste de menu impuestos
+			//private String bPredial;
+			//private String bVehicular;
+			//private String bIca;
+			if (detalleContribuyente.getGasolina() != null && !detalleContribuyente.getGasolina().isEmpty())
+			{
+				dataForm.setbSobreGasolina("X");
+			}
+			else
+			{
+				dataForm.setbSobreGasolina("");
+			}
+
+			if (detalleContribuyente.getPublicidadExt() != null && !detalleContribuyente.getPublicidadExt().isEmpty())
+			{
+				dataForm.setbPublicidadExt("X");
+			}
+			else
+			{
+				dataForm.setbPublicidadExt("");
+			}
+			//*->FIN dev-eduardo ajuste de menu impuestos
+
+			model.addAttribute("dataForm", dataForm);
 		}
 		tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
 		numDoc = gasolinaService.obtenerNumDoc(dataForm.getListaDocumentos());
@@ -215,6 +242,31 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		{
 			LOG.error("Error al leer detalle de gasolina: " + detalleGasolinaResponse.getErrores().get(0).getTxtmsj());
 			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error1");
+
+			//*->INI dev-eduardo ajuste de menu impuestos
+			//private String bPredial;
+			//private String bVehicular;
+			//private String bIca;
+			if (detalleContribuyente.getGasolina() != null && !detalleContribuyente.getGasolina().isEmpty())
+			{
+				dataForm.setbSobreGasolina("X");
+			}
+			else
+			{
+				dataForm.setbSobreGasolina("");
+			}
+
+			if (detalleContribuyente.getPublicidadExt() != null && !detalleContribuyente.getPublicidadExt().isEmpty())
+			{
+				dataForm.setbPublicidadExt("X");
+			}
+			else
+			{
+				dataForm.setbPublicidadExt("");
+			}
+			//*->FIN dev-eduardo ajuste de menu impuestos
+
+			model.addAttribute("dataForm", dataForm);
 		}
 
 		if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
@@ -229,8 +281,30 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			dataForm.setTipoDoc(tipoDoc);
 			dataForm.setDataForm(detalleGasolinaResponse);
 
-			model.addAttribute("dataForm", dataForm);
+		//*->INI dev-eduardo ajuste de menu impuestos
+			//private String bPredial;
+			//private String bVehicular;
+			//private String bIca;
+			if (detalleContribuyente.getGasolina() != null && !detalleContribuyente.getGasolina().isEmpty())
+			{
+				dataForm.setbSobreGasolina("X");
+			}
+			else
+			{
+				dataForm.setbSobreGasolina("");
+			}
 
+			if (detalleContribuyente.getPublicidadExt() != null && !detalleContribuyente.getPublicidadExt().isEmpty())
+			{
+				dataForm.setbPublicidadExt("X");
+			}
+			else
+			{
+				dataForm.setbPublicidadExt("");
+			}
+			//*->FIN dev-eduardo ajuste de menu impuestos
+
+		model.addAttribute("dataForm", dataForm);
 			storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
 			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));

@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="src" path="/acceleratorstorefrontcommons"/>
-	<classpathentry exported="true" kind="src" path="/sdhfacades"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/json-taglib-0.4.1.jar"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/jsoup-1.6.1.jar"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/jstl-impl-1.2.jar"/>
@@ -11,7 +10,6 @@
 	<classpathentry exported="true" kind="lib" path="resources"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
-	<classpathentry exported="true" kind="src" path="/platform"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xyformsstorefrontcommons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
@@ -19,5 +17,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/sdhbillsaddon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sdhrelationshipsaddon"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sdhcore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdhfacades"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
 </classpath>

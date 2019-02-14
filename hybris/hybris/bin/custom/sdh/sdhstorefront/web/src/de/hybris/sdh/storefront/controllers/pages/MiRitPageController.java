@@ -18,6 +18,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -130,6 +131,34 @@ public class MiRitPageController extends AbstractPageController
 					SDHValidaMailRolResponse.class);
 
 			final MiRitForm miRitForm = new MiRitForm();
+
+
+
+			//*->INI dev-eduardo ajuste de menu impuestos
+			//private String bPredial;
+			//private String bVehicular;
+			//private String bIca;
+			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
+					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+			{
+				miRitForm.setbSobreGasolina("X");
+			}
+			else
+			{
+				miRitForm.setbSobreGasolina("");
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
+					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
+			{
+				miRitForm.setbPublicidadExt("X");
+			}
+			else
+			{
+				miRitForm.setbPublicidadExt("");
+			}
+			//*->FIN dev-eduardo ajuste de menu impuestos
+
 
 			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
 			{
