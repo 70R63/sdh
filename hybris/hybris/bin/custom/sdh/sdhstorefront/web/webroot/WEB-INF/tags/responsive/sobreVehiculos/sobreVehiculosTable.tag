@@ -4,171 +4,112 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-		<div class="row">
-			<div class="headline">
-				<h2>
-					<span tabindex="0"><spring:theme code="sobre.vehiculos.title" text="Mis Vehiculos"/></span>
-				</h2>
-			</div>			
-			<p><spring:theme code="sobre.vehiculos.desciption" /></p>	
-			
+<div class="container">
+	<div class="row">
+		<div class="avisoheadline">
+			<h3>
+				<span class="p"><spring:theme
+						code="sobre.vehiculos.table.title" text="Mis Vehiculos" /></span>
+			</h3>
 		</div>
-		<div class="row">
-			<div class="headline">
-				<h3>
-					<span tabindex="0"><spring:theme code="sobre.vehiculos.propertiesList" /></span>
-				</h3>
-			</div>	
-		</div> 
-		<br/>
-		<div class="row">				
-			<div class="col-md-2 text-right">
-				<label><spring:theme code="sobre.vehiculos.showing" /></label>
-			</div>
-			<div class="col-md-2">
-				<select id="u5013_input" class="form-control">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                </select>
-			</div>
-			<div class="col-md-2 ">
-				<label><spring:theme code="sobre.vehiculos.dataPerPage" /></label>
-			</div>
-			<div class="col-md-2 text-right">
-				<label><spring:theme code="sobre.vehiculos.search" /></label>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group ">
-					<input id="address.surname" name="lastName" class="form-control form-control" aria-required="true" type="text" value="" maxlength="240">
-				</div>
-			</div>
+		<p class="avisobody">
+			<spring:theme code="sobre.vehiculos.table.descripcion" />
+		</p>
+	</div>
+</div>
+
+<sf:form>
+	<br>
+	<div class="container">
+		<div class="col-md-1">
+			<label class="control-label "><spring:theme
+					code="sobre.vehiculo.table.anigrav" /></label>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="table-responsive">
-				  <table class="table">
-				  	<thead>
-				  		<tr>
-				  			<th><spring:theme code="sobre.vehiculos.licenseplate" /></th>
-				  			<th><spring:theme code="sobre.vehiculos.brand" /></th>
-				  			<th><spring:theme code="sobre.vehiculos.officialactdate" /></th>
-				  			<th><spring:theme code="sobre.vehiculos.select" /></th>
-				  		</tr>
-				  	</thead>
-				  	<tbody>
-				  		<tr>
-				  			<td>123456</td>
-				  			<td></td>
-				  			<td>KR 3d 48K 60 SUR</td>
-				  			<td>
-								<input id="consentForm.consentGiven1" style="visibility: visible !important; margin:0;min-height:0;" name="consentForm.consentGiven" type="checkbox" value="true">
-							</td>
-						</tr>
-						<tr>
-				  			<td>678909</td>
-				  			<td></td>
-				  			<td>KR 5D 48K 60 SUR</td>
-				  			<td>
-								<input id="consentForm.consentGiven1" style="visibility: visible !important; margin:0;min-height:0;" name="consentForm.consentGiven" type="checkbox" value="true">
-							</td>
-						</tr>
-				  	</tbody>
-				  </table>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<label><spring:theme code="sobre.vehiculos.whatToSee" /></label>
-				<div class="row">
-					<div class="col-md-6 col-xs-6">
-						<ul class="list-unstyled">
-						  <!-- <li><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.seeDetail" /></li>   -->
-						  <c:url value="/contribuyentes2/sobrevehiculosautomotores/detail" var="sobreVehiculosDetail"/>
-						  <li><a href="${sobreVehiculosDetail}"><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.seeDetail" /></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-xs-6">
-						<ul class="list-unstyled ">
-						  <li ><a href="javascript:;" onclick="$('.menu').addClass('hidden');$('#declarationMenu').removeClass('hidden');"><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.billing" /></a></li>
-						</ul>
-					</div>
-					<div class="col-md-6 col-xs-6">
-						<ul id="facturasMenu" class="list-unstyled hidden menu" style="position: absolute; z-index: 1000;">
-						  <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<spring:theme code="sobre.vehiculos.billing.downloadinvoice" /></li>
-						  <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<spring:theme code="sobre.vehiculos.billing.additionaldiscount" /></li>
-						  <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<spring:theme code="sobre.vehiculos.billing.redirectinginvoices" /></li>
-						  <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<spring:theme code="sobre.vehiculos.billing.billmodificationrequest" /></li>
-						  <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<spring:theme code="sobre.vehiculos.billing.billcancellationrequest" /></li>
-						</ul>
-					</div>		
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-xs-6">
-						<ul class="list-unstyled ">
-						  <li ><a href="javascript:;" onclick="$('.menu').addClass('hidden');$('#declarationMenu').removeClass('hidden');"><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.declaration" /></a></li>
-						</ul>
-					</div>
-					<div class="col-md-6 col-xs-6">
-						<ul id="declarationMenu" class="list-unstyled hidden menu" style="position: absolute; z-index: 1000;">
-						  <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<spring:theme code="sobre.vehiculos.declaration.declaration" /></li>
-						  <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<spring:theme code="sobre.vehiculos.declaration.corrections" /></li>
-						  <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<spring:theme code="sobre.vehiculos.declaration.paymentcoupons" /></li>
-						</ul>
-					</div>		
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-xs-6">
-						<ul class="list-unstyled">
-						  <li><a href="javascript:;" onclick="$('.menu').addClass('hidden');$('#pagosMenu').removeClass('hidden');"><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="predial.unificado.payments" /></a></li>
-						</ul>
-					</div>
-					<div class="col-md-6 col-xs-6">
-						<ul id="pagosMenu" class="list-unstyled hidden menu" style="position: absolute; z-index: 1000;">
-						  <li><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="predial.unificado.payments.ROPGeneration" /></li>
-						  <li><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="predial.unificado.payments.PSE" /></li>
-						</ul>
-					</div>		
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-xs-6">
-						<ul class="list-unstyled">
-						  <li><a href="javascript:;" onclick="$('.menu').addClass('hidden');$('#reportesMenu').removeClass('hidden');"><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="predial.unificado.reports" /></a></li>
-						</ul>
-					</div>
-					<div class="col-md-6 col-xs-6">
-						<ul id="reportesMenu" class="list-unstyled hidden menu" style="position: absolute; z-index: 1000;">
-						  <li><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.reports.paymentCertifications" /></li>
-						  <li><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.reports.pendingDuties" /></li>
-						   <li><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.reports.paymentRelation" /></li>
-						  <li><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.reports.accountStatement" /></li>
-						</ul>
-					</div>		
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-xs-6">
-						<ul class="list-unstyled">
-						  <li><a href="javascript:;" onclick="$('.menu').addClass('hidden');$('#reportesMenu').removeClass('hidden');"><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="sobre.vehiculos.massiveLiquidations" /></a></li>
-						</ul>
-					</div>
-					<div class="col-md-6 col-xs-6">
-						<ul id="liquidacionesmasivasMenu" class="list-unstyled hidden menu" style="position: absolute; z-index: 1000;">
-						  <li><span class="glyphicon glyphicon-edit" ></span>&nbsp;<spring:theme code="predial.unificado.massiveLiquidations" /></li>
-						</ul>
-					</div>		
-				</div>
-				<div class="row">
-					<br />
-				</div>
-				<div class="row">
-				<br />
-				</div>
-			</div>	
+		<div class="col-md-2">
+			<select id="an" class="form-control " name=" " onchange=" " disabled>
+				<option value="2019">2019</option>
+				<option value="2018">2018</option>
+				<option value="2017">2017</option>
+				<option value="2016">2016</option>
+			</select>
 		</div>
-	
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.placa" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.marca" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.factura" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.linea" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.modelo" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.clase" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.numpuertas" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.blindado" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.cilindraje" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code="sobre.vehiculo.table.avaluo" /></label></th>
+						<th><label class="control-label "><spring:theme
+									code=" " /></label></th>
+
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="placa"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="marca"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="factura"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="linea"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="modelo"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="clase"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="Puertas"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="blindado"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="cilin"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="text"
+							readonly="readonly" value="<c:out value="avaluo"></c:out>"
+							maxlength="240" style="width: 100% !important;"></td>
+						<td><input id="" name="" class="inputtextnew" type="submit"
+							value="<c:out value="Ver detalle"></c:out>" maxlength="240"
+							style="width: 100% !important;"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</sf:form>
 
 

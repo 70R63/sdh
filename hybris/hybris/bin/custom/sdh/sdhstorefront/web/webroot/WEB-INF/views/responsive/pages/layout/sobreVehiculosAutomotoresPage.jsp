@@ -6,15 +6,10 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sobreVehiculos" tagdir="/WEB-INF/tags/responsive/sobreVehiculos"%>
 
-<template:page pageTitle="${pageTitle}">
-	<div class="container">
-		
-		<sobreVehiculos:sobreVehiculosTable/>
-		
-		<c:if test="${not empty showDetail }">
-		
-			<sobreVehiculos:sobreVehiculosDetail/>
-		
-		</c:if>	
-	</div>
-</template:page>
+<div class= "container">
+	<sobreVehiculos:sobreVehiculosTable/>
+	<sobreVehiculos:sobreVehiculosDetail/>
+	<sobreVehiculos:sobreVehiculosJuridicos/>
+	<sobreVehiculos:sobreVehiculosMarcas/>
+	<sobreVehiculos:sobreVehiculosLiquida/>
+</div>

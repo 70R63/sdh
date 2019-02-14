@@ -7,6 +7,7 @@
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 
+
 <div class="col-md-12">
 	<delineacionUrbana:delineacionUrbanaTable />
 </div>
