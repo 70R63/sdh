@@ -15,6 +15,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -112,13 +113,39 @@ public class PublicidadExteriorPageController extends AbstractPageController
 				publicidadForm.setPublicidadExt(sdhConsultaContribuyenteBPResponse.getPublicidadExt().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumResolu())).collect(Collectors.toList()));
 
-
-				model.addAttribute("publicidadForm", publicidadForm);
 			}
 			else
 			{
 				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 			}
+
+
+			//*->INI dev-eduardo ajuste de menu impuestos
+			//private String bPredial;
+			//private String bVehicular;
+			//private String bIca;
+			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
+					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+			{
+				publicidadForm.setbSobreGasolina("X");
+			}
+			else
+			{
+				publicidadForm.setbSobreGasolina("");
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
+					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
+			{
+				publicidadForm.setbPublicidadExt("X");
+			}
+			else
+			{
+				publicidadForm.setbPublicidadExt("");
+			}
+			//*->FIN dev-eduardo ajuste de menu impuestos
+
+			model.addAttribute("publicidadForm", publicidadForm);
 
 		}
 		catch (final Exception e)
