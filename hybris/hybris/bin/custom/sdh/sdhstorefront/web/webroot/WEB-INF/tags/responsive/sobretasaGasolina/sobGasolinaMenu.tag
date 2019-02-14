@@ -28,7 +28,8 @@
 
 					<td><spring:theme
 							code="impuestos.sobreTasaGasolina.menu.tituloNota" /><a
-						href="http://www.shd.gov.co/shd/" target="_blank"> Mas información</a></td>
+						href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+							información</a></td>
 				</tr>
 			</tbody>
 		</table>

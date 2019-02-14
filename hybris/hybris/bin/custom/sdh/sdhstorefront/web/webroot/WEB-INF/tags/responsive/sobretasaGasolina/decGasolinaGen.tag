@@ -30,7 +30,7 @@
 			<sf:select path="anoGravable"
 				items="${dataForm.catalogosSo.anioGravable}"
 				referenceData="${dataForm.catalogosSo.anioGravable}"
-				class="form-control" />
+				class="form-control" disabled="true" readonly="true" />
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -38,7 +38,8 @@
 			<label class="control-label"><spring:theme
 					code="impuestos.decGasolina.DatosGenerales.Periodo" /></label>
 			<sf:select path="periodo" items="${dataForm.catalogosSo.periodo}"
-				referenceData="${dataForm.catalogosSo.periodo}" class="form-control" />
+				referenceData="${dataForm.catalogosSo.periodo}" class="form-control"
+				disabled="true" readonly="true" />
 		</div>
 	</div>
 </div>
@@ -52,8 +53,6 @@
 			<sf:input path="numDoc" value="${dataForm.numDoc}"
 				class="form-control form-control" maxlength="30" size="20"
 				readonly="true" />
-			<!-- 				<input id="numeroId" name="numeroId" class="form-control form-control" -->
-			<!-- 					aria-required="true" type="text" value="" maxlength="240"> -->
 		</div>
 	</div>
 
@@ -65,7 +64,7 @@
 				<sf:select path="opcionUso"
 					items="${dataForm.catalogosSo.opcionesUso}"
 					referenceData="${dataForm.catalogosSo.opcionesUso}"
-					class="form-control" />
+					class="form-control" readonly="true" disabled="true" />
 			</div>
 		</div>
 	</div>
