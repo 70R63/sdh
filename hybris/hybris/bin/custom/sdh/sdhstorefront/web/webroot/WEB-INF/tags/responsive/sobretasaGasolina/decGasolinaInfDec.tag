@@ -12,102 +12,105 @@
 	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
 
+
 <div class="row">
 	<div class="col-md-6">
-		<h3>
-			<span tabindex="0"><spring:theme
-					code="impuestos.decGasolina.InformacionDec.titulo" /></span>
-		</h3>
+		<div class="hieadline">
+			<h2>
+				<span tabindex="0"><spring:theme
+						code="impuestos.decGasolina.InformacionDec.titulo" /></span>
+			</h2>
+		</div>
 	</div>
 </div>
 
-<div class="col-md-12">
-	<div class="table-responsive">
-		<table class="table">
-			<thead>
-				<tr>
-					<td><label class="inputlabelnew"><spring:theme
-								code="impuestos.decGasolina.InformacionDec.claseProducto" /></label></td>
-					<td><label class="inputlabelnew"><spring:theme
-								code="impuestos.decGasolina.InformacionDec.galones" /></label></td>
-					<td><label class="inputlabelnew"><spring:theme
-								code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label></td>
-					<td><label class="inputlabelnew"><spring:theme
-								code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label></td>
-					<td><label class="inputlabelnew"><spring:theme
-								code="impuestos.decGasolina.InformacionDec.baseGravable" /></label></td>
-					<td><label class="inputlabelnew"><spring:theme
-								code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label></td>
-					<td></td>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${dataForm.infoDeclara}" var="infoDeclara"
-					varStatus="loop">
+
+<div class="col-md-9">
+	<div>
+		<div class="col-md-12">
+			<table class="table col-md-2 table-bordered">
+				<thead>
 					<tr>
-						<td>
-							<div class="form-group ">
-								<sf:select path="dataForm.infoDeclara[${loop.index}].claseProd"
-									items="${dataForm.catalogosDe.claseProd}"
-									referenceData="${dataForm.catalogosDe.claseProd}" />
-							</div>
-						</td>
-						<td>
-							<div class="form-group ">
-								<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
-									value="${infoDeclara.galonesGra}" />
-							</div>
-						</td>
-						<td>
-							<div class="form-group ">
-								<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
-									value="${infoDeclara.precioRef}" />
-							</div>
-						</td>
-						<td>
-							<div class="form-group ">
-								<sf:select
-									path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
-									items="${dataForm.catalogosDe.alcoholCarbu}"
-									referenceData="${dataForm.catalogosDe.alcoholCarbu}" />
-							</div>
-						</td>
-						<td>
-							<div class="form-group ">
-								<sf:input
-									path="dataForm.infoDeclara[${loop.index}].baseGravable"
-									value="${infoDeclara.baseGravable}" />
-							</div>
-						</td>
-						<td>
-							<div class="form-group ">
-								<sf:input
-									path="dataForm.infoDeclara[${loop.index}].vlrSobretasa"
-									value="${infoDeclara.vlrSobretasa}" />
-							</div>
-						</td>
+						<td><label
+							class="control-label text-capitalize !important"><spring:theme
+									code="impuestos.decGasolina.InformacionDec.claseProducto" /></label></td>
+						<td><label
+							class="col-md-offset-1 control-label text-capitalize !important"><spring:theme
+									code="impuestos.decGasolina.InformacionDec.galones" /></label></td>
+						<td><label
+							class="control-label text-capitalize !important"><spring:theme
+									code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label></td>
+						<td><label
+							class="col-md-4 control-label text-capitalize !important"><spring:theme
+									code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label></td>
+						<td><label
+							class="control-label text-capitalize !important"><spring:theme
+									code="impuestos.decGasolina.InformacionDec.baseGravable" /></label></td>
+						<td><label
+							class="control-label text-capitalize !important"><spring:theme
+									code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label></td>
 					</tr>
-				</c:forEach>
-
-
-
-			</tbody>
-		</table>
+					<tr></tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${dataForm.dataForm.infoDeclara}" var="info"
+						varStatus="loop">
+						<tr>
+							<td><div class="col-md-12">
+									<sf:select path="dataForm.infoDeclara[${loop.index}].claseProd"
+										items="${dataForm.catalogosSo.claseProd}"
+										referenceData="${dataForm.catalogosSo.claseProd}"
+										class="form-control"  maxlength="10"/>
+								</div></td>
+							<td><div class="col-md-12">
+									<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
+										value="${info.galonesGra}" class="form-control form-control"
+										maxlength="30" size="20"  />
+								</div></td>
+							<td><div class="col-md-12">
+									<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
+										value="${info.precioRef}" class="form-control form-control"
+										maxlength="30" size="20" readonly="true" />
+								</div></td>
+							<td><div class="col-sm-12">
+									<sf:select
+										path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
+										items="${dataForm.catalogosSo.alcoholCarbu}"
+										referenceData="${dataForm.catalogosSo.alcoholCarbu}"
+										class="form-control" />
+								</div></td>
+							<td><div class="col-md-12">
+									<sf:input
+										path="dataForm.infoDeclara[${loop.index}].baseGravable"
+										value="${info.baseGravable}" class="form-control form-control"
+										maxlength="30" size="20" readonly="true" />
+								</div></td>
+							<td><div class="col-md-12">
+									<sf:input
+										path="dataForm.infoDeclara[${loop.index}].vlrSobretasa"
+										value="${info.vlrSobretasa}" class="form-control form-control"
+										maxlength="30" size="20" readonly="true" />
+								</div></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 
-<br />
-<br />
-
-<div class="col-md-12 text-right">
-
-	<button id="presentarDeclaracionUrl" type="submit"
-		class="btn btn-primary btn-block">
-		<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
-	</button>
+<br>
+<br>
+<div class="row">
+	<div class="col-md-12 col-md-offset-4">
+		<div class="form-group ">
+			<sf:button action="${presentarDeclaracionUrl}" type="submit"
+				class="btn btn-primary btn-lg" id="action" name="action"
+				value="calcular">
+				<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
+			</sf:button>
+		</div>
+	</div>
 </div>
 
 <div class="row"></div>
-
-
-

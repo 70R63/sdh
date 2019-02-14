@@ -19,6 +19,7 @@ public class DetGasResponse
 	private String almacTanque;
 	private String localidad;
 	private String codPostal;
+	private String opcionUso;
 	private List<DetGasRepResponse> representantes;
 	private List<DetGasInfoDeclaraResponse> infoDeclara;
 	private DetGasValoresDeclaraResponse valoresDeclara;
@@ -138,6 +139,24 @@ public class DetGasResponse
 	{
 		this.codPostal = codPostal;
 	}
+	
+	/**
+	 * @return the opcionUso
+	 */
+	public String getOpcionUso()
+	{
+		return opcionUso;
+	}
+
+	/**
+	 * @param opcionUso
+	 *           the opcionUso to set
+	 */
+	public void setOpcionUso(final String opcionUso)
+	{
+		this.opcionUso = opcionUso;
+	}
+
 	/**
 	 * @return the representantes
 	 */

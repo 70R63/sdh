@@ -40,7 +40,7 @@
 				<label class="control-label"><spring:theme
 						code="impuestos.decGasolina.DatosRevisor.tipoId" /></label> <input
 					id="nombre" name="nombre" class="form-control" aria-required="true"
-					type="text" value="${dataForm.revisor.tipoIdRev}" maxlength="240"
+					type="text" value="${dataForm.revisor.tipoDoc}" maxlength="240"
 					readonly="readonly">
 			</div>
 		</div>

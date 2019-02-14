@@ -271,9 +271,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 		if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
 		{
-		dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
-		dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
-		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+			dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
+			dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+			dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
 			dataForm.setAnoGravable(gasolinaService.obtenerAnoGravableActual());
 			dataForm.setPeriodo(gasolinaService.obtenerPeriodoActual());
 			dataForm.setNumBP(numBP);
@@ -281,7 +281,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			dataForm.setTipoDoc(tipoDoc);
 			dataForm.setDataForm(detalleGasolinaResponse);
 
-			//*->INI dev-eduardo ajuste de menu impuestos
+		//*->INI dev-eduardo ajuste de menu impuestos
 			//private String bPredial;
 			//private String bVehicular;
 			//private String bIca;
@@ -305,11 +305,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			//*->FIN dev-eduardo ajuste de menu impuestos
 
 		model.addAttribute("dataForm", dataForm);
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+			storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 			returnURL = getViewForPage(model);
 		}
@@ -332,6 +331,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
+		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
 		String[] mensajesError;
 		String numBP = "";
 		String numDoc = "";
@@ -356,7 +357,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final String tipoRevisor = "1";
 		final String tipoDeclarante = "2";
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
-		List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
+		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
 
 
 		detalleGasolinaRequest.setNumBP(numBP);
@@ -380,20 +381,18 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		dataForm.setAnoGravable(anoGravable);
 		dataForm.setPeriodo(periodo);
 		dataForm.setNumDoc(numDoc);
+		dataForm.setOpcionUso(detalleGasolinaResponse.getOpcionUso());
 
-		infoDeclaraDefaultTMP = detalleGasolinaResponse.getInfoDeclara();
-		if (infoDeclaraDefaultTMP != null)
+		infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(detalleGasolinaResponse.getInfoDeclara());
+		if (infoDeclaraDefaultTMP != null && infoDeclaraDefaultTMP.size() > 0)
 		{
-			for (int i = 0; i < infoDeclaraDefaultTMP.size(); i++)
-			{
-				infoDeclaraDefault.add(infoDeclaraDefaultTMP.get(i));
-			}
+			infoDeclaraDefault.addAll(infoDeclaraDefaultTMP);
 		}
-		for (int i = 0; i < 5; i++)
+		else if (dataForm.getDataForm().getInfoDeclara() != null && dataForm.getDataForm().getInfoDeclara().size() > 0)
 		{
-			infoDeclaraDefault.add(new DetGasInfoDeclaraResponse());
+			infoDeclaraDefault.addAll(dataForm.getDataForm().getInfoDeclara());
 		}
-
+		infoDeclaraDefault.addAll(gasolinaService.prepararInfoDeclaraDefault(5));
 
 		dataForm.getDataForm().setInfoDeclara(infoDeclaraDefault);
 
@@ -404,17 +403,19 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			{
 				if (detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoInterloc().equals(tipoRevisor) == true)
 				{
-					dataForm.getRevisor().setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
-					dataForm.getRevisor().setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
-					dataForm.getRevisor().setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
-					dataForm.getRevisor().setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					revisor.setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					revisor.setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
+					revisor.setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
+					revisor.setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					dataForm.setRevisor(revisor);
 				}
 				else
 				{
-					dataForm.getDeclarante().setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
-					dataForm.getDeclarante().setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
-					dataForm.getDeclarante().setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
-					dataForm.getDeclarante().setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					declarante.setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					declarante.setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
+					declarante.setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
+					declarante.setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					dataForm.setDeclarante(declarante);
 				}
 			}
 		}
@@ -451,9 +452,12 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
+		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
+		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
 		final CalculaGasolinaResponse calculaGasolinaResponse;
 		String[] mensajesError;
 		int claveError;
+		List infoDeclaraDefaultTMP;
 
 		String numBP = customerModel.getNumBP();
 		String numDoc = customerModel.getDocumentNumber();
@@ -474,28 +478,20 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		numBP = customerModel.getNumBP();
 		if (dataForm != null)
 		{
-			numDoc = dataForm.getNumDoc();
-			tipoDoc = dataForm.getTipoDoc();
-			if (dataForm.getListaDocumentos() != null)
-			{
-				if (dataForm.getListaDocumentos().get(0) != null)
-				{
-					tipoDoc = dataForm.getListaDocumentos().get(0).getTipoDocumento();
-					numDoc = dataForm.getListaDocumentos().get(0).getNumeroDocumento();
-				}
-			}
+			tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
+			numDoc = gasolinaService.obtenerNumDoc(dataForm.getListaDocumentos());
 			anoGravable = dataForm.getAnoGravable();
 			periodo = dataForm.getPeriodo();
-		}
-		if (dataForm.getDataForm().getInfoDeclara() != null)
-		{
-			infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
-			for (int i = 0; i < dataForm.getDataForm().getInfoDeclara().size(); i++)
+			if (dataForm.getDataForm().getInfoDeclara() != null)
 			{
-				if (dataForm.getDataForm().getInfoDeclara().get(i).getGalonesGra().equals("") != true
-						&& dataForm.getDataForm().getInfoDeclara().get(i).getGalonesGra().equals("") != true)
+				infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
+				for (int i = 0; i < dataForm.getDataForm().getInfoDeclara().size(); i++)
 				{
-					infoDeclaraDefault.add(dataForm.getDataForm().getInfoDeclara().get(i));
+					if (dataForm.getDataForm().getInfoDeclara().get(i).getGalonesGra().equals("") != true
+							&& dataForm.getDataForm().getInfoDeclara().get(i).getGalonesGra().equals("") != true)
+					{
+						infoDeclaraDefault.add(dataForm.getDataForm().getInfoDeclara().get(i));
+					}
 				}
 			}
 		}
@@ -533,17 +529,14 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		}
 
 
-		if (calculaGasolinaResponse.getInfoDeclara() == null && dataForm.getDataForm().getInfoDeclara() == null)
+		infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(calculaGasolinaResponse.getInfoDeclara());
+		infoDeclaraDefaultTMP = infoDeclaraDefaultTMP.size() == 0 ? null : infoDeclaraDefaultTMP;
+		if (infoDeclaraDefaultTMP != null && infoDeclaraDefaultTMP.size() > 0)
 		{
-			infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
-			infoDeclaraDefault.add(new DetGasInfoDeclaraResponse());
+			infoDeclaraDefault = infoDeclaraDefaultTMP;
+		}
+		dataForm.getDataForm().setInfoDeclara(infoDeclaraDefault);
 
-			dataForm.getDataForm().setInfoDeclara(infoDeclaraDefault);
-		}
-		else
-		{
-			dataForm.getDataForm().setInfoDeclara(calculaGasolinaResponse.getInfoDeclara());
-		}
 
 		dataForm.getDataForm().setValoresDeclara(calculaGasolinaResponse.getValoresDeclara());
 		if (calculaGasolinaResponse.getRevisorDeclarante() != null)
@@ -552,17 +545,19 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			{
 				if (calculaGasolinaResponse.getRevisorDeclarante().get(i).getTipoInterloc().equals(tipoRevisor) == true)
 				{
-					dataForm.getRevisor().setTipoDoc(calculaGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
-					dataForm.getRevisor().setNumDoc(calculaGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
-					dataForm.getRevisor().setNombres(calculaGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
-					dataForm.getRevisor().setTarjetaProf(calculaGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					revisor.setTipoDoc(calculaGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					revisor.setNumDoc(calculaGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
+					revisor.setNombres(calculaGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
+					revisor.setTarjetaProf(calculaGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					dataForm.setRevisor(revisor);
 				}
 				else
 				{
-					dataForm.getDeclarante().setTipoDoc(calculaGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
-					dataForm.getDeclarante().setNumDoc(calculaGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
-					dataForm.getDeclarante().setNombres(calculaGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
-					dataForm.getDeclarante().setTarjetaProf(calculaGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					declarante.setTipoDoc(calculaGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					declarante.setNumDoc(calculaGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
+					declarante.setNombres(calculaGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
+					declarante.setTarjetaProf(calculaGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					dataForm.setDeclarante(declarante);
 				}
 			}
 		}

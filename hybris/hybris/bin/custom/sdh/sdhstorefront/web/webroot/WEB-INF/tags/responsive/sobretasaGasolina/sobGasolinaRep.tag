@@ -29,19 +29,19 @@
 					<table>
 						<thead>
 							<tr>
-								<td><label class="control-label"><spring:theme
+								<td><label class="control-label text-capitalize !important"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.tipoId" /></label></td>
-								<td><label class="control-label"><spring:theme
+								<td><label class="control-label text-capitalize !important"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.numId" /></label></td>
-								<td><label class="control-label"><spring:theme
+								<td><label class="control-label text-capitalize !important"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.nombre" /></label></td>
-								<td><label class="control-label"><spring:theme
+								<td><label class="control-label text-capitalize !important"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.tipoRelacion" /></label></td>
-								<td><label class="control-label"><spring:theme
+								<td><label class="control-label text-capitalize !important"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.fechaDesde" /></label></td>
-								<td><label class="control-label"><spring:theme
+								<td><label class="control-label text-capitalize !important"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.fechaHasta" /></label></td>
-								<td><label class="control-label"><spring:theme
+								<td><label class="control-label text-capitalize !important"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.fuenteDato" /></label></td>
 							</tr>
 						</thead>

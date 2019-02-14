@@ -25,10 +25,10 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="impuestos.sobreTasaGasolina.DatosGenerales.anioGravableConsultardisable" /></label>
-					<sf:select disabled="true" path="anoGravable"
+					<sf:select path="anoGravable"
 						items="${dataForm.catalogosSo.anioGravable}"
 						referenceData="${dataForm.catalogosSo.anioGravable}"
-						class="form-control" />
+						class="form-control" disabled="true" readonly="true" />
 				</div>
 			</div>
 
@@ -36,10 +36,9 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="impuestos.sobreTasaGasolina.DatosGenerales.Periododisable" /></label>
-					<sf:select disabled="true" path="periodo"
-						items="${dataForm.catalogosSo.periodo}"
+					<sf:select path="periodo" items="${dataForm.catalogosSo.periodo}"
 						referenceData="${dataForm.catalogosSo.periodo}"
-						class="form-control" />
+						class="form-control" disabled="true" readonly="true" />
 				</div>
 			</div>
 		</div>
