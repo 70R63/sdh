@@ -27,7 +27,7 @@
 						code="impuestos.decGasolina.Totales.totalSobretasa" /></label> <input
 					id="totalSobretasa" name="totalSobretasa" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
-					value="${dataForm.valoresDeclara.totalSobretasa}" maxlength="240">
+					value="${dataForm.dataForm.valoresDeclara.totalSobretasa}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 						code="impuestos.decGasolina.Totales.valorSanciones" /></label> <input
 					id="valorSansiones" name="valorSansiones" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
-					value="${dataForm.valoresDeclara.vlrSancTotales}" maxlength="240">
+					value="${dataForm.dataForm.valoresDeclara.vlrSancTotales}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -51,7 +51,7 @@
 						code="impuestos.decGasolina.Totales.totalCargo" /></label> <input
 					id="totalCargo" name="totalCargo" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
-					value="${dataForm.valoresDeclara.totalCargo}" maxlength="240">
+					value="${dataForm.dataForm.valoresDeclara.totalCargo}" maxlength="240">
 			</div>
 		</div>
 	</div>
