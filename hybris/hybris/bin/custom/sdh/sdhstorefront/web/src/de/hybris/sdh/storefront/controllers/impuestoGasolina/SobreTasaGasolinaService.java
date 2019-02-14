@@ -490,21 +490,12 @@ public class SobreTasaGasolinaService
 			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
 	{
 
-		//		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
 		CalculaGasolinaResponse responseInfo = new CalculaGasolinaResponse();
 		final String confUrl = "sdh.calculoGasolina.url";
 		final String confUser = "sdh.calculoGasolina.user";
 		final String confPass = "sdh.calculoGasolina.password";
 		final String wsNombre = "Calculo_Gasolina";
 		final String wsReqMet = "POST";
-
-		//		consultaGasolinaRequest.setNumBP(requestInfo.getNumBP());
-		//		consultaGasolinaRequest.setNumDoc(requestInfo.getNumDoc());
-		//		consultaGasolinaRequest.setTipoDoc(requestInfo.getTipoDoc());
-		//		consultaGasolinaRequest.setAnoGravable(requestInfo.getAnoGravable());
-		//		consultaGasolinaRequest.setPeriodo(requestInfo.getPeriodo());
-
-
 
 		responseInfo = llamarWSCalGasolina(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
 				LOG);

@@ -41,21 +41,18 @@
 											code="impuestos.sobreTasaGasolina.representantes.fechaDesde" /></label></td>
 								<td><label class="control-label text-capitalize !important"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.fechaHasta" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
-											code="impuestos.sobreTasaGasolina.representantes.fuenteDato" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${dataForm.dataForm.representantes}"
-								var="representante">
+								var="representante" varStatus="loop">
 								<tr>
 									<td>
 										<div class="form-group ">
-											<input id="tipoDoc" name="tipoDoc"
-												class="form-control form-control" aria-required="true"
-												type="text"
-												value='<c:out value="${representante.tipoDoc}"></c:out>'
-												maxlength="240">
+										<sf:select path="dataForm.representantes[${loop.index}].tipoDoc"
+										items="${dataForm.catalogosSo.tipoIdRev}"
+										referenceData="${dataForm.catalogosSo.tipoIdRev}"
+										class="form-control" maxlength="45" readonly="readonly" disabled="true" />
 										</div>
 									</td>
 									<td>
@@ -64,7 +61,7 @@
 												class="form-control form-control" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.numDoc}"></c:out>'
-												maxlength="240">
+												maxlength="240" readonly="readonly">
 										</div>
 									</td>
 									<td>
@@ -73,7 +70,7 @@
 												class="form-control form-control" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.nombre}"></c:out>'
-												maxlength="240">
+												maxlength="240" size="45" readonly="readonly">
 										</div>
 									</td>
 									<td>
@@ -82,7 +79,7 @@
 												class="form-control form-control" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.tipoRelacion}"></c:out>'
-												maxlength="240">
+												maxlength="240" size="40" readonly="readonly">
 										</div>
 									</td>
 									<td>
@@ -91,7 +88,7 @@
 												class="form-control form-control" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.fechDesde}"></c:out>'
-												maxlength="240">
+												maxlength="240" readonly="readonly">
 										</div>
 									</td>
 									<td>
@@ -100,16 +97,7 @@
 												class="form-control form-control" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.fechHasta}"></c:out>'
-												maxlength="240">
-										</div>
-									</td>
-									<td>
-										<div class="form-group ">
-											<input id="fuente" name="fuente"
-												class="form-control form-control" aria-required="true"
-												type="text"
-												value='<c:out value="${representante.fuente}"></c:out>'
-												maxlength="240">
+												maxlength="240" readonly="readonly">
 										</div>
 									</td>
 								</tr>
