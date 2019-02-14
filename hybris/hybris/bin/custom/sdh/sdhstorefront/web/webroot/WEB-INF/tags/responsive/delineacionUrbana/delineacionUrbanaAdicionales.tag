@@ -9,11 +9,11 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="row">
-	<div class="col-md-6">
-		<h3>
-			<span class="cintillo col-md-10"><spring:theme
+	<div class="col-md-6 headline">
+		<h2>
+			<span><spring:theme
 					code="delineacion.urbana.adicionales.title" /></span>
-		</h3>
+		</h2>
 	</div>
 </div>
 
@@ -22,21 +22,21 @@
 		<table class="newtable">
 			<thead>
 				<tr>
-					<th><label class="labeltabla" for=""><spring:theme
+					<th><label class="control-label" for=""><spring:theme
 								code="delineacion.urbana.adicionales.numradicado" /></label></th>
-					<th><label class="labeltabla" for=""> <spring:theme
+					<th><label class="control-label" for=""> <spring:theme
 								code="delineacion.urbana.adicionales.chip" /></label></th>
-					<th><label class="labeltabla" for=""> <spring:theme
+					<th><label class="control-label" for=""> <spring:theme
 								code="delineacion.urbana.adicionales.direcobra" /></label></th>
-					<th><label class="labeltabla" for=""> <spring:theme
+					<th><label class="control-label" for=""> <spring:theme
 								code="delineacion.urbana.adicionales.codpostal" /></label></th>
-					<th><label class="labeltabla" for=""> <spring:theme
+					<th><label class="control-label" for=""> <spring:theme
 								code="delineacion.urbana.adicionales.localidad" /></label></th>
-						<th><label class="labeltabla" for=""> <spring:theme
+						<th><label class="control-label" for=""> <spring:theme
 								code="delineacion.urbana.adicionales.matinmo" /></label></th>
-					<th><label class="labeltabla" for=""> <spring:theme
+					<th><label class="control-label" for=""> <spring:theme
 								code="delineacion.urbana.adicionales.estrato" /></label></th>
-								<th><label class="labeltabla" for=""> <spring:theme
+								<th><label class="control-label" for=""> <spring:theme
 								code="delineacion.urbana.adicionales.tipunidad" /></label></th>
 				</tr>
 			</thead>
@@ -45,27 +45,28 @@
 					<td><c:out value="Numero de radicado"></c:out></td>
 					<td><c:out value="Chip"></c:out></td>
 					<td><c:out value="Direccion de la obra"></c:out></td>
-					<td><c:out value="Codigo Postal"></c:out></td>
-					<td><c:out value="Localidad"></c:out></td>
+					<td><select class="form-control" disabled="disabled"><option>Código Postal</option></select></td>
+					<td><select class="form-control" disabled="disabled"><option>Localidad</option></select></td>
 					<td><c:out value="Matricula inmobiliaria"></c:out></td>
-					<td><c:out value="Estrato"></c:out></td>
-					<td><c:out value="Tipo de unidad"></c:out></td>
+					<td><select class="form-control" disabled="disabled"><option>Estrato</option></select></td>
+					<td><select class="form-control" disabled="disabled"><option>Tipo de unidad</option></select></td>
 				</tr>
 
 			</tbody>
 		</table>
 	</div>
 	
+	<br>
 	<div>
 	<div class="row">
 		<table class="newtable">
 			<thead>
 				<tr>
-					<th><label class="labeltabla " for=""><spring:theme
+					<th><label class="control-label " for=""><spring:theme
 								code="delineacion.urbana.adicionales.numradicado" /></label></th>
-					<th><label class="labeltabla " for=""> <spring:theme
+					<th><label class="control-label " for=""> <spring:theme
 								code="delineacion.urbana.adicionales.cantunida" /></label></th>
-					<th><label class="labeltabla " for=""> <spring:theme
+					<th><label class="control-label " for=""> <spring:theme
 								code="delineacion.urbana.adicionales.areaunidad" /></label></th>
 				</tr>
 			</thead>
