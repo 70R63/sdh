@@ -121,12 +121,15 @@
 </div>
 <div class="col-md-1">
 </div>
-	<sf:button action="${buscarUrl}" type="submit"
-		class="btn btn-primary btn-lg" id="action" name="action"
-		value="declarar">
-		<spring:theme
-			code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" />
-	</sf:button>
+<%-- 	<sf:button action="${buscarUrl}" type="submit" --%>
+<%-- 		class="btn btn-primary btn-lg" id="action" name="action" --%>
+<%-- 		value="declarar"> --%>
+<%-- 		<spring:theme --%>
+<%-- 			code="impuestos.sobreTasaGasolina.menu.presentarDeclaracion" /> --%>
+<%-- 	</sf:button> --%>
+
+	<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina/generar?numForm=${ dataForm.dataForm.numForm}' />';">Generar Declaración</button>
+
 </div>
 
 <div class="row">
