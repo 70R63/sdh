@@ -26,8 +26,9 @@ import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -118,15 +120,29 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 				final BASE64Decoder decoder = new BASE64Decoder();
 				byte[] decodedBytes;
-				FileOutputStream fop;
+				final FileOutputStream fop;
 				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
-				final File file = new File("path/file.pdf");
-				fop = new FileOutputStream(file);
+				//				final File file = new File("path/file.pdf");
+				//				fop = new FileOutputStream(file);
+				//
+				//				fop.write(decodedBytes);
+				//
+				//				fop.flush();
+				//				fop.close();
 
-				fop.write(decodedBytes);
 
-				fop.flush();
-				fop.close();
+				response.setHeader("Content-Disposition", "attachment; filename=file.pdf");
+				response.setHeader("Pragma", "no-cache");
+				response.setHeader("Cache-Control", "no-cache");
+
+				/* Convert bytes to stream of objects */
+				final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+				/* Download copying the content to destination file */
+				IOUtils.copy(is, response.getOutputStream());
+				response.flushBuffer();
+
+
 			}
 
 		}

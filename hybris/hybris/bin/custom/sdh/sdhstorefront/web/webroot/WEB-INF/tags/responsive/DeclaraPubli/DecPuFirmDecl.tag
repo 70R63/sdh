@@ -49,7 +49,7 @@
 	</div>
 	<div class="col-md-4">
 		<input id="name" name="name" class="inputtextnew"
-			aria-required="true" type="text" value="" maxlength="30" size="30"
+			aria-required="true" type="text" value="${declaPublicidadForm.name}" maxlength="30" size="30"
 			disabled="disabled">
 	</div>
 </div>
