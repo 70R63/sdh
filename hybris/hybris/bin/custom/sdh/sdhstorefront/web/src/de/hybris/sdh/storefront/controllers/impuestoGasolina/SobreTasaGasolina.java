@@ -232,7 +232,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		dataForm.setAnoGravable(anioGravable);
 		dataForm.setPeriodo(periodo);
 		dataForm.setDataForm(detalleGasolinaResponse);
-
+		dataForm.setNumForm(detalleGasolinaResponse.getNumForm());
 		model.addAttribute("dataForm", dataForm);
 
 		if (action.equals("buscar"))
@@ -630,7 +630,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error3.attrib" + Integer.toString(claveError), mensajesError);
 		}
-
+		dataForm.setNumForm(calculaGasolinaResponse.getNumForm());
 
 		infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(calculaGasolinaResponse.getInfoDeclara());
 		infoDeclaraDefaultTMP = infoDeclaraDefaultTMP.size() == 0 ? null : infoDeclaraDefaultTMP;
