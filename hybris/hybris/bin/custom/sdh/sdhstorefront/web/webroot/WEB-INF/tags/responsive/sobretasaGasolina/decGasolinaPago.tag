@@ -15,7 +15,7 @@
 <div class="col-md-8 text-right">
 	<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 		name="action">
-		<spring:theme code="impuestos.decGasolina.Pago.GenerarDec" />
+		<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
 	</sf:button>
 	<div class="col-md-1"></div>
 	<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
