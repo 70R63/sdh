@@ -83,7 +83,7 @@ public class DetGasInfoDeclaraResponse
 	 */
 	public void setAlcoholCarbu(final String alcoholCarbu)
 	{
-		this.alcoholCarbu = alcoholCarbu;
+		this.alcoholCarbu = alcoholCarbu.trim();
 	}
 
 	/**

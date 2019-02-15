@@ -65,6 +65,8 @@
 			
 			ACC.generaDeclaracionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion/generar' />";
 			
+			ACC.gasolinaGeneraDeclaracionURL = "<c:url value='/contribuyentes/sobretasa-gasolina/generar' />"
+			
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},
 				{'isocode':'AF','name':'Afganistán'},

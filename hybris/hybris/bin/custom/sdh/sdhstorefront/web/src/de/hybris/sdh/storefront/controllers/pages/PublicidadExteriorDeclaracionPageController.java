@@ -27,6 +27,7 @@ import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
@@ -104,18 +105,94 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 
+	private String getNameOrOrgName(final String bp)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final StringBuilder nameBuilder = new StringBuilder();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final PublicidadForm publicidadForm = new PublicidadForm();
+		final String numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
+
+		consultaContribuyenteBPRequest.setNumBP(numBP);
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
+			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
+			{
+				if (sdhConsultaContribuyenteBPResponse.getInfoContrib() != null
+						&& sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales() != null)
+				{
+					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1()))
+					{
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+					}
+					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2()))
+					{
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2());
+					}
+					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3()))
+					{
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3());
+					}
+					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4()))
+					{
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4());
+					}
+				}
+			}
+			else
+			{
+				if (sdhConsultaContribuyenteBPResponse.getInfoContrib() != null)
+				{
+
+					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom()))
+					{
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+					}
+					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom()))
+					{
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
+					}
+					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe()))
+					{
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
+					}
+					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe()))
+					{
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
+					}
+				}
+
+			}
+
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+		}
+
+		return nameBuilder.toString();
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String showView(final Model model, @RequestParam(required = true, value = "numResolu")
 	final String numResolu, @RequestParam(required = true, value = "anoGravable")
 	final String anoGravable) throws CMSItemNotFoundException
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		//TODO: this call should be replace for code getting data from model
+		final String name = this.getNameOrOrgName(customerModel.getNumBP());
+
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerModel.getNumBP();
-		//		final String anio = dataform1.getAnoGravable();
-		//		final String numResolu = dataform1.getNumResolu();
-		//		numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
-		//		final PublicidadForm dataform1 = new PublicidadForm();
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(numResolu);
 		detallePublicidadRequest.setAnoGravable(anoGravable);
@@ -132,7 +209,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 			declaPublicidadForm.setIdNumber(customerModel.getDocumentNumber());
 			declaPublicidadForm.setIdType(customerModel.getDocumentType());
-
+			declaPublicidadForm.setName(name);
 			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
 			declaPublicidadForm.setNumBP(customerModel.getNumBP());
 			declaPublicidadForm.setAnograv(detallePublicidadResponse.getAnoGravable());
@@ -165,6 +242,9 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			declaPublicidadForm.setVigenHasta(detallePublicidadResponse.getVigenHasta());
 			declaPublicidadForm.setDetalle(detallePublicidadResponse.getDetalle());
 
+			//TODO: this has to change once we have logic for agents.
+			declaPublicidadForm.setIdDeclarante(customerModel.getDocumentNumber());
+			declaPublicidadForm.setTipoIDdeclara(customerModel.getDocumentType());
 			if (detallePublicidadResponse.getDetalle() != null && !detallePublicidadResponse.getDetalle().isEmpty())
 			{
 

@@ -16,6 +16,7 @@ public class GeneraDeclaracionResponse
 
 	private List<ErrorPubli> errores;
 	private String stringPDF;
+	private String urlDownload;
 
 	/**
 	 * @return the errores
@@ -50,6 +51,25 @@ public class GeneraDeclaracionResponse
 	{
 		this.stringPDF = stringPDF;
 	}
+
+	/**
+	 * @return the urlDownload
+	 */
+	public String getUrlDownload()
+	{
+		return urlDownload;
+	}
+
+	/**
+	 * @param urlDownload
+	 *           the urlDownload to set
+	 */
+	public void setUrlDownload(final String urlDownload)
+	{
+		this.urlDownload = urlDownload;
+	}
+
+
 
 
 }
