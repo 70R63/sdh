@@ -142,7 +142,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 
-				final String fileName = numForm + "-" + customerModel.getNumBP() + ".pdf";
+				final String fileName = numForm+"-"+customerModel.getNumBP()+".pdf";
 
 				final InputStream is = new ByteArrayInputStream(decodedBytes);
 
@@ -232,7 +232,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		dataForm.setAnoGravable(anioGravable);
 		dataForm.setPeriodo(periodo);
 		dataForm.setDataForm(detalleGasolinaResponse);
-
+		dataForm.setNumForm(detalleGasolinaResponse.getNumForm());
 		model.addAttribute("dataForm", dataForm);
 
 		if (action.equals("buscar"))
@@ -485,7 +485,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		dataForm.setPeriodo(periodo);
 		dataForm.setNumDoc(numDoc);
 		dataForm.setOpcionUso(detalleGasolinaResponse.getOpcionUso());
-
+		dataForm.setNumForm(detalleGasolinaResponse.getNumForm());
 		infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(detalleGasolinaResponse.getInfoDeclara());
 		if (infoDeclaraDefaultTMP != null && infoDeclaraDefaultTMP.size() > 0)
 		{
@@ -630,7 +630,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error3.attrib" + Integer.toString(claveError), mensajesError);
 		}
-
+		dataForm.setNumForm(calculaGasolinaResponse.getNumForm());
 
 		infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(calculaGasolinaResponse.getInfoDeclara());
 		infoDeclaraDefaultTMP = infoDeclaraDefaultTMP.size() == 0 ? null : infoDeclaraDefaultTMP;
