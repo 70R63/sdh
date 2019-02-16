@@ -60,11 +60,7 @@
 									<sf:select path="dataForm.infoDeclara[${loop.index}].claseProd"
 										items="${dataForm.catalogosSo.claseProd}"
 										referenceData="${dataForm.catalogosSo.claseProd}"
-<<<<<<< HEAD
 										cssClass="form-control-gasolina"  maxlength="10"/>
-=======
-										class="form-control"  maxlength="10" width="500px" />
->>>>>>> dev
 								</div></td>
 							<td><div class="col-md-12">
 									<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
