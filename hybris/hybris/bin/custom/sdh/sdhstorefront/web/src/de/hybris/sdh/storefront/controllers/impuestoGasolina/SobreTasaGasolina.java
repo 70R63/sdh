@@ -436,6 +436,17 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
 		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente;
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+		final DetGasResponse detalleGasolinaResponse;
+		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
+		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
+
+		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
+
 		String[] mensajesError;
 		String numBP = "";
 		String numDoc = "";
@@ -454,13 +465,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		}
 
 
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
-		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
-		final DetGasResponse detalleGasolinaResponse;
 		final String tipoRevisor = "1";
 		final String tipoDeclarante = "2";
-		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
-		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
 
 
 		detalleGasolinaRequest.setNumBP(numBP);
@@ -507,6 +513,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				if (detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoInterloc().equals(tipoRevisor) == true)
 				{
 					revisor.setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					revisor.setTipoDocDESC(gasolinaService.getDescripcion(revisor.getTipoDoc(), catalogos.getTipoIdRev()));
 					revisor.setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
 					revisor.setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
 					revisor.setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
@@ -515,6 +522,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				else
 				{
 					declarante.setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					declarante.setTipoDocDESC(gasolinaService.getDescripcion(declarante.getTipoDoc(), catalogos.getTipoIdRev()));
 					declarante.setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
 					declarante.setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
 					declarante.setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
@@ -522,7 +530,31 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				}
 			}
 		}
-		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+
+
+		numBP = customerModel.getNumBP();
+		contribuyenteRequest.setNumBP(numBP);
+
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		if (detalleContribuyente.getIdmsj() != 0)
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+
+		}
+		declarante.setTipoDoc(detalleContribuyente.getInfoContrib().getTipoDoc());
+		declarante.setTipoDocDESC(gasolinaService.getDescripcion(declarante.getTipoDoc(), catalogos.getTipoIdRev()));
+		declarante.setNumDoc(detalleContribuyente.getInfoContrib().getNumDoc());
+		declarante.setNombres(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+		dataForm.setDeclarante(declarante);
+
+
+
+
+		dataForm.setCatalogosSo(catalogos);
 		System.out.println(dataForm);
 
 

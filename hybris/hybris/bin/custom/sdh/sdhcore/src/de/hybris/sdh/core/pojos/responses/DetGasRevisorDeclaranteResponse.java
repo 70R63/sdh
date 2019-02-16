@@ -15,6 +15,7 @@ public class DetGasRevisorDeclaranteResponse
 	String numDoc;
 	String nombres;
 	String tarjetaProf;
+	String tipoDocDESC;
 
 
 	/**
@@ -100,6 +101,23 @@ public class DetGasRevisorDeclaranteResponse
 	public void setTarjetaProf(final String tarjetaProf)
 	{
 		this.tarjetaProf = tarjetaProf;
+	}
+
+	/**
+	 * @return the tipoDocDESC
+	 */
+	public String getTipoDocDESC()
+	{
+		return tipoDocDESC;
+	}
+
+	/**
+	 * @param tipoDocDESC
+	 *           the tipoDocDESC to set
+	 */
+	public void setTipoDocDESC(final String tipoDocDESC)
+	{
+		this.tipoDocDESC = tipoDocDESC;
 	}
 
 }
