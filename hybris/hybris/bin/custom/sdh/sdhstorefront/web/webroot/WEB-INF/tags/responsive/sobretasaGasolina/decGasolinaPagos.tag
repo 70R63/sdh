@@ -62,7 +62,7 @@
 				<label class="control-label"><spring:theme
 						code="impuestos.decGasolina.Pagos.menosCompensaciones" /></label> <input
 					id="menosCompensaciones" name="menosCompensaciones"
-					class="form-control" aria-required="true" type="text"
+					class="form-control" aria-required="true" type="text" readonly="readonly"
 					value="${dataForm.dataForm.valoresDeclara.menosCompensa}" maxlength="240">
 			</div>
 		</div>
