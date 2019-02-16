@@ -275,6 +275,7 @@ public class SobreTasaGasolinaService
 		elementos.put("TIE", "Tarjeta de Identidad de Extranjero");
 		elementos.put("TPA", "Tarjeta Profesional de Abogacía");
 		elementos.put("TPC", "Tarjeta Profesional de Contador Público");
+		elementos.put("NIT", "Número de Identificacion Tributaria");
 
 		return elementos;
 	}
@@ -766,6 +767,17 @@ public class SobreTasaGasolinaService
 		}
 
 		return infoDeclara;
+	}
+
+
+	public String getDescripcion(final String clave, final Map<String, String> catalogo)
+	{
+		String descripcion = "";
+
+
+		descripcion = catalogo.get(clave);
+
+		return descripcion;
 	}
 
 

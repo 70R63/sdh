@@ -13,10 +13,14 @@
 
 
 <div class="col-md-8 text-right">
+
+	<button type="button"  class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';">Regresar</button>
+
 		
 	<button type="button" <c:if test="${empty  dataForm.dataForm.numForm}"> disabled="disabled"</c:if> class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina/generar?numForm=${ dataForm.dataForm.numForm}' />';">Generar Declaración</button>
 	
 	<div class="col-md-1"></div>
+	
 	<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 		name="action">
 		<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
