@@ -55,11 +55,16 @@
 				<tbody>
 					<c:forEach items="${dataForm.dataForm.infoDeclara}" var="info"
 						varStatus="loop">
+<<<<<<< HEAD
 						 <tr>
+=======
+						<tr>
+>>>>>>> 42418d2b60866e6f015ca544cbb3ac4511f571e6
 							 <td><div class="col-md-12">
 									 <sf:select path="dataForm.infoDeclara[${loop.index}].claseProd"
 										 items="${dataForm.catalogosSo.claseProd}"
 										 referenceData="${dataForm.catalogosSo.claseProd}"
+<<<<<<< HEAD
 										 cssClass="form-control-gasolina"  maxlength="10"/>
 								 </div></td>
 							 <td><div class="col-md-12">
@@ -67,6 +72,15 @@
 										 value="${info.galonesGra}" class="form-control form-control"
 										 maxlength="30" size="20"  />
 								 </div></td>
+=======
+										 cssClass="form-control-gasolina" maxlength="10" />
+								 </div></td>
+							<td><div class="col-md-12">
+									<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
+										value="${info.galonesGra}" class="form-control form-control"
+										maxlength="30" size="20" />
+								</div></td>
+>>>>>>> 42418d2b60866e6f015ca544cbb3ac4511f571e6
 							<td><div class="col-md-12">
 									<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
 										value="${info.precioRef}" class="form-control form-control"
