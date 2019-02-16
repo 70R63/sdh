@@ -63,11 +63,6 @@
 										maxlength="30" size="20" />
 								</div></td>
 							<td><div class="col-md-12">
-									<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
-										value="${info.galonesGra}" class="form-control form-control"
-										maxlength="30" size="20" />
-								</div></td>
-							<td><div class="col-md-12">
 									<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
 										value="${info.precioRef}" class="form-control form-control"
 										maxlength="30" size="20" readonly="true" />
