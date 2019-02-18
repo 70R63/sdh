@@ -147,7 +147,7 @@ public class SobreTasaGasolinaService
 		elementos.put("7.00", "7");
 		elementos.put("8.00", "8");
 		elementos.put("9.00", "9");
-		elementos.put("10.00", "1");
+		elementos.put("10.00", "10");
 		elementos.put("11.00", "11");
 		elementos.put("12.00", "12");
 		elementos.put("13.00", "13");
