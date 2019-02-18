@@ -31,26 +31,21 @@
 			<table class="table col-md-2 table-bordered">
 				<thead>
 					<tr>
-						<td><label
-							class="control-label text-capitalize !important"><spring:theme
+						<td><label class="control-label text-capitalize !important"><spring:theme
 									code="impuestos.decGasolina.InformacionDec.claseProducto" /></label></td>
 						<td><label
 							class="col-md-offset-1 control-label text-capitalize !important"><spring:theme
 									code="impuestos.decGasolina.InformacionDec.galones" /></label></td>
-						<td><label
-							class="control-label text-capitalize !important"><spring:theme
+						<td><label class="control-label text-capitalize !important"><spring:theme
 									code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label></td>
 						<td><label
 							class="col-md-4 control-label text-capitalize !important"><spring:theme
 									code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label></td>
-						<td><label
-							class="control-label text-capitalize !important"><spring:theme
+						<td><label class="control-label text-capitalize !important"><spring:theme
 									code="impuestos.decGasolina.InformacionDec.baseGravable" /></label></td>
-						<td><label
-							class="control-label text-capitalize !important"><spring:theme
+						<td><label class="control-label text-capitalize !important"><spring:theme
 									code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label></td>
 					</tr>
-					<tr></tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${dataForm.dataForm.infoDeclara}" var="info"
@@ -60,12 +55,12 @@
 									<sf:select path="dataForm.infoDeclara[${loop.index}].claseProd"
 										items="${dataForm.catalogosSo.claseProd}"
 										referenceData="${dataForm.catalogosSo.claseProd}"
-										class="form-control"  maxlength="10"/>
+										cssClass="form-control-gasolina" maxlength="10" />
 								</div></td>
 							<td><div class="col-md-12">
 									<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
 										value="${info.galonesGra}" class="form-control form-control"
-										maxlength="30" size="20"  />
+										maxlength="30" size="20" />
 								</div></td>
 							<td><div class="col-md-12">
 									<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"

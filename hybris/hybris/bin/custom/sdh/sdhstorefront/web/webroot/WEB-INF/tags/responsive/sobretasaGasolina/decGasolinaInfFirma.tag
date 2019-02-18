@@ -22,8 +22,11 @@
 		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
-						code="impuestos.decGasolina.InformacionFirma.tipoId" /></label> <select
-					class="form-control" disabled="disabled"></select>
+						code="impuestos.decGasolina.InformacionFirma.tipoId" /></label> 
+						<input
+					id="nombre" name="nombre" class="form-control" aria-required="true"
+					type="text" value="${dataForm.declarante.tipoDocDESC}" maxlength="240"
+					readonly="readonly">
 			</div>
 		</div>
 	</div>
@@ -34,7 +37,7 @@
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="impuestos.decGasolina.InformacionFirma.numeroId" /></label> <input
-					value="${revisor.numDoc}" class="form-control" aria-required="true"
+					value="${dataForm.declarante.numDoc}" class="form-control" aria-required="true"
 					maxlength="30" size="30" disabled="disabled" type="text" />
 			</div>
 		</div>
@@ -46,7 +49,7 @@
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="impuestos.decGasolina.InformacionFirma.denominacion" /></label> <input
-					value="${revisor.nombre}" class="form-control" aria-required="true"
+					value="${dataForm.declarante.nombres}" class="form-control" aria-required="true"
 					maxlength="30" size="30" disabled="disabled" type="text" />
 			</div>
 		</div>

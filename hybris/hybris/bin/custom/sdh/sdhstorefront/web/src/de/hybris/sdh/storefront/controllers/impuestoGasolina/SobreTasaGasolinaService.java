@@ -147,7 +147,7 @@ public class SobreTasaGasolinaService
 		elementos.put("7.00", "7");
 		elementos.put("8.00", "8");
 		elementos.put("9.00", "9");
-		elementos.put("10.00", "1");
+		elementos.put("10.00", "10");//correccion de etiqueta
 		elementos.put("11.00", "11");
 		elementos.put("12.00", "12");
 		elementos.put("13.00", "13");
@@ -275,6 +275,7 @@ public class SobreTasaGasolinaService
 		elementos.put("TIE", "Tarjeta de Identidad de Extranjero");
 		elementos.put("TPA", "Tarjeta Profesional de Abogacía");
 		elementos.put("TPC", "Tarjeta Profesional de Contador Público");
+		elementos.put("NIT", "Número de Identificacion Tributaria");
 
 		return elementos;
 	}
@@ -766,6 +767,17 @@ public class SobreTasaGasolinaService
 		}
 
 		return infoDeclara;
+	}
+
+
+	public String getDescripcion(final String clave, final Map<String, String> catalogo)
+	{
+		String descripcion = "";
+
+
+		descripcion = catalogo.get(clave);
+
+		return descripcion;
 	}
 
 
