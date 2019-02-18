@@ -65,6 +65,16 @@ public interface ControllerConstants
 		}
 	}
 
+	interface PSE
+	{
+		String PREDIAL = "PREDIAL";
+		String DELINEACION = "DELINEACION";
+		String VEHICULAR = "VEHICULAR";
+		String PUBLICIDAD = "PUBLICIDAD";
+		String GASOLINA = "GASOLINA";
+		String ICA = "ICA";
+	}
+
 	/**
 	 * Class with view name constants
 	 */
