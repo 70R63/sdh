@@ -7,27 +7,41 @@ import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadc
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,8 +49,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import sun.misc.BASE64Decoder;
 
 
 /**
@@ -76,6 +93,92 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "sdhGeneraDeclaracionService")
+	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
+
+	@Resource(name = "mediaService")
+	private MediaService mediaService;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
+
+
+	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/generar", method = RequestMethod.GET)
+	@ResponseBody
+	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request)
+			throws CMSItemNotFoundException
+	{
+		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		String numForm = request.getParameter("numForm");
+
+		if(StringUtils.isBlank(numForm))
+		{
+			numForm= dataForm.getNumForm();
+		}
+
+		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
+
+
+		generaDeclaracionRequest.setNumForm(numForm);
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
+					GeneraDeclaracionResponse.class);
+
+			if (generaDeclaracionResponse != null && generaDeclaracionResponse.getStringPDF() != null)
+			{
+				final String encodedBytes = generaDeclaracionResponse.getStringPDF();
+
+				final BASE64Decoder decoder = new BASE64Decoder();
+				byte[] decodedBytes;
+				final FileOutputStream fop;
+				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+
+
+
+				final String fileName = numForm+"-"+customerModel.getNumBP()+".pdf";
+
+				final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+
+				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				modelService.save(mediaModel);
+				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+				modelService.refresh(mediaModel);
+
+				generaDeclaracionResponse.setUrlDownload(mediaModel.getDownloadURL());
+
+
+			}
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error generating declaration : " + e.getMessage());
+
+			final ErrorPubli error = new ErrorPubli();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al generar la declaración, por favor intentalo más tarde");
+
+			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
+
+			errores.add(error);
+
+			generaDeclaracionResponse.setErrores(errores);
+
+		}
+		return generaDeclaracionResponse;
+
+
+	}
 
 
 	//-----------------------------------------------------------------------------------------------------------------
@@ -129,7 +232,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		dataForm.setAnoGravable(anioGravable);
 		dataForm.setPeriodo(periodo);
 		dataForm.setDataForm(detalleGasolinaResponse);
-
+		dataForm.setNumForm(detalleGasolinaResponse.getNumForm());
 		model.addAttribute("dataForm", dataForm);
 
 		if (action.equals("buscar"))
@@ -333,6 +436,17 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
 		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente;
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+		final DetGasResponse detalleGasolinaResponse;
+		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
+		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
+
+		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
+
 		String[] mensajesError;
 		String numBP = "";
 		String numDoc = "";
@@ -351,13 +465,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		}
 
 
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
-		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
-		final DetGasResponse detalleGasolinaResponse;
 		final String tipoRevisor = "1";
 		final String tipoDeclarante = "2";
-		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
-		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
 
 
 		detalleGasolinaRequest.setNumBP(numBP);
@@ -382,7 +491,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		dataForm.setPeriodo(periodo);
 		dataForm.setNumDoc(numDoc);
 		dataForm.setOpcionUso(detalleGasolinaResponse.getOpcionUso());
-
+		dataForm.setNumForm(detalleGasolinaResponse.getNumForm());
 		infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(detalleGasolinaResponse.getInfoDeclara());
 		if (infoDeclaraDefaultTMP != null && infoDeclaraDefaultTMP.size() > 0)
 		{
@@ -404,6 +513,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				if (detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoInterloc().equals(tipoRevisor) == true)
 				{
 					revisor.setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					revisor.setTipoDocDESC(gasolinaService.getDescripcion(revisor.getTipoDoc(), catalogos.getTipoIdRev()));
 					revisor.setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
 					revisor.setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
 					revisor.setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
@@ -412,6 +522,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				else
 				{
 					declarante.setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					declarante.setTipoDocDESC(gasolinaService.getDescripcion(declarante.getTipoDoc(), catalogos.getTipoIdRev()));
 					declarante.setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
 					declarante.setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
 					declarante.setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
@@ -419,7 +530,31 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				}
 			}
 		}
-		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+
+
+		numBP = customerModel.getNumBP();
+		contribuyenteRequest.setNumBP(numBP);
+
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		if (detalleContribuyente.getIdmsj() != 0)
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+
+		}
+		declarante.setTipoDoc(detalleContribuyente.getInfoContrib().getTipoDoc());
+		declarante.setTipoDocDESC(gasolinaService.getDescripcion(declarante.getTipoDoc(), catalogos.getTipoIdRev()));
+		declarante.setNumDoc(detalleContribuyente.getInfoContrib().getNumDoc());
+		declarante.setNombres(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+		dataForm.setDeclarante(declarante);
+
+
+
+
+		dataForm.setCatalogosSo(catalogos);
 		System.out.println(dataForm);
 
 
@@ -527,7 +662,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error3.attrib" + Integer.toString(claveError), mensajesError);
 		}
-
+		dataForm.setNumForm(calculaGasolinaResponse.getNumForm());
 
 		infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(calculaGasolinaResponse.getInfoDeclara());
 		infoDeclaraDefaultTMP = infoDeclaraDefaultTMP.size() == 0 ? null : infoDeclaraDefaultTMP;
@@ -568,6 +703,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 		return REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE;
 	}
+
+
 
 }
 

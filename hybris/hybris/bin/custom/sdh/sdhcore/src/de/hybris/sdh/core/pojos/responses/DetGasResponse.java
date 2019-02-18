@@ -20,6 +20,7 @@ public class DetGasResponse
 	private String localidad;
 	private String codPostal;
 	private String opcionUso;
+	private String numForm;
 	private List<DetGasRepResponse> representantes;
 	private List<DetGasInfoDeclaraResponse> infoDeclara;
 	private DetGasValoresDeclaraResponse valoresDeclara;
@@ -139,7 +140,7 @@ public class DetGasResponse
 	{
 		this.codPostal = codPostal;
 	}
-	
+
 	/**
 	 * @return the opcionUso
 	 */
@@ -238,6 +239,25 @@ public class DetGasResponse
 	{
 		this.errores = errores;
 	}
+
+	/**
+	 * @return the numForm
+	 */
+	public String getNumForm()
+	{
+		return numForm;
+	}
+
+	/**
+	 * @param numForm
+	 *           the numForm to set
+	 */
+	public void setNumForm(final String numForm)
+	{
+		this.numForm = numForm;
+	}
+
+
 
 
 }

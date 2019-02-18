@@ -27,7 +27,7 @@
 						code="impuestos.decGasolina.Pagos.valorSobretasa" /></label> <input
 					id="valorSobretasa" name="valorSobretasa" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
-					value="${dataForm.valoresDeclara.vlrSobretasa}" maxlength="240">
+					value="${dataForm.dataForm.valoresDeclara.vlrSobretasa}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 						code="impuestos.decGasolina.Pagos.valorSanciones" /></label> <input
 					id="valorSansiones" name="valorSansiones" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
-					value="${dataForm.valoresDeclara.vlrSancPagos}" maxlength="240">
+					value="${dataForm.dataForm.valoresDeclara.vlrSancPagos}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -51,7 +51,7 @@
 						code="impuestos.decGasolina.Pagos.valorIntereses" /></label> <input
 					id="valorIntereses" name="valorIntereses" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
-					value="${dataForm.valoresDeclara.interesMora}" maxlength="240">
+					value="${dataForm.dataForm.valoresDeclara.interesMora}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -62,8 +62,8 @@
 				<label class="control-label"><spring:theme
 						code="impuestos.decGasolina.Pagos.menosCompensaciones" /></label> <input
 					id="menosCompensaciones" name="menosCompensaciones"
-					class="form-control" aria-required="true" type="text"
-					value="${dataForm.valoresDeclara.menosCompensa}" maxlength="240">
+					class="form-control" aria-required="true" type="text" readonly="readonly"
+					value="${dataForm.dataForm.valoresDeclara.menosCompensa}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -75,7 +75,7 @@
 						code="impuestos.decGasolina.Pagos.valorTotalPagar" /></label> <input
 					id="valorTotalPagar" name="valorTotalPagar" class="form-control"
 					aria-required="true" type="text" readonly="readonly"
-					value="${dataForm.valoresDeclara.totalPagar}" maxlength="240">
+					value="${dataForm.dataForm.valoresDeclara.totalPagar}" maxlength="240">
 			</div>
 		</div>
 	</div>

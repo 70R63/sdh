@@ -37,7 +37,7 @@ public class SobreTasaGasolinaForm
 
 	private DetGasValoresDeclaraResponse valoresDeclara;
 	private DetGasRevisorDeclaranteResponse revisor;
-	private DetGasRevisorDeclaranteResponse Declarante;
+	private DetGasRevisorDeclaranteResponse declarante;
 
 	//*->INI dev-eduardo ajuste de menu impuestos
 	private String bPredial;
@@ -411,14 +411,14 @@ public class SobreTasaGasolinaForm
 	 */
 	public DetGasRevisorDeclaranteResponse getDeclarante()
 	{
-		return Declarante;
+		return declarante;
 	}
 	/**
 	 * @param declarante the declarante to set
 	 */
 	public void setDeclarante(final DetGasRevisorDeclaranteResponse declarante)
 	{
-		Declarante = declarante;
+		this.declarante = declarante;
 	}
 
 	/**
