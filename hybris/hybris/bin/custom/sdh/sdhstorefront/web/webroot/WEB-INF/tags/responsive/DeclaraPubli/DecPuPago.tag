@@ -25,7 +25,10 @@
 <div class="row">
 	<div class="col-md-3 col-md-offset-6 center">
 		<div class="accountActions">
-			<button id="generaDeclaracionButton" name="generaDeclaracionButton" type="button">
+		<a id="downloadHelper" target="_blank"></a>
+	
+		
+			<button id="generaDeclaracionButton" class="btn btn-primary btn-block" name="generaDeclaracionButton" type="button" <c:if test="${empty  declaPublicidadForm.numform}"> disabled="disabled"</c:if>>
 				<spring:theme code="declaracion.publicidad.button.generar" text="Generar Declaración"/>
 				</button>
 		</div>

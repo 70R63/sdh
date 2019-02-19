@@ -1,4 +1,4 @@
-ACC.publicidadexterior = {
+ACC.gasolina = {
 
 	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina"],
 	 
@@ -39,8 +39,8 @@ ACC.publicidadexterior = {
 	 	      		
 		            },
 		            error: function () {
-		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
-		            	$("#publicidadExteriorDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            	$( "#dialogGasolina" ).dialog( "open" );
+		            	$("#gasolinaDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 		            }
 		        });
 	 	       

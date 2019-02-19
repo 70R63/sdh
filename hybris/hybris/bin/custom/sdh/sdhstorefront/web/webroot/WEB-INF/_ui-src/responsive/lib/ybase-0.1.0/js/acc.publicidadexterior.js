@@ -1,6 +1,44 @@
 ACC.publicidadexterior = {
 
-	 _autoload: ["bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior","bindDataTable"],
+	 _autoload: ["bindLocalidadData","bindSearchByYearButton","bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior"],
+	 
+	 bindLocalidadData:function(){
+		
+		 $.each($(".localidad"),function(index,value){
+			
+			 var localidadId = $(value).val();
+			 
+			 localidades.forEach(function (eachLoc) {
+	    	    	if(parseInt(eachLoc.locId) == parseInt(localidadId))
+	    	    		$(value).val(eachLoc.name);
+     		});
+			 
+		 });
+		 
+		 
+	 },
+	 
+	 bindSearchByYearButton: function () {
+    	 $(document).on("click", "#searchByYearButton", function (e) {
+	 	        e.preventDefault();
+	 	        
+	 	        var anoGravable  = $.trim($("#anio").val());
+	 	       
+	 	        
+	 	        if(anoGravable == "0")
+	 	        {	
+	 	        	alert("Por favor, selecciona el año a consultar");
+	 	        	return;
+	 	        }
+	 	        	
+	 	        
+	 	       window.location.href = ACC.publicidadExteriorAllURL+"?anoGravable="+anoGravable;
+	 	        
+	 	        
+	 	        
+	 	  });
+    	
+    },
 	 
 	 bindGeneraDeclaracionButton: function () {
 		 $(document).on("click", "#generaDeclaracionButton", function (e) {
@@ -20,7 +58,7 @@ ACC.publicidadexterior = {
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores)
 	            		{
-		            		$("#publicidadExteriorDialogContent").html();
+		            		$("#publicidadExteriorDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
     	            		});
@@ -28,24 +66,11 @@ ACC.publicidadexterior = {
 		            		
 	            		}else
 	            		{
-	            			$("#publicidadExteriorDialogContent").html();
+	            			$("#publicidadExteriorDialogContent").html("");
 	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
-	            			// base64 string
-//	            			var base64str = data.stringPDF;
-
-	            			// decode base64 string, remove space for IE compatibility
-//	            			var binary = atob(base64str.replace(/\s/g, ''));
-//	            			var len = binary.length;
-//	            			var buffer = new ArrayBuffer(len);
-//	            			var view = new Uint8Array(buffer);
-//	            			for (var i = 0; i < len; i++) {
-//	            			    view[i] = binary.charCodeAt(i);
-//	            			}
-
-	            			// create the blob object with content-type "application/pdf"               
-//	            			var blob = new Blob( [view], { type: "application/pdf" });
-//	            			var url = URL.createObjectURL(blob);
-//	            			window.open(url);
+	            			
+	            			$("#downloadHelper").attr("href",data.urlDownload);
+	            			document.getElementById("downloadHelper").click();
 	            		}
 	 	      		
 		            },
@@ -143,7 +168,7 @@ ACC.publicidadexterior = {
 	 	        e.preventDefault();
 	 	        
 	 	       var anoGravable  = $.trim($("#anio").val());
-	 	       var numResolu = $.trim($("#example input[type='radio']:checked").attr("data-numRes"));
+	 	       var numResolu = $.trim($("input[type='radio']:checked").attr("data-numRes"));
 	 	       
 	 	      if(anoGravable == "0")
 	 	        {	
