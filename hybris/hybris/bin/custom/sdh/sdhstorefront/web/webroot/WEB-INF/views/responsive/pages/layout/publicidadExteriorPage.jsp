@@ -7,6 +7,9 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="publicidadExterior"
 	tagdir="/WEB-INF/tags/responsive/publicidadExterior"%>
+<%@ taglib prefix="newpublicidad"
+	tagdir="/WEB-INF/tags/responsive/newpublicidad"%>
+
 
 <style>
 #divAvisos { }
@@ -20,21 +23,21 @@
 <%-- <sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="POST" modelAttribute="publicidadForm" id="forma"> --%>
 <sf:form action="" method="POST" modelAttribute="publicidadForm" id="forma">
 	<div class="container">
-	
-		<publicidadExterior:publicidadExteriorTable />
-		<publicidadExterior:publicidadExteriorDetail />
+		<newpublicidad:publicidadexteriortable/>
+<%-- 		<publicidadExterior:publicidadExteriorTable /> --%>
+<%-- 		<publicidadExterior:publicidadExteriorDetail /> --%>
 <%-- 		<publicidadExterior:publicidadExteriorAvisos /> --%>
-		<publicidadExterior:publicidadExteriorTubularComercial />
-		<publicidadExterior:publicidadExteriorVehiculos />
-		<publicidadExterior:publicidadExteriorTubularObra />
-		<publicidadExterior:publicidadExteriorObraConvencional />
-		<publicidadExterior:publicidadExteriorPantallaLed />
+<%-- 		<publicidadExterior:publicidadExteriorTubularComercial /> --%>
+<%-- 		<publicidadExterior:publicidadExteriorVehiculos /> --%>
+<%-- 		<publicidadExterior:publicidadExteriorTubularObra /> --%>
+<%-- 		<publicidadExterior:publicidadExteriorObraConvencional /> --%>
+<%-- 		<publicidadExterior:publicidadExteriorPantallaLed /> --%>
 	</div>
 	</sf:form>
 	
 	<div id="dialogPublicidadExterior" title="Publicidad Exterior" ><div id="publicidadExteriorDialogContent"></div></div>
 
-
+	
 	
 	
 </template:page>
@@ -42,7 +45,6 @@
 
 <script>
 	function borrarMenu(bPredial, bVehicular, bIca, bPublicidadExt, bSobreGasolina, bDelineacionUrbana) {
-		debugger;
 		var li_array = document.getElementsByTagName('li');
 		var borrar_index;
 		var submenu_index;

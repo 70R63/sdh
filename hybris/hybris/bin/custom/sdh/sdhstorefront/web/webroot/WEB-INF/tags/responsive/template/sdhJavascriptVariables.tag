@@ -59,6 +59,8 @@
 			
 			ACC.publicidadExteriorDetalleURL = "<c:url value='/contribuyentes/publicidadexterior/detalle' />";
 			
+			ACC.publicidadExteriorAllURL = "<c:url value='/contribuyentes/publicidadexterior/all' />";
+			
 			ACC.publicidadExteriorDeclararionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion' />";
 			
 			ACC.publicidadExteriorCalculoURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion/calculo' />";
