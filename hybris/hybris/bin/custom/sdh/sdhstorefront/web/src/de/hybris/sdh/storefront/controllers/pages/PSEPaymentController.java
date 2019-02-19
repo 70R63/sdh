@@ -4,6 +4,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.sdh.storefront.controllers.ControllerConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
@@ -24,11 +25,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
-@RequestMapping("/impuestosPSE")
+@RequestMapping("/impuestos")
 public class PSEPaymentController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(PSEPaymentController.class);
 	private static final String CMS_SITE_PAGE_PAGO_PSE = "PagoPSEPage";
+	private static final String CMS_SITE_PAGE_PAGO_EN_lINEA = "PagoEnLineaPSEPage";
+
+	@ModelAttribute("tipoDeImpuesto")
+	public List<SelectAtomValue> getIdTipoDeImpuesto()
+	{
+
+		final List<SelectAtomValue> tipoDeImpuesto = Arrays.asList(
+				new SelectAtomValue(ControllerConstants.PSE.DELINEACION, "Delineacion"),
+				new SelectAtomValue(ControllerConstants.PSE.GASOLINA, 	"Gasolina"),
+				new SelectAtomValue(ControllerConstants.PSE.ICA, 			"ICA"),
+				new SelectAtomValue(ControllerConstants.PSE.PREDIAL, 		"Predial"),
+				new SelectAtomValue(ControllerConstants.PSE.PUBLICIDAD, 	"Publicidad"),
+				new SelectAtomValue(ControllerConstants.PSE.VEHICULAR, 	"Vehicular"));
+
+		return tipoDeImpuesto;
+	}
 
 	@ModelAttribute("anoGravable")
 	public List<SelectAtomValue> getIdAnoGravable()
@@ -48,11 +65,11 @@ public class PSEPaymentController extends AbstractPageController
 
 		final List<SelectAtomValue> periodo = Arrays.asList(
 				new SelectAtomValue("01", "Enero/Febrero"),
-				new SelectAtomValue("03", "Marzo/Abril"),
+				new SelectAtomValue("02", "Marzo/Abril"),
 				new SelectAtomValue("03", "Mayo/Junio"),
-				new SelectAtomValue("03", "Julio/Agosto"),
-				new SelectAtomValue("03", "Septiembre/Octubre"),
-				new SelectAtomValue("03", "Noviembre/Diciembre"));
+				new SelectAtomValue("04", "Julio/Agosto"),
+				new SelectAtomValue("05", "Septiembre/Octubre"),
+				new SelectAtomValue("06", "Noviembre/Diciembre"));
 
 		return periodo;
 	}
@@ -91,13 +108,12 @@ public class PSEPaymentController extends AbstractPageController
 		return tipoDeTarjeta;
 	}
 
-
-	@RequestMapping(value = "/realizarPago", method = RequestMethod.GET)
+	@RequestMapping(value = "/pagoEnLinea", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String realizarPago(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String pagoEnLinea(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		model.addAttribute("psePaymentForm", new PSEPaymentForm());
@@ -105,7 +121,21 @@ public class PSEPaymentController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/realizarPago", method = RequestMethod.POST)
+	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String realizarPago(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+
+		model.addAttribute("psePaymentForm", new PSEPaymentForm());
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String realizarPago(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
@@ -114,6 +144,8 @@ public class PSEPaymentController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		model.addAttribute("psePaymentForm", psePaymentForm);
 
 		return getViewForPage(model);
 	}
