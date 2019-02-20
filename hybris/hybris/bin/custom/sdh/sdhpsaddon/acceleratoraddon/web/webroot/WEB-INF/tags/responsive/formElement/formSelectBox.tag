@@ -13,6 +13,7 @@
 <%@ attribute name="selectedValue" required="false" type="java.lang.String" %>
 <%@ attribute name="tabindex" required="false" rtexprvalue="true" %>
 <%@ attribute name="disabled" required="false" type="java.lang.Boolean" %>
+<%@ attribute name="onchange" required="false" type="java.lang.String" %>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -41,7 +42,7 @@
 					</span>
 			</label>
 			<div class="control">
-				<form:select aria-required="${mandatory}" id="${escapedIdKey}" path="${escapedPath}" cssClass="${selectCSSClass}" tabindex="${tabindex}" disabled="${disabled}">
+				<form:select aria-required="${mandatory}" id="${escapedIdKey}" path="${escapedPath}" cssClass="${selectCSSClass}" tabindex="${tabindex}" disabled="${disabled}" onchange="${onchange}">
 					<c:if test="${skipBlank == null || skipBlank == false}">
 						<option value="" disabled="disabled" ${empty selectedValue ? 'selected="selected"' : ''}>
 							<spring:theme code='${skipBlankMessageKey}'/>

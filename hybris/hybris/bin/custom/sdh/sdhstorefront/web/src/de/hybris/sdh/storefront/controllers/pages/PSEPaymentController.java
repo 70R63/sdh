@@ -91,8 +91,8 @@ public class PSEPaymentController extends AbstractPageController
 
 		final List<SelectAtomValue> banco = Arrays.asList(
 				new SelectAtomValue("01", "Bancolombia"),
-				new SelectAtomValue("03", "BBVA"),
-				new SelectAtomValue("04", "Davivienda"));
+				new SelectAtomValue("02", "BBVA"), 
+				new SelectAtomValue("03", "Davivienda"));
 
 		return banco;
 	}
@@ -103,7 +103,7 @@ public class PSEPaymentController extends AbstractPageController
 
 		final List<SelectAtomValue> tipoDeTarjeta = Arrays.asList(
 				new SelectAtomValue("01", "Cedito"),
-				new SelectAtomValue("03", "Debito"));
+				new SelectAtomValue("02", "Debito"));
 
 		return tipoDeTarjeta;
 	}
