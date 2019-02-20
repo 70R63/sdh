@@ -499,8 +499,7 @@ public class SobreTasaGasolinaService
 		final String wsNombre = "Calculo_Gasolina";
 		final String wsReqMet = "POST";
 
-		responseInfo = llamarWSCalGasolina(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
-				LOG);
+		responseInfo = llamarWSCalGasolina(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG);
 
 		return responseInfo;
 	}
@@ -779,6 +778,32 @@ public class SobreTasaGasolinaService
 
 		return descripcion;
 	}
+
+
+	/**
+	 * @param representantes
+	 * @return
+	 */
+	public List<DetGasRepResponse> prepararTablaRepresentantes(final List<DetGasRepResponse> origen)
+	{
+		final List<DetGasRepResponse> destino = new ArrayList<DetGasRepResponse>();
+
+		if (origen != null)
+		{
+			for (int i = 0; i < origen.size(); i++)
+			{
+				if (origen.get(i).getTipoDoc() != null && origen.get(i).getTipoDoc().trim().length() > 0)
+				{
+					destino.add(origen.get(i));
+				}
+			}
+		}
+
+		return destino;
+	}
+
+
+
 
 
 }

@@ -106,16 +106,15 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/generar", method = RequestMethod.GET)
 	@ResponseBody
 	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
-			final HttpServletRequest request)
-			throws CMSItemNotFoundException
+			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		String numForm = request.getParameter("numForm");
 
-		if(StringUtils.isBlank(numForm))
+		if (StringUtils.isBlank(numForm))
 		{
-			numForm= dataForm.getNumForm();
+			numForm = dataForm.getNumForm();
 		}
 
 		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
@@ -142,7 +141,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 
-				final String fileName = numForm+"-"+customerModel.getNumBP()+".pdf";
+				final String fileName = numForm + "-" + customerModel.getNumBP() + ".pdf";
 
 				final InputStream is = new ByteArrayInputStream(decodedBytes);
 
@@ -371,49 +370,53 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 			model.addAttribute("dataForm", dataForm);
 		}
+		detalleGasolinaResponse
+				.setRepresentantes(gasolinaService.prepararTablaRepresentantes(detalleGasolinaResponse.getRepresentantes()));
 
-		if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
 		{
-			dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
-			dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
-			dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
-			dataForm.setAnoGravable(gasolinaService.obtenerAnoGravableActual());
-			dataForm.setPeriodo(gasolinaService.obtenerPeriodoActual());
-			dataForm.setNumBP(numBP);
-			dataForm.setNumDoc(numDoc);
-			dataForm.setTipoDoc(tipoDoc);
-			dataForm.setDataForm(detalleGasolinaResponse);
-
-		//*->INI dev-eduardo ajuste de menu impuestos
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (detalleContribuyente.getGasolina() != null && !detalleContribuyente.getGasolina().isEmpty())
+			if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
 			{
-				dataForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				dataForm.setbSobreGasolina("");
-			}
+				dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
+				dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+				dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
+				dataForm.setAnoGravable(gasolinaService.obtenerAnoGravableActual());
+				dataForm.setPeriodo(gasolinaService.obtenerPeriodoActual());
+				dataForm.setNumBP(numBP);
+				dataForm.setNumDoc(numDoc);
+				dataForm.setTipoDoc(tipoDoc);
+				dataForm.setDataForm(detalleGasolinaResponse);
 
-			if (detalleContribuyente.getPublicidadExt() != null && !detalleContribuyente.getPublicidadExt().isEmpty())
-			{
-				dataForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				dataForm.setbPublicidadExt("");
-			}
-			//*->FIN dev-eduardo ajuste de menu impuestos
+				//*->INI dev-eduardo ajuste de menu impuestos
+				//private String bPredial;
+				//private String bVehicular;
+				//private String bIca;
+				if (detalleContribuyente.getGasolina() != null && !detalleContribuyente.getGasolina().isEmpty())
+				{
+					dataForm.setbSobreGasolina("X");
+				}
+				else
+				{
+					dataForm.setbSobreGasolina("");
+				}
 
-		model.addAttribute("dataForm", dataForm);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+				if (detalleContribuyente.getPublicidadExt() != null && !detalleContribuyente.getPublicidadExt().isEmpty())
+				{
+					dataForm.setbPublicidadExt("X");
+				}
+				else
+				{
+					dataForm.setbPublicidadExt("");
+				}
+				//*->FIN dev-eduardo ajuste de menu impuestos
 
-			returnURL = getViewForPage(model);
+				model.addAttribute("dataForm", dataForm);
+				storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
+				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
+				model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+				model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+				returnURL = getViewForPage(model);
+			}
 		}
 
 
