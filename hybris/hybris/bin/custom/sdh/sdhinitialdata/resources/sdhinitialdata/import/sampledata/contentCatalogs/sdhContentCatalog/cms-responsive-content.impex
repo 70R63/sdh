@@ -88,7 +88,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ; ;MiRITLink; MI RIT LINK    ; "/contribuyentes/mirit" ;;;;;
-; ;MiBuzonLink; MI BUZON LINK    ; "#" ;;;;;
+; ;MiBuzonLink; MI BUZON LINK    ; "/contribuyentes/mibuzontributario/inicial" ;;;;;
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "#" ;;;;;
 ; ;TramitesLink; TRAMITES LINK    ; "#" ;;;;;
 ; ;FacturacionLink; FACTURACION LINK    ; "#" ;;;;;
@@ -108,9 +108,9 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 ; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; "/contribuyentes/delineacionurbana/detalle" ;;;;;
 ; ; ICALink                      ; ICA                                 ; "/contribuyentes2/icareteica" ;;;;;
-; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; "/contribuyentes2/predialunificado" ;;;;;
+; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; "/contribuyentes/predialunificado/detalle" ;;;;;
 ; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes/publicidadexterior" ;;;;;
-; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes2/sobrevehiculosautomotores" ;;;;;
+; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
 ; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; "/contribuyentes/sobretasa-gasolina" ;;;;;
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
@@ -287,6 +287,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
+;MiBuzonNavigationServiceRequestsNavNodeMenu;;Mi Buzon Service Requests Menu;MiBuzonNavigationServiceRequestsNavNodeMenu #borrar
 #->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
@@ -1518,3 +1519,74 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;delineacionUrbanaDeclaracionesPageComponent	;delineacionUrbanaDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaDeclaracionesPageComponent
 
 #->FIN dev-maria Agregar paginas para impuesto delineacionurbana  13/02/2019
+
+#->INI dev-maria Agregar paginas para impuesto sobrevehiculos impex detalle  14/02/2019
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;sobreVehiculosAutomotoresPage 		;Sobre Vehiculos	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/sobrevehiculosautomotores/detalle
+
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='sobreVehiculosAutomotoresPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-sobreVehiculosAutomotoresPage 	;SideContent			;																	;SideContent-sobreVehiculosAutomotoresPage				;;;
+								;						;BodyContent-sobreVehiculosAutomotoresPage 	;BodyContent			;																	;BodyContent-sobreVehiculosAutomotoresPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-sobreVehiculosAutomotoresPage 	;Side Content Slot for Sobre Vehiculos	;true	;								;;;
+							;							;BodyContent-sobreVehiculosAutomotoresPage	;Body Content Slot for Sobre Vehiculos	;true	;sobreVehiculosAutomotoresPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;sobreVehiculosAutomotoresPageComponent	;sobreVehiculosAutomotoresPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosAutomotoresPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosAutomotoresPageComponent	
+
+#->FIN dev-maria Agregar paginas para impuesto sobrevehiculos impex detalle  14/02/2019
+
+#->INI dev-maria Agregar paginas para impuesto predialunificado  impex detalle 14/02/2019
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;predialUnificadoPage 		;Predial Unificado	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/predialunificado/detalle
+
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='predialUnificadoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-predialUnificadoPage 	;SideContent			;																	;SideContent-predialUnificadoPage				;;;
+								;						;BodyContent-predialUnificadoPage 	;BodyContent			;																	;BodyContent-predialUnificadoPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-predialUnificadoPage 	;Side Content Slot for Predial unificado	;true	;								;;;
+							;							;BodyContent-predialUnificadoPage	;Body Content Slot for Predial unificado	;true	;predialUnificadoPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;predialUnificadoPageComponent	;predialUnificadoPage Component	;/WEB-INF/views/responsive/pages/layout/predialUnificadoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;predialUnificadoPageComponent
+
+#->FIN dev-maria Agregar paginas para impuesto predial unificado impex detalle 14/02/2019
+
+#->INI dev-maria Agregar paginas para mi buzón tributario 19/02/2019
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;miBuzonPage 		;Mi buzon	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mibuzontributario/inicial
+
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='miBuzonPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-miBuzonPage 	;SideContent			;																	;SideContent-miBuzonPage				;;;
+								;						;BodyContent-miBuzonPage 	;BodyContent			;																	;BodyContent-miBuzonPage				;;;
+								
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-miBuzonPage 	;Side Content Slot for Mi Buzon	;true	;								;;;
+							;							;BodyContent-miBuzonPage	;Body Content Slot for Mi buzon	;true	;miBuzonPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;miBuzonPageComponent	;miBuzonPage Component	;/WEB-INF/views/responsive/pages/layout/miBuzonPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;miBuzonPageComponent	
+
+#->FIN dev-maria Agregar paginas para mi buzón tributario 19/02/2019

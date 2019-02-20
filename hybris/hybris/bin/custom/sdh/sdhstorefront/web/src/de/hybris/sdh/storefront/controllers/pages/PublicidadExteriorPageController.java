@@ -15,7 +15,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -31,6 +30,8 @@ import de.hybris.sdh.storefront.forms.PublicidadForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -160,6 +161,15 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
+
+
+	@ModelAttribute("years")
+	public List<String> getYears()
+	{
+		return Arrays.asList("2019", "2018", "2017", "2016");
+	}
+
+
 
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
@@ -371,6 +381,30 @@ public class PublicidadExteriorPageController extends AbstractPageController
 							publicidadForm.setOrientacion("-");
 						}
 
+						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
+						{
+							publicidadForm.setTipoSolicitud("Registro Nuevo");
+						}
+						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
+						{
+							publicidadForm.setTipoSolicitud("Actualizacion");
+						}
+						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
+						{
+							publicidadForm.setTipoSolicitud("Prorroga");
+						}
+						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
+						{
+							publicidadForm.setTipoSolicitud("Traslado");
+						}
+						else
+						{
+							publicidadForm.setTipoSolicitud("-");
+						}
 
 						}
 					else if ("Valla Tubular de Obra".equalsIgnoreCase(tipovalla))
@@ -384,25 +418,29 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						publicidadForm.setMatricula(eachDetalle.getMatricula());
 
 
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud()))
+						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Registro Nuevo");
 						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Actualizacion");
 						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Prorroga");
 						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Traslado");
 						}
 						else
 						{
-							publicidadForm.setTipoSolicitud(" ");
+							publicidadForm.setTipoSolicitud("-");
 						}
 
 
@@ -513,25 +551,29 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						publicidadForm.setUbicacion(eachDetalle.getUbicacion());
 						publicidadForm.setTipoPublici(eachDetalle.getTipoPublici());
 
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud()))
+						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Registro Nuevo");
 						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Actualizacion");
 						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Prorroga");
 						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Traslado");
 						}
 						else
 						{
-							publicidadForm.setTipoSolicitud(" ");
+							publicidadForm.setTipoSolicitud("-");
 						}
 
 					}
@@ -593,19 +635,23 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						}
 
 
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud()))
+						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Registro Nuevo");
 						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Actualizacion");
 						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Prorroga");
 						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Traslado");
 						}
@@ -689,7 +735,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 						}
 						else
 						{
-							publicidadForm.setTipoPublici(" ");
+							publicidadForm.setTipoPublici("-");
 						}
 
 						if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
@@ -725,19 +771,23 @@ public class PublicidadExteriorPageController extends AbstractPageController
 							publicidadForm.setOrientacion("-");
 						}
 
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud()))
+						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Registro Nuevo");
 						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Actualizacion");
 						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Prorroga");
 						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud()))
+						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
 						{
 							publicidadForm.setTipoSolicitud("Traslado");
 						}
@@ -777,5 +827,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		//		return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
 		return publicidadForm;
 		}
+
 
 }

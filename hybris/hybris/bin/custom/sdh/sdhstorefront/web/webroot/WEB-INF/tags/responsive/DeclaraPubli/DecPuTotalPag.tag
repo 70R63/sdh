@@ -80,7 +80,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-3 col-md-offset-3 center">
+	<div class="col-md-3 col-md-offset-2 center">
 
 <%-- 		<sf:form action="${presentarDeclaracionUrl}" id="presentarDeclaracionUrl1"  method="POST"> --%>
 <!-- 			<button id="/contribuyentes/publicidadexterior/declaracion" type="submit" -->
@@ -90,7 +90,7 @@
 <%-- 			</sf:form> --%>
 
 				<button id="calculoButton" name="calculoButton" type="button"
-				class="botton">
+				class="btn btn-primary btn-block">
 				<spring:theme code="declaracion.publicidad.button.calcular" />
 				</button>
 

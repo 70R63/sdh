@@ -13,9 +13,12 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
@@ -36,12 +39,17 @@ import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -53,6 +61,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import sun.misc.BASE64Decoder;
 
 
 /**
@@ -91,6 +101,12 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 	@Resource(name = "sdhGeneraDeclaracionService")
 	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
+
+	@Resource(name = "mediaService")
+	private MediaService mediaService;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
 
 
 	private static final String ERROR_CMS_PAGE = "notFound";
@@ -364,15 +380,22 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 	@RequestMapping(value = "/generar", method = RequestMethod.POST)
 	@ResponseBody
-	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm) throws CMSItemNotFoundException
+	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		String numForm = request.getParameter("numForm");
 
+		if (StringUtils.isBlank(numForm))
+		{
+			numForm = dataForm.getNumForm();
+		}
 
 		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
 
 
-		generaDeclaracionRequest.setNumForm(dataForm.getNumForm());
+		generaDeclaracionRequest.setNumForm(numForm);
 
 		try
 		{
@@ -382,10 +405,34 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
 					GeneraDeclaracionResponse.class);
 
+			if (generaDeclaracionResponse != null && generaDeclaracionResponse.getStringPDF() != null)
+			{
+				final String encodedBytes = generaDeclaracionResponse.getStringPDF();
+
+				final BASE64Decoder decoder = new BASE64Decoder();
+				byte[] decodedBytes;
+				final FileOutputStream fop;
+				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+
+
+
+				final String fileName = numForm + "-" + customerModel.getNumBP() + ".pdf";
+
+				final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+
+				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				modelService.save(mediaModel);
+				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+				modelService.refresh(mediaModel);
+
+				generaDeclaracionResponse.setUrlDownload(mediaModel.getDownloadURL());
+
+
+			}
 
 		}
-
-
 		catch (final Exception e)
 		{
 			LOG.error("error generating declaration : " + e.getMessage());
@@ -402,7 +449,6 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			generaDeclaracionResponse.setErrores(errores);
 
 		}
-
 		return generaDeclaracionResponse;
 
 	}

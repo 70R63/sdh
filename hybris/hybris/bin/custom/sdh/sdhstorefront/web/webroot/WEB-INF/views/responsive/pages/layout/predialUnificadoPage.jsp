@@ -4,17 +4,18 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="predialUnificado" tagdir="/WEB-INF/tags/responsive/predialUnificado"%>
+<%@ taglib prefix="predialUnificado"
+	tagdir="/WEB-INF/tags/responsive/predialUnificado"%>
 
-<template:page pageTitle="${pageTitle}">
-	<div class="container">
-		
-		<predialUnificado:predialUnificadoTable/>
-		
-		<c:if test="${not empty showDetail }">
-		
-			<predialUnificado:predialUnificadoDetail/>
-		
-		</c:if>	
-	</div>
-</template:page>
+
+<div class="container">
+
+	<predialUnificado:predialUnificadoTable />
+	<predialUnificado:predialUnificadoJuridicos />
+	<predialUnificado:predialUnificadoEconomicos />
+	<predialUnificado:predialUnificadoFisicos />
+	<predialUnificado:predialUnificadoMarcas />
+	<predialUnificado:predialUnificadoLiquidacion />
+	<predialUnificado:predialUnificadoConsulta />
+
+</div>
