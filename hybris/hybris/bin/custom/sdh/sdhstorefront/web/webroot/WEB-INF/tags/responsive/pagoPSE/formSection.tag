@@ -7,10 +7,51 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<script>
+function myFunction() {
+	//var banco = document.getElementById("psePaymentForm.banco").value;
+	//var tipoDeTarjeta = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
+	
+	//var divBottonPSE = document.getElementById("bottonPSE")
+	//var divBottonBBVA = document.getElementById("bottonBBVA")
+	//var divBottonDAVIVIENDA = document.getElementById("bottonDAVIVIENDA")
+	
+	alert(tipoDeTarjeta + "," + banco);
+	
+	//divBottonPSE.style.display = "none";
+	//divBottonBBVA.style.display = "none";
+	//divBottonDAVIVIENDA.style.display = "none";
+	
+	//if (tipoDeTarjeta == "02"){ //Tipo De Tarjeta - Credito 
+//		divBottonPSE.style.display = "block";
+	//}else if(tipoDeTarjeta == "01") //Tipo De Tarjeta - Debito
+//		if(banco == "01"){ //Banco - Bancolombia
+			//divBottonPSE.style.display = "block";
+		//}else if(banco == "02"){ //Banco - BBVA
+//			divBottonBBVA.style.display = "block";
+		//}else if(banco == "03"){ //Banco - DAVIVIENDA
+			//divBottonDAVIVIENDA.style.display = "block";
+		//}else{
+//			divBottonPSE.style.display = "none";
+			//divBottonBBVA.style.display = "none";
+			//divBottonDAVIVIENDA.style.display = "none";
+		//}
+	//}else{
+		//divBottonPSE.style.display = "none";
+		//divBottonBBVA.style.display = "none";
+		//divBottonDAVIVIENDA.style.display = "none";
+	//}
+
+	
+}
+</script>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <c:set var = "tipoDeImpuestoSeleccionado" scope = "session" value = "${psePaymentForm.tipoDeImpuesto}"/>
+<c:set var = "buttonImagePSE" scope = "session" value = "https://jumpseller.co/images/support/pse/logopse.png"/>
+<c:set var = "buttonImageBBVA" scope = "session" value = "https://pbs.twimg.com/profile_images/907185208549572608/Hn65NsHV_400x400.jpg"/>
+<c:set var = "buttonImageDAVIVIENDA" scope = "session" value = "https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0029/4616/davivienda.png"/>
 <c:out value="${tipoDeImpuestoSeleccionado}"/>
 
 <div class="row" >
@@ -72,18 +113,28 @@
 							<formElement:formSelectBox idKey="psePaymentForm.pagoAdicional" labelKey="psePaymentForm.pagoAdicional" path="pagoAdicional" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${pagoAdicional}" selectCSSClass="form-control"/>
 						</c:if>
 						
-						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control"/>
+						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control" onchange="myFunction()"/>
 						<formElement:formInputBox  idKey="psePaymentForm.valorAPagar" maxlength="240" labelKey="psePaymentForm.valorAPagar" path="valorAPagar" inputCSS="text" mandatory="true" tabindex="0"/>
-						<formElement:formSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeTarjeta}" selectCSSClass="form-control"/>
+						<formElement:formSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeTarjeta}" selectCSSClass="form-control" onchange="myFunction()"/>
+
 						
 						<div class="text-center">
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
-								<button class="btn" type="submit">
-									<img src="https://jumpseller.co/images/support/pse/logopse.png" width="80" />
-								</button>
-								<!--  <button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '<c:url value="/" />'">
-									<spring:theme code="register.cancel"/>
-								</button> -->
+								<div id="bottonPSE" style="display:none;">
+									<button class="btn" type="submit">
+										<img src="${buttonImagePSE} " width="80" />
+									</button>
+								</div>
+								<div id="bottonBBVA" style="display:none;">
+									<button class="btn" type="submit">
+										<img src="${buttonImageBBVA} " width="80" />
+									</button>
+								</div>
+								<div id="bottonDAVIVIENDA" style="display:none;">
+									<button class="btn" type="submit">
+										<img src="${buttonImageDAVIVIENDA} " width="80" />
+									</button>
+								</div>
 							</ycommerce:testId>
 						</div>
 						
