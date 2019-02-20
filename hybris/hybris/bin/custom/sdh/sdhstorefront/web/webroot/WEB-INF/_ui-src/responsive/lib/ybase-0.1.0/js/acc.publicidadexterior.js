@@ -1,44 +1,8 @@
 ACC.publicidadexterior = {
 
-	 _autoload: ["bindLocalidadData","bindSearchByYearButton","bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior"],
+	 _autoload: ["bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior","bindDataTable"],
 	 
-	 bindLocalidadData:function(){
-		
-		 $.each($(".localidad"),function(index,value){
-			
-			 var localidadId = $(value).val();
-			 
-			 localidades.forEach(function (eachLoc) {
-	    	    	if(parseInt(eachLoc.locId) == parseInt(localidadId))
-	    	    		$(value).val(eachLoc.name);
-     		});
-			 
-		 });
-		 
-		 
-	 },
-	 
-	 bindSearchByYearButton: function () {
-    	 $(document).on("click", "#searchByYearButton", function (e) {
-	 	        e.preventDefault();
-	 	        
-	 	        var anoGravable  = $.trim($("#anio").val());
-	 	       
-	 	        
-	 	        if(anoGravable == "0")
-	 	        {	
-	 	        	alert("Por favor, selecciona el año a consultar");
-	 	        	return;
-	 	        }
-	 	        	
-	 	        
-	 	       window.location.href = ACC.publicidadExteriorAllURL+"?anoGravable="+anoGravable;
-	 	        
-	 	        
-	 	        
-	 	  });
-    	
-    },
+	
 	 
 	 bindGeneraDeclaracionButton: function () {
 		 $(document).on("click", "#generaDeclaracionButton", function (e) {
@@ -221,10 +185,11 @@ ACC.publicidadexterior = {
 			            success: function (data) {
 			            	var tipoValla = $.trim($("#example input[type='radio']:checked").attr("data-tipoValla"));
 
-			            	$("#divAvisos").hide();
-			            	$("#divConvencional").hide();
+			            	$("#divTubularComercial").hide();
 			            	$("#divVehiculos").hide();
-			            	$("#divTubular").hide();
+			            	$("#divTubularObra").hide();
+			            	$("#divObraConvencional").hide();
+			            	$("#divPantallaLed").hide();
 			            	
 			            	if(tipoValla == "Valla Tubular Comercial")
 		            		{
