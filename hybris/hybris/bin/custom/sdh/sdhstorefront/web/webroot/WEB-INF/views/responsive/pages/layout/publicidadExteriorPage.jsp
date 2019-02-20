@@ -23,15 +23,15 @@
 <%-- <sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="POST" modelAttribute="publicidadForm" id="forma"> --%>
 <sf:form action="" method="POST" modelAttribute="publicidadForm" id="forma">
 	<div class="container">
-		<newpublicidad:publicidadexteriortable/>
-<%-- 		<publicidadExterior:publicidadExteriorTable /> --%>
-<%-- 		<publicidadExterior:publicidadExteriorDetail /> --%>
+<%-- 		<newpublicidad:publicidadexteriortable/> --%>
+		<publicidadExterior:publicidadExteriorTable />
+		<publicidadExterior:publicidadExteriorDetail />
 <%-- 		<publicidadExterior:publicidadExteriorAvisos /> --%>
-<%-- 		<publicidadExterior:publicidadExteriorTubularComercial /> --%>
-<%-- 		<publicidadExterior:publicidadExteriorVehiculos /> --%>
-<%-- 		<publicidadExterior:publicidadExteriorTubularObra /> --%>
-<%-- 		<publicidadExterior:publicidadExteriorObraConvencional /> --%>
-<%-- 		<publicidadExterior:publicidadExteriorPantallaLed /> --%>
+		<publicidadExterior:publicidadExteriorTubularComercial />
+		<publicidadExterior:publicidadExteriorVehiculos />
+		<publicidadExterior:publicidadExteriorTubularObra />
+		<publicidadExterior:publicidadExteriorObraConvencional />
+		<publicidadExterior:publicidadExteriorPantallaLed />
 	</div>
 	</sf:form>
 	
