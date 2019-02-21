@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span class="cintillo col-md-10"><spring:theme
+			<span class="col-md-10"><spring:theme
 					code="declaracion.publicidad.FirmaDeclarante" /></span>
 		</h3>
 	</div>
@@ -18,38 +18,33 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<label class="inputlabelnew"><spring:theme
-				code="declaracion.publicidad.tipoiden" /></label>
+		<div class="form-group">
+			<label class="control-label"><spring:theme
+					code="declaracion.publicidad.tipoiden" /></label> <select id="tipiden"
+				class="form-control" disabled="disabled">
+				<option value="CC"><spring:theme
+						code="register.id.types.${declaPublicidadForm.idType}" /></option>
+			</select>
+		</div>
 	</div>
-
 	<div class="col-md-4">
-		<label class="inputlabelnew"><spring:theme code="declaracion.publicidad.numidenti" /></label>
+		<div class="form-group">
+			<label class="control-label"><spring:theme
+					code="declaracion.publicidad.numidenti" /></label> <input id="numide"
+				name="numide" class="form-control" aria-required="true" type="text"
+				value="${declaPublicidadForm.idNumber}" maxlength="30" size="30"
+				disabled="disabled">
+		</div>
 	</div>
-
 	<div class="col-md-4">
-		<label class="inputlabelnew"><spring:theme
-				code="declaracion.publicidad.nombreyrazon" /></label>
+		<div class="form-group">
+			<label class="control-label"><spring:theme
+					code="declaracion.publicidad.nombreyrazon" /></label> <input id="name"
+				name="name" class="form-control" aria-required="true" type="text"
+				value="${declaPublicidadForm.name}" maxlength="30" size="30"
+				disabled="disabled">
+		</div>
 	</div>
 </div>
 
-<br display: block;
-   margin: 5px 0;>
-<div class="row">
 
-	<div class="col-md-4">
-		<select id="tipiden" class="inputdropdown2" disabled="disabled">
-			<option value="CC"><spring:theme code="register.id.types.${declaPublicidadForm.idType}" /></option>
-		</select>
-	</div>
-	
-	<div class="col-md-4">
-		<input id="numide" name="numide" class="inputtextnew"
-			aria-required="true" type="text" value="${declaPublicidadForm.idNumber}" maxlength="30" size="30"
-			disabled="disabled">
-	</div>
-	<div class="col-md-4">
-		<input id="name" name="name" class="inputtextnew"
-			aria-required="true" type="text" value="${declaPublicidadForm.name}" maxlength="30" size="30"
-			disabled="disabled">
-	</div>
-</div>

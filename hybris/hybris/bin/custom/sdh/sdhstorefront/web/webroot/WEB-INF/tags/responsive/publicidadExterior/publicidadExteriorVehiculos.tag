@@ -7,103 +7,86 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div id="divVehiculos" style="display: none;">
+<div id="divVehiculos"  style="display: none;">
 	<div class="row">
 		<div class="headline">
-			<h3>
-				<span class="cintillo col-md-10 "><spring:theme
+			<h2>
+				<span class="col-md-10 "><spring:theme
 						code="publicidad.exterior.vehicles" /></span>
-			</h3>
+			</h2>
 		</div>
 	</div>
 	<br />
+	
 	<div class="row">
-		<div class="col-md-3">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.vehicles.model" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="vehiculoModelo" name="vehiculoModelo" class="inputtextnew"
-					aria-required="true" type="text" value=""
-					maxlength="240">
+				<label class="control-label "><spring:theme
+						code="publicidad.exterior.vehicles.model" /></label> <input
+					id="vehiculoModelo" name="vehiculoModelo" class="form-control"
+					aria-required="true" type="text" value="" maxlength="240" disabled>
 			</div>
 		</div>
-		<div class="col-md-3 ">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.vehicles.typeadvertising" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="vehiculoTipoPublici" name="vehiculoTipoPublici" class="inputtextnew"
-					aria-required="true" type="text"
-					value="" maxlength="240">
+				<label class="control-label "><spring:theme
+						code="publicidad.exterior.vehicles.typeadvertising" /></label> <input
+					id="vehiculoTipoPublici" name="vehiculoTipoPublici"
+					class="form-control" aria-required="true" type="text" value=""
+					maxlength="240" disabled>
 			</div>
 		</div>
 	</div>
+	
 	<div class="row">
-		<div class="col-md-3">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.vehicles.plate" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="vehiculoPlaca" name="vehiculoPlaca" class="inputtextnew"
-					aria-required="true" type="text" value=""
-					maxlength="240">
+				<label class="control-label "><spring:theme
+						code="publicidad.exterior.vehicles.plate" /></label> <input
+					id="vehiculoPlaca" name="vehiculoPlaca" class="form-control"
+					aria-required="true" type="text" value="" maxlength="240" disabled>
 			</div>
 		</div>
-		<div class="col-md-3 ">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.vehicles.typeitemreg" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="vehiculoTipoElemento" name="vehiculoTipoElemento" class="inputtextnew"
-					aria-required="true" type="text"
-					value="" maxlength="240">
+				<label class="control-label "><spring:theme
+						code="publicidad.exterior.vehicles.typeitemreg" /></label> <input
+					id="vehiculoTipoElemento" name="vehiculoTipoElemento"
+					class="form-control" aria-required="true" type="text" value=""
+					maxlength="240" disabled>
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-3">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.vehicles.licensenumber" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="vehiculoNumLicenciaTrans" name="vehiculoNumLicenciaTrans"
-					class="inputtextnew" aria-required="true" type="text"
-					value="" maxlength="240">
+				<label class="control-label "><spring:theme
+						code="publicidad.exterior.vehicles.licensenumber" /></label> <input
+					id="vehiculoNumLicenciaTrans" name="vehiculoNumLicenciaTrans"
+					class="form-control" aria-required="true" type="text" value=""
+					maxlength="240" disabled>
 			</div>
 		</div>
-		<div class="col-md-3">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.vehicles.elementlocation" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="vehiculoOrientacion" name="vehiculoOrientacion" class="inputtextnew"
-					aria-required="true" type="text"
-					value="${publicidadForm.orientacion}" maxlength="240">
-
+				<label class="control-label "><spring:theme
+						code="publicidad.exterior.vehicles.elementlocation" /></label> <input
+					id="vehiculoOrientacion" name="vehiculoOrientacion"
+					class="form-control" aria-required="true" type="text"
+					value="${publicidadForm.orientacion}" maxlength="240" disabled>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3">
-			<label class="inputlabelnew vehiculos"><spring:theme
-					code="publicidad.exterior.vehicles.typeservice" /></label>
-		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
 			<div class="form-group ">
-				<input id="vehiculoTipoServicio" name="vehiculoTipoServicio" class="inputtextnew"
-					aria-required="true" type="text"
-					value="${publicidadForm.tipoServicio}" maxlength="240">
+				<label class="control-label "><spring:theme
+						code="publicidad.exterior.vehicles.typeservice" /></label> <input
+					id="vehiculoTipoServicio" name="vehiculoTipoServicio"
+					class="form-control" aria-required="true" type="text"
+					value="${publicidadForm.tipoServicio}" maxlength="240" disabled>
 			</div>
 		</div>
 	</div>
 </div>
-
-

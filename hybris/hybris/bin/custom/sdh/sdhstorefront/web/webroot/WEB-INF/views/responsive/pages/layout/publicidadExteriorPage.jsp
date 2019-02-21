@@ -32,6 +32,7 @@
 		<publicidadExterior:publicidadExteriorTubularObra />
 		<publicidadExterior:publicidadExteriorObraConvencional />
 		<publicidadExterior:publicidadExteriorPantallaLed />
+		<publicidadExterior:publicidadExteriorConsultaDetalle />
 	</div>
 	</sf:form>
 	
