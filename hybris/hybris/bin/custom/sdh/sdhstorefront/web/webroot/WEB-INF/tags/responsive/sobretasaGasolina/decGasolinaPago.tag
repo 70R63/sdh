@@ -8,28 +8,36 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
+<spring:url value="/impuestos/pagoEnLinea/form" var="pagarURL"
+	htmlEscape="false" />
 
 
 
 <div class="col-md-8 text-right">
-	<a id="downloadHelper" target="_blank"></a>
-	<input type="hidden" id="numForm" value="${dataForm.numForm }"> 
-<%-- 	<sf:button class="btn btn-primary btn-lg" type="submit" id="action" --%>
-<%-- 		name="action"> --%>
-<%-- 		<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" /> --%>
-<%-- 	</sf:button> --%>
-	<button type="button"  class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';">Regresar</button>
+	<sf:form action="${pagarURL}" method="POST" modelAttribute="psePaymentForm" id="psePaymentForm">
+	
+	<a id="downloadHelper" target="_blank"></a> <input type="hidden"
+		id="numForm" value="${dataForm.numForm }">
+	<button type="button" class="btn btn-primary btn-lg"
+		onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';">Regresar</button>
 
-<button id="gasolinaGeneraDeclaracionButton" type="button" <c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if> class="btn btn-primary btn-lg" >
-	<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
-</button>
+	<button id="gasolinaGeneraDeclaracionButton" type="button"
+		<c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if>
+		class="btn btn-primary btn-lg">
+		<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
+	</button>
 
-	<div class="col-md-1"></div>
-	<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-		name="action">
-		<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
-	</sf:button>
+		<sf:input path="tipoDeImpuesto" type="hidden" />
+		<sf:input path="anoGravable" type="hidden" />
+		<sf:input path="valorAPagar" type="hidden" />
+		<sf:input path="periodo" type="hidden" />
+		<sf:input path="tipoDeIdentificacion" type="hidden" />
+		<sf:input path="noIdentificacion" type="hidden" />
+		<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
+			name="pagar" value="pagar">
+			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
+		</sf:button>
+	</sf:form>
 </div>
 
 <br>
@@ -44,4 +52,6 @@
 
 <div class="row"></div>
 
-<div id="dialogGasolina" title="Gasolina" ><div id="gasolinaDialogContent"></div></div>
+<div id="dialogGasolina" title="Gasolina">
+	<div id="gasolinaDialogContent"></div>
+</div>
