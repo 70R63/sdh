@@ -28,6 +28,9 @@
 
 <!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq"> -->
 
+<input type="hidden" value="" id="selectedTipoValla" />
+
+<input type="hidden" value="" id="selectedNumRes" />
 <div class="row">
 	<div class="table-responsive">
 		<table class="table col-md-2 table-bordered">
@@ -97,7 +100,7 @@
 						<tr>
 							<td><c:out value="${eachPubExtTax.numResolu}"></c:out></td>
 							<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label data-numRes="${eachPubExtTax.numResolu}" data-tipoValla="${eachPubExtTax.tipoValla}" class="control-label text-capitalize !important labelVer"><spring:theme
 										code="publicidad.exterior.ver" /></label></td>
 
 						<%--	<td><input id="action"
@@ -181,7 +184,6 @@
 		</div>
 		<div class="col-md-1">
 			<select id="anio" class="inputdropdown" name="anoGravable">
-				<option value="0">Selecciona un año</option>
 				<option value="2019">2019</option>
 				<option value="2018">2018</option>
 				<option value="2017">2017</option>
