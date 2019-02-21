@@ -48,5 +48,14 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-4  ">
+				<div class="form-group ">
+					<button class="btn btn-secondary btn-lg " type="button" id="updateAutorizacionesButton">
+							<spring:theme code="mirit.contactData.updateAutorizaciones" />
+					</button>
+				</div>
+			</div>
+		</div>
 		
 		
