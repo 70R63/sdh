@@ -103,7 +103,7 @@
 							<td><label data-numRes="${eachPubExtTax.numResolu}" data-tipoValla="${eachPubExtTax.tipoValla}" class="control-label text-capitalize !important labelVer"><spring:theme
 										code="publicidad.exterior.ver" /></label></td>
 
-						<%--	<td><input id="action"
+							<%--	<td><input id="action"
 								style="visibility: visible !important; margin: 0; min-height: 0;"
 								name="action" type="radio"
 								value="${eachPubExtTax.numResolu}, ${eachPubExtTax.tipoValla}"
