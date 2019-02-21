@@ -271,7 +271,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(publicidadInfo.getNumResolu());
 		detallePublicidadRequest.setAnoGravable(publicidadInfo.getAnoGravable());
-
+		detallePublicidadRequest.setTipoValla(publicidadInfo.getTipoValla());
 		try
 			{
 			final String tipovalla = publicidadInfo.getTipoValla();
@@ -348,531 +348,34 @@ public class PublicidadExteriorPageController extends AbstractPageController
 					{
 
 					if ("VALLA VEHICULOS".equalsIgnoreCase(tipovalla) || "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
-						{
+					{
 
-						publicidadForm.setModelo(eachDetalle.getModelo());
-						publicidadForm.setPlaca(eachDetalle.getPlaca());
-						publicidadForm.setNumLicenciaTrans(eachDetalle.getNumLicenciaTrans());
+						this.fillVallaVehiculos(publicidadForm, eachDetalle, detallePublicidadResponse);
 
-						if ("01".equals(eachDetalle.getTipoServicio()))
-						{
-							publicidadForm.setTipoServicio("Publico");
-						}
-						else if ("02".equals(eachDetalle.getTipoServicio()))
-						{
-							publicidadForm.setTipoServicio("Particular");
-						}
-						else if ("03".equals(eachDetalle.getTipoServicio()))
-						{
-							publicidadForm.setTipoServicio("Publico colectivo");
-						}
-						else if ("04".equals(eachDetalle.getTipoServicio()))
-						{
-							publicidadForm.setTipoServicio("Publico individual");
-						}
-						else
-						{
-							publicidadForm.setTipoServicio("-");
-						}
-
-						//publicidadForm.setTipoPublici(eachDetalle.getTipoPublici());
-						if ("01".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Politica");
-						}
-						else if ("02".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Comercial");
-						}
-						else if ("03".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Institucional");
-						}
-						else
-						{
-							publicidadForm.setTipoPublici("-");
-						}
-
-						if ("01".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Vehiculo");
-						}
-						else if ("02".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Taxi");
-						}
-						else if ("03".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Disel");
-						}
-						else if ("04".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Bus");
-						}
-						else if ("05".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Buseta");
-						}
-						else if ("06".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Colectivo Disel");
-						}
-						else if ("07".equals(eachDetalle.getTipoElemento()))
-						{
-							publicidadForm.setTipoElemento("Hibrido");
-						}
-						else
-						{
-							publicidadForm.setTipoElemento("-");
-						}
-
-						if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Oriente-Occidente");
-						}
-						else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Occidente-Oriente");
-						}
-						else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Norte-Sur");
-						}
-						else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Sur-Norte");
-						}
-						if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Derecha");
-						}
-						if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Izquierda");
-						}
-						if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Ambos sentidos");
-						}
-						else
-						{
-							publicidadForm.setOrientacion("-");
-						}
-
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Registro Nuevo");
-						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Actualizacion");
-						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Prorroga");
-						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Traslado");
-						}
-						else
-						{
-							publicidadForm.setTipoSolicitud("-");
-						}
-
-						}
+					}
 					else if ("Valla Tubular de Obra".equalsIgnoreCase(tipovalla))
-						{
+					{
 
-
-						publicidadForm.setDireccion(eachDetalle.getDireccion());
-						publicidadForm.setLocalidad(eachDetalle.getLocalidad());
-						publicidadForm.setCodPostal(eachDetalle.getCodPostal());
-						publicidadForm.setChip(eachDetalle.getChip());
-						publicidadForm.setMatricula(eachDetalle.getMatricula());
-
-
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Registro Nuevo");
-						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Actualizacion");
-						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Prorroga");
-						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Traslado");
-						}
-						else
-						{
-							publicidadForm.setTipoSolicitud("-");
-						}
-
-
-						if ("01".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Edificio Privado");
-						}
-						else if ("02".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Lote Privado");
-						}
-						else if ("03".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Espacio Público");
-						}
-						else
-						{
-							publicidadForm.setUbicacion("-");
-						}
-
-						if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Oriente-Occidente");
-						}
-						else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Occidente-Oriente");
-						}
-						else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Norte-Sur");
-						}
-						else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Sur-Norte");
-						}
-						if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Derecha");
-						}
-						if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Izquierda");
-						}
-						if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Ambos sentidos");
-						}
-						else
-						{
-							publicidadForm.setOrientacion("-");
-						}
-						publicidadForm.setLicenciaUrb(eachDetalle.getLicenciaUrb());
-						publicidadForm.setContratoObra(eachDetalle.getContratoObra());
-						publicidadForm.setLicenciaConstruc(eachDetalle.getLicenciaConstruc());
-						publicidadForm.setVigLicenConstruc(eachDetalle.getVigLicenConstruc());
-						publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
-						publicidadForm.setPeriodicidad(eachDetalle.getPeriodicidad());
-						publicidadForm.setNumCaras(eachDetalle.getNumCaras());
+						this.fillVallaTubularObra(publicidadForm, eachDetalle, detallePublicidadResponse);
 
 
 					}
 					else if ("Valla de Obra Convencional".equalsIgnoreCase(tipovalla))
 					{
 
-						publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
-						publicidadForm.setDireccion(eachDetalle.getDireccion());//repetido
-						publicidadForm.setLocalidad(eachDetalle.getLocalidad());//repetido
-						publicidadForm.setCodPostal(eachDetalle.getCodPostal());//repetido
-						publicidadForm.setChip(eachDetalle.getChip());//repetido
-						publicidadForm.setMatricula(eachDetalle.getMatricula());//repetido
-						publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
-
-						if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Oriente-Occidente");
-						}
-						else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Occidente-Oriente");
-						}
-						else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Norte-Sur");
-						}
-						else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Sur-Norte");
-						}
-						if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Derecha");
-						}
-						if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Izquierda");
-						}
-						if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Ambos sentidos");
-						}
-						else
-						{
-							publicidadForm.setOrientacion("-");
-						}
-
-						publicidadForm.setAvisoLumino(eachDetalle.getAvisoLumino());
-						publicidadForm.setUbicacion(eachDetalle.getUbicacion());
-						publicidadForm.setTipoPublici(eachDetalle.getTipoPublici());
-
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Registro Nuevo");
-						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Actualizacion");
-						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Prorroga");
-						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Traslado");
-						}
-						else
-						{
-							publicidadForm.setTipoSolicitud("-");
-						}
+						this.fillVallaObraConvencional(publicidadForm, eachDetalle, detallePublicidadResponse);
 
 					}
 					else if ("Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
 					{
 
 
-						publicidadForm.setDireccion(eachDetalle.getDireccion());
-						publicidadForm.setLocalidad(eachDetalle.getLocalidad());
-						publicidadForm.setCodPostal(eachDetalle.getCodPostal());
-						publicidadForm.setChip(eachDetalle.getChip());
-						publicidadForm.setMatricula(eachDetalle.getMatricula());
-						publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
-
-						if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Oriente-Occidente");
-						}
-						else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Occidente-Oriente");
-						}
-						else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Norte-Sur");
-						}
-						else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Sur-Norte");
-						}
-						if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Derecha");
-						}
-						if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Izquierda");
-						}
-						if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Ambos sentidos");
-						}
-						else
-						{
-							publicidadForm.setOrientacion("-");
-						}
-
-						if ("01".equals(eachDetalle.getAvisoLumino()))
-						{
-							publicidadForm.setAvisoLumino("Si");
-						}
-						else if ("02".equals(eachDetalle.getAvisoLumino()))
-						{
-							publicidadForm.setAvisoLumino("No");
-						}
-						else
-						{
-							publicidadForm.setAvisoLumino("-");
-						}
-
-
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Registro Nuevo");
-						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Actualizacion");
-						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Prorroga");
-						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Traslado");
-						}
-						else
-						{
-							publicidadForm.setTipoSolicitud("-");
-						}
-
-
-						if ("01".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Primer piso");
-						}
-						else if ("02".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Parqueadero");
-						}
-						else if ("03".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Antepecho del segundo piso");
-						}
-						else if ("04".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Canopy porte superior del edificio (de 5 más pisos)");
-						}
-						else
-						{
-							publicidadForm.setUbicacion("-");
-						}
+						this.fillVallaTubularComercial(publicidadForm, eachDetalle, detallePublicidadResponse);
 
 					}
 					else if ("Pantalla LED".equalsIgnoreCase(tipovalla))
 					{
-						publicidadForm.setDireccion(eachDetalle.getDireccion());
-						publicidadForm.setLocalidad(eachDetalle.getLocalidad());
-						publicidadForm.setCodPostal(eachDetalle.getCodPostal());
-						publicidadForm.setChip(eachDetalle.getChip());
-						publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
-						publicidadForm.setMatricula(eachDetalle.getMatricula());
-
-						if ("01".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Edificio privado");
-						}
-						else if ("02".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Lote privado");
-						}
-						else if ("03".equals(eachDetalle.getUbicacion()))
-						{
-							publicidadForm.setUbicacion("Espacio público");
-						}
-						else
-						{
-							publicidadForm.setUbicacion("-");
-						}
-
-						if ("01".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Comercial");
-						}
-						else if ("02".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Institucional");
-						}
-						else if ("03".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Cultural");
-						}
-						else if ("04".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Política");
-						}
-						else if ("05".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Deportiva");
-						}
-						else if ("06".equals(eachDetalle.getTipoPublici()))
-						{
-							publicidadForm.setTipoPublici("Otra");
-						}
-						else
-						{
-							publicidadForm.setTipoPublici("-");
-						}
-
-						if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Oriente-Occidente");
-						}
-						else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Occidente-Oriente");
-						}
-						else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Norte-Sur");
-						}
-						else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Sur-Norte");
-						}
-						if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Derecha");
-						}
-						if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Izquierda");
-						}
-						if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
-						{
-							publicidadForm.setOrientacion("Ambos sentidos");
-						}
-						else
-						{
-							publicidadForm.setOrientacion("-");
-						}
-
-						if ("01".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "1".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Registro Nuevo");
-						}
-						else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Actualizacion");
-						}
-						else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Prorroga");
-						}
-						else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
-								|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
-						{
-							publicidadForm.setTipoSolicitud("Traslado");
-						}
-						else
-						{
-							publicidadForm.setTipoSolicitud("-");
-						}
+						this.fillVallaLED(publicidadForm, eachDetalle, detallePublicidadResponse);
 
 
 					}
@@ -906,5 +409,567 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		return publicidadForm;
 		}
 
+	private void fillVallaLED(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setDireccion(eachDetalle.getDireccion());
+		publicidadForm.setLocalidad(eachDetalle.getLocalidad());
+		publicidadForm.setCodPostal(eachDetalle.getCodPostal());
+		publicidadForm.setChip(eachDetalle.getChip());
+		publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
+		publicidadForm.setMatricula(eachDetalle.getMatricula());
+		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+		if ("01".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Edificio privado");
+		}
+		else if ("02".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Lote privado");
+		}
+		else if ("03".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Espacio público");
+		}
+		else
+		{
+			publicidadForm.setUbicacion("-");
+		}
+
+		if ("01".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Comercial");
+		}
+		else if ("02".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Institucional");
+		}
+		else if ("03".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Cultural");
+		}
+		else if ("04".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Política");
+		}
+		else if ("05".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Deportiva");
+		}
+		else if ("06".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Otra");
+		}
+		else
+		{
+			publicidadForm.setTipoPublici("-");
+		}
+
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+
+		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Registro Nuevo");
+		}
+		else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Actualizacion");
+		}
+		else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Prorroga");
+		}
+		else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Traslado");
+		}
+		else
+		{
+			publicidadForm.setTipoSolicitud("-");
+		}
+	}
+
+	private void fillVallaTubularComercial(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setDireccion(eachDetalle.getDireccion());
+		publicidadForm.setLocalidad(eachDetalle.getLocalidad());
+		publicidadForm.setCodPostal(eachDetalle.getCodPostal());
+		publicidadForm.setChip(eachDetalle.getChip());
+		publicidadForm.setMatricula(eachDetalle.getMatricula());
+		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+
+		if ("01".equals(eachDetalle.getAvisoLumino()))
+		{
+			publicidadForm.setAvisoLumino("Si");
+		}
+		else if ("02".equals(eachDetalle.getAvisoLumino()))
+		{
+			publicidadForm.setAvisoLumino("No");
+		}
+		else
+		{
+			publicidadForm.setAvisoLumino("-");
+		}
+
+
+		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Registro Nuevo");
+		}
+		else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Actualizacion");
+		}
+		else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Prorroga");
+		}
+		else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Traslado");
+		}
+		else
+		{
+			publicidadForm.setTipoSolicitud("-");
+		}
+
+
+		if ("01".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Primer piso");
+		}
+		else if ("02".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Parqueadero");
+		}
+		else if ("03".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Antepecho del segundo piso");
+		}
+		else if ("04".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Canopy porte superior del edificio (de 5 más pisos)");
+		}
+		else
+		{
+			publicidadForm.setUbicacion("-");
+		}
+	}
+
+	private void fillVallaObraConvencional(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
+		publicidadForm.setDireccion(eachDetalle.getDireccion());//repetido
+		publicidadForm.setLocalidad(eachDetalle.getLocalidad());//repetido
+		publicidadForm.setCodPostal(eachDetalle.getCodPostal());//repetido
+		publicidadForm.setChip(eachDetalle.getChip());//repetido
+		publicidadForm.setMatricula(eachDetalle.getMatricula());//repetido
+		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+
+		if ("01".equals(eachDetalle.getAvisoLumino()))
+		{
+			publicidadForm.setAvisoLumino("Si");
+		}
+		else if ("02".equals(eachDetalle.getAvisoLumino()))
+		{
+			publicidadForm.setAvisoLumino("No");
+		}
+		else
+		{
+			publicidadForm.setAvisoLumino("-");
+		}
+
+		if ("01".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Edificio privado");
+		}
+		else if ("02".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Lote privado");
+		}
+		else if ("03".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Espacio público");
+		}
+		else
+		{
+			publicidadForm.setUbicacion("-");
+		}
+
+		if ("01".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Comercial");
+		}
+		else if ("02".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Institucional");
+		}
+		else
+		{
+			publicidadForm.setTipoPublici("-");
+		}
+
+		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Registro Nuevo");
+		}
+		else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Actualizacion");
+		}
+		else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Prorroga");
+		}
+		else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Traslado");
+		}
+		else
+		{
+			publicidadForm.setTipoSolicitud("-");
+		}
+	}
+
+	private void fillVallaTubularObra(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setDireccion(eachDetalle.getDireccion());
+		publicidadForm.setLocalidad(eachDetalle.getLocalidad());
+		publicidadForm.setCodPostal(eachDetalle.getCodPostal());
+		publicidadForm.setChip(eachDetalle.getChip());
+		publicidadForm.setMatricula(eachDetalle.getMatricula());
+
+
+		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Registro Nuevo");
+		}
+		else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Actualizacion");
+		}
+		else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Prorroga");
+		}
+		else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Traslado");
+		}
+		else
+		{
+			publicidadForm.setTipoSolicitud("-");
+		}
+
+
+		if ("01".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Edificio Privado");
+		}
+		else if ("02".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Lote Privado");
+		}
+		else if ("03".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Espacio Público");
+		}
+		else
+		{
+			publicidadForm.setUbicacion("-");
+		}
+
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+		publicidadForm.setLicenciaUrb(eachDetalle.getLicenciaUrb());
+		publicidadForm.setContratoObra(eachDetalle.getContratoObra());
+		publicidadForm.setLicenciaConstruc(eachDetalle.getLicenciaConstruc());
+		publicidadForm.setVigLicenConstruc(eachDetalle.getVigLicenConstruc());
+		publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
+		publicidadForm.setPeriodicidad(eachDetalle.getPeriodicidad());
+		publicidadForm.setNumCaras(eachDetalle.getNumCaras());
+		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+
+	}
+
+	private void fillVallaVehiculos(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setModelo(eachDetalle.getModelo());
+		publicidadForm.setPlaca(eachDetalle.getPlaca());
+		publicidadForm.setNumLicenciaTrans(eachDetalle.getNumLicenciaTrans());
+
+		if ("01".equals(eachDetalle.getTipoServicio()))
+		{
+			publicidadForm.setTipoServicio("Publico");
+		}
+		else if ("02".equals(eachDetalle.getTipoServicio()))
+		{
+			publicidadForm.setTipoServicio("Particular");
+		}
+		else if ("03".equals(eachDetalle.getTipoServicio()))
+		{
+			publicidadForm.setTipoServicio("Publico colectivo");
+		}
+		else if ("04".equals(eachDetalle.getTipoServicio()))
+		{
+			publicidadForm.setTipoServicio("Publico individual");
+		}
+		else
+		{
+			publicidadForm.setTipoServicio("-");
+		}
+
+		//publicidadForm.setTipoPublici(eachDetalle.getTipoPublici());
+		if ("01".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Politica");
+		}
+		else if ("02".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Comercial");
+		}
+		else if ("03".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Institucional");
+		}
+		else
+		{
+			publicidadForm.setTipoPublici("-");
+		}
+
+		if ("01".equals(eachDetalle.getTipoElemento()))
+		{
+			publicidadForm.setTipoElemento("Vehiculo");
+		}
+		else if ("02".equals(eachDetalle.getTipoElemento()))
+		{
+			publicidadForm.setTipoElemento("Taxi");
+		}
+		else if ("03".equals(eachDetalle.getTipoElemento()))
+		{
+			publicidadForm.setTipoElemento("Disel");
+		}
+		else if ("04".equals(eachDetalle.getTipoElemento()))
+		{
+			publicidadForm.setTipoElemento("Bus");
+		}
+		else if ("05".equals(eachDetalle.getTipoElemento()))
+		{
+			publicidadForm.setTipoElemento("Buseta");
+		}
+		else if ("06".equals(eachDetalle.getTipoElemento()))
+		{
+			publicidadForm.setTipoElemento("Colectivo Disel");
+		}
+		else if ("07".equals(eachDetalle.getTipoElemento()))
+		{
+			publicidadForm.setTipoElemento("Hibrido");
+		}
+		else
+		{
+			publicidadForm.setTipoElemento("-");
+		}
+
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+
+
+		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Registro Nuevo");
+		}
+		else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Actualizacion");
+		}
+		else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Prorroga");
+		}
+		else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Traslado");
+		}
+		else
+		{
+			publicidadForm.setTipoSolicitud("-");
+		}
+	}
 
 }
