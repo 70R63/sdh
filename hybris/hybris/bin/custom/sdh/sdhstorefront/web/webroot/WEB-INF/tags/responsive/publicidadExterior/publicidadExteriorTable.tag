@@ -100,7 +100,7 @@
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="publicidad.exterior.ver" /></label></td>
 
-						<%--	<td><input id="action"
+							<%--	<td><input id="action"
 								style="visibility: visible !important; margin: 0; min-height: 0;"
 								name="action" type="radio"
 								value="${eachPubExtTax.numResolu}, ${eachPubExtTax.tipoValla}"
@@ -134,78 +134,6 @@
 
 	</div>
 
-	<div class="row">
-		<div class="col-md-2 col-md-offset-5 center">
-
-			<%-- 		<sf:button --%>
-			<%-- 			action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior" --%>
-			<%-- 			type="submit" class="boton" id="accionBoton" name="accionBoton" --%>
-			<%-- 			value="declarar"> --%>
-			<%-- 			<spring:theme code="publicidad.exterior.declarationpresent" /> --%>
-			<%-- 		</sf:button> --%>
-			<button id="presentarDeclaracionButton" class="" type="button">
-				<spring:theme code="publicdad.exterior.presentarDeclaracionButton"
-					text="Presentar" />
-			</button>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2 col-md-offset-5 center">
-			<div class="boton">
-				<spring:theme code="publicidad.exterior.rop" />
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-2 col-md-offset-5 center">
-			<div class="boton">
-				<spring:theme code="publicidad.exterior.payonline" />
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="headline">
-			<h3>
-				<span class="cintillo col-md-10"><spring:theme
-						code="publicidad.exterior.detail.outdooradvertising" /></span>
-			</h3>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<label class="inputlabelnew"><spring:theme
-					code="publicidad.exterior.detail.selectYear" /></label>
-		</div>
-		<div class="col-md-1">
-			<select id="anio" class="inputdropdown" name="anoGravable">
-				<option value="0">Selecciona un año</option>
-				<option value="2019">2019</option>
-				<option value="2018">2018</option>
-				<option value="2017">2017</option>
-				<option value="2016">2016</option>
-
-			</select>
-		</div>
-
-		<div class="col-md-1 col-md-offset-1">
-			<div>
-				<%-- 			<sf:button --%>
-				<%-- 				action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior" --%>
-				<%-- 				type="submit" class="boton" id="accionBoton" name="accionBoton" --%>
-				<%-- 				value="buscar"> --%>
-				<%-- 				<spring:theme code="publicidad.exterior.detail.search" /> --%>
-				<%-- 			</sf:button> --%>
-				<button id="searchDetailButton" class="" type="button">
-					<spring:theme code="publicdad.exterior.searchDetailButton"
-						text="Buscar" />
-				</button>
-
-			</div>
-		</div>
-	</div>
 </div>
 <!-- </form:form> -->
 
