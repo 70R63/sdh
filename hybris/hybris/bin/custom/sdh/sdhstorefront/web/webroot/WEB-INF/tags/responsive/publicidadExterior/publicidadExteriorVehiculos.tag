@@ -7,7 +7,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div id="div"  style="display: none;">
+<div id="divVehiculos"  style="display: none;">
 	<div class="row">
 		<div class="headline">
 			<h2>
