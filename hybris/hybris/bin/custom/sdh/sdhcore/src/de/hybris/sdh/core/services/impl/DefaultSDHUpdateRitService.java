@@ -4,6 +4,9 @@
 package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.services.SDHUpdateRitService;
 
@@ -91,6 +94,225 @@ public class DefaultSDHUpdateRitService implements SDHUpdateRitService
 		catch (final Exception e)
 		{
 			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
+		}
+
+
+
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHUpdateRitService#updateEmailRit(de.hybris.sdh.core.pojos.requests.
+	 * UpdateEmailRitRequest)
+	 */
+	@Override
+	public String updateEmailRit(final UpdateEmailRitRequest request)
+	{
+		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
+		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
+		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+
+
+		try
+		{
+			if (StringUtils.isAnyBlank(urlString, user, password))
+			{
+				throw new RuntimeException("Error while updating email: Empty credentials");
+			}
+
+			final URL url = new URL(urlString);
+
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			final String authString = user + ":" + password;
+			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
+			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			LOG.info("connection to: " + conn.toString());
+
+			final String requestJson = request.toString();
+			LOG.info("request: " + requestJson);
+
+			final OutputStream os = conn.getOutputStream();
+			os.write(requestJson.getBytes());
+			os.flush();
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+			{
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			final StringBuilder builder = new StringBuilder();
+
+			String inputLine;
+			while ((inputLine = br.readLine()) != null)
+			{
+				builder.append(inputLine);
+			}
+
+
+			final String result = builder.toString();
+			LOG.info("response: " + result);
+
+			return result;
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("There was an error updating email contribuyente: " + e.getMessage());
+		}
+
+
+
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHUpdateRitService#updateAutorizacionesRit(de.hybris.sdh.core.pojos.requests.
+	 * UpdateAutorizacionesRitRequest)
+	 */
+	@Override
+	public String updateAutorizacionesRit(final UpdateAutorizacionesRitRequest request)
+	{
+		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
+		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
+		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+
+
+		try
+		{
+			if (StringUtils.isAnyBlank(urlString, user, password))
+			{
+				throw new RuntimeException("Error while updating autorizacions for contribuyente: Empty credentials");
+			}
+
+			final URL url = new URL(urlString);
+
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			final String authString = user + ":" + password;
+			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
+			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			LOG.info("connection to: " + conn.toString());
+
+			final String requestJson = request.toString();
+			LOG.info("request: " + requestJson);
+
+			final OutputStream os = conn.getOutputStream();
+			os.write(requestJson.getBytes());
+			os.flush();
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+			{
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			final StringBuilder builder = new StringBuilder();
+
+			String inputLine;
+			while ((inputLine = br.readLine()) != null)
+			{
+				builder.append(inputLine);
+			}
+
+
+			final String result = builder.toString();
+			LOG.info("response: " + result);
+
+			return result;
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("There was an error updating autorizaciones a contribuyente: " + e.getMessage());
+		}
+
+
+
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.hybris.sdh.core.services.SDHUpdateRitService#updateRedesSocialesRit(de.hybris.sdh.core.pojos.requests.
+	 * UpdateRedesSocialesRitRequest)
+	 */
+	@Override
+	public String updateRedesSocialesRit(final UpdateRedesSocialesRitRequest request)
+	{
+		final String urlString = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.url");
+		final String user = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.user");
+		final String password = configurationService.getConfiguration().getString("sdh.creamodcontribuyente.password");
+
+
+		try
+		{
+			if (StringUtils.isAnyBlank(urlString, user, password))
+			{
+				throw new RuntimeException("Error while updating redes sociales for contribuyente: Empty credentials");
+			}
+
+			final URL url = new URL(urlString);
+
+			final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+
+			final String authString = user + ":" + password;
+			final String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
+			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			LOG.info("connection to: " + conn.toString());
+
+			final String requestJson = request.toString();
+			LOG.info("request: " + requestJson);
+
+			final OutputStream os = conn.getOutputStream();
+			os.write(requestJson.getBytes());
+			os.flush();
+			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+			{
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+			final BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+			final StringBuilder builder = new StringBuilder();
+
+			String inputLine;
+			while ((inputLine = br.readLine()) != null)
+			{
+				builder.append(inputLine);
+			}
+
+
+			final String result = builder.toString();
+			LOG.info("response: " + result);
+
+			return result;
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("There was an error updating redes sociales a contribuyente: " + e.getMessage());
 		}
 
 

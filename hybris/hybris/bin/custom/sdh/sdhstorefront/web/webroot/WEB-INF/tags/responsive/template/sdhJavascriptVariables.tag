@@ -16,6 +16,10 @@
 			ACC.validaCurrentPasswrodURL ="<c:url value='/contribuyentes/mirit/validCurrentPassword' />";
 			ACC.validaEmailURL ="<c:url value='/contribuyentes/mirit/validNewEmail' />";
 			ACC.updateRitURL ="<c:url value='/contribuyentes/mirit/updateRit' />";
+			ACC.updateEmailRitURL ="<c:url value='/contribuyentes/mirit/updateEmail' />";
+			ACC.updatePasswordRitURL ="<c:url value='/contribuyentes/mirit/updatePassword' />";
+			ACC.updateAutorizacionesRitURL ="<c:url value='/contribuyentes/mirit/updateAutorizaciones' />";
+			ACC.updateRedesSocialesRitURL ="<c:url value='/contribuyentes/mirit/updateRedesSociales' />";
 			
 			ACC.addressNotificationCountry = "";
 			<c:if test="${not empty miRitForm.direccionNotificacion.COUNTRY}">
@@ -58,8 +62,6 @@
 			</c:if>
 			
 			ACC.publicidadExteriorDetalleURL = "<c:url value='/contribuyentes/publicidadexterior/detalle' />";
-			
-			ACC.publicidadExteriorAllURL = "<c:url value='/contribuyentes/publicidadexterior/all' />";
 			
 			ACC.publicidadExteriorDeclararionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion' />";
 			

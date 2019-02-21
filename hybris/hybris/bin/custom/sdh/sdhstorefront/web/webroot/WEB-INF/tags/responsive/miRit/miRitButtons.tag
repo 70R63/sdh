@@ -15,6 +15,6 @@
 </div>
 
 
-<div id="dialog" title="Actualizacion de RIT" ><div id="textCertNom"></div></div>
+<div id="dialog" title="Actualizacion de RIT" ><div id="ritDialogContent"></div></div>
 
 
