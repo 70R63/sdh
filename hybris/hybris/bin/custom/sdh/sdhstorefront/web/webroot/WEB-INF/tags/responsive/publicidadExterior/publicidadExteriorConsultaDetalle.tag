@@ -22,7 +22,6 @@
 			<label class="control-label"><spring:theme
 					code="publicidad.exterior.detail.selectYear" /></label> <select id="anio"
 				class="form-control" name="anoGravable">
-				<option value="0">Selecciona un año</option>
 				<option value="2019">2019</option>
 				<option value="2018">2018</option>
 				<option value="2017">2017</option>
@@ -42,7 +41,7 @@
 			<%-- 				value="buscar"> --%>
 			<%-- 				<spring:theme code="publicidad.exterior.detail.search" /> --%>
 			<%-- 			</sf:button> --%>
-			<button style = "margin-top: 27px" id="searchDetailButton" class="btn btn-primary btn-lg"
+			<button style = "margin-top: 27px" id="searchDetailButton"  class="btn btn-primary btn-lg"
 				type="button">
 				<spring:theme code="publicdad.exterior.searchDetailButton"
 					text="Buscar" />
@@ -55,7 +54,7 @@
 <div class="row">
 	<div class="col-md-4 col-md-offset-5 centercol-md-8 text-right">
 
-		<button id="regresar" class="btn btn-primary btn-lg" type="button">
+		<button id="regresar" class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/' />';" type="button">
 			<spring:theme code="publicidad.exterior.regresar" />
 		</button>
 
@@ -65,7 +64,7 @@
 		<%-- 			value="declarar"> --%>
 		<%-- 			<spring:theme code="publicidad.exterior.declarationpresent" /> --%>
 		<%-- 		</sf:button> --%>
-		<button id="presentarDeclaracionButton" class="btn btn-primary btn-lg"
+		<button id="presentarDeclaracionButton"   class="btn btn-primary btn-lg"
 			type="button">
 			<spring:theme code="publicidad.exterior.declarationpresent" />
 		</button>

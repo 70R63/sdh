@@ -132,7 +132,7 @@ ACC.publicidadexterior = {
 	 	        e.preventDefault();
 	 	        
 	 	       var anoGravable  = $.trim($("#anio").val());
-	 	       var numResolu = $.trim($("input[type='radio']:checked").attr("data-numRes"));
+	 	       var numResolu =  $("#selectedNumRes").val();
 	 	       
 	 	      if(anoGravable == "0")
 	 	        {	
@@ -156,8 +156,8 @@ ACC.publicidadexterior = {
 		 	        e.preventDefault();
 		 	        
 		 	        var anoGravable  = $.trim($("#anio").val());
-		 	        var tipoValla = $.trim($("#example input[type='radio']:checked").attr("data-tipoValla"));
-		 	       var numResolu = $.trim($("#example input[type='radio']:checked").attr("data-numRes"));
+		 	       var tipoValla = $("#selectedTipoValla").val();
+		 	       var numResolu =  $("#selectedNumRes").val();
 		 	        
 		 	        if(anoGravable == "0")
 		 	        {	
@@ -183,7 +183,7 @@ ACC.publicidadexterior = {
 			            data: data,
 			            type: "GET",
 			            success: function (data) {
-			            	var tipoValla = $.trim($("#example input[type='radio']:checked").attr("data-tipoValla"));
+			            	var tipoValla = $("#selectedTipoValla").val();
 
 			            	$("#divTubularComercial").hide();
 			            	$("#divVehiculos").hide();
@@ -525,23 +525,21 @@ ACC.publicidadexterior = {
 			var tabla = $("#example")
 					.DataTable(
 							{
-								"sPaginationType" : "full_numbers",
+								"sPagingType" : "full_numbers",
 								"oLanguage" : {
 									"oPaginate" : {
-										"sPrevious" : "Anterior",
+										"sPrevious" : " Anterior ",
 
-										"sNext" : "Siguiente",
-										"sLast" : "Ultima",
-										"sFirst" : "Primera"
+										"sNext" : " Siguiente ",
+										"sLast" : " >> ",
+										"sFirst" : " << "
 									},
-									"sLengthMenu" : 'Mostrando <select>'
-											+ '<option value="5">5</option>'
+									"sLengthMenu" : 'Mostrando <select >'
 											+ '<option value="10">10</option>'
-											+ '<option value="15">15</option>'
 											+ '<option value="20">20</option>'
 											+ '<option value="30">30</option>'
 											+ '</select> datos por página',
-									"sInfo" : "Mostrando del START a END (Total: TOTAL resultados)",
+									"sInfo" : "Mostrando del _START_ a _END_ (Total: _TOTAL_ resultados)",
 									"sInfoFiltered" : " Filtrados de MAX registros",
 									"sInfoEmpty" : " ",
 									"sZeroRecords" : "No se encontraron registros",

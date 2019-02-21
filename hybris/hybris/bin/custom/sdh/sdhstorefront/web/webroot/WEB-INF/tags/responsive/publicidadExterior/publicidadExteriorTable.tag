@@ -46,13 +46,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input value="tipoDocumento" disabled class="inputtextnew"
+					<td><input  disabled class="inputtextnew"
 						aria-required="true" maxlength="30" size="30" readonly="readonly"
-						type="text" /></td>
-					<td><input value="numeroDocumento" readonly="readonly"
+						type="text" value="${docTipe }"/></td>
+					<td><input  readonly="readonly"
 						class="inputtextnew" aria-required="true" maxlength="30" size="30"
-						disabled="disabled" type="text" /></td>
-					<td><input value="nombre" disabled class="inputtextnew"
+						disabled="disabled" type="text" value="${docNumber }"/></td>
+					<td><input value="${name }" disabled class="inputtextnew"
 						aria-required="true" maxlength="30" size="30" readonly="readonly"
 						type="text" /></td>
 				</tr>
