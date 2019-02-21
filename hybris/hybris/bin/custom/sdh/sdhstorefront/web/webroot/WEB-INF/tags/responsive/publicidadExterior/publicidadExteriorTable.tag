@@ -59,31 +59,11 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="row">
-		<div class="col-md-1">
-			<label class="control-label text-capitalize !important"><spring:theme
-					code="publicidad.exterior.showing" /></label>
-		</div>
-		<div class="col-md-1">
-			<select id="mostrando" name="mostrando" class="form-control">
-				<option value="10">10</option>
-				<option value="20">20</option>
-				<option value="30">30</option>
-			</select>
-		</div>
-		<div class="col-md-2 col-md-offset-5">
-			<label class="control-label text-capitalize !important"><spring:theme
-					code="publicidad.exterior.search" /></label>
-		</div>
-		<div class="col-md-2">
-			<input value="referencia" class="form-control" maxlength="30"
-				size="30" type="text" />
-		</div>
-	</div>
+	
 	<br>
 	<div class="row">
 		<div class="table-responsive">
-			<table class="table col-md-2 table-bordered" id="example ">
+			<table class="table col-md-2 table-bordered" id="example">
 				<thead>
 					<tr>
 						<th><label class="control-label " for=""><spring:theme
