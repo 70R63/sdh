@@ -21,7 +21,7 @@
 	<div class="col-md-4 text-right">
 		<div class="form-group">
 			<button id="regresar" class="btn btn-primary btn-lg"
-				name="generaDeclaracionButton" type="button">
+				name="generaDeclaracionButton" type="button" onclick="window.location.href ='<c:url value='/contribuyentes/publicidadexterior/' />';"> 
 				<spring:theme code=""
 					text="Regresar" />
 			</button>
