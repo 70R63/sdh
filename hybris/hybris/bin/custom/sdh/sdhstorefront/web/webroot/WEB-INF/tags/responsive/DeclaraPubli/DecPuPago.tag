@@ -13,53 +13,37 @@
 <spring:url value="/contribuyentes/publicidadexterior/declaracion"
 	var="CalculodeclaracionUrl2" htmlEscape="false" />
 
+
+<input type="hidden" id="numForm" name="numForm"
+	value="${declaPublicidadForm.numform }" />
 <div class="row">
-	<div class="col-md-6">
-		<h3>
-			<span class="cintillo col-md-10"><spring:theme
-					code="declaracion.publicidad.pago" /></span>
-		</h3>
-	</div>
-</div>
-<input type="hidden" id="numForm" name="numForm" value="${declaPublicidadForm.numform }"/>
-<div class="row">
-	<div class="col-md-3 col-md-offset-6 center">
-		<div class="accountActions">
-		<a id="downloadHelper" target="_blank"></a>
+
+	<div class="col-md-4 text-right">
+		<div class="form-group">
+			<button id="regresar" class="btn btn-primary btn-lg"
+				name="generaDeclaracionButton" type="button">
+				<spring:theme code=""
+					text="Regresar" />
+			</button>
+		</div>
+		</div>
+
+
+	<div class="col-md-3 text-center">	
+			<a id="downloadHelper" target="_blank"></a>
+			<button id="generaDeclaracionButton" class="btn btn-primary btn-lg"
+				name="generaDeclaracionButton" type="button"
+				<c:if test="${empty  declaPublicidadForm.numform}"> disabled="disabled"</c:if>>
+				<spring:theme code="declaracion.publicidad.button.presdec" />
+			</button>
+		</div>
+
+	<div class="col-md-2">
 	
-		
-			<button id="generaDeclaracionButton" class="btn btn-primary btn-block" name="generaDeclaracionButton" type="button" <c:if test="${empty  declaPublicidadForm.numform}"> disabled="disabled"</c:if>>
-				<spring:theme code="declaracion.publicidad.button.generar" text="Generar Declaración"/>
-				</button>
+			<button id="pagarlinea" class="btn btn-primary btn-lg"
+				name="pagarlinea" type="button">
+				<spring:theme code="declaracion.publicidad.button.pago.linea" />
+			</button>
 		</div>
-		<div class="accountActions">
-			<sf:form action="${presentarDeclaracionUrl2}"
-				id="presentarDeclaracionUrl1" commandName="presentarDeclaracion"
-				method="GET">		
-					<button id="${presentarDeclaracionUrl2}" type="submit"
-						class="boton">
-						<spring:theme code="declaracion.publicidad.button.crenewdec" />
-					</button>
-			</sf:form>
-		</div>
-	<div class="accountActions">
-		<div class="boton" type="button">
-			<spring:theme code="declaracion.publicidad.button.presdec" />
-		</div>
-	</div>
-	<div class="accountActions">
-		<div class="boton" type="button">
-			<spring:theme code="declaracion.publicidad.button.pago.linea" />
-		</div>
-
-		<div class="accountActions">
-			<div class="boton" type="button">
-				<spring:theme code="declaracion.publicidad.button.rop" />
-			</div>
-		</div>
-	</div>
 </div>
 </div>
-
-
-

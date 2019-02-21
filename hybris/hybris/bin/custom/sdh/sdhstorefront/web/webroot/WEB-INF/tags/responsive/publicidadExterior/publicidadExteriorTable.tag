@@ -59,7 +59,7 @@
 			</tbody>
 		</table>
 	</div>
-	
+
 	<br>
 	<div class="row">
 		<div class="table-responsive">
@@ -80,9 +80,10 @@
 						<tr>
 							<td><c:out value="${eachPubExtTax.numResolu}"></c:out></td>
 							<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
-							<td><label data-numRes="${eachPubExtTax.numResolu}"
+							<td><label style="color: #0358d8 !important"
+								data-numRes="${eachPubExtTax.numResolu}"
 								data-tipoValla="${eachPubExtTax.tipoValla}"
-								class="control-label text-capitalize !important labelVer"><spring:theme
+								class="text-capitalize !important labelVer "><spring:theme
 										code="publicidad.exterior.ver" /></label></td>
 
 							<%--	<td><input id="action"

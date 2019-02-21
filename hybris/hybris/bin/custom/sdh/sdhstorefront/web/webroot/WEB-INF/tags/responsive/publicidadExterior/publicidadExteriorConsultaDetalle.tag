@@ -33,8 +33,8 @@
 
 		</div>
 	</div>
-
-	<div class="col-md-1 col-md-offset-1">
+	<div class="col-md-1">
+	<div class="form-group">
 		<div>
 			<%-- 			<sf:button --%>
 			<%-- 				action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior" --%>
@@ -42,12 +42,12 @@
 			<%-- 				value="buscar"> --%>
 			<%-- 				<spring:theme code="publicidad.exterior.detail.search" /> --%>
 			<%-- 			</sf:button> --%>
-			<button id="searchDetailButton" class="btn btn-primary btn-lg"
+			<button style = "margin-top: 27px" id="searchDetailButton" class="btn btn-primary btn-lg"
 				type="button">
 				<spring:theme code="publicdad.exterior.searchDetailButton"
 					text="Buscar" />
 			</button>
-
+</div>
 		</div>
 	</div>
 </div>
