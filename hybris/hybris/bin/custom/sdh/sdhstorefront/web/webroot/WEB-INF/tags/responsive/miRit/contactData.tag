@@ -400,142 +400,6 @@
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required" for="telefonoPricipal">
-						<spring:theme code="mirit.contactData.landPhone" />
-					</label> 
-					<input id="telefonoPricipal" name="telefonoPricipal" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoPricipal }" maxlength="240">
-					<div class="help-block">
-						<span id="telefonoPricipal.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required" for="extensionTelefono">
-						<spring:theme code="mirit.contactData.extension" />
-					</label> 
-					<input id="extensionTelefono" name="extensionTelefono" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.extensionTelefono }" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div id="socialNetRows">
-		
-		<c:choose>
-			<c:when test="${not empty miRitForm.redsocial }">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group ">
-							<label class="control-label required" for="">
-								<spring:theme code="mirit.contactData.socialNetwork" />
-							</label> 
-						</div>
-						
-					</div>
-					<div class="col-md-4">
-						<div class="form-group ">
-							<label class="control-label required" for="">
-								<spring:theme code="mirit.contactData.socialNetworkUser" />
-							</label> 
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group ">
-						<button class="btn btn-secondary btn-lg " type="button" id="addSocialNetworkButton">
-							<spring:theme code="mirit.contactData.addSocialNetwork" /></button>
-						</div>
-					</div>
-					
-				</div>
-				<c:forEach items="${miRitForm.redsocial }" var="eachRedSocial" varStatus="status">
-					<div class="row socialNetworkRow" >
-						<div class="col-md-4">
-							<div class="form-group ">
-								<select  class="form-control redSocial"   >
-									<option value=""></option>
-					                  <c:forEach items="${socialNetworks }" var="eachSN">
-					                  	<c:set var="selected" value=""/>
-					                  	<c:if test="${eachSN eq  eachRedSocial.RED_SOCIAL}">
-					                  		<c:set var="selected" value="selected"/>
-					                  	</c:if>
-						                  <option value="${eachSN }" ${selected }>${eachSN}</option>
-										</c:forEach>			                  
-					                </select>
-								<div class="help-block">
-									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-								</div>
-							</div>
-							
-						</div>
-						<div class="col-md-4">
-							<div class="form-group ">
-								<input   class="form-control usuarioRedSocial" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
-								<div class="help-block">
-									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<div class="row" >
-				<div class="col-md-4">
-					<div class="form-group ">
-						<label class="control-label required" for="">
-							<spring:theme code="mirit.contactData.socialNetwork" />
-						</label> 
-					</div>
-					
-				</div>
-				<div class="col-md-4">
-					<div class="form-group ">
-						<label class="control-label required" for="">
-							<spring:theme code="mirit.contactData.socialNetworkUser" />
-						</label> 
-					</div>
-				</div>
-				<div class="col-md-4">
-						<div class="form-group ">
-						<button class="btn btn-secondary btn-lg " type="button" id="addSocialNetworkButton">
-							<spring:theme code="mirit.contactData.addSocialNetwork" /></button>
-						</div>
-					</div>
-				</div>
-					<div class="row socialNetworkRow">
-						<div class="col-md-4">
-							<div class="form-group ">
-								<select  class="form-control redSocial"   >
-									<option value=""></option>
-					                  <c:forEach items="${socialNetworks }" var="eachSN">
-						                  <option value="${eachSN }">${eachSN}</option>
-										</c:forEach>			                  
-					                </select>
-								<div class="help-block">
-									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-								</div>
-							</div>
-							
-						</div>
-						<div class="col-md-4">
-							<div class="form-group ">
-								<input  class="form-control usuarioRedSocial" aria-required="true" type="text" value="" maxlength="240">
-								<div class="help-block">
-									<span id="redsocial[0].USUARIORED.errors" class="hidden"></span>
-								</div>
-							</div>
-						</div>
-					</div>
-			</c:otherwise>
-		</c:choose>
-		
-		</div>	
 		<br>
 		<br>
 		<div class="row">
@@ -990,4 +854,140 @@
 		</div>	
 		<br>
 		<br>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label required" for="telefonoPricipal">
+						<spring:theme code="mirit.contactData.landPhone" />
+					</label> 
+					<input id="telefonoPricipal" name="telefonoPricipal" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.telefonoPricipal }" maxlength="240">
+					<div class="help-block">
+						<span id="telefonoPricipal.errors" class="hidden">Seleccione un tipo de documento</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label required" for="extensionTelefono">
+						<spring:theme code="mirit.contactData.extension" />
+					</label> 
+					<input id="extensionTelefono" name="extensionTelefono" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.extensionTelefono }" maxlength="240">
+					<div class="help-block">
+						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div id="socialNetRows">
 		
+		<c:choose>
+			<c:when test="${not empty miRitForm.redsocial }">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group ">
+							<label class="control-label required" for="">
+								<spring:theme code="mirit.contactData.socialNetwork" />
+							</label> 
+						</div>
+						
+					</div>
+					<div class="col-md-4">
+						<div class="form-group ">
+							<label class="control-label required" for="">
+								<spring:theme code="mirit.contactData.socialNetworkUser" />
+							</label> 
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group ">
+						<button class="btn btn-secondary btn-lg " type="button" id="addSocialNetworkButton">
+							<spring:theme code="mirit.contactData.addSocialNetwork" /></button>
+						</div>
+					</div>
+					
+				</div>
+				<c:forEach items="${miRitForm.redsocial }" var="eachRedSocial" varStatus="status">
+					<div class="row socialNetworkRow" >
+						<div class="col-md-4">
+							<div class="form-group ">
+								<select  class="form-control redSocial"   >
+									<option value=""></option>
+					                  <c:forEach items="${socialNetworks }" var="eachSN">
+					                  	<c:set var="selected" value=""/>
+					                  	<c:if test="${eachSN eq  eachRedSocial.RED_SOCIAL}">
+					                  		<c:set var="selected" value="selected"/>
+					                  	</c:if>
+						                  <option value="${eachSN }" ${selected }>${eachSN}</option>
+										</c:forEach>			                  
+					                </select>
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-md-4">
+							<div class="form-group ">
+								<input   class="form-control usuarioRedSocial" aria-required="true" type="text" value="${eachRedSocial.USUARIORED }" maxlength="240">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div class="row" >
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required" for="">
+							<spring:theme code="mirit.contactData.socialNetwork" />
+						</label> 
+					</div>
+					
+				</div>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required" for="">
+							<spring:theme code="mirit.contactData.socialNetworkUser" />
+						</label> 
+					</div>
+				</div>
+				<div class="col-md-4">
+						<div class="form-group ">
+						<button class="btn btn-secondary btn-lg " type="button" id="addSocialNetworkButton">
+							<spring:theme code="mirit.contactData.addSocialNetwork" /></button>
+						</div>
+					</div>
+				</div>
+					<div class="row socialNetworkRow">
+						<div class="col-md-4">
+							<div class="form-group ">
+								<select  class="form-control redSocial"   >
+									<option value=""></option>
+					                  <c:forEach items="${socialNetworks }" var="eachSN">
+						                  <option value="${eachSN }">${eachSN}</option>
+										</c:forEach>			                  
+					                </select>
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+								</div>
+							</div>
+							
+						</div>
+						<div class="col-md-4">
+							<div class="form-group ">
+								<input  class="form-control usuarioRedSocial" aria-required="true" type="text" value="" maxlength="240">
+								<div class="help-block">
+									<span id="redsocial[0].USUARIORED.errors" class="hidden"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+			</c:otherwise>
+		</c:choose>
+		
+		</div>	

@@ -1,7 +1,269 @@
 ACC.mirit = {
 
-		 _autoload: [ "bindUpdateButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton"],
+		 _autoload: ["bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindUpdateButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton"],
 		    
+		 bindUpdateAutorizacionesButton: function () {
+		        $(document).on("click", "#updateAutorizacionesButton", function (e) {
+		    	        e.preventDefault();
+		    	        
+		    	        
+		    	        var updateAutorizacionesData = {};
+		    	        updateAutorizacionesData.usoBuzon = $("#buzon").is(":checked");
+		    	        updateAutorizacionesData.autoUsoInfo = $("#usoInformacion").is(":checked");
+       	        
+			   	        $.ajax({
+			   	            url: ACC.updateAutorizacionesRitURL,
+			   	            data: updateAutorizacionesData,
+			   	            type: "POST",
+			   	           async: false,
+			   	            success: function (data) {
+			        	        	$( "#dialog" ).dialog( "open" );
+			        	        	if(data.ritUpdated==true)
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tus autorizaciones han sido actualizadas.");
+			        	        	}else
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tus autorizaciones no han sido actualizadas.");
+			        	        	}
+			    	            	
+			   	            },
+			   	            error: function () {
+			   	            	$( "#dialog" ).dialog( "open" );
+			    	            	$("#ritDialogContent").html("");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            }
+			   	        });
+		        });
+		   },
+		 
+		 bindUpdatePasswordButton: function () {
+		        $(document).on("click", "#updatePasswordButton", function (e) {
+		    	        e.preventDefault();
+		    	        
+		    	        
+		    	        var currentPassword = $.trim($("#currentPassword").val());
+		    	        var newPassword = $.trim($("#newPassword").val());
+		    	        var confirmNewPassword = $.trim($("#confirmNewPassword").val());
+		    	        
+		    	        if(currentPassword == "")
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("Por favor introduce la contraseña actual");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        if(newPassword == "")
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("Por favor introduce la nueva contraseña");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        
+		    	        if(confirmNewPassword == "")
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("Por favor confirma la nueva contraseña");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        if(/[a-z]/.test(newPassword) == false || /[A-Z]/.test(newPassword) == false || /[0-9]/.test(newPassword) == false || (newPassword.length <8 || newPassword.length>16))
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("La contraseña debe tener una letra mayúscula, una minúscula, un número y una longitud entre 8 y 16 caracteres.");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        if(currentPassword == newPassword)
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("La contraseña actual y la nueva contraseña son idénticas.");
+	    	            	return;
+	    	        	}
+	    	        
+		    	        if(confirmNewPassword != newPassword)
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("La nueva contraseña y la confirmacion de contraseña son diferentes.");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        
+		    	        
+		    	        
+		        	        	
+		    	        var passwordData = {};
+	        	        passwordData.passoword = currentPassword;
+          	        
+          	        $.ajax({
+          	            url: ACC.validaCurrentPasswrodURL,
+          	            data: passwordData,
+          	            type: "POST",
+          	           async: false,
+          	            success: function (data) {
+          	            	if(data.isValidPassword == true)
+      	            		{
+          	            		var updatePasswordRitData = {};
+          	            		updatePasswordRitData.passoword = currentPassword;
+          	            		updatePasswordRitData.newPassword = newPassword;
+          	            		updatePasswordRitData.confirmNewPassword = confirmNewPassword;
+          	            		
+          	            		$.ajax({
+                      	            url: ACC.updatePasswordRitURL,
+                      	            data: updatePasswordRitData,
+                      	            type: "POST",
+                      	           async: false,
+                      	            success: function (data) {
+                  	        	        	$( "#dialog" ).dialog( "open" );
+                 	    	            	$("#ritDialogContent").html("");
+                 	    	            	if(data.ritUpdated==true)
+             	    	            		{
+                 	    	            		$("#ritDialogContent").html("");
+                 		    	            	$("#ritDialogContent").html("Su contraseña ha sido cambiada.");
+                 		    	            	$("#currentPassword").val("");
+                 		    	            	$("#newPassword").val("");
+                 		    	            	$("#confirmNewPassword").val("");
+             	    	            		}
+                 	    	            	else{
+                 	    	            		$("#ritDialogContent").html("");
+                 		    	            	$("#ritDialogContent").html("Su contraseña no ha sido cambiada.");
+                 	    	            	}
+                      	            },
+                      	            error: function () {
+                      	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+                      	            }
+                      	        });
+      	            		}else
+          	            	{
+      	        	        	$( "#dialog" ).dialog( "open" );
+     	    	            	$("#ritDialogContent").html("");
+     	    	            	$("#ritDialogContent").html("Contraseña actual incorrecta.");
+          	            	}
+          	            },
+          	            error: function () {
+          	            	$( "#dialog" ).dialog( "open" );
+ 	    	            	$("#ritDialogContent").html("");
+          	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+          	            }
+          	        });
+		        });
+		   },
+		 
+		 bindUpdateEmailButton: function () {
+		        $(document).on("click", "#updateEmailButton", function (e) {
+		    	        e.preventDefault();
+		    	        
+		    	        
+		    	        var email = $.trim($("#currentMail").val());
+		    	        var newEmail = $.trim($("#newEmail").val());
+		    	        var confirmNewEmail = $.trim($("#confirmNewEmail").val());
+		    	        
+		    	        
+		    	        if(newEmail == "")
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("Por favor introduce el nuevo correo");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        
+		    	        if(confirmNewEmail == "")
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("Por favor confirma el nuevo correo");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        if(newEmail == email)
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("Correo actual y correo nuevo son idénticos.");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    	        	if(!re.test(String(newEmail).toLowerCase()))
+	    	        	{
+	    	        		$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("Por favor indique una dirección de correo electrónico válida.");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        if(newEmail != confirmNewEmail )
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+	    	            	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("El nuevo correo y la confirmación de correo no coinciden.");
+	    	            	return;
+	    	        	}
+		    	        
+		    	        
+		        	        	
+        	        	var emailData = {};
+             	        emailData.mail = confirmNewEmail;
+             	        
+             	        $.ajax({
+             	            url: ACC.validaEmailURL,
+             	            data: emailData,
+             	            type: "POST",
+             	           async: false,
+             	            success: function (data) {
+             	            	if(data.isValidEmail == true)
+         	            		{
+             	            		var updateEmailRitData = {};
+             	            		updateEmailRitData.email = email;
+             	            		updateEmailRitData.newEmailAddress = newEmail;
+             	            		updateEmailRitData.confirmNewEmailAddress = confirmNewEmail;
+             	            		
+             	            		$.ajax({
+                         	            url: ACC.updateEmailRitURL,
+                         	            data: updateEmailRitData,
+                         	            type: "POST",
+                         	           async: false,
+                         	            success: function (data) {
+                     	        	        	$( "#dialog" ).dialog( "open" );
+                    	    	            	$("#ritDialogContent").html("");
+                    	    	            	$.each(data.errores, function( index, value ) {
+                    	    	            		if(value.idmsj != "")
+                    	    	            		{
+                    	    	            			$("#ritDialogContent").html($("#ritDialogContent").html()+value.txtmsj+"<br>");
+                    	    	            		}
+                    	    	            	});
+                         	            },
+                         	            error: function () {
+                         	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+                         	            }
+                         	        });
+         	            		}else
+             	            	{
+         	        	        	$( "#dialog" ).dialog( "open" );
+        	    	            	$("#ritDialogContent").html("");
+        	    	            	$("#ritDialogContent").html("Correo no disponible, por favor indique otro.");
+             	            	}
+             	            },
+             	            error: function () {
+             	            	$( "#dialog" ).dialog( "open" );
+    	    	            	$("#ritDialogContent").html("");
+             	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+             	            }
+             	        });
+		        });
+		   },
+		 
+		 
+		 
 		    bindAddressData: function(){
 		    	
 		    	if ( typeof(countries) == 'undefined' )

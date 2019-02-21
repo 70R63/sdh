@@ -270,16 +270,21 @@ public class UpdateRitRequest
 		}
 		else
 		{
-			final ContribDireccion address= this.getDireccionNoficacion();
+			final ContribDireccion address = this.getDireccionNoficacion();
 
 			stringBuilder.append("{\"ADR_KIND\": \"02\",");
-			stringBuilder.append("\"STREET\": \""+ ((StringUtils.isBlank(address.getSTREET()))? "" : address.getSTREET() ) +"\",");
-			stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTR_SUPPL1() ) +"\",");
-			stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTR_SUPPL2() ) +"\",");
-			stringBuilder.append("\"POST_CODE1\": \""+ ((StringUtils.isBlank(address.getPOST_CODE()))? "" : StringUtils.leftPad(address.getPOST_CODE(),6,"0") ) +"\",");
-			stringBuilder.append("\"CITY1\": \""+ ((StringUtils.isBlank(address.getCITY1()))? "" : address.getCITY1() ) +"\",");
-			stringBuilder.append("\"COUNTRY\": \""+ ((StringUtils.isBlank(address.getCOUNTRY()))? "" : address.getCOUNTRY() ) +"\",");
-			stringBuilder.append("\"REGION\": \""+ ((StringUtils.isBlank(address.getREGION()))? "" : address.getREGION() ) +"\"");
+			stringBuilder.append("\"STREET\": \"" + ((StringUtils.isBlank(address.getSTREET())) ? "" : address.getSTREET()) + "\",");
+			stringBuilder.append(
+					"\"STR_SUPPL1\": \"" + ((StringUtils.isBlank(address.getSTR_SUPPL1())) ? "" : address.getSTR_SUPPL1()) + "\",");
+			stringBuilder.append(
+					"\"STR_SUPPL2\": \"" + ((StringUtils.isBlank(address.getSTR_SUPPL2())) ? "" : address.getSTR_SUPPL2()) + "\",");
+			stringBuilder.append("\"POST_CODE1\": \""
+					+ ((StringUtils.isBlank(address.getPOST_CODE())) ? "" : StringUtils.leftPad(address.getPOST_CODE(), 6, "0"))
+					+ "\",");
+			stringBuilder.append("\"CITY1\": \"" + ((StringUtils.isBlank(address.getCITY1())) ? "" : address.getCITY1()) + "\",");
+			stringBuilder
+					.append("\"COUNTRY\": \"" + ((StringUtils.isBlank(address.getCOUNTRY())) ? "" : address.getCOUNTRY()) + "\",");
+			stringBuilder.append("\"REGION\": \"" + ((StringUtils.isBlank(address.getREGION())) ? "" : address.getREGION()) + "\"");
 			stringBuilder.append("    },");
 		}
 
@@ -303,11 +308,16 @@ public class UpdateRitRequest
 
 			stringBuilder.append("{\"ADR_KIND\": \"01\",");
 			stringBuilder.append("\"STREET\": \"" + ((StringUtils.isBlank(address.getSTREET())) ? "" : address.getSTREET()) + "\",");
-			stringBuilder.append("\"STR_SUPPL1\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL1()))? "" : address.getSTR_SUPPL1() ) +"\",");
-			stringBuilder.append("\"STR_SUPPL2\": \""+ ((StringUtils.isBlank(address.getSTR_SUPPL2()))? "" : address.getSTR_SUPPL2() ) +"\",");
-			stringBuilder.append("\"POST_CODE1\": \"" + ((StringUtils.isBlank(address.getPOST_CODE())) ? "" : StringUtils.leftPad(address.getPOST_CODE(),6,"0")) + "\",");
+			stringBuilder.append(
+					"\"STR_SUPPL1\": \"" + ((StringUtils.isBlank(address.getSTR_SUPPL1())) ? "" : address.getSTR_SUPPL1()) + "\",");
+			stringBuilder.append(
+					"\"STR_SUPPL2\": \"" + ((StringUtils.isBlank(address.getSTR_SUPPL2())) ? "" : address.getSTR_SUPPL2()) + "\",");
+			stringBuilder.append("\"POST_CODE1\": \""
+					+ ((StringUtils.isBlank(address.getPOST_CODE())) ? "" : StringUtils.leftPad(address.getPOST_CODE(), 6, "0"))
+					+ "\",");
 			stringBuilder.append("\"CITY1\": \"" + ((StringUtils.isBlank(address.getCITY1())) ? "" : address.getCITY1()) + "\",");
-			stringBuilder.append("\"COUNTRY\": \"" + ((StringUtils.isBlank(address.getCOUNTRY())) ? "" : address.getCOUNTRY()) + "\",");
+			stringBuilder
+					.append("\"COUNTRY\": \"" + ((StringUtils.isBlank(address.getCOUNTRY())) ? "" : address.getCOUNTRY()) + "\",");
 			stringBuilder.append("\"REGION\": \"" + ((StringUtils.isBlank(address.getREGION())) ? "" : address.getREGION()) + "\"");
 			stringBuilder.append("    }");
 		}
@@ -326,8 +336,8 @@ public class UpdateRitRequest
 		}
 		else
 		{
-			final String tel= this.getTelfonoPrincipal();
-			final String ext= this.getExtension();
+			final String tel = this.getTelfonoPrincipal();
+			final String ext = this.getExtension();
 
 			stringBuilder.append("{\"TEL_TIPO\": \" 1\",");
 			stringBuilder.append("\"TEL_NUMBER\": \"" + ((StringUtils.isBlank(tel)) ? "" : tel) + "\",");

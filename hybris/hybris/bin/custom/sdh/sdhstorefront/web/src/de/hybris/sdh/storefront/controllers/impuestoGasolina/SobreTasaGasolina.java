@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -28,6 +29,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
+import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -79,6 +81,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	private static final String DECLARACIONES_GASOLINA_CMS_PAGE = "declaracion-gasolina";
 	private static final String REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/sobretasa-gasolina/declaracion-gasolina";
+	private static final String REDIRECT_CMS_SITE_PAGE_PAGO_PSE_FORM = FORWARD_PREFIX + "/impuestos/pagoEnLinea/form";
+
+	private static final String FORWARD_CMS_SITE_PAGE_PAGO_PSE_FORM = null;
 
 
 	@Resource(name = "accountBreadcrumbBuilder")
@@ -447,6 +452,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final DetGasResponse detalleGasolinaResponse;
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
+		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
+
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
 
@@ -562,6 +569,16 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 		model.addAttribute("dataForm", dataForm);
+
+		psePaymentForm.setTipoDeImpuesto("GASOLINA");
+		psePaymentForm.setAnoGravable(dataForm.getAnoGravable());
+		psePaymentForm.setValorAPagar(dataForm.getDataForm().getValoresDeclara().getTotalPagar());
+		psePaymentForm.setPeriodo(gasolinaService.perpararPeriodoPago(dataForm.getPeriodo()));
+		psePaymentForm
+				.setTipoDeIdentificacion(
+						gasolinaService.getDescripcion(dataForm.getTipoDoc(), dataForm.getCatalogosSo().getTipoIdRev()));
+		psePaymentForm.setNoIdentificacion(dataForm.getNumDoc());
+		model.addAttribute("psePaymentForm", psePaymentForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
@@ -702,6 +719,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
 		System.out.println(dataForm);
 		model.addAttribute("dataForm", dataForm);
+
+
 
 
 		return REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE;

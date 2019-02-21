@@ -803,6 +803,44 @@ public class SobreTasaGasolinaService
 	}
 
 
+	/**
+	 * @param periodo
+	 * @return
+	 */
+	public String perpararPeriodoPago(final String periodo)
+	{
+		String periodoConvertidoPagar = "";
+
+		if (periodo.equals("01") || periodo.equals("02"))
+		{
+			periodoConvertidoPagar = "01";
+		}
+		else if (periodo.equals("03") || periodo.equals("04"))
+		{
+			periodoConvertidoPagar = "02";
+		}
+		else if (periodo.equals("05") || periodo.equals("06"))
+		{
+			periodoConvertidoPagar = "03";
+		}
+		else if (periodo.equals("07") || periodo.equals("08"))
+		{
+			periodoConvertidoPagar = "04";
+		}
+		else if (periodo.equals("09") || periodo.equals("10"))
+		{
+			periodoConvertidoPagar = "05";
+		}
+		else if (periodo.equals("11") || periodo.equals("12"))
+		{
+			periodoConvertidoPagar = "06";
+		}
+
+
+		return periodoConvertidoPagar;
+	}
+
+
 
 
 
