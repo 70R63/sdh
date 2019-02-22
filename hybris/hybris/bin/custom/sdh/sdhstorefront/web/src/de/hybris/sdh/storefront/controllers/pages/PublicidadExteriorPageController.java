@@ -22,6 +22,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -192,6 +193,47 @@ public class PublicidadExteriorPageController extends AbstractPageController
 				publicidadForm.setPublicidadExt(sdhConsultaContribuyenteBPResponse.getPublicidadExt().stream()
 						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumResolu())).collect(Collectors.toList()));
 
+				if (publicidadForm.getPublicidadExt() != null && !publicidadForm.getPublicidadExt().isEmpty())
+				{
+					for (final ImpuestoPublicidadExterior ecahPublicidadExt : publicidadForm.getPublicidadExt())
+					{
+						final String tipovalla = ecahPublicidadExt.getTipoValla();
+						if ("VALLA VEHICULOS".equalsIgnoreCase(tipovalla) || "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
+						{
+
+							ecahPublicidadExt.setTipoVallaCode("02");
+
+						}
+						else if ("Valla Tubular de Obra".equalsIgnoreCase(tipovalla))
+						{
+
+							ecahPublicidadExt.setTipoVallaCode("03");
+
+
+						}
+						else if ("Valla de Obra Convencional".equalsIgnoreCase(tipovalla))
+						{
+
+							ecahPublicidadExt.setTipoVallaCode("04");
+
+						}
+						else if ("Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
+						{
+
+
+							ecahPublicidadExt.setTipoVallaCode("01");
+
+						}
+						else if ("Pantalla LED".equalsIgnoreCase(tipovalla))
+						{
+							ecahPublicidadExt.setTipoVallaCode("05");
+
+
+						}
+					}
+				}
+
+
 			}
 			else
 			{
@@ -347,33 +389,34 @@ public class PublicidadExteriorPageController extends AbstractPageController
 				for (final DetallePubli eachDetalle : detallePublicidadResponse.getDetalle())
 					{
 
-					if ("VALLA VEHICULOS".equalsIgnoreCase(tipovalla) || "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
+					if ("02".equalsIgnoreCase(tipovalla) || "VALLA VEHICULOS".equalsIgnoreCase(tipovalla)
+							|| "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
 					{
 
 						this.fillVallaVehiculos(publicidadForm, eachDetalle, detallePublicidadResponse);
 
 					}
-					else if ("Valla Tubular de Obra".equalsIgnoreCase(tipovalla))
+					else if ("03".equalsIgnoreCase(tipovalla) || "Valla Tubular de Obra".equalsIgnoreCase(tipovalla))
 					{
 
 						this.fillVallaTubularObra(publicidadForm, eachDetalle, detallePublicidadResponse);
 
 
 					}
-					else if ("Valla de Obra Convencional".equalsIgnoreCase(tipovalla))
+					else if ("04".equalsIgnoreCase(tipovalla) || "Valla de Obra Convencional".equalsIgnoreCase(tipovalla))
 					{
 
 						this.fillVallaObraConvencional(publicidadForm, eachDetalle, detallePublicidadResponse);
 
 					}
-					else if ("Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
+					else if ("01".equalsIgnoreCase(tipovalla) || "Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
 					{
 
 
 						this.fillVallaTubularComercial(publicidadForm, eachDetalle, detallePublicidadResponse);
 
 					}
-					else if ("Pantalla LED".equalsIgnoreCase(tipovalla))
+					else if ("05".equalsIgnoreCase(tipovalla) || "Pantalla LED".equalsIgnoreCase(tipovalla))
 					{
 						this.fillVallaLED(publicidadForm, eachDetalle, detallePublicidadResponse);
 
@@ -419,6 +462,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
 		publicidadForm.setMatricula(eachDetalle.getMatricula());
 		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+		publicidadForm.setTipoVallaCode("05");
 		if ("01".equals(eachDetalle.getUbicacion()))
 		{
 			publicidadForm.setUbicacion("Edificio privado");
@@ -532,7 +576,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		publicidadForm.setChip(eachDetalle.getChip());
 		publicidadForm.setMatricula(eachDetalle.getMatricula());
 		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
-
+		publicidadForm.setTipoVallaCode("01");
 		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
 		{
 			publicidadForm.setOrientacion("Oriente-Occidente");
@@ -637,7 +681,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		publicidadForm.setChip(eachDetalle.getChip());//repetido
 		publicidadForm.setMatricula(eachDetalle.getMatricula());//repetido
 		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
-
+		publicidadForm.setTipoVallaCode("04");
 		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
 		{
 			publicidadForm.setOrientacion("Oriente-Occidente");
@@ -747,7 +791,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		publicidadForm.setCodPostal(eachDetalle.getCodPostal());
 		publicidadForm.setChip(eachDetalle.getChip());
 		publicidadForm.setMatricula(eachDetalle.getMatricula());
-
+		publicidadForm.setTipoVallaCode("03");
 
 		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
 		{
@@ -840,7 +884,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		publicidadForm.setModelo(eachDetalle.getModelo());
 		publicidadForm.setPlaca(eachDetalle.getPlaca());
 		publicidadForm.setNumLicenciaTrans(eachDetalle.getNumLicenciaTrans());
-
+		publicidadForm.setTipoVallaCode("02");
 		if ("01".equals(eachDetalle.getTipoServicio()))
 		{
 			publicidadForm.setTipoServicio("Publico");

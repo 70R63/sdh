@@ -65,10 +65,27 @@ public class PublicidadForm
 	private String vigLicenConstruc;
 	private String tipoVia;
 	private String tipoValla;
+	private String tipoVallaCode;
 
 
 
 
+	/**
+	 * @return the tipoVallaCode
+	 */
+	public String getTipoVallaCode()
+	{
+		return tipoVallaCode;
+	}
+
+	/**
+	 * @param tipoVallaCode
+	 *           the tipoVallaCode to set
+	 */
+	public void setTipoVallaCode(final String tipoVallaCode)
+	{
+		this.tipoVallaCode = tipoVallaCode;
+	}
 
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 	private InfoDeclaraPubli infodeclara;

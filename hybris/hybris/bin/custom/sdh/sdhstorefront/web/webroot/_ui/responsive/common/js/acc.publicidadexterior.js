@@ -208,7 +208,7 @@ ACC.publicidadexterior = {
         	$("#divObraConvencional").hide();
         	$("#divPantallaLed").hide();
 	    	
-	    	if(tipoValla == "Valla Tubular Comercial")
+	    	if(tipoValla == "Valla Tubular Comercial"||tipoValla == "01")
     		{
         		$("#divTubularComercial").show();
         		$(".inputtextnew").val();
@@ -235,7 +235,7 @@ ACC.publicidadexterior = {
         		$("#tubularComercialAvisoLumino").val(data.avisoLumino);
         		$("#tubularComercialUbicacion").val(data.ubicacion);
         		$("#tubularComercialMatricula").val(data.matricula);
-    		}else if(tipoValla == "Valla Vehículos")
+    		}else if(tipoValla == "Valla Vehículos"||tipoValla == "02")
     		{
     			$("#divVehiculos").show();
         		$(".inputtextnew").val();
@@ -252,7 +252,7 @@ ACC.publicidadexterior = {
         		$("#vehiculoOrientacion").val(data.orientacion);
         		$("#vehiculoTipoServicio").val(data.tipoServicio);
         		
-    		}else if(tipoValla == "Valla Tubular de Obra")
+    		}else if(tipoValla == "Valla Tubular de Obra"||tipoValla == "03")
     		{
     			$("#divTubularObra").show();
         		$(".inputtextnew").val();
@@ -284,7 +284,7 @@ ACC.publicidadexterior = {
         		$("#tubularObraOrientacion").val(data.orientacion);
         		$("#tubularObraNumcaras").val(data.numCaras);
     			
-    		}else if(tipoValla == "Valla de Obra Convencional")
+    		}else if(tipoValla == "Valla de Obra Convencional"||tipoValla == "04")
     		{
     			
     			$("#divObraConvencional").show();
@@ -312,7 +312,7 @@ ACC.publicidadexterior = {
         		$("#obraConvencionalMatricula").val(data.matricula);
         		$("#obraConvencionalOrientacion").val(data.orientacion);
         		$("#obraConvencionalTotalArea").val(data.areaElemento);
-    		}else if(tipoValla == "Pantalla LED")
+    		}else if(tipoValla == "Pantalla LED"||tipoValla == "05")
     		{
     			$("#divPantallaLed").show();
         		$(".inputtextnew").val();

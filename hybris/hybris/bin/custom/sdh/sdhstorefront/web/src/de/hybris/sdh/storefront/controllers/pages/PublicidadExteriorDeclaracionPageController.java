@@ -225,7 +225,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
 
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
-
+			declaPublicidadForm.setTipoValla(tipoValla);
 			declaPublicidadForm.setIdNumber(customerModel.getDocumentNumber());
 			declaPublicidadForm.setIdType(customerModel.getDocumentType());
 			declaPublicidadForm.setName(name);

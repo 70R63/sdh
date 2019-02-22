@@ -342,6 +342,18 @@
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-md-4  ">
+				<div class="form-group ">
+					<button class="btn btn-secondary btn-lg " type="button" id="updateNotificationAddressButton">
+							<spring:theme code="mirit.contactData.updateNotificationAddress" />
+					</button>
+				</div>
+			</div>
+		</div>
+		
+		<br>
+		<br>
+		<div class="row">
 			<div class="col-md-8">
 				<div class="form-group ">
 					<label class="control-label required" for="direccionContacto">
@@ -396,6 +408,15 @@
 					</label> 
 					<select disabled="disabled" id="postalCodeDireccionContacto" class="form-control" onchange="">
 		              </select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4  ">
+				<div class="form-group ">
+					<button class="btn btn-secondary btn-lg " type="button" id="updateContactAddressButton">
+							<spring:theme code="mirit.contactData.updateContactAddress" />
+					</button>
 				</div>
 			</div>
 		</div>
@@ -878,6 +899,17 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-4  ">
+				<div class="form-group ">
+					<button class="btn btn-secondary btn-lg " type="button" id="updateTelefonoButton">
+							<spring:theme code="mirit.contactData.updateTelefono" />
+					</button>
+				</div>
+			</div>
+		</div>
+		
 		<br>
 		<br>
 		<div id="socialNetRows">
@@ -991,3 +1023,12 @@
 		</c:choose>
 		
 		</div>	
+		<div class="row">
+			<div class="col-md-4  ">
+				<div class="form-group ">
+					<button class="btn btn-secondary btn-lg " type="button" id="updateRedesSocialesButton">
+							<spring:theme code="mirit.contactData.updateRedesSociales" />
+					</button>
+				</div>
+			</div>
+		</div>

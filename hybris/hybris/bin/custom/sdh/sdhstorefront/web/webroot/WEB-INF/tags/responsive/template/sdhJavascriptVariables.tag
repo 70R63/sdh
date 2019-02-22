@@ -20,6 +20,9 @@
 			ACC.updatePasswordRitURL ="<c:url value='/contribuyentes/mirit/updatePassword' />";
 			ACC.updateAutorizacionesRitURL ="<c:url value='/contribuyentes/mirit/updateAutorizaciones' />";
 			ACC.updateRedesSocialesRitURL ="<c:url value='/contribuyentes/mirit/updateRedesSociales' />";
+			ACC.updateTelefonoRitURL ="<c:url value='/contribuyentes/mirit/updateTelefono' />";
+			ACC.updateAddressRitURL ="<c:url value='/contribuyentes/mirit/updateAddress' />";
+			ACC.updateNombreRitURL ="<c:url value='/contribuyentes/mirit/updateNombre' />";
 			
 			ACC.addressNotificationCountry = "";
 			<c:if test="${not empty miRitForm.direccionNotificacion.COUNTRY}">

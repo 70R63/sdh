@@ -1,7 +1,255 @@
 ACC.mirit = {
 
-		 _autoload: ["bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindUpdateButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton"],
-		    
+		 _autoload: ["bindUpdateNombreButton","bindUpdateNotificationAddressButton","bindUpdateContactAddressButton","bindUpdateTelefonoButton","bindUpdateRedesSocialesButton","bindUpdateAutorizacionesButton","bindUpdatePasswordButton", "bindUpdateEmailButton", "bindCertifNombButton","bindDialog","bindUpdateRitButton","bindAddressData","bindAddSocialNetworkRowButton"],
+		 
+		 bindUpdateNombreButton: function () {
+		        $(document).on("click", "#updateNombreButton", function (e) {
+		    	        e.preventDefault();
+		    	        
+		    	        
+		    	        var updateNombreData = {};
+		    	        
+		    	        
+		    	        updateNombreData.name1 = $.trim( $("#primNom").val());
+		    	        updateNombreData.name2 =  $.trim($("#segNom").val());
+		    	        updateNombreData.apellido1 =  $.trim($("#primApe").val());
+		    	        updateNombreData.apellido2 =  $.trim($("#segApe").val());
+		    	        
+	        
+			   	        $.ajax({
+			   	            url: ACC.updateNombreRitURL,
+			   	            data: updateNombreData,
+			   	            type: "POST",
+			   	            success: function (data) {
+			        	        	$( "#dialog" ).dialog( "open" );
+			        	        	if(data.ritUpdated==true)
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tu nombre ha sido actualizadas.");
+			        	        	}else
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tu nombre no ha sido actualizadas.");
+			        	        	}
+			    	            	
+			   	            },
+			   	            error: function () {
+			   	            	$( "#dialog" ).dialog( "open" );
+			    	            	$("#ritDialogContent").html("");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            }
+			   	        });
+		        });
+		   },
+		 
+		 bindUpdateNotificationAddressButton: function () {
+		        $(document).on("click", "#updateNotificationAddressButton", function (e) {
+		    	        e.preventDefault();
+		    	        
+		    	        
+		    	        var direccionNotificacion = {};
+		    	        
+		    	        direccionNotificacion.ADR_KIND = "02";
+		    	        direccionNotificacion.COUNTRY  = $.trim($("#countryDireccionNotificacion").val());
+		    	        
+		    	        if($("#countryDireccionNotificacion").val()=="CO")
+			        	{
+		    	        	direccionNotificacion.STREET = $.trim($("#direccionNotificacionStreet").val());
+		    	        	direccionNotificacion.STR_SUPPL1 = $.trim($("#direccionNotificacionSuppl1").val());
+		    	        	direccionNotificacion.STR_SUPPL2 = $.trim($("#direccionNotificacionSuppl2").val());
+		    	        	direccionNotificacion.POST_CODE1 = $.trim($("#postalCodeDireccionNotificacion").val());
+		    	        	direccionNotificacion.REGION = $.trim($("#deparmentDireccionNotificacion").val());
+		    	        	direccionNotificacion.CITY1   =$.trim( $("#municipioDireccionNotificacion").val())
+			        	}else
+		        		{
+			        		direccionNotificacion.STREET = $.trim($("#direccionNotificacion").val());
+		        		}
+		    	        
+		    	        var addressData = {};
+		    	        addressData.address = JSON.stringify(direccionNotificacion);
+	        
+			   	        $.ajax({
+			   	            url: ACC.updateAddressRitURL,
+			   	            data: addressData,
+			   	            type: "POST",
+			   	            success: function (data) {
+			        	        	$( "#dialog" ).dialog( "open" );
+			        	        	if(data.ritUpdated==true)
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tu dirección de notificación ha sido actualizadas.");
+			        	        	}else
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tu dirección de notificación no ha sido actualizadas.");
+			        	        	}
+			    	            	
+			   	            },
+			   	            error: function () {
+			   	            	$( "#dialog" ).dialog( "open" );
+			    	            	$("#ritDialogContent").html("");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            }
+			   	        });
+		        });
+		   },
+		 
+		 bindUpdateContactAddressButton: function () {
+		        $(document).on("click", "#updateContactAddressButton", function (e) {
+		    	        e.preventDefault();
+		    	        
+		    	        
+		    	        var direccionContacto = {};
+		    	        
+		    	        direccionContacto.ADR_KIND = "01";
+		    	        direccionContacto.COUNTRY  = $.trim($("#countryDireccionContacto").val());
+		    	        
+		    	        if($("#countryDireccionContacto").val()=="CO")
+			        	{
+		    	        	direccionContacto.STREET = $.trim($("#direccionContactoStreet").val());
+		    	        	direccionContacto.STR_SUPPL1 = $.trim($("#direccionContactoSuppl1").val());
+		    	        	direccionContacto.STR_SUPPL2 = $.trim($("#direccionContactoSuppl2").val());
+		    	        	direccionContacto.POST_CODE1 = $.trim($("#postalCodeDireccionContacto").val());
+		    	        	direccionContacto.REGION = $.trim($("#deparmentDireccionContacto").val());
+		    	        	direccionContacto.CITY1   = $.trim($("#municipioDireccionContacto").val());
+			        	}else
+		        		{
+			        		direccionContacto.STREET = $.trim($("#direccionContacto").val());
+		        		}
+		    	        
+		    	        
+		    	        var addressData = {};
+		    	        addressData.address = JSON.stringify(direccionContacto);
+ 	        
+		    	        $.ajax({
+			   	            url: ACC.updateAddressRitURL,
+			   	            data: addressData,
+			   	            type: "POST",
+			   	            success: function (data) {
+			        	        	$( "#dialog" ).dialog( "open" );
+			        	        	if(data.ritUpdated==true)
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tu dirección de contacto ha sido actualizadas.");
+			        	        	}else
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tu dirección de contacto no ha sido actualizadas.");
+			        	        	}
+			    	            	
+			   	            },
+			   	            error: function () {
+			   	            	$( "#dialog" ).dialog( "open" );
+			    	            	$("#ritDialogContent").html("");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            }
+			   	        });
+		        });
+		   },
+		 
+		 bindUpdateTelefonoButton: function () {
+		        $(document).on("click", "#updateTelefonoButton", function (e) {
+		    	        e.preventDefault();
+		    	        
+		    	        
+		    	        var updateTelefonoRitData ={};
+		    	        
+		    	        updateTelefonoRitData.telfonoPrincipal = $.trim($("#telefonoPricipal").val());
+		    	        updateTelefonoRitData.extension = $.trim($("#extensionTelefono").val());
+		    	        
+    	        
+			   	        $.ajax({
+			   	            url: ACC.updateTelefonoRitURL,
+			   	            data: updateTelefonoRitData,
+			   	            type: "POST",
+			   	            success: function (data) {
+			        	        	$( "#dialog" ).dialog( "open" );
+			        	        	if(data.ritUpdated==true)
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tu teléfono sido actualizadas.");
+			        	        	}else
+			        	        	{
+			        	        		$("#ritDialogContent").html("");
+				    	            	$("#ritDialogContent").html("Tu teléfono no ha sido actualizadas.");
+			        	        	}
+			    	            	
+			   	            },
+			   	            error: function () {
+			   	            	$( "#dialog" ).dialog( "open" );
+			    	            	$("#ritDialogContent").html("");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            }
+			   	        });
+		        });
+		   },
+		 
+		 bindUpdateRedesSocialesButton: function () {
+		        $(document).on("click", "#updateRedesSocialesButton", function (e) {
+		    	        e.preventDefault();
+		    	        
+		    	        
+		    	        var redSocialData = new Array();
+		    	        
+		    	        var updateRedesSociales = false;
+		    	        
+		    	        $.each($(".socialNetworkRow"),function(index,value){
+		    	        	
+		    	        	var redSocial = $(value).find(".redSocial").val();
+		    	        	var usuarioRedSocial = $(value).find(".usuarioRedSocial").val();
+		    	        	
+		    	        	if(redSocial != "" && usuarioRedSocial != "")
+		    	        	{
+			    	        	var eachSocialNet=new Object();
+			    	        	
+			    	        	eachSocialNet.RED_SOCIAL = redSocial;
+			    	        	eachSocialNet.USUARIORED = usuarioRedSocial;
+			    	        	
+			    	        	redSocialData.push(eachSocialNet);
+			    	        	
+			    	        	updateRedesSociales = true;
+			    	        	
+		    	        	}
+		    	        	
+		    	        });
+		    	        if(updateRedesSociales)
+		    	        {
+			    	        var updateRedesSocialesData = {};
+			    	        
+			    	        updateRedesSocialesData.redsocial = JSON.stringify(redSocialData);
+	    	        
+				   	        $.ajax({
+				   	            url: ACC.updateRedesSocialesRitURL,
+				   	            data: updateRedesSocialesData,
+				   	            type: "POST",
+				   	            success: function (data) {
+				        	        	$( "#dialog" ).dialog( "open" );
+				        	        	if(data.ritUpdated==true)
+				        	        	{
+				        	        		$("#ritDialogContent").html("");
+					    	            	$("#ritDialogContent").html("Tus redes sociales han sido actualizadas.");
+				        	        	}else
+				        	        	{
+				        	        		$("#ritDialogContent").html("");
+					    	            	$("#ritDialogContent").html("Tus redes sociales no han sido actualizadas.");
+				        	        	}
+				    	            	
+				   	            },
+				   	            error: function () {
+				   	            	$( "#dialog" ).dialog( "open" );
+				    	            	$("#ritDialogContent").html("");
+				   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+				   	            }
+				   	        });
+		    	        }else
+	    	        	{
+		    	        	$( "#dialog" ).dialog( "open" );
+		    	        	$("#ritDialogContent").html("");
+	    	            	$("#ritDialogContent").html("Tus redes sociales no han sido actualizadas.");
+	    	        	}
+		        });
+		   },
+		 
 		 bindUpdateAutorizacionesButton: function () {
 		        $(document).on("click", "#updateAutorizacionesButton", function (e) {
 		    	        e.preventDefault();
@@ -15,7 +263,6 @@ ACC.mirit = {
 			   	            url: ACC.updateAutorizacionesRitURL,
 			   	            data: updateAutorizacionesData,
 			   	            type: "POST",
-			   	           async: false,
 			   	            success: function (data) {
 			        	        	$( "#dialog" ).dialog( "open" );
 			        	        	if(data.ritUpdated==true)
@@ -107,7 +354,6 @@ ACC.mirit = {
           	            url: ACC.validaCurrentPasswrodURL,
           	            data: passwordData,
           	            type: "POST",
-          	           async: false,
           	            success: function (data) {
           	            	if(data.isValidPassword == true)
       	            		{
@@ -218,7 +464,6 @@ ACC.mirit = {
              	            url: ACC.validaEmailURL,
              	            data: emailData,
              	            type: "POST",
-             	           async: false,
              	            success: function (data) {
              	            	if(data.isValidEmail == true)
          	            		{
@@ -481,7 +726,7 @@ ACC.mirit = {
     	    });
         },
 
-    bindUpdateButton: function () {
+    bindCertifNombButton: function () {
     $(document).on("click", "#certifNombButton", function (e) {
 	        e.preventDefault();
 	        
@@ -501,14 +746,14 @@ ACC.mirit = {
 	            	$( "#dialog" ).dialog( "open" );
 	            	if(data.success==true)
 	            	{
-	            		$("#textCertNom").html("Nombre válido. Tu nombre será acutalizado cuando clickes ACTUALIZAR RIT");
+	            		$("#ritDialogContent").html("Nombre válido. Tu nombre será acutalizado cuando clickes ACTUALIZAR RIT");
 	            	}else
 	            	{
-	            		$("#textCertNom").html("Nombre inválido.<br> El nuevo nombre tiene un porcentaje de "+parseInt(100*data.porcentaje)+"%<br>El porcentaje mínimo necesario para actualizar tu nombre es "+parseInt(100*data.minPercentage)+"%");
+	            		$("#ritDialogContent").html("Nombre inválido.<br> El nuevo nombre tiene un porcentaje de "+parseInt(100*data.porcentaje)+"%<br>El porcentaje mínimo necesario para actualizar tu nombre es "+parseInt(100*data.minPercentage)+"%");
 	            	}
 	            },
 	            error: function () {
-	            	$("#textCertNom").html("No se puede certificar el nombre");
+	            	$("#ritDialogContent").html("No se puede certificar el nombre");
 	            }
 	        });
 	    });
