@@ -18,7 +18,6 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -29,6 +28,9 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.responses.CertifNombResponse;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
@@ -45,6 +47,10 @@ import de.hybris.sdh.facades.SDHCertifNombFacade;
 import de.hybris.sdh.facades.SDHUpdateRitFacade;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
+import de.hybris.sdh.storefront.forms.UpdateAutorizacionesRitForm;
+import de.hybris.sdh.storefront.forms.UpdateEmailRitForm;
+import de.hybris.sdh.storefront.forms.UpdatePasswordRitForm;
+import de.hybris.sdh.storefront.forms.UpdateRedesSocialesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRitForm;
 import de.hybris.sdh.storefront.forms.ValidEmailForm;
 import de.hybris.sdh.storefront.forms.ValidPasswordForm;
@@ -406,6 +412,146 @@ public class MiRitPageController extends AbstractPageController
 		return sdhCertifNombFacade.certifNomb(request);
 	}
 
+
+	@RequestMapping(value = "/updateEmail", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateEmail(final UpdateEmailRitForm updateEmailForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		String email = customerModel.getUid();
+
+		UpdateRitResponse response = new UpdateRitResponse();
+
+		if (StringUtils.isNotBlank(updateEmailForm.getEmail())
+				&& StringUtils.isNotBlank(updateEmailForm.getConfirmNewEmailAddress())
+				&& StringUtils.isNotBlank(updateEmailForm.getNewEmailAddress()))
+		{
+			final String newUidLower = updateEmailForm.getNewEmailAddress().toLowerCase();
+
+			customerModel.setOriginalUid(newUidLower);
+			customerModel.setUid(newUidLower);
+			modelService.save(customerModel);
+
+			eventService.publishEvent(initializeEvent(new ChangeUIDEvent(), customerModel));
+
+
+			// Replace the spring security authentication with the new UID
+			final String newUid = customerFacade.getCurrentCustomer().getUid().toLowerCase();
+			final Authentication oldAuthentication = SecurityContextHolder.getContext().getAuthentication();
+			final UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(newUid, null,
+					oldAuthentication.getAuthorities());
+			newAuthentication.setDetails(oldAuthentication.getDetails());
+			SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
+			email = newUidLower;
+
+			final UpdateEmailRitRequest request = new UpdateEmailRitRequest();
+
+			request.setEmail(email);request.setNumBP(customerModel.getNumBP());
+
+			response = sdhUpdateRitFacade.updateEmailRit(request);
+		}
+
+
+		return response;
+	}
+
+	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updatePassword(final UpdatePasswordRitForm updatePasswordRitForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final String email = customerModel.getUid();
+
+		final UpdateRitResponse response = new UpdateRitResponse();
+
+		if (StringUtils.isNotBlank(updatePasswordRitForm.getPassoword())
+				&& StringUtils.isNotBlank(updatePasswordRitForm.getConfirmNewPassword())
+				&& StringUtils.isNotBlank(updatePasswordRitForm.getNewPassword()))
+		{
+			customerFacade.changePassword(updatePasswordRitForm.getPassoword(), updatePasswordRitForm.getNewPassword());
+
+			response.setRitUpdated(true);
+		}
+
+
+		return response;
+	}
+
+	@RequestMapping(value = "/updateAutorizaciones", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateAutorizaciones(final UpdateAutorizacionesRitForm updateAutorizacionesRitForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final UpdateAutorizacionesRitRequest request = new UpdateAutorizacionesRitRequest();
+
+		request.setNumBP(customerModel.getNumBP());
+		request.setUseEmailForNotifications(updateAutorizacionesRitForm.getUsoBuzon());
+		request.setUseInformationForInstitutionalPurposes(updateAutorizacionesRitForm.getAutoUsoInfo());
+
+		if (Boolean.TRUE.equals(updateAutorizacionesRitForm.getUsoBuzon()))
+		{
+			final LocalDateTime now = LocalDateTime.now();
+
+			final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+			final String formatDateTime = now.format(formatter);
+
+			request.setAutoBuzonDate(formatDateTime);
+		}
+		else
+		{
+			request.setAutoBuzonDate("0");
+		}
+
+		final UpdateRitResponse udpateRitResponse = sdhUpdateRitFacade.updateAutorizacionesRit(request);
+
+		return udpateRitResponse;
+	}
+
+
+	@RequestMapping(value = "/updateRedesSociales", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateRedesSociales(final UpdateRedesSocialesRitForm updateRedesSocialesRitForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final UpdateRedesSocialesRitRequest request = new UpdateRedesSocialesRitRequest();
+
+		UpdateRitResponse udpateRitResponse = new UpdateRitResponse();
+
+		if (StringUtils.isNotBlank(updateRedesSocialesRitForm.getRedsocial()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ContribRedSocial> redesSociales = Arrays
+						.asList(mapper.readValue(updateRedesSocialesRitForm.getRedsocial(), ContribRedSocial[].class));
+
+				request.setRedsocial(redesSociales);
+
+
+				udpateRitResponse = sdhUpdateRitFacade.updateRedesSocialesRit(request);
+			}
+			catch (final Exception e)
+			{
+				// XXX Auto-generated catch block
+				LOG.error("there was an error while parsing redsocial JSON");
+				udpateRitResponse.setRitUpdated(false);
+			}
+		}
+
+
+
+		return udpateRitResponse;
+	}
+
+
 	@Resource(name = "passwordEncoderService")
 	private PasswordEncoderService passwordEncoderService;
 
@@ -468,45 +614,10 @@ public class MiRitPageController extends AbstractPageController
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		String email = customerModel.getUid();
-
-		final UpdateRitResponse response = new UpdateRitResponse();
-
-		if (StringUtils.isNotBlank(updateRitForm.getPassoword() ) && StringUtils.isNotBlank(updateRitForm.getConfirmNewPassword())
-				&& StringUtils.isNotBlank(updateRitForm.getNewPassword()))
-		{
-			customerFacade.changePassword(updateRitForm.getPassoword(), updateRitForm.getNewPassword());
-		}
-
-
-
-
-		if(StringUtils.isNotBlank(updateRitForm.getEmail()) && StringUtils.isNotBlank(updateRitForm.getConfirmNewEmailAddress())&& StringUtils.isNotBlank(updateRitForm.getNewEmailAddress()))
-		{
-			final String newUidLower = updateRitForm.getNewEmailAddress().toLowerCase();
-
-			customerModel.setOriginalUid(newUidLower);
-			customerModel.setUid(newUidLower);
-			modelService.save(customerModel);
-
-			eventService.publishEvent(initializeEvent(new ChangeUIDEvent(), customerModel));
-
-
-			// Replace the spring security authentication with the new UID
-			final String newUid = customerFacade.getCurrentCustomer().getUid().toLowerCase();
-			final Authentication oldAuthentication = SecurityContextHolder.getContext().getAuthentication();
-			final UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(newUid, null,
-					oldAuthentication.getAuthorities());
-			newAuthentication.setDetails(oldAuthentication.getDetails());
-			SecurityContextHolder.getContext().setAuthentication(newAuthentication);
-
-			email = newUidLower;
-		}
 
 		final UpdateRitRequest request = new UpdateRitRequest();
 
 		request.setNumBP(customerModel.getNumBP());
-		request.setEmail(email);
 		request.setPrimNom(updateRitForm.getPrimNom());
 		request.setSegNom(updateRitForm.getSegNom());
 		request.setPrimApe(updateRitForm.getPrimApe());
