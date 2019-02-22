@@ -28,7 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/impuestos")
 public class PSEPaymentController extends AbstractPageController
 {
-	private static final Logger LOG = Logger.getLogger(PSEPaymentController.class);
+	private static final Logger LOG = Logger.getLogger(PSEPaymentController.class); //new
 	private static final String CMS_SITE_PAGE_PAGO_PSE = "PagoPSEPage";
 	private static final String CMS_SITE_PAGE_PAGO_EN_lINEA = "PagoEnLineaPSEPage";
 
@@ -91,7 +91,7 @@ public class PSEPaymentController extends AbstractPageController
 
 		final List<SelectAtomValue> banco = Arrays.asList(
 				new SelectAtomValue("01", "Bancolombia"),
-				new SelectAtomValue("02", "BBVA"), 
+				new SelectAtomValue("02", "BBVA"),
 				new SelectAtomValue("03", "Davivienda"));
 
 		return banco;
@@ -121,30 +121,43 @@ public class PSEPaymentController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.GET)
+	/*
+	 * @RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.GET)
+	 *
+	 * @RequireHardLogIn public String realizarPago(final Model model, final RedirectAttributes redirectModel) throws
+	 * CMSItemNotFoundException { storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+	 * setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+	 * model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+	 *
+	 *
+	 * model.addAttribute("psePaymentForm", new PSEPaymentForm());
+	 *
+	 * return getViewForPage(model); }
+	 */
+
+	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String realizarPago(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String pagoEnLineaForm(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-
-		model.addAttribute("psePaymentForm", new PSEPaymentForm());
+		model.addAttribute("psePaymentForm", psePaymentForm);
 
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.POST)
+	@RequestMapping(value = "/pagoEnLinea/realizarPago", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String realizarPago(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
-
-
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
+		System.out.println(psePaymentForm);
+		System.out.println("Call PSE/Bank Web Service");
 		model.addAttribute("psePaymentForm", psePaymentForm);
 
 		return getViewForPage(model);

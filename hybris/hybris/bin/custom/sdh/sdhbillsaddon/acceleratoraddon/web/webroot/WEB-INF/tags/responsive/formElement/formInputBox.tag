@@ -10,6 +10,8 @@
 <%@ attribute name="tabindex" required="false" rtexprvalue="true"%>
 <%@ attribute name="autocomplete" required="false" type="java.lang.String"%>
 <%@ attribute name="maxlength" required="false" type="java.lang.String"%>
+<%@ attribute name="disabled" required="false" type="java.lang.String"%>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -32,7 +34,7 @@
 		<div class="bill-textbox"><span class="pull-left bill-symbol">${ycommerce:encodeHTML(textBoxPrefix)}</span>
 		<spring:theme code="${placeholder}" var="placeHolderMessage" />
 		<form:input aria-required="${mandatory}" cssClass="${inputCSS} form-control" id="${idKey}" path="${path}"
-				tabindex="${tabindex}" autocomplete="${autocomplete}" placeholder="${placeHolderMessage}" maxlength="${maxlength}"/></div>
+				tabindex="${tabindex}" autocomplete="${autocomplete}" placeholder="${placeHolderMessage}" maxlength="${maxlength}" disabled="${disabled}"/></div>
 						
 	</ycommerce:testId>
 </template:errorSpanField>

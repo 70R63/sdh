@@ -11,6 +11,7 @@
     <extension name='sdhbillsaddon' />
     <extension name='sdhpsaddon' />
     <extension name='sdhrelationshipsaddon' />
+    <extension name='sdhpse' />
 <!--     <extension name='sdhtest' /> -->
 <!--     <extension name='sdhcockpits' /> -->
     <extension name='ycommercewebservices' />
@@ -33,7 +34,7 @@
     <extension name='permissionswebservices' />
     <extension name='xyformscockpits' />
     <extension name='xyformsbackoffice' />
-    <extension name='orbeonweb' />
+<!--    <extension name='orbeonweb' /> -->
     <extension name='xyformscommerceservices' />
     <extension name='xyformscommercefacades' />
     <extension name='xyformscommercecockpits' />
