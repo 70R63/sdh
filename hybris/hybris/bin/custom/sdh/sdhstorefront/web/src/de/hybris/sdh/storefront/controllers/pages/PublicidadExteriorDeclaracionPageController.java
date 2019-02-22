@@ -201,8 +201,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	public String showView(final Model model, @RequestParam(required = true, value = "numResolu")
 	final String numResolu, @RequestParam(required = true, value = "anoGravable")
 	final String anoGravable, @RequestParam(required = true, value = "tipoValla")
-	final String tipoValla, @ModelAttribute("publicidadInfo")
-	final PublicidadForm publicidadInfo, final HttpServletRequest request) throws CMSItemNotFoundException
+	final String tipoValla) throws CMSItemNotFoundException
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
@@ -214,6 +213,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(numResolu);
 		detallePublicidadRequest.setAnoGravable(anoGravable);
+		detallePublicidadRequest.setTipoValla(tipoValla);
+
 		try
 		{
 			final PublicidadForm publicidadForm = new PublicidadForm();
