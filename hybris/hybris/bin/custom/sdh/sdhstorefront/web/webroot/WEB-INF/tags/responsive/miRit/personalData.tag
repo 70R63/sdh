@@ -94,6 +94,9 @@
 							<label class="control-label " for="address.surname">
 					</label> 
 								<button class="btn btn-primary btn-block change_address_button show_processing_message" type="button" id="certifNombButton">
+									<spring:theme code="mirit.personalData.certifName" />
+								</button>
+								<button class="btn btn-primary btn-block change_address_button show_processing_message" type="button" id="updateNombreButton">
 									<spring:theme code="mirit.personalData.updateName" />
 								</button>
 							

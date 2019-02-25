@@ -12,6 +12,7 @@ public class ImpuestoPublicidadExterior
 	private String numResolu;
 	private String tipoValla;
 	private boolean seleccionado;
+	private String tipoVallaCode;
 
 	/**
 	 *
@@ -71,6 +72,23 @@ public class ImpuestoPublicidadExterior
 	public void setSeleccionado(final boolean seleccionado)
 	{
 		this.seleccionado = seleccionado;
+	}
+
+	/**
+	 * @return the tipoVallaCode
+	 */
+	public String getTipoVallaCode()
+	{
+		return tipoVallaCode;
+	}
+
+	/**
+	 * @param tipoVallaCode
+	 *           the tipoVallaCode to set
+	 */
+	public void setTipoVallaCode(final String tipoVallaCode)
+	{
+		this.tipoVallaCode = tipoVallaCode;
 	}
 
 

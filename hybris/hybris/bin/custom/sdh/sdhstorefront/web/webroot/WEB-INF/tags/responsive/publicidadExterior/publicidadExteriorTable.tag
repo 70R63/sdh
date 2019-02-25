@@ -82,7 +82,7 @@
 							<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
 							<td><label style="color: #0358d8 !important"
 								data-numRes="${eachPubExtTax.numResolu}"
-								data-tipoValla="${eachPubExtTax.tipoValla}"
+								data-tipoValla="${eachPubExtTax.tipoVallaCode}"
 								class="text-capitalize !important labelVer "><spring:theme
 										code="publicidad.exterior.ver" /></label></td>
 
