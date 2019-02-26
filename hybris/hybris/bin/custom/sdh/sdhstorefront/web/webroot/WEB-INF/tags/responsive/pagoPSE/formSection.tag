@@ -9,39 +9,28 @@
 
 <script>
 function myFunction() {
-	//var banco = document.getElementById("psePaymentForm.banco").value;
-	//var tipoDeTarjeta = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
+	var banco = document.getElementById("psePaymentForm.banco").value;
+	var tipoDeTarjeta = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
 	
-	//var divBottonPSE = document.getElementById("bottonPSE")
-	//var divBottonBBVA = document.getElementById("bottonBBVA")
-	//var divBottonDAVIVIENDA = document.getElementById("bottonDAVIVIENDA")
-	
-	alert(tipoDeTarjeta + "," + banco);
-	
-	//divBottonPSE.style.display = "none";
-	//divBottonBBVA.style.display = "none";
-	//divBottonDAVIVIENDA.style.display = "none";
-	
-	//if (tipoDeTarjeta == "02"){ //Tipo De Tarjeta - Credito 
-//		divBottonPSE.style.display = "block";
-	//}else if(tipoDeTarjeta == "01") //Tipo De Tarjeta - Debito
-//		if(banco == "01"){ //Banco - Bancolombia
-			//divBottonPSE.style.display = "block";
-		//}else if(banco == "02"){ //Banco - BBVA
-//			divBottonBBVA.style.display = "block";
-		//}else if(banco == "03"){ //Banco - DAVIVIENDA
-			//divBottonDAVIVIENDA.style.display = "block";
-		//}else{
-//			divBottonPSE.style.display = "none";
-			//divBottonBBVA.style.display = "none";
-			//divBottonDAVIVIENDA.style.display = "none";
-		//}
-	//}else{
-		//divBottonPSE.style.display = "none";
-		//divBottonBBVA.style.display = "none";
-		//divBottonDAVIVIENDA.style.display = "none";
-	//}
+	var divBottonPSE = document.getElementById("bottonPSE");
+	var divBottonBBVA = document.getElementById("bottonBBVA");
+	var divBottonDAVIVIENDA = document.getElementById("bottonDAVIVIENDA");
 
+	divBottonPSE.style.display = "none";
+	divBottonBBVA.style.display = "none";
+	divBottonDAVIVIENDA.style.display = "none";
+	
+	if (tipoDeTarjeta == "02"){ //Tipo De Tarjeta - Credito 
+		divBottonPSE.style.display = "block";
+	}else if(tipoDeTarjeta == "01"){ //Tipo De Tarjeta - Debito
+		if(banco == "01"){ //Banco - Bancolombia
+			divBottonPSE.style.display = "block";
+		}else if(banco == "02"){ //Banco - BBVA
+			divBottonBBVA.style.display = "block";
+		}else if(banco == "03"){ //Banco - DAVIVIENDA
+			divBottonDAVIVIENDA.style.display = "block";
+		}
+	}
 	
 }
 </script>
@@ -65,7 +54,7 @@ function myFunction() {
 						<input type="hidden" value="" class="text" name="psePaymentForm.tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
 						<div class="row">
 							<div class="col-xs-6">
-								<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" />
+								<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="true"/>
 							</div>
 							<div class="col-xs-6">
 								<formElement:formSelectBox idKey="psePaymentForm.tipoDeImpuesto" labelKey="psePaymentForm.tipoDeImpuesto" path="tipoDeImpuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeImpuesto}" selectCSSClass="form-control" disabled="true"/>
@@ -84,10 +73,10 @@ function myFunction() {
 						</div>	
 						
 						<c:if test = "${tipoDeImpuestoSeleccionado eq 'PREDIAL'}">						
-							<formElement:formInputBox  idKey="psePaymentForm.CHIP" maxlength="240" labelKey="psePaymentForm.CHIP" path="CHIP" inputCSS="text" mandatory="true" tabindex="0"/>
+							<formElement:formInputBox  idKey="psePaymentForm.CHIP" maxlength="240" labelKey="psePaymentForm.CHIP" path="CHIP" inputCSS="text" mandatory="true" tabindex="0" disabled="true"/>
 						</c:if>
 						<c:if test = "${tipoDeImpuestoSeleccionado eq 'DELINEACION'}">
-							<formElement:formInputBox  idKey="psePaymentForm.CUD" maxlength="240" labelKey="psePaymentForm.CUD" path="CUD" inputCSS="text" mandatory="true" tabindex="0"/>
+							<formElement:formInputBox  idKey="psePaymentForm.CUD" maxlength="240" labelKey="psePaymentForm.CUD" path="CUD" inputCSS="text" mandatory="true" tabindex="0" disabled="true"/>
 						</c:if>
 						
 						<c:if test = "${tipoDeImpuestoSeleccionado eq 'PUBLICIDAD' or
@@ -95,17 +84,17 @@ function myFunction() {
 						 tipoDeImpuestoSeleccionado eq 'VEHICULAR'}">
 							<div class="row">
 								<div class="col-xs-6">
-									<formElement:formInputBox  idKey="psePaymentForm.noIdentificacion" maxlength="240" labelKey="psePaymentForm.noIdentificacion" path="noIdentificacion" inputCSS="text" mandatory="true" tabindex="0"/>
+									<formElement:formInputBox  idKey="psePaymentForm.noIdentificacion" maxlength="240" labelKey="psePaymentForm.noIdentificacion" path="noIdentificacion" inputCSS="text" mandatory="true" tabindex="0" disabled="true"/>
 								</div>
 								<div class="col-xs-6">
-									<formElement:formInputBox  idKey="psePaymentForm.DV" maxlength="240" labelKey="psePaymentForm.DV" path="DV" inputCSS="text" mandatory="true" tabindex="0"/>
+									<formElement:formInputBox  idKey="psePaymentForm.DV" maxlength="240" labelKey="psePaymentForm.DV" path="DV" inputCSS="text" mandatory="true" tabindex="0" disabled="true" />
 								</div>
 							</div>									
-							<formElement:formInputBox  idKey="psePaymentForm.tipoDeIdentificacion" maxlength="240" labelKey="psePaymentForm.tipoDeIdentificacion" path="tipoDeIdentificacion" inputCSS="text" mandatory="true" tabindex="0"/>
+							<formElement:formInputBox  idKey="psePaymentForm.tipoDeIdentificacion" maxlength="240" labelKey="psePaymentForm.tipoDeIdentificacion" path="tipoDeIdentificacion" inputCSS="text" mandatory="true" tabindex="0" disabled="true"/>
 						</c:if>
 						
 						<c:if test = "${tipoDeImpuestoSeleccionado ne 'PREDIAL'}">
-							<formElement:formInputBox  idKey="psePaymentForm.fechaLimiteDePago" maxlength="240" labelKey="psePaymentForm.fechaLimiteDePago" path="fechaLimiteDePago" inputCSS="text" mandatory="true" tabindex="0"/>
+							<formElement:formInputBox  idKey="psePaymentForm.fechaLimiteDePago" maxlength="240" labelKey="psePaymentForm.fechaLimiteDePago" path="fechaLimiteDePago" inputCSS="text" mandatory="true" tabindex="0" disabled="true"/>
 						</c:if>
 						
 						
@@ -114,7 +103,7 @@ function myFunction() {
 						</c:if>
 						
 						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control" onchange="myFunction()"/>
-						<formElement:formInputBox  idKey="psePaymentForm.valorAPagar" maxlength="240" labelKey="psePaymentForm.valorAPagar" path="valorAPagar" inputCSS="text" mandatory="true" tabindex="0"/>
+						<formElement:formInputBox  idKey="psePaymentForm.valorAPagar" maxlength="240" labelKey="psePaymentForm.valorAPagar" path="valorAPagar" inputCSS="text" mandatory="true" tabindex="0" disabled="true"/>
 						<formElement:formSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeTarjeta}" selectCSSClass="form-control" onchange="myFunction()"/>
 
 						

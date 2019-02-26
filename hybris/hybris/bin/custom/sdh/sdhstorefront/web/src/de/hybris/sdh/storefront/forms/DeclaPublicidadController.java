@@ -51,6 +51,25 @@ public class DeclaPublicidadController
 	private String idNumber;
 	private String idType;
 
+	private String tipoValla;
+
+	/**
+	 * @return the tipoValla
+	 */
+	public String getTipoValla()
+	{
+		return tipoValla;
+	}
+
+	/**
+	 * @param tipoValla
+	 *           the tipoValla to set
+	 */
+	public void setTipoValla(final String tipoValla)
+	{
+		this.tipoValla = tipoValla;
+	}
+
 	/**
 	 * @return the catalogos
 	 */

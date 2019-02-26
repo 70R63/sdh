@@ -46,13 +46,13 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input value="tipoDocumento" disabled class="inputtextnew"
+					<td><input  disabled class="inputtextnew"
 						aria-required="true" maxlength="30" size="30" readonly="readonly"
-						type="text" /></td>
-					<td><input value="numeroDocumento" readonly="readonly"
+						type="text" value="${docTipe }"/></td>
+					<td><input  readonly="readonly"
 						class="inputtextnew" aria-required="true" maxlength="30" size="30"
-						disabled="disabled" type="text" /></td>
-					<td><input value="nombre" disabled class="inputtextnew"
+						disabled="disabled" type="text" value="${docNumber }"/></td>
+					<td><input value="${name }" disabled class="inputtextnew"
 						aria-required="true" maxlength="30" size="30" readonly="readonly"
 						type="text" /></td>
 				</tr>
@@ -82,7 +82,7 @@
 							<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
 							<td><label style="color: #0358d8 !important"
 								data-numRes="${eachPubExtTax.numResolu}"
-								data-tipoValla="${eachPubExtTax.tipoValla}"
+								data-tipoValla="${eachPubExtTax.tipoVallaCode}"
 								class="text-capitalize !important labelVer "><spring:theme
 										code="publicidad.exterior.ver" /></label></td>
 

@@ -12,7 +12,7 @@ public class DetallePublicidadRequest
 	private String numBP;
 	private String numResolu;
 	private String anoGravable;
-
+	private String tipoValla;
 
 	/**
 	 * @return the numBP
@@ -71,6 +71,27 @@ public class DetallePublicidadRequest
 	}
 
 
+
+
+	/**
+	 * @return the tipoValla
+	 */
+	public String getTipoValla()
+	{
+		return tipoValla;
+	}
+
+
+	/**
+	 * @param tipoValla
+	 *           the tipoValla to set
+	 */
+	public void setTipoValla(final String tipoValla)
+	{
+		this.tipoValla = tipoValla;
+	}
+
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -84,7 +105,8 @@ public class DetallePublicidadRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"numResolu\":\"" + this.getNumResolu() + "\",");
-		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\"");
+		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\",");
+		stringBuilder.append("\"tipoValla\":\"" + this.getTipoValla() + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();

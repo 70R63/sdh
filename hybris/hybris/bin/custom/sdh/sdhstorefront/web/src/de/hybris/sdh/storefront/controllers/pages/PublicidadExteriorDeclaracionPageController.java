@@ -46,6 +46,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -146,19 +147,19 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				{
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4() + " ");
 					}
 				}
 			}
@@ -169,19 +170,19 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe() + " ");
 					}
 				}
 
@@ -200,7 +201,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	@RequestMapping(method = RequestMethod.GET)
 	public String showView(final Model model, @RequestParam(required = true, value = "numResolu")
 	final String numResolu, @RequestParam(required = true, value = "anoGravable")
-	final String anoGravable) throws CMSItemNotFoundException
+	final String anoGravable, @RequestParam(required = true, value = "tipoValla")
+	final String tipoValla) throws CMSItemNotFoundException
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
@@ -212,6 +214,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(numResolu);
 		detallePublicidadRequest.setAnoGravable(anoGravable);
+		detallePublicidadRequest.setTipoValla(tipoValla);
+
 		try
 		{
 			final PublicidadForm publicidadForm = new PublicidadForm();
@@ -222,7 +226,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
 
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
-
+			declaPublicidadForm.setTipoValla(tipoValla);
 			declaPublicidadForm.setIdNumber(customerModel.getDocumentNumber());
 			declaPublicidadForm.setIdType(customerModel.getDocumentType());
 			declaPublicidadForm.setName(name);
@@ -244,7 +248,14 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				declaPublicidadForm.setFechnotif(localDate.format(formatter2));
 			}
 
-			declaPublicidadForm.setOrValla(detallePublicidadResponse.getInfoDeclara().getOrientacionValla());
+			final Optional optional = detallePublicidadResponse.getDetalle().stream()
+					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
+
+			if (Boolean.TRUE.equals(optional.isPresent()))
+			{
+				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
+			}
+
 			declaPublicidadForm.setLuginst(detallePublicidadResponse.getInfoDeclara().getLugarInstala());
 			declaPublicidadForm.setBasegrav(detallePublicidadResponse.getInfoDeclara().getTamanoValla());
 			declaPublicidadForm.setOpuso(detallePublicidadResponse.getInfoDeclara().getOpcionUso());
