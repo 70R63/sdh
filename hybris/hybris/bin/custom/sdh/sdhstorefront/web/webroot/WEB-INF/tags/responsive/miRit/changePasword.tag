@@ -53,4 +53,12 @@
 			</div>
 		</div>
 		<div class="description"><spring:theme code="mirit.changePassword.passwordRequirements" htmlEscape="false"/></div>
-		
+		<div class="row">
+			<div class="col-md-4  ">
+				<div class="form-group ">
+					<button class="btn btn-secondary btn-lg " type="button" id="updatePasswordButton">
+							<spring:theme code="mirit.contactData.updatePassword" />
+					</button>
+				</div>
+			</div>
+		</div>
