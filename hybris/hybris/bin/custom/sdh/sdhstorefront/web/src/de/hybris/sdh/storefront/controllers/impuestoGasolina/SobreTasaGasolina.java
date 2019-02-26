@@ -9,7 +9,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -17,11 +16,13 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -449,10 +450,14 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		SDHValidaMailRolResponse detalleContribuyente;
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
 		final DetGasResponse detalleGasolinaResponse;
+		final DetallePagoResponse detallePagoResponse;
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
 		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
+		String clavePeriodo = "";
+
 
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
@@ -560,24 +565,39 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		declarante.setNumDoc(detalleContribuyente.getInfoContrib().getNumDoc());
 		declarante.setNombres(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
 		dataForm.setDeclarante(declarante);
-
-
-
-
 		dataForm.setCatalogosSo(catalogos);
 		System.out.println(dataForm);
-
-
 		model.addAttribute("dataForm", dataForm);
+
+
+		clavePeriodo = gasolinaService.perpararPeriodoPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+		detallePagoRequest.setNumBP(numBP);
+		detallePagoRequest.setClavePeriodo(clavePeriodo);
+		detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjeto(detalleContribuyente));
+
+		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+		if (detallePagoResponse.getErrores() != null && detallePagoResponse.getErrores().get(0) != null
+				&& detallePagoResponse.getErrores().get(0).getTxtmsj() != null
+				&& !detallePagoResponse.getErrores().get(0).getTxtmsj().equals(""))
+		{
+			LOG.error("Error al leer detalle de pago: " + detallePagoResponse.getErrores().get(0).getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error4", mensajesError);
+		}
+
 
 		psePaymentForm.setTipoDeImpuesto("GASOLINA");
 		psePaymentForm.setAnoGravable(dataForm.getAnoGravable());
-		psePaymentForm.setValorAPagar(dataForm.getDataForm().getValoresDeclara().getTotalPagar());
-		psePaymentForm.setPeriodo(gasolinaService.perpararPeriodoPago(dataForm.getPeriodo()));
+		psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
+		psePaymentForm.setPeriodo(clavePeriodo);
 		psePaymentForm
 				.setTipoDeIdentificacion(
 						gasolinaService.getDescripcion(dataForm.getTipoDoc(), dataForm.getCatalogosSo().getTipoIdRev()));
 		psePaymentForm.setNoIdentificacion(dataForm.getNumDoc());
+		psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
+		psePaymentForm.setFechaLimiteDePago(detallePagoResponse.getFechVenc());
+		psePaymentForm.setDV(gasolinaService.prepararDV(detalleContribuyente));
 		model.addAttribute("psePaymentForm", psePaymentForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
