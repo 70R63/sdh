@@ -10,6 +10,7 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -18,7 +19,6 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -86,6 +86,9 @@ public class MiRitPageController extends AbstractPageController
 
 	private static final String Mi_RIT_CMS_PAGE = "MiRitPage";
 
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+	private static final String BREADCRUMBS_VALUE = "breadcrumb.certificacion";
+
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
@@ -102,6 +105,9 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sdhUpdateRitFacade")
 	SDHUpdateRitFacade sdhUpdateRitFacade;
 
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
 	{
@@ -115,6 +121,7 @@ public class MiRitPageController extends AbstractPageController
 	public String showView(final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
@@ -384,6 +391,10 @@ public class MiRitPageController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
+
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
+
+
 
 		return getViewForPage(model);
 	}

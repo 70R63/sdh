@@ -11,10 +11,12 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -66,6 +68,10 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			+ "/contribuyentes2/publicidadexterior/detalle";
 
 
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+	private static final String BREADCRUMBS_VALUE = "breadcrumb.publicidad";
+
+
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
@@ -81,6 +87,9 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 	@Resource(name = "sdhCalPublicidadService")
 	SDHCalPublicidadService sdhCalPublicidadService;
+
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 
 	private static final String ERROR_CMS_PAGE = "notFound";
@@ -158,6 +167,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
 
 		return getViewForPage(model);
 	}
