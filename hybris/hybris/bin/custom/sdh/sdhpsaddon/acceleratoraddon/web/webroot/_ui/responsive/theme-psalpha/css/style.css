@@ -24255,3 +24255,21 @@ author: Vikas Gupta
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+div.dataTables_length {
+  float: left;
+}
+div.dataTables_filter {
+  float: right;
+}
+div.dataTables_info {
+  float: left;
+}
+div.dataTables_paginate {
+  float: right;
+}
+div.dataTables_length,
+div.dataTables_filter,
+div.dataTables_paginate,
+div.dataTables_info {
+  padding: 6px;
+}
