@@ -39,10 +39,8 @@
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.opuso" /></label> <select id="opuso"
-					class="form-control">
-					<option value="">${declaraPublidadForm.infodeclara.opcionUso}
-					<option value="01">Declaraci&oacuten</option>
-					<option value="02">Correcci&oacuten</option>
+					class="form-control" disabled="disabled">
+					<option value="${declaPublicidadForm.opuso}"><spring:theme code="declaracion.publicidad.opuso.d${declaPublicidadForm.opuso}"> </spring:theme></option>
 				</select>
 			</div>
 		</div>

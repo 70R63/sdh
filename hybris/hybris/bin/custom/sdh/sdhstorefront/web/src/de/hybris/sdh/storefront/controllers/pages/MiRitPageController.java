@@ -28,10 +28,13 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateTelefonoRitRequest;
 import de.hybris.sdh.core.pojos.responses.CertifNombResponse;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
@@ -47,11 +50,13 @@ import de.hybris.sdh.facades.SDHCertifNombFacade;
 import de.hybris.sdh.facades.SDHUpdateRitFacade;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
+import de.hybris.sdh.storefront.forms.UpdateAddressRitForm;
 import de.hybris.sdh.storefront.forms.UpdateAutorizacionesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateEmailRitForm;
 import de.hybris.sdh.storefront.forms.UpdatePasswordRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRedesSocialesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateRitForm;
+import de.hybris.sdh.storefront.forms.UpdateTelefonoRitForm;
 import de.hybris.sdh.storefront.forms.ValidEmailForm;
 import de.hybris.sdh.storefront.forms.ValidPasswordForm;
 
@@ -412,6 +417,45 @@ public class MiRitPageController extends AbstractPageController
 		return sdhCertifNombFacade.certifNomb(request);
 	}
 
+	@RequestMapping(value = "/updateNombre", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateNombre(final CertifNombForm certifNombForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final CertifNombRequest request = new CertifNombRequest();
+
+		request.setNumBP(customerModel.getNumBP());
+		request.setApellido1(certifNombForm.getApellido1());
+		request.setApellido2(certifNombForm.getApellido2());
+		request.setName1(certifNombForm.getName1());
+		request.setName2(certifNombForm.getName2());
+
+		UpdateRitResponse response = new UpdateRitResponse();
+
+		response.setRitUpdated(false);
+
+		final CertifNombResponse certifNombResponse = sdhCertifNombFacade.certifNomb(request);
+
+		if (certifNombResponse != null && Boolean.TRUE.equals(certifNombResponse.getSuccess()))
+		{
+			final UpdateNameRitRequest updateNameRequest = new UpdateNameRitRequest();
+
+			updateNameRequest.setNumBP(customerModel.getNumBP());
+			updateNameRequest.setPrimApe(certifNombForm.getApellido1());
+			updateNameRequest.setSegApe(certifNombForm.getApellido2());
+			updateNameRequest.setPrimNom(certifNombForm.getName1());
+			updateNameRequest.setSegNom(certifNombForm.getName2());
+
+			response = sdhUpdateRitFacade.updateNameRit(updateNameRequest);
+			response.setRitUpdated(true);
+
+		}
+
+
+		return response;
+	}
+
 
 	@RequestMapping(value = "/updateEmail", method = RequestMethod.POST)
 	@ResponseBody
@@ -534,7 +578,7 @@ public class MiRitPageController extends AbstractPageController
 						.asList(mapper.readValue(updateRedesSocialesRitForm.getRedsocial(), ContribRedSocial[].class));
 
 				request.setRedsocial(redesSociales);
-
+				request.setNumBP(customerModel.getNumBP());
 
 				udpateRitResponse = sdhUpdateRitFacade.updateRedesSocialesRit(request);
 			}
@@ -545,6 +589,63 @@ public class MiRitPageController extends AbstractPageController
 				udpateRitResponse.setRitUpdated(false);
 			}
 		}
+
+
+
+		return udpateRitResponse;
+	}
+
+	@RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateAdddress(final UpdateAddressRitForm updateAddressRitForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final UpdateAddressRitRequest request = new UpdateAddressRitRequest();
+
+		UpdateRitResponse udpateRitResponse = new UpdateRitResponse();
+
+		if (StringUtils.isNotBlank(updateAddressRitForm.getAddress()))
+		{
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				final ContribDireccion direccion = mapper.readValue(updateAddressRitForm.getAddress(),
+						ContribDireccion.class);
+
+				request.setNumBP(customerModel.getNumBP());
+				request.setDireccion(direccion);
+
+				udpateRitResponse = sdhUpdateRitFacade.updateAddressRit(request);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+
+
+		return udpateRitResponse;
+	}
+
+
+	@RequestMapping(value = "/updateTelefono", method = RequestMethod.POST)
+	@ResponseBody
+	public UpdateRitResponse updateTelefono(final UpdateTelefonoRitForm updateTelefonoRitForm)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final UpdateTelefonoRitRequest request = new UpdateTelefonoRitRequest();
+		request.setNumBP(customerModel.getNumBP());
+		request.setExtension(updateTelefonoRitForm.getExtension());
+		request.setTelfonoPrincipal(updateTelefonoRitForm.getTelfonoPrincipal());
+
+		UpdateRitResponse udpateRitResponse = new UpdateRitResponse();
+
+		udpateRitResponse = sdhUpdateRitFacade.updateTelefonoRit(request);
 
 
 

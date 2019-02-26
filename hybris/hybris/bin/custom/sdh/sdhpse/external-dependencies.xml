@@ -1,0 +1,292 @@
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.hybris.platform</groupId>
+	<artifactId>sdhpse</artifactId>
+	<version>6.7.0.0-RC19</version>
+
+	<packaging>jar</packaging>
+
+	<dependencies>
+	
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>5.0.8.RELEASE</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.0.8.RELEASE</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.0.8.RELEASE</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>5.0.8.RELEASE</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.0.8.RELEASE</version>
+		</dependency>
+
+		<!-- REST Web Services Dependencies -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.9.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.4</version>
+		</dependency>
+
+		
+
+		<!-- PSE External Libraries - SDH -->
+		<dependency>
+			<groupId>activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/activation.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>addressing</groupId>
+			<artifactId>addressing-1.0</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/addressing-1.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/axis.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>axis-1.4</groupId>
+			<artifactId>axis-1.4</artifactId>
+			<version>1.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/axis-1.4.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>axis-ant</groupId>
+			<artifactId>axis-ant</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/axis-ant.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>axis-ant-1.4</groupId>
+			<artifactId>axis-ant-1.4</artifactId>
+			<version>1.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/axis-ant-1.4.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>axis-jaxrpc-1.4</groupId>
+			<artifactId>axis-jaxrpc-1.4</artifactId>
+			<version>1.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/axis-jaxrpc-1.4.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>axis-saaj-1.4</groupId>
+			<artifactId>axis-saaj-1.4</artifactId>
+			<version>1.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/axis-saaj-1.4.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec-1.3</groupId>
+			<artifactId>commons-codec-1.3</artifactId>
+			<version>1.3</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/commons-codec-1.3.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-discovery-0.2</groupId>
+			<artifactId>commons-discovery-0.2</artifactId>
+			<version>0.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/commons-discovery-0.2.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-httpclient-3.0-rc2</groupId>
+			<artifactId>commons-httpclient-3.0-rc2</artifactId>
+			<version>3.0-rc2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/commons-httpclient-3.0-rc2.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging-1.0.4</groupId>
+			<artifactId>commons-logging-1.0.4</artifactId>
+			<version>1.0.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/commons-logging-1.0.4.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>jaxrpc</groupId>
+			<artifactId>jaxrpc</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/jaxrpc.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>junit-3.8.1</groupId>
+			<artifactId>junit-3.8.1</artifactId>
+			<version>3.8.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/junit-3.8.1.jar</systemPath>
+		</dependency>
+
+		<!--  
+		<dependency>
+			<groupId>log4j-1.2.8</groupId>
+			<artifactId>log4j-1.2.8</artifactId>
+			<version>1.2.8</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/log4j-1.2.8.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j-1.2.9</groupId>
+			<artifactId>log4j-1.2.9</artifactId>
+			<version>1.2.9</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/log4j-1.2.9.jar</systemPath>
+		</dependency>
+		-->
+
+		<dependency>
+			<groupId>mailapi</groupId>
+			<artifactId>mailapi</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/mailapi.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>opensaml-1.0.1</groupId>
+			<artifactId>opensaml-1.0.1</artifactId>
+			<version>1.0.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/opensaml-1.0.1.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>saaj</groupId>
+			<artifactId>saaj</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/saaj.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>serializer-2.7.0</groupId>
+			<artifactId>serializer-2.7.0</artifactId>
+			<version>2.7.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/serializer-2.7.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>wsdl4j-1.5.1</groupId>
+			<artifactId>wsdl4j-1.5.1</artifactId>
+			<version>1.5.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/wsdl4j-1.5.1.jar</systemPath>
+		</dependency>
+
+		<!--  
+		<dependency>
+			<groupId>wss4j-1.5.4</groupId>
+			<artifactId>wss4j-1.5.4</artifactId>
+			<version>1.5.4</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/wss4j-1.5.4.jar</systemPath>
+		</dependency>
+		-->
+
+		<dependency>
+			<groupId>xalan-2.7.0</groupId>
+			<artifactId>xalan-2.7.0</artifactId>
+			<version>2.7.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/xalan-2.7.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>xmlsec-1.4.0</groupId>
+			<artifactId>xmlsec-1.4.0</artifactId>
+			<version>1.4.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/xmlsec-1.4.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>xercesImpl</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/xercesImpl.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/externalLibs/xml-apis.jar</systemPath>
+		</dependency>
+	
+	</dependencies>
+</project>
