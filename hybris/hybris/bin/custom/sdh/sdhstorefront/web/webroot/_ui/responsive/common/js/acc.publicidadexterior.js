@@ -84,9 +84,9 @@ ACC.publicidadexterior = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores)
 	            		{
+		            		$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
     	            		});
@@ -97,10 +97,12 @@ ACC.publicidadexterior = {
 	            			$("#intmora").val("");
 	            			$("#totpag").val("");
 	            			$("#numForm").val("");
+	            			
+	            			$('#generaDeclaracionButton').prop("disabled", true);
 		            		
 	            		}else
 	            		{
-	            			$("#publicidadExteriorDialogContent").html("El cálculo se ha realizado exitosamente.")
+//	            			$("#publicidadExteriorDialogContent").html("El cálculo se ha realizado exitosamente.")
 	            			
 	            			$("#impCar").val(data.impCargo);
 	            			$("#valsan").val(data.vlrSancion);
@@ -108,6 +110,8 @@ ACC.publicidadexterior = {
 	            			$("#intmora").val(data.interesMora);
 	            			$("#totpag").val(data.totalPagar);
 	            			$("#numForm").val(data.numForm);
+	            			
+	            			$('#generaDeclaracionButton').prop("disabled", false);
 	            			
 	            		}
 	 	      		
