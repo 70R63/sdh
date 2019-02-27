@@ -12,6 +12,7 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -36,7 +37,7 @@ public class ReportantesPageController extends AbstractPageController
 
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
-	private static final String REPORTANTES_CMS_PAGE = "reportantesInfoPage";
+	private static final String REPORTANTES_CMS_PAGE = "miRitPage";
 
 
 	@Resource(name = "sessionService")
@@ -52,12 +53,8 @@ public class ReportantesPageController extends AbstractPageController
 	//	SDHCreaModContribuyenteFacade sdhCreaModContribuyenteFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showView(final Model model,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String showView(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-
-
-
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(REPORTANTES_CMS_PAGE));
@@ -65,5 +62,10 @@ public class ReportantesPageController extends AbstractPageController
 		updatePageTitle(model, getContentPageForLabelOrId(REPORTANTES_CMS_PAGE));
 
 		return getViewForPage(model);
+	}
+
+	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
+	{
+		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 }
