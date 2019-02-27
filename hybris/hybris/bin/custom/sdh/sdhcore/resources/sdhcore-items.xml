@@ -155,6 +155,10 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
+        			<attribute qualifier="lastName" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
         			<attribute qualifier="secondLastName" type="java.lang.String">
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
@@ -270,6 +274,9 @@
         				<persistence type="property"></persistence>
         			</attribute>
         			<attribute qualifier="phoneNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="extension" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
        			</attributes>

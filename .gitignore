@@ -220,3 +220,4 @@ hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHGasTax.java
 hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHAgent.java
 hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHAddress.java
 hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHSocialNetwork.java
+hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHExteriorPublicityTax.java
