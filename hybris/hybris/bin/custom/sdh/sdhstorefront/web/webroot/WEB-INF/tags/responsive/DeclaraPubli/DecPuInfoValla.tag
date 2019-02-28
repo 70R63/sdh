@@ -25,19 +25,22 @@
 		<div class="form-group">
 			<label class="control-label"><spring:theme
 					code="declaracion.publicidad.luginst" /></label>
-			<c:choose>
-				<c:when test="${declaPublicidadForm.tipoValla eq '01' || declaPublicidadForm.tipoValla eq '03' || declaPublicidadForm.tipoValla eq '04' ||declaPublicidadForm.tipoValla eq '05'}">
 					<input id="luginst" name="luginst" class="form-control"
+						aria-required="true" type="hidden" value="${declaPublicidadForm.luginst}" maxlength="30"
+						disabled="disabled">
+			<c:choose>
+				<c:when test="${declaPublicidadForm.luginst eq '01'}">
+					<input  class="form-control"
 						aria-required="true" type="text" value="Predio" maxlength="30"
 						disabled="disabled">
 				</c:when>
-				<c:when test="${declaPublicidadForm.tipoValla eq '02'}">
-					<input id="luginst" name="luginst" class="form-control"
+				<c:when test="${declaPublicidadForm.luginst eq '02'}">
+					<input  class="form-control"
 						aria-required="true" type="text" value="Vehículo" maxlength="30"
 						disabled="disabled">
 				</c:when>
 				<c:otherwise>
-					<input id="luginst" name="luginst" class="form-control"
+					<input  class="form-control"
 						aria-required="true" type="text" value="" maxlength="30"
 						disabled="disabled">
 				</c:otherwise>
@@ -52,45 +55,48 @@
 		<div class="form-group">
 			<label class="control-label"><spring:theme
 					code="declaracion.publicidad.OrValla" /></label>
-
+			<input id="orValla" name="orValla" class="form-control"
+						aria-required="true" type="hidden" value="${declaPublicidadForm.orValla}"
+						maxlength="30" disabled="disabled">
 			<c:choose>
 				<c:when test="${declaPublicidadForm.orValla eq '1'}">
-					<input id="orValla" name="orValla" class="form-control"
+					<input class="form-control"
 						aria-required="true" type="text" value="Oriente-Occidente"
 						maxlength="30" disabled="disabled">
+						
 				</c:when>
 				<c:when test="${declaPublicidadForm.orValla eq '2'}">
-					<input id="orValla" name="orValla" class="form-control"
+					<input class="form-control"
 						aria-required="true" type="text" value="Occidente-Oriente"
 						maxlength="30" disabled="disabled">
 				</c:when>
 				<c:when test="${declaPublicidadForm.orValla eq '3'}">
-					<input id="orValla" name="orValla" class="form-control"
+					<input  class="form-control"
 						aria-required="true" type="text" value="Norte-Sur" maxlength="30"
 						disabled="disabled">
 				</c:when>
 				<c:when test="${declaPublicidadForm.orValla eq '4'}">
-					<input id="orValla" name="orValla" class="form-control"
+					<input  class="form-control"
 						aria-required="true" type="text" value="Sur-Norte" maxlength="30"
 						disabled="disabled">
 				</c:when>
 				<c:when test="${declaPublicidadForm.orValla eq '5'}">
-					<input id="orValla" name="orValla" class="form-control"
+					<input  class="form-control"
 						aria-required="true" type="text" value="Derecha" maxlength="30"
 						disabled="disabled">
 				</c:when>
 				<c:when test="${declaPublicidadForm.orValla eq '6'}">
-					<input id="orValla" name="orValla" class="form-control"
+					<input  class="form-control"
 						aria-required="true" type="text" value="Izquierda" maxlength="30"
 						disabled="disabled">
 				</c:when>
 				<c:when test="${declaPublicidadForm.orValla eq '7'}">
-					<input id="orValla" name="orValla" class="form-control"
+					<input  class="form-control"
 						aria-required="true" type="text" value="Ambos sentidos"
 						maxlength="30" disabled="disabled">
 				</c:when>
 				<c:otherwise>
-					<input id="orValla" name="orValla" class="form-control"
+					<input  class="form-control"
 						aria-required="true" type="text" value="" maxlength="30"
 						disabled="disabled">
 				</c:otherwise>
@@ -108,7 +114,7 @@
 					code="declaracion.publicidad.tamvalla" /></label>
 
 			<c:choose>
-				<c:when test="${declaPublicidadForm.tipoValla eq '01' || declaPublicidadForm.tipoValla eq '03'|| declaPublicidadForm.tipoValla eq '04' || declaPublicidadForm.tipoValla eq '05'}">
+				<c:when test="${declaPublicidadForm.luginst eq '01'}">
 					<select id="tamValla" class="form-control">
 						<c:set var="selected" value="" />
 						<c:if test="${declaPublicidadForm.basegrav eq '01' }">
@@ -129,7 +135,7 @@
 							constructores de más de 8 m2</option>
 					</select>
 				</c:when>
-				<c:when test="${declaPublicidadForm.tipoValla eq '02'}">
+				<c:when test="${declaPublicidadForm.luginst eq '02'}">
 					<option value="04">Vallas en vehículos automotores con
 						dimensión superior a 8 m2</option>
 				</c:when>
