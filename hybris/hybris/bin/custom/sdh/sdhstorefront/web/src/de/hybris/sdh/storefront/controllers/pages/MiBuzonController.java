@@ -32,7 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
-@RequestMapping("/contribuyentes/mibuzontributario/inicialmirit")
+@RequestMapping("/contribuyentes/mibuzontributario/inicial")
 public class MiBuzonController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);

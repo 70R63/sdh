@@ -140,6 +140,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;DeclaracionesLink;"Declaraciones";"Haga clic aquí para ir a Declaraciones"
 ;;PagosLink;"Pagos";"Haga clic aquí para ir a Pagos"
 ;;ConsultasLink;"Consultas";"Haga clic aquí para ir a las consultas"
+;;ReportantesLink;"Mi Información Reportada";"Hagaclic aquí para ir a su Información Reportada"
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 
@@ -184,6 +185,10 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;ObligacionesPendLink;"Obligaciones pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
 ;;RelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
 ;;EdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
+
+;;CargaLink;"Carga de Documentos";"Haga clic aquí para acceder a la opción de Carga de Documentos"
+;;HistoricoLink;"Histórico de reportes";"Haga clic aquí para acceder a la opción de Histórico de reportes"
+;;SancionesLink;"Sanciones impuestas";"Haga clic aquí para acceder a la opción Sanciones impuestas"
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 #*->-------------------------------------------------------------------------------------------------------------------------
