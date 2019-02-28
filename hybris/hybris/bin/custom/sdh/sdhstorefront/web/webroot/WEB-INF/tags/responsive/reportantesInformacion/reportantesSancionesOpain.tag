@@ -11,10 +11,13 @@
 
 
 <div class="container">
+	<br>
+	<hr
+		style="background-color: #56ace3 !important; border-top: 1px solid #56ace3 !important;" />
 
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table border" id="example">
+			<table class="table border">
 				<thead style="cellspacing: 10 !important">
 					<tr>
 						<th style="text-align: center"><label class="control-label"
@@ -39,9 +42,12 @@
 									code="representantes.info.historico.opain.articulo1" /></td>
 						<td style="width: 416px !important;"><input type="text"
 							class="form-control" id="exampleFormControlFile1" disabled></td>
-						<td style="text-align: center !important"><label
-							class="control-label" for=""> <spring:theme
-									code="representantes.info.sanciones.opain.ver" /></label></td>
+						<td
+							style="text-align: center !important; color: #0358d8 !important"><label
+							class="control-label" for=""
+							style="text-align: center !important; color: #0358d8 !important">
+								<spring:theme code="representantes.info.sanciones.opain.ver" />
+						</label></td>
 					</tr>
 				</tbody>
 			</table>

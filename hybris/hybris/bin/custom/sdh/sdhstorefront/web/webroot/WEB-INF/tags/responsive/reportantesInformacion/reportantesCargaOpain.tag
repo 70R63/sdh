@@ -33,7 +33,8 @@
 	<div class="row">
 		<div class="form-group">
 			<label class="control-label"><spring:theme
-					code="representantes.info.opain.pasos" /></label>
+					code="representantes.info.opain.pasos1" /></label><p><label class="control-label"><spring:theme
+					code="representantes.info.opain.pasos2" /></label>
 		</div>
 	</div>
 

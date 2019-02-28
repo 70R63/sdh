@@ -34,7 +34,10 @@
 	<div class="row">
 		<div class="form-group">
 			<label class="control-label"><spring:theme
-					code="representantes.info.vehiculos.pasos" /></label>
+					code="representantes.info.vehiculos.pasos1" /></label>
+			<p>
+				<label class="control-label"><spring:theme
+						code="representantes.info.vehiculos.pasos2" /></label>
 		</div>
 	</div>
 
