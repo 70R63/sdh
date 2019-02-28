@@ -9,6 +9,8 @@ import de.hybris.platform.cronjob.model.CronJobModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable;
 import de.hybris.platform.servicelayer.cronjob.PerformResult;
+import de.hybris.sdh.core.model.PseBankListCatalogModel;
+import de.hybris.sdh.core.services.SDHPseBankListCatalogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
 import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
@@ -32,16 +34,24 @@ public class PseBankListCatalogPerformable extends AbstractJobPerformable<CronJo
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 
+	@Resource(name = "sdhPseBankListCatalogService")
+	private SDHPseBankListCatalogService sdhPseBankListCatalogService;
+
 	@Override
 	public PerformResult perform(final CronJobModel arg0)
 	{
+		final PseBankListCatalogModel bankEntryModel;
 		final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionData(),this.getMessageHeader());
-		LOG.info("bankList -> " + bankList);
-		if(bankList != null) { 
+
+		sdhPseBankListCatalogService.deleteAll();
+		if(bankList != null) {
 			for(final GetBankListResponseInformationType bank : bankList) {
-				System.out.println(bank.getFinancialInstitutionCode() + " - " + bank.getFinancialInstitutionName());
+				sdhPseBankListCatalogService.newBankEntry(bank.getFinancialInstitutionCode(), bank.getFinancialInstitutionName());
 			}
 		}
+
+		LOG.info("Pse Bank List Catalog Performable - CronJob - Finished");
+
 		return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
 	}
 
