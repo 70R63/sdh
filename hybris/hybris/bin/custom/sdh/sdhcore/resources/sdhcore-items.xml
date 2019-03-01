@@ -377,6 +377,35 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<itemtype generate="true" code="PseBankListCatalog" extends="GenericItem" autocreate="true" >
+				<deployment table="PseBankListCatalog" typecode="20000" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="financialInstitutionCode">
+						<description>Financial Institution Code</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="financialInstitutionName">
+						<description>Financial Institution Name</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+        	
+<!--         	<itemtype code="IdentificationDocumentType" autocreate="true" generate="true"> -->
+<!--         		<description>Added to hold ID document type</description> -->
+<!--         		<attributes> -->
+<!--         			<attribute type="code" qualifier="java.lang.String"> -->
+<!--         				<persistence type="property"></persistence> -->
+<!--         				<modifiers unique="true"/> -->
+<!--         			</attribute> -->
+<!--         			<attribute type="description" qualifier="localized:java.lang.String"> -->
+<!--         				<persistence type="property"></persistence> -->
+<!--         			</attribute> -->
+<!--         		</attributes> -->
+<!--         	</itemtype> -->
         </typegroup>
     </itemtypes>
 </items>

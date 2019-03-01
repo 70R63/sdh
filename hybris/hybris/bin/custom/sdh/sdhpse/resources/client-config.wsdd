@@ -20,13 +20,13 @@
   </requestFlow>
   <responseFlow>
    <handler type="java:org.apache.ws.axis.security.WSDoAllReceiver">
-    <parameter name="user" value="ac raiz demo certicamara s.a"/>
+    <parameter name="user" value="sdh4"/>
     <parameter name="signatureKeyIdentifier" value="DirectReference"/>
     <parameter name="signaturePropFile" value="sdhPPE.properties"/>
     <parameter name="passwordCallbackClass" value="de.hybris.sdh.core.soap.pse.util.PWCallback"/>
     <parameter name="timeToLive" value="0"/>
     <parameter name="action" value="Signature Timestamp"/>
-    <parameter name="signatureUser" value="pse"/>
+    <parameter name="signatureUser" value="sdh4"/>
     <parameter name="enableSignatureConfirmation" value="false"/>
    </handler>
   </responseFlow>

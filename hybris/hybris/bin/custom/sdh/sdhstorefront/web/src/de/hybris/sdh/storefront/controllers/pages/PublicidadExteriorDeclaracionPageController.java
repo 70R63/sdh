@@ -146,19 +146,19 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				{
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4() + " ");
 					}
 				}
 			}
@@ -169,19 +169,19 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe() + " ");
 					}
 				}
 
@@ -247,7 +247,16 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				declaPublicidadForm.setFechnotif(localDate.format(formatter2));
 			}
 
+			//			final Optional optional = detallePublicidadResponse.getDetalle().stream()
+			//					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
+			//
+			//			if (Boolean.TRUE.equals(optional.isPresent()))
+			//			{
+			//				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
+			//			}
+
 			declaPublicidadForm.setOrValla(detallePublicidadResponse.getInfoDeclara().getOrientacionValla());
+
 			declaPublicidadForm.setLuginst(detallePublicidadResponse.getInfoDeclara().getLugarInstala());
 			declaPublicidadForm.setBasegrav(detallePublicidadResponse.getInfoDeclara().getTamanoValla());
 			declaPublicidadForm.setOpuso(detallePublicidadResponse.getInfoDeclara().getOpcionUso());
@@ -335,7 +344,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		calcPublicidadRequest.setDireccion(dataForm.getDireccion());
 		calcPublicidadRequest.setPlaca(dataForm.getPlaca());
 		calcPublicidadRequest.setOrientacionValla(dataForm.getOrValla());
-		calcPublicidadRequest.setTamanoValla(dataForm.getBasegrav());
+		calcPublicidadRequest.setTamanoValla(dataForm.getTamValla());
 		calcPublicidadRequest.setTipoIDcontrib(customerModel.getDocumentType());
 		calcPublicidadRequest.setIDcontrib(customerModel.getDocumentNumber());
 		calcPublicidadRequest.setMunicipioContrib(dataForm.getMunicipioContrib());
