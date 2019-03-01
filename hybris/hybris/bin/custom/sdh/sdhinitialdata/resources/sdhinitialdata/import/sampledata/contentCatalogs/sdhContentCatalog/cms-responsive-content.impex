@@ -136,7 +136,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
-; ; CertPagoLink                 ; CONSULTAS LINK                      ; http://www.stateofrosebud.com/about ;;;;;
+; ; CertPagoLink                 ; CONSULTAS LINK                      ; "/contribuyentes/consultas/certipagos" ;;;;;
 ; ; ObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; http://www.stateofrosebud.com/about ;;;;;
 ; ; RelPagosLink                 ; RELACION DE PAGOS LINK              ; http://www.stateofrosebud.com/about ;;;;;
 ; ; EdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/contribuyentes/estado-de-cuenta" ;;;;;
@@ -1683,7 +1683,8 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;reportantesSancionesPage 		;Reportantes Sanciones	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes/sanciones
 
-###### SDH - UPDATE EXAMPLE FORM START ######INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesSancionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesSancionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-reportantesSancionesPage 	;SideContent			;																	;SideContent-reportantesSancionesPage				;;;
 								;						;BodyContent-reportantesSancionesPage 	;BodyContent			;																	;BodyContent-reportantesSancionesPage				;;;
 								
@@ -1698,3 +1699,25 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;reportantesSancionesPageComponent	;reportantesSancionesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesSancionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesSancionesPageComponent	
 
 #->FIN dev-maria Agregar paginas para Reportantes 19/02/2019
+
+#->INI dev-maria Agregar paginas para Certificacion de Pagos 28/02/2019
+
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;certiPagoPage 		;Certificacion Pago 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/certipagos
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='certiPagoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-certiPagoPage 		;SideContent				;															;SideContent-certiPagoPage						;;;
+								;						;BodyContent-certiPagoPage		;BodyContent				;															;BodyContent-certiPagoPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-certiPagoPage 	;Side Content Slot for Certificacion Pago			;true	;								;;;
+							;							;BodyContent-certiPagoPage	;Body Content Slot for Certificacion Pago			;true	;certiPagoPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;certiPagoPageComponent	;certiPagoPage Component	;/WEB-INF/views/responsive/pages/layout/certiPagoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;certiPagoPageComponent					
+									
+									#->FIN dev-maria Agregar paginas para Certificacion de Pagos 28/02/2019
