@@ -305,6 +305,7 @@
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
+			document.getElementById("Idimp").value = '';
 		} else {
 			idImpuesto.style.display = 'none';
 			idAnio.style.display = 'none';

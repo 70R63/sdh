@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="certificacion"
-	tagdir="/WEB-INF/tags/responsive/certifiPago"%>
+	tagdir="/WEB-INF/tags/responsive/consultas"%>
 
 
 <div class="container">
