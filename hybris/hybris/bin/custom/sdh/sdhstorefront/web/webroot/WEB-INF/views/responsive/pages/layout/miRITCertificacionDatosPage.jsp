@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<spring:htmlEscape defaultHtmlEscape="true" />
 
 
 <style>
@@ -39,7 +40,7 @@ input[type=radio] {
 	    		for( a_index = 0; a_index < a_array.length; a_index++ ) {
 		    		itext = a_array[a_index].getAttribute('href');
 		    		
-		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("delineacion-urbana")) ) ||
+		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("delineacion")) ) ||
 		    			( (bIca != "X") && (itext.includes("icareteica"))                       ) ||
 		    			( (bPredial != "X") && (itext.includes("predialunificado"))             ) ||
 		    			( (bPublicidadExt != "X") && (itext.includes("publicidadexterior"))     ) ||
@@ -71,7 +72,7 @@ input[type=radio] {
 
 <script>
 	function downloadPDF(pdf) {
-		
+		debugger;
 		if (pdf){
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 		    const downloadLink = document.createElement("a");
@@ -84,18 +85,10 @@ input[type=radio] {
 	}
 	
 	
-	downloadPDF('${miRitCertificacionForm.rit.stringRIT}');
+	downloadPDF('${miRitCertificacionFormResp.rit.stringRIT}');
 </script>
 
- <!--
- 
- 
-<div class="col-md-2" >
-			<button class="btn btn-primary btn-block" type="button" style="margin-top: 30px;margin-left: 40px" onclick='borrarMenu("${miRitCertificacionForm.bPredial}", "${miRitCertificacionForm.bVehicular}", "${miRitCertificacionForm.bIca}", "${miRitCertificacionForm.bPublicidadExt}", "${miRitCertificacionForm.bSobreGasolina}", "${miRitCertificacionForm.bDelineacionUrbana}")'>
-				<spring:theme code="mirit.certificacion.btnGenerar" />
-			</button>
-		</div>
--->
+
 
 <div class="row">
  	<div class=" headline">
@@ -105,7 +98,7 @@ input[type=radio] {
 	</div>
 </div>
 
- <form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/mirit/certificacion/datos" method="post" commandName="miRitCertificacionForm" >
+ <form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/mirit/certificacion-datos" method="post" commandName="miRitCertificacionForm" >
        
 	<br>
 	  <div class="row">  
@@ -145,7 +138,6 @@ input[type=radio] {
 				<c:if test="${miRitCertificacionForm.bPredial == 'X'}">
 					<input type="radio" name="tipoImp" id="tipoImp" value="01" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
 				</c:if>
-				
 				
 				<c:if test="${miRitCertificacionForm.bVehicular == 'X'}">
 					<input type="radio" name="tipoImp" id="tipoImp" value="02" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
