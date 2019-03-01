@@ -100,7 +100,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 
 #->INI dev-eduardo Agregar submenu MI RIT 04/01/2019
-; ; CertRitLink        ; CERTIFICACION RIT                             ; "/contribuyentes/mirit/certificacion/datos" ;;;;;
+; ; CertRitLink        ; CERTIFICACION RIT                             ; "/contribuyentes/mirit/certificacion-datos" ;;;;;
 #->FIN dev-eduardo Agregar submenu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar submenu MI BUZON 04/01/2019

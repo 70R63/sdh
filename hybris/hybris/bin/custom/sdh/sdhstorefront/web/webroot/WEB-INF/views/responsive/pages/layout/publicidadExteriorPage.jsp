@@ -9,6 +9,8 @@
 	tagdir="/WEB-INF/tags/responsive/publicidadExterior"%>
 <%@ taglib prefix="newpublicidad"
 	tagdir="/WEB-INF/tags/responsive/newpublicidad"%>
+	
+<spring:htmlEscape defaultHtmlEscape="true" />	
 
 
 <style>
@@ -62,7 +64,7 @@
 	    		for( a_index = 0; a_index < a_array.length; a_index++ ) {
 		    		itext = a_array[a_index].getAttribute('href');
 		    		
-		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("delineacion-urbana"))  ) ||
+		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("delineacion"))  ) ||
 		    			( (bIca != "X") && (itext.includes("icareteica"))                        ) ||
 		    			( (bPredial != "X") && (itext.includes("predialunificado"))              ) ||
 		    			( (bPublicidadExt != "X") && (itext.includes("publicidadexterior"))      ) ||

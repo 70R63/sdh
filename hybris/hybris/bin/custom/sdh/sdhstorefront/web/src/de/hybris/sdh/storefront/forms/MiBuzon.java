@@ -3,42 +3,25 @@
  */
 package de.hybris.sdh.storefront.forms;
 
-import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
-
-import java.util.List;
-
-
 /**
  * @author Consultor
  *
  */
-public class UIContribuyenteForm
+public class MiBuzon
 {
+
+	//*->INI dev-eduardo ajuste de menu impuestos
 	private String bPredial;
 	private String bVehicular;
 	private String bIca;
 	private String bPublicidadExt;
 	private String bSobreGasolina;
 	private String bDelineacionUrbana;
-	private List<NombreRolResponse> roles;
 
 
-	/**
-	 * @return the roles
-	 */
-	public List<NombreRolResponse> getRoles()
-	{
-		return roles;
-	}
 
-	/**
-	 * @param roles
-	 *           the roles to set
-	 */
-	public void setRoles(final List<NombreRolResponse> roles)
-	{
-		this.roles = roles;
-	}
+
+
 
 	/**
 	 * @return the bPredial
@@ -141,5 +124,7 @@ public class UIContribuyenteForm
 	{
 		this.bDelineacionUrbana = bDelineacionUrbana;
 	}
+
+	//*->FIN dev-eduardo ajuste de menu impuestos
 
 }

@@ -16,47 +16,65 @@
 <script>
 	function borrarMenu(bPredial, bVehicular, bIca, bPublicidadExt, bSobreGasolina, bDelineacionUrbana) {
 		
-		debugger;
+		debugger; 
 		
 		var li_array = document.getElementsByTagName('li');
-		var borrar_index;
-		var submenu_index;
 		var li_index;
-		var a_index;
-		var itext;
+		var currentUrl = document.URL;
+		var inner_Text;
+		var error_message;
+		var counter;
 		
-	    
-		for( submenu_index = 1; submenu_index <= 6; submenu_index++ ) {
-	    	for( li_index = 7; li_index <= 19; li_index++ ) {
-	    		
-	    		a_array = li_array[li_index].getElementsByTagName('a');
-		    	
-	    		for( a_index = 0; a_index < a_array.length; a_index++ ) {
-		    		itext = a_array[a_index].getAttribute('href');
-		    		
-		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("delineacion-urbana"))   ) ||
-		    			( (bIca != "X") && (itext.includes("icareteica"))                         ) ||
-		    			( (bPredial != "X") && (itext.includes("predialunificado"))               ) ||
-		    			( (bPublicidadExt != "X") && (itext.includes("publicidadexterior"))       ) ||
-		    			( (bVehicular != "X") && (itext.includes("sobrevehiculosautomotores"))    ) ||
-		    		    ( (bSobreGasolina != "X") && (itext.includes("sobretasa-gasolina"))       )
-		    		  )			
-		    		{
-		    			borrar_index = true;
-		    			break;
-		    		}
-		    		else{
-		    			borrar_index = false;
-		    			break;
-		    		}
-			    }
-	    		
-	    		if(borrar_index){
-	    			li_array[li_index].remove();
-	    		}
+		
+		<c:forEach items="${uiContribuyenteForm.roles}" var="row_uiContribuyenteForm">
+			<c:if test = "${row_uiContribuyenteForm.nombreRol == '05'}">  
+				for( counter = 1; counter <= 7; counter++ ) {
+					for( li_index = 1; li_index <= li_array.length; li_index++ ) {	    		
+						try{
+							inner_Text = li_array[li_index].innerText;
+							
+							if( inner_Text.includes("Impuestos")	 ||
+								inner_Text.includes("Buzón")         ||
+								inner_Text.includes("Trámites")      ||
+								inner_Text.includes("Facturación")   ||
+								inner_Text.includes("Declaraciones") ||
+								inner_Text.includes("Pagos")         ||
+								inner_Text.includes("Consultas")   	
+							  ){					
+								li_array[li_index].remove();
+							}	
+						}catch(err){
+							error_message = err.message;
+						}		
+			    	}
+				}	
+			</c:if>
+		</c:forEach>
+			
+		
+		
+		for( counter = 1; counter <= 6; counter++ ) {
+			for( li_index = 1; li_index <= li_array.length; li_index++ ) {
+				try{
+					inner_Text = li_array[li_index].innerText;
+					
+					if( ( (bDelineacionUrbana != "X") && (inner_Text.includes("Delineación Urbana"))                ) ||
+		    			( (bIca != "X")               && (inner_Text.includes("ICA"))                               ) ||
+		    			( (bPredial != "X")           && (inner_Text.includes("Predial unificado"))                 ) ||
+		    			( (bPublicidadExt != "X")     && (inner_Text.includes("Publicidad exterior"))               ) ||
+		    			( (bVehicular != "X")         && (inner_Text.includes("Sobre vehículos automotores"))       ) ||
+		    		    ( (bSobreGasolina != "X")     && (inner_Text.includes("Sobretasa a la gasolina"))           )
+			    	  )		
+					{
+						li_array[li_index].remove();
+					}
+				}catch(err){
+					error_message = err.message;
+				}
 	    	}
 		}	
+		
 	}	
 	
-	borrarMenu("${uiContribuyenteForm.bPredial}", "${uiContribuyenteForm.bVehicular}", "${uiContribuyenteForm.bIca}", "${uiContribuyenteForm.bPublicidadExt}", "${uiContribuyenteForm.bSobreGasolina}", "${uiContribuyenteForm.bDelineacionUrbana}");	
+	borrarMenu("${uiContribuyenteForm.bPredial}", "${uiContribuyenteForm.bVehicular}", "${uiContribuyenteForm.bIca}", "${uiContribuyenteForm.bPublicidadExt}", "${uiContribuyenteForm.bSobreGasolina}", "${uiContribuyenteForm.bDelineacionUrbana}", "${uiContribuyenteForm.roles}");	
 </script>

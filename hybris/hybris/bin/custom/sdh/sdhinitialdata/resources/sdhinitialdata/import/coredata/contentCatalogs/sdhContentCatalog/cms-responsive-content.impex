@@ -1606,11 +1606,11 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 #->INI dev-eduardo Pantalla de menu MiRIT->Certificacion Datos 23/01/2019
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		            ;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;miRITCertificacionDatosPage 	;Mi RIT Certificacion Datos	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mirit/certificacion/datos
+			 				;							;certificacion-datos 	;Certificacion RIT	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mirit/certificacion-datos
 
 
 ###### SDH - UPDATE EXAMPLE FORM START ######
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]			      	;position[unique=true]		;page(uid,$contentCV)[unique=true][default='miRITCertificacionDatosPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]			      	;position[unique=true]		;page(uid,$contentCV)[unique=true][default='certificacion-datos']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-miRITCertificacionDatosPage 	;SideContent		     	;																	;SideContent-miRITCertificacionDatosPage				;;;
 								;						;BodyContent-miRITCertificacionDatosPage 	;BodyContent			    ;																	;BodyContent-miRITCertificacionDatosPage				;;;
 
