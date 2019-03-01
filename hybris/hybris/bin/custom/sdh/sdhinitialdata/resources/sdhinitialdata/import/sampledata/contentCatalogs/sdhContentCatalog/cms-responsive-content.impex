@@ -1683,7 +1683,8 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;reportantesSancionesPage 		;Reportantes Sanciones	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes/sanciones
 
-###### SDH - UPDATE EXAMPLE FORM START ######INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesSancionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesSancionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-reportantesSancionesPage 	;SideContent			;																	;SideContent-reportantesSancionesPage				;;;
 								;						;BodyContent-reportantesSancionesPage 	;BodyContent			;																	;BodyContent-reportantesSancionesPage				;;;
 								
