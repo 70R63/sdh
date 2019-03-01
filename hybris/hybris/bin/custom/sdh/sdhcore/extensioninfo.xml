@@ -17,6 +17,7 @@
 		<requires-extension name="acceleratorcms"/>
 		<requires-extension name="solrserver"/>
 		<requires-extension name="xyformsservices"/>
+		<requires-extension name="sdhpse"/>
 
 		<coremodule generated="true" manager="de.hybris.sdh.core.jalo.SdhCoreManager" packageroot="de.hybris.sdh.core"/>
 
