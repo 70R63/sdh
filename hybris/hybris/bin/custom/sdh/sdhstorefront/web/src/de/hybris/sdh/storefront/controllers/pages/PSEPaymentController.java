@@ -4,12 +4,17 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.sdh.core.dao.PseBankListCatalogDao;
+import de.hybris.sdh.core.model.PseBankListCatalogModel;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -31,6 +36,10 @@ public class PSEPaymentController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(PSEPaymentController.class); //new
 	private static final String CMS_SITE_PAGE_PAGO_PSE = "PagoPSEPage";
 	private static final String CMS_SITE_PAGE_PAGO_EN_lINEA = "PagoEnLineaPSEPage";
+
+
+	@Resource(name = "pseBankListCatalogDao")
+	private PseBankListCatalogDao pseBankListCatalogDao;
 
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getIdTipoDeImpuesto()
@@ -88,12 +97,11 @@ public class PSEPaymentController extends AbstractPageController
 	@ModelAttribute("banco")
 	public List<SelectAtomValue> getIdBanco()
 	{
-
-		final List<SelectAtomValue> banco = Arrays.asList(
-				new SelectAtomValue("01", "Bancolombia"),
-				new SelectAtomValue("02", "BBVA"),
-				new SelectAtomValue("03", "Davivienda"));
-
+		final List<SelectAtomValue> banco = new ArrayList<SelectAtomValue>(); //
+		for (final PseBankListCatalogModel bankEntry : pseBankListCatalogDao.getAllBankEntries().getResult())
+		{
+			banco.add(new SelectAtomValue(bankEntry.getFinancialInstitutionCode(), bankEntry.getFinancialInstitutionName()));
+		}
 		return banco;
 	}
 

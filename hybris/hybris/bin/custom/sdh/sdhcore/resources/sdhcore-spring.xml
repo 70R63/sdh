@@ -588,14 +588,6 @@
 	<alias name="DefaultZWS_HYBSEND_MAIL_INT" alias="DefaultZWS_HYBSEND_MAIL_CORE"/>
 	<bean id="DefaultZWS_HYBSEND_MAIL_INT" class="de.hybris.sdh.core.soap.impl.DefaultZWS_HYBSEND_MAIL_INT" />
 	
-	<!-- SOAP Web Services - PSE Comunication -->
-	<alias name="MainServicesImplLocator" alias="DefaultMainServicesImplLocator"/>
-	<bean id="MainServicesImplLocator" class="de.hybris.sdh.core.soap.pse.impl.MainServicesImplLocator" />
-	
-	<alias name="servicePSE" alias="DefaultServicePSE"/>
-	<bean id="servicePSE" class="de.hybris.sdh.core.soap.pse.impl.DefaultServicePSE" />
-	
-	
 	<alias name="DefaultSDHGetQuestionsForRegistration" alias="SDHGetQuestionsForRegistration"/>
 	<bean id="DefaultSDHGetQuestionsForRegistration" class="de.hybris.sdh.core.services.impl.DefaultSDHGetQuestionsForRegistration" />
 	
@@ -604,5 +596,16 @@
 	<bean id="sdhUpdateRitService" class="de.hybris.sdh.core.services.impl.DefaultSDHUpdateRitService" />
 	
 	<bean id="sdhGeneraDeclaracionService" class="de.hybris.sdh.core.services.impl.DefaultSDHGeneraDeclaracionService" />
+	
+	<alias alias="pseBankListCatalogPerformable" name="pseBankListCatalogPerformable"/>
+	<bean id="pseBankListCatalogPerformable" class="de.hybris.sdh.core.job.PseBankListCatalogPerformable" parent="abstractJobPerformable"/>
+	
+	<alias alias="pseBankListCatalogDao" name="defaultPseBankListCatalogDao"/>
+	<bean id="defaultPseBankListCatalogDao" class="de.hybris.sdh.core.dao.impl.DefaultPseBankListCatalogDao">
+		<constructor-arg value="PseBankListCatalog"/>
+	</bean>
+	
+	<alias alias="sdhPseBankListCatalogService" name="defaultSDHPseBankListCatalogService"/>
+	<bean id="defaultSDHPseBankListCatalogService" class="de.hybris.sdh.core.services.impl.DefaultSDHPseBankListCatalogService"/>
 	
 </beans>
