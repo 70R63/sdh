@@ -224,4 +224,13 @@ public class CreateTransactionPaymentResponseInformationType  implements java.io
             _javaType, _xmlType, typeDesc);
     }
 
+	@Override
+	public String toString()
+	{
+		return "CreateTransactionPaymentResponseInformationType [trazabilityCode=" + trazabilityCode + ", returnCode=" + returnCode
+				+ ", bankurl=" + bankurl + ", transactionCycle=" + transactionCycle + "]";
+	}
+    
+    
+
 }
