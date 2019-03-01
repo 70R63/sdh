@@ -22,7 +22,7 @@
         <collectiontype code="SDHSocialNetworkList" elementtype="SDHSocialNetwork" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHRolList" elementtype="SDHRol" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHExteriorPublicityTaxList" elementtype="SDHExteriorPublicityTax" autocreate="true" generate="true" type="list"/>
-        <collectiontype code="SDHGasTaxList" elementtype="SDHExteriorPublicityTax" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHGasTaxList" elementtype="SDHGasTax" autocreate="true" generate="true" type="list"/>
         
     </collectiontypes>
 
@@ -215,7 +215,19 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
-        			<attribute qualifier="addrressList" type="SDHAddressList">
+        			<attribute qualifier="digVer" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="legalEntity" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="legalOrg" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="addressList" type="SDHAddressList">
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
@@ -262,6 +274,9 @@
         				<persistence type="property"></persistence>
         			</attribute>
         			<attribute qualifier="region" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="postalCode" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
        			</attributes>
@@ -336,6 +351,9 @@
         		<description>Custom SDH Model to save agent data</description>
         		<deployment table="SDHAGENT" typecode="15008"/>
        			<attributes>
+       				<attribute qualifier="agent" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
        				<attribute qualifier="documentNumber" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
