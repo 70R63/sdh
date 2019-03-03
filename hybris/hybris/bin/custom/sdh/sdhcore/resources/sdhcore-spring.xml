@@ -597,8 +597,10 @@
 	
 	<bean id="sdhGeneraDeclaracionService" class="de.hybris.sdh.core.services.impl.DefaultSDHGeneraDeclaracionService" />
 	
+	 
 	<alias alias="pseBankListCatalogPerformable" name="pseBankListCatalogPerformable"/>
 	<bean id="pseBankListCatalogPerformable" class="de.hybris.sdh.core.job.PseBankListCatalogPerformable" parent="abstractJobPerformable"/>
+	
 	
 	<alias alias="pseBankListCatalogDao" name="defaultPseBankListCatalogDao"/>
 	<bean id="defaultPseBankListCatalogDao" class="de.hybris.sdh.core.dao.impl.DefaultPseBankListCatalogDao">
@@ -607,5 +609,8 @@
 	
 	<alias alias="sdhPseBankListCatalogService" name="defaultSDHPseBankListCatalogService"/>
 	<bean id="defaultSDHPseBankListCatalogService" class="de.hybris.sdh.core.services.impl.DefaultSDHPseBankListCatalogService"/>
+	
+	<alias alias="pseTransactionsLogService" name="defaultSDHPseTransactionsLogService"/>
+	<bean id="defaultSDHPseTransactionsLogService" class="de.hybris.sdh.core.services.impl.DefaultSDHPseTransactionsLogService"/>
 	
 </beans>
