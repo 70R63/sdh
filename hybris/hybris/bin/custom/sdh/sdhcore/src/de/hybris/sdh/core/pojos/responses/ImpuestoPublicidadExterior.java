@@ -13,6 +13,24 @@ public class ImpuestoPublicidadExterior
 	private String tipoValla;
 	private boolean seleccionado;
 	private String tipoVallaCode;
+	private String numObjeto;
+
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
+	}
 
 	/**
 	 *
