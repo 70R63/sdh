@@ -20,12 +20,31 @@ import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.event.SDHRegistrationEvent;
 import de.hybris.sdh.core.exceptions.SameOldPasswordException;
+import de.hybris.sdh.core.model.SDHAddressModel;
+import de.hybris.sdh.core.model.SDHAgentModel;
+import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
+import de.hybris.sdh.core.model.SDHGasTaxModel;
+import de.hybris.sdh.core.model.SDHPhoneModel;
+import de.hybris.sdh.core.model.SDHRolModel;
+import de.hybris.sdh.core.model.SDHSocialNetworkModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateCustomerCommPrefsRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
+import de.hybris.sdh.core.pojos.responses.ContribAdicionales;
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.ContribDireccion;
+import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
+import de.hybris.sdh.core.pojos.responses.ContribTelefono;
+import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
+import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
@@ -35,13 +54,16 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.xml.rpc.holders.StringHolder;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.util.Assert;
@@ -71,6 +93,13 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+
+	@Resource(name = "userService")
+	private UserService userService;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -399,6 +428,675 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		getUserService().setPassword(data.getData(), newPassword, getPasswordEncoding());
 	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#updateMiRitInfo()
+	 */
+	@Override
+	public void updateMiRitInfo()
+	{
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final String numBP = customerModel.getNumBP();
+
+		try
+		{
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+			consultaContribuyenteBPRequest.setNumBP(numBP);
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
+			final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+
+			if (null != infoContribuyente)
+			{
+				customerModel.setFirstName(infoContribuyente.getPrimNom());
+				customerModel.setMiddleName(infoContribuyente.getSegNom());
+				customerModel.setLastName(infoContribuyente.getPrimApe());
+				customerModel.setSecondLastName(infoContribuyente.getSegApe());
+
+				customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
+				customerModel.setDocumentType(infoContribuyente.getTipoDoc());
+				//TODO: save document expedition date
+
+				customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
+
+
+				final ContribAdicionales adicionales = infoContribuyente.getAdicionales();
+				if (null != adicionales)
+				{
+					customerModel.setSdhType(adicionales.getTYPE());
+					customerModel.setSdhTitle(adicionales.getTITLE());
+					customerModel.setNameOrg1(adicionales.getNAME_ORG1());
+					customerModel.setNameOrg2(adicionales.getNAME_ORG2());
+					customerModel.setNameOrg3(adicionales.getNAME_ORG3());
+					customerModel.setNameOrg4(adicionales.getNAME_ORG4());
+
+
+					customerModel.setDigVer(adicionales.getDIGVERIF());
+					customerModel.setLegalEntity(adicionales.getLEGAL_ENTY());
+					customerModel.setLegalOrg(adicionales.getLEGALORG());
+					customerModel.setUseEmailForNotifications(
+							Boolean.TRUE.equals(adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
+					customerModel.setUseInformationForInstitutionalPurposes(
+							Boolean.TRUE.equals(adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
+					//TODO: fecha de autorizacion de uso de buzon
+
+				}
+
+				//clean old addresses
+				final List<SDHAddressModel> currentAddresses = customerModel.getAddressList();
+
+				if (currentAddresses != null && !currentAddresses.isEmpty())
+				{
+					modelService.removeAll(currentAddresses);
+				}
+
+				final List<ContribDireccion> direcciones = infoContribuyente.getDireccion();
+
+				if (direcciones != null && !direcciones.isEmpty())
+				{
+
+					final List<SDHAddressModel> newAddresses = new ArrayList<SDHAddressModel>();
+
+					for (final ContribDireccion eachAddress : direcciones)
+					{
+
+						if (StringUtils.isBlank(eachAddress.getADR_KIND()))
+						{
+							continue;
+						}
+
+						final SDHAddressModel eachAddressModel = new SDHAddressModel();
+						eachAddressModel.setAddKind(eachAddress.getADR_KIND());
+						eachAddressModel.setStreet(eachAddress.getSTREET());
+						eachAddressModel.setPostalCode(eachAddress.getPOST_CODE());
+						eachAddressModel.setCity(eachAddress.getCITY1());
+						eachAddressModel.setCountry(eachAddress.getCOUNTRY());
+						eachAddressModel.setRegion(eachAddress.getREGION());
+
+						newAddresses.add(eachAddressModel);
+
+					}
+
+					modelService.saveAll(newAddresses);
+
+					customerModel.setAddressList(newAddresses);
+
+				}
+				else
+				{
+					customerModel.setAddressList(null);
+				}
+
+
+
+
+
+
+				//clean old social networks
+				final List<SDHSocialNetworkModel> socialNetworks = customerModel.getNetworkList();
+
+				if (socialNetworks != null && !socialNetworks.isEmpty())
+				{
+					modelService.removeAll(socialNetworks);
+				}
+
+				final List<ContribRedSocial> redsocial = infoContribuyente.getRedsocial();
+
+				if (redsocial != null && !redsocial.isEmpty())
+				{
+
+					final List<SDHSocialNetworkModel> newSocialNetwork = new ArrayList<SDHSocialNetworkModel>();
+
+					for (final ContribRedSocial eachSocialNetwork : redsocial)
+					{
+						if (StringUtils.isBlank(eachSocialNetwork.getRED_SOCIAL()))
+						{
+							continue;
+						}
+
+						final SDHSocialNetworkModel eachSocialNetworkModel = new SDHSocialNetworkModel();
+						eachSocialNetworkModel.setSocialNetwork(eachSocialNetwork.getRED_SOCIAL());
+						eachSocialNetworkModel.setUsername(eachSocialNetwork.getUSUARIORED());
+						newSocialNetwork.add(eachSocialNetworkModel);
+
+					}
+
+					modelService.saveAll(newSocialNetwork);
+
+					customerModel.setNetworkList(newSocialNetwork);
+				}
+				else
+				{
+					customerModel.setNetworkList(null);
+				}
+
+			}
+
+
+
+
+
+			//clean old agents
+			final List<SDHAgentModel> oldAgentModels = customerModel.getAgentList();
+
+			if (oldAgentModels != null && !oldAgentModels.isEmpty())
+			{
+				modelService.removeAll(oldAgentModels);
+			}
+
+			final List<ContribAgente> agents = sdhConsultaContribuyenteBPResponse.getAgentes();
+
+			if (agents != null && !agents.isEmpty())
+			{
+
+				final List<SDHAgentModel> newAgentModels = new ArrayList<SDHAgentModel>();
+
+				for (final ContribAgente eachAgentResponse : agents)
+				{
+					if (StringUtils.isBlank(eachAgentResponse.getNumDoc()))
+					{
+						continue;
+					}
+
+					final SDHAgentModel eachNewAgentModel = new SDHAgentModel();
+
+					eachNewAgentModel.setAgent(eachAgentResponse.getAgente());
+					eachNewAgentModel.setDocumentNumber(eachAgentResponse.getNumDoc());
+					eachNewAgentModel.setDocumentType(eachAgentResponse.getTipoDoc());
+					eachNewAgentModel.setCompleteName(eachAgentResponse.getNomCompleto());
+					eachNewAgentModel.setInternalFunction(eachAgentResponse.getFuncionInterl());
+
+
+					newAgentModels.add(eachNewAgentModel);
+
+				}
+
+				modelService.saveAll(newAgentModels);
+
+				customerModel.setAgentList(newAgentModels);
+			}
+			else
+			{
+				customerModel.setAgentList(null);
+			}
+
+
+
+			//clean old publicidad exterior taxes
+
+			final List<SDHExteriorPublicityTaxModel> oldPETaxModels = customerModel.getExteriorPublicityTaxList();
+
+			if (oldPETaxModels != null && !oldPETaxModels.isEmpty())
+			{
+				modelService.removeAll(oldPETaxModels);
+			}
+
+			final List<ImpuestoPublicidadExterior> publicidadExterior = sdhConsultaContribuyenteBPResponse.getPublicidadExt();
+
+			if (publicidadExterior != null && !publicidadExterior.isEmpty())
+			{
+
+				final List<SDHExteriorPublicityTaxModel> newPETaxModels = new ArrayList<SDHExteriorPublicityTaxModel>();
+
+				for (final ImpuestoPublicidadExterior eachPETax : publicidadExterior)
+				{
+
+					final SDHExteriorPublicityTaxModel eachNewPETaxModel = new SDHExteriorPublicityTaxModel();
+					eachNewPETaxModel.setResolutionNumber(eachPETax.getNumResolu());
+					eachNewPETaxModel.setFenceType(eachPETax.getTipoValla());
+					eachNewPETaxModel.setObjectNumber(eachPETax.getNumObjeto());
+
+
+					newPETaxModels.add(eachNewPETaxModel);
+
+				}
+
+				modelService.saveAll(newPETaxModels);
+
+				customerModel.setExteriorPublicityTaxList(newPETaxModels);
+			}
+			else
+			{
+				customerModel.setExteriorPublicityTaxList(null);
+			}
+
+
+			//clean old gas taxes
+
+			final List<SDHGasTaxModel> oldGasTaxModels = customerModel.getGasTaxList();
+
+			if (oldGasTaxModels != null && !oldGasTaxModels.isEmpty())
+			{
+				modelService.removeAll(oldGasTaxModels);
+			}
+
+			final List<ImpuestoGasolina> gasolina = sdhConsultaContribuyenteBPResponse.getGasolina();
+
+			if (gasolina != null && !gasolina.isEmpty())
+			{
+
+				final List<SDHGasTaxModel> newGasTaxModels = new ArrayList<SDHGasTaxModel>();
+
+				for (final ImpuestoGasolina eachGasolinaTax : gasolina)
+				{
+					if (StringUtils.isBlank(eachGasolinaTax.getNumDoc()))
+					{
+						continue;
+					}
+
+					final SDHGasTaxModel eachGasolinaModel = new SDHGasTaxModel();
+					eachGasolinaModel.setDocumentNumber(eachGasolinaTax.getNumDoc());
+					eachGasolinaModel.setDocumentType(eachGasolinaTax.getTipoDoc());
+					//					eachGasolinaModel.setObjectNumber(value);
+
+
+					newGasTaxModels.add(eachGasolinaModel);
+
+				}
+
+				modelService.saveAll(newGasTaxModels);
+
+				customerModel.setGasTaxList(newGasTaxModels);
+			}
+			else
+			{
+				customerModel.setGasTaxList(null);
+			}
+
+
+			modelService.save(customerModel);
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP: " + e.getMessage());
+		}
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#updateEmailRit(de.hybris.sdh.core.pojos.requests.
+	 * UpdateEmailRitRequest)
+	 */
+	@Override
+	public String updateEmailRit(final UpdateEmailRitRequest request)
+	{
+
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * de.hybris.sdh.core.services.SDHCustomerAccountService#updateAutorizacionesRit(de.hybris.sdh.core.pojos.responses.
+	 * SDHValidaMailRolResponse)
+	 */
+	@Override
+	public String updateAutorizacionesRit(final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+
+		if (null != infoContribuyente && null != infoContribuyente.getAdicionales())
+		{
+			final ContribAdicionales adicionales = infoContribuyente.getAdicionales();
+				customerModel
+						.setUseEmailForNotifications(Boolean.TRUE.equals(adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
+				customerModel.setUseInformationForInstitutionalPurposes(
+						Boolean.TRUE.equals(adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
+				//TODO: fecha de autorizacion de uso de buzon
+
+		}
+		else
+		{
+			customerModel.setUseEmailForNotifications(Boolean.FALSE.booleanValue());
+			customerModel.setUseInformationForInstitutionalPurposes(Boolean.FALSE.booleanValue());
+
+		}
+
+
+		modelService.save(customerModel);
+
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * de.hybris.sdh.core.services.SDHCustomerAccountService#updateRedesSocialesRit(de.hybris.sdh.core.pojos.responses.
+	 * SDHValidaMailRolResponse)
+	 */
+	@Override
+	public String updateRedesSocialesRit(final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		//clean old social networks
+		final List<SDHSocialNetworkModel> socialNetworks = customerModel.getNetworkList();
+
+		if (socialNetworks != null && !socialNetworks.isEmpty())
+		{
+			modelService.removeAll(socialNetworks);
+		}
+		final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+
+
+		if (infoContribuyente != null && infoContribuyente.getRedsocial() != null && !infoContribuyente.getRedsocial().isEmpty())
+		{
+			final List<ContribRedSocial> redsocial = infoContribuyente.getRedsocial();
+
+			final List<SDHSocialNetworkModel> newSocialNetwork = new ArrayList<SDHSocialNetworkModel>();
+
+			for (final ContribRedSocial eachSocialNetwork : redsocial)
+			{
+				if (StringUtils.isBlank(eachSocialNetwork.getRED_SOCIAL()))
+				{
+					continue;
+				}
+
+				final SDHSocialNetworkModel eachSocialNetworkModel = new SDHSocialNetworkModel();
+				eachSocialNetworkModel.setSocialNetwork(eachSocialNetwork.getRED_SOCIAL());
+				eachSocialNetworkModel.setUsername(eachSocialNetwork.getUSUARIORED());
+				newSocialNetwork.add(eachSocialNetworkModel);
+
+			}
+
+			modelService.saveAll(newSocialNetwork);
+
+			customerModel.setNetworkList(newSocialNetwork);
+		}
+		else
+		{
+			customerModel.setNetworkList(null);
+		}
+
+		modelService.save(customerModel);
+
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#updateTelefonoRit(de.hybris.sdh.core.pojos.responses.
+	 * SDHValidaMailRolResponse)
+	 */
+	@Override
+	public String updateTelefonoRit(final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		//clean old phone numbers
+		final List<SDHPhoneModel> phoneNumbers = customerModel.getPhoneList();
+
+		if (phoneNumbers != null && !phoneNumbers.isEmpty())
+		{
+			modelService.removeAll(phoneNumbers);
+		}
+
+		final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+
+		if (null != infoContribuyente && infoContribuyente.getTelefono() != null && !infoContribuyente.getTelefono().isEmpty())
+		{
+			final List<ContribTelefono> phones = infoContribuyente.getTelefono();
+
+			final List<SDHPhoneModel> newPhones = new ArrayList<SDHPhoneModel>();
+
+			for (final ContribTelefono eachPhone : phones)
+			{
+				if (StringUtils.isBlank(eachPhone.getTEL_TIPO()))
+				{
+					continue;
+				}
+
+				final SDHPhoneModel eachPhoneModel = new SDHPhoneModel();
+				eachPhoneModel.setPhoneKind(eachPhone.getTEL_TIPO());
+				eachPhoneModel.setPhoneNumber(eachPhone.getTEL_NUMBER());
+				eachPhoneModel.setExtension(eachPhone.getTEL_EXTENS());
+
+				newPhones.add(eachPhoneModel);
+
+			}
+
+			modelService.saveAll(newPhones);
+
+			customerModel.setPhoneList(newPhones);
+
+		}
+		else
+		{
+			customerModel.setPhoneList(null);
+		}
+
+		modelService.save(customerModel);
+
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#updateAddressRit(de.hybris.sdh.core.pojos.responses.
+	 * SDHValidaMailRolResponse)
+	 */
+	@Override
+	public String updateAddressRit(final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+
+		//clean old addresses
+		final List<SDHAddressModel> currentAddresses = customerModel.getAddressList();
+
+		if (currentAddresses != null && !currentAddresses.isEmpty())
+		{
+			modelService.removeAll(currentAddresses);
+		}
+
+
+
+		if (null != infoContribuyente && infoContribuyente.getDireccion() != null && !infoContribuyente.getDireccion().isEmpty())
+		{
+			final List<ContribDireccion> direcciones = infoContribuyente.getDireccion();
+
+			final List<SDHAddressModel> newAddresses = new ArrayList<SDHAddressModel>();
+
+			for (final ContribDireccion eachAddress : direcciones)
+			{
+
+				if (StringUtils.isBlank(eachAddress.getADR_KIND()))
+				{
+					continue;
+				}
+
+				final SDHAddressModel eachAddressModel = new SDHAddressModel();
+				eachAddressModel.setAddKind(eachAddress.getADR_KIND());
+				eachAddressModel.setStreet(eachAddress.getSTREET());
+				eachAddressModel.setPostalCode(eachAddress.getPOST_CODE());
+				eachAddressModel.setCity(eachAddress.getCITY1());
+				eachAddressModel.setCountry(eachAddress.getCOUNTRY());
+				eachAddressModel.setRegion(eachAddress.getREGION());
+
+				newAddresses.add(eachAddressModel);
+
+			}
+
+			modelService.saveAll(newAddresses);
+
+			customerModel.setAddressList(newAddresses);
+
+		}
+		else
+		{
+			customerModel.setAddressList(null);
+		}
+		modelService.save(customerModel);
+
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#updateNameRit(de.hybris.sdh.core.pojos.responses.
+	 * SDHValidaMailRolResponse)
+	 */
+	@Override
+	public String updateNameRit(final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+
+		if (null != infoContribuyente)
+		{
+			customerModel.setFirstName(infoContribuyente.getPrimNom());
+			customerModel.setMiddleName(infoContribuyente.getSegNom());
+			customerModel.setLastName(infoContribuyente.getPrimApe());
+			customerModel.setSecondLastName(infoContribuyente.getSegApe());
+
+		}
+		modelService.save(customerModel);
+
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#updateRols(de.hybris.sdh.core.pojos.responses.
+	 * SDHValidaMailRolResponse)
+	 */
+	@Override
+	public String updateRols(final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final String numBP = customerModel.getNumBP();
+
+		//clean old rols
+		final List<SDHRolModel> rols = customerModel.getRolList();
+
+		if (rols != null && !rols.isEmpty())
+		{
+			modelService.removeAll(rols);
+		}
+
+		final List<NombreRolResponse> roles = sdhConsultaContribuyenteBPResponse.getRoles();
+
+		if (roles != null && !roles.isEmpty())
+		{
+			final List<SDHRolModel> newRolesModel = new ArrayList<SDHRolModel>();
+
+			for (final NombreRolResponse eachRolResponse : roles)
+			{
+				if (StringUtils.isBlank(eachRolResponse.getNombreRol()))
+				{
+					continue;
+				}
+
+				final SDHRolModel eachRolModel = new SDHRolModel();
+				eachRolModel.setRol(eachRolResponse.getNombreRol());
+				newRolesModel.add(eachRolModel);
+
+			}
+
+			modelService.saveAll(newRolesModel);
+
+			customerModel.setRolList(newRolesModel);
+		}
+		else
+		{
+			customerModel.setRolList(null);
+		}
+
+		modelService.save(customerModel);
+
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCustomerAccountService#updateBasicData(de.hybris.sdh.core.pojos.responses.
+	 * SDHValidaMailRolResponse)
+	 */
+	@Override
+	public String updateBasicData(final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final String numBP = customerModel.getNumBP();
+
+		final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
+
+		if (null != infoContribuyente)
+		{
+			customerModel.setFirstName(infoContribuyente.getPrimNom());
+			customerModel.setMiddleName(infoContribuyente.getSegNom());
+			customerModel.setLastName(infoContribuyente.getPrimApe());
+			customerModel.setSecondLastName(infoContribuyente.getSegApe());
+
+			customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
+			customerModel.setDocumentType(infoContribuyente.getTipoDoc());
+			//TODO: save document expedition date
+
+			customerModel.setDocumentNumber(infoContribuyente.getNumDoc());
+
+
+			final ContribAdicionales adicionales = infoContribuyente.getAdicionales();
+			if (null != adicionales)
+			{
+				customerModel.setSdhType(adicionales.getTYPE());
+				customerModel.setSdhTitle(adicionales.getTITLE());
+				customerModel.setNameOrg1(adicionales.getNAME_ORG1());
+				customerModel.setNameOrg2(adicionales.getNAME_ORG2());
+				customerModel.setNameOrg3(adicionales.getNAME_ORG3());
+				customerModel.setNameOrg4(adicionales.getNAME_ORG4());
+
+
+				customerModel.setDigVer(adicionales.getDIGVERIF());
+				customerModel.setLegalEntity(adicionales.getLEGAL_ENTY());
+				customerModel.setLegalOrg(adicionales.getLEGALORG());
+				customerModel
+						.setUseEmailForNotifications(Boolean.TRUE.equals(adicionales.getZZAUTOBUZONE()) ? Boolean.TRUE : Boolean.FALSE);
+				customerModel.setUseInformationForInstitutionalPurposes(
+						Boolean.TRUE.equals(adicionales.getZZAUTOUSOINF()) ? Boolean.TRUE : Boolean.FALSE);
+				//TODO: fecha de autorizacion de uso de buzon
+
+			}
+		}
+
+		modelService.save(customerModel);
+
+		return null;
+	}
+
 
 
 
