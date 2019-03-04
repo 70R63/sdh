@@ -71,7 +71,7 @@ public interface ControllerConstants
 		String DELINEACION = "DELINEACION";
 		String VEHICULAR = "VEHICULAR";
 		String PUBLICIDAD = "PUBLICIDAD";
-		String GASOLINA = "GASOLINA";
+		String GASOLINA = "2308";
 		String ICA = "ICA";
 	}
 

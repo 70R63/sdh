@@ -964,6 +964,8 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 #end  Mi RIT page
 
+
+
 #---------------- new Pago PSE page ---------------- 
 INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
 ;;PagoPSEPageTemplate;Pago PSE Page Template;layout/pagoPSEPage;ContentPage
@@ -1604,11 +1606,11 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 #->INI dev-eduardo Pantalla de menu MiRIT->Certificacion Datos 23/01/2019
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		            ;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;miRITCertificacionDatosPage 	;Mi RIT Certificacion Datos	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mirit/certificacion/datos
+			 				;							;certificacion-datos 	;Certificacion RIT	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mirit/certificacion-datos
 
 
 ###### SDH - UPDATE EXAMPLE FORM START ######
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]			      	;position[unique=true]		;page(uid,$contentCV)[unique=true][default='miRITCertificacionDatosPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]			      	;position[unique=true]		;page(uid,$contentCV)[unique=true][default='certificacion-datos']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-miRITCertificacionDatosPage 	;SideContent		     	;																	;SideContent-miRITCertificacionDatosPage				;;;
 								;						;BodyContent-miRITCertificacionDatosPage 	;BodyContent			    ;																	;BodyContent-miRITCertificacionDatosPage				;;;
 
@@ -1663,4 +1665,31 @@ INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;nam
 INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																		;actions(uid,$productCVSDH)							;&componentRef
 				 					;							;EstadoCuentaComponent			;EstadoCuentaComponent			;/WEB-INF/views/responsive/pages/layout/estadoCuenta.jsp					;ViewOrderAction:$contentCatalogSDH:Staged			;EstadoCuentaComponent
 #->FIN dev-federico Agregar paginas para menu Consultas - Estado de cuenta  11/02/2019
+
+#INI Reportantes  27/02/2019
+
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;reportantesPage 		;Reportantes	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes
+
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-reportantesPage 	;SideContent			;																	;SideContent-reportantesPage				;;;
+								;						;BodyContent-reportantesPage 	;BodyContent			;																	;BodyContent-reportantesPage				;;;
+								
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-reportantesPage 	;Side Content Slot for Reportantes	;true	;								;;;
+							;							;BodyContent-reportantesPage	;Body Content Slot for Reportantes	;true	;reportantesPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;reportantesPageComponent	;reportantesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesPageComponent	
+
+#end Reportantes page 27/02/2019
 

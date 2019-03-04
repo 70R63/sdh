@@ -393,6 +393,136 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<itemtype generate="true" code="PseTransactionsLog" extends="GenericItem" autocreate="true" >
+				<deployment table="PseTransactionsLog" typecode="20001" />
+				<attributes>
+					<!-- ConstantConnectionData -->
+					<attribute type="java.lang.String" qualifier="entityCode">
+						<description>Entity Code (ppeCode)</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<!-- PSEPaymentForm -->
+					<attribute type="java.lang.String" qualifier="numeroDeReferencia">
+						<description>Numero De Referencia (TicketId)</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="tipoDeImpuesto">
+						<description>Tipo De Impuesto (serviceCode)</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="impuesto">
+						<description>Impuesto</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="anoGravable">
+						<description>Año Gravable</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="CHIP">
+						<description>CHIP</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="periodo">
+						<description>Periodo</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="CUD">
+						<description>CUD</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="tipoDeIdentificacion">
+						<description>Tipo De Identificacion</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="noIdentificacion">
+						<description>No. De Identificacion</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>					
+					<attribute type="java.lang.String" qualifier="DV">
+						<description>DV</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="fechaLimiteDePago">
+						<description>Fecha Limite De Pago</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="pagoAdicional">
+						<description>Pago Adicional Si/No</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="banco">
+						<description>banco</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="valorAPagar">
+						<description>Valor A Pagar</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="isoCurrency">
+						<description>Moneda</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="tipoDeTarjeta">
+						<description>Tipo De Tarjeta</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<!-- CreateTransactionPaymentResponseInformationType -->
+					<attribute type="java.lang.String" qualifier="trazabilityCode">
+						<description>Trazability Code</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="returnCode">
+						<description>Return Code</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="bankUrl">
+						<description>Bank Url</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="transactionCycle">
+						<description>Transaction Cycle</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<!-- GetTransactionInformationResponseBodyType -->
+					<attribute type="java.lang.String" qualifier="soliciteDate">
+						<description>soliciteDate</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="bankProcessDate">
+						<description>bankProcessDate</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="transactionState">
+						<description>transactionState</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
         	
 <!--         	<itemtype code="IdentificationDocumentType" autocreate="true" generate="true"> -->
 <!--         		<description>Added to hold ID document type</description> -->
