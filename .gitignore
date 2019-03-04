@@ -214,3 +214,10 @@ hybris/hybris/bin/custom/sdh/sdhstorefront/web/webroot/_ui/responsive/common/js/
 hybris/hybris/bin/custom/sdh/sdhstorefront/web/webroot/_ui/responsive/common/js/acc.register.js
 /sdh-colombia/
 /sdh-colombia/
+hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHRol.java
+hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHPhone.java
+hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHGasTax.java
+hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHAgent.java
+hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHAddress.java
+hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHSocialNetwork.java
+hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHExteriorPublicityTax.java

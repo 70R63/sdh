@@ -25,9 +25,9 @@
 		<property name="numBP" type="String"/>
 		<property name="documentNumber" type="String"/>
 		<property name="documentType" type="String"/>
+		<property name="documentExpeditionDate" type="Date"/>
 		<property name="middleName" type="String"/>
 		<property name="secondLastName" type="String"/>
-		<property name="documentExpeditionDate" type="Date"/>
 		<property name="sex" type="String"/>
 		<property name="nationality" type="String"/>
 		<property name="birthDate" type="Date"/>
@@ -35,6 +35,24 @@
 		<property name="originCountry" type="de.hybris.platform.commercefacades.user.data.CountryData"/>
 		<property name="useEmailForNotifications" type="Boolean"/>
 		<property name="useInformationForInstitutionalPurposes" type="Boolean"/>
+		<property name="sdhType" type="String"/>
+		<property name="sdhTitle" type="String"/>
+		<property name="nameOrg1" type="String"/>
+		<property name="nameOrg2" type="String"/>
+		<property name="nameOrg3" type="String"/>
+		<property name="nameOrg4" type="String"/>
+		<property name="digVer" type="String"/>
+		<property name="legalEntity" type="String"/>
+		<property name="legalOrg" type="String"/>
+		
+		
+		<property name="addressList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHAddressData>"/>
+		<property name="phoneList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHPhoneData>"/>
+		<property name="agentList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHAgentData>"/>
+		<property name="networkList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHSocialNetworkData>"/>
+		<property name="rolList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHRolData>"/>
+		<property name="exteriorPublicityTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData>"/>
+		<property name="gasTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHGasTaxData>"/>
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
@@ -45,8 +63,53 @@
 		<property name="documentType" type="String"/>
 	</bean>
 	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHAddressData">	
+		<property name="addKind" type="String"/>
+		<property name="street" type="String"/>
+		<property name="city" type="String"/>
+		<property name="country" type="String"/>
+		<property name="region" type="String"/>
+		<property name="postalCode" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHPhoneData">	
+		<property name="phoneKind" type="String"/>
+		<property name="phoneNumber" type="String"/>
+		<property name="extension" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHSocialNetworkData">	
+		<property name="socialNetwork" type="String"/>
+		<property name="username" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHRolData">	
+		<property name="rol" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHGasTaxData">	
+		<property name="documentNumber" type="String"/>
+		<property name="documentType" type="String"/>
+		<property name="objectNumber" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData">	
+		<property name="documentNumber" type="String"/>
+		<property name="documentType" type="String"/>
+		<property name="objectNumber" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHAgentData">	
+		<property name="agent" type="String"/>
+		<property name="documentNumber" type="String"/>
+		<property name="documentType" type="String"/>
+		<property name="completeName" type="String"/>
+		<property name="internalFunction" type="String"/>
+	</bean>
+	
 	<bean class="de.hybris.sdh.facades.questions.data.OptionsData">	
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+	
 </beans>

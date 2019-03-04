@@ -15,4 +15,6 @@ public interface SDHCustomerFacade
 	void activateAccount(final String token) throws TokenInvalidatedException;
 
 	boolean isUserRegistered(String documentNumber, String documentType);
+
+	void updateMiRitInfo();
 }
