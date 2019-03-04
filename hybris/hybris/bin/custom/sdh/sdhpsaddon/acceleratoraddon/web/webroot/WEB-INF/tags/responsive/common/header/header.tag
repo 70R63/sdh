@@ -218,3 +218,81 @@
 	class="container-fluid">
 	<cms:component component="${component}" />
 </cms:pageSlot>
+
+
+<script>
+	function borraMenu(elementMenu, indexMenu, arrayMenu){
+		
+		var li_array = document.getElementsByTagName('li');
+		var inner_Text;
+		var li_index;
+		var error_message;
+		
+		for( li_index = 0; li_index < li_array.length; li_index++ ) {	    		
+			try{
+				inner_Text = li_array[li_index].innerText;
+				
+				if( inner_Text.includes(elementMenu)){					  					
+					li_array[li_index].remove();
+				}	
+			}catch(err){
+				error_message = err.message;
+			}		
+    	}
+	}
+	
+	
+	function ajustesMenu() {
+		
+		debugger; 
+						
+		var currentUrl = document.URL;
+		var rol;
+		var listaMenus=[];
+		var li_index;
+		
+		<c:forEach items="${uiMenuForm.roles}" var="row_rol">
+		
+			rol = '<c:out value="${row_rol.nombreRol}"/>';
+			
+			if (rol = "01" && currentUrl.includes("Contribuyentes")){
+				listaMenus.push("Mi Información Reportada");
+				
+				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
+					listaMenus.push("Delineación Urbana");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bIca != 'X'}">
+					listaMenus.push("ICA");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bPredial != 'X'}">
+					listaMenus.push("Predial unificado");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bPublicidadExt != 'X'}">
+					listaMenus.push("Publicidad exterior");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bVehicular != 'X'}">
+					listaMenus.push("Sobre vehículos automotores");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bSobreGasolina != 'X'}">
+					listaMenus.push("Sobretasa a la gasolina");
+				</c:if>				
+			}
+			
+			
+			if (rol = "05" && currentUrl.includes("reportantes")){
+				listaMenus = ["Impuestos","Buzón","Trámites","Facturación","Declaraciones","Pagos","Consultas"];				
+			}
+			
+			for( li_index = 0; li_index < listaMenus.length; li_index++ ) {
+				borraMenu(listaMenus[li_index], li_index, listaMenus);
+			}	
+		</c:forEach>
+	}	
+	
+	ajustesMenu();	
+</script>
