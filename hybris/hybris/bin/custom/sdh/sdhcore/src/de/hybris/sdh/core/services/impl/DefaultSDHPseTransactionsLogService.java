@@ -37,10 +37,13 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final String isoCurrency, final String tipoDeTarjeta)
 	{
 		final PseTransactionsLogModel transactionLogModel = new PseTransactionsLogModel();
+		final String transactionPaymentResponsePrint = null;
 
-		// ConstantConnectionDat transactionLogModel.setEntityCode(constantConnectionData.getPpeCode());
+		// ConstantConnectionDat
+		transactionLogModel.setEntityCode(constantConnectionData.getPpeCode());
 
-		// PSEPaymentForm transactionLogModel.setNumeroDeReferencia(numeroDeReferencia);
+		// PSEPaymentForm
+		transactionLogModel.setNumeroDeReferencia(numeroDeReferencia);
 		transactionLogModel.setTipoDeImpuesto(tipoDeImpuesto);
 		transactionLogModel.setImpuesto(impuesto);
 		transactionLogModel.setAnoGravable(anoGravable);
@@ -58,10 +61,18 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		transactionLogModel.setTipoDeTarjeta(tipoDeTarjeta);
 
 		// CreateTransactionPaymentResponseInformationType
-		transactionLogModel.setTrazabilityCode(transactionPaymentResponse.getTrazabilityCode());
-		transactionLogModel.setReturnCode(transactionPaymentResponse.getReturnCode().getValue());
-		transactionLogModel.setBankUrl(transactionPaymentResponse.getBankurl());
-		transactionLogModel.setTransactionCycle(transactionPaymentResponse.getTransactionCycle());
+		if (transactionPaymentResponse != null)
+		{
+			transactionLogModel.setTrazabilityCode(transactionPaymentResponse.getTrazabilityCode());
+			transactionLogModel.setReturnCode(transactionPaymentResponse.getReturnCode().getValue());
+			transactionLogModel.setBankUrl(transactionPaymentResponse.getBankurl());
+			transactionLogModel.setTransactionCycle(transactionPaymentResponse.getTransactionCycle());
+
+			LOG.info("New newLogTransactionEntry - transactionPaymentResponse[" + transactionPaymentResponse.getTrazabilityCode()
+					+ " , " + transactionPaymentResponse.getReturnCode().getValue() + " , " + transactionPaymentResponse.getBankurl()
+					+ " , " + transactionPaymentResponse.getTransactionCycle() + "]");
+		}
+
 
 		// GetTransactionInformationResponseBodyType transactionLogModel.setSoliciteDate("");
 		transactionLogModel.setBankProcessDate("");
@@ -70,9 +81,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		LOG.info("New newLogTransactionEntry:[" + constantConnectionData.getPpeCode() + " , " + numeroDeReferencia + " , "
 				+ tipoDeImpuesto + " , " + impuesto + " , " + anoGravable + " , " + CHIP + " , " + periodo + " , " + CUD + " , "
 				+ tipoDeIdentificacion + " , " + noIdentificacion + " , " + DV + " , " + fechaLimiteDePago + " , " + pagoAdicional
-				+ " , " + banco + " , " + valorAPagar + " , " + isoCurrency + " , " + tipoDeTarjeta + " , "
-				+ transactionPaymentResponse.getTrazabilityCode() + " , " + transactionPaymentResponse.getReturnCode().getValue()
-				+ " , " + transactionPaymentResponse.getBankurl() + " , " + transactionPaymentResponse.getTransactionCycle() + "]");
+				+ " , " + banco + " , " + valorAPagar + " , " + isoCurrency + " , " + tipoDeTarjeta + "]");
 
 		modelService.saveAll(transactionLogModel);
 	}

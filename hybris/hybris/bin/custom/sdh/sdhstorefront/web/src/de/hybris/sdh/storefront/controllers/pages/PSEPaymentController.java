@@ -228,6 +228,9 @@ public class PSEPaymentController extends AbstractPageController
 			GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
 		}
 
+		this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+				psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
+
 
 		LOG.info(response);
 
