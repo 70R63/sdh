@@ -13,8 +13,6 @@ public class ImpuestoPublicidadExterior
 	private String tipoValla;
 	private boolean seleccionado;
 	private String tipoVallaCode;
-<<<<<<< HEAD
-=======
 	private String numObjeto;
 
 	/**
@@ -33,7 +31,6 @@ public class ImpuestoPublicidadExterior
 	{
 		this.numObjeto = numObjeto;
 	}
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 
 	/**
 	 *

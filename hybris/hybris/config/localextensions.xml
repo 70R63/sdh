@@ -11,12 +11,7 @@
     <extension name='sdhbillsaddon' />
     <extension name='sdhpsaddon' />
     <extension name='sdhrelationshipsaddon' />
-<<<<<<< HEAD
     <extension name='sdhpse' />
-=======
- 	<extension name='sdhpse' />
- 
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 <!--     <extension name='sdhtest' /> -->
 <!--     <extension name='sdhcockpits' /> -->
     <extension name='ycommercewebservices' />

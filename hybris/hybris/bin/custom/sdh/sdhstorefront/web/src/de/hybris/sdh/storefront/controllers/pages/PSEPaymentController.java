@@ -124,20 +124,11 @@ public class PSEPaymentController extends AbstractPageController
 	@ModelAttribute("banco")
 	public List<SelectAtomValue> getIdBanco()
 	{
-<<<<<<< HEAD
-
-		final List<SelectAtomValue> banco = Arrays.asList(
-				new SelectAtomValue("01", "Bancolombia"),
-				new SelectAtomValue("02", "BBVA"),
-				new SelectAtomValue("03", "Davivienda"));
-
-=======
 		final List<SelectAtomValue> banco = new ArrayList<SelectAtomValue>(); //
 		for (final PseBankListCatalogModel bankEntry : pseBankListCatalogDao.getAllBankEntries().getResult())
 		{
 			banco.add(new SelectAtomValue(bankEntry.getFinancialInstitutionCode(), bankEntry.getFinancialInstitutionName()));
 		}
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 		return banco;
 	}
 
@@ -165,40 +156,17 @@ public class PSEPaymentController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-<<<<<<< HEAD
-	/*
-	 * @RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.GET)
-	 *
-	 * @RequireHardLogIn public String realizarPago(final Model model, final RedirectAttributes redirectModel) throws
-	 * CMSItemNotFoundException { storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
-	 * setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
-	 * model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-	 *
-	 *
-	 * model.addAttribute("psePaymentForm", new PSEPaymentForm());
-	 *
-	 * return getViewForPage(model); }
-	 */
-
-	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.POST)
-	@RequireHardLogIn
-	public String pagoEnLineaForm(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
-=======
 
 	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String pseResponse(final Model model, final RedirectAttributes redirectModel,
 			@RequestParam(required = false, defaultValue = "", value = "ticketId") final String ticketId)
 			throws CMSItemNotFoundException
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-<<<<<<< HEAD
-		model.addAttribute("psePaymentForm", psePaymentForm);
-=======
 		System.out.println("------ pseResponse ------- ");
 		System.out.println(ticketId);
 
@@ -207,35 +175,24 @@ public class PSEPaymentController extends AbstractPageController
 		psePaymentForm.setPeriodo("02");
 		psePaymentForm.setAnoGravable("2019");
 
-		String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
+		final String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
 
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
-<<<<<<< HEAD
-		GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
-=======
 		model.addAttribute("ticketId", ticketId);
 
 		//GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
 				"pse.message.info.success.transaction", new Object[]{ codeResponse });
->>>>>>> 0ae5daa2ba7d6040174676d2a9dbe6b11fb9cf46
 
 		return getViewForPage(model);
 	}
 
-<<<<<<< HEAD
-	@RequestMapping(value = "/pagoEnLinea/realizarPago", method = RequestMethod.POST)
-=======
 
 	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.POST)
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 	@RequireHardLogIn
 	public String pagoEnLineaForm(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
-<<<<<<< HEAD
-=======
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
@@ -251,15 +208,10 @@ public class PSEPaymentController extends AbstractPageController
 	public String realizarPago(final Model model, final PSEPaymentForm psePaymentForm, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-<<<<<<< HEAD
-		System.out.println(psePaymentForm);
-		System.out.println("Call PSE/Bank Web Service");
-=======
 
 		String redirecUrl = getViewForPage(model);
 
@@ -290,7 +242,6 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info(response);
 		LOG.info(psePaymentForm);
 		LOG.info("Call PSE/Bank Web Service");
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 

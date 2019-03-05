@@ -51,10 +51,7 @@ import de.hybris.sdh.facades.SDHCertifNombFacade;
 import de.hybris.sdh.facades.SDHUpdateRitFacade;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
-<<<<<<< HEAD
-=======
 import de.hybris.sdh.storefront.forms.UIMenuForm;
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 import de.hybris.sdh.storefront.forms.UpdateAddressRitForm;
 import de.hybris.sdh.storefront.forms.UpdateAutorizacionesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateEmailRitForm;

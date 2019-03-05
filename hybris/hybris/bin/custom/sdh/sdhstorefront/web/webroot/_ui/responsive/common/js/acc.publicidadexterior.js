@@ -87,10 +87,7 @@ ACC.publicidadexterior = {
 		            	if(data.errores)
 	            		{
 		            		$( "#dialogPublicidadExterior" ).dialog( "open" );
-<<<<<<< HEAD
-=======
 		            		$("#publicidadExteriorDialogContent").html("");
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
     	            		});

@@ -42,7 +42,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -137,24 +136,6 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
 
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
-			model.addAttribute("uiMenuForm", uiMenuForm);
-
-
-
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
-=======
->>>>>>> 0ae5daa2ba7d6040174676d2a9dbe6b11fb9cf46
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
 			declaPublicidadForm.setIdNumber(customerData.getDocumentType());
@@ -178,25 +159,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				declaPublicidadForm.setFechnotif(localDate.format(formatter2));
 			}
 
-<<<<<<< HEAD
-			final Optional optional = detallePublicidadResponse.getDetalle().stream()
-					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
-
-			if (Boolean.TRUE.equals(optional.isPresent()))
-			{
-				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
-			}
-=======
-			//			final Optional optional = detallePublicidadResponse.getDetalle().stream()
-			//					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
-			//
-			//			if (Boolean.TRUE.equals(optional.isPresent()))
-			//			{
-			//				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
-			//			}
 
 			declaPublicidadForm.setOrValla(detallePublicidadResponse.getInfoDeclara().getOrientacionValla());
->>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 
 			declaPublicidadForm.setLuginst(detallePublicidadResponse.getInfoDeclara().getLugarInstala());
 			declaPublicidadForm.setBasegrav(detallePublicidadResponse.getInfoDeclara().getTamanoValla());
