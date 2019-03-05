@@ -10,6 +10,8 @@
 <%@ attribute name="autocomplete" required="false" type="java.lang.String"%>
 <%@ attribute name="maxlength" required="false" type="java.lang.String"%>
 <%@ attribute name="onchange" required="false" type="java.lang.String"%>
+<%@ attribute name="disabled" required="false" type="java.lang.String"%>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -32,7 +34,7 @@
 			
 		<spring:theme code="${placeholder}" var="placeHolderMessage"  htmlEscape="false"/>
 		<form:input aria-required="${mandatory}" cssClass="${inputCSS} form-control" id="${idKey}" path="${path}"
-				tabindex="${tabindex}" autocomplete="${autocomplete}" placeholder="${placeHolderMessage}" maxlength="${maxlength}"/>
+				tabindex="${tabindex}" autocomplete="${autocomplete}" placeholder="${placeHolderMessage}" maxlength="${maxlength}" disabled="${disabled}"/>
 				
 	
 						

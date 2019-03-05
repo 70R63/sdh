@@ -84,9 +84,9 @@ ACC.publicidadexterior = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores)
 	            		{
+		            		$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
     	            		});
@@ -97,10 +97,12 @@ ACC.publicidadexterior = {
 	            			$("#intmora").val("");
 	            			$("#totpag").val("");
 	            			$("#numForm").val("");
+	            			
+	            			$('#generaDeclaracionButton').prop("disabled", true);
 		            		
 	            		}else
 	            		{
-	            			$("#publicidadExteriorDialogContent").html("El cálculo se ha realizado exitosamente.")
+//	            			$("#publicidadExteriorDialogContent").html("El cálculo se ha realizado exitosamente.")
 	            			
 	            			$("#impCar").val(data.impCargo);
 	            			$("#valsan").val(data.vlrSancion);
@@ -108,6 +110,8 @@ ACC.publicidadexterior = {
 	            			$("#intmora").val(data.interesMora);
 	            			$("#totpag").val(data.totalPagar);
 	            			$("#numForm").val(data.numForm);
+	            			
+	            			$('#generaDeclaracionButton').prop("disabled", false);
 	            			
 	            		}
 	 	      		
@@ -133,7 +137,8 @@ ACC.publicidadexterior = {
 	 	        
 	 	       var anoGravable  = $.trim($("#anio").val());
 	 	       var numResolu =  $("#selectedNumRes").val();
-	 	       
+	 	      var tipoValla = $("#selectedTipoValla").val();
+	 	      
 	 	      if(anoGravable == "0")
 	 	        {	
 	 	        	alert("Por favor, selecciona el año a consultar");
@@ -146,7 +151,7 @@ ACC.publicidadexterior = {
 	 	        	return;
 	 	        }
 	 	       
-	 	      window.location.href = ACC.publicidadExteriorDeclararionURL+"?numResolu="+numResolu+"&anoGravable="+anoGravable;
+	 	      window.location.href = ACC.publicidadExteriorDeclararionURL+"?numResolu="+numResolu+"&anoGravable="+anoGravable+"&tipoValla="+tipoValla;
 	 	       
 		 });
 	 },
@@ -183,145 +188,9 @@ ACC.publicidadexterior = {
 			            data: data,
 			            type: "GET",
 			            success: function (data) {
-			            	var tipoValla = $("#selectedTipoValla").val();
-
-			            	$("#divTubularComercial").hide();
-			            	$("#divVehiculos").hide();
-			            	$("#divTubularObra").hide();
-			            	$("#divObraConvencional").hide();
-			            	$("#divPantallaLed").hide();
 			            	
-			            	if(tipoValla == "Valla Tubular Comercial")
-		            		{
-			            		$("#divTubularComercial").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#tubularComercialDireccion").val(data.direccion);
-			            		$("#tubularComercialAreaElemento").val(data.areaElemento);
-			            		
-			            		var localidadText  = data.localidad;
-			            		
-			            		localidades.forEach(function (eachLoc) {
-					    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
-					    	    		localidadText = eachLoc.name;
-			            		});
-			            		
-			            		
-			            		$("#tubularComercialLocalidad").val(localidadText);
-			            		$("#tubularComercialOrientacion").val(data.orientacion);
-			            		$("#tubularComercialCodPostal").val(data.codPostal);
-			            		$("#tubularComercialChip").val(data.chip);
-			            		$("#tubularComercialAvisoLumino").val(data.avisoLumino);
-			            		$("#tubularComercialUbicacion").val(data.ubicacion);
-			            		$("#tubularComercialMatricula").val(data.matricula);
-		            		}else if(tipoValla == "Valla Vehículos")
-		            		{
-		            			$("#divVehiculos").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#vehiculoModelo").val(data.modelo);
-			            		$("#vehiculoTipoPublici").val(data.tipoPublici);
-			            		$("#vehiculoPlaca").val(data.placa);
-			            		$("#vehiculoTipoElemento").val(data.tipoElemento);
-			            		$("#vehiculoNumLicenciaTrans").val(data.numLicenciaTrans);
-			            		$("#vehiculoOrientacion").val(data.orientacion);
-			            		$("#vehiculoTipoServicio").val(data.tipoServicio);
-			            		
-		            		}else if(tipoValla == "Valla Tubular de Obra")
-		            		{
-		            			$("#divTubularObra").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#tubularObraDireccion").val(data.direccion);
-			            		$("#tubularObraLicenciaUrb").val(data.licenciaUrb);
-			            		
-			            		var localidadText  = data.localidad;
-			            		
-			            		localidades.forEach(function (eachLoc) {
-					    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
-					    	    		localidadText = eachLoc.name;
-			            		});
-			            		
-			            		$("#tubularObraLocalidad").val(localidadText);
-			            		$("#tubularObraContratoObra").val(data.contratoObra);
-			            		$("#tubularObraCodPostal").val(data.codPostal);
-			            		$("#tubularObraLicenciaConstruc").val(data.licenciaContruc);
-			            		$("#tubularObraChip").val(data.chip);
-			            		$("#tubularObraVigLicenConstruc").val(data.vigLicenConstruc);
-			            		$("#tubularObraMatricula").val(data.matricula);
-			            		$("#tubularObraAreaTotal").val(data.areaTotal);
-			            		$("#tubularObraUbicacion").val(data.ubicacion);
-			            		$("#tubularObraPeriodicidad").val(data.periodicidad);
-			            		$("#tubularObraOrientacion").val(data.orientacion);
-			            		$("#tubularObraNumcaras").val(data.numCaras);
-		            			
-		            		}else if(tipoValla == "Valla de Obra Convencional")
-		            		{
-		            			
-		            			$("#divObraConvencional").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#obraConvencionalDireccion").val(data.direccion);
-			            		$("#obraConvencionaltipoPublici").val(data.tipoPublici);
-			            		
-			            		var localidadText  = data.localidad;
-			            		
-			            		localidades.forEach(function (eachLoc) {
-					    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
-					    	    		localidadText = eachLoc.name;
-			            		});
-			            		
-			            		$("#obraConvencionalLocalidad").val(localidadText);
-			            		$("#obraConvencionalUbicacion").val(data.ubicacion);
-			            		$("#obraConvencionalCodPostal").val(data.codPostal);
-			            		$("#obraConvencionalChip").val(data.chip);
-			            		$("#obraConvencionalAvisoLumino").val(data.avisoLumino);
-			            		$("#obraConvencionalMatricula").val(data.matricula);
-			            		$("#obraConvencionalOrientacion").val(data.orientacion);
-			            		$("#obraConvencionalTotalArea").val(data.areaTotal);
-		            		}else if(tipoValla == "Pantalla LED")
-		            		{
-		            			$("#divPantallaLed").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#pantallaLedDireccion").val(data.direccion);
-			            		$("#pantallaLedMatricula").val(data.matricula);
-			            		
-			            		var localidadText  = data.localidad;
-			            		
-			            		localidades.forEach(function (eachLoc) {
-					    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
-					    	    		localidadText = eachLoc.name;
-			            		});
-			            		
-			            		$("#pantallaLedLocalidad").val(localidadText);
-			            		$("#pantallaLedUbicacion").val(data.ubicacion);
-			            		$("#pantallaLedCodPostal").val(data.copPostal);
-			            		$("#pantallaLedTipoPublicidad").val(data.tipoPublici);
-			            		$("#pantallaLedChip").val(data.chip);
-			            		$("#pantallaLedOrientacionVisual").val(data.orientacion);
-			            		$("#pantallaLedAreaTotal").val(data.areaTotal);
-		            		}
+			            	
+			            	ACC.publicidadexterior.fillFieldsFromData(data);
 			            	
 			            },
 			            error: function () {
@@ -331,6 +200,149 @@ ACC.publicidadexterior = {
 		 	        
 		 	  });
 	    	
+	    },
+	    
+	    fillFieldsFromData:function(data){
+	    	
+	    	var tipoValla = $("#selectedTipoValla").val();
+
+        	$("#divTubularComercial").hide();
+        	$("#divVehiculos").hide();
+        	$("#divTubularObra").hide();
+        	$("#divObraConvencional").hide();
+        	$("#divPantallaLed").hide();
+	    	
+	    	if(tipoValla == "Valla Tubular Comercial"||tipoValla == "01")
+    		{
+        		$("#divTubularComercial").show();
+        		$(".inputtextnew").val();
+        		
+        		$("#fechResolu").val(data.fechResolu);
+        		$("#fechNotif").val(data.fechNotif);
+        		$("#tipoSolicitud").val(data.tipoSolicitud);
+        		
+        		$("#tubularComercialDireccion").val(data.direccion);
+        		$("#tubularComercialAreaElemento").val(data.areaElemento);
+        		
+        		var localidadText  = data.localidad;
+        		
+        		localidades.forEach(function (eachLoc) {
+	    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
+	    	    		localidadText = eachLoc.name;
+        		});
+        		
+        		
+        		$("#tubularComercialLocalidad").val(localidadText);
+        		$("#tubularComercialOrientacion").val(data.orientacion);
+        		$("#tubularComercialCodPostal").val(data.codPostal);
+        		$("#tubularComercialChip").val(data.chip);
+        		$("#tubularComercialAvisoLumino").val(data.avisoLumino);
+        		$("#tubularComercialUbicacion").val(data.ubicacion);
+        		$("#tubularComercialMatricula").val(data.matricula);
+    		}else if(tipoValla == "Valla Vehículos"||tipoValla == "02")
+    		{
+    			$("#divVehiculos").show();
+        		$(".inputtextnew").val();
+        		
+        		$("#fechResolu").val(data.fechResolu);
+        		$("#fechNotif").val(data.fechNotif);
+        		$("#tipoSolicitud").val(data.tipoSolicitud);
+        		
+        		$("#vehiculoModelo").val(data.modelo);
+        		$("#vehiculoTipoPublici").val(data.tipoPublici);
+        		$("#vehiculoPlaca").val(data.placa);
+        		$("#vehiculoTipoElemento").val(data.tipoElemento);
+        		$("#vehiculoNumLicenciaTrans").val(data.numLicenciaTrans);
+        		$("#vehiculoOrientacion").val(data.orientacion);
+        		$("#vehiculoTipoServicio").val(data.tipoServicio);
+        		
+    		}else if(tipoValla == "Valla Tubular de Obra"||tipoValla == "03")
+    		{
+    			$("#divTubularObra").show();
+        		$(".inputtextnew").val();
+        		
+        		$("#fechResolu").val(data.fechResolu);
+        		$("#fechNotif").val(data.fechNotif);
+        		$("#tipoSolicitud").val(data.tipoSolicitud);
+        		
+        		$("#tubularObraDireccion").val(data.direccion);
+        		$("#tubularObraLicenciaUrb").val(data.licenciaUrb);
+        		
+        		var localidadText  = data.localidad;
+        		
+        		localidades.forEach(function (eachLoc) {
+	    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
+	    	    		localidadText = eachLoc.name;
+        		});
+        		
+        		$("#tubularObraLocalidad").val(localidadText);
+        		$("#tubularObraContratoObra").val(data.contratoObra);
+        		$("#tubularObraCodPostal").val(data.codPostal);
+        		$("#tubularObraLicenciaConstruc").val(data.licenciaConstruc);
+        		$("#tubularObraChip").val(data.chip);
+        		$("#tubularObraVigLicenConstruc").val(data.vigLicenConstruc);
+        		$("#tubularObraMatricula").val(data.matricula);
+        		$("#tubularObraAreaTotal").val(data.areaElemento);
+        		$("#tubularObraUbicacion").val(data.ubicacion);
+        		$("#tubularObraPeriodicidad").val(data.periodicidad);
+        		$("#tubularObraOrientacion").val(data.orientacion);
+        		$("#tubularObraNumcaras").val(data.numCaras);
+    			
+    		}else if(tipoValla == "Valla de Obra Convencional"||tipoValla == "04")
+    		{
+    			
+    			$("#divObraConvencional").show();
+        		$(".inputtextnew").val();
+        		
+        		$("#fechResolu").val(data.fechResolu);
+        		$("#fechNotif").val(data.fechNotif);
+        		$("#tipoSolicitud").val(data.tipoSolicitud);
+        		
+        		$("#obraConvencionalDireccion").val(data.direccion);
+        		$("#obraConvencionaltipoPublici").val(data.tipoPublici);
+        		
+        		var localidadText  = data.localidad;
+        		
+        		localidades.forEach(function (eachLoc) {
+	    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
+	    	    		localidadText = eachLoc.name;
+        		});
+        		
+        		$("#obraConvencionalLocalidad").val(localidadText);
+        		$("#obraConvencionalUbicacion").val(data.ubicacion);
+        		$("#obraConvencionalCodPostal").val(data.codPostal);
+        		$("#obraConvencionalChip").val(data.chip);
+        		$("#obraConvencionalAvisoLumino").val(data.avisoLumino);
+        		$("#obraConvencionalMatricula").val(data.matricula);
+        		$("#obraConvencionalOrientacion").val(data.orientacion);
+        		$("#obraConvencionalTotalArea").val(data.areaElemento);
+    		}else if(tipoValla == "Pantalla LED"||tipoValla == "05")
+    		{
+    			$("#divPantallaLed").show();
+        		$(".inputtextnew").val();
+        		
+        		$("#fechResolu").val(data.fechResolu);
+        		$("#fechNotif").val(data.fechNotif);
+        		$("#tipoSolicitud").val(data.tipoSolicitud);
+        		
+        		$("#pantallaLedDireccion").val(data.direccion);
+        		$("#pantallaLedMatricula").val(data.matricula);
+        		
+        		var localidadText  = data.localidad;
+        		
+        		localidades.forEach(function (eachLoc) {
+	    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
+	    	    		localidadText = eachLoc.name;
+        		});
+        		
+        		$("#pantallaLedLocalidad").val(localidadText);
+        		$("#pantallaLedUbicacion").val(data.ubicacion);
+        		$("#pantallaLedCodPostal").val(data.codPostal);
+        		$("#pantallaLedTipoPublicidad").val(data.tipoPublici);
+        		$("#pantallaLedChip").val(data.chip);
+        		$("#pantallaLedOrientacionVisual").val(data.orientacion);
+        		$("#pantallaLedAreaTotal").val(data.areaElemento);
+    		}
 	    },
 	    
 	    bindLabelVerButton: function () {
@@ -367,145 +379,7 @@ ACC.publicidadexterior = {
 			            data: data,
 			            type: "GET",
 			            success: function (data) {
-			            	var tipoValla = $("#selectedTipoValla").val();
-
-			            	$("#divTubularComercial").hide();
-			            	$("#divVehiculos").hide();
-			            	$("#divTubularObra").hide();
-			            	$("#divObraConvencional").hide();
-			            	$("#divPantallaLed").hide();
-			            	
-			            	if(tipoValla == "Valla Tubular Comercial")
-		            		{
-			            		$("#divTubularComercial").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#tubularComercialDireccion").val(data.direccion);
-			            		$("#tubularComercialAreaElemento").val(data.areaElemento);
-			            		
-			            		var localidadText  = data.localidad;
-			            		
-			            		localidades.forEach(function (eachLoc) {
-					    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
-					    	    		localidadText = eachLoc.name;
-			            		});
-			            		
-			            		
-			            		$("#tubularComercialLocalidad").val(localidadText);
-			            		$("#tubularComercialOrientacion").val(data.orientacion);
-			            		$("#tubularComercialCodPostal").val(data.codPostal);
-			            		$("#tubularComercialChip").val(data.chip);
-			            		$("#tubularComercialAvisoLumino").val(data.avisoLumino);
-			            		$("#tubularComercialUbicacion").val(data.ubicacion);
-			            		$("#tubularComercialMatricula").val(data.matricula);
-		            		}else if(tipoValla == "Valla Vehículos")
-		            		{
-		            			$("#divVehiculos").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#vehiculoModelo").val(data.modelo);
-			            		$("#vehiculoTipoPublici").val(data.tipoPublici);
-			            		$("#vehiculoPlaca").val(data.placa);
-			            		$("#vehiculoTipoElemento").val(data.tipoElemento);
-			            		$("#vehiculoNumLicenciaTrans").val(data.numLicenciaTrans);
-			            		$("#vehiculoOrientacion").val(data.orientacion);
-			            		$("#vehiculoTipoServicio").val(data.tipoServicio);
-			            		
-		            		}else if(tipoValla == "Valla Tubular de Obra")
-		            		{
-		            			$("#divTubularObra").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#tubularObraDireccion").val(data.direccion);
-			            		$("#tubularObraLicenciaUrb").val(data.licenciaUrb);
-			            		
-			            		var localidadText  = data.localidad;
-			            		
-			            		localidades.forEach(function (eachLoc) {
-					    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
-					    	    		localidadText = eachLoc.name;
-			            		});
-			            		
-			            		$("#tubularObraLocalidad").val(localidadText);
-			            		$("#tubularObraContratoObra").val(data.contratoObra);
-			            		$("#tubularObraCodPostal").val(data.codPostal);
-			            		$("#tubularObraLicenciaConstruc").val(data.licenciaContruc);
-			            		$("#tubularObraChip").val(data.chip);
-			            		$("#tubularObraVigLicenConstruc").val(data.vigLicenConstruc);
-			            		$("#tubularObraMatricula").val(data.matricula);
-			            		$("#tubularObraAreaTotal").val(data.areaTotal);
-			            		$("#tubularObraUbicacion").val(data.ubicacion);
-			            		$("#tubularObraPeriodicidad").val(data.periodicidad);
-			            		$("#tubularObraOrientacion").val(data.orientacion);
-			            		$("#tubularObraNumcaras").val(data.numCaras);
-		            			
-		            		}else if(tipoValla == "Valla de Obra Convencional")
-		            		{
-		            			
-		            			$("#divObraConvencional").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#obraConvencionalDireccion").val(data.direccion);
-			            		$("#obraConvencionaltipoPublici").val(data.tipoPublici);
-			            		
-			            		var localidadText  = data.localidad;
-			            		
-			            		localidades.forEach(function (eachLoc) {
-					    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
-					    	    		localidadText = eachLoc.name;
-			            		});
-			            		
-			            		$("#obraConvencionalLocalidad").val(localidadText);
-			            		$("#obraConvencionalUbicacion").val(data.ubicacion);
-			            		$("#obraConvencionalCodPostal").val(data.codPostal);
-			            		$("#obraConvencionalChip").val(data.chip);
-			            		$("#obraConvencionalAvisoLumino").val(data.avisoLumino);
-			            		$("#obraConvencionalMatricula").val(data.matricula);
-			            		$("#obraConvencionalOrientacion").val(data.orientacion);
-			            		$("#obraConvencionalTotalArea").val(data.areaTotal);
-		            		}else if(tipoValla == "Pantalla LED")
-		            		{
-		            			$("#divPantallaLed").show();
-			            		$(".inputtextnew").val();
-			            		
-			            		$("#fechResolu").val(data.fechResolu);
-			            		$("#fechNotif").val(data.fechNotif);
-			            		$("#tipoSolicitud").val(data.tipoSolicitud);
-			            		
-			            		$("#pantallaLedDireccion").val(data.direccion);
-			            		$("#pantallaLedMatricula").val(data.matricula);
-			            		
-			            		var localidadText  = data.localidad;
-			            		
-			            		localidades.forEach(function (eachLoc) {
-					    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
-					    	    		localidadText = eachLoc.name;
-			            		});
-			            		
-			            		$("#pantallaLedLocalidad").val(localidadText);
-			            		$("#pantallaLedUbicacion").val(data.ubicacion);
-			            		$("#pantallaLedCodPostal").val(data.copPostal);
-			            		$("#pantallaLedTipoPublicidad").val(data.tipoPublici);
-			            		$("#pantallaLedChip").val(data.chip);
-			            		$("#pantallaLedOrientacionVisual").val(data.orientacion);
-			            		$("#pantallaLedAreaTotal").val(data.areaTotal);
-		            		}
+			            	ACC.publicidadexterior.fillFieldsFromData(data);
 			            	
 			            },
 			            error: function () {

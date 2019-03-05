@@ -1,0 +1,174 @@
+/**
+ * FinalizeTransactionPaymentInformationType.java
+ *
+ * This file was auto-generated from WSDL
+ * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
+ */
+
+package de.hybris.sdh.core.soap.pse.eanucc;
+
+public class FinalizeTransactionPaymentInformationType  implements java.io.Serializable {
+    private java.lang.String entityCode;
+
+    private java.lang.String trazabilityCode;
+
+    public FinalizeTransactionPaymentInformationType() {
+    }
+
+    public FinalizeTransactionPaymentInformationType(
+           final java.lang.String entityCode,
+           final java.lang.String trazabilityCode) {
+           this.entityCode = entityCode;
+           this.trazabilityCode = trazabilityCode;
+    }
+
+
+    /**
+     * Gets the entityCode value for this FinalizeTransactionPaymentInformationType.
+     *
+     * @return entityCode
+     */
+    public java.lang.String getEntityCode() {
+        return entityCode;
+    }
+
+
+    /**
+     * Sets the entityCode value for this FinalizeTransactionPaymentInformationType.
+     *
+     * @param entityCode
+     */
+    public void setEntityCode(final java.lang.String entityCode) {
+        this.entityCode = entityCode;
+    }
+
+
+    /**
+     * Gets the trazabilityCode value for this FinalizeTransactionPaymentInformationType.
+     *
+     * @return trazabilityCode
+     */
+    public java.lang.String getTrazabilityCode() {
+        return trazabilityCode;
+    }
+
+
+    /**
+     * Sets the trazabilityCode value for this FinalizeTransactionPaymentInformationType.
+     *
+     * @param trazabilityCode
+     */
+    public void setTrazabilityCode(final java.lang.String trazabilityCode) {
+        this.trazabilityCode = trazabilityCode;
+    }
+
+    private java.lang.Object __equalsCalc = null;
+    @Override
+	public synchronized boolean equals(final java.lang.Object obj) {
+        if (!(obj instanceof FinalizeTransactionPaymentInformationType))
+		{
+			return false;
+		}
+        final FinalizeTransactionPaymentInformationType other = (FinalizeTransactionPaymentInformationType) obj;
+        if (obj == null)
+		{
+			return false;
+		}
+        if (this == obj)
+		{
+			return true;
+		}
+        if (__equalsCalc != null) {
+            return (__equalsCalc == obj);
+        }
+        __equalsCalc = obj;
+        boolean _equals;
+        _equals = true &&
+            ((this.entityCode==null && other.getEntityCode()==null) ||
+             (this.entityCode!=null &&
+              this.entityCode.equals(other.getEntityCode()))) &&
+            ((this.trazabilityCode==null && other.getTrazabilityCode()==null) ||
+             (this.trazabilityCode!=null &&
+              this.trazabilityCode.equals(other.getTrazabilityCode())));
+        __equalsCalc = null;
+        return _equals;
+    }
+
+    private boolean __hashCodeCalc = false;
+    @Override
+	public synchronized int hashCode() {
+        if (__hashCodeCalc) {
+            return 0;
+        }
+        __hashCodeCalc = true;
+        int _hashCode = 1;
+        if (getEntityCode() != null) {
+            _hashCode += getEntityCode().hashCode();
+        }
+        if (getTrazabilityCode() != null) {
+            _hashCode += getTrazabilityCode().hashCode();
+        }
+        __hashCodeCalc = false;
+        return _hashCode;
+    }
+
+    // Type metadata
+    private static org.apache.axis.description.TypeDesc typeDesc =
+        new org.apache.axis.description.TypeDesc(FinalizeTransactionPaymentInformationType.class, true);
+
+    static {
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://www.uc-council.org/smp/schemas/eanucc", "finalizeTransactionPaymentInformationType"));
+        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("entityCode");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://www.uc-council.org/smp/schemas/eanucc", "entityCode"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("trazabilityCode");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://www.uc-council.org/smp/schemas/eanucc", "trazabilityCode"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+    }
+
+    /**
+     * Return type metadata object
+     */
+    public static org.apache.axis.description.TypeDesc getTypeDesc() {
+        return typeDesc;
+    }
+
+    /**
+     * Get Custom Serializer
+     */
+    public static org.apache.axis.encoding.Serializer getSerializer(
+           final java.lang.String mechType,
+           final java.lang.Class _javaType,
+           final javax.xml.namespace.QName _xmlType) {
+        return
+          new  org.apache.axis.encoding.ser.BeanSerializer(
+            _javaType, _xmlType, typeDesc);
+    }
+
+    /**
+     * Get Custom Deserializer
+     */
+    public static org.apache.axis.encoding.Deserializer getDeserializer(
+           final java.lang.String mechType,
+           final java.lang.Class _javaType,
+           final javax.xml.namespace.QName _xmlType) {
+        return
+          new  org.apache.axis.encoding.ser.BeanDeserializer(
+            _javaType, _xmlType, typeDesc);
+    }
+
+	@Override
+	public String toString()
+	{
+		return "FinalizeTransactionPaymentInformationType [entityCode=" + entityCode + ", trazabilityCode=" + trazabilityCode + "]";
+	}
+
+
+
+}
