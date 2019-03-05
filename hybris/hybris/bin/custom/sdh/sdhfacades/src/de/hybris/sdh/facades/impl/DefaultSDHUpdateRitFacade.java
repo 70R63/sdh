@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.facades.impl;
 
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAutorizacionesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
@@ -10,7 +11,10 @@ import de.hybris.sdh.core.pojos.requests.UpdateNameRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRedesSocialesRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateTelefonoRitRequest;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHUpdateRitService;
 import de.hybris.sdh.facades.SDHUpdateRitFacade;
 
@@ -33,6 +37,11 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 	@Resource(name = "sdhUpdateRitService")
 	SDHUpdateRitService sdhUpdateRitService;
 
+	@Resource(name = "sdhCustomerAccountService")
+	SDHCustomerAccountService sdhCustomerAccountService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	/*
 	 * (non-Javadoc)
@@ -86,6 +95,7 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
 				response.setRitUpdated(true);
+
 			}
 			catch (final Exception e)
 			{
@@ -118,6 +128,17 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
 				response.setRitUpdated(true);
+
+
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
+
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
+				sdhCustomerAccountService.updateAutorizacionesRit(sdhConsultaContribuyenteBPResponse);
+
 			}
 			catch (final Exception e)
 			{
@@ -150,6 +171,16 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
 				response.setRitUpdated(true);
+
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
+
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
+				sdhCustomerAccountService.updateRedesSocialesRit(sdhConsultaContribuyenteBPResponse);
+
 			}
 			catch (final Exception e)
 			{
@@ -182,6 +213,16 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
 				response.setRitUpdated(true);
+
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
+
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
+				sdhCustomerAccountService.updateTelefonoRit(sdhConsultaContribuyenteBPResponse);
+
 			}
 			catch (final Exception e)
 			{
@@ -214,6 +255,16 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
 				response.setRitUpdated(true);
+
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
+
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
+				sdhCustomerAccountService.updateAddressRit(sdhConsultaContribuyenteBPResponse);
+
 			}
 			catch (final Exception e)
 			{
@@ -246,6 +297,16 @@ public class DefaultSDHUpdateRitFacade implements SDHUpdateRitFacade
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
 				response.setRitUpdated(true);
+
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+				consultaContribuyenteBPRequest.setNumBP(request.getNumBP());
+
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
+				sdhCustomerAccountService.updateNameRit(sdhConsultaContribuyenteBPResponse);
+
 			}
 			catch (final Exception e)
 			{

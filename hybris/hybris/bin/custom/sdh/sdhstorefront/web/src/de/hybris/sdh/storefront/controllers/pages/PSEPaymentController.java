@@ -3,10 +3,12 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.model.PseBankListCatalogModel;
+import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
 import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
@@ -15,6 +17,7 @@ import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInform
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
+import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
@@ -32,6 +35,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -51,23 +55,30 @@ public class PSEPaymentController extends AbstractPageController
 	@Resource(name = "pseBankListCatalogDao")
 	private PseBankListCatalogDao pseBankListCatalogDao;
 
+
 	@Resource(name = "defaultPseServices")
 	private PseServices pseServices;
 
+
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+
+
+	@Resource(name = "pseTransactionsLogService")
+	private SDHPseTransactionsLogService pseTransactionsLogService;
+
 
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getIdTipoDeImpuesto()
 	{
 
 		final List<SelectAtomValue> tipoDeImpuesto = Arrays.asList(
-				new SelectAtomValue(ControllerConstants.PSE.DELINEACION, "Delineacion"),
-				new SelectAtomValue(ControllerConstants.PSE.GASOLINA, 	"Gasolina"),
-				new SelectAtomValue(ControllerConstants.PSE.ICA, 			"ICA"),
-				new SelectAtomValue(ControllerConstants.PSE.PREDIAL, 		"Predial"),
-				new SelectAtomValue(ControllerConstants.PSE.PUBLICIDAD, 	"Publicidad"),
-				new SelectAtomValue(ControllerConstants.PSE.VEHICULAR, 	"Vehicular"));
+				new SelectAtomValue(new ControllerPseConstants().getDELINEACION(), "Delineacion"),
+				new SelectAtomValue(new ControllerPseConstants().getGASOLINA(), "Gasolina"),
+				new SelectAtomValue(new ControllerPseConstants().getICA(), "ICA"),
+				new SelectAtomValue(new ControllerPseConstants().getPREDIAL(), "Predial"),
+				new SelectAtomValue(new ControllerPseConstants().getPUBLICIDAD(), "Publicidad"),
+				new SelectAtomValue(new ControllerPseConstants().getVEHICULAR(), "Vehicular"));
 
 		return tipoDeImpuesto;
 	}
@@ -146,17 +157,29 @@ public class PSEPaymentController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.GET)
-
+	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String realizarPago(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String pseResponse(final Model model, final RedirectAttributes redirectModel,
+			@RequestParam(required = false, defaultValue = "", value = "ticketId") final String ticketId)
+			throws CMSItemNotFoundException
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
+		System.out.println("------ pseResponse ------- ");
+		System.out.println(ticketId);
 
-		model.addAttribute("psePaymentForm", new PSEPaymentForm());
+		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
+		psePaymentForm.setTipoDeImpuesto(ControllerConstants.PSE.GASOLINA);
+		psePaymentForm.setPeriodo("02");
+		psePaymentForm.setAnoGravable("2019");
+
+
+
+		model.addAttribute("psePaymentForm", psePaymentForm);
+		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
+		GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 
 		return getViewForPage(model);
 	}
@@ -171,6 +194,7 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		model.addAttribute("psePaymentForm", psePaymentForm);
+		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 
 		return getViewForPage(model);
 	}
@@ -185,6 +209,7 @@ public class PSEPaymentController extends AbstractPageController
 
 
 		String redirecUrl = getViewForPage(model);
+
 		final CreateTransactionPaymentResponseInformationType response = this.doPsePayment(psePaymentForm);
 
 		if (response != null)
@@ -194,16 +219,25 @@ public class PSEPaymentController extends AbstractPageController
 			{
 				redirecUrl = "redirect:" + response.getBankurl();
 			}
+			this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+					psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
+			GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+		}
+		else
+		{
+			GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
 		}
 
 		LOG.info(response);
+
 		LOG.info(psePaymentForm);
 		LOG.info("Call PSE/Bank Web Service");
 		model.addAttribute("psePaymentForm", psePaymentForm);
-
+		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 
 		return redirecUrl;
 	}
+
 
 	private CreateTransactionPaymentResponseInformationType doPsePayment(final PSEPaymentForm psePaymentForm)
 	{
@@ -214,15 +248,14 @@ public class PSEPaymentController extends AbstractPageController
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
-						psePaymentForm.getTipoDeIdentificacion() + " " + psePaymentForm.getNoIdentificacion(), 
-						"Dir. IP 172.18.39.46", 
-						"r3"));
+				psePaymentForm.getTipoDeIdentificacion() + " " + psePaymentForm.getNoIdentificacion(), "Dir. IP 172.18.39.46", "r3"));
 
 
-		return pseServices.createTransactionPayment(
-				this.getConstantConnectionData(psePaymentForm.getBanco(), "2308"),
-				this.getMessageHeader(),
-				createTransactionPaymentInformationType);
+		return pseServices
+				.createTransactionPayment(
+						this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+								psePaymentForm.getNumeroDeReferencia()),
+						this.getMessageHeader(), createTransactionPaymentInformationType);
 	}
 
 	private MessageHeader getMessageHeader()
@@ -230,16 +263,19 @@ public class PSEPaymentController extends AbstractPageController
 		final MessageHeader messageHeader = new MessageHeader();
 		messageHeader.setTo(configurationService.getConfiguration().getString("sdh.pse.messageHeader.to"));
 		messageHeader.setFrom(configurationService.getConfiguration().getString("sdh.pse.messageHeader.from"));
-		messageHeader.setRepresentingParty(configurationService.getConfiguration().getString("sdh.pse.messageHeader.representingParty"));
+		messageHeader
+				.setRepresentingParty(configurationService.getConfiguration().getString("sdh.pse.messageHeader.representingParty"));
 		return messageHeader;
 	}
 
-	private ConstantConnectionData getConstantConnectionData(final String bankCode, final String serviceCode)
+	private ConstantConnectionData getConstantConnectionData(final String bankCode, final String serviceCode,
+			final String ticketId)
 	{
 		final ConstantConnectionData constantConnectionData = new ConstantConnectionData();
 		constantConnectionData.setPseurl(configurationService.getConfiguration().getString("sdh.pse.pseURL"));
 		constantConnectionData.setPpeCode(configurationService.getConfiguration().getString("sdh.pse.ppeCode"));
-		constantConnectionData.setEntityUrl(configurationService.getConfiguration().getString("sdh.pse.entityUrl"));
+		constantConnectionData
+				.setEntityUrl(configurationService.getConfiguration().getString("sdh.pse.entityUrl") + "?ticketId=" + ticketId);
 		constantConnectionData.setBankCode(bankCode);
 		constantConnectionData.setServiceCode(serviceCode);
 		return constantConnectionData;
@@ -261,4 +297,19 @@ public class PSEPaymentController extends AbstractPageController
 		references[2] = r3;
 		return references;
 	}
+
+	private void savePseTransaction(final ConstantConnectionData constantConnectionData,
+			final CreateTransactionPaymentResponseInformationType transactionPaymentResponse, final PSEPaymentForm psePaymentForm)
+	{
+		pseTransactionsLogService.newLogTransactionEntry(constantConnectionData, transactionPaymentResponse,
+				psePaymentForm.getNumeroDeReferencia(), psePaymentForm.getTipoDeImpuesto(), psePaymentForm.getImpuesto(),
+				psePaymentForm.getAnoGravable(), psePaymentForm.getCHIP(), psePaymentForm.getPeriodo(), psePaymentForm.getCUD(),
+				psePaymentForm.getTipoDeIdentificacion(), psePaymentForm.getNoIdentificacion(), psePaymentForm.getDV(),
+				psePaymentForm.getFechaLimiteDePago(), psePaymentForm.getPagoAdicional(), psePaymentForm.getBanco(),
+				psePaymentForm.getValorAPagar(), configurationService.getConfiguration().getString("sdh.pse.isoCodeCurrency"),
+				psePaymentForm.getTipoDeTarjeta());
+
+
+	}
+
 }

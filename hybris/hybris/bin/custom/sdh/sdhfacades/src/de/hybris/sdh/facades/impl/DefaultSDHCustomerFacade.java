@@ -100,4 +100,14 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 	}
 
 
+
+
+
+	@Override
+	public void updateMiRitInfo()
+	{
+		sdhCustomerAccountService.updateMiRitInfo();
+	}
+
+
 }

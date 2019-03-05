@@ -20,12 +20,14 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 
+
 /**
  * @author edson.roa
  *
  */
 public class PseBankListCatalogPerformable extends AbstractJobPerformable<CronJobModel>
 {
+
 	private static final Logger LOG = Logger.getLogger(PseBankListCatalogPerformable.class);
 
 	@Resource(name = "defaultPseServices")
@@ -41,11 +43,14 @@ public class PseBankListCatalogPerformable extends AbstractJobPerformable<CronJo
 	public PerformResult perform(final CronJobModel arg0)
 	{
 		final PseBankListCatalogModel bankEntryModel;
-		final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionData(),this.getMessageHeader());
+		final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionData(),
+				this.getMessageHeader());
 
 		sdhPseBankListCatalogService.deleteAll();
-		if(bankList != null) {
-			for(final GetBankListResponseInformationType bank : bankList) {
+		if (bankList != null)
+		{
+			for (final GetBankListResponseInformationType bank : bankList)
+			{
 				sdhPseBankListCatalogService.newBankEntry(bank.getFinancialInstitutionCode(), bank.getFinancialInstitutionName());
 			}
 		}
@@ -60,7 +65,8 @@ public class PseBankListCatalogPerformable extends AbstractJobPerformable<CronJo
 		final MessageHeader messageHeader = new MessageHeader();
 		messageHeader.setTo(configurationService.getConfiguration().getString("sdh.pse.messageHeader.to"));
 		messageHeader.setFrom(configurationService.getConfiguration().getString("sdh.pse.messageHeader.from"));
-		messageHeader.setRepresentingParty(configurationService.getConfiguration().getString("sdh.pse.messageHeader.representingParty"));
+		messageHeader
+				.setRepresentingParty(configurationService.getConfiguration().getString("sdh.pse.messageHeader.representingParty"));
 		return messageHeader;
 	}
 
@@ -71,5 +77,6 @@ public class PseBankListCatalogPerformable extends AbstractJobPerformable<CronJo
 		constantConnectionData.setPpeCode(configurationService.getConfiguration().getString("sdh.pse.ppeCode"));
 		return constantConnectionData;
 	}
+
 
 }
