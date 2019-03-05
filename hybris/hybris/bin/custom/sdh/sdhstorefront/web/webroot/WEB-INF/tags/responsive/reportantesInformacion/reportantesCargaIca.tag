@@ -33,7 +33,10 @@
 	<div class="row">
 		<div class="form-group">
 			<label class="control-label"><spring:theme
-					code="representantes.info.ica.pasos" /></label>
+					code="representantes.info.ica.pasos1" /></label>
+			<p>
+				<label class="control-label"><spring:theme
+						code="representantes.info.ica.pasos2" /></label>
 		</div>
 	</div>
 
@@ -154,8 +157,8 @@
 									code="representantes.info.ica.seleccionar" /></label><input
 							type="file" class="form-control" id="exampleFormControlFile1"></td>
 					</tr>
-					
-					
+
+
 				</tbody>
 			</table>
 		</div>

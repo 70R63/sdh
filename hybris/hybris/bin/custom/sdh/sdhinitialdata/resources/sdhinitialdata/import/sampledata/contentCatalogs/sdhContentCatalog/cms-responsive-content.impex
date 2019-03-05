@@ -95,11 +95,12 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;DeclaracionesLink; DECLARACIONES LINK    ; "#" ;;;;;
 ; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
+; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 
 #->INI dev-eduardo Agregar submenu MI RIT 04/01/2019
-; ; CertRitLink        ; CERTIFICACION RIT                             ; "/contribuyentes/mirit/certificacion/datos" ;;;;;
+; ; CertRitLink        ; CERTIFICACION RIT                             ; "/contribuyentes/mirit/certificacion-datos" ;;;;;
 #->FIN dev-eduardo Agregar submenu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar submenu MI BUZON 04/01/2019
@@ -140,7 +141,9 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; RelPagosLink                 ; RELACION DE PAGOS LINK              ; http://www.stateofrosebud.com/about ;;;;;
 ; ; EdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/contribuyentes/estado-de-cuenta" ;;;;;
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
-
+; ; CargaLink               	 ; CARGA LINK              		; "/reportantes/cargadocumentos";;;;;
+; ; HistoricoLink                ; HISTORICO LINK              ;  "/reportantes/historico";;;;;
+; ; SancionesLink                ; SANCIONES LINK              ;  "/reportantes/sanciones" ;;;;;
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 
@@ -198,7 +201,7 @@ INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=tru
 
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
-;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
+;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -229,6 +232,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;DeclaracionesNavigationNode;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesNavigationServiceRequestsNavNodeMenu
 ;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
 ;ConsultaNavigationNode;;Consultas Menu;ConsultaNavigationNode;ConsultaNavigationServiceRequestsNavNodeMenu
+;ReportantesNavigationNode;;Reportantes Menu;ReportantesNavigationNode;ReportantesNavigationServiceRequestsNavNodeMenu
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 #*->-------------------------------------------------------------------------------------------------------------------------
 
@@ -258,6 +262,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;DeclaracionesNavigationNodeEntry;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesLink;
 ;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
 ;ConsultaNavigationNodeEntry;;Consulta Menu;ConsultaNavigationNode;ConsultasLink;
+;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 #*->-------------------------------------------------------------------------------------------------------------------------
 
@@ -313,6 +318,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
 ;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
+
+;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
 #*->-------------------------------------------------------------------------------------------------------------------------
 
 
@@ -412,6 +419,10 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;ObligacionesPendNavNode;;Obligaciones Pendientes Link;ObligacionesPendNavNode
 ;RelPagosNavNode;;Relacion Pagos Link;RelPagosNavNode
 ;EdoCuentaNavNode;;Estado Cuenta Link;EdoCuentaNavNode
+
+;CargaNavNode;;Carga Link;CargaNavNode
+;HistoricoNavNode;;Historico Link;HistoricoNavNode
+;SancionesNavNode;;Sanciones Link;SancionesNavNode
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 #*->-------------------------------------------------------------------------------------------------------------------------
 
@@ -511,6 +522,10 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ObligacionesPendNavNode;ObligacionesPendLink
 ;RelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;RelPagosNavNode;RelPagosLink
 ;EdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;EdoCuentaNavNode;EdoCuentaLink
+
+;CargaNavNodeEntry;;Carga Navigation Node Entry;CargaNavNode;CargaLink
+;HistoricoNavNodeEntry;;Historico Navigation Node Entry;HistoricoNavNode;HistoricoLink
+;SancionesNavNodeEntry;;Sancones Navigation Node entry;SancionesNavNode;SancionesLink
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 #*->-------------------------------------------------------------------------------------------------------------------------
 
@@ -1414,7 +1429,7 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 ;;DeclaracionesLink Logged in User;anonymousUserRestriction;DeclaracionesLinkloggedInUser;DeclaracionesLink
 ;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
 ;;ConsultasLink Logged in User;anonymousUserRestriction;ConsultasLinkloggedInUser;ConsultasLink
-
+;;ReportantesLink Logged in User;anonymousUserRestriction;RecaudacionLinkloggedInUser;ReportantesLink
 
 
 
@@ -1590,3 +1605,97 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;miBuzonPageComponent	;miBuzonPage Component	;/WEB-INF/views/responsive/pages/layout/miBuzonPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;miBuzonPageComponent	
 
 #->FIN dev-maria Agregar paginas para mi buzón tributario 19/02/2019
+
+#->INI dev-maria Agregar paginas para Reportantes 19/02/2019
+###INICIAL
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;reportantesPage 		;Reportantes	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-reportantesPage 	;SideContent			;																	;SideContent-reportantesPage				;;;
+								;						;BodyContent-reportantesPage 	;BodyContent			;																	;BodyContent-reportantesPage				;;;
+								
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-reportantesPage 	;Side Content Slot for Reportantes	;true	;								;;;
+							;							;BodyContent-reportantesPage	;Body Content Slot for Reportantes	;true	;reportantesPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;reportantesPageComponent	;reportantesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesPageComponent	
+
+
+###CARGA
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;reportantesInfoPage 		;Reportantes	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes/cargadocumentos
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesInfoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-reportantesInfoPage 	;SideContent			;																	;SideContent-reportantesInfoPage				;;;
+								;						;BodyContent-reportantesInfoPage 	;BodyContent			;																	;BodyContent-reportantesInfoPage				;;;
+								
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-reportantesInfoPage 	;Side Content Slot for Reportantes Carga;true	;								;;;
+							;							;BodyContent-reportantesInfoPage	;Body Content Slot for Reportantes Carga;true	;reportantesInfoPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;reportantesInfoPageComponent	;reportantesInfoPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesInfoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesInfoPageComponent	
+
+####HISTORICO
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;reportantesHistoricoPage 		;Reportantes Historico	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes/historico
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesHistoricoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-reportantesHistoricoPage 	;SideContent			;																	;SideContent-reportantesHistoricoPage				;;;
+								;						;BodyContent-reportantesHistoricoPage 	;BodyContent			;																	;BodyContent-reportantesHistoricoPage				;;;
+								
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-reportantesHistoricoPage 	;Side Content Slot for Reportantes Historico;true	;								;;;
+							;							;BodyContent-reportantesHistoricoPage	;Body Content Slot for Reportantes Historico;true	;reportantesHistoricoPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;reportantesHistoricoPageComponent	;reportantesHistoricoPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesHistoricoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesHistoricoPageComponent	
+
+###SANCIONES
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;reportantesSancionesPage 		;Reportantes Sanciones	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes/sanciones
+
+###### SDH - UPDATE EXAMPLE FORM START ######
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesSancionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-reportantesSancionesPage 	;SideContent			;																	;SideContent-reportantesSancionesPage				;;;
+								;						;BodyContent-reportantesSancionesPage 	;BodyContent			;																	;BodyContent-reportantesSancionesPage				;;;
+								
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-reportantesSancionesPage 	;Side Content Slot for Reportantes Sanciones;true	;								;;;
+							;							;BodyContent-reportantesSancionesPage	;Body Content Slot for Reportantes Sanciones;true	;reportantesSancionesPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;reportantesSancionesPageComponent	;reportantesSancionesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesSancionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesSancionesPageComponent	
+
+#->FIN dev-maria Agregar paginas para Reportantes 19/02/2019

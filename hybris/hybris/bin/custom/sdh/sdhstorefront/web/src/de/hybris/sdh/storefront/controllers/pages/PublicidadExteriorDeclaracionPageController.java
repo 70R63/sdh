@@ -46,7 +46,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -248,13 +247,15 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				declaPublicidadForm.setFechnotif(localDate.format(formatter2));
 			}
 
-			final Optional optional = detallePublicidadResponse.getDetalle().stream()
-					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
+			//			final Optional optional = detallePublicidadResponse.getDetalle().stream()
+			//					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
+			//
+			//			if (Boolean.TRUE.equals(optional.isPresent()))
+			//			{
+			//				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
+			//			}
 
-			if (Boolean.TRUE.equals(optional.isPresent()))
-			{
-				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
-			}
+			declaPublicidadForm.setOrValla(detallePublicidadResponse.getInfoDeclara().getOrientacionValla());
 
 			declaPublicidadForm.setLuginst(detallePublicidadResponse.getInfoDeclara().getLugarInstala());
 			declaPublicidadForm.setBasegrav(detallePublicidadResponse.getInfoDeclara().getTamanoValla());
@@ -343,7 +344,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		calcPublicidadRequest.setDireccion(dataForm.getDireccion());
 		calcPublicidadRequest.setPlaca(dataForm.getPlaca());
 		calcPublicidadRequest.setOrientacionValla(dataForm.getOrValla());
-		calcPublicidadRequest.setTamanoValla(dataForm.getBasegrav());
+		calcPublicidadRequest.setTamanoValla(dataForm.getTamValla());
 		calcPublicidadRequest.setTipoIDcontrib(customerModel.getDocumentType());
 		calcPublicidadRequest.setIDcontrib(customerModel.getDocumentNumber());
 		calcPublicidadRequest.setMunicipioContrib(dataForm.getMunicipioContrib());

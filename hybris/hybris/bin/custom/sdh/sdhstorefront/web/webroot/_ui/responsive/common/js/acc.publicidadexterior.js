@@ -87,6 +87,7 @@ ACC.publicidadexterior = {
 		            	if(data.errores)
 	            		{
 		            		$( "#dialogPublicidadExterior" ).dialog( "open" );
+		            		$("#publicidadExteriorDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
     	            		});
@@ -118,6 +119,7 @@ ACC.publicidadexterior = {
 		            },
 		            error: function () {
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
+		            	$("#publicidadExteriorDialogContent").html("");
 		            	$("#publicidadExteriorDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
 		            	$("#impCar").val("");
             			$("#valsan").val("");
