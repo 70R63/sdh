@@ -7,13 +7,17 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
+import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import org.apache.commons.lang.StringUtils;
 
 
 public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerData>
@@ -25,6 +29,7 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 	public void populate(final CustomerModel source, final CustomerData target) throws ConversionException
 	{
 		target.setDocumentNumber(source.getDocumentNumber());
+		target.setDocumentType(source.getDocumentType());
 		target.setMiddleName(source.getMiddleName());
 		target.setSecondLastName(source.getSecondLastName());
 		target.setDocumentExpeditionDate(source.getDocumentExpeditionDate());
@@ -61,6 +66,72 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 		}
 
 		target.setRolList(rolDatas);
+
+		final StringBuilder nameBuilder = new StringBuilder();
+
+		if ("nit".equalsIgnoreCase(source.getDocumentType()) || "nite".equalsIgnoreCase(source.getDocumentType()))
+		{
+			if (StringUtils.isNotBlank(source.getNameOrg1()))
+			{
+				nameBuilder.append(source.getNameOrg1() + " ");
+			}
+			if (StringUtils.isNotBlank(source.getNameOrg2()))
+			{
+				nameBuilder.append(source.getNameOrg2() + " ");
+			}
+			if (StringUtils.isNotBlank(source.getNameOrg3()))
+			{
+				nameBuilder.append(source.getNameOrg3() + " ");
+			}
+			if (StringUtils.isNotBlank(source.getNameOrg4()))
+			{
+				nameBuilder.append(source.getNameOrg4() + " ");
+			}
+		}
+		else
+		{
+
+			if (StringUtils.isNotBlank(source.getFirstName()))
+			{
+				nameBuilder.append(source.getFirstName() + " ");
+			}
+			if (StringUtils.isNotBlank(source.getMiddleName()))
+			{
+				nameBuilder.append(source.getMiddleName() + " ");
+			}
+			if (StringUtils.isNotBlank(source.getLastName()))
+			{
+				nameBuilder.append(source.getLastName() + " ");
+			}
+			if (StringUtils.isNotBlank(source.getSecondLastName()))
+			{
+				nameBuilder.append(source.getSecondLastName() + " ");
+			}
+
+		}
+
+		target.setCompleteName(nameBuilder.toString());
+
+
+		final List<SDHExteriorPublicityTaxModel> peTaxModels = source.getExteriorPublicityTaxList();
+		final List<SDHExteriorPublicityTaxData> peTaxDatas = new ArrayList<SDHExteriorPublicityTaxData>();
+		if (null != peTaxModels && !peTaxModels.isEmpty())
+		{
+
+			for (final SDHExteriorPublicityTaxModel eachModel : peTaxModels)
+			{
+				final SDHExteriorPublicityTaxData eachData = new SDHExteriorPublicityTaxData();
+
+				eachData.setFenceType(eachModel.getFenceType());
+				eachData.setObjectNumber(eachModel.getObjectNumber());
+				eachData.setResolutionNumber(eachModel.getResolutionNumber());
+
+				peTaxDatas.add(eachData);
+			}
+
+		}
+		target.setExteriorPublicityTaxList(peTaxDatas);
+
 
 	}
 
