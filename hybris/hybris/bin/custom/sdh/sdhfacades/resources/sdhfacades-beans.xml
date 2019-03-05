@@ -44,7 +44,7 @@
 		<property name="digVer" type="String"/>
 		<property name="legalEntity" type="String"/>
 		<property name="legalOrg" type="String"/>
-		
+		<property name="completeName" type="String"/>
 		
 		<property name="addressList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHAddressData>"/>
 		<property name="phoneList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHPhoneData>"/>
@@ -94,9 +94,9 @@
 	</bean>
 	
 	<bean class="de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData">	
-		<property name="documentNumber" type="String"/>
-		<property name="documentType" type="String"/>
+		<property name="resolutionNumber" type="String"/>
 		<property name="objectNumber" type="String"/>
+		<property name="fenceType" type="String"/>
 	</bean>
 	
 	<bean class="de.hybris.sdh.facades.questions.data.SDHAgentData">	

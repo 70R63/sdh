@@ -207,12 +207,20 @@ public class PSEPaymentController extends AbstractPageController
 		psePaymentForm.setPeriodo("02");
 		psePaymentForm.setAnoGravable("2019");
 
-
+		String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
 
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
+<<<<<<< HEAD
 		GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 >>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
+=======
+		model.addAttribute("ticketId", ticketId);
+
+		//GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
+		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
+				"pse.message.info.success.transaction", new Object[]{ codeResponse });
+>>>>>>> 0ae5daa2ba7d6040174676d2a9dbe6b11fb9cf46
 
 		return getViewForPage(model);
 	}
@@ -240,7 +248,8 @@ public class PSEPaymentController extends AbstractPageController
 
 	@RequestMapping(value = "/pagoEnLinea/realizarPago", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String realizarPago(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
+	public String realizarPago(final Model model, final PSEPaymentForm psePaymentForm, final RedirectAttributes redirectModel)
+			throws CMSItemNotFoundException
 	{
 >>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
@@ -265,15 +274,20 @@ public class PSEPaymentController extends AbstractPageController
 			}
 			this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
 					psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
-			GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+			//GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
+					"pse.message.info.done.transaction.with.status",
+					new Object[]{ returnCode });
 		}
 		else
 		{
-			GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+			//GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"pse.message.error.no.connection", new Object[] {});
 		}
 
-		LOG.info(response);
 
+		LOG.info(response);
 		LOG.info(psePaymentForm);
 		LOG.info("Call PSE/Bank Web Service");
 >>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73

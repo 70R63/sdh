@@ -144,7 +144,7 @@
 									<span class="logged_in js-logged_in">
 									<ycommerce:testId
 											code="header_tipo_doc">
-											<spring:theme code="header.tipo.doc" htmlEscape="true" />&nbsp;${ docTipe}
+											<spring:theme code="header.tipo.doc" htmlEscape="true" />&nbsp;${ docType}
 										</ycommerce:testId></span>
 								</li>
 								<li>

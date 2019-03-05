@@ -607,10 +607,17 @@
 		<constructor-arg value="PseBankListCatalog"/>
 	</bean>
 	
+	
+	<alias alias="pseTransactionsLogDao" name="defaultPseTransactionsLogDao"/>
+	<bean id="defaultPseTransactionsLogDao" class="de.hybris.sdh.core.dao.impl.DefaultPseTransactionsLogDao">
+		<constructor-arg value="PseTransactionsLog"/>
+	</bean>
+	
 	<alias alias="sdhPseBankListCatalogService" name="defaultSDHPseBankListCatalogService"/>
 	<bean id="defaultSDHPseBankListCatalogService" class="de.hybris.sdh.core.services.impl.DefaultSDHPseBankListCatalogService"/>
 	
 	<alias alias="pseTransactionsLogService" name="defaultSDHPseTransactionsLogService"/>
 	<bean id="defaultSDHPseTransactionsLogService" class="de.hybris.sdh.core.services.impl.DefaultSDHPseTransactionsLogService"/>
+
 	
 </beans>

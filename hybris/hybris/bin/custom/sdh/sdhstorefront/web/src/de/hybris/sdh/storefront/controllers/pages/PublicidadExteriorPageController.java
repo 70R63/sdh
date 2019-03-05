@@ -16,26 +16,24 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.session.SessionService;
-import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
-import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
+import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -72,16 +70,12 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String BREADCRUMBS_VALUE = "breadcrumb.publicidad";
 
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
 
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
-
-	@Resource(name = "userService")
-	UserService userService;
-
-	@Resource(name = "sdhConsultaContribuyenteBPService")
-	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	@Resource(name = "sdhDetallePublicidadService")
 	SDHDetallePublicidadService sdhDetallePublicidadService;
@@ -99,149 +93,55 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	//CMS PAGES
 	private static final String DECLARACION_PUBLICIDAD_CMS_PAGE = "DeclaraPublicidadPage";
 
-	private String getNameOrOrgName(final String bp)
-	{
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final StringBuilder nameBuilder = new StringBuilder();
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final PublicidadForm publicidadForm = new PublicidadForm();
-		final String numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
-
-		consultaContribuyenteBPRequest.setNumBP(numBP);
-		try
-		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
-			{
-				if (sdhConsultaContribuyenteBPResponse.getInfoContrib() != null
-						&& sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales() != null)
-				{
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4() + " ");
-					}
-				}
-			}
-			else
-			{
-				if (sdhConsultaContribuyenteBPResponse.getInfoContrib() != null)
-				{
-
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe() + " ");
-					}
-				}
-
-			}
-
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-		}
-
-		return nameBuilder.toString();
-	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String showView(final Model model) throws CMSItemNotFoundException
 	{
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-		final String numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
 		final UIMenuForm uiMenuForm = new UIMenuForm();
 		//TODO: this call should be replace for code getting data from model
-		final String name = this.getNameOrOrgName(customerModel.getNumBP());
-		model.addAttribute("name", name);
-		consultaContribuyenteBPRequest.setNumBP(numBP);
-		try
+		model.addAttribute("name", customerData.getCompleteName());
+
+		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			final List<SDHExteriorPublicityTaxData> exteriorPublicityList = customerData.getExteriorPublicityTaxList();
 
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
+			final List<ImpuestoPublicidadExterior> listImpuestoPublicdadExterior = new ArrayList<ImpuestoPublicidadExterior>();
 
-			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
+			for (final SDHExteriorPublicityTaxData eachPublicityTax : exteriorPublicityList)
 			{
-				publicidadForm.setPublicidadExt(sdhConsultaContribuyenteBPResponse.getPublicidadExt().stream()
-						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNumResolu())).collect(Collectors.toList()));
+				final ImpuestoPublicidadExterior eachImpuestoPE = new ImpuestoPublicidadExterior();
 
-				if (publicidadForm.getPublicidadExt() != null && !publicidadForm.getPublicidadExt().isEmpty())
+				eachImpuestoPE.setNumObjeto(eachPublicityTax.getObjectNumber());
+				eachImpuestoPE.setNumResolu(eachPublicityTax.getResolutionNumber());
+				eachImpuestoPE.setTipoValla(eachPublicityTax.getFenceType());
+
+				if ("VALLA VEHICULOS".equalsIgnoreCase(eachPublicityTax.getFenceType())
+						|| "VALLA VEHíCULOS".equalsIgnoreCase(eachPublicityTax.getFenceType()))
 				{
-					for (final ImpuestoPublicidadExterior ecahPublicidadExt : publicidadForm.getPublicidadExt())
-					{
-						final String tipovalla = ecahPublicidadExt.getTipoValla();
-						if ("VALLA VEHICULOS".equalsIgnoreCase(tipovalla) || "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
-						{
-
-							ecahPublicidadExt.setTipoVallaCode("02");
-
-						}
-						else if ("Valla Tubular de Obra".equalsIgnoreCase(tipovalla))
-						{
-
-							ecahPublicidadExt.setTipoVallaCode("03");
-
-
-						}
-						else if ("Valla de Obra Convencional".equalsIgnoreCase(tipovalla))
-						{
-
-							ecahPublicidadExt.setTipoVallaCode("04");
-
-						}
-						else if ("Valla Tubular Comercial".equalsIgnoreCase(tipovalla))
-						{
-
-
-							ecahPublicidadExt.setTipoVallaCode("01");
-
-						}
-						else if ("Pantalla LED".equalsIgnoreCase(tipovalla))
-						{
-							ecahPublicidadExt.setTipoVallaCode("05");
-
-
-						}
-					}
+					eachImpuestoPE.setTipoVallaCode("02");
 				}
+				else if ("Valla Tubular de Obra".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("03");
+				}
+				else if ("Valla de Obra Convencional".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("04");
+				}
+				else if ("Valla Tubular Comercial".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("01");
+				}
+				else if ("Pantalla LED".equalsIgnoreCase(eachPublicityTax.getFenceType()))
+				{
+					eachImpuestoPE.setTipoVallaCode("05");
+				}
+				listImpuestoPublicdadExterior.add(eachImpuestoPE);
+			}
 
+			publicidadForm.setPublicidadExt(listImpuestoPublicdadExterior);
 
 			}
 			else
@@ -250,18 +150,8 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			}
 
 
-			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
-			model.addAttribute("uiMenuForm", uiMenuForm);
-
-
 			model.addAttribute("publicidadForm", publicidadForm);
 
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
@@ -294,10 +184,9 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	final PublicidadForm publicidadInfo, final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		final PublicidadForm publicidadForm = new PublicidadForm();
-
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
-		final String numBP = customerModel.getNumBP();
+		final String numBP = customerData.getNumBP();
 
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(publicidadInfo.getNumResolu());
@@ -956,19 +845,15 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 		if ("01".equals(eachDetalle.getUbicacion()))
 		{
-			publicidadForm.setUbicacion("Primer piso");
+			publicidadForm.setUbicacion("Edificio privado");
 		}
 		else if ("02".equals(eachDetalle.getUbicacion()))
 		{
-			publicidadForm.setUbicacion("Parqueadero");
+			publicidadForm.setUbicacion("Lote privado");
 		}
 		else if ("03".equals(eachDetalle.getUbicacion()))
 		{
-			publicidadForm.setUbicacion("Antepecho del segundo piso");
-		}
-		else if ("04".equals(eachDetalle.getUbicacion()))
-		{
-			publicidadForm.setUbicacion("Canopy porte superior del edificio (de 5 más pisos)");
+			publicidadForm.setUbicacion("Espacio público");
 		}
 		else
 		{

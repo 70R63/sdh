@@ -16,13 +16,11 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
-import de.hybris.platform.servicelayer.session.SessionService;
-import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.responses.CalcPublicidadResponse;
@@ -30,15 +28,12 @@ import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
-import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
-import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -86,15 +81,6 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 
 
-	@Resource(name = "sessionService")
-	SessionService sessionService;
-
-	@Resource(name = "userService")
-	UserService userService;
-
-	@Resource(name = "sdhConsultaContribuyenteBPService")
-	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
-
 	@Resource(name = "sdhDetallePublicidadService")
 	SDHDetallePublicidadService sdhDetallePublicidadService;
 
@@ -110,6 +96,9 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	@Resource(name = "modelService")
 	private ModelService modelService;
 
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
 
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
@@ -123,97 +112,16 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 
-	private String getNameOrOrgName(final String bp)
-	{
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final StringBuilder nameBuilder = new StringBuilder();
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final PublicidadForm publicidadForm = new PublicidadForm();
-		final String numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
-
-		consultaContribuyenteBPRequest.setNumBP(numBP);
-		try
-		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
-			{
-				if (sdhConsultaContribuyenteBPResponse.getInfoContrib() != null
-						&& sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales() != null)
-				{
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4() + " ");
-					}
-				}
-			}
-			else
-			{
-				if (sdhConsultaContribuyenteBPResponse.getInfoContrib() != null)
-				{
-
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe() + " ");
-					}
-					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe()))
-					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe() + " ");
-					}
-				}
-
-			}
-
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-		}
-
-		return nameBuilder.toString();
-	}
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String showView(final Model model, @RequestParam(required = true, value = "numResolu")
 	final String numResolu, @RequestParam(required = true, value = "anoGravable")
 	final String anoGravable, @RequestParam(required = true, value = "tipoValla")
 	final String tipoValla) throws CMSItemNotFoundException
 	{
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final UIMenuForm uiMenuForm = new UIMenuForm();
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-
-		//TODO: this call should be replace for code getting data from model
-		final String name = this.getNameOrOrgName(customerModel.getNumBP());
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
-		final String numBP = customerModel.getNumBP();
+		final String numBP = customerData.getNumBP();
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(numResolu);
 		detallePublicidadRequest.setAnoGravable(anoGravable);
@@ -232,6 +140,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
@@ -244,13 +153,15 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 
 >>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
+=======
+>>>>>>> 0ae5daa2ba7d6040174676d2a9dbe6b11fb9cf46
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
-			declaPublicidadForm.setIdNumber(customerModel.getDocumentNumber());
-			declaPublicidadForm.setIdType(customerModel.getDocumentType());
-			declaPublicidadForm.setName(name);
+			declaPublicidadForm.setIdNumber(customerData.getDocumentType());
+			declaPublicidadForm.setIdType(customerData.getDocumentType());
+			declaPublicidadForm.setName(customerData.getCompleteName());
 			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
-			declaPublicidadForm.setNumBP(customerModel.getNumBP());
+			declaPublicidadForm.setNumBP(customerData.getNumBP());
 			declaPublicidadForm.setAnograv(detallePublicidadResponse.getAnoGravable());
 			declaPublicidadForm.setNumform(detallePublicidadResponse.getInfoDeclara().getNumForm());
 			declaPublicidadForm.setNumresol(detallePublicidadResponse.getNumResolu());
@@ -301,8 +212,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			declaPublicidadForm.setDetalle(detallePublicidadResponse.getDetalle());
 
 			//TODO: this has to change once we have logic for agents.
-			declaPublicidadForm.setIdDeclarante(customerModel.getDocumentNumber());
-			declaPublicidadForm.setTipoIDdeclara(customerModel.getDocumentType());
+			declaPublicidadForm.setIdDeclarante(customerData.getDocumentNumber());
+			declaPublicidadForm.setTipoIDdeclara(customerData.getDocumentType());
 			if (detallePublicidadResponse.getDetalle() != null && !detallePublicidadResponse.getDetalle().isEmpty())
 			{
 
@@ -342,16 +253,12 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	{
 		CalcPublicidadResponse calcPublicidadResponse = new CalcPublicidadResponse();
 
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-
-		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		final CalcPublicidadRequest calcPublicidadRequest = new CalcPublicidadRequest();
 
 
-		calcPublicidadRequest.setNumBP(customerModel.getNumBP());
+		calcPublicidadRequest.setNumBP(customerData.getNumBP());
 		calcPublicidadRequest.setNumResolu(dataForm.getNumresol());
 		calcPublicidadRequest.setNumForm(dataForm.getNumform());
 		calcPublicidadRequest.setAnoGravable(dataForm.getAnograv());
@@ -376,8 +283,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		calcPublicidadRequest.setPlaca(dataForm.getPlaca());
 		calcPublicidadRequest.setOrientacionValla(dataForm.getOrValla());
 		calcPublicidadRequest.setTamanoValla(dataForm.getTamValla());
-		calcPublicidadRequest.setTipoIDcontrib(customerModel.getDocumentType());
-		calcPublicidadRequest.setIDcontrib(customerModel.getDocumentNumber());
+		calcPublicidadRequest.setTipoIDcontrib(customerData.getDocumentType());
+		calcPublicidadRequest.setIDcontrib(customerData.getDocumentNumber());
 		calcPublicidadRequest.setMunicipioContrib(dataForm.getMunicipioContrib());
 		calcPublicidadRequest.setTipoIDdeclara(dataForm.getTipoIDdeclara());
 		calcPublicidadRequest.setIDdeclarante(dataForm.getIdDeclarante());
@@ -427,7 +334,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		String numForm = request.getParameter("numForm");
 
 		if (StringUtils.isBlank(numForm))
@@ -459,7 +366,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 
 
-				final String fileName = numForm + "-" + customerModel.getNumBP() + ".pdf";
+				final String fileName = numForm + "-" + customerData.getNumBP() + ".pdf";
 
 				final InputStream is = new ByteArrayInputStream(decodedBytes);
 
