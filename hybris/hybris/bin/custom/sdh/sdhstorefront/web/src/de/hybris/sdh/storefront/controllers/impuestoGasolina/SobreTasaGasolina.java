@@ -591,9 +591,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		psePaymentForm.setAnoGravable(dataForm.getAnoGravable());
 		psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
 		psePaymentForm.setPeriodo(clavePeriodo);
-		psePaymentForm
-				.setTipoDeIdentificacion(
-						gasolinaService.getDescripcion(dataForm.getTipoDoc(), dataForm.getCatalogosSo().getTipoIdRev()));
+		psePaymentForm.setTipoDeIdentificacion(dataForm.getTipoDoc());
 		psePaymentForm.setNoIdentificacion(dataForm.getNumDoc());
 		psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
 		psePaymentForm.setFechaLimiteDePago(detallePagoResponse.getFechVenc());

@@ -230,16 +230,18 @@ public class ContribuyentesPageController extends AbstractPageController
 	//#->FIN dev-federico 17/01/2019 comentado para usar otro controller para Sobretasa Gasolina
 	*/
 
-	@RequestMapping(value = "/delineacion-urbana", method = RequestMethod.GET)
-	public String delineacionUrbana(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	{
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
-		updatePageTitle(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
-
-		return getViewForPage(model);
-	}
+	//#->INI dev-federico 26/02/2019 comentado para usar otro controller para Delineacion urbana
+	//	@RequestMapping(value = "/delineacion-urbana", method = RequestMethod.GET)
+	//	public String delineacionUrbana(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	//	{
+	//
+	//		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
+	//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
+	//		updatePageTitle(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
+	//
+	//		return getViewForPage(model);
+	//	}
+	//#->INI dev-federico 26/02/2019 comentado para usar otro controller para Delineacion urbana
 
 	@RequestMapping(value = "/delineacion-urbana/declaraciones", method = RequestMethod.GET)
 	public String delineacionUrbanaDeclaraciones(final Model model, final RedirectAttributes redirectModel,final HttpServletRequest request)
