@@ -27,6 +27,7 @@ import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -98,7 +99,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	{
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-
+		final UIMenuForm uiMenuForm = new UIMenuForm();
 		//TODO: this call should be replace for code getting data from model
 		model.addAttribute("name", customerData.getCompleteName());
 		model.addAttribute("docType", customerData.getDocumentType());
@@ -150,31 +151,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 			}
 
-
-			//*->INI dev-eduardo ajuste de menu impuestos
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-		//			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-		//					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-		//			{
-		//				publicidadForm.setbSobreGasolina("X");
-		//			}
-		//			else
-		//			{
-		//				publicidadForm.setbSobreGasolina("");
-		//			}
-		//
-		//			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-		//					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
-		//			{
-		//				publicidadForm.setbPublicidadExt("X");
-		//			}
-		//			else
-		//			{
-		//				publicidadForm.setbPublicidadExt("");
-		//			}
-			//*->FIN dev-eduardo ajuste de menu impuestos
 
 			model.addAttribute("publicidadForm", publicidadForm);
 

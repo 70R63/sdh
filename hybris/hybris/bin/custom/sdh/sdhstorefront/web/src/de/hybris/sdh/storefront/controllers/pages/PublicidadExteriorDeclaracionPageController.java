@@ -118,7 +118,6 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	final String tipoValla) throws CMSItemNotFoundException
 	{
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		//TODO: this call should be replace for code getting data from model
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
@@ -130,11 +129,13 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		try
 		{
 			final PublicidadForm publicidadForm = new PublicidadForm();
+
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+
 
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
@@ -198,6 +199,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			}
 			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
 			model.addAttribute("declaPublicidadForm", declaPublicidadForm);
+
 		}
 		catch (final Exception e)
 		{

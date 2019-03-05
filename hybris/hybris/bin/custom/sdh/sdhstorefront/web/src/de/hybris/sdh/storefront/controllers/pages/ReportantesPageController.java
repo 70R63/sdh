@@ -21,7 +21,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
-import de.hybris.sdh.storefront.forms.UIContribuyenteForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import javax.annotation.Resource;
 
@@ -80,7 +80,7 @@ public class ReportantesPageController extends AbstractPageController
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final UIContribuyenteForm uiContribuyenteForm = new UIContribuyenteForm();
+		final UIMenuForm uiMenuForm = new UIMenuForm();
 
 		try
 		{
@@ -94,10 +94,8 @@ public class ReportantesPageController extends AbstractPageController
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 					SDHValidaMailRolResponse.class);
 
-			if (sdhConsultaContribuyenteBPResponse.getRoles() != null && !sdhConsultaContribuyenteBPResponse.getRoles().isEmpty())
-			{
-				uiContribuyenteForm.setRoles(sdhConsultaContribuyenteBPResponse.getRoles());
-			}
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
 		}
 		catch (final Exception e)
@@ -112,160 +110,10 @@ public class ReportantesPageController extends AbstractPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(REPORTANTES_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_REPORTANTES_VALUE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		model.addAttribute("uiContribuyenteForm", uiContribuyenteForm);
+
 
 		return getViewForPage(model);
 
 	}
-
-
-
-	//----------------------------------------------------------------------------------------------------------------------
-	//->Carga de documentos
-	//----------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/reportantes/cargadocumentos", method = RequestMethod.GET)
-	public String showView(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	{
-
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final UIContribuyenteForm uiContribuyenteForm = new UIContribuyenteForm();
-
-		try
-		{
-			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			if (sdhConsultaContribuyenteBPResponse.getRoles() != null && !sdhConsultaContribuyenteBPResponse.getRoles().isEmpty())
-			{
-				uiContribuyenteForm.setRoles(sdhConsultaContribuyenteBPResponse.getRoles());
-			}
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
-
-
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(REPORTANTES_CARGA_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(REPORTANTES_CARGA_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_CARGA_VALUE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		model.addAttribute("uiContribuyenteForm", uiContribuyenteForm);
-
-		return getViewForPage(model);
-
-	}
-
-
-
-	//----------------------------------------------------------------------------------------------------------------------
-	//->Historico
-	//----------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/reportantes/historico", method = RequestMethod.GET)
-	public String showReportantesHistorico(final Model model, final RedirectAttributes redirectModel)
-			throws CMSItemNotFoundException
-	{
-
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final UIContribuyenteForm uiContribuyenteForm = new UIContribuyenteForm();
-
-		try
-		{
-			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			if (sdhConsultaContribuyenteBPResponse.getRoles() != null && !sdhConsultaContribuyenteBPResponse.getRoles().isEmpty())
-			{
-				uiContribuyenteForm.setRoles(sdhConsultaContribuyenteBPResponse.getRoles());
-			}
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
-
-
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(REPORTANTES_HISTORICO_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(REPORTANTES_HISTORICO_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_HISTORICO_VALUE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		model.addAttribute("uiContribuyenteForm", uiContribuyenteForm);
-
-		return getViewForPage(model);
-
-	}
-
-
-	//----------------------------------------------------------------------------------------------------------------------
-	//->Sanciones
-	//----------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/reportantes/sanciones", method = RequestMethod.GET)
-	public String showReportantesSanciones(final Model model, final RedirectAttributes redirectModel)
-			throws CMSItemNotFoundException
-	{
-
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final UIContribuyenteForm uiContribuyenteForm = new UIContribuyenteForm();
-
-		try
-		{
-			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			if (sdhConsultaContribuyenteBPResponse.getRoles() != null && !sdhConsultaContribuyenteBPResponse.getRoles().isEmpty())
-			{
-				uiContribuyenteForm.setRoles(sdhConsultaContribuyenteBPResponse.getRoles());
-			}
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
-
-
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(REPORTANTES_SANCIONES_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(REPORTANTES_SANCIONES_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_SANCIONES_VALUE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		model.addAttribute("uiContribuyenteForm", uiContribuyenteForm);
-
-		return getViewForPage(model);
-
-	}
-
-
 
 }
