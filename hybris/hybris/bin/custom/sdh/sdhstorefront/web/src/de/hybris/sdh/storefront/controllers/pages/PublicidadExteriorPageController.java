@@ -16,7 +16,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -30,6 +29,7 @@ import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -182,7 +182,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final PublicidadForm publicidadForm = new PublicidadForm();
 		final String numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
-
+		final UIMenuForm uiMenuForm = new UIMenuForm();
 		//TODO: this call should be replace for code getting data from model
 		final String name = this.getNameOrOrgName(customerModel.getNumBP());
 		model.addAttribute("name", name);
@@ -250,30 +250,9 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			}
 
 
-			//*->INI dev-eduardo ajuste de menu impuestos
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-			{
-				publicidadForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				publicidadForm.setbSobreGasolina("");
-			}
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
-			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
-			{
-				publicidadForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				publicidadForm.setbPublicidadExt("");
-			}
-			//*->FIN dev-eduardo ajuste de menu impuestos
 
 			model.addAttribute("publicidadForm", publicidadForm);
 

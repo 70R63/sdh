@@ -78,6 +78,7 @@ public class ContribuyentesPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final ObjectMapper mapper = new ObjectMapper();
+		final UIMenuForm uiMenuForm = new UIMenuForm();
 
 		try
 		{
@@ -89,7 +90,8 @@ public class ContribuyentesPageController extends AbstractPageController
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 					SDHValidaMailRolResponse.class);
 
-
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
 			model.addAttribute("uiContribuyenteForm", uiContribuyenteForm);
 

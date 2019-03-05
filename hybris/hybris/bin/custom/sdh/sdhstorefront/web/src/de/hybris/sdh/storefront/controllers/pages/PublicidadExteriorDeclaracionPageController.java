@@ -38,6 +38,7 @@ import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -204,6 +205,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	final String tipoValla) throws CMSItemNotFoundException
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final UIMenuForm uiMenuForm = new UIMenuForm();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 
 		//TODO: this call should be replace for code getting data from model
 		final String name = this.getNameOrOrgName(customerModel.getNumBP());
@@ -218,11 +221,24 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		try
 		{
 			final PublicidadForm publicidadForm = new PublicidadForm();
+
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+
+
+			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
+
+
 
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
@@ -286,6 +302,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			}
 			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
 			model.addAttribute("declaPublicidadForm", declaPublicidadForm);
+
 		}
 		catch (final Exception e)
 		{

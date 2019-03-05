@@ -221,18 +221,21 @@
 
 
 <script>
-	function borraMenu(elementMenu, indexMenu, arrayMenu){
+	function borraMenu(elementMenu, indexMenu, arrayMenu, html_element, element_attr){
 		
-		var li_array = document.getElementsByTagName('li');
-		var inner_Text;
+		var li_array = document.getElementsByTagName(html_element);
+		var attr_value;
 		var li_index;
 		var error_message;
 		
 		for( li_index = 0; li_index < li_array.length; li_index++ ) {	    		
 			try{
-				inner_Text = li_array[li_index].innerText;
 				
-				if( inner_Text.includes(elementMenu)){					  					
+				if (element_attr == "innerText"){ attr_value = li_array[li_index].innerText;}				
+				if (element_attr == "className"){ attr_value = li_array[li_index].className;}
+				
+				
+				if( attr_value.includes(elementMenu)){					  					
 					li_array[li_index].remove();
 				}	
 			}catch(err){
@@ -251,11 +254,23 @@
 		var listaMenus=[];
 		var li_index;
 		
+		if (currentUrl.includes("/sdhstorefront/es/login") && 
+			!currentUrl.includes("/pw/request/external") ){
+			
+			listaMenus=[];
+			listaMenus.push("breadcrumb-section");
+			
+			for( li_index = 0; li_index < listaMenus.length; li_index++ ) {
+				borraMenu(listaMenus[li_index], li_index, listaMenus, "div", "className");
+			}	
+		}
+		
 		<c:forEach items="${uiMenuForm.roles}" var="row_rol">
+			listaMenus=[];
 		
 			rol = '<c:out value="${row_rol.nombreRol}"/>';
 			
-			if (rol = "01" && currentUrl.includes("Contribuyentes")){
+			if (rol = "01" && currentUrl.includes("contribuyentes")){
 				listaMenus.push("Mi Información Reportada");
 				
 				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
@@ -289,7 +304,7 @@
 			}
 			
 			for( li_index = 0; li_index < listaMenus.length; li_index++ ) {
-				borraMenu(listaMenus[li_index], li_index, listaMenus);
+				borraMenu(listaMenus[li_index], li_index, listaMenus, "li", "innerText");
 			}	
 		</c:forEach>
 	}	
