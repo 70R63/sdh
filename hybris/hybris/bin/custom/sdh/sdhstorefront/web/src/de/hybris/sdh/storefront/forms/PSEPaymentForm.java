@@ -280,6 +280,21 @@ public class PSEPaymentForm
 		this.tipoDeTarjeta = tipoDeTarjeta;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "PSEPaymentForm [tipoDeImpuesto=" + tipoDeImpuesto + ", numeroDeReferencia=" + numeroDeReferencia + ", impuesto="
+				+ impuesto + ", anoGravable=" + anoGravable + ", CHIP=" + CHIP + ", periodo=" + periodo + ", CUD=" + CUD
+				+ ", noIdentificacion=" + noIdentificacion + ", DV=" + DV + ", tipoDeIdentificacion=" + tipoDeIdentificacion
+				+ ", fechaLimiteDePago=" + fechaLimiteDePago + ", pagoAdicional=" + pagoAdicional + ", banco=" + banco
+				+ ", valorAPagar=" + valorAPagar + ", tipoDeTarjeta=" + tipoDeTarjeta + "]";
+	}
+
 
 
 

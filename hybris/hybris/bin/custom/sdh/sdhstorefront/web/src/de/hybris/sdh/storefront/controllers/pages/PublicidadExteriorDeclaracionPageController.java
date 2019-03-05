@@ -38,6 +38,7 @@ import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -147,19 +148,19 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				{
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4() + " ");
 					}
 				}
 			}
@@ -170,19 +171,19 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe() + " ");
 					}
 				}
 
@@ -205,6 +206,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	final String tipoValla) throws CMSItemNotFoundException
 	{
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final UIMenuForm uiMenuForm = new UIMenuForm();
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 
 		//TODO: this call should be replace for code getting data from model
 		final String name = this.getNameOrOrgName(customerModel.getNumBP());
@@ -219,12 +222,28 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		try
 		{
 			final PublicidadForm publicidadForm = new PublicidadForm();
+
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
 
+<<<<<<< HEAD
+=======
+
+			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
+
+
+
+>>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
 			declaPublicidadForm.setIdNumber(customerModel.getDocumentNumber());
@@ -248,6 +267,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				declaPublicidadForm.setFechnotif(localDate.format(formatter2));
 			}
 
+<<<<<<< HEAD
 			final Optional optional = detallePublicidadResponse.getDetalle().stream()
 					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
 
@@ -255,6 +275,17 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			{
 				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
 			}
+=======
+			//			final Optional optional = detallePublicidadResponse.getDetalle().stream()
+			//					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
+			//
+			//			if (Boolean.TRUE.equals(optional.isPresent()))
+			//			{
+			//				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
+			//			}
+
+			declaPublicidadForm.setOrValla(detallePublicidadResponse.getInfoDeclara().getOrientacionValla());
+>>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 
 			declaPublicidadForm.setLuginst(detallePublicidadResponse.getInfoDeclara().getLugarInstala());
 			declaPublicidadForm.setBasegrav(detallePublicidadResponse.getInfoDeclara().getTamanoValla());
@@ -285,6 +316,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			}
 			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
 			model.addAttribute("declaPublicidadForm", declaPublicidadForm);
+
 		}
 		catch (final Exception e)
 		{
@@ -343,7 +375,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		calcPublicidadRequest.setDireccion(dataForm.getDireccion());
 		calcPublicidadRequest.setPlaca(dataForm.getPlaca());
 		calcPublicidadRequest.setOrientacionValla(dataForm.getOrValla());
-		calcPublicidadRequest.setTamanoValla(dataForm.getBasegrav());
+		calcPublicidadRequest.setTamanoValla(dataForm.getTamValla());
 		calcPublicidadRequest.setTipoIDcontrib(customerModel.getDocumentType());
 		calcPublicidadRequest.setIDcontrib(customerModel.getDocumentNumber());
 		calcPublicidadRequest.setMunicipioContrib(dataForm.getMunicipioContrib());

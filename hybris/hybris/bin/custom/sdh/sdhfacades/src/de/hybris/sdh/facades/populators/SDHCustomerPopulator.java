@@ -7,6 +7,11 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.sdh.core.model.SDHRolModel;
+import de.hybris.sdh.facades.questions.data.SDHRolData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -38,6 +43,24 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 			target.setOriginCountry(countryData);
 
 		}
+
+		final List<SDHRolModel> rolModels = source.getRolList();
+
+		final List<SDHRolData> rolDatas = new ArrayList<SDHRolData>();
+
+		if (null != rolModels && !rolModels.isEmpty())
+		{
+			for (final SDHRolModel eachRolModel : rolModels)
+			{
+				final SDHRolData eachRolData = new SDHRolData();
+
+				eachRolData.setRol(eachRolModel.getRol());
+
+				rolDatas.add(eachRolData);
+			}
+		}
+
+		target.setRolList(rolDatas);
 
 	}
 

@@ -9,7 +9,11 @@
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
 -->
+<<<<<<< HEAD
 <project name="sdhbillsaddon" default="all">
+=======
+<project name="solrserver" default="all">
+>>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 	<property file="platformhome.properties" />
 
 	<!-- next line is only for eclipse to get rid of warnings -->

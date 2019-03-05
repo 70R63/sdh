@@ -10,6 +10,7 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -50,6 +51,10 @@ import de.hybris.sdh.facades.SDHCertifNombFacade;
 import de.hybris.sdh.facades.SDHUpdateRitFacade;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
+<<<<<<< HEAD
+=======
+import de.hybris.sdh.storefront.forms.UIMenuForm;
+>>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 import de.hybris.sdh.storefront.forms.UpdateAddressRitForm;
 import de.hybris.sdh.storefront.forms.UpdateAutorizacionesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateEmailRitForm;
@@ -97,6 +102,9 @@ public class MiRitPageController extends AbstractPageController
 
 	private static final String Mi_RIT_CMS_PAGE = "MiRitPage";
 
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+	private static final String BREADCRUMBS_VALUE = "breadcrumb.certificacion";
+
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
@@ -113,6 +121,9 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sdhUpdateRitFacade")
 	SDHUpdateRitFacade sdhUpdateRitFacade;
 
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
 	{
@@ -126,9 +137,12 @@ public class MiRitPageController extends AbstractPageController
 	public String showView(final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+		final UIMenuForm uiMenuForm = new UIMenuForm();
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
@@ -143,33 +157,8 @@ public class MiRitPageController extends AbstractPageController
 
 			final MiRitForm miRitForm = new MiRitForm();
 
-
-
-			//*->INI dev-eduardo ajuste de menu impuestos
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-			{
-				miRitForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				miRitForm.setbSobreGasolina("");
-			}
-
-			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
-			{
-				miRitForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				miRitForm.setbPublicidadExt("");
-			}
-			//*->FIN dev-eduardo ajuste de menu impuestos
-
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
 			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
 			{
@@ -395,6 +384,10 @@ public class MiRitPageController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
+
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
+
+
 
 		return getViewForPage(model);
 	}

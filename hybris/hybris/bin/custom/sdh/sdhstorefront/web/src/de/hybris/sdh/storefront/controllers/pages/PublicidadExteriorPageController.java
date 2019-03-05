@@ -11,6 +11,7 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -28,6 +29,7 @@ import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -67,6 +69,10 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			+ "/contribuyentes2/publicidadexterior/detalle";
 
 
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+	private static final String BREADCRUMBS_VALUE = "breadcrumb.publicidad";
+
+
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
@@ -82,6 +88,9 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 	@Resource(name = "sdhCalPublicidadService")
 	SDHCalPublicidadService sdhCalPublicidadService;
+
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 
 	private static final String ERROR_CMS_PAGE = "notFound";
@@ -115,19 +124,19 @@ public class PublicidadExteriorPageController extends AbstractPageController
 				{
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG1() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG2() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG3() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getAdicionales().getNAME_ORG4() + " ");
 					}
 				}
 			}
@@ -138,19 +147,19 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimNom() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegNom() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getPrimApe() + " ");
 					}
 					if (StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe()))
 					{
-						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe());
+						nameBuilder.append(sdhConsultaContribuyenteBPResponse.getInfoContrib().getSegApe() + " ");
 					}
 				}
 
@@ -173,7 +182,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final PublicidadForm publicidadForm = new PublicidadForm();
 		final String numBP = customerModel.getNumBP(); //Pendiente descomentar para que se tome el BP que se logeo
-
+		final UIMenuForm uiMenuForm = new UIMenuForm();
 		//TODO: this call should be replace for code getting data from model
 		final String name = this.getNameOrOrgName(customerModel.getNumBP());
 		model.addAttribute("name", name);
@@ -241,30 +250,9 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			}
 
 
-			//*->INI dev-eduardo ajuste de menu impuestos
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-			{
-				publicidadForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				publicidadForm.setbSobreGasolina("");
-			}
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
-			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
-			{
-				publicidadForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				publicidadForm.setbPublicidadExt("");
-			}
-			//*->FIN dev-eduardo ajuste de menu impuestos
 
 			model.addAttribute("publicidadForm", publicidadForm);
 
@@ -278,6 +266,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
 
 		return getViewForPage(model);
 	}
@@ -432,6 +421,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			}
 
 				model.addAttribute("publicidadForm", publicidadForm);
+<<<<<<< HEAD
 
 
 			}
@@ -623,7 +613,322 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			publicidadForm.setAvisoLumino("-");
 		}
 
+=======
 
+
+			}
+		catch (final Exception e)
+			{
+			// XXX Auto-generated catch block
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+			}
+
+		//model.addAttribute("showDetail", true);
+		//	model.addAttribute("action", request.getParameter("action"));
+		//System.out.println("action: " + request.getParameter("action"));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		//		return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
+		return publicidadForm;
+		}
+
+	private void fillVallaLED(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setDireccion(eachDetalle.getDireccion());
+		publicidadForm.setLocalidad(eachDetalle.getLocalidad());
+		publicidadForm.setCodPostal(eachDetalle.getCodPostal());
+		publicidadForm.setChip(eachDetalle.getChip());
+		publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
+		publicidadForm.setMatricula(eachDetalle.getMatricula());
+		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+		publicidadForm.setTipoVallaCode("05");
+		if ("01".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Edificio privado");
+		}
+		else if ("02".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Lote privado");
+		}
+		else if ("03".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Espacio público");
+		}
+		else
+		{
+			publicidadForm.setUbicacion("-");
+		}
+
+		if ("01".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Comercial");
+		}
+		else if ("02".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Institucional");
+		}
+		else if ("03".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Cultural");
+		}
+		else if ("04".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Política");
+		}
+		else if ("05".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Deportiva");
+		}
+		else if ("06".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Otra");
+		}
+		else
+		{
+			publicidadForm.setTipoPublici("-");
+		}
+
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+
+		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Registro Nuevo");
+		}
+		else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Actualizacion");
+		}
+		else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Prorroga");
+		}
+		else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Traslado");
+		}
+		else
+		{
+			publicidadForm.setTipoSolicitud("-");
+		}
+	}
+
+	private void fillVallaTubularComercial(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setDireccion(eachDetalle.getDireccion());
+		publicidadForm.setLocalidad(eachDetalle.getLocalidad());
+		publicidadForm.setCodPostal(eachDetalle.getCodPostal());
+		publicidadForm.setChip(eachDetalle.getChip());
+		publicidadForm.setMatricula(eachDetalle.getMatricula());
+		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+		publicidadForm.setTipoVallaCode("01");
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+
+		if ("01".equals(eachDetalle.getAvisoLumino()))
+		{
+			publicidadForm.setAvisoLumino("Si");
+		}
+		else if ("02".equals(eachDetalle.getAvisoLumino()))
+		{
+			publicidadForm.setAvisoLumino("No");
+		}
+		else
+		{
+			publicidadForm.setAvisoLumino("-");
+		}
+>>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
+
+		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Registro Nuevo");
+		}
+		else if ("02".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "2".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Actualizacion");
+		}
+		else if ("03".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "3".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Prorroga");
+		}
+		else if ("04".equals(detallePublicidadResponse.getTipoSolicitud())
+				|| "4".equals(detallePublicidadResponse.getTipoSolicitud()))
+		{
+			publicidadForm.setTipoSolicitud("Traslado");
+		}
+		else
+		{
+			publicidadForm.setTipoSolicitud("-");
+		}
+
+<<<<<<< HEAD
+
+		if ("01".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Primer piso");
+		}
+		else if ("02".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Parqueadero");
+		}
+		else if ("03".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Antepecho del segundo piso");
+		}
+		else if ("04".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Canopy porte superior del edificio (de 5 más pisos)");
+		}
+		else
+		{
+			publicidadForm.setUbicacion("-");
+		}
+	}
+
+	private void fillVallaObraConvencional(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
+		publicidadForm.setDireccion(eachDetalle.getDireccion());//repetido
+		publicidadForm.setLocalidad(eachDetalle.getLocalidad());//repetido
+		publicidadForm.setCodPostal(eachDetalle.getCodPostal());//repetido
+		publicidadForm.setChip(eachDetalle.getChip());//repetido
+		publicidadForm.setMatricula(eachDetalle.getMatricula());//repetido
+		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+		publicidadForm.setTipoVallaCode("04");
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+
+		if ("01".equals(eachDetalle.getAvisoLumino()))
+		{
+			publicidadForm.setAvisoLumino("Si");
+		}
+		else if ("02".equals(eachDetalle.getAvisoLumino()))
+		{
+			publicidadForm.setAvisoLumino("No");
+		}
+		else
+		{
+			publicidadForm.setAvisoLumino("-");
+		}
+
+		if ("01".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Edificio privado");
+		}
+		else if ("02".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Lote privado");
+		}
+		else if ("03".equals(eachDetalle.getUbicacion()))
+		{
+			publicidadForm.setUbicacion("Espacio público");
+		}
+		else
+		{
+			publicidadForm.setUbicacion("-");
+		}
+
+=======
 		if ("01".equals(detallePublicidadResponse.getTipoSolicitud()) || "1".equals(detallePublicidadResponse.getTipoSolicitud()))
 		{
 			publicidadForm.setTipoSolicitud("Registro Nuevo");
@@ -745,6 +1050,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			publicidadForm.setUbicacion("-");
 		}
 
+>>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 		if ("01".equals(eachDetalle.getTipoPublici()))
 		{
 			publicidadForm.setTipoPublici("Comercial");
@@ -833,6 +1139,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		else
 		{
 			publicidadForm.setUbicacion("-");
+<<<<<<< HEAD
 		}
 
 		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
@@ -924,6 +1231,99 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			publicidadForm.setTipoPublici("-");
 		}
 
+=======
+		}
+
+		if ("01".equals(eachDetalle.getOrientacion()) || "1".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Oriente-Occidente");
+		}
+		else if ("02".equals(eachDetalle.getOrientacion()) || "2".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Occidente-Oriente");
+		}
+		else if ("03".equals(eachDetalle.getOrientacion()) || "3".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Norte-Sur");
+		}
+		else if ("04".equals(eachDetalle.getOrientacion()) || "4".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Sur-Norte");
+		}
+		else if ("05".equals(eachDetalle.getOrientacion()) || "5".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Derecha");
+		}
+		else if ("06".equals(eachDetalle.getOrientacion()) || "6".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Izquierda");
+		}
+		else if ("07".equals(eachDetalle.getOrientacion()) || "7".equals(eachDetalle.getOrientacion()))
+		{
+			publicidadForm.setOrientacion("Ambos sentidos");
+		}
+		else
+		{
+			publicidadForm.setOrientacion("-");
+		}
+		publicidadForm.setLicenciaUrb(eachDetalle.getLicenciaUrb());
+		publicidadForm.setContratoObra(eachDetalle.getContratoObra());
+		publicidadForm.setLicenciaConstruc(eachDetalle.getLicenciaConstruc());
+		publicidadForm.setVigLicenConstruc(eachDetalle.getVigLicenConstruc());
+		publicidadForm.setAreaTotal(eachDetalle.getAreaTotal());
+		publicidadForm.setPeriodicidad(eachDetalle.getPeriodicidad());
+		publicidadForm.setNumCaras(eachDetalle.getNumCaras());
+		publicidadForm.setAreaElemento(eachDetalle.getAreaElemento());
+
+	}
+
+	private void fillVallaVehiculos(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
+			final DetallePublicidadResponse detallePublicidadResponse)
+	{
+		publicidadForm.setModelo(eachDetalle.getModelo());
+		publicidadForm.setPlaca(eachDetalle.getPlaca());
+		publicidadForm.setNumLicenciaTrans(eachDetalle.getNumLicenciaTrans());
+		publicidadForm.setTipoVallaCode("02");
+		if ("01".equals(eachDetalle.getTipoServicio()))
+		{
+			publicidadForm.setTipoServicio("Publico");
+		}
+		else if ("02".equals(eachDetalle.getTipoServicio()))
+		{
+			publicidadForm.setTipoServicio("Particular");
+		}
+		else if ("03".equals(eachDetalle.getTipoServicio()))
+		{
+			publicidadForm.setTipoServicio("Publico colectivo");
+		}
+		else if ("04".equals(eachDetalle.getTipoServicio()))
+		{
+			publicidadForm.setTipoServicio("Publico individual");
+		}
+		else
+		{
+			publicidadForm.setTipoServicio("-");
+		}
+
+		//publicidadForm.setTipoPublici(eachDetalle.getTipoPublici());
+		if ("01".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Politica");
+		}
+		else if ("02".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Comercial");
+		}
+		else if ("03".equals(eachDetalle.getTipoPublici()))
+		{
+			publicidadForm.setTipoPublici("Institucional");
+		}
+		else
+		{
+			publicidadForm.setTipoPublici("-");
+		}
+
+>>>>>>> 3501aefa667527b4c0bb02ad0f617feb131dea73
 		if ("01".equals(eachDetalle.getTipoElemento()))
 		{
 			publicidadForm.setTipoElemento("Vehiculo");

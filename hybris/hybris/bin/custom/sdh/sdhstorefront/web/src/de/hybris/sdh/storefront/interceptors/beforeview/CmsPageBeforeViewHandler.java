@@ -31,16 +31,13 @@ import de.hybris.platform.cms2.servicelayer.data.RestrictionData;
 import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.cms2.servicelayer.services.CMSPreviewService;
 import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
-import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.jalo.c2l.LocalizableItem;
 import de.hybris.platform.servicelayer.model.AbstractItemModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.type.TypeService;
-import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
-import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.storefront.filters.cms.CMSSiteFilter;
 
 import java.util.Collection;
@@ -54,7 +51,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -95,11 +91,8 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 	@Resource(name = "reqAddOnsNameProvider")
 	private RequiredAddOnsNameProvider requiredAddOnsNameProvider;
 
-	@Resource(name = "userService")
-	UserService userService;
-
-	@Resource(name = "sdhConsultaContribuyenteBPService")
-	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
 
 
 	@Override
@@ -141,67 +134,31 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 		sessionService.setAttribute(LocalizableItem.LANGUAGE_FALLBACK_ENABLED, Boolean.TRUE);
 		sessionService.setAttribute(AbstractItemModel.LANGUAGE_FALLBACK_ENABLED_SERVICE_LAYER, Boolean.TRUE);
 
-
-
-
-
-
-		//TODO: this info should be taken from user model
-
-
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		if (!userService.isAnonymousUser(customerModel))
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		if (!"anonymous".equalsIgnoreCase(customerData.getUid()))
 		{
-			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-
-			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
-			try
+			for (final SDHRolData eachRolData : customerData.getRolList())
 			{
-				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-						SDHValidaMailRolResponse.class);
-
-				final String docNumber = sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumDoc();
-				final String docType = sdhConsultaContribuyenteBPResponse.getInfoContrib().getTipoDoc();
-				modelAndView.addObject("docNumber", docNumber);
-				modelAndView.addObject("docTipe", docType);
-				if (sdhConsultaContribuyenteBPResponse.getRoles() != null && !sdhConsultaContribuyenteBPResponse.getRoles().isEmpty())
+				if ("01".equals(eachRolData.getRol()))
 				{
-
-					for (final NombreRolResponse eachRolResponse : sdhConsultaContribuyenteBPResponse.getRoles())
-					{
-						if ("01".equals(eachRolResponse.getNombreRol()))
-						{
-							modelAndView.addObject("hasCORol", true);
-						}
-						else if ("02".equals(eachRolResponse.getNombreRol()))
-						{
-							modelAndView.addObject("hasAARol", true);
-						}
-						else if ("03".equals(eachRolResponse.getNombreRol()))
-						{
-							modelAndView.addObject("hasTARol", true);
-						}
-						else if ("04".equals(eachRolResponse.getNombreRol()))
-						{
-							modelAndView.addObject("hasARRol", true);
-						}
-						else if ("05".equals(eachRolResponse.getNombreRol()))
-						{
-							modelAndView.addObject("hasRIRol", true);
-						}
-					}
+					modelAndView.addObject("hasCORol", true);
 				}
-
-			}
-			catch (final Exception e)
-			{
-				// XXX Auto-generated catch block
-				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+				else if ("02".equals(eachRolData.getRol()))
+				{
+					modelAndView.addObject("hasAARol", true);
+				}
+				else if ("03".equals(eachRolData.getRol()))
+				{
+					modelAndView.addObject("hasTARol", true);
+				}
+				else if ("04".equals(eachRolData.getRol()))
+				{
+					modelAndView.addObject("hasARRol", true);
+				}
+				else if ("05".equals(eachRolData.getRol()))
+				{
+					modelAndView.addObject("hasRIRol", true);
+				}
 			}
 		}
 

@@ -209,7 +209,7 @@
 	</bean>
 
 	<alias name="defaultLoginAuthenticationSuccessHandler" alias="loginAuthenticationSuccessHandler"/>
-	<bean id="defaultLoginAuthenticationSuccessHandler" class="de.hybris.platform.acceleratorstorefrontcommons.security.StorefrontAuthenticationSuccessHandler" >
+	<bean id="defaultLoginAuthenticationSuccessHandler" class="de.hybris.sdh.storefront.security.SDHStorefrontAuthenticationSuccessHandler" >
 		<property name="customerFacade" ref="customerFacade" />
 		<property name="defaultTargetUrl" value="#{'responsive' == '${commerceservices.default.desktop.ui.experience}' ? '/' : '/my-account'}"/>
 		<property name="useReferer" value="true"/>
@@ -241,7 +241,7 @@
 	</bean>
 
 	<alias name="defaultLoginCheckoutAuthenticationSuccessHandler" alias="loginCheckoutAuthenticationSuccessHandler"/>
-	<bean id="defaultLoginCheckoutAuthenticationSuccessHandler" class="de.hybris.platform.acceleratorstorefrontcommons.security.StorefrontAuthenticationSuccessHandler" >
+	<bean id="defaultLoginCheckoutAuthenticationSuccessHandler" class="de.hybris.sdh.storefront.security.SDHStorefrontAuthenticationSuccessHandler" >
 		<property name="customerFacade" ref="customerFacade" />
 		<property name="defaultTargetUrl" value="/checkout"/>
 		<property name="uiExperienceService" ref="uiExperienceService"/>
