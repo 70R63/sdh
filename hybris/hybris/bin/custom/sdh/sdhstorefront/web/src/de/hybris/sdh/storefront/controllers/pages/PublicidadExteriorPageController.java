@@ -102,8 +102,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		final UIMenuForm uiMenuForm = new UIMenuForm();
 		//TODO: this call should be replace for code getting data from model
 		model.addAttribute("name", customerData.getCompleteName());
-		model.addAttribute("docType", customerData.getDocumentType());
-		model.addAttribute("docNumber", customerData.getDocumentNumber());
 
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{

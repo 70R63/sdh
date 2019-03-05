@@ -8,8 +8,10 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
+import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
+import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 
 import java.util.ArrayList;
@@ -131,6 +133,25 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 
 		}
 		target.setExteriorPublicityTaxList(peTaxDatas);
+
+		final List<SDHGasTaxModel> gasTaxModels = source.getGasTaxList();
+		final List<SDHGasTaxData> gasTaxDatas = new ArrayList<SDHGasTaxData>();
+		if (null != gasTaxModels && !gasTaxModels.isEmpty())
+		{
+
+			for (final SDHGasTaxModel eachModel : gasTaxModels)
+			{
+				final SDHGasTaxData eachData = new SDHGasTaxData();
+
+				eachData.setObjectNumber(eachModel.getObjectNumber());
+				eachData.setDocumentNumber(eachModel.getDocumentNumber());
+				eachData.setDocumentType(eachModel.getDocumentType());
+
+				gasTaxDatas.add(eachData);
+			}
+
+		}
+		target.setGasTaxList(gasTaxDatas);
 
 
 	}
