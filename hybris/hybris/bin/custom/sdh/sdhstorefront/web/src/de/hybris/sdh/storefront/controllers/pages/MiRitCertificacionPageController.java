@@ -20,6 +20,7 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiRitCertificacionForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import javax.annotation.Resource;
 
@@ -162,6 +163,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CertificaRITRequest certificaRITRequest = new CertificaRITRequest();
+		final UIMenuForm uiMenuForm = new UIMenuForm();
 
 		if (error == "sinPdf")
 		{
@@ -181,28 +183,8 @@ public class MiRitCertificacionPageController extends AbstractPageController
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 					SDHValidaMailRolResponse.class);
 
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-			{
-				miRitCertificacionForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				miRitCertificacionForm.setbSobreGasolina("");
-			}
-
-			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
-			{
-				miRitCertificacionForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				miRitCertificacionForm.setbPublicidadExt("");
-			}
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
 		}
 

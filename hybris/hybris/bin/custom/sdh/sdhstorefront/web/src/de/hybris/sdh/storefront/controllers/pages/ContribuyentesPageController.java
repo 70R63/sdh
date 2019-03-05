@@ -19,7 +19,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
-import de.hybris.sdh.storefront.forms.UIContribuyenteForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -74,10 +74,11 @@ public class ContribuyentesPageController extends AbstractPageController
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 
-		final UIContribuyenteForm uiContribuyenteForm = new UIContribuyenteForm();
+		final UIMenuForm uiContribuyenteForm = new UIMenuForm();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final ObjectMapper mapper = new ObjectMapper();
+		final UIMenuForm uiMenuForm = new UIMenuForm();
 
 		try
 		{
@@ -89,28 +90,8 @@ public class ContribuyentesPageController extends AbstractPageController
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 					SDHValidaMailRolResponse.class);
 
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-			{
-				uiContribuyenteForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				uiContribuyenteForm.setbSobreGasolina("");
-			}
-
-			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
-			{
-				uiContribuyenteForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				uiContribuyenteForm.setbPublicidadExt("");
-			}
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
 			model.addAttribute("uiContribuyenteForm", uiContribuyenteForm);
 

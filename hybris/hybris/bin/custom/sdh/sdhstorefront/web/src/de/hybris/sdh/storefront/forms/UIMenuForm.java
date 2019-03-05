@@ -3,17 +3,35 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.storefront.controllers.pages.MiRitCertificacionPageController;
 
 import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
 
 
 /**
  * @author Consultor
  *
  */
-public class UIContribuyenteForm
+public class UIMenuForm
 {
+
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	//log
+	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
+
 	private String bPredial;
 	private String bVehicular;
 	private String bIca;
@@ -22,6 +40,48 @@ public class UIContribuyenteForm
 	private String bDelineacionUrbana;
 	private List<NombreRolResponse> roles;
 
+
+
+
+	public void fillForm(final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse)
+	{
+		try
+		{
+
+			if (sdhConsultaContribuyenteBPResponse.getRoles() != null && !sdhConsultaContribuyenteBPResponse.getRoles().isEmpty())
+			{
+				this.setRoles(sdhConsultaContribuyenteBPResponse.getRoles());
+			}
+
+			//private String bPredial;
+			//private String bVehicular;
+			//private String bIca;
+			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
+					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
+			{
+				this.setbSobreGasolina("X");
+			}
+			else
+			{
+				this.setbSobreGasolina("");
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
+					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
+			{
+				this.setbPublicidadExt("X");
+			}
+			else
+			{
+				this.setbPublicidadExt("");
+			}
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+		}
+	}
 
 	/**
 	 * @return the roles
