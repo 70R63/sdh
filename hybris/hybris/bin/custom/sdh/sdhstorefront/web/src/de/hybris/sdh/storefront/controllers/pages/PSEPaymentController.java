@@ -12,6 +12,7 @@ import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
 import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
@@ -182,13 +183,26 @@ public class PSEPaymentController extends AbstractPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		model.addAttribute("psePaymentForm", psePaymentForm);
 
-		LOG.info(this.doPsePayment(psePaymentForm));
+		String redirecUrl = getViewForPage(model);
+		final CreateTransactionPaymentResponseInformationType response = this.doPsePayment(psePaymentForm);
+
+		if (response != null)
+		{
+			final String returnCode = response.getReturnCode().getValue();
+			if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._SUCCESS))
+			{
+				redirecUrl = "redirect:" + response.getBankurl();
+			}
+		}
+
+		LOG.info(response);
 		LOG.info(psePaymentForm);
 		LOG.info("Call PSE/Bank Web Service");
+		model.addAttribute("psePaymentForm", psePaymentForm);
 
-		return getViewForPage(model);
+
+		return redirecUrl;
 	}
 
 	private CreateTransactionPaymentResponseInformationType doPsePayment(final PSEPaymentForm psePaymentForm)
@@ -199,7 +213,10 @@ public class PSEPaymentController extends AbstractPageController
 		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
-		createTransactionPaymentInformationType.setReferenceNumber(this.getReferences("r1", "r2", "r3"));
+		createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
+						psePaymentForm.getTipoDeIdentificacion() + " " + psePaymentForm.getNoIdentificacion(), 
+						"Dir. IP 172.18.39.46", 
+						"r3"));
 
 
 		return pseServices.createTransactionPayment(
