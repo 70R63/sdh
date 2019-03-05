@@ -29,6 +29,7 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
@@ -587,7 +588,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		}
 
 
-		psePaymentForm.setTipoDeImpuesto("GASOLINA");
+		psePaymentForm.setTipoDeImpuesto(new ControllerPseConstants().getGASOLINA());
 		psePaymentForm.setAnoGravable(dataForm.getAnoGravable());
 		psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
 		psePaymentForm.setPeriodo(clavePeriodo);
