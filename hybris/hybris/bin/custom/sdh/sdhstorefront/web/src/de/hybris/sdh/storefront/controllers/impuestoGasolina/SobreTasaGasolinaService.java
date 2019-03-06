@@ -7,10 +7,12 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractContr
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -592,6 +594,28 @@ public class SobreTasaGasolinaService
 		return consultaGasolinaResponse;
 	}
 
+	private DetallePagoResponse llamarWSDetPago(final DetallePagoRequest infoRequest, final SDHDetalleGasolina sdhConsultaWS,
+			final String confUrl, final String confUser, final String confPass, final String wsNombre, final String wsReqMet,
+			final Logger LOG)
+	{
+		DetallePagoResponse responseInfo = new DetallePagoResponse();
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
+					DetallePagoResponse.class);
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Error al llamar WebService: " + wsNombre + "Detalle:" + e.getMessage());
+		}
+
+		return responseInfo;
+	}
+
 	public String obtenerURL(final String origen, final String accion, final String destino)
 	{
 		String returnURL = "";
@@ -807,37 +831,103 @@ public class SobreTasaGasolinaService
 	 * @param periodo
 	 * @return
 	 */
-	public String perpararPeriodoPago(final String periodo)
+	public String perpararPeriodoPago(final String anoGravable, final String periodo)
 	{
 		String periodoConvertidoPagar = "";
 
-		if (periodo.equals("01") || periodo.equals("02"))
+		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = "01";
+			periodoConvertidoPagar = anoGravable.substring(2) + periodo;
 		}
-		else if (periodo.equals("03") || periodo.equals("04"))
-		{
-			periodoConvertidoPagar = "02";
-		}
-		else if (periodo.equals("05") || periodo.equals("06"))
-		{
-			periodoConvertidoPagar = "03";
-		}
-		else if (periodo.equals("07") || periodo.equals("08"))
-		{
-			periodoConvertidoPagar = "04";
-		}
-		else if (periodo.equals("09") || periodo.equals("10"))
-		{
-			periodoConvertidoPagar = "05";
-		}
-		else if (periodo.equals("11") || periodo.equals("12"))
-		{
-			periodoConvertidoPagar = "06";
-		}
+		//		if (periodo.equals("01") || periodo.equals("02"))
+		//		{
+		//			periodoConvertidoPagar = "01";
+		//		}
+		//		else if (periodo.equals("03") || periodo.equals("04"))
+		//		{
+		//			periodoConvertidoPagar = "02";
+		//		}
+		//		else if (periodo.equals("05") || periodo.equals("06"))
+		//		{
+		//			periodoConvertidoPagar = "03";
+		//		}
+		//		else if (periodo.equals("07") || periodo.equals("08"))
+		//		{
+		//			periodoConvertidoPagar = "04";
+		//		}
+		//		else if (periodo.equals("09") || periodo.equals("10"))
+		//		{
+		//			periodoConvertidoPagar = "05";
+		//		}
+		//		else if (periodo.equals("11") || periodo.equals("12"))
+		//		{
+		//			periodoConvertidoPagar = "06";
+		//		}
 
 
 		return periodoConvertidoPagar;
+	}
+
+
+	/**
+	 * @param detallePagoRequest
+	 * @param sdhDetalleGasolinaWS
+	 * @param log
+	 * @return
+	 */
+	public DetallePagoResponse consultaDetallePago(final DetallePagoRequest requestInfo, final SDHDetalleGasolina sdhConsultaWS,
+			final Logger LOG)
+	{
+		DetallePagoResponse responseInfo = new DetallePagoResponse();
+		final String confUrl = "sdh.detallePago.url";
+		final String confUser = "sdh.detallePago.user";
+		final String confPass = "sdh.detallePago.password";
+		final String wsNombre = "Detalle_Pago";
+		final String wsReqMet = "POST";
+
+
+		responseInfo = llamarWSDetPago(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG);
+
+
+		return responseInfo;
+	}
+
+
+	/**
+	 * @param declarante
+	 * @return
+	 */
+	public String prepararNumObjeto(final SDHValidaMailRolResponse detalleContribuyente)
+	{
+		String numObjeto = "";
+
+		if (detalleContribuyente != null && detalleContribuyente.getGasolina() != null
+				&& detalleContribuyente.getGasolina().get(0) != null)
+		{
+			numObjeto = detalleContribuyente.getGasolina().get(0).getNumObjeto();
+		}
+
+
+		return numObjeto;
+	}
+
+
+	/**
+	 * @param detalleContribuyente
+	 * @return
+	 */
+	public String prepararDV(final SDHValidaMailRolResponse detalleContribuyente)
+	{
+		String dv = "";
+
+		if (detalleContribuyente != null && detalleContribuyente.getInfoContrib() != null
+				&& detalleContribuyente.getInfoContrib().getAdicionales() != null)
+		{
+			dv = detalleContribuyente.getInfoContrib().getAdicionales().getDIGVERIF();
+		}
+
+
+		return dv;
 	}
 
 

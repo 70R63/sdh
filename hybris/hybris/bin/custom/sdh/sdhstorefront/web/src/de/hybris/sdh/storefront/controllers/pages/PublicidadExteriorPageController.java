@@ -27,7 +27,6 @@ import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
-import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -99,7 +98,6 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	{
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final PublicidadForm publicidadForm = new PublicidadForm();
-		final UIMenuForm uiMenuForm = new UIMenuForm();
 		//TODO: this call should be replace for code getting data from model
 		model.addAttribute("name", customerData.getCompleteName());
 

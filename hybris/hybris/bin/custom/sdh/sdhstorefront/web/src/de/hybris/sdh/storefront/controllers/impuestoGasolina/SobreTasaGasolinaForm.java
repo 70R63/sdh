@@ -23,6 +23,7 @@ public class SobreTasaGasolinaForm
 	private String anoGravable;
 	private String periodo;
 	private String numDoc;
+	private String numObjeto;
 	private String opcionUso;
 	private String tipoIdRev;
 	private String tipoIdDec;
@@ -248,6 +249,24 @@ public class SobreTasaGasolinaForm
 	{
 		this.numDoc = numDoc;
 	}
+	
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
+	}
+
 	/**
 	 * @return the opcionUso
 	 */

@@ -650,6 +650,10 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 				for (final ImpuestoPublicidadExterior eachPETax : publicidadExterior)
 				{
+					if (StringUtils.isBlank(eachPETax.getNumResolu()))
+					{
+						continue;
+					}
 
 					final SDHExteriorPublicityTaxModel eachNewPETaxModel = new SDHExteriorPublicityTaxModel();
 					eachNewPETaxModel.setResolutionNumber(eachPETax.getNumResolu());
