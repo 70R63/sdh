@@ -714,6 +714,43 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			}
 
 
+			//clean old rols
+			final List<SDHRolModel> rols = customerModel.getRolList();
+
+			if (rols != null && !rols.isEmpty())
+			{
+				modelService.removeAll(rols);
+			}
+
+			final List<NombreRolResponse> roles = sdhConsultaContribuyenteBPResponse.getRoles();
+
+			if (roles != null && !roles.isEmpty())
+			{
+				final List<SDHRolModel> newRolesModel = new ArrayList<SDHRolModel>();
+
+				for (final NombreRolResponse eachRolResponse : roles)
+				{
+					if (StringUtils.isBlank(eachRolResponse.getNombreRol()))
+					{
+						continue;
+					}
+
+					final SDHRolModel eachRolModel = new SDHRolModel();
+					eachRolModel.setRol(eachRolResponse.getNombreRol());
+					newRolesModel.add(eachRolModel);
+
+				}
+
+				modelService.saveAll(newRolesModel);
+
+				customerModel.setRolList(newRolesModel);
+			}
+			else
+			{
+				customerModel.setRolList(null);
+			}
+
+
 			modelService.save(customerModel);
 
 		}

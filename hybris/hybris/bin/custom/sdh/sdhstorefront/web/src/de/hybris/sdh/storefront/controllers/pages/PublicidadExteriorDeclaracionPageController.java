@@ -136,7 +136,6 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
 
-
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
 			declaPublicidadForm.setIdNumber(customerData.getDocumentType());
@@ -160,13 +159,6 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				declaPublicidadForm.setFechnotif(localDate.format(formatter2));
 			}
 
-			//			final Optional optional = detallePublicidadResponse.getDetalle().stream()
-			//					.filter(eachDetail -> StringUtils.isNotBlank(eachDetail.getOrientacion())).findFirst();
-			//
-			//			if (Boolean.TRUE.equals(optional.isPresent()))
-			//			{
-			//				declaPublicidadForm.setOrValla(((DetallePubli) optional.get()).getOrientacion());
-			//			}
 
 			declaPublicidadForm.setOrValla(detallePublicidadResponse.getInfoDeclara().getOrientacionValla());
 

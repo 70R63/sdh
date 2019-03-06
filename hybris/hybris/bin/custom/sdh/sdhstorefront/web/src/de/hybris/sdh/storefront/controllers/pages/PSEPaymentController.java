@@ -175,7 +175,7 @@ public class PSEPaymentController extends AbstractPageController
 		psePaymentForm.setPeriodo("02");
 		psePaymentForm.setAnoGravable("2019");
 
-		String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
+		final String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
 
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
