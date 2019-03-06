@@ -20,7 +20,6 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiRitCertificacionForm;
-import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import javax.annotation.Resource;
 
@@ -163,7 +162,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CertificaRITRequest certificaRITRequest = new CertificaRITRequest();
-		final UIMenuForm uiMenuForm = new UIMenuForm();
+
 
 		if (error == "sinPdf")
 		{
@@ -183,8 +182,6 @@ public class MiRitCertificacionPageController extends AbstractPageController
 					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
 					SDHValidaMailRolResponse.class);
 
-			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
-			model.addAttribute("uiMenuForm", uiMenuForm);
 
 		}
 

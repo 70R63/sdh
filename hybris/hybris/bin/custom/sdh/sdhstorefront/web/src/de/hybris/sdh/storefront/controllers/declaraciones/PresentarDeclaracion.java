@@ -22,7 +22,6 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCa
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
-import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.util.List;
 
@@ -138,7 +137,6 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;
-				final UIMenuForm uiMenuForm = new UIMenuForm();
 				String[] mensajesError;
 
 
@@ -160,9 +158,6 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 							"error.impuestoGasolina.sobretasa.error2", mensajesError);
 				}
-
-				uiMenuForm.fillForm(detalleContribuyente);
-				model.addAttribute("uiMenuForm", uiMenuForm);
 
 
 				tablaDocs = gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina());
