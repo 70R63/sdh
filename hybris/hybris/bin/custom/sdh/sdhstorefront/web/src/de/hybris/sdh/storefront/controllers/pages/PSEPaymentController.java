@@ -105,12 +105,12 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> periodo = Arrays.asList(
-				new SelectAtomValue("01", "Enero/Febrero"),
-				new SelectAtomValue("02", "Marzo/Abril"),
-				new SelectAtomValue("03", "Mayo/Junio"),
-				new SelectAtomValue("04", "Julio/Agosto"),
-				new SelectAtomValue("05", "Septiembre/Octubre"),
-				new SelectAtomValue("06", "Noviembre/Diciembre"));
+				new SelectAtomValue("1901", "2019 - Enero/Febrero"),
+				new SelectAtomValue("1902", "2019 - Marzo/Abril"),
+				new SelectAtomValue("1903", "2019 - Mayo/Junio"),
+				new SelectAtomValue("1904", "2019 - Julio/Agosto"),
+				new SelectAtomValue("1905", "2019 - Septiembre/Octubre"),
+				new SelectAtomValue("1906", "2019 - Noviembre/Diciembre"));
 
 		return periodo;
 	}
