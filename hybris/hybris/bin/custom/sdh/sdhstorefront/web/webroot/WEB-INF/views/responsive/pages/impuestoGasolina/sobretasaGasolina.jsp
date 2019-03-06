@@ -16,7 +16,7 @@
 		<sobreTasaGasolina:sobGasolinaMenu />
 		<sobreTasaGasolina:sobGasolinaBasicos />
 		<sobreTasaGasolina:sobGasolinaRep />
-<%-- 		<sobreTasaGasolina:sobGasolinaBuscar /> --%>
+		<sobreTasaGasolina:sobGasolinaBuscar />
 	</sf:form>
 </div>
 
