@@ -33,6 +33,9 @@
 		<sf:input path="periodo" type="hidden" />
 		<sf:input path="tipoDeIdentificacion" type="hidden" />
 		<sf:input path="noIdentificacion" type="hidden" />
+		<sf:input path="numeroDeReferencia" type="hidden" />
+		<sf:input path="fechaLimiteDePago" type="hidden" />
+		<sf:input path="DV" type="hidden" />
 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 			name="pagar" value="pagar">
 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />

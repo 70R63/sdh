@@ -20,11 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
- * @author Maria Luisa
+ * @author Maria Luisa/Federico Flores Dimas
  *
  */
 @Controller
-//@RequestMapping("/contribuyentes/delineacionurbana/detalle")
 public class DelineacionUrbanaController extends AbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
@@ -33,11 +32,29 @@ public class DelineacionUrbanaController extends AbstractPageController
 	// CMS Pages
 	private static final String DELINEACION_URBANA_CMS_PAGE = "delineacionUrbanaPage";
 	private static final String DELINEACION_URBANA_DECLARACIONES_CMS_PAGE = "delineacionUrbanaDeclaracionesPage";
-
-	private static final String REDIRECT_TO_UPDATE_EMAIL_PAGE = REDIRECT_PREFIX + "/contribuyentes/delineacionurbana/detalle";
+	private static final String REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE = REDIRECT_PREFIX + "/contribuyentes/delineacion-urbana";
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+
+
+	@RequestMapping(value = "/contribuyentes/delineacion-urbana", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String delineacionUrbana(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Delineacion urbana GET --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+
+
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/detalle", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -61,7 +78,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 	{
 		System.out.println("------------------entro al post------------------------");
 
-		return REDIRECT_TO_UPDATE_EMAIL_PAGE;
+		return REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE;
 	}
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/declaracion", method = RequestMethod.GET)
@@ -86,7 +103,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 	{
 		System.out.println("------------------entro al post------------------------");
 
-		return REDIRECT_TO_UPDATE_EMAIL_PAGE;
+		return REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE;
 	}
 
 
