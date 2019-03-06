@@ -122,20 +122,19 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
-			if (response != null)
-			{
-				pseTransactionsLogModel.setSoliciteDate(response.getSoliciteDate().toString());
-				pseTransactionsLogModel.setBankProcessDate(response.getBankProcessDate().toString());
-				pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
-				transactionState = response.getTransactionState().getValue();
-
-				LOG.info("Updated PseTransactionsLogModel [" + numeroDeReferencia + "," + response.getSoliciteDate().toString() + ", "
-						+ response.getBankProcessDate().toString() + ", " + response.getTransactionState().getValue() + "]");
-
-				modelService.saveAll(pseTransactionsLogModel);
-			}else {
-				LOG.info("Error con la comunicacion de PSE");
-			}
+			/*
+			 * if (response != null) { pseTransactionsLogModel.setSoliciteDate(response.getSoliciteDate().toString());
+			 * pseTransactionsLogModel.setBankProcessDate(response.getBankProcessDate().toString());
+			 * pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue()); transactionState =
+			 * response.getTransactionState().getValue();
+			 *
+			 * LOG.info("Updated PseTransactionsLogModel [" + numeroDeReferencia + "," +
+			 * response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", " +
+			 * response.getTransactionState().getValue() + "]");
+			 *
+			 * modelService.saveAll(pseTransactionsLogModel); }else { LOG.info("Error con la comunicacion de PSE"); }
+			 */
+			transactionState = this.updateResponse(pseTransactionsLogModel, response);
 		}
 		else
 		{
@@ -151,10 +150,20 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	{
 		final List<PseTransactionsLogModel> transactions = pseTransactionsLogDao.getAllOutstandingTransactions(transactionState)
 				.getResult();
+		String trazabilityCode = null;
 
-		for (final PseTransactionsLogModel transaction : transactions)
+
+		for (final PseTransactionsLogModel pseTransactionsLogModel : transactions)
 		{
-			this.updateTransaction(transaction.getNumeroDeReferencia());
+			trazabilityCode = pseTransactionsLogModel.getTrazabilityCode();
+
+			final GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
+			getTransactionInformationBodyType.setTrazabilityCode(trazabilityCode);
+
+			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
+					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
+
+			this.updateResponse(pseTransactionsLogModel, response);
 		}
 
 	}
@@ -177,5 +186,28 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		return constantConnectionData;
 	}
 
+	private String updateResponse(final PseTransactionsLogModel pseTransactionsLogModel,
+			final GetTransactionInformationResponseBodyType response)
+	{
+		String transactionState = null;
+		if (response != null)
+		{
+			pseTransactionsLogModel.setSoliciteDate(response.getSoliciteDate().toString());
+			pseTransactionsLogModel.setBankProcessDate(response.getBankProcessDate().toString());
+			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
 
+			transactionState = response.getTransactionState().getValue();
+
+			LOG.info("Updated PseTransactionsLogModel [" + pseTransactionsLogModel.getNumeroDeReferencia() + ","
+					+ response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", "
+					+ response.getTransactionState().getValue() + "]");
+
+			modelService.saveAll(pseTransactionsLogModel);
+		}
+		else
+		{
+			LOG.info("Error con la comunicacion de PSE");
+		}
+		return transactionState;
+	}
 }
