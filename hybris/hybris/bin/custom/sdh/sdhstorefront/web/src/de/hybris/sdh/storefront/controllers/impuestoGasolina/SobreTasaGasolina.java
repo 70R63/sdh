@@ -32,7 +32,6 @@ import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
-import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -285,7 +284,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		final DetGasResponse detalleGasolinaResponse;
-		final UIMenuForm uiMenuForm = new UIMenuForm();
+
 
 		String[] mensajesError;
 		String numBP = "";
@@ -308,10 +307,6 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error2", mensajesError);
-
-
-			uiMenuForm.fillForm(detalleContribuyente);
-			model.addAttribute("uiMenuForm", uiMenuForm);
 
 			model.addAttribute("dataForm", dataForm);
 		}

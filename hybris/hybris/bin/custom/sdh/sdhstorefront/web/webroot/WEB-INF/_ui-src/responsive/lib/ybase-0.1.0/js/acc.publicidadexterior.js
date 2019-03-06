@@ -208,6 +208,7 @@ ACC.publicidadexterior = {
 	    	
 	    	var tipoValla = $("#selectedTipoValla").val();
 
+	    	$("#divPublicidadExteriorDetail").show();
         	$("#divTubularComercial").hide();
         	$("#divVehiculos").hide();
         	$("#divTubularObra").hide();
