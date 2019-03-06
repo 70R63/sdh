@@ -39,6 +39,7 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.type.TypeService;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.storefront.filters.cms.CMSSiteFilter;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -135,6 +136,10 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 		sessionService.setAttribute(AbstractItemModel.LANGUAGE_FALLBACK_ENABLED_SERVICE_LAYER, Boolean.TRUE);
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+		modelAndView.addObject("docType", customerData.getDocumentType());
+		modelAndView.addObject("docNumber", customerData.getDocumentNumber());
+
 		if (!"anonymous".equalsIgnoreCase(customerData.getUid()))
 		{
 			for (final SDHRolData eachRolData : customerData.getRolList())
@@ -160,6 +165,12 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 					modelAndView.addObject("hasRIRol", true);
 				}
 			}
+
+			final UIMenuForm uiMenuForm = new UIMenuForm();
+
+			uiMenuForm.fillForm(customerData);
+			modelAndView.addObject("uiMenuForm", uiMenuForm);
+
 		}
 
 	}

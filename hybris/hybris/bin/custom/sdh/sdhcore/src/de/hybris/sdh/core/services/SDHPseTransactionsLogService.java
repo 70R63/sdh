@@ -21,4 +21,10 @@ public interface SDHPseTransactionsLogService
 			String noIdentificacion, String DV, String tipoDeIdentificacion, String fechaLimiteDePago, String pagoAdicional,
 			String banco, String valorAPagar, String isoCurrency, String tipoDeTarjeta);
 
+	public String updateTransaction(final String numeroDeReferencia);
+
+	public void updateAllTransactions(final String transactionState);
+
+
+
 }

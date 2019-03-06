@@ -51,6 +51,7 @@ import de.hybris.sdh.facades.SDHCertifNombFacade;
 import de.hybris.sdh.facades.SDHUpdateRitFacade;
 import de.hybris.sdh.storefront.forms.CertifNombForm;
 import de.hybris.sdh.storefront.forms.MiRitForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 import de.hybris.sdh.storefront.forms.UpdateAddressRitForm;
 import de.hybris.sdh.storefront.forms.UpdateAutorizacionesRitForm;
 import de.hybris.sdh.storefront.forms.UpdateEmailRitForm;
@@ -138,6 +139,8 @@ public class MiRitPageController extends AbstractPageController
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 
+		final UIMenuForm uiMenuForm = new UIMenuForm();
+
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
 
 		try
@@ -151,33 +154,8 @@ public class MiRitPageController extends AbstractPageController
 
 			final MiRitForm miRitForm = new MiRitForm();
 
-
-
-			//*->INI dev-eduardo ajuste de menu impuestos
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-			{
-				miRitForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				miRitForm.setbSobreGasolina("");
-			}
-
-			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
-			{
-				miRitForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				miRitForm.setbPublicidadExt("");
-			}
-			//*->FIN dev-eduardo ajuste de menu impuestos
-
+			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
 			if ("nit".equalsIgnoreCase(customerModel.getDocumentType()) || "nite".equalsIgnoreCase(customerModel.getDocumentType()))
 			{

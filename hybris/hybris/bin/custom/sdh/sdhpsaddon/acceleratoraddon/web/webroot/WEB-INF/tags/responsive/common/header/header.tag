@@ -144,7 +144,7 @@
 									<span class="logged_in js-logged_in">
 									<ycommerce:testId
 											code="header_tipo_doc">
-											<spring:theme code="header.tipo.doc" htmlEscape="true" />&nbsp;${ docTipe}
+											<spring:theme code="header.tipo.doc" htmlEscape="true" />&nbsp;${ docType}
 										</ycommerce:testId></span>
 								</li>
 								<li>
@@ -218,3 +218,96 @@
 	class="container-fluid">
 	<cms:component component="${component}" />
 </cms:pageSlot>
+
+
+<script>
+	function borraMenu(elementMenu, indexMenu, arrayMenu, html_element, element_attr){
+		
+		var li_array = document.getElementsByTagName(html_element);
+		var attr_value;
+		var li_index;
+		var error_message;
+		
+		for( li_index = 0; li_index < li_array.length; li_index++ ) {	    		
+			try{
+				
+				if (element_attr == "innerText"){ attr_value = li_array[li_index].innerText;}				
+				if (element_attr == "className"){ attr_value = li_array[li_index].className;}
+				
+				
+				if( attr_value.includes(elementMenu)){					  					
+					li_array[li_index].remove();
+				}	
+			}catch(err){
+				error_message = err.message;
+			}		
+    	}
+	}
+	
+	
+	function ajustesMenu() {
+		
+		debugger; 
+						
+		var currentUrl = document.URL;
+		var rol;
+		var listaMenus=[];
+		var li_index;
+		
+		if (currentUrl.includes("/sdhstorefront/es/login") && 
+			!currentUrl.includes("/pw/request/external") ){
+			
+			listaMenus=[];
+			listaMenus.push("breadcrumb-section");
+			
+			for( li_index = 0; li_index < listaMenus.length; li_index++ ) {
+				borraMenu(listaMenus[li_index], li_index, listaMenus, "div", "className");
+			}	
+		}
+		
+		<c:forEach items="${uiMenuForm.roles}" var="row_rol">
+			listaMenus=[];
+		
+			rol = '<c:out value="${row_rol.nombreRol}"/>';
+			
+			if (rol = "01" && currentUrl.includes("contribuyentes")){
+				listaMenus.push("Mi Información Reportada");
+				
+				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
+					listaMenus.push("Delineación Urbana");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bIca != 'X'}">
+					listaMenus.push("ICA");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bPredial != 'X'}">
+					listaMenus.push("Predial unificado");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bPublicidadExt != 'X'}">
+					listaMenus.push("Publicidad exterior");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bVehicular != 'X'}">
+					listaMenus.push("Sobre vehículos automotores");
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bSobreGasolina != 'X'}">
+					listaMenus.push("Sobretasa a la gasolina");
+				</c:if>				
+			}
+			
+			
+			if (rol = "05" && currentUrl.includes("reportantes")){
+				listaMenus = ["Impuestos","Buzón","Trámites","Facturación","Declaraciones","Pagos","Consultas"];				
+			}
+			
+			for( li_index = 0; li_index < listaMenus.length; li_index++ ) {
+				borraMenu(listaMenus[li_index], li_index, listaMenus, "li", "innerText");
+			}	
+		</c:forEach>
+	}	
+	
+	ajustesMenu();	
+</script>

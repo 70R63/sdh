@@ -32,6 +32,7 @@ import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
+import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -284,6 +285,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		final DetGasResponse detalleGasolinaResponse;
+		final UIMenuForm uiMenuForm = new UIMenuForm();
+
 		String[] mensajesError;
 		String numBP = "";
 		String tipoDoc = "";
@@ -307,28 +310,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 					"error.impuestoGasolina.sobretasa.error2", mensajesError);
 
 
-			//*->INI dev-eduardo ajuste de menu impuestos
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (detalleContribuyente.getGasolina() != null && !detalleContribuyente.getGasolina().isEmpty())
-			{
-				dataForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				dataForm.setbSobreGasolina("");
-			}
-
-			if (detalleContribuyente.getPublicidadExt() != null && !detalleContribuyente.getPublicidadExt().isEmpty())
-			{
-				dataForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				dataForm.setbPublicidadExt("");
-			}
-			//*->FIN dev-eduardo ajuste de menu impuestos
+			uiMenuForm.fillForm(detalleContribuyente);
+			model.addAttribute("uiMenuForm", uiMenuForm);
 
 			model.addAttribute("dataForm", dataForm);
 		}

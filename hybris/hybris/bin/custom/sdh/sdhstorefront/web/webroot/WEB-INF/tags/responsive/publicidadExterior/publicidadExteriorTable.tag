@@ -48,7 +48,7 @@
 				<tr>
 					<td><input  disabled class="inputtextnew"
 						aria-required="true" maxlength="30" size="30" readonly="readonly"
-						type="text" value="${docTipe }"/></td>
+						type="text" value="${docType }"/></td>
 					<td><input  readonly="readonly"
 						class="inputtextnew" aria-required="true" maxlength="30" size="30"
 						disabled="disabled" type="text" value="${docNumber }"/></td>

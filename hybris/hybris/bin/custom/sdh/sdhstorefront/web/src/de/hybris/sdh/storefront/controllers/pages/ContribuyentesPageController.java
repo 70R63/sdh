@@ -16,16 +16,12 @@ import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
-import de.hybris.sdh.storefront.forms.UIContribuyenteForm;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,53 +70,7 @@ public class ContribuyentesPageController extends AbstractPageController
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 
-		final UIContribuyenteForm uiContribuyenteForm = new UIContribuyenteForm();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final ObjectMapper mapper = new ObjectMapper();
-
-		try
-		{
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			//private String bPredial;
-			//private String bVehicular;
-			//private String bIca;
-			if (sdhConsultaContribuyenteBPResponse.getGasolina() != null
-					&& !sdhConsultaContribuyenteBPResponse.getGasolina().isEmpty())
-			{
-				uiContribuyenteForm.setbSobreGasolina("X");
-			}
-			else
-			{
-				uiContribuyenteForm.setbSobreGasolina("");
-			}
-
-			if (sdhConsultaContribuyenteBPResponse.getPublicidadExt() != null
-					&& !sdhConsultaContribuyenteBPResponse.getPublicidadExt().isEmpty())
-			{
-				uiContribuyenteForm.setbPublicidadExt("X");
-			}
-			else
-			{
-				uiContribuyenteForm.setbPublicidadExt("");
-			}
-
-			model.addAttribute("uiContribuyenteForm", uiContribuyenteForm);
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-		}
-
-
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));

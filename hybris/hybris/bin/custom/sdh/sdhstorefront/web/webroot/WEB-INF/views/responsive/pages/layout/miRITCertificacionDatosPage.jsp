@@ -22,55 +22,6 @@ input[type=radio] {
 
 
 <script>
-	function borrarMenu(bPredial, bVehicular, bIca, bPublicidadExt, bSobreGasolina, bDelineacionUrbana) {
-		debugger;
-		var li_array = document.getElementsByTagName('li');
-		var borrar_index;
-		var submenu_index;
-		var li_index;
-		var a_index;
-		var itext;
-		
-	    
-		for( submenu_index = 1; submenu_index <= 6; submenu_index++ ) {
-	    	for( li_index = 7; li_index <= 19; li_index++ ) {
-	    		
-	    		a_array = li_array[li_index].getElementsByTagName('a');
-		    	
-	    		for( a_index = 0; a_index < a_array.length; a_index++ ) {
-		    		itext = a_array[a_index].getAttribute('href');
-		    		
-		    		if( ( (bDelineacionUrbana != "X") && (itext.includes("delineacion")) ) ||
-		    			( (bIca != "X") && (itext.includes("icareteica"))                       ) ||
-		    			( (bPredial != "X") && (itext.includes("predialunificado"))             ) ||
-		    			( (bPublicidadExt != "X") && (itext.includes("publicidadexterior"))     ) ||
-		    			( (bVehicular != "X") && (itext.includes("sobrevehiculosautomotores"))  ) ||
-		    		    ( (bSobreGasolina != "X") && (itext.includes("sobretasa-gasolina"))     )
-		    		  )			
-		    		{
-		    			borrar_index = true;
-		    			break;
-		    		}
-		    		else{
-		    			borrar_index = false;
-		    			break;
-		    		}
-			    }
-	    		
-	    		if(borrar_index){
-	    			li_array[li_index].remove();
-	    		}
-	    	}
-		}	
-	}	
-	
-	borrarMenu("${miRitCertificacionForm.bPredial}", "${miRitCertificacionForm.bVehicular}", "${miRitCertificacionForm.bIca}", "${miRitCertificacionForm.bPublicidadExt}", "${miRitCertificacionForm.bSobreGasolina}", "${miRitCertificacionForm.bDelineacionUrbana}");	
-</script>
-
-
-
-
-<script>
 	function downloadPDF(pdf) {
 		debugger;
 		if (pdf){
@@ -87,6 +38,18 @@ input[type=radio] {
 	
 	downloadPDF('${miRitCertificacionFormResp.rit.stringRIT}');
 </script>
+
+<script>
+    function Hide(val) {
+	  var x = document.getElementById("myDIV");
+	  if(val == "1"){
+		  x.style.display = "block";	  
+	  }
+	  else{
+		  x.style.display = "none";
+	  }
+	}
+  </script>
 
 
 
@@ -135,27 +98,27 @@ input[type=radio] {
 			<br>
 		    
 			<div class=" col-md-2">
-				<c:if test="${miRitCertificacionForm.bPredial == 'X'}">
+				<c:if test="${uiMenuForm.bPredial == 'X'}">
 					<input type="radio" name="tipoImp" id="tipoImp" value="01" style="visibility: visible"><spring:theme code="mirit.certificacion.opPredial"/><br>
 				</c:if>
 				
-				<c:if test="${miRitCertificacionForm.bVehicular == 'X'}">
+				<c:if test="${uiMenuForm.bVehicular == 'X'}">
 					<input type="radio" name="tipoImp" id="tipoImp" value="02" style="visibility: visible"><spring:theme code="mirit.certificacion.opVehicular"/><br>
 				</c:if>
 				
-				<c:if test="${miRitCertificacionForm.bIca == 'X'}">
+				<c:if test="${uiMenuForm.bIca == 'X'}">
 					<input type="radio" name="tipoImp" id="tipoImp" value="03" style="visibility: visible"><spring:theme code="mirit.certificacion.opICA"/><br>	
 		    	</c:if>
 		    	
-		    	<c:if test="${miRitCertificacionForm.bPublicidadExt == 'X'}">
+		    	<c:if test="${uiMenuForm.bPublicidadExt == 'X'}">
 		    		<input type="radio" name="tipoImp" id="tipoImp" value="07" style="visibility: visible"><spring:theme code="mirit.certificacion.opPublicidadExterior"/><br>
 		    	</c:if>
 		    	
-		    	<c:if test="${miRitCertificacionForm.bSobreGasolina == 'X'}">
+		    	<c:if test="${uiMenuForm.bSobreGasolina == 'X'}">
 		    		<input type="radio" name="tipoImp" id="tipoImp" value="05" style="visibility: visible"><spring:theme code="mirit.certificacion.opSobretasaGasolina"/><br>
 		    	</c:if>
 		    	
-		    	<c:if test="${miRitCertificacionForm.bDelineacionUrbana == 'X'}">
+		    	<c:if test="${uiMenuForm.bDelineacionUrbana == 'X'}">
 		    		<input type="radio" name="tipoImp" id="tipoImp" value="06" style="visibility: visible"><spring:theme code="mirit.certificacion.opDelineaciónUrbana"/><br>
 		    	</c:if>
 		    </div>    
@@ -163,15 +126,5 @@ input[type=radio] {
     </div>
   </form:form>
 
-  <script>
-    function Hide(val) {
-	  var x = document.getElementById("myDIV");
-	  if(val == "1"){
-		  x.style.display = "block";	  
-	  }
-	  else{
-		  x.style.display = "none";
-	  }
-	}
-  </script>
+  
   
