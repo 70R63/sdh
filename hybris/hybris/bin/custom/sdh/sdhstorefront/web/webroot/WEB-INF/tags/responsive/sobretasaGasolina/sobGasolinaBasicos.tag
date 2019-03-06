@@ -79,7 +79,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
-							code="impuestos.sobreTasaGasolina.datosBasicos.localidad" /></label>
+							code="impuestos.sobreTasaGasolina.datosBasicos.municipio" /></label>
 				</div>
 				<div class="form-group ">
 					<input id="localidad" name="localidad"
