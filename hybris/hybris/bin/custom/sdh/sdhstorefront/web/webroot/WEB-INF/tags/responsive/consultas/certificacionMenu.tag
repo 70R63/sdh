@@ -8,18 +8,22 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<spring:url value="/contribuyentes/consultas/certipagos"
+	var="certificacionURL" htmlEscape="false" />
 
-<sf:form>
-	<div>
-		<div class="container">
-			<div class="row">
-				<div class="headline">
-					<h2 align="center">
-						<span><spring:theme code="certificacion.inicial.titulo" /></span>
 
-					</h2>
-				</div>
+
+<div>
+	<div class="container">
+		<div class="row">
+			<div class="headline">
+				<h2 align="center">
+					<span><spring:theme code="certificacion.inicial.titulo" /></span>
+
+				</h2>
 			</div>
+		</div>
+		
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group">
@@ -38,7 +42,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.selcimpuesto" /></label> <select
-							required="required" required id="impuesto" class="form-control "
+							required="required" required id="tipoimp" class="form-control "
 							name="impuesto" onchange="Selected(this)">
 							<option value="">Seleccionar</option>
 							<option value="1">Predial Unificado</option>
@@ -55,7 +59,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.aniograv" /></label> <select
-							aria-required="true" id="aniograva" class="form-control "
+							aria-required="true" id="aniograv" class="form-control "
 							name="aniograva" onchange="SelectedAnio(this) "
 							required='required'>
 							<option value="">Seleccionar</option>
@@ -110,7 +114,13 @@
 				</div>
 			</div>
 			<div id="impuest" style="display: none;">
-				<input id="Idimp" value="">
+				<input id="Idimp" value="" />
+			</div>
+			<div id="periodo" style="display: none;">
+				<input id="Idper" value="" />
+			</div>
+			<div id="anio" style="display: none;">
+				<input id="Idanio" value="" />
 			</div>
 			<br>
 			<div class="row" id="table-predial" style="display: none;">
@@ -265,18 +275,17 @@
 							name="action" value="cancelar">
 							<spring:theme code="certificacion.inicial.cancelar" />
 						</button>
-				
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar">
+
+						<button type="submit" class="btn btn-primary btn-lg"
+							id="generarPDFButton" name="action" value="generar">
 							<spring:theme code="certificacion.inicial.generar" />
 						</button>
 					</div>
 				</div>
 			</div>
-
-		</div>
 	</div>
-</sf:form>
+</div>
+
 
 <script type="text/javascript">
 	function ShowSelected(selectObject) {
@@ -290,7 +299,7 @@
 		var tablevehiculos = document.getElementById('table-vehiculos');
 		var tableica = document.getElementById('table-ica');
 		var tablepublicidad = document.getElementById('table-publicidad');
-		
+
 		if (value == '1') {
 			idImpuesto.style.display = 'block';
 			idAnio.style.display = 'none';
@@ -342,14 +351,13 @@
 
 			idAnio.style.display = 'none';
 			idPeriodoICA.style.display = 'none';
-			
+
 		}
 	}
 
 	function SelectedAnio(selectObject) {
 		var value = selectObject.value;
 		var x = document.getElementById('Idimp').value;
-debugger;
 		var tablepredial = document.getElementById('table-predial');
 		var tablevehiculos = document.getElementById('table-vehiculos');
 		var tableica = document.getElementById('table-ica');
@@ -360,21 +368,20 @@ debugger;
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
-			
+
 		} else if (x == '2') {
 
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'block';
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
-			
 
 		} else if (x == '4') {
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'block';
-			
+
 		} else {
 
 			tablepredial.style.display = 'none';
@@ -382,11 +389,12 @@ debugger;
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
 		}
-		
+
 	}
 
 	function SelectedPerIca(selectObject) {
 		var value = selectObject.value;
+		document.getElementById("Idper").value = value;
 
 		var x = document.getElementById('Idimp').value;
 
@@ -400,7 +408,7 @@ debugger;
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'block';
 			tablepublicidad.style.display = 'none';
-			
+
 		} else {
 
 			tablepredial.style.display = 'none';
@@ -425,7 +433,7 @@ debugger;
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
-			
+
 		} else {
 
 			tablepredial.style.display = 'none';
