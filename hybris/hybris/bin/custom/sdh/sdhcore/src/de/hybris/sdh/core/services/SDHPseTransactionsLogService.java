@@ -25,4 +25,6 @@ public interface SDHPseTransactionsLogService
 
 	public void updateAllTransactions(final String transactionState);
 
+
+
 }
