@@ -7,7 +7,9 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
+import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseBankListCatalogModel;
+import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
@@ -16,7 +18,6 @@ import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationTyp
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
-import de.hybris.sdh.storefront.controllers.ControllerConstants;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
@@ -66,6 +67,10 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "pseTransactionsLogService")
 	private SDHPseTransactionsLogService pseTransactionsLogService;
+
+	@Resource(name = "pseTransactionsLogDao")
+	private PseTransactionsLogDao pseTransactionsLogDao;
+
 
 
 	@ModelAttribute("tipoDeImpuesto")
@@ -142,6 +147,20 @@ public class PSEPaymentController extends AbstractPageController
 
 		return tipoDeTarjeta;
 	}
+	
+	@ModelAttribute("tipoDeIdentificacion")
+	public List<SelectAtomValue> getIdTipoDeIdentificacion()
+	{
+
+		final List<SelectAtomValue> tipoDeIdentificacion = Arrays.asList(
+				new SelectAtomValue("CC",  "Cedula De Ciudadania"),
+				new SelectAtomValue("NIT", "NIT De La Empresa"),
+				new SelectAtomValue("CE",  "Cedula De Extranjeria"),
+				new SelectAtomValue("TI",  "Tarjeta De Identificacion"),
+				new SelectAtomValue("PP",  "Pasaporte"));
+
+		return tipoDeIdentificacion;
+	}
 
 	@RequestMapping(value = "/pagoEnLinea", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -170,20 +189,23 @@ public class PSEPaymentController extends AbstractPageController
 		System.out.println("------ pseResponse ------- ");
 		System.out.println(ticketId);
 
-		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
-		psePaymentForm.setTipoDeImpuesto(ControllerConstants.PSE.GASOLINA);
-		psePaymentForm.setPeriodo("02");
-		psePaymentForm.setAnoGravable("2019");
+		/*
+		 * final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
+		 * psePaymentForm.setTipoDeImpuesto(ControllerConstants.PSE.GASOLINA); psePaymentForm.setPeriodo("02");
+		 * psePaymentForm.setAnoGravable("2019");
+		 */
 
 		final String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
 
-		model.addAttribute("psePaymentForm", psePaymentForm);
+		model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
-		model.addAttribute("ticketId", ticketId);
+		model.addAttribute("disableFields", "true");
 
-		//GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
-		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
-				"pse.message.info.success.transaction", new Object[]{ codeResponse });
+		GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
+		/*
+		 * GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
+		 * "pse.message.info.success.transaction", new Object[]{ codeResponse });
+		 */
 
 		return getViewForPage(model);
 	}
@@ -226,16 +248,17 @@ public class PSEPaymentController extends AbstractPageController
 			}
 			this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
 					psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
-			//GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
-					"pse.message.info.done.transaction.with.status",
-					new Object[]{ returnCode });
+			GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+			/*
+			 * GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
+			 * "pse.message.info.done.transaction.with.status", new Object[]{ returnCode });
+			 */
 		}
 		else
 		{
-			//GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"pse.message.error.no.connection", new Object[] {});
+			GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+			/*GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"pse.message.error.no.connection", new Object[] {});*/
 		}
 
 
@@ -318,8 +341,33 @@ public class PSEPaymentController extends AbstractPageController
 				psePaymentForm.getFechaLimiteDePago(), psePaymentForm.getPagoAdicional(), psePaymentForm.getBanco(),
 				psePaymentForm.getValorAPagar(), configurationService.getConfiguration().getString("sdh.pse.isoCodeCurrency"),
 				psePaymentForm.getTipoDeTarjeta());
+	}
 
+	private PSEPaymentForm getPSEPaymentForm(final String ticketId)
+	{
+		final PSEPaymentForm form = new PSEPaymentForm();
+		final PseTransactionsLogModel modelo = pseTransactionsLogDao.getTransaction(ticketId);
 
+		if (modelo != null)
+		{
+			form.setTipoDeImpuesto(modelo.getTipoDeImpuesto());
+			form.setNumeroDeReferencia(modelo.getNumeroDeReferencia());
+			form.setImpuesto(modelo.getImpuesto());
+			form.setAnoGravable(modelo.getAnoGravable());
+			form.setCHIP(modelo.getCHIP());
+			form.setPeriodo(modelo.getPeriodo());
+			form.setCUD(modelo.getCUD());
+			form.setNoIdentificacion(modelo.getNoIdentificacion());
+			form.setDV(modelo.getDV());
+			form.setTipoDeIdentificacion(modelo.getTipoDeIdentificacion());
+			form.setFechaLimiteDePago(modelo.getFechaLimiteDePago());
+			form.setPagoAdicional(modelo.getPagoAdicional());
+			form.setBanco(modelo.getBanco());
+			form.setValorAPagar(modelo.getValorAPagar());
+			form.setTipoDeTarjeta(modelo.getTipoDeTarjeta());
+		}
+
+		return form;
 	}
 
 }

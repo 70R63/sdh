@@ -163,6 +163,9 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
+			LOG.info("Actualizando informacion de [" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+					+ pseTransactionsLogModel.getTransactionState() + "] ");
+
 			this.updateResponse(pseTransactionsLogModel, response);
 		}
 

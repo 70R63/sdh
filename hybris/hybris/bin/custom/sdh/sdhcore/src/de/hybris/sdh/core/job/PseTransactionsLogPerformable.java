@@ -31,7 +31,7 @@ public class PseTransactionsLogPerformable extends AbstractJobPerformable<CronJo
 	public PerformResult perform(final CronJobModel arg0)
 	{
 		LOG.info(" -------------- PseTransactionsLogPerformable -------------");
-		pseTransactionsLogService.updateAllTransactions("");
+		pseTransactionsLogService.updateAllTransactions("PENDING");
 		return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
 	}
 
