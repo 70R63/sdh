@@ -113,13 +113,13 @@
 					</div>
 				</div>
 			</div>
-			<div id="impuest" style="display: none;">
+			<div id="tipoImp" style="display: none;">
 				<input id="Idimp" value="" />
 			</div>
 			<div id="periodo" style="display: none;">
 				<input id="Idper" value="" />
 			</div>
-			<div id="anio" style="display: none;">
+			<div id="aniograv" style="display: none;">
 				<input id="Idanio" value="" />
 			</div>
 			<br>
@@ -276,8 +276,8 @@
 							<spring:theme code="certificacion.inicial.cancelar" />
 						</button>
 
-						<button type="submit" class="btn btn-primary btn-lg"
-							id="generarPDFButton" name="action" value="generar">
+						<button type="button" class="btn btn-primary btn-lg"
+							id="generarPDFButton" name="generarPDFButton">
 							<spring:theme code="certificacion.inicial.generar" />
 						</button>
 					</div>
@@ -285,6 +285,7 @@
 			</div>
 	</div>
 </div>
+<div id="dialog" title="Generar Certificacion" ><div id="certiDialogContent"></div></div>
 
 
 <script type="text/javascript">
@@ -305,6 +306,7 @@
 			idAnio.style.display = 'none';
 			idPeriodo.style.display = 'none';
 			idPeriodoICA.style.display = 'none';
+			document.getElementById("Idper").value = '';
 		} else if (value == '2') {
 			idImpuesto.style.display = 'none';
 			idAnio.style.display = 'block';
@@ -315,6 +317,7 @@
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
 			document.getElementById("Idimp").value = '';
+			document.getElementById("Idper").value = '';
 		} else {
 			idImpuesto.style.display = 'none';
 			idAnio.style.display = 'none';
@@ -324,6 +327,7 @@
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
+			document.getElementById("Idper").value = '';
 		}
 	}
 	function Selected(selectObject) {
@@ -332,11 +336,15 @@
 		var idAnio = document.getElementById('idAnio');
 		var idPeriodo = document.getElementById('idPeriodo');
 		var idPeriodoICA = document.getElementById('idPeriodoICA');
+		var idPeriodo = document.getElementById('idPeriodo');
+		var idPeriodoICA = document.getElementById('idPeriodoICA');
 		if (value == '1' || value == '2' || value == '4') {
 
 			idAnio.style.display = 'block';
 			idPeriodo.style.display = 'none';
 			idPeriodoICA.style.display = 'none';
+			document.getElementById("Idper").value = '';
+			
 		} else if (value == '3') {
 
 			idAnio.style.display = 'block';
@@ -357,6 +365,7 @@
 
 	function SelectedAnio(selectObject) {
 		var value = selectObject.value;
+		document.getElementById("Idanio").value = value;
 		var x = document.getElementById('Idimp').value;
 		var tablepredial = document.getElementById('table-predial');
 		var tablevehiculos = document.getElementById('table-vehiculos');
@@ -420,7 +429,7 @@
 
 	function SelectSobreDeli(selectObject) {
 		var value = selectObject.value;
-
+		document.getElementById("Idper").value = value;
 		var x = document.getElementById('Idimp').value;
 
 		var tablepredial = document.getElementById('table-predial');

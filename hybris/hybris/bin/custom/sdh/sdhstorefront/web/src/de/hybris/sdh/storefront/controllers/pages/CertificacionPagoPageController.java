@@ -18,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -59,8 +58,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 	@RequestMapping(value = "/contribuyentes/consultas/certipagos", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String certipdf(@ModelAttribute("dataForm")
-	final CertificacionPagoForm dataForm, @RequestParam(value = "action")
-	final String action, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+	final CertificacionPagoForm dataForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al POST certificacion de pagos--------------------------");

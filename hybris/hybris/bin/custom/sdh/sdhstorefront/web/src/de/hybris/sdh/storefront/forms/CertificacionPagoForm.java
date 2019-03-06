@@ -2,6 +2,7 @@ package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.CertificacionRIT;
 
+
 public class CertificacionPagoForm
 {
 
@@ -21,6 +22,8 @@ public class CertificacionPagoForm
 	private String periodo;
 	private String periodoICA;
 	private String Idimp;
+	private String Idper;
+	private String Idanio;
 
 
 
@@ -270,6 +273,74 @@ public class CertificacionPagoForm
 	public void setbDelineacionUrbana(final String bDelineacionUrbana)
 	{
 		this.bDelineacionUrbana = bDelineacionUrbana;
+	}
+
+	/**
+	 * @return the periodoICA
+	 */
+	public String getPeriodoICA()
+	{
+		return periodoICA;
+	}
+
+	/**
+	 * @param periodoICA
+	 *           the periodoICA to set
+	 */
+	public void setPeriodoICA(final String periodoICA)
+	{
+		this.periodoICA = periodoICA;
+	}
+
+	/**
+	 * @return the idimp
+	 */
+	public String getIdimp()
+	{
+		return Idimp;
+	}
+
+	/**
+	 * @param idimp
+	 *           the idimp to set
+	 */
+	public void setIdimp(final String idimp)
+	{
+		Idimp = idimp;
+	}
+
+	/**
+	 * @return the idper
+	 */
+	public String getIdper()
+	{
+		return Idper;
+	}
+
+	/**
+	 * @param idper
+	 *           the idper to set
+	 */
+	public void setIdper(final String idper)
+	{
+		Idper = idper;
+	}
+
+	/**
+	 * @return the idanio
+	 */
+	public String getIdanio()
+	{
+		return Idanio;
+	}
+
+	/**
+	 * @param idanio
+	 *           the idanio to set
+	 */
+	public void setIdanio(final String idanio)
+	{
+		Idanio = idanio;
 	}
 
 

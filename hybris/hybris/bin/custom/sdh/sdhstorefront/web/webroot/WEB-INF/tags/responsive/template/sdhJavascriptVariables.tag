@@ -74,7 +74,7 @@
 			
 			ACC.gasolinaGeneraDeclaracionURL = "<c:url value='/contribuyentes/sobretasa-gasolina/generar' />"
 			
-			ACC.certificacionPagosGenerarURL= "/contribuyentes/consultas/certipagos"
+			ACC.certificacionPagosGenerarURL= "<c:url value='/contribuyentes/consultas/certipagos' />"
 			
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},
