@@ -166,8 +166,8 @@ function onChange() {
 									<button class="btn" type="submit">
 										<img src="${buttonImagePSE} " width="80" />
 									</button>
-									<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '<c:url value="/" />'">
-										<spring:theme code="register.cancel"/>
+									<button class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
+										<spring:theme code="impuestos.decGasolina.Pago.Regresar"/>
 									</button>
 									
 								</div>

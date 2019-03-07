@@ -10,6 +10,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -87,6 +88,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 	private static final String FORWARD_CMS_SITE_PAGE_PAGO_PSE_FORM = null;
 
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -204,7 +208,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		String anioGravable = "";
 		String periodo = "";
 		final int indiceSeleccionado = 0;
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		final DetGasResponse detalleGasolinaResponse;
 
@@ -279,7 +283,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		System.out.println("---------------- En Menu sobretasa gasolina GET --------------------------");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
@@ -312,7 +316,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		}
 		tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
 		numDoc = gasolinaService.obtenerNumDoc(dataForm.getListaDocumentos());
-		anioGravable = gasolinaService.obtenerAnoGravableActual();
+		anioGravable = Integer.toString(gasolinaService.obtenerAnoGravableActual());
 		periodo = gasolinaService.obtenerPeriodoActual();
 
 		detalleGasolinaRequest.setNumBP(numBP);
@@ -361,10 +365,13 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		{
 			if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
 			{
+				detalleGasolinaResponse.setAlmacProd(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacProd()));
+				detalleGasolinaResponse.setNumTanques(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getNumTanques()));
+				detalleGasolinaResponse.setAlmacTanque(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacTanque()));
 				dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
 				dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
 				dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
-				dataForm.setAnoGravable(gasolinaService.obtenerAnoGravableActual());
+				dataForm.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
 				dataForm.setPeriodo(gasolinaService.obtenerPeriodoActual());
 				dataForm.setNumBP(numBP);
 				dataForm.setNumDoc(numDoc);
@@ -427,7 +434,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		SDHValidaMailRolResponse detalleContribuyente;
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
 		final DetGasResponse detalleGasolinaResponse;
@@ -575,6 +582,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
 		psePaymentForm.setFechaLimiteDePago(detallePagoResponse.getFechVenc());
 		psePaymentForm.setDV(gasolinaService.prepararDV(detalleContribuyente));
+		psePaymentForm.setObjPago(detalleContribuyente.getGasolina().get(0).getNumObjeto());
 		model.addAttribute("psePaymentForm", psePaymentForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
@@ -602,7 +610,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		List<DetGasInfoDeclaraResponse> infoDeclaraDefault;
 		List<DetGasRevisorDeclaranteResponse> revisorDeclaranteDefault;
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
 		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
 		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
