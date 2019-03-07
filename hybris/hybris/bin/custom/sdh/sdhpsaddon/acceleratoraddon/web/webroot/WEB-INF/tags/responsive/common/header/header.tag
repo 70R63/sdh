@@ -270,7 +270,9 @@
 		
 			rol = '<c:out value="${row_rol.nombreRol}"/>';
 			
-			if (rol = "01" && currentUrl.includes("contribuyentes")){
+			if ((rol = "01" && currentUrl.includes("contribuyentes") ) ||
+				(rol = "01" && currentUrl.includes("pagoEnLinea") )  
+				){
 				listaMenus.push("Mi Información Reportada");
 				
 				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
