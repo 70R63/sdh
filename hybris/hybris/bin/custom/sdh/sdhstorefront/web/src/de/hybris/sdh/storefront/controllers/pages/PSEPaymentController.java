@@ -103,14 +103,20 @@ public class PSEPaymentController extends AbstractPageController
 	@ModelAttribute("periodo")
 	public List<SelectAtomValue> getIdPeriodo()
 	{
-
+		//Periodos para gasolina
 		final List<SelectAtomValue> periodo = Arrays.asList(
-				new SelectAtomValue("1901", "2019 - Enero/Febrero"),
-				new SelectAtomValue("1902", "2019 - Marzo/Abril"),
-				new SelectAtomValue("1903", "2019 - Mayo/Junio"),
-				new SelectAtomValue("1904", "2019 - Julio/Agosto"),
-				new SelectAtomValue("1905", "2019 - Septiembre/Octubre"),
-				new SelectAtomValue("1906", "2019 - Noviembre/Diciembre"));
+				new SelectAtomValue("1901", "Enero"),
+				new SelectAtomValue("1902", "Febrero"),
+				new SelectAtomValue("1903", "Marzo"),
+				new SelectAtomValue("1904", "Abril"),
+				new SelectAtomValue("1905", "Mayo"),
+				new SelectAtomValue("1906", "Junio"),
+				new SelectAtomValue("1907", "Julio"),
+				new SelectAtomValue("1908", "Agostp"),
+				new SelectAtomValue("1909", "Septiembre"),
+				new SelectAtomValue("1910", "Octubre"),
+				new SelectAtomValue("1911", "Noviembre"),
+				new SelectAtomValue("1912", "Diciembre"));
 
 		return periodo;
 	}
@@ -147,7 +153,7 @@ public class PSEPaymentController extends AbstractPageController
 
 		return tipoDeTarjeta;
 	}
-	
+
 	@ModelAttribute("tipoDeIdentificacion")
 	public List<SelectAtomValue> getIdTipoDeIdentificacion()
 	{
@@ -164,13 +170,17 @@ public class PSEPaymentController extends AbstractPageController
 
 	@RequestMapping(value = "/pagoEnLinea", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String pagoEnLinea(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String pagoEnLinea(final Model model, final RedirectAttributes redirectModel,
+			@RequestParam(required = false, defaultValue = "", value = "debugMode")
+			final String debugMode) throws CMSItemNotFoundException
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		model.addAttribute("psePaymentForm", new PSEPaymentForm());
+		model.addAttribute("debugMode", debugMode);
+		LOG.info("debugMode[" + debugMode + "]");
 
 		return getViewForPage(model);
 	}
@@ -221,6 +231,10 @@ public class PSEPaymentController extends AbstractPageController
 
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
+		model.addAttribute("debugMode", psePaymentForm.getDebugMode());
+
+		LOG.info("debugMode[" + psePaymentForm.getDebugMode() + "]");
+
 
 		return getViewForPage(model);
 	}
@@ -275,6 +289,10 @@ public class PSEPaymentController extends AbstractPageController
 	private CreateTransactionPaymentResponseInformationType doPsePayment(final PSEPaymentForm psePaymentForm)
 	{
 		final CreateTransactionPaymentInformationType createTransactionPaymentInformationType = new CreateTransactionPaymentInformationType();
+
+		LOG.info("----------- doPsePayment --------------");
+		LOG.info(psePaymentForm);
+		LOG.info("----------- doPsePayment --------------");
 
 		createTransactionPaymentInformationType.setPaymentDescription("descripcion de ejemplo");
 		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
