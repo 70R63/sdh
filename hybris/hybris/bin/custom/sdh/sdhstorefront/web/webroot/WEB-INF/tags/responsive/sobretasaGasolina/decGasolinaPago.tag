@@ -19,7 +19,7 @@
 	<a id="downloadHelper" target="_blank"></a> <input type="hidden"
 		id="numForm" value="${dataForm.numForm }">
 	<button type="button" class="btn btn-primary btn-lg"
-		onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';">Regresar</button>
+		onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';"><spring:theme code="impuestos.decGasolina.Pago.Regresar" /></button>
 
 	<button id="gasolinaGeneraDeclaracionButton" type="button"
 		<c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if>
@@ -36,8 +36,9 @@
 		<sf:input path="numeroDeReferencia" type="hidden" />
 		<sf:input path="fechaLimiteDePago" type="hidden" />
 		<sf:input path="DV" type="hidden" />
+		<sf:input path="objPago" type="hidden" />
 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-			name="pagar" value="pagar">
+			name="pagar" value="pagar" disabled="${empty psePaymentForm.numeroDeReferencia ? 'true' : 'false'}">
 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 		</sf:button>
 	</sf:form>
