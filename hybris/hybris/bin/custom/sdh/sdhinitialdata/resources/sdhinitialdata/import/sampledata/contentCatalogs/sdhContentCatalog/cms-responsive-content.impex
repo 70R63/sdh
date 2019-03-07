@@ -1768,7 +1768,27 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;relacionPagosPageComponent	;relacionPagosPage Component	;/WEB-INF/views/responsive/pages/layout/relacionPagosPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;relacionPagosPageComponent					
-#->FIN dev-maria Agregar paginas para Relacion Pagos 01/03/2019					
+#->FIN dev-maria Agregar paginas para Relacion Pagos 01/03/2019		
+#->INI dev-maria Agregar paginas para Certificacion Declaracion 07/03/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;certiDeclaracionesPage 		;certificacion declaracion 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/certideclaraciones
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='certiDeclaracionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-certiDeclaracionesPage 		;SideContent				;															;SideContent-certiDeclaracionesPage						;;;
+								;						;BodyContent-certiDeclaracionesPage		;BodyContent				;															;BodyContent-certiDeclaracionesPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-certiDeclaracionesPage 	;Side Content Slot for certificacion declaracion			;true	;								;;;
+							;							;BodyContent-certiDeclaracionesPage	;Body Content Slot for certificacion declaracion			;true	;certiDeclaracionesPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;certiDeclaracionesPageComponent	;certiDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/certiDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;certiDeclaracionesPageComponent					
+#->FIN dev-maria Agregar paginas para Certificacion Declaracion 07/03/2019					
 									
 									
 									
