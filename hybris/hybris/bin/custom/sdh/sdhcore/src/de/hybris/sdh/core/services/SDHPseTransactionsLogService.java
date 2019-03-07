@@ -19,7 +19,7 @@ public interface SDHPseTransactionsLogService
 			CreateTransactionPaymentResponseInformationType transactionPaymentResponse, String numeroDeReferencia,
 			String tipoDeImpuesto, String impuesto, String anoGravable, String CHIP, String periodo, String CUD,
 			String noIdentificacion, String DV, String tipoDeIdentificacion, String fechaLimiteDePago, String pagoAdicional,
-			String banco, String valorAPagar, String isoCurrency, String tipoDeTarjeta);
+			String banco, String valorAPagar, String isoCurrency, String tipoDeTarjeta, String objPago);
 
 	public String updateTransaction(final String numeroDeReferencia);
 

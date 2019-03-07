@@ -521,6 +521,19 @@
 						<modifiers optional="true" />
 						<persistence type="property"></persistence>
 					</attribute>
+					<!-- indicador de recaudo -->
+					<attribute type="java.lang.String" qualifier="notificacionDeRecaudo">
+						<description>Notificacion De Recaudo</description>
+						<modifiers optional="true" />
+						 <defaultvalue>"NO"</defaultvalue>  
+						<persistence type="property"></persistence>
+					</attribute>
+					
+					<attribute type="java.lang.String" qualifier="objPago">
+						<description>Objeto de pago</description>
+						<modifiers optional="true" /> 
+						<persistence type="property"></persistence>
+					</attribute>
 				</attributes>
 			</itemtype>
         	
