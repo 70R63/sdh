@@ -185,6 +185,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;ObligacionesPendLink;"Obligaciones pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
 ;;RelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
 ;;EdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
+;;CertDeclaraLink;"Certificaciones de Declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
 
 ;;CargaLink;"Carga de Documentos";"Haga clic aquí para acceder a la opción de Carga de Documentos"
 ;;HistoricoLink;"Histórico de reportes";"Haga clic aquí para acceder a la opción de Histórico de reportes"

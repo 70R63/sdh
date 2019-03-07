@@ -140,6 +140,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; ObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/contribuyentes/consultas/oblipendientes" ;;;;;
 ; ; RelPagosLink                 ; RELACION DE PAGOS LINK              ; "/contribuyentes/consultas/relacionpagos" ;;;;;
 ; ; EdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/contribuyentes/estado-de-cuenta" ;;;;;
+; ; CertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/contribuyentes/consultas/certideclaraciones" ;;;;;
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 ; ; CargaLink               	 ; CARGA LINK              		; "/reportantes/cargadocumentos";;;;;
 ; ; HistoricoLink                ; HISTORICO LINK              ;  "/reportantes/historico";;;;;
@@ -316,7 +317,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
-;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode
+;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
 ;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
@@ -419,6 +420,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;ObligacionesPendNavNode;;Obligaciones Pendientes Link;ObligacionesPendNavNode
 ;RelPagosNavNode;;Relacion Pagos Link;RelPagosNavNode
 ;EdoCuentaNavNode;;Estado Cuenta Link;EdoCuentaNavNode
+;CertDeclaraNavNode;; Certificacion Declaracion Link;CertDeclaraNavNode
 
 ;CargaNavNode;;Carga Link;CargaNavNode
 ;HistoricoNavNode;;Historico Link;HistoricoNavNode
@@ -522,6 +524,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ObligacionesPendNavNode;ObligacionesPendLink
 ;RelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;RelPagosNavNode;RelPagosLink
 ;EdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;EdoCuentaNavNode;EdoCuentaLink
+;CertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;CertDeclaraNavNode;CertDeclaraLink
 
 ;CargaNavNodeEntry;;Carga Navigation Node Entry;CargaNavNode;CargaLink
 ;HistoricoNavNodeEntry;;Historico Navigation Node Entry;HistoricoNavNode;HistoricoLink

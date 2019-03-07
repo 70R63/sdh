@@ -9,37 +9,25 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/contribuyentes/consultas/certipagos"
-	var="certificacionURL" htmlEscape="false" />
+	var="certideclaraURL" htmlEscape="false" />
 
 <div>
 	<div class="container">
 		<div class="row">
 			<div class="headline">
 				<h2 align="center">
-					<span><spring:theme code="certificacion.inicial.titulo" /></span>
+					<span><spring:theme code="certideclara.inicial.titulo" /></span>
 
 				</h2>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label required"><spring:theme
-							code="certificacion.inicial.tipo" /></label><select required="required"
-						required id="impuesto" class="form-control " name="impuesto"
-						onchange="ShowSelected(this)">
-						<option value="">Seleccionar</option>
-						<option value="1">Impuesto</option>
-						<option value="2">Sujeto</option>
 
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3" id="idImpuesto" style="display: none;">
+			<div class="col-md-3" id="idImpuesto" style="display: block;">
 				<div class="form-group">
 					<label class="control-label required"><spring:theme
-							code="certificacion.inicial.selcimpuesto" /></label> <select
+							code="certideclara.inicial.selcimpuesto" /></label> <select
 						required="required" required id="tipoimp" class="form-control "
 						name="impuesto" onchange="Selected(this)">
 						<option value="">Seleccionar</option>
@@ -53,10 +41,10 @@
 				</div>
 			</div>
 
-			<div class="col-md-3" id="idAnio" style="display: none;">
+			<div class="col-md-3" id="idAnio" style="display: block;">
 				<div class="form-group">
 					<label class="control-label required"><spring:theme
-							code="certificacion.inicial.aniograv" /></label> <select
+							code="certideclara.inicial.aniograv" /></label> <select
 						aria-required="true" id="aniograv" class="form-control "
 						name="aniograva" onchange="SelectedAnio(this) "
 						required='required'>
@@ -72,7 +60,7 @@
 			<div class="col-md-3" id="idPeriodo" style="display: none;">
 				<div class="form-group">
 					<label class="control-label required"><spring:theme
-							code="certificacion.inicial.periodo" /></label> <select
+							code="certideclara.inicial.periodo" /></label> <select
 						aria-required="true" id="periodo" class="form-control "
 						name="aniograva" onchange="SelectSobreDeli(this)"
 						required='required'>
@@ -109,16 +97,16 @@
 						<tr>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
-										code="certificacion.inicial.predio.chip" /></label></th>
+										code="certideclara.inicial.predio.chip" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certificacion.inicial.predio.matricula" /></label></th>
+										code="certideclara.inicial.predio.matricula" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certificacion.inicial.predio.direccion" /></label></th>
+										code="certideclara.inicial.predio.direccion" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certificacion.inicial.predio.seleccionar" /></label></th>
+										code="certideclara.inicial.predio.seleccionar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -150,13 +138,13 @@
 						<tr>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
-										code="certificacion.inicial.vehiculo.placa" /></label></th>
+										code="certideclara.inicial.vehiculo.placa" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certificacion.inicial.vehiculo.marca" /></label></th>
+										code="certideclara.inicial.vehiculo.marca" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certificacion.inicial.vehiculo.seleccionar" /></label></th>
+										code="certideclara.inicial.vehiculo.seleccionar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -184,13 +172,13 @@
 						<tr>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
-										code="certificacion.inicial.ica.tipdocu" /></label></th>
+										code="certideclara.inicial.ica.tipdocu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certificacion.inicial.ica.numdocu" /></label></th>
+										code="certideclara.inicial.ica.numdocu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certificacion.inicial.ica.seleccionar" /></label></th>
+										code="certideclara.inicial.ica.seleccionar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -219,13 +207,13 @@
 						<tr>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
-										code="certificacion.inicial.publicidad.numresol" /></label></th>
+										code="certideclara.inicial.publicidad.numresol" /></label></th>
 							<th style="text-align: center"><label class="control-label">
-									<spring:theme code="certificacion.inicial.publicidad.tipvalla" />
+									<spring:theme code="certideclara.inicial.publicidad.tipvalla" />
 							</label></th>
 							<th style="text-align: center"><label class="control-label">
 									<spring:theme
-										code="certificacion.inicial.publicidad.seleccionar" />
+										code="certideclara.inicial.publicidad.seleccionar" />
 							</label></th>
 
 						</tr>
@@ -260,62 +248,25 @@
 				<div class="form-group ">
 					<button type="submit" class="btn btn-primary btn-lg" id="action"
 						name="action" value="cancelar">
-						<spring:theme code="certificacion.inicial.cancelar" />
+						<spring:theme code="certideclara.inicial.cancelar" />
 					</button>
 
 					<button type="button" class="btn btn-primary btn-lg"
 						id="generarPDFButton" name="generarPDFButton">
-						<spring:theme code="certificacion.inicial.generar" />
+						<spring:theme code="certideclara.inicial.generar" />
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div id="dialog" title="Generar Certificacion">
+<div id="dialog" title="Generar certideclara">
 	<div id="certiDialogContent"></div>
 </div>
 
 
 <script type="text/javascript">
-	function ShowSelected(selectObject) {
-		var value = selectObject.value;
-
-		var idImpuesto = document.getElementById('idImpuesto');
-		var idAnio = document.getElementById('idAnio');
-		var idPeriodo = document.getElementById('idPeriodo');
-		var tablepredial = document.getElementById('table-predial');
-		var tablevehiculos = document.getElementById('table-vehiculos');
-		var tableica = document.getElementById('table-ica');
-		var tablepublicidad = document.getElementById('table-publicidad');
-
-		if (value == '1') {
-			idImpuesto.style.display = 'block';
-			idAnio.style.display = 'none';
-			idPeriodo.style.display = 'none';
-			document.getElementById("Idper").value = '';
-		} else if (value == '2') {
-			idImpuesto.style.display = 'none';
-			idAnio.style.display = 'block';
-			idPeriodo.style.display = 'none';
-			
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			document.getElementById("Idimp").value = '';
-			document.getElementById("Idper").value = '';
-		} else {
-			idImpuesto.style.display = 'none';
-			idAnio.style.display = 'none';
-			idPeriodo.style.display = 'none';
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			document.getElementById("Idper").value = '';
-		}
-	}
+	
 	function Selected(selectObject) {
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
