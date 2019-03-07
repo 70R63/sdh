@@ -4,6 +4,7 @@
 package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
@@ -18,6 +19,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,8 +40,25 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class SobreTasaGasolinaService
 {
+	private final ConfigurationService configurationService;
+
 	private static final String REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE = AbstractController.REDIRECT_PREFIX
 			+ "/contribuyentes/sobretasa-gasolina/declaracion-gasolina";
+
+	private final String confCantidadAnioGravableBusqueda = "sdh.sobretasaGasolina.cantidadAnioGravableBusqueda";
+
+
+
+
+
+	/**
+	 * @param configurationService
+	 */
+	public SobreTasaGasolinaService(final ConfigurationService configurationService)
+	{
+		this.configurationService = configurationService;
+	}
+
 
 	public SobreTasaGasolinaCatalogos prepararCatalogos()
 	{
@@ -48,7 +67,8 @@ public class SobreTasaGasolinaService
 
 		//Sobretasa a gasolina
 		catalogosForm.setOpcionesCantidadMostrar(obtenerListaOpcionesCantidadMostrar());
-		catalogosForm.setAnioGravable(obtenerListaAnioGravable(2019, 6));
+		catalogosForm.setAnioGravable(obtenerListaAnioGravable(obtenerAnoGravableActual(),
+				Integer.parseInt(configurationService.getConfiguration().getString(confCantidadAnioGravableBusqueda))));
 		catalogosForm.setPeriodo(obtenerListaPeriodo());
 		catalogosForm.setCalidadResponsable(obtenerListaCalidadResponsable());
 		catalogosForm.setCodigoPostal(obtenerListaCodigoPostal());
@@ -282,46 +302,6 @@ public class SobreTasaGasolinaService
 		return elementos;
 	}
 
-	//	private List<ItemSelectOption> obtenerListaTipoRelacion()
-	//	{
-	//
-	//		final List<ItemSelectOption> elementos = new ArrayList<ItemSelectOption>();
-	//
-	//		elementos.add(new ItemSelectOption(1, "tipo 1"));
-	//
-	//
-	//		return elementos;
-	//	}
-
-	//	private List<ItemSelectOption> obtenerListaFuenteDato()
-	//	{
-	//
-	//		final List<ItemSelectOption> elementos = new ArrayList<ItemSelectOption>();
-	//
-	//		elementos.add(new ItemSelectOption(1, "tipo 1"));
-	//
-	//
-	//		return elementos;
-	//	}
-
-	/**
-	 * @return
-	 */
-	//	public List<SobreTasaGasolinaTabla> prepararTablaDeclaracion()
-	//	{
-	//
-	//		final List<SobreTasaGasolinaTabla> gasolinaTabla = new ArrayList<SobreTasaGasolinaTabla>();
-	//
-	//		for (int i = 1; i < 20; i++)
-	//		{
-	//			gasolinaTabla.add(new SobreTasaGasolinaTabla("NIT" + Integer.toString(i), Integer.toString(i)));
-	//		}
-	//
-	//
-	//		return gasolinaTabla;
-	//
-	//	}
-
 	public List<SobreTasaGasolinaTabla> prepararTablaDeclaracion(final List<ImpuestoGasolina> origen)
 	{
 		final List<SobreTasaGasolinaTabla> destino = new ArrayList<SobreTasaGasolinaTabla>();
@@ -430,62 +410,6 @@ public class SobreTasaGasolinaService
 		detalleGasolinaResponse = llamarWSDetGasolina(detalleGasolinaRequest, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
 				wsReqMet, LOG);
 
-
-		//		final DetalleGasolinaResponse dataForm = new DetalleGasolinaResponse();
-		//
-		//		//datos en el formulario
-		//		String calidResp;
-		//		String numTanques;
-		//		String almacProd;
-		//		String almacTanque;
-		//		String ubicaPlanta;
-		//		String codPostal;
-		//		String localidad;
-		//		String tipoDoc;
-		//		String numDoc;
-		//		String nombre;
-		//		String tipoRelacion;
-		//		String fechaDesde;
-		//		final String fechaHasta;
-		//		String fuente;
-		//		final DetalleGasolinaRepResponse representante = new DetalleGasolinaRepResponse();
-		//		final List<DetalleGasolinaRepResponse> listaRepresentantes = new ArrayList<DetalleGasolinaRepResponse>();
-		//
-		//
-		//		//Obtener los valores
-		//		calidResp = "Productor";
-		//		numTanques = "10";
-		//		almacProd = "100";
-		//		almacTanque = "1000";
-		//		ubicaPlanta = "10000";
-		//		codPostal = "110111";
-		//		localidad = "Antonio Nariño";
-		//		tipoDoc = "Cédula de Ciudadania";
-		//		numDoc = "12345";
-		//		nombre = "usuario";
-		//		tipoRelacion = "relacion1";
-		//		fechaDesde = "01/01/2019";
-		//		fechaHasta = "31/12/2019";
-		//		fuente = "fuenteDato1";
-		//		representante.setTipoDoc(tipoDoc);
-		//		representante.setNumDoc(numDoc);
-		//		representante.setNombre(nombre);
-		//		representante.setTipoRelacion(tipoRelacion);
-		//		representante.setFechDesde(fechaDesde);
-		//		representante.setFechHasta(fechaHasta);
-		//		representante.setFuente(fuente);
-		//		listaRepresentantes.add(representante);
-		//
-		//
-		//		//Setear los valores
-		//		dataForm.setCalidResp(calidResp);
-		//		dataForm.setNumTanques(numTanques);
-		//		dataForm.setAlmacProd(almacProd);
-		//		dataForm.setAlmacTanque(almacTanque);
-		//		dataForm.setUbicaPlanta(ubicaPlanta);
-		//		dataForm.setCodPostal(codPostal);
-		//		dataForm.setLocalidad(localidad);
-		//		dataForm.setRepresentantes(listaRepresentantes);
 
 		return detalleGasolinaResponse;
 	}
@@ -677,13 +601,13 @@ public class SobreTasaGasolinaService
 	/**
 	 * @return
 	 */
-	public String obtenerAnoGravableActual()
+	public int obtenerAnoGravableActual()
 	{
 		final Calendar c = Calendar.getInstance();
 		final int year = c.get(Calendar.YEAR);
-		final String yearSTR = Integer.toString(year);
 
-		return yearSTR;
+
+		return year;
 	}
 
 
@@ -839,30 +763,6 @@ public class SobreTasaGasolinaService
 		{
 			periodoConvertidoPagar = anoGravable.substring(2) + periodo;
 		}
-		//		if (periodo.equals("01") || periodo.equals("02"))
-		//		{
-		//			periodoConvertidoPagar = "01";
-		//		}
-		//		else if (periodo.equals("03") || periodo.equals("04"))
-		//		{
-		//			periodoConvertidoPagar = "02";
-		//		}
-		//		else if (periodo.equals("05") || periodo.equals("06"))
-		//		{
-		//			periodoConvertidoPagar = "03";
-		//		}
-		//		else if (periodo.equals("07") || periodo.equals("08"))
-		//		{
-		//			periodoConvertidoPagar = "04";
-		//		}
-		//		else if (periodo.equals("09") || periodo.equals("10"))
-		//		{
-		//			periodoConvertidoPagar = "05";
-		//		}
-		//		else if (periodo.equals("11") || periodo.equals("12"))
-		//		{
-		//			periodoConvertidoPagar = "06";
-		//		}
 
 
 		return periodoConvertidoPagar;
@@ -928,6 +828,49 @@ public class SobreTasaGasolinaService
 
 
 		return dv;
+	}
+
+
+	/**
+	 * @param gasolina
+	 * @return
+	 */
+	public List<SelectAtomValue> prepararCatalogoPeriodoPSE(final String gasolina)
+	{
+		final List<SelectAtomValue> periodo = new ArrayList<SelectAtomValue>();
+		final int limite = Integer.parseInt(configurationService.getConfiguration().getString(confCantidadAnioGravableBusqueda));
+		final int anioActual = obtenerAnoGravableActual();
+
+		for (int i = 0; i < limite; i++)
+		{
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "01"), "Enero"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "02"), "Febrero"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "03"), "Marzo"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "04"), "Abril"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "05"), "Mayo"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "06"), "Junio"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "07"), "Julio"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "08"), "Agosto"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "09"), "Septiembre"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "10"), "Octubre"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "11"), "Noviembre"));
+			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "12"), "Diciembre"));
+		}
+
+
+		return periodo;
+	}
+
+
+	/**
+	 * @param almacProd
+	 * @return
+	 */
+	public String prepararValNumerico(final String valorNumString)
+	{
+		final String valorConvertido = valorNumString.replaceFirst("^0+(?!$)", "");
+
+		return valorConvertido;
 	}
 
 

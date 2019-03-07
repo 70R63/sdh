@@ -19,6 +19,7 @@ import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInform
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
@@ -104,19 +105,8 @@ public class PSEPaymentController extends AbstractPageController
 	public List<SelectAtomValue> getIdPeriodo()
 	{
 		//Periodos para gasolina
-		final List<SelectAtomValue> periodo = Arrays.asList(
-				new SelectAtomValue("1901", "Enero"),
-				new SelectAtomValue("1902", "Febrero"),
-				new SelectAtomValue("1903", "Marzo"),
-				new SelectAtomValue("1904", "Abril"),
-				new SelectAtomValue("1905", "Mayo"),
-				new SelectAtomValue("1906", "Junio"),
-				new SelectAtomValue("1907", "Julio"),
-				new SelectAtomValue("1908", "Agostp"),
-				new SelectAtomValue("1909", "Septiembre"),
-				new SelectAtomValue("1910", "Octubre"),
-				new SelectAtomValue("1911", "Noviembre"),
-				new SelectAtomValue("1912", "Diciembre"));
+		final List<SelectAtomValue> periodo = new SobreTasaGasolinaService(configurationService)
+				.prepararCatalogoPeriodoPSE(new ControllerPseConstants().getGASOLINA());
 
 		return periodo;
 	}
