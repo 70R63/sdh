@@ -59,4 +59,23 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		return transactionModel;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.dao.PseTransactionsLogDao#getAllTransactionsNotNotifiedPaymentAndStatusOk()
+	 */
+	@Override
+	public SearchResult<PseTransactionsLogModel> getAllTransactionsNotNotifiedPaymentAndStatusOk(
+			final String transactionStateStatus, final String notificacionRecaudoStatus)
+	{
+		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
+		      + PseTransactionsLogModel._TYPECODE + " AS p} Where "
+				+ "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + transactionStateStatus + "' AND " + "{p:"
+				+ PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '" + notificacionRecaudoStatus + "'";
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT);
+		final SearchResult<PseTransactionsLogModel> transactions = getFlexibleSearchService().search(query);
+		return getFlexibleSearchService().search(query);
+	}
+
 }

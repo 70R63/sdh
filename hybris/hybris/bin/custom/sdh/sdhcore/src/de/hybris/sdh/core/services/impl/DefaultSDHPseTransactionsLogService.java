@@ -51,7 +51,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final String tipoDeImpuesto, final String impuesto, final String anoGravable, final String CHIP, final String periodo,
 			final String CUD, final String noIdentificacion, final String DV, final String tipoDeIdentificacion,
 			final String fechaLimiteDePago, final String pagoAdicional, final String banco, final String valorAPagar,
-			final String isoCurrency, final String tipoDeTarjeta)
+			final String isoCurrency, final String tipoDeTarjeta, final String objPago)
 	{
 		final PseTransactionsLogModel transactionLogModel = new PseTransactionsLogModel();
 		final String transactionPaymentResponsePrint = null;
@@ -76,6 +76,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		transactionLogModel.setValorAPagar(valorAPagar);
 		transactionLogModel.setIsoCurrency(isoCurrency);
 		transactionLogModel.setTipoDeTarjeta(tipoDeTarjeta);
+		transactionLogModel.setObjPago(objPago);
 
 		// CreateTransactionPaymentResponseInformationType
 		if (transactionPaymentResponse != null)
