@@ -622,5 +622,11 @@
 	
 	<alias alias="pseTransactionsLogPerformable" name="pseTransactionsLogPerformable"/>
 	<bean id="pseTransactionsLogPerformable" class="de.hybris.sdh.core.job.PseTransactionsLogPerformable" parent="abstractJobPerformable"/>
+	
+	<alias alias="sdhNotificacionPagoService" name="defaultSDHNotificacionPagoService"/>
+	<bean id="defaultSDHNotificacionPagoService" class="de.hybris.sdh.core.services.impl.DefaultSDHNotificacionPagoService" />
+	
+	<alias alias="pseNotificacionPagoPerformable" name="pseNotificacionPagoPerformable"/>
+	<bean id="pseNotificacionPagoPerformable" class="de.hybris.sdh.core.job.PseNotificacionPagoPerformable" parent="abstractJobPerformable"/>
 
 </beans>

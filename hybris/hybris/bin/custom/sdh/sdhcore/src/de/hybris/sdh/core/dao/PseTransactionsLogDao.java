@@ -17,4 +17,7 @@ public interface PseTransactionsLogDao
 	public SearchResult<PseTransactionsLogModel> getAllOutstandingTransactions(String transactionState);
 
 	public PseTransactionsLogModel getTransaction(String numeroDeReferencia);
+
+	public SearchResult<PseTransactionsLogModel> getAllTransactionsNotNotifiedPaymentAndStatusOk(String transactionStateStatus,
+			String notificacionRecaudoStatus);
 }

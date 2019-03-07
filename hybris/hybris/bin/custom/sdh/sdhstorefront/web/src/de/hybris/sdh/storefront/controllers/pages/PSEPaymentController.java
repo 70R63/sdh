@@ -148,8 +148,8 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> tipoDeTarjeta = Arrays.asList(
-				new SelectAtomValue("01", "Cedito"),
-				new SelectAtomValue("02", "Debito"));
+				new SelectAtomValue("04", "Cedito"),
+				new SelectAtomValue("03", "Debito"));
 
 		return tipoDeTarjeta;
 	}
@@ -358,7 +358,7 @@ public class PSEPaymentController extends AbstractPageController
 				psePaymentForm.getTipoDeIdentificacion(), psePaymentForm.getNoIdentificacion(), psePaymentForm.getDV(),
 				psePaymentForm.getFechaLimiteDePago(), psePaymentForm.getPagoAdicional(), psePaymentForm.getBanco(),
 				psePaymentForm.getValorAPagar(), configurationService.getConfiguration().getString("sdh.pse.isoCodeCurrency"),
-				psePaymentForm.getTipoDeTarjeta());
+				psePaymentForm.getTipoDeTarjeta(),psePaymentForm.getObjPago());
 	}
 
 	private PSEPaymentForm getPSEPaymentForm(final String ticketId)
