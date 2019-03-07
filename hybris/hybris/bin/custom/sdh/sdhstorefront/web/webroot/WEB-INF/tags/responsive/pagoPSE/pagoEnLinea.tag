@@ -8,7 +8,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:set var = "tipoDeImpuesto" scope = "session" value = "${param.tipoDeImpuesto}"/>
+<c:out value="ModeDebuge = ${debugMode}"/>
 
 <div class="row" >
 	<div class="col-md-6 col-md-offset-3">
@@ -22,6 +22,7 @@
 						<formElement:formSelectBox idKey="psePaymentForm.tipoDeImpuesto" labelKey="psePaymentForm.tipoDeImpuesto" path="tipoDeImpuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeImpuesto}" selectCSSClass="form-control" disabled="false"/>
 						<formElement:formSelectBox idKey="psePaymentForm.anoGravable" labelKey="psePaymentForm.anoGravable" path="anoGravable" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${anoGravable}" selectCSSClass="form-control" disabled="false"/>
 						<formElement:formSelectBox idKey="psePaymentForm.periodo" labelKey="psePaymentForm.periodo" path="periodo" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${periodo}" selectCSSClass="form-control" disabled="false"/>
+						<form:hidden path="debugMode" value="${debugMode}"/>
 
 						<div class="text-right">
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">

@@ -24,6 +24,8 @@ public class PSEPaymentForm
 	private String banco;
 	private String valorAPagar;
 	private String tipoDeTarjeta;
+	private String debugMode;
+	private String objPago;
 
 	/**
 	 * @return the tipoDeImpuesto
@@ -280,6 +282,44 @@ public class PSEPaymentForm
 		this.tipoDeTarjeta = tipoDeTarjeta;
 	}
 
+
+
+	/**
+	 * @return the debugMode
+	 */
+	public String getDebugMode()
+	{
+		return debugMode;
+	}
+
+	/**
+	 * @param debugMode
+	 *           the debugMode to set
+	 */
+	public void setDebugMode(final String debugMode)
+	{
+		this.debugMode = debugMode;
+	}
+
+
+
+	/**
+	 * @return the objPago
+	 */
+	public String getObjPago()
+	{
+		return objPago;
+	}
+
+	/**
+	 * @param objPago
+	 *           the objPago to set
+	 */
+	public void setObjPago(final String objPago)
+	{
+		this.objPago = objPago;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -292,8 +332,22 @@ public class PSEPaymentForm
 				+ impuesto + ", anoGravable=" + anoGravable + ", CHIP=" + CHIP + ", periodo=" + periodo + ", CUD=" + CUD
 				+ ", noIdentificacion=" + noIdentificacion + ", DV=" + DV + ", tipoDeIdentificacion=" + tipoDeIdentificacion
 				+ ", fechaLimiteDePago=" + fechaLimiteDePago + ", pagoAdicional=" + pagoAdicional + ", banco=" + banco
-				+ ", valorAPagar=" + valorAPagar + ", tipoDeTarjeta=" + tipoDeTarjeta + "]";
+				+ ", valorAPagar=" + valorAPagar + ", tipoDeTarjeta=" + tipoDeTarjeta + ", debugMode=" + debugMode + ", objPago="
+				+ objPago + "]";
 	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
+	 */
 
 
 
