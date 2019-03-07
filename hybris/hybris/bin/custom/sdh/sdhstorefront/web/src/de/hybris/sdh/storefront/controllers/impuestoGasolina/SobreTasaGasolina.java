@@ -16,20 +16,22 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
-import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -282,7 +284,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		final DetGasResponse detalleGasolinaResponse;
-		final UIMenuForm uiMenuForm = new UIMenuForm();
+
 
 		String[] mensajesError;
 		String numBP = "";
@@ -305,10 +307,6 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error2", mensajesError);
-
-
-			uiMenuForm.fillForm(detalleContribuyente);
-			model.addAttribute("uiMenuForm", uiMenuForm);
 
 			model.addAttribute("dataForm", dataForm);
 		}
@@ -431,10 +429,14 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		SDHValidaMailRolResponse detalleContribuyente;
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
 		final DetGasResponse detalleGasolinaResponse;
+		final DetallePagoResponse detallePagoResponse;
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
 		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
+		String clavePeriodo = "";
+
 
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
@@ -542,24 +544,37 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		declarante.setNumDoc(detalleContribuyente.getInfoContrib().getNumDoc());
 		declarante.setNombres(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
 		dataForm.setDeclarante(declarante);
-
-
-
-
 		dataForm.setCatalogosSo(catalogos);
 		System.out.println(dataForm);
-
-
 		model.addAttribute("dataForm", dataForm);
 
-		psePaymentForm.setTipoDeImpuesto("GASOLINA");
+
+		clavePeriodo = gasolinaService.perpararPeriodoPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+		detallePagoRequest.setNumBP(numBP);
+		detallePagoRequest.setClavePeriodo(clavePeriodo);
+		detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjeto(detalleContribuyente));
+
+		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+		if (detallePagoResponse.getErrores() != null && detallePagoResponse.getErrores().get(0) != null
+				&& detallePagoResponse.getErrores().get(0).getTxtmsj() != null
+				&& !detallePagoResponse.getErrores().get(0).getTxtmsj().equals(""))
+		{
+			LOG.error("Error al leer detalle de pago: " + detallePagoResponse.getErrores().get(0).getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error4", mensajesError);
+		}
+
+
+		psePaymentForm.setTipoDeImpuesto(new ControllerPseConstants().getGASOLINA());
 		psePaymentForm.setAnoGravable(dataForm.getAnoGravable());
-		psePaymentForm.setValorAPagar(dataForm.getDataForm().getValoresDeclara().getTotalPagar());
-		psePaymentForm.setPeriodo(gasolinaService.perpararPeriodoPago(dataForm.getPeriodo()));
-		psePaymentForm
-				.setTipoDeIdentificacion(
-						gasolinaService.getDescripcion(dataForm.getTipoDoc(), dataForm.getCatalogosSo().getTipoIdRev()));
+		psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
+		psePaymentForm.setPeriodo(clavePeriodo);
+		psePaymentForm.setTipoDeIdentificacion(dataForm.getTipoDoc());
 		psePaymentForm.setNoIdentificacion(dataForm.getNumDoc());
+		psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
+		psePaymentForm.setFechaLimiteDePago(detallePagoResponse.getFechVenc());
+		psePaymentForm.setDV(gasolinaService.prepararDV(detalleContribuyente));
 		model.addAttribute("psePaymentForm", psePaymentForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));

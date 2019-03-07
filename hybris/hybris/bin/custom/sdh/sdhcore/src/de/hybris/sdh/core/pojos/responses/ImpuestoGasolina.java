@@ -11,6 +11,7 @@ public class ImpuestoGasolina
 {
 	private String numDoc;
 	private String tipoDoc;
+	private String numObjeto;
 
 	/**
 	 *
@@ -52,6 +53,23 @@ public class ImpuestoGasolina
 	public void setTipoDoc(final String tipoDoc)
 	{
 		this.tipoDoc = tipoDoc;
+	}
+
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
 	}
 
 

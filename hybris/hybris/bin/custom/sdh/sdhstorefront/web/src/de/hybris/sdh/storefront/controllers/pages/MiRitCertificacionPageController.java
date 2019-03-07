@@ -16,11 +16,9 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CertificaRITRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.CertificacionRITResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiRitCertificacionForm;
-import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import javax.annotation.Resource;
 
@@ -163,35 +161,11 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CertificaRITRequest certificaRITRequest = new CertificaRITRequest();
-		final UIMenuForm uiMenuForm = new UIMenuForm();
+
 
 		if (error == "sinPdf")
 		{
 			GlobalMessages.addErrorMessage(model, "mirit.certificacion..error.pdfVacio");
-		}
-
-		try
-		{
-			certificaRITRequest.setNumBP(customerModel.getNumBP());
-			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
-
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
-
-			uiMenuForm.fillForm(sdhConsultaContribuyenteBPResponse);
-			model.addAttribute("uiMenuForm", uiMenuForm);
-
-		}
-
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
 
 
