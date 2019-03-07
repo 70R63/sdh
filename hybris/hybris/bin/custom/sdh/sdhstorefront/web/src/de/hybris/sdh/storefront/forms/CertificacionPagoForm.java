@@ -1,6 +1,9 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.CertificacionRIT;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+
+import java.util.List;
 
 
 public class CertificacionPagoForm
@@ -24,6 +27,8 @@ public class CertificacionPagoForm
 	private String Idimp;
 	private String Idper;
 	private String Idanio;
+
+	private List<ImpuestoPublicidadExterior> publicidadExt;
 
 
 
@@ -341,6 +346,23 @@ public class CertificacionPagoForm
 	public void setIdanio(final String idanio)
 	{
 		Idanio = idanio;
+	}
+
+	/**
+	 * @return the publicidadExt
+	 */
+	public List<ImpuestoPublicidadExterior> getPublicidadExt()
+	{
+		return publicidadExt;
+	}
+
+	/**
+	 * @param publicidadExt
+	 *           the publicidadExt to set
+	 */
+	public void setPublicidadExt(final List<ImpuestoPublicidadExterior> publicidadExt)
+	{
+		this.publicidadExt = publicidadExt;
 	}
 
 
