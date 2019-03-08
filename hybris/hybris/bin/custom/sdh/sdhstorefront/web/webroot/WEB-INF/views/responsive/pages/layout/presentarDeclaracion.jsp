@@ -27,7 +27,7 @@
 		var div = document.getElementById("impuestoPE");
 		var valPE = div.attributes[0].value;
 
-		if (valGas != null && valPE != null) {
+		if (valGas != "" && valPE != "") {
 			var x = document.getElementById("impuestonew");
 
 			var option = document.createElement("option");
@@ -42,7 +42,7 @@
 			option.value = "5"
 			option.text = "Sobretasa Gasolina";
 			x.appendChild(option);
-		} else if (valGas != null && valPE == null){
+		} else if (valGas != "" && valPE == ""){
 			var x = document.getElementById("impuestonew");
 			var option = document.createElement("option");
 			option.value = "0"
@@ -52,7 +52,7 @@
 			option.value = "5"
 			option.text = "Sobretasa Gasolina";
 			x.appendChild(option);
-		}else if (valGas != null && valPE == null){
+		}else if (valGas == "" && valPE != ""){
 			var x = document.getElementById("impuestonew");
 			var option = document.createElement("option");
 			option.value = "0"
