@@ -17,6 +17,7 @@ import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
+import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
