@@ -355,6 +355,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		final PSEPaymentForm form = new PSEPaymentForm();
 		final PseTransactionsLogModel modelo = pseTransactionsLogDao.getTransaction(ticketId);
+		String bankProcessDate = null;
 
 		if (modelo != null)
 		{
@@ -373,6 +374,18 @@ public class PSEPaymentController extends AbstractPageController
 			form.setBanco(modelo.getBanco());
 			form.setValorAPagar(modelo.getValorAPagar());
 			form.setTipoDeTarjeta(modelo.getTipoDeTarjeta());
+
+			bankProcessDate = modelo.getBankProcessDate();
+
+			if (bankProcessDate != null)
+			{
+				if (bankProcessDate.split(" ").length == 2)
+				{
+					form.setBankDateResponse(bankProcessDate.split(" ")[0]);
+					form.setBankTimeResponse(bankProcessDate.split(" ")[1]);
+				}
+			}
+
 		}
 
 		return form;

@@ -125,18 +125,6 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
-			/*
-			 * if (response != null) { pseTransactionsLogModel.setSoliciteDate(response.getSoliciteDate().toString());
-			 * pseTransactionsLogModel.setBankProcessDate(response.getBankProcessDate().toString());
-			 * pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue()); transactionState =
-			 * response.getTransactionState().getValue();
-			 *
-			 * LOG.info("Updated PseTransactionsLogModel [" + numeroDeReferencia + "," +
-			 * response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", " +
-			 * response.getTransactionState().getValue() + "]");
-			 *
-			 * modelService.saveAll(pseTransactionsLogModel); }else { LOG.info("Error con la comunicacion de PSE"); }
-			 */
 			transactionState = this.updateResponse(pseTransactionsLogModel, response);
 		}
 		else
