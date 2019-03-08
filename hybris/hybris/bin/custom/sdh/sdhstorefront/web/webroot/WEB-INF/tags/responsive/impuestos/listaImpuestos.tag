@@ -21,10 +21,21 @@
 				<label class="control-label required"><spring:theme
 						code="impuestos.presentarDeclaracion.impuesto" /></label>
 
-				<sf:select path="impuesto" items="${dataForm.catalogosSo.impuesto}"
+			<%--<sf:select path="impuesto" items="${dataForm.catalogosSo.impuesto}"
 					referenceData="${dataForm.catalogosSo.impuesto}"
-					class="form-control"/>
+					class="form-control"/>--%>
+					<sf:select id="impuestonew" class="form-control" path="impuesto"> 
+				
+				</sf:select>
 			</div>
+		</div>
+
+		
+		<div id="impuestoss" style="display: none;">
+			<input value="${dataForm.optionPubliExt}" id="impuestoPE" />
+		</div>
+		<div id="impuestoss2" style="display: none;">
+			<input value="${dataForm.optionGas}" id="impuestoGas" />
 		</div>
 
 		<div class="col-md-3">
