@@ -17,7 +17,6 @@ import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
-import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
@@ -138,7 +137,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> tipoDeTarjeta = Arrays.asList(
-				new SelectAtomValue("04", "Crédito"),
+				new SelectAtomValue("04", "Credito"),
 				new SelectAtomValue("03", "Debito"));
 
 		return tipoDeTarjeta;

@@ -38,7 +38,7 @@
 		<sf:input path="DV" type="hidden" />
 		<sf:input path="objPago" type="hidden" />
 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-			name="pagar" value="pagar" disabled="${empty psePaymentForm.numeroDeReferencia ? 'true' : 'false'}">
+			name="pagar" value="pagar" >
 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 		</sf:button>
 	</sf:form>
