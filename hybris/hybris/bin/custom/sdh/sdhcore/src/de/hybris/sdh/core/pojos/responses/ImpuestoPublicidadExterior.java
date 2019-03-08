@@ -15,6 +15,9 @@ public class ImpuestoPublicidadExterior
 	private String tipoVallaCode;
 	private String numObjeto;
 
+
+
+
 	/**
 	 * @return the numObjeto
 	 */

@@ -580,6 +580,10 @@
 	</bean>
 	
 	<bean name="sdhCertificaRITService" class="de.hybris.sdh.core.services.impl.DefaultSDHCertificaRITService" />
+	
+	<bean name="sdhImprimePagoService" class="de.hybris.sdh.core.services.impl.DefaultSDHImprimePagoService" />
+	
+	<bean name="sdhConsultaPagoService" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaPagoService" />
 
 	<!-- SOAP Web Services - SEND CRM MAIL -->
 	<alias name="ZWS_HYSEND_MAIL_ServiceLocator" alias="ZWS_HYSEND_MAIL_locator"/>
