@@ -235,6 +235,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			LOG.error("Error al leer detalle de gasolina: " + detalleGasolinaResponse.getErrores().get(0).getTxtmsj());
 			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error1");
 		}
+		detalleGasolinaResponse.setAlmacProd(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacProd()));
+		detalleGasolinaResponse.setNumTanques(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getNumTanques()));
+		detalleGasolinaResponse.setAlmacTanque(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacTanque()));
+
 
 		dataForm.setNumBP(numBP);
 		dataForm.setNumDoc(numDoc);
@@ -359,15 +363,16 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 			model.addAttribute("dataForm", dataForm);
 		}
+		detalleGasolinaResponse.setAlmacProd(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacProd()));
+		detalleGasolinaResponse.setNumTanques(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getNumTanques()));
+		detalleGasolinaResponse.setAlmacTanque(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacTanque()));
+
 		detalleGasolinaResponse
 				.setRepresentantes(gasolinaService.prepararTablaRepresentantes(detalleGasolinaResponse.getRepresentantes()));
 
 		{
 			if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
 			{
-				detalleGasolinaResponse.setAlmacProd(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacProd()));
-				detalleGasolinaResponse.setNumTanques(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getNumTanques()));
-				detalleGasolinaResponse.setAlmacTanque(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacTanque()));
 				dataForm.setListaDocumentos(gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()));
 				dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
 				dataForm.setCatalogosSo(gasolinaService.prepararCatalogos());
@@ -487,6 +492,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error1", mensajesError);
 		}
+		detalleGasolinaResponse.setAlmacProd(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacProd()));
+		detalleGasolinaResponse.setNumTanques(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getNumTanques()));
+		detalleGasolinaResponse.setAlmacTanque(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacTanque()));
+
 
 		dataForm.setAnoGravable(anoGravable);
 		dataForm.setPeriodo(periodo);
