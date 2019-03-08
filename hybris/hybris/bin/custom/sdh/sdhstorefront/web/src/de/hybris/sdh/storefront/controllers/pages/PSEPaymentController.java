@@ -138,7 +138,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> tipoDeTarjeta = Arrays.asList(
-				new SelectAtomValue("04", "Cedito"),
+				new SelectAtomValue("04", "Credito"),
 				new SelectAtomValue("03", "Debito"));
 
 		return tipoDeTarjeta;
