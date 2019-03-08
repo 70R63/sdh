@@ -157,6 +157,7 @@ function onChange() {
 					<form:hidden path="valorAPagar" value="${psePaymentForm.valorAPagar}"/>
 					<form:hidden id="hiddenTipoDeTarjeta" path="tipoDeTarjeta" value="${varTipoDeTarjeta}"/>
 					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>
+					
 					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>
 				
 					<div class="text-center">

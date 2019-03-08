@@ -26,6 +26,8 @@ public class PSEPaymentForm
 	private String tipoDeTarjeta;
 	private String debugMode;
 	private String objPago;
+	private String bankDateResponse;
+	private String bankTimeResponse;
 
 	/**
 	 * @return the tipoDeImpuesto
@@ -320,6 +322,41 @@ public class PSEPaymentForm
 		this.objPago = objPago;
 	}
 
+
+	/**
+	 * @return the bankDateResponse
+	 */
+	public String getBankDateResponse()
+	{
+		return bankDateResponse;
+	}
+
+	/**
+	 * @param bankDateResponse
+	 *           the bankDateResponse to set
+	 */
+	public void setBankDateResponse(final String bankDateResponse)
+	{
+		this.bankDateResponse = bankDateResponse;
+	}
+
+	/**
+	 * @return the bankTimeResponse
+	 */
+	public String getBankTimeResponse()
+	{
+		return bankTimeResponse;
+	}
+
+	/**
+	 * @param bankTimeResponse
+	 *           the bankTimeResponse to set
+	 */
+	public void setBankTimeResponse(final String bankTimeResponse)
+	{
+		this.bankTimeResponse = bankTimeResponse;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -333,21 +370,9 @@ public class PSEPaymentForm
 				+ ", noIdentificacion=" + noIdentificacion + ", DV=" + DV + ", tipoDeIdentificacion=" + tipoDeIdentificacion
 				+ ", fechaLimiteDePago=" + fechaLimiteDePago + ", pagoAdicional=" + pagoAdicional + ", banco=" + banco
 				+ ", valorAPagar=" + valorAPagar + ", tipoDeTarjeta=" + tipoDeTarjeta + ", debugMode=" + debugMode + ", objPago="
-				+ objPago + "]";
+				+ objPago + ", bankDateResponse=" + bankDateResponse + ", bankTimeResponse=" + bankTimeResponse + "]";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
-
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
 
 
 
