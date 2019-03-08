@@ -135,6 +135,11 @@ function onChange() {
 						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>
 						<formElement:formInputBox  idKey="psePaymentForm.valorAPagar" maxlength="240" labelKey="psePaymentForm.valorAPagar" path="valorAPagar" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 						<formElement:formSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeTarjeta}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>
+					
+					<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA && !empty psePaymentForm.bankDateResponse }">
+   						<formElement:formInputBox  idKey="psePaymentForm.bankDateResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
+   						<formElement:formInputBox  idKey="psePaymentForm.bankTimeResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
+					</c:if>
 					</fieldset>
 				</form:form>
 				
@@ -158,6 +163,11 @@ function onChange() {
 					<form:hidden id="hiddenTipoDeTarjeta" path="tipoDeTarjeta" value="${varTipoDeTarjeta}"/>
 					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>
 					
+					
+					<form:hidden path="bankDateResponse" value="${psePaymentForm.bankDateResponse}"/>
+					<form:hidden path="bankTimeResponse" value="${psePaymentForm.bankTimeResponse}"/>
+					
+					
 					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>
 				
 					<div class="text-center">
@@ -172,6 +182,17 @@ function onChange() {
 									</button>
 									
 								</div>
+								</c:if>
+								
+								<c:if test = "${disabled eq true}">
+									<div id="continuar">
+										<button class="btn btn-secondary btn-lg" type="button">
+											<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
+										</button>
+										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
+											<spring:theme code="impuestos.Pago.PSE.continuar"/>
+										</button>
+									</div>
 								</c:if>
 							</ycommerce:testId>
 						</div>
