@@ -15,7 +15,7 @@
 			<div class="row">
 				<div class="headline">
 					<h2 align="center">
-						<span><spring:theme code="edocuenta.inicial.titulo" /></span>
+						<span><spring:theme code="relacion.inicial.titulo" /></span>
 
 					</h2>
 				</div>
@@ -24,7 +24,7 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="edocuenta.inicial.tipo" /></label><select required="required"
+								code="relacion.inicial.tipo" /></label><select required="required"
 							required id="impuesto" class="form-control " name="impuesto"
 							onchange="ShowSelected(this)">
 							<option value="">Seleccionar</option>
@@ -37,7 +37,7 @@
 				<div class="col-md-3" id="idImpuesto" style="display: none;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="edocuenta.inicial.selcimpuesto" /></label> <select
+								code="relacion.inicial.selcimpuesto" /></label> <select
 							required="required" required id="impuesto" class="form-control "
 							name="impuesto" onchange="Selected(this)">
 							<option value="">Seleccionar</option>
@@ -54,7 +54,7 @@
 				<div class="col-md-3" id="idAnio" style="display: none;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="edocuenta.inicial.aniograv" /></label> <select
+								code="relacion.inicial.aniograv" /></label> <select
 							aria-required="true" id="aniograva" class="form-control "
 							name="aniograva" onchange="SelectedAnio(this) "
 							required='required'>
@@ -70,7 +70,7 @@
 				<div class="col-md-3" id="idPeriodo" style="display: none;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="edocuenta.inicial.periodo" /></label> <select
+								code="relacion.inicial.periodo" /></label> <select
 							aria-required="true" id="periodo" class="form-control "
 							name="aniograva" onchange="SelectSobreDeli(this)"
 							required='required'>
@@ -94,7 +94,7 @@
 				<div class="col-md-3" id="idPeriodoICA" style="display: none;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="edocuenta.inicial.periodo" /></label> <select
+								code="relacion.inicial.periodo" /></label> <select
 							aria-required="true" id="periodoICA" class="form-control "
 							name="aniograva" onchange="SelectedPerIca(this)"
 							required='required'>
@@ -120,16 +120,16 @@
 							<tr>
 								<th style="text-align: center"><label
 									class="control-label " for=""><spring:theme
-											code="edocuenta.inicial.predio.chip" /></label></th>
+											code="relacion.inicial.predio.chip" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.predio.matricula" /></label></th>
+											code="relacion.inicial.predio.matricula" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.predio.direccion" /></label></th>
+											code="relacion.inicial.predio.direccion" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.predio.seleccionar" /></label></th>
+											code="relacion.inicial.predio.seleccionar" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -161,13 +161,13 @@
 							<tr>
 								<th style="text-align: center"><label
 									class="control-label " for=""><spring:theme
-											code="edocuenta.inicial.vehiculo.placa" /></label></th>
+											code="relacion.inicial.vehiculo.placa" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.vehiculo.marca" /></label></th>
+											code="relacion.inicial.vehiculo.marca" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.vehiculo.seleccionar" /></label></th>
+											code="relacion.inicial.vehiculo.seleccionar" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -195,13 +195,13 @@
 							<tr>
 								<th style="text-align: center"><label
 									class="control-label " for=""><spring:theme
-											code="edocuenta.inicial.ica.tipdocu" /></label></th>
+											code="relacion.inicial.ica.tipdocu" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.ica.numdocu" /></label></th>
+											code="relacion.inicial.ica.numdocu" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.ica.seleccionar" /></label></th>
+											code="relacion.inicial.ica.seleccionar" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -230,13 +230,13 @@
 							<tr>
 								<th style="text-align: center"><label
 									class="control-label " for=""><spring:theme
-											code="edocuenta.inicial.publicidad.numresol" /></label></th>
+											code="relacion.inicial.publicidad.numresol" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.publicidad.tipvalla" /></label></th>
+											code="relacion.inicial.publicidad.tipvalla" /></label></th>
 								<th style="text-align: center"><label class="control-label"
 									for=""> <spring:theme
-											code="edocuenta.inicial.publicidad.seleccionar" /></label></th>
+											code="relacion.inicial.publicidad.seleccionar" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -263,12 +263,12 @@
 					<div class="form-group ">
 						<button type="submit" class="btn btn-primary btn-lg" id="action"
 							name="action" value="cancelar">
-							<spring:theme code="edocuenta.inicial.cancelar" />
+							<spring:theme code="relacion.inicial.cancelar" />
 						</button>
 				
 						<button type="submit" class="btn btn-primary btn-lg" id="action"
 							name="action" value="generar">
-							<spring:theme code="edocuenta.inicial.generar" />
+							<spring:theme code="relacion.inicial.generar" />
 						</button>
 					</div>
 				</div>
