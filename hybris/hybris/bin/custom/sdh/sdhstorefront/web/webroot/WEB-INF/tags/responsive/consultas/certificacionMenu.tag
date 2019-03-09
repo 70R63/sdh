@@ -63,9 +63,9 @@
 				<div class="col-md-3" id="idImpuesto" style="display: none;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.selcimpuesto" /></label> <select
-							required="required" required id="Idimp" class="form-control "
-							name="impuesto" onchange="Selected(this)">
+								code="certificacion.inicial.selcimpuesto" /></label>
+						<select	required="required" required id="Idimp" class="form-control "
+							name="Idimp" onchange="Selected(this)">
 							<option value="">Seleccionar</option>
 							<option value="1">Predial Unificado</option>
 							<option value="2">Vehículos</option>
@@ -82,7 +82,7 @@
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.aniograv" /></label> <select
 							aria-required="true" id="aniograv" class="form-control "
-							name="aniograva" onchange="SelectedAnio(this) "
+							name="aniograv" onchange="SelectedAnio(this) "
 							required='required'>
 							<option value="">Seleccionar</option>
 							<option value="2019">2019</option>
@@ -101,12 +101,18 @@
 							name="periodo" onchange="SelectSobreDeli(this)"
 							required='required'>
 							<option value="">Seleccionar</option>
-							<option value="01">1-Enero / Febrero</option>
-							<option value="02">2-Marzo / Abril</option>
-							<option value="03">3-Mayo / Junio</option>
-							<option value="04">4-Julio / Agosto</option>
-							<option value="05">5-Septiembre / Octubre</option>
-							<option value="06">6-Noviembre / Diciembre</option>
+							<option value="01">1-Enero</option>
+							<option value="02">2-Febrero</option>
+							<option value="03">3-Marzo</option>
+							<option value="04">4-Abril</option>
+							<option value="05">5-Mayo</option>
+							<option value="06">6-Junio</option>
+							<option value="07">6-Julio</option>
+							<option value="08">6-Agosto</option>
+							<option value="09">6-Septiembre</option>
+							<option value="10">6-Octubre</option>
+							<option value="11">6-Noviembre</option>
+							<option value="12">6-Diciembre</option>
 						</select>
 					</div>
 				</div>		

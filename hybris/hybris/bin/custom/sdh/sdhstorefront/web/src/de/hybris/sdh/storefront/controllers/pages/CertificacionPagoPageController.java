@@ -11,7 +11,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
@@ -159,15 +158,21 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 			consultaPagoRequest.setNumBP(certiFormPost.getNumBP());
 
-			if (certiFormPost.getIdimp() == "4")
+
+			if (certiFormPost.getIdimp().equals("4"))
 			{
 				consultaPagoRequest.setNumObjeto(certiFormPost.getNumObjetoSel());
 			}
 
-			if (certiFormPost.getIdimp() == "5" && customerData.getGasTaxList() != null)
+
+
+			if (certiFormPost.getIdimp().equals("5"))
 			{
-				final List<SDHGasTaxData> gasTaxList = customerData.getGasTaxList();
-				consultaPagoRequest.setNumObjeto(gasTaxList.get(0).getObjectNumber());
+				if (customerData.getGasTaxList() != null)
+				{
+					final List<SDHGasTaxData> gasTaxList = customerData.getGasTaxList();
+					consultaPagoRequest.setNumObjeto(gasTaxList.get(0).getObjectNumber());
+				}
 			}
 
 		   final ObjectMapper mapper = new ObjectMapper();
@@ -182,21 +187,20 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 				if (consultaPagoResponse.getDeclaraciones() != null)
 				{
-					List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
+					final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
 
-					if (certiFormPost.getIdimp() == "4")
+					if (certiFormPost.getIdimp().equals("4"))
 					{
 						declaracion = declaracionesList.get(0);
 					}
 
-					if (certiFormPost.getIdimp() == "5")
+					if (certiFormPost.getIdimp().equals("5"))
 					{
-						StringBuilder aniograv_periodo = new StringBuilder();
-						aniograv_periodo.append(certiFormPost.getAniograv()).append(certiFormPost.getPeriodo());
+						final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
 
 						for (final ConsultaPagoDeclaraciones element : declaracionesList)
 						{
-							if (declaracion.getClavePeriodo() == aniograv_periodo.toString())
+							if (element.getClavePeriodo().equals(aniograv_periodo))
 							{
 								declaracion = element;
 								break;
