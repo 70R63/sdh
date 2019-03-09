@@ -14,6 +14,7 @@
 
 
 <div class="col-md-8 text-right">
+<<<<<<< HEAD
 	<sf:form action="${pagarURL}" method="POST"
 		modelAttribute="psePaymentForm" id="psePaymentForm">
 
@@ -29,6 +30,20 @@
 			class="btn btn-primary btn-lg">
 			<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
 		</button>
+=======
+	<sf:form action="${pagarURL}" method="POST" modelAttribute="psePaymentForm" id="psePaymentForm">
+	
+	<a id="downloadHelper" target="_blank"></a> <input type="hidden"
+		id="numForm" value="${dataForm.numForm }">
+	<button type="button" class="btn btn-primary btn-lg"
+		onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';location.reload(true);"><spring:theme code="impuestos.decGasolina.Pago.Regresar" /></button>
+
+	<button id="gasolinaGeneraDeclaracionButton" type="button"
+		<c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if>
+		class="btn btn-primary btn-lg">
+		<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
+	</button>
+>>>>>>> fe48c56bac1ca15acf29fcc5a279a723cb85e8d4
 
 		<sf:input path="tipoDeImpuesto" type="hidden" />
 		<sf:input path="anoGravable" type="hidden" />
