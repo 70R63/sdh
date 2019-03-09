@@ -81,6 +81,18 @@ function onChange() {
 				<form:form method="post" commandName="psePaymentForm" action="">
 					<fieldset>					
 						<input type="hidden" value="" class="text" name="psePaymentForm.tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
+					<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA && disabled eq true}">
+						<div class="col-xs-4">
+							<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
+						</div>
+						<div class="col-xs-4">
+							<formElement:formInputBox  idKey="psePaymentForm.trazabilityCode" maxlength="240" labelKey="psePaymentForm.trazabilityCode" path="trazabilityCode"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
+						</div>							
+						<div class="col-xs-4">
+							<formElement:formSelectBox idKey="psePaymentForm.tipoDeImpuesto" labelKey="psePaymentForm.tipoDeImpuesto" path="tipoDeImpuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeImpuesto}" selectCSSClass="form-control" disabled="${debugMode}"/>
+						</div>	
+					</c:if>
+					<c:if test = "${tipoDeImpuestoSeleccionado ne ControllerPseConstants.GASOLINA || disabled ne true}">
 						<div class="row">
 							<div class="col-xs-6">
 								<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
@@ -89,6 +101,8 @@ function onChange() {
 								<formElement:formSelectBox idKey="psePaymentForm.tipoDeImpuesto" labelKey="psePaymentForm.tipoDeImpuesto" path="tipoDeImpuesto" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeImpuesto}" selectCSSClass="form-control" disabled="${debugMode}"/>
 							</div>
 						</div>					
+					</c:if>
+
 						<div class="row">
 							<div class="col-xs-6">
 								<formElement:formSelectBox idKey="psePaymentForm.anoGravable" labelKey="psePaymentForm.anoGravable" path="anoGravable" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${anoGravable}" selectCSSClass="form-control" disabled="${debugMode}"/>
@@ -147,6 +161,7 @@ function onChange() {
 
 					
 					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
+					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
 					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/>
 					<form:hidden path="impuesto" value="${psePaymentForm.impuesto}"/>
 					<form:hidden path="anoGravable" value="${psePaymentForm.anoGravable}"/>

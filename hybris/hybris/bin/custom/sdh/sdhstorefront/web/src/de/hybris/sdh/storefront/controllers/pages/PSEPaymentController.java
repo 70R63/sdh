@@ -384,6 +384,7 @@ public class PSEPaymentController extends AbstractPageController
 					form.setBankTimeResponse(bankProcessDate.split(" ")[1]);
 				}
 			}
+			form.setTrazabilityCode(modelo.getTrazabilityCode());
 
 		}
 
