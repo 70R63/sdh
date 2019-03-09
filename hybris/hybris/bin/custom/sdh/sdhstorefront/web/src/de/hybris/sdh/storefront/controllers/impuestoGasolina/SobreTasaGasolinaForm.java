@@ -31,6 +31,13 @@ public class SobreTasaGasolinaForm
 	private String NAME_ORG1;
 	private String action;
 	private String tipoConsulta;
+	private String optionPredial;
+	private String optionVehicular;
+	private String optionIca;
+	private String optionPubliExt;
+	private String optionGas;
+	private String optionDeli;
+
 
 	private List<SobreTasaGasolinaTabla> listaDocumentos;
 	private DetGasResponse dataForm;
@@ -249,7 +256,7 @@ public class SobreTasaGasolinaForm
 	{
 		this.numDoc = numDoc;
 	}
-	
+
 	/**
 	 * @return the numObjeto
 	 */
@@ -455,6 +462,108 @@ public class SobreTasaGasolinaForm
 	public void setTipoConsulta(final String tipoConsulta)
 	{
 		this.tipoConsulta = tipoConsulta;
+	}
+
+	/**
+	 * @return the optionPredial
+	 */
+	public String getOptionPredial()
+	{
+		return optionPredial;
+	}
+
+	/**
+	 * @param optionPredial
+	 *           the optionPredial to set
+	 */
+	public void setOptionPredial(final String optionPredial)
+	{
+		this.optionPredial = optionPredial;
+	}
+
+	/**
+	 * @return the optionVehicular
+	 */
+	public String getOptionVehicular()
+	{
+		return optionVehicular;
+	}
+
+	/**
+	 * @param optionVehicular
+	 *           the optionVehicular to set
+	 */
+	public void setOptionVehicular(final String optionVehicular)
+	{
+		this.optionVehicular = optionVehicular;
+	}
+
+	/**
+	 * @return the optionIca
+	 */
+	public String getOptionIca()
+	{
+		return optionIca;
+	}
+
+	/**
+	 * @param optionIca
+	 *           the optionIca to set
+	 */
+	public void setOptionIca(final String optionIca)
+	{
+		this.optionIca = optionIca;
+	}
+
+	/**
+	 * @return the optionPubliExt
+	 */
+	public String getOptionPubliExt()
+	{
+		return optionPubliExt;
+	}
+
+	/**
+	 * @param optionPubliExt
+	 *           the optionPubliExt to set
+	 */
+	public void setOptionPubliExt(final String optionPubliExt)
+	{
+		this.optionPubliExt = optionPubliExt;
+	}
+
+	/**
+	 * @return the optionGas
+	 */
+	public String getOptionGas()
+	{
+		return optionGas;
+	}
+
+	/**
+	 * @param optionGas
+	 *           the optionGas to set
+	 */
+	public void setOptionGas(final String optionGas)
+	{
+		this.optionGas = optionGas;
+	}
+
+	/**
+	 * @return the optionDeli
+	 */
+	public String getOptionDeli()
+	{
+		return optionDeli;
+	}
+
+	/**
+	 * @param optionDeli
+	 *           the optionDeli to set
+	 */
+	public void setOptionDeli(final String optionDeli)
+	{
+		this.optionDeli = optionDeli;
 	}
 
 
