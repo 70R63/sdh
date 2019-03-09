@@ -19,7 +19,7 @@
 	<a id="downloadHelper" target="_blank"></a> <input type="hidden"
 		id="numForm" value="${dataForm.numForm }">
 	<button type="button" class="btn btn-primary btn-lg"
-		onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';"><spring:theme code="impuestos.decGasolina.Pago.Regresar" /></button>
+		onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';location.reload(true);"><spring:theme code="impuestos.decGasolina.Pago.Regresar" /></button>
 
 	<button id="gasolinaGeneraDeclaracionButton" type="button"
 		<c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if>
