@@ -14,36 +14,22 @@
 
 
 <div class="col-md-8 text-right">
-<<<<<<< HEAD
+
+
 	<sf:form action="${pagarURL}" method="POST"
 		modelAttribute="psePaymentForm" id="psePaymentForm">
-
-		<a id="downloadHelper" target="_blank"></a>
-		<input type="hidden" id="numForm" value="${dataForm.numForm }">
-		<%--<button type="button" class="btn btn-primary btn-lg"
-		onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';"><spring:theme code="impuestos.decGasolina.Pago.Regresar" /></button> --%>
-		<button type="button" class="btn btn-primary btn-lg" onclick="goBack()"><spring:theme
-			code="impuestos.decGasolina.Pago.Regresar" />
-		</button>
-		<button id="gasolinaGeneraDeclaracionButton" type="button"
-			<c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if>
-			class="btn btn-primary btn-lg">
-			<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
-		</button>
-=======
-	<sf:form action="${pagarURL}" method="POST" modelAttribute="psePaymentForm" id="psePaymentForm">
-	
+		
 	<a id="downloadHelper" target="_blank"></a> <input type="hidden"
 		id="numForm" value="${dataForm.numForm }">
-	<button type="button" class="btn btn-primary btn-lg"
-		onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina' />';location.reload(true);"><spring:theme code="impuestos.decGasolina.Pago.Regresar" /></button>
-
+	<button type="button" class="btn btn-primary btn-lg" onclick="goBack()">
+		<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
+	</button>
 	<button id="gasolinaGeneraDeclaracionButton" type="button"
 		<c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if>
 		class="btn btn-primary btn-lg">
 		<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
 	</button>
->>>>>>> fe48c56bac1ca15acf29fcc5a279a723cb85e8d4
+		
 
 		<sf:input path="tipoDeImpuesto" type="hidden" />
 		<sf:input path="anoGravable" type="hidden" />
@@ -56,20 +42,7 @@
 		<sf:input path="DV" type="hidden" />
 		<sf:input path="objPago" type="hidden" />
 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-<<<<<<< HEAD
-<<<<<<< HEAD
-			name="pagar" value="pagar" >
-=======
-			name="pagar" value="pagar"
-			disabled="${empty psePaymentForm.numeroDeReferencia ? 'true' : 'false'}">
->>>>>>> dev-maria
-=======
-			name="pagar" value="pagar"
-			disabled="${empty psePaymentForm.numeroDeReferencia ? 'true' : 'false'}">
-=======
-			name="pagar" value="pagar" >
->>>>>>> dev
->>>>>>> dev-maria
+			name="pagar" value="pagar">
 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 		</sf:button>
 	</sf:form>
