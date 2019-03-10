@@ -16,5 +16,14 @@
 				</div>
 			</div>
 		</div>
+		
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-4  col-md-offset-4" >
+	         <button type="button" class="btn btn-primary btn-block backToHome">
+	             <spring:theme code="text.consent.button.accept"/>
+	         </button>
+	     </div>
 	</div>
 </template:page>

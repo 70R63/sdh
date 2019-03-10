@@ -34,6 +34,7 @@ import de.hybris.sdh.core.model.SDHPhoneModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.SendEmailRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateCustomerCommPrefsRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
 import de.hybris.sdh.core.pojos.responses.ContribAdicionales;
@@ -48,6 +49,7 @@ import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
+import de.hybris.sdh.core.services.SDHSendEmailService;
 import de.hybris.sdh.core.services.SDHUpdateCustomerCommPrefsService;
 
 import java.io.UnsupportedEncodingException;
@@ -99,6 +101,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "modelService")
 	private ModelService modelService;
+
+	@Resource(name = "sdhSendEmailService")
+	private SDHSendEmailService sdhSendEmailService;
 
 	/*
 	 * (non-Javadoc)
@@ -197,11 +202,19 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final String encodedToken = this.getEncodedURL(token);
 
 
-		crm_mail.send(customerModel.getUid(),
-				"Para activar tu cuenta ingresa <A HREF='"+hybrisURL+encodedToken+"'>AQUÍ</A> <BR/>",
-				"SDH Activar Cuenta - Hybris ",
-				a,
-				b);
+		//		crm_mail.send(customerModel.getUid(),
+		//				"Para activar tu cuenta ingresa <A HREF='"+hybrisURL+encodedToken+"'>AQUÍ</A> <BR/>",
+		//				"SDH Activar Cuenta - Hybris ",
+		//				a,
+		//				b);
+
+		final SendEmailRequest request = new SendEmailRequest();
+
+		request.setEmail(customerModel.getUid());
+		request.setSubject("SDH Activar Cuenta - Hybris ");
+		request.setMessage("Para activar tu cuenta ingresa <A HREF='" + hybrisURL + encodedToken + "'>AQUÍ</A> <BR/>");
+
+		sdhSendEmailService.sendEmail(request);
 
 		getEventService().publishEvent(event);
 	}
@@ -309,9 +322,17 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		final String encodedToken = this.getEncodedURL(token);
 
 
-		crm_mail.send(customerModel.getUid(),
-				"Para recuperar tu contraseña ingresa <A HREF='" + hybrisURL + encodedToken + "'>AQUÍ</A> <BR/>",
-				"SDH Recuperar Cuenta - Hybris ", a, b);
+		//		crm_mail.send(customerModel.getUid(),
+		//				"Para recuperar tu contraseña ingresa <A HREF='" + hybrisURL + encodedToken + "'>AQUÍ</A> <BR/>",
+		//				"SDH Recuperar Cuenta - Hybris ", a, b);
+
+		final SendEmailRequest request = new SendEmailRequest();
+
+		request.setEmail(customerModel.getUid());
+		request.setSubject("SDH Recuperar Cuenta - Hybris ");
+		request.setMessage("Para recuperar tu contraseña ingresa <A HREF='" + hybrisURL + encodedToken + "'>AQUÍ</A> <BR/>");
+
+		sdhSendEmailService.sendEmail(request);
 
 	}
 
@@ -701,7 +722,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					final SDHGasTaxModel eachGasolinaModel = new SDHGasTaxModel();
 					eachGasolinaModel.setDocumentNumber(eachGasolinaTax.getNumDoc());
 					eachGasolinaModel.setDocumentType(eachGasolinaTax.getTipoDoc());
-					//					eachGasolinaModel.setObjectNumber(value);
+					eachGasolinaModel.setObjectNumber(eachGasolinaTax.getNumObjeto());
 
 
 					newGasTaxModels.add(eachGasolinaModel);

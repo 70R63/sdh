@@ -1,6 +1,7 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
@@ -54,6 +55,12 @@ public class PSEPaymentController extends AbstractPageController
 	private static final String CMS_SITE_PAGE_PAGO_PSE = "PagoPSEPage";
 	private static final String CMS_SITE_PAGE_PAGO_EN_lINEA = "PagoEnLineaPSEPage";
 
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+	private static final String TEXT_PAGO_LINEA = "Pago en linea";
+	private static final String TEXT_PSE_RESPUESTA = "PSE Respuesta";
+	private static final String TEXT_PSE_FORMA = "PSE Forma";
+	private static final String TEXT_REALIZAR_PAGO = "Realizar Pago";
+
 
 	@Resource(name = "pseBankListCatalogDao")
 	private PseBankListCatalogDao pseBankListCatalogDao;
@@ -72,6 +79,9 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "pseTransactionsLogDao")
 	private PseTransactionsLogDao pseTransactionsLogDao;
+
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 
 
@@ -165,8 +175,11 @@ public class PSEPaymentController extends AbstractPageController
 			@RequestParam(required = false, defaultValue = "", value = "debugMode")
 			final String debugMode) throws CMSItemNotFoundException
 	{
+
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PAGO_LINEA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		model.addAttribute("psePaymentForm", new PSEPaymentForm());
@@ -185,6 +198,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		LOG.info("------ pseResponse -------");
@@ -222,6 +236,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_FORMA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		model.addAttribute("psePaymentForm", psePaymentForm);
@@ -241,6 +256,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_REALIZAR_PAGO));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 
@@ -384,6 +400,7 @@ public class PSEPaymentController extends AbstractPageController
 					form.setBankTimeResponse(bankProcessDate.split(" ")[1]);
 				}
 			}
+			form.setTrazabilityCode(modelo.getTrazabilityCode());
 
 		}
 

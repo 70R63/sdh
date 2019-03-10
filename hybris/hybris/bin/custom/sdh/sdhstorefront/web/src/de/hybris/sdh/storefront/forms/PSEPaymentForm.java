@@ -28,6 +28,7 @@ public class PSEPaymentForm
 	private String objPago;
 	private String bankDateResponse;
 	private String bankTimeResponse;
+	private String trazabilityCode;
 
 	/**
 	 * @return the tipoDeImpuesto
@@ -357,9 +358,26 @@ public class PSEPaymentForm
 		this.bankTimeResponse = bankTimeResponse;
 	}
 
+	/**
+	 * @return the trazabilityCode
+	 */
+	public String getTrazabilityCode()
+	{
+		return trazabilityCode;
+	}
+
+	/**
+	 * @param trazabilityCode
+	 *           the trazabilityCode to set
+	 */
+	public void setTrazabilityCode(final String trazabilityCode)
+	{
+		this.trazabilityCode = trazabilityCode;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -370,7 +388,8 @@ public class PSEPaymentForm
 				+ ", noIdentificacion=" + noIdentificacion + ", DV=" + DV + ", tipoDeIdentificacion=" + tipoDeIdentificacion
 				+ ", fechaLimiteDePago=" + fechaLimiteDePago + ", pagoAdicional=" + pagoAdicional + ", banco=" + banco
 				+ ", valorAPagar=" + valorAPagar + ", tipoDeTarjeta=" + tipoDeTarjeta + ", debugMode=" + debugMode + ", objPago="
-				+ objPago + ", bankDateResponse=" + bankDateResponse + ", bankTimeResponse=" + bankTimeResponse + "]";
+				+ objPago + ", bankDateResponse=" + bankDateResponse + ", bankTimeResponse=" + bankTimeResponse + "]"
+				+ ", trazabilityCode=" + trazabilityCode;
 	}
 
 
