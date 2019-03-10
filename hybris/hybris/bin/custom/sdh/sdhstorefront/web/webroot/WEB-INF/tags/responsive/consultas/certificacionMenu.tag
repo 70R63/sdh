@@ -107,12 +107,12 @@
 							<option value="04">4-Abril</option>
 							<option value="05">5-Mayo</option>
 							<option value="06">6-Junio</option>
-							<option value="07">6-Julio</option>
-							<option value="08">6-Agosto</option>
-							<option value="09">6-Septiembre</option>
-							<option value="10">6-Octubre</option>
-							<option value="11">6-Noviembre</option>
-							<option value="12">6-Diciembre</option>
+							<option value="07">7-Julio</option>
+							<option value="08">8-Agosto</option>
+							<option value="09">9-Septiembre</option>
+							<option value="10">10-Octubre</option>
+							<option value="11">11-Noviembre</option>
+							<option value="12">12-Diciembre</option>
 						</select>
 					</div>
 				</div>		
