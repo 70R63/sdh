@@ -722,7 +722,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					final SDHGasTaxModel eachGasolinaModel = new SDHGasTaxModel();
 					eachGasolinaModel.setDocumentNumber(eachGasolinaTax.getNumDoc());
 					eachGasolinaModel.setDocumentType(eachGasolinaTax.getTipoDoc());
-					//					eachGasolinaModel.setObjectNumber(value);
+					eachGasolinaModel.setObjectNumber(eachGasolinaTax.getNumObjeto());
 
 
 					newGasTaxModels.add(eachGasolinaModel);

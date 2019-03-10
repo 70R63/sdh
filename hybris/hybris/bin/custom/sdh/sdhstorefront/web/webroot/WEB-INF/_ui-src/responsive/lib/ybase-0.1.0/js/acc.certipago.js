@@ -1,9 +1,12 @@
+
 ACC.certipago = {
 
+/*		
 		 _autoload: ["bindGenerarPDFButton", "bindDialog"],
 		 
 		 bindGenerarPDFButton: function () {
-		        $(document).on("click", "#generarPDFButton", function (e) {
+
+			 $(document).on("click", "#generarPDFButton", function (e) {
 		    	        e.preventDefault();
 		    	        
 		    	        
@@ -54,6 +57,6 @@ ACC.certipago = {
     	
     }
 
-    
+  */  
 
 };
