@@ -3,13 +3,18 @@
  */
 package de.hybris.sdh.storefront.controllers.declaraciones;
 
+
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
@@ -39,7 +44,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-
 /**
  * @author Federico Flores Dimas
  *
@@ -63,6 +67,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	private static final String REDIRECT_TO_PRESENTAR_DECLARACION_PAGE = REDIRECT_PREFIX + "/contribuyentes/presentar-declaracion";
 	private static final String DECLARACIONES_GASOLINA_CMS_PAGE = "declaracion-gasolina";
 
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
 
 	@Resource(name = "userService")
 	UserService userService;
@@ -87,10 +96,23 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	{
 		System.out.println("---------------- En Presentar Declaracion GET --------------------------");
 
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-		dataForm.setCatalogosSo(new SobreTasaGasolinaService().prepararCatalogos());
+		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		dataForm.setAnoGravable("2019");
 		dataForm.setPeriodo("1");
+
+		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+		{
+
+			dataForm.setOptionPubliExt("4");
+
+		}
+		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
+		{
+			dataForm.setOptionGas("5");
+		}
 
 		model.addAttribute("dataForm", dataForm);
 
@@ -124,7 +146,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			if (dataFormResponse.getImpuesto().equals("5"))
 			{
 				final CustomerModel customerModel;
-				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 				final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 				String numBP = "";
 				String numDoc = "";
@@ -133,7 +155,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				String periodo = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				final DetGasResponse detalleResponse;
-				final SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;

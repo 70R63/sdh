@@ -18,8 +18,10 @@ import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
@@ -114,19 +116,8 @@ public class PSEPaymentController extends AbstractPageController
 	public List<SelectAtomValue> getIdPeriodo()
 	{
 		//Periodos para gasolina
-		final List<SelectAtomValue> periodo = Arrays.asList(
-				new SelectAtomValue("1901", "Enero"),
-				new SelectAtomValue("1902", "Febrero"),
-				new SelectAtomValue("1903", "Marzo"),
-				new SelectAtomValue("1904", "Abril"),
-				new SelectAtomValue("1905", "Mayo"),
-				new SelectAtomValue("1906", "Junio"),
-				new SelectAtomValue("1907", "Julio"),
-				new SelectAtomValue("1908", "Agostp"),
-				new SelectAtomValue("1909", "Septiembre"),
-				new SelectAtomValue("1910", "Octubre"),
-				new SelectAtomValue("1911", "Noviembre"),
-				new SelectAtomValue("1912", "Diciembre"));
+		final List<SelectAtomValue> periodo = new SobreTasaGasolinaService(configurationService)
+				.prepararCatalogoPeriodoPSE(new ControllerPseConstants().getGASOLINA());
 
 		return periodo;
 	}
@@ -158,7 +149,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> tipoDeTarjeta = Arrays.asList(
-				new SelectAtomValue("04", "Cedito"),
+				new SelectAtomValue("04", "Credito"),
 				new SelectAtomValue("03", "Debito"));
 
 		return tipoDeTarjeta;
@@ -210,26 +201,30 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		System.out.println("------ pseResponse ------- ");
-		System.out.println(ticketId);
+		LOG.info("------ pseResponse -------");
+		LOG.info("ticketId [" + ticketId + "]");
 
-		/*
-		 * final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
-		 * psePaymentForm.setTipoDeImpuesto(ControllerConstants.PSE.GASOLINA); psePaymentForm.setPeriodo("02");
-		 * psePaymentForm.setAnoGravable("2019");
-		 */
 
 		final String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
 
-		model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+		if (codeResponse != null)
+		{
+			if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue())) //Transaccion exitosa
+			{
+				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
+			}else {	//Transaccion con error
+				model.addAttribute("psePaymentForm", new PSEPaymentForm());
+				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+			}
+		}else {
+			model.addAttribute("psePaymentForm", new PSEPaymentForm());
+			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+		}
+
+
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("disableFields", "true");
-
-		GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
-		/*
-		 * GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
-		 * "pse.message.info.success.transaction", new Object[]{ codeResponse });
-		 */
 
 		return getViewForPage(model);
 	}
@@ -279,16 +274,10 @@ public class PSEPaymentController extends AbstractPageController
 			this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
 					psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
 			GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
-			/*
-			 * GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
-			 * "pse.message.info.done.transaction.with.status", new Object[]{ returnCode });
-			 */
 		}
 		else
 		{
 			GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
-			/*GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"pse.message.error.no.connection", new Object[] {});*/
 		}
 
 
@@ -381,6 +370,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		final PSEPaymentForm form = new PSEPaymentForm();
 		final PseTransactionsLogModel modelo = pseTransactionsLogDao.getTransaction(ticketId);
+		String bankProcessDate = null;
 
 		if (modelo != null)
 		{
@@ -399,6 +389,18 @@ public class PSEPaymentController extends AbstractPageController
 			form.setBanco(modelo.getBanco());
 			form.setValorAPagar(modelo.getValorAPagar());
 			form.setTipoDeTarjeta(modelo.getTipoDeTarjeta());
+
+			bankProcessDate = modelo.getBankProcessDate();
+
+			if (bankProcessDate != null)
+			{
+				if (bankProcessDate.split(" ").length == 2)
+				{
+					form.setBankDateResponse(bankProcessDate.split(" ")[0]);
+					form.setBankTimeResponse(bankProcessDate.split(" ")[1]);
+				}
+			}
+
 		}
 
 		return form;

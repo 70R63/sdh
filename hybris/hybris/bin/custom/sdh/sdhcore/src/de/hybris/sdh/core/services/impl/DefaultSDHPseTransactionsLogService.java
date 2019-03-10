@@ -16,6 +16,8 @@ import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationBodyType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -123,18 +125,6 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
-			/*
-			 * if (response != null) { pseTransactionsLogModel.setSoliciteDate(response.getSoliciteDate().toString());
-			 * pseTransactionsLogModel.setBankProcessDate(response.getBankProcessDate().toString());
-			 * pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue()); transactionState =
-			 * response.getTransactionState().getValue();
-			 *
-			 * LOG.info("Updated PseTransactionsLogModel [" + numeroDeReferencia + "," +
-			 * response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", " +
-			 * response.getTransactionState().getValue() + "]");
-			 *
-			 * modelService.saveAll(pseTransactionsLogModel); }else { LOG.info("Error con la comunicacion de PSE"); }
-			 */
 			transactionState = this.updateResponse(pseTransactionsLogModel, response);
 		}
 		else
@@ -193,11 +183,13 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	private String updateResponse(final PseTransactionsLogModel pseTransactionsLogModel,
 			final GetTransactionInformationResponseBodyType response)
 	{
+		final DateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		String transactionState = null;
 		if (response != null)
 		{
-			pseTransactionsLogModel.setSoliciteDate(response.getSoliciteDate().toString());
-			pseTransactionsLogModel.setBankProcessDate(response.getBankProcessDate().toString());
+
+			pseTransactionsLogModel.setSoliciteDate(dateTimeFormat.format(response.getSoliciteDate()));
+			pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(response.getBankProcessDate()));
 			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
 
 			transactionState = response.getTransactionState().getValue();

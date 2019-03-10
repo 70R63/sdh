@@ -8,63 +8,68 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url
-	value="/contribuyentes/presentar-declaracion"
+<spring:url value="/contribuyentes/presentar-declaracion"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
 
 
 
 <br>
-<div class="col-md-10">
+<div class="col-md-10 col-md-offset-2">
 	<div class="row">
 		<div class="col-md-3">
-			<label class="inputlabelnew"><spring:theme
-					code="impuestos.presentarDeclaracion.impuesto" /></label>
-		</div>
-		<div class="col-md-2">
 			<div class="form-group ">
-				<sf:select path="impuesto"
-					items="${dataForm.catalogosSo.impuesto}"
+				<label class="control-label required"><spring:theme
+						code="impuestos.presentarDeclaracion.impuesto" /></label>
+
+			<%--<sf:select path="impuesto" items="${dataForm.catalogosSo.impuesto}"
 					referenceData="${dataForm.catalogosSo.impuesto}"
-					class="inputdropdown" />
+					class="form-control"/>--%>
+					<sf:select id="impuestonew" class="form-control" path="impuesto"> 
+				
+				</sf:select>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3">
-			<label class="inputlabelnew"><spring:theme
-					code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
+
+		
+		<div id="impuestoss" style="display: none;">
+			<input value="${dataForm.optionPubliExt}" id="impuestoPE" />
 		</div>
-		<div class="col-md-2">
+		<div id="impuestoss2" style="display: none;">
+			<input value="${dataForm.optionGas}" id="impuestoGas" />
+		</div>
+
+		<div class="col-md-3">
 			<div class="form-group ">
+				<label class="control-label required"><spring:theme
+						code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
+
 				<sf:select path="anoGravable"
 					items="${dataForm.catalogosSo.anioGravable}"
 					referenceData="${dataForm.catalogosSo.anioGravable}"
-					class="inputdropdown" />
+					class="form-control" />
 			</div>
 
 
 		</div>
-	</div>
-	<div class="row">
+
 		<div class="col-md-3">
-			<label class="inputlabelnew"><spring:theme
-					code="impuestos.presentarDeclaracion.Periodo" /></label>
-		</div>
-		<div class="col-md-2">
 			<div class="form-group ">
+				<label class="control-label required"><spring:theme
+						code="impuestos.presentarDeclaracion.Periodo" /></label>
+
 				<sf:select path="periodo" items="${dataForm.catalogosSo.periodo}"
 					referenceData="${dataForm.catalogosSo.periodo}"
-					class="inputdropdown" />
+					class="form-control" />
 			</div>
 
 
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-6 col-md-offset-3">
 			<sf:button action="${presentarDeclaracionUrl}" type="submit"
-				class="boton" id="action" name="action" value="presentarDeclaracion">
+				class="btn btn-primary btn-lg" id="action" name="action"
+				value="presentarDeclaracion" style="width: 187px !important">
 				<spring:theme
 					code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
 			</sf:button>

@@ -70,13 +70,26 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 
 		for (final PseTransactionsLogModel transaction : transactions)
 		{
+			final String bankProcessDate = transaction.getBankProcessDate();
+			String fechaRecaudo = "";
+			String horaRecaudo = "";
+
+			if (bankProcessDate != null)
+			{
+				if (bankProcessDate.split(" ").length == 2)
+				{
+					fechaRecaudo = bankProcessDate.split(" ")[0];
+					horaRecaudo = bankProcessDate.split(" ")[1];
+				}
+			}
+
 			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();
 			pseNotificacionDePagoRequest.setIdBancos(transaction.getBanco());
 			pseNotificacionDePagoRequest.setModalidad("01");
 			pseNotificacionDePagoRequest.setProcPago("03");
-			pseNotificacionDePagoRequest.setFchRecaudo("31/12/9999*");
-			pseNotificacionDePagoRequest.setHorRecaudo("00:00:00");
-			pseNotificacionDePagoRequest.setCodImpuesto("08");
+			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
+			pseNotificacionDePagoRequest.setHorRecaudo(horaRecaudo);
+			pseNotificacionDePagoRequest.setCodImpuesto("08"); // 08 Gasolina
 			pseNotificacionDePagoRequest.setTipoHorario("0");
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());

@@ -10,6 +10,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
@@ -61,6 +62,9 @@ public class ConsultaEstado extends AbstractSearchPageController
 	private static final String REDIRECT_TO_ESTADO_DE_CUENTA_PAGE = REDIRECT_PREFIX + "/contribuyentes/estado-de-cuenta";
 
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
 	@Resource(name = "userService")
 	UserService userService;
 
@@ -85,7 +89,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		System.out.println("---------------- En Presentar Declaracion GET --------------------------");
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
-		dataForm.setCatalogosSo(new SobreTasaGasolinaService().prepararCatalogos());
+		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		model.addAttribute("dataForm", dataForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
@@ -116,7 +120,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 			if (dataFormResponse.getImpuesto().equals("5"))
 			{
 				final CustomerModel customerModel;
-				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService();
+				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 				final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 				String numBP = "";
 				String numDoc = "";
@@ -125,7 +129,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 				String periodo = "";
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				final DetGasResponse detalleResponse;
-				final SobreTasaGasolinaCatalogos dataFormCatalogos = new SobreTasaGasolinaService().prepararCatalogos();
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
 				List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;

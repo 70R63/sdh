@@ -21,3 +21,10 @@
 	</sf:form>
 	<sobreTasaGasolina:decGasolinaPago />
 </div>
+
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script> 
