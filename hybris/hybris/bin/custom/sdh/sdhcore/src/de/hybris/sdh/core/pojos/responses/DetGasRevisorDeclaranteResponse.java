@@ -120,4 +120,16 @@ public class DetGasRevisorDeclaranteResponse
 		this.tipoDocDESC = tipoDocDESC;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DetGasRevisorDeclaranteResponse [tipoInterloc=" + tipoInterloc + ", tipoDoc=" + tipoDoc + ", numDoc=" + numDoc
+				+ ", nombres=" + nombres + ", tarjetaProf=" + tarjetaProf + ", tipoDocDESC=" + tipoDocDESC + "]";
+	}
+
 }

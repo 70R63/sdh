@@ -21,7 +21,7 @@ public class ErrorEnWS
 	{
 		return idmsj;
 	}
-	
+
 	/**
 	 * @param idmsj
 	 *           the idmsj to set
@@ -37,7 +37,7 @@ public class ErrorEnWS
 	{
 		return txtmsj;
 	}
-	
+
 	/**
 	 * @param txtmsj
 	 *           the txtmsj to set
@@ -45,6 +45,17 @@ public class ErrorEnWS
 	public void setTxtmsj(final String txtmsj)
 	{
 		this.txtmsj = txtmsj;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ErrorEnWS [idmsj=" + idmsj + ", txtmsj=" + txtmsj + "]";
 	}
 
 

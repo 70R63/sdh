@@ -120,4 +120,16 @@ public class DetGasInfoDeclaraResponse
 		this.vlrSobretasa = vlrSobretasa;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DetGasInfoDeclaraResponse [claseProd=" + claseProd + ", galonesGra=" + galonesGra + ", precioRef=" + precioRef
+				+ ", alcoholCarbu=" + alcoholCarbu + ", baseGravable=" + baseGravable + ", vlrSobretasa=" + vlrSobretasa + "]";
+	}
+
 }
