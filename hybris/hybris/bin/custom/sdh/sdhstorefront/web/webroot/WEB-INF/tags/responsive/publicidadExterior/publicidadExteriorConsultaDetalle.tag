@@ -56,15 +56,15 @@
 <!-- 	</div> -->
 <!-- </div> -->
 
-<!-- <div class="row"> -->
-<!-- 	<div class="col-md-4 col-md-offset-5 centercol-md-8 text-right"> -->
+<div class="row">
+	<div class="col-md-4 col-md-offset-5 centercol-md-8 text-right">
 
-<%-- 		<button id="regresar" class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/' />';" type="button"> --%>
-<%-- 			<spring:theme code="publicidad.exterior.regresar" /> --%>
-<!-- 		</button> -->
-<!-- 		<button id="presentarDeclaracionButton"   class="btn btn-primary btn-lg" -->
-<!-- 			type="button"> -->
-<%-- 			<spring:theme code="publicidad.exterior.declarationpresent" /> --%>
-<!-- 		</button> -->
-<!-- 	</div> -->
-<!-- </div> -->
+		<button id="regresar" class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/' />';" type="button">
+			<spring:theme code="publicidad.exterior.regresar" />
+		</button>
+		<button id="presentarDeclaracionButton"   class="btn btn-primary btn-lg"
+			type="button">
+			<spring:theme code="publicidad.exterior.declarationpresent" />
+		</button>
+	</div>
+</div>
