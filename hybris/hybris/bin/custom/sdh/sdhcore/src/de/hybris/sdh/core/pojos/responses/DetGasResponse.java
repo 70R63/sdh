@@ -25,8 +25,9 @@ public class DetGasResponse
 	private List<DetGasInfoDeclaraResponse> infoDeclara;
 	private DetGasValoresDeclaraResponse valoresDeclara;
 	private List<DetGasRevisorDeclaranteResponse> revisorDeclarante;
-
 	private List<ErrorEnWS> errores;
+
+
 
 	/**
 	 * @return the calidResp
@@ -256,6 +257,28 @@ public class DetGasResponse
 	{
 		this.numForm = numForm;
 	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DetGasResponse [calidResp=" + calidResp + ", almacProd=" + almacProd + ", ubicaPlanta=" + ubicaPlanta
+				+ ", numTanques=" + numTanques + ", almacTanque=" + almacTanque + ", localidad=" + localidad + ", codPostal="
+				+ codPostal + ", opcionUso=" + opcionUso + ", numForm=" + numForm + ", representantes=" + representantes
+				+ ", infoDeclara=" + infoDeclara + ", valoresDeclara=" + valoresDeclara + ", revisorDeclarante=" + revisorDeclarante
+				+ ", errores=" + errores + "]";
+	}
+
+
+
+
+
+
 
 
 

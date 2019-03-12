@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+	<!-- sdhbackoffice UI configuration should be provided here -->
+
+	<!--<context component="component-code" module="sdhbackoffice">-->
+		<!--Please check documentation for code snippets for specific components-->
+	<!--</context>-->
+	
+	
+	<context merge-by="type"  type="Customer" component="editor-area" module="sdhbackoffice">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <editorArea:tab name="hmc.tab.sdh.properties">
+                <editorArea:section name="hmc.tab.sdh.administration">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="numBP"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="documentType"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="documentNumber"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="documentExpeditionDate"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="firstName"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="middleName"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="lastName"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="secondLastName"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="sex"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="nationality"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="birthDate"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="birthPlace"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="originCountry"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="useEmailForNotifications"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="useInformationForInstitutionalPurposes"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="sdhTitle"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="nameOrg1"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="nameOrg2"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="nameOrg3"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="nameOrg4"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="digVer"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="legalEntity"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="legalOrg"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="addressList"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="phoneList"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="agentList"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="networkList"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="rolList"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="exteriorPublicityTaxList"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="gasTaxList"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	 <context merge-by="type" parent="GenericItem" type="SDHAddress" component="base" module="sdhbackoffice">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <y:labels>
+                <y:label>addKind+' '+street</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="SDHPhone" component="base" module="sdhbackoffice">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <y:labels>
+                <y:label>phoneKind+' '+phoneNumber</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+     <context merge-by="type" parent="GenericItem" type="SDHSocialNetwork" component="base" module="sdhbackoffice">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <y:labels>
+                <y:label>socialNetwork+' '+username</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+     <context merge-by="type" parent="GenericItem" type="SDHRol" component="base" module="sdhbackoffice">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <y:labels>
+                <y:label>rol</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+     <context merge-by="type" parent="GenericItem" type="SDHExteriorPublicityTax" component="base" module="sdhbackoffice">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <y:labels>
+                <y:label>resolutionNumber</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+    <context merge-by="type" parent="GenericItem" type="SDHGasTax" component="base" module="sdhbackoffice">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <y:labels>
+                <y:label>documentNumber</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+     <context merge-by="type" parent="GenericItem" type="SDHAgent" component="base" module="sdhbackoffice">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <y:labels>
+                <y:label>documentNumber+' '+completeName</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+</config>

@@ -10,6 +10,7 @@ package de.hybris.sdh.core.pojos.responses;
 public class DetGasRepResponse
 {
 
+
 	private String tipoDoc;
 	private String numDoc;
 	private String nombre;
@@ -138,5 +139,16 @@ public class DetGasRepResponse
 		this.fuente = fuente;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DetGasRepResponse [tipoDoc=" + tipoDoc + ", numDoc=" + numDoc + ", nombre=" + nombre + ", tipoRelacion="
+				+ tipoRelacion + ", fechDesde=" + fechDesde + ", fechHasta=" + fechHasta + ", fuente=" + fuente + "]";
+	}
 
 }

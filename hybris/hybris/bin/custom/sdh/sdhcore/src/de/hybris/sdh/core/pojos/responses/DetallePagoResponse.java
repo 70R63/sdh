@@ -105,5 +105,17 @@ public class DetallePagoResponse
 		this.errores = errores;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DetallePagoResponse [numRef=" + numRef + ", fechVenc=" + fechVenc + ", totalPagar=" + totalPagar + ", numBP="
+				+ numBP + ", errores=" + errores + "]";
+	}
+
 
 }
