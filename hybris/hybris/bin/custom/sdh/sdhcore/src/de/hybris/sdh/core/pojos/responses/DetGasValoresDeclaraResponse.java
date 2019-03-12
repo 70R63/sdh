@@ -156,4 +156,17 @@ public class DetGasValoresDeclaraResponse
 		this.totalPagar = totalPagar;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DetGasValoresDeclaraResponse [totalSobretasa=" + totalSobretasa + ", vlrSancTotales=" + vlrSancTotales
+				+ ", totalCargo=" + totalCargo + ", vlrSobretasa=" + vlrSobretasa + ", vlrSancPagos=" + vlrSancPagos
+				+ ", interesMora=" + interesMora + ", menosCompensa=" + menosCompensa + ", totalPagar=" + totalPagar + "]";
+	}
+
 }

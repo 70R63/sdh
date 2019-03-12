@@ -29,6 +29,8 @@ public class CertificacionPagoForm
 	private String Idanio;
 
 	private List<ImpuestoPublicidadExterior> publicidadExt;
+	private String numObjetoSel;
+
 
 
 
@@ -38,6 +40,23 @@ public class CertificacionPagoForm
 
 
 
+
+	/**
+	 * @return the numObjetoSel
+	 */
+	public String getNumObjetoSel()
+	{
+		return numObjetoSel;
+	}
+
+	/**
+	 * @param numObjetoSel
+	 *           the numObjetoSel to set
+	 */
+	public void setNumObjetoSel(final String numObjetoSel)
+	{
+		this.numObjetoSel = numObjetoSel;
+	}
 
 
 

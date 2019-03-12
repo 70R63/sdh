@@ -566,5 +566,25 @@ public class SobreTasaGasolinaForm
 		this.optionDeli = optionDeli;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "SobreTasaGasolinaForm [numBP=" + numBP + ", tipoDoc=" + tipoDoc + ", impuesto=" + impuesto + ", anoGravable="
+				+ anoGravable + ", periodo=" + periodo + ", numDoc=" + numDoc + ", numObjeto=" + numObjeto + ", opcionUso="
+				+ opcionUso + ", tipoIdRev=" + tipoIdRev + ", tipoIdDec=" + tipoIdDec + ", numForm=" + numForm + ", NAME_ORG1="
+				+ NAME_ORG1 + ", action=" + action + ", tipoConsulta=" + tipoConsulta + ", optionPredial=" + optionPredial
+				+ ", optionVehicular=" + optionVehicular + ", optionIca=" + optionIca + ", optionPubliExt=" + optionPubliExt
+				+ ", optionGas=" + optionGas + ", optionDeli=" + optionDeli + ", listaDocumentos=" + listaDocumentos + ", dataForm="
+				+ dataForm + ", catalogosSo=" + catalogosSo + ", valoresDeclara=" + valoresDeclara + ", revisor=" + revisor
+				+ ", declarante=" + declarante + ", bPredial=" + bPredial + ", bVehicular=" + bVehicular + ", bIca=" + bIca
+				+ ", bPublicidadExt=" + bPublicidadExt + ", bSobreGasolina=" + bSobreGasolina + ", bDelineacionUrbana="
+				+ bDelineacionUrbana + "]";
+	}
+
 
 }

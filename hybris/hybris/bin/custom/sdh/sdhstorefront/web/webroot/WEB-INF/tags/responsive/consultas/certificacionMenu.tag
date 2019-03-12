@@ -10,6 +10,25 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/contribuyentes/consultas/certipagos"
 	var="certificacionURL" htmlEscape="false" />
+	
+	
+<script>
+	function downloadPDF(pdf) {
+		debugger;
+		if (pdf){
+			const linkSource = 'data:application/pdf;base64,' + pdf;
+		    const downloadLink = document.createElement("a");
+		    const fileName = "Certificación_Pago.pdf";
+	
+		    downloadLink.href = linkSource;
+		    downloadLink.download = fileName;
+		    downloadLink.click();
+		}    
+	}
+	
+	
+	downloadPDF('${imprimePagoResponse.stringPDF}');
+</script>	
 
 <div>
 	<div class="container">
@@ -21,87 +40,87 @@
 				</h2>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label required"><spring:theme
-							code="certificacion.inicial.tipo" /></label><select required="required"
-						required id="impuesto" class="form-control " name="impuesto"
-						onchange="ShowSelected(this)">
-						<option value="">Seleccionar</option>
-						<option value="1">Impuesto</option>
-						<option value="2">Sujeto</option>
-
-					</select>
-				</div>
-			</div>
-			<div class="col-md-3" id="idImpuesto" style="display: none;">
-				<div class="form-group">
-					<label class="control-label required"><spring:theme
-							code="certificacion.inicial.selcimpuesto" /></label> <select
-						required="required" required id="tipoimp" class="form-control "
-						name="impuesto" onchange="Selected(this)">
-						<option value="">Seleccionar</option>
-						<option value="1">Predial Unificado</option>
-						<option value="2">Vehículos</option>
-						<option value="3">ICA</option>
-						<option value="4">Publicidad Exterior</option>
-						<option value="5">Sobretasa Gasolina</option>
-						<option value="6">Delineación Urbana</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-md-3" id="idAnio" style="display: none;">
-				<div class="form-group">
-					<label class="control-label required"><spring:theme
-							code="certificacion.inicial.aniograv" /></label> <select
-						aria-required="true" id="aniograv" class="form-control "
-						name="aniograva" onchange="SelectedAnio(this) "
-						required='required'>
-						<option value="">Seleccionar</option>
-						<option value="2019">2019</option>
-						<option value="2018">2018</option>
-						<option value="2017">2017</option>
-						<option value="2016">2016</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-md-3" id="idPeriodo" style="display: none;">
-				<div class="form-group">
-					<label class="control-label required"><spring:theme
-							code="certificacion.inicial.periodo" /></label> <select
-						aria-required="true" id="periodo" class="form-control "
-						name="aniograva" onchange="SelectSobreDeli(this)"
-						required='required'>
-						<option value="">Seleccionar</option>
-						<option value="01">1-Enero / Febrero</option>
-						<option value="02">2-Marzo / Abril</option>
-						<option value="03">3-Mayo / Junio</option>
-						<option value="04">4-Julio / Agosto</option>
-						<option value="05">5-Septiembre / Octubre</option>
-						<option value="06">6-Noviembre / Diciembre</option>
-					</select>
-				</div>
-			</div>
-
 		
+		<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certipagos" method="post" commandName="certiFormPost" >
+			
+			<input type="hidden" name="numBP" value="${certiForm.numBP}"/>
+			
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="certificacion.inicial.tipo" /></label><select required="required"
+							required id="impuesto" class="form-control " name="tipoImp"
+							>
+							<option value="">Seleccionar</option>
+							<option value="1">Impuesto</option>
+							<option value="2">Sujeto</option>
+	
+						</select>
+					</div>
+				</div>
+			
+				<div class="col-md-3" id="idImpuesto" style="display: block;">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="certificacion.inicial.selcimpuesto" /></label>
+						<select	required="required" required id="Idimp" class="form-control "
+							name="Idimp" >
+							<option value="">Seleccionar</option>
+							<option value="1">Predial Unificado</option>
+							<option value="2">Vehículos</option>
+							<option value="3">ICA</option>
+							<option value="4">Publicidad Exterior</option>
+							<option value="5">Sobretasa Gasolina</option>
+							<option value="6">Delineación Urbana</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-md-3" id="idAnio" style="display: block;">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="certificacion.inicial.aniograv" /></label> <select
+							aria-required="true" id="aniograv" class="form-control "
+							name="aniograv" 				required='required'>
+							<option value="">Seleccionar</option>
+							<option value="2019">2019</option>
+							<option value="2018">2018</option>
+							<option value="2017">2017</option>
+							<option value="2016">2016</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-md-3" id="idPeriodo" style="display: block;">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="certificacion.inicial.periodo" /></label> <select
+							aria-required="true" id="periodo" class="form-control "
+							name="periodo"
+							required='required'>
+							<option value="">Seleccionar</option>
+							<option value="01">1-Enero</option>
+							<option value="02">2-Febrero</option>
+							<option value="03">3-Marzo</option>
+							<option value="04">4-Abril</option>
+							<option value="05">5-Mayo</option>
+							<option value="06">6-Junio</option>
+							<option value="07">7-Julio</option>
+							<option value="08">8-Agosto</option>
+							<option value="09">9-Septiembre</option>
+							<option value="10">10-Octubre</option>
+							<option value="11">11-Noviembre</option>
+							<option value="12">12-Diciembre</option>
+						</select>
+					</div>
+				</div>		
 		</div>
-		<div id="tipoImp" style="display: none;">
-			<input id="Idimp" value="" />
-		</div>
-		<div id="periodo" style="display: none;">
-			<input id="Idper" value="" />
-		</div>
-		<div id="aniograv" style="display: none;">
-			<input id="Idanio" value="" />
-		</div>
-		<div id="numBP" style="display: none;">
-			<input id="numBP" value="${certiForm.numBP}" />
-		</div>
+		
+		
 		<br>
+		
+		
 		<div class="row" id="table-predial" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table">
@@ -177,6 +196,8 @@
 				</table>
 			</div>
 		</div>
+		
+		
 		<div class="row" id="table-ica" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table">
@@ -230,7 +251,9 @@
 
 						</tr>
 					</thead>
+					
 					<tbody>
+						
 						<c:forEach varStatus="loop" items="${certiForm.publicidadExt}"
 							var="eachPubExtTax">
 							<tr>
@@ -241,13 +264,14 @@
 									data-tipoValla="${eachPubExtTax.tipoVallaCode}"
 									class="text-capitalize !important labelVer "><spring:theme
 											code="publicidad.exterior.ver" /></label></td> --%>
-
+								
 								<td><input id="action"
 								style="visibility: visible !important; margin: 0; min-height: 0;"
-								name="action" type="radio"
-								value="${eachPubExtTax.numResolu}, ${eachPubExtTax.tipoValla},${eachPuExtTax.numObjeto}"
+								name="numObjetoSel" type="radio"
+								value="${eachPubExtTax.numObjeto}"
 								data-numRes="${eachPubExtTax.numResolu}"
 								data-tipoValla="${eachPubExtTax.tipoValla}" data-numObjeto="${eachPuExtTax.numObjeto}"></td>
+								
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -258,18 +282,21 @@
 		<div class="row">
 			<div class="col-md-12 col-md-offset-5">
 				<div class="form-group ">
-					<button type="submit" class="btn btn-primary btn-lg" id="action"
+					<button type="button" class="btn btn-primary btn-lg" id="action"
 						name="action" value="cancelar">
 						<spring:theme code="certificacion.inicial.cancelar" />
 					</button>
 
-					<button type="button" class="btn btn-primary btn-lg"
+					<button type="submit" class="btn btn-primary btn-lg"
 						id="generarPDFButton" name="generarPDFButton">
 						<spring:theme code="certificacion.inicial.generar" />
 					</button>
 				</div>
 			</div>
-		</div>
+		 </div>
+		 
+	 </form:form>
+		
 	</div>
 </div>
 <div id="dialog" title="Generar Certificacion">

@@ -1,6 +1,7 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
@@ -17,6 +18,7 @@ import de.hybris.sdh.core.soap.pse.eanucc.AmountType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
@@ -53,6 +55,12 @@ public class PSEPaymentController extends AbstractPageController
 	private static final String CMS_SITE_PAGE_PAGO_PSE = "PagoPSEPage";
 	private static final String CMS_SITE_PAGE_PAGO_EN_lINEA = "PagoEnLineaPSEPage";
 
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+	private static final String TEXT_PAGO_LINEA = "Pago en linea";
+	private static final String TEXT_PSE_RESPUESTA = "PSE Respuesta";
+	private static final String TEXT_PSE_FORMA = "PSE Forma";
+	private static final String TEXT_REALIZAR_PAGO = "Realizar Pago";
+
 
 	@Resource(name = "pseBankListCatalogDao")
 	private PseBankListCatalogDao pseBankListCatalogDao;
@@ -71,6 +79,9 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "pseTransactionsLogDao")
 	private PseTransactionsLogDao pseTransactionsLogDao;
+
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 
 
@@ -164,8 +175,11 @@ public class PSEPaymentController extends AbstractPageController
 			@RequestParam(required = false, defaultValue = "", value = "debugMode")
 			final String debugMode) throws CMSItemNotFoundException
 	{
+
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PAGO_LINEA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		model.addAttribute("psePaymentForm", new PSEPaymentForm());
@@ -184,28 +198,33 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		System.out.println("------ pseResponse ------- ");
-		System.out.println(ticketId);
+		LOG.info("------ pseResponse -------");
+		LOG.info("ticketId [" + ticketId + "]");
 
-		/*
-		 * final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
-		 * psePaymentForm.setTipoDeImpuesto(ControllerConstants.PSE.GASOLINA); psePaymentForm.setPeriodo("02");
-		 * psePaymentForm.setAnoGravable("2019");
-		 */
 
 		final String codeResponse = pseTransactionsLogService.updateTransaction(ticketId);
 
-		model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+		if (codeResponse != null)
+		{
+			if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue())) //Transaccion exitosa
+			{
+				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
+			}else {	//Transaccion con error
+				model.addAttribute("psePaymentForm", new PSEPaymentForm());
+				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+			}
+		}else {
+			model.addAttribute("psePaymentForm", new PSEPaymentForm());
+			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+		}
+
+
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("disableFields", "true");
-
-		GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
-		/*
-		 * GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
-		 * "pse.message.info.success.transaction", new Object[]{ codeResponse });
-		 */
 
 		return getViewForPage(model);
 	}
@@ -217,6 +236,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_FORMA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		model.addAttribute("psePaymentForm", psePaymentForm);
@@ -236,6 +256,7 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_REALIZAR_PAGO));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 
@@ -253,16 +274,10 @@ public class PSEPaymentController extends AbstractPageController
 			this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
 					psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
 			GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
-			/*
-			 * GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER,
-			 * "pse.message.info.done.transaction.with.status", new Object[]{ returnCode });
-			 */
 		}
 		else
 		{
 			GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
-			/*GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"pse.message.error.no.connection", new Object[] {});*/
 		}
 
 
@@ -385,6 +400,7 @@ public class PSEPaymentController extends AbstractPageController
 					form.setBankTimeResponse(bankProcessDate.split(" ")[1]);
 				}
 			}
+			form.setTrazabilityCode(modelo.getTrazabilityCode());
 
 		}
 
