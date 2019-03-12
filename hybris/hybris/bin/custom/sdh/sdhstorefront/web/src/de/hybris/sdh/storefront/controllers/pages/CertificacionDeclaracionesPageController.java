@@ -70,7 +70,8 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 	@RequestMapping(value = "/contribuyentes/consultas/certideclaraciones", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String oblipendi(final Model model) throws CMSItemNotFoundException
+	public String oblipendi(final Model model, @ModelAttribute("error")
+	final String error) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Obligaciones Pendientes--------------------------");
 
@@ -78,6 +79,11 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final CertificacionPagoForm certiFormPost = new CertificacionPagoForm();
 
 		model.addAttribute("certiFormPost", certiFormPost);
+
+		if (error == "sinPdf")
+		{
+			GlobalMessages.addErrorMessage(model, "mirit.certificacion..error.pdfVacio");
+		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
@@ -132,6 +138,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		{
 			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+			redirectModel.addFlashAttribute("error", "sinPdf");
 			return "redirect:/contribuyentes/consultas/certideclaraciones";
 
 		}
