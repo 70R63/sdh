@@ -217,7 +217,8 @@ public class PSEPaymentController extends AbstractPageController
 	public String pseResponse(final Model model, final RedirectAttributes redirectModel,
 			@RequestParam(required = false, defaultValue = "", value = "ticketId")
 			final String ticketId, @ModelAttribute("error")
-			final String error)
+			final String error, @ModelAttribute("psePaymentFormResp")
+			final PSEPaymentForm psePaymentFormResp)
 			throws CMSItemNotFoundException
 	{
 
@@ -253,6 +254,11 @@ public class PSEPaymentController extends AbstractPageController
 		}
 
 
+		if (psePaymentFormResp != null)
+		{
+			model.addAttribute("psePaymentForm", psePaymentFormResp);
+		}
+
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("disableFields", "true");
 
@@ -281,8 +287,9 @@ public class PSEPaymentController extends AbstractPageController
 
 			LOG.info("getPUBLICIDAD: " + controllerPseConstants.getPUBLICIDAD());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
+			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
 
-			if (psePaymentForm.getImpuesto().toUpperCase().endsWith("PUBLICIDAD"))
+			if (psePaymentForm.getTipoDeImpuesto().toUpperCase().equals(controllerPseConstants.getPUBLICIDAD()))
 			{
 				final List<SDHExteriorPublicityTaxData> exteriorPublicityTaxList = customerData.getExteriorPublicityTaxList();
 
@@ -320,8 +327,9 @@ public class PSEPaymentController extends AbstractPageController
 
 			LOG.info("getGASOLINA: " + controllerPseConstants.getGASOLINA());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
+			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
 
-			if (psePaymentForm.getImpuesto().toUpperCase().endsWith("GASOLINA"))
+			if (psePaymentForm.getTipoDeImpuesto().toUpperCase().equals(controllerPseConstants.getGASOLINA()))
 			{
 				final List<SDHGasTaxData> GasTaxList = customerData.getGasTaxList();
 
@@ -376,6 +384,8 @@ public class PSEPaymentController extends AbstractPageController
 				final ImprimePagoResponse imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
 
 				redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
+				redirectModel.addFlashAttribute("psePaymentFormResp", psePaymentForm);
+
 			}
 		}
 		catch (final Exception e)
