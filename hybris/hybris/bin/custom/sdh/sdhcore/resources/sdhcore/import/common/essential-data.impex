@@ -115,7 +115,7 @@ INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isoCode)[defau
 
 # TRIGGER
 INSERT_UPDATE Trigger; cronJob(code)[unique=true]; cronExpression
-; sdhDeletePDFMediaFilesJobPerformable; 0 0 1 ? * * *
+; sdhDeletePDFMediaFilesCronJob; 0 0 1 ? * * *
 
 
 
