@@ -233,6 +233,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
 			return "redirect:/contribuyentes/consultas/certipagos";
 
 		}

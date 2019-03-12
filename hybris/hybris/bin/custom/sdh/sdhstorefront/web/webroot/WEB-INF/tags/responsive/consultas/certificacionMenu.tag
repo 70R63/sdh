@@ -60,7 +60,7 @@
 					</div>
 				</div>
 			
-				<div class="col-md-3" id="idImpuesto" style="display: none;">
+				<div class="col-md-3" id="idImpuesto" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.selcimpuesto" /></label>
@@ -77,7 +77,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-3" id="idAnio" style="display: none;">
+				<div class="col-md-3" id="idAnio" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.aniograv" /></label> <select
@@ -93,7 +93,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-3" id="idPeriodo" style="display: none;">
+				<div class="col-md-3" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.periodo" /></label> <select

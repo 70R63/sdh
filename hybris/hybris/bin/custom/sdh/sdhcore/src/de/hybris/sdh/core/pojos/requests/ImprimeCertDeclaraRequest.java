@@ -100,5 +100,22 @@ public class ImprimeCertDeclaraRequest
 		this.anoGravable = anoGravable;
 	}
 
+	@Override
+	public String toString()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+
+		stringBuilder.append("{");
+		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
+		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\",");
+		stringBuilder.append("\"retencion\":\"" + this.getRetencion() + "\",");
+		stringBuilder.append("\"periodo\":\"" + this.getPeriodo() + "\",");
+		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\"");
+		stringBuilder.append("}");
+
+
+		return stringBuilder.toString();
+	}
+
 
 }
