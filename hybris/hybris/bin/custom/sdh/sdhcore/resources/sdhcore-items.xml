@@ -536,6 +536,13 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			<itemtype code="CatalogUnawareMedia" autocreate="false" generate="false">
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="deleteByCronjob">
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
         	
 <!--         	<itemtype code="IdentificationDocumentType" autocreate="true" generate="true"> -->
 <!--         		<description>Added to hold ID document type</description> -->

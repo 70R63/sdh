@@ -106,6 +106,19 @@ INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 ;quoteToExpireSoonJobPerformable;quoteToExpireSoonJobPerformable
 ;quoteExpiredJobPerformable;quoteExpiredJobPerformable
 
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]             
+; sdhDeletePDFMediaFilesJobPerformable;   sdhDeletePDFMediaFilesJobPerformable
+                           
+# CRON JOB
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isoCode)[default=en];triggers
+; sdhDeletePDFMediaFilesCronJob; sdhDeletePDFMediaFilesJobPerformable;
+
+# TRIGGER
+INSERT_UPDATE Trigger; cronJob(code)[unique=true]; cronExpression
+; sdhDeletePDFMediaFilesJobPerformable; 0 0 1 ? * * *
+
+
+
 # Deactivate Frontend Restriction on category by default for perfomance purposes
 UPDATE SearchRestriction;code[unique=true];active[default=false]
 ;Frontend_RestrictedCategory
