@@ -12,6 +12,7 @@
     <extension name='sdhpsaddon' />
     <extension name='sdhrelationshipsaddon' />
     <extension name='sdhpse' />
+     <extension name='sdhbackoffice' />
 <!--     <extension name='sdhtest' /> -->
 <!--     <extension name='sdhcockpits' /> -->
     <extension name='ycommercewebservices' />
