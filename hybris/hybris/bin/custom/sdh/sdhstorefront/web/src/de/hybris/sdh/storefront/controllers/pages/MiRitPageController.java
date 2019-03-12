@@ -19,6 +19,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -99,7 +100,7 @@ public class MiRitPageController extends AbstractPageController
 	private static final String Mi_RIT_CMS_PAGE = "MiRitPage";
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String BREADCRUMBS_VALUE = "breadcrumb.certificacion";
+	private static final String BREADCRUMBS_VALUE = "breadcrumb.miRIT";
 
 
 	@Resource(name = "sessionService")

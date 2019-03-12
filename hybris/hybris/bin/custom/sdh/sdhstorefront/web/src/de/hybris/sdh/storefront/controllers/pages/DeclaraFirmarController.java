@@ -33,7 +33,7 @@ public class DeclaraFirmarController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declarafirm";
 
 	// CMS Pages
 	private static final String LISTA_FIRMAR_CMS_PAGE = "declaraFirmarPage";

@@ -6,13 +6,11 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="relacionpagos"
 	tagdir="/WEB-INF/tags/responsive/consultas"%>
-	<%@ taglib prefix="impuestos"
-	tagdir="/WEB-INF/tags/responsive/impuestos"%>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
 <div class="container">
 	<relacionpagos:relacionPagos />
-	<impuestos:declaraFirmar />
 </div>
 
