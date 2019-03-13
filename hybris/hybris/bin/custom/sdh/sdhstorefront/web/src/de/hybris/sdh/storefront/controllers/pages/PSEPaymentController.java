@@ -218,7 +218,8 @@ public class PSEPaymentController extends AbstractPageController
 			@RequestParam(required = false, defaultValue = "", value = "ticketId")
 			final String ticketId, @ModelAttribute("error")
 			final String error, @ModelAttribute("psePaymentFormResp")
-			final PSEPaymentForm psePaymentFormResp)
+			final PSEPaymentForm psePaymentFormResp, @ModelAttribute("estatus")
+			final String estatus)
 			throws CMSItemNotFoundException
 	{
 
@@ -253,8 +254,8 @@ public class PSEPaymentController extends AbstractPageController
 			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 		}
 
-
-		if (psePaymentFormResp != null)
+		LOG.info("estatus: " + estatus);
+		if (estatus == "impreso")
 		{
 			model.addAttribute("psePaymentForm", psePaymentFormResp);
 		}
@@ -385,6 +386,7 @@ public class PSEPaymentController extends AbstractPageController
 
 				redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
 				redirectModel.addFlashAttribute("psePaymentFormResp", psePaymentForm);
+				redirectModel.addFlashAttribute("estatus", "impreso");
 
 			}
 		}
