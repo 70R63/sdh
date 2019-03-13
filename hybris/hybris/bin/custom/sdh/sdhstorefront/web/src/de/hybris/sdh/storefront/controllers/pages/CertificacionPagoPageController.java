@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
@@ -50,7 +51,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.certipagos";
 
 	private static final String VACIO = "";
 
@@ -77,12 +78,18 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/consultas/certipagos", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String certipagos(final Model model) throws CMSItemNotFoundException
+	public String certipagos(final Model model, @ModelAttribute("error")
+	final String error) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET certificacion de pagos--------------------------");
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final CertificacionPagoForm certiForm = new CertificacionPagoForm();
 		final CertificacionPagoForm certiFormPost = new CertificacionPagoForm();
+
+		if (error == "sinPdf")
+		{
+			GlobalMessages.addErrorMessage(model, "mirit.certificacion..error.pdfVacio");
+		}
 
 		certiForm.setNumBP(customerData.getNumBP());
 
@@ -233,6 +240,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+			redirectModel.addFlashAttribute("error", "sinPdf");
 			return "redirect:/contribuyentes/consultas/certipagos";
 
 		}

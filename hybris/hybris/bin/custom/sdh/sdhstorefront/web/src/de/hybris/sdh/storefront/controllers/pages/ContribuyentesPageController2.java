@@ -11,6 +11,7 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -63,6 +64,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ContribuyentesPageController2 extends AbstractPageController
 {
 
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+
+	private static final String TEXT_PUBLICIDAD_EXTERIOR = "Publicidad Exterior";
+
 	private static final Logger LOG = Logger.getLogger(ContribuyentesPageController2.class);
 
 	private static final String PREDIAL_UNIFICADO_CMS_PAGE = "PredialUnificadoPage";
@@ -104,6 +109,9 @@ public class ContribuyentesPageController2 extends AbstractPageController
 
 	@Resource(name = "sdhDetallePublicidadService")
 	SDHDetallePublicidadService sdhDetallePublicidadService;
+
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 
 
@@ -711,6 +719,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PUBLICIDAD_EXTERIOR));
 		//		return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
 		return getViewForPage(model);
 	}
@@ -772,6 +781,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PUBLICIDAD_EXTERIOR));
 
 		return getViewForPage(model);
 	}
@@ -897,6 +907,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
 		//updatePageTitle(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE)); */
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PUBLICIDAD_EXTERIOR));
 
 		return getViewForPage(model);
 
@@ -996,6 +1007,7 @@ public class ContribuyentesPageController2 extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
 		/* updatePageTitle(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE)); */
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PUBLICIDAD_EXTERIOR));
 
 		return getViewForPage(model);
 

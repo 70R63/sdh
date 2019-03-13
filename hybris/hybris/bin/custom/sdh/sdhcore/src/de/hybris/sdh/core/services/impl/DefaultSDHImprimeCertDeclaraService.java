@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 public class DefaultSDHImprimeCertDeclaraService implements SDHImprimeCertDeclaraService
 {
 
-	private static final Logger LOG = Logger.getLogger(DefaultSDHConsultaContribuyenteBPService.class);
+	private static final Logger LOG = Logger.getLogger(DefaultSDHImprimeCertDeclaraService.class);
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;

@@ -34,7 +34,7 @@ import org.apache.log4j.Logger;
 public class DefaultSDHImprimePagoService implements SDHImprimePagoService
 {
 
-	private static final Logger LOG = Logger.getLogger(DefaultSDHConsultaContribuyenteBPService.class);
+	private static final Logger LOG = Logger.getLogger(DefaultSDHImprimePagoService.class);
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
