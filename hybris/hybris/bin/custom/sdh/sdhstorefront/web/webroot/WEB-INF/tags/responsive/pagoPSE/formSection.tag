@@ -96,7 +96,7 @@ function onChange() {
 			<div class="forgotten-password item_container ">
 				<c:url var="action" value="/register/validateAnswers"/> 
 			
-				<form:form method="post" commandName="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">
+				<form:form method="post" commandName="psePaymentForm" action="">
 					<fieldset>					
 						<input type="hidden" value="" class="text" name="tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
 					<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA && disabled eq true}">
@@ -216,7 +216,42 @@ function onChange() {
 									
 								</div>
 								</c:if>
-								
+							</ycommerce:testId>
+						</div>
+				</form:form>
+				
+				
+				
+				<form:form method="post" commandName="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">
+
+					
+					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
+					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
+					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/>
+					<form:hidden path="impuesto" value="${psePaymentForm.impuesto}"/>
+					<form:hidden path="anoGravable" value="${psePaymentForm.anoGravable}"/>
+					<form:hidden path="CHIP" value="${psePaymentForm.CHIP}"/>
+					<form:hidden path="periodo" value="${psePaymentForm.periodo}"/>
+					<form:hidden path="CUD" value="${psePaymentForm.CUD}"/>
+					<form:hidden path="noIdentificacion" value="${psePaymentForm.noIdentificacion}"/>
+					<form:hidden path="DV" value="${psePaymentForm.DV}"/>
+					<form:hidden path="tipoDeIdentificacion" value="${psePaymentForm.tipoDeIdentificacion}"/>
+					<form:hidden path="fechaLimiteDePago" value="${psePaymentForm.fechaLimiteDePago}"/>
+					<form:hidden path="pagoAdicional" value="${psePaymentForm.pagoAdicional}"/>
+					<form:hidden id="hiddenBanco" path="banco" value="${varBanco}"/>
+					<form:hidden path="valorAPagar" value="${psePaymentForm.valorAPagar}"/>
+					<form:hidden id="hiddenTipoDeTarjeta" path="tipoDeTarjeta" value="${varTipoDeTarjeta}"/>
+					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>
+					
+					
+					<form:hidden path="bankDateResponse" value="${psePaymentForm.bankDateResponse}"/>
+					<form:hidden path="bankTimeResponse" value="${psePaymentForm.bankTimeResponse}"/>
+					
+					
+					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>
+				
+					<div class="text-center">
+							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq true}">
 									<div id="continuar">
 										<button class="btn btn-secondary btn-lg" type="submit">
@@ -230,9 +265,11 @@ function onChange() {
 							</ycommerce:testId>
 						</div>
 				</form:form>
+				
 						
 				
 			</div>
 		</div>
 	</div>
 </div>
+ 

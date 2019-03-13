@@ -282,7 +282,7 @@ public class PSEPaymentController extends AbstractPageController
 			LOG.info("getPUBLICIDAD: " + controllerPseConstants.getPUBLICIDAD());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
 
-			if (controllerPseConstants.getPUBLICIDAD().equals(psePaymentForm.getTipoDeImpuesto().toUpperCase()))
+			if (psePaymentForm.getImpuesto().toUpperCase().endsWith("PUBLICIDAD"))
 			{
 				final List<SDHExteriorPublicityTaxData> exteriorPublicityTaxList = customerData.getExteriorPublicityTaxList();
 
@@ -321,7 +321,7 @@ public class PSEPaymentController extends AbstractPageController
 			LOG.info("getGASOLINA: " + controllerPseConstants.getGASOLINA());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
 
-			if (controllerPseConstants.getGASOLINA().equals(psePaymentForm.getTipoDeImpuesto().toUpperCase()))
+			if (psePaymentForm.getImpuesto().toUpperCase().endsWith("GASOLINA"))
 			{
 				final List<SDHGasTaxData> GasTaxList = customerData.getGasTaxList();
 
@@ -358,7 +358,7 @@ public class PSEPaymentController extends AbstractPageController
 
 			}
 
-			if (declaracion != null)
+			if (!declaracion.getNumBP().equals("") || declaracion.getNumBP() != null)
 			{
 				imprimePagoRequest.setNumBP(declaracion.getNumBP());
 				imprimePagoRequest.setCtaContrato(declaracion.getCtaContrato());
@@ -383,7 +383,7 @@ public class PSEPaymentController extends AbstractPageController
 			LOG.error("error getting customer info from Pago en linea PSE response page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
 			redirectModel.addFlashAttribute("error", "sinPdf");
-			return "redirect:/pagoEnLinea/pseResponse";
+			return "redirect:/impuestos/pagoEnLinea/pseResponse";
 
 		}
 
@@ -392,7 +392,7 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		return "redirect:/pagoEnLinea/pseResponse";
+		return "redirect:/impuestos/pagoEnLinea/pseResponse";
 
 	}
 
