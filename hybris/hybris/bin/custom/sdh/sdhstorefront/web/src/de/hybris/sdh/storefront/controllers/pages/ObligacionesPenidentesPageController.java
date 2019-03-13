@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ObligacionesPenidentesPageController extends AbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.oblipendienetes";
 
 	// CMS Pages
 	private static final String OBLIGACIONES_PENDIENTES_CMS_PAGE = "obligacionesPendientesPage";
