@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ImprimeCertDeclaraRequest;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
@@ -39,7 +40,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CertificacionDeclaracionesPageController extends AbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_CERTIFICA_DECLARACION = "Certifica Declaración";
+	private static final String TEXT_CERTIFICA_DECLARACION = "Certificaciones de Declaración";
 	private static final String VACIO = "";
 
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);

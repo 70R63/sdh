@@ -11,6 +11,7 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
@@ -18,6 +19,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
@@ -79,6 +81,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			+ "/contribuyentes2/publicidadexterior/detalle";
 
 
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhDetallePublicidadService")
 	SDHDetallePublicidadService sdhDetallePublicidadService;
@@ -100,7 +104,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 
 	private static final String ERROR_CMS_PAGE = "notFound";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declarapublicidad";
 
 	//CMS PAGES
 	private static final String DECLARACION_PUBLICIDAD_CMS_PAGE = "DeclaraPublicidadPage";
@@ -203,6 +208,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		//updatePageTitle(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE)); */
 
 		return getViewForPage(model);
@@ -288,6 +294,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 		}
 
+
 		return calcPublicidadResponse;
 
 	}
@@ -364,6 +371,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			generaDeclaracionResponse.setErrores(errores);
 
 		}
+
 		return generaDeclaracionResponse;
 
 	}

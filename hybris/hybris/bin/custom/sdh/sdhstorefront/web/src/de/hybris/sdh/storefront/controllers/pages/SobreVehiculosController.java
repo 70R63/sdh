@@ -27,7 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class SobreVehiculosController extends AbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.vehiculos";
 
 	// CMS Pages
 	private static final String SOBRE_VEHICULOS_CMS_PAGE = "sobreVehiculosAutomotoresPage";
