@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -55,7 +56,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 
 	//Example Controller
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.estadocuenta";
 
 	// CMS Pages
 	private static final String ESTADO_DE_CUENTA_CMS_PAGE = "estado-de-cuenta";

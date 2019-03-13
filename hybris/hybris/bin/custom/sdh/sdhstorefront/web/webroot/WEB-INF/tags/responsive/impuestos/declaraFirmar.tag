@@ -22,11 +22,11 @@
 			</h2>
 		</div>
 	</div>
-
+<br>
 	<div class="col-md-10 col-md-offset-2">
 		<div class="row">
 
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-7 col-md-offset-1">
 				<table class="table">
 					<thead style="cellspacing: 10 !important">
 						<tr>
@@ -66,12 +66,12 @@
 
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
-					<sf:button action="${presentarDeclaracionUrl}" type="submit"
+					<button type="submit"
 						class="btn btn-primary btn-lg" id="action" name="action"
-						value="presentarDeclaracion" style="width: 187px !important">
+						value="" style="width: 187px !important">
 						<spring:theme
-							code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
-					</sf:button>
+							code="declarafirma.inicial.firma" />
+					</button>
 				</div>
 			</div>
 		</div>
