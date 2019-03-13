@@ -82,8 +82,11 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	private static final String SOBRETASA_GASOLINA_CMS_PAGE = "sobretasa-gasolina";
 	private static final String REDIRECT_TO_SOBRETASA_GASOLINA_PAGE = REDIRECT_PREFIX + "/contribuyentes/sobretasa-gasolina";
 	private static final String DECLARACIONES_GASOLINA_CMS_PAGE = "declaracion-gasolina";
+	private static final String DECLARACIONES_GASOLINA_PAGAR_CMS_PAGE = "declaracion-gasolinaPagar";
 	private static final String REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/sobretasa-gasolina/declaracion-gasolina";
+	private static final String REDIRECT_TO_DECLARACIONES_GASOLINA_PAGAR_PAGE = REDIRECT_PREFIX
+			+ "/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar";
 	private static final String REDIRECT_CMS_SITE_PAGE_PAGO_PSE_FORM = FORWARD_PREFIX + "/impuestos/pagoEnLinea/form";
 
 	private static final String FORWARD_CMS_SITE_PAGE_PAGO_PSE_FORM = null;
@@ -432,7 +435,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String handleGET_DEC(@ModelAttribute("dataForm")
 	final SobreTasaGasolinaForm dataForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
 
@@ -600,6 +604,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		psePaymentForm.setDV(gasolinaService.prepararDV(detalleContribuyente));
 		psePaymentForm.setObjPago(detalleContribuyente.getGasolina().get(0).getNumObjeto());
 		model.addAttribute("psePaymentForm", psePaymentForm);
+		model.addAttribute("detallePagoRequest", detallePagoRequest);
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_CMS_PAGE));
@@ -607,6 +613,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
+
+
 	}
 
 
@@ -663,7 +671,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
 				for (int i = 0; i < dataForm.getDataForm().getInfoDeclara().size(); i++)
 				{
-					if (dataForm.getDataForm().getInfoDeclara().get(i).getGalonesGra().equals("") != true
+					if (dataForm.getDataForm().getInfoDeclara().get(i).getGalonesGra() != null
 							&& dataForm.getDataForm().getInfoDeclara().get(i).getGalonesGra().equals("") != true)
 					{
 						infoDeclaraDefault.add(dataForm.getDataForm().getInfoDeclara().get(i));
@@ -748,6 +756,304 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		return REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE;
 	}
 
+
+
+
+
+
+
+
+	//-----------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String handleGET_PAG(@ModelAttribute("dataForm")
+	final SobreTasaGasolinaForm dataForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes, final HttpServletRequest request, final HttpServletResponse response)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Declaracion gasolina Pagar GET --------------------------");
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
+		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente;
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
+		final DetGasResponse detalleGasolinaResponse;
+		final DetallePagoResponse detallePagoResponse;
+		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
+		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
+		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
+		String clavePeriodo = "";
+
+
+
+		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
+
+		String[] mensajesError;
+		String numBP = "";
+		String numDoc = "";
+		String tipoDoc = "";
+		String anoGravable = "";
+		String periodo = "";
+
+
+		numBP = customerModel.getNumBP();
+		if (dataForm != null)
+		{
+			anoGravable = dataForm.getAnoGravable();
+			periodo = dataForm.getPeriodo();
+			numDoc = dataForm.getNumDoc();
+			tipoDoc = dataForm.getTipoDoc();
+		}
+
+
+		final String tipoRevisor = "1";
+		final String tipoDeclarante = "2";
+
+
+		detalleGasolinaRequest.setNumBP(numBP);
+		detalleGasolinaRequest.setNumDoc(numDoc);
+		detalleGasolinaRequest.setTipoDoc(tipoDoc);
+		detalleGasolinaRequest.setAnoGravable(anoGravable);
+		detalleGasolinaRequest.setPeriodo(periodo);
+
+		System.out.println("Request de infObjeto/Gasolina: " + detalleGasolinaRequest);
+		detalleGasolinaResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de infObjeto/Gasolina: " + detalleGasolinaResponse);
+		if (detalleGasolinaResponse.getErrores() != null && detalleGasolinaResponse.getErrores().get(0) != null
+				&& detalleGasolinaResponse.getErrores().get(0).getTxtmsj() != null
+				&& !detalleGasolinaResponse.getErrores().get(0).getTxtmsj().equals(""))
+		{
+			LOG.error("Error al leer detalle de gasolina: " + detalleGasolinaResponse.getErrores().get(0).getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(detalleGasolinaResponse.getErrores());
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error1", mensajesError);
+		}
+		detalleGasolinaResponse.setAlmacProd(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacProd()));
+		detalleGasolinaResponse.setNumTanques(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getNumTanques()));
+		detalleGasolinaResponse.setAlmacTanque(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacTanque()));
+
+
+		dataForm.setAnoGravable(anoGravable);
+		dataForm.setPeriodo(periodo);
+		dataForm.setNumDoc(numDoc);
+		dataForm.setOpcionUso(detalleGasolinaResponse.getOpcionUso());
+		dataForm.setNumForm(detalleGasolinaResponse.getNumForm());
+		infoDeclaraDefaultTMP = gasolinaService.prepararInfoDeclara(detalleGasolinaResponse.getInfoDeclara());
+		if (infoDeclaraDefaultTMP != null && infoDeclaraDefaultTMP.size() > 0)
+		{
+			infoDeclaraDefault.addAll(infoDeclaraDefaultTMP);
+		}
+		else if (dataForm.getDataForm().getInfoDeclara() != null && dataForm.getDataForm().getInfoDeclara().size() > 0)
+		{
+			infoDeclaraDefault.addAll(dataForm.getDataForm().getInfoDeclara());
+		}
+		infoDeclaraDefault.addAll(gasolinaService.prepararInfoDeclaraDefault(5));
+
+		dataForm.getDataForm().setInfoDeclara(infoDeclaraDefault);
+
+		dataForm.setValoresDeclara(detalleGasolinaResponse.getValoresDeclara());
+		if (detalleGasolinaResponse.getRevisorDeclarante() != null)
+		{
+			for (int i = 0; i < detalleGasolinaResponse.getRevisorDeclarante().size(); i++)
+			{
+				if (detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoInterloc().equals(tipoRevisor) == true)
+				{
+					revisor.setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					revisor.setTipoDocDESC(gasolinaService.getDescripcion(revisor.getTipoDoc(), catalogos.getTipoIdRev()));
+					revisor.setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
+					revisor.setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
+					revisor.setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					dataForm.setRevisor(revisor);
+				}
+				else
+				{
+					declarante.setTipoDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTipoDoc());
+					declarante.setTipoDocDESC(gasolinaService.getDescripcion(declarante.getTipoDoc(), catalogos.getTipoIdRev()));
+					declarante.setNumDoc(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNumDoc());
+					declarante.setNombres(detalleGasolinaResponse.getRevisorDeclarante().get(i).getNombres());
+					declarante.setTarjetaProf(detalleGasolinaResponse.getRevisorDeclarante().get(i).getTarjetaProf());
+					dataForm.setDeclarante(declarante);
+				}
+			}
+		}
+
+
+		numBP = customerModel.getNumBP();
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (detalleContribuyente.getIdmsj() != 0)
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+
+		}
+		declarante.setTipoDoc(detalleContribuyente.getInfoContrib().getTipoDoc());
+		declarante.setTipoDocDESC(gasolinaService.getDescripcion(declarante.getTipoDoc(), catalogos.getTipoIdRev()));
+		declarante.setNumDoc(detalleContribuyente.getInfoContrib().getNumDoc());
+		declarante.setNombres(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+		dataForm.setDeclarante(declarante);
+		dataForm.setCatalogosSo(catalogos);
+		System.out.println(dataForm);
+		model.addAttribute("dataForm", dataForm);
+
+
+		clavePeriodo = gasolinaService.perpararPeriodoPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+		detallePagoRequest.setNumBP(numBP);
+		detallePagoRequest.setClavePeriodo(clavePeriodo);
+		detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjeto(detalleContribuyente));
+
+		model.addAttribute("detallePagoRequest", detallePagoRequest);
+
+
+		System.out.println("Request de consulPago: " + detallePagoRequest);
+		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de consulPago: " + detallePagoResponse);
+		if (detallePagoResponse.getErrores() != null && detallePagoResponse.getErrores().get(0) != null
+				&& detallePagoResponse.getErrores().get(0).getTxtmsj() != null
+				&& !detallePagoResponse.getErrores().get(0).getTxtmsj().equals(""))
+		{
+			LOG.error("Error al leer detalle de pago: " + detallePagoResponse.getErrores().get(0).getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error4", mensajesError);
+		}
+
+
+		psePaymentForm.setTipoDeImpuesto(new ControllerPseConstants().getGASOLINA());
+		psePaymentForm.setAnoGravable(dataForm.getAnoGravable());
+		psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
+		psePaymentForm.setPeriodo(clavePeriodo);
+		psePaymentForm.setTipoDeIdentificacion(dataForm.getTipoDoc());
+		psePaymentForm.setNoIdentificacion(dataForm.getNumDoc());
+		psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
+		psePaymentForm.setFechaLimiteDePago(detallePagoResponse.getFechVenc());
+		psePaymentForm.setDV(gasolinaService.prepararDV(detalleContribuyente));
+		psePaymentForm.setObjPago(detalleContribuyente.getGasolina().get(0).getNumObjeto());
+		model.addAttribute("psePaymentForm", psePaymentForm);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_PAGAR_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_PAGAR_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+
+
+	}
+
+
+
+	//-----------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String handlePOST_PAG(@ModelAttribute("dataForm")
+	final SobreTasaGasolinaForm dataForm, @ModelAttribute("psePaymentForm")
+	final PSEPaymentForm psePaymentForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Declaracion gasolina Pagar POST --------------------------");
+
+		List<DetGasInfoDeclaraResponse> infoDeclaraDefault;
+		List<DetGasRevisorDeclaranteResponse> revisorDeclaranteDefault;
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
+		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
+		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
+		final CalculaGasolinaResponse calculaGasolinaResponse;
+		String[] mensajesError;
+		final int claveError;
+		final List infoDeclaraDefaultTMP;
+
+
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
+		final DetGasResponse detalleGasolinaResponse;
+		final DetallePagoResponse detallePagoResponse;
+		//		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
+		String clavePeriodo = "";
+
+
+
+		String numBP = customerModel.getNumBP();
+		final String numDoc = customerModel.getDocumentNumber();
+		final String tipoDoc = "";
+		final String anoGravable = "";
+		final String periodo = "";
+		final String numForm = "";
+		final String opcionUso = "";
+		final String calidResp = "";
+		infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
+		infoDeclaraDefault.add(new DetGasInfoDeclaraResponse());
+		revisorDeclaranteDefault = new ArrayList<DetGasRevisorDeclaranteResponse>();
+		revisorDeclaranteDefault.add(new DetGasRevisorDeclaranteResponse());
+
+
+		numBP = customerModel.getNumBP();
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (detalleContribuyente.getIdmsj() != 0)
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+
+		}
+
+
+		model.addAttribute("dataForm", dataForm);
+
+		clavePeriodo = gasolinaService.perpararPeriodoPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+		detallePagoRequest.setNumBP(numBP);
+		detallePagoRequest.setClavePeriodo(clavePeriodo);
+		detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjeto(detalleContribuyente));
+
+		System.out.println("Request de consulPago: " + detallePagoRequest);
+		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de consulPago: " + detallePagoResponse);
+		if (detallePagoResponse.getErrores() != null && detallePagoResponse.getErrores().get(0) != null
+				&& detallePagoResponse.getErrores().get(0).getTxtmsj() != null
+				&& !detallePagoResponse.getErrores().get(0).getTxtmsj().equals(""))
+		{
+			LOG.error("Error al leer detalle de pago: " + detallePagoResponse.getErrores().get(0).getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error4", mensajesError);
+		}
+
+
+		psePaymentForm.setTipoDeImpuesto(new ControllerPseConstants().getGASOLINA());
+		psePaymentForm.setAnoGravable(dataForm.getAnoGravable());
+		psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
+		psePaymentForm.setPeriodo(clavePeriodo);
+		psePaymentForm.setTipoDeIdentificacion(dataForm.getTipoDoc());
+		psePaymentForm.setNoIdentificacion(dataForm.getNumDoc());
+		psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
+		psePaymentForm.setFechaLimiteDePago(detallePagoResponse.getFechVenc());
+		psePaymentForm.setDV(gasolinaService.prepararDV(detalleContribuyente));
+		psePaymentForm.setObjPago(detalleContribuyente.getGasolina().get(0).getNumObjeto());
+		model.addAttribute("psePaymentForm", psePaymentForm);
+
+
+		return REDIRECT_TO_DECLARACIONES_GASOLINA_PAGAR_PAGE;
+	}
 
 
 }
