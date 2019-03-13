@@ -6,11 +6,20 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseBankListCatalogModel;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
+import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
+import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
+import de.hybris.sdh.core.pojos.responses.ConsultaPagoDeclaraciones;
+import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
+import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
+import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHImprimePagoService;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
@@ -20,6 +29,8 @@ import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInform
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
+import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
+import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
@@ -34,6 +45,7 @@ import javax.annotation.Resource;
 
 import org.apache.axis.types.NonNegativeInteger;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,6 +72,7 @@ public class PSEPaymentController extends AbstractPageController
 	private static final String TEXT_PSE_RESPUESTA = "PSE Respuesta";
 	private static final String TEXT_PSE_FORMA = "PSE Forma";
 	private static final String TEXT_REALIZAR_PAGO = "Realizar Pago";
+	private static final String VACIO = "";
 
 
 	@Resource(name = "pseBankListCatalogDao")
@@ -83,7 +96,14 @@ public class PSEPaymentController extends AbstractPageController
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
 
+	@Resource(name = "sdhConsultaPagoService")
+	SDHConsultaPagoService sdhConsultaPagoService;
+
+	@Resource(name = "sdhImprimePagoService")
+	SDHImprimePagoService sdhImprimePagoService;
 
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getIdTipoDeImpuesto()
@@ -195,9 +215,17 @@ public class PSEPaymentController extends AbstractPageController
 	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String pseResponse(final Model model, final RedirectAttributes redirectModel,
-			@RequestParam(required = false, defaultValue = "", value = "ticketId") final String ticketId)
+			@RequestParam(required = false, defaultValue = "", value = "ticketId")
+			final String ticketId, @ModelAttribute("error")
+			final String error)
 			throws CMSItemNotFoundException
 	{
+
+		if (error == "sinPdf")
+		{
+			GlobalMessages.addErrorMessage(model, "psePaymentForm.error.pdfVacio");
+		}
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
@@ -231,6 +259,149 @@ public class PSEPaymentController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
+	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
+	public String pagoPdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("psePaymentForm")
+	final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro al POST pago en linea PSE response--------------------------");
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final ConsultaPagoRequest consultaPagoRequest = new ConsultaPagoRequest();
+		ConsultaPagoDeclaraciones declaracion = new ConsultaPagoDeclaraciones();
+		final ImprimePagoRequest imprimePagoRequest = new ImprimePagoRequest();
+		final ControllerPseConstants controllerPseConstants = new ControllerPseConstants();
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			consultaPagoRequest.setNumBP(customerData.getNumBP());
+			LOG.info("NumBP: " + customerData.getNumBP());
+
+			LOG.info("getPUBLICIDAD: " + controllerPseConstants.getPUBLICIDAD());
+			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
+
+			if (controllerPseConstants.getPUBLICIDAD().equals(psePaymentForm.getTipoDeImpuesto().toUpperCase()))
+			{
+				final List<SDHExteriorPublicityTaxData> exteriorPublicityTaxList = customerData.getExteriorPublicityTaxList();
+
+				for (final SDHExteriorPublicityTaxData exteriorPublicityTax : exteriorPublicityTaxList)
+				{
+					LOG.info("	exteriorPublicityTax.getObjectNumber: " + exteriorPublicityTax.getObjectNumber());
+
+					consultaPagoRequest.setNumObjeto(exteriorPublicityTax.getObjectNumber());
+
+					final ConsultaPagoResponse consultaPagoResponse = mapper
+							.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
+
+					final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
+
+					for (final ConsultaPagoDeclaraciones element : declaracionesList)
+					{
+
+						LOG.info("		element.getReferencia: " + element.getReferencia());
+						LOG.info("		psePaymentForm.getNumeroDeReferencia: " + psePaymentForm.getNumeroDeReferencia());
+
+						if (element.getReferencia().equals(psePaymentForm.getNumeroDeReferencia()))
+						{
+							declaracion = element;
+							break;
+						}
+					}
+
+					if (declaracion != null)
+					{
+						break;
+					}
+
+				}
+			}
+
+			LOG.info("getGASOLINA: " + controllerPseConstants.getGASOLINA());
+			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
+
+			if (controllerPseConstants.getGASOLINA().equals(psePaymentForm.getTipoDeImpuesto().toUpperCase()))
+			{
+				final List<SDHGasTaxData> GasTaxList = customerData.getGasTaxList();
+
+				for (final SDHGasTaxData GasTax : GasTaxList)
+				{
+
+					LOG.info("	GasTax.getObjectNumber: " + GasTax.getObjectNumber());
+
+					consultaPagoRequest.setNumObjeto(GasTax.getObjectNumber());
+
+					final ConsultaPagoResponse consultaPagoResponse = mapper
+							.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
+
+					final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
+
+					for (final ConsultaPagoDeclaraciones element : declaracionesList)
+					{
+
+						LOG.info("		element.getReferencia: " + element.getReferencia());
+						LOG.info("		psePaymentForm.getNumeroDeReferencia: " + psePaymentForm.getNumeroDeReferencia());
+
+						if (element.getReferencia().equals(psePaymentForm.getNumeroDeReferencia()))
+						{
+							declaracion = element;
+							break;
+						}
+					}
+
+					if (declaracion != null)
+					{
+						break;
+					}
+				}
+
+			}
+
+			if (declaracion != null)
+			{
+				imprimePagoRequest.setNumBP(declaracion.getNumBP());
+				imprimePagoRequest.setCtaContrato(declaracion.getCtaContrato());
+				imprimePagoRequest.setNumObjeto(declaracion.getNumObjeto());
+				imprimePagoRequest.setClavePeriodo(declaracion.getClavePeriodo());
+				imprimePagoRequest.setReferencia(declaracion.getReferencia());
+				imprimePagoRequest.setFechaCompensa(declaracion.getFechaCompensa());
+				imprimePagoRequest.setImporte(declaracion.getImporte());
+				imprimePagoRequest.setMoneda(declaracion.getMoneda());
+				imprimePagoRequest.setNumfactForm(declaracion.getNumfactForm());
+				imprimePagoRequest.setNumDocPago(declaracion.getNumDocPago());
+				imprimePagoRequest.setRefROP(VACIO);
+
+				final String resp = sdhImprimePagoService.imprimePago(imprimePagoRequest);
+				final ImprimePagoResponse imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+
+				redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
+			}
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from Pago en linea PSE response page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+			redirectModel.addFlashAttribute("error", "sinPdf");
+			return "redirect:/pagoEnLinea/pseResponse";
+
+		}
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return "redirect:/pagoEnLinea/pseResponse";
+
+	}
+
+
+
+
+
+
+
 
 	@RequestMapping(value = "/pagoEnLinea/form", method = RequestMethod.POST)
 	@RequireHardLogIn
@@ -250,6 +421,8 @@ public class PSEPaymentController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
+
+
 
 	@RequestMapping(value = "/pagoEnLinea/realizarPago", method = RequestMethod.POST)
 	@RequireHardLogIn
