@@ -337,6 +337,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
 				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
 				modelService.save(mediaModel);
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);

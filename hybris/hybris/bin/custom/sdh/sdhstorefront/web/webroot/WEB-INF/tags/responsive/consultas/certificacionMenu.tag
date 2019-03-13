@@ -51,7 +51,7 @@
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.tipo" /></label><select required="required"
 							required id="impuesto" class="form-control " name="tipoImp"
-							onchange="ShowSelected(this)">
+							>
 							<option value="">Seleccionar</option>
 							<option value="1">Impuesto</option>
 							<option value="2">Sujeto</option>
@@ -60,12 +60,12 @@
 					</div>
 				</div>
 			
-				<div class="col-md-3" id="idImpuesto" style="display: none;">
+				<div class="col-md-3" id="idImpuesto" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.selcimpuesto" /></label>
 						<select	required="required" required id="Idimp" class="form-control "
-							name="Idimp" onchange="Selected(this)">
+							name="Idimp" >
 							<option value="">Seleccionar</option>
 							<option value="1">Predial Unificado</option>
 							<option value="2">Vehículos</option>
@@ -77,13 +77,12 @@
 					</div>
 				</div>
 
-				<div class="col-md-3" id="idAnio" style="display: none;">
+				<div class="col-md-3" id="idAnio" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.aniograv" /></label> <select
 							aria-required="true" id="aniograv" class="form-control "
-							name="aniograv" onchange="SelectedAnio(this) "
-							required='required'>
+							name="aniograv" 				required='required'>
 							<option value="">Seleccionar</option>
 							<option value="2019">2019</option>
 							<option value="2018">2018</option>
@@ -93,12 +92,12 @@
 					</div>
 				</div>
 
-				<div class="col-md-3" id="idPeriodo" style="display: none;">
+				<div class="col-md-3" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.periodo" /></label> <select
 							aria-required="true" id="periodo" class="form-control "
-							name="periodo" onchange="SelectSobreDeli(this)"
+							name="periodo"
 							required='required'>
 							<option value="">Seleccionar</option>
 							<option value="01">1-Enero</option>

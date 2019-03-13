@@ -159,6 +159,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
 				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
 				modelService.save(mediaModel);
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);
@@ -226,8 +227,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		detalleGasolinaRequest.setAnoGravable(anioGravable);
 		detalleGasolinaRequest.setPeriodo(periodo);
 
+		System.out.println("Request de infObjeto/Gasolina: " + detalleGasolinaRequest);
 		detalleGasolinaResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
-		System.out.println(detalleGasolinaResponse);
+		System.out.println("Response de infObjeto/Gasolina: " + detalleGasolinaResponse);
 		if (detalleGasolinaResponse.getErrores() != null && detalleGasolinaResponse.getErrores().get(0) != null
 				&& detalleGasolinaResponse.getErrores().get(0).getTxtmsj() != null
 				&& !detalleGasolinaResponse.getErrores().get(0).getTxtmsj().equals(""))
@@ -307,7 +309,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		numBP = customerModel.getNumBP();
 		contribuyenteRequest.setNumBP(numBP);
 
+		System.out.println("Request para validaCont: " + contribuyenteRequest);
 		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (detalleContribuyente.getIdmsj() != 0)
 		{
 			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
@@ -329,8 +333,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		detalleGasolinaRequest.setAnoGravable(anioGravable);
 		detalleGasolinaRequest.setPeriodo(periodo);
 
+		System.out.println("Request de infObjeto/Gasolina: " + detalleGasolinaRequest);
 		detalleGasolinaResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
-		System.out.println(detalleGasolinaResponse);
+		System.out.println("Response de infObjeto/Gasolina: " + detalleGasolinaResponse);
 		if (detalleGasolinaResponse.getErrores() != null && detalleGasolinaResponse.getErrores().get(0) != null
 				&& detalleGasolinaResponse.getErrores().get(0).getTxtmsj() != null
 				&& !detalleGasolinaResponse.getErrores().get(0).getTxtmsj().equals(""))
@@ -369,7 +374,6 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 		detalleGasolinaResponse
 				.setRepresentantes(gasolinaService.prepararTablaRepresentantes(detalleGasolinaResponse.getRepresentantes()));
-
 		{
 			if (gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina()).size() > 0)
 			{
@@ -436,7 +440,6 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
 		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
-		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		SDHValidaMailRolResponse detalleContribuyente;
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
@@ -481,8 +484,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		detalleGasolinaRequest.setAnoGravable(anoGravable);
 		detalleGasolinaRequest.setPeriodo(periodo);
 
+		System.out.println("Request de infObjeto/Gasolina: " + detalleGasolinaRequest);
 		detalleGasolinaResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
-		System.out.println(detalleGasolinaResponse);
+		System.out.println("Response de infObjeto/Gasolina: " + detalleGasolinaResponse);
 		if (detalleGasolinaResponse.getErrores() != null && detalleGasolinaResponse.getErrores().get(0) != null
 				&& detalleGasolinaResponse.getErrores().get(0).getTxtmsj() != null
 				&& !detalleGasolinaResponse.getErrores().get(0).getTxtmsj().equals(""))
@@ -545,7 +549,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		numBP = customerModel.getNumBP();
 		contribuyenteRequest.setNumBP(numBP);
 
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
 		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (detalleContribuyente.getIdmsj() != 0)
 		{
 			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
@@ -570,7 +576,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		detallePagoRequest.setClavePeriodo(clavePeriodo);
 		detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjeto(detalleContribuyente));
 
+		System.out.println("Request de consulPago: " + detallePagoRequest);
 		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de consulPago: " + detallePagoResponse);
 		if (detallePagoResponse.getErrores() != null && detallePagoResponse.getErrores().get(0) != null
 				&& detallePagoResponse.getErrores().get(0).getTxtmsj() != null
 				&& !detallePagoResponse.getErrores().get(0).getTxtmsj().equals(""))
@@ -684,8 +692,9 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		consultaGasolinaRequest.setRevisorDeclarante(revisorDeclaranteDefault);
 
 
+		System.out.println("Request de calculoImp/Gasolina: " + consultaGasolinaRequest);
 		calculaGasolinaResponse = gasolinaService.consultaCalGasolina(consultaGasolinaRequest, sdhDetalleGasolinaWS, LOG);
-		System.out.println(calculaGasolinaResponse);
+		System.out.println("Response de calculoImp/Gasolina: " + calculaGasolinaResponse);
 		if (calculaGasolinaResponse.getErrores() != null && calculaGasolinaResponse.getErrores().get(0) != null
 				&& calculaGasolinaResponse.getErrores().get(0).getTxtmsj() != null
 				&& !calculaGasolinaResponse.getErrores().get(0).getTxtmsj().equals(""))

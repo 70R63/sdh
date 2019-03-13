@@ -221,3 +221,12 @@ hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHAgent.java
 hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHAddress.java
 hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHSocialNetwork.java
 hybris/hybris/bin/custom/sdh/sdhcore/src/de/hybris/sdh/core/jalo/SDHExteriorPublicityTax.java
+hybris/hybris/bin/custom/sdh/sdhbackoffice/backoffice/classes/
+hybris/hybris/bin/custom/sdh/sdhbackoffice/gensrc/
+hybris/hybris/bin/custom/sdh/sdhbackoffice/resources/sdhbackoffice/sdhbackoffice-testclasses.xml
+hybris/hybris/bin/custom/sdh/sdhbackoffice/resources/items.xsd
+hybris/hybris/bin/custom/sdh/sdhbackoffice/resources/beans.xsd
+hybris/hybris/bin/custom/sdh/sdhbackoffice/resources/backoffice/sdhbackoffice_bof.jar
+hybris/hybris/bin/custom/sdh/sdhbackoffice/platformhome.properties
+hybris/hybris/bin/custom/sdh/sdhbackoffice/extensioninfo.xsd
+hybris/hybris/bin/custom/sdh/sdhbackoffice/build.xml

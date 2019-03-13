@@ -11,6 +11,7 @@
 <spring:url value="/contribuyentes/consultas/certipagos"
 	var="certideclaraURL" htmlEscape="false" />
 	
+	
 <script>
 	function downloadPDF(pdf) {
 		debugger;
@@ -40,7 +41,6 @@
 				</h2>
 			</div>
 		</div>
-
 		
 		<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certideclaraciones" method="post" commandName="certiFormPost" >
 			
@@ -49,10 +49,11 @@
 			<div class="row">
 				<div class="col-md-3" id="idImpuesto" style="display: block;">
 					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certideclara.inicial.selcimpuesto" /></label> <select
-							required="required" required id="tipoimp" class="form-control "
-							name="Idimp" onchange="Selected(this)">
+						<label class="control-label required">
+							<spring:theme code="certideclara.inicial.selcimpuesto" />
+						</label> 
+						<select	required="required" required id="tipoimp" class="form-control "
+							name="Idimp" >
 							<option value="">Seleccionar</option>
 							<option value="1">Predial Unificado</option>
 							<option value="2">Vehículos</option>
@@ -69,7 +70,7 @@
 						<label class="control-label required"><spring:theme
 								code="certideclara.inicial.aniograv" /></label> <select
 							aria-required="true" id="aniograv" class="form-control "
-							name="aniograv" onchange="SelectedAnio(this) "
+							name="aniograv" 
 							required='required'>
 							<option value="">Seleccionar</option>
 							<option value="2019">2019</option>
@@ -79,14 +80,15 @@
 						</select>
 					</div>
 				</div>
-
-				<div class="col-md-3" id="idPeriodo" style="display: none;">
+				
+				
+				<div class="col-md-3" id="idPeriodo" style="display: block;">
 					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certideclara.inicial.periodo" /></label> <select
-							aria-required="true" id="periodo" class="form-control "
-							name="periodo" onchange="SelectSobreDeli(this)"
-							required='required'>
+						<label class="control-label required">
+							<spring:theme code="certideclara.inicial.periodo" />
+						</label> 
+						<select	aria-required="true" id="periodo" class="form-control "
+							name="periodo" 	required='required'>
 							<option value="">Seleccionar</option>
 							<option value="01">1-Enero</option>
 							<option value="02">2-Febrero</option>
@@ -94,12 +96,12 @@
 							<option value="04">4-Abril</option>
 							<option value="05">5-Mayo</option>
 							<option value="06">6-Junio</option>
-							<option value="07">6-Julio</option>
-							<option value="08">6-Agosto</option>
-							<option value="09">6-Septiembre</option>
-							<option value="10">6-Octubre</option>
-							<option value="11">6-Noviembre</option>
-							<option value="12">6-Diciembre</option>
+							<option value="07">7-Julio</option>
+							<option value="08">8-Agosto</option>
+							<option value="09">9-Septiembre</option>
+							<option value="10">10-Octubre</option>
+							<option value="11">11-Noviembre</option>
+							<option value="12">12-Diciembre</option>
 						</select>
 					</div>
 				</div>

@@ -77,12 +77,18 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/consultas/certipagos", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String certipagos(final Model model) throws CMSItemNotFoundException
+	public String certipagos(final Model model, @ModelAttribute("error")
+	final String error) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET certificacion de pagos--------------------------");
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final CertificacionPagoForm certiForm = new CertificacionPagoForm();
 		final CertificacionPagoForm certiFormPost = new CertificacionPagoForm();
+
+		if (error == "sinPdf")
+		{
+			GlobalMessages.addErrorMessage(model, "mirit.certificacion..error.pdfVacio");
+		}
 
 		certiForm.setNumBP(customerData.getNumBP());
 
@@ -233,6 +239,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+			redirectModel.addFlashAttribute("error", "sinPdf");
 			return "redirect:/contribuyentes/consultas/certipagos";
 
 		}
