@@ -134,10 +134,10 @@ public class CertificacionPagoPageController extends AbstractPageController
 			certiForm.setPublicidadExt(listImpuestoPublicdadExterior);
 
 		}
-		else
-		{
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-		}
+		/*
+		 * else { GlobalMessages.addErrorMessage(model, "mirit.error.getInfo"); }
+		 */
+
 		model.addAttribute("certiFormPost", certiFormPost);
 		model.addAttribute("certiForm", certiForm);
 

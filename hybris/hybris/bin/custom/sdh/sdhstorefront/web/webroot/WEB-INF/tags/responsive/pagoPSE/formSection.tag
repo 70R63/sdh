@@ -42,6 +42,24 @@ function onChange() {
 }
 </script>
 
+<script>
+	function downloadPDF(pdf) {
+		debugger;
+		if (pdf){
+			const linkSource = 'data:application/pdf;base64,' + pdf;
+		    const downloadLink = document.createElement("a");
+		    const fileName = "Certificación_Pago.pdf";
+	
+		    downloadLink.href = linkSource;
+		    downloadLink.download = fileName;
+		    downloadLink.click();
+		}    
+	}
+	
+	
+	downloadPDF('${imprimePagoResponse.stringPDF}');
+</script>
+
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -78,9 +96,9 @@ function onChange() {
 			<div class="forgotten-password item_container ">
 				<c:url var="action" value="/register/validateAnswers"/> 
 			
-				<form:form method="post" commandName="psePaymentForm" action="">
+				<form:form method="post" commandName="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">
 					<fieldset>					
-						<input type="hidden" value="" class="text" name="psePaymentForm.tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
+						<input type="hidden" value="" class="text" name="tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
 					<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA && disabled eq true}">
 						<div class="col-xs-4">
 							<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
@@ -201,7 +219,7 @@ function onChange() {
 								
 								<c:if test = "${disabled eq true}">
 									<div id="continuar">
-										<button class="btn btn-secondary btn-lg" type="button">
+										<button class="btn btn-secondary btn-lg" type="submit">
 											<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
 										</button>
 										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
