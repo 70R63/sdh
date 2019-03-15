@@ -65,7 +65,7 @@
 		<div class="col-md-4  ">
 			<div class="form-group ">
 				<button class="btn btn-primary btn-lg " type="button"
-					id="regresardeli" onclick="goBack()">
+					id="regresarButton" onclick="goBack()">
 					<spring:theme code="delineacion.urbana.radicados.regresar" />
 				</button>
 			</div>
@@ -90,6 +90,9 @@
 </div>
 
 <script>
+function goBack() {
+	window.history.back();
+}
 	function seleccion(selectObject) {
 		var x = selectObject.value;
 		var seleccionar = document.getElementById('selec');
@@ -106,10 +109,7 @@
 			btnreten.disabled = false;
 		}
 		
-		function goBack() {
-			  window.history.back();
-			}
-
+		
 	}
 </script>
 

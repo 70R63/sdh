@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
+<div class="container">
 <div class="row">
 	<div class="col-md-6 headline">
 		<h2>
@@ -68,8 +68,17 @@
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.modlicencia" /></label> <select
-					id="an" class="form-control " name=" " onchange=" " disabled>
+					id="selecmodlicen" class="form-control " name=" " onchange=" " disabled>
 					<option value="">Seleccionar</option>
+					<option value="1">Adecuación</option> 
+					<option value="2">Ampliación</option>
+					<option value="3">Cerramiento</option>
+					<option value="4">Demolición</option> 
+					<option value="5">Modificación</option>
+					<option selected="selected" value="6">Obra nueva</option> 
+					<option value="7">Reforma</option>
+					<option value="8">Estructural</option>
+					<option value="9">Restauración</option>
 				</select>
 			</div>
 		</div>
@@ -102,4 +111,5 @@
 	
 	
 </form:form>
+</div>
 

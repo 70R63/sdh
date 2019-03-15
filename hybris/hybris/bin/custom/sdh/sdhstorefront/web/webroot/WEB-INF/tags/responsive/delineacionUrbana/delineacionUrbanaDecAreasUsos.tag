@@ -7,274 +7,285 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
-<div class="row">
-	<div class="col-md-6 headline">
-		<h2>
-			<span><spring:theme
-					code="delineacion.urbana.dec.areasusos.title" /></span>
-		</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 headline">
+			<h2>
+				<span><spring:theme
+						code="delineacion.urbana.dec.areasusos.title" /></span>
+			</h2>
+		</div>
 	</div>
 </div>
 
 <form:form>
-
-	<div class="row">
-		<div class="col-md-2">
-
-			<label class="control-label" for=""> <spring:theme
-					code="delineacion.urbana.dec.areasusos.uso" />
-			</label>
-
-
-		</div>
-		<div class="col-md-2">
-
-			<label class="control-label" for=""> <spring:theme
-					code="delineacion.urbana.dec.areasusos.areauso" />
-			</label>
-
-		</div>
-		<div class="col-md-1">
-
-			<label class="control-label" for=""> <spring:theme
-					code="delineacion.urbana.dec.areasusos.numunidades" />
-			</label>
-
-		</div>
-		<div class="col-md-2">
-			<label class="control-label" for=""> <spring:theme
-					code="delineacion.urbana.dec.areasusos.netuso" /></label>
-		</div>
-
-		<div class="col-md-2">
-
-			<label class="control-label" for=""> <spring:theme
-					code="delineacion.urbana.dec.areasusos.areainve" />
-			</label>
-
-		</div>
-		<div class="col-md-2">
-
-			<label class="control-label" for=""> <spring:theme
-					code="delineacion.urbana.dec.areasusos.m2area" />
-			</label>
-
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="row areasusos">
+	<div class="col-md-12">
+		<div class="row">
 			<div class="col-md-2">
-				<div class="form-group ">
-					<select class="form-control select1">
-						<option value="">Seleccionar</option>
-						<option value="1">Vivienda</option>
-						<option value="2">Comercio</option>
-						<option value="3">Servicios</option>
-						<option value="4">Dot/Instituc</option>
-						<option value="5">Industria</option>
-						<option value="6">Otros</option>
-					</select>
-				</div>
+
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.uso" />
+				</label>
+
 
 			</div>
-
 			<div class="col-md-2">
-				<div class="form-group ">
-					<select class="form-control select2">
-						<option value="Seleccionar">Seleccionar</option>
-						<option value="Vivienda estrato 1">Vivienda estrato 1</option>
-						<option value="Vivienda estrato 2">Vivienda estrato 2</option>
-						<option value="Vivienda estrato 3">Vivienda estrato 3</option>
-						<option value="Vivienda estrato 4">Vivienda estrato 4</option>
-						<option value="Vivienda estrato 5">Vivienda estrato 5</option>
-						<option value="Comercio Metropolitano">Comercio
-							Metropolitano</option>
-						<option value="Comercio Vecinal o Local">Comercio Vecinal
-							o Local</option>
-						<option value="comercio Zonal">Comercio Zonal</option>
-						<option value="Comercio Urbano">Comercio Urbano</option>
-						<option value="Servicios Metropolitano">Servicios
-							Metropolitano</option>
-						<option value="Servicios Vecinal o Local">Servicios
-							Vecinal o Local</option>
-						<option value="Servicios Zonal">Servicios Zonal</option>
-						<option value="Servicios Urbano">Servicios Urbano</option>
-						<option value="Dotacional Metropolitano">Dotacional
-							Metropolitano</option>
-						<option value="Dotacional Vecinal o Local">Dotacional
-							Vecinal o Local</option>
-						<option value="Dotacional Zonal">Dotacional Zonal</option>
-						<option value="Dotacional Urbano">Dotacional Urbano</option>
-						<option value="Industrial">Industrial</option>
-					</select>
-				</div>
-			</div>
 
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.areauso" />
+				</label>
+
+			</div>
 			<div class="col-md-1">
-				<div class="form-group ">
-					<input class="form-control input1" maxlength="30"></input>
-				</div>
+
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.numunidades" />
+				</label>
+
+			</div>
+			<div class="col-md-2">
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.netuso" /></label>
 			</div>
 
 			<div class="col-md-2">
-				<div class="form-group ">
-					<input class="form-control input2" maxlength="30" value="M2"></input>
-				</div>
-			</div>
 
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.areainve" />
+				</label>
+
+			</div>
 			<div class="col-md-2">
-				<div class="form-group ">
-					<select class="form-control select3">
-						<option value=" ">Seleccionar</option>
-						<option value="Ampliada">Ampliada</option>
-						<option value="Modificada">Modificada</option>
-						<option value="Adecuada">Adecuada</option>
-						<option value="Obra Nueva">Obra Nueva</option>
-						<option value="Reconocimiento">Reconocimiento</option>
-						<option value="Conservación/Restauración">Conservación/Restauración</option>
-						<option value="Reforzamiento est">Reforzamiento est</option>
-						<option value="Demolición">Demolición</option>
-						<option value="Cerramiento">Cerramiento</option>
-					</select>
-				</div>
-			</div>
 
-			<div class="col-md-2">
-				<div class="form-group ">
-					<input class="form-control input3" maxlength="30" value="M2"></input>
-				</div>
-			</div>
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.m2area" />
+				</label>
 
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addinfoareuso()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="row areasusos">
+				<div class="col-md-2">
+					<div class="form-group ">
+						<select class="form-control select1">
+							<option value="">Seleccionar</option>
+							<option value="1">Vivienda</option>
+							<option value="2">Comercio</option>
+							<option value="3">Servicios</option>
+							<option value="4">Dot/Instituc</option>
+							<option value="5">Industria</option>
+							<option value="6">Otros</option>
+						</select>
+					</div>
+
+				</div>
+
+				<div class="col-md-2">
+					<div class="form-group ">
+						<select class="form-control select2">
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="Vivienda estrato 1">Vivienda estrato 1</option>
+							<option value="Vivienda estrato 2">Vivienda estrato 2</option>
+							<option value="Vivienda estrato 3">Vivienda estrato 3</option>
+							<option value="Vivienda estrato 4">Vivienda estrato 4</option>
+							<option value="Vivienda estrato 5">Vivienda estrato 5</option>
+							<option value="Comercio Metropolitano">Comercio
+								Metropolitano</option>
+							<option value="Comercio Vecinal o Local">Comercio
+								Vecinal o Local</option>
+							<option value="comercio Zonal">Comercio Zonal</option>
+							<option value="Comercio Urbano">Comercio Urbano</option>
+							<option value="Servicios Metropolitano">Servicios
+								Metropolitano</option>
+							<option value="Servicios Vecinal o Local">Servicios
+								Vecinal o Local</option>
+							<option value="Servicios Zonal">Servicios Zonal</option>
+							<option value="Servicios Urbano">Servicios Urbano</option>
+							<option value="Dotacional Metropolitano">Dotacional
+								Metropolitano</option>
+							<option value="Dotacional Vecinal o Local">Dotacional
+								Vecinal o Local</option>
+							<option value="Dotacional Zonal">Dotacional Zonal</option>
+							<option value="Dotacional Urbano">Dotacional Urbano</option>
+							<option value="Industrial">Industrial</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-md-1">
+					<div class="form-group ">
+						<input class="form-control input1" maxlength="30"></input>
+					</div>
+				</div>
+
+				<div class="col-md-2">
+					<div class="form-group ">
+						<input class="form-control input2" maxlength="30" value="M2"></input>
+					</div>
+				</div>
+
+				<div class="col-md-2">
+					<div class="form-group ">
+						<select class="form-control select3" id="selectareinter">
+							<option value=" ">Seleccionar</option>
+							<option value="Ampliada">Ampliada</option>
+							<option value="Modificada">Modificada</option>
+							<option value="Adecuada">Adecuada</option>
+							<option value="Obra Nueva">Obra Nueva</option>
+							<option value="Reconocimiento">Reconocimiento</option>
+							<option value="Conservación/Restauración">Conservación/Restauración</option>
+							<option value="Reforzamiento est">Reforzamiento est</option>
+							<option value="Demolición">Demolición</option>
+							<option value="Cerramiento">Cerramiento</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-md-2">
+					<div class="form-group ">
+						<input class="form-control input3" maxlength="30" value="M2"
+							id="inputareainter"></input>
+					</div>
+				</div>
+
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addinfoareuso()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deleinfoareuso()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="row total">
-			<div class="col-md-2">
-				<div class="form-group ">
-					<input class="form-control" maxlength="30" value="Total" disabled></input>
+		<div class="row">
+			<div class="row total">
+				<div class="col-md-2">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value="Total" disabled></input>
+					</div>
 				</div>
-			</div>
+				
+				<div class="col-md-2 ">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value=""></input>
+					</div>
+				</div>
 
-			<div class="col-md-2 col-md-offset-3">
-				<div class="form-group ">
-					<input class="form-control" maxlength="30" value=""></input>
+				<div class="col-md-2 col-md-offset-1">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value=""></input>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-2 col-md-offset-2">
-				<div class="form-group ">
-					<input class="form-control" maxlength="30" value=""></input>
+				<div class="col-md-2 col-md-offset-2">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value=""></input>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<br>
-	<br>
+		<br> <br>
 
-	<div class="row">
-		<div class="col-md-3">
-
-			<label class="control-label" for=""> <spring:theme
-					code="delineacion.urbana.dec.areasusos.netuso" />
-			</label>
-		</div>
-		<div class="col-md-3">
-
-			<label class="control-label" for=""> <spring:theme
-					code="delineacion.urbana.dec.areasusos.aream2" />
-			</label>
-
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="row arearquitec">
+		<div class="row">
 			<div class="col-md-3">
-				<div class="form-group ">
-					<select class="form-control sel1">
 
-						<option value="Seleccionar">Seleccionar</option>
-						<option value="Lote">Lote</option>
-						<option value="Sótano">Sótano</option>
-						<option value="Semisotano(s)">Semisotano(s)</option>
-						<option value="Primer Piso">Primer Piso</option>
-						<option value="Pisos Restantes">Pisos Restantes</option>
-						<option value="Libre Primer Piso">Libre Primer Piso</option>
-					</select>
-				</div>
-
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.netuso" />
+				</label>
 			</div>
-
-
-
 			<div class="col-md-3">
-				<div class="form-group ">
-					<input class="form-control in1" maxlength="30"></input>
-				</div>
+
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.aream2" />
+				</label>
+
 			</div>
+		</div>
+
+		<div class="row">
+			<div class="row arearquitec">
+				<div class="col-md-3">
+					<div class="form-group ">
+						<select class="form-control sel1">
+
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="Lote">Lote</option>
+							<option value="Sótano">Sótano</option>
+							<option value="Semisotano(s)">Semisotano(s)</option>
+							<option value="Primer Piso">Primer Piso</option>
+							<option value="Pisos Restantes">Pisos Restantes</option>
+							<option value="Libre Primer Piso">Libre Primer Piso</option>
+						</select>
+					</div>
+
+				</div>
 
 
 
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addinfoareusotable2()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img>
+				<div class="col-md-3">
+					<div class="form-group ">
+						<input class="form-control in1" maxlength="30"></input>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addinfoareusotable2()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
+					</div>
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="row totalnew">
+				<div class="col-md-3">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value="Total" disabled></input>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value=""></input>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br> <br>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="delineacion.urbana.dec.areasusos.fechultabo" /></label> <input
+							id="" name="" class="form-control" aria-required="true"
+							type="text" value="" maxlength="240" disabled>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="delineacion.urbana.dec.areasusos.fechejec" /></label> <input
+							id="" name="" class="form-control" aria-required="true"
+							type="text" value="" maxlength="240" disabled>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
 	</div>
-
-	<div class="row">
-		<div class="row totalnew">
-			<div class="col-md-3">
-				<div class="form-group ">
-					<input class="form-control" maxlength="30" value="Total" disabled></input>
-				</div>
-			</div>
-
-			<div class="col-md-3">
-				<div class="form-group ">
-					<input class="form-control" maxlength="30" value=""></input>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<br>
-	<br>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.areasusos.fechultabo" /></label> <input
-					id="" name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.areasusos.fechejec" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-
-	</div>
-
-
 
 </form:form>
 <script>
@@ -299,18 +310,43 @@
 		}
 
 	}
-	
+
+	function deleinfoareuso() {
+		var i = $(".areasusos").length;
+		var val = i - 1;
+		if ($(".areasusos").length <= 3 && $(".areasusos").length > 1) {
+
+			$($(".areasusos")[val]).closest($($(".areasusos")[val]).remove());
+
+		} else if ($(".areasusos").length <= 1) {
+			alert("No puede eliminar todos los registros");
+		}
+	}
+
 	function addinfoareusotable2() {
 
 		if ($(".arearquitec").length < 3) {
-			$($(".arearquitec")[0]).parent()
-					.append($($(".arearquitec")[0]).clone());
+			$($(".arearquitec")[0]).parent().append(
+					$($(".arearquitec")[0]).clone());
 
 			$($(".arearquitec")[0]).parent().children().last().find(".sel1")
 					.val("")
 			$($(".arearquitec")[0]).parent().children().last().find(".in1")
 					.val("")
-			
+
+		}
+	}
+
+	function deleinfoareusotable2() {
+		var i = $(".arearquitec").length;
+		var val = i - 1;
+		if ($(".arearquitec").length <= 3 && $(".arearquitec").length > 1) {
+
+			$($(".arearquitec")[val]).closest(
+					$($(".arearquitec")[val]).remove());
+
+		} else if ($(".arearquitec").length <= 1) {
+			alert("No puede eliminar todos los registros");
 		}
 
 	}

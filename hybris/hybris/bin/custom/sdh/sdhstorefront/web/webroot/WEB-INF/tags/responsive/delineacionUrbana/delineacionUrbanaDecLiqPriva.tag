@@ -7,133 +7,134 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
-<div class="row">
-	<div class="col-md-6 headline">
-		<h2>
-			<span><spring:theme
-					code="delineacion.urbana.dec.liqpriv.title" /></span>
-		</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 headline">
+			<h2>
+				<span><spring:theme
+						code="delineacion.urbana.dec.liqpriv.title" /></span>
+			</h2>
+		</div>
 	</div>
+
+	<form:form>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.totobrcons" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.valorcons" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.impcargo" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.totvalorsanciones" /></label> <input
+						id="" name="" class="form-control" aria-required="true"
+						type="text" readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.totreten" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.salimpcar" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.salpag" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.valpag" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.intermora" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+				value="calcular">
+				<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
+			</button>
+		</div>
+
+	</form:form>
 </div>
-
-<form:form>
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.totobrcons" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.valorcons" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.impcargo" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.totvalorsanciones" /></label> <input
-					id="" name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.totreten" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.salimpcar" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.salpag" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.valpag" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.intermora" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<button  type="submit" class="btn btn-primary btn-lg" id=""
-			name="" value="calcular">
-			<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
-		</button>
-	</div>
-
-</form:form>
 

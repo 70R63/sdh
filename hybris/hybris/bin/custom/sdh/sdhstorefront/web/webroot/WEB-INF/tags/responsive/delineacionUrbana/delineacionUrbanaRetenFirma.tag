@@ -7,87 +7,87 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
-<div class="row">
-	<div class="col-md-6 headline">
-		<h3>
-			<span><spring:theme code="delineacion.urbana.dec.firm.title" /></span>
-		</h3>
-	</div>
-</div>
-
-<form:form>
+<div class="container">
 	<div class="row">
-		<div class="col-md-3">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.firm.tipiden" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-
-		<div class="col-md-3">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.firm.numide" /></label> <input id="" name=""
-					class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
-			</div>
-		</div>
-
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.firm.nombraz" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					value="" maxlength="240">
-			</div>
-		</div>
-		<div class="col-md-2">
-			<button action="" type="submit" class="btn btn-primary btn-lg" id=""
-				name="" value="calcular">
-				<spring:theme code="delineacion.urbana.dec.firm.firma" />
-			</button>
+		<div class="col-md-6 headline">
+			<h3>
+				<span><spring:theme code="delineacion.urbana.dec.firm.title" /></span>
+			</h3>
 		</div>
 	</div>
 
-
-
-<br>
-	<div class="container">
-		<div class="row">	
-
-			<div class=" col-md-3">
-				<button type="button" class="btn btn-primary btn-lg" id=""
-					name="" value="regresar" onclick="goBack()" >
-					<spring:theme code="delineacion.urbana.dec.firm.regresar" />
-				</button>
-			</div>
-			
-			<div class=" col-md-3">
-				<button type="submit" class="btn btn-primary btn-lg" id=""
-					name="" value="calcular">
-					<spring:theme code="delineacion.urbana.dec.firm.cancelar" />
-				</button>
-			</div>
-			
+	<form:form>
+		<div class="row">
 			<div class="col-md-3">
-				<button type="submit" class="btn btn-primary btn-lg" id=""
-					name="" value="retencion">
-					<spring:theme code="delineacion.urbana.dec.firm.prerete" />
-				</button>
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.firm.tipiden" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
 			</div>
-			
-			
+
 			<div class="col-md-3">
-				<button type="submit" class="btn btn-primary btn-lg" id=""
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.firm.numide" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="" maxlength="240">
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.firm.nombraz" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						value="" maxlength="240">
+				</div>
+			</div>
+			<div class="col-md-2">
+				<button action="" type="submit" class="btn btn-primary btn-lg" id=""
 					name="" value="calcular">
-					<spring:theme code="delineacion.urbana.dec.firm.paglin" />
+					<spring:theme code="delineacion.urbana.dec.firm.firma" />
 				</button>
 			</div>
 		</div>
-	</div>
 
-</form:form>
 
+
+		<br>
+		<div class="container">
+			<div class="row">
+
+				<div class=" col-md-3">
+					<button type="button" class="btn btn-primary btn-lg"
+						id="regresarButton" name="" value="regresar" onclick="goBack()">
+						<spring:theme code="delineacion.urbana.dec.firm.regresar" />
+					</button>
+				</div>
+
+				<div class=" col-md-3">
+					<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+						value="calcular">
+						<spring:theme code="delineacion.urbana.dec.firm.cancelar" />
+					</button>
+				</div>
+
+				<div class="col-md-3">
+					<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+						value="retencion">
+						<spring:theme code="delineacion.urbana.dec.firm.prerete" />
+					</button>
+				</div>
+
+
+				<div class="col-md-3">
+					<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+						value="calcular">
+						<spring:theme code="delineacion.urbana.dec.firm.paglin" />
+					</button>
+				</div>
+			</div>
+		</div>
+
+	</form:form>
+</div>

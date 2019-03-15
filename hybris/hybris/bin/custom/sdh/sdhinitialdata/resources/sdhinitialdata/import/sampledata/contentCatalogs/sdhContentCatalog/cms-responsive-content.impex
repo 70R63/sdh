@@ -127,7 +127,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 ; ; PresentarDeclaracionLink     ; PRESENTAR DECLARACION               ; "/contribuyentes/presentar-declaracion" ;;;;;
-; ; ListaDeclaracionFirmaLink    ; LISTA DECLARACION FIRMA             ; http://www.stateofrosebud.com/about ;;;;;
+; ; ListaDeclaracionFirmaLink    ; LISTA DECLARACION FIRMA             ; "/contribuyentes/declaraciones/listadeclafirmar";;;;;
 #->FIN dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGOS 04/01/2019
@@ -1828,6 +1828,26 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;delineacionUrbanaRadicadosComponent	;delineacionUrbanaRadicados Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaRadicados.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaRadicadosComponent					
 #->FIN dev-maria Agregar paginas para Delieneacion Retencion 14/03/2019	
 									
+#->INI dev-maria Agregar paginas para Lista de declaraciones a Firmar 15/03/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;declaraFirmarPage 		;Declaraciones Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/declaraciones/listadeclafirmar
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='declaraFirmarPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-declaraFirmarPage 		;SideContent				;															;SideContent-declaraFirmarPage						;;;
+								;						;BodyContent-declaraFirmarPage		;BodyContent				;															;BodyContent-declaraFirmarPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-declaraFirmarPage 	;Side Content Slot for Lista de Declaraciones			;true	;								;;;
+							;							;BodyContent-declaraFirmarPage	;Body Content Slot for Lista de Declaraciones			;true	;declaraFirmarPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;declaraFirmarPageComponent	;declaraFirmarPage Component	;/WEB-INF/views/responsive/pages/layout/declaraFirmarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;declaraFirmarPageComponent					
+#->FIN dev-maria Agregar paginas para Lista de declaraciones a firmar 15/03/2019										
 									
 									
 									
