@@ -9,23 +9,17 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-<spring:url value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina" var="declaracionURL"
-	htmlEscape="false" />
 
-<div class="container">
-	<sf:form action="${declaracionURL}" method="POST" modelAttribute="dataForm" id="forma">
-		<sobreTasaGasolina:decGasolinaGen />
-		<sobreTasaGasolina:decGasolinaInfDec />
-		<sobreTasaGasolina:decGasolinaTotales />
-		<sobreTasaGasolina:decGasolinaPagos />
-		<sobreTasaGasolina:decGasolinaDatRev />
-		<sobreTasaGasolina:decGasolinaInfFirma />
-	</sf:form>
-	<sobreTasaGasolina:decGasolinaPago />
-</div>
+<sobreTasaGasolina:infoPagoPSE />
+<body onload="myFunction()" />
+
 
 <script>
-function goBack() {
-  window.history.back();
-}
-</script> 
+	function myFunction() {
+
+		var form = document.getElementById("psePaymentForm");
+
+		form.submit();
+
+	}
+</script>

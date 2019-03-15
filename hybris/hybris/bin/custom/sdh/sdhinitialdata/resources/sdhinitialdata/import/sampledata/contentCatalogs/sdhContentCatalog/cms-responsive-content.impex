@@ -1489,6 +1489,23 @@ INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;nam
 INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
 				 					;							;DeclaracionGasolinaComponent	;DeclaracionGasolinaComponent	;/WEB-INF/views/responsive/pages/impuestoGasolina/declaracionGasolina.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;DeclaracionGasolinaComponent
 									
+#$productCatalogSDH=sdhProductCatalog
+#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Staged])[default=$productCatalogSDH:Staged] 
+#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
+INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;declaracion-gasolinaPagar 		;Declaracion Gasolina Pagar 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar
+
+INSERT_UPDATE ContentSlotForPage;$productCVSDH[unique=true];uid[unique=true]				;position[unique=true]	;page(uid,$productCVSDH)[unique=true][default='declaracion-gasolinaPagar']	;contentSlot(uid,$productCVSDH)[unique=true]		;;;
+								;						;SideContent-DeclaracionGasolinaPagar	;SideContent			;																		;SideContent-DeclaracionGasolinaPagar					;;;
+								;						;BodyContent-DeclaracionGasolinaPagar	;BodyContent			;																		;BodyContent-DeclaracionGasolinaPagar					;;;
+
+INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-DeclaracionGasolinaPagar	;Side Content Slot for Declaracion Gasolina	Pagar	;true	;								;;;
+			 				;							;BodyContent-DeclaracionGasolinaPagar	;Body Content Slot for Declaracion Gasolina Pagar	;true	;DeclaracionGasolinaComponentPagar	;;;
+
+INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
+				 					;							;DeclaracionGasolinaComponentPagar	;DeclaracionGasolinaComponentPagar	;/WEB-INF/views/responsive/pages/impuestoGasolina/declaracionGasolinaPagar.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;DeclaracionGasolinaComponentPagar
+									
 #->FIN dev-federico Agregar paginas para impuesto sobretasagasolina  17/01/2019
 
 #->INI dev-maria Agregar paginas para impuesto delineacionurbana  13/02/2019

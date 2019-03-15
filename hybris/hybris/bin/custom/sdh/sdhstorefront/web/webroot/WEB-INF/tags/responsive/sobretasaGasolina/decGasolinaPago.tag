@@ -8,8 +8,9 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/impuestos/pagoEnLinea/form" var="pagarURL"
-	htmlEscape="false" />
+<spring:url
+	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar"
+	var="pagarURL" htmlEscape="false" />
 
 
 
@@ -17,30 +18,22 @@
 
 
 	<sf:form action="${pagarURL}" method="POST"
-		modelAttribute="psePaymentForm" id="psePaymentForm">
-		
-	<a id="downloadHelper" target="_blank"></a> <input type="hidden"
-		id="numForm" value="${dataForm.numForm }">
-	<button type="button" class="btn btn-primary btn-lg" onclick="goBack()">
-		<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
-	</button>
-	<button id="gasolinaGeneraDeclaracionButton" type="button"
-		<c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if>
-		class="btn btn-primary btn-lg">
-		<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
-	</button>
-		
+		modelAttribute="detallePagoRequest" id="detallePagoRequest">
 
-		<sf:input path="tipoDeImpuesto" type="hidden" />
-		<sf:input path="anoGravable" type="hidden" />
-		<sf:input path="valorAPagar" type="hidden" />
-		<sf:input path="periodo" type="hidden" />
-		<sf:input path="tipoDeIdentificacion" type="hidden" />
-		<sf:input path="noIdentificacion" type="hidden" />
-		<sf:input path="numeroDeReferencia" type="hidden" />
-		<sf:input path="fechaLimiteDePago" type="hidden" />
-		<sf:input path="DV" type="hidden" />
-		<sf:input path="objPago" type="hidden" />
+		<a id="downloadHelper" target="_blank"></a>
+		<input type="hidden" id="numForm" value="${dataForm.numForm }">
+		<button type="button" class="btn btn-primary btn-lg"
+			onclick="goBack()">
+			<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
+		</button>
+		<button id="gasolinaGeneraDeclaracionButton" type="button"
+			<c:if test="${empty  dataForm.numForm}"> disabled="disabled"</c:if>
+			class="btn btn-primary btn-lg">
+			<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
+		</button>
+		<sf:input path="numBP" type="hidden" />
+		<sf:input path="clavePeriodo" type="hidden" />
+		<sf:input path="numObjeto" type="hidden" />
 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 			name="pagar" value="pagar">
 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
