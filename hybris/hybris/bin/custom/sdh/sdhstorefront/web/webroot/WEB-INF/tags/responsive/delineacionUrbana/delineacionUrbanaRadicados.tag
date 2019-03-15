@@ -73,7 +73,7 @@
 		<div class="col-md-4  ">
 			<div class="form-group">
 				<button class="btn btn-primary btn-lg" type="button"
-					id="retenciondeli" disabled="disabled">
+					id="retenciondelibutton" disabled="disabled">
 					<spring:theme code="delineacion.urbana.radicados.retencion" />
 				</button>
 			</div>
@@ -81,7 +81,7 @@
 		<div class="col-md-4  ">
 			<div class="form-group ">
 				<button class="btn btn-primary btn-lg" type="button"
-					id="declaradeli" disabled="disabled">
+					id="declaradelibutton" disabled="disabled">
 					<spring:theme code="delineacion.urbana.radicados.declaracion" />
 				</button>
 			</div>
@@ -93,8 +93,8 @@
 	function seleccion(selectObject) {
 		var x = selectObject.value;
 		var seleccionar = document.getElementById('selec');
-		var btndecla = document.getElementById('declaradeli');
-		var btnreten = document.getElementById('retenciondeli');
+		var btndecla = document.getElementById('declaradelibutton');
+		var btnreten = document.getElementById('retenciondelibutton');
 		
 		if (x == '2') {
 			seleccionar.checked = true;
