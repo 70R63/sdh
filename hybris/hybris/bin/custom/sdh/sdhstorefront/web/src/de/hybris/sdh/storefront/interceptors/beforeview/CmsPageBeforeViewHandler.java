@@ -100,7 +100,7 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 	public void beforeView(final HttpServletRequest request, final HttpServletResponse response, final ModelAndView modelAndView)
 	{
 		modelAndView.addObject("cmsSite", cmsSiteService.getCurrentSite());
-
+		modelAndView.addObject("currentURL", request.getRequestURI());
 		// Look for the page in the model
 		final AbstractPageModel page = updateCmsPageInModelAndView(request, modelAndView);
 
