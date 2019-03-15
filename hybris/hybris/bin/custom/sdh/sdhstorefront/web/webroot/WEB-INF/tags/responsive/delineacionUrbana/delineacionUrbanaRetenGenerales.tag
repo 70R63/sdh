@@ -40,6 +40,16 @@
 				</select>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label "><spring:theme
+						code="delineacion.urbana.dec.generales.radic" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly" value="" maxlength="240">
+			</div>
+		</div>
 
 
 		<div class="col-md-4">
@@ -52,54 +62,39 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.tiplicencia" /></label> <select
-					id="an" class="form-control " name=" " onchange=" ">
-					<option value="">Seleccionar</option>
+					id="an" class="form-control " name=" " onchange=" " disabled>
 					<option value="1">Licencia</option>
 					<option value="2">Reconocimiento</option>
 				</select>
 			</div>
 		</div>
 
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.modlicencia" /></label> <select
-					id="an" class="form-control " name=" " onchange=" " disabled>
-					<option value="">Seleccionar</option>
-				</select>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="form-group ">
-				<label class="control-label "><spring:theme
-						code="delineacion.urbana.dec.generales.cauexen" /></label> <select id=""
-					class="form-control " name=" " onchange=" ">
-					<option value="0">Seleccionar</option>
-					<option value="1">Obras Nuevas Vis Estratos 1, 2 Y 3</option>
-					<option value="2">Obras De Autocontrucción De Vivienda, De
-						Estratos 1 Y 2, Que No Excedan Los Topes Definidos Por La Ley Para
-						El Valor De La Vivienda De Interés Social</option>
-					<option value="3">Ampliaciones, Modificaciones,
-						Adecuaciones O Reparaciones Inmuebles Residenciales Estrato 1, 2 Y
-						3. Avalúo Catastral Inferior A 135 Smimv</option>
-					<option value="4">Obras Que Se Realicen Para Reparar
-						Inmuebles Afectados Por Actos Terroristas O Catástrofes Naturales</option>
-					<option value="5">Obras De Restauración Y Conservación En
-						Bien Inmueble De Interés Cultural</option>
-				</select>
-			</div>
-		</div>
+					id="an" class="form-control " name=" " onchange=" ">
 
+					<option value="Seleccionar">Seleccionar</option>
+					<option value="Adecuación">Adecuación</option>
+					<option value="Ampliación">Ampliación</option>
+					<option value="Cerramiento">Cerramiento</option>
+					<option value="Demolición">Demolición</option>
+					<option value="Modificación">Modificación</option>
+					<option value="Obra nueva">Obra nueva</option>
+					<option value="Reforma estructural">Reforma estructural</option>
+					<option value="Restauración">Restauración</option>
+				</select>
+
+			</div>
+		</div>
 	</div>
-	
-	
-	
-	
+
+
+
 </form:form>
 

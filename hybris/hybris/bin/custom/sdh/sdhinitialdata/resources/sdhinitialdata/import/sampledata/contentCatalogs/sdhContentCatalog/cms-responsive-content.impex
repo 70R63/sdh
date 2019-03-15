@@ -1789,6 +1789,27 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;certiDeclaracionesPageComponent	;certiDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/certiDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;certiDeclaracionesPageComponent					
 #->FIN dev-maria Agregar paginas para Certificacion Declaracion 07/03/2019					
+
+#->INI dev-maria Agregar paginas para Lista de Delieneacion Retencion 14/03/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;delineacionUrbanaRadicados 		;Declaraciones Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/delineacionurbana/retencion
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='delineacionUrbanaRadicados']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-delineacionUrbanaRadicados 		;SideContent				;															;SideContent-delineacionUrbanaRadicados						;;;
+								;						;BodyContent-delineacionUrbanaRadicados		;BodyContent				;															;BodyContent-delineacionUrbanaRadicados						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-delineacionUrbanaRadicados 	;Side Content Slot for Retenciones			;true	;								;;;
+							;							;BodyContent-delineacionUrbanaRadicados	;Body Content Slot for Retenciones			;true	;delineacionUrbanaRadicadosComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;delineacionUrbanaRadicadosComponent	;delineacionUrbanaRadicados Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaRadicados.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaRadicadosComponent					
+#->FIN dev-maria Agregar paginas para Delieneacion Retencion 14/03/2019	
 									
 									
 									

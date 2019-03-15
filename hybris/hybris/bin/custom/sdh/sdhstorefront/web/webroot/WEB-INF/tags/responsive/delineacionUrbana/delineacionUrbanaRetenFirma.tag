@@ -74,10 +74,11 @@
 			
 			<div class="col-md-3">
 				<button type="submit" class="btn btn-primary btn-lg" id=""
-					name="" value="calcular">
-					<spring:theme code="delineacion.urbana.dec.firm.predec" />
+					name="" value="retencion">
+					<spring:theme code="delineacion.urbana.dec.firm.prerete" />
 				</button>
 			</div>
+			
 			
 			<div class="col-md-3">
 				<button type="submit" class="btn btn-primary btn-lg" id=""

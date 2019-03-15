@@ -9,15 +9,19 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <sf:form>
-	<delineacionUrbana:delineacionUrbanaIDs />
-	<delineacionUrbana:delineacionUrbanaCDUs />
-	<delineacionUrbana:delineacionUrbanaBuscar />
+	<div class="container">
+	<delineacionUrbana:delineacionUrbanaRetenGenerales />
+	<delineacionUrbana:delineacionUrbanaRetenAreasUsos />
+	<delineacionUrbana:delineacionUrbanaRetenLiqPriva />
+	<delineacionUrbana:delineacionUrbanaRetenFirma />
+</div>
 </sf:form>
 
-<delineacionUrbana:delineacionUrbanaAdicionales />
-<delineacionUrbana:delineacionUrbanaBasicos />
-<delineacionUrbana:delineacionUrbanaDecAreasUsos />
-<delineacionUrbana:delineacionUrbanaDecFirma />
-<delineacionUrbana:delineacionUrbanaDecGenerales />
-<delineacionUrbana:delineacionUrbanaDecLiqPriva />
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
+
 
