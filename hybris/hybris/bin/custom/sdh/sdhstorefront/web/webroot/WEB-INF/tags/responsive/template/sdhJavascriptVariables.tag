@@ -76,6 +76,9 @@
 			
 			ACC.certificacionPagosGenerarURL= "<c:url value='/contribuyentes/consultas/certipagos' />"
 			
+			ACC.declaracionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/declaracion' />"
+			
+			ACC.retencionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/retencion' />"
 			
 			ACC.currentURL = "${currentURL}";
 			
