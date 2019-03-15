@@ -127,9 +127,9 @@ public class PSEPaymentController extends AbstractPageController
 		final List<SelectAtomValue> anoGravable = Arrays.asList(
 				new SelectAtomValue("2019", "2019"),
 				new SelectAtomValue("2018", "2018"),
-				new SelectAtomValue("2017", "2017"), new SelectAtomValue("2017", "2016"), new SelectAtomValue("2017", "2015"),
-				new SelectAtomValue("2017", "2014"), new SelectAtomValue("2017", "2013"), new SelectAtomValue("2017", "2012"),
-				new SelectAtomValue("2017", "2011"));
+				new SelectAtomValue("2017", "2017"), new SelectAtomValue("2016", "2016"), new SelectAtomValue("2015", "2015"),
+				new SelectAtomValue("2014", "2014"), new SelectAtomValue("2013", "2013"), new SelectAtomValue("2012", "2012"),
+				new SelectAtomValue("2011", "2011"));
 
 		return anoGravable;
 	}
