@@ -19,7 +19,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
@@ -143,7 +142,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
-			declaPublicidadForm.setIdNumber(customerData.getDocumentType());
+			declaPublicidadForm.setIdNumber(customerData.getDocumentNumber());
 			declaPublicidadForm.setIdType(customerData.getDocumentType());
 			declaPublicidadForm.setName(customerData.getCompleteName());
 			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());

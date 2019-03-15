@@ -76,6 +76,68 @@
 			
 			ACC.certificacionPagosGenerarURL= "<c:url value='/contribuyentes/consultas/certipagos' />"
 			
+			
+			ACC.currentURL = "${currentURL}";
+			
+			ACC.hideMenuInformacionReportada = false;
+			ACC.hideMenuImpuestos = false;
+			ACC.hideMenuBuzon = false;
+			ACC.hideMenuTramites = false;
+			ACC.hideMenuFacturacion = false;
+			ACC.hideMenuDeclaraciones = false;
+			ACC.hideMenuPagos = false;
+			ACC.hideMenuConsultas = false;
+			
+			ACC.hideSubmenuDelineacionUrbana = false;
+			ACC.hideSubmenuICA = false;
+			ACC.hideSubmenuPredial = false;
+			ACC.hideSubmenuPublicidadExt = false;
+			ACC.hideSubmenuVehicular = false;
+			ACC.hideSubmenuGasolina = false;
+			
+			<c:if test="${(hasCORol and fn:contains(currentURL, 'contribuyentes')) or (hasCORol and fn:contains(currentURL, 'pagoEnLinea'))}">
+				ACC.hideMenuInformacionReportada = true;
+				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
+					ACC.hideSubmenuDelineacionUrbana = true;
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bIca != 'X'}">
+					ACC.hideSubmenuICA = true;
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bPredial != 'X'}">
+					ACC.hideSubmenuPredial = true;
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bPublicidadExt != 'X'}">
+					ACC.hideSubmenuPublicidadExt = true;
+				</c:if>
+				
+				<c:if test = "${uiMenuForm.bVehicular != 'X'}">
+					ACC.hideSubmenuVehicular = true;
+				</c:if>
+				<c:if test = "${uiMenuForm.bSobreGasolina != 'X'}">
+					ACC.hideSubmenuGasolina = true;
+				</c:if>	
+			</c:if>
+			<c:if test="${hasAARol }">
+			</c:if>
+			<c:if test="${hasTARol }">
+			</c:if>
+			<c:if test="${hasARRol }">
+			</c:if>
+			<c:if test="${hasRIRol and fn:contains(currentURL, 'reportantes')}">
+				ACC.hideMenuImpuestos = true;
+				ACC.hideMenuBuzon = true;
+				ACC.hideMenuTramites = true;
+				ACC.hideMenuFacturacion = true;
+				ACC.hideMenuDeclaraciones = true;
+				ACC.hideMenuPagos = true;
+				ACC.hideMenuConsultas = true;
+			</c:if>
+			
+			
+			
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},
 				{'isocode':'AF','name':'Afganistán'},
