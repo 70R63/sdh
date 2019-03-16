@@ -127,9 +127,9 @@ public class PSEPaymentController extends AbstractPageController
 		final List<SelectAtomValue> anoGravable = Arrays.asList(
 				new SelectAtomValue("2019", "2019"),
 				new SelectAtomValue("2018", "2018"),
-				new SelectAtomValue("2017", "2017"), new SelectAtomValue("2017", "2016"), new SelectAtomValue("2017", "2015"),
-				new SelectAtomValue("2017", "2014"), new SelectAtomValue("2017", "2013"), new SelectAtomValue("2017", "2012"),
-				new SelectAtomValue("2017", "2011"));
+				new SelectAtomValue("2017", "2017"), new SelectAtomValue("2016", "2016"), new SelectAtomValue("2015", "2015"),
+				new SelectAtomValue("2014", "2014"), new SelectAtomValue("2013", "2013"), new SelectAtomValue("2012", "2012"),
+				new SelectAtomValue("2011", "2011"));
 
 		return anoGravable;
 	}
@@ -217,7 +217,9 @@ public class PSEPaymentController extends AbstractPageController
 	public String pseResponse(final Model model, final RedirectAttributes redirectModel,
 			@RequestParam(required = false, defaultValue = "", value = "ticketId")
 			final String ticketId, @ModelAttribute("error")
-			final String error)
+			final String error, @ModelAttribute("psePaymentFormResp")
+			final PSEPaymentForm psePaymentFormResp, @ModelAttribute("estatus")
+			final String estatus)
 			throws CMSItemNotFoundException
 	{
 
@@ -252,6 +254,11 @@ public class PSEPaymentController extends AbstractPageController
 			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 		}
 
+		LOG.info("estatus: " + estatus);
+		if (estatus == "impreso")
+		{
+			model.addAttribute("psePaymentForm", psePaymentFormResp);
+		}
 
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("disableFields", "true");
@@ -281,8 +288,9 @@ public class PSEPaymentController extends AbstractPageController
 
 			LOG.info("getPUBLICIDAD: " + controllerPseConstants.getPUBLICIDAD());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
+			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
 
-			if (psePaymentForm.getImpuesto().toUpperCase().endsWith("PUBLICIDAD"))
+			if (psePaymentForm.getTipoDeImpuesto().toUpperCase().equals(controllerPseConstants.getPUBLICIDAD()))
 			{
 				final List<SDHExteriorPublicityTaxData> exteriorPublicityTaxList = customerData.getExteriorPublicityTaxList();
 
@@ -320,8 +328,9 @@ public class PSEPaymentController extends AbstractPageController
 
 			LOG.info("getGASOLINA: " + controllerPseConstants.getGASOLINA());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
+			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
 
-			if (psePaymentForm.getImpuesto().toUpperCase().endsWith("GASOLINA"))
+			if (psePaymentForm.getTipoDeImpuesto().toUpperCase().equals(controllerPseConstants.getGASOLINA()))
 			{
 				final List<SDHGasTaxData> GasTaxList = customerData.getGasTaxList();
 
@@ -376,6 +385,9 @@ public class PSEPaymentController extends AbstractPageController
 				final ImprimePagoResponse imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
 
 				redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
+				redirectModel.addFlashAttribute("psePaymentFormResp", psePaymentForm);
+				redirectModel.addFlashAttribute("estatus", "impreso");
+
 			}
 		}
 		catch (final Exception e)
