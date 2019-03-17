@@ -13,7 +13,7 @@ import java.util.List;
  * @author hybris
  *
  */
-public class CalculaGasolinaRequest extends ConsultaGasolinaRequest
+public class CalculaGasolinaRequest
 {
 
 	private String numBP;

@@ -19,19 +19,28 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.CalcPublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
@@ -58,6 +67,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
 
@@ -78,7 +88,20 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			+ "/contribuyentes/publicidadexterior/declaracion";
 	private static final String REDIRECT_TO_DETALLE_PUBLICIDAD_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes2/publicidadexterior/detalle";
+	private static final String DECLARACIONES_PAGAR_CMS_PAGE = "preparacion-PagarPSE";
+	private static final String REDIRECT_TO_DECLARACIONES_PAGAR_PAGE = REDIRECT_PREFIX + "/impuestos/preparacion-PagarPSE";
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "sdhDetalleGasolina")
+	SDHDetalleGasolina sdhDetalleGasolinaWS;
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -119,7 +142,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	public String showView(final Model model, @RequestParam(required = true, value = "numResolu")
 	final String numResolu, @RequestParam(required = true, value = "anoGravable")
 	final String anoGravable, @RequestParam(required = true, value = "tipoValla")
-	final String tipoValla) throws CMSItemNotFoundException
+	final String tipoValla, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
@@ -204,6 +227,43 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
 
+		//informacion para PSE
+
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		final String mensajeError = "";
+		String[] mensajesError;
+
+
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		{
+			infoPreviaPSE.setAnoGravable(anoGravable);
+			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
+			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+			infoPreviaPSE.setNumBP(numBP);
+			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoGravable));
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoPublicidad(detalleContribuyente));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getPUBLICIDAD());
+		}
+		else
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+		}
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+		//informacion para PSE
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
@@ -262,7 +322,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			calcPublicidadResponse = mapper.readValue(sdhCalPublicidadService.calcPublicidad(calcPublicidadRequest), CalcPublicidadResponse.class);
+			calcPublicidadResponse = mapper.readValue(sdhCalPublicidadService.calcPublicidad(calcPublicidadRequest),
+					CalcPublicidadResponse.class);
 
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 

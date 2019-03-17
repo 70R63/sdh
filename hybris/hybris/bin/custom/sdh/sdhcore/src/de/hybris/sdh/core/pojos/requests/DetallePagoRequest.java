@@ -7,7 +7,7 @@ package de.hybris.sdh.core.pojos.requests;
  * @author hybris
  *
  */
-public class DetallePagoRequest extends ConsultaGasolinaRequest
+public class DetallePagoRequest
 {
 	private String numBP;
 	private String clavePeriodo;

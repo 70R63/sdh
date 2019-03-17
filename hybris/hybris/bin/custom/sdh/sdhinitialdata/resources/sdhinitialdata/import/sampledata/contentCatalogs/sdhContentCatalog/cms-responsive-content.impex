@@ -1454,7 +1454,6 @@ INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];u
 # USE CTRL-SPACE for type-ahead support 
 $productCatalogSDH=sdhProductCatalog
 $contentCatalogSDH=sdhContentCatalog
-#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Staged])[default=$productCatalogSDH:Staged] 
 $productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
 
 INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
@@ -1471,9 +1470,6 @@ INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;nam
 INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
 				 					;							;SobretasaGasolinaComponent	;SobretasaGasolinaComponent	;/WEB-INF/views/responsive/pages/impuestoGasolina/sobretasaGasolina.jsp					;ViewOrderAction:$contentCatalogSDH:Staged	;SobretasaGasolinaComponent
 
-#$productCatalogSDH=sdhProductCatalog
-#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Staged])[default=$productCatalogSDH:Staged] 
-#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
 
 INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;declaracion-gasolina 		;Declaracion Gasolina 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/contribuyentes/sobretasa-gasolina/declaracion-gasolina
@@ -1488,23 +1484,21 @@ INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;nam
 
 INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
 				 					;							;DeclaracionGasolinaComponent	;DeclaracionGasolinaComponent	;/WEB-INF/views/responsive/pages/impuestoGasolina/declaracionGasolina.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;DeclaracionGasolinaComponent
-									
-#$productCatalogSDH=sdhProductCatalog
-#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Staged])[default=$productCatalogSDH:Staged] 
-#$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
-INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;declaracion-gasolinaPagar 		;Declaracion Gasolina Pagar 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar
+																		
 
-INSERT_UPDATE ContentSlotForPage;$productCVSDH[unique=true];uid[unique=true]				;position[unique=true]	;page(uid,$productCVSDH)[unique=true][default='declaracion-gasolinaPagar']	;contentSlot(uid,$productCVSDH)[unique=true]		;;;
-								;						;SideContent-DeclaracionGasolinaPagar	;SideContent			;																		;SideContent-DeclaracionGasolinaPagar					;;;
-								;						;BodyContent-DeclaracionGasolinaPagar	;BodyContent			;																		;BodyContent-DeclaracionGasolinaPagar					;;;
+INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;preparacionPagarPSE 		;Preparacion Pagar PSE 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/impuestos/preparacionPagarPSE
+
+INSERT_UPDATE ContentSlotForPage;$productCVSDH[unique=true];uid[unique=true]				;position[unique=true]	;page(uid,$productCVSDH)[unique=true][default='preparacionPagarPSE']	;contentSlot(uid,$productCVSDH)[unique=true]		;;;
+								;						;SideContent-preparacionPagarPSE	;SideContent			;																		;SideContent-preparacionPagarPSE					;;;
+								;						;BodyContent-preparacionPagarPSE	;BodyContent			;																		;BodyContent-preparacionPagarPSE					;;;
 
 INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-DeclaracionGasolinaPagar	;Side Content Slot for Declaracion Gasolina	Pagar	;true	;								;;;
-			 				;							;BodyContent-DeclaracionGasolinaPagar	;Body Content Slot for Declaracion Gasolina Pagar	;true	;DeclaracionGasolinaComponentPagar	;;;
+			 				;							;SideContent-preparacionPagarPSE	;Side Content Slot for Preparacion Pagar PSE	;true	;								;;;
+			 				;							;BodyContent-preparacionPagarPSE	;Body Content Slot for Preparacion Pagar PSE	;true	;preparacionPagarPSEComponent	;;;
 
 INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
-				 					;							;DeclaracionGasolinaComponentPagar	;DeclaracionGasolinaComponentPagar	;/WEB-INF/views/responsive/pages/impuestoGasolina/declaracionGasolinaPagar.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;DeclaracionGasolinaComponentPagar
+				 					;							;preparacionPagarPSEComponent	;preparacionPagarPSEComponent	;/WEB-INF/views/responsive/pages/layout/preparacionPagarPSE.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;preparacionPagarPSEComponent
 									
 #->FIN dev-federico Agregar paginas para impuesto sobretasagasolina  17/01/2019
 

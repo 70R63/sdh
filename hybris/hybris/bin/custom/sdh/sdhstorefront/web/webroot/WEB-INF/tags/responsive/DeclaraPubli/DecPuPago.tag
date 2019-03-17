@@ -12,11 +12,16 @@
 	var="CalculodeclaracionUrl" htmlEscape="false" />
 <spring:url value="/contribuyentes/publicidadexterior/declaracion"
 	var="CalculodeclaracionUrl2" htmlEscape="false" />
-
+<spring:url
+	value="/impuestos/preparaPagoPSE"
+	var="pagarURL" htmlEscape="false" />
+	
 
 <input type="hidden" id="numForm" name="numForm"
 	value="${declaPublicidadForm.numform }" />
 <div class="row">
+	<sf:form action="${pagarURL}" method="POST"
+		modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 
 	<div class="col-md-4 text-right">
 		<div class="form-group">
@@ -40,10 +45,24 @@
 
 	<div class="col-md-2">
 	
-			<button id="pagarlinea" class="btn btn-primary btn-lg"
-				name="pagarlinea" type="button">
-				<spring:theme code="declaracion.publicidad.button.pago.linea" />
-			</button>
+		<sf:hidden path="tipoImpuesto" />
+		<sf:hidden path="numBP" />
+		<sf:hidden path="numDoc" />
+		<sf:hidden path="tipoDoc" />
+		<sf:hidden path="anoGravable" />
+		<sf:hidden path="periodo" />
+		<sf:hidden path="clavePeriodo" />
+		<sf:hidden path="dv" />
+		<sf:hidden path="numObjeto" />
+<!-- 			<button id="pagarlinea" class="btn btn-primary btn-lg" -->
+<!-- 				name="pagarlinea" type="button"> -->
+<%-- 				<spring:theme code="declaracion.publicidad.button.pago.linea" /> --%>
+<!-- 			</button>  -->
+		    <sf:button class="btn btn-primary btn-lg" type="submit" id="action"
+			name="pagar" value="pagar">
+			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
+		</sf:button>
 		</div>
-</div>
+</sf:form>
+
 </div>

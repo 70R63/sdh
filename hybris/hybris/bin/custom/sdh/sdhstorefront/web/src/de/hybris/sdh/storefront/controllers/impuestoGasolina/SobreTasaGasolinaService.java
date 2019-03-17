@@ -19,6 +19,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 
 import java.util.ArrayList;
@@ -777,13 +778,26 @@ public class SobreTasaGasolinaService
 	 * @param periodo
 	 * @return
 	 */
-	public String perpararPeriodoPago(final String anoGravable, final String periodo)
+	public String perpararPeriodoMensualPago(final String anoGravable, final String periodo)
 	{
 		String periodoConvertidoPagar = "";
 
 		if (anoGravable != null)
 		{
 			periodoConvertidoPagar = anoGravable.substring(2) + periodo;
+		}
+
+
+		return periodoConvertidoPagar;
+	}
+
+	public String perpararPeriodoAnualPago(final String anoGravable)
+	{
+		String periodoConvertidoPagar = "";
+
+		if (anoGravable != null)
+		{
+			periodoConvertidoPagar = anoGravable.substring(2) + "A1";
 		}
 
 
@@ -819,7 +833,7 @@ public class SobreTasaGasolinaService
 	 * @param declarante
 	 * @return
 	 */
-	public String prepararNumObjeto(final SDHValidaMailRolResponse detalleContribuyente)
+	public String prepararNumObjetoGasolina(final SDHValidaMailRolResponse detalleContribuyente)
 	{
 		String numObjeto = "";
 
@@ -827,6 +841,20 @@ public class SobreTasaGasolinaService
 				&& detalleContribuyente.getGasolina().get(0) != null)
 		{
 			numObjeto = detalleContribuyente.getGasolina().get(0).getNumObjeto();
+		}
+
+
+		return numObjeto;
+	}
+
+	public String prepararNumObjetoPublicidad(final SDHValidaMailRolResponse detalleContribuyente)
+	{
+		String numObjeto = "";
+
+		if (detalleContribuyente != null && detalleContribuyente.getPublicidadExt() != null
+				&& detalleContribuyente.getPublicidadExt().get(0) != null)
+		{
+			numObjeto = detalleContribuyente.getPublicidadExt().get(0).getNumObjeto();
 		}
 
 
@@ -857,28 +885,38 @@ public class SobreTasaGasolinaService
 	 * @param gasolina
 	 * @return
 	 */
-	public List<SelectAtomValue> prepararCatalogoPeriodoPSE(final String gasolina)
+	public List<SelectAtomValue> prepararCatalogoPeriodoPSE(final String tipoImpuesto)
 	{
 		final List<SelectAtomValue> periodo = new ArrayList<SelectAtomValue>();
 		final int limite = Integer.parseInt(configurationService.getConfiguration().getString(confCantidadAnioGravableBusqueda));
 		final int anioActual = obtenerAnoGravableActual();
 
-		for (int i = 0; i < limite; i++)
+		if (tipoImpuesto.equals(new ControllerPseConstants().getGASOLINA()))
 		{
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "01"), "Enero"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "02"), "Febrero"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "03"), "Marzo"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "04"), "Abril"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "05"), "Mayo"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "06"), "Junio"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "07"), "Julio"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "08"), "Agosto"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "09"), "Septiembre"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "10"), "Octubre"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "11"), "Noviembre"));
-			periodo.add(new SelectAtomValue(perpararPeriodoPago(Integer.toString(anioActual - i), "12"), "Diciembre"));
+			for (int i = 0; i < limite; i++)
+			{
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "01"), "Enero"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "02"), "Febrero"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "03"), "Marzo"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "04"), "Abril"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "05"), "Mayo"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "06"), "Junio"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "07"), "Julio"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "08"), "Agosto"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "09"), "Septiembre"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "10"), "Octubre"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "11"), "Noviembre"));
+				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "12"), "Diciembre"));
+			}
 		}
-
+		if (tipoImpuesto.equals(new ControllerPseConstants().getPUBLICIDAD()))
+		{
+			for (int i = 0; i < limite; i++)
+			{
+				periodo.add(new SelectAtomValue(perpararPeriodoAnualPago(Integer.toString(anioActual - i)),
+						"Año " + Integer.toString(anioActual - i)));
+			}
+		}
 
 		return periodo;
 	}
@@ -1074,6 +1112,24 @@ public class SobreTasaGasolinaService
 		}
 
 		return mensajeError;
+	}
+
+
+	/**
+	 * @param anograv
+	 * @return
+	 */
+	public String prepararPeriodoAnualPago(final String anoGravable)
+	{
+		String periodoConvertidoPagar = "";
+
+		if (anoGravable != null)
+		{
+			periodoConvertidoPagar = anoGravable.substring(2) + "A1";
+		}
+
+
+		return periodoConvertidoPagar;
 	}
 
 

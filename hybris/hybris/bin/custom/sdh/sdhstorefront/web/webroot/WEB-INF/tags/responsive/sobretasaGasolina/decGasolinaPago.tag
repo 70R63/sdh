@@ -31,9 +31,9 @@
 			class="btn btn-primary btn-lg">
 			<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
 		</button>
-		<sf:input path="numBP" type="hidden" />
-		<sf:input path="clavePeriodo" type="hidden" />
-		<sf:input path="numObjeto" type="hidden" />
+		<sf:hidden path="numBP" />
+		<sf:hidden path="clavePeriodo" />
+		<sf:hidden path="numObjeto" />
 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 			name="pagar" value="pagar">
 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />

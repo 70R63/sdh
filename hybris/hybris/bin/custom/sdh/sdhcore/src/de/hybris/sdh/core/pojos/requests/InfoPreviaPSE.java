@@ -7,15 +7,35 @@ package de.hybris.sdh.core.pojos.requests;
  * @author hybris
  *
  */
-public class DetalleGasolinaRequest
+public class InfoPreviaPSE
 {
+	private String tipoImpuesto;
 	private String numBP;
 	private String numDoc;
 	private String tipoDoc;
 	private String anoGravable;
 	private String periodo;
+	private String clavePeriodo;
+	private String dv;
+	private String numObjeto;
 
 
+	/**
+	 * @return the tipoImpuesto
+	 */
+	public String getTipoImpuesto()
+	{
+		return tipoImpuesto;
+	}
+
+	/**
+	 * @param tipoImpuesto
+	 *           the tipoImpuesto to set
+	 */
+	public void setTipoImpuesto(final String tipoImpuesto)
+	{
+		this.tipoImpuesto = tipoImpuesto;
+	}
 	/**
 	 * @return the numBP
 	 */
@@ -32,7 +52,6 @@ public class DetalleGasolinaRequest
 	{
 		this.numBP = numBP;
 	}
-
 	/**
 	 * @return the numDoc
 	 */
@@ -49,7 +68,6 @@ public class DetalleGasolinaRequest
 	{
 		this.numDoc = numDoc;
 	}
-
 	/**
 	 * @return the tipoDoc
 	 */
@@ -66,7 +84,6 @@ public class DetalleGasolinaRequest
 	{
 		this.tipoDoc = tipoDoc;
 	}
-
 	/**
 	 * @return the anoGravable
 	 */
@@ -83,7 +100,6 @@ public class DetalleGasolinaRequest
 	{
 		this.anoGravable = anoGravable;
 	}
-
 	/**
 	 * @return the periodo
 	 */
@@ -101,25 +117,58 @@ public class DetalleGasolinaRequest
 		this.periodo = periodo;
 	}
 
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
+	/**
+	 * @return the clavePeriodo
 	 */
-	@Override
-	public String toString()
+	public String getClavePeriodo()
 	{
-		final StringBuilder stringBuilder = new StringBuilder();
-
-		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"numDoc\":\"" + this.getNumDoc() + "\",");
-		stringBuilder.append("\"tipoDoc\":\"" + this.getTipoDoc() + "\",");
-		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\",");
-		stringBuilder.append("\"periodo\":\"" + this.getPeriodo() + "\"");
-		stringBuilder.append("}");
-		// XXX Auto-generated method stub
-		return stringBuilder.toString();
+		return clavePeriodo;
 	}
+
+	/**
+	 * @param clavePeriodo
+	 *           the clavePeriodo to set
+	 */
+	public void setClavePeriodo(final String clavePeriodo)
+	{
+		this.clavePeriodo = clavePeriodo;
+	}
+
+	/**
+	 * @return the dv
+	 */
+	public String getDv()
+	{
+		return dv;
+	}
+
+	/**
+	 * @param dv
+	 *           the dv to set
+	 */
+	public void setDv(final String dv)
+	{
+		this.dv = dv;
+	}
+
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
+	}
+
+
+
+
 }
