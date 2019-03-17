@@ -84,10 +84,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	private static final String SOBRETASA_GASOLINA_CMS_PAGE = "sobretasa-gasolina";
 	private static final String REDIRECT_TO_SOBRETASA_GASOLINA_PAGE = REDIRECT_PREFIX + "/contribuyentes/sobretasa-gasolina";
 	private static final String DECLARACIONES_GASOLINA_CMS_PAGE = "declaracion-gasolina";
-	private static final String DECLARACIONES_GASOLINA_PAGAR_CMS_PAGE = "declaracion-gasolinaPagar";
+	private static final String DECLARACIONES_PAGAR_CMS_PAGE = "preparacionPagarPSE";
 	private static final String REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/sobretasa-gasolina/declaracion-gasolina";
-	private static final String REDIRECT_TO_DECLARACIONES_GASOLINA_PAGAR_PAGE = REDIRECT_PREFIX
+	private static final String REDIRECT_TO_DECLARACIONES_PAGAR_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar";
 	private static final String REDIRECT_CMS_SITE_PAGE_PAGO_PSE_FORM = FORWARD_PREFIX + "/impuestos/pagoEnLinea/form";
 
@@ -518,10 +518,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				dataForm.setDeclarante(declarante);
 				dataForm.setCatalogosSo(catalogos);
 
-				clavePeriodo = gasolinaService.perpararPeriodoPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+				clavePeriodo = gasolinaService.perpararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
 				detallePagoRequest.setNumBP(numBP);
 				detallePagoRequest.setClavePeriodo(clavePeriodo);
-				detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjeto(detalleContribuyente));
+				detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjetoGasolina(detalleContribuyente));
 			}
 			else
 			{
@@ -697,19 +697,18 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String handleGET_PAG(@ModelAttribute("dataForm")
-	final SobreTasaGasolinaForm dataForm, @ModelAttribute("psePaymentForm")
-	final PSEPaymentForm psePaymentForm, final BindingResult bindingResult, final Model model,
+	public String handleGET_PAG(
+			@ModelAttribute("psePaymentForm")
+			final PSEPaymentForm psePaymentForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes, final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina Pagar GET --------------------------");
 
-		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("psePaymentForm", psePaymentForm);
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_PAGAR_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACIONES_GASOLINA_PAGAR_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_PAGAR_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACIONES_PAGAR_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
@@ -729,21 +728,11 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina Pagar POST --------------------------");
-
-		List<DetGasInfoDeclaraResponse> infoDeclaraDefault;
-		List<DetGasRevisorDeclaranteResponse> revisorDeclaranteDefault;
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		final CalculaGasolinaRequest consultaGasolinaRequest = new CalculaGasolinaRequest();
-		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
-		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
-		final CalculaGasolinaResponse calculaGasolinaResponse;
 		String[] mensajesError;
 		final int claveError;
-		final List infoDeclaraDefaultTMP;
 		String mensajeError = "";
-
-
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
@@ -759,13 +748,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final String tipoDoc = "";
 		final String anoGravable = "";
 		final String periodo = "";
-		final String numForm = "";
-		final String opcionUso = "";
-		final String calidResp = "";
-		infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
-		infoDeclaraDefault.add(new DetGasInfoDeclaraResponse());
-		revisorDeclaranteDefault = new ArrayList<DetGasRevisorDeclaranteResponse>();
-		revisorDeclaranteDefault.add(new DetGasRevisorDeclaranteResponse());
+
 
 
 		numBP = customerModel.getNumBP();
@@ -776,10 +759,10 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
-			clavePeriodo = gasolinaService.perpararPeriodoPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+			clavePeriodo = gasolinaService.perpararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
 			detallePagoRequest.setNumBP(numBP);
 			detallePagoRequest.setClavePeriodo(clavePeriodo);
-			detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjeto(detalleContribuyente));
+			detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjetoGasolina(detalleContribuyente));
 
 			System.out.println("Request de consulPago: " + detallePagoRequest);
 			detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
@@ -820,7 +803,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 
 
-		return REDIRECT_TO_DECLARACIONES_GASOLINA_PAGAR_PAGE;
+		return REDIRECT_TO_DECLARACIONES_PAGAR_PAGE;
 	}
 
 }

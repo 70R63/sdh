@@ -20,8 +20,8 @@
 					<DeclaraPubli:DecPuInfoValla />
 					<DeclaraPubli:DecPuTotalPag />
 					<DeclaraPubli:DecPuFirmDecl />
-					<DeclaraPubli:DecPuPago />
 				</form:form>
+				<DeclaraPubli:DecPuPago />
 			</div>
 		</div>
 	</div>
