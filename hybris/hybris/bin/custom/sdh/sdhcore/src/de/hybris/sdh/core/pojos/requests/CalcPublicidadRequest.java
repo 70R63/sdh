@@ -423,7 +423,7 @@ public class CalcPublicidadRequest
 		stringBuilder.append("\"tipoIDdeclara\":\"" +((StringUtils.isBlank(this.getTipoIDdeclara())) ? "" : this.getTipoIDdeclara())  + "\",");
 		stringBuilder.append(
 				"\"IDdeclarante\":\"" + ((StringUtils.isBlank(this.getIDdeclarante())) ? "" : this.getIDdeclarante()) + "\",");
-		stringBuilder.append("\"IDdeclarante\":\"" + ((StringUtils.isBlank(this.getNumForm())) ? "" : this.getNumForm()) + "\"");
+		stringBuilder.append("\"numForm\":\"" + ((StringUtils.isBlank(this.getNumForm())) ? "" : this.getNumForm()) + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
