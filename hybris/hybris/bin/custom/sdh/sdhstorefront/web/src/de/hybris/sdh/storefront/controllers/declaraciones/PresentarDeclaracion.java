@@ -60,7 +60,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 	//Example Controller
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.presendecla";
 
 	// CMS Pages
 	private static final String PRESENTAR_DECLARACION_CMS_PAGE = "presentar-declaracion";

@@ -9,15 +9,66 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <sf:form>
-	<delineacionUrbana:delineacionUrbanaIDs />
-	<delineacionUrbana:delineacionUrbanaCDUs />
-	<delineacionUrbana:delineacionUrbanaBuscar />
+
+	<delineacionUrbana:delineacionUrbanaRetenGenerales />
+	<delineacionUrbana:delineacionUrbanaRetenAreasUsos />
+	<delineacionUrbana:delineacionUrbanaRetenLiqPriva />
+	<delineacionUrbana:delineacionUrbanaRetenFirma />
+
 </sf:form>
 
-<delineacionUrbana:delineacionUrbanaAdicionales />
-<delineacionUrbana:delineacionUrbanaBasicos />
-<delineacionUrbana:delineacionUrbanaDecAreasUsos />
-<delineacionUrbana:delineacionUrbanaDecFirma />
-<delineacionUrbana:delineacionUrbanaDecGenerales />
-<delineacionUrbana:delineacionUrbanaDecLiqPriva />
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+	
+	function obranueva(selectObject){
+	
+			var value = selectObject.value;
+			var areaintervenida = document.getElementById('selectareinter');
+			var inareainter = document.getElementById('inputareainter');
+			
+			if (value == '6'){
+				
+				areaintervenida.disabled=false;
+				inareainter.disabled=false;
+				
+			}else{
+				areaintervenida.disabled=true;
+				inareainter.disabled=true;
+			}
+	}
+	
+	function costoshabil(selectObject){
+		
+		var value = selectObject.value;
+		var cosdir = document.getElementById('codstdirec');
+		var cosind = document.getElementById('costindirec');
+		var metcons = document.getElementById('metconstr');
+		var metvent = document.getElementById('metventa');
+		var valcons = document.getElementById('valconstr');
+		var valapr = document.getElementById('valaprox');
+		
+		if (value == '1'){
+			cosdir.disabled=true;
+			cosind.disabled=true;
+			metcons.disabled=true;
+			metvent.disabled=true;
+			valcons.disabled=true;
+			valapr.disabled=true;
+			
+			
+		}else{
+			cosdir.disabled=false;
+			cosind.disabled=false;
+			metcons.disabled=false;
+			metvent.disabled=false;
+			valcons.disabled=false;
+			valapr.disabled=false;
+		}
+}
+	
+</script>
+
 

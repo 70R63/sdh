@@ -18,8 +18,98 @@ ACC.global = {
         "initImager",
         "backToHome",
         "bindDropdown",
-        "closeAccAlert"
+        "closeAccAlert",
+        "updateMenu"
     ],
+    updateMenu: function () {
+    	if(ACC.hideMenuInformacionReportada == true)
+    	{	
+    		$("a:contains('Mi Información Reportada')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuImpuestos == true)
+    	{	
+    		$("a:contains('Impuestos')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuBuzon == true)
+    	{	
+    		$("a:contains('Mi Buzón')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuTramites == true)
+    	{	
+    		$("a:contains('Trámites')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuFacturacion == true)
+    	{	
+    		$("a:contains('Facturación')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuDeclaraciones == true)
+    	{	
+    		$("a:contains('Declaraciones')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuPagos == true)
+    	{	
+    		$("a:contains('Pagos')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuConsultas == true)
+    	{	
+    		$("a:contains('Consultas')").closest("li").remove();
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	if(ACC.hideSubmenuDelineacionUrbana == true)
+    	{	
+    		$("a:contains('Delineación Urbana')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideSubmenuICA == true)
+    	{	
+    		$("a:contains('Delineación Urbana')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideSubmenuICA == true)
+    	{	
+    		$("a:contains('Delineación Urbana')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideSubmenuICA == true)
+    	{	
+    		$("a:contains('ICA')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideSubmenuPredial == true)
+    	{	
+    		$("a:contains('Predial unificado')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideSubmenuPublicidadExt == true)
+    	{	
+    		$("a:contains('Publicidad exterior')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideSubmenuVehicular == true)
+    	{	
+    		$("a:contains('Sobre vehículos automotores')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideSubmenuGasolina == true)
+    	{	
+    		$("a:contains('Sobretasa a la gasolina')").closest("li").remove();
+    	}
+    	
+    },
+    
     passwordStrength: function () {
         $('.password-strength').pstrength({
             verdicts: [ACC.pwdStrengthTooShortPwd,

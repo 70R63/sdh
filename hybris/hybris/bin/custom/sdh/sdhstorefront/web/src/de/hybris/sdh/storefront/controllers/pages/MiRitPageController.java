@@ -10,6 +10,7 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
@@ -19,6 +20,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -99,7 +101,7 @@ public class MiRitPageController extends AbstractPageController
 	private static final String Mi_RIT_CMS_PAGE = "MiRitPage";
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String BREADCRUMBS_VALUE = "breadcrumb.certificacion";
+	private static final String BREADCRUMBS_VALUE = "breadcrumb.miRIT";
 
 
 	@Resource(name = "sessionService")
@@ -120,6 +122,21 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
+	@Resource(name = "customerFacade")
+	private CustomerFacade customerFacade;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
+
+	@Resource(name = "eventService")
+	private EventService eventService;
+
+	@Resource(name = "commerceCommonI18NService")
+	private CommerceCommonI18NService commerceCommonI18NService;
+
+	@Resource(name = "baseStoreService")
+	private BaseStoreService baseStoreService;
+
 	@ModelAttribute("socialNetworks")
 	public List<String> getSocialNetworks()
 	{
@@ -130,6 +147,7 @@ public class MiRitPageController extends AbstractPageController
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
+	@RequireHardLogIn
 	public String showView(final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
@@ -683,18 +701,6 @@ public class MiRitPageController extends AbstractPageController
 	}
 
 
-	@Resource(name = "customerFacade")
-	private CustomerFacade customerFacade;
-
-	@Resource(name = "modelService")
-	private ModelService modelService;
-
-	@Resource(name = "eventService")
-	private EventService eventService;
-
-
-
-
 	@RequestMapping(value = "/updateRit", method = RequestMethod.POST)
 	@ResponseBody
 	public UpdateRitResponse updateRit(final UpdateRitForm updateRitForm)
@@ -826,12 +832,6 @@ public class MiRitPageController extends AbstractPageController
 
 		return udpateRitResponse;
 	}
-
-	@Resource(name = "commerceCommonI18NService")
-	private CommerceCommonI18NService commerceCommonI18NService;
-
-	@Resource(name = "baseStoreService")
-	private BaseStoreService baseStoreService;
 
 	protected AbstractCommerceUserEvent initializeEvent(final AbstractCommerceUserEvent event, final CustomerModel customerModel)
 	{

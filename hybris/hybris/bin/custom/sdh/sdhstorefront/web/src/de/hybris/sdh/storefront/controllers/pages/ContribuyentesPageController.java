@@ -10,6 +10,7 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
@@ -66,6 +67,7 @@ public class ContribuyentesPageController extends AbstractPageController
 	//	SDHCreaModContribuyenteFacade sdhCreaModContribuyenteFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
+	@RequireHardLogIn
 	public String showView(final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{

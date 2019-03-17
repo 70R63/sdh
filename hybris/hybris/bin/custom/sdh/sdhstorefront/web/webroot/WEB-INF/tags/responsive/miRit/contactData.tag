@@ -79,7 +79,7 @@
     	
     	municipios.forEach(function (eachMun) {
     	    if (eachMun.dep == selectedDepartment) {
-    	    	var o = new Option( eachMun.desc,eachMun.mun);
+    	    	var o = new Option( eachMun.desc,eachMun.desc);
     	    	/// jquerify the DOM object 'o' so we can use the html method
     	    	$(o).html(eachMun.desc);
     	    	$("#u5058_input").append(o);
@@ -130,8 +130,17 @@
     	$(o).html("SELECCIONAR");
     	$("#u5073_input").append(o);
     	
+    	var munID="";
+    	
+    	municipios.forEach(function (eachMun) {
+    	    if (eachMun.desc == selectedMunicipio) {
+    	    	var o = new Option( eachMun.desc,eachMun.desc);
+    	    	munID=eachMun.mun;
+    	    }
+    	});
+    	
     	cps.forEach(function (eachCP) {
-    	    if (eachCP.mun == selectedMunicipio) {
+    	    if (eachCP.mun == munID) {
     	    	var o = new Option( eachCP.cp,eachCP.cp);
     	    	/// jquerify the DOM object 'o' so we can use the html method
     	    	$(o).html(eachCP.cp);

@@ -17,9 +17,9 @@
 		</div>
 	</div>
 </div>
+<div class="col-md-12">
+	<form:form>
 
-<form:form>
-	<div class="col-md-12">
 		<div class="row">
 			<div class="col-md-2">
 
@@ -43,12 +43,12 @@
 				</label>
 
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<label class="control-label" for=""> <spring:theme
 						code="delineacion.urbana.dec.areasusos.netuso" /></label>
 			</div>
 
-			<div class="col-md-2">
+			<div class="col-md-3">
 
 				<label class="control-label" for=""> <spring:theme
 						code="delineacion.urbana.dec.areasusos.areainve" />
@@ -119,15 +119,15 @@
 					</div>
 				</div>
 
-				<div class="col-md-2">
+				<div class="col-md-1">
 					<div class="form-group ">
 						<input class="form-control input2" maxlength="30" value="M2"></input>
 					</div>
 				</div>
 
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<div class="form-group ">
-						<select class="form-control select3" id="selectareinter">
+						<select class="form-control select3" id="selectareinter" disabled>
 							<option value=" ">Seleccionar</option>
 							<option value="Ampliada">Ampliada</option>
 							<option value="Modificada">Modificada</option>
@@ -144,8 +144,7 @@
 
 				<div class="col-md-2">
 					<div class="form-group ">
-						<input class="form-control input3" maxlength="30" value="M2"
-							id="inputareainter"></input>
+						<input id="inputareainter"class="form-control input3" maxlength="30" value="M2" disabled></input>
 					</div>
 				</div>
 
@@ -168,19 +167,18 @@
 						<input class="form-control" maxlength="30" value="Total" disabled></input>
 					</div>
 				</div>
-				
-				<div class="col-md-2 ">
+				<div class="col-md-2">
 					<div class="form-group ">
 						<input class="form-control" maxlength="30" value=""></input>
 					</div>
 				</div>
 
-				<div class="col-md-2 col-md-offset-1">
+				<div class="col-md-1 col-md-offset-1">
 					<div class="form-group ">
 						<input class="form-control" maxlength="30" value=""></input>
 					</div>
 				</div>
-				<div class="col-md-2 col-md-offset-2">
+				<div class="col-md-2 col-md-offset-3">
 					<div class="form-group ">
 						<input class="form-control" maxlength="30" value=""></input>
 					</div>
@@ -188,7 +186,8 @@
 			</div>
 		</div>
 
-		<br> <br>
+		<br>
+		<br>
 
 		<div class="row">
 			<div class="col-md-3">
@@ -262,32 +261,52 @@
 			</div>
 		</div>
 
-		<br> <br>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group ">
-						<label class="control-label"><spring:theme
-								code="delineacion.urbana.dec.areasusos.fechultabo" /></label> <input
-							id="" name="" class="form-control" aria-required="true"
-							type="text" value="" maxlength="240" disabled>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group ">
-						<label class="control-label"><spring:theme
-								code="delineacion.urbana.dec.areasusos.fechejec" /></label> <input
-							id="" name="" class="form-control" aria-required="true"
-							type="text" value="" maxlength="240" disabled>
-					</div>
-				</div>
+		<br>
+		<br>
 
+		<div class="row">
+			<div class="col-md-9">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.areasusos.preobra" /></label> <select
+ 						class="form-control" onchange="costoshabil(this)">
+						<option value="">Seleccionar</option>
+						<option value="1">Calcular con base en la Resolución de
+							la Secretaría Distrital de Planeación</option>
+						<option value="2">Incorporar el valor de su presupuesto
+							estimado</option>
+					</select>
+				</div>
 			</div>
+				</div>
+				<div class="row">
+			<div class="col-md-9">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.areasusos.cauexen" /></label> <select
+						class="form-control">
+						<option value="0">Seleccionar</option>
+						<option value="1">Obras Nuevas Vis Estratos 1, 2 Y 3</option>
+						<option value="2">Obras De Autocontrucción De Vivienda,
+							De Estratos 1 Y 2, Que No Excedan Los Topes Definidos Por La Ley
+							Para El Valor De La Vivienda De Interés Social</option>
+						<option value="3">Ampliaciones, Modificaciones,
+							Adecuaciones O Reparaciones Inmuebles Residenciales Estrato 1, 2
+							Y 3. Avalúo Catastral Inferior A 135 Smimv</option>
+						<option value="4">Obras Que Se Realicen Para Reparar
+							Inmuebles Afectados Por Actos Terroristas O Catástrofes Naturales</option>
+						<option value="5">Obras De Restauración Y Conservación En
+							Bien Inmueble De Interés Cultural</option>
+					</select>
+				</div>
+			</div>
+
 		</div>
 
-	</div>
 
-</form:form>
+
+	</form:form>
+</div>
 <script>
 	function addinfoareuso() {
 
@@ -310,7 +329,6 @@
 		}
 
 	}
-
 	function deleinfoareuso() {
 		var i = $(".areasusos").length;
 		var val = i - 1;
@@ -335,6 +353,7 @@
 					.val("")
 
 		}
+
 	}
 
 	function deleinfoareusotable2() {

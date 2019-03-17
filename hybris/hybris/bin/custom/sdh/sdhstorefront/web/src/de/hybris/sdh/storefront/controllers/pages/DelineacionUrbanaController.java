@@ -27,11 +27,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class DelineacionUrbanaController extends AbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.delineacion";
+	private static final String TEXT_ACCOUNT_PROFILE_DECLARACION = "Declaración Delineación Urbana";
+	private static final String TEXT_ACCOUNT_PROFILE_RETENCION = "Retencion Delineación Urbana";
 
 	// CMS Pages
 	private static final String DELINEACION_URBANA_CMS_PAGE = "delineacionUrbanaPage";
 	private static final String DELINEACION_URBANA_DECLARACIONES_CMS_PAGE = "delineacionUrbanaDeclaracionesPage";
+	private static final String DELINEACION_URBANA_RETENCION_CMS_PAGE = "delineacionUrbanaRadicados";
 	private static final String REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE = REDIRECT_PREFIX + "/contribuyentes/delineacion-urbana";
 
 	@Resource(name = "accountBreadcrumbBuilder")
@@ -85,12 +88,12 @@ public class DelineacionUrbanaController extends AbstractPageController
 	@RequireHardLogIn
 	public String delineacionUrbanadeclaracion(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro a updateExampleForm --------------------------");
+		System.out.println("---------------- Hola entro a declaracion delineacion --------------------------");
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_DECLARACION));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -102,6 +105,31 @@ public class DelineacionUrbanaController extends AbstractPageController
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("------------------entro al post------------------------");
+
+		return REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE;
+	}
+
+	@RequestMapping(value = "/contribuyentes/delineacionurbana/retencion", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String delineacionUrbanaretencion(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro a retencion delineacion --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_RETENCION_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DELINEACION_URBANA_RETENCION_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_RETENCION));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/delineacionurbana/retencion", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String delineacionurbanaretencionpost(final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("------------------entro al post de retencion------------------------");
 
 		return REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE;
 	}

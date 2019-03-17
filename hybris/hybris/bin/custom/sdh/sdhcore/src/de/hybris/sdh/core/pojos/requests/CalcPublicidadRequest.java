@@ -421,7 +421,9 @@ public class CalcPublicidadRequest
 		stringBuilder.append("\"IDcontrib\":\"" +((StringUtils.isBlank(this.getIDcontrib())) ? "" : this.getIDcontrib())  + "\",");
 		stringBuilder.append("\"municipioContrib\":\"" +((StringUtils.isBlank(this.getMunicipioContrib())) ? "" : this.getMunicipioContrib())  + "\",");
 		stringBuilder.append("\"tipoIDdeclara\":\"" +((StringUtils.isBlank(this.getTipoIDdeclara())) ? "" : this.getTipoIDdeclara())  + "\",");
-		stringBuilder.append("\"IDdeclarante\":\"" + ((StringUtils.isBlank(this.getIDdeclarante())) ? "" : this.getIDdeclarante())  + "\"");
+		stringBuilder.append(
+				"\"IDdeclarante\":\"" + ((StringUtils.isBlank(this.getIDdeclarante())) ? "" : this.getIDdeclarante()) + "\",");
+		stringBuilder.append("\"numForm\":\"" + ((StringUtils.isBlank(this.getNumForm())) ? "" : this.getNumForm()) + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();

@@ -42,6 +42,24 @@ function onChange() {
 }
 </script>
 
+<script>
+	function downloadPDF(pdf) {
+		debugger;
+		if (pdf){
+			const linkSource = 'data:application/pdf;base64,' + pdf;
+		    const downloadLink = document.createElement("a");
+		    const fileName = "Certificación_Pago.pdf";
+	
+		    downloadLink.href = linkSource;
+		    downloadLink.download = fileName;
+		    downloadLink.click();
+		}    
+	}
+	
+	
+	downloadPDF('${imprimePagoResponse.stringPDF}');
+</script>
+
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -80,7 +98,7 @@ function onChange() {
 			
 				<form:form method="post" commandName="psePaymentForm" action="">
 					<fieldset>					
-						<input type="hidden" value="" class="text" name="psePaymentForm.tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
+						<input type="hidden" value="" class="text" name="tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
 					<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA && disabled eq true}">
 						<div class="col-xs-4">
 							<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
@@ -198,10 +216,45 @@ function onChange() {
 									
 								</div>
 								</c:if>
-								
+							</ycommerce:testId>
+						</div>
+				</form:form>
+				
+				
+				
+				<form:form method="post" commandName="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">
+
+					
+					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
+					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
+					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/>
+					<form:hidden path="impuesto" value="${psePaymentForm.impuesto}"/>
+					<form:hidden path="anoGravable" value="${psePaymentForm.anoGravable}"/>
+					<form:hidden path="CHIP" value="${psePaymentForm.CHIP}"/>
+					<form:hidden path="periodo" value="${psePaymentForm.periodo}"/>
+					<form:hidden path="CUD" value="${psePaymentForm.CUD}"/>
+					<form:hidden path="noIdentificacion" value="${psePaymentForm.noIdentificacion}"/>
+					<form:hidden path="DV" value="${psePaymentForm.DV}"/>
+					<form:hidden path="tipoDeIdentificacion" value="${psePaymentForm.tipoDeIdentificacion}"/>
+					<form:hidden path="fechaLimiteDePago" value="${psePaymentForm.fechaLimiteDePago}"/>
+					<form:hidden path="pagoAdicional" value="${psePaymentForm.pagoAdicional}"/>
+					<form:hidden id="hiddenBanco" path="banco" value="${varBanco}"/>
+					<form:hidden path="valorAPagar" value="${psePaymentForm.valorAPagar}"/>
+					<form:hidden id="hiddenTipoDeTarjeta" path="tipoDeTarjeta" value="${varTipoDeTarjeta}"/>
+					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>
+					
+					
+					<form:hidden path="bankDateResponse" value="${psePaymentForm.bankDateResponse}"/>
+					<form:hidden path="bankTimeResponse" value="${psePaymentForm.bankTimeResponse}"/>
+					
+					
+					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>
+				
+					<div class="text-center">
+							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq true}">
 									<div id="continuar">
-										<button class="btn btn-secondary btn-lg" type="button">
+										<button class="btn btn-secondary btn-lg" type="submit">
 											<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
 										</button>
 										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
@@ -212,9 +265,11 @@ function onChange() {
 							</ycommerce:testId>
 						</div>
 				</form:form>
+				
 						
 				
 			</div>
 		</div>
 	</div>
 </div>
+ 

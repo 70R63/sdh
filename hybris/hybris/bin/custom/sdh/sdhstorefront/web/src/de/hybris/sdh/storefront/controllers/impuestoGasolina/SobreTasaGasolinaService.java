@@ -569,10 +569,13 @@ public class SobreTasaGasolinaService
 		String[] listaMensajes;
 		String mensajeError;
 
-		for (int i = 0; i < errores.size(); i++)
+		if (errores != null)
 		{
-			mensajeError = "ID= " + errores.get(i).getIdmsj() + " Mensaje = " + errores.get(i).getTxtmsj();
-			mensajes.add(mensajeError);
+			for (int i = 0; i < errores.size(); i++)
+			{
+				mensajeError = "ID= " + errores.get(i).getIdmsj() + " Mensaje = " + errores.get(i).getTxtmsj();
+				mensajes.add(mensajeError);
+			}
 		}
 		listaMensajes = new String[mensajes.size()];
 		listaMensajes = mensajes.toArray(listaMensajes);
@@ -604,10 +607,29 @@ public class SobreTasaGasolinaService
 	public int obtenerAnoGravableActual()
 	{
 		final Calendar c = Calendar.getInstance();
-		final int year = c.get(Calendar.YEAR);
+		int year = c.get(Calendar.YEAR);
+		final boolean esCambioAnio = false;
 
+		year = ocurrioCambioAnio() == false ? year : year--;
 
 		return year;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private boolean ocurrioCambioAnio()
+	{
+
+		final Calendar c = Calendar.getInstance();
+		final int month = c.get(Calendar.MONTH);
+		boolean esCambioAnio = false;
+
+		esCambioAnio = month != 0 ? false : true;
+
+
+		return esCambioAnio;
 	}
 
 
@@ -620,7 +642,7 @@ public class SobreTasaGasolinaService
 		int month = c.get(Calendar.MONTH);
 		final String monthSTR;
 
-		month++;
+		month = month == 11 ? 12 : month;
 		monthSTR = month < 10 ? "0" + Integer.toString(month) : Integer.toString(month);
 
 		return monthSTR;
@@ -874,6 +896,185 @@ public class SobreTasaGasolinaService
 	}
 
 
+	/**
+	 * @param detalleGasolinaResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorDetalle(final DetGasResponse detalleGasolinaResponse)
+	{
+		boolean ocurrioError = false;
+
+		if (detalleGasolinaResponse.getAlmacProd() == null && detalleGasolinaResponse.getAlmacTanque() == null
+				&& detalleGasolinaResponse.getCalidResp() == null && detalleGasolinaResponse.getCodPostal() == null
+				&& detalleGasolinaResponse.getErrores() == null && detalleGasolinaResponse.getInfoDeclara() == null
+				&& detalleGasolinaResponse.getLocalidad() == null && detalleGasolinaResponse.getNumForm() == null
+				&& detalleGasolinaResponse.getNumTanques() == null && detalleGasolinaResponse.getOpcionUso() == null
+				&& detalleGasolinaResponse.getRepresentantes() == null && detalleGasolinaResponse.getRevisorDeclarante() == null
+				&& detalleGasolinaResponse.getUbicaPlanta() == null && detalleGasolinaResponse.getValoresDeclara() == null)
+		{
+			ocurrioError = true;
+		}
+		else if (detalleGasolinaResponse.getErrores() != null)
+		{
+			if (detalleGasolinaResponse.getErrores().get(0) != null)
+			{
+				if (detalleGasolinaResponse.getErrores().get(0).getTxtmsj() != null)
+				{
+					ocurrioError = true;
+				}
+			}
+		}
+
+		return ocurrioError;
+	}
+
+
+	/**
+	 * @param detalleContribuyente
+	 * @return
+	 */
+	public boolean ocurrioErrorValcont(final SDHValidaMailRolResponse detalleContribuyente)
+	{
+		boolean ocurrioError = false;
+
+		if (detalleContribuyente.getInfoContrib() == null && detalleContribuyente.getRoles() == null
+				&& detalleContribuyente.getAgentes() == null && detalleContribuyente.getPublicidadExt() == null
+				&& detalleContribuyente.getGasolina() == null)
+		{
+			ocurrioError = true;
+		}
+		else if (detalleContribuyente.getIdmsj() != 0)
+		{
+			ocurrioError = true;
+		}
+
+		return ocurrioError;
+	}
+
+
+	/**
+	 * @param detalleContribuyente
+	 * @param dataForm
+	 */
+	public void ajustarMenus(final SDHValidaMailRolResponse detalleContribuyente, final SobreTasaGasolinaForm dataForm)
+	{
+
+		if (detalleContribuyente.getGasolina() != null)
+		{
+			if (!detalleContribuyente.getGasolina().isEmpty())
+			{
+				dataForm.setbSobreGasolina("X");
+			}
+			else
+			{
+				dataForm.setbSobreGasolina("");
+			}
+		}
+		else
+		{
+			dataForm.setbSobreGasolina("");
+		}
+
+		if (detalleContribuyente.getPublicidadExt() != null)
+		{
+			if (!detalleContribuyente.getPublicidadExt().isEmpty())
+			{
+				dataForm.setbPublicidadExt("X");
+			}
+			else
+			{
+				dataForm.setbPublicidadExt("");
+			}
+		}
+		else
+		{
+			dataForm.setbPublicidadExt("");
+		}
+
+	}
+
+
+	/**
+	 * @param detallePagoResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorPSE(final DetallePagoResponse detallePagoResponse)
+	{
+
+		boolean ocurrioError = false;
+		if (detallePagoResponse.getFechVenc() == null && detallePagoResponse.getNumBP() == null
+				&& detallePagoResponse.getNumRef() == null && detallePagoResponse.getTotalPagar() == null)
+		{
+			ocurrioError = true;
+		}
+		//		else if (detallePagoResponse.getErrores() != null)
+		//		{
+		//			if (detallePagoResponse.getErrores().get(0) != null)
+		//			{
+		//				if (detallePagoResponse.getErrores().get(0).getIdmsj().equals("0") != true)
+		//				{
+		//					ocurrioError = true;
+		//				}
+		//			}
+		//		}
+
+		return ocurrioError;
+	}
+
+
+	/**
+	 * @param calculaGasolinaResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorCalcular(final CalculaGasolinaResponse calculaGasolinaResponse)
+	{
+		boolean ocurrioError = false;
+
+		if (calculaGasolinaResponse.getInfoDeclara() == null && calculaGasolinaResponse.getNumForm() == null
+				&& calculaGasolinaResponse.getRevisorDeclarante() == null && calculaGasolinaResponse.getValoresDeclara() == null)
+		{
+			ocurrioError = true;
+		}
+		else if (calculaGasolinaResponse.getErrores() != null)
+		{
+			if (calculaGasolinaResponse.getErrores().get(0) != null)
+			{
+				if (calculaGasolinaResponse.getErrores().get(0).getTxtmsj() != null)
+				{
+					ocurrioError = true;
+				}
+			}
+		}
+
+		return ocurrioError;
+	}
+
+
+	/**
+	 * @param list
+	 * @param i
+	 * @return
+	 */
+	public String obtenerMensajeError(final List<ErrorEnWS> list, final int i)
+	{
+		String mensajeError = "";
+
+		if (list != null)
+		{
+			try
+			{
+				if (list.get(i) != null)
+				{
+					mensajeError = list.get(i).getTxtmsj();
+				}
+			}
+			catch (final Exception e)
+			{
+			}
+		}
+
+		return mensajeError;
+	}
 
 
 

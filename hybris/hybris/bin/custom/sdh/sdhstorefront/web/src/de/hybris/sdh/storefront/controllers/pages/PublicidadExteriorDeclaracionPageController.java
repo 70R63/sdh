@@ -11,6 +11,7 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
@@ -79,6 +80,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			+ "/contribuyentes2/publicidadexterior/detalle";
 
 
+	@Resource(name = "accountBreadcrumbBuilder")
+	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhDetallePublicidadService")
 	SDHDetallePublicidadService sdhDetallePublicidadService;
@@ -100,7 +103,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 
 	private static final String ERROR_CMS_PAGE = "notFound";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declarapublicidad";
 
 	//CMS PAGES
 	private static final String DECLARACION_PUBLICIDAD_CMS_PAGE = "DeclaraPublicidadPage";
@@ -138,7 +142,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
-			declaPublicidadForm.setIdNumber(customerData.getDocumentType());
+			declaPublicidadForm.setIdNumber(customerData.getDocumentNumber());
 			declaPublicidadForm.setIdType(customerData.getDocumentType());
 			declaPublicidadForm.setName(customerData.getCompleteName());
 			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
@@ -203,6 +207,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		//updatePageTitle(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE)); */
 
 		return getViewForPage(model);
@@ -288,6 +293,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 		}
 
+
 		return calcPublicidadResponse;
 
 	}
@@ -364,6 +370,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			generaDeclaracionResponse.setErrores(errores);
 
 		}
+
 		return generaDeclaracionResponse;
 
 	}

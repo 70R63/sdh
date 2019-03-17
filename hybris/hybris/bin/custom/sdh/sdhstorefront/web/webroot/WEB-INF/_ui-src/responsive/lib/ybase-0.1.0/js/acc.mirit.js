@@ -82,6 +82,10 @@ ACC.mirit = {
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
 				    	            	$("#ritDialogContent").html("Tu dirección de notificación no ha sido actualizadas.");
+				    	            	$.each(data.errores,function (index, value)
+				    	            	{
+				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
+				    	            	});
 			        	        	}
 			    	            	
 			   	            },
@@ -135,6 +139,11 @@ ACC.mirit = {
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
 				    	            	$("#ritDialogContent").html("Tu dirección de contacto no ha sido actualizadas.");
+				    	            	$.each(data.errores,function (index, value)
+				    	            	{
+				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
+				    	            	});
+				    	            	
 			        	        	}
 			    	            	
 			   	            },
