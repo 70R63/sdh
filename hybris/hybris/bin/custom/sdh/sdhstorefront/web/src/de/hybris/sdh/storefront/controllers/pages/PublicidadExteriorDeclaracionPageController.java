@@ -67,6 +67,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -76,6 +77,7 @@ import sun.misc.BASE64Decoder;
  * Controller for home page 2
  */
 @Controller
+@SessionAttributes("infoPreviaPSE")
 @RequestMapping("/contribuyentes/publicidadexterior/declaracion")
 public class PublicidadExteriorDeclaracionPageController extends AbstractPageController
 {
