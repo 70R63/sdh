@@ -18,7 +18,7 @@ ACC.delineacionurbana = {
 	 	        e.preventDefault();
 	 	        debugger;
 	 	       
-	 	       window.location.href = ACC.declaracionDelineacionurbanaURL
+	 	       window.location.href = ACC.declaracionDelineacionurbanaURL,
 		  
 	 	       
 		 });

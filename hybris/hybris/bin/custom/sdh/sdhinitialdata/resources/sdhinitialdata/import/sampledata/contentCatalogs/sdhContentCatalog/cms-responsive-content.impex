@@ -108,7 +108,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 ; ; DelineacionUrbanaLink        ; DELINEACION URBANA                  ; "/contribuyentes/delineacion-urbana" ;;;;;
-; ; ICALink                      ; ICA                                 ; "/contribuyentes2/icareteica" ;;;;;
+; ; ICALink                      ; ICA                                 ; "/contribuyentes/ica" ;;;;;
 ; ; PredialUnificadoLink         ; PREDIAL UNIFICADO                   ; "/contribuyentes/predialunificado/detalle" ;;;;;
 ; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes/publicidadexterior" ;;;;;
 ; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
@@ -1848,6 +1848,26 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;declaraFirmarPageComponent	;declaraFirmarPage Component	;/WEB-INF/views/responsive/pages/layout/declaraFirmarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;declaraFirmarPageComponent					
 #->FIN dev-maria Agregar paginas para Lista de declaraciones a firmar 15/03/2019										
-									
+
+#->INI dev-maria Agregar paginas para ICA 18/03/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;icaPage 		;ICA 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/ica
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='icaPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-icaPage 		;SideContent				;															;SideContent-icaPage						;;;
+								;						;BodyContent-icaPage		;BodyContent				;															;BodyContent-icaPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-icaPage 	;Side Content Slot for ICA			;true	;								;;;
+							;							;BodyContent-icaPage	;Body Content Slot for ICA			;true	;icaPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;icaPageComponent	;icaPage Component	;/WEB-INF/views/responsive/pages/layout/icaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaPageComponent					
+#->FIN dev-maria Agregar paginas para ICA 18/03/2019	
 									
 									
