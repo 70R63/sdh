@@ -11,7 +11,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
@@ -23,9 +22,12 @@ import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHImprimePagoService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
+import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
+import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.CertificacionPagoForm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -74,6 +76,36 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 	@Resource(name = "sdhImprimePagoService")
 	SDHImprimePagoService sdhImprimePagoService;
+
+	@ModelAttribute("tipoDeImpuesto")
+	public List<SelectAtomValue> getIdTipoDeImpuesto()
+	{
+
+		final List<SelectAtomValue> tipoDeImpuesto = Arrays.asList(
+				new SelectAtomValue(new ControllerPseConstants().getGASOLINA(), "Gasolina"),
+				new SelectAtomValue(new ControllerPseConstants().getPUBLICIDAD(), "Publicidad")
+		);
+
+		return tipoDeImpuesto;
+	}
+
+	@ModelAttribute("anoGravable")
+	public List<SelectAtomValue> getIdAnoGravable()
+	{
+
+		final List<SelectAtomValue> anoGravable = Arrays.asList(
+				new SelectAtomValue("2019", "2019"),
+				new SelectAtomValue("2018", "2018"), 
+				new SelectAtomValue("2017", "2017"), 
+				new SelectAtomValue("2016", "2016"),
+				new SelectAtomValue("2015", "2015"), 
+				new SelectAtomValue("2014", "2014"), 
+				new SelectAtomValue("2013", "2013"),
+				new SelectAtomValue("2012", "2012"), 
+				new SelectAtomValue("2011", "2011"));
+
+		return anoGravable;
+	}
 
 
 	@RequestMapping(value = "/contribuyentes/consultas/certipagos", method = RequestMethod.GET)

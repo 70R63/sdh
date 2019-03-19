@@ -39,6 +39,8 @@ function onChange() {
 			//divBottonDAVIVIENDA.style.display = "block";
 		//}
 	//}
+	
+	
 }
 </script>
 

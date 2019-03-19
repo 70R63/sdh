@@ -6,6 +6,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
+
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/contribuyentes/consultas/certipagos"
@@ -13,6 +15,19 @@
 	
 	
 <script>
+
+	function onChange() {
+		impuesto = document.getElementById("Idimp").value;
+		
+		
+		if(impuesto == '4'){
+			document.getElementById('idPeriodo').style.display = 'none';	
+		}else{
+			document.getElementById('idPeriodo').style.display = '';
+		}
+		
+	}
+	
 	function downloadPDF(pdf) {
 		debugger;
 		if (pdf){
@@ -24,11 +39,13 @@
 		    downloadLink.download = fileName;
 		    downloadLink.click();
 		}    
-	}
-	
-	
+	}	
 	downloadPDF('${imprimePagoResponse.stringPDF}');
 </script>	
+
+<script>
+
+</script>
 
 <div>
 	<div class="container">
@@ -65,17 +82,18 @@
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.selcimpuesto" /></label>
 						<select	required="required" required id="Idimp" class="form-control "
-							name="Idimp" >
+							name="Idimp" onchange="onChange()">
 							<option value="">Seleccionar</option>
-							<option value="1">Predial Unificado</option>
-							<option value="2">Vehículos</option>
-							<option value="3">ICA</option>
+							<!--option value="1">Predial Unificado</option>-->
+							<!--<option value="2">Vehículos</option>-->
+							<!--<option value="3">ICA</option>-->
 							<option value="4">Publicidad Exterior</option>
 							<option value="5">Sobretasa Gasolina</option>
-							<option value="6">Delineación Urbana</option>
+							<!--<option value="6">Delineación Urbana</option>-->
 						</select>
 					</div>
 				</div>
+
 
 				<div class="col-md-3" id="idAnio" style="display: block;">
 					<div class="form-group">

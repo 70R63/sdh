@@ -13,6 +13,18 @@
 	
 	
 <script>
+	function onChange() {
+		impuesto = document.getElementById("tipoimp").value;
+		if(impuesto == '4'){
+			document.getElementById('periodo').style.display = 'none';	
+		}else{
+			document.getElementById('periodo').style.display = '';
+		}
+	
+		
+	
+	}
+
 	function downloadPDF(pdf) {
 		debugger;
 		if (pdf){
@@ -36,7 +48,7 @@
 		<div class="row">
 			<div class="headline">
 				<h2 align="center">
-					<span><spring:theme code="certideclara.inicial.titulo" /></span>
+					<span><spring:theme code="certideclara.inicial.titulo" /></span> 
 
 				</h2>
 			</div>
@@ -53,14 +65,14 @@
 							<spring:theme code="certideclara.inicial.selcimpuesto" />
 						</label> 
 						<select	required="required" required id="tipoimp" class="form-control "
-							name="Idimp" >
+							name="Idimp" onchange="onChange()">
 							<option value="">Seleccionar</option>
-							<option value="1">Predial Unificado</option>
-							<option value="2">Vehículos</option>
-							<option value="3">ICA</option>
+							<!--  <option value="1">Predial Unificado</option>-->
+							<!--<option value="2">Vehículos</option>-->
+							<!--<option value="3">ICA</option>-->
 							<option value="4">Publicidad Exterior</option>
 							<option value="5">Sobretasa Gasolina</option>
-							<option value="6">Delineación Urbana</option>
+							<!--<option value="6">Delineación Urbana</option>-->
 						</select>
 					</div>
 				</div>
