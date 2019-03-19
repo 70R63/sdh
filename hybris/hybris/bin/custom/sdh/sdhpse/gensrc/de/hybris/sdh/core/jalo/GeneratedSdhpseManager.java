@@ -1,7 +1,11 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 18-mar-2019 17:35:37                        ---
+<<<<<<< .merge_file_a07772
+ * --- Generated at 12/03/2019 06:37:25 PM                      ---
+=======
+ * --- Generated at 18/03/2019 03:39:22 PM                      ---
+>>>>>>> .merge_file_a04044
  * ----------------------------------------------------------------
  *  
  * [y] hybris Platform
