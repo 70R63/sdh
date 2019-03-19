@@ -50,7 +50,7 @@ ACC.publicidadexterior = {
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#calculoButton", function (e) {
 	 	        e.preventDefault();
-	 	        
+	 	        $("#calculoButton").prop('disabled', true);
 	 	       var anograv  = $.trim($("#anograv").val());
 	 	       var numresol = $.trim($("#numresol").val());
 	 	       var fechnotif =  $.trim($("#fechnotif").val());
@@ -127,6 +127,7 @@ ACC.publicidadexterior = {
             			$("#intmora").val("");
             			$("#totpag").val("");
             			$("#numForm").val("");
+            			$("#calculoButton").prop('disabled', false);
 		            }
 		        });
 	 	       
