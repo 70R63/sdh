@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
@@ -246,7 +247,7 @@ public class PSEPaymentController extends AbstractPageController
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 			}else {	//Transaccion con error
-				model.addAttribute("psePaymentForm", new PSEPaymentForm());
+				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId)); //new PSEPaymentForm());
 				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 			}
 		}else {
