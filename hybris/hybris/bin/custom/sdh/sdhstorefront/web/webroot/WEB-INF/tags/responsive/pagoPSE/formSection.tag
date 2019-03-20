@@ -101,7 +101,7 @@ function onChange() {
 				<form:form method="post" commandName="psePaymentForm" action="">
 					<fieldset>					
 						<input type="hidden" value="" class="text" name="tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
-					<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA && disabled eq true}">
+					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD ) && disabled eq true}">
 						<div class="col-xs-4">
 							<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
 						</div>
@@ -170,7 +170,7 @@ function onChange() {
 						<formElement:formInputBox  idKey="psePaymentForm.valorAPagar" maxlength="240" labelKey="psePaymentForm.valorAPagar" path="valorAPagar" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 						<formElement:formSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeTarjeta}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>
 					
-					<c:if test = "${tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA && !empty psePaymentForm.bankDateResponse }">
+					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD) && !empty psePaymentForm.bankDateResponse }">
    						<formElement:formInputBox  idKey="psePaymentForm.bankDateResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
    						<formElement:formInputBox  idKey="psePaymentForm.bankTimeResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 					</c:if>
