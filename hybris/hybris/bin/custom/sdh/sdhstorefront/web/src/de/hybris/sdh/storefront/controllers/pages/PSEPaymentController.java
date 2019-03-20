@@ -319,7 +319,7 @@ public class PSEPaymentController extends AbstractPageController
 						}
 					}
 
-					if (declaracion != null)
+					if (!declaracion.getReferencia().isEmpty() || declaracion.getReferencia() != null)
 					{
 						break;
 					}

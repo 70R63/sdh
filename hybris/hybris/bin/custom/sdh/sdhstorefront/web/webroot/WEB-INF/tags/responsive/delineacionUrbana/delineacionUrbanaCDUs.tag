@@ -107,7 +107,7 @@
 						aria-required="true" type="text" readonly="readonly"
 						value="${docNumber}" maxlength="240"
 						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><a onclick="show()" href="">Ver</a></td>
+					<td><a onclick="show()">Ver</a></td>
 
 				</tr>
 			</tbody>
