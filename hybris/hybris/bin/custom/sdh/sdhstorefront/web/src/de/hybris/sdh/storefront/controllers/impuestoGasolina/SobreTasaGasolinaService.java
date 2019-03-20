@@ -16,6 +16,7 @@ import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
@@ -847,14 +848,28 @@ public class SobreTasaGasolinaService
 		return numObjeto;
 	}
 
-	public String prepararNumObjetoPublicidad(final SDHValidaMailRolResponse detalleContribuyente)
+	public String prepararNumObjetoPublicidad(final SDHValidaMailRolResponse detalleContribuyente, final String numResolu)
 	{
 		String numObjeto = "";
+		List<ImpuestoPublicidadExterior> infoPublicidad;
 
-		if (detalleContribuyente != null && detalleContribuyente.getPublicidadExt() != null
-				&& detalleContribuyente.getPublicidadExt().get(0) != null)
+
+		infoPublicidad = detalleContribuyente.getPublicidadExt();
+		if (detalleContribuyente != null && infoPublicidad != null)
 		{
-			numObjeto = detalleContribuyente.getPublicidadExt().get(0).getNumObjeto();
+			for (int i = 0; i < infoPublicidad.size(); i++)
+			{
+				if (infoPublicidad.get(i) != null)
+				{
+					if (infoPublicidad.get(i).getNumResolu() != null)
+					{
+						if (infoPublicidad.get(i).getNumResolu().equals(numResolu))
+						{
+							numObjeto = infoPublicidad.get(i).getNumObjeto();
+						}
+					}
+				}
+			}
 		}
 
 

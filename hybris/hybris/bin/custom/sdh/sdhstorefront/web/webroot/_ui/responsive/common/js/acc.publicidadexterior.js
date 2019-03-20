@@ -50,9 +50,10 @@ ACC.publicidadexterior = {
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#calculoButton", function (e) {
 	 	        e.preventDefault();
-	 	        
+	 	        $("#calculoButton").prop('disabled', true);
 	 	       var anograv  = $.trim($("#anograv").val());
 	 	       var numresol = $.trim($("#numresol").val());
+	 	      var numform = $.trim($("#numForm").val());
 	 	       var fechnotif =  $.trim($("#fechnotif").val());
 	 	       var opuso  = $.trim($("#opuso").val());
 	 	       var luginst  = $.trim($("#luginst").val());
@@ -68,6 +69,7 @@ ACC.publicidadexterior = {
 	 	       
 	 	       data.anograv=anograv;
 	 	      data.numresol=numresol;
+	 	     data.numform=numform;
 	 	      data.fechnotif = fechnotif; 
 	 	      data.opuso = opuso; 
 	   	      data.luginst = luginst; 
@@ -127,6 +129,7 @@ ACC.publicidadexterior = {
             			$("#intmora").val("");
             			$("#totpag").val("");
             			$("#numForm").val("");
+            			$("#calculoButton").prop('disabled', false);
 		            }
 		        });
 	 	       
