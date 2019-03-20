@@ -48,7 +48,7 @@
 		<div class="row">
 			<div class="headline">
 				<h2 align="center">
-					<span><spring:theme code="certideclara.inicial.titulo" /></span> 
+					<span><spring:theme code="certideclara.inicial.titulo" /></span>  
 
 				</h2>
 			</div>
