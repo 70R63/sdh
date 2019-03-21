@@ -11,19 +11,26 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
+import de.hybris.sdh.core.pojos.responses.ConsultaPagoDeclaraciones;
+import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -112,6 +119,41 @@ public class DefaultSDHConsultaPagoService implements SDHConsultaPagoService
 		// XXX Auto-generated method stub
 		return null;
 
+	}
+
+
+	@Override
+	public List<ConsultaPagoDeclaraciones> consultaPago(final String numBP, final String numObjeto, final String clavePeriodo)
+	{
+		final ConsultaPagoRequest request = new ConsultaPagoRequest();
+		final ObjectMapper mapper = new ObjectMapper();
+		final List<ConsultaPagoDeclaraciones>  finalDeclaraciones = new ArrayList<ConsultaPagoDeclaraciones>();
+
+		request.setNumBP(numBP);
+		request.setNumObjeto(numObjeto);
+
+		ConsultaPagoResponse consultaPagoResponse = null;
+		try
+		{
+			consultaPagoResponse = mapper.readValue(this.consultaPago(request), ConsultaPagoResponse.class);
+			if(consultaPagoResponse != null) {
+				if(consultaPagoResponse.getDeclaraciones() != null) {
+					for(final ConsultaPagoDeclaraciones declaracion : consultaPagoResponse.getDeclaraciones()) {
+						if(declaracion.getClavePeriodo() != null) {
+							if(declaracion.getClavePeriodo().equals(clavePeriodo)) {
+								finalDeclaraciones.add(declaracion);
+							}
+						}
+					}
+				}
+
+			}
+		}
+		catch (final IOException e)
+		{
+			e.printStackTrace();
+		}
+		return finalDeclaraciones;
 	}
 
 

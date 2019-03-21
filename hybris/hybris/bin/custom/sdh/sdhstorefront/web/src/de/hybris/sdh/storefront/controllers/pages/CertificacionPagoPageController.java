@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
@@ -89,23 +90,42 @@ public class CertificacionPagoPageController extends AbstractPageController
 		return tipoDeImpuesto;
 	}
 
-	@ModelAttribute("anoGravable")
-	public List<SelectAtomValue> getIdAnoGravable()
+	@ModelAttribute("anoGravableGasolina")
+	public List<SelectAtomValue> getIdAnoGravableGasolina()
 	{
 
-		final List<SelectAtomValue> anoGravable = Arrays.asList(
+		final List<SelectAtomValue> anoGravableGasolina = Arrays.asList(
 				new SelectAtomValue("2019", "2019"),
-				new SelectAtomValue("2018", "2018"), 
-				new SelectAtomValue("2017", "2017"), 
+				new SelectAtomValue("2018", "2018"),
+				new SelectAtomValue("2017", "2017"),
 				new SelectAtomValue("2016", "2016"),
-				new SelectAtomValue("2015", "2015"), 
-				new SelectAtomValue("2014", "2014"), 
+				new SelectAtomValue("2015", "2015"),
+				new SelectAtomValue("2014", "2014"),
 				new SelectAtomValue("2013", "2013"),
-				new SelectAtomValue("2012", "2012"), 
+				new SelectAtomValue("2012", "2012"),
 				new SelectAtomValue("2011", "2011"));
 
-		return anoGravable;
+		return anoGravableGasolina;
 	}
+
+	@ModelAttribute("anoGravablePublicidad")
+	public List<SelectAtomValue> getIdAnoGravablePublicidad()
+	{
+
+		final List<SelectAtomValue> anoGravablePublicidad = Arrays.asList(
+				new SelectAtomValue("2019A1", "2019"),
+				new SelectAtomValue("2018A1", "2018"),
+				new SelectAtomValue("2017A1", "2017"),
+				new SelectAtomValue("2016A1", "2016"),
+				new SelectAtomValue("2015A1", "2015"),
+				new SelectAtomValue("2014A1", "2014"),
+				new SelectAtomValue("2013A1", "2013"),
+				new SelectAtomValue("2012A1", "2012"),
+				new SelectAtomValue("2011A1", "2011"));
+
+		return anoGravablePublicidad;
+	}
+
 
 
 	@RequestMapping(value = "/contribuyentes/consultas/certipagos", method = RequestMethod.GET)
@@ -172,6 +192,10 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 		model.addAttribute("certiFormPost", certiFormPost);
 		model.addAttribute("certiForm", certiForm);
+		model.addAttribute("sdhConsultaPagoService", sdhConsultaPagoService);
+
+
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_PAGOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_PAGOS_CMS_PAGE));
@@ -186,6 +210,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 	final CertificacionPagoForm certiFormPost) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al POST certificacion de pagos--------------------------");
+		System.out.println(certiFormPost.getAniograv());
+		System.out.println(certiFormPost.getIdimp());
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		ConsultaPagoDeclaraciones declaracion = new ConsultaPagoDeclaraciones();
@@ -285,7 +311,5 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 		return "redirect:/contribuyentes/consultas/certipagos";
 	}
-
-
 
 }
