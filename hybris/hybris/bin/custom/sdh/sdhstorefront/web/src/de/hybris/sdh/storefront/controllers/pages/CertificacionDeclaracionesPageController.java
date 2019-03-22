@@ -90,11 +90,10 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 	public String oblipendi(final Model model, @ModelAttribute("error")
 	final String error) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al GET Obligaciones Pendientes--------------------------");
+		LOG.debug("----------------  GET Obligaciones Pendientes--------------------------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final CertificacionPagoForm certiFormPost = new CertificacionPagoForm();
-
 		model.addAttribute("certiFormPost", certiFormPost);
 
 		if (error == "sinPdf")
@@ -107,6 +106,9 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_CERTIFICA_DECLARACION));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
+		certiFormPost.setNumBP(customerData.getNumBP());
+		model.addAttribute("certiForm", certiFormPost);
+
 		return getViewForPage(model);
 	}
 
@@ -116,7 +118,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 	public String certipdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("certiFormPost")
 	final CertificacionPagoForm certiFormPost) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al POST certificacion de pagos--------------------------");
+		LOG.debug("---------------- POST certificacion de pagos--------------------------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final ImprimeCertDeclaraRequest imprimeCertDeclaraRequest = new ImprimeCertDeclaraRequest();

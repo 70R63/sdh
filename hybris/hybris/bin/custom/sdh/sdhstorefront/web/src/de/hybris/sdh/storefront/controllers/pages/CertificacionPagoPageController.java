@@ -267,9 +267,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 						imprimePagoRequest.setRefROP(VACIO);
 
 						final String resp = sdhImprimePagoService.imprimePago(imprimePagoRequest);
-
 						final ImprimePagoResponse imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
-
 						redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
 					}
 				}
