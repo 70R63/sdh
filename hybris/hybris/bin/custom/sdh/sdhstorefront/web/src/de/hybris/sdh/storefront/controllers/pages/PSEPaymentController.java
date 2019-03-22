@@ -314,7 +314,7 @@ public class PSEPaymentController extends AbstractPageController
 							LOG.info("		psePaymentForm.getNumeroDeReferencia: " + psePaymentForm.getNumeroDeReferencia());
 
 							if (element.getReferencia().equals(psePaymentForm.getNumeroDeReferencia())
-									&& element.getPeriodo().equals(psePaymentForm.getPeriodo()))
+									&& element.getClavePeriodo.equals(psePaymentForm.getPeriodo()))
 							{
 								declaracion = element;
 								break;
