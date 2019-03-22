@@ -4,7 +4,9 @@
 package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 
 import java.io.BufferedReader;
@@ -18,6 +20,9 @@ import javax.annotation.Resource;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.client.support.BasicAuthorizationInterceptor;
+import org.springframework.web.client.RestTemplate;
 
 
 /**
@@ -94,11 +99,31 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 		{
 			LOG.error("There was an error validating a contribuyente: " + e.getMessage());
 		}
-
-
-
-		// XXX Auto-generated method stub
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * de.hybris.sdh.core.services.SDHValidaContribuyenteService#validaContibuyente(de.hybris.sdh.core.pojos.requests.
+	 * ConsultaContribuyenteBPRequest)
+	 */
+	@Override
+	public SDHValidaMailRolResponse validaContribuyente(final String stringBp)
+	{
+		final String usuario = configurationService.getConfiguration().getString("sdh.validacontribuyente.user");
+		final String password = configurationService.getConfiguration().getString("sdh.validacontribuyente.password");
+		final String urlService = configurationService.getConfiguration().getString("sdh.validacontribuyente.url");
+
+		final ConsultaContribuyenteBPRequest bp = new ConsultaContribuyenteBPRequest();
+		bp.setNumBP(stringBp);
+
+		final RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+
+		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(bp);
+		return restTemplate.postForObject(urlService, request, SDHValidaMailRolResponse.class);
 	}
 
 }

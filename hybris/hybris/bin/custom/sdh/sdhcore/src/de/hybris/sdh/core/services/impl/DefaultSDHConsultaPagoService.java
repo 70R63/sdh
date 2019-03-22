@@ -13,7 +13,10 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,6 +48,9 @@ public class DefaultSDHConsultaPagoService implements SDHConsultaPagoService
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+
+	@Resource(name = "sdhValidaContribuyenteService")
+	private SDHValidaContribuyenteService sdhValidaContribuyenteService;
 
 	/*
 	 * (non-Javadoc)
@@ -125,23 +131,42 @@ public class DefaultSDHConsultaPagoService implements SDHConsultaPagoService
 	@Override
 	public List<ConsultaPagoDeclaraciones> consultaPago(final String numBP, final String numObjeto, final String clavePeriodo)
 	{
-		final ConsultaPagoRequest request = new ConsultaPagoRequest();
+
+
+
 		final ObjectMapper mapper = new ObjectMapper();
 		final List<ConsultaPagoDeclaraciones>  finalDeclaraciones = new ArrayList<ConsultaPagoDeclaraciones>();
 
-		request.setNumBP(numBP);
-		request.setNumObjeto(numObjeto);
+		final ConsultaPagoRequest consltaPagoRequest = new ConsultaPagoRequest();
+		consltaPagoRequest.setNumBP(numBP);
+		consltaPagoRequest.setNumObjeto(numObjeto);
+
+
+		SDHValidaMailRolResponse contribuyenteResponse = null;
+		contribuyenteResponse = sdhValidaContribuyenteService.validaContribuyente(numBP);
+
 
 		ConsultaPagoResponse consultaPagoResponse = null;
 		try
 		{
-			consultaPagoResponse = mapper.readValue(this.consultaPago(request), ConsultaPagoResponse.class);
+			consultaPagoResponse = mapper.readValue(this.consultaPago(consltaPagoRequest), ConsultaPagoResponse.class);
 			if(consultaPagoResponse != null) {
 				if(consultaPagoResponse.getDeclaraciones() != null) {
 					for(final ConsultaPagoDeclaraciones declaracion : consultaPagoResponse.getDeclaraciones()) {
 						if(declaracion.getClavePeriodo() != null) {
 							if(declaracion.getClavePeriodo().equals(clavePeriodo)) {
-								finalDeclaraciones.add(declaracion);
+								if (contribuyenteResponse != null){
+									final List<ImpuestoPublicidadExterior> publicidadExtList = contribuyenteResponse.getPublicidadExt();
+									if (publicidadExtList != null){
+										for (final ImpuestoPublicidadExterior publicidadExt : publicidadExtList){
+											if(publicidadExt.getNumObjeto().equals(declaracion.getNumObjeto())) {
+												declaracion.setNumResolu(publicidadExt.getNumResolu());
+												declaracion.setTipoValla(publicidadExt.getTipoValla());
+												finalDeclaraciones.add(declaracion);
+											}
+										}
+									}
+								}
 							}
 						}
 					}

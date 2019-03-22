@@ -11,7 +11,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
@@ -27,6 +26,7 @@ import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.CertificacionPagoForm;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -113,15 +113,15 @@ public class CertificacionPagoPageController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> anoGravablePublicidad = Arrays.asList(
-				new SelectAtomValue("2019A1", "2019"),
-				new SelectAtomValue("2018A1", "2018"),
-				new SelectAtomValue("2017A1", "2017"),
-				new SelectAtomValue("2016A1", "2016"),
-				new SelectAtomValue("2015A1", "2015"),
-				new SelectAtomValue("2014A1", "2014"),
-				new SelectAtomValue("2013A1", "2013"),
-				new SelectAtomValue("2012A1", "2012"),
-				new SelectAtomValue("2011A1", "2011"));
+				new SelectAtomValue("19A1", "2019"),
+				new SelectAtomValue("18A1", "2018"),
+				new SelectAtomValue("17A1", "2017"),
+				new SelectAtomValue("16A1", "2016"),
+				new SelectAtomValue("15A1", "2015"),
+				new SelectAtomValue("14A1", "2014"),
+				new SelectAtomValue("13A1", "2013"),
+				new SelectAtomValue("12A1", "2012"),
+				new SelectAtomValue("11A1", "2011"));
 
 		return anoGravablePublicidad;
 	}
@@ -137,6 +137,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final CertificacionPagoForm certiForm = new CertificacionPagoForm();
 		final CertificacionPagoForm certiFormPost = new CertificacionPagoForm();
+
 
 		if (error == "sinPdf")
 		{
@@ -190,11 +191,10 @@ public class CertificacionPagoPageController extends AbstractPageController
 		 * else { GlobalMessages.addErrorMessage(model, "mirit.error.getInfo"); }
 		 */
 
+
+
 		model.addAttribute("certiFormPost", certiFormPost);
 		model.addAttribute("certiForm", certiForm);
-		model.addAttribute("sdhConsultaPagoService", sdhConsultaPagoService);
-
-
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_PAGOS_CMS_PAGE));
@@ -209,100 +209,167 @@ public class CertificacionPagoPageController extends AbstractPageController
 	public String certipdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("certiFormPost")
 	final CertificacionPagoForm certiFormPost) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al POST certificacion de pagos--------------------------");
-		System.out.println(certiFormPost.getAniograv());
-		System.out.println(certiFormPost.getIdimp());
+
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		ConsultaPagoDeclaraciones declaracion = new ConsultaPagoDeclaraciones();
 		final ImprimePagoRequest imprimePagoRequest = new ImprimePagoRequest();
+		final String anioGrav;
+		final String idimp;
+		final String tipoImp;
+		final String param;
 
-		try
+		if (certiFormPost.getIdimp().equals("5"))
 		{
-			final ConsultaPagoRequest consultaPagoRequest = new ConsultaPagoRequest();
-
-			consultaPagoRequest.setNumBP(certiFormPost.getNumBP());
-
-
-			if (certiFormPost.getIdimp().equals("4"))
+			try
 			{
-				consultaPagoRequest.setNumObjeto(certiFormPost.getNumObjetoSel());
-			}
+				final ConsultaPagoRequest consultaPagoRequest = new ConsultaPagoRequest();
+
+				consultaPagoRequest.setNumBP(certiFormPost.getNumBP());
+
+
+				/*
+				 * if (certiFormPost.getIdimp().equals("4")) {
+				 * consultaPagoRequest.setNumObjeto(certiFormPost.getNumObjetoSel()); }
+				 */
 
 
 
-			if (certiFormPost.getIdimp().equals("5"))
-			{
-				if (customerData.getGasTaxList() != null)
+				if (certiFormPost.getIdimp().equals("5"))
 				{
-					final List<SDHGasTaxData> gasTaxList = customerData.getGasTaxList();
-					consultaPagoRequest.setNumObjeto(gasTaxList.get(0).getObjectNumber());
-				}
-			}
-
-		   final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			final ConsultaPagoResponse consultaPagoResponse = mapper
-					.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
-
-
-			if (consultaPagoResponse != null)
-			{
-
-				if (consultaPagoResponse.getDeclaraciones() != null)
-				{
-					final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
-
-					if (certiFormPost.getIdimp().equals("4"))
+					if (customerData.getGasTaxList() != null)
 					{
-						declaracion = declaracionesList.get(0);
+						final List<SDHGasTaxData> gasTaxList = customerData.getGasTaxList();
+						consultaPagoRequest.setNumObjeto(gasTaxList.get(0).getObjectNumber());
 					}
+				}
 
-					if (certiFormPost.getIdimp().equals("5"))
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+				final ConsultaPagoResponse consultaPagoResponse = mapper
+						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
+
+
+				if (consultaPagoResponse != null)
+				{
+
+					if (consultaPagoResponse.getDeclaraciones() != null)
 					{
-						final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
+						final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
 
-						for (final ConsultaPagoDeclaraciones element : declaracionesList)
+						/*
+						 * if (certiFormPost.getIdimp().equals("4")) { declaracion = declaracionesList.get(0); }
+						 */
+
+						if (certiFormPost.getIdimp().equals("5"))
 						{
-							if (element.getClavePeriodo().equals(aniograv_periodo))
+							final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
+
+							for (final ConsultaPagoDeclaraciones element : declaracionesList)
 							{
-								declaracion = element;
-								break;
+								if (element.getClavePeriodo().equals(aniograv_periodo))
+								{
+									declaracion = element;
+									break;
+								}
 							}
 						}
+
+						imprimePagoRequest.setNumBP(declaracion.getNumBP());
+						imprimePagoRequest.setCtaContrato(declaracion.getCtaContrato());
+						imprimePagoRequest.setNumObjeto(declaracion.getNumObjeto());
+						imprimePagoRequest.setClavePeriodo(declaracion.getClavePeriodo());
+						imprimePagoRequest.setReferencia(declaracion.getReferencia());
+						imprimePagoRequest.setFechaCompensa(declaracion.getFechaCompensa());
+						imprimePagoRequest.setImporte(declaracion.getImporte());
+						imprimePagoRequest.setMoneda(declaracion.getMoneda());
+						imprimePagoRequest.setNumfactForm(declaracion.getNumfactForm());
+						imprimePagoRequest.setNumDocPago(declaracion.getNumDocPago());
+						imprimePagoRequest.setRefROP(VACIO);
+
+						final String resp = sdhImprimePagoService.imprimePago(imprimePagoRequest);
+
+						final ImprimePagoResponse imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+
+						redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
 					}
-
-					imprimePagoRequest.setNumBP(declaracion.getNumBP());
-					imprimePagoRequest.setCtaContrato(declaracion.getCtaContrato());
-					imprimePagoRequest.setNumObjeto(declaracion.getNumObjeto());
-					imprimePagoRequest.setClavePeriodo(declaracion.getClavePeriodo());
-					imprimePagoRequest.setReferencia(declaracion.getReferencia());
-					imprimePagoRequest.setFechaCompensa(declaracion.getFechaCompensa());
-					imprimePagoRequest.setImporte(declaracion.getImporte());
-					imprimePagoRequest.setMoneda(declaracion.getMoneda());
-					imprimePagoRequest.setNumfactForm(declaracion.getNumfactForm());
-					imprimePagoRequest.setNumDocPago(declaracion.getNumDocPago());
-					imprimePagoRequest.setRefROP(VACIO);
-
-					final String resp = sdhImprimePagoService.imprimePago(imprimePagoRequest);
-
-					final ImprimePagoResponse imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
-
-					redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
 				}
+
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+				GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+				redirectModel.addFlashAttribute("error", "sinPdf");
+				return "redirect:/contribuyentes/consultas/certipagos";
+
+			}
+			redirectModel.addFlashAttribute("publicidadMode", false);
+		}
+		else if (certiFormPost.getIdimp().equals("4"))
+		{
+			if (certiFormPost.getRowFrompublicidadTable() != null)
+			{
+				if (certiFormPost.getRowFrompublicidadTable().equals("X"))
+				{
+					final ImprimePagoRequest imprimePubli = new ImprimePagoRequest();
+					imprimePubli.setNumBP(certiFormPost.getNumBP());
+					imprimePubli.setCtaContrato(certiFormPost.getCtaContrato());
+					imprimePubli.setNumObjeto(certiFormPost.getNumObjeto());
+					imprimePubli.setClavePeriodo(certiFormPost.getClavePeriodo());
+					imprimePubli.setReferencia(certiFormPost.getReferencia());
+					imprimePubli.setFechaCompensa(certiFormPost.getFechaCompensa());
+					imprimePubli.setImporte(certiFormPost.getImporte());
+					imprimePubli.setMoneda(certiFormPost.getMoneda());
+					imprimePubli.setNumfactForm(certiFormPost.getNumfactForm());
+					imprimePubli.setNumDocPago(certiFormPost.getNumDocPago());
+					imprimePubli.setRefROP(VACIO);
+
+					final ObjectMapper mapperPubli = new ObjectMapper();
+					final String respPubli = sdhImprimePagoService.imprimePago(imprimePubli);
+					ImprimePagoResponse imprimePagoPubliResponse = null;
+					try
+					{
+						imprimePagoPubliResponse = mapperPubli.readValue(respPubli, ImprimePagoResponse.class);
+						redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoPubliResponse);
+					}
+					catch (final IOException e)
+					{
+						GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+						redirectModel.addFlashAttribute("error", "sinPdf");
+						LOG.error(e.getMessage());
+					}
+				}
+				else
+				{
+					final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+					certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+					certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+					certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+
+					redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+					redirectModel.addFlashAttribute("publicidadMode", true);
+					try
+					{
+						redirectModel.addFlashAttribute("consultaPagoList",
+								sdhConsultaPagoService.consultaPago(certiFormPost.getNumBP(), "PU", certiFormPost.getAniograv()));
+					}
+					catch (final Exception e)
+					{
+						LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+					}
+				}
+
 			}
 
-
+			System.out.println(certiFormPost.getAniograv());
+			System.out.println(certiFormPost.getNumBP());
+			System.out.println(certiFormPost.getIdimp());
+			System.out.println(certiFormPost.getTipoImp());
 		}
-		catch (final Exception e)
-		{
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
-			redirectModel.addFlashAttribute("error", "sinPdf");
-			return "redirect:/contribuyentes/consultas/certipagos";
 
-		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_PAGOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_PAGOS_CMS_PAGE));

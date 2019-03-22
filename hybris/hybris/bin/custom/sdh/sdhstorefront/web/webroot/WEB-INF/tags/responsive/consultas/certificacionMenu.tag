@@ -26,6 +26,10 @@
 		
 		if(impuesto == '4'){
 			document.getElementById('idPeriodo').style.display = 'none';
+			var option = document.createElement("option");
+			option.text = "Seleccionar";
+			option.value =  " "
+			anioGravable.add(option);
 			<c:forEach var="item" items="${anoGravablePublicidad}">
 				var option = document.createElement("option");
 				option.text = "${item.name}";
@@ -34,6 +38,10 @@
     		</c:forEach>
 		}else{
 			document.getElementById('idPeriodo').style.display = '';
+			var option = document.createElement("option");
+			option.text = "Seleccionar";
+			option.value =  " "
+			anioGravable.add(option);
 			<c:forEach var="item" items="${anoGravableGasolina}">
 				var option = document.createElement("option");
 				option.text = "${item.name}";
@@ -45,6 +53,7 @@
 	
 	function onChangeAnioGravable() {
 		impuesto = document.getElementById("Idimp").value;
+		
 		
 		if(impuesto == 4){
 			form = document.getElementById("form_pdf");
@@ -78,15 +87,15 @@
 			<div class="headline">
 				<h2 align="center">
 					<span><spring:theme code="certificacion.inicial.titulo" /></span>
-					<c:out value = "${anoGravable}"/>
-
 				</h2>
 			</div>
-		</div>
+		</div>	
 		
 		<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certipagos" method="post" commandName="certiFormPost" >
 			
 			<input type="hidden" name="numBP" value="${certiForm.numBP}"/>
+			<!--  <input type="hidden" name="numBP" value="7182"/> -->
+			<input type="hidden" name="rowFrompublicidadTable" value=""/>
 			
 			<div class="row">
 				<div class="col-md-3">
@@ -325,6 +334,7 @@
 			</div>
 		</div>
 
+		<c:if test="${empty consultaPagoList}">
 		<div class="row">
 			<div class="col-md-12 col-md-offset-5">
 				<div class="form-group ">
@@ -340,26 +350,52 @@
 				</div>
 			</div>
 		 </div>
-		 
+		 </c:if>	
+		 	 
 	 </form:form>
 	 
+	 
+	 
+	<!--<c:if test="${not empty consultaPagoList}"> -->
 	 <table id="myTable"> 
 	 	<tr>
-    		<td>cell 1</td>
-    		<td>cell 2</td>
-    		<td>cell 2</td>
-  		</tr>
-  		<tr>
-    		<td>cell 3</td>
-    		<td>cell 4</td>
-    		<td>cell 2</td>
-  		</tr>
-  		<tr>
-    		<td>cell 3</td>
-    		<td>cell 4</td>
-    		<td>cell 2</td>
-  		</tr>
+    		<th>NUMERO DE RESOLUCION</th>
+    		<th>TIPO DE VALLA</th> 
+    		<th>IMPRIMIR</th>
+		 </tr>
+		<c:forEach var="item" items="${consultaPagoList}">
+	 		<tr>
+    			<td><c:out value="${item.numResolu}" /></td>
+	    		<td><c:out value="${item.tipoValla}" /></td>
+	    		<td>
+	    			<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certipagos" method="post" commandName="certiFormPost" >					
+						<input type="hidden" name="tipoImp" value="1"/>
+						<input type="hidden" name="Idimp" value="4"/>
+						<input type="hidden" name="rowFrompublicidadTable" value="X"/>
+						
+						<input type="hidden" name="numBP" value="${item.numBP}"/>
+						<input type="hidden" name="aniograv" value="${item.clavePeriodo}"/>
+						<input type="hidden" name="ctaContrato" value="${item.ctaContrato}"/>
+						<input type="hidden" name="numObjeto" value="${item.numObjeto}"/>
+						<input type="hidden" name="clavePeriodo" value="${item.clavePeriodo}"/>
+						<input type="hidden" name="referencia" value="${item.referencia}"/>
+						<input type="hidden" name="fechaCompensa" value="${item.fechaCompensa}"/>
+						<input type="hidden" name="importe" value="${item.importe}"/>
+						<input type="hidden" name="moneda" value="${item.moneda}"/>
+						<input type="hidden" name="numfactForm" value="${item.numfactForm}"/>
+						<input type="hidden" name="numDocPago" value="${item.numDocPago}"/>
+						<input type="hidden" name="numResolu" value="${item.numResolu}"/>
+						<input type="hidden" name="tipoValla" value="${item.tipoValla}"/>					
+						
+    					<button type="submit" class="btn btn-primary btn-lg" id="generarPDFButton" name="generarPDFButton">
+							<spring:theme code="certificacion.inicial.generar" />
+						</button>
+    				</form:form>
+    			</td>
+	  		</tr>
+  		</c:forEach>  		
   	</table>
+  	<!-- </c:if> -->
 		
 	</div>
 </div>
