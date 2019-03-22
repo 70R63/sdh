@@ -23,6 +23,10 @@ import de.hybris.platform.acceleratorcms.model.components.SimpleResponsiveBanner
 import de.hybris.platform.acceleratorcms.model.components.SubCategoryListComponentModel;
 import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 import de.hybris.platform.cms2lib.model.components.ProductCarouselComponentModel;
+import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -214,6 +218,35 @@ public interface ControllerConstants
 				String ReviewsTab = "fragments/product/reviewsTab"; // NOSONAR
 				String StorePickupSearchResults = "fragments/product/storePickupSearchResults"; // NOSONAR
 			}
+			
 		}
 	}
+	
+	interface AnioGravable{
+		
+		final List<SelectAtomValue> anoGravableGasolina = Arrays.asList(
+				new SelectAtomValue("2019", "2019"),
+				new SelectAtomValue("2018", "2018"),
+				new SelectAtomValue("2017", "2017"),
+				new SelectAtomValue("2016", "2016"),
+				new SelectAtomValue("2015", "2015"),
+				new SelectAtomValue("2014", "2014"),
+				new SelectAtomValue("2013", "2013"),
+				new SelectAtomValue("2012", "2012"),
+				new SelectAtomValue("2011", "2011"));
+		
+		final List<SelectAtomValue> anoGravablePublicidad = Arrays.asList(
+				new SelectAtomValue("19A1", "2019"),
+				new SelectAtomValue("18A1", "2018"),
+				new SelectAtomValue("17A1", "2017"),
+				new SelectAtomValue("16A1", "2016"),
+				new SelectAtomValue("15A1", "2015"),
+				new SelectAtomValue("14A1", "2014"),
+				new SelectAtomValue("13A1", "2013"),
+				new SelectAtomValue("12A1", "2012"),
+				new SelectAtomValue("11A1", "2011"));
+	}
+	
+	
+	
 }

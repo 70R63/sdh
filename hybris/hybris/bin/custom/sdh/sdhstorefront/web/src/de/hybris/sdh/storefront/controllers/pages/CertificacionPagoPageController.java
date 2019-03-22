@@ -22,6 +22,7 @@ import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHImprimePagoService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
+import de.hybris.sdh.storefront.controllers.ControllerConstants;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.CertificacionPagoForm;
@@ -93,37 +94,14 @@ public class CertificacionPagoPageController extends AbstractPageController
 	@ModelAttribute("anoGravableGasolina")
 	public List<SelectAtomValue> getIdAnoGravableGasolina()
 	{
+		return ControllerConstants.AnioGravable.anoGravableGasolina;
 
-		final List<SelectAtomValue> anoGravableGasolina = Arrays.asList(
-				new SelectAtomValue("2019", "2019"),
-				new SelectAtomValue("2018", "2018"),
-				new SelectAtomValue("2017", "2017"),
-				new SelectAtomValue("2016", "2016"),
-				new SelectAtomValue("2015", "2015"),
-				new SelectAtomValue("2014", "2014"),
-				new SelectAtomValue("2013", "2013"),
-				new SelectAtomValue("2012", "2012"),
-				new SelectAtomValue("2011", "2011"));
-
-		return anoGravableGasolina;
 	}
 
 	@ModelAttribute("anoGravablePublicidad")
 	public List<SelectAtomValue> getIdAnoGravablePublicidad()
 	{
-
-		final List<SelectAtomValue> anoGravablePublicidad = Arrays.asList(
-				new SelectAtomValue("19A1", "2019"),
-				new SelectAtomValue("18A1", "2018"),
-				new SelectAtomValue("17A1", "2017"),
-				new SelectAtomValue("16A1", "2016"),
-				new SelectAtomValue("15A1", "2015"),
-				new SelectAtomValue("14A1", "2014"),
-				new SelectAtomValue("13A1", "2013"),
-				new SelectAtomValue("12A1", "2012"),
-				new SelectAtomValue("11A1", "2011"));
-
-		return anoGravablePublicidad;
+		return ControllerConstants.AnioGravable.anoGravablePublicidad;
 	}
 
 

@@ -356,7 +356,7 @@
 	 
 	 
 	 
-	<!--<c:if test="${not empty consultaPagoList}"> -->
+	<c:if test="${not empty consultaPagoList}">
 	 <table id="myTable"> 
 	 	<tr>
     		<th>NUMERO DE RESOLUCION</th>
@@ -395,7 +395,7 @@
 	  		</tr>
   		</c:forEach>  		
   	</table>
-  	<!-- </c:if> -->
+  	</c:if>
 		
 	</div>
 </div>

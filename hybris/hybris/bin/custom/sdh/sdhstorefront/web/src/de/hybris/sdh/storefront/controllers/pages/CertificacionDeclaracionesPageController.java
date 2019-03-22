@@ -11,13 +11,17 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ImprimeCertDeclaraRequest;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHImprimeCertDeclaraService;
+import de.hybris.sdh.storefront.controllers.ControllerConstants;
+import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.CertificacionPagoForm;
+
+import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -68,6 +72,18 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 	@Resource(name = "sdhImprimeCertDeclaraService")
 	SDHImprimeCertDeclaraService sdhImprimeCertDeclaraService;
 
+	@ModelAttribute("anoGravableGasolina")
+	public List<SelectAtomValue> getIdAnoGravableGasolina()
+	{
+		return ControllerConstants.AnioGravable.anoGravableGasolina;
+	}
+
+	@ModelAttribute("anoGravablePublicidad")
+	public List<SelectAtomValue> getIdAnoGravablePublicidad()
+	{
+		return ControllerConstants.AnioGravable.anoGravablePublicidad;
+	}
+
 
 	@RequestMapping(value = "/contribuyentes/consultas/certideclaraciones", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -105,43 +121,101 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final ImprimeCertDeclaraRequest imprimeCertDeclaraRequest = new ImprimeCertDeclaraRequest();
 
-		try
+		if (certiFormPost.getIdimp().equals("4"))
 		{
-
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			if (certiFormPost.getIdimp().equals("4"))
+			if (certiFormPost.getRowFrompublicidadTable() != null)
 			{
-				imprimeCertDeclaraRequest.setNumObjeto(customerData.getExteriorPublicityTaxList().get(0).getObjectNumber());
+				if (certiFormPost.getRowFrompublicidadTable().equals("X"))
+				{
+					final ImprimeCertDeclaraRequest imprimeCertDeclaraPublicidadRequest = new ImprimeCertDeclaraRequest();
+					final ObjectMapper mapperPublicidad = new ObjectMapper();
+
+					imprimeCertDeclaraPublicidadRequest.setNumBP(certiFormPost.getNumBP());
+					imprimeCertDeclaraPublicidadRequest.setNumObjeto(certiFormPost.getNumObjeto());
+					imprimeCertDeclaraPublicidadRequest.setRetencion(VACIO);
+					imprimeCertDeclaraPublicidadRequest.setPeriodo(certiFormPost.getAniograv());
+					imprimeCertDeclaraPublicidadRequest.setAnoGravable(getAnioGravableFromPublicidadPeriodo(certiFormPost.getAniograv()));
+
+					final String respPublicidad = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraPublicidadRequest);
+					ImprimePagoResponse imprimeCertiDeclaraPublicidadResponse;
+					try
+					{
+						imprimeCertiDeclaraPublicidadResponse = mapperPublicidad.readValue(respPublicidad, ImprimePagoResponse.class);
+						redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraPublicidadResponse);
+					}
+					catch (final IOException e)
+					{
+						LOG.error(e.getMessage());
+						e.printStackTrace();
+					}
+
+				}
+				else
+				{
+					final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+					certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+					certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+					certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+
+					redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+					redirectModel.addFlashAttribute("publicidadMode", true);
+					try
+					{
+						redirectModel.addFlashAttribute("consultaPagoList",
+								sdhConsultaPagoService.consultaPago(certiFormPost.getNumBP(), "PU", certiFormPost.getAniograv()));
+					}
+					catch (final Exception e)
+					{
+						LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+					}
+
+					System.out.println(certiFormPost.getAniograv());
+					System.out.println(certiFormPost.getNumBP());
+					System.out.println(certiFormPost.getIdimp());
+					System.out.println(certiFormPost.getTipoImp());
+				}
 			}
-
-			if (certiFormPost.getIdimp().equals("5"))
-			{
-				imprimeCertDeclaraRequest.setNumObjeto(customerData.getGasTaxList().get(0).getObjectNumber());
-			}
-
-			final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
-
-			imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
-			imprimeCertDeclaraRequest.setRetencion(VACIO);
-			imprimeCertDeclaraRequest.setPeriodo(aniograv_periodo);
-			imprimeCertDeclaraRequest.setAnoGravable(certiFormPost.getAniograv());
-
-			final String resp = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraRequest);
-
-			final ImprimePagoResponse imprimeCertiDeclaraResponse = mapper.readValue(resp, ImprimePagoResponse.class);
-
-			redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraResponse);
-
 		}
-		catch (final Exception e)
+		else
 		{
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
-			redirectModel.addFlashAttribute("error", "sinPdf");
-			return "redirect:/contribuyentes/consultas/certideclaraciones";
+			try
+			{
 
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+				if (certiFormPost.getIdimp().equals("4"))
+				{
+					imprimeCertDeclaraRequest.setNumObjeto(customerData.getExteriorPublicityTaxList().get(0).getObjectNumber());
+				}
+
+				if (certiFormPost.getIdimp().equals("5"))
+				{
+					imprimeCertDeclaraRequest.setNumObjeto(customerData.getGasTaxList().get(0).getObjectNumber());
+				}
+
+				final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
+
+				imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
+				imprimeCertDeclaraRequest.setRetencion(VACIO);
+				imprimeCertDeclaraRequest.setPeriodo(aniograv_periodo);
+				imprimeCertDeclaraRequest.setAnoGravable(certiFormPost.getAniograv());
+
+				final String resp = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraRequest);
+
+				final ImprimePagoResponse imprimeCertiDeclaraResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+
+				redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraResponse);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+				GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+				redirectModel.addFlashAttribute("error", "sinPdf");
+				return "redirect:/contribuyentes/consultas/certideclaraciones";
+
+			}
 		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
@@ -152,6 +226,18 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		return "redirect:/contribuyentes/consultas/certideclaraciones";
 	}
 
+	private String getAnioGravableFromPublicidadPeriodo(final String perido)
+	{
+		String anio = "";
+		for (final SelectAtomValue element : ControllerConstants.AnioGravable.anoGravablePublicidad)
+		{
+			if (element.getCode().equals(perido))
+			{
+				anio = element.getName();
+			}
+		}
+		return anio;
+	}
 
 
 }
