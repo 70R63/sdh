@@ -251,7 +251,7 @@ public class PSEPaymentController extends AbstractPageController
 				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 			}
 		}else {
-			model.addAttribute("psePaymentForm", new PSEPaymentForm());
+			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 		}
 
