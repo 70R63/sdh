@@ -289,7 +289,7 @@ public class PSEPaymentController extends AbstractPageController
 
 			LOG.info("getPUBLICIDAD: " + controllerPseConstants.getPUBLICIDAD());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
-			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
+			LOG.info("getImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
 
 			if (psePaymentForm.getTipoDeImpuesto().toUpperCase().equals(controllerPseConstants.getPUBLICIDAD()))
 			{
@@ -321,9 +321,12 @@ public class PSEPaymentController extends AbstractPageController
 							}
 						}
 
-						if (!declaracion.getReferencia().isEmpty() || declaracion.getReferencia() != null)
+						if (declaracion.getReferencia() != null)
 						{
-							break;
+							if (!declaracion.getReferencia().isEmpty())
+							{
+								break;
+							}
 						}
 
 					}
@@ -332,7 +335,7 @@ public class PSEPaymentController extends AbstractPageController
 
 			LOG.info("getGASOLINA: " + controllerPseConstants.getGASOLINA());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
-			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
+			LOG.info("getImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
 
 			if (psePaymentForm.getTipoDeImpuesto().toUpperCase().equals(controllerPseConstants.getGASOLINA()))
 			{
