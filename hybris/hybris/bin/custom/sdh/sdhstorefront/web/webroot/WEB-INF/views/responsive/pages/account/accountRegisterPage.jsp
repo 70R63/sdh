@@ -10,6 +10,9 @@
 
 <template:page pageTitle="${pageTitle}">
 	<c:choose>
+		<c:when test="${currentSection eq 'requestRols' }">
+			<registration:requestRols/>
+		</c:when>
 		<c:when test="${currentSection eq 'searchUserSection' }">
 			<registration:searchUserSection/>
 		</c:when>
