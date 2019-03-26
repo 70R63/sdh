@@ -20,6 +20,9 @@ public class ConsultaPagoDeclaraciones
 	private String numfactForm;
 	private String numDocPago;
 
+	private String numResolu;
+	private String tipoValla;
+
 	/**
 	 * @return the numBP
 	 */
@@ -189,6 +192,41 @@ public class ConsultaPagoDeclaraciones
 	{
 		this.numDocPago = numDocPago;
 	}
+
+	/**
+	 * @return the numResolu
+	 */
+	public String getNumResolu()
+	{
+		return numResolu;
+	}
+
+	/**
+	 * @param numResolu
+	 *           the numResolu to set
+	 */
+	public void setNumResolu(final String numResolu)
+	{
+		this.numResolu = numResolu;
+	}
+
+	/**
+	 * @return the tipoValla
+	 */
+	public String getTipoValla()
+	{
+		return tipoValla;
+	}
+
+	/**
+	 * @param tipoValla
+	 *           the tipoValla to set
+	 */
+	public void setTipoValla(final String tipoValla)
+	{
+		this.tipoValla = tipoValla;
+	}
+
 
 
 

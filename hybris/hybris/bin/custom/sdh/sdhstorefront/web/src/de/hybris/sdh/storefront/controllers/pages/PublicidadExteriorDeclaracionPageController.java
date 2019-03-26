@@ -67,7 +67,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -77,7 +76,6 @@ import sun.misc.BASE64Decoder;
  * Controller for home page 2
  */
 @Controller
-@SessionAttributes("infoPreviaPSE")
 @RequestMapping("/contribuyentes/publicidadexterior/declaracion")
 public class PublicidadExteriorDeclaracionPageController extends AbstractPageController
 {
@@ -146,6 +144,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	final String anoGravable, @RequestParam(required = true, value = "tipoValla")
 	final String tipoValla, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
+		String anoParaPSE = "";
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
@@ -165,6 +164,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
 
+			anoParaPSE = detallePublicidadResponse.getAnoGravable();
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
 			declaPublicidadForm.setTipoValla(tipoValla);
 			declaPublicidadForm.setIdNumber(customerData.getDocumentNumber());
@@ -246,12 +246,12 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
-			infoPreviaPSE.setAnoGravable(anoGravable);
+			infoPreviaPSE.setAnoGravable(anoParaPSE);
 			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
 			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
 			infoPreviaPSE.setNumBP(numBP);
-			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoGravable));
-			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoPublicidad(detalleContribuyente));
+			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoPublicidad(detalleContribuyente, numResolu));
 			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getPUBLICIDAD());
 		}

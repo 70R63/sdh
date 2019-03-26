@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
@@ -37,9 +38,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * Controller for home page 2
  */
 @Controller
-@SessionAttributes(
-{ "infoPreviaPSE", "psePaymentForm" })
-
+@SessionAttributes("psePaymentForm")
 public class PreparacionPagoPSE extends AbstractPageController
 {
 

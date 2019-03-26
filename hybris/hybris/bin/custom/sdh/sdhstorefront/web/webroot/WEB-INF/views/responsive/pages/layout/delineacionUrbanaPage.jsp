@@ -11,7 +11,9 @@
 <sf:form>
 	<delineacionUrbana:delineacionUrbanaIDs />
 	<delineacionUrbana:delineacionUrbanaCDUs />
+	<div id="idRadicados" style="display: none;">
 	<delineacionUrbana:delineacionUrbanaRadicados />
+	</div>
 </sf:form>
 
 
@@ -56,5 +58,11 @@ function goBack() {
 								"sSearch" : "Buscar:",
 							}
 						});
+	}
+	
+	function show() {
+		var idRad = document.getElementById('idRadicados');
+			idRad.style.display = 'block';
+	
 	}
 </script>

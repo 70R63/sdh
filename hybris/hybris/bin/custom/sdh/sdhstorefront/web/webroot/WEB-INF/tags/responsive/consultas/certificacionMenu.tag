@@ -16,16 +16,50 @@
 	
 <script>
 
-	function onChange() {
+	function onChange(anoGravableGasolina,anoGravablePublicidad) {
+		impuesto = document.getElementById("Idimp").value;
+		anioGravable = document.getElementById("aniograv");
+		
+		for(i = anioGravable.options.length - 1 ; i >= 0 ; i--){
+			anioGravable.remove(i);
+    	}
+		
+		if(impuesto == '4'){
+			document.getElementById('idPeriodo').style.display = 'none';
+			var option = document.createElement("option");
+			option.text = "Seleccionar";
+			option.value =  " "
+			anioGravable.add(option);
+			<c:forEach var="item" items="${anoGravablePublicidad}">
+				var option = document.createElement("option");
+				option.text = "${item.name}";
+				option.value =  "${item.code}"
+				anioGravable.add(option);
+    		</c:forEach>
+		}else{
+			document.getElementById('idPeriodo').style.display = '';
+			var option = document.createElement("option");
+			option.text = "Seleccionar";
+			option.value =  " "
+			anioGravable.add(option);
+			<c:forEach var="item" items="${anoGravableGasolina}">
+				var option = document.createElement("option");
+				option.text = "${item.name}";
+				option.value =  "${item.code}"
+				anioGravable.add(option);
+			</c:forEach>
+		}		
+	}
+	
+	function onChangeAnioGravable() {
 		impuesto = document.getElementById("Idimp").value;
 		
 		
-		if(impuesto == '4'){
-			document.getElementById('idPeriodo').style.display = 'none';	
-		}else{
-			document.getElementById('idPeriodo').style.display = '';
+		if(impuesto == 4){
+			form = document.getElementById("form_pdf");
+			form.submit();
 		}
-		
+			
 	}
 	
 	function downloadPDF(pdf) {
@@ -53,14 +87,15 @@
 			<div class="headline">
 				<h2 align="center">
 					<span><spring:theme code="certificacion.inicial.titulo" /></span>
-
 				</h2>
 			</div>
-		</div>
+		</div>	
 		
 		<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certipagos" method="post" commandName="certiFormPost" >
 			
 			<input type="hidden" name="numBP" value="${certiForm.numBP}"/>
+			<!--  <input type="hidden" name="numBP" value="7182"/> -->
+			<input type="hidden" name="rowFrompublicidadTable" value=""/>
 			
 			<div class="row">
 				<div class="col-md-3">
@@ -82,7 +117,7 @@
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.selcimpuesto" /></label>
 						<select	required="required" required id="Idimp" class="form-control "
-							name="Idimp" onchange="onChange()">
+							name="Idimp" onchange="onChange('${anoGravable}','${anoGravable}')">
 							<option value="">Seleccionar</option>
 							<!--option value="1">Predial Unificado</option>-->
 							<!--<option value="2">Vehículos</option>-->
@@ -100,14 +135,14 @@
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.aniograv" /></label> <select
 							aria-required="true" id="aniograv" class="form-control "
-							name="aniograv" 				required='required'>
+							name="aniograv" required='required' onchange="onChangeAnioGravable()">
 							<option value="">Seleccionar</option>
 							<option value="2019">2019</option>
 							<option value="2018">2018</option>
 							<option value="2017">2017</option>
 							<option value="2016">2016</option>
-							<option value="2016">2015</option>
-							<option value="2016">2014</option>
+							<option value="2015">2015</option>
+							<option value="2014">2014</option>
 						</select>
 					</div>
 				</div>
@@ -299,6 +334,7 @@
 			</div>
 		</div>
 
+		<c:if test="${empty consultaPagoList}">
 		<div class="row">
 			<div class="col-md-12 col-md-offset-5">
 				<div class="form-group ">
@@ -314,8 +350,52 @@
 				</div>
 			</div>
 		 </div>
-		 
+		 </c:if>	
+		 	 
 	 </form:form>
+	 
+	 
+	 
+	<c:if test="${not empty consultaPagoList}">
+	 <table id="myTable"> 
+	 	<tr>
+    		<th>NUMERO DE RESOLUCION</th>
+    		<th>TIPO DE VALLA</th> 
+    		<th>IMPRIMIR</th>
+		 </tr>
+		<c:forEach var="item" items="${consultaPagoList}">
+	 		<tr>
+    			<td><c:out value="${item.numResolu}" /></td>
+	    		<td><c:out value="${item.tipoValla}" /></td>
+	    		<td>
+	    			<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certipagos" method="post" commandName="certiFormPost" >					
+						<input type="hidden" name="tipoImp" value="1"/>
+						<input type="hidden" name="Idimp" value="4"/>
+						<input type="hidden" name="rowFrompublicidadTable" value="X"/>
+						
+						<input type="hidden" name="numBP" value="${item.numBP}"/>
+						<input type="hidden" name="aniograv" value="${item.clavePeriodo}"/>
+						<input type="hidden" name="ctaContrato" value="${item.ctaContrato}"/>
+						<input type="hidden" name="numObjeto" value="${item.numObjeto}"/>
+						<input type="hidden" name="clavePeriodo" value="${item.clavePeriodo}"/>
+						<input type="hidden" name="referencia" value="${item.referencia}"/>
+						<input type="hidden" name="fechaCompensa" value="${item.fechaCompensa}"/>
+						<input type="hidden" name="importe" value="${item.importe}"/>
+						<input type="hidden" name="moneda" value="${item.moneda}"/>
+						<input type="hidden" name="numfactForm" value="${item.numfactForm}"/>
+						<input type="hidden" name="numDocPago" value="${item.numDocPago}"/>
+						<input type="hidden" name="numResolu" value="${item.numResolu}"/>
+						<input type="hidden" name="tipoValla" value="${item.tipoValla}"/>					
+						
+    					<button type="submit" class="btn btn-primary btn-lg" id="generarPDFButton" name="generarPDFButton">
+							<spring:theme code="certificacion.inicial.generar" />
+						</button>
+    				</form:form>
+    			</td>
+	  		</tr>
+  		</c:forEach>  		
+  	</table>
+  	</c:if>
 		
 	</div>
 </div>
