@@ -305,25 +305,28 @@ public class PSEPaymentController extends AbstractPageController
 							.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
 
 					final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
-
-					for (final ConsultaPagoDeclaraciones element : declaracionesList)
+					if (declaracionesList != null)
 					{
-
-						LOG.info("		element.getReferencia: " + element.getReferencia());
-						LOG.info("		psePaymentForm.getNumeroDeReferencia: " + psePaymentForm.getNumeroDeReferencia());
-
-						if (element.getReferencia().equals(psePaymentForm.getNumeroDeReferencia()))
+						for (final ConsultaPagoDeclaraciones element : declaracionesList)
 						{
-							declaracion = element;
+
+							LOG.info("		element.getReferencia: " + element.getReferencia());
+							LOG.info("		psePaymentForm.getNumeroDeReferencia: " + psePaymentForm.getNumeroDeReferencia());
+
+							if (element.getReferencia().equals(psePaymentForm.getNumeroDeReferencia())
+									&& element.getClavePeriodo().equals(psePaymentForm.getPeriodo()))
+							{
+								declaracion = element;
+								break;
+							}
+						}
+
+						if (!declaracion.getReferencia().isEmpty() || declaracion.getReferencia() != null)
+						{
 							break;
 						}
-					}
 
-					if (!declaracion.getReferencia().isEmpty() || declaracion.getReferencia() != null)
-					{
-						break;
 					}
-
 				}
 			}
 
