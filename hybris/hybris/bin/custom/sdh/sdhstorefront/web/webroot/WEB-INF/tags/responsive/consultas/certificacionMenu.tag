@@ -17,49 +17,23 @@
 <script>
 
 	function onChange(anoGravableGasolina,anoGravablePublicidad) {
-		impuesto = document.getElementById("Idimp").value;
-		anioGravable = document.getElementById("aniograv");
-		
-		for(i = anioGravable.options.length - 1 ; i >= 0 ; i--){
-			anioGravable.remove(i);
-    	}
-		
-		if(impuesto == '4'){
-			document.getElementById('idPeriodo').style.display = 'none';
-			var option = document.createElement("option");
-			option.text = "Seleccionar";
-			option.value =  " "
-			anioGravable.add(option);
-			<c:forEach var="item" items="${anoGravablePublicidad}">
-				var option = document.createElement("option");
-				option.text = "${item.name}";
-				option.value =  "${item.code}"
-				anioGravable.add(option);
-    		</c:forEach>
-		}else{
-			document.getElementById('idPeriodo').style.display = '';
-			var option = document.createElement("option");
-			option.text = "Seleccionar";
-			option.value =  " "
-			anioGravable.add(option);
-			<c:forEach var="item" items="${anoGravableGasolina}">
-				var option = document.createElement("option");
-				option.text = "${item.name}";
-				option.value =  "${item.code}"
-				anioGravable.add(option);
-			</c:forEach>
-		}		
+		form = document.getElementById("form_pdf");
+
+		input = document.createElement('input');
+        input.setAttribute('name', 'rowFrompublicidadTable');
+        input.setAttribute('value', 'X');
+        input.setAttribute('type', 'hidden');
+        
+        form.appendChild(input);
+		form.submit();
 	}
 	
 	function onChangeAnioGravable() {
 		impuesto = document.getElementById("Idimp").value;
-		
-		
 		if(impuesto == 4){
 			form = document.getElementById("form_pdf");
 			form.submit();
-		}
-			
+		}			
 	}
 	
 	function downloadPDF(pdf) {
@@ -67,8 +41,7 @@
 		if (pdf){
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 		    const downloadLink = document.createElement("a");
-		    const fileName = "Certificación_Pago.pdf";
-	
+		    const fileName = "Certificación_Pago.pdf";	
 		    downloadLink.href = linkSource;
 		    downloadLink.download = fileName;
 		    downloadLink.click();
@@ -77,16 +50,21 @@
 	downloadPDF('${imprimePagoResponse.stringPDF}');
 </script>	
 
-<script>
-
-</script>
+<c:choose>
+    <c:when test="${certiFormPost.idimp == '4'}">
+        <c:set var = "anioGravable" value = "${anoGravablePublicidad}"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var = "anioGravable" value = "${anoGravableGasolina}"/>
+    </c:otherwise>
+</c:choose>
 
 <div>
 	<div class="container">
 		<div class="row">
 			<div class="headline">
 				<h2 align="center">
-					<span><spring:theme code="certificacion.inicial.titulo" /></span>
+					<span><spring:theme code="certificacion.inicial.titulo" /></span> 
 				</h2>
 			</div>
 		</div>	
@@ -94,59 +72,40 @@
 		<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certipagos" method="post" commandName="certiFormPost" >
 			
 			<input type="hidden" name="numBP" value="${certiForm.numBP}"/>
-			<!--  <input type="hidden" name="numBP" value="7182"/> -->
 			<input type="hidden" name="rowFrompublicidadTable" value=""/>
 			
 			<div class="row">
 				<div class="col-md-3">
-					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.tipo" /></label><select required="required"
-							required id="impuesto" class="form-control " name="tipoImp"
-							>
-							<option value="">Seleccionar</option>
-							<option value="1">Impuesto</option>
-							<option value="2">Sujeto</option>
-	
-						</select>
+					<div class="form-group">						
+						<formElement:formSelectBox idKey="impuesto" 
+							labelKey="certideclara.inicial.selcimpuesto" 
+							path="tipoImp" mandatory="true" 
+							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
+							items="${impuesto}" selectCSSClass="form-control"/>
 					</div>
 				</div>
 			
 				<div class="col-md-3" id="idImpuesto" style="display: block;">
 					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.selcimpuesto" /></label>
-						<select	required="required" required id="Idimp" class="form-control "
-							name="Idimp" onchange="onChange('${anoGravable}','${anoGravable}')">
-							<option value="">Seleccionar</option>
-							<!--option value="1">Predial Unificado</option>-->
-							<!--<option value="2">Vehículos</option>-->
-							<!--<option value="3">ICA</option>-->
-							<option value="4">Publicidad Exterior</option>
-							<option value="5">Sobretasa Gasolina</option>
-							<!--<option value="6">Delineación Urbana</option>-->
-						</select>
+						<formElement:formSelectBox idKey="Idimp" 
+							labelKey="certideclara.inicial.selcimpuesto" 
+							path="Idimp" mandatory="true" 
+							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
+							items="${tipoDeImpuesto}" selectCSSClass="form-control" onchange="onChange()"/>
 					</div>
 				</div>
-
-
+				
 				<div class="col-md-3" id="idAnio" style="display: block;">
 					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.aniograv" /></label> <select
-							aria-required="true" id="aniograv" class="form-control "
-							name="aniograv" required='required' onchange="onChangeAnioGravable()">
-							<option value="">Seleccionar</option>
-							<option value="2019">2019</option>
-							<option value="2018">2018</option>
-							<option value="2017">2017</option>
-							<option value="2016">2016</option>
-							<option value="2015">2015</option>
-							<option value="2014">2014</option>
-						</select>
+						<formElement:formSelectBox idKey="aniograv" 
+							labelKey="certideclara.inicial.aniograv" 
+							path="aniograv" mandatory="true" 
+							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
+							items="${anioGravable}" selectCSSClass="form-control" onchange="onChangeAnioGravable()"/>
 					</div>
 				</div>
-
+				
+				<c:if test="${certiFormPost.idimp ne '4'}">
 				<div class="col-md-3" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
@@ -169,7 +128,8 @@
 							<option value="12">12-Diciembre</option>
 						</select>
 					</div>
-				</div>		
+				</div>
+				</c:if>			
 		</div>
 		
 		
@@ -334,7 +294,7 @@
 			</div>
 		</div>
 
-		<c:if test="${empty consultaPagoList}">
+		<c:if test="${certiFormPost.idimp ne '4'}">
 		<div class="row">
 			<div class="col-md-12 col-md-offset-5">
 				<div class="form-group ">
