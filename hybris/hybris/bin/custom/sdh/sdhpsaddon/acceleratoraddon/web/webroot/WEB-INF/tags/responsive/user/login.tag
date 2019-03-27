@@ -31,7 +31,14 @@
 		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="form-control" mandatory="true" />
 		<input type="hidden" id="registeredCheckout" name="registeredCheckout" value="${registeredCheckout}" />
 
-		<formElement:formCheckbox idKey="notARobot" labelKey="login.not.a.robot" path="notARobot"/>
+		<c:choose>
+			<c:when test="${captchaEnabledForCurrentStore eq true }">
+				<div class="form_field-elements control-group js-recaptcha-captchaaddon"></div>
+			</c:when>
+			<c:otherwise>
+				<formElement:formCheckbox idKey="notARobot" labelKey="login.not.a.robot" path="notARobot"/>	
+			</c:otherwise>
+		</c:choose>
 
 		<div class="forgotten-password">
 			<ycommerce:testId code="login_forgotPassword_link">

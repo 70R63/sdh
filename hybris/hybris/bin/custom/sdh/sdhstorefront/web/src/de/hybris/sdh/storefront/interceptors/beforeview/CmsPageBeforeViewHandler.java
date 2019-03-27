@@ -14,6 +14,7 @@ import de.hybris.platform.acceleratorcms.data.CmsPageRequestContextData;
 import de.hybris.platform.acceleratorcms.model.actions.AbstractCMSActionModel;
 import de.hybris.platform.acceleratorcms.services.CMSPageContextService;
 import de.hybris.platform.acceleratorservices.addonsupport.RequiredAddOnsNameProvider;
+import de.hybris.platform.acceleratorservices.config.SiteConfigService;
 import de.hybris.platform.acceleratorservices.data.RequestContextData;
 import de.hybris.platform.acceleratorservices.util.SpringHelper;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
@@ -37,6 +38,8 @@ import de.hybris.platform.jalo.c2l.LocalizableItem;
 import de.hybris.platform.servicelayer.model.AbstractItemModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.type.TypeService;
+import de.hybris.platform.store.BaseStoreModel;
+import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.storefront.filters.cms.CMSSiteFilter;
 import de.hybris.sdh.storefront.forms.UIMenuForm;
@@ -68,6 +71,8 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 	private static final String CSS_TYPE_PREFIX = "pageType-";
 	private static final String CSS_TEMPLATE_PREFIX = "template-";
 
+	private static final String RECAPTCHA_SITE_KEY_PROPERTY = "recaptcha.publickey";
+
 	@Resource(name = "cmsSiteService")
 	private CMSSiteService cmsSiteService;
 
@@ -95,6 +100,11 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
 
+	@Resource(name = "baseStoreService")
+	BaseStoreService baseStoreService;
+
+	@Resource(name = "siteConfigService")
+	SiteConfigService siteConfigService;
 
 	@Override
 	public void beforeView(final HttpServletRequest request, final HttpServletResponse response, final ModelAndView modelAndView)
@@ -173,6 +183,22 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 		}
 
+		if (request != null)
+		{
+			final boolean captchaEnabledForCurrentStore = isCaptchaEnabledForCurrentStore();
+			request.setAttribute("captchaEnabledForCurrentStore", Boolean.valueOf(captchaEnabledForCurrentStore));
+			if (captchaEnabledForCurrentStore)
+			{
+				request.setAttribute("recaptchaPublicKey", siteConfigService.getProperty(RECAPTCHA_SITE_KEY_PROPERTY));
+			}
+		}
+
+	}
+
+	protected boolean isCaptchaEnabledForCurrentStore()
+	{
+		final BaseStoreModel currentBaseStore = baseStoreService.getCurrentBaseStore();
+		return currentBaseStore != null && Boolean.TRUE.equals(currentBaseStore.getCaptchaCheckEnabled());
 	}
 
 	protected String getNameOfComponentExtension(final AbstractCMSComponentModel component)
