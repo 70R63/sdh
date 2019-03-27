@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
@@ -30,7 +29,6 @@ import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInform
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
-import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
@@ -278,6 +276,7 @@ public class PSEPaymentController extends AbstractPageController
 		ConsultaPagoDeclaraciones declaracion = new ConsultaPagoDeclaraciones();
 		final ImprimePagoRequest imprimePagoRequest = new ImprimePagoRequest();
 		final ControllerPseConstants controllerPseConstants = new ControllerPseConstants();
+		final String ComodinPublicidad = "PU";
 
 		try
 		{
@@ -293,42 +292,26 @@ public class PSEPaymentController extends AbstractPageController
 
 			if (psePaymentForm.getTipoDeImpuesto().toUpperCase().equals(controllerPseConstants.getPUBLICIDAD()))
 			{
-				final List<SDHExteriorPublicityTaxData> exteriorPublicityTaxList = customerData.getExteriorPublicityTaxList();
+				consultaPagoRequest.setNumObjeto(ComodinPublicidad);
 
-				for (final SDHExteriorPublicityTaxData exteriorPublicityTax : exteriorPublicityTaxList)
+				final ConsultaPagoResponse consultaPagoResponse = mapper
+						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
+
+				final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
+				if (declaracionesList != null)
 				{
-					LOG.info("	exteriorPublicityTax.getObjectNumber: " + exteriorPublicityTax.getObjectNumber());
-
-					consultaPagoRequest.setNumObjeto(exteriorPublicityTax.getObjectNumber());
-
-					final ConsultaPagoResponse consultaPagoResponse = mapper
-							.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
-
-					final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
-					if (declaracionesList != null)
+					for (final ConsultaPagoDeclaraciones element : declaracionesList)
 					{
-						for (final ConsultaPagoDeclaraciones element : declaracionesList)
+
+						LOG.info("		element.getReferencia: " + element.getReferencia());
+						LOG.info("		psePaymentForm.getNumeroDeReferencia: " + psePaymentForm.getNumeroDeReferencia());
+
+						if (element.getReferencia().equals(psePaymentForm.getNumeroDeReferencia())
+								&& element.getClavePeriodo().equals(psePaymentForm.getPeriodo()))
 						{
-
-							LOG.info("		element.getReferencia: " + element.getReferencia());
-							LOG.info("		psePaymentForm.getNumeroDeReferencia: " + psePaymentForm.getNumeroDeReferencia());
-
-							if (element.getReferencia().equals(psePaymentForm.getNumeroDeReferencia())
-									&& element.getClavePeriodo().equals(psePaymentForm.getPeriodo()))
-							{
-								declaracion = element;
-								break;
-							}
+							declaracion = element;
+							break;
 						}
-
-						if (declaracion.getReferencia() != null)
-						{
-							if (!declaracion.getReferencia().isEmpty())
-							{
-								break;
-							}
-						}
-
 					}
 				}
 			}
