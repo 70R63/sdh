@@ -23,13 +23,11 @@ import de.hybris.sdh.core.services.SDHImprimePagoService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
-import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.CertificacionPagoForm;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -79,18 +77,6 @@ public class CertificacionPagoPageController extends AbstractPageController
 	@Resource(name = "sdhImprimePagoService")
 	SDHImprimePagoService sdhImprimePagoService;
 
-	@ModelAttribute("tipoDeImpuesto")
-	public List<SelectAtomValue> getIdTipoDeImpuesto()
-	{
-
-		final List<SelectAtomValue> tipoDeImpuesto = Arrays.asList(
-				new SelectAtomValue(new ControllerPseConstants().getGASOLINA(), "Gasolina"),
-				new SelectAtomValue(new ControllerPseConstants().getPUBLICIDAD(), "Publicidad")
-		);
-
-		return tipoDeImpuesto;
-	}
-
 	@ModelAttribute("anoGravableGasolina")
 	public List<SelectAtomValue> getIdAnoGravableGasolina()
 	{
@@ -102,6 +88,18 @@ public class CertificacionPagoPageController extends AbstractPageController
 	public List<SelectAtomValue> getIdAnoGravablePublicidad()
 	{
 		return ControllerConstants.AnioGravable.anoGravablePublicidad;
+	}
+
+	@ModelAttribute("tipoDeImpuesto")
+	public List<SelectAtomValue> getTtipoDeImpuesto()
+	{
+		return ControllerConstants.AnioGravable.tipoDeImpuesto;
+	}
+
+	@ModelAttribute("impuesto")
+	public List<SelectAtomValue> getImpuesto()
+	{
+		return ControllerConstants.AnioGravable.impuesto;
 	}
 
 
@@ -199,19 +197,16 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 		if (certiFormPost.getIdimp().equals("5"))
 		{
+			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+
 			try
 			{
 				final ConsultaPagoRequest consultaPagoRequest = new ConsultaPagoRequest();
-
 				consultaPagoRequest.setNumBP(certiFormPost.getNumBP());
-
-
-				/*
-				 * if (certiFormPost.getIdimp().equals("4")) {
-				 * consultaPagoRequest.setNumObjeto(certiFormPost.getNumObjetoSel()); }
-				 */
-
-
 
 				if (certiFormPost.getIdimp().equals("5"))
 				{
@@ -224,7 +219,6 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 				final ObjectMapper mapper = new ObjectMapper();
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
 				final ConsultaPagoResponse consultaPagoResponse = mapper
 						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
 
@@ -235,11 +229,6 @@ public class CertificacionPagoPageController extends AbstractPageController
 					if (consultaPagoResponse.getDeclaraciones() != null)
 					{
 						final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
-
-						/*
-						 * if (certiFormPost.getIdimp().equals("4")) { declaracion = declaracionesList.get(0); }
-						 */
-
 						if (certiFormPost.getIdimp().equals("5"))
 						{
 							final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
@@ -278,7 +267,10 @@ public class CertificacionPagoPageController extends AbstractPageController
 			{
 				LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
 				GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
-				redirectModel.addFlashAttribute("error", "sinPdf");
+				if (!certiFormPost.getRowFrompublicidadTable().replace(",", "").equals("X"))
+				{
+					redirectModel.addFlashAttribute("error", "sinPdf");
+				}
 				return "redirect:/contribuyentes/consultas/certipagos";
 
 			}
@@ -318,8 +310,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 						LOG.error(e.getMessage());
 					}
 				}
-				else
-				{
+				/*
+				 * else {
+				 */
 					final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
 					certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
 					certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
@@ -336,7 +329,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 					{
 						LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
 					}
-				}
+				/*}*/
 
 			}
 

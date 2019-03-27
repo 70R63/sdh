@@ -84,6 +84,12 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		return ControllerConstants.AnioGravable.anoGravablePublicidad;
 	}
 
+	@ModelAttribute("tipoDeImpuesto")
+	public List<SelectAtomValue> getTtipoDeImpuesto()
+	{
+		return ControllerConstants.AnioGravable.tipoDeImpuesto;
+	}
+
 
 	@RequestMapping(value = "/contribuyentes/consultas/certideclaraciones", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -152,14 +158,15 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 					}
 
 				}
-				else
-				{
+				/*
+				 * else {
+				 */
 					final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
 					certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
 					certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
 					certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
-
 					redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+
 					redirectModel.addFlashAttribute("publicidadMode", true);
 					try
 					{
@@ -175,11 +182,22 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 					System.out.println(certiFormPost.getNumBP());
 					System.out.println(certiFormPost.getIdimp());
 					System.out.println(certiFormPost.getTipoImp());
-				}
+				/* } */
 			}
 		}
 		else
 		{
+			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+
+			System.out.println(certiFormPost.getAniograv());
+			System.out.println(certiFormPost.getNumBP());
+			System.out.println(certiFormPost.getIdimp());
+			System.out.println(certiFormPost.getTipoImp());
+			System.out.println("--------------[" + certiFormPost.getRowFrompublicidadTable() + "]--------------");
 			try
 			{
 
@@ -204,17 +222,17 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				imprimeCertDeclaraRequest.setAnoGravable(certiFormPost.getAniograv());
 
 				final String resp = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraRequest);
-
 				final ImprimePagoResponse imprimeCertiDeclaraResponse = mapper.readValue(resp, ImprimePagoResponse.class);
-
 				redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraResponse);
-
 			}
 			catch (final Exception e)
 			{
 				LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
 				GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
-				redirectModel.addFlashAttribute("error", "sinPdf");
+				if (!certiFormPost.getRowFrompublicidadTable().replace(",", "").equals("X"))
+				{
+					redirectModel.addFlashAttribute("error", "sinPdf");
+				}
 				return "redirect:/contribuyentes/consultas/certideclaraciones";
 
 			}
