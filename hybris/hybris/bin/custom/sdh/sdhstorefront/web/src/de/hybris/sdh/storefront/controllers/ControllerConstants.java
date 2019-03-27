@@ -218,12 +218,12 @@ public interface ControllerConstants
 				String ReviewsTab = "fragments/product/reviewsTab"; // NOSONAR
 				String StorePickupSearchResults = "fragments/product/storePickupSearchResults"; // NOSONAR
 			}
-			
+
 		}
 	}
-	
+
 	interface AnioGravable{
-		
+
 		final List<SelectAtomValue> anoGravableGasolina = Arrays.asList(
 				new SelectAtomValue("2019", "2019"),
 				new SelectAtomValue("2018", "2018"),
@@ -234,7 +234,7 @@ public interface ControllerConstants
 				new SelectAtomValue("2013", "2013"),
 				new SelectAtomValue("2012", "2012"),
 				new SelectAtomValue("2011", "2011"));
-		
+
 		final List<SelectAtomValue> anoGravablePublicidad = Arrays.asList(
 				new SelectAtomValue("19A1", "2019"),
 				new SelectAtomValue("18A1", "2018"),
@@ -245,8 +245,21 @@ public interface ControllerConstants
 				new SelectAtomValue("13A1", "2013"),
 				new SelectAtomValue("12A1", "2012"),
 				new SelectAtomValue("11A1", "2011"));
+
+		final List<SelectAtomValue> tipoDeImpuesto = Arrays.asList(
+				//new SelectAtomValue("1", "Predial Unificado"),
+				//new SelectAtomValue("2", "Vehículos"),
+				//new SelectAtomValue("3", "ICA"),
+				new SelectAtomValue("4", "Publicidad Exterior"),
+				new SelectAtomValue("5", "Sobretasa Gasolina"));
+				//new SelectAtomValue("6", "Delineación Urbana"));
+		
+		final List<SelectAtomValue> impuesto = Arrays.asList(
+				new SelectAtomValue("1", "Impuesto"),
+				new SelectAtomValue("2", "Sujeto"));
+
 	}
-	
-	
-	
+
+
+
 }
