@@ -8,8 +8,8 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="row ">
-	<div class="col-md-8  text-right">
-		<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href = '<c:url value="/contribuyentes/mirit/certificacion-datos" />'"><spring:theme code="mirit.buttons.certificate"  /></button>
+	<div class="col-12 col-md-4 col-md-offset-2 text-center">
+		<button class="btn btn-primary btn-block btn-lg" type="button" onclick="window.location.href = '<c:url value="/contribuyentes/mirit/certificacion-datos" />'"><spring:theme code="mirit.buttons.certificate"  /></button>
 <%-- 		<button class="btn btn-primary btn-lg" type="button" id="updateRitButton"><spring:theme code="mirit.buttons.update" /></button> --%>
 	</div>
 </div>

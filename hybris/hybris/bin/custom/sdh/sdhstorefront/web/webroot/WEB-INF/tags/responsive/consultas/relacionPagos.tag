@@ -259,15 +259,15 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-12 col-md-offset-5">
+				<div class="col-md-12 text-center">
 					<div class="form-group ">
 						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="cancelar">
+							name="action" value="cancelar" style=" margin-top: 3px">
 							<spring:theme code="relacion.inicial.cancelar" />
 						</button>
 				
 						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar">
+							name="action" value="generar" style=" margin-top: 3px">
 							<spring:theme code="relacion.inicial.generar" />
 						</button>
 					</div>

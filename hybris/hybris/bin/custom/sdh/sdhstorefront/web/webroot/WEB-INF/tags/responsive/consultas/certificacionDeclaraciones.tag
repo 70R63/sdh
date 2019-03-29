@@ -288,15 +288,15 @@
 
 			<c:if test="${certiFormPost.idimp ne '4'}">
 			<div class="row" id="formButtons">
-				<div class="col-md-12 col-md-offset-5">
+				<div class="col-md-12 text-center">
 					<div class="form-group ">
 						<button type="button" class="btn btn-primary btn-lg" id="action"
-							name="action" value="cancelar">
+							name="action" value="cancelar"  style=" margin-top: 3px">
 							<spring:theme code="certideclara.inicial.cancelar" />
 						</button>
 	
 						<button type="submit" class="btn btn-primary btn-lg"
-							id="generarPDFButton" name="generarPDFButton">
+							id="generarPDFButton" name="generarPDFButton"  style=" margin-top: 3px">
 							<spring:theme code="certideclara.inicial.generar" />
 						</button>
 					</div>
