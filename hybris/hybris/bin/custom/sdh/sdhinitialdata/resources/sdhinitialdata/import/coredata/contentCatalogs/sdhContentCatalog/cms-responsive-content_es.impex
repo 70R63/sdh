@@ -54,3 +54,4 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];ke
  ;;SobretasaGasolinaPage;"Sobretasa a la Gasolina Motor"
  ;;ActivateAccountPage;"Activar Cuenta"
  ;;PublicidadExteriorPage;"Publicidad Exterior"
+  ;;ConciliacionesPage;"Conciliaciones"

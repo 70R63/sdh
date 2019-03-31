@@ -543,7 +543,17 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-        	
+        	<itemtype code="BaseStore" autocreate="false" generate="false">
+				<description>Extending BaseStore type with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="captchaCheckEnabled">
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+						<description>Determines whether the site should use captcha during registration.</description>
+					</attribute>
+				</attributes>
+			</itemtype>
 <!--         	<itemtype code="IdentificationDocumentType" autocreate="true" generate="true"> -->
 <!--         		<description>Added to hold ID document type</description> -->
 <!--         		<attributes> -->

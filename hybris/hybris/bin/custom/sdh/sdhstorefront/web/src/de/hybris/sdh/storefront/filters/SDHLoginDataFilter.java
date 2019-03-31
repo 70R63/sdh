@@ -10,10 +10,13 @@
  */
 package de.hybris.sdh.storefront.filters;
 
+import de.hybris.platform.acceleratorservices.config.SiteConfigService;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.store.BaseStoreModel;
+import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.sdh.core.exceptions.NotARobotException;
 import de.hybris.sdh.core.exceptions.NotAValidEmailException;
 import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHRegistrationValidator;
@@ -33,6 +36,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
@@ -42,13 +50,21 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import atg.taglib.json.util.JSONException;
+import atg.taglib.json.util.JSONObject;
+
 
 
 public class SDHLoginDataFilter extends AbstractAuthenticationProcessingFilter
 {
 	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "j_username";
 	private final String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
+	private static final String RECAPTCHA_SITE_KEY_PROPERTY = "recaptcha.publickey";
+	private static final String RECAPTCHA_SECRET_KEY_PROPERTY = "recaptcha.privatekey";
+	private static final String RECAPTCHA_RESPONSE_PARAM = "g-recaptcha-response";
+	private static final String RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 	private static final Logger LOG = Logger.getLogger(SDHLoginDataFilter.class);
+
 	@Resource(name = "loginAuthenticationFailureHandler")
 	LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
 
@@ -64,12 +80,56 @@ public class SDHLoginDataFilter extends AbstractAuthenticationProcessingFilter
 	@Resource(name = "modelService")
 	ModelService modelService;
 
+	@Resource(name = "baseStoreService")
+	BaseStoreService baseStoreService;
+
+	@Resource(name = "siteConfigService")
+	SiteConfigService siteConfigService;
+
 	/**
 	 * @param defaultFilterProcessesUrl
 	 */
 	public SDHLoginDataFilter()
 	{
 		super(new AntPathRequestMatcher("/j_spring_security_check", "POST"));
+	}
+
+	protected boolean isCaptchaEnabledForCurrentStore()
+	{
+		final BaseStoreModel currentBaseStore = baseStoreService.getCurrentBaseStore();
+		return currentBaseStore != null && Boolean.TRUE.equals(currentBaseStore.getCaptchaCheckEnabled());
+	}
+
+	protected boolean checkAnswer(final String recaptchaResponse)
+	{
+		final HttpClient client = new HttpClient();
+		final PostMethod method = new PostMethod(RECAPTCHA_VERIFY_URL);
+
+		method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(3, true));
+		method.addParameter("secret", siteConfigService.getProperty(RECAPTCHA_SECRET_KEY_PROPERTY));
+		method.addParameter("response", recaptchaResponse);
+
+		try
+		{
+			final int statusCode = client.executeMethod(method);
+
+			if (statusCode != HttpStatus.SC_OK)
+			{
+				return false;
+			}
+
+			final JSONObject response = new JSONObject(method.getResponseBodyAsString());
+			return response.getBoolean("success");
+		}
+		catch (IOException | JSONException e)
+		{
+			LOG.error("Exception occurred while checking captcha answer", e);
+			return false;
+		}
+		finally
+		{
+			method.releaseConnection();
+		}
 	}
 
 	/*
@@ -83,16 +143,29 @@ public class SDHLoginDataFilter extends AbstractAuthenticationProcessingFilter
 	public Authentication attemptAuthentication(final HttpServletRequest request, final HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException
 	{
-		final String notARobotString = request.getParameter("notARobot");
-
-		final Boolean notARobot = Boolean.parseBoolean(notARobotString);
-
-		if (!Boolean.TRUE.equals(notARobot))
+		final boolean captchaEnabledForCurrentStore = isCaptchaEnabledForCurrentStore();
+		if (captchaEnabledForCurrentStore)
 		{
-			throw new NotARobotException("A Robot");
+			request.setAttribute("captchaEnabledForCurrentStore", Boolean.valueOf(captchaEnabledForCurrentStore));
+			request.setAttribute("recaptchaPublicKey", siteConfigService.getProperty(RECAPTCHA_SITE_KEY_PROPERTY));
+			final String recaptchaResponse = request.getParameter(RECAPTCHA_RESPONSE_PARAM);
+			if (StringUtils.isBlank(recaptchaResponse) || !checkAnswer(recaptchaResponse))
+			{
+				throw new NotARobotException("A Robot");
+			}
 		}
+		else
+		{
+			final String notARobotString = request.getParameter("notARobot");
 
+			final Boolean notARobot = Boolean.parseBoolean(notARobotString);
 
+			if (!Boolean.TRUE.equals(notARobot))
+			{
+				throw new NotARobotException("A Robot");
+			}
+
+		}
 		final String username = obtainUsername(request);
 		if (!Boolean.TRUE.equals(sdhRegistrationValidator.validateEmailAddress(username)))
 		{

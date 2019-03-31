@@ -16,31 +16,31 @@
 	</div>
 </div>
 <sf:form>
-<div class="row">
-	<div class="col-md-4 col-md-offset-3 center headline">
-		<h2>
-			<span><spring:theme code="mibuzon.notificaciones.nuevos" /></span>
-		</h2>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-3 center headline">
+			<h2>
+				<span><spring:theme code="mibuzon.notificaciones.nuevos" /></span>
+			</h2>
+		</div>
 	</div>
-</div>
 	<div>
 		<div class="row">
 
 			<div class="col-md-7 col-md-offset-3 center">
-				<table class="table" id="">
+				<table class="table table-responsive" id="">
 					<thead>
 						<tr>
-							<th style="text-align: center"><label class="control-label "
-								for=""><spring:theme
+							<th style="text-align: center;"><label class="control-label"
+								style="text-transform: capitalize !important" for=""><spring:theme
 										code="mibuzon.notificaciones.identi" /></label></th>
 							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
+								style="text-transform: capitalize !important" for=""> <spring:theme
 										code="mibuzon.notificaciones.autoridad" /></label></th>
 							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
+								style="text-transform: capitalize !important" for=""> <spring:theme
 										code="mibuzon.notificaciones.asunto" /></label></th>
 							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
+								style="text-transform: capitalize !important" for=""> <spring:theme
 										code="mibuzon.notificaciones.fecnoti" /></label></th>
 						</tr>
 					</thead>
@@ -69,33 +69,33 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="row">
-	<div class="col-md-6 col-md-offset-3 headline">
-		<h2>
-			<span><spring:theme code="mibuzon.notificaciones.leidos" /></span>
-		</h2>
+		<div class="col-md-6 col-md-offset-3 headline">
+			<h2>
+				<span><spring:theme code="mibuzon.notificaciones.leidos" /></span>
+			</h2>
+		</div>
 	</div>
-</div>
 	<div>
 		<div class="row">
 
 			<div class="col-md-7 col-md-offset-3 center">
-				<table class="table" id="">
+				<table class="table table-responsive" id="">
 					<thead>
 						<tr>
 							<th style="text-align: center"><label class="control-label "
-								for=""><spring:theme
+								style="text-transform: capitalize !important" for=""><spring:theme
 										code="mibuzon.notificaciones.identi" /></label></th>
 							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
+								style="text-transform: capitalize !important" for=""> <spring:theme
 										code="mibuzon.notificaciones.autoridad" /></label></th>
 							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
+								style="text-transform: capitalize !important" for=""> <spring:theme
 										code="mibuzon.notificaciones.asunto" /></label></th>
 							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
+								style="text-transform: capitalize !important" for=""> <spring:theme
 										code="mibuzon.notificaciones.fecnoti" /></label></th>
 						</tr>
 					</thead>

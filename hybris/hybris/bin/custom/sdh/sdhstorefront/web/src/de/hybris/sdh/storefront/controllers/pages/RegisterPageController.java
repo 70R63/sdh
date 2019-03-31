@@ -16,6 +16,8 @@ import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
 import de.hybris.sdh.core.pojos.responses.QuestionForRegistrationResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHGetQuestionsForRegistration;
 import de.hybris.sdh.facades.SDHCustomerFacade;
@@ -26,6 +28,7 @@ import de.hybris.sdh.storefront.forms.SDHRegisterForm;
 import de.hybris.sdh.storefront.forms.SearchUserForm;
 import de.hybris.sdh.storefront.forms.SecretAnswerForm;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,6 +37,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +59,8 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 {
 	private HttpSessionRequestCache httpSessionRequestCache;
 
+	private static final Logger LOG = Logger.getLogger(RegisterPageController.class);
+
 	@Resource(name = "sdhValidaContribuyenteFacade")
 	SDHValidaContribuyenteFacade sdhValidaContribuyenteFacade;
 
@@ -68,6 +75,9 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 
 	@Resource(name = "sdhCustomerAccountService")
 	private SDHCustomerAccountService sdhCustomerAccountService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	@Override
 	protected AbstractPageModel getCmsPage() throws CMSItemNotFoundException
@@ -186,25 +196,25 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 	final String token, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		final boolean userFound = false;
-		
-		
+
+
 		//System.out.println("Token["+token+"]");
 		//System.out.println("UidUser["+uidUser+"]");
 		//System.out.println("isValidToke["+sdhCustomerAccountService.validateToken(token,uidUser)+"]");
 		//Start registration
-		
-		
-		String msg = "No puedes acceder a este sitio";
-		
+
+
+		final String msg = "No puedes acceder a este sitio";
+
 		if(token.equals("null")) {
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,msg);
 			return "redirect:/login";
 		}
-			
-		String uidUser = getSessionService().getAttribute("SMTP_ADDR");
-		String bpNumbre = getSessionService().getAttribute("numBP");
-		
-		
+
+		final String uidUser = getSessionService().getAttribute("SMTP_ADDR");
+		final String bpNumbre = getSessionService().getAttribute("numBP");
+
+
 		sdhCustomerAccountService.validateToken(token,bpNumbre);
 		model.addAttribute("currentSection", "personalDataSection");
 		return getDefaultRegistrationPage(model);
@@ -226,27 +236,51 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 	public String getQuestions(final Model model, @RequestParam(value = "currentQuestion", defaultValue = "0")
 	final int currentQuestion, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		ConsultaContribuyenteBPRequest bp = new ConsultaContribuyenteBPRequest();
+		final ConsultaContribuyenteBPRequest bp = new ConsultaContribuyenteBPRequest();
 		bp.setNumBP(getSessionService().getAttribute("numBP"));
 
-		System.out.println(getSessionService().getAttribute("numBP"));
+		LOG.info(getSessionService().getAttribute("numBP"));
 
-		QuestionForRegistrationResponse response = sdhGetQuestionsForRegistration.getQuestionForRegistration(bp);
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		String msg = "Estimado contribuyente, no cuentas con información suficiente para poder autenticarte, por favor dirígete a un punto de atención para generar tu información";
-		
-		if(response != null) {			
+		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse;
+		try
+		{
+			sdhConsultaContribuyenteBPResponse = mapper.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(bp),
+					SDHValidaMailRolResponse.class);
+
+			if (sdhConsultaContribuyenteBPResponse != null && (sdhConsultaContribuyenteBPResponse.getRoles() == null
+					|| sdhConsultaContribuyenteBPResponse.getRoles().isEmpty()))
+			{
+				model.addAttribute("currentSection", "requestRols");
+				return getDefaultRegistrationPage(model);
+			}
+		}
+		catch (final IOException e)
+		{
+			LOG.info(e.getMessage());
+		}
+
+
+
+
+		final QuestionForRegistrationResponse response = sdhGetQuestionsForRegistration.getQuestionForRegistration(bp);
+
+		final String msg = "Estimado contribuyente, no cuentas con información suficiente para poder autenticarte, por favor dirígete a un punto de atención para generar tu información";
+
+		if(response != null) {
 			if(response.getIdmsj() != null) {
 				if(!response.getIdmsj().equals("")) {
-					int noQuestions = new Integer(response.getIdmsj().replaceAll(" ",""));
+					final int noQuestions = new Integer(response.getIdmsj().replaceAll(" ",""));
 					if(noQuestions < 3) {
 						GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,msg);
-						return "redirect:/login"; 
+						return "redirect:/login";
 					}
 				}
 			}
 		}
-		
+
 		model.addAttribute("questionAndOptions", response.getQuestionAndOptions());
 		model.addAttribute("questionCatalog", response.getMapQuestionsCatalog());
 		model.addAttribute("currentSection", "questionsSection");
@@ -260,17 +294,17 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
-		ConsultaContribuyenteBPRequest bp = new ConsultaContribuyenteBPRequest();
-		String bpNumbre = getSessionService().getAttribute("numBP");
-		String uidUser = getSessionService().getAttribute("SMTP_ADDR");
-		
+		final ConsultaContribuyenteBPRequest bp = new ConsultaContribuyenteBPRequest();
+		final String bpNumbre = getSessionService().getAttribute("numBP");
+		final String uidUser = getSessionService().getAttribute("SMTP_ADDR");
+
 		bp.setNumBP(bpNumbre);
 		System.out.println("bpNumbre ------>"+bpNumbre);
 		System.out.println("uidUser ------>"+uidUser);
 
-		QuestionForRegistrationResponse responseWS = sdhGetQuestionsForRegistration.getQuestionForRegistration(bp);
-		
-		String msg = "La información que proporcionaste no fue correcta por lo cual no podemos confirmar tu identidad, por favor vuelve a intentarlo";
+		final QuestionForRegistrationResponse responseWS = sdhGetQuestionsForRegistration.getQuestionForRegistration(bp);
+
+		final String msg = "La información que proporcionaste no fue correcta por lo cual no podemos confirmar tu identidad, por favor vuelve a intentarlo";
 
 		int i = 0;
 
@@ -289,7 +323,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 				i++;
 			}
 		}
-		
+
 		if (form.getDIR2() != null)
 		{
 			if (form.getDIR2().equals(responseWS.getCorrectAnswer("DIR2")))
@@ -328,7 +362,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			return "redirect:/login";
 		}
 
-		String token = sdhCustomerAccountService.generateCustomerSessionToken(bpNumbre);
+		final String token = sdhCustomerAccountService.generateCustomerSessionToken(bpNumbre);
 		System.out.println("generated token: " + token);
 
 		return "redirect:/register/personalData?token=" +token;

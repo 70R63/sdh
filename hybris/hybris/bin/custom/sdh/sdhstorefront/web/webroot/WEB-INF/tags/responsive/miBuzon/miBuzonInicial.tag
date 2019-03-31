@@ -10,17 +10,19 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
-	<div class="col-md-5 col-md-offset-1 center">
-		<div class="avisoheadline " style="text-align: center">
-			<h2>
-				<span class="p"><spring:theme code="mibuzon.inicial.title"
-						text="Mi Buzon" /></span>
-			</h2>
+		<div class="col-md-12 col-md-offset-1 text-center">
+			<div class="avisoheadline "
+				style="text-align: center; width: auto; height: 35px;">
+				<h2>
+					<span class="p"><spring:theme code="mibuzon.inicial.title"
+							text="Mi Buzon" /></span>
+				</h2>
+			</div>
+			<p class="avisobody"
+				style="text-align: center; width: auto; height: auto;">
+				<spring:theme code="mibuzon.inicial.descripcion" />
+			</p>
 		</div>
-		<p class="avisobody" style="text-align: center">
-			<spring:theme code="mibuzon.inicial.descripcion" />
-		</p>
-	</div>
 	</div>
 </div>
 
@@ -40,11 +42,12 @@
 				<div class="row">
 
 					<div class="col-md-4 col-md-offset-4 center">
-						<table class="table" id="">
+						<table class="table table-responsive" id="">
 							<thead>
 								<tr>
 									<th style="text-align: center"><label
-										class="control-label " for=""><spring:theme
+										class="control-label " for=""
+										style="text-transform: capitalize !important"><spring:theme
 												code="mibuzon.inicial.tipmsn" /></label></th>
 									<th style="text-align: center"><label
 										class="control-label" for=""> <spring:theme
@@ -53,21 +56,26 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><label class="control-label "><spring:theme
+									<td><label class="control-label"
+										style="text-transform: capitalize !important"><spring:theme
 												code="mibuzon.inicial.noti" /></label></td>
-									<td><input id="notificaciones" name="notificaciones" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
+									<td><input id="notificaciones" name="notificaciones"
+										class="inputtextnew" aria-required="true" type="text"
+										readonly="readonly"
 										value="<c:out value="notificaciones"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"  onclick= "myFunction(1)"></td>
-								
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"
+										onclick="myFunction(1)"></td>
+
 								</tr>
 								<tr>
-									<td><label class="control-label "><spring:theme
+									<td><label class="control-label"
+										style="text-transform: capitalize !important"><spring:theme
 												code="mibuzon.inicial.mns" /></label></td>
 									<td><input id="" name="" class="inputtextnew"
 										aria-required="true" type="text" readonly="readonly"
 										value="<c:out value="mensajes"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"  onclick= "myFunction(2)"></td>
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"
+										onclick="myFunction(2)"></td>
 								</tr>
 							</tbody>
 						</table>

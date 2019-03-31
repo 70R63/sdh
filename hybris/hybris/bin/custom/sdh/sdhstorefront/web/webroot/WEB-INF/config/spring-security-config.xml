@@ -327,7 +327,7 @@
 		<constructor-arg name="key" value="sdhstorefront" />
 		<constructor-arg name="userDetailsService" ref="originalUidUserDetailsService" />
 		<property name="cookieName" value="sdhstorefrontRememberMe" />
-		<property name="alwaysRemember" value="true" />
+		<property name="alwaysRemember" value="false" />
 		<property name="userService" ref="userService"/>
 		<property name="useSecureCookie" value="true"/>
 		<property name="customerFacade" ref="customerFacade"/>

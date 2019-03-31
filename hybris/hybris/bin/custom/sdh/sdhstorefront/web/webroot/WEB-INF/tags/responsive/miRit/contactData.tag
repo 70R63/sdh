@@ -351,9 +351,9 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4  ">
+			<div class="col-12 col-md-4  ">
 				<div class="form-group ">
-					<button class="btn btn-secondary btn-lg " type="button" id="updateNotificationAddressButton">
+					<button class="btn btn-secondary btn-lg btn-block" type="button" id="updateNotificationAddressButton">
 							<spring:theme code="mirit.contactData.updateNotificationAddress" />
 					</button>
 				</div>
@@ -421,9 +421,9 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4  ">
+			<div class="col-12 col-md-4  ">
 				<div class="form-group ">
-					<button class="btn btn-secondary btn-lg " type="button" id="updateContactAddressButton">
+					<button class="btn btn-secondary btn-lg btn-block" type="button" id="updateContactAddressButton">
 							<spring:theme code="mirit.contactData.updateContactAddress" />
 					</button>
 				</div>
@@ -434,9 +434,9 @@
 		<br>
 		<div class="row">
 			<div class="row">
-				<div class="col-md-4">	
+				<div class="col-12 col-md-4">	
 					<div>
-						<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="toggleAssistant();">
+						<button class="btn btn-primary btn-lg btn-block addressHelperField" type="button" onclick="toggleAssistant();">
 							<spring:theme code="mirit.contactData.editarAddress" /></button>
 					</div>
 				</div>
@@ -477,15 +477,15 @@
 				</div>
 				<div class="col-md-2">
 				</div>
-				<div class="col-md-2">
+				<div class="col-12 col-md-2 text-center">
 					<div class="form-group ">
-						<button class="btn btn-secondary btn-lg  addressHelperField" type="button" onclick="cancelAddAddress();">
+						<button class="btn btn-secondary btn-lg addressHelperField" type="button" onclick="cancelAddAddress();">
 						<spring:theme code="mirit.contactData.cancel" /></button>
 					</div>
 				</div>
-				<div class="col-md-2">	
+				<div class="col-12 col-md-2 text-center">	
 					<div class="form-group ">
-						<button class="btn btn-primary btn-lg  addressHelperField" type="button" onclick="setAddress();">
+						<button class="btn btn-primary btn-lg addressHelperField" type="button" onclick="setAddress();">
 							<spring:theme code="mirit.contactData.addAddress" /></button>
 					</div>
 				</div>
@@ -910,9 +910,9 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-md-4  ">
+			<div class="col-12 col-md-4  ">
 				<div class="form-group ">
-					<button class="btn btn-secondary btn-lg " type="button" id="updateTelefonoButton">
+					<button class="btn btn-secondary btn-block btn-lg " type="button" id="updateTelefonoButton">
 							<spring:theme code="mirit.contactData.updateTelefono" />
 					</button>
 				</div>
@@ -941,9 +941,9 @@
 							</label> 
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-12 col-md-4">
 						<div class="form-group ">
-						<button class="btn btn-secondary btn-lg " type="button" id="addSocialNetworkButton">
+						<button class="btn btn-secondary btn-lg btn-block " type="button" id="addSocialNetworkButton">
 							<spring:theme code="mirit.contactData.addSocialNetwork" /></button>
 						</div>
 					</div>
@@ -997,9 +997,9 @@
 						</label> 
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-12 col-md-4">
 						<div class="form-group ">
-						<button class="btn btn-secondary btn-lg " type="button" id="addSocialNetworkButton">
+						<button class="btn btn-secondary btn-lg btn-block" type="button" id="addSocialNetworkButton">
 							<spring:theme code="mirit.contactData.addSocialNetwork" /></button>
 						</div>
 					</div>
@@ -1033,9 +1033,9 @@
 		
 		</div>	
 		<div class="row">
-			<div class="col-md-4  ">
+			<div class="col-12 col-md-4">
 				<div class="form-group ">
-					<button class="btn btn-secondary btn-lg " type="button" id="updateRedesSocialesButton">
+					<button class="btn btn-secondary btn-lg btn-block " type="button" id="updateRedesSocialesButton">
 							<spring:theme code="mirit.contactData.updateRedesSociales" />
 					</button>
 				</div>

@@ -22,55 +22,56 @@
 			</h2>
 		</div>
 	</div>
-<br>
+	<br>
 	<div class="col-md-10 col-md-offset-2">
 		<div class="row">
-
 			<div class="col-md-7 col-md-offset-1">
-				<table class="table">
-					<thead style="cellspacing: 10 !important">
-						<tr>
-							<th style="text-align: center"><label class="control-label "
-								for=""><spring:theme code="declarafirma.inicial.declara" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
-										code="declarafirma.inicial.anigrav" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
-										code="declarafirma.inicial.periodo" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
-										code="declarafirma.inicial.seleccionar" /></label></th>
-						</tr>
-					</thead>
-					<tbody>
+				<div class="table-resposive">
+					<table class="table">
+						<thead style="cellspacing: 10 !important">
+							<tr>
+								<th style="text-align: center"><label
+									class="control-label " for=""
+									style="text-transform: capitalize"><spring:theme
+											code="declarafirma.inicial.declara" /></label></th>
+								<th style="text-align: center"><label class="control-label"
+									for="" style="text-transform: capitalize"> <spring:theme
+											code="declarafirma.inicial.anigrav" /></label></th>
+								<th style="text-align: center"><label class="control-label"
+									for="" style="text-transform: capitalize"> <spring:theme
+											code="declarafirma.inicial.periodo" /></label></th>
+								<th style="text-align: center"><label class="control-label"
+									for="" style="text-transform: capitalize"> <spring:theme
+											code="declarafirma.inicial.seleccionar" /></label></th>
+							</tr>
+						</thead>
+						<tbody>
 
-						<tr>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="# Declaracion"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="Año Gravable"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="Periodo"></c:out>" /></td>
-							<td><input class="inputtextnew"
-								style="visibility: visible !important; width: 15px" type="radio"
-								id="" name="" value=""></td>
+							<tr>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value="# Declaracion"></c:out>" /></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value="Año Gravable"></c:out>" /></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value="Periodo"></c:out>" /></td>
+								<td><input class="inputtextnew"
+									style="visibility: visible !important; width: 15px"
+									type="radio" id="" name="" value=""></td>
 
-						</tr>
-					</tbody>
-				</table>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
-					<button type="submit"
-						class="btn btn-primary btn-lg" id="action" name="action"
-						value="" style="width: 187px !important">
-						<spring:theme
-							code="declarafirma.inicial.firma" />
+				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
+					<button type="submit" class="btn btn-primary btn-lg" id="action"
+						name="action" value="" style="width: 187px !important">
+						<spring:theme code="declarafirma.inicial.firma" />
 					</button>
 				</div>
 			</div>
