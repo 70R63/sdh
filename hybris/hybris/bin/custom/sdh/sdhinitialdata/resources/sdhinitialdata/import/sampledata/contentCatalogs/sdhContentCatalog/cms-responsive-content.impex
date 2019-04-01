@@ -2,11 +2,11 @@
 # ImpEx for Responsive Public Sector Site CMS Content 
 # 
 $contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
  
 $productCatalog=sdhProductCatalog 
 $productCatalogName=Public Sector Product Catalog 
-$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged] 
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online] 
 $picture=media(code, $contentCV) ;
 $siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/cockpits/cmscockpit
@@ -188,6 +188,10 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 # Category Navigation Bar Component
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
 ;;CategoryNavComponent; Category Navigation Component;;CategoryNavComponent;CategoryNavNode;10
+;;AnonnymousCategoryNavComponent; Anonnymous Category Navigation Component;;AnonnymousCategoryNavComponent;AnnonymousCategoryNavNode;10
+
+INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(uid,$contentCV)
+;;CategoryNavComponent Logged in User;anonymousUserRestriction;CategoryNavComponentloggedInUser;CategoryNavComponent
 
 ## level 1. SiteRoot ##
 ## level 2. children of SiteRoot ## 
@@ -203,6 +207,8 @@ INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=tru
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
 ;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode
+;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
+
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -542,7 +548,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; FooterSlot             ; FooterComponent
 ; ; SearchBoxSlot          ; SearchBox
 ; ; HomepageNavLinkSlot    ; HomepageNavLink
-; ; NavigationBarSlot      ; CategoryNavComponent, breadcrumbComponent
+; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,CategoryNavComponent, breadcrumbComponent
 ; ; SideContentSlot        ; MobileAppBanner
 ; ; SiteLogoSlot           ; SiteLogoComponent
 ; ; TopContentSlot         ; FacebookOffersBanner
@@ -631,7 +637,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; FooterSlot             ; FooterComponent
 ; ; SearchBoxSlot          ; SearchBox
 ; ; HomepageNavLinkSlot    ; HomepageNavLink
-; ; NavigationBarSlot      ; CategoryNavComponent, breadcrumbComponent
+; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,CategoryNavComponent, breadcrumbComponent
 ; ; SideContentSlot        ; MobileAppBanner
 ; ; SiteLogoSlot           ; SiteLogoComponent
 ; ; TopContentSlot         ; FacebookOffersBanner
