@@ -4,13 +4,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="ica" tagdir="/WEB-INF/tags/responsive/ica"%>
+<%@ taglib prefix="icaprop"
+	tagdir="/WEB-INF/tags/responsive/icaPropuesta"%>
 
-<ica:icaTable />
-<ica:icaDetalle />
-<ica:icaActividades />
-<ica:icaEstablecimientos />
-<ica:icaEconomicos />
-<ica:icaMarcas />
-<ica:icaRepresentantes />
+<icaprop:icaTable></icaprop:icaTable>
+<icaprop:icaDetalle></icaprop:icaDetalle>
+<icaprop:icaRepresentantes />
 
