@@ -1,103 +1,100 @@
-<%@ tag body-content="empty" trimDirectiveWhitespaces="true"%>
+<%@ tag body-content="scriptless" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
-		<div class="headline">
-			<h2>
-				<span class="col-md-10 "><spring:theme
-						code="ica.detalle.estable.titulo" /></span>
-			</h2>
+		<div class="col-md-12">
+			<div class="headline">
+				<h2>
+					<span class="col-md-10 "><spring:theme
+							code="ica.inicial.estableci.title" /></span>
+				</h2>
+			</div>
 		</div>
 	</div>
 </div>
-<br>
 
-<div class="row">
-	<br>
-	<div class="row col-md-12">
-		<table class="table table-bordered" id="">
-			<thead>
-				<tr>
-					<th><label class="control-label " for=""><spring:theme
-								code="ica.detalle.estable.matricula" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.fecdesde" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.edomatricula" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.fechasta" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.valoractivo" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.cantidadperson" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.nomestable" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.direccion" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.localidad" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.cp" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.codciiu" /></label></th>
-					<th><label class="control-label " for=""> <spring:theme
-								code="ica.detalle.estable.denoacti" /></label></th>
-				</tr>
-			</thead>
-			<tbody>
 
-				<tr>
-					<td><input id="action"
-						style="visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" disabled></td>
-					<td><input id="action"
-						style=" width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-					<td><input id="action"
-						style="width: 100%; visibility: visible !important; margin: 0; min-height: 0;"
-						name="action" type="text" value='<c:out value=""></c:out>' disabled></td>
-				</tr>
-			</tbody>
-		</table>
+<form:form action="">
+	<div class="container">
+		<div class="row mt-3">
+			<div class="col-md-7">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.inicial.estableci.nomesta" /></label> <input id="" name=""
+						class="form-control" disabled type="text" value="" maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.inicial.estableci.direc" /></label> <input id="" name=""
+						class="form-control" disabled type="text" value="" maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.inicial.estableci.loca" /></label> <input id="" name=""
+						class="form-control" disabled type="text" value="" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
-
-
-
-
-
+	<div class="row">
+		<div class="col-md-12">
+			<div class="table-responsive">
+				<table class="table table-bordered datatable">
+					<thead>
+						<tr>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.matesta" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.fecdesde" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.edomat" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.fechasta" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.valactivo" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.cantperso" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.codpost" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.ciiu" /></label></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" size="10"/></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</form:form>
 

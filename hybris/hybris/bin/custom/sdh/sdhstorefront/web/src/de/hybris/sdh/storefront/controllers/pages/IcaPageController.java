@@ -34,11 +34,16 @@ public class IcaPageController extends AbstractPageController
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.ica";
+	private static final String DECLARACION_ACCOUNT_PROFILE = "Declaracion ICA";
 
 	// CMS Pages
 	private static final String ICA_CMS_PAGE = "icaPage";
+	private static final String ICA_DOS_CMS_PAGE = "icaDosPage";
+	private static final String ICA_DECLARACION_CMS_PAGE = "icaDeclaracionPage";
 
 	private static final String REDIRECT_TO_ICA_PAGE = REDIRECT_PREFIX + "/contribuyentes/ica";
+	private static final String REDIRECT_TO_ICA_DOS_PAGE = REDIRECT_PREFIX + "/contribuyentes/icados";
+	private static final String REDIRECT_TO_ICA_DECLARACION_PAGE = REDIRECT_PREFIX + "/contribuyentes/ica/declaracion";
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -73,5 +78,56 @@ public class IcaPageController extends AbstractPageController
 
 		return REDIRECT_TO_ICA_PAGE;
 	}
+
+	@RequestMapping(value = "/contribuyentes/icados", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String ica2inicial(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro al GET ICA --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DOS_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ICA_DOS_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/ica/declaracion", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String ica2post(final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("------------------Entro al POST de ICA------------------------");
+
+		return REDIRECT_TO_ICA_DOS_PAGE;
+	}
+
+	@RequestMapping(value = "/contribuyentes/ica/declaracion", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String icadeclarainicial(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro al GET ICA --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(DECLARACION_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/icados", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String icadeclarapost(final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("------------------Entro al POST de ICA------------------------");
+
+		return REDIRECT_TO_ICA_DECLARACION_PAGE;
+	}
+
 
 }

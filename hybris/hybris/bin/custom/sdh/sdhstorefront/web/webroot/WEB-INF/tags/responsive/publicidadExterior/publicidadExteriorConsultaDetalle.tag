@@ -15,7 +15,7 @@
 <!-- 				<option value="2016">2016</option> -->
 
 <!-- 			</select> -->
-			
+
 <input type="hidden" id="anio" name="anio" value="2019" />
 
 <!-- <div class="row"> -->
@@ -56,14 +56,16 @@
 <!-- 	</div> -->
 <!-- </div> -->
 
-<div class="row">
+<div class="row mb-2">
 	<div class="col-md-4 col-md-offset-5 centercol-md-8 text-right">
 
-		<button id="regresar" class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/' />';" type="button">
+		<button style="margin-top: 3px;" id="regresar"
+			class="btn btn-primary btn-lg"
+			onclick="window.location.href ='<c:url value='/' />';" type="button">
 			<spring:theme code="publicidad.exterior.regresar" />
 		</button>
-		<button id="presentarDeclaracionButton"   class="btn btn-primary btn-lg"
-			type="button">
+		<button style="margin-top: 3px;" id="presentarDeclaracionButton"
+			class="btn btn-primary btn-lg" type="button">
 			<spring:theme code="publicidad.exterior.declarationpresent" />
 		</button>
 	</div>

@@ -14,15 +14,15 @@
 			<table class="table">
 				<thead>
 					<tr class="avisoheadline p">
-						<td><spring:theme code="ica.inicial.title" /></td>
+						<td><spring:theme code="ica.declaracion.title" /></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="avisobody">
 
-						<td><spring:theme code="ica.inicial.descripcion1" /><a
+						<td><spring:theme code="ica.declaracion.descripcion1" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								información</a> <spring:theme code="ica.inicial.descripcion2" /></td>
+								información</a> <spring:theme code="ica.declaracion.descripcion2" /></td>
 					</tr>
 				</tbody>
 			</table>
@@ -37,11 +37,11 @@
 						<thead>
 							<tr>
 								<td><label class="control-label text-capitalize !important"><spring:theme
-											code="ica.inicial.table.tipdoc" /></label></td>
+											code="ica.declaracion.table.tipdoc" /></label></td>
 								<td><label class="control-label text-capitalize !important"><spring:theme
-											code="ica.inicial.table.numdoc" /></label></td>
+											code="ica.declaracion.table.numdoc" /></label></td>
 								<td><label class="control-label text-capitalize !important"><spring:theme
-											code="ica.inicial.table.nombre" /></label></td>
+											code="ica.declaracion.table.nombre" /></label></td>
 							</tr>
 						</thead>
 						<tbody>

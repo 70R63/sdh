@@ -1869,5 +1869,47 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;icaPageComponent	;icaPage Component	;/WEB-INF/views/responsive/pages/layout/icaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaPageComponent					
 #->FIN dev-maria Agregar paginas para ICA 18/03/2019	
+
+#->INI dev-maria Agregar paginas para ICA DOS 01/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;icaDosPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/icados
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='icaDosPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-icaDosPage 		;SideContent				;															;SideContent-icaDosPage						;;;
+								;						;BodyContent-icaDosPage		;BodyContent				;															;BodyContent-icaDosPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-icaDosPage 	;Side Content Slot for ICA Prop			;true	;								;;;
+							;							;BodyContent-icaDosPage	;Body Content Slot for ICA Prop		;true	;icaDosPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;icaDosPageComponent	;icaDosPage Component	;/WEB-INF/views/responsive/pages/layout/icaDosPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDosPageComponent					
+#->FIN dev-maria Agregar paginas para ICA DOS 01/04/2019	
+
+#->INI dev-maria Agregar paginas para ICA Declaracion 01/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;icaDeclaracionPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/ica/declaracion
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='icaDeclaracionPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-icaDeclaracionPage 		;SideContent				;															;SideContent-icaDeclaracionPage						;;;
+								;						;BodyContent-icaDeclaracionPage		;BodyContent				;															;BodyContent-icaDeclaracionPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-icaDeclaracionPage 	;Side Content Slot for ICA Prop			;true	;								;;;
+							;							;BodyContent-icaDeclaracionPage	;Body Content Slot for ICA Prop		;true	;icaDeclaracionPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;icaDeclaracionPageComponent	;icaDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/icaDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDeclaracionPageComponent					
+#->FIN dev-maria Agregar paginas para ICA Declaracion 01/04/2019	
 									
 									

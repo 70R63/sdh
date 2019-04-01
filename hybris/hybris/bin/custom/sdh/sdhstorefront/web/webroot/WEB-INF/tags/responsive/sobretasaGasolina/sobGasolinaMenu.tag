@@ -14,31 +14,30 @@
 <spring:url value="/contribuyentes/sobretasa-gasolina" var="buscarUrl"
 	htmlEscape="false" />
 
-<div class="col-md-9">
-	<div class="table-responsive">
-		<table class="table">
-			<thead>
-				<tr class="avisoheadline p">
-					<td><spring:theme
-							code="impuestos.sobreTasaGasolina.menu.titulo" /></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="avisobody">
+<div class="col-md-12">
+	<table class="table">
+		<thead>
+			<tr class="avisoheadline p">
+				<td><spring:theme
+						code="impuestos.sobreTasaGasolina.menu.titulo" /></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="avisobody">
 
-					<td><spring:theme
-							code="impuestos.sobreTasaGasolina.menu.tituloNota" /><a
-						href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-							información</a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+				<td><spring:theme
+						code="impuestos.sobreTasaGasolina.menu.tituloNota" /><a
+					href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+						información</a></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
 <br>
 <div class="col-md-9">
-	<div>
+	<div class="table-responsive">
+		>
 		<div class="col-md-12">
 			<table class="table col-md-2 table-bordered">
 				<thead>

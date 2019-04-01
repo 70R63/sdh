@@ -13,15 +13,17 @@
 
 
 <div class="row">
-	<div class="avisoheadline">
-		<h3>
-			<span class="p"><spring:theme code="publicidad.exterior.title"
-					text="Publicidad Exterior" /></span>
-		</h3>
+	<div class="col-md-12 text-center">
+		<div class="avisoheadline" style="text-align: center; width: auto; height: 35px;">
+			<h3>
+				<span class="p"><spring:theme
+						code="publicidad.exterior.title" text="Publicidad Exterior" /></span>
+			</h3>
+		</div>
+		<p class="avisobody" style="text-align: center; width: auto; height: auto;">
+			<spring:theme code="publicidad.exterior.description" />
+		</p>
 	</div>
-	<p class="avisobody">
-		<spring:theme code="publicidad.exterior.description" />
-	</p>
 </div>
 
 <br>
@@ -46,12 +48,12 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><input  disabled class="inputtextnew"
-						aria-required="true" maxlength="30" size="30" readonly="readonly"
-						type="text" value="${docType }"/></td>
-					<td><input  readonly="readonly"
-						class="inputtextnew" aria-required="true" maxlength="30" size="30"
-						disabled="disabled" type="text" value="${docNumber }"/></td>
+					<td><input disabled class="inputtextnew" aria-required="true"
+						maxlength="30" size="30" readonly="readonly" type="text"
+						value="${docType }" /></td>
+					<td><input readonly="readonly" class="inputtextnew"
+						aria-required="true" maxlength="30" size="30" disabled="disabled"
+						type="text" value="${docNumber }" /></td>
 					<td><input value="${name }" disabled class="inputtextnew"
 						aria-required="true" maxlength="30" size="30" readonly="readonly"
 						type="text" /></td>

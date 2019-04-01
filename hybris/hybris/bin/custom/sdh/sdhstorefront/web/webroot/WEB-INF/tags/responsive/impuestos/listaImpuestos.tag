@@ -66,7 +66,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-xs-12 col-sm-12 col-md-9 text-center">
 			<sf:button action="${presentarDeclaracionUrl}" type="submit"
 				class="btn btn-primary btn-lg" id="action" name="action"
 				value="presentarDeclaracion" style="width: 187px !important">
