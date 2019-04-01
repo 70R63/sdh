@@ -34,13 +34,15 @@
 				<div class="mobile__nav__row mobile__nav__row--table">
 					<div class="mobile__nav__row--table-group">
 						<div class="mobile__nav__row--table-row">
-							<div class="mobile__nav__row--table-cell visible-xs hidden-sm" >
-								<button title="${textMegamenu}" aria-label="${megaMenuText}"
-									class="mobile__nav__row--btn  mobile__nav__row--btn-menu js-toggle-sm-navigation header-menu-btn"
-									type="button">
-									<span class="glyphicon glyphicon-align-justify"></span>
-								</button>
-							</div>
+							<c:if test="${hideMenuBar ne true}">
+								<div class="mobile__nav__row--table-cell visible-xs hidden-sm" >
+									<button title="${textMegamenu}" aria-label="${megaMenuText}"
+										class="mobile__nav__row--btn  mobile__nav__row--btn-menu js-toggle-sm-navigation header-menu-btn"
+										type="button">
+										<span class="glyphicon glyphicon-align-justify"></span>
+									</button>
+								</div>
+							</c:if>
 <!-- 							<div class="mobile__nav__row--table-cell visible-xs hidden-sm "> -->
 <!-- 									<div class="col-xs-12 no-space yComponentWrapper hpsa-logo-block "> -->
 <%-- 										<cms:pageSlot position="SiteLogo" var="logo" limit="1"> --%>
@@ -94,12 +96,13 @@
 <%-- 								</cms:pageSlot> --%>
 <!-- 							</div> -->
 <!-- 						</div> -->
-
-						<div class="col-sm-1 hidden-xs visible-sm mobile-menu">
-							<button title="${textMegamenu}" aria-label="${megaMenuText}" class="js-toggle-sm-navigation header-menu-btn" type="button">
-								<span class="glyphicon glyphicon-align-justify"></span>
-							</button>
-						</div>
+						<c:if test="${hideMenuBar ne true}">
+							<div class="col-sm-1 hidden-xs visible-sm mobile-menu">
+								<button title="${textMegamenu}" aria-label="${megaMenuText}" class="js-toggle-sm-navigation header-menu-btn" type="button">
+									<span class="glyphicon glyphicon-align-justify"></span>
+								</button>
+							</div>
+						</c:if>
 
 <%-- 						<c:if test="${empty hideHeaderLinks}"> --%>
 <%-- 							<ycommerce:testId code="header_StoreFinder_link"> --%>
