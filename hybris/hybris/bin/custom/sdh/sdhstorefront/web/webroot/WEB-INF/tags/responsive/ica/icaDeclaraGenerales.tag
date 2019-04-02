@@ -60,11 +60,11 @@
 						<div class="form-check">
 							<label class="form-check-label"> <input type="radio"
 								name="regimen" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important">
+								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
 								<spring:theme code="ica.declaracion.generales.regimencomun" />
 							</label> <label class="form-check-label"> <input type="radio"
 								name="regimen" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important">
+								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
 								<spring:theme code="ica.declaracion.generales.regsimpli" />
 							</label>
 						</div>
@@ -77,11 +77,11 @@
 						<div class="form-check">
 							<label class="form-check-label" style="text-transform:capitalize !important"> <input type="radio"
 								name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important">
+								style="visibility: visible !important; min-height: 4px !important; v">
 								Si
 							</label> <label class="form-check-label" style="text-transform:capitalize !important"> <input type="radio"
 								name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important">
+								style="visibility: visible !important; min-height: 4px !important;margin-left: 12px">
 								No
 							</label>
 						</div>

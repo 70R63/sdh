@@ -24,7 +24,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.totobrcons" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						value="" maxlength="240">
 				</div>
 			</div>
 

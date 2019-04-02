@@ -44,9 +44,9 @@
 						value="" maxlength="240">
 				</div>
 			</div>
-			<div class="col-md-2">
-				<button action="" type="submit" class="btn btn-primary btn-lg" id=""
-					name="" value="calcular">
+			<div class="col-md-2" style="margin-top: 29px;">
+				<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+					value="calcular">
 					<spring:theme code="delineacion.urbana.dec.firm.firma" />
 				</button>
 			</div>
