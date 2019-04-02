@@ -44,6 +44,8 @@ public class HomePageController extends AbstractPageController
 			return REDIRECT_PREFIX + ROOT;
 		}
 
+		model.addAttribute("hideMenuBar", true);
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
 		updatePageTitle(model, getContentPageForLabelOrId(null));

@@ -34,13 +34,15 @@
 				<div class="mobile__nav__row mobile__nav__row--table">
 					<div class="mobile__nav__row--table-group">
 						<div class="mobile__nav__row--table-row">
-							<div class="mobile__nav__row--table-cell visible-xs hidden-sm" >
-								<button title="${textMegamenu}" aria-label="${megaMenuText}"
-									class="mobile__nav__row--btn  mobile__nav__row--btn-menu js-toggle-sm-navigation header-menu-btn"
-									type="button">
-									<span class="glyphicon glyphicon-align-justify"></span>
-								</button>
-							</div>
+							<c:if test="${hideMenuBar ne true}">
+								<div class="mobile__nav__row--table-cell visible-xs hidden-sm" >
+									<button title="${textMegamenu}" aria-label="${megaMenuText}"
+										class="mobile__nav__row--btn  mobile__nav__row--btn-menu js-toggle-sm-navigation header-menu-btn"
+										type="button">
+										<span class="glyphicon glyphicon-align-justify"></span>
+									</button>
+								</div>
+							</c:if>
 <!-- 							<div class="mobile__nav__row--table-cell visible-xs hidden-sm "> -->
 <!-- 									<div class="col-xs-12 no-space yComponentWrapper hpsa-logo-block "> -->
 <%-- 										<cms:pageSlot position="SiteLogo" var="logo" limit="1"> --%>
@@ -51,32 +53,32 @@
 <%-- 								</button> --%>
 <!-- 							</div> -->
 
-							<c:if test="${empty hideHeaderLinks}">
-								<ycommerce:testId code="header_StoreFinder_link">
-									<div
-										class="mobile__nav__row--table-cell hidden-sm hidden-md hidden-lg" >
-										<spring:theme code="serviceFinder.acc.label"
-											var="serviceFinderLabel" />
-										<a href="<c:url value="/store-finder"/>"
-											 aria-label="${serviceFinderLabel}"
-											class="mobile__nav__row--btn mobile__nav__row--btn-location">
-											<span class="visuallyhidden">${ycommerce:encodeHTML(serviceFinderLabel)}</span><span
-											class="glyphicon glyphicon-map-marker"></span>
-										</a>
-									</div>
-								</ycommerce:testId>
-							</c:if>
+<%-- 							<c:if test="${empty hideHeaderLinks}"> --%>
+<%-- 								<ycommerce:testId code="header_StoreFinder_link"> --%>
+<!-- 									<div -->
+<!-- 										class="mobile__nav__row--table-cell hidden-sm hidden-md hidden-lg" > -->
+<%-- 										<spring:theme code="serviceFinder.acc.label" --%>
+<%-- 											var="serviceFinderLabel" /> --%>
+<%-- 										<a href="<c:url value="/store-finder"/>" --%>
+<%-- 											 aria-label="${serviceFinderLabel}" --%>
+<!-- 											class="mobile__nav__row--btn mobile__nav__row--btn-location"> -->
+<%-- 											<span class="visuallyhidden">${ycommerce:encodeHTML(serviceFinderLabel)}</span><span --%>
+<!-- 											class="glyphicon glyphicon-map-marker"></span> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<%-- 								</ycommerce:testId> --%>
+<%-- 							</c:if> --%>
 
-							<div class="mobile__nav__row--table-cell visible-xs ">
-								<ycommerce:testId code="header_search_activation_button">
-									<spring:theme code="search.icon" var="searchIconTitle" />
-									<button title="${searchIconTitle}"
-										class="mobile__nav__row--btn btn mobile__nav__row--btn-search js-toggle-xs-search hidden-sm hidden-md hidden-lg"
-										type="button">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</ycommerce:testId>
-							</div>
+<!-- 							<div class="mobile__nav__row--table-cell visible-xs "> -->
+<%-- 								<ycommerce:testId code="header_search_activation_button"> --%>
+<%-- 									<spring:theme code="search.icon" var="searchIconTitle" /> --%>
+<%-- 									<button title="${searchIconTitle}" --%>
+<!-- 										class="mobile__nav__row--btn btn mobile__nav__row--btn-search js-toggle-xs-search hidden-sm hidden-md hidden-lg" -->
+<!-- 										type="button"> -->
+<!-- 										<span class="glyphicon glyphicon-search"></span> -->
+<!-- 									</button> -->
+<%-- 								</ycommerce:testId> --%>
+<!-- 							</div> -->
 
 						</div>
 					</div>
@@ -94,12 +96,13 @@
 <%-- 								</cms:pageSlot> --%>
 <!-- 							</div> -->
 <!-- 						</div> -->
-
-						<div class="col-sm-1 hidden-xs visible-sm mobile-menu">
-							<button title="${textMegamenu}" aria-label="${megaMenuText}" class="js-toggle-sm-navigation header-menu-btn" type="button">
-								<span class="glyphicon glyphicon-align-justify"></span>
-							</button>
-						</div>
+						<c:if test="${hideMenuBar ne true}">
+							<div class="col-sm-1 hidden-xs visible-sm mobile-menu">
+								<button title="${textMegamenu}" aria-label="${megaMenuText}" class="js-toggle-sm-navigation header-menu-btn" type="button">
+									<span class="glyphicon glyphicon-align-justify"></span>
+								</button>
+							</div>
+						</c:if>
 
 <%-- 						<c:if test="${empty hideHeaderLinks}"> --%>
 <%-- 							<ycommerce:testId code="header_StoreFinder_link"> --%>

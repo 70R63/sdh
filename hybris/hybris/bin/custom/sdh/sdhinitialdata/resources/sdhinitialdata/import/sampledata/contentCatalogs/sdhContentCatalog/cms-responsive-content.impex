@@ -188,6 +188,13 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 # Category Navigation Bar Component
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
 ;;CategoryNavComponent; Category Navigation Component;;CategoryNavComponent;CategoryNavNode;10
+;;AnonnymousCategoryNavComponent; Anonnymous Category Navigation Component;;AnonnymousCategoryNavComponent;AnnonymousCategoryNavNode;10
+
+INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(uid,$contentCV)
+;;CategoryNavComponent Logged in User;anonymousUserRestriction;CategoryNavComponentloggedInUser;CategoryNavComponent
+
+INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];users(uid);components(uid,$contentCV)
+;;Anonnymous Category Nav Component Restriction;AnonnymousCategoryNavComponentRestriction;anonymous;AnonnymousCategoryNavComponent
 
 ## level 1. SiteRoot ##
 ## level 2. children of SiteRoot ## 
@@ -203,6 +210,8 @@ INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=tru
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
 ;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode
+;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
+
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -542,7 +551,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; FooterSlot             ; FooterComponent
 ; ; SearchBoxSlot          ; SearchBox
 ; ; HomepageNavLinkSlot    ; HomepageNavLink
-; ; NavigationBarSlot      ; CategoryNavComponent, breadcrumbComponent
+; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,CategoryNavComponent, breadcrumbComponent
 ; ; SideContentSlot        ; MobileAppBanner
 ; ; SiteLogoSlot           ; SiteLogoComponent
 ; ; TopContentSlot         ; FacebookOffersBanner
@@ -631,7 +640,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; FooterSlot             ; FooterComponent
 ; ; SearchBoxSlot          ; SearchBox
 ; ; HomepageNavLinkSlot    ; HomepageNavLink
-; ; NavigationBarSlot      ; CategoryNavComponent, breadcrumbComponent
+; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,CategoryNavComponent, breadcrumbComponent
 ; ; SideContentSlot        ; MobileAppBanner
 ; ; SiteLogoSlot           ; SiteLogoComponent
 ; ; TopContentSlot         ; FacebookOffersBanner
@@ -1863,5 +1872,47 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;icaPageComponent	;icaPage Component	;/WEB-INF/views/responsive/pages/layout/icaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaPageComponent					
 #->FIN dev-maria Agregar paginas para ICA 18/03/2019	
+
+#->INI dev-maria Agregar paginas para ICA DOS 01/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;icaDosPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/icados
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='icaDosPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-icaDosPage 		;SideContent				;															;SideContent-icaDosPage						;;;
+								;						;BodyContent-icaDosPage		;BodyContent				;															;BodyContent-icaDosPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-icaDosPage 	;Side Content Slot for ICA Prop			;true	;								;;;
+							;							;BodyContent-icaDosPage	;Body Content Slot for ICA Prop		;true	;icaDosPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;icaDosPageComponent	;icaDosPage Component	;/WEB-INF/views/responsive/pages/layout/icaDosPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDosPageComponent					
+#->FIN dev-maria Agregar paginas para ICA DOS 01/04/2019	
+
+#->INI dev-maria Agregar paginas para ICA Declaracion 01/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;icaDeclaracionPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/ica/declaracion
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='icaDeclaracionPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-icaDeclaracionPage 		;SideContent				;															;SideContent-icaDeclaracionPage						;;;
+								;						;BodyContent-icaDeclaracionPage		;BodyContent				;															;BodyContent-icaDeclaracionPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-icaDeclaracionPage 	;Side Content Slot for ICA Prop			;true	;								;;;
+							;							;BodyContent-icaDeclaracionPage	;Body Content Slot for ICA Prop		;true	;icaDeclaracionPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;icaDeclaracionPageComponent	;icaDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/icaDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDeclaracionPageComponent					
+#->FIN dev-maria Agregar paginas para ICA Declaracion 01/04/2019	
 									
 									
