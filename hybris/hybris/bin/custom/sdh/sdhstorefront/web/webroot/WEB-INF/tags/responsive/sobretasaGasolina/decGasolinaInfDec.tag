@@ -30,7 +30,7 @@
 				code="impuestos.decGasolina.InformacionDec.claseProducto" />
 		</label>
 	</div>
-	<div class="col-md-1">
+	<div class="col-md-1" style="padding-left: 12px;">
 		<label class="control-label text-capitalize !important" for="">
 			<spring:theme code="impuestos.decGasolina.InformacionDec.galones" />
 		</label>
@@ -40,7 +40,7 @@
 				code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label>
 	</div>
 
-	<div class="col-md-1">
+	<div class="col-md-1" style="padding-left: 0px;">
 		<label class="col-md-4 control-label text-capitalize !important"><spring:theme
 				code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label>
 	</div>
@@ -72,7 +72,7 @@
 			<sf:select class="form-control-gasolina claseProducto"
 				path="dataForm.infoDeclara[${loop.index}].claseProd"
 				items="${dataForm.catalogosSo.claseProd}"
-				referenceData="${dataForm.catalogosSo.claseProd}" maxlength="10" />
+				referenceData="${dataForm.catalogosSo.claseProd}" maxlength="10" style="width: 235px" />
 		</div>
 		<div class="col-md-1">
 			<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
@@ -88,7 +88,7 @@
 			<sf:select path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
 				items="${dataForm.catalogosSo.alcoholCarbu}"
 				referenceData="${dataForm.catalogosSo.alcoholCarbu}"
-				class="form-control alcohol" />
+				class="form-control form-control-gasolina alcohol" style="width: auto !important;" />
 		</div>
 		<div class="col-md-2">
 			<sf:input path="dataForm.infoDeclara[${loop.index}].baseGravable"
