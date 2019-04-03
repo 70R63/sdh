@@ -131,7 +131,7 @@
 	function addinformadeclara() {
 		
 		var tam = $(".informadeclara").length;
-		if ($(".informadeclara").length < 8) {
+		if ($(".informadeclara").length < 55) {
 			
 			$($(".informadeclara")[0]).parent().append($($(".informadeclara")[0]).clone());
 			$($(".informadeclara")[0]).parent().children().last().find(".claseProducto").val("")
@@ -150,7 +150,7 @@
 		debugger;
 		var i = $(".informadeclara").length;
 		var val = i - 1;
-		if ($(".informadeclara").length <= 8 && $(".informadeclara").length > 1) {
+		if ($(".informadeclara").length <= 55 && $(".informadeclara").length > 1) {
 
 			$($(".informadeclara")[val]).closest(
 					$($(".informadeclara")[val]).remove());
