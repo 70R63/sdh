@@ -52,7 +52,7 @@
 		<div class="col-md-12">
 			<div class="table-responsive">
 				<table class="table table-bordered datatable">
-					<thead>
+					<thead style="background-color: rgb(235, 235, 228)!important">
 						<tr>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.estableci.matesta" /></label></td>

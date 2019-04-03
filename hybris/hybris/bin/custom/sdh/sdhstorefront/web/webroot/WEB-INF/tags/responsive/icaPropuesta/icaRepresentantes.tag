@@ -27,7 +27,7 @@
 		<div class="col-md-12">
 			<div class="table-responsive">
 				<table class="table table-bordered">
-					<thead>
+					<thead style="background-color: rgb(235, 235, 228)!important">
 						<tr>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.propuesta.representantes.tipiden" /></label></td>

@@ -194,7 +194,7 @@
 			<div class="col-md-3">
 
 				<label class="control-label" for=""> <spring:theme
-						code="delineacion.urbana.dec.areasusos.netuso" />
+						code="delineacion.urbana.dec.areasusos.arnetpro" />
 				</label>
 			</div>
 			<div class="col-md-3">
@@ -269,6 +269,14 @@
 					<div class="form-group ">
 						<label class="control-label"><spring:theme
 								code="delineacion.urbana.dec.areasusos.fechultabo" /></label> <input
+							id="" name="" class="form-control" aria-required="true"
+							type="text" value="" maxlength="240" disabled>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="delineacion.urbana.dec.areasusos.fecfinalobra" /></label> <input
 							id="" name="" class="form-control" aria-required="true"
 							type="text" value="" maxlength="240" disabled>
 					</div>
