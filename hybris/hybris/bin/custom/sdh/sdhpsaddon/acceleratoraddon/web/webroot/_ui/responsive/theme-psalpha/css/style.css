@@ -24276,3 +24276,7 @@ div.dataTables_info {
 .breadcrumb-section .breadcrumb {
   text-transform: capitalize;
 }
+
+input[type="search"] {
+    min-height: 8px !important;
+}
