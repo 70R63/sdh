@@ -68,11 +68,22 @@
 										maxlength="30" size="20" readonly="true" />
 								</div></td>
 							<td><div class="col-sm-12">
-									<sf:select
-										path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
-										items="${dataForm.catalogosSo.alcoholCarbu}"
-										referenceData="${dataForm.catalogosSo.alcoholCarbu}"
-										class="form-control" />
+									<c:choose>
+										<c:when test="${info.claseProd eq '01' or info.claseProd eq '03'}" >
+											<sf:select
+												path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
+												items="${dataForm.catalogosSo.alcoholCarbu}"
+												referenceData="${dataForm.catalogosSo.alcoholCarbu}"
+												class="form-control" readonly="true"/>
+										</c:when>
+										<c:otherwise>
+											<sf:select
+												path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
+												items="${dataForm.catalogosSo.alcoholCarbu}"
+												referenceData="${dataForm.catalogosSo.alcoholCarbu}"
+												class="form-control" />
+										</c:otherwise>
+									</c:choose>
 								</div></td>
 							<td><div class="col-md-12">
 									<sf:input
