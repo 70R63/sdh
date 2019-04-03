@@ -40,7 +40,7 @@ ACC.gasolina = {
 		            },
 		            error: function () {
 		            	$( "#dialogGasolina" ).dialog( "open" );
-		            	$("#gasolinaDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            	$("#gasolinaDialogContent").html("Hubo un error al generar la declaración, por favor inténtalo más tarde");
 		            }
 		        });
 	 	       
