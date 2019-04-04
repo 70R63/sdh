@@ -274,8 +274,8 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 				if(!response.getIdmsj().equals("")) {
 					final int noQuestions = new Integer(response.getIdmsj().replaceAll(" ",""));
 					if(noQuestions < 3) {
-						GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,msg);
-						return "redirect:/login";
+						model.addAttribute("currentSection", "requestRols");
+						return getDefaultRegistrationPage(model);
 					}
 				}
 			}

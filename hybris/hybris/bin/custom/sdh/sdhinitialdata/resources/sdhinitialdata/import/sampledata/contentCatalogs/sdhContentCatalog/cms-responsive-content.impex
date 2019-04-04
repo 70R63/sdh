@@ -1914,5 +1914,30 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;icaDeclaracionPageComponent	;icaDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/icaDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDeclaracionPageComponent					
 #->FIN dev-maria Agregar paginas para ICA Declaracion 01/04/2019	
+
+#INI Agentes Retenedores  04/04/2019
+
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;retenedoresDetallePage 		;Retenedores	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/detalle
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retenedoresDetallePage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-retenedoresDetallePage 	;SideContent			;																	;SideContent-retenedoresDetallePage				;;;
+								;						;BodyContent-retenedoresDetallePage 	;BodyContent			;																	;BodyContent-retenedoresDetallePage				;;;
+								
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-retenedoresDetallePage 	;Side Content Slot for Retenedores	;true	;								;;;
+							;							;BodyContent-retenedoresDetallePage	;Body Content Slot for Retenedores	;true	;retenedoresDetallePageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;retenedoresDetallePageComponent	;retenedoresDetallePage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDetallePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDetallePageComponent	
+									
+									
 									
 									

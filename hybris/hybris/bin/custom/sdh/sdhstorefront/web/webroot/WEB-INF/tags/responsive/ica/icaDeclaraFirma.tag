@@ -13,7 +13,7 @@
 		<div class="col-md-12 mt-3">
 			<div class="headline">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span><spring:theme
 							code="ica.declaracion.firma.titulo" /></span>
 				</h2>
 			</div>
@@ -22,7 +22,7 @@
 				<div class="row margin-bottom-4" style="margin-top: 18px">
 					<div class="col-md-12" style="margin-top: 18px">
 						<div class="form-check">
-							<label class="form-check-label"> <input type="checkbox"
+							<label class="form-check-label" style="text-transform: capitalize"> <input type="checkbox"
 								name="regimen" id="" class="form-check-input mr-2"
 								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
 								<spring:theme code="ica.declaracion.firma.obligado" />
