@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="src" path="/acceleratorstorefrontcommons"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/json-taglib-0.4.1.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/jsoup-1.6.1.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/jstl-impl-1.2.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/owasp-java-html-sanitizer-20160924.1.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/wro4j-core-1.7.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
+	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/xyformsstorefrontcommons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdhpsaddon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdhbillsaddon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdhrelationshipsaddon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdhcore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/platform"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sdhfacades"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

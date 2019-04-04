@@ -37,7 +37,7 @@
 <br>
 <div class="col-md-9">
 	<div class="table-responsive">
-		>
+		
 		<div class="col-md-12">
 			<table class="table col-md-2 table-bordered">
 				<thead>

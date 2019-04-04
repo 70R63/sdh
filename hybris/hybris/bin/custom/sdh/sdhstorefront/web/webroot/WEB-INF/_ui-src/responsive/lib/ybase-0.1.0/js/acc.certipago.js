@@ -32,7 +32,7 @@ ACC.certipago = {
 			   	            error: function () {
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
-			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 			   	            }
 			   	        });
 		        });

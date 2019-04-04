@@ -19,16 +19,16 @@
 			</div>
 		</div>
 	</div>
-</div>
+
 
 <form:form action="">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
 				<table class="table table-bordered">
-					<thead>
+					<thead style="background-color: rgb(235, 235, 228)!important">
 						<tr>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 75px"><spring:theme
 										code="ica.inicial.representantes.tipiden" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.representantes.numide" /></label></td>
@@ -45,7 +45,7 @@
 					<tbody>
 						<tr>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="visibility: visibility !important" /></td>
+								type="text" style="visibility: visibility !important; width: 75px" /></td>
 							<td><input class="inputtextnew" disabled="disabled"
 								type="text" /></td>
 							<td><input class="inputtextnew" disabled="disabled"
@@ -86,3 +86,4 @@
 		</div>
 	</div>
 </form:form>
+</div>
