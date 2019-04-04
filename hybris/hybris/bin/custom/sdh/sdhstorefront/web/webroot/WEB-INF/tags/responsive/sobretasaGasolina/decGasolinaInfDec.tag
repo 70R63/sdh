@@ -63,7 +63,8 @@
 	</div>
 </div>
 
-
+<div class="">
+<input type='hidden' name='dataForm.dataForm.infoDeclara' value='' />
 <c:forEach items="${dataForm.dataForm.infoDeclara}" var="info"
 	varStatus="loop">
 	<div class="row informadeclara">
@@ -85,10 +86,20 @@
 				maxlength="30" size="20" readonly="true" type="" />
 		</div>
 		<div class="col-sm-1">
-			<sf:select path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
-				items="${dataForm.catalogosSo.alcoholCarbu}"
-				referenceData="${dataForm.catalogosSo.alcoholCarbu}"
-				class="form-control form-control-gasolina alcohol" style="width: auto !important;" />
+			<c:choose>
+				<c:when test="${info.claseProd eq '01' or info.claseProd eq '03'}" >
+					<sf:select path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
+					items="${dataForm.catalogosSo.alcoholCarbu}"
+					referenceData="${dataForm.catalogosSo.alcoholCarbu}"
+					class="form-control form-control-gasolina alcohol" readonly="true" style="width: auto !important;" />
+				</c:when>
+				<c:otherwise>
+					<sf:select path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
+					items="${dataForm.catalogosSo.alcoholCarbu}"
+					referenceData="${dataForm.catalogosSo.alcoholCarbu}"
+					class="form-control form-control-gasolina alcohol" style="width: auto !important;" />
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="col-md-2">
 			<sf:input path="dataForm.infoDeclara[${loop.index}].baseGravable"
@@ -104,13 +115,7 @@
 	</div>
 
 </c:forEach>
-</sf:form>
-
-
-<sf:form action="${declaracionURL}" method="POST" modelAttribute="dataForm" id="forma">
-
-
-
+</div>
 <br>
 <br>
 <div class="row">
@@ -140,6 +145,20 @@
 			$($(".informadeclara")[0]).parent().children().last().find(".alcohol").val("")
 			$($(".informadeclara")[0]).parent().children().last().find(".base").val("")
 			$($(".informadeclara")[0]).parent().children().last().find(".vlrsobre").val("")
+			
+			$($(".informadeclara")[0]).parent().children().last().find(".claseProducto").attr("id","dataForm.infoDeclara"+tam+".claseProd");
+			$($(".informadeclara")[0]).parent().children().last().find(".galones").attr("id","dataForm.infoDeclara"+tam+".galonesGra");
+			$($(".informadeclara")[0]).parent().children().last().find(".precio").attr("id","dataForm.infoDeclara"+tam+".precioRef");
+			$($(".informadeclara")[0]).parent().children().last().find(".alcohol").attr("id","dataForm.infoDeclara"+tam+".alcoholCarbu");
+			$($(".informadeclara")[0]).parent().children().last().find(".base").attr("id","dataForm.infoDeclara"+tam+".baseGravable");
+			$($(".informadeclara")[0]).parent().children().last().find(".vlrsobre").attr("id","dataForm.infoDeclara"+tam+".vlrSobretasa");
+			
+			$($(".informadeclara")[0]).parent().children().last().find(".claseProducto").attr("name","dataForm.infoDeclara["+tam+"].claseProd");
+			$($(".informadeclara")[0]).parent().children().last().find(".galones").attr("name","dataForm.infoDeclara["+tam+"].galonesGra");
+			$($(".informadeclara")[0]).parent().children().last().find(".precio").attr("name","dataForm.infoDeclara["+tam+"].precioRef");
+			$($(".informadeclara")[0]).parent().children().last().find(".alcohol").attr("name","dataForm.infoDeclara["+tam+"].alcoholCarbu");
+			$($(".informadeclara")[0]).parent().children().last().find(".base").attr("name","dataForm.infoDeclara["+tam+"].baseGravable");
+			$($(".informadeclara")[0]).parent().children().last().find(".vlrsobre").attr("name","dataForm.infoDeclara["+tam+"].vlrSobretasa");
 		} else {
 			alert("No se pueden agregar más registros");
 		}
