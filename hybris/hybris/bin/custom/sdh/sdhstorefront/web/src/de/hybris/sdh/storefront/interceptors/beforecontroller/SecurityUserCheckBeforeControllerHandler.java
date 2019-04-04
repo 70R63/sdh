@@ -15,6 +15,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.interceptors.BeforeContro
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.time.TimeService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 
 import java.io.IOException;
 
@@ -57,6 +58,22 @@ public class SecurityUserCheckBeforeControllerHandler implements BeforeControlle
 	public boolean beforeController(final HttpServletRequest request, final HttpServletResponse response,
 			final HandlerMethod handler) throws IOException
 	{
+		//Added to udpate dataForm from session
+
+		if ("POST".equalsIgnoreCase(request.getMethod())
+				&& request.getRequestURI().contains("/contribuyentes/sobretasa-gasolina/declaracion-gasolina"))
+		{
+			final Object dataForm = request.getSession().getAttribute("dataForm");
+
+			if (dataForm instanceof SobreTasaGasolinaForm)
+			{
+				// remove current rows in session in order to be able to receive the new ones captured by customer
+				((SobreTasaGasolinaForm) dataForm).getDataForm().setInfoDeclara(null);
+			}
+		}
+
+
+
 		// Skip this security check when run from within the WCMS Cockpit
 		if (isPreviewDataModelValid(request))
 		{
