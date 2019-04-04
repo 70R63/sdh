@@ -16,7 +16,7 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row" style="margin-top: 5px">
 	<div class="col-md-4">
 		<div class="form-group">
 			<label class="control-label"><spring:theme

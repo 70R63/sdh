@@ -24276,12 +24276,9 @@ div.dataTables_info {
 .breadcrumb-section .breadcrumb {
   text-transform: capitalize;
 }
-
-
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
-
 input[type="search"] {
-    min-height: 8px !important;
+  min-height: 8px !important;
 }
