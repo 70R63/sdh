@@ -3903,6 +3903,28 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;retenedoresDetallePageComponent	;retenedoresDetallePage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDetallePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDetallePageComponent	
+								
+#->INI dev-maria Agregar paginas para Terceros Autorizados 05/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;tercerosReportesPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/reportar
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tercerosReportesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-tercerosReportesPage 		;SideContent				;															;SideContent-tercerosReportesPage						;;;
+								;						;BodyContent-tercerosReportesPage		;BodyContent				;															;BodyContent-tercerosReportesPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-tercerosReportesPage 	;Side Content Slot for ICA Prop			;true	;								;;;
+							;							;BodyContent-tercerosReportesPage	;Body Content Slot for ICA Prop		;true	;tercerosReportesPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;tercerosReportesPageComponent	;tercerosReportesPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosReportesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosReportesPageComponent					
+#->FIN dev-maria Agregar paginas para Terceros Autorizados 05/04/2019									
+									
 									
 									
 									
