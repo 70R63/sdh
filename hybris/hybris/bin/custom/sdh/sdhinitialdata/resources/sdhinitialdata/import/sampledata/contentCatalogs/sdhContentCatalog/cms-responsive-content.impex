@@ -2013,9 +2013,9 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
-; ;RetenedorDetalleLink; DETALLE LINK	; "#" ;;;;;
-; ;RetenedorRegistroLink; REGISTRO LINK	; "#" ;;;;;
-; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "#" ;;;;;
+; ;RetenedorDetalleLink; DETALLE LINK	; "/retenedores/detalle" ;;;;;
+; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
+; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "/retenedores/declaracionesfirmar" ;;;;;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 
@@ -2069,7 +2069,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-maria Agregar submenu Reportantes 04/01/2019
 
 #->INI dev-maria Agregar submenu Retenedores Registro 04/04/2019
-; ;EdoCargasLink				;CARGAS LINK					; http://www.stateofrosebud.com/about ;;;;;
+; ;EdoCargasLink				;CARGAS LINK					; "/retenedores/estadocargas";;;;;
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------

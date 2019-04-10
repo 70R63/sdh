@@ -28,17 +28,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 //@RequestMapping("")
-public class AgentesRetenedoresPageController extends AbstractPageController
+public class RetenedoresDetallePageController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Agentes Retenedores";
+	private static final String TEXT_ACCOUNT_PROFILE = "Detalle del Retenedor";
 
 	// CMS Pages
-	private static final String AGENTES_RETENEDORES_CMS_PAGE = "retenedoresPage";
+	private static final String AGENTES_RETENEDORES_CMS_PAGE = "retenedoresDetallePage";
 
-	private static final String REDIRECT_TO_AGENTES_RETENEDORES_PAGE = REDIRECT_PREFIX + "/retenedores";
+	private static final String REDIRECT_TO_AGENTES_RETENEDORES_PAGE = REDIRECT_PREFIX + "/retenedores/detalle";
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -49,9 +49,9 @@ public class AgentesRetenedoresPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/retenedores", method = RequestMethod.GET)
+	@RequestMapping(value = "/retenedores/detalle", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String retenedores(final Model model) throws CMSItemNotFoundException
+	public String retenedoresinicial(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Retenedores --------------------------");
 
@@ -66,7 +66,7 @@ public class AgentesRetenedoresPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/retenedores", method = RequestMethod.POST)
+	@RequestMapping(value = "/retenedores/detalle", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String retenedorespost(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)
