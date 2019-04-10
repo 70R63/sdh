@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ImprimeCertDeclaraRequest;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
@@ -198,43 +199,48 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 			System.out.println(certiFormPost.getIdimp());
 			System.out.println(certiFormPost.getTipoImp());
 			System.out.println("--------------[" + certiFormPost.getRowFrompublicidadTable() + "]--------------");
-			try
+
+			if (!certiFormPost.getIdimp().equals(""))
 			{
 
-				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-				if (certiFormPost.getIdimp().equals("4"))
+				try
 				{
-					imprimeCertDeclaraRequest.setNumObjeto(customerData.getExteriorPublicityTaxList().get(0).getObjectNumber());
-				}
 
-				if (certiFormPost.getIdimp().equals("5"))
+					final ObjectMapper mapper = new ObjectMapper();
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+					if (certiFormPost.getIdimp().equals("4"))
+					{
+						imprimeCertDeclaraRequest.setNumObjeto(customerData.getExteriorPublicityTaxList().get(0).getObjectNumber());
+					}
+
+					if (certiFormPost.getIdimp().equals("5"))
+					{
+						imprimeCertDeclaraRequest.setNumObjeto(customerData.getGasTaxList().get(0).getObjectNumber());
+					}
+
+					final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
+
+					imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
+					imprimeCertDeclaraRequest.setRetencion(VACIO);
+					imprimeCertDeclaraRequest.setPeriodo(aniograv_periodo);
+					imprimeCertDeclaraRequest.setAnoGravable(certiFormPost.getAniograv());
+
+					final String resp = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraRequest);
+					final ImprimePagoResponse imprimeCertiDeclaraResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+					redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraResponse);
+				}
+				catch (final Exception e)
 				{
-					imprimeCertDeclaraRequest.setNumObjeto(customerData.getGasTaxList().get(0).getObjectNumber());
+					LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+					GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+					if (!certiFormPost.getRowFrompublicidadTable().replace(",", "").equals("X"))
+					{
+						redirectModel.addFlashAttribute("error", "sinPdf");
+					}
+					return "redirect:/contribuyentes/consultas/certideclaraciones";
+
 				}
-
-				final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
-
-				imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
-				imprimeCertDeclaraRequest.setRetencion(VACIO);
-				imprimeCertDeclaraRequest.setPeriodo(aniograv_periodo);
-				imprimeCertDeclaraRequest.setAnoGravable(certiFormPost.getAniograv());
-
-				final String resp = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraRequest);
-				final ImprimePagoResponse imprimeCertiDeclaraResponse = mapper.readValue(resp, ImprimePagoResponse.class);
-				redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraResponse);
-			}
-			catch (final Exception e)
-			{
-				LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-				GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
-				if (!certiFormPost.getRowFrompublicidadTable().replace(",", "").equals("X"))
-				{
-					redirectModel.addFlashAttribute("error", "sinPdf");
-				}
-				return "redirect:/contribuyentes/consultas/certideclaraciones";
-
 			}
 		}
 

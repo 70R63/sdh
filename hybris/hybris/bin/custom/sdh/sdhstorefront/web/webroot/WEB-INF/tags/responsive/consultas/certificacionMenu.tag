@@ -17,6 +17,7 @@
 <script>
 
 	function onChange(anoGravableGasolina,anoGravablePublicidad) {
+		
 		form = document.getElementById("form_pdf");
 
 		input = document.createElement('input');
@@ -355,6 +356,14 @@
 	  		</tr>
   		</c:forEach>  		
   	</table>
+  	
+  	<br>
+  	<br>
+  	
+  	<button type="button" class="btn btn-primary btn-lg" id="regresar" onclick="reiniciaConsultaPublicidad()">
+		<spring:theme code="certificacion.inicial.regresar" />
+	</button>
+	
   	</c:if>
 		
 	</div>
@@ -497,5 +506,17 @@
 			tablepublicidad.style.display = 'none';
 		}
 	}
+	
+	function reiniciaConsultaPublicidad(){
+		debugger;
+		impuesto = document.getElementById("Idimp");
+		impuesto.value = "";
+		
+		form = document.getElementById("form_pdf");
+		form.submit();
+	}
+	
+		
+	
 </script>
 

@@ -24279,11 +24279,9 @@ div.dataTables_info {
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
-
-
+input[type="search"] {
+  min-height: 8px !important;
 }
-
-
 .main-footer .footer__top .footer__nav--container .footer__nav--links a {
   color: #000000;
 }
@@ -24298,10 +24296,4 @@ body {
 }
 .col-md-offset-2 {
   margin-left: 6.66666667%;
-}
-.main-footer .footer__top .footer__nav--container .footer__nav--links a {
-  color: #000000;
-}
-.main-footer {
-  font-family: 'Helvetica', 'Arial', sans-serif;
 }
