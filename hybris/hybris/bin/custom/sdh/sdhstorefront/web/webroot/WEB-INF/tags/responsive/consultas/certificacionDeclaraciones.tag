@@ -344,6 +344,14 @@
 	  		</tr>
   		</c:forEach>  		
   	</table>
+  	
+  	<br>
+  	<br>
+  	
+  	<button type="button" class="btn btn-primary btn-lg" id="regresar" onclick="reiniciaCertificaPublicidad()">
+		<spring:theme code="certificacion.inicial.regresar" />
+	</button>
+	
   	</c:if>
 	</div>		
 </div>
@@ -447,6 +455,16 @@
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
 		}
+	}
+	
+	
+	function reiniciaCertificaPublicidad(){
+		debugger;
+		impuesto = document.getElementById("tipoimp");
+		impuesto.value = "";
+		
+		form = document.getElementById("form_pdf");
+		form.submit();
 	}
 </script>
 
