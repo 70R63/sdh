@@ -4,9 +4,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%-- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> --%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL" htmlEscape="false" />
+	
+	
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
@@ -16,7 +21,6 @@
 		</div>
 	</div>
 
-	<form:form>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group ">
@@ -57,6 +61,7 @@
 		<br>
 		<div class="container">
 			<div class="row">
+				<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 
 				<div class=" col-md-3">
 					<button type="button" class="btn btn-primary btn-lg"
@@ -80,14 +85,23 @@
 				</div>
 
 
+				<sf:hidden path="tipoImpuesto"/>
+				<sf:hidden path="numBP" />
+				<sf:hidden path="numDoc" />
+				<sf:hidden path="tipoDoc" />
+				<sf:hidden path="anoGravable" />
+				<sf:hidden path="periodo" />
+				<sf:hidden path="clavePeriodo" />
+				<sf:hidden path="dv" />
+				<sf:hidden path="numObjeto" />
 				<div class="col-md-3">
-					<button type="submit" class="btn btn-primary btn-lg" id="" name=""
-						value="calcular">
-						<spring:theme code="delineacion.urbana.dec.firm.paglin" />
-					</button>
+				<sf:button class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar">
+					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
+				</sf:button>
 				</div>
+				</sf:form>
 			</div>
 		</div>
+		
 
-	</form:form>
 </div>
