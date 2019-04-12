@@ -28,17 +28,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 //@RequestMapping("")
-public class AgentesRetenedoresPageController extends AbstractPageController
+public class RetenedoresRegistroPageController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Agentes Retenedores";
+	private static final String TEXT_ACCOUNT_PROFILE = "Registro de Retenciones";
 
 	// CMS Pages
-	private static final String AGENTES_RETENEDORES_CMS_PAGE = "retenedoresPage";
+	private static final String AGENTES_RETENEDORES_REGISTRO_CMS_PAGE = "retenedoresRegistroPage";
 
-	private static final String REDIRECT_TO_AGENTES_RETENEDORES_PAGE = REDIRECT_PREFIX + "/retenedores";
+	private static final String REDIRECT_TO_AGENTES_RETENEDORES_REGISTRO_PAGE = REDIRECT_PREFIX
+			+ "/retenedores/registroretenciones";
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -49,16 +50,17 @@ public class AgentesRetenedoresPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/retenedores", method = RequestMethod.GET)
+	@RequestMapping(value = "/retenedores/registroretenciones", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String retenedores(final Model model) throws CMSItemNotFoundException
+	public String retenedoresregistro(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al GET Agentes Retenedores --------------------------");
+		System.out
+				.println("---------------- Hola entro al GET Agentes Retenedores Registro de Retenciones--------------------------");
 
 
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(AGENTES_RETENEDORES_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AGENTES_RETENEDORES_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(AGENTES_RETENEDORES_REGISTRO_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AGENTES_RETENEDORES_REGISTRO_CMS_PAGE));
 
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
@@ -66,15 +68,15 @@ public class AgentesRetenedoresPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/retenedores", method = RequestMethod.POST)
+	@RequestMapping(value = "/retenedores/registroretenciones", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String retenedorespost(final BindingResult bindingResult, final Model model,
+	public String retenedoresregistropost(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("------------------Entro al POST de Agentes Retenedores------------------------");
+		System.out.println("------------------Entro al POST de Agentes Retenedores Estado de Cargas------------------------");
 
-		return REDIRECT_TO_AGENTES_RETENEDORES_PAGE;
+		return REDIRECT_TO_AGENTES_RETENEDORES_REGISTRO_PAGE;
 	}
 
 }

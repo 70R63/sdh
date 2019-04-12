@@ -2013,9 +2013,9 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
-; ;RetenedorDetalleLink; DETALLE LINK	; "#" ;;;;;
-; ;RetenedorRegistroLink; REGISTRO LINK	; "#" ;;;;;
-; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "#" ;;;;;
+; ;RetenedorDetalleLink; DETALLE LINK	; "/retenedores/detalle" ;;;;;
+; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
+; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "/retenedores/declaracionesfirmar" ;;;;;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 
@@ -2069,7 +2069,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-maria Agregar submenu Reportantes 04/01/2019
 
 #->INI dev-maria Agregar submenu Retenedores Registro 04/04/2019
-; ;EdoCargasLink				;CARGAS LINK					; http://www.stateofrosebud.com/about ;;;;;
+; ;EdoCargasLink				;CARGAS LINK					; "/retenedores/estadocargas";;;;;
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -3903,6 +3903,111 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;retenedoresDetallePageComponent	;retenedoresDetallePage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDetallePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDetallePageComponent	
+								
+#->INI dev-maria Agregar paginas para Terceros Autorizados 05/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;tercerosReportesPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/reportar
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tercerosReportesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-tercerosReportesPage 		;SideContent				;															;SideContent-tercerosReportesPage						;;;
+								;						;BodyContent-tercerosReportesPage		;BodyContent				;															;BodyContent-tercerosReportesPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-tercerosReportesPage 	;Side Content Slot for ICA Prop			;true	;								;;;
+							;							;BodyContent-tercerosReportesPage	;Body Content Slot for ICA Prop		;true	;tercerosReportesPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;tercerosReportesPageComponent	;tercerosReportesPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosReportesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosReportesPageComponent					
+#->FIN dev-maria Agregar paginas para Terceros Autorizados 05/04/2019
+
+#->INI dev-maria Agregar paginas para Retenedores Registro 10/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;retenedoresRegistroPage 		;Retenedores Registro 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/registroretenciones
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retenedoresRegistroPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-retenedoresRegistroPage 		;SideContent				;															;SideContent-retenedoresRegistroPage						;;;
+								;						;BodyContent-retenedoresRegistroPage		;BodyContent				;															;BodyContent-retenedoresRegistroPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-retenedoresRegistroPage 	;Side Content Slot for Retenedores Registro 			;true	;								;;;
+							;							;BodyContent-retenedoresRegistroPage	;Body Content Slot for Retenedores Registro 		;true	;retenedoresRegistroPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;retenedoresRegistroPageComponent	;retenedoresRegistroPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresRegistroPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresRegistroPageComponent					
+#->FIN dev-maria Agregar paginas para Retenedores Registro 10/04/2019	
+
+#->INI dev-maria Agregar paginas para Retenedores Inicial 10/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;retenedoresPage 		;Retenedores Inicial 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retenedoresPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-retenedoresPage 		;SideContent				;															;SideContent-retenedoresPage						;;;
+								;						;BodyContent-retenedoresPage		;BodyContent				;															;BodyContent-retenedoresPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-retenedoresPage 	;Side Content Slot for Retenedores Inicial 			;true	;								;;;
+							;							;BodyContent-retenedoresPage	;Body Content Slot for Retenedores Inicial 		;true	;retenedoresPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;retenedoresPageComponent	;retenedoresPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresPageComponent					
+#->FIN dev-maria Agregar paginas para Retenedores Inicial 10/04/2019	
+
+#->INI dev-maria Agregar paginas para Retenedores Estado Cargas 10/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;retenedoresEdoCargasPage 		;Retenedores Cargas 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/estadocargas
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retenedoresEdoCargasPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-retenedoresEdoCargasPage 		;SideContent				;															;SideContent-retenedoresEdoCargasPage						;;;
+								;						;BodyContent-retenedoresEdoCargasPage		;BodyContent				;															;BodyContent-retenedoresEdoCargasPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-retenedoresEdoCargasPage 	;Side Content Slot for Retenedores Cargas 			;true	;								;;;
+							;							;BodyContent-retenedoresEdoCargasPage	;Body Content Slot for Retenedores Cargas 		;true	;retenedoresEdoCargasPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;retenedoresEdoCargasPageComponent	;retenedoresEdoCargasPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresEdoCargasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresEdoCargasPageComponent					
+#->FIN dev-maria Agregar paginas para Estado Cargas  10/04/2019	
+#->INI dev-maria Agregar paginas para Retenedores Declaraciones Firmar 10/04/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;retenedoresDecFirmarPage 		;Retenedores Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/declaracionesfirmar
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retenedoresDecFirmarPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-retenedoresDecFirmarPage 		;SideContent				;															;SideContent-retenedoresDecFirmarPage						;;;
+								;						;BodyContent-retenedoresDecFirmarPage		;BodyContent				;															;BodyContent-retenedoresDecFirmarPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-retenedoresDecFirmarPage 	;Side Content Slot for Retenedores Firmar 			;true	;								;;;
+							;							;BodyContent-retenedoresDecFirmarPage	;Body Content Slot for Retenedores Firmar 		;true	;retenedoresDecFirmarPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;retenedoresDecFirmarPageComponent	;retenedoresDecFirmarPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDecFirmarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDecFirmarPageComponent					
+#->FIN dev-maria Agregar paginas para Declaraciones Firmar 10/04/2019					
+									
 									
 									
 									

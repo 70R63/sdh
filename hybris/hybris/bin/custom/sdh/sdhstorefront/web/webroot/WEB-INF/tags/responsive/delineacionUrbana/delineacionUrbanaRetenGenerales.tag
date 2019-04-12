@@ -93,6 +93,45 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.areasusos.preobra" /></label> <select
+						class="form-control" onchange="costoshabil(this)">
+						<option value="">Seleccionar</option>
+						<option value="1">Calcular con base en la Resolución de
+							la Secretaría Distrital de Planeación</option>
+						<option value="2">Incorporar el valor de su presupuesto
+							estimado</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.areasusos.cauexen" /></label> <select
+						class="form-control">
+						<option value="0">Seleccionar</option>
+						<option value="1">Obras Nuevas Vis Estratos 1, 2 Y 3</option>
+						<option value="2">Obras De Autocontrucción De Vivienda,
+							De Estratos 1 Y 2, Que No Excedan Los Topes Definidos Por La Ley
+							Para El Valor De La Vivienda De Interés Social</option>
+						<option value="3">Ampliaciones, Modificaciones,
+							Adecuaciones O Reparaciones Inmuebles Residenciales Estrato 1, 2
+							Y 3. Avalúo Catastral Inferior A 135 Smimv</option>
+						<option value="4">Obras Que Se Realicen Para Reparar
+							Inmuebles Afectados Por Actos Terroristas O Catástrofes Naturales</option>
+						<option value="5">Obras De Restauración Y Conservación En
+							Bien Inmueble De Interés Cultural</option>
+					</select>
+				</div>
+			</div>
+
+		</div>
+
 	</form:form>
 </div>
 

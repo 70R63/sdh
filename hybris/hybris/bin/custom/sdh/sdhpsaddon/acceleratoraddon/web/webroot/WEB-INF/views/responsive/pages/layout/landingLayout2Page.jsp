@@ -41,7 +41,7 @@
 		</c:if>
 		<c:if test="${hasTARol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
-			<a href="#">
+			<a href="<c:url value='/terceros/reportar' />">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
 					<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/terceros_autorizados.png">
 				</div>
@@ -56,7 +56,7 @@
 		</c:if>
 		<c:if test="${hasARRol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
-			<a href="<c:url value='/retenedores/detalle' />">
+			<a href="<c:url value='/retenedores' />">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
 					<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/agente_retenedor.png">
 				</div>
