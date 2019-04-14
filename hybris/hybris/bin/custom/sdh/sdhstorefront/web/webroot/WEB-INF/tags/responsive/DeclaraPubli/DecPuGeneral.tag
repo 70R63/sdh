@@ -7,8 +7,9 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div class="container">
 <div class="row">
-	<div class="col-md-6 headline">
+	<div class="col-md-12 headline">
 		<h2>
 			<span class="col-md-10"><spring:theme
 					code="declaracion.publicidad.titulo" /></span>
@@ -66,5 +67,6 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 

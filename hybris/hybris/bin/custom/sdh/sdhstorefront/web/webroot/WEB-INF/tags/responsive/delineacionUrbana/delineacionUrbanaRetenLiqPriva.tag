@@ -18,87 +18,6 @@
 	</div>
 
 	<form:form>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.costdire" /></label> <input id="codstdirec"
-						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
-				</div>
-			</div>
-
-		</div>
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.costindi" /></label> <input id="costindirec"
-						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
-				</div>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.mtcons" /></label> <input id="metconstr"
-						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group ">
-
-					<label class="control-label" style="padding-top: 40px;"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.m2" /></label>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.mtventa" /></label> <input id="metventa"
-						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group ">
-
-					<label class="control-label" style="padding-top: 40px;"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.m2" /></label>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.valcomcons" /></label> <input id="valconstr"
-						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.valaproxmet" /></label> <input
-						id="valaprox" name="" class="form-control" aria-required="true"
-						type="text" value="" maxlength="240">
-				</div>
-			</div>
-		</div>
 
 		<div class="row">
 			<div class="col-md-4">
@@ -116,17 +35,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.valrete" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.pago" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						value="" maxlength="240" disabled>
 				</div>
 			</div>
 		</div>
@@ -141,14 +50,14 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="container">
-			<button type="submit" class="btn btn-primary btn-lg" id="" name=""
-				value="calcular">
-				<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
-			</button>
+		<div class="row">
+			<div class="col-md-4">
+				<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+					value="calcular">
+					<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
+				</button>
+			</div>
 		</div>
-
 	</form:form>
 </div>
 

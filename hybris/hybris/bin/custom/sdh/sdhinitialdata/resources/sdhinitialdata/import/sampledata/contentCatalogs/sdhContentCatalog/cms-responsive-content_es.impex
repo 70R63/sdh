@@ -140,6 +140,320 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;DeclaracionesLink;"Declaraciones";"Haga clic aquí para ir a Declaraciones"
 ;;PagosLink;"Pagos";"Haga clic aquí para ir a Pagos"
 ;;ConsultasLink;"Consultas";"Haga clic aquí para ir a las consultas"
+;;ReportantesLink;"Mi Información Reportada";"Haga clic aquí para ir a su Información Reportada"
+
+;;RetenedorDetalleLink;"Detalle del Retenedor";"Haga clic aquí para ir al detalle de su información"
+;;RetenedorRegistroLink;"Registro de Retenciones";"Haga clic aquí para ir al registro de sus retenciones"
+;;RetenedorDeclaracionesLink;"Delaraciones por Firmar";"Haga clic aquí para ir a las Declaraciones por Firmar"
+
+
+#->FIN dev-eduardo Agregar menu SDH 04/01/2019
+
+
+#->INI dev-eduardo Agregar submenu MI RIT 04/01/2019
+;;CertRitLink;"Certificación RIT";"Haga clic aquí para acceder a la opción de menú Certifiación RIT"
+#->FIN dev-eduardo Agregar submenu MI RIT 04/01/2019
+
+#->INI dev-eduardo Agregar submenu MI BUZON 04/01/2019
+#->FIN dev-eduardo Agregar submenu MI BUZON 04/01/2019
+
+#->INI dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
+;;DelineacionUrbanaLink;"Delineación Urbana";"Haga clic aquí para acceder a la opción de menú Delineación Urbana"
+;;ICALink;"ICA";"Haga clic aquí para acceder a la opción de menú ICA"
+;;PredialUnificadoLink;"Predial unificado";"Haga clic aquí para acceder a la opción de menú Predial unificado"
+;;PublicidadExteriorLink;"Publicidad exterior";"Haga clic aquí para acceder a la opción de menú Publicidad exterior"
+;;SobreVehiAutomotoresLink;"Sobre vehículos automotores";"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
+;;SobreTasaGasolinaLink;"Sobretasa a la gasolina";"Haga clic aquí para acceder a la opción de menú Sobretasa a la gasolina"
+#->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
+
+#->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
+;;AnulacionFacturaLink;"Anulación de factura";"Haga clic aquí para acceder a la opción de menú Anulación factura"
+;;ModificacionFacturaLink;"Modificación de factura";"Haga clic aquí para acceder a la opción de menú Modificación factura"
+#->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
+
+#->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
+;;DescargaFacturaLink;"Descarga de factura";"Haga clic aquí para acceder a la opción de menú Descarga de factura"
+;;ReexpedicionFacturaLink;"Reexpedición de factura";"Haga clic aquí para acceder a la opción de menú Reexpedición de factura"
+#->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
+
+#->INI dev-eduardo Agregar submenu DECLARACION 04/01/2019
+;;PresentarDeclaracionLink;"Presentar declaración";"Haga clic aquí para acceder a la opción de menú Presentar declaración"
+;;ListaDeclaracionFirmaLink;"Lista de declaraciones a firmar";"Haga clic aquí para acceder a la opción de menú Lista de declaraciones a firmar"
+#->FIN dev-eduardo Agregar submenu DECLARACION 04/01/2019
+
+#->INI dev-eduardo Agregar submenu PAGO 04/01/2019
+;;GeneracionROPLink;"Generación de ROP";"Haga clic aquí para acceder a la opción de menú Generación de ROP"
+;;PagoLineaLink;"Pago en línea";"Haga clic aquí para acceder a la opción de menú Pago en línea"
+#->FIN dev-eduardo Agregar submenu PAGO 04/01/2019
+
+#->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+;;CertPagoLink;"Certificaciones de pago";"Haga clic aquí para acceder a la opción de menú Certificaciones de pago"
+;;ObligacionesPendLink;"Obligaciones pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
+;;RelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
+;;EdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
+;;CertDeclaraLink;"Certificaciones de Declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
+
+;;CargaLink;"Carga de Documentos";"Haga clic aquí para acceder a la opción de Carga de Documentos"
+;;HistoricoLink;"Histórico de reportes";"Haga clic aquí para acceder a la opción de Histórico de reportes"
+;;SancionesLink;"Sanciones impuestas";"Haga clic aquí para acceder a la opción Sanciones impuestas"
+#->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
+;;EdoCargasLink;"Estado de Cargas";"Haga clic aquí para consultar el estado de sus cargas"
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+UPDATE PSRetrieveADraftComponent; $contentCV[unique = true]; uid[unique = true];title[lang=$lang];description[lang=$lang];retrieveDraftButtonLabel[lang=$lang];
+;;PSRetrieveADraftComponent;Recuperar el borrador de su solicitud;¿Ya ha iniciado una solicitud de servicio y la ha grabado como borrador? Recupérela aquí.;Recuperar borrador de solicitud;
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;NoSearchResultsParagraphComponent;<h2>Lo sentimos. No hemos encontrado ningún resultado para su búsqueda.</h2><p>Sugerencias:</p><ul>    <li style="list-style-type:disc">Es posible que haya escrito mal sus palabras clave. Compruébelas.</li>  <li style="list-style-type:disc">Es posible que haya sido demasiado específico. Amplíe su búsqueda utilizando menos palabras clave.</li>   <li style="list-style-type:disc">Navegue por nuestros productos seleccionando una categoría más arriba.</li></ul>
+
+# CMS Paragraph Component (Contact information)
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
+;;faqTextParagraph;"<div class=""global-alerts""><div class=""alert alert-info"" role=""alert""><strong>Información: </strong>Página en construcción - No completamente operativa</div></div><a name=""00""></a><div class=""textpage textpage-faqs""><div class=""item_container"">		<h2><a name=""a00""></a>Devoluciones y reembolsos</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>		<div class=""item_container"">		<h2><a name=""b00""></a>Información de entrega</h2>		<a class=""faq-menulink"" href=""#b01"">Opciones de entrega</a>		<a class=""faq-menulink"" href=""#b02"">Plazos de entrega y gastos</a>		<a class=""faq-menulink"" href=""#b03"">Información sobre el seguimiento del pedido</a>		<a class=""faq-menulink"" href=""#b04"">Información sobre estado del servicio de mensajería</a>			<h3><a name=""b01""></a>Opciones de entrega</h3>		<p>			Las opciones de entrega que tiene disponibles se muestran en el área de check out, en Método de entrega.<br><br>			Según su dirección de entrega, es posible que estas opciones no estén todas disponibles:			</p><ul>			<li>					<b>Entrega a domicilio </b> - Entrega estándar en GB gratuita para todos los pedidos superiores a 50 libras en un plazo de 4 días laborables (*puede haber excepciones)				</li>				<li>					<b>Entrega estándar</b> -  Entre 1 y 2 días laborables				</li>				<li>					<b>Otro método de entrega</b>  &ndash; Entre 3 y 5 días laborables				</li>				<li>				<b>Entrega internacional</b> &ndash; Entre 7 y 10 días laborables (no disponible en todos los países)				</li>			</ul>		<p></p>		<h3><a name=""b02""></a>Plazos de entrega y gastos</h3>		<p>			Entregamos la mayoría de los pedidos en un plazo de 4 días laborables a un precio de 3,99 libras o GRATIS en el caso de pedidos de más de 50 libras (*puede haber excepciones: ver tabla más abajo).			</p><ul>				<li>					Las entregas a direcciones de GB se efectúan de lunes a viernes de 9 de la mañana a 6 de la tarde, excepto días festivos. 				</li>				<li>					Los plazos para las entregas a las Tierras Altas y las Islas de Escocia, ubicaciones en alta mar y a Irlanda del Norte pueden ser algo mayores.<br>					Para entregas a la República de Irlanda visite nuestra página irlandesa en hybris.com				</li>				<li>					Varios artículos se pueden entregar en más de un paquete en diferentes momentos.				</li>			</ul>		<p></p>	<h3><a name=""b03""></a>Información sobre el seguimiento del pedido</h3>		<p>			Le enviaremos por correo electrónico actualizaciones de cada fase de su pedido. En cada correo electrónico podrá ver el estado en el que se encuentra su pedido. En la tabla de más abajo se explican los distintos estados de los pedidos. Enviamos la mayoría de los paquetes a través de nuestro servicio de mensajería. Puede hacer un seguimiento de esos paquetes haciendo clic en el enlace de referencia al paquete que encontrará en su correo electrónico. Una vez haya hecho clic en el enlace accederá directamente a la página web del servicio de mensajería. Encontrará información sobre los estados del servicio de mensajería <a href=""#b04"">haciendo clic aquí</a>.		</p>		<table width=""100%"" cellspacing=""0"" cellpadding=""0"" border=""0"">			<tbody>				<tr>					<th>Estado </th>					<th>Descripción</th>				</tr>				<!--ROW 1-->				<tr>					<td class=""blue3"">						<strong>Proceso</strong><br>					</td>					<td class=""grey3"">						Su pedido está en proceso.<br>					</td>				</tr>				<!--ROW 2-->	<tr>					<td class=""blue3"">						<strong>Entregado</strong><br>					</td>					<td class=""grey3"">						Su pedido ha sido entregado al servicio de mensajería.<br><br>    En caso de artículos pesados y de gran tamaño, su pedido está listo para ser entregado por nuestro servicio de mensajería. El mensajero se pondrá en contacto con usted para acordar una fecha para la entrega.<br><br>En el caso de pedidos para recoger en tienda, recibirá una actualización del estado de su pedido cuando sus artículos estén listos para ser recogidos (más abajo encontrará información sobre los estados de recogida en tienda)<br><br>					</td>				</tr>				<!--ROW 3-->				<tr>					<td class=""blue3"">						<strong>Cancelado<br>Imposible atender<br> Anulación de pago</strong><br>					</td>					<td class=""grey3"">						Su pedido ha sido cancelado debido a la disponibilidad en stock, no se ha efectuado ningún cobro.<br><br>					</td>				</tr>				<!--ROW 4-->				<tr>					<td class=""blue3"">						<strong>Cancelado<br>Imposible atender<br>Pago reembolsado</strong><br>				</td>					<td class=""grey3"">						Su pedido ha sido cancelado debido a la disponibilidad en stock. Hemos procesado un reembolso a su tarjeta de pago.<br><br>					</td>				</tr>				<!--ROW 5-->				<tr>					<td class=""blue3"">						<strong>Devolución recibida</strong><br>					</td>					<td class=""grey3"">Hemos recibido su devolución. Sin embargo, dado que las mercancías se han enviado al almacén erróneo, es posible que se produzca una pequeña demora en la tramitación del reembolso mientras las mercancías se redireccionan.<br><br>					</td>				</tr>				<!--ROW 6-->				<tr>					<td class=""blue3"">						<strong>Pedido listo para recogida</strong><br>					</td>					<td class=""grey3"">						Su pedido está listo para ser recogido en la tienda elegida.<br><br><strong><i>Recuerde:</i></strong> Debe recoger su pedido en un plazo de 14 días a partir de la recepción del correo electrónico de notificación.<br><br>					</td>				</tr>				<!--ROW 7-->				<tr>					<td class=""blue3"">						<strong>Recogido</strong><br>					</td>					<td class=""grey3"">					Su pedido ha sido recogido.<br><br>					</td>				</tr>				<!--ROW 8-->				<tr>					<td class=""blue3"">						<strong>Devolución en curso</strong><br>					</td>					<td class=""grey3"">						Estamos procesando su devolución.<br><br>					</td>				</tr>				<!--ROW 9-->				<tr>					<td class=""blue3"">						<strong>Reembolso por devolución completado</strong><br>					</td>					<td class=""grey3"">						Hemos procesado su devolución.<br><br><strong><i>Recuerde:</i></strong>  Algunos bancos tardan más que otros en procesar reembolsos.<br><br>					</td>				</tr>			</tbody>		</table>		<p></p>		<h3><a name=""b04""></a>Información sobre el estado del servicio de mensajería</h3>		<p></p>		<table width=""100%"" cellspacing=""0"" cellpadding=""0"" border=""0"">			<tbody>				<tr>					<th>Estado</th>					<th>Descripción</th>				</tr>			<!--ROW 1-->				<tr>					<td class=""blue3"">						<strong>Pedido generado</strong><br>					</td>					<td class=""grey3"">						Su pedido está listo para la entrega y se ha introducido en el sistema del servicio de mensajería.<br>					</td>				</tr>				<!--ROW 2-->				<tr>					<td class=""blue3"">						<strong>Recibido en el depósito</strong><br>					</td>					<td class=""grey3"">					Su paquete ha sido recibido en el depósito. <br><br>					</td>				</tr>				<!--ROW 3-->				<tr>					<td class=""blue3"">						<strong>Procesado en el depósito</strong><br>					</td>					<td class=""grey3"">						Su paquete ha sido procesado en el depósito y está listo para ser entregado al servicio de mensajería.<br><br>					</td>				</tr>				<!--ROW 4-->				<tr>					<td class=""blue3"">						<strong>Ha salido para entrega a servicio de mensajería.</strong><br>					</td>					<td class=""grey3"">						Su paquete ha salido del depósito para ser entregado al servicio de mensajería.<br><br>					</td>				</tr>				<!--ROW 5-->				<tr>					<td class=""blue3"">						<strong>Servicio de mensajería para reintento</strong><br>					</td>					<td class=""grey3"">						El servicio de mensajería ha intentado entregar su paquete y lo intentará de nuevo. Recibirá una tarjeta confirmando que se ha intentado efectuar la entrega.<br><br>					</td>				</tr>			<!--ROW 6-->				<tr>					<td class=""blue3"">						<strong>Entregado a</strong><br>					</td>					<td class=""grey3"">						Su paquete ha sido entregado .<br><br>					</td>				</tr>			</tbody>		</table>		<p></p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>		<div class=""item_container"">		<h2><a name=""c00""></a>Registro</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>	<div class=""item_container"">		<h2><a name=""d00""></a>Su cuenta online</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>	<div class=""item_container"">		<h2><a name=""e00""></a>Pedidos</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>	<div class=""item_container"">		<h2><a name=""f00""></a>Promociones y descuentos</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>	<div class=""item_container"">		<h2><a name=""g00""></a>Información general y sobre productos</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>	<div class=""item_container"">		<h2><a name=""h00""></a>Información sobre tiendas</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>	<div class=""item_container"">		<h2><a name=""i00""></a>Contactos comerciales</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>		<div class=""item_container"">		<h2><a name=""j00""></a>Guías de compra</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>		<div class=""item_container"">		<h2><a name=""k00""></a>Guías de tallas</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div>		<div class=""item_container"">		<h2><a name=""l00""></a>Privacidad y seguridad</h2>		<p>Texto</p>		<a class=""pagetop-link"" href=""#00"">Volver al inicio</a>	</div></div>";
+
+
+################### Public Sector Home Page Start #######################
+
+###### Home page Section 1 ######
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
+;;publicSectorBannerHome;publicSector-homepage-Carousel-en
+
+###### Home page Section 2A ######
+#CMS Link Components
+INSERT_UPDATE PSFeaturedLinksComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];
+;;FrequentlyUsedServices;Servicios frecuentes;
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;RegisterBirthLink;"Registrar un nacimiento"
+;;ApplyWokringWithChildrenCheckLink;"Solicitar un certificado para trabajar con menores"
+;;ApplyEventPermitLink;"Solicitar autorización para un evento"
+;;ReportPotholeLink;"Informar sobre un bache"
+;;ApplyMarriageCertificateLink;"Solicitar un certificado de matrimonio"
+;;ApplyCarLearnerPermitLink;"Solicitar un permiso de conductor novel para un coche"
+
+#### Home section 2B #######
+
+UPDATE PSBannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];title[lang=$lang]
+;;PublicSectorHompageBannerComponent1;"Festival Internacional de Trineos";"Festival Internacional de Trineos (imagen)"
+;;PublicSectorHompageBannerComponent2;"Quiénes somos";"Quiénes somos (imagen)"
+;;PublicSectorHompageBannerComponent3;"Últimas noticias";"Últimas noticias (imagen)"
+;;PublicSectorHompageBannerComponent4;"Próximos eventos";"Próximos eventos (imagen)"
+
+#Footer Link Components
+
+# CMS Navigation Nodes 
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;AboutUsNavNode;""
+;;ServicesNavNode;""
+;;SocialMediaNavNode;""
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;ContactUsLink;"Contacto"
+#;;AboutRoseBudLink;"Acerca de Rosebud"
+;;RoseBudsSenatorsLink;"Senadores de Rosebud"
+;;RetrieveDraftLink;"Recuperar un borrador"
+;;AllServiceRequestsLink;"Todas las solicitudes de servicios"
+;;PinterestLink;"Pinterest"
+;;LinkedInLink;"LinkedIn"
+;;YouTubeLink;"YouTube"
+;;FacebookLink;"Facebook"
+;;TwitterLink;"Twitter"
+;;GooglePlusLink;"Google+"
+
+; ; NoticiasLink            		; "Noticias"
+; ; CalendarioTributarioLink            ; "Calendario Tributario"
+; ; IndiceRecaudacionLink           ; "Indice de Recaudo"
+; ; PredialLink               		; "1% Predial, aquí te decimos como"
+
+
+## Header Start ##
+
+# Site Logo Component #
+UPDATE PSSimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];title[lang=$lang]
+;;HybrisLogoComponent;/images/theme/oficina_virtual.png;"Logotipo de Bogota Mejor"
+
+#################### Public Sector Home Page End ###############################
+
+###  Responsive Error page #######
+
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;$mediaContainer
+;;PublicSectorErrorpageBannerComponent;Public Sector Error Page Banner Component;PublicSectorErrorpageBannerComponent;public-sector-errorpage-pagenotfound
+
+# Create ContentSlots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;PublicSector-MiddleContent-Errorpage;PublicSector Middle Content Slot for Error Page;true;PublicSectorErrorpageBannerComponent;;;
+
+# Create Content Slots for Page
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='notFound'];contentSlot(uid,$contentCV)[unique=true]
+;;PublicSector-MiddleContent-Errorpage;MiddleContent;;PublicSector-MiddleContent-Errorpage
+
+# update navigation node title
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+
+#->INI dev-eduardo Mi RIT 07/01/2019---------------------------------------------------
+#;;MyAccountNavNode;"Mi cuenta"
+;;MyAccountNavNode;"Mi RIT"
+#->INI dev-eduardo Mi RIT 07/01/2019---------------------------------------------------
+
+
+
+## Service Request Details page
+
+UPDATE PSHelpDeskComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];description[lang=$lang];&componentRef;;;
+;;ServiceHelpDeskComponent;Servicio al cliente;<div>Nuestro servicio al cliente le ayudará si tiene alguna duda sobre esta solicitud. Los empleados del centro de atención al cliente están a su disposición en este horario:</div> <p><span class="strong">Lu. - Sá.: 7 - 19 h.</span></p> <div ><span class="strong">Tel. +61 12345 678</span></div>;ServiceHelpDeskComponent;;;
+
+UPDATE PSShareThisPageComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];&componentRef;;;
+;;ServiceShareThisPageComponent;Compartir esta página;ServiceShareThisPageComponent;;;
+# 
+# ImpEx for Responsive Public Sector Site CMS Content 
+# 
+$contentCatalog=sdhContentCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$productCatalog=sdhProductCatalog 
+$productCatalogName=Public Sector Product Catalog 
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged] 
+$picture=media(code, $contentCV);
+$siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/cockpits/cmscockpit
+$medias=medias(code, $contentCV);
+$lang=es
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+$addonExtensionName=sdhpsacceleratoraddon
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# Media
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+;;/images/theme/logo-hybris.png;logo-hybris.png;$siteResource/images/theme/logo-hybris.png;image/png;;"hybris Accelerator"
+
+# Site Logo Component
+UPDATE PSSimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;SiteLogoComponent;/images/theme/logo-hybris.png
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+
+# CMS Navigation Nodes 
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;AcceleratorNavNode;"Acelerador"
+;;PublicSectorNavNode;"Página web del sector público"
+;;CategoriesNavNode;"Categorías"
+;;FollowUsNavNode;"Síguenos"
+;;HybrisNavNode;"Hybris"
+
+#Public Sector Start
+;;ReportAnIssuePopularServiceRequestsNavNodeMenu;"Solicitudes de servicio populares"
+;;ReportAnIssuePopularCategoriesNavNodeMenu;"Categorías populares"
+;;RoadsAndVehiclesPopularServiceRequestsNavNodeMenu;"Solicitudes de servicio populares"
+;;RoadsAndVehiclesPopularCategoriesNavNodeMenu;"Categorías populares"
+;;PermitsAndApplicationsPopularServiceRequestsNavNodeMenu;"Solicitudes de servicio populares"
+;;PermitsAndApplicationsPopularCategoriesNavNodeMenu;"Categorías populares"
+;;BirthsDeathsAndMarriagesPopularServiceRequestsNavNodeMenu;"Solicitudes de servicio populares"
+;;BirthsDeathsAndMarriagesPopularCategoriesNavNodeMenu;"Categorías populares"
+
+# CMS Footer Component
+UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]
+;;FooterComponent;"© 2015 hybris software"
+
+# Generic Banners (banners are not localizable so we must create a separate banner per language)
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+;;Generic_148x300_MobileApp_EN_01.jpg;$siteResource/images/banners/site/Generic_148x300_MobileApp_EN_01.jpg;;;"Always up to date! Download our mobile app"
+;;Generic_788x120_FacebookOffers_EN_01.jpg;$siteResource/images/banners/site/Generic_788x120_FacebookOffers_EN_01.jpg;;;"Up to 30% off! Sign up on facebook for exclusive offers"
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;FacebookOffersBanner;Generic_788x120_FacebookOffers_EN_01.jpg
+;;MobileAppBanner;Generic_148x300_MobileApp_EN_01.jpg
+
+# CMS ProductReferences Components
+UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;CrossSelling;"Complete el look"
+;;Others;"Accesorios"
+;;Similar;"Puede que también le interese..."
+;;accessories;"Accesorios"
+
+# CMS CartSuggestion Components
+UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;CartSuggestions;"Puede que también le interese..."
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;EmptyCartParagraphComponent;"<h2>La cesta de la compra está vacía</h2><p>Sugerencias</p><ul>	<li>Seleccione una de las categorías anteriores para explorar nuestros productos</li></ul>"
+;;HelpParagraphComponent;"<strong>¿Necesita ayuda con el proceso de finalización de la compra?</strong> <span>Póngase en contacto con nosotros o llámenos por teléfono.</span>"
+
+#public Sector start
+UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang];title[lang=$lang]
+;;ReportAnIssueLink;"INFORMAR SOBRE UN PROBLEMA";"Haga clic aquí para acceder a la opción de menú Informar sobre un problema"
+;;RoadsAndVehiclesLink;"CARRETERAS Y VEHÍCULOS";"Haga clic aquí para acceder a la opción de menú Carreteras y vehículos"
+;;PermitsAndApplicationsLink;"AUTORIZACIONES Y SOLICITUDES";"Haga clic aquí para acceder a la opción de menú Autorizaciones y solicitudes"
+;;BirthsDeathsAndMarriagesLink;"NACIMIENTOS, DEFUNCIONES Y MATRIMONIOS";"Haga clic aquí para acceder a la opción de menú Nacimientos, defunciones y matrimonios"
+;;AboutRosebudLink;"ACERCA DE ROSEBUD";"Haga clic aquí para acceder a la opción de menú Acerca de Rosebud"
+;;BlogAndNewsLink;"NOTICIAS";"Haga clic aquí para acceder a la opción de menú Blogs y noticias"
+;;EventsLink;"EVENTOS";"Haga clic aquí para acceder a la opción de menú Eventos"
+;;EscuelaVirtualLink;"ESCUELA VIRTUAL";"Haga clic aquí para ir a la Escuela Virtual"
+;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
+
+
+#Report An Issue
+;;ReportGraffitiLink;"Informar sobre grafitis";"Haga clic aquí para acceder a la opción de menú Informar sobre grafitis"
+;;ReportAPotholeLink;"Informar sobre un bache";"Haga clic aquí para acceder a la opción de menú Informar sobre un bache"
+;;ReportAnIssueSeeAllServiceRequestsLink;"> Ver todas las solicitudes de servicio";"Haga clic aquí para ver Todas las solicitudes de servicio"
+;;InTheCommunityLink;"En la comunidad";"Haga clic aquí para acceder a la opción de menú En la comunidad"
+;;OnTheRoadLink;"En la carretera";"Haga clic aquí para acceder a la opción de menú En la comunidad"
+;;Environment&GarbageLink;"Medio ambiente y residuos";"Haga clic aquí para acceder a la opción de menú Medio ambiente y residuos"
+;;ReportAnIssueSeeAllCategoriesLink;"> Ver todas las categorías";"Haga clic aquí para ver Todas las categorías"
+
+#Roads And Vehicles
+;;LearnerDriversLicenseLink;"Permiso de conducir para conductor novel";"Haga clic aquí para acceder a la opción de menú Permiso de conducir para conductor novel"
+;;DisabledParkingPermitLink;"Autorización para aparcamiento";"Haga clic aquí para acceder a la opción de menú Autorización para aparcamiento"
+;;NewDriverLink;"Nuevo conductor";"Haga clic aquí para acceder a la opción de menú Nuevo conductor"
+;;NewVehicleLink;"Nuevo vehículo";"Haga clic aquí para acceder a la opción de menú Nuevo vehículo"
+;;ParkingLink;"Aparcamiento";"Haga clic aquí para acceder a la opción de menú Aparcamiento"
+;;RetrieveADraftLink;"> Recuperar un borrador";"Haga clic aquí para acceder a la opción de menú Recuperar un borrador"
+;;RoadsAndVehiclesSeeAllServiceRequestsLink;"> Ver todas las solicitudes de servicio";"Haga clic aquí para ver todas las solicitudes de servicio de carreteras y vehículos"
+;;RoadsAndVehiclesSeeAllCategoriesLink;"> Ver todas las categorías";"Haga clic aquí para ver todas las categorías de carreteras y vehículos"
+
+#Permits And Applications
+;;WorkingWithChildrenCheckLink;"Certificado para trabajar con menores";"Haga clic aquí para acceder a la opción de menú Certificado para trabajar con menores"
+;;PoolBuildingPermitLink;"Autorización para construir una piscina";"Haga clic aquí para acceder a la opción de menú Autorización para construir una piscina"
+;;EventPermitLink;"Autorización para evento";"Haga clic aquí para acceder a la opción de menú Autorización para evento"
+;;ApplyForAMarriageCertificateLink;"Solicitar un certificado de matrimonio";"Haga clic aquí para acceder a la opción de menú Solicitar un certificado de matrimonio"
+;;Building&PlanningLink;"Planificación y obras";"Haga clic aquí para acceder a la opción de menú Planificación y obras"
+;;DrivingLink;"Conducción";"Haga clic aquí para acceder a la opción de menú Conducción"
+;;PetsLink;"Mascotas";"Haga clic aquí para acceder a la opción de menú Mascotas"
+;;PermitsAndApplicationsSeeAllServiceRequestsLink;"> Ver todas las solicitudes de servicio";"Haga clic aquí para ver todas las solicitudes de autorizaciones y servicio"
+;;PermitsAndApplicationsSeeAllCategoriesLink;"> Ver todas las categorías";"Haga clic aquí para ver todas las categorías de autorizaciones y servicio"
+
+#Births Deaths And Marriages
+;;RegisterABirthLink;"Registrar un nacimiento";"Haga clic aquí para acceder a la opción de menú Registrar un nacimiento"
+;;MarriageCertificateLink;"Certificado de matrimonio";"Haga clic aquí para acceder a la opción de menú Certificado de matrimonio"
+;;Births&ChildrenLink;"Nacimientos y niños";"Haga clic aquí para acceder a la opción de menú Nacimientos y niños"
+;;MarriagesLink;"Matrimonios";"Haga clic aquí para acceder a la opción de menú Matrimonios"
+;;BirthsDeathsAndMarriagesSeeAllServiceRequestsLink;"> Ver todas las solicitudes de servicio";"Haga clic aquí para ver todas las solicitudes de servicio de nacimientos, defunciones y matrimonios"
+;;BirthsDeathsAndMarriagesSeeAllCategoriesLink;"> Ver todas las categorías";"Haga clic aquí para ver todas las categorías de nacimientos, defunciones y matrimonios"
+
+
+#*->-------------------------------------------------------------------------------------------------------------------------
+
+#->INI dev-eduardo Agregar menu SDH 04/01/2019
+;;MiRITLink;"Mi RIT";"Haga clic aquí para ir a Mi RIT"
+;;MiBuzonLink;"Mi Buzón";"Haga clic aquí para ir a Mi Buzón"
+;;ImpuestosLink;"Impuestos";"Haga clic aquí para ir a Impuestos"
+;;TramitesLink;"Trámites";"Haga clic aquí para ir a Trámites"
+;;FacturacionLink;"Facturación";"Haga clic aquí para ir a Facturación"
+;;DeclaracionesLink;"Declaraciones";"Haga clic aquí para ir a Declaraciones"
+;;PagosLink;"Pagos";"Haga clic aquí para ir a Pagos"
+;;ConsultasLink;"Consultas";"Haga clic aquí para ir a las consultas"
 ;;ReportantesLink;"Mi Información Reportada";"Hagaclic aquí para ir a su Información Reportada"
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 

@@ -35,7 +35,7 @@
 
 	<br>
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-6 col-md-offset-3 ">
 			<table class="table" id="">
 				<thead style="background-color: #006DCC !important">
 					<tr>

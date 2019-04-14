@@ -24041,7 +24041,7 @@ author: Vikas Gupta
 }
 .nav__links--account {
   display: inline-block;
-  font-family: Arial;
+  font-family: Helvetica;
   font-size: 12px;
   font-weight: bold;
   color: #0000ff;
@@ -24049,7 +24049,7 @@ author: Vikas Gupta
   text-transform: uppercase;
 }
 .navigation--bottom .nav__links--products li a {
-  font-family: Arial;
+  font-family: Helvetica;
   font-size: 13px;
   font-weight: 400;
   color: #ffffff;
@@ -24125,7 +24125,7 @@ author: Vikas Gupta
 .p {
   border-width: 0px;
   position: absolute;
-  font-family: 'Arial Negrita', 'Arial Normal', 'Arial';
+  font-family: 'Helvetica Negrita', 'Helvetica Normal', 'Helvetica';
   font-weight: 700;
   font-style: normal;
   font-size: 12px;
@@ -24181,7 +24181,7 @@ author: Vikas Gupta
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  font-family: 'Arial Negrita Cursiva', 'Arial Normal', 'Arial';
+  font-family: 'Helvetica Negrita Cursiva', 'Helvetica Normal', 'Helvetica';
   font-weight: 700;
   font-style: italic;
   font-size: 12px;
@@ -24189,7 +24189,7 @@ author: Vikas Gupta
 }
 .inputdropdown {
   position: absolute;
-  font-family: 'Arial Normal', 'Arial';
+  font-family: 'Helvetica Normal', 'Helvetica';
   font-weight: 400;
   font-style: normal;
   font-size: 12px;
@@ -24206,7 +24206,7 @@ author: Vikas Gupta
 }
 .inputtextnew {
   position: inherit;
-  font-family: 'Arial Normal', 'Arial';
+  font-family: 'Helvetica Normal', 'Helvetica';
   font-weight: 400;
   font-style: normal;
   font-size: 12px;
@@ -24219,7 +24219,7 @@ author: Vikas Gupta
 .inputlabelnew {
   margin-right: 5px;
   position: absolute;
-  font-family: 'Arial Normal', 'Arial';
+  font-family: 'Helvetica Normal', 'Helvetica';
   font-weight: 400;
   font-style: normal;
   font-size: 12px;
@@ -24229,7 +24229,7 @@ author: Vikas Gupta
 }
 .boton {
   font-size: 14px;
-  font-family: 'Arial Normal', 'Arial';
+  font-family: 'Helvetica Normal', 'Helvetica';
   font-color: black;
   height: 25px;
   text-align: center;
@@ -24275,4 +24275,25 @@ div.dataTables_info {
 }
 .breadcrumb-section .breadcrumb {
   text-transform: capitalize;
+}
+body {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+input[type="search"] {
+  min-height: 8px !important;
+}
+.main-footer .footer__top .footer__nav--container .footer__nav--links a {
+  color: #000000;
+}
+.main-footer {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+.main-footer .links {
+  padding-left: 0px;
+}
+.col-md-8 {
+  width: 86.66666667%;
+}
+.col-md-offset-2 {
+  margin-left: 6.66666667%;
 }

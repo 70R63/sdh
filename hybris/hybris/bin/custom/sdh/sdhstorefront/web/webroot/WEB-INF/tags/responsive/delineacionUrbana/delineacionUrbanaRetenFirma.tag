@@ -41,18 +41,10 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.nombraz" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
+						value="" maxlength="240" disabled>
 				</div>
 			</div>
-			<div class="col-md-2">
-				<button action="" type="submit" class="btn btn-primary btn-lg" id=""
-					name="" value="calcular">
-					<spring:theme code="delineacion.urbana.dec.firm.firma" />
-				</button>
-			</div>
 		</div>
-
-
 
 		<br>
 		<div class="container">
@@ -78,7 +70,6 @@
 						<spring:theme code="delineacion.urbana.dec.firm.prerete" />
 					</button>
 				</div>
-
 
 				<div class="col-md-3">
 					<button type="submit" class="btn btn-primary btn-lg" id="" name=""

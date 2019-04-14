@@ -26,7 +26,7 @@
 		<div class="col-md-12">
 			<div class="table-responsive">
 				<table class="table table-bordered">
-					<thead>
+					<thead style="background-color: rgb(235, 235, 228)!important">
 						<tr>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.marcas.tipmarca" /></label></td>
@@ -36,7 +36,7 @@
 										code="ica.inicial.marcas.valexe" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.marcas.ciiu" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td style="width: 12px;"><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.marcas.denoacteco" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.marcas.fecvaldesde" /></label></td>

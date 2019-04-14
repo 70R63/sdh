@@ -22,11 +22,11 @@
 
 
 	<form:form action="">
-		<div class="row">
+		<div class="row" style="margin-top: 18px">
 			<div class="col-md-12">
 				<div class="table-responsive">
 					<table class="table table-bordered">
-						<thead>
+						<thead style="background-color: rgb(235, 235, 228)!important">
 							<tr>
 								<td><label class="control-label text-capitalize !important"
 									style="width: 300px;"><spring:theme

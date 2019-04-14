@@ -108,7 +108,7 @@
 
 
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-8">
 		<div class="form-group">
 			<label class="control-label"><spring:theme
 					code="declaracion.publicidad.tamvalla" /></label>

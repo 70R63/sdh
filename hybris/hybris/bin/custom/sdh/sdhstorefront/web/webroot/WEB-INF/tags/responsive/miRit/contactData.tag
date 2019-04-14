@@ -235,7 +235,7 @@
     		complementos++;
     	}else
     	{
-    		alert("Solo se permiten hasta 3 complementos.");
+    		alert("Sólo se permiten hasta 3 complementos.");
     	}
     	
     	

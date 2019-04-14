@@ -1,6 +1,24 @@
 ACC.gasolina = {
 
-	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina"],
+	 _autoload: ["bindGeneraDeclaracionButton","bindDialogGasolina","bindProductClass"],
+	 
+	 bindProductClass: function () {
+		 $(document).on("change", ".form-control-gasolina", function (e) {
+	 	        
+			 var productClass = $(this).val();
+			 var alcoholCarbID = $(this).attr("id").replace("claseProd","alcoholCarbu");
+			 
+			 if(productClass == "01" || productClass == "03")
+			 {
+				 $(document.getElementById(alcoholCarbID)).attr("readonly",true);
+				 $(document.getElementById(alcoholCarbID)).val("0.00");
+			 }else{
+				 $(document.getElementById(alcoholCarbID)).attr("readonly",false);
+			 }
+			 
+	 	       
+		 });
+	 },
 	 
 	 bindGeneraDeclaracionButton: function () {
 		 $(document).on("click", "#gasolinaGeneraDeclaracionButton", function (e) {
@@ -40,7 +58,7 @@ ACC.gasolina = {
 		            },
 		            error: function () {
 		            	$( "#dialogGasolina" ).dialog( "open" );
-		            	$("#gasolinaDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            	$("#gasolinaDialogContent").html("Hubo un error al generar la declaración, por favor inténtalo más tarde");
 		            }
 		        });
 	 	       

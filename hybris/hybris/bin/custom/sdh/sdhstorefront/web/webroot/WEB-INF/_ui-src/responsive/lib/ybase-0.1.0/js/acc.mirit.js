@@ -25,18 +25,18 @@ ACC.mirit = {
 			        	        	if(data.ritUpdated==true)
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
-				    	            	$("#ritDialogContent").html("Tu nombre ha sido actualizadas.");
+				    	            	$("#ritDialogContent").html("Tu nombre ha sido actualizado.");
 			        	        	}else
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
-				    	            	$("#ritDialogContent").html("Tu nombre no ha sido actualizadas.");
+				    	            	$("#ritDialogContent").html("Tu nombre no ha sido actualizado.");
 			        	        	}
 			    	            	
 			   	            },
 			   	            error: function () {
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
-			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 			   	            }
 			   	        });
 		        });
@@ -77,11 +77,11 @@ ACC.mirit = {
 			        	        	if(data.ritUpdated==true)
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
-				    	            	$("#ritDialogContent").html("Tu dirección de notificación ha sido actualizadas.");
+				    	            	$("#ritDialogContent").html("Tu dirección de notificación ha sido actualizada.");
 			        	        	}else
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
-				    	            	$("#ritDialogContent").html("Tu dirección de notificación no ha sido actualizadas.");
+				    	            	$("#ritDialogContent").html("Tu dirección de notificación no ha sido actualizada.");
 				    	            	$.each(data.errores,function (index, value)
 				    	            	{
 				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
@@ -92,7 +92,7 @@ ACC.mirit = {
 			   	            error: function () {
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
-			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 			   	            }
 			   	        });
 		        });
@@ -134,11 +134,11 @@ ACC.mirit = {
 			        	        	if(data.ritUpdated==true)
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
-				    	            	$("#ritDialogContent").html("Tu dirección de contacto ha sido actualizadas.");
+				    	            	$("#ritDialogContent").html("Tu dirección de contacto ha sido actualizada.");
 			        	        	}else
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
-				    	            	$("#ritDialogContent").html("Tu dirección de contacto no ha sido actualizadas.");
+				    	            	$("#ritDialogContent").html("Tu dirección de contacto no ha sido actualizada.");
 				    	            	$.each(data.errores,function (index, value)
 				    	            	{
 				    	            		$("#ritDialogContent").html($("#ritDialogContent").html()+"<br>"+value.txtmsj);
@@ -150,7 +150,7 @@ ACC.mirit = {
 			   	            error: function () {
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
-			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 			   	            }
 			   	        });
 		        });
@@ -176,18 +176,18 @@ ACC.mirit = {
 			        	        	if(data.ritUpdated==true)
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
-				    	            	$("#ritDialogContent").html("Tu teléfono sido actualizadas.");
+				    	            	$("#ritDialogContent").html("Tu teléfono ha sido actualizado.");
 			        	        	}else
 			        	        	{
 			        	        		$("#ritDialogContent").html("");
-				    	            	$("#ritDialogContent").html("Tu teléfono no ha sido actualizadas.");
+				    	            	$("#ritDialogContent").html("Tu teléfono no ha sido actualizado.");
 			        	        	}
 			    	            	
 			   	            },
 			   	            error: function () {
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
-			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 			   	            }
 			   	        });
 		        });
@@ -247,7 +247,7 @@ ACC.mirit = {
 				   	            error: function () {
 				   	            	$( "#dialog" ).dialog( "open" );
 				    	            	$("#ritDialogContent").html("");
-				   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+				   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 				   	            }
 				   	        });
 		    	        }else
@@ -288,7 +288,7 @@ ACC.mirit = {
 			   	            error: function () {
 			   	            	$( "#dialog" ).dialog( "open" );
 			    	            	$("#ritDialogContent").html("");
-			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+			   	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 			   	            }
 			   	        });
 		        });
@@ -348,7 +348,7 @@ ACC.mirit = {
 	    	        	{
 		    	        	$( "#dialog" ).dialog( "open" );
 	    	            	$("#ritDialogContent").html("");
-	    	            	$("#ritDialogContent").html("La nueva contraseña y la confirmacion de contraseña son diferentes.");
+	    	            	$("#ritDialogContent").html("La nueva contraseña y la confirmación de contraseña son diferentes.");
 	    	            	return;
 	    	        	}
 		    	        
@@ -393,7 +393,7 @@ ACC.mirit = {
                  	    	            	}
                       	            },
                       	            error: function () {
-                      	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+                      	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
                       	            }
                       	        });
       	            		}else
@@ -406,7 +406,7 @@ ACC.mirit = {
           	            error: function () {
           	            	$( "#dialog" ).dialog( "open" );
  	    	            	$("#ritDialogContent").html("");
-          	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+          	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
           	            }
           	        });
 		        });
@@ -497,7 +497,7 @@ ACC.mirit = {
                     	    	            	});
                          	            },
                          	            error: function () {
-                         	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+                         	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
                          	            }
                          	        });
          	            		}else
@@ -510,7 +510,7 @@ ACC.mirit = {
              	            error: function () {
              	            	$( "#dialog" ).dialog( "open" );
     	    	            	$("#ritDialogContent").html("");
-             	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+             	            	$("#ritDialogContent").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
              	            }
              	        });
 		        });
@@ -811,7 +811,7 @@ ACC.mirit = {
              	            success: function (data) {
              	            	if(data.isValidEmail == true)
          	            		{
-             	            		$("#textCertNom").html("Nuevo Usuario Valido");
+             	            		$("#textCertNom").html("Nuevo Usuario Válido");
          	            		}else
              	            	{
          	            			$("#newEmailErrors").removeClass("hidden");
@@ -821,7 +821,7 @@ ACC.mirit = {
              	            	}
              	            },
              	            error: function () {
-             	            	$("#textCertNom").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+             	            	$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
              	            }
              	        });
     	        	}
@@ -930,7 +930,7 @@ ACC.mirit = {
 		    	            	}
 		    	            },
 		    	            error: function () {
-		    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+		    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
 		    	            }
 	        	        });
     	        	}
@@ -1012,7 +1012,7 @@ ACC.mirit = {
     	        if(hasErrors || hasPasswordErrors)
     	        {
     	        	$( "#dialog" ).dialog( "open" );
-    	        	$("#textCertNom").html("Por favor corrije los errores señalados");
+    	        	$("#textCertNom").html("Por favor corrige los errores señalados");
     	        }else
     	        {
     	        	 var updateRitData = {};
@@ -1051,7 +1051,7 @@ ACC.mirit = {
     	    	            		});
     	    	            },
     	    	            error: function () {
-    	    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar su RIT, por favor intentalo mas tarde.");
+    	    	            	$("#textCertNom").html("Hubo un error al tratar de actualizar tu RIT, por favor inténtalo más tarde.");
     	    	            }
     	    	        });
     	        }

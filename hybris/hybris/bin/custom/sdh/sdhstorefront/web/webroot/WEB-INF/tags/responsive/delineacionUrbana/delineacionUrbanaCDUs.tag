@@ -20,98 +20,101 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-12">
-		<table class="table" id="example">
-			<thead style="background-color: #006DCC !important">
-				<tr>
-					<th style="text-align: center"><label class="control-label "><spring:theme
-								code="delineacion.urbana.CDU" /> </label></th>
-					<th style="text-align: center"><label class="control-label"><spring:theme
-								code="delineacion.urbana.basic.Liceconstruction" /></label></th>
-					<th style="text-align: center"><label class="control-label"><spring:theme
-								code="delineacion.urbana.basic.fechrexpe" /></label></th>
-					<th style="text-align: center"><label class="control-label"><spring:theme
-								code="delineacion.urbana.basic.numResolucionRevalidacion" /></label></th>
-					<th style="text-align: center"><label class="control-label"><spring:theme
-								code="delineacion.urbana.basic.fechrevalida" /></label></th>
-					<th style="text-align: center"><label class="control-label">
-							<spring:theme code="delineacion.urbana.basic.totalPresupuesto" />
-					</label></th>
-					<th style="text-align: center"><label class="control-label"><spring:theme
-								code="delineacion.urbana.basic.valorEjecutado" /></label></th>
-					<th style="text-align: center"><label class="control-label"><spring:theme
-								code="delineacion.urbana.basic.tipomarca" /></label></th>
-					<th style="text-align: center"><label class="control-label">
-							<spring:theme code="delineacion.urbana.basic.fechaInicioObra" />
-					</label></th>
-					<th style="text-align: center"><label class="control-label"><spring:theme
-								code="delineacion.urbana.basic.fechfinobra" /></label></th>
-					<th style="text-align: center"><label class="control-label">
-							<spring:theme code="delineacion.urbana.basic.curaduria" />
-					</label></th>
-					<th style="text-align: center"><label class="control-label">
-							<spring:theme code="delineacion.urbana.basic.codigoEstrato" />
-					</label></th>
-					<th style="text-align: center"><label class="control-label">
-							<spring:theme code="delineacion.urbana.basic.detalleRadicado" />
-					</label></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input id="CDU" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 150px !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><input id="" name="" class="inputtextnew"
-						aria-required="true" type="text" readonly="readonly"
-						value="${docNumber}" maxlength="240"
-						style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-					<td><a onclick="show()">Ver</a></td>
+	
+		<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table" id="example">
+				<thead style="background-color: #006DCC !important">
+					<tr>
+						<th style="text-align: center"><label class="control-label " style="text-transform: capitalize !important"><spring:theme
+									code="delineacion.urbana.CDU" /> </label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important"><spring:theme
+									code="delineacion.urbana.basic.Liceconstruction" /></label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important"><spring:theme
+									code="delineacion.urbana.basic.fechrexpe" /></label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important"><spring:theme
+									code="delineacion.urbana.basic.numResolucionRevalidacion" /></label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important"><spring:theme
+									code="delineacion.urbana.basic.fechrevalida" /></label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important">
+								<spring:theme code="delineacion.urbana.basic.totalPresupuesto" />
+						</label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important"><spring:theme
+									code="delineacion.urbana.basic.valorEjecutado" /></label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important"><spring:theme
+									code="delineacion.urbana.basic.tipomarca" /></label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important">
+								<spring:theme code="delineacion.urbana.basic.fechaInicioObra" />
+						</label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important"><spring:theme
+									code="delineacion.urbana.basic.fechfinobra" /></label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important">
+								<spring:theme code="delineacion.urbana.basic.curaduria" />
+						</label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important">
+								<spring:theme code="delineacion.urbana.basic.codigoEstrato" />
+						</label></th>
+						<th style="text-align: center"><label class="control-label" style="text-transform: capitalize !important">
+								<spring:theme code="delineacion.urbana.basic.detalleRadicado" />
+						</label></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input id="CDU" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 150px !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><input id="" name="" class="inputtextnew"
+							aria-required="true" type="text" readonly="readonly"
+							value="${docNumber}" maxlength="240"
+							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+						<td><a onclick="show()">Ver</a></td>
 
-				</tr>
-			</tbody>
-		</table>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 
