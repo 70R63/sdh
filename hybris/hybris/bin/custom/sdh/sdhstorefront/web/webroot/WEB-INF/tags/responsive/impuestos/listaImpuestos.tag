@@ -5,12 +5,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/contribuyentes/presentar-declaracion"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
 
+<c:out value = "${dataForm.impuesto}"/>
 
 
 <br>
@@ -20,12 +22,11 @@
 			<div class="form-group ">
 				<label class="control-label required"><spring:theme
 						code="impuestos.presentarDeclaracion.impuesto" /></label>
-
-			<%--<sf:select path="impuesto" items="${dataForm.catalogosSo.impuesto}"
-					referenceData="${dataForm.catalogosSo.impuesto}"
-					class="form-control"/>--%>
-					<sf:select id="impuestonew" class="form-control" path="impuesto"> 
-				
+				<sf:select 
+					path="impuesto" 
+					id="impuesto" 
+					class="form-control" 
+					onchange="onChange()" > 				
 				</sf:select>
 			</div>
 		</div>
@@ -43,7 +44,7 @@
 				<label class="control-label required"><spring:theme
 						code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
 
-				<sf:select path="anoGravable"
+				<sf:select path="anoGravable" 
 					items="${dataForm.catalogosSo.anioGravable}"
 					referenceData="${dataForm.catalogosSo.anioGravable}"
 					class="form-control" />
@@ -52,6 +53,7 @@
 
 		</div>
 
+		<c:if test="${dataForm.impuesto ne '4'}">
 		<div class="col-md-3">
 			<div class="form-group ">
 				<label class="control-label required"><spring:theme
@@ -64,6 +66,7 @@
 
 
 		</div>
+		</c:if>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-9 text-center">

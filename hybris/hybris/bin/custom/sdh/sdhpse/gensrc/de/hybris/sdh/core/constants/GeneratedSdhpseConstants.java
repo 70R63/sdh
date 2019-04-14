@@ -1,7 +1,8 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 27/03/2019 01:10:42 PM                      --- * ----------------------------------------------------------------
+ * --- Generated at 01-abr-2019 23:48:46                        ---
+ * ----------------------------------------------------------------
  *  
  * [y] hybris Platform
  * Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.

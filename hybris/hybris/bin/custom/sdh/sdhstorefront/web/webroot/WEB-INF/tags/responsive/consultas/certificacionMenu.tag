@@ -50,15 +50,6 @@
 	downloadPDF('${imprimePagoResponse.stringPDF}');
 </script>	
 
-<c:choose>
-    <c:when test="${certiFormPost.idimp == '4'}">
-        <c:set var = "anioGravable" value = "${anoGravablePublicidad}"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var = "anioGravable" value = "${anoGravableGasolina}"/>
-    </c:otherwise>
-</c:choose>
-
 <div>
 	<div class="container">
 		<div class="row">

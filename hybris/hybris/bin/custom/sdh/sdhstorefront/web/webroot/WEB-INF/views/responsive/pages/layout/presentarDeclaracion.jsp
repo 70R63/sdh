@@ -4,16 +4,16 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="impuestos"
-	tagdir="/WEB-INF/tags/responsive/impuestos"%>
-<spring:htmlEscape defaultHtmlEscape="true" />
+<%@ taglib prefix="impuestos" tagdir="/WEB-INF/tags/responsive/impuestos"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<spring:htmlEscape defaultHtmlEscape="true" />
+
 
 
 <div class="container">
-	<sf:form action="" method="POST" modelAttribute="dataForm" id="forma">
+	<sf:form action="presentar-declaracion?action=presentarDeclaracion" method="POST" modelAttribute="dataForm" id="forma">
 		<impuestos:listaImpuestos />
-
 	</sf:form>
 </div>
 
@@ -28,7 +28,7 @@
 		var valPE = div.attributes[0].value;
 
 		if (valGas != "" && valPE != "") {
-			var x = document.getElementById("impuestonew");
+			var x = document.getElementById("impuesto");
 
 			var option = document.createElement("option");
 			option.value = "0"
@@ -43,7 +43,7 @@
 			option.text = "Sobretasa Gasolina";
 			x.appendChild(option);
 		} else if (valGas != "" && valPE == ""){
-			var x = document.getElementById("impuestonew");
+			var x = document.getElementById("impuesto");
 			var option = document.createElement("option");
 			option.value = "0"
 			option.text = "Seleccionar";
@@ -53,7 +53,7 @@
 			option.text = "Sobretasa Gasolina";
 			x.appendChild(option);
 		}else if (valGas == "" && valPE != ""){
-			var x = document.getElementById("impuestonew");
+			var x = document.getElementById("impuesto");
 			var option = document.createElement("option");
 			option.value = "0"
 			option.text = "Seleccionar";
@@ -67,4 +67,18 @@
 		}
 			
 	};
+	
+	
+	function onChange() {
+		
+		form = document.getElementById("forma");
+		
+		input = document.createElement('input');
+        input.setAttribute('name', 'skipReques');
+        input.setAttribute('value', 'X');
+        input.setAttribute('type', 'hidden');        
+        form.appendChild(input);		
+		
+		form.submit();
+	}
 </script>

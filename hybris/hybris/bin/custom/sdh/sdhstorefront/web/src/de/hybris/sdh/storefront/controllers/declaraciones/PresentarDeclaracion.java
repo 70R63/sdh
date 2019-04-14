@@ -12,7 +12,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -21,6 +20,7 @@ import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
@@ -85,9 +85,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-
-
-
+	@Resource(name = "sdhConsultaPagoService")
+	SDHConsultaPagoService sdhConsultaPagoService;
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
@@ -100,14 +99,12 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
-		dataForm.setAnoGravable("2019");
-		dataForm.setPeriodo("1");
+		//dataForm.setAnoGravable("2019");
+		//dataForm.setPeriodo("1");
 
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
-
 			dataForm.setOptionPubliExt("4");
-
 		}
 		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
 		{
@@ -138,12 +135,13 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Presentar Declaracion POST --------------------------");
-
+		System.out.println("[" + dataFormResponse.getSkipReques() + "]");
 
 		String URLdeterminada = "";
 		if (action.equals("presentarDeclaracion"))
 		{
-			if (dataFormResponse.getImpuesto().equals("5"))
+			if (dataFormResponse.getImpuesto().equals("5") && !dataFormResponse.getAnoGravable().equals("")
+					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
 				final CustomerModel customerModel;
 				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
@@ -213,23 +211,45 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				dataForm.setAnoGravable(anioGravable);
 				dataForm.setPeriodo(periodo);
 				dataForm.setNAME_ORG1(detalleContribuyente.getInfoContrib().getAdicionales().getNAME_ORG1());
+				dataForm.setImpuesto(dataFormResponse.getImpuesto());
 
 				model.addAttribute("dataForm", dataForm);
 				URLdeterminada = gasolinaService.obtenerURL("presentar-declaracion", "impuesto", "sobretasa-gasolina");
+
+				return URLdeterminada;
 			}
-			else
+			else if (dataFormResponse.getImpuesto().equals("4") && !dataFormResponse.getAnoGravable().equals("")
+					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
 
-				storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
-				setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
-				model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-				model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-				URLdeterminada = getViewForPage(model);
 			}
 		}
 
-		return URLdeterminada;
+		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
+		{
+			dataForm.setOptionPubliExt("4");
+		}
+		if (customerData.getGasTaxList() != null && !customerData.getGasTaxList().isEmpty())
+		{
+			dataForm.setOptionGas("5");
+		}
+
+		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		dataForm.setImpuesto(dataFormResponse.getImpuesto());
+		dataForm.setAnoGravable(dataFormResponse.getAnoGravable());
+		dataForm.setPeriodo(dataFormResponse.getPeriodo());
+		model.addAttribute("dataForm", dataForm);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+
+		return getViewForPage(model);
 	}
 
 
