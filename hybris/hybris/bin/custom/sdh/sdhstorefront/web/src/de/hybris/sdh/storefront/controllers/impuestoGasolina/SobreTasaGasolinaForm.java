@@ -55,6 +55,8 @@ public class SobreTasaGasolinaForm
 	private String bSobreGasolina;
 	private String bDelineacionUrbana;
 
+	private String skipReques;
+
 
 
 
@@ -566,9 +568,30 @@ public class SobreTasaGasolinaForm
 		this.optionDeli = optionDeli;
 	}
 
+
+
+
+
+	/**
+	 * @return the skipReques
+	 */
+	public String getSkipReques()
+	{
+		return skipReques;
+	}
+
+	/**
+	 * @param skipReques
+	 *           the skipReques to set
+	 */
+	public void setSkipReques(final String skipReques)
+	{
+		this.skipReques = skipReques;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -585,6 +608,7 @@ public class SobreTasaGasolinaForm
 				+ ", bPublicidadExt=" + bPublicidadExt + ", bSobreGasolina=" + bSobreGasolina + ", bDelineacionUrbana="
 				+ bDelineacionUrbana + "]";
 	}
+
 
 
 }

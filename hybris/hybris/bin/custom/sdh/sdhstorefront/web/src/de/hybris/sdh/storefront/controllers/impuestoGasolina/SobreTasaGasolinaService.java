@@ -133,6 +133,7 @@ public class SobreTasaGasolinaService
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
+		elementos.put("", "SELECCIONAR");
 		for (int i = 0; i < cantidadAnios; i++)
 		{
 			elementos.put(Integer.toString(anioBase - i), Integer.toString(anioBase - i));
@@ -236,6 +237,7 @@ public class SobreTasaGasolinaService
 
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
+		elementos.put("01", "SELECCIONAR");
 		elementos.put("01", "Enero");
 		elementos.put("02", "Febrero");
 		elementos.put("03", "Marzo");
