@@ -22,13 +22,16 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -88,6 +91,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	@Resource(name = "sdhConsultaPagoService")
 	SDHConsultaPagoService sdhConsultaPagoService;
 
+	@Resource(name = "sdhValidaContribuyenteService")
+	SDHValidaContribuyenteService sdhValidaContribuyenteService;
+
+
+
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -112,7 +120,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		}
 
 		model.addAttribute("dataForm", dataForm);
-
+		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -138,6 +146,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		System.out.println("[" + dataFormResponse.getSkipReques() + "]");
 
 		String URLdeterminada = "";
+		System.out.println("acti:" + action);
+		System.out.println("imp:" + dataFormResponse.getImpuesto());
+		System.out.println("anio:" + dataFormResponse.getAnoGravable());
+		System.out.println("per:" + dataFormResponse.getPeriodo());
+
 		if (action.equals("presentarDeclaracion"))
 		{
 			if (dataFormResponse.getImpuesto().equals("5") && !dataFormResponse.getAnoGravable().equals("")
@@ -221,8 +234,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			else if (dataFormResponse.getImpuesto().equals("4") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
-
-
+				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+				model.addAttribute("publicidadExtList", sdhValidaContribuyenteService
+						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
+				System.out.println("hola como estas");
 			}
 		}
 
@@ -242,6 +257,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setAnoGravable(dataFormResponse.getAnoGravable());
 		dataForm.setPeriodo(dataFormResponse.getPeriodo());
 		model.addAttribute("dataForm", dataForm);
+		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -250,6 +266,36 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 
 		return getViewForPage(model);
+	}
+
+	private Map<String, String> getTpImpuesto(final String optionGas, final String optionPubExt)
+	{
+		final Map<String, String> map;
+		if (optionGas != "" && optionPubExt != "")
+		{
+			map = new HashMap<String, String>();
+			map.put("0", "Seleccionar");
+			map.put("4", "Publicidad Exterior");
+			map.put("5", "Sobretasa Gasolina");
+		}
+		else if (optionGas != "" && optionPubExt == "")
+		{
+			map = new HashMap<String, String>();
+			map.put("0", "Seleccionar");
+			map.put("5", "Sobretasa Gasolina");
+		}
+		else if (optionGas == "" && optionPubExt != "")
+		{
+			map = new HashMap<String, String>();
+			map.put("0", "Seleccionar");
+			map.put("4", "Publicidad Exterior");
+		}
+		else
+		{
+			map = null;
+		}
+
+		return map;
 	}
 
 

@@ -14,6 +14,7 @@ public class ImpuestoPublicidadExterior
 	private boolean seleccionado;
 	private String tipoVallaCode;
 	private String numObjeto;
+	private String anoGravable;
 
 
 
@@ -76,6 +77,7 @@ public class ImpuestoPublicidadExterior
 	public void setTipoValla(final String tipoValla)
 	{
 		this.tipoValla = tipoValla;
+		this.tipoVallaCode = this.getTipoVallaCode(this.tipoValla);
 	}
 
 	/**
@@ -111,6 +113,63 @@ public class ImpuestoPublicidadExterior
 	{
 		this.tipoVallaCode = tipoVallaCode;
 	}
+
+	/**
+	 * @return the anoGravable
+	 */
+	public String getAnoGravable()
+	{
+		return anoGravable;
+	}
+
+	/**
+	 * @param anoGravable
+	 *           the anoGravable to set
+	 */
+	public void setAnoGravable(final String anoGravable)
+	{
+		this.anoGravable = anoGravable;
+	}
+
+	private String getTipoVallaCode(final String tipoVallaDescripcion)
+	{
+		String tipoVallaCode = "";
+
+		if ("VALLA VEHICULOS".equalsIgnoreCase(tipoVallaDescripcion) || "VALLA VEHíCULOS".equalsIgnoreCase(tipoVallaDescripcion))
+		{
+			tipoVallaCode = "02";
+		}
+		else if ("Valla Tubular de Obra".equalsIgnoreCase(tipoVallaDescripcion))
+		{
+			tipoVallaCode = "03";
+		}
+		else if ("Valla de Obra Convencional".equalsIgnoreCase(tipoVallaDescripcion))
+		{
+			tipoVallaCode = "04";
+		}
+		else if ("Valla Tubular Comercial".equalsIgnoreCase(tipoVallaDescripcion))
+		{
+			tipoVallaCode = "01";
+		}
+		else if ("Pantalla LED".equalsIgnoreCase(tipoVallaDescripcion))
+		{
+			tipoVallaCode = "05";
+		}
+		return tipoVallaCode;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ImpuestoPublicidadExterior [numResolu=" + numResolu + ", tipoValla=" + tipoValla + ", seleccionado=" + seleccionado
+				+ ", tipoVallaCode=" + tipoVallaCode + ", numObjeto=" + numObjeto + ", anoGravable=" + anoGravable + "]";
+	}
+
 
 
 
