@@ -89,10 +89,12 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.closeaccount.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.register.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.mirit.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.duBotonVer.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.publicidadexterior.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.gasolina.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.delineacionurbana.js"></script>
+		
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.certipago.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>

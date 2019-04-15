@@ -79,6 +79,8 @@
 			ACC.declaracionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/declaracion' />"
 			
 			ACC.retencionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/retencion' />"
+
+			ACC.radicaDelinDetallesURL= "<c:url value='/contribuyentes/delineacion-urbana/detalle' />"
 			
 			ACC.currentURL = "${currentURL}";
 			

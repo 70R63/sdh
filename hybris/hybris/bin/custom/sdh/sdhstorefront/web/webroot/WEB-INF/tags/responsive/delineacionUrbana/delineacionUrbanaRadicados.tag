@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container">
+<div id="divInfoRadicados"  style="display: none;">
 	<br>
 	<div class="row">
 		<div class="col-md-12" style="background:#d2d2d2;">
@@ -36,7 +36,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3 ">
-			<table class="table" id="">
+			<table class="table" id="duRadicados">
 				<thead style="background-color: #006DCC !important">
 					<tr>
 						<th style="text-align: center"><label class="control-label "><spring:theme
@@ -46,27 +46,15 @@
 						<th style="text-align: center"><label class="control-label"><spring:theme
 									code="delineacion.urbana.radicados.modlicencia" /></label></th>
 						<th style="text-align: center"><label class="control-label"><spring:theme
+									code="delineacion.urbana.radicados.presupuestoRadicado" /></label></th>			
+						<th style="text-align: center"><label class="control-label"><spring:theme
+									code="delineacion.urbana.radicados.codigoEstrato" /></label></th>									
+						<th style="text-align: center"><label class="control-label"><spring:theme
 									code="delineacion.urbana.radicados.seleccionar" /></label></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><input id="CDU" name="" class="inputtextnew"
-							aria-required="true" type="text" readonly="readonly"
-							value="${docNumber}" maxlength="240"
-							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;"></td>
-						<td><input id="" name="" class="inputtextnew"
-							aria-required="true" type="text" readonly="readonly"
-							value="${docNumber}" maxlength="240"
-							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-						<td><input id="" name="" class="inputtextnew"
-							aria-required="true" type="text" readonly="readonly"
-							value="${docNumber}" maxlength="240"
-							style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-						<td><input class="inputtextnew"
-							style="visibility: visible !important; width: 20% !important"
-							type="checkbox" id="selec"></td>
-					</tr>
+
 				</tbody>
 			</table>
 		</div>

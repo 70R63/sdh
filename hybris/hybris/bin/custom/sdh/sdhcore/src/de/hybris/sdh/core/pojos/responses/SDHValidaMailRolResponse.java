@@ -19,6 +19,8 @@ public class SDHValidaMailRolResponse
 	private List<ImpuestoGasolina> gasolina;
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 	private List<ContribAgente> agentes;
+	private List<ValContDelineacion> delineacion;
+
 	/**
 	 * @return the infoContrib
 	 */
@@ -136,6 +138,23 @@ public class SDHValidaMailRolResponse
 	public void setAgentes(final List<ContribAgente> agentes)
 	{
 		this.agentes = agentes;
+	}
+
+	/**
+	 * @return the delineacion
+	 */
+	public List<ValContDelineacion> getDelineacion()
+	{
+		return delineacion;
+	}
+
+	/**
+	 * @param delineacion
+	 *           the delineacion to set
+	 */
+	public void setDelineacion(final List<ValContDelineacion> delineacion)
+	{
+		this.delineacion = delineacion;
 	}
 
 
