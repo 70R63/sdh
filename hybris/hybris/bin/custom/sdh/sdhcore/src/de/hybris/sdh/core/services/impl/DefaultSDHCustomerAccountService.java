@@ -33,6 +33,7 @@ import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHPhoneModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
+import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.SendEmailRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateCustomerCommPrefsRequest;
@@ -42,6 +43,7 @@ import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
@@ -774,6 +776,53 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			{
 				customerModel.setRolList(null);
 			}
+
+
+
+
+			//clean old urban delineations exterior taxes
+
+			final List<SDHUrbanDelineationsTaxModel> oldUrbanDelineationsTaxModels = customerModel.getUrbanDelineationsTaxList();
+
+			if (oldUrbanDelineationsTaxModels != null && !oldUrbanDelineationsTaxModels.isEmpty())
+			{
+				modelService.removeAll(oldUrbanDelineationsTaxModels);
+			}
+
+			final List<ImpuestoDelineacionUrbana> delineacionUrbana = sdhConsultaContribuyenteBPResponse.getDelineacion();
+
+			if (delineacionUrbana != null && !delineacionUrbana.isEmpty())
+			{
+
+				final List<SDHUrbanDelineationsTaxModel> newUrbanDelineationsTaxModels = new ArrayList<SDHUrbanDelineationsTaxModel>();
+
+				for (final ImpuestoDelineacionUrbana eachUrbanDelineationsTax : delineacionUrbana)
+				{
+					if (StringUtils.isBlank(eachUrbanDelineationsTax.getCdu()))
+					{
+						continue;
+					}
+
+					final SDHUrbanDelineationsTaxModel eachNewUrbanDelineationsTaxModel = new SDHUrbanDelineationsTaxModel();
+					eachNewUrbanDelineationsTaxModel.setObjectNumber(eachUrbanDelineationsTax.getNumObjeto());
+					eachNewUrbanDelineationsTaxModel.setCdu(eachUrbanDelineationsTax.getCdu());
+					eachNewUrbanDelineationsTaxModel.setLicenConst(eachUrbanDelineationsTax.getLicenConst());
+					eachNewUrbanDelineationsTaxModel.setExpDate(eachUrbanDelineationsTax.getFechaExp());
+
+					newUrbanDelineationsTaxModels.add(eachNewUrbanDelineationsTaxModel);
+				}
+
+				modelService.saveAll(newUrbanDelineationsTaxModels);
+
+				customerModel.setUrbanDelineationsTaxList(newUrbanDelineationsTaxModels);
+			}
+			else
+			{
+				customerModel.setUrbanDelineationsTaxList(null);
+			}
+
+
+
 
 
 			modelService.save(customerModel);
