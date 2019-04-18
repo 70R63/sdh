@@ -9,6 +9,7 @@ import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
+import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
@@ -17,6 +18,7 @@ import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
@@ -131,6 +133,7 @@ public class SobreTasaGasolinaService
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
+		elementos.put("", "SELECCIONAR");
 		for (int i = 0; i < cantidadAnios; i++)
 		{
 			elementos.put(Integer.toString(anioBase - i), Integer.toString(anioBase - i));
@@ -234,6 +237,7 @@ public class SobreTasaGasolinaService
 
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
+		elementos.put("01", "SELECCIONAR");
 		elementos.put("01", "Enero");
 		elementos.put("02", "Febrero");
 		elementos.put("03", "Marzo");
@@ -533,6 +537,28 @@ public class SobreTasaGasolinaService
 
 			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
 					DetallePagoResponse.class);
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Error al llamar WebService: " + wsNombre + "Detalle:" + e.getMessage());
+		}
+
+		return responseInfo;
+	}
+
+	private Object llamarWS(final RadicaDelinRequest infoRequest,
+			final SDHDetalleGasolina sdhConsultaWS, final String confUrl, final String confUser, final String confPass,
+			final String wsNombre, final String wsReqMet, final Logger LOG, final String nombreClase)
+	{
+		Object responseInfo = new Object();
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
+					Class.forName(nombreClase));
 		}
 		catch (final Exception e)
 		{
@@ -1147,6 +1173,38 @@ public class SobreTasaGasolinaService
 		return periodoConvertidoPagar;
 	}
 
+
+	/**
+	 * @param wsRadicaDelinRequest
+	 * @param sdhConsultaContribuyenteBPService
+	 * @param log
+	 * @return
+	 */
+	public RadicaDelinResponse consultaRadicaDelin(final RadicaDelinRequest requestInfo, final SDHDetalleGasolina sdhConsultaWS,
+			final Logger LOG)
+	{
+		RadicaDelinResponse responseInfo = new RadicaDelinResponse();
+		final String confUrl = "sdh.radicaDelin.url";
+		final String confUser = "sdh.radicaDelin.user";
+		final String confPass = "sdh.radicaDelin.password";
+		final String wsNombre = "Info_Radicado";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.RadicaDelinResponse";
+
+		responseInfo = (RadicaDelinResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
+				LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
+	public boolean ocurrioErrorRadicaDelin(final RadicaDelinResponse radicaDelinResponse)
+	{
+		final boolean ocurrioError = false;
+
+
+		return ocurrioError;
+	}
 
 
 }

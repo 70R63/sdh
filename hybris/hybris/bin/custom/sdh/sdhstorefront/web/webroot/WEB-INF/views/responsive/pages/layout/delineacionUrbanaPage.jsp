@@ -11,9 +11,9 @@
 <sf:form>
 	<delineacionUrbana:delineacionUrbanaIDs />
 	<delineacionUrbana:delineacionUrbanaCDUs />
-	<div id="idRadicados" style="display: none;">
+<!-- 	<div id="idRadicados" style="display: none;"> -->
 	<delineacionUrbana:delineacionUrbanaRadicados />
-	</div>
+<!-- 	</div> -->
 </sf:form>
 
 
@@ -66,3 +66,4 @@ function goBack() {
 	
 	}
 </script>
+

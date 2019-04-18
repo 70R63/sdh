@@ -6,6 +6,7 @@ package de.hybris.sdh.core.services.impl;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 
@@ -14,6 +15,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -125,5 +129,35 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 		final HttpEntity<ConsultaContribuyenteBPRequest> request = new HttpEntity<>(bp);
 		return restTemplate.postForObject(urlService, request, SDHValidaMailRolResponse.class);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHValidaContribuyenteService#getpublicidadExtListByBpAndYear(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public List<ImpuestoPublicidadExterior> getpublicidadExtListByBpAndYear(final String stringBp, final String stringYear)
+	{
+		final SDHValidaMailRolResponse contribuyente = this.validaContribuyente(stringBp);
+		final List<ImpuestoPublicidadExterior> returnList = new ArrayList<>();
+		if (Objects.nonNull(contribuyente))
+		{
+			for (final ImpuestoPublicidadExterior pExterior : contribuyente.getPublicidadExt())
+			{
+				if (Objects.nonNull(pExterior.getAnoGravable()))
+				{
+					if (pExterior.getAnoGravable().equals(stringYear))
+					{
+						returnList.add(pExterior);
+					}
+				}
+			}
+		}
+		// XXX Auto-generated method stub
+		return returnList;
+	}
+
+
 
 }
