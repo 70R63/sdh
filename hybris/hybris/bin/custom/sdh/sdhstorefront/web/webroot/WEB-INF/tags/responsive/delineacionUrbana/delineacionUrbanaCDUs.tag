@@ -9,7 +9,6 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<input type="hidden" value="" id="selectedTipoValla" />
 
 <div class="row">
 

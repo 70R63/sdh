@@ -9,6 +9,7 @@ import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
+import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
@@ -18,8 +19,10 @@ import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.responses.ValContDelineacion;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
@@ -94,6 +97,115 @@ public class SobreTasaGasolinaService
 
 
 		return catalogosForm;
+	}
+
+	public SobreTasaGasolinaCatalogos prepararCatalogosDelineacionU()
+	{
+
+		final SobreTasaGasolinaCatalogos catalogosForm = new SobreTasaGasolinaCatalogos();
+
+		//Sobretasa a gasolina
+		catalogosForm.setAnioGravable(obtenerListaAnioGravable(obtenerAnoGravableActual(),
+				Integer.parseInt(configurationService.getConfiguration().getString(confCantidadAnioGravableBusqueda))));
+		catalogosForm.setPeriodo(obtenerListaPeriodo());
+		catalogosForm.setCalidadResponsable(obtenerListaCalidadResponsable());
+		catalogosForm.setCodigoPostal(obtenerListaCodigoPostal());
+		catalogosForm.setLocalidad(obtenerListaLocalidades());
+		catalogosForm.setTipoId(obtenerListaTipoId());
+
+		//Liquidador gasolina
+		catalogosForm.setOpcionesUso(obtenerListaOpcionesUso());
+		catalogosForm.setClaseProd(obtenerListaClaseProd());
+		catalogosForm.setAlcoholCarbu(obtenerListaAlcoholCarbu());
+		catalogosForm.setTipoIdRev(obtenerListaTipoId());
+		catalogosForm.setTipoIdDec(obtenerListaTipoId());
+
+		//Presentar declaracion
+		catalogosForm.setImpuesto(obtenerListaImpuesto());
+
+		//Consulta estado de cuenta
+		catalogosForm.setTipoConsulta(obtenerListaTipoConsulta());
+
+		//Delineacion Urbana
+		catalogosForm.setAnoGravable(obtenerListaAnioGravable(obtenerAnoGravableActual(),
+				Integer.parseInt(configurationService.getConfiguration().getString(confCantidadAnioGravableBusqueda))));
+		catalogosForm.setTipoDeLicencia(obtenerListaTipoDeLicencia());
+		catalogosForm.setModalidadLicencia(obtenerListaModalidadLicencia());
+		catalogosForm.setPresupuestoObra(obtenerListaPresupuestoObra());
+		catalogosForm.setCausalExencion(obtenerListaCausalExencion());
+
+
+		return catalogosForm;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaCausalExencion()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Vis obras nuevas estrato 1,2,3");
+		elementos.put("02", "Obras de autoconstrucción de vivienda estrato 1 y 2");
+		elementos.put("03", "Ampliaciones, modificaciones, adecuaciones y/o reparaciones en estrato 1,2,3");
+		elementos.put("04", "Obras para reconstruir predios afectados por actos terroristas o catástrofes naturales");
+		elementos.put("05", "Obras que se realicen para restaurar o conservar los edificios declarados de conservación histórica");
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaPresupuestoObra()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Calcular con base en la resolución SDP");
+		elementos.put("02", "Incorporar el valor de su presupuesto");
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaModalidadLicencia()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Obra nueva");
+		elementos.put("02", "Ampliación");
+		elementos.put("03", "Modificación");
+		elementos.put("04", "Adecuación");
+		elementos.put("05", "Reforzamiento");
+		elementos.put("06", "Restauración/conservación");
+		elementos.put("07", "Demolición");
+		elementos.put("08", "Cerramiento");
+		elementos.put("09", "Reconocimiento");
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaTipoDeLicencia()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Licencia");
+		elementos.put("02", "Reconocimiento");
+
+		return elementos;
 	}
 
 
@@ -546,7 +658,7 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
-	private Object llamarWS(final RadicaDelinRequest infoRequest,
+	private Object llamarWS(final Object infoRequest,
 			final SDHDetalleGasolina sdhConsultaWS, final String confUrl, final String confUser, final String confPass,
 			final String wsNombre, final String wsReqMet, final Logger LOG, final String nombreClase)
 	{
@@ -1205,6 +1317,57 @@ public class SobreTasaGasolinaService
 
 		return ocurrioError;
 	}
+
+
+	/**
+	 * @param delineacion
+	 * @param string
+	 * @return
+	 */
+	public String getAnoGravableDU(final List<ValContDelineacion> delineacion, final String cdu)
+	{
+		String anoGravable = "";
+
+		for (int i = 0; i < delineacion.size(); i++)
+		{
+			if (delineacion.get(i).getCdu().equals(cdu))
+			{
+				anoGravable = delineacion.get(i).getFechaExp().substring(0, 4);
+			}
+		}
+
+		return anoGravable;
+	}
+
+	public InfoObjetoDelineacionResponse consultaInfoDelineacion(final InfoObjetoDelineacionRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		InfoObjetoDelineacionResponse responseInfo = new InfoObjetoDelineacionResponse();
+		final String confUrl = "sdh.infObjetoDelineacion.url";
+		final String confUser = "sdh.infObjetoDelineacion.user";
+		final String confPass = "sdh.infObjetoDelineacion.password";
+		final String wsNombre = "infObjeto_Delineacion";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse";
+
+		responseInfo = (InfoObjetoDelineacionResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
+	/**
+	 * @param infoDelineacionResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorInfoDelineacion(final InfoObjetoDelineacionResponse infoDelineacionResponse)
+	{
+
+
+		return false;
+	}
+
 
 
 }

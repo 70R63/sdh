@@ -35,7 +35,99 @@ public class SobreTasaGasolinaCatalogos
 
 	private Map<String, String> tipoConsulta;
 
+	//delineacion Urbana
+	private Map<String, String> anoGravable;
+	private Map<String, String> tipoDeLicencia;
+	private Map<String, String> modalidadLicencia;
+	private Map<String, String> presupuestoObra;
+	private Map<String, String> causalExencion;
 
+
+
+	/**
+	 * @return the anoGravable
+	 */
+	public Map<String, String> getAnoGravable()
+	{
+		return anoGravable;
+	}
+
+	/**
+	 * @param anoGravable
+	 *           the anoGravable to set
+	 */
+	public void setAnoGravable(final Map<String, String> anoGravable)
+	{
+		this.anoGravable = anoGravable;
+	}
+
+	/**
+	 * @return the tipoDeLicencia
+	 */
+	public Map<String, String> getTipoDeLicencia()
+	{
+		return tipoDeLicencia;
+	}
+
+	/**
+	 * @param tipoDeLicencia
+	 *           the tipoDeLicencia to set
+	 */
+	public void setTipoDeLicencia(final Map<String, String> tipoDeLicencia)
+	{
+		this.tipoDeLicencia = tipoDeLicencia;
+	}
+
+	/**
+	 * @return the modalidadLicencia
+	 */
+	public Map<String, String> getModalidadLicencia()
+	{
+		return modalidadLicencia;
+	}
+
+	/**
+	 * @param modalidadLicencia
+	 *           the modalidadLicencia to set
+	 */
+	public void setModalidadLicencia(final Map<String, String> modalidadLicencia)
+	{
+		this.modalidadLicencia = modalidadLicencia;
+	}
+
+	/**
+	 * @return the presupuestoObra
+	 */
+	public Map<String, String> getPresupuestoObra()
+	{
+		return presupuestoObra;
+	}
+
+	/**
+	 * @param presupuestoObra
+	 *           the presupuestoObra to set
+	 */
+	public void setPresupuestoObra(final Map<String, String> presupuestoObra)
+	{
+		this.presupuestoObra = presupuestoObra;
+	}
+
+	/**
+	 * @return the causalExencion
+	 */
+	public Map<String, String> getCausalExencion()
+	{
+		return causalExencion;
+	}
+
+	/**
+	 * @param causalExencion
+	 *           the causalExencion to set
+	 */
+	public void setCausalExencion(final Map<String, String> causalExencion)
+	{
+		this.causalExencion = causalExencion;
+	}
 
 	/**
 	 * @return the impuesto

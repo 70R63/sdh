@@ -10,12 +10,15 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
+import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -33,7 +36,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -42,6 +47,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
+@SessionAttributes("dataForm")
+
 public class DelineacionUrbanaController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
@@ -55,6 +62,10 @@ public class DelineacionUrbanaController extends AbstractPageController
 	private static final String DELINEACION_URBANA_CMS_PAGE = "delineacionUrbanaPage";
 	private static final String DELINEACION_URBANA_DECLARACIONES_CMS_PAGE = "delineacionUrbanaDeclaracionesPage";
 	private static final String DELINEACION_URBANA_RETENCION_CMS_PAGE = "delineacionUrbanaRadicados";
+	private static final String REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE = REDIRECT_PREFIX
+			+ "/contribuyentes/delineacionurbana/retencion";
+	private static final String REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE = REDIRECT_PREFIX
+			+ "/contribuyentes/delineacionurbana/retencion";
 	private static final String REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE = REDIRECT_PREFIX + "/contribuyentes/delineacion-urbana";
 
 	@Resource(name = "accountBreadcrumbBuilder")
@@ -74,15 +85,17 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 
 
+
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
 	@Resource(name = "sdhDetallePublicidadService")
 	SDHDetallePublicidadService sdhDetallePublicidadService;
 
 
+
 	@RequestMapping(value = "/contribuyentes/delineacion-urbana", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String delineacionUrbana(final Model model) throws CMSItemNotFoundException
+	public String delineacionUrbanaGET(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Delineacion urbana GET --------------------------");
 
@@ -92,11 +105,6 @@ public class DelineacionUrbanaController extends AbstractPageController
 		SDHValidaMailRolResponse detalleContribuyente;
 		String mensajeError = "";
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
-
-
-		//		RadicaDelinRequest delinRequest = new RadicaDelinRequest();
-		//
-		//		delinRequest.setBP()
 
 
 		contribuyenteRequest.setNumBP(customerModel.getNumBP());
@@ -127,6 +135,73 @@ public class DelineacionUrbanaController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
+
+
+	@RequestMapping(value = "/contribuyentes/delineacion-urbana", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String delineacionUrbanaPOST(@ModelAttribute("dataForm")
+	final InfoDelineacion infoDelineacion, @RequestParam(value = "action")
+	final String action, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Delineacion urbana POST --------------------------");
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final InfoObjetoDelineacionRequest infoDelineacionRequest = new InfoObjetoDelineacionRequest();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
+		final String mensajeError = "";
+		String anoGravable = "";
+		String paginaDestino = "";
+		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
+
+		anoGravable = gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(),
+				infoDelineacion.getInput().getSelectedCDU());
+
+
+		infoDelineacionRequest.setNumBP(customerModel.getNumBP());
+		infoDelineacionRequest.setCdu(infoDelineacion.getInput().getSelectedCDU());
+		infoDelineacionRequest.setNumRadicado(infoDelineacion.getInput().getSelectedRadicado());
+		infoDelineacionRequest.setAnoGravable(anoGravable);
+		infoDelineacionRequest.setTipoLicencia(infoDelineacion.getInput().getSelectedTipoLicencia());
+
+		System.out.println("Request para infObjeto/Delineacion: " + infoDelineacionRequest);
+		infoDelineacionResponse = gasolinaService.consultaInfoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de infObjeto/Delineacion: " + infoDelineacionResponse);
+		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
+		{
+
+			infObjetoDelineacionExtras.setAnoGravable(anoGravable);
+
+			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
+			infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
+			infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
+		}
+		else
+		{
+			//			mensajeError = detalleContribuyente.getTxtmsj();
+			//			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+			//			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+		}
+
+
+		model.addAttribute("dataForm", infoDelineacion);
+
+		if (action.equals("retencion"))
+		{
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
+		}
+		if (action.equals("declaracion"))
+		{
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
+
+		}
+
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return paginaDestino;
+	}
 
 
 
@@ -219,7 +294,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/retencion", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String delineacionUrbanaretencion(final Model model) throws CMSItemNotFoundException
+	public String delineacionUrbanaretencion(@ModelAttribute("dataForm")
+	final InfoDelineacion infoDelineacion, final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro a retencion delineacion --------------------------");
 
@@ -259,6 +335,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+		model.addAttribute("dataForm", infoDelineacion);
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_RETENCION_CMS_PAGE));

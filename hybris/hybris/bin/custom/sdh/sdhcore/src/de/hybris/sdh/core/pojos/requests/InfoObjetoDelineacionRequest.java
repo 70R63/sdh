@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import org.apache.commons.lang3.StringUtils;
+
+
 /**
  * @author Federico Flores Dimas
  *
@@ -181,9 +184,9 @@ public class InfoObjetoDelineacionRequest
 		stringBuilder.append("\"cdu\":\"" + this.getCdu() + "\",");
 		stringBuilder.append("\"numRadicado\":\"" + this.getNumRadicado() + "\",");
 		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\",");
-		stringBuilder.append("\"retencion\":\"" + this.getRetencion() + "\",");
+		stringBuilder.append("\"retencion\":\"" + (StringUtils.isBlank(this.getRetencion()) ? "" : this.getRetencion()) + "\",");
 		stringBuilder.append("\"tipoLicencia\":\"" + this.getTipoLicencia() + "\",");
-		stringBuilder.append("\"opcionUso\":\"" + this.getOpcionUso() + "\"");
+		stringBuilder.append("\"opcionUso\":\"" + (StringUtils.isBlank(this.getOpcionUso()) ? "" : this.getOpcionUso()) + "\"");
 		stringBuilder.append("}");
 
 		return stringBuilder.toString();
