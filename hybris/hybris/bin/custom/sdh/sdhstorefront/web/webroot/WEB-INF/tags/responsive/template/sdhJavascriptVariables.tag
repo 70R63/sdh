@@ -79,6 +79,8 @@
 			ACC.declaracionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/declaracion' />"
 			
 			ACC.retencionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/retencion' />"
+
+			ACC.radicaDelinDetallesURL= "<c:url value='/contribuyentes/delineacion-urbana/detalle' />"
 			
 			ACC.currentURL = "${currentURL}";
 			
@@ -97,9 +99,11 @@
 			ACC.hideSubmenuPublicidadExt = false;
 			ACC.hideSubmenuVehicular = false;
 			ACC.hideSubmenuGasolina = false;
+			debugger;
 			
 			<c:if test="${(hasCORol and fn:contains(currentURL, 'contribuyentes')) or (hasCORol and fn:contains(currentURL, 'pagoEnLinea'))}">
 				ACC.hideMenuInformacionReportada = true;
+				
 				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
 					ACC.hideSubmenuDelineacionUrbana = true;
 				</c:if>

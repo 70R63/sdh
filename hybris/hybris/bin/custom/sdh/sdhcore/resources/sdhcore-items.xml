@@ -23,6 +23,7 @@
         <collectiontype code="SDHRolList" elementtype="SDHRol" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHExteriorPublicityTaxList" elementtype="SDHExteriorPublicityTax" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHGasTaxList" elementtype="SDHGasTax" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHUrbanDelineationsTaxList" elementtype="SDHUrbanDelineationsTax" autocreate="true" generate="true" type="list"/>
         
     </collectiontypes>
 
@@ -255,6 +256,10 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
+        			<attribute qualifier="urbanDelineationsTaxList" type="SDHUrbanDelineationsTaxList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
         		</attributes>
         	</itemtype>
         	<itemtype code="SDHAddress" autocreate="true" generate="true">
@@ -347,6 +352,8 @@
         			</attribute>
        			</attributes>
 	        </itemtype>
+
+
 	        <itemtype code="SDHAgent" autocreate="true" generate="true">
         		<description>Custom SDH Model to save agent data</description>
         		<deployment table="SDHAGENT" typecode="15008"/>
@@ -364,6 +371,25 @@
         				<persistence type="property"></persistence>
         			</attribute>
         			<attribute qualifier="internalFunction" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        
+	        <itemtype code="SDHUrbanDelineationsTax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save urban delineations data</description>
+        		<deployment table="SDHURBANDELTAX" typecode="15009"/>
+       			<attributes>
+       				<attribute qualifier="objectNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="cdu" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="licenConst" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="expDate" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
        			</attributes>

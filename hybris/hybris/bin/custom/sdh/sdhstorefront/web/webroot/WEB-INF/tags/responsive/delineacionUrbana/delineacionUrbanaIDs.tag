@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
-	<div class="row">
+	<div class="row" >
 		<div class="avisoheadline">
 			<h3>
 				<span class="p"><spring:theme code="delineacion.urbana.title"
@@ -40,11 +40,11 @@
 					<tr>
 						<td><input disabled class="inputtextnew" aria-required="true"
 							maxlength="30" size="30" readonly="readonly" type="text"
-							value="${docTipe }" /></td>
+							value="${dataForm.valCont.infoContrib.tipoDoc}" /></td>
 						<td><input readonly="readonly" class="inputtextnew"
 							aria-required="true" maxlength="30" size="30" disabled="disabled"
-							type="text" value="${docNumber }" /></td>
-						<td><input value="${name }" disabled class="inputtextnew"
+							type="text" value="${dataForm.valCont.infoContrib.numDoc}" /></td>
+						<td><input value="${dataForm.valCont.infoContrib.adicionales.NAME_ORG1}" disabled class="inputtextnew"
 							aria-required="true" maxlength="30" size="30" readonly="readonly"
 							type="text" /></td>
 					</tr>

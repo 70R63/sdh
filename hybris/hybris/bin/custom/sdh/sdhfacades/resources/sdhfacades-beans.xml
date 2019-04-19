@@ -53,6 +53,7 @@
 		<property name="rolList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHRolData>"/>
 		<property name="exteriorPublicityTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData>"/>
 		<property name="gasTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHGasTaxData>"/>
+		<property name="urbanDelineationsTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData>"/>
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
@@ -110,6 +111,13 @@
 	<bean class="de.hybris.sdh.facades.questions.data.OptionsData">	
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData">	
+		<property name="objectNumber" type="String"/>
+		<property name="cdu" type="String"/>
+		<property name="licenConst" type="String"/>
+		<property name="expDate" type="String"/>
 	</bean>
 	
 </beans>

@@ -8,7 +8,41 @@
 	tagdir="/WEB-INF/tags/responsive/consultas"%>
 
 
-<div class="container">
-	<obligaciones:obliPendientes />
+
+<obligaciones:obliPendientes />
+<div id="sujeto" style="display: none;">
+	<obligaciones:obliPendientesSujeto />
 </div>
+<div id="impuesto" style="display: none;">
+	<obligaciones:obliPendientesImpuesto />
+</div>
+
+
+<script type="text/javascript">
+	function Selected(selectObject) {
+		var value = selectObject.value;
+		document.getElementById("Idimp").value = value;
+	}
+
+	function ShowSujeto(selectObject) {
+		var value = selectObject.value;
+		var x = document.getElementById('Idimp').value;
+		var suj = document.getElementById('sujeto');
+		var im = document.getElementById('impuesto');
+
+		suj.style.display = 'block';
+		im.style.display = 'none';
+
+	}
+	function ShowImpuesto(selectObject) {
+		var value = selectObject.value;
+		var x = document.getElementById('Idimp').value;
+		var suj = document.getElementById('sujeto');
+		var im = document.getElementById('impuesto');
+
+		suj.style.display = 'none';
+		im.style.display = 'block';
+
+	}
+</script>
 

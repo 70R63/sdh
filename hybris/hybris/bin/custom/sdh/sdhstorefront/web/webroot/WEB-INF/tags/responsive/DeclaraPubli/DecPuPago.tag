@@ -54,10 +54,6 @@
 		<sf:hidden path="clavePeriodo" />
 		<sf:hidden path="dv" />
 		<sf:hidden path="numObjeto" />
-<!-- 			<button id="pagarlinea" class="btn btn-primary btn-lg" -->
-<!-- 				name="pagarlinea" type="button"> -->
-<%-- 				<spring:theme code="declaracion.publicidad.button.pago.linea" /> --%>
-<!-- 			</button>  -->
 		    <sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 			name="pagar" value="pagar">
 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />

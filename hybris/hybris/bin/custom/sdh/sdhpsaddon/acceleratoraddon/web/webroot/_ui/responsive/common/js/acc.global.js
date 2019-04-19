@@ -63,22 +63,12 @@ ACC.global = {
     	}
     	
     	
-    	
+    	debugger;
     	
     	
     	
     	
     	if(ACC.hideSubmenuDelineacionUrbana == true)
-    	{	
-    		$("a:contains('Delineación Urbana')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideSubmenuICA == true)
-    	{	
-    		$("a:contains('Delineación Urbana')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideSubmenuICA == true)
     	{	
     		$("a:contains('Delineación Urbana')").closest("li").remove();
     	}
