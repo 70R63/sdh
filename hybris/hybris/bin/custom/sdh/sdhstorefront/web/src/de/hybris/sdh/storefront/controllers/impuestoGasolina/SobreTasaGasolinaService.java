@@ -17,12 +17,12 @@ import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
-import de.hybris.sdh.core.pojos.responses.ValContDelineacion;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
@@ -1320,19 +1320,19 @@ public class SobreTasaGasolinaService
 
 
 	/**
-	 * @param delineacion
+	 * @param list
 	 * @param string
 	 * @return
 	 */
-	public String getAnoGravableDU(final List<ValContDelineacion> delineacion, final String cdu)
+	public String getAnoGravableDU(final List<ImpuestoDelineacionUrbana> list, final String cdu)
 	{
 		String anoGravable = "";
 
-		for (int i = 0; i < delineacion.size(); i++)
+		for (int i = 0; i < list.size(); i++)
 		{
-			if (delineacion.get(i).getCdu().equals(cdu))
+			if (list.get(i).getCdu().equals(cdu))
 			{
-				anoGravable = delineacion.get(i).getFechaExp().substring(0, 4);
+				anoGravable = list.get(i).getFechaExp().substring(0, 4);
 			}
 		}
 
