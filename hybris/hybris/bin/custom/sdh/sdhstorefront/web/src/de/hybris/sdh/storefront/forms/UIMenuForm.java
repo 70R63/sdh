@@ -126,6 +126,15 @@ public class UIMenuForm
 				this.setbPublicidadExt("");
 			}
 
+			if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+			{
+				this.setbDelineacionUrbana("X");
+			}
+			else
+			{
+				this.setbDelineacionUrbana("");
+			}
+
 		}
 		catch (final Exception e)
 		{

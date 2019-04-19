@@ -10,9 +10,11 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
+import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
+import de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,6 +154,30 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 
 		}
 		target.setGasTaxList(gasTaxDatas);
+
+
+
+		final List<SDHUrbanDelineationsTaxModel> UrbanDelineationsTaxModels = source.getUrbanDelineationsTaxList();
+		final List<SDHUrbanDelineationsTaxData> UrbanDelineationsTaxDatas = new ArrayList<SDHUrbanDelineationsTaxData>();
+		if (null != UrbanDelineationsTaxModels && !UrbanDelineationsTaxModels.isEmpty())
+		{
+
+			for (final SDHUrbanDelineationsTaxModel eachModel : UrbanDelineationsTaxModels)
+			{
+				final SDHUrbanDelineationsTaxData eachData = new SDHUrbanDelineationsTaxData();
+
+				eachData.setObjectNumber(eachModel.getObjectNumber());
+				eachData.setCdu(eachModel.getCdu());
+				eachData.setLicenConst(eachModel.getLicenConst());
+				eachData.setExpDate(eachModel.getExpDate());
+
+				UrbanDelineationsTaxDatas.add(eachData);
+			}
+
+		}
+
+		target.setUrbanDelineationsTaxList(UrbanDelineationsTaxDatas);
+
 
 
 	}
