@@ -25,7 +25,7 @@
 					<label class="control-label "><spring:theme
 							code="delineacion.urbana.dec.generales.codigo" /></label>
 					<sf:input class="form-control" readonly="true" aria-required="true"
-						maxlength="240" path="infObjetoDelineacion.infoDeclara.cdu" />
+						maxlength="240" path="input.selectedCDU" />
 				</div>
 			</div>
 
