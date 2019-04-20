@@ -147,7 +147,7 @@
 			<!-- 		inicio tabla dos -->
 			<br> <br>
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-5">
 
 					<label class="control-label" for=""> <spring:theme
 							code="delineacion.urbana.dec.areasusos.areainve" />
@@ -162,22 +162,124 @@
 
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-3">
+			<div class="row areausosdos">
+				<div class="col-md-5">
 					<div class="form-group ">
-						<input class="form-control" maxlength="30" value=""
-							id="inputareainter"></input>
+						<select class="form-control sel5">
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="Obra nueva">Obra nueva</option>
+							<option value="Ampliada">Ampliada</option>
+							<option value="Modificada">Modificada</option>
+							<option value="Adecuada">Adecuada</option>
+							<option value="Reconocimiento">Reconocimiento</option>
+							<option value="Conservación/Restaruación">Conservación/Restaruación</option>
+							<option value="Reforzamiento estructural">Reforzamiento
+								estructural</option>
+							<option value="Demolición">Demolición</option>
+							<option value="Metros lineales Cerramiento">Metros
+								lineales Cerramiento</option>
+							<option value="Reconocimiento">Reconocimiento</option>
+							<option value="Obra">Obra</option>
+						</select>
 					</div>
 				</div>
 
 				<div class="col-md-3">
 					<div class="form-group ">
-						<input class="form-control" maxlength="30" value=""
+						<input class="form-control input5" maxlength="30" value=""
 							id="inputareainter"></input>
 					</div>
 				</div>
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addinfoareuso3()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deleinfoareusotable3()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
+					</div>
+				</div>
 			</div>
+		</div>
+		<div>
 			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value="Total" disabled></input>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value=""></input>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 		inicio tabla tres -->
+
+		<br>
+		<br>
+
+		<div class="row">
+			<div class="col-md-3">
+
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.arnetpro" />
+				</label>
+			</div>
+			<div class="col-md-3">
+
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.aream2" />
+				</label>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="row arearquitec">
+				<div class="col-md-3">
+					<div class="form-group ">
+						<select class="form-control sel1">
+
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="Lote">Lote</option>
+							<option value="Sótano">Sótano</option>
+							<option value="Semisotano(s)">Semisotano(s)</option>
+							<option value="Primer Piso">Primer Piso</option>
+							<option value="Pisos Restantes">Pisos Restantes</option>
+							<option value="Libre Primer Piso">Libre Primer Piso</option>
+						</select>
+					</div>
+
+				</div>
+
+
+
+				<div class="col-md-3">
+					<div class="form-group ">
+						<input class="form-control in1" maxlength="30"></input>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addinfoareusotable2()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="row totalnew">
 				<div class="col-md-3">
 					<div class="form-group ">
 						<input class="form-control" maxlength="30" value="Total" disabled></input>
@@ -190,117 +292,42 @@
 					</div>
 				</div>
 			</div>
-
-			<!-- 		inicio tabla tres -->
-
-			<br> <br>
-
-			<div class="row">
-				<div class="col-md-3">
-
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.arnetpro" />
-					</label>
-				</div>
-				<div class="col-md-3">
-
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.aream2" />
-					</label>
-
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="row arearquitec">
-					<div class="col-md-3">
-						<div class="form-group ">
-							<select class="form-control sel1">
-
-								<option value="Seleccionar">Seleccionar</option>
-								<option value="Lote">Lote</option>
-								<option value="Sótano">Sótano</option>
-								<option value="Semisotano(s)">Semisotano(s)</option>
-								<option value="Primer Piso">Primer Piso</option>
-								<option value="Pisos Restantes">Pisos Restantes</option>
-								<option value="Libre Primer Piso">Libre Primer Piso</option>
-							</select>
-						</div>
-
-					</div>
-
-
-
-					<div class="col-md-3">
-						<div class="form-group ">
-							<input class="form-control in1" maxlength="30"></input>
-						</div>
-					</div>
-
-
-
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addinfoareusotable2()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="row totalnew">
-					<div class="col-md-3">
-						<div class="form-group ">
-							<input class="form-control" maxlength="30" value="Total" disabled></input>
-						</div>
-					</div>
-
-					<div class="col-md-3">
-						<div class="form-group ">
-							<input class="form-control" maxlength="30" value=""></input>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<br> <br>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group ">
-							<label class="control-label"><spring:theme
-									code="delineacion.urbana.dec.areasusos.fechultabo" /></label> <input
-								id="" name="" class="form-control" aria-required="true"
-								type="text" value="" maxlength="240" disabled>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group ">
-							<label class="control-label"><spring:theme
-									code="delineacion.urbana.dec.areasusos.fecfinalobra" /></label> <input
-								id="" name="" class="form-control" aria-required="true"
-								type="text" value="" maxlength="240" disabled>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group ">
-							<label class="control-label"><spring:theme
-									code="delineacion.urbana.dec.areasusos.fechejec" /></label> <input
-								id="" name="" class="form-control" aria-required="true"
-								type="text" value="" maxlength="240" disabled>
-						</div>
-					</div>
-
-				</div>
-			</div>
-
 		</div>
 
-	</form:form>
+		<br>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="delineacion.urbana.dec.areasusos.fechultabo" /></label> <input
+							id="" name="" class="form-control" aria-required="true"
+							type="text" value="" maxlength="240" disabled>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="delineacion.urbana.dec.areasusos.fecfinalobra" /></label> <input
+							id="" name="" class="form-control" aria-required="true"
+							type="text" value="" maxlength="240" disabled>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="delineacion.urbana.dec.areasusos.fechejec" /></label> <input
+							id="" name="" class="form-control" aria-required="true"
+							type="text" value="" maxlength="240" disabled>
+					</div>
+				</div>
+
+			</div>
+		</div>
+</div>
+
+</form:form>
 
 </div>
 <script>
@@ -357,6 +384,33 @@
 					$($(".arearquitec")[val]).remove());
 
 		} else if ($(".arearquitec").length <= 1) {
+			alert("No puede eliminar todos los registros");
+		}
+
+	}
+
+	function addinfoareuso3() {
+
+		if ($(".areausosdos").length < 3) {
+			$($(".areausosdos")[0]).parent().append(
+					$($(".areausosdos")[0]).clone());
+			$($(".areausosdos")[0]).parent().children().last().find(".sel5")
+					.val("")
+			$($(".areausosdos")[0]).parent().children().last().find(".input5")
+					.val("")
+		}
+
+	}
+
+	function deleinfoareusotable3() {
+		var i = $(".areausosdos").length;
+		var val = i - 1;
+		if ($(".areausosdos").length <= 3 && $(".areausosdos").length > 1) {
+
+			$($(".areausosdos")[val]).closest(
+					$($(".areausosdos")[val]).remove());
+
+		} else if ($(".areausosdos").length <= 1) {
 			alert("No puede eliminar todos los registros");
 		}
 

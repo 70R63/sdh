@@ -165,8 +165,8 @@
 			<br>
 			<br>
 			<div class="row">
-				<div class="roW">
-					<div class="col-md-3">
+				<div class="row">
+					<div class="col-md-5">
 						<label class="control-label" for=""> <spring:theme
 								code="delineacion.urbana.dec.areasusos.areainve" />
 						</label>
@@ -182,7 +182,7 @@
 			<c:forEach items="${infObjetoDelineacion.areaIntervenida}"
 				var="varAreaIntervenida">
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-5">
 						<div class="form-group ">
 							<input id="inputareainter" class="form-control" maxlength="30"
 								value="Total2" disabled></input>
@@ -203,17 +203,40 @@
 			</c:forEach>
 
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-5 areausosdos">
 					<div class="form-group ">
-						<input id="inputareainter" class="form-control" maxlength="30"
-							value="Total" disabled></input>
+						<select class="form-control sel5">
+							<option value="Seleccionar">Seleccionar</option>
+							<option value="Obra nueva">Obra nueva</option>
+							<option value="Ampliada">Ampliada</option>
+							<option value="Modificada">Modificada</option>
+							<option value="Adecuada">Adecuada</option>
+							<option value="Reconocimiento">Reconocimiento</option>
+							<option value="Conservación/Restaruación">Conservación/Restaruación</option>
+							<option value="Reforzamiento estructural">Reforzamiento
+								estructural</option>
+							<option value="Demolición">Demolición</option>
+							<option value="Metros lineales Cerramiento">Metros
+								lineales Cerramiento</option>
+							<option value="Reconocimiento">Reconocimiento</option>
+							<option value="Obra">Obra</option>
+						</select>
 					</div>
 				</div>
 
 				<div class="col-md-3">
-					<div class="form-group ">
+					<div class="form-group input5">
 						<input id="inputareainter" class="form-control" maxlength="30"
 							value=""></input>
+					</div>
+				</div>
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addinfoareuso3()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deleinfoareusotable3()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
 					</div>
 				</div>
 			</div>
@@ -345,6 +368,33 @@
 					$($(".arearquitec")[val]).remove());
 
 		} else if ($(".arearquitec").length <= 1) {
+			alert("No puede eliminar todos los registros");
+		}
+
+	}
+
+	function addinfoareuso3() {
+
+		if ($(".areausosdos").length < 3) {
+			$($(".areausosdos")[0]).parent().append(
+					$($(".areausosdos")[0]).clone());
+			$($(".areausosdos")[0]).parent().children().last().find(".sel5")
+					.val("")
+			$($(".areausosdos")[0]).parent().children().last().find(".input5")
+					.val("")
+		}
+
+	}
+
+	function deleinfoareusotable3() {
+		var i = $(".areausosdos").length;
+		var val = i - 1;
+		if ($(".areausosdos").length <= 3 && $(".areausosdos").length > 1) {
+
+			$($(".areausosdos")[val]).closest(
+					$($(".areausosdos")[val]).remove());
+
+		} else if ($(".areausosdos").length <= 1) {
 			alert("No puede eliminar todos los registros");
 		}
 
