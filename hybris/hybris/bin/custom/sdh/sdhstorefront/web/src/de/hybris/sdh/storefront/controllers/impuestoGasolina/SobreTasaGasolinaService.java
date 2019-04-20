@@ -209,7 +209,7 @@ public class SobreTasaGasolinaService
 	/**
 	 * @return
 	 */
-	private Map<String, String> obtenerListaCodUso(final String uso)
+	private Map<String, String> obtenerListaCodUso()
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
