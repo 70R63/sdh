@@ -10,7 +10,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -232,7 +231,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String delineacionUrbanadeclaracion(final Model model) throws CMSItemNotFoundException
+	public String delineacionUrbanadeclaracionGET(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro a declaracion delineacion --------------------------");
 
@@ -284,7 +283,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/declaracion", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String delineacionurbanadeclaracionpost(final BindingResult bindingResult, final Model model,
+	public String delineacionurbanadeclaracionPOST(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("------------------entro al post------------------------");
@@ -294,7 +293,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/retencion", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String delineacionUrbanaretencion(@ModelAttribute("dataForm")
+	public String delineacionUrbanaretencionGET(@ModelAttribute("dataForm")
 	final InfoDelineacion infoDelineacion, final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro a retencion delineacion --------------------------");
@@ -349,7 +348,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/retencion", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String delineacionurbanaretencionpost(final BindingResult bindingResult, final Model model,
+	public String delineacionurbanaretencionPOST(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("------------------entro al post de retencion------------------------");
@@ -361,7 +360,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/delineacion-urbana/detalle", method = RequestMethod.GET)
 	@ResponseBody
-	public RadicaDelinResponse publicidadExternaDetail(@ModelAttribute("radicadoInfoRequest")
+	public RadicaDelinResponse delineacionUrbanaCDUDetalleGET(@ModelAttribute("radicadoInfoRequest")
 	final RadicaDelinRequest radicaDelinRequest, final Model model, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{

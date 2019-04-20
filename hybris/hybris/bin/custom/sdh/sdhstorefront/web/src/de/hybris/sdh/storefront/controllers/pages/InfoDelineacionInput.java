@@ -16,28 +16,10 @@ public class InfoDelineacionInput
 	private String selectedRadicado;
 	private String selectedTipoLicencia;
 
-	private Map<String, String> tipoDeLicencia;
 	private Map<String, String> modalidadLicencia;
 	private Map<String, String> presupuestoObra;
 	private Map<String, String> causalExencion;
 
-
-	/**
-	 * @return the tipoDeLicencia
-	 */
-	public Map<String, String> getTipoDeLicencia()
-	{
-		return tipoDeLicencia;
-	}
-
-	/**
-	 * @param tipoDeLicencia
-	 *           the tipoDeLicencia to set
-	 */
-	public void setTipoDeLicencia(final Map<String, String> tipoDeLicencia)
-	{
-		this.tipoDeLicencia = tipoDeLicencia;
-	}
 
 	/**
 	 * @return the modalidadLicencia

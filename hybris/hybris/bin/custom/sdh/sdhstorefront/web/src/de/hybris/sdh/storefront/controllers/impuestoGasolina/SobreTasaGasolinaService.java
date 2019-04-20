@@ -133,9 +133,125 @@ public class SobreTasaGasolinaService
 		catalogosForm.setModalidadLicencia(obtenerListaModalidadLicencia());
 		catalogosForm.setPresupuestoObra(obtenerListaPresupuestoObra());
 		catalogosForm.setCausalExencion(obtenerListaCausalExencion());
+		catalogosForm.setUso(obtenerListaUso());
+		catalogosForm.setCodUso(obtenerListaCodUso());
+		catalogosForm.setAreaInter(obtenerListaAreaInter());
+		catalogosForm.setAreaProy(obtenerListaAreaProy());
 
 
 		return catalogosForm;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaAreaProy()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Obra nueva");
+		elementos.put("02", "Ampliación");
+		elementos.put("03", "Modificación");
+		elementos.put("04", "Adecuación");
+		elementos.put("05", "Reforzamiento");
+		elementos.put("06", "Restauración/conservación");
+		elementos.put("07", "Demolición");
+		elementos.put("08", "Cerramiento");
+		elementos.put("09", "Reconocimiento");
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaAreaInter()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Obra nueva");
+		elementos.put("02", "Ampliación");
+		elementos.put("03", "Modificación");
+		elementos.put("04", "Adecuación");
+		elementos.put("05", "Reforzamiento");
+		elementos.put("06", "Restauración/conservación");
+		elementos.put("07", "Demolición");
+		elementos.put("08", "Cerramiento");
+		elementos.put("09", "Reconocimiento");
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaUso()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Comercio");
+		elementos.put("02", "Servicios");
+		elementos.put("03", "Dotacional");
+		elementos.put("04", "Industrial");
+		elementos.put("05", "Vivienda");
+
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaCodUso(final String uso)
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+
+		elementos.put("00", "Seleccionar");
+		//		if (uso.equals("Comercio"))
+		//		{
+		elementos.put("07", "Comercio vecinal o local");
+		elementos.put("08", "Comercio zonal");
+		elementos.put("09", "Comercio urbano");
+		elementos.put("10", "Comercio metropolitano");
+		//		}
+		//		if (uso.equals("Servicios"))
+		//		{
+		elementos.put("11", "Servicios vecinal o local");
+		elementos.put("12", "Servicios zonal");
+		elementos.put("13", "Servicios urbana");
+		elementos.put("14", "Servicios metropolitana");
+		elementos.put("15", "Dotacional vecinal o local");
+		elementos.put("16", "Dotacional zonal");
+		elementos.put("17", "Dotacional urbana");
+		elementos.put("18", "Dotacional metropolitana");
+		//		}
+		//		if (uso.equals("Industrial"))
+		//		{
+		elementos.put("19", "Industrial");
+		//		}
+		//		if (uso.equals("Vivienda"))
+		//		{
+		elementos.put("E1", "Estrato 1");
+		elementos.put("E2", "Estrato 2");
+		elementos.put("E3", "Estrato 3");
+		elementos.put("E4", "Estrato 4");
+		elementos.put("E5", "Estrato 5");
+		elementos.put("E6", "Estrato 6");
+		elementos.put("V1", "Vis Estrato 1");
+		elementos.put("V2", "Vis Estrato 2");
+		elementos.put("V3", "Vis Estrato 3");
+//		}
+
+
+		return elementos;
 	}
 
 
@@ -658,9 +774,9 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
-	private Object llamarWS(final Object infoRequest,
-			final SDHDetalleGasolina sdhConsultaWS, final String confUrl, final String confUser, final String confPass,
-			final String wsNombre, final String wsReqMet, final Logger LOG, final String nombreClase)
+	private Object llamarWS(final Object infoRequest, final SDHDetalleGasolina sdhConsultaWS, final String confUrl,
+			final String confUser, final String confPass, final String wsNombre, final String wsReqMet, final Logger LOG,
+			final String nombreClase)
 	{
 		Object responseInfo = new Object();
 

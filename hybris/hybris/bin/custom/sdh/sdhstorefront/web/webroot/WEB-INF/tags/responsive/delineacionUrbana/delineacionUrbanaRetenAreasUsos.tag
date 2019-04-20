@@ -21,21 +21,17 @@
 		<sf:form action="${delineacionUrbanaURL}" method="POST"
 			modelAttribute="dataForm" id="forma">
 
+
 			<div class="row">
 				<div class="col-md-3">
-
 					<label class="control-label" for=""> <spring:theme
 							code="delineacion.urbana.dec.areasusos.uso" />
 					</label>
-
-
 				</div>
 				<div class="col-md-3">
-
 					<label class="control-label" for=""> <spring:theme
 							code="delineacion.urbana.dec.areasusos.areauso" />
 					</label>
-
 				</div>
 				<div class="col-md-2">
 					<label class="control-label" for=""> <spring:theme
@@ -43,6 +39,17 @@
 				</div>
 			</div>
 
+
+
+
+
+
+
+
+
+
+
+			<!-- LINEA DE USO -->
 			<div class="row">
 				<div class="row areasusos">
 					<div class="col-md-3">
@@ -115,64 +122,84 @@
 				</div>
 			</div>
 
+
+
+
+
+
+
+
+
+
+
+			<!-- LINEA DE TOTAL - USO -->
 			<div class="row">
 				<div class="row total">
 					<div class="col-md-6">
 						<div class="form-group ">
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.total" />
-					</label>
+							<input id="inputareainter" class="form-control" maxlength="30"
+								value="Total" disabled></input>
 						</div>
 					</div>
-					<div class="col-md-2">
+
+					<div class="col-md-2 offset-md-3">
 						<div class="form-group ">
 							<sf:input class="form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.areaIntervenida[0].aream2" />
 						</div>
 					</div>
-
-
 				</div>
 			</div>
+
+
+
+
+
+
+
+
+
+
 			<!-- 	comienza tabla dos -->
 			<br>
 			<br>
 			<div class="row">
-				<div class="col-md-3">
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.areainve" />
-					</label>
-
-				</div>
-				<div class="col-md-3">
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.m2area" />
-					</label>
-
+				<div class="roW">
+					<div class="col-md-3">
+						<label class="control-label" for=""> <spring:theme
+								code="delineacion.urbana.dec.areasusos.areainve" />
+						</label>
+					</div>
+					<div class="col-md-3">
+						<label class="control-label" for=""> <spring:theme
+								code="delineacion.urbana.dec.areasusos.m2area" />
+						</label>
+					</div>
 				</div>
 			</div>
 
-			<c:forEach items="${infObjetoDelineacion.areaIntervenida}" var="varAreaIntervenida">
-			<div class="row">
-				<div class="col-md-3">
-					<div class="form-group ">
-											<input id="inputareainter" class="form-control" maxlength="30"
-							value="Total2" disabled></input>
+			<c:forEach items="${infObjetoDelineacion.areaIntervenida}"
+				var="varAreaIntervenida">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group ">
+							<input id="inputareainter" class="form-control" maxlength="30"
+								value="Total2" disabled></input>
 							<sf:input class="form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="varAreaIntervenida.areaInter" />
+						</div>
 					</div>
-				</div>
 
-				<div class="col-md-3">
-					<div class="form-group ">
+					<div class="col-md-3">
+						<div class="form-group ">
 							<sf:input class="form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="varAreaIntervenida.aream2" />
+						</div>
 					</div>
 				</div>
-			</div>
 			</c:forEach>
 
 			<div class="row">
