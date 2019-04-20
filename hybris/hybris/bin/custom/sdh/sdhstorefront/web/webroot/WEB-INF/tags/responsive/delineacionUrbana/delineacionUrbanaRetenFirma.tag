@@ -25,7 +25,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.tipiden" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.valCont.infoContrib.tipoDoc}" maxlength="240">
 				</div>
 			</div>
 
@@ -34,7 +34,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.numide" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.valCont.infoContrib.numDoc}" maxlength="240">
 				</div>
 			</div>
 
@@ -43,7 +43,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.nombraz" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240" disabled>
+						value="${dataForm.valCont.infoContrib.adicionales.NAME_ORG1}" maxlength="240" disabled>
 				</div>
 			</div>
 		</div>

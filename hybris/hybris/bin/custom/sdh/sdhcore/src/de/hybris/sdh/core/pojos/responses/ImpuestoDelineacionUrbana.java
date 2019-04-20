@@ -22,6 +22,25 @@ public class ImpuestoDelineacionUrbana
 	private String fechFinObra;
 	private String curaduria;
 	private String radicados;
+	private String fechaEjecutoria;
+
+	/**
+	 * @return the fechaEjecutoria
+	 */
+	public String getFechaEjecutoria()
+	{
+		return fechaEjecutoria;
+	}
+
+	/**
+	 * @param fechaEjecutoria
+	 *           the fechaEjecutoria to set
+	 */
+	public void setFechaEjecutoria(final String fechaEjecutoria)
+	{
+		this.fechaEjecutoria = fechaEjecutoria;
+	}
+
 	/**
 	 * @return the numObjeto
 	 */
@@ -29,7 +48,7 @@ public class ImpuestoDelineacionUrbana
 	{
 		return numObjeto;
 	}
-	
+
 	/**
 	 * @param numObjeto
 	 *           the numObjeto to set

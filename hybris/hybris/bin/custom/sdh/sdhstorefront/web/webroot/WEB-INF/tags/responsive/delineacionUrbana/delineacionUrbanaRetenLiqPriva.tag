@@ -29,7 +29,7 @@
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id=""
 					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
+					readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.valrete" /></label> <input id=""
 					name="" class="form-control" aria-required="true" type="text"
-					value="" maxlength="240" disabled>
+					value="${dataForm.infObjetoDelineacion.infoDeclara.totalRetencion}" maxlength="240" disabled>
 			</div>
 		</div>
 	</div>
@@ -50,7 +50,7 @@
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
 					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="" maxlength="240">
+					readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.valorPagar}" maxlength="240">
 			</div>
 		</div>
 	</div>
