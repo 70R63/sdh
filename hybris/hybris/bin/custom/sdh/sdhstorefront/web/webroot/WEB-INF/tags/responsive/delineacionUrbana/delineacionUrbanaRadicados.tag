@@ -65,7 +65,7 @@
 
 				</tbody>
 			</table>
-		</div>
+		</div> 
 	</div>
 	<sf:form action="${duURL}" method="POST" modelAttribute="dataForm" id="forma" >
 	<sf:hidden path="input.selectedCDU" id="selectedCDU" name="selectedCDU" readonly="true"/>

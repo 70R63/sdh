@@ -312,13 +312,13 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String numObjeto = "";
 
 		tipoImpuesto = "5041";
-		numBP = "766";
-		numDoc = "802007086";
-		tipoDoc = "NIT";
-		anoGravable = "2019";
+		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
+		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
+		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
+		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
 		periodo = "01";
 		clavePeriodo = "19A1";
-		dv = "4";
+		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
 		numObjeto = "00060000000000000157";
 
 
