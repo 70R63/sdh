@@ -13,6 +13,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
@@ -145,24 +146,26 @@ public class DelineacionUrbanaController extends AbstractPageController
 	{
 		System.out.println("---------------- En Delineacion urbana POST --------------------------");
 
-		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
 		final InfoObjetoDelineacionRequest infoDelineacionRequest = new InfoObjetoDelineacionRequest();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
 		final String mensajeError = "";
-		String anoGravable = "";
 		String paginaDestino = "";
 		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
-		anoGravable = gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(),
-				infoDelineacion.getInput().getSelectedCDU());
+		infObjetoDelineacionExtras.setAnoGravable(gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(),
+				infoDelineacion.getInput().getSelectedCDU()));
+		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
 
 
-		infoDelineacionRequest.setNumBP(customerModel.getNumBP());
+		infoDelineacionRequest.setNumBP(infoDelineacion.getValCont().getInfoContrib().getNumBP());
 		infoDelineacionRequest.setCdu(infoDelineacion.getInput().getSelectedCDU());
 		infoDelineacionRequest.setNumRadicado(infoDelineacion.getInput().getSelectedRadicado());
-		infoDelineacionRequest.setAnoGravable(anoGravable);
+		infoDelineacionRequest.setAnoGravable(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		infoDelineacionRequest.setTipoLicencia(infoDelineacion.getInput().getSelectedTipoLicencia());
+		//		infoDelineacionRequest.setRetencion(retencion);//pendiente de definir que iria
+		//		infoDelineacionRequest.setOpcionUso(opcionUso);//pendiente de definir que iria
 
 		System.out.println("Request para infObjeto/Delineacion: " + infoDelineacionRequest);
 		infoDelineacionResponse = gasolinaService.consultaInfoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
@@ -170,11 +173,11 @@ public class DelineacionUrbanaController extends AbstractPageController
 		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
 		{
 
-			infObjetoDelineacionExtras.setAnoGravable(anoGravable);
+
 			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
 
 			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
-			infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
+
 			infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
 		}
 		else
@@ -320,8 +323,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
 		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
 		periodo = "01";
-		clavePeriodo = gasolinaService
-				.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
+		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
 		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
 
@@ -352,12 +354,94 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/retencion", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String delineacionurbanaretencionPOST(final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String delineacionurbanaretencionPOST(@ModelAttribute("dataForm")
+	final InfoDelineacion infoDelineacion, @RequestParam(value = "action")
+	final String action, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
 	{
 		System.out.println("------------------entro al post de retencion------------------------");
 
-		return REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE;
+		final CalculoImpDelineacionRequest infoDelineacionRequest = new CalculoImpDelineacionRequest();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
+		final String mensajeError = "";
+		final String paginaDestino = "";
+		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
+
+
+
+		infoDelineacionRequest.setNumBP(infoDelineacion.getValCont().getInfoContrib().getNumBP());
+		infoDelineacionRequest.setCdu(infoDelineacion.getInput().getSelectedCDU());
+		infoDelineacionRequest.setNumRadicado(infoDelineacion.getInput().getSelectedRadicado());
+		infoDelineacionRequest.setAnoGravable(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
+		//		infoDelineacionRequest.setRetencion(retencion); //pendiente de definir que iria
+		infoDelineacionRequest.setNumForm(infoDelineacion.getInfObjetoDelineacion().getNumForm());
+		infoDelineacionRequest.setInfoDeclara(infoDelineacion.getInfObjetoDelineacion().getInfoDeclara());
+		infoDelineacionRequest.setUsos(infoDelineacion.getInfObjetoDelineacion().getUsos());
+		infoDelineacionRequest.setAreaIntervenida(infoDelineacion.getInfObjetoDelineacion().getAreaIntervenida());
+		infoDelineacionRequest.setAreaProyecto(infoDelineacion.getInfObjetoDelineacion().getAreaProyecto());
+
+		System.out.println("Request para calculoImp/Delineacion: " + infoDelineacionRequest);
+		infoDelineacionResponse = gasolinaService.calcularImpuestoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de calculoImp/Delineacion: " + infoDelineacionResponse);
+		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
+		{
+
+			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+
+			//			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
+			infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
+			infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
+		}
+		else
+		{
+			//			mensajeError = detalleContribuyente.getTxtmsj();
+			//			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+			//			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+		}
+
+
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
+		String tipoImpuesto = "";
+		String numBP = "";
+		String numDoc = "";
+		String tipoDoc = "";
+		String anoGravable = "";
+		String periodo = "";
+		String clavePeriodo = "";
+		String dv = "";
+		String numObjeto = "";
+
+		tipoImpuesto = "5041";
+		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
+		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
+		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
+		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
+		periodo = "01";
+		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
+		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
+		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(numBP);
+		infoPreviaPSE.setNumDoc(numDoc);
+		infoPreviaPSE.setTipoDoc(tipoDoc);
+		infoPreviaPSE.setAnoGravable(anoGravable);
+		infoPreviaPSE.setPeriodo(periodo);
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setNumObjeto(numObjeto);
+
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+		model.addAttribute("dataForm", infoDelineacion);
+		//		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+
+
+
+		return REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
 	}
 
 

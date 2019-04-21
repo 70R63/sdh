@@ -17,8 +17,7 @@
 		</div>
 	</div>
 
-	<sf:form action="${delineacionUrbanaURL}" method="POST"
-		modelAttribute="dataForm" id="forma">
+
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group ">
@@ -82,7 +81,7 @@
 					<label class="control-label "><spring:theme
 							code="delineacion.urbana.dec.generales.modlicencia" /></label>
 					<sf:select class="form-control" id="an" onchange="obranueva(this)"
-						path="infObjetoDelineacion.infoDeclara.tipoLicencia"
+						path="input.selectedTipoLicencia"
 						items="${dataForm.catalogos.modalidadLicencia}">
 					</sf:select>
 				</div>
@@ -108,6 +107,5 @@
 			</div>
 		</div>
 
-	</sf:form>
 </div>
 

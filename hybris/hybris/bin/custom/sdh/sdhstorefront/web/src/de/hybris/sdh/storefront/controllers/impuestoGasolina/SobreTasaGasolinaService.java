@@ -6,6 +6,7 @@ package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
@@ -1471,6 +1472,23 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
+	public InfoObjetoDelineacionResponse calcularImpuestoDelineacion(final CalculoImpDelineacionRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		InfoObjetoDelineacionResponse responseInfo = new InfoObjetoDelineacionResponse();
+		final String confUrl = "sdh.calculoImpDelineacion.url";
+		final String confUser = "sdh.calculoImpDelineacion.user";
+		final String confPass = "sdh.calculoImpDelineacion.password";
+		final String wsNombre = "calculoImp_Delineacion";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse";
+
+		responseInfo = (InfoObjetoDelineacionResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
 
 	/**
 	 * @param infoDelineacionResponse
@@ -1543,6 +1561,16 @@ public class SobreTasaGasolinaService
 		}
 
 
+	}
+
+	public static String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
 	}
 
 

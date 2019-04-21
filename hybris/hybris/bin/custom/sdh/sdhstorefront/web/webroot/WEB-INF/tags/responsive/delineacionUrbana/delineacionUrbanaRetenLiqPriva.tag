@@ -8,8 +8,6 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<spring:url value="/contribuyentes/delineacion-urbana" var="duURL"
-	htmlEscape="false" />
 
 
 <div class="container">
@@ -56,13 +54,10 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<sf:form action="${duURL}" method="POST" modelAttribute="dataForm"
-				id="forma">
 				<sf:button class="btn btn-primary btn-lg" name="action"
-					id="retenciondelibutton1" value="retencion" disabled="false">
+					id="calcular" value="calcular" disabled="false">
 					<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
 				</sf:button>
-			</sf:form>
 		</div>
 	</div>
 </div>

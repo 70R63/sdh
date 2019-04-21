@@ -20,8 +20,26 @@ public class InfoDelineacion
 	private RadicaDelinResponse radicaDelin;
 	private InfoDelineacionInput input;
 	private InfoObjetoDelineacionResponse infObjetoDelineacion;
+	private InfoObjetoDelineacionResponse calculoImpDelineacion;
 	private InfoObjetoDelineacionExtras infObjetoDelineacionExtras;
 	private SobreTasaGasolinaCatalogos catalogos;
+
+	/**
+	 * @return the calculoImpDelineacion
+	 */
+	public InfoObjetoDelineacionResponse getCalculoImpDelineacion()
+	{
+		return calculoImpDelineacion;
+	}
+
+	/**
+	 * @param calculoImpDelineacion
+	 *           the calculoImpDelineacion to set
+	 */
+	public void setCalculoImpDelineacion(final InfoObjetoDelineacionResponse calculoImpDelineacion)
+	{
+		this.calculoImpDelineacion = calculoImpDelineacion;
+	}
 
 	/**
 	 * @return the catalogos

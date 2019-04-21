@@ -18,111 +18,23 @@
 	</div>
 
 	<div class="col-md-12">
-		<sf:form action="${delineacionUrbanaURL}" method="POST"
-			modelAttribute="dataForm" id="forma">
 
-
-			<div class="row">
-				<div class="col-md-3">
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.uso" />
-					</label>
-				</div>
-				<div class="col-md-3">
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.areauso" />
-					</label>
-				</div>
-				<div class="col-md-2">
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.netuso" /></label>
-				</div>
+		<div class="row">
+			<div class="col-md-3">
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.uso" />
+				</label>
 			</div>
-
-
-
-
-
-
-
-
-
-
-
-			<!-- LINEA DE USO -->
-			<c:forEach items="${dataForm.infObjetoDelineacion.usos}" var="info"
-				varStatus="loop">
-				<div class="row">
-					<div class="row areasusos">
-						<div class="col-md-3">
-							<div class="form-group ">
-								<sf:select path="infObjetoDelineacion.usos[${loop.index}].Uso"
-									items="${dataForm.catalogos.uso}"
-									referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select>
-							</div>
-
-						</div>
-
-						<div class="col-md-3">
-							<div class="form-group ">
-								<sf:select
-									path="infObjetoDelineacion.usos[${loop.index}].codUso"
-									items="${dataForm.catalogos.codUso}"
-									referenceData="${dataForm.catalogos.codUso}"
-									class="form-control"></sf:select>
-							</div>
-						</div>
-
-
-						<div class="col-md-2">
-							<div class="form-group ">
-								<sf:input class="form-control" readonly="false"
-									aria-required="true" maxlength="240"
-									path="infObjetoDelineacion.usos[${loop.index}].areaNeta" />
-							</div>
-						</div>
-
-
-						<div class="col-md-1">
-							<div class="form-group ">
-								<img onclick="addinfoareuso()"
-									src="${themeResourcePath}/images/adddelineacion.png"
-									style="width: 25px"></img> <img onclick="deleinfoareuso()"
-									src="${themeResourcePath}/images/deledelineacion.png"
-									style="width: 25px"></img>
-							</div>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-
-
-
-
-
-
-
-
-
-
-			<!-- LINEA DE TOTAL - USO -->
-			<div class="row">
-				<div class="row total">
-					<div class="col-md-6">
-						<div class="form-group ">
-							<input id="inputareainter" class="form-control" maxlength="30"
-								value="Total" disabled></input>
-						</div>
-					</div>
-
-					<div class="col-md-2 offset-md-3">
-						<div class="form-group ">
-							<input id="inputareainter" class="form-control" maxlength="30"
-								value=""></input>
-						</div>
-					</div>
-				</div>
+			<div class="col-md-3">
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.areauso" />
+				</label>
 			</div>
+			<div class="col-md-2">
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.netuso" /></label>
+			</div>
+		</div>
 
 
 
@@ -133,159 +45,240 @@
 
 
 
-			<!-- 	comienza tabla dos -->
-			<br>
-			<br>
+
+		<!-- LINEA DE USO -->
+		<c:forEach items="${dataForm.infObjetoDelineacion.usos}" var="info"
+			varStatus="loop">
 			<div class="row">
-				<div class="row">
-					<div class="col-md-5">
-						<label class="control-label" for=""> <spring:theme
-								code="delineacion.urbana.dec.areasusos.areainve" />
-						</label>
-					</div>
+				<div class="row areasusos">
 					<div class="col-md-3">
-						<label class="control-label" for=""> <spring:theme
-								code="delineacion.urbana.dec.areasusos.m2area" />
-						</label>
-					</div>
-				</div>
-			</div>
-
-			<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
-				var="varAreaIntervenida" varStatus="loop">
-				<div class="row">
-					<div class="col-md-5">
 						<div class="form-group ">
-							<sf:select
-								path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
-								items="${dataForm.catalogos.areaInter}"
-								referenceData="${dataForm.catalogos.areaInter}"
+							<sf:select path="infObjetoDelineacion.usos[${loop.index}].Uso"
+								items="${dataForm.catalogos.uso}"
+								referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select>
+						</div>
+
+					</div>
+
+					<div class="col-md-3">
+						<div class="form-group ">
+							<sf:select path="infObjetoDelineacion.usos[${loop.index}].codUso"
+								items="${dataForm.catalogos.codUso}"
+								referenceData="${dataForm.catalogos.codUso}"
 								class="form-control"></sf:select>
 						</div>
+					</div>
+
+
+					<div class="col-md-2">
+						<div class="form-group ">
+							<sf:input class="form-control" readonly="false"
+								aria-required="true" maxlength="240"
+								path="infObjetoDelineacion.usos[${loop.index}].areaNeta" />
+						</div>
+					</div>
+
+
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addinfoareuso()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deleinfoareuso()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+
+
+
+
+
+
+
+
+
+
+		<!-- LINEA DE TOTAL - USO -->
+		<div class="row">
+			<div class="row total">
+				<div class="col-md-6">
+					<div class="form-group ">
+						<input id="inputareainter" class="form-control" maxlength="30"
+							value="Total" disabled></input>
+					</div>
+				</div>
+
+				<div class="col-md-2 offset-md-3">
+					<div class="form-group ">
+						<input id="inputareainter" class="form-control" maxlength="30"
+							value=""></input>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+		<!-- 	comienza tabla dos -->
+		<br> <br>
+		<div class="row">
+			<div class="row">
+				<div class="col-md-5">
+					<label class="control-label" for=""> <spring:theme
+							code="delineacion.urbana.dec.areasusos.areainve" />
+					</label>
+				</div>
+				<div class="col-md-3">
+					<label class="control-label" for=""> <spring:theme
+							code="delineacion.urbana.dec.areasusos.m2area" />
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
+			var="varAreaIntervenida" varStatus="loop">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group ">
+						<sf:select
+							path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
+							items="${dataForm.catalogos.areaInter}"
+							referenceData="${dataForm.catalogos.areaInter}"
+							class="form-control"></sf:select>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="form-group ">
+						<sf:input class="form-control" readonly="false"
+							aria-required="true" maxlength="240"
+							path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2" />
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+
+		<div class="row">
+			<div class="col-md-5 areausosdos">
+				<div class="form-group ">
+					<select class="form-control sel5">
+						<option value="Seleccionar">Seleccionar</option>
+						<option value="Obra nueva">Obra nueva</option>
+						<option value="Ampliada">Ampliada</option>
+						<option value="Modificada">Modificada</option>
+						<option value="Adecuada">Adecuada</option>
+						<option value="Reconocimiento">Reconocimiento</option>
+						<option value="Conservación/Restaruación">Conservación/Restaruación</option>
+						<option value="Reforzamiento estructural">Reforzamiento
+							estructural</option>
+						<option value="Demolición">Demolición</option>
+						<option value="Metros lineales Cerramiento">Metros
+							lineales Cerramiento</option>
+						<option value="Reconocimiento">Reconocimiento</option>
+						<option value="Obra">Obra</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group input5">
+					<input id="inputareainter" class="form-control" maxlength="30"
+						value=""></input>
+				</div>
+			</div>
+			<div class="col-md-1">
+				<div class="form-group ">
+					<img onclick="addinfoareuso3()"
+						src="${themeResourcePath}/images/adddelineacion.png"
+						style="width: 25px"></img> <img onclick="deleinfoareusotable3()"
+						src="${themeResourcePath}/images/deledelineacion.png"
+						style="width: 25px"></img>
+				</div>
+			</div>
+		</div>
+
+		<!-- 	comienza tabla tres -->
+		<br> <br>
+		<div class="row">
+			<div class="col-md-3">
+
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.areaproyin" />
+				</label>
+			</div>
+			<div class="col-md-3">
+
+				<label class="control-label" for=""> <spring:theme
+						code="delineacion.urbana.dec.areasusos.aream2" />
+				</label>
+
+			</div>
+		</div>
+
+
+		<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
+			var="varAreaIntervenida" varStatus="loop">
+			<div class="row">
+				<div class="row arearquitec">
+					<div class="col-md-3">
+						<div class="form-group ">
+							<sf:select
+								path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
+								items="${dataForm.catalogos.areaProy}"
+								referenceData="${dataForm.catalogos.areaProy}"
+								class="form-control"></sf:select>
+						</div>
+
 					</div>
 
 					<div class="col-md-3">
 						<div class="form-group ">
 							<sf:input class="form-control" readonly="false"
 								aria-required="true" maxlength="240"
-								path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2" />
+								path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
 						</div>
 					</div>
-				</div>
-			</c:forEach>
 
-			<div class="row">
-				<div class="col-md-5 areausosdos">
-					<div class="form-group ">
-						<select class="form-control sel5">
-							<option value="Seleccionar">Seleccionar</option>
-							<option value="Obra nueva">Obra nueva</option>
-							<option value="Ampliada">Ampliada</option>
-							<option value="Modificada">Modificada</option>
-							<option value="Adecuada">Adecuada</option>
-							<option value="Reconocimiento">Reconocimiento</option>
-							<option value="Conservación/Restaruación">Conservación/Restaruación</option>
-							<option value="Reforzamiento estructural">Reforzamiento
-								estructural</option>
-							<option value="Demolición">Demolición</option>
-							<option value="Metros lineales Cerramiento">Metros
-								lineales Cerramiento</option>
-							<option value="Reconocimiento">Reconocimiento</option>
-							<option value="Obra">Obra</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="col-md-3">
-					<div class="form-group input5">
-						<input id="inputareainter" class="form-control" maxlength="30"
-							value=""></input>
-					</div>
-				</div>
-				<div class="col-md-1">
-					<div class="form-group ">
-						<img onclick="addinfoareuso3()"
-							src="${themeResourcePath}/images/adddelineacion.png"
-							style="width: 25px"></img> <img onclick="deleinfoareusotable3()"
-							src="${themeResourcePath}/images/deledelineacion.png"
-							style="width: 25px"></img>
-					</div>
-				</div>
-			</div>
-
-			<!-- 	comienza tabla tres -->
-			<br>
-			<br>
-			<div class="row">
-				<div class="col-md-3">
-
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.areaproyin" />
-					</label>
-				</div>
-				<div class="col-md-3">
-
-					<label class="control-label" for=""> <spring:theme
-							code="delineacion.urbana.dec.areasusos.aream2" />
-					</label>
-
-				</div>
-			</div>
-
-
-			<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
-				var="varAreaIntervenida" varStatus="loop">
-				<div class="row">
-					<div class="row arearquitec">
-						<div class="col-md-3">
-							<div class="form-group ">
-								<sf:select
-									path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
-									items="${dataForm.catalogos.areaProy}"
-									referenceData="${dataForm.catalogos.areaProy}"
-									class="form-control"></sf:select>
-							</div>
-
-						</div>
-
-						<div class="col-md-3">
-							<div class="form-group ">
-								<sf:input class="form-control" readonly="false"
-									aria-required="true" maxlength="240"
-									path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
-							</div>
-						</div>
-
-						<div class="col-md-1">
-							<div class="form-group ">
-								<img onclick="addinfoareusotable2()"
-									src="${themeResourcePath}/images/adddelineacion.png"
-									style="width: 25px"></img> <img
-									onclick="deleinfoareusotable2()"
-									src="${themeResourcePath}/images/deledelineacion.png"
-									style="width: 25px"></img>
-							</div>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-
-			<div class="row">
-				<div class="row totalnew">
-					<div class="col-md-3">
+					<div class="col-md-1">
 						<div class="form-group ">
-							<input class="form-control" maxlength="30" value="Total" disabled></input>
-						</div>
-					</div>
-
-					<div class="col-md-3">
-						<div class="form-group ">
-							<input class="form-control" maxlength="30" value=""></input>
+							<img onclick="addinfoareusotable2()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
 						</div>
 					</div>
 				</div>
 			</div>
-		</sf:form>
+		</c:forEach>
+
+		<div class="row">
+			<div class="row totalnew">
+				<div class="col-md-3">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value="Total" disabled></input>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="form-group ">
+						<input class="form-control" maxlength="30" value=""></input>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>
 
