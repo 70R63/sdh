@@ -1,6 +1,6 @@
 ACC.duBotonVer = {
 
-	_autoload : [ "bindLabelVerButton" ],
+	_autoload : [ "bindLabelVerButton","bindCheckBoxSelect" ],
 
 	
 	bindLabelVerButton : function() {
@@ -8,18 +8,18 @@ ACC.duBotonVer = {
 			e.preventDefault();
 			
 
- 	       var tipoValla = $.trim($(this).attr("data-cdu")); 	       
+ 	       var valorCDU = $.trim($(this).attr("data-cdu")); 	       
 
- 	       if (tipoValla == "") {
+ 	       if (valorCDU == "") {
 				alert("Por favor, selecciona un CDU");
 				return;
 			}
 
-			$("#selectedTipoValla").val(tipoValla);
+			$("#selectedCDU").val(valorCDU);
 
 			var data = {};
 
-			data.cdu = tipoValla;
+			data.cdu = valorCDU;
 
 			$.ajax({
 				url : ACC.radicaDelinDetallesURL,
@@ -37,8 +37,6 @@ ACC.duBotonVer = {
 	
 	fillFieldsFromData : function(data) {
 
-		var tipoValla = $("#selectedTipoValla").val();
-
 		$("#divInfoRadicados").show();	
 		$("#duRadicados").find("tr:gt(0)").remove();
 		$.each(data.radicados, function (index,value){
@@ -48,9 +46,23 @@ ACC.duBotonVer = {
 					 '<td><input id="modLicencia" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.modLicencia + '"></td>"' +
 					 '<td><input id="presupuesto" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.presupuesto + '"></td>"' +
 					 '<td><input id="estrato" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.estrato + '"></td>"' +
-					 '<td><input class="inputtextnew" style="visibility: visible !important; width: 20% !important" type="checkbox" id="selec"></td> '+ 
+					 '<td><input class="inputtextnew selectRadicado" style="visibility: visible !important; width: 20% !important" type="checkbox"  data-numradicado="' + value.numRadicado + '" data-modlicencia="' + value.modLicencia +'" ></td> '+ 
 					 "</tr>");	
 		})
+	},
+	
+	
+	bindCheckBoxSelect : function() {
+		$(document).on("click", ".selectRadicado", function(e) {
+			e.preventDefault();
+			
+ 	       var valorNumRadicado = $.trim($(this).attr("data-numradicado")); 	       
+ 	       var valorModLicencia = $.trim($(this).attr("data-modlicencia")); 	       
+
+ 	       $("#selectedRadicado").val(valorNumRadicado);
+ 	       $("#selectedTipoLicencia").val(valorModLicencia);
+
+		});
 	}
 
 
