@@ -1448,7 +1448,7 @@ public class SobreTasaGasolinaService
 		{
 			if (list.get(i).getCdu().equals(cdu))
 			{
-				anoGravable = list.get(i).getFechaExp().substring(0, 4);
+				anoGravable = list.get(i).getFechaExp().substring(6);
 			}
 		}
 
