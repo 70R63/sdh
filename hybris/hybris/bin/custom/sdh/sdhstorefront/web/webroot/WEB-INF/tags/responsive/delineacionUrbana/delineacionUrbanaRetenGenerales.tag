@@ -48,7 +48,7 @@
 							code="delineacion.urbana.dec.generales.radic" /></label>
 					<sf:input class="form-control" readonly="true" aria-required="true"
 						maxlength="240"
-						path="infObjetoDelineacion.infoDeclara.numRadicado" />
+						path="input.selectedRadicado" />
 				</div>
 			</div>
 

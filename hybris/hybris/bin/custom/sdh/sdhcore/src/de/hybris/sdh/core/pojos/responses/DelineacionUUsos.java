@@ -101,6 +101,18 @@ public class DelineacionUUsos
 		this.areaNeta = areaNeta;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DelineacionUUsos [codUso=" + codUso + ", numUnidad=" + numUnidad + ", Uso=" + Uso + ", usoCatalogo=" + usoCatalogo
+				+ ", areaNeta=" + areaNeta + "]";
+	}
+
 
 
 }

@@ -1531,28 +1531,29 @@ public class SobreTasaGasolinaService
 
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put("Comercio vecinal o local", "Comercio");
-		elementos.put("Comercio zonal", "Comercio");
-		elementos.put("Comercio urbano", "Comercio");
-		elementos.put("Comercio metropolitano", "Comercio");
-		elementos.put("Servicios vecinal o local", "Servicios");
-		elementos.put("Servicios zonal", "Servicios");
-		elementos.put("Servicios urbana", "Servicios");
-		elementos.put("Servicios metropolitana", "Servicios");
-		elementos.put("Dotacional vecinal o local", "Servicios");
-		elementos.put("Dotacional zonal", "Servicios");
-		elementos.put("Dotacional urbana", "Servicios");
-		elementos.put("Dotacional metropolitana", "Servicios");
-		elementos.put("Industrial", "Industrial");
-		elementos.put("Estrato 1", "Vivienda");
-		elementos.put("Estrato 2", "Vivienda");
-		elementos.put("Estrato 3", "Vivienda");
-		elementos.put("Estrato 4", "Vivienda");
-		elementos.put("Estrato 5", "Vivienda");
-		elementos.put("Estrato 6", "Vivienda");
-		elementos.put("Vis Estrato 1", "Vivienda");
-		elementos.put("Vis Estrato 2", "Vivienda");
-		elementos.put("Vis Estrato 3", "Vivienda");
+
+		elementos.put("07", "01");
+		elementos.put("08", "01");
+		elementos.put("09", "01");
+		elementos.put("10", "01");
+		elementos.put("11", "02");
+		elementos.put("12", "02");
+		elementos.put("13", "02");
+		elementos.put("14", "02");
+		elementos.put("15", "02");
+		elementos.put("16", "02");
+		elementos.put("17", "02");
+		elementos.put("18", "02");
+		elementos.put("19", "04");
+		elementos.put("E1", "05");
+		elementos.put("E2", "05");
+		elementos.put("E3", "05");
+		elementos.put("E4", "05");
+		elementos.put("E5", "05");
+		elementos.put("E6", "05");
+		elementos.put("V1", "05");
+		elementos.put("V2", "05");
+		elementos.put("V3", "05");
 
 		final List<DelineacionUUsos> usos = infoDelineacionResponse.getUsos();
 		for (int i = 0; i < usos.size(); i++)

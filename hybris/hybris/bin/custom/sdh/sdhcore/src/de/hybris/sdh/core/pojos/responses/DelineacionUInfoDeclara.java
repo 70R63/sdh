@@ -30,16 +30,73 @@ public class DelineacionUInfoDeclara
 	private String interesMora;
 	private String saldoFavor;
 	private String saldoImpCargo;
+	private String totalUsos;
+	private String totalAreap;
+	private String totalAreai;
 
 	//	private String fechaFinObra; //se utiliza en el response de calculo de impuesto
 	//	private String causalExep; //se utiliza en el response de calculo de impuesto
 	//	private String interesesMora; //se utiliza en el response de calculo de impuesto
+
+
+
 	/**
 	 * @return the fechaEjecutaria
 	 */
 	public String getFechaEjecutaria()
 	{
 		return fechaEjecutaria;
+	}
+
+	/**
+	 * @return the totalUsos
+	 */
+	public String getTotalUsos()
+	{
+		return totalUsos;
+	}
+
+	/**
+	 * @param totalUsos
+	 *           the totalUsos to set
+	 */
+	public void setTotalUsos(final String totalUsos)
+	{
+		this.totalUsos = totalUsos;
+	}
+
+	/**
+	 * @return the totalAreap
+	 */
+	public String getTotalAreap()
+	{
+		return totalAreap;
+	}
+
+	/**
+	 * @param totalAreap
+	 *           the totalAreap to set
+	 */
+	public void setTotalAreap(final String totalAreap)
+	{
+		this.totalAreap = totalAreap;
+	}
+
+	/**
+	 * @return the totalAreai
+	 */
+	public String getTotalAreai()
+	{
+		return totalAreai;
+	}
+
+	/**
+	 * @param totalAreai
+	 *           the totalAreai to set
+	 */
+	public void setTotalAreai(final String totalAreai)
+	{
+		this.totalAreai = totalAreai;
 	}
 
 	/**
@@ -410,6 +467,24 @@ public class DelineacionUInfoDeclara
 	{
 		this.interesMora = interesesMora;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DelineacionUInfoDeclara [fechaEjecutaria=" + fechaEjecutaria + ", fechaUltAbono=" + fechaUltAbono
+				+ ", fechaFinalObra=" + fechaFinalObra + ", cdu=" + cdu + ", numRadicado=" + numRadicado + ", objetoLicen="
+				+ objetoLicen + ", opcionUso=" + opcionUso + ", causalExcep=" + causalExcep + ", presupuestoObra=" + presupuestoObra
+				+ ", tipoLicencia=" + tipoLicencia + ", totalPagar=" + totalPagar + ", totalPresupuesto=" + totalPresupuesto
+				+ ", totalRetencion=" + totalRetencion + ", valorPagar=" + valorPagar + ", valorEjecutado=" + valorEjecutado
+				+ ", impuestoCargo=" + impuestoCargo + ", valorSancion=" + valorSancion + ", interesMora=" + interesMora
+				+ ", saldoFavor=" + saldoFavor + ", saldoImpCargo=" + saldoImpCargo + ", totalUsos=" + totalUsos + ", totalAreap="
+				+ totalAreap + ", totalAreai=" + totalAreai + "]";
+	}
+
+
 
 
 }

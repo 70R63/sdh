@@ -53,7 +53,8 @@
 				<div class="row areasusos">
 					<div class="col-md-3">
 						<div class="form-group ">
-							<sf:select path="infObjetoDelineacion.usos[${loop.index}].Uso"
+							<sf:select
+								path="infObjetoDelineacion.usos[${loop.index}].usoCatalogo"
 								items="${dataForm.catalogos.uso}"
 								referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select>
 						</div>
@@ -114,7 +115,7 @@
 				<div class="col-md-2 offset-md-3">
 					<div class="form-group ">
 						<input id="inputareainter" class="form-control" maxlength="30"
-							value=""></input>
+							value="${dataForm.infObjetoDelineacion.infoDeclara.totalUsos}"></input>
 					</div>
 				</div>
 			</div>
@@ -166,47 +167,43 @@
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2" />
 					</div>
 				</div>
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addinfoareuso3()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deleinfoareusotable3()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
+					</div>
+				</div>
 			</div>
+
 		</c:forEach>
 
-		<div class="row">
-			<div class="col-md-5 areausosdos">
-				<div class="form-group ">
-					<select class="form-control sel5">
-						<option value="Seleccionar">Seleccionar</option>
-						<option value="Obra nueva">Obra nueva</option>
-						<option value="Ampliada">Ampliada</option>
-						<option value="Modificada">Modificada</option>
-						<option value="Adecuada">Adecuada</option>
-						<option value="Reconocimiento">Reconocimiento</option>
-						<option value="Conservación/Restaruación">Conservación/Restaruación</option>
-						<option value="Reforzamiento estructural">Reforzamiento
-							estructural</option>
-						<option value="Demolición">Demolición</option>
-						<option value="Metros lineales Cerramiento">Metros
-							lineales Cerramiento</option>
-						<option value="Reconocimiento">Reconocimiento</option>
-						<option value="Obra">Obra</option>
-					</select>
-				</div>
-			</div>
 
-			<div class="col-md-3">
-				<div class="form-group input5">
-					<input id="inputareainter" class="form-control" maxlength="30"
-						value=""></input>
+		<div class="row">
+			<div class="row total">
+				<div class="col-md-5">
+					<div class="form-group ">
+						<input id="inputareainter" class="form-control" maxlength="30"
+							value="Total" disabled></input>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addinfoareuso3()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img> <img onclick="deleinfoareusotable3()"
-						src="${themeResourcePath}/images/deledelineacion.png"
-						style="width: 25px"></img>
+
+				<div class="col-md-3 offset-md-3">
+					<div class="form-group ">
+						<input id="inputareainter" class="form-control" maxlength="30"
+							value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreai}"></input>
+					</div>
 				</div>
 			</div>
 		</div>
+
+
+
+
+
+
 
 		<!-- 	comienza tabla tres -->
 		<br> <br>
@@ -273,7 +270,8 @@
 
 				<div class="col-md-3">
 					<div class="form-group ">
-						<input class="form-control" maxlength="30" value=""></input>
+						<input class="form-control" maxlength="30"
+							value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}"></input>
 					</div>
 				</div>
 			</div>

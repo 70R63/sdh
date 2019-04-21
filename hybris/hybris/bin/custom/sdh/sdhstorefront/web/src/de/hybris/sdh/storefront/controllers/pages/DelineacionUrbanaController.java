@@ -154,6 +154,18 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String paginaDestino = "";
 		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
+		if (action.equals("retencion"))
+		{
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
+			infoDelineacion.getInput().setTipoFlujo("R");
+		}
+		if (action.equals("declaracion"))
+		{
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
+			infoDelineacion.getInput().setTipoFlujo("D");
+		}
+
+
 		infObjetoDelineacionExtras.setAnoGravable(gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(),
 				infoDelineacion.getInput().getSelectedCDU()));
 		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
@@ -189,16 +201,6 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 
 		model.addAttribute("dataForm", infoDelineacion);
-
-		if (action.equals("retencion"))
-		{
-			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
-		}
-		if (action.equals("declaracion"))
-		{
-			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
-
-		}
 
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
@@ -317,7 +319,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		tipoImpuesto = "5041";
+		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo() == "R" ? "2332" : "2306";
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
@@ -366,7 +368,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
 		final String mensajeError = "";
 		final String paginaDestino = "";
-		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
+		//		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
 
 
@@ -382,7 +384,17 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoDelineacionRequest.setAreaProyecto(infoDelineacion.getInfObjetoDelineacion().getAreaProyecto());
 
 		System.out.println("Request para calculoImp/Delineacion: " + infoDelineacionRequest);
-		infoDelineacionResponse = gasolinaService.calcularImpuestoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
+		try
+		{
+			infoDelineacionResponse = gasolinaService.calcularImpuestoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
+
+		}
+		catch (final Exception e)
+		{
+			//						mensajeError = infoDelineacionResponse.getErrores();
+			LOG.error("Error al leer informacion de calculo de Delineacion: " + mensajeError);
+			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+		}
 		System.out.println("Response de calculoImp/Delineacion: " + infoDelineacionResponse);
 		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
 		{
@@ -390,7 +402,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
 
 			//			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
-			infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
+			//			infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
 			infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
 		}
 		else
@@ -413,7 +425,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		tipoImpuesto = "5041";
+		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo() == "R" ? "2332" : "2306";
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
