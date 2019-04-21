@@ -12,6 +12,7 @@ import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
+import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
@@ -26,6 +27,7 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
+import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 
 import java.util.ArrayList;
@@ -150,16 +152,13 @@ public class SobreTasaGasolinaService
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put("00", "Seleccionar");
-		elementos.put("01", "Obra nueva");
-		elementos.put("02", "Ampliación");
-		elementos.put("03", "Modificación");
-		elementos.put("04", "Adecuación");
-		elementos.put("05", "Reforzamiento");
-		elementos.put("06", "Restauración/conservación");
-		elementos.put("07", "Demolición");
-		elementos.put("08", "Cerramiento");
-		elementos.put("09", "Reconocimiento");
+		elementos.put("00", "Lote");
+		elementos.put("01", "Sótano(s)");
+		elementos.put("02", "Semisótano");
+		elementos.put("03", "Primer Piso");
+		elementos.put("04", "Pisos Restantes");
+		elementos.put("05", "Libre Primer Piso");
+
 
 		return elementos;
 	}
@@ -248,7 +247,7 @@ public class SobreTasaGasolinaService
 		elementos.put("V1", "Vis Estrato 1");
 		elementos.put("V2", "Vis Estrato 2");
 		elementos.put("V3", "Vis Estrato 3");
-//		}
+		//		}
 
 
 		return elementos;
@@ -1482,6 +1481,68 @@ public class SobreTasaGasolinaService
 
 
 		return false;
+	}
+
+
+	/**
+	 * @param infoDelineacion
+	 */
+	public String obtenerNumeroObjetoDU(final InfoDelineacion infoDelineacion)
+	{
+		String numObjeto = "";
+		final List<ImpuestoDelineacionUrbana> dealineaciones = infoDelineacion.getValCont().getDelineacion();
+		final String cduSeleccionado = infoDelineacion.getInput().getSelectedCDU();
+
+		for (int i = 0; i < dealineaciones.size(); i++)
+		{
+			if (dealineaciones.get(i).getCdu().equals(cduSeleccionado))
+			{
+				numObjeto = dealineaciones.get(i).getNumObjeto();
+			}
+		}
+
+		return numObjeto;
+	}
+
+
+	/**
+	 * @param infoDelineacionResponse
+	 */
+	public void prepararValorUsoDU(final InfoObjetoDelineacionResponse infoDelineacionResponse)
+	{
+
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("Comercio vecinal o local", "Comercio");
+		elementos.put("Comercio zonal", "Comercio");
+		elementos.put("Comercio urbano", "Comercio");
+		elementos.put("Comercio metropolitano", "Comercio");
+		elementos.put("Servicios vecinal o local", "Servicios");
+		elementos.put("Servicios zonal", "Servicios");
+		elementos.put("Servicios urbana", "Servicios");
+		elementos.put("Servicios metropolitana", "Servicios");
+		elementos.put("Dotacional vecinal o local", "Servicios");
+		elementos.put("Dotacional zonal", "Servicios");
+		elementos.put("Dotacional urbana", "Servicios");
+		elementos.put("Dotacional metropolitana", "Servicios");
+		elementos.put("Industrial", "Industrial");
+		elementos.put("Estrato 1", "Vivienda");
+		elementos.put("Estrato 2", "Vivienda");
+		elementos.put("Estrato 3", "Vivienda");
+		elementos.put("Estrato 4", "Vivienda");
+		elementos.put("Estrato 5", "Vivienda");
+		elementos.put("Estrato 6", "Vivienda");
+		elementos.put("Vis Estrato 1", "Vivienda");
+		elementos.put("Vis Estrato 2", "Vivienda");
+		elementos.put("Vis Estrato 3", "Vivienda");
+
+		final List<DelineacionUUsos> usos = infoDelineacionResponse.getUsos();
+		for (int i = 0; i < usos.size(); i++)
+		{
+			usos.get(i).setUsoCatalogo(elementos.get(usos.get(i).getCodUso()));
+		}
+
+
 	}
 
 

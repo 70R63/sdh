@@ -171,6 +171,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		{
 
 			infObjetoDelineacionExtras.setAnoGravable(anoGravable);
+			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
 
 			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
 			infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
@@ -296,6 +297,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 	public String delineacionUrbanaretencionGET(@ModelAttribute("dataForm")
 	final InfoDelineacion infoDelineacion, final Model model) throws CMSItemNotFoundException
 	{
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+
 		System.out.println("---------------- Hola entro a retencion delineacion --------------------------");
 
 
@@ -317,9 +320,10 @@ public class DelineacionUrbanaController extends AbstractPageController
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
 		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
 		periodo = "01";
-		clavePeriodo = "19A1";
+		clavePeriodo = gasolinaService
+				.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
-		numObjeto = "00060000000000000157";
+		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
 
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);

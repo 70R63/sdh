@@ -50,78 +50,51 @@
 
 
 			<!-- LINEA DE USO -->
-			<div class="row">
-				<div class="row areasusos">
-					<div class="col-md-3">
-						<div class="form-group ">
-							<select class="form-control select1">
-								<option value="">Seleccionar</option>
-								<option value="1">Vivienda</option>
-								<option value="2">Comercio</option>
-								<option value="3">Servicios</option>
-								<option value="4">Dot/Instituc</option>
-								<option value="5">Industria</option>
-								<option value="6">Otros</option>
-							</select>
+			<c:forEach items="${dataForm.infObjetoDelineacion.usos}" var="info"
+				varStatus="loop">
+				<div class="row">
+					<div class="row areasusos">
+						<div class="col-md-3">
+							<div class="form-group ">
+								<sf:select path="infObjetoDelineacion.usos[${loop.index}].Uso"
+									items="${dataForm.catalogos.uso}"
+									referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select>
+							</div>
+
 						</div>
 
-					</div>
-
-					<div class="col-md-3">
-						<div class="form-group ">
-							<select class="form-control select2">
-								<option value="Seleccionar">Seleccionar</option>
-								<option value="Vivienda estrato 1">Vivienda estrato 1</option>
-								<option value="Vivienda estrato 2">Vivienda estrato 2</option>
-								<option value="Vivienda estrato 3">Vivienda estrato 3</option>
-								<option value="Vivienda estrato 4">Vivienda estrato 4</option>
-								<option value="Vivienda estrato 5">Vivienda estrato 5</option>
-								<option value="Comercio Metropolitano">Comercio
-									Metropolitano</option>
-								<option value="Comercio Vecinal o Local">Comercio
-									Vecinal o Local</option>
-								<option value="comercio Zonal">Comercio Zonal</option>
-								<option value="Comercio Urbano">Comercio Urbano</option>
-								<option value="Servicios Metropolitano">Servicios
-									Metropolitano</option>
-								<option value="Servicios Vecinal o Local">Servicios
-									Vecinal o Local</option>
-								<option value="Servicios Zonal">Servicios Zonal</option>
-								<option value="Servicios Urbano">Servicios Urbano</option>
-								<option value="Dotacional Metropolitano">Dotacional
-									Metropolitano</option>
-								<option value="Dotacional Vecinal o Local">Dotacional
-									Vecinal o Local</option>
-								<option value="Dotacional Zonal">Dotacional Zonal</option>
-								<option value="Dotacional Urbano">Dotacional Urbano</option>
-								<option value="Industrial">Industrial</option>
-							</select>
+						<div class="col-md-3">
+							<div class="form-group ">
+								<sf:select
+									path="infObjetoDelineacion.usos[${loop.index}].codUso"
+									items="${dataForm.catalogos.codUso}"
+									referenceData="${dataForm.catalogos.codUso}"
+									class="form-control"></sf:select>
+							</div>
 						</div>
-					</div>
 
 
-					<div class="col-md-2">
-						<div class="form-group ">
-							<sf:input class="form-control" readonly="false"
-								aria-required="true" maxlength="240"
-								path="infObjetoDelineacion.usos[0].areaNeta" />
+						<div class="col-md-2">
+							<div class="form-group ">
+								<sf:input class="form-control" readonly="false"
+									aria-required="true" maxlength="240"
+									path="infObjetoDelineacion.usos[${loop.index}].areaNeta" />
+							</div>
 						</div>
-					</div>
 
 
-
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addinfoareuso()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareuso()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
+						<div class="col-md-1">
+							<div class="form-group ">
+								<img onclick="addinfoareuso()"
+									src="${themeResourcePath}/images/adddelineacion.png"
+									style="width: 25px"></img> <img onclick="deleinfoareuso()"
+									src="${themeResourcePath}/images/deledelineacion.png"
+									style="width: 25px"></img>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
+			</c:forEach>
 
 
 
@@ -144,9 +117,8 @@
 
 					<div class="col-md-2 offset-md-3">
 						<div class="form-group ">
-							<sf:input class="form-control" readonly="false"
-								aria-required="true" maxlength="240"
-								path="infObjetoDelineacion.areaIntervenida[0].aream2" />
+							<input id="inputareainter" class="form-control" maxlength="30"
+								value=""></input>
 						</div>
 					</div>
 				</div>
@@ -179,16 +151,16 @@
 				</div>
 			</div>
 
-			<c:forEach items="${infObjetoDelineacion.areaIntervenida}"
-				var="varAreaIntervenida">
+			<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
+				var="varAreaIntervenida" varStatus="loop">
 				<div class="row">
 					<div class="col-md-3">
 						<div class="form-group ">
-							<input id="inputareainter" class="form-control" maxlength="30"
-								value="Total2" disabled></input>
-							<sf:input class="form-control" readonly="false"
-								aria-required="true" maxlength="240"
-								path="varAreaIntervenida.areaInter" />
+							<sf:select
+								path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
+								items="${dataForm.catalogos.areaInter}"
+								referenceData="${dataForm.catalogos.areaInter}"
+								class="form-control"></sf:select>
 						</div>
 					</div>
 
@@ -196,7 +168,7 @@
 						<div class="form-group ">
 							<sf:input class="form-control" readonly="false"
 								aria-required="true" maxlength="240"
-								path="varAreaIntervenida.aream2" />
+								path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2" />
 						</div>
 					</div>
 				</div>
@@ -237,40 +209,43 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="row arearquitec">
-					<div class="col-md-3">
-						<div class="form-group ">
-							<select class="form-control sel1">
-								<option value="Seleccionar">Seleccionar</option>
-								<option value="Lote">Lote</option>
-								<option value="Sótano">Sótano</option>
-								<option value="Semisotano(s)">Semisotano(s)</option>
-								<option value="Primer Piso">Primer Piso</option>
-								<option value="Pisos Restantes">Pisos Restantes</option>
-								<option value="Libre Primer Piso">Libre Primer Piso</option>
-							</select>
+
+			<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
+				var="varAreaIntervenida" varStatus="loop">
+				<div class="row">
+					<div class="row arearquitec">
+						<div class="col-md-3">
+							<div class="form-group ">
+								<sf:select
+									path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
+									items="${dataForm.catalogos.areaProy}"
+									referenceData="${dataForm.catalogos.areaProy}"
+									class="form-control"></sf:select>
+							</div>
+
 						</div>
 
-					</div>
-
-					<div class="col-md-3">
-						<div class="form-group ">
-							<input class="form-control in1" maxlength="30"></input>
+						<div class="col-md-3">
+							<div class="form-group ">
+								<sf:input class="form-control" readonly="false"
+									aria-required="true" maxlength="240"
+									path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
+							</div>
 						</div>
-					</div>
 
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addinfoareusotable2()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
+						<div class="col-md-1">
+							<div class="form-group ">
+								<img onclick="addinfoareusotable2()"
+									src="${themeResourcePath}/images/adddelineacion.png"
+									style="width: 25px"></img> <img
+									onclick="deleinfoareusotable2()"
+									src="${themeResourcePath}/images/deledelineacion.png"
+									style="width: 25px"></img>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</c:forEach>
 
 			<div class="row">
 				<div class="row totalnew">

@@ -12,8 +12,43 @@ public class DelineacionUUsos
 
 	private String codUso;
 	private String numUnidad;
-	private String uso;
+	private String Uso;
+	private String usoCatalogo;
 	private String areaNeta;
+
+	/**
+	 * @return the uso
+	 */
+	public String getUso()
+	{
+		return Uso;
+	}
+
+	/**
+	 * @param uso
+	 *           the uso to set
+	 */
+	public void setUso(final String uso)
+	{
+		Uso = uso;
+	}
+
+	/**
+	 * @return the usoCatalogo
+	 */
+	public String getUsoCatalogo()
+	{
+		return usoCatalogo;
+	}
+
+	/**
+	 * @param usoCatalogo
+	 *           the usoCatalogo to set
+	 */
+	public void setUsoCatalogo(final String usoCatalogo)
+	{
+		this.usoCatalogo = usoCatalogo;
+	}
 
 	/**
 	 * @return the codUso
@@ -47,23 +82,6 @@ public class DelineacionUUsos
 	public void setNumUnidad(final String numUnidad)
 	{
 		this.numUnidad = numUnidad;
-	}
-
-	/**
-	 * @return the uso
-	 */
-	public String getUso()
-	{
-		return uso;
-	}
-
-	/**
-	 * @param uso
-	 *           the uso to set
-	 */
-	public void setUso(final String uso)
-	{
-		this.uso = uso;
 	}
 
 	/**
