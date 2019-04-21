@@ -31,9 +31,9 @@ public class DelineacionUInfoDeclara
 	private String saldoFavor;
 	private String saldoImpCargo;
 
-
-
-
+	//	private String fechaFinObra; //se utiliza en el response de calculo de impuesto
+	//	private String causalExep; //se utiliza en el response de calculo de impuesto
+	//	private String interesesMora; //se utiliza en el response de calculo de impuesto
 	/**
 	 * @return the fechaEjecutaria
 	 */
@@ -50,7 +50,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.fechaEjecutaria = fechaEjecutaria;
 	}
-
 	/**
 	 * @return the fechaUltAbono
 	 */
@@ -67,7 +66,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.fechaUltAbono = fechaUltAbono;
 	}
-
 	/**
 	 * @return the fechaFinalObra
 	 */
@@ -84,7 +82,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.fechaFinalObra = fechaFinalObra;
 	}
-
 	/**
 	 * @return the cdu
 	 */
@@ -101,7 +98,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.cdu = cdu;
 	}
-
 	/**
 	 * @return the numRadicado
 	 */
@@ -118,7 +114,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.numRadicado = numRadicado;
 	}
-
 	/**
 	 * @return the objetoLicen
 	 */
@@ -135,7 +130,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.objetoLicen = objetoLicen;
 	}
-
 	/**
 	 * @return the opcionUso
 	 */
@@ -152,7 +146,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.opcionUso = opcionUso;
 	}
-
 	/**
 	 * @return the causalExcep
 	 */
@@ -169,7 +162,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.causalExcep = causalExcep;
 	}
-
 	/**
 	 * @return the presupuestoObra
 	 */
@@ -186,7 +178,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.presupuestoObra = presupuestoObra;
 	}
-
 	/**
 	 * @return the tipoLicencia
 	 */
@@ -203,7 +194,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.tipoLicencia = tipoLicencia;
 	}
-
 	/**
 	 * @return the totalPagar
 	 */
@@ -220,7 +210,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.totalPagar = totalPagar;
 	}
-
 	/**
 	 * @return the totalPresupuesto
 	 */
@@ -237,7 +226,6 @@ public class DelineacionUInfoDeclara
 	{
 		this.totalPresupuesto = totalPresupuesto;
 	}
-
 	/**
 	 * @return the totalRetencion
 	 */
@@ -347,10 +335,8 @@ public class DelineacionUInfoDeclara
 	{
 		return saldoFavor;
 	}
-
 	/**
-	 * @param saldoFavor
-	 *           the saldoFavor to set
+	 * @param saldoFavor the saldoFavor to set
 	 */
 	public void setSaldoFavor(final String saldoFavor)
 	{
@@ -374,6 +360,56 @@ public class DelineacionUInfoDeclara
 		this.saldoImpCargo = saldoImpCargo;
 	}
 
+	/**
+	 * @return the fechaFinObra
+	 */
+	public String getFechaFinObra()
+	{
+		return fechaFinalObra;
+	}
+
+	/**
+	 * @param fechaFinObra
+	 *           the fechaFinObra to set
+	 */
+	public void setFechaFinObra(final String fechaFinObra)
+	{
+		this.fechaFinalObra = fechaFinObra;
+	}
+
+	/**
+	 * @return the causalExep
+	 */
+	public String getCausalExep()
+	{
+		return causalExcep;
+	}
+
+	/**
+	 * @param causalExep
+	 *           the causalExep to set
+	 */
+	public void setCausalExep(final String causalExep)
+	{
+		this.causalExcep = causalExep;
+	}
+
+	/**
+	 * @return the interesesMora
+	 */
+	public String getInteresesMora()
+	{
+		return interesMora;
+	}
+
+	/**
+	 * @param interesesMora
+	 *           the interesesMora to set
+	 */
+	public void setInteresesMora(final String interesesMora)
+	{
+		this.interesMora = interesesMora;
+	}
 
 
 }
