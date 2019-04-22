@@ -6,12 +6,18 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<spring:url value="/contribuyentes/delineacionurbana/retencion"
+	var="duRetencionURL" htmlEscape="false" />
 
-
+<sf:form action="${duRetencionURL}" method="POST"
+	modelAttribute="dataForm" id="forma">
 	<delineacionUrbana:delineacionUrbanaDecGenerales />
-	<delineacionUrbana:delineacionUrbanaDecAreasUsos />
+	<delineacionUrbana:delineacionUrbanaRetenAreasUsos />
+	<delineacionUrbana:delineacionUrbanaDecAreasUsosFechas />
 	<delineacionUrbana:delineacionUrbanaDecLiqPriva />
+	</sf:form>
 	<delineacionUrbana:delineacionUrbanaDecFirma />
 
 

@@ -263,13 +263,15 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String delineacionUrbanadeclaracionGET(final Model model) throws CMSItemNotFoundException
+	public String delineacionUrbanadeclaracionGET(@ModelAttribute("dataForm")
+	final InfoDelineacion infoDelineacion, final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro a declaracion delineacion --------------------------");
 
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		String tipoImpuesto = "";
+		final String tipoImpuesto = "5401";
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -279,15 +281,15 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		tipoImpuesto = "5401";
-		numBP = "766";
-		numDoc = "802007086";
-		tipoDoc = "NIT";
-		anoGravable = "2019";
+		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo() == "R" ? "2332" : "2306";
+		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
+		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
+		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
+		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
 		periodo = "01";
-		clavePeriodo = "19A1";
-		dv = "4";
-		numObjeto = "00060000000000000157";
+		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
+		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
+		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
 
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
@@ -302,7 +304,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
-
+		model.addAttribute("dataForm", infoDelineacion);
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));
@@ -393,7 +395,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
 		final String mensajeError = "";
-		final String paginaDestino = "";
+		String paginaDestino = "";
 		//		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
 
@@ -409,11 +411,21 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoDelineacionRequest.setAreaIntervenida(infoDelineacion.getInfObjetoDelineacion().getAreaIntervenida());
 		infoDelineacionRequest.setAreaProyecto(infoDelineacion.getInfObjetoDelineacion().getAreaProyecto());
 
+		if (infoDelineacion.getInput().getTipoFlujo().equals("R"))
+		{
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
+		}
+		if (infoDelineacion.getInput().getTipoFlujo().equals("D"))
+		{
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
+			infoDelineacionRequest.setNumRadicado("");
+		}
+
+
 		System.out.println("Request para calculoImp/Delineacion: " + infoDelineacionRequest);
 		try
 		{
 			infoDelineacionResponse = gasolinaService.calcularImpuestoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
-
 		}
 		catch (final Exception e)
 		{
@@ -479,7 +491,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 
 
-		return REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
+
+		return paginaDestino;
 	}
 
 
@@ -523,8 +536,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 	@RequestMapping(value = "/contribuyentes/delineacion-urbana/generar", method = RequestMethod.GET)
 	@ResponseBody
 	public GeneraDeclaracionResponse generar(@ModelAttribute("dataForm")
-	final InfoDelineacion dataForm, final HttpServletResponse response,
-			final HttpServletRequest request) throws CMSItemNotFoundException
+	final InfoDelineacion dataForm, final HttpServletResponse response, final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
