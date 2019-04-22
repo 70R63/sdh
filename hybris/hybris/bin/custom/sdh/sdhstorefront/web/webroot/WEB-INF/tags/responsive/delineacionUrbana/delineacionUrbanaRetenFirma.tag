@@ -51,7 +51,12 @@
 		<br>
 		<div class="container">
 			<div class="row">
+			
+<%-- 			<sf:hidden path="dataForm.infObjetoDelineacion.numForm" /> --%>
+			<input type="hidden" id="numForm" value="${dataForm.infObjetoDelineacion.numForm}">
+			
 				<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
+				
 				<div class=" col-md-3">
 					<button type="button" class="btn btn-primary btn-lg"
 						id="regresarButton" name="" value="regresar" onclick="goBack()">
@@ -67,10 +72,16 @@
 				</div>
 
 				<div class="col-md-3">
-					<button type="submit" class="btn btn-primary btn-lg" id="" name=""
-						value="retencion">
-						<spring:theme code="delineacion.urbana.dec.firm.prerete" />
-					</button>
+<!-- 					<button type="submit" class="btn btn-primary btn-lg" id="" name="" -->
+<!-- 						value="retencion"> -->
+<%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>
+<!-- 					</button> -->
+		<button id="duGeneraDeclaracionButton" type="button"
+			<c:if test="${empty  dataForm.infObjetoDelineacion.numForm}"> disabled="disabled"</c:if>
+			class="btn btn-primary btn-lg">
+			<spring:theme code="delineacion.urbana.dec.firm.prerete" />
+		</button>
+					
 				</div>
 
 				<sf:hidden path="tipoImpuesto"/>
@@ -91,4 +102,11 @@
 			</div>
 		</div>
 
+</div>
+
+
+<div class="row"></div>
+
+<div id="dialogDU" title="Delineación Urbana">
+	<div id="duDialogContent"></div>
 </div>

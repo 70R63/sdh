@@ -82,6 +82,8 @@
 
 			ACC.radicaDelinDetallesURL= "<c:url value='/contribuyentes/delineacion-urbana/detalle' />"
 			
+		  	ACC.duGeneraDeclaracionURL = "<c:url value='/contribuyentes/delineacion-urbana/generar' />"
+			
 			ACC.currentURL = "${currentURL}";
 			
 			ACC.hideMenuInformacionReportada = false;
