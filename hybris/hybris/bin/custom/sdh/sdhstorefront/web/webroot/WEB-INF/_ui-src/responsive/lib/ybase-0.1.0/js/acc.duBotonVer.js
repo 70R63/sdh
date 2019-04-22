@@ -54,7 +54,7 @@ ACC.duBotonVer = {
 	
 	bindCheckBoxSelect : function() {
 		$(document).on("click", ".selectRadicado", function(e) {
-			e.preventDefault();
+//			e.preventDefault();
 			
  	       var valorNumRadicado = $.trim($(this).attr("data-numradicado")); 	       
  	       var valorModLicencia = $.trim($(this).attr("data-modlicencia")); 	       

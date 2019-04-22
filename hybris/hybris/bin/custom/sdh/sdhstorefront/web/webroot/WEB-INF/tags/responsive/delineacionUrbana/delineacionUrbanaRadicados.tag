@@ -65,12 +65,12 @@
 
 				</tbody>
 			</table>
-		</div>
+		</div> 
 	</div>
 	<sf:form action="${duURL}" method="POST" modelAttribute="dataForm" id="forma" >
-	<sf:input path="input.selectedCDU" id="selectedCDU" name="selectedCDU" readonly="true"/>
-	<sf:input path="input.selectedRadicado" id="selectedRadicado" name="selectedRadicado" readonly="true" />
-	<sf:input path="input.selectedTipoLicencia" id="selectedTipoLicencia" name="selectedTipoLicencia" readonly="true"/>
+	<sf:hidden path="input.selectedCDU" id="selectedCDU" name="selectedCDU" readonly="true"/>
+	<sf:hidden path="input.selectedRadicado" id="selectedRadicado" name="selectedRadicado" readonly="true" />
+	<sf:hidden path="input.selectedTipoLicencia" id="selectedTipoLicencia" name="selectedTipoLicencia" readonly="true"/>
 
 	<div class="row">
 		<div class="col-md-4  ">

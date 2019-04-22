@@ -7,7 +7,7 @@ import java.util.Map;
 
 
 /**
- * @author CONSULTOR
+ * @author Federico Flores Dimas
  *
  */
 public class InfoDelineacionInput
@@ -15,28 +15,27 @@ public class InfoDelineacionInput
 	private String selectedCDU;
 	private String selectedRadicado;
 	private String selectedTipoLicencia;
+	private String tipoFlujo;
 
-	private Map<String, String> tipoDeLicencia;
 	private Map<String, String> modalidadLicencia;
 	private Map<String, String> presupuestoObra;
 	private Map<String, String> causalExencion;
-
-
+	
 	/**
-	 * @return the tipoDeLicencia
+	 * @return the tipoFlujo
 	 */
-	public Map<String, String> getTipoDeLicencia()
+	public String getTipoFlujo()
 	{
-		return tipoDeLicencia;
+		return tipoFlujo;
 	}
 
 	/**
-	 * @param tipoDeLicencia
-	 *           the tipoDeLicencia to set
+	 * @param tipoFlujo
+	 *           the tipoFlujo to set
 	 */
-	public void setTipoDeLicencia(final Map<String, String> tipoDeLicencia)
+	public void setTipoFlujo(final String tipoFlujo)
 	{
-		this.tipoDeLicencia = tipoDeLicencia;
+		this.tipoFlujo = tipoFlujo;
 	}
 
 	/**

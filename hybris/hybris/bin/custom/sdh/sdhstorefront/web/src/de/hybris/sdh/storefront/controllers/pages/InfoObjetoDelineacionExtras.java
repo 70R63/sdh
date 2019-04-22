@@ -12,6 +12,18 @@ public class InfoObjetoDelineacionExtras
 
 	private String anoGravable;
 
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "InfoObjetoDelineacionExtras [anoGravable=" + anoGravable + "]";
+	}
+
 	/**
 	 * @return the anoGravable
 	 */

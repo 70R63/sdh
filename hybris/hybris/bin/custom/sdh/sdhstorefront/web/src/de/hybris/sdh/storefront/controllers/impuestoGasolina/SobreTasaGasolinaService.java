@@ -6,12 +6,14 @@ package de.hybris.sdh.storefront.controllers.impuestoGasolina;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
+import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
@@ -26,6 +28,7 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
+import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 
 import java.util.ArrayList;
@@ -133,9 +136,122 @@ public class SobreTasaGasolinaService
 		catalogosForm.setModalidadLicencia(obtenerListaModalidadLicencia());
 		catalogosForm.setPresupuestoObra(obtenerListaPresupuestoObra());
 		catalogosForm.setCausalExencion(obtenerListaCausalExencion());
+		catalogosForm.setUso(obtenerListaUso());
+		catalogosForm.setCodUso(obtenerListaCodUso());
+		catalogosForm.setAreaInter(obtenerListaAreaInter());
+		catalogosForm.setAreaProy(obtenerListaAreaProy());
 
 
 		return catalogosForm;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaAreaProy()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Lote");
+		elementos.put("01", "Sótano(s)");
+		elementos.put("02", "Semisótano");
+		elementos.put("03", "Primer Piso");
+		elementos.put("04", "Pisos Restantes");
+		elementos.put("05", "Libre Primer Piso");
+
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaAreaInter()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Obra nueva");
+		elementos.put("02", "Ampliación");
+		elementos.put("03", "Modificación");
+		elementos.put("04", "Adecuación");
+		elementos.put("05", "Reforzamiento");
+		elementos.put("06", "Restauración/conservación");
+		elementos.put("07", "Demolición");
+		elementos.put("08", "Cerramiento");
+		elementos.put("09", "Reconocimiento");
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaUso()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "Comercio");
+		elementos.put("02", "Servicios");
+		elementos.put("03", "Dotacional");
+		elementos.put("04", "Industrial");
+		elementos.put("05", "Vivienda");
+
+
+		return elementos;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private Map<String, String> obtenerListaCodUso()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+
+		elementos.put("00", "Seleccionar");
+		//		if (uso.equals("Comercio"))
+		//		{
+		elementos.put("07", "Comercio vecinal o local");
+		elementos.put("08", "Comercio zonal");
+		elementos.put("09", "Comercio urbano");
+		elementos.put("10", "Comercio metropolitano");
+		//		}
+		//		if (uso.equals("Servicios"))
+		//		{
+		elementos.put("11", "Servicios vecinal o local");
+		elementos.put("12", "Servicios zonal");
+		elementos.put("13", "Servicios urbana");
+		elementos.put("14", "Servicios metropolitana");
+		elementos.put("15", "Dotacional vecinal o local");
+		elementos.put("16", "Dotacional zonal");
+		elementos.put("17", "Dotacional urbana");
+		elementos.put("18", "Dotacional metropolitana");
+		//		}
+		//		if (uso.equals("Industrial"))
+		//		{
+		elementos.put("19", "Industrial");
+		//		}
+		//		if (uso.equals("Vivienda"))
+		//		{
+		elementos.put("E1", "Estrato 1");
+		elementos.put("E2", "Estrato 2");
+		elementos.put("E3", "Estrato 3");
+		elementos.put("E4", "Estrato 4");
+		elementos.put("E5", "Estrato 5");
+		elementos.put("E6", "Estrato 6");
+		elementos.put("V1", "Vis Estrato 1");
+		elementos.put("V2", "Vis Estrato 2");
+		elementos.put("V3", "Vis Estrato 3");
+		//		}
+
+
+		return elementos;
 	}
 
 
@@ -658,9 +774,9 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
-	private Object llamarWS(final Object infoRequest,
-			final SDHDetalleGasolina sdhConsultaWS, final String confUrl, final String confUser, final String confPass,
-			final String wsNombre, final String wsReqMet, final Logger LOG, final String nombreClase)
+	private Object llamarWS(final Object infoRequest, final SDHDetalleGasolina sdhConsultaWS, final String confUrl,
+			final String confUser, final String confPass, final String wsNombre, final String wsReqMet, final Logger LOG,
+			final String nombreClase)
 	{
 		Object responseInfo = new Object();
 
@@ -1332,7 +1448,7 @@ public class SobreTasaGasolinaService
 		{
 			if (list.get(i).getCdu().equals(cdu))
 			{
-				anoGravable = list.get(i).getFechaExp().substring(0, 4);
+				anoGravable = list.get(i).getFechaExp().substring(6);
 			}
 		}
 
@@ -1356,6 +1472,23 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
+	public InfoObjetoDelineacionResponse calcularImpuestoDelineacion(final CalculoImpDelineacionRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		InfoObjetoDelineacionResponse responseInfo = new InfoObjetoDelineacionResponse();
+		final String confUrl = "sdh.calculoImpDelineacion.url";
+		final String confUser = "sdh.calculoImpDelineacion.user";
+		final String confPass = "sdh.calculoImpDelineacion.password";
+		final String wsNombre = "calculoImp_Delineacion";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse";
+
+		responseInfo = (InfoObjetoDelineacionResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
 
 	/**
 	 * @param infoDelineacionResponse
@@ -1366,6 +1499,79 @@ public class SobreTasaGasolinaService
 
 
 		return false;
+	}
+
+
+	/**
+	 * @param infoDelineacion
+	 */
+	public String obtenerNumeroObjetoDU(final InfoDelineacion infoDelineacion)
+	{
+		String numObjeto = "";
+		final List<ImpuestoDelineacionUrbana> dealineaciones = infoDelineacion.getValCont().getDelineacion();
+		final String cduSeleccionado = infoDelineacion.getInput().getSelectedCDU();
+
+		for (int i = 0; i < dealineaciones.size(); i++)
+		{
+			if (dealineaciones.get(i).getCdu().equals(cduSeleccionado))
+			{
+				numObjeto = dealineaciones.get(i).getNumObjeto();
+			}
+		}
+
+		return numObjeto;
+	}
+
+
+	/**
+	 * @param infoDelineacionResponse
+	 */
+	public void prepararValorUsoDU(final InfoObjetoDelineacionResponse infoDelineacionResponse)
+	{
+
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+
+		elementos.put("07", "01");
+		elementos.put("08", "01");
+		elementos.put("09", "01");
+		elementos.put("10", "01");
+		elementos.put("11", "02");
+		elementos.put("12", "02");
+		elementos.put("13", "02");
+		elementos.put("14", "02");
+		elementos.put("15", "02");
+		elementos.put("16", "02");
+		elementos.put("17", "02");
+		elementos.put("18", "02");
+		elementos.put("19", "04");
+		elementos.put("E1", "05");
+		elementos.put("E2", "05");
+		elementos.put("E3", "05");
+		elementos.put("E4", "05");
+		elementos.put("E5", "05");
+		elementos.put("E6", "05");
+		elementos.put("V1", "05");
+		elementos.put("V2", "05");
+		elementos.put("V3", "05");
+
+		final List<DelineacionUUsos> usos = infoDelineacionResponse.getUsos();
+		for (int i = 0; i < usos.size(); i++)
+		{
+			usos.get(i).setUsoCatalogo(elementos.get(usos.get(i).getCodUso()));
+		}
+
+
+	}
+
+	public static String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
 	}
 
 

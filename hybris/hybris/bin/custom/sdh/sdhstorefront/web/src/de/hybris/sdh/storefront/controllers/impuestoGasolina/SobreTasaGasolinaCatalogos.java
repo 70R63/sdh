@@ -41,8 +41,78 @@ public class SobreTasaGasolinaCatalogos
 	private Map<String, String> modalidadLicencia;
 	private Map<String, String> presupuestoObra;
 	private Map<String, String> causalExencion;
+	private Map<String, String> uso;
+	private Map<String, String> codUso;
+	private Map<String, String> areaInter;
+	private Map<String, String> areaProy;
 
+	/**
+	 * @return the uso
+	 */
+	public Map<String, String> getUso()
+	{
+		return uso;
+	}
 
+	/**
+	 * @param uso
+	 *           the uso to set
+	 */
+	public void setUso(final Map<String, String> uso)
+	{
+		this.uso = uso;
+	}
+
+	/**
+	 * @return the codUso
+	 */
+	public Map<String, String> getCodUso()
+	{
+		return codUso;
+	}
+
+	/**
+	 * @param codUso
+	 *           the codUso to set
+	 */
+	public void setCodUso(final Map<String, String> codUso)
+	{
+		this.codUso = codUso;
+	}
+
+	/**
+	 * @return the areaInter
+	 */
+	public Map<String, String> getAreaInter()
+	{
+		return areaInter;
+	}
+
+	/**
+	 * @param areaInter
+	 *           the areaInter to set
+	 */
+	public void setAreaInter(final Map<String, String> areaInter)
+	{
+		this.areaInter = areaInter;
+	}
+
+	/**
+	 * @return the areaProy
+	 */
+	public Map<String, String> getAreaProy()
+	{
+		return areaProy;
+	}
+
+	/**
+	 * @param areaProy
+	 *           the areaProy to set
+	 */
+	public void setAreaProy(final Map<String, String> areaProy)
+	{
+		this.areaProy = areaProy;
+	}
 
 	/**
 	 * @return the anoGravable
