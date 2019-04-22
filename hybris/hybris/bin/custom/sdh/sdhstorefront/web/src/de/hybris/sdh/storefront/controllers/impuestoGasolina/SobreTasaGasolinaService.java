@@ -1556,9 +1556,12 @@ public class SobreTasaGasolinaService
 		elementos.put("V3", "05");
 
 		final List<DelineacionUUsos> usos = infoDelineacionResponse.getUsos();
-		for (int i = 0; i < usos.size(); i++)
+		if (usos != null)
 		{
-			usos.get(i).setUsoCatalogo(elementos.get(usos.get(i).getCodUso()));
+			for (int i = 0; i < usos.size(); i++)
+			{
+				usos.get(i).setUsoCatalogo(elementos.get(usos.get(i).getCodUso()));
+			}
 		}
 
 

@@ -1,5 +1,5 @@
 /**
-*
+*<
 */
 package de.hybris.sdh.storefront.controllers.pages;
 
@@ -271,7 +271,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = "5401";
+		String tipoImpuesto = "5401";
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -281,7 +281,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo() == "R" ? "2332" : "2306";
+		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "2332" : "2306";
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
@@ -337,7 +337,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = "5401";
+		String tipoImpuesto = "5401";
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -347,7 +347,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo() == "R" ? "2332" : "2306";
+		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "2332" : "2306";
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
@@ -453,7 +453,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = "5401";
+		String tipoImpuesto = "5401";
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -463,7 +463,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo() == "R" ? "2332" : "2306";
+		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "2332" : "2306";
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
