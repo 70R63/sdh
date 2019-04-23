@@ -94,6 +94,9 @@
 			ACC.hideMenuDeclaraciones = false;
 			ACC.hideMenuPagos = false;
 			ACC.hideMenuConsultas = false;
+			ACC.hideMenuDetalleRetenedor = false;
+			ACC.hideMenuRegistroRetenciones = false;
+			ACC.hideMenuDeclaracionFirmar = false;
 			
 			ACC.hideSubmenuDelineacionUrbana = false;
 			ACC.hideSubmenuICA = false;
@@ -105,6 +108,9 @@
 			
 			<c:if test="${(hasCORol and fn:contains(currentURL, 'contribuyentes')) or (hasCORol and fn:contains(currentURL, 'pagoEnLinea'))}">
 				ACC.hideMenuInformacionReportada = true;
+				ACC.hideMenuDetalleRetenedor = true;
+				ACC.hideMenuRegistroRetenciones = true;
+				ACC.hideMenuDeclaracionFirmar = true;
 				
 				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
 					ACC.hideSubmenuDelineacionUrbana = true;

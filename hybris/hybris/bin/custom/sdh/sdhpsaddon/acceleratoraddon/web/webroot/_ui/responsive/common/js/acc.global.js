@@ -27,6 +27,21 @@ ACC.global = {
     		$("a:contains('Mi Información Reportada')").closest("li").remove();
     	}
     	
+    	if(ACC.hideMenuDetalleRetenedor == true)
+    	{	
+    		$("a:contains('Detalle del Retenedor')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuRegistroRetenciones == true)
+    	{	
+    		$("a:contains('Registro de Retenciones')").closest("li").remove();
+    	}
+    	
+    	if(ACC.hideMenuDeclaracionFirmar == true)
+    	{	
+    		$("a:contains('Delaraciones por Firmar')").closest("li").remove();
+    	}
+    	
     	if(ACC.hideMenuImpuestos == true)
     	{	
     		$("a:contains('Impuestos')").closest("li").remove();
