@@ -27,7 +27,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
-				<table class="table table-bordered datatable">
+				<table class="table table-bordered" id="example">
 					<thead style="background-color: rgb(235, 235, 228) !important">
 						<tr>
 							<td><label class="control-label text-capitalize !important"><spring:theme
@@ -55,30 +55,44 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 104px !important;" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 104px !important;"/></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 90px !important;" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 104px !important;"/></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 90px !important;"/></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text"  style="width: 94px !important;"/></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 84px !important;"/></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 84px !important;"/></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 80px !important;" /></td>
-						</tr>
+						<c:forEach varStatus="loop" items="${icaInfObjetoFormResp.icaInfObjetoResponse.establecimientos}"
+									var="eachEstablecimientos">
+							<tr>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.nombre}"
+									type="text" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.direccion}"
+									type="text" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.localidad}"
+									type="text" style="width: 104px !important;" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.matricula}"
+									type="text" style="width: 104px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.fechaDesde}"
+									type="text" style="width: 90px !important;" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.estadoMatricula}"
+									type="text" style="width: 104px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.fechaHasta}"
+									type="text" style="width: 90px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.valorActivo}"
+									type="text"  style="width: 94px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.cantPersonal}"
+									type="text" style="width: 84px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.codPostal}"
+									type="text" style="width: 84px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.ciiu}"
+									type="text" style="width: 80px !important;" /></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

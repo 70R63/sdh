@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">
-					<table class="table table-bordered">
+					<table class="table table-bordered" id="example">
 						<thead style="background-color: rgb(235, 235, 228) !important">
 							<tr>
 								<td><label class="control-label text-capitalize !important"><spring:theme
@@ -38,16 +38,23 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input class="inputtextnew" disabled="disabled"
-									type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									type="text" /></td>
-							</tr>
+							<c:forEach varStatus="loop" items="${icaInfObjetoFormResp.icaInfObjetoResponse.marcas}"
+									var="eachMarcas">
+								<tr>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachMarcas.denominacion}"
+										type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachMarcas.valorExcencion}"
+										type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachMarcas.fechaDesde}"
+										type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachMarcas.fechaHasta}"
+										type="text" /></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
