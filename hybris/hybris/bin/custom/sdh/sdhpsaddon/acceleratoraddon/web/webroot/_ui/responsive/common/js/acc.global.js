@@ -22,60 +22,6 @@ ACC.global = {
         "updateMenu"
     ],
     updateMenu: function () {
-    	if(ACC.hideMenuInformacionReportada == true)
-    	{	
-    		$("a:contains('Mi Información Reportada')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuDetalleRetenedor == true)
-    	{	
-    		$("a:contains('Detalle del Retenedor')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuRegistroRetenciones == true)
-    	{	
-    		$("a:contains('Registro de Retenciones')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuDeclaracionFirmar == true)
-    	{	
-    		$("a:contains('Delaraciones por Firmar')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuImpuestos == true)
-    	{	
-    		$("a:contains('Impuestos')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuBuzon == true)
-    	{	
-    		$("a:contains('Mi Buzón')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuTramites == true)
-    	{	
-    		$("a:contains('Trámites')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuFacturacion == true)
-    	{	
-    		$("a:contains('Facturación')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuDeclaraciones == true)
-    	{	
-    		$("a:contains('Declaraciones')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuPagos == true)
-    	{	
-    		$("a:contains('Pagos')").closest("li").remove();
-    	}
-    	
-    	if(ACC.hideMenuConsultas == true)
-    	{	
-    		$("a:contains('Consultas')").closest("li").remove();
-    	}
     	
     	
     	debugger;

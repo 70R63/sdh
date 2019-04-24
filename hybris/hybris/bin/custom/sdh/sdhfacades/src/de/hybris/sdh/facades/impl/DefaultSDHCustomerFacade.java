@@ -14,6 +14,7 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
@@ -21,9 +22,11 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.TitleModel;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.facades.questions.data.SDHRolData;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
@@ -107,6 +110,33 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 	public void updateMiRitInfo()
 	{
 		sdhCustomerAccountService.updateMiRitInfo();
+	}
+
+
+	@Override
+	public boolean isValidRoleForCurrentCustomer(final String role)
+	{
+		if (StringUtils.isBlank(role))
+		{
+			return false;
+		}
+
+		final CustomerData customerData = getCurrentCustomer();
+
+		if (customerData.getRolList() == null || customerData.getRolList().isEmpty())
+		{
+			return false;
+		}
+
+		for (final SDHRolData eachRole : customerData.getRolList())
+		{
+			if (role.contains(eachRole.getRol()))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 

@@ -639,4 +639,6 @@
 
 	<bean id="sdhDeletePDFMediaFilesJobPerformable" class="de.hybris.sdh.core.job.SDHDeletePDFMediaFilesJobPerformable" parent="abstractJobPerformable"/>
 
+	<bean id="sdhFTPService"	class="de.hybris.sdh.core.services.impl.DefaultSDHFTPService" />
+
 </beans>

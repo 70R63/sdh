@@ -98,6 +98,9 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;RetenedorDetalleLink; DETALLE LINK	; "/retenedores/detalle" ;;;;;
 ; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
 ; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "/retenedores/declaracionesfirmar" ;;;;;
+
+;;TerceroAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/terceros/reportar";;;;;
+;;TerceroAutorizadoConsultasLink;CONSULTAS;"/terceros/consultas";;;;;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 
@@ -195,7 +198,11 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 
 # Category Navigation Bar Component
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
-;;CategoryNavComponent; Category Navigation Component;;CategoryNavComponent;CategoryNavNode;10
+#;;CategoryNavComponent; Category Navigation Component;;CategoryNavComponent;CategoryNavNode;10
+;;ContribuyentesCategoryNavComponent;Contribuyentes Category Navigation Component;;ContribuyenteCategoryNavComponent;ContribuyentesCategoryNavNode;10
+;;ReportantesInformacionCategoryNavComponent;Reportantes Informacion Category Navigation Component;;ReportantesInformacionCategoryNavComponent;ReportantesInformacionCategoryNavNode;10
+;;AgenteRetenedorCategoryNavComponent;Agente Retenedor Category Navigation Component;;AgenteRetenedorCategoryNavComponent;AgenteRetenedorCategoryNavNode;10
+;;TerceroAutorizadoCategoryNavComponent;Tercero Autorizado Category Navigation Component;;TerceroAutorizadoCategoryNavComponent;TerceroAutorizadoCategoryNavNode;10
 ;;AnonnymousCategoryNavComponent; Anonnymous Category Navigation Component;;AnonnymousCategoryNavComponent;AnnonymousCategoryNavNode;10
 
 INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(uid,$contentCV)
@@ -204,6 +211,11 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];users(uid);components(uid,$contentCV)
 ;;Anonnymous Category Nav Component Restriction;AnonnymousCategoryNavComponentRestriction;anonymous;AnonnymousCategoryNavComponent
 
+INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=true];userGroups(uid);components(uid,$contentCV)
+;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01;ContribuyentesCategoryNavComponent
+;;Reportantes Informacion Category Nav Component Restriction;ReportantesInformacionCategoryNavComponentRestriction;sdh_05;ReportantesInformacionCategoryNavComponent
+;;Agente Retenedor Category Nav Component Restriction;AgenteRetenedorCategoryNavComponentRestriction;sdh_04;AgenteRetenedorCategoryNavComponent
+;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoCategoryNavComponent
 ## level 1. SiteRoot ##
 ## level 2. children of SiteRoot ## 
 # the following order of children is the display order on the site
@@ -217,7 +229,11 @@ INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];u
 
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
-;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
+#;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
+;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode
+;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
+;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
+;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -239,11 +255,17 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;EscuelaVirtualNavigationNode;;Escuela Virtual Menu;EscuelaVirtualNavigationNode;
 ;PreguntasFrecuentesNavigationNode;;Preguntas Frecuentes Menu;PreguntasFrecuentesNavigationNode;
 
+;TerceroAutorizadoReportarInformacionNavigationNode;;Tercero Autorizado Reportar Información Menu;TerceroAutorizadoReportarInformacionNavigationNode;
+;TerceroAutorizadoConsultasNavigationNode;;Tercero Autorizado Consutlas Menu;TerceroAutorizadoConsultasNavigationNode;
+
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
+;MiRITContribuyentesNavigationNode;;Mi RIT Contribuyentes Menu;MiRITContribuyentesNavigationNode;MiRITContribuyentesNavigationServiceRequestsNavNodeMenu
+;MiRITReportanteInformacionNavigationNode;;Mi RIT ReportanteInformacion Menu;MiRITReportanteInformacionNavigationNode;MiRITReportanteInformacionNavigationServiceRequestsNavNodeMenu
 ;MiRITNavigationNode;;Mi RIT Menu;MiRITNavigationNode;MiRITNavigationServiceRequestsNavNodeMenu
 ;MiBuzonNavigationNode;;Mi Buzon Menu;MiBuzonNavigationNode;
+;MiBuzonContribuyentesNavigationNode;;Mi Buzon Menu;MiBuzonContribuyentesNavigationNode;
 ;ImpuestosNavigationNode;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosNavigationServiceRequestsNavNodeMenu
 ;TramitesNavigationNode;;Tramites Menu;TramitesNavigationNode;TramitesNavigationServiceRequestsNavNodeMenu
 ;FacturacionNavigationNode;;Facturacion Menu;FacturacionNavigationNode;FacturacionNavigationServiceRequestsNavNodeMenu
@@ -271,12 +293,16 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;EscuelaVirtualNavigationNodeEntry;;Escuela Virtual Menu;EscuelaVirtualNavigationNode;EscuelaVirtualLink;
 ;PreguntasFrecuentesNavigationNodeEntry;;Preguntas Frecuentes Menu;PreguntasFrecuentesNavigationNode;PreguntasFrecuentesLink;
 
-
+;TerceroAutorizadoReportarInformacionNavigationNodeEntry;;Tercero Autorizado Reportar Informacion Menu;TerceroAutorizadoReportarInformacionNavigationNode;TerceroAutorizadoReportarInformacionLink;
+;TerceroAutorizadoConsultasNavigationNodeEntry;;Tercero Autorizado Consultas Menu;TerceroAutorizadoConsultasNavigationNode;TerceroAutorizadoConsultasLink;
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ;MiRITNavigationNodeEntry;;Mi RIT Menu;MiRITNavigationNode;MiRITLink;
+;MiRITContribuyentesNavigationNodeEntry;;Mi RIT Menu;MiRITContribuyentesNavigationNode;MiRITLink;
+;MiRITReportanteInformacionNavigationNodeEntry;;Mi RIT Menu;MiRITReportanteInformacionNavigationNode;MiRITLink;
 ;MiBuzonNavigationNodeEntry;;Mi Buzon Menu;MiBuzonNavigationNode;MiBuzonLink;
+;MiBuzonContribuyentesNavigationNodeEntry;;Mi Buzon Menu;MiBuzonContribuyentesNavigationNode;MiBuzonLink;
 ;ImpuestosNavigationNodeEntry;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosLink;
 ;TramitesNavigationNodeEntry;;Tramites Menu;TramitesNavigationNode;TramitesLink;
 ;FacturacionNavigationNodeEntry;;Facturacion Menu;FacturacionNavigationNode;FacturacionLink;
@@ -313,6 +339,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu MI RIT 04/01/2019
 ;MiRITNavigationServiceRequestsNavNodeMenu;;Mi RIT Service Requests Menu;MiRITNavigationServiceRequestsNavNodeMenu;CertRitNavNode
+;MiRITContribuyentesNavigationServiceRequestsNavNodeMenu;;Mi RIT Service Requests Menu;MiRITContribuyentesNavigationServiceRequestsNavNodeMenu;CertRitContribuyentesNavNode
+;MiRITReportanteInformacionNavigationServiceRequestsNavNodeMenu;;Mi RIT Service Requests Menu;MiRITReportanteInformacionNavigationServiceRequestsNavNodeMenu;CertRitReportanteInformacionNavNode
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
@@ -407,7 +435,9 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu MI RIT 04/01/2019
-;CertRitNavNode ;;Certificacion RIT Link;CertRitNavNode 
+;CertRitNavNode ;;Certificacion RIT Link;CertRitNavNode
+;CertRitContribuyentesNavNode ;;Certificacion RIT Link;CertRitContribuyentesNavNode 
+;CertRitReportanteInformacionNavNode ;;Certificacion RIT Link;CertRitReportanteInformacionNavNode 
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
@@ -515,6 +545,8 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu MI RIT 04/01/2019
 ;CertRitNavNodeEntry;;Certificacion RIT Navigation Node Entry;CertRitNavNode;CertRitLink
+;CertRitContribuyentesNavNodeEntry;;Certificacion RIT Navigation Node Entry;CertRitContribuyentesNavNode;CertRitLink
+;CertRitReportanteInformacionNavNodeEntry;;Certificacion RIT Navigation Node Entry;CertRitReportanteInformacionNavNode;CertRitLink
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
@@ -574,7 +606,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; FooterSlot             ; FooterComponent
 ; ; SearchBoxSlot          ; SearchBox
 ; ; HomepageNavLinkSlot    ; HomepageNavLink
-; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,CategoryNavComponent, breadcrumbComponent
+; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,ContribuyentesCategoryNavComponent,ReportantesInformacionCategoryNavComponent,AgenteRetenedorCategoryNavComponent,TerceroAutorizadoCategoryNavComponent, breadcrumbComponent
 ; ; SideContentSlot        ; MobileAppBanner
 ; ; SiteLogoSlot           ; SiteLogoComponent
 ; ; TopContentSlot         ; FacebookOffersBanner
@@ -655,19 +687,6 @@ INSERT_UPDATE SearchResultsListComponent; $contentCV[unique = true]; uid[unique 
 INSERT_UPDATE PSSearchResultsGridComponent; $contentCV[unique = true]; uid[unique = true]; name; actions(uid, $contentCV); &componentRef
 ; ; PSSearchResultsGrid ; Public sector Search Result Grid Component ; ServiceListAddToCartAction ; PSSearchResultsGrid
 
-# ContentSlot 
-INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
-; ; VariantSelectorSlot    ; VariantSelector
-; ; UpSellingSlot          ; Similar, Others
-; ; CrossSellingSlot       ; CrossSelling
-; ; FooterSlot             ; FooterComponent
-; ; SearchBoxSlot          ; SearchBox
-; ; HomepageNavLinkSlot    ; HomepageNavLink
-; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,CategoryNavComponent, breadcrumbComponent
-; ; SideContentSlot        ; MobileAppBanner
-; ; SiteLogoSlot           ; SiteLogoComponent
-; ; TopContentSlot         ; FacebookOffersBanner
-; ; ProductLeftRefinements ; RefinementFacetComponent, PSRetrieveADraftComponent
 
 # Preview Image for use in the CMS Cockpit for special ContentPages 
 # Media 

@@ -18,7 +18,9 @@ import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -61,8 +63,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.xml.rpc.holders.StringHolder;
@@ -1209,7 +1213,50 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 
+	@Override
+	public void setAutorityOnSession(final String role)
+	{
 
+		final UserModel userModel = userService.getCurrentUser();
+		final Set<PrincipalGroupModel> currentPricipals = userModel.getGroups();
+		final Set<PrincipalGroupModel> newPricipals = new HashSet<PrincipalGroupModel>();
+
+
+		for (final PrincipalGroupModel eachPrincipal : currentPricipals)
+		{
+			newPricipals.add(eachPrincipal);
+		}
+
+		newPricipals.add(userService.getUserGroupForUID(role));
+		userModel.setGroups(newPricipals);
+
+		modelService.save(userModel);
+
+
+
+	}
+
+
+	@Override
+	public void cleanSessionAutorities()
+	{
+		final UserModel userModel = userService.getCurrentUser();
+		final Set<PrincipalGroupModel> currentPricipals = userModel.getGroups();
+		final Set<PrincipalGroupModel> newPricipals = new HashSet<PrincipalGroupModel>();
+
+		for (final PrincipalGroupModel eachPrincipal : currentPricipals)
+		{
+			if (!eachPrincipal.getUid().contains("sdh"))
+			{
+				newPricipals.add(eachPrincipal);
+			}
+		}
+
+		userModel.setGroups(newPricipals);
+
+		modelService.save(userModel);
+
+	}
 
 
 
