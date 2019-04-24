@@ -65,17 +65,17 @@
 							<td><input class="inputtextnew" disabled="disabled"
 								type="text" /></td>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
+								type="text" style="width: 104px !important;" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" style="width: 104px !important;"/></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" style="width: 104px !important;"/></td>
 							<td><input class="inputtextnew" disabled="disabled"
 								type="text" /></td>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
+								type="text" style="width: 104px !important;"/></td>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
+								type="text" style="width: 104px !important;"/></td>
 							<td><input class="inputtextnew" disabled="disabled"
 								type="text" size="10" /></td>
 						</tr>
