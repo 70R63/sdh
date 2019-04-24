@@ -21,39 +21,21 @@
 	</div>
 </div>
 
-
+<br>
 <form:form action="">
-	<div class="container">
-		<div class="row mt-3">
-			<div class="col-md-7">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.inicial.estableci.nomesta" /></label> <input id="" name=""
-						class="form-control" disabled type="text" value="" maxlength="240"></input>
-				</div>
-			</div>
-			<div class="col-md-7">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.inicial.estableci.direc" /></label> <input id="" name=""
-						class="form-control" disabled type="text" value="" maxlength="240"></input>
-				</div>
-			</div>
-			<div class="col-md-7">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.inicial.estableci.loca" /></label> <input id="" name=""
-						class="form-control" disabled type="text" value="" maxlength="240"></input>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
 				<table class="table table-bordered datatable">
-					<thead style="background-color: rgb(235, 235, 228)!important">
+					<thead style="background-color: rgb(235, 235, 228) !important">
 						<tr>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.nomesta" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.direc" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.loca" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.estableci.matesta" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
@@ -89,12 +71,19 @@
 							<td><input class="inputtextnew" disabled="disabled"
 								type="text" /></td>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" size="10"/></td>
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" /></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" size="10" /></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+
 </form:form>
 

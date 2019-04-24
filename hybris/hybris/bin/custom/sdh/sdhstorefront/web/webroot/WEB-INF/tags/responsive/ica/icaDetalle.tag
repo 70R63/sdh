@@ -23,6 +23,14 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
+									code="ica.inicial.detalle.feciniact" /></label> <input id="" name=""
+								class="form-control" disabled type="text" value=""
+								maxlength="240"></input>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label"><spring:theme
 									code="ica.inicial.detalle.fecceseact" /></label> <input id="" name=""
 								class="form-control" disabled type="text" value=""
 								maxlength="240"></input>
@@ -38,14 +46,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.inicial.detalle.fecceseact" /></label> <input id="" name=""
-								class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
+
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
@@ -54,8 +55,7 @@
 								maxlength="240"></input>
 						</div>
 					</div>
-				</div>
-				<div class="row">
+
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
@@ -90,8 +90,8 @@
 								maxlength="240"></input>
 						</div>
 					</div>
-				</div>
-				<div class="row">
+
+
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
@@ -100,6 +100,8 @@
 								maxlength="240"></input>
 						</div>
 					</div>
+				</div>
+				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme

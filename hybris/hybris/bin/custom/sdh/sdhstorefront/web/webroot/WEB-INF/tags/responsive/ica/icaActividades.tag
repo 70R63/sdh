@@ -44,13 +44,12 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><input type="checkbox" name="" id=""
-											class="form-check-input mr-2"
-											style="visibility: visible !important; min-height: 4px !important"></td>
+										<td><label class="control-label "><spring:theme
+										code="ica.inicial.activecono.principal" /></label></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											type="text" /></td>
 										<td><input class="inputtextnew" disabled="disabled"
-											type="text" /></td>
+											type="text" style="height: auto !important;"/></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											type="text" /></td>
 										<td><input class="inputtextnew" disabled="disabled"

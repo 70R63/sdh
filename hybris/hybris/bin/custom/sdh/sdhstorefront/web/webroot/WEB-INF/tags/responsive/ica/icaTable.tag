@@ -48,7 +48,7 @@
 							<tr>
 								<td><input class="inputtextnew" disabled="disabled" type="text" size="30"/></td>
 								<td><input class="inputtextnew" disabled="disabled" type="text" size="30"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30"/></td>
+								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 406px;"/></td>
 							</tr>
 						</tbody>
 					</table>
