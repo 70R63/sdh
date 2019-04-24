@@ -44,13 +44,13 @@
 										code="ica.inicial.estableci.edomat" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.estableci.fechasta" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 94px !important;"><spring:theme
 										code="ica.inicial.estableci.valactivo" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 84px !important;"><spring:theme
 										code="ica.inicial.estableci.cantperso" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 84px !important;"><spring:theme
 										code="ica.inicial.estableci.codpost" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 84px !important;"><spring:theme
 										code="ica.inicial.estableci.ciiu" /></label></td>
 						</tr>
 					</thead>
@@ -61,23 +61,23 @@
 							<td><input class="inputtextnew" disabled="disabled"
 								type="text" /></td>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
 								type="text" style="width: 104px !important;" /></td>
 							<td><input class="inputtextnew" disabled="disabled"
 								type="text" style="width: 104px !important;"/></td>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 104px !important;"/></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
+								type="text" style="width: 90px !important;" /></td>
 							<td><input class="inputtextnew" disabled="disabled"
 								type="text" style="width: 104px !important;"/></td>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="width: 104px !important;"/></td>
+								type="text" style="width: 90px !important;"/></td>
 							<td><input class="inputtextnew" disabled="disabled"
-								type="text" size="10" /></td>
+								type="text"  style="width: 94px !important;"/></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" style="width: 84px !important;"/></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" style="width: 84px !important;"/></td>
+							<td><input class="inputtextnew" disabled="disabled"
+								type="text" style="width: 80px !important;" /></td>
 						</tr>
 					</tbody>
 				</table>
