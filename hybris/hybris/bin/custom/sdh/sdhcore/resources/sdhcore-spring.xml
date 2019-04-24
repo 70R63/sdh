@@ -638,5 +638,10 @@
 	<bean id="pseNotificacionPagoPerformable" class="de.hybris.sdh.core.job.PseNotificacionPagoPerformable" parent="abstractJobPerformable"/>
 
 	<bean id="sdhDeletePDFMediaFilesJobPerformable" class="de.hybris.sdh.core.job.SDHDeletePDFMediaFilesJobPerformable" parent="abstractJobPerformable"/>
+	
+	
+	<bean id="sdhICAInfObjetoService" class="de.hybris.sdh.core.services.impl.DefaultSDHICAInfObjetoService" />
+	
+	<bean id="sdhICACalculoImpService" class="de.hybris.sdh.core.services.impl.DefaultSDHICACalculoImpService" />
 
 </beans>

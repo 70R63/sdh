@@ -30,6 +30,7 @@ import de.hybris.sdh.core.model.SDHAddressModel;
 import de.hybris.sdh.core.model.SDHAgentModel;
 import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
+import de.hybris.sdh.core.model.SDHICATaxModel;
 import de.hybris.sdh.core.model.SDHPhoneModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
@@ -45,6 +46,7 @@ import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
@@ -473,8 +475,10 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+
+			final String response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					response,
 					SDHValidaMailRolResponse.class);
 
 			final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
@@ -820,6 +824,40 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			{
 				customerModel.setUrbanDelineationsTaxList(null);
 			}
+
+
+			//clean old ICA exterior taxes
+
+
+			final SDHICATaxModel oldIcaTaxModel = customerModel.getIcaTaxList();
+
+			if (oldIcaTaxModel != null)
+			{
+				modelService.removeAll(oldIcaTaxModel);
+			}
+
+			final ImpuestoICA ica = sdhConsultaContribuyenteBPResponse.getIca();
+
+			if (ica != null)
+			{
+				final SDHICATaxModel newIcaTaxModel = new SDHICATaxModel();
+
+				if (!StringUtils.isBlank(ica.getNumObjeto()))
+				{
+					newIcaTaxModel.setObjectNumber(ica.getNumObjeto());
+				}
+
+				modelService.saveAll(newIcaTaxModel);
+
+				customerModel.setIcaTaxList(newIcaTaxModel);
+
+			}
+			else
+			{
+				customerModel.setIcaTaxList(null);
+			}
+
+
 
 
 

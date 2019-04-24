@@ -10,6 +10,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHICACalculoImpService;
+import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 
 import javax.annotation.Resource;
 
@@ -53,6 +55,12 @@ public class IcaPageController extends AbstractPageController
 
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "sdhICAInfObjetoService")
+	SDHICAInfObjetoService sdhICAInfObjetoService;
+
+	@Resource(name = "sdhICACalculoImpService")
+	SDHICACalculoImpService sdhICACalculoImpService;
 
 	@RequestMapping(value = "/contribuyentes/ica", method = RequestMethod.GET)
 	@RequireHardLogIn

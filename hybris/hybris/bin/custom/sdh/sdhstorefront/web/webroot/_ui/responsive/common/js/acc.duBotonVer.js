@@ -1,6 +1,6 @@
 ACC.duBotonVer = {
 
-	_autoload : [ "bindLabelVerButton","bindCheckBoxSelect" ],
+	_autoload : [ "bindLabelVerButton","bindCheckBoxSelect","bindGeneraDeclaracionButton","bindDialogGasolina" ],
 
 	
 	bindLabelVerButton : function() {
@@ -54,7 +54,7 @@ ACC.duBotonVer = {
 	
 	bindCheckBoxSelect : function() {
 		$(document).on("click", ".selectRadicado", function(e) {
-			e.preventDefault();
+//			e.preventDefault();
 			
  	       var valorNumRadicado = $.trim($(this).attr("data-numradicado")); 	       
  	       var valorModLicencia = $.trim($(this).attr("data-modlicencia")); 	       
@@ -63,7 +63,70 @@ ACC.duBotonVer = {
  	       $("#selectedTipoLicencia").val(valorModLicencia);
 
 		});
-	}
+	},
+	
+	
+	bindGeneraDeclaracionButton: function () {
+		 $(document).on("click", "#duGeneraDeclaracionButton", function (e) {
+	 	        e.preventDefault();
+	 	        
+	 	       var numForm  = $.trim($("#numForm").val());
+	 	 
+	 	       var data = {};
+	 	       
+	 	       data.numForm=numForm;
+	 	
+	 	      $.ajax({
+		            url: ACC.duGeneraDeclaracionURL,
+		            data: data,
+		            type: "GET",
+		            success: function (data) {
+		            	$( "#dialogDU" ).dialog( "open" );
+		            	if(data.errores)
+	            		{
+		            		$("#duDialogContent").html("");
+		            		$.each(data.errores, function( index, value ) {
+   	            			$("#duDialogContent").html($("#duDialogContent").html()+value.txtmsj+"<br>");
+   	            		});
+		            		
+		            		
+	            		}else
+	            		{
+	            			$("#duDialogContent").html("");
+	            			$("#duDialogContent").html("La declaración se ha generado exitosamente.")
+	            			
+	            			$("#downloadHelper").attr("href",data.urlDownload);
+	            			
+	            			document.getElementById("downloadHelper").click();
+	            			
+	            		}
+	 	      		
+		            },
+		            error: function () {
+		            	$( "#dialogDU" ).dialog( "open" );
+		            	$("#duDialogContent").html("Hubo un error al generar la declaración, por favor inténtalo más tarde");
+		            }
+		        });
+	 	       
+		 });
+	 },
+	 
+	
+   
+	    bindDialogGasolina: function(){
+   	
+   	$( "#dialogDU" ).dialog({ 
+   		autoOpen: false, 
+   		modal: true,
+			 draggable: false,
+   		buttons: {
+   			Ok: function() {
+   				$( this ).dialog( "close" );
+   			}
+   	    } 
+   	});
+   	
+   }
 
 
 };
