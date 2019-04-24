@@ -37,9 +37,9 @@ ACC.duBotonVer = {
 	
 	fillFieldsFromData : function(data) {
 
-		$("#divInfoRadicados").show();	
 		$("#duRadicados").find("tr:gt(0)").remove();
 		$.each(data.radicados, function (index,value){
+			if(value.numRadicado != ''){
 			$('#duRadicados').append("<tr>"+ 
 					 '<td><input id="numRadicado" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.numRadicado + '"></td>"' +
 					 '<td><input id="fechaRadicado" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.fechaRadicado + '"></td>"' +

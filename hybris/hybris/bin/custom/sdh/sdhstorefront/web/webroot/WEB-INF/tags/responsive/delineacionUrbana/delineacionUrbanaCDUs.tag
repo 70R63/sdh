@@ -62,6 +62,7 @@
 				<tbody>
 					<c:forEach items="${dataForm.valCont.delineacion}"
 						var="delineacion">
+						<c:if test="${delineacion.cdu != ''}">
 						<tr>
 							<td><input id="CDU" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
@@ -117,6 +118,7 @@
 							</td>
 
 						</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
