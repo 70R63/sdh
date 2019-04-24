@@ -8,6 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -46,9 +47,9 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 406px;"/></td>
+								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" value="${icaInfObjetoFormResp.documentType}"/></td>
+								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" value="${icaInfObjetoFormResp.documentNumber}"/></td>
+								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 406px;" value="${icaInfObjetoFormResp.completeName}"/></td>
 							</tr>
 						</tbody>
 					</table>

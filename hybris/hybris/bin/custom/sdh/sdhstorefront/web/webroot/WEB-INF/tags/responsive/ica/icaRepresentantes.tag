@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">
-					<table class="table table-bordered">
+					<table class="table table-bordered" id="example">
 						<thead style="background-color: rgb(235, 235, 228) !important">
 							<tr>
 
@@ -47,17 +47,23 @@
 						<tbody>
 							<tr>
 								<td><input class="inputtextnew" disabled="disabled"
+									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.tipoRelacion}"
 									type="text" /></td>
 								<td><input class="inputtextnew" disabled="disabled"
+									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.tipoDoc}"
 									type="text"
 									style="visibility: visibility !important; width: 75px" /></td>
 								<td><input class="inputtextnew" disabled="disabled"
+									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.numDoc}"
 									type="text" /></td>
 								<td><input class="inputtextnew" disabled="disabled"
+									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.nombre}"
 									type="text" /></td>
 								<td><input class="inputtextnew" disabled="disabled"
+									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.fechaDesde}"
 									type="text" /></td>
 								<td><input class="inputtextnew" disabled="disabled"
+									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.fechaHasta}"
 									type="text" /></td>
 							</tr>
 						</tbody>
