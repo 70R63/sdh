@@ -37,6 +37,8 @@ ACC.duBotonVer = {
 	
 	fillFieldsFromData : function(data) {
 
+		$("#divInfoRadicados").show();
+		debugger;
 		$("#duRadicados").find("tr:gt(0)").remove();
 		$.each(data.radicados, function (index,value){
 			if(value.numRadicado != ''){
@@ -47,7 +49,7 @@ ACC.duBotonVer = {
 					 '<td><input id="presupuesto" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.presupuesto + '"></td>"' +
 					 '<td><input id="estrato" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.estrato + '"></td>"' +
 					 '<td><input class="inputtextnew selectRadicado" style="visibility: visible !important; width: 20% !important" type="checkbox"  data-numradicado="' + value.numRadicado + '" data-modlicencia="' + value.modLicencia +'" ></td> '+ 
-					 "</tr>");	
+					 "</tr>");	}
 		})
 	},
 	
