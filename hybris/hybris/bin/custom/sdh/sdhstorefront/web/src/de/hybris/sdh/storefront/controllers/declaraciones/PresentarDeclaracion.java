@@ -28,6 +28,8 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCa
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
+import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
+import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
 
 import java.util.HashMap;
 import java.util.List;
@@ -241,8 +243,34 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			else if (dataFormResponse.getImpuesto().equals("6") && !dataFormResponse.getAnoGravable().equals("X"))
 			{
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+				final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+				SDHValidaMailRolResponse detalleContribuyente;
+				final InfoDelineacion infoDelineacion = new InfoDelineacion();
+				String mensajeError = "";
+
 				model.addAttribute("delineacionWithRadicadosList", sdhValidaContribuyenteService
 						.getDelineacionListByBpAndYearWithRadicados(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
+
+				contribuyenteRequest.setNumBP(customerModel.getNumBP());
+				detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
+						LOG);
+				if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+				{
+					infoDelineacion.setValCont(detalleContribuyente);
+				}
+				else
+				{
+					mensajeError = detalleContribuyente.getTxtmsj();
+					LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+					GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+				}
+
+				//model.addAttribute("dataFormDelineacion", infoDelineacion);
+				model.addAttribute("inputDelineacion", new InfoDelineacionInput());
+
+
+
 			}
 		}
 
