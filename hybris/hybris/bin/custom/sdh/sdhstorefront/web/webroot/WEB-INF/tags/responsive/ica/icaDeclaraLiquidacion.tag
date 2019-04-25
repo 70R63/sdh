@@ -16,11 +16,12 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totinord" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text" value=""
-						maxlength="240"></input>
+							code="ica.declaracion.liquidacion.totinord" /></label> <input id=""
+						name="" class="form-control" type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -40,6 +41,8 @@
 						maxlength="240"></input>
 				</div>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -58,6 +61,8 @@
 						maxlength="240"></input>
 				</div>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -67,15 +72,8 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-md-5">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.sanciones" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text" value=""
-						maxlength="240"></input>
-				</div>
-			</div>
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -89,13 +87,13 @@
 			<div class="col-md-5">
 				<div class="form-check">
 					<label class="form-check-label"
-						style="text-transform: capitalize !important"><spring:theme
+						style="text-transform: none !important;"><spring:theme
 							code="ica.declaracion.liquidacion.impavtableros" /> </label> <label
 						class="form-check-label"
 						style="text-transform: capitalize !important"> <input
 						type="radio" name="aporte" id="" class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important;">
-						Si
+						style="visibility: visible !important; min-height: 4px !important;"
+						onclick="show()"> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important"> <input
 						type="radio" name="aporte" id="" class="form-check-input mr-2"
@@ -105,9 +103,9 @@
 				</div>
 
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-4">
 				<div class="form-group">
-					<input disabled id="" name="" class="form-control" disabled
+					<input id="" id="" name="" class="form-control" disabled
 						type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
@@ -123,6 +121,8 @@
 						maxlength="240"></input>
 				</div>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -142,6 +142,8 @@
 						maxlength="240"></input>
 				</div>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -156,15 +158,24 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.valpag" /></label> <input disabled
+							code="ica.declaracion.liquidacion.valpag" /></label> <input id=""
+						name="" class="form-control" type="text" value="" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.sanciones" /></label> <input disabled
 						id="" name="" class="form-control" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>
+		</div>
 
-
-
-
+		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -183,23 +194,29 @@
 						maxlength="240"></input>
 				</div>
 			</div>
-
+		</div>
+		<div class="row">
 			<div class="col-md-5">
-				<label class="form-check-label"
-					style="text-transform: capitalize !important"><spring:theme
-						code="ica.declaracion.liquidacion.aportvol" /> </label>
 				<div class="form-check">
 					<label class="form-check-label"
+						style="text-transform: none !important;"><spring:theme
+							code="ica.declaracion.liquidacion.aportvol" /> </label> <label
+						class="form-check-label"
 						style="text-transform: capitalize !important"> <input
 						type="radio" name="aporte" id="" class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important;">
-						Si
+						style="visibility: visible !important; min-height: 4px !important;"
+						onclick="disab()"> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important"> <input
 						type="radio" name="aporte" id="" class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-						No
+						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
+						onclick="disab2()"> No
 					</label>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<select id="idaporte" disabled class="form-control"><option>Seleccionar</option></select>
 				</div>
 			</div>
 		</div>
@@ -216,4 +233,18 @@
 
 	</form:form>
 </div>
+
+<script>
+	function disab() {
+		var cant = document.getElementById('idaporte');
+		cant.disabled = false;
+
+	}
+
+	function disab2() {
+		var cant = document.getElementById('idaporte');
+		cant.disabled = true;
+
+	}
+</script>
 
