@@ -18,6 +18,8 @@ import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -102,6 +104,10 @@ public class IcaPageController extends AbstractPageController
 			icaInfObjetoRequest.setNumBP(VACIO);
 		}
 
+
+		final Calendar now = Calendar.getInstance();
+		final int year = now.get(Calendar.YEAR);
+		icaInfObjetoRequest.setAnoGravable(String.valueOf(year));
 
 		try
 		{

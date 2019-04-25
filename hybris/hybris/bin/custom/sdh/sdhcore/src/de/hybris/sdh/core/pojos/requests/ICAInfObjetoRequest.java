@@ -11,6 +11,7 @@ public class ICAInfObjetoRequest
 {
 	private String numObjeto;
 	private String numBP;
+	private String anoGravable;
 
 	/**
 	 * @return the numObjeto
@@ -46,6 +47,23 @@ public class ICAInfObjetoRequest
 		this.numBP = numBP;
 	}
 
+	/**
+	 * @return the anoGravable
+	 */
+	public String getAnoGravable()
+	{
+		return anoGravable;
+	}
+
+	/**
+	 * @param anoGravable
+	 *           the anoGravable to set
+	 */
+	public void setAnoGravable(final String anoGravable)
+	{
+		this.anoGravable = anoGravable;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -53,7 +71,8 @@ public class ICAInfObjetoRequest
 
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\"");
+		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\",");
+		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\"");
 		stringBuilder.append("}");
 
 		return stringBuilder.toString();
