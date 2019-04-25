@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -40,30 +40,42 @@
 				</label>
 			</div>
 		</div>
-		<div class="row totaluno">
-			<div class="col-md-1">
-				<input type="checkbox" name=""
-					class="form-check-input mr-2 actividad"
-					style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-					size="10">
+		<c:forEach items="${infoDeclara.ingNetosGrava }" var="eachIngreso">
+			<div class="row totaluno">
+					<div class="col-md-1">
+						<c:choose>
+						<c:when test="${eachIngreso.actPrincipal eq 'X' }">
+						<input type="checkbox" name=""
+							class="form-check-input mr-2 actividad"
+							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+							size="10" checked="checked">
+						</c:when>
+						<c:otherwise>
+							<input type="checkbox" name=""
+							class="form-check-input mr-2 actividad"
+							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+							size="10" >
+						</c:otherwise>
+						</c:choose>
+					</div>
+		
+					<div class="col-md-3">
+						<input class="form-control denomina" type="text" value="${eachIngreso.codCIIU}"/>
+					</div>
+					<div class="col-md-3">
+						<input class="form-control ingreso" type="text" value="${eachIngreso.ingresos}"/>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addtotaluno()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deletotaluno()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
 			</div>
-
-			<div class="col-md-3">
-				<input class="form-control denomina" type="text" />
-			</div>
-			<div class="col-md-3">
-				<input class="form-control ingreso" type="text" />
-			</div>
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addtotaluno()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img> <img onclick="deletotaluno()"
-						src="${themeResourcePath}/images/deledelineacion.png"
-						style="width: 25px"></img>
-				</div>
-			</div>
-		</div>
+			</c:forEach>
 	</div>
 
 	<br>

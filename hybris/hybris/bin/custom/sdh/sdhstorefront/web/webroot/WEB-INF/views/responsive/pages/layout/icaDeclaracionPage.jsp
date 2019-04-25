@@ -5,7 +5,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="icadecla" tagdir="/WEB-INF/tags/responsive/ica"%>
-
 	<icadecla:icaDeclaraInicial/>
 	<icadecla:icaDeclaraGenerales/>
 	<icadecla:icaDeclaraLiquidacion/>

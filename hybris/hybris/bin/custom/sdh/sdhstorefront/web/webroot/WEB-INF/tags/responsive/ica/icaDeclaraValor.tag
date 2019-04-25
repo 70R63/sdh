@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -74,48 +74,52 @@
 				</label>
 			</div>
 		</div>
-		<div class="row valor">
-			<div class="col-md-1">
-				<input class="form-control anio" type="text" />
-			</div>
-			<div class="col-md-2">
-				<select id="" class="form-control tipo" style="height: 48px;">
-					<option value=" ">Seleccionar</option>
-				</select>
-			</div>
-			<div class="col-md-1">
-				<input class="form-control numiden" type="text" />
-			</div>
-			<div class="col-md-2">
-				<input class="form-control nombre" type="text" />
-			</div>
-			<div class="col-md-1">
-				<input class="form-control direc" type="text" />
-			</div>
-			<div class="col-md-1">
-				<input class="form-control telefono" type="text" />
-			</div>
-			<div class="col-md-1">
-				<select id="" class="form-control denoact" style="height: 48px;">
-					<option value=" ">Seleccionar</option>
-				</select>
-			</div>
-			<div class="col-md-1">
-				<input class="form-control valbrut" type="text" />
-			</div>
-			<div class="col-md-1">
-				<input class="form-control valtotal" type="text" />
-			</div>
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addvalor()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img> <img onclick="delevalor()"
-						src="${themeResourcePath}/images/deledelineacion.png"
-						style="width: 25px"></img>
+		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
+			<c:if test="${not empty eachValor.tipoID }">
+				<div class="row valor">
+					<div class="col-md-1">
+						<input class="form-control anio" type="text" value="${eachValor.anoGravable }"/>
+					</div>
+					<div class="col-md-2">
+						<select id="" class="form-control tipo" style="height: 48px;">
+							<option value=" ">${eachValor.tipoID }</option>
+						</select>
+					</div>
+					<div class="col-md-1">
+						<input class="form-control numiden" type="text" value="${eachValor.numID }"/>
+					</div>
+					<div class="col-md-2">
+						<input class="form-control nombre" type="text" value="${eachValor.razonSocial }"/>
+					</div>
+					<div class="col-md-1">
+						<input class="form-control direc" type="text" value="${eachValor.direccion }"/>
+					</div>
+					<div class="col-md-1">
+						<input class="form-control telefono" type="text" value="${eachValor.telefono }"/>
+					</div>
+					<div class="col-md-1">
+						<select id="" class="form-control denoact" style="height: 48px;">
+							<option value=" ">Seleccionar</option>
+						</select>
+					</div>
+					<div class="col-md-1">
+						<input class="form-control valbrut" type="text" value="${eachValor.tarifaApl }"/>
+					</div>
+					<div class="col-md-1">
+						<input class="form-control valtotal" type="text"  value="${eachValor.montoRetenido }"/>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addvalor()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="delevalor()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			</c:if>
+		</c:forEach>
 	</div>
 	<div class="container">
 		<div class="row">

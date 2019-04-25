@@ -8,6 +8,9 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -32,7 +35,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.regitribut" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
+								id="" name="" class="form-control" disabled type="text" value="<spring:theme code='ica.declaracion.regimen.r${icaInfObjetoFormResp.icaInfObjetoResponse.regimen }' />"
 								maxlength="240"></input>
 						</div>
 					</div>
@@ -82,7 +85,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.cantesta" /></label> <input 
-								id="idcatestable" name="" class="form-control" disabled type="text" value=""
+								id="idcatestable" name="" class="form-control" disabled type="text" value="${infoDeclara.cantEstablec }"
 								maxlength="240"></input>
 						</div>
 					</div>

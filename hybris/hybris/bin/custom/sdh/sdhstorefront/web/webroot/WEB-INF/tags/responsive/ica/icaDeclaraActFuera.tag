@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -39,32 +39,35 @@
 				</label>
 			</div>
 		</div>
-		<div class="row actvifuera">
-			<div class="col-md-3">
-				<select id="" class="form-control deno" style="height: 48px;">
-					<option value=" ">Seleccionar</option>
-				</select>
-			</div>
-
-			<div class="col-md-3">
-				<select id="" class="form-control mun" style="height: 48px;">
-					<option value=" ">Seleccionar</option>
-				</select>
-			</div>
-			<div class="col-md-3">
-				<input class="form-control ing" type="text" />
-			</div>
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addactvifuera()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img> <img onclick="deleactvifuera()"
-						src="${themeResourcePath}/images/deledelineacion.png"
-						style="width: 25px"></img>
+		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
+			<c:if test="${not empty eachIngreso.codCIIU }">
+				<div class="row actvifuera">
+					<div class="col-md-3">
+						<select id="" class="form-control deno" style="height: 48px;">
+							<option value="${eachIngreso.codCIIU }">${eachIngreso.codCIIU }</option>
+						</select>
+					</div>
+		
+					<div class="col-md-3">
+						<select id="" class="form-control mun" style="height: 48px;">
+							<option value="${eachIngreso.codMunicipio }">${eachIngreso.desMunicipio }</option>
+						</select>
+					</div>
+					<div class="col-md-3">
+						<input class="form-control ing" type="text" value="${eachIngreso.ingresos }"/>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addactvifuera()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deleactvifuera()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-
+			</c:if>
+		</c:forEach>
 	</form:form>
 </div>
 

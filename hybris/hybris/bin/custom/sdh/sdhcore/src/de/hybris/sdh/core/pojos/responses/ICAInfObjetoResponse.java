@@ -32,6 +32,8 @@ public class ICAInfObjetoResponse
 	private DetalleDatosEconomicos datosEconomicos;
 	private List<DetalleMarcas> marcas;
 
+	private ICAInfoDeclara infoDeclara;
+
 	/**
 	 * @return the numForm
 	 */
@@ -304,6 +306,23 @@ public class ICAInfObjetoResponse
 	public void setRelaciones(final List<DetalleRelaciones> relaciones)
 	{
 		this.relaciones = relaciones;
+	}
+
+	/**
+	 * @return the infoDeclara
+	 */
+	public ICAInfoDeclara getInfoDeclara()
+	{
+		return infoDeclara;
+	}
+
+	/**
+	 * @param infoDeclara
+	 *           the infoDeclara to set
+	 */
+	public void setInfoDeclara(final ICAInfoDeclara infoDeclara)
+	{
+		this.infoDeclara = infoDeclara;
 	}
 
 
