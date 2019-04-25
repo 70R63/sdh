@@ -160,9 +160,9 @@
 							<form:hidden path="selectedRadicado" value="" />
 							<form:hidden path="selectedTipoLicencia" value="" />
 
-							<button type="submit" class="btn btn-primary btn-lg"
+							<button type="submit" class="btn-link"
 								id="declaradelibutton1" name="action" value="declaracion">
-								<spring:theme code="certificacion.inicial.generar" />
+								<spring:theme code="delineacion.urbana.radicados.declaracion" />
 							</button>
 						</form:form>
 					</div>
@@ -183,7 +183,7 @@
 									<form:hidden path="selectedRadicado" value="${item.radicados}" />
 									<form:hidden path="selectedTipoLicencia" value="" />
 
-									<button type="submit" class="btn btn-primary btn-lg"
+									<button type="submit" class="btn-link"
 										id="retenciondelibutton1" name="action" value="retencion">
 										<spring:theme code="delineacion.urbana.radicados.retencion" />
 									</button>
