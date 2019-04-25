@@ -54,7 +54,7 @@
 
 			</div>
 
-			<c:if test="${dataForm.impuesto ne '4'}">
+			<c:if test="${dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
 				<div class="col-md-4">
 					<div class="form-group ">
 						<label class="control-label required"><spring:theme
@@ -69,7 +69,8 @@
 		</div>
 
 
-		<c:if test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' '}">
+		<c:if
+			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
 					<sf:button action="${presentarDeclaracionUrl}" type="submit"
@@ -85,7 +86,7 @@
 </sf:form>
 <br>
 
-<c:if test="${dataForm.impuesto eq '4'}">
+<c:if test="${not empty publicidadExtList}">
 	<table id="myTable">
 		<tr>
 			<th>NUMERO DE RESOLUCION</th>
@@ -105,125 +106,92 @@
 	</table>
 </c:if>
 
-<!-- Se agrega tabla de CDU´s para delineación -->
-<!-- cambiar el número 6 por el que corresponda a delineación en caso de no ser este -->
-<c:if test="${dataForm.impuesto eq '6'}">
-	<div class="row">
-		<div class="col-md-9 col-md-offset-1">
-			<div class="table-resposive">
-				<table class="table">
-					<thead style="cellspacing: 10 !important">
-						<tr>
-							<th style="text-align: center"><label class="control-label "
-								for="" style="text-transform: capitalize"><spring:theme
-										code="impuestos.presentarDeclaracion.deliur.cdu" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for="" style="text-transform: capitalize"> <spring:theme
-										code="impuestos.presentarDeclaracion.deliur.tipobli" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for="" style="text-transform: capitalize"> <spring:theme
-										code="impuestos.presentarDeclaracion.deliur.tiplic" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for="" style="text-transform: capitalize"> <spring:theme
-										code="" /></label></th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<tr>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="CDU"></c:out>" /></td>
-							<td><select id="selctipobliga" class="form-control"
-								onchange="ShowSelected(this)">
-									<option value="">Seleccionar</option>
-									<option value="1">Declaración</option>
-									<option value="2">Retención</option>
-							</select></td>
-							<td><select id="selectiplic" class="form-control"
-								onchange="">
-									<option value="">Seleccionar</option>
-									<option value="1">Licencia</option>
-									<option value="2">Reconocimiento</option>
-							</select></td>
-							<td><label class="control-label" for=""
-								style="text-transform: capitalize; color: #0358d8 !important">
-									<spring:theme
-										code="impuestos.presentarDeclaracion.deliur.prendecla" />
-							</label></td>
-						</tr>
-
-					</tbody>
-				</table>
-			</div>
+<c:if test="${not empty delineacionWithRadicadosList}">
+	<div class="col-md-9 col-md-offset-1">
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="text-align: center">
+						<label class="control-label " for="" style="text-transform: capitalize">
+							<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" />
+						</label>
+					</th>
+					<th style="text-align: center"><label class="control-label"
+						for="" style="text-transform: capitalize"> <spring:theme
+								code="impuestos.presentarDeclaracion.deliur.tipobli" /></label></th>
+					<th style="text-align: center"><label class="control-label"
+						for="" style="text-transform: capitalize"> <spring:theme
+								code="impuestos.presentarDeclaracion.deliur.tiplic" /></label></th>
+					<th style="text-align: center"><label class="control-label"
+						for="" style="text-transform: capitalize"> <spring:theme
+								code="Evento" /></label></th>
+				</tr>
+			</thead>
+		</table>
+		<div class="table-resposive">
+			<c:forEach var="item" items="${delineacionWithRadicadosList}">
+				<div class="row">
+					<div class="col-sm-3">
+						<input style="width: 100%" class="inputtextnew"
+							disabled="disabled" type="text" value="${item.cdu}" />
+					</div>
+					<div class="col-sm-3">
+						<select id="selctipobliga" class="form-control"
+							onchange="ShowSelected(this)">
+							<option value="0-${item.cdu}">Seleccionar</option>
+							<option value="1-${item.cdu}">Declaración</option>
+							<option value="2-${item.cdu}">Retención</option>
+						</select>
+					</div>
+					<div class="col-sm-3">
+						<select id="selctipobliga" class="form-control"
+							onchange="ShowSelected1(this)">
+							<option value="0-${item.cdu}">Seleccionar</option>
+							<option value="1-${item.cdu}">Declaración</option>
+							<option value="2-${item.cdu}">Retención</option>
+						</select>
+					</div>
+					<div class="col-sm-3">Presentar Declaracion</div>
+				</div>
+				<div class="row" id="${item.cdu}" style="display: none">
+					<c:forEach var="radicado" items="${item.radicados}">
+						<div class="row">
+							<div class="col-sm-3"></div>
+							<div class="col-sm-3">Radicados:</div>
+							<div class="col-sm-3">
+								<input style="width: 100%" class="inputtextnew"
+									disabled="disabled" type="text" value="${radicado.numRadicado}" />
+							</div>
+							<div class="col-sm-3">Presentar Retencion</div>
+						</div>
+					</c:forEach>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </c:if>
 
-<!-- tabla de radicados para Delineación -->
-<br>
-<div class="row" id="idRadicados" style="display: none;">
-	<div class="row">
-		<div class="col-md-3 col-md-offset-1">
-			<div class="form-group">
-				<label class="control-label"><spring:theme
-						code="impuestos.presentarDeclaracion.deliur.cdu" /></label> <input
-					style="" class="form-control" disabled="disabled" type="text"
-					value="<c:out value="CDU"></c:out>" />
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-5 col-md-offset-3">
-			<div class="table-resposive">
-				<table class="table">
-					<thead style="cellspacing: 10 !important">
-						<tr>
-							<th style="text-align: center"><label class="control-label "
-								for="" style="text-transform: capitalize"><spring:theme
-										code="impuestos.presentarDeclaracion.deliur.radic" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for="" style="text-transform: capitalize"> <spring:theme
-										code="" /></label></th>
-						</tr>
-					</thead>
-					<tbody>
 
-						<tr>
 
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="RADICADOS"></c:out>" /></td>
-							<td><label class="control-label" for=""
-								style="text-transform: capitalize; color: #0358d8 !important">
-									<spring:theme
-										code="impuestos.presentarDeclaracion.deliur.prereten" />
-							</label></td>
-						</tr>
 
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-</div>
+
+
+
+
+
 
 <!-- se agrega control para tablas de delineación -->
 <script type="text/javascript">
 	function ShowSelected(selectObject) {
 		var value = selectObject.value;
-		var idLic = document.getElementById('selectiplic');
-		var idrad = document.getElementById('idRadicados');
-		if (value == '1') {
-			idLic.disabled = false;
-			idLic.selectedIndex = "";
-			idrad.style.display = 'none';
-		} else if (value == '2') {
-			idLic.disabled = true;
-			idLic.selectedIndex = "1";
-			idrad.style.display = 'block';
+		var selected = value.substring(0, 1);
+		var div = value.substring(2, value.length);
+		var x = document.getElementById(div);
+
+		if (selected === "2") {
+			x.style.display = "block";
 		} else {
-			idrad.style.display = 'none';
+			x.style.display = "none";
 		}
 	}
 </script>

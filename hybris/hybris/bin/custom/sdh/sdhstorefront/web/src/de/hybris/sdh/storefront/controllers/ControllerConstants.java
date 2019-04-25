@@ -251,9 +251,9 @@ public interface ControllerConstants
 				//new SelectAtomValue("2", "Vehículos"),
 				//new SelectAtomValue("3", "ICA"),
 				new SelectAtomValue("4", "Publicidad Exterior"),
-				new SelectAtomValue("5", "Sobretasa Gasolina"));
-				//new SelectAtomValue("6", "Delineación Urbana"));
-		
+				new SelectAtomValue("5", "Sobretasa Gasolina"), 
+				new SelectAtomValue("6", "Delineación Urbana"));
+
 		final List<SelectAtomValue> impuesto = Arrays.asList(
 				new SelectAtomValue("1", "Impuesto"),
 				new SelectAtomValue("2", "Sujeto"));

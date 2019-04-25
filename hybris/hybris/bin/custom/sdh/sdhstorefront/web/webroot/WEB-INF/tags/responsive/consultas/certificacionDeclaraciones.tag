@@ -29,7 +29,7 @@
 	
 	function onChangeAnioGravable() {
 		impuesto = document.getElementById("tipoimp").value;	
-		if(impuesto == 4){
+		if(impuesto == 4 || impuesto == 6){
 			form = document.getElementById("form_pdf");
 			form.submit();
 		}			
@@ -50,7 +50,6 @@
 	
 	downloadPDF('${imprimeCertiDeclaraResponse.stringPDF}');
 </script>
-
 
 
 <c:choose>
@@ -102,7 +101,7 @@
 					</div>
 				</div>
 
-				<c:if test="${certiFormPost.idimp ne '4'}">
+				<c:if test="${certiFormPost.idimp ne '4' && certiFormPost.idimp ne '6'}">
 					<div class="col-md-3" id="idPeriodo" style="display: block;">
 						<div class="form-group">
 							<label class="control-label required"> <spring:theme
@@ -289,7 +288,7 @@
 				</div>
 			</div>
 
-			<c:if test="${certiFormPost.idimp ne '4'}">
+			<c:if test="${certiFormPost.idimp ne '4' && certiFormPost.idimp ne '6'}">
 				<div class="row" id="formButtons">
 					<div class="col-md-12 text-center">
 						<div class="form-group ">
@@ -328,23 +327,16 @@
 								<input type="hidden" name="Idimp" value="4" />
 								<input type="hidden" name="rowFrompublicidadTable" value="X" />
 								<input type="hidden" name="numBP" value="${item.numBP}" />
-								<input type="hidden" name="aniograv"
-									value="${item.clavePeriodo}" />
-								<input type="hidden" name="ctaContrato"
-									value="${item.ctaContrato}" />
+								<input type="hidden" name="aniograv" value="${item.clavePeriodo}" />
+								<input type="hidden" name="ctaContrato" value="${item.ctaContrato}" />
 								<input type="hidden" name="numObjeto" value="${item.numObjeto}" />
-								<input type="hidden" name="clavePeriodo"
-									value="${item.clavePeriodo}" />
-								<input type="hidden" name="referencia"
-									value="${item.referencia}" />
-								<input type="hidden" name="fechaCompensa"
-									value="${item.fechaCompensa}" />
+								<input type="hidden" name="clavePeriodo" value="${item.clavePeriodo}" />
+								<input type="hidden" name="referencia" value="${item.referencia}" />
+								<input type="hidden" name="fechaCompensa" value="${item.fechaCompensa}" />
 								<input type="hidden" name="importe" value="${item.importe}" />
 								<input type="hidden" name="moneda" value="${item.moneda}" />
-								<input type="hidden" name="numfactForm"
-									value="${item.numfactForm}" />
-								<input type="hidden" name="numDocPago"
-									value="${item.numDocPago}" />
+								<input type="hidden" name="numfactForm" value="${item.numfactForm}" />
+								<input type="hidden" name="numDocPago" value="${item.numDocPago}" />
 								<input type="hidden" name="numResolu" value="${item.numResolu}" />
 								<input type="hidden" name="tipoValla" value="${item.tipoValla}" />
 
@@ -366,107 +358,50 @@
 			</button>
 
 		</c:if>
+		
+		<c:if test="${not empty consultaPagoDelineacionList}">
+			<table id="myTable">
+				<tr>
+					<th>CDU</th>
+					<th>FECHA DE EXPEDICION</th>
+					<th>IMPRIMIR</th>
+				</tr>
+				<c:forEach var="item" items="${consultaPagoDelineacionList}">
+					<tr>
+						<td><c:out value="${item.cdu}" /></td>
+						<td><c:out value="${item.fechaExp}" /></td>
+						<td><form:form id="form_pdf"
+								action="/sdhstorefront/es/contribuyentes/consultas/certideclaraciones"
+								method="post" commandName="certiFormPost">
+								<input type="hidden" name="tipoImp" value="1" />
+								<input type="hidden" name="Idimp" value="6" />
+								<input type="hidden" name="rowFrompublicidadTable" value="X" />
+								<input type="hidden" name="numObjeto" value="${item.numObjeto}" />
+								<input type="hidden" name="aniograv" value="${item.fechaExp}" />
+							
+								<button type="submit" class="btn btn-primary btn-lg"
+									id="generarPDFButton" name="generarPDFButton">
+									<spring:theme code="certificacion.inicial.generar" />
+								</button>
+							</form:form></td>
+					</tr>
+				</c:forEach>
+			</table>
+
+			<br>
+			<br>
+
+			<button type="button" class="btn btn-primary btn-lg" id="regresar"
+				onclick="reiniciaCertificaPublicidad()">
+				<spring:theme code="certificacion.inicial.regresar" />
+			</button>
+
+		</c:if>
 	</div>
 
-	<!-- Se agrega tabla de CDU´s para delineación -->
-	<!-- cambiar el número 6 por el que corresponda a delineación en caso de no ser este -->
-	<c:if test="${certiFormPost.idimp eq '6'}">
-		<div class="row">
-			<div class="col-md-9 col-md-offset-1">
-				<div class="table-resposive">
-					<table class="table">
-						<thead style="cellspacing: 10 !important">
-							<tr>
-								<th style="text-align: center"><label
-									class="control-label " for=""
-									style="text-transform: capitalize"><spring:theme
-											code="certificacion.inicial.deliur.cdu" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									for="" style="text-transform: capitalize"> <spring:theme
-											code="certificacion.inicial.deliur.tipobli" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									for="" style="text-transform: capitalize"> <spring:theme
-											code="certificacion.inicial.deliur.tiplic" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									for="" style="text-transform: capitalize"> <spring:theme
-											code="" /></label></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="CDU"></c:out>" /></td>
-								<td><select id="selctipobliga" class="form-control"
-									onchange="ShowSelected(this)">
-										<option value="">Seleccionar</option>
-										<option value="1">Declaración</option>
-										<option value="2">Retención</option>
-								</select></td>
-								<td><select id="selectiplic" class="form-control"
-									onchange="">
-										<option value="">Seleccionar</option>
-										<option value="1">Licencia</option>
-										<option value="2">Reconocimiento</option>
-								</select></td>
-								<td><label class="control-label" for=""
-									style="text-transform: capitalize; color: #0358d8 !important">
-										<spring:theme code="certificacion.inicial.deliur.prendecla" />
-								</label></td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</c:if>
 
 
-	<!-- tabla de radicados para Delineación -->
-	<br>
-	<div class="row" id="idRadicados" style="display: none;">
-		<div class="row">
-			<div class="col-md-3 col-md-offset-1">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="certificacion.inicial.deliur.cdu" /></label> <input style=""
-						class="form-control" disabled="disabled" type="text"
-						value="<c:out value="CDU"></c:out>" />
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-5 col-md-offset-3">
-				<div class="table-resposive">
-					<table class="table">
-						<thead style="cellspacing: 10 !important">
-							<tr>
-								<th style="text-align: center"><label
-									class="control-label " for=""
-									style="text-transform: capitalize"><spring:theme
-											code="certificacion.inicial.deliur.radic" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									for="" style="text-transform: capitalize"> <spring:theme
-											code="" /></label></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="RADICADOS"></c:out>" /></td>
-								<td><label class="control-label" for=""
-									style="text-transform: capitalize; color: #0358d8 !important">
-										<spring:theme code="certificacion.inicial.deliur.prereten" />
-								</label></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+
 </div>
 <div id="dialog" title="Generar certideclara">
 	<div id="certiDialogContent"></div>

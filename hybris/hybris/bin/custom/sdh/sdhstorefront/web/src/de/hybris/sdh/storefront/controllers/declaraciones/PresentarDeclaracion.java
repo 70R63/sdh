@@ -237,7 +237,12 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 				model.addAttribute("publicidadExtList", sdhValidaContribuyenteService
 						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
-				System.out.println("hola como estas");
+			}
+			else if (dataFormResponse.getImpuesto().equals("6") && !dataFormResponse.getAnoGravable().equals("X"))
+			{
+				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+				model.addAttribute("delineacionWithRadicadosList", sdhValidaContribuyenteService
+						.getDelineacionListByBpAndYearWithRadicados(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
 			}
 		}
 
@@ -277,6 +282,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			map.put("0", "Seleccionar");
 			map.put("4", "Publicidad Exterior");
 			map.put("5", "Sobretasa Gasolina");
+			map.put("6", "Delineacion Urbana");
 		}
 		else if (optionGas != "" && optionPubExt == "")
 		{

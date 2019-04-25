@@ -17,5 +17,9 @@ public interface SDHConsultaPagoService
 {
 	String consultaPago(ConsultaPagoRequest request);
 
-	List<ConsultaPagoDeclaraciones> consultaPago(String numBP, String numObjeto, String clavePeriodo);
+	List<ConsultaPagoDeclaraciones> consultaPago(String numBP, String numObjeto, String clavePeriodo); //Publicidad
+
+	List<ConsultaPagoDeclaraciones> consultaPagoDelineacion(String numBP, String numObjeto, String clavePeriodo);
+
+
 }

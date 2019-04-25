@@ -4,7 +4,10 @@
 package de.hybris.sdh.core.services;
 
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
@@ -21,4 +24,10 @@ public interface SDHValidaContribuyenteService
 	SDHValidaMailRolResponse validaContribuyente(String stringBp);
 
 	List<ImpuestoPublicidadExterior> getpublicidadExtListByBpAndYear(String stringBp, String stringYear);
+
+	List<ImpuestoDelineacionUrbana> getDelineacionListByBpAndYear(String stringBp, String stringYear);
+
+	List<ImpuestoDelineacionUrbanaWithRadicados> getDelineacionListByBpAndYearWithRadicados(String stringBp, String stringYear);
+
+	RadicaDelinResponse getRadicadosDelineacion(String numBp, String cdu);
 }
