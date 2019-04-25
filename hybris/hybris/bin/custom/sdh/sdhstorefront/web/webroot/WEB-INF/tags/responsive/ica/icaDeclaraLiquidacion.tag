@@ -87,15 +87,15 @@
 			<div class="col-md-5">
 				<div class="form-check">
 					<label class="form-check-label"
-						style="text-transform: none !important;"><spring:theme
+						style="text-transform: none !important; font-weight: normal !important"><spring:theme
 							code="ica.declaracion.liquidacion.impavtableros" /> </label> <label
 						class="form-check-label"
-						style="text-transform: capitalize !important"> <input
+						style="text-transform: capitalize !important; font-weight: normal !important"> <input
 						type="radio" name="aporte" id="" class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
 						onclick="show()"> Si
 					</label> <label class="form-check-label"
-						style="text-transform: capitalize !important"> <input
+						style="text-transform: capitalize !important;font-weight: normal !important"> <input
 						type="radio" name="aporte" id="" class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
 						No
@@ -199,15 +199,15 @@
 			<div class="col-md-5">
 				<div class="form-check">
 					<label class="form-check-label"
-						style="text-transform: none !important;"><spring:theme
+						style="text-transform: none !important; font-weight: normal !important"><spring:theme
 							code="ica.declaracion.liquidacion.aportvol" /> </label> <label
 						class="form-check-label"
-						style="text-transform: capitalize !important"> <input
+						style="text-transform: capitalize !important; font-weight: normal !important"> <input
 						type="radio" name="aporte" id="" class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
 						onclick="disab()"> Si
 					</label> <label class="form-check-label"
-						style="text-transform: capitalize !important"> <input
+						style="text-transform: capitalize !important; font-weight: normal !important"> <input
 						type="radio" name="aporte" id="" class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
 						onclick="disab2()"> No
