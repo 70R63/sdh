@@ -36,11 +36,11 @@
 					<table class="table col-md-2 table-bordered">
 						<thead>
 							<tr>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
 											code="ica.declaracion.table.tipdoc" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
 											code="ica.declaracion.table.numdoc" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
 											code="ica.declaracion.table.nombre" /></label></td>
 							</tr>
 						</thead>

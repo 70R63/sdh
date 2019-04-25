@@ -1197,7 +1197,12 @@ public class SobreTasaGasolinaService
 	 */
 	public String prepararValNumerico(final String valorNumString)
 	{
-		final String valorConvertido = valorNumString.replaceFirst("^0+(?!$)", "");
+		String valorConvertido = "";
+
+		if (valorNumString != null)
+		{
+			valorConvertido = valorNumString.replaceFirst("^0+(?!$)", "");
+		}
 
 		return valorConvertido;
 	}

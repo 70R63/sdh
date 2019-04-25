@@ -25,7 +25,7 @@ public class ICAInfObjetoResponse
 	private String estadoMatricula;
 	private String claseESAL;
 
-	private DetalleRelaciones relaciones;
+	private List<DetalleRelaciones> relaciones;
 
 	private List<DetalleActivEconomicas> activEconomicas;
 	private List<DetalleEstablecimientos> establecimientos;
@@ -220,23 +220,6 @@ public class ICAInfObjetoResponse
 	}
 
 	/**
-	 * @return the relaciones
-	 */
-	public DetalleRelaciones getRelaciones()
-	{
-		return relaciones;
-	}
-
-	/**
-	 * @param relaciones
-	 *           the relaciones to set
-	 */
-	public void setRelaciones(final DetalleRelaciones relaciones)
-	{
-		this.relaciones = relaciones;
-	}
-
-	/**
 	 * @return the activEconomicas
 	 */
 	public List<DetalleActivEconomicas> getActivEconomicas()
@@ -304,6 +287,23 @@ public class ICAInfObjetoResponse
 	public void setMarcas(final List<DetalleMarcas> marcas)
 	{
 		this.marcas = marcas;
+	}
+
+	/**
+	 * @return the relaciones
+	 */
+	public List<DetalleRelaciones> getRelaciones()
+	{
+		return relaciones;
+	}
+
+	/**
+	 * @param relaciones
+	 *           the relaciones to set
+	 */
+	public void setRelaciones(final List<DetalleRelaciones> relaciones)
+	{
+		this.relaciones = relaciones;
 	}
 
 

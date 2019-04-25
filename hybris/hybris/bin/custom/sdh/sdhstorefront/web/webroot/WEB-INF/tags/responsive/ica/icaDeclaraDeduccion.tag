@@ -20,32 +20,72 @@
 		</div>
 	</div>
 
-
+	<br>
 	<form:form action="">
-		<div class="row" style="margin-top: 18px">
-			<div class="col-md-7">
-				<div class="table-responsive">
-					<table class="table table-bordered">
-						<thead style="background-color: rgb(235, 235, 228)!important">
-							<tr>
-								<td ><label
-									class="control-label text-capitalize !important" ><spring:theme
-											code="ica.declaracion.deducciones.deduccion" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
-											code="ica.declaracion.deducciones.monto" /></label></td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><select id="" style="width: 200px">
-										<option value=" ">Seleccionar</option>
-								</select></td>
-								<td><input class="inputtextnew" type="text" /></td>
-							</tr>
-						</tbody>
-					</table>
+		<div class="row">
+			<div class="col-md-3">
+				<label class="control-label text-capitalize !important" for="">
+					<spring:theme code="ica.declaracion.deducciones.deduccion" />
+				</label>
+			</div>
+			<div class="col-md-3">
+				<label class="control-label text-capitalize !important" for="">
+					<spring:theme code="ica.declaracion.deducciones.monto" />
+				</label>
+			</div>
+		</div>
+		<div class="row deducciones">
+			<div class="col-md-3">
+				<select id="" class="form-control deducci" style="height: 48px;">
+					<option value=" ">Seleccionar</option>
+				</select>
+			</div>
+
+			<div class="col-md-3">
+				<input class="form-control valordedu" type="text" />
+			</div>
+			<div class="col-md-1">
+				<div class="form-group ">
+					<img onclick="adddeducciones()"
+						src="${themeResourcePath}/images/adddelineacion.png"
+						style="width: 25px"></img> <img onclick="delededucciones()"
+						src="${themeResourcePath}/images/deledelineacion.png"
+						style="width: 25px"></img>
 				</div>
 			</div>
 		</div>
 	</form:form>
 </div>
+
+<script>
+	function adddeducciones() {
+
+		var tam = $(".deducciones").length;
+		if ($(".deducciones").length < 20) {
+			$($(".deducciones")[0]).parent().append(
+					$($(".deducciones")[0]).clone());
+			$($(".deducciones")[0]).parent().children().last().find(".deducci")
+					.val("")
+			$($(".deducciones")[0]).parent().children().last().find(
+					".valordedu").val("")
+
+		} else {
+			alert("No se pueden agregar más registros");
+		}
+
+	}
+
+	function delededucciones() {
+		debugger;
+		var i = $(".deducciones").length;
+		var val = i - 1;
+		if ($(".deducciones").length <= 20 && $(".deducciones").length > 1) {
+
+			$($(".deducciones")[val]).closest(
+					$($(".deducciones")[val]).remove());
+
+		} else if ($(".deducciones").length <= 1) {
+			alert("No puede eliminar todos los registros");
+		}
+	}
+</script>

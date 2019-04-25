@@ -212,16 +212,16 @@
 function show() {
 	var rep = document.getElementById('representante');
 	var rev = document.getElementById('Revisor');
-	rep.style.display = 'block';
-	rev.style.display = 'none';
+	rep.style.display = 'none';
+	rev.style.display = 'block';
 
 	}
 	
 function show2() {
 	var rep = document.getElementById('representante');
 	var rev = document.getElementById('Revisor');
-	rep.style.display = 'none';
-	rev.style.display = 'block';
+	rep.style.display = 'block';
+	rev.style.display = 'none';
 
 	}
 </script>

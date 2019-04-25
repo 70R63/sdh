@@ -20,36 +20,84 @@
 		</div>
 	</div>
 
-
+	<br>
 	<form:form action="">
-		<div class="row" style="margin-top: 18px">
-			<div class="col-md-10">
-				<div class="table-responsive">
-					<table class="table table-bordered">
-						<thead style="background-color: rgb(235, 235, 228) !important">
-							<tr>
-								<td style="width: 250px;"><label class="control-label text-capitalize !important"><spring:theme
-											code="ica.declaracion.actifuera.ciiu" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
-											code="ica.declaracion.actifuera.municipio" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
-											code="ica.declaracion.actifuera.ingre" /></label></td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td style="width: 300px;"><select id="" style="width: 300px;">
-										<option value=" ">Seleccionar</option>
-								</select></td>
-								<td><select class="" style="width: 200px;" >
-										<option>Seleccionar</option>
-								</select></td>
-								<td><input class="inputtextnew" type="text"  /></td>
-							</tr>
-						</tbody>
-					</table>
+		<div class="row">
+			<div class="col-md-3">
+				<label class="control-label text-capitalize !important" for="">
+					<spring:theme code="ica.declaracion.actifuera.ciiu" />
+				</label>
+			</div>
+			<div class="col-md-3">
+				<label class="control-label text-capitalize !important" for="">
+					<spring:theme code="ica.declaracion.actifuera.municipio" />
+				</label>
+			</div>
+			<div class="col-md-3">
+				<label class="control-label text-capitalize !important" for="">
+					<spring:theme code="ica.declaracion.actifuera.ingre" />
+				</label>
+			</div>
+		</div>
+		<div class="row actvifuera">
+			<div class="col-md-3">
+				<select id="" class="form-control deno" style="height: 48px;">
+					<option value=" ">Seleccionar</option>
+				</select>
+			</div>
+
+			<div class="col-md-3">
+				<select id="" class="form-control mun" style="height: 48px;">
+					<option value=" ">Seleccionar</option>
+				</select>
+			</div>
+			<div class="col-md-3">
+				<input class="form-control ing" type="text" />
+			</div>
+			<div class="col-md-1">
+				<div class="form-group ">
+					<img onclick="addactvifuera()"
+						src="${themeResourcePath}/images/adddelineacion.png"
+						style="width: 25px"></img> <img onclick="deleactvifuera()"
+						src="${themeResourcePath}/images/deledelineacion.png"
+						style="width: 25px"></img>
 				</div>
 			</div>
 		</div>
+
 	</form:form>
 </div>
+
+<script>
+	function addactvifuera() {
+
+		var tam = $(".actvifuera").length;
+		if ($(".actvifuera").length < 20) {
+			$($(".actvifuera")[0]).parent().append(
+					$($(".actvifuera")[0]).clone());
+			$($(".actvifuera")[0]).parent().children().last().find(".deno")
+					.val("")
+			$($(".actvifuera")[0]).parent().children().last().find(".mun").val(
+					"")
+			$($(".actvifuera")[0]).parent().children().last().find(".ing").val(
+					"")
+
+		} else {
+			alert("No se pueden agregar más registros");
+		}
+
+	}
+
+	function deleactvifuera() {
+
+		var i = $(".actvifuera").length;
+		var val = i - 1;
+		if ($(".actvifuera").length <= 20 && $(".actvifuera").length > 1) {
+
+			$($(".actvifuera")[val]).closest($($(".actvifuera")[val]).remove());
+
+		} else if ($(".actvifuera").length <= 1) {
+			alert("No puede eliminar todos los registros");
+		}
+	}
+</script>
