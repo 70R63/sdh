@@ -17,4 +17,7 @@ public interface SDHCustomerFacade
 	boolean isUserRegistered(String documentNumber, String documentType);
 
 	void updateMiRitInfo();
+
+	boolean isValidRoleForCurrentCustomer(String role);
+
 }

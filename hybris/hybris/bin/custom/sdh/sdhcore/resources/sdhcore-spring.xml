@@ -644,4 +644,6 @@
 	
 	<bean id="sdhICACalculoImpService" class="de.hybris.sdh.core.services.impl.DefaultSDHICACalculoImpService" />
 
+	<bean id="sdhFTPService"	class="de.hybris.sdh.core.services.impl.DefaultSDHFTPService" />
+
 </beans>

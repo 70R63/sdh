@@ -234,6 +234,102 @@ public class DelineacionUrbanaController extends AbstractPageController
 		return paginaDestino;
 	}
 
+	@RequestMapping(value = "/contribuyentes/delineacion-urbana/declaracion", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String delineacionUrbanaDeclaracionPOST(@ModelAttribute("inputDelineacion")
+	final InfoDelineacionInput input, @RequestParam(value = "action")
+	final String action, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
+	{
+
+
+
+		final InfoObjetoDelineacionRequest infoDelineacionRequest = new InfoObjetoDelineacionRequest();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
+		String mensajeError = "";
+		String paginaDestino = "";
+		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
+
+		final InfoDelineacion infoDelineacion = new InfoDelineacion();
+		infoDelineacion.setInput(input);
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente;
+		contribuyenteRequest.setNumBP(customerModel.getNumBP());
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		{
+			infoDelineacion.setValCont(detalleContribuyente);
+		}
+		else
+		{
+			mensajeError = detalleContribuyente.getTxtmsj();
+			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+		}
+
+		System.out.println("---------------- En Delineacion urbana POST --------------------------");
+		System.out.println(infoDelineacion);
+		System.out.println(infoDelineacion.getValCont());
+		System.out.println(infoDelineacion.getValCont().getDelineacion());
+		System.out.println(infoDelineacion);
+		System.out.println(infoDelineacion.getInput());
+		System.out.println(infoDelineacion.getInput().getSelectedCDU());
+		System.out.println("---------------- En Delineacion urbana POST --------------------------");
+
+
+
+		infObjetoDelineacionExtras.setAnoGravable(gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(),
+				infoDelineacion.getInput().getSelectedCDU()));
+		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
+
+
+		infoDelineacionRequest.setNumBP(infoDelineacion.getValCont().getInfoContrib().getNumBP());
+		infoDelineacionRequest.setCdu(infoDelineacion.getInput().getSelectedCDU());
+		infoDelineacionRequest.setNumRadicado(infoDelineacion.getInput().getSelectedRadicado());
+		infoDelineacionRequest.setAnoGravable(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
+		infoDelineacionRequest.setTipoLicencia(infoDelineacion.getInput().getSelectedTipoLicencia());
+		//		infoDelineacionRequest.setRetencion(retencion);//pendiente de definir que iria
+		//		infoDelineacionRequest.setOpcionUso(opcionUso);//pendiente de definir que iria
+
+		if (action.equals("retencion"))
+		{
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
+			infoDelineacion.getInput().setTipoFlujo("R");
+		}
+		if (action.equals("declaracion"))
+		{
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
+			infoDelineacion.getInput().setTipoFlujo("D");
+			infoDelineacionRequest.setNumRadicado("");
+		}
+
+
+		System.out.println("Request para infObjeto/Delineacion: " + infoDelineacionRequest);
+		infoDelineacionResponse = gasolinaService.consultaInfoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de infObjeto/Delineacion: " + infoDelineacionResponse);
+		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
+		{
+			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
+			infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
+		}
+		else
+		{
+			//			mensajeError = detalleContribuyente.getTxtmsj();
+			//			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+			//			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+		}
+
+
+		model.addAttribute("dataForm", infoDelineacion);
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return paginaDestino;
+	}
+
 
 
 	@RequestMapping(value = "/contribuyentes/delineacionurbana/detalle", method = RequestMethod.GET)

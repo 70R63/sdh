@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -45,27 +45,31 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input class="inputtextnew" disabled="disabled"
-									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.tipoRelacion}"
-									type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.tipoDoc}"
-									type="text"
-									style="visibility: visibility !important; width: 75px" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.numDoc}"
-									type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.nombre}"
-									type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.fechaDesde}"
-									type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									value="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones.fechaHasta}"
-									type="text" /></td>
-							</tr>
+							<c:forEach items="${icaInfObjetoFormResp.icaInfObjetoResponse.relaciones}" var="eachRelation">
+								<c:if test="${not empty eachRelation.tipoRelacion }">
+									<tr>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachRelation.tipoRelacion}"
+											type="text" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachRelation.tipoDoc}"
+											type="text"
+											style="visibility: visibility !important; width: 75px" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachRelation.numDoc}"
+											type="text" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachRelation.nombre}"
+											type="text" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachRelation.fechaDesde}"
+											type="text" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachRelation.fechaHasta}"
+											type="text" /></td>
+									</tr>
+								</c:if>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -81,7 +85,8 @@
 					type="button">
 					<spring:theme code="ica.inicial.representantes.regresar" />
 				</button>
-				<button style="margin-top: 3px;" id=""
+<%-- 				<button style="margin-top: 3px;" id="" onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?anoGravable=${fn:substring(icaInfObjetoFormResp.icaInfObjetoResponse.fechaIniAct,0,4)}&numObjeto=${numObjeto}' />';" --%>
+				<button style="margin-top: 3px;" id="" onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?anoGravable=2019&numObjeto=${numObjeto}' />';"
 					class="btn btn-primary btn-lg" type="button">
 					<spring:theme code="ica.inicial.representantes.presendecla" />
 				</button>

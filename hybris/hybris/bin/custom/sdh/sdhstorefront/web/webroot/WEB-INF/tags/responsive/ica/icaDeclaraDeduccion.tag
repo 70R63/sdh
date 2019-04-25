@@ -20,74 +20,72 @@
 		</div>
 	</div>
 
-
+	<br>
 	<form:form action="">
-		<div class="row" style="margin-top: 18px">
-			<div class="col-md-10">
-				<div class="table-responsive">
-					<table class="table table-bordered">
-						<thead style="background-color: rgb(235, 235, 228)!important">
-							<tr>
-								<td style="width: 10px"><label
-									class="control-label text-capitalize !important"><spring:theme
-											code="ica.declaracion.deducciones.deduccion" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
-											code="ica.declaracion.deducciones.monto" /></label></td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><select id="">
-										<option value=" ">&nbsp;</option>
-										<option
-											value="Actividad no sujeta por la porduccion Primaria Agricola">Actividad
-											no sujeta por la porduccion Primaria Agricola</option>
-										<option value="Enajenacion de Activo Fijos">Enajenacion
-											de Activo Fijos</option>
-										<option value="Exportacion de bienes">Exportacion de
-											bienes</option>
-										<option value="Exportacion de Servicios">Exportacion
-											de Servicios</option>
-										<option
-											value="Actividad no sujeta Art. 39 Decreto 352 de 2002">Actividad
-											no sujeta Art. 39 Decreto 352 de 2002</option>
-										<option
-											value="Actividades no sujetas propias de obj.soc. de prop.horiz.">Actividades
-											no sujetas propias de obj.soc. de prop.horiz.</option>
-										<option
-											value="Explotación de los juegos de suerte y azar (Ley 643 de 2001)">Explotación
-											de los juegos de suerte y azar (Ley 643 de 2001)</option>
-										<option value="Donaciones">Donaciones</option>
-										<option
-											value="Exen.consec.de actos terroristas o catástrofes naturales">Exen.consec.de
-											actos terroristas o catástrofes naturales</option>
-										<option value="Base gravable especial">Base gravable
-											especial</option>
-										<option
-											value="Ingresos por actividades realizadas a través de Consorcios">Ingresos
-											por actividades realizadas a través de Consorcios</option>
-										<option
-											value="Dividendos que no hacen parte del giro ordinario del negocio">Dividendos
-											que no hacen parte del giro ordinario del negocio</option>
-										<option
-											value="Exención víctima del secuestro o de la desaparición forzada">Exención
-											víctima del secuestro o de la desaparición forzada</option>
-										<option
-											value="Corrección monetaria y/o ajustes por inflaciones">Corrección
-											monetaria y/o ajustes por inflaciones</option>
-										<option value="Reintegro de costos y gastos">Reintegro
-											de costos y gastos</option>
-										<option value="Salarios">Salarios</option>
-										<option value="Devoluciones">Devoluciones</option>
-										<option value="Rebajas">Rebajas</option>
-										<option value="Descuentos">Descuentos</option>
-								</select></td>
-								<td><input class="inputtextnew" type="text" /></td>
-							</tr>
-						</tbody>
-					</table>
+		<div class="row">
+			<div class="col-md-3">
+				<label class="control-label text-capitalize !important" for="">
+					<spring:theme code="ica.declaracion.deducciones.deduccion" />
+				</label>
+			</div>
+			<div class="col-md-3">
+				<label class="control-label text-capitalize !important" for="">
+					<spring:theme code="ica.declaracion.deducciones.monto" />
+				</label>
+			</div>
+		</div>
+		<div class="row deducciones">
+			<div class="col-md-3">
+				<select id="" class="form-control deducci" style="height: 48px;">
+					<option value=" ">Seleccionar</option>
+				</select>
+			</div>
+
+			<div class="col-md-3">
+				<input class="form-control valordedu" type="text" />
+			</div>
+			<div class="col-md-1">
+				<div class="form-group ">
+					<img onclick="adddeducciones()"
+						src="${themeResourcePath}/images/adddelineacion.png"
+						style="width: 25px"></img> <img onclick="delededucciones()"
+						src="${themeResourcePath}/images/deledelineacion.png"
+						style="width: 25px"></img>
 				</div>
 			</div>
 		</div>
 	</form:form>
 </div>
+
+<script>
+	function adddeducciones() {
+
+		var tam = $(".deducciones").length;
+		if ($(".deducciones").length < 20) {
+			$($(".deducciones")[0]).parent().append(
+					$($(".deducciones")[0]).clone());
+			$($(".deducciones")[0]).parent().children().last().find(".deducci")
+					.val("")
+			$($(".deducciones")[0]).parent().children().last().find(
+					".valordedu").val("")
+
+		} else {
+			alert("No se pueden agregar más registros");
+		}
+
+	}
+
+	function delededucciones() {
+		debugger;
+		var i = $(".deducciones").length;
+		var val = i - 1;
+		if ($(".deducciones").length <= 20 && $(".deducciones").length > 1) {
+
+			$($(".deducciones")[val]).closest(
+					$($(".deducciones")[val]).remove());
+
+		} else if ($(".deducciones").length <= 1) {
+			alert("No puede eliminar todos los registros");
+		}
+	}
+</script>

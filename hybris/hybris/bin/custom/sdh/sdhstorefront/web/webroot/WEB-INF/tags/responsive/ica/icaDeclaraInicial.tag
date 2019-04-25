@@ -13,7 +13,7 @@
 		<div class="col-md-12">
 			<table class="table">
 				<thead>
-					<tr class="avisoheadline p">
+					<tr class="avisoheadline p text-center">
 						<td><spring:theme code="ica.declaracion.title" /></td>
 					</tr>
 				</thead>
@@ -36,19 +36,19 @@
 					<table class="table col-md-2 table-bordered">
 						<thead>
 							<tr>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
 											code="ica.declaracion.table.tipdoc" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
 											code="ica.declaracion.table.numdoc" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
 											code="ica.declaracion.table.nombre" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30"/></td>
+								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.documentType}"/></td>
+								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.documentNumber}"/></td>
+								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 406px;" value="${ icaInfObjetoFormResp.completeName}"/></td>
 							</tr>
 						</tbody>
 					</table>

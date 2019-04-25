@@ -11,12 +11,12 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ImprimeCertDeclaraRequest;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHImprimeCertDeclaraService;
+import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.CertificacionPagoForm;
@@ -72,6 +72,9 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 	@Resource(name = "sdhImprimeCertDeclaraService")
 	SDHImprimeCertDeclaraService sdhImprimeCertDeclaraService;
+
+	@Resource(name = "sdhValidaContribuyenteService")
+	private SDHValidaContribuyenteService sdhValidaContribuyenteService;
 
 	@ModelAttribute("anoGravableGasolina")
 	public List<SelectAtomValue> getIdAnoGravableGasolina()
@@ -130,7 +133,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final ImprimeCertDeclaraRequest imprimeCertDeclaraRequest = new ImprimeCertDeclaraRequest();
 
-		if (certiFormPost.getIdimp().equals("4"))
+		if (certiFormPost.getIdimp().equals("4")) //Publicidad
 		{
 			if (certiFormPost.getRowFrompublicidadTable() != null)
 			{
@@ -159,15 +162,11 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 					}
 
 				}
-				/*
-				 * else {
-				 */
 					final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
 					certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
 					certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
 					certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
 					redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
-
 					redirectModel.addFlashAttribute("publicidadMode", true);
 					try
 					{
@@ -183,22 +182,15 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 					System.out.println(certiFormPost.getNumBP());
 					System.out.println(certiFormPost.getIdimp());
 					System.out.println(certiFormPost.getTipoImp());
-				/* } */
 			}
 		}
-		else
+		else if (certiFormPost.getIdimp().equals("5"))//Gasolina
 		{
 			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
 			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
 			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
 			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
 			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
-
-			System.out.println(certiFormPost.getAniograv());
-			System.out.println(certiFormPost.getNumBP());
-			System.out.println(certiFormPost.getIdimp());
-			System.out.println(certiFormPost.getTipoImp());
-			System.out.println("--------------[" + certiFormPost.getRowFrompublicidadTable() + "]--------------");
 
 			if (!certiFormPost.getIdimp().equals(""))
 			{
@@ -241,6 +233,55 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 					return "redirect:/contribuyentes/consultas/certideclaraciones";
 
 				}
+			}
+		}
+		else if (certiFormPost.getIdimp().equals("6")) //Delineacion Urbana
+		{
+			if (certiFormPost.getRowFrompublicidadTable() != null)
+			{
+				if (certiFormPost.getRowFrompublicidadTable().equals("X"))
+				{
+					final ImprimeCertDeclaraRequest imprimeCertDeclaraDelineacionRequest = new ImprimeCertDeclaraRequest();
+					final ObjectMapper mapperPublicidad = new ObjectMapper();
+
+					imprimeCertDeclaraDelineacionRequest.setNumBP(customerData.getNumBP());
+					imprimeCertDeclaraDelineacionRequest.setNumObjeto(certiFormPost.getNumObjeto());
+					imprimeCertDeclaraDelineacionRequest.setRetencion(VACIO);
+					//imprimeCertDeclaraDelineacionRequest.setPeriodo(certiFormPost.getAniograv());
+					imprimeCertDeclaraDelineacionRequest.setAnoGravable(certiFormPost.getAniograv().split("/")[2]);
+
+					final String respDelineacion = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraDelineacionRequest);
+					ImprimePagoResponse imprimeCertiDeclaraDelineacionResponse;
+					try
+					{
+						imprimeCertiDeclaraDelineacionResponse = mapperPublicidad.readValue(respDelineacion, ImprimePagoResponse.class);
+						redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraDelineacionResponse);
+					}
+					catch (final IOException e)
+					{
+						LOG.error(e.getMessage());
+						e.printStackTrace();
+					}
+
+					System.out.println(imprimeCertDeclaraDelineacionRequest);
+				}
+
+				final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+				certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+				certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+				certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+				certiFormPostRedirect.setPeriodo(certiFormPost.getPeriodo());
+				redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+
+
+				redirectModel.addFlashAttribute("consultaPagoDelineacionList", sdhValidaContribuyenteService
+						.getDelineacionListByBpAndYear(certiFormPost.getNumBP(), certiFormPost.getAniograv()));
+
+
+				System.out.println(certiFormPost.getAniograv());
+				System.out.println(certiFormPost.getNumBP());
+				System.out.println(certiFormPost.getIdimp());
+				System.out.println(certiFormPost.getTipoImp());
 			}
 		}
 

@@ -18,8 +18,11 @@ import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -103,6 +107,10 @@ public class IcaPageController extends AbstractPageController
 		}
 
 
+		final Calendar now = Calendar.getInstance();
+		final int year = now.get(Calendar.YEAR);
+		icaInfObjetoRequest.setAnoGravable(String.valueOf(year));
+
 		try
 		{
 			final ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
@@ -122,7 +130,7 @@ public class IcaPageController extends AbstractPageController
 			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-			//redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
 
 
 		}
@@ -163,9 +171,51 @@ public class IcaPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/ica/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String icadeclarainicial(final Model model) throws CMSItemNotFoundException
+	public String icadeclarainicial(final Model model, @RequestParam(required = false, value = "anoGravable")
+	final String anoGravable, @RequestParam(required = false, value = "numObjeto")
+	final String numObjeto) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al GET ICA --------------------------");
+
+		if (StringUtils.isAllBlank(numObjeto, anoGravable))
+		{
+			return REDIRECT_TO_ICA_PAGE;
+		}
+
+
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+
+		icaInfObjetoRequest.setNumBP(customerModel.getNumBP());
+		icaInfObjetoRequest.setNumObjeto(numObjeto);
+		icaInfObjetoRequest.setAnoGravable(anoGravable);
+
+		try
+		{
+			final ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
+			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+
+			final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+
+			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
+			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
+			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
+			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
+
+			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
+			//redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+		}
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
