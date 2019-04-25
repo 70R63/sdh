@@ -19,51 +19,46 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<form:form action="">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="table-responsive">
-				<table class="table table-bordered">
-					<thead style="background-color: rgb(235, 235, 228)!important">
-						<tr>
-							<td><label class="control-label text-capitalize !important"><spring:theme
-										code="ica.inicial.marcas.tipmarca" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
-										code="ica.inicial.marcas.caodmarca" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
-										code="ica.inicial.marcas.valexe" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
-										code="ica.inicial.marcas.ciiu" /></label></td>
-							<td style="width: 12px;"><label class="control-label text-capitalize !important"><spring:theme
-										code="ica.inicial.marcas.denoacteco" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
-										code="ica.inicial.marcas.fecvaldesde" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
-										code="ica.inicial.marcas.fecvalhasta" /></label></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" style="visibility: visibility !important" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-						</tr>
-					</tbody>
-				</table>
+	<form:form action="">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="example">
+						<thead style="background-color: rgb(235, 235, 228) !important">
+							<tr>
+								<td><label class="control-label text-capitalize !important"><spring:theme
+											code="ica.inicial.marcas.descrimarca" /></label></td>
+								<td><label class="control-label text-capitalize !important"><spring:theme
+											code="ica.inicial.marcas.valexe" /></label></td>
+								<td><label class="control-label text-capitalize !important"><spring:theme
+											code="ica.inicial.marcas.fecvaldesde" /></label></td>
+								<td><label class="control-label text-capitalize !important"><spring:theme
+											code="ica.inicial.marcas.fecvalhasta" /></label></td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach varStatus="loop" items="${icaInfObjetoFormResp.icaInfObjetoResponse.marcas}"
+									var="eachMarcas">
+								<tr>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachMarcas.denominacion}"
+										type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachMarcas.valorExcencion}"
+										type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachMarcas.fechaDesde}"
+										type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachMarcas.fechaHasta}"
+										type="text" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
-</form:form>
+	</form:form>
+</div>

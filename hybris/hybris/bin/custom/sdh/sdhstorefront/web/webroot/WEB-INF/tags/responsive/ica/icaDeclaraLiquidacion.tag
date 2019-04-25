@@ -9,197 +9,211 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="headline">
-				<h2>
-					<span class="col-md-10 "><spring:theme
-							code="ica.declaracion.liquidacion.titulo" /></span>
-				</h2>
+
+	<form:form action="">
+		<br>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totinord" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totobfuerabogo" /></label> <input
+						disabled id="" name="" class="form-control" disabled type="text"
+						value="" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totinbrut" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.devrebdes" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.sanciones" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.impincom" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-check">
+					<label class="form-check-label"
+						style="text-transform: capitalize !important"><spring:theme
+							code="ica.declaracion.liquidacion.impavtableros" /> </label> <label
+						class="form-check-label"
+						style="text-transform: capitalize !important"> <input
+						type="radio" name="aporte" id="" class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important;">
+						Si
+					</label> <label class="form-check-label"
+						style="text-transform: capitalize !important"> <input
+						type="radio" name="aporte" id="" class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+						No
+					</label>
+				</div>
+
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<input disabled id="" name="" class="form-control" disabled
+						type="text" value="" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.valtot" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totimpcar" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.valret" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totsaldo" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.valpag" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
 			</div>
 
-			<form:form action="">
-				<div class="row mt-3">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.valtot" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.dedexeact" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.valexe" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.totinnetos" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.sanciones" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.impincom" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.intmora" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.impavtableros" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.acteco" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.totimpcar" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.totinord" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.valret" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.totinobte" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.totsaldo" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.totinbrut" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.totpag" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
-								maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.devrebdes" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="control-label"><spring:theme
-									code="ica.declaracion.liquidacion.totpagvol" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
-								value="" maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<button style="margin-top: 3px;" id=""
-							class="btn btn-primary btn-lg" type="button">
-							<spring:theme code="ica.declaracion.liquidacion.calcular" />
-						</button>
-					</div>
-				</div>
 
 
 
-			</form:form>
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.intmora" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totpag" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+
+			<div class="col-md-5">
+				<label class="form-check-label"
+					style="text-transform: capitalize !important"><spring:theme
+						code="ica.declaracion.liquidacion.aportvol" /> </label>
+				<div class="form-check">
+					<label class="form-check-label"
+						style="text-transform: capitalize !important"> <input
+						type="radio" name="aporte" id="" class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important;">
+						Si
+					</label> <label class="form-check-label"
+						style="text-transform: capitalize !important"> <input
+						type="radio" name="aporte" id="" class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+						No
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totpagvol" /></label> <input disabled
+						id="" name="" class="form-control" disabled type="text" value=""
+						maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+
+	</form:form>
 </div>
+

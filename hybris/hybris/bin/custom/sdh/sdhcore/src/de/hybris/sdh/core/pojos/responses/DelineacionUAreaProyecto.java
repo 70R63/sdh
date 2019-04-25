@@ -10,6 +10,17 @@ package de.hybris.sdh.core.pojos.responses;
 public class DelineacionUAreaProyecto
 {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DelineacionUAreaProyecto [areaProy=" + areaProy + ", aream2=" + aream2 + "]";
+	}
+
 	private String areaProy;
 	private String aream2;
 

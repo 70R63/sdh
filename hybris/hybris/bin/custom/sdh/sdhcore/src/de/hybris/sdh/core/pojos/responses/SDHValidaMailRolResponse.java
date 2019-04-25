@@ -5,6 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonSetter;
+
 
 /**
  * @author hybris
@@ -20,6 +22,7 @@ public class SDHValidaMailRolResponse
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 	private List<ContribAgente> agentes;
 	private List<ImpuestoDelineacionUrbana> delineacion;
+	private ImpuestoICA ica;
 
 	/**
 	 * @return the infoContrib
@@ -156,6 +159,29 @@ public class SDHValidaMailRolResponse
 	{
 		this.delineacion = delineacion;
 	}
+
+	/**
+	 * @return the ica
+	 */
+	public ImpuestoICA getIca()
+	{
+		return ica;
+	}
+
+	/**
+	 * @param ica
+	 *           the ica to set
+	 */
+	@JsonSetter("ICA")
+	public void setIca(final ImpuestoICA ica)
+	{
+		this.ica = ica;
+	}
+
+
+
+
+
 
 
 

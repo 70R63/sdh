@@ -12,6 +12,7 @@ package de.hybris.sdh.storefront.interceptors.beforecontroller;
 
 import de.hybris.platform.acceleratorcms.services.CMSPageContextService;
 import de.hybris.platform.acceleratorstorefrontcommons.interceptors.BeforeControllerHandler;
+import de.hybris.platform.core.model.user.UserGroupModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.time.TimeService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -72,6 +73,60 @@ public class SecurityUserCheckBeforeControllerHandler implements BeforeControlle
 			}
 		}
 
+
+		//validate that user is accessing a valid page according to his/her roles
+
+
+		if ("GET".equalsIgnoreCase(request.getMethod()) && request.getRequestURI().contains("/contribuyentes"))
+		{
+			final UserGroupModel userGroup = userService.getUserGroupForUID("sdh_01");
+
+			if (!userService.getCurrentUser().getGroups().contains(userGroup))
+			{
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+				return false;
+			}
+		}
+		else if ("GET".equalsIgnoreCase(request.getMethod()) && request.getRequestURI().contains("/agentesautorizados"))
+		{
+			final UserGroupModel userGroup = userService.getUserGroupForUID("sdh_02");
+
+			if (!userService.getCurrentUser().getGroups().contains(userGroup))
+			{
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+				return false;
+			}
+		}
+		else if ("GET".equalsIgnoreCase(request.getMethod()) && request.getRequestURI().contains("/terceros"))
+		{
+			final UserGroupModel userGroup = userService.getUserGroupForUID("sdh_03");
+
+			if (!userService.getCurrentUser().getGroups().contains(userGroup))
+			{
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+				return false;
+			}
+		}
+		else if ("GET".equalsIgnoreCase(request.getMethod()) && request.getRequestURI().contains("/retenedores"))
+		{
+			final UserGroupModel userGroup = userService.getUserGroupForUID("sdh_04");
+
+			if (!userService.getCurrentUser().getGroups().contains(userGroup))
+			{
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+				return false;
+			}
+		}
+		else if ("GET".equalsIgnoreCase(request.getMethod()) && request.getRequestURI().contains("/reportantes"))
+		{
+			final UserGroupModel userGroup = userService.getUserGroupForUID("sdh_05");
+
+			if (!userService.getCurrentUser().getGroups().contains(userGroup))
+			{
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+				return false;
+			}
+		}
 
 
 		// Skip this security check when run from within the WCMS Cockpit

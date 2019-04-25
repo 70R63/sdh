@@ -62,6 +62,7 @@
 				<tbody>
 					<c:forEach items="${dataForm.valCont.delineacion}"
 						var="delineacion">
+						<c:if test="${delineacion.cdu != ''}">
 						<tr>
 							<td><input id="CDU" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
@@ -77,7 +78,7 @@
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
 							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
-								value="FALTA" maxlength="240"
+								value="${delineacion.fechaEjecutoria}" maxlength="240"
 								style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
 							<td><input id="" name="" class="inputtextnew"
 								aria-required="true" type="text" readonly="readonly"
@@ -117,6 +118,7 @@
 							</td>
 
 						</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>

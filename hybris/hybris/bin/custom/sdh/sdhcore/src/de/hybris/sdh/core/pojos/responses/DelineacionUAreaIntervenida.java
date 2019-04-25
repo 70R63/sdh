@@ -10,6 +10,17 @@ package de.hybris.sdh.core.pojos.responses;
 public class DelineacionUAreaIntervenida
 {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DelineacionUAreaIntervenida [areaInter=" + areaInter + ", aream2=" + aream2 + "]";
+	}
+
 	private String areaInter;
 	private String aream2;
 

@@ -66,7 +66,8 @@ function onChange() {
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <c:set var = "tipoDeImpuestoSeleccionado" scope = "session" value = "${psePaymentForm.tipoDeImpuesto}"/>
-<c:set var = "buttonImagePSE" scope = "session" value = "https://jumpseller.co/images/support/pse/logopse.png"/>
+<%-- <c:set var = "buttonImagePSE" scope = "session" value = "https://jumpseller.co/images/support/pse/logopse.png"/> --%>
+<c:set var = "buttonImagePSE" scope = "session" value = "http://blog.achcolombia.com.co/wp-content/themes/ach/img/logo.svg"/>
 <c:set var = "buttonImageBBVA" scope = "session" value = "https://pbs.twimg.com/profile_images/907185208549572608/Hn65NsHV_400x400.jpg"/>
 <c:set var = "buttonImageDAVIVIENDA" scope = "session" value = "https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0029/4616/davivienda.png"/>
 <!-- <c:out value="${tipoDeImpuestoSeleccionado}"/> 

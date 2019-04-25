@@ -18,7 +18,9 @@ import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService;
 import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
+import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -30,6 +32,7 @@ import de.hybris.sdh.core.model.SDHAddressModel;
 import de.hybris.sdh.core.model.SDHAgentModel;
 import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
+import de.hybris.sdh.core.model.SDHICATaxModel;
 import de.hybris.sdh.core.model.SDHPhoneModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
@@ -45,6 +48,7 @@ import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ContribTelefono;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
@@ -61,8 +65,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.xml.rpc.holders.StringHolder;
@@ -473,8 +479,10 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+
+			final String response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
 			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					response,
 					SDHValidaMailRolResponse.class);
 
 			final InfoContribResponse infoContribuyente = sdhConsultaContribuyenteBPResponse.getInfoContrib();
@@ -820,6 +828,40 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			{
 				customerModel.setUrbanDelineationsTaxList(null);
 			}
+
+
+			//clean old ICA exterior taxes
+
+
+			final SDHICATaxModel oldIcaTaxModel = customerModel.getIcaTaxList();
+
+			if (oldIcaTaxModel != null)
+			{
+				modelService.removeAll(oldIcaTaxModel);
+			}
+
+			final ImpuestoICA ica = sdhConsultaContribuyenteBPResponse.getIca();
+
+			if (ica != null)
+			{
+				final SDHICATaxModel newIcaTaxModel = new SDHICATaxModel();
+
+				if (!StringUtils.isBlank(ica.getNumObjeto()))
+				{
+					newIcaTaxModel.setObjectNumber(ica.getNumObjeto());
+				}
+
+				modelService.saveAll(newIcaTaxModel);
+
+				customerModel.setIcaTaxList(newIcaTaxModel);
+
+			}
+			else
+			{
+				customerModel.setIcaTaxList(null);
+			}
+
+
 
 
 
@@ -1209,7 +1251,50 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 
+	@Override
+	public void setAutorityOnSession(final String role)
+	{
 
+		final UserModel userModel = userService.getCurrentUser();
+		final Set<PrincipalGroupModel> currentPricipals = userModel.getGroups();
+		final Set<PrincipalGroupModel> newPricipals = new HashSet<PrincipalGroupModel>();
+
+
+		for (final PrincipalGroupModel eachPrincipal : currentPricipals)
+		{
+			newPricipals.add(eachPrincipal);
+		}
+
+		newPricipals.add(userService.getUserGroupForUID(role));
+		userModel.setGroups(newPricipals);
+
+		modelService.save(userModel);
+
+
+
+	}
+
+
+	@Override
+	public void cleanSessionAutorities()
+	{
+		final UserModel userModel = userService.getCurrentUser();
+		final Set<PrincipalGroupModel> currentPricipals = userModel.getGroups();
+		final Set<PrincipalGroupModel> newPricipals = new HashSet<PrincipalGroupModel>();
+
+		for (final PrincipalGroupModel eachPrincipal : currentPricipals)
+		{
+			if (!eachPrincipal.getUid().contains("sdh"))
+			{
+				newPricipals.add(eachPrincipal);
+			}
+		}
+
+		userModel.setGroups(newPricipals);
+
+		modelService.save(userModel);
+
+	}
 
 
 

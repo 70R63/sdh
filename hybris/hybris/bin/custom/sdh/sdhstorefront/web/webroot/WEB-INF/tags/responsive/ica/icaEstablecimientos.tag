@@ -21,39 +21,21 @@
 	</div>
 </div>
 
-
+<br>
 <form:form action="">
-	<div class="container">
-		<div class="row mt-3">
-			<div class="col-md-7">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.inicial.estableci.nomesta" /></label> <input id="" name=""
-						class="form-control" disabled type="text" value="" maxlength="240"></input>
-				</div>
-			</div>
-			<div class="col-md-7">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.inicial.estableci.direc" /></label> <input id="" name=""
-						class="form-control" disabled type="text" value="" maxlength="240"></input>
-				</div>
-			</div>
-			<div class="col-md-7">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.inicial.estableci.loca" /></label> <input id="" name=""
-						class="form-control" disabled type="text" value="" maxlength="240"></input>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="table-responsive">
-				<table class="table table-bordered datatable">
-					<thead style="background-color: rgb(235, 235, 228)!important">
+				<table class="table table-bordered" id="example">
+					<thead style="background-color: rgb(235, 235, 228) !important">
 						<tr>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.nomesta" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.direc" /></label></td>
+							<td><label class="control-label text-capitalize !important"><spring:theme
+										code="ica.inicial.estableci.loca" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.estableci.matesta" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
@@ -62,39 +44,60 @@
 										code="ica.inicial.estableci.edomat" /></label></td>
 							<td><label class="control-label text-capitalize !important"><spring:theme
 										code="ica.inicial.estableci.fechasta" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 94px !important;"><spring:theme
 										code="ica.inicial.estableci.valactivo" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 84px !important;"><spring:theme
 										code="ica.inicial.estableci.cantperso" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 84px !important;"><spring:theme
 										code="ica.inicial.estableci.codpost" /></label></td>
-							<td><label class="control-label text-capitalize !important"><spring:theme
+							<td><label class="control-label text-capitalize !important" style="width: 84px !important;"><spring:theme
 										code="ica.inicial.estableci.ciiu" /></label></td>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" /></td>
-							<td><input class="inputtextnew" disabled="disabled"
-								type="text" size="10"/></td>
-						</tr>
+						<c:forEach varStatus="loop" items="${icaInfObjetoFormResp.icaInfObjetoResponse.establecimientos}"
+									var="eachEstablecimientos">
+							<tr>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.nombre}"
+									type="text" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.direccion}"
+									type="text" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.localidad}"
+									type="text" style="width: 104px !important;" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.matricula}"
+									type="text" style="width: 104px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.fechaDesde}"
+									type="text" style="width: 90px !important;" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.estadoMatricula}"
+									type="text" style="width: 104px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.fechaHasta}"
+									type="text" style="width: 90px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.valorActivo}"
+									type="text"  style="width: 94px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.cantPersonal}"
+									type="text" style="width: 84px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.codPostal}"
+									type="text" style="width: 84px !important;"/></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="${eachEstablecimientos.ciiu}"
+									type="text" style="width: 80px !important;" /></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+
 </form:form>
 

@@ -10,12 +10,27 @@ package de.hybris.sdh.core.pojos.responses;
 public class DelineacionURelaciones
 {
 
+
+
 	private String tipoDoc;
 	private String numDoc;
 	private String nombre;
 	private String tipoRelacion;
 	private String fechaDesde;
 	private String fechaHasta;
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "DelineacionURelaciones [tipoDoc=" + tipoDoc + ", numDoc=" + numDoc + ", nombre=" + nombre + ", tipoRelacion="
+				+ tipoRelacion + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + "]";
+	}
 
 	/**
 	 * @return the tipoDoc

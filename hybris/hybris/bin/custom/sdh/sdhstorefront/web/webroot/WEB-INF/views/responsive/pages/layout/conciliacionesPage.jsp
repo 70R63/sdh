@@ -27,11 +27,8 @@
          </form:form>
 		  
 	</div>
-	<div id="dialogConsiliaciones" title="Conciliaciones" ><div id="conciliacionesDialogContent"></div></div>
+	<div id="dialogConciliaciones" title="Conciliaciones" ><div id="conciliacionesDialogContent"></div></div>
 
-	
-	
 	
 </template:page>
-
 

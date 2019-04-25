@@ -25,6 +25,7 @@
         <collectiontype code="SDHGasTaxList" elementtype="SDHGasTax" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHUrbanDelineationsTaxList" elementtype="SDHUrbanDelineationsTax" autocreate="true" generate="true" type="list"/>
         
+        
     </collectiontypes>
 
     <enumtypes>
@@ -260,6 +261,10 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
+        			<attribute qualifier="icaTaxList" type="SDHICATax">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
         		</attributes>
         	</itemtype>
         	<itemtype code="SDHAddress" autocreate="true" generate="true">
@@ -378,7 +383,7 @@
 	        
 	        <itemtype code="SDHUrbanDelineationsTax" autocreate="true" generate="true">
         		<description>Custom SDH Model to save urban delineations data</description>
-        		<deployment table="SDHURBANDELTAX" typecode="15009"/>
+        		<deployment  table="SDHURBANDELTAX" typecode="15009"/>
        			<attributes>
        				<attribute qualifier="objectNumber" type="java.lang.String">
         				<persistence type="property"></persistence>
@@ -394,6 +399,17 @@
         			</attribute>
        			</attributes>
 	        </itemtype>
+	        
+	        <itemtype code="SDHICATax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save ICA data</description>
+        		<deployment  table="SDHICATAX" typecode="15010"/>
+       			<attributes>
+       				<attribute qualifier="objectNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>        			
+       			</attributes>
+	        </itemtype>
+	        
 	        
         	<itemtype code="SDHCustomerRegistrationProcess" extends="StoreFrontCustomerProcess" autocreate="true" generate="true">
 				<attributes>

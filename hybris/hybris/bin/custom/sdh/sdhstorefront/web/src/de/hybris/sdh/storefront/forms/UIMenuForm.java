@@ -135,6 +135,15 @@ public class UIMenuForm
 				this.setbDelineacionUrbana("");
 			}
 
+			if (customerData.getIcaTax() != null )
+			{
+				this.setbIca("X");
+			}
+			else
+			{
+				this.setbIca("");
+			}
+
 		}
 		catch (final Exception e)
 		{

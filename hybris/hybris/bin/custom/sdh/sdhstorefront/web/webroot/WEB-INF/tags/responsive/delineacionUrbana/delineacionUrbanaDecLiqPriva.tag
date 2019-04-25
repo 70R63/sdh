@@ -4,7 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -17,14 +17,12 @@
 		</div>
 	</div>
 
-	<form:form>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.totobrcons" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
+							code="delineacion.urbana.dec.liqpriv.totobrcons" /></label> <sf:input class="form-control" readonly="false" aria-required="true"
+						maxlength="240" path="infObjetoDelineacion.infoDeclara.totalPresupuesto" />
 				</div>
 			</div>
 
@@ -34,9 +32,8 @@
 			<div class="col-md-4">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.valorcons" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						value="" maxlength="240">
+							code="delineacion.urbana.dec.liqpriv.valorcons" /></label> <sf:input class="form-control" readonly="false" aria-required="true"
+						maxlength="240" path="infObjetoDelineacion.infoDeclara.valorEjecutado" />
 				</div>
 			</div>
 		</div>
@@ -48,7 +45,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.impcargo" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.impuestoCargo}" maxlength="240">
 				</div>
 			</div>
 		</div>
@@ -59,7 +56,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.totvalorsanciones" /></label> <input
 						id="" name="" class="form-control" aria-required="true"
-						type="text" readonly="readonly" value="" maxlength="240">
+						type="text" readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.valorSancion}" maxlength="240">
 				</div>
 			</div>
 		</div>
@@ -70,7 +67,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.totreten" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.totalRetencion}" maxlength="240">
 				</div>
 			</div>
 		</div>
@@ -81,7 +78,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.salimpcar" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.saldoImpCargo}" maxlength="240">
 				</div>
 			</div>
 		</div>
@@ -92,7 +89,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.salpag" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.saldoFavor}" maxlength="240">
 				</div>
 			</div>
 		</div>
@@ -102,7 +99,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.valpag" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.valorPagar}" maxlength="240">
 				</div>
 			</div>
 		</div>
@@ -112,7 +109,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.intermora" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.interesMora}" maxlength="240">
 				</div>
 			</div>
 		</div>
@@ -123,18 +120,17 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="" maxlength="240">
+						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPagar}" maxlength="240">
 				</div>
 			</div>
 		</div>
 
 		<div class="container">
-			<button type="submit" class="btn btn-primary btn-lg" id="" name=""
-				value="calcular">
-				<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
-			</button>
+				<sf:button class="btn btn-primary btn-lg" name="action"
+					id="calcular" value="calcular" disabled="false">
+					<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
+				</sf:button>
 		</div>
 
-	</form:form>
 </div>
 

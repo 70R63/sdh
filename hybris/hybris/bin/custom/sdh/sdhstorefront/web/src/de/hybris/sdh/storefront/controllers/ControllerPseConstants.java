@@ -15,6 +15,7 @@ public class ControllerPseConstants
 	private final String PUBLICIDAD;
 	private final String GASOLINA;
 	private final String ICA;
+	private final String RETENCIONDU;
 
 
 
@@ -22,11 +23,12 @@ public class ControllerPseConstants
 	{
 
 		PREDIAL = "PREDIAL";
-		DELINEACION = "DELINEACION";
+		DELINEACION = "2306";
 		VEHICULAR = "VEHICULAR";
 		PUBLICIDAD = "5401";
 		GASOLINA = "2308";
 		ICA = "ICA";
+		RETENCIONDU = "2332";
 	}
 
 
@@ -87,6 +89,16 @@ public class ControllerPseConstants
 	public String getICA()
 	{
 		return ICA;
+	}
+
+
+
+	/**
+	 * @return the rETENCIONDU
+	 */
+	public String getRETENCIONDU()
+	{
+		return RETENCIONDU;
 	}
 
 

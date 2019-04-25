@@ -25,3 +25,14 @@ INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);nam
 
 # Customer addresses
 INSERT_UPDATE Address;&addId;owner(&userId)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+
+
+
+INSERT_UPDATE Usergroup;uid[unique=true];locName[lang=en];locName[lang=es]
+;sdh_01;Contribuyente;Contribuyente
+;sdh_02;Agente Autorizado;Agente Autorizado
+;sdh_03;Tercero Autorizado;Tercero Autorizado
+;sdh_04;Agente Retenedor;Agente Retenedor
+;sdh_05;Reportante de Información;Reportente de Información
+
+

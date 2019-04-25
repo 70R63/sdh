@@ -10,13 +10,13 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row" >
-		<div class="avisoheadline">
-			<h3>
-				<span class="p"><spring:theme code="delineacion.urbana.title"
+		<div class="avisoheadline" style="text-align: center !important">
+			<h2>
+				<span class="p" style="text-align: center !important; margin-bottom: 10px !important;"><spring:theme code="delineacion.urbana.title"
 						text="Delineacion Urbana" /></span>
-			</h3>
+			</h2>
 		</div>
-		<p class="avisobody">
+		<p class="avisobody" style="height: auto !important;">
 			<spring:theme code="delineacion.urbana.desciption" />
 			<a href="http://www.shd.gov.co/shd/" target="_blank"> Mas
 				información</a>
@@ -46,7 +46,7 @@
 							type="text" value="${dataForm.valCont.infoContrib.numDoc}" /></td>
 						<td><input value="${dataForm.valCont.infoContrib.adicionales.NAME_ORG1}" disabled class="inputtextnew"
 							aria-required="true" maxlength="30" size="30" readonly="readonly"
-							type="text" /></td>
+							type="text" style="width: 406px;" /></td>
 					</tr>
 				</tbody>
 			</table>
