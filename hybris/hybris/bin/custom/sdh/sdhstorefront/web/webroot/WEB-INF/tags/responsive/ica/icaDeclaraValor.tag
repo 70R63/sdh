@@ -6,7 +6,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
+	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -78,24 +79,41 @@
 			<c:if test="${not empty eachValor.tipoID }">
 				<div class="row valor">
 					<div class="col-md-1">
-						<input class="form-control anio" type="text" value="${eachValor.anoGravable }"/>
+						<input class="form-control anio" type="text"
+							value="${eachValor.anoGravable }" />
 					</div>
 					<div class="col-md-2">
 						<select id="" class="form-control tipo" style="height: 48px;">
 							<option value=" ">${eachValor.tipoID }</option>
+							<option value="0">Seleccionar</option>
+							<option value="CC">CC Cédula de ciudadania</option>
+							<option value="CE">CE Cédula de extranjería</option>
+							<option value="NIT">NIT Número de identificación
+								tributaria</option>
+							<option value="PA">PA Pasaporte</option>
+							<option value="TI">TI Tarjeta de identidad</option>
+							<option value="TIE">TIE Tarjeta de identidad de
+								extranjero</option>
+							<option value="NITE">NITE NIT extranjero</option>
+							<option value="NUIP">NUIP Número único de identificación
+								personal</option>
 						</select>
 					</div>
 					<div class="col-md-1">
-						<input class="form-control numiden" type="text" value="${eachValor.numID }"/>
+						<input class="form-control numiden" type="text"
+							value="${eachValor.numID }" />
 					</div>
 					<div class="col-md-2">
-						<input class="form-control nombre" type="text" value="${eachValor.razonSocial }"/>
+						<input class="form-control nombre" type="text"
+							value="${eachValor.razonSocial }" />
 					</div>
 					<div class="col-md-1">
-						<input class="form-control direc" type="text" value="${eachValor.direccion }"/>
+						<input class="form-control direc" type="text"
+							value="${eachValor.direccion }" />
 					</div>
 					<div class="col-md-1">
-						<input class="form-control telefono" type="text" value="${eachValor.telefono }"/>
+						<input class="form-control telefono" type="text"
+							value="${eachValor.telefono }" />
 					</div>
 					<div class="col-md-1">
 						<select id="" class="form-control denoact" style="height: 48px;">
@@ -103,10 +121,12 @@
 						</select>
 					</div>
 					<div class="col-md-1">
-						<input class="form-control valbrut" type="text" value="${eachValor.tarifaApl }"/>
+						<input class="form-control valbrut" type="text"
+							value="${eachValor.tarifaApl }" />
 					</div>
 					<div class="col-md-1">
-						<input class="form-control valtotal" type="text"  value="${eachValor.montoRetenido }"/>
+						<input class="form-control valtotal" type="text"
+							value="${eachValor.montoRetenido }" />
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">
