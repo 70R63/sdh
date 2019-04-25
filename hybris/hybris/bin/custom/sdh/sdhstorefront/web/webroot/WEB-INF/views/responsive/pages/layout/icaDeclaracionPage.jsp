@@ -8,10 +8,9 @@
 
 	<icadecla:icaDeclaraInicial/>
 	<icadecla:icaDeclaraGenerales/>
-	<icadecla:icaDeclaraActDentro/>
+	<icadecla:icaDeclaraLiquidacion/>
 	<icadecla:icaDeclaraActFuera/>
+	<icadecla:icaDeclaraDeduccion/>
 	<icadecla:icaDeclaraTotal/>
 	<icadecla:icaDeclaraValor/>
-	<icadecla:icaDeclaraDeduccion/>
-	<icadecla:icaDeclaraLiquidacion/>
 	<icadecla:icaDeclaraFirma/>

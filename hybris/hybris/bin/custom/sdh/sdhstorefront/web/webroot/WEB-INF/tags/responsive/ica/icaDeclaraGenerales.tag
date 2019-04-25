@@ -36,14 +36,35 @@
 								maxlength="240"></input>
 						</div>
 					</div>
-				</div>
-				<div class="row">
+
+
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.opcuso" /></label> <input disabled
 								id="" name="" class="form-control" disabled type="text" value=""
 								maxlength="240"></input>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+
+					<div class="col-md-4">
+						<label class="form-check-label"
+							style="text-transform: capitalize !important"><spring:theme
+								code="ica.declaracion.generales.entfinan" /> </label>
+						<div class="form-check">
+							<label class="form-check-label"
+								style="text-transform: capitalize !important"> <input
+								type="radio" name="aporte" id="" class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important;">
+								Si
+							</label> <label class="form-check-label"
+								style="text-transform: capitalize !important"> <input
+								type="radio" name="aporte" id="" class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+								No
+							</label>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -54,36 +75,12 @@
 								maxlength="240"></input>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-check">
-							<label class="form-check-label"> <input type="radio"
-								name="regimen" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-								<spring:theme code="ica.declaracion.generales.regimencomun" />
-							</label> <label class="form-check-label"> <input type="radio"
-								name="regimen" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-								<spring:theme code="ica.declaracion.generales.regsimpli" />
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<label class="form-check-label" style="text-transform:capitalize !important"><spring:theme
-								code="ica.declaracion.generales.aporte" /> </label>
-						<div class="form-check">
-							<label class="form-check-label" style="text-transform:capitalize !important"> <input type="radio"
-								name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important; v">
-								Si
-							</label> <label class="form-check-label" style="text-transform:capitalize !important"> <input type="radio"
-								name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important;margin-left: 12px">
-								No
-							</label>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label"><spring:theme
+									code="ica.declaracion.generales.regitribut" /></label> <input disabled
+								id="" name="" class="form-control" disabled type="text" value=""
+								maxlength="240"></input>
 						</div>
 					</div>
 				</div>
