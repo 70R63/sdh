@@ -180,7 +180,7 @@
 								<form:form method="post" commandName="inputDelineacion"
 									action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
 									<form:hidden path="selectedCDU" value="${item.cdu}" />
-									<form:hidden path="selectedRadicado" value="" />
+									<form:hidden path="selectedRadicado" value="${item.radicados}" />
 									<form:hidden path="selectedTipoLicencia" value="" />
 
 									<button type="submit" class="btn btn-primary btn-lg"
