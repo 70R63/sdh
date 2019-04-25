@@ -64,15 +64,15 @@
 					<div class="col-md-4">
 						<div class="form-check">
 							<label class="form-check-label"
-								 style="text-transform: none !important;"><spring:theme
+								 style="text-transform: none !important; font-weight: normal !important"><spring:theme
 									code="ica.declaracion.generales.entfinan" /> </label> <label
 								class="form-check-label"
-								style="text-transform: capitalize !important"> <input
+								style="text-transform: capitalize !important; font-weight: normal !important"> <input
 								type="radio" name="aporte" id="" class="form-check-input mr-2"
 								style="visibility: visible !important; min-height: 4px !important;" onclick="disa()">
 								Si
 							</label> <label class="form-check-label"
-								style="text-transform: capitalize !important"> <input
+								style="text-transform: capitalize !important; font-weight: normal !important"> <input
 								type="radio" name="aporte" id="" class="form-check-input mr-2"
 								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="disa2()">
 								No

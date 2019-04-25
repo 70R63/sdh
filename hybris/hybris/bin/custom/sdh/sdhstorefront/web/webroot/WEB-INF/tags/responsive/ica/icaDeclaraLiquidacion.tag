@@ -87,23 +87,26 @@
 			<div class="col-md-5">
 				<div class="form-check">
 					<label class="form-check-label"
-						style="text-transform: none !important;"><spring:theme
+						style="text-transform: none !important; font-weight: normal !important; font-size: 14px !important;"><spring:theme
 							code="ica.declaracion.liquidacion.impavtableros" /> </label> <label
 						class="form-check-label"
-						style="text-transform: capitalize !important"> <input
-						type="radio" name="aporte" id="" class="form-check-input mr-2"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="aporte" id=""
+						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
 						onclick="show()"> Si
 					</label> <label class="form-check-label"
-						style="text-transform: capitalize !important"> <input
-						type="radio" name="aporte" id="" class="form-check-input mr-2"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="aporte" id=""
+						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
 						No
 					</label>
 				</div>
-
 			</div>
-			<div class="col-md-4">
+		</div>
+		<div class="row">
+			<div class="col-md-5">
 				<div class="form-group">
 					<input id="" id="" name="" class="form-control" disabled
 						type="text" value="${infoDeclara.impuestoAviso }" maxlength="240"></input>
@@ -199,22 +202,26 @@
 			<div class="col-md-5">
 				<div class="form-check">
 					<label class="form-check-label"
-						style="text-transform: none !important;"><spring:theme
+						style="text-transform: none !important; font-weight: normal !important; font-size: 14px;"><spring:theme
 							code="ica.declaracion.liquidacion.aportvol" /> </label> <label
 						class="form-check-label"
-						style="text-transform: capitalize !important"> <input
-						type="radio" name="aporte" id="" class="form-check-input mr-2"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="aporte" id=""
+						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
 						onclick="disab()"> Si
 					</label> <label class="form-check-label"
-						style="text-transform: capitalize !important"> <input
-						type="radio" name="aporte" id="" class="form-check-input mr-2"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="aporte" id=""
+						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
 						onclick="disab2()"> No
 					</label>
 				</div>
 			</div>
-			<div class="col-md-4">
+		</div>
+		<div class="row">
+			<div class="col-md-5">
 				<div class="form-group">
 					<select id="idaporte" disabled class="form-control"><option>Seleccionar</option></select>
 				</div>

@@ -106,16 +106,18 @@
 	</table>
 </c:if>
 
+
+<c:out value="${dataFormDelineacion.valCont}" />
+
 <c:if test="${not empty delineacionWithRadicadosList}">
 	<div class="col-md-9 col-md-offset-1">
 		<table class="table">
 			<thead>
 				<tr>
-					<th style="text-align: center">
-						<label class="control-label " for="" style="text-transform: capitalize">
-							<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" />
-						</label>
-					</th>
+					<th style="text-align: center"><label class="control-label "
+						for="" style="text-transform: capitalize"> <spring:theme
+								code="impuestos.presentarDeclaracion.deliur.cdu" />
+					</label></th>
 					<th style="text-align: center"><label class="control-label"
 						for="" style="text-transform: capitalize"> <spring:theme
 								code="impuestos.presentarDeclaracion.deliur.tipobli" /></label></th>
@@ -151,7 +153,19 @@
 							<option value="2-${item.cdu}">Retención</option>
 						</select>
 					</div>
-					<div class="col-sm-3">Presentar Declaracion</div>
+					<div class="col-sm-3">
+						<form:form method="post" commandName="inputDelineacion"
+							action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+							<form:hidden path="selectedCDU" value="${item.cdu}" />
+							<form:hidden path="selectedRadicado" value="" />
+							<form:hidden path="selectedTipoLicencia" value="" />
+
+							<button type="submit" class="btn-link"
+								id="declaradelibutton1" name="action" value="declaracion">
+								<spring:theme code="delineacion.urbana.radicados.declaracion" />
+							</button>
+						</form:form>
+					</div>
 				</div>
 				<div class="row" id="${item.cdu}" style="display: none">
 					<c:forEach var="radicado" items="${item.radicados}">
@@ -162,7 +176,19 @@
 								<input style="width: 100%" class="inputtextnew"
 									disabled="disabled" type="text" value="${radicado.numRadicado}" />
 							</div>
-							<div class="col-sm-3">Presentar Retencion</div>
+							<div class="col-sm-3">
+								<form:form method="post" commandName="inputDelineacion"
+									action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+									<form:hidden path="selectedCDU" value="${item.cdu}" />
+									<form:hidden path="selectedRadicado" value="${item.radicados}" />
+									<form:hidden path="selectedTipoLicencia" value="" />
+
+									<button type="submit" class="btn-link"
+										id="retenciondelibutton1" name="action" value="retencion">
+										<spring:theme code="delineacion.urbana.radicados.retencion" />
+									</button>
+								</form:form>
+							</div>
 						</div>
 					</c:forEach>
 				</div>
