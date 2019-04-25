@@ -236,21 +236,20 @@
 			<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<select id="tarifa1" disabled class="form-control" style="text-transform: none !important; font-weight: normal !important; font-size: 14px;">
+					<select id="tarifa2" disabled class="form-control" style="text-transform: none !important; font-weight: normal !important; font-size: 14px;">
 						<option value=0>Seleccionar</option>
-						<option value=1>3.00</option>
-						<option value=2>5.00</option>
-						<option value=2>10.00</option></select>
+						<option value=1>10.00</option></select>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<select id="tarifa2"  class="form-control" style="display: none; text-transform: none !important; font-weight: normal !important; font-size: 14px;">
+					<select id="tarifa1"  class="form-control" style="display: none; text-transform: none !important; font-weight: normal !important; font-size: 14px;">
 						<option value=0>Seleccionar</option>
-						<option value=1>10.00</option>
-					</select>
+						<option value=1>3.00</option>
+						<option value=2>5.00</option>
+						<option value=3>10.00</option></select>
 				</div>
 			</div>
 		</div>
