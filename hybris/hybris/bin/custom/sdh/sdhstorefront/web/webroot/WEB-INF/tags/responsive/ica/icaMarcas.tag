@@ -41,8 +41,8 @@
 							<c:forEach varStatus="loop" items="${icaInfObjetoFormResp.icaInfObjetoResponse.marcas}"
 									var="eachMarcas">
 								<tr>
-									<td><input class="inputtextnew" disabled="disabled"
-										value="${eachMarcas.denominacion}"
+									<td><input class="inputtextnewmd" disabled="disabled"
+										value="${eachMarcas.descripMarca}"
 										type="text" /></td>
 									<td><input class="inputtextnew" disabled="disabled"
 										value="${eachMarcas.valorExcencion}"

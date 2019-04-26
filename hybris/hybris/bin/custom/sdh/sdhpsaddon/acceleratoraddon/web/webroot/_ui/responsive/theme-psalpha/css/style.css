@@ -24216,6 +24216,19 @@ author: Vikas Gupta
   vertical-align: text-bottom;
   min-height: 0px;
 }
+.inputtextnewmd {
+  position: inherit;
+  font-family: 'Helvetica Normal', 'Helvetica';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  text-decoration: none;
+  color: #000000;
+  text-align: left;
+  vertical-align: text-bottom;
+  min-height: 0px;
+  width: 100%;
+}
 .inputlabelnew {
   margin-right: 5px;
   position: absolute;
