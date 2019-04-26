@@ -8,6 +8,9 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -31,6 +34,16 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
+									code="ica.declaracion.generales.regitribut" /></label> <input disabled
+								id="" name="" class="form-control" disabled type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.regimen }"
+								maxlength="240"></input>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.periodo" /></label> <input disabled
 								id="" name="" class="form-control" disabled type="text" value=""
 								maxlength="240"></input>
@@ -46,44 +59,34 @@
 								maxlength="240"></input>
 						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-check">
+							<label class="form-check-label"
+								 style="text-transform: none !important; font-weight: normal !important"><spring:theme
+									code="ica.declaracion.generales.entfinan" /> </label> <label
+								class="form-check-label"
+								style="text-transform: capitalize !important; font-weight: normal !important"> <input
+								type="radio" name="aporte" id="" class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important;" onclick="disa()">
+								Si
+							</label> <label class="form-check-label"
+								style="text-transform: capitalize !important; font-weight: normal !important"> <input
+								type="radio" name="aporte" id="" class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="disa2()">
+								No
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
-									code="ica.declaracion.generales.cantesta" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
+									code="ica.declaracion.generales.cantesta" /></label> <input 
+								id="idcatestable" name="" class="form-control" disabled type="text" value="${infoDeclara.cantEstablec }"
 								maxlength="240"></input>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-check">
-							<label class="form-check-label"> <input type="radio"
-								name="regimen" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-								<spring:theme code="ica.declaracion.generales.regimencomun" />
-							</label> <label class="form-check-label"> <input type="radio"
-								name="regimen" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-								<spring:theme code="ica.declaracion.generales.regsimpli" />
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<label class="form-check-label" style="text-transform:capitalize !important"><spring:theme
-								code="ica.declaracion.generales.aporte" /> </label>
-						<div class="form-check">
-							<label class="form-check-label" style="text-transform:capitalize !important"> <input type="radio"
-								name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important; v">
-								Si
-							</label> <label class="form-check-label" style="text-transform:capitalize !important"> <input type="radio"
-								name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important;margin-left: 12px">
-								No
-							</label>
 						</div>
 					</div>
 				</div>
@@ -91,3 +94,20 @@
 		</div>
 	</div>
 </div>
+
+<script>
+
+function disa() {
+	var cant = document.getElementById('idcatestable');
+	cant.disabled = false;
+
+	}
+	
+function disa2() {
+	var cant = document.getElementById('idcatestable');
+	cant.disabled = true;
+
+
+	}
+</script>
+

@@ -21,6 +21,7 @@
 	</bean>
 	
 	
+	
 	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
 		<property name="numBP" type="String"/>
 		<property name="documentNumber" type="String"/>
@@ -54,6 +55,8 @@
 		<property name="exteriorPublicityTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData>"/>
 		<property name="gasTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHGasTaxData>"/>
 		<property name="urbanDelineationsTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData>"/>
+		<property name="icaTax" type="de.hybris.sdh.facades.questions.data.SDHICATaxData"/>
+		
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
@@ -119,5 +122,10 @@
 		<property name="licenConst" type="String"/>
 		<property name="expDate" type="String"/>
 	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHICATaxData">	
+		<property name="objectNumber" type="String"/>
+	</bean>
+	
 	
 </beans>

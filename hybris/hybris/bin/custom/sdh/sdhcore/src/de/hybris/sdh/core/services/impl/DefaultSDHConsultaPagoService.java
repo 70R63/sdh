@@ -131,9 +131,6 @@ public class DefaultSDHConsultaPagoService implements SDHConsultaPagoService
 	@Override
 	public List<ConsultaPagoDeclaraciones> consultaPago(final String numBP, final String numObjeto, final String clavePeriodo)
 	{
-
-
-
 		final ObjectMapper mapper = new ObjectMapper();
 		final List<ConsultaPagoDeclaraciones>  finalDeclaraciones = new ArrayList<ConsultaPagoDeclaraciones>();
 
@@ -171,7 +168,6 @@ public class DefaultSDHConsultaPagoService implements SDHConsultaPagoService
 						}
 					}
 				}
-
 			}
 		}
 		catch (final IOException e)
@@ -179,6 +175,14 @@ public class DefaultSDHConsultaPagoService implements SDHConsultaPagoService
 			e.printStackTrace();
 		}
 		return finalDeclaraciones;
+	}
+
+
+	@Override
+	public List<ConsultaPagoDeclaraciones> consultaPagoDelineacion(final String numBP, final String numObjeto,
+			final String clavePeriodo)
+	{
+		return null;
 	}
 
 

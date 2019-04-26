@@ -22,7 +22,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive">
-							<table class="table table-bordered">
+							<table class="table table-bordered" id="example">
 								<thead style="background-color: rgb(235, 235, 228)!important">
 									<tr>
 										<td><label
@@ -43,18 +43,30 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><label class="control-label "><spring:theme
-										code="ica.inicial.activecono.principal" /></label></td>
-										<td><input class="inputtextnew" disabled="disabled"
-											type="text" /></td>
-										<td><input class="inputtextnew" disabled="disabled"
-											type="text" style="height: auto !important;"/></td>
-										<td><input class="inputtextnew" disabled="disabled"
-											type="text" /></td>
-										<td><input class="inputtextnew" disabled="disabled"
-											type="text" /></td>
-									</tr>
+									<c:forEach varStatus="loop" items="${icaInfObjetoFormResp.icaInfObjetoResponse.activEconomicas}"
+									var="eachActivEconomicas">
+										<tr>
+											<c:if test='${eachActivEconomicas.activPrincipal == "X"}'>
+												<td><label class="control-label "><spring:theme
+												code="ica.inicial.activecono.principal" /></label></td>
+											</c:if>
+											<c:if test='${eachActivEconomicas.activPrincipal != "X"}'>
+												<td><label class="control-label "></label></td>
+											</c:if>
+											<td><input class="inputtextnew" disabled="disabled" 
+												value="${eachActivEconomicas.ciiu}"
+												type="text" /></td>
+											<td><input class="inputtextnew" disabled="disabled"
+												value="${eachActivEconomicas.denominacion}"
+												type="text" style="height: auto !important;"/></td>
+											<td><input class="inputtextnew" disabled="disabled"
+												value="${eachActivEconomicas.fechaIniAct}"
+												type="text" /></td>
+											<td><input class="inputtextnew" disabled="disabled"
+												value="${eachActivEconomicas.fechaCeseAct}"
+												type="text" /></td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

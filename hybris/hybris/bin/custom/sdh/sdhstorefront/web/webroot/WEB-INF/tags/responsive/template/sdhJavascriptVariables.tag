@@ -84,19 +84,12 @@
 			
 		  	ACC.duGeneraDeclaracionURL = "<c:url value='/contribuyentes/delineacion-urbana/generar' />"
 			
-			ACC.currentURL = "${currentURL}";
+		  	ACC.icaDeclaracionCalculoURL = "<c:url value='/contribuyentes/ica/declaracion/calculo' />"
+		  	
+		  	
+		  	ACC.currentURL = "${currentURL}";
 			
-			ACC.hideMenuInformacionReportada = false;
-			ACC.hideMenuImpuestos = false;
-			ACC.hideMenuBuzon = false;
-			ACC.hideMenuTramites = false;
-			ACC.hideMenuFacturacion = false;
-			ACC.hideMenuDeclaraciones = false;
-			ACC.hideMenuPagos = false;
-			ACC.hideMenuConsultas = false;
-			ACC.hideMenuDetalleRetenedor = false;
-			ACC.hideMenuRegistroRetenciones = false;
-			ACC.hideMenuDeclaracionFirmar = false;
+			
 			
 			ACC.hideSubmenuDelineacionUrbana = false;
 			ACC.hideSubmenuICA = false;
@@ -104,13 +97,8 @@
 			ACC.hideSubmenuPublicidadExt = false;
 			ACC.hideSubmenuVehicular = false;
 			ACC.hideSubmenuGasolina = false;
-			debugger;
 			
 			<c:if test="${(hasCORol and fn:contains(currentURL, 'contribuyentes')) or (hasCORol and fn:contains(currentURL, 'pagoEnLinea'))}">
-				ACC.hideMenuInformacionReportada = true;
-				ACC.hideMenuDetalleRetenedor = true;
-				ACC.hideMenuRegistroRetenciones = true;
-				ACC.hideMenuDeclaracionFirmar = true;
 				
 				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">
 					ACC.hideSubmenuDelineacionUrbana = true;
@@ -142,13 +130,6 @@
 			<c:if test="${hasARRol }">
 			</c:if>
 			<c:if test="${hasRIRol and fn:contains(currentURL, 'reportantes')}">
-				ACC.hideMenuImpuestos = true;
-				ACC.hideMenuBuzon = true;
-				ACC.hideMenuTramites = true;
-				ACC.hideMenuFacturacion = true;
-				ACC.hideMenuDeclaraciones = true;
-				ACC.hideMenuPagos = true;
-				ACC.hideMenuConsultas = true;
 			</c:if>
 			
 			

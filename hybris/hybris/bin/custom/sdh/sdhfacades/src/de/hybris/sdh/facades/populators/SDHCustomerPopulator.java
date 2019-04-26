@@ -9,10 +9,12 @@ import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
+import de.hybris.sdh.core.model.SDHICATaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
+import de.hybris.sdh.facades.questions.data.SDHICATaxData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData;
 
@@ -177,6 +179,21 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 		}
 
 		target.setUrbanDelineationsTaxList(UrbanDelineationsTaxDatas);
+
+
+
+		final SDHICATaxModel icaTaxModel = source.getIcaTaxList();
+		final SDHICATaxData icaTaxData = new SDHICATaxData();
+
+		if (null != icaTaxModel)
+		{
+
+			icaTaxData.setObjectNumber(icaTaxModel.getObjectNumber());
+
+		}
+
+		target.setIcaTax(icaTaxData);
+
 
 
 

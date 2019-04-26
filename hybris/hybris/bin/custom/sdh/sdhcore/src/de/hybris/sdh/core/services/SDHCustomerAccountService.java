@@ -36,4 +36,8 @@ public interface SDHCustomerAccountService
 	String updateBasicData(SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse);
 
 	void updateMiRitInfo();
+
+	void setAutorityOnSession(String role);
+
+	void cleanSessionAutorities();
 }

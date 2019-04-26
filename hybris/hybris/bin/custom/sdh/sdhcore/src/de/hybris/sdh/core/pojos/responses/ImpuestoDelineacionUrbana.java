@@ -13,6 +13,7 @@ public class ImpuestoDelineacionUrbana
 	private String cdu;
 	private String licenConst;
 	private String fechaExp;
+
 	private String nroResolucReva;
 	private String fechaReval;
 	private String totalPresup;

@@ -5,8 +5,12 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 
@@ -155,6 +159,116 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 			}
 		}
 		// XXX Auto-generated method stub
+		return returnList;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHValidaContribuyenteService#getDelineacionListByBpAndYear(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public List<ImpuestoDelineacionUrbana> getDelineacionListByBpAndYear(final String stringBp, final String stringYear)
+	{
+		final SDHValidaMailRolResponse contribuyente = this.validaContribuyente(stringBp);
+		final List<ImpuestoDelineacionUrbana> returnList = new ArrayList<>();
+
+		System.out.println("----------- getDelineacionListByBpAndYear -----------");
+		System.out.println(contribuyente);
+
+		if (Objects.nonNull(contribuyente))
+		{
+			for (final ImpuestoDelineacionUrbana delineacion : contribuyente.getDelineacion())
+			{
+				System.out.println("delineacion [" + delineacion + "]");
+				if (Objects.nonNull(delineacion.getFechaExp()))
+				{
+					final String anio = delineacion.getFechaExp().split("/")[2];
+					System.out.println("getDelineacionListByBpAndYear ----- > " + anio);
+					if (Objects.nonNull(anio))
+					{
+						if (anio.equals(stringYear))
+						{
+							returnList.add(delineacion);
+						}
+					}
+				}
+
+			}
+		}
+		return returnList;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHValidaContribuyenteService#getRadicadosDelineacion(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public RadicaDelinResponse getRadicadosDelineacion(final String numBp, final String cdu)
+	{
+		final String usuario = configurationService.getConfiguration().getString("sdh.radicaDelin.user");
+		final String password = configurationService.getConfiguration().getString("sdh.radicaDelin.password");
+		final String urlService = configurationService.getConfiguration().getString("sdh.radicaDelin.url");
+
+		final RadicaDelinRequest bp = new RadicaDelinRequest();
+		bp.setNumBP(numBp);
+		bp.setCdu(cdu);
+
+		final RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+
+		final HttpEntity<RadicaDelinRequest> request = new HttpEntity<>(bp);
+		return restTemplate.postForObject(urlService, request, RadicaDelinResponse.class);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * de.hybris.sdh.core.services.SDHValidaContribuyenteService#getDelineacionListByBpAndYearWithRadicados(java.lang.
+	 * String, java.lang.String)
+	 */
+	@Override
+	public List<ImpuestoDelineacionUrbanaWithRadicados> getDelineacionListByBpAndYearWithRadicados(final String stringBp,
+			final String stringYear)
+	{
+		final SDHValidaMailRolResponse contribuyente = this.validaContribuyente(stringBp);
+		final List<ImpuestoDelineacionUrbanaWithRadicados> returnList = new ArrayList<>();
+
+		if (Objects.nonNull(contribuyente))
+		{
+			ImpuestoDelineacionUrbanaWithRadicados deli;
+			for (final ImpuestoDelineacionUrbana delineacion : contribuyente.getDelineacion())
+			{
+
+				if (Objects.nonNull(delineacion.getFechaExp()))
+				{
+					final String anio = delineacion.getFechaExp().split("/")[2];
+					System.out.println("getDelineacionListByBpAndYear ----- > " + anio);
+					if (Objects.nonNull(anio))
+					{
+						if (anio.equals(stringYear))
+						{
+							deli = new ImpuestoDelineacionUrbanaWithRadicados();
+
+							deli.setNumObjeto(delineacion.getNumObjeto());
+							deli.setCdu(delineacion.getCdu());
+							deli.setLicenConst(delineacion.getLicenConst());
+							deli.setFechaExp(delineacion.getFechaExp());
+							deli.setFechaReval(delineacion.getFechaReval());
+							deli.setFechFinObra(delineacion.getFechFinObra());
+							deli.setFechaEjecutoria(delineacion.getFechaEjecutoria());
+							deli.setRadicados(this.getRadicadosDelineacion(stringBp, delineacion.getCdu()).getRadicados());
+							returnList.add(deli);
+						}
+					}
+				}
+
+			}
+		}
 		return returnList;
 	}
 
