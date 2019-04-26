@@ -75,8 +75,8 @@
 				</label>
 			</div>
 		</div>
+		
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
-			<c:if test="${not empty eachValor.tipoID }">
 				<div class="row valor">
 					<div class="col-md-1">
 						<input class="form-control anio anoGravable" type="text"
@@ -117,7 +117,9 @@
 					</div>
 					<div class="col-md-1">
 						<select id="" class="form-control codMunicipio" style="height: 48px;">
-							<option value=" ">Seleccionar</option>
+						<c:forEach items="${cities}" var="eachCity">
+							<option value="${ eachCity.code}">${eachCity.name}</option>
+						</c:forEach>
 						</select>
 					</div>
 					<div class="col-md-1">
@@ -138,7 +140,6 @@
 						</div>
 					</div>
 				</div>
-			</c:if>
 		</c:forEach>
 	</div>
 	<div class="container">

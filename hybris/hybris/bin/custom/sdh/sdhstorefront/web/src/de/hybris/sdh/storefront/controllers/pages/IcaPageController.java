@@ -13,6 +13,10 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.dao.impl.DefaultSDHICACityDao;
+import de.hybris.sdh.core.dao.impl.DefaultSDHICAEconomicActivityDao;
+import de.hybris.sdh.core.model.SDHICACityModel;
+import de.hybris.sdh.core.model.SDHICAEconomicActivityModel;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
@@ -116,6 +120,30 @@ public class IcaPageController extends AbstractPageController
 
 	@Resource(name = "sdhGeneraDeclaracionService")
 	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
+
+	@Resource(name = "sdhICACityDao")
+	DefaultSDHICACityDao sdhICACityDao;
+
+	@Resource(name = "sdhICAEconomicAcitivityDao")
+	DefaultSDHICAEconomicActivityDao sdhICAEconomicAcitivityDao;
+
+	@ModelAttribute("cities")
+	public List<SDHICACityModel> getCities()
+	{
+
+		final List<SDHICACityModel> cities = sdhICACityDao.find();
+
+		return cities;
+	}
+
+	@ModelAttribute("econActivities")
+	public List<SDHICAEconomicActivityModel> getEconActivities()
+	{
+
+		final List<SDHICAEconomicActivityModel> econActivities = sdhICAEconomicAcitivityDao.find();
+
+		return econActivities;
+	}
 
 	@RequestMapping(value = "/contribuyentes/ica", method = RequestMethod.GET)
 	@RequireHardLogIn

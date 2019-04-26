@@ -175,9 +175,9 @@ ACC.ica = {
 	            		{
 		            		$( "#dialogICA" ).dialog( "open" );
 		            		$("#icaDialogContent").html("Error");
-//		            		$.each(data.errores, function( index, value ) {
-//    	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
-//    	            		});
+		            		$.each(data.errores, function( index, value ) {
+    	            			$("#icaDialogContent").html($("#icaDialogContent").html()+value.txtmsj+"<br>");
+    	            		});
 //		            		
 //		            		$("#impCar").val("");
 //	            			$("#valsan").val("");

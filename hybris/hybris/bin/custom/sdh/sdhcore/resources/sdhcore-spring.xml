@@ -646,4 +646,14 @@
 
 	<bean id="sdhFTPService"	class="de.hybris.sdh.core.services.impl.DefaultSDHFTPService" />
 
+	<alias alias="sdhICACityDao" name="defaultSDHICACityDao"/>
+	<bean id="defaultSDHICACityDao" class="de.hybris.sdh.core.dao.impl.DefaultSDHICACityDao">
+		<constructor-arg value="SDHICACity"/>
+	</bean>
+	
+	<alias alias="sdhICAEconomicAcitivityDao" name="defaultSDHEconomicActivityDao"/>
+	<bean id="defaultSDHEconomicActivityDao" class="de.hybris.sdh.core.dao.impl.DefaultSDHICAEconomicActivityDao">
+		<constructor-arg value="SDHICAEconomicActivity"/>
+	</bean>
+
 </beans>
