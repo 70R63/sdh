@@ -19,62 +19,62 @@
 			</div>
 			<form:form action="">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.inicial.datecono.actsoc" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.activoTotal}"
-								maxlength="240"></input>
+								maxlength="240" style="width: auto !important"></input>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.inicial.datecono.ingoper" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.ingresosOp}"
-								maxlength="240"></input>
+								maxlength="240" style="width: auto !important"></input>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.inicial.datecono.pastot" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.pasivoTotal}"
-								maxlength="240"></input>
+								maxlength="240" style="width: auto !important"></input>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
-									code="ica.inicial.datecono.ingoper" /></label> <input id="" name=""
+									code="ica.inicial.datecono.ingnoper" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.ingresosNoOp}"
-								maxlength="240"></input>
+								maxlength="240" style="width: auto !important"></input>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.inicial.datecono.patneto" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.patrimonioNeto}"
-								maxlength="240"></input>
+								maxlength="240" style="width: auto !important"></input>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.inicial.datecono.paspat" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.pasivoPatrim}"
-								maxlength="240"></input>
+								maxlength="240" style="width: auto !important"></input>
 						</div>
 					</div>
 				</div>

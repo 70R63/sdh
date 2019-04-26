@@ -13,7 +13,7 @@ public class DetalleMarcas
 	private String codMarca;
 	private String valorExcencion;
 	private String ciiu;
-	private String denominacion;
+	private String descripMarca;
 	private String fechaDesde;
 	private String fechaHasta;
 
@@ -85,22 +85,6 @@ public class DetalleMarcas
 		this.ciiu = ciiu;
 	}
 
-	/**
-	 * @return the denominacion
-	 */
-	public String getDenominacion()
-	{
-		return denominacion;
-	}
-
-	/**
-	 * @param denominacion
-	 *           the denominacion to set
-	 */
-	public void setDenominacion(final String denominacion)
-	{
-		this.denominacion = denominacion;
-	}
 
 	/**
 	 * @return the fechaDesde
@@ -134,6 +118,23 @@ public class DetalleMarcas
 	public void setFechaHasta(final String fechaHasta)
 	{
 		this.fechaHasta = fechaHasta;
+	}
+
+	/**
+	 * @return the descripMarca
+	 */
+	public String getDescripMarca()
+	{
+		return descripMarca;
+	}
+
+	/**
+	 * @param descripMarca
+	 *           the descripMarca to set
+	 */
+	public void setDescripMarca(final String descripMarca)
+	{
+		this.descripMarca = descripMarca;
 	}
 
 

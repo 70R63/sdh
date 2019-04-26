@@ -96,12 +96,12 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						onclick="show()"> Si
+						onclick="habilitar()"> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="deshabilitar()">
 						No
 					</label>
 				</div>
@@ -110,7 +110,7 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<input id="" id="" name="" class="form-control" disabled
+					<input id="impuest" name="" class="form-control" disabled
 						type="text" value="${infoDeclara.impuestoAviso }" maxlength="240"></input>
 				</div>
 			</div>
@@ -303,6 +303,18 @@
 		}
 
 
+	}
+	
+	function deshabilitar() {
+		var imp = document.getElementById('impuest');
+		imp.disabled = true;
+
+
+	}
+	
+	function habilitar() {
+		var imp = document.getElementById('impuest');
+		imp.disabled = false;
 	}
 </script>
 

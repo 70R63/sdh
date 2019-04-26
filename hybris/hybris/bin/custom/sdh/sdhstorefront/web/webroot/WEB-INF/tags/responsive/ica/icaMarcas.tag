@@ -27,13 +27,13 @@
 					<table class="table table-bordered" id="example">
 						<thead style="background-color: rgb(235, 235, 228) !important">
 							<tr>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important"><spring:theme
 											code="ica.inicial.marcas.descrimarca" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important"><spring:theme
 											code="ica.inicial.marcas.valexe" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important"><spring:theme
 											code="ica.inicial.marcas.fecvaldesde" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important"><spring:theme
 											code="ica.inicial.marcas.fecvalhasta" /></label></td>
 							</tr>
 						</thead>
@@ -41,9 +41,9 @@
 							<c:forEach varStatus="loop" items="${icaInfObjetoFormResp.icaInfObjetoResponse.marcas}"
 									var="eachMarcas">
 								<tr>
-									<td><input class="inputtextnew" disabled="disabled"
-										value="${eachMarcas.denominacion}"
-										type="text" /></td>
+									<td><input class="inputtextnewmd" disabled="disabled"
+										value="${eachMarcas.descripMarca}"
+										type="text" style="height: auto !important; width: 380px !important"/></td>
 									<td><input class="inputtextnew" disabled="disabled"
 										value="${eachMarcas.valorExcencion}"
 										type="text" /></td>

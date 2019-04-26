@@ -29,6 +29,7 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 
@@ -367,7 +368,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = "5401";
+		final String tipoImpuesto = new ControllerPseConstants().getPUBLICIDAD();
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -377,7 +378,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "2332" : "2306";
+		//				tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
@@ -433,7 +434,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = "5401";
+		final String tipoImpuesto = new ControllerPseConstants().getPUBLICIDAD();
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -443,7 +444,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "2332" : "2306";
+		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
@@ -549,7 +550,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = "5401";
+		final String tipoImpuesto = new ControllerPseConstants().getPUBLICIDAD();
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -559,7 +560,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 
-		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "2332" : "2306";
+		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
