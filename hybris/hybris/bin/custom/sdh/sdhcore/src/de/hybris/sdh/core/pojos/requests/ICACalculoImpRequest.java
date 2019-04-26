@@ -126,6 +126,9 @@ public class ICACalculoImpRequest
 	}
 
 
+
+
+
 	/**
 	 * @return the numObjeto
 	 */
@@ -133,6 +136,10 @@ public class ICACalculoImpRequest
 	{
 		return numObjeto;
 	}
+
+
+
+
 
 	/**
 	 * @param numObjeto
@@ -143,6 +150,10 @@ public class ICACalculoImpRequest
 		this.numObjeto = numObjeto;
 	}
 
+
+
+
+
 	/**
 	 * @return the numForm
 	 */
@@ -150,6 +161,10 @@ public class ICACalculoImpRequest
 	{
 		return numForm;
 	}
+
+
+
+
 
 	/**
 	 * @param numForm
@@ -160,6 +175,35 @@ public class ICACalculoImpRequest
 		this.numForm = numForm;
 	}
 
+
+
+
+
+	/**
+	 * @return the anoGravable
+	 */
+	public String getAnoGravable()
+	{
+		return anoGravable;
+	}
+
+
+
+
+
+	/**
+	 * @param anoGravable
+	 *           the anoGravable to set
+	 */
+	public void setAnoGravable(final String anoGravable)
+	{
+		this.anoGravable = anoGravable;
+	}
+
+
+
+
+
 	/**
 	 * @return the periodo
 	 */
@@ -167,6 +211,10 @@ public class ICACalculoImpRequest
 	{
 		return periodo;
 	}
+
+
+
+
 
 	/**
 	 * @param periodo
@@ -177,6 +225,10 @@ public class ICACalculoImpRequest
 		this.periodo = periodo;
 	}
 
+
+
+
+
 	/**
 	 * @return the numBP
 	 */
@@ -184,6 +236,10 @@ public class ICACalculoImpRequest
 	{
 		return numBP;
 	}
+
+
+
+
 
 	/**
 	 * @param numBP
@@ -194,39 +250,209 @@ public class ICACalculoImpRequest
 		this.numBP = numBP;
 	}
 
-	/**
-	 * @return the declaracion
-	 */
-	public ICADeclaracion getDeclaracion()
-	{
-		return declaracion;
-	}
+
+
+
 
 	/**
-	 * @param declaracion
-	 *           the declaracion to set
+	 * @return the cantEstablec
 	 */
-	public void setDeclaracion(final ICADeclaracion declaracion)
+	public String getCantEstablec()
 	{
-		this.declaracion = declaracion;
+		return cantEstablec;
 	}
 
-	/**
-	 * @return the stringIngFueraBog
-	 */
-	public String getStringIngFueraBog()
-	{
-		return stringIngFueraBog;
-	}
+
+
+
 
 	/**
-	 * @param stringIngFueraBog
-	 *           the stringIngFueraBog to set
+	 * @param cantEstablec
+	 *           the cantEstablec to set
 	 */
-	public void setStringIngFueraBog(final String stringIngFueraBog)
+	public void setCantEstablec(final String cantEstablec)
 	{
-		this.stringIngFueraBog = stringIngFueraBog;
+		this.cantEstablec = cantEstablec;
 	}
+
+
+
+
+
+	/**
+	 * @return the entFinanciera
+	 */
+	public String getEntFinanciera()
+	{
+		return entFinanciera;
+	}
+
+
+
+
+
+	/**
+	 * @param entFinanciera
+	 *           the entFinanciera to set
+	 */
+	public void setEntFinanciera(final String entFinanciera)
+	{
+		this.entFinanciera = entFinanciera;
+	}
+
+
+
+
+
+	/**
+	 * @return the impuestoAviso
+	 */
+	public String getImpuestoAviso()
+	{
+		return impuestoAviso;
+	}
+
+
+
+
+
+	/**
+	 * @param impuestoAviso
+	 *           the impuestoAviso to set
+	 */
+	public void setImpuestoAviso(final String impuestoAviso)
+	{
+		this.impuestoAviso = impuestoAviso;
+	}
+
+
+
+
+
+	/**
+	 * @return the totalIngrPeriodo
+	 */
+	public String getTotalIngrPeriodo()
+	{
+		return totalIngrPeriodo;
+	}
+
+
+
+
+
+	/**
+	 * @param totalIngrPeriodo
+	 *           the totalIngrPeriodo to set
+	 */
+	public void setTotalIngrPeriodo(final String totalIngrPeriodo)
+	{
+		this.totalIngrPeriodo = totalIngrPeriodo;
+	}
+
+
+
+
+
+	/**
+	 * @return the valorPagar
+	 */
+	public String getValorPagar()
+	{
+		return valorPagar;
+	}
+
+
+
+
+
+	/**
+	 * @param valorPagar
+	 *           the valorPagar to set
+	 */
+	public void setValorPagar(final String valorPagar)
+	{
+		this.valorPagar = valorPagar;
+	}
+
+
+
+
+
+	/**
+	 * @return the checkAporte
+	 */
+	public String getCheckAporte()
+	{
+		return checkAporte;
+	}
+
+
+
+
+
+	/**
+	 * @param checkAporte
+	 *           the checkAporte to set
+	 */
+	public void setCheckAporte(final String checkAporte)
+	{
+		this.checkAporte = checkAporte;
+	}
+
+
+
+
+
+	/**
+	 * @return the proyectoAporte
+	 */
+	public String getProyectoAporte()
+	{
+		return proyectoAporte;
+	}
+
+
+
+
+
+	/**
+	 * @param proyectoAporte
+	 *           the proyectoAporte to set
+	 */
+	public void setProyectoAporte(final String proyectoAporte)
+	{
+		this.proyectoAporte = proyectoAporte;
+	}
+
+
+
+
+
+	/**
+	 * @return the tarifaAporte
+	 */
+	public String getTarifaAporte()
+	{
+		return tarifaAporte;
+	}
+
+
+
+
+
+	/**
+	 * @param tarifaAporte
+	 *           the tarifaAporte to set
+	 */
+	public void setTarifaAporte(final String tarifaAporte)
+	{
+		this.tarifaAporte = tarifaAporte;
+	}
+
+
+
+
 
 	/**
 	 * @return the ingFueraBog
@@ -235,6 +461,10 @@ public class ICACalculoImpRequest
 	{
 		return ingFueraBog;
 	}
+
+
+
+
 
 	/**
 	 * @param ingFueraBog
@@ -245,6 +475,10 @@ public class ICACalculoImpRequest
 		this.ingFueraBog = ingFueraBog;
 	}
 
+
+
+
+
 	/**
 	 * @return the deducciones
 	 */
@@ -252,6 +486,10 @@ public class ICACalculoImpRequest
 	{
 		return deducciones;
 	}
+
+
+
+
 
 	/**
 	 * @param deducciones
@@ -262,22 +500,9 @@ public class ICACalculoImpRequest
 		this.deducciones = deducciones;
 	}
 
-	/**
-	 * @return the stringIngNetos
-	 */
-	public String getStringIngNetos()
-	{
-		return stringIngNetos;
-	}
 
-	/**
-	 * @param stringIngNetos
-	 *           the stringIngNetos to set
-	 */
-	public void setStringIngNetos(final String stringIngNetos)
-	{
-		this.stringIngNetos = stringIngNetos;
-	}
+
+
 
 	/**
 	 * @return the ingNetosGrava
@@ -286,6 +511,10 @@ public class ICACalculoImpRequest
 	{
 		return ingNetosGrava;
 	}
+
+
+
+
 
 	/**
 	 * @param ingNetosGrava
@@ -296,22 +525,34 @@ public class ICACalculoImpRequest
 		this.ingNetosGrava = ingNetosGrava;
 	}
 
-	/**
-	 * @return the stringValRetenido
-	 */
-	public String getStringValRetenido()
-	{
-		return stringValRetenido;
-	}
+
+
+
 
 	/**
-	 * @param stringValRetenido
-	 *           the stringValRetenido to set
+	 * @return the ingPorCIIU
 	 */
-	public void setStringValRetenido(final String stringValRetenido)
+	public ICAIngPorCIIU getIngPorCIIU()
 	{
-		this.stringValRetenido = stringValRetenido;
+		return ingPorCIIU;
 	}
+
+
+
+
+
+	/**
+	 * @param ingPorCIIU
+	 *           the ingPorCIIU to set
+	 */
+	public void setIngPorCIIU(final ICAIngPorCIIU ingPorCIIU)
+	{
+		this.ingPorCIIU = ingPorCIIU;
+	}
+
+
+
+
 
 	/**
 	 * @return the valorRetenido
@@ -320,6 +561,10 @@ public class ICACalculoImpRequest
 	{
 		return valorRetenido;
 	}
+
+
+
+
 
 	/**
 	 * @param valorRetenido
@@ -330,6 +575,10 @@ public class ICACalculoImpRequest
 		this.valorRetenido = valorRetenido;
 	}
 
+
+
+
+
 	/**
 	 * @return the relaciones
 	 */
@@ -337,6 +586,10 @@ public class ICACalculoImpRequest
 	{
 		return relaciones;
 	}
+
+
+
+
 
 	/**
 	 * @param relaciones
@@ -346,6 +599,9 @@ public class ICACalculoImpRequest
 	{
 		this.relaciones = relaciones;
 	}
+
+
+
 
 
 
