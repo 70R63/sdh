@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Consultor
  *
@@ -13,7 +16,7 @@ public class ICACalculoImpResponse
 
 	private ICADeclaracion declaracion;
 	private ICAValRetenido valRetenido;
-	private ErrorEnWS errores;
+	private List<ErrorEnWS> errores;
 
 	/**
 	 * @return the numForm
@@ -69,7 +72,7 @@ public class ICACalculoImpResponse
 	/**
 	 * @return the errores
 	 */
-	public ErrorEnWS getErrores()
+	public List<ErrorEnWS> getErrores()
 	{
 		return errores;
 	}
@@ -78,7 +81,7 @@ public class ICACalculoImpResponse
 	 * @param errores
 	 *           the errores to set
 	 */
-	public void setErrores(final ErrorEnWS errores)
+	public void setErrores(final List<ErrorEnWS> errores)
 	{
 		this.errores = errores;
 	}

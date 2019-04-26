@@ -10,15 +10,21 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.ICACalculoImpResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
+import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -28,9 +34,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -225,6 +233,142 @@ public class IcaPageController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
+
+
+	@RequestMapping(value = "/contribuyentes/ica/declaracion/calculo", method = RequestMethod.POST)
+	@ResponseBody
+	public ICACalculoImpResponse calculo(@ModelAttribute("icaCalculaDeclaracionForm")
+	final ICACalculaDeclaracionForm icaCalculaDeclaracionForm) throws CMSItemNotFoundException
+	{
+		ICACalculoImpResponse icaCalculoImpResponse = new ICACalculoImpResponse();
+
+
+		final ICACalculoImpRequest icaCalculoImpRequest = new ICACalculoImpRequest();
+
+		icaCalculoImpRequest.setNumObjeto(icaCalculaDeclaracionForm.getNumObjeto());
+		icaCalculoImpRequest.setNumForm(icaCalculaDeclaracionForm.getNumForm());
+		icaCalculoImpRequest.setAnoGravable(icaCalculaDeclaracionForm.getAnoGravable());
+		icaCalculoImpRequest.setPeriodo(icaCalculaDeclaracionForm.getPeriodo());
+		icaCalculoImpRequest.setNumBP(icaCalculaDeclaracionForm.getNumBP());
+		icaCalculoImpRequest.setCantEstablec(icaCalculaDeclaracionForm.getCantEstablec());
+		icaCalculoImpRequest.setEntFinanciera(icaCalculaDeclaracionForm.getEntFinanciera());
+		icaCalculoImpRequest.setImpuestoAviso(icaCalculaDeclaracionForm.getImpuestoAviso());
+		icaCalculoImpRequest.setTotalIngrPeriodo(icaCalculaDeclaracionForm.getTotalIngrPeriodo());
+		icaCalculoImpRequest.setValorPagar(icaCalculaDeclaracionForm.getValorPagar());
+		icaCalculoImpRequest.setCheckAporte(icaCalculaDeclaracionForm.getCheckAporte());
+		icaCalculoImpRequest.setProyectoAporte(icaCalculaDeclaracionForm.getProyectoAporte());
+		icaCalculoImpRequest.setTarifaAporte(icaCalculaDeclaracionForm.getTarifaAporte());
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			icaCalculoImpResponse = mapper.readValue(sdhICACalculoImpService.consultaICACalculoImp(icaCalculoImpRequest),
+					ICACalculoImpResponse.class);
+
+
+		}
+
+
+		catch (final Exception e)
+		{
+			LOG.error("error calculating ica declaration: " + e.getMessage());
+
+			final ErrorEnWS error = new ErrorEnWS();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+
+			errores.add(error);
+
+			icaCalculoImpResponse.setErrores(errores);
+
+		}
+
+
+		return icaCalculoImpResponse;
+
+	}
+
+	//	@RequestMapping(value = "/generar", method = RequestMethod.POST)
+	//	@ResponseBody
+	//	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
+	//			final HttpServletRequest request) throws CMSItemNotFoundException
+	//	{
+	//		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
+	//		final CustomerData customerData = customerFacade.getCurrentCustomer();
+	//		String numForm = request.getParameter("numForm");
+	//
+	//		if (StringUtils.isBlank(numForm))
+	//		{
+	//			numForm = dataForm.getNumForm();
+	//		}
+	//
+	//		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
+	//
+	//
+	//		generaDeclaracionRequest.setNumForm(numForm);
+	//
+	//		try
+	//		{
+	//			final ObjectMapper mapper = new ObjectMapper();
+	//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	//
+	//			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
+	//					GeneraDeclaracionResponse.class);
+	//
+	//			if (generaDeclaracionResponse != null && generaDeclaracionResponse.getStringPDF() != null)
+	//			{
+	//				final String encodedBytes = generaDeclaracionResponse.getStringPDF();
+	//
+	//				final BASE64Decoder decoder = new BASE64Decoder();
+	//				byte[] decodedBytes;
+	//				final FileOutputStream fop;
+	//				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+	//
+	//
+	//
+	//				final String fileName = numForm + "-" + customerData.getNumBP() + ".pdf";
+	//
+	//				final InputStream is = new ByteArrayInputStream(decodedBytes);
+	//
+	//
+	//				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+	//				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+	//				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+	//				modelService.save(mediaModel);
+	//				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+	//				modelService.refresh(mediaModel);
+	//
+	//				generaDeclaracionResponse.setUrlDownload(mediaModel.getDownloadURL());
+	//
+	//
+	//			}
+	//
+	//		}
+	//		catch (final Exception e)
+	//		{
+	//			LOG.error("error generating declaration : " + e.getMessage());
+	//
+	//			final ErrorPubli error = new ErrorPubli();
+	//
+	//			error.setIdmsj("0");
+	//			error.setTxtmsj("Hubo un error al generar la declaración, por favor intentalo más tarde");
+	//
+	//			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
+	//
+	//			errores.add(error);
+	//
+	//			generaDeclaracionResponse.setErrores(errores);
+	//
+	//		}
+	//
+	//		return generaDeclaracionResponse;
+	//
+	//	}
 
 
 }

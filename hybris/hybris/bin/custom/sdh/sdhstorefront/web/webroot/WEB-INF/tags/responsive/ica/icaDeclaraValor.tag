@@ -124,7 +124,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center" style="marging-top: 15px">
-				<button style="margin-top: 3px;" id=""
+				<button style="margin-top: 3px;" id="icaCalculoButton"
 					class="btn btn-primary btn-lg" type="button">
 					<spring:theme code="ica.declaracion.valor.calcular" />
 				</button>

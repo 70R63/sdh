@@ -35,7 +35,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.regitribut" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value="<spring:theme code='ica.declaracion.regimen.r${icaInfObjetoFormResp.icaInfObjetoResponse.regimen }' />"
+								id="" name="" class="form-control" disabled type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.regimen }"
 								maxlength="240"></input>
 						</div>
 					</div>
