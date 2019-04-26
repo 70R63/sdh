@@ -25,7 +25,7 @@ public class ControllerPseConstants
 		PREDIAL = "PREDIAL";
 		DELINEACION = "2306";
 		VEHICULAR = "VEHICULAR";
-		PUBLICIDAD = "5401";
+		PUBLICIDAD = "5154";
 		GASOLINA = "2308";
 		ICA = "ICA";
 		RETENCIONDU = "2332";
