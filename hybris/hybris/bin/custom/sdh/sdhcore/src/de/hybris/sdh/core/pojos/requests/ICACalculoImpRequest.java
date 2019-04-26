@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import java.util.List;
+
+
 /**
  * @author Consultor
  *
@@ -23,16 +26,12 @@ public class ICACalculoImpRequest
 	private String proyectoAporte;
 	private String tarifaAporte;
 
-	private ICAIngFueraBog ingFueraBog;
-	private ICADeducciones deducciones;
-	private ICAIngNetosGrava ingNetosGrava;
-	private ICAIngPorCIIU ingPorCIIU;
-	private ICAValorRetenido valorRetenido;
-	private ICARelaciones relaciones;
-
-
-
-
+	private List<ICAIngFueraBog> ingFueraBog;
+	private List<ICADeducciones> deducciones;
+	private List<ICAIngNetosGrava> ingNetosGrava;
+	private List<ICAIngPorCIIU> ingPorCIIU;
+	private List<ICAValorRetenido> valorRetenido;
+	private List<ICARelaciones> relaciones;
 
 	@Override
 	public String toString()
@@ -52,71 +51,71 @@ public class ICACalculoImpRequest
 		stringBuilder.append("\"valorPagar\":\"" + this.valorPagar + "\",");
 		stringBuilder.append("\"checkAporte\":\"" + this.checkAporte + "\",");
 		stringBuilder.append("\"proyectoAporte\":\"" + this.proyectoAporte + "\",");
-		stringBuilder.append("\"tarifaAporte\":\"" + this.tarifaAporte + "\",");
+		stringBuilder.append("\"tarifaAporte\":\"" + this.tarifaAporte + "\"");
 
-		stringBuilder.append("\"ingFueraBog\":{");
-		stringBuilder.append("\"codCIIU\":\"" + this.ingFueraBog.getCodCIIU() + "\",");
-		stringBuilder.append("\"codMunicipio\":\"" + this.ingFueraBog.getCodMunicipio() + "\",");
-		stringBuilder.append("\"ingresos\":\"" + this.ingFueraBog.getIngresos() + "\",");
-		stringBuilder.append("},");
-
-		stringBuilder.append("\"deducciones\":{");
-		stringBuilder.append("\"actnosubPA\":\"" + this.deducciones.getActnosubPA() + "\",");
-		stringBuilder.append("\"enajActFijo\":\"" + this.deducciones.getEnajActFijo() + "\",");
-		stringBuilder.append("\"exportBienes\":\"" + this.deducciones.getExportBienes() + "\",");
-		stringBuilder.append("\"exportServ\":\"" + this.deducciones.getExportServ() + "\",");
-		stringBuilder.append("\"actnosub39\":\"" + this.deducciones.getActnosub39() + "\",");
-		stringBuilder.append("\"actnosubPH\":\"" + this.deducciones.getActnosubPH() + "\",");
-		stringBuilder.append("\"juegoSuerteAzar\":\"" + this.deducciones.getJuegoSuerteAzar() + "\",");
-		stringBuilder.append("\"donaciones\":\"" + this.deducciones.getDonaciones() + "\",");
-		stringBuilder.append("\"exenActos\":\"" + this.deducciones.getExenActos() + "\",");
-		stringBuilder.append("\"baseGravEsp\":\"" + this.deducciones.getBaseGravEsp() + "\",");
-		stringBuilder.append("\"ingrActConsorc\":\"" + this.deducciones.getIngrActConsorc() + "\",");
-		stringBuilder.append("\"diviNOGiroOrd\":\"" + this.deducciones.getDiviNOGiroOrd() + "\",");
-		stringBuilder.append("\"exenVictima\":\"" + this.deducciones.getExenVictima() + "\",");
-		stringBuilder.append("\"correcMoneda\":\"" + this.deducciones.getCorrecMoneda() + "\",");
-		stringBuilder.append("\"reintegro\":\"" + this.deducciones.getReintegro() + "\",");
-		stringBuilder.append("\"Salarios\":\"" + this.deducciones.getSalarios() + "\",");
-		stringBuilder.append("\"devoluciones\":\"" + this.deducciones.getDevoluciones() + "\",");
-		stringBuilder.append("\"rebajas\":\"" + this.deducciones.getRebajas() + "\",");
-		stringBuilder.append("\"descuentos\":\"" + this.deducciones.getDescuentos() + "\",");
-		stringBuilder.append("},");
-
-		stringBuilder.append("\"ingNetosGrava\":{");
-		stringBuilder.append("\"actPrincipal\":\"" + this.ingNetosGrava.getActPrincipal() + "\",");
-		stringBuilder.append("\"codCIIU\":\"" + this.ingNetosGrava.getCodCIIU() + "\",");
-		stringBuilder.append("\"ingresos\":\"" + this.ingNetosGrava.getIngresos() + "\",");
-		stringBuilder.append("},");
-
-		stringBuilder.append("\"ingPorCIIU\":{");
-		stringBuilder.append("\"anoGravable\":\"" + this.ingPorCIIU.getAnoGravable() + "\",");
-		stringBuilder.append("\"tipoID\":\"" + this.ingPorCIIU.getTipoID() + "\",");
-		stringBuilder.append("\"numID\":\"" + this.ingPorCIIU.getNumID() + "\",");
-		stringBuilder.append("\"direccion\":\"" + this.ingPorCIIU.getDireccion() + "\",");
-		stringBuilder.append("\"telefono\":\"" + this.ingPorCIIU.getTelefono() + "\",");
-		stringBuilder.append("\"codCIIU\":\"" + this.ingPorCIIU.getCodCIIU() + "\",");
-		stringBuilder.append("\"ingBrutoSINIVA\":\"" + this.ingPorCIIU.getIngBrutoSINIVA() + "\",");
-		stringBuilder.append("},");
-
-		stringBuilder.append("\"valorRetenido\":{");
-		stringBuilder.append("\"anoGravable\":\"" + this.valorRetenido.getAnoGravable() + "\",");
-		stringBuilder.append("\"tipoID\":\"" + this.valorRetenido.getTipoID() + "\",");
-		stringBuilder.append("\"numID\":\"" + this.valorRetenido.getNumID() + "\",");
-		stringBuilder.append("\"razonSocial\":\"" + this.valorRetenido.getRazonSocial() + "\",");
-		stringBuilder.append("\"codMunicipio\":\"" + this.valorRetenido.getCodMunicipio() + "\",");
-		stringBuilder.append("\"direccion\":\"" + this.valorRetenido.getDireccion() + "\",");
-		stringBuilder.append("\"telefono\":\"" + this.valorRetenido.getTelefono() + "\",");
-		stringBuilder.append("\"tarifaApl\":\"" + this.valorRetenido.getTarifaApl() + "\",");
-		stringBuilder.append("},");
-
-		stringBuilder.append("\"relaciones\":{");
-		stringBuilder.append("\"tipoDoc\":\"" + this.relaciones.getTipoDoc() + "\",");
-		stringBuilder.append("\"numDoc\":\"" + this.relaciones.getNumDoc() + "\",");
-		stringBuilder.append("\"nombre\":\"" + this.relaciones.getNombre() + "\",");
-		stringBuilder.append("\"tipoRelacion\":\"" + this.relaciones.getTipoRelacion() + "\",");
-		stringBuilder.append("\"fechaDesde\":\"" + this.relaciones.getFechaDesde() + "\",");
-		stringBuilder.append("\"fechaHasta\":\"" + this.relaciones.getFechaHasta() + "\",");
-		stringBuilder.append("}");
+		//		stringBuilder.append("\"ingFueraBog\":{");
+		//		stringBuilder.append("\"codCIIU\":\"" + this.ingFueraBog.getCodCIIU() + "\",");
+		//		stringBuilder.append("\"codMunicipio\":\"" + this.ingFueraBog.getCodMunicipio() + "\",");
+		//		stringBuilder.append("\"ingresos\":\"" + this.ingFueraBog.getIngresos() + "\",");
+		//		stringBuilder.append("},");
+		//
+		//		stringBuilder.append("\"deducciones\":{");
+		//		stringBuilder.append("\"actnosubPA\":\"" + this.deducciones.getActnosubPA() + "\",");
+		//		stringBuilder.append("\"enajActFijo\":\"" + this.deducciones.getEnajActFijo() + "\",");
+		//		stringBuilder.append("\"exportBienes\":\"" + this.deducciones.getExportBienes() + "\",");
+		//		stringBuilder.append("\"exportServ\":\"" + this.deducciones.getExportServ() + "\",");
+		//		stringBuilder.append("\"actnosub39\":\"" + this.deducciones.getActnosub39() + "\",");
+		//		stringBuilder.append("\"actnosubPH\":\"" + this.deducciones.getActnosubPH() + "\",");
+		//		stringBuilder.append("\"juegoSuerteAzar\":\"" + this.deducciones.getJuegoSuerteAzar() + "\",");
+		//		stringBuilder.append("\"donaciones\":\"" + this.deducciones.getDonaciones() + "\",");
+		//		stringBuilder.append("\"exenActos\":\"" + this.deducciones.getExenActos() + "\",");
+		//		stringBuilder.append("\"baseGravEsp\":\"" + this.deducciones.getBaseGravEsp() + "\",");
+		//		stringBuilder.append("\"ingrActConsorc\":\"" + this.deducciones.getIngrActConsorc() + "\",");
+		//		stringBuilder.append("\"diviNOGiroOrd\":\"" + this.deducciones.getDiviNOGiroOrd() + "\",");
+		//		stringBuilder.append("\"exenVictima\":\"" + this.deducciones.getExenVictima() + "\",");
+		//		stringBuilder.append("\"correcMoneda\":\"" + this.deducciones.getCorrecMoneda() + "\",");
+		//		stringBuilder.append("\"reintegro\":\"" + this.deducciones.getReintegro() + "\",");
+		//		stringBuilder.append("\"Salarios\":\"" + this.deducciones.getSalarios() + "\",");
+		//		stringBuilder.append("\"devoluciones\":\"" + this.deducciones.getDevoluciones() + "\",");
+		//		stringBuilder.append("\"rebajas\":\"" + this.deducciones.getRebajas() + "\",");
+		//		stringBuilder.append("\"descuentos\":\"" + this.deducciones.getDescuentos() + "\",");
+		//		stringBuilder.append("},");
+		//
+		//		stringBuilder.append("\"ingNetosGrava\":{");
+		//		stringBuilder.append("\"actPrincipal\":\"" + this.ingNetosGrava.getActPrincipal() + "\",");
+		//		stringBuilder.append("\"codCIIU\":\"" + this.ingNetosGrava.getCodCIIU() + "\",");
+		//		stringBuilder.append("\"ingresos\":\"" + this.ingNetosGrava.getIngresos() + "\",");
+		//		stringBuilder.append("},");
+		//
+		//		stringBuilder.append("\"ingPorCIIU\":{");
+		//		stringBuilder.append("\"anoGravable\":\"" + this.ingPorCIIU.getAnoGravable() + "\",");
+		//		stringBuilder.append("\"tipoID\":\"" + this.ingPorCIIU.getTipoID() + "\",");
+		//		stringBuilder.append("\"numID\":\"" + this.ingPorCIIU.getNumID() + "\",");
+		//		stringBuilder.append("\"direccion\":\"" + this.ingPorCIIU.getDireccion() + "\",");
+		//		stringBuilder.append("\"telefono\":\"" + this.ingPorCIIU.getTelefono() + "\",");
+		//		stringBuilder.append("\"codCIIU\":\"" + this.ingPorCIIU.getCodCIIU() + "\",");
+		//		stringBuilder.append("\"ingBrutoSINIVA\":\"" + this.ingPorCIIU.getIngBrutoSINIVA() + "\",");
+		//		stringBuilder.append("},");
+		//
+		//		stringBuilder.append("\"valorRetenido\":{");
+		//		stringBuilder.append("\"anoGravable\":\"" + this.valorRetenido.getAnoGravable() + "\",");
+		//		stringBuilder.append("\"tipoID\":\"" + this.valorRetenido.getTipoID() + "\",");
+		//		stringBuilder.append("\"numID\":\"" + this.valorRetenido.getNumID() + "\",");
+		//		stringBuilder.append("\"razonSocial\":\"" + this.valorRetenido.getRazonSocial() + "\",");
+		//		stringBuilder.append("\"codMunicipio\":\"" + this.valorRetenido.getCodMunicipio() + "\",");
+		//		stringBuilder.append("\"direccion\":\"" + this.valorRetenido.getDireccion() + "\",");
+		//		stringBuilder.append("\"telefono\":\"" + this.valorRetenido.getTelefono() + "\",");
+		//		stringBuilder.append("\"tarifaApl\":\"" + this.valorRetenido.getTarifaApl() + "\",");
+		//		stringBuilder.append("},");
+		//
+		//		stringBuilder.append("\"relaciones\":{");
+		//		stringBuilder.append("\"tipoDoc\":\"" + this.relaciones.getTipoDoc() + "\",");
+		//		stringBuilder.append("\"numDoc\":\"" + this.relaciones.getNumDoc() + "\",");
+		//		stringBuilder.append("\"nombre\":\"" + this.relaciones.getNombre() + "\",");
+		//		stringBuilder.append("\"tipoRelacion\":\"" + this.relaciones.getTipoRelacion() + "\",");
+		//		stringBuilder.append("\"fechaDesde\":\"" + this.relaciones.getFechaDesde() + "\",");
+		//		stringBuilder.append("\"fechaHasta\":\"" + this.relaciones.getFechaHasta() + "\",");
+		//		stringBuilder.append("}");
 
 		stringBuilder.append("}");
 
@@ -124,9 +123,6 @@ public class ICACalculoImpRequest
 
 		return stringBuilder.toString();
 	}
-
-
-
 
 
 	/**
@@ -137,10 +133,6 @@ public class ICACalculoImpRequest
 		return numObjeto;
 	}
 
-
-
-
-
 	/**
 	 * @param numObjeto
 	 *           the numObjeto to set
@@ -150,10 +142,6 @@ public class ICACalculoImpRequest
 		this.numObjeto = numObjeto;
 	}
 
-
-
-
-
 	/**
 	 * @return the numForm
 	 */
@@ -161,10 +149,6 @@ public class ICACalculoImpRequest
 	{
 		return numForm;
 	}
-
-
-
-
 
 	/**
 	 * @param numForm
@@ -175,8 +159,39 @@ public class ICACalculoImpRequest
 		this.numForm = numForm;
 	}
 
+	/**
+	 * @return the periodo
+	 */
+	public String getPeriodo()
+	{
+		return periodo;
+	}
 
+	/**
+	 * @param periodo
+	 *           the periodo to set
+	 */
+	public void setPeriodo(final String periodo)
+	{
+		this.periodo = periodo;
+	}
 
+	/**
+	 * @return the numBP
+	 */
+	public String getNumBP()
+	{
+		return numBP;
+	}
+
+	/**
+	 * @param numBP
+	 *           the numBP to set
+	 */
+	public void setNumBP(final String numBP)
+	{
+		this.numBP = numBP;
+	}
 
 
 	/**
@@ -186,9 +201,6 @@ public class ICACalculoImpRequest
 	{
 		return anoGravable;
 	}
-
-
-
 
 
 	/**
@@ -201,59 +213,6 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
-	/**
-	 * @return the periodo
-	 */
-	public String getPeriodo()
-	{
-		return periodo;
-	}
-
-
-
-
-
-	/**
-	 * @param periodo
-	 *           the periodo to set
-	 */
-	public void setPeriodo(final String periodo)
-	{
-		this.periodo = periodo;
-	}
-
-
-
-
-
-	/**
-	 * @return the numBP
-	 */
-	public String getNumBP()
-	{
-		return numBP;
-	}
-
-
-
-
-
-	/**
-	 * @param numBP
-	 *           the numBP to set
-	 */
-	public void setNumBP(final String numBP)
-	{
-		this.numBP = numBP;
-	}
-
-
-
-
-
 	/**
 	 * @return the cantEstablec
 	 */
@@ -261,9 +220,6 @@ public class ICACalculoImpRequest
 	{
 		return cantEstablec;
 	}
-
-
-
 
 
 	/**
@@ -276,9 +232,6 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
 	/**
 	 * @return the entFinanciera
 	 */
@@ -286,9 +239,6 @@ public class ICACalculoImpRequest
 	{
 		return entFinanciera;
 	}
-
-
-
 
 
 	/**
@@ -301,9 +251,6 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
 	/**
 	 * @return the impuestoAviso
 	 */
@@ -311,9 +258,6 @@ public class ICACalculoImpRequest
 	{
 		return impuestoAviso;
 	}
-
-
-
 
 
 	/**
@@ -326,9 +270,6 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
 	/**
 	 * @return the totalIngrPeriodo
 	 */
@@ -336,9 +277,6 @@ public class ICACalculoImpRequest
 	{
 		return totalIngrPeriodo;
 	}
-
-
-
 
 
 	/**
@@ -351,9 +289,6 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
 	/**
 	 * @return the valorPagar
 	 */
@@ -361,9 +296,6 @@ public class ICACalculoImpRequest
 	{
 		return valorPagar;
 	}
-
-
-
 
 
 	/**
@@ -376,9 +308,6 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
 	/**
 	 * @return the checkAporte
 	 */
@@ -386,9 +315,6 @@ public class ICACalculoImpRequest
 	{
 		return checkAporte;
 	}
-
-
-
 
 
 	/**
@@ -401,9 +327,6 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
 	/**
 	 * @return the proyectoAporte
 	 */
@@ -411,9 +334,6 @@ public class ICACalculoImpRequest
 	{
 		return proyectoAporte;
 	}
-
-
-
 
 
 	/**
@@ -426,9 +346,6 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
 	/**
 	 * @return the tarifaAporte
 	 */
@@ -436,9 +353,6 @@ public class ICACalculoImpRequest
 	{
 		return tarifaAporte;
 	}
-
-
-
 
 
 	/**
@@ -451,156 +365,118 @@ public class ICACalculoImpRequest
 	}
 
 
-
-
-
 	/**
 	 * @return the ingFueraBog
 	 */
-	public ICAIngFueraBog getIngFueraBog()
+	public List<ICAIngFueraBog> getIngFueraBog()
 	{
 		return ingFueraBog;
 	}
-
-
-
 
 
 	/**
 	 * @param ingFueraBog
 	 *           the ingFueraBog to set
 	 */
-	public void setIngFueraBog(final ICAIngFueraBog ingFueraBog)
+	public void setIngFueraBog(final List<ICAIngFueraBog> ingFueraBog)
 	{
 		this.ingFueraBog = ingFueraBog;
 	}
 
 
-
-
-
 	/**
 	 * @return the deducciones
 	 */
-	public ICADeducciones getDeducciones()
+	public List<ICADeducciones> getDeducciones()
 	{
 		return deducciones;
 	}
-
-
-
 
 
 	/**
 	 * @param deducciones
 	 *           the deducciones to set
 	 */
-	public void setDeducciones(final ICADeducciones deducciones)
+	public void setDeducciones(final List<ICADeducciones> deducciones)
 	{
 		this.deducciones = deducciones;
 	}
 
 
-
-
-
 	/**
 	 * @return the ingNetosGrava
 	 */
-	public ICAIngNetosGrava getIngNetosGrava()
+	public List<ICAIngNetosGrava> getIngNetosGrava()
 	{
 		return ingNetosGrava;
 	}
-
-
-
 
 
 	/**
 	 * @param ingNetosGrava
 	 *           the ingNetosGrava to set
 	 */
-	public void setIngNetosGrava(final ICAIngNetosGrava ingNetosGrava)
+	public void setIngNetosGrava(final List<ICAIngNetosGrava> ingNetosGrava)
 	{
 		this.ingNetosGrava = ingNetosGrava;
 	}
 
 
-
-
-
 	/**
 	 * @return the ingPorCIIU
 	 */
-	public ICAIngPorCIIU getIngPorCIIU()
+	public List<ICAIngPorCIIU> getIngPorCIIU()
 	{
 		return ingPorCIIU;
 	}
-
-
-
 
 
 	/**
 	 * @param ingPorCIIU
 	 *           the ingPorCIIU to set
 	 */
-	public void setIngPorCIIU(final ICAIngPorCIIU ingPorCIIU)
+	public void setIngPorCIIU(final List<ICAIngPorCIIU> ingPorCIIU)
 	{
 		this.ingPorCIIU = ingPorCIIU;
 	}
 
 
-
-
-
 	/**
 	 * @return the valorRetenido
 	 */
-	public ICAValorRetenido getValorRetenido()
+	public List<ICAValorRetenido> getValorRetenido()
 	{
 		return valorRetenido;
 	}
-
-
-
 
 
 	/**
 	 * @param valorRetenido
 	 *           the valorRetenido to set
 	 */
-	public void setValorRetenido(final ICAValorRetenido valorRetenido)
+	public void setValorRetenido(final List<ICAValorRetenido> valorRetenido)
 	{
 		this.valorRetenido = valorRetenido;
 	}
 
 
-
-
-
 	/**
 	 * @return the relaciones
 	 */
-	public ICARelaciones getRelaciones()
+	public List<ICARelaciones> getRelaciones()
 	{
 		return relaciones;
 	}
-
-
-
 
 
 	/**
 	 * @param relaciones
 	 *           the relaciones to set
 	 */
-	public void setRelaciones(final ICARelaciones relaciones)
+	public void setRelaciones(final List<ICARelaciones> relaciones)
 	{
 		this.relaciones = relaciones;
 	}
-
-
 
 
 
