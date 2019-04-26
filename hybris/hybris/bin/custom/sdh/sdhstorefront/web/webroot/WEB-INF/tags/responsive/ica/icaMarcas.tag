@@ -43,7 +43,7 @@
 								<tr>
 									<td><input class="inputtextnewmd" disabled="disabled"
 										value="${eachMarcas.descripMarca}"
-										type="text" /></td>
+										type="text" style="height: auto !important; width: 380px !important"/></td>
 									<td><input class="inputtextnew" disabled="disabled"
 										value="${eachMarcas.valorExcencion}"
 										type="text" /></td>
