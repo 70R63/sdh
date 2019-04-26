@@ -136,7 +136,16 @@
 
 		<div class="col-md-1">
 			<select id="" class="form-control tipo" style="height: 48px;">
-				<option value=" ">Seleccionar</option>
+				<option value="0">Seleccionar</option>
+				<option value="CC">CC Cédula de ciudadania</option>
+				<option value="CE">CE Cédula de extranjería</option>
+				<option value="NIT">NIT Número de identificación tributaria</option>
+				<option value="PA">PA Pasaporte</option>
+				<option value="TI">TI Tarjeta de identidad</option>
+				<option value="TIE">TIE Tarjeta de identidad de extranjero</option>
+				<option value="NITE">NITE NIT extranjero</option>
+				<option value="NUIP">NUIP Número único de identificación
+					personal</option>
 			</select>
 		</div>
 		<div class="col-md-1">
