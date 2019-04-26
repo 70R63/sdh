@@ -13,3 +13,5 @@
 	<icadecla:icaDeclaraTotal/>
 	<icadecla:icaDeclaraValor/>
 	<icadecla:icaDeclaraFirma/>
+
+	<div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>

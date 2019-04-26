@@ -1,6 +1,6 @@
-ACC.publicidadexterior = {
+ACC.ica = {
 
-	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior"],
+	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA"],
 	 
 	
 	 
@@ -9,23 +9,22 @@ ACC.publicidadexterior = {
 		 $(document).on("click", "#icaCalculoButton", function (e) {
 	 	        e.preventDefault();
 	 	        
-	 	        alert("Calcula!");
 	 	        $("#icaCalculoButton").prop('disabled', true);
 	 	       var data = {};
 	 	       
-	 	  data.numObjeto="00030000000000000220";
-	 	 data.numForm="030000000334";
-	 	 data.anoGravable="2018";
-	 	 data.periodo="";
-	 	 data.numBP="6212";
-	 	 data.cantEstablec="2";
-	 	 data.entFinanciera="";
-	 	 data.impuestoAviso="";
-	 	 data.totalIngrPeriodo="";
-	 	 data.valorPagar="";
-	 	 data.checkAporte="";
-	 	 data.proyectoAporte="";
-	 	 data.tarifaAporte="";
+			 	 data.numObjeto="00030000000000000220";
+			 	 data.numForm="030000000334";
+			 	 data.anoGravable="2018";
+			 	 data.periodo="";
+			 	 data.numBP="6212";
+			 	 data.cantEstablec="2";
+			 	 data.entFinanciera="";
+			 	 data.impuestoAviso="";
+			 	 data.totalIngrPeriodo="";
+			 	 data.valorPagar="";
+			 	 data.checkAporte="";
+			 	 data.proyectoAporte="";
+			 	 data.tarifaAporte="";
 	 	
 	 	      $.ajax({
 		            url: ACC.icaDeclaracionCalculoURL,
@@ -34,8 +33,8 @@ ACC.publicidadexterior = {
 		            success: function (data) {
 		            	if(data.errores)
 	            		{
-//		            		$( "#dialogPublicidadExterior" ).dialog( "open" );
-//		            		$("#publicidadExteriorDialogContent").html("");
+		            		$( "#dialogICA" ).dialog( "open" );
+		            		$("#icaDialogContent").html("Error");
 //		            		$.each(data.errores, function( index, value ) {
 //    	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
 //    	            		});
@@ -48,11 +47,12 @@ ACC.publicidadexterior = {
 //	            			$("#numForm").val("");
 //	            			
 //	            			$('#generaDeclaracionButton').prop("disabled", true);
-		            		alert("error");
+//		            		alert("error");
 		            		
 	            		}else
 	            		{
-//	            			$("#publicidadExteriorDialogContent").html("El cálculo se ha realizado exitosamente.")
+	            			$( "#dialogICA" ).dialog( "open" );
+	            			$("#icaDialogContent").html("El cálculo se ha realizado exitosamente.")
 	            			
 //	            			$("#impCar").val(data.impCargo);
 //	            			$("#valsan").val(data.vlrSancion);
@@ -62,7 +62,7 @@ ACC.publicidadexterior = {
 //	            			$("#numForm").val(data.numForm);
 //	            			
 //	            			$('#generaDeclaracionButton').prop("disabled", false);
-	            			alert("exito!");
+//	            			alert("exito!");
 	            		}
 	 	      		
 		            },
@@ -76,7 +76,7 @@ ACC.publicidadexterior = {
 //            			$("#intmora").val("");
 //            			$("#totpag").val("");
 //            			$("#numForm").val("");
-//            			$("#icaCalculoButton").prop('disabled', false);
+            			$("#icaCalculoButton").prop('disabled', false);
 		            }
 		        });
 	 	       
@@ -84,37 +84,57 @@ ACC.publicidadexterior = {
 	 },
 	 
 	 bindPresentarDeclaracionButton: function () {
-//		 $(document).on("click", "#presentarDeclaracionButton", function (e) {
-//	 	        e.preventDefault();
-//	 	        
-//	 	       var anoGravable  = $.trim($("#anio").val());
-//	 	       var numResolu =  $("#selectedNumRes").val();
-//	 	      var tipoValla = $("#selectedTipoValla").val();
-//	 	      
-//	 	      if(anoGravable == "0")
-//	 	        {	
-//	 	        	alert("Por favor, selecciona el año a consultar");
-//	 	        	return;
-//	 	        }
-//	 	        	
-//	 	        if(numResolu == "" || numResolu == "")
-//	 	        {
-//	 	        	alert("Por favor, selecciona el impuesto a consultar");
-//	 	        	return;
-//	 	        }
-//	 	       
-//	 	      window.location.href = ACC.publicidadExteriorDeclararionURL+"?numResolu="+numResolu+"&anoGravable="+anoGravable+"&tipoValla="+tipoValla;
-//	 	       
-//		 });
+		 $(document).on("click", "#icaPresentarDeclaracionButton", function (e) {
+	 	        e.preventDefault();
+	 	       $("#icaPresentarDeclaracionButton").prop('disabled', true);
+	 	       var numForm  = $.trim($("#numForm").val());
+	 		 	 
+	 	       var data = {};
+	 	       
+	 	       data.numForm=numForm;
+	 	
+	 	      $.ajax({
+		            url: ACC.generaDeclaracionURL,
+		            data: data,
+		            type: "POST",
+		            success: function (data) {
+		            	$( "#dialogICA" ).dialog( "open" );
+		            	if(data.errores)
+	            		{
+		            		$("#icaDialogContent").html("");
+		            		$.each(data.errores, function( index, value ) {
+    	            			$("#icaDialogContent").html($("#icaDialogContent").html()+value.txtmsj+"<br>");
+    	            		});
+		            		
+		            		$("#icaPresentarDeclaracionButton").prop('disabled', false);
+	            		}else
+	            		{
+	            			$("#icaDialogContent").html("");
+	            			$("#dialogICA").html("La declaración se ha generado exitosamente.")
+	            			
+	            			$("#downloadHelper").attr("href",data.urlDownload);
+	            			document.getElementById("downloadHelper").click();
+	            			$("#icaPresentarDeclaracionButton").prop('disabled', false);
+	            		}
+	 	      		
+		            },
+		            error: function () {
+		            	$( "#dialogICA" ).dialog( "open" );
+		            	$("#icaDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            	$("#icaPresentarDeclaracionButton").prop('disabled', false);
+		            }
+		        });
+	 	       
+		 });
 	 },
 	 
 	    
     
     
     
-	    bindDialogPublicidadExterior: function(){
+	    bindDialogICA: function(){
     	
-    	$( "#dialogPublicidadExterior" ).dialog({ 
+    	$( "#dialogICA" ).dialog({ 
     		autoOpen: false, 
     		modal: true,
 			 draggable: false,
