@@ -46,13 +46,13 @@
 						<c:choose>
 						<c:when test="${eachIngreso.actPrincipal eq 'X' }">
 						<input type="checkbox" name=""
-							class="form-check-input mr-2 actividad"
+							class="form-check-input mr-2 actividad actPrincipal"
 							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
 							size="10" checked="checked">
 						</c:when>
 						<c:otherwise>
 							<input type="checkbox" name=""
-							class="form-check-input mr-2 actividad"
+							class="form-check-input mr-2 actividad actPrincipal"
 							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
 							size="10" >
 						</c:otherwise>
@@ -60,10 +60,10 @@
 					</div>
 		
 					<div class="col-md-3">
-						<input class="form-control denomina" type="text" value="${eachIngreso.codCIIU}"/>
+						<input class="form-control denomina codCIIU" type="text" value="${eachIngreso.codCIIU}"/>
 					</div>
 					<div class="col-md-3">
-						<input class="form-control ingreso" type="text" value="${eachIngreso.ingresos}"/>
+						<input class="form-control ingreso ingresos" type="text" value="${eachIngreso.ingresos}"/>
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">
@@ -130,12 +130,12 @@
 	</div>
 	<div class="row totaldos">
 		<div class="col-md-1">
-			<input class="form-control anio" type="text" />
+			<input class="form-control anoGravable" type="text" />
 		</div>
 
 
 		<div class="col-md-1">
-			<select id="" class="form-control tipo" style="height: 48px;">
+			<select id="" class="form-control tipoID" style="height: 48px;">
 				<option value="0">Seleccionar</option>
 				<option value="CC">CC Cédula de ciudadania</option>
 				<option value="CE">CE Cédula de extranjería</option>
@@ -149,27 +149,27 @@
 			</select>
 		</div>
 		<div class="col-md-1">
-			<input class="form-control numiden" type="text" />
+			<input class="form-control numID" type="text" />
 		</div>
 		<div class="col-md-2">
-			<input class="form-control nombre" type="text" />
+			<input class="form-control razonSocial" type="text" />
 		</div>
 		<div class="col-md-1">
-			<input class="form-control direc" type="text" />
+			<input class="form-control direccion" type="text" />
 		</div>
 		<div class="col-md-1">
 			<input class="form-control telefono" type="text" />
 		</div>
 		<div class="col-md-2">
-			<select id="" class="form-control denoact" style="height: 48px;">
+			<select id="" class="form-control codCIIU" style="height: 48px;">
 				<option value=" ">Seleccionar</option>
 			</select>
 		</div>
 		<div class="col-md-1">
-			<input class="form-control valbrut" type="text" />
+			<input class="form-control ingBrutoSINIVA" type="text" />
 		</div>
 		<div class="col-md-1">
-			<input class="form-control valtotal" type="text" />
+			<input class="form-control valorTotalDevol" type="text" />
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">

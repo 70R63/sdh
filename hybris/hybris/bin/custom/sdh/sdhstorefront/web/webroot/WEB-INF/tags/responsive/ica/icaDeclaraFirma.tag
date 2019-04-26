@@ -183,7 +183,8 @@
 						</div>
 					</div>
 				</div>
-				
+				<input type="hidden" id="numObjeto" name="numObjeto"
+				value="${numObjeto}" />
 				<input type="hidden" id="numForm" name="numForm"
 				value="${icaInfObjetoFormResp.icaInfObjetoResponse.numForm }" />
 				<a id="downloadHelper" target="_blank"></a>

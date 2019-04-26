@@ -43,18 +43,18 @@
 			<c:if test="${not empty eachIngreso.codCIIU }">
 				<div class="row actvifuera">
 					<div class="col-md-3">
-						<select id="" class="form-control deno" style="height: 48px;">
+						<select id="" class="form-control deno codCIIU" style="height: 48px;">
 							<option value="${eachIngreso.codCIIU }">${eachIngreso.codCIIU }</option>
 						</select>
 					</div>
 		
 					<div class="col-md-3">
-						<select id="" class="form-control mun" style="height: 48px;">
+						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
 							<option value="${eachIngreso.codMunicipio }">${eachIngreso.desMunicipio }</option>
 						</select>
 					</div>
 					<div class="col-md-3">
-						<input class="form-control ing" type="text" value="${eachIngreso.ingresos }"/>
+						<input class="form-control ing ingresos" type="text" value="${eachIngreso.ingresos }"/>
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">

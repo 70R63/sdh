@@ -16,6 +16,11 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
+import de.hybris.sdh.core.pojos.requests.ICAIngFueraBog;
+import de.hybris.sdh.core.pojos.requests.ICAIngNetosGrava;
+import de.hybris.sdh.core.pojos.requests.ICAIngPorCIIU;
+import de.hybris.sdh.core.pojos.requests.ICARelaciones;
+import de.hybris.sdh.core.pojos.requests.ICAValorRetenido;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
@@ -34,6 +39,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -264,16 +270,15 @@ public class IcaPageController extends AbstractPageController
 	public ICACalculoImpResponse calculo(@ModelAttribute("icaCalculaDeclaracionForm")
 	final ICACalculaDeclaracionForm icaCalculaDeclaracionForm) throws CMSItemNotFoundException
 	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		ICACalculoImpResponse icaCalculoImpResponse = new ICACalculoImpResponse();
-
-
 		final ICACalculoImpRequest icaCalculoImpRequest = new ICACalculoImpRequest();
 
 		icaCalculoImpRequest.setNumObjeto(icaCalculaDeclaracionForm.getNumObjeto());
 		icaCalculoImpRequest.setNumForm(icaCalculaDeclaracionForm.getNumForm());
 		icaCalculoImpRequest.setAnoGravable(icaCalculaDeclaracionForm.getAnoGravable());
 		icaCalculoImpRequest.setPeriodo(icaCalculaDeclaracionForm.getPeriodo());
-		icaCalculoImpRequest.setNumBP(icaCalculaDeclaracionForm.getNumBP());
+		icaCalculoImpRequest.setNumBP(customerModel.getNumBP());
 		icaCalculoImpRequest.setCantEstablec(icaCalculaDeclaracionForm.getCantEstablec());
 		icaCalculoImpRequest.setEntFinanciera(icaCalculaDeclaracionForm.getEntFinanciera());
 		icaCalculoImpRequest.setImpuestoAviso(icaCalculaDeclaracionForm.getImpuestoAviso());
@@ -282,6 +287,108 @@ public class IcaPageController extends AbstractPageController
 		icaCalculoImpRequest.setCheckAporte(icaCalculaDeclaracionForm.getCheckAporte());
 		icaCalculoImpRequest.setProyectoAporte(icaCalculaDeclaracionForm.getProyectoAporte());
 		icaCalculoImpRequest.setTarifaAporte(icaCalculaDeclaracionForm.getTarifaAporte());
+
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getIngFueraBog()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICAIngFueraBog> ingFueraBog = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getIngFueraBog(), ICAIngFueraBog[].class));
+
+				icaCalculoImpRequest.setIngFueraBog(ingFueraBog);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+
+		icaCalculoImpRequest.setDeducciones(icaCalculaDeclaracionForm.getDeducciones());
+
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getIngNetosGrava()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICAIngNetosGrava> ingNetosGrava = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getIngNetosGrava(), ICAIngNetosGrava[].class));
+
+				icaCalculoImpRequest.setIngNetosGrava(ingNetosGrava);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getIngPorCIIU()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICAIngPorCIIU> ingPorCIIU = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getIngPorCIIU(), ICAIngPorCIIU[].class));
+
+				icaCalculoImpRequest.setIngPorCIIU(ingPorCIIU);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getValorRetenido()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICAValorRetenido> valorRetenido = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getValorRetenido(), ICAValorRetenido[].class));
+
+				icaCalculoImpRequest.setValorRetenido(valorRetenido);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getRelaciones()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICARelaciones> relaciones = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getRelaciones(), ICARelaciones[].class));
+
+				icaCalculoImpRequest.setRelaciones(relaciones);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
 
 		try
 		{

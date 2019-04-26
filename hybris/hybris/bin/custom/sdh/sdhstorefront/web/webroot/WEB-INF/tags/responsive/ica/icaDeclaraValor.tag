@@ -79,11 +79,11 @@
 			<c:if test="${not empty eachValor.tipoID }">
 				<div class="row valor">
 					<div class="col-md-1">
-						<input class="form-control anio" type="text"
+						<input class="form-control anio anoGravable" type="text"
 							value="${eachValor.anoGravable }" />
 					</div>
 					<div class="col-md-2">
-						<select id="" class="form-control tipo" style="height: 48px;">
+						<select id="" class="form-control tipoID" style="height: 48px;">
 							<option value=" ">${eachValor.tipoID }</option>
 							<option value="0">Seleccionar</option>
 							<option value="CC">CC Cédula de ciudadania</option>
@@ -100,15 +100,15 @@
 						</select>
 					</div>
 					<div class="col-md-1">
-						<input class="form-control numiden" type="text"
+						<input class="form-control numID" type="text"
 							value="${eachValor.numID }" />
 					</div>
 					<div class="col-md-2">
-						<input class="form-control nombre" type="text"
+						<input class="form-control razonSocial" type="text"
 							value="${eachValor.razonSocial }" />
 					</div>
 					<div class="col-md-1">
-						<input class="form-control direc" type="text"
+						<input class="form-control direccion" type="text"
 							value="${eachValor.direccion }" />
 					</div>
 					<div class="col-md-1">
@@ -116,16 +116,16 @@
 							value="${eachValor.telefono }" />
 					</div>
 					<div class="col-md-1">
-						<select id="" class="form-control denoact" style="height: 48px;">
+						<select id="" class="form-control codMunicipio" style="height: 48px;">
 							<option value=" ">Seleccionar</option>
 						</select>
 					</div>
 					<div class="col-md-1">
-						<input class="form-control valbrut" type="text"
+						<input class="form-control tarifaApl" type="text"
 							value="${eachValor.tarifaApl }" />
 					</div>
 					<div class="col-md-1">
-						<input class="form-control valtotal" type="text"
+						<input class="form-control montoRetenido" type="text"
 							value="${eachValor.montoRetenido }" />
 					</div>
 					<div class="col-md-1">

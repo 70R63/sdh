@@ -4,14 +4,6 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.requests.ICADeducciones;
-import de.hybris.sdh.core.pojos.requests.ICAIngFueraBog;
-import de.hybris.sdh.core.pojos.requests.ICAIngNetosGrava;
-import de.hybris.sdh.core.pojos.requests.ICAIngPorCIIU;
-import de.hybris.sdh.core.pojos.requests.ICARelaciones;
-import de.hybris.sdh.core.pojos.requests.ICAValorRetenido;
-
-import java.util.List;
-
 
 /**
  * @author Maria Luisa
@@ -33,13 +25,13 @@ public class ICACalculaDeclaracionForm
 	private String proyectoAporte;
 	private String tarifaAporte;
 
-	private List<ICAIngFueraBog> ingFueraBog;
-	private List<ICADeducciones> deducciones;
-	private List<ICAIngNetosGrava> ingNetosGrava;
-	private List<ICAIngPorCIIU> ingPorCIIU;
-	private List<ICAValorRetenido> valorRetenido;
-	private List<ICARelaciones> relaciones;
-	
+	private String ingFueraBog;
+	private ICADeducciones deducciones;
+	private String ingNetosGrava;
+	private String ingPorCIIU;
+	private String valorRetenido;
+	private String relaciones;
+
 	/**
 	 * @return the numObjeto
 	 */
@@ -47,7 +39,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return numObjeto;
 	}
-	
+
 	/**
 	 * @param numObjeto
 	 *           the numObjeto to set
@@ -56,7 +48,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.numObjeto = numObjeto;
 	}
-	
+
 	/**
 	 * @return the numForm
 	 */
@@ -64,7 +56,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return numForm;
 	}
-	
+
 	/**
 	 * @param numForm
 	 *           the numForm to set
@@ -73,7 +65,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.numForm = numForm;
 	}
-	
+
 	/**
 	 * @return the anoGravable
 	 */
@@ -81,7 +73,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return anoGravable;
 	}
-	
+
 	/**
 	 * @param anoGravable
 	 *           the anoGravable to set
@@ -90,7 +82,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.anoGravable = anoGravable;
 	}
-	
+
 	/**
 	 * @return the periodo
 	 */
@@ -98,7 +90,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return periodo;
 	}
-	
+
 	/**
 	 * @param periodo
 	 *           the periodo to set
@@ -121,7 +113,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.numBP = numBP;
 	}
-	
+
 	/**
 	 * @return the cantEstablec
 	 */
@@ -129,7 +121,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return cantEstablec;
 	}
-	
+
 	/**
 	 * @param cantEstablec
 	 *           the cantEstablec to set
@@ -138,7 +130,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.cantEstablec = cantEstablec;
 	}
-	
+
 	/**
 	 * @return the entFinanciera
 	 */
@@ -146,7 +138,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return entFinanciera;
 	}
-	
+
 	/**
 	 * @param entFinanciera
 	 *           the entFinanciera to set
@@ -155,7 +147,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.entFinanciera = entFinanciera;
 	}
-	
+
 	/**
 	 * @return the impuestoAviso
 	 */
@@ -163,7 +155,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return impuestoAviso;
 	}
-	
+
 	/**
 	 * @param impuestoAviso
 	 *           the impuestoAviso to set
@@ -172,7 +164,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.impuestoAviso = impuestoAviso;
 	}
-	
+
 	/**
 	 * @return the totalIngrPeriodo
 	 */
@@ -180,7 +172,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return totalIngrPeriodo;
 	}
-	
+
 	/**
 	 * @param totalIngrPeriodo
 	 *           the totalIngrPeriodo to set
@@ -189,7 +181,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.totalIngrPeriodo = totalIngrPeriodo;
 	}
-	
+
 	/**
 	 * @return the valorPagar
 	 */
@@ -197,7 +189,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return valorPagar;
 	}
-	
+
 	/**
 	 * @param valorPagar
 	 *           the valorPagar to set
@@ -206,7 +198,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.valorPagar = valorPagar;
 	}
-	
+
 	/**
 	 * @return the checkAporte
 	 */
@@ -214,7 +206,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return checkAporte;
 	}
-	
+
 	/**
 	 * @param checkAporte
 	 *           the checkAporte to set
@@ -223,7 +215,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.checkAporte = checkAporte;
 	}
-	
+
 	/**
 	 * @return the proyectoAporte
 	 */
@@ -231,7 +223,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return proyectoAporte;
 	}
-	
+
 	/**
 	 * @param proyectoAporte
 	 *           the proyectoAporte to set
@@ -240,7 +232,7 @@ public class ICACalculaDeclaracionForm
 	{
 		this.proyectoAporte = proyectoAporte;
 	}
-	
+
 	/**
 	 * @return the tarifaAporte
 	 */
@@ -248,7 +240,7 @@ public class ICACalculaDeclaracionForm
 	{
 		return tarifaAporte;
 	}
-	
+
 	/**
 	 * @param tarifaAporte
 	 *           the tarifaAporte to set
@@ -257,109 +249,108 @@ public class ICACalculaDeclaracionForm
 	{
 		this.tarifaAporte = tarifaAporte;
 	}
-	
+
 	/**
 	 * @return the ingFueraBog
 	 */
-	public List<ICAIngFueraBog> getIngFueraBog()
+	public String getIngFueraBog()
 	{
 		return ingFueraBog;
 	}
-	
+
 	/**
 	 * @param ingFueraBog
 	 *           the ingFueraBog to set
 	 */
-	public void setIngFueraBog(final List<ICAIngFueraBog> ingFueraBog)
+	public void setIngFueraBog(final String ingFueraBog)
 	{
 		this.ingFueraBog = ingFueraBog;
 	}
-	
+
 	/**
 	 * @return the deducciones
 	 */
-	public List<ICADeducciones> getDeducciones()
+	public ICADeducciones getDeducciones()
 	{
 		return deducciones;
 	}
-	
+
 	/**
 	 * @param deducciones
 	 *           the deducciones to set
 	 */
-	public void setDeducciones(final List<ICADeducciones> deducciones)
+	public void setDeducciones(final ICADeducciones deducciones)
 	{
 		this.deducciones = deducciones;
 	}
-	
+
 	/**
 	 * @return the ingNetosGrava
 	 */
-	public List<ICAIngNetosGrava> getIngNetosGrava()
+	public String getIngNetosGrava()
 	{
 		return ingNetosGrava;
 	}
-	
+
 	/**
 	 * @param ingNetosGrava
 	 *           the ingNetosGrava to set
 	 */
-	public void setIngNetosGrava(final List<ICAIngNetosGrava> ingNetosGrava)
+	public void setIngNetosGrava(final String ingNetosGrava)
 	{
 		this.ingNetosGrava = ingNetosGrava;
 	}
-	
+
 	/**
 	 * @return the ingPorCIIU
 	 */
-	public List<ICAIngPorCIIU> getIngPorCIIU()
+	public String getIngPorCIIU()
 	{
 		return ingPorCIIU;
 	}
-	
+
 	/**
 	 * @param ingPorCIIU
 	 *           the ingPorCIIU to set
 	 */
-	public void setIngPorCIIU(final List<ICAIngPorCIIU> ingPorCIIU)
+	public void setIngPorCIIU(final String ingPorCIIU)
 	{
 		this.ingPorCIIU = ingPorCIIU;
 	}
-	
+
 	/**
 	 * @return the valorRetenido
 	 */
-	public List<ICAValorRetenido> getValorRetenido()
+	public String getValorRetenido()
 	{
 		return valorRetenido;
 	}
-	
+
 	/**
 	 * @param valorRetenido
 	 *           the valorRetenido to set
 	 */
-	public void setValorRetenido(final List<ICAValorRetenido> valorRetenido)
+	public void setValorRetenido(final String valorRetenido)
 	{
 		this.valorRetenido = valorRetenido;
 	}
-	
+
 	/**
 	 * @return the relaciones
 	 */
-	public List<ICARelaciones> getRelaciones()
+	public String getRelaciones()
 	{
 		return relaciones;
 	}
-	
+
 	/**
 	 * @param relaciones
 	 *           the relaciones to set
 	 */
-	public void setRelaciones(final List<ICARelaciones> relaciones)
+	public void setRelaciones(final String relaciones)
 	{
 		this.relaciones = relaciones;
 	}
-
 
 
 

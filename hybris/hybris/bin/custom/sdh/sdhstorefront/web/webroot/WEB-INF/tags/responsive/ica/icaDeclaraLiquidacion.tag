@@ -18,8 +18,8 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totinord" /></label> <input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"></input>
+							code="ica.declaracion.liquidacion.totinord" /></label> <input id="totalIngrPeriodo"
+						name="totalIngrPeriodo" class="form-control" type="text" value="${infoDeclara.totalIngrPeriodo }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -163,8 +163,8 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.valpag" /></label> <input id=""
-						name="" class="form-control" type="text"
+							code="ica.declaracion.liquidacion.valpag" /></label> <input id="valorPagar"
+						name="valorPagar" class="form-control" type="text"
 						value="${infoDeclara.valorPagar }" maxlength="240"></input>
 				</div>
 			</div>
@@ -236,7 +236,7 @@
 			<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<select id="tarifa2" disabled class="form-control" style="text-transform: none !important; font-weight: normal !important; font-size: 14px;">
+					<select id="tarifaAporte2" disabled class="form-control" style="text-transform: none !important; font-weight: normal !important; font-size: 14px;">
 						<option value=0>Seleccionar</option>
 						<option value=1>10.00</option></select>
 				</div>
@@ -245,7 +245,7 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<select id="tarifa1"  class="form-control" style="display: none; text-transform: none !important; font-weight: normal !important; font-size: 14px;">
+					<select id="tarifaAporte1"  class="form-control" style="display: none; text-transform: none !important; font-weight: normal !important; font-size: 14px;">
 						<option value=0>Seleccionar</option>
 						<option value=1>3.00</option>
 						<option value=2>5.00</option>
@@ -270,8 +270,8 @@
 <script>
 	function disab() {
 		var cant = document.getElementById('idaporte');
-		var tar1 = document.getElementById('tarifa1');
-		var tar2 = document.getElementById('tarifa2');
+		var tar1 = document.getElementById('tarifaAporte1');
+		var tar2 = document.getElementById('tarifaAporte2');
 		cant.disabled = false;
 		tar1.disabled = false;
 		tar2.disabled = false;
@@ -280,8 +280,8 @@
 
 	function disab2() {
 		var cant = document.getElementById('idaporte');
-		var tar1 = document.getElementById('tarifa1');
-		var tar2 = document.getElementById('tarifa2');
+		var tar1 = document.getElementById('tarifaAporte1');
+		var tar2 = document.getElementById('tarifaAporte2');
 		cant.disabled = true;
 		tar1.disabled = true;
 		tar2.disabled = true;
@@ -290,9 +290,8 @@
 	
 	function showtarifa(selectObject) {
 		var x = selectObject.value;
-		debugger;
-		var tari1 = document.getElementById('tarifa1');
-		var tari2 = document.getElementById('tarifa2');
+		var tari1 = document.getElementById('tarifaAporte1');
+		var tari2 = document.getElementById('tarifaAporte2');
 
 		if (x == '1') {
 			tari1.style.display = 'none';
