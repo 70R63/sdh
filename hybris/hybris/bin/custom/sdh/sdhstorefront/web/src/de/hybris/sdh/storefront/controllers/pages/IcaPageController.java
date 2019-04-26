@@ -7,26 +7,39 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.ICACalculoImpResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -40,6 +53,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import sun.misc.BASE64Decoder;
 
 
 /**
@@ -72,6 +87,12 @@ public class IcaPageController extends AbstractPageController
 	@Resource(name = "userService")
 	UserService userService;
 
+	@Resource(name = "modelService")
+	ModelService modelService;
+
+	@Resource(name = "mediaService")
+	MediaService mediaService;
+
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
@@ -86,6 +107,9 @@ public class IcaPageController extends AbstractPageController
 
 	@Resource(name = "sdhICACalculoImpService")
 	SDHICACalculoImpService sdhICACalculoImpService;
+
+	@Resource(name = "sdhGeneraDeclaracionService")
+	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
 
 	@RequestMapping(value = "/contribuyentes/ica", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -293,82 +317,82 @@ public class IcaPageController extends AbstractPageController
 
 	}
 
-	//	@RequestMapping(value = "/generar", method = RequestMethod.POST)
-	//	@ResponseBody
-	//	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
-	//			final HttpServletRequest request) throws CMSItemNotFoundException
-	//	{
-	//		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
-	//		final CustomerData customerData = customerFacade.getCurrentCustomer();
-	//		String numForm = request.getParameter("numForm");
-	//
-	//		if (StringUtils.isBlank(numForm))
-	//		{
-	//			numForm = dataForm.getNumForm();
-	//		}
-	//
-	//		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
-	//
-	//
-	//		generaDeclaracionRequest.setNumForm(numForm);
-	//
-	//		try
-	//		{
-	//			final ObjectMapper mapper = new ObjectMapper();
-	//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-	//
-	//			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
-	//					GeneraDeclaracionResponse.class);
-	//
-	//			if (generaDeclaracionResponse != null && generaDeclaracionResponse.getStringPDF() != null)
-	//			{
-	//				final String encodedBytes = generaDeclaracionResponse.getStringPDF();
-	//
-	//				final BASE64Decoder decoder = new BASE64Decoder();
-	//				byte[] decodedBytes;
-	//				final FileOutputStream fop;
-	//				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
-	//
-	//
-	//
-	//				final String fileName = numForm + "-" + customerData.getNumBP() + ".pdf";
-	//
-	//				final InputStream is = new ByteArrayInputStream(decodedBytes);
-	//
-	//
-	//				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
-	//				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
-	//				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
-	//				modelService.save(mediaModel);
-	//				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
-	//				modelService.refresh(mediaModel);
-	//
-	//				generaDeclaracionResponse.setUrlDownload(mediaModel.getDownloadURL());
-	//
-	//
-	//			}
-	//
-	//		}
-	//		catch (final Exception e)
-	//		{
-	//			LOG.error("error generating declaration : " + e.getMessage());
-	//
-	//			final ErrorPubli error = new ErrorPubli();
-	//
-	//			error.setIdmsj("0");
-	//			error.setTxtmsj("Hubo un error al generar la declaración, por favor intentalo más tarde");
-	//
-	//			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
-	//
-	//			errores.add(error);
-	//
-	//			generaDeclaracionResponse.setErrores(errores);
-	//
-	//		}
-	//
-	//		return generaDeclaracionResponse;
-	//
-	//	}
+	@RequestMapping(value = "/generar", method = RequestMethod.POST)
+	@ResponseBody
+	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		String numForm = request.getParameter("numForm");
+
+		if (StringUtils.isBlank(numForm))
+		{
+			numForm = dataForm.getNumForm();
+		}
+
+		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
+
+
+		generaDeclaracionRequest.setNumForm(numForm);
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
+					GeneraDeclaracionResponse.class);
+
+			if (generaDeclaracionResponse != null && generaDeclaracionResponse.getStringPDF() != null)
+			{
+				final String encodedBytes = generaDeclaracionResponse.getStringPDF();
+
+				final BASE64Decoder decoder = new BASE64Decoder();
+				byte[] decodedBytes;
+				final FileOutputStream fop;
+				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+
+
+
+				final String fileName = numForm + "-" + customerModel.getNumBP() + ".pdf";
+
+				final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+
+				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				modelService.save(mediaModel);
+				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+				modelService.refresh(mediaModel);
+
+				generaDeclaracionResponse.setUrlDownload(mediaModel.getDownloadURL());
+
+
+			}
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error generating declaration : " + e.getMessage());
+
+			final ErrorPubli error = new ErrorPubli();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al generar la declaración, por favor intentalo más tarde");
+
+			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
+
+			errores.add(error);
+
+			generaDeclaracionResponse.setErrores(errores);
+
+		}
+
+		return generaDeclaracionResponse;
+
+	}
 
 
 }

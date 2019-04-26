@@ -183,6 +183,10 @@
 						</div>
 					</div>
 				</div>
+				
+				<input type="hidden" id="numForm" name="numForm"
+				value="${icaInfObjetoFormResp.icaInfObjetoResponse.numForm }" />
+				<a id="downloadHelper" target="_blank"></a>
 				<div class="row" style="marging-top: 5px">
 					<div class="col-md-12 centercol-md-8 text-center">
 
@@ -192,10 +196,20 @@
 							type="button">
 							<spring:theme code="ica.declaracion.firma.regresar" />
 						</button>
-						<button style="margin-top: 3px;" id=""
-							class="btn btn-primary btn-lg" type="button">
-							<spring:theme code="ica.declaracion.firma.prendecla" />
-						</button>
+						<c:choose>
+							<c:when test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.numForm }">
+								<button style="margin-top: 3px;" id="icaPresentarDeclaracionButton"
+									class="btn btn-primary btn-lg" type="button">
+									<spring:theme code="ica.declaracion.firma.prendecla" />
+								</button>
+							</c:when>
+							<c:otherwise>
+								<button style="margin-top: 3px;" id="icaPresentarDeclaracionButton"
+									class="btn btn-primary btn-lg" type="button" disabled="disabled">
+									<spring:theme code="ica.declaracion.firma.prendecla" />
+								</button>
+							</c:otherwise>
+						</c:choose>
 						<button style="margin-top: 3px;" id=""
 							class="btn btn-primary btn-lg" type="button">
 							<spring:theme code="ica.declaracion.firma.pagliena" />
