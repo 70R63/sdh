@@ -32,13 +32,13 @@
 											class="control-label text-capitalize !important"><spring:theme
 													code="ica.inicial.activecono.ciiu" /></label></td>
 										<td><label
-											class="control-label text-capitalize !important"><spring:theme
+											class="control-label" style="text-transform: none !important"><spring:theme
 													code="ica.inicial.activecono.denomi" /></label></td>
 										<td><label
-											class="control-label text-capitalize !important"><spring:theme
+											class="control-label" style="text-transform: none !important"><spring:theme
 													code="ica.inicial.activecono.feciniact" /></label></td>
 										<td><label
-											class="control-label text-capitalize !important"><spring:theme
+											class="control-label" style="text-transform: none !important"><spring:theme
 													code="ica.inicial.activecono.feciniact" /></label></td>
 									</tr>
 								</thead>

@@ -51,7 +51,7 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
-									code="ica.inicial.datecono.ingoper" /></label> <input id="" name=""
+									code="ica.inicial.datecono.ingnoper" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.ingresosNoOp}"
 								maxlength="240"></input>
