@@ -11,6 +11,7 @@
 <spring:url value="/contribuyentes/delineacionurbana/retencion"
 	var="duRetencionURL" htmlEscape="false" />
 
+
 <sf:form action="${duRetencionURL}" method="POST"
 	modelAttribute="dataForm" id="forma">
 	<delineacionUrbana:delineacionUrbanaDecGenerales />
@@ -26,7 +27,13 @@
 
 <script>
 	function goBack() {
-		window.history.back();
+		var declaracion = '${param.declaracion}';
+		
+		if(declaracion){
+			window.location.href = "/sdhstorefront/es/contribuyentes/presentar-declaracion";
+		}else{
+			window.history.back();
+		}
 	}
 	
 	function obranueva(){

@@ -296,12 +296,12 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		if (action.equals("retencion"))
 		{
-			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE + "?declaracion=true";
 			infoDelineacion.getInput().setTipoFlujo("R");
 		}
 		if (action.equals("declaracion"))
 		{
-			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
+			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE + "?declaracion=true";
 			infoDelineacion.getInput().setTipoFlujo("D");
 			infoDelineacionRequest.setNumRadicado("");
 		}

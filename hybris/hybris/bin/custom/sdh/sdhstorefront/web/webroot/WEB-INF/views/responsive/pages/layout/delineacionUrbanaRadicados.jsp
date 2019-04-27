@@ -25,7 +25,13 @@
 
 <script>
 	function goBack() {
-		window.history.back();
+		var declaracion = '${param.declaracion}';
+		
+		if(declaracion){
+			window.location.href = "/sdhstorefront/es/contribuyentes/presentar-declaracion";
+		}else{
+			window.history.back();
+		}
 	}
 
 	function obranueva(selectObject) {

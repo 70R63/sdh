@@ -39,6 +39,44 @@
 				</label>
 			</div>
 		</div>
+<!--  se agregan líneas para agregar siempre una linea en la tabla -->
+				<div class="row actvifuera">
+					<div class="col-md-3">
+						<select id="" class="form-control deno codCIIU" style="height: 48px;">
+							
+							<c:forEach items="${ econActivities}" var="eachActivity">
+								<option ${selected } value="${eachActivity.code}">${eachActivity.description }</option>
+							</c:forEach>
+						</select>
+					</div>
+		
+					
+						<div class="col-md-3">
+						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
+							<c:set var="selected" value=""/>
+							<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
+								<c:set var="selected" value=""/>
+							</c:if>
+							<c:forEach items="${cities}" var="eachCity">
+							<option value="${ eachCity.code}">${eachCity.name}</option>
+						</c:forEach>
+						</select>
+					</div>
+					<div class="col-md-3">
+						<input class="form-control ing ingresos" type="text" value=""/>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addactvifuera()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deleactvifuera()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
+				</div>
+<!-- fin de código agregado -->
+
 		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
 <%-- 			<c:if test="${not empty eachIngreso.codCIIU }"> --%>
 				<div class="row actvifuera">
@@ -80,6 +118,7 @@
 				</div>
 <%-- 			</c:if> --%>
 		</c:forEach>
+
 	</form:form>
 </div>
 

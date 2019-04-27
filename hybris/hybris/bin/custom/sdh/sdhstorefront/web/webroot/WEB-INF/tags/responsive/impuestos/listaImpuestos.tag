@@ -15,6 +15,8 @@
 	var="presentarDeclaracionUrl" htmlEscape="false" />
 
 <br>
+
+
 <sf:form action="presentar-declaracion?action=presentarDeclaracion"
 	method="POST" modelAttribute="dataForm" id="forma">
 	<div class="col-md-10 col-md-offset-2">
@@ -54,7 +56,7 @@
 
 			</div>
 
-			<c:if test="${dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
+			<c:if test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
 				<div class="col-md-4">
 					<div class="form-group ">
 						<label class="control-label required"><spring:theme
@@ -66,9 +68,22 @@
 					</div>
 				</div>
 			</c:if>
+			
+			<c:if test="${dataForm.impuesto == '3'}">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required"><spring:theme
+								code="impuestos.presentarDeclaracion.Periodo" /></label>
+
+						<sf:select path="periodo" items="${icaPeriodo}"
+						referenceData="${icaPeriodo}"
+							class="form-control" />
+					</div>
+				</div>
+			</c:if>
 		</div>
-
-
+		
+		
 		<c:if
 			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">
@@ -146,11 +161,10 @@
 						</select>
 					</div>
 					<div class="col-sm-3">
-						<select id="selctipobliga" class="form-control"
-							onchange="ShowSelected1(this)">
-							<option value="0-${item.cdu}">Seleccionar</option>
-							<option value="1-${item.cdu}">Declaración</option>
-							<option value="2-${item.cdu}">Retención</option>
+						<select id="btnTpLic_${item.cdu}" class="form-control">
+							<option value="00">Seleccionar</option>
+							<option value="01">Licencia</option>
+							<option value="02">Reconocimiento</option>
 						</select>
 					</div>
 					<div class="col-sm-3">
@@ -161,7 +175,7 @@
 							<form:hidden path="selectedTipoLicencia" value="" />
 
 							<button type="submit" class="btn-link"
-								id="declaradelibutton1" name="action" value="declaracion">
+								id="btn_${item.cdu}" name="action" value="declaracion">
 								<spring:theme code="delineacion.urbana.radicados.declaracion" />
 							</button>
 						</form:form>
@@ -183,8 +197,7 @@
 									<form:hidden path="selectedRadicado" value="${item.radicados}" />
 									<form:hidden path="selectedTipoLicencia" value="" />
 
-									<button type="submit" class="btn-link"
-										id="retenciondelibutton1" name="action" value="retencion">
+									<button type="submit" class="btn-link" id="retenciondelibutton1" name="action" value="retencion">
 										<spring:theme code="delineacion.urbana.radicados.retencion" />
 									</button>
 								</form:form>
@@ -197,15 +210,6 @@
 	</div>
 </c:if>
 
-
-
-
-
-
-
-
-
-
 <!-- se agrega control para tablas de delineación -->
 <script type="text/javascript">
 	function ShowSelected(selectObject) {
@@ -213,11 +217,20 @@
 		var selected = value.substring(0, 1);
 		var div = value.substring(2, value.length);
 		var x = document.getElementById(div);
-
+		var tipoLicencia = document.getElementById("btnTpLic_" + div);
+		var btnDeclaracion = document.getElementById("btn_" + div);
+		
+		
 		if (selected === "2") {
 			x.style.display = "block";
+			tipoLicencia.selectedIndex = "1"
+			tipoLicencia.disabled = true;
+			btnDeclaracion.disabled = true;
 		} else {
 			x.style.display = "none";
+			tipoLicencia.selectedIndex = "0"
+			tipoLicencia.disabled = false;
+			btnDeclaracion.disabled = false;
 		}
 	}
 </script>

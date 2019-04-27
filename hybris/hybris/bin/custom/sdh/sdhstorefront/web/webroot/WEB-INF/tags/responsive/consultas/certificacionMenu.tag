@@ -10,12 +10,9 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/contribuyentes/consultas/certipagos"
-	var="certificacionURL" htmlEscape="false" />
-	
+<spring:url value="/contribuyentes/consultas/certipagos" var="certificacionURL" htmlEscape="false" />
 	
 <script>
-
 	function onChange(anoGravableGasolina,anoGravablePublicidad) {
 		
 		form = document.getElementById("form_pdf");
@@ -50,6 +47,19 @@
 	}	
 	downloadPDF('${imprimePagoResponse.stringPDF}');
 </script>	
+
+<c:choose>        
+   <c:when test = "${certiFormPost.idimp == 4}">
+      <c:set var = "anioGravable" value = "${anoGravablePublicidad}"/>
+   </c:when>
+         
+   <c:when test = "${certiFormPost.idimp == 5}">
+      <c:set var = "anioGravable" value = "${anoGravableGasolina}"/>
+   </c:when>
+         
+   <c:otherwise>
+   </c:otherwise>
+</c:choose>
 
 <div>
 	<div class="container">

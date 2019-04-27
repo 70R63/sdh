@@ -45,6 +45,7 @@ import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
@@ -251,13 +252,28 @@ public class IcaPageController extends AbstractPageController
 	@RequestMapping(value = "/contribuyentes/ica/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String icadeclarainicial(final Model model, @RequestParam(required = false, value = "anoGravable")
-	final String anoGravable, @RequestParam(required = false, value = "numObjeto")
-	final String numObjeto) throws CMSItemNotFoundException
+	final String panoGravable, @RequestParam(required = false, value = "numObjeto")
+	final String pnumObjeto, @ModelAttribute("dataFormResponseICA")
+	final SobreTasaGasolinaForm dataFormResponseICA, @ModelAttribute("periodoSeleccionado")
+	final String periodoSeleccionado) throws CMSItemNotFoundException
 	{
+		String numObjeto;
+		String anoGravable;
+
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
 		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
 
+		if (StringUtils.isAllBlank(pnumObjeto, panoGravable))
+		{
+			numObjeto = dataFormResponseICA.getNumObjeto();
+			anoGravable = dataFormResponseICA.getAnoGravable();
+		}
+		else
+		{
+			numObjeto = pnumObjeto;
+			anoGravable = panoGravable;
+		}
 		if (StringUtils.isAllBlank(numObjeto, anoGravable))
 		{
 			return REDIRECT_TO_ICA_PAGE;
