@@ -85,7 +85,7 @@
 	
 function onChangeAnioGravable() {		
 		var impuestoVal = document.getElementById("impuesto").value;
-		if(impuestoVal == "4" ||  impuestoVal == "6"){
+		if(impuestoVal == "4" ||  impuestoVal == "6" ){
 			form = document.getElementById("forma");
 			input = document.createElement('input');
 	        input.setAttribute('name', 'skipReques');

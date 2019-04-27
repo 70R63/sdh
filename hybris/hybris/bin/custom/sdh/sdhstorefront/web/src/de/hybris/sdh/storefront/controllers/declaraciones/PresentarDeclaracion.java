@@ -112,6 +112,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
 
+		if (customerData.getIcaTax() != null)
+		{
+			dataForm.setOptionGas("3");
+		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
 			dataForm.setOptionPubliExt("4");
@@ -120,9 +124,17 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			dataForm.setOptionGas("5");
 		}
+		if (customerData.getUrbanDelineationsTaxList() != null && !customerData.getUrbanDelineationsTaxList().isEmpty())
+		{
+			dataForm.setOptionGas("6");
+		}
+
+
 
 		model.addAttribute("dataForm", dataForm);
-		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt()));
+		model.addAttribute("tpImpuesto",
+				this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(), dataForm.getOptionIca(),
+						dataForm.getOptionDeli()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -233,6 +245,16 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 				return URLdeterminada;
 			}
+			else if (dataFormResponse.getImpuesto().equals("3") && !dataFormResponse.getAnoGravable().equals("")
+					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
+			{
+				final Map<String, String> mapIca = this.getIcaPeriodo();
+				final String periodoSeleccionado = mapIca.get(dataFormResponse.getPeriodo());
+
+				redirectAttributes.addFlashAttribute("dataFormResponseICA", dataFormResponse);
+				redirectAttributes.addFlashAttribute("periodoSeleccionado", periodoSeleccionado);
+				return "redirect:/contribuyentes/ica/declaracion";
+			}
 			else if (dataFormResponse.getImpuesto().equals("4") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
@@ -284,13 +306,20 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			dataForm.setOptionGas("5");
 		}
+		if (customerData.getIcaTax() != null)
+		{
+			dataForm.setOptionIca("3");
+			dataForm.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+		}
 
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		dataForm.setImpuesto(dataFormResponse.getImpuesto());
 		dataForm.setAnoGravable(dataFormResponse.getAnoGravable());
 		dataForm.setPeriodo(dataFormResponse.getPeriodo());
 		model.addAttribute("dataForm", dataForm);
-		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt()));
+		model.addAttribute("icaPeriodo", this.getIcaPeriodo());
+		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
+				dataForm.getOptionDeli(), dataForm.getOptionIca()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -301,33 +330,53 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	private Map<String, String> getTpImpuesto(final String optionGas, final String optionPubExt)
+	private Map<String, String> getTpImpuesto(final String optionGas, final String optionPubExt, final String optionIca,
+			final String optionDeli)
 	{
 		final Map<String, String> map;
-		if (optionGas != "" && optionPubExt != "")
+		if (optionGas != "" || optionPubExt != "" || optionIca != "" || optionDeli != "")
 		{
 			map = new HashMap<String, String>();
 			map.put("0", "Seleccionar");
-			map.put("4", "Publicidad Exterior");
-			map.put("5", "Sobretasa Gasolina");
-			map.put("6", "Delineacion Urbana");
-		}
-		else if (optionGas != "" && optionPubExt == "")
-		{
-			map = new HashMap<String, String>();
-			map.put("0", "Seleccionar");
-			map.put("5", "Sobretasa Gasolina");
-		}
-		else if (optionGas == "" && optionPubExt != "")
-		{
-			map = new HashMap<String, String>();
-			map.put("0", "Seleccionar");
-			map.put("4", "Publicidad Exterior");
+
+			if (optionIca != "")
+			{
+				map.put("3", "ICA");
+			}
+			if (optionPubExt != "")
+			{
+				map.put("4", "Publicidad Exterior");
+			}
+			if (optionGas != "")
+			{
+				map.put("5", "Sobretasa Gasolina");
+			}
+			if (optionDeli != "")
+			{
+				map.put("6", "Delineacion Urbana");
+			}
+
 		}
 		else
 		{
 			map = null;
 		}
+
+		return map;
+	}
+
+
+	private Map<String, String> getIcaPeriodo()
+	{
+		final Map<String, String> map;
+		map = new HashMap<String, String>();
+		map.put("0", "Seleccionar");
+		map.put("1", "1 - Ene / Feb");
+		map.put("2", "2 - Mar / Abr");
+		map.put("3", "3 - May / Jun");
+		map.put("4", "4 - Jul / Ago");
+		map.put("5", "5 - Sep / Oct");
+		map.put("6", "6 - Nov / Dic");
 
 		return map;
 	}
