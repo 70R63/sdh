@@ -35,6 +35,8 @@ import de.hybris.sdh.core.pojos.responses.ICACalculoImpResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfoDeclara;
 import de.hybris.sdh.core.pojos.responses.ICAInfoIngFueraBog;
+import de.hybris.sdh.core.pojos.responses.ICAInfoIngNetosGrava;
+import de.hybris.sdh.core.pojos.responses.ICAInfoIngPorCiiu;
 import de.hybris.sdh.core.pojos.responses.ICAInfoValorRetenido;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
@@ -299,14 +301,20 @@ public class IcaPageController extends AbstractPageController
 			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
 			final List<ICAInfoIngFueraBog> listInfFueraBog = new ArrayList<ICAInfoIngFueraBog>();
 			final List<ICAInfoValorRetenido> listvalorRetenido = new ArrayList<ICAInfoValorRetenido>();
+			final List<ICAInfoIngNetosGrava> listIngNetosGrava = new ArrayList<ICAInfoIngNetosGrava>();
+			final List<ICAInfoIngPorCiiu> listIngPorCIIU = new ArrayList<ICAInfoIngPorCiiu>();
 
 
 			listInfFueraBog.add(new ICAInfoIngFueraBog());
 			listvalorRetenido.add(new ICAInfoValorRetenido());
+			listIngNetosGrava.add(new ICAInfoIngNetosGrava());
+			listIngPorCIIU.add(new ICAInfoIngPorCiiu());
 
 
 			infoDeclara.setIngFueraBog(listInfFueraBog);
 			infoDeclara.setValorRetenido(listvalorRetenido);
+			infoDeclara.setIngNetosGrava(listIngNetosGrava);
+			infoDeclara.setIngPorCIIU(listIngPorCIIU);
 
 			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
 			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
