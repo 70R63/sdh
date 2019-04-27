@@ -10,6 +10,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -17,6 +18,7 @@ import de.hybris.sdh.core.dao.impl.DefaultSDHICACityDao;
 import de.hybris.sdh.core.dao.impl.DefaultSDHICAEconomicActivityDao;
 import de.hybris.sdh.core.model.SDHICACityModel;
 import de.hybris.sdh.core.model.SDHICAEconomicActivityModel;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
@@ -25,16 +27,23 @@ import de.hybris.sdh.core.pojos.requests.ICAIngNetosGrava;
 import de.hybris.sdh.core.pojos.requests.ICAIngPorCIIU;
 import de.hybris.sdh.core.pojos.requests.ICARelaciones;
 import de.hybris.sdh.core.pojos.requests.ICAValorRetenido;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.ICACalculoImpResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ICAInfoDeclara;
+import de.hybris.sdh.core.pojos.responses.ICAInfoIngFueraBog;
+import de.hybris.sdh.core.pojos.responses.ICAInfoValorRetenido;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
+import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
@@ -93,6 +102,8 @@ public class IcaPageController extends AbstractPageController
 	private static final String REDIRECT_TO_ICA_DOS_PAGE = REDIRECT_PREFIX + "/contribuyentes/icados";
 	private static final String REDIRECT_TO_ICA_DECLARACION_PAGE = REDIRECT_PREFIX + "/contribuyentes/ica/declaracion";
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
 
 	@Resource(name = "userService")
 	UserService userService;
@@ -242,6 +253,9 @@ public class IcaPageController extends AbstractPageController
 	final String numObjeto) throws CMSItemNotFoundException
 	{
 
+		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
+		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
+
 		if (StringUtils.isAllBlank(numObjeto, anoGravable))
 		{
 			return REDIRECT_TO_ICA_PAGE;
@@ -257,7 +271,7 @@ public class IcaPageController extends AbstractPageController
 
 		try
 		{
-			final ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
+			icaInfObjetoFormResp = new ICAInfObjetoForm();
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -265,7 +279,7 @@ public class IcaPageController extends AbstractPageController
 
 			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
 
-			final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 
 			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
 			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
@@ -281,8 +295,60 @@ public class IcaPageController extends AbstractPageController
 		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+
+			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
+			final List<ICAInfoIngFueraBog> listInfFueraBog = new ArrayList<ICAInfoIngFueraBog>();
+			final List<ICAInfoValorRetenido> listvalorRetenido = new ArrayList<ICAInfoValorRetenido>();
+
+
+			listInfFueraBog.add(new ICAInfoIngFueraBog());
+			listvalorRetenido.add(new ICAInfoValorRetenido());
+
+
+			infoDeclara.setIngFueraBog(listInfFueraBog);
+			infoDeclara.setValorRetenido(listvalorRetenido);
+
+			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
+			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
+			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 		}
 
+		//informacion para PSE
+		final CustomerModel customerData = (CustomerModel) userService.getCurrentUser();
+		final String numBP = customerData.getNumBP();
+
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		//		final String mensajeError = "";
+		String[] mensajesError;
+
+
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		{
+			infoPreviaPSE.setAnoGravable(anoGravable);
+			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
+			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+			infoPreviaPSE.setNumBP(numBP);
+			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());
+		}
+		else
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+		}
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+		//informacion para PSE
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
