@@ -24,6 +24,8 @@ public class ICAInfObjetoResponse
 	private String orgJuridica;
 	private String estadoMatricula;
 	private String claseESAL;
+
+	private String opcionUso;
 	private String periodo;
 	private String anoGravable;
 
@@ -325,6 +327,23 @@ public class ICAInfObjetoResponse
 	public void setInfoDeclara(final ICAInfoDeclara infoDeclara)
 	{
 		this.infoDeclara = infoDeclara;
+	}
+
+	/**
+	 * @return the opcionUso
+	 */
+	public String getOpcionUso()
+	{
+		return opcionUso;
+	}
+
+	/**
+	 * @param opcionUso
+	 *           the opcionUso to set
+	 */
+	public void setOpcionUso(final String opcionUso)
+	{
+		this.opcionUso = opcionUso;
 	}
 
 	/**

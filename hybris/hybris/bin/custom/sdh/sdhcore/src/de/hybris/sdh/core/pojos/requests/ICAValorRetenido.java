@@ -17,7 +17,7 @@ public class ICAValorRetenido
 	private String direccion;
 	private String telefono;
 	private String tarifaApl;
-
+	private String motoRetenido;
 	/**
 	 * @return the anoGravable
 	 */
@@ -152,6 +152,23 @@ public class ICAValorRetenido
 	public void setTarifaApl(final String tarifaApl)
 	{
 		this.tarifaApl = tarifaApl;
+	}
+
+	/**
+	 * @return the motoRetenido
+	 */
+	public String getMotoRetenido()
+	{
+		return motoRetenido;
+	}
+
+	/**
+	 * @param motoRetenido
+	 *           the motoRetenido to set
+	 */
+	public void setMotoRetenido(final String motoRetenido)
+	{
+		this.motoRetenido = motoRetenido;
 	}
 
 

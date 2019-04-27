@@ -29,16 +29,16 @@
 											class="control-label text-capitalize !important"><spring:theme
 													code="ica.inicial.activecono.actprin" /></label></td>
 										<td><label
-											class="control-label text-capitalize !important"><spring:theme
+											class="control-label text-capitalize !important" style="width: 100px !important"><spring:theme
 													code="ica.inicial.activecono.ciiu" /></label></td>
 										<td><label
-											class="control-label text-capitalize !important"><spring:theme
+											class="control-label" style="text-transform: none !important"><spring:theme
 													code="ica.inicial.activecono.denomi" /></label></td>
 										<td><label
-											class="control-label text-capitalize !important"><spring:theme
+											class="control-label" style="text-transform: none !important"><spring:theme
 													code="ica.inicial.activecono.feciniact" /></label></td>
 										<td><label
-											class="control-label text-capitalize !important"><spring:theme
+											class="control-label" style="text-transform: none !important"><spring:theme
 													code="ica.inicial.activecono.feciniact" /></label></td>
 									</tr>
 								</thead>
@@ -55,16 +55,16 @@
 											</c:if>
 											<td><input class="inputtextnew" disabled="disabled" 
 												value="${eachActivEconomicas.ciiu}"
-												type="text" /></td>
+												type="text" style="width: 100px !important" /></td>
 											<td><input class="inputtextnew" disabled="disabled"
 												value="${eachActivEconomicas.denominacion}"
-												type="text" style="height: auto !important;"/></td>
+												type="text" style="height: auto !important; width: 380px !important"/></td>
 											<td><input class="inputtextnew" disabled="disabled"
 												value="${eachActivEconomicas.fechaIniAct}"
 												type="text" /></td>
 											<td><input class="inputtextnew" disabled="disabled"
 												value="${eachActivEconomicas.fechaCeseAct}"
-												type="text" /></td>
+												type="text"/></td>
 										</tr>
 									</c:forEach>
 								</tbody>

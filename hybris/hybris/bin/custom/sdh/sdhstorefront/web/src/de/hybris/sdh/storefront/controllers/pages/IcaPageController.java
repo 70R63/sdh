@@ -10,30 +10,31 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.dao.impl.DefaultSDHICACityDao;
+import de.hybris.sdh.core.dao.impl.DefaultSDHICAEconomicActivityDao;
+import de.hybris.sdh.core.model.SDHICACityModel;
+import de.hybris.sdh.core.model.SDHICAEconomicActivityModel;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
-import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.pojos.requests.ICAIngFueraBog;
+import de.hybris.sdh.core.pojos.requests.ICAIngNetosGrava;
+import de.hybris.sdh.core.pojos.requests.ICAIngPorCIIU;
+import de.hybris.sdh.core.pojos.requests.ICARelaciones;
+import de.hybris.sdh.core.pojos.requests.ICAValorRetenido;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.ICACalculoImpResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
-import de.hybris.sdh.core.pojos.responses.ICAInfoDeclara;
-import de.hybris.sdh.core.pojos.responses.ICAInfoIngFueraBog;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
-import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
-import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
@@ -42,6 +43,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -92,10 +94,6 @@ public class IcaPageController extends AbstractPageController
 	private static final String REDIRECT_TO_ICA_DECLARACION_PAGE = REDIRECT_PREFIX + "/contribuyentes/ica/declaracion";
 
 
-	@Resource(name = "configurationService")
-	private ConfigurationService configurationService;
-
-
 	@Resource(name = "userService")
 	UserService userService;
 
@@ -122,6 +120,30 @@ public class IcaPageController extends AbstractPageController
 
 	@Resource(name = "sdhGeneraDeclaracionService")
 	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
+
+	@Resource(name = "sdhICACityDao")
+	DefaultSDHICACityDao sdhICACityDao;
+
+	@Resource(name = "sdhICAEconomicAcitivityDao")
+	DefaultSDHICAEconomicActivityDao sdhICAEconomicAcitivityDao;
+
+	@ModelAttribute("cities")
+	public List<SDHICACityModel> getCities()
+	{
+
+		final List<SDHICACityModel> cities = sdhICACityDao.find();
+
+		return cities;
+	}
+
+	@ModelAttribute("econActivities")
+	public List<SDHICAEconomicActivityModel> getEconActivities()
+	{
+
+		final List<SDHICAEconomicActivityModel> econActivities = sdhICAEconomicAcitivityDao.find();
+
+		return econActivities;
+	}
 
 	@RequestMapping(value = "/contribuyentes/ica", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -220,9 +242,6 @@ public class IcaPageController extends AbstractPageController
 	final String numObjeto) throws CMSItemNotFoundException
 	{
 
-		final ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
-		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
-
 		if (StringUtils.isAllBlank(numObjeto, anoGravable))
 		{
 			return REDIRECT_TO_ICA_PAGE;
@@ -238,7 +257,7 @@ public class IcaPageController extends AbstractPageController
 
 		try
 		{
-
+			final ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -246,7 +265,7 @@ public class IcaPageController extends AbstractPageController
 
 			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
 
-			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+			final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 
 			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
 			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
@@ -262,58 +281,7 @@ public class IcaPageController extends AbstractPageController
 		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
-
-			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
-			final List<ICAInfoIngFueraBog> listInfFueraBog = new ArrayList<ICAInfoIngFueraBog>();
-
-			listInfFueraBog.add(new ICAInfoIngFueraBog());
-
-			infoDeclara.setIngFueraBog(listInfFueraBog);
-
-			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
-			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
-			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-
 		}
-
-
-
-		//informacion para PSE
-		final CustomerModel customerData = (CustomerModel) userService.getCurrentUser();
-		final String numBP = customerData.getNumBP();
-
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
-		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
-		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
-		//		final String mensajeError = "";
-		String[] mensajesError;
-
-
-		contribuyenteRequest.setNumBP(numBP);
-
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
-		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-		System.out.println("Response de validaCont: " + detalleContribuyente);
-		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
-		{
-			infoPreviaPSE.setAnoGravable(anoGravable);
-			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
-			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
-			infoPreviaPSE.setNumBP(numBP);
-			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
-			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
-			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
-			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());
-		}
-		else
-		{
-			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-			mensajesError = gasolinaService.prepararMensajesError(
-					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
-		}
-		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
-		//informacion para PSE
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
@@ -330,16 +298,15 @@ public class IcaPageController extends AbstractPageController
 	public ICACalculoImpResponse calculo(@ModelAttribute("icaCalculaDeclaracionForm")
 	final ICACalculaDeclaracionForm icaCalculaDeclaracionForm) throws CMSItemNotFoundException
 	{
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		ICACalculoImpResponse icaCalculoImpResponse = new ICACalculoImpResponse();
-
-
 		final ICACalculoImpRequest icaCalculoImpRequest = new ICACalculoImpRequest();
 
 		icaCalculoImpRequest.setNumObjeto(icaCalculaDeclaracionForm.getNumObjeto());
 		icaCalculoImpRequest.setNumForm(icaCalculaDeclaracionForm.getNumForm());
 		icaCalculoImpRequest.setAnoGravable(icaCalculaDeclaracionForm.getAnoGravable());
 		icaCalculoImpRequest.setPeriodo(icaCalculaDeclaracionForm.getPeriodo());
-		icaCalculoImpRequest.setNumBP(icaCalculaDeclaracionForm.getNumBP());
+		icaCalculoImpRequest.setNumBP(customerModel.getNumBP());
 		icaCalculoImpRequest.setCantEstablec(icaCalculaDeclaracionForm.getCantEstablec());
 		icaCalculoImpRequest.setEntFinanciera(icaCalculaDeclaracionForm.getEntFinanciera());
 		icaCalculoImpRequest.setImpuestoAviso(icaCalculaDeclaracionForm.getImpuestoAviso());
@@ -348,6 +315,108 @@ public class IcaPageController extends AbstractPageController
 		icaCalculoImpRequest.setCheckAporte(icaCalculaDeclaracionForm.getCheckAporte());
 		icaCalculoImpRequest.setProyectoAporte(icaCalculaDeclaracionForm.getProyectoAporte());
 		icaCalculoImpRequest.setTarifaAporte(icaCalculaDeclaracionForm.getTarifaAporte());
+
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getIngFueraBog()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICAIngFueraBog> ingFueraBog = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getIngFueraBog(), ICAIngFueraBog[].class));
+
+				icaCalculoImpRequest.setIngFueraBog(ingFueraBog);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+
+		icaCalculoImpRequest.setDeducciones(icaCalculaDeclaracionForm.getDeducciones());
+
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getIngNetosGrava()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICAIngNetosGrava> ingNetosGrava = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getIngNetosGrava(), ICAIngNetosGrava[].class));
+
+				icaCalculoImpRequest.setIngNetosGrava(ingNetosGrava);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getIngPorCIIU()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICAIngPorCIIU> ingPorCIIU = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getIngPorCIIU(), ICAIngPorCIIU[].class));
+
+				icaCalculoImpRequest.setIngPorCIIU(ingPorCIIU);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getValorRetenido()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICAValorRetenido> valorRetenido = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getValorRetenido(), ICAValorRetenido[].class));
+
+				icaCalculoImpRequest.setValorRetenido(valorRetenido);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
+
+		if (StringUtils.isNotBlank(icaCalculaDeclaracionForm.getRelaciones()))
+		{
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final List<ICARelaciones> relaciones = Arrays
+						.asList(mapper.readValue(icaCalculaDeclaracionForm.getRelaciones(), ICARelaciones[].class));
+
+				icaCalculoImpRequest.setRelaciones(relaciones);
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("there was an error while parsing redsocial JSON");
+			}
+		}
+
 
 		try
 		{

@@ -596,18 +596,32 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-<!--         	<itemtype code="IdentificationDocumentType" autocreate="true" generate="true"> -->
-<!--         		<description>Added to hold ID document type</description> -->
-<!--         		<attributes> -->
-<!--         			<attribute type="code" qualifier="java.lang.String"> -->
-<!--         				<persistence type="property"></persistence> -->
-<!--         				<modifiers unique="true"/> -->
-<!--         			</attribute> -->
-<!--         			<attribute type="description" qualifier="localized:java.lang.String"> -->
-<!--         				<persistence type="property"></persistence> -->
-<!--         			</attribute> -->
-<!--         		</attributes> -->
-<!--         	</itemtype> -->
+			<itemtype code="SDHICACity" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save ICA Cities</description>
+        		<deployment  table="SDHICACity" typecode="15011"/>
+       			<attributes>
+       				<attribute qualifier="code" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        				<modifiers unique="true" />
+        			</attribute>
+        			<attribute qualifier="name" type="localized:java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>          			
+       			</attributes>
+	        </itemtype>
+	        <itemtype code="SDHICAEconomicActivity" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save ICA Economic Activity</description>
+        		<deployment  table="SDHICAECONACT" typecode="15012"/>
+       			<attributes>
+       				<attribute qualifier="code" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        				<modifiers unique="true" />
+        			</attribute>
+        			<attribute qualifier="description" type="localized:java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>        			
+       			</attributes>
+	        </itemtype>
         </typegroup>
     </itemtypes>
 </items>

@@ -80,7 +80,6 @@ public class DefaultSDHICACalculoImpService implements SDHICACalculoImpService
 				builder.append(inputLine);
 			}
 
-
 			final String result = builder.toString();
 			LOG.info("response: " + result);
 
