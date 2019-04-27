@@ -15,6 +15,8 @@
 	var="presentarDeclaracionUrl" htmlEscape="false" />
 
 <br>
+
+
 <sf:form action="presentar-declaracion?action=presentarDeclaracion"
 	method="POST" modelAttribute="dataForm" id="forma">
 	<div class="col-md-10 col-md-offset-2">
