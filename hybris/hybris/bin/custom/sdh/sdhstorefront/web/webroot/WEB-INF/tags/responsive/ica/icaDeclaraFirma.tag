@@ -225,11 +225,11 @@
 				<sf:hidden path="clavePeriodo" />
 				<sf:hidden path="dv" />
 				<sf:hidden path="numObjeto" />
-				<div class="col-md-3">
+				
 				<sf:button class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar">
 					<spring:theme code="ica.declaracion.firma.pagliena" />
 				</sf:button>
-				</div>
+			
 						
 <!-- 						<button style="margin-top: 3px;" id="" -->
 <!-- 							class="btn btn-primary btn-lg" type="button"> -->
