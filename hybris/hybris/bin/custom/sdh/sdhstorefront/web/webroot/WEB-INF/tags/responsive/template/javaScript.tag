@@ -94,6 +94,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.gasolina.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.csv-import.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.delineacionurbana.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.ica.js"></script>
 		
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.certipago.js"></script>
 

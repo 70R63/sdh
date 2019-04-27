@@ -24,7 +24,6 @@ ACC.global = {
     updateMenu: function () {
     	
     	
-    	debugger;
     	
     	
     	

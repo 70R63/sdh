@@ -407,7 +407,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
-		final DetGasResponse detalleGasolinaResponse;
+		DetGasResponse detalleGasolinaResponse;
 		final DetallePagoResponse detallePagoResponse;
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefault = new ArrayList<DetGasInfoDeclaraResponse>();
 		final List<DetGasInfoDeclaraResponse> infoDeclaraDefaultTMP;
@@ -518,7 +518,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				dataForm.setDeclarante(declarante);
 				dataForm.setCatalogosSo(catalogos);
 
-				clavePeriodo = gasolinaService.perpararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+				clavePeriodo = gasolinaService.prepararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
 				detallePagoRequest.setNumBP(numBP);
 				detallePagoRequest.setClavePeriodo(clavePeriodo);
 				detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjetoGasolina(detalleContribuyente));
@@ -538,6 +538,17 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			LOG.error("Error al leer detalle de gasolina: " + mensajesError);
 			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 					"error.impuestoGasolina.sobretasa.error1", mensajesError);
+
+			final DetGasInfoDeclaraResponse infoDeclara = new DetGasInfoDeclaraResponse();
+			final List listaInfoDeclara = new ArrayList<DetGasInfoDeclaraResponse>();
+			listaInfoDeclara.add(new DetGasInfoDeclaraResponse());
+
+			detalleGasolinaResponse = new DetGasResponse();
+
+			detalleGasolinaResponse.setInfoDeclara(listaInfoDeclara);
+			dataForm.setDataForm(detalleGasolinaResponse);
+			dataForm.setCatalogosSo(catalogos);
+
 		}
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("detallePagoRequest", detallePagoRequest);
@@ -759,7 +770,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
-			clavePeriodo = gasolinaService.perpararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+			clavePeriodo = gasolinaService.prepararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
 			detallePagoRequest.setNumBP(numBP);
 			detallePagoRequest.setClavePeriodo(clavePeriodo);
 			detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjetoGasolina(detalleContribuyente));

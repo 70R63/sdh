@@ -4,10 +4,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL" htmlEscape="false" />
+
 <div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
@@ -17,7 +20,7 @@
 				</h2>
 			</div>
 
-			<form:form action="">
+<%-- 			<form:form action=""> --%>
 				<div class="row margin-bottom-4" style="margin-top: 18px">
 					<div class="col-md-12" style="margin-top: 18px">
 						<div class="form-check">
@@ -183,30 +186,66 @@
 						</div>
 					</div>
 				</div>
+				<input type="hidden" id="numObjeto" name="numObjeto"
+				value="${numObjeto}" />
+				<input type="hidden" id="numForm" name="numForm"
+				value="${icaInfObjetoFormResp.icaInfObjetoResponse.numForm }" />
+				<a id="downloadHelper" target="_blank"></a>
 				<div class="row" style="marging-top: 5px">
 					<div class="col-md-12 centercol-md-8 text-center">
 
+				<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 						<button style="margin-top: 3px;" id="regresar"
 							class="btn btn-primary btn-lg"
 							onclick="window.location.href ='<c:url value='/' />';"
 							type="button">
 							<spring:theme code="ica.declaracion.firma.regresar" />
 						</button>
-						<button style="margin-top: 3px;" id=""
-							class="btn btn-primary btn-lg" type="button">
-							<spring:theme code="ica.declaracion.firma.prendecla" />
-						</button>
-						<button style="margin-top: 3px;" id=""
-							class="btn btn-primary btn-lg" type="button">
-							<spring:theme code="ica.declaracion.firma.pagliena" />
-						</button>
+						<c:choose>
+							<c:when test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.numForm }">
+								<button style="margin-top: 3px;" id="icaPresentarDeclaracionButton"
+									class="btn btn-primary btn-lg" type="button">
+									<spring:theme code="ica.declaracion.firma.prendecla" />
+								</button>
+							</c:when>
+							<c:otherwise>
+								<button style="margin-top: 3px;" id="icaPresentarDeclaracionButton"
+									class="btn btn-primary btn-lg" type="button" disabled="disabled">
+									<spring:theme code="ica.declaracion.firma.prendecla" />
+								</button>
+							</c:otherwise>
+						</c:choose>
+
+				<sf:hidden path="tipoImpuesto"/>
+				<sf:hidden path="numBP" />
+				<sf:hidden path="numDoc" />
+				<sf:hidden path="tipoDoc" />
+				<sf:hidden path="anoGravable" />
+				<sf:hidden path="periodo" />
+				<sf:hidden path="clavePeriodo" />
+				<sf:hidden path="dv" />
+				<sf:hidden path="numObjeto" />
+				<div class="col-md-3">
+				<sf:button class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar">
+					<spring:theme code="ica.declaracion.firma.pagliena" />
+				</sf:button>
+				</div>
+						
+<!-- 						<button style="margin-top: 3px;" id="" -->
+<!-- 							class="btn btn-primary btn-lg" type="button"> -->
+<%-- 							<spring:theme code="ica.declaracion.firma.pagliena" /> --%>
+<!-- 						</button> -->
+					</sf:form>
 					</div>
 				</div>
 
-			</form:form>
+<%-- 			</form:form> --%>
 		</div>
 	</div>
 </div>
+
+
+
 <script>
 
 function show() {

@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -39,31 +39,85 @@
 				</label>
 			</div>
 		</div>
-		<div class="row actvifuera">
-			<div class="col-md-3">
-				<select id="" class="form-control deno" style="height: 48px;">
-					<option value=" ">Seleccionar</option>
-				</select>
-			</div>
-
-			<div class="col-md-3">
-				<select id="" class="form-control mun" style="height: 48px;">
-					<option value=" ">Seleccionar</option>
-				</select>
-			</div>
-			<div class="col-md-3">
-				<input class="form-control ing" type="text" />
-			</div>
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addactvifuera()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img> <img onclick="deleactvifuera()"
-						src="${themeResourcePath}/images/deledelineacion.png"
-						style="width: 25px"></img>
+<!--  se agregan líneas para agregar siempre una linea en la tabla -->
+				<div class="row actvifuera">
+					<div class="col-md-3">
+						<select id="" class="form-control deno codCIIU" style="height: 48px;">
+							
+							<c:forEach items="${ econActivities}" var="eachActivity">
+								<option ${selected } value="${eachActivity.code}">${eachActivity.description }</option>
+							</c:forEach>
+						</select>
+					</div>
+		
+					
+						<div class="col-md-3">
+						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
+							<c:set var="selected" value=""/>
+							<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
+								<c:set var="selected" value=""/>
+							</c:if>
+							<c:forEach items="${cities}" var="eachCity">
+							<option value="${ eachCity.code}">${eachCity.name}</option>
+						</c:forEach>
+						</select>
+					</div>
+					<div class="col-md-3">
+						<input class="form-control ing ingresos" type="text" value=""/>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addactvifuera()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deleactvifuera()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+<!-- fin de código agregado -->
+
+		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
+<%-- 			<c:if test="${not empty eachIngreso.codCIIU }"> --%>
+				<div class="row actvifuera">
+					<div class="col-md-3">
+						<select id="" class="form-control deno codCIIU" style="height: 48px;">
+							<c:set var="selected" value=""/>
+							<c:if test="${eachIngreso.codCIIU eq eachActivity.code}">
+								<c:set var="selected" value="selected"/>
+							</c:if>
+							<c:forEach items="${ econActivities}" var="eachActivity">
+								<option ${selected } value="${eachActivity.code}">${eachActivity.description }</option>
+							</c:forEach>
+						</select>
+					</div>
+		
+					<div class="col-md-3">
+						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
+							<c:set var="selected" value=""/>
+							<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
+								<c:set var="selected" value=""/>
+							</c:if>
+							<c:forEach items="${cities}" var="eachCity">
+							<option value="${ eachCity.code}">${eachCity.name}</option>
+						</c:forEach>
+						</select>
+					</div>
+					<div class="col-md-3">
+						<input class="form-control ing ingresos" type="text" value="${eachIngreso.ingresos }"/>
+					</div>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addactvifuera()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deleactvifuera()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
+				</div>
+<%-- 			</c:if> --%>
+		</c:forEach>
 
 	</form:form>
 </div>

@@ -14,6 +14,7 @@
 <ica:icaMarcas />
 <ica:icaRepresentantes />
 
+<div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
 
 <script type="text/javascript">
 	function datatable(e) {

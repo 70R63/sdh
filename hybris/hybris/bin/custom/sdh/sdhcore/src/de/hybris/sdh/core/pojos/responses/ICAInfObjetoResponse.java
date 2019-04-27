@@ -25,12 +25,18 @@ public class ICAInfObjetoResponse
 	private String estadoMatricula;
 	private String claseESAL;
 
+	private String opcionUso;
+	private String periodo;
+	private String anoGravable;
+
 	private List<DetalleRelaciones> relaciones;
 
 	private List<DetalleActivEconomicas> activEconomicas;
 	private List<DetalleEstablecimientos> establecimientos;
 	private DetalleDatosEconomicos datosEconomicos;
 	private List<DetalleMarcas> marcas;
+
+	private ICAInfoDeclara infoDeclara;
 
 	/**
 	 * @return the numForm
@@ -304,6 +310,74 @@ public class ICAInfObjetoResponse
 	public void setRelaciones(final List<DetalleRelaciones> relaciones)
 	{
 		this.relaciones = relaciones;
+	}
+
+	/**
+	 * @return the infoDeclara
+	 */
+	public ICAInfoDeclara getInfoDeclara()
+	{
+		return infoDeclara;
+	}
+
+	/**
+	 * @param infoDeclara
+	 *           the infoDeclara to set
+	 */
+	public void setInfoDeclara(final ICAInfoDeclara infoDeclara)
+	{
+		this.infoDeclara = infoDeclara;
+	}
+
+	/**
+	 * @return the opcionUso
+	 */
+	public String getOpcionUso()
+	{
+		return opcionUso;
+	}
+
+	/**
+	 * @param opcionUso
+	 *           the opcionUso to set
+	 */
+	public void setOpcionUso(final String opcionUso)
+	{
+		this.opcionUso = opcionUso;
+	}
+
+	/**
+	 * @return the periodo
+	 */
+	public String getPeriodo()
+	{
+		return periodo;
+	}
+
+	/**
+	 * @param periodo
+	 *           the periodo to set
+	 */
+	public void setPeriodo(final String periodo)
+	{
+		this.periodo = periodo;
+	}
+
+	/**
+	 * @return the anoGravable
+	 */
+	public String getAnoGravable()
+	{
+		return anoGravable;
+	}
+
+	/**
+	 * @param anoGravable
+	 *           the anoGravable to set
+	 */
+	public void setAnoGravable(final String anoGravable)
+	{
+		this.anoGravable = anoGravable;
 	}
 
 

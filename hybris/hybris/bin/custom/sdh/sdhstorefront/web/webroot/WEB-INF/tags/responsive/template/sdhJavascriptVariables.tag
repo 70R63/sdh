@@ -84,7 +84,11 @@
 			
 		  	ACC.duGeneraDeclaracionURL = "<c:url value='/contribuyentes/delineacion-urbana/generar' />"
 			
-			ACC.currentURL = "${currentURL}";
+		  	ACC.icaDeclaracionCalculoURL = "<c:url value='/contribuyentes/ica/declaracion/calculo' />"
+		  	
+		  	
+		  	ACC.currentURL = "${currentURL}";
+			
 			
 			
 			ACC.hideSubmenuDelineacionUrbana = false;
@@ -93,7 +97,6 @@
 			ACC.hideSubmenuPublicidadExt = false;
 			ACC.hideSubmenuVehicular = false;
 			ACC.hideSubmenuGasolina = false;
-			debugger;
 			
 			<c:if test="${(hasCORol and fn:contains(currentURL, 'contribuyentes')) or (hasCORol and fn:contains(currentURL, 'pagoEnLinea'))}">
 				

@@ -8,6 +8,9 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -24,7 +27,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.aniograv" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
+								id="anoGravable" name="anoGravable" class="form-control" disabled type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.anoGravable }"
 								maxlength="240"></input>
 						</div>
 					</div>
@@ -32,7 +35,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.regitribut" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
+								id="" name="" class="form-control" disabled type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.regimen }"
 								maxlength="240"></input>
 						</div>
 					</div>
@@ -42,7 +45,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.periodo" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
+								id="periodo" name="periodo" class="form-control" disabled type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.periodo }"
 								maxlength="240"></input>
 						</div>
 					</div>
@@ -52,7 +55,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.opcuso" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text" value=""
+								id="opcionUso" name="opcionUso" class="form-control" disabled type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.opcionUso }"
 								maxlength="240"></input>
 						</div>
 					</div>
@@ -82,7 +85,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.cantesta" /></label> <input 
-								id="idcatestable" name="" class="form-control" disabled type="text" value=""
+								id="cantEstablec" name="cantEstablec" class="form-control" disabled type="text" value="${infoDeclara.cantEstablec }"
 								maxlength="240"></input>
 						</div>
 					</div>

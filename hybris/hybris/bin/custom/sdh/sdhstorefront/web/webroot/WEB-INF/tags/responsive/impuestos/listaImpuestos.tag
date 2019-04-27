@@ -54,7 +54,7 @@
 
 			</div>
 
-			<c:if test="${dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
+			<c:if test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
 				<div class="col-md-4">
 					<div class="form-group ">
 						<label class="control-label required"><spring:theme
@@ -66,9 +66,22 @@
 					</div>
 				</div>
 			</c:if>
+			
+			<c:if test="${dataForm.impuesto == '3'}">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required"><spring:theme
+								code="impuestos.presentarDeclaracion.Periodo" /></label>
+
+						<sf:select path="periodo" items="${icaPeriodo}"
+						referenceData="${icaPeriodo}"
+							class="form-control" />
+					</div>
+				</div>
+			</c:if>
 		</div>
-
-
+		
+		
 		<c:if
 			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">

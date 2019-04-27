@@ -250,7 +250,6 @@
 	
 	function ajustesMenu() {
 		
-		debugger; 
 						
 		var currentUrl = document.URL;
 		var rol;

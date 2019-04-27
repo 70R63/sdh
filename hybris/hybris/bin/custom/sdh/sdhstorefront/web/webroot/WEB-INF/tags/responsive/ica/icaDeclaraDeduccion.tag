@@ -36,8 +36,37 @@
 		</div>
 		<div class="row deducciones">
 			<div class="col-md-3">
-				<select id="" class="form-control deducci" style="height: 48px;">
-					<option value=" ">Seleccionar</option>
+				<select id="" class="form-control deducci"
+					style="height: 48px; text-transform: none !important; font-size: 14px !important">
+					<option value="0">Seleccionar</option>
+					<option value="1">1.- Actividad no sujeta por la
+						producción Primaria Agricola</option>
+					<option value="2">2.- Enajenación de Activo Fijos</option>
+					<option value="3">3.- Exportación de bienes</option>
+					<option value="4">4.- Exportación de Servicios</option>
+					<option value="5">5.- Actividad no sujeta Art. 39 Decreto
+						352 de 2002</option>
+					<option value="6">6.- Actividades no sujetas propias de
+						obj.soc. de prop.horiz.</option>
+					<option value="7">7.- Explotación de los juegos de suerte
+						y azar (Ley 643 de 2001)</option>
+					<option value="8">8.- Donaciones</option>
+					<option value="9">9.- Exen.consec.de actos terroristas o
+						catástrofes naturales</option>
+					<option value="10">10.- Base gravable especial</option>
+					<option value="11">11.- Ingresos por actividades
+						realizadas a través de Consorcios</option>
+					<option value="12">12.- Dividendos que no hacen parte del
+						giro ordinario del negocio</option>
+					<option value="13">13.- Exención víctima del secuestro o
+						de la desaparición forzada</option>
+					<option value="14">14.- Corrección monetaria y/o
+						Diferencia en cambio</option>
+					<option value="15">15.- Reintegro de costos y gastos</option>
+					<option value="16">16.- Salarios</option>
+					<option value="17">17.- Devoluciones</option>
+					<option value="18">18.- Rebajas</option>
+					<option value="19">19.- Descuentos</option>
 				</select>
 			</div>
 
