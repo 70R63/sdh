@@ -19,8 +19,10 @@ import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
@@ -1033,7 +1035,7 @@ public class SobreTasaGasolinaService
 	 * @param periodo
 	 * @return
 	 */
-	public String perpararPeriodoMensualPago(final String anoGravable, final String periodo)
+	public String prepararPeriodoMensualPago(final String anoGravable, final String periodo)
 	{
 		String periodoConvertidoPagar = "";
 
@@ -1046,18 +1048,19 @@ public class SobreTasaGasolinaService
 		return periodoConvertidoPagar;
 	}
 
-	public String perpararPeriodoAnualPago(final String anoGravable)
+	public String prepararPeriodoBimestralPago(final String anoGravable, final String periodo)
 	{
 		String periodoConvertidoPagar = "";
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2) + "A1";
+			periodoConvertidoPagar = anoGravable.substring(2) + "B" + periodo;
 		}
 
 
 		return periodoConvertidoPagar;
 	}
+
 
 
 	/**
@@ -1131,6 +1134,23 @@ public class SobreTasaGasolinaService
 	}
 
 
+	public String prepararNumObjetoICA(final SDHValidaMailRolResponse detalleContribuyente)
+	{
+		String numObjeto = "";
+		ImpuestoICA infoImpuesto;
+
+
+		infoImpuesto = detalleContribuyente.getIca();
+		if (infoImpuesto != null)
+		{
+			numObjeto = infoImpuesto.getNumObjeto();
+		}
+
+
+		return numObjeto;
+	}
+
+
 	/**
 	 * @param detalleContribuyente
 	 * @return
@@ -1164,25 +1184,25 @@ public class SobreTasaGasolinaService
 		{
 			for (int i = 0; i < limite; i++)
 			{
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "01"), "Enero"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "02"), "Febrero"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "03"), "Marzo"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "04"), "Abril"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "05"), "Mayo"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "06"), "Junio"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "07"), "Julio"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "08"), "Agosto"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "09"), "Septiembre"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "10"), "Octubre"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "11"), "Noviembre"));
-				periodo.add(new SelectAtomValue(perpararPeriodoMensualPago(Integer.toString(anioActual - i), "12"), "Diciembre"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "01"), "Enero"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "02"), "Febrero"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "03"), "Marzo"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "04"), "Abril"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "05"), "Mayo"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "06"), "Junio"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "07"), "Julio"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "08"), "Agosto"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "09"), "Septiembre"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "10"), "Octubre"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "11"), "Noviembre"));
+				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "12"), "Diciembre"));
 			}
 		}
 		if (tipoImpuesto.equals(new ControllerPseConstants().getPUBLICIDAD()))
 		{
 			for (int i = 0; i < limite; i++)
 			{
-				periodo.add(new SelectAtomValue(perpararPeriodoAnualPago(Integer.toString(anioActual - i)),
+				periodo.add(new SelectAtomValue(prepararPeriodoAnualPago(Integer.toString(anioActual - i)),
 						"Año " + Integer.toString(anioActual - i)));
 			}
 		}
@@ -1581,6 +1601,37 @@ public class SobreTasaGasolinaService
 
 		return valorVariable;
 	}
+
+
+	/**
+	 * @param icaInfObjetoResponse
+	 * @return
+	 */
+	public String prepararClavePeriodoICA(final ICAInfObjetoResponse icaInfObjetoResponse)
+	{
+		final String anoGravable = icaInfObjetoResponse.getAnoGravable();
+		final String periodo = icaInfObjetoResponse.getPeriodo();
+		String periodoConvertidoPagar = "";
+
+
+		if (periodo != null)
+		{
+			if (periodo.substring(2, 3).equals(" "))
+			{
+				periodoConvertidoPagar = prepararPeriodoAnualPago(icaInfObjetoResponse.getAnoGravable());
+			}
+			else
+			{
+				periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(1, 2));
+			}
+		}
+
+
+		return periodoConvertidoPagar;
+	}
+
+
+
 
 
 

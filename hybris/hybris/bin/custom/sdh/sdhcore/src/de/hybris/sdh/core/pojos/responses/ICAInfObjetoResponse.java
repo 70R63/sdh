@@ -24,6 +24,8 @@ public class ICAInfObjetoResponse
 	private String orgJuridica;
 	private String estadoMatricula;
 	private String claseESAL;
+	private String periodo;
+	private String anoGravable;
 
 	private List<DetalleRelaciones> relaciones;
 
@@ -323,6 +325,40 @@ public class ICAInfObjetoResponse
 	public void setInfoDeclara(final ICAInfoDeclara infoDeclara)
 	{
 		this.infoDeclara = infoDeclara;
+	}
+
+	/**
+	 * @return the periodo
+	 */
+	public String getPeriodo()
+	{
+		return periodo;
+	}
+
+	/**
+	 * @param periodo
+	 *           the periodo to set
+	 */
+	public void setPeriodo(final String periodo)
+	{
+		this.periodo = periodo;
+	}
+
+	/**
+	 * @return the anoGravable
+	 */
+	public String getAnoGravable()
+	{
+		return anoGravable;
+	}
+
+	/**
+	 * @param anoGravable
+	 *           the anoGravable to set
+	 */
+	public void setAnoGravable(final String anoGravable)
+	{
+		this.anoGravable = anoGravable;
 	}
 
 

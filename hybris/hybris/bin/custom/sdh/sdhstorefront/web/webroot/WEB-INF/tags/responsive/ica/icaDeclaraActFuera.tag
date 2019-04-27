@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
-			<c:if test="${not empty eachIngreso.codCIIU }">
+<%-- 			<c:if test="${not empty eachIngreso.codCIIU }"> --%>
 				<div class="row actvifuera">
 					<div class="col-md-3">
 						<select id="" class="form-control deno" style="height: 48px;">
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 				</div>
-			</c:if>
+<%-- 			</c:if> --%>
 		</c:forEach>
 	</form:form>
 </div>

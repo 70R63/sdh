@@ -518,7 +518,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 				dataForm.setDeclarante(declarante);
 				dataForm.setCatalogosSo(catalogos);
 
-				clavePeriodo = gasolinaService.perpararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+				clavePeriodo = gasolinaService.prepararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
 				detallePagoRequest.setNumBP(numBP);
 				detallePagoRequest.setClavePeriodo(clavePeriodo);
 				detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjetoGasolina(detalleContribuyente));
@@ -770,7 +770,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
-			clavePeriodo = gasolinaService.perpararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
+			clavePeriodo = gasolinaService.prepararPeriodoMensualPago(dataForm.getAnoGravable(), dataForm.getPeriodo());
 			detallePagoRequest.setNumBP(numBP);
 			detallePagoRequest.setClavePeriodo(clavePeriodo);
 			detallePagoRequest.setNumObjeto(gasolinaService.prepararNumObjetoGasolina(detalleContribuyente));
