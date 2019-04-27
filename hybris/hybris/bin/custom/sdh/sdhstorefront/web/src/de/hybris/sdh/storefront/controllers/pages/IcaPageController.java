@@ -42,9 +42,10 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
-
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
-import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
