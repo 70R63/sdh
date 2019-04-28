@@ -108,7 +108,10 @@ public class ImprimeCertDeclaraRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\",");
-		stringBuilder.append("\"retencion\":\"" + this.getRetencion() + "\",");
+		if (this.getRetencion() != null)
+		{
+			stringBuilder.append("\"retencion\":\"" + this.getRetencion() + "\",");
+		}
 		stringBuilder.append("\"periodo\":\"" + this.getPeriodo() + "\",");
 		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\"");
 		stringBuilder.append("}");
