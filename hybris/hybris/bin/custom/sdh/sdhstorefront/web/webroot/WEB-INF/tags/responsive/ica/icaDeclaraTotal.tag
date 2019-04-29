@@ -55,11 +55,11 @@
 
 				<div class="col-md-3">
 					<input class="form-control denomina codCIIU" type="text"
-						value="${infoDeclara.codCIIU}" />
+						value="" />
 				</div>
 				<div class="col-md-3">
 					<input class="form-control ingreso ingresos" type="text"
-						value="${infoDeclara.ingresos}" />
+						value="" />
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -203,7 +203,7 @@
 			<div class="col-md-2">
 				<select id="" class="form-control codCIIU" style="height: 48px;">
 					<c:forEach items="${ econActivities}" var="eachActivity">
-						<option value="${infoDeclara.code}">${infoDeclara.description }</option>
+						<option value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -262,7 +262,7 @@
 			<div class="col-md-2">
 				<select id="" class="form-control codCIIU" style="height: 48px;">
 					<c:forEach items="${ econActivities}" var="eachActivity">
-						<option value="${eachActivity.code}">${eachActivity.description }</option>
+						<option value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
 					</c:forEach>
 				</select>
 			</div>
