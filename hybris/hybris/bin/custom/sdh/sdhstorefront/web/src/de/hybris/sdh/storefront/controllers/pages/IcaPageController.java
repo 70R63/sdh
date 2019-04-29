@@ -48,6 +48,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -141,6 +142,15 @@ public class IcaPageController extends AbstractPageController
 		final List<SDHICACityModel> cities = sdhICACityDao.find();
 
 		return cities;
+	}
+
+	@ModelAttribute("idTypes")
+	public List<String> getIdTipes()
+	{
+
+		final List<String> idTypes = Arrays.asList("CC", "CE", "NIT", "PA", "TI", "TIE", "NITE", "NUIP");
+
+		return idTypes;
 	}
 
 	@ModelAttribute("econActivities")
