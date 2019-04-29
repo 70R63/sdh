@@ -71,8 +71,17 @@ ACC.ica = {
 				icaCalculaDeclaracionForm.numForm=$.trim($("#numForm").val());
 				icaCalculaDeclaracionForm.anoGravable=$.trim($("#anoGravable").val());
 //				icaCalculaDeclaracionForm.periodo=$.trim($("#periodo").val());
-				icaCalculaDeclaracionForm.cantEstablec=$.trim($("#cantEstablec").val());
-				icaCalculaDeclaracionForm.entFinanciera=$.trim($("#entFinanciera").val());
+				
+				
+				if($("input[name='entidadFinanciera']:checked").val() == "si")
+				{
+					icaCalculaDeclaracionForm.cantEstablec=$.trim($("#cantEstablec").val());
+					icaCalculaDeclaracionForm.entFinanciera="X";
+				}else
+				{
+					icaCalculaDeclaracionForm.cantEstablec="";
+					icaCalculaDeclaracionForm.entFinanciera="";
+				}
 				
 				var impuestoAvisoRadio = $("input[name='impAviso']:checked"). val();
 				

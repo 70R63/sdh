@@ -80,13 +80,13 @@
 									code="ica.declaracion.generales.entfinan" /> </label> <label
 								class="form-check-label"
 								style="text-transform: capitalize !important; font-weight: normal !important"> <input
-								type="radio" name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important;" onclick="disa()" ${yesChecked}>
+								type="radio" name="entidadFinanciera" id="" class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important;" onclick="disa()" ${yesChecked} value="si">
 								Si
 							</label> <label class="form-check-label"
 								style="text-transform: capitalize !important; font-weight: normal !important"> <input
-								type="radio" name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="disa2()" ${noChecked }>
+								type="radio" name="entidadFinanciera" id="" class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="disa2()" ${noChecked } value="no">
 								No
 							</label>
 						</div>
