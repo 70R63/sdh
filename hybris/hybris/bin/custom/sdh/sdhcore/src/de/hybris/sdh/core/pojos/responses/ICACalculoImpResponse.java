@@ -15,7 +15,7 @@ public class ICACalculoImpResponse
 	private String numForm;
 
 	private ICADeclaracion declaracion;
-	private ICAValRetenido valRetenido;
+	private List<ICAValRetenido> valRetenido;
 	private List<ErrorEnWS> errores;
 
 	/**
@@ -50,23 +50,6 @@ public class ICACalculoImpResponse
 	public void setDeclaracion(final ICADeclaracion declaracion)
 	{
 		this.declaracion = declaracion;
-	}
-
-	/**
-	 * @return the valRetenido
-	 */
-	public ICAValRetenido getValRetenido()
-	{
-		return valRetenido;
-	}
-
-	/**
-	 * @param valRetenido
-	 *           the valRetenido to set
-	 */
-	public void setValRetenido(final ICAValRetenido valRetenido)
-	{
-		this.valRetenido = valRetenido;
 	}
 
 	/**

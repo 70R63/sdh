@@ -284,6 +284,46 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				System.out.println(certiFormPost.getTipoImp());
 			}
 		}
+		else if (certiFormPost.getIdimp().equals("3"))//ICA
+		{
+			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+
+			if (certiFormPost.getIdimp() != null && certiFormPost.getAniograv() != null)
+			{
+				final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
+
+				try
+				{
+
+					final ObjectMapper mapper = new ObjectMapper();
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+					imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
+					imprimeCertDeclaraRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+					imprimeCertDeclaraRequest.setPeriodo(aniograv_periodo);
+					imprimeCertDeclaraRequest.setAnoGravable(certiFormPost.getAniograv());
+
+					final String resp = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraRequest);
+					final ImprimePagoResponse imprimeCertiDeclaraResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+					redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraResponse);
+				}
+				catch (final Exception e)
+				{
+					LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+					GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+					if (!certiFormPost.getRowFrompublicidadTable().replace(",", "").equals("X"))
+					{
+						redirectModel.addFlashAttribute("error", "sinPdf");
+					}
+					return "redirect:/contribuyentes/consultas/certideclaraciones";
+
+				}
+			}
+		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));

@@ -28,7 +28,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totobfuerabogo" /></label> <input
-						disabled id="" name="" class="form-control" disabled type="text"
+						disabled id="totalingFueraBog" name="totalingFueraBog" class="form-control" disabled type="text"
 						value="${infoDeclara.totalingFueraBog }" maxlength="240"></input>
 				</div>
 			</div>
@@ -39,7 +39,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totinbrut" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="totalingBrutos" name="totalingBrutos" class="form-control" disabled type="text"
 						value="${infoDeclara.totalingBrutos }" maxlength="240"></input>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.devrebdes" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="devolDescuentos" name="devolDescuentos" class="form-control" disabled type="text"
 						value="${infoDeclara.devolDescuentos }" maxlength="240"></input>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="totalDeduccion" name="totalDeduccion" class="form-control" disabled type="text"
 						value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
 				</div>
 			</div>
@@ -69,7 +69,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="totalingNetos" name="totalingNetos" class="form-control" disabled type="text"
 						value="${infoDeclara.totalingNetos }" maxlength="240"></input>
 				</div>
 			</div>
@@ -80,12 +80,47 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.impincom" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="impIndusComer" name="impIndusComer" class="form-control" disabled type="text"
 						value="${infoDeclara.impIndusComer }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		
+		<c:choose>
+			<c:when test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.impuestoAviso }">
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-check">
+							<label class="form-check-label"
+								style="text-transform: none !important; font-weight: normal !important; font-size: 14px !important;"><spring:theme
+									code="ica.declaracion.liquidacion.impavtableros" /> </label> <label
+								class="form-check-label"
+								style="text-transform: capitalize !important; font-weight: normal !important">
+								<input type="radio" name="aporte" id=""
+								class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important;"
+								onclick="habilitar()" checked="checked"> Si
+							</label> <label class="form-check-label"
+								style="text-transform: capitalize !important; font-weight: normal !important">
+								<input type="radio" name="aporte" id=""
+								class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="deshabilitar()">
+								No
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<input id="impuest" name="" class="form-control" disabled
+								type="text" value="${infoDeclara.impuestoAviso }" maxlength="240"></input>
+						</div>
+					</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="row">
 			<div class="col-md-5">
 				<div class="form-check">
 					<label class="form-check-label"
@@ -101,7 +136,7 @@
 						style="text-transform: capitalize !important; font-weight: normal !important">
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="deshabilitar()">
+						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="deshabilitar()" checked="checked">
 						No
 					</label>
 				</div>
@@ -111,18 +146,20 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<input id="impuest" name="" class="form-control" disabled
-						type="text" value="${infoDeclara.impuestoAviso }" maxlength="240"></input>
+						type="text" value="${infoDeclara.valorImpAviso }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
-
+			</c:otherwise>
+		</c:choose>
+		
 
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.valtot" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="totalUnidadAdic" name="totalUnidadAdic" class="form-control" disabled type="text"
 						value="${infoDeclara.totalUnidadAdic }" maxlength="240"></input>
 				</div>
 			</div>
@@ -132,7 +169,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totimpcar" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="impuestoCargo" name="impuestoCargo" class="form-control" disabled type="text"
 						value="${infoDeclara.impuestoCargo }" maxlength="240"></input>
 				</div>
 			</div>
@@ -143,7 +180,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.valret" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="valorReteIndusComer" name="valorReteIndusComer" class="form-control" disabled type="text"
 						value="${infoDeclara.valorReteIndus }" maxlength="240"></input>
 				</div>
 			</div>
@@ -153,7 +190,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totsaldo" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="saldoCargo" name="saldoCargo" class="form-control" disabled type="text"
 						value="${infoDeclara.saldoCargo }" maxlength="240"></input>
 				</div>
 			</div>
@@ -175,7 +212,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.sanciones" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="sanciones" name="sanciones" class="form-control" disabled type="text"
 						value="${infoDeclara.sanciones }" maxlength="240"></input>
 				</div>
 			</div>
@@ -186,7 +223,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.intmora" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="interesMora" name="interesMora" class="form-control" disabled type="text"
 						value="${infoDeclara.interesMora }" maxlength="240"></input>
 				</div>
 			</div>
@@ -196,7 +233,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totpag" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="totalPagar" name="totalPagar" class="form-control" disabled type="text"
 						value="${infoDeclara.totalPagar }" maxlength="240"></input>
 				</div>
 			</div>
@@ -258,7 +295,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totpagvol" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text"
+						id="totalAporteVolun" name="totalAporteVolun" class="form-control" disabled type="text"
 						value="${infoDeclara.totalAporteVolun }" maxlength="240"></input>
 				</div>
 			</div>
