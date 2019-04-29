@@ -49,7 +49,7 @@
 								<c:set var="selected" value="selected"/>
 							</c:if>
 							<c:forEach items="${ econActivities}" var="eachActivity">
-								<option ${selected } value="${eachActivity.code}">${eachActivity.description }</option>
+								<option ${selected } value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -86,7 +86,7 @@
 						<select id="" class="form-control deno codCIIU" style="height: 48px;">
 							
 							<c:forEach items="${ econActivities}" var="eachActivity">
-								<option ${selected } value="${eachActivity.code}">${eachActivity.description }</option>
+								<option ${selected } value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
 							</c:forEach>
 						</select>
 					</div>
