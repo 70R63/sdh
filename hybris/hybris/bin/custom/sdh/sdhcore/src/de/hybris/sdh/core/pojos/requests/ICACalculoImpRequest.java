@@ -22,6 +22,7 @@ public class ICACalculoImpRequest
 	private String cantEstablec;
 	private String entFinanciera;
 	private String impuestoAviso;
+	private String valorImpAviso;
 	private String totalIngrPeriodo;
 	private String valorPagar;
 	private String checkAporte;
@@ -49,6 +50,7 @@ public class ICACalculoImpRequest
 		stringBuilder.append("\"cantEstablec\":\"" +((StringUtils.isBlank( this.cantEstablec )) ? "" :this.cantEstablec)+"\",");
 		stringBuilder.append("\"entFinanciera\":\"" +((StringUtils.isBlank( this.entFinanciera )) ? "" :this.entFinanciera)+"\",");
 		stringBuilder.append("\"impuestoAviso\":\"" +((StringUtils.isBlank( this.impuestoAviso )) ? "" :this.impuestoAviso)+"\",");
+		stringBuilder.append("\"valorImpAviso\":\"" +((StringUtils.isBlank( this.valorImpAviso )) ? "0.00" :this.valorImpAviso)+"\",");
 		stringBuilder.append("\"totalIngrPeriodo\":\"" +((StringUtils.isBlank( this.totalIngrPeriodo )) ? "" :this.totalIngrPeriodo)+"\",");
 		stringBuilder.append("\"valorPagar\":\"" +((StringUtils.isBlank( this.valorPagar )) ? "" :this.valorPagar)+"\",");
 		stringBuilder.append("\"checkAporte\":\"" +((StringUtils.isBlank( this.checkAporte )) ? "" :this.checkAporte)+"\",");
@@ -552,6 +554,24 @@ public class ICACalculoImpRequest
 	public void setRelaciones(final List<ICARelaciones> relaciones)
 	{
 		this.relaciones = relaciones;
+	}
+
+
+	/**
+	 * @return the valorImpAviso
+	 */
+	public String getValorImpAviso()
+	{
+		return valorImpAviso;
+	}
+
+
+	/**
+	 * @param valorImpAviso the valorImpAviso to set
+	 */
+	public void setValorImpAviso(String valorImpAviso)
+	{
+		this.valorImpAviso = valorImpAviso;
 	}
 
 

@@ -407,6 +407,7 @@ public class IcaPageController extends AbstractPageController
 		icaCalculoImpRequest.setCantEstablec(icaCalculaDeclaracionForm.getCantEstablec());
 		icaCalculoImpRequest.setEntFinanciera(icaCalculaDeclaracionForm.getEntFinanciera());
 		icaCalculoImpRequest.setImpuestoAviso(icaCalculaDeclaracionForm.getImpuestoAviso());
+		icaCalculoImpRequest.setValorImpAviso(icaCalculaDeclaracionForm.getValorImpAviso());
 		icaCalculoImpRequest.setTotalIngrPeriodo(icaCalculaDeclaracionForm.getTotalIngrPeriodo());
 		icaCalculoImpRequest.setValorPagar(icaCalculaDeclaracionForm.getValorPagar());
 		icaCalculoImpRequest.setCheckAporte(icaCalculaDeclaracionForm.getCheckAporte());

@@ -26,6 +26,7 @@ public class ICACalculaDeclaracionForm
 	private String cantEstablec;
 	private String entFinanciera;
 	private String impuestoAviso;
+	private String valorImpAviso;
 	private String totalIngrPeriodo;
 	private String valorPagar;
 	private String checkAporte;
@@ -358,6 +359,23 @@ public class ICACalculaDeclaracionForm
 	public void setRelaciones(final List<ICARelaciones> relaciones)
 	{
 		this.relaciones = relaciones;
+	}
+
+	/**
+	 * @return the valorImpAviso
+	 */
+	public String getValorImpAviso()
+	{
+		return valorImpAviso;
+	}
+
+	/**
+	 * @param valorImpAviso
+	 *           the valorImpAviso to set
+	 */
+	public void setValorImpAviso(final String valorImpAviso)
+	{
+		this.valorImpAviso = valorImpAviso;
 	}
 
 

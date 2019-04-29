@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -87,7 +87,7 @@
 		</div>
 		
 		<c:choose>
-			<c:when test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.impuestoAviso }">
+			<c:when test="${empty icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorImpAviso or fn:trim(icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorImpAviso) eq '0.00'  }">
 				<div class="row">
 					<div class="col-md-5">
 						<div class="form-check">
@@ -96,13 +96,13 @@
 									code="ica.declaracion.liquidacion.impavtableros" /> </label> <label
 								class="form-check-label"
 								style="text-transform: capitalize !important; font-weight: normal !important">
-								<input type="radio" name="aporte" id=""
+								<input type="radio" name="impAviso" id=""
 								class="form-check-input mr-2"
 								style="visibility: visible !important; min-height: 4px !important;"
-								onclick="habilitar()" checked="checked"> Si
+								onclick="habilitar()" checked="checked" value="si"> Si
 							</label> <label class="form-check-label"
 								style="text-transform: capitalize !important; font-weight: normal !important">
-								<input type="radio" name="aporte" id=""
+								<input type="radio" name="impAviso" id="" value="no"
 								class="form-check-input mr-2"
 								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="deshabilitar()">
 								No
@@ -113,28 +113,28 @@
 				<div class="row">
 					<div class="col-md-5">
 						<div class="form-group">
-							<input id="impuest" name="" class="form-control" disabled
-								type="text" value="${infoDeclara.impuestoAviso }" maxlength="240"></input>
+							<input id="valorImpAviso" name="" class="form-control" disabled
+								type="text" value="0" maxlength="240"></input>
 						</div>
 					</div>
 				</div>
 			</c:when>
-			<c:otherwise>
+			<c:when test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorImpAviso and icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorImpAviso ne '0.00'  }">
 				<div class="row">
-			<div class="col-md-5">
+				<div class="col-md-5">
 				<div class="form-check">
 					<label class="form-check-label"
 						style="text-transform: none !important; font-weight: normal !important; font-size: 14px !important;"><spring:theme
 							code="ica.declaracion.liquidacion.impavtableros" /> </label> <label
 						class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="aporte" id=""
+						<input type="radio" name="impAviso" id=""
 						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important;"
+						style="visibility: visible !important; min-height: 4px !important;" value="si"
 						onclick="habilitar()"> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="aporte" id=""
+						<input type="radio" name="impAviso" id="" value="no"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="deshabilitar()" checked="checked">
 						No
@@ -145,8 +145,40 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<input id="impuest" name="" class="form-control" disabled
+					<input id="valorImpAviso" name="" class="form-control" disabled
 						type="text" value="${infoDeclara.valorImpAviso }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+			</c:when>
+			<c:otherwise>
+				<div class="row">
+				<div class="col-md-5">
+				<div class="form-check">
+					<label class="form-check-label"
+						style="text-transform: none !important; font-weight: normal !important; font-size: 14px !important;"><spring:theme
+							code="ica.declaracion.liquidacion.impavtableros" /> </label> <label
+						class="form-check-label"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="impAviso" id=""
+						class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important;" value="si"
+						onclick="habilitar()"> Si
+					</label> <label class="form-check-label"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="radio" name="impAviso" id="" value="no"
+						class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="deshabilitar()" >
+						No
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<input id="valorImpAviso" name="" class="form-control" disabled
+						type="text" value="0" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -344,14 +376,14 @@
 	
 	function deshabilitar() {
 		var imp = document.getElementById('impuest');
-		imp.disabled = true;
+// 		imp.disabled = true;
 
 
 	}
 	
 	function habilitar() {
 		var imp = document.getElementById('impuest');
-		imp.disabled = false;
+// 		imp.disabled = false;
 	}
 </script>
 

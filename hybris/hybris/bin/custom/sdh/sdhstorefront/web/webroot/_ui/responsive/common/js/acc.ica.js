@@ -73,7 +73,25 @@ ACC.ica = {
 //				icaCalculaDeclaracionForm.periodo=$.trim($("#periodo").val());
 				icaCalculaDeclaracionForm.cantEstablec=$.trim($("#cantEstablec").val());
 				icaCalculaDeclaracionForm.entFinanciera=$.trim($("#entFinanciera").val());
-				icaCalculaDeclaracionForm.impuestoAviso=$.trim($("#impuestoAviso").val());
+				
+				var impuestoAvisoRadio = $("input[name='impAviso']:checked"). val();
+				
+				if(impuestoAvisoRadio == 'si')
+				{
+					icaCalculaDeclaracionForm.impuestoAviso = "X";
+					icaCalculaDeclaracionForm.valorImpAviso = "0.00";
+				}else
+				{
+					icaCalculaDeclaracionForm.impuestoAviso = "";
+					icaCalculaDeclaracionForm.valorImpAviso=$.trim($("#valorImpAviso").val());
+				}
+				
+				
+				
+				
+				
+				
+				
 				icaCalculaDeclaracionForm.totalIngrPeriodo=$.trim($("#totalIngrPeriodo").val());
 				icaCalculaDeclaracionForm.valorPagar=$.trim($("#valorPagar").val());
 				icaCalculaDeclaracionForm.checkAporte=$.trim($("#checkAporte").val());
@@ -406,7 +424,7 @@ ACC.ica = {
 	            			$("#totalDeduccion").val(data.declaracion.totalDeduccion);
 	            			$("#totalingNetos").val(data.declaracion.totalingNetos);
 	            			$("#impIndusComer").val(data.declaracion.impIndusComer);
-	            			$("#impuest").val(data.declaracion.impuestoAviso);
+	            			$("#valorImpAviso").val(data.declaracion.valorImpAviso);
 	            			$("#totalUnidadAdic").val(data.declaracion.totalUnidadAdic);
 	            			$("#impuestoCargo").val(data.declaracion.impuestoCargo);
 	            			$("#valorReteIndusComer").val(data.declaracion.valorReteIndusComer);
