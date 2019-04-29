@@ -24,7 +24,7 @@ public class ICAInfoDeducciones
 	private String exenVictima;
 	private String correcMoneda;
 	private String reintegro;
-	private String Salarios;
+	private String salarios;
 	private String devoluciones;
 	private String rebajas;
 	private String descuentos;
@@ -284,12 +284,14 @@ public class ICAInfoDeducciones
 		this.reintegro = reintegro;
 	}
 
+
+
 	/**
 	 * @return the salarios
 	 */
 	public String getSalarios()
 	{
-		return Salarios;
+		return salarios;
 	}
 
 	/**
@@ -298,7 +300,7 @@ public class ICAInfoDeducciones
 	 */
 	public void setSalarios(final String salarios)
 	{
-		Salarios = salarios;
+		this.salarios = salarios;
 	}
 
 	/**

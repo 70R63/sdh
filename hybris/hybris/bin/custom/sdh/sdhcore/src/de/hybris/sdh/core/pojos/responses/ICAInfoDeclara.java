@@ -13,6 +13,7 @@ import java.util.List;
 public class ICAInfoDeclara
 {
 	private Integer cantEstablec;
+	private String entFinanciera;
 	private String totalIngrPeriodo;
 	private String totalingFueraBog;
 	private String totalingBrutos;
@@ -21,6 +22,7 @@ public class ICAInfoDeclara
 	private String totalingNetos;
 	private String impIndusComer;
 	private String impuestoAviso;
+	private String valorImpAviso;
 	private String totalUnidadAdic;
 	private String impuestoCargo;
 	private String valorReteIndus;
@@ -461,6 +463,40 @@ public class ICAInfoDeclara
 	public void setValorRetenido(final List<ICAInfoValorRetenido> valorRetenido)
 	{
 		this.valorRetenido = valorRetenido;
+	}
+
+	/**
+	 * @return the entFinanciera
+	 */
+	public String getEntFinanciera()
+	{
+		return entFinanciera;
+	}
+
+	/**
+	 * @param entFinanciera
+	 *           the entFinanciera to set
+	 */
+	public void setEntFinanciera(final String entFinanciera)
+	{
+		this.entFinanciera = entFinanciera;
+	}
+
+	/**
+	 * @return the valorImpAviso
+	 */
+	public String getValorImpAviso()
+	{
+		return valorImpAviso;
+	}
+
+	/**
+	 * @param valorImpAviso
+	 *           the valorImpAviso to set
+	 */
+	public void setValorImpAviso(final String valorImpAviso)
+	{
+		this.valorImpAviso = valorImpAviso;
 	}
 
 

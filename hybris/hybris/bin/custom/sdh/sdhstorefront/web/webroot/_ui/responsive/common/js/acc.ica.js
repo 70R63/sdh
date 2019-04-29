@@ -1,21 +1,76 @@
 ACC.ica = {
 
-	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA"],
+	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones"],
 	 
-	
+	 bindDeleteDeducciones: function(){
+		 $(document).on("click", ".delededucciones", function (e) {
+			 e.preventDefault();
+			 $(this).parent().parent().parent().remove();
+			 
+		 });
+		 
+	 } ,
+	 
+	 bindDeduccionesLists: function(){
+		
+		 $(document).on("change", ".deducci", function (e) {
+	 	        e.preventDefault();
+	 	       
+	 	       var tam = $(".deducciones").length;
+	 	        
+	 	      if ($(".deducciones").length == 20)
+	 	      {
+	 	    	 $( "#dialogICA" ).dialog( "open" );
+        		$("#icaDialogContent").html("");
+        		$("#icaDialogContent").html("No puede agregar más registros");
+        		$(this).val("0");
+        		return;
+	 	      }
+	 	      
+	 	      var selectedOption = $(this);
+	 	      var alreadyInList = false;
+	 	     $.each($(".deducciones"),function(index,value){
+ 	        	
+	 	    	 if(selectedOption.val() == $(value).find(".deducci").val() && selectedOption.parent().parent()[0] != value)
+ 	    		 {
+	 	    		alreadyInList = true;
+	 	    		
+	        		return;
+ 	    		 }
+ 	        	
+	 	     });
+	 	     
+	 	     if(alreadyInList)
+	 	    {
+	 	    	$( "#dialogICA" ).dialog( "open" );
+        		$("#icaDialogContent").html("");
+        		$("#icaDialogContent").html("La deducción seleccionada ya se encuentra en la lista.");
+        		$(this).val("0");
+        		return;
+	 	    } 
+	 	      
+	 	        
+	 	        var clonedRow = $(this).closest(".deducciones").clone();
+	 	       $(this).closest(".deducciones").parent().last().append(clonedRow);
+	 	       $(this).find("option").not(":selected").remove();
+	 	      
+	 	      $(this).closest(".deducciones").find(".col-md-1").find(".form-group").html("<img class='delededucciones' src='" + ACC.config.themeResourcePath +"/images/deledelineacion.png' style='width: 25px'></img>")
+		 });
+		 
+	 },
 	 
 	 
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#icaCalculoButton", function (e) {
 	 	        e.preventDefault();
 	 	        
-	 	        $("#icaCalculoButton").prop('disabled', true);
+//	 	        $("#icaCalculoButton").prop('disabled', true);
 	 	       var icaCalculaDeclaracionForm = {};
 	 	       
 				icaCalculaDeclaracionForm.numObjeto=$.trim($("#numObjeto").val());
 				icaCalculaDeclaracionForm.numForm=$.trim($("#numForm").val());
 				icaCalculaDeclaracionForm.anoGravable=$.trim($("#anoGravable").val());
-				icaCalculaDeclaracionForm.periodo=$.trim($("#periodo").val());
+//				icaCalculaDeclaracionForm.periodo=$.trim($("#periodo").val());
 				icaCalculaDeclaracionForm.cantEstablec=$.trim($("#cantEstablec").val());
 				icaCalculaDeclaracionForm.entFinanciera=$.trim($("#entFinanciera").val());
 				icaCalculaDeclaracionForm.impuestoAviso=$.trim($("#impuestoAviso").val());
@@ -48,7 +103,153 @@ ACC.ica = {
 	    	        	
 	    	        });
 			 	 
-			 	icaCalculaDeclaracionForm.ingFueraBog=JSON.stringify(ingFueraBog);
+			 	icaCalculaDeclaracionForm.ingFueraBog=ingFueraBog;
+			 	
+			 	
+			 	var deducciones = {};
+			 	
+			 	var deduccionValue= 0;
+			 	
+			 	deduccionValue = $('.deducci option[value="actnosubPA"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.actnosubPA = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="enajActFijo"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.enajActFijo = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="exportBienes"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.exportBienes = deduccionValue;
+		 		}
+			 	
+			 	
+			 	deduccionValue = $('.deducci option[value="exportServ"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.exportServ = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="actnosub39"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.actnosub39 = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="actnosubPH"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.actnosubPH = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="juegoSuerteAzar"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.juegoSuerteAzar = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="donaciones"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.donaciones = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="exenActos"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.exenActos = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="baseGravEsp"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.baseGravEsp = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="ingrActConsorc"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.ingrActConsorc = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="diviNOGiroOrd"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.diviNOGiroOrd = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="exenVictima"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.exenVictima = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="correcMoneda"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.correcMoneda = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="reintegro"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.reintegro = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="salarios"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.salarios = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="devoluciones"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.devoluciones = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="rebajas"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.rebajas = deduccionValue;
+		 		}
+			 	
+			 	deduccionValue = $('.deducci option[value="descuentos"]:selected').parent().parent().parent().find(".valordedu").val();
+			 	
+			 	if($.isNumeric(deduccionValue))
+			 	{	
+			 		deducciones.descuentos = deduccionValue;
+		 		}
+			 	
+			 	
+			 	
+			 	
+			 	
+			 	icaCalculaDeclaracionForm.deducciones = deducciones;
+			 	
 			 	
 			 	
 			 	var ingNetosGrava = new Array();
@@ -80,7 +281,7 @@ ACC.ica = {
 	    	        	
 	    	        });
 			 	 
-			 	icaCalculaDeclaracionForm.ingNetosGrava=JSON.stringify(ingNetosGrava);
+			 	icaCalculaDeclaracionForm.ingNetosGrava=ingNetosGrava;
 			 	
 			 	
 			 	
@@ -123,7 +324,7 @@ ACC.ica = {
 	    	        	
 	    	        });
 			 	 
-			 	icaCalculaDeclaracionForm.ingNetosGrava=JSON.stringify(ingPorCIIU);
+			 	icaCalculaDeclaracionForm.ingPorCIIU=ingPorCIIU;
 			 	
 			 	var valorRetenido = new Array();
 			 	 
@@ -163,15 +364,28 @@ ACC.ica = {
 	    	        	
 	    	        });
 			 	 
-			 	icaCalculaDeclaracionForm.valorRetenido=JSON.stringify(valorRetenido);
+			 	icaCalculaDeclaracionForm.valorRetenido=valorRetenido;
 	 	
 	 	
 	 	      $.ajax({
-		            url: ACC.icaDeclaracionCalculoURL,
-		            data: icaCalculaDeclaracionForm,
+	 	    	  url: ACC.icaDeclaracionCalculoURL,
+		            data: JSON.stringify(icaCalculaDeclaracionForm),
 		            type: "POST",
+		            dataType: "json",
+		              contentType: "application/json",
 		            success: function (data) {
+		            	
+		            	var actualErrors = [];
+		            	
 		            	if(data.errores)
+		            	{
+		            		$.each(data.errores, function( index, value ) {
+		            			if(value.idmsj != "0")
+		            			actualErrors.push(value);
+    	            		});
+		            	}
+		            	
+		            	if(actualErrors.length > 0)
 	            		{
 		            		$( "#dialogICA" ).dialog( "open" );
 		            		$("#icaDialogContent").html("Error");
@@ -179,30 +393,31 @@ ACC.ica = {
     	            			$("#icaDialogContent").html($("#icaDialogContent").html()+value.txtmsj+"<br>");
     	            		});
 //		            		
-//		            		$("#impCar").val("");
-//	            			$("#valsan").val("");
-//	            			$("#valpag").val("");
-//	            			$("#intmora").val("");
-//	            			$("#totpag").val("");
-//	            			$("#numForm").val("");
-//	            			
-//	            			$('#generaDeclaracionButton').prop("disabled", true);
-//		            		alert("error");
-		            		
 	            		}else
 	            		{
 	            			$( "#dialogICA" ).dialog( "open" );
 	            			$("#icaDialogContent").html("El cálculo se ha realizado exitosamente.")
 	            			
-//	            			$("#impCar").val(data.impCargo);
-//	            			$("#valsan").val(data.vlrSancion);
-//	            			$("#valpag").val(data.vlrPagar);
-//	            			$("#intmora").val(data.interesMora);
-//	            			$("#totpag").val(data.totalPagar);
-//	            			$("#numForm").val(data.numForm);
-//	            			
-//	            			$('#generaDeclaracionButton').prop("disabled", false);
-//	            			alert("exito!");
+	            			
+	            			$("#totalingPeriodo").val(data.declaracion.totalingPeriodo);
+	            			$("#totalingFueraBog").val(data.declaracion.totalingFueraBog);
+	            			$("#totalingBrutos").val(data.declaracion.totalingBrutos);
+	            			$("#devolDescuentos").val(data.declaracion.devolDescuentos);
+	            			$("#totalDeduccion").val(data.declaracion.totalDeduccion);
+	            			$("#totalingNetos").val(data.declaracion.totalingNetos);
+	            			$("#impIndusComer").val(data.declaracion.impIndusComer);
+	            			$("#impuest").val(data.declaracion.impuestoAviso);
+	            			$("#totalUnidadAdic").val(data.declaracion.totalUnidadAdic);
+	            			$("#impuestoCargo").val(data.declaracion.impuestoCargo);
+	            			$("#valorReteIndusComer").val(data.declaracion.valorReteIndusComer);
+	            			$("#saldoCargo").val(data.declaracion.saldoCargo);
+	            			$("#valorPagar").val(data.declaracion.valorPagar);
+	            			$("#sanciones").val(data.declaracion.sanciones);
+	            			$("#interesMora").val(data.declaracion.interesMora);
+	            			$("#totalPagar").val(data.declaracion.totalPagar);
+	            			$("#totalAporteVolun").val(data.declaracion.totalAporteVolun);
+	            			
+	            			
 	            		}
 	 	      		
 		            },
