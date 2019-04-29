@@ -471,7 +471,7 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			{
 				infoDeclaraDefault.addAll(dataForm.getDataForm().getInfoDeclara());
 			}
-			infoDeclaraDefault.addAll(gasolinaService.prepararInfoDeclaraDefault(0));
+			infoDeclaraDefault.addAll(gasolinaService.prepararInfoDeclaraDefault(1));
 
 			dataForm.getDataForm().setInfoDeclara(infoDeclaraDefault);
 
