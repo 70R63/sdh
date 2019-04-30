@@ -70,7 +70,7 @@ ACC.ica = {
 				icaCalculaDeclaracionForm.numObjeto=$.trim($("#numObjeto").val());
 				icaCalculaDeclaracionForm.numForm=$.trim($("#numForm").val());
 				icaCalculaDeclaracionForm.anoGravable=$.trim($("#anoGravable").val());
-//				icaCalculaDeclaracionForm.periodo=$.trim($("#periodo").val());
+				icaCalculaDeclaracionForm.periodo=$.trim($("#periodo").val());
 				
 				
 				if($("input[name='entidadFinanciera']:checked").val() == "si")
@@ -470,15 +470,6 @@ ACC.ica = {
 	 	      		
 		            },
 		            error: function () {
-//		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
-//		            	$("#publicidadExteriorDialogContent").html("");
-//		            	$("#publicidadExteriorDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
-//		            	$("#impCar").val("");
-//            			$("#valsan").val("");
-//            			$("#valpag").val("");
-//            			$("#intmora").val("");
-//            			$("#totpag").val("");
-//            			$("#numForm").val("");
             			$("#icaCalculoButton").prop('disabled', false);
 		            }
 		        });

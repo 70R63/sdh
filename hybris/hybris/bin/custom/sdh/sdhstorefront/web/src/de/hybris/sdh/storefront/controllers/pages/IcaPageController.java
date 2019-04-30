@@ -166,7 +166,8 @@ public class IcaPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/ica", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String icainicial(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String icainicial(final Model model, final RedirectAttributes redirectModel, final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET ICA --------------------------");
 
@@ -191,10 +192,30 @@ public class IcaPageController extends AbstractPageController
 			icaInfObjetoRequest.setNumBP(VACIO);
 		}
 
+		final String anoGravable = request.getParameter("anoGravable");
 
-		final Calendar now = Calendar.getInstance();
-		final int year = now.get(Calendar.YEAR);
-		icaInfObjetoRequest.setAnoGravable(String.valueOf(year));
+		if (StringUtils.isBlank(anoGravable))
+		{
+
+			final Calendar now = Calendar.getInstance();
+			final int year = now.get(Calendar.YEAR);
+			icaInfObjetoRequest.setAnoGravable(String.valueOf(year));
+		}
+		else
+		{
+			icaInfObjetoRequest.setAnoGravable(anoGravable);
+		}
+
+		final String periodo = request.getParameter("periodo");
+
+		if (!StringUtils.isBlank(periodo))
+		{
+			icaInfObjetoRequest.setPeriodo(periodo);
+		}
+		else
+		{
+			icaInfObjetoRequest.setPeriodo("");
+		}
 
 		try
 		{
@@ -285,12 +306,22 @@ public class IcaPageController extends AbstractPageController
 		}
 
 
+
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 
 		icaInfObjetoRequest.setNumBP(customerModel.getNumBP());
 		icaInfObjetoRequest.setNumObjeto(numObjeto);
 		icaInfObjetoRequest.setAnoGravable(anoGravable);
+
+		if (!StringUtils.isBlank(periodoSeleccionado))
+		{
+			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
+		}
+		else
+		{
+			icaInfObjetoRequest.setPeriodo("");
+		}
 
 		try
 		{

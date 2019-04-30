@@ -12,6 +12,24 @@ public class ICAInfObjetoRequest
 	private String numObjeto;
 	private String numBP;
 	private String anoGravable;
+	private String periodo;
+
+	/**
+	 * @return the periodo
+	 */
+	public String getPeriodo()
+	{
+		return periodo;
+	}
+
+	/**
+	 * @param periodo
+	 *           the periodo to set
+	 */
+	public void setPeriodo(final String periodo)
+	{
+		this.periodo = periodo;
+	}
 
 	/**
 	 * @return the numObjeto
@@ -72,6 +90,7 @@ public class ICAInfObjetoRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\",");
+		stringBuilder.append("\"periodo\":\"" + this.getPeriodo() + "\",");
 		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\"");
 		stringBuilder.append("}");
 
