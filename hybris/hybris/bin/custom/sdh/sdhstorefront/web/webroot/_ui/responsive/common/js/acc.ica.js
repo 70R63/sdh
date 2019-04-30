@@ -440,6 +440,8 @@ ACC.ica = {
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#icaDialogContent").html($("#icaDialogContent").html()+value.txtmsj+"<br>");
     	            		});
+		            		
+		            		$("#icaPresentarDeclaracionButton").prop("disabled",true);
 //		            		
 	            		}else
 	            		{
@@ -465,7 +467,7 @@ ACC.ica = {
 	            			$("#totalPagar").val(data.declaracion.totalPagar);
 	            			$("#totalAporteVolun").val(data.declaracion.totalAporteVolun);
 	            			
-	            			
+	            			$("#icaPresentarDeclaracionButton").prop("disabled",false);
 	            		}
 	 	      		
 		            },
