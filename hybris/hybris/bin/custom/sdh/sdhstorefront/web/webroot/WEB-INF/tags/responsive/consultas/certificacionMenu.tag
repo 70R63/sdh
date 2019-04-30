@@ -52,7 +52,7 @@
       <c:set var = "anioGravable" value = "${anoGravablePublicidad}"/>
    </c:when>
          
-   <c:when test = "${certiFormPost.idimp == 5}">
+   <c:when test = "${certiFormPost.idimp == 5 or certiFormPost.idimp == 3 or certiFormPost.idimp == 6}">
       <c:set var = "anioGravable" value = "${anoGravableGasolina}"/>
    </c:when>
    
@@ -107,7 +107,7 @@
 					</div>
 				</div>
 				
-				<c:if test="${certiFormPost.idimp ne '4' and certiFormPost.idimp ne '3'}">
+				<c:if test="${certiFormPost.idimp ne '4' and certiFormPost.idimp ne '3' and certiFormPost.idimp ne '6'}">
 				<div class="col-md-3" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
@@ -133,25 +133,7 @@
 				</div>
 				</c:if>
 				
-				<c:if test="${certiFormPost.idimp == '3'}">
-				<div class="col-md-3" id="idPeriodo" style="display: block;">
-					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.periodo" /></label> <select
-							aria-required="true" id="periodo" class="form-control "
-							name="periodo"
-							required='required'>
-							<option value="">Seleccionar</option>
-							<option value="01">1 - Ene / Feb</option>
-							<option value="02">2 - Mar / Abr</option>
-							<option value="03">3 - May / Jun</option>
-							<option value="04">4 - Jul / Ago</option>
-							<option value="05">5 - Sep / Oct</option>
-							<option value="06">6 - Nov / Dic</option>							
-						</select>
-					</div>
-				</div>
-				</c:if>					
+							
 		</div>
 		
 		
@@ -389,7 +371,7 @@
   	
   		<!-- Se agrega tabla de CDU´s para delineación -->
 	<!-- cambiar el número 6 por el que corresponda a delineación en caso de no ser este -->
-	<c:if test="${certiFormPost.idimp eq '6'}">
+	<c:if test="${certiFormPost.idimp eq '16'}">
 		<div class="row">
 			<div class="col-md-9 col-md-offset-1">
 				<div class="table-resposive">
