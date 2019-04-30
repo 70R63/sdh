@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author Consultor
  *
@@ -90,10 +92,10 @@ public class ICAInfObjetoRequest
 		stringBuilder.append("{");
 		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
 		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\",");
-		stringBuilder.append("\"periodo\":\"" + this.getPeriodo() + "\",");
-		stringBuilder.append("\"anoGravable\":\"" + this.getAnoGravable() + "\"");
+		stringBuilder.append("\"periodo\":\"" + (StringUtils.isBlank(this.getPeriodo())?"":this.getPeriodo()) + "\",");
+		stringBuilder.append("\"anoGravable\":\"" + (StringUtils.isBlank(this.getAnoGravable())?"":this.getAnoGravable()) + "\"");
 		stringBuilder.append("}");
-
+//		(StringUtils.isBlank(this.getPeriodo())?"":this.getPeriodo())
 		return stringBuilder.toString();
 	}
 
