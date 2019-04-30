@@ -246,12 +246,12 @@
 	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso">
 		<div class="row totaldos">
 			<div class="col-md-1">
-				<input class="form-control anoGravable" type="text" value="${eachIngreso.anoGravable }"/>
+				<input class="form-control anoGravable" disabled="disabled"  type="text" value="${eachIngreso.anoGravable }"/>
 			</div>
 
 
 			<div class="col-md-1">
-				<select id="" class="form-control tipoID" style="height: 48px;">
+				<select id=""  disabled="disabled" class="form-control tipoID" style="height: 48px;">
 					<option value="0">Seleccionar</option>
 <!-- 					<option value="CC">CC Cédula de ciudadania</option> -->
 <!-- 					<option value="CE">CE Cédula de extranjería</option> -->
@@ -276,22 +276,22 @@
 				</select>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control numID" type="text" value="${eachIngreso.numID }"/>
+				<input class="form-control numID" disabled="disabled"  type="text" value="${eachIngreso.numID }"/>
 			</div>
 			<div class="col-md-2">
-				<input class="form-control razonSocial" type="text" value="${eachIngreso.razonSocial }"/>
+				<input class="form-control razonSocial" disabled="disabled"  type="text" value="${eachIngreso.razonSocial }"/>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control direccion" type="text" value="${eachIngreso.direccion }"/>
+				<input class="form-control direccion" disabled="disabled"  type="text" value="${eachIngreso.direccion }"/>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control telefono" type="text" value="${eachIngreso.telefono }"/>
+				<input class="form-control telefono" disabled="disabled"  type="text" value="${eachIngreso.telefono }"/>
 			</div>
 			<div class="col-md-2">
 
 				<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
 					
-					<select id="" class="form-control codCIIU" style="height: 48px;">
+					<select id="" disabled="disabled" class="form-control codCIIU" style="height: 48px;">
 						<c:forEach items="${ econActivities}" var="eachActivity">
 							
 							<fmt:formatNumber value="${ eachActivity.code}" pattern="#######################" var="eachCodCIIUNumber"/>
@@ -307,10 +307,10 @@
 
 			</div>
 			<div class="col-md-1">
-				<input class="form-control ingBrutoSINIVA" type="text" value="${eachIngreso.ingBrutoSINIVA }"/>
+				<input class="form-control ingBrutoSINIVA" type="text" disabled="disabled" value="${eachIngreso.ingBrutoSINIVA }"/>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control valorTotalDevol" type="text" value="${eachIngreso.valorTotalDevo }"/>
+				<input class="form-control valorTotalDevol" disabled="disabled" type="text" value="${eachIngreso.valorTotalDevo }"/>
 			</div>
 			<div class="col-md-1">
 				<div class="form-group ">

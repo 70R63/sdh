@@ -103,10 +103,31 @@ ACC.ica = {
 				
 				icaCalculaDeclaracionForm.totalIngrPeriodo=$.trim($("#totalIngrPeriodo").val());
 				icaCalculaDeclaracionForm.valorPagar=$.trim($("#valorPagar").val());
-				icaCalculaDeclaracionForm.checkAporte=$.trim($("#checkAporte").val());
-				icaCalculaDeclaracionForm.proyectoAporte=$.trim($("#proyectoAporte").val());
-				icaCalculaDeclaracionForm.tarifaAporte=$.trim($("#tarifaAporte").val());
-			 	 
+				
+				
+				var checkAporteRadio = $("input[name='aporte']:checked"). val();
+				
+				if(checkAporteRadio == 'si')
+				{
+					icaCalculaDeclaracionForm.checkAporte="X";
+					var idaporte = $.trim($("#idaporte").val());
+					icaCalculaDeclaracionForm.proyectoAporte=idaporte;
+					if(idaporte == '02')
+					{
+						icaCalculaDeclaracionForm.tarifaAporte=$.trim($("#tarifaAporte1").val());
+					}
+					else if(idaporte == '01')
+					{
+						icaCalculaDeclaracionForm.tarifaAporte=$.trim($("#tarifaAporte2").val());
+					}
+					
+				
+				}else{
+					icaCalculaDeclaracionForm.checkAporte="";
+					icaCalculaDeclaracionForm.proyectoAporte="";
+					icaCalculaDeclaracionForm.tarifaAporte="";
+				}
+				
 			 	var ingFueraBog = new Array();
 			 	 
 			 	 $.each($(".actvifuera"),function(index,value){
@@ -313,45 +334,45 @@ ACC.ica = {
 			 	
 			 	
 			 	
-			 	var ingPorCIIU = new Array();
-			 	 
-			 	 $.each($(".totaldos"),function(index,value){
-	    	        	
-			 		 	
-			 		 		
-			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
-			 		var tipoID=$.trim($(value).find(".tipoID").val());
-			 		var numID=$.trim($(value).find(".numID").val());
-			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
-			 		var direccion=$.trim($(value).find(".direccion").val());
-			 		var telefono=$.trim($(value).find(".telefono").val());
-			 		var codCIIU=$.trim($(value).find(".codCIIU").val());
-			 		var ingBrutoSINIVA=$.trim($(value).find(".ingBrutoSINIVA").val());
-			 		var valorTotalDevol=$.trim($(value).find(".valorTotalDevol").val());
-
-	    	        	
-	    	        	if(anoGravable != "" && tipoID != "" && numID != "" && razonSocial != "" && direccion != "" && telefono != "" && codCIIU != "" && ingBrutoSINIVA != "" && valorTotalDevol != "")
-	    	        	{
-		    	        	var eachIngreso=new Object();
-		    	        	
-		    	        	eachIngreso.anoGravable=anoGravable;
-		    	        	eachIngreso.tipoID=tipoID;
-		    	        	eachIngreso.numID=numID;
-		    	        	eachIngreso.razonSocial=razonSocial;
-		    	        	eachIngreso.direccion=direccion;
-		    	        	eachIngreso.telefono=telefono;
-		    	        	eachIngreso.codCIIU=codCIIU;
-		    	        	eachIngreso.ingBrutoSINIVA=ingBrutoSINIVA;
-		    	        	eachIngreso.valorTotalDevol=valorTotalDevol;
-		    	        	
-		    	        	ingPorCIIU.push(eachIngreso);
-		    	        	
-		    	        	
-	    	        	}
-	    	        	
-	    	        });
-			 	 
-			 	icaCalculaDeclaracionForm.ingPorCIIU=ingPorCIIU;
+//			 	var ingPorCIIU = new Array();
+//			 	 
+//			 	 $.each($(".totaldos"),function(index,value){
+//	    	        	
+//			 		 	
+//			 		 		
+//			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
+//			 		var tipoID=$.trim($(value).find(".tipoID").val());
+//			 		var numID=$.trim($(value).find(".numID").val());
+//			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
+//			 		var direccion=$.trim($(value).find(".direccion").val());
+//			 		var telefono=$.trim($(value).find(".telefono").val());
+//			 		var codCIIU=$.trim($(value).find(".codCIIU").val());
+//			 		var ingBrutoSINIVA=$.trim($(value).find(".ingBrutoSINIVA").val());
+//			 		var valorTotalDevol=$.trim($(value).find(".valorTotalDevol").val());
+//
+//	    	        	
+//	    	        	if(anoGravable != "" && tipoID != "" && numID != "" && razonSocial != "" && direccion != "" && telefono != "" && codCIIU != "" && ingBrutoSINIVA != "" && valorTotalDevol != "")
+//	    	        	{
+//		    	        	var eachIngreso=new Object();
+//		    	        	
+//		    	        	eachIngreso.anoGravable=anoGravable;
+//		    	        	eachIngreso.tipoID=tipoID;
+//		    	        	eachIngreso.numID=numID;
+//		    	        	eachIngreso.razonSocial=razonSocial;
+//		    	        	eachIngreso.direccion=direccion;
+//		    	        	eachIngreso.telefono=telefono;
+//		    	        	eachIngreso.codCIIU=codCIIU;
+//		    	        	eachIngreso.ingBrutoSINIVA=ingBrutoSINIVA;
+//		    	        	eachIngreso.valorTotalDevol=valorTotalDevol;
+//		    	        	
+//		    	        	ingPorCIIU.push(eachIngreso);
+//		    	        	
+//		    	        	
+//	    	        	}
+//	    	        	
+//	    	        });
+//			 	 
+//			 	icaCalculaDeclaracionForm.ingPorCIIU=ingPorCIIU;
 			 	
 			 	var valorRetenido = new Array();
 			 	 

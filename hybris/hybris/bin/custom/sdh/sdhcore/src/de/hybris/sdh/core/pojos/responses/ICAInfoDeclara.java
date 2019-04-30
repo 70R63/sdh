@@ -31,7 +31,8 @@ public class ICAInfoDeclara
 	private String sanciones;
 	private String interesMora;
 	private String totalPagar;
-	private Integer proyectoAporte;
+	private String checkAporte;
+	private String proyectoAporte;
 	private String tarifaAporte;
 	private String totalAporteVolun;
 	private List<ICAInfoIngFueraBog> ingFueraBog;
@@ -332,7 +333,7 @@ public class ICAInfoDeclara
 	/**
 	 * @return the proyectoAporte
 	 */
-	public Integer getProyectoAporte()
+	public String getProyectoAporte()
 	{
 		return proyectoAporte;
 	}
@@ -341,7 +342,7 @@ public class ICAInfoDeclara
 	 * @param proyectoAporte
 	 *           the proyectoAporte to set
 	 */
-	public void setProyectoAporte(final Integer proyectoAporte)
+	public void setProyectoAporte(final String proyectoAporte)
 	{
 		this.proyectoAporte = proyectoAporte;
 	}
@@ -497,6 +498,23 @@ public class ICAInfoDeclara
 	public void setValorImpAviso(final String valorImpAviso)
 	{
 		this.valorImpAviso = valorImpAviso;
+	}
+
+	/**
+	 * @return the checkAporte
+	 */
+	public String getCheckAporte()
+	{
+		return checkAporte;
+	}
+
+	/**
+	 * @param checkAporte
+	 *           the checkAporte to set
+	 */
+	public void setCheckAporte(final String checkAporte)
+	{
+		this.checkAporte = checkAporte;
 	}
 
 
