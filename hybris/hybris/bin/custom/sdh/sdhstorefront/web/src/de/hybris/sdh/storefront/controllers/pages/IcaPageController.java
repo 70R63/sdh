@@ -237,8 +237,8 @@ public class IcaPageController extends AbstractPageController
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
-
-
+			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
+			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
 		}
 		catch (final Exception e)
 		{
@@ -342,8 +342,8 @@ public class IcaPageController extends AbstractPageController
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
-			model.addAttribute("anoGravable", anoGravable);
-
+			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
+			model.addAttribute("periodo", icaInfObjetoResponse.getAnoGravable());
 			//redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 
 
