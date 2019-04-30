@@ -467,6 +467,8 @@ ACC.ica = {
 	            			$("#totalPagar").val(data.declaracion.totalPagar);
 	            			$("#totalAporteVolun").val(data.declaracion.totalAporteVolun);
 	            			
+	            			$("#numForm").val(data.numForm)
+	            			
 	            			$("#icaPresentarDeclaracionButton").prop("disabled",false);
 	            		}
 	 	      		
