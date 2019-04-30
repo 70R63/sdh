@@ -45,7 +45,7 @@
 		}    
 	}	
 	downloadPDF('${imprimePagoResponse.stringPDF}');
-</script>	
+</script>
 
 <c:choose>        
    <c:when test = "${certiFormPost.idimp == 4}">
