@@ -51,7 +51,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -197,9 +196,7 @@ public class IcaPageController extends AbstractPageController
 		if (StringUtils.isBlank(anoGravable))
 		{
 
-			final Calendar now = Calendar.getInstance();
-			final int year = now.get(Calendar.YEAR);
-			icaInfObjetoRequest.setAnoGravable(String.valueOf(year));
+			icaInfObjetoRequest.setAnoGravable("");
 		}
 		else
 		{
