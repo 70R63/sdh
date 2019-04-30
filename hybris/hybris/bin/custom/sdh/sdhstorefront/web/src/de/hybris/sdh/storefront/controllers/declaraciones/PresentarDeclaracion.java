@@ -248,8 +248,9 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			else if (dataFormResponse.getImpuesto().equals("3") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
-				final Map<String, String> mapIca = this.getIcaPeriodo();
-				final String periodoSeleccionado = mapIca.get(dataFormResponse.getPeriodo());
+				//final Map<String, String> mapIca = this.getIcaPeriodo();
+				//final String periodoSeleccionado = mapIca.get(dataFormResponse.getPeriodo());
+				final String periodoSeleccionado = dataFormResponse.getPeriodo();
 
 				redirectAttributes.addFlashAttribute("dataFormResponseICA", dataFormResponse);
 				redirectAttributes.addFlashAttribute("periodoSeleccionado", periodoSeleccionado);
@@ -370,13 +371,13 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	{
 		final Map<String, String> map;
 		map = new HashMap<String, String>();
-		map.put("0", "Seleccionar");
-		map.put("1", "1 - Ene / Feb");
-		map.put("2", "2 - Mar / Abr");
-		map.put("3", "3 - May / Jun");
-		map.put("4", "4 - Jul / Ago");
-		map.put("5", "5 - Sep / Oct");
-		map.put("6", "6 - Nov / Dic");
+		map.put("", "Seleccionar");
+		map.put("01", "1 - Ene / Feb");
+		map.put("02", "2 - Mar / Abr");
+		map.put("03", "3 - May / Jun");
+		map.put("04", "4 - Jul / Ago");
+		map.put("05", "5 - Sep / Oct");
+		map.put("06", "6 - Nov / Dic");
 
 		return map;
 	}

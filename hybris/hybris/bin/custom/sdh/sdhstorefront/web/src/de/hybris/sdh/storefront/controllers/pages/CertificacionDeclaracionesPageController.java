@@ -292,6 +292,10 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
 			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
 
+
+
+
+
 			if (certiFormPost.getIdimp() != null && certiFormPost.getAniograv() != null)
 			{
 				final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
