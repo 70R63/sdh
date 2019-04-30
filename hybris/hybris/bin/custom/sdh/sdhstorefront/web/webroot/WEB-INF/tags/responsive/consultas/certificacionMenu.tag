@@ -14,8 +14,6 @@
 <script>
 	function onChange(anoGravableGasolina,anoGravablePublicidad) {
 			form = document.getElementById("form_pdf");
-			
-			alert(document.getElementById("idImpuesto").value);
 
 			input = document.createElement('input');
 	        input.setAttribute('name', 'rowFrompublicidadTable');
@@ -47,8 +45,7 @@
 		}    
 	}	
 	downloadPDF('${imprimePagoResponse.stringPDF}');
-</script>	
-<c:out value="${certiFormPost.idimp}---------"/>
+</script>
 
 <c:choose>        
    <c:when test = "${certiFormPost.idimp == 4}">
