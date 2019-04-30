@@ -146,7 +146,8 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 					imprimeCertDeclaraPublicidadRequest.setNumObjeto(certiFormPost.getNumObjeto());
 					imprimeCertDeclaraPublicidadRequest.setRetencion(VACIO);
 					imprimeCertDeclaraPublicidadRequest.setPeriodo(certiFormPost.getAniograv());
-					imprimeCertDeclaraPublicidadRequest.setAnoGravable(getAnioGravableFromPublicidadPeriodo(certiFormPost.getAniograv()));
+					imprimeCertDeclaraPublicidadRequest
+							.setAnoGravable(getAnioGravableFromPublicidadPeriodo(certiFormPost.getAniograv()));
 
 					final String respPublicidad = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraPublicidadRequest);
 					ImprimePagoResponse imprimeCertiDeclaraPublicidadResponse;
@@ -162,26 +163,26 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 					}
 
 				}
-					final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
-					certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
-					certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
-					certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
-					redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
-					redirectModel.addFlashAttribute("publicidadMode", true);
-					try
-					{
-						redirectModel.addFlashAttribute("consultaPagoList",
-								sdhConsultaPagoService.consultaPago(certiFormPost.getNumBP(), "PU", certiFormPost.getAniograv()));
-					}
-					catch (final Exception e)
-					{
-						LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-					}
+				final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+				certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+				certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+				certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+				redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+				redirectModel.addFlashAttribute("publicidadMode", true);
+				try
+				{
+					redirectModel.addFlashAttribute("consultaPagoList",
+							sdhConsultaPagoService.consultaPago(certiFormPost.getNumBP(), "PU", certiFormPost.getAniograv()));
+				}
+				catch (final Exception e)
+				{
+					LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+				}
 
-					System.out.println(certiFormPost.getAniograv());
-					System.out.println(certiFormPost.getNumBP());
-					System.out.println(certiFormPost.getIdimp());
-					System.out.println(certiFormPost.getTipoImp());
+				System.out.println(certiFormPost.getAniograv());
+				System.out.println(certiFormPost.getNumBP());
+				System.out.println(certiFormPost.getIdimp());
+				System.out.println(certiFormPost.getTipoImp());
 			}
 		}
 		else if (certiFormPost.getIdimp().equals("5"))//Gasolina
