@@ -8,22 +8,21 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
-
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/contribuyentes/consultas/certipagos" var="certificacionURL" htmlEscape="false" />
 	
 <script>
 	function onChange(anoGravableGasolina,anoGravablePublicidad) {
-		
-		form = document.getElementById("form_pdf");
+			form = document.getElementById("form_pdf");
 
-		input = document.createElement('input');
-        input.setAttribute('name', 'rowFrompublicidadTable');
-        input.setAttribute('value', 'X');
-        input.setAttribute('type', 'hidden');
-        
-        form.appendChild(input);
-		form.submit();
+			input = document.createElement('input');
+	        input.setAttribute('name', 'rowFrompublicidadTable');
+	        input.setAttribute('value', 'X');
+	        input.setAttribute('type', 'hidden');
+	        
+	        form.appendChild(input);
+			form.submit();
+		
 	}
 	
 	function onChangeAnioGravable() {
@@ -56,6 +55,7 @@
    <c:when test = "${certiFormPost.idimp == 5}">
       <c:set var = "anioGravable" value = "${anoGravableGasolina}"/>
    </c:when>
+   
          
    <c:otherwise>
    </c:otherwise>
@@ -107,7 +107,7 @@
 					</div>
 				</div>
 				
-				<c:if test="${certiFormPost.idimp ne '4'}">
+				<c:if test="${certiFormPost.idimp ne '4' and certiFormPost.idimp ne '3'}">
 				<div class="col-md-3" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
@@ -131,7 +131,27 @@
 						</select>
 					</div>
 				</div>
-				</c:if>			
+				</c:if>
+				
+				<c:if test="${certiFormPost.idimp == '3'}">
+				<div class="col-md-3" id="idPeriodo" style="display: block;">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="certificacion.inicial.periodo" /></label> <select
+							aria-required="true" id="periodo" class="form-control "
+							name="periodo"
+							required='required'>
+							<option value="">Seleccionar</option>
+							<option value="01">1 - Ene / Feb</option>
+							<option value="02">2 - Mar / Abr</option>
+							<option value="03">3 - May / Jun</option>
+							<option value="04">4 - Jul / Ago</option>
+							<option value="05">5 - Sep / Oct</option>
+							<option value="06">6 - Nov / Dic</option>							
+						</select>
+					</div>
+				</div>
+				</c:if>					
 		</div>
 		
 		

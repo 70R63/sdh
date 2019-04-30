@@ -4,6 +4,13 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.requests.ICADeducciones;
+import de.hybris.sdh.core.pojos.requests.ICAIngFueraBog;
+import de.hybris.sdh.core.pojos.requests.ICAIngNetosGrava;
+import de.hybris.sdh.core.pojos.requests.ICAIngPorCIIU;
+import de.hybris.sdh.core.pojos.requests.ICARelaciones;
+import de.hybris.sdh.core.pojos.requests.ICAValorRetenido;
+
+import java.util.List;
 
 /**
  * @author Maria Luisa
@@ -19,18 +26,19 @@ public class ICACalculaDeclaracionForm
 	private String cantEstablec;
 	private String entFinanciera;
 	private String impuestoAviso;
+	private String valorImpAviso;
 	private String totalIngrPeriodo;
 	private String valorPagar;
 	private String checkAporte;
 	private String proyectoAporte;
 	private String tarifaAporte;
 
-	private String ingFueraBog;
+	private List<ICAIngFueraBog> ingFueraBog;
 	private ICADeducciones deducciones;
-	private String ingNetosGrava;
-	private String ingPorCIIU;
-	private String valorRetenido;
-	private String relaciones;
+	private List<ICAIngNetosGrava> ingNetosGrava;
+	private List<ICAIngPorCIIU> ingPorCIIU;
+	private List<ICAValorRetenido> valorRetenido;
+	private List<ICARelaciones> relaciones;
 
 	/**
 	 * @return the numObjeto
@@ -250,22 +258,6 @@ public class ICACalculaDeclaracionForm
 		this.tarifaAporte = tarifaAporte;
 	}
 
-	/**
-	 * @return the ingFueraBog
-	 */
-	public String getIngFueraBog()
-	{
-		return ingFueraBog;
-	}
-
-	/**
-	 * @param ingFueraBog
-	 *           the ingFueraBog to set
-	 */
-	public void setIngFueraBog(final String ingFueraBog)
-	{
-		this.ingFueraBog = ingFueraBog;
-	}
 
 	/**
 	 * @return the deducciones
@@ -285,9 +277,26 @@ public class ICACalculaDeclaracionForm
 	}
 
 	/**
+	 * @return the ingFueraBog
+	 */
+	public List<ICAIngFueraBog> getIngFueraBog()
+	{
+		return ingFueraBog;
+	}
+
+	/**
+	 * @param ingFueraBog
+	 *           the ingFueraBog to set
+	 */
+	public void setIngFueraBog(final List<ICAIngFueraBog> ingFueraBog)
+	{
+		this.ingFueraBog = ingFueraBog;
+	}
+
+	/**
 	 * @return the ingNetosGrava
 	 */
-	public String getIngNetosGrava()
+	public List<ICAIngNetosGrava> getIngNetosGrava()
 	{
 		return ingNetosGrava;
 	}
@@ -296,7 +305,7 @@ public class ICACalculaDeclaracionForm
 	 * @param ingNetosGrava
 	 *           the ingNetosGrava to set
 	 */
-	public void setIngNetosGrava(final String ingNetosGrava)
+	public void setIngNetosGrava(final List<ICAIngNetosGrava> ingNetosGrava)
 	{
 		this.ingNetosGrava = ingNetosGrava;
 	}
@@ -304,7 +313,7 @@ public class ICACalculaDeclaracionForm
 	/**
 	 * @return the ingPorCIIU
 	 */
-	public String getIngPorCIIU()
+	public List<ICAIngPorCIIU> getIngPorCIIU()
 	{
 		return ingPorCIIU;
 	}
@@ -313,7 +322,7 @@ public class ICACalculaDeclaracionForm
 	 * @param ingPorCIIU
 	 *           the ingPorCIIU to set
 	 */
-	public void setIngPorCIIU(final String ingPorCIIU)
+	public void setIngPorCIIU(final List<ICAIngPorCIIU> ingPorCIIU)
 	{
 		this.ingPorCIIU = ingPorCIIU;
 	}
@@ -321,7 +330,7 @@ public class ICACalculaDeclaracionForm
 	/**
 	 * @return the valorRetenido
 	 */
-	public String getValorRetenido()
+	public List<ICAValorRetenido> getValorRetenido()
 	{
 		return valorRetenido;
 	}
@@ -330,7 +339,7 @@ public class ICACalculaDeclaracionForm
 	 * @param valorRetenido
 	 *           the valorRetenido to set
 	 */
-	public void setValorRetenido(final String valorRetenido)
+	public void setValorRetenido(final List<ICAValorRetenido> valorRetenido)
 	{
 		this.valorRetenido = valorRetenido;
 	}
@@ -338,7 +347,7 @@ public class ICACalculaDeclaracionForm
 	/**
 	 * @return the relaciones
 	 */
-	public String getRelaciones()
+	public List<ICARelaciones> getRelaciones()
 	{
 		return relaciones;
 	}
@@ -347,9 +356,26 @@ public class ICACalculaDeclaracionForm
 	 * @param relaciones
 	 *           the relaciones to set
 	 */
-	public void setRelaciones(final String relaciones)
+	public void setRelaciones(final List<ICARelaciones> relaciones)
 	{
 		this.relaciones = relaciones;
+	}
+
+	/**
+	 * @return the valorImpAviso
+	 */
+	public String getValorImpAviso()
+	{
+		return valorImpAviso;
+	}
+
+	/**
+	 * @param valorImpAviso
+	 *           the valorImpAviso to set
+	 */
+	public void setValorImpAviso(final String valorImpAviso)
+	{
+		this.valorImpAviso = valorImpAviso;
 	}
 
 

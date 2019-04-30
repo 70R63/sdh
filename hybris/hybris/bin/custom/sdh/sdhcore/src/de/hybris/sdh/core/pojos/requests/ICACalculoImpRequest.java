@@ -22,6 +22,7 @@ public class ICACalculoImpRequest
 	private String cantEstablec;
 	private String entFinanciera;
 	private String impuestoAviso;
+	private String valorImpAviso;
 	private String totalIngrPeriodo;
 	private String valorPagar;
 	private String checkAporte;
@@ -49,6 +50,7 @@ public class ICACalculoImpRequest
 		stringBuilder.append("\"cantEstablec\":\"" +((StringUtils.isBlank( this.cantEstablec )) ? "" :this.cantEstablec)+"\",");
 		stringBuilder.append("\"entFinanciera\":\"" +((StringUtils.isBlank( this.entFinanciera )) ? "" :this.entFinanciera)+"\",");
 		stringBuilder.append("\"impuestoAviso\":\"" +((StringUtils.isBlank( this.impuestoAviso )) ? "" :this.impuestoAviso)+"\",");
+		stringBuilder.append("\"valorImpAviso\":\"" +((StringUtils.isBlank( this.valorImpAviso )) ? "0.00" :this.valorImpAviso)+"\",");
 		stringBuilder.append("\"totalIngrPeriodo\":\"" +((StringUtils.isBlank( this.totalIngrPeriodo )) ? "" :this.totalIngrPeriodo)+"\",");
 		stringBuilder.append("\"valorPagar\":\"" +((StringUtils.isBlank( this.valorPagar )) ? "" :this.valorPagar)+"\",");
 		stringBuilder.append("\"checkAporte\":\"" +((StringUtils.isBlank( this.checkAporte )) ? "" :this.checkAporte)+"\",");
@@ -77,7 +79,7 @@ public class ICACalculoImpRequest
 		if(this.deducciones != null)
 		{
 			stringBuilder.append(",");
-			stringBuilder.append("\"deducciones\": {");
+			stringBuilder.append("\"deducciones\": ");
 			stringBuilder.append("{");
 			stringBuilder.append("\"actnosubPA\":\"" + ((StringUtils.isBlank( this.deducciones.getActnosubPA() )) ? "0.00" :   this.deducciones.getActnosubPA() ) + "\",");
          stringBuilder.append("\"enajActFijo\":\"" + ((StringUtils.isBlank( this.deducciones.getEnajActFijo() )) ? "0.00" :   this.deducciones.getEnajActFijo() ) + "\",");
@@ -89,12 +91,14 @@ public class ICACalculoImpRequest
          stringBuilder.append("\"donaciones\":\"" + ((StringUtils.isBlank( this.deducciones.getDonaciones() )) ? "0.00" :   this.deducciones.getDonaciones() ) + "\",");
          stringBuilder.append("\"exenActos\":\"" + ((StringUtils.isBlank( this.deducciones.getExenActos() )) ? "0.00" :   this.deducciones.getExenActos() ) + "\",");
          stringBuilder.append("\"baseGravEsp\":\"" + ((StringUtils.isBlank( this.deducciones.getBaseGravEsp() )) ? "0.00" :   this.deducciones.getBaseGravEsp() ) + "\",");
-         stringBuilder.append("\"ingrActConsorc\\:\"" + ((StringUtils.isBlank( this.deducciones.getIngrActConsorc() )) ? "0.00" :  this.deducciones.getIngrActConsorc() )+ "\",");
+			stringBuilder.append("\"ingrActConsorc\":\""
+					+ ((StringUtils.isBlank(this.deducciones.getIngrActConsorc())) ? "0.00" : this.deducciones.getIngrActConsorc())
+					+ "\",");
          stringBuilder.append("\"diviNOGiroOrd\":\"" + ((StringUtils.isBlank( this.deducciones.getDiviNOGiroOrd() )) ? "0.00" :   this.deducciones.getDiviNOGiroOrd() ) + "\",");
          stringBuilder.append("\"exenVictima\":\"" + ((StringUtils.isBlank( this.deducciones.getExenVictima() )) ? "0.00" :   this.deducciones.getExenVictima() ) + "\",");
          stringBuilder.append("\"correcMoneda\":\"" + ((StringUtils.isBlank( this.deducciones.getCorrecMoneda() )) ? "0.00" :   this.deducciones.getCorrecMoneda() ) + "\",");
          stringBuilder.append("\"reintegro\":\"" + ((StringUtils.isBlank( this.deducciones.getReintegro() ))? "0.00" :   this.deducciones.getReintegro() ) + "\",");
-         stringBuilder.append("\"Salarios\":\"" + ((StringUtils.isBlank( this.deducciones.getSalarios() )) ? "0.00" :   this.deducciones.getSalarios() ) + "\",");
+         stringBuilder.append("\"salarios\":\"" + ((StringUtils.isBlank( this.deducciones.getSalarios() )) ? "0.00" :   this.deducciones.getSalarios() ) + "\",");
          stringBuilder.append("\"devoluciones\":\"" + ((StringUtils.isBlank( this.deducciones.getDevoluciones() )) ? "0.00" :   this.deducciones.getDevoluciones() ) + "\",");
          stringBuilder.append("\"rebajas\":\"" + ((StringUtils.isBlank( this.deducciones.getRebajas() )) ? "0.00" :   this.deducciones.getRebajas() ) + "\",");
          stringBuilder.append("\"descuentos\":\"" + ((StringUtils.isBlank( this.deducciones.getDescuentos() )) ? "0.00" :   this.deducciones.getDescuentos() ) + "\"");
@@ -111,10 +115,11 @@ public class ICACalculoImpRequest
 				stringBuilder.append("{");
 				stringBuilder.append("\"actPrincipal\":\"" + ((StringUtils.isBlank( eachIngreso.getActPrincipal() )) ? "" :   eachIngreso.getActPrincipal() ) + "\",");
 				stringBuilder.append("\"codCIIU\":\"" + ((StringUtils.isBlank( eachIngreso.getCodCIIU() )) ? "" :   eachIngreso.getCodCIIU() ) + "\",");
-				stringBuilder.append("\"ingresos\":\""
-						+ ((StringUtils.isBlank(eachIngreso.getIngresos())) ? "0.00" : eachIngreso.getIngresos()) + "\"");
-				stringBuilder.append("}");
+				stringBuilder.append("\"ingresos\":\""+((StringUtils.isBlank(eachIngreso.getIngresos())) ? "0.00" : eachIngreso.getIngresos()) + "\"");
+				stringBuilder.append("},");
+
 			}
+			stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
 			stringBuilder.append(" ]");
 
 		}
@@ -133,10 +138,8 @@ public class ICACalculoImpRequest
 				stringBuilder.append("\"direccion\":\""+ ((StringUtils.isBlank(eachIngreso.getDireccion())) ? "" : eachIngreso.getDireccion()) + "\",");
 				stringBuilder.append("\"telefono\":\""+ ((StringUtils.isBlank(eachIngreso.getTelefono())) ? "" : eachIngreso.getTelefono()) + "\",");
 				stringBuilder.append("\"codCIIU\":\"" + ((StringUtils.isBlank(eachIngreso.getCodCIIU())) ? "" : eachIngreso.getCodCIIU()) + "\",");
-				stringBuilder.append("\"ingBrutoSINIVA\":\""
-						+ ((StringUtils.isBlank(eachIngreso.getIngBrutoSINIVA())) ? "0.00" : eachIngreso.getIngBrutoSINIVA()) + "\",");
-				stringBuilder.append("\"valorTotalDevol\":\""
-						+ ((StringUtils.isBlank(eachIngreso.getValorTotalDevol())) ? "0.00" : eachIngreso.getValorTotalDevol()) + "\"");
+				stringBuilder.append("\"ingBrutoSINIVA\":\""+ ((StringUtils.isBlank(eachIngreso.getIngBrutoSINIVA())) ? "0.00" : eachIngreso.getIngBrutoSINIVA()) + "\",");
+				stringBuilder.append("\"valorTotalDevol\":\""+ ((StringUtils.isBlank(eachIngreso.getValorTotalDevol())) ? "0.00" : eachIngreso.getValorTotalDevol()) + "\"");
 				stringBuilder.append("},");
 			}
 			stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
@@ -159,10 +162,8 @@ public class ICACalculoImpRequest
 				stringBuilder.append("\"codMunicipio\":\""+ ((StringUtils.isBlank(eachIngreso.getCodMunicipio())) ? "" : eachIngreso.getCodMunicipio()) + "\",");
 				stringBuilder.append("\"direccion\":\""+ ((StringUtils.isBlank(eachIngreso.getDireccion())) ? "" : eachIngreso.getDireccion()) + "\",");
 				stringBuilder.append("\"telefono\":\""+ ((StringUtils.isBlank(eachIngreso.getTelefono())) ? "" : eachIngreso.getTelefono()) + "\",");
-				stringBuilder.append("\"tarifaApl\":\""
-						+ ((StringUtils.isBlank(eachIngreso.getTarifaApl())) ? "0.00" : eachIngreso.getTarifaApl()) + "\",");
-				stringBuilder.append("\"montoRetenido\":\""
-						+ ((StringUtils.isBlank(eachIngreso.getMotoRetenido())) ? "0.00" : eachIngreso.getMotoRetenido()) + "\"");
+				stringBuilder.append("\"tarifaApl\":\""+ ((StringUtils.isBlank(eachIngreso.getTarifaApl())) ? "0.00" : eachIngreso.getTarifaApl()) + "\",");
+				stringBuilder.append("\"montoRetenido\":\""+ ((StringUtils.isBlank(eachIngreso.getMotoRetenido())) ? "0.00" : eachIngreso.getMotoRetenido()) + "\"");
 				stringBuilder.append("},");
 			}
 			stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
@@ -553,6 +554,24 @@ public class ICACalculoImpRequest
 	public void setRelaciones(final List<ICARelaciones> relaciones)
 	{
 		this.relaciones = relaciones;
+	}
+
+
+	/**
+	 * @return the valorImpAviso
+	 */
+	public String getValorImpAviso()
+	{
+		return valorImpAviso;
+	}
+
+
+	/**
+	 * @param valorImpAviso the valorImpAviso to set
+	 */
+	public void setValorImpAviso(String valorImpAviso)
+	{
+		this.valorImpAviso = valorImpAviso;
 	}
 
 

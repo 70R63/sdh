@@ -90,6 +90,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		return ControllerConstants.AnioGravable.anoGravablePublicidad;
 	}
 
+
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getTtipoDeImpuesto()
 	{
@@ -344,6 +345,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_PAGOS_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
 
 		return "redirect:/contribuyentes/consultas/certipagos";
 	}

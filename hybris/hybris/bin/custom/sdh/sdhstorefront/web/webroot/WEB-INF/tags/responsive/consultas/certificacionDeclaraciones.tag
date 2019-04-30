@@ -101,7 +101,7 @@
 					</div>
 				</div>
 
-				<c:if test="${certiFormPost.idimp ne '4' && certiFormPost.idimp ne '6'}">
+				<c:if test="${certiFormPost.idimp == '5'}">
 					<div class="col-md-3" id="idPeriodo" style="display: block;">
 						<div class="form-group">
 							<label class="control-label required"> <spring:theme
@@ -125,6 +125,8 @@
 						</div>
 					</div>
 				</c:if>
+				
+				
 			</div>
 
 

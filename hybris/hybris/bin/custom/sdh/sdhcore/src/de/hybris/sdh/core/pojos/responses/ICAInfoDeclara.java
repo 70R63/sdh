@@ -13,6 +13,7 @@ import java.util.List;
 public class ICAInfoDeclara
 {
 	private Integer cantEstablec;
+	private String entFinanciera;
 	private String totalIngrPeriodo;
 	private String totalingFueraBog;
 	private String totalingBrutos;
@@ -21,6 +22,7 @@ public class ICAInfoDeclara
 	private String totalingNetos;
 	private String impIndusComer;
 	private String impuestoAviso;
+	private String valorImpAviso;
 	private String totalUnidadAdic;
 	private String impuestoCargo;
 	private String valorReteIndus;
@@ -29,7 +31,8 @@ public class ICAInfoDeclara
 	private String sanciones;
 	private String interesMora;
 	private String totalPagar;
-	private Integer proyectoAporte;
+	private String checkAporte;
+	private String proyectoAporte;
 	private String tarifaAporte;
 	private String totalAporteVolun;
 	private List<ICAInfoIngFueraBog> ingFueraBog;
@@ -330,7 +333,7 @@ public class ICAInfoDeclara
 	/**
 	 * @return the proyectoAporte
 	 */
-	public Integer getProyectoAporte()
+	public String getProyectoAporte()
 	{
 		return proyectoAporte;
 	}
@@ -339,7 +342,7 @@ public class ICAInfoDeclara
 	 * @param proyectoAporte
 	 *           the proyectoAporte to set
 	 */
-	public void setProyectoAporte(final Integer proyectoAporte)
+	public void setProyectoAporte(final String proyectoAporte)
 	{
 		this.proyectoAporte = proyectoAporte;
 	}
@@ -461,6 +464,57 @@ public class ICAInfoDeclara
 	public void setValorRetenido(final List<ICAInfoValorRetenido> valorRetenido)
 	{
 		this.valorRetenido = valorRetenido;
+	}
+
+	/**
+	 * @return the entFinanciera
+	 */
+	public String getEntFinanciera()
+	{
+		return entFinanciera;
+	}
+
+	/**
+	 * @param entFinanciera
+	 *           the entFinanciera to set
+	 */
+	public void setEntFinanciera(final String entFinanciera)
+	{
+		this.entFinanciera = entFinanciera;
+	}
+
+	/**
+	 * @return the valorImpAviso
+	 */
+	public String getValorImpAviso()
+	{
+		return valorImpAviso;
+	}
+
+	/**
+	 * @param valorImpAviso
+	 *           the valorImpAviso to set
+	 */
+	public void setValorImpAviso(final String valorImpAviso)
+	{
+		this.valorImpAviso = valorImpAviso;
+	}
+
+	/**
+	 * @return the checkAporte
+	 */
+	public String getCheckAporte()
+	{
+		return checkAporte;
+	}
+
+	/**
+	 * @param checkAporte
+	 *           the checkAporte to set
+	 */
+	public void setCheckAporte(final String checkAporte)
+	{
+		this.checkAporte = checkAporte;
 	}
 
 

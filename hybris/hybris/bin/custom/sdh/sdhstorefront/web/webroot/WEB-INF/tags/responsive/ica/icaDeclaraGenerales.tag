@@ -27,7 +27,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.aniograv" /></label> <input disabled
-								id="anoGravable" name="anoGravable" class="form-control" disabled type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.anoGravable }"
+								id="anoGravable" name="anoGravable" class="form-control" disabled type="text" value="${anoGravable }"
 								maxlength="240"></input>
 						</div>
 					</div>
@@ -63,18 +63,30 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-check">
+							<c:set var="noChecked" value="" />
+							<c:set var="yesChecked" value="" />
+							<c:set var="inputDisabled" value="" />
+							<c:choose>
+								<c:when test="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.entFinanciera eq 'x'}">
+									<c:set var="yesChecked" value="checked" />
+								</c:when>
+								<c:otherwise>
+									<c:set var="noChecked" value="checked" />
+									<c:set var="inputDisabled" value="disabled" />
+								</c:otherwise>
+							</c:choose>
 							<label class="form-check-label"
 								 style="text-transform: none !important; font-weight: normal !important"><spring:theme
 									code="ica.declaracion.generales.entfinan" /> </label> <label
 								class="form-check-label"
 								style="text-transform: capitalize !important; font-weight: normal !important"> <input
-								type="radio" name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important;" onclick="disa()">
+								type="radio" name="entidadFinanciera" id="" class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important;" onclick="disa()" ${yesChecked} value="si">
 								Si
 							</label> <label class="form-check-label"
 								style="text-transform: capitalize !important; font-weight: normal !important"> <input
-								type="radio" name="aporte" id="" class="form-check-input mr-2"
-								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="disa2()">
+								type="radio" name="entidadFinanciera" id="" class="form-check-input mr-2"
+								style="visibility: visible !important; min-height: 4px !important; margin-left: 12px" onclick="disa2()" ${noChecked } value="no">
 								No
 							</label>
 						</div>
@@ -85,8 +97,8 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.cantesta" /></label> <input 
-								id="cantEstablec" name="cantEstablec" class="form-control" disabled type="text" value="${infoDeclara.cantEstablec }"
-								maxlength="240"></input>
+								id="cantEstablec" name="cantEstablec" class="form-control" type="text" value="${infoDeclara.cantEstablec }"
+								maxlength="240" ${inputDisabled }></input>
 						</div>
 					</div>
 				</div>
@@ -98,13 +110,13 @@
 <script>
 
 function disa() {
-	var cant = document.getElementById('idcatestable');
+	var cant = document.getElementById('cantEstablec');
 	cant.disabled = false;
 
 	}
 	
 function disa2() {
-	var cant = document.getElementById('idcatestable');
+	var cant = document.getElementById('cantEstablec');
 	cant.disabled = true;
 
 

@@ -85,7 +85,6 @@
 					</div>
 					<div class="col-md-2">
 						<select id="" class="form-control tipoID" style="height: 48px;">
-							<option value=" ">${infoDeclara.tipoID }</option>
 							<option value="0">Seleccionar</option>
 							<option value="CC">CC Cédula de ciudadania</option>
 							<option value="CE">CE Cédula de extranjería</option>
@@ -153,19 +152,31 @@
 					</div>
 					<div class="col-md-2">
 						<select id="" class="form-control tipoID" style="height: 48px;">
-							<option value=" ">${eachValor.tipoID }</option>
+<%-- 							<option value=" ">${eachValor.tipoID }</option> --%>
 							<option value="0">Seleccionar</option>
-							<option value="CC">CC Cédula de ciudadania</option>
-							<option value="CE">CE Cédula de extranjería</option>
-							<option value="NIT">NIT Número de identificación
-								tributaria</option>
-							<option value="PA">PA Pasaporte</option>
-							<option value="TI">TI Tarjeta de identidad</option>
-							<option value="TIE">TIE Tarjeta de identidad de
-								extranjero</option>
-							<option value="NITE">NITE NIT extranjero</option>
-							<option value="NUIP">NUIP Número único de identificación
-								personal</option>
+<!-- 							<option value="CC">CC Cédula de ciudadania</option> -->
+<!-- 							<option value="CE">CE Cédula de extranjería</option> -->
+<!-- 							<option value="NIT">NIT Número de identificación -->
+<!-- 								tributaria</option> -->
+<!-- 							<option value="PA">PA Pasaporte</option> -->
+<!-- 							<option value="TI">TI Tarjeta de identidad</option> -->
+<!-- 							<option value="TIE">TIE Tarjeta de identidad de -->
+<!-- 								extranjero</option> -->
+<!-- 							<option value="NITE">NITE NIT extranjero</option> -->
+<!-- 							<option value="NUIP">NUIP Número único de identificación -->
+<!-- 								personal</option> -->
+							<c:forEach items="${ idTypes}" var="eachType">
+							
+								<c:set var="selected" value="" />
+								<c:if test="${eachValor.tipoID  eq  eachType}">
+									<c:set var="selected" value="selected" />
+								</c:if>
+							
+								<option value="${eachType }" ${selected }><spring:theme code="register.id.types.${eachType }"/></option>
+									
+							</c:forEach>
+
+
 						</select>
 					</div>
 					<div class="col-md-1">
@@ -187,7 +198,13 @@
 					<div class="col-md-1">
 						<select id="" class="form-control codMunicipio" style="height: 48px;">
 						<c:forEach items="${cities}" var="eachCity">
-							<option value="${ eachCity.code}">${eachCity.name}</option>
+							
+							<c:set var="selected" value="" />
+							<c:if test="${eachCity.code eq  eachValor.codMunicipio}">
+								<c:set var="selected" value="selected" />
+							</c:if>
+						
+							<option value="${ eachCity.code}" ${selected }   >${eachCity.name}</option>
 						</c:forEach>
 						</select>
 					</div>

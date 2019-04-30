@@ -86,7 +86,7 @@
 					<spring:theme code="ica.inicial.representantes.regresar" />
 				</button>
 <%-- 				<button style="margin-top: 3px;" id="" onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?anoGravable=${fn:substring(icaInfObjetoFormResp.icaInfObjetoResponse.fechaIniAct,0,4)}&numObjeto=${numObjeto}' />';" --%>
-				<button style="margin-top: 3px;" id="" onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?anoGravable=2019&numObjeto=${numObjeto}' />';"
+				<button style="margin-top: 3px;" id="" onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?anoGravable=${anoGravable }&numObjeto=${numObjeto}&periodo=${periodo }' />';"
 					class="btn btn-primary btn-lg" type="button">
 					<spring:theme code="ica.inicial.representantes.presendecla" />
 				</button>

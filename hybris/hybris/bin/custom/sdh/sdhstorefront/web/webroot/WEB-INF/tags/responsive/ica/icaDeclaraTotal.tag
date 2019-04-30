@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
@@ -55,11 +56,11 @@
 
 				<div class="col-md-3">
 					<input class="form-control denomina codCIIU" type="text"
-						value="${infoDeclara.codCIIU}" />
+						value="" />
 				</div>
 				<div class="col-md-3">
 					<input class="form-control ingreso ingresos" type="text"
-						value="${infoDeclara.ingresos}" />
+						value="" />
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -95,8 +96,25 @@
 				</div>
 
 				<div class="col-md-3">
-					<input class="form-control denomina codCIIU" type="text"
-						value="${eachIngreso.codCIIU}" />
+<!-- 					<input class="form-control denomina codCIIU" type="text" -->
+<%-- 						value="${eachIngreso.codCIIU}" /> --%>
+					
+					
+					<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
+					
+					<select id="" class="form-control codCIIU" style="height: 48px;">
+						<c:forEach items="${ econActivities}" var="eachActivity">
+							
+							<fmt:formatNumber value="${ eachActivity.code}" pattern="#######################" var="eachCodCIIUNumber"/>
+							
+							<c:set var="selected" value="" />
+							<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
+								<c:set var="selected" value="selected" />
+							</c:if>
+							
+							<option value="${eachActivity.code}"   ${selected } >${eachActivity.code} - ${eachActivity.description }</option>
+						</c:forEach>
+					</select>
 				</div>
 				<div class="col-md-3">
 					<input class="form-control ingreso ingresos" type="text"
@@ -203,7 +221,7 @@
 			<div class="col-md-2">
 				<select id="" class="form-control codCIIU" style="height: 48px;">
 					<c:forEach items="${ econActivities}" var="eachActivity">
-						<option value="${infoDeclara.code}">${infoDeclara.description }</option>
+						<option value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -228,49 +246,71 @@
 	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso">
 		<div class="row totaldos">
 			<div class="col-md-1">
-				<input class="form-control anoGravable" type="text" />
+				<input class="form-control anoGravable" disabled="disabled"  type="text" value="${eachIngreso.anoGravable }"/>
 			</div>
 
 
 			<div class="col-md-1">
-				<select id="" class="form-control tipoID" style="height: 48px;">
+				<select id=""  disabled="disabled" class="form-control tipoID" style="height: 48px;">
 					<option value="0">Seleccionar</option>
-					<option value="CC">CC Cédula de ciudadania</option>
-					<option value="CE">CE Cédula de extranjería</option>
-					<option value="NIT">NIT Número de identificación
-						tributaria</option>
-					<option value="PA">PA Pasaporte</option>
-					<option value="TI">TI Tarjeta de identidad</option>
-					<option value="TIE">TIE Tarjeta de identidad de extranjero</option>
-					<option value="NITE">NITE NIT extranjero</option>
-					<option value="NUIP">NUIP Número único de identificación
-						personal</option>
+<!-- 					<option value="CC">CC Cédula de ciudadania</option> -->
+<!-- 					<option value="CE">CE Cédula de extranjería</option> -->
+<!-- 					<option value="NIT">NIT Número de identificación -->
+<!-- 						tributaria</option> -->
+<!-- 					<option value="PA">PA Pasaporte</option> -->
+<!-- 					<option value="TI">TI Tarjeta de identidad</option> -->
+<!-- 					<option value="TIE">TIE Tarjeta de identidad de extranjero</option> -->
+<!-- 					<option value="NITE">NITE NIT extranjero</option> -->
+<!-- 					<option value="NUIP">NUIP Número único de identificación -->
+<!-- 						personal</option> -->
+							<c:forEach items="${ idTypes}" var="eachType">
+							
+								<c:set var="selected" value="" />
+								<c:if test="${eachIngreso.tipoID  eq  eachType}">
+									<c:set var="selected" value="selected" />
+								</c:if>
+							
+								<option value="${eachType}" ${selected }><spring:theme code="register.id.types.${eachType }"/></option>
+									
+							</c:forEach>
 				</select>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control numID" type="text" />
+				<input class="form-control numID" disabled="disabled"  type="text" value="${eachIngreso.numID }"/>
 			</div>
 			<div class="col-md-2">
-				<input class="form-control razonSocial" type="text" />
+				<input class="form-control razonSocial" disabled="disabled"  type="text" value="${eachIngreso.razonSocial }"/>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control direccion" type="text" />
+				<input class="form-control direccion" disabled="disabled"  type="text" value="${eachIngreso.direccion }"/>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control telefono" type="text" />
+				<input class="form-control telefono" disabled="disabled"  type="text" value="${eachIngreso.telefono }"/>
 			</div>
 			<div class="col-md-2">
-				<select id="" class="form-control codCIIU" style="height: 48px;">
-					<c:forEach items="${ econActivities}" var="eachActivity">
-						<option value="${eachActivity.code}">${eachActivity.description }</option>
-					</c:forEach>
-				</select>
+
+				<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
+					
+					<select id="" disabled="disabled" class="form-control codCIIU" style="height: 48px;">
+						<c:forEach items="${ econActivities}" var="eachActivity">
+							
+							<fmt:formatNumber value="${ eachActivity.code}" pattern="#######################" var="eachCodCIIUNumber"/>
+							
+							<c:set var="selected" value="" />
+							<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
+								<c:set var="selected" value="selected" />
+							</c:if>
+							
+							<option value="${eachActivity.code}"   ${selected } >${eachActivity.code} - ${eachActivity.description }</option>
+						</c:forEach>
+					</select>
+
 			</div>
 			<div class="col-md-1">
-				<input class="form-control ingBrutoSINIVA" type="text" />
+				<input class="form-control ingBrutoSINIVA" type="text" disabled="disabled" value="${eachIngreso.ingBrutoSINIVA }"/>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control valorTotalDevol" type="text" />
+				<input class="form-control valorTotalDevol" disabled="disabled" type="text" value="${eachIngreso.valorTotalDevo }"/>
 			</div>
 			<div class="col-md-1">
 				<div class="form-group ">
