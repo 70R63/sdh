@@ -395,7 +395,14 @@ public class IcaPageController extends AbstractPageController
 			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
 			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
 			infoPreviaPSE.setNumBP(numBP);
-			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
+			try
+			{
+				infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
+			}
+			catch (final Exception e)
+			{
+				infoPreviaPSE.setClavePeriodo(icaInfObjetoResponse.getPeriodo());
+			}
 			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
 			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());

@@ -1271,7 +1271,7 @@ public class SobreTasaGasolinaService
 
 		if (detalleContribuyente.getInfoContrib() == null && detalleContribuyente.getRoles() == null
 				&& detalleContribuyente.getAgentes() == null && detalleContribuyente.getPublicidadExt() == null
-				&& detalleContribuyente.getGasolina() == null)
+				&& detalleContribuyente.getGasolina() == null && detalleContribuyente.getIca() == null)
 		{
 			ocurrioError = true;
 		}
