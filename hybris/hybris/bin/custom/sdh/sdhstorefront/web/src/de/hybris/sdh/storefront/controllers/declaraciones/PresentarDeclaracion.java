@@ -17,11 +17,14 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
@@ -38,6 +41,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -96,6 +100,9 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	@Resource(name = "sdhValidaContribuyenteService")
 	SDHValidaContribuyenteService sdhValidaContribuyenteService;
 
+	@Resource(name = "sdhICAInfObjetoService")
+	SDHICAInfObjetoService sdhICAInfObjetoService;
+
 
 
 	//-----------------------------------------------------------------------------------------------------------------
@@ -109,12 +116,44 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
+		boolean isPeriodoAnual = false;
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
 
 		if (customerData.getIcaTax() != null)
 		{
 			dataForm.setOptionGas("3");
+
+			final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+			ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
+
+			icaInfObjetoRequest.setNumBP(customerData.getNumBP());
+			icaInfObjetoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
+				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+				icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+
+				if (icaInfObjetoResponse.getRegimen() != null)
+				{
+					if (icaInfObjetoResponse.getRegimen().charAt(0) == '2')
+					{
+						isPeriodoAnual = true;
+					}
+				}
+
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+			}
+
 		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
@@ -132,6 +171,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 
 		model.addAttribute("dataForm", dataForm);
+		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
 		model.addAttribute("tpImpuesto",
 				this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(), dataForm.getOptionIca(),
 						dataForm.getOptionDeli()));
@@ -248,8 +288,15 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			else if (dataFormResponse.getImpuesto().equals("3") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
-				final Map<String, String> mapIca = this.getIcaPeriodo();
-				final String periodoSeleccionado = mapIca.get(dataFormResponse.getPeriodo());
+				final String periodoSeleccionado;
+				if (dataFormResponse.getPeriodo() != null)
+				{
+					periodoSeleccionado = dataFormResponse.getPeriodo();
+				}
+				else
+				{
+					periodoSeleccionado = "";
+				}
 
 				redirectAttributes.addFlashAttribute("dataFormResponseICA", dataFormResponse);
 				redirectAttributes.addFlashAttribute("periodoSeleccionado", periodoSeleccionado);
@@ -370,13 +417,13 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	{
 		final Map<String, String> map;
 		map = new HashMap<String, String>();
-		map.put("0", "Seleccionar");
-		map.put("1", "1 - Ene / Feb");
-		map.put("2", "2 - Mar / Abr");
-		map.put("3", "3 - May / Jun");
-		map.put("4", "4 - Jul / Ago");
-		map.put("5", "5 - Sep / Oct");
-		map.put("6", "6 - Nov / Dic");
+		map.put("", "Seleccionar");
+		map.put("01", "1 - Ene / Feb");
+		map.put("02", "2 - Mar / Abr");
+		map.put("03", "3 - May / Jun");
+		map.put("04", "4 - Jul / Ago");
+		map.put("05", "5 - Sep / Oct");
+		map.put("06", "6 - Nov / Dic");
 
 		return map;
 	}
