@@ -13,12 +13,15 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
+import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
+import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHImprimePagoService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
@@ -78,6 +81,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 	@Resource(name = "sdhImprimePagoService")
 	SDHImprimePagoService sdhImprimePagoService;
 
+	@Resource(name = "sdhICAInfObjetoService")
+	SDHICAInfObjetoService sdhICAInfObjetoService;
+
 	@ModelAttribute("anoGravableGasolina")
 	public List<SelectAtomValue> getIdAnoGravableGasolina()
 	{
@@ -115,6 +121,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final CertificacionPagoForm certiForm = new CertificacionPagoForm();
 		final CertificacionPagoForm certiFormPost = new CertificacionPagoForm();
+		boolean isPeriodoAnual = false;
 
 
 		if (error == "sinPdf")
@@ -123,6 +130,39 @@ public class CertificacionPagoPageController extends AbstractPageController
 		}
 
 		certiForm.setNumBP(customerData.getNumBP());
+
+
+		if (customerData.getIcaTax() != null)
+		{
+
+			final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+			ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
+
+			icaInfObjetoRequest.setNumBP(customerData.getNumBP());
+			icaInfObjetoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
+				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+				icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+
+				if (icaInfObjetoResponse.getRegimen() != null)
+				{
+					if (icaInfObjetoResponse.getRegimen().charAt(0) == '2')
+					{
+						isPeriodoAnual = true;
+					}
+				}
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+			}
+		}
 
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
@@ -346,6 +386,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
 			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
 			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+			certiFormPostRedirect.setPeriodo(certiFormPost.getPeriodo());
 			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
 
 			try
@@ -371,7 +412,15 @@ public class CertificacionPagoPageController extends AbstractPageController
 					if (consultaPagoResponse.getDeclaraciones() != null)
 					{
 						final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
-						final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
+						final String aniograv_periodo;
+						if (certiFormPost.getPeriodo() == null)
+						{
+							aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
+						}
+						else
+						{
+							aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
+						}
 
 						for (final ConsultaPagoDeclaraciones element : declaracionesList)
 						{

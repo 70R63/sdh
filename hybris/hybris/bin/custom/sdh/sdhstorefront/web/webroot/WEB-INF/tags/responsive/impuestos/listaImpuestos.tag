@@ -69,7 +69,7 @@
 				</div>
 			</c:if>
 			
-			<c:if test="${dataForm.impuesto == '3'}">
+			<c:if test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">
 				<div class="col-md-4">
 					<div class="form-group ">
 						<label class="control-label required"><spring:theme

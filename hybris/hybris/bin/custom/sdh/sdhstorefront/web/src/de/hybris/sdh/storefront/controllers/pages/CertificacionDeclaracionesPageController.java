@@ -12,9 +12,12 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimeCertDeclaraRequest;
+import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHImprimeCertDeclaraService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
@@ -76,6 +79,9 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 	@Resource(name = "sdhValidaContribuyenteService")
 	private SDHValidaContribuyenteService sdhValidaContribuyenteService;
 
+	@Resource(name = "sdhICAInfObjetoService")
+	SDHICAInfObjetoService sdhICAInfObjetoService;
+
 	@ModelAttribute("anoGravableGasolina")
 	public List<SelectAtomValue> getIdAnoGravableGasolina()
 	{
@@ -105,11 +111,45 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final CertificacionPagoForm certiFormPost = new CertificacionPagoForm();
 		model.addAttribute("certiFormPost", certiFormPost);
+		boolean isPeriodoAnual = false;
 
 		if (error == "sinPdf")
 		{
 			GlobalMessages.addErrorMessage(model, "mirit.certificacion..error.pdfVacio");
 		}
+
+		if (customerData.getIcaTax() != null)
+		{
+
+			final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+			ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
+
+			icaInfObjetoRequest.setNumBP(customerData.getNumBP());
+			icaInfObjetoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
+				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+				icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+
+				if (icaInfObjetoResponse.getRegimen() != null)
+				{
+					if (icaInfObjetoResponse.getRegimen().charAt(0) == '2')
+					{
+						isPeriodoAnual = true;
+					}
+				}
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+			}
+		}
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
@@ -291,6 +331,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
 			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
 			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+			certiFormPostRedirect.setPeriodo(certiFormPost.getPeriodo());
 			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
 
 
@@ -299,7 +340,15 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 			if (certiFormPost.getIdimp() != null && certiFormPost.getAniograv() != null)
 			{
-				final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
+				final String aniograv_periodo;
+				if (certiFormPost.getPeriodo() == null)
+				{
+					aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
+				}
+				else
+				{
+					aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
+				}
 
 				try
 				{

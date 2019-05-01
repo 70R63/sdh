@@ -133,6 +133,23 @@
 				</div>
 				</c:if>
 				
+				<c:if test="${certiFormPost.idimp == '3' and  isPeriodoAnual == false}">
+				<div class="col-md-3" id="idPeriodo" style="display: block;">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="certificacion.inicial.periodo" /></label>	
+					<select  id="periodo" class="form-control "	name="periodo" >
+						<option value="">Seleccionar</option>
+						<option value="B1">1 - Ene / Feb</option>
+						<option value="B2">2 - Mar / Abr</option>
+						<option value="B3">3 - May / Jun</option>
+						<option value="B4">4 - Jul / Ago</option>
+						<option value="B5">5 - Sep / Oct</option>
+						<option value="B6">6 - Nov / Dic</option>
+					</select>
+				</div>
+				</div>	
+				</c:if>
 							
 		</div>
 		
