@@ -5,6 +5,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -43,13 +45,17 @@
 <%-- 			<c:if test="${not empty eachIngreso.codCIIU }"> --%>
 				<div class="row actvifuera">
 					<div class="col-md-3">
+						<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
+						
+						
 						<select id="" class="form-control deno codCIIU" style="height: 48px;">
 							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value=""/>
-							<c:if test="${eachIngreso.codCIIU eq eachActivity.code}">
-								<c:set var="selected" value="selected"/>
-							</c:if>
 							<c:forEach items="${ econActivities}" var="eachActivity">
+								<fmt:formatNumber value="${ eachActivity.code}" pattern="#######################" var="eachCodCIIUNumber"/>
+								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}">
+									<c:set var="selected" value="selected"/>
+								</c:if>
 								<option ${selected } value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
 							</c:forEach>
 						</select>
@@ -58,13 +64,14 @@
 					<div class="col-md-3">
 						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
 							<option value="">SELECCIONAR</option>
-							<c:set var="selected" value=""/>
-							<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
-								<c:set var="selected" value=""/>
-							</c:if>
+							
 							<c:forEach items="${cities}" var="eachCity">
-							<option value="${ eachCity.code}">${eachCity.name}</option>
-						</c:forEach>
+								<c:set var="selected" value=""/>
+								<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
+									<c:set var="selected" value="selected"/>
+								</c:if>
+								<option value="${ eachCity.code}" ${selected }>${eachCity.name}</option>
+							</c:forEach>
 						</select>
 					</div>
 					<div class="col-md-3">
