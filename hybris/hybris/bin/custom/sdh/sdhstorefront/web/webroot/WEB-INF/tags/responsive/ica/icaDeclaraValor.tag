@@ -86,7 +86,7 @@
 					</div>
 					<div class="col-md-2">
 						<select id="" class="form-control tipoID" style="height: 48px;">
-							<option value="0">Seleccionar</option>
+							<option value="">Seleccionar</option>
 							<option value="CC">CC Cédula de ciudadania</option>
 							<option value="CE">CE Cédula de extranjería</option>
 							<option value="NIT">NIT Número de identificación
@@ -118,6 +118,7 @@
 					</div>
 					<div class="col-md-1">
 						<select id="" class="form-control codMunicipio" style="height: 48px;">
+						<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
 							<option value="${eachCity.code}">${eachCity.name}</option>
 						</c:forEach>
@@ -153,19 +154,7 @@
 					</div>
 					<div class="col-md-2">
 						<select id="" class="form-control tipoID" style="height: 48px;">
-<%-- 							<option value=" ">${eachValor.tipoID }</option> --%>
-							<option value="0">Seleccionar</option>
-<!-- 							<option value="CC">CC Cédula de ciudadania</option> -->
-<!-- 							<option value="CE">CE Cédula de extranjería</option> -->
-<!-- 							<option value="NIT">NIT Número de identificación -->
-<!-- 								tributaria</option> -->
-<!-- 							<option value="PA">PA Pasaporte</option> -->
-<!-- 							<option value="TI">TI Tarjeta de identidad</option> -->
-<!-- 							<option value="TIE">TIE Tarjeta de identidad de -->
-<!-- 								extranjero</option> -->
-<!-- 							<option value="NITE">NITE NIT extranjero</option> -->
-<!-- 							<option value="NUIP">NUIP Número único de identificación -->
-<!-- 								personal</option> -->
+							<option value="">Seleccionar</option>
 							<c:forEach items="${ idTypes}" var="eachType">
 							
 								<c:set var="selected" value="" />
@@ -198,6 +187,7 @@
 					</div>
 					<div class="col-md-1">
 						<select id="" class="form-control codMunicipio" style="height: 48px;">
+							<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
 							
 							<c:set var="selected" value="" />
