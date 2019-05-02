@@ -446,7 +446,7 @@
 		<div class="row deducciones">
 			<div class="col-md-3">
 				<select id="deduccionBase" class="form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
-					<option value="0">Seleccionar</option>
+					<option value="">Seleccionar</option>
 					<option value="actnosubPA">1.- Actividad no sujeta por la producción Primaria Agricola</option>
 					<option value="enajActFijo">2.- Enajenación de Activo Fijos</option>
 					<option value="exportBienes">3.- Exportación de bienes</option>

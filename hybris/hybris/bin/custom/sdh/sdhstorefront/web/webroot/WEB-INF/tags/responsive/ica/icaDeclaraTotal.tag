@@ -103,6 +103,7 @@
 					<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
 					
 					<select id="" class="form-control codCIIU" style="height: 48px;">
+						<option value="">SELECCIONAR</option>
 						<c:forEach items="${ econActivities}" var="eachActivity">
 							
 							<fmt:formatNumber value="${ eachActivity.code}" pattern="#######################" var="eachCodCIIUNumber"/>
@@ -193,7 +194,7 @@
 
 			<div class="col-md-1">
 				<select id="" class="form-control tipoID" style="height: 48px;">
-					<option value="0">Seleccionar</option>
+					<option value="">Seleccionar</option>
 					<option value="CC">CC Cédula de ciudadania</option>
 					<option value="CE">CE Cédula de extranjería</option>
 					<option value="NIT">NIT Número de identificación
@@ -220,6 +221,7 @@
 			</div>
 			<div class="col-md-2">
 				<select id="" class="form-control codCIIU" style="height: 48px;">
+					<option value="">SELECCIONAR</option>
 					<c:forEach items="${ econActivities}" var="eachActivity">
 						<option value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
 					</c:forEach>
@@ -252,17 +254,7 @@
 
 			<div class="col-md-1">
 				<select id=""  disabled="disabled" class="form-control tipoID" style="height: 48px;">
-					<option value="0">Seleccionar</option>
-<!-- 					<option value="CC">CC Cédula de ciudadania</option> -->
-<!-- 					<option value="CE">CE Cédula de extranjería</option> -->
-<!-- 					<option value="NIT">NIT Número de identificación -->
-<!-- 						tributaria</option> -->
-<!-- 					<option value="PA">PA Pasaporte</option> -->
-<!-- 					<option value="TI">TI Tarjeta de identidad</option> -->
-<!-- 					<option value="TIE">TIE Tarjeta de identidad de extranjero</option> -->
-<!-- 					<option value="NITE">NITE NIT extranjero</option> -->
-<!-- 					<option value="NUIP">NUIP Número único de identificación -->
-<!-- 						personal</option> -->
+					<option value="">Seleccionar</option>
 							<c:forEach items="${ idTypes}" var="eachType">
 							
 								<c:set var="selected" value="" />
@@ -292,6 +284,7 @@
 				<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
 					
 					<select id="" disabled="disabled" class="form-control codCIIU" style="height: 48px;">
+						<option value="">SELECCIONAR</option>
 						<c:forEach items="${ econActivities}" var="eachActivity">
 							
 							<fmt:formatNumber value="${ eachActivity.code}" pattern="#######################" var="eachCodCIIUNumber"/>

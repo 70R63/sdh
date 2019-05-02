@@ -255,7 +255,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				return URLdeterminada;
 			}
 			else if (dataFormResponse.getImpuesto().equals("3") && !dataFormResponse.getAnoGravable().equals("")
-					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
+					&& !dataFormResponse.getSkipReques().equals("X"))
 			{
 				final String periodoSeleccionado;
 				if (dataFormResponse.getPeriodo() != null)
@@ -348,6 +348,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 					if (icaInfObjetoResponse.getRegimen().charAt(0) == '2')
 					{
 						isPeriodoAnual = true;
+						dataFormResponse.setPeriodo("");
 					}
 				}
 

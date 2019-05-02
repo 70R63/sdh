@@ -44,6 +44,7 @@
 				<div class="row actvifuera">
 					<div class="col-md-3">
 						<select id="" class="form-control deno codCIIU" style="height: 48px;">
+							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value=""/>
 							<c:if test="${eachIngreso.codCIIU eq eachActivity.code}">
 								<c:set var="selected" value="selected"/>
@@ -56,6 +57,7 @@
 		
 					<div class="col-md-3">
 						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
+							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value=""/>
 							<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
 								<c:set var="selected" value=""/>
@@ -84,7 +86,7 @@
 				<div class="row actvifuera">
 					<div class="col-md-3">
 						<select id="" class="form-control deno codCIIU" style="height: 48px;">
-							
+							<option value="">SELECCIONAR</option>
 							<c:forEach items="${ econActivities}" var="eachActivity">
 								<option ${selected } value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
 							</c:forEach>
@@ -94,6 +96,7 @@
 					
 						<div class="col-md-3">
 						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
+							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value=""/>
 							<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
 								<c:set var="selected" value=""/>
