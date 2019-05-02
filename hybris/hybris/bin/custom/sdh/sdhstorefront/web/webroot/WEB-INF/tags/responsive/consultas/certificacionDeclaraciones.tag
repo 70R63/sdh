@@ -90,16 +90,35 @@
 							selectCSSClass="form-control" onchange="onChange()" />
 					</div>
 				</div>
-
-				<div class="col-md-3" id="idAnio" style="display: block;">
-					<div class="form-group">
-						<formElement:formSelectBox idKey="aniograv"
-							labelKey="certideclara.inicial.aniograv" path="aniograv"
-							mandatory="true" skipBlank="false"
-							skipBlankMessageKey="SELECCIONAR" items="${aniGravable}"
-							selectCSSClass="form-control" onchange="onChangeAnioGravable()" />
+				
+				<c:if test="${certiFormPost.idimp != '3'}">
+					<div class="col-md-3" id="idAnio" style="display: block;">
+						<div class="form-group">
+							<formElement:formSelectBox idKey="aniograv"
+								labelKey="certideclara.inicial.aniograv" path="aniograv"
+								mandatory="true" skipBlank="false"
+								skipBlankMessageKey="SELECCIONAR" items="${aniGravable}"
+								selectCSSClass="form-control" onchange="onChangeAnioGravable()" />
+						</div>
 					</div>
-				</div>
+				</c:if>	
+				
+				
+				<c:if test="${certiFormPost.idimp == '3'}">
+					<div class="col-md-3" id="idPeriodo" style="display: block;">
+						<div class="form-group">
+							<label class="control-label required"><spring:theme
+									code="certificacion.inicial.periodo" /></label>	
+						<select  id="periodo" class="form-control "	name="periodo" >
+							<option value="">Seleccionar</option>
+							<option value="2019">2019</option>
+							<option value="2018">2018</option>
+							<option value="2017">2017</option>
+							<option value="2016">2016</option>							
+						</select>
+						</div>
+					</div>	
+				</c:if>
 
 				<c:if test="${certiFormPost.idimp == '5'}">
 					<div class="col-md-3" id="idPeriodo" style="display: block;">

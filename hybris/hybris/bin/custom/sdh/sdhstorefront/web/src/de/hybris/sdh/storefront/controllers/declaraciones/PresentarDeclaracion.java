@@ -116,44 +116,12 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
-		boolean isPeriodoAnual = false;
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
 
 		if (customerData.getIcaTax() != null)
 		{
 			dataForm.setOptionGas("3");
-
-			final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
-			ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
-
-			icaInfObjetoRequest.setNumBP(customerData.getNumBP());
-			icaInfObjetoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
-
-			try
-			{
-				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
-				icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
-
-				if (icaInfObjetoResponse.getRegimen() != null)
-				{
-					if (icaInfObjetoResponse.getRegimen().charAt(0) == '2')
-					{
-						isPeriodoAnual = true;
-					}
-				}
-
-
-			}
-			catch (final Exception e)
-			{
-				LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
-			}
-
 		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
@@ -171,7 +139,6 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 
 		model.addAttribute("dataForm", dataForm);
-		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
 		model.addAttribute("tpImpuesto",
 				this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(), dataForm.getOptionIca(),
 						dataForm.getOptionDeli()));
@@ -204,6 +171,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		System.out.println("imp:" + dataFormResponse.getImpuesto());
 		System.out.println("anio:" + dataFormResponse.getAnoGravable());
 		System.out.println("per:" + dataFormResponse.getPeriodo());
+
+		boolean isPeriodoAnual = false;
 
 		if (action.equals("presentarDeclaracion"))
 		{
@@ -357,6 +326,37 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			dataForm.setOptionIca("3");
 			dataForm.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+
+
+			final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+			ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
+
+			icaInfObjetoRequest.setNumBP(customerData.getNumBP());
+			icaInfObjetoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
+				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+				icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+
+				if (icaInfObjetoResponse.getRegimen() != null)
+				{
+					if (icaInfObjetoResponse.getRegimen().charAt(0) == '2')
+					{
+						isPeriodoAnual = true;
+					}
+				}
+
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+			}
 		}
 
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
@@ -365,6 +365,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setPeriodo(dataFormResponse.getPeriodo());
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("icaPeriodo", this.getIcaPeriodo());
+		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
+		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
 		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
 				dataForm.getOptionDeli(), dataForm.getOptionIca()));
 
@@ -424,6 +426,19 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		map.put("04", "4 - Jul / Ago");
 		map.put("05", "5 - Sep / Oct");
 		map.put("06", "6 - Nov / Dic");
+
+		return map;
+	}
+
+	private Map<String, String> getIcaAnoGravable()
+	{
+		final Map<String, String> map;
+		map = new HashMap<String, String>();
+		map.put("", "Seleccionar");
+		map.put("2019", "2019");
+		map.put("2018", "2018");
+		map.put("2017", "2017");
+		map.put("2016", "2016");
 
 		return map;
 	}
