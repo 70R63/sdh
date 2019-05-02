@@ -25,7 +25,7 @@
 									code="ica.inicial.datecono.actsoc" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.activoTotal}"
-								maxlength="240" style="width: auto !important"></input>
+								maxlength="240" style="width: auto !important; text-align: center"></input>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -34,7 +34,7 @@
 									code="ica.inicial.datecono.ingoper" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.ingresosOp}"
-								maxlength="240" style="width: auto !important"></input>
+								maxlength="240" style="width: auto !important; text-align: center"></input>
 						</div>
 					</div>
 				</div>
@@ -45,7 +45,7 @@
 									code="ica.inicial.datecono.pastot" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.pasivoTotal}"
-								maxlength="240" style="width: auto !important"></input>
+								maxlength="240" style="width: auto !important; text-align: center"></input>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -54,7 +54,7 @@
 									code="ica.inicial.datecono.ingnoper" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.ingresosNoOp}"
-								maxlength="240" style="width: auto !important"></input>
+								maxlength="240" style="width: auto !important; text-align: center"></input>
 						</div>
 					</div>
 				</div>
@@ -65,7 +65,7 @@
 									code="ica.inicial.datecono.patneto" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.patrimonioNeto}"
-								maxlength="240" style="width: auto !important"></input>
+								maxlength="240" style="width: auto !important;text-align: center"></input>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -74,7 +74,7 @@
 									code="ica.inicial.datecono.paspat" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.datosEconomicos.pasivoPatrim}"
-								maxlength="240" style="width: auto !important"></input>
+								maxlength="240" style="width: auto !important; text-align: center"></input>
 						</div>
 					</div>
 				</div>

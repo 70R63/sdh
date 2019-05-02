@@ -19,28 +19,29 @@
 			</div>
 		</div>
 	</div>
+	</div>
 
 
 	<form:form action="">
-		<div class="row">
+		<div class="row text-center">
 			<div class="col-md-12">
 				<div class="table-responsive">
-					<table class="table table-bordered" id="example">
-						<thead style="background-color: rgb(235, 235, 228) !important">
+					<table class="table" id="example">
+						<thead style="background-color: !important">
 							<tr>
 
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
 											code="ica.inicial.representantes.tiprela" /></label></td>
-								<td><label class="control-label text-capitalize !important"
-									style="width: 75px"><spring:theme
+								<td><label class="control-label" 
+									style="width: 75px; text-transform: none !important;"><spring:theme
 											code="ica.inicial.representantes.tipiden" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label text-capitalize !important" style="text-transform: none !important;"><spring:theme
 											code="ica.inicial.representantes.numide" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label text-capitalize !important" style="text-transform: none !important;"><spring:theme
 											code="ica.inicial.representantes.nombre" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label text-capitalize !important" style="text-transform: none !important;"><spring:theme
 											code="ica.inicial.representantes.fecdesde" /></label></td>
-								<td><label class="control-label text-capitalize !important"><spring:theme
+								<td><label class="control-label text-capitalize !important" style="text-transform: none !important;"><spring:theme
 											code="ica.inicial.representantes.fechasta" /></label></td>
 							</tr>
 						</thead>
@@ -50,23 +51,23 @@
 									<tr>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachRelation.tipoRelacion}"
-											type="text" /></td>
+											type="text" style="width: 303px;"/></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachRelation.tipoDoc}"
 											type="text"
 											style="visibility: visibility !important; width: 75px" /></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachRelation.numDoc}"
-											type="text" /></td>
+											type="text" style="text-align: center"/></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachRelation.nombre}"
 											type="text" /></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachRelation.fechaDesde}"
-											type="text" /></td>
+											type="text" style="text-align: center"/></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachRelation.fechaHasta}"
-											type="text" /></td>
+											type="text" style="text-align: center" /></td>
 									</tr>
 								</c:if>
 							</c:forEach>
@@ -80,7 +81,7 @@
 			<div class="col-md-12 centercol-md-8 text-center">
 
 				<button style="margin-top: 3px;" id="regresar"
-					class="btn btn-primary btn-lg"
+					class="btn btn-secondary btn-lg"
 					onclick="window.location.href ='<c:url value='/' />';"
 					type="button">
 					<spring:theme code="ica.inicial.representantes.regresar" />
@@ -93,4 +94,3 @@
 			</div>
 		</div>
 	</form:form>
-</div>

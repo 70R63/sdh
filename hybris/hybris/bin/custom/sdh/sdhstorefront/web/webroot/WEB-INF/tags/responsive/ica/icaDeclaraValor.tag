@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
@@ -209,8 +210,24 @@
 						</select>
 					</div>
 					<div class="col-md-1">
-						<input class="form-control tarifaApl" type="text"
-							value="${eachValor.tarifaApl }" />
+<!-- 						<input class="form-control tarifaApl" type="text" -->
+<%-- 							value="${eachValor.tarifaApl }" /> --%>
+						<select id="" class="form-control tarifaApl" style="height: 48px;">
+							<option value="">Seleccionar</option>
+							<c:forEach items="${ tarifasValorRetenido}" var="eachTarifa">
+							
+								<c:set var="selected" value="" />
+								<c:if test="${ fn:trim(eachValor.tarifaApl)  eq  eachTarifa}">
+									<c:set var="selected" value="selected" />
+								</c:if>
+							
+								<option value="${eachTarifa }" ${selected }>${eachTarifa }</option>
+									
+							</c:forEach>
+
+
+						</select>
+
 					</div>
 					<div class="col-md-1">
 						<input class="form-control montoRetenido" type="text"

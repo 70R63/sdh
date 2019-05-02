@@ -42,6 +42,7 @@
 
 			<input type="hidden" name="skipReques" value="" />
 
+			<c:if test="${dataForm.impuesto != '3'}">
 			<div class="col-md-4">
 				<div class="form-group ">
 					<label class="control-label required"><spring:theme
@@ -52,9 +53,21 @@
 						referenceData="${dataForm.catalogosSo.anioGravable}"
 						class="form-control" onchange="onChangeAnioGravable()" />
 				</div>
-
-
 			</div>
+			</c:if>
+			
+			<c:if test="${dataForm.impuesto == '3'}">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label required"><spring:theme
+							code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
+							
+					<sf:select path="anoGravable" items="${icaAnioGravable}"
+						referenceData="${icaAnioGravable}"
+							class="form-control" />		
+				</div>
+			</div>
+			</c:if>
 
 			<c:if test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
 				<div class="col-md-4">
