@@ -14,7 +14,7 @@
 			<table class="table">
 				<thead>
 					<tr class="avisoheadline p">
-						<td><spring:theme code="ica.inicial.title" /></td>
+						<td style="text-align: center"><spring:theme code="ica.inicial.title" /></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,20 +35,20 @@
 				<div class="table-responsive">
 					<table class="table col-md-2 table-bordered">
 						<thead>
-							<tr>
-								<td><label class="control-label"  style="text-transform: none !important; width: 150px"><spring:theme
+							<tr >
+								<td style="border-color: solid 1px #00ccff !important;border-top: solid 1px #0486e0 !important; border-bottom: solid 1px #0486e0 !important; border-right: solid 1px #0486e0 !important; border-left: solid 1px #0486e0 !important;"><label class="control-label"  style="text-transform: none !important; width: 150px"><spring:theme
 											code="ica.inicial.table.tipdoc" /></label></td>
-								<td><label class="control-label"  style="text-transform: none !important; width: 150px"><spring:theme
+								<td style="border-color: solid 1px #0486e0 !important;border-top: solid 1px #0486e0 !important; border-bottom: solid 1px #0486e0 !important; border-right: solid 1px #0486e0 !important; border-left: solid 1px #0486e0 !important;"><label class="control-label"  style="text-transform: none !important; width: 150px"><spring:theme
 											code="ica.inicial.table.numdoc" /></label></td>
-								<td><label class="control-label"  style="text-transform: none !important; width: 250px"><spring:theme
+								<td style="border-color: solid 1px #0486e0 !important;border-top: solid 1px #0486e0 !important; border-bottom: solid 1px #0486e0 !important; border-right: solid 1px #0486e0 !important; border-left: solid 1px #0486e0 !important;"><label class="control-label"  style="text-transform: none !important; width: 250px"><spring:theme
 											code="ica.inicial.table.nombre" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 150px;" value="${icaInfObjetoFormResp.documentType}"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 150px;" value="${icaInfObjetoFormResp.documentNumber}"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 250px;" value="${icaInfObjetoFormResp.completeName}"/></td>
+						 <tr>
+								<td style="border-color: solid 1px #0486e0 !important;border-top: solid 1px #0486e0 !important; border-bottom: solid 1px #0486e0 !important; border-right: solid 1px #0486e0 !important; border-left: solid 1px #0486e0 !important;"><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 150px;" value="${icaInfObjetoFormResp.documentType}"/></td>
+								<td style="border-color: solid 1px #0486e0 !important;border-top: solid 1px #0486e0 !important; border-bottom: solid 1px #0486e0 !important; border-right: solid 1px #0486e0 !important; border-left: solid 1px #0486e0 !important;"><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 150px;" value="${icaInfObjetoFormResp.documentNumber}"/></td>
+								<td style="border-color: solid 1px #0486e0 !important;border-top: solid 1px #0486e0 !important; border-bottom: solid 1px #0486e0 !important; border-right: solid 1px #0486e0 !important; border-left: solid 1px #0486e0 !important;"><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 250px;" value="${icaInfObjetoFormResp.completeName}"/></td>
 							</tr>
 						</tbody>
 					</table>
