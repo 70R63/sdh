@@ -163,7 +163,7 @@ public class ICACalculoImpRequest
 				stringBuilder.append("\"direccion\":\""+ ((StringUtils.isBlank(eachIngreso.getDireccion())) ? "" : eachIngreso.getDireccion()) + "\",");
 				stringBuilder.append("\"telefono\":\""+ ((StringUtils.isBlank(eachIngreso.getTelefono())) ? "" : eachIngreso.getTelefono()) + "\",");
 				stringBuilder.append("\"tarifaApl\":\""+ ((StringUtils.isBlank(eachIngreso.getTarifaApl())) ? "0.00" : eachIngreso.getTarifaApl()) + "\",");
-				stringBuilder.append("\"montoRetenido\":\""+ ((StringUtils.isBlank(eachIngreso.getMotoRetenido())) ? "0.00" : eachIngreso.getMotoRetenido()) + "\"");
+				stringBuilder.append("\"montoRetenido\":\""+ ((StringUtils.isBlank(eachIngreso.getMontoRetenido())) ? "0.00" : eachIngreso.getMontoRetenido()) + "\"");
 				stringBuilder.append("},");
 			}
 			stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
