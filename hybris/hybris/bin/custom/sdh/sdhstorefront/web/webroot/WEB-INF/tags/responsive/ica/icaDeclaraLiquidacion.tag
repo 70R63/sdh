@@ -19,7 +19,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totinord" /></label> <input id="totalIngrPeriodo"
-						name="totalIngrPeriodo" class="form-control" type="text" value="${infoDeclara.totalIngrPeriodo }" maxlength="240"></input>
+						name="totalIngrPeriodo" class="form-control text-right !important" type="text" value="${infoDeclara.totalIngrPeriodo }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -28,7 +28,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totobfuerabogo" /></label> <input
-						disabled id="totalingFueraBog" name="totalingFueraBog" class="form-control" disabled type="text"
+						disabled id="totalingFueraBog" name="totalingFueraBog" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.totalingFueraBog }" maxlength="240"></input>
 				</div>
 			</div>
@@ -39,7 +39,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totinbrut" /></label> <input disabled
-						id="totalingBrutos" name="totalingBrutos" class="form-control" disabled type="text"
+						id="totalingBrutos" name="totalingBrutos" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.totalingBrutos }" maxlength="240"></input>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.devrebdes" /></label> <input disabled
-						id="devolDescuentos" name="devolDescuentos" class="form-control" disabled type="text"
+						id="devolDescuentos" name="devolDescuentos" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.devolDescuentos }" maxlength="240"></input>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
-						id="totalDeduccion" name="totalDeduccion" class="form-control" disabled type="text"
+						id="totalDeduccion" name="totalDeduccion" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
 				</div>
 			</div>
@@ -69,7 +69,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
-						id="totalingNetos" name="totalingNetos" class="form-control" disabled type="text"
+						id="totalingNetos" name="totalingNetos" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.totalingNetos }" maxlength="240"></input>
 				</div>
 			</div>
@@ -80,7 +80,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.impincom" /></label> <input disabled
-						id="impIndusComer" name="impIndusComer" class="form-control" disabled type="text"
+						id="impIndusComer" name="impIndusComer" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.impIndusComer }" maxlength="240"></input>
 				</div>
 			</div>
@@ -113,7 +113,7 @@
 				<div class="row">
 					<div class="col-md-5">
 						<div class="form-group">
-							<input id="valorImpAviso" name="" class="form-control" disabled
+							<input id="valorImpAviso" name="" class="form-control text-right !important" disabled
 								type="text" value="0" maxlength="240"></input>
 						</div>
 					</div>
@@ -145,7 +145,7 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<input id="valorImpAviso" name="" class="form-control" disabled
+					<input id="valorImpAviso" name="" class="form-control text-right !important" disabled
 						type="text" value="${infoDeclara.valorImpAviso }" maxlength="240"></input>
 				</div>
 			</div>
@@ -177,7 +177,7 @@
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
-					<input id="valorImpAviso" name="" class="form-control" disabled
+					<input id="valorImpAviso" name="" class="form-control text-right !important" disabled
 						type="text" value="0" maxlength="240"></input>
 				</div>
 			</div>
@@ -191,7 +191,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.valtot" /></label> <input disabled
-						id="totalUnidadAdic" name="totalUnidadAdic" class="form-control" disabled type="text"
+						id="totalUnidadAdic" name="totalUnidadAdic" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.totalUnidadAdic }" maxlength="240"></input>
 				</div>
 			</div>
@@ -201,7 +201,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totimpcar" /></label> <input disabled
-						id="impuestoCargo" name="impuestoCargo" class="form-control" disabled type="text"
+						id="impuestoCargo" name="impuestoCargo" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.impuestoCargo }" maxlength="240"></input>
 				</div>
 			</div>
@@ -212,7 +212,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.valret" /></label> <input disabled
-						id="valorReteIndusComer" name="valorReteIndusComer" class="form-control" disabled type="text"
+						id="valorReteIndusComer" name="valorReteIndusComer" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.valorReteIndus }" maxlength="240"></input>
 				</div>
 			</div>
@@ -222,7 +222,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totsaldo" /></label> <input disabled
-						id="saldoCargo" name="saldoCargo" class="form-control" disabled type="text"
+						id="saldoCargo" name="saldoCargo" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.saldoCargo }" maxlength="240"></input>
 				</div>
 			</div>
@@ -233,7 +233,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.valpag" /></label> <input id="valorPagar"
-						name="valorPagar" class="form-control" type="text"
+						name="valorPagar" class="form-control text-right !important" type="text"
 						value="${infoDeclara.valorPagar }" maxlength="240"></input>
 				</div>
 			</div>
@@ -244,7 +244,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.sanciones" /></label> <input disabled
-						id="sanciones" name="sanciones" class="form-control" disabled type="text"
+						id="sanciones" name="sanciones" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.sanciones }" maxlength="240"></input>
 				</div>
 			</div>
@@ -255,7 +255,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.intmora" /></label> <input disabled
-						id="interesMora" name="interesMora" class="form-control" disabled type="text"
+						id="interesMora" name="interesMora" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.interesMora }" maxlength="240"></input>
 				</div>
 			</div>
@@ -265,7 +265,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totpag" /></label> <input disabled
-						id="totalPagar" name="totalPagar" class="form-control" disabled type="text"
+						id="totalPagar" name="totalPagar" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.totalPagar }" maxlength="240"></input>
 				</div>
 			</div>
@@ -438,7 +438,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.totpagvol" /></label> <input disabled
-						id="totalAporteVolun" name="totalAporteVolun" class="form-control" disabled type="text"
+						id="totalAporteVolun" name="totalAporteVolun" class="form-control text-right !important" disabled type="text"
 						value="${infoDeclara.totalAporteVolun }" maxlength="240"></input>
 				</div>
 			</div>
