@@ -26,7 +26,7 @@
 									code="ica.inicial.detalle.feciniact" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.fechaIniAct}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -35,7 +35,7 @@
 									code="ica.inicial.detalle.fecceseact" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.fechaCeseAct}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -44,7 +44,7 @@
 									code="ica.inicial.detalle.mat" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.matricula}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 									code="ica.inicial.detalle.codliq" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.codLiquida}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 
@@ -66,7 +66,7 @@
 									code="ica.inicial.detalle.cantesta" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.cantEstablec}"
-								maxlength="240"style="width: 260px !important"></input>
+								maxlength="240"style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -75,7 +75,7 @@
 									code="ica.inicial.detalle.orgjuri" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.orgJuridica}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 				</div>
@@ -86,7 +86,7 @@
 									code="ica.inicial.detalle.causal" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.causalCeseAct}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -95,7 +95,7 @@
 									code="ica.inicial.detalle.edomat" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.estadoMatricula}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 
@@ -106,7 +106,7 @@
 									code="ica.inicial.detalle.regimen" /></label> <input id="" name=""
 								class="form-control" disabled type="text" 
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.regimen}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 				</div>
@@ -117,7 +117,7 @@
 									code="ica.inicial.detalle.clasiden" /></label> <input id="" name=""
 								class="form-control" disabled type="text"
 								value="${icaInfObjetoFormResp.icaInfObjetoResponse.claseESAL}"
-								maxlength="240" style="width: 260px !important"></input>
+								maxlength="240" style="width: 260px !important; text-align: center !important"></input>
 						</div>
 					</div>
 				</div>
