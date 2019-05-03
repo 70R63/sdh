@@ -456,7 +456,7 @@ ACC.ica = {
 	            			$("#totalDeduccion").val(data.declaracion.totalDeduccion);
 	            			$("#totalingNetos").val(data.declaracion.totalingNetos);
 	            			$("#impIndusComer").val(data.declaracion.impIndusComer);
-	            			$("#valorImpAviso").val(data.declaracion.valorImpAviso);
+	            			$("#valorImpAviso").val(data.valorImpAviso);
 	            			$("#totalUnidadAdic").val(data.declaracion.totalUnidadAdic);
 	            			$("#impuestoCargo").val(data.declaracion.impuestoCargo);
 	            			$("#valorReteIndusComer").val(data.declaracion.valorReteIndusComer);
@@ -466,6 +466,27 @@ ACC.ica = {
 	            			$("#interesMora").val(data.declaracion.interesMora);
 	            			$("#totalPagar").val(data.declaracion.totalPagar);
 	            			$("#totalAporteVolun").val(data.declaracion.totalAporteVolun);
+	            			
+	            			
+	            			
+	            			if(data.valRetenido)
+            				{
+	            				$.each(data.valRetenido, function( dataIndex, dataValue ) {
+	            					
+	            					$.each($(".valor"), function( index, value ) {
+		            					
+		            					if($(value).find(".anoGravable").val() == dataValue.anoGravable && $(value).find(".tipoID").val() == dataValue.tipoID && $(value).find(".tipoID").val() == dataValue.tipoID)
+		            					{
+		            						$(value).find(".montoRetenido").val(dataValue.montoRetenido);
+		            					}
+		            					
+		            					
+		    	            		});
+	            					
+	            					
+	    	            		});
+            				}
+	            			
 	            			
 	            			$("#numForm").val(data.numForm)
 	            			
