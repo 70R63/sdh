@@ -17,6 +17,7 @@ public class ICACalculoImpResponse
 	private ICADeclaracion declaracion;
 	private List<ICAValRetenido> valRetenido;
 	private List<ErrorEnWS> errores;
+	private String valorImpAviso;
 
 	/**
 	 * @return the numForm
@@ -67,6 +68,40 @@ public class ICACalculoImpResponse
 	public void setErrores(final List<ErrorEnWS> errores)
 	{
 		this.errores = errores;
+	}
+
+	/**
+	 * @return the valRetenido
+	 */
+	public List<ICAValRetenido> getValRetenido()
+	{
+		return valRetenido;
+	}
+
+	/**
+	 * @param valRetenido
+	 *           the valRetenido to set
+	 */
+	public void setValRetenido(final List<ICAValRetenido> valRetenido)
+	{
+		this.valRetenido = valRetenido;
+	}
+
+	/**
+	 * @return the valorImpAviso
+	 */
+	public String getValorImpAviso()
+	{
+		return valorImpAviso;
+	}
+
+	/**
+	 * @param valorImpAviso
+	 *           the valorImpAviso to set
+	 */
+	public void setValorImpAviso(final String valorImpAviso)
+	{
+		this.valorImpAviso = valorImpAviso;
 	}
 
 

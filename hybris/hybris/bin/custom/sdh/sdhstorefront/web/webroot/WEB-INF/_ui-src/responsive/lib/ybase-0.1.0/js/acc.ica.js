@@ -456,7 +456,7 @@ ACC.ica = {
 	            			$("#totalDeduccion").val(data.declaracion.totalDeduccion);
 	            			$("#totalingNetos").val(data.declaracion.totalingNetos);
 	            			$("#impIndusComer").val(data.declaracion.impIndusComer);
-	            			$("#valorImpAviso").val(data.declaracion.valorImpAviso);
+	            			$("#valorImpAviso").val(data.valorImpAviso);
 	            			$("#totalUnidadAdic").val(data.declaracion.totalUnidadAdic);
 	            			$("#impuestoCargo").val(data.declaracion.impuestoCargo);
 	            			$("#valorReteIndusComer").val(data.declaracion.valorReteIndusComer);
