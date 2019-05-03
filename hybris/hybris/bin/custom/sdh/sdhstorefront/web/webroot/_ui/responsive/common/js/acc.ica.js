@@ -477,7 +477,7 @@ ACC.ica = {
 		            					
 		            					if($(value).find(".anoGravable").val() == dataValue.anoGravable && $(value).find(".tipoID").val() == dataValue.tipoID && $(value).find(".tipoID").val() == dataValue.tipoID)
 		            					{
-		            						$(value).find(".montoRetenido").val(dataValue.motoRetenido);
+		            						$(value).find(".montoRetenido").val(dataValue.montoRetenido);
 		            					}
 		            					
 		            					

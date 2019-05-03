@@ -19,6 +19,24 @@ public class ICAValRetenido
 	private String desMunicipio;
 	private String tarifaApl;
 	private String motoRetenido;
+	private String montoRetenido;
+
+	/**
+	 * @return the montoRetenido
+	 */
+	public String getMontoRetenido()
+	{
+		return montoRetenido;
+	}
+
+	/**
+	 * @param montoRetenido
+	 *           the montoRetenido to set
+	 */
+	public void setMontoRetenido(final String montoRetenido)
+	{
+		this.montoRetenido = montoRetenido;
+	}
 
 	/**
 	 * @return the anoGravable

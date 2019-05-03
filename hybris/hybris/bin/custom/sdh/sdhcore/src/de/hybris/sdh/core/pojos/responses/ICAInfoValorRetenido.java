@@ -12,7 +12,7 @@ public class ICAInfoValorRetenido
 
 	private String anoGravable;
 	private String tipoID;
-	private Long numID;
+	private String numID;
 	private String razonSocial;
 	private String codMunicipio;
 	private String direccion;
@@ -54,10 +54,12 @@ public class ICAInfoValorRetenido
 		this.tipoID = tipoID;
 	}
 
+
+
 	/**
 	 * @return the numID
 	 */
-	public Long getNumID()
+	public String getNumID()
 	{
 		return numID;
 	}
@@ -66,7 +68,7 @@ public class ICAInfoValorRetenido
 	 * @param numID
 	 *           the numID to set
 	 */
-	public void setNumID(final Long numID)
+	public void setNumID(final String numID)
 	{
 		this.numID = numID;
 	}
