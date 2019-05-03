@@ -467,6 +467,27 @@ ACC.ica = {
 	            			$("#totalPagar").val(data.declaracion.totalPagar);
 	            			$("#totalAporteVolun").val(data.declaracion.totalAporteVolun);
 	            			
+	            			
+	            			
+	            			if(data.valRetenido)
+            				{
+	            				$.each(data.valRetenido, function( dataIndex, dataValue ) {
+	            					
+	            					$.each($(".valor"), function( index, value ) {
+		            					
+		            					if($(value).find(".anoGravable").val() == dataValue.anoGravable && $(value).find(".tipoID").val() == dataValue.tipoID && $(value).find(".tipoID").val() == dataValue.tipoID)
+		            					{
+		            						$(value).find(".montoRetenido").val(dataValue.motoRetenido);
+		            					}
+		            					
+		            					
+		    	            		});
+	            					
+	            					
+	    	            		});
+            				}
+	            			
+	            			
 	            			$("#numForm").val(data.numForm)
 	            			
 	            			$("#icaPresentarDeclaracionButton").prop("disabled",false);
