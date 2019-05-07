@@ -15,3 +15,10 @@
 	<icadecla:icaDeclaraFirma/>
 
 	<div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
+	
+	
+<script>	
+	function goBack() {
+		window.history.back();
+	}
+</script>	

@@ -81,7 +81,7 @@
 
 				<button style="margin-top: 3px;" id="regresar"
 					class="btn btn-secondary btn-lg"
-					onclick="window.location.href ='<c:url value='/' />';"
+					onclick="goBack()"
 					type="button">
 					<spring:theme code="ica.inicial.representantes.regresar" />
 				</button>
