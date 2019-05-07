@@ -17,6 +17,7 @@
 							code="ica.inicial.datecono.title" /></span>
 				</h2>
 			</div>
+			<br>
 			<form:form action="">
 				<div class="row">
 					<div class="col-md-3">

@@ -17,8 +17,10 @@
 							code="ica.inicial.detalle.title" /></span>
 				</h2>
 			</div>
+			
 
 			<form:form action="">
+			<div class="row"></div>
 				<div class="row mt-3">
 					<div class="col-md-4">
 						<div class="form-group">

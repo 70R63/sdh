@@ -8,13 +8,13 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-10 col-md-offset-1 d-flex align-items-center">
 			<table class="table">
 				<thead>
-					<tr class="avisoheadline p text-center">
-						<td><spring:theme code="ica.declaracion.title" /></td>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme code="ica.declaracion.title" /></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,25 +30,25 @@
 	</div>
 
 	<div class="row mt-3">
-		<div class="col-md-12">
+		<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
 			<form:form action="">
 				<div class="table-responsive">
 					<table class="table col-md-2 table-bordered">
 						<thead>
 							<tr>
-								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
+								<td><label class="control-label labeltabletd tableident"><spring:theme
 											code="ica.declaracion.table.tipdoc" /></label></td>
-								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
+								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
 											code="ica.declaracion.table.numdoc" /></label></td>
-								<td><label class="control-label" style="text-transform: none !important;"><spring:theme
+								<td><label class="control-label labeltabletd tablenombre"><spring:theme
 											code="ica.declaracion.table.nombre" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.documentType}"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.documentNumber}"/></td>
-								<td><input class="inputtextnew" disabled="disabled" type="text" size="30" style="width: 406px;" value="${ icaInfObjetoFormResp.completeName}"/></td>
+								<td><input class="inputtextnew tableident" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.documentType}"/></td>
+								<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.documentNumber}"/></td>
+								<td><input class="inputtextnew tablenombre" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.completeName}"/></td>
 							</tr>
 						</tbody>
 					</table>
@@ -56,4 +56,4 @@
 			</form:form>
 		</div>
 	</div>
-</div>
+

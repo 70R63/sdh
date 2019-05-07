@@ -196,7 +196,7 @@
 
 				<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 						<button style="margin-top: 3px;" id="regresar"
-							class="btn btn-primary btn-lg"
+							class="btn btn-secondary btn-lg"
 							onclick="window.location.href ='<c:url value='/' />';"
 							type="button">
 							<spring:theme code="ica.declaracion.firma.regresar" />

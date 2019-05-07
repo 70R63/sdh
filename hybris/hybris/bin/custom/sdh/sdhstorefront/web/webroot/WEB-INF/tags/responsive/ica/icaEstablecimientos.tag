@@ -19,85 +19,87 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<br>
-<form:form action="">
 
-	<div class="row">
-		<div class="col-md-12">
-			<div class="table-responsive">
-				<table class="table table-bordered" id="example">
-					<thead style="background-color:  #56ace2 !important">
-						<tr>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;" style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.nomesta" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;" style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.direc" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;" style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.loca" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;" style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.matesta" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.fecdesde" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.edomat" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.fechasta" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="width: 94px !important; color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.valactivo" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="width: 84px !important; color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.cantperso" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="width: 84px !important; color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.codpost" /></label></td>
-							<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><label class="control-label text-capitalize !important" style="width: 84px !important; color: #ffffff !important"><spring:theme
-										code="ica.inicial.estableci.ciiu" /></label></td>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach varStatus="loop" items="${icaInfObjetoFormResp.icaInfObjetoResponse.establecimientos}"
-									var="eachEstablecimientos">
+	<br>
+	<form:form action="">
+
+		<div class="row">
+			<div class="col-md-12 tableamplia">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="example">
+						<thead>
 							<tr>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.nombre}"
-									type="text" /></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.direccion}"
-									type="text" /></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.localidad}"
-									type="text" style="width: 104px !important;" /></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.matricula}"
-									type="text" style="width: 104px !important;"/></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.fechaDesde}"
-									type="text" style="width: 90px !important;" /></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.estadoMatricula}"
-									type="text" style="width: 104px !important;"/></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.fechaHasta}"
-									type="text" style="width: 90px !important;"/></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.valorActivo}"
-									type="text"  style="width: 94px !important;"/></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.cantPersonal}"
-									type="text" style="width: 84px !important;"/></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.codPostal}"
-									type="text" style="width: 84px !important;"/></td>
-								<td style="border-top: solid 1px #000000 !important; border-bottom: solid 1px #000000 !important; border-right: solid 1px #000000 !important; border-left: solid 1px #000000 !important;"><input class="inputtextnew" disabled="disabled"
-									value="${eachEstablecimientos.ciiu}"
-									type="text" style="width: 80px !important;" /></td>
+								<td><label class="control-label labeltabletd"><spring:theme
+											code="ica.inicial.estableci.nomesta" /></label></td>
+								<td><label class="control-label labeltabletd"><spring:theme
+											code="ica.inicial.estableci.direc" /></label></td>
+								<td><label class="control-label labeltabletd"><spring:theme
+											code="ica.inicial.estableci.loca" /></label></td>
+								<td><label class="control-label labeltabletd tablecodpost"><spring:theme
+											code="ica.inicial.estableci.matesta" /></label></td>
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
+											code="ica.inicial.estableci.fecdesde" /></label></td>
+								<td><label class="control-label labeltabletd tabledomatri"><spring:theme
+											code="ica.inicial.estableci.edomat" /></label></td>
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
+											code="ica.inicial.estableci.fechasta" /></label></td>
+								<td><label
+									class="control-label labeltabletd tablecantperoc"><spring:theme
+											code="ica.inicial.estableci.valactivo" /></label></td>
+								<td><label
+									class="control-label labeltabletd tablecantperoc"><spring:theme
+											code="ica.inicial.estableci.cantperso" /></label></td>
+								<td><label class="control-label labeltabletd tablecodpost"><spring:theme
+											code="ica.inicial.estableci.codpost" /></label></td>
+								<td><label class="control-label labeltabletd inputcodciuu"><spring:theme
+											code="ica.inicial.estableci.ciiu" /></label></td>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach varStatus="loop"
+								items="${icaInfObjetoFormResp.icaInfObjetoResponse.establecimientos}"
+								var="eachEstablecimientos">
+								<tr>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachEstablecimientos.nombre}" type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachEstablecimientos.direccion}" type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="${eachEstablecimientos.localidad}" type="text"
+										style="width: 104px !important;" /></td>
+									<td><input class="inputtextnew tablecodpost"
+										disabled="disabled" value="${eachEstablecimientos.matricula}"
+										type="text" style="width: 104px !important;" /></td>
+									<td><input class="inputtextnew tablefechas"
+										disabled="disabled" value="${eachEstablecimientos.fechaDesde}"
+										type="text" /></td>
+									<td><input class="inputtextnew tabledomatri"
+										disabled="disabled"
+										value="${eachEstablecimientos.estadoMatricula}" type="text" /></td>
+									<td><input class="inputtextnew tablefechas"
+										disabled="disabled" value="${eachEstablecimientos.fechaHasta}"
+										type="text" /></td>
+									<td><input class="inputtextnew tablecantperoc"
+										disabled="disabled"
+										value="${eachEstablecimientos.valorActivo}" type="text" /></td>
+									<td><input class="inputtextnew tablecantperoc"
+										disabled="disabled"
+										value="${eachEstablecimientos.cantPersonal}" type="text" /></td>
+									<td><input class="inputtextnew tablecodpost"
+										disabled="disabled" value="${eachEstablecimientos.codPostal}"
+										type="text" /></td>
+									<td><input class="inputtextnew inputcodciuu"
+										disabled="disabled" value="${eachEstablecimientos.ciiu}"
+										type="text" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
 
-</form:form>
+	</form:form>
+</div>
 
