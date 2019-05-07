@@ -109,7 +109,7 @@
 						<div class="form-group">
 							<label class="control-label required"><spring:theme
 									code="certificacion.inicial.periodo" /></label>	
-						<select  id="periodo" class="form-control "	name="periodo" >
+						<select  id="aniograv" class="form-control "	name="aniograv" >
 							<option value="">Seleccionar</option>
 							<option value="2019">2019</option>
 							<option value="2018">2018</option>
