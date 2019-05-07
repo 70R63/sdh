@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1 d-flex align-items-center">
+		<div class="col-md-12">
 			<table class="table">
 				<thead>
 					<tr class="avisoheadline p">
