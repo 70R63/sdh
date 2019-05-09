@@ -23,7 +23,7 @@
 
 			<form:form action="">
 				<div class="row mt-3">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.aniograv" /></label> <input disabled
@@ -31,7 +31,7 @@
 								maxlength="240"></input>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.regitribut" /></label> <input disabled
@@ -41,7 +41,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.periodo" /></label> <input disabled
@@ -51,7 +51,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.opcuso" /></label> <input disabled
@@ -61,7 +61,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="form-check">
 							<c:set var="noChecked" value="" />
 							<c:set var="yesChecked" value="" />
@@ -93,7 +93,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="ica.declaracion.generales.cantesta" /></label> <input 
@@ -102,6 +102,15 @@
 						</div>
 					</div>
 				</div>
+						<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totinord" /></label> <input id="totalIngrPeriodo"
+						name="totalIngrPeriodo" class="form-control text-right !important" type="text" value="${infoDeclara.totalIngrPeriodo }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
 			</form:form>
 		</div>
 	</div>
