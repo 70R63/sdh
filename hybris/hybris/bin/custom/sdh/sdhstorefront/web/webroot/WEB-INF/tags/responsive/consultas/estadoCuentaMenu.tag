@@ -261,7 +261,7 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<div class="form-group ">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
+						<button type="submit" class="btn btn-primary btn-lg" id="btnCancelar"
 							name="action" value="cancelar" style=" margin-top: 3px">
 							<spring:theme code="edocuenta.inicial.cancelar" />
 						</button>
@@ -279,6 +279,10 @@
 </sf:form>
 
 <script type="text/javascript">
+	document.getElementById("btnCancelar").addEventListener("click", function(){
+		location = self.location;
+	});
+	
 	function ShowSelected(selectObject) {
 		var value = selectObject.value;
 

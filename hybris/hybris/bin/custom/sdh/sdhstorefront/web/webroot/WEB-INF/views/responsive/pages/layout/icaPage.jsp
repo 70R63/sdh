@@ -17,6 +17,10 @@
 <div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
 
 <script type="text/javascript">
+	function goBack() {
+		window.history.back();
+	}
+
 	function datatable(e) {
 		if ($.fn.dataTable.isDataTable('#example')) {
 			table = $('#example').DataTable();

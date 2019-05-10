@@ -121,7 +121,7 @@
 	<%-- 	</sf:button> --%>
 
 	<button type="button" class="btn btn-primary btn-lg"
-		onclick="window.location.href ='<c:url value='/' />';">
+		onclick="goBack()">
 		<spring:theme
 			code="impuestos.sobreTasaGasolina.representantes.regresar" />
 	</button>

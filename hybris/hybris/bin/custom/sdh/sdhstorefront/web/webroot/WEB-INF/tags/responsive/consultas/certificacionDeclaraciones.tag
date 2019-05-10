@@ -331,7 +331,7 @@
 				<div class="row" id="formButtons">
 					<div class="col-md-12 text-center">
 						<div class="form-group ">
-							<button type="button" class="btn btn-primary btn-lg" id="action"
+							<button type="button" class="btn btn-primary btn-lg" id="btnCancelar"
 								name="action" value="cancelar" style="margin-top: 3px">
 								<spring:theme code="certideclara.inicial.cancelar" />
 							</button>
@@ -448,6 +448,10 @@
 
 
 <script type="text/javascript">
+
+	document.getElementById("btnCancelar").addEventListener("click", function(){
+		location = self.location;
+	});
 	
 	function Selected(selectObject) {
 		var value = selectObject.value;

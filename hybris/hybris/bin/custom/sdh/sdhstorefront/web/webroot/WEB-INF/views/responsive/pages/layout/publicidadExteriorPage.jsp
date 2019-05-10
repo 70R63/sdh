@@ -45,4 +45,10 @@
 	
 </template:page>
 
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
+
 
