@@ -48,78 +48,80 @@
 							code="reteica.consulta.estado.descripcion1" /></label>
 				</div>
 			</div>
-			
+
 			<div class="col-md-12">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="reteica.consulta.estado.descipcion2" /></label>
 				</div>
 			</div>
-
-			<div class="col-md-4 text-center">
-				<div class="form-group">
-					<button class="btn btn-primary text-center" id="" name=""
-						value="descargar">
-						<spring:theme code="reteica.inicial.carga.descargar" />
-					</button>
-				</div>
-			</div>
-
-			<div class="col-md-12">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="reteica.inicial.carga.agrega" /></label>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="reteica.inicial.carga.guarda" /></label>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="reteica.inicial.carga.adjunta" /></label>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="reteica.inicial.carga.seleccionar" /></label><input type="file"
-						class="form-control" id="" accept=".csv">
-				</div>
-			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-10 text-center">
-				<div class="col-md-2">
-					<div class="form-group">
-						<button class="btn btn-secondary text-left" id="" name=""
-							value="regresar">
-							<spring:theme code="reteica.inicial.carga.regresar" />
-						</button>
-					</div>
+			<div class="col-md-12 col-md-offset-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="reteica.consulta.estado.anio" /></label> <select id="" name=""
+						class="form-control" style="width: 200px !important">
+						<option>Seleccionar</option>
+					</select>
 				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<button class="btn btn-primary text-left" id="" name=""
-							value="cargar">
-							<spring:theme code="reteica.inicial.carga.cargar" />
-						</button>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="form-group">
-						<button class="btn btn-primary text-left" id="" name=""
-							value="consulta">
-							<spring:theme code="reteica.inicial.carga.consultar" />
-						</button>
-					</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-md-12 tableamplia">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="example">
+						<thead>
+							<tr>
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
+											code="reteica.consulta.estado.fechcarga" /></label></td>
+								<td><label class="control-label labeltabletd tablenombre"><spring:theme
+											code="reteica.consulta.estado.nomdoc" /></label></td>
+								<td><label class="control-label labeltabletd"><spring:theme
+											code="reteica.consulta.estado.perrepor" /></label></td>
+								<td><label class="control-label labeltabletd tabledomatri"><spring:theme
+											code="reteica.consulta.estado.estado" /></label></td>
+								<td><label class="control-label labeltabletd "><spring:theme
+											code="reteica.consulta.estado.detalle" /></label></td>
+								<td><label class="control-label labeltabletd "><spring:theme
+											code="reteica.consulta.estado.deseacargar" /></label></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input class="inputtextnew tablefechas"
+									disabled="disabled" value="" type="text" /></td>
+								<td><input class="inputtextnew tablenombre"
+									disabled="disabled" value="" type="text" /></td>
+								<td><input class="inputtextnew " disabled="disabled"
+									value="" type="text" /></td>
+								<td><input class="inputtextnew tabledomatri"
+									disabled="disabled" value="" type="text" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="" type="text" /></td>
+								<td><input class="inputtextnew" disabled="disabled"
+									value="" type="text" /></td>
+							</tr>
+
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div class="form-group">
+					<button class="btn btn-secondary text-center" id="" name=""
+						value="regresar">
+						<spring:theme code="reteica.consulta.estado.regresar" />
+					</button>
+				</div>
+			</div>
+		</div>
+
 	</form:form>
 </div>
+
 
