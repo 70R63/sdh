@@ -190,19 +190,20 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoDelineacionRequest.setNumRadicado(infoDelineacion.getInput().getSelectedRadicado());
 		infoDelineacionRequest.setAnoGravable(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		infoDelineacionRequest.setTipoLicencia(infoDelineacion.getInput().getSelectedTipoLicencia());
-		//		infoDelineacionRequest.setRetencion(retencion);//pendiente de definir que iria
 		//		infoDelineacionRequest.setOpcionUso(opcionUso);//pendiente de definir que iria
 
 		if (action.equals("retencion"))
 		{
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
 			infoDelineacion.getInput().setTipoFlujo("R");
+			infoDelineacionRequest.setRetencion("X"); //Se indico que para retencion va una X
 		}
 		if (action.equals("declaracion"))
 		{
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
 			infoDelineacion.getInput().setTipoFlujo("D");
 			infoDelineacionRequest.setNumRadicado("");
+			infoDelineacionRequest.setRetencion(""); //Se indico que para retencion va una X
 		}
 
 
