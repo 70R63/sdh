@@ -61,7 +61,8 @@
 
 		<button style="margin-top: 3px;" id="regresar"
 			class="btn btn-primary btn-lg"
-			onclick="window.location.href ='<c:url value='/' />';" type="button">
+			onclick="goBack()" 
+			type="button">
 			<spring:theme code="publicidad.exterior.regresar" />
 		</button>
 		<button style="margin-top: 3px;" id="presentarDeclaracionButton"

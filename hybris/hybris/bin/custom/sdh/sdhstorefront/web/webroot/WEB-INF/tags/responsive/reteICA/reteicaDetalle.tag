@@ -8,58 +8,8 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="row">
-	<div class="col-md-12">
-		<table class="table">
-			<thead>
-				<tr class="avisoheadline p">
-					<td style="text-align: center"><spring:theme
-							code="reteica.declaracion.table.titulo" /></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="avisobody">
-
-					<td><spring:theme code="reteica.declaracion.table.descripcion" /><a
-						href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-							información</a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
-<form:form action="">
-	<div class="row mt-3">
-		<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
-
-			<div class="table-responsive text-center">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<td><label class="control-label labeltabletd tableident"><spring:theme
-										code="reteica.declaracion.table.tipodoc" /></label></td>
-							<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-										code="reteica.declaracion.table.numdoc" /></label></td>
-							<td><label class="control-label labeltabletd tablenombre"><spring:theme
-										code="reteica.declaracion.table.nombre" /></label></td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><input class="inputtextnew tableident"
-								disabled="disabled" type="text" size="30" value="" /></td>
-							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="" /></td>
-							<td><input class="inputtextnew tablenombre"
-								disabled="disabled" type="text" size="30" value="" /></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-
+<div class="container">
+	<form:form action="">
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -163,6 +113,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</form:form>
+	</form:form>
+</div>
 

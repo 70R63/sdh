@@ -9735,6 +9735,9 @@ ul.nav__links::after {
 .search-results-highlight {
   font-weight: bold;
 }
+.navigation--bottom .nav__links--primary .sub__navigation {
+  width: auto;
+}
 header {
   background: #f5f5f5;
   margin-bottom: 20px;
@@ -24310,61 +24313,88 @@ input[type="search"] {
 .col-md-offset-2 {
   margin-left: 6.66666667%;
 }
-
 /*
-## ajuste de estilos cuerpo general página dev-maria
+## ajuste de estilos cuerpo general pagina dev-maria
 ********************************************************************/
-
 thead {
-	background-color: rgb(235, 235, 228) !important;
-	text-color: #ffffff !important;
+  background-color: #ebebe4 !important;
+  text-color: #ffffff !important;
 }
-
-td, th {
-	border-top: solid 1px #000000 !important;
-	border-bottom: solid 1px #000000 !important;
-	border-right: solid 1px #000000 !important;
-	border-left: solid 1px #000000 !important;
-	vertical-align: inherit !important;
+td,
+th {
+  border-top: solid 1px #000000 !important;
+  border-bottom: solid 1px #000000 !important;
+  border-right: solid 1px #000000 !important;
+  border-left: solid 1px #000000 !important;
+  vertical-align: inherit !important;
 }
-
 .labeltabletd {
-	text-align: center !important;
-	color: #1b1464 !important;
-	text-transform: none !important;
+  text-align: center !important;
+  color: #1b1464 !important;
+  text-transform: none !important;
 }
-
-.inputcodciuu, .tablenumiden, .tabledomatri, .tablecodpost {
-	width: 80px !important;
-	text-align: center !important;
+.inputcodciuu,
+.tablenumiden,
+.tabledomatri,
+.tablecodpost {
+  width: 80px !important;
+  text-align: center !important;
 }
-
-.tablefechas, .tableident  {
-	width: 75px !important;
-	text-align: center !important;
+.tablefechas,
+.tableident {
+  width: 75px !important;
+  text-align: center !important;
 }
-
-.tablenombre, .tabledenomi  {
-	width: 400px !important;
+.tablenombre,
+.tabledenomi {
+  width: 400px !important;
 }
-
-.tablecantperoc  {
-	width: 55px !important;
-	text-align: center !important;
+.tablecantperoc {
+  width: 55px !important;
+  text-align: center !important;
 }
-
 .tabletiprela {
-	width: 300px !important;
+  width: 300px !important;
 }
-
-.tableamplia{
-	width: auto !important;
+.tableamplia {
+  width: auto !important;
 }
-
 .container {
-	margin-right: 1px !important;
-	margin-left: 1px !important;
-	padding-left: 10px !important;
-	padding-right: 10px !important;
+  margin-right: 1px !important;
+  margin-left: 1px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
 }
-
+.main-header .md-secondary-navigation ul,
+.main-header .md-secondary-navigation ul li {
+  text-transform: none !important;
+}
+.breadcrumb-section {
+  padding-left: 2px;
+}
+.main-header .md-secondary-navigation a {
+  text-transform: none;
+}
+.navigation--bottom .nav__links--products li a {
+  padding: 10px 15px;
+  text-aling: center !important;
+}
+.navigation--bottom .nav__links--primary .sub__navigation {
+  width: auto;
+}
+.breadcrumb-section {
+  padding-left: 2px;
+}
+.main-header .md-secondary-navigation a {
+  text-transform: none;
+}
+.navigation--bottom .nav__links--products li a {
+  padding: 10px 15px;
+  text-aling: center !important;
+}
+li {
+  text-align: -webkit-center;
+}
+.navigation--bottom .nav__links--primary .sub__navigation {
+  width: auto;
+}

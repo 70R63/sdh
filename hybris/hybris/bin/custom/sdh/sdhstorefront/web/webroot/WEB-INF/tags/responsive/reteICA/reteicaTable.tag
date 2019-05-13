@@ -14,15 +14,15 @@
 			<table class="table">
 				<thead>
 					<tr class="avisoheadline p">
-						<td style="text-align: center"><spring:theme code="ica.inicial.title" /></td>
+						<td style="text-align: center"><spring:theme code="reteica.declaracion.table.titulo" /></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="avisobody">
 
-						<td><spring:theme code="ica.inicial.descripcion1" /><a
+						<td><spring:theme code="reteica.declaracion.table.descripcion" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								información</a> <spring:theme code="ica.inicial.descripcion2" /></td>
+								información</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -37,18 +37,18 @@
 						<thead>
 							<tr >
 								<td><label class="control-label labeltabletd tableident"><spring:theme
-											code="ica.inicial.table.tipdoc" /></label></td>
+											code="reteica.declaracion.table.tipodoc" /></label></td>
 								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="ica.inicial.table.numdoc" /></label></td>
+											code="reteica.declaracion.table.numdoc" /></label></td>
 								<td><label class="control-label labeltabletd tablenombre"><spring:theme
-											code="ica.inicial.table.nombre" /></label></td>
+											code="reteica.declaracion.table.nombre" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
 						 <tr>
-								<td><input class="inputtextnew tableident" disabled="disabled" type="text" size="30" value="${icaInfObjetoFormResp.documentType}"/></td>
-								<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value="${icaInfObjetoFormResp.documentNumber}"/></td>
-								<td><input class="inputtextnew tablenombre" disabled="disabled" type="text" size="30" value="${icaInfObjetoFormResp.completeName}"/></td>
+								<td><input class="inputtextnew tableident" disabled="disabled" type="text" size="30" value=""/></td>
+								<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value=""/></td>
+								<td><input class="inputtextnew tablenombre" disabled="disabled" type="text" size="30" value=""/></td>
 							</tr>
 						</tbody>
 					</table>

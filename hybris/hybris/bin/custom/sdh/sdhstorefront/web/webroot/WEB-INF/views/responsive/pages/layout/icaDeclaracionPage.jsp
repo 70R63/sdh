@@ -7,11 +7,19 @@
 <%@ taglib prefix="icadecla" tagdir="/WEB-INF/tags/responsive/ica"%>
 	<icadecla:icaDeclaraInicial/>
 	<icadecla:icaDeclaraGenerales/>
-	<icadecla:icaDeclaraLiquidacion/>
+	
 	<icadecla:icaDeclaraActFuera/>
 	<icadecla:icaDeclaraDeduccion/>
 	<icadecla:icaDeclaraTotal/>
 	<icadecla:icaDeclaraValor/>
+	<icadecla:icaDeclaraLiquidacion/>
 	<icadecla:icaDeclaraFirma/>
 
 	<div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
+	
+	
+<script>	
+	function goBack() {
+		window.history.back();
+	}
+</script>	
