@@ -24365,6 +24365,9 @@ th {
   padding-left: 10px !important;
   padding-right: 10px !important;
 }
+/*
+## ajuste de estilos menu pagina dev-maria
+********************************************************************/
 .main-header .md-secondary-navigation ul,
 .main-header .md-secondary-navigation ul li {
   text-transform: none !important;
@@ -24397,4 +24400,33 @@ li {
 }
 .navigation--bottom .nav__links--primary .sub__navigation {
   width: auto;
+}
+.navigation--middle .nav__right {
+  padding-right: 6%;
+}
+.main-header .md-secondary-navigation li span.logged_in {
+  color: black;
+}
+.main-header .md-secondary-navigation ul:last-child a,
+.main-header .md-secondary-navigation ul li:last-child a {
+  color: black;
+}
+.main-header .md-secondary-navigation ul:last-child a,
+.main-header .md-secondary-navigation ul li:last-child a {
+  color: black;
+}
+.main-header .md-secondary-navigation a:hover,
+.main-header .md-secondary-navigation a:focus,
+.main-header .md-secondary-navigation a:active {
+  color: #ffffff;
+  background: #66cdfc;
+}
+header {
+  marging-bottom: 5px;
+}
+.form-group {
+  margin-bottom: 10px;
+}
+.labeltabletd {
+  width: 100%;
 }
