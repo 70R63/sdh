@@ -54,7 +54,7 @@ public class RetenedoresDeclaracionPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/retenedores/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String reteicadeclaracion(final Model model) throws CMSItemNotFoundException
+	public String retenedoricadeclaracion(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET reteica declaracion --------------------------");
 
@@ -70,7 +70,7 @@ public class RetenedoresDeclaracionPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/retenedores/declaracion", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String postreteicadeclaracion(final BindingResult bindingResult, final Model model,
+	public String postretenedoricadeclaracion(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
