@@ -45,45 +45,45 @@
 		
 		<%-- Custom ACC JS --%>
 		
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.address.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.autocomplete.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.carousel.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.cart.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.cartitem.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkout.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkoutsteps.js"></script>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.address.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.autocomplete.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.carousel.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cart.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cartitem.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkout.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.checkoutsteps.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cms.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.colorbox.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.common.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.forgottenpassword.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.global.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.hopdebug.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.imagegallery.js"></script>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.hopdebug.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.imagegallery.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.langcurrencyselector.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.minicart.js"></script>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.minicart.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.navigation.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.order.js"></script>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.order.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.paginationsort.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.payment.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.paymentDetails.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.pickupinstore.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.product.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.productDetail.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.quickview.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.ratingstars.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.refinements.js"></script>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.payment.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.paymentDetails.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.pickupinstore.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.product.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.productDetail.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.quickview.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.ratingstars.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.refinements.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.sanitizer.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.silentorderpost.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.tabs.js"></script>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.silentorderpost.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.tabs.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.termsandconditions.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.track.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.storefinder.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.futurelink.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.productorderform.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.savedcarts.js"></script>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.storefinder.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.futurelink.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.productorderform.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.savedcarts.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.multidgrid.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.quickorder.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/acc.quote.js"></script>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.quickorder.js"></script> --%>
+<%-- 		<script type="text/javascript" src="${commonResourcePath}/js/acc.quote.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.consent.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.cookienotification.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.closeaccount.js"></script>

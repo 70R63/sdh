@@ -41,7 +41,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,8 +53,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Controller for store locator search and detail pages.
  */
 
-@Controller
-@RequestMapping(value = "/store-finder")
+//@Controller
+//@RequestMapping(value = "/store-finder")
 public class StoreLocatorPageController extends AbstractSearchPageController
 {
 	private static final Logger LOG = Logger.getLogger(StoreLocatorPageController.class);
@@ -262,7 +261,7 @@ public class StoreLocatorPageController extends AbstractSearchPageController
 
 	/**
 	 * Get the default search page size.
-	 * 
+	 *
 	 * @return the number of results per page, <tt>0</tt> (zero) indicated 'default' size should be used
 	 */
 	protected int getStoreLocatorPageSize()

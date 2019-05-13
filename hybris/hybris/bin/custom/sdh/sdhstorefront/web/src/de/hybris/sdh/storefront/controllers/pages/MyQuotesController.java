@@ -46,7 +46,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,8 +54,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-@Controller
-@RequestMapping(value = "/my-account/my-quotes")
+//@Controller
+//@RequestMapping(value = "/my-account/my-quotes")
 public class MyQuotesController extends AbstractSearchPageController
 {
 	private static final Logger LOG = Logger.getLogger(MyQuotesController.class);

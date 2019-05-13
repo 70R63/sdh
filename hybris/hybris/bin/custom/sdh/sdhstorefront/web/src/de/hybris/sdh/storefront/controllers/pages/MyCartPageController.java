@@ -12,7 +12,6 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Controller for MyCart functionality.
  */
-@Controller
-@RequestMapping(value = "/my-cart")
+//@Controller
+//@RequestMapping(value = "/my-cart")
 public class MyCartPageController extends AbstractPageController
 {
 	private static final String FORWARD_LOGIN_URL = FORWARD_PREFIX + "/login";

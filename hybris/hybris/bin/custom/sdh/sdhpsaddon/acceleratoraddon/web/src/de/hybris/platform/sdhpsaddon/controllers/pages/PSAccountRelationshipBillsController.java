@@ -24,9 +24,9 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.relationshipfacades.relationship.PSRelationshipFacade;
 import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
 import de.hybris.platform.sdhpsaddon.security.PSOpenRedirectValidator;
-import de.hybris.platform.relationshipfacades.relationship.PSRelationshipFacade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Extended Controller for functionality related with bills in my Account
  */
-@RequestMapping("/my-account")
+//@RequestMapping("/my-account")
 public class PSAccountRelationshipBillsController extends AbstractSearchPageController
 {
 	protected static final String BREADCRUMBS_ATTR = "breadcrumbs";
