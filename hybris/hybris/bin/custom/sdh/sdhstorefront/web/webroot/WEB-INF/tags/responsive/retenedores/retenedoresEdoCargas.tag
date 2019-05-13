@@ -114,7 +114,7 @@
 			<div class="col-md-10">
 				<div class="form-group">
 					<button class="btn btn-secondary text-center" id="" name=""
-						value="regresar">
+						value="regresar" type="button" onclick="goBack()">
 						<spring:theme code="reteica.consulta.estado.regresar" />
 					</button>
 				</div>
@@ -124,4 +124,9 @@
 	</form:form>
 </div>
 
-
+<script>
+	function goBack() {
+			window.history.back();
+		
+	}
+</script>

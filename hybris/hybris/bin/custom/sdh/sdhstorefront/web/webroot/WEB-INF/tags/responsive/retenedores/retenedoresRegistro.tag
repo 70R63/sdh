@@ -140,7 +140,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<button class="btn btn-secondary text-left" id="" name=""
-							value="regresar">
+							value="regresar" onclick="goBack()" type="button">
 							<spring:theme code="reteica.inicial.carga.regresar" />
 						</button>
 					</div>
@@ -155,8 +155,9 @@
 				</div>
 				<div class="col-md-3">
 					<div class="form-group">
-						<button class="btn btn-primary text-left" id="" name=""
-							value="consulta">
+						<button class="btn btn-primary text-left" type="button" id=""
+							name="" value="consulta"
+							onclick="window.location.href ='<c:url value='/retenedores/estadocargas' />';">
 							<spring:theme code="reteica.inicial.carga.consultar" />
 						</button>
 					</div>
@@ -165,4 +166,12 @@
 		</div>
 	</div>
 </form:form>
+
+
+<script>
+	function goBack() {
+			window.history.back();
+		
+	}
+	</script>
 
