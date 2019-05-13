@@ -95,7 +95,6 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
-; ;RetenedorDetalleLink; DETALLE LINK	; "/retenedores/detalle" ;;;;;
 ; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
 ; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "/retenedores/declaracionesfirmar" ;;;;;
 
@@ -232,7 +231,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 #;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
 ;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
-;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
+;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
 ;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 
@@ -273,7 +272,6 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
 ;ConsultaNavigationNode;;Consultas Menu;ConsultaNavigationNode;ConsultaNavigationServiceRequestsNavNodeMenu
 ;ReportantesNavigationNode;;Reportantes Menu;ReportantesNavigationNode;ReportantesNavigationServiceRequestsNavNodeMenu
-;RetenedorDetalleNavigationNode;;Retenedor Detalle;RetenedorDetalleNavigationNode;RetenedorDetalleNavigationServiceRequestsNavNodeMenu
 ;RetenedorRegistroNavigationNode;;Retenedor Registros;RetenedorRegistroNavigationNode;RetenedorRegistroNavigationServiceRequestsNavNodeMenu
 ;RetenedorDeclaracionesNavigationNode;; Retenedor Declaraciones;RetenedorDeclaracionesNavigationNode;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -310,7 +308,6 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
 ;ConsultaNavigationNodeEntry;;Consulta Menu;ConsultaNavigationNode;ConsultasLink;
 ;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
-;RetenedorDetalleNavigationNodeEntry;;Retenedor Detalle;RetenedorDetalleNavigationNode;RetenedorDetalleLink;
 ;RetenedorRegistroNavigationNodeEntry;;Retenedor Registro;RetenedorRegistroNavigationNode;RetenedorRegistroLink;
 ;RetenedorDeclaracionesNavigationNodeEntry;;Retenedor Declaraciones;RetenedorDeclaracionesNavigationNode;RetenedorDeclaracionesLink;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -1959,52 +1956,7 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 
 #INI Agentes Retenedores  04/04/2019
 
-$contentCatalog=sdhProductCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
-
-INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;retenedoresDetallePage 		;Retenedores	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/detalle
-
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retenedoresDetallePage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
-								;						;SideContent-retenedoresDetallePage 	;SideContent			;																	;SideContent-retenedoresDetallePage				;;;
-								;						;BodyContent-retenedoresDetallePage 	;BodyContent			;																	;BodyContent-retenedoresDetallePage				;;;
-								
-
-
-INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-retenedoresDetallePage 	;Side Content Slot for Retenedores	;true	;								;;;
-							;							;BodyContent-retenedoresDetallePage	;Body Content Slot for Retenedores	;true	;retenedoresDetallePageComponent		;;;
-
-
-INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;retenedoresDetallePageComponent	;retenedoresDetallePage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDetallePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDetallePageComponent	
-									
-									
-									
-									
-
-$contentCatalog=sdhProductCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
-
-INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;retenedoresDetallePage 		;Retenedores	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/detalle
-
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retenedoresDetallePage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
-								;						;SideContent-retenedoresDetallePage 	;SideContent			;																	;SideContent-retenedoresDetallePage				;;;
-								;						;BodyContent-retenedoresDetallePage 	;BodyContent			;																	;BodyContent-retenedoresDetallePage				;;;
-								
-
-
-INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-retenedoresDetallePage 	;Side Content Slot for Retenedores	;true	;								;;;
-							;							;BodyContent-retenedoresDetallePage	;Body Content Slot for Retenedores	;true	;retenedoresDetallePageComponent		;;;
-
-
-INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;retenedoresDetallePageComponent	;retenedoresDetallePage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDetallePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDetallePageComponent	
-								
+					
 #->INI dev-maria Agregar paginas para Terceros Autorizados 05/04/2019
 $contentCatalog=sdhProductCatalog 
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
@@ -2107,5 +2059,26 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;retenedoresDecFirmarPageComponent	;retenedoresDecFirmarPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDecFirmarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDecFirmarPageComponent					
-#->FIN dev-maria Agregar paginas para Declaraciones Firmar 10/04/2019					
+#->FIN dev-maria Agregar paginas para Declaraciones Firmar 10/04/2019		
+
+#->INI dev-maria Agregar paginas para Retenedores Declaracion  10/05/2019
+$contentCatalog=sdhProductCatalog 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;retenedoresDeclaracionPage 		;Retenedores Declaracion 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/declaracion
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='retenedoresDeclaracionPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-retenedoresDeclaracionPage 		;SideContent				;															;SideContent-retenedoresDeclaracionPage						;;;
+								;						;BodyContent-retenedoresDeclaracionPage		;BodyContent				;															;BodyContent-retenedoresDeclaracionPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-retenedoresDeclaracionPage 	;Side Content Slot for Retenedores Declaracion 			;true	;								;;;
+							;							;BodyContent-retenedoresDeclaracionPage	;Body Content Slot for Retenedores Declaracion 		;true	;retenedoresDeclaracionPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;retenedoresDeclaracionPageComponent	;retenedoresDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDeclaracionPageComponent					
+#->FIN dev-maria Agregar paginas para Declaraciones  10/05/2019				
 									
