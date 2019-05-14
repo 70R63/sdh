@@ -38,7 +38,6 @@ ACC.duBotonVer = {
 	fillFieldsFromData : function(data) {
 
 		$("#divInfoRadicados").show();
-		debugger;
 		$("#duRadicados").find("tr:gt(0)").remove();
 		$.each(data.radicados, function (index,value){
 			if(value.numRadicado != ''){
@@ -56,7 +55,6 @@ ACC.duBotonVer = {
 	
 	bindCheckBoxSelect : function() {
 		$(document).on("click", ".selectRadicado", function(e) {
-//			e.preventDefault();
 			
  	       var valorNumRadicado = $.trim($(this).attr("data-numradicado")); 	       
  	       var valorModLicencia = $.trim($(this).attr("data-modlicencia")); 	       
@@ -64,6 +62,10 @@ ACC.duBotonVer = {
  	       $("#selectedRadicado").val(valorNumRadicado);
  	       $("#selectedTipoLicencia").val(valorModLicencia);
 
+ 	       if($( "input:checked" ).length > 1 ){
+ 	    	   document.getElementById("retenciondelibutton1").disabled = false;
+ 	       } 	       
+ 	       
 		});
 	},
 	

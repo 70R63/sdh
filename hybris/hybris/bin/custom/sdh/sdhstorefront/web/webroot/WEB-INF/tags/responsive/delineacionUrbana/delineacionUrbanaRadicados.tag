@@ -66,10 +66,14 @@
 			</table>
 		</div>
 	</div>
-	<sf:form action="${duURL}" method="POST" modelAttribute="dataForm" 	id="forma">
-		<sf:hidden path="input.selectedCDU" id="selectedCDU" name="selectedCDU" readonly="true" />
-		<sf:hidden path="input.selectedRadicado" id="selectedRadicado" name="selectedRadicado" readonly="true" />
-		<sf:hidden path="input.selectedTipoLicencia" id="selectedTipoLicencia" name="selectedTipoLicencia" readonly="true" />
+	<sf:form action="${duURL}" method="POST" modelAttribute="dataForm"
+		id="forma">
+		<sf:hidden path="input.selectedCDU" id="selectedCDU"
+			name="selectedCDU" readonly="true" />
+		<sf:hidden path="input.selectedRadicado" id="selectedRadicado"
+			name="selectedRadicado" readonly="true" />
+		<sf:hidden path="input.selectedTipoLicencia" id="selectedTipoLicencia"
+			name="selectedTipoLicencia" readonly="true" />
 
 		<div class="row">
 			<div class="col-md-4  ">
@@ -82,10 +86,6 @@
 			</div>
 			<div class="col-md-4  ">
 				<div class="form-group">
-					<!-- 				<button class="btn btn-primary btn-lg" type="button" -->
-					<!-- 					id="retenciondelibutton" disabled="disabled"> -->
-					<%-- 					<spring:theme code="delineacion.urbana.radicados.retencion" /> --%>
-					<!-- 				</button> -->
 					<sf:button class="btn btn-primary btn-lg" name="action"
 						id="retenciondelibutton1" value="retencion" disabled="true">
 						<spring:theme code="delineacion.urbana.radicados.retencion" />
@@ -94,10 +94,6 @@
 			</div>
 			<div class="col-md-4  ">
 				<div class="form-group ">
-					<!-- 				<button class="btn btn-primary btn-lg" type="button" -->
-					<!-- 					id="declaradelibutton" disabled="disabled"> -->
-					<%-- 					<spring:theme code="delineacion.urbana.radicados.declaracion" /> --%>
-					<!-- 				</button> -->
 					<sf:button class="btn btn-primary btn-lg" name="action"
 						id="declaradelibutton1" value="declaracion" disabled="true">
 						<spring:theme code="delineacion.urbana.radicados.declaracion" />
@@ -107,47 +103,58 @@
 		</div>
 	</sf:form>
 
-	</div>
+</div>
 
-	<script>
-		function goBack() {
-			window.history.back();
+<script>
+	function goBack() {
+		window.history.back();
+	}
+	function seleccion(selectObject) {
+		var x = selectObject.value;
+		var seleccionar = document.getElementById('selectRadicado');
+		var btndecla = document.getElementById('declaradelibutton');
+		var btnreten = document.getElementById('retenciondelibutton');
+
+		if (x == '2') {
+			btndecla.disabled = false;
+			btnreten.disabled = true;
+			seleccionar.checked = true;
+		} else if (x == '1') {
+			btndecla.disabled = true;
+			btnreten.disabled = false;
+			seleccionar.checked = false;
 		}
-		function seleccion(selectObject) {
-			var x = selectObject.value;
-			var seleccionar = document.getElementById('selectRadicado');
-			var btndecla = document.getElementById('declaradelibutton');
-			var btnreten = document.getElementById('retenciondelibutton');
 
-			if (x == '2') {
-				btndecla.disabled = false;
-				btnreten.disabled = true;
-				seleccionar.checked = true;
-			} else if (x == '1') {
-				btndecla.disabled = true;
-				btnreten.disabled = false;
-				seleccionar.checked = false;
+	}
+
+	function seleccion2(selectObject) {
+
+		var x = selectObject.value;
+		var seleccionar = document.getElementById('selectRadicado');
+		var btndecla = document.getElementById('declaradelibutton1');
+		var btnreten = document.getElementById('retenciondelibutton1');
+		var tblradicados = document.getElementById('duRadicados');
+		var tableIndex = 0;
+
+		if (x == '2') { //DECLARACION
+			while (renglon = tblradicados.rows[tableIndex++]) {
+				renglon.lastElementChild.lastElementChild.checked = true;
+				renglon.lastElementChild.lastElementChild.disabled = true;
 			}
-
-		}
-
-		function seleccion2(selectObject) {
-
-			debugger;
-			var x = selectObject.value;
-			var seleccionar = document.getElementById('selectRadicado');
-			var btndecla = document.getElementById('declaradelibutton1');
-			var btnreten = document.getElementById('retenciondelibutton1');
-
-			if (x == '2') {
-				btndecla.disabled = false;
-				btnreten.disabled = true;
-				seleccionar.checked = true;
-			} else if (x == '1') {
-				btndecla.disabled = true;
-				btnreten.disabled = false;
-				seleccionar.checked = false;
+			btndecla.disabled = false;
+			btnreten.disabled = true;
+			seleccionar.checked = true;
+		} else if (x == '1') { //RETENCION
+			while (renglon = tblradicados.rows[tableIndex++]) {
+				renglon.lastElementChild.lastElementChild.checked = false;
+				renglon.lastElementChild.lastElementChild.disabled = false;
 			}
-
+			btndecla.disabled = true;
+			btnreten.disabled = true;
+			seleccionar.checked = false;
 		}
-	</script>
+		
+
+
+	}
+</script>
