@@ -11,7 +11,7 @@
 
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
-<div class="login-page__headline" style="margin-top: 0px !important; margin-bottom: 0px !important">
+<div class="login-page__headline">
 	<spring:theme code="login.title" />
 </div>
 
