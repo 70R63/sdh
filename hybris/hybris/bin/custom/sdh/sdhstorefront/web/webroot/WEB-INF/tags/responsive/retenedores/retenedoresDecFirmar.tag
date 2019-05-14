@@ -68,11 +68,18 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 col-md-offset-5">
-				<button class="btn btn-primary"
-					style="text-align: center !important" type="submit">
+				<button class="btn btn-secondary"
+					style="text-align: center !important" type="button" onclick="goBack()">
 					<spring:theme code="retenedor.edocargas.inicial.regresar" />
 				</button>
 			</div>
 		</div>
 	</form:form>
 </div>
+
+<script>
+	function goBack() {
+			window.history.back();
+		
+	}
+</script>
