@@ -7,7 +7,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container">
+
 <div class="row">
 	<div class="col-md-12 headline">
 		<h2>
@@ -16,7 +16,7 @@
 		</h2>
 	</div>
 </div>
-<div class="row">
+
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>
@@ -67,6 +67,5 @@
 			</div>
 		</div>
 	</div>
-</div>
-</div>
+
 
