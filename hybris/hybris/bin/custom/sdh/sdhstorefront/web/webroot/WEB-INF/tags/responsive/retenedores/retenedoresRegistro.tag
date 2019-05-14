@@ -173,5 +173,5 @@
 			window.history.back();
 		
 	}
-	</script>
+</script>
 
