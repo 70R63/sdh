@@ -81,11 +81,10 @@ public class SecurityUserCheckBeforeControllerHandler implements BeforeControlle
 		{
 			final UserGroupModel userGroup = userService.getUserGroupForUID("sdh_01");
 
-			if (!userService.getCurrentUser().getGroups().contains(userGroup))
-			{
-				response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
-				return false;
-			}
+			/*
+			 * if (!userService.getCurrentUser().getGroups().contains(userGroup)) {
+			 * response.sendRedirect(response.encodeRedirectURL(request.getContextPath())); return false; }
+			 */
 		}
 		else if ("GET".equalsIgnoreCase(request.getMethod()) && request.getRequestURI().contains("/agentesautorizados"))
 		{
