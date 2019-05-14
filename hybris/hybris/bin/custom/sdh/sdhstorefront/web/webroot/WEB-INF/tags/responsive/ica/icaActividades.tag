@@ -17,59 +17,59 @@
 							code="ica.inicial.activecono.title" /></span>
 				</h2>
 			</div>
-			<br>
-			<form:form action="">
-				<div class="row">
-					<div class="col-md-10">
-						<div class="table-responsive">
-							<table class="table table-bordered" id="example">
-								<thead>
-									<tr>
-										<td><label class="control-label labeltabletd"><spring:theme
-													code="ica.inicial.activecono.actprin" /></label></td>
-										<td><label
-											class="control-label labeltabletd inputcodciuu"><spring:theme
-													code="ica.inicial.activecono.ciiu" /></label></td>
-										<td><label class="control-label labeltabletd tablenombre"><spring:theme
-													code="ica.inicial.activecono.denomi" /></label></td>
-										<td><label class="control-label labeltabletd tablefechas"><spring:theme
-													code="ica.inicial.activecono.feciniact" /></label></td>
-										<td><label class="control-label labeltabletd tablefechas"><spring:theme
-													code="ica.inicial.activecono.feciniact" /></label></td>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach varStatus="loop"
-										items="${icaInfObjetoFormResp.icaInfObjetoResponse.activEconomicas}"
-										var="eachActivEconomicas">
-										<tr>
-											<c:if test='${eachActivEconomicas.activPrincipal == "X"}'>
-												<td><label class="control-label "><spring:theme
-															code="ica.inicial.activecono.principal" /></label></td>
-											</c:if>
-											<c:if test='${eachActivEconomicas.activPrincipal != "X"}'>
-												<td><label class="control-label "></label></td>
-											</c:if>
-											<td><input class="inputtextnew inputcodciuu"
-												disabled="disabled" value="${eachActivEconomicas.ciiu}"
-												type="text" /></td>
-											<td><input class="inputtextnew tablenombre"
-												disabled="disabled"
-												value="${eachActivEconomicas.denominacion}" type="text" /></td>
-											<td><input class="inputtextnew tablefechas"
-												disabled="disabled"
-												value="${eachActivEconomicas.fechaIniAct}" type="text" /></td>
-											<td><input class="inputtextnew tablefechas"
-												disabled="disabled"
-												value="${eachActivEconomicas.fechaCeseAct}" type="text" /></td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</form:form>
 		</div>
 	</div>
+
+	<br>
+	<form:form action="">
+		<div class="row">
+			<div class="col-md-10">
+				<div class="table-responsive">
+					<table class="table table-bordered" id="example">
+						<thead>
+							<tr>
+								<td><label class="control-label labeltabletd"><spring:theme
+											code="ica.inicial.activecono.actprin" /></label></td>
+								<td><label class="control-label labeltabletd inputcodciuu"><spring:theme
+											code="ica.inicial.activecono.ciiu" /></label></td>
+								<td><label class="control-label labeltabletd tablenombre"><spring:theme
+											code="ica.inicial.activecono.denomi" /></label></td>
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
+											code="ica.inicial.activecono.feciniact" /></label></td>
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
+											code="ica.inicial.activecono.feciniact" /></label></td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach varStatus="loop"
+								items="${icaInfObjetoFormResp.icaInfObjetoResponse.activEconomicas}"
+								var="eachActivEconomicas">
+								<tr>
+									<c:if test='${eachActivEconomicas.activPrincipal == "X"}'>
+										<td><label class="control-label "><spring:theme
+													code="ica.inicial.activecono.principal" /></label></td>
+									</c:if>
+									<c:if test='${eachActivEconomicas.activPrincipal != "X"}'>
+										<td><label class="control-label "></label></td>
+									</c:if>
+									<td><input class="inputtextnew inputcodciuu"
+										disabled="disabled" value="${eachActivEconomicas.ciiu}"
+										type="text" /></td>
+									<td><input class="inputtextnew tablenombre"
+										disabled="disabled"
+										value="${eachActivEconomicas.denominacion}" type="text" /></td>
+									<td><input class="inputtextnew tablefechas"
+										disabled="disabled" value="${eachActivEconomicas.fechaIniAct}"
+										type="text" /></td>
+									<td><input class="inputtextnew tablefechas"
+										disabled="disabled"
+										value="${eachActivEconomicas.fechaCeseAct}" type="text" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form:form>
 </div>

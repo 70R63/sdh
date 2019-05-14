@@ -9,62 +9,67 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
-	<div class="row" >
-		<div class="avisoheadline" style="text-align: center !important">
-			<h2>
-				<span class="p" style="text-align: center !important; margin-bottom: 10px !important;"><spring:theme code="delineacion.urbana.title"
-						text="Delineacion Urbana" /></span>
-			</h2>
-		</div>
-		<p class="avisobody" style="height: auto !important;">
-			<spring:theme code="delineacion.urbana.desciption" />
-			<a href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-				información</a>
-		</p>
-	</div>
-	<br>
 	<div class="row">
-		<div class="table-responsive">
-			<table class="table col-md-2 table-bordered">
+		<div class="col-md-12">
+			<table class="table">
 				<thead>
-					<tr>
-						<td><label class="control-label text-capitalize !important"><spring:theme
-									code="publicidad.exterior.tipodocumento" /></label></td>
-						<td><label class="control-label text-capitalize !important"><spring:theme
-									code="publicidad.exterior.numdocumento" /></label></td>
-						<td><label class="control-label text-capitalize !important"><spring:theme
-									code="publicidad.esterior.nombre" /></label></td>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme
+								code="delineacion.urbana.title" /></td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><input disabled class="inputtextnew" aria-required="true"
-							maxlength="30" size="30" readonly="readonly" type="text"
-							value="${dataForm.valCont.infoContrib.tipoDoc}" /></td>
-						<td><input readonly="readonly" class="inputtextnew"
-							aria-required="true" maxlength="30" size="30" disabled="disabled"
-							type="text" value="${dataForm.valCont.infoContrib.numDoc}" /></td>
-						<td><input value="${dataForm.valCont.infoContrib.adicionales.NAME_ORG1}" disabled class="inputtextnew"
-							aria-required="true" maxlength="30" size="30" readonly="readonly"
-							type="text" style="width: 406px;" /></td>
+					<tr class="avisobody">
+
+						<td><spring:theme code="delineacion.urbana.desciption" /><a
+							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+								información</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-12">
-			<spring:theme code="delineacion.urbana.nota" />
-		</div>
 	</div>
 </div>
 
+<div class="row mt-3">
+	<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
+		<form:form action="">
+			<div class="table-responsive text-center">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td><label class="control-label labeltabletd tableident"><spring:theme
+										code="publicidad.exterior.tipodocumento" /></label></td>
+							<td><label class="control-label labeltabletd tablenumiden"><spring:theme
+										code="publicidad.exterior.numdocumento" /></label></td>
+							<td><label class="control-label labeltabletd tablenombre"><spring:theme
+										code="publicidad.esterior.nombre" /></label></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input class="inputtextnew tableident"
+								disabled="disabled" type="text" size="30"
+								value="${dataForm.valCont.infoContrib.tipoDoc}" /></td>
+							<td><input class="inputtextnew tablenumiden"
+								disabled="disabled" type="text" size="30"
+								value="${dataForm.valCont.infoContrib.numDoc}" /></td>
+							<td><input class="inputtextnew tablenombre"
+								disabled="disabled" type="text" size="30"
+								value="${dataForm.valCont.infoContrib.adicionales.NAME_ORG1}" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form:form>
+	</div>
+</div>
 
-
-
-
-
-
-
-
+<div class="container">
+	<div class="col-md-12">
+		<spring:theme code="delineacion.urbana.nota" />
+	</div>
+</div>
 
 
 
