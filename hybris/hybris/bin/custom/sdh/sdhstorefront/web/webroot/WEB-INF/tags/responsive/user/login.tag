@@ -11,7 +11,7 @@
 
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
-<div class="login-page__headline">
+<div class="login-page__headline" style="margin-bottom: 0px; margin-top: 0px;">
 	<spring:theme code="login.title" />
 </div>
 
@@ -28,12 +28,12 @@
 	</c:if>	
 	
 		<formElement:formInputBox idKey="j_username" labelKey="login.email"
-			path="j_username" mandatory="true" />
+			path="j_username" mandatory="true" inputCSS="form-control redtam"/>
 		<formElement:formPasswordBox idKey="j_password"
-			labelKey="login.password" path="j_password" inputCSS="form-control"
+			labelKey="login.password" path="j_password" inputCSS="form-control redtam"
 			mandatory="true" />
 	
-			<div class="forgotten-password">
+			<div class="forgotten-password" style="margin-bottom: 1px; margin-top: 0px;">
 				<ycommerce:testId code="login_forgotPassword_link">
 					<a href="#" data-link="<c:url value='/login/pw/request'/>" class="js-password-forgotten" data-cbox-title="<spring:theme code="forgottenPwd.title"/>">
 						<spring:theme code="login.link.forgottenPwd" />
@@ -41,7 +41,7 @@
 				</ycommerce:testId>
 			</div>
 		<ycommerce:testId code="loginAndCheckoutButton">
-			<button type="submit" class="btn btn-primary btn-block">
+			<button type="submit" class="btn btn-primary redtam">
 				<spring:theme code="${actionNameKey}" />
 			</button>
 		</ycommerce:testId>
