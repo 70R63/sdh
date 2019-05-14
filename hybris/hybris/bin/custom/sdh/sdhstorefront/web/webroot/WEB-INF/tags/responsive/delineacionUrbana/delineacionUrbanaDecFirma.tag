@@ -58,7 +58,7 @@
 				<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 
 				<div class=" col-md-3">
-					<button type="button" class="btn btn-primary btn-lg"
+					<button type="button" class="btn btn-secondary btn-lg"
 						id="regresarButton" name="" value="regresar" onclick="goBack()">
 						<spring:theme code="delineacion.urbana.dec.firm.regresar" />
 					</button>

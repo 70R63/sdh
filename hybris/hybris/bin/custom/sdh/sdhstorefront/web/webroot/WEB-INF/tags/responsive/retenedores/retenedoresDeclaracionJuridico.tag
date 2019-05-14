@@ -112,7 +112,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="reteica.declaracion.juridico.totpagar" /></label> <input id=""
-								name="" class="form-control" disabled type="text" value=""
+								name="" class="form-control" type="text" value=""
 								maxlength="240"
 								style="width: 280px !important; text-align: center !important"></input>
 						</div>

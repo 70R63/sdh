@@ -4,9 +4,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="rete" tagdir="/WEB-INF/tags/responsive/reteICA"%>
+<%@ taglib prefix="retenedores" tagdir="/WEB-INF/tags/responsive/retenedores"%>
 
-<rete:reteicaDeclaracionTable />
-<rete:reteicaDeclaracionJuridico />
-<rete:reteicaDeclaracionFirma />
+<retenedores:retenedoresDeclaracionTable />
+<retenedores:retenedoresDeclaracionJuridico />
+<retenedores:retenedoresDeclaracionFirma />
 
