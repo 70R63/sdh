@@ -48,7 +48,12 @@ ACC.duBotonVer = {
 					 '<td><input id="presupuesto" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.presupuesto + '"></td>"' +
 					 '<td><input id="estrato" name="" class="inputtextnew" aria-required="true" type="text" readonly="readonly" maxlength="240" style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important;" value="' + value.estrato + '"></td>"' +
 					 '<td><input class="inputtextnew selectRadicado" style="visibility: visible !important; width: 20% !important" type="checkbox"  data-numradicado="' + value.numRadicado + '" data-modlicencia="' + value.modLicencia +'" ></td> '+ 
-					 "</tr>");	}
+					 "</tr>");	
+			}
+			document.getElementById("retenciondelibutton1").disabled = true;
+			document.getElementById("declaradelibutton1").disabled = true; 
+			$('#optradio1').prop('checked', 'checked');
+
 		})
 	},
 	
@@ -62,9 +67,11 @@ ACC.duBotonVer = {
  	       $("#selectedRadicado").val(valorNumRadicado);
  	       $("#selectedTipoLicencia").val(valorModLicencia);
 
- 	       if($( "input:checked" ).length > 1 ){
+ 	       if($( "input:checked" ).length == 2 ){
  	    	   document.getElementById("retenciondelibutton1").disabled = false;
- 	       } 	       
+ 	       }else{
+ 	    	  document.getElementById("retenciondelibutton1").disabled = true;
+ 	       }
  	       
 		});
 	},
