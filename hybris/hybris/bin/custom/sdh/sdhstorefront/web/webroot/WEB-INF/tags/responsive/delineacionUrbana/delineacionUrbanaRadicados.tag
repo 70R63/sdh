@@ -44,19 +44,19 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 ">
 				<table class="table" id="duRadicados">
-					<thead style="background-color: #006DCC !important">
+					<thead>
 						<tr>
-							<th style="text-align: center"><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.radicados" /> </label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.fechradicado" /></label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.modlicencia" /></label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.presupuestoRadicado" /></label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.codigoEstrato" /></label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.seleccionar" /></label></th>
 						</tr>
 					</thead>
