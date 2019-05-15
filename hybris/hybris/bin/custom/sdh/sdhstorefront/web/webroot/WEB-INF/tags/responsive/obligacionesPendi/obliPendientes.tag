@@ -16,7 +16,7 @@
 			<table class="table">
 				<thead>
 					<tr class="avisoheadline p">
-						<td><spring:theme code="obligacion.inicial.encabezado" /></td>
+						<td style="text-align: center"><spring:theme code="obligacion.inicial.encabezado" /></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,7 +32,7 @@
 	</div>
 		<div class="row">
 			<div class="headline">
-				<h2 align="center">
+				<h2>
 					<span><spring:theme code="obligacion.inicial.titulo" /></span>
 
 				</h2>

@@ -24548,6 +24548,8 @@ input[type="search"] {
     margin-right: -110px;
   }
 }
+<<<<<<< HEAD
+=======
 @media (min-width: 1920px) {
   /*
 ## ajuste de estilos cuerpo general pagina dev-maria
@@ -24778,3 +24780,4 @@ input[type="search"] {
     margin-bottom: 0px;
   }
 }
+>>>>>>> dev
