@@ -7,7 +7,7 @@
 <%@ taglib prefix="sobretasaGasolina" tagdir="/WEB-INF/tags/responsive/sobretasaGasolina"%>
 
 <template:page pageTitle="${pageTitle}">
-	<div class="container">
+
 		
 		<sobretasaGasolina:sobretasaGasolinaTable/>
 		
@@ -20,7 +20,7 @@
 
 		
 		
-	</div>
+
 
 
 </template:page>
