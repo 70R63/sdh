@@ -20,14 +20,14 @@
 	<div class="col-md-12">
 
 		<div class="row">
+			<!-- 			<div class="col-md-3"> -->
+			<%-- 				<label class="control-label" for=""> <spring:theme --%>
+			<%-- 						code="delineacion.urbana.dec.areasusos.uso" /> --%>
+			<!-- 				</label> -->
+			<!-- 			</div> -->
 			<div class="col-md-3">
 				<label class="control-label" for=""> <spring:theme
 						code="delineacion.urbana.dec.areasusos.uso" />
-				</label>
-			</div>
-			<div class="col-md-3">
-				<label class="control-label" for=""> <spring:theme
-						code="delineacion.urbana.dec.areasusos.areauso" />
 				</label>
 			</div>
 			<div class="col-md-2">
@@ -51,15 +51,15 @@
 			varStatus="loop">
 			<div class="row">
 				<div class="row areasusos">
-					<div class="col-md-3">
-						<div class="form-group ">
-							<sf:select
-								path="infObjetoDelineacion.usos[${loop.index}].usoCatalogo"
-								items="${dataForm.catalogos.uso}"
-								referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select>
-						</div>
+					<!-- 					<div class="col-md-3"> -->
+					<!-- 						<div class="form-group "> -->
+					<%-- 							<sf:select --%>
+					<%-- 								path="infObjetoDelineacion.usos[${loop.index}].usoCatalogo" --%>
+					<%-- 								items="${dataForm.catalogos.uso}" --%>
+					<%-- 								referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select> --%>
+					<!-- 						</div> -->
 
-					</div>
+					<!-- 					</div> -->
 
 					<div class="col-md-3">
 						<div class="form-group ">
@@ -80,15 +80,17 @@
 					</div>
 
 
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addinfoareuso()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareuso()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
+					<c:if test='${dataForm.input.tipoFlujo == "D"}'>
+						<div class="col-md-1">
+							<div class="form-group ">
+								<img onclick="addinfoareuso()"
+									src="${themeResourcePath}/images/adddelineacion.png"
+									style="width: 25px"></img> <img onclick="deleinfoareuso()"
+									src="${themeResourcePath}/images/deledelineacion.png"
+									style="width: 25px"></img>
+							</div>
 						</div>
-					</div>
+					</c:if>
 				</div>
 			</div>
 		</c:forEach>
@@ -100,12 +102,10 @@
 
 
 
-
-
 		<!-- LINEA DE TOTAL - USO -->
 		<div class="row">
 			<div class="row total">
-				<div class="col-md-6">
+				<div class="col-md-3">
 					<div class="form-group ">
 						<input id="inputareainter" class="form-control" maxlength="30"
 							value="Total" disabled></input>
