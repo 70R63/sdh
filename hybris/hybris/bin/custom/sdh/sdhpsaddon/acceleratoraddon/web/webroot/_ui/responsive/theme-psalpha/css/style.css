@@ -24543,6 +24543,10 @@ input[type="search"] {
     margin-top: 0px;
     margin-bottom: 0px;
   }
+  .row .gasorow {
+    margin-left: -110px;
+    margin-right: -110px;
+  }
 }
 @media (min-width: 1920px) {
   /*
@@ -24716,8 +24720,6 @@ input[type="search"] {
     max-width: 100%;
     height: auto;
     display: block;
-    /* margin-left: 36px; */
-    /* margin-right: 35px; */
     width: 100%;
     justify-content: space-between;
   }
