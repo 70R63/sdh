@@ -38,6 +38,7 @@ public class SobreTasaGasolinaCatalogos
 	//delineacion Urbana
 	private Map<String, String> anoGravable;
 	private Map<String, String> tipoDeLicencia;
+	private Map<String, String> objetoLicencia;
 	private Map<String, String> modalidadLicencia;
 	private Map<String, String> presupuestoObra;
 	private Map<String, String> causalExencion;
@@ -45,6 +46,9 @@ public class SobreTasaGasolinaCatalogos
 	private Map<String, String> codUso;
 	private Map<String, String> areaInter;
 	private Map<String, String> areaProy;
+
+
+
 
 	/**
 	 * @return the uso
@@ -469,6 +473,23 @@ public class SobreTasaGasolinaCatalogos
 	public void setTipoConsulta(final Map<String, String> tipoConsulta)
 	{
 		this.tipoConsulta = tipoConsulta;
+	}
+
+	/**
+	 * @return the objetoLicencia
+	 */
+	public Map<String, String> getObjetoLicencia()
+	{
+		return objetoLicencia;
+	}
+
+	/**
+	 * @param objetoLicencia
+	 *           the objetoLicencia to set
+	 */
+	public void setObjetoLicencia(final Map<String, String> objetoLicencia)
+	{
+		this.objetoLicencia = objetoLicencia;
 	}
 
 

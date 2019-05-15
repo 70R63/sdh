@@ -23,6 +23,7 @@ public class SDHValidaMailRolResponse
 	private List<ContribAgente> agentes;
 	private List<ImpuestoDelineacionUrbana> delineacion;
 	private ImpuestoICA ica;
+	private ImpuestoReteICA reteICA;
 
 	/**
 	 * @return the infoContrib
@@ -178,8 +179,22 @@ public class SDHValidaMailRolResponse
 		this.ica = ica;
 	}
 
+	/**
+	 * @return the reteICA
+	 */
+	public ImpuestoReteICA getReteICA()
+	{
+		return reteICA;
+	}
 
-
+	/**
+	 * @param reteICA
+	 *           the reteICA to set
+	 */
+	public void setReteICA(final ImpuestoReteICA reteICA)
+	{
+		this.reteICA = reteICA;
+	}
 
 
 
