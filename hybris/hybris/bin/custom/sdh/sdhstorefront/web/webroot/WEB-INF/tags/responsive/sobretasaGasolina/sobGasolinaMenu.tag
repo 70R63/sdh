@@ -14,39 +14,42 @@
 <spring:url value="/contribuyentes/sobretasa-gasolina" var="buscarUrl"
 	htmlEscape="false" />
 
-<div class="col-md-12">
-	<table class="table">
-		<thead>
-			<tr class="avisoheadline p">
-				<td><spring:theme
-						code="impuestos.sobreTasaGasolina.menu.titulo" /></td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="avisobody">
+<div class="container">
+	<div class="row gasorow">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme
+								code="impuestos.sobreTasaGasolina.menu.titulo" /></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="avisobody">
 
-				<td><spring:theme
-						code="impuestos.sobreTasaGasolina.menu.tituloNota" /><a
-					href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-						información</a></td>
-			</tr>
-		</tbody>
-	</table>
+						<td><spring:theme
+								code="impuestos.sobreTasaGasolina.menu.tituloNota" /><a
+							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+								información</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 
-<br>
-<div class="col-md-9">
-	<div class="table-responsive">
-		
-		<div class="col-md-12">
-			<table class="table col-md-2 table-bordered">
+
+<div class="row mt-3">
+	<div class="col-md-7 col-md-offset-3 d-flex align-items-center">
+		<div class="table-responsive text-center">
+			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<td><label class="control-label text-capitalize !important"><spring:theme
+						<td><label class="control-label labeltabletd tableident"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.tipoDocumento" /></label></td>
-						<td><label class="control-label text-capitalize !important"><spring:theme
+						<td><label class="control-label labeltabletd tablenumiden"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.numeroDocumento" /></label></td>
-						<td><label class="control-label text-capitalize !important"><spring:theme
+						<td><label class="control-label labeltabletd tablenombre"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.nombre" /></label></td>
 					</tr>
 				</thead>
@@ -56,17 +59,17 @@
 						<tr>
 							<td><sf:input
 									path="listaDocumentos[${loop.index}].tipoDocumento"
-									value="${item.tipoDocumento}" readonly="true"
-									class="inputtextnew" aria-required="true" maxlength="30"
-									size="30" disabled="disabled" type="text" /></td>
+									value="${item.tipoDocumento}"
+									class="inputtextnew tableident" aria-required="true"
+									maxlength="30" size="30" disabled="disabled" type="text" /></td>
 							<td><sf:input
 									path="listaDocumentos[${loop.index}].numeroDocumento"
-									value="${item.numeroDocumento}" readonly="true"
-									class="inputtextnew" aria-required="true" maxlength="30"
-									size="30" disabled="disabled" type="text" /></td>
+									value="${item.numeroDocumento}" 
+									class="inputtextnew tablenumiden" aria-required="true"
+									maxlength="30" size="30" disabled="disabled" type="text" /></td>
 							<td><sf:input path="NAME_ORG1" value="" readonly="true"
-									class="inputtextnew" aria-required="true" maxlength="30"
-									size="30" disabled="disabled" type="text" /></td>
+									class="inputtextnew tablenombre" 
+									maxlength="30" size="30" disabled="disabled" type="text" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -74,7 +77,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-

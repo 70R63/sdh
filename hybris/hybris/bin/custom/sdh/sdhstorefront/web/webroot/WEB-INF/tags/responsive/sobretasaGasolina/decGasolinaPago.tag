@@ -14,7 +14,7 @@
 
 
 
-<div class="col-md-8 text-right">
+<div class="col-md-8 text-center">
 
 
 	<sf:form action="${pagarURL}" method="POST"
@@ -22,7 +22,7 @@
 
 		<a id="downloadHelper" target="_blank"></a>
 		<input type="hidden" id="numForm" value="${dataForm.numForm }">
-		<button type="button" class="btn btn-primary btn-lg"
+		<button type="button" class="btn btn-secondary btn-lg"
 			onclick="goBack()">
 			<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
 		</button>
