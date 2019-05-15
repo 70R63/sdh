@@ -98,6 +98,7 @@
 			ACC.hideSubmenuVehicular = false;
 			ACC.hideSubmenuGasolina = false;
 			
+			
 			<c:if test="${(hasCORol and fn:contains(currentURL, 'contribuyentes')) or (hasCORol and fn:contains(currentURL, 'pagoEnLinea'))}">
 				
 				<c:if test = "${uiMenuForm.bDelineacionUrbana != 'X'}">

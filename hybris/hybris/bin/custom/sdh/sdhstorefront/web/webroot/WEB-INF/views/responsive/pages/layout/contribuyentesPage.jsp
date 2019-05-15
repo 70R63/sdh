@@ -77,7 +77,7 @@
 
 	<img class="delededucciones"
 		src="${themeResourcePath}/images/contribuyentes_1.jpg"
-		style="pointer-events: none; position: absolute; width: 100%; height: 100%;"></img>
+		style="pointer-events: none; position: absolute; width: 86%; height: 86%; margin-bottom: 80px !important"></img>
 
 
 </div>

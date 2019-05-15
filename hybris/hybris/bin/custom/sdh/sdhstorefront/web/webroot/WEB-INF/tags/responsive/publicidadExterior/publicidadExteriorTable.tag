@@ -10,61 +10,73 @@
 
 <spring:url value="/calculo" var="CalculodeclaracionUrl"
 	htmlEscape="false" />
-
-
-<div class="row">
-	<div class="col-md-12 text-center">
-		<div class="avisoheadline" style="text-align: center; width: auto; height: 35px;">
-			<h3>
-				<span class="p"><spring:theme
-						code="publicidad.exterior.title" text="Publicidad Exterior" /></span>
-			</h3>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme
+								code="publicidad.exterior.title" /></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="avisobody">
+						<td><spring:theme code="publicidad.exterior.description" /><a
+							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+								información</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<p class="avisobody" style="text-align: center; width: auto; height: auto;">
-			<spring:theme code="publicidad.exterior.description" />
-		</p>
 	</div>
 </div>
 
-<br>
+
+
 
 <!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq"> -->
 
 <input type="hidden" value="" id="selectedTipoValla" />
 
 <input type="hidden" value="" id="selectedNumRes" />
-<div class="row">
-	<div class="table-responsive">
-		<table class="table col-md-2 table-bordered">
-			<thead>
-				<tr>
-					<td><label class="control-label text-capitalize !important"><spring:theme
-								code="publicidad.exterior.tipodocumento" /></label></td>
-					<td><label class="control-label text-capitalize !important"><spring:theme
-								code="publicidad.exterior.numdocumento" /></label></td>
-					<td><label class="control-label text-capitalize !important"><spring:theme
-								code="publicidad.esterior.nombre" /></label></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input disabled class="inputtextnew" aria-required="true"
-						maxlength="30" size="30" readonly="readonly" type="text"
-						value="${docType }" /></td>
-					<td><input readonly="readonly" class="inputtextnew"
-						aria-required="true" maxlength="30" size="30" disabled="disabled"
-						type="text" value="${docNumber }" /></td>
-					<td><input value="${name }" disabled class="inputtextnew"
-						aria-required="true" maxlength="30" size="30" readonly="readonly"
-						type="text" /></td>
-				</tr>
-			</tbody>
-		</table>
+<div class="row mt-3">
+	<div class="col-md-7 col-md-offset-3 d-flex align-items-center">
+
+			<div class="table-responsive text-center">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td><label class="control-label labeltabletd tableident"><spring:theme
+										code="publicidad.exterior.tipodocumento" /></label></td>
+							<td><label class="control-label labeltabletd tablenumiden"><spring:theme
+										code="publicidad.exterior.numdocumento" /></label></td>
+							<td><label class="control-label labeltabletd tablenombre"><spring:theme
+										code="publicidad.esterior.nombre" /></label></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input class="inputtextnew tableident"
+								disabled="disabled" type="text" size="30"
+								value="${docType }" /></td>
+							<td><input class="inputtextnew tablenumiden"
+								disabled="disabled" type="text" size="30"
+								value="${docNumber }" /></td>
+							<td><input class="inputtextnew tablenombre"
+								disabled="disabled" type="text" size="30"
+								value="${name }" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
 	</div>
+</div>
 
 	<br>
 	<div class="row">
-		<div class="table-responsive">
+		<div class="col-md-10 table-responsive">
 			<table class="table col-md-2 table-bordered" id="example">
 				<thead>
 					<tr>
@@ -121,7 +133,7 @@
 		</div>
 
 	</div>
-</div>
+
 <!-- </form:form> -->
 
 
