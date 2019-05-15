@@ -56,7 +56,9 @@
 		<div class="form-group ">
 			<img onclick="addinformadeclara()"
 				src="${themeResourcePath}/images/adddelineacion.png"
-				style="width: 25px"></img> <img onclick="deleinformadeclara()"
+				style="width: 25px"></img> 
+				
+			<img onclick="deleinformadeclara()"
 				src="${themeResourcePath}/images/deledelineacion.png"
 				style="width: 25px"></img>
 		</div>
@@ -73,7 +75,7 @@
 			<sf:select class="form-control-gasolina claseProducto"
 				path="dataForm.infoDeclara[${loop.index}].claseProd"
 				items="${dataForm.catalogosSo.claseProd}"
-				referenceData="${dataForm.catalogosSo.claseProd}" maxlength="10" style="width: 235px" />
+				referenceData="${dataForm.catalogosSo.claseProd}" maxlength="10" style="width: 235px" onchange="getProductClassOccurrance(this)"/>
 		</div>
 		<div class="col-md-1">
 			<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
@@ -133,9 +135,50 @@
 <div class="row"></div>
 
 <script>
-	function addinformadeclara() {
+
+
+	function getProductClassOccurrance(currentSelected){
+		var map = new Map();
+		var mapMaxOcc = new Map();
+		var tableLength = $(".informadeclara").length;
+		var maxOcc = '${productClassMaximumOccurrencies}';
+		
+		maxOcc = maxOcc.replace('{','');
+		maxOcc = maxOcc.replace('}','');
+		maxOcc = maxOcc.replace(' ','');
+		maxOcc = maxOcc.split(',');
+		
+		for(var i=0; i< tableLength; i++){
+			var productClass = document.getElementById("dataForm.infoDeclara"+i+".claseProd").value; 
+			if(map.has(productClass)){
+				var productClassCounter = map.get(productClass)
+				map.set(productClass,productClassCounter+1);
+			}else{
+				map.set(productClass,1);
+			}
+		}
+		
+		for(var i=0; i< maxOcc.length; i++){
+			var item = maxOcc[i];
+			item = item.split("=");
+			mapMaxOcc.set(item[0],item[1]);
+		}
+		
+		if(mapMaxOcc.has(currentSelected.value)){
+			var maxOccuNum = Number(mapMaxOcc.get(currentSelected.value)) + 1;
+			if(map.get(currentSelected.value) == maxOccuNum){
+				alert("Excedido número de entradas permitidas");
+				currentSelected.value = 0;
+			}
+		}	
+	}
+
+	function addinformadeclara() {		
 		
 		var tam = $(".informadeclara").length;
+		
+		
+		
 		if ($(".informadeclara").length < 55) {
 			
 			$($(".informadeclara")[0]).parent().append($($(".informadeclara")[0]).clone());
