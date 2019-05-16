@@ -20,6 +20,7 @@ public class DelineacionUInfoDeclara
 	private String causalExcep;
 	private String presupuestoObra;
 	private String tipoLicencia;
+	private String objetoLicencia;
 	private String totalPagar;
 	private String totalPresupuesto;
 	private String totalRetencion;
@@ -466,6 +467,23 @@ public class DelineacionUInfoDeclara
 	public void setInteresesMora(final String interesesMora)
 	{
 		this.interesMora = interesesMora;
+	}
+
+	/**
+	 * @return the objetoLicencia
+	 */
+	public String getObjetoLicencia()
+	{
+		return objetoLicencia;
+	}
+
+	/**
+	 * @param objetoLicencia
+	 *           the objetoLicencia to set
+	 */
+	public void setObjetoLicencia(final String objetoLicencia)
+	{
+		this.objetoLicencia = objetoLicencia;
 	}
 
 	/* (non-Javadoc)

@@ -113,14 +113,14 @@
 	</div>
 </div>
 
-<div class="col-md-8 text-right">
+<div class="col-md-8 text-center">
 	<%-- 	<sf:button action="" type="submit" class="btn btn-primary btn-lg" --%>
 	<%-- 		id="action" name="action" value="regresar"> --%>
 	<%-- 		<spring:theme --%>
 	<%-- 			code="impuestos.sobreTasaGasolina.representantes.regresar" /> --%>
 	<%-- 	</sf:button> --%>
 
-	<button type="button" class="btn btn-primary btn-lg"
+	<button type="button" class="btn btn-secondary btn-lg"
 		onclick="goBack()">
 		<spring:theme
 			code="impuestos.sobreTasaGasolina.representantes.regresar" />

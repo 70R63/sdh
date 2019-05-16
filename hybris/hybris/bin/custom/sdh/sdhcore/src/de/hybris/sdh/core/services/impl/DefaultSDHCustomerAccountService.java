@@ -34,6 +34,7 @@ import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHICATaxModel;
 import de.hybris.sdh.core.model.SDHPhoneModel;
+import de.hybris.sdh.core.model.SDHReteICATaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
 import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
@@ -50,6 +51,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.ImpuestoReteICA;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -859,6 +861,39 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			else
 			{
 				customerModel.setIcaTaxList(null);
+			}
+
+
+			//clean old ReteICA exterior taxes
+
+
+			final SDHReteICATaxModel oldReteIcaTaxModel = customerModel.getReteIcaTaxList();
+
+			if (oldReteIcaTaxModel != null)
+			{
+				modelService.removeAll(oldReteIcaTaxModel);
+			}
+
+			final ImpuestoReteICA reteIca = sdhConsultaContribuyenteBPResponse.getReteICA();
+
+			if (reteIca != null)
+			{
+				final SDHReteICATaxModel newReteIcaTaxModel = new SDHReteICATaxModel();
+
+				if (!StringUtils.isBlank(reteIca.getNumObjeto()))
+				{
+					newReteIcaTaxModel.setObjectNumber(reteIca.getNumObjeto());
+					newReteIcaTaxModel.setIdNumber(reteIca.getNumID());
+				}
+
+				modelService.saveAll(newReteIcaTaxModel);
+
+				customerModel.setReteIcaTaxList(newReteIcaTaxModel);
+
+			}
+			else
+			{
+				customerModel.setReteIcaTaxList(null);
 			}
 
 

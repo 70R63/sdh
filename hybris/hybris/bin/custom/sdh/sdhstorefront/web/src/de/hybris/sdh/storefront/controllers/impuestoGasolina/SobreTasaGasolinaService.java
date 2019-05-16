@@ -135,6 +135,7 @@ public class SobreTasaGasolinaService
 		catalogosForm.setAnoGravable(obtenerListaAnioGravable(obtenerAnoGravableActual(),
 				Integer.parseInt(configurationService.getConfiguration().getString(confCantidadAnioGravableBusqueda))));
 		catalogosForm.setTipoDeLicencia(obtenerListaTipoDeLicencia());
+		catalogosForm.setObjetoLicencia(obtenerListaObjetoDeLicencia());
 		catalogosForm.setModalidadLicencia(obtenerListaModalidadLicencia());
 		catalogosForm.setPresupuestoObra(obtenerListaPresupuestoObra());
 		catalogosForm.setCausalExencion(obtenerListaCausalExencion());
@@ -322,6 +323,18 @@ public class SobreTasaGasolinaService
 		elementos.put("00", "Seleccionar");
 		elementos.put("01", "Licencia");
 		elementos.put("02", "Reconocimiento");
+
+		return elementos;
+	}
+
+	private Map<String, String> obtenerListaObjetoDeLicencia()
+	{
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "INICIAL");
+		elementos.put("02", "MODIFICACIÓN DE LICENCIA");
+		elementos.put("03", "REVALIDACIÓN");
 
 		return elementos;
 	}

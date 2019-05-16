@@ -33,10 +33,10 @@
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.radicados.question1" /></label> <input
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important"
-					type="radio" name="optradio" onclick="seleccion2(this)" value="1">
+					type="radio" name="optradio" id="optradio1" onclick="seleccion2(this)" value="1">
 				Si <input
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important"
-					type="radio" name="optradio" onclick="seleccion2(this)" value="2">No
+					type="radio" name="optradio" id="optradio2" onclick="seleccion2(this)" value="2">No
 			</div>
 		</div>
 
@@ -44,19 +44,19 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 ">
 				<table class="table" id="duRadicados">
-					<thead style="background-color: #006DCC !important">
+					<thead>
 						<tr>
-							<th style="text-align: center"><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.radicados" /> </label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.fechradicado" /></label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.modlicencia" /></label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.presupuestoRadicado" /></label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.codigoEstrato" /></label></th>
-							<th style="text-align: center"><label class="control-label"><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.seleccionar" /></label></th>
 						</tr>
 					</thead>
@@ -143,14 +143,24 @@
 		var seleccionar = document.getElementById('selectRadicado');
 		var btndecla = document.getElementById('declaradelibutton1');
 		var btnreten = document.getElementById('retenciondelibutton1');
+		var tblradicados = document.getElementById('duRadicados');
+		var tableIndex = 0;
 
-		if (x == '2') {
+		if (x == '2') {  //DECLARACION
+			while (renglon = tblradicados.rows[tableIndex++]) {
+				renglon.lastElementChild.lastElementChild.checked = true;
+				renglon.lastElementChild.lastElementChild.disabled = true;
+			}
 			btndecla.disabled = false;
 			btnreten.disabled = true;
 			seleccionar.checked = true;
-		} else if (x == '1') {
+		} else if (x == '1') { //RETENCION
+			while (renglon = tblradicados.rows[tableIndex++]) {
+				renglon.lastElementChild.lastElementChild.checked = false;
+				renglon.lastElementChild.lastElementChild.disabled = false;
+			}
 			btndecla.disabled = true;
-			btnreten.disabled = false;
+			btnreten.disabled = true;
 			seleccionar.checked = false;
 		}
 

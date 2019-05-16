@@ -56,6 +56,7 @@
 		<property name="gasTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHGasTaxData>"/>
 		<property name="urbanDelineationsTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData>"/>
 		<property name="icaTax" type="de.hybris.sdh.facades.questions.data.SDHICATaxData"/>
+		<property name="reteIcaTax" type="de.hybris.sdh.facades.questions.data.SDHReteICATaxData"/>
 		
 	</bean>
 	
@@ -125,6 +126,11 @@
 	
 	<bean class="de.hybris.sdh.facades.questions.data.SDHICATaxData">	
 		<property name="objectNumber" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHReteICATaxData">	
+		<property name="objectNumber" type="String"/>
+		<property name="idNumber" type="String"/>
 	</bean>
 	
 	

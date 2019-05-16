@@ -34,10 +34,10 @@ function goBack() {
 							"sPaginationType" : "full_numbers",
 							"oLanguage" : {
 								"oPaginate" : {
-									"sPrevious" : "Anterior",
-									"sNext" : "Siguiente",
-									"sLast" : "Ãltima",
-									"sFirst" : "Primera"
+									"sPrevious" : " Anterior ",
+									"sNext" : " Siguiente ",
+									"sLast" : " Última ",
+									"sFirst" : " Primera "
 								},
 								"sLengthMenu" : 'Mostrar <select>'
 										+ '<option value="5">5</option>'

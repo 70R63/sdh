@@ -30,18 +30,17 @@
 			</table>
 		</div>
 	</div>
-</div>
 
 
 
 
-<!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq"> -->
 
-<input type="hidden" value="" id="selectedTipoValla" />
+	<!-- <form:form action="${pageContext.request.contextPath}/contribuyentes2/publicidadexterior/detalle" method="post" commandName="publicidadFormReq"> -->
 
-<input type="hidden" value="" id="selectedNumRes" />
-<div class="row mt-3">
-	<div class="col-md-7 col-md-offset-3 d-flex align-items-center">
+	<input type="hidden" value="" id="selectedTipoValla" /> <input
+		type="hidden" value="" id="selectedNumRes" />
+	<div class="row mt-3">
+		<div class="col-md-7 col-md-offset-3 d-flex align-items-center">
 
 			<div class="table-responsive text-center">
 				<table class="table table-bordered">
@@ -58,21 +57,18 @@
 					<tbody>
 						<tr>
 							<td><input class="inputtextnew tableident"
-								disabled="disabled" type="text" size="30"
-								value="${docType }" /></td>
+								disabled="disabled" type="text" size="30" value="${docType }" /></td>
 							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30"
-								value="${docNumber }" /></td>
+								disabled="disabled" type="text" size="30" value="${docNumber }" /></td>
 							<td><input class="inputtextnew tablenombre"
-								disabled="disabled" type="text" size="30"
-								value="${name }" /></td>
+								disabled="disabled" type="text" size="30" value="${name }" /></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
+		</div>
 	</div>
-</div>
 
 	<br>
 	<div class="row">
@@ -134,7 +130,8 @@
 
 	</div>
 
-<!-- </form:form> -->
+	<!-- </form:form> -->
+</div>
 
 
 
