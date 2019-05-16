@@ -20,7 +20,7 @@
 			<div class="row">
 				<div class="headline">
 					<h2>
-						<span><spring:theme code="obligacion.sujeto.predial.titulo" /></span>
+						<span><spring:theme code="relacion.inicial.predio.titulo" /></span>
 					</h2>
 				</div>
 			</div>
@@ -30,15 +30,15 @@
 						<thead style="cellspacing: 10 !important">
 							<tr>
 								<th><label class="control-label labeltabletd"><spring:theme
-											code="obligacion.inicial.predio.chip" /></label></th>
+											code="relacion.inicial.predio.chip" /></label></th>
 								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.predio.matricula" />
+											code="relacion.inicial.predio.matricula" />
 								</label></th>
 								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.predio.direccion" />
+											code="relacion.inicial.predio.direccion" />
 								</label></th>
 								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.predio.visualizar" /></label></th>
+											code="relacion.inicial.predio.visualizar" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -69,8 +69,7 @@
 			<div class="row">
 				<div class="headline">
 					<h2>
-						<span><spring:theme
-								code="obligacion.sujeto.vehiculos.titulo" /></span>
+						<span><spring:theme code="relacion.inicial.vehiculo.titulo" /></span>
 					</h2>
 				</div>
 			</div>
@@ -80,17 +79,17 @@
 						<thead>
 							<tr>
 								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="obligacion.inicial.vehiculo.placa" /></label></th>
+											code="relacion.inicial.vehiculo.placa" /></label></th>
 								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="obligacion.inicial.vehiculo.modelo" /></label></th>
+											code="relacion.inicial.vehiculo.modelo" /></label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.vehiculo.marca" />
+										<spring:theme code="relacion.inicial.vehiculo.marca" />
 								</label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.vehiculo.linea" />
+										<spring:theme code="relacion.inicial.vehiculo.linea" />
 								</label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.vehiculo.visualizar" />
+										<spring:theme code="relacion.inicial.vehiculo.visualizar" />
 								</label></th>
 							</tr>
 						</thead>
@@ -128,7 +127,7 @@
 			<div class="row">
 				<div class="headline">
 					<h2>
-						<span><spring:theme code="obligacion.sujeto.ica.titulo" /></span>
+						<span><spring:theme code="relacion.inicial.ica.titulo" /></span>
 					</h2>
 				</div>
 			</div>
@@ -138,12 +137,12 @@
 						<thead>
 							<tr>
 								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="obligacion.inicial.ica.tipdocu" /></label></th>
+											code="relacion.inicial.ica.numdoc" /></label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.ica.numdocu" />
+										<spring:theme code="relacion.inicial.ica.tipdocu" />
 								</label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.ica.visualizar" />
+										<spring:theme code="relacion.inicial.ica.visualizar" />
 								</label></th>
 							</tr>
 						</thead>
@@ -171,7 +170,7 @@
 				<div class="headline">
 					<h2>
 						<span><spring:theme
-								code="obligacion.sujeto.publiext.titulo" /></span>
+								code="relacion.inicial.publicidad.titulo" /></span>
 					</h2>
 				</div>
 			</div>
@@ -181,12 +180,12 @@
 						<thead style="cellspacing: 10 !important">
 							<tr>
 								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="obligacion.inicial.publicidad.numresol" /></label></th>
+											code="relacion.inicial.publicidad.numresol" /></label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.publicidad.tipvalla" />
+										<spring:theme code="relacion.inicial.publicidad.tipvalla" />
 								</label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.publicidad.visualizar" />
+										<spring:theme code="relacion.inicial.publicidad.visualizar" />
 								</label></th>
 							</tr>
 						</thead>
@@ -214,8 +213,7 @@
 			<div class="row">
 				<div class="headline">
 					<h2>
-						<span><spring:theme
-								code="obligacion.sujeto.gasolina.titulo" /></span>
+						<span><spring:theme code="relacion.inicial.gasolina.titulo" /></span>
 					</h2>
 				</div>
 			</div>
@@ -226,12 +224,12 @@
 						<thead style="cellspacing: 10 !important">
 							<tr>
 								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="obligacion.inicial.gasolina.tipiden" /></label></th>
+											code="relacion.inicial.gasolina.tipdoc" /></label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.gasolina.numiden" />
+										<spring:theme code="relacion.inicial.gasolina.numdoc" />
 								</label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.gasolina.visualizar" />
+										<spring:theme code="relacion.inicial.gasolina.visualizar" />
 								</label></th>
 							</tr>
 						</thead>
@@ -270,24 +268,27 @@
 						<thead style="cellspacing: 10 !important">
 							<tr>
 								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="obligacion.inicial.delineacion.cdu" /></label></th>
+											code="relacion.inicial.delineacion.retencion.cdu" /></label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.delineacion.licconstr" />
+										<spring:theme
+											code="relacion.inicial.delineacion.retencion.liccons" />
 								</label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.delineacion.direccion" />
+										<spring:theme
+											code="relacion.inicial.delineacion.retencion.direccion" />
 								</label></th>
 								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.delineacion.visualizar" />
+										<spring:theme
+											code="relacion.inicial.delineacion.retencion.visualizar" />
 								</label></th>
 							</tr>
 						</thead>
 						<tbody>
 
 							<tr>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="cdu"></c:out>" /></td>
+								<td><label class="control-label"
+									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+									id="" onclick="showdetail('7')">CDU</label></td>
 								<td><input style="width: 100%" class="inputtextnew"
 									maxlength="30" size="30" disabled="disabled" type="text"
 									value="<c:out value="licencia"></c:out>" /></td>
@@ -309,188 +310,138 @@
 
 		<div id="detalle-predial" style="display: none;">
 			<div class="row">
-				<div class="col-md-6">
-					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.conreserva" />
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.sinreserva" />
+						</label>
+					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-8 text-center">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="">
 							<thead>
 								<tr>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.predio.chip" /> </label></th>
 									<th><label class="control-label labeltabletd tableangrav"><spring:theme
-												code="obligacion.sujeto.predial.aniograv" /> </label></th>
+												code="relacion.inicial.predio.aniograv" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.predial.edoobliga" /> </label></th>
+												code="relacion.inicial.predio.tipdoc" /> </label></th>
+									<th><label class="control-label labeltabletd "><spring:theme
+												code="relacion.inicial.predio.norefrecaudo" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.predial.obligacion" /> </label></th>
+												code="relacion.inicial.predio.sticker" /> </label></th>
+									<th><label class="control-label labeltabletd tablefechas"><spring:theme
+												code="relacion.inicial.predio.fecpreseta" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.predial.actooficial" /> </label></th>
+												code="relacion.inicial.predio.totpagado" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.predio.totaporte" /> </label></th>
 
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><label class="form-check-label"> <input
-											type="radio" name="aporte" id=""
-											class="form-check-input mr-2"
-											style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-											<c:out value="123456" />
-									</label></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew " disabled="disabled"
 										value="" type="text" /></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tablefechas"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.predial.presendecla" />
-						</button>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.predial.genrop" />
-						</button>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.predial.paglinea" />
-						</button>
-					</div>
-				</div>
-			</div>
 		</div>
+
 
 		<div id="detalle-ica" style="display: none;">
 			<div class="row">
-				<div class="col-md-6">
-					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 text-center">
-					<div class="table-responsive">
-						<table class="table table-bordered" id="">
-							<thead>
-								<tr>
-									<th><label class="control-label labeltabletd"><spring:theme
-												code="obligacion.sujeto.ica.aniograv" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.ica.periodo" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.ica.edoobliga" /> </label></th>
-									<th><label class="control-label labeltabletd"><spring:theme
-												code="obligacion.sujeto.ica.obligacion" /> </label></th>
-									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.ica.actooficial" /> </label></th>
-
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label class="form-check-label"> <input
-											type="radio" name="aporte" id=""
-											class="form-check-input mr-2"
-											style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-											<c:out value="2019" />
-									</label></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.ica.presendecla" />
-						</button>
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.conreserva" />
+						</label>
 					</div>
 				</div>
 				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.ica.genrop" />
-						</button>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.ica.paglinea" />
-						</button>
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.sinreserva" />
+						</label>
 					</div>
 				</div>
 			</div>
-		</div>
-
-
-		<div id="detalle-vehiculos" style="display: none;">
 			<div class="row">
-				<div class="col-md-6">
-					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 text-center">
+				<div class="col-md-8 text-center">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tableangrav"><spring:theme
-												code="obligacion.sujeto.vehiculos.aniograv" /> </label></th>
+												code="relacion.inicial.ica.aniograv" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.vehiculos.edoobliga" /> </label></th>
+												code="relacion.inicial.ica.periodo" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.vehiculos.obligacion" /> </label></th>
+												code="relacion.inicial.ica.tipdocu" /> </label></th>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="relacion.inicial.ica.numrefrec" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.vehiculos.actooficial" /> </label></th>
+												code="relacion.inicial.ica.sticker" /> </label></th>
+									<th><label class="control-label labeltabletd tablefechas"><spring:theme
+												code="relacion.inicial.ica.fecprese" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.ica.totpag" /> </label></th>
 
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><label class="form-check-label"> <input
-											type="radio" name="aporte" id=""
-											class="form-check-input mr-2"
-											style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-											<c:out value="RCK502" />
-									</label></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew " disabled="disabled"
+										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tablefechas"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
@@ -500,29 +451,79 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+
+
+		<div id="detalle-vehiculos" style="display: none;">
 			<div class="row">
-				<div class="col-md-3">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.vehiculos.presendecla" />
-						</button>
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.conreserva" />
+						</label>
 					</div>
 				</div>
 				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.vehiculos.genrop" />
-						</button>
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.sinreserva" />
+						</label>
 					</div>
 				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.vehiculos.paglinea" />
-						</button>
+			</div>
+			<div class="row">
+				<div class="col-md-8 text-center">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="">
+							<thead>
+								<tr>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.vehiculo.placa" /> </label></th>
+									<th><label class="control-label labeltabletd tableangrav"><spring:theme
+												code="relacion.inicial.vehiculo.aniograv" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.vehiculo.tipdoc" /> </label></th>
+									<th><label class="control-label labeltabletd "><spring:theme
+												code="relacion.inicial.vehiculo.numrefrec" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.vehiculo.sticker" /> </label></th>
+									<th><label class="control-label labeltabletd tablefechas"><spring:theme
+												code="relacion.inicial.vehiculo.fecprese" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.vehiculo.totpag" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.vehiculo.totapovol" /> </label></th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tableangrav"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tableangrav"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew " disabled="disabled"
+										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tablefechas"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -531,9 +532,31 @@
 
 		<div id="detalle-delurbana" style="display: none;">
 			<div class="row">
-				<div class="col-md-6">
-					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+				<div class="col-md-12">
+					<label class="control-label" style="text-transform: none;"><spring:theme
+							code="relacion.inicial.delineacion.retencion.nota1" /> </label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.conreserva" />
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.sinreserva" />
+						</label>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -543,35 +566,39 @@
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.inicial.delineacion.numident" /> </label></th>
+												code="relacion.inicial.delineacion.cdu" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.inicial.delineacion.tipiden" /> </label></th>
+												code="relacion.inicial.delineacion.tipo" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.modalidad" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
-												code="obligacion.sujeto.delurbana.direccion" /> </label></th>
-									<th><label class="control-label labeltabletd tableangrav"><spring:theme
-												code="obligacion.sujeto.delurbana.aniograv" /> </label></th>
+												code="relacion.inicial.delineacion.nurefrec" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.delurbana.edoobliga" /> </label></th>
+												code="relacion.inicial.delineacion.sticker" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.delurbana.obligacion" /> </label></th>
+												code="relacion.inicial.delineacion.tipdocu" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.delurbana.actooficial" /> </label></th>
-
+												code="relacion.inicial.delineacion.fecprese" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.totrete" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.totpag" /> </label></th>
 								</tr>
 							</thead>
+
 							<tbody>
 								<tr>
-									<td><label class="form-check-label tabledoobli"> <input
-											type="radio" name="aporte" id=""
-											class="form-check-input mr-2"
-											style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-											<c:out value="1234" />
-									</label></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew" disabled="disabled"
 										value="" type="text" /></td>
-									<td><input class="inputtextnew tableangrav"
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
@@ -585,68 +612,144 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		
+		
+		<div id="detalle-retenciones" style="display: none;">
 			<div class="row">
-				<div class="col-md-3">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.delurbana.presendecla" />
-						</button>
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.conreserva" />
+						</label>
 					</div>
 				</div>
 				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.delurbana.genrop" />
-						</button>
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.sinreserva" />
+						</label>
 					</div>
 				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.delurbana.paglinea" />
-						</button>
+			</div>
+			<div class="row">
+				<div class="col-md-8 text-center">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="">
+							<thead>
+								<tr>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.retencion.cdu" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.retencion.radicados" />
+									</label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.retencion.tipo" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.retencion.modalidad" />
+									</label></th>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="relacion.inicial.delineacion.retencion.nurefrec" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.retencion.sticker" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.retencion.tipdocu" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.retencion.fecprese" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.delineacion.retencion.totpag" /> </label></th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+		
 
 		<div id="detalle-gasolina" style="display: none;">
 			<div class="row">
-				<div class="col-md-6">
-					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.conreserva" />
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.sinreserva" />
+						</label>
+					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-8 text-center">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="">
 							<thead>
 								<tr>
+									<th><label class="control-label labeltabletd tableangrav"><spring:theme
+												code="relacion.inicial.gasolina.aniograv" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.gasolina.periodo" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
-												code="obligacion.sujeto.gasolina.aniograv" /> </label></th>
+												code="relacion.inicial.gasolina.nurefrec" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.gasolina.periodo" /> </label></th>
+												code="relacion.inicial.gasolina.sticker" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.gasolina.edoobliga" /> </label></th>
+												code="relacion.inicial.gasolina.tipdoc" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.gasolina.obligacion" /> </label></th>
+												code="relacion.inicial.gasolina.fecprese" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.gasolina.actooficial" /> </label></th>
+												code="relacion.inicial.gasolina.totpag" /> </label></th>
 
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><label class="form-check-label"> <input
-											type="radio" name="aporte" id=""
-											class="form-check-input mr-2"
-											style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-											<c:out value="1234" />
-									</label></td>
+									<td><input class="inputtextnew tableangrav"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew " disabled="disabled"
+										value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -661,30 +764,30 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+
+		<div id="detalle-publiext" style="display: none;">
 			<div class="row">
-				<div class="col-md-3">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.gasolina.presendecla" />
-						</button>
+				<div class="col-md-2">
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.conreserva" />
+						</label>
 					</div>
 				</div>
 				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.gasolina.paglinea" />
-						</button>
+					<div class="form-check">
+						<label class="form-check-label" style="text-transform: capitalize">
+							<input type="checkbox" name="regimen" id=""
+							class="form-check-input mr-2"
+							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
+							<spring:theme code="relacion.inicial.sinreserva" />
+						</label>
 					</div>
-				</div>
-			</div>
-		</div>
-		<div id="detalle-publiext" style="display: none;">
-			<div class="row">
-				<div class="col-md-6">
-					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
 				</div>
 			</div>
 			<div class="row">
@@ -694,32 +797,36 @@
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd"><spring:theme
-												code="obligacion.sujeto.publiext.noresol" /> </label></th>
+												code="relacion.inicial.publicidad.numresol" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
-												code="obligacion.sujeto.publiext.dirvalla" /> </label></th>
+												code="relacion.inicial.publicidad.dirins" /> </label></th>
 									<th><label class="control-label labeltabletd tableangrav"><spring:theme
-												code="obligacion.sujeto.publiext.aniograv" /> </label></th>
+												code="relacion.inicial.publicidad.orientacion" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.publiext.orvalla" /> </label></th>
+												code="relacion.inicial.publicidad.regrisol" /> </label></th>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="relacion.inicial.publicidad.numrefrec" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.publiext.edoobliga" /> </label></th>
+												code="relacion.inicial.publicidad.sticker" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.publiext.obligacion" /> </label></th>
+												code="relacion.inicial.publicidad.tipdoc" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-												code="obligacion.sujeto.publiext.actooficial" /> </label></th>
+												code="relacion.inicial.publicidad.fecprese" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.publicidad.totpag" /> </label></th>
 
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><label class="form-check-label"> <input
-											type="radio" name="aporte" id=""
-											class="form-check-input mr-2"
-											style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-											<c:out value="1234" />
-									</label></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew" disabled="disabled"
 										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -733,24 +840,6 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.publiext.presendecla" />
-						</button>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px">
-							<spring:theme code="obligacion.sujeto.publiext.paglinea" />
-						</button>
 					</div>
 				</div>
 			</div>
@@ -760,6 +849,7 @@
 
 <script type="text/javascript">
 	function Selected(selectObject) {
+		debugger;
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
 	}
@@ -767,7 +857,8 @@
 	function showdetail(selectObject) {
 
 		debugger;
-		var value = selectObject.value;
+		var values = selectObject.value;
+		var value = selectObject;
 		var x = document.getElementById('Idimp').value;
 
 		var todo = document.getElementById('idtodos');
@@ -777,8 +868,9 @@
 		var detdeli = document.getElementById('detalle-delurbana');
 		var detgas = document.getElementById('detalle-gasolina');
 		var detplubliext = document.getElementById('detalle-publiext');
+		var detradic = document.getElementById('detalle-retenciones');
 
-		if (x == '1') {
+		if (x == '1' && value !='7') {
 
 			todo.style.display = 'none';
 			detpred.style.display = 'block';
@@ -787,8 +879,9 @@
 			detdeli.style.display = 'none';
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
 
-		} else if (x == '2') {
+		} else if (x == '2' && value !='7') {
 
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
@@ -797,8 +890,9 @@
 			detdeli.style.display = 'none';
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
 
-		} else if (x == '3') {
+		} else if (x == '3' && value !='7') {
 
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
@@ -807,8 +901,9 @@
 			detdeli.style.display = 'none';
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
 
-		} else if (x == '4') {
+		} else if (x == '4'&& value !='7') {
 
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
@@ -817,8 +912,9 @@
 			detdeli.style.display = 'none';
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'block';
+			detradic.style.display = 'none';
 
-		} else if (x == '5') {
+		} else if (x == '5' && value !='7') {
 
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
@@ -827,8 +923,9 @@
 			detdeli.style.display = 'none';
 			detgas.style.display = 'block';
 			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
 
-		} else if (x == '6') {
+		} else if (x == '6' && value !='7') {
 
 			todo.style.display = 'none';
 			detpred.style.display = 'none';
@@ -837,6 +934,18 @@
 			detgas.style.display = 'none';
 			detdeli.style.display = 'block';
 			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
+
+		}  else if (value == '7') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detgas.style.display = 'none';
+			detdeli.style.display = 'none';
+			detplubliext.style.display = 'none';
+			detradic.style.display = 'block';
 
 		} else {
 
@@ -847,6 +956,7 @@
 			detdeli.style.display = 'none';
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
 		}
 
 	}

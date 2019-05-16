@@ -24337,12 +24337,14 @@ input[type="search"] {
   .inputcodciuu,
   .tablenumiden,
   .tabledomatri,
-  .tablecodpost {
+  .tablecodpost,
+  .tabledoobli {
     width: 80px !important;
     text-align: center !important;
   }
   .tablefechas,
-  .tableident {
+  .tableident,
+  .tableangrav {
     width: 75px !important;
     text-align: center !important;
   }
