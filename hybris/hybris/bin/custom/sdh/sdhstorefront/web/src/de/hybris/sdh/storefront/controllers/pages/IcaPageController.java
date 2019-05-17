@@ -23,6 +23,7 @@ import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.pojos.responses.DetalleActivEconomicas;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
@@ -52,6 +53,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -423,6 +425,9 @@ public class IcaPageController extends AbstractPageController
 					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
 		}
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+
+		model.addAttribute("gravableNetIncomes",
+				this.getGravableNetIncomes(numBP, numObjeto, anoGravable, icaInfObjetoRequest.getPeriodo()));
 		//informacion para PSE
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
@@ -573,6 +578,22 @@ public class IcaPageController extends AbstractPageController
 
 		return generaDeclaracionResponse;
 
+	}
+
+	private List<DetalleActivEconomicas> getGravableNetIncomes(final String numBp, final String numObjeto,
+			final String anioGravable,
+			final String periodo)
+	{
+		final ICAInfObjetoRequest ica = new ICAInfObjetoRequest();
+		ica.setNumBP(numBp);
+		ica.setNumObjeto(numObjeto);
+		ica.setAnoGravable(anioGravable);
+		ica.setPeriodo(periodo);
+
+		final ICAInfObjetoResponse responseICA = sdhICAInfObjetoService.consultaICAInfObjetoReturningObject(ica);
+
+		return Objects.nonNull(responseICA.getActivEconomicas()) ? responseICA.getActivEconomicas()
+				: new ArrayList<DetalleActivEconomicas>();
 	}
 
 
