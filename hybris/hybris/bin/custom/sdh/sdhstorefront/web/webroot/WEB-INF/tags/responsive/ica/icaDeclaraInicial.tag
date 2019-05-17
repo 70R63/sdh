@@ -9,51 +9,58 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr class="avisoheadline p">
-						<td style="text-align: center"><spring:theme code="ica.declaracion.title" /></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="avisobody">
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr class="avisoheadline p">
+					<td style="text-align: center"><spring:theme
+							code="ica.declaracion.title" /></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="avisobody">
 
-						<td><spring:theme code="ica.declaracion.descripcion1" /><a
-							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								información</a> <spring:theme code="ica.declaracion.descripcion2" /></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+					<td><spring:theme code="ica.declaracion.descripcion1" /><a
+						href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+							información</a> <spring:theme code="ica.declaracion.descripcion2" /></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
+</div>
 
-	<div class="row mt-3">
-		<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
-			<form:form action="">
-				<div class="table-responsive">
-					<table class="table col-md-2 table-bordered">
-						<thead>
-							<tr>
-								<td><label class="control-label labeltabletd tableident"><spring:theme
-											code="ica.declaracion.table.tipdoc" /></label></td>
-								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="ica.declaracion.table.numdoc" /></label></td>
-								<td><label class="control-label labeltabletd tablenombre"><spring:theme
-											code="ica.declaracion.table.nombre" /></label></td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input class="inputtextnew tableident" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.documentType}"/></td>
-								<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.documentNumber}"/></td>
-								<td><input class="inputtextnew tablenombre" disabled="disabled" type="text" size="30" value="${ icaInfObjetoFormResp.completeName}"/></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</form:form>
-		</div>
+<div class="row mt-3">
+	<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
+		<form:form action="">
+			<div class="table-responsive">
+				<table class="table col-md-2 table-bordered">
+					<thead>
+						<tr>
+							<td><label class="control-label labeltabletd tableident"><spring:theme
+										code="ica.declaracion.table.tipdoc" /></label></td>
+							<td><label class="control-label labeltabletd tablenumiden"><spring:theme
+										code="ica.declaracion.table.numdoc" /></label></td>
+							<td><label class="control-label labeltabletd tablenombre"><spring:theme
+										code="ica.declaracion.table.nombre" /></label></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input class="inputtextnew tableident"
+								disabled="disabled" type="text" size="30"
+								value="${ icaInfObjetoFormResp.documentType}" /></td>
+							<td><input class="inputtextnew tablenumiden"
+								disabled="disabled" type="text" size="30"
+								value="${ icaInfObjetoFormResp.documentNumber}" /></td>
+							<td><input class="inputtextnew tablenombre"
+								disabled="disabled" type="text" size="30"
+								value="${ icaInfObjetoFormResp.completeName}" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form:form>
 	</div>
+</div>
 
