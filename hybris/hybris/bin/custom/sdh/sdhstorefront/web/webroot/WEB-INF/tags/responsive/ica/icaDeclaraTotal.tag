@@ -7,6 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -58,6 +59,7 @@
 					<input class="form-control denomina codCIIU" type="text"
 						value="" />
 				</div>
+				
 				<div class="col-md-3">
 					<input class="form-control ingreso ingresos" type="text"
 						value="" />
@@ -75,7 +77,7 @@
 		</c:if>
 		<!-- fin de código agregado -->
 		
-		
+		<!-- <c:out value="${gravableNetIncomes}"/> -->
 		<c:forEach items="${infoDeclara.ingNetosGrava }" var="eachIngreso">
 			<div class="row totaluno">
 				<div class="col-md-1">
@@ -103,8 +105,9 @@
 					<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
 					
 					<select id="" class="form-control codCIIU" style="height: 48px;">
-						<option value="">SELECCIONAR</option>
-						<c:forEach items="${ econActivities}" var="eachActivity">
+						<option value="" selected>SELECCIONAR</option>
+						<!--  
+						<c:forEach items="${econActivities}" var="eachActivity">
 							
 							<fmt:formatNumber value="${ eachActivity.code}" pattern="#######################" var="eachCodCIIUNumber"/>
 							
@@ -115,6 +118,13 @@
 							
 							<option value="${eachActivity.code}"   ${selected } >${eachActivity.code} - ${eachActivity.description }</option>
 						</c:forEach>
+						-->
+						
+						<!-- EJRO 17/05/2019  -->
+						<c:forEach items="${gravableNetIncomes}" var="eachActivity">
+							<option value="${eachActivity.ciiu}">${eachActivity.ciiu} - ${eachActivity.denominacion}</option>
+						</c:forEach>
+						
 					</select>
 				</div>
 				<div class="col-md-3">
@@ -296,7 +306,7 @@
 							
 							<option value="${eachActivity.code}"   ${selected } >${eachActivity.code} - ${eachActivity.description }</option>
 						</c:forEach>
-					</select>
+					</select> 
 
 			</div>
 			<div class="col-md-1">

@@ -5,6 +5,7 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
+import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 
 import java.io.BufferedReader;
@@ -18,6 +19,9 @@ import javax.annotation.Resource;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.client.support.BasicAuthorizationInterceptor;
+import org.springframework.web.client.RestTemplate;
 
 
 /**
@@ -97,5 +101,27 @@ public class DefaultSDHICAInfObjetoService implements SDHICAInfObjetoService
 		// XXX Auto-generated method stub
 		return null;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * de.hybris.sdh.core.services.SDHICAInfObjetoService#consultaICAInfObjetoReturnungObject(de.hybris.sdh.core.pojos.
+	 * requests.ICAInfObjetoRequest)
+	 */
+	@Override
+	public ICAInfObjetoResponse consultaICAInfObjetoReturningObject(final ICAInfObjetoRequest requestObject)
+	{
+		final String urlString = configurationService.getConfiguration().getString("sdh.ica.infoObjeto.url");
+		final String user = configurationService.getConfiguration().getString("sdh.ica.infoObjeto.user");
+		final String password = configurationService.getConfiguration().getString("sdh.ica.infoObjeto.password");
+
+		final RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(user, password));
+		final HttpEntity<ICAInfObjetoRequest> request = new HttpEntity<>(requestObject);
+		return restTemplate.postForObject(urlString, request, ICAInfObjetoResponse.class);
+	}
+
+
 
 }
