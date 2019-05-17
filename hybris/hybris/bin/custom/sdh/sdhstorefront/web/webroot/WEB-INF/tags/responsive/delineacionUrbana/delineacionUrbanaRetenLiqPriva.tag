@@ -35,12 +35,14 @@
 		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.valrete" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
+						code="delineacion.urbana.dec.liqpriv.valrete" /></label> <input id="totalRetencion"
+					name="totalRetencion" class="form-control" aria-required="true" type="text"
 					value="${dataForm.infObjetoDelineacion.infoDeclara.totalRetencion}" maxlength="240" disabled>
+					<sf:hidden path="input.totalRetencionOBLIGATORIO" id="totalRetencionOBLIGATORIO"/>
 			</div>
 		</div>
 	</div>
+	
 
 	<div class="row">
 		<div class="col-md-4">

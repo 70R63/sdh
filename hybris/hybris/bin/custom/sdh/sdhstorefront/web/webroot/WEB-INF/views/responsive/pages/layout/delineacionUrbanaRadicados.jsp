@@ -13,7 +13,8 @@
 	var="duRetencionURL" htmlEscape="false" />
 
 <sf:form action="${duRetencionURL}" method="POST"
-	modelAttribute="dataForm" id="forma">
+	modelAttribute="dataForm" id="forma"
+	onsubmit="return validarAntesCalculo();">
 	<delineacionUrbana:delineacionUrbanaRetenGenerales />
 	<delineacionUrbana:delineacionUrbanaRetenAreasUsos />
 	<delineacionUrbana:delineacionUrbanaRetenLiqPriva />
@@ -26,16 +27,17 @@
 <script>
 	function goBack() {
 		var declaracion = '${param.declaracion}';
-		
-		if(declaracion){
+
+		if (declaracion) {
 			window.location.href = "/sdhstorefront/es/contribuyentes/presentar-declaracion";
-		}else{
+		} else {
 			window.history.back();
 		}
 	}
 
 	function obranueva(selectObject) {
 
+		debugger;
 		var value = selectObject.value;
 		var areaintervenida = document.getElementById('selectareinter');
 		var inareainter = document.getElementById('inputareainter');
@@ -49,6 +51,17 @@
 			areaintervenida.disabled = true;
 			inareainter.disabled = true;
 		}
+
+		//Validacion presupuesto de obra = 02
+		var presupuestoObra = document.getElementById('presupuestoObra');
+		var totalRetencion = document.getElementById('totalRetencion');
+
+		if (presupuestoObra == '02') {
+			totalRetencion.disabled = false;
+		} else {
+			totalRetencion.disabled = true;
+		}
+
 	}
 
 	function costoshabil(selectObject) {
@@ -77,6 +90,46 @@
 			valcons.disabled = false;
 			valapr.disabled = false;
 		}
+	}
+
+	function presupuestoObraCHANGE(selectObject) {
+
+		debugger;
+		//Validacion presupuesto de obra = 02
+		var totalRetencion = document.getElementById('totalRetencion');
+		var totalRetencionOBLIGATORIO = document
+				.getElementById('totalRetencionOBLIGATORIO');
+		var presupuestoObra = selectObject.value;
+
+		if (presupuestoObra == "02") {
+			totalRetencion.disabled = false;
+			totalRetencionOBLIGATORIO.value = 'X';
+		} else {
+			totalRetencion.disabled = true;
+		}
+
+	}
+
+	function validarAntesCalculo() {
+
+		debugger;
+		var totalRetencion = document.getElementById('totalRetencion').value;
+		var totalRetencionOBLIGATORIO = document
+				.getElementById('totalRetencionOBLIGATORIO').value;
+
+		if (totalRetencionOBLIGATORIO == "X") {
+			if (totalRetencion <= 0) {
+				alert("Debido al valor en el campo \"Presupuesto de obra\" el campo \"Valor de retención\" será obligatorio (su valor deberá ser mayor o igual a cero)");
+				return false;
+			} else {
+				document.form.submit();
+				return true;
+			}
+		} else {
+			document.form.submit();
+			return true;
+		}
+
 	}
 </script>
 

@@ -25,8 +25,18 @@
 						maxlength="240" path="infObjetoDelineacion.infoDeclara.totalPresupuesto" />
 				</div>
 			</div>
-
 		</div>
+		
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group ">
+					<label class="control-label"><spring:theme
+							code="delineacion.urbana.dec.liqpriv.valorExencion" /></label> <input id=""
+						name="" class="form-control" aria-required="true" type="text"
+						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.impuestoCargo}" maxlength="240">
+				</div>
+			</div>
+		</div>		
 
 		<div class="row">
 			<div class="col-md-4">
