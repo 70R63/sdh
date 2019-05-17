@@ -92,7 +92,7 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.areasusos.preobra" /></label>
-					<sf:select class="form-control" id="an" onchange="obranueva(this)"
+					<sf:select class="form-control" name="presupuestoObra" id="presupuestoObra" onchange="presupuestoObraCHANGE(this)"
 						path="infObjetoDelineacion.infoDeclara.presupuestoObra"
 						items="${dataForm.catalogos.presupuestoObra}"></sf:select>
 				</div>

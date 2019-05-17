@@ -40,7 +40,12 @@
 					<spring:theme code="ica.declaracion.actifuera.ingre" />
 				</label>
 			</div>
+			<div class="col-md-3" style="margin-bottom: 3px !important">
+				<button class="btn btn-primary" data-toggle="modal"
+			data-target="#fm-modal" type="button" onclick="addfile()">Adjuntar archivo</button>
+			</div>
 		</div>
+		
 		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
 <%-- 			<c:if test="${not empty eachIngreso.codCIIU }"> --%>
 				<div class="row actvifuera">
@@ -127,6 +132,14 @@
 					</div>
 				</div>
 <!-- fin de código agregado -->
+
+<div id="adjuntar" class="row" style="display: none;">
+		<div class="col-md-3" style="margin-top: 20px !important">
+		
+		<input class="control-form" type="file"></input>
+				
+			</div>
+		</div>
 	</form:form>
 </div>
 
@@ -161,5 +174,11 @@
 		} else if ($(".actvifuera").length <= 1) {
 			alert("No puede eliminar todos los registros");
 		}
+	}
+	
+	function addfile(){
+		debugger;
+		var subir = document.getElementById('adjuntar');
+		subir.style.display = 'block';
 	}
 </script>

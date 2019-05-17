@@ -16,11 +16,12 @@ public class InfoDelineacionInput
 	private String selectedRadicado;
 	private String selectedTipoLicencia;
 	private String tipoFlujo;
+	private String totalRetencionOBLIGATORIO;
 
 	private Map<String, String> modalidadLicencia;
 	private Map<String, String> presupuestoObra;
 	private Map<String, String> causalExencion;
-	
+
 	/**
 	 * @return the tipoFlujo
 	 */
@@ -139,5 +140,24 @@ public class InfoDelineacionInput
 	{
 		this.selectedRadicado = selectedRadicado;
 	}
+
+	/**
+	 * @return the totalRetencionOBLIGATORIO
+	 */
+	public String getTotalRetencionOBLIGATORIO()
+	{
+		return totalRetencionOBLIGATORIO;
+	}
+
+	/**
+	 * @param totalRetencionOBLIGATORIO
+	 *           the totalRetencionOBLIGATORIO to set
+	 */
+	public void setTotalRetencionOBLIGATORIO(final String totalRetencionOBLIGATORIO)
+	{
+		this.totalRetencionOBLIGATORIO = totalRetencionOBLIGATORIO;
+	}
+
+
 
 }
