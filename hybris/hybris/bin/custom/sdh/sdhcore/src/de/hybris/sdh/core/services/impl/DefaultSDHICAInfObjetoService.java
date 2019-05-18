@@ -108,6 +108,7 @@ public class DefaultSDHICAInfObjetoService implements SDHICAInfObjetoService
 	 * @see
 	 * de.hybris.sdh.core.services.SDHICAInfObjetoService#consultaICAInfObjetoReturnungObject(de.hybris.sdh.core.pojos.
 	 * requests.ICAInfObjetoRequest)
+	 *
 	 */
 	@Override
 	public ICAInfObjetoResponse consultaICAInfObjetoReturningObject(final ICAInfObjetoRequest requestObject)

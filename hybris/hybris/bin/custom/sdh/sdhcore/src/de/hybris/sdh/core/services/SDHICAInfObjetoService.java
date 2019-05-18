@@ -15,6 +15,7 @@ public interface SDHICAInfObjetoService
 {
 	String consultaICAInfObjeto(ICAInfObjetoRequest request);
 
+	//
 	ICAInfObjetoResponse consultaICAInfObjetoReturningObject(ICAInfObjetoRequest requestObject);
 
 }
