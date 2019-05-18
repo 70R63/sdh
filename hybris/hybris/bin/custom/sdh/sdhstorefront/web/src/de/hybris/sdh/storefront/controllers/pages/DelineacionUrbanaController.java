@@ -401,8 +401,20 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setNumObjeto(numObjeto);
 
 
+
+		String tipoMarca = "";
+
+		for (int i = 0; i < infoDelineacion.getValCont().getDelineacion().size(); i++)
+		{
+			if (infoDelineacion.getValCont().getDelineacion().get(i).getCdu().equals(infoDelineacion.getInput().getSelectedCDU()))
+			{
+				tipoMarca = infoDelineacion.getValCont().getDelineacion().get(i).getTipoMarca();
+			}
+		}
+
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("dataForm", infoDelineacion);
+		model.addAttribute("tipoMarca", tipoMarca);
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));

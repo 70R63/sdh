@@ -64,11 +64,20 @@
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.tiplicencia" /></label>
-				<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
-					items="${dataForm.catalogos.tipoDeLicencia}"
-					referenceData="${dataForm.catalogos.tipoDeLicencia}"
-					class="form-control"></sf:select>
-
+				<c:if test="${empty tipoMarca}">
+					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
+						items="${dataForm.catalogos.tipoDeLicencia}"
+						referenceData="${dataForm.catalogos.tipoDeLicencia}"
+						class="form-control" readonly="true">
+					</sf:select>
+				</c:if>
+				<c:if test="${not empty  tipoMarca}">
+					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
+						items="${dataForm.catalogos.tipoDeLicencia}"
+						referenceData="${dataForm.catalogos.tipoDeLicencia}"
+						class="form-control">
+					</sf:select>
+				</c:if>
 				<!-- 				<select -->
 				<!-- 					id="an" class="form-control " name=" " onchange=" "> -->
 				<!-- 					<option value="">Seleccionar</option> -->
@@ -76,6 +85,7 @@
 				<!-- 					<option value="2">Reconocimiento</option> -->
 				<!-- 				</select> -->
 			</div>
+			<c:out value="${delineacion.tipoMarca}"></c:out>
 		</div>
 
 		<div class="col-md-4">
