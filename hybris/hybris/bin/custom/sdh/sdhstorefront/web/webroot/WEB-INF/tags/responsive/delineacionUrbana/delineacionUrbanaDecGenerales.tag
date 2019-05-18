@@ -68,7 +68,7 @@
 					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
 						items="${dataForm.catalogos.tipoDeLicencia}"
 						referenceData="${dataForm.catalogos.tipoDeLicencia}"
-						class="form-control" readonly="true">
+						class="form-control" disabled="true" readonly="true">
 					</sf:select>
 				</c:if>
 				<c:if test="${not empty  tipoMarca}">
@@ -85,7 +85,6 @@
 				<!-- 					<option value="2">Reconocimiento</option> -->
 				<!-- 				</select> -->
 			</div>
-			<c:out value="${delineacion.tipoMarca}"></c:out>
 		</div>
 
 		<div class="col-md-4">
