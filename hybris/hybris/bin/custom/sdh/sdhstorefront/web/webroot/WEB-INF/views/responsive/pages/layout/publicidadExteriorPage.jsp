@@ -24,7 +24,7 @@
 
 <%-- <sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="POST" modelAttribute="publicidadForm" id="forma"> --%>
 <sf:form action="" method="POST" modelAttribute="publicidadForm" id="forma">
-	<div class="container">
+
 <%-- 		<newpublicidad:publicidadexteriortable/> --%>
 		<publicidadExterior:publicidadExteriorTable />
 		<publicidadExterior:publicidadExteriorDetail />
@@ -35,7 +35,7 @@
 		<publicidadExterior:publicidadExteriorObraConvencional />
 		<publicidadExterior:publicidadExteriorPantallaLed />
 		<publicidadExterior:publicidadExteriorConsultaDetalle />
-	</div>
+
 	</sf:form>
 	
 	<div id="dialogPublicidadExterior" title="Publicidad Exterior" ><div id="publicidadExteriorDialogContent"></div></div>

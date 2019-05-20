@@ -53,24 +53,24 @@
 			</div>
 
 
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label "><spring:theme
-							code="delineacion.urbana.dec.generales.opuso" /></label>
-					<sf:input class="form-control" readonly="true" aria-required="true"
-						maxlength="240" path="infObjetoDelineacion.infoDeclara.opcionUso" />
-				</div>
-			</div>
+<!-- 			<div class="col-md-4"> -->
+<!-- 				<div class="form-group "> -->
+<%-- 					<label class="control-label "><spring:theme --%>
+<%-- 							code="delineacion.urbana.dec.generales.opuso" /></label> --%>
+<%-- 					<sf:input class="form-control" readonly="true" aria-required="true" --%>
+<%-- 						maxlength="240" path="infObjetoDelineacion.infoDeclara.opcionUso" /> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
-							code="delineacion.urbana.dec.generales.tiplicencia" /></label>
+							code="delineacion.urbana.dec.generales.Objetolicencia" /></label>
 					<div class="form-group ">
-						<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
-							items="${dataForm.catalogos.tipoDeLicencia}"
-							referenceData="${dataForm.catalogos.tipoDeLicencia}"
+						<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicencia"
+							items="${dataForm.catalogos.objetoLicencia}"
+							referenceData="${dataForm.catalogos.objetoLicencia}"
 							class="form-control"></sf:select>
 					</div>
 				</div>
@@ -92,7 +92,7 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.areasusos.preobra" /></label>
-					<sf:select class="form-control" id="an" onchange="obranueva(this)"
+					<sf:select class="form-control" name="presupuestoObra" id="presupuestoObra" onchange="presupuestoObraCHANGE(this)"
 						path="infObjetoDelineacion.infoDeclara.presupuestoObra"
 						items="${dataForm.catalogos.presupuestoObra}"></sf:select>
 				</div>
@@ -102,7 +102,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.areasusos.cauexen" /></label>
 					<sf:select class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep"
-						items="${dataForm.catalogos.causalExencion}"></sf:select>
+						items="${dataForm.catalogos.causalExencion}" disabled="true"></sf:select>
 				</div>
 			</div>
 		</div>

@@ -11,7 +11,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimeCertDeclaraRequest;
@@ -363,6 +362,97 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 					imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
 					imprimeCertDeclaraRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+					imprimeCertDeclaraRequest.setPeriodo(aniograv_periodo);
+					imprimeCertDeclaraRequest.setAnoGravable(certiFormPost.getAniograv());
+
+					final String resp = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraRequest);
+					final ImprimePagoResponse imprimeCertiDeclaraResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+					redirectModel.addFlashAttribute("imprimeCertiDeclaraResponse", imprimeCertiDeclaraResponse);
+
+				}
+				catch (final Exception e)
+				{
+					LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+					GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+					if (!certiFormPost.getRowFrompublicidadTable().replace(",", "").equals("X"))
+					{
+						redirectModel.addFlashAttribute("error", "sinPdf");
+					}
+					return "redirect:/contribuyentes/consultas/certideclaraciones";
+
+				}
+			}
+		}
+
+		else if (certiFormPost.getIdimp().equals("7"))//ReteICA
+		{
+			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+			boolean isPeriodoAnual = true;
+
+			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+			certiFormPostRedirect.setPeriodo(certiFormPost.getPeriodo());
+			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+
+			if (customerData.getReteIcaTax() != null)
+			{
+
+				final ICAInfObjetoRequest reteIcaInfObjetoRequest = new ICAInfObjetoRequest();
+				ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
+
+				reteIcaInfObjetoRequest.setNumBP(customerData.getNumBP());
+				reteIcaInfObjetoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+
+				try
+				{
+					final ObjectMapper mapper = new ObjectMapper();
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
+					final String response = sdhICAInfObjetoService.consultaICAInfObjeto(reteIcaInfObjetoRequest);
+					icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+
+					if (icaInfObjetoResponse.getRegimen() != null)
+					{
+						if (icaInfObjetoResponse.getRegimen().charAt(0) != '2')
+						{
+							isPeriodoAnual = false;
+						}
+					}
+				}
+				catch (final Exception e)
+				{
+					LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+				}
+			}
+
+			redirectModel.addFlashAttribute("isPeriodoAnual", isPeriodoAnual);
+
+
+
+
+
+			if (certiFormPost.getIdimp() != null && certiFormPost.getAniograv() != null)
+			{
+				final String aniograv_periodo;
+				if (certiFormPost.getPeriodo() == null)
+				{
+					aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
+				}
+				else
+				{
+					aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
+				}
+
+				try
+				{
+
+					final ObjectMapper mapper = new ObjectMapper();
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+					imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
+					imprimeCertDeclaraRequest.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
 					imprimeCertDeclaraRequest.setPeriodo(aniograv_periodo);
 					imprimeCertDeclaraRequest.setAnoGravable(certiFormPost.getAniograv());
 

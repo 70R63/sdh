@@ -62,7 +62,7 @@
 					</c:when>
 				</c:choose>
 				<c:if test="${not empty component.navigationNode.children}"><span class="glyphicon  glyphicon-chevron-right hidden-md hidden-lg nav__link--drill__down js_nav__link--drill__down"></span></c:if>
-				<div class="sub__navigation js_sub__navigation ${subNavigationClass}">
+				<div class="sub__navigation js_sub__navigation ${subNavigationClass}" style="right: -100px; top: 264.313px; left: auto;">
 					<a class="sm-back js-enquire-sub-close hidden-md hidden-lg" href="#">Back</a>
 					<div class="row">
 					<c:forEach items="${component.navigationNode.children}" var="child">

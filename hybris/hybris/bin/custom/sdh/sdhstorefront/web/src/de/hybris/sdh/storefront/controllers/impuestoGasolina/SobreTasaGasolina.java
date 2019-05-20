@@ -38,7 +38,9 @@ import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -117,6 +119,27 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 	@Resource(name = "modelService")
 	private ModelService modelService;
+
+	@ModelAttribute("productClassMaximumOccurrencies")
+	public Map<String, Integer> getProductClassMaximumOccurrencies()
+	{
+		final HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+		//Gasolina Corriente Básica
+		//map.put("01", valueMaxOccurrancy);
+
+		//Gasolina Corriente Oxigenada
+		map.put("02", 3);
+
+		//Gasolina Extra Básica
+		//map.put("03", valueMaxOccurrancy);
+
+		//Gasolina Extra Oxigenada
+		map.put("04", 3);
+
+		return map;
+
+	}
 
 
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/generar", method = RequestMethod.GET)
