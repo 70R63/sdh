@@ -419,30 +419,19 @@
 	        </itemtype>
 	        <itemtype code="SDHReteICATax" autocreate="true" generate="true">
         		<description>Custom SDH Model to save ReteICA data</description>
-        		<deployment  table="SDHRETEICATAX" typecode="15013"/>
+        		<deployment  table="SDHReteICATAX" typecode="15013"/>
        			<attributes>
        				<attribute qualifier="consecutive" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>   
        				<attribute qualifier="objectNumber" type="java.lang.String">
         				<persistence type="property"></persistence>
-        			</attribute>        			
+        			</attribute>   
+        			<attribute qualifier="numID" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>     			
        			</attributes>
 	        </itemtype>
-	        
-	        <itemtype code="SDHReteICATax" autocreate="true" generate="true">
-        		<description>Custom SDH Model to save ReteICA data</description>
-        		<deployment  table="SDHReteICATAX" typecode="15013"/>
-       			<attributes>
-       				<attribute qualifier="objectNumber" type="java.lang.String">
-        				<persistence type="property"></persistence>
-        			</attribute>
-        			<attribute qualifier="idNumber" type="java.lang.String">
-        				<persistence type="property"></persistence>
-        			</attribute>        			
-       			</attributes>
-	        </itemtype>
-	        
 	        
         	<itemtype code="SDHCustomerRegistrationProcess" extends="StoreFrontCustomerProcess" autocreate="true" generate="true">
 				<attributes>
