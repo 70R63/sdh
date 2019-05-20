@@ -7,6 +7,8 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+<input type="hidden" value="${tipoMarca}" id="tipoMarca"/>
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
@@ -64,11 +66,22 @@
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.tiplicencia" /></label>
-				<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
-					items="${dataForm.catalogos.tipoDeLicencia}"
-					referenceData="${dataForm.catalogos.tipoDeLicencia}"
-					class="form-control"></sf:select>
-
+				<c:if test="${empty tipoMarca}">
+					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
+						id="tipoDeLicencia"
+						items="${dataForm.catalogos.tipoDeLicencia}"
+						referenceData="${dataForm.catalogos.tipoDeLicencia}"
+						class="form-control" disabled="true" readonly="true">
+					</sf:select>
+				</c:if>
+				<c:if test="${not empty  tipoMarca}">
+					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
+						id="tipoDeLicencia"
+						items="${dataForm.catalogos.tipoDeLicencia}"
+						referenceData="${dataForm.catalogos.tipoDeLicencia}"
+						class="form-control" onchange="tipoLicenciaCHANGE(this)">
+					</sf:select>
+				</c:if>
 				<!-- 				<select -->
 				<!-- 					id="an" class="form-control " name=" " onchange=" "> -->
 				<!-- 					<option value="">Seleccionar</option> -->
@@ -124,7 +137,7 @@
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.cauexen" /></label>
 				<sf:input class="form-control" readonly="true" aria-required="true"
-					maxlength="240" path="infObjetoDelineacion.infoDeclara.causalExcep" />
+					maxlength="240" path="infObjetoDelineacion.infoDeclara.causalExcep" /> 
 				<%-- 				<sf:select class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep" --%>
 				<%-- 						items="${dataForm.catalogos.causalExencion}" disabled="true"></sf:select>		 --%>
 

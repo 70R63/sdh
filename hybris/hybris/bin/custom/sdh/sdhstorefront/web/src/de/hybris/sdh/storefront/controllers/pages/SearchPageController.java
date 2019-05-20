@@ -41,7 +41,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,8 +49,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-@Controller
-@RequestMapping("/search")
+//@Controller
+//@RequestMapping("/search")
 public class SearchPageController extends AbstractSearchPageController
 {
 	private static final String SEARCH_META_DESCRIPTION_ON = "search.meta.description.on";

@@ -24,14 +24,14 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.enums.OrderStatus;
-import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
-import de.hybris.platform.sdhpsaddon.security.PSOpenRedirectValidator;
 import de.hybris.platform.publicsectorfacades.order.PSCartFacade;
 import de.hybris.platform.publicsectorfacades.order.PSOrderFacade;
 import de.hybris.platform.publicsectorfacades.order.PSSaveCartFacade;
 import de.hybris.platform.relationshipfacades.permission.PSPermissionFacade;
 import de.hybris.platform.relationshipfacades.relationship.PSRelationshipFacade;
 import de.hybris.platform.relationshipservices.relationship.exception.RelationshipDoesNotExistException;
+import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
+import de.hybris.platform.sdhpsaddon.security.PSOpenRedirectValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  * Extended Controller for functionality related with drafts in my account
  */
-@RequestMapping("/my-account")
+//@RequestMapping("/my-account")
 public class PSAccountDraftsController extends AbstractSearchPageController
 {
 	private static final Logger LOG = LoggerFactory.getLogger(PSAccountDraftsController.class);

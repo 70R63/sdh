@@ -898,7 +898,28 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 
 
+			// clean previous reteICA
+			if (customerModel.getReteIcaTax() != null)
+			{
+				final SDHReteICATaxModel reteICAModel = customerModel.getReteIcaTax();
+				modelService.remove(reteICAModel);
+			}
 
+			if (sdhConsultaContribuyenteBPResponse.getReteIca() != null)
+			{
+				final SDHReteICATaxModel newReteICAModel = customerModel.getReteIcaTax();
+				newReteICAModel.setObjectNumber(sdhConsultaContribuyenteBPResponse.getReteIca().getNumObjeto());
+				newReteICAModel.setConsecutive(sdhConsultaContribuyenteBPResponse.getReteIca().getConsecutive());
+
+				modelService.save(newReteICAModel);
+
+				customerModel.setReteIcaTax(newReteICAModel);
+
+			}
+			else
+			{
+				customerModel.setReteIcaTax(null);
+			}
 
 
 

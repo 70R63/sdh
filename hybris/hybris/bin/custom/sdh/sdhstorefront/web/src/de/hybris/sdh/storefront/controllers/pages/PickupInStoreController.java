@@ -40,7 +40,6 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -52,8 +51,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-@Controller
-@RequestMapping("/store-pickup")
+//
+//@Controller
+//@RequestMapping("/store-pickup")
 public class PickupInStoreController extends AbstractSearchPageController
 {
 	private static final String QUANTITY_REDUCED_NUMBER_OF_ITEMS_ADDED = "basket.information.quantity.reducedNumberOfItemsAdded.";

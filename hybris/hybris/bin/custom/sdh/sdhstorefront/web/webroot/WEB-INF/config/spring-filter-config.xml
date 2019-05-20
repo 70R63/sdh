@@ -177,6 +177,7 @@
 	<util:map id="defaultFileUploadUrlFilterMappings" key-type="java.lang.String" value-type="org.springframework.web.multipart.support.MultipartFilter">
 		<entry key="/import/csv/*" value-ref="importCSVMultipartFilter"/>
 		<entry key="/conciliaciones/*" value-ref="importP7ZultipartFilter"/>
+		<entry key="/retenedores/*" value-ref="importRetencionesMultipartFilter"/>
 	</util:map>
 
 	<bean id="fileUploadFilter" class="de.hybris.sdh.storefront.filters.FileUploadFilter" >
@@ -228,11 +229,19 @@
 		<property name="multipartResolverBeanName" value="importP7ZMultipartResolver"/>
 	</bean>
 	
+	<bean id="importRetencionesMultipartFilter" class="org.springframework.web.multipart.support.MultipartFilter">
+		<property name="multipartResolverBeanName" value="importRetencionesMultipartResolver"/>
+	</bean>
+	
 	<bean id="importCSVMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="#{configurationService.configuration.getProperty('import.csv.max.upload.size.bytes')}" />
 	</bean>
 	
 	<bean id="importP7ZMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="#{configurationService.configuration.getProperty('import.p7z.max.upload.size.bytes')}" />
+	</bean>
+	
+	<bean id="importRetencionesMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="#{configurationService.configuration.getProperty('sdh.reteica.file.max.upload.size.bytes')}" />
 	</bean>
 </beans>

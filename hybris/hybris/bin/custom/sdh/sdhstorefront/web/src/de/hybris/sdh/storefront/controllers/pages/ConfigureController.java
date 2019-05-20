@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +37,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * The controller redirects to specific configuration page. If product is configurable the controller takes first one
  * configuration and use its type for redirect. If product is not configurable the controller redirect to 404 page.
  */
-@Controller
-@RequestMapping(value = "/**/p/{productCode:.*}/configuratorPage")
+//@Controller
+//@RequestMapping(value = "/**/p/{productCode:.*}/configuratorPage")
 public class ConfigureController extends AbstractPageController
 {
 	@Resource(name = "productVariantFacade")

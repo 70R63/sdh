@@ -23,7 +23,8 @@ public class SDHValidaMailRolResponse
 	private List<ContribAgente> agentes;
 	private List<ImpuestoDelineacionUrbana> delineacion;
 	private ImpuestoICA ica;
-	private ImpuestoReteICA reteICA;
+	private ReteICA reteIca;
+	//	private ImpuestoReteICA reteICA;
 
 	/**
 	 * @return the infoContrib
@@ -180,21 +181,27 @@ public class SDHValidaMailRolResponse
 	}
 
 	/**
-	 * @return the reteICA
+	 * @return the reteIca
 	 */
-	public ImpuestoReteICA getReteICA()
+	public ReteICA getReteIca()
 	{
-		return reteICA;
+		return reteIca;
 	}
 
-	/**
-	 * @param reteICA
-	 *           the reteICA to set
-	 */
-	public void setReteICA(final ImpuestoReteICA reteICA)
+	public void setReteIca(final ReteICA reteIca)
 	{
-		this.reteICA = reteICA;
+		this.reteIca = reteIca;
 	}
+
+	//	public ImpuestoReteICA getReteICA()
+	//	{
+	//		return reteICA;
+	//	}
+	//
+	//	public void setReteICA(final ImpuestoReteICA reteICA)
+	//	{
+	//		this.reteICA = reteICA;
+	//	}
 
 
 

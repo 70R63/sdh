@@ -30,10 +30,8 @@ import de.hybris.platform.commercefacades.order.SaveCartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.CommerceSaveCartParameterData;
 import de.hybris.platform.commercefacades.order.data.CommerceSaveCartResultData;
-import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
-import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceSaveCartException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
@@ -43,13 +41,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -65,8 +61,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  * Controller for saved carts page
  */
-@Controller
-@RequestMapping("/my-account/saved-carts")
+//@Controller
+//@RequestMapping("/my-account/saved-carts")
 public class AccountSavedCartsPageController extends AbstractSearchPageController
 {
 	private static final String MY_ACCOUNT_SAVED_CARTS_URL = "/my-account/saved-carts";

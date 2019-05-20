@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Extended Controller for functionality related with user's assets
  */
-@RequestMapping("/my-account")
+//@RequestMapping("/my-account")
 public class PSAccountAssetsController extends AbstractSearchPageController
 {
 	private static final Logger LOG = LoggerFactory.getLogger(PSAccountAssetsController.class);

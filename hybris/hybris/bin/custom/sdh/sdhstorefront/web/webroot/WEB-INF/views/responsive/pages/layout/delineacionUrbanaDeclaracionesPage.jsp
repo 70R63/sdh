@@ -71,5 +71,26 @@
 			inareainter.disabled=true;
 		}
 	}
+	
+	
+	function tipoLicenciaCHANGE(selectObject) {
+
+		debugger;
+		//Validacion tipo de licencia = 02
+		var valorExen = document.getElementById('valorExen');
+		var tipoMarca = document.getElementById('tipoMarca');
+		var tipoDeLicencia = selectObject.value;
+
+		
+		if ((tipoDeLicencia == "02") && (tipoMarca.value != "")) {
+			valorExen.disabled = false;
+			valorExen.readOnly = false;
+			
+		} else {
+			valorExen.disabled = true;
+			valorExen.readOnly = true;
+		}
+
+	}
 </script>
 

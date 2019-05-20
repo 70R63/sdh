@@ -64,7 +64,6 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
 import org.springframework.validation.BindingResult;
@@ -81,8 +80,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  * Controller for cart page
  */
-@Controller
-@RequestMapping(value = "/cart")
+//@Controller
+//@RequestMapping(value = "/cart")
 public class CartPageController extends AbstractCartPageController
 {
 	public static final String SHOW_CHECKOUT_STRATEGY_OPTIONS = "storefront.show.checkout.flows";
@@ -562,6 +561,7 @@ public class CartPageController extends AbstractCartPageController
 		return REDIRECT_CART_URL;
 	}
 
+	@Override
 	public BaseSiteService getBaseSiteService()
 	{
 		return baseSiteService;

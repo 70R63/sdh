@@ -25,16 +25,16 @@
 	<context:annotation-config/> 
    
 	<bean name="checkoutLoginController" class="de.hybris.platform.sdhpsaddon.controllers.pages.CheckoutLoginController"/>
-	<bean name="checkoutController" class="de.hybris.platform.sdhpsaddon.controllers.pages.CheckoutController"/>
-	<bean name="cartPageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.CartPageController"/>
+<!-- 	<bean name="checkoutController" class="de.hybris.platform.sdhpsaddon.controllers.pages.CheckoutController"/> -->
+<!-- 	<bean name="cartPageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.CartPageController"/> -->
 	<bean name="loginPageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.LoginPageController"/>
-	<bean name="accountPageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.AccountPageController"/>
+<!-- 	<bean name="accountPageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.AccountPageController"/> -->
 	<bean name="homePageController" class="de.hybris.platform.sdhpsaddon.controllers.pages.HomePageController"/>
-	<bean name="acceleratorRegisteredCheckoutLoginController" class="de.hybris.platform.sdhpsaddon.controllers.imported.PSAcceleratorRegisteredCheckoutLoginController"/>
-	<bean name="accountDocumentsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountDocumentsController"/>
-	<bean name="accountDraftsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountDraftsController"/>
+<!-- 	<bean name="acceleratorRegisteredCheckoutLoginController" class="de.hybris.platform.sdhpsaddon.controllers.imported.PSAcceleratorRegisteredCheckoutLoginController"/> -->
+<!-- 	<bean name="accountDocumentsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountDocumentsController"/> -->
+<!-- 	<bean name="accountDraftsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountDraftsController"/> -->
 	<bean name="accountRelationshipBillsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountRelationshipBillsController"/>
-	<bean name="accountAssetsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountAssetsController"/>
+<!-- 	<bean name="accountAssetsController" class="de.hybris.platform.sdhpsaddon.controllers.pages.PSAccountAssetsController"/> -->
 	
 	<context:component-scan base-package="de.hybris.platform.sdhpsaddon" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver">
 		<context:exclude-filter type="regex" expression="de.hybris.platform.sdhpsaddon.controllers.pages.checkout.steps.*" />

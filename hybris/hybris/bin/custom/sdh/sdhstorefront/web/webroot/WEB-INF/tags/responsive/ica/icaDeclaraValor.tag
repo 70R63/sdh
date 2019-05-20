@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
@@ -76,193 +76,199 @@
 				</label>
 			</div>
 		</div>
-		
+
 		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
-			<c:if test="${empty infoDeclara.valorRetenido}">
-				<div class="row valor">
-					<div class="col-md-1">
-						<input class="form-control anio anoGravable" type="text"
-							value="${infoDeclara.anoGravable }" />
-					</div>
-					<div class="col-md-2">
-						<select id="" class="form-control tipoID" style="height: 48px;">
-							<option value="">Seleccionar</option>
-							<option value="CC">CC Cédula de ciudadania</option>
-							<option value="CE">CE Cédula de extranjería</option>
-							<option value="NIT">NIT Número de identificación
-								tributaria</option>
-							<option value="PA">PA Pasaporte</option>
-							<option value="TI">TI Tarjeta de identidad</option>
-							<option value="TIE">TIE Tarjeta de identidad de
-								extranjero</option>
-							<option value="NITE">NITE NIT extranjero</option>
-							<option value="NUIP">NUIP Número único de identificación
-								personal</option>
-						</select>
-					</div>
-					<div class="col-md-1">
-						<input class="form-control numID" type="text"
-							value="${infoDeclara.numID }" />
-					</div>
-					<div class="col-md-2">
-						<input class="form-control razonSocial" type="text"
-							value="${infoDeclara.razonSocial }" />
-					</div>
-					<div class="col-md-1">
-						<input class="form-control direccion" type="text"
-							value="${infoDeclara.direccion }" />
-					</div>
-					<div class="col-md-1">
-						<input class="form-control telefono" type="text"
-							value="${infoDeclara.telefono }" />
-					</div>
-					<div class="col-md-1">
-						<select id="" class="form-control codMunicipio" style="height: 48px;">
+		<c:if test="${empty infoDeclara.valorRetenido}">
+			<div class="row valor">
+				<div class="col-md-1">
+					<input class="form-control anio anoGravable" type="text"
+						value="${infoDeclara.anoGravable }" />
+				</div>
+				<div class="col-md-2">
+					<select id="" class="form-control tipoID" style="height: 48px;">
+						<option value="">Seleccionar</option>
+						<option value="CC">CC Cédula de ciudadania</option>
+						<option value="CE">CE Cédula de extranjería</option>
+						<option value="NIT">NIT Número de identificación
+							tributaria</option>
+						<option value="PA">PA Pasaporte</option>
+						<option value="TI">TI Tarjeta de identidad</option>
+						<option value="TIE">TIE Tarjeta de identidad de
+							extranjero</option>
+						<option value="NITE">NITE NIT extranjero</option>
+						<option value="NUIP">NUIP Número único de identificación
+							personal</option>
+					</select>
+				</div>
+				<div class="col-md-1">
+					<input class="form-control numID" type="text"
+						value="${infoDeclara.numID }" />
+				</div>
+				<div class="col-md-2">
+					<input class="form-control razonSocial" type="text"
+						value="${infoDeclara.razonSocial }" />
+				</div>
+				<div class="col-md-1">
+					<input class="form-control direccion" type="text"
+						value="${infoDeclara.direccion }" />
+				</div>
+				<div class="col-md-1">
+					<input class="form-control telefono" type="text"
+						value="${infoDeclara.telefono }" />
+				</div>
+				<div class="col-md-1">
+					<select id="" class="form-control codMunicipio"
+						style="height: 48px;">
 						<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
 							<option value="${eachCity.code}">${eachCity.name}</option>
 						</c:forEach>
-						</select>
-					</div>
-					<div class="col-md-1">
-						<input class="form-control tarifaApl" type="text"
-							value="${infoDeclara.tarifaApl }" />
-					</div>
-					<div class="col-md-1">
-						<input class="form-control montoRetenido" type="text"
-							value="${infoDeclara.montoRetenido }" />
-					</div>
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addvalor()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="delevalor()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
-						</div>
+					</select>
+				</div>
+				<div class="col-md-1">
+					<input class="form-control tarifaApl" type="text"
+						value="${infoDeclara.tarifaApl }" />
+				</div>
+				<div class="col-md-1">
+					<input class="form-control montoRetenido" type="text"
+						value="${infoDeclara.montoRetenido }" />
+				</div>
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addvalor()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="delevalor()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
 					</div>
 				</div>
+			</div>
 		</c:if>
 		<!-- fin de código agregado -->
-		
-		
+
+
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
-				<div class="row valor">
-					<div class="col-md-1">
-						<input class="form-control anio anoGravable" type="text"
-							value="${eachValor.anoGravable }" />
-					</div>
-					<div class="col-md-2">
-						<select id="" class="form-control tipoID" style="height: 48px;">
-							<option value="">Seleccionar</option>
-							<c:forEach items="${ idTypes}" var="eachType">
-							
-								<c:set var="selected" value="" />
-								<c:if test="${eachValor.tipoID  eq  eachType}">
-									<c:set var="selected" value="selected" />
-								</c:if>
-							
-								<option value="${eachType }" ${selected }><spring:theme code="register.id.types.${eachType }"/></option>
-									
-							</c:forEach>
+			<div class="row valor">
+				<div class="col-md-1">
+					<input class="form-control anio anoGravable" type="text"
+						value="${eachValor.anoGravable }" />
+				</div>
+				<div class="col-md-2">
+					<select id="" class="form-control tipoID" style="height: 48px;">
+						<option value="">Seleccionar</option>
+						<c:forEach items="${ idTypes}" var="eachType">
+
+							<c:set var="selected" value="" />
+							<c:if test="${eachValor.tipoID  eq  eachType}">
+								<c:set var="selected" value="selected" />
+							</c:if>
+
+							<option value="${eachType }" ${selected }><spring:theme
+									code="register.id.types.${eachType }" /></option>
+
+						</c:forEach>
 
 
-						</select>
-					</div>
-					<div class="col-md-1">
-						<input class="form-control numID" type="text"
-							value="${eachValor.numID }" />
-					</div>
-					<div class="col-md-2">
-						<input class="form-control razonSocial" type="text"
-							value="${eachValor.razonSocial }" />
-					</div>
-					<div class="col-md-1">
-						<input class="form-control direccion" type="text"
-							value="${eachValor.direccion }" />
-					</div>
-					<div class="col-md-1">
-						<input class="form-control telefono" type="text"
-							value="${eachValor.telefono }" />
-					</div>
-					<div class="col-md-1">
-						<select id="" class="form-control codMunicipio" style="height: 48px;">
-							<option value="">SELECCIONAR</option>
+					</select>
+				</div>
+				<div class="col-md-1">
+					<input class="form-control numID" type="text"
+						value="${eachValor.numID }" />
+				</div>
+				<div class="col-md-2">
+					<input class="form-control razonSocial" type="text"
+						value="${eachValor.razonSocial }" />
+				</div>
+				<div class="col-md-1">
+					<input class="form-control direccion" type="text"
+						value="${eachValor.direccion }" />
+				</div>
+				<div class="col-md-1">
+					<input class="form-control telefono" type="text"
+						value="${eachValor.telefono }" />
+				</div>
+				<div class="col-md-1">
+					<select id="" class="form-control codMunicipio"
+						style="height: 48px;">
+						<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
-							
+
 							<c:set var="selected" value="" />
 							<c:if test="${eachCity.code eq  eachValor.codMunicipio}">
 								<c:set var="selected" value="selected" />
 							</c:if>
-						
-							<option value="${ eachCity.code}" ${selected }   >${eachCity.name}</option>
+
+							<option value="${ eachCity.code}" ${selected }>${eachCity.name}</option>
 						</c:forEach>
-						</select>
-					</div>
-					<div class="col-md-1">
-<!-- 						<input class="form-control tarifaApl" type="text" -->
-<%-- 							value="${eachValor.tarifaApl }" /> --%>
-						<select id="" class="form-control tarifaApl" style="height: 48px;">
-							<option value="">Seleccionar</option>
-							<c:forEach items="${ tarifasValorRetenido}" var="eachTarifa">
-							
-								<c:set var="selected" value="" />
-								<c:if test="${ fn:trim(eachValor.tarifaApl)  eq  eachTarifa}">
-									<c:set var="selected" value="selected" />
-								</c:if>
-							
-								<option value="${eachTarifa }" ${selected }>${eachTarifa }</option>
-									
-							</c:forEach>
+					</select>
+				</div>
+				<div class="col-md-1">
+					<!-- 						<input class="form-control tarifaApl" type="text" -->
+					<%-- 							value="${eachValor.tarifaApl }" /> --%>
+					<select id="" class="form-control tarifaApl" style="height: 48px;">
+						<option value="">Seleccionar</option>
+						<c:forEach items="${ tarifasValorRetenido}" var="eachTarifa">
+
+							<c:set var="selected" value="" />
+							<c:if test="${ fn:trim(eachValor.tarifaApl)  eq  eachTarifa}">
+								<c:set var="selected" value="selected" />
+							</c:if>
+
+							<option value="${eachTarifa }" ${selected }>${eachTarifa }</option>
+
+						</c:forEach>
 
 
-						</select>
+					</select>
 
-					</div>
-					<div class="col-md-1">
-						<input class="form-control montoRetenido" type="text"
-							value="${eachValor.montoRetenido }" />
-					</div>
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addvalor()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="delevalor()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
-						</div>
+				</div>
+				<div class="col-md-1">
+					<input class="form-control montoRetenido" type="text"
+						value="${eachValor.montoRetenido }" />
+				</div>
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addvalor()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="delevalor()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
 					</div>
 				</div>
+			</div>
 		</c:forEach>
 	</div>
-	<div class="container">
-		
-		<!-- 	se agrega boton para adjuntar archivo -->
-	<div class="row">
-		<div class="col-md-3" style="margin-bottom: 3px !important">
-			<button class="btn btn-primary" data-toggle="modal"
-				data-target="#fm-modal" type="button" onclick="addfilevalor()" style="margin-top:15px !importan">Adjuntar
-				archivo</button>
-		</div>
 
-		<div id="adjuntar-valor" class="row" style="display: none;">
-			<div class="col-md-3" style="margin-top: 20px !important">
+	<!-- 	se agrega boton para adjuntar archivo -->
+	<div class="container" style="margin-top: 15px !important">
 
-				<input class="control-form" type="file"></input>
 
-			</div>
-		</div>
 		<div class="row">
-			<div class="col-md-12 text-center" style="marging-top: 15px">
-				<button style="margin-top: 3px;" id="icaCalculoButton"
-					class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="ica.declaracion.valor.calcular" />
-				</button>
+			<div class="col-md-3" style="margin-bottom: 3px !important">
+				<button class="btn btn-primary" data-toggle="modal"
+					data-target="#fm-modal" type="button" onclick="addfilevalor()"
+					style="margin-top: 15px!importan">Adjuntar archivo</button>
+			</div>
+
+			<div id="adjuntar-valor" class="row" style="display: none;">
+				<div class="col-md-3" style="margin-top: 20px !important">
+
+					<input class="control-form" type="file"></input>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center" style="marging-top: 15px">
+					<button style="margin-top: 3px;" id="icaCalculoButton"
+						class="btn btn-primary btn-lg" type="button">
+						<spring:theme code="ica.declaracion.valor.calcular" />
+					</button>
+				</div>
 			</div>
 		</div>
+
 	</div>
-<!-- fin de codigo adjuntar archivo -->
-	</div>
+	<!-- fin de codigo adjuntar archivo -->
 </form:form>
 
 <script type="text/javascript">
@@ -304,7 +310,7 @@
 			alert("No puede eliminar todos los registros");
 		}
 	}
-	
+
 	function addfilevalor() {
 		debugger;
 		var subir = document.getElementById('adjuntar-valor');
