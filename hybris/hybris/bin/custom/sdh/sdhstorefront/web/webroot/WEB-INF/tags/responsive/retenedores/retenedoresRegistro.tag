@@ -64,7 +64,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="reteica.inicial.carga.anio" /></label> <select id="" name=""
+							code="reteica.inicial.carga.anio" /></label> <select id="anoGravable" name="anoGravable"
 						class="form-control" style="width: 200px !important">
 						<option>Seleccionar</option>
 					</select>
@@ -73,7 +73,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="reteica.inicial.carga.periodo" /></label> <select id="" name=""
+							code="reteica.inicial.carga.periodo" /></label> <select id="periodo" name="periodo"
 						class="form-control" style="width: 200px !important">
 						<option>Seleccionar</option>
 					</select>
@@ -129,7 +129,7 @@
 			<div class="col-md-12">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="reteica.inicial.carga.seleccionar" /></label><input type="file"
+							code="reteica.inicial.carga.seleccionar" /></label><input id="retencionesFile" name="retencionesFile" type="file"
 						class="form-control" id="" accept=".csv">
 				</div>
 			</div>
@@ -147,7 +147,7 @@
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
-						<button class="btn btn-primary text-left" id="" name=""
+						<button class="btn btn-primary text-left" id="bindCargarButton" name="bindCargarButton" type="button"
 							value="cargar">
 							<spring:theme code="reteica.inicial.carga.cargar" />
 						</button>

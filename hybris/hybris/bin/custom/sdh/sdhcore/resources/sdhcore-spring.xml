@@ -655,5 +655,7 @@
 	<bean id="defaultSDHEconomicActivityDao" class="de.hybris.sdh.core.dao.impl.DefaultSDHICAEconomicActivityDao">
 		<constructor-arg value="SDHICAEconomicActivity"/>
 	</bean>
+	
+	<bean id="sdhReteIcaService"	class="de.hybris.sdh.core.services.impl.DefaultSDHReteIcaService" />
 
 </beans>

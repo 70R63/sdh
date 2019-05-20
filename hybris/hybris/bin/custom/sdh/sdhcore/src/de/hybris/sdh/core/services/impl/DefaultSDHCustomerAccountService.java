@@ -34,6 +34,7 @@ import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHICATaxModel;
 import de.hybris.sdh.core.model.SDHPhoneModel;
+import de.hybris.sdh.core.model.SDHReteICATaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
 import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
@@ -863,7 +864,28 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 
 
+			// clean previous reteICA
+			if (customerModel.getReteIcaTax() != null)
+			{
+				final SDHReteICATaxModel reteICAModel = customerModel.getReteIcaTax();
+				modelService.remove(reteICAModel);
+			}
 
+			if (sdhConsultaContribuyenteBPResponse.getReteIca() != null)
+			{
+				final SDHReteICATaxModel newReteICAModel = customerModel.getReteIcaTax();
+				newReteICAModel.setObjectNumber(sdhConsultaContribuyenteBPResponse.getReteIca().getNumObjeto());
+				newReteICAModel.setConsecutive(sdhConsultaContribuyenteBPResponse.getReteIca().getConsecutive());
+
+				modelService.save(newReteICAModel);
+
+				customerModel.setReteIcaTax(newReteICAModel);
+
+			}
+			else
+			{
+				customerModel.setReteIcaTax(null);
+			}
 
 
 
