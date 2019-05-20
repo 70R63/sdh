@@ -31,9 +31,17 @@
 			<div class="col-md-4">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.valorExencion" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.impuestoCargo}" maxlength="240">
+							code="delineacion.urbana.dec.liqpriv.valorExencion" /></label> 
+
+						<c:choose>
+						<c:when test='${(not empty tipoMarca) && (dataForm.infObjetoDelineacion.infoDeclara.tipoLicencia == "02")}'>
+						<sf:input id="valorExen" name="" class="form-control" aria-required="true" type="text" readonly="false" path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240"/>
+						</c:when>
+						<c:otherwise>
+						<sf:input id="valorExen" name="" class="form-control" aria-required="true" type="text" readonly="true" path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240"/>
+						</c:otherwise>
+						</c:choose>
+																		
 				</div>
 			</div>
 		</div>		

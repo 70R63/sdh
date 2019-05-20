@@ -34,6 +34,7 @@ public class DelineacionUInfoDeclara
 	private String totalUsos;
 	private String totalAreap;
 	private String totalAreai;
+	private String valorExen;
 
 	//	private String fechaFinObra; //se utiliza en el response de calculo de impuesto
 	//	private String causalExep; //se utiliza en el response de calculo de impuesto
@@ -484,6 +485,23 @@ public class DelineacionUInfoDeclara
 	public void setObjetoLicencia(final String objetoLicencia)
 	{
 		this.objetoLicencia = objetoLicencia;
+	}
+
+	/**
+	 * @return the valorExen
+	 */
+	public String getValorExen()
+	{
+		return valorExen;
+	}
+
+	/**
+	 * @param valorExen
+	 *           the valorExen to set
+	 */
+	public void setValorExen(final String valorExen)
+	{
+		this.valorExen = valorExen;
 	}
 
 	/* (non-Javadoc)
