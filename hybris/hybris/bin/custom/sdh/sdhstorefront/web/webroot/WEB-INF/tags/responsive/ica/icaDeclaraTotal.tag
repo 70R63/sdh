@@ -73,7 +73,6 @@
 		</c:if>
 		<!-- fin de código agregado -->
 
-
 		<c:forEach items="${infoDeclara.ingNetosGrava }" var="eachIngreso">
 			<div class="row totaluno">
 				<div class="col-md-1">
@@ -96,8 +95,7 @@
 				<div class="col-md-3">
 					<!-- 					<input class="form-control denomina codCIIU" type="text" -->
 					<%-- 						value="${eachIngreso.codCIIU}" /> --%>
-
-
+					<!--
 					<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 						pattern="#######################" var="codCIIUNumber" />
 
@@ -115,6 +113,14 @@
 
 							<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
 								- ${eachActivity.description }</option>
+						</c:forEach>
+					</select>
+					 -->		
+					 <!-- EJRR Adding data to select box -->			 
+					 <select id="" class="form-control codCIIU" style="height: 48px;">
+						<option value="" selected>SELECCIONAR</option>
+						<c:forEach items="${gravableNetIncomes}" var="eachActivity">
+							<option value="${eachActivity.ciiu}">${eachActivity.ciiu} - ${eachActivity.denominacion}</option>
 						</c:forEach>
 					</select>
 				</div>
