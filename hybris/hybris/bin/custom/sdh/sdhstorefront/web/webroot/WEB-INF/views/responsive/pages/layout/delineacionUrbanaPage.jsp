@@ -46,7 +46,7 @@ function goBack() {
 										+ '<option value="20">20</option>'
 										+ '<option value="30">30</option>'
 										+ '</select> registros',
-								"sInfo" : "Mostrando del START a END (Total: TOTAL resultados)",
+								"sInfo" : "Mostrando del INICIO al FIN (Total: TOTAL resultados)",
 								"sInfoFiltered" : " Filtrados de MAX registros",
 								"sInfoEmpty" : " ",
 								"sZeroRecords" : "No se encontraron registros",
