@@ -12,7 +12,7 @@ public class DelineacionUUsos
 
 	private String codUso;
 	private String numUnidad;
-	private String Uso;
+	private String uso;
 	private String usoCatalogo;
 	private String areaNeta;
 
@@ -21,7 +21,7 @@ public class DelineacionUUsos
 	 */
 	public String getUso()
 	{
-		return Uso;
+		return uso;
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class DelineacionUUsos
 	 */
 	public void setUso(final String uso)
 	{
-		Uso = uso;
+		this.uso = uso;
 	}
 
 	/**
@@ -103,13 +103,13 @@ public class DelineacionUUsos
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "DelineacionUUsos [codUso=" + codUso + ", numUnidad=" + numUnidad + ", Uso=" + Uso + ", usoCatalogo=" + usoCatalogo
+		return "DelineacionUUsos [codUso=" + codUso + ", numUnidad=" + numUnidad + ", uso=" + uso + ", usoCatalogo=" + usoCatalogo
 				+ ", areaNeta=" + areaNeta + "]";
 	}
 
