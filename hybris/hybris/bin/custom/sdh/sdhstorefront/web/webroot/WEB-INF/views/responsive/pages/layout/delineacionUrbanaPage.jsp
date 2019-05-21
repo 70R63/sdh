@@ -8,15 +8,15 @@
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-	<delineacionUrbana:delineacionUrbanaIDs />
-	<delineacionUrbana:delineacionUrbanaCDUs />
-	<delineacionUrbana:delineacionUrbanaRadicados />
+<delineacionUrbana:delineacionUrbanaIDs />
+<delineacionUrbana:delineacionUrbanaCDUs />
+<delineacionUrbana:delineacionUrbanaRadicados />
 
 
 <script type="text/javascript">
-function goBack() {
-	window.history.back();
-}
+	function goBack() {
+		window.history.back();
+	}
 	document.onreadystatechange = function() {
 		if (document.readyState == "complete") {
 			datatable();
@@ -46,7 +46,7 @@ function goBack() {
 										+ '<option value="20">20</option>'
 										+ '<option value="30">30</option>'
 										+ '</select> registros',
-								"sInfo" : "Mostrando del INICIO al FIN (Total: TOTAL resultados)",
+								"sInfo" : "Mostrando _START_ al _END_ de _TOTAL_ registros",
 								"sInfoFiltered" : " Filtrados de MAX registros",
 								"sInfoEmpty" : " ",
 								"sZeroRecords" : "No se encontraron registros",
@@ -55,11 +55,11 @@ function goBack() {
 							}
 						});
 	}
-	
+
 	function show() {
 		var idRad = document.getElementById('idRadicados');
-			idRad.style.display = 'block';
-	
+		idRad.style.display = 'block';
+
 	}
 </script>
 
