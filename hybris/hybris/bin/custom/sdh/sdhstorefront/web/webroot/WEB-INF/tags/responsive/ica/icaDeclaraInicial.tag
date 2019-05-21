@@ -31,6 +31,14 @@
 </div>
 
 <div class="row mt-3">
+	<div class="col-md-7 col-md-offset-3 d-flex align-items-center">
+		<spring:theme code="ica.declaracion.descripcion3" />
+	</div>
+</div>
+
+<br>
+
+<div class="row mt-3">
 	<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
 		<form:form action="">
 			<div class="table-responsive">

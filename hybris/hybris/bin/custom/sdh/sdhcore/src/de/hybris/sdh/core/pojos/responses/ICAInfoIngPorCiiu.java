@@ -15,6 +15,8 @@ public class ICAInfoIngPorCiiu
 	private Long numID;
 	private String razonSocial;
 	private String direccion;
+	private String codMunicipio;
+	private String desMunicipio;
 	private String telefono;
 	private String codCIIU;
 	private String ingBrutoSINIVA;
@@ -170,6 +172,40 @@ public class ICAInfoIngPorCiiu
 	public void setValorTotalDevo(final String valorTotalDevo)
 	{
 		this.valorTotalDevo = valorTotalDevo;
+	}
+
+	/**
+	 * @return the codMunicipio
+	 */
+	public String getCodMunicipio()
+	{
+		return codMunicipio;
+	}
+
+	/**
+	 * @param codMunicipio
+	 *           the codMunicipio to set
+	 */
+	public void setCodMunicipio(final String codMunicipio)
+	{
+		this.codMunicipio = codMunicipio;
+	}
+
+	/**
+	 * @return the desMunicipio
+	 */
+	public String getDesMunicipio()
+	{
+		return desMunicipio;
+	}
+
+	/**
+	 * @param desMunicipio
+	 *           the desMunicipio to set
+	 */
+	public void setDesMunicipio(final String desMunicipio)
+	{
+		this.desMunicipio = desMunicipio;
 	}
 
 

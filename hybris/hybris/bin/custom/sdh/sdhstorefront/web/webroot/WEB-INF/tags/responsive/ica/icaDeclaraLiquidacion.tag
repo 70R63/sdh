@@ -14,7 +14,17 @@
 		var="infoDeclara" />
 	<form:form action="">
 		<br>
-
+		
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totinord" /></label> <input disabled id="totalIngrPeriodo"
+						name="totalIngrPeriodo" class="form-control text-right !important" type="text" value="${infoDeclara.totalIngrPeriodo }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+		
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">

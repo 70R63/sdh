@@ -24,6 +24,14 @@
 </div>
 <br>
 
+<div class="row mt-3">
+	<div class="col-md-8 col-md-offset-2 d-flex align-items-center">
+		<spring:theme code="ica.declaracion.valor.descripcion1" />
+	</div>
+</div>
+
+<br>
+
 <form:form action="">
 	<div>
 		<div class="row">
