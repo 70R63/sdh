@@ -178,7 +178,7 @@
 				for=""> <spring:theme code="ica.declaracion.total.numide" />
 			</label>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-1">
 			<label class="control-label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.nombre" />
 			</label>
@@ -186,6 +186,11 @@
 		<div class="col-md-1">
 			<label class="control-label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.direc" />
+			</label>
+		</div>
+		<div class="col-md-1">
+			<label class="control-label" style="text-transform: none !important"
+				for=""> <spring:theme code="ica.declaracion.total.municipio" />
 			</label>
 		</div>
 		<div class="col-md-1">
@@ -237,11 +242,14 @@
 			<div class="col-md-1">
 				<input class="form-control numID" type="text" />
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<input class="form-control razonSocial" type="text" />
 			</div>
 			<div class="col-md-1">
 				<input class="form-control direccion" type="text" />
+			</div>
+			<div class="col-md-1">
+				<input class="form-control municipio" type="text" />
 			</div>
 			<div class="col-md-1">
 				<input class="form-control telefono" type="text" />
@@ -302,13 +310,17 @@
 				<input class="form-control numID" disabled="disabled" type="text"
 					value="${eachIngreso.numID }" />
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<input class="form-control razonSocial" disabled="disabled"
 					type="text" value="${eachIngreso.razonSocial }" />
 			</div>
 			<div class="col-md-1">
 				<input class="form-control direccion" disabled="disabled"
 					type="text" value="${eachIngreso.direccion }" />
+			</div>
+			<div class="col-md-1">
+				<input class="form-control municipio" disabled="disabled"
+					type="text" value="${eachIngreso.desMunicipio }" />
 			</div>
 			<div class="col-md-1">
 				<input class="form-control telefono" disabled="disabled" type="text"
