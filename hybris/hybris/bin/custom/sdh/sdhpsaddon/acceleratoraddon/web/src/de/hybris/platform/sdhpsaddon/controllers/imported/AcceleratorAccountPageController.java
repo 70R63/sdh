@@ -52,14 +52,14 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.enums.OrderStatus;
-import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
-import de.hybris.platform.sdhpsaddon.controllers.pages.AccountPageController;
-import de.hybris.platform.sdhpsaddon.security.PSOpenRedirectValidator;
 import de.hybris.platform.publicsectorfacades.bundle.selection.BundleSelectionFacade;
 import de.hybris.platform.publicsectorfacades.order.PSCartFacade;
 import de.hybris.platform.publicsectorfacades.order.impl.DefaultPSSaveCartFacade;
 import de.hybris.platform.publicsectorfacades.template.PSYFormTemplateFacade;
 import de.hybris.platform.relationshipfacades.relationship.PSRelationshipFacade;
+import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
+import de.hybris.platform.sdhpsaddon.controllers.pages.AccountPageController;
+import de.hybris.platform.sdhpsaddon.security.PSOpenRedirectValidator;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 
 import java.util.ArrayList;
@@ -97,7 +97,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * Controller for account pages
  */
 @Scope("tenant")
-@RequestMapping("/my-account")
+//@RequestMapping("/my-account")
 public class AcceleratorAccountPageController extends AbstractSearchPageController
 {
 	protected static final Logger LOG = LoggerFactory.getLogger(AccountPageController.class);

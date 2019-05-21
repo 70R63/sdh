@@ -8,8 +8,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadc
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.sdh.core.services.SDHCertificaRITService;
-import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.facades.SDHReteIcaFacade;
+import de.hybris.sdh.storefront.controllers.pages.forms.RetencionesForm;
 
 import javax.annotation.Resource;
 
@@ -19,6 +19,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -44,20 +47,13 @@ public class RetenedoresRegistroPageController extends AbstractPageController
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
-	@Resource(name = "sdhCertificaRITService")
-	SDHCertificaRITService sdhCertificaRITService;
-
-	@Resource(name = "sdhConsultaContribuyenteBPService")
-	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+	@Resource(name = "sdhReteIcaFacade")
+	SDHReteIcaFacade sdhReteIcaFacade;
 
 	@RequestMapping(value = "/retenedores/registroretenciones", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String retenedoresregistro(final Model model) throws CMSItemNotFoundException
 	{
-		System.out
-				.println("---------------- Hola entro al GET Agentes Retenedores Registro de Retenciones--------------------------");
-
-
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AGENTES_RETENEDORES_REGISTRO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AGENTES_RETENEDORES_REGISTRO_CMS_PAGE));
@@ -69,14 +65,17 @@ public class RetenedoresRegistroPageController extends AbstractPageController
 	}
 
 	@RequestMapping(value = "/retenedores/registroretenciones", method = RequestMethod.POST)
+	@ResponseBody
 	@RequireHardLogIn
-	public String retenedoresregistropost(final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes)
+	public RetencionesForm retenedoresregistropost(final @RequestPart("retencionesForm") RetencionesForm retencionesForm,
+			final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes, @RequestPart("retencionesFile")
+			final MultipartFile retencionesFile)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("------------------Entro al POST de Agentes Retenedores Estado de Cargas------------------------");
 
-		return REDIRECT_TO_AGENTES_RETENEDORES_REGISTRO_PAGE;
+		sdhReteIcaFacade.sendFile(retencionesFile);
+
+		return retencionesForm;
 	}
 
 }

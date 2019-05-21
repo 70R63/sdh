@@ -66,7 +66,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.SmartValidator;
@@ -83,8 +82,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 /**
  * Controller for Quotes
  */
-@Controller
-@RequestMapping(value = "/quote")
+//@Controller
+//@RequestMapping(value = "/quote")
 public class QuoteController extends AbstractCartPageController
 {
 	private static final String REDIRECT_CART_URL = REDIRECT_PREFIX + "/cart";

@@ -17,7 +17,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Extended Controller for functionality related to Dashboard
  */
-@Controller
-@RequestMapping("/my-account")
+//@Controller
+//@RequestMapping("/my-account")
 public class PSDashboardPageController extends AbstractSearchPageController
 {
 	private static final String DASHBOARD_CMS_PAGE = "dashboardPage";

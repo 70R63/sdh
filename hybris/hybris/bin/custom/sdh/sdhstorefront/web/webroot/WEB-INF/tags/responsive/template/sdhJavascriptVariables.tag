@@ -72,19 +72,21 @@
 			
 			ACC.generaDeclaracionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion/generar' />";
 			
-			ACC.gasolinaGeneraDeclaracionURL = "<c:url value='/contribuyentes/sobretasa-gasolina/generar' />"
+			ACC.gasolinaGeneraDeclaracionURL = "<c:url value='/contribuyentes/sobretasa-gasolina/generar' />";
 			
-			ACC.certificacionPagosGenerarURL= "<c:url value='/contribuyentes/consultas/certipagos' />"
+			ACC.certificacionPagosGenerarURL= "<c:url value='/contribuyentes/consultas/certipagos' />";
 			
-			ACC.declaracionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/declaracion' />"
+			ACC.declaracionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/declaracion' />";
 			
-			ACC.retencionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/retencion' />"
+			ACC.retencionDelineacionurbanaURL= "<c:url value='/contribuyentes/delineacionurbana/retencion' />";
 
-			ACC.radicaDelinDetallesURL= "<c:url value='/contribuyentes/delineacion-urbana/detalle' />"
+			ACC.radicaDelinDetallesURL= "<c:url value='/contribuyentes/delineacion-urbana/detalle' />";
 			
-		  	ACC.duGeneraDeclaracionURL = "<c:url value='/contribuyentes/delineacion-urbana/generar' />"
+		  	ACC.duGeneraDeclaracionURL = "<c:url value='/contribuyentes/delineacion-urbana/generar' />";
 			
-		  	ACC.icaDeclaracionCalculoURL = "<c:url value='/contribuyentes/ica/declaracion/calculo' />"
+		  	ACC.icaDeclaracionCalculoURL = "<c:url value='/contribuyentes/ica/declaracion/calculo' />";
+		  	
+		  	ACC.reteICARegistroRetencionesURL = "<c:url value='/retenedores/registroretenciones' />";
 		  	
 		  	
 		  	ACC.currentURL = "${currentURL}";

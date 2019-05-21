@@ -265,12 +265,14 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
+        			<attribute qualifier="reteIcaTax" type="SDHReteICATax">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
         			<attribute qualifier="reteIcaTaxList" type="SDHReteICATax">
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
-        			
-        			
         		</attributes>
         	</itemtype>
         	<itemtype code="SDHAddress" autocreate="true" generate="true">
@@ -415,20 +417,21 @@
         			</attribute>        			
        			</attributes>
 	        </itemtype>
-	        
 	        <itemtype code="SDHReteICATax" autocreate="true" generate="true">
         		<description>Custom SDH Model to save ReteICA data</description>
         		<deployment  table="SDHReteICATAX" typecode="15013"/>
        			<attributes>
+       				<attribute qualifier="consecutive" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>   
        				<attribute qualifier="objectNumber" type="java.lang.String">
         				<persistence type="property"></persistence>
-        			</attribute>
-        			<attribute qualifier="idNumber" type="java.lang.String">
+        			</attribute>   
+        			<attribute qualifier="numID" type="java.lang.String">
         				<persistence type="property"></persistence>
-        			</attribute>        			
+        			</attribute>     			
        			</attributes>
 	        </itemtype>
-	        
 	        
         	<itemtype code="SDHCustomerRegistrationProcess" extends="StoreFrontCustomerProcess" autocreate="true" generate="true">
 				<attributes>

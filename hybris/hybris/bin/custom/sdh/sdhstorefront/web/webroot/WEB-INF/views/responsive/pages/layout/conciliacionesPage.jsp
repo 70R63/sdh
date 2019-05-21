@@ -12,6 +12,43 @@
 
 <template:page>
 
+
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1 d-flex align-items-center">
+			<table class="table">
+				<thead>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme code="conciliaciones.header.title" /></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="avisobody">
+
+						<td><spring:theme code="conciliaciones.header.description" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="row">
+			<div class="headline">
+				<h2 align="center">
+					<span><spring:theme code="obligacion.inicial.titulo" /></span>
+
+				</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="obligacion.inicial.buscarpor" /></label>
+				</div>
+			</div>
+		</div>
+
 	<div class="container">
 		CONCILIACIONES!
 		<c:url var="importConciliacion" value="/conciliaciones/upload" />

@@ -21,7 +21,6 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +32,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Controller for a category page
  */
-@Controller
-@RequestMapping(value = "/**/c")
+//@Controller
+//@RequestMapping(value = "/**/c")
 public class CategoryPageController extends AbstractCategoryPageController {
 
     @RequestMapping(value = CATEGORY_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)

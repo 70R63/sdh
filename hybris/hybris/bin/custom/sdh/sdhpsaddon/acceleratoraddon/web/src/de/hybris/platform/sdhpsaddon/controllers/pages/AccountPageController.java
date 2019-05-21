@@ -36,14 +36,14 @@ import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.enums.OrderStatus;
-import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
-import de.hybris.platform.sdhpsaddon.controllers.imported.AcceleratorAccountPageController;
-import de.hybris.platform.sdhpsaddon.security.PSOpenRedirectValidator;
 import de.hybris.platform.publicsectorfacades.order.PSCheckoutFacade;
 import de.hybris.platform.publicsectorfacades.order.impl.DefaultPSOrderFacade;
 import de.hybris.platform.relationshipfacades.permission.PSPermissionFacade;
 import de.hybris.platform.relationshipfacades.relationship.PSRelationshipFacade;
 import de.hybris.platform.relationshipservices.relationship.exception.RelationshipDoesNotExistException;
+import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
+import de.hybris.platform.sdhpsaddon.controllers.imported.AcceleratorAccountPageController;
+import de.hybris.platform.sdhpsaddon.security.PSOpenRedirectValidator;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
@@ -71,7 +71,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  * Extended Controller for account pages
  */
-@RequestMapping("/my-account")
+//@RequestMapping("/my-account")
 public class AccountPageController extends AcceleratorAccountPageController
 {
 	private static final Logger LOG = LoggerFactory.getLogger(AccountPageController.class);

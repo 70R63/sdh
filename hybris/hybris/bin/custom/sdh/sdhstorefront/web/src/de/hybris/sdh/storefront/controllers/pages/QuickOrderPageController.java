@@ -28,7 +28,6 @@ import java.util.Arrays;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,8 +38,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  *
  */
-@Controller
-@RequestMapping(value = "/quickOrder")
+//@Controller
+//@RequestMapping(value = "/quickOrder")
 public class QuickOrderPageController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(QuickOrderPageController.class);

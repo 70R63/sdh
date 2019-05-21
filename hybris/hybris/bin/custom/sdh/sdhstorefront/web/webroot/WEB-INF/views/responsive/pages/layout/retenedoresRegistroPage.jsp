@@ -10,6 +10,10 @@
 
 <sf:form>
 <retenedores:retenedoresRegistro/>
+
+<div id="dialogReteICA" title="ReteICA" ><div id="reteICADialogContent"></div></div>
+
+
 </sf:form>
 
 

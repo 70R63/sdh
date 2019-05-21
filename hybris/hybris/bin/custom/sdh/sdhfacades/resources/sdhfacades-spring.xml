@@ -209,6 +209,8 @@
 	<bean id="sdhUpdateRitFacade" class="de.hybris.sdh.facades.impl.DefaultSDHUpdateRitFacade" />
 		
 	<bean id="sdhConciliacionesFacade"	class="de.hybris.sdh.facades.DefaultSDHConciliacionesFacade" />
+	
+	<bean id="sdhReteIcaFacade"	class="de.hybris.sdh.facades.impl.DefaultSDHReteIcaFacade" />
 		
 		
 </beans>

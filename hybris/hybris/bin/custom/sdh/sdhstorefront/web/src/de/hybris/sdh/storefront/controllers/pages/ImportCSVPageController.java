@@ -26,9 +26,9 @@ import java.io.InputStream;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,15 +36,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import org.apache.log4j.Logger;
-
 
 
 /**
  * Controller for importing CSV file(s)
  */
-@Controller
-@RequestMapping("/import/csv")
+//@Controller
+//@RequestMapping("/import/csv")
 public class ImportCSVPageController extends AbstractPageController
 {
 	private static final String SAVED_CART_PATH_SEGMENT = "/saved-cart";
@@ -101,7 +99,7 @@ public class ImportCSVPageController extends AbstractPageController
 			}
 			catch (final IOException e)
 			{
-				if (LOG.isDebugEnabled()) 
+				if (LOG.isDebugEnabled())
 				{
 					LOG.debug(e.getMessage(), e);
 				}

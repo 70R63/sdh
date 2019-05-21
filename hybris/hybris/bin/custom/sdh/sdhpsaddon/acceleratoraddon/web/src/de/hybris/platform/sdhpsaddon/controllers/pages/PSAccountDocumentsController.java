@@ -19,12 +19,12 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
 import de.hybris.platform.publicsectordocmanagement.data.PSDocumentData;
 import de.hybris.platform.publicsectorfacades.docmanagement.PSDocumentManagementFacade;
 import de.hybris.platform.relationshipfacades.permission.PSPermissionFacade;
 import de.hybris.platform.relationshipfacades.relationship.PSRelationshipFacade;
 import de.hybris.platform.relationshipservices.relationship.exception.RelationshipDoesNotExistException;
+import de.hybris.platform.sdhpsaddon.controllers.ControllerConstants;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 
 import java.io.File;
@@ -54,7 +54,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * Extended Controller for functionality related with Documents in My Account
  */
-@RequestMapping("/my-account")
+//@RequestMapping("/my-account")
 public class PSAccountDocumentsController extends AbstractSearchPageController
 {
 	private static final Logger LOG = LoggerFactory.getLogger(PSAccountDocumentsController.class);
