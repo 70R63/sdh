@@ -62,20 +62,22 @@
 					<!-- 					</div> -->
 
 					<div class="col-md-3">
-						<div class="form-group ">
-							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
+						<div class="form-group " style="disabled: disabled">
+							<sf:select readonly="readonly"
+								path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
-								class="form-control"></sf:select>
+								class="form-control" style="disabled: disabled"></sf:select>
 						</div>
 					</div>
 
 
 					<div class="col-md-2">
-						<div class="form-group ">
-							<sf:input class="form-control" readonly="false"
+						<div class="form-group " style="disabled: disabled">
+							<sf:input class="form-control" readonly="true"
 								aria-required="true" maxlength="240"
-								path="infObjetoDelineacion.usos[${loop.index}].areaNeta" />
+								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
+								style="disabled: disabled" />
 						</div>
 					</div>
 
@@ -115,7 +117,8 @@
 				<div class="col-md-2 offset-md-3">
 					<div class="form-group ">
 						<input id="inputareainter" class="form-control" maxlength="30"
-							value="${dataForm.infObjetoDelineacion.infoDeclara.totalUsos}"></input>
+							value="${dataForm.infObjetoDelineacion.infoDeclara.totalUsos}"
+							disabled="disabled"></input>
 					</div>
 				</div>
 			</div>
