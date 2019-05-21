@@ -63,7 +63,7 @@
 
 					<div class="col-md-3">
 						<div class="form-group ">
-							<sf:select path="infObjetoDelineacion.usos[${loop.index}].codUso"
+							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
 								class="form-control"></sf:select>

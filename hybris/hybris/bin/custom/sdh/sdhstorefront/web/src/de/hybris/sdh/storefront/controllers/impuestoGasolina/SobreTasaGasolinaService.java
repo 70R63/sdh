@@ -156,12 +156,13 @@ public class SobreTasaGasolinaService
 	{
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put("00", "Lote");
-		elementos.put("01", "Sótano(s)");
-		elementos.put("02", "Semisótano");
-		elementos.put("03", "Primer Piso");
-		elementos.put("04", "Pisos Restantes");
-		elementos.put("05", "Libre Primer Piso");
+		elementos.put("00", "Seleccionar");
+		elementos.put("01", "LOTE");
+		elementos.put("02", "SÓTANOS");
+		elementos.put("03", "SEMI SÓTANOS");
+		elementos.put("04", "PRIMER PISO");
+		elementos.put("05", "PISOS RESTANTES");
+		elementos.put("06", "LIBRE PRIMER PISO");
 
 
 		return elementos;
