@@ -59,14 +59,14 @@
 
 				<div class=" col-md-3">
 					<button type="button" class="btn btn-secondary btn-lg"
-						id="regresarButton" name="" value="regresar" onclick="goBack()">
+						id="regresarButton" name="" value="regresar" onclick="goBack4()">
 						<spring:theme code="delineacion.urbana.dec.firm.regresar" />
 					</button>
 				</div>
 
 				<div class=" col-md-3">
-					<button type="submit" class="btn btn-primary btn-lg" id="" name=""
-						value="calcular">
+					<button type="button" class="btn btn-primary btn-lg" id="" name=""
+						value="" onclick="window.location.href ='<c:url value='/contribuyentes' />';">
 						<spring:theme code="delineacion.urbana.dec.firm.cancelar" />
 					</button>
 				</div>
@@ -102,3 +102,9 @@
 <div id="dialogDU" title="Delineación Urbana">
 	<div id="duDialogContent"></div>
 </div>
+
+<script>
+function goBack4() {
+  window.history.back();
+}
+</script>

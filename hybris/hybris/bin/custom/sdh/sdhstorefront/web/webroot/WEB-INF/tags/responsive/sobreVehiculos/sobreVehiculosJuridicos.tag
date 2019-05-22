@@ -9,6 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <sf:form>
+<div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>
@@ -17,26 +18,26 @@
 		</div>
 	</div>
 
-	<div class="container">
+	
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<br>
 				<table class="table">
 					<thead>
 						<tr>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.juridicos.tipo" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.juridicos.nomcomple" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.juridicos.numero" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.juridicos.calidsuje" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.juridicos.propiedad" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.juridicos.fecdesde" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.juridicos.fechasta" /></label></th>
 						</tr>
 					</thead>
@@ -69,6 +70,5 @@
 				</table>
 			</div>
 		</div>
-
 	</div>
 </sf:form>
