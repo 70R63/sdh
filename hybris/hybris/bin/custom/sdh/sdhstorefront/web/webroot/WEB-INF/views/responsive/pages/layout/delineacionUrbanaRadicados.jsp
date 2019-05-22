@@ -131,6 +131,15 @@
 		}
 
 	}
+	
+	function goBack2() {
+
+		debugger;
+		window.history.back();
+
+	}
+	
+	
 </script>
 
 
