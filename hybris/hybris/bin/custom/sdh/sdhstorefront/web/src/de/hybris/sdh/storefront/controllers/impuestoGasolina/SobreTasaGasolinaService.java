@@ -1617,7 +1617,8 @@ public class SobreTasaGasolinaService
 
 		if (infoDelineacionResponse.getInfoDeclara().getCausalExcep() != null)
 		{
-			causalExcepDESCRIPCION = obtenerListaCausalExencion().get(infoDelineacionResponse.getInfoDeclara().getCausalExcep());
+			causalExcepDESCRIPCION = infoDelineacionResponse.getInfoDeclara().getCausalExcep() + " - "
+					+ obtenerListaCausalExencion().get(infoDelineacionResponse.getInfoDeclara().getCausalExcep());
 		}
 
 		if (!causalExcepDESCRIPCION.isEmpty())
