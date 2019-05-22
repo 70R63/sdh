@@ -9,6 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <sf:form>
+<div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>
@@ -17,24 +18,24 @@
 		</div>
 	</div>
 
-	<div class="container">
+	
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-9">
 				<br>
 				<table class="table">
 					<thead>
 						<tr>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.marcas.codmarca" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.marcas.descrip" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.marcas.excencion" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.marcas.valexcencion" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.marcas.fecdesde" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.marcas.fechasta" /></label></th>
 						</tr>
 					</thead>
