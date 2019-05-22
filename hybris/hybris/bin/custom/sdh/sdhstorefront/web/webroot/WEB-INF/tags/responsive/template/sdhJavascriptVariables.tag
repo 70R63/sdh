@@ -135,7 +135,24 @@
 			<c:if test="${hasRIRol and fn:contains(currentURL, 'reportantes')}">
 			</c:if>
 			
+			<c:choose>
+				<c:when test="${not empty reteIcaMaxFileSize}">
+					ACC.reteIcaMaxFileSize = ${reteIcaMaxFileSize};
+					ACC.customerNIT
+				</c:when>
+				<c:otherwise>
+					ACC.reteIcaMaxFileSize = 1024;
+				</c:otherwise>
+			</c:choose>
 			
+			<c:choose>
+				<c:when test="${not empty customerNIT}">
+					ACC.customerNIT = ${customerNIT};
+				</c:when>
+				<c:otherwise>
+					ACC.customerNIT = "";
+				</c:otherwise>
+			</c:choose>
 			
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},

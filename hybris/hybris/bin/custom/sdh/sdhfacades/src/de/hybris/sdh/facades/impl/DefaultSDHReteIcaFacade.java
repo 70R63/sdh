@@ -14,6 +14,7 @@ import de.hybris.sdh.core.pojos.responses.ReteIcaResponse;
 import de.hybris.sdh.core.services.SDHReteIcaService;
 import de.hybris.sdh.facades.SDHReteIcaFacade;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
@@ -149,7 +150,14 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 		try
 		{
 			client.changeWorkingDirectory(ftpDir);
-			client.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
+			final Boolean fileSent = client.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
+
+			if (!Boolean.TRUE.equals(fileSent))
+			{
+				LOG.error("Error sending ReteICA file to FTP");
+				return false;
+			}
+
 			client.logout();
 		}
 		catch (final Exception ex)
@@ -168,6 +176,25 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 				LOG.error("Error disconecting FTP client after sending ReteICA file to FTP" + e.getMessage());
 				return false;
 			}
+		}
+
+		return true;
+	}
+
+	@Override
+	public Boolean writeFile(final MultipartFile multipartFile)
+	{
+		final String directory = configurationService.getConfiguration().getString("sdh.reteica.nfs.directory");
+
+		final File file = new File(directory + multipartFile.getOriginalFilename());
+		try
+		{
+			multipartFile.transferTo(file);
+		}
+		catch (IllegalStateException | IOException e)
+		{
+			LOG.error("Error sending file to NFS");
+			return false;
 		}
 
 		return true;

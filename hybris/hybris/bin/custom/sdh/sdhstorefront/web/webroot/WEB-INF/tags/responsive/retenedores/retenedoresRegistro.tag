@@ -47,11 +47,11 @@
 					<tbody>
 						<tr>
 							<td><input class="inputtextnew tableident"
-								disabled="disabled" type="text" size="30" value="" /></td>
+								disabled="disabled" type="text" size="30" value="${ docType}" /></td>
 							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="" /></td>
+								disabled="disabled" type="text" size="30" value="${ docNumber}" /></td>
 							<td><input class="inputtextnew tablenombre"
-								disabled="disabled" type="text" size="30" value="" /></td>
+								disabled="disabled" type="text" size="30" value="${customerName }" /></td>
 						</tr>
 					</tbody>
 				</table>
@@ -66,7 +66,10 @@
 					<label class="control-label"><spring:theme
 							code="reteica.inicial.carga.anio" /></label> <select id="anoGravable" name="anoGravable"
 						class="form-control" style="width: 200px !important">
-						<option>Seleccionar</option>
+						<option value="">Seleccionar</option>
+						<c:forEach items="${ years}" var="eachYear">
+							<option value="${ eachYear}" >${eachYear }</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
@@ -75,7 +78,10 @@
 					<label class="control-label"><spring:theme
 							code="reteica.inicial.carga.periodo" /></label> <select id="periodo" name="periodo"
 						class="form-control" style="width: 200px !important">
-						<option>Seleccionar</option>
+						<option value="">Seleccionar</option>
+						<c:forEach items="${ perdiods}" var="eachPeriod">
+							<option value="${ eachPeriod}" ><spring:theme code="reteica.registro.period.${eachPeriod}"/> </option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
