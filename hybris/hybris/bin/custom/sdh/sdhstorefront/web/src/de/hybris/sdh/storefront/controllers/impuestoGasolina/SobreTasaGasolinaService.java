@@ -300,15 +300,15 @@ public class SobreTasaGasolinaService
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
 		elementos.put("00", "Seleccionar");
-		elementos.put("01", "Obra nueva");
-		elementos.put("02", "Ampliación");
-		elementos.put("03", "Modificación");
-		elementos.put("04", "Adecuación");
-		elementos.put("05", "Reforzamiento");
-		elementos.put("06", "Restauración/conservación");
-		elementos.put("07", "Demolición");
-		elementos.put("08", "Cerramiento");
-		elementos.put("09", "Reconocimiento");
+		elementos.put("01", "01 - OBRA NUEVA");
+		elementos.put("02", "02 - AMPLIACIÓN");
+		elementos.put("03", "03 - MODIFICACIÓN");
+		elementos.put("04", "04 - ADECUACIÓN");
+		elementos.put("05", "05 - REFORZAMIENTO");
+		elementos.put("06", "06 - RESTAURACIÓN/CONSERVACIÓN");
+		elementos.put("07", "07 - DEMOLICIÓN");
+		elementos.put("08", "08 - CERRAMIENTO");
+		elementos.put("09", "09 - RECONOCIMIENTO");
 
 		return elementos;
 	}
