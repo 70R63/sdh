@@ -68,7 +68,7 @@
 					<label class="control-label "><spring:theme
 							code="delineacion.urbana.dec.generales.Objetolicencia" /></label>
 					<div class="form-group ">
-						<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicencia"
+						<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicen"
 							items="${dataForm.catalogos.objetoLicencia}"
 							referenceData="${dataForm.catalogos.objetoLicencia}"
 							class="form-control"></sf:select>

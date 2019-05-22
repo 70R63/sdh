@@ -121,7 +121,7 @@
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.Objetolicencia" /></label>
 				<div class="form-group ">
-					<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicencia"
+					<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicen"
 						items="${dataForm.catalogos.objetoLicencia}"
 						referenceData="${dataForm.catalogos.objetoLicencia}"
 						class="form-control"></sf:select>
@@ -137,7 +137,7 @@
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.cauexen" /></label>
 				<sf:input class="form-control" readonly="true" aria-required="true"
-					maxlength="240" path="infObjetoDelineacion.infoDeclara.causalExcep" /> 
+					maxlength="240" path="infObjetoDelineacion.infoDeclara.causalExcepDESCRIPCION" /> 
 				<%-- 				<sf:select class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep" --%>
 				<%-- 						items="${dataForm.catalogos.causalExencion}" disabled="true"></sf:select>		 --%>
 
