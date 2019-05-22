@@ -64,7 +64,7 @@
 							var="delineacion">
 							<c:if test="${delineacion.cdu != ''}">
 								<tr>
-									<td><input id="CDU" name="" class="inputtextnew"
+									<td><input id="CDU" name="" class="inputtextnew tableident"
 										aria-required="true" type="text" readonly="readonly"
 										value="${delineacion.cdu}" maxlength="240"
 										style="width: 81px !important; padding-left: 1px !important; padding-right: 1px !important;"></td>
