@@ -215,6 +215,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 
 			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+			gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
 
 			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
 

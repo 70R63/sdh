@@ -63,19 +63,36 @@
 
 					<div class="col-md-3">
 						<div class="form-group ">
-							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
-								items="${dataForm.catalogos.codUso}"
-								referenceData="${dataForm.catalogos.codUso}"
-								class="form-control"></sf:select>
+							<c:if test='${dataForm.input.tipoFlujo == "D"}'>
+								<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
+									items="${dataForm.catalogos.codUso}"
+									referenceData="${dataForm.catalogos.codUso}"
+									class="form-control"></sf:select>
+							</c:if>
+							<c:if test='${dataForm.input.tipoFlujo == "R"}'>
+								<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
+									items="${dataForm.catalogos.codUso}"
+									referenceData="${dataForm.catalogos.codUso}"
+									class="form-control" readOnly="true" disabled="true"></sf:select>
+							</c:if>
+
 						</div>
 					</div>
 
 
 					<div class="col-md-2">
 						<div class="form-group ">
-							<sf:input class="form-control" readonly="false"
-								aria-required="true" maxlength="240"
-								path="infObjetoDelineacion.usos[${loop.index}].areaNeta" />
+							<c:if test='${dataForm.input.tipoFlujo == "D"}'>
+								<sf:input class="form-control" readonly="false"
+									aria-required="true" maxlength="240"
+									path="infObjetoDelineacion.usos[${loop.index}].areaNeta" />
+							</c:if>
+							<c:if test='${dataForm.input.tipoFlujo == "R"}'>
+								<sf:input class="form-control" readonly="false"
+									aria-required="true" maxlength="240"
+									path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
+									readOnly="true" disabled="true" />
+							</c:if>
 						</div>
 					</div>
 
@@ -114,8 +131,8 @@
 
 				<div class="col-md-2 offset-md-3">
 					<div class="form-group ">
-						<input id="inputareainter" class="form-control" maxlength="30"
-							value="${dataForm.infObjetoDelineacion.infoDeclara.totalUsos}"></input>
+						<sf:input id="inputareainter" class="form-control" maxlength="30"
+							path="infObjetoDelineacion.infoDeclara.totalUsos"></sf:input>
 					</div>
 				</div>
 			</div>

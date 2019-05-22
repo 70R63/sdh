@@ -18,6 +18,7 @@ public class DelineacionUInfoDeclara
 	private String objetoLicen;
 	private String opcionUso;
 	private String causalExcep;
+	private String causalExcepDESCRIPCION;
 	private String presupuestoObra;
 	private String tipoLicencia;
 	private String objetoLicencia;
@@ -502,6 +503,23 @@ public class DelineacionUInfoDeclara
 	public void setValorExen(final String valorExen)
 	{
 		this.valorExen = valorExen;
+	}
+
+	/**
+	 * @return the causalExcepDESCRIPCION
+	 */
+	public String getCausalExcepDESCRIPCION()
+	{
+		return causalExcepDESCRIPCION;
+	}
+
+	/**
+	 * @param causalExcepDESCRIPCION
+	 *           the causalExcepDESCRIPCION to set
+	 */
+	public void setCausalExcepDESCRIPCION(final String causalExcepDESCRIPCION)
+	{
+		this.causalExcepDESCRIPCION = causalExcepDESCRIPCION;
 	}
 
 	/* (non-Javadoc)

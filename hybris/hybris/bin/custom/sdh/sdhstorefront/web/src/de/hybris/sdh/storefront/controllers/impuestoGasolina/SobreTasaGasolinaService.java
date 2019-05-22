@@ -1606,6 +1606,27 @@ public class SobreTasaGasolinaService
 
 	}
 
+
+	/**
+	 * @param infoDelineacionResponse
+	 */
+	public void prepararValorcausalExcepDESCRIPCIONDU(final InfoObjetoDelineacionResponse infoDelineacionResponse)
+	{
+
+		String causalExcepDESCRIPCION = "";
+
+		if (infoDelineacionResponse.getInfoDeclara().getCausalExcep() != null)
+		{
+			causalExcepDESCRIPCION = obtenerListaCausalExencion().get(infoDelineacionResponse.getInfoDeclara().getCausalExcep());
+		}
+
+		if (!causalExcepDESCRIPCION.isEmpty())
+		{
+			infoDelineacionResponse.getInfoDeclara().setCausalExcepDESCRIPCION(causalExcepDESCRIPCION);
+		}
+
+	}
+
 	public static String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
 	{
 		String valorVariable = "";
