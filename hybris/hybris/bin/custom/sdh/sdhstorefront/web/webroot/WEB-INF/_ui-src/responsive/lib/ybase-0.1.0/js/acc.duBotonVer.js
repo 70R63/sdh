@@ -108,7 +108,7 @@ ACC.duBotonVer = {
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			
-	            			document.getElementById("downloadHelper").click();
+	            			document.getElementById("#downloadHelper").click();
 	            			
 	            		}
 	 	      		
