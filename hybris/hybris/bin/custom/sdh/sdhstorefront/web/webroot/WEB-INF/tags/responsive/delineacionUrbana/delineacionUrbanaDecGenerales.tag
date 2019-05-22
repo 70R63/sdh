@@ -96,7 +96,7 @@
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.modlicencia" /></label>
 				<sf:select class="form-control" id="an" onchange="obranueva(this)"
-					path="input.selectedTipoLicencia"
+					path="infObjetoDelineacion.infoDeclara.modalidad"
 					items="${dataForm.catalogos.modalidadLicencia}">
 				</sf:select>
 				<!-- 				<select -->

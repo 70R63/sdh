@@ -36,6 +36,8 @@ public class DelineacionUInfoDeclara
 	private String totalAreap;
 	private String totalAreai;
 	private String valorExen;
+	private String modalidad;
+
 
 	//	private String fechaFinObra; //se utiliza en el response de calculo de impuesto
 	//	private String causalExep; //se utiliza en el response de calculo de impuesto
@@ -522,6 +524,23 @@ public class DelineacionUInfoDeclara
 		this.causalExcepDESCRIPCION = causalExcepDESCRIPCION;
 	}
 
+	/**
+	 * @return the modalidad
+	 */
+	public String getModalidad()
+	{
+		return modalidad;
+	}
+
+	/**
+	 * @param modalidad
+	 *           the modalidad to set
+	 */
+	public void setModalidad(final String modalidad)
+	{
+		this.modalidad = modalidad;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -530,12 +549,13 @@ public class DelineacionUInfoDeclara
 	{
 		return "DelineacionUInfoDeclara [fechaEjecutaria=" + fechaEjecutaria + ", fechaUltAbono=" + fechaUltAbono
 				+ ", fechaFinalObra=" + fechaFinalObra + ", cdu=" + cdu + ", numRadicado=" + numRadicado + ", objetoLicen="
-				+ objetoLicen + ", opcionUso=" + opcionUso + ", causalExcep=" + causalExcep + ", presupuestoObra=" + presupuestoObra
-				+ ", tipoLicencia=" + tipoLicencia + ", totalPagar=" + totalPagar + ", totalPresupuesto=" + totalPresupuesto
+				+ objetoLicen + ", opcionUso=" + opcionUso + ", causalExcep=" + causalExcep + ", causalExcepDESCRIPCION="
+				+ causalExcepDESCRIPCION + ", presupuestoObra=" + presupuestoObra + ", tipoLicencia=" + tipoLicencia
+				+ ", objetoLicencia=" + objetoLicencia + ", totalPagar=" + totalPagar + ", totalPresupuesto=" + totalPresupuesto
 				+ ", totalRetencion=" + totalRetencion + ", valorPagar=" + valorPagar + ", valorEjecutado=" + valorEjecutado
 				+ ", impuestoCargo=" + impuestoCargo + ", valorSancion=" + valorSancion + ", interesMora=" + interesMora
 				+ ", saldoFavor=" + saldoFavor + ", saldoImpCargo=" + saldoImpCargo + ", totalUsos=" + totalUsos + ", totalAreap="
-				+ totalAreap + ", totalAreai=" + totalAreai + "]";
+				+ totalAreap + ", totalAreai=" + totalAreai + ", valorExen=" + valorExen + ", modalidad=" + modalidad + "]";
 	}
 
 
