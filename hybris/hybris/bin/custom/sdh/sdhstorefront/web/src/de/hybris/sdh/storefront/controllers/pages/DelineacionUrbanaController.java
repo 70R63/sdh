@@ -1,5 +1,5 @@
 /**
-*<
+*
 */
 package de.hybris.sdh.storefront.controllers.pages;
 
@@ -215,6 +215,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 
 			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+			gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
 
 			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
 
@@ -299,14 +300,15 @@ public class DelineacionUrbanaController extends AbstractPageController
 		{
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE + "?declaracion=true";
 			infoDelineacion.getInput().setTipoFlujo("R");
+			infoDelineacionRequest.setRetencion("X"); //Se indico que para retencion va una X
 		}
 		if (action.equals("declaracion"))
 		{
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE + "?declaracion=true";
 			infoDelineacion.getInput().setTipoFlujo("D");
 			infoDelineacionRequest.setNumRadicado("");
+			infoDelineacionRequest.setRetencion(""); //Se indico que para retencion va una X
 		}
-
 
 		System.out.println("Request para infObjeto/Delineacion: " + infoDelineacionRequest);
 		infoDelineacionResponse = gasolinaService.consultaInfoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
@@ -524,13 +526,14 @@ public class DelineacionUrbanaController extends AbstractPageController
 		if (infoDelineacion.getInput().getTipoFlujo().equals("R"))
 		{
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
+			infoDelineacionRequest.setRetencion("X"); //Se indico que para retencion va una X
 		}
 		if (infoDelineacion.getInput().getTipoFlujo().equals("D"))
 		{
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
 			infoDelineacionRequest.setNumRadicado("");
+			infoDelineacionRequest.setRetencion(""); //Se indico que para retencion va una X
 		}
-
 
 		System.out.println("Request para calculoImp/Delineacion: " + infoDelineacionRequest);
 		try

@@ -11,6 +11,24 @@ public class ReteICA
 {
 	private String numObjeto;
 	private String consecutive;
+	private String numID;
+
+	/**
+	 * @return the numID
+	 */
+	public String getNumID()
+	{
+		return numID;
+	}
+
+	/**
+	 * @param numID
+	 *           the numID to set
+	 */
+	public void setNumID(final String numID)
+	{
+		this.numID = numID;
+	}
 
 	/**
 	 * @return the numObjeto

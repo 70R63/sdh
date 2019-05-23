@@ -51,7 +51,6 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
-import de.hybris.sdh.core.pojos.responses.ImpuestoReteICA;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -867,34 +866,34 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			//clean old ReteICA exterior taxes
 
 
-			final SDHReteICATaxModel oldReteIcaTaxModel = customerModel.getReteIcaTaxList();
-
-			if (oldReteIcaTaxModel != null)
-			{
-				modelService.removeAll(oldReteIcaTaxModel);
-			}
-
-			final ImpuestoReteICA reteIca = sdhConsultaContribuyenteBPResponse.getReteICA();
-
-			if (reteIca != null)
-			{
-				final SDHReteICATaxModel newReteIcaTaxModel = new SDHReteICATaxModel();
-
-				if (!StringUtils.isBlank(reteIca.getNumObjeto()))
-				{
-					newReteIcaTaxModel.setObjectNumber(reteIca.getNumObjeto());
-					newReteIcaTaxModel.setIdNumber(reteIca.getNumID());
-				}
-
-				modelService.saveAll(newReteIcaTaxModel);
-
-				customerModel.setReteIcaTaxList(newReteIcaTaxModel);
-
-			}
-			else
-			{
-				customerModel.setReteIcaTaxList(null);
-			}
+			//			final SDHReteICATaxModel oldReteIcaTaxModel = customerModel.getReteIcaTaxList();
+			//
+			//			if (oldReteIcaTaxModel != null)
+			//			{
+			//				modelService.removeAll(oldReteIcaTaxModel);
+			//			}
+			//
+			//			final ImpuestoReteICA reteIca = sdhConsultaContribuyenteBPResponse.getReteICA();
+			//
+			//			if (reteIca != null)
+			//			{
+			//				final SDHReteICATaxModel newReteIcaTaxModel = new SDHReteICATaxModel();
+			//
+			//				if (!StringUtils.isBlank(reteIca.getNumObjeto()))
+			//				{
+			//					newReteIcaTaxModel.setObjectNumber(reteIca.getNumObjeto());
+			//					newReteIcaTaxModel.setIdNumber(reteIca.getNumID());
+			//				}
+			//
+			//				modelService.saveAll(newReteIcaTaxModel);
+			//
+			//				customerModel.setReteIcaTaxList(newReteIcaTaxModel);
+			//
+			//			}
+			//			else
+			//			{
+			//				customerModel.setReteIcaTaxList(null);
+			//			}
 
 
 
@@ -910,6 +909,8 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 				final SDHReteICATaxModel newReteICAModel = customerModel.getReteIcaTax();
 				newReteICAModel.setObjectNumber(sdhConsultaContribuyenteBPResponse.getReteIca().getNumObjeto());
 				newReteICAModel.setConsecutive(sdhConsultaContribuyenteBPResponse.getReteIca().getConsecutive());
+				newReteICAModel.setNumID(sdhConsultaContribuyenteBPResponse.getReteIca().getNumID());
+
 
 				modelService.save(newReteICAModel);
 

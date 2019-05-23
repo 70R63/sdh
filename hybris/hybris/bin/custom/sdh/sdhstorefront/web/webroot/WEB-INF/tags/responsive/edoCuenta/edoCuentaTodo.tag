@@ -156,8 +156,8 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"> <spring:theme
-								code="edocuenta.inicial.ica.tiporegimen" /></label> <select
-							class="control-form"><option>Seleccionar</option></select>
+								code="edocuenta.inicial.ica.tiporegimen" /></label> <input class="form-cntrol"
+										disabled="disabled" value="" type="text" />
 					</div>
 				</div>
 			</div>

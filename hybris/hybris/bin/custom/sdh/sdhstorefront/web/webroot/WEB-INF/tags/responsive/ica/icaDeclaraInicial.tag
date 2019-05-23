@@ -8,27 +8,36 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme
+								code="ica.declaracion.title" /></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="avisobody">
 
-<div class="row">
-	<div class="col-md-12">
-		<table class="table">
-			<thead>
-				<tr class="avisoheadline p">
-					<td style="text-align: center"><spring:theme
-							code="ica.declaracion.title" /></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="avisobody">
-
-					<td><spring:theme code="ica.declaracion.descripcion1" /><a
-						href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-							información</a> <spring:theme code="ica.declaracion.descripcion2" /></td>
-				</tr>
-			</tbody>
-		</table>
+						<td><spring:theme code="ica.declaracion.descripcion1" /><a
+							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+								información</a> <spring:theme code="ica.declaracion.descripcion2" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
+
+<div class="row mt-3">
+	<div class="col-md-7 col-md-offset-3 d-flex align-items-center">
+		<spring:theme code="ica.declaracion.descripcion3" />
+	</div>
+</div>
+
+<br>
 
 <div class="row mt-3">
 	<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
