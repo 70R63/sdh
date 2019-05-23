@@ -9,15 +9,16 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <sf:form>
-	<div class="row">
-		<div class="col-md-6 headline">
-			<h2>
-				<span><spring:theme code="sobre.vehiculo.detail.title" /></span>
-			</h2>
-		</div>
-	</div>
-
 	<div class="container">
+		<div class="row">
+			<div class="col-md-6 headline">
+				<h2>
+					<span><spring:theme code="sobre.vehiculo.detail.title" /></span>
+				</h2>
+			</div>
+		</div>
+
+
 		<br>
 		<div class="col-md-1">
 			<label class="control-label"><spring:theme
@@ -30,27 +31,25 @@
 		</div>
 		<br> <br>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-10">
 				<br>
 				<table class="table">
 					<thead>
 						<tr>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.idServicio" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.idestado" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.watts" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.clasanti" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.cappasa" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.capton" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.feccambio" /></label></th>
-							<th><label class="control-label "><spring:theme
-										code="sobre.vehiculo.detail.feccance" /></label></th>
 						</tr>
 					</thead>
 
@@ -77,14 +76,10 @@
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="fechacambio"></c:out>"
 								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="feccancela"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-
 	</div>
 </sf:form>

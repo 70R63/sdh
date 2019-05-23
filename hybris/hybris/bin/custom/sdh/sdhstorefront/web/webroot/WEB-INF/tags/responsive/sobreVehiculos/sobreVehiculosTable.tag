@@ -10,15 +10,24 @@
 
 <div class="container">
 	<div class="row">
-		<div class="avisoheadline">
-			<h3>
-				<span class="p"><spring:theme
-						code="sobre.vehiculos.table.title" text="Mis Vehiculos" /></span>
-			</h3>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme
+								code="sobre.vehiculos.table.title" /></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="avisobody">
+
+						<td><spring:theme code="sobre.vehiculos.table.descripcion" /><a
+							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+								información</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<p class="avisobody">
-			<spring:theme code="sobre.vehiculos.table.descripcion" />
-		</p>
 	</div>
 </div>
 
@@ -26,7 +35,7 @@
 	<br>
 	<div class="container">
 		<div class="col-md-1">
-			<label class="control-label "><spring:theme
+			<label class="control-label"><spring:theme
 					code="sobre.vehiculo.table.anigrav" /></label>
 		</div>
 		<div class="col-md-2">
@@ -37,77 +46,78 @@
 				<option value="2016">2016</option>
 			</select>
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.placa" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.marca" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.factura" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.linea" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.modelo" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.clase" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.numpuertas" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.blindado" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.cilindraje" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code="sobre.vehiculo.table.avaluo" /></label></th>
-						<th><label class="control-label "><spring:theme
-									code=" " /></label></th>
 
-					</tr>
-				</thead>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.placa" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.marca" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.factura" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.linea" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.modelo" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.clase" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.numpuertas" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.blindado" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.cilindraje" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.avaluo" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code=" " /></label></th>
 
-				<tbody>
-					<tr>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="placa"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="marca"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="factura"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="linea"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="modelo"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="clase"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="Puertas"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="blindado"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="cilin"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="text"
-							readonly="readonly" value="<c:out value="avaluo"></c:out>"
-							maxlength="240" style="width: 100% !important;"></td>
-						<td><input id="" name="" class="inputtextnew" type="submit"
-							value="<c:out value="Ver detalle"></c:out>" maxlength="240"
-							style="width: 100% !important;"></td>
-					</tr>
-				</tbody>
-			</table>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="placa"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="marca"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="factura"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="linea"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="modelo"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="clase"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="Puertas"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="blindado"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="cilin"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="avaluo"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="submit"
+								value="<c:out value="Ver detalle"></c:out>" maxlength="240"
+								style="width: 100% !important;"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </sf:form>
