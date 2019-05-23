@@ -8,11 +8,10 @@
 	tagdir="/WEB-INF/tags/responsive/sobreVehiculos"%>
 
 
-<sobreVehiculos:sobreVehiculosTable />
-<sobreVehiculos:sobreVehiculosDetail />
-<sobreVehiculos:sobreVehiculosJuridicos />
-<sobreVehiculos:sobreVehiculosMarcas />
-<sobreVehiculos:sobreVehiculosLiquida />
+<sobreVehiculos:sobreMotosDeclaraInicial />
+<sobreVehiculos:sobreMotosDeclaraInfo />
+<sobreVehiculos:sobreMotosDeclaraLiqui />
+<sobreVehiculos:sobreMotosDeclaraFirma />
 
 <script>
 	function goBack() {
