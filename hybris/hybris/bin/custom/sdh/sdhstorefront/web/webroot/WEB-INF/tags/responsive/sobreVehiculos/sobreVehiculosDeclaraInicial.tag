@@ -44,7 +44,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.info.captone" /></label> <input
+							code="sobre.vehiculo.declaracion.vehiculo.placa" /></label> <input
 						id="numresol" name="numresol" class="form-control"
 						aria-required="true" type="text" value="" maxlength="30"
 						disabled="disabled">

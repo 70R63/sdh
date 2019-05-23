@@ -84,7 +84,7 @@
 		</div>
 
 		<div class="row" style="marging-top: 5px">
-			<div class="col-md-12 centercol-md-8 text-center">
+			<div class="col-md-3 centercol-md-8 text-center">
 
 				<button style="margin-top: 3px;" id="regresar"
 					class="btn btn-secondary btn-lg"
@@ -93,11 +93,23 @@
 					<spring:theme code="ica.inicial.representantes.regresar" />
 				</button>
 				<%-- 				<button style="margin-top: 3px;" id="" onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?anoGravable=${fn:substring(icaInfObjetoFormResp.icaInfObjetoResponse.fechaIniAct,0,4)}&numObjeto=${numObjeto}' />';" --%>
+				</div>
+				<div class="col-md-6">
 				<button style="margin-top: 3px;" id=""
 					onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?&numObjeto=${numObjeto}' />';"
 					class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="ica.inicial.representantes.presendecla" />
+					<spring:theme code="ica.inicial.representantes.presendecla" /><span class="badge badge-light" style="background: transparent; color: #000000; font-size: 16px;">vigencia actual</span>
 				</button>
+			</div>
+		</div>
+			<div class="row">
+			<div class="col-md-12" style="background: #d2d2d2; margin-top: 20px !important;">
+				<label class="control-label "><spring:theme
+						code="ica.inicial.representantes.nota1" /></label>
+				<div class="form-group">
+					<label class="control-label "><spring:theme
+							code="ica.inicial.representantes.nota2" /></label>
+				</div>
 			</div>
 		</div>
 	</form:form>
