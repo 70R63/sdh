@@ -368,7 +368,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
 ;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode
-;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, CertDeclaraNavNode 
+;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertPagoNavNode, ARObligacionesPendNavNode, ARRelPagosNavNode, ARCertDeclaraNavNode
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
 ;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
@@ -479,6 +479,12 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;EdoCuentaNavNode;;Estado Cuenta Link;EdoCuentaNavNode
 ;CertDeclaraNavNode;; Certificacion Declaracion Link;CertDeclaraNavNode
 
+;ARCertPagoNavNode;;Certificacion Pago Link;ARCertPagoNavNode
+;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
+;ARRelPagosNavNode;;Relacion Pagos Link;ARRelPagosNavNode
+;ARCertDeclaraNavNode;; Certificacion Declaracion Link;ARCertDeclaraNavNode
+
+
 ;CargaNavNode;;Carga Link;CargaNavNode
 ;HistoricoNavNode;;Historico Link;HistoricoNavNode
 ;SancionesNavNode;;Sanciones Link;SancionesNavNode
@@ -587,6 +593,13 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;RelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;RelPagosNavNode;RelPagosLink
 ;EdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;EdoCuentaNavNode;EdoCuentaLink
 ;CertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;CertDeclaraNavNode;CertDeclaraLink
+
+
+;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;CertPagoLink
+;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ObligacionesPendLink
+;ARRelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;ARRelPagosNavNode;RelPagosLink
+;ARCertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;ARCertDeclaraNavNode;CertDeclaraLink
+
 
 ;CargaNavNodeEntry;;Carga Navigation Node Entry;CargaNavNode;CargaLink
 ;HistoricoNavNodeEntry;;Historico Navigation Node Entry;HistoricoNavNode;HistoricoLink
