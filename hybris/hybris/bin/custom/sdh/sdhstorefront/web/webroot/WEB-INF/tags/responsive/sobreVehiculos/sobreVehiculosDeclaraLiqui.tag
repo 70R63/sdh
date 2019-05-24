@@ -94,6 +94,25 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.tipvesdh" /></label> <input
+						id="" name="" class="form-control" aria-required="true"
+						type="text" value="" maxlength="30" disabled="disabled">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.despronpag" /></label> <input
+						id="" name="" class="form-control" aria-required="true"
+						type="text" value="" maxlength="30" disabled="disabled">
+				</div>
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="col-md-3">
