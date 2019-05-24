@@ -74,7 +74,9 @@
 				</div>
 
 				<div class="col-md-3">
+		<a id="downloadHelper" target="_blank"></a>		
 		<button id="duGeneraDeclaracionButton" type="button"
+			
 			<c:if test="${empty  dataForm.infObjetoDelineacion.numForm}"> disabled="disabled"</c:if>
 			class="btn btn-primary btn-lg">
 			<spring:theme code="delineacion.urbana.dec.firm.predec" />

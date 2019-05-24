@@ -72,6 +72,7 @@
 				</div>
 
 				<div class="col-md-3">
+				<a id="downloadHelper" target="_blank"></a>
 <!-- 					<button type="submit" class="btn btn-primary btn-lg" id="" name="" -->
 <!-- 						value="retencion"> -->
 <%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>

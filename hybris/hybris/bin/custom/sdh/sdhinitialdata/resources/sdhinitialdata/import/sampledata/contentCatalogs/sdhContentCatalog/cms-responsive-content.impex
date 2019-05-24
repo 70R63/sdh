@@ -2084,4 +2084,46 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;retenedoresDeclaracionPageComponent	;retenedoresDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDeclaracionPageComponent					
 #->FIN dev-maria Agregar paginas para Declaraciones  10/05/2019				
+
+#->INI dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion vehiculos  22/05/2019
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;sobreVehiculosDeclaracionPage 		;Sobre Vehiculos	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/sobrevehiculosautomotores/declaracion
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='sobreVehiculosDeclaracionPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-sobreVehiculosDeclaracionPage 	;SideContent			;																	;SideContent-sobreVehiculosDeclaracionPage				;;;
+								;						;BodyContent-sobreVehiculosDeclaracionPage 	;BodyContent			;																	;BodyContent-sobreVehiculosDeclaracionPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-sobreVehiculosDeclaracionPage 	;Side Content Slot for Sobre Vehiculos Declaracion	;true	;								;;;
+							;							;BodyContent-sobreVehiculosDeclaracionPage	;Body Content Slot for Sobre Vehiculos Declaracion	;true	;sobreVehiculosDeclaracionPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;sobreVehiculosDeclaracionPageComponent	;sobreVehiculosDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosDeclaracionPageComponent	
+
+#->FIN dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion vehiculos  22/05/2019
+
+#->INI dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion motos  22/05/2019
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;sobreVehiculosMotosDeclaracionPage 		;Sobre Vehiculos	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/sobrevehiculosautomotores/declaracion/motos
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='sobreVehiculosMotosDeclaracionPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-sobreVehiculosMotosDeclaracionPage 	;SideContent			;																	;SideContent-sobreVehiculosMotosDeclaracionPage				;;;
+								;						;BodyContent-sobreVehiculosMotosDeclaracionPage 	;BodyContent			;																	;BodyContent-sobreVehiculosMotosDeclaracionPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-sobreVehiculosMotosDeclaracionPage 	;Side Content Slot for Sobre Vehiculos Motos	;true	;								;;;
+							;							;BodyContent-sobreVehiculosMotosDeclaracionPage	;Body Content Slot for Sobre Vehiculos Motos	;true	;sobreVehiculosMotosDeclaracionPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;sobreVehiculosMotosDeclaracionPageComponent	;sobreVehiculosMotosDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosMotosDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosMotosDeclaracionPageComponent	
+
+#->FIN dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion motos  22/05/2019
 									

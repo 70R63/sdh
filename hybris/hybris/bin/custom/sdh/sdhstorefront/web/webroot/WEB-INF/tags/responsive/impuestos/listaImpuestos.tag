@@ -43,33 +43,33 @@
 			<input type="hidden" name="skipReques" value="" />
 
 			<c:if test="${dataForm.impuesto != '3'}">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required"><spring:theme
-							code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required"><spring:theme
+								code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
 
-					<sf:select path="anoGravable" id="anoGravable"
-						items="${dataForm.catalogosSo.anioGravable}"
-						referenceData="${dataForm.catalogosSo.anioGravable}"
-						class="form-control" onchange="onChangeAnioGravable()" />
+						<sf:select path="anoGravable" id="anoGravable"
+							items="${dataForm.catalogosSo.anioGravable}"
+							referenceData="${dataForm.catalogosSo.anioGravable}"
+							class="form-control" onchange="onChangeAnioGravable()" />
+					</div>
 				</div>
-			</div>
 			</c:if>
-			
+
 			<c:if test="${dataForm.impuesto == '3'}">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label required"><spring:theme
-							code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
-							
-					<sf:select path="anoGravable" items="${icaAnioGravable}"
-						referenceData="${icaAnioGravable}"
-							class="form-control" />		
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label required"><spring:theme
+								code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
+
+						<sf:select path="anoGravable" items="${icaAnioGravable}"
+							referenceData="${icaAnioGravable}" class="form-control" />
+					</div>
 				</div>
-			</div>
 			</c:if>
 
-			<c:if test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
+			<c:if
+				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
 				<div class="col-md-4">
 					<div class="form-group ">
 						<label class="control-label required"><spring:theme
@@ -81,7 +81,7 @@
 					</div>
 				</div>
 			</c:if>
-			
+
 			<c:if test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">
 				<div class="col-md-4">
 					<div class="form-group ">
@@ -89,14 +89,13 @@
 								code="impuestos.presentarDeclaracion.Periodo" /></label>
 
 						<sf:select path="periodo" items="${icaPeriodo}"
-						referenceData="${icaPeriodo}"
-							class="form-control" />
+							referenceData="${icaPeriodo}" class="form-control" />
 					</div>
 				</div>
 			</c:if>
 		</div>
-		
-		
+
+
 		<c:if
 			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">
@@ -139,42 +138,47 @@
 
 <c:if test="${not empty delineacionWithRadicadosList}">
 	<div class="col-md-9 col-md-offset-1">
-		<table class="table">
-			<thead>
-				<tr>
-					<th style="text-align: center"><label class="control-label "
-						for="" style="text-transform: capitalize"> <spring:theme
-								code="impuestos.presentarDeclaracion.deliur.cdu" />
-					</label></th>
-					<th style="text-align: center"><label class="control-label"
-						for="" style="text-transform: capitalize"> <spring:theme
-								code="impuestos.presentarDeclaracion.deliur.tipobli" /></label></th>
-					<th style="text-align: center"><label class="control-label"
-						for="" style="text-transform: capitalize"> <spring:theme
-								code="impuestos.presentarDeclaracion.deliur.tiplic" /></label></th>
-					<th style="text-align: center"><label class="control-label"
-						for="" style="text-transform: capitalize"> <spring:theme
-								code="Evento" /></label></th>
-				</tr>
-			</thead>
-		</table>
+	<br>
+	<br>
+		<div class="row">
+			<div class="col-md-2">
+				<label class="control-label" for="" style="text-transform: none">
+					<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" />
+				</label>
+			</div>
+			<div class="col-md-3">
+				<label class="control-label" for="" style="text-transform: none">
+					<spring:theme code="impuestos.presentarDeclaracion.deliur.tipobli" />
+				</label>
+			</div>
+			<div class="col-md-3">
+				<label class="control-label" for="" style="text-transform: none">
+					<spring:theme code="impuestos.presentarDeclaracion.deliur.tiplic" />
+				</label>
+			</div>
+			<div class="col-md-3">
+				<label class="control-label" for="" style="text-transform: none">
+					<spring:theme code="Evento" />
+				</label>
+			</div>
+		</div>
 		<div class="table-resposive">
 			<c:forEach var="item" items="${delineacionWithRadicadosList}">
 				<div class="row">
-					<div class="col-sm-3">
-						<input style="width: 100%" class="inputtextnew"
-							disabled="disabled" type="text" value="${item.cdu}" />
+					<div class="col-sm-2">
+						<input class="form-control" disabled="disabled" type="text"
+							value="${item.cdu}" style="height: 32px !important; margin-bottom: 9px !important"/>
 					</div>
 					<div class="col-sm-3">
 						<select id="selctipobliga" class="form-control"
-							onchange="ShowSelected(this)">
+							onchange="ShowSelected(this)" style="height: 48px !important">
 							<option value="0-${item.cdu}">Seleccionar</option>
 							<option value="1-${item.cdu}">Declaración</option>
 							<option value="2-${item.cdu}">Retención</option>
 						</select>
 					</div>
 					<div class="col-sm-3">
-						<select id="btnTpLic_${item.cdu}" class="form-control">
+						<select id="btnTpLic_${item.cdu}" class="form-control" style="height: 48px !important">
 							<option value="00">Seleccionar</option>
 							<option value="01">Licencia</option>
 							<option value="02">Reconocimiento</option>
@@ -187,8 +191,8 @@
 							<form:hidden path="selectedRadicado" value="" />
 							<form:hidden path="selectedTipoLicencia" value="" />
 
-							<button type="submit" class="btn-link"
-								id="btn_${item.cdu}" name="action" value="declaracion">
+							<button type="submit" class="btn-link" id="btn_${item.cdu}"
+								name="action" value="declaracion">
 								<spring:theme code="delineacion.urbana.radicados.declaracion" />
 							</button>
 						</form:form>
@@ -197,11 +201,11 @@
 				<div class="row" id="${item.cdu}" style="display: none">
 					<c:forEach var="radicado" items="${item.radicados}">
 						<div class="row">
-							<div class="col-sm-3"></div>
-							<div class="col-sm-3">Radicados:</div>
+							<div class="col-sm-2"></div>
+							<div class="col-sm-3 text-right">Radicados:</div>
 							<div class="col-sm-3">
-								<input style="width: 100%" class="inputtextnew"
-									disabled="disabled" type="text" value="${radicado.numRadicado}" />
+								<input style="margin-bottom: 5px !important" class="form-control"
+									disabled="disabled" type="text" value="${radicado.numRadicado}"/>
 							</div>
 							<div class="col-sm-3">
 								<form:form method="post" commandName="inputDelineacion"
@@ -210,7 +214,8 @@
 									<form:hidden path="selectedRadicado" value="${item.radicados}" />
 									<form:hidden path="selectedTipoLicencia" value="" />
 
-									<button type="submit" class="btn-link" id="retenciondelibutton1" name="action" value="retencion">
+									<button type="submit" class="btn-link"
+										id="retenciondelibutton1" name="action" value="retencion">
 										<spring:theme code="delineacion.urbana.radicados.retencion" />
 									</button>
 								</form:form>
@@ -232,8 +237,7 @@
 		var x = document.getElementById(div);
 		var tipoLicencia = document.getElementById("btnTpLic_" + div);
 		var btnDeclaracion = document.getElementById("btn_" + div);
-		
-		
+
 		if (selected === "2") {
 			x.style.display = "block";
 			tipoLicencia.selectedIndex = "1"
