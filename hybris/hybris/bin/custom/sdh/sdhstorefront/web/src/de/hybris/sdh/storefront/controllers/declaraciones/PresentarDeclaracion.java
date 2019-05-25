@@ -278,7 +278,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				model.addAttribute("publicidadExtList", sdhValidaContribuyenteService
 						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
 			}
-			else if (dataFormResponse.getImpuesto().equals("6") && !dataFormResponse.getAnoGravable().equals("X"))
+			else if (dataFormResponse.getImpuesto().equals("6") && !dataFormResponse.getAnoGravable().equals("X")
+					&& !dataFormResponse.getAnoGravable().isEmpty())
 			{
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 				final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();

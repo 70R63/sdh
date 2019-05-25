@@ -139,6 +139,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
+			gasolinaService.prepararValortipoDocDESCRIPCIONDU(detalleContribuyente);
 			infoDelineacion.setValCont(detalleContribuyente);
 		}
 		else
@@ -316,6 +317,9 @@ public class DelineacionUrbanaController extends AbstractPageController
 		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
 		{
 			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+			gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
+			gasolinaService.prepararValortipoDocDESCRIPCIONDU(infoDelineacion.getValCont());
+
 			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
 			infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
 		}
