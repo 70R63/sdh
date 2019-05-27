@@ -188,23 +188,11 @@ public class SDHValidaMailRolResponse
 		return reteIca;
 	}
 
+	@JsonSetter("reteICA")
 	public void setReteIca(final ReteICA reteIca)
 	{
 		this.reteIca = reteIca;
 	}
-
-	//	public ImpuestoReteICA getReteICA()
-	//	{
-	//		return reteICA;
-	//	}
-	//
-	//	public void setReteICA(final ImpuestoReteICA reteICA)
-	//	{
-	//		this.reteICA = reteICA;
-	//	}
-
-
-
 
 
 }

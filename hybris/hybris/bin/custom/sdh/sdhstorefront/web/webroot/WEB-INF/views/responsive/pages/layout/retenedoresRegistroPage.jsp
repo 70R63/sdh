@@ -12,7 +12,7 @@
 <retenedores:retenedoresRegistro/>
 
 <div id="dialogReteICA" title="ReteICA" ><div id="reteICADialogContent"></div></div>
-
+<div id="dialogConfirmReteICA" title="ReteICA" ><div id="reteICADialogConfirmContent"></div></div>
 
 </sf:form>
 

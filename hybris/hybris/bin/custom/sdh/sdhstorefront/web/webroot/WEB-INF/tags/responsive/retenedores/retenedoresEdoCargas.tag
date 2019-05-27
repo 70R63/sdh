@@ -31,7 +31,6 @@
 </div>
 
 <div class="container">
-	<form:form action="">
 		<div class="row">
 			<div class="headline">
 				<h2>
@@ -56,19 +55,27 @@
 				</div>
 			</div>
 		</div>
-
+		<c:url value="/retenedores/estadocargas"  var="edoCargasAction"/>
+		<form:form commandName="form" action="${edoCargasAction}" id="edoCargasForm" name="edoCargasForm">
 		<div class="row">
 			<div class="col-md-12 col-md-offset-3">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="reteica.consulta.estado.anio" /></label> <select id="" name=""
-						class="form-control" style="width: 200px !important">
+					<label class="control-label"><spring:theme code="reteica.consulta.estado.anio" /></label> 
+					<select id="anoGravable" name="anoGravable" class="form-control" style="width: 200px !important">
 						<option>Seleccionar</option>
+						<c:forEach items="${ years}" var="eachYear">
+							<c:set var="selected" value="" />
+							<c:if test="${ eachYear eq form.anoGravable}">
+								<c:set var="selected" value="selected" />
+							</c:if>
+							<option value="${ eachYear}" ${selected }>${eachYear }</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
-
+	
 		</div>
+		</form:form>
 		<div class="row">
 			<div class="col-md-12 tableamplia">
 				<div class="table-responsive">
@@ -90,21 +97,42 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input class="inputtextnew tablefechas"
-									disabled="disabled" value="" type="text" /></td>
-								<td><input class="inputtextnew tablenombre"
-									disabled="disabled" value="" type="text" /></td>
-								<td><input class="inputtextnew " disabled="disabled"
-									value="" type="text" /></td>
-								<td><input class="inputtextnew tabledomatri"
-									disabled="disabled" value="" type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									value="" type="text" /></td>
-								<td><input class="inputtextnew" disabled="disabled"
-									value="" type="text" /></td>
-							</tr>
-
+						<c:choose>
+							<c:when test="${empty archivosTRM }">
+								<tr>
+									<td><input class="inputtextnew tablefechas"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tablenombre"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew " disabled="disabled"
+										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledomatri"
+										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="" type="text" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="" type="text" /></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${archivosTRM }" var="eachArchivo">
+									<tr>
+										<td><input class="inputtextnew tablefechas"
+											disabled="disabled" value="${eachArchivo.fechaCarga }" type="text" /></td>
+										<td><input class="inputtextnew tablenombre"
+											disabled="disabled" value="${eachArchivo.nomArchivo }" type="text" /></td>
+										<td><input class="inputtextnew " disabled="disabled"
+											value="${eachArchivo.perRepor }" type="text" /></td>
+										<td><input class="inputtextnew tabledomatri"
+											disabled="disabled" value="${eachArchivo.estado }" type="text" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="" type="text" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachArchivo.numForm }" type="text" /></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 						</tbody>
 					</table>
 				</div>
@@ -121,7 +149,6 @@
 			</div>
 		</div>
 
-	</form:form>
 </div>
 
 <script>

@@ -15,6 +15,7 @@ public class ReteIcaResponse
 	private List<ErrorEnWS> errores;
 	private List<ArchivosTRM> archivosTRM;
 
+
 	/**
 	 * @return the errores
 	 */
@@ -48,6 +49,7 @@ public class ReteIcaResponse
 	{
 		this.archivosTRM = archivosTRM;
 	}
+
 
 
 

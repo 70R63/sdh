@@ -7,14 +7,19 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.LogReteIcaRequest;
+import de.hybris.sdh.core.pojos.requests.ReteIcaFileStatusInTRMRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaRequest;
+import de.hybris.sdh.core.pojos.responses.ArchivosTRM;
 import de.hybris.sdh.core.pojos.responses.CalculoReteIcaResponse;
 import de.hybris.sdh.core.pojos.responses.LogReteIcaResponse;
 import de.hybris.sdh.core.pojos.responses.ReteIcaResponse;
 import de.hybris.sdh.core.services.SDHReteIcaService;
 import de.hybris.sdh.facades.SDHReteIcaFacade;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -149,7 +154,14 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 		try
 		{
 			client.changeWorkingDirectory(ftpDir);
-			client.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
+			final Boolean fileSent = client.storeFile(multipartFile.getOriginalFilename(), multipartFile.getInputStream());
+
+			if (!Boolean.TRUE.equals(fileSent))
+			{
+				LOG.error("Error sending ReteICA file to FTP");
+				return false;
+			}
+
 			client.logout();
 		}
 		catch (final Exception ex)
@@ -172,5 +184,87 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 
 		return true;
 	}
+
+	@Override
+	public Boolean writeFile(final MultipartFile multipartFile)
+	{
+		final String directory = configurationService.getConfiguration().getString("sdh.reteica.nfs.directory");
+
+		final File file = new File(directory + multipartFile.getOriginalFilename());
+		try
+		{
+			multipartFile.transferTo(file);
+		}
+		catch (IllegalStateException | IOException e)
+		{
+			LOG.error("Error sending file to NFS");
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public ReteIcaResponse reteICAMock(final ReteIcaRequest request)
+	{
+		final ReteIcaResponse response = new ReteIcaResponse();
+
+		final List<ArchivosTRM> archivosTRM = new ArrayList<ArchivosTRM>();
+
+		final ArchivosTRM archivo1 = new ArchivosTRM();
+
+		archivo1.setEstado("proceso");
+		archivo1.setFechaCarga("20/05/2019");
+		archivo1.setNomArchivo("0420180100800897987.csv");
+		archivo1.setNumForm("01324657498");
+		archivo1.setPerRepor("Valor 1");
+
+		archivosTRM.add(archivo1);
+
+		final ArchivosTRM archivo2 = new ArchivosTRM();
+
+		archivo2.setEstado("Aceptado");
+		archivo2.setFechaCarga("20/05/2018");
+		archivo2.setNomArchivo("Archivo de Prueba 2.csv");
+		archivo2.setNumForm("qweuyqwe");
+		archivo2.setPerRepor("Valor 2");
+
+		archivosTRM.add(archivo2);
+
+		response.setArchivosTRM(archivosTRM);
+
+		return response;
+	}
+
+	@Override
+	public String getFileStatusInTRM(final ReteIcaFileStatusInTRMRequest request)
+	{
+
+		final ReteIcaRequest reteICARequest = new ReteIcaRequest();
+
+		reteICARequest.setAnoGravable(request.getAnoGravable());
+		reteICARequest.setNumBP(request.getNumBP());
+		reteICARequest.setNumObjeto(request.getNumObjeto());
+		reteICARequest.setPeriodo(request.getPeriodo());
+
+		final ReteIcaResponse response = this.reteICA(reteICARequest);
+
+		if (response == null || response.getArchivosTRM() == null || response.getArchivosTRM().isEmpty())
+		{
+			return "00";
+		}
+
+		for (final ArchivosTRM eachArchivo : response.getArchivosTRM())
+		{
+			if (request.getFileName().equals(eachArchivo.getNomArchivo()))
+			{
+				return eachArchivo.getEstado();
+			}
+		}
+
+		return "00";
+	}
+
+
 
 }

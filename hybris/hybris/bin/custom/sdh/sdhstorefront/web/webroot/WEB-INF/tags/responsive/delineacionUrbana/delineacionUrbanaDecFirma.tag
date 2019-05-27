@@ -21,13 +21,15 @@
 		</div>
 	</div>
 
+<c:set var="tipoDescripcionID" value='${dataForm.valCont.infoContrib.tipoDoc} ${dataForm.valCont.infoContrib.tipoDocDESCRIPCION}' />
+<c:set var="nombreCompleto" value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.tipiden" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.valCont.infoContrib.numDoc}" maxlength="240">
+						readonly="readonly" value="${tipoDescripcionID}" maxlength="240">
 				</div>
 			</div>
 
@@ -45,7 +47,7 @@
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.nombraz" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						value="${dataForm.valCont.infoContrib.adicionales.NAME_ORG1}" maxlength="240" disabled>
+						value="${nombreCompleto}" maxlength="240" disabled>
 				</div>
 			</div>
 		</div>
@@ -72,7 +74,9 @@
 				</div>
 
 				<div class="col-md-3">
+		<a id="downloadHelper" target="_blank"></a>		
 		<button id="duGeneraDeclaracionButton" type="button"
+			
 			<c:if test="${empty  dataForm.infObjetoDelineacion.numForm}"> disabled="disabled"</c:if>
 			class="btn btn-primary btn-lg">
 			<spring:theme code="delineacion.urbana.dec.firm.predec" />

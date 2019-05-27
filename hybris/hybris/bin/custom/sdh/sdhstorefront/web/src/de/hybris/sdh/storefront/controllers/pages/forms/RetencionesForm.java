@@ -10,32 +10,31 @@
  */
 package de.hybris.sdh.storefront.controllers.pages.forms;
 
-import org.springframework.web.multipart.MultipartFile;
-
-
 public class RetencionesForm
 {
-	private MultipartFile retencionesFile;
+	private String fileName;
 
 	private String anoGravable;
 
 	private String periodo;
 
+
+
 	/**
-	 * @return the retencionesFile
+	 * @return the fileName
 	 */
-	public MultipartFile getRetencionesFile()
+	public String getFileName()
 	{
-		return retencionesFile;
+		return fileName;
 	}
 
 	/**
-	 * @param retencionesFile
-	 *           the retencionesFile to set
+	 * @param fileName
+	 *           the fileName to set
 	 */
-	public void setRetencionesFile(final MultipartFile retencionesFile)
+	public void setFileName(final String fileName)
 	{
-		this.retencionesFile = retencionesFile;
+		this.fileName = fileName;
 	}
 
 	/**

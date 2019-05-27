@@ -130,7 +130,8 @@
 	
 	<bean class="de.hybris.sdh.facades.questions.data.SDHReteICATaxData">	
 		<property name="objectNumber" type="String"/>
-		<property name="idNumber" type="String"/>
+		<property name="numID" type="String"/>
+		<property name="consecutive" type="String"/>
 	</bean>
 	
 	

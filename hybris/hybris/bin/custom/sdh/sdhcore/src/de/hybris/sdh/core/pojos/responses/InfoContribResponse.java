@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+
 import java.util.List;
 
 
@@ -22,6 +23,7 @@ public class InfoContribResponse
 	private String segApe;
 	private String departExp;
 	private String municipio;
+	private String tipoDocDESCRIPCION;
 
 	private ContribAdicionales adicionales;
 	private List<ContribDireccion> direccion;
@@ -274,6 +276,23 @@ public class InfoContribResponse
 	public void setRedsocial(final List<ContribRedSocial> redsocial)
 	{
 		this.redsocial = redsocial;
+	}
+
+	/**
+	 * @return the tipoDocDESCRIPCION
+	 */
+	public String getTipoDocDESCRIPCION()
+	{
+		return tipoDocDESCRIPCION;
+	}
+
+	/**
+	 * @param tipoDocDESCRIPCION
+	 *           the tipoDocDESCRIPCION to set
+	 */
+	public void setTipoDocDESCRIPCION(final String tipoDocDESCRIPCION)
+	{
+		this.tipoDocDESCRIPCION = tipoDocDESCRIPCION;
 	}
 
 

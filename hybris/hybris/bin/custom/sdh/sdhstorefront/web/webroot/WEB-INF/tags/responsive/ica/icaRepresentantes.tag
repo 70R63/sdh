@@ -19,9 +19,9 @@
 			</div>
 		</div>
 	</div>
-
-
-<br>
+	
+		
+	<br>
 	<form:form action="">
 		<div class="row text-center">
 			<div class="col-md-12">
@@ -91,7 +91,7 @@
 				<button style="margin-top: 3px;" id=""
 					onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?&numObjeto=${numObjeto}' />';"
 					class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="ica.inicial.representantes.presendecla" /><span class="badge badge-light" style="background: transparent; color: #000000; font-size: 16px;">vigencia actual</span>
+					<spring:theme code="ica.inicial.representantes.presendecla" />
 				</button>
 			</div>
 		</div>
