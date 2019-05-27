@@ -54,21 +54,20 @@ public class DefaultSDHConciliacionesFacade implements SDHConciliacionesFacade
 		final String ftpPassword = configurationService.getConfiguration().getString("sdh.conciliaciones.ftp.password");
 
 		final FTPClient client = new FTPClient();
-
 		client.setBufferSize(1024000);
+
+
 		try
 		{
-			client.connect(ftpServer, ftpPort);
-			client.login(ftpUsername, ftpPassword);
+			client.connect(ftpServer);
+			//client.connect(ftpServer, ftpPort);
+			//client.login(ftpUsername, ftpPassword);
 		}
 		catch (final IOException e1)
 		{
 			LOG.error("Error connecting to FTP Server");
 			return;
 		}
-
-
-
 
 		ISevenZipInArchive inArchive = null;
 		ISimpleInArchive simpleInArchive = null;
