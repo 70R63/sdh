@@ -8,9 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/retenedores"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-<sf:form>
 	<retenedores:retenedoresEdoCargas/>
-</sf:form>
 
 
 

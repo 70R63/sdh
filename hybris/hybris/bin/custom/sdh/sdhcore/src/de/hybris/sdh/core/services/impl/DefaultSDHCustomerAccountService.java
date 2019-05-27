@@ -863,40 +863,6 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			}
 
 
-			//clean old ReteICA exterior taxes
-
-
-			//			final SDHReteICATaxModel oldReteIcaTaxModel = customerModel.getReteIcaTaxList();
-			//
-			//			if (oldReteIcaTaxModel != null)
-			//			{
-			//				modelService.removeAll(oldReteIcaTaxModel);
-			//			}
-			//
-			//			final ImpuestoReteICA reteIca = sdhConsultaContribuyenteBPResponse.getReteICA();
-			//
-			//			if (reteIca != null)
-			//			{
-			//				final SDHReteICATaxModel newReteIcaTaxModel = new SDHReteICATaxModel();
-			//
-			//				if (!StringUtils.isBlank(reteIca.getNumObjeto()))
-			//				{
-			//					newReteIcaTaxModel.setObjectNumber(reteIca.getNumObjeto());
-			//					newReteIcaTaxModel.setIdNumber(reteIca.getNumID());
-			//				}
-			//
-			//				modelService.saveAll(newReteIcaTaxModel);
-			//
-			//				customerModel.setReteIcaTaxList(newReteIcaTaxModel);
-			//
-			//			}
-			//			else
-			//			{
-			//				customerModel.setReteIcaTaxList(null);
-			//			}
-
-
-
 			// clean previous reteICA
 			if (customerModel.getReteIcaTax() != null)
 			{
@@ -906,7 +872,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 			if (sdhConsultaContribuyenteBPResponse.getReteIca() != null)
 			{
-				final SDHReteICATaxModel newReteICAModel = customerModel.getReteIcaTax();
+				final SDHReteICATaxModel newReteICAModel = new SDHReteICATaxModel();
 				newReteICAModel.setObjectNumber(sdhConsultaContribuyenteBPResponse.getReteIca().getNumObjeto());
 				newReteICAModel.setConsecutive(sdhConsultaContribuyenteBPResponse.getReteIca().getConsecutive());
 				newReteICAModel.setNumID(sdhConsultaContribuyenteBPResponse.getReteIca().getNumID());

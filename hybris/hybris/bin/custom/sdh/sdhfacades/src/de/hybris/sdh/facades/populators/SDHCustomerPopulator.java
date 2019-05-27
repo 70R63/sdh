@@ -10,11 +10,13 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
 import de.hybris.sdh.core.model.SDHGasTaxModel;
 import de.hybris.sdh.core.model.SDHICATaxModel;
+import de.hybris.sdh.core.model.SDHReteICATaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.facades.questions.data.SDHICATaxData;
+import de.hybris.sdh.facades.questions.data.SDHReteICATaxData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData;
 
@@ -195,18 +197,19 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 		target.setIcaTax(icaTaxData);
 
 
-		//		final SDHReteICATaxModel reteIcaTaxModel = source.getReteIcaTaxList();
-		//		final SDHReteICATaxData reteIcaTaxData = new SDHReteICATaxData();
-		//
-		//		if (null != reteIcaTaxModel)
-		//		{
-		//
-		//			reteIcaTaxData.setObjectNumber(reteIcaTaxModel.getObjectNumber());
-		//			reteIcaTaxData.setIdNumber(reteIcaTaxModel.getIdNumber());
-		//
-		//		}
-		//
-		//		target.setReteIcaTax(reteIcaTaxData);
+		final SDHReteICATaxModel reteIcaTaxModel = source.getReteIcaTax();
+		final SDHReteICATaxData reteIcaTaxData = new SDHReteICATaxData();
+
+		if (null != reteIcaTaxModel)
+		{
+
+			reteIcaTaxData.setObjectNumber(reteIcaTaxModel.getObjectNumber());
+			reteIcaTaxData.setNumID(reteIcaTaxModel.getNumID());
+			reteIcaTaxData.setConsecutive(reteIcaTaxModel.getConsecutive());
+
+		}
+
+		target.setReteIcaTax(reteIcaTaxData);
 
 
 

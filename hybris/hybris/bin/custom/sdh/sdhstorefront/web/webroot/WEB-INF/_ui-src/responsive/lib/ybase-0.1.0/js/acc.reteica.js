@@ -1,8 +1,22 @@
 ACC.reteica = {
 
-	 _autoload: [ "bindCargarButton","bindDialogReteICA"],
+	 _autoload: [ "bindCargarButton","bindDialogReteICA","bindAnoGravable"],
 	 
-	 
+	 bindAnoGravable: function(){
+	    	
+	    	$( document ).on("change","#anoGravable",function(e) {
+	    		
+	    		var anoGravable =  $.trim( $("#anoGravable").val());
+	    		
+	    		if(anoGravable != "")
+    			{
+	    			$("#edoCargasForm").submit();
+    			}
+	    		
+	    	});
+	    	
+	    	
+	    	},
 	 
 	 bindCargarButton: function(){
 		 
@@ -56,35 +70,40 @@ ACC.reteica = {
 	     	 		
 	     	 		return;
 			 }
-			 formData.append("retencionesFile",$("#retencionesFile").prop('files')[0]); 
-			 formData.append("retencionesForm",new Blob([JSON.stringify({
-	                "anoGravable": anoGravable,
-	                "periodo": periodo                    
-	            })], {
-	                type: "application/json"
-	            }));
+			 
+			 var data = {};
+			 
+			 data.fileName = fileName;
+			 data.anoGravable = anoGravable;
+			 data.periodo = periodo;
+			 
+			 
 			 $.ajax({
-	 	    	  url: ACC.reteICARegistroRetencionesURL,
-		            data: formData,
+	 	    	  url: ACC.reteICAValidaArchivoURL,
+		            data: data,
 		            type: "POST",
-		            contentType: false,
-		            processData: false ,
 		            success: function (data) {
 		            	
-		            	if(!data.errores)
-		            	{
-			            	$( "#dialogReteICA" ).dialog( "open" );
-			     	 		$("#reteICADialogContent").html("");
-			     	 		$("#reteICADialogContent").html("Cargar Archivo Exitosa!");
-		            	}else
-		            	{
-		            		$( "#dialogReteICA" ).dialog( "open" );
-		            		$("#reteICADialogContent").html("");
+		            	if(data.allowFileUpload == true && data.requestCofirmation == false)
+	            		{
+		            		ACC.reteica.uploadFile();
+	            		}else if(data.allowFileUpload == true && data.requestCofirmation == true)
+            			{
+	            			$( "#dialogConfirmReteICA" ).dialog( "open" );
+		            		$("#reteICADialogConfirmContent").html("");
 	    	            	$.each(data.errores,function (index, value)
 	    	            	{
-	    	            		$("#reteICADialogContent").html($("#reteICADialogContent").html()+"<br>"+value.txtmsj);
+	    	            		$("#reteICADialogConfirmContent").html($("#reteICADialogConfirmContent").html()+"<br>"+value.txtmsj);
 	    	            	});
-		            	}
+            			}if(data.allowFileUpload == false)
+            			{
+            				$( "#dialogReteICA" ).dialog( "open" );
+    	            		$("#reteICADialogContent").html("");
+        	            	$.each(data.errores,function (index, value)
+        	            	{
+        	            		$("#reteICADialogContent").html($("#reteICADialogContent").html()+"<br>"+value.txtmsj);
+        	            	});
+            			}
 		            	
 		            },
 		            error: function () {
@@ -93,14 +112,66 @@ ACC.reteica = {
 		     	 		$("#reteICADialogContent").html("Cargar Archivo Fallida!");
 		            }
 		        });
+			 
+			 
 	 	       
 		 });
 			 
 			 
 			
 		 
-	 } ,
+	 },
 	 
+	 
+	 uploadFile: function(){
+		 
+		 var formData = new FormData();
+		 
+		 var anoGravable = $.trim( $("#anoGravable").val());
+		 var periodo = $.trim( $("#periodo").val());
+		 
+		 formData.append("retencionesFile",$("#retencionesFile").prop('files')[0]); 
+		 formData.append("retencionesForm",new Blob([JSON.stringify({
+                "anoGravable": anoGravable,
+                "periodo": periodo                    
+            })], {
+                type: "application/json"
+            }));
+		 $.ajax({
+ 	    	  url: ACC.reteICARegistroRetencionesURL,
+	            data: formData,
+	            type: "POST",
+	            contentType: false,
+	            processData: false ,
+	            success: function (data) {
+	            	
+	            	if(!data.errores)
+	            	{
+		            	$( "#dialogReteICA" ).dialog( "open" );
+		     	 		$("#reteICADialogContent").html("");
+		     	 		$("#reteICADialogContent").html("Carga Archivo Exitosa!");
+	            	}else
+	            	{
+	            		$( "#dialogReteICA" ).dialog( "open" );
+	            		$("#reteICADialogContent").html("");
+    	            	$.each(data.errores,function (index, value)
+    	            	{
+    	            		$("#reteICADialogContent").html($("#reteICADialogContent").html()+"<br>"+value.txtmsj);
+    	            	});
+	            	}
+	            	
+	            },
+	            error: function () {
+	            	 $( "#dialogReteICA" ).dialog( "open" );
+	     	 		$("#reteICADialogContent").html("");
+	     	 		$("#reteICADialogContent").html("Cargar Archivo Fallida!");
+	            }
+	        });
+		 
+		 
+	 }
+	 
+	 ,
 	
 	 
 	    
@@ -118,6 +189,21 @@ ACC.reteica = {
     				$( this ).dialog( "close" );
     			}
     	    } 
+    	});
+    	
+    	$( "#dialogConfirmReteICA" ).dialog({ 
+    		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
+			 buttons: {
+			        "Si": function() {
+			          $( this ).dialog( "close" );
+			          ACC.reteica.uploadFile();
+			        },
+			        Cancel: function() {
+			          $( this ).dialog( "close" );
+			        }
+			      }
     	});
     	
     }

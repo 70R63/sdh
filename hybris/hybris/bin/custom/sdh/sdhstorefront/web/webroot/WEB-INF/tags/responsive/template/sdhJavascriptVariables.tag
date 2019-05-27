@@ -88,6 +88,7 @@
 		  	
 		  	ACC.reteICARegistroRetencionesURL = "<c:url value='/retenedores/registroretenciones' />";
 		  	
+			ACC.reteICAValidaArchivoURL = "<c:url value='/retenedores/registroretenciones/validaArchivo' />";
 		  	
 		  	ACC.currentURL = "${currentURL}";
 			

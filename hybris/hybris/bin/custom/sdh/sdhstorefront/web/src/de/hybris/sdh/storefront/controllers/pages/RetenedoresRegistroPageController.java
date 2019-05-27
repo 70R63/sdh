@@ -6,18 +6,18 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.sdh.core.pojos.requests.ReteIcaFileStatusInTRMRequest;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ReteIcaResponse;
+import de.hybris.sdh.core.pojos.responses.ReteIcaValidaArchivoResponse;
 import de.hybris.sdh.facades.SDHReteIcaFacade;
 import de.hybris.sdh.storefront.controllers.pages.forms.RetencionesForm;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,7 +27,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -42,7 +41,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 //@RequestMapping("")
-public class RetenedoresRegistroPageController extends AbstractPageController
+public class RetenedoresRegistroPageController extends RetenedoresAbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
@@ -81,39 +80,6 @@ public class RetenedoresRegistroPageController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
-	}
-
-	@ModelAttribute("perdiods")
-	public List<String> getPeriods()
-	{
-		return Arrays.asList("01", "02", "03", "04", "05", "06");
-	}
-
-	@ModelAttribute("customerNIT")
-	public String getNIT()
-	{
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		final String customerNit = StringUtils.leftPad(customerData.getDocumentNumber(), 11, "0");
-		return customerNit;
-	}
-
-	@ModelAttribute("customerName")
-	public String getCustomerName()
-	{
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		return customerData.getCompleteName();
-	}
-
-	@ModelAttribute("years")
-	public List<String> getYears()
-	{
-		return Arrays.asList("2019", "2018", "2017", "2016");
-	}
-
-	@ModelAttribute("reteIcaMaxFileSize")
-	public String getReteIcaMaxFileSize()
-	{
-		return configurationService.getConfiguration().getString("sdh.reteica.file.max.upload.size.bytes", "10485760");
 	}
 
 	@RequestMapping(value = "/retenedores/registroretenciones", method = RequestMethod.POST)
@@ -191,6 +157,36 @@ public class RetenedoresRegistroPageController extends AbstractPageController
 			return response;
 		}
 
+		final ReteIcaFileStatusInTRMRequest request = new ReteIcaFileStatusInTRMRequest();
+		request.setAnoGravable(retencionesForm.getAnoGravable());
+		request.setPeriodo(retencionesForm.getPeriodo());
+		request.setNumBP(customerData.getNumBP());
+		request.setFileName(retencionesFile.getOriginalFilename());
+		if (customerData.getReteIcaTax() != null)
+		{
+			request.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
+		}
+
+
+		final String fileStatusInTRM = sdhReteIcaFacade.getFileStatusInTRM(request);
+
+		if ("01".equalsIgnoreCase(fileStatusInTRM))
+		{
+			final ErrorEnWS error = new ErrorEnWS();
+			error.setIdmsj("X");
+			error.setTxtmsj("Ya existe un archivo en proceso");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			errores.add(error);
+
+			response.setErrores(errores);
+
+			LOG.info("el archivo " + retencionesFile.getOriginalFilename() + " en proceso");
+
+			return response;
+		}
+
+
 		final Boolean fileSent = sdhReteIcaFacade.writeFile(retencionesFile);
 
 		if (!Boolean.TRUE.equals(fileSent))
@@ -206,6 +202,132 @@ public class RetenedoresRegistroPageController extends AbstractPageController
 
 			return response;
 		}
+
+		return response;
+	}
+
+	@RequestMapping(value = "/retenedores/registroretenciones/validaArchivo", method = RequestMethod.POST)
+	@ResponseBody
+	@RequireHardLogIn
+	public ReteIcaValidaArchivoResponse validaArchivo(final RetencionesForm retencionesForm, final Model model,
+			final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
+	{
+
+		final ReteIcaValidaArchivoResponse response = new ReteIcaValidaArchivoResponse();
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final String customerNit = StringUtils.leftPad(customerData.getDocumentNumber(), 11, "0");
+
+		if (StringUtils.isBlank(retencionesForm.getAnoGravable()))
+		{
+			final ErrorEnWS error = new ErrorEnWS();
+			error.setIdmsj("X");
+			error.setTxtmsj("Por favor selecciona el año Gravable");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			errores.add(error);
+
+			response.setErrores(errores);
+			response.setAllowFileUpload(false);
+
+			return response;
+
+		}
+
+
+		if (StringUtils.isBlank(retencionesForm.getPeriodo()))
+		{
+			final ErrorEnWS error = new ErrorEnWS();
+			error.setIdmsj("X");
+			error.setTxtmsj("Por favor seleccion el periodo");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			errores.add(error);
+
+			response.setErrores(errores);
+			response.setAllowFileUpload(false);
+			return response;
+
+		}
+
+
+		final ReteIcaFileStatusInTRMRequest request = new ReteIcaFileStatusInTRMRequest();
+		request.setAnoGravable(retencionesForm.getAnoGravable());
+		request.setPeriodo(retencionesForm.getPeriodo());
+		request.setNumBP(customerData.getNumBP());
+		request.setFileName(retencionesForm.getFileName());
+		if (customerData.getReteIcaTax() != null)
+		{
+			request.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
+		}
+
+
+		final String fileStatusInTRM = sdhReteIcaFacade.getFileStatusInTRM(request);
+
+		if ("00".equalsIgnoreCase(fileStatusInTRM))
+		{
+			response.setAllowFileUpload(true);
+			response.setRequestCofirmation(false);
+			LOG.info("el archivo " + retencionesForm.getFileName() + " primera carga");
+
+			return response;
+		}
+		else if ("01".equalsIgnoreCase(fileStatusInTRM))
+		{
+			final ErrorEnWS error = new ErrorEnWS();
+			error.setIdmsj("X");
+			error.setTxtmsj("Ya existe un archivo en proceso");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			errores.add(error);
+
+			response.setErrores(errores);
+			response.setAllowFileUpload(false);
+			response.setRequestCofirmation(false);
+			LOG.info("el archivo " + retencionesForm.getFileName() + " fue rechazado");
+
+			return response;
+		}
+		else if ("02".equalsIgnoreCase(fileStatusInTRM))
+		{
+			response.setAllowFileUpload(true);
+			response.setRequestCofirmation(false);
+			LOG.info("el archivo " + retencionesForm.getFileName() + " permitido");
+
+			return response;
+		}
+		else if ("03".equalsIgnoreCase(fileStatusInTRM))
+		{
+			final ErrorEnWS error = new ErrorEnWS();
+			error.setIdmsj("X");
+			error.setTxtmsj("Ya existe un archivo procesado/exitoso, ¿desea reemplazarlo?.");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			errores.add(error);
+
+			response.setErrores(errores);
+			response.setRequestCofirmation(true);
+			response.setAllowFileUpload(true);
+			LOG.info("el archivo " + retencionesForm.getFileName() + " terminado");
+			return response;
+		}
+		else if ("04".equalsIgnoreCase(fileStatusInTRM))
+		{
+			final ErrorEnWS error = new ErrorEnWS();
+			error.setIdmsj("X");
+			error.setTxtmsj("Ya existe un archivo procesado/exitoso, ¿desea corregirlo?.");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			errores.add(error);
+
+			response.setErrores(errores);
+			response.setRequestCofirmation(true);
+			response.setAllowFileUpload(true);
+			LOG.info("el archivo " + retencionesForm.getFileName() + " terminado");
+			return response;
+		}
+
 
 		return response;
 	}
