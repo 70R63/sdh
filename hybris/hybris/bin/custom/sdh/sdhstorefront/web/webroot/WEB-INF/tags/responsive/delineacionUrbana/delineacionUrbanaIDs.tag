@@ -31,6 +31,7 @@
 	</div>
 </div>
 
+<c:set var="nombreCompleto" value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
 <div class="row mt-3">
 	<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
 		<form:form action="">
@@ -56,7 +57,7 @@
 								value="${dataForm.valCont.infoContrib.numDoc}" /></td>
 							<td><input class="inputtextnew tablenombre"
 								disabled="disabled" type="text" size="30"
-								value="${dataForm.valCont.infoContrib.adicionales.NAME_ORG1}" /></td>
+								value="${nombreCompleto}" /></td>
 						</tr>
 					</tbody>
 				</table>

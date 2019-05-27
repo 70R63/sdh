@@ -71,6 +71,11 @@ public class SobreTasaGasolinaService
 		this.configurationService = configurationService;
 	}
 
+	public SobreTasaGasolinaService()
+	{
+		configurationService = null;
+
+	}
 
 	public SobreTasaGasolinaCatalogos prepararCatalogos()
 	{
@@ -1610,21 +1615,33 @@ public class SobreTasaGasolinaService
 	/**
 	 * @param infoDelineacionResponse
 	 */
-	public void prepararValorcausalExcepDESCRIPCIONDU(final InfoObjetoDelineacionResponse infoDelineacionResponse)
+	public void prepararValorcausalExcepDESCRIPCIONDU(final InfoObjetoDelineacionResponse fuente)
 	{
 
-		String causalExcepDESCRIPCION = "";
+		String campoDESCRIPCION = "";
+		final String separador = " ";
 
-		if (infoDelineacionResponse.getInfoDeclara().getCausalExcep() != null)
+		if (fuente.getInfoDeclara().getCausalExcep() != null)
 		{
-			causalExcepDESCRIPCION = infoDelineacionResponse.getInfoDeclara().getCausalExcep() + " - "
-					+ obtenerListaCausalExencion().get(infoDelineacionResponse.getInfoDeclara().getCausalExcep());
+			campoDESCRIPCION = fuente.getInfoDeclara().getCausalExcep() + separador
+					+ obtenerListaCausalExencion().get(fuente.getInfoDeclara().getCausalExcep());
 		}
 
-		if (!causalExcepDESCRIPCION.isEmpty())
+		fuente.getInfoDeclara().setCausalExcepDESCRIPCION(campoDESCRIPCION);
+
+	}
+
+	public void prepararValortipoDocDESCRIPCIONDU(final SDHValidaMailRolResponse fuente)
+	{
+
+		String campoDESCRIPCION = "";
+
+		if (fuente.getInfoContrib().getTipoDoc() != null)
 		{
-			infoDelineacionResponse.getInfoDeclara().setCausalExcepDESCRIPCION(causalExcepDESCRIPCION);
+			campoDESCRIPCION = obtenerListaTipoId().get(fuente.getInfoContrib().getTipoDoc());
 		}
+
+		fuente.getInfoContrib().setTipoDocDESCRIPCION(campoDESCRIPCION);
 
 	}
 

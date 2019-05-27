@@ -21,24 +21,24 @@
 		</div>
 	</div>
 
+<c:set var="tipoDescripcionID" value='${dataForm.valCont.infoContrib.tipoDoc} ${dataForm.valCont.infoContrib.tipoDocDESCRIPCION}' />
+<c:set var="nombreCompleto" value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.tipiden" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.valCont.infoContrib.tipoDoc}" maxlength="240">
+						readonly="readonly" value="${tipoDescripcionID}" maxlength="240">
 				</div>
 			</div>
 
-<c:set var="tipoDescripcionID" value='${dataForm.valCont.infoContrib.tipoDoc} ${dataForm.valCont.infoContrib.numDoc}' />
-<c:set var="nombreCompleto" value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
 			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.numide" /></label> <input id=""
 						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${tipoDescripcionID}" maxlength="240">
+						readonly="readonly" value="${dataForm.valCont.infoContrib.numDoc}" maxlength="240">
 				</div>
 			</div>
 
