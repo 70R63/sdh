@@ -12,11 +12,15 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.media.MediaModel;
+import de.hybris.platform.servicelayer.media.MediaService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,6 +31,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
  */
 public abstract class RetenedoresAbstractPageController extends AbstractPageController
 {
+
+	static final String RETEICA_TEMPLATE_ID = "reteICATemplate";
+
+	@Resource(name = "mediaService")
+	MediaService mediaService;
+
+	@ModelAttribute("reteICATemplateURL")
+	public String getReteICATemplateURL()
+	{
+		final MediaModel mediaModel = mediaService.getMedia(RETEICA_TEMPLATE_ID);
+
+		return mediaModel.getDownloadURL();
+	}
+
 	@ModelAttribute("perdiods")
 	public List<String> getPeriods()
 	{

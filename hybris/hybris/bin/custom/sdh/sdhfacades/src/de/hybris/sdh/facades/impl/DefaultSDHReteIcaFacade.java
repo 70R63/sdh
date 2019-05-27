@@ -247,7 +247,7 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 		reteICARequest.setNumObjeto(request.getNumObjeto());
 		reteICARequest.setPeriodo(request.getPeriodo());
 
-		final ReteIcaResponse response = this.reteICAMock(reteICARequest);
+		final ReteIcaResponse response = this.reteICA(reteICARequest);
 
 		if (response == null || response.getArchivosTRM() == null || response.getArchivosTRM().isEmpty())
 		{

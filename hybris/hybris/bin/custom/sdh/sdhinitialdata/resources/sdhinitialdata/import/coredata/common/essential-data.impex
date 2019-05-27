@@ -14,6 +14,10 @@
 # * Tax & Tax Groups
 # * Jobs
 
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+$jarResourceCommon=jar:de.hybris.sdh.initialdata.setup.InitialDataSystemSetup&/sdhinitialdata/import/coredata/common
+
+
 # Languages
 INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
 ;en;;;
@@ -123,6 +127,9 @@ INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target
 ;headerlinks;PSCMSLinkComponent
 ;footer;PSCMSLinkComponent
 ;navigation;PSCMSLinkComponent
+
+INSERT_UPDATE CatalogUnawareMedia;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];mime[default='text/plain']
+;reteICATemplate;AyudaReteICA-Hybris.xlsm;$jarResourceCommon/AyudaReteICA-Hybris.xlsm;pplication/vnd.ms-excel.sheet.macroEnabled.12
 
 INSERT_UPDATE SiteTheme;code[unique=true]
 ;psalpha

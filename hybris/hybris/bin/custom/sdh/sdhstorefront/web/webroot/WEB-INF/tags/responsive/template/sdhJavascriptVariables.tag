@@ -92,7 +92,9 @@
 		  	
 		  	ACC.currentURL = "${currentURL}";
 			
-			
+		  	<c:if test="${not empty reteICATemplateURL}">
+		  		ACC.reteICADownloadTemplate ="${reteICATemplateURL}";
+			</c:if>
 			
 			ACC.hideSubmenuDelineacionUrbana = false;
 			ACC.hideSubmenuICA = false;

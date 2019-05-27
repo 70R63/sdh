@@ -33,7 +33,7 @@
     <extension name='permissionswebservices' />
     <extension name='xyformscockpits' />
     <extension name='xyformsbackoffice' />
-<!--    <extension name='orbeonweb' /> -->
+   <extension name='orbeonweb' />
     <extension name='xyformscommerceservices' />
     <extension name='xyformscommercefacades' />
     <extension name='xyformscommercecockpits' />

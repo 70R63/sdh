@@ -107,10 +107,11 @@
 
 			<div class="col-md-4 text-center">
 				<div class="form-group">
-					<button class="btn btn-primary text-center" id="" name=""
+					<button class="btn btn-primary text-center" id="downloadTemplateButton" name="downloadTemplateButton"
 						value="descargar">
 						<spring:theme code="reteica.inicial.carga.descargar" />
 					</button>
+					<a id="reteICADownloadHelper" target="_blank"></a>
 				</div>
 			</div>
 

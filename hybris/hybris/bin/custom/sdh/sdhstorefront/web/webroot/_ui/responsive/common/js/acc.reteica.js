@@ -1,6 +1,20 @@
 ACC.reteica = {
 
-	 _autoload: [ "bindCargarButton","bindDialogReteICA","bindAnoGravable"],
+	 _autoload: ["bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindAnoGravable"],
+	 
+	 bindDownloadTemplateButton: function(){
+		
+		 $(document).on("click", "#downloadTemplateButton", function (e) {
+			 e.preventDefault();
+			 
+			 $("#reteICADownloadHelper").attr("href",ACC.reteICADownloadTemplate);
+			 document.getElementById("reteICADownloadHelper").download = "Ayuda Rete ICA -Hybris.xlsm";
+			 document.getElementById("reteICADownloadHelper").click();
+ 			
+	 	       
+		 });
+		 
+	 },
 	 
 	 bindAnoGravable: function(){
 	    	
