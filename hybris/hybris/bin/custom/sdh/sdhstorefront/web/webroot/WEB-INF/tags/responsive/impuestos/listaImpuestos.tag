@@ -190,6 +190,7 @@
 							<form:hidden path="selectedCDU" value="${item.cdu}" />
 							<form:hidden path="selectedRadicado" value="" />
 							<form:hidden path="selectedTipoLicencia" value="" />
+							<form:hidden path="selectedAnoPresDeclaracion" value="" />
 
 							<button type="submit" class="btn-link" id="btn_${item.cdu}"
 								name="action" value="declaracion">

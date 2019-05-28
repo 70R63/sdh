@@ -31,6 +31,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.ControllerPseConstants;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
+import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 
 import java.util.ArrayList;
@@ -1484,15 +1485,22 @@ public class SobreTasaGasolinaService
 	 * @param string
 	 * @return
 	 */
-	public String getAnoGravableDU(final List<ImpuestoDelineacionUrbana> list, final String cdu)
+	public String getAnoGravableDU(final List<ImpuestoDelineacionUrbana> list, final InfoDelineacionInput infoDelineacionInput)
 	{
 		String anoGravable = "";
 
-		for (int i = 0; i < list.size(); i++)
+		if (infoDelineacionInput.getSelectedAnoPresDeclaracion() != null)
 		{
-			if (list.get(i).getCdu().equals(cdu))
+			anoGravable = infoDelineacionInput.getSelectedAnoPresDeclaracion();
+		}
+		else
+		{
+			for (int i = 0; i < list.size(); i++)
 			{
-				anoGravable = list.get(i).getFechaExp().substring(6);
+				if (list.get(i).getCdu().equals(infoDelineacionInput.getSelectedCDU()))
+				{
+					anoGravable = list.get(i).getFechaExp().substring(6);
+				}
 			}
 		}
 

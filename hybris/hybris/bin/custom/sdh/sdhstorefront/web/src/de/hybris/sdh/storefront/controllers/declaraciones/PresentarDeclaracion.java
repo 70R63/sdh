@@ -286,6 +286,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 				SDHValidaMailRolResponse detalleContribuyente;
 				final InfoDelineacion infoDelineacion = new InfoDelineacion();
+				final InfoDelineacionInput infoDelineacionInput = new InfoDelineacionInput();
 				String mensajeError = "";
 
 				model.addAttribute("delineacionWithRadicadosList", sdhValidaContribuyenteService
@@ -306,7 +307,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				}
 
 				//model.addAttribute("dataFormDelineacion", infoDelineacion);
-				model.addAttribute("inputDelineacion", new InfoDelineacionInput());
+				infoDelineacionInput.setSelectedAnoPresDeclaracion(dataFormResponse.getAnoGravable());
+				model.addAttribute("inputDelineacion", infoDelineacionInput);
 
 
 
