@@ -64,7 +64,6 @@ public class ConciliacionesPageController extends AbstractPageController
 	public String showView(final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CONCILIACIONES_CMS_PAGE));
@@ -84,6 +83,7 @@ public class ConciliacionesPageController extends AbstractPageController
 		GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
 				"conciliaciones.upload.messages.success", new Object[]
 				{ importConciliacionForm.getConciliacionFile().getOriginalFilename() });
+
 
 		sdhConciliacionesFacade.processConciliacionesFile(importConciliacionForm.getConciliacionFile());
 
