@@ -136,16 +136,16 @@
 											disabled="disabled" value="${eachArchivo.estado }"
 											type="text" /></td>
 										<td><input class="inputtextnew" disabled="disabled"
-											value="" type="text" /></td>
+											value="<a href="#">Ver log</a>" type="text" /></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachArchivo.numForm }" type="text" /></td>
 										<c:choose>
 											<c:when
-												test='${(not empty tipoMarca) && (dataForm.infObjetoDelineacion.infoDeclara.tipoLicencia == "02")}'>
-												<td>Presentar Declaración</td>
+												test='${(eachArchivo.estado == "02")}'>
+												<td><a href="#">Presentar Declaración</a></td>
 											</c:when>
 											<c:otherwise>
-												<td>Presentar Declaración</td>
+												<td></td>
 											</c:otherwise>
 										</c:choose>
 									</tr>
