@@ -58,12 +58,19 @@
 		var mod = document.getElementById('an').value;
 		var cauex = document.getElementById('cauexen').value;
 		var auex = document.getElementById('valorExen');
+		var tiplin = document.getElementById('tipoDeLicencia');
 		
-		if(mod!='09' && cauex!='00'){
+		if(mod!='09' && cauex!='00' || cauex=='' ){
 			auex.readOnly=false;
 		}else{
 			auex.readOnly=true;
 		}
+		
+		if(cauex=='' || cauex=="00")
+			{
+			tiplin.readOnly="true"
+			}
+		
 		
 		if (value == '6'){
 			

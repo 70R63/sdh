@@ -80,6 +80,16 @@
 		} else {
 			totalRetencion.disabled = true;
 		}
+		
+		
+		var incor = selectObject.value;
+		var tot= document.getElementById('totalRetencion');
+		
+		if(incor=='02'){
+			tot.readOnly=false;
+		}else{
+			tot.readOnly=true;
+		}
 
 	}
 
@@ -123,6 +133,20 @@
 	function presdecla(){
 		 var habidec = document.getElementById('duGeneraDeclaracionButton');
 		 habidec.disabled = false;
+	}
+	
+	window.onload = function data() {
+		debugger;
+		
+		var incor = document.getElementById('presupuestoObra').value;
+		
+		var tot= document.getElementById('totalRetencion');
+		
+		if(incor=='02'){
+			tot.readOnly=false;
+		}else{
+			tot.readOnly=true;
+		}
 	}
 	
 </script>
