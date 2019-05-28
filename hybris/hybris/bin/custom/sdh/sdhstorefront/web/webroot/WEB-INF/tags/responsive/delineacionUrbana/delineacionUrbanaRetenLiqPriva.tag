@@ -25,7 +25,7 @@
 		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id=""
+						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id="totalpresu"
 					name="" class="form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
 			</div>
 		</div>
