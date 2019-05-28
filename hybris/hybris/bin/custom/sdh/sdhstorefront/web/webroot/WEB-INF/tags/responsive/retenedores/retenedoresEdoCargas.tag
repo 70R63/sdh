@@ -135,13 +135,12 @@
 										<td><input class="inputtextnew tabledomatri"
 											disabled="disabled" value="${eachArchivo.estado }"
 											type="text" /></td>
-										<td><input class="inputtextnew" disabled="disabled"
-											value="<a href="#">Ver log</a>" type="text" /></td>
+										<td><a href="#">Ver log</a></td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachArchivo.numForm }" type="text" /></td>
 										<c:choose>
 											<c:when
-												test='${(eachArchivo.estado == "02")}'>
+												test='${(eachArchivo.estado == "01")}'>
 												<td><a href="#">Presentar Declaración</a></td>
 											</c:when>
 											<c:otherwise>
