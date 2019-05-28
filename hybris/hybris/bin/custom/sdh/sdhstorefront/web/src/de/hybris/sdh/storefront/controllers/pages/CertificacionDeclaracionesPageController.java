@@ -11,16 +11,26 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimeCertDeclaraRequest;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHImprimeCertDeclaraService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
+import de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.CertificacionPagoForm;
 
@@ -44,6 +54,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
+
 
 public class CertificacionDeclaracionesPageController extends AbstractPageController
 {
@@ -81,6 +92,16 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 	@Resource(name = "sdhICAInfObjetoService")
 	SDHICAInfObjetoService sdhICAInfObjetoService;
+
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
 
 	@ModelAttribute("anoGravableGasolina")
 	public List<SelectAtomValue> getIdAnoGravableGasolina()
@@ -133,8 +154,10 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 
 	@RequestMapping(value = "/contribuyentes/consultas/certideclaraciones", method = RequestMethod.POST)
-	public String certipdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("certiFormPost")
-	final CertificacionPagoForm certiFormPost) throws CMSItemNotFoundException
+	public String certipdf(@ModelAttribute("dataForm")
+	final SobreTasaGasolinaForm dataFormResponse,
+			final Model model, final RedirectAttributes redirectModel, @ModelAttribute("certiFormPost")
+			final CertificacionPagoForm certiFormPost) throws CMSItemNotFoundException
 	{
 		LOG.debug("---------------- POST certificacion de pagos--------------------------");
 
@@ -246,18 +269,78 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		}
 		else if (certiFormPost.getIdimp().equals("6")) //Delineacion Urbana
 		{
-			if (certiFormPost.getRowFrompublicidadTable() != null)
+
+			final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+			final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+			final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+			SDHValidaMailRolResponse detalleContribuyente;
+			final InfoDelineacion infoDelineacion = new InfoDelineacion();
+			String mensajeError = "";
+
+			if (certiFormPost.getAniograv() != null)
 			{
-				if (certiFormPost.getRowFrompublicidadTable().equals("X"))
+				final List<ImpuestoDelineacionUrbanaWithRadicados> delineacionWithRadicadosList = sdhValidaContribuyenteService
+						.getDelineacionListByBpAndYearWithRadicados(customerModel.getNumBP(),
+								certiFormPost.getAniograv());
+
+				redirectModel.addFlashAttribute("delineacionWithRadicadosList", delineacionWithRadicadosList);
+			}
+
+
+
+			contribuyenteRequest.setNumBP(customerModel.getNumBP());
+			detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
+					LOG);
+			if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+			{
+				infoDelineacion.setValCont(detalleContribuyente);
+			}
+			else
+			{
+				mensajeError = detalleContribuyente.getTxtmsj();
+				LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+				GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+			}
+
+			redirectModel.addFlashAttribute("inputDelineacion", new InfoDelineacionInput());
+
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			if (certiFormPost.getInputDelineacion() != null)
+			{
+
+				if (certiFormPost.getInputDelineacion().getSelectedTipoLicencia().equals("retencion")
+						|| certiFormPost.getInputDelineacion().getSelectedTipoLicencia().equals("declaracion"))
 				{
+
 					final ImprimeCertDeclaraRequest imprimeCertDeclaraDelineacionRequest = new ImprimeCertDeclaraRequest();
 					final ObjectMapper mapperPublicidad = new ObjectMapper();
 
+
 					imprimeCertDeclaraDelineacionRequest.setNumBP(customerData.getNumBP());
-					imprimeCertDeclaraDelineacionRequest.setNumObjeto(certiFormPost.getNumObjeto());
-					imprimeCertDeclaraDelineacionRequest.setRetencion(VACIO);
-					//imprimeCertDeclaraDelineacionRequest.setPeriodo(certiFormPost.getAniograv());
-					imprimeCertDeclaraDelineacionRequest.setAnoGravable(certiFormPost.getAniograv().split("/")[2]);
+
+					String numObj = "";
+					String itemCDU = "";
+					String certiFormPostCDU = "";
+					for (final SDHUrbanDelineationsTaxData item : customerData.getUrbanDelineationsTaxList())
+					{
+
+						itemCDU = item.getCdu();
+						certiFormPostCDU = certiFormPost.getInputDelineacion().getSelectedCDU();
+						if (itemCDU.equals(certiFormPostCDU))
+						{
+							numObj = item.getObjectNumber();
+							break;
+						}
+					}
+
+					imprimeCertDeclaraDelineacionRequest.setNumObjeto(numObj);
+
+
+					imprimeCertDeclaraDelineacionRequest.setRetencion(certiFormPost.getInputDelineacion().getSelectedRadicado());
+					imprimeCertDeclaraDelineacionRequest.setPeriodo(certiFormPost.getAniograv().substring(2) + "A1");
+					imprimeCertDeclaraDelineacionRequest.setAnoGravable(certiFormPost.getAniograv());
 
 					final String respDelineacion = sdhImprimeCertDeclaraService.imprimePago(imprimeCertDeclaraDelineacionRequest);
 					ImprimePagoResponse imprimeCertiDeclaraDelineacionResponse;
@@ -274,7 +357,12 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 					System.out.println(imprimeCertDeclaraDelineacionRequest);
 				}
+			}
 
+
+
+			if (certiFormPost.getRowFrompublicidadTable() != null)
+			{
 				final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
 				certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
 				certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
@@ -292,6 +380,9 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				System.out.println(certiFormPost.getIdimp());
 				System.out.println(certiFormPost.getTipoImp());
 			}
+
+
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		}
 		else if (certiFormPost.getIdimp().equals("3"))//ICA
 		{
