@@ -64,7 +64,7 @@ ACC.reteica = {
 			 }
 			 
 			 
-			 if(!($("#retencionesFile").prop('files')[0].name.indexOf(".csv") != -1) && !($("#retencionesFile").prop('files')[0].name.indexOf(".CSV") != -1))
+			 if(!($("#retencionesFile").prop('files')[0].name.indexOf(".txt") != -1) && !($("#retencionesFile").prop('files')[0].name.indexOf(".TXT") != -1))
 			 {
 				 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");
@@ -76,7 +76,7 @@ ACC.reteica = {
 			 var taxNumber = "04";
 			 var fileName = $("#retencionesFile").prop('files')[0].name;
 			 
-			 if(fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != ACC.customerNIT)
+			 if(fileName.length-4 != 21 || fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != ACC.customerNIT)
 			 {
 				 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");

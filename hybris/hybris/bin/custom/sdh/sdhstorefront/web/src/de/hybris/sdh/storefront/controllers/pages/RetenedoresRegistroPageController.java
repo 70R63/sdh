@@ -143,7 +143,7 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 		}
 
 
-		if (!retencionesFile.getOriginalFilename().contains(".csv") && !retencionesFile.getOriginalFilename().contains(".CSV"))
+		if (!retencionesFile.getOriginalFilename().contains(".txt") && !retencionesFile.getOriginalFilename().contains(".TXT"))
 		{
 			final ErrorEnWS error = new ErrorEnWS();
 			error.setIdmsj("X");
@@ -335,7 +335,7 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 	Boolean hasValidName(final String fileName, final String anoGravable, final String periodo, final String nit)
 	{
 
-		if (fileName.substring(0, fileName.length() - 4).length() != 19)
+		if (fileName.substring(0, fileName.length() - 4).length() != 21)
 		{
 			return false;
 		}
