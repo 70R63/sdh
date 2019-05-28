@@ -17,6 +17,7 @@ public class InfoDelineacionInput
 	private String selectedTipoLicencia;
 	private String tipoFlujo;
 	private String totalRetencionOBLIGATORIO;
+	private String selectedAnoPresDeclaracion;
 
 	private Map<String, String> modalidadLicencia;
 	private Map<String, String> presupuestoObra;
@@ -156,6 +157,23 @@ public class InfoDelineacionInput
 	public void setTotalRetencionOBLIGATORIO(final String totalRetencionOBLIGATORIO)
 	{
 		this.totalRetencionOBLIGATORIO = totalRetencionOBLIGATORIO;
+	}
+
+	/**
+	 * @return the selectedAnoPresDeclaracion
+	 */
+	public String getSelectedAnoPresDeclaracion()
+	{
+		return selectedAnoPresDeclaracion;
+	}
+
+	/**
+	 * @param selectedAnoPresDeclaracion
+	 *           the selectedAnoPresDeclaracion to set
+	 */
+	public void setSelectedAnoPresDeclaracion(final String selectedAnoPresDeclaracion)
+	{
+		this.selectedAnoPresDeclaracion = selectedAnoPresDeclaracion;
 	}
 
 
