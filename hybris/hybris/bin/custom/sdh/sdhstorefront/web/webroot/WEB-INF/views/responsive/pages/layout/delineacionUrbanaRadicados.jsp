@@ -35,34 +35,7 @@
 		}
 	}
 
-	function obranueva(selectObject) {
-
-		debugger;
-		var value = selectObject.value;
-		var areaintervenida = document.getElementById('selectareinter');
-		var inareainter = document.getElementById('inputareainter');
-
-		if (value == '6') {
-
-			areaintervenida.disabled = false;
-			inareainter.disabled = false;
-
-		} else {
-			areaintervenida.disabled = true;
-			inareainter.disabled = true;
-		}
-
-		//Validacion presupuesto de obra = 02
-		var presupuestoObra = document.getElementById('presupuestoObra');
-		var totalRetencion = document.getElementById('totalRetencion');
-
-		if (presupuestoObra == '02') {
-			totalRetencion.disabled = false;
-		} else {
-			totalRetencion.disabled = true;
-		}
-
-	}
+	
 
 	function costoshabil(selectObject) {
 
@@ -94,7 +67,7 @@
 
 	function presupuestoObraCHANGE(selectObject) {
 
-		debugger;
+		
 		//Validacion presupuesto de obra = 02
 		var totalRetencion = document.getElementById('totalRetencion');
 		var totalRetencionOBLIGATORIO = document
@@ -112,7 +85,7 @@
 
 	function validarAntesCalculo() {
 
-		debugger;
+	
 		var totalRetencion = document.getElementById('totalRetencion').value;
 		var totalRetencionOBLIGATORIO = document
 				.getElementById('totalRetencionOBLIGATORIO').value;
@@ -139,6 +112,18 @@
 
 	}
 	
+	function pagarlinea(){
+		
+		var habipag = document.getElementById('action');
+		
+		habipag.disabled = false;
+		
+	}
+	
+	function presdecla(){
+		 var habidec = document.getElementById('duGeneraDeclaracionButton');
+		 habidec.disabled = false;
+	}
 	
 </script>
 

@@ -177,7 +177,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 #->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar submenu DECLARACION 04/01/2019
-;;PresentarDeclaracionLink;"Presentar declaración";"Haga clic aquí para acceder a la opción de menú Presentar declaración"
+;;PresentarDeclaracionLink;"Generar Declaración";"Haga clic aquí para acceder a la opción de menú Generar Declaración"
 ;;ListaDeclaracionFirmaLink;"Lista de declaraciones a firmar";"Haga clic aquí para acceder a la opción de menú Lista de declaraciones a firmar"
 #->FIN dev-eduardo Agregar submenu DECLARACION 04/01/2019
 

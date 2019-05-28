@@ -10,6 +10,7 @@
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL" htmlEscape="false" />
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
@@ -19,7 +20,8 @@
 		</div>
 	</div>
 
-<c:set var="tipoDescripcionID" value='${dataForm.valCont.infoContrib.tipoDoc} ${dataForm.valCont.infoContrib.tipoDocDESCRIPCION}' />
+<c:set var="tipoDescripcionID" value='${dataForm.valCont.infoContrib.tipoDoc}'/>
+<%-- ${dataForm.valCont.infoContrib.tipoDocDescripcion}' /> --%>
 <c:set var="nombreCompleto" value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
 		<div class="row">
 			<div class="col-md-3">
@@ -80,8 +82,8 @@
 <%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>
 <!-- 					</button> -->
 		<button id="duGeneraDeclaracionButton" type="button"
-			<c:if test="${empty  dataForm.infObjetoDelineacion.numForm}"> disabled="disabled"</c:if>
-			class="btn btn-primary btn-lg">
+			<c:if test="${empty  dataForm.infObjetoDelineacion.numForm}"></c:if>
+			class="btn btn-primary btn-lg" onclick="pagarlinea()" disabled="disabled">
 			<spring:theme code="delineacion.urbana.dec.firm.prerete" />
 		</button>
 					
@@ -97,7 +99,7 @@
 				<sf:hidden path="dv" />
 				<sf:hidden path="numObjeto" />
 				<div class="col-md-3">
-				<sf:button class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar">
+				<sf:button class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar" disabled="true">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 				</sf:button>
 				</div>

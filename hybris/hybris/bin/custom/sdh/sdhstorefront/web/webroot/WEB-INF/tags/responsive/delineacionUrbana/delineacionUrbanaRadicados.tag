@@ -138,7 +138,6 @@
 
 	function seleccion2(selectObject) {
 
-		debugger;
 		var x = selectObject.value;
 		var seleccionar = document.getElementById('selectRadicado');
 		var btndecla = document.getElementById('declaradelibutton1');
