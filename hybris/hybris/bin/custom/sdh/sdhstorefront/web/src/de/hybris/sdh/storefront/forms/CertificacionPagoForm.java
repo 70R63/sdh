@@ -2,6 +2,7 @@ package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.CertificacionRIT;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
 
 import java.util.List;
 
@@ -49,7 +50,8 @@ public class CertificacionPagoForm
 	private String numResolu;
 	private String tipoValla;
 
-
+	//Delineacion Urbana
+	private InfoDelineacionInput inputDelineacion;
 
 
 	/**
@@ -598,6 +600,25 @@ public class CertificacionPagoForm
 	{
 		this.tipoValla = tipoValla;
 	}
+
+	/**
+	 * @return the inputDelineacion
+	 */
+	public InfoDelineacionInput getInputDelineacion()
+	{
+		return inputDelineacion;
+	}
+
+	/**
+	 * @param inputDelineacion
+	 *           the inputDelineacion to set
+	 */
+	public void setInputDelineacion(final InfoDelineacionInput inputDelineacion)
+	{
+		this.inputDelineacion = inputDelineacion;
+	}
+
+
 
 
 
