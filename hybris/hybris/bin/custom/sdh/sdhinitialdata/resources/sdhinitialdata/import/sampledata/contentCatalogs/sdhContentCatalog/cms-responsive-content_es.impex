@@ -141,10 +141,10 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;DeclaracionesLink;"Declaraciones";"Haga clic aquí para ir a Declaraciones"
 ;;PagosLink;"Pagos";"Haga clic aquí para ir a Pagos"
 ;;ConsultasLink;"Consultas";"Haga clic aquí para ir a las consultas"
-;;ReportantesLink;"Mi Información Reportada";"Haga clic aquí para ir a su Información Reportada"
+;;ReportantesLink;"Mi información reportada";"Haga clic aquí para ir a su Información Reportada"
 
 ;;RetenedorRegistroLink;"Registro de Retenciones";"Haga clic aquí para ir al registro de sus retenciones"
-;;RetenedorDeclaracionesLink;"Delaraciones por Firmar";"Haga clic aquí para ir a las Declaraciones por Firmar"
+;;RetenedorDeclaracionesLink;"Delaraciones por firmar";"Haga clic aquí para ir a las Declaraciones por Firmar"
 
 
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -177,13 +177,13 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 #->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar submenu DECLARACION 04/01/2019
-;;PresentarDeclaracionLink;"Generar Declaración";"Haga clic aquí para acceder a la opción de menú Generar Declaración"
+;;PresentarDeclaracionLink;"Generar declaración";"Haga clic aquí para acceder a la opción de menú Generar declaración"
 ;;ListaDeclaracionFirmaLink;"Lista de declaraciones a firmar";"Haga clic aquí para acceder a la opción de menú Lista de declaraciones a firmar"
 #->FIN dev-eduardo Agregar submenu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGO 04/01/2019
 ;;GeneracionROPLink;"Generación de ROP";"Haga clic aquí para acceder a la opción de menú Generación de ROP"
-;;PagoLineaLink;"Pago en línea";"Haga clic aquí para acceder a la opción de menú Pago en línea"
+;;PagoLineaLink;"Pago en línea";"Haga clic aquí para acceder a la opción de menú pago en línea"
 #->FIN dev-eduardo Agregar submenu PAGO 04/01/2019
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
@@ -191,14 +191,14 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;ObligacionesPendLink;"Obligaciones pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
 ;;RelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
 ;;EdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
-;;CertDeclaraLink;"Certificaciones de Declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
+;;CertDeclaraLink;"Certificaciones de declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
 
-;;CargaLink;"Carga de Documentos";"Haga clic aquí para acceder a la opción de Carga de Documentos"
+;;CargaLink;"Carga de documentos";"Haga clic aquí para acceder a la opción de Carga de Documentos"
 ;;HistoricoLink;"Histórico de reportes";"Haga clic aquí para acceder a la opción de Histórico de reportes"
 ;;SancionesLink;"Sanciones impuestas";"Haga clic aquí para acceder a la opción Sanciones impuestas"
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
-;;EdoCargasLink;"Estado de Cargas";"Haga clic aquí para consultar el estado de sus cargas"
+;;EdoCargasLink;"Estado de cargas";"Haga clic aquí para consultar el estado de sus cargas"
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 

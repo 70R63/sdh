@@ -401,7 +401,7 @@
 								</div>
 								<div class="col-sm-3">
 										<button type="button" class="btn-link" onClick = "cargaInputDelineacion('${item.cdu}_');">
-											<spring:theme code="delineacion.urbana.radicados.declaracion" />
+											<spring:theme code="delineacion.urbana.radicados.declaracion.pdf" />
 										</button>
 								</div>
 							</div>
@@ -417,7 +417,7 @@
 										<div class="col-sm-3">
 											<button type="button" class="btn-link" id="btn_${item.cdu}_${radicado.numRadicado}" 
 												onClick = "cargaInputDelineacion('${item.cdu}_${radicado.numRadicado}');">
-													<spring:theme code="delineacion.urbana.radicados.retencion" />
+													<spring:theme code="delineacion.urbana.radicados.declaracion.pdf" />
 											</button>											
 										</div>
 									</div>
