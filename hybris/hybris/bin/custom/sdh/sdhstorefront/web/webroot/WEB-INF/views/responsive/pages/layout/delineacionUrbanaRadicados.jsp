@@ -84,11 +84,14 @@
 		
 		var incor = selectObject.value;
 		var tot= document.getElementById('totalRetencion');
+		var pres= document.getElementById('totalpresu');
 		
 		if(incor=='02'){
 			tot.readOnly=false;
+			pres.readOnly=false;
 		}else{
 			tot.readOnly=true;
+			pres.readOnly=true;
 		}
 
 	}
@@ -136,16 +139,18 @@
 	}
 	
 	window.onload = function data() {
-		debugger;
 		
 		var incor = document.getElementById('presupuestoObra').value;
 		
 		var tot= document.getElementById('totalRetencion');
+		var pres= document.getElementById('totalpresu');
 		
 		if(incor=='02'){
 			tot.readOnly=false;
+			pres.readOnly=false;
 		}else{
 			tot.readOnly=true;
+			pres.readOnly=true;
 		}
 	}
 	
