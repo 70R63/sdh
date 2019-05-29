@@ -181,8 +181,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
 
-		infObjetoDelineacionExtras.setAnoGravable(gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(),
-				infoDelineacion.getInput()));
+		infObjetoDelineacionExtras.setAnoGravable(
+				gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(), infoDelineacion.getInput()));
 		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
 
 
@@ -283,8 +283,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 		System.out.println("---------------- En Delineacion urbana POST --------------------------");
 
 
-		infObjetoDelineacionExtras.setAnoGravable(gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(),
-				infoDelineacion.getInput()));
+		infObjetoDelineacionExtras.setAnoGravable(
+				gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(), infoDelineacion.getInput()));
 		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
 
 

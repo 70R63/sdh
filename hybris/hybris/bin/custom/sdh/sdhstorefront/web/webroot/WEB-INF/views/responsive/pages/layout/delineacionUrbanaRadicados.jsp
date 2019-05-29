@@ -139,7 +139,7 @@
 	}
 	
 	window.onload = function data() {
-		
+		debugger;
 		var incor = document.getElementById('presupuestoObra').value;
 		
 		var tot= document.getElementById('totalRetencion');
