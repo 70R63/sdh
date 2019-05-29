@@ -48,11 +48,11 @@
 					<tbody>
 						<tr>
 							<td><input class="inputtextnew tableident"
-								disabled="disabled" type="text" size="30" value="" /></td>
+								disabled="disabled" type="text" size="30" value="${ docType}" /></td>
 							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="" /></td>
+								disabled="disabled" type="text" size="30" value="${ docNumber}" /></td>
 							<td><input class="inputtextnew tablenombre"
-								disabled="disabled" type="text" size="30" value="" /></td>
+								disabled="disabled" type="text" size="30" value="${customerName }" /></td>
 						</tr>
 					</tbody>
 				</table>

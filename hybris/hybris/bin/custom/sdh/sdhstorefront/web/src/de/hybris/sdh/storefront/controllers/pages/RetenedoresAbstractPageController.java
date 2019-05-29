@@ -14,6 +14,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +37,9 @@ public abstract class RetenedoresAbstractPageController extends AbstractPageCont
 
 	@Resource(name = "mediaService")
 	MediaService mediaService;
+
+	@Resource(name = "modelService")
+	ModelService modelService;
 
 	@ModelAttribute("reteICATemplateURL")
 	public String getReteICATemplateURL()

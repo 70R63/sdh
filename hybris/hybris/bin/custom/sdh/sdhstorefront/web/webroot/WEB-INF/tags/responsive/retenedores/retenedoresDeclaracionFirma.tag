@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
+<input type="hidden" id="numForm" name="numForm" value="${calculoResponse.numForm }"/>
 <div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
@@ -72,12 +72,15 @@
 			</div>
 			<div class="row">
 				<div class="col-md-3">
-					<button type="button" id="" class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
+					
+					<c:url value="/retenedores/estadocargas" var="edoCargasURL"/>
+					<a id="downloadReteICADeclaracionHelper" target="_blank"></a>
+					<button type="button" id="" class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '${edoCargasURL}'">
 						<spring:theme code="reteica.declaracion.firma.regresar" />
 					</button>
 				</div>
 					<div class="col-md-3">
-					<button id="" class="btn btn-primary btn-lg" type="button">
+					<button id="generaDeclaracionReteICAButton" class="btn btn-primary btn-lg" type="button">
 						<spring:theme code="reteica.declaracion.firma.presendecla" />
 					</button>
 				</div>

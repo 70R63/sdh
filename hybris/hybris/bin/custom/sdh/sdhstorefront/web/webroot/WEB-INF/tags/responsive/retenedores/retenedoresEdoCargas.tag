@@ -144,9 +144,9 @@
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachArchivo.numForm }" type="text" /></td>
 										<c:choose>
-											<c:when
-												test='${(eachArchivo.estado == "03")}'>
-												<td><a href="#">Presentar Declaración</a></td>
+											<c:when test='${(eachArchivo.estado == "03")}'>
+												<c:url value="/retenedores/declaracion" var="urlPresentar" />
+												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }">Presentar Declaración</a></td>
 											</c:when>
 											<c:otherwise>
 												<td></td>

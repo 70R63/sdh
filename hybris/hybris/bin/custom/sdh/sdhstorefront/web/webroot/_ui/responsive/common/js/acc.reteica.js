@@ -1,6 +1,124 @@
 ACC.reteica = {
 
-	 _autoload: ["bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindAnoGravable"],
+	 _autoload: ["bindGeneraDeclaracionReteICAButton","bindActualizarButton","bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindAnoGravable"],
+	 
+	 
+	 bindGeneraDeclaracionReteICAButton: function () {
+		 $(document).on("click", "#generaDeclaracionReteICAButton", function (e) {
+	 	        e.preventDefault();
+	 	        
+	 	       var numForm  = $.trim($("#numForm").val());
+	 	 
+	 	       var data = {};
+	 	       
+	 	       data.numForm=numForm;
+	 	
+	 	      $.ajax({
+		            url: ACC.reteICAGeneraDeclaracionURL,
+		            data: data,
+		            type: "POST",
+		            success: function (data) {
+		            	$( "#dialogReteICA" ).dialog( "open" );
+		            	if(data.errores)
+	            		{
+		            		$("#reteICADialogContent").html("");
+		            		$.each(data.errores, function( index, value ) {
+    	            			$("#reteICADialogContent").html($("#reteICADialogContent").html()+value.txtmsj+"<br>");
+    	            		});
+		            		
+		            		
+	            		}else
+	            		{
+	            			$("#reteICADialogContent").html("");
+	            			$("#reteICADialogContent").html("La declaración se ha generado exitosamente.")
+	            			
+	            			$("#downloadReteICADeclaracionHelper").attr("href",data.urlDownload);
+	            			document.getElementById("downloadReteICADeclaracionHelper").click();
+	            		}
+	 	      		
+		            },
+		            error: function () {
+		            	$( "#dialogPublicidadialogReteICAdExterior" ).dialog( "open" );
+		            	$("#reteICADialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            }
+		        });
+	 	       
+		 });
+	 },
+	 
+	 bindActualizarButton: function(){
+		 $(document).on("click", "#actualizarButton", function (e) {
+			 e.preventDefault();
+			 
+			 var valorPagar =  $.trim( $("#totalPagar").val());
+			 
+			 if(valorPagar == "")
+			 {
+				 $( "#dialogReteICA" ).dialog( "open" );
+	  	 		$("#reteICADialogContent").html("");
+	  	 		$("#reteICADialogContent").html("Por favor introduzca un total a pagar");
+	  	 		
+	  	 		return;
+			 }
+			 
+			 var numForm =  $.trim( $("#numForm").val());
+			 
+			 if(numForm == "")
+			 {
+				 $( "#dialogReteICA" ).dialog( "open" );
+	  	 		$("#reteICADialogContent").html("");
+	  	 		$("#reteICADialogContent").html("No se ha encontrado NumForm, por favor actualice nuevamente");
+	  	 		
+	  	 		return;
+			 }
+			 
+			 var data = {};
+			 
+			 data.numForm = numForm;
+			 data.valorPagar = valorPagar;
+			 
+			 
+			 $.ajax({
+		    	  url: ACC.reteICACalculoURL,
+		            data: data,
+		            type: "POST",
+		            success: function (data) {
+		            	if(!data.errores)
+		            	{
+			            	$("#baseReten").val(data.infoDeclara.baseReten)
+			            	$("#totalRetePer").val(data.infoDeclara.totalRetePer)
+			            	$("#descDevol").val(data.infoDeclara.descDevol)
+			            	$("#totalReteDecl").val(data.infoDeclara.totalReteDecl)
+			            	$("#sancion").val(data.infoDeclara.sancion)
+			            	$("#totalSaldo").val(data.infoDeclara.totalSaldo)
+			            	$("#valorPagar").val(data.infoDeclara.valorPagar)
+			            	$("#interesMora").val(data.infoDeclara.interesMora)
+			            	$("#totalPagar").val(data.infoDeclara.totalPagar)
+			            	
+			            	$("#numForm").val(data.numForm)
+		            		
+			            	$( "#dialogReteICA" ).dialog( "open" );
+			     	 		$("#reteICADialogContent").html("");
+			     	 		$("#reteICADialogContent").html("Calculo realizado exitosamente");
+		            		
+		            	}else
+		            	{
+		            		$( "#dialogReteICA" ).dialog( "open" );
+		            		$("#reteICADialogContent").html("");
+	    	            	$.each(data.errores,function (index, value)
+	    	            	{
+	    	            		$("#reteICADialogContent").html($("#reteICADialogContent").html()+"<br>"+value.txtmsj);
+	    	            	});
+		            	}
+		            },
+		            error: function () {
+		            	 $( "#dialogReteICA" ).dialog( "open" );
+		     	 		$("#reteICADialogContent").html("");
+		     	 		$("#reteICADialogContent").html("Error al realizar el calculo, por favor intelo nuevamente más tarde.");
+		            }
+		        });
+			});
+	 },
 	 
 	 bindDownloadTemplateButton: function(){
 		

@@ -3,7 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-
+import java.util.List;
 
 /**
  * @author hybris
@@ -17,7 +17,7 @@ public class CalculoReteIcaResponse
 
 	private ReteIcaRelaciones relaciones;
 
-	private ErrorEnWS errores;
+	private List<ErrorEnWS> errores;
 
 	/**
 	 * @return the numForm
@@ -73,7 +73,7 @@ public class CalculoReteIcaResponse
 	/**
 	 * @return the errores
 	 */
-	public ErrorEnWS getErrores()
+	public List<ErrorEnWS> getErrores()
 	{
 		return errores;
 	}
@@ -82,10 +82,11 @@ public class CalculoReteIcaResponse
 	 * @param errores
 	 *           the errores to set
 	 */
-	public void setErrores(final ErrorEnWS errores)
+	public void setErrores(final List<ErrorEnWS> errores)
 	{
 		this.errores = errores;
 	}
+
 
 
 
