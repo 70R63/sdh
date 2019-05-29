@@ -135,12 +135,17 @@
 										<td><input class="inputtextnew tabledomatri"
 											disabled="disabled" value="${eachArchivo.estado }"
 											type="text" /></td>
-										<td><a href="#">Ver log</a></td>
+										<td>
+											<c:if test="${eachArchivo.estado ne  '02' }">
+												<c:url value="/retenedores/download/log" var="urlDownload" />
+												<a href="${urlDownload}?nomArchivo=${eachArchivo.nomArchivo}">Ver log</a>
+											</c:if>
+										</td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachArchivo.numForm }" type="text" /></td>
 										<c:choose>
 											<c:when
-												test='${(eachArchivo.estado == "01")}'>
+												test='${(eachArchivo.estado == "03")}'>
 												<td><a href="#">Presentar Declaración</a></td>
 											</c:when>
 											<c:otherwise>
