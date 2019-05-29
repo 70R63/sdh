@@ -194,7 +194,7 @@
 
 							<button type="submit" class="btn-link" id="btn_${item.cdu}"
 								name="action" value="declaracion">
-								<spring:theme code="delineacion.urbana.radicados.declaracion" />
+								<spring:theme code="delineacion.urbana.radicados.declara" />
 							</button>
 						</form:form>
 					</div>
@@ -218,7 +218,7 @@
 
 									<button type="submit" class="btn-link"
 										id="retenciondelibutton1" name="action" value="retencion">
-										<spring:theme code="delineacion.urbana.radicados.retencion" />
+										<spring:theme code="delineacion.urbana.radicados.retencion.generar" />
 									</button>
 								</form:form>
 							</div>

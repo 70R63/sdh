@@ -63,12 +63,28 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme code="" /></label>
-						<button style="margin-top: 25px;"
-							id="" class="btn btn-primary btn-lg"
-							type="button">
+						<button style="margin-top: 25px;" id=""
+							class="btn btn-primary btn-lg" type="button">
 							<spring:theme code="reteica.declaracion.firma.firma" />
 						</button>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<button type="button" id="" class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
+						<spring:theme code="reteica.declaracion.firma.regresar" />
+					</button>
+				</div>
+					<div class="col-md-3">
+					<button id="" class="btn btn-primary btn-lg" type="button">
+						<spring:theme code="reteica.declaracion.firma.presendecla" />
+					</button>
+				</div>
+					<div class="col-md-3">
+					<button id="" class="btn btn-primary btn-lg" type="button">
+						<spring:theme code="reteica.declaracion.firma.paglinea" />
+					</button>
 				</div>
 			</div>
 
@@ -84,14 +100,12 @@
 
 		var tam = $(".firma").length;
 		if ($(".firma").length < 3) {
-			$($(".firma")[0]).parent().append(
-					$($(".firma")[0]).clone());
-			$($(".firma")[0]).parent().children().last().find(".tipodoc")
+			$($(".firma")[0]).parent().append($($(".firma")[0]).clone());
+			$($(".firma")[0]).parent().children().last().find(".tipodoc").val(
+					"")
+			$($(".firma")[0]).parent().children().last().find(".numdoc")
 					.val("")
-			$($(".firma")[0]).parent().children().last().find(".numdoc").val(
-					"")
-			$($(".firma")[0]).parent().children().last().find(".name").val(
-					"")
+			$($(".firma")[0]).parent().children().last().find(".name").val("")
 
 		} else {
 			alert("No se pueden agregar más registros");
