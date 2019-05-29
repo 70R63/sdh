@@ -42,10 +42,14 @@
 		var cauex = document.getElementById('cauexen').value;
 		var auex = document.getElementById('valorExen');
 		
-		if(value!='09' && cauex!='00'){
-			auex.readOnly=false;
-		}else{
+		if(value=='09' && (cauex=='00' || cauex=='')){
 			auex.readOnly=true;
+		}else if(value=='09' && (cauex!='00' || cauex!='')){
+			auex.readOnly=true;
+		}else if(value!='09' && (cauex=='00' || cauex=='' || cauex=="")){
+			auex.readOnly=true;
+		}else{
+			auex.readOnly=false;
 		}
 		
 }
@@ -60,15 +64,19 @@
 		var auex = document.getElementById('valorExen');
 		var tiplin = document.getElementById('tipoDeLicencia');
 		
-		if(mod!='09' && cauex!='00' || cauex=='' ){
-			auex.readOnly=false;
-		}else{
+		if(mod=='09' && (cauex=='00' || cauex=='')){
 			auex.readOnly=true;
+		}else if(mod=='09' && (cauex!='00' || cauex!='')){
+			auex.readOnly=true;
+		}else if(mod!='09' && (cauex=='00' || cauex=='' || cauex=="")){
+			auex.readOnly=true;
+		}else{
+			auex.readOnly=false;
 		}
 		
 		if(cauex=='' || cauex=="00")
 			{
-			tiplin.readOnly="true"
+			tiplin.readOnly=true;
 			}
 		
 		
