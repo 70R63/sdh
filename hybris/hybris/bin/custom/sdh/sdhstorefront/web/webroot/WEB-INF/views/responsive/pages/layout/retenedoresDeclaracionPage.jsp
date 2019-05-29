@@ -10,3 +10,8 @@
 <retenedores:retenedoresDeclaracionJuridico />
 <retenedores:retenedoresDeclaracionFirma />
 
+<script type="text/javascript">
+	function goBack() {
+		window.history.back();
+	}
+</script>
