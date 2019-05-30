@@ -82,8 +82,8 @@
 <%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>
 <!-- 					</button> -->
 		<button id="duGeneraDeclaracionButton" type="button"
-			<c:if test="${empty  dataForm.infObjetoDelineacion.numForm}"></c:if>
-			class="btn btn-primary btn-lg" onclick="pagarlinea()" disabled="disabled">
+			<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
+			class="btn btn-primary btn-lg" onclick="pagarlinea()" >
 			<spring:theme code="delineacion.urbana.dec.firm.prerete" />
 		</button>
 					
