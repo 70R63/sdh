@@ -93,7 +93,7 @@
 						<!-- 				</button> -->
 						<sf:button class="btn btn-primary btn-lg" name="action"
 							id="retenciondelibutton1" value="retencion" disabled="true">
-							<spring:theme code="delineacion.urbana.radicados.retencion" />
+							<spring:theme code="delineacion.urbana.radicados.generar.retencion" />
 						</sf:button>
 					</div>
 				</div>
@@ -105,7 +105,7 @@
 						<!-- 				</button> -->
 						<sf:button class="btn btn-primary btn-lg" name="action"
 							id="declaradelibutton1" value="declaracion" disabled="true">
-							<spring:theme code="delineacion.urbana.radicados.declaracion" />
+							<spring:theme code="delineacion.urbana.radicados.generar.declaracion" />
 						</sf:button>
 					</div>
 				</div>
@@ -138,7 +138,6 @@
 
 	function seleccion2(selectObject) {
 
-		debugger;
 		var x = selectObject.value;
 		var seleccionar = document.getElementById('selectRadicado');
 		var btndecla = document.getElementById('declaradelibutton1');

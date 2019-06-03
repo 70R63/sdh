@@ -8,7 +8,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<input type="hidden" value="${tipoMarca}" id="tipoMarca"/>
+<input type="hidden" value="${tipoMarca}" id="tipoMarca" />
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
@@ -68,18 +68,16 @@
 						code="delineacion.urbana.dec.generales.tiplicencia" /></label>
 				<c:if test="${empty tipoMarca}">
 					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
-						id="tipoDeLicencia"
-						items="${dataForm.catalogos.tipoDeLicencia}"
+						id="tipoDeLicencia" items="${dataForm.catalogos.tipoDeLicencia}"
 						referenceData="${dataForm.catalogos.tipoDeLicencia}"
 						class="form-control" disabled="true" readonly="true">
 					</sf:select>
 				</c:if>
 				<c:if test="${not empty  tipoMarca}">
 					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
-						id="tipoDeLicencia"
-						items="${dataForm.catalogos.tipoDeLicencia}"
+						id="tipoDeLicencia" items="${dataForm.catalogos.tipoDeLicencia}"
 						referenceData="${dataForm.catalogos.tipoDeLicencia}"
-						class="form-control" onchange="tipoLicenciaCHANGE(this)">
+						class="form-control">
 					</sf:select>
 				</c:if>
 				<!-- 				<select -->
@@ -95,23 +93,23 @@
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.modlicencia" /></label>
-				<sf:select class="form-control" id="an" onchange="obranueva(this)"
+				<sf:select class="form-control" id="an"
 					path="infObjetoDelineacion.infoDeclara.modalidad"
-					items="${dataForm.catalogos.modalidadLicencia}">
+					items="${dataForm.catalogos.modalidadLicencia}" onchange="nuevos(this)">
 				</sf:select>
-				<!-- 				<select -->
-				<!-- 					id="selecmodlicen" class="form-control " name=" " onchange=" " disabled> -->
-				<!-- 					<option value="">Seleccionar</option> -->
-				<!-- 					<option value="1">Adecuación</option>  -->
-				<!-- 					<option value="2">Ampliación</option> -->
-				<!-- 					<option value="3">Cerramiento</option> -->
-				<!-- 					<option value="4">Demolición</option>  -->
-				<!-- 					<option value="5">Modificación</option> -->
-				<!-- 					<option selected="selected" value="6">Obra nueva</option>  -->
-				<!-- 					<option value="7">Reforma</option> -->
-				<!-- 					<option value="8">Estructural</option> -->
-				<!-- 					<option value="9">Restauración</option> -->
-				<!-- 				</select> -->
+				<!-- 								<select -->
+				<!-- 									id="selecmodlicen" class="form-control " name=" " onchange="obranueva(this)"> -->
+				<!-- 									<option value="00">Seleccionar</option> -->
+				<!-- 									<option value="01">Adecuación</option>  -->
+				<!-- 									<option value="02">Ampliación</option> -->
+				<!-- 									<option value="03">Cerramiento</option> -->
+				<!-- 									<option value="04">Demolición</option>  -->
+				<!-- 									<option value="05">Modificación</option> -->
+				<!-- 									<option value="06">Obra nueva</option>  -->
+				<!-- 									<option value="07">Reforma</option> -->
+				<!-- 									<option value="08">Estructural</option> -->
+				<!-- 									<option value="09">Restauración</option> -->
+				<!-- 								</select> -->
 			</div>
 		</div>
 
@@ -136,8 +134,9 @@
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.cauexen" /></label>
-				<sf:input class="form-control" readonly="true" aria-required="true"
-					maxlength="240" path="infObjetoDelineacion.infoDeclara.causalExcepDESCRIPCION" /> 
+				<sf:input id="cauexen" class="form-control" readonly="true"
+					aria-required="true" maxlength="240"
+					path="infObjetoDelineacion.infoDeclara.causalExcepDESCRIPCION" />
 				<%-- 				<sf:select class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep" --%>
 				<%-- 						items="${dataForm.catalogos.causalExencion}" disabled="true"></sf:select>		 --%>
 
@@ -165,4 +164,5 @@
 
 
 </div>
+
 

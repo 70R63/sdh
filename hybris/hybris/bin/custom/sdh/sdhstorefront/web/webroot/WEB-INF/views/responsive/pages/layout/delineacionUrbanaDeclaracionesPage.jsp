@@ -36,46 +36,64 @@
 		}
 	}
 	
-	function obranueva(){
-		
+	function nuevos(selectObject){
+
 		var value = selectObject.value;
-		var areaintervenida = document.getElementById('selectareinter');
-		var inareainter = document.getElementById('inputareainter');
+		var cauex = document.getElementById('cauexen').value;
+		var auex = document.getElementById('valorExen');
 		
-		if (value == '6'){
-			
-			areaintervenida.disabled=false;
-			inareainter.disabled=false;
-			
+		if(value=='09' && (cauex=='00' || cauex=='')){
+			auex.readOnly=true;
+		}else if(value=='09' && (cauex!='00' || cauex!='')){
+			auex.readOnly=true;
+		}else if(value!='09' && (cauex=='00' || cauex=='' || cauex=="")){
+			auex.readOnly=true;
 		}else{
-			areaintervenida.disabled=true;
-			inareainter.disabled=true;
+			auex.readOnly=false;
 		}
 		
 }
 	window.onload = function data() {
-
 		debugger;
 
 		var value = document.getElementById("selecmodlicen");
 		var areaintervenida = document.getElementById('selectareinter');
 		var inareainter = document.getElementById('inputareainter');
+		var mod = document.getElementById('an').value;
+		var cauex = document.getElementById('cauexen').value;
+		var auex = document.getElementById('valorExen');
+		var tiplin = document.getElementById('tipoDeLicencia');
+		
+		if(mod=='09' && (cauex=='00' || cauex=='')){
+			auex.readOnly=true;
+		}else if(mod=='09' && (cauex!='00' || cauex!='')){
+			auex.readOnly=true;
+		}else if(mod!='09' && (cauex=='00' || cauex=='' || cauex=="")){
+			auex.readOnly=true;
+		}else{
+			auex.readOnly=false;
+		}
+		
+		if(cauex=='' || cauex=="00")
+			{
+			tiplin.readOnly=true;
+			}
+		
 		
 		if (value == '6'){
 			
-			areaintervenida.disabled=false;
-			inareainter.disabled=false;
+			areaintervenida.readonly=false;
+			inareainter.readonly=false;
 			
 		}else{
-			areaintervenida.disabled=true;
-			inareainter.disabled=true;
+			areaintervenida.readOnly=true;
+			inareainter.readOnly=true;
 		}
 	}
 	
 	
 	function tipoLicenciaCHANGE(selectObject) {
 
-		debugger;
 		//Validacion tipo de licencia = 02
 		var valorExen = document.getElementById('valorExen');
 		var tipoMarca = document.getElementById('tipoMarca');
@@ -91,6 +109,21 @@
 			valorExen.readOnly = true;
 		}
 
+	}
+	
+	function pagarlinea() {
+
+		var btnpaglinea = document.getElementById('action');
+		btnpaglinea.disabled=false;
+		
+		
+	}
+	
+	function presdec() {
+		var btnpresdec = document.getElementById('duGeneraDeclaracionButton');
+		btnpresdec.disabled=false;
+		
+		
 	}
 </script>
 

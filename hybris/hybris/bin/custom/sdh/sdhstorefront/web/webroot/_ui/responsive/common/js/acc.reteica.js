@@ -1,6 +1,140 @@
 ACC.reteica = {
 
-	 _autoload: ["bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindAnoGravable"],
+	 _autoload: ["bindGeneraDeclaracionReteICAButton","bindActualizarButton","bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindAnoGravable"],
+	 
+	 
+	 bindGeneraDeclaracionReteICAButton: function () {
+		 $(document).on("click", "#generaDeclaracionReteICAButton", function (e) {
+	 	        e.preventDefault();
+	 	        
+	 	       var numForm  = $.trim($("#numForm").val());
+	 	 
+	 	       var data = {};
+	 	       
+	 	       data.numForm=numForm;
+	 	
+	 	      $.ajax({
+		            url: ACC.reteICAGeneraDeclaracionURL,
+		            data: data,
+		            type: "POST",
+		            success: function (data) {
+		            	$( "#dialogReteICA" ).dialog( "open" );
+		            	if(data.errores)
+	            		{
+		            		$("#reteICADialogContent").html("");
+		            		$.each(data.errores, function( index, value ) {
+    	            			$("#reteICADialogContent").html($("#reteICADialogContent").html()+value.txtmsj+"<br>");
+    	            		});
+		            		
+		            		
+	            		}else
+	            		{
+	            			$("#reteICADialogContent").html("");
+	            			$("#reteICADialogContent").html("La declaración se ha generado exitosamente.")
+	            			
+	            			$("#downloadReteICADeclaracionHelper").attr("href",data.urlDownload);
+	            			document.getElementById("downloadReteICADeclaracionHelper").click();
+	            		}
+	 	      		
+		            },
+		            error: function () {
+		            	$( "#dialogPublicidadialogReteICAdExterior" ).dialog( "open" );
+		            	$("#reteICADialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            }
+		        });
+	 	       
+		 });
+	 },
+	 
+	 bindActualizarButton: function(){
+		 $(document).on("click", "#actualizarButton", function (e) {
+			 e.preventDefault();
+			 
+			 var valorPagar =  $.trim( $("#totalPagar").val());
+			 
+			 if(valorPagar == "")
+			 {
+				 $( "#dialogReteICA" ).dialog( "open" );
+	  	 		$("#reteICADialogContent").html("");
+	  	 		$("#reteICADialogContent").html("Por favor introduzca un total a pagar");
+	  	 		
+	  	 		return;
+			 }
+			 
+			 var numForm =  $.trim( $("#numForm").val());
+			 
+			 if(numForm == "")
+			 {
+				 $( "#dialogReteICA" ).dialog( "open" );
+	  	 		$("#reteICADialogContent").html("");
+	  	 		$("#reteICADialogContent").html("No se ha encontrado NumForm, por favor actualice nuevamente");
+	  	 		
+	  	 		return;
+			 }
+			 
+			 var data = {};
+			 
+			 data.numForm = numForm;
+			 data.valorPagar = valorPagar;
+			 
+			 
+			 $.ajax({
+		    	  url: ACC.reteICACalculoURL,
+		            data: data,
+		            type: "POST",
+		            success: function (data) {
+		            	if(!data.errores)
+		            	{
+		            		if(data.numForm == "")
+		            		{
+			            		$("#generaDeclaracionReteICAButton").attr("disabled",true);
+		            		}else
+		            		{
+		            			$("#numForm").val(data.numForm);
+		            			$("#generaDeclaracionReteICAButton").attr("disabled",false);
+		            		}
+		            		
+		            		if(data.infoDeclara)
+		            		{
+		            			$("#baseReten").val(data.infoDeclara.baseReten)
+				            	$("#totalRetePer").val(data.infoDeclara.totalRetePer)
+				            	$("#descDevol").val(data.infoDeclara.descDevol)
+				            	$("#totalReteDecl").val(data.infoDeclara.totalReteDecl)
+				            	$("#sancion").val(data.infoDeclara.sancion)
+				            	$("#totalSaldo").val(data.infoDeclara.totalSaldo)
+				            	$("#valorPagar").val(data.infoDeclara.valorPagar)
+				            	$("#interesMora").val(data.infoDeclara.interesMora)
+				            	$("#totalPagar").val(data.infoDeclara.totalPagar)
+				            	
+				            	$( "#dialogReteICA" ).dialog( "open" );
+				     	 		$("#reteICADialogContent").html("");
+				     	 		$("#reteICADialogContent").html("Calculo realizado exitosamente");
+				     	 		
+		            		}else
+	            			{
+		            			$( "#dialogReteICA" ).dialog( "open" );
+				     	 		$("#reteICADialogContent").html("");
+				     	 		$("#reteICADialogContent").html("Hubo un problema al realizar el cálculo, por favor intentelo más tarde.");
+	            			}
+		            	}else
+		            	{
+		            		$("#generaDeclaracionReteICAButton").attr("disabled",true);
+		            		$( "#dialogReteICA" ).dialog( "open" );
+		            		$("#reteICADialogContent").html("");
+	    	            	$.each(data.errores,function (index, value)
+	    	            	{
+	    	            		$("#reteICADialogContent").html($("#reteICADialogContent").html()+"<br>"+value.txtmsj);
+	    	            	});
+		            	}
+		            },
+		            error: function () {
+		            	 $( "#dialogReteICA" ).dialog( "open" );
+		     	 		$("#reteICADialogContent").html("");
+		     	 		$("#reteICADialogContent").html("Error al realizar el calculo, por favor intelo nuevamente más tarde.");
+		            }
+		        });
+			});
+	 },
 	 
 	 bindDownloadTemplateButton: function(){
 		
@@ -64,7 +198,7 @@ ACC.reteica = {
 			 }
 			 
 			 
-			 if(!($("#retencionesFile").prop('files')[0].name.indexOf(".csv") != -1) && !($("#retencionesFile").prop('files')[0].name.indexOf(".CSV") != -1))
+			 if(!($("#retencionesFile").prop('files')[0].name.indexOf(".txt") != -1) && !($("#retencionesFile").prop('files')[0].name.indexOf(".TXT") != -1))
 			 {
 				 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");
@@ -76,7 +210,7 @@ ACC.reteica = {
 			 var taxNumber = "04";
 			 var fileName = $("#retencionesFile").prop('files')[0].name;
 			 
-			 if(fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != ACC.customerNIT)
+			 if(fileName.length-4 != 21 || fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != ACC.customerNIT)
 			 {
 				 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");

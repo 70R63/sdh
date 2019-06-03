@@ -25,9 +25,8 @@
 		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
-					readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
+						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id="totalpresu"
+					name="" class="form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -57,7 +56,7 @@
 	<div class="row">
 		<div class="col-md-4">
 				<sf:button class="btn btn-primary btn-lg" name="action"
-					id="calcular" value="calcular" disabled="false">
+					id="calcular" value="calcular" disabled="false" onclick="presdecla()">
 					<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
 				</sf:button>
 		</div>

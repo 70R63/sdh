@@ -345,6 +345,89 @@
 					</div>
 				</div>
 			</c:if>
+			
+			
+			<c:if test="${not empty delineacionWithRadicadosList}">
+				<div class="col-md-9 col-md-offset-1">
+				<br>
+				<br>
+					<div class="row">
+						<div class="col-md-2">
+							<label class="control-label" for="" style="text-transform: none">
+								<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" />
+							</label>
+						</div>
+						<div class="col-md-3">
+							<label class="control-label" for="" style="text-transform: none">
+								<spring:theme code="impuestos.presentarDeclaracion.deliur.tipobli" />
+							</label>
+						</div>
+						<div class="col-md-3">
+							<label class="control-label" for="" style="text-transform: none">
+								<spring:theme code="impuestos.presentarDeclaracion.deliur.tiplic" />
+							</label>
+						</div>
+						<div class="col-md-3">
+							<label class="control-label" for="" style="text-transform: none">
+								<spring:theme code="Evento" />
+							</label>
+						</div>
+					</div>
+					<div class="table-resposive">
+						<form:hidden path="inputDelineacion.selectedCDU"/>
+						<form:hidden path="inputDelineacion.selectedRadicado"/>
+						<form:hidden path="inputDelineacion.selectedTipoLicencia"/>
+						
+						<c:forEach var="item" items="${delineacionWithRadicadosList}">
+							<div class="row">
+								<div class="col-sm-2">
+									<input class="form-control" disabled="disabled" type="text"
+										value="${item.cdu}" style="height: 32px !important; margin-bottom: 9px !important"/>
+								</div>
+								<div class="col-sm-3">
+									<select id="selctipobliga" class="form-control"
+										onchange="ShowSelected(this)" style="height: 48px !important">
+										<option value="0-${item.cdu}">Seleccionar</option>
+										<option value="1-${item.cdu}">Declaración</option>
+										<option value="2-${item.cdu}">Retención</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<select id="btnTpLic_${item.cdu}" class="form-control" style="height: 48px !important">
+										<option value="00">Seleccionar</option>
+										<option value="01">Licencia</option>
+										<option value="02">Reconocimiento</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+										<button type="button" class="btn-link" onClick = "cargaInputDelineacion('${item.cdu}_');">
+											<spring:theme code="delineacion.urbana.radicados.declaracion.pdf" />
+										</button>
+								</div>
+							</div>
+							<div class="row" id="${item.cdu}" style="display: none">
+								<c:forEach var="radicado" items="${item.radicados}">
+									<div class="row">
+										<div class="col-sm-2"></div>
+										<div class="col-sm-3 text-right">Radicados:</div>
+										<div class="col-sm-3">
+											<input style="margin-bottom: 5px !important" class="form-control"
+												disabled="disabled" type="text" value="${radicado.numRadicado}"/>
+										</div>
+										<div class="col-sm-3">
+											<button type="button" class="btn-link" id="btn_${item.cdu}_${radicado.numRadicado}" 
+												onClick = "cargaInputDelineacion('${item.cdu}_${radicado.numRadicado}');">
+													<spring:theme code="delineacion.urbana.radicados.declaracion.pdf" />
+											</button>											
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</c:if>
+			
 
 		</form:form>
 
@@ -398,6 +481,8 @@
 
 		</c:if>
 		
+		
+		<!--  
 		<c:if test="${not empty consultaPagoDelineacionList}">
 			<table id="myTable">
 				<tr>
@@ -436,10 +521,11 @@
 			</button>
 
 		</c:if>
+		-->
+	
+
+				
 	</div>
-
-
-
 
 </div>
 <div id="dialog" title="Generar certideclara">
@@ -448,7 +534,7 @@
 
 
 <script type="text/javascript">
-
+	
 	document.getElementById("btnCancelar").addEventListener("click", function(){
 		location = self.location;
 	});
@@ -558,7 +644,7 @@
 		form.submit();
 	}
 	
-	<!-- se agrega control para tablas de delineación -->
+	<!-- se agrega control para tablas de delineación
 
 		function ShowSelected(selectObject) {
 			var value = selectObject.value;
@@ -575,7 +661,59 @@
 			} else {
 				idrad.style.display = 'none';
 			}
+		} -->
+		
+</script>
+
+<!-- se agrega control para tablas de delineación -->
+<script type="text/javascript">
+	function ShowSelected(selectObject) {
+		var value = selectObject.value;
+		var selected = value.substring(0, 1);
+		var div = value.substring(2, value.length);
+		var x = document.getElementById(div);
+		var tipoLicencia = document.getElementById("btnTpLic_" + div);
+		var btnDeclaracion = document.getElementById("btn_" + div);
+
+		if (selected === "2") {
+			x.style.display = "block";
+			tipoLicencia.selectedIndex = "1"
+			tipoLicencia.disabled = true;
+			btnDeclaracion.disabled = true;
+		} else {
+			x.style.display = "none";
+			tipoLicencia.selectedIndex = "0"
+			tipoLicencia.disabled = false;
+			btnDeclaracion.disabled = false;
 		}
+	}
+</script>
 
 
+<script type="text/javascript">
+	function cargaInputDelineacion(cdu_retencion) {
+		
+		debugger;
+		
+		var valores = cdu_retencion.split('_');
+		var selectedCDU = document.querySelector('#inputDelineacion\\.selectedCDU');
+		var selectedRadicado = document.querySelector('#inputDelineacion\\.selectedRadicado');
+		var selectedTipoLicencia = document.querySelector('#inputDelineacion\\.selectedTipoLicencia');
+		
+		form = document.getElementById("form_pdf");
+		
+		selectedCDU.value = valores[0];
+		
+		if (valores[1].length != 0)
+		{
+			selectedRadicado.value = valores[1];
+			selectedTipoLicencia.value = "retencion"
+		}
+		else{
+			selectedRadicado.value = "";
+			selectedTipoLicencia.value = "declaracion"
+		} 
+		
+		form.submit();
+	}
 </script>

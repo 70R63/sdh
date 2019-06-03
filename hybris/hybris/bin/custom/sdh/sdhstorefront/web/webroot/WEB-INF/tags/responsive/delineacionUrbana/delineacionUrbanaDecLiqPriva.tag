@@ -17,138 +17,162 @@
 		</div>
 	</div>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.totobrcons" /></label> <sf:input class="form-control" readonly="true" aria-required="true"
-						maxlength="240" path="infObjetoDelineacion.infoDeclara.totalPresupuesto" />
-				</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.totobrcons" /></label>
+				<sf:input class="form-control" readonly="true" aria-required="true"
+					maxlength="240"
+					path="infObjetoDelineacion.infoDeclara.totalPresupuesto" />
 			</div>
 		</div>
-		
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.valorExencion" /></label> 
+	</div>
 
-						<c:choose>
-						<c:when test='${(not empty tipoMarca) && (dataForm.infObjetoDelineacion.infoDeclara.tipoLicencia == "02")}'>
-						<sf:input id="valorExen" name="" class="form-control" aria-required="true" type="text" readonly="false" path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240"/>
-						</c:when>
-						<c:otherwise>
-						<sf:input id="valorExen" name="" class="form-control" aria-required="true" type="text" readonly="true" path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240"/>
-						</c:otherwise>
-						</c:choose>
-																		
-				</div>
-			</div>
-		</div>		
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.valorExencion" /></label>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.valorcons" /></label> <sf:input class="form-control" readonly="false" aria-required="true"
-						maxlength="240" path="infObjetoDelineacion.infoDeclara.valorEjecutado" />
-				</div>
+				<%-- 				<c:choose> --%>
+				<%-- 					<c:when --%>
+				<%-- 						test='${(not empty tipoMarca) && (dataForm.infObjetoDelineacion.infoDeclara.tipoLicencia == "02")}'> --%>
+				<sf:input id="valorExen" name="" class="form-control"
+					aria-required="true" type="text" readonly="false"
+					path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240" />
+				<%-- 					</c:when> --%>
+				<%-- 					<c:otherwise> --%>
+				<%-- 						<sf:input id="valorExen" name="" class="form-control" --%>
+				<%-- 							aria-required="true" type="text" readonly="true" --%>
+				<%-- 							path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240" /> --%>
+				<%-- 					</c:otherwise> --%>
+				<%-- 				</c:choose> --%>
 			</div>
 		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.valorcons" /></label>
+				<sf:input class="form-control" readonly="false" aria-required="true"
+					maxlength="240"
+					path="infObjetoDelineacion.infoDeclara.valorEjecutado" />
+			</div>
+		</div>
+	</div>
 
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.impcargo" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.impuestoCargo}" maxlength="240">
-				</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.impcargo" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly"
+					value="${dataForm.infObjetoDelineacion.infoDeclara.impuestoCargo}"
+					maxlength="240">
 			</div>
 		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.totvalorsanciones" /></label> <input
-						id="" name="" class="form-control" aria-required="true"
-						type="text" readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.valorSancion}" maxlength="240">
-				</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.totvalorsanciones" /></label> <input
+					id="" name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly"
+					value="${dataForm.infObjetoDelineacion.infoDeclara.valorSancion}"
+					maxlength="240">
 			</div>
 		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.totreten" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.totalRetencion}" maxlength="240">
-				</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.totreten" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly"
+					value="${dataForm.infObjetoDelineacion.infoDeclara.totalRetencion}"
+					maxlength="240">
 			</div>
 		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.salimpcar" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.saldoImpCargo}" maxlength="240">
-				</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.salimpcar" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly"
+					value="${dataForm.infObjetoDelineacion.infoDeclara.saldoImpCargo}"
+					maxlength="240">
 			</div>
 		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.salpag" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.saldoFavor}" maxlength="240">
-				</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.salpag" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly"
+					value="${dataForm.infObjetoDelineacion.infoDeclara.saldoFavor}"
+					maxlength="240">
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.valpag" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.valorPagar}" maxlength="240">
-				</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.valpag" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly"
+					value="${dataForm.infObjetoDelineacion.infoDeclara.valorPagar}"
+					maxlength="240">
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.intermora" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.interesMora}" maxlength="240">
-				</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.intermora" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly"
+					value="${dataForm.infObjetoDelineacion.infoDeclara.interesMora}"
+					maxlength="240">
 			</div>
 		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPagar}" maxlength="240">
-				</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group ">
+				<label class="control-label"><spring:theme
+						code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
+					name="" class="form-control" aria-required="true" type="text"
+					readonly="readonly"
+					value="${dataForm.infObjetoDelineacion.infoDeclara.totalPagar}"
+					maxlength="240">
 			</div>
 		</div>
+	</div>
 
-		<div class="container">
-				<sf:button class="btn btn-primary btn-lg" name="action"
-					id="calcular" value="calcular" disabled="false">
-					<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
-				</sf:button>
-		</div>
+	<div class="container">
+		<sf:button class="btn btn-primary btn-lg" name="action" id="calcular"
+			value="calcular" disabled="false" onclick="presdec()">
+			<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
+		</sf:button>
+	</div>
 
 </div>
 

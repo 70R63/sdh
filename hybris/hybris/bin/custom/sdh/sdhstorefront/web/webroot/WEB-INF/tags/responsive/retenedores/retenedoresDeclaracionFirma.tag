@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
+<input type="hidden" id="numForm" name="numForm" value="${calculoResponse.numForm }"/>
 <div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
@@ -63,12 +63,36 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme code="" /></label>
-						<button style="margin-top: 25px;"
-							id="" class="btn btn-primary btn-lg"
-							type="button">
+						<button style="margin-top: 25px;" id=""
+							class="btn btn-primary btn-lg" type="button">
 							<spring:theme code="reteica.declaracion.firma.firma" />
 						</button>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					
+					<c:url value="/retenedores/estadocargas" var="edoCargasURL"/>
+					<a id="downloadReteICADeclaracionHelper" target="_blank"></a>
+					<button type="button" id="" class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '${edoCargasURL}'">
+						<spring:theme code="reteica.declaracion.firma.regresar" />
+					</button>
+				</div>
+					<div class="col-md-3">
+					<c:set var="disbled" value=""/>
+					<c:if test="${empty calculoResponse.numForm }">
+						<c:set var="disabled" value="disabled"/>	
+					</c:if>
+					
+					<button id="generaDeclaracionReteICAButton" class="btn btn-primary btn-lg" type="button" ${disabled }>
+						<spring:theme code="reteica.declaracion.firma.presendecla" />
+					</button>
+				</div>
+					<div class="col-md-3">
+					<button id="" class="btn btn-primary btn-lg" type="button">
+						<spring:theme code="reteica.declaracion.firma.paglinea" />
+					</button>
 				</div>
 			</div>
 
@@ -84,14 +108,12 @@
 
 		var tam = $(".firma").length;
 		if ($(".firma").length < 3) {
-			$($(".firma")[0]).parent().append(
-					$($(".firma")[0]).clone());
-			$($(".firma")[0]).parent().children().last().find(".tipodoc")
+			$($(".firma")[0]).parent().append($($(".firma")[0]).clone());
+			$($(".firma")[0]).parent().children().last().find(".tipodoc").val(
+					"")
+			$($(".firma")[0]).parent().children().last().find(".numdoc")
 					.val("")
-			$($(".firma")[0]).parent().children().last().find(".numdoc").val(
-					"")
-			$($(".firma")[0]).parent().children().last().find(".name").val(
-					"")
+			$($(".firma")[0]).parent().children().last().find(".name").val("")
 
 		} else {
 			alert("No se pueden agregar más registros");

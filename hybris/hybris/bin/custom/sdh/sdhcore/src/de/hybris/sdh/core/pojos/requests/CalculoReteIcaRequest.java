@@ -96,7 +96,7 @@ public class CalculoReteIcaRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numForm\":\"" + ((StringUtils.isBlank(this.valorPagar)) ? "" : this.valorPagar) + "\",");
+		stringBuilder.append("\"numForm\":\"" + ((StringUtils.isBlank(this.numForm)) ? "" : this.numForm) + "\",");
 		stringBuilder.append("\"numBP\":\"" + ((StringUtils.isBlank(this.numBP)) ? "" : this.numBP) + "\",");
 		stringBuilder.append("\"valorPagar\":\"" + ((StringUtils.isBlank(this.valorPagar)) ? "" : this.valorPagar) + "\"");
 

@@ -101,7 +101,7 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.areasusos.cauexen" /></label>
-					<sf:select class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep"
+					<sf:select id="causalexcencion" class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep"
 						items="${dataForm.catalogos.causalExencion}" disabled="true"></sf:select>
 				</div>
 			</div>
@@ -109,3 +109,30 @@
 
 </div>
 
+
+<script>
+
+function presupuestoObraCHANGE(selectObject) {
+	
+	debugger;
+	
+	var x = selectObject.value;
+	//Validacion presupuesto de obra = 02
+	var totalRetencion = document.getElementById('totalRetencion');
+	var totalRetencionOBLIGATORIO = document
+			.getElementById('totalRetencionOBLIGATORIO');
+	var presupuestoObra = selectObject.value;
+	var caus = document.getElementById('causalexcencion');
+	
+	if (presupuestoObra == "02") {
+		totalRetencion.disabled = false;
+		totalRetencionOBLIGATORIO.value = 'X';
+		caus.value = '02';
+		
+		
+	} else {
+		totalRetencion.disabled = true;
+	}
+
+}
+</script>

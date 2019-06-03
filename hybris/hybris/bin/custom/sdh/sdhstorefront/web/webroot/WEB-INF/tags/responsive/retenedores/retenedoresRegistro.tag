@@ -137,7 +137,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="reteica.inicial.carga.seleccionar" /></label><input id="retencionesFile" name="retencionesFile" type="file"
-						class="form-control" id="" accept=".csv">
+						class="form-control" id="" accept=".txt">
 				</div>
 			</div>
 		</div>

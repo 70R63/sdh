@@ -35,34 +35,7 @@
 		}
 	}
 
-	function obranueva(selectObject) {
-
-		debugger;
-		var value = selectObject.value;
-		var areaintervenida = document.getElementById('selectareinter');
-		var inareainter = document.getElementById('inputareainter');
-
-		if (value == '6') {
-
-			areaintervenida.disabled = false;
-			inareainter.disabled = false;
-
-		} else {
-			areaintervenida.disabled = true;
-			inareainter.disabled = true;
-		}
-
-		//Validacion presupuesto de obra = 02
-		var presupuestoObra = document.getElementById('presupuestoObra');
-		var totalRetencion = document.getElementById('totalRetencion');
-
-		if (presupuestoObra == '02') {
-			totalRetencion.disabled = false;
-		} else {
-			totalRetencion.disabled = true;
-		}
-
-	}
+	
 
 	function costoshabil(selectObject) {
 
@@ -94,7 +67,7 @@
 
 	function presupuestoObraCHANGE(selectObject) {
 
-		debugger;
+		
 		//Validacion presupuesto de obra = 02
 		var totalRetencion = document.getElementById('totalRetencion');
 		var totalRetencionOBLIGATORIO = document
@@ -107,12 +80,25 @@
 		} else {
 			totalRetencion.disabled = true;
 		}
+		
+		
+		var incor = selectObject.value;
+		var tot= document.getElementById('totalRetencion');
+		var pres= document.getElementById('totalpresu');
+		
+		if(incor=='02'){
+			tot.readOnly=false;
+			pres.readOnly=false;
+		}else{
+			tot.readOnly=true;
+			pres.readOnly=true;
+		}
 
 	}
 
 	function validarAntesCalculo() {
 
-		debugger;
+	
 		var totalRetencion = document.getElementById('totalRetencion').value;
 		var totalRetencionOBLIGATORIO = document
 				.getElementById('totalRetencionOBLIGATORIO').value;
@@ -139,6 +125,34 @@
 
 	}
 	
+	function pagarlinea(){
+		
+		var habipag = document.getElementById('action');
+		
+		habipag.disabled = false;
+		
+	}
+	
+	function presdecla(){
+		 var habidec = document.getElementById('duGeneraDeclaracionButton');
+		 habidec.disabled = false;
+	}
+	
+	window.onload = function data() {
+		debugger;
+		var incor = document.getElementById('presupuestoObra').value;
+		
+		var tot= document.getElementById('totalRetencion');
+		var pres= document.getElementById('totalpresu');
+		
+		if(incor=='02'){
+			tot.readOnly=false;
+			pres.readOnly=false;
+		}else{
+			tot.readOnly=true;
+			pres.readOnly=true;
+		}
+	}
 	
 </script>
 
