@@ -85,24 +85,40 @@ ACC.reteica = {
 		            success: function (data) {
 		            	if(!data.errores)
 		            	{
-			            	$("#baseReten").val(data.infoDeclara.baseReten)
-			            	$("#totalRetePer").val(data.infoDeclara.totalRetePer)
-			            	$("#descDevol").val(data.infoDeclara.descDevol)
-			            	$("#totalReteDecl").val(data.infoDeclara.totalReteDecl)
-			            	$("#sancion").val(data.infoDeclara.sancion)
-			            	$("#totalSaldo").val(data.infoDeclara.totalSaldo)
-			            	$("#valorPagar").val(data.infoDeclara.valorPagar)
-			            	$("#interesMora").val(data.infoDeclara.interesMora)
-			            	$("#totalPagar").val(data.infoDeclara.totalPagar)
-			            	
-			            	$("#numForm").val(data.numForm)
+		            		if(data.numForm == "")
+		            		{
+			            		$("#generaDeclaracionReteICAButton").attr("disabled",true);
+		            		}else
+		            		{
+		            			$("#numForm").val(data.numForm);
+		            			$("#generaDeclaracionReteICAButton").attr("disabled",false);
+		            		}
 		            		
-			            	$( "#dialogReteICA" ).dialog( "open" );
-			     	 		$("#reteICADialogContent").html("");
-			     	 		$("#reteICADialogContent").html("Calculo realizado exitosamente");
-		            		
+		            		if(data.infoDeclara)
+		            		{
+		            			$("#baseReten").val(data.infoDeclara.baseReten)
+				            	$("#totalRetePer").val(data.infoDeclara.totalRetePer)
+				            	$("#descDevol").val(data.infoDeclara.descDevol)
+				            	$("#totalReteDecl").val(data.infoDeclara.totalReteDecl)
+				            	$("#sancion").val(data.infoDeclara.sancion)
+				            	$("#totalSaldo").val(data.infoDeclara.totalSaldo)
+				            	$("#valorPagar").val(data.infoDeclara.valorPagar)
+				            	$("#interesMora").val(data.infoDeclara.interesMora)
+				            	$("#totalPagar").val(data.infoDeclara.totalPagar)
+				            	
+				            	$( "#dialogReteICA" ).dialog( "open" );
+				     	 		$("#reteICADialogContent").html("");
+				     	 		$("#reteICADialogContent").html("Calculo realizado exitosamente");
+				     	 		
+		            		}else
+	            			{
+		            			$( "#dialogReteICA" ).dialog( "open" );
+				     	 		$("#reteICADialogContent").html("");
+				     	 		$("#reteICADialogContent").html("Hubo un problema al realizar el cálculo, por favor intentelo más tarde.");
+	            			}
 		            	}else
 		            	{
+		            		$("#generaDeclaracionReteICAButton").attr("disabled",true);
 		            		$( "#dialogReteICA" ).dialog( "open" );
 		            		$("#reteICADialogContent").html("");
 	    	            	$.each(data.errores,function (index, value)

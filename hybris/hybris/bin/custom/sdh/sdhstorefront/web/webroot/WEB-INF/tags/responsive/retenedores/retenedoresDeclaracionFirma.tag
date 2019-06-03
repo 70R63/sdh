@@ -80,7 +80,12 @@
 					</button>
 				</div>
 					<div class="col-md-3">
-					<button id="generaDeclaracionReteICAButton" class="btn btn-primary btn-lg" type="button">
+					<c:set var="disbled" value=""/>
+					<c:if test="${empty calculoResponse.numForm }">
+						<c:set var="disabled" value="disabled"/>	
+					</c:if>
+					
+					<button id="generaDeclaracionReteICAButton" class="btn btn-primary btn-lg" type="button" ${disabled }>
 						<spring:theme code="reteica.declaracion.firma.presendecla" />
 					</button>
 				</div>
