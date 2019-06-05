@@ -98,29 +98,26 @@
 
 	function validarAntesCalculo() {
 
-	
 		var totalRetencion = document.getElementById('totalRetencion').value;
+		totalRetencion = totalRetencion.trimLeft();
+		totalRetencion = totalRetencion.trimRight();
 		var totalRetencionOBLIGATORIO = document
 				.getElementById('totalRetencionOBLIGATORIO').value;
-
-		if (totalRetencionOBLIGATORIO == "X") {
-			
-			if(totalRetencion==''){
-				document.form.submit();
-				totalRetencion=='0';
-				return true;
-			}
-
-			if (totalRetencion <= 0) {
-				alert("Debido al valor en el campo \"Presupuesto de obra\" el campo \"Valor de retención\" será obligatorio (su valor deberá ser mayor o igual a cero)");
-				return false;
-			} else{
-				document.form.submit();
-				return true;
-			}
+		var totalRetencionFLOAT = parseFloat(totalRetencion);
+		var esValido = false;
+		
+		if ((totalRetencionOBLIGATORIO == "X") && (!isNaN(totalRetencionFLOAT)) && (totalRetencionFLOAT >= 0) ) {
+			esValido = true;
 		} else {
+			esValido = false;
+		}
+		
+		if(esValido == true){
 			document.form.submit();
 			return true;
+		}else{
+			alert("Debido al valor en el campo \"Presupuesto de obra\" el campo \"Valor de retención\" será obligatorio (su valor deberá ser mayor o igual a cero)");
+			return false;			
 		}
 
 	}
@@ -146,7 +143,6 @@
 	}
 	
 	window.onload = function data() {
-		debugger;
 		var incor = document.getElementById('presupuestoObra').value;
 		
 		var tot= document.getElementById('totalRetencion');

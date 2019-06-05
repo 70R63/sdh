@@ -34,10 +34,21 @@
 		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.valrete" /></label> <input id="totalRetencion"
-					name="totalRetencion" class="form-control" aria-required="true" type="text"
-					value="${dataForm.infObjetoDelineacion.infoDeclara.totalRetencion}" maxlength="240" disabled>
+						code="delineacion.urbana.dec.liqpriv.valrete" /></label> 
+<!-- 					<input id="totalRetencion" -->
+<!-- 					name="totalRetencion" class="form-control" aria-required="true" type="text" -->
+<%-- 					value="${dataForm.infObjetoDelineacion.infoDeclara.totalRetencion}" maxlength="240" disabled> --%>
 					<sf:hidden path="input.totalRetencionOBLIGATORIO" id="totalRetencionOBLIGATORIO"/>
+					<c:if test="${empty totalRetencionOBLIGATORIO}">
+						<sf:input id="totalRetencion" class="form-control" readonly="true"
+						aria-required="true" maxlength="240"
+						path="infObjetoDelineacion.infoDeclara.totalRetencion" readOnly="true"/>						
+					</c:if>
+					<c:if test="${not empty totalRetencionOBLIGATORIO}">
+						<sf:input id="totalRetencion" class="form-control" readonly="true"
+						aria-required="true" maxlength="240"
+						path="infObjetoDelineacion.infoDeclara.totalRetencion" readOnly="false"/>						
+					</c:if>
 			</div>
 		</div>
 	</div>
