@@ -187,7 +187,8 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 		}
 
 
-		final Boolean fileSent = sdhReteIcaFacade.writeFile(retencionesFile);
+		final Boolean fileSent = sdhReteIcaFacade.writeFile(retencionesFile, customerData.getNumBP(),
+				request.getNumObjeto() != null ? request.getNumObjeto() : "");
 
 		if (!Boolean.TRUE.equals(fileSent))
 		{
