@@ -104,10 +104,17 @@
 				.getElementById('totalRetencionOBLIGATORIO').value;
 
 		if (totalRetencionOBLIGATORIO == "X") {
+			
+			if(totalRetencion==''){
+				document.form.submit();
+				totalRetencion=='0';
+				return true;
+			}
+
 			if (totalRetencion <= 0) {
 				alert("Debido al valor en el campo \"Presupuesto de obra\" el campo \"Valor de retención\" será obligatorio (su valor deberá ser mayor o igual a cero)");
 				return false;
-			} else {
+			} else{
 				document.form.submit();
 				return true;
 			}
