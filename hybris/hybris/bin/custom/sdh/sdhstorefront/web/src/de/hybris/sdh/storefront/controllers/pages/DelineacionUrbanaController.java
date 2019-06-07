@@ -509,8 +509,9 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final CalculoImpDelineacionRequest infoDelineacionRequest = new CalculoImpDelineacionRequest();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
-		final String mensajeError = "";
+		String mensajeError = "";
 		String paginaDestino = "";
+		String[] mensajesError;
 		//		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
 
@@ -545,7 +546,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		}
 		catch (final Exception e)
 		{
-			//						mensajeError = infoDelineacionResponse.getErrores();
+			mensajeError = gasolinaService.prepararMensajeError(infoDelineacionResponse.getErrores());
 			LOG.error("Error al leer informacion de calculo de Delineacion: " + mensajeError);
 			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
 		}
@@ -561,9 +562,10 @@ public class DelineacionUrbanaController extends AbstractPageController
 		}
 		else
 		{
-			//			mensajeError = detalleContribuyente.getTxtmsj();
-			//			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
-			//			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+			mensajesError = gasolinaService.prepararMensajesError(infoDelineacionResponse.getErrores());
+			LOG.error("Error al leer informacion del calculo: " + mensajeError);
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoDelineacion.calculoImpuesto.error1.attrib1", mensajesError);
 		}
 
 

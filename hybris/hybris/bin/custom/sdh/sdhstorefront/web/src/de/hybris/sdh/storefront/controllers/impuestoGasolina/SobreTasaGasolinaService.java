@@ -851,14 +851,39 @@ public class SobreTasaGasolinaService
 		{
 			for (int i = 0; i < errores.size(); i++)
 			{
-				mensajeError = "ID= " + errores.get(i).getIdmsj() + " Mensaje = " + errores.get(i).getTxtmsj();
-				mensajes.add(mensajeError);
+				if (!errores.get(i).getIdmsj().isEmpty() && !errores.get(i).getIdmsj().equals("0"))
+				{
+					mensajeError = "ID= " + errores.get(i).getIdmsj() + " Mensaje = " + errores.get(i).getTxtmsj();
+					mensajes.add(mensajeError);
+				}
 			}
 		}
 		listaMensajes = new String[mensajes.size()];
 		listaMensajes = mensajes.toArray(listaMensajes);
 
 		return listaMensajes;
+	}
+
+	public String prepararMensajeError(final List<ErrorEnWS> errores)
+	{
+		final List<String> mensajes = new ArrayList<String>();
+		final String[] listaMensajes;
+		String mensajeError = "";
+		final StringBuffer sb = new StringBuffer();
+
+		if (errores != null)
+		{
+			for (int i = 0; i < errores.size(); i++)
+			{
+				if (!errores.get(i).getIdmsj().isEmpty() && errores.get(i).getIdmsj().equals("0"))
+				{
+					sb.append("ID= " + errores.get(i).getIdmsj() + " Mensaje = " + errores.get(i).getTxtmsj());
+				}
+			}
+		}
+		mensajeError = sb.toString();
+
+		return mensajeError;
 	}
 
 
@@ -1548,9 +1573,24 @@ public class SobreTasaGasolinaService
 	 */
 	public boolean ocurrioErrorInfoDelineacion(final InfoObjetoDelineacionResponse infoDelineacionResponse)
 	{
+		boolean ocurrioError = false;
+		final List<ErrorEnWS> errores;
+
+		if (infoDelineacionResponse.getErrores() != null)
+		{
+			for (int i = 0; i < infoDelineacionResponse.getErrores().size(); i++)
+			{
+				if (!infoDelineacionResponse.getErrores().get(i).getIdmsj().isEmpty()
+						&& !infoDelineacionResponse.getErrores().get(i).getIdmsj().equals("0"))
+				{
+					ocurrioError = true;
+					break;
+				}
+			}
+		}
 
 
-		return false;
+		return ocurrioError;
 	}
 
 
