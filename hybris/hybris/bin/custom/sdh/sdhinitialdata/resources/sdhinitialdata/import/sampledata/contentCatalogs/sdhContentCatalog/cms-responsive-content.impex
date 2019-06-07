@@ -1,4 +1,4 @@
-# ImpEx for Responsive Public Sector Site CMS Content 
+﻿# ImpEx for Responsive Public Sector Site CMS Content 
 # 
 $contentCatalog=sdhContentCatalog 
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
@@ -2139,4 +2139,25 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;sobreVehiculosMotosDeclaracionPageComponent	;sobreVehiculosMotosDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosMotosDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosMotosDeclaracionPageComponent	
 
 #->FIN dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion motos  22/05/2019
+
+#->INI dev-maria Agregar paginas terceros consultas 07/06/2019
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;tercerosConsultas 		;Terceros Consultas	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/consultas/inicial
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tercerosConsultas']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-tercerosConsultas 	;SideContent			;																	;SideContent-tercerosConsultas				;;;
+								;						;BodyContent-tercerosConsultas 	;BodyContent			;																	;BodyContent-tercerosConsultas				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-tercerosConsultas 	;Side Content Slot for Terceros Consultas	;true	;								;;;
+							;							;BodyContent-tercerosConsultas	;Body Content Slot for Terceros Consultas	;true	;tercerosConsultasComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;tercerosConsultasComponent	;tercerosConsultas Component	;/WEB-INF/views/responsive/pages/layout/tercerosConsultas.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosConsultasComponent	
+
+#->FIN dev-maria Agregar paginas para terceros consultas 07/06/2019
 									
