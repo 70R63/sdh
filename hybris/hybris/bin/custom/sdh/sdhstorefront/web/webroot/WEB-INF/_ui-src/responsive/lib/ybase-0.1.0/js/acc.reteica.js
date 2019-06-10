@@ -50,7 +50,7 @@ ACC.reteica = {
 		 $(document).on("click", "#actualizarButton", function (e) {
 			 e.preventDefault();
 			 
-			 var valorPagar =  $.trim( $("#totalPagar").val());
+			 var valorPagar =  $.trim( $("#valorPagar").val());
 			 
 			 if(valorPagar == "")
 			 {
