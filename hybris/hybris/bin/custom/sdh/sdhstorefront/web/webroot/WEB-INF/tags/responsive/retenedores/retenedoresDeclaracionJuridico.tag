@@ -89,8 +89,9 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
-									code="reteica.declaracion.juridico.valpag" /></label> <input id="valorPagar"
-								name="" class="form-control" type="text" value="${calculoResponse.infoDeclara.valorPagar }"
+									code="reteica.declaracion.juridico.valpag" /></label> 
+							<input id="totalPagar"
+								name="" class="form-control"  type="text" value="${calculoResponse.infoDeclara.totalPagar }"
 								maxlength="240"
 								style="width: 280px !important; text-align: center !important"></input>
 						</div>
@@ -111,8 +112,9 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label class="control-label"><spring:theme
-									code="reteica.declaracion.juridico.totpagar" /></label> <input id="totalPagar"
-								name="" class="form-control" disabled type="text" value="${calculoResponse.infoDeclara.totalPagar }"
+									code="reteica.declaracion.juridico.totpagar" /></label> 
+								<input id="valorPagar"
+								name="" class="form-control" disabled type="text" value="${calculoResponse.infoDeclara.valorPagar }"
 								maxlength="240"
 								style="width: 280px !important; text-align: center !important"></input>
 						</div>
