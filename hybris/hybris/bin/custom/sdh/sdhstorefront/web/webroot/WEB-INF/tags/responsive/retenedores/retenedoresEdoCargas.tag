@@ -98,8 +98,7 @@
 										code="reteica.consulta.estado.detalle" /></label></td>
 							<td><label class="control-label labeltabletd "><spring:theme
 										code="reteica.consulta.estado.deseacargar" /></label></td>
-							<td><label class="control-label labeltabletd "><spring:theme
-										code="" /></label></td>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -118,7 +117,7 @@
 										value="" type="text" /></td>
 									<td><input class="inputtextnew" disabled="disabled"
 										value="" type="text" /></td>
-									<td></td>
+									
 								</tr>
 							</c:when>
 							<c:otherwise>
@@ -130,11 +129,23 @@
 										<td><input class="inputtextnew tablenombre"
 											disabled="disabled" value="${eachArchivo.nomArchivo }"
 											type="text" /></td>
-										<td><input class="inputtextnew " disabled="disabled"
+										<td><input class="inputtextnew " disabled="disabled" id="perRepor"
 											value="${eachArchivo.perRepor }" type="text" /></td>
-										<td><input class="inputtextnew tabledomatri"
-											disabled="disabled" value="${eachArchivo.estado }"
-											type="text" /></td>
+										<c:choose>
+											<c:when test='${(eachArchivo.estado == "02")}'>
+												<td>Rechazado</td>
+											</c:when>
+											<c:when test='${(eachArchivo.estado == "03")}'>
+												<c:url value="/retenedores/declaracion" var="urlPresentar" />
+												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }">Presentar Declaración</a></td>
+											</c:when>
+											<c:when test='${(eachArchivo.estado == "04")}'>
+												<td>Procesado</td>
+											</c:when>
+											<c:otherwise>
+												<td></td>
+											</c:otherwise>
+										</c:choose>
 										<td>
 											<c:if test="${eachArchivo.estado ne  '02' }">
 												<c:url value="/retenedores/download/log" var="urlDownload" />
@@ -143,15 +154,7 @@
 										</td>
 										<td><input class="inputtextnew" disabled="disabled"
 											value="${eachArchivo.numForm }" type="text" /></td>
-										<c:choose>
-											<c:when test='${(eachArchivo.estado == "03")}'>
-												<c:url value="/retenedores/declaracion" var="urlPresentar" />
-												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }">Presentar Declaración</a></td>
-											</c:when>
-											<c:otherwise>
-												<td></td>
-											</c:otherwise>
-										</c:choose>
+										
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -175,8 +178,50 @@
 </div>
 
 <script>
+   
+    
 	function goBack() {
 		window.history.back();
 
 	}
+	
+	
+</script>
+
+
+<script>
+    
+    function formatoPerRepor(element, index, array){
+		debugger;
+		var periodo =element.value.substring(2);  
+		if (periodo == 'B1'){
+			element.value = 'Enero-Febrero';
+		}
+		if (periodo == 'B2'){
+			element.value = 'Marzo-Abril';
+		}
+		if (periodo == 'B3'){
+			element.value = 'Enero-Febrero';
+		}
+		if (periodo == 'B4'){
+			element.value = 'Enero-Febrero';
+		}
+		if (periodo == 'B5'){
+			element.value = 'Enero-Febrero';
+		}
+		if (periodo == 'B6'){
+			element.value = 'Enero-Febrero';
+		}
+	}
+
+    
+    function formato(){
+    	debugger;
+    	var arrayPerRepor = document.querySelectorAll('#perRepor');
+    	arrayPerRepor.forEach( formatoPerRepor );
+    	
+    }
+        
+	
+	formato();
 </script>
