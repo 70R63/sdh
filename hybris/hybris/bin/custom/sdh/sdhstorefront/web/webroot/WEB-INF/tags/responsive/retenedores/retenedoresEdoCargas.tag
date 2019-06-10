@@ -152,8 +152,7 @@
 												<a href="${urlDownload}?nomArchivo=${eachArchivo.nomArchivo}">Ver log</a>
 											</c:if>
 										</td>
-										<td><input class="inputtextnew" disabled="disabled"
-											value="${eachArchivo.numForm }" type="text" /></td>
+										<td><a href="#" onClick="goBack();return false;">Desea volver a cargar</a></td>
 										
 									</tr>
 								</c:forEach>
