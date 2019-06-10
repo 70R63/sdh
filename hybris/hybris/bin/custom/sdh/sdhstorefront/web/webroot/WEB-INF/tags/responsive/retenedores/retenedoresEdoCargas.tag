@@ -201,16 +201,16 @@
 			element.value = 'Marzo-Abril';
 		}
 		if (periodo == 'B3'){
-			element.value = 'Enero-Febrero';
+			element.value = 'Mayo-Junio';
 		}
 		if (periodo == 'B4'){
-			element.value = 'Enero-Febrero';
+			element.value = 'Julio-Agosto';
 		}
 		if (periodo == 'B5'){
-			element.value = 'Enero-Febrero';
+			element.value = 'Septiembre-Octubre';
 		}
 		if (periodo == 'B6'){
-			element.value = 'Enero-Febrero';
+			element.value = 'Noviembre-Diciembre';
 		}
 	}
 
