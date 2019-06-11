@@ -123,7 +123,7 @@
 							<c:otherwise>
 								<c:forEach items="${archivosTRM }" var="eachArchivo">
 									<tr>
-										<td><input class="inputtextnew tablefechas"
+										<td><input class="inputtextnew tablefechas" id="fechaCarga"
 											disabled="disabled" value="${eachArchivo.fechaCarga }"
 											type="text" /></td>
 										<td><input class="inputtextnew tablenombre"
@@ -132,6 +132,9 @@
 										<td><input class="inputtextnew " disabled="disabled" id="perRepor"
 											value="${eachArchivo.perRepor }" type="text" /></td>
 										<c:choose>
+											<c:when test='${(eachArchivo.estado == "01")}'>
+												<td>Proceso iniciado</td>
+											</c:when>
 											<c:when test='${(eachArchivo.estado == "02")}'>
 												<td>Rechazado</td>
 											</c:when>
@@ -152,7 +155,16 @@
 												<a href="${urlDownload}?nomArchivo=${eachArchivo.nomArchivo}">Ver log</a>
 											</c:if>
 										</td>
-										<td><a href="#" onClick="goBack();return false;">Desea volver a cargar</a></td>
+										<c:choose>
+											<c:when test='${(eachArchivo.bandera == "X")}'>
+												<td><a href="#" onClick="goBack();return false;">Desea volver a cargar</a></td>
+											</c:when>
+											<c:otherwise>
+												<td>Desea volver a cargar</td>
+											</c:otherwise>
+										</c:choose>
+										
+										
 										
 									</tr>
 								</c:forEach>
@@ -212,8 +224,8 @@
 			element.value = 'Noviembre-Diciembre';
 		}
 	}
-
     
+        
     function formato(){
     	debugger;
     	var arrayPerRepor = document.querySelectorAll('#perRepor');

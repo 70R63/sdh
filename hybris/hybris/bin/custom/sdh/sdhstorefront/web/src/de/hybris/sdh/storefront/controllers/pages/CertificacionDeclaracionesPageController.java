@@ -486,14 +486,15 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 			certiFormPostRedirect.setPeriodo(certiFormPost.getPeriodo());
 			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
 
-			if (customerData.getReteIcaTax() != null)
+			if (customerData.getReteIcaTax() != null && certiFormPost.getAniograv() != null && certiFormPost.getPeriodo() != null)
 			{
 
 				final ICAInfObjetoRequest reteIcaInfObjetoRequest = new ICAInfObjetoRequest();
 				ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
 
 				reteIcaInfObjetoRequest.setNumBP(customerData.getNumBP());
-				reteIcaInfObjetoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+				reteIcaInfObjetoRequest.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
+
 
 				try
 				{
