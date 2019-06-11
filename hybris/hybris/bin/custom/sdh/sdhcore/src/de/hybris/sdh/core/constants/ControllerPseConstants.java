@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.hybris.sdh.storefront.controllers;
+package de.hybris.sdh.core.constants;
 
 /**
  * @author edson.roa
@@ -40,7 +40,6 @@ public class ControllerPseConstants
 		RETEICA = "31";
 		RETENCIONDU = "32";
 		PUBLICIDAD = "54";
-
 		GASOLINA = "2308"; // no se eucuentra en la tabla
 
 
