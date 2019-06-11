@@ -19,6 +19,8 @@ public class ArchivosTRM
 
 	private String numForm;
 
+	private String bandera;
+
 	/**
 	 * @return the fechaCarga
 	 */
@@ -103,6 +105,25 @@ public class ArchivosTRM
 	{
 		this.numForm = numForm;
 	}
+
+	/**
+	 * @return the bandera
+	 */
+	public String getBandera()
+	{
+		return bandera;
+	}
+
+	/**
+	 * @param bandera
+	 *           the bandera to set
+	 */
+	public void setBandera(final String bandera)
+	{
+		this.bandera = bandera;
+	}
+
+
 
 
 
