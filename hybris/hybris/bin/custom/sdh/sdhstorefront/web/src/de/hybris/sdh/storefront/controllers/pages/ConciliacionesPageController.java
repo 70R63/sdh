@@ -85,7 +85,8 @@ public class ConciliacionesPageController extends AbstractPageController
 				{ importConciliacionForm.getConciliacionFile().getOriginalFilename() });
 
 
-		sdhConciliacionesFacade.processConciliacionesFile(importConciliacionForm.getConciliacionFile());
+		//sdhConciliacionesFacade.processConciliacionesFile(importConciliacionForm.getConciliacionFile());
+		sdhConciliacionesFacade.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
 
 
 		return "redirect:/conciliaciones";

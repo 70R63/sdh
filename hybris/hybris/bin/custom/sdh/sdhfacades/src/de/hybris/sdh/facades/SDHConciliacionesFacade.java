@@ -17,4 +17,6 @@ public interface SDHConciliacionesFacade
 	void processConciliacionesFile(MultipartFile file);
 
 	CertStatus checkCertificates(MultipartFile multipartFile);
+
+	void validade7ZipCertificates(MultipartFile multipartFile);
 }

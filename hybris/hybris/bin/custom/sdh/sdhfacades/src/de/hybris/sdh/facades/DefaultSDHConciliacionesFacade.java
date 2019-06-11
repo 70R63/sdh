@@ -54,7 +54,7 @@ public class DefaultSDHConciliacionesFacade implements SDHConciliacionesFacade
 		final String ftpPassword = configurationService.getConfiguration().getString("sdh.conciliaciones.ftp.password");
 
 		final FTPClient client = new FTPClient();
-		client.setBufferSize(1024000);
+		client.setBufferSize(9843540);
 
 
 		try
@@ -91,6 +91,7 @@ public class DefaultSDHConciliacionesFacade implements SDHConciliacionesFacade
 
 			for (final ISimpleInArchiveItem item : simpleInArchive.getArchiveItems())
 			{
+
 				final int[] hash = new int[] { 0 };
 				if (!item.isFolder() && item.getPath().contains(".txt"))
 				{
@@ -199,11 +200,94 @@ public class DefaultSDHConciliacionesFacade implements SDHConciliacionesFacade
 	@Override
 	public CertStatus checkCertificates(final MultipartFile multipartFile)
 	{
-
-
-
-
 		return RevocationStatus.CertStatus.GOOD;
+	}
+
+
+
+
+	/* (non-Javadoc)
+	 * @see de.hybris.sdh.facades.SDHConciliacionesFacade#validade7ZipCertificates(org.springframework.web.multipart.MultipartFile)
+	 */
+	@Override
+	public void validade7ZipCertificates(final MultipartFile multipartFile)
+	{
+		final long startTime = System.nanoTime();
+		ISevenZipInArchive inArchive = null;
+		ISimpleInArchive simpleInArchive = null;
+		RandomAccessFile randomAccessFile = null;
+		File zip = null;
+
+		LOG.info("  Validating 7Zip Certificate ");
+		LOG.info("----------+------------+---------");
+
+
+		try
+		{
+			zip = File.createTempFile(UUID.randomUUID().toString(), "temp");
+			final FileOutputStream o = new FileOutputStream(zip);
+			IOUtils.copy(multipartFile.getInputStream(), o);
+			o.close();
+
+			randomAccessFile = new RandomAccessFile(zip.getAbsolutePath(), "r");
+			inArchive = SevenZip.openInArchive(null, new RandomAccessFileInStream(randomAccessFile));
+			simpleInArchive = inArchive.getSimpleInterface();
+
+
+			for (final ISimpleInArchiveItem item : simpleInArchive.getArchiveItems())
+			{
+				final int[] hash = new int[] { 0 };
+				LOG.info(item.getPath());
+				if (!item.isFolder() && item.getPath().contains(".cer"))
+				{
+
+				}
+			}
+		}
+		catch (final SevenZipException e)
+		{
+			LOG.error("Error extracting item: " + e.getMessage());
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Error occurs: " + e);
+		}
+		finally
+		{
+			if (inArchive != null)
+			{
+				try
+				{
+					inArchive.close();
+				}
+				catch (final SevenZipException e)
+				{
+					LOG.error("Error closing archive: " + e);
+				}
+			}
+			if (randomAccessFile != null)
+			{
+				try
+				{
+					randomAccessFile.close();
+				}
+				catch (final IOException e)
+				{
+					LOG.error("Error closing file: " + e);
+				}
+			}
+			if (zip != null)
+			{
+				zip.delete();
+			}
+
+		}
+
+		final long estimatedTime = System.nanoTime() - startTime;
+
+		LOG.info("All process took: " + (estimatedTime / 1000) + "ms");
+		// XXX Auto-generated method stub
+
 	}
 
 }
