@@ -5,8 +5,8 @@ package de.hybris.sdh.facades;
 
 import de.hybris.sdh.core.pojos.requests.CalculoReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.LogReteIcaRequest;
-import de.hybris.sdh.core.pojos.requests.ReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaFileStatusInTRMRequest;
+import de.hybris.sdh.core.pojos.requests.ReteIcaRequest;
 import de.hybris.sdh.core.pojos.responses.CalculoReteIcaResponse;
 import de.hybris.sdh.core.pojos.responses.LogReteIcaResponse;
 import de.hybris.sdh.core.pojos.responses.ReteIcaResponse;
@@ -30,7 +30,7 @@ public interface SDHReteIcaFacade
 
 	Boolean sendFile(MultipartFile multipartFile);
 
-	Boolean writeFile(MultipartFile multipartFile);
+	Boolean writeFile(MultipartFile multipartFile, String numBP, String numObjeto);
 
 	String getFileStatusInTRM(ReteIcaFileStatusInTRMRequest request);
 

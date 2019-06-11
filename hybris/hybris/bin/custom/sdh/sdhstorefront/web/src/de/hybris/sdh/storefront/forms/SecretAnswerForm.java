@@ -15,6 +15,7 @@ public class SecretAnswerForm
 	private String DIR;
 	private String AGE;
 	private String DIR2;
+	private String IMP;
 
 	/**
 	 * @return the fNAM
@@ -116,6 +117,23 @@ public class SecretAnswerForm
 	public void setDIR2(final String dIR2)
 	{
 		DIR2 = dIR2;
+	}
+
+	/**
+	 * @return the iMP
+	 */
+	public String getIMP()
+	{
+		return IMP;
+	}
+
+	/**
+	 * @param iMP
+	 *           the iMP to set
+	 */
+	public void setIMP(final String iMP)
+	{
+		IMP = iMP;
 	}
 
 

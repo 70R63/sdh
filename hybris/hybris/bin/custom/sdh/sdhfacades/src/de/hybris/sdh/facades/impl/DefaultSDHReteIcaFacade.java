@@ -7,6 +7,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.LogReteIcaRequest;
+import de.hybris.sdh.core.pojos.requests.ReteIcaAvisoArchivoRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaFileStatusInTRMRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaRequest;
 import de.hybris.sdh.core.pojos.responses.ArchivosTRM;
@@ -186,7 +187,7 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 	}
 
 	@Override
-	public Boolean writeFile(final MultipartFile multipartFile)
+	public Boolean writeFile(final MultipartFile multipartFile,final String numBP,final String numObjeto)
 	{
 		final String directory = configurationService.getConfiguration().getString("sdh.reteica.nfs.directory");
 
@@ -194,6 +195,28 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 		try
 		{
 			multipartFile.transferTo(file);
+
+			final ReteIcaAvisoArchivoRequest request = new ReteIcaAvisoArchivoRequest();
+			request.setNumBP(numBP);
+			request.setNumObjeto(numObjeto);
+
+			final String fileName = multipartFile.getOriginalFilename();
+
+			final List<String> archivos = new ArrayList<String>();
+			archivos.add(fileName.substring(0, fileName.length() - 4));
+			request.setArchivos(archivos);
+
+			final Boolean aviso = sdhReteIcaService.avisoArchivo(request );
+
+			if (!Boolean.TRUE.equals(aviso))
+			{
+				LOG.error("not able to notice TRM about new file");
+				if (file != null && file.exists())
+				{
+					file.delete();
+				}
+				return false;
+			}
 		}
 		catch (IllegalStateException | IOException e)
 		{
