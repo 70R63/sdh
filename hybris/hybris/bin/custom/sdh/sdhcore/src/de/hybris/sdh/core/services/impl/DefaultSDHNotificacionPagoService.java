@@ -5,6 +5,7 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.PseNotificacionDePagoRequest;
@@ -89,7 +90,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setProcPago("03");
 			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
 			pseNotificacionDePagoRequest.setHorRecaudo(horaRecaudo);
-			pseNotificacionDePagoRequest.setCodImpuesto("08"); // 08 Gasolina
+			pseNotificacionDePagoRequest.setCodImpuesto(transaction.getTipoDeImpuesto()); // 08 Gasolina
 			pseNotificacionDePagoRequest.setTipoHorario("0");
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
@@ -97,12 +98,25 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setNumOperacion("9999999");
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
 
-			this.realizarNotificacion(pseNotificacionDePagoRequest);
+			this.realizarNotificacion(validateTransaction(pseNotificacionDePagoRequest));
 
 			transaction.setNotificacionDeRecaudo("SI");
 			modelService.saveAll(transaction);
 		}
 
+	}
+
+	private PseNotificacionDePagoRequest validateTransaction(final PseNotificacionDePagoRequest pseNotificacionDePagoRequest) {
+		final PseNotificacionDePagoRequest newPseNotificacionDePagoRequest = pseNotificacionDePagoRequest;
+		final ControllerPseConstants cont = new ControllerPseConstants();
+
+		if (pseNotificacionDePagoRequest.getCodImpuesto().equals(cont.getGASOLINA())){
+			newPseNotificacionDePagoRequest.setIdBancos("01"); //01 Banco de Bogotá
+		}else if (pseNotificacionDePagoRequest.getCodImpuesto().equals(cont.getPUBLICIDAD())){
+			newPseNotificacionDePagoRequest.setIdBancos("51"); //51 Banco Davivienda.
+		}
+
+		return newPseNotificacionDePagoRequest;
 	}
 
 }
