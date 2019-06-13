@@ -70,11 +70,15 @@
 		
 		//Validacion presupuesto de obra = 02
 		var totalRetencion = document.getElementById('totalRetencion');
+		var causalexcencion = document.getElementById('causalexcencion');
+		
 		var totalRetencionOBLIGATORIO = document
 				.getElementById('totalRetencionOBLIGATORIO');
 		var presupuestoObra = selectObject.value;
+		var valCausalExcencion = causalexcencion.value;
 
-		if (presupuestoObra == "02") {
+        if (presupuestoObra == "02" &&  valCausalExcencion != "00" ) {
+
 			totalRetencion.disabled = false;
 			totalRetencionOBLIGATORIO.value = 'X';
 		} else {

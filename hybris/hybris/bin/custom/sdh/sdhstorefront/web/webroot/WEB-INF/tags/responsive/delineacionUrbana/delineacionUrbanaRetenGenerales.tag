@@ -119,12 +119,16 @@ function presupuestoObraCHANGE(selectObject) {
 	var x = selectObject.value;
 	//Validacion presupuesto de obra = 02
 	var totalRetencion = document.getElementById('totalRetencion');
+	var causalexcencion = document.getElementById('causalexcencion');
+	
+	
 	var totalRetencionOBLIGATORIO = document
 			.getElementById('totalRetencionOBLIGATORIO');
 	var presupuestoObra = selectObject.value;
-	var caus = document.getElementById('causalexcencion');
-	
-	if (presupuestoObra == "02") {
+	var valCausalExcencion = causalexcencion.value;
+
+    if (presupuestoObra == "02" &&  valCausalExcencion != "00" ) {
+
 		totalRetencion.disabled = false;
 		totalRetencionOBLIGATORIO.value = 'X';
 		caus.value = '02';
