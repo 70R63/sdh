@@ -97,7 +97,7 @@
 	}
 
 	function validarAntesCalculo() {
-
+			
 		var totalRetencion = document.getElementById('totalRetencion').value;
 		totalRetencion = totalRetencion.trimLeft();
 		totalRetencion = totalRetencion.trimRight();
@@ -108,10 +108,14 @@
 		
 		if ((totalRetencionOBLIGATORIO == "X") && (!isNaN(totalRetencionFLOAT)) && (totalRetencionFLOAT >= 0) ) {
 			esValido = true;
-		} else {
+		} else if ((totalRetencionOBLIGATORIO == "" )) {
+			esValido = true;
+		}
+		else{
 			esValido = false;
 		}
 		
+		 
 		if(esValido == true){
 			document.form.submit();
 			return true;

@@ -478,7 +478,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		else if (certiFormPost.getIdimp().equals("7"))//ReteICA
 		{
 			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
-			boolean isPeriodoAnual = true;
+			final boolean isPeriodoAnual = false;
 
 			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
 			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
@@ -486,62 +486,18 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 			certiFormPostRedirect.setPeriodo(certiFormPost.getPeriodo());
 			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
 
-			if (customerData.getReteIcaTax() != null && certiFormPost.getAniograv() != null && certiFormPost.getPeriodo() != null)
-			{
-
-				final ICAInfObjetoRequest reteIcaInfObjetoRequest = new ICAInfObjetoRequest();
-				ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
-
-				reteIcaInfObjetoRequest.setNumBP(customerData.getNumBP());
-				reteIcaInfObjetoRequest.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
-
-
-				try
-				{
-					final ObjectMapper mapper = new ObjectMapper();
-					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-					final String response = sdhICAInfObjetoService.consultaICAInfObjeto(reteIcaInfObjetoRequest);
-					icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
-
-					if (icaInfObjetoResponse.getRegimen() != null)
-					{
-						if (icaInfObjetoResponse.getRegimen().charAt(0) != '2')
-						{
-							isPeriodoAnual = false;
-						}
-					}
-				}
-				catch (final Exception e)
-				{
-					LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
-				}
-			}
-
 			redirectModel.addFlashAttribute("isPeriodoAnual", isPeriodoAnual);
 
 
-
-
-
-			if (certiFormPost.getIdimp() != null && certiFormPost.getAniograv() != null)
+			if (certiFormPost.getIdimp() != null && certiFormPost.getAniograv() != null && certiFormPost.getPeriodo() != null)
 			{
-				final String aniograv_periodo;
-				if (certiFormPost.getPeriodo() == null)
-				{
-					aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
-				}
-				else
-				{
-					aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
-				}
-
 				try
 				{
 
 					final ObjectMapper mapper = new ObjectMapper();
 					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+					final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
 
 					imprimeCertDeclaraRequest.setNumBP(customerData.getNumBP());
 					imprimeCertDeclaraRequest.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
@@ -555,7 +511,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				}
 				catch (final Exception e)
 				{
-					LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+					LOG.error("error getting customer info from SAP Certificate page: " + e.getMessage());
 					GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
 					if (!certiFormPost.getRowFrompublicidadTable().replace(",", "").equals("X"))
 					{

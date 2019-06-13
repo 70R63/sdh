@@ -7,6 +7,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -129,7 +131,7 @@
 										<td><input class="inputtextnew tablenombre"
 											disabled="disabled" value="${eachArchivo.nomArchivo }"
 											type="text" /></td>
-										<td><input class="inputtextnew " disabled="disabled" id="perRepor"
+										<td><input class="inputtextnew " disabled="disabled" id="perRepor" 
 											value="${eachArchivo.perRepor }" type="text" /></td>
 										<c:choose>
 											<c:when test='${(eachArchivo.estado == "01")}'>
@@ -140,7 +142,7 @@
 											</c:when>
 											<c:when test='${(eachArchivo.estado == "03")}'>
 												<c:url value="/retenedores/declaracion" var="urlPresentar" />
-												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }">Presentar Declaración</a></td>
+												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }">Generar declaración</a></td>
 											</c:when>
 											<c:when test='${(eachArchivo.estado == "04")}'>
 												<td>Procesado</td>
@@ -200,7 +202,7 @@
 </script>
 
 
-<script>
+<script type="text/javascript">
     
     function formatoPerRepor(element, index, array){
 		debugger;
@@ -228,7 +230,10 @@
         
     function formato(){
     	debugger;
-    	var arrayPerRepor = document.querySelectorAll('#perRepor');
+    	
+    	var inputList = document.getElementsByTagName("input");
+    	var arrayPerRepor = Array.prototype.slice.call(inputList);
+    	
     	arrayPerRepor.forEach( formatoPerRepor );
     	
     }
