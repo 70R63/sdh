@@ -197,7 +197,6 @@ public class DelineacionUrbanaController extends AbstractPageController
 		{
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
 			infoDelineacion.getInput().setTipoFlujo("R");
-			infoDelineacion.getInput().setTotalRetencionOBLIGATORIO("X");
 			infoDelineacionRequest.setRetencion("X"); //Se indico que para retencion va una X
 		}
 		if (action.equals("declaracion"))
@@ -205,7 +204,6 @@ public class DelineacionUrbanaController extends AbstractPageController
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE;
 			infoDelineacion.getInput().setTipoFlujo("D");
 			infoDelineacionRequest.setNumRadicado("");
-			infoDelineacion.getInput().setTotalRetencionOBLIGATORIO("");
 			infoDelineacionRequest.setRetencion(""); //Se indico que para retencion va una X
 		}
 
