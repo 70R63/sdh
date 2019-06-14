@@ -279,8 +279,13 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 
 		for (final ArchivosTRM eachArchivo : response.getArchivosTRM())
 		{
-			if (request.getFileName().equals(eachArchivo.getNomArchivo()))
+			if (request.getFileName().substring(0, request.getFileName().length() - 4).equals(eachArchivo.getNomArchivo()))
 			{
+				if (!"X".equalsIgnoreCase(eachArchivo.getBandera()))
+				{
+					return "-1"; //Accion no permitida
+				}
+
 				return eachArchivo.getEstado();
 			}
 		}

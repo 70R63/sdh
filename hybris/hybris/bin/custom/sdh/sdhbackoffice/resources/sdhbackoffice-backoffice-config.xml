@@ -16,7 +16,64 @@
 	<!--<context component="component-code" module="sdhbackoffice">-->
 		<!--Please check documentation for code snippets for specific components-->
 	<!--</context>-->
-	
+	<context merge-by="principal" component="explorer-tree" principal="sdhemployeegroup">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc_treenode_catalog" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc_treenode_system" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc_treenode_medias" merge-mode="remove">
+			</explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc_treenode_user" merge-mode="replace">
+				<explorer-tree:type-node code="UserGroup" id="hmc_typenode_usergroup"/>
+		        <explorer-tree:type-node code="Customer" id="hmc_typenode_customer"/>
+			</explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc_treenode_order" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc_treenode_pricesettings" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc_treenode_c2l" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc_treenode_marketing" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc.cockpit" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc_ticketsystemgroup" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc.cms2" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc.group.basecommerce" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			<explorer-tree:navigation-node id="hmc.group.basecommerce.deeplink" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc.PSRelationship" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc.PSBillPayment" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc.PSAsset" merge-mode="remove">
+
+			</explorer-tree:navigation-node>
+			
+		</explorer-tree:explorer-tree>
+	</context>
 	
 	<context merge-by="type"  type="Customer" component="editor-area" module="sdhbackoffice">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
