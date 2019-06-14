@@ -338,7 +338,8 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 		{
 			final ErrorEnWS error = new ErrorEnWS();
 			error.setIdmsj("X");
-			error.setTxtmsj("Ya existe un archivo procesado/exitoso, ¿desea reemplazarlo?.");
+			error.setTxtmsj(
+					"Se realizará una nueva carga del año y periodo indicado, la carga anterior que realizaste se sobre escribirá y quedará como final la nueva que se realice.");
 
 			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
 			errores.add(error);
@@ -353,7 +354,8 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 		{
 			final ErrorEnWS error = new ErrorEnWS();
 			error.setIdmsj("X");
-			error.setTxtmsj("Ya existe un archivo procesado/exitoso, ¿desea corregirlo?.");
+			error.setTxtmsj(
+					"Se realizara una nueva carga del año y periodo indicado. Con esta carga podrás generar una declaración pero será una corrección, ya que en el sistema ya se cuenta con una declaración presentada");
 
 			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
 			errores.add(error);
