@@ -255,7 +255,30 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 
 		final ReteIcaFileStatusInTRMRequest request = new ReteIcaFileStatusInTRMRequest();
 		request.setAnoGravable(retencionesForm.getAnoGravable());
-		request.setPeriodo(retencionesForm.getPeriodo());
+		if ("01".equalsIgnoreCase(retencionesForm.getPeriodo()))
+		{
+			request.setPeriodo("B1");
+		}
+		else if ("02".equalsIgnoreCase(retencionesForm.getPeriodo()))
+		{
+			request.setPeriodo("B2");
+		}
+		else if ("03".equalsIgnoreCase(retencionesForm.getPeriodo()))
+		{
+			request.setPeriodo("B3");
+		}
+		else if ("04".equalsIgnoreCase(retencionesForm.getPeriodo()))
+		{
+			request.setPeriodo("B4");
+		}
+		else if ("05".equalsIgnoreCase(retencionesForm.getPeriodo()))
+		{
+			request.setPeriodo("B5");
+		}
+		else if ("06".equalsIgnoreCase(retencionesForm.getPeriodo()))
+		{
+			request.setPeriodo("B6");
+		}
 		request.setNumBP(customerData.getNumBP());
 		request.setFileName(retencionesForm.getFileName());
 		if (customerData.getReteIcaTax() != null)
@@ -266,7 +289,20 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 
 		final String fileStatusInTRM = sdhReteIcaFacade.getFileStatusInTRM(request);
 
-		if ("00".equalsIgnoreCase(fileStatusInTRM))
+		if ("-1".equalsIgnoreCase(fileStatusInTRM))
+		{
+			final ErrorEnWS error = new ErrorEnWS();
+			error.setIdmsj("X");
+			error.setTxtmsj("Accion no permitida");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			errores.add(error);
+
+			response.setErrores(errores);
+			response.setAllowFileUpload(false);
+			return response;
+		}
+		else if ("00".equalsIgnoreCase(fileStatusInTRM))
 		{
 			response.setAllowFileUpload(true);
 			response.setRequestCofirmation(false);
@@ -302,7 +338,8 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 		{
 			final ErrorEnWS error = new ErrorEnWS();
 			error.setIdmsj("X");
-			error.setTxtmsj("Ya existe un archivo procesado/exitoso, ¿desea reemplazarlo?.");
+			error.setTxtmsj(
+					"Se realizará una nueva carga del año y periodo indicado, la carga anterior que realizaste se sobre escribirá y quedará como final la nueva que se realice.");
 
 			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
 			errores.add(error);
@@ -317,7 +354,8 @@ public class RetenedoresRegistroPageController extends RetenedoresAbstractPageCo
 		{
 			final ErrorEnWS error = new ErrorEnWS();
 			error.setIdmsj("X");
-			error.setTxtmsj("Ya existe un archivo procesado/exitoso, ¿desea corregirlo?.");
+			error.setTxtmsj(
+					"Se realizara una nueva carga del año y periodo indicado. Con esta carga podrás generar una declaración pero será una corrección, ya que en el sistema ya se cuenta con una declaración presentada");
 
 			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
 			errores.add(error);

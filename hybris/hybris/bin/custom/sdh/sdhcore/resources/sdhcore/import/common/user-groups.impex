@@ -35,4 +35,27 @@ INSERT_UPDATE Usergroup;uid[unique=true];locName[lang=en];locName[lang=es]
 ;sdh_04;Agente Retenedor;Agente Retenedor
 ;sdh_05;Reportante de Información;Reportente de Información
 
+INSERT_UPDATE BackofficeRole;uid[unique=true];locName[lang=en];locName[lang=es]
+#;sdhemployeegroup;sdhemployeegroup;sdhemployeegroup
 
+INSERT_UPDATE Employee;uid[unique=true];name;groups(uid);backOfficeLoginDisabled;passwordEncoding;encodedPassword[default=$defaultPassword]
+#;jorge.romero;jorge.romero;sdhemployeegroup;false;plain
+
+ $START_USERRIGHTS
+ Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;changerights
+ BackofficeRole;sdhemployeegroup;;;;;;;;
+ ;;;;Customer;+;+;-;-;-
+ ;;;;UserGroup;+;+;-;-;-
+ ;;;;SDHAddress;+;+;-;-;-
+ ;;;;SDHPhone;+;+;-;-;-
+ ;;;;SDHSocialNetwork;+;+;-;-;-
+ ;;;;SDHRol;+;+;-;-;-
+ ;;;;SDHExteriorPublicityTax;+;+;-;-;-
+ ;;;;SDHGasTax;+;+;-;-;-
+ ;;;;SDHAgent;+;+;-;-;-
+ ;;;;SDHUrbanDelineationsTax;+;+;-;-;-
+ ;;;;SDHICATax;+;+;-;-;-
+ ;;;;SDHReteICATax;+;+;-;-;-
+ ;;;;SDHICACity;+;+;-;-;-
+ ;;;;SDHICAEconomicActivity;+;+;-;-;-
+ $END_USERRIGHTS

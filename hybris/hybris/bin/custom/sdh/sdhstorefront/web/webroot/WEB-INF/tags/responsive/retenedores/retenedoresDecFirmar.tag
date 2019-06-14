@@ -9,17 +9,24 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
+
 	<div class="row">
 		<div class="col-md-12">
-			<div class="avisoheadline " style="width: auto; height: 35px;">
-				<h2>
-					<span class="p"><spring:theme
-							code="retenedor.declarfirmar.inicial.titulo" /></span>
-				</h2>
-			</div>
-			<p class="avisobody" style="width: auto; height: auto;">
-				<spring:theme code="retenedor.declarfirmar.inicial.descripcion" />
-			</p>
+			<table class="table">
+				<thead>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme
+								code="retenedor.declarfirmar.inicial.titulo" /></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="avisobody">
+
+						<td><spring:theme
+								code="retenedor.declarfirmar.inicial.descripcion" /></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="row">
@@ -53,9 +60,12 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><input class="inputtextnew" type="text" size="30" disabled/></td>
-								<td><input class="inputtextnew" type="text" size="30" disabled/></td>
-								<td><input class="inputtextnew" type="text" size="30" disabled/></td>
+								<td><input class="inputtextnew" type="text" size="30"
+									disabled /></td>
+								<td><input class="inputtextnew" type="text" size="30"
+									disabled /></td>
+								<td><input class="inputtextnew" type="text" size="30"
+									disabled /></td>
 								<td><input type="checkbox" name="regimen" id=""
 									class="form-check-input mr-2"
 									style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"></td>
@@ -69,7 +79,8 @@
 		<div class="row">
 			<div class="col-md-12 col-md-offset-5">
 				<button class="btn btn-secondary"
-					style="text-align: center !important" type="button" onclick="goBack()">
+					style="text-align: center !important" type="button"
+					onclick="goBack()">
 					<spring:theme code="retenedor.edocargas.inicial.regresar" />
 				</button>
 			</div>
@@ -79,7 +90,7 @@
 
 <script>
 	function goBack() {
-			window.history.back();
-		
+		window.history.back();
+
 	}
 </script>
