@@ -65,7 +65,7 @@
 			<div class="col-md-12 col-md-offset-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="reteica.consulta.estado.anio" /></label> <select id="anoGravable"
+							code="reteica.consulta.estado.anio" /></label> <select id="reteICAEDOAnoGravable"
 						name="anoGravable" class="form-control"
 						style="width: 200px !important">
 						<option>Seleccionar</option>
