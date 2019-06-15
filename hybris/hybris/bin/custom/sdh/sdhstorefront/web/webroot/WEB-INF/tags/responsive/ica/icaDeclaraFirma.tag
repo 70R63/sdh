@@ -243,7 +243,7 @@
 					<c:otherwise>
 						<button style="margin-top: 3px;"
 							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg"
-							type="button" disabled="disabled">
+							type="button">
 							<spring:theme code="ica.declaracion.firma.prendecla" />
 						</button>
 					</c:otherwise>
@@ -282,6 +282,7 @@
 
 <script>
 	function habradio() {
+		debugger;
 		var hrep = document.getElementById('radiorepresentante');
 		var hrev = document.getElementById('radiorevisor');
 		var hobli = document.getElementById('selectobligado');
@@ -290,11 +291,23 @@
 		var firman = document.getElementById('addFirmante');
 		var rep2 = document.getElementById('newrepresentante');
 		var rev2 = document.getElementById('newrevisor');
+		var btnpredec = document
+				.getElementById('icaPresentarDeclaracionButton');
 
 		if (hobli.checked == true) {
 			hrep.disabled = false;
 			hrev.disabled = false;
+			btnpredec.disabled = true;
 
+		} else if ((rep2 == null) && (rev2 == null)) {
+			hrep.disabled = true;
+			hrev.disabled = true;
+			hrep.checked = false;
+			hrev.checked = false;
+			firman.disabled = true;
+			rev.style.display = 'none';
+			rep.style.display = 'none';
+			btnpredec.disabled = false;
 		} else if (rep2 == null) {
 
 			hrep.disabled = true;
@@ -305,6 +318,7 @@
 			rev.style.display = 'none';
 			rep.style.display = 'none';
 			rev2.style.display = 'none';
+			btnpredec.disabled = false;
 
 		} else if (rev2 == null) {
 
@@ -316,6 +330,7 @@
 			rev.style.display = 'none';
 			rep.style.display = 'none';
 			rep2.style.display = 'none';
+			btnpredec.disabled = false;
 
 		} else if ((rep2 != null) && (rev2 != null)) {
 
@@ -328,6 +343,7 @@
 			rep.style.display = 'none';
 			rep2.style.display = 'none';
 			rev2.style.display = 'none';
+			btnpredec.disabled = false;
 		}
 	}
 
