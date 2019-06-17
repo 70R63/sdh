@@ -66,8 +66,8 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="reteica.inicial.carga.anio" /></label> <select id="anoGravable"
-							name="anoGravable" class="form-control"
+								code="reteica.inicial.carga.anio" /></label> <select id="reteICAAnoGravable"
+							name="reteICAAnoGravable" class="form-control"
 							style="width: 200px !important">
 							<option value="">Seleccionar</option>
 							<c:forEach items="${ years}" var="eachYear">
@@ -79,15 +79,15 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="reteica.inicial.carga.periodo" /></label> <select id="periodo"
-							name="periodo" class="form-control"
+								code="reteica.inicial.carga.periodo" /></label> <select id="reteICAPeriodo"
+							name="reteICAPeriodo" class="form-control"
 							style="width: 200px !important">
 							<option value="">Seleccionar</option>
-							<c:forEach items="${ perdiods}" var="eachPeriod">
-								<option value="${ eachPeriod}"><spring:theme
-										code="reteica.registro.period.${eachPeriod}" />
-								</option>
-							</c:forEach>
+<%-- 							<c:forEach items="${ perdiods}" var="eachPeriod"> --%>
+<%-- 								<option value="${ eachPeriod}"><spring:theme --%>
+<%-- 										code="reteica.registro.period.${eachPeriod}" /> --%>
+<!-- 								</option> -->
+<%-- 							</c:forEach> --%>
 						</select>
 					</div>
 				</div>

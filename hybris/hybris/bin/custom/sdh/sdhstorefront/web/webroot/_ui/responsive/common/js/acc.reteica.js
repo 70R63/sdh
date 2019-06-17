@@ -1,6 +1,6 @@
 ACC.reteica = {
 
-	 _autoload: ["bindGeneraDeclaracionReteICAButton","bindActualizarButton","bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindAnoGravable"],
+	 _autoload: ["bindGeneraDeclaracionReteICAButton","bindActualizarButton","bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindReteICAAnoGravable","bindReteICAEDOAnoGravable"],
 	 
 	 
 	 bindGeneraDeclaracionReteICAButton: function () {
@@ -150,11 +150,11 @@ ACC.reteica = {
 		 
 	 },
 	 
-	 bindAnoGravable: function(){
+	 bindReteICAEDOAnoGravable: function(){
 	    	
-	    	$( document ).on("change","#anoGravable",function(e) {
+	    	$( document ).on("change","#reteICAEDOAnoGravable",function(e) {
 	    		
-	    		var anoGravable =  $.trim( $("#anoGravable").val());
+	    		var anoGravable =  $.trim( $("#reteICAEDOAnoGravable").val());
 	    		
 	    		if(anoGravable != "")
     			{
@@ -165,6 +165,131 @@ ACC.reteica = {
 	    	
 	    	
 	    	},
+	    	
+	    	bindReteICAAnoGravable: function(){
+	 	    	
+	 	    	$( document ).on("change","#reteICAAnoGravable",function(e) {
+	 	    		
+	 	    		var anoGravable =  $.trim( $("#reteICAAnoGravable").val());
+	 	    		
+	 	    		var currentYear = new Date().getFullYear()
+	 	    		
+	 	    		if(anoGravable == "")
+	     			{
+	 	    			$("#reteICAPeriodo").empty();
+	     				
+	     				var period00= new Option("SELECCIONAR", "");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period00).html("SELECCIONAR");
+	     				$("#reteICAPeriodo").append(period00);
+	     			}
+	 	    		else if(anoGravable == currentYear)
+	     			{
+	 	    			$("#reteICAPeriodo").empty();
+	     				
+	     				var period00= new Option("SELECCIONAR", "");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period00).html("SELECCIONAR");
+	     				$("#reteICAPeriodo").append(period00);
+	     				var currentMonth = new Date().getMonth();
+	     				var bimester = Math.floor(  (currentMonth -1) / 2);
+	     				
+	     				if(bimester > 0)
+	     				{
+	     					var period01 = new Option("Enero - Febrero", "01");
+		     				/// jquerify the DOM object 'o' so we can use the html method
+		     				$(period01).html("Enero - Febrero");
+		     				$("#reteICAPeriodo").append(period01);
+	     				}
+	     				
+	     				if(bimester > 1)
+	     				{
+	     					var period02 = new Option("Marzo - Abril", "02");
+		     				/// jquerify the DOM object 'o' so we can use the html method
+		     				$(period02).html("Marzo - Abril");
+		     				$("#reteICAPeriodo").append(period02);
+	     				}
+	     				
+	     				if(bimester > 2)
+	     				{
+	     					var period03 = new Option("Mayo - Junio", "03");
+		     				/// jquerify the DOM object 'o' so we can use the html method
+		     				$(period03).html("Mayo - Junio");
+		     				$("#reteICAPeriodo").append(period03);
+	     				}
+	     				
+	     				if(bimester > 3)
+	     				{
+	     					var period04 = new Option("Julio - Agosto", "04");
+		     				/// jquerify the DOM object 'o' so we can use the html method
+		     				$(period04).html("Julio - Agosto");
+		     				$("#reteICAPeriodo").append(period04);
+	     				}
+	     				
+	     				if(bimester > 4)
+	     				{
+	     					var period05 = new Option("Septiembre - Octubre", "05");
+		     				/// jquerify the DOM object 'o' so we can use the html method
+		     				$(period05).html("Septiembre - Octubre");
+		     				$("#reteICAPeriodo").append(period05);
+	     				}
+	     				
+	     				if(bimester > 5)
+	     				{
+	     					var period06 = new Option("Noviembre - Diciembre", "06");
+		     				/// jquerify the DOM object 'o' so we can use the html method
+		     				$(period06).html("Noviembre - Diciembre");
+		     				$("#reteICAPeriodo").append(period06);
+	     				}
+	     				
+	     				
+	     				
+	     				
+	     				
+	     			}else
+     				{
+	     				$("#reteICAPeriodo").empty();
+	     				
+	     				var period00= new Option("SELECCIONAR", "");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period00).html("SELECCIONAR");
+	     				$("#reteICAPeriodo").append(period00);
+	     				
+	     				var period01 = new Option("Enero - Febrero", "01");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period01).html("Enero - Febrero");
+	     				$("#reteICAPeriodo").append(period01);
+	     				
+	     				var period02 = new Option("Marzo - Abril", "02");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period02).html("Marzo - Abril");
+	     				$("#reteICAPeriodo").append(period02);
+	     				
+	     				var period03 = new Option("Mayo - Junio", "03");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period03).html("Mayo - Junio");
+	     				$("#reteICAPeriodo").append(period03);
+	     				
+	     				var period04 = new Option("Julio - Agosto", "04");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period04).html("Julio - Agosto");
+	     				$("#reteICAPeriodo").append(period04);
+	     				
+	     				var period05 = new Option("Septiembre - Octubre", "05");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period05).html("Septiembre - Octubre");
+	     				$("#reteICAPeriodo").append(period05);
+	     				
+	     				var period06 = new Option("Noviembre - Diciembre", "06");
+	     				/// jquerify the DOM object 'o' so we can use the html method
+	     				$(period06).html("Noviembre - Diciembre");
+	     				$("#reteICAPeriodo").append(period06);
+     				}
+	 	    		
+	 	    	});
+	 	    	
+	 	    	
+	 	    	},
 	 
 	 bindCargarButton: function(){
 		 
@@ -175,7 +300,7 @@ ACC.reteica = {
 			 
 			 var formData = new FormData();
 			 
-			 var anoGravable = $.trim( $("#anoGravable").val());
+			 var anoGravable = $.trim( $("#reteICAAnoGravable").val());
 			 
 			 if(anoGravable == "")
 			 {
@@ -186,7 +311,7 @@ ACC.reteica = {
      	 		return;
 			 }
 				 
-			 var periodo = $.trim( $("#periodo").val());
+			 var periodo = $.trim( $("#reteICAPeriodo").val());
 			 
 			 if(periodo == "")
 			 {
@@ -275,8 +400,8 @@ ACC.reteica = {
 		 
 		 var formData = new FormData();
 		 
-		 var anoGravable = $.trim( $("#anoGravable").val());
-		 var periodo = $.trim( $("#periodo").val());
+		 var anoGravable = $.trim( $("#reteICAAnoGravable").val());
+		 var periodo = $.trim( $("#reteICAPeriodo").val());
 		 
 		 formData.append("retencionesFile",$("#retencionesFile").prop('files')[0]); 
 		 formData.append("retencionesForm",new Blob([JSON.stringify({

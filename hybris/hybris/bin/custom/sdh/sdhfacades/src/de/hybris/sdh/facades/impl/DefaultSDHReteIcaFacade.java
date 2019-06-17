@@ -24,6 +24,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -51,25 +52,27 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 	@Override
 	public ReteIcaResponse reteICA(final ReteIcaRequest request)
 	{
+		ReteIcaResponse reteIcaResponse = new ReteIcaResponse();
 
 		final String response = sdhReteIcaService.reteICA(request);
 
-
-		try
+		if (StringUtils.isNotBlank(response))
 		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final ReteIcaResponse reteIcaResponse = mapper.readValue(response, ReteIcaResponse.class);
+				reteIcaResponse = mapper.readValue(response, ReteIcaResponse.class);
 
-			return reteIcaResponse;
+				return reteIcaResponse;
+			}
+			catch (final IOException e)
+			{
+				LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
+			}
 		}
-		catch (final IOException e)
-		{
-			LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
-		}
-
-		return null;
+		return reteIcaResponse;
 	}
 
 	/*
@@ -80,24 +83,29 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 	@Override
 	public CalculoReteIcaResponse calculo(final CalculoReteIcaRequest request)
 	{
+
+		CalculoReteIcaResponse reteIcaCalculoResponse = new CalculoReteIcaResponse();
+
 		final String response = sdhReteIcaService.calculo(request);
 
-
-		try
+		if (StringUtils.isNoneBlank(response))
 		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final CalculoReteIcaResponse reteIcaCalculoResponse = mapper.readValue(response, CalculoReteIcaResponse.class);
+				reteIcaCalculoResponse = mapper.readValue(response, CalculoReteIcaResponse.class);
 
-			return reteIcaCalculoResponse;
+				return reteIcaCalculoResponse;
+			}
+			catch (final IOException e)
+			{
+				LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
+			}
 		}
-		catch (final IOException e)
-		{
-			LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
-		}
 
-		return null;
+		return reteIcaCalculoResponse;
 	}
 
 	/*
