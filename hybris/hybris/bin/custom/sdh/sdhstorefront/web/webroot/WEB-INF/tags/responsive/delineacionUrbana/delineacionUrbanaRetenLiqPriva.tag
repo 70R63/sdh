@@ -26,7 +26,7 @@
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id="totalpresu"
-					name="" class="form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
+					name="infObjetoDelineacion.infoDeclara.totalPresupuesto" class="form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
 			</div>
 		</div>
 	</div>
@@ -47,7 +47,8 @@
 					<c:if test="${not empty totalRetencionOBLIGATORIO}">
 						<sf:input id="totalRetencion" class="form-control" readonly="true"
 						aria-required="true" maxlength="240"
-						path="infObjetoDelineacion.infoDeclara.totalRetencion" readOnly="false"/>						
+						path="infObjetoDelineacion.infoDeclara.totalRetencion" 
+						name="infObjetoDelineacion.infoDeclara.totalRetencion" readOnly="false"/>						
 					</c:if>
 			</div>
 		</div>

@@ -92,7 +92,7 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.areasusos.preobra" /></label>
-					<sf:select class="form-control" name="presupuestoObra" id="presupuestoObra" onchange="presupuestoObraCHANGE(this)"
+					<sf:select class="form-control" name="presupuestoObra" id="presupuestoObra" onchange="presupuestoObraCHANGE(this)" 
 						path="infObjetoDelineacion.infoDeclara.presupuestoObra"
 						items="${dataForm.catalogos.presupuestoObra}"></sf:select>
 				</div>
@@ -139,4 +139,33 @@ function presupuestoObraCHANGE(selectObject) {
 	}
 
 }
+
+function presupuestoObraLOAD() {
+	
+	debugger;
+	
+	var totalRetencion = document.getElementById('totalRetencion');
+	
+	var causalexcencion = document.getElementById('causalexcencion');
+	var valCausalExcencion = causalexcencion.value;
+	
+	var presupuestoObra = document.getElementById('presupuestoObra');
+	var valPresupuestoObra = presupuestoObra.value;
+	
+	
+    if (valPresupuestoObra == "02" &&  valCausalExcencion != "00" ) {
+
+		totalRetencion.disabled = false;
+		totalRetencionOBLIGATORIO.value = 'X';
+		caus.value = '02';
+		
+		
+	} else {
+		totalRetencion.disabled = true;
+	}
+
+}
+
+function presupuestoObraLOAD();
+
 </script>

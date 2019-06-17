@@ -527,6 +527,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoDelineacionRequest.setAreaIntervenida(infoDelineacion.getInfObjetoDelineacion().getAreaIntervenida());
 		infoDelineacionRequest.setAreaProyecto(infoDelineacion.getInfObjetoDelineacion().getAreaProyecto());
 
+
+
 		if (infoDelineacion.getInput().getTipoFlujo().equals("R"))
 		{
 			paginaDestino = REDIRECT_TO_DELINEACION_URBANA_RETENCION_CMS_PAGE;
