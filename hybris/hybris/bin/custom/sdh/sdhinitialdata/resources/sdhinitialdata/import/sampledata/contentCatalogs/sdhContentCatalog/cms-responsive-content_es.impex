@@ -90,6 +90,8 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;PreguntasFrecuentesLink;"PREGUNTAS FRECUENTES";"Haga clic aquí para ir a las Preguntas Frecuentes"
 ;;TerceroAutorizadoReportarInformacionLink;"Reportar Información"
 ;;TerceroAutorizadoConsultasLink;"Consultas"
+;;AgenteAutorizadoReportarInformacionLink;"Reportar Información"
+;;AgenteAutorizadoConsultasLink;"Consultas"
 
 #Report An Issue
 ;;ReportGraffitiLink;"Informar sobre grafitis";"Haga clic aquí para acceder a la opción de menú Informar sobre grafitis"

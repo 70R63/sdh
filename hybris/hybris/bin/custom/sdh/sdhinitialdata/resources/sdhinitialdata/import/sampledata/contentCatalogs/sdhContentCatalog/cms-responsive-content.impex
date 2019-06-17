@@ -100,6 +100,9 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 ;;TerceroAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/terceros/reportar";;;;;
 ;;TerceroAutorizadoConsultasLink;CONSULTAS;"/terceros/consultas";;;;;
+
+;;AgenteAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/autorizados/entidades/reportarinfo";;;;;
+;;AgenteAutorizadoConsultasLink;CONSULTAS;"/autorizados/entidades/consultas";;;;;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 
@@ -232,7 +235,7 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=tr
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
 #;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
 ;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode
-;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;
+;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
 ;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,PagosNavigationNode,ARConsultaNavigationNode
 ;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
@@ -259,6 +262,9 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 ;TerceroAutorizadoReportarInformacionNavigationNode;;Tercero Autorizado Reportar Información Menu;TerceroAutorizadoReportarInformacionNavigationNode;
 ;TerceroAutorizadoConsultasNavigationNode;;Tercero Autorizado Consutlas Menu;TerceroAutorizadoConsultasNavigationNode;
+
+;AgenteAutorizadoReportarInformacionNavigationNode;;Agente Autorizado Reportar Información Menu;AgenteAutorizadoReportarInformacionNavigationNode;
+;AgenteAutorizadoConsultasNavigationNode;;Agente Autorizado Consutlas Menu;AgenteAutorizadoConsultasNavigationNode;
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -297,6 +303,9 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 ;TerceroAutorizadoReportarInformacionNavigationNodeEntry;;Tercero Autorizado Reportar Informacion Menu;TerceroAutorizadoReportarInformacionNavigationNode;TerceroAutorizadoReportarInformacionLink;
 ;TerceroAutorizadoConsultasNavigationNodeEntry;;Tercero Autorizado Consultas Menu;TerceroAutorizadoConsultasNavigationNode;TerceroAutorizadoConsultasLink;
+
+;AgenteAutorizadoReportarInformacionNavigationNodeEntry;;Agente Autorizado Reportar Informacion Menu;AgenteAutorizadoReportarInformacionNavigationNode;AgenteAutorizadoReportarInformacionLink;
+;AgeteAutorizadoConsultasNavigationNodeEntry;;Agente Autorizado Consultas Menu;AgenteAutorizadoConsultasNavigationNode;AgenteAutorizadoConsultasLink;
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
@@ -622,7 +631,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; FooterSlot             ; FooterComponent
 ; ; SearchBoxSlot          ; SearchBox
 ; ; HomepageNavLinkSlot    ; HomepageNavLink
-; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,ContribuyentesCategoryNavComponent,ReportantesInformacionCategoryNavComponent,AgenteRetenedorCategoryNavComponent,TerceroAutorizadoCategoryNavComponent, breadcrumbComponent
+; ; NavigationBarSlot      ; AnonnymousCategoryNavComponent,ContribuyentesCategoryNavComponent,ReportantesInformacionCategoryNavComponent,AgenteRetenedorCategoryNavComponent,TerceroAutorizadoCategoryNavComponent,AutorizadosCategoryNavComponent, breadcrumbComponent
 ; ; SideContentSlot        ; MobileAppBanner
 ; ; SiteLogoSlot           ; SiteLogoComponent
 ; ; TopContentSlot         ; FacebookOffersBanner

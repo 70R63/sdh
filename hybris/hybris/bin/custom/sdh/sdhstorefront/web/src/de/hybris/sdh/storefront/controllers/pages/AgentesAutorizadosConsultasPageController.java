@@ -28,17 +28,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 //@RequestMapping("")
-public class AgentesAutorizadosReportarInfoPageController extends AbstractPageController
+public class AgentesAutorizadosConsultasPageController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Reportar Información";
+	private static final String TEXT_ACCOUNT_PROFILE = "Consultas";
 
 	// CMS Pages
-	private static final String AUTORIZADOS_REPORTAR_CMS_PAGE = "autorizadosReportarInfoPage";
+	private static final String AUTORIZADOS_CONSULTAS_CMS_PAGE = "autorizadosConsultasPage";
 
-	private static final String REDIRECT_TO_AUTORIZADOS_REPORTAR_PAGE = REDIRECT_PREFIX + "/autorizados/entidades/reportarinfo";
+	private static final String REDIRECT_TO_AUTORIZADOS_CONSULTAS_PAGE = REDIRECT_PREFIX + "/autorizados/entidades/consultas";
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -49,16 +49,16 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/autorizados/entidades/reportarinfo", method = RequestMethod.GET)
+	@RequestMapping(value = "/autorizados/entidades/consultas", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String autorizados(final Model model) throws CMSItemNotFoundException
+	public String autorizadosconsultas(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al GET Agentes Autorizados reportar --------------------------");
+		System.out.println("---------------- Hola entro al GET Agentes Autorizados consultas --------------------------");
 
 
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_REPORTAR_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_REPORTAR_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_CONSULTAS_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_CONSULTAS_CMS_PAGE));
 
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
@@ -66,15 +66,15 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/autorizados/entidades/reportarinfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/autorizados/entidades/consultas", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String autorizadosreportarpost(final BindingResult bindingResult, final Model model,
+	public String autorizadosconsultaspost(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("------------------Entro al POST de Agentes Autorizados reportar------------------------");
+		System.out.println("------------------Entro al POST de Agentes Autorizados consultas------------------------");
 
-		return REDIRECT_TO_AUTORIZADOS_REPORTAR_PAGE;
+		return REDIRECT_TO_AUTORIZADOS_CONSULTAS_PAGE;
 	}
 
 }
