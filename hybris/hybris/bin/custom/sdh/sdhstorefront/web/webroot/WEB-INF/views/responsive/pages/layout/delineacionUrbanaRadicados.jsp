@@ -101,28 +101,43 @@
 	}
 
 	function validarAntesCalculo() {
-
+		debugger;
 		var totalRetencion = document.getElementById('totalRetencion').value;
+		
+		var presupuestoObra = document.getElementById('presupuestoObra');
+		var valPresupuestoObra = presupuestoObra.value;
+		
+		var causalexcencion = document.getElementById('causalexcencion');
+		var valCausalExcencion = causalexcencion.value;
+		
+		var totalpresu = document.getElementById('totalpresu');
+		var valTotalpresu = totalpresu.value;
+		valTotalpresu = valTotalpresu.trimLeft();
+		valTotalpresu = valTotalpresu.trimRight();
+		var valTotalpresuFLOAT = parseFloat(valTotalpresu);
+		
+		
+		
 		totalRetencion = totalRetencion.trimLeft();
 		totalRetencion = totalRetencion.trimRight();
 		var totalRetencionOBLIGATORIO = document
 				.getElementById('totalRetencionOBLIGATORIO').value;
 		var totalRetencionFLOAT = parseFloat(totalRetencion);
-		var esValido = false;
 		
-		if ((totalRetencionOBLIGATORIO == "X") && (!isNaN(totalRetencionFLOAT)) && (totalRetencionFLOAT >= 0) ) {
-			esValido = true;
-		} else {
-			esValido = false;
-		}
 		
-		if(esValido == true){
-			document.form.submit();
-			return true;
-		}else{
+		if (valPresupuestoObra == "02" &&  valCausalExcencion != "00"  && !isNaN(valTotalpresuFLOAT) && valTotalpresuFLOAT <= 0 && !isNaN(totalRetencionFLOAT) && totalRetencionFLOAT <= 0) {
+		
 			alert("Debido al valor en el campo \"Presupuesto de obra\" el campo \"Valor de retención\" será obligatorio (su valor deberá ser mayor o igual a cero)");
 			return false;			
+		}	
+		
+		if (valPresupuestoObra == "02" &&  valCausalExcencion == "00" && !isNaN(valTotalpresuFLOAT) && valTotalpresuFLOAT <= 0 ) {
+			alert("El valor el campo \"Presupuesto de obra\" debe ser mayor a cero.");
+			return false;
 		}
+		
+		document.form.submit();
+		return true;
 
 	}
 	
@@ -149,13 +164,19 @@
 	window.onload = function data() {
 		var incor = document.getElementById('presupuestoObra').value;
 		
+		var causalexcencion = document.getElementById('causalexcencion');
+		var valCausalExcencion = causalexcencion.value;
+		
 		var tot= document.getElementById('totalRetencion');
 		var pres= document.getElementById('totalpresu');
 		
-		if(incor=='02'){
+		if(incor=='02' && valCausalExcencion != '00'){
 			tot.readOnly=false;
 			pres.readOnly=false;
-		}else{
+		}else if(incor=='02' && valCausalExcencion == '00'){
+			tot.readOnly=true;
+			pres.readOnly=false;
+		} else{	
 			tot.readOnly=true;
 			pres.readOnly=true;
 		}

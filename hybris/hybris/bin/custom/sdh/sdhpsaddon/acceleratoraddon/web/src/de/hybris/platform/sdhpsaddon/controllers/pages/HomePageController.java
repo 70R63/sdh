@@ -94,7 +94,7 @@ public class HomePageController extends AbstractPageController
 		}
 		else if ("sdh_02".equals(role))
 		{
-			//			return REDIRECT_PREFIX + "/contribueyentes";
+						return REDIRECT_PREFIX + "/autorizados";
 		}
 		else if ("sdh_03".equals(role))
 		{
