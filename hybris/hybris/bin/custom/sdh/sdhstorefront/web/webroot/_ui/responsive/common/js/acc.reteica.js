@@ -1,8 +1,34 @@
 ACC.reteica = {
 
-	 _autoload: ["bindGeneraDeclaracionReteICAButton","bindActualizarButton","bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindReteICAAnoGravable","bindReteICAEDOAnoGravable"],
+	 _autoload: ["bindGeneraDeclaracionReteICAButton","bindActualizarButton","bindDownloadTemplateButton", "bindCargarButton","bindDialogReteICA","bindReteICAAnoGravable","bindReteICAEDOAnoGravable","bindReteIcaRecargar"],
 	 
-	 
+	 bindReteIcaRecargar: function(){
+		
+		 $(document).on("click", ".reteICARecargar", function (e) {
+	 	        e.preventDefault();
+	 	        
+	 	      var estado = $(this).attr("data-estado");
+	 	      if(estado=="02")
+ 	    	  {
+	 	    	 window.location.href = ACC.reteICARegistroRetencionesURL;
+ 	    	  }
+	 	      
+	 	      if(estado == "03"){
+	 	    	 
+	 	    	$( "#dialogConfirmActionReteICA" ).dialog( "open" );
+	 	    	$("#reteICADialogConfirmActionContent").html("");
+	 	    	$("#reteICADialogConfirmActionContent").html("Se realizara una nueva carga del año y periodo indicado, la carga anterior que realizaste se sobre escribirá y quedara como final la nueva que se realice.");
+	 	      }
+	 	    	  
+	 	       if(estado == "04")
+ 	    	   {
+	 	    	   $( "#dialogConfirmActionReteICA" ).dialog( "open" );
+		 	    	$("#reteICADialogConfirmActionContent").html("");
+		 	    	$("#reteICADialogConfirmActionContent").html("Se realizara una nueva carga del año y periodo indicado. Con esta carga podrás generar una declaración pero será una corrección, ya que en el sistema ya se cuenta con una declaración presentada.");
+ 	    	   }
+		 });
+		 
+	 },
 	 bindGeneraDeclaracionReteICAButton: function () {
 		 $(document).on("click", "#generaDeclaracionReteICAButton", function (e) {
 	 	        e.preventDefault();
@@ -472,6 +498,21 @@ ACC.reteica = {
 			        "Si": function() {
 			          $( this ).dialog( "close" );
 			          ACC.reteica.uploadFile();
+			        },
+			        Cancel: function() {
+			          $( this ).dialog( "close" );
+			        }
+			      }
+    	});
+    	
+    	$( "#dialogConfirmActionReteICA" ).dialog({ 
+    		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
+			 buttons: {
+			        "Si": function() {
+			          $( this ).dialog( "close" );
+			          window.location.href = ACC.reteICARegistroRetencionesURL;
 			        },
 			        Cancel: function() {
 			          $( this ).dialog( "close" );

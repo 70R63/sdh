@@ -159,15 +159,13 @@
 										</td>
 										<c:choose>
 											<c:when test='${(eachArchivo.bandera == "X")}'>
-												<td><a href="#" onClick="goBack();return false;">Desea volver a cargar</a></td>
+											<c:url value="/retenedores/registroretenciones" var="registroRetencionesURL" />
+												<td><a href="${registroRetencionesURL }" class="reteICARecargar" data-estado="${eachArchivo.estado}">Desea volver a cargar</a></td>
 											</c:when>
 											<c:otherwise>
 												<td>Desea volver a cargar</td>
 											</c:otherwise>
 										</c:choose>
-										
-										
-										
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -205,7 +203,6 @@
 <script type="text/javascript">
     
     function formatoPerRepor(element, index, array){
-		debugger;
 		var periodo =element.value.substring(2);  
 		if (periodo == 'B1'){
 			element.value = 'Enero-Febrero';
@@ -229,7 +226,6 @@
     
         
     function formato(){
-    	debugger;
     	
     	var inputList = document.getElementsByTagName("input");
     	var arrayPerRepor = Array.prototype.slice.call(inputList);

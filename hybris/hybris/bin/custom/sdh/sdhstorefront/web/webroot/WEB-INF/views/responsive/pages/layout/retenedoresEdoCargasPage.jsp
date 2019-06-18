@@ -11,7 +11,7 @@
 	<retenedores:retenedoresEdoCargas/>
 
 
-
+<div id="dialogConfirmActionReteICA" title="ReteICA" ><div id="reteICADialogConfirmActionContent"></div></div>
 
 <script type="text/javascript">
 	function goBack() {
