@@ -9,24 +9,29 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-<spring:url value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina" var="declaracionURL"
-	htmlEscape="false" />
+<spring:url
+	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina"
+	var="declaracionURL" htmlEscape="false" />
 
 
-<div class="container">
-	<sf:form action="${declaracionURL}" method="POST" modelAttribute="dataForm" id="forma">
-		<sobreTasaGasolina:decGasolinaGen />
-		<sobreTasaGasolina:decGasolinaInfDec />
-		<sobreTasaGasolina:decGasolinaTotales />
-		<sobreTasaGasolina:decGasolinaPagos />
-		<sobreTasaGasolina:decGasolinaDatRev />
-		<sobreTasaGasolina:decGasolinaInfFirma />
-	</sf:form>
-	<sobreTasaGasolina:decGasolinaPago />
-</div>
+
+<sf:form action="${declaracionURL}" method="POST"
+	modelAttribute="dataForm" id="forma">
+	<sobreTasaGasolina:decGasolinaGen />
+	<sobreTasaGasolina:decGasolinaInfDec />
+	<sobreTasaGasolina:decGasolinaTotales />
+	<sobreTasaGasolina:decGasolinaPagos />
+<%-- 	<sobreTasaGasolina:decGasolinaDatRev /> --%>
+<%-- 	<sobreTasaGasolina:decGasolinaInfFirma /> --%>
+	<sobreTasaGasolina:decGasolinaFirma />
+</sf:form>
+<sobreTasaGasolina:decGasolinaPago />
+
 
 <script>
-function goBack() {
-  window.history.back();
-}
-</script> 
+	function goBack() {
+		window.history.back();
+	}
+</script>
+
+

@@ -17,7 +17,7 @@
 		<div class="col-md-12 mt-3">
 			<div class="headline">
 				<h2>
-					<span><spring:theme code="ica.declaracion.firma.titulo" /></span>
+					<span><spring:theme code="publicidad.declaracion.firma.titulo" /></span>
 				</h2>
 			</div>
 
@@ -31,7 +31,7 @@
 							class="form-check-input mr-2"
 							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px;"
 							onclick="habradio()"> <spring:theme
-								code="ica.declaracion.firma.obligado" />
+								code="publicidad.declaracion.firma.obligado" />
 						</label>
 					</div>
 				</div>
@@ -55,7 +55,7 @@
 				<div class="col-md-1">
 					<div class="form-group">
 						<label class="control-label textocentrado"><spring:theme
-								code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
+								code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id=""
 							name="" class="form-control" disabled type="text" value=""
 							maxlength="240"></input>
 					</div>
@@ -63,7 +63,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label margen20"><spring:theme
-								code="ica.declaracion.firma.numide" /></label> <input disabled id=""
+								code="publicidad.declaracion.firma.numide" /></label> <input disabled id=""
 							name="" class="form-control" disabled type="text" value=""
 							maxlength="240"></input>
 					</div>
@@ -72,7 +72,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label  margen20"><spring:theme
-								code="ica.declaracion.firma.numtarjeta" /></label> <input disabled
+								code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled
 							id="" name="" class="form-control" disabled type="text" value=""
 							maxlength="240"></input>
 					</div>
@@ -80,7 +80,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label margen20"><spring:theme
-								code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
+								code="publicidad.declaracion.firma.nombre" /></label> <input disabled id=""
 							name="" class="form-control" disabled type="text" value=""
 							maxlength="240"></input>
 					</div>
@@ -115,7 +115,7 @@
 		<div class="col-md-1">
 			<div class="form-group">
 				<label class="control-label textocentrado"><spring:theme
-						code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -123,7 +123,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.numide" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.numide" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -132,7 +132,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.numtarjeta" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -140,7 +140,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label " style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.nombre" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -181,7 +181,7 @@
 		<div class="col-md-1">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
-						code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -189,7 +189,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.numide" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.numide" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -198,7 +198,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.numtarjeta" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -206,7 +206,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.nombre" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -247,7 +247,7 @@
 		<div class="col-md-1">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
-						code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -255,7 +255,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.numide" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.numide" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -264,7 +264,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.numtarjeta" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -272,7 +272,7 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
+						code="publicidad.declaracion.firma.nombre" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
@@ -292,63 +292,6 @@
 		</div>
 	</div>
 </div>
-<div class="container">
-	<input type="hidden" id="numObjeto" name="numObjeto"
-		value="${numObjeto}" /> <input type="hidden" id="numForm"
-		name="numForm"
-		value="${icaInfObjetoFormResp.icaInfObjetoResponse.numForm }" /> <a
-		id="downloadHelper" target="_blank"></a>
-	<div class="row" style="marging-top: 5px">
-		<div class="col-md-12 centercol-md-8 text-center">
-
-			<sf:form action="${pagarURL}" method="POST"
-				modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
-				<button style="margin-top: 3px;" id="regresar"
-					class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
-					<spring:theme code="ica.declaracion.firma.regresar" />
-				</button>
-				<c:choose>
-					<c:when
-						test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.numForm }">
-						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg"
-							type="button">
-							<spring:theme code="ica.declaracion.firma.prendecla" />
-						</button>
-					</c:when>
-					<c:otherwise>
-						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg"
-							type="button">
-							<spring:theme code="ica.declaracion.firma.prendecla" />
-						</button>
-					</c:otherwise>
-				</c:choose>
-
-				<sf:hidden path="tipoImpuesto" />
-				<sf:hidden path="numBP" />
-				<sf:hidden path="numDoc" />
-				<sf:hidden path="tipoDoc" />
-				<sf:hidden path="anoGravable" />
-				<sf:hidden path="periodo" />
-				<sf:hidden path="clavePeriodo" />
-				<sf:hidden path="dv" />
-				<sf:hidden path="numObjeto" />
-
-				<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-					name="pagar" value="pagar">
-					<spring:theme code="ica.declaracion.firma.pagliena" />
-				</sf:button>
-			</sf:form>
-		</div>
-	</div>
-
-	<%-- 			</form:form> --%>
-</div>
-
-
-
-
 
 <script>
 	function habradio() {
@@ -356,7 +299,7 @@
 		var firmante = document.getElementById('selectfirmante');
 		var firmdeclar = document.getElementById('btnfirmardeclarante');
 		var btnpredec = document
-				.getElementById('icaPresentarDeclaracionButton');
+				.getElementById('generaDeclaracionButton');
 		var repre = document.getElementById('representante');
 		var rev = document.getElementById('revisor');
 		var conta = document.getElementById('contador');

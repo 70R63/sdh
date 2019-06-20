@@ -8,54 +8,59 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<sf:form action="${declaracionURL}" method="POST" modelAttribute="dataForm" id="forma">
-<div class="row">
-	<div class="col-md-12">
-		<h2>
-			<span tabindex="0 headline"> <spring:theme
-					code="impuestos.decGasolina.InformacionFirma.titulo" />
-			</span>
-		</h2>
-	</div>
-</div>
-<div class="row">
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="impuestos.decGasolina.InformacionFirma.tipoId" /></label> 
-						<input
-					id="nombre" name="nombre" class="form-control" aria-required="true"
-					type="text" value="${dataForm.declarante.tipoDocDESC}" maxlength="240"
-					readonly="readonly">
+<div class="container">
+	<sf:form action="${declaracionURL}" method="POST"
+		modelAttribute="dataForm" id="forma">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>
+					<span tabindex="0 headline"> <spring:theme
+							code="impuestos.decGasolina.InformacionFirma.titulo" />
+					</span>
+				</h2>
 			</div>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="impuestos.decGasolina.InformacionFirma.numeroId" /></label> <input
-					value="${dataForm.declarante.numDoc}" class="form-control" aria-required="true"
-					maxlength="30" size="30" disabled="disabled" type="text" />
+		<div class="row">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="impuestos.decGasolina.InformacionFirma.tipoId" /></label> <input
+							id="nombre" name="nombre" class="form-control"
+							aria-required="true" type="text"
+							value="${dataForm.declarante.tipoDocDESC}" maxlength="240"
+							readonly="readonly">
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group ">
-				<label class="control-label"><spring:theme
-						code="impuestos.decGasolina.InformacionFirma.denominacion" /></label> <input
-					value="${dataForm.declarante.nombres}" class="form-control" aria-required="true"
-					maxlength="30" size="30" disabled="disabled" type="text" />
+		<div class="row">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="impuestos.decGasolina.InformacionFirma.numeroId" /></label> <input
+							value="${dataForm.declarante.numDoc}" class="form-control"
+							aria-required="true" maxlength="30" size="30" disabled="disabled"
+							type="text" />
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+		<div class="row">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group ">
+						<label class="control-label"><spring:theme
+								code="impuestos.decGasolina.InformacionFirma.denominacion" /></label> <input
+							value="${dataForm.declarante.nombres}" class="form-control"
+							aria-required="true" maxlength="30" size="30" disabled="disabled"
+							type="text" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</sf:form>
 </div>
-</sf:form>
 
 
