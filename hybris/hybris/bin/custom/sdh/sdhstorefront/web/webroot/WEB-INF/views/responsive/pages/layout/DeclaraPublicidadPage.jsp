@@ -19,7 +19,8 @@
 					<DeclaraPubli:DecPuGeneral />
 					<DeclaraPubli:DecPuInfoValla />
 					<DeclaraPubli:DecPuTotalPag />
-					<DeclaraPubli:DecPuFirmDecl />
+					<%-- 					<DeclaraPubli:DecPuFirmDecl /> --%>
+					<DeclaraPubli:DecPuFirmas />
 				</form:form>
 				<DeclaraPubli:DecPuPago />
 			</div>
@@ -27,4 +28,6 @@
 	</div>
 </div>
 
-<div id="dialogPublicidadExterior" title="Publicidad Exterior" ><div id="publicidadExteriorDialogContent"></div></div>
+<div id="dialogPublicidadExterior" title="Publicidad Exterior">
+	<div id="publicidadExteriorDialogContent"></div>
+</div>

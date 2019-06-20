@@ -19,8 +19,8 @@
 	<delineacionUrbana:delineacionUrbanaDecAreasUsosFechas />
 	<delineacionUrbana:delineacionUrbanaDecLiqPriva />
 	</sf:form>
-	<delineacionUrbana:delineacionUrbanaDecFirma />
-
+<%-- 	<delineacionUrbana:delineacionUrbanaDecFirma /> --%>
+	<delineacionUrbana:delineacionUrbanaDecFirmas />
 
 
 
