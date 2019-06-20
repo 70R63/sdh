@@ -2214,5 +2214,90 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;autorizadosReportarInfoPageComponent	;autorizadosReportarInfoPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosReportarInfoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosReportarInfoPageComponent	
 
 #->FIN dev-maria Agregar paginas para agentes autorizados
+#->INI dev-maria Agregar paginas agentes autorizados
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;autorizadosConsultasPage 		;Agentes Autorizados Consultas	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados/entidades/reportarinfo
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='autorizadosConsultasPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-autorizadosConsultasPage 	;SideContent			;																	;SideContent-autorizadosConsultasPage				;;;
+								;						;BodyContent-autorizadosConsultasPage 	;BodyContent			;																	;BodyContent-autorizadosConsultasPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-autorizadosConsultasPage 	;Side Content Slot for Agentes Autorizados Consultas	;true	;								;;;
+							;							;BodyContent-autorizadosConsultasPage	;Body Content Slot for Agentes Autorizados Consultas;true	;autorizadosConsultasPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;autorizadosConsultasPageComponent	;autorizadosConsultasPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosConsultasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosConsultasPageComponent	
+
+#->FIN dev-maria Agregar paginas para agentes autorizados
+
+#->INI dev-maria Agregar paginas agentes autorizados
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;autorizadosInicialContribuyentePage 		;Agentes Autorizados Representando	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados/contribuyente/representando
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='autorizadosInicialContribuyentePage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-autorizadosInicialContribuyentePage 	;SideContent			;																	;SideContent-autorizadosInicialContribuyentePage				;;;
+								;						;BodyContent-autorizadosInicialContribuyentePage 	;BodyContent			;																	;BodyContent-autorizadosInicialContribuyentePage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-autorizadosInicialContribuyentePage 	;Side Content Slot for Agentes Autorizados 	Representando;true	;								;;;
+							;							;BodyContent-autorizadosInicialContribuyentePage	;Body Content Slot for Agentes Autorizados Representando;true	;autorizadosInicialContribuyentePageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;autorizadosInicialContribuyentePageComponent	;autorizadosInicialContribuyentePage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosInicialContribuyentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosInicialContribuyentePageComponent	
+
+#->FIN dev-maria Agregar paginas para agentes autorizados
+
+#->INI dev-maria Agregar paginas agentes autorizados
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;autorizadosListadeContribuyentesPage 		;Agentes Autorizados Liscontrib	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados/contribuyente
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='autorizadosListadeContribuyentesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-autorizadosListadeContribuyentesPage 	;SideContent			;																	;SideContent-autorizadosListadeContribuyentesPage				;;;
+								;						;BodyContent-autorizadosListadeContribuyentesPage 	;BodyContent			;																	;BodyContent-autorizadosListadeContribuyentesPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-autorizadosListadeContribuyentesPage 	;Side Content Slot for Agentes Autorizados 	Liscontrib;true	;								;;;
+							;							;BodyContent-autorizadosListadeContribuyentesPage	;Body Content Slot for Agentes Autorizados Liscontrib;true	;autorizadosListadeContribuyentesPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;autorizadosListadeContribuyentesPageComponent	;autorizadosListadeContribuyentesPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosListadeContribuyentesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosListadeContribuyentesPageComponent	
+
+#->FIN dev-maria Agregar paginas para agentes autorizados
+
+#->INI dev-maria Agregar paginas agentes autorizados
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;autorizadosListadeclaracionesPage 		;Agentes Autorizados declaracion	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados/contribuyente/listadeclaraciones
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='autorizadosListadeclaracionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-autorizadosListadeclaracionesPage 	;SideContent			;																	;SideContent-autorizadosListadeclaracionesPage				;;;
+								;						;BodyContent-autorizadosListadeclaracionesPage 	;BodyContent			;																	;BodyContent-autorizadosListadeclaracionesPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-autorizadosListadeclaracionesPage 	;Side Content Slot for Agentes Autorizados 	declaracion;true	;								;;;
+							;							;BodyContent-autorizadosListadeclaracionesPage	;Body Content Slot for Agentes Autorizados declaracion;true	;autorizadosListadeclaracionesPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;autorizadosListadeclaracionesPageComponent	;autorizadosListadeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosListadeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosListadeclaracionesPageComponent	
+
+#->FIN dev-maria Agregar paginas para agentes autorizados
+
+
 
 									
