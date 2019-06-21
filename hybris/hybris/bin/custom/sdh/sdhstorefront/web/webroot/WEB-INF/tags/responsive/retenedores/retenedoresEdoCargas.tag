@@ -147,6 +147,9 @@
 											<c:when test='${(eachArchivo.estado == "04")}'>
 												<td>Procesado</td>
 											</c:when>
+											<c:when test='${(eachArchivo.estado == "05")}'>
+												<td>Obsoleto</td>
+											</c:when>
 											<c:otherwise>
 												<td></td>
 											</c:otherwise>
