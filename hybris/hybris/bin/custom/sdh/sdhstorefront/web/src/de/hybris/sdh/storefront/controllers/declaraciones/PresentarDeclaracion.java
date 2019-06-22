@@ -325,7 +325,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			dataForm.setOptionGas("5");
 		}
-		if (customerData.getIcaTax() != null)
+		if (customerData.getIcaTax() != null && dataFormResponse.getImpuesto().equals("3"))
 		{
 			dataForm.setOptionIca("3");
 			dataForm.setNumObjeto(customerData.getIcaTax().getObjectNumber());
@@ -336,6 +336,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 			icaInfObjetoRequest.setNumBP(customerData.getNumBP());
 			icaInfObjetoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+			icaInfObjetoRequest.setAnoGravable(dataFormResponse.getAnoGravable());
 
 			try
 			{
