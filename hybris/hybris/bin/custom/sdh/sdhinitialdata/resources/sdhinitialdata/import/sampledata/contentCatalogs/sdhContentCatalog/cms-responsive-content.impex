@@ -89,7 +89,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;MiRITLink; MI RIT LINK    ; "/contribuyentes/mirit" ;;;;;
 ; ;MiBuzonLink; MI BUZON LINK    ; "/contribuyentes/mibuzontributario/inicial" ;;;;;
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "#" ;;;;;
-; ;TramitesLink; TRAMITES LINK    ; "#" ;;;;;
+; ;TramitesLink; TRAMITES LINK    ; "/contibuyentes/tramites" ;;;;;
 ; ;FacturacionLink; FACTURACION LINK    ; "#" ;;;;;
 ; ;DeclaracionesLink; DECLARACIONES LINK    ; "#" ;;;;;
 ; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
@@ -2297,6 +2297,92 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;autorizadosListadeclaracionesPageComponent	;autorizadosListadeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosListadeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosListadeclaracionesPageComponent	
 
 #->FIN dev-maria Agregar paginas para agentes autorizados
+
+#->INI dev-maria Agregar paginas tramites
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;tramitesCrearPage 		;tramites crear	;AccountPageTemplate:sdhContentCatalog:Staged	;/contibuyentes/tramites/crear
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tramitesCrearPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-tramitesCrearPage 	;SideContent			;																	;SideContent-tramitesCrearPage				;;;
+								;						;BodyContent-tramitesCrearPage 	;BodyContent			;																	;BodyContent-tramitesCrearPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-tramitesCrearPage 	;Side Content Slot for tramites crear;true	;								;;;
+							;							;BodyContent-tramitesCrearPage	;Body Content Slot for tramites crear;true	;tramitesCrearPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;tramitesCrearPageComponent	;tramitesCrearPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesCrearPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesCrearPageComponent	
+
+#->FIN dev-maria Agregar paginas para tramites
+
+#->INI dev-maria Agregar paginas tramites
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;tramitesSeguimientoPage 		;tramites seguimiento	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/tramites/seguimiento
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tramitesSeguimientoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-tramitesSeguimientoPage 	;SideContent			;																	;SideContent-tramitesSeguimientoPage				;;;
+								;						;BodyContent-tramitesSeguimientoPage 	;BodyContent			;																	;BodyContent-tramitesSeguimientoPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-tramitesSeguimientoPage 	;Side Content Slot for tramites seguimiento;true	;								;;;
+							;							;BodyContent-tramitesSeguimientoPage	;Body Content Slot for tramites seguimiento;true	;tramitesSeguimientoPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;tramitesSeguimientoPageComponent	;tramitesSeguimientoPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesSeguimientoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesSeguimientoPageComponent	
+
+#->FIN dev-maria Agregar paginas para tramites
+
+#->INI dev-maria Agregar paginas tramites
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;tramitesMenuPage 		;tramites menu	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/tramites
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tramitesMenuPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-tramitesMenuPage 	;SideContent			;																	;SideContent-tramitesMenuPage				;;;
+								;						;BodyContent-tramitesMenuPage 	;BodyContent			;																	;BodyContent-tramitesMenuPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-tramitesMenuPage 	;Side Content Slot for tramites menu;true	;								;;;
+							;							;BodyContent-tramitesMenuPage	;Body Content Slot for tramites menu;true	;tramitesMenuPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;tramitesMenuPageComponent	;tramitesMenuPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesMenuPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesMenuPageComponent	
+
+#->FIN dev-maria Agregar paginas para tramites
+#->INI dev-maria Agregar paginas rop
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;ropPage 		;Agentes Autorizados declaracion	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/rop
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='ropPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-ropPage 	;SideContent			;																	;SideContent-ropPage				;;;
+								;						;BodyContent-ropPage 	;BodyContent			;																	;BodyContent-ropPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-ropPage 	;Side Content Slot for Agentes Autorizados 	declaracion;true	;								;;;
+							;							;BodyContent-ropPage	;Body Content Slot for Agentes Autorizados declaracion;true	;ropPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;ropPageComponent	;ropPage Component	;/WEB-INF/views/responsive/pages/layout/ropPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;ropPageComponent	
+
+#->FIN dev-maria Agregar paginas para rop
+
+
+
 
 
 

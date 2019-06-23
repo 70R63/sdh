@@ -18,14 +18,19 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.responses.DetallePubli;
 import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 
 import java.time.LocalDate;
@@ -72,6 +77,11 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
@@ -141,14 +151,14 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 			publicidadForm.setPublicidadExt(listImpuestoPublicdadExterior);
 
-			}
-			else
-			{
-				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-			}
+		}
+		else
+		{
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
 
 
-			model.addAttribute("publicidadForm", publicidadForm);
+		model.addAttribute("publicidadForm", publicidadForm);
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
@@ -181,17 +191,20 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	public PublicidadForm publicidadExternaDetail(@ModelAttribute("publicidadInfo")
 	final PublicidadForm publicidadInfo, final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+
 		final PublicidadForm publicidadForm = new PublicidadForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
+
+		resetYearPublicidadInfo(numBP, publicidadInfo);
 
 		detallePublicidadRequest.setNumBP(numBP);
 		detallePublicidadRequest.setNumResolu(publicidadInfo.getNumResolu());
 		detallePublicidadRequest.setAnoGravable(publicidadInfo.getAnoGravable());
 		detallePublicidadRequest.setTipoValla(publicidadInfo.getTipoValla());
 		try
-			{
+		{
 			final String tipovalla = publicidadInfo.getTipoValla();
 
 			//final PublicidadForm publicidadForm = new PublicidadForm();
@@ -222,7 +235,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 			final String fechNotif = detallePublicidadResponse.getFechNotif();
 			if (StringUtils.isNotBlank(fechNotif) && !"00000000".equals(fechNotif))
-				{
+			{
 				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 				final LocalDate localDate = LocalDate.parse(fechNotif, formatter);
@@ -263,7 +276,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			{
 
 				for (final DetallePubli eachDetalle : detallePublicidadResponse.getDetalle())
-					{
+				{
 
 					if ("02".equalsIgnoreCase(tipovalla) || "VALLA VEHICULOS".equalsIgnoreCase(tipovalla)
 							|| "VALLA VEHíCULOS".equalsIgnoreCase(tipovalla))
@@ -307,16 +320,16 @@ public class PublicidadExteriorPageController extends AbstractPageController
 
 			}
 
-				model.addAttribute("publicidadForm", publicidadForm);
+			model.addAttribute("publicidadForm", publicidadForm);
 
 
-			}
+		}
 		catch (final Exception e)
-			{
+		{
 			// XXX Auto-generated catch block
 			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-			}
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
 
 		//model.addAttribute("showDetail", true);
 		//	model.addAttribute("action", request.getParameter("action"));
@@ -326,7 +339,45 @@ public class PublicidadExteriorPageController extends AbstractPageController
 		updatePageTitle(model, getContentPageForLabelOrId(PUBLICIDAD_EXTERIOR_CMS_PAGE));
 		//		return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
 		return publicidadForm;
+	}
+
+	/**
+	 * @param numBP
+	 * @param publicidadInfo
+	 */
+	private void resetYearPublicidadInfo(final String numBP, final PublicidadForm publicidadInfo)
+	{
+
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		SDHValidaMailRolResponse detalleContribuyente;
+		String mensajeError = "";
+
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request para validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		{
+			for (final ImpuestoPublicidadExterior infoPublicidadWS : detalleContribuyente.getPublicidadExt())
+			{
+				if (infoPublicidadWS.getNumResolu().equals(publicidadInfo.getNumResolu()))
+				{
+					publicidadInfo.setAnoGravable(infoPublicidadWS.getAnoGravable());
+					break;
+				}
+			}
+
 		}
+		else
+		{
+			mensajeError = detalleContribuyente.getTxtmsj();
+			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+		}
+
+	}
+
 
 	private void fillVallaLED(final PublicidadForm publicidadForm, final DetallePubli eachDetalle,
 			final DetallePublicidadResponse detallePublicidadResponse)
