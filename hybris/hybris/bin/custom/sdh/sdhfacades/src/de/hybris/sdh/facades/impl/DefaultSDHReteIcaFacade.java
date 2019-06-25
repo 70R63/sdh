@@ -273,6 +273,7 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 
 		final ReteIcaRequest reteICARequest = new ReteIcaRequest();
 
+
 		reteICARequest.setAnoGravable(request.getAnoGravable());
 		reteICARequest.setNumBP(request.getNumBP());
 		reteICARequest.setNumObjeto(request.getNumObjeto());
@@ -285,16 +286,23 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 			return "00";
 		}
 
+		String filenameRequest = request.getFileName();
+		int fileNameLength = request.getFileName().length();
+		filenameRequest = filenameRequest.substring(0, fileNameLength - 6);
+
+		String filenameResponse;
+
 		for (final ArchivosTRM eachArchivo : response.getArchivosTRM())
 		{
-			if (request.getFileName().substring(0, request.getFileName().length() - 4).equals(eachArchivo.getNomArchivo()))
-			{
-				if (!"X".equalsIgnoreCase(eachArchivo.getBandera()))
-				{
-					return "-1"; //Accion no permitida
-				}
 
-				return eachArchivo.getEstado();
+			fileNameLength = eachArchivo.getNomArchivo().length();
+			filenameResponse = eachArchivo.getNomArchivo().substring(0, fileNameLength - 2);
+			if (filenameResponse.equals(filenameRequest))
+			{
+				if ("X".equalsIgnoreCase(eachArchivo.getBandera()))
+				{
+					return eachArchivo.getEstado();
+				}
 			}
 		}
 

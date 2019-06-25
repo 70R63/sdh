@@ -12,7 +12,8 @@
 <sobreVehiculos:sobreVehiculosDeclaraInicial />
 <sobreVehiculos:sobreVehiculosDeclaraInfo />
 <sobreVehiculos:sobreVehiculosDeclaraLiqui />
-<sobreVehiculos:sobreVehiculosDeclaraFirma />
+<%-- <sobreVehiculos:sobreVehiculosDeclaraFirma /> --%>
+<sobreVehiculos:sobreVehiculosDeclaraFirmas/>
 
 
 <script>

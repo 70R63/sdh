@@ -541,7 +541,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 			infoDelineacionRequest.setRetencion(""); //Se indico que para retencion va una X
 		}
 
-		System.out.println("Request para calculoImp/Delineacion: " + infoDelineacionRequest);
+		System.out.println("Request para calculo	/Delineacion: " + infoDelineacionRequest);
 		try
 		{
 			infoDelineacionResponse = gasolinaService.calcularImpuestoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);

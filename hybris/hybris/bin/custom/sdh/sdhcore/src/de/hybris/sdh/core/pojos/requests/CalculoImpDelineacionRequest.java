@@ -391,7 +391,7 @@ public class CalculoImpDelineacionRequest
 		if (this.getAreaProyecto() != null)
 		{
 			stringBuilder.append("[");
-			for (int i = 0; i < this.getAreaIntervenida().size() - 1; i++)
+			for (int i = 0; i <= this.getAreaProyecto().size() - 1; i++)
 			{
 				info = this.getAreaProyecto().get(i);
 
@@ -400,12 +400,14 @@ public class CalculoImpDelineacionRequest
 				stringBuilder.append(obtenerValorJson("\"aream2\":\"", info.getAream2(), "\""));
 				stringBuilder.append("},");
 			}
-			info = this.getAreaProyecto().get(this.getAreaProyecto().size() - 1);
 
-			stringBuilder.append("{");
-			stringBuilder.append(obtenerValorJson("\"areaProy\":\"", info.getAreaProy(), "\","));
-			stringBuilder.append(obtenerValorJson("\"aream2\":\"", info.getAream2(), "\""));
-			stringBuilder.append("}");
+			if (this.getAreaProyecto() == null)
+			{
+				stringBuilder.append("{");
+				stringBuilder.append(obtenerValorJson("\"areaProy\":\"", "", "\","));
+				stringBuilder.append(obtenerValorJson("\"aream2\":\"", "", "\""));
+				stringBuilder.append("}");
+			}
 
 			stringBuilder.append("]");
 		}

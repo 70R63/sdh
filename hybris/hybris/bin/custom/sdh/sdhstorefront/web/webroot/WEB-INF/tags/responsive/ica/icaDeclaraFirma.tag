@@ -23,7 +23,7 @@
 
 			<%-- 			<form:form action=""> --%>
 			<div class="row margin-bottom-4" style="margin-top: 18px">
-				<div class="col-md-6" style="margin-top: 18px">
+				<div class="col-md-3" style="margin-top: 18px">
 					<div class="form-check">
 						<label class="form-check-label"
 							style="text-transform: none; font-size: 14px; font-weight: 400;">
@@ -32,35 +32,24 @@
 							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px;"
 							onclick="habradio()"> <spring:theme
 								code="ica.declaracion.firma.obligado" />
-						</label> <label class="form-check-label"
-							style="text-transform: none; font-size: 14px; font-weight: 400;">
-							<input onclick="show()" type="radio" name="firma"
-							id="radiorevisor" class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px;"
-							disabled> <spring:theme
-								code="ica.declaracion.firma.revisor" />
-						</label> <label class="form-check-label"
-							style="text-transform: none; font-size: 14px; font-weight: 400;">
-							<input onclick="show2()" type="radio" name="firma"
-							id="radiorepresentante" class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-							disabled> <spring:theme
-								code="ica.declaracion.firma.replegal" />
 						</label>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<button id="addFirmante" class="btn btn-primary"
-						style="font-size: 14px" disabled onclick="fnaddFirmante()">Agregar
-						otro firmante</button>
-				</div>
 			</div>
 			<div class="row mt-3">
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div class="form-group">
-						<input disabled id="" name="" class="form-control" disabled
-							type="text" value="" maxlength="240" placeholder="Declarante"
-							style="margin-top: 26px;">
+						<label class="control-label"><spring:theme code="" /></label> <input
+							disabled id="" name="" class="form-control" disabled type="text"
+							value="" maxlength="240" placeholder="Declarante" style="margin-top:4px">
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
+							name="" class="form-control" disabled type="text" value=""
+							maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-2">
@@ -88,43 +77,41 @@
 							maxlength="240"></input>
 					</div>
 				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<label class="control-label"><spring:theme
-								code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
-							name="" class="form-control" disabled type="text" value=""
-							maxlength="240"></input>
-					</div>
-				</div>
 				<div class="col-md-1">
-					<button class="btn btn-primary" style="margin-top: 26px">Firmar</button>
+					<label class="control-label"><spring:theme code="" /></label>
+					<button class="btn btn-primary" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container">
+<div class="container" id="repre">
+
 	<div id="representante" class="row mt-3 representante"
 		style="display: none">
 		<div class="col-md-2">
 			<div class="form-group">
-				<input disabled id="replegal" name="" class="form-control replegal"
-					disabled type="text" value="" maxlength="240"
-					placeholder="Representante Legal" style="margin-top: 26px;">
-			</div>
-		</div>
-		<div class="col-md-1">
-			<div class="form-group">
 				<label class="control-label"><spring:theme code="" /></label> <select
-					class="form-control"
-					style="font-size: 13px; padding: 0px; margin-top: 5px;">
-					<option>seleccionar</option>
+					class="form-control "
+					style="font-size: 13px; padding: 0px; margin-top: 23px"
+					onchange="habfirmante(this)" id="selectfirmante">
+					<option>Seleccionar</option>
+					<option>Revisor</option>
+					<option>Contador</option>
+					<option>Representante</option>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
-				<label class="control-label"><spring:theme
+				<label class="control-label " style="margin-top: 20px"><spring:theme
+						code="ica.declaracion.firma.nombre" /></label> <select  id="selcnombre"
+					name="" class="form-control"><option>Seleccionar</option></select>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group">
+				<label class="control-label textocentrado" style="margin-top: 20px"><spring:theme
 						code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
@@ -132,7 +119,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
-				<label class="control-label"><spring:theme
+				<label class="control-label" style="margin-top: 20px"><spring:theme
 						code="ica.declaracion.firma.numide" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
@@ -141,81 +128,29 @@
 
 		<div class="col-md-2">
 			<div class="form-group">
-				<label class="control-label"><spring:theme
+				<label class="control-label" style="margin-top: 20px"><spring:theme
 						code="ica.declaracion.firma.numtarjeta" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
-					maxlength="240"></input>
-			</div>
-		</div>
-		<div class="col-md-2">
-			<div class="form-group">
-				<label class="control-label"><spring:theme
-						code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
-					maxlength="240"></input>
-			</div>
-		</div>
-		<div class="col-md-1">
-			<button class="btn btn-primary" style="margin-top: 26px;">Firmar</button>
-		</div>
-	</div>
-</div>
-<div class="container">
-	<div id="revisor" class="row mt-3 revisor" style="display: none">
-		<div class="col-md-2">
-			<div class="form-group">
-				<input disabled id="" name="" class="form-control" disabled
-					type="text" value="" maxlength="240" placeholder="Revisor/Contador"
-					style="margin-top: 26px;"> </input>
-			</div>
-		</div>
-		<div class="col-md-1">
-			<div class="form-group">
-				<label class="control-label"><spring:theme code="" /></label> <select
-					class="form-control"
-					style="font-size: 13px; padding: 0px; margin-top: 5px;">
-					<option>seleccionar</option>
-				</select>
-			</div>
-		</div>
-		<div class="col-md-2">
-			<div class="form-group">
-				<label class="control-label"><spring:theme
-						code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
-					maxlength="240"></input>
-			</div>
-		</div>
-		<div class="col-md-2">
-			<div class="form-group">
-				<label class="control-label"><spring:theme
-						code="ica.declaracion.firma.numide" /></label> <input disabled id=""
 					name="" class="form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
 		</div>
 
-		<div class="col-md-2">
-			<div class="form-group">
-				<label class="control-label"><spring:theme
-						code="ica.declaracion.firma.numtarjeta" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
-					maxlength="240"></input>
-			</div>
-		</div>
-		<div class="col-md-2">
-			<div class="form-group">
-				<label class="control-label"><spring:theme
-						code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
-					maxlength="240"></input>
-			</div>
+		<div class="col-md-1">
+			<button class="btn btn-primary ajustemargen">Firmar</button>
 		</div>
 		<div class="col-md-1">
-			<button class="btn btn-primary" style="margin-top: 26px;">Firmar</button>
+			<div class="form-group ">
+				<img onclick="fnaddFirmanteRep()"
+					src="${themeResourcePath}/images/adddelineacion.png"
+					style="width: 25px; margin-top: 55px;"></img> <img
+					onclick="delerepre()"
+					src="${themeResourcePath}/images/deledelineacion.png"
+					style="width: 25px; margin-top: 55px;"></img>
+			</div>
 		</div>
 	</div>
 </div>
+
 <div class="container">
 	<input type="hidden" id="numObjeto" name="numObjeto"
 		value="${numObjeto}" /> <input type="hidden" id="numForm"
@@ -263,12 +198,6 @@
 					name="pagar" value="pagar">
 					<spring:theme code="ica.declaracion.firma.pagliena" />
 				</sf:button>
-
-
-				<!-- 						<button style="margin-top: 3px;" id="" -->
-				<!-- 							class="btn btn-primary btn-lg" type="button"> -->
-				<%-- 							<spring:theme code="ica.declaracion.firma.pagliena" /> --%>
-				<!-- 						</button> -->
 			</sf:form>
 		</div>
 	</div>
@@ -283,176 +212,74 @@
 <script>
 	function habradio() {
 		debugger;
-		var hrep = document.getElementById('radiorepresentante');
-		var hrev = document.getElementById('radiorevisor');
 		var hobli = document.getElementById('selectobligado');
-		var rep = document.getElementById('representante');
-		var rev = document.getElementById('revisor');
-		var firman = document.getElementById('addFirmante');
-		var rep2 = document.getElementById('newrepresentante');
-		var rev2 = document.getElementById('newrevisor');
+		var firmdeclar = document.getElementById('btnfirmardeclarante');
 		var btnpredec = document
 				.getElementById('icaPresentarDeclaracionButton');
+		var repre = document.getElementById('representante');
+		var rep2 = document.getElementById('newrepresentante');
+		var selc = document.getElementById('selectfirmante');
+		var selcnom = document.getElementById('selcnombre');
 
 		if (hobli.checked == true) {
-			hrep.disabled = false;
-			hrev.disabled = false;
+			firmdeclar.disabled = false;
 			btnpredec.disabled = true;
+			repre.style.display = 'block';
 
-		} else if ((rep2 == null) && (rev2 == null)) {
-			hrep.disabled = true;
-			hrev.disabled = true;
-			hrep.checked = false;
-			hrev.checked = false;
-			firman.disabled = true;
-			rev.style.display = 'none';
-			rep.style.display = 'none';
+		} else if ((rep2 != null)) {
+
+			firmdeclar.disabled = false;
 			btnpredec.disabled = false;
-		} else if (rep2 == null) {
-
-			hrep.disabled = true;
-			hrev.disabled = true;
-			hrep.checked = false;
-			hrev.checked = false;
-			firman.disabled = true;
-			rev.style.display = 'none';
-			rep.style.display = 'none';
-			rev2.style.display = 'none';
-			btnpredec.disabled = false;
-
-		} else if (rev2 == null) {
-
-			hrep.disabled = true;
-			hrev.disabled = true;
-			hrep.checked = false;
-			hrev.checked = false;
-			firman.disabled = true;
-			rev.style.display = 'none';
-			rep.style.display = 'none';
+			repre.style.display = 'none';
 			rep2.style.display = 'none';
-			btnpredec.disabled = false;
-
-		} else if ((rep2 != null) && (rev2 != null)) {
-
-			hrep.disabled = true;
-			hrev.disabled = true;
-			hrep.checked = false;
-			hrev.checked = false;
-			firman.disabled = true;
-			rev.style.display = 'none';
-			rep.style.display = 'none';
-			rep2.style.display = 'none';
-			rev2.style.display = 'none';
-			btnpredec.disabled = false;
-		}
-	}
-
-	function show() {
-		var rep = document.getElementById('representante');
-		var rev = document.getElementById('revisor');
-		var firman = document.getElementById('addFirmante');
-		var rep2 = document.getElementById('newrepresentante');
-		var rev2 = document.getElementById('newrevisor');
-
-		if (rep2 == null) {
-			rep.style.display = 'none';
-			rev.style.display = 'block';
-			firman.disabled = false;
-
-		} else if (rep2 != null && rev2 != null) {
-
-			rep.style.display = 'none';
-			rev.style.display = 'block';
-			rep2.style.display = 'none';
-			firman.disabled = false;
+			selc.value="Seleccionar";
+			selcnom.value="Seleccionar"
 
 		} else {
 
-			rep.style.display = 'none';
-			rep2.style.display = 'none';
-			rev.style.display = 'block';
-			firman.disabled = false;
+			firmdeclar.disabled = false;
+			btnpredec.disabled = false;
+			repre.style.display = 'none';
+			selc.value="Seleccionar";
+			selcnom.value="Seleccionar"
 
 		}
-
 	}
 
-	function show2() {
-		var rep = document.getElementById('representante');
-		var rev = document.getElementById('revisor');
-		var firman = document.getElementById('addFirmante');
+	function fnaddFirmanteRep() {
 		var rep2 = document.getElementById('newrepresentante');
-		var rev2 = document.getElementById('newrevisor');
 
-		if (rev2 == null) {
-			rep.style.display = 'block';
-			rev.style.display = 'none';
-			firman.disabled = false;
+		var tam = $(".representante").length;
 
-		} else if (rep2 != null && rev2 != null) {
+		if ($(".representante").length < 2) {
 
-			rep.style.display = 'block';
-			rev.style.display = 'none';
-			rev2.style.display = 'none';
-			firman.disabled = false;
+			var clon = $(".representante:first").clone();
+			$(clon).attr('id', 'newrepresentante'); //change cloned element id attribute
+			$(clon).insertAfter(".representante:last");
+
+		} else if ($(".representante").length == 2
+				&& rep2.style.display == 'none') {
+
+			rep2.style.display = 'block';
 
 		} else {
 
-			rep.style.display = 'block';
-			rev2.style.display = 'none';
-			rev.style.display = 'none';
-			firman.disabled = false;
+			alert("No se pueden agregar más firmantes");
 
 		}
 	}
 
-	function fnaddFirmante() {
-		var hrep = document.getElementById('radiorepresentante');
-		var hrev = document.getElementById('radiorevisor');
-		var rep2 = document.getElementById('newrepresentante');
-		var rev2 = document.getElementById('newrevisor');
+	function delerepre() {
 
-		if (hrep.checked == true) {
-			var tam = $(".representante").length;
+		var i = $(".representante").length;
+		var val = i - 1;
+		if ($(".representante").length <= 2 && $(".representante").length > 1) {
 
-			if ($(".representante").length < 2) {
+			$($(".representante")[val]).closest(
+					$($(".representante")[val]).remove());
 
-				var clon = $(".representante:first").clone();
-				$(clon).attr('id', 'newrepresentante'); //change cloned element id attribute
-				$(clon).insertAfter(".representante:last");
-
-			} else if ($(".representante").length == 2
-					&& rep2.style.display == 'none') {
-
-				rep2.style.display = 'block';
-
-			} else {
-
-				alert("No se pueden agregar más firmantes");
-
-			}
+		} else if ($(".representante").length <= 1) {
+			alert("No puede eliminar todos los registros");
 		}
-
-		if (hrev.checked == true) {
-			var tam = $(".revisor").length;
-			if ($(".revisor").length < 2) {
-
-				var clon = $(".revisor").clone();
-				$(clon).attr('id', 'newrevisor'); //change cloned element id attribute
-
-				$(clon).insertAfter(".revisor:last");
-
-			} else if ($(".revisor").length == 2
-					&& rev2.style.display == 'none') {
-
-				rev2.style.display = 'block';
-
-			} else {
-
-				alert("No se pueden agregar más firmantes");
-
-			}
-		}
-
 	}
 </script>

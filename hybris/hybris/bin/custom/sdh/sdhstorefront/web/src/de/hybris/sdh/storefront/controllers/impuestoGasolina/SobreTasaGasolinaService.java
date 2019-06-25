@@ -807,8 +807,14 @@ public class SobreTasaGasolinaService
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			responseInfo = mapper.readValue(sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet),
-					Class.forName(nombreClase));
+
+			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse"))
+			{
+				wsresponse = wsresponse.replace("\"Uso\"", "\"uso\"");
+			}
+
+			responseInfo = mapper.readValue(wsresponse, Class.forName(nombreClase));
 		}
 		catch (final Exception e)
 		{
