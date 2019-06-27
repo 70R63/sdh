@@ -10,36 +10,38 @@
 
 <template:page pageTitle="${pageTitle}">
 	<div class="container">
-		<p><spring:theme code="mirit.description" /></p>
-			<c:choose>
-				<c:when test="${ PJUR eq true}">
-					<miRit:personalDataPJ/>
-				</c:when>
-				<c:otherwise>
-					<miRit:personalData/>
-		
-					<miRit:generalData/>
-				</c:otherwise>
-			</c:choose>		
-		
-		
-		<miRit:contactData/>
-		
-		<miRit:changeEmail/>
-		
-		<miRit:changePasword/>
-		
-		<miRit:consentsData/>
-		
-		<miRit:myTaxes/>
-		
-		<miRit:myRepresentantsData/>
-		
-		<miRit:myTributaryRols/>
-		
-		<miRit:miRitButtons/>
-		
+		<p>
+			<spring:theme code="mirit.description" />
+		</p>
 	</div>
+	<c:choose>
+		<c:when test="${ PJUR eq true}">
+			<miRit:personalDataPJ />
+		</c:when>
+		<c:otherwise>
+			<miRit:personalData />
+
+			<miRit:generalData />
+		</c:otherwise>
+	</c:choose>
+
+
+	<miRit:contactData />
+
+	<miRit:changeEmail />
+
+	<miRit:changePasword />
+
+	<miRit:consentsData />
+
+	<miRit:myTaxes />
+
+	<miRit:myRepresentantsData />
+
+	<miRit:myTributaryRols />
+
+	<miRit:miRitButtons />
+
 
 
 </template:page>

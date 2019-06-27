@@ -6,71 +6,100 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<div id="acordeon" class="container">
+	<div class="card cardmirit ">
+		<div class="card-header" id="head8" style="background: #f2f2f2">
+			<h5 class="mb-0">
+				<button class="btn btn-link miritmenu" data-toggle="collapse"
+					data-target="#collapse8" aria-expanded="true"
+					aria-controls="collapse8">
+					<h4>
+						<span tabindex="0"><spring:theme
+								code="mirit.tributaryRols.title" text="Mis Roles Tributarios" /></span>
+					</h4>
+				</button>
+			</h5>
+		</div>
+		<div id="collapse8" class="collapse" aria-ladelledby="head8"
+			data-parent="#acordeon">
+			<div class="card-body">
+				<c:if test="${miRitForm.hasCORol }">
+					<div class="row">
+						<div class="col-md-3  text-center">
+							<div class="form-group ">
+								<input id="address.surname" disabled name="lastName"
+									class="form-control text-center" aria-required="true"
+									type="text" value="Contribuyente" maxlength="240">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un
+										tipo de documento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${miRitForm.hasAARol }">
+					<div class="row">
+						<div class="col-md-3  text-center">
+							<div class="form-group ">
+								<input id="address.surname" disabled name="lastName"
+									class="form-control text-center" aria-required="true"
+									type="text" value="Agente Autorizado" maxlength="240">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un
+										tipo de documento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${miRitForm.hasTARol }">
+					<div class="row">
+						<div class="col-md-3 text-center">
+							<div class="form-group ">
+								<input id="address.surname" disabled name="lastName"
+									class="form-control text-center" aria-required="true"
+									type="text" value="Tercero Autorizado" maxlength="240">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un
+										tipo de documento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${miRitForm.hasARRol }">
+					<div class="row">
+						<div class="col-md-3 text-center">
+							<div class="form-group ">
+								<input id="address.surname" disabled name="lastName"
+									class="form-control text-center" aria-required="true"
+									type="text" value="Agente Retenedor" maxlength="240">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un
+										tipo de documento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${miRitForm.hasRIRol }">
+					<div class="row">
+						<div class="col-md-3 text-center">
+							<div class="form-group ">
+								<input id="address.surname" disabled name="lastName"
+									class="form-control text-center" aria-required="true"
+									type="text" value="Reportantes de Información" maxlength="240">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un
+										tipo de documento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+			</div>
+		</div>
+	</div>
+</div>
 
-			<div class="headline">
-				<h2>
-					<span tabindex="0"><spring:theme code="mirit.tributaryRols.title" text="Mis Roles Tributarios"/></span>
-				</h2>
-			</div>
-			
-			
-		<c:if test="${miRitForm.hasCORol }">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-2 text-center">
-				<div class="form-group ">
-					<input  id="address.surname" disabled  name="lastName" class="form-control text-center" aria-required="true" type="text" value="Contribuyente" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		</c:if>
-		<c:if test="${miRitForm.hasAARol }">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-2 text-center">
-				<div class="form-group ">
-					<input  id="address.surname" disabled  name="lastName" class="form-control text-center" aria-required="true" type="text" value="Agente Autorizado" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		</c:if>
-		<c:if test="${miRitForm.hasTARol }">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-2 text-center">
-				<div class="form-group ">
-					<input  id="address.surname" disabled  name="lastName" class="form-control text-center" aria-required="true" type="text" value="Tercero Autorizado" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		</c:if>
-		<c:if test="${miRitForm.hasARRol }">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-2 text-center">
-				<div class="form-group ">
-					<input  id="address.surname" disabled  name="lastName" class="form-control text-center" aria-required="true" type="text" value="Agente Retenedor" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		</c:if>
-		<c:if test="${miRitForm.hasRIRol }">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-2 text-center">
-				<div class="form-group ">
-					<input  id="address.surname" disabled  name="lastName" class="form-control text-center" aria-required="true" type="text" value="Reportantes de Información" maxlength="240">
-					<div class="help-block">
-						<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		</c:if>
