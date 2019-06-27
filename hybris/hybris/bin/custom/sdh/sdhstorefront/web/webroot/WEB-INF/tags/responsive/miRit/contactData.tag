@@ -278,38 +278,27 @@
 		$("#addressAssistant").toggle();
 	}
 </script>
-<div id="acordeon">
-	<div class="card">
-		<div class="card-header" id="head2">
+<div id="acordeon" class="container">
+	<div class="card cardmirit ">
+		<div class="card-header" id="head2" style="background: #f2f2f2">
 			<h5 class="mb-0">
-				<button class="btn btn-link" data-toggle="collapse"
+				<button class="btn btn-link miritmenu" data-toggle="collapse"
 					data-target="#collapse2" aria-expanded="true"
 					aria-controls="collapse2">
-					<h2>
+					<h4>
 						<span tabindex="0"><spring:theme
 								code="mirit.contactData.title" text="Datos Contacto" /></span>
-					</h2>
+					</h4>
 				</button>
 			</h5>
 		</div>
 		<div id="collapse2" class="collapse" aria-ladelledby="head2"
 			data-parent="#acordeon">
+
 			<div class="card-body">
-<!-- 				<h2 class="card-title">titulo</h2> -->
-<!-- 				<p class="card-text">iushf djahkjd sakjhfkja ashfkjahs hkjashf -->
-<!-- 					akjhskl iushf djahkjd sakjhfkja</p> -->
-
-
-				<!-- 				<div class="headline"> -->
-				<!-- 					<h2> -->
-				<%-- 						<span tabindex="0"><spring:theme --%>
-				<%-- 								code="mirit.contactData.title" text="Datos Contacto" /></span> --%>
-				<!-- 					</h2> -->
-				<!-- 				</div> -->
-
 				<!--  First column of form -->
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-4">
 						<div class="form-group ">
 							<label class="control-label required" for="direccionNotificacion">
 								<spring:theme code="mirit.contactData.notificationAddress" />
@@ -334,7 +323,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="countryDireccionNotificacion">
 								<spring:theme code="mirit.contactData.country" />
@@ -344,7 +333,7 @@
 						</div>
 
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label "
 								for="deparmentDireccionNotificacion"> <spring:theme
@@ -356,7 +345,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label "
 								for="municipioDireccionNotificacion"> <spring:theme
@@ -366,7 +355,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label "
 								for="postalCodeDireccionNotificacion"> <spring:theme
@@ -390,7 +379,7 @@
 
 				<br> <br>
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-4">
 						<div class="form-group ">
 							<label class="control-label required" for="direccionContacto">
 								<spring:theme code="mirit.contactData.anotherContactAddress" />
@@ -420,7 +409,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="countryDireccionContacto">
 								<spring:theme code="mirit.contactData.country" />
@@ -430,7 +419,7 @@
 						</div>
 
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="deparmentDireccionContacto">
 								<spring:theme code="mirit.contactData.department" />
@@ -441,7 +430,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="municipioDireccionContacto">
 								<spring:theme code="mirit.contactData.county" />
@@ -450,7 +439,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="postalCodeDireccionContacto">
 								<spring:theme code="mirit.contactData.postalCode" />
@@ -474,11 +463,12 @@
 				<br> <br>
 				<div class="row">
 					<div class="row">
-						<div class="col-12 col-md-4">
+						<div class="col-12 col-md-2">
 							<div>
 								<button
 									class="btn btn-primary btn-lg btn-block addressHelperField"
-									type="button" onclick="toggleAssistant();">
+									type="button" onclick="toggleAssistant();"
+									style="margin-bottom: 10px;">
 									<spring:theme code="mirit.contactData.editarAddress" />
 								</button>
 							</div>
@@ -486,7 +476,8 @@
 					</div>
 
 				</div>
-				<div id="addressAssistant" style="display: none;">
+				<div id="addressAssistant"
+					style="display: none; border: 1px solid #000; padding: 10px;">
 					<br> <br>
 					<div class="form-group ">
 						<label class="control-label "> <spring:theme
@@ -966,7 +957,7 @@
 				</div>
 				<br> <br>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required" for="telefonoPricipal">
 								<spring:theme code="mirit.contactData.landPhone" />
@@ -980,7 +971,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required" for="extensionTelefono">
 								<spring:theme code="mirit.contactData.extension" />
@@ -1013,7 +1004,7 @@
 					<c:choose>
 						<c:when test="${not empty miRitForm.redsocial }">
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<div class="form-group ">
 										<label class="control-label required" for=""> <spring:theme
 												code="mirit.contactData.socialNetwork" />
@@ -1021,14 +1012,14 @@
 									</div>
 
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<div class="form-group ">
 										<label class="control-label required" for=""> <spring:theme
 												code="mirit.contactData.socialNetworkUser" />
 										</label>
 									</div>
 								</div>
-								<div class="col-12 col-md-4">
+								<div class="col-12 col-md-2">
 									<div class="form-group ">
 										<button class="btn btn-secondary btn-lg btn-block "
 											type="button" id="addSocialNetworkButton">
@@ -1041,7 +1032,7 @@
 							<c:forEach items="${miRitForm.redsocial }" var="eachRedSocial"
 								varStatus="status">
 								<div class="row socialNetworkRow">
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<div class="form-group ">
 											<select class="form-control redSocial">
 												<option value=""></option>
@@ -1060,7 +1051,7 @@
 										</div>
 
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<div class="form-group ">
 											<input class="form-control usuarioRedSocial"
 												aria-required="true" type="text"
@@ -1076,7 +1067,7 @@
 						</c:when>
 						<c:otherwise>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<div class="form-group ">
 										<label class="control-label required" for=""> <spring:theme
 												code="mirit.contactData.socialNetwork" />
@@ -1084,14 +1075,14 @@
 									</div>
 
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<div class="form-group ">
 										<label class="control-label required" for=""> <spring:theme
 												code="mirit.contactData.socialNetworkUser" />
 										</label>
 									</div>
 								</div>
-								<div class="col-12 col-md-4">
+								<div class="col-12 col-md-2">
 									<div class="form-group ">
 										<button class="btn btn-secondary btn-lg btn-block"
 											type="button" id="addSocialNetworkButton">
@@ -1101,7 +1092,7 @@
 								</div>
 							</div>
 							<div class="row socialNetworkRow">
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<div class="form-group ">
 										<select class="form-control redSocial">
 											<option value=""></option>
@@ -1116,7 +1107,7 @@
 									</div>
 
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-2">
 									<div class="form-group ">
 										<input class="form-control usuarioRedSocial"
 											aria-required="true" type="text" value="" maxlength="240">
