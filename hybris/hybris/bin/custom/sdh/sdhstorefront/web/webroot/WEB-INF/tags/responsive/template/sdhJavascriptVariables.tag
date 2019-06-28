@@ -93,7 +93,9 @@
 			ACC.reteICACalculoURL = "<c:url value='/retenedores/declaracion/calculo' />";
 			
 			ACC.reteICAGeneraDeclaracionURL = "<c:url value='/retenedores/declaracion/generar' />";
-		  	
+
+			ACC.tramitestSeleccionURL= "<c:url value='/contribuyentes/tramites/seleccionNivel' />";			
+			
 		  	ACC.currentURL = "${currentURL}";
 			
 		  	<c:if test="${not empty reteICATemplateURL}">
