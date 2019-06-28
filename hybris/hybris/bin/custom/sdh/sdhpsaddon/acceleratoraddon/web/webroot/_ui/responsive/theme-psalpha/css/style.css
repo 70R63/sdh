@@ -24796,3 +24796,25 @@ input[type="search"] {
 .cardsinfondo {
   background: none;
 }
+.miritmenu {
+  font-size: 14 px !important;
+  margin: 0px;
+}
+.cardmirit {
+  background: none;
+  font-size: 14 px !important;
+  margin: 0px;
+  padding-bottom: 0px;
+}
+.miritmenu:hover,
+.miritmenu:active:hover {
+  outline: transparent;
+}
+.miritmenu:focus,
+.miritmenu:active:focus,
+.miritmenu.active:focus,
+.miritmenu.focus,
+.miritmenu:active.focus,
+.miritmenu.active.focus {
+  outline: transparent;
+}
