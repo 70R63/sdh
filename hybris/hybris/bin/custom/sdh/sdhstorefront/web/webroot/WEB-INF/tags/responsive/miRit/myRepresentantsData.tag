@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div id="acordeon" class="container">
+<div id="acordeon" class="container_new">
 	<div class="card cardmirit ">
 		<div class="card-header" id="head7" style="background: #f2f2f2">
 			<h5 class="mb-0">
