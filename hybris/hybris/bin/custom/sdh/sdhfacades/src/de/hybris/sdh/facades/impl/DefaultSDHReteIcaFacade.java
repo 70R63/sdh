@@ -70,6 +70,8 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 			catch (final IOException e)
 			{
 				LOG.error("Error trying to parse JSON :" + response + " to String. Ex.Message" + e.getMessage());
+
+				return null;
 			}
 		}
 		return reteIcaResponse;
@@ -294,6 +296,11 @@ public class DefaultSDHReteIcaFacade implements SDHReteIcaFacade
 
 		for (final ArchivosTRM eachArchivo : response.getArchivosTRM())
 		{
+			if ("06".equals(eachArchivo.getEstado()))
+			{
+				return "00";
+			}
+
 			if (StringUtils.isNotBlank(eachArchivo.getNomArchivo()))
 			{
 				fileNameLength = eachArchivo.getNomArchivo().length();
