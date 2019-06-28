@@ -13,7 +13,7 @@
 	var="pagarURL" htmlEscape="false" />
 
 
-<div class="container">
+<div class="container_new">
 	<div class="col-md-8 text-center">
 
 

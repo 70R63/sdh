@@ -8,7 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/consultas"%>
 
 
-<div class="container">
+
 	<certificacion:certificacionMenu />
-</div>
+
 

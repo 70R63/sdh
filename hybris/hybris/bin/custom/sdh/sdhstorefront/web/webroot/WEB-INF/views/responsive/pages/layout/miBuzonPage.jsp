@@ -8,7 +8,7 @@
 
 
 
-<div class="container">
+
 	<mibuzon:miBuzonInicial />
 	<div id="idNotifi" style="display: none;">
 		<mibuzon:miBuzonNotificaciones />
@@ -16,7 +16,7 @@
 	<div id="idMsn" style="display: none;">
 		<mibuzon:miBuzonMensajes />
 	</div>
-</div>
+
 
 <script>
 	function myFunction(idButton) {

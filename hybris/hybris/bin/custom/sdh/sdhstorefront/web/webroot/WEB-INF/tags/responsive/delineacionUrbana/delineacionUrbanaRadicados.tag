@@ -15,7 +15,7 @@
 
 <!-- <input type="hidden" value="" id="selectedCDU" /> -->
 <!-- <input type="hidden" value="" id="selectedRadicado" /> -->
-<div class="container">
+<div class="container_new">
 	<div id="divInfoRadicados" style="display: none;">
 		<br>
 		<div class="row">

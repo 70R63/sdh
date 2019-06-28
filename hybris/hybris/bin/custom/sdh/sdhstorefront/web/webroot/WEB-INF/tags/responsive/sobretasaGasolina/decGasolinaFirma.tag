@@ -9,7 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <sf:form action="${declaracionURL}" method="POST"
 	modelAttribute="dataForm" id="forma">
-	<div class="container">
+	<div class="container_new">
 		<div class="row mt-3">
 			<div class="col-md-12 mt-3">
 				<div class="headline">
@@ -85,7 +85,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container" id="repre">
+	<div class="container_new" id="repre">
 
 		<div id="representante" class="row mt-3 representante"
 			style="display: none">

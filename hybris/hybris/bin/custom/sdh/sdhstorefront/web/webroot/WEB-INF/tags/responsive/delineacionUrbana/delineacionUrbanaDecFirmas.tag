@@ -11,7 +11,7 @@
 
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
 	htmlEscape="false" />
-<div class="container">
+<div class="container_new">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
 		
@@ -89,7 +89,7 @@
 		</div>
 	</div>
 </div>
-<div class="container" id="repre">
+<div class="container_new" id="repre">
 
 	<div id="representante" class="row mt-3 representante"
 		style="display: none">
@@ -156,7 +156,7 @@
 </div>
 
 <br>
-<div class="container">
+<div class="container_new">
 	<div class="row ">
 		<sf:form action="${pagarURL}" method="POST"
 			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">

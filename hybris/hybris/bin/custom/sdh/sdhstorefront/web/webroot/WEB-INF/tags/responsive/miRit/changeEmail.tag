@@ -8,8 +8,8 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div id="acordeon" class="container_new">
 	<div class="card cardmirit ">
-		<div class="card-header" id="head3" style="background: #f2f2f2">
-			<h5 class="mb-0">
+		<div class="card-header" id="head3">
+			<h5 class="mb-0 cardtitle">
 				<button class="btn btn-link miritmenu" data-toggle="collapse"
 					data-target="#collapse3" aria-expanded="true"
 					aria-controls="collapse3">

@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container">
+<div class="container_new">
 	<div class="row" style="margin-top:50px !important">
 		<div class="col-md-7">
 			<div class="table-responsive">
