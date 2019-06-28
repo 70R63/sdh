@@ -76,8 +76,7 @@
 	style="margin-left: 0PX; margin-right: 55px; margin-top: 15px; padding: 0px;">
 
 	<img class="delededucciones"
-		src="${themeResourcePath}/images/contribuyentes_1.jpg"
-		style="pointer-events: none; position: absolute; width: 86%; height: 86%; margin-bottom: 80px !important"></img>
+		src="${themeResourcePath}/images/contribuyentes_1.jpg"></img>
 
 
 </div>

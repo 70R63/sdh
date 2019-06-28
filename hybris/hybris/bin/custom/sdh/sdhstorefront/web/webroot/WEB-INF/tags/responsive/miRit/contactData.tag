@@ -303,7 +303,7 @@
 							<label class="control-label required" for="direccionNotificacion">
 								<spring:theme code="mirit.contactData.notificationAddress" />
 							</label> <input id="direccionNotificacion" name="direccionNotificacion"
-								class="form-control" aria-required="true" type="text"
+								class="newalto form-control" aria-required="true" type="text"
 								data-original="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
 								" disabled="disabled"
 								value="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
@@ -323,45 +323,45 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label " for="countryDireccionNotificacion">
 								<spring:theme code="mirit.contactData.country" />
 							</label> <select disabled="disabled" id="countryDireccionNotificacion"
-								class="form-control" onchange="">
+								class="newalto form-control" onchange="">
 							</select>
 						</div>
 
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label "
 								for="deparmentDireccionNotificacion"> <spring:theme
 									code="mirit.contactData.department" />
 							</label> <select disabled="disabled" id="deparmentDireccionNotificacion"
-								class="form-control " onchange="">
+								class="newalto form-control " onchange="">
 							</select>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label "
 								for="municipioDireccionNotificacion"> <spring:theme
 									code="mirit.contactData.county" />
 							</label> <select disabled="disabled" id="municipioDireccionNotificacion"
-								class="form-control" onchange="municipioDNChanged();">
+								class="newalto form-control" onchange="municipioDNChanged();">
 							</select>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label "
 								for="postalCodeDireccionNotificacion"> <spring:theme
 									code="mirit.contactData.postalCode" />
 							</label> <select disabled="disabled" id="postalCodeDireccionNotificacion"
-								class="form-control" onchange="">
+								class="newalto form-control" onchange="">
 							</select>
 						</div>
 					</div>
@@ -384,7 +384,7 @@
 							<label class="control-label required" for="direccionContacto">
 								<spring:theme code="mirit.contactData.anotherContactAddress" />
 							</label> <input id="direccionContacto" name="direccionContacto"
-								class="form-control" aria-required="true" type="text"
+								class="newalto form-control" aria-required="true" type="text"
 								disabled="disabled"
 								data-original="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }"
 								value="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }"
@@ -409,42 +409,42 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label " for="countryDireccionContacto">
 								<spring:theme code="mirit.contactData.country" />
 							</label> <select disabled="disabled" id="countryDireccionContacto"
-								class="form-control" onchange="countryACChanged();">
+								class="newalto form-control" onchange="countryACChanged();">
 							</select>
 						</div>
 
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label " for="deparmentDireccionContacto">
 								<spring:theme code="mirit.contactData.department" />
 							</label> <select disabled="disabled" id="deparmentDireccionContacto"
-								class="form-control " onchange="departmentACChanged();">
+								class="newalto form-control " onchange="departmentACChanged();">
 							</select>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label " for="municipioDireccionContacto">
 								<spring:theme code="mirit.contactData.county" />
 							</label> <select disabled="disabled" id="municipioDireccionContacto"
-								class="form-control" onchange="municipioDNChanged();">
+								class="newalto form-control" onchange="municipioDNChanged();">
 							</select>
 						</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label " for="postalCodeDireccionContacto">
 								<spring:theme code="mirit.contactData.postalCode" />
 							</label> <select disabled="disabled" id="postalCodeDireccionContacto"
-								class="form-control" onchange="">
+								class="newalto form-control" onchange="">
 							</select>
 						</div>
 					</div>
@@ -962,7 +962,7 @@
 							<label class="control-label required" for="telefonoPricipal">
 								<spring:theme code="mirit.contactData.landPhone" />
 							</label> <input id="telefonoPricipal" name="telefonoPricipal"
-								class="form-control form-control" aria-required="true"
+								class="newalto form-control" aria-required="true"
 								type="text" value="${miRitForm.telefonoPricipal }"
 								maxlength="240">
 							<div class="help-block">
@@ -976,7 +976,7 @@
 							<label class="control-label required" for="extensionTelefono">
 								<spring:theme code="mirit.contactData.extension" />
 							</label> <input id="extensionTelefono" name="extensionTelefono"
-								class="form-control form-control" aria-required="true"
+								class="newalto form-control" aria-required="true"
 								type="text" value="${miRitForm.extensionTelefono }"
 								maxlength="240">
 							<div class="help-block">
@@ -1004,7 +1004,7 @@
 					<c:choose>
 						<c:when test="${not empty miRitForm.redsocial }">
 							<div class="row">
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="form-group ">
 										<label class="control-label required" for=""> <spring:theme
 												code="mirit.contactData.socialNetwork" />
@@ -1012,7 +1012,7 @@
 									</div>
 
 								</div>
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="form-group ">
 										<label class="control-label required" for=""> <spring:theme
 												code="mirit.contactData.socialNetworkUser" />
@@ -1032,9 +1032,9 @@
 							<c:forEach items="${miRitForm.redsocial }" var="eachRedSocial"
 								varStatus="status">
 								<div class="row socialNetworkRow">
-									<div class="col-md-2">
+									<div class="col-md-3">
 										<div class="form-group ">
-											<select class="form-control redSocial">
+											<select class="newalto form-control redSocial">
 												<option value=""></option>
 												<c:forEach items="${socialNetworks }" var="eachSN">
 													<c:set var="selected" value="" />
@@ -1051,9 +1051,9 @@
 										</div>
 
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-3">
 										<div class="form-group ">
-											<input class="form-control usuarioRedSocial"
+											<input class="newalto form-control usuarioRedSocial"
 												aria-required="true" type="text"
 												value="${eachRedSocial.USUARIORED }" maxlength="240">
 											<div class="help-block">
@@ -1067,7 +1067,7 @@
 						</c:when>
 						<c:otherwise>
 							<div class="row">
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="form-group ">
 										<label class="control-label required" for=""> <spring:theme
 												code="mirit.contactData.socialNetwork" />
@@ -1075,7 +1075,7 @@
 									</div>
 
 								</div>
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="form-group ">
 										<label class="control-label required" for=""> <spring:theme
 												code="mirit.contactData.socialNetworkUser" />
@@ -1092,9 +1092,9 @@
 								</div>
 							</div>
 							<div class="row socialNetworkRow">
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="form-group ">
-										<select class="form-control redSocial">
+										<select class="newalto form-control redSocial">
 											<option value=""></option>
 											<c:forEach items="${socialNetworks }" var="eachSN">
 												<option value="${eachSN }">${eachSN}</option>
@@ -1107,9 +1107,9 @@
 									</div>
 
 								</div>
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="form-group ">
-										<input class="form-control usuarioRedSocial"
+										<input class="newalto form-control usuarioRedSocial"
 											aria-required="true" type="text" value="" maxlength="240">
 										<div class="help-block">
 											<span id="redsocial[0].USUARIORED.errors" class="hidden"></span>
