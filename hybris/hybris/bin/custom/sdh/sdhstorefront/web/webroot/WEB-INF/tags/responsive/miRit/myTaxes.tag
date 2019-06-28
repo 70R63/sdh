@@ -36,7 +36,7 @@
 									<label class="control-label " for=""> <spring:theme
 											code="mirit.exterior.publicity.numRes" />
 									</label> <input id="numResolu" disabled="disabled" name="numResolu"
-										class="form-control form-control" aria-required="true"
+										class="newalto form-control" aria-required="true"
 										type="text" value="${eachPubExtTax.numResolu }"
 										maxlength="240">
 									<div class="help-block">
@@ -45,12 +45,12 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group ">
 									<label class="control-label " for=""> <spring:theme
 											code="mirit.exterior.publicity.tipoValla" />
 									</label> <input id="tipoValla" disabled="disabled" name="tipoValla"
-										class="form-control form-control" aria-required="true"
+										class="newalto form-control" aria-required="true"
 										type="text" value="${eachPubExtTax.tipoValla }"
 										maxlength="240">
 									<div class="help-block">
@@ -79,7 +79,7 @@
 											code="mirit.gas.tax.tipoDoc" />
 									</label> <input id="gasolina[${status.index }].tipoDoc"
 										disabled="disabled" name="gasolina[${status.index }].tipoDoc"
-										class="form-control form-control" aria-required="true"
+										class="newalto form-control" aria-required="true"
 										type="text"
 										value="<spring:theme code="register.id.types.${eachGasTax.tipoDoc }" />"
 										maxlength="240">
@@ -89,13 +89,13 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group ">
 									<label class="control-label " for=""> <spring:theme
 											code="mirit.gas.tax.numDoc" />
 									</label> <input id="gasolina[${status.index }].numDoc"
 										disabled="gasolina[${status.index }].numDoc" name="lastName"
-										class="form-control form-control" aria-required="true"
+										class="newalto form-control" aria-required="true"
 										type="text" value="${eachGasTax.numDoc }" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un

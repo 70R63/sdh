@@ -28,7 +28,7 @@
 						<div class="form-group ">
 							<label class="control-label required" for="currentMail">
 								<spring:theme code="mirit.changeEmail.email" />
-							</label> <input id="currentMail" name="currentMail" class="form-control "
+							</label> <input id="currentMail" name="currentMail" class="newalto form-control "
 								aria-required="true" type="text" value="${miRitForm.email }"
 								maxlength="240">
 							<div class="help-block">
@@ -43,7 +43,7 @@
 						<div class="form-group ">
 							<label class="control-label required" for="newEmail"> <spring:theme
 									code="mirit.changeEmail.newEmail" />
-							</label> <input id="newEmail" name="newEmail" class="form-control "
+							</label> <input id="newEmail" name="newEmail" class="newalto form-control "
 								aria-required="true" type="text" value="" maxlength="240">
 							<div class="help-block">
 								<span id="newEmailErrors" class="hidden"><spring:theme
@@ -58,7 +58,7 @@
 							<label class="control-label required" for="confirmNewEmail">
 								<spring:theme code="mirit.changeEmail.confirmNewEmail" />
 							</label> <input id="confirmNewEmail" name="confirmNewEmail"
-								class="form-control " aria-required="true" type="text" value=""
+								class="newalto form-control " aria-required="true" type="text" value=""
 								maxlength="240">
 							<div class="help-block">
 								<span id="confirmNewEmailErrors" class="hidden"><spring:theme
