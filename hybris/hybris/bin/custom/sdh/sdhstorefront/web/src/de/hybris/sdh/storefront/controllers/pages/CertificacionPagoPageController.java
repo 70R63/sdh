@@ -261,8 +261,11 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 				final ObjectMapper mapper = new ObjectMapper();
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				String consultaPagoResp = sdhConsultaPagoService.consultaPago(consultaPagoRequest);
+				consultaPagoResp = consultaPagoResp.replaceAll("(\"declaraciones\"):\\{((\"\\w*\":(\"\\w*\"|\\w*),*\\s*)*\\s*)\\}",
+						"$1:\\[\\{$2\\}\\]");
 				final ConsultaPagoResponse consultaPagoResponse = mapper
-						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
+						.readValue(consultaPagoResp, ConsultaPagoResponse.class);
 
 
 				if (consultaPagoResponse != null)
