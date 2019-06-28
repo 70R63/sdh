@@ -21,37 +21,37 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="impuestos.sobreTasaGasolina.DatosGenerales.anioGravableConsultardisable" /></label>
 					<sf:select path="anoGravable"
 						items="${dataForm.catalogosSo.anioGravable}"
 						referenceData="${dataForm.catalogosSo.anioGravable}"
-						class="form-control" disabled="true" readonly="true" />
+						class="newalto form-control" disabled="true" readonly="true" />
 				</div>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="impuestos.sobreTasaGasolina.DatosGenerales.Periododisable" /></label>
 					<sf:select path="periodo" items="${dataForm.catalogosSo.periodo}"
 						referenceData="${dataForm.catalogosSo.periodo}"
-						class="form-control" disabled="true" readonly="true" />
+						class="newalto form-control" disabled="true" readonly="true" />
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.ubicacionPlantaAbasto" /></label>
 				</div>
 				<div class="form-group ">
 					<input id="ubicaPlanta" name="ubicaPlanta"
-						class="form-control form-control" aria-required="true" type="text"
+						class="new_alto form-control" aria-required="true" type="text"
 						disabled="disabled"
 						value='<c:out value="${dataForm.dataForm.ubicaPlanta}"></c:out>'
 						maxlength="240">
@@ -60,14 +60,14 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.codigoPostal" /></label>
 				</div>
 				<div class="form-group">
 					<input id="codPostal" name="codPostal"
-						class="form-control form-control" aria-required="true" type="text"
+						class="newalto form-control" aria-required="true" type="text"
 						disabled="disabled"
 						value='<c:out value="${dataForm.dataForm.codPostal}"></c:out>'
 						maxlength="240">
@@ -76,14 +76,14 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.municipio" /></label>
 				</div>
 				<div class="form-group ">
 					<input id="localidad" name="localidad"
-						class="form-control form-control" aria-required="true" type="text"
+						class="newalto form-control" aria-required="true" type="text"
 						disabled="disabled"
 						value='<c:out value="${dataForm.dataForm.localidad}"></c:out>'
 						maxlength="240">
@@ -93,14 +93,14 @@
 
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.calidadResponsable" /></label>
 				</div>
 				<div class="form-group ">
 					<input id="calidResp" name="calidResp"
-						class="form-control form-control" aria-required="true" type="text"
+						class="newalto form-control" aria-required="true" type="text"
 						disabled="disabled"
 						value='<c:out value="${dataForm.dataForm.calidResp}"></c:out>'
 						maxlength="240">
@@ -109,14 +109,14 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.capacidadAlmacProd" /></label>
 				</div>
 				<div class="form-group ">
 					<input id="almacProd" name="almacProd"
-						class="form-control form-control" aria-required="true" type="text"
+						class="newalto form-control" aria-required="true" type="text"
 						disabled="disabled"
 						value='<c:out value="${dataForm.dataForm.almacProd}"></c:out>'
 						maxlength="240">
@@ -125,14 +125,14 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.numTanques" /></label>
 				</div>
 				<div class="form-group ">
 					<input id="numTanques" name="numTanques"
-						class="form-control form-control" aria-required="true" type="text"
+						class="newalto form-control" aria-required="true" type="text"
 						disabled="disabled"
 						value='<c:out value="${dataForm.dataForm.numTanques}"></c:out>'
 						maxlength="240">
@@ -141,14 +141,14 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.capacAlmacTanques" /></label>
 				</div>
 				<div class="form-group ">
 					<input id="almacTanque" name="almacTanque"
-						class="form-control form-control" aria-required="true" type="text"
+						class="newalto form-control" aria-required="true" type="text"
 						disabled="disabled"
 						value='<c:out value="${dataForm.dataForm.almacTanque}"></c:out>'
 						maxlength="240">

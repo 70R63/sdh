@@ -61,7 +61,7 @@
    </c:otherwise>
 </c:choose>
 
-<div>
+
 	<div class="container">
 		<div class="row">
 			<div class="headline">

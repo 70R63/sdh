@@ -9,135 +9,154 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="row" id="idmensajes">
-	<div class="col-md-6 col-md-offset-1 headline">
-		<h2>
-			<span><spring:theme code="mibuzon.mensajes.mensajes" /></span>
-		</h2>
+<div class="container_new">
+	<div class="row" id="idmensajes">
+		<div class="col-md-6 col-md-offset-1 headline">
+			<h2>
+				<span><spring:theme code="mibuzon.mensajes.mensajes" /></span>
+			</h2>
+		</div>
 	</div>
+	<sf:form>
+		<div style="aling-items: center; justify-content: center">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 center headline">
+					<h2>
+						<span><spring:theme code="mibuzon.mensajes.nuevos" /></span>
+					</h2>
+				</div>
+			</div>
+			<div>
+				<div class="row">
+
+					<div class="col-md-7 col-md-offset-3 center">
+						<table class="table table-responsive" id="">
+							<thead>
+								<tr>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for=""><spring:theme
+												code="mibuzon.mensajes.identi" /></label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.mensajes.autoridad" />
+									</label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.mensajes.asunto" />
+									</label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.mensajes.fecnoti" />
+									</label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.mensajes.papelera" />
+									</label></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input id="" name="" class="inputtextnew"
+										aria-required="true" type="text" readonly="readonly"
+										value="<c:out value="identifi"></c:out>" maxlength="240"
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><input id="" name="" class="inputtextnew"
+										aria-required="true" type="text" readonly="readonly"
+										value="<c:out value="autoridad"></c:out>" maxlength="240"
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><input id="" name="" class="inputtextnew"
+										aria-required="true" type="text" readonly="readonly"
+										value="<c:out value="asunto"></c:out>" maxlength="240"
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><input id="" name="" class="inputtextnew"
+										aria-required="true" type="text" readonly="readonly"
+										value="<c:out value="fechanotificacion"></c:out>"
+										maxlength="240"
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><img
+										src="${themeResourcePath}/images/papeleranuevos.png"
+										style="width: 30px"></img></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 headline">
+					<h2>
+						<span><spring:theme code="mibuzon.mensajes.leidos" /></span>
+					</h2>
+				</div>
+			</div>
+			<div>
+				<div class="row">
+
+					<div class="col-md-7 col-md-offset-3 center">
+						<table class="table table-responsive" id="">
+							<thead>
+								<tr>
+									<th style="text-align: center"><label
+										class="control-label "
+										style="text-transform: capitalize !important" for=""><spring:theme
+												code="mibuzon.mensajes.identi" /></label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.mensajes.autoridad" />
+									</label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.mensajes.asunto" />
+									</label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.mensajes.fecnoti" />
+									</label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.mensajes.papelera" />
+									</label></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input id="" name="" class="inputtextnew"
+										aria-required="true" type="text" readonly="readonly"
+										value="<c:out value="identifi"></c:out>" maxlength="240"
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><input id="" name="" class="inputtextnew"
+										aria-required="true" type="text" readonly="readonly"
+										value="<c:out value="autoridad"></c:out>" maxlength="240"
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><input id="" name="" class="inputtextnew"
+										aria-required="true" type="text" readonly="readonly"
+										value="<c:out value="asunto"></c:out>" maxlength="240"
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><input id="" name="" class="inputtextnew"
+										aria-required="true" type="text" readonly="readonly"
+										value="<c:out value="fechanotificacion"></c:out>"
+										maxlength="240"
+										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><img
+										src="${themeResourcePath}/images/papeleraleidos.png"
+										style="width: 20px"></img></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</sf:form>
 </div>
-<sf:form>
-	<div style="aling-items: center; justify-content: center">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 center headline">
-				<h2>
-					<span><spring:theme code="mibuzon.mensajes.nuevos" /></span>
-				</h2>
-			</div>
-		</div>
-		<div>
-			<div class="row">
-
-				<div class="col-md-7 col-md-offset-3 center">
-					<table class="table table-responsive" id="">
-						<thead>
-							<tr>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""><spring:theme
-											code="mibuzon.mensajes.identi" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.mensajes.autoridad" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.mensajes.asunto" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.mensajes.fecnoti" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.mensajes.papelera" /></label></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="identifi"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="autoridad"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="asunto"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="fechanotificacion"></c:out>"
-									maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><img
-									src="${themeResourcePath}/images/papeleranuevos.png"
-									style="width: 30px"></img></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 headline">
-				<h2>
-					<span><spring:theme code="mibuzon.mensajes.leidos" /></span>
-				</h2>
-			</div>
-		</div>
-		<div>
-			<div class="row">
-
-				<div class="col-md-7 col-md-offset-3 center">
-					<table class="table table-responsive" id="">
-						<thead>
-							<tr>
-								<th style="text-align: center"><label
-									class="control-label "
-									style="text-transform: capitalize !important" for=""><spring:theme
-											code="mibuzon.mensajes.identi" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.mensajes.autoridad" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.mensajes.asunto" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.mensajes.fecnoti" /></label></th>
-								<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.mensajes.papelera" /></label></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="identifi"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="autoridad"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="asunto"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="fechanotificacion"></c:out>"
-									maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><img
-									src="${themeResourcePath}/images/papeleraleidos.png"
-									style="width: 20px"></img></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</sf:form>

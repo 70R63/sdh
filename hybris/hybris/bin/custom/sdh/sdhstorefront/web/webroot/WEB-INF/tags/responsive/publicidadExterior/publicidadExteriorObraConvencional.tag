@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<div class="container_new">
 	<div id="divObraConvencional" style="display: none;">
 		<div class="row">
 			<div class="headline">

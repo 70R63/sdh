@@ -7,7 +7,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<div class="container_new">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>
@@ -167,7 +167,7 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container_new">
 		<sf:button class="btn btn-primary btn-lg" name="action" id="calcular"
 			value="calcular" disabled="false" onclick="presdec()">
 			<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />

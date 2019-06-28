@@ -10,7 +10,7 @@
 
 
 <div class="row">
-	<div class="container">
+<!-- 	<div class="container"> -->
 		<div class="account-section-content">
 			<div class="account-section-form">
 				<form:form
@@ -25,7 +25,7 @@
 				<DeclaraPubli:DecPuPago />
 			</div>
 		</div>
-	</div>
+<!-- 	</div> -->
 </div>
 
 <div id="dialogPublicidadExterior" title="Publicidad Exterior">

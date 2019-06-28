@@ -7,6 +7,7 @@ import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
+import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 
 import java.util.List;
@@ -70,6 +71,8 @@ public class MiRitForm
 	private List<ContribRedSocial> redsocial;
 	private List<ContribAgente> representados;
 	private List<ContribAgente> representantes;
+	private ImpuestoICA impuestoICA;
+
 
 
 	//*->INI dev-eduardo ajuste de menu impuestos
@@ -84,6 +87,22 @@ public class MiRitForm
 
 
 
+	/**
+	 * @return the impuestoICA
+	 */
+	public ImpuestoICA getImpuestoICA()
+	{
+		return impuestoICA;
+	}
+
+	/**
+	 * @param impuestoICA
+	 *           the impuestoICA to set
+	 */
+	public void setImpuestoICA(final ImpuestoICA impuestoICA)
+	{
+		this.impuestoICA = impuestoICA;
+	}
 
 	/**
 	 * @return the bPredial
