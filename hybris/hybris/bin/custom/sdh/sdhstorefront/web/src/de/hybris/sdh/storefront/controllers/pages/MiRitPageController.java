@@ -73,6 +73,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -383,6 +384,13 @@ public class MiRitPageController extends AbstractPageController
 					&& StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto()))
 			{
 				miRitForm.setImpuestoICA(sdhConsultaContribuyenteBPResponse.getIca());
+			}
+
+			if (sdhConsultaContribuyenteBPResponse.getDelineacion() != null
+					&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getDelineacion()))
+			{
+				miRitForm.setDelineacion(sdhConsultaContribuyenteBPResponse.getDelineacion().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
 			}
 
 			model.addAttribute("miRitForm", miRitForm);

@@ -6,6 +6,7 @@ package de.hybris.sdh.storefront.forms;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.ContribDireccion;
 import de.hybris.sdh.core.pojos.responses.ContribRedSocial;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
@@ -72,7 +73,7 @@ public class MiRitForm
 	private List<ContribAgente> representados;
 	private List<ContribAgente> representantes;
 	private ImpuestoICA impuestoICA;
-
+	private List<ImpuestoDelineacionUrbana> delineacion;
 
 
 	//*->INI dev-eduardo ajuste de menu impuestos
@@ -84,7 +85,22 @@ public class MiRitForm
 	private String bDelineacionUrbana;
 
 
+	/**
+	 * @return the delineacion
+	 */
+	public List<ImpuestoDelineacionUrbana> getDelineacion()
+	{
+		return delineacion;
+	}
 
+	/**
+	 * @param delineacion
+	 *           the delineacion to set
+	 */
+	public void setDelineacion(final List<ImpuestoDelineacionUrbana> delineacion)
+	{
+		this.delineacion = delineacion;
+	}
 
 
 	/**
