@@ -379,6 +379,11 @@ public class MiRitPageController extends AbstractPageController
 						.collect(Collectors.toList()));
 			}
 
+			if (sdhConsultaContribuyenteBPResponse.getIca()!= null
+					&& StringUtils.isNotBlank(sdhConsultaContribuyenteBPResponse.getIca().getNumObjeto()))
+			{
+				miRitForm.setImpuestoICA(sdhConsultaContribuyenteBPResponse.getIca());
+			}
 
 			model.addAttribute("miRitForm", miRitForm);
 
