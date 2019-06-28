@@ -10,7 +10,7 @@
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<div class="container_new">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline">
@@ -248,7 +248,7 @@
 	</div>
 
 	<!-- 	se agrega boton para adjuntar archivo -->
-	<div class="container" style="margin-top: 15px !important">
+	<div class="container_new" style="margin-top: 15px !important">
 
 
 		<div class="row">

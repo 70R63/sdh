@@ -7,15 +7,15 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
-<div class="row">
-	<div class="col-md-12 headline">
-		<h2>
-			<span class="col-md-10"><spring:theme
-					code="declaracion.publicidad.titulo" /></span>
-		</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 headline">
+			<h2>
+				<span class="col-md-10"><spring:theme
+						code="declaracion.publicidad.titulo" /></span>
+			</h2>
+		</div>
 	</div>
-</div>
 
 	<div class="row">
 		<div class="col-md-6 headline">
@@ -41,7 +41,9 @@
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.opuso" /></label> <select id="opuso"
 					class="form-control" disabled="disabled">
-					<option value="${declaPublicidadForm.opuso}"><spring:theme code="declaracion.publicidad.opuso.d${declaPublicidadForm.opuso}"> </spring:theme></option>
+					<option value="${declaPublicidadForm.opuso}"><spring:theme
+							code="declaracion.publicidad.opuso.d${declaPublicidadForm.opuso}">
+						</spring:theme></option>
 				</select>
 			</div>
 		</div>
@@ -67,5 +69,6 @@
 			</div>
 		</div>
 	</div>
+</div>
 
 

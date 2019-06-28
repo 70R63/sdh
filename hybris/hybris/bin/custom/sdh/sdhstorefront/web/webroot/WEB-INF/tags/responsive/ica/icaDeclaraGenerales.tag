@@ -11,7 +11,7 @@
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 
-<div class="container">
+<div class="container_new">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline">

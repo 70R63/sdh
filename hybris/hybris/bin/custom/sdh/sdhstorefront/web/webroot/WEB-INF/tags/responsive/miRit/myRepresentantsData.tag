@@ -6,10 +6,10 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div id="acordeon" class="container">
+<div id="acordeon" class="container_new">
 	<div class="card cardmirit ">
-		<div class="card-header" id="head7" style="background: #f2f2f2">
-			<h5 class="mb-0">
+		<div class="card-header" id="head7">
+			<h5 class="mb-0 cardtitle">
 				<button class="btn btn-link miritmenu" data-toggle="collapse"
 					data-target="#collapse7" aria-expanded="true"
 					aria-controls="collapse7">
@@ -71,7 +71,7 @@
 							<div class="col-md-2">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="new_alto form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
 										maxlength="240">
@@ -84,7 +84,7 @@
 							<div class="col-md-2">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text" value="${eachAgent.numDoc}"
 										maxlength="240">
 									<div class="help-block">
@@ -96,7 +96,7 @@
 							<div class="col-md-4">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="new_alto form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="${eachAgent.nomCompleto}" maxlength="240">
 									<div class="help-block">
@@ -108,7 +108,7 @@
 							<div class="col-md-2">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="${eachAgent.funcionInterl }" maxlength="240">
 									<div class="help-block">
@@ -120,7 +120,7 @@
 							<div class="col-md-2">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text" value="${eachAgent.impuesto}"
 										maxlength="240">
 									<div class="help-block">
@@ -188,7 +188,7 @@
 							<div class="col-md-2">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="new_alto form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
 										maxlength="240">
@@ -201,7 +201,7 @@
 							<div class="col-md-2">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text" value="${eachAgent.numDoc}"
 										maxlength="240">
 									<div class="help-block">
@@ -213,7 +213,7 @@
 							<div class="col-md-4">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="new_alto form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="${eachAgent.nomCompleto}" maxlength="240">
 									<div class="help-block">
@@ -225,7 +225,7 @@
 							<div class="col-md-2">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="${eachAgent.funcionInterl }" maxlength="240">
 									<div class="help-block">
@@ -237,7 +237,7 @@
 							<div class="col-md-2">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="form-control form-control" disabled="disabled"
+										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text" value="${eachAgent.impuesto}"
 										maxlength="240">
 									<div class="help-block">

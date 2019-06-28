@@ -66,7 +66,7 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container_new">
 	<div class="col-md-12">
 		<spring:theme code="delineacion.urbana.nota" />
 	</div>

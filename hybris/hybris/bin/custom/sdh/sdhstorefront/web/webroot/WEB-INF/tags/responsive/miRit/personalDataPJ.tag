@@ -7,10 +7,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div id="acordeon" class="container">
+<div id="acordeon" class="container_new">
 	<div class="card cardmirit ">
-		<div class="card-header" id="head0" style="background: #f2f2f2">
-			<h5 class="mb-0">
+		<div class="card-header" id="head0">
+			<h5 class="mb-0 cardtitle">
 				<button class="btn btn-link miritmenu" data-toggle="collapse"
 					data-target="#collapse0" aria-expanded="true"
 					aria-controls="collapse0">
