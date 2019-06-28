@@ -43,13 +43,13 @@
 		var auex = document.getElementById('valorExen');
 		
 		if(value=='09' && (cauex=='00' || cauex=='')){
-			auex.readOnly=true;
+			auex.readonly=true;
 		}else if(value=='09' && (cauex!='00' || cauex!='')){
-			auex.readOnly=true;
+			auex.readonly=true;
 		}else if(value!='09' && (cauex=='00' || cauex=='' || cauex=="")){
-			auex.readOnly=true;
+			auex.readonly=true;
 		}else{
-			auex.readOnly=false;
+			auex.readonly=false;
 		}
 		
 }
@@ -65,18 +65,18 @@
 		var tiplin = document.getElementById('tipoDeLicencia');
 		
 		if(mod=='09' && (cauex=='00' || cauex=='')){
-			auex.readOnly=true;
+			auex.readonly=true;
 		}else if(mod=='09' && (cauex!='00' || cauex!='')){
-			auex.readOnly=true;
+			auex.readonly=true;
 		}else if(mod!='09' && (cauex=='00' || cauex=='' || cauex=="")){
-			auex.readOnly=true;
+			auex.readonly=true;
 		}else{
-			auex.readOnly=false;
+			auex.readonly=false;
 		}
 		
 		if(cauex=='' || cauex=="00")
 			{
-			tiplin.readOnly=true;
+			tiplin.readonly=true;
 			}
 		
 		
@@ -86,8 +86,8 @@
 			inareainter.readonly=false;
 			
 		}else{
-			areaintervenida.readOnly=true;
-			inareainter.readOnly=true;
+			areaintervenida.readonly=true;
+			inareainter.readonly=true;
 		}
 	}
 	
@@ -102,11 +102,11 @@
 		
 		if ((tipoDeLicencia == "02") && (tipoMarca.value != "")) {
 			valorExen.disabled = false;
-			valorExen.readOnly = false;
+			valorExen.readonly = false;
 			
 		} else {
 			valorExen.disabled = true;
-			valorExen.readOnly = true;
+			valorExen.readonly = true;
 		}
 
 	}

@@ -6,10 +6,10 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div id="acordeon" class="container">
+<div id="acordeon" class="container_new">
 	<div class="card cardmirit ">
-		<div class="card-header" id="head8" style="background: #f2f2f2">
-			<h5 class="mb-0">
+		<div class="card-header" id="head8">
+			<h5 class="mb-0 cardtitle">
 				<button class="btn btn-link miritmenu" data-toggle="collapse"
 					data-target="#collapse8" aria-expanded="true"
 					aria-controls="collapse8">
@@ -28,7 +28,7 @@
 						<div class="col-md-3  text-center">
 							<div class="form-group ">
 								<input id="address.surname" disabled name="lastName"
-									class="form-control text-center" aria-required="true"
+									class="newalto form-control text-center" aria-required="true"
 									type="text" value="Contribuyente" maxlength="240">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
@@ -43,7 +43,7 @@
 						<div class="col-md-3  text-center">
 							<div class="form-group ">
 								<input id="address.surname" disabled name="lastName"
-									class="form-control text-center" aria-required="true"
+									class="newalto form-control text-center" aria-required="true"
 									type="text" value="Agente Autorizado" maxlength="240">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
@@ -58,7 +58,7 @@
 						<div class="col-md-3 text-center">
 							<div class="form-group ">
 								<input id="address.surname" disabled name="lastName"
-									class="form-control text-center" aria-required="true"
+									class="newalto form-control text-center" aria-required="true"
 									type="text" value="Tercero Autorizado" maxlength="240">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
@@ -73,7 +73,7 @@
 						<div class="col-md-3 text-center">
 							<div class="form-group ">
 								<input id="address.surname" disabled name="lastName"
-									class="form-control text-center" aria-required="true"
+									class="newalto form-control text-center" aria-required="true"
 									type="text" value="Agente Retenedor" maxlength="240">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
@@ -88,7 +88,7 @@
 						<div class="col-md-3 text-center">
 							<div class="form-group ">
 								<input id="address.surname" disabled name="lastName"
-									class="form-control text-center" aria-required="true"
+									class="newalto form-control text-center" aria-required="true"
 									type="text" value="Reportantes de Información" maxlength="240">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un

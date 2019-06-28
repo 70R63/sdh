@@ -20,7 +20,7 @@
 		</div>
 	</div>
 </div>
-<div class="container">
+<div class="container_new">
 	<sf:form action="${pagarURL}" method="POST"
 		modelAttribute="psePaymentForm" id="psePaymentForm">
 		<sf:hidden path="tipoDeImpuesto" />
