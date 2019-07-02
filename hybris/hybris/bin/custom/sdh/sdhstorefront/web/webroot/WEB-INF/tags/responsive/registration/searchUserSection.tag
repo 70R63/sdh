@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div class="container">
 <div class="row" >
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">
@@ -88,4 +89,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
