@@ -7,7 +7,7 @@
 <%@ taglib prefix="pagoROP" tagdir="/WEB-INF/tags/responsive/pagoROP"%>
 
 <template:page pageTitle="${pageTitle}">
-	<div class="container">
+	<div class="container_new">
 		<pagoROP:formSection/>
 	</div>	
 </template:page>

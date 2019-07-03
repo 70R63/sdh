@@ -12,7 +12,7 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 
 <spring:url value="/login/register/termsandconditions" var="getTermsAndConditionsUrl"/>
-<div class="cotainer">
+<div class="cotainer_new">
 <div class="user-register__headline">
 	<spring:theme code="register.new.customer" />
 </div>

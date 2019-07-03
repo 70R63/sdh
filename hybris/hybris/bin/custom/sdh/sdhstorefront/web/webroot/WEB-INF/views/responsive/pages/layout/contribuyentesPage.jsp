@@ -72,7 +72,7 @@
 	<!-- </div> -->
 </template:page>
 
-<div class="container" 
+<div class="container_new" 
 	style="margin-left: 0PX; margin-right: 55px; padding-top: 300px !important;">
 
 	<img class="delededucciones"

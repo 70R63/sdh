@@ -11,7 +11,7 @@
 
 
 
-<div class="container">
+<div class="container_new">
 	
 		<impuestos:listaImpuestos />
 	

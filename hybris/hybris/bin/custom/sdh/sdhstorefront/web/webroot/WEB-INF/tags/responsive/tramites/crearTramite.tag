@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<div class="container_new">
 	<div class="row mt-3">
 		<div class="col-md-12 text-center">
 			<label class="control-label" style="text-transform: none"><spring:theme

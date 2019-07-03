@@ -10,7 +10,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_agentes_inicial">
+<div class="container_new">
 	<div class="row">
 
 		<div class="col-md-12">

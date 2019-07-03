@@ -7,7 +7,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="container">
+<div class="container_new">
 	<div class="headline"><spring:theme code="guest.checkout" arguments="${fn:escapeXml(siteName)}"/></div>
 	
 		<form:form action="${action}" method="post" commandName="guestForm">

@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <input type="hidden" id="numForm" name="numForm" value="${calculoResponse.numForm }"/>
-<div class="container_new">
+<div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
 			<div class="headline">

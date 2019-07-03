@@ -9,7 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <sf:form>
-	<div class="container">
+	<div class="container_new">
 		<div class="row">
 			<div class="col-md-6 headline">
 				<h2>

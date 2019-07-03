@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container">
+<div class="container_new">
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
 <div class="login-page__headline" style="margin-bottom: 0px; margin-top: 0px;">

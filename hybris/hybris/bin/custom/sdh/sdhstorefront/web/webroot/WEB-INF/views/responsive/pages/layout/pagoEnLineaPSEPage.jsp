@@ -7,7 +7,7 @@
 <%@ taglib prefix="pagoPSE" tagdir="/WEB-INF/tags/responsive/pagoPSE"%>
 
 <template:page pageTitle="${pageTitle}">
-	<div class="container">
+	<div class="container_new">
 		<pagoPSE:pagoEnLinea/>
 	</div>	
 </template:page>

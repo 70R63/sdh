@@ -16,6 +16,7 @@ public class SecretAnswerForm
 	private String AGE;
 	private String DIR2;
 	private String IMP;
+	private String PLA;
 
 	/**
 	 * @return the fNAM
@@ -134,6 +135,23 @@ public class SecretAnswerForm
 	public void setIMP(final String iMP)
 	{
 		IMP = iMP;
+	}
+
+	/**
+	 * @return the pLA
+	 */
+	public String getPLA()
+	{
+		return PLA;
+	}
+
+	/**
+	 * @param pLA
+	 *           the pLA to set
+	 */
+	public void setPLA(final String pLA)
+	{
+		PLA = pLA;
 	}
 
 

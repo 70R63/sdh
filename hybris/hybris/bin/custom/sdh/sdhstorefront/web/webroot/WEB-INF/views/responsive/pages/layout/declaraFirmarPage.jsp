@@ -8,6 +8,6 @@
 
 
 
-<div class="container">
+<div class="container_new">
 <firmar:declaraFirmar />
 </div>

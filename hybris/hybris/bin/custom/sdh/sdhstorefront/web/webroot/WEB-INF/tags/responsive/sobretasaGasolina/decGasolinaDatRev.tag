@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<sf:form action="${declaracionURL}" method="POST"
 		modelAttribute="dataForm" id="forma">
 

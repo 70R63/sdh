@@ -7,7 +7,7 @@
 <%@ taglib prefix="predialUnificado" tagdir="/WEB-INF/tags/responsive/predialUnificado"%>
 
 <template:page pageTitle="${pageTitle}">
-	<div class="container">
+	<div class="container_new">
 		<div class="row">
 			<div class="headline">
 				<h3>

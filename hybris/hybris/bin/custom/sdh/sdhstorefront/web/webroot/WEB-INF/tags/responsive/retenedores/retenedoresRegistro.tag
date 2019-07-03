@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_agentes_inicial">
+<div class="container_new">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -60,7 +60,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="container_new">
+		<div class="container">
 
 			<div class="row mt-3">
 				<div class="col-md-3">

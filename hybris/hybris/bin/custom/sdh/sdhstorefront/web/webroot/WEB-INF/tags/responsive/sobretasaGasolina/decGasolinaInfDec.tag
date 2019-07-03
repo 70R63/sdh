@@ -11,7 +11,7 @@
 <spring:url
 	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
-<div class="container_new">
+<div class="container">
 	<sf:form action="${declaracionURL}" method="POST"
 		modelAttribute="dataForm" id="forma">
 

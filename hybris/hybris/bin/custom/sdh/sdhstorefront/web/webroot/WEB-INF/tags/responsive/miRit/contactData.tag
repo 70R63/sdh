@@ -278,7 +278,7 @@
 		$("#addressAssistant").toggle();
 	}
 </script>
-<div id="acordeon" class="container_new">
+<div id="acordeon" class="container">
 	<div class="card cardmirit ">
 		<div class="card-header" id="head2">
 			<h5 class="mb-0 cardtitle">

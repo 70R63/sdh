@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<div class="row ">
 		<div class="col-12 col-md-3 text-center">
 			<button class="btn btn-primary btn-block btn-lg" type="button"

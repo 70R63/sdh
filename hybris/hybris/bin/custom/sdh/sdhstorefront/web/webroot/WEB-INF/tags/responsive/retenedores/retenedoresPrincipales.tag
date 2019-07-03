@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-<div class="container">
+<div class="container_new">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline">
