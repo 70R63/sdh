@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring"  uri="http://www.springframework.org/tags"%>
 
+<div class="container_new">
 <c:if test="${(not empty accConfMsgs) || (not empty accInfoMsgs) || (not empty accErrorMsgs)}">
 	<div class="global-alerts">
 		<spring:theme code="text.global.alerts.accessibility" var="textGlobalAlerts" />
@@ -38,3 +39,4 @@
 
 	</div>
 </c:if>
+</div>

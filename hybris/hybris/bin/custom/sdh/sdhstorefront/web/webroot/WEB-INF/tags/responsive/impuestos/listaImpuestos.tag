@@ -22,12 +22,12 @@
 		method="POST" modelAttribute="dataForm" id="forma">
 		<div class="col-md-10 col-md-offset-2">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<div class="form-group ">
 						<label class="control-label required"><spring:theme
 								code="impuestos.presentarDeclaracion.impuesto" /></label>
 						<sf:select path="impuesto" id="impuesto" items="${tpImpuesto}"
-							referenceData="${dataForm.impuesto}" class="form-control"
+							referenceData="${dataForm.impuesto}" class="new_alto form-control"
 							onchange="onChange()">
 						</sf:select>
 					</div>
@@ -44,7 +44,7 @@
 				<input type="hidden" name="skipReques" value="" />
 
 				<c:if test="${dataForm.impuesto != '3'}">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
@@ -52,46 +52,46 @@
 							<sf:select path="anoGravable" id="anoGravable"
 								items="${dataForm.catalogosSo.anioGravable}"
 								referenceData="${dataForm.catalogosSo.anioGravable}"
-								class="form-control" onchange="onChangeAnioGravable()" />
+								class="newalto form-control" onchange="onChangeAnioGravable()" />
 						</div>
 					</div>
 				</c:if>
 
 				<c:if test="${dataForm.impuesto == '3'}">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
 
 							<sf:select path="anoGravable" items="${icaAnioGravable}"
-								referenceData="${icaAnioGravable}" class="form-control" />
+								referenceData="${icaAnioGravable}" class="newalto form-control" />
 						</div>
 					</div>
 				</c:if>
 
 				<c:if
 					test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.Periodo" /></label>
 
 							<sf:select path="periodo" items="${dataForm.catalogosSo.periodo}"
 								referenceData="${dataForm.catalogosSo.periodo}"
-								class="form-control" />
+								class="newalto form-control" />
 						</div>
 					</div>
 				</c:if>
 
 				<c:if
 					test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.Periodo" /></label>
 
 							<sf:select path="periodo" items="${icaPeriodo}"
-								referenceData="${icaPeriodo}" class="form-control" />
+								referenceData="${icaPeriodo}" class="new_alto form-control" />
 						</div>
 					</div>
 				</c:if>
@@ -167,21 +167,20 @@
 				<c:forEach var="item" items="${delineacionWithRadicadosList}">
 					<div class="row">
 						<div class="col-sm-2">
-							<input class="form-control" disabled="disabled" type="text"
+							<input class="new_alto form-control" disabled="disabled" type="text"
 								value="${item.cdu}"
 								style="height: 32px !important; margin-bottom: 9px !important" />
 						</div>
 						<div class="col-sm-3">
-							<select id="selctipobliga" class="form-control"
-								onchange="ShowSelected(this)" style="height: 48px !important">
+							<select id="selctipobliga" class="newalto form-control"
+								onchange="ShowSelected(this)" >
 								<option value="0-${item.cdu}">Seleccionar</option>
 								<option value="1-${item.cdu}">Declaración</option>
 								<option value="2-${item.cdu}">Retención</option>
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<select id="btnTpLic_${item.cdu}" class="form-control"
-								style="height: 48px !important">
+							<select id="btnTpLic_${item.cdu}" class="newalto form-control">
 								<option value="00">Seleccionar</option>
 								<option value="01">Licencia</option>
 								<option value="02">Reconocimiento</option>
@@ -209,7 +208,7 @@
 								<div class="col-sm-3 text-right">Radicados:</div>
 								<div class="col-sm-3">
 									<input style="margin-bottom: 5px !important"
-										class="form-control" disabled="disabled" type="text"
+										class="newalto form-control" disabled="disabled" type="text"
 										value="${radicado.numRadicado}" />
 								</div>
 								<div class="col-sm-3">
@@ -237,6 +236,26 @@
 	</c:if>
 </div>
 <br>
+<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<br>
 	<br>
 	<br>

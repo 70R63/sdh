@@ -16,16 +16,16 @@
 <div class="container_new">
 	<div class="row">
 		<div class="headline">
-			<h2 align="center">
+			<h2>
 				<span><spring:theme code="declarafirma.inicial.titulo" /></span>
 
 			</h2>
 		</div>
 	</div>
 	<br>
-	<div class="col-md-10 col-md-offset-2">
+	<div class="col-md-10">
 		<div class="row">
-			<div class="col-md-7 col-md-offset-1">
+			<div class="col-md-7">
 				<div class="table-resposive">
 					<table class="table">
 						<thead style="cellspacing: 10 !important">
@@ -82,6 +82,18 @@
 	<br>
 	<br>
 	<br>
-	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br><br>
+	<br>
+	<br>
+	<br>
+	<br><br>
+	<br>
+	<br>
+	<br>
+	<br>
 </div>
 <br>

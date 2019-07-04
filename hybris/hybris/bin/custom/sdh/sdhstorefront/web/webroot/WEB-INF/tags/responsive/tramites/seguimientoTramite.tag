@@ -45,38 +45,38 @@
 		</div>
 
 		<div class="row mt-3">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.inicial.numcaso" /></label><input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"></input>
+						name="" class="newalto form-control" type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.inicial.numrad" /></label><input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"></input>
+						name="" class="newalto form-control" type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-md-4 text-center">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.inicial.tipdoc" /></label> <select
-						class="form-control">
+						class="newalto form-control">
 						<option value="Seleccionar">Seleccionar</option>
 						<option value="">Creación</option>
 						<option value="">Actualización</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.inicial.numdoc" /></label><input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"></input>
+						name="" class="newalto form-control" type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -131,73 +131,73 @@
 	</div>
 	<div id="detalle" style="display: none">
 		<div class="row mt-3">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.numtam" /></label><input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.tiptramite" /></label><input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-md-4 ">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.numrad" /></label> <input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.subtramite" /></label><input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.estado" /></label> <input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.categoria" /></label><input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.justi" /></label> <input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.subcategoria" /></label><input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
 			</div>
