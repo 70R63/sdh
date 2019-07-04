@@ -9,7 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <input type="hidden" value="${tipoMarca}" id="tipoMarca" />
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>

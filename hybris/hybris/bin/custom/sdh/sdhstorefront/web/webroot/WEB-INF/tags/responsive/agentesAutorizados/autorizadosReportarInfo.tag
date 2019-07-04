@@ -8,7 +8,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_agentes_inicial">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -62,12 +62,12 @@
 
 	<form:form action="">
 		<div class="row" style="margin-top: 6px;">
-			<div class="col-md-5">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label required"
 						style="text-transform: none"><spring:theme
 							code="autorizado.reportar.info.tiparch" /></label> <select
-						class="form-control">
+						class="new_alto form-control">
 						<option value="Seleccionar">Seleccionar</option>
 						<option value="Formularios">Formularios no generados por
 							la administración</option>
@@ -93,12 +93,12 @@
 					<label class="control-label required"
 						style="text-transform: capitalize"><spring:theme
 							code="autorizado.reportar.info.selarch" /></label><input type="file"
-						class="form-control" id="exampleFormControlFile1" accept=".txt">
+						class="new_alto form-control" id="exampleFormControlFile1" accept=".txt">
 				</div>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 6px;">
-			<div class="col-md-12 centercol-md-8 text-center">
+			<div class="col-md-12 centercol-md-6">
 
 				<button style="margin-top: 3px;" id="regresar"
 					class="btn btn-secondary btn-lg" onclick="goBack()" type="button">

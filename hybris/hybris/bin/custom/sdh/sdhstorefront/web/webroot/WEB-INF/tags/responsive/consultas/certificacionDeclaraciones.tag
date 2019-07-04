@@ -87,29 +87,29 @@
 						labelKey="certideclara.inicial.selcimpuesto" path="Idimp"
 						mandatory="true" skipBlank="false"
 						skipBlankMessageKey="SELECCIONAR" items="${tipoDeImpuesto}"
-						selectCSSClass="form-control" onchange="onChange()" />
+						selectCSSClass="new_alto form-control" onchange="onChange()" />
 				</div>
 			</div>
 
 			<c:if test="${certiFormPost.idimp != '3'}">
-				<div class="col-md-3" id="idAnio" style="display: block;">
+				<div class="col-md-2" id="idAnio" style="display: block;">
 					<div class="form-group">
 						<formElement:formSelectBox idKey="aniograv"
 							labelKey="certideclara.inicial.aniograv" path="aniograv"
 							mandatory="true" skipBlank="false"
 							skipBlankMessageKey="SELECCIONAR" items="${aniGravable}"
-							selectCSSClass="form-control" onchange="onChangeAnioGravable()" />
+							selectCSSClass="newalto form-control" onchange="onChangeAnioGravable()" />
 					</div>
 				</div>
 			</c:if>
 
 
 			<c:if test="${certiFormPost.idimp == '3'}">
-				<div class="col-md-3" id="idPeriodo" style="display: block;">
+				<div class="col-md-2" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.periodo" /></label> <select id="aniograv"
-							class="form-control " name="aniograv">
+							class="newalto form-control " name="aniograv">
 							<option value="">Seleccionar</option>
 							<option value="2019">2019</option>
 							<option value="2018">2018</option>
@@ -121,11 +121,11 @@
 			</c:if>
 
 			<c:if test="${certiFormPost.idimp == '5'}">
-				<div class="col-md-3" id="idPeriodo" style="display: block;">
+				<div class="col-md-2" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"> <spring:theme
 								code="certideclara.inicial.periodo" />
-						</label> <select aria-required="true" id="periodo" class="form-control "
+						</label> <select aria-required="true" id="periodo" class="new_alto form-control "
 							name="periodo" required='required'>
 							<option value="">Seleccionar</option>
 							<option value="01">1-Enero</option>
@@ -151,7 +151,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.periodo" /></label> <select id="periodo"
-							class="form-control " name="periodo">
+							class="new_alto form-control " name="periodo">
 							<option value="">Seleccionar</option>
 							<option value="B1">1 - Ene / Feb</option>
 							<option value="B2">2 - Mar / Abr</option>
@@ -354,7 +354,7 @@
 			<div class="col-md-9 col-md-offset-1">
 				<br> <br>
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<label class="control-label" for="" style="text-transform: none">
 							<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" />
 						</label>
@@ -383,22 +383,21 @@
 
 					<c:forEach var="item" items="${delineacionWithRadicadosList}">
 						<div class="row">
-							<div class="col-sm-2">
-								<input class="form-control" disabled="disabled" type="text"
+							<div class="col-sm-3">
+								<input class="new_alto form-control" disabled="disabled" type="text"
 									value="${item.cdu}"
-									style="height: 32px !important; margin-bottom: 9px !important" />
+									style="margin-bottom: 9px !important" />
 							</div>
 							<div class="col-sm-3">
-								<select id="selctipobliga" class="form-control"
-									onchange="ShowSelected(this)" style="height: 48px !important">
+								<select id="selctipobliga" class="new_alto form-control"
+									onchange="ShowSelected(this)">
 									<option value="0-${item.cdu}">Seleccionar</option>
 									<option value="1-${item.cdu}">Declaración</option>
 									<option value="2-${item.cdu}">Retención</option>
 								</select>
 							</div>
 							<div class="col-sm-3">
-								<select id="btnTpLic_${item.cdu}" class="form-control"
-									style="height: 48px !important">
+								<select id="btnTpLic_${item.cdu}" class="new_alto form-control">
 									<option value="00">Seleccionar</option>
 									<option value="01">Licencia</option>
 									<option value="02">Reconocimiento</option>
@@ -416,10 +415,10 @@
 							<c:forEach var="radicado" items="${item.radicados}">
 								<div class="row">
 									<div class="col-sm-2"></div>
-									<div class="col-sm-3 text-right">Radicados:</div>
+									<div class="col-sm-4 text-right">Radicados:</div>
 									<div class="col-sm-3">
 										<input style="margin-bottom: 5px !important"
-											class="form-control" disabled="disabled" type="text"
+											class="new_alto form-control" disabled="disabled" type="text"
 											value="${radicado.numRadicado}" />
 									</div>
 									<div class="col-sm-3">

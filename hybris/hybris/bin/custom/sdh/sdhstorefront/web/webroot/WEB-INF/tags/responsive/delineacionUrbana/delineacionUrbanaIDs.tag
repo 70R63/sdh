@@ -8,7 +8,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">

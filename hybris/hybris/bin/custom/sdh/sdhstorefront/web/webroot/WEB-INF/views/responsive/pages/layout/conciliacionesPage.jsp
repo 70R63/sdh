@@ -12,7 +12,7 @@
 
 <template:page>
 
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1 d-flex align-items-center">
 			<table class="table">

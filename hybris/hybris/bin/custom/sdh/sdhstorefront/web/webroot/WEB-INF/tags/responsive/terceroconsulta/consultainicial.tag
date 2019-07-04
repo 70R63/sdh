@@ -8,7 +8,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_agentes_inicial">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="avisoheadline text-center " style="width: auto; height: 35px;">
@@ -47,27 +47,27 @@
 	</div>
 	<form action="">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="terceros.consultas.inicio.idenvio" /></label> <input id="" name=""
-						class="form-control" type="text" value="" maxlength="240">
+						class="newalto form-control" type="text" value="" maxlength="240">
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="terceros.consultas.inicio.noservicio" /></label> <input id=""
-						name="" class="form-control" type="text" value="" maxlength="240">
+						name="" class="newalto form-control" type="text" value="" maxlength="240">
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="terceros.consultas.inicio.tiparch" /></label> <select
-						class="form-control">
+						class="newalto form-control">
 						<option>Seleccionar</option>
 					</select>
 				</div>
@@ -94,37 +94,37 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="terceros.consultas.inicio.fecenvio" /></label> <input id=""
-						name="" class="form-control" type="text" value="" maxlength="240"
+						name="" class="newalto form-control" type="text" value="" maxlength="240"
 						placeholder="dd/mm/aaaa">
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="terceros.consultas.inicio.fecnoti" /></label> <input id="" name=""
-						class="form-control" type="text" value="" maxlength="240"
+						class="newalto form-control" type="text" value="" maxlength="240"
 						placeholder="dd/mm/aaaa">
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<button type="button" class="btn btn-secondary" id="" name=""
 				value="regresar" onclick="goBack()">
 				<spring:theme code="terceros.consultas.inicio.regresar" />
 			</button>
 			</div>
-				<div class=" col-md-3">
+				<div class=" col-md-2">
 					<button type="button" class="btn btn-primary btn-lg" id="" name=""
 						value="" onclick="window.location.href ='<c:url value='/terceros' />';">
 						<spring:theme code="terceros.consultas.inicio.cancelar" />
 					</button>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 				<button type="button" class="btn btn-primary btn-lg" id="" name=""
 				value="Buscar" onclick="show()">
 				<spring:theme code="terceros.consultas.inicio.buscar" />

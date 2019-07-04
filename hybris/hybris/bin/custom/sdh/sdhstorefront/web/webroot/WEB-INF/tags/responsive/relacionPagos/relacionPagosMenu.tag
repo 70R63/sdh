@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -49,7 +49,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="relacion.inicial.selcimpuesto" /></label> <select id="impuesto"
-						class="form-control " name="impuesto" onchange="Selected(this)">
+						class="new_alto form-control " name="impuesto" onchange="Selected(this)">
 						<option value="0">Seleccionar</option>
 						<option value="1">Predial Unificado</option>
 						<option value="2">Vehículos</option>
@@ -69,7 +69,7 @@
 				<div class="form-group">
 					<label class="control-label text-right"><spring:theme
 							code="relacion.inicial.aniograv" /></label> <select aria-required="true"
-						id="aniograva" class="form-control " name="aniograva" onchange="">
+						id="aniograva" class="new_alto form-control " name="aniograva" onchange="">
 						<option value="">Seleccionar</option>
 					</select>
 				</div>

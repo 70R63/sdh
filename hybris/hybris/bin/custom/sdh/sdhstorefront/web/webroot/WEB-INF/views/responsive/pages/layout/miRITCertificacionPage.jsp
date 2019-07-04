@@ -29,7 +29,7 @@
 	
 	
     
-	<div class="container_new">
+	<div class="container">
 	 	<div class="headline">
 			<h3>
 				<span tabindex="0" ><spring:theme code="mirit.certificacion.titulo" /></span>

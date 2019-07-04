@@ -24433,25 +24433,19 @@ header {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 86%;
+  width: 85%;
   padding: 0 !important;
-  /* 	margin-right: 1px !important; */
-  margin-right: 10%;
-  margin-left: 80px !important;
-  /* 	padding-top: 310px !important; */
 }
 .container_new {
   max-width: 90%;
   height: auto;
   display: block;
-  margin-left: auto;
+  width: 86%;
   margin-right: auto;
-  width: 88%;
-  /* 	padding: 0 !important; */
-  /* 	margin-right: 1px !important; */
-  margin-right: 10%;
-  margin-left: 80px !important;
-  padding-top: 25%;
+  margin-left: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 26%;
 }
 .container_new_contrib {
   max-width: 90%;
@@ -24460,19 +24454,12 @@ header {
   margin-left: auto;
   margin-right: auto;
   width: 86%;
-  /* 	padding: 0 !important; */
-  /* 	margin-right: 1px !important; */
-  margin-right: 10%;
-  margin-left: 80px !important;
   padding-top: 18%;
-}
-.login-section {
-  padding-top: 40%;
 }
 .delededucciones {
   pointer-events: none;
   position: absolute;
-  width: 100%;
+  width: 85%;
   height: auto;
   margin-bottom: 80px !important;
   max-width: 90%;
@@ -24538,4 +24525,7 @@ th {
   height: 38px !important;
   min-height: 30px !important;
   width: 28%;
+}
+.headline {
+  margin-left: 11px;
 }
