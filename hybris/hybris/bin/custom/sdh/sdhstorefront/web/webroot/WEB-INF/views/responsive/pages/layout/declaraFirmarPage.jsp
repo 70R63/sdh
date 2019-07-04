@@ -7,7 +7,5 @@
 <%@ taglib prefix="firmar" tagdir="/WEB-INF/tags/responsive/impuestos"%>
 
 
-
-<div class="container">
 <firmar:declaraFirmar />
-</div>
+

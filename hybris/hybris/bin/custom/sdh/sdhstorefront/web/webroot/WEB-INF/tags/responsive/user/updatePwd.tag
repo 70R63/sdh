@@ -5,6 +5,7 @@
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 
 <spring:htmlEscape defaultHtmlEscape="true"/>
+<div class="container">
         <div class="account-section">
             <div class="account-section-header no-border"><spring:theme code="text.account.profile.resetPassword"/></div>
             <div class="account-section-content row">
@@ -34,4 +35,4 @@
                 </form:form>
             </div>
         </div>
-
+</div>

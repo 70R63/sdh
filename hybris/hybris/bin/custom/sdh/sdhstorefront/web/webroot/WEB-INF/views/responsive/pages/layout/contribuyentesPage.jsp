@@ -72,8 +72,7 @@
 	<!-- </div> -->
 </template:page>
 
-<div class="container" 
-	style="margin-left: 0PX; margin-right: 55px; padding-top: 300px !important;">
+<div class="container" >
 
 	<img class="delededucciones"
 		src="${themeResourcePath}/images/contribuyentes_1.jpg"></img>

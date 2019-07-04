@@ -9,13 +9,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
-
-<div class="container">
 	
 		<impuestos:listaImpuestos />
 	
-</div>
+
 
 <script type="text/javascript">
 	window.onload = function data() {

@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container_new">
+<div class="container">
 	<sf:form action="${declaracionURL}" method="POST"
 		modelAttribute="dataForm" id="forma">
 
@@ -26,11 +26,11 @@
 
 		<div class="row">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group ">
 						<label class="control-label"><spring:theme
 								code="impuestos.decGasolina.Pagos.valorSobretasa" /></label> <input
-							id="valorSobretasa" name="valorSobretasa" class="form-control"
+							id="valorSobretasa" name="valorSobretasa" class="newalto form-control"
 							aria-required="true" type="text" readonly="readonly"
 							value="${dataForm.dataForm.valoresDeclara.vlrSobretasa}"
 							maxlength="240">
@@ -39,11 +39,11 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group ">
 						<label class="control-label"><spring:theme
 								code="impuestos.decGasolina.Pagos.valorSanciones" /></label> <input
-							id="valorSansiones" name="valorSansiones" class="form-control"
+							id="valorSansiones" name="valorSansiones" class="newalto form-control"
 							aria-required="true" type="text" readonly="readonly"
 							value="${dataForm.dataForm.valoresDeclara.vlrSancPagos}"
 							maxlength="240">
@@ -52,11 +52,11 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group ">
 						<label class="control-label"><spring:theme
 								code="impuestos.decGasolina.Pagos.valorIntereses" /></label> <input
-							id="valorIntereses" name="valorIntereses" class="form-control"
+							id="valorIntereses" name="valorIntereses" class="newalto form-control"
 							aria-required="true" type="text" readonly="readonly"
 							value="${dataForm.dataForm.valoresDeclara.interesMora}"
 							maxlength="240">
@@ -65,12 +65,12 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group ">
 						<label class="control-label"><spring:theme
 								code="impuestos.decGasolina.Pagos.menosCompensaciones" /></label> <input
 							id="menosCompensaciones" name="menosCompensaciones"
-							class="form-control" aria-required="true" type="text"
+							class="newalto form-control" aria-required="true" type="text"
 							readonly="readonly"
 							value="${dataForm.dataForm.valoresDeclara.menosCompensa}"
 							maxlength="240">
@@ -79,11 +79,11 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group ">
 						<label class="control-label"><spring:theme
 								code="impuestos.decGasolina.Pagos.valorTotalPagar" /></label> <input
-							id="valorTotalPagar" name="valorTotalPagar" class="form-control"
+							id="valorTotalPagar" name="valorTotalPagar" class="newalto form-control"
 							aria-required="true" type="text" readonly="readonly"
 							value="${dataForm.dataForm.valoresDeclara.totalPagar}"
 							maxlength="240">

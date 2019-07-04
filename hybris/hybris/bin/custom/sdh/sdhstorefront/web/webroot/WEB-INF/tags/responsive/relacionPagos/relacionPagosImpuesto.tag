@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <sf:form>
-	<div class="container_new">
+	<div class="container">
 		<div id="impuest" style="display: none;">
 			<input id="Idimp" value="">
 		</div>

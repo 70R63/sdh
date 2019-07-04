@@ -15,7 +15,7 @@
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
 	htmlEscape="false" />
 
-<div class="container_new">
+<div class="container">
 	<input type="hidden" id="numForm" name="numForm"
 		value="${declaPublicidadForm.numform }" />
 	<div class="row">
@@ -53,8 +53,16 @@
 				<sf:hidden path="clavePeriodo" />
 				<sf:hidden path="dv" />
 				<sf:hidden path="numObjeto" />
+				<c:choose>
+					<c:when test="${empty declaPublicidadForm.numform}">
+						<c:set var = "deshabilitarPagar" value = "true"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var = "deshabilitarPagar" value = "false"/>	
+					</c:otherwise>
+				</c:choose>
 				<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-					name="pagar" value="pagar">
+					name="pagar" value="pagar" disabled="${deshabilitarPagar}">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 				</sf:button>
 			</div>

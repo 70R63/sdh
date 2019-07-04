@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>
@@ -52,8 +52,8 @@
 			<div class="row">
 				<div class="row areasusos">
 					<div class="col-md-3">
-						<div class="form-group ">
-							<select class="form-control select1">
+						<div class=" form-group ">
+							<select class="new_alto form-control select1">
 								<option value="">Seleccionar</option>
 								<option value="1">Vivienda</option>
 								<option value="2">Comercio</option>
@@ -68,7 +68,7 @@
 
 					<div class="col-md-3">
 						<div class="form-group ">
-							<select class="form-control select2">
+							<select class="new_alto form-control select2">
 								<option value="Seleccionar">Seleccionar</option>
 								<option value="Vivienda estrato 1">Vivienda estrato 1</option>
 								<option value="Vivienda estrato 2">Vivienda estrato 2</option>
@@ -296,7 +296,7 @@
 
 		<br>
 		<br>
-		<div class="container_new">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group ">

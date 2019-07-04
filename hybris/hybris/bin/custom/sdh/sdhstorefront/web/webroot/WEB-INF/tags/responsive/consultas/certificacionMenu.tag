@@ -77,13 +77,13 @@
 			<input type="hidden" name="rowFrompublicidadTable" value=""/>
 			
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div class="form-group">						
 						<formElement:formSelectBox idKey="impuesto" 
 							labelKey="certideclara.inicial.selcimpuesto" 
 							path="tipoImp" mandatory="true" 
 							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
-							items="${impuesto}" selectCSSClass="form-control"/>
+							items="${impuesto}" selectCSSClass="newalto form-control"/>
 					</div>
 				</div>
 			
@@ -93,26 +93,26 @@
 							labelKey="certideclara.inicial.selcimpuesto" 
 							path="Idimp" mandatory="true" 
 							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
-							items="${tipoDeImpuesto}" selectCSSClass="form-control" onchange="onChange()"/>
+							items="${tipoDeImpuesto}" selectCSSClass="newalto form-control" onchange="onChange()"/>
 					</div>
 				</div>
 				
-				<div class="col-md-3" id="idAnio" style="display: block;">
+				<div class="col-md-2" id="idAnio" style="display: block;">
 					<div class="form-group">
 						<formElement:formSelectBox idKey="aniograv" 
 							labelKey="certideclara.inicial.aniograv" 
 							path="aniograv" mandatory="true" 
 							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
-							items="${anioGravable}" selectCSSClass="form-control" onchange="onChangeAnioGravable()"/>
+							items="${anioGravable}" selectCSSClass="newalto form-control" onchange="onChangeAnioGravable()"/>
 					</div>
 				</div>
 				
 				<c:if test="${certiFormPost.idimp ne '4' and certiFormPost.idimp ne '3' and certiFormPost.idimp ne '6'}">
-				<div class="col-md-3" id="idPeriodo" style="display: block;">
+				<div class="col-md-2" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.periodo" /></label> <select
-							aria-required="true" id="periodo" class="form-control "
+							aria-required="true" id="periodo" class="newalto form-control "
 							name="periodo"
 							required='required'>
 							<option value="">Seleccionar</option>
@@ -134,11 +134,11 @@
 				</c:if>
 				
 				<c:if test="${certiFormPost.idimp == '3' and  isPeriodoAnual == false}">
-				<div class="col-md-3" id="idPeriodo" style="display: block;">
+				<div class="col-md-2" id="idPeriodo" style="display: block;">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="certificacion.inicial.periodo" /></label>	
-					<select  id="periodo" class="form-control "	name="periodo" >
+					<select  id="periodo" class="newalto form-control "	name="periodo" >
 						<option value="">Seleccionar</option>
 						<option value="B1">1 - Ene / Feb</option>
 						<option value="B2">2 - Mar / Abr</option>

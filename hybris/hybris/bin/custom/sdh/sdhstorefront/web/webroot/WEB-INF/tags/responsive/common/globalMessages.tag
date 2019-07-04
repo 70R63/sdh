@@ -6,6 +6,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div class="container_new">
 <c:if test="${(not empty accConfMsgs) || (not empty accInfoMsgs) || (not empty accErrorMsgs)}">
 	<div class="global-alerts">
 		
@@ -44,3 +45,4 @@
 
 	</div>
 </c:if>
+</div>

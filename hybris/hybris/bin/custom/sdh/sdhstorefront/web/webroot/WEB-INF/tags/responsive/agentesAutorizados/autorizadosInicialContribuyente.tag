@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
+<div class="container">
 	<div class="col-md-6 col-md-offset-3" style="  margin-bottom: 5px">
 		<label class="control-label"
 			style="text-transform: none; font-weight: 600 !important; "><spring:theme
@@ -46,4 +46,5 @@
 			</div>
 		</form:form>
 	</div>
+</div>
 </div>

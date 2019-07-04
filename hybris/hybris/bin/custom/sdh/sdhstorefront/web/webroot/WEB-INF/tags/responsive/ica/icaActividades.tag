@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline">
@@ -23,16 +23,16 @@
 	<br>
 	<form:form action="">
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-7 text-center">
 				<div class="table-responsive">
 					<table class="table table-bordered" id="example">
 						<thead>
 							<tr>
-								<td><label class="control-label labeltabletd"><spring:theme
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
 											code="ica.inicial.activecono.actprin" /></label></td>
 								<td><label class="control-label labeltabletd inputcodciuu"><spring:theme
 											code="ica.inicial.activecono.ciiu" /></label></td>
-								<td><label class="control-label labeltabletd tablenombre"><spring:theme
+								<td><label class="control-label labeltabletd"><spring:theme
 											code="ica.inicial.activecono.denomi" /></label></td>
 								<td><label class="control-label labeltabletd tablefechas"><spring:theme
 											code="ica.inicial.activecono.feciniact" /></label></td>
@@ -46,7 +46,7 @@
 								var="eachActivEconomicas">
 								<tr>
 									<c:if test='${eachActivEconomicas.activPrincipal == "X"}'>
-										<td><label class="control-label "><spring:theme
+										<td><label class="control-label tablefechas "><spring:theme
 													code="ica.inicial.activecono.principal" /></label></td>
 									</c:if>
 									<c:if test='${eachActivEconomicas.activPrincipal != "X"}'>
@@ -55,7 +55,7 @@
 									<td><input class="inputtextnew inputcodciuu"
 										disabled="disabled" value="${eachActivEconomicas.ciiu}"
 										type="text" /></td>
-									<td><input class="inputtextnew tablenombre"
+									<td><input class="inputtextnew"
 										disabled="disabled"
 										value="${eachActivEconomicas.denominacion}" type="text" /></td>
 									<td><input class="inputtextnew tablefechas"

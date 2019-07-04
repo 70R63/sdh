@@ -10,7 +10,7 @@
 
 
 
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>
@@ -22,16 +22,16 @@
 
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id="totalpresu"
-					name="infObjetoDelineacion.infoDeclara.totalPresupuesto" class="form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
+					name="infObjetoDelineacion.infoDeclara.totalPresupuesto" class="newalto form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.valrete" /></label> 
@@ -40,12 +40,12 @@
 <%-- 					value="${dataForm.infObjetoDelineacion.infoDeclara.totalRetencion}" maxlength="240" disabled> --%>
 					<sf:hidden path="input.totalRetencionOBLIGATORIO" id="totalRetencionOBLIGATORIO"/>
 					<c:if test="${empty totalRetencionOBLIGATORIO}">
-						<sf:input id="totalRetencion" class="form-control" readonly="true"
+						<sf:input id="totalRetencion" class="newalto form-control" readonly="true"
 						aria-required="true" maxlength="240"
 						path="infObjetoDelineacion.infoDeclara.totalRetencion" readOnly="true"/>						
 					</c:if>
 					<c:if test="${not empty totalRetencionOBLIGATORIO}">
-						<sf:input id="totalRetencion" class="form-control" readonly="true"
+						<sf:input id="totalRetencion" class="newalto form-control" readonly="true"
 						aria-required="true" maxlength="240"
 						path="infObjetoDelineacion.infoDeclara.totalRetencion" 
 						name="infObjetoDelineacion.infoDeclara.totalRetencion" readOnly="false"/>						
@@ -56,17 +56,17 @@
 	
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
-					name="" class="form-control" aria-required="true" type="text"
+					name="" class="newalto form-control" aria-required="true" type="text"
 					readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.valorPagar}" maxlength="240">
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 				<sf:button class="btn btn-primary btn-lg" name="action"
 					id="calcular" value="calcular" disabled="false" onclick="presdecla()">
 					<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />

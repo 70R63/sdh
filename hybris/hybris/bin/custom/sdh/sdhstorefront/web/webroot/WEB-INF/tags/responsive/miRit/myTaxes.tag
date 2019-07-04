@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div id="acordeon" class="container_new">
+<div id="acordeon" class="container">
 	<div class="card cardmirit ">
 		<div class="card-header" id="head6">
 			<h5 class="mb-0 cardtitle">
@@ -119,19 +119,52 @@
 							</label>
 						</div>
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group ">
 									<label class="control-label required" for="address.surname">
-										Num. Objeto
+										<spring:theme code="mirit.gas.tax.numDoc" />
 									</label> 
-									<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.impuestoICA.numObjeto}" maxlength="240">
+									<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="<spring:theme  code='register.id.types.${miRitForm.tipoDoc}' />" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 									</div>
 								</div>
 							</div>
-
+							<div class="col-md-2">
+								<div class="form-group ">
+									<label class="control-label required" for="address.surname">
+										<spring:theme code="mirit.gas.tax.numDoc" />
+									</label> 
+									<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.numDoc }" maxlength="240">
+									<div class="help-block">
+										<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
+									</div>
+								</div>
+							</div>
 						</div>
+						</c:if>
+						<br>
+						<br>
+						<c:if test="${not empty  miRitForm.delineacion}">
+						<div class="form-group ">
+							<label class="control-label " >
+										<spring:theme code="mirit.ica"/>
+							</label>
+						</div>
+						<c:forEach items="${miRitForm.delineacion }" var="eachDelineacion">
+						<div class="row">
+							
+							<div class="col-md-3">
+								<div class="form-group ">
+									<label class="control-label required" for="address.surname">
+										CDU
+									</label> 
+									<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${eachDelineacion.cdu }" maxlength="240">
+								</div>
+							</div>
+							
+						</div>
+						</c:forEach>
 						</c:if>
 						<br>
 						<br>

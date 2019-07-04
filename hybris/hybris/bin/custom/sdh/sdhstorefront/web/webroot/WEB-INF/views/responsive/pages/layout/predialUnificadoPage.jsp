@@ -8,7 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/predialUnificado"%>
 
 
-<div class="container">
+
 
 	<predialUnificado:predialUnificadoTable />
 	<predialUnificado:predialUnificadoJuridicos />
@@ -17,5 +17,3 @@
 	<predialUnificado:predialUnificadoMarcas />
 	<predialUnificado:predialUnificadoLiquidacion />
 	<predialUnificado:predialUnificadoConsulta />
-
-</div>

@@ -9,6 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div class="container">
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
 <div class="login-page__headline" style="margin-bottom: 0px; margin-top: 0px;">
@@ -53,4 +54,6 @@
 	</c:if>
 
 </form:form>
+
+</div>
 

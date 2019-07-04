@@ -5,7 +5,10 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
+<div class="container">
+<div class="container">
+<div class="container">
+<div class="container">
 <div class="forgotten-password">
 	<div class="description"><spring:theme code="forgottenPwd.description"/></div>
 	<form:form method="post" commandName="forgottenPwdForm">
@@ -20,4 +23,8 @@
 			</ycommerce:testId>
 		</div>
 	</form:form>
+</div>
+</div>
+</div>
+</div>
 </div>

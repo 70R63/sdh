@@ -12,7 +12,7 @@
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
 	htmlEscape="false" />
 
-<div class="container_new">
+<div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
 			<div class="headline">
@@ -40,7 +40,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme code="" /></label> <input
-							disabled id="" name="" class="form-control" disabled type="text"
+							disabled id="" name="" class="new_alto form-control" disabled type="text"
 							value="" maxlength="240" placeholder="Declarante" style="margin-top:4px">
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
-							name="" class="form-control" disabled type="text" value=""
+							name="" class="new_alto form-control" disabled type="text" value=""
 							maxlength="240"></input>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
-							name="" class="form-control" disabled type="text" value=""
+							name="" class="new_alto form-control" disabled type="text" value=""
 							maxlength="240"></input>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="ica.declaracion.firma.numide" /></label> <input disabled id=""
-							name="" class="form-control" disabled type="text" value=""
+							name="" class="new_alto form-control" disabled type="text" value=""
 							maxlength="240"></input>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="ica.declaracion.firma.numtarjeta" /></label> <input disabled
-							id="" name="" class="form-control" disabled type="text" value=""
+							id="" name="" class="new_alto form-control" disabled type="text" value=""
 							maxlength="240"></input>
 					</div>
 				</div>
@@ -85,14 +85,14 @@
 		</div>
 	</div>
 </div>
-<div class="container_new" id="repre">
+<div class="container" id="repre">
 
 	<div id="representante" class="row mt-3 representante"
 		style="display: none">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme code="" /></label> <select
-					class="form-control "
+					class="new_alto form-control "
 					style="font-size: 13px; padding: 0px; margin-top: 23px"
 					onchange="habfirmante(this)" id="selectfirmante">
 					<option>Seleccionar</option>
@@ -106,14 +106,14 @@
 			<div class="form-group">
 				<label class="control-label " style="margin-top: 20px"><spring:theme
 						code="ica.declaracion.firma.nombre" /></label> <select  id="selcnombre"
-					name="" class="form-control"><option>Seleccionar</option></select>
+					name="" class="new_alto form-control"><option>Seleccionar</option></select>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label textocentrado" style="margin-top: 20px"><spring:theme
 						code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
+					name="" class="new_alto form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
 		</div>
@@ -121,7 +121,7 @@
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
 						code="ica.declaracion.firma.numide" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
+					name="" class="new_alto form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
 		</div>
@@ -130,7 +130,7 @@
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
 						code="ica.declaracion.firma.numtarjeta" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
+					name="" class="new_alto form-control" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
 		</div>
@@ -151,7 +151,7 @@
 	</div>
 </div>
 
-<div class="container_new">
+<div class="container">
 	<input type="hidden" id="numObjeto" name="numObjeto"
 		value="${numObjeto}" /> <input type="hidden" id="numForm"
 		name="numForm"

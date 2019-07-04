@@ -11,7 +11,7 @@
 <spring:url
 	value="/contribuyentes/sobretasa-gasolina/declaracion-gasolina"
 	var="presentarDeclaracionUrl" htmlEscape="false" />
-<div class="container_new">
+<div class="container">
 	<sf:form action="${declaracionURL}" method="POST"
 		modelAttribute="dataForm" id="forma">
 
@@ -72,7 +72,7 @@
 				<div class="row informadeclara">
 
 					<div class="col-md-3">
-						<sf:select class="form-control-gasolina claseProducto"
+						<sf:select class="new_alto form-control-gasolina claseProducto"
 							path="dataForm.infoDeclara[${loop.index}].claseProd"
 							items="${dataForm.catalogosSo.claseProd}"
 							referenceData="${dataForm.catalogosSo.claseProd}" maxlength="10"
@@ -81,13 +81,13 @@
 					<div class="col-md-1">
 						<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
 							value="${info.galonesGra}"
-							class="form-control form-control galones" maxlength="30"
+							class="new_alto form-control galones" maxlength="30"
 							size="20" />
 					</div>
 					<div class="col-md-2">
 						<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
 							value="${info.precioRef}"
-							class="form-control form-control precio" maxlength="30" size="20"
+							class="new_alto form-control precio" maxlength="30" size="20"
 							readonly="true" type="" />
 					</div>
 					<div class="col-sm-1">
@@ -98,7 +98,7 @@
 									path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
 									items="${dataForm.catalogosSo.alcoholCarbu}"
 									referenceData="${dataForm.catalogosSo.alcoholCarbu}"
-									class="form-control form-control-gasolina alcohol"
+									class="new_alto form-control-gasolina alcohol"
 									readonly="true" style="width: auto !important;" />
 							</c:when>
 							<c:otherwise>
@@ -106,7 +106,7 @@
 									path="dataForm.infoDeclara[${loop.index}].alcoholCarbu"
 									items="${dataForm.catalogosSo.alcoholCarbu}"
 									referenceData="${dataForm.catalogosSo.alcoholCarbu}"
-									class="form-control form-control-gasolina alcohol"
+									class="new_alto form-control-gasolina alcohol"
 									style="width: auto !important;" />
 							</c:otherwise>
 						</c:choose>
@@ -114,13 +114,13 @@
 					<div class="col-md-2">
 						<sf:input path="dataForm.infoDeclara[${loop.index}].baseGravable"
 							value="${info.baseGravable}"
-							class="form-control form-control base" maxlength="30" size="20"
+							class="new_alto form-control base" maxlength="30" size="20"
 							readonly="true" />
 					</div>
 					<div class="col-md-2">
 						<sf:input path="dataForm.infoDeclara[${loop.index}].vlrSobretasa"
 							value="${info.vlrSobretasa}"
-							class="form-control form-control vlrsobre" maxlength="30"
+							class="new_alto form-control vlrsobre" maxlength="30"
 							size="20" readonly="true" />
 					</div>
 				</div>

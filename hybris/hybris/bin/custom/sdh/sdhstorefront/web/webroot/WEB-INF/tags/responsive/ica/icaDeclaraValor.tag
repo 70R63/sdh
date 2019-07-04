@@ -10,7 +10,7 @@
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline">
@@ -89,11 +89,11 @@
 		<c:if test="${empty infoDeclara.valorRetenido}">
 			<div class="row valor">
 				<div class="col-md-1">
-					<input class="form-control anio anoGravable" type="text"
+					<input class="new_alto form-control anio anoGravable" type="text"
 						value="${infoDeclara.anoGravable }" />
 				</div>
 				<div class="col-md-2">
-					<select id="" class="form-control tipoID" style="height: 48px;">
+					<select id="" class="new_alto form-control tipoID" style="height: 48px;">
 						<option value="">Seleccionar</option>
 						<option value="CC">CC Cédula de ciudadania</option>
 						<option value="CE">CE Cédula de extranjería</option>
@@ -109,19 +109,19 @@
 					</select>
 				</div>
 				<div class="col-md-1">
-					<input class="form-control numID" type="text"
+					<input class="new_alto form-control numID" type="text"
 						value="${infoDeclara.numID }" />
 				</div>
 				<div class="col-md-2">
-					<input class="form-control razonSocial" type="text"
+					<input class="new_alto form-control razonSocial" type="text"
 						value="${infoDeclara.razonSocial }" />
 				</div>
 				<div class="col-md-1">
-					<input class="form-control direccion" type="text"
+					<input class="new_alto form-control direccion" type="text"
 						value="${infoDeclara.direccion }" />
 				</div>
 				<div class="col-md-1">
-					<input class="form-control telefono" type="text"
+					<input class="new_alto form-control telefono" type="text"
 						value="${infoDeclara.telefono }" />
 				</div>
 				<div class="col-md-1">
@@ -134,11 +134,11 @@
 					</select>
 				</div>
 				<div class="col-md-1">
-					<input class="form-control tarifaApl" type="text"
+					<input class="new_alto form-control tarifaApl" type="text"
 						value="${infoDeclara.tarifaApl }" />
 				</div>
 				<div class="col-md-1">
-					<input class="form-control montoRetenido" type="text"
+					<input class="new_alto form-control montoRetenido" type="text"
 						value="${infoDeclara.montoRetenido }" />
 				</div>
 				<div class="col-md-1">
@@ -158,11 +158,11 @@
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
 			<div class="row valor">
 				<div class="col-md-1">
-					<input class="form-control anio anoGravable" type="text"
+					<input class="new_alto form-control anio anoGravable" type="text"
 						value="${eachValor.anoGravable }" />
 				</div>
 				<div class="col-md-2">
-					<select id="" class="form-control tipoID" style="height: 48px;">
+					<select id="" class="new_alto form-control tipoID" style="height: 48px;">
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ idTypes}" var="eachType">
 
@@ -180,23 +180,23 @@
 					</select>
 				</div>
 				<div class="col-md-1">
-					<input class="form-control numID" type="text"
+					<input class="new_alto form-control numID" type="text"
 						value="${eachValor.numID }" />
 				</div>
 				<div class="col-md-2">
-					<input class="form-control razonSocial" type="text"
+					<input class="new_alto form-control razonSocial" type="text"
 						value="${eachValor.razonSocial }" />
 				</div>
 				<div class="col-md-1">
-					<input class="form-control direccion" type="text"
+					<input class="new_alto form-control direccion" type="text"
 						value="${eachValor.direccion }" />
 				</div>
 				<div class="col-md-1">
-					<input class="form-control telefono" type="text"
+					<input class="new_alto form-control telefono" type="text"
 						value="${eachValor.telefono }" />
 				</div>
 				<div class="col-md-1">
-					<select id="" class="form-control codMunicipio"
+					<select id="" class="new_alto form-control codMunicipio"
 						style="height: 48px;">
 						<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
@@ -213,7 +213,7 @@
 				<div class="col-md-1">
 					<!-- 						<input class="form-control tarifaApl" type="text" -->
 					<%-- 							value="${eachValor.tarifaApl }" /> --%>
-					<select id="" class="form-control tarifaApl" style="height: 48px;">
+					<select id="" class="new_alto form-control tarifaApl" style="height: 48px;">
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ tarifasValorRetenido}" var="eachTarifa">
 
@@ -231,7 +231,7 @@
 
 				</div>
 				<div class="col-md-1">
-					<input class="form-control montoRetenido" type="text"
+					<input class="new_alto form-control montoRetenido" type="text"
 						value="${eachValor.montoRetenido }" />
 				</div>
 				<div class="col-md-1">
@@ -248,7 +248,7 @@
 	</div>
 
 	<!-- 	se agrega boton para adjuntar archivo -->
-	<div class="container_new" style="margin-top: 15px !important">
+	<div class="container" style="margin-top: 15px !important">
 
 
 		<div class="row">

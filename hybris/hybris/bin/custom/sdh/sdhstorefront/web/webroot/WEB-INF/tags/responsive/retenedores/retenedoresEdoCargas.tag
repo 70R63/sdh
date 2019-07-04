@@ -10,7 +10,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_agentes_inicial">
+<div class="container">
 	<div class="row">
 
 		<div class="col-md-12">
@@ -62,12 +62,11 @@
 	<form:form commandName="form" action="${edoCargasAction}"
 		id="edoCargasForm" name="edoCargasForm">
 		<div class="row">
-			<div class="col-md-12 col-md-offset-3">
+			<div class="col-md-3 col-md-offset-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="reteica.consulta.estado.anio" /></label> <select id="reteICAEDOAnoGravable"
-						name="anoGravable" class="form-control"
-						style="width: 200px !important">
+						name="anoGravable" class="newalto form-control">
 						<option>Seleccionar</option>
 						<c:forEach items="${ years}" var="eachYear">
 							<c:set var="selected" value="" />
@@ -83,7 +82,7 @@
 		</div>
 	</form:form>
 	<div class="row">
-		<div class="col-md-12 tableamplia">
+		<div class="col-md-10 tableamplia">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="example">
 					<thead>
@@ -92,7 +91,7 @@
 										code="reteica.consulta.estado.fechcarga" /></label></td>
 							<td><label class="control-label labeltabletd tablenombre"><spring:theme
 										code="reteica.consulta.estado.nomdoc" /></label></td>
-							<td><label class="control-label labeltabletd"><spring:theme
+							<td><label class="control-label labeltabletd tableangrav"><spring:theme
 										code="reteica.consulta.estado.perrepor" /></label></td>
 							<td><label class="control-label labeltabletd tabledomatri"><spring:theme
 										code="reteica.consulta.estado.estado" /></label></td>
@@ -111,7 +110,7 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tablenombre"
 										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew " disabled="disabled"
+									<td><input class="inputtextnew tableangrav" disabled="disabled"
 										value="" type="text" /></td>
 									<td><input class="inputtextnew tabledomatri"
 										disabled="disabled" value="" type="text" /></td>

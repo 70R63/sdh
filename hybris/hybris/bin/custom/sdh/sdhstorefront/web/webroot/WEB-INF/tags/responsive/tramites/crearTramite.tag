@@ -21,49 +21,48 @@
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.tiptramite" /></label> <select
-							class="form-control">
-							<option value="Seleccionar">Seleccionar</option>
-							<option value="">RIT</option>
+								code="tramites.crear.inicial.tiptramite" /></label> 
+						<select data-nivel="0"
+							class="new_alto form-control !important tramitestSN" id="selectNivel0">
+							<option value="00">Seleccionar</option>
+							<option value="01">RIT</option>
+							<option value="02">Novedades de registro</option>
+							<option value="03">Facturación</option>
+							<option value="04">Analisis de la cuenta</option>
+							<option value="05">Boletín de deudores Morosos del Estado</option>
+							<option value="06">Verificación de pagos</option>
+							<option value="07">Corrección de la información causada contablemente</option>
+							<option value="08">Declaración</option>
 						</select>
 					</div>
 				</div>
 			</div>
-			<div class="row mt-3">
+			<div id="divSubtramite" class="row mt-3" style="display: none;">
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.subtramite" /></label> <select
-							class="form-control">
-							<option value="Seleccionar">Seleccionar</option>
-							<option value="">Creación</option>
-							<option value="">Actualización</option>
+								code="tramites.crear.inicial.subtramite" /></label> 
+						<select data-nivel="1" class="new_alto form-control !important tramitestSN" id="selectNivel1">
 						</select>
 					</div>
 				</div>
 			</div>
-			<div class="row mt-3">
+			<div id="divCategoria" class="row mt-3" style="display: none;">
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.categoria" /></label> <select
-							class="form-control">
-							<option value="Seleccionar">Seleccionar</option>
-							<option value="">Registro/Rol tributario</option>
-							<option value="">Creación de calidad de sujeción pasiva</option>
+								code="tramites.crear.inicial.categoria" /></label> 
+						<select data-nivel="2" class="new_alto form-control !important tramitestSN" id="selectNivel2">
 						</select>
 					</div>
 				</div>
 			</div>
-			<div class="row mt-3">
+			<div id="divSubCategoria" class="row mt-3" style="display: none;">
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.subcategoria" /></label> <select
-							class="form-control">
-							<option value="Seleccionar">Seleccionar</option>
-							<option value="">Persona Natural</option>
-							<option value="">PersonaJurídica</option>
+								code="tramites.crear.inicial.subcategoria" /></label> 
+						<select data-nivel="3" class="new_alto form-control !important tramitestSN" id="selectNivel3">
 						</select>
 					</div>
 				</div>
@@ -77,7 +76,7 @@
 							style="text-align: center !important;"><spring:theme
 								code="tramites.crear.inicial.mensaje" /></label>
 						<textarea name="mensaje" id="mensaje" class="form-control"
-							style="min-height: 120px; max-height: 400px; min-width: 100%; max-width: 100%;"></textarea>
+							style="min-height: 220px; max-height: 600px; min-width: 100%; max-width: 100%;" maxlength="1000"></textarea>
 						<small class="form-text text-muted"
 							style="text-align: right !important"><spring:theme
 								code="tramites.crear.inicial.nota" /></small>

@@ -48,6 +48,10 @@ ACC.gasolina = {
 	            		{
 	            			$("#gasolinaDialogContent").html("");
 	            			$("#gasolinaDialogContent").html("La declaración se ha generado exitosamente.")
+							$("#gasolinaDialogContent").html($("#gasolinaDialogContent").html()+ "<br><br>" +
+							"Recuerda que la obligación del Impuesto de Sobretasa  a la Gasolina, solo se " +
+							"culmina al momento en que se termine y se admita de manera exitosa el pago en línea.<br>" )
+							
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			

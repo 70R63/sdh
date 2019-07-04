@@ -11,7 +11,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h3>
@@ -28,7 +28,7 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.tipiden" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
+						name="" class="new_alto form-control" aria-required="true" type="text"
 						readonly="readonly" value="${tipoDescripcionID}" maxlength="240">
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.numide" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
+						name="" class="new_alto form-control" aria-required="true" type="text"
 						readonly="readonly" value="${dataForm.valCont.infoContrib.numDoc}" maxlength="240">
 				</div>
 			</div>
@@ -46,14 +46,14 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.firm.nombraz" /></label> <input id=""
-						name="" class="form-control" aria-required="true" type="text"
+						name="" class="new_alto form-control" aria-required="true" type="text"
 						value="${nombreCompleto}" maxlength="240" disabled>
 				</div>
 			</div>
 		</div>
 
 		<br>
-		<div class="container_new">
+		<div class="container">
 			<div class="row">
 			
 <%-- 			<sf:hidden path="dataForm.infObjetoDelineacion.numForm" /> --%>

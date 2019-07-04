@@ -48,51 +48,51 @@
 			<div class="col-md-6">
 				<div class="card cardsinfondo">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.tipiden" /></label> <input
-									class="form-control" maxlength="30" size="30"
+									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
 									value="<c:out value=""></c:out>" />
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.numiden" /></label> <input
-									class="form-control" maxlength="30" size="30"
+									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
 									value="<c:out value=""></c:out>" />
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-8">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
-										code="edocuenta.inicial.nom" /></label> <input class="form-control"
+										code="edocuenta.inicial.nom" /></label> <input class="newalto form-control"
 									maxlength="30" size="30" disabled="disabled" type="text"
 									value="<c:out value=""></c:out>" />
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.fecgen" /></label> <input
-									class="form-control" maxlength="30" size="30"
+									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
 									value="<c:out value=""></c:out>" />
 							</div>
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.tasint" /></label> <input
-									class="form-control" maxlength="30" size="30"
+									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
 									value="<c:out value=""></c:out>" />
 							</div>
@@ -101,14 +101,14 @@
 
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="card cardsinfondo">
 					<div class="row">
 						<div class="col-md-10" id="idImpuesto">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.selcimpuesto" /></label> <select
-									id="impuesto" class="form-control " name="impuesto"
+									id="impuesto" class="new_alto form-control " name="impuesto"
 									onchange="Selected(this)">
 									<option value="0">Seleccionar</option>
 									<option value="1">Predial Unificado</option>
@@ -127,7 +127,7 @@
 							<div class="form-group">
 								<label class="control-label text-right"><spring:theme
 										code="edocuenta.inicial.aniograv" /></label> <select
-									aria-required="true" id="aniograva" class="form-control "
+									aria-required="true" id="aniograva" class="newalto form-control "
 									name="aniograva" onchange="" required>
 									<option value="">Seleccionar</option>
 									<option value="1">2019</option>

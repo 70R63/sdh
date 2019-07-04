@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="impuestos.sobreTasaGasolina.DatosGenerales.anioGravableConsultardisable" /></label>
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="impuestos.sobreTasaGasolina.DatosGenerales.Periododisable" /></label>
@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.ubicacionPlantaAbasto" /></label>
@@ -60,7 +60,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.codigoPostal" /></label>
@@ -76,7 +76,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.municipio" /></label>
@@ -93,7 +93,7 @@
 
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.calidadResponsable" /></label>
@@ -109,7 +109,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.capacidadAlmacProd" /></label>
@@ -125,7 +125,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.numTanques" /></label>
@@ -141,7 +141,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.capacAlmacTanques" /></label>
