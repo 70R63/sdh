@@ -24421,10 +24421,15 @@ ul.nav__links li {
   border-top: 1px transparen #ffffff;
 }
 /* terminan los ajustes de la sección del menú */
+.branding-mobile {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
 header {
   position: fixed;
   z-index: 100;
-  width: 88%;
+  width: 100%;
 }
 /* cambios para el container */
 .container {
@@ -24447,11 +24452,14 @@ header {
   margin-left: auto;
   margin-right: auto;
   width: 88%;
-  padding: 0 !important;
+  /* 	padding: 0 !important; */
   /* 	margin-right: 1px !important; */
   margin-right: 10%;
   margin-left: 80px !important;
-  padding-top: 380px ;
+  padding-top: 25%;
+}
+.login-section {
+  padding-top: 45%;
 }
 .delededucciones {
   pointer-events: none;
@@ -24459,4 +24467,48 @@ header {
   width: 100%;
   height: auto;
   margin-bottom: 80px !important;
+  max-width:90%;
+}
+thead {
+  background-color: #ebebe4 !important;
+  text-color: #ffffff !important;
+}
+td,
+th {
+  border-top: solid 1px #000000 !important;
+  border-bottom: solid 1px #000000 !important;
+  border-right: solid 1px #000000 !important;
+  border-left: solid 1px #000000 !important;
+  vertical-align: inherit !important;
+}
+.labeltabletd {
+  text-align: center !important;
+  color: #1b1464 !important;
+  text-transform: none !important;
+}
+.inputcodciuu,
+.tablenumiden,
+.tabledomatri,
+.tablecodpost {
+  width: 80px !important;
+  text-align: center !important;
+}
+.tablefechas,
+.tableident {
+  width: 75px !important;
+  text-align: center !important;
+}
+.tablenombre,
+.tabledenomi {
+  width: 400px !important;
+}
+.tablecantperoc {
+  width: 55px !important;
+  text-align: center !important;
+}
+.tabletiprela {
+  width: 300px !important;
+}
+.tableamplia {
+  width: auto !important;
 }

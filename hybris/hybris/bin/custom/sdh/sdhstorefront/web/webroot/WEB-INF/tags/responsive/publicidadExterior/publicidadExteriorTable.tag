@@ -10,7 +10,7 @@
 
 <spring:url value="/calculo" var="CalculodeclaracionUrl"
 	htmlEscape="false" />
-<div class="container">
+<div class="container_new">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">

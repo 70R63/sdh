@@ -15,7 +15,7 @@
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
 	htmlEscape="false" />
 
-<div class="container_new">
+<div class="container">
 	<input type="hidden" id="numForm" name="numForm"
 		value="${declaPublicidadForm.numform }" />
 	<div class="row">

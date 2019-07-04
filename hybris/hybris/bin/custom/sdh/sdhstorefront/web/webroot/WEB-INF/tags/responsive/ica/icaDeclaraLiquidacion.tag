@@ -8,7 +8,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<c:set
 		value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 		var="infoDeclara" />

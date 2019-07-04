@@ -7,7 +7,7 @@
 <%@ taglib prefix="publicidadExterior"
 	tagdir="/WEB-INF/tags/responsive/publicidadExterior"%>
 
-<div class="container_new">
+<div class="container">
 	<spring:htmlEscape defaultHtmlEscape="true" />
 	<div id="divPublicidadExteriorDetail" style="display: none;">
 		<div class="row">

@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container">
+<div class="container_new">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -32,7 +32,7 @@
 
 <sf:form>
 	<br>
-	<div class="container_new">
+	<div class="container">
 		<div class="col-md-5 col-md-offset-4 center">
 			<div class="form-group">
 				<label class="control-label "><spring:theme

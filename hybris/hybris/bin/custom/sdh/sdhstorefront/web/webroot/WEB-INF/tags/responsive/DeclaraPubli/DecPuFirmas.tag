@@ -12,7 +12,7 @@
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
 	htmlEscape="false" />
 
-<div class="container_new">
+<div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
 			<div class="headline">

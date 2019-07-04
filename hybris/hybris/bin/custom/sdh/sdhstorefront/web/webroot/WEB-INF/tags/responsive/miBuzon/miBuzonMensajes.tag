@@ -9,7 +9,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<div class="row" id="idmensajes">
 		<div class="col-md-6 col-md-offset-1 headline">
 			<h2>

@@ -12,7 +12,7 @@
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
 	htmlEscape="false" />
 
-<div class="container_new">
+<div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
 			<div class="headline">
@@ -85,7 +85,7 @@
 		</div>
 	</div>
 </div>
-<div class="container_new" id="repre">
+<div class="container" id="repre">
 
 	<div id="representante" class="row mt-3 representante"
 		style="display: none">
@@ -151,7 +151,7 @@
 	</div>
 </div>
 
-<div class="container_new">
+<div class="container">
 	<input type="hidden" id="numObjeto" name="numObjeto"
 		value="${numObjeto}" /> <input type="hidden" id="numForm"
 		name="numForm"

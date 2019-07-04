@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
-<div class="container_new">
+<div class="container">
 	<sf:form>
 		<div id="predial">
 			<div class="row">

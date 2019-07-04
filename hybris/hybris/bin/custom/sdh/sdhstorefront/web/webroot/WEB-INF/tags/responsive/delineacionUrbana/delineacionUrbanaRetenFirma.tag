@@ -11,7 +11,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h3>
@@ -53,7 +53,7 @@
 		</div>
 
 		<br>
-		<div class="container_new">
+		<div class="container">
 			<div class="row">
 			
 <%-- 			<sf:hidden path="dataForm.infObjetoDelineacion.numForm" /> --%>

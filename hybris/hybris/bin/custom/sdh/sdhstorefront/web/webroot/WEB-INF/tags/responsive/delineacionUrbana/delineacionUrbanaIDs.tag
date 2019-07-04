@@ -8,7 +8,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<div class="container_new">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -66,7 +66,7 @@
 	</div>
 </div>
 
-<div class="container_new">
+<div class="container">
 	<div class="col-md-12">
 		<spring:theme code="delineacion.urbana.nota" />
 	</div>
