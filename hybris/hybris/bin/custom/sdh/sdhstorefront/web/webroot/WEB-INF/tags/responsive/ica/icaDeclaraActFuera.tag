@@ -30,17 +30,17 @@
 					<spring:theme code="ica.declaracion.actifuera.ciiu" />
 				</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.actifuera.municipio" />
 				</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.actifuera.ingre" />
 				</label>
 			</div>
-			<div class="col-md-3" style="margin-bottom: 3px !important">
+			<div class="col-md-2" style="margin-bottom: 3px !important">
 				<button class="btn btn-primary" data-toggle="modal"
 			data-target="#fm-modal" type="button" onclick="addfile()">Adjuntar archivo</button>
 			</div>
@@ -53,7 +53,7 @@
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
 						
 						
-						<select id="" class="form-control deno codCIIU" style="height: 48px;">
+						<select id="" class="new_alto form-control deno codCIIU" style="height: 48px;">
 							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value=""/>
 							<c:forEach items="${ econActivities}" var="eachActivity">
@@ -66,8 +66,8 @@
 						</select>
 					</div>
 		
-					<div class="col-md-3">
-						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
+					<div class="col-md-2">
+						<select id="" class="new_alto form-control mun codMunicipio" style="height: 48px;">
 							<option value="">SELECCIONAR</option>
 							
 							<c:forEach items="${cities}" var="eachCity">
@@ -79,8 +79,8 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-md-3">
-						<input class="form-control ing ingresos" type="text" value="${eachIngreso.ingresos }"/>
+					<div class="col-md-2">
+						<input class="new_alto form-control ing ingresos" type="text" value="${eachIngreso.ingresos }"/>
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">
@@ -97,7 +97,7 @@
 <!--  se agregan líneas para agregar siempre una linea en la tabla -->
 				<div class="row actvifuera">
 					<div class="col-md-3">
-						<select id="" class="form-control deno codCIIU" style="height: 48px;">
+						<select id="" class="new_alto form-control deno codCIIU" style="height: 48px;">
 							<option value="">SELECCIONAR</option>
 							<c:forEach items="${ econActivities}" var="eachActivity">
 								<option ${selected } value="${eachActivity.code}">${eachActivity.code} - ${eachActivity.description }</option>
@@ -106,8 +106,8 @@
 					</div>
 		
 					
-						<div class="col-md-3">
-						<select id="" class="form-control mun codMunicipio" style="height: 48px;">
+						<div class="col-md-2">
+						<select id="" class="new_alto form-control mun codMunicipio" style="height: 48px;">
 							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value=""/>
 							<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
@@ -118,8 +118,8 @@
 						</c:forEach>
 						</select>
 					</div>
-					<div class="col-md-3">
-						<input class="form-control ing ingresos" type="text" value=""/>
+					<div class="col-md-2">
+						<input class="new_alto form-control ing ingresos" type="text" value=""/>
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">

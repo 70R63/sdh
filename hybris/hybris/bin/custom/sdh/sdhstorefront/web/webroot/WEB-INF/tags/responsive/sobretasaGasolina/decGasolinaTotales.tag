@@ -24,11 +24,11 @@
 
 		<div class="row">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label "><spring:theme
 								code="impuestos.decGasolina.Totales.totalSobretasa" /></label> <input
-							id="totalSobretasa" name="totalSobretasa" class="form-control"
+							id="totalSobretasa" name="totalSobretasa" class="newalto form-control"
 							aria-required="true" type="text" readonly="readonly"
 							value="${dataForm.dataForm.valoresDeclara.totalSobretasa}"
 							maxlength="240">
@@ -37,11 +37,11 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label "><spring:theme
 								code="impuestos.decGasolina.Totales.valorSanciones" /></label> <input
-							id="valorSansiones" name="valorSansiones" class="form-control"
+							id="valorSansiones" name="valorSansiones" class="newalto form-control"
 							aria-required="true" type="text" readonly="readonly"
 							value="${dataForm.dataForm.valoresDeclara.vlrSancTotales}"
 							maxlength="240">
@@ -50,11 +50,11 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label "><spring:theme
 								code="impuestos.decGasolina.Totales.totalCargo" /></label> <input
-							id="totalCargo" name="totalCargo" class="form-control"
+							id="totalCargo" name="totalCargo" class="newalto form-control"
 							aria-required="true" type="text" readonly="readonly"
 							value="${dataForm.dataForm.valoresDeclara.totalCargo}"
 							maxlength="240">

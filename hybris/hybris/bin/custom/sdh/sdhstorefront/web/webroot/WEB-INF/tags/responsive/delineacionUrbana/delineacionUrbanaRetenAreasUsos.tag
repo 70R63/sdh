@@ -67,13 +67,13 @@
 								<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 									items="${dataForm.catalogos.codUso}"
 									referenceData="${dataForm.catalogos.codUso}"
-									class="form-control"></sf:select>
+									class="new_alto form-control"></sf:select>
 							</c:if>
 							<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 								<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 									items="${dataForm.catalogos.codUso}"
 									referenceData="${dataForm.catalogos.codUso}"
-									class="form-control" readOnly="true" disabled="true"></sf:select>
+									class="new_alto form-control" readOnly="true" disabled="true"></sf:select>
 							</c:if>
 
 						</div>
@@ -83,12 +83,12 @@
 					<div class="col-md-2">
 						<div class="form-group ">
 							<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-								<sf:input class="form-control" readonly="false"
+								<sf:input class="newalto form-control" readonly="false"
 									aria-required="true" maxlength="240"
 									path="infObjetoDelineacion.usos[${loop.index}].areaNeta" />
 							</c:if>
 							<c:if test='${dataForm.input.tipoFlujo == "R"}'>
-								<sf:input class="form-control" readonly="false"
+								<sf:input class="newalto form-control" readonly="false"
 									aria-required="true" maxlength="240"
 									path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
 									readOnly="true" disabled="true" />
@@ -124,14 +124,14 @@
 			<div class="row total">
 				<div class="col-md-3">
 					<div class="form-group ">
-						<input id="inputareainter" class="form-control" maxlength="30"
+						<input id="inputareainter" class="new_alto form-control" maxlength="30"
 							value="Total" disabled></input>
 					</div>
 				</div>
 
 				<div class="col-md-2 offset-md-3">
 					<div class="form-group ">
-						<sf:input id="inputareainter" class="form-control" maxlength="30"
+						<sf:input id="inputareainter" class="newalto form-control" maxlength="30"
 							path="infObjetoDelineacion.infoDeclara.totalUsos"></sf:input>
 					</div>
 				</div>
@@ -151,12 +151,12 @@
 		<br> <br>
 		<div class="row">
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-3">
 					<label class="control-label" for="" style="text-transform: none !important"> <spring:theme
 							code="delineacion.urbana.dec.areasusos.areainve" />
 					</label>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<label class="control-label" for="" style="text-transform: none !important"> <spring:theme
 							code="delineacion.urbana.dec.areasusos.m2area" />
 					</label>
@@ -167,19 +167,19 @@
 		<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
 			var="varAreaIntervenida" varStatus="loop">
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-3">
 					<div class="form-group ">
 						<sf:select
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
 							items="${dataForm.catalogos.areaInter}"
 							referenceData="${dataForm.catalogos.areaInter}"
-							class="form-control"></sf:select>
+							class="new_alto form-control"></sf:select>
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div class="form-group ">
-						<sf:input class="form-control" readonly="false"
+						<sf:input class="newalto form-control" readonly="false"
 							aria-required="true" maxlength="240"
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2" />
 					</div>
@@ -200,16 +200,16 @@
 
 		<div class="row">
 			<div class="row total">
-				<div class="col-md-5">
+				<div class="col-md-3">
 					<div class="form-group ">
-						<input id="inputareainter" class="form-control" maxlength="30"
+						<input id="inputareainter" class="new_alto form-control" maxlength="30"
 							value="Total" disabled></input>
 					</div>
 				</div>
 
-				<div class="col-md-3 offset-md-3">
+				<div class="col-md-2 offset-md-2">
 					<div class="form-group ">
-						<input id="inputareainter" class="form-control" maxlength="30"
+						<input id="inputareainter" class="newalto form-control" maxlength="30"
 							value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreai}"></input>
 					</div>
 				</div>
@@ -231,7 +231,7 @@
 						code="delineacion.urbana.dec.areasusos.areaproyin" />
 				</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 
 				<label class="control-label" for="" style="text-transform: none !important"> <spring:theme
 						code="delineacion.urbana.dec.areasusos.aream2" />
@@ -251,14 +251,14 @@
 								path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
 								items="${dataForm.catalogos.areaProy}"
 								referenceData="${dataForm.catalogos.areaProy}"
-								class="form-control"></sf:select>
+								class="new_alto form-control"></sf:select>
 						</div>
 
 					</div>
 
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group ">
-							<sf:input class="form-control" readonly="false"
+							<sf:input class="newalto form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
 						</div>
@@ -281,13 +281,13 @@
 			<div class="row totalnew">
 				<div class="col-md-3">
 					<div class="form-group ">
-						<input class="form-control" maxlength="30" value="Total" disabled></input>
+						<input class="new_alto form-control" maxlength="30" value="Total" disabled></input>
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div class="form-group ">
-						<input class="form-control" maxlength="30"
+						<input class="newalto form-control" maxlength="30"
 							value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}"></input>
 					</div>
 				</div>

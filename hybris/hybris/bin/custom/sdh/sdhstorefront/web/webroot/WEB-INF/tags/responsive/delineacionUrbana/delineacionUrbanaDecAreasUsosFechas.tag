@@ -10,29 +10,29 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.areasusos.fechultabo" /></label> <input
-					id="fecultimabono" name="" class="form-control" aria-required="true" type="text"
+					id="fecultimabono" name="" class="newalto form-control" aria-required="true" type="text"
 					value="${dataForm.infObjetoDelineacion.infoDeclara.fechaUltAbono}"
 					maxlength="240" disabled>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.areasusos.fecfinalobra" /></label> <input
-					id="fecfinalobra" name="" class="form-control" aria-required="true" type="text"
+					id="fecfinalobra" name="" class="newalto form-control" aria-required="true" type="text"
 					value="${dataForm.infObjetoDelineacion.infoDeclara.fechaFinalObra}"
 					maxlength="240" disabled>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.areasusos.fechejec" /></label> <input id="fechejec"
-					name="" class="form-control" aria-required="true" type="text"
+					name="" class="newalto form-control" aria-required="true" type="text"
 					value="${dataForm.infObjetoDelineacion.infoDeclara.fechaEjecutaria}"
 					maxlength="240" disabled>
 			</div>

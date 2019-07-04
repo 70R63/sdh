@@ -38,7 +38,7 @@
 					<div class="col-md-2">
 						<div class="form-group">
 							<label class="control-label"><spring:theme code="" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
+								disabled id="" name="" class="new_alto form-control" disabled type="text"
 								value="" maxlength="240" placeholder="Declarante"
 								style="margin-top: 4px">
 						</div>
@@ -47,7 +47,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="gasolina.declaracion.firma.nombre" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text"
+								id="" name="" class="new_alto form-control" disabled type="text"
 								value="${dataForm.declarante.nombres}" maxlength="240"></input>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="gasolina.declaracion.firma.tipoiden" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text"
+								id="" name="" class="new_alto form-control" disabled type="text"
 								value="${dataForm.declarante.tipoDoc}" maxlength="240"></input>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="delineacion.declaracion.firma.numide" /></label> <input disabled
-								id="" name="" class="form-control" disabled type="text"
+								id="" name="" class="new_alto form-control" disabled type="text"
 								value="${dataForm.declarante.numDoc}" maxlength="240"></input>
 						</div>
 					</div>
@@ -72,7 +72,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="delineacion.declaracion.firma.numtarjeta" /></label> <input
-								disabled id="" name="" class="form-control" disabled type="text"
+								disabled id="" name="" class="new_alto form-control" disabled type="text"
 								value="" maxlength="240"></input>
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme code="" /></label> <select
-						class="form-control "
+						class="new_alto form-control "
 						style="font-size: 13px; padding: 0px; margin-top: 23px"
 						onchange="habfirmante(this)" id="selectfirmante">
 						<option>Seleccionar</option>
@@ -106,14 +106,14 @@
 				<div class="form-group">
 					<label class="control-label " style="margin-top: 20px"><spring:theme
 							code="ica.declaracion.firma.nombre" /></label> <select id="selcnombre"
-						name="" class="form-control"><option>Seleccionar</option></select>
+						name="" class="new_alto form-control"><option>Seleccionar</option></select>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label textocentrado" style="margin-top: 20px"><spring:theme
 							code="gasolina.declaracion.firma.nombre" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text" value=""
+						id="" name="" class="new_alto form-control" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -121,7 +121,7 @@
 				<div class="form-group">
 					<label class="control-label" style="margin-top: 20px"><spring:theme
 							code="gasolina.declaracion.firma.numide" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text" value=""
+						id="" name="" class="new_alto form-control" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -130,7 +130,7 @@
 				<div class="form-group">
 					<label class="control-label" style="margin-top: 20px"><spring:theme
 							code="gasolina.declaracion.firma.numtarjeta" /></label> <input disabled
-						id="" name="" class="form-control" disabled type="text" value=""
+						id="" name="" class="new_alto form-control" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>

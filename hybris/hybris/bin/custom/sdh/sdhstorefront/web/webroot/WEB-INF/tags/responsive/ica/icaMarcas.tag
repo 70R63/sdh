@@ -23,7 +23,7 @@
 
 	<form:form action="">
 		<div class="row">
-			<div class="col-md-9 text-center margign-md-left-0">
+			<div class="col-md-7 text-center margign-md-left-0">
 				<div class="table-responsive">
 					<table class="table table-bordered"
 						id="example">

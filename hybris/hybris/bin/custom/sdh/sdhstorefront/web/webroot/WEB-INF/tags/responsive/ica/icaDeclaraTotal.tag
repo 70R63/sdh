@@ -36,7 +36,7 @@
 					<spring:theme code="ica.declaracion.total.denomi" />
 				</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.total.ingnet" />
 				</label>
@@ -55,10 +55,10 @@
 				</div>
 
 				<div class="col-md-3">
-					<input class="form-control denomina codCIIU" type="text" value="" />
+					<input class="new_alto form-control denomina codCIIU" type="text" value="" />
 				</div>
-				<div class="col-md-3">
-					<input class="form-control ingreso ingresos" type="text" value="" />
+				<div class="col-md-2">
+					<input class="newalto form-control ingreso ingresos" type="text" value="" />
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -117,15 +117,15 @@
 					</select>
 					 -->		
 					 <!-- EJRR Adding data to select box -->			 
-					 <select id="" class="form-control codCIIU" style="height: 48px;">
+					 <select id="" class="new_alto form-control codCIIU" style="height: 48px;">
 						<option value="" selected>SELECCIONAR</option>
 						<c:forEach items="${gravableNetIncomes}" var="eachActivity">
 							<option value="${eachActivity.ciiu}">${eachActivity.ciiu} - ${eachActivity.denominacion}</option>
 						</c:forEach>
 					</select>
 				</div>
-				<div class="col-md-3">
-					<input class="form-control ingreso ingresos" type="text"
+				<div class="col-md-2">
+					<input class="newalto form-control ingreso ingresos" type="text"
 						value="${eachIngreso.ingresos}" />
 				</div>
 				<div class="col-md-1">
@@ -220,12 +220,12 @@
 	<c:if test="${empty infoDeclara.ingPorCIIU }">
 		<div class="row totaldos">
 			<div class="col-md-1">
-				<input class="form-control anoGravable" type="text" />
+				<input class="new_alto form-control anoGravable" type="text" />
 			</div>
 
 
 			<div class="col-md-1">
-				<select id="" class="form-control tipoID" style="height: 48px;">
+				<select id="" class="new_alto form-control tipoID" style="height: 48px;">
 					<option value="">Seleccionar</option>
 					<option value="CC">CC Cédula de ciudadania</option>
 					<option value="CE">CE Cédula de extranjería</option>
@@ -240,22 +240,22 @@
 				</select>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control numID" type="text" />
+				<input class="new_alto form-control numID" type="text" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control razonSocial" type="text" />
+				<input class="new_alto form-control razonSocial" type="text" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control direccion" type="text" />
+				<input class="new_alto form-control direccion" type="text" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control municipio" type="text" />
+				<input class="new_alto form-control municipio" type="text" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control telefono" type="text" />
+				<input class="new_alto form-control telefono" type="text" />
 			</div>
 			<div class="col-md-2">
-				<select id="" class="form-control codCIIU" style="height: 48px;">
+				<select id="" class="new_alto form-control codCIIU" style="height: 48px;">
 					<option value="">SELECCIONAR</option>
 					<c:forEach items="${ econActivities}" var="eachActivity">
 						<option value="${eachActivity.code}">${eachActivity.code}
@@ -264,10 +264,10 @@
 				</select>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control ingBrutoSINIVA" type="text" />
+				<input class="new_alto form-control ingBrutoSINIVA" type="text" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control valorTotalDevol" type="text" />
+				<input class="new_alto form-control valorTotalDevol" type="text" />
 			</div>
 			<div class="col-md-1">
 				<div class="form-group ">
@@ -284,13 +284,13 @@
 	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso">
 		<div class="row totaldos">
 			<div class="col-md-1">
-				<input class="form-control anoGravable" disabled="disabled"
+				<input class="new_alto form-control anoGravable" disabled="disabled"
 					type="text" value="${eachIngreso.anoGravable }" />
 			</div>
 
 
 			<div class="col-md-1">
-				<select id="" disabled="disabled" class="form-control tipoID"
+				<select id="" disabled="disabled" class="new_alto form-control tipoID"
 					style="height: 48px;">
 					<option value="">Seleccionar</option>
 					<c:forEach items="${ idTypes}" var="eachType">
@@ -307,23 +307,23 @@
 				</select>
 			</div>
 			<div class="col-md-1">
-				<input class="form-control numID" disabled="disabled" type="text"
+				<input class="new_alto form-control numID" disabled="disabled" type="text"
 					value="${eachIngreso.numID }" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control razonSocial" disabled="disabled"
+				<input class="new_alto form-control razonSocial" disabled="disabled"
 					type="text" value="${eachIngreso.razonSocial }" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control direccion" disabled="disabled"
+				<input class="new_alto form-control direccion" disabled="disabled"
 					type="text" value="${eachIngreso.direccion }" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control municipio" disabled="disabled"
+				<input class="new_alto form-control municipio" disabled="disabled"
 					type="text" value="${eachIngreso.desMunicipio }" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control telefono" disabled="disabled" type="text"
+				<input class="new_alto form-control telefono" disabled="disabled" type="text"
 					value="${eachIngreso.telefono }" />
 			</div>
 			<div class="col-md-2">
@@ -331,7 +331,7 @@
 				<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 					pattern="#######################" var="codCIIUNumber" />
 
-				<select id="" disabled="disabled" class="form-control codCIIU"
+				<select id="" disabled="disabled" class="new_alto form-control codCIIU"
 					style="height: 48px;">
 					<option value="">SELECCIONAR</option>
 					<c:forEach items="${ econActivities}" var="eachActivity">
@@ -351,11 +351,11 @@
 
 			</div>
 			<div class="col-md-1">
-				<input class="form-control ingBrutoSINIVA" type="text"
+				<input class="new_alto form-control ingBrutoSINIVA" type="text"
 					disabled="disabled" value="${eachIngreso.ingBrutoSINIVA }" />
 			</div>
 			<div class="col-md-1">
-				<input class="form-control valorTotalDevol" disabled="disabled"
+				<input class="new_alto form-control valorTotalDevol" disabled="disabled"
 					type="text" value="${eachIngreso.valorTotalDevo }" />
 			</div>
 			<div class="col-md-1">

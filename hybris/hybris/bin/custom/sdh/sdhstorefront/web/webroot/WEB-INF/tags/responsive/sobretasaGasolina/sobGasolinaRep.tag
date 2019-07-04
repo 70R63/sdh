@@ -13,7 +13,7 @@
 <spring:url value="/contribuyentes/sobretasa-gasolina" var="buscarUrl"
 	htmlEscape="false" />
 
-<div class="col-md-9">
+<div class="col-md-12">
 	<div class="col-md-12">
 		<div class="row">
 			<div class="col-md-12">
@@ -23,23 +23,23 @@
 				</h3>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12 table-bordered">
+		<div class="row text-center">
+			<div class="col-md-9">
 				<div class="table-responsive">
-					<table>
+					<table class="table">
 						<thead>
 							<tr>
-								<td><label class="control-label labeltabletd"><spring:theme
+								<td><label class="control-label labeltabletd tipoId"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.tipoId" /></label></td>
-								<td><label class="control-label labeltabletd"><spring:theme
+								<td><label class="control-label labeltabletd tipoId"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.numId" /></label></td>
 								<td><label class="control-label labeltabletd"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.nombre" /></label></td>
-								<td><label class="control-label labeltabletd"><spring:theme
+								<td><label class="control-label labeltabletd tipoId"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.tipoRelacion" /></label></td>
-								<td><label class="control-label labeltabletd"><spring:theme
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.fechaDesde" /></label></td>
-								<td><label class="control-label labeltabletd"><spring:theme
+								<td><label class="control-label labeltabletd tablefechas"><spring:theme
 											code="impuestos.sobreTasaGasolina.representantes.fechaHasta" /></label></td>
 							</tr>
 						</thead>
@@ -53,14 +53,14 @@
 												path="dataForm.representantes[${loop.index}].tipoDoc"
 												items="${dataForm.catalogosSo.tipoIdRev}"
 												referenceData="${dataForm.catalogosSo.tipoIdRev}"
-												class="form-control" maxlength="45" readonly="readonly"
+												class="inputtextnew tabletiprela" maxlength="45" readonly="readonly"
 												disabled="true" />
 										</div>
 									</td>
 									<td>
 										<div class="form-group ">
 											<input id="numDoc" name="numDoc"
-												class="form-control form-control" aria-required="true"
+												class="inputtextnew tableident" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.numDoc}"></c:out>'
 												maxlength="240" readonly="readonly">
@@ -69,7 +69,7 @@
 									<td>
 										<div class="form-group ">
 											<input id="nombre" name="nombre"
-												class="form-control form-control" aria-required="true"
+												class="inputtextnew tablenombrecorto" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.nombre}"></c:out>'
 												maxlength="240" size="45" readonly="readonly">
@@ -78,7 +78,7 @@
 									<td>
 										<div class="form-group ">
 											<input id="tipoRelacion" name="tipoRelacion"
-												class="form-control form-control" aria-required="true"
+												class="inputtextnew tabletiprela" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.tipoRelacion}"></c:out>'
 												maxlength="240" size="40" readonly="readonly">
@@ -87,7 +87,7 @@
 									<td>
 										<div class="form-group ">
 											<input id="fechDesde" name="fechDesde"
-												class="form-control form-control" aria-required="true"
+												class="inputtextnew tablefechas" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.fechDesde}"></c:out>'
 												maxlength="240" readonly="readonly">
@@ -96,7 +96,7 @@
 									<td>
 										<div class="form-group ">
 											<input id="fechHasta" name="fechHasta"
-												class="form-control form-control" aria-required="true"
+												class="inputtextnew tablefechas" aria-required="true"
 												type="text"
 												value='<c:out value="${representante.fechHasta}"></c:out>'
 												maxlength="240" readonly="readonly">

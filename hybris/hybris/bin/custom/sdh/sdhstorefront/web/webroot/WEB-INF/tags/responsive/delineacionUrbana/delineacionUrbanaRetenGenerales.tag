@@ -19,16 +19,16 @@
 
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
 							code="delineacion.urbana.dec.generales.codigo" /></label>
-					<sf:input class="form-control" readonly="true" aria-required="true"
+					<sf:input class="newalto form-control" readonly="true" aria-required="true"
 						maxlength="240" path="input.selectedCDU" />
 				</div>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
 							code="delineacion.urbana.dec.generales.anigrav" /></label>
@@ -36,17 +36,17 @@
 						<sf:select path="infObjetoDelineacionExtras.anoGravable"
 							items="${dataForm.catalogos.anoGravable}"
 							referenceData="${dataForm.catalogos.anoGravable}"
-							class="form-control" disabled="true" readonly="true"></sf:select>
+							class="newalto form-control" disabled="true" readonly="true"></sf:select>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
 							code="delineacion.urbana.dec.generales.radic" /></label>
-					<sf:input class="form-control" readonly="true" aria-required="true"
+					<sf:input class="newalto form-control" readonly="true" aria-required="true"
 						maxlength="240"
 						path="input.selectedRadicado" />
 				</div>
@@ -63,7 +63,7 @@
 <!-- 			</div> -->
 		</div>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
 							code="delineacion.urbana.dec.generales.Objetolicencia" /></label>
@@ -71,16 +71,16 @@
 						<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicen"
 							items="${dataForm.catalogos.objetoLicencia}"
 							referenceData="${dataForm.catalogos.objetoLicencia}"
-							class="form-control"></sf:select>
+							class="new_alto form-control"></sf:select>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
 							code="delineacion.urbana.dec.generales.modlicencia" /></label>
-					<sf:select class="form-control" id="an" onchange="obranueva(this)"
+					<sf:select class="new_alto form-control" id="an" onchange="obranueva(this)"
 						path="infObjetoDelineacion.infoDeclara.modalidad"
 						items="${dataForm.catalogos.modalidadLicencia}">
 					</sf:select>
@@ -88,20 +88,20 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.areasusos.preobra" /></label>
-					<sf:select class="form-control" name="presupuestoObra" id="presupuestoObra" onchange="presupuestoObraCHANGE(this)" 
+					<sf:select class="new_alto form-control" name="presupuestoObra" id="presupuestoObra" onchange="presupuestoObraCHANGE(this)" 
 						path="infObjetoDelineacion.infoDeclara.presupuestoObra"
 						items="${dataForm.catalogos.presupuestoObra}"></sf:select>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="delineacion.urbana.dec.areasusos.cauexen" /></label>
-					<sf:select id="causalexcencion" class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep"
+					<sf:select id="causalexcencion" class="new_alto form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep"
 						items="${dataForm.catalogos.causalExencion}" disabled="true"></sf:select>
 				</div>
 			</div>

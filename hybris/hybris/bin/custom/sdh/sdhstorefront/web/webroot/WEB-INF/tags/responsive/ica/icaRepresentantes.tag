@@ -24,7 +24,7 @@
 	<br>
 	<form:form action="">
 		<div class="row text-center">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<div class="table-responsive">
 					<table class="table" id="example">
 						<thead>
@@ -59,7 +59,7 @@
 										<td><input class="inputtextnew tablenumiden"
 											disabled="disabled" value="${eachRelation.numDoc}"
 											type="text" style="text-align: center" /></td>
-										<td><input class="inputtextnew" disabled="disabled"
+										<td><input class="inputtextnew tablenombre" disabled="disabled"
 											value="${eachRelation.nombre}" type="text" /></td>
 										<td><input class="inputtextnew tablefechas"
 											disabled="disabled" value="${eachRelation.fechaDesde}"

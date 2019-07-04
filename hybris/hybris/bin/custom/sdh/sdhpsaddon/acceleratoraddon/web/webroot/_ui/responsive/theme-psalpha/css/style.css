@@ -24421,11 +24421,6 @@ ul.nav__links li {
   border-top: 1px transparen #ffffff;
 }
 /* terminan los ajustes de la sección del menú */
-.branding-mobile {
-  position: fixed;
-  z-index: 100;
-  width: 100%;
-}
 header {
   position: fixed;
   z-index: 100;
@@ -24458,8 +24453,21 @@ header {
   margin-left: 80px !important;
   padding-top: 25%;
 }
+.container_new_contrib {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 88%;
+  /* 	padding: 0 !important; */
+  /* 	margin-right: 1px !important; */
+  margin-right: 10%;
+  margin-left: 80px !important;
+  padding-top: 18%;
+}
 .login-section {
-  padding-top: 45%;
+  padding-top: 40%;
 }
 .delededucciones {
   pointer-events: none;
@@ -24467,7 +24475,7 @@ header {
   width: 100%;
   height: auto;
   margin-bottom: 80px !important;
-  max-width:90%;
+  max-width: 90%;
 }
 thead {
   background-color: #ebebe4 !important;
@@ -24500,15 +24508,27 @@ th {
 }
 .tablenombre,
 .tabledenomi {
-  width: 400px !important;
+  width: 300px !important;
+}
+.tablenombrecorto {
+  width: 200px !important;
 }
 .tablecantperoc {
   width: 55px !important;
   text-align: center !important;
 }
 .tabletiprela {
-  width: 300px !important;
+  width: 130px !important;
 }
 .tableamplia {
   width: auto !important;
+}
+.form-group .newalto {
+  height: 38px !important;
+  min-height: 30px !important;
+  width: 70%;
+}
+.form-group .new_alto {
+  height: 38px !important;
+  min-height: 30px !important;
 }

@@ -20,23 +20,23 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.codigo" /></label>
-				<sf:input class="form-control" readonly="true" aria-required="true"
+				<sf:input class="newalto form-control" readonly="true" aria-required="true"
 					maxlength="240" path="input.selectedCDU" />
 			</div>
 		</div>
 
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.anigrav" /></label>
 				<sf:select path="infObjetoDelineacionExtras.anoGravable"
 					items="${dataForm.catalogos.anoGravable}"
 					referenceData="${dataForm.catalogos.anoGravable}"
-					class="form-control" disabled="true" readonly="true"></sf:select>
+					class="newalto form-control" disabled="true" readonly="true"></sf:select>
 
 				<!-- 				<select -->
 				<!-- 					id="an" class="form-control " name=" " onchange=" " disabled> -->
@@ -49,11 +49,11 @@
 		</div>
 
 
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.opuso" /></label>
-				<sf:input class="form-control" readonly="true" aria-required="true"
+				<sf:input class="newalto form-control" readonly="true" aria-required="true"
 					maxlength="240" path="infObjetoDelineacion.infoDeclara.opcionUso" />
 				<!-- 						<input id="" -->
 				<!-- 					name="" class="form-control" aria-required="true" type="text" -->
@@ -62,7 +62,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.tiplicencia" /></label>
@@ -70,14 +70,14 @@
 					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
 						id="tipoDeLicencia" items="${dataForm.catalogos.tipoDeLicencia}"
 						referenceData="${dataForm.catalogos.tipoDeLicencia}"
-						class="form-control" disabled="true" readonly="true">
+						class="newalto form-control" disabled="true" readonly="true">
 					</sf:select>
 				</c:if>
 				<c:if test="${not empty  tipoMarca}">
 					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
 						id="tipoDeLicencia" items="${dataForm.catalogos.tipoDeLicencia}"
 						referenceData="${dataForm.catalogos.tipoDeLicencia}"
-						class="form-control">
+						class="new_alto form-control">
 					</sf:select>
 				</c:if>
 				<!-- 				<select -->
@@ -89,11 +89,11 @@
 			</div>
 		</div>
 
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.modlicencia" /></label>
-				<sf:select class="form-control" id="an"
+				<sf:select class="new_alto form-control" id="an"
 					path="infObjetoDelineacion.infoDeclara.modalidad"
 					items="${dataForm.catalogos.modalidadLicencia}" onchange="nuevos(this)">
 				</sf:select>
@@ -113,7 +113,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group ">
 
 				<label class="control-label "><spring:theme
@@ -122,7 +122,7 @@
 					<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicen"
 						items="${dataForm.catalogos.objetoLicencia}"
 						referenceData="${dataForm.catalogos.objetoLicencia}"
-						class="form-control"></sf:select>
+						class="new_alto form-control"></sf:select>
 				</div>
 
 			</div>
@@ -130,11 +130,11 @@
 
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.cauexen" /></label>
-				<sf:input id="cauexen" class="form-control" readonly="true"
+				<sf:input id="cauexen" class="new_alto form-control" readonly="true"
 					aria-required="true" maxlength="240"
 					path="infObjetoDelineacion.infoDeclara.causalExcepDESCRIPCION" />
 				<%-- 				<sf:select class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep" --%>

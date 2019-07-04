@@ -61,12 +61,12 @@
 									path="listaDocumentos[${loop.index}].tipoDocumento"
 									value="${item.tipoDocumento}"
 									class="inputtextnew tableident" aria-required="true"
-									maxlength="30" size="30" disabled="disabled" type="text" /></td>
+									maxlength="30" size="30" disabled="disabled" type="text" readonly="true" /></td>
 							<td><sf:input
 									path="listaDocumentos[${loop.index}].numeroDocumento"
 									value="${item.numeroDocumento}" 
 									class="inputtextnew tablenumiden" aria-required="true"
-									maxlength="30" size="30" disabled="disabled" type="text" /></td>
+									maxlength="30" size="30" disabled="disabled" type="text"  readonly="true"/></td>
 							<td><sf:input path="NAME_ORG1" value="" readonly="true"
 									class="inputtextnew tablenombre" 
 									maxlength="30" size="30" disabled="disabled" type="text" /></td>
