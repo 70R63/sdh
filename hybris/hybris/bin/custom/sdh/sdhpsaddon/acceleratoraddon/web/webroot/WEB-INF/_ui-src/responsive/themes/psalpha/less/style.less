@@ -353,7 +353,6 @@ input[type="search"] {
     margin-left: 6.66666667%;
   }  
 
-
 /*nueva estructura*/
 .cardsinfondo {
   background: none;
@@ -399,6 +398,13 @@ input[type="search"] {
 .navigation--middle .nav__right {
   width: 95%;
   margin-right: 25px;
+  height: 10%;
+  height: 25px;
+  padding: 0px;
+}
+.main-header .md-secondary-navigation ul,
+.main-header .md-secondary-navigation ul li {
+  padding: 0px;
 }
 .navigation--bottom .nav__links--primary .sub-navigation-section ul.sub-navigation-list > li > a:hover,
 .navigation--bottom .nav__links--primary .sub-navigation-section ul.sub-navigation-list > li > a:focus {
@@ -417,6 +423,7 @@ input[type="search"] {
 ul.nav__links li {
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
+  padding: 0px;
 }
 .navigation__overflow {
   max-width: 90%;
@@ -451,6 +458,10 @@ ul.nav__links li {
   width: 119px;
   text-align: center;
 }
+.breadcrumb {
+  height: 15px;
+  padding: 0px;
+}
 .breadcrumb-section {
   text-transform: none;
   max-width: 90%;
@@ -466,6 +477,7 @@ header {
   position: fixed;
   z-index: 100;
   width: 100%;
+  margin-bottom: 1px;
 }
 /* cambios para el container */
 .container {
@@ -477,25 +489,40 @@ header {
   width: 85%;
   padding: 0 !important;
 }
+.container_menu {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%;
+  padding: 0 !important;
+  margin-top: -110px;
+}
 .container_new {
   max-width: 90%;
   height: auto;
   display: block;
-  width: 86%;
+  width: 85%;
   margin-right: auto;
   margin-left: auto;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 28%;
+  padding-top: 21%;
 }
-.container_new_contrib {
+.container_new_page {
   max-width: 90%;
   height: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 86%;
-  padding-top: 18%;
+  width: 85%;
+  padding: 0 !important;
+  margin-top: -27px;
+}
+.login-section {
+  padding-top: 0px;
+  margin-top: -50px;
 }
 .delededucciones {
   pointer-events: none;
@@ -504,6 +531,7 @@ header {
   height: auto;
   margin-bottom: 80px !important;
   max-width: 90%;
+  margin-top: 10px;
 }
 thead {
   background-color: #ebebe4 !important;
@@ -525,12 +553,14 @@ th {
 .inputcodciuu,
 .tablenumiden,
 .tabledomatri,
-.tablecodpost,  .tabledoobli {
+.tablecodpost,
+.tabledoobli {
   width: 80px !important;
   text-align: center !important;
 }
 .tablefechas,
-.tableident, .tableangrav {
+.tableident,
+.tableangrav {
   width: 75px !important;
   text-align: center !important;
 }
@@ -570,3 +600,36 @@ th {
 .headline {
   margin-left: 11px;
 }
+@media (max-width: 1024px) {
+  .login-section {
+    padding-top: 0px;
+    margin-top: -10px;
+  }
+  .container_new_page {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    padding: 0 !important;
+    margin-top: 5px;
+  }
+}
+.main-header .md-secondary-navigation a:hover,
+.main-header .md-secondary-navigation a:focus,
+.main-header .md-secondary-navigation a:active {
+  color: #000000;
+  background: transparent;
+  text-decoration: underline;
+}
+.login-section .headline,
+.register-section .headline,
+.checkout-login .headline {
+  padding-top: 25px ;
+}
+.alert-danger {
+
+    margin-bottom: 30px;
+}
+

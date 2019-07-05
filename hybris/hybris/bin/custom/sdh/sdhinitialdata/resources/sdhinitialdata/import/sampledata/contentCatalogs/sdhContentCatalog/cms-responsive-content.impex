@@ -2381,6 +2381,27 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 
 #->FIN dev-maria Agregar paginas para rop
 
+#->INI dev-maria Agregar paginas terceros autorizados menu
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;tercerosMenuPage 		;terceros Autorizados	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='tercerosMenuPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-tercerosMenuPage 	;SideContent			;																	;SideContent-tercerosMenuPage				;;;
+								;						;BodyContent-tercerosMenuPage 	;BodyContent			;																	;BodyContent-tercerosMenuPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-tercerosMenuPage 	;Side Content Slot for terceros Autorizados	;true	;								;;;
+							;							;BodyContent-tercerosMenuPage	;Body Content Slot for terceros Autorizados	;true	;tercerosMenuPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;tercerosMenuPageComponent	;tercerosMenuPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosMenuPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosMenuPageComponent	
+
+#->FIN dev-maria Agregar paginas para terceros autorizados menu
+
 
 
 

@@ -252,19 +252,19 @@
 
 
 		<div class="row">
-			<div class="col-md-3" style="margin-bottom: 3px !important">
-				<button class="btn btn-primary" data-toggle="modal"
-					data-target="#fm-modal" type="button" onclick="addfilevalor()"
-					style="margin-top: 15px!importan">Adjuntar archivo</button>
-			</div>
+<!-- 			<div class="col-md-3" style="margin-bottom: 3px !important"> -->
+<!-- 				<button class="btn btn-primary" data-toggle="modal" -->
+<!-- 					data-target="#fm-modal" type="button" onclick="addfilevalor()" -->
+<!-- 					style="margin-top: 15px!importan">Adjuntar archivo</button> -->
+<!-- 			</div> -->
 
-			<div id="adjuntar-valor" class="row" style="display: none;">
-				<div class="col-md-3" style="margin-top: 20px !important">
+<!-- 			<div id="adjuntar-valor" class="row" style="display: none;"> -->
+<!-- 				<div class="col-md-3" style="margin-top: 20px !important"> -->
 
-					<input class="control-form" type="file"></input>
+<!-- 					<input class="control-form" type="file"></input> -->
 
-				</div>
-			</div>
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="row">
 				<div class="col-md-12 text-center" style="marging-top: 15px">
 					<button style="margin-top: 3px;" id="icaCalculoButton"

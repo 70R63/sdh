@@ -144,19 +144,19 @@
 	<!-- 	se agrega boton para adjuntar archivo -->
 	<div class="container" style="margin-top: 15px !important">
 		<div class="row">
-			<div class="col-md-3" style="margin-bottom: 3px !important">
-				<button style="margin-top: 25px!importan" class="btn btn-primary"
-					data-toggle="modal" data-target="#fm-modal" type="button"
-					onclick="addfiletotal()">Adjuntar archivo</button>
-			</div>
+<!-- 			<div class="col-md-3" style="margin-bottom: 3px !important"> -->
+<!-- 				<button style="margin-top: 25px!importan" class="btn btn-primary" -->
+<!-- 					data-toggle="modal" data-target="#fm-modal" type="button" -->
+<!-- 					onclick="addfiletotal()">Adjuntar archivo</button> -->
+<!-- 			</div> -->
 
-			<div id="adjuntar-total" class="row" style="display: none;">
-				<div class="col-md-3" style="margin-top: 20px !important">
+<!-- 			<div id="adjuntar-total" class="row" style="display: none;"> -->
+<!-- 				<div class="col-md-3" style="margin-top: 20px !important"> -->
 
-					<input class="control-form" type="file"></input>
+<!-- 					<input class="control-form" type="file"></input> -->
 
-				</div>
-			</div>
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 	<!-- fin de codigo adjuntar archivo -->

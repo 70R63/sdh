@@ -9,7 +9,7 @@
 
 
 <template:page pageTitle="${pageTitle}">
-	<div class="container">
+	<div class="container_new_page">
 		<p>
 			<spring:theme code="mirit.description" />
 		</p>
