@@ -22,11 +22,11 @@
 	<!--<sf:form action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion" method="post" commandName="declaPublicidadForm"> -->
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.impcargo" /></label> <input id="impCar"
-					name="impCar" class="form-control" aria-required="true" type=""
+					name="impCar" class="newalto form-control" aria-required="true" type=""
 					value="${declaPublicidadForm.impCar}" maxlength="30" size="30"
 					disabled="disabled">
 			</div>
@@ -34,11 +34,11 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.valsan" /></label> <input id="valsan"
-					name="valsan" class="form-control" aria-required="true" type=""
+					name="valsan" class="newalto form-control" aria-required="true" type=""
 					value="${declaPublicidadForm.valsan}" maxlength="30" size="30"
 					disabled="disabled">
 			</div>
@@ -46,11 +46,11 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.valpaga" /></label> <input id="valpag"
-					name="valpag" class="form-control" aria-required="true" type=""
+					name="valpag" class="newalto form-control" aria-required="true" type=""
 					value="${declaPublicidadForm.valsan}" maxlength="30" size="30"
 					disabled="disabled">
 			</div>
@@ -58,11 +58,11 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.intermora" /></label> <input id="intmora"
-					name="intmora" class="form-control" aria-required="true" type=""
+					name="intmora" class="newalto form-control" aria-required="true" type=""
 					value="${declaPublicidadForm.intmora}" maxlength="30" size="30"
 					disabled="disabled">
 			</div>
@@ -70,11 +70,11 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.totalapagar" /></label> <input id="totpag"
-					name="totpag" class="form-control" aria-required="true" type=""
+					name="totpag" class="newalto form-control" aria-required="true" type=""
 					value="${declaPublicidadForm.totpag}" maxlength="30" size="30"
 					disabled="disabled">
 			</div>

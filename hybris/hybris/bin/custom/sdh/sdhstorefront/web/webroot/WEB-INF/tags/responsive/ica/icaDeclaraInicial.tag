@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">

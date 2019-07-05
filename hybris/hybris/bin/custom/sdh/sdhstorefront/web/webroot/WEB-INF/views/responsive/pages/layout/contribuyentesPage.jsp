@@ -72,7 +72,7 @@
 	<!-- </div> -->
 </template:page>
 
-<div class="container" >
+<div class="container_new_page" >
 
 	<img class="delededucciones"
 		src="${themeResourcePath}/images/contribuyentes_1.jpg"></img>

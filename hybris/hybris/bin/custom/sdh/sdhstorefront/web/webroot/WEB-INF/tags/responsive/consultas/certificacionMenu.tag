@@ -62,7 +62,7 @@
 </c:choose>
 
 
-	<div class="container">
+	<div class="container_new_page">
 		<div class="row">
 			<div class="headline">
 				<h2 align="center">

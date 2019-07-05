@@ -8,28 +8,28 @@
 <div class="container_new_page">
 	<div class="row ">
 			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
-				<a href="<c:url value='/autorizados/entidades/reportarinfo' />">
+				<a href="<c:url value='/terceros/sim' />">
 					<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
-						<img title="Entidad" alt="Entidad" class="card-section-content" src="${themeResourcePath}/images/agentes_autorizados_entidad.jpg">
+						<img title="sim" alt="sim" class="card-section-content" src="${themeResourcePath}/images/terceros_sim.jpg">
 					</div>
 					<div class="card-section  col-xs-8 col-sm-10 col-md-10">
-						<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="agent.auto.bancaria.titulo" /></span></h2></div>
+						<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="terceros.menu.sim" /></span></h2></div>
 						<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
-							<div id="helpSection"><div><spring:theme code="agent.auto.bancaria.descripcion" /></div></div>
+							<div id="helpSection"><div></div></div>
 						</div>
 					</div>
 				</a>
 			</div>
 
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
-			<a href="<c:url value='/autorizados/contribuyente' />">
+			<a href="<c:url value='/terceros/notarios' />">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
-					<img title="Contrib" alt="Contrib" class="card-section-content" src="${themeResourcePath}/images/agentes_autorizados_contribuyente.png">
+					<img title="notarios" alt="notarios" class="card-section-content" src="${themeResourcePath}/images/terceros_notario.jpg">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
-					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="agent.auto.contribuyente.titulo" /></span></h2></div>
+					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="terceros.menu.notarios" /></span></h2></div>
 					<div class="card-section-content" aria-labelledby="helpSection" tabindex="0">
-						<div id="helpSection"><div><spring:theme code="agent.auto.contribuyente.decripcion" /></div></div>
+						<div id="helpSection"><div></div></div>
 					</div>
 				</div>
 			</a>
