@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container_new_page">
 	<div class="row mt-3">
 		<div class="col-md-12 text-center">
 			<label class="control-label" style="text-transform: none"><spring:theme
@@ -83,26 +83,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="row mt-3" style="display: none" id="adjuntar">
-				<div class="col-md-12">
-					<div class="form-group">
-						<label class="control-label" style="text-transform: none"><spring:theme
-								code="tramites.crear.inicial.selarch" /></label><input type="file"
-							class="form-control" id="exampleFormControlFile1" accept=".txt">
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 
 	<div class="row mt-3">
 		<div class="col-md-7 text-right">
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button" onclick="adjuntar()">
-				<spring:theme code="tramites.crear.inicial.adjuntar" />
-			</button>
-		</div>
-		<div class="col-md-1">
 			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
 				type="button">
 				<spring:theme code="tramites.crear.inicial.enviar" />
@@ -117,12 +102,6 @@
 	</div>
 </div>
 
-<script>
-	function adjuntar() {
-		var show = document.getElementById('adjuntar');
-		show.style.display = 'block';
-	}
-</script>
 
 
 

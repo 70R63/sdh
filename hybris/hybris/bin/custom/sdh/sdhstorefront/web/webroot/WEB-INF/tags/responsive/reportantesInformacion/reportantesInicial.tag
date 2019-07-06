@@ -63,11 +63,11 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="form-group">
 				<label class="control-label required"><spring:theme
 						code="representantes.info.inicial.impreportar" /></label> <select
-					required="required" required id="impuesto" class="form-control "
+					required="required" required id="impuesto" class="newalto form-control "
 					name="impuesto" onchange="ShowSelected(this)">
 					<option value="">Seleccionar</option>
 					<option value="1">Predial</option>
@@ -85,11 +85,11 @@
 
 		</div>
 
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="form-group">
 				<label class="control-label required"><spring:theme
 						code="representantes.info.inicial.anigrav" /></label> <select
-					aria-required="true" id="aniograva" class="form-control "
+					aria-required="true" id="aniograva" class="newalto form-control "
 					name="aniograva" onchange=" " required='required'>
 					<option value="">Seleccionar</option>
 					<option value="2019">2019</option>
@@ -102,7 +102,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-3  col-md-offset-1 centercol-md-8 text-right">
+		<div class="col-md-3  col-md-offset-1 text-right">
 			<div class="form-group">
 				<button class="btn btn-primary btn-block" id=""
 					name="" value="cancelar">

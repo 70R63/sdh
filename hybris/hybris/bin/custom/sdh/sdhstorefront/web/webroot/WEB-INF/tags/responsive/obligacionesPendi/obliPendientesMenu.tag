@@ -10,13 +10,14 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
-<div class="container_new">
+<div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
 				<thead>
 					<tr class="avisoheadline p">
-						<td style="text-align: center"><spring:theme code="obligacion.inicial.encabezado" /></td>
+						<td style="text-align: center"><spring:theme
+								code="obligacion.inicial.encabezado" /></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,15 +44,12 @@
 	<sf:form>
 		<div class="row">
 			<div class="col-md-6"></div>
-
-
-
-
 			<div class="col-md-3" id="idImpuesto">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="obligacion.inicial.selcimpuesto" /></label> <select id="impuesto"
-						class="form-control " name="impuesto" onchange="Selected(this)">
+						class="new_alto form-control " name="impuesto"
+						onchange="Selected(this)">
 						<option value="0">Seleccionar</option>
 						<option value="1">Predial Unificado</option>
 						<option value="2">Vehículos</option>
@@ -71,7 +69,7 @@
 				<div class="form-group">
 					<label class="control-label text-right"><spring:theme
 							code="obligacion.sujeto.vigencia" /></label> <select
-						aria-required="true" id="aniograva" class="form-control "
+						aria-required="true" id="aniograva" class="new_alto form-control "
 						name="aniograva" onchange="">
 						<option value="">Seleccionar</option>
 					</select>
@@ -108,7 +106,8 @@
 			</div>
 			<div class="col-md-3">
 				<button type="button" class="btn btn-secondary btn-lg" id="action"
-					name="action" value="cancelar" style="margin-top: 3px" onclick="cancelfun(this)">
+					name="action" value="cancelar" style="margin-top: 3px"
+					onclick="cancelfun(this)">
 					<spring:theme code="obligacion.inicial.cancelar" />
 				</button>
 

@@ -283,8 +283,9 @@ public class DelineacionUrbanaController extends AbstractPageController
 		System.out.println("---------------- En Delineacion urbana POST --------------------------");
 
 
-		infObjetoDelineacionExtras.setAnoGravable(
-				gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(), infoDelineacion.getInput()));
+		//		infObjetoDelineacionExtras.setAnoGravable(
+		//				gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(), infoDelineacion.getInput()));
+		infObjetoDelineacionExtras.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
 		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
 
 
@@ -388,6 +389,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
+		infoDelineacion.getInfObjetoDelineacionExtras()
+				.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
 		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
 		periodo = "01";
 		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
@@ -399,6 +402,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setNumBP(numBP);
 		infoPreviaPSE.setNumDoc(numDoc);
 		infoPreviaPSE.setTipoDoc(tipoDoc);
+		infoPreviaPSE.setAnoGravable(anoGravable);
 		infoPreviaPSE.setAnoGravable(anoGravable);
 		infoPreviaPSE.setPeriodo(periodo);
 		infoPreviaPSE.setClavePeriodo(clavePeriodo);

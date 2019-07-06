@@ -8,7 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/reportantesInformacion"%>
 
 
-<div class="container_new">
+<div class="container">
 	<reportantes:reportantesHistoricoInicial />
 	<div id="idPredial" style="display: none;">
 		<reportantes:reportantesHistoricoPredial />

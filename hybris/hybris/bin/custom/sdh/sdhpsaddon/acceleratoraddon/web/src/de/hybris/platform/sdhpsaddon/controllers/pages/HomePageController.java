@@ -98,7 +98,7 @@ public class HomePageController extends AbstractPageController
 		}
 		else if ("sdh_03".equals(role))
 		{
-			return REDIRECT_PREFIX + "/terceros/reportar";
+			return REDIRECT_PREFIX + "/terceros";
 		}
 		else if ("sdh_04".equals(role))
 		{

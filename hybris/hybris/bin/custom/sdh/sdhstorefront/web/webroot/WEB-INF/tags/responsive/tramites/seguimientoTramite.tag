@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -27,13 +27,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
-			<div class="headline">
-				<h2>
-					<span class="col-md-10 "><spring:theme
-							code="tramites.seguimiento.inicial.title" /></span>
-				</h2>
-			</div>
+		<div class="headlinecol-md-12">
+
+			<h2>
+				<span class="col-md-10 "><spring:theme
+						code="tramites.seguimiento.inicial.title" /></span>
+			</h2>
+
 			<div class="col-md-12">
 				<label class="control-label" style="text-transform: none"><spring:theme
 						code="tramites.seguimiento.inicial.desc" /></label>
@@ -49,14 +49,16 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.inicial.numcaso" /></label><input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.inicial.numrad" /></label><input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -76,7 +78,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.inicial.numdoc" /></label><input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -115,8 +118,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><label class="control-label labeltabletd tableident" onclick="showdetalle()"><spring:theme
-										code="Ejemplo" /></label></td>
+							<td><label class="control-label labeltabletd tableident"
+								onclick="showdetalle()"><spring:theme code="Ejemplo" /></label></td>
 							<td><input class="inputtextnew tablenumiden"
 								disabled="disabled" type="text" size="30" value="" /></td>
 							<td><input class="inputtextnew tablenumiden"
@@ -135,16 +138,16 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.numtam" /></label><input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						disabled></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.tiptramite" /></label><input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						disabled></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 		</div>
@@ -153,16 +156,16 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.numrad" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						disabled></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.subtramite" /></label><input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						disabled></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 		</div>
@@ -171,16 +174,16 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.estado" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						disabled></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.categoria" /></label><input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						disabled></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 		</div>
@@ -189,16 +192,16 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.justi" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						disabled></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.subcategoria" /></label><input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						disabled></input>
+						name="" class="newalto form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 		</div>
@@ -240,8 +243,8 @@
 		var table = document.getElementById('table');
 		table.style.display = 'block';
 	}
-	
-	function showdetalle(){
+
+	function showdetalle() {
 		var deta = document.getElementById('detalle');
 		deta.style.display = 'block';
 	}

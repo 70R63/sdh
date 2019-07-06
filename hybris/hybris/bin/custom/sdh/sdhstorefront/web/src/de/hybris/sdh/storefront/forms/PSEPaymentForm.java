@@ -389,7 +389,7 @@ public class PSEPaymentForm
 				+ ", fechaLimiteDePago=" + fechaLimiteDePago + ", pagoAdicional=" + pagoAdicional + ", banco=" + banco
 				+ ", valorAPagar=" + valorAPagar + ", tipoDeTarjeta=" + tipoDeTarjeta + ", debugMode=" + debugMode + ", objPago="
 				+ objPago + ", bankDateResponse=" + bankDateResponse + ", bankTimeResponse=" + bankTimeResponse + "]"
-				+ ", trazabilityCode=" + trazabilityCode;
+				+ ", trazabilityCode=" + trazabilityCode + "]";
 	}
 
 

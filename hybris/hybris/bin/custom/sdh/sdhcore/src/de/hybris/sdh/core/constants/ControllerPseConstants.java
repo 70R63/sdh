@@ -39,7 +39,7 @@ public class ControllerPseConstants
 		SOBRETASA = "08";
 		RETEICA = "31";
 		RETENCIONDU = "32";
-		PUBLICIDAD = "54";
+		PUBLICIDAD = "5401";
 		GASOLINA = "2308"; // no se eucuentra en la tabla
 
 

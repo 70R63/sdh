@@ -17,7 +17,7 @@
 <br>
 
 
-<div class="container_new">
+<div class="container_new_page">
 	<sf:form action="presentar-declaracion?action=presentarDeclaracion"
 		method="POST" modelAttribute="dataForm" id="forma">
 		<div class="col-md-10 col-md-offset-2">

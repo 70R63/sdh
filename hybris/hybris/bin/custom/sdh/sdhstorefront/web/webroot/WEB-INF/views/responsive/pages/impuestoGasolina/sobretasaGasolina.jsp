@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
-<div class="container_new">
+<div class="container">
 	<sf:form action="" method="POST" modelAttribute="dataForm" id="forma">
 		<sobreTasaGasolina:sobGasolinaMenu />
 		<sobreTasaGasolina:sobGasolinaBasicos />

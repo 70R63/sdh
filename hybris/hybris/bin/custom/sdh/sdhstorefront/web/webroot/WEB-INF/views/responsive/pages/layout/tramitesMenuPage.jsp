@@ -7,7 +7,7 @@
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div class="container_new">
+<div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">

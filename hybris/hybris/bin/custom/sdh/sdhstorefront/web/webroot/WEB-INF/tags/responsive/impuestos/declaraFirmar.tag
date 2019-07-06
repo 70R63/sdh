@@ -13,7 +13,7 @@
 
 
 
-<div class="container_new">
+<div class="container_new_page">
 	<div class="row">
 		<div class="headline">
 			<h2>

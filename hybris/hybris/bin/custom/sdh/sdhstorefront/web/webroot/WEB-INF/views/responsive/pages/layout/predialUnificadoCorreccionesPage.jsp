@@ -7,7 +7,7 @@
 <%@ taglib prefix="delineacionUrbana" tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 
 <template:page pageTitle="${pageTitle}">
-	<div class="container_new">
+	<div class="container">
 		<div class="row">
 			<div class="headline">
 				<h3>

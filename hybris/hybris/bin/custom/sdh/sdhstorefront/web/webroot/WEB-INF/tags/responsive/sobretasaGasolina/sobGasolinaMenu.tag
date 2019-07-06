@@ -14,7 +14,7 @@
 <spring:url value="/contribuyentes/sobretasa-gasolina" var="buscarUrl"
 	htmlEscape="false" />
 
-<div class="container">
+<div class="container_new_page">
 	<div class="row gasorow">
 		<div class="col-md-12">
 			<table class="table">

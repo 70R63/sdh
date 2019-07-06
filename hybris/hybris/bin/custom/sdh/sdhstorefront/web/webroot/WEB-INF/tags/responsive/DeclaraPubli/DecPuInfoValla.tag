@@ -22,24 +22,24 @@
 
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.luginst" /></label> <input id="luginst"
-					name="luginst" class="form-control" aria-required="true"
+					name="luginst" class="newalto form-control" aria-required="true"
 					type="hidden" value="${declaPublicidadForm.luginst}" maxlength="30"
 					disabled="disabled">
 				<c:choose>
 					<c:when test="${declaPublicidadForm.luginst eq '01'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Predio" maxlength="30" disabled="disabled">
 					</c:when>
 					<c:when test="${declaPublicidadForm.luginst eq '02'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Vehículo" maxlength="30" disabled="disabled">
 					</c:when>
 					<c:otherwise>
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="" maxlength="30" disabled="disabled">
 					</c:otherwise>
 				</c:choose>
@@ -49,45 +49,45 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.OrValla" /></label> <input id="orValla"
-					name="orValla" class="form-control" aria-required="true"
+					name="orValla" class="newalto form-control" aria-required="true"
 					type="hidden" value="${declaPublicidadForm.orValla}" maxlength="30"
 					disabled="disabled">
 				<c:choose>
 					<c:when test="${declaPublicidadForm.orValla eq '1'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Oriente-Occidente" maxlength="30" disabled="disabled">
 
 					</c:when>
 					<c:when test="${declaPublicidadForm.orValla eq '2'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Occidente-Oriente" maxlength="30" disabled="disabled">
 					</c:when>
 					<c:when test="${declaPublicidadForm.orValla eq '3'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Norte-Sur" maxlength="30" disabled="disabled">
 					</c:when>
 					<c:when test="${declaPublicidadForm.orValla eq '4'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Sur-Norte" maxlength="30" disabled="disabled">
 					</c:when>
 					<c:when test="${declaPublicidadForm.orValla eq '5'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Derecha" maxlength="30" disabled="disabled">
 					</c:when>
 					<c:when test="${declaPublicidadForm.orValla eq '6'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Izquierda" maxlength="30" disabled="disabled">
 					</c:when>
 					<c:when test="${declaPublicidadForm.orValla eq '7'}">
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="Ambos sentidos" maxlength="30" disabled="disabled">
 					</c:when>
 					<c:otherwise>
-						<input class="form-control" aria-required="true" type="text"
+						<input class="newalto form-control" aria-required="true" type="text"
 							value="" maxlength="30" disabled="disabled">
 					</c:otherwise>
 				</c:choose>
@@ -98,14 +98,14 @@
 
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.tamvalla" /></label>
 
 				<c:choose>
 					<c:when test="${declaPublicidadForm.luginst eq '01'}">
-						<select id="tamValla" class="form-control">
+						<select id="tamValla" class="newalto form-control">
 							<c:set var="selected" value="" />
 							<c:if test="${declaPublicidadForm.basegrav eq '01' }">
 								<c:set var="selected" value="selected" />
@@ -130,7 +130,7 @@
 							dimensión superior a 8 m2</option>
 					</c:when>
 					<c:otherwise>
-						<select id="tamValla" class="form-control">
+						<select id="tamValla" class="newalto form-control">
 							<option value=" ">Seleccionar</option>
 						</select>
 					</c:otherwise>

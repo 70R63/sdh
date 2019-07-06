@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -63,12 +63,11 @@
 		<div class="container">
 
 			<div class="row mt-3">
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="reteica.inicial.carga.anio" /></label> <select id="reteICAAnoGravable"
-							name="reteICAAnoGravable" class="form-control"
-							style="width: 200px !important">
+							name="reteICAAnoGravable" class="newalto form-control">
 							<option value="">Seleccionar</option>
 							<c:forEach items="${ years}" var="eachYear">
 								<option value="${ eachYear}">${eachYear }</option>
@@ -76,12 +75,11 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="reteica.inicial.carga.periodo" /></label> <select id="reteICAPeriodo"
-							name="reteICAPeriodo" class="form-control"
-							style="width: 200px !important">
+							name="reteICAPeriodo" class="new_alto form-control">
 							<option value="">Seleccionar</option>
 <%-- 							<c:forEach items="${ perdiods}" var="eachPeriod"> --%>
 <%-- 								<option value="${ eachPeriod}"><spring:theme --%>
@@ -140,12 +138,12 @@
 								code="reteica.inicial.carga.adjunta" /></label>
 					</div>
 				</div>
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="reteica.inicial.carga.seleccionar" /></label><input
 							id="retencionesFile" name="retencionesFile" type="file"
-							class="form-control" id="" accept=".txt">
+							class="new_alto form-control" id="" accept=".txt">
 					</div>
 				</div>
 			</div>
