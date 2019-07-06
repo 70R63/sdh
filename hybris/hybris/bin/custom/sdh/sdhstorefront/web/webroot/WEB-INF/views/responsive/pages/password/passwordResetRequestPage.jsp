@@ -5,7 +5,7 @@
 
 <template:page pageTitle="${pageTitle}">
 	<div class="row">
-		<div class="col-md-4  col-md-offset-4" >
+		<div class="col-md-8  col-md-offset-2" >
 			<c:if test="${not passwordRequestSent}">
 				<user:forgottenPwd />
 			</c:if>

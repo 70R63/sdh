@@ -24588,3 +24588,6 @@ th {
 .checkout-login .headline {
   padding-top: 25px ;
 }
+.alert-danger {
+  margin-bottom: 30px;
+}
