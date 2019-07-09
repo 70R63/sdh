@@ -11,7 +11,6 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -20,7 +19,6 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -29,6 +27,7 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.PasswordEncoderService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.services.BaseStoreService;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CertifNombRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateAddressRitRequest;
@@ -120,7 +119,7 @@ public class MiRitPageController extends AbstractPageController
 	@Resource(name = "sdhUpdateRitFacade")
 	SDHUpdateRitFacade sdhUpdateRitFacade;
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "customerFacade")

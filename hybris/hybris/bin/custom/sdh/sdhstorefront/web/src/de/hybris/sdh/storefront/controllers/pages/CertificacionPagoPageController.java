@@ -4,7 +4,6 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
@@ -12,6 +11,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
@@ -72,7 +72,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 	@Resource(name = "sessionService")
 	SessionService sessionService;
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhConsultaPagoService")

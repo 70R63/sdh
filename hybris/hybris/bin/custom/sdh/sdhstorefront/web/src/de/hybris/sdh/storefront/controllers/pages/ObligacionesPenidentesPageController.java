@@ -4,10 +4,10 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 
 import javax.annotation.Resource;
 
@@ -34,7 +34,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	private static final String REDIRECT_TO_OBLIGACIONES_PENDIENTES_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/consultas/oblipendientes";
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@RequestMapping(value = "/contribuyentes/consultas/oblipendientes", method = RequestMethod.GET)

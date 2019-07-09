@@ -4,10 +4,10 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 
@@ -40,7 +40,7 @@ public class AgentesAutorizadosPageController extends AbstractPageController
 
 	private static final String REDIRECT_TO_AGENTES_AUTORIZADOS_PAGE = REDIRECT_PREFIX + "/autorizados";
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhCertificaRITService")

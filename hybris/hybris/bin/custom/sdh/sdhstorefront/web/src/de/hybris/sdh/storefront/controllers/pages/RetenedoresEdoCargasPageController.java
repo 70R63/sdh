@@ -4,10 +4,10 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.LogReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.ReteIcaRequest;
 import de.hybris.sdh.core.pojos.responses.LogReteIcaResponse;
@@ -54,7 +54,7 @@ public class RetenedoresEdoCargasPageController extends RetenedoresAbstractPageC
 
 	private static final String REDIRECT_TO_AGENTES_RETENEDORES_CARGAS_PAGE = REDIRECT_PREFIX + "/retenedores/estadocargas";
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhReteIcaFacade")

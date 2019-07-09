@@ -154,18 +154,64 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		TreeMap<Integer, CustomBreadcrumb> subTreeMap = new TreeMap<Integer, CustomBreadcrumb>();
 
 
+		//*->INI MI RIT---------------------------------------------------------------------------------
+		if (resourceKey.equals("breadcrumb.miRIT"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("breadcrumb.miRIT", subTreeMap);
+		}
+
+
+		if (resourceKey.equals("breadcrumb.certificacion"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("breadcrumb.miRIT", "/contribuyentes/mirit"));
+			treeMap.put("breadcrumb.certificacion", subTreeMap);
+		}
+		//*->FIN MI RIT---------------------------------------------------------------------------------
+
+
+
+		//*->INI MI BUZON-------------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.buzon"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.buzon", subTreeMap);
+		}
+		//*->FIN MI BUZON-------------------------------------------------------------------------------
+
+
+
 		//*->INI TRAMITES-------------------------------------------------------------------------------
+		if (resourceKey.equals("Tramites"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("Tramites", subTreeMap);
+		}
+
 		if (resourceKey.equals("Crear Tramites"))
 		{
 			subTreeMap.clear();
-			subTreeMap.put(1, new CustomBreadcrumb("Tramites", "/contibuyentes/tramites"));
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Tramites", "/contibuyentes/tramites"));
 			treeMap.put("Crear Tramites", subTreeMap);
 		}
 
 		if (resourceKey.equals("Seguimiento Trámites"))
 		{
 			subTreeMap.clear();
-			subTreeMap.put(1, new CustomBreadcrumb("Tramites", "/contibuyentes/tramites"));
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Tramites", "/contibuyentes/tramites"));
 			treeMap.put("Seguimiento Trámites", subTreeMap);
 		}
 		//*->FIN TRAMITES-------------------------------------------------------------------------------
@@ -174,50 +220,331 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 
 
 		//*->INI DELINEACION URBANA-------------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.delineacion"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.delineacion", subTreeMap);
+		}
+
+
 		if (resourceKey.equals("Retencion Delineación Urbana"))
 		{
 			subTreeMap.clear();
-			subTreeMap.put(1, new CustomBreadcrumb("text.account.profile.delineacion", "/contribuyentes/delineacion-urbana"));
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("text.account.profile.delineacion", "/contribuyentes/delineacion-urbana"));
 			treeMap.put("Retencion Delineación Urbana", subTreeMap);
 		}
 
 		if (resourceKey.equals("Declaración Delineación Urbana"))
 		{
 			subTreeMap.clear();
-			subTreeMap.put(1, new CustomBreadcrumb("text.account.profile.delineacion", "/contribuyentes/delineacion-urbana"));
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("text.account.profile.delineacion", "/contribuyentes/delineacion-urbana"));
 			treeMap.put("Declaración Delineación Urbana", subTreeMap);
 		}
 		//*->FIN DELINEACION URBANA-------------------------------------------------------------------------------
 
 
 		//*->INI ICA-------------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.ica"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.ica", subTreeMap);
+		}
+
+
 		if (resourceKey.equals("Declaracion ICA"))
 		{
 			subTreeMap.clear();
-			subTreeMap.put(1, new CustomBreadcrumb("text.account.profile.ica", "/contribuyentes/ica"));
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("text.account.profile.ica", "/contribuyentes/ica"));
 			treeMap.put("Declaracion ICA", subTreeMap);
 		}
 		//*->FIN ICA-------------------------------------------------------------------------------
 
 
 		//*->INI PUBLICIDAD------------------------------------------------------------------------
+		if (resourceKey.equals("breadcrumb.publicidad"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("breadcrumb.publicidad", subTreeMap);
+		}
+
+
 		if (resourceKey.equals("text.account.profile.declarapublicidad"))
 		{
 			subTreeMap.clear();
-			subTreeMap.put(1, new CustomBreadcrumb("breadcrumb.publicidad", "/contribuyentes/publicidadexterior"));
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("breadcrumb.publicidad", "/contribuyentes/publicidadexterior"));
 			treeMap.put("text.account.profile.declarapublicidad", subTreeMap);
 		}
 		//*->FIN PUBLICIDAD------------------------------------------------------------------------
 
 
 		//*->INI GASOLINA--------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.gasolina"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.gasolina", subTreeMap);
+		}
+
+
 		if (resourceKey.equals("text.account.profile.gasolina.declaracion"))
 		{
 			subTreeMap.clear();
-			subTreeMap.put(1, new CustomBreadcrumb("text.account.profile.gasolina", "/contribuyentes/sobretasa-gasolina"));
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("text.account.profile.gasolina", "/contribuyentes/sobretasa-gasolina"));
 			treeMap.put("text.account.profile.gasolina.declaracion", subTreeMap);
 		}
 		//*->FIN GASOLINA--------------------------------------------------------------------------
+
+
+		//*->INI PRESENTAR DECLARACION-------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.presendecla"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.presendecla", subTreeMap);
+		}
+		//*->FIN PRESENTAR DECLARACION-------------------------------------------------------------
+
+
+		//*->INI PRESENTAR DECLARACION-------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.declarafirm"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.declarafirm", subTreeMap);
+		}
+		//*->FIN PRESENTAR DECLARACION-------------------------------------------------------------
+
+
+		//*->INI CONSULTAS CERTIFICACION PAGOS-----------------------------------------------------
+		if (resourceKey.equals("text.account.profile.certipagos"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.certipagos", subTreeMap);
+		}
+		//*->FIN CONSULTAS CERTIFICACION PAGOS-----------------------------------------------------
+
+		//*->INI CONSULTAS OBLIGACIONES PENDIENTES-------------------------------------------------
+		if (resourceKey.equals("text.account.profile.oblipendienetes"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.oblipendienetes", subTreeMap);
+		}
+		//*->FIN CONSULTAS OBLIGACIONES PENDIENTES-------------------------------------------------
+
+
+		//*->INI CONSULTAS RELACION PAGOS-------------------------------------------------
+		if (resourceKey.equals("text.account.profile.relapagos"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.relapagos", subTreeMap);
+		}
+		//*->FIN CONSULTAS RELACION PAGOS-------------------------------------------------
+
+		//*->INI CONSULTAS ESTADO CUENTA--------------------------------------------------
+		if (resourceKey.equals("text.account.profile.estadocuenta"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.estadocuenta", subTreeMap);
+		}
+		//*->FIN CONSULTAS ESTADO CUENTA--------------------------------------------------
+
+
+		//*->INI CONSULTAS CERTIFICACIONES DECLARACION------------------------------------
+		if (resourceKey.equals("Certificaciones de Declaración"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("Certificaciones de Declaración", subTreeMap);
+		}
+		//*->FIN CONSULTAS CERTIFICACIONES DECLARACION------------------------------------
+
+
+
+
+		//*->INI AGENTES AUTRORIZADOS--------------------------------------------------------------
+		if (resourceKey.equals("Agentes Autorizados"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			treeMap.put("Agentes Autorizados", subTreeMap);
+		}
+		//*->FIN AGENTES AUTRORIZADOS--------------------------------------------------------------
+
+
+		//*->INI REPORTAR INFORMACION--------------------------------------------------------------
+		if (resourceKey.equals("Reportar Información"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agentes Autorizados", "/autorizados"));
+			treeMap.put("Reportar Información", subTreeMap);
+		}
+		//*->FIN REPORTAR INFORMACION--------------------------------------------------------------
+
+		//*->INI REPORTAR INFORMACION--------------------------------------------------------------
+		if (resourceKey.equals("Consultas"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agentes Autorizados", "/autorizados"));
+			treeMap.put("Consultas", subTreeMap);
+		}
+		//*->FIN REPORTAR INFORMACION--------------------------------------------------------------
+
+		//*->INI LISTA CONTRUBUYENTES--------------------------------------------------------------
+		if (resourceKey.equals("Lista contribuyentes"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agentes Autorizados", "/autorizados"));
+			treeMap.put("Lista contribuyentes", subTreeMap);
+		}
+		//*->FIN LISTA CONTRUBUYENTES--------------------------------------------------------------
+
+		//*->INI TERCEROS AUTORIZADOS--------------------------------------------------------------
+		if (resourceKey.equals("AgentesTerceros Autorizados"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			treeMap.put("AgentesTerceros Autorizados", subTreeMap);
+		}
+		//*->FIN TERCEROS AUTORIZADOS--------------------------------------------------------------
+
+		//*->INI TERCEROS AUTORIZADOS SIM-----------------------------------------------------------
+		if (resourceKey.equals("Terceros Autorizados SIM"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("AgentesTerceros Autorizados", "/terceros"));
+			treeMap.put("Terceros Autorizados SIM", subTreeMap);
+		}
+		//*->FIN TERCEROS AUTORIZADOS SIM-----------------------------------------------------------
+
+
+		//*->INI TERCEROS AUTORIZADOS NOTARIO-------------------------------------------------------
+		if (resourceKey.equals("Terceros Autorizados Notario"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("AgentesTerceros Autorizados", "/terceros"));
+			treeMap.put("Terceros Autorizados Notario", subTreeMap);
+		}
+		//*->FIN TERCEROS AUTORIZADOS NOTARIO-------------------------------------------------------
+
+		//*->INI TERCEROS AUTORIZADOS REPORTAR INFORMACION------------------------------------------
+		if (resourceKey.equals("Terceros Autorizados"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("AgentesTerceros Autorizados", "/terceros"));
+			treeMap.put("Terceros Autorizados", subTreeMap);
+		}
+		//*->FIN TERCEROS AUTORIZADOS REPORTAR INFORMACION------------------------------------------
+
+		//*->INI AGENTES REGISTRO RETENCIONES-------------------------------------------------------
+		if (resourceKey.equals("Registro de Retenciones"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			treeMap.put("Registro de Retenciones", subTreeMap);
+		}
+		//*->FIN AGENTES REGISTRO RETENCIONES-------------------------------------------------------
+
+		//*->INI AGENTES ESTADO DE CARGAS-----------------------------------------------------------
+		if (resourceKey.equals("Estado de Cargas"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			subTreeMap.put(3, new CustomBreadcrumb("Registro de Retenciones", "/retenedores/registroretenciones"));
+			treeMap.put("Estado de Cargas", subTreeMap);
+		}
+		//*->FIN AGENTES ESTADO DE CARGAS-----------------------------------------------------------
+
+		//*->INI AGENTES DECLARACION POR FIRMAR-----------------------------------------------------
+		if (resourceKey.equals("Declaraciones por Firmar"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			treeMap.put("Declaraciones por Firmar", subTreeMap);
+		}
+		//*->FIN AGENTES DECLARACION POR FIRMAR-----------------------------------------------------
+
+		//*->INI REPORTANTE DECLARACION POR FIRMAR-----------------------------------------------------
+		if (resourceKey.equals("breadcrumb.reportante"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			treeMap.put("breadcrumb.reportante", subTreeMap);
+		}
+		//*->FIN AGENTES DECLARACION POR FIRMAR-----------------------------------------------------
+
+		//*->INI REPORTANTE CARGA DOCUMENTOS-----------------------------------------------------
+		if (resourceKey.equals("breadcrumb.reportante.carga"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Reportante", "/reportantes"));
+			treeMap.put("breadcrumb.reportante.carga", subTreeMap);
+		}
+		//*->FIN REPORTANTE CARGA DOCUMENTOS-----------------------------------------------------
+
+
+		//*->INI REPORTANTE HISTORICO-----------------------------------------------------
+		if (resourceKey.equals("breadcrumb.reportante.historico"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Reportante", "/reportantes"));
+			treeMap.put("breadcrumb.reportante.historico", subTreeMap);
+		}
+		//*->FIN REPORTANTE HISTORICO-----------------------------------------------------
+
+
+		//*->INI REPORTANTE SANCIONES-----------------------------------------------------
+		if (resourceKey.equals("breadcrumb.reportante.sanciones"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Reportante", "/reportantes"));
+			treeMap.put("breadcrumb.reportante.sanciones", subTreeMap);
+		}
+		//*->FIN REPORTANTE SANCIONES-----------------------------------------------------
 
 
 
