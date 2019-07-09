@@ -72,11 +72,12 @@
 				<div class="row informadeclara">
 
 					<div class="col-md-3">
+						<c:set var = "claseProd_id" value = 'dataForm.infoDeclara${loop.index}.claseProd'/>
 						<sf:select class="new_alto form-control-gasolina claseProducto"
 							path="dataForm.infoDeclara[${loop.index}].claseProd"
 							items="${dataForm.catalogosSo.claseProd}"
 							referenceData="${dataForm.catalogosSo.claseProd}" maxlength="10"
-							style="width: 235px" onchange="getProductClassOccurrance(this)" />
+							style="width: 235px" onchange="getProductClassOccurrance(this)" id="${claseProd_id}"/>
 					</div>
 					<div class="col-md-1">
 						<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
@@ -91,6 +92,7 @@
 							readonly="true" type="" />
 					</div>
 					<div class="col-sm-1">
+						<c:set var = "alcoholCarbu_id" value = 'dataForm.infoDeclara${loop.index}.alcoholCarbu'/>
 						<c:choose>
 							<c:when
 								test="${info.claseProd eq '01' or info.claseProd eq '03'}">
@@ -99,7 +101,7 @@
 									items="${dataForm.catalogosSo.alcoholCarbu}"
 									referenceData="${dataForm.catalogosSo.alcoholCarbu}"
 									class="new_alto form-control-gasolina alcohol"
-									readonly="true" style="width: auto !important;" />
+									readonly="true" style="width: auto !important;" id="${alcoholCarbu_id}"/>
 							</c:when>
 							<c:otherwise>
 								<sf:select
@@ -107,7 +109,7 @@
 									items="${dataForm.catalogosSo.alcoholCarbu}"
 									referenceData="${dataForm.catalogosSo.alcoholCarbu}"
 									class="new_alto form-control-gasolina alcohol"
-									style="width: auto !important;" />
+									style="width: auto !important;" id="${alcoholCarbu_id}"/>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -146,6 +148,16 @@
 
 <script>
 	function getProductClassOccurrance(currentSelected) {
+		var seleccion = currentSelected.value;
+		var idModificar = currentSelected.id;
+		idModificar = idModificar.replace('.claseProd','.alcoholCarbu');
+		
+		if(seleccion == '01' || seleccion == '03'){
+			document.getElementById(idModificar).disabled = true;
+		}else{
+			document.getElementById(idModificar).disabled = false;			
+		}
+		
 		var map = new Map();
 		var mapMaxOcc = new Map();
 		var tableLength = $(".informadeclara").length;
