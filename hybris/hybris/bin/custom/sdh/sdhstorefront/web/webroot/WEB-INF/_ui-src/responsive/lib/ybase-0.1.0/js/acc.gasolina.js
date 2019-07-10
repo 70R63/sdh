@@ -56,6 +56,7 @@ ACC.gasolina = {
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			
 	            			document.getElementById("downloadHelper").click();
+	            			document.getElementById("pagar").disabled = false;
 	            			
 	            		}
 	 	      		

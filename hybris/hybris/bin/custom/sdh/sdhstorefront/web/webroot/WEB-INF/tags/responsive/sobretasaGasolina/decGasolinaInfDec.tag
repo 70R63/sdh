@@ -135,7 +135,7 @@
 			<div class="col-md-12 col-md-offset-4">
 				<div class="form-group ">
 					<sf:button action="${presentarDeclaracionUrl}" type="submit"
-						class="btn btn-primary btn-lg" id="action" name="action"
+						class="btn btn-primary btn-lg" id="calcular" name="action"
 						value="calcular">
 						<spring:theme code="impuestos.decGasolina.InformacionDec.calcular" />
 					</sf:button>
