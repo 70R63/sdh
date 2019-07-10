@@ -24560,7 +24560,10 @@ th {
 .headline {
   margin-left: 11px;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
+  .container_new {
+    padding-top: 22%;
+  }
   .login-section {
     padding-top: 0px;
     margin-top: -10px;
@@ -24700,4 +24703,57 @@ span.pasos {
 }
 .boder_section_cdu {
   border: 1px dashed #66bce9;
+}
+.imgagen_tran:hover {
+  animation-name: colores;
+  /*animation-name: colores;*/
+  animation-duration: 5s;
+  /*cuanto tiempo va a durar*/
+  animation-iteration-count: initial;
+  /*que se repita la animación cuando acabe*/
+}
+@keyframes colores {
+  /*from{background: #9EB3C2;}
+	to{background: #1B3B6F; }*/
+  0% {
+    background: #9EB3C2;
+  }
+  25% {
+    background: #1C7293;
+    width: 100px;
+  }
+  50% {
+    background: #043A53;
+    width: 120px;
+  }
+  75% {
+    background: #1B3B6F;
+    width: 100px;
+  }
+  100% {
+    background: #9EB3C2;
+    width: 90px;
+  }
+}
+.new_tab {
+  color: #000 !important;
+  font-size: 20px ;
+}
+.nav .new_tab:active {
+  color: #104d83 !important;
+  font-size: 23px ;
+}
+.nav .new_tab:focus {
+  color: #043A53;
+  font-size: 40px ;
+}
+.new_active:hover {
+  color: #043A53;
+  background: #E0F8F7 !important;
+}
+.new_active.active {
+  color: #156ab5 !important;
+}
+.new_active {
+  color: #000 !important;
 }
