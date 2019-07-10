@@ -32,29 +32,29 @@
 
 	<form:form action="">
 		<div class="row mt-3">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.aniograv" /></label> <select
-						id="aniograv" class="form-control" disabled="disabled">
+						id="aniograv" class="newalto form-control" disabled="disabled">
 						<option value="">2019</option>
 					</select>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.placa" /></label> <input
-						id="numresol" name="numresol" class="form-control"
+						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text" value="" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.opuso" /></label> <select
-						id="aniograv" class="form-control" disabled="disabled">
+						id="aniograv" class="new_alto form-control" disabled="disabled">
 						<option value="">Declaración</option>
 					</select>
 				</div>
