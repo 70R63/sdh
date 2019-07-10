@@ -20,30 +20,30 @@
 
 
 		<div class="row">
-			<div class="col-md-5">
+			<div class="col-md-3">
 				<br>
 				<table class="table">
 					<thead>
 						<tr>
+						<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.liqui.anio" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.liqui.avaactual" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.liqui.tarfiactual" /></label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
-										code="sobre.vehiculo.liqui.tipvehiculo" /></label></th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<tr>
+						<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="Año"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="Avalúo"></c:out>"
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="Tarifa"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Tipo"></c:out>"
 								maxlength="240" style="width: 100% !important;"></td>
 						</tr>
 					</tbody>
@@ -57,13 +57,13 @@
 					<spring:theme code="sobre.vehiculo.liqui.regresar" />
 				</button>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<button  type="submit" class="btn btn-primary "
 					id="" name="" value="regresar">
 					<spring:theme code="sobre.vehiculo.liqui.descfactura" />
 				</button>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 
 				<button type="submit" class="btn btn-primary "
 					id="" name="" value="regresar">

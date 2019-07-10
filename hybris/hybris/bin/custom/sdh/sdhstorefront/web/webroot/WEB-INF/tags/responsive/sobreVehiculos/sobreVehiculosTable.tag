@@ -29,6 +29,34 @@
 			</table>
 		</div>
 	</div>
+	<div class="row mt-3">
+	<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
+			<div class="table-responsive text-center">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td><label class="control-label labeltabletd tableident"><spring:theme
+										code="sobre.vehiculo.table.tipdoc" /></label></td>
+							<td><label class="control-label labeltabletd tablenumiden"><spring:theme
+										code="sobre.vehiculo.table.numdoc" /></label></td>
+							<td><label class="control-label labeltabletd tablenombre"><spring:theme
+										code="sobre.vehiculo.table.nombre" /></label></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input class="inputtextnew tableident"
+								disabled="disabled" type="text" size="30" value="" /></td>
+							<td><input class="inputtextnew tablenumiden"
+								disabled="disabled" type="text" size="30" value="" /></td>
+							<td><input class="inputtextnew tablenombre"
+								disabled="disabled" type="text" size="30" value="" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+</div>
 </div>
 
 <sf:form>
@@ -65,6 +93,8 @@
 										code="sobre.vehiculo.table.modelo" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.table.clase" /></label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.carroceria" /></label></th>										
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.table.numpuertas" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
@@ -98,6 +128,9 @@
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="clase"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="carrocería"></c:out>"
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="Puertas"></c:out>"

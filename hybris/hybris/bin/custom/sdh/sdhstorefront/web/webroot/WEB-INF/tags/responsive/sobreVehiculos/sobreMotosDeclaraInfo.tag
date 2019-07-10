@@ -26,7 +26,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.moto.info.objcont" /></label><input
-						id="numresol" name="numresol" class="form-control"
+						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text" value="" maxlength="30"
 						disabled="disabled">
 				</div>
@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.moto.info.clase" /></label> <input
-						id="numresol" name="numresol" class="form-control"
+						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text" value="" maxlength="30"
 						disabled="disabled">
 				</div>
@@ -48,7 +48,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.moto.info.carro" /></label> <input
-						id="numresol" name="numresol" class="form-control"
+						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text" value="" maxlength="30"
 						disabled="disabled">
 				</div>
