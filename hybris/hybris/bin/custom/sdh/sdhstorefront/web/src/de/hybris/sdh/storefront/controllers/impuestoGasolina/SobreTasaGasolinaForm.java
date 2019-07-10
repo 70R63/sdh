@@ -37,6 +37,7 @@ public class SobreTasaGasolinaForm
 	private String optionPubliExt;
 	private String optionGas;
 	private String optionDeli;
+	private String habilitaPagarEnLinea;
 
 
 	private List<SobreTasaGasolinaTabla> listaDocumentos;
@@ -587,6 +588,25 @@ public class SobreTasaGasolinaForm
 	public void setSkipReques(final String skipReques)
 	{
 		this.skipReques = skipReques;
+	}
+
+
+
+	/**
+	 * @return the habilitaPagarEnLinea
+	 */
+	public String getHabilitaPagarEnLinea()
+	{
+		return habilitaPagarEnLinea;
+	}
+
+	/**
+	 * @param habilitaPagarEnLinea
+	 *           the habilitaPagarEnLinea to set
+	 */
+	public void setHabilitaPagarEnLinea(final String habilitaPagarEnLinea)
+	{
+		this.habilitaPagarEnLinea = habilitaPagarEnLinea;
 	}
 
 	/*

@@ -266,7 +266,14 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 			detalleGasolinaResponse.setNumTanques(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getNumTanques()));
 			detalleGasolinaResponse.setAlmacTanque(gasolinaService.prepararValNumerico(detalleGasolinaResponse.getAlmacTanque()));
 
-
+			dataForm.setHabilitaPagarEnLinea("");
+			if (detalleGasolinaResponse.getNumForm() != null)
+			{
+				if (!detalleGasolinaResponse.getNumForm().isEmpty())
+				{
+					dataForm.setHabilitaPagarEnLinea("");
+				}
+			}
 			dataForm.setNumBP(numBP);
 			dataForm.setNumDoc(numDoc);
 			dataForm.setTipoDoc(tipoDoc);
@@ -731,9 +738,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/sobretasa-gasolina/declaracion-gasolinaPagar", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String handleGET_PAG(
-			@ModelAttribute("psePaymentForm")
-			final PSEPaymentForm psePaymentForm, final BindingResult bindingResult, final Model model,
+	public String handleGET_PAG(@ModelAttribute("psePaymentForm")
+	final PSEPaymentForm psePaymentForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes, final HttpServletRequest request, final HttpServletResponse response)
 			throws CMSItemNotFoundException
 	{
