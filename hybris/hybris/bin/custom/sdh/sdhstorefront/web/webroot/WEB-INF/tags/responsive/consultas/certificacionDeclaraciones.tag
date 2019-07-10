@@ -80,9 +80,11 @@
 		<input type="hidden" name="rowFrompublicidadTable" value="" />
 
 		<div class="row">
-
-			<div class="col-md-3" id="idImpuesto" style="display: block;">
-				<div class="form-group">
+			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
+				<span class="paso--uno pasos color-sr1">1</span>
+				<h2 class="titulo-caja--ser-rel color-sr1 ">¿QUÉ QUIERES HACER?</h2>
+				<p class="pasoClase1 metrophobic">Selecciona el impuesto que deseas consultar.</p>
+				<div class="caja--ser-rel color-sr1">
 					<formElement:formSelectBox idKey="tipoimp"
 						labelKey="certideclara.inicial.selcimpuesto" path="Idimp"
 						mandatory="true" skipBlank="false"
@@ -92,41 +94,54 @@
 			</div>
 
 			<c:if test="${certiFormPost.idimp != '3'}">
-				<div class="col-md-2" id="idAnio" style="display: block;">
-					<div class="form-group">
+				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
+					<span class="paso--dos pasos color-sr2">2</span>
+					<h2 class="titulo-caja--ser-rel color-sr2 ">
+						<span class="paso2">AÑO GRAVABLE</span>
+					</h2>
+					<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+					<div class="caja--ser-rel color-sr2">
 						<formElement:formSelectBox idKey="aniograv"
 							labelKey="certideclara.inicial.aniograv" path="aniograv"
 							mandatory="true" skipBlank="false"
 							skipBlankMessageKey="SELECCIONAR" items="${aniGravable}"
-							selectCSSClass="newalto form-control" onchange="onChangeAnioGravable()" />
+							selectCSSClass="newalto form-control"
+							onchange="onChangeAnioGravable()" />
 					</div>
 				</div>
 			</c:if>
 
 
 			<c:if test="${certiFormPost.idimp == '3'}">
-				<div class="col-md-2" id="idPeriodo" style="display: block;">
-					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.periodo" /></label> <select id="aniograv"
-							class="newalto form-control " name="aniograv">
+				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
+					<span class="paso--dos pasos color-sr2">2</span>
+					<h2 class="titulo-caja--ser-rel color-sr2 ">
+						<span class="paso2">AÑO GRAVABLE</span>
+					</h2>
+					<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+					<div class="caja--ser-rel color-sr2">
+						<select id="aniograv" class="newalto form-control "
+							name="aniograv">
 							<option value="">Seleccionar</option>
 							<option value="2019">2019</option>
 							<option value="2018">2018</option>
 							<option value="2017">2017</option>
 							<option value="2016">2016</option>
 						</select>
+
 					</div>
 				</div>
+
 			</c:if>
 
 			<c:if test="${certiFormPost.idimp == '5'}">
-				<div class="col-md-2" id="idPeriodo" style="display: block;">
-					<div class="form-group">
-						<label class="control-label required"> <spring:theme
-								code="certideclara.inicial.periodo" />
-						</label> <select aria-required="true" id="periodo" class="new_alto form-control "
-							name="periodo" required='required'>
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
+					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
+					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
+					<p class="pasoClase3 metrophobic">selecciona el periodo.</p>
+					<div class="caja--ser-rel color-sr3">
+						<select aria-required="true" id="periodo"
+							class="new_alto form-control " name="periodo" required='required'>
 							<option value="">Seleccionar</option>
 							<option value="01">1-Enero</option>
 							<option value="02">2-Febrero</option>
@@ -147,11 +162,12 @@
 
 			<c:if
 				test="${(certiFormPost.idimp == '3' or certiFormPost.idimp == '7') and  isPeriodoAnual == false}">
-				<div class="col-md-3" id="idPeriodo" style="display: block;">
-					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.periodo" /></label> <select id="periodo"
-							class="new_alto form-control " name="periodo">
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
+					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
+					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
+					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
+					<div class="caja--ser-rel color-sr3">
+						<select id="periodo" class="new_alto form-control " name="periodo">
 							<option value="">Seleccionar</option>
 							<option value="B1">1 - Ene / Feb</option>
 							<option value="B2">2 - Mar / Abr</option>
@@ -163,8 +179,6 @@
 					</div>
 				</div>
 			</c:if>
-
-
 		</div>
 
 
@@ -333,7 +347,7 @@
 			<div class="row" id="formButtons">
 				<div class="col-md-12 text-center">
 					<div class="form-group ">
-						<button type="button" class="btn btn-primary btn-lg"
+						<button type="button" class="btn btn-secondary btn-lg"
 							id="btnCancelar" name="action" value="cancelar"
 							style="margin-top: 3px">
 							<spring:theme code="certideclara.inicial.cancelar" />
@@ -351,7 +365,7 @@
 
 
 		<c:if test="${not empty delineacionWithRadicadosList}">
-			<div class="col-md-9 col-md-offset-1">
+			<div class="col-md-9 col-md-offset-1 boder_section_cdu">
 				<br> <br>
 				<div class="row">
 					<div class="col-md-3">
@@ -384,8 +398,8 @@
 					<c:forEach var="item" items="${delineacionWithRadicadosList}">
 						<div class="row">
 							<div class="col-sm-3">
-								<input class="new_alto form-control" disabled="disabled" type="text"
-									value="${item.cdu}"
+								<input class="new_alto form-control" disabled="disabled"
+									type="text" value="${item.cdu}"
 									style="margin-bottom: 9px !important" />
 							</div>
 							<div class="col-sm-3">

@@ -13,7 +13,7 @@
 			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 				<a href="<c:url value='/setRole?role=sdh_01' />">
 					<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
-						<img title="Kennedy" alt="Kennedy" class="card-section-content" src="${themeResourcePath}/images/contribuyentes.png">
+						<img title="Kennedy" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/contribuyentes.png">
 					</div>
 					<div class="card-section  col-xs-8 col-sm-10 col-md-10">
 						<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="taxpayers.title" /></span></h2></div>
