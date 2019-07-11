@@ -38,7 +38,9 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 	{
 		target.setDocumentNumber(source.getDocumentNumber());
 		target.setDocumentType(source.getDocumentType());
+		target.setFirstName(source.getFirstName());
 		target.setMiddleName(source.getMiddleName());
+		target.setLastName(source.getLastName());
 		target.setSecondLastName(source.getSecondLastName());
 		target.setDocumentExpeditionDate(source.getDocumentExpeditionDate());
 		target.setSex(source.getSex());

@@ -28,17 +28,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 //@RequestMapping("")
-public class AgentesAutorizadosPageController extends AbstractPageController
+public class TercerosSIMBuscarPageController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Agentes Autorizados";
+	private static final String TEXT_ACCOUNT_PROFILE = "Terceros Autorizados SIM";
 
 	// CMS Pages
-	private static final String AGENTES_AUTORIZADOS_CMS_PAGE = "agentesAutorizadosMenuPage";
+	private static final String TERCEROS_AUTORIZADOS_SIM_CMS_PAGE = "tercerosSIMBuscarPage";
 
-	private static final String REDIRECT_TO_AGENTES_AUTORIZADOS_PAGE = REDIRECT_PREFIX + "/autorizados";
+	private static final String REDIRECT_TO_TERCEROS_AUTORIZADOS_SIM_PAGE = REDIRECT_PREFIX + "/terceros/sim/buscar";
 
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -49,16 +49,16 @@ public class AgentesAutorizadosPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/autorizados", method = RequestMethod.GET)
+	@RequestMapping(value = "/terceros/sim/buscar", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String retenedores(final Model model) throws CMSItemNotFoundException
+	public String tercerossim(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al GET Agentes Autorizados --------------------------");
+		System.out.println("---------------- Hola entro al GET terceros Autorizados SIM--------------------------");
 
 
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(AGENTES_AUTORIZADOS_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AGENTES_AUTORIZADOS_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_SIM_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(TERCEROS_AUTORIZADOS_SIM_CMS_PAGE));
 
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
@@ -66,15 +66,15 @@ public class AgentesAutorizadosPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/autorizados", method = RequestMethod.POST)
+	@RequestMapping(value = "/terceros/sim/buscar", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String retenedorespost(final BindingResult bindingResult, final Model model,
+	public String tercerossimpost(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("------------------Entro al POST de Agentes Autorizados------------------------");
+		System.out.println("------------------Entro al POST de terceros Autorizados SIM------------------------");
 
-		return REDIRECT_TO_AGENTES_AUTORIZADOS_PAGE;
+		return REDIRECT_TO_TERCEROS_AUTORIZADOS_SIM_PAGE;
 	}
 
 }

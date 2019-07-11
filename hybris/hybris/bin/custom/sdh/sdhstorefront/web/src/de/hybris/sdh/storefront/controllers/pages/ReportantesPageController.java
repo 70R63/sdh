@@ -10,7 +10,7 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
+
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
@@ -18,6 +18,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -58,7 +59,7 @@ public class ReportantesPageController extends AbstractPageController
 	private static final String REPORTANTES_SANCIONES_CMS_PAGE = "reportantesSancionesPage";
 
 	//Servicios
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sessionService")

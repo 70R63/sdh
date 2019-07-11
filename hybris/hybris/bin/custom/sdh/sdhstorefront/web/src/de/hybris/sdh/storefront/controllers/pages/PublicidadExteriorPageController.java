@@ -11,7 +11,7 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
+
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -20,6 +20,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
 import de.hybris.sdh.core.pojos.responses.DetallePubli;
@@ -92,7 +93,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 	@Resource(name = "sdhCalPublicidadService")
 	SDHCalPublicidadService sdhCalPublicidadService;
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 

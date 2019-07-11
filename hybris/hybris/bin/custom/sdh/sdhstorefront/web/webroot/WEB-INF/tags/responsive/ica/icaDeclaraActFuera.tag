@@ -47,7 +47,7 @@
 		</div>
 		
 		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
-<%-- 			<c:if test="${not empty eachIngreso.codCIIU }"> --%>
+			<c:if test="${not empty eachIngreso.codCIIU }">
 				<div class="row actvifuera">
 					<div class="col-md-3">
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}" pattern="#######################" var="codCIIUNumber"/>
@@ -92,7 +92,7 @@
 						</div>
 					</div>
 				</div>
-<%-- 			</c:if> --%>
+			</c:if>
 		</c:forEach>
 <!--  se agregan líneas para agregar siempre una linea en la tabla -->
 				<div class="row actvifuera">

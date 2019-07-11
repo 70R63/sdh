@@ -8,7 +8,7 @@
 <div class="container_new_page">
 	<div class="row ">
 			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
-				<a href="<c:url value='/terceros/sim' />">
+				<a href="<c:url value='/terceros/sim/buscar' />">
 					<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
 						<img title="sim" alt="sim" class="card-section-content" src="${themeResourcePath}/images/terceros_sim.jpg">
 					</div>
@@ -22,7 +22,7 @@
 			</div>
 
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
-			<a href="<c:url value='/terceros/notarios' />">
+			<a href="<c:url value='/terceros/notarios/buscar' />">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
 					<img title="notarios" alt="notarios" class="card-section-content" src="${themeResourcePath}/images/terceros_notario.jpg">
 				</div>

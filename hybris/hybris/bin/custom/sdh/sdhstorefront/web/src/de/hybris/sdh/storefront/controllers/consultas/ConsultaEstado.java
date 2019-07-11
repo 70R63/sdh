@@ -4,15 +4,14 @@
 package de.hybris.sdh.storefront.controllers.consultas;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
@@ -69,7 +68,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 	@Resource(name = "userService")
 	UserService userService;
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhDetalleGasolina")

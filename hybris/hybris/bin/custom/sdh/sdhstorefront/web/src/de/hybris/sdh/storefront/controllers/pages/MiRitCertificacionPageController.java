@@ -5,7 +5,7 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 
 
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
+
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -13,6 +13,7 @@ import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CertificaRITRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.responses.CertificacionRITResponse;
@@ -59,7 +60,7 @@ public class MiRitCertificacionPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@RequestMapping(value = "/contribuyentes/mirit/certificacion-datos", method = RequestMethod.POST)

@@ -4,7 +4,6 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
@@ -15,6 +14,7 @@ import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.dao.impl.DefaultSDHICACityDao;
 import de.hybris.sdh.core.dao.impl.DefaultSDHICAEconomicActivityDao;
 import de.hybris.sdh.core.model.SDHICACityModel;
@@ -114,7 +114,7 @@ public class IcaPageController extends AbstractPageController
 	@Resource(name = "mediaService")
 	MediaService mediaService;
 
-	@Resource(name = "accountBreadcrumbBuilder")
+	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhCertificaRITService")

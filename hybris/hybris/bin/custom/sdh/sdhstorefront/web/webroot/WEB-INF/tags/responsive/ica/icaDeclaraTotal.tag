@@ -74,71 +74,137 @@
 		<!-- fin de código agregado -->
 
 		<c:forEach items="${infoDeclara.ingNetosGrava }" var="eachIngreso">
-			<div class="row totaluno">
-				<div class="col-md-1">
-					<c:choose>
-						<c:when test="${eachIngreso.actPrincipal eq 'X' }">
-							<input type="checkbox" name=""
-								class="form-check-input mr-2 actividad actPrincipal"
-								style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-								size="10" checked="checked">
-						</c:when>
-						<c:otherwise>
-							<input type="checkbox" name=""
-								class="form-check-input mr-2 actividad actPrincipal"
-								style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-								size="10">
-						</c:otherwise>
-					</c:choose>
-				</div>
-
-				<div class="col-md-3">
-					<!-- 					<input class="form-control denomina codCIIU" type="text" -->
-					<%-- 						value="${eachIngreso.codCIIU}" /> --%>
-					<!--
-					<fmt:formatNumber value="${ eachIngreso.codCIIU}"
-						pattern="#######################" var="codCIIUNumber" />
-
-					<select id="" class="form-control codCIIU" style="height: 48px;">
-						<option value="">SELECCIONAR</option>
-						<c:forEach items="${ econActivities}" var="eachActivity">
-
-							<fmt:formatNumber value="${ eachActivity.code}"
-								pattern="#######################" var="eachCodCIIUNumber" />
-
-							<c:set var="selected" value="" />
-							<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
-								<c:set var="selected" value="selected" />
-							</c:if>
-
-							<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
-								- ${eachActivity.description }</option>
-						</c:forEach>
-					</select>
-					 -->		
-					 <!-- EJRR Adding data to select box -->			 
-					 <select id="" class="new_alto form-control codCIIU" style="height: 48px;">
-						<option value="" selected>SELECCIONAR</option>
-						<c:forEach items="${gravableNetIncomes}" var="eachActivity">
-							<option value="${eachActivity.ciiu}">${eachActivity.ciiu} - ${eachActivity.denominacion}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<div class="col-md-2">
-					<input class="newalto form-control ingreso ingresos" type="text"
-						value="${eachIngreso.ingresos}" />
-				</div>
-				<div class="col-md-1">
-					<div class="form-group ">
-						<img onclick="addtotaluno()"
-							src="${themeResourcePath}/images/adddelineacion.png"
-							style="width: 25px"></img> <img onclick="deletotaluno()"
-							src="${themeResourcePath}/images/deledelineacion.png"
-							style="width: 25px"></img>
+			<c:if test="${not empty eachIngreso.codCIIU }">
+				<div class="row totaluno">
+					<div class="col-md-1">
+						<c:choose>
+							<c:when test="${eachIngreso.actPrincipal eq 'X' }">
+								<input type="checkbox" name=""
+									class="form-check-input mr-2 actividad actPrincipal"
+									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+									size="10" checked="checked">
+							</c:when>
+							<c:otherwise>
+								<input type="checkbox" name=""
+									class="form-check-input mr-2 actividad actPrincipal"
+									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+									size="10">
+							</c:otherwise>
+						</c:choose>
+					</div>
+	
+					<div class="col-md-3">
+						<!-- 					<input class="form-control denomina codCIIU" type="text" -->
+						<%-- 						value="${eachIngreso.codCIIU}" /> --%>
+						<!--
+						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
+							pattern="#######################" var="codCIIUNumber" />
+	
+						<select id="" class="form-control codCIIU" style="height: 48px;">
+							<option value="">SELECCIONAR</option>
+							<c:forEach items="${ econActivities}" var="eachActivity">
+	
+								<fmt:formatNumber value="${ eachActivity.code}"
+									pattern="#######################" var="eachCodCIIUNumber" />
+	
+								<c:set var="selected" value="" />
+								<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
+									<c:set var="selected" value="selected" />
+								</c:if>
+	
+								<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
+									- ${eachActivity.description }</option>
+							</c:forEach>
+						</select>
+						 -->		
+						 <!-- EJRR Adding data to select box -->			 
+						 <select id="" class="new_alto form-control codCIIU" style="height: 48px;">
+							<option value="" selected>SELECCIONAR</option>
+							<c:forEach items="${gravableNetIncomes}" var="eachActivity">
+								<option value="${eachActivity.ciiu}">${eachActivity.ciiu} - ${eachActivity.denominacion}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="col-md-2">
+						<input class="newalto form-control ingreso ingresos" type="text"
+							value="${eachIngreso.ingresos}" />
+					</div>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addtotaluno()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deletotaluno()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
 					</div>
 				</div>
-			</div>
+			</c:if>
 		</c:forEach>
+		<div class="row totaluno">
+					<div class="col-md-1">
+						<c:choose>
+							<c:when test="${eachIngreso.actPrincipal eq 'X' }">
+								<input type="checkbox" name=""
+									class="form-check-input mr-2 actividad actPrincipal"
+									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+									size="10" checked="checked">
+							</c:when>
+							<c:otherwise>
+								<input type="checkbox" name=""
+									class="form-check-input mr-2 actividad actPrincipal"
+									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+									size="10">
+							</c:otherwise>
+						</c:choose>
+					</div>
+	
+					<div class="col-md-3">
+						<!-- 					<input class="form-control denomina codCIIU" type="text" -->
+						<%-- 						value="${eachIngreso.codCIIU}" /> --%>
+						<!--
+						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
+							pattern="#######################" var="codCIIUNumber" />
+	
+						<select id="" class="form-control codCIIU" style="height: 48px;">
+							<option value="">SELECCIONAR</option>
+							<c:forEach items="${ econActivities}" var="eachActivity">
+	
+								<fmt:formatNumber value="${ eachActivity.code}"
+									pattern="#######################" var="eachCodCIIUNumber" />
+	
+								<c:set var="selected" value="" />
+								<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
+									<c:set var="selected" value="selected" />
+								</c:if>
+	
+								<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
+									- ${eachActivity.description }</option>
+							</c:forEach>
+						</select>
+						 -->		
+						 <!-- EJRR Adding data to select box -->			 
+						 <select id="" class="new_alto form-control codCIIU" style="height: 48px;">
+							<option value="" selected>SELECCIONAR</option>
+							<c:forEach items="${gravableNetIncomes}" var="eachActivity">
+								<option value="${eachActivity.ciiu}">${eachActivity.ciiu} - ${eachActivity.denominacion}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="col-md-2">
+						<input class="newalto form-control ingreso ingresos" type="text"
+							value="${eachIngreso.ingresos}" />
+					</div>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addtotaluno()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deletotaluno()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
+				</div>
 	</div>
 
 	<!-- 	se agrega boton para adjuntar archivo -->

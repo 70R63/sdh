@@ -24,7 +24,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.moto.liq.avaluo" /></label><input id=""
-						name="numresol" class="form-control" aria-required="true"
+						name="numresol" class="newalto form-control" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.moto.liq.valsem" /></label> <input
-						id="" name="" class="form-control" aria-required="true"
+						id="" name="" class="newalto form-control" aria-required="true"
 						type="text" value="" maxlength="30" disabled>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.moto.liq.totpag" /></label> <input
-						id="" name="" class="form-control" aria-required="true"
+						id="" name="" class="newalto form-control" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.moto.liq.valpag" /></label> <input
-						id="" name="" class="form-control" aria-required="true"
+						id="" name="" class="newalto form-control" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>

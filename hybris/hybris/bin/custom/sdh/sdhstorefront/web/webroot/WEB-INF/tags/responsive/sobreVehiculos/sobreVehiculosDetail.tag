@@ -25,7 +25,7 @@
 					code="sobre.vehiculo.detail.placa" /></label>
 		</div>
 		<div class="col-md-2">
-			<input id="" name="" class="form-control" aria-required="true"
+			<input id="" name="" class="newalto form-control" aria-required="true"
 				type="text" readonly="readonly"
 				value="<c:out value="placa"></c:out>" maxlength="240">
 		</div>
@@ -45,9 +45,13 @@
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.clasanti" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.detail.tipvehiculo" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.cappasa" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.capton" /></label></th>
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.detail.fecinacti" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.detail.feccambio" /></label></th>
 						</tr>
@@ -68,10 +72,16 @@
 								readonly="readonly" value="<c:out value="clásico"></c:out>"
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="tip vehiculo"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="pasajeros"></c:out>"
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="ton"></c:out>"
+								maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="" name="" class="inputtextnew" type="text"
+								readonly="readonly" value="<c:out value="fecinacti"></c:out>"
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="fechacambio"></c:out>"
