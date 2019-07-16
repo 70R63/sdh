@@ -237,11 +237,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,ConsultaNavigationNode 
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
-<<<<<<< HEAD
-;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARPagosNavigationNode,ARConsultaNavigationNode
-=======
 ;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
->>>>>>> dev-maria
+;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
 ;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 
@@ -282,12 +279,9 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;TramitesNavigationNode;;Tramites Menu;TramitesNavigationNode;TramitesNavigationServiceRequestsNavNodeMenu
 ;FacturacionNavigationNode;;Facturacion Menu;FacturacionNavigationNode;FacturacionNavigationServiceRequestsNavNodeMenu
 ;DeclaracionesNavigationNode;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesNavigationServiceRequestsNavNodeMenu
-<<<<<<< HEAD
-;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
-;ARPagosNavigationNode;;Pagos Menu;ARPagosNavigationNode;ARPagosNavigationServiceRequestsNavNodeMenu
-=======
+#;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
+#;ARPagosNavigationNode;;Pagos Menu;ARPagosNavigationNode;ARPagosNavigationServiceRequestsNavNodeMenu
 #->;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
->>>>>>> dev-maria
 ;ConsultaNavigationNode;;Consultas Menu;ConsultaNavigationNode;ConsultaNavigationServiceRequestsNavNodeMenu
 ;ARConsultaNavigationNode;;Consultas Menu;ARConsultaNavigationNode;ARConsultaNavigationServiceRequestsNavNodeMenu
 ;ReportantesNavigationNode;;Reportantes Menu;ReportantesNavigationNode;ReportantesNavigationServiceRequestsNavNodeMenu
@@ -327,12 +321,12 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;TramitesNavigationNodeEntry;;Tramites Menu;TramitesNavigationNode;TramitesLink;
 ;FacturacionNavigationNodeEntry;;Facturacion Menu;FacturacionNavigationNode;FacturacionLink;
 ;DeclaracionesNavigationNodeEntry;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesLink;
-<<<<<<< HEAD
-;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
-;ARPagosNavigationNodeEntry;;Pagos Menu;ARPagosNavigationNode;PagosLink;
-=======
+
+#;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
+#;ARPagosNavigationNodeEntry;;Pagos Menu;ARPagosNavigationNode;PagosLink;
+
 #->;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
->>>>>>> dev-maria
+
 ;ConsultaNavigationNodeEntry;;Consulta Menu;ConsultaNavigationNode;ConsultasLink;
 ;ARConsultaNavigationNodeEntry;;Consulta Menu;ARConsultaNavigationNode;ConsultasLink;
 ;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
@@ -389,12 +383,12 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
-<<<<<<< HEAD
-;PagosNavigationServiceRequestsNavNodeMenu;;Pagos Service Requests Menu;PagosNavigationServiceRequestsNavNodeMenu;GeneracionROPNavNode, PagoLineaNavNode
-;ARPagosNavigationServiceRequestsNavNodeMenu;;Pagos Service Requests Menu;ARPagosNavigationServiceRequestsNavNodeMenu;ARGeneracionROPNavNode, ARPagoLineaNavNode
-=======
+
+#;PagosNavigationServiceRequestsNavNodeMenu;;Pagos Service Requests Menu;PagosNavigationServiceRequestsNavNodeMenu;GeneracionROPNavNode, PagoLineaNavNode
+#;ARPagosNavigationServiceRequestsNavNodeMenu;;Pagos Service Requests Menu;ARPagosNavigationServiceRequestsNavNodeMenu;ARGeneracionROPNavNode, ARPagoLineaNavNode
+
 #->;PagosNavigationServiceRequestsNavNodeMenu;;Pagos Service Requests Menu;PagosNavigationServiceRequestsNavNodeMenu;GeneracionROPNavNode, PagoLineaNavNode
->>>>>>> dev-maria
+
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
@@ -499,15 +493,15 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
-<<<<<<< HEAD
-;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode 
-;PagoLineaNavNode ;;Pago Linea Link;PagoLineaNavNode
-;ARGeneracionROPNavNode ;;Generacion ROP Link;ARGeneracionROPNavNode 
-;ARPagoLineaNavNode ;;Pago Linea Link;ARPagoLineaNavNode
-=======
+
+#;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode 
+#;PagoLineaNavNode ;;Pago Linea Link;PagoLineaNavNode
+#;ARGeneracionROPNavNode ;;Generacion ROP Link;ARGeneracionROPNavNode 
+#;ARPagoLineaNavNode ;;Pago Linea Link;ARPagoLineaNavNode
+
 #->;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode 
 #->;PagoLineaNavNode ;;Pago Linea Link;PagoLineaNavNode
->>>>>>> dev-maria
+
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
@@ -621,15 +615,15 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #->FIN dev-eduardo Agregar menu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
-<<<<<<< HEAD
-;GeneracionROPNavNodeEntry;;Generacion ROP Navigation Node Entry;GeneracionROPNavNode;GeneracionROPLink
-;PagoLineaNavNodeEntry;;Pago linea Navigation Node Entry;PagoLineaNavNode;PagoLineaLink
-;ARGeneracionROPNavNodeEntry;;Generacion ROP Navigation Node Entry;ARGeneracionROPNavNode;GeneracionROPLink
-;ARPagoLineaNavNodeEntry;;Pago linea Navigation Node Entry;ARPagoLineaNavNode;PagoLineaLink
-=======
+
+#;GeneracionROPNavNodeEntry;;Generacion ROP Navigation Node Entry;GeneracionROPNavNode;GeneracionROPLink
+#;PagoLineaNavNodeEntry;;Pago linea Navigation Node Entry;PagoLineaNavNode;PagoLineaLink
+#;ARGeneracionROPNavNodeEntry;;Generacion ROP Navigation Node Entry;ARGeneracionROPNavNode;GeneracionROPLink
+#;ARPagoLineaNavNodeEntry;;Pago linea Navigation Node Entry;ARPagoLineaNavNode;PagoLineaLink
+
 #->;GeneracionROPNavNodeEntry;;Generacion ROP Navigation Node Entry;GeneracionROPNavNode;GeneracionROPLink
 #->;PagoLineaNavNodeEntry;;Pago linea Navigation Node Entry;PagoLineaNavNode;PagoLineaLink
->>>>>>> dev-maria
+
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
