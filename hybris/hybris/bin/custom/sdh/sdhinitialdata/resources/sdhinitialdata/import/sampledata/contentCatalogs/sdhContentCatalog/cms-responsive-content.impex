@@ -92,7 +92,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;TramitesLink; TRAMITES LINK    ; "/contibuyentes/tramites" ;;;;;
 ; ;FacturacionLink; FACTURACION LINK    ; "#" ;;;;;
 ; ;DeclaracionesLink; DECLARACIONES LINK    ; "#" ;;;;;
-; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
+#->; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
 ; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
@@ -138,8 +138,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGOS 04/01/2019
-; ; GeneracionROPLink            ; GENERACION ROP                      ; "/contribuyentes/rop" ;;;;;
-; ; PagoLineaLink                ; PAGO LINEA                          ; "/contribuyentes/presentar-declaracion" ;;;;;
+#->; ; GeneracionROPLink            ; GENERACION ROP                      ; "/contribuyentes/rop" ;;;;;
+#->; ; PagoLineaLink                ; PAGO LINEA                          ; "/contribuyentes/presentar-declaracion" ;;;;;
 #->FIN dev-eduardo Agregar submenu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
@@ -234,10 +234,10 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=tr
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
 #;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
-;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode
+;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,ConsultaNavigationNode 
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
-;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,PagosNavigationNode,ARConsultaNavigationNode
+;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
 ;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 
@@ -278,7 +278,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;TramitesNavigationNode;;Tramites Menu;TramitesNavigationNode;TramitesNavigationServiceRequestsNavNodeMenu
 ;FacturacionNavigationNode;;Facturacion Menu;FacturacionNavigationNode;FacturacionNavigationServiceRequestsNavNodeMenu
 ;DeclaracionesNavigationNode;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesNavigationServiceRequestsNavNodeMenu
-;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
+#->;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
 ;ConsultaNavigationNode;;Consultas Menu;ConsultaNavigationNode;ConsultaNavigationServiceRequestsNavNodeMenu
 ;ARConsultaNavigationNode;;Consultas Menu;ARConsultaNavigationNode;ARConsultaNavigationServiceRequestsNavNodeMenu
 ;ReportantesNavigationNode;;Reportantes Menu;ReportantesNavigationNode;ReportantesNavigationServiceRequestsNavNodeMenu
@@ -318,7 +318,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;TramitesNavigationNodeEntry;;Tramites Menu;TramitesNavigationNode;TramitesLink;
 ;FacturacionNavigationNodeEntry;;Facturacion Menu;FacturacionNavigationNode;FacturacionLink;
 ;DeclaracionesNavigationNodeEntry;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesLink;
-;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
+#->;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
 ;ConsultaNavigationNodeEntry;;Consulta Menu;ConsultaNavigationNode;ConsultasLink;
 ;ARConsultaNavigationNodeEntry;;Consulta Menu;ARConsultaNavigationNode;ConsultasLink;
 ;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
@@ -375,7 +375,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
-;PagosNavigationServiceRequestsNavNodeMenu;;Pagos Service Requests Menu;PagosNavigationServiceRequestsNavNodeMenu;GeneracionROPNavNode, PagoLineaNavNode
+#->;PagosNavigationServiceRequestsNavNodeMenu;;Pagos Service Requests Menu;PagosNavigationServiceRequestsNavNodeMenu;GeneracionROPNavNode, PagoLineaNavNode
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
@@ -480,8 +480,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
-;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode 
-;PagoLineaNavNode ;;Pago Linea Link;PagoLineaNavNode
+#->;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode 
+#->;PagoLineaNavNode ;;Pago Linea Link;PagoLineaNavNode
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
@@ -595,8 +595,8 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #->FIN dev-eduardo Agregar menu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
-;GeneracionROPNavNodeEntry;;Generacion ROP Navigation Node Entry;GeneracionROPNavNode;GeneracionROPLink
-;PagoLineaNavNodeEntry;;Pago linea Navigation Node Entry;PagoLineaNavNode;PagoLineaLink
+#->;GeneracionROPNavNodeEntry;;Generacion ROP Navigation Node Entry;GeneracionROPNavNode;GeneracionROPLink
+#->;PagoLineaNavNodeEntry;;Pago linea Navigation Node Entry;PagoLineaNavNode;PagoLineaLink
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
@@ -1506,7 +1506,7 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 ;;TramitesLink Logged in User;anonymousUserRestriction;TramitesLinkloggedInUser;TramitesLink
 ;;FacturacionLink Logged in User;anonymousUserRestriction;FacturacionLinkloggedInUser;FacturacionLink
 ;;DeclaracionesLink Logged in User;anonymousUserRestriction;DeclaracionesLinkloggedInUser;DeclaracionesLink
-;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
+#->;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
 ;;ConsultasLink Logged in User;anonymousUserRestriction;ConsultasLinkloggedInUser;ConsultasLink
 ;;ReportantesLink Logged in User;anonymousUserRestriction;RecaudacionLinkloggedInUser;ReportantesLink
 

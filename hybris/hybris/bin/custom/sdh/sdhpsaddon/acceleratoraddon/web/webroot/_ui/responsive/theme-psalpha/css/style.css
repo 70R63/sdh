@@ -24576,7 +24576,7 @@ th {
   margin-bottom: 30px;
 }
 .titulo--ser-rel {
-  font-family: Rajdhani;
+  font-family: Helvetica;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -24599,7 +24599,7 @@ th {
 .titulo-caja--ser-rel,
 span.pasos {
   font-weight: 700;
-  font-family: Rajdhani;
+  font-family: Helvetica;
 }
 span.pasos {
   padding: 1px 22px;
@@ -24621,7 +24621,7 @@ span.paso--uno {
 .titulo-caja--ser-rel,
 span.pasos {
   font-weight: 700;
-  font-family: Rajdhani;
+  font-family: Helvetica;
 }
 .titulo-caja--ser-rel {
   font-size: 1.25em;
