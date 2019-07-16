@@ -24748,6 +24748,14 @@ span.pasos {
     width: 100%;
     margin-bottom: 1px;
   }
+  .color-sr1,
+  .color-sr2,
+  .color-sr3 {
+    font-size: 13px;
+  }
+  span.pasos {
+    font-size: 27px;
+  }
 }
 @media (min-width: 321px) and (max-width: 769px) {
   .container_new {
