@@ -348,6 +348,9 @@
         			<attribute qualifier="objectNumber" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
+        			<attribute qualifier="anoGravable" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
        			</attributes>
 	        </itemtype>
 	        <itemtype code="SDHGasTax" autocreate="true" generate="true">

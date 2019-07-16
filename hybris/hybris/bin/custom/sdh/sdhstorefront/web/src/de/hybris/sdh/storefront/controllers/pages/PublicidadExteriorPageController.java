@@ -125,7 +125,7 @@ public class PublicidadExteriorPageController extends AbstractPageController
 				eachImpuestoPE.setNumObjeto(eachPublicityTax.getObjectNumber());
 				eachImpuestoPE.setNumResolu(eachPublicityTax.getResolutionNumber());
 				eachImpuestoPE.setTipoValla(eachPublicityTax.getFenceType());
-
+				eachImpuestoPE.setAnoGravable(eachPublicityTax.getAnoGravable());
 				if ("VALLA VEHICULOS".equalsIgnoreCase(eachPublicityTax.getFenceType())
 						|| "VALLA VEHíCULOS".equalsIgnoreCase(eachPublicityTax.getFenceType()))
 				{

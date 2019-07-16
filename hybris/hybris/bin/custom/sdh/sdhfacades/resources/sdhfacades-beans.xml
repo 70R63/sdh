@@ -102,6 +102,7 @@
 		<property name="resolutionNumber" type="String"/>
 		<property name="objectNumber" type="String"/>
 		<property name="fenceType" type="String"/>
+		<property name="anoGravable" type="String"/>
 	</bean>
 	
 	<bean class="de.hybris.sdh.facades.questions.data.SDHAgentData">	

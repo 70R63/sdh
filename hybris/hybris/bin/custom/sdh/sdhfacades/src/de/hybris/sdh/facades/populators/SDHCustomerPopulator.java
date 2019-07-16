@@ -135,7 +135,7 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 				eachData.setFenceType(eachModel.getFenceType());
 				eachData.setObjectNumber(eachModel.getObjectNumber());
 				eachData.setResolutionNumber(eachModel.getResolutionNumber());
-
+				eachData.setAnoGravable(eachModel.getAnoGravable());
 				peTaxDatas.add(eachData);
 			}
 
