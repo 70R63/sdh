@@ -138,8 +138,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGOS 04/01/2019
-; ; GeneracionROPLink            ; GENERACION ROP                      ; http://www.stateofrosebud.com/about ;;;;;
-; ; PagoLineaLink                ; PAGO LINEA                          ; /contribuyentes/presentar-declaracion ;;;;;
+; ; GeneracionROPLink            ; GENERACION ROP                      ; "/contribuyentes/rop" ;;;;;
+; ; PagoLineaLink                ; PAGO LINEA                          ; "/contribuyentes/presentar-declaracion" ;;;;;
 #->FIN dev-eduardo Agregar submenu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
