@@ -7,7 +7,6 @@
 <%@ taglib prefix="declaraciones"
 	tagdir="/WEB-INF/tags/responsive/consultas"%>
 
-<div class="container_new_page">
+
 	<declaraciones:certificacionDeclaraciones/>
-</div>
 

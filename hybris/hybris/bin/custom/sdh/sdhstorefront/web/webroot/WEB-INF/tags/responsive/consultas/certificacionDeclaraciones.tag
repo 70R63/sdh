@@ -62,7 +62,7 @@
 </c:choose>
 
 
-<div class="container">
+<div class="container_new_page">
 	<div class="row">
 		<div class="headline">
 			<h2 align="center">
@@ -82,7 +82,7 @@
 		<div class="row">
 			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
 				<span class="paso--uno pasos color-sr1">1</span>
-				<h2 class="titulo-caja--ser-rel color-sr1 ">¿QUÉ QUIERES HACER?</h2>
+				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICAR DECLARACIÓN</h2>
 				<p class="pasoClase1 metrophobic">Selecciona el impuesto que deseas consultar.</p>
 				<div class="caja--ser-rel color-sr1">
 					<formElement:formSelectBox idKey="tipoimp"
@@ -105,7 +105,7 @@
 							labelKey="certideclara.inicial.aniograv" path="aniograv"
 							mandatory="true" skipBlank="false"
 							skipBlankMessageKey="SELECCIONAR" items="${aniGravable}"
-							selectCSSClass="newalto form-control"
+							selectCSSClass="new_alto form-control"
 							onchange="onChangeAnioGravable()" />
 					</div>
 				</div>
@@ -120,7 +120,7 @@
 					</h2>
 					<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
 					<div class="caja--ser-rel color-sr2">
-						<select id="aniograv" class="newalto form-control "
+						<select id="aniograv" class="new_alto form-control "
 							name="aniograv">
 							<option value="">Seleccionar</option>
 							<option value="2019">2019</option>
