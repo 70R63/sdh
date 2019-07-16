@@ -393,14 +393,21 @@
 		</c:choose>
 		
 		<div class="row">
+		<div class="col-md-1">
+				<div class="form-group">
+					
+						<span class="">Proyecto</span>
+				</div>
+			</div>
 			<div class="col-md-5">
 				<div class="form-group">
-					<select  id="idaporte" ${projectDisable } class="etiqlargas form-control" onchange="showtarifa(this)" style="text-transform: none !important; font-weight: normal !important; font-size: 14px;">
+					<select  id="idaporte" ${projectDisable } class="etiqlargas form-control" onchange="showtarifa(this)" style="text-transform: none !important; font-weight: normal !important; font-size: 14px;"  style="margin-left:-340px">
 						<option value="0">Seleccionar</option>
 						<option value="01" ${fortalecimientoOptionSelected }>Fortalecimiento de la seguridad ciudadana </option>
 						<option value="02" ${financimientoOptionSelected }>Financiación de la educación superior</option></select>
 				</div>
 			</div>
+			
 		</div>
 		
 		
@@ -414,6 +421,7 @@
 						<option value="10.00" ${tarifa2_10OptionSelected }>10.00</option></select>
 				</div>
 			</div>
+			
 		</div>
 		<div class="row">
 			<div class="col-md-5">
@@ -423,17 +431,25 @@
 						<option value="3.00" ${tarifa1_3OptionSelected }>3.00</option>
 						<option value="5.00" ${tarifa1_5OptionSelected }>5.00</option>
 						<option value="10.00" ${ tarifa1_10OptionSelected}>10.00</option></select>
+						
 				</div>
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-md-1">
+						<div class="form-group">
+							<span class="">Tarifa</span>
+						</div>
+					</div>
 			<div class="col-md-5">
 				<div class="form-group">
-					<select id="emptyTarifa" ${tarifa1Disable} class="etiqlargas form-control" style="${emptyTarifaDisplay} text-transform: none !important; font-weight: normal !important; font-size: 14px;">
+					<select id="emptyTarifa" ${tarifa1Disable} class="etiqlargas form-control" style="${emptyTarifaDisplay} text-transform: none !important; font-weight: normal !important; font-size: 14px;"  style="margin-left: -345px;">
 						<option value="">Seleccionar</option>
 					</select>
+				
 				</div>
 			</div>
+			
 		</div>
 		<div class="row">
 			<div class="col-md-5">

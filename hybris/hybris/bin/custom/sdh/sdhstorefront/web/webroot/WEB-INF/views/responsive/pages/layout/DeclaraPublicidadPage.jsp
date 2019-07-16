@@ -10,22 +10,21 @@
 
 
 <div class="row">
-<!-- 	<div class="container"> -->
-		<div class="account-section-content">
-			<div class="account-section-form">
-				<form:form
-					action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion"
-					method="post" commandName="declaPublicidadForm">
-					<DeclaraPubli:DecPuGeneral />
-					<DeclaraPubli:DecPuInfoValla />
-					<DeclaraPubli:DecPuTotalPag />
-					<%-- 					<DeclaraPubli:DecPuFirmDecl /> --%>
-					<DeclaraPubli:DecPuFirmas />
-				</form:form>
-				<DeclaraPubli:DecPuPago />
-			</div>
+	<!-- 	<div class="container"> -->
+	<div class="account-section-content">
+		<div class="account-section-form">
+			<form:form
+				action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion"
+				method="post" commandName="declaPublicidadForm">
+				<DeclaraPubli:DecPuGeneral />
+				<DeclaraPubli:DecPuInfoValla />
+				<DeclaraPubli:DecPuTotalPag />
+				<DeclaraPubli:DecPuFirmas />
+			</form:form>
+			<DeclaraPubli:DecPuPago />
 		</div>
-<!-- 	</div> -->
+	</div>
+	<!-- 	</div> -->
 </div>
 
 <div id="dialogPublicidadExterior" title="Publicidad Exterior">

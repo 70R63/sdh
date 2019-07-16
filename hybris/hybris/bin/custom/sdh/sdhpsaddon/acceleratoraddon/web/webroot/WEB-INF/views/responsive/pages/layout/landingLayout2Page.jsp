@@ -12,7 +12,7 @@
 		<c:if test="${hasCORol }">
 			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 				<a href="<c:url value='/setRole?role=sdh_01' />">
-					<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+					<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
 						<img title="Contribuyente" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/contribuyentes.png">
 					</div>
 					<div class="card-section  col-xs-8 col-sm-10 col-md-10">
@@ -27,7 +27,7 @@
 		<c:if test="${hasAARol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_02' />">
-				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+				<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
 					<img title="Agentes Autorizados" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/agentes_autorizados.png">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
@@ -42,7 +42,7 @@
 		<c:if test="${hasTARol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_03' />">
-				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+				<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
 					<img title="Terceros Autorizados" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/terceros_autorizados.png">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
@@ -57,7 +57,7 @@
 		<c:if test="${hasARRol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_04' />">
-				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+				<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
 					<img title="Agente Retenedor" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/agente_retenedor.png">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
@@ -72,7 +72,7 @@
 		<c:if test="${hasRIRol }">
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_05' />">
-				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
+				<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
 					<img title="Reportates de Información" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/reportante_de_informacion.png">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">

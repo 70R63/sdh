@@ -31,7 +31,7 @@
 			class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/contibuyentes/tramites/crear' />">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
-					<img title="crear" alt="crear" class="card-section-content"
+					<img title="crear" alt="crear" class="card-section-content imgagen_tran"
 						src="${themeResourcePath}/images/crear_tramites.jpg">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
@@ -57,7 +57,7 @@
 			class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/contibuyentes/tramites/seguimiento' />">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
-					<img title="seguimiento" alt="seguimiento" class="card-section-content"
+					<img title="seguimiento" alt="seguimiento" class="card-section-content imgagen_tran"
 						src="${themeResourcePath}/images/seguimiento_tramites.jpg">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
