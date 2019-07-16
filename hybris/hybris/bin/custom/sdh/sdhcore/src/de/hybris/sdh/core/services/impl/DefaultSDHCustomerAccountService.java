@@ -691,7 +691,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 					eachNewPETaxModel.setResolutionNumber(eachPETax.getNumResolu());
 					eachNewPETaxModel.setFenceType(eachPETax.getTipoValla());
 					eachNewPETaxModel.setObjectNumber(eachPETax.getNumObjeto());
-
+					eachNewPETaxModel.setAnoGravable(eachPETax.getAnoGravable());
 
 					newPETaxModels.add(eachNewPETaxModel);
 

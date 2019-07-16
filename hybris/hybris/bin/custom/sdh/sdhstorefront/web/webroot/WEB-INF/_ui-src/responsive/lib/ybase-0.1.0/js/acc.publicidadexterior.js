@@ -355,7 +355,7 @@ ACC.publicidadexterior = {
 	    	 $(document).on("click", ".labelVer", function (e) {
 		 	        e.preventDefault();
 		 	        
-		 	        var anoGravable  = $.trim($("#anio").val());
+		 	        var anoGravable  = $.trim($(this).attr("data-anogravable"));
 		 	        var tipoValla = $.trim($(this).attr("data-tipoValla"));
 		 	       var numResolu = $.trim($(this).attr("data-numRes"));
 		 	        
@@ -373,7 +373,7 @@ ACC.publicidadexterior = {
 		 	        
 		 	        $("#selectedTipoValla").val(tipoValla);
 		 	       $("#selectedNumRes").val(numResolu);
-		 	        
+		 	      $("#anio").val(anoGravable)
 		 	       var data={};
 			        
 			       data.numResolu = numResolu;

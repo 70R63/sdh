@@ -138,7 +138,7 @@
 				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
 					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
 					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
-					<p class="pasoClase3 metrophobic">selecciona el periodo.</p>
+					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 					<div class="caja--ser-rel color-sr3">
 						<select aria-required="true" id="periodo"
 							class="new_alto form-control " name="periodo" required='required'>

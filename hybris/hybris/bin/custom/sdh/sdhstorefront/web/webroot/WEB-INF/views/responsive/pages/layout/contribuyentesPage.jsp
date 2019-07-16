@@ -70,17 +70,40 @@
 	<!-- 		</div> -->
 	<!-- 	</div> -->
 	<!-- </div> -->
-</template:page>
+
 
 <div class="container_new_page" >
 
 	<img class="delededucciones"
 		src="${themeResourcePath}/images/contribuyentes_1.jpg"></img>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-
+</template:page>
 
 
 
