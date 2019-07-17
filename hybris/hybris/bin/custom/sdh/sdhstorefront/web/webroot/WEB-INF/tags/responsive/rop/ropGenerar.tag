@@ -8,7 +8,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<div class="container_new_page">
 	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
@@ -18,7 +18,8 @@
 					size="30" value="" />
 			</div>
 		</div>
-
+	</div>
+	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
@@ -27,35 +28,37 @@
 					size="30" value="" />
 			</div>
 		</div>
-
+	</div>
+	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="rop.generar.parcial" /></label> <input
-					class="form-control new_alto" type="text"
-					size="30" value="" />
+					class="form-control new_alto" type="text" size="30" value="" />
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-2">
+		<button style="margin-top: 26px; margin-bottom: 15px;" id=""
+				class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
+				<spring:theme code="rop.generar.regresar" />
+			</button>
+		
+			
+		</div>
+		<div class="col-md-2">
 			<button style="margin-top: 26px; margin-bottom: 15px;" id=""
 				class="btn btn-primary btn-lg" onclick="" type="button">
 				<spring:theme code="rop.generar.genrop" />
-			</button>
-		</div>
-		<div class="col-md-3">
-			<button style="margin-top: 26px; margin-bottom: 15px;" id=""
-				class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
-				<spring:theme code="rop.generar.regresar" />
 			</button>
 		</div>
 	</div>
 </div>
 
 <script>
-function goBack() {
-	window.history.back();
-}
+	function goBack() {
+		window.history.back();
+	}
 </script>
 

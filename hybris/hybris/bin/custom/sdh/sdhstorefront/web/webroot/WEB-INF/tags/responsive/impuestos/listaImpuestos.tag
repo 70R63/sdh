@@ -20,31 +20,44 @@
 <div class="container_new_page">
 	<sf:form action="presentar-declaracion?action=presentarDeclaracion"
 		method="POST" modelAttribute="dataForm" id="forma">
-		<div class="col-md-10 col-md-offset-2">
-			<div class="row">
-				<div class="col-md-3">
+
+		<div class="row">
+			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
+				<span class="paso--uno pasos color-sr1">1</span>
+				<h2 class="titulo-caja--ser-rel color-sr1 label-control">PRESENTAR
+					DECLARACIÓN</h2>
+				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
+					deseas consultar.</p>
+				<div class="caja--ser-rel color-sr1">
 					<div class="form-group ">
 						<label class="control-label required"><spring:theme
 								code="impuestos.presentarDeclaracion.impuesto" /></label>
 						<sf:select path="impuesto" id="impuesto" items="${tpImpuesto}"
-							referenceData="${dataForm.impuesto}" class="new_alto form-control"
-							onchange="onChange()">
+							referenceData="${dataForm.impuesto}"
+							class="new_alto form-control" onchange="onChange()">
 						</sf:select>
 					</div>
 				</div>
+			</div>
 
 
-				<div id="impuestoss" style="display: none;">
-					<input value="${dataForm.optionPubliExt}" id="impuestoPE" />
-				</div>
-				<div id="impuestoss2" style="display: none;">
-					<input value="${dataForm.optionGas}" id="impuestoGas" />
-				</div>
+			<div id="impuestoss" style="display: none;">
+				<input value="${dataForm.optionPubliExt}" id="impuestoPE" />
+			</div>
+			<div id="impuestoss2" style="display: none;">
+				<input value="${dataForm.optionGas}" id="impuestoGas" />
+			</div>
 
-				<input type="hidden" name="skipReques" value="" />
+			<input type="hidden" name="skipReques" value="" />
 
-				<c:if test="${dataForm.impuesto != '3'}">
-					<div class="col-md-2">
+			<c:if test="${dataForm.impuesto != '3'}">
+				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
+					<span class="paso--dos pasos color-sr2">2</span>
+					<h2 class="titulo-caja--ser-rel color-sr2 ">
+						<span class="paso2">AÑO GRAVABLE</span>
+					</h2>
+					<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+					<div class="caja--ser-rel color-sr2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
@@ -55,10 +68,17 @@
 								class="newalto form-control" onchange="onChangeAnioGravable()" />
 						</div>
 					</div>
-				</c:if>
+				</div>
+			</c:if>
 
-				<c:if test="${dataForm.impuesto == '3'}">
-					<div class="col-md-2">
+			<c:if test="${dataForm.impuesto == '3'}">
+				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
+					<span class="paso--dos pasos color-sr2">2</span>
+					<h2 class="titulo-caja--ser-rel color-sr2 ">
+						<span class="paso2">AÑO GRAVABLE</span>
+					</h2>
+					<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+					<div class="caja--ser-rel color-sr2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
@@ -67,11 +87,16 @@
 								referenceData="${icaAnioGravable}" class="newalto form-control" />
 						</div>
 					</div>
-				</c:if>
+				</div>
+			</c:if>
 
-				<c:if
-					test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
-					<div class="col-md-2">
+			<c:if
+				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
+					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
+					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
+					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
+					<div class="caja--ser-rel color-sr3">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.Periodo" /></label>
@@ -81,11 +106,15 @@
 								class="newalto form-control" />
 						</div>
 					</div>
-				</c:if>
+				</div>
+			</c:if>
 
-				<c:if
-					test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">
-					<div class="col-md-2">
+			<c:if test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
+					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
+					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
+					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
+					<div class="caja--ser-rel color-sr3">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.Periodo" /></label>
@@ -94,24 +123,25 @@
 								referenceData="${icaPeriodo}" class="new_alto form-control" />
 						</div>
 					</div>
-				</c:if>
-			</div>
-
-
-			<c:if
-				test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-9 text-center">
-						<sf:button action="${presentarDeclaracionUrl}" type="submit"
-							class="btn btn-primary btn-lg" id="action" name="" value=""
-							style="width: 187px !important">
-							<spring:theme
-								code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
-						</sf:button>
-					</div>
 				</div>
 			</c:if>
 		</div>
+
+
+		<c:if
+			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
+					<sf:button action="${presentarDeclaracionUrl}" type="submit"
+						class="btn btn-primary btn-lg" id="action" name="" value=""
+						style="margin-top: 15px">
+						<spring:theme
+							code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
+					</sf:button>
+				</div>
+			</div>
+		</c:if>
+
 	</sf:form>
 	<br>
 
@@ -167,13 +197,13 @@
 				<c:forEach var="item" items="${delineacionWithRadicadosList}">
 					<div class="row">
 						<div class="col-sm-2">
-							<input class="new_alto form-control" disabled="disabled" type="text"
-								value="${item.cdu}"
+							<input class="new_alto form-control" disabled="disabled"
+								type="text" value="${item.cdu}"
 								style="height: 32px !important; margin-bottom: 9px !important" />
 						</div>
 						<div class="col-sm-3">
 							<select id="selctipobliga" class="newalto form-control"
-								onchange="ShowSelected(this)" >
+								onchange="ShowSelected(this)">
 								<option value="0-${item.cdu}">Seleccionar</option>
 								<option value="1-${item.cdu}">Declaración</option>
 								<option value="2-${item.cdu}">Retención</option>
@@ -237,29 +267,29 @@
 </div>
 <br>
 <br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <!-- se agrega control para tablas de delineación -->
 <script type="text/javascript">

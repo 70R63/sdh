@@ -83,7 +83,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<button type="button" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px" onclick="window.location.href ='<c:url value='https://publicsector.localhost:9002/sdhstorefront/es/contribuyentes/rop' />';">
+							name="action" value="generar" style="margin-top: 3px" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">
 							<spring:theme code="obligacion.sujeto.predial.genrop" />
 						</button>
 					</div>
@@ -162,7 +162,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<button type="button" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px" onclick="window.location.href ='<c:url value='https://publicsector.localhost:9002/sdhstorefront/es/contribuyentes/rop' />';">
+							name="action" value="generar" style="margin-top: 3px" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">
 							<spring:theme code="obligacion.sujeto.ica.genrop" />
 						</button>
 					</div>
@@ -254,7 +254,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<button type="button" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px" onclick="window.location.href ='<c:url value='https://publicsector.localhost:9002/sdhstorefront/es/contribuyentes/rop' />';">
+							name="action" value="generar" style="margin-top: 3px" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">
 							<spring:theme code="obligacion.sujeto.vehiculos.genrop" />
 						</button>
 					</div>
@@ -342,7 +342,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<button type="button" class="btn btn-primary btn-lg" id="action"
-							name="action" value="generar" style="margin-top: 3px" onclick="window.location.href ='<c:url value='https://publicsector.localhost:9002/sdhstorefront/es/contribuyentes/rop' />';">
+							name="action" value="generar" style="margin-top: 3px" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">
 							<spring:theme code="obligacion.sujeto.delurbana.genrop" />
 						</button>
 					</div>

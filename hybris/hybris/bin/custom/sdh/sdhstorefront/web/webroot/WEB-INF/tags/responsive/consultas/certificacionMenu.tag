@@ -6,11 +6,13 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
+<%@ taglib prefix="formElement"
+	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/contribuyentes/consultas/certipagos" var="certificacionURL" htmlEscape="false" />
-	
+<spring:url value="/contribuyentes/consultas/certipagos"
+	var="certificacionURL" htmlEscape="false" />
+
 <script>
 	function onChange(anoGravableGasolina,anoGravablePublicidad) {
 			form = document.getElementById("form_pdf");
@@ -47,116 +49,148 @@
 	downloadPDF('${imprimePagoResponse.stringPDF}');
 </script>
 
-<c:choose>        
-   <c:when test = "${certiFormPost.idimp == 4}">
-      <c:set var = "anioGravable" value = "${anoGravablePublicidad}"/>
-   </c:when>
-         
-   <c:when test = "${certiFormPost.idimp == 5 or certiFormPost.idimp == 3 or certiFormPost.idimp == 6}">
-      <c:set var = "anioGravable" value = "${anoGravableGasolina}"/>
-   </c:when>
-   
-         
-   <c:otherwise>
-   </c:otherwise>
+<c:choose>
+	<c:when test="${certiFormPost.idimp == 4}">
+		<c:set var="anioGravable" value="${anoGravablePublicidad}" />
+	</c:when>
+
+	<c:when
+		test="${certiFormPost.idimp == 5 or certiFormPost.idimp == 3 or certiFormPost.idimp == 6}">
+		<c:set var="anioGravable" value="${anoGravableGasolina}" />
+	</c:when>
+
+
+	<c:otherwise>
+	</c:otherwise>
 </c:choose>
 
 
-	<div class="container_new_page">
-		<div class="row">
-			<div class="headline">
-				<h2 align="center">
-					<span><spring:theme code="certificacion.inicial.titulo" /> </span> 
-				</h2>
-			</div>
-		</div>	
-		
-		<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certipagos" method="post" commandName="certiFormPost" >
-			
-			<input type="hidden" name="numBP" value="${certiForm.numBP}"/>
-			<input type="hidden" name="rowFrompublicidadTable" value=""/>
-			
-			<div class="row">
-				<div class="col-md-2">
-					<div class="form-group">						
-						<formElement:formSelectBox idKey="impuesto" 
-							labelKey="certideclara.inicial.selcimpuesto" 
-							path="tipoImp" mandatory="true" 
-							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
-							items="${impuesto}" selectCSSClass="newalto form-control"/>
-					</div>
-				</div>
-			
-				<div class="col-md-3" id="idImpuesto" style="display: block;">
-					<div class="form-group">
-						<formElement:formSelectBox idKey="Idimp" 
-							labelKey="certideclara.inicial.selcimpuesto" 
-							path="Idimp" mandatory="true" 
-							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
-							items="${tipoDeImpuesto}" selectCSSClass="newalto form-control" onchange="onChange()"/>
-					</div>
-				</div>
-				
-				<div class="col-md-2" id="idAnio" style="display: block;">
-					<div class="form-group">
-						<formElement:formSelectBox idKey="aniograv" 
-							labelKey="certideclara.inicial.aniograv" 
-							path="aniograv" mandatory="true" 
-							skipBlank="false" skipBlankMessageKey="SELECCIONAR"  
-							items="${anioGravable}" selectCSSClass="newalto form-control" onchange="onChangeAnioGravable()"/>
-					</div>
-				</div>
-				
-				<c:if test="${certiFormPost.idimp ne '4' and certiFormPost.idimp ne '3' and certiFormPost.idimp ne '6'}">
-				<div class="col-md-2" id="idPeriodo" style="display: block;">
-					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.periodo" /></label> <select
-							aria-required="true" id="periodo" class="newalto form-control "
-							name="periodo"
-							required='required'>
-							<option value="">Seleccionar</option>
-							<option value="01">1-Enero</option>
-							<option value="02">2-Febrero</option>
-							<option value="03">3-Marzo</option>
-							<option value="04">4-Abril</option>
-							<option value="05">5-Mayo</option>
-							<option value="06">6-Junio</option>
-							<option value="07">7-Julio</option>
-							<option value="08">8-Agosto</option>
-							<option value="09">9-Septiembre</option>
-							<option value="10">10-Octubre</option>
-							<option value="11">11-Noviembre</option>
-							<option value="12">12-Diciembre</option>
-						</select>
-					</div>
-				</div>
-				</c:if>
-				
-				<c:if test="${certiFormPost.idimp == '3' and  isPeriodoAnual == false}">
-				<div class="col-md-2" id="idPeriodo" style="display: block;">
-					<div class="form-group">
-						<label class="control-label required"><spring:theme
-								code="certificacion.inicial.periodo" /></label>	
-					<select  id="periodo" class="newalto form-control "	name="periodo" >
-						<option value="">Seleccionar</option>
-						<option value="B1">1 - Ene / Feb</option>
-						<option value="B2">2 - Mar / Abr</option>
-						<option value="B3">3 - May / Jun</option>
-						<option value="B4">4 - Jul / Ago</option>
-						<option value="B5">5 - Sep / Oct</option>
-						<option value="B6">6 - Nov / Dic</option>
-					</select>
-				</div>
-				</div>	
-				</c:if>
-							
+<div class="container_new_page">
+	<div class="row">
+		<div class="headline">
+			<h2 align="center">
+				<span><spring:theme code="certificacion.inicial.titulo" /> </span>
+			</h2>
 		</div>
-		
-		
+	</div>
+
+	<form:form id="form_pdf"
+		action="/sdhstorefront/es/contribuyentes/consultas/certipagos"
+		method="post" commandName="certiFormPost">
+
+		<input type="hidden" name="numBP" value="${certiForm.numBP}" />
+		<input type="hidden" name="rowFrompublicidadTable" value="" />
+
+		<div class="row">
+			<!-- 				<div class="col-md-2"> -->
+			<!-- 					<div class="form-group">						 -->
+			<%-- 						<formElement:formSelectBox idKey="impuesto"  --%>
+			<%-- 							labelKey="certideclara.inicial.selcimpuesto"  --%>
+			<%-- 							path="tipoImp" mandatory="true"  --%>
+			<%-- 							skipBlank="false" skipBlankMessageKey="SELECCIONAR"   --%>
+			<%-- 							items="${impuesto}" selectCSSClass="newalto form-control"/> --%>
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+
+			<div class="col-md-4 col-xs-12 mb-20 no-marginright" id="idImpuesto"
+				style="display: block;">
+				<span class="paso--uno pasos color-sr1">1</span>
+				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICACIÓN DE
+					PAGO</h2>
+				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
+					deseas consultar.</p>
+				<div class="caja--ser-rel color-sr1">
+					<div class="form-group">
+						<formElement:formSelectBox idKey="Idimp"
+							labelKey="certideclara.inicial.selcimpuesto" path="Idimp"
+							mandatory="true" skipBlank="false"
+							skipBlankMessageKey="SELECCIONAR" items="${tipoDeImpuesto}"
+							selectCSSClass="newalto form-control" onchange="onChange()" />
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-12 mb-20 no-margincol" id="idAnio"
+				style="display: block;">
+				<span class="paso--dos pasos color-sr2">2</span>
+				<h2 class="titulo-caja--ser-rel color-sr2 ">
+					<span class="paso2">AÑO GRAVABLE</span>
+				</h2>
+				<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+				<div class="caja--ser-rel color-sr2">
+					<div class="form-group">
+						<formElement:formSelectBox idKey="aniograv"
+							labelKey="certideclara.inicial.aniograv" path="aniograv"
+							mandatory="true" skipBlank="false"
+							skipBlankMessageKey="SELECCIONAR" items="${anioGravable}"
+							selectCSSClass="newalto form-control"
+							onchange="onChangeAnioGravable()" />
+					</div>
+				</div>
+			</div>
+
+			<c:if
+				test="${certiFormPost.idimp ne '4' and certiFormPost.idimp ne '3' and certiFormPost.idimp ne '6'}">
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft" id="idPeriodo"
+					style="display: block;">
+					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
+					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
+					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
+					<div class="caja--ser-rel color-sr3">
+						<div class="form-group">
+							<label class="control-label required"><spring:theme
+									code="certificacion.inicial.periodo" /></label> <select
+								aria-required="true" id="periodo" class="newalto form-control "
+								name="periodo" required='required'>
+								<option value="">Seleccionar</option>
+								<option value="01">1-Enero</option>
+								<option value="02">2-Febrero</option>
+								<option value="03">3-Marzo</option>
+								<option value="04">4-Abril</option>
+								<option value="05">5-Mayo</option>
+								<option value="06">6-Junio</option>
+								<option value="07">7-Julio</option>
+								<option value="08">8-Agosto</option>
+								<option value="09">9-Septiembre</option>
+								<option value="10">10-Octubre</option>
+								<option value="11">11-Noviembre</option>
+								<option value="12">12-Diciembre</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</c:if>
+
+			<c:if
+				test="${certiFormPost.idimp == '3' and  isPeriodoAnual == false}">
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft" id="idPeriodo"
+					style="display: block;">
+					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
+					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
+					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
+					<div class="caja--ser-rel color-sr3">
+						<div class="form-group">
+							<label class="control-label required"><spring:theme
+									code="certificacion.inicial.periodo" /></label> <select id="periodo"
+								class="newalto form-control " name="periodo">
+								<option value="">Seleccionar</option>
+								<option value="B1">1 - Ene / Feb</option>
+								<option value="B2">2 - Mar / Abr</option>
+								<option value="B3">3 - May / Jun</option>
+								<option value="B4">4 - Jul / Ago</option>
+								<option value="B5">5 - Sep / Oct</option>
+								<option value="B6">6 - Nov / Dic</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</c:if>
+
+		</div>
+
+
 		<br>
-		
-		
+
+
 		<div class="row" id="table-predial" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table">
@@ -232,8 +266,8 @@
 				</table>
 			</div>
 		</div>
-		
-		
+
+
 		<div class="row" id="table-ica" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table">
@@ -287,9 +321,9 @@
 
 						</tr>
 					</thead>
-					
+
 					<tbody>
-						
+
 						<c:forEach varStatus="loop" items="${certiForm.publicidadExt}"
 							var="eachPubExtTax">
 							<tr>
@@ -300,14 +334,15 @@
 									data-tipoValla="${eachPubExtTax.tipoVallaCode}"
 									class="text-capitalize !important labelVer "><spring:theme
 											code="publicidad.exterior.ver" /></label></td> --%>
-								
+
 								<td><input id="action"
-								style="visibility: visible !important; margin: 0; min-height: 0;"
-								name="numObjetoSel" type="radio"
-								value="${eachPubExtTax.numObjeto}"
-								data-numRes="${eachPubExtTax.numResolu}"
-								data-tipoValla="${eachPubExtTax.tipoValla}" data-numObjeto="${eachPuExtTax.numObjeto}"></td>
-								
+									style="visibility: visible !important; margin: 0; min-height: 0;"
+									name="numObjetoSel" type="radio"
+									value="${eachPubExtTax.numObjeto}"
+									data-numRes="${eachPubExtTax.numResolu}"
+									data-tipoValla="${eachPubExtTax.tipoValla}"
+									data-numObjeto="${eachPuExtTax.numObjeto}"></td>
+
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -316,77 +351,85 @@
 		</div>
 
 		<c:if test="${certiFormPost.idimp ne '4'}">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<div class="form-group ">
-					<button type="button" class="btn btn-primary btn-lg" id="btnCancelar"
-						name="action" value="cancelar" style=" margin-top: 3px">
-						<spring:theme code="certificacion.inicial.cancelar" />
-					</button>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="form-group ">
+						<button type="button" class="btn btn-primary btn-lg"
+							id="btnCancelar" name="action" value="cancelar"
+							style="margin-top: 3px">
+							<spring:theme code="certificacion.inicial.cancelar" />
+						</button>
 
-					<button type="submit" class="btn btn-primary btn-lg"
-						id="generarPDFButton" name="generarPDFButton" style=" margin-top: 3px">
-						<spring:theme code="certificacion.inicial.generar" />
-					</button>
-				</div>
-			</div>
-		 </div>
-		 </c:if>	
-		 	 
-	 </form:form>
-	 
-	 
-	 
-	<c:if test="${not empty consultaPagoList}">
-	 <table id="myTable"> 
-	 	<tr>
-    		<th>NUMERO DE RESOLUCION</th>
-    		<th>TIPO DE VALLA</th> 
-    		<th>IMPRIMIR</th>
-		 </tr>
-		<c:forEach var="item" items="${consultaPagoList}">
-	 		<tr>
-    			<td><c:out value="${item.numResolu}" /></td>
-	    		<td><c:out value="${item.tipoValla}" /></td>
-	    		<td>
-	    			<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/consultas/certipagos" method="post" commandName="certiFormPost" >					
-						<input type="hidden" name="tipoImp" value="1"/>
-						<input type="hidden" name="Idimp" value="4"/>
-						<input type="hidden" name="rowFrompublicidadTable" value="X"/>
-						
-						<input type="hidden" name="numBP" value="${item.numBP}"/>
-						<input type="hidden" name="aniograv" value="${item.clavePeriodo}"/>
-						<input type="hidden" name="ctaContrato" value="${item.ctaContrato}"/>
-						<input type="hidden" name="numObjeto" value="${item.numObjeto}"/>
-						<input type="hidden" name="clavePeriodo" value="${item.clavePeriodo}"/>
-						<input type="hidden" name="referencia" value="${item.referencia}"/>
-						<input type="hidden" name="fechaCompensa" value="${item.fechaCompensa}"/>
-						<input type="hidden" name="importe" value="${item.importe}"/>
-						<input type="hidden" name="moneda" value="${item.moneda}"/>
-						<input type="hidden" name="numfactForm" value="${item.numfactForm}"/>
-						<input type="hidden" name="numDocPago" value="${item.numDocPago}"/>
-						<input type="hidden" name="numResolu" value="${item.numResolu}"/>
-						<input type="hidden" name="tipoValla" value="${item.tipoValla}"/>					
-						
-    					<button type="submit" class="btn btn-primary btn-lg" id="generarPDFButton" name="generarPDFButton">
+						<button type="submit" class="btn btn-primary btn-lg"
+							id="generarPDFButton" name="generarPDFButton"
+							style="margin-top: 3px">
 							<spring:theme code="certificacion.inicial.generar" />
 						</button>
-    				</form:form>
-    			</td>
-	  		</tr>
-  		</c:forEach>  		
-  	</table>
-  	
-  	<br>
-  	<br>
-  	
-  	<button type="button" class="btn btn-primary btn-lg" id="regresar" onclick="reiniciaConsultaPublicidad()">
-		<spring:theme code="certificacion.inicial.regresar" />
-	</button>
-	
-  	</c:if>
-  	
-  		<!-- Se agrega tabla de CDU´s para delineación -->
+					</div>
+				</div>
+			</div>
+		</c:if>
+
+	</form:form>
+
+
+
+	<c:if test="${not empty consultaPagoList}">
+		<table id="myTable">
+			<tr>
+				<th>NUMERO DE RESOLUCION</th>
+				<th>TIPO DE VALLA</th>
+				<th>IMPRIMIR</th>
+			</tr>
+			<c:forEach var="item" items="${consultaPagoList}">
+				<tr>
+					<td><c:out value="${item.numResolu}" /></td>
+					<td><c:out value="${item.tipoValla}" /></td>
+					<td><form:form id="form_pdf"
+							action="/sdhstorefront/es/contribuyentes/consultas/certipagos"
+							method="post" commandName="certiFormPost">
+							<input type="hidden" name="tipoImp" value="1" />
+							<input type="hidden" name="Idimp" value="4" />
+							<input type="hidden" name="rowFrompublicidadTable" value="X" />
+
+							<input type="hidden" name="numBP" value="${item.numBP}" />
+							<input type="hidden" name="aniograv" value="${item.clavePeriodo}" />
+							<input type="hidden" name="ctaContrato"
+								value="${item.ctaContrato}" />
+							<input type="hidden" name="numObjeto" value="${item.numObjeto}" />
+							<input type="hidden" name="clavePeriodo"
+								value="${item.clavePeriodo}" />
+							<input type="hidden" name="referencia" value="${item.referencia}" />
+							<input type="hidden" name="fechaCompensa"
+								value="${item.fechaCompensa}" />
+							<input type="hidden" name="importe" value="${item.importe}" />
+							<input type="hidden" name="moneda" value="${item.moneda}" />
+							<input type="hidden" name="numfactForm"
+								value="${item.numfactForm}" />
+							<input type="hidden" name="numDocPago" value="${item.numDocPago}" />
+							<input type="hidden" name="numResolu" value="${item.numResolu}" />
+							<input type="hidden" name="tipoValla" value="${item.tipoValla}" />
+
+							<button type="submit" class="btn btn-primary btn-lg"
+								id="generarPDFButton" name="generarPDFButton">
+								<spring:theme code="certificacion.inicial.generar" />
+							</button>
+						</form:form></td>
+				</tr>
+			</c:forEach>
+		</table>
+
+		<br>
+		<br>
+
+		<button type="button" class="btn btn-primary btn-lg" id="regresar"
+			onclick="reiniciaConsultaPublicidad()">
+			<spring:theme code="certificacion.inicial.regresar" />
+		</button>
+
+	</c:if>
+
+	<!-- Se agrega tabla de CDU´s para delineación -->
 	<!-- cambiar el número 6 por el que corresponda a delineación en caso de no ser este -->
 	<c:if test="${certiFormPost.idimp eq '16'}">
 		<div class="row">
@@ -484,7 +527,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 </div>
 <div id="dialog" title="Generar Certificacion">

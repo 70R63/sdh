@@ -141,7 +141,6 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;TramitesLink;"Trámites";"Haga clic aquí para ir a Trámites"
 ;;FacturacionLink;"Facturación";"Haga clic aquí para ir a Facturación"
 ;;DeclaracionesLink;"Declaraciones";"Haga clic aquí para ir a Declaraciones"
-;;PagosLink;"Pagos";"Haga clic aquí para ir a Pagos"
 ;;ConsultasLink;"Consultas";"Haga clic aquí para ir a las consultas"
 ;;ReportantesLink;"Mi información reportada";"Haga clic aquí para ir a su Información Reportada"
 
