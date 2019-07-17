@@ -48,8 +48,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="obligacion.inicial.selcimpuesto" /></label> <select id="impuesto"
-						class="new_alto form-control " name="impuesto"
-						onchange="Selected(this)">
+						class="new_alto form-control " name="impuesto" >
 						<option value="0">Seleccionar</option>
 						<option value="1">Predial Unificado</option>
 						<option value="2">Vehículos</option>
@@ -96,9 +95,8 @@
 			</div>
 			<div class="col-md-3">
 				<div class="form-group ">
-					<button type="button" class="btn btn-primary btn-lg" id="action"
-						name="action" value="buscar" style="margin-top: 3px"
-						onclick=" Selectedver(this)">
+					<button type="button" class="btn btn-primary btn-lg" id="buscarObliPend"
+						name="action" value="buscar" style="margin-top: 3px">
 						<spring:theme code="obligacion.inicial.buscar" />
 					</button>
 

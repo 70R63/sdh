@@ -12,7 +12,7 @@
 
 <div class="container">
 	<sf:form>
-		<div id="predial">
+		<div id="oblipend-predial" class="oblipend-table" style="display: none;">
 			<div class="row">
 				<div class="headline">
 					<h2>
@@ -99,7 +99,7 @@
 			</div>
 		</div>
 
-		<div id="ica">
+		<div id="oblipend-ica" class="oblipend-table" style="display: none;">
 			<div class="row">
 				<div class="headline">
 					<h2>
@@ -179,7 +179,7 @@
 		</div>
 
 
-		<div id="vehiculos">
+		<div id="oblipend-vehiculos" class="oblipend-table" style="display: none;">
 			<div class="row">
 				<div class="headline">
 					<h2>
@@ -271,7 +271,7 @@
 		</div>
 
 		<c:if test="${not empty customerData.urbanDelineationsTaxList }">
-			<div id="delurbana">
+			<div id="oblipend-delurbana" class="oblipend-table" style="display: none;">
 				<div class="row">
 					<div class="headline">
 						<h2>
@@ -361,7 +361,7 @@
 			</div>
 		</c:if>
 		<c:if test="${not empty customerData.gasTaxList }">
-			<div id="gasolina">
+			<div id="oblipend-gasolina" class="oblipend-table" style="display: none;">
 				<div class="row">
 					<div class="headline">
 						<h2>
@@ -436,7 +436,7 @@
 			</div>
 		</c:if>
 		<c:if test="${not empty customerData.exteriorPublicityTaxList }">
-			<div id="publiext">
+			<div id="oblipend-publiext" class="oblipend-table" style="display: none;">
 				<div class="row">
 					<div class="headline">
 						<h2>
