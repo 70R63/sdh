@@ -15,6 +15,7 @@ public class InititalizeTransactionRequest
 	private String personType;
 	private String returnRoute;
 	private String value;
+	private String bankCode;
 	private String tax;
 	private String ref1;
 	private String ref2;
@@ -40,7 +41,8 @@ public class InititalizeTransactionRequest
 	 * @param ref3
 	 */
 	public InititalizeTransactionRequest(final String nus, final String concept, final String description, final String personType,
-			final String returnRoute, final String value, final String tax, final String ref1, final String ref2, final String ref3)
+			final String returnRoute, final String value, final String tax, final String ref1, final String ref2, final String ref3,
+			final String bankCode)
 	{
 		this.nus = nus;
 		this.concept = concept;
@@ -52,6 +54,8 @@ public class InititalizeTransactionRequest
 		this.ref1 = ref1;
 		this.ref2 = ref2;
 		this.ref3 = ref3;
+		this.bankCode = bankCode;
+
 	}
 
 	/**
@@ -224,6 +228,24 @@ public class InititalizeTransactionRequest
 		this.ref3 = ref3;
 	}
 
+
+	/**
+	 * @return the bankCode
+	 */
+	public String getBankCode()
+	{
+		return bankCode;
+	}
+
+	/**
+	 * @param bankCode
+	 *           the bankCode to set
+	 */
+	public void setBankCode(final String bankCode)
+	{
+		this.bankCode = bankCode;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -234,7 +256,7 @@ public class InititalizeTransactionRequest
 	{
 		return "InititalizeTransactionRequest [nus=" + nus + ", concept=" + concept + ", description=" + description
 				+ ", personType=" + personType + ", returnRoute=" + returnRoute + ", value=" + value + ", tax=" + tax + ", ref1="
-				+ ref1 + ", ref2=" + ref2 + ", ref3=" + ref3 + "]";
+				+ ref1 + ", ref2=" + ref2 + ", ref3=" + ref3 + "bankCode=" + bankCode + "]";
 	}
 
 

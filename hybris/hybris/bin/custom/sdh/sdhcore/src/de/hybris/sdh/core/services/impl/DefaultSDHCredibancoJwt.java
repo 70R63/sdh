@@ -38,13 +38,6 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 
-	final String PRIVATE_KEY_FILE_RSA512 = InititalizeTransactionRequest.class.getClassLoader()
-			.getResource("credibanco/rsa-private.pem").getFile();
-
-	final String PUBLIC_KEY_FILE_RSA512 = InititalizeTransactionRequest.class.getClassLoader()
-			.getResource("credibanco/rsa-public.pem").getFile();
-
-	;
 
 	/*
 	 * (non-Javadoc)
@@ -56,10 +49,14 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 	public String getTransactionToken(final InititalizeTransactionRequest request, final String iss, final Date iat,
 			final String sub)
 	{
-		RSAPrivateKey privateKey = null;
-		RSAPublicKey publicKey = null;
+		final String PRIVATE_KEY_FILE_RSA512 = configurationService.getConfiguration().getString("credibanco.credential.privateKey.path");
+		final String PUBLIC_KEY_FILE_RSA512 = configurationService.getConfiguration().getString("credibanco.credential.publicKey.path");
 		final String hashMd5 = JKSUtils.getObjectToHashMd5(request);
 		final JWTCreator.Builder builder = com.auth0.jwt.JWT.create();
+		RSAPrivateKey privateKey = null;
+		RSAPublicKey publicKey = null;
+
+
 		builder.withJWTId(hashMd5).withIssuer(iss).withIssuedAt(iat).withSubject(sub);
 
 		try
@@ -101,7 +98,7 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 		rqt = new HttpEntity<InititalizeTransactionRequest>(request, headers);
 
 		LOG.info("Token [" + token + "]");
-		LOG.info("URL [" + token + "]");
+		LOG.info("URL [" + URL + "]");
 
 
 		return restTemplate.postForObject(URL, rqt, InititalizeTransactionResponse.class);
