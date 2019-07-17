@@ -86,6 +86,20 @@
 					</div>
 				</div>
 			</div>
+				<div id="divRol" class="row mt-3">
+				<div class="col-md-12 text-center">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="tramites.crear.inicial.rol" /></label> 
+						<select class="new_alto form-control !important " id=""><option value="00">Seleccionar</option>
+						<option value="01">Contribuyente</option>
+						<option value="02">Agente Retenedor</option>
+						<option value="03">Reportate de la Información</option>
+						<option value="04">Terceros Autorizados</option>
+						</select>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="row mt-3">
