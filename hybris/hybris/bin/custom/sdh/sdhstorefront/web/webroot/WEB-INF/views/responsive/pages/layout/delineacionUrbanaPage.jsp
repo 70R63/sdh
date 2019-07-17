@@ -7,14 +7,12 @@
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="desfac"
-	tagdir="/WEB-INF/tags/responsive/facturacion"%>
+
 
 <delineacionUrbana:delineacionUrbanaIDs />
 <delineacionUrbana:delineacionUrbanaCDUs />
 <delineacionUrbana:delineacionUrbanaRadicados />
-<desfac:descargaFactura/>
-<desfac:reexpedicionFactura/>
+
 
 
 <script type="text/javascript">
