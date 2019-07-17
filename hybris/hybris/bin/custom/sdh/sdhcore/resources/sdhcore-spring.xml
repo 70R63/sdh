@@ -658,7 +658,9 @@
 	
 	<bean id="sdhReteIcaService"	class="de.hybris.sdh.core.services.impl.DefaultSDHReteIcaService" />
 	<bean id="sdhValidateBankFiles"	class="de.hybris.sdh.core.services.impl.DefaultSDHValidateBankFiles" />
-	<bean id="sdhCredibancoJwt"	class="de.hybris.sdh.core.services.impl.DefaultSDHCredibancoJwt" />
+	
+	<alias alias="sdhCredibancoJwt" name="defaultSDHCredibancoJwt"/>
+	<bean id="defaultSDHCredibancoJwt" class="de.hybris.sdh.core.services.impl.DefaultSDHCredibancoJwt" />
 	
 	
 

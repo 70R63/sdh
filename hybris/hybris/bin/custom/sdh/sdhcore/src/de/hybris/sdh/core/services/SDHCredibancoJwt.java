@@ -6,7 +6,7 @@ package de.hybris.sdh.core.services;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 
-import java.io.IOException;
+import java.util.Date;
 
 
 /**
@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public interface SDHCredibancoJwt
 {
-	public String getTransactionToken(InititalizeTransactionRequest request, String iss, String iat, String sub)
-			throws IOException;
+	public String getTransactionToken(InititalizeTransactionRequest request, String iss, Date iat, String sub);
+
 	public InititalizeTransactionResponse inititalizeTransaction(InititalizeTransactionRequest request);
 }

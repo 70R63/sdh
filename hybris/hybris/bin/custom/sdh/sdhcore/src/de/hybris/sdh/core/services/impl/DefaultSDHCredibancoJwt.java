@@ -12,10 +12,18 @@ import de.hybris.sdh.core.services.SDHCredibancoJwt;
 import java.io.IOException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Date;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
+
+import com.auth0.jwt.JWTCreator;
+import com.auth0.jwt.algorithms.Algorithm;
 
 
 /**
@@ -24,36 +32,19 @@ import org.apache.log4j.Logger;
  */
 public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 {
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see de.hybris.sdh.core.services.SDHCredibancoJwt#inititalizeTransaction(de.hybris.sdh.core.credibanco.
-	 * InititalizeTransactionRequest)
-	 */
 	private static final Logger LOG = Logger.getLogger(DefaultSDHCredibancoJwt.class);
+
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 
-	final String PRIVATE_KEY_FILE_RSA512 = configurationService.getConfiguration()
-			.getString("credibanco.credential.privateKey.path"); //"src/resources/rsa-private.pem";
+	final String PRIVATE_KEY_FILE_RSA512 = InititalizeTransactionRequest.class.getClassLoader()
+			.getResource("credibanco/rsa-private.pem").getFile();
 
-	final String PUBLIC_KEY_FILE_RSA512 = configurationService.getConfiguration()
-			.getString("credibanco.credential.publicKey.path"); //"src/resources/rsa-public.pem";
+	final String PUBLIC_KEY_FILE_RSA512 = InititalizeTransactionRequest.class.getClassLoader()
+			.getResource("credibanco/rsa-public.pem").getFile();
 
-
-
-
-	@Override
-	public InititalizeTransactionResponse inititalizeTransaction(final InititalizeTransactionRequest request)
-	{
-
-		return null;
-	}
-
-
-
+	;
 
 	/*
 	 * (non-Javadoc)
@@ -62,25 +53,57 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 	 * InititalizeTransactionRequest, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String getTransactionToken(final InititalizeTransactionRequest request, final String iss, final String iat, final String sub) throws IOException
+	public String getTransactionToken(final InititalizeTransactionRequest request, final String iss, final Date iat,
+			final String sub)
 	{
-		final RSAPrivateKey privateKey = (RSAPrivateKey) JKSUtils.readPrivateKeyFromFile(PRIVATE_KEY_FILE_RSA512, "RSA");
-		final RSAPublicKey publicKey = (RSAPublicKey) JKSUtils.readPublicKeyFromFile(PUBLIC_KEY_FILE_RSA512, "RSA");
-		final String objectHashMd5 = JKSUtils.getObjectToHashMd5(request);
+		RSAPrivateKey privateKey = null;
+		RSAPublicKey publicKey = null;
+		final String hashMd5 = JKSUtils.getObjectToHashMd5(request);
+		final JWTCreator.Builder builder = com.auth0.jwt.JWT.create();
+		builder.withJWTId(hashMd5).withIssuer(iss).withIssuedAt(iat).withSubject(sub);
 
-		LOG.info("-------------------------------------------");
-		LOG.info(privateKey);
-		LOG.info(publicKey);
-		LOG.info(objectHashMd5);
-		LOG.info(PRIVATE_KEY_FILE_RSA512);
-		LOG.info(PUBLIC_KEY_FILE_RSA512);
-		LOG.info("-------------------------------------------");
+		try
+		{
+			privateKey = (RSAPrivateKey) JKSUtils.readPrivateKeyFromFile(PRIVATE_KEY_FILE_RSA512, "RSA");
+			publicKey = (RSAPublicKey) JKSUtils.readPublicKeyFromFile(PUBLIC_KEY_FILE_RSA512, "RSA");
+		}
+		catch (final IOException e)
+		{
+			LOG.error(e.toString());
+		}
 
-		return null;
+		LOG.info("HashMd5 [" + hashMd5 + "]");
+		LOG.info("PrivateKey [" + privateKey + "]");
+		LOG.info("PublicKey [" + publicKey + "]");
+		LOG.info("RequestObject [" + request + "]");
+		LOG.info("RequestObjectJson [" + JKSUtils.objectToJson(request) + "]");
+
+		return builder.sign(Algorithm.RSA512(publicKey, privateKey));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCredibancoJwt#inititalizeTransaction(de.hybris.sdh.core.credibanco.
+	 * InititalizeTransactionRequest)
+	 */
+	@Override
+	public InititalizeTransactionResponse inititalizeTransaction(final InititalizeTransactionRequest request)
+	{
+		final String token = this.getTransactionToken(request, "SDH", new Date(), "initializeTransaction");
+		final HttpHeaders headers = new HttpHeaders();
+		final RestTemplate restTemplate = new RestTemplate();
+		HttpEntity<InititalizeTransactionRequest> rqt;
+
+		headers.set("Authorization", "Bearer " + token);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		rqt = new HttpEntity<InititalizeTransactionRequest>(request, headers);
+
+		LOG.info("Token [" + token + "]");
 
 
-
+		return restTemplate.postForObject(configurationService.getConfiguration().getString("credibanco.credential.webService.url"),
+				rqt, InititalizeTransactionResponse.class);
+	}
 
 }

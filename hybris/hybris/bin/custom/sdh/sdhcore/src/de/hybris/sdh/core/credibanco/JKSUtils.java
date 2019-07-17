@@ -60,11 +60,12 @@ public class JKSUtils
 
 	public static PrivateKey readPrivateKeyFromFile(final String filepath, final String algorithm) throws IOException
 	{
+
 		final byte[] bytes = JKSUtils.parsePEMFile(new File(filepath));
 		return JKSUtils.getPrivateKey(bytes, algorithm);
 	}
 
-	private static String objectToJson(final Object object)
+	public static String objectToJson(final Object object)
 	{
 		final ObjectMapper mapper = new ObjectMapper();
 		String stringJsonObject = null;
