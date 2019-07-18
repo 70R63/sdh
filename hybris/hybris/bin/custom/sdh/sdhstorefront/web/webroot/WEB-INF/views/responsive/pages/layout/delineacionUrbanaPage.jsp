@@ -8,9 +8,11 @@
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+
 <delineacionUrbana:delineacionUrbanaIDs />
 <delineacionUrbana:delineacionUrbanaCDUs />
 <delineacionUrbana:delineacionUrbanaRadicados />
+
 
 
 <script type="text/javascript">
