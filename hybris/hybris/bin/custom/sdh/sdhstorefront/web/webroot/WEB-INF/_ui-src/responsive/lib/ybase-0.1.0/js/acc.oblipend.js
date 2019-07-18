@@ -36,17 +36,7 @@ ACC.oblipend = {
 	 	    	   
 	 	    	   $("#oblipend-delurbana").show();
 	 	    	   
-	 	       }else if(impuesto == "7"){
-//	 	    	  $("#oblipend-predial").show();
-//	 	    	 $("#oblipend-vehiculos").show();
-	 	    	  $("#oblipend-ica").show();
-	 	    	  $("#oblipend-publiext").show();
-	 	    	 $("#oblipend-gasolina").show();
-	 	    	 
-	 	    	  $("#oblipend-delurbana").show();
-	 	    	   
 	 	       }
-	 	       
 	 	       
 		 });
 		 
