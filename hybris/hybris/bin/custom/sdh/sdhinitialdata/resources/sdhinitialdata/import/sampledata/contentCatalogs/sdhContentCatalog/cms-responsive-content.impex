@@ -128,8 +128,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
-; ; DescargaFacturaLink          ; DESCARGA FACTURA                    ; http://www.stateofrosebud.com/about ;;;;;
-; ; ReexpedicionFacturaLink      ; REEXPEDICION FACTURA                ; http://www.stateofrosebud.com/about ;;;;;
+; ; DescargaFacturaLink          ; DESCARGA FACTURA                    ; "/contribuyentes/descargafactura" ;;;;;
+; ; ReexpedicionFacturaLink      ; REEXPEDICION FACTURA                ; "/contribuyentes/reexpedicionfactura" ;;;;;
 #->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
@@ -2470,6 +2470,48 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;tercerosSIMBuscarPageComponent	;tercerosSIMBuscarPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosSIMBuscarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosSIMBuscarPageComponent	
 
 #->FIN dev-maria Agregar paginas para terceros sim buscar
+#->INI dev-maria Agregar paginas descarga factura
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;descargaFacturaPage 		;descarga factura	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/descargafactura
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='descargaFacturaPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-descargaFacturaPage 	;SideContent			;																	;SideContent-descargaFacturaPage				;;;
+								;						;BodyContent-descargaFacturaPage 	;BodyContent			;																	;BodyContent-descargaFacturaPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-descargaFacturaPage 	;Side Content Slot for descarga factura;true	;								;;;
+							;							;BodyContent-descargaFacturaPage	;Body Content Slot for descarga factyra;true	;descargaFacturaPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;descargaFacturaPageComponent	;descargaFacturaPage Component	;/WEB-INF/views/responsive/pages/layout/descargaFacturaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;descargaFacturaPageComponent	
+
+#->FIN dev-maria Agregar paginas para descarga factura
+
+#->INI dev-maria Agregar paginas reexpedicion factura
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;reexpedicionFacturaPage 		;reexpedicion factura	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/reexpedicionfactura
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reexpedicionFacturaPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-reexpedicionFacturaPage 	;SideContent			;																	;SideContent-reexpedicionFacturaPage				;;;
+								;						;BodyContent-reexpedicionFacturaPage 	;BodyContent			;																	;BodyContent-reexpedicionFacturaPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-reexpedicionFacturaPage 	;Side Content Slot for reexpedicion factura;true	;								;;;
+							;							;BodyContent-reexpedicionFacturaPage	;Body Content Slot for reexpedicion factura;true	;reexpedicionFacturaPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;reexpedicionFacturaPageComponent	;reexpedicionFacturaPage Component	;/WEB-INF/views/responsive/pages/layout/reexpedicionFacturaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reexpedicionFacturaPageComponent	
+
+#->FIN dev-maria Agregar paginas para reexpedicion factura 
+
 
 
 

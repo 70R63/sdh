@@ -4,21 +4,18 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="obligaciones"
-	tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="desfac"
+	tagdir="/WEB-INF/tags/responsive/facturacion"%>
+
+
+<desfac:descargaFactura/>
 
 
 
-<obligaciones:obliPendientesMenu />
-<div id="idtodos" style="display: block;">
-	<obligaciones:obliPendientesTodo />
-</div>
-	
-	
-<script>
-function goBack() {
-	window.history.back();
-}
+<script type="text/javascript">
+	function goBack() {
+		window.history.back();
+	}
 </script>
-
 
