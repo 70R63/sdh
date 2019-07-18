@@ -53,6 +53,8 @@ public class DeclaPublicidadController
 
 	private String tipoValla;
 
+	private String habilitaPagarEnLinea;
+
 	/**
 	 * @return the tipoValla
 	 */
@@ -620,6 +622,23 @@ public class DeclaPublicidadController
 	public void setIdDeclarante(final String idDeclarante)
 	{
 		this.idDeclarante = idDeclarante;
+	}
+
+	/**
+	 * @return the habilitaPagarEnLinea
+	 */
+	public String getHabilitaPagarEnLinea()
+	{
+		return habilitaPagarEnLinea;
+	}
+
+	/**
+	 * @param habilitaPagarEnLinea
+	 *           the habilitaPagarEnLinea to set
+	 */
+	public void setHabilitaPagarEnLinea(final String habilitaPagarEnLinea)
+	{
+		this.habilitaPagarEnLinea = habilitaPagarEnLinea;
 	}
 
 

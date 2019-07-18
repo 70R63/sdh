@@ -18,6 +18,7 @@
 <div class="container">
 	<input type="hidden" id="numForm" name="numForm"
 		value="${declaPublicidadForm.numform }" />
+		
 	<div class="row">
 		<sf:form action="${pagarURL}" method="POST"
 			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
@@ -54,7 +55,7 @@
 				<sf:hidden path="dv" />
 				<sf:hidden path="numObjeto" />
 				<c:choose>
-					<c:when test="${empty declaPublicidadForm.numform}">
+					<c:when test="${empty declaPublicidadForm.habilitaPagarEnLinea}">
 						<c:set var = "deshabilitarPagar" value = "true"/>
 					</c:when>
 					<c:otherwise>

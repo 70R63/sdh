@@ -348,6 +348,31 @@ public class IcaPageController extends AbstractPageController
 			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
 			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
 
+			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
+					.getIngPorCIIU();
+
+			for (int i = 0; i < IngPorCIIUList.size(); i++)
+			{
+				if (IngPorCIIUList.get(i).getNumID() == null)
+				{
+					IngPorCIIUList.remove(i);
+				}
+			}
+			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
+
+
+			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = icaInfObjetoFormResp.getIcaInfObjetoResponse()
+					.getInfoDeclara().getValorRetenido();
+
+			for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
+			{
+				if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+				{
+					ICAInfoValorRetenidoList.remove(i);
+				}
+			}
+			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
+
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
 			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
@@ -371,7 +396,6 @@ public class IcaPageController extends AbstractPageController
 			listvalorRetenido.add(new ICAInfoValorRetenido());
 			listIngNetosGrava.add(new ICAInfoIngNetosGrava());
 			listIngPorCIIU.add(new ICAInfoIngPorCiiu());
-
 
 			infoDeclara.setIngFueraBog(listInfFueraBog);
 			infoDeclara.setValorRetenido(listvalorRetenido);
