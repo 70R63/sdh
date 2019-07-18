@@ -1,6 +1,6 @@
 ACC.oblipend = {
 
-	 _autoload: ["bindBuscarObliPend"],
+	 _autoload: ["bindBuscarObliPend", "bindDetalle"],
 	 
 	 bindBuscarObliPend: function(){
 		
@@ -8,6 +8,7 @@ ACC.oblipend = {
 	 	        e.preventDefault();
 	 	        
 	 	       $(".oblipend-table").hide();
+	 	      $(".oblipend-tabledetalle").hide();
 	 	       
 	 	       var impuesto = $("#impuesto").val();
 	 	      
@@ -35,10 +36,57 @@ ACC.oblipend = {
 	 	    	   
 	 	    	   $("#oblipend-delurbana").show();
 	 	    	   
+	 	       }else if(impuesto == "7"){
+//	 	    	  $("#oblipend-predial").show();
+//	 	    	 $("#oblipend-vehiculos").show();
+	 	    	  $("#oblipend-ica").show();
+	 	    	  $("#oblipend-publiext").show();
+	 	    	 $("#oblipend-gasolina").show();
+	 	    	 
+	 	    	  $("#oblipend-delurbana").show();
+	 	    	   
 	 	       }
 	 	       
 	 	       
 		 });
 		 
+	 },
+	 
+	 bindDetalle: function(){
+		
+		 $(document).on("click", "#Detalle", function (e) {
+	 	        e.preventDefault();
+	 	        
+	 	       $(".oblipend-tabledetalle").hide();
+	 	       
+	 	        
+	 	       var impuesto = $("#impuesto").val();
+		 	      
+	 	       if(impuesto == "1"){
+	 	    	   
+	 	    	  $("#detalle-predial").show();
+	 	    	 
+	 	       }else  if(impuesto == "2"){
+	 	    	   
+	 	    	   $("#detalle-vehiculos").show();
+	 	    	   
+	 	       }else  if(impuesto == "3"){
+	 	    	   
+	 	    	   $("#detalle-ica").show();
+	 	    	   
+	 	       }else  if(impuesto == "4"){
+	 	    	   
+	 	    	   $("#detalle-publiext").show();
+	 	    	   
+	 	       }else  if(impuesto == "5"){
+	 	    	   
+	 	    	   $("#detalle-gasolina").show();
+	 	    	   
+	 	       }else  if(impuesto == "6"){
+	 	    	   
+	 	    	   $("#detalle-delurbana").show();
+	 	    	   
+	 	       }
+		 });
 	 }
 };

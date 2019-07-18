@@ -50,8 +50,8 @@
 							code="obligacion.inicial.selcimpuesto" /></label> <select id="impuesto"
 						class="new_alto form-control " name="impuesto" >
 						<option value="0">Seleccionar</option>
-						<option value="1">Predial Unificado</option>
-						<option value="2">Vehículos</option>
+<!-- 						<option value="1">Predial Unificado</option> -->
+<!-- 						<option value="2">Vehículos</option> -->
 						<option value="3">ICA</option>
 						<option value="4">Publicidad Exterior</option>
 						<option value="5">Sobretasa Gasolina</option>
@@ -62,37 +62,25 @@
 		</div>
 
 
+	
 		<div class="row">
-			<div class="col-md-6"></div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label text-right"><spring:theme
-							code="obligacion.sujeto.vigencia" /></label> <select
-						aria-required="true" id="aniograva" class="new_alto form-control "
-						name="aniograva" onchange="">
-						<option value="">Seleccionar</option>
-					</select>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group">
-					<button type="submit" class="btn btn-secondary btn-lg" id="action"
-						name="action" value="generar" style="margin-top: 3px">
-						<spring:theme code="obligacion.sujeto.regresar" />
-					</button>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-lg" id="action"
-						name="action" value="generar" style="margin-top: 3px">
-						<spring:theme code="obligacion.sujeto.descargar" />
-					</button>
-				</div>
-			</div>
+		<div class="col-md-6"></div>
+<!-- 			<div class="col-md-3"> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<button type="submit" class="btn btn-secondary btn-lg" id="action" -->
+<!-- 						name="action" value="generar" style="margin-top: 3px"> -->
+<%-- 						<spring:theme code="obligacion.sujeto.regresar" /> --%>
+<!-- 					</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-3"> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<button type="submit" class="btn btn-primary btn-lg" id="action" -->
+<!-- 						name="action" value="generar" style="margin-top: 3px"> -->
+<%-- 						<spring:theme code="obligacion.sujeto.descargar" /> --%>
+<!-- 					</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="col-md-3">
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg" id="buscarObliPend"
@@ -102,14 +90,14 @@
 
 				</div>
 			</div>
-			<div class="col-md-3">
-				<button type="button" class="btn btn-secondary btn-lg" id="action"
-					name="action" value="cancelar" style="margin-top: 3px"
-					onclick="cancelfun(this)">
-					<spring:theme code="obligacion.inicial.cancelar" />
-				</button>
+<!-- 			<div class="col-md-3"> -->
+<!-- 				<button type="button" class="btn btn-secondary btn-lg" id="action" -->
+<!-- 					name="action" value="cancelar" style="margin-top: 3px" -->
+<!-- 					onclick="cancelfun(this)"> -->
+<%-- 					<spring:theme code="obligacion.inicial.cancelar" /> --%>
+<!-- 				</button> -->
 
-			</div>
+<!-- 			</div> -->
 		</div>
 	</sf:form>
 </div>
