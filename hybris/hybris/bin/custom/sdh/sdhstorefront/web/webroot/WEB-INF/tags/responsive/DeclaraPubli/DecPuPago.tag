@@ -36,11 +36,10 @@
 
 			<div class="col-md-3 text-center">
 				<a id="downloadHelper" target="_blank"></a>
-				<button id="generaDeclaracionButton" class="btn btn-primary btn-lg"
-					name="generaDeclaracionButton" type="button"
-					<c:if test="${empty  declaPublicidadForm.numform}"> disabled="disabled"</c:if>>
+				<sf:button id="generaDeclaracionButton" class="btn btn-primary btn-lg"
+					name="generaDeclaracionButton" type="button"  disabled="true">					
 					<spring:theme code="declaracion.publicidad.button.presdec" />
-				</button>
+				</sf:button>
 			</div>
 
 			<div class="col-md-2">
