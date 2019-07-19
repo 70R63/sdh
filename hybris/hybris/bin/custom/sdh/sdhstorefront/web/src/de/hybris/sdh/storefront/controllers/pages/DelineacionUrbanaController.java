@@ -396,11 +396,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 		}
 		else
 		{
-
-			final String selectedCDU = "20" + infoDelineacion.getInput().getSelectedCDU().substring(3, 5);
-
 			infoDelineacion.getInfObjetoDelineacionExtras()
-					.setAnoGravable(selectedCDU);
+					.setAnoGravable(infoDelineacion.getInput().getSelectedAnoPresDeclaracion());
 		}
 
 		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
