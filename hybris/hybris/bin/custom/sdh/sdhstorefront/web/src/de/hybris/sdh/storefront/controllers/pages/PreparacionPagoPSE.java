@@ -135,6 +135,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 			psePaymentForm.setNoIdentificacion(infoPreviaPSE.getNumDoc());
 			psePaymentForm.setDV(infoPreviaPSE.getDv());
 			psePaymentForm.setObjPago(infoPreviaPSE.getNumObjeto());
+			psePaymentForm.setCUD(infoPreviaPSE.getCDU());
 
 			psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
 			psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
