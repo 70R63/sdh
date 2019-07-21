@@ -177,6 +177,10 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			declaPublicidadForm.setNumform(detallePublicidadResponse.getInfoDeclara().getNumForm());
 			declaPublicidadForm.setNumresol(detallePublicidadResponse.getNumResolu());
 			declaPublicidadForm.setFecresol(detallePublicidadResponse.getFechResolu());
+
+
+
+
 			final String fechnotif = detallePublicidadResponse.getFechNotif();
 			if (StringUtils.isNotBlank(fechnotif) && !"00000000".equals(fechnotif))
 			{
@@ -219,7 +223,17 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 				}
 
 			}
+
+			declaPublicidadForm.setHabilitaPagarEnLinea("");
+			if (declaPublicidadForm.getNumform() != null)
+			{
+				if (!declaPublicidadForm.getNumform().isEmpty())
+				{
+					declaPublicidadForm.setHabilitaPagarEnLinea("");
+				}
+			}
 			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
+
 			model.addAttribute("declaPublicidadForm", declaPublicidadForm);
 
 		}
@@ -337,7 +351,11 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 			declaPublicidadForm.setIntmora(calcPublicidadResponse.getInteresMora());
 			declaPublicidadForm.setTotpag(calcPublicidadResponse.getTotalPagar());
 
+
+
 		}
+
+
 
 
 		catch (final Exception e)

@@ -19,6 +19,7 @@ ACC.publicidadexterior = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
+						
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores)
 	            		{
@@ -35,6 +36,8 @@ ACC.publicidadexterior = {
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
+							document.getElementById("action").disabled = false;
+							
 	            		}
 	 	      		
 		            },

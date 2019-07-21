@@ -7,6 +7,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 
 import javax.annotation.Resource;
@@ -37,12 +39,16 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
+	@Resource(name = "customerFacade")
+	private CustomerFacade customerFacade;
+
 	@RequestMapping(value = "/contribuyentes/consultas/oblipendientes", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String oblipendi(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al GET Obligaciones Pendientes--------------------------");
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
+		model.addAttribute("customerData", customerData);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(OBLIGACIONES_PENDIENTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(OBLIGACIONES_PENDIENTES_CMS_PAGE));
