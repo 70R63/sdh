@@ -87,6 +87,10 @@
 								items="${icaAnioGravable}" 
 								referenceData="${icaAnioGravable}" 
 								class="newalto form-control"  onchange="onChangeAnioGravable()" />
+
+							<sf:select path="anoGravable" items="${icaAnioGravable}"
+								referenceData="${icaAnioGravable}" class="newalto form-control" onchange="onChangeAnioGravable()" />
+
 						</div>
 					</div>
 				</div>
@@ -94,6 +98,7 @@
 
 			<c:if
 				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
+				
 				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
 					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
 					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
@@ -111,9 +116,13 @@
 						</div>
 					</div>
 				</div>
+
 				<sf:select id="periodobk" path="periodo" items="${dataForm.catalogosSo.periodo}"
 								referenceData="${dataForm.catalogosSo.periodo}"
 								class="newalto form-control"  style="visibility:hidden"/>
+
+				
+
 			</c:if>
 
 			<c:if test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">

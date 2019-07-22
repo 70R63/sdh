@@ -91,6 +91,7 @@ function onChangeAnioGravable() {
 	        form.appendChild(input);
 	        form.submit();
 		}
+
 		ajustaMeses();
 	}
 	
@@ -123,5 +124,35 @@ function ajustaMeses(){
     else{
     	document.getElementById("periodo").innerHTML = document.getElementById("periodobk").innerHTML;  
     }
+
+		ajustaPeriodo();
+	}
+	
+function ajustaPeriodo(){
+	debugger;
+	var dt = new Date();
+	var year = dt.getFullYear();
+	
+	
+	var sizePeriodo = document.getElementById("periodo").options.length;
+	
+	
+	if (sizePeriodo == 12 && document.getElementById("anoGravable").value == year){
+		var mon = dt.getMonth() + 1;
+		for (monPop = mon; monPop <= 11; monPop++ ){
+			document.getElementById("periodo").options[monPop].disabled = true;
+		}
+	}else if (sizePeriodo == 7 && document.getElementById("anoGravable").value == year){
+		var mon = parseInt((dt.getMonth() + 1)/2) + 2;
+		for (monPop = mon; monPop < 7; monPop++ ){
+			document.getElementById("periodo").options[monPop].disabled = true;
+		}
+	}else{
+		for (monPop = 0; monPop < document.getElementById("periodo").length; monPop++ ){
+			document.getElementById("periodo").options[monPop].disabled = false;
+		} 
+	}
+	
+
 }	
 </script>

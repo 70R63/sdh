@@ -260,24 +260,31 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 					System.out.println("getDelineacionListByBpAndYear ----- > " + anio);
 					if (Objects.nonNull(anio) && (anio.matches("[0-9]+") && anio.length() == 4))
 					{
-						if (true) //anio.equals(stringYear))
+						if (delineacion.getCdu() != null) //anio.equals(stringYear))
 						{
-							final RadicaDelinResponse radicaDelinResponse = this.getRadicadosDelineacion(stringBp, delineacion.getCdu());
-							if (radicaDelinResponse != null)
+							final int anioCdu = Integer.parseInt(delineacion.getCdu().substring(3, 5));
+							final int anioEjec = Integer.parseInt(stringYear.substring(2, 4));
+
+							if (anioCdu <= anioEjec)
 							{
+								final RadicaDelinResponse radicaDelinResponse = this.getRadicadosDelineacion(stringBp,
+										delineacion.getCdu());
+								if (radicaDelinResponse != null)
+								{
 
-							deli = new ImpuestoDelineacionUrbanaWithRadicados();
+									deli = new ImpuestoDelineacionUrbanaWithRadicados();
 
-							deli.setNumObjeto(delineacion.getNumObjeto());
-							deli.setCdu(delineacion.getCdu());
-							deli.setLicenConst(delineacion.getLicenConst());
-							deli.setFechaExp(delineacion.getFechaExp());
-							deli.setFechaReval(delineacion.getFechaReval());
-							deli.setFechFinObra(delineacion.getFechFinObra());
-							deli.setFechaEjecutoria(delineacion.getFechaEjecutoria());
-								deli.setRadicados(radicaDelinResponse.getRadicados());
+									deli.setNumObjeto(delineacion.getNumObjeto());
+									deli.setCdu(delineacion.getCdu());
+									deli.setLicenConst(delineacion.getLicenConst());
+									deli.setFechaExp(delineacion.getFechaExp());
+									deli.setFechaReval(delineacion.getFechaReval());
+									deli.setFechFinObra(delineacion.getFechFinObra());
+									deli.setFechaEjecutoria(delineacion.getFechaEjecutoria());
+									deli.setRadicados(radicaDelinResponse.getRadicados());
 
-							returnList.add(deli);
+									returnList.add(deli);
+								}
 							}
 						}
 					}
