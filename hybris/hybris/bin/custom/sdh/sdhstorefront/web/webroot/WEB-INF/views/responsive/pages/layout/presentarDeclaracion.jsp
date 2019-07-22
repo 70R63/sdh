@@ -105,20 +105,19 @@ function ajustaPeriodo(){
 	
 	if (sizePeriodo == 12 && document.getElementById("anoGravable").value == year){
 		var mon = dt.getMonth() + 1;
-		for (monPop = mon; monPop < 12; monPop++ ){
-			last = document.getElementById("periodo").options.length - 1;
-			document.getElementById("periodo").remove(last);
+		for (monPop = mon; monPop <= 11; monPop++ ){
+			document.getElementById("periodo").options[monPop].disabled = true;
 		}
 	}else if (sizePeriodo == 7 && document.getElementById("anoGravable").value == year){
 		var mon = parseInt((dt.getMonth() + 1)/2) + 2;
 		for (monPop = mon; monPop < 7; monPop++ ){
-			last = document.getElementById("periodo").options.length - 1;
-			document.getElementById("periodo").remove(last);
+			document.getElementById("periodo").options[monPop].disabled = true;
 		}
 	}else{
-		document.getElementById("periodo").innerHTML  = document.getElementById("periodobk").innerHTML; 
+		for (monPop = 0; monPop < document.getElementById("periodo").length; monPop++ ){
+			document.getElementById("periodo").options[monPop].disabled = false;
+		} 
 	}
-	
 	
 }	
 </script>
