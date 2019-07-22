@@ -488,9 +488,13 @@ public class PSEPaymentController extends AbstractPageController
 				final String returnCode = response.getReturnCode();
 				if(returnCode.equals("0")) { // Return Transaction code - OK(0)
 					redirecUrl = "redirect:" + response.getPaymentRoute();
+					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+				}
+				else
+				{
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
 				}
 				this.saveCredibancoTransaction(response, psePaymentForm);
-				GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
 			}
 			else
 			{
@@ -507,10 +511,14 @@ public class PSEPaymentController extends AbstractPageController
 				if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._SUCCESS))
 				{
 					redirecUrl = "redirect:" + response.getBankurl();
+					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+				}
+				else
+				{
+					GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
 				}
 				this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
 						psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
-				GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
 			}
 			else
 			{

@@ -257,6 +257,8 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			transactionLogModel.setReturnCode(transactionPaymentResponse.getReturnCode());
 			transactionLogModel.setBankUrl(transactionPaymentResponse.getPaymentRoute());
 			transactionLogModel.setTransactionCycle("Description: " + transactionPaymentResponse.getDescription());
+			transactionLogModel.setTransactionState(transactionPaymentResponse.getDescription());
+			transactionLogModel.setNotificacionDeRecaudo("NO");
 
 			LOG.info(
 					"NewCredibancoLogTransactionEntry - transactionPaymentResponse[" + transactionPaymentResponse.getInternalCode()

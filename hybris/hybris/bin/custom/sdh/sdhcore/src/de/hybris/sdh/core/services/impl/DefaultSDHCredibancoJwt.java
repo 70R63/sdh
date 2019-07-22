@@ -42,7 +42,7 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 
 	private final String ISS = "SDH";
 	private final String SUB_INITIALIZE_TRANSACTION = "initializeTransaction";
-	private final String SUB_RESULT_TRANSACTION = "resultTransaction";
+	private final String SUB_RESULT_TRANSACTION = "getResultTransaction";
 	private final String SUB_REPORT_INFO_TRANSACTION = "reportInfoTransaction";
 
 	/*
