@@ -7,6 +7,8 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.credibanco.JKSUtils;
+import de.hybris.sdh.core.credibanco.ResultTransactionRequest;
+import de.hybris.sdh.core.credibanco.ResultTransactionResponse;
 import de.hybris.sdh.core.services.SDHCredibancoJwt;
 
 import java.io.IOException;
@@ -38,6 +40,10 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 
+	private final String ISS = "SDH";
+	private final String SUB_INITIALIZE_TRANSACTION = "initializeTransaction";
+	private final String SUB_RESULT_TRANSACTION = "resultTransaction";
+	private final String SUB_REPORT_INFO_TRANSACTION = "reportInfoTransaction";
 
 	/*
 	 * (non-Javadoc)
@@ -46,7 +52,7 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 	 * InititalizeTransactionRequest, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String getTransactionToken(final InititalizeTransactionRequest request, final String iss, final Date iat,
+	public String getTransactionToken(final Object request, final String iss, final Date iat,
 			final String sub)
 	{
 		final String PRIVATE_KEY_FILE_RSA512 = configurationService.getConfiguration().getString("credibanco.credential.privateKey.path");
@@ -87,21 +93,45 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 	@Override
 	public InititalizeTransactionResponse inititalizeTransaction(final InititalizeTransactionRequest request)
 	{
-		final String token = this.getTransactionToken(request, "SDH", new Date(), "initializeTransaction");
+		final String token = this.getTransactionToken(request, ISS, new Date(), SUB_INITIALIZE_TRANSACTION);
 		final String URL = configurationService.getConfiguration().getString("credibanco.credential.webService.url");
 		final HttpHeaders headers = new HttpHeaders();
 		final RestTemplate restTemplate = new RestTemplate();
-		HttpEntity<InititalizeTransactionRequest> rqt;
 
 		headers.set("Authorization", "Bearer " + token);
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		rqt = new HttpEntity<InititalizeTransactionRequest>(request, headers);
+		final HttpEntity<InititalizeTransactionRequest> rqt = new HttpEntity<InititalizeTransactionRequest>(request, headers);
 
-		LOG.info("Token [" + token + "]");
+		LOG.info(" InititalizeTransactionResponse Token [" + token + "]");
 		LOG.info("URL [" + URL + "]");
 
 
 		return restTemplate.postForObject(URL, rqt, InititalizeTransactionResponse.class);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHCredibancoJwt#resultTransaction(de.hybris.sdh.core.credibanco.
+	 * ResultTransactionRequest)
+	 */
+	@Override
+	public ResultTransactionResponse resultTransaction(final ResultTransactionRequest request)
+	{
+		final String token = this.getTransactionToken(request, ISS, new Date(), SUB_RESULT_TRANSACTION);
+		final String URL = configurationService.getConfiguration().getString("credibanco.credential.webService.url");
+		final HttpHeaders headers = new HttpHeaders();
+		final RestTemplate restTemplate = new RestTemplate();
+
+		headers.set("Authorization", "Bearer " + token);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		final HttpEntity<ResultTransactionRequest> rqt = new HttpEntity<ResultTransactionRequest>(request, headers);
+
+		LOG.info(" InititalizeTransactionResponse Token [" + token + "]");
+		LOG.info("URL [" + URL + "]");
+
+		return restTemplate.postForObject(URL, rqt, ResultTransactionResponse.class);
+	}
+
 
 }

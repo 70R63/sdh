@@ -254,7 +254,7 @@ public class InititalizeTransactionRequest
 	@Override
 	public String toString()
 	{
-		return "InititalizeTransactionRequest [nus=" + nus + ", concept=" + concept + ", description=" + description
+		return "CredibancoInititalizeTransactionRequest [nus=" + nus + ", concept=" + concept + ", description=" + description
 				+ ", personType=" + personType + ", returnRoute=" + returnRoute + ", value=" + value + ", tax=" + tax + ", ref1="
 				+ ref1 + ", ref2=" + ref2 + ", ref3=" + ref3 + "bankCode=" + bankCode + "]";
 	}
