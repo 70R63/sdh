@@ -94,7 +94,7 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 	public InititalizeTransactionResponse inititalizeTransaction(final InititalizeTransactionRequest request)
 	{
 		final String token = this.getTransactionToken(request, ISS, new Date(), SUB_INITIALIZE_TRANSACTION);
-		final String URL = configurationService.getConfiguration().getString("credibanco.credential.webService.url");
+		final String URL = configurationService.getConfiguration().getString("credibanco.credential.webService.inititalizeTransaction.url");
 		final HttpHeaders headers = new HttpHeaders();
 		final RestTemplate restTemplate = new RestTemplate();
 
@@ -119,7 +119,7 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 	public ResultTransactionResponse resultTransaction(final ResultTransactionRequest request)
 	{
 		final String token = this.getTransactionToken(request, ISS, new Date(), SUB_RESULT_TRANSACTION);
-		final String URL = configurationService.getConfiguration().getString("credibanco.credential.webService.url");
+		final String URL = configurationService.getConfiguration().getString("credibanco.credential.webService.resultTransaction.url");
 		final HttpHeaders headers = new HttpHeaders();
 		final RestTemplate restTemplate = new RestTemplate();
 
