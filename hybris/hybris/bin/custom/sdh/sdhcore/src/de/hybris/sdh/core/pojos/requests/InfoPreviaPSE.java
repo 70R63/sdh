@@ -18,6 +18,7 @@ public class InfoPreviaPSE
 	private String clavePeriodo;
 	private String dv;
 	private String numObjeto;
+	private String CDU;
 
 
 	/**
@@ -168,7 +169,22 @@ public class InfoPreviaPSE
 		this.numObjeto = numObjeto;
 	}
 
+	/**
+	 * @return the cDU
+	 */
+	public String getCDU()
+	{
+		return CDU;
+	}
 
+	/**
+	 * @param cDU
+	 *           the cDU to set
+	 */
+	public void setCDU(final String cDU)
+	{
+		CDU = cDU;
+	}
 
 
 }

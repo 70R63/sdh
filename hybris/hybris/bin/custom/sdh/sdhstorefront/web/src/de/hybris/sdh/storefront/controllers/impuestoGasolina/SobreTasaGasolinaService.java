@@ -1249,7 +1249,8 @@ public class SobreTasaGasolinaService
 				periodo.add(new SelectAtomValue(prepararPeriodoMensualPago(Integer.toString(anioActual - i), "12"), "Diciembre"));
 			}
 		}
-		if (tipoImpuesto.equals(new ControllerPseConstants().getPUBLICIDAD()))
+		if (tipoImpuesto.equals(new ControllerPseConstants().getPUBLICIDAD())
+				|| tipoImpuesto.equals(new ControllerPseConstants().getDELINEACION()))
 		{
 			for (int i = 0; i < limite; i++)
 			{
