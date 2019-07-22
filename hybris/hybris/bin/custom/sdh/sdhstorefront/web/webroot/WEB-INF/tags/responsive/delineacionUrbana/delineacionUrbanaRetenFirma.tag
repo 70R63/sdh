@@ -98,6 +98,7 @@
 				<sf:hidden path="clavePeriodo" />
 				<sf:hidden path="dv" />
 				<sf:hidden path="numObjeto" />
+				<sf:hidden path="CDU" />
 				<div class="col-md-3">
 				<sf:button class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar" disabled="true">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />

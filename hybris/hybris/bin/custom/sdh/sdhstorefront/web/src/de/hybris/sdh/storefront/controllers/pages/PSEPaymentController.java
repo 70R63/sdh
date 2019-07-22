@@ -9,7 +9,10 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.sdh.core.constants.ControllerCredibancoConstants;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
+import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
+import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseBankListCatalogModel;
@@ -20,6 +23,7 @@ import de.hybris.sdh.core.pojos.responses.ConsultaPagoDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
+import de.hybris.sdh.core.services.SDHCredibancoJwt;
 import de.hybris.sdh.core.services.SDHImprimePagoService;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
@@ -38,7 +42,10 @@ import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -72,6 +79,16 @@ public class PSEPaymentController extends AbstractPageController
 	private static final String TEXT_PSE_FORMA = "PSE Forma";
 	private static final String TEXT_REALIZAR_PAGO = "Realizar Pago";
 	private static final String VACIO = "";
+	private static final Map<String, String> CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE = new HashMap<String, String>()
+	{
+		{
+			put("CC", "1");
+			put("NIT","2");
+			put("CE", "1");
+			put("TI", "1");
+			put("PP", "1");
+		}
+	};
 
 
 	@Resource(name = "pseBankListCatalogDao")
@@ -103,6 +120,9 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "sdhImprimePagoService")
 	SDHImprimePagoService sdhImprimePagoService;
+
+	@Resource(name = "sdhCredibancoJwt")
+	SDHCredibancoJwt sdhCredibancoJwt;
 
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getIdTipoDeImpuesto()
@@ -167,6 +187,11 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			banco.add(new SelectAtomValue(bankEntry.getFinancialInstitutionCode(), bankEntry.getFinancialInstitutionName()));
 		}
+		//Adding Credibanco Bank code and description
+		banco.add(new SelectAtomValue(
+				configurationService.getConfiguration().getString("credibanco.bank.code"),
+				configurationService.getConfiguration().getString("credibanco.bank.description")));
+
 		return banco;
 	}
 
@@ -270,11 +295,24 @@ public class PSEPaymentController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
+	@RequestMapping(value = "/pagoEnLinea/credibancoResponse", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String credibancoResponse(final Model model, final RedirectAttributes redirectModel,
+			@RequestParam(required = false, defaultValue = "", value = "ticketId")
+			final String ticketId, @ModelAttribute("error")
+			final String error, @ModelAttribute("psePaymentFormResp")
+			final PSEPaymentForm psePaymentFormResp, @ModelAttribute("estatus")
+			final String estatus) throws CMSItemNotFoundException
+	{
+
+
+		return null;
+	}
+
 	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
 	public String pagoPdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("psePaymentForm")
 	final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al POST pago en linea PSE response--------------------------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final ConsultaPagoRequest consultaPagoRequest = new ConsultaPagoRequest();
@@ -290,7 +328,6 @@ public class PSEPaymentController extends AbstractPageController
 
 			consultaPagoRequest.setNumBP(customerData.getNumBP());
 			LOG.info("NumBP: " + customerData.getNumBP());
-
 			LOG.info("getPUBLICIDAD: " + controllerPseConstants.getPUBLICIDAD());
 			LOG.info("getTipoDeImpuesto: " + psePaymentForm.getTipoDeImpuesto().toUpperCase());
 			LOG.info("getImpuesto: " + psePaymentForm.getImpuesto().toUpperCase());
@@ -440,33 +477,48 @@ public class PSEPaymentController extends AbstractPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_REALIZAR_PAGO));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-
-
 		String redirecUrl = getViewForPage(model);
 
 		LOG.info("--------- Call PSE/Bank Web Service ---------");
-		final CreateTransactionPaymentResponseInformationType response = this.doPsePayment(psePaymentForm);
-
-		if (response != null)
+		if (psePaymentForm.getBanco().equals(new ControllerCredibancoConstants().getCREDIBANCO_CODE())) //Credibanco Payment
 		{
-			final String returnCode = response.getReturnCode().getValue();
-			if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._SUCCESS))
+			final InititalizeTransactionResponse response = this.doCredibancoPayment(psePaymentForm);
+			if (Objects.nonNull(response))
 			{
-				redirecUrl = "redirect:" + response.getBankurl();
+				final String returnCode = response.getReturnCode();
+				if(returnCode.equals("0")) { // Return Transaction code - OK(0)
+					redirecUrl = "redirect:" + response.getPaymentRoute();
+				}
+				this.saveCredibancoTransaction(response, psePaymentForm);
+				GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
 			}
-			this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
-					psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
-			GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+			else
+			{
+				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+			}
+			LOG.info(response);
 		}
-		else
+		else // ACH Payment
 		{
-			GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+			final CreateTransactionPaymentResponseInformationType response = this.doPsePayment(psePaymentForm);
+			if (response != null)
+			{
+				final String returnCode = response.getReturnCode().getValue();
+				if (returnCode.equals(CreateTransactionPaymentResponseReturnCodeList._SUCCESS))
+				{
+					redirecUrl = "redirect:" + response.getBankurl();
+				}
+				this.savePseTransaction(this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+						psePaymentForm.getNumeroDeReferencia()), response, psePaymentForm);
+				GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+			}
+			else
+			{
+				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+			}
+			LOG.info(response);
 		}
 
-
-		LOG.info(response);
-		//LOG.info(psePaymentForm);
-		LOG.info("--------- Call PSE/Bank Web Service ---------");
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 
@@ -497,6 +549,24 @@ public class PSEPaymentController extends AbstractPageController
 						this.getMessageHeader(), createTransactionPaymentInformationType);
 	}
 
+	private InititalizeTransactionResponse doCredibancoPayment(final PSEPaymentForm psePaymentForm)
+	{
+		final InititalizeTransactionRequest inititalizeTransactionRequest = new InititalizeTransactionRequest(
+				psePaymentForm.getNumeroDeReferencia(),
+				psePaymentForm.getNoIdentificacion().concat("-").concat(psePaymentForm.getObjPago()),
+				psePaymentForm.getNoIdentificacion().concat("-").concat(psePaymentForm.getObjPago()).concat("-").concat(psePaymentForm.getImpuesto().concat("-").concat(psePaymentForm.getTipoDeIdentificacion())),
+				CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE.get(psePaymentForm.getTipoDeIdentificacion()), //persona natural
+				configurationService.getConfiguration().getString("credibanco.response.url").concat("/").concat(psePaymentForm.getNumeroDeReferencia()),
+				psePaymentForm.getValorAPagar(),
+				"0", //Tax
+				"nonRef1",
+				"nonRef2",
+				"nonRef3",
+				null); //bankCode
+
+		return sdhCredibancoJwt.inititalizeTransaction(inititalizeTransactionRequest);
+	}
+
 	private MessageHeader getMessageHeader()
 	{
 		final MessageHeader messageHeader = new MessageHeader();
@@ -513,8 +583,7 @@ public class PSEPaymentController extends AbstractPageController
 		final ConstantConnectionData constantConnectionData = new ConstantConnectionData();
 		constantConnectionData.setPseurl(configurationService.getConfiguration().getString("sdh.pse.pseURL"));
 		constantConnectionData.setPpeCode(configurationService.getConfiguration().getString("sdh.pse.ppeCode"));
-		constantConnectionData
-				.setEntityUrl(configurationService.getConfiguration().getString("sdh.pse.entityUrl") + "?ticketId=" + ticketId);
+		constantConnectionData.setEntityUrl(configurationService.getConfiguration().getString("sdh.pse.entityUrl") + "?ticketId=" + ticketId);
 		constantConnectionData.setBankCode(bankCode);
 		constantConnectionData.setServiceCode(serviceCode);
 		return constantConnectionData;
@@ -547,6 +616,18 @@ public class PSEPaymentController extends AbstractPageController
 				psePaymentForm.getFechaLimiteDePago(), psePaymentForm.getPagoAdicional(), psePaymentForm.getBanco(),
 				psePaymentForm.getValorAPagar(), configurationService.getConfiguration().getString("sdh.pse.isoCodeCurrency"),
 				psePaymentForm.getTipoDeTarjeta(),psePaymentForm.getObjPago());
+	}
+
+	private void saveCredibancoTransaction(final InititalizeTransactionResponse transactionPaymentResponse,
+			final PSEPaymentForm psePaymentForm)
+	{
+		pseTransactionsLogService.newCredibancoLogTransactionEntry(transactionPaymentResponse,
+				psePaymentForm.getNumeroDeReferencia(), psePaymentForm.getTipoDeImpuesto(), psePaymentForm.getImpuesto(),
+				psePaymentForm.getAnoGravable(), psePaymentForm.getCHIP(), psePaymentForm.getPeriodo(), psePaymentForm.getCUD(),
+				psePaymentForm.getTipoDeIdentificacion(), psePaymentForm.getNoIdentificacion(), psePaymentForm.getDV(),
+				psePaymentForm.getFechaLimiteDePago(), psePaymentForm.getPagoAdicional(), psePaymentForm.getBanco(),
+				psePaymentForm.getValorAPagar(), configurationService.getConfiguration().getString("credibanco.sdh.isoCodeCurrency"),
+				psePaymentForm.getTipoDeTarjeta(), psePaymentForm.getObjPago());
 	}
 
 	private PSEPaymentForm getPSEPaymentForm(final String ticketId)

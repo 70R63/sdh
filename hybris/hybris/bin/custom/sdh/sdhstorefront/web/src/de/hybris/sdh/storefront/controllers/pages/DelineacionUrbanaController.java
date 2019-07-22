@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -375,7 +376,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = new ControllerPseConstants().getPUBLICIDAD();
+		final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -384,6 +385,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String clavePeriodo = "";
 		String dv = "";
 		String numObjeto = "";
+		String CDU = "";
 
 		//				tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
@@ -405,6 +407,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
 		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
+		CDU = infoDelineacion.getInput().getSelectedCDU();
 
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
@@ -417,6 +420,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setClavePeriodo(clavePeriodo);
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
+		infoPreviaPSE.setCDU(CDU);
 
 
 
@@ -465,7 +469,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = new ControllerPseConstants().getPUBLICIDAD();
+		final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -474,6 +478,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String clavePeriodo = "";
 		String dv = "";
 		String numObjeto = "";
+		String CDU = "";
 
 		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
@@ -486,6 +491,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
 		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
+		CDU = infoDelineacion.getInput().getSelectedCDU();
 
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
@@ -497,6 +503,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setClavePeriodo(clavePeriodo);
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
+		infoPreviaPSE.setCDU(CDU);
 
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
@@ -588,7 +595,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = new ControllerPseConstants().getPUBLICIDAD();
+		final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -597,6 +604,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String clavePeriodo = "";
 		String dv = "";
 		String numObjeto = "";
+		String CDU = "";
 
 		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
@@ -607,6 +615,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
 		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
+		CDU = infoDelineacion.getInput().getSelectedCDU();
 
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
@@ -618,6 +627,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setClavePeriodo(clavePeriodo);
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
+		infoPreviaPSE.setCDU(CDU);
 
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
