@@ -21,8 +21,8 @@
 	<sobreTasaGasolina:decGasolinaInfDec />
 	<sobreTasaGasolina:decGasolinaTotales />
 	<sobreTasaGasolina:decGasolinaPagos />
-<%-- 	<sobreTasaGasolina:decGasolinaDatRev /> --%>
-<%-- 	<sobreTasaGasolina:decGasolinaInfFirma /> --%>
+	<%-- 	<sobreTasaGasolina:decGasolinaDatRev /> --%>
+	<%-- 	<sobreTasaGasolina:decGasolinaInfFirma /> --%>
 	<sobreTasaGasolina:decGasolinaFirma />
 </sf:form>
 <sobreTasaGasolina:decGasolinaPago />
@@ -33,5 +33,37 @@
 		window.history.back();
 	}
 </script>
+
+<script>
+	function numberFormat(selectObject) {
+
+		var numero = selectObject.value;
+		var idinput = selectObject.id;
+		var resultado = "";
+		if (numero[0] == "-") {
+			nuevoNumero = numero.replace(/\./g, '').substring(1);
+		} else {
+			nuevoNumero = numero.toString().replace(/\./g, '');
+		}
+		if (numero.toString().indexOf(",") >= 0)
+			nuevoNumero = nuevoNumero.substring(0, nuevoNumero.indexOf(","));
+
+		for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++)
+			resultado = nuevoNumero.charAt(i)
+					+ ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
+		if (numero.toString().indexOf(",") >= 0)
+			resultado += numero.substring(numero.indexOf(","));
+
+		if (numero[0] == "-") {
+			document.getElementById(idinput).value = "-" + resultado;
+			return "-" + resultado;
+		} else {
+			document.getElementById(idinput).value = resultado;
+			return resultado;
+		}
+	}
+</script>
+
+
 
 
