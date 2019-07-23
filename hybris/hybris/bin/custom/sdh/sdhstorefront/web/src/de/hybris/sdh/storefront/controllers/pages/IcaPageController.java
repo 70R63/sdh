@@ -426,10 +426,10 @@ public class IcaPageController extends AbstractPageController
 		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
-			if (icaInfObjetoResponse.getAnoGravable() != null)
-			{
-				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim());
-			}
+			if (icaInfObjetoResponse.getAnoGravable() != null) 
+			{ 
+				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim()); 
+			} 
 			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
 			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
 			infoPreviaPSE.setNumBP(numBP);
