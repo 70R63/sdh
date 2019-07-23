@@ -59,9 +59,9 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
-						code="rop.generar.totalpagar" /></label> <input
+						code="rop.generar.totalpagar" /></label> <input disabled="disabled"
 					class="form-control new_alto" disabled="disabled" type="text"
-					size="30" value="" />
+					size="30" value="" readonly="readonly" />
 			</div>
 		</div>
 	</div>
@@ -89,6 +89,7 @@
 				<spring:theme code="rop.generar.genrop" />
 			</button>
 		</div>
+		
 	</div>
 </div>
 </form:form>
