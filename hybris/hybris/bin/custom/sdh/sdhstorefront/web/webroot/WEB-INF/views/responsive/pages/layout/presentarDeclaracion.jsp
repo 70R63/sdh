@@ -91,7 +91,7 @@ function onChangeAnioGravable() {
 	        form.appendChild(input);
 	        form.submit();
 		}
-<<<<<<< HEAD
+
 		ajustaPeriodo();
 	}
 	
@@ -120,9 +120,6 @@ function ajustaPeriodo(){
 		} 
 	}
 	
-<<<<<<< HEAD
-	
-=======
 		ajustaMeses();
 	}
 	
@@ -155,8 +152,5 @@ function ajustaMeses(){
     else{
     	document.getElementById("periodo").innerHTML = document.getElementById("periodobk").innerHTML;  
     }
->>>>>>> dev-maria
-=======
->>>>>>> 60317c01fac8e7f617aedc26ffdd0c2dec31b7f2
-}	
+
 </script>

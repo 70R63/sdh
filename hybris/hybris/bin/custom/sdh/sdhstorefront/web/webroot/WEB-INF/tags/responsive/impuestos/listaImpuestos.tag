@@ -83,19 +83,11 @@
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
 
-<<<<<<< HEAD
-							<sf:select path="anoGravable" items="${icaAnioGravable}"
-<<<<<<< HEAD
-								referenceData="${icaAnioGravable}" class="newalto form-control" onchange="onChangeAnioGravable()"/>
-=======
+
 							<sf:select path="anoGravable" id="anoGravable" 
 								items="${icaAnioGravable}" 
 								referenceData="${icaAnioGravable}" 
 								class="newalto form-control"  onchange="onChangeAnioGravable()" />
->>>>>>> dev-maria
-=======
-								referenceData="${icaAnioGravable}" class="newalto form-control" onchange="onChangeAnioGravable()" />
->>>>>>> 60317c01fac8e7f617aedc26ffdd0c2dec31b7f2
 						</div>
 					</div>
 				</div>
@@ -121,17 +113,12 @@
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
+
 				<sf:select id="periodobk" path="periodo" items="${dataForm.catalogosSo.periodo}"
 								referenceData="${dataForm.catalogosSo.periodo}"
-<<<<<<< HEAD
+
 								class="newalto form-control" style="visibility:hidden"/>
-=======
-								class="newalto form-control"  style="visibility:hidden"/>
->>>>>>> dev-maria
-=======
-				
->>>>>>> 60317c01fac8e7f617aedc26ffdd0c2dec31b7f2
+
 			</c:if>
 
 			<c:if test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">
