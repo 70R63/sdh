@@ -1092,7 +1092,7 @@ public class SobreTasaGasolinaService
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2) + periodo;
+			periodoConvertidoPagar = anoGravable.substring(2).trim() + periodo;
 		}
 
 
@@ -1105,7 +1105,7 @@ public class SobreTasaGasolinaService
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2) + "B" + periodo;
+			periodoConvertidoPagar = anoGravable.substring(2).trim() + "B" + periodo;
 		}
 
 
@@ -1194,7 +1194,7 @@ public class SobreTasaGasolinaService
 		infoImpuesto = detalleContribuyente.getIca();
 		if (infoImpuesto != null)
 		{
-			numObjeto = infoImpuesto.getNumObjeto();
+			numObjeto = infoImpuesto.getNumObjeto().trim();
 		}
 
 
@@ -1471,7 +1471,7 @@ public class SobreTasaGasolinaService
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2) + "A1";
+			periodoConvertidoPagar = anoGravable.substring(2).trim() + "A1";
 		}
 
 
@@ -1724,14 +1724,18 @@ public class SobreTasaGasolinaService
 
 		if (periodo != null)
 		{
-			if (periodo.substring(2, 3).equals(" "))
-			{
-				periodoConvertidoPagar = prepararPeriodoAnualPago(icaInfObjetoResponse.getAnoGravable());
-			}
-			else
-			{
+			//			if (periodo.substring(2, 3).equals(" "))
+			//			{
+			//				periodoConvertidoPagar = prepararPeriodoAnualPago(icaInfObjetoResponse.getAnoGravable());
+			//			}
+			//			else
+			//			{
 				periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(1, 2));
-			}
+			//			}
+		}
+		else
+		{
+			periodoConvertidoPagar = prepararPeriodoAnualPago(icaInfObjetoResponse.getAnoGravable());
 		}
 
 
