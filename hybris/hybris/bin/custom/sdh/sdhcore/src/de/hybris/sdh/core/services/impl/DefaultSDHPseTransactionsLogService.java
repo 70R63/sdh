@@ -6,6 +6,7 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
@@ -205,5 +206,77 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			LOG.info("Error con la comunicacion de PSE");
 		}
 		return transactionState;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#newCredibancoLogTransactionEntry(de.hybris.sdh.core.
+	 * credibanco.InititalizeTransactionResponse, java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void newCredibancoLogTransactionEntry(final InititalizeTransactionResponse transactionPaymentResponse,
+			final String numeroDeReferencia, final String tipoDeImpuesto, final String impuesto, final String anoGravable,
+			final String CHIP, final String periodo, final String CUD, final String noIdentificacion, final String DV,
+			final String tipoDeIdentificacion, final String fechaLimiteDePago, final String pagoAdicional, final String banco,
+			final String valorAPagar, final String isoCurrency, final String tipoDeTarjeta, final String objPago)
+	{
+		final PseTransactionsLogModel transactionLogModel = new PseTransactionsLogModel();
+		final String transactionPaymentResponsePrint = null;
+
+		// ConstantConnectionDat
+		transactionLogModel.setEntityCode("CREDIBANCO_TRANSACTION");
+
+		// PSEPaymentForm
+		transactionLogModel.setNumeroDeReferencia(numeroDeReferencia);
+		transactionLogModel.setTipoDeImpuesto(tipoDeImpuesto);
+		transactionLogModel.setImpuesto(impuesto);
+		transactionLogModel.setAnoGravable(anoGravable);
+		transactionLogModel.setCHIP(CHIP);
+		transactionLogModel.setPeriodo(periodo);
+		transactionLogModel.setCUD(CUD);
+		transactionLogModel.setTipoDeIdentificacion(noIdentificacion);
+		transactionLogModel.setNoIdentificacion(DV);
+		transactionLogModel.setDV(tipoDeIdentificacion);
+		transactionLogModel.setFechaLimiteDePago(fechaLimiteDePago);
+		transactionLogModel.setPagoAdicional(pagoAdicional);
+		transactionLogModel.setBanco(banco);
+		transactionLogModel.setValorAPagar(valorAPagar);
+		transactionLogModel.setIsoCurrency(isoCurrency);
+		transactionLogModel.setTipoDeTarjeta(tipoDeTarjeta);
+		transactionLogModel.setObjPago(objPago);
+
+		// CreateTransactionPaymentResponseInformationType
+		if (transactionPaymentResponse != null)
+		{
+			transactionLogModel.setTrazabilityCode(transactionPaymentResponse.getInternalCode());
+			transactionLogModel.setReturnCode(transactionPaymentResponse.getReturnCode());
+			transactionLogModel.setBankUrl(transactionPaymentResponse.getPaymentRoute());
+			transactionLogModel.setTransactionCycle("Description: " + transactionPaymentResponse.getDescription());
+			transactionLogModel.setTransactionState(transactionPaymentResponse.getDescription());
+			transactionLogModel.setNotificacionDeRecaudo("NO");
+
+			LOG.info(
+					"NewCredibancoLogTransactionEntry - transactionPaymentResponse[" + transactionPaymentResponse.getInternalCode()
+							+ " , " + transactionPaymentResponse.getReturnCode() + " , " + transactionPaymentResponse.getReturnCode()
+							+ " , " + transactionPaymentResponse.getInternalCode() + "]");
+		}
+
+
+		// GetTransactionInformationResponseBodyType transactionLogModel.setSoliciteDate("");
+		transactionLogModel.setBankProcessDate("");
+		transactionLogModel.setTransactionState("");
+
+		LOG.info("NewCredibancoLogTransactionEntry:[" + transactionLogModel.getEntityCode() + " , " + numeroDeReferencia + " , "
+				+ tipoDeImpuesto + " , " + impuesto + " , " + anoGravable + " , " + CHIP + " , " + periodo + " , " + CUD + " , "
+				+ tipoDeIdentificacion + " , " + noIdentificacion + " , " + DV + " , " + fechaLimiteDePago + " , " + pagoAdicional
+				+ " , " + banco + " , " + valorAPagar + " , " + isoCurrency + " , " + tipoDeTarjeta + "]");
+
+		modelService.saveAll(transactionLogModel);
+
 	}
 }

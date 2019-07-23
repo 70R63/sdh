@@ -84,13 +84,14 @@ public class InititalizeTransactionResponse
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "InititalizeTransactionResponse [returnCode=" + returnCode + ", paymentRoute=" + paymentRoute + ", internalCode="
+		return "CredibancoInititalizeTransactionResponse [returnCode=" + returnCode + ", paymentRoute=" + paymentRoute
+				+ ", internalCode="
 				+ internalCode + ", description=" + description + "]";
 	}
 
