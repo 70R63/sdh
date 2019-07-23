@@ -91,6 +91,7 @@ function onChangeAnioGravable() {
 	        form.appendChild(input);
 	        form.submit();
 		}
+<<<<<<< HEAD
 		ajustaPeriodo();
 	}
 	
@@ -120,5 +121,39 @@ function ajustaPeriodo(){
 	}
 	
 	
+=======
+		ajustaMeses();
+	}
+	
+function ajustaMeses(){
+	debugger;
+	var dt = new Date( );
+    var mon;
+    var yr = dt.getFullYear();
+    
+    var size = document.getElementById("periodo").options.length;
+    let periodoList = document.getElementById("periodobk");
+    
+    var contPop;
+    var last;
+    if (size == 12 && document.getElementById("anoGravable").value == yr){
+    	mon = dt.getMonth() + 1;
+    	
+    	for( contPop = mon; contPop <= 11; contPop++){
+    		last = document.getElementById("periodo").options.length - 1;
+    		document.getElementById("periodo").remove(last);	
+    	}
+    }else  
+    if (size == 7 && document.getElementById("anoGravable").value == yr){
+    	mon = parseInt((dt.getMonth() + 1) / 2) + 1;
+    	for( contPop = mon; contPop < 6; contPop++){
+    		last = document.getElementById("periodo").options.length - 1;
+    		document.getElementById("periodo").remove(last);	
+    	}
+    }
+    else{
+    	document.getElementById("periodo").innerHTML = document.getElementById("periodobk").innerHTML;  
+    }
+>>>>>>> dev-maria
 }	
 </script>
