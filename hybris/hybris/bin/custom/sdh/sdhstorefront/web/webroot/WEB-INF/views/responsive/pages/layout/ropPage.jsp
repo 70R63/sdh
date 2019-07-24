@@ -9,10 +9,6 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
-
-
-
 <div class="container_new_page">
 	<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/rop"
 		method="post" commandName="ropForm">

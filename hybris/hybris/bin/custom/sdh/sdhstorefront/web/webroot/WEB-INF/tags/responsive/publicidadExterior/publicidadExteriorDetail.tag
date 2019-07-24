@@ -25,27 +25,26 @@
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="publicidad.exterior.detail.dateresolution" /></label> <input
-						id="fechResolu" name="fechResolu" class="newalto form-control" disabled
-						type="text" value="" maxlength="240"></input>
+						id="fechResolu" name="fechResolu" class="newalto form-control"
+						disabled type="text" value="" maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="publicidad.exterior.detail.type" /></label> <input
-						id="tipoSolicitud" name="tipoSolicitud" class="newalto form-control"
-						disabled type="text" value="" maxlength="240"></input>
+						id="tipoSolicitud" name="tipoSolicitud"
+						class="newalto form-control" disabled type="text" value=""
+						maxlength="240"></input>
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="publicidad.exterior.detail.Datenotification" /></label> <input
-						id="fechNotif" name="fechNotif" class="newalto form-control" disabled
-						type="text" value="" maxlength="240">
+						id="fechNotif" name="fechNotif" class="newalto form-control"
+						disabled type="text" value="" maxlength="240">
 				</div>
 			</div>
 		</div>

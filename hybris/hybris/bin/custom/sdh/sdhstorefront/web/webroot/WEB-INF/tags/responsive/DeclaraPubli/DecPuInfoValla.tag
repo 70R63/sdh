@@ -46,9 +46,7 @@
 
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
@@ -94,11 +92,8 @@
 
 			</div>
 		</div>
-	</div>
 
-
-	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-6">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.tamvalla" /></label>
@@ -139,9 +134,7 @@
 			</div>
 		</div>
 	</div>
-
-
-	<br> <br> <input type="hidden"
+ <input type="hidden"
 		value="${declaPublicidadForm.opuso }" id="opuso" /> <input
 		type="hidden" value="${declaPublicidadForm.direccion }" id="direccion" />
 	<input type="hidden" value="${declaPublicidadForm.placa }" id="placa" />

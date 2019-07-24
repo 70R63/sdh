@@ -80,7 +80,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-3 col-md-offset-2 center">
+		<div class="col-md-2">
 
 			<button id="calculoButton" name="calculoButton" type="button"
 				class="btn btn-primary btn-block">

@@ -47,9 +47,7 @@
 				</select>
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
