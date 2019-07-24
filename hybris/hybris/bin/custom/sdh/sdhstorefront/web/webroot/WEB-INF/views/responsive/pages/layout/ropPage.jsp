@@ -61,7 +61,7 @@
 					<label class="control-label"><spring:theme
 							code="rop.generar.totalpagar" /></label> <form:input
 						class="form-control new_alto" disabled="true" type="text"
-						size="30" value="" />
+						size="30" value="" path="" />
 				</div>
 			</div>
 		</div>
@@ -92,8 +92,8 @@
 			
 			<div class="col-md-2">
 			<button style="margin-top: 26px; margin-bottom: 15px;" id=""
-				class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';" type="button">
-				<spring:theme code="rop.generar.paglinea" />
+				class="btn btn-primary btn-lg"  onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea/form'/>';" type="button">
+				<spring:theme code="rop.generar.pagolinea" />
 			</button>
 		</div>
 		</div>
