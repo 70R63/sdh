@@ -42,7 +42,7 @@ public class ControllerPseConstants
 		PUBLICIDAD = "5401";
 		GASOLINA = "2308"; */
 
-		PREDIAL = "5101";
+		/*PREDIAL = "5101";
 		ICA = "5102";
 		VEHICULAR = "5103";
 		DELINEACION = "0706";
@@ -50,7 +50,19 @@ public class ControllerPseConstants
 		RETEICA = "5131";
 		RETENCIONDU = "0732";
 		PUBLICIDAD = "5154";
-		GASOLINA = "0108";
+		GASOLINA = "0108";*/
+
+		PREDIAL = "01";
+		ICA = "02";
+		VEHICULAR = "03";
+		DELINEACION = "06";
+		SOBRETASA = "XXXX"; //not used
+		RETEICA = "31";
+		RETENCIONDU = "32";
+		PUBLICIDAD = "54";
+		GASOLINA = "08";
+
+
 	}
 
 

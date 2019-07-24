@@ -132,10 +132,11 @@ public class PSEPaymentController extends AbstractPageController
 				new SelectAtomValue(new ControllerPseConstants().getDELINEACION(), "Delineacion"),
 				new SelectAtomValue(new ControllerPseConstants().getGASOLINA(), "Gasolina"),
 				new SelectAtomValue(new ControllerPseConstants().getICA(), "ICA"),
+				new SelectAtomValue(new ControllerPseConstants().getRETEICA(), "Retencion ICA"),
 				new SelectAtomValue(new ControllerPseConstants().getPREDIAL(), "Predial"),
 				new SelectAtomValue(new ControllerPseConstants().getPUBLICIDAD(), "Publicidad"),
 				new SelectAtomValue(new ControllerPseConstants().getVEHICULAR(), "Vehicular"),
-				new SelectAtomValue(new ControllerPseConstants().getRETENCIONDU(), "Retención de la delineación"));
+				new SelectAtomValue(new ControllerPseConstants().getRETENCIONDU(), "Retención De La Delineación"));
 
 		return tipoDeImpuesto;
 	}
@@ -187,10 +188,6 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			banco.add(new SelectAtomValue(bankEntry.getFinancialInstitutionCode(), bankEntry.getFinancialInstitutionName()));
 		}
-		//Adding Credibanco Bank code and description
-		banco.add(new SelectAtomValue(
-				configurationService.getConfiguration().getString("credibanco.bank.code"),
-				configurationService.getConfiguration().getString("credibanco.bank.description")));
 
 		return banco;
 	}
@@ -200,8 +197,8 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> tipoDeTarjeta = Arrays.asList(
-				new SelectAtomValue("04", "Credito"),
-				new SelectAtomValue("03", "Debito"));
+				new SelectAtomValue("01", "Credito"),
+				new SelectAtomValue("02", "Debito"));
 
 		return tipoDeTarjeta;
 	}
@@ -544,34 +541,37 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info(psePaymentForm);
 		LOG.info("----------- doPsePayment --------------");
 
-		createTransactionPaymentInformationType.setPaymentDescription("descripcion de ejemplo");
+		createTransactionPaymentInformationType.setPaymentDescription(psePaymentForm.getTipoDeIdentificacion().concat("-".concat(psePaymentForm.getNumeroDeReferencia())));
 		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
-				psePaymentForm.getTipoDeIdentificacion() + " " + psePaymentForm.getNoIdentificacion(), "Dir. IP 172.18.39.46", "r3"));
+				psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), "172.18.39.46", "NonRed#1"));
 
 
 		return pseServices
 				.createTransactionPayment(
-						this.getConstantConnectionData(psePaymentForm.getBanco(), psePaymentForm.getTipoDeImpuesto(),
+						this.getConstantConnectionData(
+								psePaymentForm.getBanco(),
+								psePaymentForm.getBanco().substring(2).concat(psePaymentForm.getTipoDeImpuesto()),
 								psePaymentForm.getNumeroDeReferencia()),
-						this.getMessageHeader(), createTransactionPaymentInformationType);
+						this.getMessageHeader(),
+						createTransactionPaymentInformationType);
 	}
 
 	private InititalizeTransactionResponse doCredibancoPayment(final PSEPaymentForm psePaymentForm)
 	{
 		final InititalizeTransactionRequest inititalizeTransactionRequest = new InititalizeTransactionRequest(
 				psePaymentForm.getNumeroDeReferencia(),
-				psePaymentForm.getNoIdentificacion().concat("-").concat(psePaymentForm.getObjPago()),
-				psePaymentForm.getNoIdentificacion().concat("-").concat(psePaymentForm.getObjPago()).concat("-").concat(psePaymentForm.getImpuesto().concat("-").concat(psePaymentForm.getTipoDeIdentificacion())),
+				psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago(),
+				psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago() + "-" + psePaymentForm.getImpuesto() + "-" + psePaymentForm.getTipoDeIdentificacion(),
 				CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE.get(psePaymentForm.getTipoDeIdentificacion()), //persona natural
 				configurationService.getConfiguration().getString("credibanco.response.url").concat("?ticketId=").concat(psePaymentForm.getNumeroDeReferencia()),
 				psePaymentForm.getValorAPagar(),
 				"0", //Tax
-				"nonRef1",
-				"nonRef2",
-				"nonRef3",
+				"NonRef#1",
+				"NonRef#2",
+				"NonRef#3",
 				null); //bankCode
 
 		return sdhCredibancoJwt.inititalizeTransaction(inititalizeTransactionRequest);
