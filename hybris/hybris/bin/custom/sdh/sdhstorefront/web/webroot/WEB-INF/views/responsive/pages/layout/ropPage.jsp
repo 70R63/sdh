@@ -9,35 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="row">
-	<script>
-		function downloadPDF(pdf) {
-			debugger;
-			const linkSource = 'data:application/pdf;base64,' + pdf;
-			const downloadLink = document.createElement("a");
-			const fileName = "ROP.pdf";
 
-			downloadLink.href = linkSource;
-			downloadLink.download = fileName;
-			downloadLink.click();
-
-		}
-
-		downloadPDF('${ropForm.stringFact}');
-	</script>
-
-
-
-	<!-- 	<div class="container"> -->
-	<!-- 	 	<div class="headline"> -->
-	<!-- 			<h3> -->
-	<%-- 				<c:if test="${not empty ropForm.stringFact}"> --%>
-	<%-- 				  <iframe width='100%' height='600' width='15' src=' data:application/pdf;/Certificación RIT#zoom=100&view=fitH&;base64,${ropForm.stringFact}'>	</iframe> --%>
-	<%-- 				</c:if>   --%>
-	<!-- 			</h3> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-</div>
 
 
 
@@ -47,11 +19,10 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label">
-						<spring:theme code="rop.generar.valobli" />
-					</label>
-					<input class="form-control new_alto" disabled="disabled"
-						type="text" size="30" value=""/>
+					<label class="control-label"> <spring:theme
+							code="rop.generar.valobli" />
+					</label> <input class="form-control new_alto" disabled="disabled"
+						type="text" size="30" value="" />
 				</div>
 			</div>
 		</div>
@@ -59,9 +30,9 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="rop.generar.totalpagar" /></label> <form:input
-						class="form-control new_alto" disabled="true" type="text"
-						size="30" value="" />
+							code="rop.generar.totalpagar" /></label>
+					<form:input class="form-control new_alto" disabled="true"
+						type="text" size="30" value="" path="" />
 				</div>
 			</div>
 		</div>
@@ -69,8 +40,10 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="rop.generar.parcial" /></label> <form:input
-						class="form-control new_alto" type="text" size="30" value="" path="importeusuario"  />
+							code="rop.generar.parcial" /></label>
+					<form:input class="form-control new_alto" type="text" size="30"
+						value="" path="importeusuario" onkeyup="numberFormat(this)"
+						onclick="numberFormat(this)" id="importeusuario" />
 				</div>
 			</div>
 		</div>
@@ -89,13 +62,15 @@
 					<spring:theme code="rop.generar.genrop" />
 				</button>
 			</div>
-			
+
 			<div class="col-md-2">
-			<button style="margin-top: 26px; margin-bottom: 15px;" id=""
-				class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';" type="button">
-				<spring:theme code="rop.generar.paglinea" />
-			</button>
-		</div>
+				<button style="margin-top: 26px; margin-bottom: 15px;" id=""
+					class="btn btn-primary btn-lg"
+					onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea/form'/>';"
+					type="button">
+					<spring:theme code="rop.generar.pagolinea" />
+				</button>
+			</div>
 		</div>
 
 	</form:form>
@@ -103,6 +78,40 @@
 <script>
 	function goBack() {
 		window.history.back();
+	}
+	
+	function numberFormat(selectObject) {
+		var numero = selectObject.value;
+		var idinput = selectObject.id;
+		var resultado = "";
+
+		if (numero[0] == "-") {
+			nuevoNumero = numero.replace(/\./g, '').substring(1);
+		} else {
+
+			nuevoNumero = numero.toString().replace(/\./g, '');
+		}
+
+		if (numero.toString().indexOf(",") >= 0)
+			nuevoNumero = nuevoNumero.substring(0, nuevoNumero.indexOf(","));
+
+		for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++)
+			resultado = nuevoNumero.charAt(i)
+					+ ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
+
+		if (numero.toString().indexOf(",") >= 0)
+			resultado += numero.substring(numero.indexOf(","));
+
+		if (numero[0] == "-") {
+
+			document.getElementById(idinput).value = "-" + resultado;
+			return "-" + resultado;
+		} else {
+			document.getElementById(idinput).value = resultado;
+			return resultado;
+
+		}
+
 	}
 </script>
 
