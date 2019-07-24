@@ -60,8 +60,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="rop.generar.totalpagar" /></label> <form:input
-						class="form-control new_alto" disabled="disabled" type="text"
-						size="30" value="" path="importeusuario" />
+						class="form-control new_alto" disabled="true" type="text"
+						size="30" value="" />
 				</div>
 			</div>
 		</div>
@@ -69,8 +69,8 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="rop.generar.parcial" /></label> <input
-						class="form-control new_alto" type="text" size="30" value="" />
+							code="rop.generar.parcial" /></label> <form:input
+						class="form-control new_alto" type="text" size="30" value="" path="importeusuario"  />
 				</div>
 			</div>
 		</div>
@@ -89,6 +89,13 @@
 					<spring:theme code="rop.generar.genrop" />
 				</button>
 			</div>
+			
+			<div class="col-md-2">
+			<button style="margin-top: 26px; margin-bottom: 15px;" id=""
+				class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';" type="button">
+				<spring:theme code="rop.generar.paglinea" />
+			</button>
+		</div>
 		</div>
 
 	</form:form>

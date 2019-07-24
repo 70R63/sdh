@@ -132,13 +132,13 @@
 
 					<div class="col-md-3">
 						<div class="form-group ">
-							<input class="form-control" maxlength="30" value=""></input>
+							<input class="form-control" maxlength="30" value="" ></input>
 						</div>
 					</div>
 
 					<div class="col-md-3 col-md-offset-1" style="margin-left: 169px;">
 						<div class="form-group ">
-							<input class="form-control" maxlength="30" value=""></input>
+							<input class="form-control" maxlength="30" value="" onkeyup="numberFormat(this)" onclick="numberFormat(this)"></input>
 						</div>
 					</div>
 				</div>
@@ -172,10 +172,10 @@
 							<option value="Modificada">Modificada</option>
 							<option value="Adecuada">Adecuada</option>
 							<option value="Reconocimiento">Reconocimiento</option>
-							<option value="Conservación/Restaruación">Conservación/Restaruación</option>
+							<option value="Conservaciï¿½n/Restaruaciï¿½n">Conservaciï¿½n/Restaruaciï¿½n</option>
 							<option value="Reforzamiento estructural">Reforzamiento
 								estructural</option>
-							<option value="Demolición">Demolición</option>
+							<option value="Demoliciï¿½n">Demoliciï¿½n</option>
 							<option value="Metros lineales Cerramiento">Metros
 								lineales Cerramiento</option>
 							<option value="Reconocimiento">Reconocimiento</option>
@@ -246,7 +246,7 @@
 
 							<option value="Seleccionar">Seleccionar</option>
 							<option value="Lote">Lote</option>
-							<option value="Sótano">Sótano</option>
+							<option value="Sï¿½tano">Sï¿½tano</option>
 							<option value="Semisotano(s)">Semisotano(s)</option>
 							<option value="Primer Piso">Primer Piso</option>
 							<option value="Pisos Restantes">Pisos Restantes</option>
@@ -325,8 +325,6 @@
 
 			</div>
 		</div>
-</div>
-
 </form:form>
 
 </div>

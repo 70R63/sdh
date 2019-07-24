@@ -221,7 +221,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-8">
 					<table class="table">
 						<thead style="cellspacing: 10 !important">
 							<tr>

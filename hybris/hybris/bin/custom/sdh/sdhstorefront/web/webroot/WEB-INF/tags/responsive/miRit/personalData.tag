@@ -75,7 +75,7 @@
 										code="mirit.personalData.documnetIssueDate" />
 								</label> <input id="fchExp" name="fchExp"
 									class="newalto form-control" aria-required="true"
-									type="text" value="${miRitForm.fchExp }" maxlength="240">
+									type="text" value="${miRitForm.fchExp }" maxlength="240" placeholder="dd/mm/aaaa">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
