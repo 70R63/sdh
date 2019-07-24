@@ -479,14 +479,15 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		String redirecUrl = getViewForPage(model);
 
-		LOG.info("--------- Call PSE/Bank Web Service ---------");
+
 		if (psePaymentForm.getBanco().equals(new ControllerCredibancoConstants().getCREDIBANCO_CODE())) //Credibanco Payment
 		{
+			LOG.info("--------- Call Credibanco/Bank Web Service ---------");
 			final InititalizeTransactionResponse response = this.doCredibancoPayment(psePaymentForm);
 			if (Objects.nonNull(response))
 			{
 				final String returnCode = response.getReturnCode();
-				if(returnCode.equals("0")) { // Return Transaction code - OK(0)
+				if(returnCode.equals("0")) { // Return Transaction code - 0(0k)
 					redirecUrl = "redirect:" + response.getPaymentRoute();
 					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
 				}
@@ -504,6 +505,7 @@ public class PSEPaymentController extends AbstractPageController
 		}
 		else // ACH Payment
 		{
+			LOG.info("--------- Call PSE/Bank Web Service ---------");
 			final CreateTransactionPaymentResponseInformationType response = this.doPsePayment(psePaymentForm);
 			if (response != null)
 			{
@@ -564,7 +566,7 @@ public class PSEPaymentController extends AbstractPageController
 				psePaymentForm.getNoIdentificacion().concat("-").concat(psePaymentForm.getObjPago()),
 				psePaymentForm.getNoIdentificacion().concat("-").concat(psePaymentForm.getObjPago()).concat("-").concat(psePaymentForm.getImpuesto().concat("-").concat(psePaymentForm.getTipoDeIdentificacion())),
 				CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE.get(psePaymentForm.getTipoDeIdentificacion()), //persona natural
-				configurationService.getConfiguration().getString("credibanco.response.url").concat("/").concat(psePaymentForm.getNumeroDeReferencia()),
+				configurationService.getConfiguration().getString("credibanco.response.url").concat("?ticketId=").concat(psePaymentForm.getNumeroDeReferencia()),
 				psePaymentForm.getValorAPagar(),
 				"0", //Tax
 				"nonRef1",

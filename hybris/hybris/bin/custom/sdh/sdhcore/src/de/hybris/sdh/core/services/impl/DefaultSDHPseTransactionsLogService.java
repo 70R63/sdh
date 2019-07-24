@@ -108,7 +108,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		modelService.saveAll(transactionLogModel);
 	}
 
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateTransaction(java.lang.String)
@@ -136,7 +136,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		}
 		else
 		{
-			LOG.info("La transaccion con numero de referencia [" + numeroDeReferencia + "] no existe");
+			LOG.info("La transaccion con numero de referencia PSE[" + numeroDeReferencia + "] no existe");
 		}
 
 		return transactionState;
@@ -169,7 +169,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 			this.updateResponse(pseTransactionsLogModel, response);
 
-			LOG.info("Actualizando informacion de [" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+			LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
 					+ pseTransactionsLogModel.getTransactionState() + "] ");
 		}
 
@@ -291,6 +291,32 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				+ " , " + banco + " , " + valorAPagar + " , " + isoCurrency + " , " + tipoDeTarjeta + "]");
 
 		modelService.saveAll(transactionLogModel);
+
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateCredibancoTransaction(java.lang.String)
+	 */
+	@Override
+	public String updateCredibancoTransaction(final String numeroDeReferencia)
+	{
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateAllCredibancoTransactions(java.lang.String)
+	 */
+	@Override
+	public void updateAllCredibancoTransactions(final String transactionState)
+	{
+		// XXX Auto-generated method stub
 
 	}
 }
