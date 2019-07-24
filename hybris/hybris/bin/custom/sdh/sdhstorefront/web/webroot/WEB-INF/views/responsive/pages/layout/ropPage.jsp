@@ -9,35 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="row">
-	<script>
-		function downloadPDF(pdf) {
-			debugger;
-			const linkSource = 'data:application/pdf;base64,' + pdf;
-			const downloadLink = document.createElement("a");
-			const fileName = "ROP.pdf";
 
-			downloadLink.href = linkSource;
-			downloadLink.download = fileName;
-			downloadLink.click();
-
-		}
-
-		downloadPDF('${ropForm.stringFact}');
-	</script>
-
-
-
-	<!-- 	<div class="container"> -->
-	<!-- 	 	<div class="headline"> -->
-	<!-- 			<h3> -->
-	<%-- 				<c:if test="${not empty ropForm.stringFact}"> --%>
-	<%-- 				  <iframe width='100%' height='600' width='15' src=' data:application/pdf;/Certificación RIT#zoom=100&view=fitH&;base64,${ropForm.stringFact}'>	</iframe> --%>
-	<%-- 				</c:if>   --%>
-	<!-- 			</h3> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-</div>
 
 
 
@@ -61,7 +33,7 @@
 					<label class="control-label"><spring:theme
 							code="rop.generar.totalpagar" /></label> <form:input
 						class="form-control new_alto" disabled="true" type="text"
-						size="30" value="" />
+						size="30" value="" path="" />
 				</div>
 			</div>
 		</div>
@@ -92,8 +64,8 @@
 			
 			<div class="col-md-2">
 			<button style="margin-top: 26px; margin-bottom: 15px;" id=""
-				class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';" type="button">
-				<spring:theme code="rop.generar.paglinea" />
+				class="btn btn-primary btn-lg"  onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea/form'/>';" type="button">
+				<spring:theme code="rop.generar.pagolinea" />
 			</button>
 		</div>
 		</div>
