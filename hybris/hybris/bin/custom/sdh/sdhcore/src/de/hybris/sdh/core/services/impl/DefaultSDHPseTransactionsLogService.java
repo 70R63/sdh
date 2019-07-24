@@ -6,6 +6,7 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
@@ -18,6 +19,7 @@ import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -107,6 +109,11 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	}
 
 
+	/*
+	 * (non-Javadoc)
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateTransaction(java.lang.String)
+	 * ACH Update Transaction
+	 */
 	@Override
 	public String updateTransaction(final String numeroDeReferencia)
 	{
@@ -129,13 +136,18 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		}
 		else
 		{
-			LOG.info("La transaccion con numero de referencia [" + numeroDeReferencia + "] no existe");
+			LOG.info("La transaccion con numero de referencia PSE[" + numeroDeReferencia + "] no existe");
 		}
 
 		return transactionState;
 	}
 
 
+	/*
+	 * (non-Javadoc)
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateAllTransactions(java.lang.String)
+	 * ACH Update All Trandactions
+	 */
 	@Override
 	public void updateAllTransactions(final String transactionState)
 	{
@@ -151,13 +163,14 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
 			getTransactionInformationBodyType.setTrazabilityCode(trazabilityCode);
 
+			//ACH Updating Transactions
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
-			LOG.info("Actualizando informacion de [" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
-					+ pseTransactionsLogModel.getTransactionState() + "] ");
-
 			this.updateResponse(pseTransactionsLogModel, response);
+
+			LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+					+ pseTransactionsLogModel.getTransactionState() + "] ");
 		}
 
 	}
@@ -205,5 +218,105 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			LOG.info("Error con la comunicacion de PSE");
 		}
 		return transactionState;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#newCredibancoLogTransactionEntry(de.hybris.sdh.core.
+	 * credibanco.InititalizeTransactionResponse, java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void newCredibancoLogTransactionEntry(final InititalizeTransactionResponse transactionPaymentResponse,
+			final String numeroDeReferencia, final String tipoDeImpuesto, final String impuesto, final String anoGravable,
+			final String CHIP, final String periodo, final String CUD, final String noIdentificacion, final String DV,
+			final String tipoDeIdentificacion, final String fechaLimiteDePago, final String pagoAdicional, final String banco,
+			final String valorAPagar, final String isoCurrency, final String tipoDeTarjeta, final String objPago)
+	{
+		final PseTransactionsLogModel transactionLogModel = new PseTransactionsLogModel();
+		final String transactionPaymentResponsePrint = null;
+		final SimpleDateFormat dateFmt = new SimpleDateFormat("MM/dd/yy");
+		final SimpleDateFormat timeFmt = new SimpleDateFormat("hh:mm:ss");
+		final Date dateTimeTransaction = new Date();
+
+		// ConstantConnectionDat
+		transactionLogModel.setEntityCode("CREDIBANCO_TRANSACTION");
+
+		// PSEPaymentForm
+		transactionLogModel.setNumeroDeReferencia(numeroDeReferencia);
+		transactionLogModel.setTipoDeImpuesto(tipoDeImpuesto);
+		transactionLogModel.setImpuesto(impuesto);
+		transactionLogModel.setAnoGravable(anoGravable);
+		transactionLogModel.setCHIP(CHIP);
+		transactionLogModel.setPeriodo(periodo);
+		transactionLogModel.setCUD(CUD);
+		transactionLogModel.setTipoDeIdentificacion(noIdentificacion);
+		transactionLogModel.setNoIdentificacion(DV);
+		transactionLogModel.setDV(tipoDeIdentificacion);
+		transactionLogModel.setFechaLimiteDePago(fechaLimiteDePago);
+		transactionLogModel.setPagoAdicional(pagoAdicional);
+		transactionLogModel.setBanco(banco);
+		transactionLogModel.setValorAPagar(valorAPagar);
+		transactionLogModel.setIsoCurrency(isoCurrency);
+		transactionLogModel.setTipoDeTarjeta(tipoDeTarjeta);
+		transactionLogModel.setObjPago(objPago);
+
+		// CreateTransactionPaymentResponseInformationType
+		if (transactionPaymentResponse != null)
+		{
+			transactionLogModel.setTrazabilityCode(transactionPaymentResponse.getInternalCode());
+			transactionLogModel.setReturnCode(transactionPaymentResponse.getReturnCode());
+			transactionLogModel.setBankUrl(transactionPaymentResponse.getPaymentRoute());
+			transactionLogModel.setTransactionCycle("Description: " + transactionPaymentResponse.getDescription());
+			transactionLogModel.setTransactionState(transactionPaymentResponse.getDescription());
+			transactionLogModel.setNotificacionDeRecaudo("NO");
+
+			LOG.info(
+					"NewCredibancoLogTransactionEntry - transactionPaymentResponse[" + transactionPaymentResponse.getInternalCode()
+							+ " , " + transactionPaymentResponse.getReturnCode() + " , " + transactionPaymentResponse.getReturnCode()
+							+ " , " + transactionPaymentResponse.getInternalCode() + "]");
+		}
+
+		// GetTransactionInformationResponseBodyType transactionLogModel.setSoliciteDate("");
+		transactionLogModel.setBankProcessDate(dateFmt.format(dateTimeTransaction));
+		transactionLogModel.setTransactionState(timeFmt.format(dateTimeTransaction));
+
+		LOG.info("NewCredibancoLogTransactionEntry:[" + transactionLogModel.getEntityCode() + " , " + numeroDeReferencia + " , "
+				+ tipoDeImpuesto + " , " + impuesto + " , " + anoGravable + " , " + CHIP + " , " + periodo + " , " + CUD + " , "
+				+ tipoDeIdentificacion + " , " + noIdentificacion + " , " + DV + " , " + fechaLimiteDePago + " , " + pagoAdicional
+				+ " , " + banco + " , " + valorAPagar + " , " + isoCurrency + " , " + tipoDeTarjeta + "]");
+
+		modelService.saveAll(transactionLogModel);
+
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateCredibancoTransaction(java.lang.String)
+	 */
+	@Override
+	public String updateCredibancoTransaction(final String numeroDeReferencia)
+	{
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateAllCredibancoTransactions(java.lang.String)
+	 */
+	@Override
+	public void updateAllCredibancoTransactions(final String transactionState)
+	{
+		// XXX Auto-generated method stub
+
 	}
 }

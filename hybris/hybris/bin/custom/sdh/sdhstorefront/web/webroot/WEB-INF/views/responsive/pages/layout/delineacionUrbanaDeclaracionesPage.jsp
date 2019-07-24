@@ -18,9 +18,9 @@
 	<delineacionUrbana:delineacionUrbanaRetenAreasUsos />
 	<delineacionUrbana:delineacionUrbanaDecAreasUsosFechas />
 	<delineacionUrbana:delineacionUrbanaDecLiqPriva />
-	</sf:form>
+</sf:form>
 <%-- 	<delineacionUrbana:delineacionUrbanaDecFirma /> --%>
-	<delineacionUrbana:delineacionUrbanaDecFirmas />
+<delineacionUrbana:delineacionUrbanaDecFirmas />
 
 
 
@@ -28,31 +28,32 @@
 <script>
 	function goBack() {
 		var declaracion = '${param.declaracion}';
-		
-		if(declaracion){
+
+		if (declaracion) {
 			window.location.href = "/sdhstorefront/es/contribuyentes/presentar-declaracion";
-		}else{
+		} else {
 			window.history.back();
 		}
 	}
-	
-	function nuevos(selectObject){
+
+	function nuevos(selectObject) {
 
 		var value = selectObject.value;
 		var cauex = document.getElementById('cauexen').value;
 		var auex = document.getElementById('valorExen');
-		
-		if(value=='09' && (cauex=='00' || cauex=='')){
-			auex.readonly=true;
-		}else if(value=='09' && (cauex!='00' || cauex!='')){
-			auex.readonly=true;
-		}else if(value!='09' && (cauex=='00' || cauex=='' || cauex=="")){
-			auex.readonly=true;
-		}else{
-			auex.readonly=false;
+
+		if (value == '09' && (cauex == '00' || cauex == '')) {
+			auex.readonly = true;
+		} else if (value == '09' && (cauex != '00' || cauex != '')) {
+			auex.readonly = true;
+		} else if (value != '09'
+				&& (cauex == '00' || cauex == '' || cauex == "")) {
+			auex.readonly = true;
+		} else {
+			auex.readonly = false;
 		}
-		
-}
+
+	}
 	window.onload = function data() {
 		debugger;
 
@@ -63,35 +64,32 @@
 		var cauex = document.getElementById('cauexen').value;
 		var auex = document.getElementById('valorExen');
 		var tiplin = document.getElementById('tipoDeLicencia');
-		
-		if(mod=='09' && (cauex=='00' || cauex=='')){
-			auex.readonly=true;
-		}else if(mod=='09' && (cauex!='00' || cauex!='')){
-			auex.readonly=true;
-		}else if(mod!='09' && (cauex=='00' || cauex=='' || cauex=="")){
-			auex.readonly=true;
-		}else{
-			auex.readonly=false;
+
+		if (mod == '09' && (cauex == '00' || cauex == '')) {
+			auex.readonly = true;
+		} else if (mod == '09' && (cauex != '00' || cauex != '')) {
+			auex.readonly = true;
+		} else if (mod != '09' && (cauex == '00' || cauex == '' || cauex == "")) {
+			auex.readonly = true;
+		} else {
+			auex.readonly = false;
 		}
-		
-		if(cauex=='' || cauex=="00")
-			{
-			tiplin.readonly=true;
-			}
-		
-		
-		if (value == '6'){
-			
-			areaintervenida.readonly=false;
-			inareainter.readonly=false;
-			
-		}else{
-			areaintervenida.readonly=true;
-			inareainter.readonly=true;
+
+		if (cauex == '' || cauex == "00") {
+			tiplin.readonly = true;
+		}
+
+		if (value == '6') {
+
+			areaintervenida.readonly = false;
+			inareainter.readonly = false;
+
+		} else {
+			areaintervenida.readonly = true;
+			inareainter.readonly = true;
 		}
 	}
-	
-	
+
 	function tipoLicenciaCHANGE(selectObject) {
 
 		//Validacion tipo de licencia = 02
@@ -99,31 +97,65 @@
 		var tipoMarca = document.getElementById('tipoMarca');
 		var tipoDeLicencia = selectObject.value;
 
-		
 		if ((tipoDeLicencia == "02") && (tipoMarca.value != "")) {
 			valorExen.disabled = false;
 			valorExen.readonly = false;
-			
+
 		} else {
 			valorExen.disabled = true;
 			valorExen.readonly = true;
 		}
 
 	}
-	
+
 	function pagarlinea() {
 
 		var btnpaglinea = document.getElementById('action');
-		btnpaglinea.disabled=false;
-		
-		
+		btnpaglinea.disabled = false;
+
 	}
-	
+
 	function presdec() {
 		var btnpresdec = document.getElementById('duGeneraDeclaracionButton');
-		btnpresdec.disabled=false;
-		
-		
+		btnpresdec.disabled = false;
+
+	}
+</script>
+
+
+<script>
+	function numberFormat(selectObject) {
+		var numero = selectObject.value;
+		var idinput = selectObject.id;
+		var resultado = "";
+
+		if (numero[0] == "-") {
+			nuevoNumero = numero.replace(/\./g, '').substring(1);
+		} else {
+
+			nuevoNumero = numero.toString().replace(/\./g, '');
+		}
+
+		if (numero.toString().indexOf(",") >= 0)
+			nuevoNumero = nuevoNumero.substring(0, nuevoNumero.indexOf(","));
+
+		for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++)
+			resultado = nuevoNumero.charAt(i)
+					+ ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
+
+		if (numero.toString().indexOf(",") >= 0)
+			resultado += numero.substring(numero.indexOf(","));
+
+		if (numero[0] == "-") {
+
+			document.getElementById(idinput).value = "-" + resultado;
+			return "-" + resultado;
+		} else {
+			document.getElementById(idinput).value = resultado;
+			return resultado;
+
+		}
+
 	}
 </script>
 

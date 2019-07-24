@@ -91,5 +91,66 @@ function onChangeAnioGravable() {
 	        form.appendChild(input);
 	        form.submit();
 		}
+
+		ajustaPeriodo();
 	}
+	
+function ajustaPeriodo(){
+	debugger;
+	var dt = new Date();
+	var year = dt.getFullYear();
+	
+	
+	var sizePeriodo = document.getElementById("periodo").options.length;
+	
+	
+	if (sizePeriodo == 12 && document.getElementById("anoGravable").value == year){
+		var mon = dt.getMonth() + 1;
+		for (monPop = mon; monPop <= 11; monPop++ ){
+			document.getElementById("periodo").options[monPop].disabled = true;
+		}
+	}else if (sizePeriodo == 7 && document.getElementById("anoGravable").value == year){
+		var mon = parseInt((dt.getMonth() + 1)/2) + 2;
+		for (monPop = mon; monPop < 7; monPop++ ){
+			document.getElementById("periodo").options[monPop].disabled = true;
+		}
+	}else{
+		for (monPop = 0; monPop < document.getElementById("periodo").length; monPop++ ){
+			document.getElementById("periodo").options[monPop].disabled = false;
+		} 
+	}
+	
+		ajustaMeses();
+	}
+	
+function ajustaMeses(){
+	debugger;
+	var dt = new Date( );
+    var mon;
+    var yr = dt.getFullYear();
+    
+    var size = document.getElementById("periodo").options.length;
+    let periodoList = document.getElementById("periodobk");
+    
+    var contPop;
+    var last;
+    if (size == 12 && document.getElementById("anoGravable").value == yr){
+    	mon = dt.getMonth() + 1;
+    	
+    	for( contPop = mon; contPop <= 11; contPop++){
+    		last = document.getElementById("periodo").options.length - 1;
+    		document.getElementById("periodo").remove(last);	
+    	}
+    }else  
+    if (size == 7 && document.getElementById("anoGravable").value == yr){
+    	mon = parseInt((dt.getMonth() + 1) / 2) + 1;
+    	for( contPop = mon; contPop < 6; contPop++){
+    		last = document.getElementById("periodo").options.length - 1;
+    		document.getElementById("periodo").remove(last);	
+    	}
+    }
+    else{
+    	document.getElementById("periodo").innerHTML = document.getElementById("periodobk").innerHTML;  
+    }
+
 </script>

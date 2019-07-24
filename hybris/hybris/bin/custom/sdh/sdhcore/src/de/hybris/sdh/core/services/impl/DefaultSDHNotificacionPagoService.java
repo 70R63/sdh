@@ -98,6 +98,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setNumOperacion("9999999");
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
 
+
 			this.realizarNotificacion(validateTransaction(pseNotificacionDePagoRequest));
 
 			transaction.setNotificacionDeRecaudo("SI");

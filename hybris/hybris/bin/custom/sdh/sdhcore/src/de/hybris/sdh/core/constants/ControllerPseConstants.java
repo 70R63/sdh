@@ -46,11 +46,11 @@ public class ControllerPseConstants
 		ICA = "5102";
 		VEHICULAR = "5103";
 		DELINEACION = "0706";
-		SOBRETASA = "0108";
+		SOBRETASA = "XXXX";
 		RETEICA = "5131";
 		RETENCIONDU = "0732";
 		PUBLICIDAD = "5154";
-		GASOLINA = "2308";
+		GASOLINA = "0108";
 	}
 
 

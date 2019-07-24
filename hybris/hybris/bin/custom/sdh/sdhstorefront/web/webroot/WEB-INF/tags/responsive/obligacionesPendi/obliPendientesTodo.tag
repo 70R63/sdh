@@ -239,7 +239,7 @@
 
 
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="">
 								<thead>
@@ -255,9 +255,9 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<c:forEach items="${customerData.gasTaxList }"
-											var="eachGasTax">
+
+									<c:forEach items="${customerData.gasTaxList }" var="eachGasTax">
+										<tr>
 											<td><input style="width: 100%" class="inputtextnew"
 												maxlength="30" size="30" disabled="disabled" type="text"
 												value="<c:out value="${eachGasTax.documentType}"></c:out>" /></td>
@@ -267,8 +267,9 @@
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle">Detalle</label></td>
-										</c:forEach>
-									</tr>
+										</tr>
+									</c:forEach>
+
 								</tbody>
 							</table>
 						</div>
@@ -295,7 +296,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-5 text-center">
+					<div class="col-md-6 text-center">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="">
 								<thead>
@@ -343,7 +344,8 @@
 
 		<!-- 			tablas de detalle -->
 
-		<div id="detalle-predial"  class="oblipend-tabledetalle" style="display: none;">
+		<div id="detalle-predial" class="oblipend-tabledetalle"
+			style="display: none;">
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
@@ -395,9 +397,11 @@
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id="" onclick="">Pagar</label></td>
-										<td><label class="control-label"
+									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar ROP</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar
+											ROP</label></td>
 								</tr>
 							</tbody>
 						</table>
@@ -426,9 +430,10 @@
 			</div>
 		</div>
 
-		<div id="detalle-ica"  class="oblipend-tabledetalle" style="display: none;">
+		<div id="detalle-ica" class="oblipend-tabledetalle"
+			style="display: none;">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-8">
 					<label class="control-label">Fecha reporte </label> <input
 						class="inputtextnew" disabled="disabled" value="" type="text" />
 				</div>
@@ -469,9 +474,11 @@
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id="" onclick="">Pagar</label></td>
-										<td><label class="control-label"
+									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar ROP</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar
+											ROP</label></td>
 								</tr>
 							</tbody>
 						</table>
@@ -501,7 +508,8 @@
 		</div>
 
 
-		<div id="detalle-vehiculos"  class="oblipend-tabledetalle" style="display: none;">
+		<div id="detalle-vehiculos" class="oblipend-tabledetalle"
+			style="display: none;">
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
@@ -556,9 +564,11 @@
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id="" onclick="">Pagar</label></td>
-										<td><label class="control-label"
+									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar ROP</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar
+											ROP</label></td>
 
 								</tr>
 							</tbody>
@@ -589,7 +599,8 @@
 		</div>
 
 
-		<div id="detalle-delurbana"  class="oblipend-tabledetalle" style="display: none;">
+		<div id="detalle-delurbana" class="oblipend-tabledetalle"
+			style="display: none;">
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
@@ -597,7 +608,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-8 text-center">
+				<div class="col-md-10 text-center">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="">
 							<thead>
@@ -607,8 +618,6 @@
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="obligacion.sujeto.delurbana.cdu" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
-												code="obligacion.sujeto.delurbana.chip" /> </label></th>
-									<th><label class="control-label labeltabletd tableangrav"><spring:theme
 												code="obligacion.sujeto.delurbana.chip" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="obligacion.sujeto.delurbana.edoobliga" /> </label></th>
@@ -627,10 +636,8 @@
 										value="<c:out value="A�o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew" disabled="disabled"
+									<td><input class="inputtextnew tabledoobli" disabled="disabled"
 										value="" type="text" /></td>
-									<td><input class="inputtextnew tableangrav"
-										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -640,9 +647,11 @@
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id="" onclick="">Pagar</label></td>
-										<td><label class="control-label"
+									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar ROP</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar
+											ROP</label></td>
 								</tr>
 							</tbody>
 						</table>
@@ -671,7 +680,8 @@
 			</div>
 		</div>
 
-		<div id="detalle-gasolina"  class="oblipend-tabledetalle" style="display: none">
+		<div id="detalle-gasolina" class="oblipend-tabledetalle"
+			style="display: none">
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
@@ -679,7 +689,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-7">
+				<div class="col-md-8">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="">
 							<thead>
@@ -714,9 +724,11 @@
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id="" onclick="">Pagar</label></td>
-										<td><label class="control-label"
+									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar ROP</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar
+											ROP</label></td>
 								</tr>
 							</tbody>
 						</table>
@@ -744,7 +756,8 @@
 				</div>
 			</div>
 		</div>
-		<div id="detalle-publiext"  class="oblipend-tabledetalle" style="display: none;">
+		<div id="detalle-publiext" class="oblipend-tabledetalle"
+			style="display: none;">
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
@@ -752,7 +765,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-8 text-center">
+				<div class="col-md-12 text-center">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="table-publi-ext-detalle">
 							<thead>
@@ -761,7 +774,7 @@
 												code="obligacion.sujeto.publiext.aniograv" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
 												code="obligacion.sujeto.publiext.noresol" /> </label></th>
-									<th><label class="control-label labeltabletd"><spring:theme
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="obligacion.sujeto.publiext.dirvalla" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="obligacion.sujeto.publiext.orvalla" /> </label></th>
@@ -782,8 +795,8 @@
 										value="<c:out value="A�o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew " disabled="disabled"
-										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -795,9 +808,11 @@
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id="" onclick="">Pagar</label></td>
-										<td><label class="control-label"
+									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar ROP</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar
+											ROP</label></td>
 								</tr>
 							</tbody>
 						</table>
