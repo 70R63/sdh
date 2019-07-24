@@ -9,35 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="row">
-	<script>
-		function downloadPDF(pdf) {
-			debugger;
-			const linkSource = 'data:application/pdf;base64,' + pdf;
-			const downloadLink = document.createElement("a");
-			const fileName = "ROP.pdf";
 
-			downloadLink.href = linkSource;
-			downloadLink.download = fileName;
-			downloadLink.click();
-
-		}
-
-		downloadPDF('${ropForm.stringFact}');
-	</script>
-
-
-
-	<!-- 	<div class="container"> -->
-	<!-- 	 	<div class="headline"> -->
-	<!-- 			<h3> -->
-	<%-- 				<c:if test="${not empty ropForm.stringFact}"> --%>
-	<%-- 				  <iframe width='100%' height='600' width='15' src=' data:application/pdf;/Certificación RIT#zoom=100&view=fitH&;base64,${ropForm.stringFact}'>	</iframe> --%>
-	<%-- 				</c:if>   --%>
-	<!-- 			</h3> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-</div>
 
 
 
