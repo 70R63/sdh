@@ -17,136 +17,140 @@
 		</div>
 	</div>
 
-	<div class="col-md-4">
+
+	<div class="row">
+		<!-- 			<div class="col-md-3"> -->
+		<%-- 				<label class="control-label" for=""> <spring:theme --%>
+		<%-- 						code="delineacion.urbana.dec.areasusos.uso" /> --%>
+		<!-- 				</label> -->
+		<!-- 			</div> -->
+		<div class="col-md-3">
+			<label class="control-label" for=""
+				style="text-transform: none !important"> <spring:theme
+					code="delineacion.urbana.dec.areasusos.uso" />
+			</label>
+		</div>
+		<div class="col-md-2">
+			<label class="control-label" for=""
+				style="text-transform: none !important"> <spring:theme
+					code="delineacion.urbana.dec.areasusos.netuso" /></label>
+		</div>
+	</div>
+
+	<!-- LINEA DE USO -->
+	<c:forEach items="${dataForm.infObjetoDelineacion.usos}" var="info"
+		varStatus="loop">
 		<div class="row">
-			<!-- 			<div class="col-md-3"> -->
-			<%-- 				<label class="control-label" for=""> <spring:theme --%>
-			<%-- 						code="delineacion.urbana.dec.areasusos.uso" /> --%>
-			<!-- 				</label> -->
-			<!-- 			</div> -->
-			<div class="col-md-6">
-				<label class="control-label" for=""
-					style="text-transform: none !important"> <spring:theme
-						code="delineacion.urbana.dec.areasusos.uso" />
-				</label>
-			</div>
-			<div class="col-md-4">
-				<label class="control-label" for=""
-					style="text-transform: none !important"> <spring:theme
-						code="delineacion.urbana.dec.areasusos.netuso" /></label>
+			<div class="row areasusos">
+				<!-- 					<div class="col-md-3"> -->
+				<!-- 						<div class="form-group "> -->
+				<%-- 							<sf:select --%>
+				<%-- 								path="infObjetoDelineacion.usos[${loop.index}].usoCatalogo" --%>
+				<%-- 								items="${dataForm.catalogos.uso}" --%>
+				<%-- 								referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select> --%>
+				<!-- 						</div> -->
+
+				<!-- 					</div> -->
+
+				<div class="col-md-3">
+					<div class="form-group ">
+						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
+							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
+								items="${dataForm.catalogos.codUso}"
+								referenceData="${dataForm.catalogos.codUso}"
+								class="new_alto form-control"></sf:select>
+						</c:if>
+						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
+							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
+								items="${dataForm.catalogos.codUso}"
+								referenceData="${dataForm.catalogos.codUso}"
+								class="new_alto form-control" readOnly="true" disabled="true"></sf:select>
+						</c:if>
+
+					</div>
+				</div>
+
+
+				<div class="col-md-2">
+					<div class="form-group ">
+						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
+							<sf:input class="newalto form-control" readonly="false"
+								aria-required="true" maxlength="240"
+								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
+								onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
+						</c:if>
+						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
+							<sf:input class="newalto form-control" readonly="false"
+								aria-required="true" maxlength="240"
+								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
+								readOnly="true" disabled="true" onkeyup="numberFormat(this)"
+								onclick="numberFormat(this)" />
+						</c:if>
+					</div>
+				</div>
+
+
+				<c:if test='${dataForm.input.tipoFlujo == "D"}'>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addinfoareuso()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deleinfoareuso()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
-
-		<!-- LINEA DE USO -->
-		<c:forEach items="${dataForm.infObjetoDelineacion.usos}" var="info"
-			varStatus="loop">
-			<div class="row">
-				<div class="row areasusos">
-					<!-- 					<div class="col-md-3"> -->
-					<!-- 						<div class="form-group "> -->
-					<%-- 							<sf:select --%>
-					<%-- 								path="infObjetoDelineacion.usos[${loop.index}].usoCatalogo" --%>
-					<%-- 								items="${dataForm.catalogos.uso}" --%>
-					<%-- 								referenceData="${dataForm.catalogos.uso}" class="form-control"></sf:select> --%>
-					<!-- 						</div> -->
-
-					<!-- 					</div> -->
-
-					<div class="col-md-6">
-						<div class="form-group ">
-							<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-								<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
-									items="${dataForm.catalogos.codUso}"
-									referenceData="${dataForm.catalogos.codUso}"
-									class="new_alto form-control"></sf:select>
-							</c:if>
-							<c:if test='${dataForm.input.tipoFlujo == "R"}'>
-								<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
-									items="${dataForm.catalogos.codUso}"
-									referenceData="${dataForm.catalogos.codUso}"
-									class="new_alto form-control" readOnly="true" disabled="true"></sf:select>
-							</c:if>
-
-						</div>
-					</div>
+	</c:forEach>
 
 
-					<div class="col-md-4">
-						<div class="form-group ">
-							<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-								<sf:input class="newalto form-control" readonly="false"
-									aria-required="true" maxlength="240"
-									path="infObjetoDelineacion.usos[${loop.index}].areaNeta" onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
-							</c:if>
-							<c:if test='${dataForm.input.tipoFlujo == "R"}'>
-								<sf:input class="newalto form-control" readonly="false"
-									aria-required="true" maxlength="240"
-									path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
-									readOnly="true" disabled="true" onkeyup="numberFormat(this)" onclick="numberFormat(this)"/>
-							</c:if>
-						</div>
-					</div>
-
-
-					<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-						<div class="col-md-1">
-							<div class="form-group ">
-								<img onclick="addinfoareuso()"
-									src="${themeResourcePath}/images/adddelineacion.png"
-									style="width: 25px"></img> <img onclick="deleinfoareuso()"
-									src="${themeResourcePath}/images/deledelineacion.png"
-									style="width: 25px"></img>
-							</div>
-						</div>
-					</c:if>
+	<!-- LINEA DE TOTAL - USO -->
+	<div class="row">
+		<div class="row total">
+			<div class="col-md-3">
+				<div class="form-group ">
+					<input id="inputareainter" class="new_alto form-control"
+						maxlength="30" value="Total" disabled></input>
 				</div>
 			</div>
-		</c:forEach>
 
-
-		<!-- LINEA DE TOTAL - USO -->
-		<div class="row">
-			<div class="row total">
-				<div class="col-md-6">
-					<div class="form-group ">
-						<input id="inputareainter" class="new_alto form-control"
-							maxlength="30" value="Total" disabled></input>
-					</div>
-				</div>
-
-				<div class="col-md-4 offset-md-3">
-					<div class="form-group ">
-						<sf:input id="inputareainter" class="newalto form-control"
-							maxlength="30" path="infObjetoDelineacion.infoDeclara.totalUsos"></sf:input>
-					</div>
+			<div class="col-md-2 offset-md-3">
+				<div class="form-group ">
+					<sf:input id="inputareainter" class="newalto form-control"
+						maxlength="30" path="infObjetoDelineacion.infoDeclara.totalUsos"></sf:input>
 				</div>
 			</div>
 		</div>
 	</div>
 
+
+
 	<!-- 	comienza tabla dos -->
-	<div class="col-md-4">
+
+	<div class="row">
 		<div class="row">
-			<div class="row">
-				<div class="col-md-5">
-					<label class="control-label" for=""
-						style="text-transform: none !important"> <spring:theme
-							code="delineacion.urbana.dec.areasusos.areainve" />
-					</label>
-				</div>
-				<div class="col-md-4">
-					<label class="control-label" for=""
-						style="text-transform: none !important"> <spring:theme
-							code="delineacion.urbana.dec.areasusos.m2area" />
-					</label>
-				</div>
+			<div class="col-md-3">
+				<label class="control-label" for=""
+					style="text-transform: none !important"> <spring:theme
+						code="delineacion.urbana.dec.areasusos.areainve" />
+				</label>
+			</div>
+			<div class="col-md-2">
+				<label class="control-label" for=""
+					style="text-transform: none !important"> <spring:theme
+						code="delineacion.urbana.dec.areasusos.m2area" />
+				</label>
 			</div>
 		</div>
+	</div>
 
-		<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
-			var="varAreaIntervenida" varStatus="loop">
-			<div class="row">
-				<div class="col-md-5">
+	<c:forEach items="${dataForm.infObjetoDelineacion.areaIntervenida}"
+		var="varAreaIntervenida" varStatus="loop">
+		<div class="row">
+			<div class="row areausosdos">
+				<div class="col-md-3">
 					<div class="form-group ">
 						<sf:select
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
@@ -156,14 +160,15 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<div class="form-group ">
 						<sf:input class="newalto form-control" readonly="false"
 							aria-required="true" maxlength="240"
-							path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2"  onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
+							path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2"
+							onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-1">
 					<div class="form-group ">
 						<img onclick="addinfoareuso3()"
 							src="${themeResourcePath}/images/adddelineacion.png"
@@ -173,105 +178,104 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</c:forEach>
 
-		</c:forEach>
 
-
-		<div class="row">
-			<div class="row total">
-				<div class="col-md-5">
-					<div class="form-group ">
-						<input id="inputareainter" class="new_alto form-control"
-							maxlength="30" value="Total" disabled></input>
-					</div>
+	<div class="row">
+		<div class="row total">
+			<div class="col-md-3">
+				<div class="form-group ">
+					<input id="inputareainter" class="new_alto form-control"
+						maxlength="30" value="Total" disabled></input>
 				</div>
+			</div>
 
-				<div class="col-md-4 offset-md-2">
-					<div class="form-group ">
-						<input id="inputareainter" class="newalto form-control"
-							maxlength="30"
-							value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreai}"></input>
-					</div>
+			<div class="col-md-2 offset-md-2">
+				<div class="form-group ">
+					<input id="inputareainter" class="newalto form-control"
+						maxlength="30"
+						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreai}"></input>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- 	comienza tabla tres -->
-	<div class="col-md-4">
+
+	<div class="row">
+		<div class="col-md-3">
+
+			<label class="control-label" for=""
+				style="text-transform: none !important"> <spring:theme
+					code="delineacion.urbana.dec.areasusos.areaproyin" />
+			</label>
+		</div>
+		<div class="col-md-2">
+
+			<label class="control-label" for=""
+				style="text-transform: none !important"> <spring:theme
+					code="delineacion.urbana.dec.areasusos.aream2" />
+			</label>
+
+		</div>
+	</div>
+
+
+	<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
+		var="varAreaIntervenida" varStatus="loop">
 		<div class="row">
-			<div class="col-md-5">
+			<div class="row arearquitec">
+				<div class="col-md-3">
+					<div class="form-group ">
+						<sf:select
+							path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
+							items="${dataForm.catalogos.areaProy}"
+							referenceData="${dataForm.catalogos.areaProy}"
+							class="new_alto form-control"></sf:select>
+					</div>
 
-				<label class="control-label" for=""
-					style="text-transform: none !important"> <spring:theme
-						code="delineacion.urbana.dec.areasusos.areaproyin" />
-				</label>
-			</div>
-			<div class="col-md-4">
+				</div>
 
-				<label class="control-label" for=""
-					style="text-transform: none !important"> <spring:theme
-						code="delineacion.urbana.dec.areasusos.aream2" />
-				</label>
+				<div class="col-md-2">
+					<div class="form-group ">
+						<sf:input class="newalto form-control" readonly="false"
+							aria-required="true" maxlength="240"
+							path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
+					</div>
+				</div>
 
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addinfoareusotable2()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
+					</div>
+				</div>
 			</div>
 		</div>
+	</c:forEach>
 
-
-		<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
-			var="varAreaIntervenida" varStatus="loop">
-			<div class="row">
-				<div class="row arearquitec">
-					<div class="col-md-5">
-						<div class="form-group ">
-							<sf:select
-								path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
-								items="${dataForm.catalogos.areaProy}"
-								referenceData="${dataForm.catalogos.areaProy}"
-								class="new_alto form-control"></sf:select>
-						</div>
-
-					</div>
-
-					<div class="col-md-4">
-						<div class="form-group ">
-							<sf:input class="newalto form-control" readonly="false"
-								aria-required="true" maxlength="240"
-								path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
-						</div>
-					</div>
-
-					<div class="col-md-2">
-						<div class="form-group ">
-							<img onclick="addinfoareusotable2()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deleinfoareusotable2()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
-						</div>
-					</div>
+	<div class="row">
+		<div class="row totalnew">
+			<div class="col-md-3">
+				<div class="form-group ">
+					<input class="new_alto form-control" maxlength="30" value="Total"
+						disabled></input>
 				</div>
 			</div>
-		</c:forEach>
 
-		<div class="row">
-			<div class="row totalnew">
-				<div class="col-md-5">
-					<div class="form-group ">
-						<input class="new_alto form-control" maxlength="30" value="Total"
-							disabled></input>
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group ">
-						<input class="newalto form-control" maxlength="30"
-							value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}"></input>
-					</div>
+			<div class="col-md-2">
+				<div class="form-group ">
+					<input class="newalto form-control" maxlength="30"
+						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}"></input>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </div>
 
 <script>
