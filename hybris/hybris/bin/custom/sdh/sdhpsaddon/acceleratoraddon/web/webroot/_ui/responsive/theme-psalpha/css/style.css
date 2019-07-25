@@ -24946,6 +24946,7 @@ span.pasos {
   column-gap: 1.25rem;
   orphans: 1;
   widows: 1;
+  margin: 5px 5px;
 }
 .trespasos_title {
   font-size: 48px;
@@ -24961,12 +24962,21 @@ span.pasos {
 .noticia {
   border: 2px dashed #fff;
   margin-right: 10px;
+  padding: 10px 10px;
 }
-.redes_sociales {
-  display: block;
+.redes {
+  width: 80%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40px;
 }
-.addtoany_list {
-  display: inline-block;
-  widht: 30px !important;
+.foot-esc {
+  font-size: 12px;
+  margin: 0px;
+  text-align: center;
 }
 /*termina escuela virtual*/

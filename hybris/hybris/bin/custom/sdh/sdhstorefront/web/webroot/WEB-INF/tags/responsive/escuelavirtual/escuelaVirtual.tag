@@ -5,13 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
 <div class="container_new_page">
-
 	<div class="jumbotron">
 		<div class="container">
 			<h2 class="display-3 mb-3 newtitle">
@@ -172,6 +172,23 @@
 							<p>Se impartira un curso de Inteligencia Emocional el 27 de
 								diciembre de 2080</p>
 						</div>
+							<div class="row">
+							<div class="redes text-center">
+								<hr
+									style="border-top: 2px dashed #fff !important; background-color: transparent !important;">
+								<p class="foot-esc">Para más información visita nuestras
+									redes sociales</p>
+
+								<a class="follow-us-Facebook icon"
+									href="https://es-la.facebook.com/HaciendaBogota" onclick=""
+									title="Facebook" target="_blank"> <span
+									class="visuallyhidden">Facebook</span></a> <a
+									class="follow-us-Twitter icon" target="_blank" id="twitter"
+									href="https://twitter.com/HaciendaBogota" onclick=""
+									title="twitter"><span class="visuallyhidden">twitter</span></a>
+
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -181,6 +198,23 @@
 							<p>Se impartira un curso de Inteligencia Emocional el 27 de
 								diciembre de 2080</p>
 						</div>
+							<div class="row">
+							<div class="redes text-center">
+								<hr
+									style="border-top: 2px dashed #fff !important; background-color: transparent !important;">
+								<p class="foot-esc">Para más información visita nuestras
+									redes sociales</p>
+
+								<a class="follow-us-Facebook icon"
+									href="https://es-la.facebook.com/HaciendaBogota" onclick=""
+									title="Facebook" target="_blank"> <span
+									class="visuallyhidden">Facebook</span></a> <a
+									class="follow-us-Twitter icon" target="_blank" id="twitter"
+									href="https://twitter.com/HaciendaBogota" onclick=""
+									title="twitter"><span class="visuallyhidden">twitter</span></a>
+
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -189,22 +223,24 @@
 						<div class="contenido">
 							<p>Se impartirá un curso de Inteligencia Emocional el 27 de
 								diciembre de 2080</p>
-							
+
 						</div>
 
 						<div class="row">
 							<div class="redes text-center">
-							<hr style="border-top: 2px dashed #fff !important; background-color: transparent !important;">
-								<p class="foot-esc">Para más información visita nuestras redes sociales</p>
+								<hr
+									style="border-top: 2px dashed #fff !important; background-color: transparent !important;">
+								<p class="foot-esc">Para más información visita nuestras
+									redes sociales</p>
 
-									<a class="follow-us-Facebook icon"
-										href="https://es-la.facebook.com/HaciendaBogota" onclick=""
-										title="Facebook" target="_blank"> <span
-										class="visuallyhidden">Facebook</span></a> <a
-										class="follow-us-Twitter icon" target="_blank" id="twitter"
-										href="https://twitter.com/HaciendaBogota" onclick=""
-										title="twitter"><span class="visuallyhidden">twitter</span></a>
-								
+								<a class="follow-us-Facebook icon"
+									href="https://es-la.facebook.com/HaciendaBogota" onclick=""
+									title="Facebook" target="_blank"> <span
+									class="visuallyhidden">Facebook</span></a> <a
+									class="follow-us-Twitter icon" target="_blank" id="twitter"
+									href="https://twitter.com/HaciendaBogota" onclick=""
+									title="twitter"><span class="visuallyhidden">twitter</span></a>
+
 							</div>
 						</div>
 					</div>
@@ -212,8 +248,6 @@
 			</div>
 		</div>
 	</div>
-
-
 </div>
 
 
@@ -267,4 +301,5 @@
 	}
 	downloadPDF('${miRitCertificacionForm.rit.stringRIT}')
 </script>
+
 
