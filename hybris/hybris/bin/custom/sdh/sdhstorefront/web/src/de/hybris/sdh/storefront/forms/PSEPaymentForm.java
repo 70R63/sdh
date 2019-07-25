@@ -29,6 +29,7 @@ public class PSEPaymentForm
 	private String bankDateResponse;
 	private String bankTimeResponse;
 	private String trazabilityCode;
+	private String onlinePaymentProvider;
 
 	/**
 	 * @return the tipoDeImpuesto
@@ -375,9 +376,27 @@ public class PSEPaymentForm
 		this.trazabilityCode = trazabilityCode;
 	}
 
+
+	/**
+	 * @return the onlinePaymentProvider
+	 */
+	public String getOnlinePaymentProvider()
+	{
+		return onlinePaymentProvider;
+	}
+
+	/**
+	 * @param onlinePaymentProvider
+	 *           the onlinePaymentProvider to set
+	 */
+	public void setOnlinePaymentProvider(final String onlinePaymentProvider)
+	{
+		this.onlinePaymentProvider = onlinePaymentProvider;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -388,10 +407,9 @@ public class PSEPaymentForm
 				+ ", noIdentificacion=" + noIdentificacion + ", DV=" + DV + ", tipoDeIdentificacion=" + tipoDeIdentificacion
 				+ ", fechaLimiteDePago=" + fechaLimiteDePago + ", pagoAdicional=" + pagoAdicional + ", banco=" + banco
 				+ ", valorAPagar=" + valorAPagar + ", tipoDeTarjeta=" + tipoDeTarjeta + ", debugMode=" + debugMode + ", objPago="
-				+ objPago + ", bankDateResponse=" + bankDateResponse + ", bankTimeResponse=" + bankTimeResponse + "]"
-				+ ", trazabilityCode=" + trazabilityCode + "]";
+				+ objPago + ", bankDateResponse=" + bankDateResponse + ", bankTimeResponse=" + bankTimeResponse + ", trazabilityCode="
+				+ trazabilityCode + ", onlinePaymentProvider=" + onlinePaymentProvider + "]";
 	}
-
 
 
 

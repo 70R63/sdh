@@ -19,18 +19,16 @@
 		</div>
 		<br />
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
 							code="publicidad.exterior.tubular.address" /></label> <input
 						id="tubularComercialDireccion" name="tubularComercialDireccion"
-						class="newalto form-control" aria-required="true" type="text" value=""
+						class="new_alto form-control" aria-required="true" type="text" value=""
 						maxlength="240" disabled>
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
+	
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
@@ -52,10 +50,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
-
-		<div class="row">
+		
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
@@ -75,10 +70,7 @@
 						aria-required="true" type="text" value="" maxlength="240" disabled>
 				</div>
 			</div>
-		</div>
-
-
-		<div class="row">
+		
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
@@ -89,18 +81,20 @@
 						value="${publicidadForm.codPostal}" maxlength="240" disabled>
 				</div>
 			</div>
+			</div>
+
+
+		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label"><spring:theme
+					<label class="control-label" style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.tubular.chip" /></label> <input
 						id="tubularComercialChip" name="tubularComercialChip"
 						class="newalto form-control" aria-required="true" type="text"
 						value="${publicidadForm.chip}" maxlength="240" disabled>
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
+	
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme
@@ -112,7 +106,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label"><spring:theme
+					<label class="control-label" style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.tubular.propertyreg" /></label> <input
 						id="tubularComercialMatricula" name="tubularComercialMatricula"
 						class="newalto form-control" aria-required="true" type="text" value=""

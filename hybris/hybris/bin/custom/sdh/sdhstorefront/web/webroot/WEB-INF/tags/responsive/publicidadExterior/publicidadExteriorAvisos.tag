@@ -7,7 +7,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
-	<div id="divAvisos" style="display: none;">
+	<div id="divAvisos" style="display: block;">
 		<div class="row">
 			<div class="headline">
 				<h3>

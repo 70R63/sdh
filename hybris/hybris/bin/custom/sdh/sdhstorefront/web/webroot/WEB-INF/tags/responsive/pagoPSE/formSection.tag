@@ -178,9 +178,7 @@ function onChange() {
 					</fieldset>
 				</form:form>
 				
-				<form:form method="post" commandName="psePaymentForm" action="realizarPago">
-
-					
+				<form:form method="post" commandName="psePaymentForm" action="realizarPago">					
 					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
 					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
 					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/>
@@ -197,9 +195,7 @@ function onChange() {
 					<form:hidden id="hiddenBanco" path="banco" value="${varBanco}"/>
 					<form:hidden path="valorAPagar" value="${psePaymentForm.valorAPagar}"/>
 					<form:hidden id="hiddenTipoDeTarjeta" path="tipoDeTarjeta" value="${varTipoDeTarjeta}"/>
-					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>
-					
-					
+					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>			
 					<form:hidden path="bankDateResponse" value="${psePaymentForm.bankDateResponse}"/>
 					<form:hidden path="bankTimeResponse" value="${psePaymentForm.bankTimeResponse}"/>
 					
