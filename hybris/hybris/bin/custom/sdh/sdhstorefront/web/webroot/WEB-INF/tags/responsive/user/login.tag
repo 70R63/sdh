@@ -29,9 +29,9 @@
 	</c:if>	
 	
 		<formElement:formInputBox idKey="j_username" labelKey="login.email"
-			path="j_username" mandatory="true" inputCSS="form-control redtam"/>
+			path="j_username" mandatory="true" inputCSS="form-control redtam tamnew"/>
 		<formElement:formPasswordBox idKey="j_password"
-			labelKey="login.password" path="j_password" inputCSS="form-control redtam"
+			labelKey="login.password" path="j_password" inputCSS="form-control redtam tamnew"
 			mandatory="true" />
 	
 			<div class="forgotten-password" style="margin-bottom: 1px; margin-top: 0px;">
@@ -42,7 +42,7 @@
 				</ycommerce:testId>
 			</div>
 		<ycommerce:testId code="loginAndCheckoutButton">
-			<button type="submit" class="btn btn-primary redtam">
+			<button type="submit" class="btn btn-primary redtam tam_button">
 				<spring:theme code="${actionNameKey}" />
 			</button>
 		</ycommerce:testId>

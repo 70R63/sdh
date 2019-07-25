@@ -36,9 +36,7 @@
 						maxlength="240" disabled>
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
+	
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
@@ -47,18 +45,19 @@
 						aria-required="true" type="text" value="" maxlength="240" disabled>
 				</div>
 			</div>
+				</div>
+
+		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label "><spring:theme
+					<label class="control-label " style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.vehicles.typeitemreg" /></label> <input
 						id="vehiculoTipoElemento" name="vehiculoTipoElemento"
 						class="newalto form-control" aria-required="true" type="text" value=""
 						maxlength="240" disabled>
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
+		
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
@@ -70,7 +69,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label "><spring:theme
+					<label class="control-label " style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.vehicles.elementlocation" /></label> <input
 						id="vehiculoOrientacion" name="vehiculoOrientacion"
 						class="newalto form-control" aria-required="true" type="text"

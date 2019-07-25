@@ -204,6 +204,7 @@
 	<!-- 	comienza tabla tres -->
 
 	<div class="row">
+
 		<div class="col-md-3">
 
 			<label class="control-label" for=""
@@ -225,7 +226,7 @@
 	<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
 		var="varAreaIntervenida" varStatus="loop">
 		<div class="row">
-			<div class="row arearquitec">
+			<div class=" arearquitec row" id="arearquitec"> 
 				<div class="col-md-3">
 					<div class="form-group ">
 						<sf:select
@@ -293,13 +294,15 @@
 					.val("")
 			$($(".areasusos")[0]).parent().children().last().find(".input2")
 					.val("M2")
+		}else{
+			alert("No puede agregar más registros");
 		}
 
 	}
 	function deleinfoareuso() {
 		var i = $(".areasusos").length;
 		var val = i - 1;
-		if ($(".areasusos").length <= 3 && $(".areasusos").length > 1) {
+		if ($(".areasusos").length <= 5 && $(".areasusos").length > 1) {
 
 			$($(".areasusos")[val]).closest($($(".areasusos")[val]).remove());
 
@@ -309,24 +312,30 @@
 	}
 
 	function addinfoareusotable2() {
+debugger;
+if ($(".arearquitec").length < 3) {
+	$($(".arearquitec")[0]).parent()
+			.append($($(".arearquitec")[0]).clone());
 
-		if ($(".arearquitec").length < 3) {
-			$($(".arearquitec")[0]).parent().append(
-					$($(".arearquitec")[0]).clone());
-
-			$($(".arearquitec")[0]).parent().children().last().find(".sel1")
-					.val("")
-			$($(".arearquitec")[0]).parent().children().last().find(".in1")
-					.val("")
-
-		}
+// 	$($(".areasusos")[0]).parent().children().last().find(".select1")
+// 			.val("")
+// 	$($(".areasusos")[0]).parent().children().last().find(".select2")
+// 			.val("")
+// 	$($(".areasusos")[0]).parent().children().last().find(".input1")
+// 			.val("")
+// 	$($(".areasusos")[0]).parent().children().last().find(".input2")
+// 			.val("M2")
+}else{
+	alert("No puede agregar más registros");
+}
 
 	}
 
 	function deleinfoareusotable2() {
+		debugger;
 		var i = $(".arearquitec").length;
 		var val = i - 1;
-		if ($(".arearquitec").length <= 3 && $(".arearquitec").length > 1) {
+		if ($(".arearquitec").length <= 5 && $(".arearquitec").length > 1) {
 
 			$($(".arearquitec")[val]).closest(
 					$($(".arearquitec")[val]).remove());
@@ -346,6 +355,8 @@
 					.val("")
 			$($(".areausosdos")[0]).parent().children().last().find(".input5")
 					.val("")
+		}else{
+			alert("No puede agregar más registros");
 		}
 
 	}
@@ -353,7 +364,7 @@
 	function deleinfoareusotable3() {
 		var i = $(".areausosdos").length;
 		var val = i - 1;
-		if ($(".areausosdos").length <= 3 && $(".areausosdos").length > 1) {
+		if ($(".areausosdos").length <= 5 && $(".areausosdos").length > 1) {
 
 			$($(".areausosdos")[val]).closest(
 					$($(".areausosdos")[val]).remove());
@@ -363,4 +374,8 @@
 		}
 
 	}
+	
+	
+	
+	
 </script>
