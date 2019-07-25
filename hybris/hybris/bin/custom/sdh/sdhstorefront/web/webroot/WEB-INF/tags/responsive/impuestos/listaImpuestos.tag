@@ -249,11 +249,6 @@
 					</div>
 					<div class="row" id="${item.cdu}" style="display: none">
 						<c:forEach var="radicado" items="${item.radicados}">
-						    <c:set var="cduAnio" value="${fn:substring(item.cdu,3,5)}"/>
-						    <fmt:parseNumber var="icduAnio" type = "number" value = "${cduAnio}" />
-						    <c:set var="radicadoAnio" value="${fn:substring(radicado.numRadicado,0,2)}"/>
-						    <fmt:parseNumber var="iradicadoAnio" type = "number" value = "${radicadoAnio}" />
-							<c:if test="${iradicadoAnio <= icduAnio}">
 							<div class="row">
 								<div class="col-sm-2"></div>
 								<div class="col-sm-3 text-right">Radicados:</div>
@@ -279,7 +274,6 @@
 									</form:form>
 								</div>
 							</div>
-							</c:if>
 						</c:forEach>
 					</div>
 				</c:forEach>
