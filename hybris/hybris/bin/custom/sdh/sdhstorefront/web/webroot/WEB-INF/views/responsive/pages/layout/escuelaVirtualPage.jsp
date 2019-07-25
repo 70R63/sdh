@@ -4,8 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="firmar" tagdir="/WEB-INF/tags/responsive/impuestos"%>
+<%@ taglib prefix="virtual" tagdir="/WEB-INF/tags/responsive/escuelavirtual"%>
 
 
-<firmar:declaraFirmar />
+<virtual:escuelaVirtual/>
 
