@@ -69,6 +69,7 @@
 	
 	function onChange() {
 		
+		debugger;
 		form = document.getElementById("forma");
 		
 		input = document.createElement('input');
@@ -91,6 +92,7 @@ function onChangeAnioGravable() {
 	        form.appendChild(input);
 	        form.submit();
 		}
+
 		ajustaPeriodo();
 	}
 	
@@ -119,5 +121,8 @@ function ajustaPeriodo(){
 		} 
 	}
 	
-}	
+		
+	}
+	
+
 </script>

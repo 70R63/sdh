@@ -9,7 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <input type="hidden" value="${tipoMarca}" id="tipoMarca" />
-<div class="container">
+<div class="container_new_page">
 	<div class="row">
 		<div class="col-md-6 headline">
 			<h2>
@@ -53,15 +53,15 @@
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.opuso" /></label>
-				<sf:input class="newalto form-control" readonly="true" aria-required="true"
+				<sf:input class="new_alto form-control" readonly="true" aria-required="true"
 					maxlength="240" path="infObjetoDelineacion.infoDeclara.opcionUso" />
 				<!-- 						<input id="" -->
 				<!-- 					name="" class="form-control" aria-required="true" type="text" -->
 				<!-- 					readonly="readonly" value="" maxlength="240"> -->
 			</div>
 		</div>
-	</div>
-	<div class="row">
+<!-- 	</div> -->
+<!-- 	<div class="row"> -->
 		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme

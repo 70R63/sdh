@@ -11,10 +11,9 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 headline">
+		<div class="col-md-6">
 			<h3>
-				<span class="col-md-10"><spring:theme
-						code="declaracion.publicidad.totpagar" /></span>
+				<span><spring:theme code="declaracion.publicidad.totpagar" /></span>
 			</h3>
 		</div>
 	</div>
@@ -28,9 +27,7 @@
 					size="30" disabled="disabled">
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
@@ -40,9 +37,7 @@
 					size="30" disabled="disabled">
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
@@ -52,9 +47,7 @@
 					size="30" disabled="disabled">
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
@@ -64,9 +57,7 @@
 					size="30" disabled="disabled">
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
@@ -76,14 +67,13 @@
 					size="30" disabled="disabled">
 			</div>
 		</div>
-
 	</div>
 
 	<div class="row">
-		<div class="col-md-3 col-md-offset-2 center">
+		<div class="col-md-2 col-md-offset-8">
 
 			<button id="calculoButton" name="calculoButton" type="button"
-				class="btn btn-primary btn-block">
+				class="btn btn-primary">
 				<spring:theme code="declaracion.publicidad.button.calcular" />
 			</button>
 		</div>

@@ -31,6 +31,10 @@ public interface SDHPseTransactionsLogService
 
 	public void updateAllTransactions(final String transactionState);
 
+	public String updateCredibancoTransaction(final String numeroDeReferencia);
+
+	public void updateAllCredibancoTransactions(final String transactionState);
+
 
 
 }

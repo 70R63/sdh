@@ -9,10 +9,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<div class="row">
+<!-- <div class="row"> -->
 	<!-- 	<div class="container"> -->
-	<div class="account-section-content">
-		<div class="account-section-form">
+<!-- 	<div class="account-section-content"> -->
+<!-- 		<div class="account-section-form"> -->
 			<form:form
 				action="${pageContext.request.contextPath}/contribuyentes/publicidadexterior/declaracion"
 				method="post" commandName="declaPublicidadForm">
@@ -22,10 +22,10 @@
 				<DeclaraPubli:DecPuFirmas />
 			</form:form>
 			<DeclaraPubli:DecPuPago />
-		</div>
-	</div>
+<!-- 		</div> -->
+<!-- 	</div> -->
 	<!-- 	</div> -->
-</div>
+<!-- </div> -->
 
 <div id="dialogPublicidadExterior" title="Publicidad Exterior">
 	<div id="publicidadExteriorDialogContent"></div>

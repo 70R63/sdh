@@ -19,6 +19,7 @@ import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -108,6 +109,11 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	}
 
 
+	/*
+	 * (non-Javadoc)
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateTransaction(java.lang.String)
+	 * ACH Update Transaction
+	 */
 	@Override
 	public String updateTransaction(final String numeroDeReferencia)
 	{
@@ -130,13 +136,18 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		}
 		else
 		{
-			LOG.info("La transaccion con numero de referencia [" + numeroDeReferencia + "] no existe");
+			LOG.info("La transaccion con numero de referencia PSE[" + numeroDeReferencia + "] no existe");
 		}
 
 		return transactionState;
 	}
 
 
+	/*
+	 * (non-Javadoc)
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateAllTransactions(java.lang.String)
+	 * ACH Update All Trandactions
+	 */
 	@Override
 	public void updateAllTransactions(final String transactionState)
 	{
@@ -152,13 +163,14 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
 			getTransactionInformationBodyType.setTrazabilityCode(trazabilityCode);
 
+			//ACH Updating Transactions
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
-			LOG.info("Actualizando informacion de [" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
-					+ pseTransactionsLogModel.getTransactionState() + "] ");
-
 			this.updateResponse(pseTransactionsLogModel, response);
+
+			LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+					+ pseTransactionsLogModel.getTransactionState() + "] ");
 		}
 
 	}
@@ -227,6 +239,9 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	{
 		final PseTransactionsLogModel transactionLogModel = new PseTransactionsLogModel();
 		final String transactionPaymentResponsePrint = null;
+		final SimpleDateFormat dateFmt = new SimpleDateFormat("MM/dd/yy");
+		final SimpleDateFormat timeFmt = new SimpleDateFormat("hh:mm:ss");
+		final Date dateTimeTransaction = new Date();
 
 		// ConstantConnectionDat
 		transactionLogModel.setEntityCode("CREDIBANCO_TRANSACTION");
@@ -266,10 +281,9 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 							+ " , " + transactionPaymentResponse.getInternalCode() + "]");
 		}
 
-
 		// GetTransactionInformationResponseBodyType transactionLogModel.setSoliciteDate("");
-		transactionLogModel.setBankProcessDate("");
-		transactionLogModel.setTransactionState("");
+		transactionLogModel.setBankProcessDate(dateFmt.format(dateTimeTransaction));
+		transactionLogModel.setTransactionState(timeFmt.format(dateTimeTransaction));
 
 		LOG.info("NewCredibancoLogTransactionEntry:[" + transactionLogModel.getEntityCode() + " , " + numeroDeReferencia + " , "
 				+ tipoDeImpuesto + " , " + impuesto + " , " + anoGravable + " , " + CHIP + " , " + periodo + " , " + CUD + " , "
@@ -277,6 +291,32 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				+ " , " + banco + " , " + valorAPagar + " , " + isoCurrency + " , " + tipoDeTarjeta + "]");
 
 		modelService.saveAll(transactionLogModel);
+
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateCredibancoTransaction(java.lang.String)
+	 */
+	@Override
+	public String updateCredibancoTransaction(final String numeroDeReferencia)
+	{
+		// XXX Auto-generated method stub
+		return null;
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see de.hybris.sdh.core.services.SDHPseTransactionsLogService#updateAllCredibancoTransactions(java.lang.String)
+	 */
+	@Override
+	public void updateAllCredibancoTransactions(final String transactionState)
+	{
+		// XXX Auto-generated method stub
 
 	}
 }

@@ -9,18 +9,18 @@
 
 <div class="container_new_page">
 	<div class="row">
-		<div class="col-md-12 headline">
+		<div class="col-md-6">
 			<h2>
-				<span class="col-md-10"><spring:theme
+				<span><spring:theme
 						code="declaracion.publicidad.titulo" /></span>
 			</h2>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-6 headline">
+		<div class="col-md-6">
 			<h2>
-				<span class="col-md-10"><spring:theme
+				<span><spring:theme
 						code="declaracion.publicidad.datgene" /></span>
 			</h2>
 		</div>
@@ -47,9 +47,7 @@
 				</select>
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme

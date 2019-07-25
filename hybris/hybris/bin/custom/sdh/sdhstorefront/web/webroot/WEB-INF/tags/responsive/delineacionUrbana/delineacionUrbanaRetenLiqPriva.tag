@@ -22,15 +22,14 @@
 
 
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id="totalpresu"
 					name="infObjetoDelineacion.infoDeclara.totalPresupuesto" class="newalto form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
 			</div>
 		</div>
-	</div>
-	<div class="row">
+	
 		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
@@ -52,10 +51,7 @@
 					</c:if>
 			</div>
 		</div>
-	</div>
-	
 
-	<div class="row">
 		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
@@ -66,7 +62,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-2">
+		<div class="col-md-2 col-md-offset-5">
 				<sf:button class="btn btn-primary btn-lg" name="action"
 					id="calcular" value="calcular" disabled="false" onclick="presdecla()">
 					<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
