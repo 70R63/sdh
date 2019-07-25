@@ -811,7 +811,7 @@
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
-										onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar
+										onclick="window.location.href ='<c:url value='/contribuyentes/rop?tipoImp=06&numBP=0000000575&numObjeto=60000000000000061&clavePeriodo=1810' />';">Generar
 											ROP</label></td>
 								</tr>
 							</tbody>

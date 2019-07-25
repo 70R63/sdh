@@ -65,28 +65,7 @@ ACC.oblipend = {
 	 	    	   $("#detalle-ica").show();
 	 	    	   
 	 	       }else  if(impuesto == "4"){
-
-				   var data={};
-
-				   data.numResolu = $(this).attr("data-numResolu");
-				   data.anoGravable = $(this).attr("data-anoGravable");
-				   data.tipoValla = $(this).attr("data-tipoValla");;
-
-				   $.ajax({
-					   url: ACC.publicidadExteriorDetalleURL,
-					   data: data,
-					   type: "GET",
-					   success: function (data) {
-
-
-						   ACC.publicidadexterior.fillFieldsFromData(data);
-
-					   },
-					   error: function () {
-					   }
-				   });
-
-
+	 	    	   
 	 	    	   $("#detalle-publiext").show();
 	 	    	   
 	 	       }else  if(impuesto == "5"){

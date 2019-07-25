@@ -198,7 +198,7 @@ ACC.publicidadexterior = {
 			            success: function (data) {
 			            	
 			            	
-
+			            	ACC.publicidadexterior.fillFieldsFromData(data);
 			            	
 			            },
 			            error: function () {
