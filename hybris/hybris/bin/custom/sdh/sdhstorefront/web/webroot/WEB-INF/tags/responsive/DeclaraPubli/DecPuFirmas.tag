@@ -15,7 +15,7 @@
 <div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
-			<div class="headline">
+			<div class="">
 				<h2>
 					<span><spring:theme code="publicidad.declaracion.firma.titulo" /></span>
 				</h2>

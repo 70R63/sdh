@@ -7,7 +7,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
-	<div id="divTubular" style="display: none;">
+	<div id="divTubular" style="display: block;">
 		<div class="row">
 			<div class="headline">
 				<h3>
@@ -40,8 +40,7 @@
 						maxlength="240">
 				</div>
 			</div>
-		</div>
-		<div class="row">
+	
 			<div class="col-md-3 ">
 				<label class="inputlabelnew vehiculos"><spring:theme
 						code="publicidad.exterior.tubular.location" /></label>
@@ -90,8 +89,7 @@
 						maxlength="240">
 				</div>
 			</div>
-		</div>
-		<div class="row">
+
 			<div class="col-md-3 ">
 				<label class="inputlabelnew vehiculos"><spring:theme
 						code="publicidad.exterior.tubular.elementlocation" /></label>
@@ -137,9 +135,7 @@
 						maxlength="240">
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
 			<div class="col-md-3 ">
 				<label class="inputlabelnew vehiculos"><spring:theme
 						code="publicidad.exterior.tubular.propertyreg" /></label>

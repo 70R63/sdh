@@ -40,8 +40,7 @@
 						value="${publicidadForm.licenciaConstruc}" maxlength="240">
 				</div>
 			</div>
-		</div>
-		<div class="row">
+
 			<div class="col-md-3 ">
 				<label class="inputlabelnew avisos"><spring:theme
 						code="publicidad.exterior.conventional.locationaddress" /></label>
@@ -89,8 +88,7 @@
 						value="${publicidadForm.orientacion}" maxlength="240">
 				</div>
 			</div>
-		</div>
-		<div class="row">
+
 			<div class="col-md-3 ">
 				<label class="inputlabelnew avisos"><spring:theme
 						code="publicidad.exterior.conventional.Trust" /></label>
@@ -137,9 +135,7 @@
 						value="${publicidadForm.codPostal}" maxlength="240">
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
 			<div class="col-md-3">
 				<label class="inputlabelnew avisos"><spring:theme
 						code="publicidad.exterior.conventional.CHIP" /></label>

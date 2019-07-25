@@ -21,7 +21,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label "><spring:theme
+					<label class="control-label " style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.vehicles.model" /></label> <input
 						id="vehiculoModelo" name="vehiculoModelo" class="newalto form-control"
 						aria-required="true" type="text" value="" maxlength="240" disabled>
@@ -29,7 +29,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label "><spring:theme
+					<label class="control-label " style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.vehicles.typeadvertising" /></label> <input
 						id="vehiculoTipoPublici" name="vehiculoTipoPublici"
 						class="newalto form-control" aria-required="true" type="text" value=""
@@ -39,15 +39,13 @@
 	
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label "><spring:theme
+					<label class="control-label " style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.vehicles.plate" /></label> <input
 						id="vehiculoPlaca" name="vehiculoPlaca" class="newalto form-control"
 						aria-required="true" type="text" value="" maxlength="240" disabled>
 				</div>
 			</div>
-				</div>
-
-		<div class="row">
+				
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label " style="margin-top: 20px"><spring:theme

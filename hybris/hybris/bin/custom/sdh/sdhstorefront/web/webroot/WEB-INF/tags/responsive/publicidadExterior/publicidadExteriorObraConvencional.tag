@@ -21,7 +21,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label"><spring:theme
+					<label class="control-label" style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.conventional.locationaddress" /></label> <input
 						id="obraConvencionalDireccion" name="obraConvencionalDireccion"
 						class="form-control new_alto" aria-required="true" type="text"
@@ -31,7 +31,7 @@
 
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label"><spring:theme
+					<label class="control-label" style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.conventional.location" /></label> <input
 						id="obraConvencionalLocalidad" name="obraConvencionalLocalidad"
 						class="form-control newalto" aria-required="true" type="text"
@@ -41,17 +41,14 @@
 
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label"><spring:theme
+					<label class="control-label" style="margin-top: 20px"><spring:theme
 							code="publicidad.exterior.conventional.postalcode" /></label> <input
 						id="obraConvencionalCodPostal" name="obraConvencionalCodPostal"
 						class="form-control newalto" aria-required="true" type="text"
 						value="${publicidadForm.codPostal}" maxlength="240" disabled>
 				</div>
 			</div>
-		</div>
-
-
-		<div class="row">
+	
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label" style="margin-top: 20px"><spring:theme
@@ -117,8 +114,7 @@
 						value="${publicidadForm.orientacion}" maxlength="240" disabled>
 				</div>
 			</div>
-		</div>
-		<div class="row">
+	
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme

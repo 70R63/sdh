@@ -12,9 +12,9 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 headline">
+		<div class="col-md-6">
 			<h3>
-				<span class="col-md-10"><spring:theme
+				<span><spring:theme
 						code="declaracion.publicidad.infovalla" /></span>
 			</h3>
 		</div>
