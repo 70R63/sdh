@@ -101,6 +101,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.ica.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.reteica.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.oblipend.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.rop.js"></script>
 		
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.certipago.js"></script>
 

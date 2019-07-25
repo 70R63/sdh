@@ -8,10 +8,20 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+	
+
+	<div id="dialogRop" title="Generar ROP">
+	<div id="ropDialogContent"></div>
+	</div>
+
 
 <div class="container_new_page">
 	<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/rop"
 		method="post" commandName="ropForm">
+		<input type="hidden" id="tipoImp" name="tipoImp" value="${ropFormRequest.tipoImp}" />
+		<input type="hidden" id="numObjeto" name="numObjeto" value="${ropFormRequest.numObjeto}" />
+		<input type="hidden" id="numBP" name="numBP" value="${ropFormRequest.numBP}" />
+		<input type="hidden" id="clavePeriodo" name="clavePeriodo" value="${ropFormRequest.clavePeriodo}" />
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
@@ -53,10 +63,11 @@
 
 			</div>
 			<div class="col-md-2">
-				<button style="margin-top: 26px; margin-bottom: 15px;" id=""
-					class="btn btn-primary btn-lg" onclick="" type="submit">
+				<button style="margin-top: 26px; margin-bottom: 15px;" id="generaROPButton"
+					class="btn btn-primary btn-lg"  type="button">
 					<spring:theme code="rop.generar.genrop" />
 				</button>
+				<a id="downloadROPHelper" target="_blank"></a>
 			</div>
 
 			<div class="col-md-2">
