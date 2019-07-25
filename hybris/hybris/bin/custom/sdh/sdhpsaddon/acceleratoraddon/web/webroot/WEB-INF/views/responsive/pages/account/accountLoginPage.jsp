@@ -9,7 +9,7 @@
 	<div class="row">
 		
 		<c:if test="${showRegisterBody || showLoginBody}">
-			<div class="col-md-6  col-md-offset-3" >
+			<div class="col-md-4  col-md-offset-4" >
 				<h1 class="acc_hidden"><span tabindex="0"><spring:theme code="text.signinregisterpage.label" /></span></h1>
 				<cms:pageSlot position="LeftContentSlot" var="feature" element="div" class="login-left-content-slot">
 					<cms:component component="${feature}" element="div" class="login-left-content-component"/>

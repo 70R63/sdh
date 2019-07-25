@@ -36,17 +36,17 @@
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.tiptramite" /></label> 
-						<select class="new_alto form-control !important" id="">
-<!-- 							<option value="00">Seleccionar</option> -->
+								code="tramites.crear.inicial.tiptramite" /></label> <select
+							class="new_alto form-control !important" id="">
+							<!-- 							<option value="00">Seleccionar</option> -->
 							<option value="01">RIT</option>
-<!-- 							<option value="02">Novedades de registro</option> -->
-<!-- 							<option value="03">Facturación</option> -->
-<!-- 							<option value="04">Analisis de la cuenta</option> -->
-<!-- 							<option value="05">Boletín de deudores Morosos del Estado</option> -->
-<!-- 							<option value="06">Verificación de pagos</option> -->
-<!-- 							<option value="07">Corrección de la información causada contablemente</option> -->
-<!-- 							<option value="08">Declaración</option> -->
+							<!-- 							<option value="02">Novedades de registro</option> -->
+							<!-- 							<option value="03">Facturación</option> -->
+							<!-- 							<option value="04">Analisis de la cuenta</option> -->
+							<!-- 							<option value="05">Boletín de deudores Morosos del Estado</option> -->
+							<!-- 							<option value="06">Verificación de pagos</option> -->
+							<!-- 							<option value="07">Corrección de la información causada contablemente</option> -->
+							<!-- 							<option value="08">Declaración</option> -->
 						</select>
 					</div>
 				</div>
@@ -55,11 +55,11 @@
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.subtramite" /></label> 
-						<select class="new_alto form-control !important" id="">
-<!-- 						<option value="00">Seleccionar</option> -->
-						<option value="01">Creación</option>
-<!-- 						<option value="02">Actualización</option> -->
+								code="tramites.crear.inicial.subtramite" /></label> <select
+							class="new_alto form-control !important" id="">
+							<!-- 						<option value="00">Seleccionar</option> -->
+							<option value="01">Creación</option>
+							<!-- 						<option value="02">Actualización</option> -->
 						</select>
 					</div>
 				</div>
@@ -68,8 +68,9 @@
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.categoria" /></label> 
-						<select class="new_alto form-control !important" id=""><option value="01">Registro/Rol Tributario</option>
+								code="tramites.crear.inicial.categoria" /></label> <select
+							class="new_alto form-control !important" id=""><option
+								value="01">Registro/Rol Tributario</option>
 						</select>
 					</div>
 				</div>
@@ -78,24 +79,26 @@
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.subcategoria" /></label> 
-						<select class="new_alto form-control !important " id=""><option value="00">Seleccionar</option>
-						<option value="01">Persona Natural</option>
-						<option value="02">Persona Jurídica</option>
+								code="tramites.crear.inicial.subcategoria" /></label> <select
+							class="new_alto form-control !important " id=""><option
+								value="00">Seleccionar</option>
+							<option value="01">Persona Natural</option>
+							<option value="02">Persona Jurídica</option>
 						</select>
 					</div>
 				</div>
 			</div>
-				<div id="divRol" class="row mt-3">
+			<div id="divRol" class="row mt-3">
 				<div class="col-md-12 text-center">
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
-								code="tramites.crear.inicial.rol" /></label> 
-						<select class="new_alto form-control !important " id=""><option value="00">Seleccionar</option>
-						<option value="01">Contribuyente</option>
-						<option value="02">Agente Retenedor</option>
-						<option value="03">Reportate de la Información</option>
-						<option value="04">Terceros Autorizados</option>
+								code="tramites.crear.inicial.rol" /></label> <select
+							class="new_alto form-control !important " id=""><option
+								value="00">Seleccionar</option>
+							<option value="01">Contribuyente</option>
+							<option value="02">Agente Retenedor</option>
+							<option value="03">Reportate de la Información</option>
+							<option value="04">Terceros Autorizados</option>
 						</select>
 					</div>
 				</div>
@@ -109,7 +112,8 @@
 							style="text-align: center !important;"><spring:theme
 								code="tramites.crear.inicial.mensaje" /></label>
 						<textarea name="mensaje" id="mensaje" class="form-control"
-							style="min-height: 220px; max-height: 600px; min-width: 100%; max-width: 100%;" maxlength="1000"></textarea>
+							style="min-height: 220px; max-height: 600px; min-width: 100%; max-width: 100%;"
+							maxlength="1000"></textarea>
 						<small class="form-text text-muted"
 							style="text-align: right !important"><spring:theme
 								code="tramites.crear.inicial.nota" /></small>
@@ -133,6 +137,24 @@
 			</button>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-6 text-center col-md-offset-3" style="margin-top: 15px">
+			<table>
+				<thead>
+					<tr>
+						<th><label class="contorl-label labeltabletd"><spring:theme
+									code="tramites.crear.inicial.adjdoc" /></label></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input class="inputtextnew" disabled="disabled"
+							type="text" size="30" value="" /></td>
+						<td><input class="inputtextnew" type="file" size="30"
+							value="" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
-
-

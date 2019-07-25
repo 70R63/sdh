@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"       prefix="fmt" %>
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -35,7 +36,9 @@
 				</label>
 			</div>
 		</div>
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.actnosubPA) }">
+		
+		<fmt:parseNumber var="actnosubPA" type = "number" value = "${fn:trim(infoDeclara.deducciones.actnosubPA)}" />
+		<c:if test="${ actnosubPA != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -56,7 +59,8 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.enajActFijo) }">
+		<fmt:parseNumber var="enajActFijo" type = "number" value = "${fn:trim(infoDeclara.deducciones.enajActFijo)}" />
+		<c:if test="${ enajActFijo != 0  }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -77,7 +81,8 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.exportBienes) }">
+		<fmt:parseNumber var="exportBienes" type = "number" value = "${fn:trim(infoDeclara.deducciones.exportBienes)}" />
+		<c:if test="${ exportBienes != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -98,7 +103,8 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.exportServ) }">
+		<fmt:parseNumber var="exportServ" type = "number" value = "${fn:trim(infoDeclara.deducciones.exportServ)}" />
+		<c:if test="${ exportServ != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -119,7 +125,8 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.actnosub39) }">
+		<fmt:parseNumber var="actnosub39" type = "number" value = "${fn:trim(infoDeclara.deducciones.actnosub39)}" />
+		<c:if test="${ actnosub39 != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -140,7 +147,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.actnosubPH) }">
+		
+		<fmt:parseNumber var="actnosubPH" type = "number" value = "${fn:trim(infoDeclara.deducciones.actnosubPH)}" />
+		<c:if test="${ actnosubPH != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -161,7 +170,8 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.juegoSuerteAzar) }">
+		<fmt:parseNumber var="juegoSuerteAzar" type = "number" value = "${fn:trim(infoDeclara.deducciones.juegoSuerteAzar)}" />
+		<c:if test="${ juegoSuerteAzar != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -182,7 +192,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.donaciones) }">
+		
+		<fmt:parseNumber var="donaciones" type = "number" value = "${fn:trim(infoDeclara.deducciones.donaciones)}" />
+		<c:if test="${ donaciones != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -203,7 +215,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.exenActos) }">
+		
+		<fmt:parseNumber var="exenActos" type = "number" value = "${fn:trim(infoDeclara.deducciones.exenActos)}" />
+		<c:if test="${ exenActos != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -224,7 +238,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.baseGravEsp) }">
+		
+		<fmt:parseNumber var="baseGravEsp" type = "number" value = "${fn:trim(infoDeclara.deducciones.baseGravEsp)}" />
+		<c:if test="${ baseGravEsp != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -245,7 +261,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.ingrActConsorc) }">
+		
+		<fmt:parseNumber var="ingrActConsorc" type = "number" value = "${fn:trim(infoDeclara.deducciones.ingrActConsorc)}" />
+		<c:if test="${ ingrActConsorc != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -266,7 +284,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.diviNOGiroOrd) }">
+		
+		<fmt:parseNumber var="diviNOGiroOrd" type = "number" value = "${fn:trim(infoDeclara.deducciones.diviNOGiroOrd)}" />
+		<c:if test="${ diviNOGiroOrd != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -287,7 +307,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.exenVictima) }">
+		
+		<fmt:parseNumber var="exenVictima" type = "number" value = "${fn:trim(infoDeclara.deducciones.exenVictima)}" />
+		<c:if test="${ exenVictima != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -308,7 +330,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.correcMoneda) }">
+		
+		<fmt:parseNumber var="correcMoneda" type = "number" value = "${fn:trim(infoDeclara.deducciones.correcMoneda)}" />
+		<c:if test="${ correcMoneda != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -332,7 +356,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.reintegro) }">
+		
+		<fmt:parseNumber var="reintegro" type = "number" value = "${fn:trim(infoDeclara.deducciones.reintegro)}" />
+		<c:if test="${ reintegro != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -356,7 +382,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.salarios) }">
+		
+		<fmt:parseNumber var="salarios" type = "number" value = "${fn:trim(infoDeclara.deducciones.salarios)}" />
+		<c:if test="${ salarios != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -380,7 +408,9 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.devoluciones) }">
+		
+		<fmt:parseNumber var="devoluciones" type = "number" value = "${fn:trim(infoDeclara.deducciones.devoluciones)}" />
+		<c:if test="${ devoluciones != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -401,7 +431,8 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.rebajas) }">
+		<fmt:parseNumber var="rebajas" type = "number" value = "${fn:trim(infoDeclara.deducciones.rebajas)}" />
+		<c:if test="${ rebajas != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -422,7 +453,8 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${ '0.00' ne fn:trim(infoDeclara.deducciones.descuentos) }">
+		<fmt:parseNumber var="descuentos" type = "number" value = "${fn:trim(infoDeclara.deducciones.descuentos)}" />
+		<c:if test="${ descuentos != 0 }">
 			<div class="row deducciones">
 				<div class="col-md-4">
 					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
@@ -443,7 +475,8 @@
 			</div>
 		</c:if>
 		
-		<div class="row deducciones">
+			
+		<div class="row deducciones"> 
 			<div class="col-md-4">
 				<select id="deduccionBase" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
 					<option value="">Seleccionar</option>
@@ -472,13 +505,7 @@
 			<div class="col-md-2">
 				<input class="newalto form-control valordedu" type="text" />
 			</div>
-			<div class="col-md-1">
-				<div class="form-group ">
-<!-- 					<img class="delededucciones" -->
-<%-- 						src="${themeResourcePath}/images/deledelineacion.png" --%>
-<!-- 						style="width: 25px"></img> -->
-				</div>
-			</div>
+			
 		</div>
 	</form:form>
 </div>

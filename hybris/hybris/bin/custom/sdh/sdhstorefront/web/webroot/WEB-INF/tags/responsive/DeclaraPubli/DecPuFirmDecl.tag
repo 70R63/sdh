@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<h3>
-			<span class="col-md-10"><spring:theme
+			<span><spring:theme
 					code="declaracion.publicidad.FirmaDeclarante" /></span>
 		</h3>
 	</div>

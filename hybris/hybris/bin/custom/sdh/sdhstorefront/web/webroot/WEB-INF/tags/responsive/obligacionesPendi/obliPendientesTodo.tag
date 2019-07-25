@@ -213,7 +213,7 @@
 												value="<c:out value="${eachPubExtTax.fenceType }"></c:out>" /></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle">Detalle</label></td>
+												id="Detalle" data-anoGravable="${eachPubExtTax.anoGravable}" data-numResolu="${eachPubExtTax.resolutionNumber }" data-tipoValla="${eachPubExtTax.fenceType }">Detalle</label></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -381,7 +381,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledomatri"
@@ -462,7 +462,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -546,7 +546,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -633,7 +633,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli" disabled="disabled"
@@ -712,7 +712,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -767,7 +767,7 @@
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="">
+						<table class="table table-bordered" id="table-publi-ext-detalle">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tableangrav"><spring:theme
@@ -792,7 +792,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -811,7 +811,7 @@
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
-										onclick="window.location.href ='<c:url value='/contribuyentes/rop' />';">Generar
+										onclick="window.location.href ='<c:url value='/contribuyentes/rop?tipoImp=06&numBP=0000000575&numObjeto=60000000000000061&clavePeriodo=1810' />';">Generar
 											ROP</label></td>
 								</tr>
 							</tbody>
