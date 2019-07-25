@@ -145,5 +145,235 @@ public class ControllerPseConstants
 
 
 
+	/**
+	 * @return the predial
+	 */
+	public static String getPredial()
+	{
+		return PREDIAL;
+	}
+
+
+
+	/**
+	 * @return the delineacion
+	 */
+	public static String getDelineacion()
+	{
+		return DELINEACION;
+	}
+
+
+
+	/**
+	 * @return the vehicular
+	 */
+	public static String getVehicular()
+	{
+		return VEHICULAR;
+	}
+
+
+
+	/**
+	 * @return the publicidad
+	 */
+	public static String getPublicidad()
+	{
+		return PUBLICIDAD;
+	}
+
+
+
+	/**
+	 * @return the gasolina
+	 */
+	public static String getGasolina()
+	{
+		return GASOLINA;
+	}
+
+
+
+	/**
+	 * @return the ica
+	 */
+	public static String getIca()
+	{
+		return ICA;
+	}
+
+
+
+	/**
+	 * @return the retenciondu
+	 */
+	public static String getRetenciondu()
+	{
+		return RETENCIONDU;
+	}
+
+
+
+	/**
+	 * @return the sobretasa
+	 */
+	public static String getSobretasa()
+	{
+		return SOBRETASA;
+	}
+
+
+
+	/**
+	 * @return the reteica
+	 */
+	public static String getReteica()
+	{
+		return RETEICA;
+	}
+
+
+
+	/**
+	 * @return the debito
+	 */
+	public static String getDebito()
+	{
+		return DEBITO;
+	}
+
+
+
+	/**
+	 * @return the credito
+	 */
+	public static String getCredito()
+	{
+		return CREDITO;
+	}
+
+
+
+	/**
+	 * @return the cc
+	 */
+	public static String getCc()
+	{
+		return CC;
+	}
+
+
+
+	/**
+	 * @return the nit
+	 */
+	public static String getNit()
+	{
+		return NIT;
+	}
+
+
+
+	/**
+	 * @return the ce
+	 */
+	public static String getCe()
+	{
+		return CE;
+	}
+
+
+
+	/**
+	 * @return the ti
+	 */
+	public static String getTi()
+	{
+		return TI;
+	}
+
+
+
+	/**
+	 * @return the pp
+	 */
+	public static String getPp()
+	{
+		return PP;
+	}
+
+
+
+	/**
+	 * @return the achPse
+	 */
+	public static String getAchPse()
+	{
+		return ACH_PSE;
+	}
+
+
+
+	/**
+	 * @return the credibanco
+	 */
+	public static String getCredibanco()
+	{
+		return CREDIBANCO;
+	}
+
+
+
+	/**
+	 * @return the si
+	 */
+	public static String getSi()
+	{
+		return SI;
+	}
+
+
+
+	/**
+	 * @return the no
+	 */
+	public static String getNo()
+	{
+		return NO;
+	}
+
+
+
+	/**
+	 * @return the pseProcPagoDebito
+	 */
+	public static String getPseProcPagoDebito()
+	{
+		return PSE_PROC_PAGO_DEBITO;
+	}
+
+
+
+	/**
+	 * @return the pseProcPagoCredito
+	 */
+	public static String getPseProcPagoCredito()
+	{
+		return PSE_PROC_PAGO_CREDITO;
+	}
+
+
+
+	/**
+	 * @return the pseProcPago
+	 */
+	public static HashMap<String, String> getPseProcPago()
+	{
+		return PSE_PROC_PAGO;
+	}
+
+
+
 
 }

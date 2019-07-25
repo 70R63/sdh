@@ -6,19 +6,32 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<jsp:useBean id="controllerPseConstants" class="de.hybris.sdh.core.constants.ControllerPseConstants"/>
 
 
 <script>
 function onChange() {
 	var varBanco = document.getElementById("psePaymentForm.banco").value;
 	var varTipoDeTarjeta = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
-	
-	
+	var divBottonPSE = document.getElementById("PSE");
+	var divBottonCRE = document.getElementById("CRE");
+
 	document.getElementById("hiddenBanco").value = varBanco;
 	document.getElementById("hiddenTipoDeTarjeta").value = varTipoDeTarjeta;
 	
 	hiddenTipoDeTarjeta
+	
+	if(varTipoDeTarjeta == '02'){ //credito
+		document.getElementById("hiddenOnlinePaymentProvider").value = "CRE";
+		divBottonPSE.style.display = "none";
+		divBottonCRE.style.display = "block";
+	}else if(varTipoDeTarjeta == "01"){ //debito
+		document.getElementById("hiddenOnlinePaymentProvider").value = "ACH";
+		divBottonCRE.style.display = "none";
+		divBottonPSE.style.display = "block";
+	}
+
+	
 	//alert(varBanco);
 	//var divBottonPSE = document.getElementById("bottonPSE");
 	//var divBottonBBVA = document.getElementById("bottonBBVA");
@@ -68,6 +81,8 @@ function onChange() {
 <c:set var = "tipoDeImpuestoSeleccionado" scope = "session" value = "${psePaymentForm.tipoDeImpuesto}"/>
 <%-- <c:set var = "buttonImagePSE" scope = "session" value = "https://jumpseller.co/images/support/pse/logopse.png"/> --%>
 <c:set var = "buttonImagePSE" scope = "session" value = "http://blog.achcolombia.com.co/wp-content/themes/ach/img/logo.svg"/>
+<c:set var = "buttonImageCRE" scope = "session" value = "https://acis.org.co/portal/sites/default/files/5907822af25d3c0dd184dc45_credibanco.png"/>
+<c:set var = "buttonImageCredibanco" scope = "session" value = "https://acis.org.co/portal/sites/default/files/5907822af25d3c0dd184dc45_credibanco.png"/>
 <c:set var = "buttonImageBBVA" scope = "session" value = "https://pbs.twimg.com/profile_images/907185208549572608/Hn65NsHV_400x400.jpg"/>
 <c:set var = "buttonImageDAVIVIENDA" scope = "session" value = "https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0029/4616/davivienda.png"/>
 <!-- <c:out value="${tipoDeImpuestoSeleccionado}"/> 
@@ -170,8 +185,7 @@ function onChange() {
 						<formElement:formInputBox  idKey="psePaymentForm.valorAPagar" maxlength="240" labelKey="psePaymentForm.valorAPagar" path="valorAPagar" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 						<formElement:formSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeTarjeta}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>
 						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>					
-						<formElement:formSelectBox idKey="psePaymentForm.onlinePaymentProvider" labelKey="psePaymentForm.onlinePaymentProvider" path="onlinePaymentProvider" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${onlinePaymentProvider}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>	
-					
+							
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD) && !empty psePaymentForm.bankDateResponse }">
    						<formElement:formInputBox  idKey="psePaymentForm.bankDateResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
    						<formElement:formInputBox  idKey="psePaymentForm.bankTimeResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
@@ -199,25 +213,29 @@ function onChange() {
 					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>			
 					<form:hidden path="bankDateResponse" value="${psePaymentForm.bankDateResponse}"/>
 					<form:hidden path="bankTimeResponse" value="${psePaymentForm.bankTimeResponse}"/>
-					
-					
-					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>
-				
-					<div class="text-center">
+					<form:hidden id="hiddenOnlinePaymentProvider" path="onlinePaymentProvider" value=""/>				
+					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>			
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq false}">
-								<div id="bottonPSE">
-									<button class="btn" type="submit">
-										<img src="${buttonImagePSE} " width="80" />
+									<div id="PSE" class="text-center" style="display: none">
+									<button id="buttonPSE" class="btn" type="submit">
+										<img src="${buttonImagePSE}" width="80" />
 									</button>
 									<button class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
 										<spring:theme code="impuestos.decGasolina.Pago.Regresar"/>
+									</button>	
+									</div>
+									<div id="CRE" class="text-center" style="display: none">
+									<button id="buttonCRE" class="btn" type="submit">
+										<img src="${buttonImageCRE}" width="80" />
 									</button>
-									
-								</div>
+									<button class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
+										<spring:theme code="impuestos.decGasolina.Pago.Regresar"/>
+									</button>	
+									</div>																
 								</c:if>
 							</ycommerce:testId>
-						</div>
+						
 				</form:form>
 				
 				
@@ -253,7 +271,7 @@ function onChange() {
 					<div class="text-center">
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq true}">
-									<div id="continuar">
+									<div id="continuar">										
 										<button class="btn btn-secondary btn-lg" type="submit">
 											<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
 										</button>

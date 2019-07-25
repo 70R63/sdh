@@ -9,7 +9,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
-import de.hybris.sdh.core.constants.ControllerCredibancoConstants;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
@@ -488,32 +487,32 @@ public class PSEPaymentController extends AbstractPageController
 		String redirecUrl = getViewForPage(model);
 
 
-		if (psePaymentForm.getBanco().equals(new ControllerCredibancoConstants().getCREDIBANCO_CODE())) //Credibanco Payment
+		if (psePaymentForm.getOnlinePaymentProvider().equals(ControllerPseConstants.CREDIBANCO)) //Credibanco Payment
 		{
-			LOG.info("--------- Call Credibanco/Bank Web Service ---------");
+			LOG.info("--------- Calling Credibanco/Bank Web Service ---------");
 			final InititalizeTransactionResponse response = this.doCredibancoPayment(psePaymentForm);
 			if (Objects.nonNull(response))
 			{
 				final String returnCode = response.getReturnCode();
 				if(returnCode.equals("0")) { // Return Transaction code - 0(0k)
 					redirecUrl = "redirect:" + response.getPaymentRoute();
-					GlobalMessages.addInfoMessage(model, "pse.message.info.done.transaction.with.status");
+					GlobalMessages.addInfoMessage(model, "credibanco.message.info.done.transaction.with.status");
 				}
 				else
 				{
-					GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+					GlobalMessages.addErrorMessage(model, "credibanco.message.error.no.connection");
 				}
 				this.saveCredibancoTransaction(response, psePaymentForm);
 			}
 			else
 			{
-				GlobalMessages.addErrorMessage(model, "pse.message.error.no.connection");
+				GlobalMessages.addErrorMessage(model, "credibanco.message.error.no.connection");
 			}
 			LOG.info(response);
 		}
-		else // ACH Payment
+		else if (psePaymentForm.getOnlinePaymentProvider().equals(ControllerPseConstants.ACH_PSE)) // ACH Payment
 		{
-			LOG.info("--------- Call PSE/Bank Web Service ---------");
+			LOG.info("--------- Calling PSE/Bank Web Service ---------");
 			final CreateTransactionPaymentResponseInformationType response = this.doPsePayment(psePaymentForm);
 			if (response != null)
 			{
