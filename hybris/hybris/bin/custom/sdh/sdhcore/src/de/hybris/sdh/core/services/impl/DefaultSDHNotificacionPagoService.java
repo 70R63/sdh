@@ -85,13 +85,13 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			}
 
 			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();
-			pseNotificacionDePagoRequest.setIdBancos(transaction.getBanco());
-			pseNotificacionDePagoRequest.setModalidad("01");
-			pseNotificacionDePagoRequest.setProcPago("03");
+			pseNotificacionDePagoRequest.setIdBancos(transaction.getBanco().subSequence(0, 2).toString());
+			pseNotificacionDePagoRequest.setModalidad(transaction.getTipoDeTarjeta());
+			pseNotificacionDePagoRequest.setProcPago(ControllerPseConstants.PSE_PROC_PAGO.get(transaction.getTipoDeTarjeta()));
 			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
 			pseNotificacionDePagoRequest.setHorRecaudo(horaRecaudo);
 			pseNotificacionDePagoRequest.setCodImpuesto(transaction.getTipoDeImpuesto()); // 08 Gasolina
-			pseNotificacionDePagoRequest.setTipoHorario("0");
+			//pseNotificacionDePagoRequest.setTipoHorario("0");
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
 			pseNotificacionDePagoRequest.setMedioPago(transaction.getTipoDeTarjeta());
@@ -99,7 +99,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
 
 
-			this.realizarNotificacion(validateTransaction(pseNotificacionDePagoRequest));
+			this.realizarNotificacion(pseNotificacionDePagoRequest);
 
 			transaction.setNotificacionDeRecaudo("SI");
 			modelService.saveAll(transaction);
@@ -119,5 +119,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 
 		return newPseNotificacionDePagoRequest;
 	}
+
+
 
 }

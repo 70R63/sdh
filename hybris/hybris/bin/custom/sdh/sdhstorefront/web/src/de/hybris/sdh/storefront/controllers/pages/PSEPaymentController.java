@@ -129,14 +129,14 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> tipoDeImpuesto = Arrays.asList(
-				new SelectAtomValue(new ControllerPseConstants().getDELINEACION(), "Delineacion"),
-				new SelectAtomValue(new ControllerPseConstants().getGASOLINA(), "Gasolina"),
-				new SelectAtomValue(new ControllerPseConstants().getICA(), "ICA"),
-				new SelectAtomValue(new ControllerPseConstants().getRETEICA(), "Retencion ICA"),
-				new SelectAtomValue(new ControllerPseConstants().getPREDIAL(), "Predial"),
-				new SelectAtomValue(new ControllerPseConstants().getPUBLICIDAD(), "Publicidad"),
-				new SelectAtomValue(new ControllerPseConstants().getVEHICULAR(), "Vehicular"),
-				new SelectAtomValue(new ControllerPseConstants().getRETENCIONDU(), "Retención De La Delineación"));
+				new SelectAtomValue(ControllerPseConstants.DELINEACION, "Delineacion"),
+				new SelectAtomValue(ControllerPseConstants.GASOLINA, "Gasolina"),
+				new SelectAtomValue(ControllerPseConstants.ICA, "ICA"),
+				new SelectAtomValue(ControllerPseConstants.RETEICA, "Retencion ICA"),
+				new SelectAtomValue(ControllerPseConstants.PREDIAL, "Predial"),
+				new SelectAtomValue(ControllerPseConstants.PUBLICIDAD, "Publicidad"),
+				new SelectAtomValue(ControllerPseConstants.VEHICULAR, "Vehicular"),
+				new SelectAtomValue(ControllerPseConstants.RETENCIONDU, "Retención De La Delineación"));
 
 		return tipoDeImpuesto;
 	}
@@ -174,8 +174,8 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> pagoAdicional = Arrays.asList(
-				new SelectAtomValue("S", "Si"),
-				new SelectAtomValue("N", "No"));
+				new SelectAtomValue(ControllerPseConstants.SI, "Si"),
+				new SelectAtomValue(ControllerPseConstants.NO, "No"));
 
 		return pagoAdicional;
 	}
@@ -197,8 +197,8 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> tipoDeTarjeta = Arrays.asList(
-				new SelectAtomValue("01", "Credito"),
-				new SelectAtomValue("02", "Debito"));
+				new SelectAtomValue(ControllerPseConstants.CREDITO, "Credito"),
+				new SelectAtomValue(ControllerPseConstants.DEBITO, "Debito"));
 
 		return tipoDeTarjeta;
 	}
@@ -208,13 +208,24 @@ public class PSEPaymentController extends AbstractPageController
 	{
 
 		final List<SelectAtomValue> tipoDeIdentificacion = Arrays.asList(
-				new SelectAtomValue("CC",  "Cedula De Ciudadania"),
-				new SelectAtomValue("NIT", "NIT De La Empresa"),
-				new SelectAtomValue("CE",  "Cedula De Extranjeria"),
-				new SelectAtomValue("TI",  "Tarjeta De Identificacion"),
-				new SelectAtomValue("PP",  "Pasaporte"));
+				new SelectAtomValue(ControllerPseConstants.CC, "Cedula De Ciudadania"),
+				new SelectAtomValue(ControllerPseConstants.NIT, "NIT De La Empresa"),
+				new SelectAtomValue(ControllerPseConstants.CE, "Cedula De Extranjeria"),
+				new SelectAtomValue(ControllerPseConstants.TI, "Tarjeta De Identificacion"),
+				new SelectAtomValue(ControllerPseConstants.PP, "Pasaporte"));
 
 		return tipoDeIdentificacion;
+	}
+
+	@ModelAttribute("onlinePaymentProvider")
+	public List<SelectAtomValue> getOnlinePaymentProvider()
+	{
+
+		final List<SelectAtomValue> onlinePaymentProvider = Arrays.asList(
+				new SelectAtomValue(ControllerPseConstants.ACH_PSE, "ACH/PSE"),
+				new SelectAtomValue(ControllerPseConstants.CREDIBANCO, "CREDIBANCO"));
+
+		return onlinePaymentProvider;
 	}
 
 	@RequestMapping(value = "/pagoEnLinea", method = RequestMethod.GET)
@@ -553,7 +564,7 @@ public class PSEPaymentController extends AbstractPageController
 				.createTransactionPayment(
 						this.getConstantConnectionData(
 								psePaymentForm.getBanco(),
-								psePaymentForm.getBanco().substring(2).concat(psePaymentForm.getTipoDeImpuesto()),
+								psePaymentForm.getTipoDeImpuesto(),
 								psePaymentForm.getNumeroDeReferencia()),
 						this.getMessageHeader(),
 						createTransactionPaymentInformationType);

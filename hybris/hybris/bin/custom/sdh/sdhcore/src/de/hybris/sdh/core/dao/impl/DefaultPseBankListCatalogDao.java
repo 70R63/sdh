@@ -24,7 +24,7 @@ public class DefaultPseBankListCatalogDao extends DefaultGenericDao<PseBankListC
 	private FlexibleSearchService defaultFlexibleSearchService;
 
 	private static final String GET_ALL_BANK_ENTRY_QUERY = "Select {p:" + PseBankListCatalogModel.PK + "} from {"
-			+ PseBankListCatalogModel._TYPECODE + " AS p}";
+			+ PseBankListCatalogModel._TYPECODE + " AS p} ";
 
 
 	public DefaultPseBankListCatalogDao(final String typecode)
