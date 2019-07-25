@@ -40,13 +40,6 @@
 							class="new_alto form-control !important" id="">
 							<!-- 							<option value="00">Seleccionar</option> -->
 							<option value="01">RIT</option>
-							<!-- 							<option value="02">Novedades de registro</option> -->
-							<!-- 							<option value="03">Facturación</option> -->
-							<!-- 							<option value="04">Analisis de la cuenta</option> -->
-							<!-- 							<option value="05">Boletín de deudores Morosos del Estado</option> -->
-							<!-- 							<option value="06">Verificación de pagos</option> -->
-							<!-- 							<option value="07">Corrección de la información causada contablemente</option> -->
-							<!-- 							<option value="08">Declaración</option> -->
 						</select>
 					</div>
 				</div>
@@ -103,6 +96,15 @@
 					</div>
 				</div>
 			</div>
+			<div id="divCorreo" class="row mt-3">
+				<div class="col-md-12 text-center">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="tramites.crear.inicial.correo" /></label><input
+							class="form-control new_alto" value="" type="email" />
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="row mt-3">
@@ -123,27 +125,17 @@
 		</div>
 	</div>
 
-	<div class="row mt-3">
-		<div class="col-md-7 text-right">
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button">
-				<spring:theme code="tramites.crear.inicial.enviar" />
-			</button>
-		</div>
-		<div class="col-md-1">
-			<button style="margin-top: 3px;" id=""
-				class="btn btn-secondary btn-lg" type="button">
-				<spring:theme code="tramites.crear.inicial.cancelar" />
-			</button>
-		</div>
-	</div>
+
 	<div class="row">
-		<div class="col-md-6 text-center col-md-offset-3" style="margin-top: 15px">
+		<div class="col-md-6 text-center col-md-offset-3"
+			style="margin-top: 15px">
 			<table>
 				<thead>
 					<tr>
 						<th><label class="contorl-label labeltabletd"><spring:theme
 									code="tramites.crear.inicial.adjdoc" /></label></th>
+						<th><label class="contorl-label labeltabletd"><spring:theme
+									code="tramites.crear.inicial.adj" /></label></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -155,6 +147,23 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+	</div>
+	<div class="row mt-3">
+		<div class="col-md-7 text-center">
+			<button style="margin-top: 5px;" id="" class="btn btn-primary btn-lg"
+				type="button">
+				<spring:theme code="tramites.crear.inicial.enviar" />
+			</button>
+		</div>
+		<div class="col-md-1">
+			<button type="button" style="margin-top: 5px;"
+				class="btn btn-secondary btn-lg" id="action" name="action"
+				value="cancelar"
+				onclick="window.location.href ='<c:url value='/contribuyentes' />';">
+				<spring:theme code="tramites.crear.inicial.cancelar" />
+			</button>
+
 		</div>
 	</div>
 </div>

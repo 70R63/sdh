@@ -23,7 +23,7 @@
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.tiptramite" /></label> 
 						<select data-nivel="0"
-							class="new_alto form-control !important tramitestSN" id="selectNivel0">
+							class="new_alto form-control !important tramitestSN" id="selectNivel0" onchange="tabdococul()">
 							<option value="00">Seleccionar</option>
 							<option value="01">RIT</option>
 							<option value="02">Novedades de registro</option>
@@ -62,7 +62,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.subcategoria" /></label> 
-						<select data-nivel="3" class="new_alto form-control !important tramitestSN" id="selectNivel3">
+						<select data-nivel="3" class="new_alto form-control !important tramitestSN" id="selectNivel3" onchange="tabdoc()">
 						</select>
 					</div>
 				</div>
@@ -85,6 +85,29 @@
 			</div>
 		</div>
 	</div>
+		<div class="row documentos" id="documentos" style="display:none">
+		<div class="col-md-6 text-center col-md-offset-3"
+			style="margin-top: 15px">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th><label class="contorl-label labeltabletd"><spring:theme
+									code="tramites.crear.inicial.adjdoc" /></label></th>
+						<th><label class="contorl-label labeltabletd"><spring:theme
+									code="tramites.crear.inicial.adj" /></label></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input class="inputtextnew" disabled="disabled"
+							type="text" size="30" value="" /></td>
+						<td><input class="inputtextnew" type="file" size="30"
+							value="" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 	<div class="row mt-3">
 		<div class="col-md-7 text-right">
@@ -101,6 +124,18 @@
 		</div>
 	</div>
 </div>
+
+<script>
+function tabdoc(){
+	var doc=document.getElementById('documentos');
+	doc.style.display='block';
+}
+
+function tabdococul(){
+	var doc=document.getElementById('documentos');
+	doc.style.display='none';
+}
+</script>
 
 
 
