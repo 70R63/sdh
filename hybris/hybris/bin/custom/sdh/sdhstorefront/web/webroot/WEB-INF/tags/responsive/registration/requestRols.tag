@@ -123,27 +123,17 @@
 		</div>
 	</div>
 
-	<div class="row mt-3">
-		<div class="col-md-7 text-right">
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button">
-				<spring:theme code="tramites.crear.inicial.enviar" />
-			</button>
-		</div>
-		<div class="col-md-1">
-			<button style="margin-top: 3px;" id=""
-				class="btn btn-secondary btn-lg" type="button">
-				<spring:theme code="tramites.crear.inicial.cancelar" />
-			</button>
-		</div>
-	</div>
+
 	<div class="row">
-		<div class="col-md-6 text-center col-md-offset-3" style="margin-top: 15px">
+		<div class="col-md-6 text-center col-md-offset-3"
+			style="margin-top: 15px">
 			<table>
 				<thead>
 					<tr>
 						<th><label class="contorl-label labeltabletd"><spring:theme
 									code="tramites.crear.inicial.adjdoc" /></label></th>
+						<th><label class="contorl-label labeltabletd"><spring:theme
+									code="tramites.crear.inicial.adj" /></label></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -155,6 +145,22 @@
 					</tr>
 				</tbody>
 			</table>
+		</div>
+	</div>
+	<div class="row mt-3">
+		<div class="col-md-7 text-center">
+			<button style="margin-top: 5px;" id="" class="btn btn-primary btn-lg"
+				type="button">
+				<spring:theme code="tramites.crear.inicial.enviar" />
+			</button>
+		</div>
+		<div class="col-md-1">
+			<button type="button" style="margin-top: 5px;" class="btn btn-secondary btn-lg" id="action"
+				name="action" value="cancelar"
+				onclick="window.location.href ='<c:url value='/contribuyentes' />';">
+				<spring:theme code="tramites.crear.inicial.cancelar" />
+			</button>
+
 		</div>
 	</div>
 </div>
