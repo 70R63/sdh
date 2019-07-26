@@ -116,11 +116,7 @@
 					</div>
 				</div>
 
-				<sf:select id="periodobk" path="periodo" items="${dataForm.catalogosSo.periodo}"
-								referenceData="${dataForm.catalogosSo.periodo}"
-
-								class="newalto form-control" style="visibility:hidden"/>
-
+				
 			</c:if>
 
 			<c:if test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">
@@ -138,8 +134,7 @@
 						</div>
 					</div>
 				</div>
-				<sf:select id="periodobk" path="periodo" items="${icaPeriodo}"
-								referenceData="${icaPeriodo}" class="new_alto form-control" style="visibility:hidden"/>
+				
 			</c:if>
 		</div>
 
