@@ -101,6 +101,8 @@
 												code="relacion.inicial.ica.fecprese" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="relacion.inicial.ica.totpag" /> </label></th>
+												<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="relacion.inicial.ica.totapovol" /> </label></th>
 
 								</tr>
 							</thead>
@@ -119,6 +121,8 @@
 									<td><input class="inputtextnew tablefechas"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
+										<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 							</tbody>

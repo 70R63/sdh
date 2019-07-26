@@ -22,6 +22,7 @@
 	}
 
 	function Selectedver(selectObject) {
+		debugger;
 		var value = selectObject.value;
 		var x = document.getElementById('Idimp').value;
 		var tablepredial = document.getElementById('table-predial');
@@ -30,6 +31,7 @@
 		var tablepublicidad = document.getElementById('table-publicidad');
 		var tabledeli = document.getElementById('table-delineacion');
 		var tablegas = document.getElementById('table-gasolina');
+		var tabrad = document.getElementById('table-delineacion-radicados');
 		var todo = document.getElementById('idtodos');
 		var detpred = document.getElementById('detalle-predial');
 		var detica = document.getElementById('detalle-ica');
@@ -56,6 +58,7 @@
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';
+			tabrad.style.display='none';
 
 		} else if (x == '2') {
 
@@ -73,6 +76,7 @@
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';
+			tabrad.style.display='none';
 
 		} else if (x == '3') {
 			tablepredial.style.display = 'none';
@@ -89,6 +93,7 @@
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';
+			tabrad.style.display='none';
 
 		} else if (x == '4') {
 			tablepredial.style.display = 'none';
@@ -105,6 +110,7 @@
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';
+			tabrad.style.display='none';
 
 		} else if (x == '5') {
 
@@ -122,6 +128,7 @@
 			detdeli.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';
+			tabrad.style.display='none';
 
 		} else if (x == '6') {
 			tablepredial.style.display = 'none';
@@ -138,6 +145,7 @@
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';
+			tabrad.style.display='none';
 		} else {
 
 			tablepredial.style.display = 'none';
@@ -146,6 +154,7 @@
 			tablepublicidad.style.display = 'none';
 			tablegas.style.display = 'none';
 			tabledeli.style.display = 'none';
+			tabrad.style.display='none';
 			todo.style.display = 'block';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
@@ -159,7 +168,7 @@
 	}
 	
 	function cancelfun(selectObject) {
-		
+		debugger;
 		var value = selectObject.value;
 		var x = document.getElementById('Idimp').value;
 		var tablepredial = document.getElementById('table-predial');
@@ -177,6 +186,7 @@
 		var detgas = document.getElementById('detalle-gasolina');
 		var detplubliext = document.getElementById('detalle-publiext');
 		var detradic = document.getElementById('detalle-retenciones');
+		var tabrad = document.getElementById('table-delineacion-radicados');
 
 		if (x == '1' || x == '2' || x == '3' || x == '4' || x == '5' || x == '6' ) {
 
@@ -186,6 +196,7 @@
 			tablepublicidad.style.display = 'none';
 			tabledeli.style.display = 'none';
 			tablegas.style.display = 'none';
+			tabrad.style.display='none';
 			todo.style.display = 'block';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
@@ -212,6 +223,7 @@
 			detgas.style.display = 'none';
 			detplubliext.style.display = 'none';
 			detradic.style.display = 'none';
+			tabrad.style.display='none';
 		}
 	}
 </script>
