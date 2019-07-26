@@ -85,7 +85,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			}
 
 			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();
-			pseNotificacionDePagoRequest.setIdBancos(transaction.getBanco().subSequence(0, 2).toString());
+			pseNotificacionDePagoRequest.setIdBancos(transaction.getTipoDeImpuesto().substring(0, 2));
 			pseNotificacionDePagoRequest.setModalidad(transaction.getTipoDeTarjeta());
 			pseNotificacionDePagoRequest.setProcPago(ControllerPseConstants.PSE_PROC_PAGO.get(transaction.getTipoDeTarjeta()));
 			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
