@@ -83,7 +83,7 @@
 						<sf:input path="dataForm.infoDeclara[${loop.index}].galonesGra"
 							value="${info.galonesGra}"
 							class="new_alto form-control galones" maxlength="30"
-							size="20" onkeyup="numberFormat(this)" onclick="numberFormat(this)" id="number1" />
+							size="20" onkeyup="numberFormattable(this)" onclick="numberFormattable(this)" id="number1" />
 					</div>
 					<div class="col-md-2">
 						<sf:input path="dataForm.infoDeclara[${loop.index}].precioRef"
