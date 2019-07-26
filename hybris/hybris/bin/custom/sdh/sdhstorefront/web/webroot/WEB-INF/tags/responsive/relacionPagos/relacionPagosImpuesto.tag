@@ -96,12 +96,9 @@
 						<tbody>
 
 							<tr>
-								<td><label class="form-check-label inputtextnew"
-									style="text-transform: capitalize !important"> <input
-										type="radio" name="placa" id="" class="form-check-input mr-2"
-										style="visibility: visible !important; min-height: 4px !important; margin-left: 12px">
-										<c:out value="placa" />
-								</label></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value="PLACA"></c:out>" /></td>
 								<td><input style="width: 100%" class="inputtextnew"
 									maxlength="30" size="30" disabled="disabled" type="text"
 									value="<c:out value="PLACA"></c:out>" /></td>
@@ -253,6 +250,8 @@
 			</div>
 		</div>
 
+		
+		
 		<div id="table-delineacion" style="display: none;">
 			<div class="row">
 				<div class="headline">
@@ -302,9 +301,66 @@
 							</tr>
 						</tbody>
 					</table>
+					<small class="form-text text-muted"
+							style="text-align: right !important"><spring:theme
+								code="relacion.inicial.delineacion.retencion.nota1" /></small>
 				</div>
 			</div>
 		</div>
+		
+		<div id="table-delineacion-radicados" style="display: none;">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="obligacion.sujeto.delurbana.titulo" /></span>
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<table class="table">
+						<thead style="cellspacing: 10 !important">
+							<tr>
+								<th><label class="control-label labeltabletd" for=""><spring:theme
+											code="relacion.inicial.delineacion.radicados.cdu" /></label></th>
+								<th><label class="control-label labeltabletd" for="">
+										<spring:theme
+											code="relacion.inicial.delineacion.radicados.radicado" />
+								</label></th>
+								<th><label class="control-label labeltabletd" for="">
+										<spring:theme
+											code="relacion.inicial.delineacion.radicados.direccion" />
+								</label></th>
+								<th><label class="control-label labeltabletd" for="">
+										<spring:theme
+											code="relacion.inicial.delineacion.radicados.visualizar" />
+								</label></th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value="licencia"></c:out>" /></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value="licencia"></c:out>" /></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value="direccion"></c:out>" /></td>
+								<td><label class="control-label"
+									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+									id="" onclick="showdetailrad(this)">Detalle</label></td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
 
 		<!-- 			tablas de detalle -->
 
@@ -531,12 +587,7 @@
 
 
 		<div id="detalle-delurbana" style="display: none;">
-			<div class="row">
-				<div class="col-md-12">
-					<label class="control-label" style="text-transform: none;"><spring:theme
-							code="relacion.inicial.delineacion.retencion.nota1" /> </label>
-				</div>
-			</div>
+		
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-check">
@@ -855,7 +906,123 @@
 	}
 
 	function showdetail(selectObject) {
+		var values = selectObject.value;
+		var value = selectObject;
+		var x = document.getElementById('Idimp').value;
 
+		var todo = document.getElementById('idtodos');
+		var detpred = document.getElementById('detalle-predial');
+		var detica = document.getElementById('detalle-ica');
+		var detvehi = document.getElementById('detalle-vehiculos');
+		var detdeli = document.getElementById('detalle-delurbana');
+		var detgas = document.getElementById('detalle-gasolina');
+		var detplubliext = document.getElementById('detalle-publiext');
+		var detradic = document.getElementById('detalle-retenciones');
+		var tabdel = document.getElementById('table-delineacion');
+		var tabrad = document.getElementById('table-delineacion-radicados');
+
+		if (x == '1' && value !='7') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'block';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
+			tabrad.style.display = 'none';
+
+		} else if (x == '2' && value !='7') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'block';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
+			tabrad.style.display = 'none';
+
+		} else if (x == '3' && value !='7') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'block';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
+			tabrad.style.display = 'none';
+
+		} else if (x == '4'&& value !='7') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'block';
+			detradic.style.display = 'none';
+			tabrad.style.display = 'none';
+
+		} else if (x == '5' && value !='7') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'block';
+			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
+			tabrad.style.display = 'none';
+
+		} else if (x == '6' && value !='7') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detgas.style.display = 'none';
+			detdeli.style.display = 'block';
+			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
+			tabrad.style.display = 'none';
+
+		}  else if (value == '7') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detgas.style.display = 'none';
+			detdeli.style.display = 'none';
+			detplubliext.style.display = 'none';
+			detradic.style.display = 'none'; 
+			tabdel.style.display='none';
+			tabrad.style.display = 'block';
+
+		} else {
+
+			todo.style.display = 'block';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'none';
+			detradic.style.display = 'none';
+			tabrad.style.display = 'none';
+		}
+
+	}
+	
+	function showdetailrad(selectObject){
+		
 		debugger;
 		var values = selectObject.value;
 		var value = selectObject;
@@ -869,95 +1036,19 @@
 		var detgas = document.getElementById('detalle-gasolina');
 		var detplubliext = document.getElementById('detalle-publiext');
 		var detradic = document.getElementById('detalle-retenciones');
-
-		if (x == '1' && value !='7') {
-
-			todo.style.display = 'none';
-			detpred.style.display = 'block';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-
-		} else if (x == '2' && value !='7') {
-
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'block';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-
-		} else if (x == '3' && value !='7') {
-
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'block';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-
-		} else if (x == '4'&& value !='7') {
-
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'block';
-			detradic.style.display = 'none';
-
-		} else if (x == '5' && value !='7') {
-
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'block';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-
-		} else if (x == '6' && value !='7') {
-
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detgas.style.display = 'none';
-			detdeli.style.display = 'block';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-
-		}  else if (value == '7') {
-
-			todo.style.display = 'none';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detgas.style.display = 'none';
-			detdeli.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'block';
-
-		} else {
-
-			todo.style.display = 'block';
-			detpred.style.display = 'none';
-			detica.style.display = 'none';
-			detvehi.style.display = 'none';
-			detdeli.style.display = 'none';
-			detgas.style.display = 'none';
-			detplubliext.style.display = 'none';
-			detradic.style.display = 'none';
-		}
-
+		var tabdel = document.getElementById('table-delineacion');
+		var tabrad = document.getElementById('table-delineacion-radicados');
+		
+		todo.style.display = 'none';
+		detpred.style.display = 'none';
+		detica.style.display = 'none';
+		detvehi.style.display = 'none';
+		detgas.style.display = 'none';
+		detdeli.style.display = 'none';
+		detplubliext.style.display = 'none';
+		detradic.style.display = 'block'; //este es el detalle de los radicados
+		tabdel.style.display='none';
+		tabrad.style.display = 'block';
+		
 	}
 </script>

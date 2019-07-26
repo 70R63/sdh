@@ -349,7 +349,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
 				</div>
 			</div>
 			<div class="row">
@@ -435,7 +435,7 @@
 			<div class="row">
 				<div class="col-md-8">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
 				</div>
 			</div>
 			<div class="row">
@@ -513,7 +513,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
 				</div>
 			</div>
 			<div class="row">
@@ -604,7 +604,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
 				</div>
 			</div>
 			<div class="row">
@@ -685,7 +685,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
 				</div>
 			</div>
 			<div class="row">
@@ -761,7 +761,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" />
+						class="inputtextnew" disabled="disabled" value="" type="text"  id="fechreporte"/>
 				</div>
 			</div>
 			<div class="row">

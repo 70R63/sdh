@@ -6,8 +6,23 @@ ACC.rop = {
 		$(document).on("click", "#generaROPButton", function (e) {
 			e.preventDefault();
 
+			var importeusuario = $("#importeusuario").val().replace(/\./g,'').replace(/\,/g,'.')
+
+			if(importeusuario < 1000 || importeusuario % 1000 !== 0)
+			{
+				$( "#dialogRop" ).dialog( "open" );
+				$("#ropDialogContent").html("");
+				$("#ropDialogContent").html("Por favor, introduce un valor múltiplo de $1.000");
+				return;
+			}
 
 			var data = {};
+
+			data.importeusuario = importeusuario;
+
+
+
+
 
 			$.ajax({
 				url: ACC.generaROPURL,
