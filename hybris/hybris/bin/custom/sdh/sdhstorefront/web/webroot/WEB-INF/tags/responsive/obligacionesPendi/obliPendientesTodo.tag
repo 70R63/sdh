@@ -396,7 +396,7 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="">Pagar</label></td>
+										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -473,7 +473,7 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="">Pagar</label></td>
+										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -563,7 +563,7 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="">Pagar</label></td>
+										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -646,7 +646,7 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="">Pagar</label></td>
+										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -723,7 +723,7 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="">Pagar</label></td>
+										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -807,7 +807,7 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="">Pagar</label></td>
+										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
