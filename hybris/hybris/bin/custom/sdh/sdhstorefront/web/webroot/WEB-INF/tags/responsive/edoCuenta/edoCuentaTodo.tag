@@ -26,7 +26,8 @@
 						<table class="table tableedocuenta" id="">
 							<thead>
 								<tr>
-									<th colspan="4"><label class="control-label labeltabletd tabledoobli"><spring:theme
+									<th colspan="4"><label
+										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.predio.detalle" /> </label></th>
 									<th><label class="control-label labeltabletd tabledomatri"><spring:theme
 												code="edocuenta.inicial.predio.resposa" /> </label></th>
@@ -69,7 +70,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="4" class="td-colspann"></td>
+									<td colspan="4" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
 												code="edocuenta.inicial.predio.total" /> </label></td>
@@ -116,8 +118,8 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><input class="inputtextnew tabledoobli" disabled="disabled"
-										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -128,7 +130,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="2" class="td-colspann"></td>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd"><spring:theme
 												code="edocuenta.inicial.vehiculo.total" /> </label></td>
@@ -156,8 +159,8 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"> <spring:theme
-								code="edocuenta.inicial.ica.tiporegimen" /></label> <input class="form-cntrol"
-										disabled="disabled" value="" type="text" />
+								code="edocuenta.inicial.ica.tiporegimen" /></label> <input
+							class="form-cntrol" disabled="disabled" value="" type="text" />
 					</div>
 				</div>
 			</div>
@@ -196,7 +199,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="2" class="td-colspann"></td>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd"><spring:theme
 												code="edocuenta.inicial.ica.total" /> </label></td>
@@ -247,8 +251,8 @@
 								<tr>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli" disabled="disabled"
-										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -259,7 +263,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="3" class="td-colspann"></td>
+									<td colspan="3" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.deliurbana.total" /></td>
@@ -319,7 +324,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="2" class="td-colspann"></td>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.gasolina.total" /></td>
@@ -369,8 +375,8 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><input class="inputtextnew tabledoobli" disabled="disabled"
-										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -383,7 +389,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="3" class="td-colspann"></td>
+									<td colspan="3" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.publicidad.total" /> </label></td>
@@ -431,8 +438,8 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><input class="inputtextnew tabledoobli" disabled="disabled"
-										value="" type="text" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -443,7 +450,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="2" class="td-colspann"></td>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.obligaciones.total" /> </label></td>

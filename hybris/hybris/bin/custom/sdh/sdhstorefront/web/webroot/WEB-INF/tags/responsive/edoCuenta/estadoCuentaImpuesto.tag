@@ -134,11 +134,11 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="edocuenta.inicial.ica.tipdocu" /></label></th>
 								<th><label class="control-label labeltabletd" for="">
 										<spring:theme code="edocuenta.inicial.ica.numdocu" />
 								</label></th>
+								<th><label class="control-label labeltabletd" for=""><spring:theme
+											code="edocuenta.inicial.ica.tipdocu" /></label></th>
 								<th><label class="control-label labeltabletd" for="">
 										<spring:theme code="edocuenta.inicial.ica.visualizar" />
 								</label></th>
@@ -304,15 +304,23 @@
 
 		<div id="table-obli-no-tributarias" style="display: none;">
 			<div class="row">
-				<div class="col-md-6 text-center">
+				<div class="col-md-7 text-center">
 					<div class="table-responsive">
 						<table class="table tableedocuenta" id="">
 							<thead>
+							<tr>
+									<th colspan="4" class="td-colspann"><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.obligaciones.impuesto" /> </label></th>
+									<th colspan="2" class="td-colspann"><label class="control-label labeltabletd"><spring:theme
+												code="edocuenta.inicial.obligaciones.saldcuneta" /> </label></th>
+								</tr>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.obligaciones.concepto" /> </label></th>
 									<th><label class="control-label labeltabletd"><spring:theme
 												code="edocuenta.inicial.obligaciones.anigrav" /> </label></th>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="edocuenta.inicial.obligaciones.desthacen" /> </label></th>
 									<th><label class="control-label labeltabletd tableangrav"><spring:theme
 												code="edocuenta.inicial.obligaciones.estado" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -331,6 +339,8 @@
 									</label></td>
 									<td><input class="inputtextnew tableangrav"
 										disabled="disabled" value="" type="text" /></td>
+									<td><input class="inputtextnew tableangrav"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -339,7 +349,7 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="2" class="td-colspann"></td>
+									<td colspan="3" class="td-colspann" style="border: 0px !important"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.obligaciones.total" /> </label></td>
@@ -411,7 +421,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="4" class="td-colspann"></td>
+									<td colspan="4" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
 												code="edocuenta.inicial.predio.total" /> </label></td>
@@ -459,8 +470,10 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"> <spring:theme
-								code="edocuenta.inicial.ica.tiporegimen" /></label> <input class="form-cntrol"
-										disabled="disabled" value="" type="text" />
+								code="edocuenta.inicial.ica.tiporegimen" /></label><select
+							class="form-contorl newalto"><option>Seleccionar</option>
+							<option>Común</option>
+							<option>Simplificado</option></select>
 					</div>
 				</div>
 			</div>
@@ -510,7 +523,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="2" class="td-colspann"></td>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd"><spring:theme
 												code="edocuenta.inicial.ica.total" /> </label></td>
@@ -597,7 +611,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="2" class="td-colspann"></td>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd"><spring:theme
 												code="edocuenta.inicial.vehiculo.total" /> </label></td>
@@ -641,7 +656,7 @@
 
 
 		<div id="detalle-delurbana" style="display: none;">
-			>
+
 			<div class="row">
 				<div class="col-md-11 text-center">
 					<div class="table-responsive">
@@ -696,7 +711,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="5" class="td-colspann"></td>
+									<td colspan="5" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.deliurbana.total" /></td>
@@ -783,7 +799,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="2" class="td-colspann"></td>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.gasolina.total" /></td>
@@ -873,7 +890,8 @@
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
 								<tr>
-									<td colspan="5" class="td-colspann"></td>
+									<td colspan="5" class="td-colspann"
+										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.publicidad.total" /> </label></td>
