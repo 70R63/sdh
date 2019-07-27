@@ -133,7 +133,7 @@ public class RopPageController extends AbstractPageController
 		ropRequest.setNumObjeto("60000000000000061");
 		ropRequest.setClavePeriodo("1810");
 		ropRequest.setConsulta("");
-		ropRequest.setImporteusuario("");
+		ropRequest.setImporteusuario(ropFormDatos.getImporteusuario());
 
 		System.out.println("Request de infObjeto/rop: " + ropRequest);
 		try
