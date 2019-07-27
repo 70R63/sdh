@@ -349,7 +349,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreportepred" />
 				</div>
 			</div>
 			<div class="row">
@@ -435,7 +435,7 @@
 			<div class="row">
 				<div class="col-md-8">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporteica" />
 				</div>
 			</div>
 			<div class="row">
@@ -513,7 +513,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporteveh" />
 				</div>
 			</div>
 			<div class="row">
@@ -604,7 +604,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreportedel" />
 				</div>
 			</div>
 			<div class="row">
@@ -632,10 +632,9 @@
 								<tr>
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
-										disabled="disabled" type="text"
-										value="<c:out value="A�o gravable"></c:out>" /></td>
+										disabled="disabled" type="text" id="angravDELI"/></td>
 									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
+										disabled="disabled" value="" type="text"  id="cduobDELI"/></td>
 									<td><input class="inputtextnew tabledoobli" disabled="disabled"
 										value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -685,7 +684,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporte" />
+						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreportegas" />
 				</div>
 			</div>
 			<div class="row">
@@ -761,7 +760,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text"  id="fechreporte"/>
+						class="inputtextnew" disabled="disabled" value="" type="text"  id="fechreportepub"/>
 				</div>
 			</div>
 			<div class="row">
@@ -791,10 +790,9 @@
 								<tr>
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
-										disabled="disabled" type="text"
-										value="<c:out value="A�o gravable"></c:out>" /></td>
+										disabled="disabled" type="text" id="angravPUB" /></td>
 									<td><input class="inputtextnew tableangrav"
-										disabled="disabled" value="" type="text" /></td>
+										disabled="disabled" value="" type="text" id="numResOB"/></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"

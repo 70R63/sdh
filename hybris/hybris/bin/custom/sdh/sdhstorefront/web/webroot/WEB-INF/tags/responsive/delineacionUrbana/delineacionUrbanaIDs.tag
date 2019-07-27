@@ -31,9 +31,10 @@
 	</div>
 </div>
 
-<c:set var="nombreCompleto" value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
+<c:set var="nombreCompleto"
+	value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
 <div class="row mt-3">
-	<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
+	<div class="col-md-4 col-md-offset-4 d-flex align-items-center">
 		<form:form action="">
 			<div class="table-responsive text-center">
 				<table class="table table-bordered">
@@ -43,21 +44,15 @@
 										code="publicidad.exterior.tipodocumento" /></label></td>
 							<td><label class="control-label labeltabletd tablenumiden"><spring:theme
 										code="publicidad.exterior.numdocumento" /></label></td>
-							<td><label class="control-label labeltabletd tablenombre"><spring:theme
+							<td><label class="control-label labeltabletd "><spring:theme
 										code="publicidad.esterior.nombre" /></label></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><input class="inputtextnew tableident"
-								disabled="disabled" type="text" size="30"
-								value="${dataForm.valCont.infoContrib.tipoDoc}" /></td>
-							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30"
-								value="${dataForm.valCont.infoContrib.numDoc}" /></td>
-							<td><input class="inputtextnew tablenombre"
-								disabled="disabled" type="text" size="30"
-								value="${nombreCompleto}" /></td>
+							<td><c:out value="${dataForm.valCont.infoContrib.tipoDoc}" /></td>
+							<td><c:out value="${dataForm.valCont.infoContrib.numDoc}" /></td>
+							<td><c:out value="${nombreCompleto}" /></td>
 						</tr>
 					</tbody>
 				</table>
