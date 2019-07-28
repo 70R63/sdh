@@ -21,59 +21,53 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label " style="margin-top: 20px"><spring:theme
+					<label class="control-label "><spring:theme
 							code="publicidad.exterior.vehicles.model" /></label> <input
-						id="vehiculoModelo" name="vehiculoModelo" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="240" disabled>
+						id="vehiculoModelo" name="vehiculoModelo"
+						class="newalto form-control" aria-required="true" type="text"
+						value="" maxlength="240" disabled>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label " style="margin-top: 20px"><spring:theme
+					<label class="control-label "><spring:theme
 							code="publicidad.exterior.vehicles.typeadvertising" /></label> <input
 						id="vehiculoTipoPublici" name="vehiculoTipoPublici"
-						class="newalto form-control" aria-required="true" type="text" value=""
-						maxlength="240" disabled>
+						class="newalto form-control" aria-required="true" type="text"
+						value="" maxlength="240" disabled>
 				</div>
 			</div>
-	
+
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label " style="margin-top: 20px"><spring:theme
+					<label class="control-label "><spring:theme
 							code="publicidad.exterior.vehicles.plate" /></label> <input
-						id="vehiculoPlaca" name="vehiculoPlaca" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="240" disabled>
+						id="vehiculoPlaca" name="vehiculoPlaca"
+						class="newalto form-control" aria-required="true" type="text"
+						value="" maxlength="240" disabled>
 				</div>
 			</div>
-				
+
 			<div class="col-md-2">
 				<div class="form-group ">
-					<label class="control-label " style="margin-top: 20px"><spring:theme
+					<label class="control-label "><spring:theme
 							code="publicidad.exterior.vehicles.typeitemreg" /></label> <input
 						id="vehiculoTipoElemento" name="vehiculoTipoElemento"
-						class="newalto form-control" aria-required="true" type="text" value=""
-						maxlength="240" disabled>
+						class="newalto form-control" aria-required="true" type="text"
+						value="" maxlength="240" disabled>
 				</div>
 			</div>
-		
+
 			<div class="col-md-2">
 				<div class="form-group ">
 					<label class="control-label "><spring:theme
 							code="publicidad.exterior.vehicles.licensenumber" /></label> <input
 						id="vehiculoNumLicenciaTrans" name="vehiculoNumLicenciaTrans"
-						class="newalto form-control" aria-required="true" type="text" value=""
-						maxlength="240" disabled>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group ">
-					<label class="control-label " style="margin-top: 20px"><spring:theme
-							code="publicidad.exterior.vehicles.elementlocation" /></label> <input
-						id="vehiculoOrientacion" name="vehiculoOrientacion"
 						class="newalto form-control" aria-required="true" type="text"
-						value="${publicidadForm.orientacion}" maxlength="240" disabled>
+						value="" maxlength="240" disabled>
 				</div>
 			</div>
+
 		</div>
 		<div class="row">
 			<div class="col-md-2">
@@ -83,6 +77,15 @@
 						id="vehiculoTipoServicio" name="vehiculoTipoServicio"
 						class="newalto form-control" aria-required="true" type="text"
 						value="${publicidadForm.tipoServicio}" maxlength="240" disabled>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group ">
+					<label class="control-label "><spring:theme
+							code="publicidad.exterior.vehicles.elementlocation" /></label> <input
+						id="vehiculoOrientacion" name="vehiculoOrientacion"
+						class="newalto form-control" aria-required="true" type="text"
+						value="${publicidadForm.orientacion}" maxlength="240" disabled>
 				</div>
 			</div>
 		</div>

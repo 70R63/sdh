@@ -97,6 +97,7 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 		final String URL = configurationService.getConfiguration().getString("credibanco.credential.webService.inititalizeTransaction.url");
 		final HttpHeaders headers = new HttpHeaders();
 		final RestTemplate restTemplate = new RestTemplate();
+		InititalizeTransactionResponse inititalizeTransaction = null;
 
 		headers.set("Authorization", "Bearer " + token);
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -105,8 +106,15 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 		LOG.info(" InititalizeTransactionResponse Token [" + token + "]");
 		LOG.info("URL [" + URL + "]");
 
-
-		return restTemplate.postForObject(URL, rqt, InititalizeTransactionResponse.class);
+		try
+		{
+			inititalizeTransaction = restTemplate.postForObject(URL, rqt, InititalizeTransactionResponse.class);
+		}
+		catch (final Exception exception)
+		{
+			LOG.error(exception);
+		}
+		return inititalizeTransaction;
 	}
 
 	/*
@@ -122,6 +130,7 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 		final String URL = configurationService.getConfiguration().getString("credibanco.credential.webService.resultTransaction.url");
 		final HttpHeaders headers = new HttpHeaders();
 		final RestTemplate restTemplate = new RestTemplate();
+		ResultTransactionResponse resultTransaction = null;
 
 		headers.set("Authorization", "Bearer " + token);
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -130,7 +139,16 @@ public class DefaultSDHCredibancoJwt implements SDHCredibancoJwt
 		LOG.info(" InititalizeTransactionResponse Token [" + token + "]");
 		LOG.info("URL [" + URL + "]");
 
-		return restTemplate.postForObject(URL, rqt, ResultTransactionResponse.class);
+		try
+		{
+			resultTransaction = restTemplate.postForObject(URL, rqt, ResultTransactionResponse.class);
+		}
+		catch (final Exception exception)
+		{
+			LOG.error(exception);
+		}
+
+		return resultTransaction;
 	}
 
 

@@ -78,7 +78,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; BlogAndNewsLink                 ; BLOG & NEWS                        ; http://www.stateofrosebud.com/news ; ; ; newWindow;;
 ; ; EventsLink                      ; EVENTS                             ; http://www.stateofrosebud.com/events ; ; ; newWindow;;
 
-; ; EscuelaVirtualLink                      ; ESCUELA VIRTUAL                             ; "#" ; ; ; newWindow;;
+; ; EscuelaVirtualLink                      ; ESCUELA VIRTUAL                             ; "/escuelavirtual" ; ; ; newWindow;;
 ; ; PreguntasFrecuentesLink                      ; PREGUNTAS FRECUENTES                             ; "#" ; ; ; newWindow;;
 
 
@@ -2511,6 +2511,27 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;reexpedicionFacturaPageComponent	;reexpedicionFacturaPage Component	;/WEB-INF/views/responsive/pages/layout/reexpedicionFacturaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reexpedicionFacturaPageComponent	
 
 #->FIN dev-maria Agregar paginas para reexpedicion factura 
+
+#->INI dev-maria Agregar paginas Escuela Virtual
+$contentCatalog=sdhProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;escuelaVirtualPage 		;Escuela Virtual	;AccountPageTemplate:sdhContentCatalog:Staged	;/escuelavirtual
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='escuelaVirtualPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-escuelaVirtualPage 	;SideContent			;																	;SideContent-escuelaVirtualPage				;;;
+								;						;BodyContent-escuelaVirtualPage 	;BodyContent			;																	;BodyContent-escuelaVirtualPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-escuelaVirtualPage 	;Side Content Slot for Escuela Virtual;true	;								;;;
+							;							;BodyContent-escuelaVirtualPage	;Body Content Slot for Escuela Virtual;true	;escuelaVirtualPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;escuelaVirtualPageComponent	;escuelaVirtualPage Component	;/WEB-INF/views/responsive/pages/layout/escuelaVirtualPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;escuelaVirtualPageComponent	
+
+#->FIN dev-maria Agregar paginas para Escuela Virtual
 
 
 

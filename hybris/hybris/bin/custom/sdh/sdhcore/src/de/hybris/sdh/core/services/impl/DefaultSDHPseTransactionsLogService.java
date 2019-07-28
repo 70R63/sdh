@@ -81,6 +81,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		transactionLogModel.setIsoCurrency(isoCurrency);
 		transactionLogModel.setTipoDeTarjeta(tipoDeTarjeta);
 		transactionLogModel.setObjPago(objPago);
+		//transactionLogModel.setNotificacionDeRecaudo("NO");
 
 		// CreateTransactionPaymentResponseInformationType
 		if (transactionPaymentResponse != null)
@@ -273,7 +274,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			transactionLogModel.setBankUrl(transactionPaymentResponse.getPaymentRoute());
 			transactionLogModel.setTransactionCycle("Description: " + transactionPaymentResponse.getDescription());
 			transactionLogModel.setTransactionState(transactionPaymentResponse.getDescription());
-			transactionLogModel.setNotificacionDeRecaudo("NO");
+			//transactionLogModel.setNotificacionDeRecaudo("NO");
 
 			LOG.info(
 					"NewCredibancoLogTransactionEntry - transactionPaymentResponse[" + transactionPaymentResponse.getInternalCode()

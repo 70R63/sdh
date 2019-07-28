@@ -24,12 +24,13 @@
 						<formElement:formSelectBox idKey="psePaymentForm.periodo" labelKey="psePaymentForm.periodo" path="periodo" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${periodo}" selectCSSClass="form-control" disabled="false"/>
 						<form:hidden path="debugMode" value="${debugMode}"/>
 						
-						<form:hidden path="numeroDeReferencia" value="123456789"/>
-						<form:hidden path="noIdentificacion" value="12345678"/>
-						<form:hidden path="DV" value="12"/>
-						<form:hidden path="tipoDeIdentificacion" value="NIT"/>
-						<form:hidden path="fechaLimiteDePago" value="06032019"/>
-						<form:hidden path="valorAPagar" value="12088"/>
+						<formElement:formInputBox idKey="numeroDeReferencia" labelKey="numeroDeReferencia" path="numeroDeReferencia" />
+						<formElement:formInputBox idKey="noIdentificacion" labelKey="noIdentificacion" path="noIdentificacion" />
+						<formElement:formInputBox idKey="DV" labelKey="DV" path="DV" />
+						<formElement:formInputBox idKey="tipoDeIdentificacion" labelKey="tipoDeIdentificacion" path="tipoDeIdentificacion" />
+						<formElement:formInputBox idKey="fechaLimiteDePago" labelKey="fechaLimiteDePago" path="fechaLimiteDePago" />
+						<formElement:formInputBox idKey="valorAPagar" labelKey="valorAPagar" path="valorAPagar" />
+						<formElement:formInputBox idKey="objPago" labelKey="objPago" path="objPago" />
 
 						<div class="text-right">
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
