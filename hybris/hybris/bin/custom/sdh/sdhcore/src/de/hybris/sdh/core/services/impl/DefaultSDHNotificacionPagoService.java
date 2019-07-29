@@ -12,6 +12,7 @@ import de.hybris.sdh.core.pojos.requests.PseNotificacionDePagoRequest;
 import de.hybris.sdh.core.services.SDHNotificacionPagoService;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -52,8 +53,10 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 
 		final Object object = restTemplate.postForObject(urlService, request, Object.class);
 
+
+		LOG.info("--------------- Notificacion De Pago Realizada EXITOSAMENTE IdReferencia["
+				+ pseNotificacionDePagoRequest.getRefPago() + "]---------");
 		LOG.info(pseNotificacionDePagoRequest);
-		LOG.info("--------------- Notificacion de pago realizada idReferencia["+pseNotificacionDePagoRequest.getRefPago()+"]---------");
 	}
 
 	/*
@@ -85,7 +88,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			}
 
 			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();
-			pseNotificacionDePagoRequest.setIdBancos(transaction.getTipoDeImpuesto().substring(0, 2));
+			pseNotificacionDePagoRequest.setIdBancos(getBankId(transaction.getTipoDeImpuesto()));
 			pseNotificacionDePagoRequest.setModalidad(transaction.getTipoDeTarjeta());
 			pseNotificacionDePagoRequest.setProcPago(ControllerPseConstants.PSE_PROC_PAGO.get(transaction.getTipoDeTarjeta()));
 			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
@@ -118,6 +121,19 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 		}
 
 		return newPseNotificacionDePagoRequest;
+	}
+
+	private String getBankId(final String tipoDeImpuesto)
+	{
+		switch (tipoDeImpuesto)
+		{
+			case ControllerPseConstants.DELINEACION:
+				return tipoDeImpuesto.substring(2, 4);
+			case ControllerPseConstants.RETENCIONDU:
+				return tipoDeImpuesto.substring(2, 4);
+			default:
+				return Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(0, 2) : null;
+		}
 	}
 
 
