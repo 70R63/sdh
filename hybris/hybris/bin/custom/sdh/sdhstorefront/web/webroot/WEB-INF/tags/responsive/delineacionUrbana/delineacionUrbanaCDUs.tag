@@ -21,7 +21,7 @@
 								class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.CDU" /> </label></th>
 							<th style="text-align: center"><label
-								class="control-label labeltabletd"><spring:theme
+								class="control-label labeltabletd lincostruc"><spring:theme
 										code="delineacion.urbana.basic.Liceconstruction" /></label></th>
 							<th style="text-align: center"><label
 								class="control-label labeltabletd tablefechas"><spring:theme
@@ -71,7 +71,7 @@
 									<td><input id="" name="" class="inputtextnew"
 										aria-required="true" type="text" readonly="readonly"
 										value="${delineacion.licenConst}" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+										style="width: 90% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
 									<td><input id="" name="" class="inputtextnew tablefechas"
 										aria-required="true" type="text" readonly="readonly"
 										value="${delineacion.fechaExp}" maxlength="240"></td>
