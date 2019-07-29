@@ -20,6 +20,8 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.TitleModel;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
@@ -40,6 +42,9 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 
 	@Resource(name = "sdhCustomerAccountService")
 	private SDHCustomerAccountService sdhCustomerAccountService;
+
+	@Resource(name="flexibleSearchService")
+	private FlexibleSearchService flexibleSearchService;
 
 
 	@Override
@@ -139,5 +144,31 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 		return false;
 	}
 
+	@Override
+	public CustomerData getRepresentado(String numBP) {
 
+		CustomerModel representadoModel = this.getCustomerFor(numBP);
+
+		if(representadoModel == null)
+			return null;
+
+		return getCustomerConverter().convert(sdhCustomerAccountService.updateMiRitInfo(representadoModel));
+	}
+
+	protected CustomerModel getCustomerFor (String numBP)
+	{
+		try {
+			String query = "SELECT {pk} FROM {Customer} Where {numBP}='" + numBP + "'";
+
+			CustomerModel customerModel = flexibleSearchService.searchUnique(new FlexibleSearchQuery(query));
+
+			return customerModel;
+		}catch (Exception ex)
+		{
+			LOG.error("Customer not found for: "+numBP);
+			return null;
+		}
+
+
+	}
 }
