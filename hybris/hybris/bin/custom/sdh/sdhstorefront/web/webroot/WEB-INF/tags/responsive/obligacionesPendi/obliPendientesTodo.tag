@@ -39,7 +39,13 @@
 											code="obligacion.inicial.predio.direccion" />
 								</label></th>
 								<th><label class="control-label labeltabletd"> <spring:theme
+											code="obligacion.inicial.estatus" />
+								</label></th>
+								<th><label class="control-label labeltabletd"> <spring:theme
 											code="obligacion.inicial.predio.visualizar" /></label></th>
+								<th><label class="control-label labeltabletd"> <spring:theme
+											code="obligacion.inicial.imprimir" />
+								</label></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,9 +60,15 @@
 								<td><input style="width: 100%" class="inputtextnew"
 									maxlength="30" size="30" disabled="disabled" type="text"
 									value="<c:out value="Direccion"></c:out>" /></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value=""></c:out>" /></td>
 								<td><label class="control-label"
 									style="visibility: visible !important; width: 100%; text-transform: none; color: #0358d8 !important"
 									onclick="" id="Detalle">Detalle</label></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value=""></c:out>" /></td>
 
 							</tr>
 						</tbody>
@@ -90,8 +102,14 @@
 								<th><label class="control-label labeltabletd" for="">
 										<spring:theme code="obligacion.inicial.vehiculo.linea" />
 								</label></th>
+								<th><label class="control-label labeltabletd"> <spring:theme
+											code="obligacion.inicial.estatus" />
+								</label></th>
 								<th><label class="control-label labeltabletd" for="">
 										<spring:theme code="obligacion.inicial.vehiculo.visualizar" />
+								</label></th>
+								<th><label class="control-label labeltabletd"> <spring:theme
+											code="obligacion.inicial.imprimir" />
 								</label></th>
 							</tr>
 						</thead>
@@ -110,9 +128,15 @@
 								<td><input style="width: 100%" class="inputtextnew"
 									maxlength="30" size="30" disabled="disabled" type="text"
 									value="<c:out value="MARCA"></c:out>" /></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value=""></c:out>" /></td>
 								<td><label class="control-label"
 									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 									id="Detalle">Detalle</label></td>
+								<td><input style="width: 100%" class="inputtextnew"
+									maxlength="30" size="30" disabled="disabled" type="text"
+									value="<c:out value=""></c:out>" /></td>
 
 							</tr>
 						</tbody>
@@ -140,8 +164,14 @@
 									<th><label class="control-label labeltabletd" for="">
 											<spring:theme code="obligacion.inicial.ica.numdocu" />
 									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.estatus" />
+									</label></th>
 									<th><label class="control-label labeltabletd" for="">
 											<spring:theme code="obligacion.inicial.ica.visualizar" />
+									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.imprimir" />
 									</label></th>
 								</tr>
 							</thead>
@@ -155,9 +185,15 @@
 									<td><input style="width: 100%" class="inputtextnew"
 										maxlength="30" size="30" disabled="disabled" type="text"
 										value="<c:out value="${customerData.documentNumber}"></c:out>" /></td>
+									<td><input style="width: 100%" class="inputtextnew"
+										maxlength="30" size="30" disabled="disabled" type="text"
+										value="<c:out value=""></c:out>" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id="Detalle">Detalle</label></td>
+									<td><input style="width: 100%" class="inputtextnew"
+										maxlength="30" size="30" disabled="disabled" type="text"
+										value="<c:out value=""></c:out>" /></td>
 
 								</tr>
 
@@ -183,7 +219,7 @@
 
 
 				<div class="row">
-					<div class="col-md-4 text-center">
+					<div class="col-md-6 text-center">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="">
 								<thead>
@@ -193,9 +229,15 @@
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme code="obligacion.inicial.publicidad.tipvalla" />
 										</label></th>
+										<th><label class="control-label labeltabletd"> <spring:theme
+													code="obligacion.inicial.estatus" />
+										</label></th>
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme
 													code="obligacion.inicial.publicidad.visualizar" />
+										</label></th>
+										<th><label class="control-label labeltabletd"> <spring:theme
+													code="obligacion.inicial.imprimir" />
 										</label></th>
 
 									</tr>
@@ -211,9 +253,17 @@
 											<td><input style="width: 100%" class="inputtextnew"
 												maxlength="30" size="30" disabled="disabled" type="text"
 												value="<c:out value="${eachPubExtTax.fenceType }"></c:out>" /></td>
+											<td><input style="width: 100%" class="inputtextnew"
+												maxlength="30" size="30" disabled="disabled" type="text"
+												value="<c:out value=""></c:out>" /></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle" data-anoGravable="${eachPubExtTax.anoGravable}" data-numResolu="${eachPubExtTax.resolutionNumber }" data-tipoValla="${eachPubExtTax.fenceType }">Detalle</label></td>
+												id="Detalle" data-anoGravable="${eachPubExtTax.anoGravable}"
+												data-numResolu="${eachPubExtTax.resolutionNumber }"
+												data-tipoValla="${eachPubExtTax.fenceType }">Detalle</label></td>
+											<td><input style="width: 100%" class="inputtextnew"
+												maxlength="30" size="30" disabled="disabled" type="text"
+												value="<c:out value=""></c:out>" /></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -249,8 +299,14 @@
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme code="obligacion.inicial.gasolina.numiden" />
 										</label></th>
+										<th><label class="control-label labeltabletd"> <spring:theme
+													code="obligacion.inicial.estatus" />
+										</label></th>
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme code="obligacion.inicial.gasolina.visualizar" />
+										</label></th>
+										<th><label class="control-label labeltabletd"> <spring:theme
+													code="obligacion.inicial.imprimir" />
 										</label></th>
 									</tr>
 								</thead>
@@ -264,9 +320,15 @@
 											<td><input style="width: 100%" class="inputtextnew"
 												maxlength="30" size="30" disabled="disabled" type="text"
 												value="<c:out value="${eachGasTax.documentNumber}"></c:out>" /></td>
+											<td><input style="width: 100%" class="inputtextnew"
+												maxlength="30" size="30" disabled="disabled" type="text"
+												value="<c:out value=""></c:out>" /></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle">Detalle</label></td>
+											<td><input style="width: 100%" class="inputtextnew"
+												maxlength="30" size="30" disabled="disabled" type="text"
+												value="<c:out value=""></c:out>" /></td>
 										</tr>
 									</c:forEach>
 
@@ -307,11 +369,14 @@
 													code="obligacion.inicial.delineacion.licconstr" /> </label></th>
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="obligacion.inicial.delineacion.exp" /> </label></th>
+										<th><label class="control-label labeltabletd"> <spring:theme
+													code="obligacion.inicial.estatus" />
+										</label></th>
 										<th><label class="control-label labeltabletd tableangrav"><spring:theme
 													code="obligacion.inicial.delineacion.visualizar" /> </label></th>
-
-
-
+										<th><label class="control-label labeltabletd"> <spring:theme
+													code="obligacion.inicial.imprimir" />
+										</label></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -328,9 +393,15 @@
 											<td><input style="width: 100%" class="inputtextnew"
 												maxlength="30" size="30" disabled="disabled" type="text"
 												value="<c:out value="${eachDelUrbTax.expDate}"></c:out>" /></td>
+											<td><input style="width: 100%" class="inputtextnew"
+												maxlength="30" size="30" disabled="disabled" type="text"
+												value="<c:out value=""></c:out>" /></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												data-cdu="${eachDelUrbTax.cdu}" id="Detalle">Detalle</label></td>
+											<td><input style="width: 100%" class="inputtextnew"
+												maxlength="30" size="30" disabled="disabled" type="text"
+												value="<c:out value=""></c:out>" /></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -349,7 +420,8 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreportepred" />
+						class="inputtextnew" disabled="disabled" value="" type="text"
+						id="fechreportepred" />
 				</div>
 			</div>
 			<div class="row">
@@ -396,7 +468,8 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -435,7 +508,8 @@
 			<div class="row">
 				<div class="col-md-8">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporteica" />
+						class="inputtextnew" disabled="disabled" value="" type="text"
+						id="fechreporteica" />
 				</div>
 			</div>
 			<div class="row">
@@ -473,7 +547,8 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -513,7 +588,8 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreporteveh" />
+						class="inputtextnew" disabled="disabled" value="" type="text"
+						id="fechreporteveh" />
 				</div>
 			</div>
 			<div class="row">
@@ -563,7 +639,8 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -604,7 +681,8 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreportedel" />
+						class="inputtextnew" disabled="disabled" value="" type="text"
+						id="fechreportedel" />
 				</div>
 			</div>
 			<div class="row">
@@ -632,11 +710,11 @@
 								<tr>
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
-										disabled="disabled" type="text" id="angravDELI"/></td>
+										disabled="disabled" type="text" id="angravDELI" /></td>
 									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text"  id="cduobDELI"/></td>
-									<td><input class="inputtextnew tabledoobli" disabled="disabled"
-										value="" type="text" /></td>
+										disabled="disabled" value="" type="text" id="cduobDELI" /></td>
+									<td><input class="inputtextnew tabledoobli"
+										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -645,7 +723,8 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -684,7 +763,8 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text" id="fechreportegas" />
+						class="inputtextnew" disabled="disabled" value="" type="text"
+						id="fechreportegas" />
 				</div>
 			</div>
 			<div class="row">
@@ -722,7 +802,8 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""
@@ -760,7 +841,8 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label class="control-label">Fecha reporte </label> <input
-						class="inputtextnew" disabled="disabled" value="" type="text"  id="fechreportepub"/>
+						class="inputtextnew" disabled="disabled" value="" type="text"
+						id="fechreportepub" />
 				</div>
 			</div>
 			<div class="row">
@@ -792,7 +874,7 @@
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text" id="angravPUB" /></td>
 									<td><input class="inputtextnew tableangrav"
-										disabled="disabled" value="" type="text" id="numResOB"/></td>
+										disabled="disabled" value="" type="text" id="numResOB" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
@@ -805,7 +887,8 @@
 										disabled="disabled" value="" type="text" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="" onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
+										id=""
+										onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea' />';">Pagar</label></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id=""

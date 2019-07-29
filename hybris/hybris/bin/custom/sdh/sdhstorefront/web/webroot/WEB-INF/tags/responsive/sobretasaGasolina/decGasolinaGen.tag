@@ -45,10 +45,7 @@
 						class="newalto form-control" disabled="true" readonly="true" />
 				</div>
 			</div>
-		</div>
-		<br>
 
-		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group ">
 					<label class="control-label"><spring:theme

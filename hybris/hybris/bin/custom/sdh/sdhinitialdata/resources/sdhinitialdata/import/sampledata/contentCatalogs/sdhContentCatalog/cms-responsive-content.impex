@@ -144,7 +144,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 ; ; CertPagoLink                 ; CONSULTAS LINK                      ; "/contribuyentes/consultas/certipagos" ;;;;;
-; ; ObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/contribuyentes/consultas/oblipendientes" ;;;;;
+; ; ObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/contribuyentes/consultas/obligaciones" ;;;;;
 ; ; RelPagosLink                 ; RELACION DE PAGOS LINK              ; "/contribuyentes/consultas/relacionpagos" ;;;;;
 ; ; EdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/contribuyentes/estado-de-cuenta" ;;;;;
 ; ; CertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/contribuyentes/consultas/certideclaraciones" ;;;;;
@@ -1846,7 +1846,7 @@ $contentCatalog=sdhProductCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;obligacionesPendientesPage 		;Obligaciones Pendientes 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/oblipendientes
+			 				;							;obligacionesPendientesPage 		;Obligaciones Pendientes 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/obligaciones
 
 
 
