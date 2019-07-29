@@ -40,7 +40,7 @@
 	<input type="hidden" value="" id="selectedTipoValla" /> <input
 		type="hidden" value="" id="selectedNumRes" />
 	<div class="row mt-3">
-		<div class="col-md-7 col-md-offset-3 d-flex align-items-center">
+		<div class="col-md-4 col-md-offset-4 d-flex align-items-center">
 
 			<div class="table-responsive text-center">
 				<table class="table table-bordered">
@@ -50,18 +50,15 @@
 										code="publicidad.exterior.tipodocumento" /></label></td>
 							<td><label class="control-label labeltabletd tablenumiden"><spring:theme
 										code="publicidad.exterior.numdocumento" /></label></td>
-							<td><label class="control-label labeltabletd tablenombre"><spring:theme
+							<td><label class="control-label labeltabletd"><spring:theme
 										code="publicidad.esterior.nombre" /></label></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><input class="inputtextnew tableident"
-								disabled="disabled" type="text" size="30" value="${docType }" /></td>
-							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="${docNumber }" /></td>
-							<td><input class="inputtextnew tablenombre"
-								disabled="disabled" type="text" size="30" value="${name }" /></td>
+							<td><c:out value="${docType }" /></td>
+							<td><c:out value="${docNumber }" /></td>
+							<td><c:out value="${name }" /></td>
 						</tr>
 					</tbody>
 				</table>

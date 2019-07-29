@@ -471,6 +471,13 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
+		this.updateMiRitInfo(customerModel);
+
+	}
+
+	@Override
+	public CustomerModel  updateMiRitInfo(CustomerModel customerModel)
+	{
 		final String numBP = customerModel.getNumBP();
 
 		try
@@ -897,8 +904,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		{
 			LOG.error("error getting customer info from SAP: " + e.getMessage());
 		}
-	}
 
+		return customerModel;
+	}
 
 	/*
 	 * (non-Javadoc)

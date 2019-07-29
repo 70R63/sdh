@@ -3,7 +3,9 @@
  */
 package de.hybris.sdh.facades;
 
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
+
 
 
 /**
@@ -19,5 +21,7 @@ public interface SDHCustomerFacade
 	void updateMiRitInfo();
 
 	boolean isValidRoleForCurrentCustomer(String role);
+
+	CustomerData getRepresentado(String numBP);
 
 }

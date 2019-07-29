@@ -35,11 +35,20 @@
 					<tbody>
 						<tr>
 							<td><input class="inputtextnew tableident"
-								disabled="disabled" type="text" size="30" value="" /></td>
+								disabled="disabled" type="text" size="30" value="${representado.documentType}" /></td>
 							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="" /></td>
-							<td><input class="inputtextnew tablenombre"
-								disabled="disabled" type="text" size="30" value="" /></td>
+								disabled="disabled" type="text" size="30" value="${representado.documentNumber}" /></td>
+							<c:choose>
+								<c:when test="${empty representado}">
+									<td><input class="inputtextnew tablenombre"
+											   disabled="disabled" type="text" size="30" value="Contribuyente no encontrado" /></td>
+								</c:when>
+								<c:otherwise>
+									<td><input class="inputtextnew tablenombre"
+										   disabled="disabled" type="text" size="30" value="${representado.completeName}" /></td>
+								</c:otherwise>
+							</c:choose>
+
 						</tr>
 					</tbody>
 				</table>
