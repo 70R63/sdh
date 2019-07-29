@@ -4,9 +4,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
+
+<sf:hidden path="valorN0" id ="pathValorN0"/>
+<sf:hidden path="valorN1" id ="pathValorN1"/>
+<sf:hidden path="valorN2" id ="pathValorN2"/>
+<sf:hidden path="valorN3" id ="pathValorN3"/>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row mt-3">
@@ -23,7 +28,7 @@
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.tiptramite" /></label> 
 						<select data-nivel="0"
-							class="new_alto form-control !important tramitestSN" id="selectNivel0" onchange="tabdococul()">
+							class="new_alto form-control !important tramitestSN" id="selectNivel0">
 							<option value="00">Seleccionar</option>
 							<option value="01">RIT</option>
 							<option value="02">Novedades de registro</option>
@@ -62,7 +67,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.subcategoria" /></label> 
-						<select data-nivel="3" class="new_alto form-control !important tramitestSN" id="selectNivel3" onchange="tabdoc()">
+						<select data-nivel="3" class="new_alto form-control !important tramitestSN" id="selectNivel3" >
 						</select>
 					</div>
 				</div>
@@ -100,7 +105,7 @@
 				<tbody>
 					<tr>
 						<td><input class="inputtextnew" disabled="disabled"
-							type="text" size="30" value="" /></td>
+							type="text" size="30" value="" id = "docTramite" value = "perrito"/></td>
 						<td><input class="inputtextnew" type="file" size="30"
 							value="" /></td>
 					</tr>
@@ -111,10 +116,14 @@
 
 	<div class="row mt-3">
 		<div class="col-md-7 text-right">
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button">
+			<sf:button class="btn btn-primary btn-lg" type="submit" id="btnEnviar"
+				name="btnEnviar" value="enviar" disabled="false">
 				<spring:theme code="tramites.crear.inicial.enviar" />
-			</button>
+			</sf:button>
+<!-- 			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg" -->
+<!-- 				type="button"> -->
+<%-- 				<spring:theme code="tramites.crear.inicial.enviar" /> --%>
+<!-- 			</button> -->
 		</div>
 		<div class="col-md-1">
 			<button style="margin-top: 3px;" id=""

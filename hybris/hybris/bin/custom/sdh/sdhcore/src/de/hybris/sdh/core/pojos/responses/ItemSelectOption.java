@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.hybris.sdh.storefront.controllers.impuestoGasolina;
+package de.hybris.sdh.core.pojos.responses;
 
 /**
  * @author fede

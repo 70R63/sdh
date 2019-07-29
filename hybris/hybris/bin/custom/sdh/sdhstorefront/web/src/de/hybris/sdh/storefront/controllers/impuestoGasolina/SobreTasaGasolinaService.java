@@ -11,6 +11,7 @@ import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
+import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
@@ -19,6 +20,7 @@ import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
+import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
@@ -26,6 +28,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
+import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -1092,7 +1095,7 @@ public class SobreTasaGasolinaService
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2) + periodo;
+			periodoConvertidoPagar = anoGravable.substring(2).trim() + periodo;
 		}
 
 
@@ -1105,7 +1108,7 @@ public class SobreTasaGasolinaService
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2) + "B" + periodo;
+			periodoConvertidoPagar = anoGravable.substring(2).trim() + "B" + periodo;
 		}
 
 
@@ -1194,7 +1197,7 @@ public class SobreTasaGasolinaService
 		infoImpuesto = detalleContribuyente.getIca();
 		if (infoImpuesto != null)
 		{
-			numObjeto = infoImpuesto.getNumObjeto();
+			numObjeto = infoImpuesto.getNumObjeto().trim();
 		}
 
 
@@ -1471,7 +1474,7 @@ public class SobreTasaGasolinaService
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2) + "A1";
+			periodoConvertidoPagar = anoGravable.substring(2).trim() + "A1";
 		}
 
 
@@ -1724,14 +1727,18 @@ public class SobreTasaGasolinaService
 
 		if (periodo != null)
 		{
-			if (periodo.substring(2, 3).equals(" "))
-			{
-				periodoConvertidoPagar = prepararPeriodoAnualPago(icaInfObjetoResponse.getAnoGravable());
-			}
-			else
-			{
+			//			if (periodo.substring(2, 3).equals(" "))
+			//			{
+			//				periodoConvertidoPagar = prepararPeriodoAnualPago(icaInfObjetoResponse.getAnoGravable());
+			//			}
+			//			else
+			//			{
 				periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(1, 2));
-			}
+			//			}
+		}
+		else
+		{
+			periodoConvertidoPagar = prepararPeriodoAnualPago(icaInfObjetoResponse.getAnoGravable());
 		}
 
 
@@ -1739,6 +1746,38 @@ public class SobreTasaGasolinaService
 	}
 
 
+	/**
+	 * @param docTramitesResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorDocTramites(final DocTramitesResponse docTramitesResponse)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * @param docTramitesRequest
+	 * @param sdhDetalleGasolinaWS
+	 * @param log
+	 * @return
+	 */
+	public DocTramitesResponse consultaDocTramites(final DocTramitesRequest requestInfo, final SDHDetalleGasolina sdhConsultaWS,
+			final Logger LOG)
+	{
+		DocTramitesResponse responseInfo = new DocTramitesResponse();
+		final String confUrl = "sdh.docTramites.url";
+		final String confUser = "sdh.docTramites.user";
+		final String confPass = "sdh.docTramites.password";
+		final String wsNombre = "crm_docTramites";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.DocTramitesResponse";
+
+		responseInfo = (DocTramitesResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
+				LOG, nombreClase);
+
+		return responseInfo;
+	}
 
 
 
