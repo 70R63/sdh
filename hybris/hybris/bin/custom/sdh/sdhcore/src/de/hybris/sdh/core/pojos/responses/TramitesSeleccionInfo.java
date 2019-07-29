@@ -1,7 +1,7 @@
 /**
  *
  */
-package de.hybris.sdh.core.pojos.requests;
+package de.hybris.sdh.core.pojos.responses;
 
 /**
  * @author Federico Flores Dimas
