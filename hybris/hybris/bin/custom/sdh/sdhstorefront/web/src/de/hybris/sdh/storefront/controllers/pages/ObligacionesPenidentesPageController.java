@@ -34,7 +34,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	private static final String OBLIGACIONES_PENDIENTES_CMS_PAGE = "obligacionesPendientesPage";
 
 	private static final String REDIRECT_TO_OBLIGACIONES_PENDIENTES_PAGE = REDIRECT_PREFIX
-			+ "/contribuyentes/consultas/oblipendientes";
+			+ "/contribuyentes/consultas/obligaciones";
 
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -42,7 +42,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	@Resource(name = "customerFacade")
 	private CustomerFacade customerFacade;
 
-	@RequestMapping(value = "/contribuyentes/consultas/oblipendientes", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/consultas/obligaciones", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String oblipendi(final Model model) throws CMSItemNotFoundException
 	{
