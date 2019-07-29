@@ -8,7 +8,7 @@ ACC.rop = {
 
 			var importeusuario = $("#importeusuario").val().replace(/\./g,'').replace(/\,/g,'.')
 
-			if(importeusuario < 1000 || importeusuario % 1000 !== 0)
+			if(importeusuario != "" && (importeusuario < 1000 || importeusuario % 1000 !== 0))
 			{
 				$( "#dialogRop" ).dialog( "open" );
 				$("#ropDialogContent").html("");
