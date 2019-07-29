@@ -7,24 +7,15 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.sdh.core.model.SDHExteriorPublicityTaxModel;
-import de.hybris.sdh.core.model.SDHGasTaxModel;
-import de.hybris.sdh.core.model.SDHICATaxModel;
-import de.hybris.sdh.core.model.SDHReteICATaxModel;
-import de.hybris.sdh.core.model.SDHRolModel;
-import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
-import de.hybris.sdh.facades.questions.data.SDHExteriorPublicityTaxData;
-import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
-import de.hybris.sdh.facades.questions.data.SDHICATaxData;
-import de.hybris.sdh.facades.questions.data.SDHReteICATaxData;
-import de.hybris.sdh.facades.questions.data.SDHRolData;
-import de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData;
+import de.hybris.sdh.core.model.*;
+import de.hybris.sdh.facades.questions.data.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
 
@@ -213,6 +204,23 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 
 		target.setReteIcaTax(reteIcaTaxData);
 
+
+		if(CollectionUtils.isNotEmpty(source.getAgentList()))
+		{
+			List<SDHAgentData> agents = new ArrayList<SDHAgentData>();
+			for (SDHAgentModel eachAgentModel: source.getAgentList()) {
+				SDHAgentData eachAgentData = new SDHAgentData();
+
+				eachAgentData.setAgent(eachAgentModel.getAgent());
+				eachAgentData.setCompleteName(eachAgentModel.getCompleteName());
+				eachAgentData.setDocumentNumber(eachAgentModel.getDocumentNumber());
+				eachAgentData.setDocumentType(eachAgentModel.getDocumentType());
+				eachAgentData.setInternalFunction(eachAgentModel.getInternalFunction());
+
+				agents.add(eachAgentData);
+			}
+			target.setAgentList(agents);
+		}
 
 
 	}

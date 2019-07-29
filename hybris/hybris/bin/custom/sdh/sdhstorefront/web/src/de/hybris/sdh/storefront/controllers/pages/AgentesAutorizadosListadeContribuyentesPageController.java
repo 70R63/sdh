@@ -7,6 +7,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -43,6 +45,9 @@ public class AgentesAutorizadosListadeContribuyentesPageController extends Abstr
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
 	@Resource(name = "sdhCertificaRITService")
 	SDHCertificaRITService sdhCertificaRITService;
 
@@ -56,7 +61,9 @@ public class AgentesAutorizadosListadeContribuyentesPageController extends Abstr
 		System.out
 				.println("---------------- Hola entro al GET Agentes Autorizados lista de contribuyentes --------------------------");
 
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
+		model.addAttribute("currentCustomer",customerData);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_LISCONTRIB_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_LISCONTRIB_CMS_PAGE));

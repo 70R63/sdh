@@ -8,17 +8,20 @@ import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadc
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 
 import javax.annotation.Resource;
 
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -48,14 +51,17 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name="sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
+
 	@RequestMapping(value = "/autorizados/contribuyente/representando", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String autorizadoscontrib(final Model model) throws CMSItemNotFoundException
+	public String autorizadoscontrib(final Model model, @RequestParam String representado) throws CMSItemNotFoundException
 	{
-		System.out
-				.println("---------------- Hola entro al GET Agentes Autorizados Represe --------------------------");
 
+		CustomerData representadoData = sdhCustomerFacade.getRepresentado(representado);
 
+		model.addAttribute("representado", representadoData);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_REPRE_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_REPRE_CMS_PAGE));

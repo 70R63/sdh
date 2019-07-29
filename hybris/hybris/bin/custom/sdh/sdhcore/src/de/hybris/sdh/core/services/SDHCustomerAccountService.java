@@ -4,6 +4,7 @@
 package de.hybris.sdh.core.services;
 
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.sdh.core.pojos.requests.UpdateEmailRitRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
@@ -36,6 +37,8 @@ public interface SDHCustomerAccountService
 	String updateBasicData(SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse);
 
 	void updateMiRitInfo();
+
+	CustomerModel updateMiRitInfo(CustomerModel customerModel);
 
 	void setAutorityOnSession(String role);
 
