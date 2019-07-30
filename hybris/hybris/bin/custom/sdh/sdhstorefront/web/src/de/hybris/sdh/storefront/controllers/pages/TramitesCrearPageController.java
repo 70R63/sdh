@@ -228,6 +228,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		System.out.println("------------------En GET creacion caso------------------------");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final TramitesSeleccionInfo tramitesSeleccionInfo = new TramitesSeleccionInfo();
 		final List<ItemSelectOption> elementosResponse = new ArrayList<ItemSelectOption>();
 		final List<TramiteOpcion> elementos = new ArrayList<TramiteOpcion>();
 		TramiteOpcion elementoSeleccionado = null;
@@ -246,7 +247,12 @@ public class TramitesCrearPageController extends AbstractPageController
 
 
 		llenarElementosTramites(elementos);
-		busquedaSubKey = obtenerKeyCrearTramite(tramitesCreacionCasoInfo);
+		tramitesSeleccionInfo.setNivelSeleccion(tramitesCreacionCasoInfo.getNivelSeleccion());
+		tramitesSeleccionInfo.setValorN0(tramitesCreacionCasoInfo.getValorN0());
+		tramitesSeleccionInfo.setValorN1(tramitesCreacionCasoInfo.getValorN1());
+		tramitesSeleccionInfo.setValorN2(tramitesCreacionCasoInfo.getValorN2());
+		tramitesSeleccionInfo.setValorN3(tramitesCreacionCasoInfo.getValorN3());
+		busquedaSubKey = obtenerKeyCrearTramite(tramitesSeleccionInfo);
 
 		for (final TramiteOpcion elemento : elementos)
 		{
