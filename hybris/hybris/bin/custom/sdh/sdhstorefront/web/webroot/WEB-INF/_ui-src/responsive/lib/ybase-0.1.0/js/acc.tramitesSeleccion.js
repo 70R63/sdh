@@ -116,7 +116,7 @@ ACC.tramitesSeleccion = {
 		}
 		
 		if(infoActual.mensaje != null){
-			if(infoActual.valorN2 == ""){
+			if(infoActual.mensaje == ""){
 				validacion = false;
 			}
 		}else{
