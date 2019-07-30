@@ -18,6 +18,7 @@ public class SecretAnswerForm
 	private String IMP;
 	private String PLA;
 	private String MAT;
+	private String BAN;
 
 
 	/**
@@ -171,6 +172,23 @@ public class SecretAnswerForm
 	public void setMAT(final String mAT)
 	{
 		MAT = mAT;
+	}
+
+	/**
+	 * @return the bAN
+	 */
+	public String getBAN()
+	{
+		return BAN;
+	}
+
+	/**
+	 * @param bAN
+	 *           the bAN to set
+	 */
+	public void setBAN(final String bAN)
+	{
+		BAN = bAN;
 	}
 
 
