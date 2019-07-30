@@ -469,7 +469,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
+		//final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -480,7 +480,9 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String numObjeto = "";
 		String CDU = "";
 
-		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
+		String tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R")
+				? new ControllerPseConstants().getRETENCIONDU()
+				: new ControllerPseConstants().getDELINEACION();
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
@@ -595,7 +597,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
+		//final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -606,7 +608,9 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String numObjeto = "";
 		String CDU = "";
 
-		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
+		final String tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R")
+				? new ControllerPseConstants().getRETENCIONDU()
+				: new ControllerPseConstants().getDELINEACION();
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
