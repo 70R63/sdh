@@ -28,7 +28,7 @@
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.tiptramite" /></label> 
 						<select data-nivel="0"
-							class="new_alto form-control !important tramitestSN" id="selectNivel0">
+							class="  form-control !important tramitestSN" id="selectNivel0">
 							<option value="00">Seleccionar</option>
 							<option value="01">RIT</option>
 							<option value="02">Novedades de registro</option>
@@ -47,7 +47,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.subtramite" /></label> 
-						<select data-nivel="1" class="new_alto form-control !important tramitestSN" id="selectNivel1">
+						<select data-nivel="1" class=" form-control !important tramitestSN" id="selectNivel1">
 						</select>
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.categoria" /></label> 
-						<select data-nivel="2" class="new_alto form-control !important tramitestSN" id="selectNivel2">
+						<select data-nivel="2" class=" form-control !important tramitestSN" id="selectNivel2">
 						</select>
 					</div>
 				</div>
@@ -67,7 +67,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.subcategoria" /></label> 
-						<select data-nivel="3" class="new_alto form-control !important tramitestSN" id="selectNivel3" >
+						<select data-nivel="3" class=" form-control !important tramitestSN" id="selectNivel3" >
 						</select>
 					</div>
 				</div>

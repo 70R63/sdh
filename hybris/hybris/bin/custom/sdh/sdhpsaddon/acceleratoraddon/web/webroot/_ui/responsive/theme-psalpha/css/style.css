@@ -24983,34 +24983,6 @@ span.pasos {
 .login-section {
   margin-left: 70px;
 }
-/*nuevos cambios en seccion menu*/
-.navigation--bottom {
-  width: 75% !important;
-}
-.breadcrumb-section {
-  width: 75% !important;
-}
-.navigation--middle .nav__right {
-  width: 89%;
-}
-.container {
-  width: 82%;
-}
-.container_menu {
-  width: 82%;
-}
-.container_new_page {
-  width: 75%;
-}
-.delededucciones {
-  width: 75%;
-}
-.tablefechas {
-  width: 70px !important;
-}
-.lincostruc {
-  width: 93% !important;
-}
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -25025,7 +24997,7 @@ span.pasos {
   min-height: 20px !important;
   padding: 1px 1px 1px 1px!important;
   min-width: 20% !important;
-  max-width: 200px !important;
+  max-width: 192px !important;
 }
 .form-group .new_alto,
 .new_alto {
@@ -25033,9 +25005,57 @@ span.pasos {
   min-height: 20px !important;
   padding: 1px !important;
   min-width: 30% !important;
-  max-width: 250px !important;
+  max-width: 192px !important;
 }
 .btn {
   font-size: 14px !important;
 }
-
+.navigation__overflow {
+  height: 60px !important;
+}
+.navigation--bottom ul.nav__links--products > li > span > a:hover,
+.navigation--bottom ul.nav__links--products > li > span > a:focus {
+  background: transparent;
+}
+.navigation--bottom .nav__links--products .nav__links--secondary .sub-navigation-section .sub-navigation-list li a:hover,
+.navigation--bottom .nav__links--products .nav__links--secondary .sub-navigation-section .sub-navigation-list li a:focus {
+  background-color: #00ccff;
+}
+.navigation--bottom .nav__links--products {
+  height: 60px !important;
+}
+.navigation--bottom .nav__link {
+  height: 60px;
+}
+.navigation--bottom .nav__links--products li a {
+  height: 60px !important;
+  padding: 13px 15px;
+}
+/*nuevos cambios en seccion menu tamaño*/
+.navigation--bottom {
+  width: 86% !important;
+}
+.breadcrumb-section {
+  width: 86% !important;
+}
+.navigation--middle .nav__right {
+  width: 89%;
+}
+.container {
+  width: 82%;
+}
+.container_menu {
+  width: 82%;
+}
+.container_new_page {
+  width: 86%;
+}
+.delededucciones {
+  width: 86%;
+}
+.tablefechas {
+  width: 70px !important;
+}
+.lincostruc {
+  width: 93% !important;
+}

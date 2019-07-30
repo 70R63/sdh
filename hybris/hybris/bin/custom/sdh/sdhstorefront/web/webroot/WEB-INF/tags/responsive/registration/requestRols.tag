@@ -37,7 +37,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.tiptramite" /></label> <select
-							class="new_alto form-control !important" id="">
+							class=" form-control !important" id="">
 							<!-- 							<option value="00">Seleccionar</option> -->
 							<option value="01">RIT</option>
 						</select>
@@ -49,7 +49,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.subtramite" /></label> <select
-							class="new_alto form-control !important" id="">
+							class=" form-control !important" id="">
 							<!-- 						<option value="00">Seleccionar</option> -->
 							<option value="01">Creación</option>
 							<!-- 						<option value="02">Actualización</option> -->
@@ -62,7 +62,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.categoria" /></label> <select
-							class="new_alto form-control !important" id=""><option
+							class=" form-control !important" id=""><option
 								value="01">Registro/Rol Tributario</option>
 						</select>
 					</div>
@@ -73,7 +73,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.subcategoria" /></label> <select
-							class="new_alto form-control !important " id=""><option
+							class=" form-control !important " id=""><option
 								value="00">Seleccionar</option>
 							<option value="01">Persona Natural</option>
 							<option value="02">Persona Jurídica</option>
@@ -86,7 +86,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.rol" /></label> <select
-							class="new_alto form-control !important " id=""><option
+							class=" form-control !important " id=""><option
 								value="00">Seleccionar</option>
 							<option value="01">Contribuyente</option>
 							<option value="02">Agente Retenedor</option>
@@ -101,7 +101,7 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.correo" /></label><input
-							class="form-control new_alto" value="" type="email" />
+							class="form-control" value="" type="email" />
 					</div>
 				</div>
 			</div>
