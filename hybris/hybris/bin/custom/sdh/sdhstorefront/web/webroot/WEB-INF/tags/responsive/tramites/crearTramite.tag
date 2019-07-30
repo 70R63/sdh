@@ -116,14 +116,10 @@
 
 	<div class="row mt-3">
 		<div class="col-md-7 text-right">
-			<sf:button class="btn btn-primary btn-lg" type="submit" id="btnEnviar"
+			<sf:button class="btn btn-primary btn-lg !important tramitesEnviar" type="submit" id="btnEnviar"
 				name="btnEnviar" value="enviar" disabled="false">
 				<spring:theme code="tramites.crear.inicial.enviar" />
 			</sf:button>
-<!-- 			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg" -->
-<!-- 				type="button"> -->
-<%-- 				<spring:theme code="tramites.crear.inicial.enviar" /> --%>
-<!-- 			</button> -->
 		</div>
 		<div class="col-md-1">
 			<button style="margin-top: 3px;" id=""

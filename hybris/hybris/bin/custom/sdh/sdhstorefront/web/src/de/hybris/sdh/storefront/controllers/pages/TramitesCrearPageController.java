@@ -7,12 +7,19 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.Breadcrumb;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.CreaCasosArchiRequest;
+import de.hybris.sdh.core.pojos.requests.CreaCasosAtribRequest;
+import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
+import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
+import de.hybris.sdh.core.pojos.responses.TramitesCreacionCasoInfo;
 import de.hybris.sdh.core.pojos.responses.TramitesSeleccionInfo;
 import de.hybris.sdh.core.pojos.responses.TramitesSeleccionInfoVista;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
@@ -69,6 +76,8 @@ public class TramitesCrearPageController extends AbstractPageController
 	@Resource(name = "sdhDetalleGasolina")
 	SDHDetalleGasolina sdhDetalleGasolinaWS;
 
+	@Resource(name = "userService")
+	UserService userService;
 
 
 	@RequestMapping(value = "/contibuyentes/tramites/crear", method = RequestMethod.GET)
@@ -209,45 +218,86 @@ public class TramitesCrearPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/tramites/consulDocTramite", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/tramites/creacionCaso", method = RequestMethod.GET)
 	@ResponseBody
-	public DocTramitesResponse consulDocTramiteGET(@ModelAttribute("tramitesSeleccionInfo")
-	final TramitesSeleccionInfo tramitesSeleccionInfo, final Model model, final RedirectAttributes redirectModel)
+	public CreaCasosResponse creacionCasoGET(@ModelAttribute("tramitesCreacionCasoInfo")
+	final TramitesCreacionCasoInfo tramitesCreacionCasoInfo, final Model model, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
 
-		System.out.println("------------------En GET consulta Doc Tramites------------------------");
+		System.out.println("------------------En GET creacion caso------------------------");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final List<ItemSelectOption> elementosResponse = new ArrayList<ItemSelectOption>();
 		final List<TramiteOpcion> elementos = new ArrayList<TramiteOpcion>();
 		TramiteOpcion elementoSeleccionado = null;
 		String busquedaSubKey = "";
-		final DocTramitesRequest docTramitesRequest = new DocTramitesRequest();
-		final DocTramitesResponse docTramitesResponse = new DocTramitesResponse();
-		final String processType = "";
-		final String categoriza = "";
+		final CreaCasosRequest creaCasosRequest = new CreaCasosRequest();
+		CreaCasosResponse creaCasosResponse = new CreaCasosResponse();
+		final List<CreaCasosAtribRequest> atributos = new ArrayList<CreaCasosAtribRequest>();
+		final List<CreaCasosArchiRequest> archivos = new ArrayList<CreaCasosArchiRequest>();
+		CreaCasosAtribRequest atributo = null;
+		String processType = "";
+		String categoriza = "";
+		String descripcion = "";
+		String canal = "";
+		String bp = "";
+		String mensaje = "";
 
 
 		llenarElementosTramites(elementos);
-		busquedaSubKey = obtenerKeySelNivel(tramitesSeleccionInfo);
+		busquedaSubKey = obtenerKeyCrearTramite(tramitesCreacionCasoInfo);
 
 		for (final TramiteOpcion elemento : elementos)
 		{
-			if (elemento.getKey().matches(busquedaSubKey))
+			if (elemento.getKey().equals(busquedaSubKey))
 			{
 				elementoSeleccionado = elemento;
-				break;
+			}
+		}
+
+		if (elementoSeleccionado != null)
+		{
+			if (elementoSeleccionado.getProcessID() != null && elementoSeleccionado.getCategorizacion() != null)
+			{
+				processType = elementoSeleccionado.getProcessID();
+				categoriza = elementoSeleccionado.getCategorizacion();
+				descripcion = elementoSeleccionado.getTramiteOpcion().getLabel();
+				bp = customerModel.getNumBP();
+				canal = "02";
+				mensaje = tramitesCreacionCasoInfo.getMensaje();
+
+
+				atributo = new CreaCasosAtribRequest("String 1", "PROCESS_TYPE", processType);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "DESCRIPCION", descripcion);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "ID_DESCRIPCION", categoriza);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "CONTRIBUYENTE", bp);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "CANAL", canal);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "COMENTARIO", mensaje);
+				atributos.add(atributo);
+
+				creaCasosRequest.setAtributos(atributos);
+				creaCasosRequest.setArchivos(archivos);
+
+				System.out.println("Request para crm/creaCasos: " + creaCasosRequest);
+				creaCasosResponse = gasolinaService.creacionCaso(creaCasosRequest, sdhDetalleGasolinaWS, LOG);
+				System.out.println("Response de crm/creaCasos: " + creaCasosResponse);
+				if (gasolinaService.ocurrioErrorCreacionCaso(creaCasosResponse) != true)
+				{
+				}
+				else
+				{
+				}
 			}
 		}
 
 
-
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(TRAMITES_CREAR_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(TRAMITES_CREAR_CMS_PAGE));
-
-
-		return docTramitesResponse;
+		return creaCasosResponse;
 	}
 
 
@@ -373,8 +423,8 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "010203__", "03", "Actualización Calidad Sujeción Pasiva");
 		//RIT-Actualización-Actualización de Rol tributario
 		agregarElementoTramites(elementos, "01020200", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "01020201", "01", "Persona Natural");
-		agregarElementoTramites(elementos, "01020202", "02", "Persona Jurídica");
+		agregarElementoTramites(elementos, "01020201", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z078");
+		agregarElementoTramites(elementos, "01020202", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z079");
 		//RIT-Actualización-Actualización Calidad Sujeción Pasiva
 		agregarElementoTramites(elementos, "0102030", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "01020301", "01", "Predial unificado/ Propietario", "ZT05", "A1ZTRT0004Z080");
@@ -392,172 +442,181 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01020312", "12", "Publicidad exterior visual", "ZT05", "A1ZTRT0004Z090");
 
 		//Novedades de registro
-		agregarElementoTramites(elementos, "0200____", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "0201____", "01", "Exclusiones", "", "");
-		agregarElementoTramites(elementos, "0202____", "02", "Excenciones", "", "");
-		agregarElementoTramites(elementos, "0203____", "03", "Tratamiento Especial", "", "");
-		agregarElementoTramites(elementos, "0204____", "04", "Novedades RIT", "", "");
+		agregarElementoTramites(elementos, "0200____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0201____", "01", "Exclusiones");
+		agregarElementoTramites(elementos, "0202____", "02", "Excenciones");
+		agregarElementoTramites(elementos, "0203____", "03", "Tratamiento Especial");
+		agregarElementoTramites(elementos, "0204____", "04", "Novedades ICA");
 		//Novedades de registro-Exclusiones
-		agregarElementoTramites(elementos, "020100__", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "020101__", "01", "Por Predial", "", "");
-		agregarElementoTramites(elementos, "020102__", "02", "Por Vehículos", "", "");
-		agregarElementoTramites(elementos, "020103__", "03", "Por Delineación Urbana", "", "");
-		//Novedades de registro-Exclusiones-Por Predial
-		agregarElementoTramites(elementos, "02010100", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02010101", "01", "Uso Publico. Ronda-Canal-Zampa", "", "");
-		agregarElementoTramites(elementos, "02010102", "02", "Uso Publico. General", "", "");
-		agregarElementoTramites(elementos, "02010103", "03", "Iglesias Católicas", "", "");
-		agregarElementoTramites(elementos, "02010104", "04", "Iglesias No Católicas", "", "");
-		agregarElementoTramites(elementos, "02010105", "05", "Juntas de acción comunal", "", "");
-		agregarElementoTramites(elementos, "02010106", "06", "Policía Nacional", "", "");
-		agregarElementoTramites(elementos, "02010107", "07", "Fuerzas Militares", "", "");
-		agregarElementoTramites(elementos, "02010108", "08", "Parques recreativos", "", "");
-		agregarElementoTramites(elementos, "02010109", "09", "Instituto de desarrollo urbano IDU", "", "");
-		agregarElementoTramites(elementos, "02010110", "10", "Avalúos inferiores a 16 SMLV", "", "");
-		agregarElementoTramites(elementos, "02010111", "11", "Tumbas y bóvedas funerarias", "", "");
-		agregarElementoTramites(elementos, "02010112", "12", "Victimas del despojo o Desplazamiento forzado", "", "");
-		//Novedades de registro-Exclusiones-Por Vehículos
-		agregarElementoTramites(elementos, "02010200", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02010201", "01", "Motocicletas 125 cm3", "", "");
-		agregarElementoTramites(elementos, "02010202", "02", "Maquinaria agrícola", "", "");
-		agregarElementoTramites(elementos, "02010203", "03", "Vehículos oficiales", "", "");
-		//Novedades de registro-Exclusiones-Por Delineación Urbana
-		agregarElementoTramites(elementos, "02010300", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02010301", "01", "Sujetos  convención Viena", "", "");
-		agregarElementoTramites(elementos, "02010302", "02", "Soc. Nac. Cruz Roja Colombiana", "", "");
-		agregarElementoTramites(elementos, "02010303", "03", "Distrito Capital", "", "");
+		agregarElementoTramites(elementos, "020100__", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "020101__", "01", "Predial");
+		agregarElementoTramites(elementos, "020102__", "02", "Vehículos");
+		agregarElementoTramites(elementos, "020103__", "03", "Delineación Urbana");
+		//Novedades de registro-Exclusiones-Predial
+		agregarElementoTramites(elementos, "02010100", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02010101", "01", "Uso Publico. Ronda-Canal-Zampa", "ZT13", "A1ZTRT0004Z001");
+		agregarElementoTramites(elementos, "02010102", "02", "Uso Publico. General", "ZT13", "A1ZTRT0004Z002");
+		agregarElementoTramites(elementos, "02010103", "03", "Iglesias Católicas", "ZT13", "A1ZTRT0004Z003");
+		agregarElementoTramites(elementos, "02010104", "04", "Iglesias No Católicas", "ZT13", "A1ZTRT0004Z092");
+		agregarElementoTramites(elementos, "02010105", "05", "Juntas de acción comunal", "ZT13", "A1ZTRT0004Z004");
+		agregarElementoTramites(elementos, "02010106", "06", "Policía Nacional", "ZT13", "A1ZTRT0004Z005");
+		agregarElementoTramites(elementos, "02010107", "07", "Fuerzas Militares", "ZT13", "A1ZTRT0004Z006");
+		agregarElementoTramites(elementos, "02010108", "08", "Parques recreativos", "ZT13", "A1ZTRT0004Z007");
+		agregarElementoTramites(elementos, "02010109", "09", "Instituto de desarrollo urbano IDU", "ZT13", "A1ZTRT0004Z008");
+		agregarElementoTramites(elementos, "02010110", "10", "Avalúos inferiores a 16 SMLV", "ZT13", "A1ZTRT0004Z009");
+		agregarElementoTramites(elementos, "02010111", "11", "Tumbas y bóvedas funerarias", "ZT13", "A1ZTRT0004Z010");
+		agregarElementoTramites(elementos, "02010112", "12", "Victimas del despojo o Desplazamiento forzado", "ZT13",
+				"A1ZTRT0004Z105");
+		//Novedades de registro-Exclusiones-Vehículos
+		agregarElementoTramites(elementos, "02010200", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02010201", "01", "Motocicletas 125 cm3", "ZT13", "A1ZTRT0004Z011");
+		agregarElementoTramites(elementos, "02010202", "02", "Maquinaria agrícola", "ZT13", "A1ZTRT0004Z012");
+		agregarElementoTramites(elementos, "02010203", "03", "Vehículos oficiales", "ZT13", "A1ZTRT0004Z013");
+		//Novedades de registro-Exclusiones-Delineación Urbana
+		agregarElementoTramites(elementos, "02010300", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02010301", "01", "Sujetos  convención Viena", "ZT13", "A1ZTRT0004Z014");
+		agregarElementoTramites(elementos, "02010302", "02", "Soc. Nac. Cruz Roja Colombiana", "ZT13", "A1ZTRT0004Z015");
+		agregarElementoTramites(elementos, "02010303", "03", "Distrito Capital", "ZT13", "A1ZTRT0004Z016");
 		//Novedades de registro-Excenciones
-		agregarElementoTramites(elementos, "020200__", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "020201__", "01", "Por Predial", "", "");
-		agregarElementoTramites(elementos, "020202__", "02", "Vehículos", "", "");
-		agregarElementoTramites(elementos, "020203__", "03", "Por Delineación Urbana", "", "");
-		agregarElementoTramites(elementos, "020204__", "04", "Por ICA", "", "");
-		//Novedades de registro-Excenciones-Por Predial
-		agregarElementoTramites(elementos, "02020100", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02020101", "01", "Interes Actual", "", "");
-		agregarElementoTramites(elementos, "02020102", "02", "Sindicatos", "", "");
-		agregarElementoTramites(elementos, "02020103", "03", "Distrito bienes por dependencia", "", "");
-		agregarElementoTramites(elementos, "02020104", "04", "Actos Terroristas", "", "");
-		agregarElementoTramites(elementos, "02020105", "05", "Catástrofes Nataturales", "", "");
-		agregarElementoTramites(elementos, "02020106", "06", "Secuestro/Desaparición forzada", "", "");
-		agregarElementoTramites(elementos, "02020107", "07", "Banco de Suelo Distrital", "", "");
+		agregarElementoTramites(elementos, "020200__", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "020201__", "01", "Predial");
+		agregarElementoTramites(elementos, "020202__", "02", "Vehículos");
+		agregarElementoTramites(elementos, "020203__", "03", "Delineación Urbana");
+		agregarElementoTramites(elementos, "020204__", "04", "ICA");
+		//Novedades de registro-Excenciones-Predial
+		agregarElementoTramites(elementos, "02020100", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02020101", "01", "Interés Cultural", "ZT13", "A1ZTRT0004Z017");
+		agregarElementoTramites(elementos, "02020102", "02", "Sindicatos", "ZT13", "A1ZTRT0004Z018");
+		agregarElementoTramites(elementos, "02020103", "03", "Distrito bienes por dependencia", "ZT13", "A1ZTRT0004Z019");
+		agregarElementoTramites(elementos, "02020104", "04", "Actos Terroristas", "ZT13", "A1ZTRT0004Z020");
+		agregarElementoTramites(elementos, "02020105", "05", "Catástrofes Nataturales", "ZT13", "A1ZTRT0004Z094");
+		agregarElementoTramites(elementos, "02020106", "06", "Secuestro/Desaparición forzada", "ZT13", "A1ZTRT0004Z021");
+		agregarElementoTramites(elementos, "02020107", "07", "Banco de Suelo Distrital", "ZT13", "A1ZTRT0004Z022");
+		agregarElementoTramites(elementos, "02020108", "08", "Victimas del despojo/Desplazamiento forzado", "ZT13",
+				"A1ZTRT0004Z022");
 		//Novedades de registro-Excenciones-Vehículos
-		agregarElementoTramites(elementos, "02020200", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02020201", "01", "Actos Terroristas", "", "");
-		agregarElementoTramites(elementos, "02020202", "02", "Catástrofes Nataturales", "", "");
-		agregarElementoTramites(elementos, "02020203", "03", "Secuestro/Desaparición forzada", "", "");
-		//Novedades de registro-Excenciones-Por Delineación Urbana
-		agregarElementoTramites(elementos, "02020300", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02020301", "01", "Actos Terroristas", "", "");
-		agregarElementoTramites(elementos, "02020302", "02", "Catástrofes Nataturales", "", "");
-		agregarElementoTramites(elementos, "02020303", "03", "Obras nuevas de vivienda de interés social estratos 1,2, y 3", "",
+		agregarElementoTramites(elementos, "02020200", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02020201", "01", "Actos Terroristas", "ZT13", "A1ZTRT0004Z023");
+		agregarElementoTramites(elementos, "02020202", "02", "Catástrofes Nataturales", "ZT13", "A1ZTRT0004Z096");
+		agregarElementoTramites(elementos, "02020203", "03", "Secuestro/Desaparición forzada", "ZT13", "A1ZTRT0004Z024");
+		//Novedades de registro-Excenciones-Delineación Urbana
+		agregarElementoTramites(elementos, "02020300", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02020301", "01", "Actos Terroristas", "ZT13", "A1ZTRT0004Z025");
+		agregarElementoTramites(elementos, "02020302", "02", "Catástrofes Nataturales", "ZT13", "A1ZTRT0004Z098");
+		agregarElementoTramites(elementos, "02020303", "03", "Obras nuevas de vivienda de interés social estratos 1,2, y 3",
+				"A1ZTRT0004Z026",
 				"");
 		agregarElementoTramites(elementos, "02020304", "04",
-				"Obras de autoconstrucción de vivienda, de estratos 1 y 2 que no excedan de 135 SMLV", "", "");
+				"Obras de autoconstrucción de vivienda, de estratos 1 y 2 que no excedan de 135 SMLV", "ZT13", "A1ZTRT0004Z027");
 		agregarElementoTramites(elementos, "02020305", "05",
 				"Las ampliaciones, modificaciones, adecuaciones o reparación de los inmuebles de los estratos 1, 2 y 3 de uso residencial, con avalúo catastral vigente inferior a 135",
-				"", "");
+				"ZT13", "A1ZTRT0004Z028");
 		agregarElementoTramites(elementos, "02020306", "06",
-				"Las obras de restauración y conservación en los bienes inmuebles de interés cultural.", "", "");
-		//Novedades de registro-Excenciones-Por ICA
-		agregarElementoTramites(elementos, "02020400", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02020401", "01", "Actos Terroristas", "", "");
-		agregarElementoTramites(elementos, "02020401", "02", "Catástrofes Nataturales", "", "");
-		agregarElementoTramites(elementos, "02020403", "03", "Secuestro/Desaparición forzada", "", "");
+				"Las obras de restauración y conservación en los bienes inmuebles de interés cultural.", "ZT13", "A1ZTRT0004Z029");
+		//Novedades de registro-Excenciones-ICA
+		agregarElementoTramites(elementos, "02020400", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02020401", "01", "Actos Terroristas", "ZT13", "A1ZTRT0004Z030");
+		agregarElementoTramites(elementos, "02020401", "02", "Catástrofes Nataturales", "ZT13", "A1ZTRT0004Z100");
+		agregarElementoTramites(elementos, "02020403", "03", "Secuestro/Desaparición forzada", "ZT13", "A1ZTRT0004Z031");
 		//Novedades de registro-Tratamiento Especial
-		agregarElementoTramites(elementos, "020300__", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "020301__", "01", "Por Predial", "", "");
+		agregarElementoTramites(elementos, "020300__", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "020301__", "01", "Por Predial");
 		//Novedades de registro-Tratamiento Especial-Por Predial
-		agregarElementoTramites(elementos, "02030100", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02030101", "01", "Suelo Rural", "", "");
-		agregarElementoTramites(elementos, "02030102", "02", "Desarrollo Urbanístico", "", "");
-		agregarElementoTramites(elementos, "02030103", "03", "Áreas Protegidas", "", "");
+		agregarElementoTramites(elementos, "02030100", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02030101", "01", "Suelo Rural", "ZT13", "A1ZTRT0004Z032");
+		agregarElementoTramites(elementos, "02030102", "02", "Desarrollo Urbanístico", "ZT13", "A1ZTRT0004Z033");
+		agregarElementoTramites(elementos, "02030103", "03", "Áreas Protegidas", "ZT13", "A1ZTRT0004Z034");
 		agregarElementoTramites(elementos, "02030104", "04",
-				"Predios con actividades industriales de bajo y   medio impacto al medio ambiente", "", "");
-		agregarElementoTramites(elementos, "02030105", "05", "Remoción de tierras y riesgo no mitigable", "", "");
-		agregarElementoTramites(elementos, "02030106", "06", "Desastres naturales o atentado terrorista", "", "");
+				"Predios con actividades industriales de bajo y   medio impacto al medio ambiente", "ZT13", "A1ZTRT0004Z035");
+		agregarElementoTramites(elementos, "02030105", "05", "Remoción de tierras y riesgo no mitigable", "ZT13", "A1ZTRT0004Z036");
+		agregarElementoTramites(elementos, "02030106", "06", "Desastres naturales o atentado terrorista", "ZT13", "A1ZTRT0004Z037");
 		agregarElementoTramites(elementos, "02030107", "07",
 				"Entidades de asistencia pública, entidades con fines de interés social y de utilidad pública y fundaciones, sin animo de lucro, de derecho público o privado",
-				"", "");
-		agregarElementoTramites(elementos, "02030108", "08", "Extinción de dominio", "", "");
-		agregarElementoTramites(elementos, "02030109", "09", "Predios con actividad financiera", "", "");
-		agregarElementoTramites(elementos, "02030110", "10", "Zona Franca", "", "");
-		//Novedades de registro-Novedades RIT
-		agregarElementoTramites(elementos, "020400__", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "020401__", "01", "Por ICA", "", "");
-		//Novedades de registro-Novedades RIT-Por ICA
-		agregarElementoTramites(elementos, "02040100", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "02040101", "01", "Actividad Económica", "", "");
-		agregarElementoTramites(elementos, "02040102", "02", "Cambio de representante legal", "", "");
-		agregarElementoTramites(elementos, "02040103", "03", "Cambio de revisor Fiscal", "", "");
-		agregarElementoTramites(elementos, "02040104", "04", "Cambio de Contador", "", "");
-		agregarElementoTramites(elementos, "02040105", "05", "Cambio de establecimientos", "", "");
+				"ZT13", "A1ZTRT0004Z038");
+		agregarElementoTramites(elementos, "02030108", "08", "Extinción de dominio", "ZT13", "A1ZTRT0004Z039");
+		agregarElementoTramites(elementos, "02030109", "09", "Predios con actividad financiera", "ZT13", "A1ZTRT0004Z040");
+		agregarElementoTramites(elementos, "02030110", "10", "Zona Franca", "ZT13", "A1ZTRT0004Z041");
+		//Novedades de registro-Novedades ICA
+		agregarElementoTramites(elementos, "020400__", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "020401__", "01", "Actividad Económica", "ZT13", "A1ZTRT0003Z025");
+		agregarElementoTramites(elementos, "020402__", "02", "Cambio de representante legal", "ZT13", "A1ZTRT0003Z026");
+		agregarElementoTramites(elementos, "020403__", "03", "Cambio de revisor Fiscal", "ZT13", "A1ZTRT0003Z027");
+		agregarElementoTramites(elementos, "020404__", "04", "Cambio de Contador", "ZT13", "A1ZTRT0003Z028");
+		agregarElementoTramites(elementos, "020405__", "05", "Cambio de establecimientos", "ZT13", "A1ZTRT0003Z029");
 
 		//Facturación
-		agregarElementoTramites(elementos, "0300____", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "0301____", "01", "Por Predial", "", "");
-		agregarElementoTramites(elementos, "0302____", "02", "Por Vehículos", "", "");
+		agregarElementoTramites(elementos, "0300____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0301____", "01", "Por Predial");
+		agregarElementoTramites(elementos, "0302____", "02", "Por Vehículos");
 		//Facturación-Por Predial
-		agregarElementoTramites(elementos, "030100__", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "030101__", "01", "Descarga de Factura", "", "");
-		agregarElementoTramites(elementos, "030102__", "02", "Descuento adicional del 1%", "", "");
-		agregarElementoTramites(elementos, "030103__", "03", "Reexpedicion de facturas", "", "");
-		agregarElementoTramites(elementos, "030104__", "04", "Solicitud de moficación de Factura", "", "");
-		agregarElementoTramites(elementos, "030105__", "05", "Solicitud de anulacion de facturas ", "", "");
+		agregarElementoTramites(elementos, "030100__", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "030101__", "01", "Descarga de Factura", "ZT06", "A1ZTRT0003Z016");
+		agregarElementoTramites(elementos, "030102__", "02", "Descuento adicional del 1%", "ZT06", "A1ZTRT0003Z017");
+		agregarElementoTramites(elementos, "030103__", "03", "Reexpedicion de facturas", "ZT06", "A1ZTRT0003Z018");
+		agregarElementoTramites(elementos, "030104__", "04", "Solicitud de moficación de Factura");
+		agregarElementoTramites(elementos, "030105__", "05", "Solicitud de anulacion de facturas ");
 		//Facturación-Por Predial-Solicitud de moficación de Factura
-		agregarElementoTramites(elementos, "03010400", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "03010401", "01", "Modificación Avaluó Catastral", "", "");
-		agregarElementoTramites(elementos, "03010402", "02", "Modificación de destino hacendario", "", "");
-		agregarElementoTramites(elementos, "03010403", "03", "Modificación  tarifa", "", "");
-		agregarElementoTramites(elementos, "03010404", "04", "Ajuste % Participación", "", "");
-		agregarElementoTramites(elementos, "03010405", "05", "Exclusiones Parciales Predial", "", "");
-		agregarElementoTramites(elementos, "03010406", "06", "Exenciones Parciales Predial", "", "");
-		agregarElementoTramites(elementos, "03010407", "07", "Descuentos por incremento diferencial", "", "");
+		agregarElementoTramites(elementos, "03010400", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "03010401", "01", "Modificación Avaluó Catastral", "ZT07", "A1ZTRT0004Z047");
+		agregarElementoTramites(elementos, "03010402", "02", "Modificación de destino hacendario", "ZT07", "A1ZTRT0004Z048");
+		agregarElementoTramites(elementos, "03010403", "03", "Modificación  tarifa", "ZT07", "A1ZTRT0004Z049");
+		agregarElementoTramites(elementos, "03010404", "04", "Ajuste % Participación", "ZT07", "A1ZTRT0004Z050");
+		agregarElementoTramites(elementos, "03010405", "05", "Exclusiones Parciales Predial", "ZT07", "A1ZTRT0004Z051");
+		agregarElementoTramites(elementos, "03010406", "06", "Exenciones Parciales Predial", "ZT07", "A1ZTRT0004Z052");
+		agregarElementoTramites(elementos, "03010407", "07", "Descuentos por incremento diferencial", "ZT07", "A1ZTRT0004Z053");
 		//Facturación-Por Predial-Solicitud de anulacion de facturas
-		agregarElementoTramites(elementos, "03010500", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "03010501", "01", "No sujeción", "", "");
-		agregarElementoTramites(elementos, "03010502", "02", "Inexistencia actual del objeto", "", "");
-		agregarElementoTramites(elementos, "03010503", "03", "Exencion total del  objeto", "", "");
-		agregarElementoTramites(elementos, "03010504", "04", "Exclusión total del  objeto", "", "");
+		agregarElementoTramites(elementos, "03010500", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "03010501", "01", "No sujeción", "ZT07", "A1ZTRT0004Z054");
+		agregarElementoTramites(elementos, "03010502", "02", "Inexistencia actual del objeto", "ZT07", "A1ZTRT0004Z055");
+		agregarElementoTramites(elementos, "03010503", "03", "Exencion total del  objeto", "ZT07", "A1ZTRT0004Z056");
+		agregarElementoTramites(elementos, "03010504", "04", "Exclusión total del  objeto", "ZT07", "A1ZTRT0004Z057");
 		//Facturación-Por Vehículos
-		agregarElementoTramites(elementos, "030200__", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "030201__", "01", "Descarga de Factura", "", "");
-		agregarElementoTramites(elementos, "030202__", "02", "Reexpedición de Factura", "", "");
-		agregarElementoTramites(elementos, "030203__", "03", "Moficación de Factura", "", "");
-		agregarElementoTramites(elementos, "030204__", "04", "Anulación de Factura", "", "");
+		agregarElementoTramites(elementos, "030200__", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "030201__", "01", "Descarga de Factura", "ZT06", "A1ZTRT0003Z021");
+		agregarElementoTramites(elementos, "030202__", "02", "Reexpedición de Factura", "ZT06", "A1ZTRT0003Z022");
+		agregarElementoTramites(elementos, "030203__", "03", "Moficación de Factura");
+		agregarElementoTramites(elementos, "030204__", "04", "Anulación de Factura");
 		//Facturación-Por Vehículos-Moficación de Factura
-		agregarElementoTramites(elementos, "03020300", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "03020301", "01", "Modificación Avaluó", "", "");
+		agregarElementoTramites(elementos, "03020300", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "03020301", "01", "Modificación Avaluó", "ZT07", "A1ZTRT0004Z058");
 		agregarElementoTramites(elementos, "03020302", "02",
-				"Modificación de placa, marca, línea, modelo, capacidad(cilindraje),  uso y grupo", "", "");
+				"Modificación de placa, marca, línea, modelo, capacidad(cilindraje),  uso y grupo", "ZT07", "A1ZTRT0004Z059");
 		//Facturación-Por Vehículos-Anulación de Factura
-		agregarElementoTramites(elementos, "03020400", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "03020401", "01", "No sujeción", "", "");
-		agregarElementoTramites(elementos, "03020402", "02", "Inexistencia objeto", "", "");
-		agregarElementoTramites(elementos, "03020403", "03", "Exención total del  objeto", "", "");
-		agregarElementoTramites(elementos, "03020404", "04", "Exclusión total  del  objeto", "", "");
+		agregarElementoTramites(elementos, "03020400", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "03020401", "01", "No sujeción", "ZT07", "A1ZTRT0004Z060");
+		agregarElementoTramites(elementos, "03020402", "02", "Inexistencia objeto", "ZT07", "A1ZTRT0004Z061");
+		agregarElementoTramites(elementos, "03020403", "03", "Exención total del  objeto", "ZT07", "A1ZTRT0004Z062");
+		agregarElementoTramites(elementos, "03020404", "04", "Exclusión total  del  objeto", "ZT07", "A1ZTRT0004Z063");
 
 		//Analisis de la cuenta
-		agregarElementoTramites(elementos, "0400____", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "0401____", "01", "Certificación de deuda", "", "");
+		agregarElementoTramites(elementos, "0400____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0401____", "01", "Certificación de deuda", "ZT08", "A1ZTRT0002Z009");
 		agregarElementoTramites(elementos, "0402____", "02",
-				"Diferencia en la imputación de pagos efectuados a través de declaraciones y/o ROP", "", "");
-		agregarElementoTramites(elementos, "0403____", "03", "Ajuste por situaciones administrativas", "", "");
-		agregarElementoTramites(elementos, "0404____", "04", "Revisión de datos SAP", "", "");
+				"Diferencia en la imputación de pagos efectuados a través de declaraciones y/o ROP", "ZT08", "A1ZTRT0002Z010");
+		agregarElementoTramites(elementos, "0403____", "03", "Ajuste por situaciones administrativas", "ZT08", "A1ZTRT0002Z011");
+		agregarElementoTramites(elementos, "0404____", "04", "Revisión de datos SAP", "ZT08", "A1ZTRT0002Z012");
 
 		//Boletín de deudores Morosos del Estado
-		agregarElementoTramites(elementos, "0500____", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "0501____", "01", "Deuda Cancelada", "", "");
-		agregarElementoTramites(elementos, "0502____", "02", "Saneamiento de información", "", "");
-		agregarElementoTramites(elementos, "0503____", "03", "Existe acuerdo de pago vigente", "", "");
-		agregarElementoTramites(elementos, "0504____", "04", "Otra cual", "", "");
+		agregarElementoTramites(elementos, "0500____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0501____", "01", "Deuda Cancelada", "ZT09", "A1ZTRT0002Z013");
+		agregarElementoTramites(elementos, "0502____", "02", "Saneamiento de información", "ZT09", "A1ZTRT0002Z014");
+		agregarElementoTramites(elementos, "0503____", "03", "Existe acuerdo de pago vigente", "ZT09", "A1ZTRT0002Z015");
+		agregarElementoTramites(elementos, "0504____", "04", "Otra cual", "ZT09", "A1ZTRT0002Z016");
+
+
+		//Corrección de la información causada contablemente
+		agregarElementoTramites(elementos, "0700____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0701____", "01", "Solicitud Interna", "ZT11", "A1ZTRT0002Z017");
+		agregarElementoTramites(elementos, "0702____", "02", "Solicitud Externa", "ZT11", "A1ZTRT0002Z018");
 
 		//Declaración
-		agregarElementoTramites(elementos, "0800____", "00", "Seleccionar", "", "");
-		agregarElementoTramites(elementos, "0801____", "01", "Autorización por declaración valores inferiores al sugerido", "", "");
-		agregarElementoTramites(elementos, "0802____", "02", "Porcentaje de copropiedad", "", "");
-		agregarElementoTramites(elementos, "0803____", "03", "Doble sujeción pasiva (Propietario, Poseedor)", "", "");
-		agregarElementoTramites(elementos, "0804____", "04", "Pago Equivocado", "", "");
+		agregarElementoTramites(elementos, "0800____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0801____", "01", "Autorización por declaración valores inferiores al sugerido", "ZT12",
+				"A1ZTRT0002Z019");
+		agregarElementoTramites(elementos, "0802____", "02", "Porcentaje de copropiedad", "ZT12", "A1ZTRT0002Z020");
+		agregarElementoTramites(elementos, "0803____", "03", "Doble sujeción pasiva (Propietario, Poseedor)", "ZT12",
+				"A1ZTRT0002Z021");
+		agregarElementoTramites(elementos, "0804____", "04", "Pago Equivocado", "ZT12", "A1ZTRT0002Z022");
 
 
 	}

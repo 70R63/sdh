@@ -9,12 +9,14 @@ import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
+import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
@@ -1779,7 +1781,32 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
+	public CreaCasosResponse creacionCaso(final CreaCasosRequest requestInfo, final SDHDetalleGasolina sdhConsultaWS,
+			final Logger LOG)
+	{
+		CreaCasosResponse responseInfo = new CreaCasosResponse();
+		final String confUrl = "sdh.creaCasos.url";
+		final String confUser = "sdh.creaCasos.user";
+		final String confPass = "sdh.creaCasos.password";
+		final String wsNombre = "crm_creaCasos";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.CreaCasosResponse";
 
+		responseInfo = (CreaCasosResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
+				LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+	/**
+	 * @param creaCasosResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorCreacionCaso(final CreaCasosResponse creaCasosResponse)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
 
 
 }

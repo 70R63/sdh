@@ -94,7 +94,9 @@
 			
 			ACC.reteICAGeneraDeclaracionURL = "<c:url value='/retenedores/declaracion/generar' />";
 
-			ACC.tramitestSeleccionURL= "<c:url value='/contribuyentes/tramites/seleccionNivel' />";			
+			ACC.casoSeleccionURL= "<c:url value='/contribuyentes/tramites/seleccionNivel' />";			
+
+			ACC.casoCreacionURL= "<c:url value='/contribuyentes/tramites/creacionCaso' />";			
 			
 		  	ACC.currentURL = "${currentURL}";
 
