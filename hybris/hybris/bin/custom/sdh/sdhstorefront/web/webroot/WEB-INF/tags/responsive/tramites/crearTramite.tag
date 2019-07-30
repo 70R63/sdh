@@ -90,10 +90,10 @@
 			</div>
 		</div>
 	</div>
-		<div class="row documentos" id="documentos" style="display:none">
+		<div class="row documentos"  >
 		<div class="col-md-6 text-center col-md-offset-3"
 			style="margin-top: 15px">
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="documentos" style="display:none">
 				<thead>
 					<tr>
 						<th><label class="contorl-label labeltabletd"><spring:theme
@@ -103,12 +103,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><input class="inputtextnew" disabled="disabled"
-							type="text" size="30" value="" id = "docTramite" value = "perrito"/></td>
-						<td><input class="inputtextnew" type="file" size="30"
-							value="" /></td>
-					</tr>
 				</tbody>
 			</table>
 		</div>

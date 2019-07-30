@@ -210,9 +210,6 @@ public class TramitesCrearPageController extends AbstractPageController
 		infoVista.setOpciones(elementosResponse);
 		infoVista.setDocTramitesResponse(docTramitesResponse);
 
-		//		storeCmsPageInModel(model, getContentPageForLabelOrId(TRAMITES_CREAR_CMS_PAGE));
-		//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(TRAMITES_CREAR_CMS_PAGE));
-
 
 		return infoVista;
 	}

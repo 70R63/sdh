@@ -16,7 +16,7 @@ ACC.tramitesSeleccion = {
 			dataActual.valorN2 = $("#selectNivel2").val();
 			dataActual.valorN3 = $("#selectNivel3").val();
 
-			debugger;
+//			debugger;
 			var doc = document.getElementById('documentos');
 			doc.style.display='none';
 			
@@ -169,22 +169,8 @@ ACC.tramitesSeleccion = {
 		}
 		
 		
-//		debugger;
-		var docDescripcion = document.getElementById('docTramite');
-		if(infoResponse.docTramitesResponse != null){
-			if(infoResponse.docTramitesResponse.documentos != null){
-				if(infoResponse.docTramitesResponse.documentos.tipoDocumen_t != null){
-					docDescripcion.value = infoResponse.docTramitesResponse.documentos.tipoDocumen_t;		
-					doc.style.display='block';
-				}else{
-					doc.style.display='none';
-				}						
-			}else{
-				doc.style.display='none';
-			}
-		}else{
-			doc.style.display='none';
-		}
+		ACC.tramitesSeleccion.fillFieldsFromDataDocs(infoResponse);
+
 		
 				
 //		debugger;
@@ -222,17 +208,26 @@ ACC.tramitesSeleccion = {
 	fillFieldsFromDataDocs : function(docTramites) {
 
 		debugger;
-		var descripcionDocumento = docTramites.documentos.tipoDocumen_t;
 		var doc = document.getElementById('documentos');
+		var mostrarTabDocs = false;
 		
-		if(descripcionDocumento != null){
-			$("#docTramite").val = descripcionDocumento;		
+		
+		$("#documentos").find("tr:gt(0)").remove();
+		$.each(docTramites.docTramitesResponse.documentos, function (index,value){
+			if(value.tipoDocumen_t != ''){
+			$('#documentos').append("<tr>"+ 
+					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id = "docTramite" value="'+ value.tipoDocumen_t + '"/></td>"'+
+					 '<td><input class="inputtextnew" type="file" size="30" /></td>'+
+					 "</tr>");
+			mostrarTabDocs = true;
+			}
+		});
+		if(mostrarTabDocs == true){
 			doc.style.display='block';
 		}else{
 			doc.style.display='none';
 		}
-
-		
+	
 	},
 	
 	clearFieldsFromDataSelN0 : function(infoActual) {
