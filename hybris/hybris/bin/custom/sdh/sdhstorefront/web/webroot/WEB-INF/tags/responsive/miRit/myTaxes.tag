@@ -124,7 +124,7 @@
 									<label class="control-label required" for="address.surname">
 										<spring:theme code="mirit.gas.tax.numDoc" />
 									</label> 
-									<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="<spring:theme  code='register.id.types.${miRitForm.tipoDoc}' />" maxlength="240">
+									<input id="address.surname" disabled="disabled" name="lastName" class="newalto form-control form-control" aria-required="true" type="text" value="<spring:theme  code='register.id.types.${miRitForm.tipoDoc}' />" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 									</div>
@@ -135,7 +135,7 @@
 									<label class="control-label required" for="address.surname">
 										<spring:theme code="mirit.gas.tax.numDoc" />
 									</label> 
-									<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${miRitForm.numDoc }" maxlength="240">
+									<input id="address.surname" disabled="disabled" name="lastName" class=" newalto form-control form-control" aria-required="true" type="text" value="${miRitForm.numDoc }" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un tipo de documento</span>
 									</div>
@@ -159,7 +159,7 @@
 									<label class="control-label required" for="address.surname">
 										CDU
 									</label> 
-									<input id="address.surname" disabled="disabled" name="lastName" class="form-control form-control" aria-required="true" type="text" value="${eachDelineacion.cdu }" maxlength="240">
+									<input id="address.surname" disabled="disabled" name="lastName" class="newalto form-control form-control" aria-required="true" type="text" value="${eachDelineacion.cdu }" maxlength="240">
 								</div>
 							</div>
 							

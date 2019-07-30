@@ -30,7 +30,7 @@
 								<spring:theme code="mirit.changePassword.password" />
 							</label> <input id="currentPassword" name="currentPassword"
 								class="newalto form-control " aria-required="true" type="password"
-								value="" maxlength="240">
+								value="" maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="currentPasswordErrors" class="hidden">Seleccione
 									un tipo de documento</span>
@@ -45,7 +45,7 @@
 								<spring:theme code="mirit.changePassword.newPassword" />
 							</label> <input id="newPassword" name="newPassword"
 								class="newalto form-control password-strength" aria-required="true"
-								type="password" value="" maxlength="240">
+								type="password" value="" maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="sameOldPasswordError" class="hidden"><spring:theme
 										code="updatePwd.token.sameOldPassword"></spring:theme></span>

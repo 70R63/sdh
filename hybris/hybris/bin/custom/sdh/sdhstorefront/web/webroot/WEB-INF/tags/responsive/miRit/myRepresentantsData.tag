@@ -30,7 +30,7 @@
 						</label>
 					</div>
 					<div class="row">
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<div class="form-group ">
 								<label class="control-label required" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentType" />
@@ -44,7 +44,7 @@
 								</label>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="form-group ">
 								<label class="control-label required" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.name" />
@@ -60,7 +60,7 @@
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important">
 									<spring:theme code="mirit.myRepresentants.refentTo" />
 								</label>
 							</div>
@@ -68,7 +68,7 @@
 					</div>
 					<c:forEach items="${miRitForm.representados }" var="eachAgent">
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="new_alto form-control" disabled="disabled"
@@ -93,7 +93,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="new_alto form-control" disabled="disabled"
@@ -122,7 +122,7 @@
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text" value="${eachAgent.impuesto}"
-										maxlength="240">
+										maxlength="240" style="margin-left: 50px !important">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
 											tipo de documento</span>
@@ -147,7 +147,7 @@
 						</label>
 					</div>
 					<div class="row">
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<div class="form-group ">
 								<label class="control-label required" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.documentType" />
@@ -161,7 +161,7 @@
 								</label>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="form-group ">
 								<label class="control-label required" for="address.surname">
 									<spring:theme code="mirit.myRepresentants.name" />
@@ -177,7 +177,7 @@
 						</div>
 						<div class="col-md-2">
 							<div class="form-group ">
-								<label class="control-label required" for="address.surname">
+								<label class="control-label required" for="address.surname"  style="margin-left: 50px !important">
 									<spring:theme code="mirit.myRepresentants.refentTo" />
 								</label>
 							</div>
@@ -185,7 +185,7 @@
 					</div>
 					<c:forEach items="${miRitForm.representantes }" var="eachAgent">
 						<div class="row">
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="new_alto form-control" disabled="disabled"
@@ -210,7 +210,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
 										class="new_alto form-control" disabled="disabled"
@@ -227,7 +227,7 @@
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text"
-										value="${eachAgent.funcionInterl }" maxlength="240">
+										value="${eachAgent.funcionInterl}" maxlength="240">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
 											tipo de documento</span>
@@ -239,7 +239,7 @@
 									<input id="address.surname" name="lastName"
 										class="newalto form-control" disabled="disabled"
 										aria-required="true" type="text" value="${eachAgent.impuesto}"
-										maxlength="240">
+										maxlength="240"  style="margin-left: 50px !important">
 									<div class="help-block">
 										<span id="lastName.errors" class="hidden">Seleccione un
 											tipo de documento</span>

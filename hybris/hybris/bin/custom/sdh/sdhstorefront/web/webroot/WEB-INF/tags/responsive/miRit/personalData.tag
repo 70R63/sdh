@@ -52,7 +52,7 @@
 								</label> <input id="primNom" name="primNom"
 									class="newalto form-control" aria-required="true"
 									type="text" data-original="${miRitForm.primNom }"
-									value="${miRitForm.primNom }" maxlength="240">
+									value="${miRitForm.primNom }" maxlength="240" onkeyup="ajustar(this)">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -64,7 +64,7 @@
 								</label> <input id="primApe" name="primApe"
 									class="newalto form-control" aria-required="true"
 									type="text" data-original="${miRitForm.primApe }"
-									value="${miRitForm.primApe }" maxlength="240">
+									value="${miRitForm.primApe }" maxlength="240" onkeyup="ajustar(this)">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -74,7 +74,7 @@
 								<label class="control-label required" for="fchExp"> <spring:theme
 										code="mirit.personalData.documnetIssueDate" />
 								</label> <input id="fchExp" name="fchExp"
-									class="newalto form-control" aria-required="true"
+									class="newseis newalto form-control" aria-required="true"
 									type="text" value="${miRitForm.fchExp }" maxlength="240" placeholder="dd/mm/aaaa">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
@@ -90,7 +90,7 @@
 								<label class="control-label required" for="numDoc"> <spring:theme
 										code="mirit.personalData.documentNumber" />
 								</label> <input id="numDoc" name="numDoc"
-									class="newalto form-control" aria-required="true"
+									class="newseis newalto form-control" aria-required="true"
 									disabled="disabled" type="text" value="${miRitForm.numDoc }"
 									maxlength="240">
 								<div class="help-block">
@@ -104,7 +104,7 @@
 								</label> <input id="segNom" name="segNom"
 									class="newalto form-control" aria-required="true"
 									type="text" data-original="${miRitForm.segNom }"
-									value="${miRitForm.segNom }" maxlength="240">
+									value="${miRitForm.segNom }" maxlength="240" onkeyup="ajustar(this)">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -116,7 +116,7 @@
 								</label> <input id="segApe" name="segApe"
 									class="newalto form-control" aria-required="true"
 									type="text" data-original="${miRitForm.segApe }"
-									value="${miRitForm.segApe }" maxlength="240">
+									value="${miRitForm.segApe }" maxlength="240" onkeyup="ajustar(this)">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>

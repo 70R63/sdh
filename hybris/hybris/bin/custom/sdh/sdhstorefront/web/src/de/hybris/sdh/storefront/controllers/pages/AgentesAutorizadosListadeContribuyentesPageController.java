@@ -15,6 +15,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 
 import javax.annotation.Resource;
 
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -62,6 +66,12 @@ public class AgentesAutorizadosListadeContribuyentesPageController extends Abstr
 				.println("---------------- Hola entro al GET Agentes Autorizados lista de contribuyentes --------------------------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+		if(customerData.getAgentList() != null && customerData.getAgentList().size() == 1)
+		{
+			return "redirect:" + "/autorizados/contribuyente/representando?representado="+customerData.getAgentList().get(0).getAgent();
+		}
+
 
 		model.addAttribute("currentCustomer",customerData);
 

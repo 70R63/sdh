@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 
@@ -54,12 +55,17 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 	@Resource(name="sdhCustomerFacade")
 	SDHCustomerFacade sdhCustomerFacade;
 
+	@Resource(name="sessionService")
+    SessionService sessionService;
+
 	@RequestMapping(value = "/autorizados/contribuyente/representando", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String autorizadoscontrib(final Model model, @RequestParam String representado) throws CMSItemNotFoundException
 	{
 
 		CustomerData representadoData = sdhCustomerFacade.getRepresentado(representado);
+
+		sessionService.getCurrentSession().setAttribute("representado",representadoData);
 
 		model.addAttribute("representado", representadoData);
 

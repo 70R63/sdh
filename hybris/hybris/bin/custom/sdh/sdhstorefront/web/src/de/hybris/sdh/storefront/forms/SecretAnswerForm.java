@@ -17,6 +17,9 @@ public class SecretAnswerForm
 	private String DIR2;
 	private String IMP;
 	private String PLA;
+	private String MAT;
+	private String BAN;
+
 
 	/**
 	 * @return the fNAM
@@ -153,6 +156,41 @@ public class SecretAnswerForm
 	{
 		PLA = pLA;
 	}
+
+	/**
+	 * @return the mAT
+	 */
+	public String getMAT()
+	{
+		return MAT;
+	}
+
+	/**
+	 * @param mAT
+	 *           the mAT to set
+	 */
+	public void setMAT(final String mAT)
+	{
+		MAT = mAT;
+	}
+
+	/**
+	 * @return the bAN
+	 */
+	public String getBAN()
+	{
+		return BAN;
+	}
+
+	/**
+	 * @param bAN
+	 *           the bAN to set
+	 */
+	public void setBAN(final String bAN)
+	{
+		BAN = bAN;
+	}
+
 
 
 

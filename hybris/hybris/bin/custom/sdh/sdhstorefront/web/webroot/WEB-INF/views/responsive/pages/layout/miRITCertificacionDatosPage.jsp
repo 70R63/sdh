@@ -75,7 +75,7 @@ input[type=radio] {
 					<label class="control-label" for="tipoCert"><spring:theme
 							code="mirit.certificacion.textImp" /></label>
 					<form:select id="tipoCert" path="tipoCert"
-						onchange="Hide(this.value);" cssClass="form-control">
+						onchange="Hide(this.value);" cssClass="new_alto form-control">
 						<form:option value="0">
 							<spring:theme code="mirit.certificacion.opSeleccionar" />
 						</form:option>
@@ -88,10 +88,11 @@ input[type=radio] {
 					</form:select>
 				</div>
 			</div>
+			</div>
+			<div class="row">
 
 			<div class="col-md-2">
-				<button class="btn btn-primary btn-block" type="submit"
-					style="margin-top: 30px; margin-left: 40px">
+				<button class="btn btn-primary btn-block" type="submit">
 					<spring:theme code="mirit.certificacion.btnGenerar" />
 				</button>
 			</div>
