@@ -122,14 +122,17 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		String trazabilityCode = null;
 		String transactionState = null;
 
-
+		//LOG.error("trazabilityCode: " + numeroDeReferencia);
 		if (pseTransactionsLogModel != null)
 		{
 			trazabilityCode = pseTransactionsLogModel.getTrazabilityCode();
 
+			//LOG.error("trazabilityCode: " + trazabilityCode);
 			final GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
 			getTransactionInformationBodyType.setTrazabilityCode(trazabilityCode);
 
+
+			//LOG.error("getTransactionInformationBodyType:" + getTransactionInformationBodyType);
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
