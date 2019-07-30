@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Federico Flores Dimas
  *
@@ -11,7 +14,7 @@ public class DocTramitesResponse
 {
 	private String idmsj;
 	private String txtmsj;
-	private DocTramitesDocumentosResponse documentos;
+	private List<DocTramitesDocumentosResponse> documentos;
 
 	/**
 	 * @return the idmsj
@@ -50,7 +53,7 @@ public class DocTramitesResponse
 	/**
 	 * @return the documentos
 	 */
-	public DocTramitesDocumentosResponse getDocumentos()
+	public List<DocTramitesDocumentosResponse> getDocumentos()
 	{
 		return documentos;
 	}
@@ -59,11 +62,10 @@ public class DocTramitesResponse
 	 * @param documentos
 	 *           the documentos to set
 	 */
-	public void setDocumentos(final DocTramitesDocumentosResponse documentos)
+	public void setDocumentos(final List<DocTramitesDocumentosResponse> documentos)
 	{
 		this.documentos = documentos;
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -75,7 +77,6 @@ public class DocTramitesResponse
 	{
 		return "DocTramitesResponse [idmsj=" + idmsj + ", txtmsj=" + txtmsj + ", documentos=" + documentos + "]";
 	}
-
 
 
 }

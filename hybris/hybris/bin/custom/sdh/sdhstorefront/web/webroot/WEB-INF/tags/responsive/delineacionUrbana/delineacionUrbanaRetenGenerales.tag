@@ -27,7 +27,7 @@
 					aria-required="true" maxlength="240" path="input.selectedCDU" />
 			</div>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-1">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.radic" /></label>
@@ -51,8 +51,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
+
 		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
@@ -77,7 +76,7 @@
 				</sf:select>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.areasusos.preobra" /></label>
@@ -89,7 +88,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-4">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.areasusos.cauexen" /></label>
