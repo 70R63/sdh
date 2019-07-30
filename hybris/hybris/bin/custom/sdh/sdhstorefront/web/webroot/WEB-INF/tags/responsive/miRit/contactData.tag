@@ -964,7 +964,7 @@
 							</label> <input id="telefonoPricipal" name="telefonoPricipal"
 								class="newalto form-control" aria-required="true"
 								type="text" value="${miRitForm.telefonoPricipal }"
-								maxlength="240">
+								maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="telefonoPricipal.errors" class="hidden">Seleccione
 									un tipo de documento</span>
@@ -978,7 +978,7 @@
 							</label> <input id="extensionTelefono" name="extensionTelefono"
 								class="newalto form-control" aria-required="true"
 								type="text" value="${miRitForm.extensionTelefono }"
-								maxlength="240">
+								maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="lastName.errors" class="hidden">Seleccione un
 									tipo de documento</span>
@@ -1055,7 +1055,7 @@
 										<div class="form-group ">
 											<input class="newalto form-control usuarioRedSocial"
 												aria-required="true" type="text"
-												value="${eachRedSocial.USUARIORED }" maxlength="240">
+												value="${eachRedSocial.USUARIORED }" maxlength="240" onkeyup="ajustar(this)">
 											<div class="help-block">
 												<span id="lastName.errors" class="hidden">Seleccione
 													un tipo de documento</span>
@@ -1110,7 +1110,7 @@
 								<div class="col-md-3">
 									<div class="form-group ">
 										<input class="newalto form-control usuarioRedSocial"
-											aria-required="true" type="text" value="" maxlength="240">
+											aria-required="true" type="text" value="" maxlength="240" onkeyup="ajustar(this)">
 										<div class="help-block">
 											<span id="redsocial[0].USUARIORED.errors" class="hidden"></span>
 										</div>

@@ -46,5 +46,24 @@
 
 </template:page>
 
+<script>
+	window.onload = function() {
+		var inputcol = document.getElementsByTagName("input");
 
+		for (i = 0; i < inputcol.length; i++) {
+			var texto = inputcol[i].value;
+			inputcol[i].style.width = (texto.length + 1) * 9 + 'px';
+		}
+
+	};
+
+	function ajustar(selectObject) {
+		debugger;
+		var inputn = selectObject;
+			var texto = inputn.value;
+			inputn.style.width = (texto.length + 1) * 8 + 'px';
+		}
+
+
+</script>
 

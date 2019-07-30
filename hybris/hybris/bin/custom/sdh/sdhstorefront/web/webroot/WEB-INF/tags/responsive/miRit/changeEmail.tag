@@ -30,7 +30,7 @@
 								<spring:theme code="mirit.changeEmail.email" />
 							</label> <input id="currentMail" name="currentMail" class="newalto form-control "
 								aria-required="true" type="text" value="${miRitForm.email }"
-								maxlength="240">
+								maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="currentMailErrors" class="hidden">Seleccione un
 									tipo de documento</span>
@@ -44,7 +44,7 @@
 							<label class="control-label required" for="newEmail"> <spring:theme
 									code="mirit.changeEmail.newEmail" />
 							</label> <input id="newEmail" name="newEmail" class="newalto form-control "
-								aria-required="true" type="text" value="" maxlength="240">
+								aria-required="true" type="text" value="" maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="newEmailErrors" class="hidden"><spring:theme
 										code="login.not.a.validEmail.exception" /></span>
@@ -59,7 +59,7 @@
 								<spring:theme code="mirit.changeEmail.confirmNewEmail" />
 							</label> <input id="confirmNewEmail" name="confirmNewEmail"
 								class="newalto form-control " aria-required="true" type="text" value=""
-								maxlength="240">
+								maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">
 								<span id="confirmNewEmailErrors" class="hidden"><spring:theme
 										code="validation.confirmEmail.equals" /></span>

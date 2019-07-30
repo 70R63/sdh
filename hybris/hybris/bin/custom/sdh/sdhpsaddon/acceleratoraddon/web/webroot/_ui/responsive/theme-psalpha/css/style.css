@@ -24985,13 +24985,13 @@ span.pasos {
 }
 /*nuevos cambios en seccion menu*/
 .navigation--bottom {
-  width: 83% !important;
+  width: 75% !important;
 }
 .breadcrumb-section {
-  width: 83% !important;
+  width: 75% !important;
 }
 .navigation--middle .nav__right {
-  width: 93%;
+  width: 89%;
 }
 .container {
   width: 82%;
@@ -25000,21 +25000,42 @@ span.pasos {
   width: 82%;
 }
 .container_new_page {
-  width: 82%;
+  width: 75%;
 }
 .delededucciones {
-  width: 82%;
+  width: 75%;
+}
+.tablefechas {
+  width: 70px !important;
+}
+.lincostruc {
+  width: 93% !important;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 6px !important;
+}
+.form-group .newalto,
+.newalto {
+  height: 25px !important;
+  min-height: 20px !important;
+  padding: 1px 1px 1px 1px!important;
+  min-width: 20% !important;
+  max-width: 200px !important;
+}
+.form-group .new_alto,
+.new_alto {
+  height: 25px !important;
+  min-height: 20px !important;
+  padding: 1px !important;
+  min-width: 30% !important;
+  max-width: 250px !important;
+}
+.btn {
+  font-size: 14px !important;
 }
 
-.tablefechas{
-	 width: 70px !important;
-}
-
-.lincostruc{
-	width: 93% !important;
-}	
-	
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-    padding: 6px !important;
-
-}

@@ -52,7 +52,7 @@
 						<div class="form-group ">
 							<label class="control-label required" for="birthDate"> <spring:theme
 									code="mirit.generalData.birthDate" />
-							</label> <input id="birthDate" name="birthDate" class="newalto form-control"
+							</label> <input id="birthDate" name="birthDate" class="newseis newalto form-control"
 								disabled="disabled" aria-required="true" type="text"
 								value="${miRitForm.fechaNacimiento}" maxlength="240">
 							<div class="help-block">
