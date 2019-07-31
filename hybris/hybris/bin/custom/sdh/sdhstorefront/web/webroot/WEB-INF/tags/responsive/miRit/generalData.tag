@@ -25,7 +25,7 @@
 			<div class="card-body">
 				<div class="row">
 					<!--  First column of form -->
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<!-- 				<div class="form-group "> -->
 						<!-- 					<label class="control-label required" for="tratamiento"> -->
 						<%-- 						<spring:theme code="mirit.generalData.treatment"/> --%>
@@ -49,35 +49,8 @@
 									tipo de documento</span>
 							</div>
 						</div>
-						<div class="form-group ">
-							<label class="control-label required" for="birthDate"> <spring:theme
-									code="mirit.generalData.birthDate" />
-							</label> <input id="birthDate" name="birthDate" class="newseis newalto form-control"
-								disabled="disabled" aria-required="true" type="text"
-								value="${miRitForm.fechaNacimiento}" maxlength="240">
-							<div class="help-block">
-								<span id="lastName.errors" class="hidden">Seleccione un
-									tipo de documento</span>
-							</div>
-						</div>
-						<div class="form-group ">
-							<label class="control-label required" for="paisOrigen"> <spring:theme
-									code="mirit.generalData.originCountry" />
-							</label> <input id="paisOrigen" name="paisOrigen" class="newalto form-control "
-								disabled="disabled" aria-required="true" type="text"
-								value="<spring:theme code="rit.pais.p${miRitForm.paisOrigen}" />"
-								maxlength="240">
-							<div class="help-block">
-								<span id="lastName.errors" class="hidden">Seleccione un
-									tipo de documento</span>
-							</div>
-						</div>
-
 					</div>
-
-
-					<!--  Second column of form -->
-					<div class="col-md-3">
+						<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required" for="claseIC"> <spring:theme
 									code="mirit.generalData.classIC" />
@@ -91,6 +64,22 @@
 									tipo de documento</span>
 							</div>
 						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group ">
+							<label class="control-label required" for="birthDate"> <spring:theme
+									code="mirit.generalData.birthDate" />
+							</label> <input id="birthDate" name="birthDate"
+								class="newseis newalto form-control" disabled="disabled"
+								aria-required="true" type="text"
+								value="${miRitForm.fechaNacimiento}" maxlength="240">
+							<div class="help-block">
+								<span id="lastName.errors" class="hidden">Seleccione un
+									tipo de documento</span>
+							</div>
+						</div>
+					</div>
+						<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required" for="nacionalidad">
 								<spring:theme code="mirit.generalData.nationality" />
@@ -103,12 +92,36 @@
 									tipo de documento</span>
 							</div>
 						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group ">
+							<label class="control-label required" for="paisOrigen"> <spring:theme
+									code="mirit.generalData.originCountry" />
+							</label> <input id="paisOrigen" name="paisOrigen"
+								class="newalto form-control " disabled="disabled"
+								aria-required="true" type="text"
+								value="<spring:theme code="rit.pais.p${miRitForm.paisOrigen}" />"
+								maxlength="240">
+							<div class="help-block">
+								<span id="lastName.errors" class="hidden">Seleccione un
+									tipo de documento</span>
+							</div>
+						</div>
+
+					</div>
+
+
+					<!--  Second column of form -->
+				
+				
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label required" for="lugarNacimiento">
 								<spring:theme code="mirit.generalData.birthPlace" />
 							</label> <input id="lugarNacimiento" name="lugarNacimiento"
-								class="newalto form-control  " disabled="disabled" aria-required="true"
-								type="text" value="${miRitForm.lugarNacimiento}" maxlength="240">
+								class="newalto form-control  " disabled="disabled"
+								aria-required="true" type="text"
+								value="${miRitForm.lugarNacimiento}" maxlength="240">
 							<div class="help-block">
 								<span id="lastName.errors" class="hidden">Seleccione un
 									tipo de documento</span>

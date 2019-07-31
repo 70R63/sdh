@@ -42,7 +42,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.ubicacionPlantaAbasto" /></label>
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.municipio" /></label> <input
@@ -77,13 +77,10 @@
 						maxlength="240">
 				</div>
 			</div>
-		</div>
 
-
-		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label " style="margin-top: 20px"><spring:theme
+					<label class="control-label"><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.calidadResponsable" /></label>
 					<input id="calidResp" name="calidResp" class="newalto form-control"
 						aria-required="true" type="text" disabled="disabled"
@@ -91,8 +88,11 @@
 						maxlength="240">
 				</div>
 			</div>
+		</div>
 
-			<div class="col-md-2">
+
+		<div class="row">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.capacidadAlmacProd" /></label>
@@ -105,7 +105,7 @@
 
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label " style="margin-top: 20px"><spring:theme
+					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.numTanques" /></label> <input
 						id="numTanques" name="numTanques" class="newalto form-control"
 						aria-required="true" type="text" disabled="disabled"
@@ -114,7 +114,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.capacAlmacTanques" /></label>
@@ -131,16 +131,14 @@
 <div class="row"></div>
 
 <script>
+	window.onload = function() {
+		var inputcol = document.getElementsByTagName("input");
 
-window.onload = function() {
-	var inputcol = document.getElementsByTagName("input");
-	
-	for(i = 0; i<inputcol.length; i++ ){
-		var texto = inputcol[i].value;
-		 inputcol[i].style.width=(texto.length + 1) * 8 + 'px';
-	}
-	
-};
+		for (i = 0; i < inputcol.length; i++) {
+			var texto = inputcol[i].value;
+			inputcol[i].style.width = (texto.length + 1) * 8 + 'px';
+		}
 
+	};
 </script>
 
