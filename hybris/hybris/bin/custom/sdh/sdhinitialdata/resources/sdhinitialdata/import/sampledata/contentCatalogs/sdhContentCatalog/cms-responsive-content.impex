@@ -123,8 +123,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
-; ; AnulacionFacturaLink         ; ANULACION FACTURACION               ; http://www.stateofrosebud.com/about ;;;;;
-; ; ModificacionFacturaLink      ; MODIFICACION FACTURACION            ; http://www.stateofrosebud.com/about ;;;;;
+#->; ; AnulacionFacturaLink         ; ANULACION FACTURACION               ; http://www.stateofrosebud.com/about ;;;;;
+#->; ; ModificacionFacturaLink      ; MODIFICACION FACTURACION            ; http://www.stateofrosebud.com/about ;;;;;
 #->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
@@ -371,7 +371,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
-;TramitesNavigationServiceRequestsNavNodeMenu;;Tramites Service Requests Menu;TramitesNavigationServiceRequestsNavNodeMenu;AnulacionFacturaNavNode, ModificacionFacturaNavNode
+;TramitesNavigationServiceRequestsNavNodeMenu;;Tramites Service Requests Menu;TramitesNavigationServiceRequestsNavNodeMenu
 #->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
@@ -478,8 +478,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
-;AnulacionFacturaNavNode ;;Anulacion Factura Link;AnulacionFacturaNavNode 
-;ModificacionFacturaNavNode ;;Modificacion Factura Link;ModificacionFacturaNavNode 
+#->;AnulacionFacturaNavNode ;;Anulacion Factura Link;AnulacionFacturaNavNode 
+#->;ModificacionFacturaNavNode ;;Modificacion Factura Link;ModificacionFacturaNavNode 
 #->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
@@ -600,8 +600,8 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #->FIN dev-eduardo Agregar menu IMPUESTOS  04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
-;AnulacionFacturaNavNodeEntry;;Anulacion factura Navigation Node Entry;AnulacionFacturaNavNode;AnulacionFacturaLink
-;ModificacionFacturaNavNodeEntry;;Modificacion factura Navigation Node Entry;ModificacionFacturaNavNode;ModificacionFacturaLink
+#->;AnulacionFacturaNavNodeEntry;;Anulacion factura Navigation Node Entry;AnulacionFacturaNavNode;AnulacionFacturaLink
+#->;ModificacionFacturaNavNodeEntry;;Modificacion factura Navigation Node Entry;ModificacionFacturaNavNode;ModificacionFacturaLink
 #->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
