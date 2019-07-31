@@ -1,6 +1,6 @@
 ACC.tramitesSeleccion = {
 
-	_autoload : [ "bindTramitesSelect", "bindTramitesEnviar" ],
+	_autoload : [ "bindTramitesSelect", "bindTramitesEnviar", "bindConsCasoEnviar" ],
 
 	
 	bindTramitesSelect : function() {
@@ -80,6 +80,54 @@ ACC.tramitesSeleccion = {
 			}
 			
 		});
+	},
+	
+	bindConsCasoEnviar : function() {
+		$(document).on("click", ".consCasoEnviar", function(e) {
+			e.preventDefault();
+						
+			var dataActual = {};
+			
+			dataActual.num_caso = $("#num_caso").val();
+			
+			debugger;
+			$.ajax({
+				url : ACC.casoConsultaURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.tramitesSeleccion.resultadoConsultaCaso(dataActual,dataResponse);
+				},
+				error : function() {
+				}
+			});
+			
+		});
+	},
+	
+	resultadoConsultaCaso : function(infoSeleccion, infoCaso) {
+
+		debugger;
+		var doc = document.getElementById('tableInfo');
+		var mostrarTabDocs = false;
+		
+		
+		$("#tableInfo").find("tr:gt(0)").remove();
+		$.each(infoCaso, function (index,value){
+			$('#tableInfo').append("<tr>"+ 
+					'<td><label class="control-label labeltabletd tableident" onclick="showdetalle() value="'+ value.num_caso + '" /></label></td>'+
+					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value="' + value.num_radicado + '" /></td>'+
+					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value="' + value.tramite +'" /></td>'+
+					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="30" value="' + value.estatus +'" /></td>'+
+					 "</tr>");
+			mostrarTabDocs = true;
+		});
+		if(mostrarTabDocs == true){
+			doc.style.display='block';
+		}else{
+			doc.style.display='none';
+		}
+	
 	},
 	
 	validarInfoAntesSubmit : function(infoActual,infoResponse) {
@@ -168,24 +216,7 @@ ACC.tramitesSeleccion = {
 			}
 		}
 		
-		
-		ACC.tramitesSeleccion.fillFieldsFromDataDocs(infoResponse);
-
-		
-				
-//		debugger;
-//		$.ajax({
-//			url : ACC.tramitesDocTramitesURL,
-//			data : infoActual,
-//			type : "GET",
-//			success : function(docTramites) {
-//				ACC.tramitesSeleccion.fillFieldsFromDataDocs(docTramites);
-//			},
-//			error : function() {
-//			}
-//		});		
-		
-		
+		ACC.tramitesSeleccion.fillFieldsFromDataDocs(infoResponse);		
 		
 	},
 	
@@ -195,7 +226,7 @@ ACC.tramitesSeleccion = {
 		var mensaje = "";
 		
 		if(infoResponse.respuesta.num_caso != null){
-			mensaje = infoResponse.respuesta.descripcion + infoResponse.respuesta.num_caso;
+			mensaje = infoResponse.respuesta.descripcion + " " + infoResponse.respuesta.num_caso;
 		}else{
 			mensaje = infoResponse.respuesta.descripcion;
 		}

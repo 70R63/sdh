@@ -8,6 +8,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
+import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
@@ -16,6 +17,7 @@ import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
+import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
@@ -817,6 +819,13 @@ public class SobreTasaGasolinaService
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse"))
 			{
 				wsresponse = wsresponse.replace("\"Uso\"", "\"uso\"");
+			}
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.ConsCasosResponse"))
+			{
+				wsresponse = wsresponse.replace("\"PROCESS_TYPE\":", "\"process_type\":");
+				wsresponse = wsresponse.replace("\"ESTRUCTURA\":", "\"esctructura\":");
+				wsresponse = wsresponse.replace("\"CAMPO\":", "\"campo\":");
+				wsresponse = wsresponse.replace("\"FACTOR\":", "\"factor\":");
 			}
 
 			responseInfo = mapper.readValue(wsresponse, Class.forName(nombreClase));
@@ -1806,6 +1815,39 @@ public class SobreTasaGasolinaService
 	{
 		// XXX Auto-generated method stub
 		return false;
+	}
+
+	/**
+	 * @param consCasosResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorCreacionCaso(final ConsCasosResponse consCasosResponse)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * @param consultaCasosRequest
+	 * @param sdhDetalleGasolinaWS
+	 * @param log
+	 * @return
+	 */
+	public ConsCasosResponse consultCaso(final ConsCasosRequest requestInfo, final SDHDetalleGasolina sdhConsultaWS,
+			final Logger LOG)
+	{
+		ConsCasosResponse responseInfo = new ConsCasosResponse();
+		final String confUrl = "sdh.consCasos.url";
+		final String confUser = "sdh.consCasos.user";
+		final String confPass = "sdh.consCasos.password";
+		final String wsNombre = "crm_consCasos";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.ConsCasosResponse";
+
+		responseInfo = (ConsCasosResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
+				LOG, nombreClase);
+
+		return responseInfo;
 	}
 
 

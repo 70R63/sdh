@@ -97,6 +97,8 @@
 			ACC.casoSeleccionURL= "<c:url value='/contribuyentes/tramites/seleccionNivel' />";			
 
 			ACC.casoCreacionURL= "<c:url value='/contribuyentes/tramites/creacionCaso' />";			
+
+			ACC.casoConsultaURL= "<c:url value='/contribuyentes/tramites/consultaCaso' />";			
 			
 		  	ACC.currentURL = "${currentURL}";
 
