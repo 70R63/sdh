@@ -298,7 +298,7 @@
 			<div class="card-body">
 				<!--  First column of form -->
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label required" for="direccionNotificacion">
 								<spring:theme code="mirit.contactData.notificationAddress" />
@@ -321,9 +321,8 @@
 								value="${miRitForm.direccionNotificacion.STR_SUPPL2 }">
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
+				
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="countryDireccionNotificacion">
 								<spring:theme code="mirit.contactData.country" />
@@ -333,7 +332,7 @@
 						</div>
 
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label "
 								for="deparmentDireccionNotificacion"> <spring:theme
@@ -343,9 +342,8 @@
 							</select>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
+				
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label "
 								for="municipioDireccionNotificacion"> <spring:theme
@@ -355,7 +353,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label "
 								for="postalCodeDireccionNotificacion"> <spring:theme
@@ -379,7 +377,7 @@
 
 				<br> <br>
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group ">
 							<label class="control-label required" for="direccionContacto">
 								<spring:theme code="mirit.contactData.anotherContactAddress" />
@@ -406,10 +404,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-3">
+				
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="countryDireccionContacto">
 								<spring:theme code="mirit.contactData.country" />
@@ -419,7 +415,7 @@
 						</div>
 
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="deparmentDireccionContacto">
 								<spring:theme code="mirit.contactData.department" />
@@ -428,9 +424,8 @@
 							</select>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
+			
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="municipioDireccionContacto">
 								<spring:theme code="mirit.contactData.county" />
@@ -439,7 +434,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group ">
 							<label class="control-label " for="postalCodeDireccionContacto">
 								<spring:theme code="mirit.contactData.postalCode" />
