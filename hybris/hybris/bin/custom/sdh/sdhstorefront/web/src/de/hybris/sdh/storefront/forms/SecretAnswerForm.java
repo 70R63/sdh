@@ -19,6 +19,11 @@ public class SecretAnswerForm
 	private String PLA;
 	private String MAT;
 	private String BAN;
+	private String REL01;
+	private String REL02;
+	private String REL03;
+	private String REL04;
+	private String REL05;
 
 
 	/**
@@ -189,6 +194,91 @@ public class SecretAnswerForm
 	public void setBAN(final String bAN)
 	{
 		BAN = bAN;
+	}
+
+	/**
+	 * @return the rEL01
+	 */
+	public String getREL01()
+	{
+		return REL01;
+	}
+
+	/**
+	 * @param rEL01
+	 *           the rEL01 to set
+	 */
+	public void setREL01(final String rEL01)
+	{
+		REL01 = rEL01;
+	}
+
+	/**
+	 * @return the rEL02
+	 */
+	public String getREL02()
+	{
+		return REL02;
+	}
+
+	/**
+	 * @param rEL02
+	 *           the rEL02 to set
+	 */
+	public void setREL02(final String rEL02)
+	{
+		REL02 = rEL02;
+	}
+
+	/**
+	 * @return the rEL03
+	 */
+	public String getREL03()
+	{
+		return REL03;
+	}
+
+	/**
+	 * @param rEL03
+	 *           the rEL03 to set
+	 */
+	public void setREL03(final String rEL03)
+	{
+		REL03 = rEL03;
+	}
+
+	/**
+	 * @return the rEL04
+	 */
+	public String getREL04()
+	{
+		return REL04;
+	}
+
+	/**
+	 * @param rEL04
+	 *           the rEL04 to set
+	 */
+	public void setREL04(final String rEL04)
+	{
+		REL04 = rEL04;
+	}
+
+	/**
+	 * @return the rEL05
+	 */
+	public String getREL05()
+	{
+		return REL05;
+	}
+
+	/**
+	 * @param rEL05
+	 *           the rEL05 to set
+	 */
+	public void setREL05(final String rEL05)
+	{
+		REL05 = rEL05;
 	}
 
 

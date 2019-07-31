@@ -7,9 +7,11 @@ import de.hybris.sdh.facades.questions.data.OptionsData;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -146,25 +148,36 @@ public class QuestionForRegistrationResponse
 		final Map<String, Collection<OptionsData>> questionsAndOptions = new HashMap<>();
 		final Map<String, List<QuestionResponse>> questionAndOptions = this.getMapQuestions();
 
-		//Map<String, String> optionSelectBox = null;
+		final List keys = new ArrayList(questionAndOptions.keySet());
+		Collections.shuffle(Objects.isNull(keys) ? new ArrayList<String>() : keys); //Shuffling List
+		final List<String> subListKeys = keys.subList(0, 5); //Getting just the first 5 elements
 
-
-
-		for (final Map.Entry<String, List<QuestionResponse>> entry : questionAndOptions.entrySet())
+		for (final String strKey : subListKeys)
 		{
 			final Collection<OptionsData> optionsDataSelect = new ArrayList<>();
-
-			for (final QuestionResponse options : entry.getValue())
+			for (final QuestionResponse options : questionAndOptions.get(strKey))
 			{
 				final OptionsData option = new OptionsData();
 				option.setCode(options.getConsecutivo());
 				option.setName(options.getTextoResp());
-
 				optionsDataSelect.add(option);
 			}
-
-			questionsAndOptions.put(entry.getKey(), optionsDataSelect);
+			questionsAndOptions.put(strKey, optionsDataSelect);
 		}
+
+		/*
+		 * for (final Map.Entry<String, List<QuestionResponse>> entry : questionAndOptions.entrySet()) { final
+		 * Collection<OptionsData> optionsDataSelect = new ArrayList<>();
+		 *
+		 * for (final QuestionResponse options : entry.getValue()) { final OptionsData option = new OptionsData();
+		 * option.setCode(options.getConsecutivo()); option.setName(options.getTextoResp());
+		 *
+		 * optionsDataSelect.add(option); }
+		 *
+		 * questionsAndOptions.put(entry.getKey(), optionsDataSelect); }
+		 */
+
+
 
 		return questionsAndOptions;
 	}
@@ -172,21 +185,21 @@ public class QuestionForRegistrationResponse
 	public String getCorrectAnswer(final String idPreg)
 	{
 		String correctAnswer = "";
-		
+
 		if(this.getMapQuestions() != null) {
 			if(this.getMapQuestions().get(idPreg) != null) {
-			for(QuestionResponse option : this.getMapQuestions().get(idPreg)) {
+			for(final QuestionResponse option : this.getMapQuestions().get(idPreg)) {
 				if(option != null) {
 					//if(option.getIndicador() != null) {
 						if(option.getIndicador().equals("X")) {
 							correctAnswer = option.getConsecutivo();
 						}
 					//}
-				}			
+				}
 			}
 		}
 		}
-		
+
 		return correctAnswer;
 	}
 

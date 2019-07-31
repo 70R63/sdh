@@ -356,6 +356,79 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			}
 		}
 
+		if (form.getIMP() != null)
+		{
+			if (form.getIMP().equals(responseWS.getCorrectAnswer("IMP")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getPLA() != null)
+		{
+			if (form.getPLA().equals(responseWS.getCorrectAnswer("PLA")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getMAT() != null)
+		{
+			if (form.getMAT().equals(responseWS.getCorrectAnswer("MAT")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getBAN() != null)
+		{
+			if (form.getBAN().equals(responseWS.getCorrectAnswer("BAN")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL01() != null)
+		{
+			if (form.getREL01().equals(responseWS.getCorrectAnswer("REL01")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL02() != null)
+		{
+			if (form.getREL02().equals(responseWS.getCorrectAnswer("REL02")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL03() != null)
+		{
+			if (form.getREL03().equals(responseWS.getCorrectAnswer("REL03")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL04() != null)
+		{
+			if (form.getREL04().equals(responseWS.getCorrectAnswer("REL04")))
+			{
+				i++;
+			}
+		}
+
+		if (form.getREL05() != null)
+		{
+			if (form.getREL05().equals(responseWS.getCorrectAnswer("REL05")))
+			{
+				i++;
+			}
+		}
+
+
 		if (i < 3)
 		{
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,msg);
