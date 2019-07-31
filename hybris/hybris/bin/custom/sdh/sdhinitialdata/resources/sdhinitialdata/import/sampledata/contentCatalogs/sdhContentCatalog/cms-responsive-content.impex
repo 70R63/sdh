@@ -2200,27 +2200,6 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 
 #->FIN dev-maria Agregar paginas para terceros consultas 07/06/2019
 
-#->INI dev-maria Agregar paginas agentes autorizados menu
-$contentCatalog=sdhProductCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
-
-INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;agentesAutorizadosMenuPage 		;Agentes Autorizados	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados
-
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='agentesAutorizadosMenuPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
-								;						;SideContent-agentesAutorizadosMenuPage 	;SideContent			;																	;SideContent-agentesAutorizadosMenuPage				;;;
-								;						;BodyContent-agentesAutorizadosMenuPage 	;BodyContent			;																	;BodyContent-agentesAutorizadosMenuPage				;;;
-
-INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-agentesAutorizadosMenuPage 	;Side Content Slot for Agentes Autorizados	;true	;								;;;
-							;							;BodyContent-agentesAutorizadosMenuPage	;Body Content Slot for Agentes Autorizados	;true	;agentesAutorizadosMenuPageComponent		;;;
-
-INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;agentesAutorizadosMenuPageComponent	;agentesAutorizadosMenuPage Component	;/WEB-INF/views/responsive/pages/layout/agentesAutorizadosMenuPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;agentesAutorizadosMenuPageComponent	
-
-#->FIN dev-maria Agregar paginas para agentes autorizados menu
-
 #->INI dev-maria Agregar paginas agentes autorizados
 $contentCatalog=sdhProductCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 

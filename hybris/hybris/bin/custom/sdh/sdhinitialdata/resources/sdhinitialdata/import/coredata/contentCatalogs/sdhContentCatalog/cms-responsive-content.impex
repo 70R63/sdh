@@ -1708,7 +1708,7 @@ INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]	
 
 #INI Reportantes  27/02/2019
 
-$contentCatalog=sdhProductCatalog
+$contentCatalog=sdhContentCatalog
 #$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
 
@@ -1729,6 +1729,45 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;reportantesPageComponent	;reportantesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesPageComponent	
-									
-									
+				 					;							;reportantesPageComponent	;reportantesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesPageComponent
+
+
+#new agentesAutorizadosMenuPageTemplate
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+                          ;;agentesAutorizadosMenuPageTemplate;Agentes Autorizados Menu Template;layout/agentesAutorizadosMenuPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='agentesAutorizadosMenuPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+                             ;SiteLogo;;;logo
+                             ;HeaderLinks;;;headerlinks
+                             ;SearchBox;;;searchbox
+                             ;Section1;;;wide
+                             ;Section2A;;;wide
+                             ;Section2B;;;narrow
+                             ;Section2C;;;narrow
+                             ;Section3;;;wide
+                             ;Section4;;;narrow
+                             ;Section5;;;wide
+                             ;Footer;;;footer
+                             ;TopHeaderSlot;;;wide
+                             ;BottomHeaderSlot;;;wide
+                             ;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='agentesAutorizadosMenuPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+                                    ;;SiteLogo-agentesAutorizadosMenuPageTemplate;SiteLogo;;SiteLogoSlot;true
+                                    ;;HomepageLink-agentesAutorizadosMenuPageTemplate;HomepageNavLink;;HomepageNavLinkSlot;true
+                                    ;;Footer-agentesAutorizadosMenuPageTemplate;Footer;;FooterSlot;true
+                                    ;;HeaderLinks-agentesAutorizadosMenuPageTemplate;HeaderLinks;;HeaderLinksSlot;true
+                                    ;;SearchBox-agentesAutorizadosMenuPageTemplate;SearchBox;;SearchBoxSlot;true
+                                    ;;TopHeaderSlot-agentesAutorizadosMenuPageTemplate;TopHeaderSlot;;TopHeaderSlot;true
+                                    ;;BottomHeaderSlot-agentesAutorizadosMenuPageTemplate;BottomHeaderSlot;;BottomHeaderSlot;true
+                                    ;;PlaceholderContentSlot-agentesAutorizadosMenuPageTemplate;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+                         ;;agentesAutorizadosMenuPage;Agentes Autorizados Menu Page;agentesAutorizadosMenuPageTemplate;Agentes Autorizados Menu Page
+
+
+#->FIN dev-maria Agregar paginas para agentes autorizados menu

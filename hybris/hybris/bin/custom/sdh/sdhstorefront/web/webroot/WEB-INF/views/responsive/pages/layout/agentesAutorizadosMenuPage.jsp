@@ -1,10 +1,15 @@
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="template" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/template"%>
-<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
-<%@ taglib prefix="nav" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+	<%@ page trimDirectiveWhitespaces="true"%>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+		<%@ taglib prefix="template" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/template"%>
+		<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+		<%@ taglib prefix="nav" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
+		<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+
+		<spring:htmlEscape defaultHtmlEscape="true" />
+
+
+		<template:page pageTitle="${pageTitle}">
 <div class="container">
 	<div class="row ">
 			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
@@ -36,3 +41,4 @@
 		</div>	
 	</div>
 </div>
+	</template:page>
