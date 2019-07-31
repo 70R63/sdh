@@ -140,7 +140,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.numtam" /></label><input id=""
+							code="tramites.seguimiento.detalle.numtam" /></label><input id="det_num_caso"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -158,7 +158,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.numrad" /></label> <input id=""
+							code="tramites.seguimiento.detalle.numrad" /></label> <input id="det_num_radicado"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -176,7 +176,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.estado" /></label> <input id=""
+							code="tramites.seguimiento.detalle.estado" /></label> <input id="det_estatus"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -184,7 +184,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.categoria" /></label><input id=""
+							code="tramites.seguimiento.detalle.categoria" /></label><input id="det_tramite"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
