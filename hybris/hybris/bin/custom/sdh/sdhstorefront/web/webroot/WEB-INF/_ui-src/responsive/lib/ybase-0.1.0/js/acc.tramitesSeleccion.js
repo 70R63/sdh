@@ -259,10 +259,15 @@ ACC.tramitesSeleccion = {
 		
 		if(infoResponse.respuesta.num_caso != null){
 			mensaje = infoResponse.respuesta.descripcion + " " + infoResponse.respuesta.num_caso;
+			var doc = document.getElementById('documentos');
+			doc.style.display='none';
+			$("#mensaje").val("");	
+			ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
+			$("#selectNivel0").val("00");	
 		}else{
 			mensaje = infoResponse.respuesta.descripcion;
 		}
-		alert(mensaje);
+		alert(mensaje);		
 		
 		
 	},

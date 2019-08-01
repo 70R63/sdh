@@ -117,7 +117,8 @@
 		</div>
 		<div class="col-md-1">
 			<button style="margin-top: 3px;" id=""
-				class="btn btn-secondary btn-lg" type="button">
+				class="btn btn-secondary btn-lg" type="button" 
+				onclick="btnCancelar()">
 				<spring:theme code="tramites.crear.inicial.cancelar" />
 			</button>
 		</div>
@@ -133,6 +134,10 @@ function tabdoc(){
 function tabdococul(){
 	var doc=document.getElementById('documentos');
 	doc.style.display='none';
+}
+
+function btnCancelar(){
+	window.location.href = '<c:url value="/contibuyentes/tramites" />';
 }
 </script>
 
