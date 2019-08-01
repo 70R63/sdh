@@ -311,9 +311,8 @@ public class PSEPaymentController extends AbstractPageController
 			final PSEPaymentForm psePaymentFormResp, @ModelAttribute("estatus")
 			final String estatus) throws CMSItemNotFoundException
 	{
-
-
-		return null;
+		LOG.info("Credibanco Ticke Id: " + ticketId);
+		return "redirect:/impuestos/pagoEnLinea/pseResponse";
 	}
 
 	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
@@ -491,6 +490,7 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			LOG.info("--------- Calling Credibanco/Bank Web Service ---------");
 			final InititalizeTransactionResponse response = this.doCredibancoPayment(psePaymentForm);
+			LOG.info(response);
 			if (Objects.nonNull(response))
 			{
 				final String returnCode = response.getReturnCode();
@@ -575,7 +575,7 @@ public class PSEPaymentController extends AbstractPageController
 				psePaymentForm.getNumeroDeReferencia(),
 				psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago(),
 				psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago() + "-" + psePaymentForm.getImpuesto() + "-" + psePaymentForm.getTipoDeIdentificacion(),
-				CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE.get(psePaymentForm.getTipoDeIdentificacion()), //persona natural
+				CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE.get(psePaymentForm.getTipoDeIdentificacion()),
 				configurationService.getConfiguration().getString("credibanco.response.url").concat("?ticketId=").concat(psePaymentForm.getNumeroDeReferencia()),
 				psePaymentForm.getValorAPagar(),
 				"0", //Tax
