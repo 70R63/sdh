@@ -48,8 +48,8 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.inicial.numcaso" /></label><input id=""
-						name="" class="newalto form-control" type="text" value=""
+							code="tramites.seguimiento.inicial.numcaso" /></label><input id="num_caso"
+						name="" class="newalto form-control" type="text"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 		<div class="row mt-3">
 			<div class="col-md-1">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button" onclick="showtable()">
+					class="btn btn-primary btn-lg !important consCasoEnviar" type="button" >
 					<spring:theme code="tramites.seguimiento.inicial.buscar" />
 				</button>
 			</div>
@@ -100,10 +100,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="row" id="table" style="display: none">
-		<div class="col-md-6">
+	
+	
+	
+	<div class="row" >
+		<div class="col-md-12">
 			<div class="table-responsive">
-				<table class="table table-bordered">
+				<table id="tableInfo" style="display: none" class="table table-bordered">
 					<thead>
 						<tr>
 							<td><label class="control-label labeltabletd tableident"><spring:theme
@@ -117,16 +120,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><label class="control-label labeltabletd tableident"
-								onclick="showdetalle()"><spring:theme code="Ejemplo" /></label></td>
-							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="" /></td>
-							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="" /></td>
-							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="" /></td>
-						</tr>
+<!-- 						<tr> -->
+<!-- 							<td><label class="control-label labeltabletd tableident" -->
+<%-- 								onclick="showdetalle()"><spring:theme code="Ejemplo" /></label></td> --%>
+<!-- 							<td><input class="inputtextnew tablenumiden" -->
+<!-- 								disabled="disabled" type="text" size="30" value="" /></td> -->
+<!-- 							<td><input class="inputtextnew tablenumiden" -->
+<!-- 								disabled="disabled" type="text" size="30" value="" /></td> -->
+<!-- 							<td><input class="inputtextnew tablenumiden" -->
+<!-- 								disabled="disabled" type="text" size="30" value="" /></td> -->
+<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
@@ -137,7 +140,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.numtam" /></label><input id=""
+							code="tramites.seguimiento.detalle.numtam" /></label><input id="det_num_caso"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -155,7 +158,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.numrad" /></label> <input id=""
+							code="tramites.seguimiento.detalle.numrad" /></label> <input id="det_num_radicado"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -173,7 +176,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.estado" /></label> <input id=""
+							code="tramites.seguimiento.detalle.estado" /></label> <input id="det_estatus"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -181,7 +184,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.categoria" /></label><input id=""
+							code="tramites.seguimiento.detalle.categoria" /></label><input id="det_tramite"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -240,7 +243,7 @@
 
 <script>
 	function showtable() {
-		var table = document.getElementById('table');
+		var table = document.getElementById('tableInfo');
 		table.style.display = 'block';
 	}
 

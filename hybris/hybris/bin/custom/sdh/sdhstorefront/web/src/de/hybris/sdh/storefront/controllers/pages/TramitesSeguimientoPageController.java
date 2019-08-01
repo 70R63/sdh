@@ -7,9 +7,24 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
+import de.hybris.sdh.core.pojos.requests.TramitesConsultaCasoInfo;
+import de.hybris.sdh.core.pojos.responses.ConsCasosInfo;
+import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
+import de.hybris.sdh.core.pojos.responses.ConsCasosResultadoResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -17,8 +32,10 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -49,6 +66,16 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+	@Resource(name = "sdhDetalleGasolina")
+	SDHDetalleGasolina sdhDetalleGasolinaWS;
+
+	@Resource(name = "userService")
+	UserService userService;
+
+
 	@RequestMapping(value = "/contibuyentes/tramites/seguimiento", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String tramitesseguimiento(final Model model) throws CMSItemNotFoundException
@@ -69,12 +96,91 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 	@RequestMapping(value = "/contibuyentes/tramites/seguimiento", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String tramitesseguimientopost(final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes)
-			throws CMSItemNotFoundException
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("------------------Entro al POST de TRAMITES seguimiento------------------------");
 
 		return REDIRECT_TO_TRAMITES_SEGUIMIENTO_PAGE;
+	}
+
+	@RequestMapping(value = "/contribuyentes/tramites/consultaCaso", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ConsCasosInfo> consultaCasoGET(@ModelAttribute("tramitesConsultaCasoInfo")
+	final TramitesConsultaCasoInfo tramitesConsultaCasoInfo, final Model model, final RedirectAttributes redirectModel)
+			throws CMSItemNotFoundException
+	{
+
+		System.out.println("------------------En GET consulta caso------------------------");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		List<ConsCasosInfo> infoVista = new ArrayList<ConsCasosInfo>();
+		ConsCasosInfo infoConsulCasos = null;
+		final ConsCasosRequest consultaCasosRequest = new ConsCasosRequest();
+		ConsCasosResponse consCasosResponse = new ConsCasosResponse();
+		String num_caso = "";
+		String linea = "";
+		final Map<String, ConsCasosInfo> mapResultado = new HashMap<String, ConsCasosInfo>();
+
+
+		if (tramitesConsultaCasoInfo.getNum_caso() != null && !tramitesConsultaCasoInfo.getNum_caso().isEmpty())
+		{
+			num_caso = tramitesConsultaCasoInfo.getNum_caso();
+			linea = "0";
+
+			consultaCasosRequest.setNUM_CASO(num_caso);
+			consultaCasosRequest.setLINEA(linea);
+
+
+			System.out.println("Request para crm/consCasos: " + consultaCasosRequest);
+			consCasosResponse = gasolinaService.consultCaso(consultaCasosRequest, sdhDetalleGasolinaWS, LOG);
+			System.out.println("Response de crm/consCasos: " + consCasosResponse);
+			if (gasolinaService.ocurrioErrorCreacionCaso(consCasosResponse) != true)
+			{
+				if (consCasosResponse.getResultado() != null)
+				{
+					if (consCasosResponse.getResultado().size() > 0)
+					{
+						for (final ConsCasosResultadoResponse resultadoActual : consCasosResponse.getResultado())
+						{
+							infoConsulCasos = mapResultado.get(resultadoActual.getProcess_type());
+							if (infoConsulCasos == null)
+							{
+								infoConsulCasos = new ConsCasosInfo();
+							}
+							else
+							{
+								mapResultado.remove(resultadoActual.getProcess_type());
+							}
+							if (resultadoActual.getCampo().equals("TRÁMITE"))
+							{
+								infoConsulCasos.setTramite(resultadoActual.getFactor());
+							}
+							if (resultadoActual.getCampo().equals("NÚMERO DE CASO"))
+							{
+								infoConsulCasos.setNum_caso(resultadoActual.getFactor());
+							}
+							if (resultadoActual.getCampo().equals("NÚMERO DE RADICADO"))
+							{
+								infoConsulCasos.setNum_radicado(resultadoActual.getFactor());
+							}
+							if (resultadoActual.getCampo().equals("ESTATUS"))
+							{
+								infoConsulCasos.setEstatus(resultadoActual.getFactor());
+							}
+							mapResultado.put(resultadoActual.getProcess_type(), infoConsulCasos);
+						}
+
+						infoVista = new ArrayList(mapResultado.values());
+					}
+				}
+			}
+			else
+			{
+			}
+		}
+
+
+		return infoVista;
 	}
 
 }

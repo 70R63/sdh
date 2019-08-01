@@ -29,9 +29,9 @@
 	</c:if>	
 	
 		<formElement:formInputBox idKey="j_username" labelKey="login.email"
-			path="j_username" mandatory="true" inputCSS="form-control redtam tamnew"/>
+			path="j_username" mandatory="true" inputCSS="tamnew form-control redtam tamnew"/>
 		<formElement:formPasswordBox idKey="j_password"
-			labelKey="login.password" path="j_password" inputCSS="form-control redtam tamnew"
+			labelKey="login.password" path="j_password" inputCSS="tamnew form-control redtam tamnew"
 			mandatory="true" />
 	
 			<div class="forgotten-password" style="margin-bottom: 1px; margin-top: 0px;">

@@ -167,11 +167,6 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;SobreTasaGasolinaLink;"Sobretasa a la gasolina";"Haga clic aquí para acceder a la opción de menú Sobretasa a la gasolina"
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
-#->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
-;;AnulacionFacturaLink;"Anulación de factura";"Haga clic aquí para acceder a la opción de menú Anulación factura"
-;;ModificacionFacturaLink;"Modificación de factura";"Haga clic aquí para acceder a la opción de menú Modificación factura"
-#->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
-
 #->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
 ;;DescargaFacturaLink;"Descarga de factura";"Haga clic aquí para acceder a la opción de menú Descarga de factura"
 ;;ReexpedicionFacturaLink;"Reexpedición de factura";"Haga clic aquí para acceder a la opción de menú Reexpedición de factura"

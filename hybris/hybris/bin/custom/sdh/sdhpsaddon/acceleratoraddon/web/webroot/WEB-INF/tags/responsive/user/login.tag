@@ -27,8 +27,8 @@
 			</span>
 		</c:if>
 
-		<formElement:formInputBox idKey="j_username" placeholder=" " labelKey="login.email" path="j_username" mandatory="true" inputCSS="form-control redtam tamnew"/>
-		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="form-control redtam tamnew" mandatory="true"/>
+		<formElement:formInputBox idKey="j_username" placeholder=" " labelKey="login.email" path="j_username" mandatory="true" inputCSS="tamnew form-control redtam tamnew"/>
+		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="tamnew form-control redtam tamnew" mandatory="true"/>
 		<input type="hidden" id="registeredCheckout" name="registeredCheckout" value="${registeredCheckout}" />
 
 		<c:choose>

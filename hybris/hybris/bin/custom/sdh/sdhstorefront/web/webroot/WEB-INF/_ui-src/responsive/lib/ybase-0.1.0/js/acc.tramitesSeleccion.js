@@ -1,6 +1,6 @@
 ACC.tramitesSeleccion = {
 
-	_autoload : [ "bindTramitesSelect", "bindTramitesEnviar" ],
+	_autoload : [ "bindTramitesSelect", "bindTramitesEnviar", "bindConsCasoEnviar", "bindSelectCaso" ],
 
 	
 	bindTramitesSelect : function() {
@@ -80,6 +80,86 @@ ACC.tramitesSeleccion = {
 			}
 			
 		});
+	},
+	
+	bindConsCasoEnviar : function() {
+		$(document).on("click", ".consCasoEnviar", function(e) {
+			e.preventDefault();
+
+			ACC.tramitesSeleccion.clearSeleccionCaso();
+
+						
+			var dataActual = {};
+			
+			dataActual.num_caso = $("#num_caso").val();
+			
+			debugger;
+			$.ajax({
+				url : ACC.casoConsultaURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.tramitesSeleccion.resultadoConsultaCaso(dataActual,dataResponse);
+				},
+				error : function() {
+				}
+			});
+			
+		});
+	},
+	
+	resultadoConsultaCaso : function(infoSeleccion, infoCaso) {
+
+		debugger;
+		ACC.tramitesSeleccion.clearSeleccionCaso();
+		var mostrarTabDocs = false;
+		
+		
+		$("#tableInfo").find("tr:gt(0)").remove();
+		$.each(infoCaso, function (index,value){
+			$('#tableInfo').append("<tr>"+ 
+					'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'"data-estatus=" '+ value.estatus +'"     >'+ value.num_caso +'</label>'+
+					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.num_radicado + '" /></td>'+
+					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="' + value.tramite +'" /></td>'+
+					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.estatus +'" /></td>'+
+					 "</tr>");
+			mostrarTabDocs = true;
+		});
+		if(mostrarTabDocs == true){
+			var doc = document.getElementById('tableInfo');
+			doc.style.display='block';
+		}
+	
+	},
+	
+	bindSelectCaso : function() {
+		$(document).on("click", ".selectCaso", function(e) {
+			
+		var valorCampo; 
+		
+		valorCampo = $.trim($(this).attr("data-num_caso"));
+		$("#det_num_caso").val(valorCampo);
+		valorCampo = $.trim($(this).attr("data-num_radicado"));
+		$("#det_num_radicado").val(valorCampo);
+		valorCampo = $.trim($(this).attr("data-tramite"));
+		$("#det_tramite").val(valorCampo);		
+		valorCampo = $.trim($(this).attr("data-estatus"));
+		$("#det_estatus").val(valorCampo);
+
+		var deta = document.getElementById('detalle');
+ 		deta.style.display = 'block';
+ 	       
+		});
+	},
+	
+	clearSeleccionCaso :function() {
+
+		var doc = document.getElementById('tableInfo');
+		doc.style.display='none';
+
+		var deta = document.getElementById('detalle');
+		deta.style.display = 'none';
+		
 	},
 	
 	validarInfoAntesSubmit : function(infoActual,infoResponse) {
@@ -168,24 +248,7 @@ ACC.tramitesSeleccion = {
 			}
 		}
 		
-		
-		ACC.tramitesSeleccion.fillFieldsFromDataDocs(infoResponse);
-
-		
-				
-//		debugger;
-//		$.ajax({
-//			url : ACC.tramitesDocTramitesURL,
-//			data : infoActual,
-//			type : "GET",
-//			success : function(docTramites) {
-//				ACC.tramitesSeleccion.fillFieldsFromDataDocs(docTramites);
-//			},
-//			error : function() {
-//			}
-//		});		
-		
-		
+		ACC.tramitesSeleccion.fillFieldsFromDataDocs(infoResponse);		
 		
 	},
 	
@@ -195,7 +258,7 @@ ACC.tramitesSeleccion = {
 		var mensaje = "";
 		
 		if(infoResponse.respuesta.num_caso != null){
-			mensaje = infoResponse.respuesta.descripcion + infoResponse.respuesta.num_caso;
+			mensaje = infoResponse.respuesta.descripcion + " " + infoResponse.respuesta.num_caso;
 		}else{
 			mensaje = infoResponse.respuesta.descripcion;
 		}

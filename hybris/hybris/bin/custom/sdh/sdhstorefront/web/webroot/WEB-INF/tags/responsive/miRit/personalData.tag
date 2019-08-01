@@ -24,12 +24,13 @@
 		<div id="collapse0" class="collapse" aria-ladelledby="head0"
 			data-parent="#acordeon">
 			<div class="card-body">
-				<div class="row">
-					<c:url value="/contribuyentes/mirit/updatePersonalData"
-						var="formAction" />
-					<form:form method="post" commandName="miRitForm"
-						action="${formAction}">
-						<!--  First column of form -->
+
+				<c:url value="/contribuyentes/mirit/updatePersonalData"
+					var="formAction" />
+				<form:form method="post" commandName="miRitForm"
+					action="${formAction}">
+					<!--  First column of form -->
+					<div class="row">
 						<div class="col-md-3">
 							<div class="form-group ">
 								<label class="control-label required" for="tipoDoc"> <spring:theme
@@ -46,45 +47,7 @@
 										tipo de documento</span>
 								</div>
 							</div>
-							<div class="form-group ">
-								<label class="control-label required" for="primNom"> <spring:theme
-										code="mirit.personalData.firstName" />
-								</label> <input id="primNom" name="primNom"
-									class="newalto form-control" aria-required="true"
-									type="text" data-original="${miRitForm.primNom }"
-									value="${miRitForm.primNom }" maxlength="240" onkeyup="ajustar(this)">
-								<div class="help-block">
-									<span id="lastName.errors" class="hidden">Seleccione un
-										tipo de documento</span>
-								</div>
-							</div>
-							<div class="form-group ">
-								<label class="control-label  required" for="primApe"> <spring:theme
-										code="mirit.personalData.firstLastName" />
-								</label> <input id="primApe" name="primApe"
-									class="newalto form-control" aria-required="true"
-									type="text" data-original="${miRitForm.primApe }"
-									value="${miRitForm.primApe }" maxlength="240" onkeyup="ajustar(this)">
-								<div class="help-block">
-									<span id="lastName.errors" class="hidden">Seleccione un
-										tipo de documento</span>
-								</div>
-							</div>
-							<div class="form-group ">
-								<label class="control-label required" for="fchExp"> <spring:theme
-										code="mirit.personalData.documnetIssueDate" />
-								</label> <input id="fchExp" name="fchExp"
-									class="newseis newalto form-control" aria-required="true"
-									type="text" value="${miRitForm.fchExp }" maxlength="240" placeholder="dd/mm/aaaa">
-								<div class="help-block">
-									<span id="lastName.errors" class="hidden">Seleccione un
-										tipo de documento</span>
-								</div>
-							</div>
-
 						</div>
-
-						<!--  Second column of form -->
 						<div class="col-md-3">
 							<div class="form-group ">
 								<label class="control-label required" for="numDoc"> <spring:theme
@@ -98,30 +61,86 @@
 										tipo de documento</span>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group ">
+								<label class="control-label required" for="primNom"> <spring:theme
+										code="mirit.personalData.firstName" />
+								</label> <input id="primNom" name="primNom" class="newalto form-control"
+									aria-required="true" type="text"
+									data-original="${miRitForm.primNom }"
+									value="${miRitForm.primNom }" maxlength="240"
+									onkeyup="ajustar(this)">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un
+										tipo de documento</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
 							<div class="form-group ">
 								<label class="control-label required" for="segNom"> <spring:theme
 										code="mirit.personalData.secondFirstName" />
-								</label> <input id="segNom" name="segNom"
-									class="newalto form-control" aria-required="true"
-									type="text" data-original="${miRitForm.segNom }"
-									value="${miRitForm.segNom }" maxlength="240" onkeyup="ajustar(this)">
+								</label> <input id="segNom" name="segNom" class="newalto form-control"
+									aria-required="true" type="text"
+									data-original="${miRitForm.segNom }"
+									value="${miRitForm.segNom }" maxlength="240"
+									onkeyup="ajustar(this)">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
 								</div>
 							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group ">
+								<label class="control-label  required" for="primApe"> <spring:theme
+										code="mirit.personalData.firstLastName" />
+								</label> <input id="primApe" name="primApe" class="newalto form-control"
+									aria-required="true" type="text"
+									data-original="${miRitForm.primApe }"
+									value="${miRitForm.primApe }" maxlength="240"
+									onkeyup="ajustar(this)">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un
+										tipo de documento</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
 							<div class="form-group ">
 								<label class="control-label required" for="segApe"> <spring:theme
 										code="mirit.personalData.secondLasName" />
-								</label> <input id="segApe" name="segApe"
-									class="newalto form-control" aria-required="true"
-									type="text" data-original="${miRitForm.segApe }"
-									value="${miRitForm.segApe }" maxlength="240" onkeyup="ajustar(this)">
+								</label> <input id="segApe" name="segApe" class="newalto form-control"
+									aria-required="true" type="text"
+									data-original="${miRitForm.segApe }"
+									value="${miRitForm.segApe }" maxlength="240"
+									onkeyup="ajustar(this)">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group ">
+								<label class="control-label required" for="fchExp"> <spring:theme
+										code="mirit.personalData.documnetIssueDate" />
+								</label> <input id="fchExp" name="fchExp"
+									class="newalto form-control" aria-required="true"
+									type="text" value="${miRitForm.fchExp }" maxlength="240"
+									placeholder="dd/mm/aaaa">
+								<div class="help-block">
+									<span id="lastName.errors" class="hidden">Seleccione un
+										tipo de documento</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
 							<div class="form-group ">
 								<label class="control-label " for="address.surname"> </label>
 								<button
@@ -137,8 +156,8 @@
 
 							</div>
 						</div>
-					</form:form>
-				</div>
+					</div>
+				</form:form>
 			</div>
 		</div>
 	</div>
