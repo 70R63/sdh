@@ -12,6 +12,8 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
+import de.hybris.sdh.core.credibanco.ResultTransactionRequest;
+import de.hybris.sdh.core.credibanco.ResultTransactionResponse;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseBankListCatalogModel;
@@ -312,6 +314,8 @@ public class PSEPaymentController extends AbstractPageController
 			final String estatus) throws CMSItemNotFoundException
 	{
 		LOG.info("Credibanco Ticke Id: " + ticketId);
+		final ResultTransactionResponse response = sdhCredibancoJwt.resultTransaction(new ResultTransactionRequest(ticketId));
+		LOG.info(response);
 		return "redirect:/impuestos/pagoEnLinea/pseResponse";
 	}
 
