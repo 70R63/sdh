@@ -94,7 +94,7 @@
 						</button>
 					</div>
 					<div class="col-md-2">
-						<button class="btn btn-primary" type="button" id="">
+						<button class="btn btn-primary" type="button" id="" onclick="detalleBP()">
 							<spring:theme code="autorizado.asignarse.buscar.buscar" />
 						</button>
 					</div>

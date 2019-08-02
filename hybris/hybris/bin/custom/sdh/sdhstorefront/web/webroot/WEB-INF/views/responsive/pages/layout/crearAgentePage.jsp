@@ -8,9 +8,18 @@
 <%@ taglib prefix="crea" tagdir="/WEB-INF/tags/responsive/crearAgente"%>
 
 <crea:buscarContrib />
-<crea:selecCalidad />
-<crea:selecImpuesto />
-<crea:selecTramiteGeneral />
-<crea:adjDocumentos />
+<div id="IdDetalleCrear" style="display: none">
+	<crea:selecCalidad />
+	<crea:selecImpuesto />
+	<crea:selecTramiteGeneral />
+	<crea:adjDocumentos />
+</div>
 
+<script type="text/javascript">
+function detalleBP(){
+	debugger;
+	var det = document.getElementById('IdDetalleCrear');
+	det.style.display='block';
+}
+</script>
 

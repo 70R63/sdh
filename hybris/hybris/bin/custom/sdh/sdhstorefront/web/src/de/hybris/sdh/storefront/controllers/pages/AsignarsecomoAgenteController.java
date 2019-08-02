@@ -35,7 +35,7 @@ public class AsignarsecomoAgenteController extends AbstractPageController
 	private static final String TEXT_ACCOUNT_PROFILE = "Asiganarse como Agente Autorizado";
 
 	// CMS Pages
-	private static final String ASIGNARSE_AGENTE_CMS_PAGE = "asignarsecomoAgentePage";
+	private static final String ASIGNARSE_AGENTE_CMS_PAGE = "asignarseAgentePage";
 
 	private static final String REDIRECT_TO_ASIGNARSE_AGENTE_PAGE = REDIRECT_PREFIX + "/contribuyentes/asignarsecomoagente";
 

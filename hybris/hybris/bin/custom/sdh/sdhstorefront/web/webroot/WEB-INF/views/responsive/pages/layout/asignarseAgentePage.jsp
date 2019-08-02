@@ -9,8 +9,19 @@
 	tagdir="/WEB-INF/tags/responsive/asignarsecomoAgente"%>
 
 <asigna:buscarContrib />
-<asigna:selecCalidad />
-<asigna:selecImpuesto />
-<asigna:selecTramiteGeneral />
-<asigna:adjDocumentos />
-<asigna:resumen />
+<div id="IdDetalleCrear" style="display: none">
+	<asigna:selecCalidad />
+	<asigna:selecImpuesto />
+	<asigna:selecTramiteGeneral />
+	<asigna:adjDocumentos />
+	<asigna:resumen />
+</div>
+
+
+<script type="text/javascript">
+	function detalleBP() {
+		debugger;
+		var det = document.getElementById('IdDetalleCrear');
+		det.style.display = 'block';
+	}
+</script>

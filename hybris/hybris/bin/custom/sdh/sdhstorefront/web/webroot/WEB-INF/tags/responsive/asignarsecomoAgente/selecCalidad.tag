@@ -6,6 +6,46 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<div class="container">
+	<div class="row" style="margin-top: 10px !important">
+		<div class="col-md-2">
+			<table class="table">
+				<thead>
+					<tr>
+						<th><label class="control-label labeltabletd" for=""><spring:theme
+									code="autorizado.asignarse.table.tipdoc" /></label></th>
+						<th><label class="control-label labeltabletd" for=""><spring:theme
+									code="autorizado.asignarse.table.numdoc" /></label></th>
+						<th><label class="control-label labeltabletd" for="">
+								<spring:theme code="autorizado.asignarse.table.nombre" />
+						</label></th>
+						<th><label class="control-label labeltabletd" for="">
+								<spring:theme code="autorizado.asignarse.table.tipperson" />
+						</label></th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td><input class="inputtextnew tablefechas" maxlength="30"
+							size="30" disabled="disabled" type="text"
+							value="<c:out value=""></c:out>" /></td>
+						<td><input class="inputtextnew tablefechas" maxlength="30"
+							size="30" disabled="disabled" type="text"
+							value="<c:out value=""></c:out>" /></td>
+						<td><input class="inputtextnew tablefechas" maxlength="30"
+							size="30" disabled="disabled" type="text"
+							value="<c:out value=""></c:out>" /></td>
+						<td><input class="inputtextnew tablefechas" maxlength="30"
+							size="30" disabled="disabled" type="text"
+							value="<c:out value=""></c:out>" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 <div id="acordeon" class="container">
 	<div class="card cardmirit ">
 		<div class="card-header" id="head1">
@@ -35,7 +75,8 @@
 				<div class="row">
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -46,7 +87,8 @@
 					</div>
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -57,7 +99,8 @@
 					</div>
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -68,7 +111,8 @@
 					</div>
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -81,7 +125,8 @@
 				<div class="row">
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -93,7 +138,8 @@
 
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -104,7 +150,8 @@
 					</div>
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -118,7 +165,8 @@
 				<div class="row">
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -129,7 +177,8 @@
 					</div>
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -140,7 +189,8 @@
 					</div>
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent" role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -154,7 +204,8 @@
 				<div class="row">
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent"role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -165,7 +216,8 @@
 					</div>
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent"role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -176,7 +228,8 @@
 					</div>
 					<div class="col-md-2 ">
 						<div class="fomchk  form-group">
-							<div class="checkbox chkagent"role="checkbox" aria-checked="false">
+							<div class="checkbox chkagent" role="checkbox"
+								aria-checked="false">
 								<label tabindex="0" class="chkagent control-label  "> <input
 									id="" name="" type="checkbox" value="true"> <input
 									type="hidden" name="_consentForm.consentGiven" value="on">
@@ -189,10 +242,16 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="alert alert-warning">
-							<spring:theme code="autorizado.asignarse.calidad.nota3" /><br>
-							<spring:theme code="autorizado.asignarse.calidad.nota4" /><br>
-							<spring:theme code="autorizado.asignarse.calidad.nota5" /><br><br>
-							<spring:theme code="autorizado.asignarse.calidad.nota6" /><br><br>
+							<spring:theme code="autorizado.asignarse.calidad.nota3" />
+							<br>
+							<spring:theme code="autorizado.asignarse.calidad.nota4" />
+							<br>
+							<spring:theme code="autorizado.asignarse.calidad.nota5" />
+							<br>
+							<br>
+							<spring:theme code="autorizado.asignarse.calidad.nota6" />
+							<br>
+							<br>
 							<spring:theme code="autorizado.asignarse.calidad.nota7" />
 						</div>
 					</div>
