@@ -31,6 +31,7 @@ import de.hybris.sdh.storefront.forms.SecretAnswerForm;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -286,7 +287,9 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		model.addAttribute("currentSection", "questionsSection");
 		model.addAttribute("SecretAnswerForm", new SecretAnswerForm());
 
-		return getDefaultRegistrationPage(model);
+		return Objects.nonNull(response.getQuestionAndOptions())
+				? response.getQuestionAndOptions().size() < 3 ? "redirect:/login" : getDefaultRegistrationPage(model)
+				: getDefaultRegistrationPage(model);
 	}
 
 	@RequestMapping(value = "/validateAnswers", method = RequestMethod.POST)

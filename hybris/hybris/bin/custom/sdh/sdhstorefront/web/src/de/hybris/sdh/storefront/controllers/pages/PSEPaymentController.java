@@ -586,7 +586,7 @@ public class PSEPaymentController extends AbstractPageController
 				"NonRef#1",
 				"NonRef#2",
 				"NonRef#3",
-				null); //bankCode
+				psePaymentForm.getBanco()); //bankCode
 
 		return sdhCredibancoJwt.inititalizeTransaction(inititalizeTransactionRequest);
 	}
