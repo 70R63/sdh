@@ -150,7 +150,7 @@ public class QuestionForRegistrationResponse
 
 		final List keys = new ArrayList(questionAndOptions.keySet());
 		Collections.shuffle(Objects.isNull(keys) ? new ArrayList<String>() : keys); //Shuffling List
-		final List<String> subListKeys = keys.subList(0, 5); //Getting just the first 5 elements
+		final List<String> subListKeys = keys.subList(0, keys.size() < 5 ? keys.size() : 5); //Getting just the first 5 elements
 
 		for (final String strKey : subListKeys)
 		{
@@ -164,20 +164,6 @@ public class QuestionForRegistrationResponse
 			}
 			questionsAndOptions.put(strKey, optionsDataSelect);
 		}
-
-		/*
-		 * for (final Map.Entry<String, List<QuestionResponse>> entry : questionAndOptions.entrySet()) { final
-		 * Collection<OptionsData> optionsDataSelect = new ArrayList<>();
-		 *
-		 * for (final QuestionResponse options : entry.getValue()) { final OptionsData option = new OptionsData();
-		 * option.setCode(options.getConsecutivo()); option.setName(options.getTextoResp());
-		 *
-		 * optionsDataSelect.add(option); }
-		 *
-		 * questionsAndOptions.put(entry.getKey(), optionsDataSelect); }
-		 */
-
-
 
 		return questionsAndOptions;
 	}

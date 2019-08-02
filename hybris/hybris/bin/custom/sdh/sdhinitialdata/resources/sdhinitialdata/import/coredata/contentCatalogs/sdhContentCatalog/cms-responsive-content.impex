@@ -1709,8 +1709,7 @@ INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]	
 #INI Reportantes  27/02/2019
 
 $contentCatalog=sdhContentCatalog
-#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;reportantesPage 		;Reportantes	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes
@@ -1771,3 +1770,45 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 
 #->FIN dev-maria Agregar paginas para agentes autorizados menu
+
+#->INI dev-maria Agregar paginas agentes autorizados
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+                          ;;autorizadosListadeContribuyentesPageTemplate;Agentes Autorizados Lista de Contribuyentes Template;layout/autorizadosListadeContribuyentesPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='autorizadosListadeContribuyentesPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+                             ;SiteLogo;;;logo
+                             ;HeaderLinks;;;headerlinks
+                             ;SearchBox;;;searchbox
+                             ;Section1;;;wide
+                             ;Section2A;;;wide
+                             ;Section2B;;;narrow
+                             ;Section2C;;;narrow
+                             ;Section3;;;wide
+                             ;Section4;;;narrow
+                             ;Section5;;;wide
+                             ;Footer;;;footer
+                             ;TopHeaderSlot;;;wide
+                             ;BottomHeaderSlot;;;wide
+                             ;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='autorizadosListadeContribuyentesPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+                                    ;;SiteLogo-autorizadosListadeContribuyentesPageTemplate;SiteLogo;;SiteLogoSlot;true
+                                    ;;HomepageLink-autorizadosListadeContribuyentesPageTemplate;HomepageNavLink;;HomepageNavLinkSlot;true
+                                    ;;Footer-autorizadosListadeContribuyentesPageTemplate;Footer;;FooterSlot;true
+                                    ;;HeaderLinks-autorizadosListadeContribuyentesPageTemplate;HeaderLinks;;HeaderLinksSlot;true
+                                    ;;SearchBox-autorizadosListadeContribuyentesPageTemplate;SearchBox;;SearchBoxSlot;true
+                                    ;;TopHeaderSlot-autorizadosListadeContribuyentesPageTemplate;TopHeaderSlot;;TopHeaderSlot;true
+                                    ;;BottomHeaderSlot-autorizadosListadeContribuyentesPageTemplate;BottomHeaderSlot;;BottomHeaderSlot;true
+                                    ;;PlaceholderContentSlot-autorizadosListadeContribuyentesPageTemplate;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+                         ;;autorizadosListadeContribuyentesPage;Agentes Autorizados Lista de Contribuyentes Page;autorizadosListadeContribuyentesPageTemplate;Agentes Autorizados Lista de Contribuyentes Page
+
+
+#->FIN dev-maria Agregar paginas para agentes autorizados

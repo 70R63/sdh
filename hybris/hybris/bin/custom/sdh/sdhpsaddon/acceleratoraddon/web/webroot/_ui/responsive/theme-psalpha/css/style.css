@@ -25072,3 +25072,19 @@ span.pasos {
 .navigation--bottom .nav__link:hover {
   background: #56ace2;
 }
+
+.chkagent{
+	margin:2px !important;
+	}
+.fomchk{
+	margin:2px !important;
+}
+
+.container{
+	margin-top:10px!important;
+}
+
+.navigation--bottom .nav__links--primary .sub-navigation-section .sub-navigation-list li:hover {
+    background: #00ccff !important;
+   
+}
