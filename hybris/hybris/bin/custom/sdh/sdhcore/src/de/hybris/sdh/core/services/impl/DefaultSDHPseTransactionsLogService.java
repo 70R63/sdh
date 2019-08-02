@@ -7,8 +7,11 @@ package de.hybris.sdh.core.services.impl;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
+import de.hybris.sdh.core.credibanco.ResultTransactionRequest;
+import de.hybris.sdh.core.credibanco.ResultTransactionResponse;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
+import de.hybris.sdh.core.services.SDHCredibancoJwt;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
@@ -21,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -48,6 +52,9 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+
+	@Resource(name = "sdhCredibancoJwt")
+	SDHCredibancoJwt sdhCredibancoJwt;
 
 	@Override
 	public void newLogTransactionEntry(final ConstantConnectionData constantConnectionData,
@@ -243,8 +250,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	{
 		final PseTransactionsLogModel transactionLogModel = new PseTransactionsLogModel();
 		final String transactionPaymentResponsePrint = null;
-		final SimpleDateFormat dateFmt = new SimpleDateFormat("MM/dd/yy");
-		final SimpleDateFormat timeFmt = new SimpleDateFormat("hh:mm:ss");
+		final SimpleDateFormat dateFmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss");
 		final Date dateTimeTransaction = new Date();
 
 		// ConstantConnectionDat
@@ -285,9 +291,8 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 							+ " , " + transactionPaymentResponse.getInternalCode() + "]");
 		}
 
-		// GetTransactionInformationResponseBodyType transactionLogModel.setSoliciteDate("");
 		transactionLogModel.setBankProcessDate(dateFmt.format(dateTimeTransaction));
-		transactionLogModel.setTransactionState(timeFmt.format(dateTimeTransaction));
+		transactionLogModel.setSoliciteDate(dateFmt.format(dateTimeTransaction));
 
 		LOG.info("NewCredibancoLogTransactionEntry:[" + transactionLogModel.getEntityCode() + " , " + numeroDeReferencia + " , "
 				+ tipoDeImpuesto + " , " + impuesto + " , " + anoGravable + " , " + CHIP + " , " + periodo + " , " + CUD + " , "
@@ -307,8 +312,38 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	@Override
 	public String updateCredibancoTransaction(final String numeroDeReferencia)
 	{
-		// XXX Auto-generated method stub
-		return null;
+		final PseTransactionsLogModel pseTransactionsLogModel = pseTransactionsLogDao.getTransaction(numeroDeReferencia);
+		final String transactionState = null;
+
+		if (Objects.nonNull(pseTransactionsLogModel))
+		{
+			final ResultTransactionResponse response = sdhCredibancoJwt
+					.resultTransaction(new ResultTransactionRequest(numeroDeReferencia));
+			if (Objects.nonNull(response))
+			{
+				pseTransactionsLogModel.setCreResponseStatus(response.getStatus());
+				pseTransactionsLogModel.setCreApprovalNumber(response.getApprovalNumber());
+				pseTransactionsLogModel.setCrePaymentMethod(response.getPaymentMethod());
+				pseTransactionsLogModel.setBankProcessDate(response.getTransactionDate());
+				pseTransactionsLogModel.setTransactionState(response.getDescription());
+				modelService.saveAll(pseTransactionsLogModel);
+				LOG.info("updateCredibancoTransaction:[ numeroReferencia(NUS)=" + pseTransactionsLogModel.getNumeroDeReferencia() +
+						" , status=" + response.getStatus() + " , description=" + response.getDescription() + " , value="
+						+ response.getValue() + " , transactionDate=" + response.getTransactionDate() + " , transactionHour="
+						+ response.getTransactionHour() + " , approvalNumber=" + response.getApprovalNumber() + " , paymentMethod="
+						+ response.getPaymentMethod() + "]");
+			}
+			else
+			{
+				LOG.info("La transaccion con numero de referencia Credibanco[" + numeroDeReferencia + "] no pudo ser actualizada");
+			}
+		}
+		else
+		{
+			LOG.info("La transaccion con numero de referencia Credibanco[" + numeroDeReferencia + "] no existe");
+		}
+
+		return transactionState;
 	}
 
 
