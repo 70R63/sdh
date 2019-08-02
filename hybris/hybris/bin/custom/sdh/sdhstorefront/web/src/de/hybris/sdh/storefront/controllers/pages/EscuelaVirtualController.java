@@ -27,6 +27,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
+
+@RequestMapping("/contribuyentes/mibuzontributario/inicial")   
+
 public class EscuelaVirtualController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
