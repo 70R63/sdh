@@ -27,17 +27,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
-public class EscuelaVirtualController extends AbstractPageController
+public class AsignarsecomoAgenteController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Escuela Virtual";
+	private static final String TEXT_ACCOUNT_PROFILE = "Asiganarse como Agente Autorizado";
 
 	// CMS Pages
-	private static final String ESCUELA_CMS_PAGE = "escuelaVirtualPage";
+	private static final String ASIGNARSE_AGENTE_CMS_PAGE = "asignarseAgentePage";
 
-	private static final String REDIRECT_TO_ESCUELA_PAGE = REDIRECT_PREFIX + "/escuelavirtual";
+	private static final String REDIRECT_TO_ASIGNARSE_AGENTE_PAGE = REDIRECT_PREFIX + "/contribuyentes/asignarsecomoagente";
 
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -48,30 +48,31 @@ public class EscuelaVirtualController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/escuelavirtual", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/asignarsecomoagente", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String escuelainicial(final Model model) throws CMSItemNotFoundException
+	public String asignarseagente(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro al GET escuela virtual --------------------------");
+		System.out.println("---------------- Hola entro al GET ASIGNARSE COMO AGENTE --------------------------");
 
 
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(ESCUELA_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ESCUELA_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ASIGNARSE_AGENTE_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ASIGNARSE_AGENTE_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/escuelavirtual", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/asignarsecomoagente", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String escuelapost(final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+	public String asignarsepost(final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("------------------Entro al POST de escuela virtual-----------------------");
+		System.out.println("------------------Entro al POST de ASIGANARSE COMO AGENTE-----------------------");
 
-		return REDIRECT_TO_ESCUELA_PAGE;
+		return REDIRECT_TO_ASIGNARSE_AGENTE_PAGE;
 	}
 
 }
