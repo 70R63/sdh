@@ -2523,3 +2523,48 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;escuelaVirtualPageComponent	;escuelaVirtualPage Component	;/WEB-INF/views/responsive/pages/layout/escuelaVirtualPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;escuelaVirtualPageComponent	
 
 #->FIN dev-maria Agregar paginas para Escuela Virtual
+
+#->INI dev-maria Agregar paginas asignarse agentes 02/08/2019
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;asignarseAgentePage 		;asignarse agente	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/asignarsecomoagente
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='asignarseAgentePage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-asignarsecomoAgente	;SideContent			;																	;SideContent-asignarsecomoAgente				;;;
+								;						;BodyContent-asignarsecomoAgente 	;BodyContent			;																	;BodyContent-asignarsecomoAgente				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-asignarsecomoAgente 	;Side Content Slot for asignarse agente;true	;								;;;
+							;							;BodyContent-asignarsecomoAgente	;Body Content Slot for asignarse agente;true	;asignarseAgentePageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;asignarseAgentePageComponent	;asignarseAgentePage Component	;/WEB-INF/views/responsive/pages/layout/asignarseAgentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;asignarseAgentePageComponent	
+
+#->FIN dev-maria Agregar paginas para asignarse agentes
+
+#->INI dev-maria Agregar paginas crear agentes 02/08/2019
+$contentCatalog=sdhProductCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;crearAgentePage 		;crear agente	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/crearagente
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='crearAgentePage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-crearAgentePage 	;SideContent			;																	;SideContent-crearAgentePage				;;;
+								;						;BodyContent-crearAgentePage 	;BodyContent			;																	;BodyContent-crearAgentePage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-crearAgentePage 	;Side Content Slot for crear agente;true	;								;;;
+							;							;BodyContent-crearAgentePage	;Body Content Slot for crear agente;true	;crearAgentePageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;crearAgentePageComponent	;crearAgentePage Component	;/WEB-INF/views/responsive/pages/layout/crearAgentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;crearAgentePageComponent	
+
+#->FIN dev-maria Agregar paginas para crear agentes
+
