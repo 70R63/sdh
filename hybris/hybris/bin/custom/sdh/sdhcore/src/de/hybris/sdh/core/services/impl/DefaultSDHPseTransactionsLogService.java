@@ -243,8 +243,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	{
 		final PseTransactionsLogModel transactionLogModel = new PseTransactionsLogModel();
 		final String transactionPaymentResponsePrint = null;
-		final SimpleDateFormat dateFmt = new SimpleDateFormat("MM/dd/yy");
-		final SimpleDateFormat timeFmt = new SimpleDateFormat("hh:mm:ss");
+		final SimpleDateFormat dateFmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss");
 		final Date dateTimeTransaction = new Date();
 
 		// ConstantConnectionDat
@@ -285,9 +284,8 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 							+ " , " + transactionPaymentResponse.getInternalCode() + "]");
 		}
 
-		// GetTransactionInformationResponseBodyType transactionLogModel.setSoliciteDate("");
 		transactionLogModel.setBankProcessDate(dateFmt.format(dateTimeTransaction));
-		transactionLogModel.setTransactionState(timeFmt.format(dateTimeTransaction));
+		transactionLogModel.setSoliciteDate(dateFmt.format(dateTimeTransaction));
 
 		LOG.info("NewCredibancoLogTransactionEntry:[" + transactionLogModel.getEntityCode() + " , " + numeroDeReferencia + " , "
 				+ tipoDeImpuesto + " , " + impuesto + " , " + anoGravable + " , " + CHIP + " , " + periodo + " , " + CUD + " , "
