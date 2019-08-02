@@ -8,12 +8,11 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
-import de.hybris.sdh.core.credibanco.ResultTransactionRequest;
-import de.hybris.sdh.core.credibanco.ResultTransactionResponse;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseBankListCatalogModel;
@@ -314,9 +313,35 @@ public class PSEPaymentController extends AbstractPageController
 			final String estatus) throws CMSItemNotFoundException
 	{
 		LOG.info("Credibanco Ticke Id: " + ticketId);
-		final ResultTransactionResponse response = sdhCredibancoJwt.resultTransaction(new ResultTransactionRequest(ticketId));
-		LOG.info(response);
-		return "redirect:/impuestos/pagoEnLinea/pseResponse";
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		final String codeResponse = pseTransactionsLogService.updateCredibancoTransaction(ticketId);
+		model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
+		model.addAttribute("disableFields", "true");
+
+		if (Objects.nonNull(codeResponse))
+		{
+			if (codeResponse.equals("OK"))
+			{
+
+			}
+			else
+			{
+
+			}
+		}
+		else
+		{
+
+		}
+
+
+		return getViewForPage(model);
 	}
 
 	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)

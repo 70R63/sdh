@@ -3,11 +3,13 @@
 	<classpathentry exported="true" kind="src" path="/acceleratorfacades"/>
 	<classpathentry exported="true" kind="lib" path="lib/jaxrpc-api-1.1.jar"/>
 	<classpathentry kind="src" path="testsrc"/>
+	<classpathentry exported="true" kind="lib" path="lib/sevenzipjbinding.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sdhcore"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="src" path="/platform"/>
 	<classpathentry exported="true" kind="lib" path="lib/axis-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/sevenzipjbinding-AllPlatforms.jar"/>
 	<classpathentry kind="src" path="gensrc"/>
 	<classpathentry exported="true" kind="lib" path="lib/wsdl4j-1.6.2.jar"/>
 	<classpathentry kind="output" path="eclipsebin"/>
