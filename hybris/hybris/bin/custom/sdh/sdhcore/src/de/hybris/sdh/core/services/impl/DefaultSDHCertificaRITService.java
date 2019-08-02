@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 public class DefaultSDHCertificaRITService implements SDHCertificaRITService
 {
 
-	private static final Logger LOG = Logger.getLogger(DefaultSDHConsultaContribuyenteBPService.class);
+	private static final Logger LOG = Logger.getLogger(DefaultSDHCertificaRITService.class);
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;

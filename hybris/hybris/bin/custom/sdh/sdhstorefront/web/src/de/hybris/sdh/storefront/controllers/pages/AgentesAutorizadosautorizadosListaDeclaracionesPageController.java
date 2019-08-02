@@ -13,6 +13,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 
 import javax.annotation.Resource;
 
+import de.hybris.sdh.facades.SDHConsultaFirmasFacade;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,9 @@ public class AgentesAutorizadosautorizadosListaDeclaracionesPageController exten
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "Lista declaraciones a firmar";
+
+	@Resource(name="sdhConsultaFirmasFacade")
+	SDHConsultaFirmasFacade sdhConsultaFirmasFacade;
 
 	// CMS Pages
 	private static final String AUTORIZADOS_LISDECLA_CMS_PAGE = "autorizadosListadeclaracionesPage";

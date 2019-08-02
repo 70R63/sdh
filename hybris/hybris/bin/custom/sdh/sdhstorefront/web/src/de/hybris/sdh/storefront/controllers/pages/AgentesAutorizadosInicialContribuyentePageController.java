@@ -8,13 +8,18 @@ import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadc
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
+import de.hybris.sdh.core.pojos.responses.ConsulFirmasResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 
 import javax.annotation.Resource;
 
+import de.hybris.sdh.facades.SDHConsultaFirmasFacade;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -58,16 +63,30 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 	@Resource(name="sessionService")
     SessionService sessionService;
 
+	@Resource(name="sdhConsultaFirmasFacade")
+	SDHConsultaFirmasFacade sdhConsultaFirmasFacade;
+
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
 	@RequestMapping(value = "/autorizados/contribuyente/representando", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String autorizadoscontrib(final Model model, @RequestParam String representado) throws CMSItemNotFoundException
 	{
+		CustomerData currentUser = customerFacade.getCurrentCustomer();
 
-		CustomerData representadoData = sdhCustomerFacade.getRepresentado(representado);
+		SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
 
-		sessionService.getCurrentSession().setAttribute("representado",representadoData);
+		sessionService.getCurrentSession().setAttribute("representado",representado);
 
 		model.addAttribute("representado", representadoData);
+
+
+		ConsulFirmasRequest request = new ConsulFirmasRequest();
+		request.setAgente(representado);
+		request.setContribuyente(currentUser.getNumBP());
+
+		model.addAttribute("firmas",sdhConsultaFirmasFacade.getDeclaraciones(request));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_REPRE_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_REPRE_CMS_PAGE));

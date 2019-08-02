@@ -36,10 +36,10 @@
 							<tr>
 								<td><input class="inputtextnew tableident"
 									disabled="disabled" type="text" size="30"
-									value="${representado.documentType}" /></td>
+									value="${representado.infoContrib.tipoDoc}" /></td>
 								<td><input class="inputtextnew tablenumiden"
 									disabled="disabled" type="text" size="30"
-									value="${representado.documentNumber}" /></td>
+									value="${representado.infoContrib.numDoc}" /></td>
 								<c:choose>
 									<c:when test="${empty representado}">
 										<td><input class="inputtextnew tablenombre"
@@ -94,20 +94,40 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input class="inputtextnew tableident"
-										disabled="disabled" type="text" size="30" value="" /></td>
-									<td><input class="inputtextnew " disabled="disabled"
-										type="text" size="30" value="" /></td>
-									<td><input class="inputtextnew tablenumiden"
-										disabled="disabled" type="text" size="30" value="" /></td>
-									<td><input class="inputtextnew tablenumiden"
-										disabled="disabled" type="text" size="30" value="" /></td>
-									<td><input class="inputtextnew" disabled="disabled"
-										type="text" size="30" value="" /></td>
-									<td
-										style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
-								</tr>
+									<c:choose>
+										<c:when test="${empty firmas.declaraciones}">
+											<tr>
+												<td><input class="inputtextnew tableident"
+														   disabled="disabled" type="text" size="30" value="" /></td>
+												<td><input class="inputtextnew " disabled="disabled"
+														   type="text" size="30" value="" /></td>
+												<td><input class="inputtextnew tablenumiden"
+														   disabled="disabled" type="text" size="30" value="" /></td>
+												<td><input class="inputtextnew tablenumiden"
+														   disabled="disabled" type="text" size="30" value="" /></td>
+												<td><input class="inputtextnew" disabled="disabled"
+														   type="text" size="30" value="No tiene declaraciones por firmar" /></td>
+												<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+												<c:forEach items="${firmas.declaraciones}" var="eachDeclaracion" >
+												<tr>
+													<td><input class="inputtextnew tableident"
+															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.idDeclaracion}" /></td>
+													<td><input class="inputtextnew " disabled="disabled"
+															   type="text" size="30" value="<spring:theme code="autorizado.impuestos.${eachDeclaracion.impuesto}" />" /></td>
+													<td><input class="inputtextnew tablenumiden"
+															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.anioGravable}" /></td>
+													<td><input class="inputtextnew tablenumiden"
+															   disabled="disabled" type="text" size="30" value="<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />"</td>
+													<td><input class="inputtextnew" disabled="disabled"
+															   type="text" size="30" value="-" /></td>
+													<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
+												<tr>
+												</c:forEach>
+										</c:otherwise>
+									</c:choose>
 							</tbody>
 						</table>
 					</div>
