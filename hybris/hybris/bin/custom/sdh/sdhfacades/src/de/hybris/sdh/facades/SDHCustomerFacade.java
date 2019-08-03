@@ -5,7 +5,7 @@ package de.hybris.sdh.facades;
 
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.customer.TokenInvalidatedException;
-
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 
 /**
@@ -23,5 +23,7 @@ public interface SDHCustomerFacade
 	boolean isValidRoleForCurrentCustomer(String role);
 
 	CustomerData getRepresentado(String numBP);
+
+	SDHValidaMailRolResponse getRepresentadoFromSAP(String numBP);
 
 }

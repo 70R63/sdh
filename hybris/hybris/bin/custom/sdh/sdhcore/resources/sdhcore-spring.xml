@@ -663,7 +663,8 @@
 	
 	<alias alias="sdhCredibancoJwt" name="defaultSDHCredibancoJwt"/>
 	<bean id="defaultSDHCredibancoJwt" class="de.hybris.sdh.core.services.impl.DefaultSDHCredibancoJwt" />
-	
-	
+
+	<bean name="sdhConsulFirmasService" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaFirmasService" />
+
 
 </beans>

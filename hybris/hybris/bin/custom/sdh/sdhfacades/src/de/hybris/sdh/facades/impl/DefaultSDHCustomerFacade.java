@@ -22,6 +22,9 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.TitleModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
@@ -30,6 +33,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.util.Assert;
 
 
@@ -46,6 +50,8 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 	@Resource(name="flexibleSearchService")
 	private FlexibleSearchService flexibleSearchService;
 
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	@Override
 	public void register(final RegisterData registerData) throws DuplicateUidException
@@ -168,7 +174,30 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 			LOG.error("Customer not found for: "+numBP);
 			return null;
 		}
+	}
 
+	@Override
+	public SDHValidaMailRolResponse getRepresentadoFromSAP(String numBP) {
+
+		try
+		{
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			consultaContribuyenteBPRequest.setNumBP(numBP);
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),SDHValidaMailRolResponse.class);
+
+			return sdhConsultaContribuyenteBPResponse;
+		}
+		catch (final Exception e)
+		{
+			LOG.error("there was an error while parsing update rit reponse: " + e.getMessage());
+		}
+		return null;
 
 	}
 }

@@ -211,6 +211,8 @@
 	<bean id="sdhConciliacionesFacade"	class="de.hybris.sdh.facades.DefaultSDHConciliacionesFacade" />
 	
 	<bean id="sdhReteIcaFacade"	class="de.hybris.sdh.facades.impl.DefaultSDHReteIcaFacade" />
+
+	<bean id="sdhConsultaFirmasFacade"	class="de.hybris.sdh.facades.impl.DefaultSDHConstultaFirmasFacade" />
 		
 		
 </beans>
