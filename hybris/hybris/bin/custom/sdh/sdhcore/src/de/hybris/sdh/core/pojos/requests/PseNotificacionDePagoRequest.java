@@ -15,7 +15,7 @@ public class PseNotificacionDePagoRequest
 	private String fchRecaudo;
 	private String horRecaudo;
 	private String codImpuesto;
-	private String tipoHorario;
+	//private String tipoHorario;
 	private String refPago;
 	private String vlrRecuado;
 	private String medioPago;
@@ -125,23 +125,6 @@ public class PseNotificacionDePagoRequest
 	}
 
 	/**
-	 * @return the tipoHorario
-	 */
-	public String getTipoHorario()
-	{
-		return tipoHorario;
-	}
-
-	/**
-	 * @param tipoHorario
-	 *           the tipoHorario to set
-	 */
-	public void setTipoHorario(final String tipoHorario)
-	{
-		this.tipoHorario = tipoHorario;
-	}
-
-	/**
 	 * @return the refPago
 	 */
 	public String getRefPago()
@@ -228,15 +211,15 @@ public class PseNotificacionDePagoRequest
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
 		return "PseNotificacionDePagoRequest [idBancos=" + idBancos + ", modalidad=" + modalidad + ", procPago=" + procPago
-				+ ", fchRecaudo=" + fchRecaudo + ", horRecaudo=" + horRecaudo + ", codImpuesto=" + codImpuesto + ", tipoHorario="
-				+ tipoHorario + ", refPago=" + refPago + ", vlrRecuado=" + vlrRecuado + ", medioPago=" + medioPago + ", numOperacion="
+				+ ", fchRecaudo=" + fchRecaudo + ", horRecaudo=" + horRecaudo + ", codImpuesto=" + codImpuesto + ", refPago="
+				+ refPago + ", vlrRecuado=" + vlrRecuado + ", medioPago=" + medioPago + ", numOperacion="
 				+ numOperacion + ", objPago=" + objPago + "]";
 	}
 

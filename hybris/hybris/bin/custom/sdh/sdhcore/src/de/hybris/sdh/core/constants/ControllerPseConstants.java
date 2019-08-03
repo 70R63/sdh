@@ -47,6 +47,26 @@ public class ControllerPseConstants
 		}
 	};
 
+	private final static String DEBITO_EN_CUENTA_POR_INTERNET = "15";
+	private final static String TARJETA_CREDITO_VISA = "50";
+	private final static String TARJETA_CREDITO_MASTERCARD = "51";
+	private final static String TARJETA_CREDITO_DINERR_CLUB = "52";
+	private final static String TARJETA_CREDITO_PROPIA_ENTIDAD_FINANCIERA = "53";
+	private final static String CRETIDO_ROTATIVO = "54";
+	private final static String TRAJETA_CREDITO_MASTER_CARD = "55";
+	public final static HashMap<String, String> NOTIFICACION_DE_PAGO_MEDIO_PAGO = new HashMap<String, String>()
+	{
+		{
+			put(DEBITO, DEBITO_EN_CUENTA_POR_INTERNET);
+			put(CREDITO, TARJETA_CREDITO_VISA);
+			put(CREDITO, TARJETA_CREDITO_MASTERCARD);
+			put(CREDITO, TARJETA_CREDITO_DINERR_CLUB);
+			put(CREDITO, TARJETA_CREDITO_PROPIA_ENTIDAD_FINANCIERA);
+			put(CREDITO, CRETIDO_ROTATIVO);
+			put(CREDITO, TRAJETA_CREDITO_MASTER_CARD);
+		}
+	};
+
 
 	public ControllerPseConstants()
 	{
