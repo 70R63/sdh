@@ -12,15 +12,15 @@ import java.util.HashMap;
  */
 public class ControllerPseConstants
 {
-	public final static String PREDIAL = "5101";
-	public final static String DELINEACION = "0607";
-	public final static String VEHICULAR = "5103";
-	public final static String PUBLICIDAD = "5154";
-	public final static String GASOLINA = "0108";
-	public final static String ICA = "5102";
-	public final static String RETENCIONDU = "3207";
-	public final static String SOBRETASA = "XXXX";
-	public final static String RETEICA = "5131";
+	public final static String PREDIAL 		= "5101";
+	public final static String DELINEACION = "5106"; //0607
+	public final static String VEHICULAR 	= "5103";
+	public final static String PUBLICIDAD 	= "5154";
+	public final static String GASOLINA 	= "0108";
+	public final static String ICA 			= "5102";
+	public final static String RETENCIONDU = "5132"; //3207
+	public final static String SOBRETASA 	= "XXXX";
+	public final static String RETEICA 		= "5131";
 
 	public final static String DEBITO = "01";
 	public final static String CREDITO = "02";

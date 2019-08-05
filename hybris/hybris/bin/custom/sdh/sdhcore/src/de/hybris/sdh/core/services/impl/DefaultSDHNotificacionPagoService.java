@@ -93,7 +93,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setProcPago(ControllerPseConstants.PSE_PROC_PAGO.get(transaction.getTipoDeTarjeta()));
 			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
 			pseNotificacionDePagoRequest.setHorRecaudo(horaRecaudo);
-			pseNotificacionDePagoRequest.setCodImpuesto(getImpuestoId(transaction.getTipoDeImpuesto()));
+			pseNotificacionDePagoRequest.setCodImpuesto(getImpuestoId(transaction.getTipoDeImpuesto())); // 08 Gasolina
 			//pseNotificacionDePagoRequest.setTipoHorario("0");
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
@@ -124,28 +124,25 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 
 	private String getBankId(final String tipoDeImpuesto)
 	{
-		switch (tipoDeImpuesto)
-		{
-			case ControllerPseConstants.DELINEACION:
-				return tipoDeImpuesto.substring(2, 4);
-			case ControllerPseConstants.RETENCIONDU:
-				return tipoDeImpuesto.substring(2, 4);
-			default:
-				return Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(0, 2) : null;
-		}
+		/*
+		 * switch (tipoDeImpuesto) { case ControllerPseConstants.DELINEACION: return tipoDeImpuesto.substring(2, 4); case
+		 * ControllerPseConstants.RETENCIONDU: return tipoDeImpuesto.substring(2, 4); default: return
+		 * Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(0, 2) : null;
+		 *
+		 * }
+		 */
+		return Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(0, 2) : null;
 	}
 
 	private String getImpuestoId(final String tipoDeImpuesto)
 	{
-		switch (tipoDeImpuesto)
-		{
-			case ControllerPseConstants.DELINEACION:
-				return tipoDeImpuesto.substring(0, 2);
-			case ControllerPseConstants.RETENCIONDU:
-				return tipoDeImpuesto.substring(0, 2);
-			default:
-				return Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(2, 4) : null;
-		}
+		/*
+		 * switch (tipoDeImpuesto) { case ControllerPseConstants.DELINEACION: return tipoDeImpuesto.substring(0, 2); case
+		 * ControllerPseConstants.RETENCIONDU: return tipoDeImpuesto.substring(0, 2); default: return
+		 * Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(2, 4) : null; }
+		 */
+
+		return Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(2, 4) : null;
 	}
 
 
