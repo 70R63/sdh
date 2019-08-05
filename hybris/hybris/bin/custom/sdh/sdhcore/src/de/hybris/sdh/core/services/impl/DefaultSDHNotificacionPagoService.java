@@ -93,14 +93,13 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setProcPago(ControllerPseConstants.PSE_PROC_PAGO.get(transaction.getTipoDeTarjeta()));
 			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
 			pseNotificacionDePagoRequest.setHorRecaudo(horaRecaudo);
-			pseNotificacionDePagoRequest.setCodImpuesto(getImpuestoId(transaction.getTipoDeImpuesto())); // 08 Gasolina
+			pseNotificacionDePagoRequest.setCodImpuesto(getImpuestoId(transaction.getTipoDeImpuesto()));
 			//pseNotificacionDePagoRequest.setTipoHorario("0");
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
 			pseNotificacionDePagoRequest.setMedioPago(ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(transaction.getTipoDeTarjeta()));
 			pseNotificacionDePagoRequest.setNumOperacion("9999999");
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
-
 
 			this.realizarNotificacion(pseNotificacionDePagoRequest);
 
