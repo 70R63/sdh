@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
@@ -326,18 +325,19 @@ public class PSEPaymentController extends AbstractPageController
 
 		if (Objects.nonNull(codeResponse))
 		{
-			if (codeResponse.equals("OK"))
+			LOG.info("------ codeResponse -------" + codeResponse);
+			if (codeResponse.equals(ControllerPseConstants.CREDIBANCO_RESPONSE_APROBADA))
 			{
-
+				GlobalMessages.addInfoMessage(model, "credibanco.message.info.done.transaction.with.status");
 			}
 			else
 			{
-
+				GlobalMessages.addErrorMessage(model, "credibanco.message.error.response.transaction");
 			}
 		}
 		else
 		{
-
+			GlobalMessages.addErrorMessage(model, "credibanco.message.error.response.transaction");
 		}
 
 

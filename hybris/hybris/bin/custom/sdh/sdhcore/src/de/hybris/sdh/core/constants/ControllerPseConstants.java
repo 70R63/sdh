@@ -67,6 +67,11 @@ public class ControllerPseConstants
 		}
 	};
 
+	public final static String CREDIBANCO_RESPONSE_PENDIENTE = "0";
+	public final static String CREDIBANCO_RESPONSE_APROBADA = "1";
+	public final static String CREDIBANCO_RESPONSE_RECHAZADA = "2";
+	public final static String CREDIBANCO_RESPONSE_FALLIDA = "3";
+
 
 	public ControllerPseConstants()
 	{
@@ -391,6 +396,46 @@ public class ControllerPseConstants
 	public static HashMap<String, String> getPseProcPago()
 	{
 		return PSE_PROC_PAGO;
+	}
+
+
+
+	/**
+	 * @return the credibancoResponsePendiente
+	 */
+	public static String getCredibancoResponsePendiente()
+	{
+		return CREDIBANCO_RESPONSE_PENDIENTE;
+	}
+
+
+
+	/**
+	 * @return the credibancoResponseAprobada
+	 */
+	public static String getCredibancoResponseAprobada()
+	{
+		return CREDIBANCO_RESPONSE_APROBADA;
+	}
+
+
+
+	/**
+	 * @return the credibancoResponseRechazada
+	 */
+	public static String getCredibancoResponseRechazada()
+	{
+		return CREDIBANCO_RESPONSE_RECHAZADA;
+	}
+
+
+
+	/**
+	 * @return the credibancoResponseFallida
+	 */
+	public static String getCredibancoResponseFallida()
+	{
+		return CREDIBANCO_RESPONSE_FALLIDA;
 	}
 
 

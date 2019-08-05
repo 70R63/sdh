@@ -313,7 +313,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	public String updateCredibancoTransaction(final String numeroDeReferencia)
 	{
 		final PseTransactionsLogModel pseTransactionsLogModel = pseTransactionsLogDao.getTransaction(numeroDeReferencia);
-		final String transactionState = null;
+		String transactionState = null;
 
 		if (Objects.nonNull(pseTransactionsLogModel))
 		{
@@ -326,6 +326,8 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				pseTransactionsLogModel.setCrePaymentMethod(response.getPaymentMethod());
 				pseTransactionsLogModel.setBankProcessDate(response.getTransactionDate());
 				pseTransactionsLogModel.setTransactionState(response.getDescription());
+				transactionState = response.getStatus();
+
 				modelService.saveAll(pseTransactionsLogModel);
 				LOG.info("updateCredibancoTransaction:[ numeroReferencia(NUS)=" + pseTransactionsLogModel.getNumeroDeReferencia() +
 						" , status=" + response.getStatus() + " , description=" + response.getDescription() + " , value="
