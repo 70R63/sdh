@@ -22,23 +22,23 @@ public class ControllerPseConstants
 	public final static String SOBRETASA 	= "XXXX";
 	public final static String RETEICA 		= "5131";
 
-	public final static String DEBITO = "01";
-	public final static String CREDITO = "02";
+	public final static String DEBITO 	= "01";
+	public final static String CREDITO 	= "02";
 
-	public final static String CC = "CC";
-	public final static String NIT = "NIT";
-	public final static String CE = "CE";
-	public final static String TI = "TE";
-	public final static String PP = "PP";
+	public final static String CC 	= "CC";
+	public final static String NIT 	= "NIT";
+	public final static String CE 	= "CE";
+	public final static String TI 	= "TE";
+	public final static String PP 	= "PP";
 
-	public final static String ACH_PSE = "ACH";
-	public final static String CREDIBANCO = "CRE";
+	public final static String ACH_PSE 		= "ACH";
+	public final static String CREDIBANCO 	= "CRE";
 
 	public final static String SI = "S";
 	public final static String NO = "N";
 
-	private final static String PSE_PROC_PAGO_DEBITO = "03";
-	private final static String PSE_PROC_PAGO_CREDITO = "04";
+	private final static String PSE_PROC_PAGO_DEBITO 	= "03";
+	private final static String PSE_PROC_PAGO_CREDITO 	= "04";
 	public final static HashMap<String, String> PSE_PROC_PAGO = new HashMap<String, String>()
 	{
 		{
@@ -47,13 +47,13 @@ public class ControllerPseConstants
 		}
 	};
 
-	private final static String DEBITO_EN_CUENTA_POR_INTERNET = "15";
-	private final static String TARJETA_CREDITO_VISA = "50";
-	private final static String TARJETA_CREDITO_MASTERCARD = "51";
-	private final static String TARJETA_CREDITO_DINERR_CLUB = "52";
-	private final static String TARJETA_CREDITO_PROPIA_ENTIDAD_FINANCIERA = "53";
-	private final static String CRETIDO_ROTATIVO = "54";
-	private final static String TRAJETA_CREDITO_MASTER_CARD = "55";
+	private final static String DEBITO_EN_CUENTA_POR_INTERNET 					= "15";
+	private final static String TARJETA_CREDITO_VISA 								= "50";
+	private final static String TARJETA_CREDITO_MASTERCARD 						= "51";
+	private final static String TARJETA_CREDITO_DINERR_CLUB 						= "52";
+	private final static String TARJETA_CREDITO_PROPIA_ENTIDAD_FINANCIERA 	= "53";
+	private final static String CRETIDO_ROTATIVO 									= "54";
+	private final static String TRAJETA_CREDITO_MASTER_CARD 						= "55";
 	public final static HashMap<String, String> NOTIFICACION_DE_PAGO_MEDIO_PAGO = new HashMap<String, String>()
 	{
 		{
@@ -68,9 +68,9 @@ public class ControllerPseConstants
 	};
 
 	public final static String CREDIBANCO_RESPONSE_PENDIENTE = "0";
-	public final static String CREDIBANCO_RESPONSE_APROBADA = "1";
+	public final static String CREDIBANCO_RESPONSE_APROBADA 	= "1";
 	public final static String CREDIBANCO_RESPONSE_RECHAZADA = "2";
-	public final static String CREDIBANCO_RESPONSE_FALLIDA = "3";
+	public final static String CREDIBANCO_RESPONSE_FALLIDA 	= "3";
 
 
 	public ControllerPseConstants()
