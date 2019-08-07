@@ -17,6 +17,8 @@ public class TramiteOpcion
 	private String processID;
 	private String categorizacion;
 	private String canal;
+	private String urlAccion;
+
 
 	/**
 	 * @return the key
@@ -88,14 +90,48 @@ public class TramiteOpcion
 	}
 
 	/**
+	 * @return the canal
+	 */
+	public String getCanal()
+	{
+		return canal;
+	}
+
+	/**
+	 * @param canal
+	 *           the canal to set
+	 */
+	public void setCanal(final String canal)
+	{
+		this.canal = canal;
+	}
+
+	/**
+	 * @return the urlAccion
+	 */
+	public String getUrlAccion()
+	{
+		return urlAccion;
+	}
+
+	/**
+	 * @param urlAccion
+	 *           the urlAccion to set
+	 */
+	public void setUrlAccion(final String urlAccion)
+	{
+		this.urlAccion = urlAccion;
+	}
+
+	/**
 	 * @param key
 	 * @param tramiteOpcion
 	 */
-	public TramiteOpcion(final String key, final ItemSelectOption tramiteOpcion)
+	public TramiteOpcion(final String key, final ItemSelectOption tramiteSelectOpcion)
 	{
 		//super();
 		this.key = key;
-		this.tramiteOpcion = tramiteOpcion;
+		this.tramiteOpcion = tramiteSelectOpcion;
 	}
 
 
@@ -106,15 +142,23 @@ public class TramiteOpcion
 	 * @param categorizacion
 	 * @param canal
 	 */
-	public TramiteOpcion(final String key, final ItemSelectOption tramiteOpcion, final String processID,
+	public TramiteOpcion(final String key, final ItemSelectOption tramiteSelectOpcion, final String processID,
 			final String categorizacion, final String canal)
 	{
 		super();
 		this.key = key;
-		this.tramiteOpcion = tramiteOpcion;
+		this.tramiteOpcion = tramiteSelectOpcion;
 		this.processID = processID;
 		this.categorizacion = categorizacion;
 		this.canal = canal;
+	}
+
+	public TramiteOpcion(final String key, final ItemSelectOption tramiteSelectOpcion, final String url)
+	{
+		super();
+		this.key = key;
+		this.tramiteOpcion = tramiteSelectOpcion;
+		this.urlAccion = url;
 	}
 
 

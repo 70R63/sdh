@@ -14,8 +14,10 @@ import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.TramitesConsultaCasoInfo;
 import de.hybris.sdh.core.pojos.responses.ConsCasosInfo;
+import de.hybris.sdh.core.pojos.responses.ConsCasosInfoVista;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResultadoResponse;
+import de.hybris.sdh.core.pojos.responses.TramiteCatalogos;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
@@ -82,6 +84,14 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 	{
 		System.out.println("---------------- Hola entro al GET TRAMITES SEGUIMIENTO --------------------------");
 
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final TramitesConsultaCasoInfo dataForm = new TramitesConsultaCasoInfo();
+		final TramiteCatalogos tramiteCatalogos = gasolinaService.prepararCatalogosConsCaso();
+
+
+		model.addAttribute("dataForm", dataForm);
+		model.addAttribute("catalogos", tramiteCatalogos);
+
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(TRAMITES_SEGUIMIENTO_CMS_PAGE));
@@ -105,7 +115,7 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/tramites/consultaCaso", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ConsCasosInfo> consultaCasoGET(@ModelAttribute("tramitesConsultaCasoInfo")
+	public ConsCasosInfoVista consultaCasoGET(@ModelAttribute("tramitesConsultaCasoInfo")
 	final TramitesConsultaCasoInfo tramitesConsultaCasoInfo, final Model model, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
@@ -113,21 +123,34 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 		System.out.println("------------------En GET consulta caso------------------------");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		List<ConsCasosInfo> infoVista = new ArrayList<ConsCasosInfo>();
+		List<ConsCasosInfo> infoCasos = new ArrayList<ConsCasosInfo>();
+		final ConsCasosInfoVista infoVista = new ConsCasosInfoVista();
 		ConsCasosInfo infoConsulCasos = null;
 		final ConsCasosRequest consultaCasosRequest = new ConsCasosRequest();
 		ConsCasosResponse consCasosResponse = new ConsCasosResponse();
 		String num_caso = "";
+		String tipoId = "";
+		String numDoc = "";
 		String linea = "";
+		String mensaje = "";
 		final Map<String, ConsCasosInfo> mapResultado = new HashMap<String, ConsCasosInfo>();
 
 
-		if (tramitesConsultaCasoInfo.getNum_caso() != null && !tramitesConsultaCasoInfo.getNum_caso().isEmpty())
+		if ((tramitesConsultaCasoInfo.getNum_caso() != null && !tramitesConsultaCasoInfo.getNum_caso().isEmpty())
+				|| ((tramitesConsultaCasoInfo.getTipoId() != null && !tramitesConsultaCasoInfo.getTipoId().isEmpty())
+						&& (tramitesConsultaCasoInfo.getNumDoc() != null && !tramitesConsultaCasoInfo.getNumDoc().isEmpty())))
 		{
 			num_caso = tramitesConsultaCasoInfo.getNum_caso();
+			tipoId = tramitesConsultaCasoInfo.getTipoId();
+			numDoc = tramitesConsultaCasoInfo.getNumDoc();
 			linea = "0";
 
 			consultaCasosRequest.setNUM_CASO(num_caso);
+			if (!tipoId.isEmpty())
+			{
+				consultaCasosRequest.setCLASE_IDENTIFICACION(tipoId);
+				consultaCasosRequest.setID_IDENTIFICADOR(numDoc);
+			}
 			consultaCasosRequest.setLINEA(linea);
 
 
@@ -136,6 +159,7 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 			System.out.println("Response de crm/consCasos: " + consCasosResponse);
 			if (gasolinaService.ocurrioErrorCreacionCaso(consCasosResponse) != true)
 			{
+				mensaje = consCasosResponse.getTxtmsj();
 				if (consCasosResponse.getResultado() != null)
 				{
 					if (consCasosResponse.getResultado().size() > 0)
@@ -170,7 +194,7 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 							mapResultado.put(resultadoActual.getProcess_type(), infoConsulCasos);
 						}
 
-						infoVista = new ArrayList(mapResultado.values());
+						infoCasos = new ArrayList(mapResultado.values());
 					}
 				}
 			}
@@ -178,6 +202,8 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 			{
 			}
 		}
+		infoVista.setInfoCasos(infoCasos);
+		infoVista.setMensaje(mensaje);
 
 
 		return infoVista;
