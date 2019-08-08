@@ -4,7 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -66,20 +66,20 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.inicial.tipdoc" /></label> <select
-						class="newalto form-control">
-						<option value="Seleccionar">Seleccionar</option>
-						<option value="">Creación</option>
-						<option value="">Actualización</option>
-					</select>
+							code="tramites.seguimiento.inicial.tipdoc" /></label> 
+					<sf:select path="tipoId"
+						items="${catalogos.tipoId}"
+						referenceData="${catalogos.tipoId}"
+						class="newalto form-control" disabled="false" readonly="false" id="tipoId"/>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.inicial.numdoc" /></label><input id=""
-						name="" class="newalto form-control" type="text" value=""
-						maxlength="240"></input>
+							code="tramites.seguimiento.inicial.numdoc" /></label>					
+							<sf:input path="numDoc" value="${dataForm.numDoc}"
+						class="newalto form-control" maxlength="30" size="20"
+						readonly="false" id="numDoc"/>
 				</div>
 			</div>
 		</div>
