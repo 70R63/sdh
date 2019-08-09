@@ -35,6 +35,7 @@ import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.responses.TramiteCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
@@ -161,6 +162,18 @@ public class SobreTasaGasolinaService
 		return catalogosForm;
 	}
 
+
+	public TramiteCatalogos prepararCatalogosConsCaso()
+	{
+
+		final TramiteCatalogos catalogosForm = new TramiteCatalogos();
+
+
+		catalogosForm.setTipoId(obtenerListaTipoIdConsCaso());
+
+
+		return catalogosForm;
+	}
 
 	/**
 	 * @return
@@ -564,6 +577,35 @@ public class SobreTasaGasolinaService
 
 		return elementos;
 	}
+
+	private Map<String, String> obtenerListaTipoIdConsCaso()
+	{
+
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+
+		elementos.put("", "Seleccionar");
+		elementos.put("CC", "Cédula de Ciudadanía");
+		elementos.put("CD", "Carnet Diplomático");
+		elementos.put("CE", "Cédula de Extranjería");
+		elementos.put("HCM001", "ID de empleado");
+		elementos.put("NIT", "Número de Identificacion Tributaria");
+		elementos.put("NITC", "NIT Compuesto (Utilización Múltiple)");
+		elementos.put("NITE", "NIT Extranjero");
+		elementos.put("NITUT", "NIT Unión Temporal o Consorcio");
+		elementos.put("NUIP", "Número Único de Identificación Personal");
+		elementos.put("PA", "Pasaporte");
+		elementos.put("RC", "Registro Civil");
+		elementos.put("SDP", "Sin Determinar - Predial");
+		elementos.put("SDV", "Sin Determinar - Vehículos");
+		elementos.put("TI", "Tarjeta de Identidad");
+		elementos.put("TIE", "Tarjeta de Identidad de Extranjero");
+		elementos.put("TPA", "Tarjeta Profesional de Abogacía");
+		elementos.put("TPC", "Tarjeta Profesional de Contador Público");
+
+		return elementos;
+	}
+
 
 	public List<SobreTasaGasolinaTabla> prepararTablaDeclaracion(final List<ImpuestoGasolina> origen)
 	{

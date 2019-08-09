@@ -9,7 +9,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -283,10 +282,14 @@ public class DelineacionUrbanaController extends AbstractPageController
 		System.out.println(infoDelineacion.getInput().getSelectedCDU());
 		System.out.println("---------------- En Delineacion urbana POST --------------------------");
 
-
-		//		infObjetoDelineacionExtras.setAnoGravable(
-		//				gasolinaService.getAnoGravableDU(infoDelineacion.getValCont().getDelineacion(), infoDelineacion.getInput()));
-		infObjetoDelineacionExtras.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
+		if (infoDelineacion.getInput().getSelectedAnoPresDeclaracion() != null)
+		{
+			infObjetoDelineacionExtras.setAnoGravable(infoDelineacion.getInput().getSelectedAnoPresDeclaracion());
+		}
+		else
+		{
+			infObjetoDelineacionExtras.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
+		}
 		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
 
 
@@ -485,11 +488,23 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final String tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R")
 				? new ControllerPseConstants().getRETENCIONDU()
 				: new ControllerPseConstants().getDELINEACION();
+
+		if (infoDelineacion.getInput().getSelectedAnoPresDeclaracion() != null)
+		{
+
+			infoDelineacion.getInfObjetoDelineacionExtras()
+					.setAnoGravable(infoDelineacion.getInput().getSelectedAnoPresDeclaracion());
+		}
+		else
+		{
+			infoDelineacion.getInfObjetoDelineacionExtras()
+					.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
+		}
+
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
-		infoDelineacion.getInfObjetoDelineacionExtras()
-				.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
+
 		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
 		periodo = "01";
 		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());

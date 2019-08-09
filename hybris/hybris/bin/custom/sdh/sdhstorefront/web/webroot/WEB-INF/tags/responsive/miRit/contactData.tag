@@ -275,7 +275,12 @@
 	}
 
 	function toggleAssistant() {
+		debugger;
 		$("#addressAssistant").toggle();
+// 		Se agrega cambio al estilo de los input para la direccion
+var toddir = document.getElementById('address.assistant.output');
+toddir.style.width= '900px'
+
 	}
 </script>
 <div id="acordeon" class="container">
@@ -651,8 +656,8 @@
 										code="mirit.addresshelper.numero" />
 								</label> <input id="u5060_input" name="lastName"
 									class="form-control form-control addressHelperField"
-									aria-required="true" type="text" value="" maxlength="240"
-									oninput="menuAutoSearch();">
+									aria-required="true" type="text" value="" maxlength="10"
+									oninput="menuAutoSearch();" onkeyup="ajustar(this)" style="padding: 2px;">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -784,8 +789,8 @@
 										code="mirit.addresshelper.numero" />
 								</label> <input id="u6064_input" name="lastName"
 									class="form-control form-control addressHelperField"
-									aria-required="true" type="text" value="" maxlength="240"
-									oninput="menuAutoSearch();">
+									aria-required="true" type="text" value="" maxlength="10"
+									oninput="menuAutoSearch();" onkeyup="ajustar(this)" style="padding: 2px;">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -841,8 +846,8 @@
 										code="mirit.addresshelper.numero" />
 								</label> <input id="u6065_input" name="lastName"
 									class="form-control form-control addressHelperField"
-									aria-required="true" type="text" value="" maxlength="240"
-									oninput="menuAutoSearch();">
+									aria-required="true" type="text" value="" maxlength="10"
+									oninput="menuAutoSearch();" onkeyup="ajustar(this)" style="padding: 2px;">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>
@@ -922,13 +927,13 @@
 								</select>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<div class="form-group ">
 								<label class="control-label " for="u6066_input"> <spring:theme
 										code="mirit.addresshelper.complemento" />
 								</label> <input id="u6066_input" name="lastName"
 									class="form-control addressHelperField" aria-required="true"
-									type="text" value="" maxlength="240" oninput="">
+									type="text" value="" maxlength="40" oninput=""  onkeyup="ajustar(this)" style="padding: 2px;">
 								<div class="help-block">
 									<span id="lastName.errors" class="hidden">Seleccione un
 										tipo de documento</span>

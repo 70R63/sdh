@@ -166,6 +166,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		String categoriza = "";
 		final DocTramitesRequest docTramitesRequest = new DocTramitesRequest();
 		DocTramitesResponse docTramitesResponse = null;
+		String urlAccion = null;
 
 
 		llenarElementosTramites(elementos);
@@ -205,10 +206,16 @@ public class TramitesCrearPageController extends AbstractPageController
 				{
 				}
 			}
+			if (elementoSeleccionado.getUrlAccion() != null)
+			{
+				urlAccion = elementoSeleccionado.getUrlAccion();
+			}
+
 		}
 
 		infoVista.setOpciones(elementosResponse);
 		infoVista.setDocTramitesResponse(docTramitesResponse);
+		infoVista.setUrlAccion(urlAccion);
 
 
 		return infoVista;
@@ -267,7 +274,7 @@ public class TramitesCrearPageController extends AbstractPageController
 				categoriza = elementoSeleccionado.getCategorizacion();
 				descripcion = elementoSeleccionado.getTramiteOpcion().getLabel();
 				bp = customerModel.getNumBP();
-				canal = "02";
+				canal = "03";
 				mensaje = tramitesCreacionCasoInfo.getMensaje();
 
 
@@ -397,28 +404,28 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0102____", "02", "Actualización");
 		//RIT-Creación
 		agregarElementoTramites(elementos, "010100__", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "010101__", "01", "Creación de RIT");
-		agregarElementoTramites(elementos, "010102__", "02", "Registro / Rol Tributario");
-		agregarElementoTramites(elementos, "010103__", "03", "Creación de Calidad Sujeción Pasiva");
+		//		agregarElementoTramites(elementos, "010101__", "01", "Creación de RIT");
+		agregarElementoTramites(elementos, "010101__", "01", "Registro / Rol Tributario");
+		agregarElementoTramites(elementos, "010102__", "02", "Creación de Calidad Sujeción Pasiva");
 		//RIT-Creación-Registro / Rol Tributario
-		agregarElementoTramites(elementos, "01010200", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "01010201", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z065");
-		agregarElementoTramites(elementos, "01010202", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z065");
+		agregarElementoTramites(elementos, "01010100", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "01010101", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z065");
+		agregarElementoTramites(elementos, "01010102", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z065");
 		//RIT-Creación-Creación de Calidad Sujeción Pasiva
-		agregarElementoTramites(elementos, "01010300", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "01010301", "01", "Predial unificado/ Propietario", "ZT04", "A1ZTRT0004Z067");
-		agregarElementoTramites(elementos, "01010302", "02", "Predial unificado/ Usufructuario", "ZT04", "A1ZTRT0004Z068");
-		agregarElementoTramites(elementos, "01010303", "03", "Predial unificado/ Beneficio/Fideicomitente", "ZT04",
+		agregarElementoTramites(elementos, "01010200", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "01010201", "01", "Predial unificado/ Propietario", "ZT04", "A1ZTRT0004Z067");
+		agregarElementoTramites(elementos, "01010202", "02", "Predial unificado/ Usufructuario", "ZT04", "A1ZTRT0004Z068");
+		agregarElementoTramites(elementos, "01010203", "03", "Predial unificado/ Beneficio/Fideicomitente", "ZT04",
 				"A1ZTRT0004Z069");
-		agregarElementoTramites(elementos, "01010304", "04", "Predial unificado/ Arrendatario", "ZT04", "A1ZTRT0004Z070");
-		agregarElementoTramites(elementos, "01010305", "05", "Predial unificado/ Poseedor", "ZT04", "A1ZTRT0004Z071");
-		agregarElementoTramites(elementos, "01010306", "06", "Vehículos automotores / Propietario", "ZT04", "A1ZTRT0004Z072");
-		agregarElementoTramites(elementos, "01010307", "07", "Vehículos automotores / Poseedor", "ZT04", "A1ZTRT0004Z073");
-		agregarElementoTramites(elementos, "01010308", "08", "Vehículos / Beneficio/Fideicomitente", "ZT04", "A1ZTRT0004Z101");
-		agregarElementoTramites(elementos, "01010309", "09", "Industria y comercio ICA", "ZT04", "A1ZTRT0004Z074");
-		agregarElementoTramites(elementos, "01010310", "10", "Delineación urbana", "ZT04", "A1ZTRT0004Z075");
-		agregarElementoTramites(elementos, "01010311", "11", "Sobretasa a la gasolina", "ZT04", "A1ZTRT0004Z076");
-		agregarElementoTramites(elementos, "01010312", "12", "Publicidad exterior visual", "ZT04", "A1ZTRT0004Z077");
+		agregarElementoTramites(elementos, "01010204", "04", "Predial unificado/ Arrendatario", "ZT04", "A1ZTRT0004Z070");
+		agregarElementoTramites(elementos, "01010205", "05", "Predial unificado/ Poseedor", "ZT04", "A1ZTRT0004Z071");
+		agregarElementoTramites(elementos, "01010206", "06", "Vehículos automotores / Propietario", "ZT04", "A1ZTRT0004Z072");
+		agregarElementoTramites(elementos, "01010207", "07", "Vehículos automotores / Poseedor", "ZT04", "A1ZTRT0004Z073");
+		agregarElementoTramites(elementos, "01010208", "08", "Vehículos / Beneficio/Fideicomitente", "ZT04", "A1ZTRT0004Z101");
+		agregarElementoTramites(elementos, "01010209", "09", "Industria y comercio ICA", "ZT04", "A1ZTRT0004Z074");
+		agregarElementoTramites(elementos, "01010210", "10", "Delineación urbana", "ZT04", "A1ZTRT0004Z075");
+		agregarElementoTramites(elementos, "01010211", "11", "Sobretasa a la gasolina", "ZT04", "A1ZTRT0004Z076");
+		agregarElementoTramites(elementos, "01010212", "12", "Publicidad exterior visual", "ZT04", "A1ZTRT0004Z077");
 		//RIT-Actualización
 		agregarElementoTramites(elementos, "010200__", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "010201__", "01", "Actualización de RIT");
@@ -621,6 +628,13 @@ public class TramitesCrearPageController extends AbstractPageController
 				"A1ZTRT0002Z021");
 		agregarElementoTramites(elementos, "0804____", "04", "Pago Equivocado", "ZT12", "A1ZTRT0002Z022");
 
+		//Agente Autorizado
+		agregarElementoTramites(elementos, "0900____", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "0901____", "01", "Crear Agente Autorizado", "contribuyentes/crearagente");
+		agregarElementoTramites(elementos, "0902____", "02", "Asignarse como Agente Autorizado",
+				"contribuyentes/asignarsecomoagente");
+
+
 
 	}
 
@@ -645,5 +659,13 @@ public class TramitesCrearPageController extends AbstractPageController
 		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion)));
 
 	}
+
+	private void agregarElementoTramites(final List<TramiteOpcion> elementos, final String claveBusqueda,
+			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String urlAccion)
+	{
+		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion), urlAccion));
+
+	}
+
 
 }

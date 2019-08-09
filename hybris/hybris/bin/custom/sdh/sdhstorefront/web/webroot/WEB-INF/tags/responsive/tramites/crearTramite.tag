@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
 
@@ -38,6 +39,7 @@
 							<option value="06">Verificación de pagos</option>
 							<option value="07">Corrección de la información causada contablemente</option>
 							<option value="08">Declaración</option>
+							<option value="09">Agente Autorizado</option>
 						</select>
 					</div>
 				</div>
@@ -125,6 +127,8 @@
 	</div>
 </div>
 
+
+
 <script>
 function tabdoc(){
 	var doc=document.getElementById('documentos');
@@ -139,6 +143,13 @@ function tabdococul(){
 function btnCancelar(){
 	window.location.href = '<c:url value="/contibuyentes/tramites" />';
 }
+
+function redireccionar(urlAccion){
+	debugger;
+	window.location = '<c:url value="/" />'+urlAccion;
+}
+
+
 </script>
 
 
