@@ -69,7 +69,7 @@
 
 	<br>
 	<div class="row">
-		<div class="col-md-10 table-responsive">
+		<div class="col-md-7 table-responsive">
 			<table class="table col-md-2 table-bordered" id="example">
 				<thead>
 					<tr>
