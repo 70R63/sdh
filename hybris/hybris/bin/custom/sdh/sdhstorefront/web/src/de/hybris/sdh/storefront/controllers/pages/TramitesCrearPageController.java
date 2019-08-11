@@ -12,10 +12,12 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.Breadcrumb;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.CreaCasosArchiInfoRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosArchiRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosAtribRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
+import de.hybris.sdh.core.pojos.responses.CreaCasoArchVista;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
@@ -222,7 +224,7 @@ public class TramitesCrearPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/tramites/creacionCaso", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/tramites/creacionCaso", method = RequestMethod.POST)
 	@ResponseBody
 	public CreaCasosResponse creacionCasoGET(@ModelAttribute("tramitesCreacionCasoInfo")
 	final TramitesCreacionCasoInfo tramitesCreacionCasoInfo, final Model model, final RedirectAttributes redirectModel)
@@ -241,6 +243,10 @@ public class TramitesCrearPageController extends AbstractPageController
 		CreaCasosResponse creaCasosResponse = new CreaCasosResponse();
 		final List<CreaCasosAtribRequest> atributos = new ArrayList<CreaCasosAtribRequest>();
 		final List<CreaCasosArchiRequest> archivos = new ArrayList<CreaCasosArchiRequest>();
+		final List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
+		CreaCasoArchVista inputInfoArchivo_tmp = null;
+		CreaCasosArchiRequest archivoCarga = null;
+		CreaCasosArchiInfoRequest archivosInfo = null;
 		CreaCasosAtribRequest atributo = null;
 		String processType = "";
 		String categoriza = "";
@@ -256,6 +262,78 @@ public class TramitesCrearPageController extends AbstractPageController
 		tramitesSeleccionInfo.setValorN1(tramitesCreacionCasoInfo.getValorN1());
 		tramitesSeleccionInfo.setValorN2(tramitesCreacionCasoInfo.getValorN2());
 		tramitesSeleccionInfo.setValorN3(tramitesCreacionCasoInfo.getValorN3());
+
+		if (!tramitesCreacionCasoInfo.getDesA0().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA0());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA0());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA1().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA1());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA1());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA2().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA2());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA2());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA3().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA3());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA3());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA4().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA4());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA4());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA5().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA5());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA5());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA6().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA6());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA6());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA7().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA7());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA7());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA8().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA8());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA8());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+		if (!tramitesCreacionCasoInfo.getDesA9().equals(""))
+		{
+			inputInfoArchivo_tmp = new CreaCasoArchVista();
+			inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA9());
+			inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA9());
+			inputInfoArchivos.add(inputInfoArchivo_tmp);
+		}
+
 		busquedaSubKey = obtenerKeyCrearTramite(tramitesSeleccionInfo);
 
 		for (final TramiteOpcion elemento : elementos)
@@ -291,8 +369,30 @@ public class TramitesCrearPageController extends AbstractPageController
 				atributo = new CreaCasosAtribRequest("String 1", "COMENTARIO", mensaje);
 				atributos.add(atributo);
 
+				//								if (tramitesCreacionCasoInfo.getInfoArchivos() != null)
+				if (inputInfoArchivos.size() > 0)
+				{
+					//					final CreaCasoArchVista elemento = tramitesCreacionCasoInfo.getInfoArchivos();
+					//					for (final CreaCasoArchVista elemento : tramitesCreacionCasoInfo.getInfoArchivos())
+					for (final CreaCasoArchVista elemento : inputInfoArchivos)
+					{
+						archivoCarga = new CreaCasosArchiRequest();
+						archivoCarga.setZZWCC_DEPEND_ID("212110");
+						archivoCarga.setZZWCC_SSERIE_ID("");
+						archivoCarga.setZZWCC_TIPODOC_ID("SDH-6274");
+						archivoCarga.setZZWCC_DESC_TIPODOC(elemento.getDescArchivo());
+						archivoCarga.setZZWCC_ARCIVO(elemento.getContenidoArchivo());
+						archivos.add(archivoCarga);
+					}
+					archivosInfo = new CreaCasosArchiInfoRequest();
+					archivosInfo.setLinea("String 1");
+					archivosInfo.setIdentificador("PROCESS_TYPE");
+					archivosInfo.setValor(elementoSeleccionado.getProcessID());
+					archivosInfo.setArchivos(archivos);
+				}
+
 				creaCasosRequest.setAtributos(atributos);
-				creaCasosRequest.setArchivos(archivos);
+				creaCasosRequest.setArchivosInfo(archivosInfo);
 
 				System.out.println("Request para crm/creaCasos: " + creaCasosRequest);
 				creaCasosResponse = gasolinaService.creacionCaso(creaCasosRequest, sdhDetalleGasolinaWS, LOG);
@@ -514,8 +614,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "02020301", "01", "Actos Terroristas", "ZT13", "A1ZTRT0004Z025");
 		agregarElementoTramites(elementos, "02020302", "02", "Catástrofes Nataturales", "ZT13", "A1ZTRT0004Z098");
 		agregarElementoTramites(elementos, "02020303", "03", "Obras nuevas de vivienda de interés social estratos 1,2, y 3",
-				"A1ZTRT0004Z026",
-				"");
+				"A1ZTRT0004Z026", "");
 		agregarElementoTramites(elementos, "02020304", "04",
 				"Obras de autoconstrucción de vivienda, de estratos 1 y 2 que no excedan de 135 SMLV", "ZT13", "A1ZTRT0004Z027");
 		agregarElementoTramites(elementos, "02020305", "05",
