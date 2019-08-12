@@ -79,7 +79,7 @@
 			<div class="row mt-3">
 				<div class="col-md-12 ">
 					<div class="form-group">
-						<label class="control-label required"
+						<label class="control-label"
 							style="text-align: center !important;"><spring:theme
 								code="tramites.crear.inicial.mensaje" /></label>
 						<textarea name="mensaje" id="mensaje" class="form-control"

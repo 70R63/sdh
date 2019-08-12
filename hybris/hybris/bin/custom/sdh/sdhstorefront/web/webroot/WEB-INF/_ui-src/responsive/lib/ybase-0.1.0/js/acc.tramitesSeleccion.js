@@ -313,13 +313,13 @@ debugger;
 			validacion = false;
 		}
 		
-		if(infoActual.mensaje != null){
-			if(infoActual.mensaje == ""){
-				validacion = false;
-			}
-		}else{
-			validacion = false;
-		}
+//		if(infoActual.mensaje != null){
+//			if(infoActual.mensaje == ""){
+//				validacion = false;
+//			}
+//		}else{
+//			validacion = false;
+//		}
 		
 		if(validacion == false){
 			alert("Por favor ingresar los valores obligatorios marcados con *");
