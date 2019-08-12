@@ -9,10 +9,65 @@ package de.hybris.sdh.core.pojos.requests;
  */
 public class CreaCasosArchiRequest
 {
+
+	private String ZZWCC_DEPEND_ID;
+	private String ZZWCC_SERIE_ID;
+	private String ZZWCC_SSERIE_ID;
 	private String ZZWCC_TIPODOC_ID;
 	private String ZZWCC_DESC_TIPODOC;
 	private String ZZWCC_ARCIVO;
 
+
+	/**
+	 * @return the zZWCC_DEPEND_ID
+	 */
+	public String getZZWCC_DEPEND_ID()
+	{
+		return ZZWCC_DEPEND_ID;
+	}
+
+	/**
+	 * @param zZWCC_DEPEND_ID
+	 *           the zZWCC_DEPEND_ID to set
+	 */
+	public void setZZWCC_DEPEND_ID(final String zZWCC_DEPEND_ID)
+	{
+		ZZWCC_DEPEND_ID = zZWCC_DEPEND_ID;
+	}
+
+	/**
+	 * @return the zZWCC_SERIE_ID
+	 */
+	public String getZZWCC_SERIE_ID()
+	{
+		return ZZWCC_SERIE_ID;
+	}
+
+	/**
+	 * @param zZWCC_SERIE_ID
+	 *           the zZWCC_SERIE_ID to set
+	 */
+	public void setZZWCC_SERIE_ID(final String zZWCC_SERIE_ID)
+	{
+		ZZWCC_SERIE_ID = zZWCC_SERIE_ID;
+	}
+
+	/**
+	 * @return the zZWCC_SSERIE_ID
+	 */
+	public String getZZWCC_SSERIE_ID()
+	{
+		return ZZWCC_SSERIE_ID;
+	}
+
+	/**
+	 * @param zZWCC_SSERIE_ID
+	 *           the zZWCC_SSERIE_ID to set
+	 */
+	public void setZZWCC_SSERIE_ID(final String zZWCC_SSERIE_ID)
+	{
+		ZZWCC_SSERIE_ID = zZWCC_SSERIE_ID;
+	}
 
 	/**
 	 * @return the zZWCC_TIPODOC_ID
@@ -21,7 +76,6 @@ public class CreaCasosArchiRequest
 	{
 		return ZZWCC_TIPODOC_ID;
 	}
-
 
 	/**
 	 * @param zZWCC_TIPODOC_ID
@@ -32,8 +86,6 @@ public class CreaCasosArchiRequest
 		ZZWCC_TIPODOC_ID = zZWCC_TIPODOC_ID;
 	}
 
-
-
 	/**
 	 * @return the zZWCC_DESC_TIPODOC
 	 */
@@ -41,7 +93,6 @@ public class CreaCasosArchiRequest
 	{
 		return ZZWCC_DESC_TIPODOC;
 	}
-
 
 	/**
 	 * @param zZWCC_DESC_TIPODOC
@@ -52,7 +103,6 @@ public class CreaCasosArchiRequest
 		ZZWCC_DESC_TIPODOC = zZWCC_DESC_TIPODOC;
 	}
 
-
 	/**
 	 * @return the zZWCC_ARCIVO
 	 */
@@ -60,7 +110,6 @@ public class CreaCasosArchiRequest
 	{
 		return ZZWCC_ARCIVO;
 	}
-
 
 	/**
 	 * @param zZWCC_ARCIVO
@@ -70,7 +119,6 @@ public class CreaCasosArchiRequest
 	{
 		ZZWCC_ARCIVO = zZWCC_ARCIVO;
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -83,12 +131,25 @@ public class CreaCasosArchiRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"ZZWCC_TIPODOC_ID\"\":\"" + this.getZZWCC_TIPODOC_ID() + "\",");
-		stringBuilder.append("\"ZZWCC_DESC_TIPODOC\":\"" + this.getZZWCC_DESC_TIPODOC() + "\",");
-		stringBuilder.append("\"ZZWCC_ARCIVO\":\"" + this.getZZWCC_ARCIVO() + "\"");
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_DEPEND_ID\":\"", this.getZZWCC_DEPEND_ID(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_SERIE_ID\":\"", this.getZZWCC_SERIE_ID(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_SSERIE_ID\":\"", this.getZZWCC_SSERIE_ID(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_TIPODOC_ID\":\"", this.getZZWCC_TIPODOC_ID(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_DESC_TIPODOC\":\"", this.getZZWCC_DESC_TIPODOC(), "\","));
+		stringBuilder.append(obtenerValorJson("\"ZZWCC_ARCIVO\":\"", this.getZZWCC_ARCIVO(), "\""));
 		stringBuilder.append("}");
 
 
 		return stringBuilder.toString();
+	}
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
 	}
 }
