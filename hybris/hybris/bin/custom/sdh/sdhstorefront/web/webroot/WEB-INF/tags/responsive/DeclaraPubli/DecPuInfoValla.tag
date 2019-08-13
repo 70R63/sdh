@@ -124,7 +124,7 @@
 						</select>
 					</c:when>
 					<c:when test="${declaPublicidadForm.luginst eq '02'}">
-						<select disabled="disabled">
+						<select class="newalto form-control">
 							<option value="04">Vallas en vehículos automotores con
 								dimensión superior a 8 m2</option>
 						</select>
