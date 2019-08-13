@@ -54,7 +54,7 @@
 									<td><input class="inputtextnew" disabled="disabled"
 										type="text" size="30" value="${eachAgent.completeName}" /></td>
 									<td
-										style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="https://publicsector.localhost:9002/sdhstorefront/es/autorizados/contribuyente/representando?representado=${eachAgent.agent}">Ingresar</a></td>
+										style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="/sdhstorefront/autorizados/contribuyente/representando?representado=${eachAgent.agent}">Ingresar</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
