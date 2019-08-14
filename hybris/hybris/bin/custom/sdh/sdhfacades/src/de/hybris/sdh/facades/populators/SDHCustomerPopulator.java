@@ -216,7 +216,7 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 				eachAgentData.setDocumentNumber(eachAgentModel.getDocumentNumber());
 				eachAgentData.setDocumentType(eachAgentModel.getDocumentType());
 				eachAgentData.setInternalFunction(eachAgentModel.getInternalFunction());
-
+				eachAgentData.setBp(eachAgentModel.getBp());
 				agents.add(eachAgentData);
 			}
 			target.setAgentList(agents);

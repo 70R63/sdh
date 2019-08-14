@@ -44,18 +44,20 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${currentCustomer.agentList}" var="eachAgent" >
-								<tr>
-									<td><input class="inputtextnew tableident"
-										disabled="disabled" type="text" size="30" value="${eachAgent.documentType}" /></td>
-									<td><input class="inputtextnew tablenumiden"
-										disabled="disabled" type="text" size="30" value="${eachAgent.documentNumber}" /></td>
-									<td><input class="inputtextnew tablenumiden"
-										disabled="disabled" type="text" size="30" value="${eachAgent.agent}" /></td>
-									<td><input class="inputtextnew" disabled="disabled"
-										type="text" size="30" value="${eachAgent.completeName}" /></td>
-									<td
-										style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="https://publicsector.localhost:9002/sdhstorefront/es/autorizados/contribuyente/representando?representado=${eachAgent.agent}">Ingresar</a></td>
-								</tr>
+								<c:if test="${eachAgent.agent eq 'X'}" >
+									<tr>
+										<td><input class="inputtextnew tableident"
+											disabled="disabled" type="text" size="30" value="${eachAgent.documentType}" /></td>
+										<td><input class="inputtextnew tablenumiden"
+											disabled="disabled" type="text" size="30" value="${eachAgent.documentNumber}" /></td>
+										<td><input class="inputtextnew tablenumiden"
+											disabled="disabled" type="text" size="30" value="${eachAgent.bp}" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											type="text" size="30" value="${eachAgent.completeName}" /></td>
+										<td
+											style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="/sdhstorefront/autorizados/contribuyente/representando?representado=${eachAgent.bp}">Ingresar</a></td>
+									</tr>
+								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>

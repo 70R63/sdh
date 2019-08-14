@@ -389,6 +389,9 @@
         			<attribute qualifier="internalFunction" type="java.lang.String">
         				<persistence type="property"></persistence>
         			</attribute>
+					<attribute qualifier="bp" type="java.lang.String">
+						<persistence type="property"></persistence>
+					</attribute>
        			</attributes>
 	        </itemtype>
 	        
