@@ -9,10 +9,6 @@
 
 
 
-<sf:hidden path="valorN0" id ="pathValorN0"/>
-<sf:hidden path="valorN1" id ="pathValorN1"/>
-<sf:hidden path="valorN2" id ="pathValorN2"/>
-<sf:hidden path="valorN3" id ="pathValorN3"/>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row mt-3">

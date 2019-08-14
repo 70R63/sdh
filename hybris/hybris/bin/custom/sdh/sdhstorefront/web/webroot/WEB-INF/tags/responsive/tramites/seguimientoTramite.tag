@@ -56,30 +56,9 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.inicial.numrad" /></label><input id=""
+							code="tramites.seguimiento.inicial.numrad" /></label><input id="radicado"
 						name="" class="newalto form-control" type="text" value=""
 						maxlength="240"></input>
-				</div>
-			</div>
-		</div>
-		<div class="row mt-3">
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.inicial.tipdoc" /></label> 
-					<sf:select path="tipoId"
-						items="${catalogos.tipoId}"
-						referenceData="${catalogos.tipoId}"
-						class="newalto form-control" disabled="false" readonly="false" id="tipoId"/>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.inicial.numdoc" /></label>					
-							<sf:input path="numDoc" value="${dataForm.numDoc}"
-						class="newalto form-control" maxlength="30" size="20"
-						readonly="false" id="numDoc"/>
 				</div>
 			</div>
 		</div>

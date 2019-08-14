@@ -129,78 +129,77 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 		final ConsCasosRequest consultaCasosRequest = new ConsCasosRequest();
 		ConsCasosResponse consCasosResponse = new ConsCasosResponse();
 		String num_caso = "";
-		String tipoId = "";
-		String numDoc = "";
+		String radicado = "";
 		String linea = "";
 		String mensaje = "";
+		String bp = "";
 		final Map<String, ConsCasosInfo> mapResultado = new HashMap<String, ConsCasosInfo>();
 
 
-		if ((tramitesConsultaCasoInfo.getNum_caso() != null && !tramitesConsultaCasoInfo.getNum_caso().isEmpty())
-				|| ((tramitesConsultaCasoInfo.getTipoId() != null && !tramitesConsultaCasoInfo.getTipoId().isEmpty())
-						&& (tramitesConsultaCasoInfo.getNumDoc() != null && !tramitesConsultaCasoInfo.getNumDoc().isEmpty())))
+		bp = customerModel.getNumBP();
+
+		num_caso = tramitesConsultaCasoInfo.getNum_caso();
+		radicado = tramitesConsultaCasoInfo.getRadicado();
+		linea = "0";
+
+		if (num_caso.isEmpty() && radicado.isEmpty())
 		{
-			num_caso = tramitesConsultaCasoInfo.getNum_caso();
-			tipoId = tramitesConsultaCasoInfo.getTipoId();
-			numDoc = tramitesConsultaCasoInfo.getNumDoc();
-			linea = "0";
-
+			consultaCasosRequest.setCONTRIBUYENTE(bp);
+		}
+		else
+		{
 			consultaCasosRequest.setNUM_CASO(num_caso);
-			if (!tipoId.isEmpty())
-			{
-				consultaCasosRequest.setCLASE_IDENTIFICACION(tipoId);
-				consultaCasosRequest.setID_IDENTIFICADOR(numDoc);
-			}
-			consultaCasosRequest.setLINEA(linea);
+			consultaCasosRequest.setNUM_RADICADO(radicado);
+		}
+		consultaCasosRequest.setLINEA(linea);
 
 
-			System.out.println("Request para crm/consCasos: " + consultaCasosRequest);
-			consCasosResponse = gasolinaService.consultCaso(consultaCasosRequest, sdhDetalleGasolinaWS, LOG);
-			System.out.println("Response de crm/consCasos: " + consCasosResponse);
-			if (gasolinaService.ocurrioErrorCreacionCaso(consCasosResponse) != true)
+		System.out.println("Request para crm/consCasos: " + consultaCasosRequest);
+		consCasosResponse = gasolinaService.consultCaso(consultaCasosRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de crm/consCasos: " + consCasosResponse);
+		if (gasolinaService.ocurrioErrorCreacionCaso(consCasosResponse) != true)
+		{
+			mensaje = consCasosResponse.getTxtmsj();
+			if (consCasosResponse.getResultado() != null)
 			{
-				mensaje = consCasosResponse.getTxtmsj();
-				if (consCasosResponse.getResultado() != null)
+				if (consCasosResponse.getResultado().size() > 0)
 				{
-					if (consCasosResponse.getResultado().size() > 0)
+					for (final ConsCasosResultadoResponse resultadoActual : consCasosResponse.getResultado())
 					{
-						for (final ConsCasosResultadoResponse resultadoActual : consCasosResponse.getResultado())
+						infoConsulCasos = mapResultado.get(resultadoActual.getProcess_type());
+						if (infoConsulCasos == null)
 						{
-							infoConsulCasos = mapResultado.get(resultadoActual.getProcess_type());
-							if (infoConsulCasos == null)
-							{
-								infoConsulCasos = new ConsCasosInfo();
-							}
-							else
-							{
-								mapResultado.remove(resultadoActual.getProcess_type());
-							}
-							if (resultadoActual.getCampo().equals("TRÁMITE"))
-							{
-								infoConsulCasos.setTramite(resultadoActual.getFactor());
-							}
-							if (resultadoActual.getCampo().equals("NÚMERO DE CASO"))
-							{
-								infoConsulCasos.setNum_caso(resultadoActual.getFactor());
-							}
-							if (resultadoActual.getCampo().equals("NÚMERO DE RADICADO"))
-							{
-								infoConsulCasos.setNum_radicado(resultadoActual.getFactor());
-							}
-							if (resultadoActual.getCampo().equals("ESTATUS"))
-							{
-								infoConsulCasos.setEstatus(resultadoActual.getFactor());
-							}
-							mapResultado.put(resultadoActual.getProcess_type(), infoConsulCasos);
+							infoConsulCasos = new ConsCasosInfo();
 						}
-
-						infoCasos = new ArrayList(mapResultado.values());
+						else
+						{
+							mapResultado.remove(resultadoActual.getProcess_type());
+						}
+						if (resultadoActual.getCampo().equals("TRÁMITE"))
+						{
+							infoConsulCasos.setTramite(resultadoActual.getFactor());
+						}
+						if (resultadoActual.getCampo().equals("NÚMERO DE CASO"))
+						{
+							infoConsulCasos.setNum_caso(resultadoActual.getFactor());
+						}
+						if (resultadoActual.getCampo().equals("NÚMERO DE RADICADO"))
+						{
+							infoConsulCasos.setNum_radicado(resultadoActual.getFactor());
+						}
+						if (resultadoActual.getCampo().equals("ESTATUS"))
+						{
+							infoConsulCasos.setEstatus(resultadoActual.getFactor());
+						}
+						mapResultado.put(resultadoActual.getProcess_type(), infoConsulCasos);
 					}
+
+					infoCasos = new ArrayList(mapResultado.values());
 				}
 			}
-			else
-			{
-			}
+		}
+		else
+		{
 		}
 		infoVista.setInfoCasos(infoCasos);
 		infoVista.setMensaje(mensaje);
