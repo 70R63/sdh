@@ -92,28 +92,30 @@
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme code="" /></label> <select
-					class="form-control "
+					class="form-control PEFirmInterFunct"
 					style="font-size: 13px; padding: 0px; margin-top: 23px"
-					onchange="habfirmante(this)" id="selectfirmante">
-					<option>Seleccionar</option>
-					<option>Revisor</option>
-					<option>Contador</option>
-					<option>Representante</option>
+					onchange="internalFunctionSelected(this)" id="selectfirmante">
+					<option value="">Seleccionar</option>
+					<c:forEach items="${agentFunctionsMap}" var="eachFunction">
+
+						<option value="${eachFunction.key}">${eachFunction.value}</option>
+
+					</c:forEach>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label " style="margin-top: 20px"><spring:theme
-						code="publicidad.declaracion.firma.nombre" /></label> <select  id="selcnombre"
-					name="" class="form-control"><option>Seleccionar</option></select>
+						code="publicidad.declaracion.firma.nombre" /></label> <select  id="selcnombre" onchange="nameSelected(this)"
+					name="" class="form-control PEFirmSelectNombre"><option value="">Seleccionar</option></select>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label textocentrado" style="margin-top: 20px"><spring:theme
 						code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
+					name="" class="form-control PEFirmTipoId" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
 		</div>
@@ -121,7 +123,7 @@
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
 						code="publicidad.declaracion.firma.numide" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
+					name="" class="form-control PEFirmNumId" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
 		</div>
@@ -130,7 +132,7 @@
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
 						code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled id=""
-					name="" class="form-control" disabled type="text" value=""
+					name="" class="form-control PEFirmTarjetaProf" disabled type="text" value=""
 					maxlength="240"></input>
 			</div>
 		</div>
@@ -206,7 +208,7 @@
 
 		} else {
 
-			alert("No se pueden agregar más firmantes");
+			alert("No se pueden agregar mï¿½s firmantes");
 
 		}
 	}
@@ -224,4 +226,59 @@
 			alert("No puede eliminar todos los registros");
 		}
 	}
+
+	function internalFunctionSelected(element) {
+		var internalFunctionSelected = $(element).val();
+		var nameSelect = $(element).closest(".representante").find(".PEFirmSelectNombre");
+		if (internalFunctionSelected == "") {
+			$(nameSelect).find('option').remove();
+			var o = new Option("SELECCIONAR", "");
+			/// jquerify the DOM object 'o' so we can use the html method
+			$(o).html("SELECCIONAR");
+			$(nameSelect).append(o);
+			$(element).closest(".representante").find(".PEFirmTipoId").val("");
+			$(element).closest(".representante").find(".PEFirmNumId").val("");
+			$(element).closest(".representante").find(".PEFirmTarjetaProf").val("");
+			return;
+		} else {
+
+			$.each(ACC.agentesFirmas[internalFunctionSelected], function (key, value) {
+				var o = new Option(value.completeName, key);
+				/// jquerify the DOM object 'o' so we can use the html method
+				$(o).html(value.completeName);
+				$(nameSelect).append(o);
+			});
+
+
+		}
+	}
+
+	function nameSelected(element){
+
+		var nameSelected = $(element).val();
+
+		if(nameSelected == "")
+		{
+			$(element).closest(".representante").find(".PEFirmTipoId").val("");
+			$(element).closest(".representante").find(".PEFirmNumId").val("");
+			$(element).closest(".representante").find(".PEFirmTarjetaProf").val("");
+			return;
+		}
+
+		var internalFunctionSelected = $(element).closest(".representante").find(".PEFirmInterFunct").val();
+
+		var documentNumber = ACC.agentesFirmas[internalFunctionSelected][nameSelected].documentNumber;
+
+		var documentType = ACC.agentesFirmas[internalFunctionSelected][nameSelected].documentType;
+
+		var tarjetaProf = ACC.agentesFirmas[internalFunctionSelected][nameSelected].bp;
+
+		$(element).closest(".representante").find(".PEFirmTipoId").val(documentType);
+		$(element).closest(".representante").find(".PEFirmNumId").val(documentNumber);
+		$(element).closest(".representante").find(".PEFirmTarjetaProf").val(tarjetaProf);
+
+
+	}
+
+
 </script>
