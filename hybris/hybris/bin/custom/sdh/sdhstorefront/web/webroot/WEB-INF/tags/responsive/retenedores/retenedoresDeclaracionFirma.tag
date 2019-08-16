@@ -9,6 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <input type="hidden" id="numForm" name="numForm" value="${calculoResponse.numForm }"/>
+<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL" htmlEscape="false" />
 <div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
@@ -72,7 +73,6 @@
 			</div>
 			<div class="row">
 				<div class="col-md-3">
-					
 					<c:url value="/retenedores/estadocargas" var="edoCargasURL"/>
 					<a id="downloadReteICADeclaracionHelper" target="_blank"></a>
 					<button type="button" id="" class="btn btn-secondary btn-lg" type="button" onclick="window.location.href = '${edoCargasURL}'">
@@ -90,17 +90,29 @@
 					</button>
 				</div>
 					<div class="col-md-3">
-					<button id="" class="btn btn-primary btn-lg" type="button">
-						<spring:theme code="reteica.declaracion.firma.paglinea" />
-					</button>
-				</div>
+						<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
+							<sf:hidden path="tipoImpuesto" />
+							<sf:hidden path="numBP" />
+							<sf:hidden path="numDoc" />
+							<sf:hidden path="tipoDoc" />
+							<sf:hidden path="anoGravable" />
+							<sf:hidden path="periodo" />
+							<sf:hidden path="clavePeriodo" />
+							<sf:hidden path="dv" />
+							<sf:hidden path="numObjeto" />
+							<sf:hidden path="CDU" />
+							<button id="pagar" class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar" ${paymentDisabled} >
+								<spring:theme code="reteica.declaracion.firma.paglinea" />
+							</button>
+						</sf:form>
+					</div>
 			</div>
 
 		</div>
 	</div>
 </div>
 
-
+<c:out value="${paymentDisabled}"/>
 
 
 <script>

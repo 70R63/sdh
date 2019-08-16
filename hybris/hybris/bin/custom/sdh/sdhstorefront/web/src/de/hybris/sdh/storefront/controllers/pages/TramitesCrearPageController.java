@@ -536,7 +536,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01020201", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z078");
 		agregarElementoTramites(elementos, "01020202", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z079");
 		//RIT-Actualización-Actualización Calidad Sujeción Pasiva
-		agregarElementoTramites(elementos, "0102030", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "01020300", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "01020301", "01", "Predial unificado/ Propietario", "ZT05", "A1ZTRT0004Z080");
 		agregarElementoTramites(elementos, "01020302", "02", "Predial unificado/ Usufructuario", "ZT05", "A1ZTRT0004Z081");
 		agregarElementoTramites(elementos, "01020303", "03", "Predial unificado/ Beneficio/Fideicomitente", "ZT05",

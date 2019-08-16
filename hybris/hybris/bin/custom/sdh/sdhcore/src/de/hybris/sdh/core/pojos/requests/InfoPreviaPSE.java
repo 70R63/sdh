@@ -186,5 +186,19 @@ public class InfoPreviaPSE
 		CDU = cDU;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "InfoPreviaPSE [tipoImpuesto=" + tipoImpuesto + ", numBP=" + numBP + ", numDoc=" + numDoc + ", tipoDoc=" + tipoDoc
+				+ ", anoGravable=" + anoGravable + ", periodo=" + periodo + ", clavePeriodo=" + clavePeriodo + ", dv=" + dv
+				+ ", numObjeto=" + numObjeto + ", CDU=" + CDU + "]";
+	}
+
+
 
 }

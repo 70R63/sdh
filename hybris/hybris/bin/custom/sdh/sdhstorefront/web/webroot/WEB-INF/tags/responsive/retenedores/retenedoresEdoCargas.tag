@@ -81,6 +81,7 @@
 
 		</div>
 	</form:form>
+
 	<div class="row">
 		<div class="col-md-10 tableamplia">
 			<div class="table-responsive">
@@ -141,7 +142,7 @@
 											</c:when>
 											<c:when test='${(eachArchivo.estado == "03")}'>
 												<c:url value="/retenedores/declaracion" var="urlPresentar" />
-												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }">Generar declaración</a></td>
+												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }&anoGravable=${estadoCargasFormData.anoGravable}&objectNumber=${objectNumber}&perRepor=${eachArchivo.perRepor}">Generar declaración</a></td>
 											</c:when>
 											<c:when test='${(eachArchivo.estado == "04")}'>
 												<td>Procesado</td>

@@ -38,7 +38,7 @@ ACC.tramitesSeleccion = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					ACC.tramitesSeleccion.fillFieldsFromDataSel(dataActual,dataResponse);
+					ACC.tramitesSeleccion.updateFromResponse(dataActual,dataResponse);
 				},
 				error : function() {
 				}
@@ -92,6 +92,8 @@ ACC.tramitesSeleccion = {
 			var dataActual = {};
 			
 			dataActual.num_caso = $("#num_caso").val();
+			dataActual.tipoId = $("#tipoId").val();
+			dataActual.numDoc = $("#numDoc").val();
 			
 			debugger;
 			$.ajax({
@@ -108,7 +110,7 @@ ACC.tramitesSeleccion = {
 		});
 	},
 	
-	resultadoConsultaCaso : function(infoSeleccion, infoCaso) {
+	resultadoConsultaCaso : function(infoSeleccion, infoResponse) {
 
 		debugger;
 		ACC.tramitesSeleccion.clearSeleccionCaso();
@@ -116,18 +118,23 @@ ACC.tramitesSeleccion = {
 		
 		
 		$("#tableInfo").find("tr:gt(0)").remove();
-		$.each(infoCaso, function (index,value){
-			$('#tableInfo').append("<tr>"+ 
-					'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'"data-estatus=" '+ value.estatus +'"     >'+ value.num_caso +'</label>'+
-					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.num_radicado + '" /></td>'+
-					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="' + value.tramite +'" /></td>'+
-					'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.estatus +'" /></td>'+
-					 "</tr>");
-			mostrarTabDocs = true;
-		});
+		if(infoResponse.infoCasos.length > 0){
+			$.each(infoResponse.infoCasos, function (index,value){
+				$('#tableInfo').append("<tr>"+ 
+						'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'"data-estatus=" '+ value.estatus +'"     >'+ value.num_caso +'</label>'+
+						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.num_radicado + '" /></td>'+
+						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="' + value.tramite +'" /></td>'+
+						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.estatus +'" /></td>'+
+						 "</tr>");
+				mostrarTabDocs = true;
+			});			
+		}
 		if(mostrarTabDocs == true){
 			var doc = document.getElementById('tableInfo');
 			doc.style.display='block';
+		}
+		if(infoResponse.mensaje != null && infoResponse.mensaje != ""){
+			alert(infoResponse.mensaje);			
 		}
 	
 	},
@@ -211,13 +218,21 @@ ACC.tramitesSeleccion = {
 	},
 	
 	
-	fillFieldsFromDataSel : function(infoActual,infoResponse) {
+	updateFromResponse : function(infoActual,infoResponse) {
 
-		var doc = document.getElementById('documentos');
-		doc.style.display='none';
+		debugger;
+		ACC.tramitesSeleccion.performActionFromResponse(infoResponse);	
+		ACC.tramitesSeleccion.updateSelectFromResponse(infoActual,infoResponse);		
+		ACC.tramitesSeleccion.fillDocsDataFromResponse(infoResponse);		
+			
+		
+	},
+	
+	
+	updateSelectFromResponse : function(infoActual,infoResponse) {	
+		
 		if(infoActual.nivelSeleccion == 0){
 			ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
-			
 			if(infoResponse.opciones.length > 0){
 				$.each(infoResponse.opciones, function (index,value){
 					$('#selectNivel1').append("<option value="+ value.key+">"+value.label+"</option>");
@@ -246,11 +261,10 @@ ACC.tramitesSeleccion = {
 				})
 				$("#divSubCategoria").show();
 			}
-		}
-		
-		ACC.tramitesSeleccion.fillFieldsFromDataDocs(infoResponse);		
+		}	
 		
 	},
+	
 	
 	resultadoCreacionCaso : function(infoActual,infoResponse) {
 
@@ -273,7 +287,7 @@ ACC.tramitesSeleccion = {
 	},
 	
 	
-	fillFieldsFromDataDocs : function(docTramites) {
+	fillDocsDataFromResponse : function(docTramites) {
 
 		debugger;
 		var doc = document.getElementById('documentos');
@@ -296,6 +310,19 @@ ACC.tramitesSeleccion = {
 			doc.style.display='none';
 		}
 	
+	},
+	
+	performActionFromResponse : function(infoResponse) {
+
+		debugger;
+		var urlAccion = $.ajaxPrefilter();
+		urlAccion = urlAccion + infoResponse.urlAccion;
+		
+		if(infoResponse.urlAccion != null){
+			redireccionar(infoResponse.urlAccion);		
+		}
+	
+		
 	},
 	
 	clearFieldsFromDataSelN0 : function(infoActual) {
