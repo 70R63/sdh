@@ -393,6 +393,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final String tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R")
 				? new ControllerPseConstants().getRETENCIONDU()
 				: new ControllerPseConstants().getDELINEACION();
+		final String anticipo = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "X" : "";
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
@@ -426,6 +427,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setAnticipo(anticipo);
 
 
 
@@ -488,6 +490,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final String tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R")
 				? new ControllerPseConstants().getRETENCIONDU()
 				: new ControllerPseConstants().getDELINEACION();
+		final String anticipo = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "X" : "";
 
 		if (infoDelineacion.getInput().getSelectedAnoPresDeclaracion() != null)
 		{
@@ -523,6 +526,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setAnticipo(anticipo);
 
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
@@ -626,6 +630,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String CDU = "";
 
 		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
+		final String anticipo = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "X" : "";
 		numBP = infoDelineacion.getValCont().getInfoContrib().getNumBP();
 		numDoc = infoDelineacion.getValCont().getInfoContrib().getNumDoc();
 		tipoDoc = infoDelineacion.getValCont().getInfoContrib().getTipoDoc();
@@ -647,6 +652,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setDv(dv);
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setAnticipo(anticipo);
 
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
