@@ -585,7 +585,7 @@ public class PSEPaymentController extends AbstractPageController
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
-				psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), "172.18.39.46", "NonRed#1"));
+				psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), "ACH Host Copy Rights", "NonRed#1"));
 
 
 		return pseServices
