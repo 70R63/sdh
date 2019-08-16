@@ -9,10 +9,6 @@
 
 
 
-<sf:hidden path="valorN0" id ="pathValorN0"/>
-<sf:hidden path="valorN1" id ="pathValorN1"/>
-<sf:hidden path="valorN2" id ="pathValorN2"/>
-<sf:hidden path="valorN3" id ="pathValorN3"/>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row mt-3">
@@ -79,7 +75,7 @@
 			<div class="row mt-3">
 				<div class="col-md-12 ">
 					<div class="form-group">
-						<label class="control-label required"
+						<label class="control-label"
 							style="text-align: center !important;"><spring:theme
 								code="tramites.crear.inicial.mensaje" /></label>
 						<textarea name="mensaje" id="mensaje" class="form-control"

@@ -13,7 +13,7 @@ import java.util.List;
 public class CreaCasosRequest
 {
 	private List<CreaCasosAtribRequest> atributos;
-	private List<CreaCasosArchiRequest> archivos;
+	private CreaCasosArchiInfoRequest archivosInfo;
 
 
 
@@ -36,20 +36,20 @@ public class CreaCasosRequest
 	}
 
 	/**
-	 * @return the archivos
+	 * @return the archivosInfo
 	 */
-	public List<CreaCasosArchiRequest> getArchivos()
+	public CreaCasosArchiInfoRequest getArchivosInfo()
 	{
-		return archivos;
+		return archivosInfo;
 	}
 
 	/**
-	 * @param archivos
-	 *           the archivos to set
+	 * @param archivosInfo
+	 *           the archivosInfo to set
 	 */
-	public void setArchivos(final List<CreaCasosArchiRequest> archivos)
+	public void setArchivosInfo(final CreaCasosArchiInfoRequest archivosInfo)
 	{
-		this.archivos = archivos;
+		this.archivosInfo = archivosInfo;
 	}
 
 	/*
@@ -62,24 +62,31 @@ public class CreaCasosRequest
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 
-		if (this.getAtributos() != null || this.getArchivos() != null)
+		if (this.getAtributos() != null || this.getArchivosInfo() != null)
 		{
 			{
 				stringBuilder.append("{");
 				stringBuilder.append("\"parametros\":");
 				stringBuilder.append("[");
+				if (this.getArchivosInfo() != null)
+				{
+					if (this.getArchivosInfo().getArchivos() != null)
+					{
+						if (this.getArchivosInfo().getArchivos().size() > 0)
+						{
+							stringBuilder.append("{");
+							stringBuilder.append(this.preparaArchivos("\"archivos\":"));
+							stringBuilder.append("}");
+						}
+					}
+				}
 				if (this.getAtributos() != null)
 				{
-					stringBuilder.append(this.preparaAtributos());
-				}
-				if (this.getArchivos() != null)
-				{
-					if (this.getArchivos().size() > 0)
+					if (this.getArchivosInfo() != null)
 					{
-						stringBuilder.append(",{");
-						stringBuilder.append(this.preparaArchivos("\"archivos\":"));
-						stringBuilder.append("}");
+						stringBuilder.append(",");
 					}
+					stringBuilder.append(this.preparaAtributos());
 				}
 				stringBuilder.append("]");
 				stringBuilder.append("}");
@@ -125,25 +132,33 @@ public class CreaCasosRequest
 		String valorRetorno = "";
 
 
-		if (this.getArchivos() != null && this.getArchivos().size() > 0)
+		if (this.getArchivosInfo() != null && this.getArchivosInfo().getArchivos() != null
+				&& this.getArchivosInfo().getArchivos().size() > 0)
 		{
+			//			stringBuilder.append("{");
+			stringBuilder.append("\"linea\":\"" + this.getArchivosInfo().getLinea() + "\",");
+			stringBuilder.append("\"identificador\":\"" + this.getArchivosInfo().getIdentificador() + "\",");
+			stringBuilder.append("\"valor\":\"" + this.getArchivosInfo().getValor() + "\",");
+
+			stringBuilder.append("\"archivos\":");
 			stringBuilder.append("[");
-			for (int i = 0; i < this.getArchivos().size() - 1; i++)
+			for (int i = 0; i < this.getArchivosInfo().getArchivos().size() - 1; i++)
 			{
-				infoArchivos = this.getArchivos().get(i);
+				infoArchivos = this.getArchivosInfo().getArchivos().get(i);
 
 				stringBuilder.append(infoArchivos.toString());
 				stringBuilder.append(",");
 			}
-			infoArchivos = this.getArchivos().get(this.getArchivos().size() - 1);
+			infoArchivos = this.getArchivosInfo().getArchivos().get(this.getArchivosInfo().getArchivos().size() - 1);
 
 			stringBuilder.append(infoArchivos.toString());
 			stringBuilder.append("]");
+			//			stringBuilder.append("}");
 		}
 
 		if (stringBuilder.toString() != null)
 		{
-			valorRetorno = nombreSegmento + stringBuilder.toString();
+			valorRetorno = stringBuilder.toString();
 		}
 
 		return valorRetorno;

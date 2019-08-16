@@ -10,10 +10,10 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
-
-
+import com.google.gson.Gson;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.acceleratorstorefrontcommons.tags.JSONUtils;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
@@ -41,6 +41,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
@@ -51,16 +52,17 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -78,8 +80,7 @@ import sun.misc.BASE64Decoder;
  */
 @Controller
 @RequestMapping("/contribuyentes/publicidadexterior/declaracion")
-public class PublicidadExteriorDeclaracionPageController extends AbstractPageController
-{
+public class PublicidadExteriorDeclaracionPageController extends AbstractPageController {
 
 	private static final Logger LOG = Logger.getLogger(PublicidadExteriorPageController.class);
 
@@ -130,6 +131,38 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declarapublicidad";
 
+	private void addAgentsToModel(Model model, CustomerData customerData)
+	{
+		if(CollectionUtils.isNotEmpty(customerData.getAgentList()))
+		{
+			Map<String,List<SDHAgentData>> agents = new HashMap<String,List<SDHAgentData>>();
+			Map<String,String> agentFunctions = new HashMap<String,String>();
+			for(SDHAgentData eachAgent : customerData.getAgentList())
+			{
+				if("-".equalsIgnoreCase(eachAgent.getAgent()))
+				{
+					if(agents.containsKey(eachAgent.getInternalFunction().replace(" ","").replace(".","")))
+					{
+						agents.get(eachAgent.getInternalFunction().replace(" ","").replace(".","")).add(eachAgent);
+					}else{
+						List<SDHAgentData> initialList = new ArrayList<SDHAgentData>();
+						initialList.add(eachAgent);
+						agents.put(eachAgent.getInternalFunction().replace(" ","").replace(".",""),initialList);
+						agentFunctions.put(eachAgent.getInternalFunction().replace(" ","").replace(".",""),eachAgent.getInternalFunction());
+					}
+				}
+			}
+			Gson gson = new Gson();
+			String agentsString = gson.toJson(agents);
+			model.addAttribute("agents", agentsString);
+			String agentFunctionsString = gson.toJson(agentFunctions);
+			model.addAttribute("agentFunctions", agentFunctionsString);
+			model.addAttribute("agentFunctionsMap", agentFunctions);
+
+
+		}
+	}
+
 	//CMS PAGES
 	private static final String DECLARACION_PUBLICIDAD_CMS_PAGE = "DeclaraPublicidadPage";
 
@@ -154,6 +187,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		detallePublicidadRequest.setNumResolu(numResolu);
 		detallePublicidadRequest.setAnoGravable(anoGravable);
 		detallePublicidadRequest.setTipoValla(tipoValla);
+
+		addAgentsToModel(model, customerData);
 
 		try
 		{

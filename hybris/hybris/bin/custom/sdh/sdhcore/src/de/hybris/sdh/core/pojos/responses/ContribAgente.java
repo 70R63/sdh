@@ -15,6 +15,7 @@ public class ContribAgente
 	private String nomCompleto;
 	private String impuesto;
 	private String funcionInterl;
+	private String bp;
 
 	/**
 	 * @return the tipoDoc
@@ -119,8 +120,12 @@ public class ContribAgente
 	}
 
 
+	public String getBp() {
+		return bp;
+	}
 
-
-
+	public void setBp(String bp) {
+		this.bp = bp;
+	}
 }
 
