@@ -9,13 +9,20 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIcaRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.CalculoReteIcaResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHReteIcaFacade;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.ReteICACalculoForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 
@@ -67,21 +74,28 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 	@Resource(name = "sdhGeneraDeclaracionService")
 	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
 
+	@Resource(name = "sdhDetalleGasolina")
+	SDHDetalleGasolina sdhDetalleGasolinaWS;
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
 
 	@RequestMapping(value = "/retenedores/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String retenedoricadeclaracion(final Model model, @RequestParam(value = "numForm")
-	final String numForm) throws CMSItemNotFoundException
+	final String numForm, @RequestParam(value = "anoGravable")
+	final String anoGravable, @RequestParam(value = "objectNumber")
+	final String objectNumber, @RequestParam(value = "perRepor")
+	final String perRepor) throws CMSItemNotFoundException
 	{
-
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 		if (StringUtils.isBlank(numForm))
 		{
 			return "redirect:" + "/retenedores/estadocargas";
 		}
 
 		final CustomerData customerData = getCustomerFacade().getCurrentCustomer();
-
-
 		final CalculoReteIcaRequest request = new CalculoReteIcaRequest();
 
 		request.setNumBP(customerData.getNumBP());
@@ -90,13 +104,33 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 		final CalculoReteIcaResponse calculoResponse = sdhReteIcaFacade.calculo(request);
 
 		model.addAttribute("calculoResponse", calculoResponse);
-
 		storeCmsPageInModel(model, getContentPageForLabelOrId(RETEICA_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(RETEICA_DECLARACION_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(RETEICA_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
+		infoPreviaPSE.setAnoGravable(anoGravable);
+		infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
+		infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+		infoPreviaPSE.setNumBP(customerData.getNumBP());
+		infoPreviaPSE.setClavePeriodo(perRepor);
+		infoPreviaPSE.setNumObjeto(objectNumber);
+		infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getRETEICA());
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final DetallePagoRequest detallePagoRequest = new DetallePagoRequest();
+		final DetallePagoResponse detallePagoResponse;
+
+		detallePagoRequest.setNumBP(infoPreviaPSE.getNumBP());
+		detallePagoRequest.setClavePeriodo(infoPreviaPSE.getClavePeriodo());
+		detallePagoRequest.setNumObjeto(infoPreviaPSE.getNumObjeto());
+		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+
+		model.addAttribute("paymentDisabled", gasolinaService.ocurrioErrorPSE(detallePagoResponse) == true ? "disabled" : "");
+		System.out.println("------> detallePagoResponse");
+		System.out.println(detallePagoResponse);
+		System.out.println("------> detallePagoResponse");
 
 		return getViewForPage(model);
 	}

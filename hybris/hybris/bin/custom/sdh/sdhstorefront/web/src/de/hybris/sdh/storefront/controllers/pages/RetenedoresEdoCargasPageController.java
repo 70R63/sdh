@@ -79,7 +79,7 @@ public class RetenedoresEdoCargasPageController extends RetenedoresAbstractPageC
 	public String retenedorescargaspost(final Model model, final EstadoCargasForm form)
 			throws CMSItemNotFoundException
 	{
-
+		String objectNumber = null;
 		model.addAttribute("form", form);
 
 		final CustomerData customerData = getCustomerFacade().getCurrentCustomer();
@@ -89,11 +89,14 @@ public class RetenedoresEdoCargasPageController extends RetenedoresAbstractPageC
 		request.setNumBP(customerData.getNumBP());
 		if (customerData.getReteIcaTax() != null)
 		{
-			request.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
+			objectNumber = customerData.getReteIcaTax().getObjectNumber();
+			request.setNumObjeto(objectNumber);
 		}
 		final ReteIcaResponse response = sdhReteIcaFacade.reteICA(request);
 
 		model.addAttribute("archivosTRM", response.getArchivosTRM());
+		model.addAttribute("estadoCargasFormData", form);
+		model.addAttribute("objectNumber", objectNumber);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AGENTES_RETENEDORES_CARGAS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AGENTES_RETENEDORES_CARGAS_CMS_PAGE));
