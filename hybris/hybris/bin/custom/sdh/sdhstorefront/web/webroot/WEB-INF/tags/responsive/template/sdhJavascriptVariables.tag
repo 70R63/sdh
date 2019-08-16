@@ -172,6 +172,9 @@
 		        ACC.agentesFirmas = ${agents};
 		        ACC.agentFunctions = ${agentFunctions};
             </c:if>
+
+			ACC.publicidadExteriorFirmar  = '<c:url value="/contribuyentes/publicidadexterior/declaracion/firmar"  />';
+
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},
 				{'isocode':'AF','name':'Afganist�n'},
