@@ -195,6 +195,7 @@
 			<sf:hidden path="dv" />
 			<sf:hidden path="numObjeto" />
 			<sf:hidden path="CDU" />
+			<sf:hidden path="anticipo" />
 			<div class="col-md-3">
 				<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 					name="pagar" value="pagar" disabled="true">
