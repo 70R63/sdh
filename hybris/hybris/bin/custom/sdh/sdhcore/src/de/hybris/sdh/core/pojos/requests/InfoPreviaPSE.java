@@ -19,6 +19,7 @@ public class InfoPreviaPSE
 	private String dv;
 	private String numObjeto;
 	private String CDU;
+	private String anticipo;
 
 
 	/**
@@ -185,6 +186,25 @@ public class InfoPreviaPSE
 	{
 		CDU = cDU;
 	}
+
+	/**
+	 * @return the anticipo
+	 */
+	public String getAnticipo()
+	{
+		return anticipo;
+	}
+
+	/**
+	 * @param anticipo
+	 *           the anticipo to set
+	 */
+	public void setAnticipo(final String anticipo)
+	{
+		this.anticipo = anticipo;
+	}
+
+
 
 
 }

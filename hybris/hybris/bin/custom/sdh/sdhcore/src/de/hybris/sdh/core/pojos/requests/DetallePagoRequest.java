@@ -12,6 +12,7 @@ public class DetallePagoRequest
 	private String numBP;
 	private String clavePeriodo;
 	private String numObjeto;
+	private String anticipo;
 
 
 
@@ -66,6 +67,23 @@ public class DetallePagoRequest
 		this.numObjeto = numObjeto;
 	}
 
+	/**
+	 * @return the anticipo
+	 */
+	public String getAnticipo()
+	{
+		return anticipo;
+	}
+
+	/**
+	 * @param anticipo
+	 *           the anticipo to set
+	 */
+	public void setAnticipo(final String anticipo)
+	{
+		this.anticipo = anticipo;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -77,11 +95,22 @@ public class DetallePagoRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"clavePeriodo\":\"" + this.getClavePeriodo() + "\",");
-		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\"");
+		stringBuilder.append(obtenerValorJson("\"numBP\":\"", this.getNumBP(), "\","));
+		stringBuilder.append(obtenerValorJson("\"clavePeriodo\":\"", this.getClavePeriodo(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"anticipo\":\"", this.getAnticipo(), "\""));
 		stringBuilder.append("}");
 
 		return stringBuilder.toString();
+	}
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
 	}
 }
