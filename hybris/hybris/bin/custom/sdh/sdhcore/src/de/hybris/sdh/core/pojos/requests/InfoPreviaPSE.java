@@ -19,6 +19,7 @@ public class InfoPreviaPSE
 	private String dv;
 	private String numObjeto;
 	private String CDU;
+	private String anticipo;
 
 
 	/**
@@ -186,6 +187,23 @@ public class InfoPreviaPSE
 		CDU = cDU;
 	}
 
+	/**
+	 * @return the anticipo
+	 */
+	public String getAnticipo()
+	{
+		return anticipo;
+	}
+
+	/**
+	 * @param anticipo
+	 *           the anticipo to set
+	 */
+	public void setAnticipo(final String anticipo)
+	{
+		this.anticipo = anticipo;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -196,9 +214,8 @@ public class InfoPreviaPSE
 	{
 		return "InfoPreviaPSE [tipoImpuesto=" + tipoImpuesto + ", numBP=" + numBP + ", numDoc=" + numDoc + ", tipoDoc=" + tipoDoc
 				+ ", anoGravable=" + anoGravable + ", periodo=" + periodo + ", clavePeriodo=" + clavePeriodo + ", dv=" + dv
-				+ ", numObjeto=" + numObjeto + ", CDU=" + CDU + "]";
+				+ ", numObjeto=" + numObjeto + ", CDU=" + CDU + ", anticipo=" + anticipo + "]";
 	}
-
 
 
 }
