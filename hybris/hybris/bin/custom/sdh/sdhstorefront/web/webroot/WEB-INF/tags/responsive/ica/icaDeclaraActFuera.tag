@@ -7,6 +7,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script>
+function bogota(selectObject){
+	debugger;
+	var muni = selectObject.value;
+	if(muni == '000000011001'){
+		alert("Seleccione un municipio diferente, ya que las actividades deben ser fuera de Bogotá");
+	}
+}
+</script>
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -107,7 +116,7 @@
 		
 					
 						<div class="col-md-2">
-						<select id="" class="new_alto form-control mun codMunicipio" style="height: 48px;">
+						<select id="" class="new_alto form-control mun codMunicipio" style="height: 48px;" onchange="bogota(this)">
 							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value=""/>
 							<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
@@ -144,6 +153,10 @@
 </div>
 
 <script>
+function alertbogota(){
+	
+	
+}
 	function addactvifuera() {
 
 		var tam = $(".actvifuera").length;
@@ -181,4 +194,7 @@
 		var subir = document.getElementById('adjuntar');
 		subir.style.display = 'block';
 	}
+	
+	
+
 </script>

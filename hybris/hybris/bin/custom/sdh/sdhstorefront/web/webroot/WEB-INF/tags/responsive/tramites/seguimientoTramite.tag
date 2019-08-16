@@ -129,7 +129,7 @@
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.tiptramite" /></label><input id=""
 						name="" class="newalto form-control" type="text" value=""
-						maxlength="240" disabled></input>
+						maxlength="240" disabled style="width: 800px !important"></input>
 				</div>
 			</div>
 		</div>
