@@ -168,7 +168,10 @@
 					ACC.customerNIT = "";
 				</c:otherwise>
 			</c:choose>
-			
+            <c:if test="${not empty agents}">
+		        ACC.agentesFirmas = ${agents};
+		        ACC.agentFunctions = ${agentFunctions};
+            </c:if>
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},
 				{'isocode':'AF','name':'Afganist�n'},
