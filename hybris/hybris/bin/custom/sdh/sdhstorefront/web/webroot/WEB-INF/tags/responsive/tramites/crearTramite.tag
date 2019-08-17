@@ -96,7 +96,7 @@
 					<tr>
 						<th><label class="contorl-label labeltabletd"><spring:theme
 									code="tramites.crear.inicial.adjdoc" /></label></th>
-						<th><label class="contorl-label labeltabletd"><spring:theme
+						<th><label class="contorl-label labeltabletd required"><spring:theme
 									code="tramites.crear.inicial.adj" /></label></th>
 					</tr>
 				</thead>
