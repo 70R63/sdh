@@ -108,10 +108,12 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		transactionLogModel.setBankProcessDate("");
 		transactionLogModel.setTransactionState("");
 
-		LOG.info("New newLogTransactionEntry:[" + constantConnectionData.getPpeCode() + " , " + numeroDeReferencia + " , "
-				+ tipoDeImpuesto + " , " + impuesto + " , " + anoGravable + " , " + CHIP + " , " + periodo + " , " + CUD + " , "
-				+ tipoDeIdentificacion + " , " + noIdentificacion + " , " + DV + " , " + fechaLimiteDePago + " , " + pagoAdicional
-				+ " , " + banco + " , " + valorAPagar + " , " + isoCurrency + " , " + tipoDeTarjeta + "]");
+		LOG.info("New newLogTransactionEntry:[ PpeCode=" + constantConnectionData.getPpeCode() + " , NumeroDeReferencia="
+				+ numeroDeReferencia + " , TipoDeImpuesto=" + tipoDeImpuesto + " , Impuesto=" + impuesto + " , AnioGravable="
+				+ anoGravable + " , CHIP=" + CHIP + " , Periodo=" + periodo + " , CUD=" + CUD + " , TipoDeIdentificacion="
+				+ tipoDeIdentificacion + " , NoIdentificacion=" + noIdentificacion + " , DV=" + DV + " , FechaLimiteDePago="
+				+ fechaLimiteDePago + " , PagoAdicional=" + pagoAdicional + " , Banco=" + banco + " , ValorAPagar=" + valorAPagar
+				+ " , IsoCurrency" + isoCurrency + " , TipoDeTarjeta" + tipoDeTarjeta + "]");
 
 		modelService.saveAll(transactionLogModel);
 	}
