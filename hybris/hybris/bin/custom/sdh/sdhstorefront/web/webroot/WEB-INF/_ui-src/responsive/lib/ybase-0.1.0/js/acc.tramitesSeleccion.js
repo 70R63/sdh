@@ -274,9 +274,9 @@ ACC.tramitesSeleccion = {
 			$.each(infoResponse.infoCasos, function (index,value){
 				$('#tableInfo').append("<tr>"+ 
 						'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'"data-estatus=" '+ value.estatus +'"     >'+ value.num_caso +'</label>'+
-						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.num_radicado + '" /></td>'+
-						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="' + value.tramite +'" /></td>'+
-						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.estatus +'" /></td>'+
+						'<td><input class="inputtextnew " disabled="disabled" type="text" size="15" value="' + value.num_radicado + '" /></td>'+
+						'<td><input class="inputtextnew " disabled="disabled" type="text" size="27" value="' + value.tramite +'" /></td>'+
+						'<td><input class="inputtextnew " disabled="disabled" type="text" size="20" value="' + value.estatus +'" /></td>'+
 						 "</tr>");
 				mostrarTabDocs = true;
 			});			
@@ -489,7 +489,7 @@ ACC.tramitesSeleccion = {
 				idNombreArchivo = "docNombreArchivo_"+index;
 				$('#documentos').append("<tr>"+ 
 					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id="'+ idDescArchivo +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
-					 '<td><input class="inputtextnew" type="file" size="30" id="'+ idNombreArchivo +'" /></td>'+
+					 '<td><input class="inputtextnew" type="file" size="150" id="'+ idNombreArchivo +'" /></td>'+
 					 "</tr>");
 				mostrarTabDocs = true;
 			}

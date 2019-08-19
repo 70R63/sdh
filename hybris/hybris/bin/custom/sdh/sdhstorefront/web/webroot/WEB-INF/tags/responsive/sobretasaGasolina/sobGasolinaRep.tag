@@ -24,7 +24,7 @@
 			</div>
 		</div>
 		<div class="row text-center">
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
@@ -53,8 +53,8 @@
 												path="dataForm.representantes[${loop.index}].tipoDoc"
 												items="${dataForm.catalogosSo.tipoIdRev}"
 												referenceData="${dataForm.catalogosSo.tipoIdRev}"
-												class="inputtextnew tabletiprela" maxlength="45" readonly="readonly"
-												disabled="true" />
+												class="inputtextnew" maxlength="45" readonly="readonly"
+												disabled="true" style="width: 150px !important"  />
 										</div>
 									</td>
 									<td>
