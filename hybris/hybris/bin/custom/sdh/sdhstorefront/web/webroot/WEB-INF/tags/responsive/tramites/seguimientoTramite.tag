@@ -83,7 +83,7 @@
 	
 	
 	<div class="row" >
-		<div class="col-md-12">
+		<div class="col-md-8">
 			<div class="table-responsive">
 				<table id="tableInfo" style="display: none" class="table table-bordered">
 					<thead>
@@ -156,16 +156,16 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.estado" /></label> <input id="det_estatus"
-						name="" class="newalto form-control" type="text" value=""
+						name="" class="new_alto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.categoria" /></label><input id="det_tramite"
-						name="" class="newalto form-control" type="text" value=""
-						maxlength="240" disabled></input>
+						name="" class="new_alto form-control" type="text" value=""
+						maxlength="240" disabled style="height: 25px !important; padding: 1px !important;"></input>
 				</div>
 			</div>
 		</div>
@@ -174,7 +174,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.justi" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value=""
+						name="" class="new_alto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
 			</div>
@@ -182,7 +182,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.subcategoria" /></label><input id=""
-						name="" class="newalto form-control" type="text" value=""
+						name="" class="new_alto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
 			</div>
