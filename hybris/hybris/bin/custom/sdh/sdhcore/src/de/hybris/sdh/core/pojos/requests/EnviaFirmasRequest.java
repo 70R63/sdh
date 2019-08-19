@@ -8,7 +8,7 @@ import java.util.List;
 public class EnviaFirmasRequest {
 
     private String numForm;
-    private List<Firmante> tablFirmante;
+    private List<FirmanteRequest> tablFirmante;
 
     public String getNumForm() {
         return numForm;
@@ -18,11 +18,11 @@ public class EnviaFirmasRequest {
         this.numForm = numForm;
     }
 
-    public List<Firmante> getTablFirmante() {
+    public List<FirmanteRequest> getTablFirmante() {
         return tablFirmante;
     }
 
-    public void setTablFirmante(List<Firmante> tablFirmante) {
+    public void setTablFirmante(List<FirmanteRequest> tablFirmante) {
         this.tablFirmante = tablFirmante;
     }
 
@@ -39,7 +39,7 @@ public class EnviaFirmasRequest {
             stringBuilder.append(",");
             stringBuilder.append("\"tablFirmante\": [");
 
-            for(Firmante echFirmante : this.getTablFirmante())
+            for(FirmanteRequest echFirmante : this.getTablFirmante())
             {
                 stringBuilder.append("{");
                 stringBuilder.append("\"tipoIdent\":\"" + ((StringUtils.isBlank(this.getNumForm())) ? "" : echFirmante.getTipoIdent()) + "\",");
