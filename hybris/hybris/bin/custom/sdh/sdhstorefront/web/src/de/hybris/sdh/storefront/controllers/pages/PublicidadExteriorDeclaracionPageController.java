@@ -25,25 +25,18 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
-import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
-import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
-import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
-import de.hybris.sdh.core.pojos.responses.CalcPublicidadResponse;
-import de.hybris.sdh.core.pojos.responses.DetallePubli;
-import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
-import de.hybris.sdh.core.pojos.responses.ErrorPubli;
-import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.requests.*;
+import de.hybris.sdh.core.pojos.responses.*;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
+import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 
@@ -65,11 +58,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -126,6 +115,9 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
 
+	@Resource(name="sdhEnviaFirmasFacade")
+    SDHEnviaFirmasFacade sdhEnviaFirmasFacade;
+
 
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
@@ -180,6 +172,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	{
 		String anoParaPSE = "";
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+		model.addAttribute("customerData",customerData);
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
@@ -414,6 +408,29 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		return calcPublicidadResponse;
 
 	}
+
+	@RequestMapping(value="/firmar",method=RequestMethod.POST)
+    @ResponseBody
+    public EnviaFirmasResponse enviaFirmas(Model model, final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+    {
+        EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
+
+        enviaFirmasRequest.setNumForm(dataForm.getNumForm());
+
+        Firmante firmante = new Firmante();
+
+        firmante.setConfirmacion(dataForm.getConfirmacion());
+        firmante.setFirmante(dataForm.getFirmante());
+        firmante.setNumIdentif(dataForm.getNumIdentif());
+        firmante.setTipoIdent(dataForm.getTipoIdent());
+
+        List<Firmante> firmantesList = new ArrayList<Firmante>();
+        firmantesList.add(firmante);
+
+        enviaFirmasRequest.setTablFirmante(firmantesList);
+
+        return sdhEnviaFirmasFacade.enviaFirmas(enviaFirmasRequest);
+    }
 
 	@RequestMapping(value = "/generar", method = RequestMethod.POST)
 	@ResponseBody

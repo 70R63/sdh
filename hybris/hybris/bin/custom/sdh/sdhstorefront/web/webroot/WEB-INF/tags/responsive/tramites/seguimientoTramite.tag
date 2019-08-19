@@ -72,7 +72,7 @@
 			<div class="col-md-1">
 				<div class="form-group">
 					<button style="margin-top: 3px;" id=""
-						class="btn btn-secondary btn-lg" type="button" onclick="">
+						class="btn btn-secondary btn-lg" type="button" onclick="btnCancelar()">
 						<spring:theme code="tramites.seguimiento.inicial.cancelar" />
 					</button>
 				</div>
@@ -116,7 +116,7 @@
 	</div>
 	<div id="detalle" style="display: none">
 		<div class="row mt-3">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.numtam" /></label><input id="det_num_caso"
@@ -124,17 +124,18 @@
 						maxlength="240" disabled></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.tiptramite" /></label><input id=""
-						name="" class="newalto form-control" type="text" value=""
-						maxlength="240" disabled style="width: 800px !important"></input>
+ 						  style="height: 25px !important; min-height: 25px !important; width: 100%; text-align: left !important; padding: 0px;"						
+						name="" class="form-control" type="text" value=""
+						maxlength="240" disabled></input>
 				</div>
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.numrad" /></label> <input id="det_num_radicado"
@@ -142,23 +143,23 @@
 						maxlength="240" disabled></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.subtramite" /></label><input id=""
-						name="" class="newalto form-control" type="text" value=""
+							style="height: 25px !important; min-height: 25px !important; width: 100%; text-align: left !important; padding: 0px;"
+						name="" class="form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.estado" /></label> <input id="det_estatus"
-						name="" class="new_alto form-control" type="text" value=""
+							code="tramites.seguimiento.detalle.estado" /></label> <input id="det_estatus"style="height: 25px !important; min-height: 25px !important; width: 100%; text-align: left !important; padding: 0px;"
+						name="" class="form-control" type="text" value=""
 						maxlength="240" disabled></input>
-				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
@@ -166,11 +167,23 @@
 							code="tramites.seguimiento.detalle.categoria" /></label><input id="det_tramite"
 						name="" class="new_alto form-control" type="text" value=""
 						maxlength="240" disabled style="height: 25px !important; padding: 1px !important;"></input>
+
+							
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="tramites.seguimiento.detalle.categoria" /></label><input id="det_tramite"
+							style="height: 25px !important; min-height: 25px !important; width: 100%; text-align: left !important; padding: 0px;"
+						name="" class="form-control" type="text" value=""
+						maxlength="240" disabled></input>
+
 				</div>
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.justi" /></label> <input id=""
@@ -178,12 +191,11 @@
 						maxlength="240" disabled></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.subcategoria" /></label><input id=""
-						name="" class="new_alto form-control" type="text" value=""
-						maxlength="240" disabled></input>
+							code="tramites.seguimiento.detalle.subcategoria" /></label><input id="" style="height: 25px !important; min-height: 25px !important; width: 100%; text-align: left !important; padding: 0px;"
+						name="" class="form-control" type="text" value="" maxlength="240" disabled></input>
 				</div>
 			</div>
 		</div>
@@ -229,5 +241,9 @@
 	function showdetalle() {
 		var deta = document.getElementById('detalle');
 		deta.style.display = 'block';
+	}
+	
+	function btnCancelar(){
+		window.location.href = '<c:url value="/contibuyentes/tramites" />';
 	}
 </script>

@@ -214,5 +214,6 @@
 
 	<bean id="sdhConsultaFirmasFacade"	class="de.hybris.sdh.facades.impl.DefaultSDHConstultaFirmasFacade" />
 		
-		
+	<bean name="sdhEnviaFirmasFacade" class="de.hybris.sdh.facades.impl.DefaultSDHEnviaFirmasFacade" />
+
 </beans>
