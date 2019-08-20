@@ -171,7 +171,7 @@
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.categoria" /></label><input
 						id="det_tramite"
-						style="height: 25px !important; min-height: 25px !important; width: 100%; text-align: left !important; padding: 0px;"
+						style="height: 25px !important; min-height: 26px !important; width: 100%; text-align: left !important; padding: 0px;"
 						name="" class="form-control" type="text" value="" maxlength="240"
 						disabled></input>
 
@@ -191,7 +191,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.subcategoria" /></label><input id=""
-						style="height: 25px !important; min-height: 25px !important; width: 100%; text-align: left !important; padding: 0px;"
+						style="height: 25px !important; min-height: 26px !important; width: 100%; text-align: left !important; padding: 0px;"
 						name="" class="form-control" type="text" value="" maxlength="240"
 						disabled></input>
 				</div>
