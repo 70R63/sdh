@@ -130,7 +130,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.tiptramite" /></label><input id=""
+							code="tramites.seguimiento.detalle.tiptramite" /></label><input id="det_cat01"
 						name="" class="new_alto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -148,7 +148,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.subtramite" /></label><input id=""
+							code="tramites.seguimiento.detalle.subtramite" /></label><input id="det_cat02"
 						name="" class="new_alto form-control" type="text" value=""
 						maxlength="240" disabled></input>
 				</div>
@@ -170,7 +170,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="tramites.seguimiento.detalle.categoria" /></label><input
-						id="det_tramite"
+						id="det_cat03"
 						style="height: 25px !important; min-height: 26px !important; width: 100%; text-align: left !important; padding: 0px;"
 						name="" class="form-control" type="text" value="" maxlength="240"
 						disabled></input>
@@ -190,7 +190,7 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="tramites.seguimiento.detalle.subcategoria" /></label><input id=""
+							code="tramites.seguimiento.detalle.subcategoria" /></label><input id="det_cat04"
 						style="height: 25px !important; min-height: 26px !important; width: 100%; text-align: left !important; padding: 0px;"
 						name="" class="form-control" type="text" value="" maxlength="240"
 						disabled></input>

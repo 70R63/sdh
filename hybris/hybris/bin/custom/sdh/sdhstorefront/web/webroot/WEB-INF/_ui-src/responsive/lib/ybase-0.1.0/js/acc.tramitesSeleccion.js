@@ -194,7 +194,7 @@ ACC.tramitesSeleccion = {
 		if(infoResponse.infoCasos.length > 0){
 			$.each(infoResponse.infoCasos, function (index,value){
 				$('#tableInfo').append("<tr>"+ 
-						'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'"data-estatus=" '+ value.estatus +'"     >'+ value.num_caso +'</label>'+
+						'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'" data-estatus=" '+ value.estatus +'" data-cat01=" '+ value.cat01 +'" data-cat02=" '+ value.cat02 +'" data-cat03=" '+ value.cat03 +'" data-cat04=" '+ value.cat04 +'"' +'>'+ value.num_caso +'</label>'+
 						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.num_radicado + '" /></td>'+
 						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="' + value.tramite + '" /></td>'+
 						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.estatus + '" /></td>'+
@@ -221,10 +221,16 @@ ACC.tramitesSeleccion = {
 		$("#det_num_caso").val(valorCampo);
 		valorCampo = $.trim($(this).attr("data-num_radicado"));
 		$("#det_num_radicado").val(valorCampo);
-		valorCampo = $.trim($(this).attr("data-tramite"));
-		$("#det_tramite").val(valorCampo);		
 		valorCampo = $.trim($(this).attr("data-estatus"));
 		$("#det_estatus").val(valorCampo);
+		valorCampo = $.trim($(this).attr("data-cat01"));
+		$("#det_cat01").val(valorCampo);
+		valorCampo = $.trim($(this).attr("data-cat02"));
+		$("#det_cat02").val(valorCampo);
+		valorCampo = $.trim($(this).attr("data-cat03"));
+		$("#det_cat03").val(valorCampo);
+		valorCampo = $.trim($(this).attr("data-cat04"));
+		$("#det_cat04").val(valorCampo);
 
 		var deta = document.getElementById('detalle');
  		deta.style.display = 'block';
@@ -401,7 +407,6 @@ ACC.tramitesSeleccion = {
 // debugger;
 		var doc = document.getElementById('documentos');
 		var mostrarTabDocs = false;
-		var idArchivo;
 		
 		
 		$("#documentos").find("tr:gt(0)").remove();
@@ -410,7 +415,6 @@ ACC.tramitesSeleccion = {
 				 debugger;
 
 				$('#documentos').append("<tr>"+ 
-<<<<<<< HEAD
 					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_'+ index +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
 					 '<td>'+
 					 '<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_'+ index +'" />'+
@@ -419,10 +423,6 @@ ACC.tramitesSeleccion = {
 					 '<input type="hidden" id="docSSerieID_'+ index +'" value="'+ value.subserie_t +'" />'+
 					 '<input type="hidden" id="docTipoDoc_'+ index +'" value="'+ value.tipoDocumen +'" />'+
 					 "</td>"+
-=======
-					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id="'+ idDescArchivo +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
-					 '<td><input style="width:405px" class="inputtextnew" type="file" size="150" id="'+ idNombreArchivo +'" /></td>'+
->>>>>>> dev-maria
 					 "</tr>");
 				mostrarTabDocs = true;
 			}
