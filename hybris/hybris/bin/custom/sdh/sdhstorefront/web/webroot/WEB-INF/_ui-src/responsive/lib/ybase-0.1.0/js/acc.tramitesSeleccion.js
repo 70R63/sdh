@@ -410,6 +410,7 @@ ACC.tramitesSeleccion = {
 				 debugger;
 
 				$('#documentos').append("<tr>"+ 
+<<<<<<< HEAD
 					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_'+ index +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
 					 '<td>'+
 					 '<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_'+ index +'" />'+
@@ -418,6 +419,10 @@ ACC.tramitesSeleccion = {
 					 '<input type="hidden" id="docSSerieID_'+ index +'" value="'+ value.subserie_t +'" />'+
 					 '<input type="hidden" id="docTipoDoc_'+ index +'" value="'+ value.tipoDocumen +'" />'+
 					 "</td>"+
+=======
+					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id="'+ idDescArchivo +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
+					 '<td><input style="width:405px" class="inputtextnew" type="file" size="150" id="'+ idNombreArchivo +'" /></td>'+
+>>>>>>> dev-maria
 					 "</tr>");
 				mostrarTabDocs = true;
 			}
