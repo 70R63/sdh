@@ -11,25 +11,38 @@ ACC.tramitesSeleccion = {
 			var dataActual = {};
 			
 			dataActual.nivelSeleccion = valorNivel;
-			dataActual.valorN0 = $("#selectNivel0").val();
-			dataActual.valorN1 = $("#selectNivel1").val();
-			dataActual.valorN2 = $("#selectNivel2").val();
-			dataActual.valorN3 = $("#selectNivel3").val();
-
-// debugger;
+			dataActual.valorN0 = "";
+			dataActual.valorN1 = "";
+			dataActual.valorN2 = "";
+			dataActual.valorN3 = "";
+			
+ debugger;
 			var doc = document.getElementById('documentos');
 			doc.style.display='none';
 			
 			if(dataActual.nivelSeleccion == 0){
 				ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
+				dataActual.valorN0 = $("#selectNivel0").val();
 			}
 
 			if(dataActual.nivelSeleccion == 1){
 				ACC.tramitesSeleccion.clearFieldsFromDataSelN1();		
+				dataActual.valorN0 = $("#selectNivel0").val();
+				dataActual.valorN1 = $("#selectNivel1").val();
 			}
 
 			if(dataActual.nivelSeleccion == 2){
 				ACC.tramitesSeleccion.clearFieldsFromDataSelN2();
+				dataActual.valorN0 = $("#selectNivel0").val();
+				dataActual.valorN1 = $("#selectNivel1").val();
+				dataActual.valorN2 = $("#selectNivel2").val();
+			}
+			
+			if(dataActual.nivelSeleccion == 3){
+				dataActual.valorN0 = $("#selectNivel0").val();
+				dataActual.valorN1 = $("#selectNivel1").val();
+				dataActual.valorN2 = $("#selectNivel2").val();
+				dataActual.valorN3 = $("#selectNivel3").val();
 			}
 
 			
@@ -221,6 +234,8 @@ ACC.tramitesSeleccion = {
 		$("#det_num_caso").val(valorCampo);
 		valorCampo = $.trim($(this).attr("data-num_radicado"));
 		$("#det_num_radicado").val(valorCampo);
+//		valorCampo = $.trim($(this).attr("data-tramite"));
+//		$("#det_tramite").val(valorCampo);		
 		valorCampo = $.trim($(this).attr("data-estatus"));
 		$("#det_estatus").val(valorCampo);
 		valorCampo = $.trim($(this).attr("data-cat01"));
@@ -444,11 +459,11 @@ ACC.tramitesSeleccion = {
 		if(infoResponse.urlAccion != null){
 			redireccionar(infoResponse.urlAccion);		
 		}
-	
 		
 	},
 	
-	clearFieldsFromDataSelN0 : function(infoActual) {
+	
+	clearFieldsFromDataSelN0 : function() {
 		
 		$("#divSubCategoria").hide();
 		$("#divCategoria").hide();
@@ -462,7 +477,8 @@ ACC.tramitesSeleccion = {
 
 	},
 	
-	clearFieldsFromDataSelN1 : function(infoActual) {
+	
+	clearFieldsFromDataSelN1 : function() {
 
 		$("#divSubCategoria").hide();
 		$("#divCategoria").hide();
@@ -473,7 +489,8 @@ ACC.tramitesSeleccion = {
 	
 	},
 	
-	clearFieldsFromDataSelN2 : function(infoActual) {
+	
+	clearFieldsFromDataSelN2 : function() {
 		$("#divSubCategoria").hide();
 		$("#selectNivel3").find("option:gt(0)").remove();
 		$("#selectNivel3").find("option:eq(0)").remove();
