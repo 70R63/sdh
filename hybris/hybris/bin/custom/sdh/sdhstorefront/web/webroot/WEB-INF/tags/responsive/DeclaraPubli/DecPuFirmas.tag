@@ -40,15 +40,15 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme code="" /></label> <input
-							disabled id="" name="" class="form-control" disabled type="text"
-							value="" maxlength="240" placeholder="Declarante" style="margin-top:4px">
+							disabled id="" name="" class="form-control PEFirmInterFunct" disabled type="text"
+							value="Declarante" maxlength="240" placeholder="Declarante" style="margin-top:4px">
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="publicidad.declaracion.firma.nombre" /></label> <input disabled id=""
-							name="" class="form-control" disabled type="text" value=""
+							name="" class="form-control" disabled type="text" value="${customerData.completeName}"
 							maxlength="240"></input>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id=""
-							name="" class="form-control" disabled type="text" value=""
+							name="" class="form-control DeclaranteDT" disabled type="text" value="${customerData.documentType}"
 							maxlength="240"></input>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="publicidad.declaracion.firma.numide" /></label> <input disabled id=""
-							name="" class="form-control" disabled type="text" value=""
+							name="" class="form-control DeclaranteDN" disabled type="text" value="${customerData.documentNumber}"
 							maxlength="240"></input>
 					</div>
 				</div>
@@ -73,13 +73,13 @@
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled
-							id="" name="" class="form-control" disabled type="text" value=""
+							id="" name="" class="form-control" disabled type="text" value="${customerData.numBP}"
 							maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-1">
 					<label class="control-label"><spring:theme code="" /></label>
-					<button class="btn btn-primary" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
+					<button type="button" onclick="firmButtonClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
 				</div>
 			</div>
 		</div>
@@ -138,7 +138,7 @@
 		</div>
 
 		<div class="col-md-1">
-			<button class="btn btn-primary ajustemargen">Firmar</button>
+			<button type="button" onclick="firmButtonClicked(this);" class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">
@@ -276,6 +276,97 @@
 		$(element).closest(".representante").find(".PEFirmTipoId").val(documentType);
 		$(element).closest(".representante").find(".PEFirmNumId").val(documentNumber);
 		$(element).closest(".representante").find(".PEFirmTarjetaProf").val(tarjetaProf);
+
+
+	}
+	
+	function firmButtonClicked(element) {
+
+		var internalFunctionSelected = $(element).closest(".representante").find(".PEFirmInterFunct").val();
+		var nameSelected = $(element).closest(".representante").find(".PEFirmSelectNombre").val();
+		if(internalFunctionSelected === undefined){
+			internalFunctionSelected = $(element).closest(".container").find(".PEFirmInterFunct").val();
+
+		}
+
+
+
+		if(internalFunctionSelected == "" || nameSelected=="")
+		{
+			$( "#dialogPublicidadExterior" ).dialog( "open" );
+			$("#publicidadExteriorDialogContent").html("");
+			$("#publicidadExteriorDialogContent").html("Por favor seleccione un firmante.");
+		}
+
+		var numIdentif = "";
+
+		var tipoIdent = "";
+
+		var firmante ="";
+
+		if (internalFunctionSelected == "Declarante")
+		{
+			numIdentif = $(".DeclaranteDN").val();
+			tipoIdent = $(".DeclaranteDT").val();
+			firmante ="1";
+
+		}else {
+
+			numIdentif = ACC.agentesFirmas[internalFunctionSelected][nameSelected].documentNumber;
+			tipoIdent = ACC.agentesFirmas[internalFunctionSelected][nameSelected].documentType;
+
+			$.each($(".PEFirmButton"),function (index,value) {
+
+				if($(value).is($(element))){
+					firmante = index+1;
+				}
+
+			});
+
+		}
+
+		var numForm = $("#numForm").val();
+
+		if(numForm == "" )
+		{
+			$( "#dialogPublicidadExterior" ).dialog( "open" );
+			$("#publicidadExteriorDialogContent").html("");
+			$("#publicidadExteriorDialogContent").html("Debe realizar el calculo primero");
+		}
+
+		var confirmacion = "X";
+
+		var data = {};
+
+		data.numForm=numForm;
+		data.tipoIdent = tipoIdent;
+		data.numIdentif = numIdentif;
+		data.firmante = firmante;
+		data.confirmacion = confirmacion;
+
+		$.ajax({
+			url: ACC.publicidadExteriorFirmar,
+			data: data,
+			type: "POST",
+			success: function (data) {
+				$( "#dialogPublicidadExterior" ).dialog( "open" );
+				$("#publicidadExteriorDialogContent").html("");
+				$.each(data.errores,function (index,value) {
+
+					if(value.idmsj != "")
+					{
+						$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+					}
+
+				});
+
+			},
+			error: function () {
+				$( "#dialogPublicidadExterior" ).dialog( "open" );
+				$("#publicidadExteriorDialogContent").html("");
+				$("#publicidadExteriorDialogContent").html("Hubo un error al intentar firmar la declaración, favor de intentarlo más tarde.")
+			}
+		});
 
 
 	}

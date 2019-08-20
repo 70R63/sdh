@@ -666,5 +666,8 @@
 
 	<bean name="sdhConsulFirmasService" class="de.hybris.sdh.core.services.impl.DefaultSDHConsultaFirmasService" />
 
+	<bean name="sdhEnviaFirmasService" class="de.hybris.sdh.core.services.impl.DefaultSDHEnviaFirmasService" />
+
+	<bean name="sdhCalPublicidad2Service" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcPublicidad2Service" />
 
 </beans>

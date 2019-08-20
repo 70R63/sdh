@@ -214,5 +214,8 @@
 
 	<bean id="sdhConsultaFirmasFacade"	class="de.hybris.sdh.facades.impl.DefaultSDHConstultaFirmasFacade" />
 		
-		
+	<bean name="sdhEnviaFirmasFacade" class="de.hybris.sdh.facades.impl.DefaultSDHEnviaFirmasFacade" />
+
+	<bean id="sdhCalculaPublicidad2Facade" class="de.hybris.sdh.facades.impl.DefaultSDHCalculaPublicidad2Facade" />
+
 </beans>

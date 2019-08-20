@@ -13,7 +13,6 @@ package de.hybris.sdh.storefront.controllers.pages;
 import com.google.gson.Gson;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
-import de.hybris.platform.acceleratorstorefrontcommons.tags.JSONUtils;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
@@ -25,25 +24,21 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
-import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
-import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
-import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
-import de.hybris.sdh.core.pojos.responses.CalcPublicidadResponse;
-import de.hybris.sdh.core.pojos.responses.DetallePubli;
-import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
-import de.hybris.sdh.core.pojos.responses.ErrorPubli;
-import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.jalo.SDHAgent;
+import de.hybris.sdh.core.pojos.requests.*;
+import de.hybris.sdh.core.pojos.responses.*;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePublicidadService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.facades.SDHCalculaPublicidad2Facade;
+import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
+import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PublicidadForm;
 
@@ -62,14 +57,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -126,6 +116,15 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
 
+	@Resource(name="sdhEnviaFirmasFacade")
+    SDHEnviaFirmasFacade sdhEnviaFirmasFacade;
+
+	@Resource(name="sdhCalculaPublicidad2Facade")
+	SDHCalculaPublicidad2Facade sdhCalculaPublicidad2Facade;
+
+	@Resource(name="sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
+
 
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
@@ -180,6 +179,8 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	{
 		String anoParaPSE = "";
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+		model.addAttribute("customerData",customerData);
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
@@ -415,6 +416,29 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 	}
 
+	@RequestMapping(value="/firmar",method=RequestMethod.POST)
+    @ResponseBody
+    public EnviaFirmasResponse enviaFirmas(Model model, final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+    {
+        EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
+
+        enviaFirmasRequest.setNumForm(dataForm.getNumForm());
+
+        FirmanteRequest firmante = new FirmanteRequest();
+
+        firmante.setConfirmacion(dataForm.getConfirmacion());
+        firmante.setFirmante(dataForm.getFirmante());
+        firmante.setNumIdentif(dataForm.getNumIdentif());
+        firmante.setTipoIdent(dataForm.getTipoIdent());
+
+        List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
+        firmantesList.add(firmante);
+
+        enviaFirmasRequest.setTablFirmante(firmantesList);
+
+        return sdhEnviaFirmasFacade.enviaFirmas(enviaFirmasRequest);
+    }
+
 	@RequestMapping(value = "/generar", method = RequestMethod.POST)
 	@ResponseBody
 	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
@@ -489,6 +513,217 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		}
 
 		return generaDeclaracionResponse;
+
+	}
+
+	private CustomerData convertSAPResponseToCustomerData(SDHValidaMailRolResponse response) {
+		CustomerData customerData = new CustomerData();
+
+		customerData.setNumBP(response.getInfoContrib().getNumBP());
+		customerData.setDocumentNumber(response.getInfoContrib().getNumDoc());
+		customerData.setDocumentType(response.getInfoContrib().getTipoDoc());
+
+
+		if (response.getAgentes() != null)
+		{
+			List<SDHAgentData> list = new ArrayList<SDHAgentData>();
+
+			for(ContribAgente eachAgent : response.getAgentes())
+			{
+				SDHAgentData eachAgentData = new SDHAgentData();
+
+				eachAgentData.setBp(eachAgent.getBp());
+				eachAgentData.setInternalFunction(eachAgent.getFuncionInterl());
+				eachAgentData.setDocumentType(eachAgent.getTipoDoc());
+				eachAgentData.setDocumentNumber(eachAgent.getNumDoc());
+				eachAgentData.setCompleteName(eachAgent.getNomCompleto());
+				eachAgentData.setAgent(eachAgent.getAgente());
+
+				list.add(eachAgentData);
+
+			}
+
+			customerData.setAgentList(list);
+		}
+
+
+
+		final StringBuilder nameBuilder = new StringBuilder();
+
+
+
+		customerData.setCompleteName(response.getCompleteName());
+
+
+
+
+
+
+		return customerData;
+
+	}
+
+
+	@RequestMapping(value="/show",method = RequestMethod.GET)
+	public String showViewFromNumForm(final Model model, @RequestParam(required = true, value = "numForm")
+	final String numForm, @RequestParam(required = true, value = "representado")
+	final String representado, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		String anoParaPSE = "";
+
+		CustomerData customerData = convertSAPResponseToCustomerData(sdhCustomerFacade.getRepresentadoFromSAP(representado));
+
+		model.addAttribute("customerData",customerData);
+
+
+		CalcPublicidad2Request calculaPublicidad2Request = new CalcPublicidad2Request();
+		calculaPublicidad2Request.setFormulario(numForm);
+		calculaPublicidad2Request.setPartner(representado);
+		CalcPublicidad2Response calculaPublicidad2Response = sdhCalculaPublicidad2Facade.calcula(calculaPublicidad2Request);
+
+
+		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
+		final String numBP = customerData.getNumBP();
+		detallePublicidadRequest.setNumBP(numBP);
+		detallePublicidadRequest.setNumResolu(calculaPublicidad2Response.getNum_resolu());
+		detallePublicidadRequest.setAnoGravable(calculaPublicidad2Response.getAnio_gravable());
+		detallePublicidadRequest.setTipoValla(calculaPublicidad2Response.getTipoValla());
+
+		addAgentsToModel(model, customerData);
+
+		try
+		{
+			final PublicidadForm publicidadForm = new PublicidadForm();
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
+					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+
+			anoParaPSE = detallePublicidadResponse.getAnoGravable();
+			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
+			declaPublicidadForm.setTipoValla(calculaPublicidad2Response.getTipoValla());
+			declaPublicidadForm.setIdNumber(customerData.getDocumentNumber());
+			declaPublicidadForm.setIdType(customerData.getDocumentType());
+			declaPublicidadForm.setName(customerData.getCompleteName());
+			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
+			declaPublicidadForm.setNumBP(customerData.getNumBP());
+			declaPublicidadForm.setAnograv(detallePublicidadResponse.getAnoGravable());
+			declaPublicidadForm.setNumform(detallePublicidadResponse.getInfoDeclara().getNumForm());
+			declaPublicidadForm.setNumresol(detallePublicidadResponse.getNumResolu());
+			declaPublicidadForm.setFecresol(detallePublicidadResponse.getFechResolu());
+
+
+
+
+			final String fechnotif = detallePublicidadResponse.getFechNotif();
+			if (StringUtils.isNotBlank(fechnotif) && !"00000000".equals(fechnotif))
+			{
+				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+				final LocalDate localDate = LocalDate.parse(fechnotif, formatter);
+
+				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+				declaPublicidadForm.setFechnotif(localDate.format(formatter2));
+			}
+
+
+			declaPublicidadForm.setOrValla(detallePublicidadResponse.getInfoDeclara().getOrientacionValla());
+
+			declaPublicidadForm.setLuginst(detallePublicidadResponse.getInfoDeclara().getLugarInstala());
+			declaPublicidadForm.setBasegrav(detallePublicidadResponse.getInfoDeclara().getTamanoValla());
+			declaPublicidadForm.setOpuso(detallePublicidadResponse.getInfoDeclara().getOpcionUso());
+			declaPublicidadForm.setImpCar(detallePublicidadResponse.getInfoDeclara().getImpCargo());
+			declaPublicidadForm.setValsan(detallePublicidadResponse.getInfoDeclara().getVlrSancion());
+			declaPublicidadForm.setValpag(detallePublicidadResponse.getInfoDeclara().getVlrPagar());
+			declaPublicidadForm.setIntmora(detallePublicidadResponse.getInfoDeclara().getInteresMora());
+			declaPublicidadForm.setTotpag(detallePublicidadResponse.getInfoDeclara().getTotalPagar());
+			declaPublicidadForm.setRefe(detallePublicidadResponse.getInfoDeclara().getReferencia());
+			declaPublicidadForm.setVigenDesde(detallePublicidadResponse.getVigenDesde());
+			declaPublicidadForm.setVigenHasta(detallePublicidadResponse.getVigenHasta());
+			declaPublicidadForm.setDetalle(detallePublicidadResponse.getDetalle());
+
+			//TODO: this has to change once we have logic for agents.
+			declaPublicidadForm.setIdDeclarante(customerData.getDocumentNumber());
+			declaPublicidadForm.setTipoIDdeclara(customerData.getDocumentType());
+			if (detallePublicidadResponse.getDetalle() != null && !detallePublicidadResponse.getDetalle().isEmpty())
+			{
+
+				for (final DetallePubli eachDetalle : detallePublicidadResponse.getDetalle())
+				{
+					declaPublicidadForm.setPlaca(eachDetalle.getPlaca());
+					declaPublicidadForm.setDireccion(eachDetalle.getDireccion());
+					break;
+				}
+
+			}
+
+			declaPublicidadForm.setHabilitaPagarEnLinea("");
+			if (declaPublicidadForm.getNumform() != null)
+			{
+				if (!declaPublicidadForm.getNumform().isEmpty())
+				{
+					declaPublicidadForm.setHabilitaPagarEnLinea("");
+				}
+			}
+			declaPublicidadForm.setCatalogos(new PublicidadExteriorServicios().prepararCatalogos());
+
+			model.addAttribute("declaPublicidadForm", declaPublicidadForm);
+
+		}
+		catch (final Exception e)
+		{
+			// XXX Auto-generated catch block
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
+
+		//informacion para PSE
+
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		final String mensajeError = "";
+		String[] mensajesError;
+
+
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		{
+			infoPreviaPSE.setAnoGravable(anoParaPSE);
+			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
+			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+			infoPreviaPSE.setNumBP(numBP);
+			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoPublicidad(detalleContribuyente, calculaPublicidad2Response.getNum_resolu()));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getPUBLICIDAD());
+		}
+		else
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+		}
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+		//informacion para PSE
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		//updatePageTitle(model, getContentPageForLabelOrId(DECLARACION_PUBLICIDAD_CMS_PAGE)); */
+
+		return getViewForPage(model);
 
 	}
 

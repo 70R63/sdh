@@ -138,12 +138,12 @@
 								code="reteica.inicial.carga.adjunta" /></label>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-7">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="reteica.inicial.carga.seleccionar" /></label><input
 							id="retencionesFile" name="retencionesFile" type="file"
-							class="new_alto form-control" id="" accept=".txt">
+							class="form-control" id="" accept=".txt">
 					</div>
 				</div>
 			</div>
