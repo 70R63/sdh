@@ -55,7 +55,7 @@
 	</c:when>
 
 	<c:when
-		test="${certiFormPost.idimp == 5 or certiFormPost.idimp == 3 or certiFormPost.idimp == 6}">
+		test="${certiFormPost.idimp == 5 or certiFormPost.idimp == 3 or certiFormPost.idimp == 7  or certiFormPost.idimp == 6}">
 		<c:set var="anioGravable" value="${anoGravableGasolina}" />
 	</c:when>
 
@@ -129,7 +129,7 @@
 			</div>
 
 			<c:if
-				test="${certiFormPost.idimp ne '4' and certiFormPost.idimp ne '3' and certiFormPost.idimp ne '6'}">
+				test="${certiFormPost.idimp ne '4' and certiFormPost.idimp ne '3' and certiFormPost.idimp ne '7' and certiFormPost.idimp ne '6'}">
 				<div class="col-md-4 col-xs-12 mb-20 no-marginleft" id="idPeriodo"
 					style="display: block;">
 					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
@@ -161,7 +161,7 @@
 			</c:if>
 
 			<c:if
-				test="${certiFormPost.idimp == '3' and  isPeriodoAnual == false}">
+				test="${certiFormPost.idimp == '3' and certiFormPost.idimp == '7' and  isPeriodoAnual == false}">
 				<div class="col-md-4 col-xs-12 mb-20 no-marginleft" id="idPeriodo"
 					style="display: block;">
 					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
