@@ -1,6 +1,6 @@
 package de.hybris.sdh.core.pojos.requests;
 
-public class Firmante {
+public class FirmanteRequest {
 
     private String tipoIdent;
     private String numIdentif;

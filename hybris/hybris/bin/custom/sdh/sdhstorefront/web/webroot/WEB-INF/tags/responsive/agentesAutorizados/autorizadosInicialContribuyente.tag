@@ -123,7 +123,19 @@
 															   disabled="disabled" type="text" size="30" value="<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />"</td>
 													<td><input class="inputtextnew" disabled="disabled"
 															   type="text" size="30" value="-" /></td>
-													<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
+
+													<c:choose>
+														<c:when test="${eachDeclaracion.impuesto eq '0007'}">
+															<td ><a href="<c:url value="/contribuyentes/publicidadexterior/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}" />">Ver</a></td>
+
+														</c:when>
+														<c:otherwise>
+															<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
+														</c:otherwise>
+
+													</c:choose>
+
+
 												<tr>
 												</c:forEach>
 										</c:otherwise>
