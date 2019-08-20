@@ -49,7 +49,7 @@ ACC.tramitesSeleccion = {
 	bindTramitesEnviar : function() {
 		$(document).on("click", ".tramitesEnviar", function(e) {
 			e.preventDefault();
-			debugger;
+//			debugger;
 			
 //			let files = this.state.files;
 //			let file0 = e.target.form[6].files[0];
@@ -71,7 +71,7 @@ ACC.tramitesSeleccion = {
 
 			
 			
-debugger;
+
  	        var valorNivel = 0; 	       
 			var valorActual = this.value;
 			var validacion = false;
@@ -83,12 +83,27 @@ debugger;
 			dataActual.valorN2 = $("#selectNivel2").val();
 			dataActual.valorN3 = $("#selectNivel3").val();
 			dataActual.mensaje = $("#mensaje").val();
+			
+//			debugger;
+			validacion = ACC.tramitesSeleccion.validarInfoAntesSubmit(dataActual);
 
 			var contenidoArchivo = "";
 			var desArchivo = "";
 			var nombreArchivo = "";
 			
 //			contenidoArchivo = "Ly8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gIA0KaW1wb3J0IG9yZy5zcHJpbmdmcmFtZXdvcmsuaHR0cC5jbGllbnQuc3VwcG9ydC5CYXNpY0F1dGhvcml6YXRpb25JbnRlcmNlcHRvcjsNCmltcG9ydCBvcmcuc3ByaW5nZnJhbWV3b3JrLndlYi5jbGllbnQuUmVzdFRlbXBsYXRlOw0KaW1wb3J0IGRlLmh5YnJpcy5zZGguY29yZS5jcmVkaWJhbmNvLio7DQppbXBvcnQgb3JnLnNwcmluZ2ZyYW1ld29yay5odHRwLkh0dHBIZWFkZXJzOw0KaW1wb3J0IG9yZy5zcHJpbmdmcmFtZXdvcmsuaHR0cC5NZWRpYVR5cGU7DQppbXBvcnQgb3JnLnNwcmluZ2ZyYW1ld29yay5odHRwLkh0dHBFbnRpdHk7DQppbXBvcnQgY29tLmZhc3RlcnhtbC5qYWNrc29uLmRhdGFiaW5kLk9iamVjdE1hcHBlcjsNCmltcG9ydCBqYXZhLm5pby5jaGFyc2V0LlN0YW5kYXJkQ2hhcnNldHM7DQppbXBvcnQgamF2YS51dGlsLkJhc2U2NDsNCg0KDQoNCkhlYWRlciBoZWFkZXIgPSBuZXcgSGVhZGVyKCJqd3QiLCJSUzI1NiIpOw0KbWFwcGVyID0gbmV3IE9iamVjdE1hcHBlcigpOw0KaGVhZGVySnNvbiA9ICBtYXBwZXIud3JpdGVWYWx1ZUFzU3RyaW5nKGhlYWRlcikNCmhlYWRlQmFzZTY0ID0gQmFzZTY0LmdldFVybEVuY29kZXIoKS53aXRob3V0UGFkZGluZygpLmVuY29kZVRvU3RyaW5nKGhlYWRlckpzb24uZ2V0Qnl0ZXMoU3RhbmRhcmRDaGFyc2V0cy5VVEZfOCkpOw0KcHJpbnRsbiAiSGVhZGVySnNvbjogIiArIGhlYWRlckpzb24NCnByaW50bG4gIkhlYWRlckJhc2U2NDogIiArIGhlYWRlQmFzZTY0DQpwcmludGxuICItLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0iDQoNCkluaXRpdGFsaXplVHJhbnNhY3Rpb25SZXF1ZXN0IHJlcXVlc3RPYmplY3QgPSBuZXcgSW5pdGl0YWxpemVUcmFuc2FjdGlvblJlcXVlc3QoIjEyMjIxMyIsIjA5MCIsIiIsIjEiLCANCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImh0dHBzOi8vc2RoZGV2LmxvY2FsOjkwMDIvc2Roc3RvcmVmcm9udCIsDQoiMTUyMDAwMCIsIjAiLCI1NjMyOTg2NjIiLCJCV0Q4NjUiLCI1ODY2OSIpOw0KbWFwcGVyID0gbmV3IE9iamVjdE1hcHBlcigpOw0KcmVxdWVzdE9iamVjdEpzb24gPSBtYXBwZXIud3JpdGVWYWx1ZUFzU3RyaW5nKHJlcXVlc3RPYmplY3QpDQpqYXZhLnNlY3VyaXR5Lk1lc3NhZ2VEaWdlc3QgbWQgPSBqYXZhLnNlY3VyaXR5Lk1lc3NhZ2VEaWdlc3QuZ2V0SW5zdGFuY2UoIk1ENSIpOw0KYnl0ZVtdIGFycmF5ID0gbWQuZGlnZXN0KHJlcXVlc3RPYmplY3RKc29uLmdldEJ5dGVzKCkpOw0KU3RyaW5nQnVmZmVyIHNiID0gbmV3IFN0cmluZ0J1ZmZlcigpOw0KZm9yIChpbnQgaSA9IDA7IGkgPCBhcnJheS5sZW5ndGg7ICsraSkgew0KICAgIHNiLmFwcGVuZChJbnRlZ2VyLnRvSGV4U3RyaW5nKChhcnJheVtpXSAmIDB4RkYpIHwgMHgxMDApLnN1YnN0cmluZygxLDMpKTsNCn0NCmluaXRpYWxpemVUcmFuc2FjdGlvbiA9IHNiLnRvU3RyaW5nKCk7DQpwcmludGxuICJJbml0aWFsaXplVHJhbnNhY3Rpb25Kc29uOiAiICsgcmVxdWVzdE9iamVjdEpzb24NCnByaW50bG4gIkluaXRpYWxpemVUcmFuc2FjdGlvbkhhc2hNZDU6ICIgKyBpbml0aWFsaXplVHJhbnNhY3Rpb247DQpwcmludGxuICItLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0iDQoNCg0KbWFwcGVyID0gbmV3IE9iamVjdE1hcHBlcigpOw0KUGF5bG9hZCBwYXlsb2FkID0gbmV3IFBheWxvYWQoaW5pdGlhbGl6ZVRyYW5zYWN0aW9uLCAiU0RIIiwgIjE1MTI1ODMwODAiLCAiSW5pdGlhbGl6ZVRyYW5zYWN0aW9uIikNCnBheWxvYWRKc29uID0gbWFwcGVyLndyaXRlVmFsdWVBc1N0cmluZyhwYXlsb2FkKQ0KcGF5bG9hZEJhc2U2NCA9IEJhc2U2NC5nZXRVcmxFbmNvZGVyKCkud2l0aG91dFBhZGRpbmcoKS5lbmNvZGVUb1N0cmluZyhwYXlsb2FkSnNvbi5nZXRCeXRlcyhTdGFuZGFyZENoYXJzZXRzLlVURl84KSkrIj09Ig0KcHJpbnRsbiAiUGF5bG9hZEpzb246ICIgKyBwYXlsb2FkSnNvbg0KcHJpbnRsbiAiUGF5bG9hZEJhc2U2NDogIiArIHBheWxvYWRCYXNlNjQNCnByaW50bG4gIi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSINCg0Kc3RyaW5ndG9FbmNvZGUgPSBoZWFkZUJhc2U2NCArICIuIiArIHBheWxvYWRCYXNlNjQNCnByaW50bG4gIkhlYWRlckJhc2U2NC5QYXlsb2FkQmFzZTY0OiAiICsgc3RyaW5ndG9FbmNvZGUNCi8vcHJpbnRsbiAiLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIg0KDQoNCmltcG9ydCBqYXZheC5jcnlwdG8uQ2lwaGVyOw0KaW1wb3J0IGphdmEuc2VjdXJpdHkuUHJpdmF0ZUtleTsNCmltcG9ydCBqYXZhLnNlY3VyaXR5LktleVN0b3JlOw0KDQppblN0cmVhbSA9IEhlYWRlci5jbGFzcy5nZXRDbGFzc0xvYWRlcigpLmdldFJlc291cmNlQXNTdHJlYW0oInNhcHNkaC5qa3MiKQ0KU3RyaW5nIHBhc3N3b3JkID0gImJvZ2RhdGEiOw0KS2V5U3RvcmUga2V5c3RvcmUgPSBLZXlTdG9yZS5nZXRJbnN0YW5jZShLZXlTdG9yZS5nZXREZWZhdWx0VHlwZSgpKTsNCmtleXN0b3JlLmxvYWQoaW5TdHJlYW0sIHBhc3N3b3JkLnRvQ2hhckFycmF5KCkpOw0KUHJpdmF0ZUtleSBwcml2YXRlS2V5ID0gKFByaXZhdGVLZXkpa2V5c3RvcmUuZ2V0S2V5KCJzZGgiLCBwYXNzd29yZC50b0NoYXJBcnJheSgpKTsNCg0KQ2lwaGVyIGNpcGhlciA9IENpcGhlci5nZXRJbnN0YW5jZSgiUlNBIik7DQpjaXBoZXIuaW5pdChDaXBoZXIuRU5DUllQVF9NT0RFLCBwcml2YXRlS2V5KTsNCg0KZW5jb2RlZFN0cmluZyA9IEJhc2U2NC5nZXRFbmNvZGVyKCkuZW5jb2RlVG9TdHJpbmcoY2lwaGVyLmRvRmluYWwoc3RyaW5ndG9FbmNvZGUuZ2V0Qnl0ZXMoKSkpDQpzdHJpbmdUb0VuY29kZUFuZEVuY29kZWRTdHJpbmcgID0gc3RyaW5ndG9FbmNvZGUgKyAiLiIgKyBlbmNvZGVkU3RyaW5nDQpwcmludGxuICJGaXJtYURpZ2l0YWwoSGVhZGVyQmFzZTY0LlBheWxvYWRCYXNlNjQpOiAiICsgZW5jb2RlZFN0cmluZw0KcHJpbnRsbiAiLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIg0KcHJpbnRsbiBzdHJpbmdUb0VuY29kZUFuZEVuY29kZWRTdHJpbmcNCg0KDQoNCkh0dHBIZWFkZXJzIGhlYWRlcnMgPSBuZXcgSHR0cEhlYWRlcnMoKTsNCmhlYWRlcnMuc2V0Q29udGVudFR5cGUoTWVkaWFUeXBlLkFQUExJQ0FUSU9OX0pTT04pOw0KaGVhZGVycy5zZXQoIkF1dGhvcml6YXRpb24iLCAiQmVhcmVyICIrIHN0cmluZ1RvRW5jb2RlQW5kRW5jb2RlZFN0cmluZyk7DQoNCkh0dHBFbnRpdHk8SW5pdGl0YWxpemVUcmFuc2FjdGlvblJlcXVlc3Q+IHJlcXVlc3QgPSBuZXcgSHR0cEVudGl0eTxJbml0aXRhbGl6ZVRyYW5zYWN0aW9uUmVxdWVzdD4ocmVxdWVzdE9iamVjdCxoZWFkZXJzKTsNClJlc3RUZW1wbGF0ZSByZXN0VGVtcGxhdGUgPSBuZXcgUmVzdFRlbXBsYXRlKCk7DQpyZXN0VGVtcGxhdGUucG9zdEZvck9iamVjdCgiaHR0cHM6Ly8xNzIuMjcuMS40Nzo4MDIyL1RpbGFjaW5vL2FwaS9zZGgvaW5pdGlhbGl6ZVRyYW5zYWN0aW9uIiwgcmVxdWVzdCwgT2JqZWN0LmNsYXNzKTsNCg0KLy8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0=";
+			var campoDesArchivo = "#docDescArchivo_0";
+			var campoNomArchivo = "#docNombreArchivo_0";
+			
+			debugger;
+			desArchivo = $(campoDesArchivo).val();
+			nombreArchivo = $(campoNomArchivo).val();
+			
+			if(desArchivo == undefined || ( nombreArchivo == undefined || nombreArchivo == "")){
+				desArchivo = "";
+				contenidoArchivo = "";
+			}
+			
 			desArchivo = $("#docDescArchivo_9").val();
 			nombreArchivo = $("#docNombreArchivo_9").val();
 			if(desArchivo == undefined || ( nombreArchivo == undefined || nombreArchivo == "")){
@@ -201,10 +216,6 @@ debugger;
 			dataActual.conA0 = contenidoArchivo;
 			
 			
-			
-			debugger;
-			validacion = ACC.tramitesSeleccion.validarInfoAntesSubmit(dataActual);
-			
 			if(validacion == true){
 				$.ajax({
 					url : ACC.casoCreacionURL,
@@ -221,6 +232,7 @@ debugger;
 		});
 	},
 	
+	
 	bindConsCasoEnviar : function() {
 		$(document).on("click", ".consCasoEnviar", function(e) {
 			e.preventDefault();
@@ -229,7 +241,7 @@ debugger;
 
 						
 			var dataActual = {};
-			
+			debugger;
 			dataActual.num_caso = $("#num_caso").val();
 //			dataActual.tipoId = $("#tipoId").val();
 //			dataActual.numDoc = $("#numDoc").val();
@@ -312,7 +324,6 @@ debugger;
 	validarInfoAntesSubmit : function(infoActual,infoResponse) {
 
 // debugger;
-		var mensaje = "";
 		var validacion = true;
 		
 		
@@ -349,10 +360,46 @@ debugger;
 //		}else{
 //			validacion = false;
 //		}
+		if(validacion == true){
+			validacion = ACC.tramitesSeleccion.validarArchivosAntesSubmit();			
+		}
 		
 		if(validacion == false){
 			alert("Por favor ingresar los valores obligatorios marcados con *");
 		}
+		
+		
+		return validacion;		
+	},
+	
+	
+	validarArchivosAntesSubmit : function() {
+
+		var validacion = true;		
+		var campoDesArchivo = "";
+		var campoNomArchivo = "";
+		var contenidoArchivo = "";
+		var desArchivo = "";
+		var nombreArchivo = "";
+
+		
+		debugger;
+		for (var i = 0; i < 10; i++) {
+			campoDesArchivo = "#docDescArchivo_" + i;
+			desArchivo = $(campoDesArchivo).val();
+			
+			if(desArchivo != undefined){
+				campoNomArchivo = "#docNombreArchivo_" + i;
+				nombreArchivo = $(campoNomArchivo).val();
+				if(nombreArchivo == undefined || nombreArchivo == ""){
+					validacion = false;
+					break;
+				}
+			}else{
+				break;
+			}
+		} 
+
 		
 		return validacion;		
 	},
@@ -442,7 +489,7 @@ debugger;
 				idNombreArchivo = "docNombreArchivo_"+index;
 				$('#documentos').append("<tr>"+ 
 					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id="'+ idDescArchivo +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
-					 '<td><input class="inputtextnew" type="file" size="150" id="'+ idNombreArchivo +'" /></td>'+
+					 '<td><input style="width:405px" class="inputtextnew" type="file" size="150" id="'+ idNombreArchivo +'" /></td>'+
 					 "</tr>");
 				mostrarTabDocs = true;
 			}
