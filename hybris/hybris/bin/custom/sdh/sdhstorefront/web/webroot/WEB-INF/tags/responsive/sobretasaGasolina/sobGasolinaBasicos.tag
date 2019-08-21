@@ -67,7 +67,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.municipio" /></label> <input
@@ -82,7 +82,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="impuestos.sobreTasaGasolina.datosBasicos.calidadResponsable" /></label>
-					<input id="calidResp" name="calidResp" class="newalto form-control"
+					<input id="calidResp" name="calidResp" class="new_alto form-control"
 						aria-required="true" type="text" disabled="disabled"
 						value='<c:out value="${dataForm.dataForm.calidResp}"></c:out>'
 						maxlength="240">
@@ -136,7 +136,7 @@
 
 		for (i = 0; i < inputcol.length; i++) {
 			var texto = inputcol[i].value;
-			inputcol[i].style.width = (texto.length + 1) * 8 + 'px';
+			inputcol[i].style.width = (texto.length + 2) * 8 + 'px';
 		}
 
 	};

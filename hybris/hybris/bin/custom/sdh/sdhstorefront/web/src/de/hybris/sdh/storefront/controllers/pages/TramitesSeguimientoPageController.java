@@ -191,6 +191,24 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 						{
 							infoConsulCasos.setEstatus(resultadoActual.getFactor());
 						}
+						if (resultadoActual.getCampo().equals("CAT01"))
+						{
+							infoConsulCasos.setCat01(resultadoActual.getFactor());
+						}
+						if (resultadoActual.getCampo().equals("CAT02"))
+						{
+							infoConsulCasos.setCat02(resultadoActual.getFactor());
+						}
+						if (resultadoActual.getCampo().equals("CAT03"))
+						{
+							infoConsulCasos.setCat03(resultadoActual.getFactor());
+						}
+						if (resultadoActual.getCampo().equals("CAT04"))
+						{
+							infoConsulCasos.setCat04(resultadoActual.getFactor());
+						}
+
+
 						mapResultado.put(resultadoActual.getProcess_type(), infoConsulCasos);
 					}
 

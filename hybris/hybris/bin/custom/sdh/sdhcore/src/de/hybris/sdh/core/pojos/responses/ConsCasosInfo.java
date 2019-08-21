@@ -13,7 +13,79 @@ public class ConsCasosInfo
 	private String num_radicado;
 	private String tramite;
 	private String estatus;
+	private String cat01;
+	private String cat02;
+	private String cat03;
+	private String cat04;
 
+
+	/**
+	 * @return the cat01
+	 */
+	public String getCat01()
+	{
+		return cat01;
+	}
+
+	/**
+	 * @param cat01
+	 *           the cat01 to set
+	 */
+	public void setCat01(final String cat01)
+	{
+		this.cat01 = cat01;
+	}
+
+	/**
+	 * @return the cat02
+	 */
+	public String getCat02()
+	{
+		return cat02;
+	}
+
+	/**
+	 * @param cat02
+	 *           the cat02 to set
+	 */
+	public void setCat02(final String cat02)
+	{
+		this.cat02 = cat02;
+	}
+
+	/**
+	 * @return the cat03
+	 */
+	public String getCat03()
+	{
+		return cat03;
+	}
+
+	/**
+	 * @param cat03
+	 *           the cat03 to set
+	 */
+	public void setCat03(final String cat03)
+	{
+		this.cat03 = cat03;
+	}
+
+	/**
+	 * @return the cat04
+	 */
+	public String getCat04()
+	{
+		return cat04;
+	}
+
+	/**
+	 * @param cat04
+	 *           the cat04 to set
+	 */
+	public void setCat04(final String cat04)
+	{
+		this.cat04 = cat04;
+	}
 
 	/**
 	 * @return the num_caso
@@ -22,7 +94,7 @@ public class ConsCasosInfo
 	{
 		return num_caso;
 	}
-	
+
 	/**
 	 * @param num_caso
 	 *           the num_caso to set
@@ -38,7 +110,7 @@ public class ConsCasosInfo
 	{
 		return num_radicado;
 	}
-	
+
 	/**
 	 * @param num_radicado
 	 *           the num_radicado to set
@@ -47,7 +119,7 @@ public class ConsCasosInfo
 	{
 		this.num_radicado = num_radicado;
 	}
-	
+
 	/**
 	 * @return the tramite
 	 */
@@ -55,7 +127,7 @@ public class ConsCasosInfo
 	{
 		return tramite;
 	}
-	
+
 	/**
 	 * @param tramite
 	 *           the tramite to set
@@ -71,7 +143,7 @@ public class ConsCasosInfo
 	{
 		return estatus;
 	}
-	
+
 	/**
 	 * @param estatus
 	 *           the estatus to set

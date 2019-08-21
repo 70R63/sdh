@@ -60,6 +60,7 @@ ACC.reteica = {
 	            			
 	            			$("#downloadReteICADeclaracionHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadReteICADeclaracionHelper").click();
+							document.getElementById("pagar").disabled = false;
 	            		}
 	 	      		
 		            },

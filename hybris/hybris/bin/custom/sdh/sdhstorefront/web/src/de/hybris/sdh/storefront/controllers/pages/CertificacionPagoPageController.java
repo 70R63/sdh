@@ -470,6 +470,95 @@ public class CertificacionPagoPageController extends AbstractPageController
 			}
 			redirectModel.addFlashAttribute("publicidadMode", false);
 		}
+
+		if (certiFormPost.getIdimp().equals("7"))//ReteICA
+		{
+			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
+			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
+			certiFormPostRedirect.setIdimp(certiFormPost.getIdimp());
+			certiFormPostRedirect.setAniograv(certiFormPost.getAniograv());
+			certiFormPostRedirect.setPeriodo(certiFormPost.getPeriodo());
+			redirectModel.addFlashAttribute("certiFormPost", certiFormPostRedirect);
+
+			try
+			{
+				final ConsultaPagoRequest consultaPagoRequest = new ConsultaPagoRequest();
+				consultaPagoRequest.setNumBP(certiFormPost.getNumBP());
+
+				if (customerData.getIcaTax() != null)
+				{
+					consultaPagoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+				}
+
+
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				final ConsultaPagoResponse consultaPagoResponse = mapper
+						.readValue(sdhConsultaPagoService.consultaPago(consultaPagoRequest), ConsultaPagoResponse.class);
+
+
+				if (consultaPagoResponse != null)
+				{
+
+					if (consultaPagoResponse.getDeclaraciones() != null)
+					{
+						final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
+						final String aniograv_periodo;
+						if (certiFormPost.getPeriodo() == null)
+						{
+							aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
+						}
+						else
+						{
+							aniograv_periodo = certiFormPost.getAniograv().substring(2) + certiFormPost.getPeriodo();
+						}
+
+						for (final ConsultaPagoDeclaraciones element : declaracionesList)
+						{
+							if (element.getClavePeriodo().equals(aniograv_periodo))
+							{
+								declaracion = element;
+								break;
+							}
+						}
+
+						if (declaracion != null)
+						{
+							imprimePagoRequest.setNumBP(declaracion.getNumBP());
+							imprimePagoRequest.setCtaContrato(declaracion.getCtaContrato());
+							imprimePagoRequest.setNumObjeto(declaracion.getNumObjeto());
+							imprimePagoRequest.setClavePeriodo(declaracion.getClavePeriodo());
+							imprimePagoRequest.setReferencia(declaracion.getReferencia());
+							imprimePagoRequest.setFechaCompensa(declaracion.getFechaCompensa());
+							imprimePagoRequest.setImporte(declaracion.getImporte());
+							imprimePagoRequest.setMoneda(declaracion.getMoneda());
+							imprimePagoRequest.setNumfactForm(declaracion.getNumfactForm());
+							imprimePagoRequest.setNumDocPago(declaracion.getNumDocPago());
+							imprimePagoRequest.setRefROP(VACIO);
+
+							final String resp = sdhImprimePagoService.imprimePago(imprimePagoRequest);
+							final ImprimePagoResponse imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+							redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
+						}
+					}
+				}
+
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+				GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+				if (!certiFormPost.getRowFrompublicidadTable().replace(",", "").equals("X"))
+				{
+					redirectModel.addFlashAttribute("error", "sinPdf");
+				}
+				return "redirect:/contribuyentes/consultas/certipagos";
+
+			}
+			redirectModel.addFlashAttribute("publicidadMode", false);
+		}
+
 		if (certiFormPost.getIdimp().equals("6"))//Delineacion
 		{
 			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
@@ -506,8 +595,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 						for (final ConsultaPagoDeclaraciones element : declaracionesList)
 						{
-								declaracion = element;
-								break;
+							declaracion = element;
+							break;
 						}
 
 						if (declaracion != null)

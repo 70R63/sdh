@@ -36,11 +36,11 @@
 				</select>
 			</div>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.opuso" /></label> <select id="opuso"
-					class="newalto form-control" disabled="disabled">
+					class="new_alto form-control" disabled="disabled">
 					<option value="${declaPublicidadForm.opuso}"><spring:theme
 							code="declaracion.publicidad.opuso.d${declaPublicidadForm.opuso}">
 						</spring:theme></option>
