@@ -435,7 +435,7 @@ ACC.tramitesSeleccion = {
 					 '<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_'+ index +'" />'+
 					 '<input type="hidden" id="docDependencia_'+ index +'" value="'+ value.dependencia +'" />'+
 					 '<input type="hidden" id="docSerieID_'+ index +'" value="'+ value.serie +'" />'+
-					 '<input type="hidden" id="docSSerieID_'+ index +'" value="'+ value.subserie_t +'" />'+
+					 '<input type="hidden" id="docSSerieID_'+ index +'" value="'+ value.subserie +'" />'+
 					 '<input type="hidden" id="docTipoDoc_'+ index +'" value="'+ value.tipoDocumen +'" />'+
 					 "</td>"+
 					 "</tr>");
