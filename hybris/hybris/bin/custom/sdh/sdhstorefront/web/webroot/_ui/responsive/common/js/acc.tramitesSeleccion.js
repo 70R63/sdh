@@ -415,7 +415,7 @@ ACC.tramitesSeleccion = {
 				 debugger;
 
 				$('#documentos').append("<tr>"+ 
-					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_'+ index +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
+					 '<td><input style="width:800px" class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_'+ index +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
 					 '<td>'+
 					 '<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_'+ index +'" />'+
 					 '<input type="hidden" id="docDependencia_'+ index +'" value="'+ value.dependencia +'" />'+

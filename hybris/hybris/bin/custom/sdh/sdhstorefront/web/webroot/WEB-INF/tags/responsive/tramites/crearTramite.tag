@@ -89,7 +89,7 @@
 		</div>
 	</div>
 		<div class="row documentos"  >
-		<div class="col-md-6 text-center col-md-offset-3"
+		<div class="col-md-6 text-center"
 			style="margin-top: 15px">
 			<table class="table table-bordered" id="documentos" style="display:none">
 				<thead>
