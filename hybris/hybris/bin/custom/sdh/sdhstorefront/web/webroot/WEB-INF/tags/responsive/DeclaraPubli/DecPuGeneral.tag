@@ -40,7 +40,7 @@
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.opuso" /></label> <select id="opuso"
-					class="new_alto form-control" disabled="disabled">
+					class="form-control" disabled="disabled" style="height: 25px !important; min-height: 26px !important; width: 100%; text-align: left !important; padding: 0px;">
 					<option value="${declaPublicidadForm.opuso}"><spring:theme
 							code="declaracion.publicidad.opuso.d${declaPublicidadForm.opuso}">
 						</spring:theme></option>
