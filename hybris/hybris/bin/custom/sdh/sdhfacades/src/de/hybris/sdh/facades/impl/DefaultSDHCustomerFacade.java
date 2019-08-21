@@ -23,10 +23,12 @@ import de.hybris.platform.core.model.user.TitleModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 
 import javax.annotation.Resource;
@@ -35,6 +37,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.util.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -199,5 +204,54 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 		}
 		return null;
 
+	}
+
+	@Override
+	public CustomerData getRepresentadoDataFromSAP(String numBP) {
+		try
+		{
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = this.getRepresentadoFromSAP(numBP);
+
+			CustomerData customerData = new CustomerData();
+
+			customerData.setNumBP(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumBP());
+			customerData.setDocumentNumber(sdhConsultaContribuyenteBPResponse.getInfoContrib().getNumDoc());
+			customerData.setDocumentType(sdhConsultaContribuyenteBPResponse.getInfoContrib().getTipoDoc());
+
+
+			if (sdhConsultaContribuyenteBPResponse.getAgentes() != null)
+			{
+				List<SDHAgentData> list = new ArrayList<SDHAgentData>();
+
+				for(ContribAgente eachAgent : sdhConsultaContribuyenteBPResponse.getAgentes())
+				{
+					SDHAgentData eachAgentData = new SDHAgentData();
+
+					eachAgentData.setBp(eachAgent.getBp());
+					eachAgentData.setInternalFunction(eachAgent.getFuncionInterl());
+					eachAgentData.setDocumentType(eachAgent.getTipoDoc());
+					eachAgentData.setDocumentNumber(eachAgent.getNumDoc());
+					eachAgentData.setCompleteName(eachAgent.getNomCompleto());
+					eachAgentData.setAgent(eachAgent.getAgente());
+
+					list.add(eachAgentData);
+
+				}
+
+				customerData.setAgentList(list);
+			}
+
+			final StringBuilder nameBuilder = new StringBuilder();
+
+			customerData.setCompleteName(sdhConsultaContribuyenteBPResponse.getCompleteName());
+
+			return customerData;
+		}
+		catch (final Exception e)
+		{
+			LOG.error("there was an error while parsing update rit reponse: " + e.getMessage());
+		}
+		return null;
 	}
 }

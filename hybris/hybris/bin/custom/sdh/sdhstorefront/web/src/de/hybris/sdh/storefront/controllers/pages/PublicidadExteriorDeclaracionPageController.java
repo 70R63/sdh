@@ -516,52 +516,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 	}
 
-	private CustomerData convertSAPResponseToCustomerData(SDHValidaMailRolResponse response) {
-		CustomerData customerData = new CustomerData();
 
-		customerData.setNumBP(response.getInfoContrib().getNumBP());
-		customerData.setDocumentNumber(response.getInfoContrib().getNumDoc());
-		customerData.setDocumentType(response.getInfoContrib().getTipoDoc());
-
-
-		if (response.getAgentes() != null)
-		{
-			List<SDHAgentData> list = new ArrayList<SDHAgentData>();
-
-			for(ContribAgente eachAgent : response.getAgentes())
-			{
-				SDHAgentData eachAgentData = new SDHAgentData();
-
-				eachAgentData.setBp(eachAgent.getBp());
-				eachAgentData.setInternalFunction(eachAgent.getFuncionInterl());
-				eachAgentData.setDocumentType(eachAgent.getTipoDoc());
-				eachAgentData.setDocumentNumber(eachAgent.getNumDoc());
-				eachAgentData.setCompleteName(eachAgent.getNomCompleto());
-				eachAgentData.setAgent(eachAgent.getAgente());
-
-				list.add(eachAgentData);
-
-			}
-
-			customerData.setAgentList(list);
-		}
-
-
-
-		final StringBuilder nameBuilder = new StringBuilder();
-
-
-
-		customerData.setCompleteName(response.getCompleteName());
-
-
-
-
-
-
-		return customerData;
-
-	}
 
 
 	@RequestMapping(value="/show",method = RequestMethod.GET)
@@ -571,7 +526,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	{
 		String anoParaPSE = "";
 
-		CustomerData customerData = convertSAPResponseToCustomerData(sdhCustomerFacade.getRepresentadoFromSAP(representado));
+		CustomerData customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
 
 		model.addAttribute("customerData",customerData);
 
@@ -581,6 +536,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		calculaPublicidad2Request.setPartner(representado);
 		CalcPublicidad2Response calculaPublicidad2Response = sdhCalculaPublicidad2Facade.calcula(calculaPublicidad2Request);
 
+		model.addAttribute("firmantesActuales",calculaPublicidad2Response.getFirmantes());
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();

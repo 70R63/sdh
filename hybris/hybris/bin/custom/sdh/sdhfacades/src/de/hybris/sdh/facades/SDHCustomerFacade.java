@@ -26,4 +26,6 @@ public interface SDHCustomerFacade
 
 	SDHValidaMailRolResponse getRepresentadoFromSAP(String numBP);
 
+	CustomerData getRepresentadoDataFromSAP(String numBP);
+
 }
