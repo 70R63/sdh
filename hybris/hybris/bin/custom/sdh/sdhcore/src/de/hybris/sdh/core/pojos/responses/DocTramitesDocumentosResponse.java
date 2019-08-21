@@ -14,6 +14,7 @@ public class DocTramitesDocumentosResponse
 	private String serie;
 	private String serie_t;
 	private String subserie_t;
+	private String subserie;
 	private String tipoDocumen;
 	private String tipoDocumen_t;
 
@@ -86,6 +87,23 @@ public class DocTramitesDocumentosResponse
 	}
 
 	/**
+	 * @return the subserie
+	 */
+	public String getSubserie()
+	{
+		return subserie;
+	}
+
+	/**
+	 * @param subserie
+	 *           the subserie to set
+	 */
+	public void setSubserie(final String subserie)
+	{
+		this.subserie = subserie;
+	}
+
+	/**
 	 * @return the subserie_t
 	 */
 	public String getSubserie_t()
@@ -145,10 +163,8 @@ public class DocTramitesDocumentosResponse
 	public String toString()
 	{
 		return "DocTramitesDocumentosResponse [dependencia=" + dependencia + ", dependencia_t=" + dependencia_t + ", serie=" + serie
-				+ ", serie_t=" + serie_t + ", subserie_t=" + subserie_t + ", tipoDocumen=" + tipoDocumen + ", tipoDocumen_t="
-				+ tipoDocumen_t + "]";
+				+ ", serie_t=" + serie_t + ", subserie_t=" + subserie_t + ", subserie=" + subserie + ", tipoDocumen=" + tipoDocumen
+				+ ", tipoDocumen_t=" + tipoDocumen_t + "]";
 	}
-
-
 
 }
