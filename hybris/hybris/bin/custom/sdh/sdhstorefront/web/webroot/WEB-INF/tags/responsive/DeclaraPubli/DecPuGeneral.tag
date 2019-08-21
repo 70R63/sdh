@@ -36,7 +36,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="declaracion.publicidad.opuso" /></label> <select id="opuso"

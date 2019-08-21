@@ -488,7 +488,7 @@ ACC.tramitesSeleccion = {
 				idDescArchivo = "docDescArchivo_"+index;
 				idNombreArchivo = "docNombreArchivo_"+index;
 				$('#documentos').append("<tr>"+ 
-					 '<td><input class="inputtextnew" disabled="disabled" type="text" size="30" id="'+ idDescArchivo +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
+					 '<td><input style="width:305px" class="inputtextnew" disabled="disabled" type="text" size="30" id="'+ idDescArchivo +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
 					 '<td><input style="width:405px" class="inputtextnew" type="file" size="150" id="'+ idNombreArchivo +'" /></td>'+
 					 "</tr>");
 				mostrarTabDocs = true;
