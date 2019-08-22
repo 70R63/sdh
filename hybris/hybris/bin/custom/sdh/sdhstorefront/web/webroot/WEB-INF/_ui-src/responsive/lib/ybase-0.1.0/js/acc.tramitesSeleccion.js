@@ -208,9 +208,9 @@ ACC.tramitesSeleccion = {
 			$.each(infoResponse.infoCasos, function (index,value){
 				$('#tableInfo').append("<tr>"+ 
 						'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'" data-estatus=" '+ value.estatus +'" data-cat01=" '+ value.cat01 +'" data-cat02=" '+ value.cat02 +'" data-cat03=" '+ value.cat03 +'" data-cat04=" '+ value.cat04 +'"' +'>'+ value.num_caso +'</label>'+
-						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.num_radicado + '" /></td>'+
-						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="' + value.tramite + '" /></td>'+
-						'<td><input class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.estatus + '" /></td>'+
+						'<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.num_radicado + '" /></td>'+
+						'<td><input style="width: 195px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="' + value.tramite + '" /></td>'+
+						'<td><input style="width: 135px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.estatus + '" /></td>'+
 						 "</tr>");
 				mostrarTabDocs = true;
 			});			
@@ -430,7 +430,7 @@ ACC.tramitesSeleccion = {
 				 debugger;
 
 				$('#documentos').append("<tr>"+ 
-					 '<td><input style="width:800px" class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_'+ index +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
+					 '<td><input style="width:710px; font-size:9px !important" class="inputtextnew" disabled="disabled" type="text" size="30" id="docDescArchivo_'+ index +'" value="'+ value.tipoDocumen_t + '"/></td>"'+
 					 '<td>'+
 					 '<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_'+ index +'" />'+
 					 '<input type="hidden" id="docDependencia_'+ index +'" value="'+ value.dependencia +'" />'+
