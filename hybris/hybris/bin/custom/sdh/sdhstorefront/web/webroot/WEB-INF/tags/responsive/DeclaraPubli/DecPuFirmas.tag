@@ -515,7 +515,7 @@
 		declarante.tipoIdent = $(".DeclaranteDT").val();
 		declarante.numIdentif =  $(".DeclaranteDN").val();
 		declarante.firmante = "1";
-		declarante.confirmacion = "X";
+		declarante.confirmacion = "x";
 
 		firmantes.push(declarante);
 
@@ -525,8 +525,8 @@
 
 			representante.tipoIdent = $(value).find(".PEFirmTipoId").val();
 			representante.numIdentif =  $(value).find(".PEFirmNumId").val();
-			representante.firmante = "1";
-			representante.confirmacion = "X";
+			representante.firmante = index+2;
+			representante.confirmacion = "";
 
 			if(representante.tipoIdent != "" && representante.numIdentif != "")
 			{
