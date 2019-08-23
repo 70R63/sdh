@@ -84,7 +84,7 @@
 				</div>
 				<div class="col-md-1">
 					<label class="control-label"><spring:theme code="" /></label>
-					<button type="button" onclick="firmButtonClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
+					<button type="button" onclick="firmButtonDeclaranteClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
 				</div>
 			</div>
 
@@ -124,7 +124,7 @@
 					</div>
 					<div class="col-md-1">
 						<label class="control-label"><spring:theme code="" /></label>
-						<button type="button" onclick="firmButtonClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
+						<button type="button" onclick="firmButtonDeclaranteClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
 					</div>
 				</div>
 			</c:otherwise>
@@ -193,7 +193,7 @@
 		</div>
 
 		<div class="col-md-1">
-			<button type="button" onclick="firmButtonClicked(this);" class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
+			<button type="button" onclick="firmButtonClicked(this);" disabled class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">
@@ -264,7 +264,7 @@
 		</div>
 
 		<div class="col-md-1">
-			<button type="button" onclick="firmButtonClicked(this);" class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
+			<button type="button" onclick="firmButtonClicked(this);" disabled class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">
@@ -495,6 +495,81 @@
 		});
 
 
+	}
+
+	function firmButtonDeclaranteClicked(element) {
+
+		var numForm = $("#numForm").val();
+
+		if(numForm == "" )
+		{
+			$( "#dialogPublicidadExterior" ).dialog( "open" );
+			$("#publicidadExteriorDialogContent").html("");
+			$("#publicidadExteriorDialogContent").html("Debe realizar el calculo primero");
+		}
+
+		var firmantes =[];
+
+		var declarante = {};
+
+		declarante.tipoIdent = $(".DeclaranteDT").val();
+		declarante.numIdentif =  $(".DeclaranteDN").val();
+		declarante.firmante = "1";
+		declarante.confirmacion = "X";
+
+		firmantes.push(declarante);
+
+		$.each($(".representante"), function( index, value ) {
+
+			var representante = {};
+
+			representante.tipoIdent = $(value).find(".PEFirmTipoId").val();
+			representante.numIdentif =  $(value).find(".PEFirmNumId").val();
+			representante.firmante = "1";
+			representante.confirmacion = "X";
+
+			if(representante.tipoIdent != "" && representante.numIdentif != "")
+			{
+				firmantes.push(representante);
+			}
+		});
+
+
+
+
+
+		var data = {};
+
+
+
+		data.numForm=numForm;
+		data.firmantes =firmantes;
+
+		$.ajax({
+			url: ACC.publicidadExteriorFirmar,
+			data: JSON.stringify(data),
+			type: "POST",
+			dataType: "json",
+			contentType: "application/json",
+			success: function (data) {
+				$( "#dialogPublicidadExterior" ).dialog( "open" );
+				$("#publicidadExteriorDialogContent").html("");
+				$.each(data.errores,function (index,value) {
+
+					if(value.idmsj != "")
+					{
+						$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+					}
+
+				});
+
+			},
+			error: function () {
+				$( "#dialogPublicidadExterior" ).dialog( "open" );
+				$("#publicidadExteriorDialogContent").html("");
+				$("#publicidadExteriorDialogContent").html("Hubo un error al intentar firmar la declaración, favor de intentarlo más tarde.")
+			}
+		});
 	}
 
 

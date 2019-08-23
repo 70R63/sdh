@@ -37,10 +37,7 @@ import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
-import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
-import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
-import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
-import de.hybris.sdh.storefront.forms.PublicidadForm;
+import de.hybris.sdh.storefront.forms.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -418,23 +415,30 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 
 	@RequestMapping(value="/firmar",method=RequestMethod.POST)
     @ResponseBody
-    public EnviaFirmasResponse enviaFirmas(Model model, final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+    public EnviaFirmasResponse enviaFirmas(Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
     {
         EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
 
         enviaFirmasRequest.setNumForm(dataForm.getNumForm());
 
-        FirmanteRequest firmante = new FirmanteRequest();
 
-        firmante.setConfirmacion(dataForm.getConfirmacion());
-        firmante.setFirmante(dataForm.getFirmante());
-        firmante.setNumIdentif(dataForm.getNumIdentif());
-        firmante.setTipoIdent(dataForm.getTipoIdent());
+        if(CollectionUtils.isNotEmpty(dataForm.getFirmantes()))
+		{
+			List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
+			for(FirmantesForm eachFirmante : dataForm.getFirmantes())
+			{
+				FirmanteRequest firmante = new FirmanteRequest();
 
-        List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
-        firmantesList.add(firmante);
+				firmante.setConfirmacion(eachFirmante.getConfirmacion());
+				firmante.setFirmante(eachFirmante.getFirmante());
+				firmante.setNumIdentif(eachFirmante.getNumIdentif());
+				firmante.setTipoIdent(eachFirmante.getTipoIdent());
 
-        enviaFirmasRequest.setTablFirmante(firmantesList);
+
+				firmantesList.add(firmante);
+			}
+			enviaFirmasRequest.setTablFirmante(firmantesList);
+		}
 
         return sdhEnviaFirmasFacade.enviaFirmas(enviaFirmasRequest);
     }
