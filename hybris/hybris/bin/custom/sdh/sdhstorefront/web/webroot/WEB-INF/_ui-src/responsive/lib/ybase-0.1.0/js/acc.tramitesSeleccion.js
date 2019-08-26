@@ -115,7 +115,7 @@ ACC.tramitesSeleccion = {
 							campoEnPantalla = "#docLeido_" + indiceItemSeleccionado;
 							$(campoEnPantalla).val("X");
 
-							valorCampo = reader.result;							
+							valorCampo = reader.result.substring(28);							
 							campoEnData = "dataCreacionCaso.conA" + indiceArchivo;
 							eval(campoEnData+"="+eval('"valorCampo"'));
 //							var mensaje = file.name + valorCampo;
