@@ -145,6 +145,8 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
+			LOG.info(response);
+
 			transactionState = this.updateResponse(pseTransactionsLogModel, response);
 		}
 		else

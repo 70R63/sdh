@@ -32,16 +32,16 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
     }
 
     public GetTransactionInformationResponseBodyType(
-           org.apache.axis.types.NonNegativeInteger ticketId,
-           java.lang.String trazabilityCode,
-           java.lang.String entityCode,
-           de.hybris.sdh.core.soap.pse.eanucc.AmountType transactionValue,
-           de.hybris.sdh.core.soap.pse.eanucc.AmountType vatValue,
-           java.util.Date soliciteDate,
-           java.util.Date bankProcessDate,
-           java.lang.String transactionCycle,
-           de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList transactionState,
-           de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseReturnCodeList returnCode) {
+           final org.apache.axis.types.NonNegativeInteger ticketId,
+           final java.lang.String trazabilityCode,
+           final java.lang.String entityCode,
+           final de.hybris.sdh.core.soap.pse.eanucc.AmountType transactionValue,
+           final de.hybris.sdh.core.soap.pse.eanucc.AmountType vatValue,
+           final java.util.Date soliciteDate,
+           final java.util.Date bankProcessDate,
+           final java.lang.String transactionCycle,
+           final de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList transactionState,
+           final de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseReturnCodeList returnCode) {
            this.ticketId = ticketId;
            this.trazabilityCode = trazabilityCode;
            this.entityCode = entityCode;
@@ -57,7 +57,7 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Gets the ticketId value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return ticketId
      */
     public org.apache.axis.types.NonNegativeInteger getTicketId() {
@@ -67,17 +67,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the ticketId value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param ticketId
      */
-    public void setTicketId(org.apache.axis.types.NonNegativeInteger ticketId) {
+    public void setTicketId(final org.apache.axis.types.NonNegativeInteger ticketId) {
         this.ticketId = ticketId;
     }
 
 
     /**
      * Gets the trazabilityCode value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return trazabilityCode
      */
     public java.lang.String getTrazabilityCode() {
@@ -87,17 +87,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the trazabilityCode value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param trazabilityCode
      */
-    public void setTrazabilityCode(java.lang.String trazabilityCode) {
+    public void setTrazabilityCode(final java.lang.String trazabilityCode) {
         this.trazabilityCode = trazabilityCode;
     }
 
 
     /**
      * Gets the entityCode value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return entityCode
      */
     public java.lang.String getEntityCode() {
@@ -107,17 +107,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the entityCode value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param entityCode
      */
-    public void setEntityCode(java.lang.String entityCode) {
+    public void setEntityCode(final java.lang.String entityCode) {
         this.entityCode = entityCode;
     }
 
 
     /**
      * Gets the transactionValue value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return transactionValue
      */
     public de.hybris.sdh.core.soap.pse.eanucc.AmountType getTransactionValue() {
@@ -127,17 +127,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the transactionValue value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param transactionValue
      */
-    public void setTransactionValue(de.hybris.sdh.core.soap.pse.eanucc.AmountType transactionValue) {
+    public void setTransactionValue(final de.hybris.sdh.core.soap.pse.eanucc.AmountType transactionValue) {
         this.transactionValue = transactionValue;
     }
 
 
     /**
      * Gets the vatValue value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return vatValue
      */
     public de.hybris.sdh.core.soap.pse.eanucc.AmountType getVatValue() {
@@ -147,17 +147,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the vatValue value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param vatValue
      */
-    public void setVatValue(de.hybris.sdh.core.soap.pse.eanucc.AmountType vatValue) {
+    public void setVatValue(final de.hybris.sdh.core.soap.pse.eanucc.AmountType vatValue) {
         this.vatValue = vatValue;
     }
 
 
     /**
      * Gets the soliciteDate value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return soliciteDate
      */
     public java.util.Date getSoliciteDate() {
@@ -167,17 +167,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the soliciteDate value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param soliciteDate
      */
-    public void setSoliciteDate(java.util.Date soliciteDate) {
+    public void setSoliciteDate(final java.util.Date soliciteDate) {
         this.soliciteDate = soliciteDate;
     }
 
 
     /**
      * Gets the bankProcessDate value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return bankProcessDate
      */
     public java.util.Date getBankProcessDate() {
@@ -187,17 +187,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the bankProcessDate value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param bankProcessDate
      */
-    public void setBankProcessDate(java.util.Date bankProcessDate) {
+    public void setBankProcessDate(final java.util.Date bankProcessDate) {
         this.bankProcessDate = bankProcessDate;
     }
 
 
     /**
      * Gets the transactionCycle value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return transactionCycle
      */
     public java.lang.String getTransactionCycle() {
@@ -207,17 +207,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the transactionCycle value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param transactionCycle
      */
-    public void setTransactionCycle(java.lang.String transactionCycle) {
+    public void setTransactionCycle(final java.lang.String transactionCycle) {
         this.transactionCycle = transactionCycle;
     }
 
 
     /**
      * Gets the transactionState value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return transactionState
      */
     public de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList getTransactionState() {
@@ -227,17 +227,17 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the transactionState value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param transactionState
      */
-    public void setTransactionState(de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList transactionState) {
+    public void setTransactionState(final de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList transactionState) {
         this.transactionState = transactionState;
     }
 
 
     /**
      * Gets the returnCode value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @return returnCode
      */
     public de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseReturnCodeList getReturnCode() {
@@ -247,53 +247,63 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
 
     /**
      * Sets the returnCode value for this GetTransactionInformationResponseBodyType.
-     * 
+     *
      * @param returnCode
      */
-    public void setReturnCode(de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseReturnCodeList returnCode) {
+    public void setReturnCode(final de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseReturnCodeList returnCode) {
         this.returnCode = returnCode;
     }
 
     private java.lang.Object __equalsCalc = null;
-    public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof GetTransactionInformationResponseBodyType)) return false;
-        GetTransactionInformationResponseBodyType other = (GetTransactionInformationResponseBodyType) obj;
-        if (obj == null) return false;
-        if (this == obj) return true;
+    @Override
+	public synchronized boolean equals(final java.lang.Object obj) {
+        if (!(obj instanceof GetTransactionInformationResponseBodyType))
+		{
+			return false;
+		}
+        final GetTransactionInformationResponseBodyType other = (GetTransactionInformationResponseBodyType) obj;
+        if (obj == null)
+		{
+			return false;
+		}
+        if (this == obj)
+		{
+			return true;
+		}
         if (__equalsCalc != null) {
             return (__equalsCalc == obj);
         }
         __equalsCalc = obj;
         boolean _equals;
-        _equals = true && 
-            ((this.ticketId==null && other.getTicketId()==null) || 
+        _equals = true &&
+            ((this.ticketId==null && other.getTicketId()==null) ||
              (this.ticketId!=null &&
               this.ticketId.equals(other.getTicketId()))) &&
-            ((this.trazabilityCode==null && other.getTrazabilityCode()==null) || 
+            ((this.trazabilityCode==null && other.getTrazabilityCode()==null) ||
              (this.trazabilityCode!=null &&
               this.trazabilityCode.equals(other.getTrazabilityCode()))) &&
-            ((this.entityCode==null && other.getEntityCode()==null) || 
+            ((this.entityCode==null && other.getEntityCode()==null) ||
              (this.entityCode!=null &&
               this.entityCode.equals(other.getEntityCode()))) &&
-            ((this.transactionValue==null && other.getTransactionValue()==null) || 
+            ((this.transactionValue==null && other.getTransactionValue()==null) ||
              (this.transactionValue!=null &&
               this.transactionValue.equals(other.getTransactionValue()))) &&
-            ((this.vatValue==null && other.getVatValue()==null) || 
+            ((this.vatValue==null && other.getVatValue()==null) ||
              (this.vatValue!=null &&
               this.vatValue.equals(other.getVatValue()))) &&
-            ((this.soliciteDate==null && other.getSoliciteDate()==null) || 
+            ((this.soliciteDate==null && other.getSoliciteDate()==null) ||
              (this.soliciteDate!=null &&
               this.soliciteDate.equals(other.getSoliciteDate()))) &&
-            ((this.bankProcessDate==null && other.getBankProcessDate()==null) || 
+            ((this.bankProcessDate==null && other.getBankProcessDate()==null) ||
              (this.bankProcessDate!=null &&
               this.bankProcessDate.equals(other.getBankProcessDate()))) &&
-            ((this.transactionCycle==null && other.getTransactionCycle()==null) || 
+            ((this.transactionCycle==null && other.getTransactionCycle()==null) ||
              (this.transactionCycle!=null &&
               this.transactionCycle.equals(other.getTransactionCycle()))) &&
-            ((this.transactionState==null && other.getTransactionState()==null) || 
+            ((this.transactionState==null && other.getTransactionState()==null) ||
              (this.transactionState!=null &&
               this.transactionState.equals(other.getTransactionState()))) &&
-            ((this.returnCode==null && other.getReturnCode()==null) || 
+            ((this.returnCode==null && other.getReturnCode()==null) ||
              (this.returnCode!=null &&
               this.returnCode.equals(other.getReturnCode())));
         __equalsCalc = null;
@@ -301,7 +311,8 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
     }
 
     private boolean __hashCodeCalc = false;
-    public synchronized int hashCode() {
+    @Override
+	public synchronized int hashCode() {
         if (__hashCodeCalc) {
             return 0;
         }
@@ -420,10 +431,10 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
      * Get Custom Serializer
      */
     public static org.apache.axis.encoding.Serializer getSerializer(
-           java.lang.String mechType, 
-           java.lang.Class _javaType,  
-           javax.xml.namespace.QName _xmlType) {
-        return 
+           final java.lang.String mechType,
+           final java.lang.Class _javaType,
+           final javax.xml.namespace.QName _xmlType) {
+        return
           new  org.apache.axis.encoding.ser.BeanSerializer(
             _javaType, _xmlType, typeDesc);
     }
@@ -432,12 +443,24 @@ public class GetTransactionInformationResponseBodyType  implements java.io.Seria
      * Get Custom Deserializer
      */
     public static org.apache.axis.encoding.Deserializer getDeserializer(
-           java.lang.String mechType, 
-           java.lang.Class _javaType,  
-           javax.xml.namespace.QName _xmlType) {
-        return 
+           final java.lang.String mechType,
+           final java.lang.Class _javaType,
+           final javax.xml.namespace.QName _xmlType) {
+        return
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
+
+	@Override
+	public String toString()
+	{
+		return "GetTransactionInformationResponseBodyType [ticketId=" + ticketId + ", trazabilityCode=" + trazabilityCode
+				+ ", entityCode=" + entityCode + ", transactionValue=" + transactionValue + ", vatValue=" + vatValue
+				+ ", soliciteDate=" + soliciteDate + ", bankProcessDate=" + bankProcessDate + ", transactionCycle=" + transactionCycle
+				+ ", transactionState=" + transactionState + ", returnCode=" + returnCode + ", __equalsCalc=" + __equalsCalc
+				+ ", __hashCodeCalc=" + __hashCodeCalc + "]";
+	}
+
+
 
 }
