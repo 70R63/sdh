@@ -69,7 +69,7 @@ public class AgentesAutorizadosListadeContribuyentesPageController extends Abstr
 
 		if(customerData.getAgentList() != null && customerData.getAgentList().size() == 1)
 		{
-			return "redirect:" + "/autorizados/contribuyente/representando?representado="+customerData.getAgentList().get(0).getAgent();
+			return "redirect:" + "/autorizados/contribuyente/representando?representado="+customerData.getAgentList().get(0).getBp();
 		}
 
 

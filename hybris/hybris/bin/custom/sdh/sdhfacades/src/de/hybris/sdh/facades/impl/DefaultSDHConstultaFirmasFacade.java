@@ -7,11 +7,13 @@ import de.hybris.sdh.core.pojos.responses.ConsulFirmasResponse;
 import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.impl.DefaultSDHConsultaFirmasService;
 import de.hybris.sdh.facades.SDHConsultaFirmasFacade;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultSDHConstultaFirmasFacade implements SDHConsultaFirmasFacade {
@@ -34,6 +36,24 @@ public class DefaultSDHConstultaFirmasFacade implements SDHConsultaFirmasFacade 
                 final ObjectMapper mapper = new ObjectMapper();
                 mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                 final ConsulFirmasResponse consulFirmasResponse = mapper.readValue(response, ConsulFirmasResponse.class);
+
+                if(consulFirmasResponse != null && CollectionUtils.isNotEmpty(consulFirmasResponse.getDeclaraciones()))
+                {
+
+                    List<ConsulFirmasDeclaracionesResponse> filteredDeclas = new ArrayList<ConsulFirmasDeclaracionesResponse>();
+
+                    for(ConsulFirmasDeclaracionesResponse eachDecla : consulFirmasResponse.getDeclaraciones())
+                    {
+
+                        if(StringUtils.isNotBlank(eachDecla.getIdDeclaracion()))
+                        {
+                            filteredDeclas.add(eachDecla);
+                        }
+
+                    }
+
+                    consulFirmasResponse.setDeclaraciones(filteredDeclas);
+                }
 
                 return consulFirmasResponse;
 
