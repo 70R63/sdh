@@ -145,7 +145,8 @@
 												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }&anoGravable=${estadoCargasFormData.anoGravable}&objectNumber=${objectNumber}&perRepor=${eachArchivo.perRepor}">Generar declaración</a></td>
 											</c:when>
 											<c:when test='${(eachArchivo.estado == "04")}'>
-												<td>Procesado</td>
+												<c:url value="/retenedores/declaracion" var="urlPresentar" />
+												<td><a href="${urlPresentar}?numForm=${eachArchivo.numForm }&anoGravable=${estadoCargasFormData.anoGravable}&objectNumber=${objectNumber}&perRepor=${eachArchivo.perRepor}">Corrección declaración</a></td>
 											</c:when>
 											<c:when test='${(eachArchivo.estado == "05")}'>
 												<td>Obsoleto</td>

@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import java.util.List;
+
 /**
  * @author Maria Luisa
  *
@@ -11,51 +13,22 @@ public class EnviaFirmasForm
 {
 	private String numForm;
 
-	private String tipoIdent;
-
-	private String numIdentif;
-
-	private String firmante;
-
-	private String confirmacion;
+	private List<FirmantesForm> firmantes;
 
 	public String getNumForm() {
 		return numForm;
 	}
 
+
 	public void setNumForm(String numForm) {
 		this.numForm = numForm;
 	}
 
-	public String getTipoIdent() {
-		return tipoIdent;
+	public List<FirmantesForm> getFirmantes() {
+		return firmantes;
 	}
 
-	public void setTipoIdent(String tipoIdent) {
-		this.tipoIdent = tipoIdent;
-	}
-
-	public String getNumIdentif() {
-		return numIdentif;
-	}
-
-	public void setNumIdentif(String numIdentif) {
-		this.numIdentif = numIdentif;
-	}
-
-	public String getFirmante() {
-		return firmante;
-	}
-
-	public void setFirmante(String firmante) {
-		this.firmante = firmante;
-	}
-
-	public String getConfirmacion() {
-		return confirmacion;
-	}
-
-	public void setConfirmacion(String confirmacion) {
-		this.confirmacion = confirmacion;
+	public void setFirmantes(List<FirmantesForm> firmantes) {
+		this.firmantes = firmantes;
 	}
 }

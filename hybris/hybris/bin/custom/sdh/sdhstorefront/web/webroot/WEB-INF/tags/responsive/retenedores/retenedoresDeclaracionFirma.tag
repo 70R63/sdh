@@ -112,7 +112,7 @@
 	</div>
 </div>
 
-<c:out value="${paymentDisabled}"/>
+
 
 
 <script>

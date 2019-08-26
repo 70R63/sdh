@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -36,6 +36,11 @@
 					</div>
 				</div>
 			</div>
+
+
+		<c:choose>
+			<c:when test="${ empty firmantesActuales }" >
+
 			<div class="row mt-3">
 				<div class="col-md-2">
 					<div class="form-group">
@@ -79,13 +84,134 @@
 				</div>
 				<div class="col-md-1">
 					<label class="control-label"><spring:theme code="" /></label>
-					<button type="button" onclick="firmButtonClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
+					<button type="button" onclick="firmButtonDeclaranteClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
 				</div>
 			</div>
+
+			</c:when>
+			<c:otherwise >
+				<div class="row mt-3">
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="control-label"><spring:theme code="" /></label> <input
+								disabled id="" name="" class="form-control PEFirmInterFunct" disabled type="text"
+								value="Declarante" maxlength="240" placeholder="Declarante" style="margin-top:4px">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="control-label"><spring:theme code="publicidad.declaracion.firma.nombre" /></label>
+							<input disabled id="" name="" class="form-control" disabled type="text" value="${firmantesActuales[0].nombre}" maxlength="240"></input>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="control-label"><spring:theme code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id="" name="" class="form-control DeclaranteDT" disabled type="text" value="${firmantesActuales[0].tipo_ident}"	 maxlength="240"></input>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="control-label"><spring:theme
+									code="publicidad.declaracion.firma.numide" /></label> <input disabled id="" name="" class="form-control DeclaranteDN" disabled type="text" value="${firmantesActuales[0].num_identif}" maxlength="240"></input>
+						</div>
+					</div>
+
+					<div class="col-md-2">
+						<div class="form-group">
+							<label class="control-label"><spring:theme
+									code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled id="" name="" class="form-control" disabled type="text" value="" maxlength="240"></input>
+						</div>
+					</div>
+					<div class="col-md-1">
+						<label class="control-label"><spring:theme code="" /></label>
+						<button type="button" onclick="firmButtonDeclaranteClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
+					</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
+
+
+
+
+
+
 		</div>
 	</div>
 </div>
 <div class="container" id="repre">
+
+
+
+
+<c:if test="${fn:length(firmantesActuales) gt 1}">
+
+	<c:forEach items="${firmantesActuales}" var="eachFirmante" begin="1">
+	<div id="representante" class="row mt-3 representante"
+		 style="">
+		<div class="col-md-2">
+			<div class="form-group">
+				<label class="control-label"><spring:theme code="" /></label> <select disabled class="form-control PEFirmInterFunct" style="font-size: 13px; padding: 0px; margin-top: 23px" onchange="internalFunctionSelected(this)" id="selectfirmante">
+				<option value="">Seleccionar</option>
+				<c:forEach items="${agentFunctionsMap}" var="eachFunction">
+					<option value="${eachFunction.key}">${eachFunction.value}</option>
+				</c:forEach>
+			</select>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group">
+				<label class="control-label " style="margin-top: 20px">
+					<spring:theme code="publicidad.declaracion.firma.nombre" />
+				</label>
+				<select  id="selcnombre" disabled name="" class="form-control PEFirmSelectNombre">
+					<option value="${eachFirmante.nombre}">${eachFirmante.nombre}</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group">
+				<label class="control-label textocentrado" style="margin-top: 20px">
+					<spring:theme code="publicidad.declaracion.firma.tipoiden" />
+				</label>
+				<input disabled id="" name="" class="form-control PEFirmTipoId" disabled type="text" value="${eachFirmante.tipo_ident}" maxlength="240"></input>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group">
+				<label class="control-label" style="margin-top: 20px">
+					<spring:theme code="publicidad.declaracion.firma.numide" />
+				</label>
+				<input disabled id="" name="" class="form-control PEFirmNumId" disabled type="text" value="${eachFirmante.num_identif}" maxlength="240"></input>
+			</div>
+		</div>
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<label class="control-label" style="margin-top: 20px"><spring:theme
+						code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled id="" name="" class="form-control PEFirmTarjetaProf" disabled type="text" value="" maxlength="240"></input>
+			</div>
+		</div>
+
+		<div class="col-md-1">
+			<button type="button" onclick="firmButtonClicked(this);" disabled class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
+		</div>
+		<div class="col-md-1">
+			<div class="form-group ">
+				<img onclick="fnaddFirmanteRep()"
+					 src="${themeResourcePath}/images/adddelineacion.png"
+					 style="width: 25px; margin-top: 55px;"></img> <img
+					onclick="delerepre()"
+					src="${themeResourcePath}/images/deledelineacion.png"
+					style="width: 25px; margin-top: 55px;"></img>
+			</div>
+		</div>
+	</div>
+
+	</c:forEach>
+</c:if>
+
+
+
 
 	<div id="representante" class="row mt-3 representante"
 		style="display: none">
@@ -138,7 +264,7 @@
 		</div>
 
 		<div class="col-md-1">
-			<button type="button" onclick="firmButtonClicked(this);" class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
+			<button type="button" onclick="firmButtonClicked(this);" disabled class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">
@@ -369,6 +495,81 @@
 		});
 
 
+	}
+
+	function firmButtonDeclaranteClicked(element) {
+
+		var numForm = $("#numForm").val();
+
+		if(numForm == "" )
+		{
+			$( "#dialogPublicidadExterior" ).dialog( "open" );
+			$("#publicidadExteriorDialogContent").html("");
+			$("#publicidadExteriorDialogContent").html("Debe realizar el calculo primero");
+		}
+
+		var firmantes =[];
+
+		var declarante = {};
+
+		declarante.tipoIdent = $(".DeclaranteDT").val();
+		declarante.numIdentif =  $(".DeclaranteDN").val();
+		declarante.firmante = "1";
+		declarante.confirmacion = "x";
+
+		firmantes.push(declarante);
+
+		$.each($(".representante"), function( index, value ) {
+
+			var representante = {};
+
+			representante.tipoIdent = $(value).find(".PEFirmTipoId").val();
+			representante.numIdentif =  $(value).find(".PEFirmNumId").val();
+			representante.firmante = index+2;
+			representante.confirmacion = "";
+
+			if(representante.tipoIdent != "" && representante.numIdentif != "")
+			{
+				firmantes.push(representante);
+			}
+		});
+
+
+
+
+
+		var data = {};
+
+
+
+		data.numForm=numForm;
+		data.firmantes =firmantes;
+
+		$.ajax({
+			url: ACC.publicidadExteriorFirmar,
+			data: JSON.stringify(data),
+			type: "POST",
+			dataType: "json",
+			contentType: "application/json",
+			success: function (data) {
+				$( "#dialogPublicidadExterior" ).dialog( "open" );
+				$("#publicidadExteriorDialogContent").html("");
+				$.each(data.errores,function (index,value) {
+
+					if(value.idmsj != "")
+					{
+						$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+					}
+
+				});
+
+			},
+			error: function () {
+				$( "#dialogPublicidadExterior" ).dialog( "open" );
+				$("#publicidadExteriorDialogContent").html("");
+				$("#publicidadExteriorDialogContent").html("Hubo un error al intentar firmar la declaración, favor de intentarlo más tarde.")
+			}
+		});
 	}
 
 

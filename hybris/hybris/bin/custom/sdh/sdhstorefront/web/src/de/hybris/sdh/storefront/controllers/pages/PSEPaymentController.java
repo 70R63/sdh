@@ -602,7 +602,8 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		final InititalizeTransactionRequest inititalizeTransactionRequest = new InititalizeTransactionRequest(
 				psePaymentForm.getNumeroDeReferencia(),
-				psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago(),
+				"0" + psePaymentForm.getTipoDeImpuesto(),
+				//psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago(),
 				psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago() + "-" + psePaymentForm.getTipoDeImpuesto() + "-" + psePaymentForm.getTipoDeIdentificacion(),
 				CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE.get(psePaymentForm.getTipoDeIdentificacion()),
 				configurationService.getConfiguration().getString("credibanco.response.url").concat("?ticketId=").concat(psePaymentForm.getNumeroDeReferencia()),
