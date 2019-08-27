@@ -16,6 +16,7 @@ public class ContribAgente
 	private String impuesto;
 	private String funcionInterl;
 	private String bp;
+	private String menu;
 
 	/**
 	 * @return the tipoDoc
@@ -126,6 +127,14 @@ public class ContribAgente
 
 	public void setBp(String bp) {
 		this.bp = bp;
+	}
+
+	public String getMenu() {
+		return menu;
+	}
+
+	public void setMenu(String menu) {
+		this.menu = menu;
 	}
 }
 

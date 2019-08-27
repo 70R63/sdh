@@ -18,6 +18,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 
@@ -43,6 +44,9 @@ public class HomePageController extends AbstractPageController
 	@Resource(name = "sdhCustomerAccountService")
 	private SDHCustomerAccountService sdhCustomerAccountService;
 
+	@Resource(name = "sessionService")
+	private SessionService sessionService;
+
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String home(@RequestParam(value = "logout", defaultValue = "false") final boolean logout, final Model model,
@@ -53,6 +57,8 @@ public class HomePageController extends AbstractPageController
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER, "account.confirmation.signout.title");
 			return REDIRECT_PREFIX + ROOT;
 		}
+
+		sessionService.setAttribute("representado","");
 
 		sdhCustomerAccountService.cleanSessionAutorities();
 

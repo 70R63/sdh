@@ -10,8 +10,10 @@
 <%-- JS configuration --%>
 	<script type="text/javascript">
 		/*<![CDATA[*/
-		
-			
+			<c:if test="${not empty representado}">
+				ACC.aamenus = "${aamenus}";
+			</c:if>
+
 			ACC.certifNombURL ="<c:url value='/contribuyentes/mirit/certifNomb' />";
 			ACC.validaCurrentPasswrodURL ="<c:url value='/contribuyentes/mirit/validCurrentPassword' />";
 			ACC.validaEmailURL ="<c:url value='/contribuyentes/mirit/validNewEmail' />";
