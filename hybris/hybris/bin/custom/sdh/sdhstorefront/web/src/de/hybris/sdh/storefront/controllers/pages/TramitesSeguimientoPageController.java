@@ -207,7 +207,10 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 						{
 							infoConsulCasos.setCat04(resultadoActual.getFactor());
 						}
-
+						if (resultadoActual.getCampo().equals("TEXT"))
+						{
+							infoConsulCasos.setMensaje(resultadoActual.getFactor());
+						}
 
 						mapResultado.put(resultadoActual.getProcess_type(), infoConsulCasos);
 					}

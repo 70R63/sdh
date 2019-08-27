@@ -232,7 +232,7 @@ ACC.tramitesSeleccion = {
 		if(infoResponse.infoCasos.length > 0){
 			$.each(infoResponse.infoCasos, function (index,value){
 				$('#tableInfo').append("<tr>"+ 
-						'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'" data-estatus=" '+ value.estatus +'" data-cat01=" '+ value.cat01 +'" data-cat02=" '+ value.cat02 +'" data-cat03=" '+ value.cat03 +'" data-cat04=" '+ value.cat04 +'"' +'>'+ value.num_caso +'</label>'+
+						'<td><label class="control-label labeltabletd tableident selectCaso" data-num_caso=" '+ value.num_caso +'" data-num_radicado=" '+ value.num_radicado +'" data-tramite=" '+ value.tramite +'" data-estatus=" '+ value.estatus +'" data-cat01=" '+ value.cat01 +'" data-cat02=" '+ value.cat02 +'" data-cat03=" '+ value.cat03 +'" data-cat04=" '+ value.cat04 +'" data-mensaje=" '+ value.mensaje +'"' +'>'+ value.num_caso +'</label>'+
 						'<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.num_radicado + '" /></td>'+
 						'<td><input style="width: 195px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="100" value="' + value.tramite + '" /></td>'+
 						'<td><input style="width: 135px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="' + value.estatus + '" /></td>'+
@@ -271,6 +271,8 @@ ACC.tramitesSeleccion = {
 		$("#det_cat03").val(valorCampo);
 		valorCampo = $.trim($(this).attr("data-cat04"));
 		$("#det_cat04").val(valorCampo);
+		valorCampo = $.trim($(this).attr("data-mensaje"));
+		$("#mensaje").val(valorCampo);
 
 		var deta = document.getElementById('detalle');
  		deta.style.display = 'block';
