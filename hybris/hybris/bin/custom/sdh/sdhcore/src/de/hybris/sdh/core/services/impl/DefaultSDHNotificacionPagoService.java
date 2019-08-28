@@ -11,6 +11,7 @@ import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.PseNotificacionDePagoRequest;
 import de.hybris.sdh.core.services.SDHNotificacionPagoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -54,8 +55,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 		final Object object = restTemplate.postForObject(urlService, request, Object.class);
 
 
-		LOG.info("--------------- Notificacion De Pago Realizada EXITOSAMENTE IdReferencia["
-				+ pseNotificacionDePagoRequest.getRefPago() + "]---------");
+		LOG.info("--------------- Notificacion De Pago Realizada EXITOSAMENTE IdReferencia[" + pseNotificacionDePagoRequest.getRefPago() + "]---------");
 		LOG.info(pseNotificacionDePagoRequest);
 	}
 
@@ -67,10 +67,18 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 	@Override
 	public void notifyAllTransactionWithStatusOkAndNotNotifiedBefore()
 	{
-		final List<PseTransactionsLogModel> transactions = pseTransactionsLogDao
-				.getAllTransactionsNotNotifiedPaymentAndStatusOk("OK", "NO").getResult();
+		final List<PseTransactionsLogModel> transactions = new ArrayList<PseTransactionsLogModel>();
+		final List<PseTransactionsLogModel> psetransactions = pseTransactionsLogDao
+				.getAllTransactionsNotNotifiedPaymentAndStatusOk(ControllerPseConstants.PSE_ACH_RESPONSE_TRANSACTION_OK,
+						ControllerPseConstants.ONLINE_PAYMENT_NOT_NOTIFIED_TRANSACTION).getResult();
+
+		final List<PseTransactionsLogModel> credibancoTransactions = pseTransactionsLogDao
+				.getAllCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(ControllerPseConstants.CREDIBANCO_RESPONSE_APROBADA,
+						ControllerPseConstants.ONLINE_PAYMENT_NOT_NOTIFIED_TRANSACTION).getResult();
 
 		PseNotificacionDePagoRequest pseNotificacionDePagoRequest;
+		transactions.addAll(psetransactions);
+		transactions.addAll(credibancoTransactions);
 
 		for (final PseTransactionsLogModel transaction : transactions)
 		{
@@ -93,14 +101,20 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setProcPago(ControllerPseConstants.PSE_PROC_PAGO.get(transaction.getTipoDeTarjeta()));
 			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
 			pseNotificacionDePagoRequest.setHorRecaudo(horaRecaudo);
-			pseNotificacionDePagoRequest.setCodImpuesto(getImpuestoId(transaction.getTipoDeImpuesto())); // 08 Gasolina
-			//pseNotificacionDePagoRequest.setTipoHorario("0");
+			pseNotificacionDePagoRequest.setCodImpuesto(getImpuestoId(transaction.getTipoDeImpuesto()));
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
-			pseNotificacionDePagoRequest.setMedioPago(ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(transaction.getTipoDeTarjeta()));
+			
 			pseNotificacionDePagoRequest.setNumOperacion("9999999");
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
 
+			
+			if(transaction.getEntityCode().equals(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION)) { //Credibanco transaction
+				pseNotificacionDePagoRequest.setMedioPago(ControllerPseConstants.CREDIBANCO_NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(transaction.getCrePaymentMethod()));
+			}else { //ACH PSE Transaction
+				pseNotificacionDePagoRequest.setMedioPago(ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(transaction.getTipoDeTarjeta()));
+			}
+			
 			this.realizarNotificacion(pseNotificacionDePagoRequest);
 
 			transaction.setNotificacionDeRecaudo("SI");

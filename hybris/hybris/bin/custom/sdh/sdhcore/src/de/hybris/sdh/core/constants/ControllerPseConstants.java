@@ -67,11 +67,32 @@ public class ControllerPseConstants
 		}
 	};
 
+	public final static String CREDIBANCO_IDENTIFIER_TRANSACTION = "CREDIBANCO_TRANSACTION";
 	public final static String CREDIBANCO_RESPONSE_PENDIENTE = "0";
 	public final static String CREDIBANCO_RESPONSE_APROBADA 	= "1";
 	public final static String CREDIBANCO_RESPONSE_RECHAZADA = "2";
 	public final static String CREDIBANCO_RESPONSE_FALLIDA 	= "3";
 
+	public final static String CREDIBANCO_PAYMENT_METHOD_TARJETA_CREDITO_VISA 			= "1";
+	public final static String CREDIBANCO_PAYMENT_METHOD_TARJETA_CREDITO_MASTERCARD 	= "2";
+	public final static String CREDIBANCO_PAYMENT_METHOD_CREDITO_ROTATIVO	 			= "3";
+	public final static String CREDIBANCO_PAYMENT_METHOD_SOBREGIRO 						= "4";
+	public final static String CREDIBANCO_PAYMENT_METHOD_CREDITO_LIBRE_INVERSION 		= "5";
+	public final static String CREDIBANCO_PAYMENT_METHOD_AVANCE_EFECTIVO 				= "6";
+	public final static HashMap<String, String> CREDIBANCO_NOTIFICACION_DE_PAGO_MEDIO_PAGO = new HashMap<String, String>()
+	{
+		{
+			put(CREDIBANCO_PAYMENT_METHOD_TARJETA_CREDITO_VISA			, TARJETA_CREDITO_VISA);
+			put(CREDIBANCO_PAYMENT_METHOD_TARJETA_CREDITO_MASTERCARD	, TARJETA_CREDITO_MASTERCARD);
+			put(CREDIBANCO_PAYMENT_METHOD_CREDITO_ROTATIVO				, "");
+			put(CREDIBANCO_PAYMENT_METHOD_SOBREGIRO						, "");
+			put(CREDIBANCO_PAYMENT_METHOD_CREDITO_LIBRE_INVERSION		, "");
+			put(CREDIBANCO_PAYMENT_METHOD_AVANCE_EFECTIVO				, "");
+		}
+	};
+
+	public final static String PSE_ACH_RESPONSE_TRANSACTION_OK = "OK";
+	public final static String ONLINE_PAYMENT_NOT_NOTIFIED_TRANSACTION = "NO";
 
 	public ControllerPseConstants()
 	{
@@ -436,6 +457,16 @@ public class ControllerPseConstants
 	public static String getCredibancoResponseFallida()
 	{
 		return CREDIBANCO_RESPONSE_FALLIDA;
+	}
+
+
+
+	/**
+	 * @return the credibancoIdentifierTransaction
+	 */
+	public static String getCredibancoIdentifierTransaction()
+	{
+		return CREDIBANCO_IDENTIFIER_TRANSACTION;
 	}
 
 

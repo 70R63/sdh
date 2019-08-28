@@ -6,6 +6,7 @@ package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.credibanco.ResultTransactionRequest;
 import de.hybris.sdh.core.credibanco.ResultTransactionResponse;
@@ -258,7 +259,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		final Date dateTimeTransaction = new Date();
 
 		// ConstantConnectionDat
-		transactionLogModel.setEntityCode("CREDIBANCO_TRANSACTION");
+		transactionLogModel.setEntityCode(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION);
 
 		// PSEPaymentForm
 		transactionLogModel.setNumeroDeReferencia(numeroDeReferencia);
@@ -333,11 +334,9 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				transactionState = response.getStatus();
 
 				modelService.saveAll(pseTransactionsLogModel);
-				LOG.info("updateCredibancoTransaction:[ numeroReferencia(NUS)=" + pseTransactionsLogModel.getNumeroDeReferencia() +
-						" , status=" + response.getStatus() + " , description=" + response.getDescription() + " , value="
-						+ response.getValue() + " , transactionDate=" + response.getTransactionDate() + " , transactionHour="
-						+ response.getTransactionHour() + " , approvalNumber=" + response.getApprovalNumber() + " , paymentMethod="
-						+ response.getPaymentMethod() + "]");
+
+				LOG.info(response);
+				LOG.info("UpdateCredibancoTransaction:[ numeroReferencia(NUS)=" + pseTransactionsLogModel.getNumeroDeReferencia() + "]");
 			}
 			else
 			{

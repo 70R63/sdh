@@ -7,6 +7,7 @@ import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 
@@ -60,7 +61,7 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * (non-Javadoc) Just PSE/ACH Transactions
 	 *
 	 * @see de.hybris.sdh.core.dao.PseTransactionsLogDao#getAllTransactionsNotNotifiedPaymentAndStatusOk()
 	 */
@@ -71,7 +72,31 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
 		      + PseTransactionsLogModel._TYPECODE + " AS p} Where "
 				+ "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + transactionStateStatus + "' AND " + "{p:"
-				+ PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '" + notificacionRecaudoStatus + "'";
+				+ PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '" + notificacionRecaudoStatus + "' AND " + "{p:"
+				+ PseTransactionsLogModel.ENTITYCODE + "} NOT IN ('" + ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION
+				+ "')";
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT);
+		final SearchResult<PseTransactionsLogModel> transactions = getFlexibleSearchService().search(query);
+		return getFlexibleSearchService().search(query);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.hybris.sdh.core.dao.PseTransactionsLogDao#getAllCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(java.
+	 * lang.String, java.lang.String)
+	 */
+	@Override
+	public SearchResult<PseTransactionsLogModel> getAllCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(
+			final String transactionStateStatus, final String notificacionRecaudoStatus)
+	{
+		final String GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
+				+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.CRERESPONSESTATUS + "} = '"
+				+ transactionStateStatus + "' AND " + "{p:" + PseTransactionsLogModel.NOTIFICACIONDERECAUDO + "} = '"
+				+ notificacionRecaudoStatus + "' AND " + "{p:" + PseTransactionsLogModel.ENTITYCODE + "} = '"
+				+ ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION + "'";
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_TRANSACTION_NOT_NOTIFIED_PAYMENT);
 		final SearchResult<PseTransactionsLogModel> transactions = getFlexibleSearchService().search(query);
