@@ -7,6 +7,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -49,13 +50,16 @@ public class AgentesAutorizadosPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "sessionService")
+	private SessionService sessionService;
+
 	@RequestMapping(value = "/autorizados", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String retenedores(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Autorizados --------------------------");
 
-
+		sessionService.setAttribute("representado",null);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AGENTES_AUTORIZADOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AGENTES_AUTORIZADOS_CMS_PAGE));

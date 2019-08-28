@@ -18,7 +18,11 @@
 	<c:otherwise>
 		<%-- jquery --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-3.2.1.min.js"></script>
-		
+
+
+		<c:if test="${not empty representado}">
+			<script type="text/javascript" src="${commonResourcePath}/js/acc.aamenu.js"></script>
+		</c:if>
 		<%-- plugins --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/enquire.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/Imager.min.js"></script>

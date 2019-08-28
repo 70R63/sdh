@@ -83,8 +83,8 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 
 
 		ConsulFirmasRequest request = new ConsulFirmasRequest();
-		request.setAgente(representado);
-		request.setContribuyente(currentUser.getNumBP());
+		request.setAgente(currentUser.getNumBP());
+		request.setContribuyente(representado);
 
 		model.addAttribute("firmas",sdhConsultaFirmasFacade.getDeclaraciones(request));
 

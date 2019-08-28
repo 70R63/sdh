@@ -40,6 +40,10 @@ import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.type.TypeService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.facades.questions.data.SDHRolData;
 import de.hybris.sdh.storefront.filters.cms.CMSSiteFilter;
 import de.hybris.sdh.storefront.forms.UIMenuForm;
@@ -106,6 +110,9 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 	@Resource(name = "siteConfigService")
 	SiteConfigService siteConfigService;
 
+	@Resource(name="sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
+
 	@Override
 	public void beforeView(final HttpServletRequest request, final HttpServletResponse response, final ModelAndView modelAndView)
 	{
@@ -152,26 +159,17 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 		if (!"anonymous".equalsIgnoreCase(customerData.getUid()))
 		{
-			for (final SDHRolData eachRolData : customerData.getRolList())
-			{
-				if ("01".equals(eachRolData.getRol()))
-				{
+
+			for (final SDHRolData eachRolData : customerData.getRolList()) {
+				if ("01".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasCORol", true);
-				}
-				else if ("02".equals(eachRolData.getRol()))
-				{
+				} else if ("02".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasAARol", true);
-				}
-				else if ("03".equals(eachRolData.getRol()))
-				{
+				} else if ("03".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasTARol", true);
-				}
-				else if ("04".equals(eachRolData.getRol()))
-				{
+				} else if ("04".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasARRol", true);
-				}
-				else if ("05".equals(eachRolData.getRol()))
-				{
+				} else if ("05".equals(eachRolData.getRol())) {
 					modelAndView.addObject("hasRIRol", true);
 				}
 			}
@@ -180,6 +178,29 @@ public class CmsPageBeforeViewHandler implements BeforeViewHandler
 
 			uiMenuForm.fillForm(customerData);
 			modelAndView.addObject("uiMenuForm", uiMenuForm);
+			if(sessionService.getAttribute("representado")!= null) {
+
+				String representado = sessionService.getAttribute("representado");
+
+				SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+
+				modelAndView.addObject("representado", representadoData);
+
+				String aamenus = "";
+
+				for (ContribAgente eachAgent : representadoData.getAgentes())
+				{
+					if(customerData.getNumBP().equalsIgnoreCase(eachAgent.getBp()) || StringUtils.leftPad(customerData.getNumBP(),10,"0").equalsIgnoreCase(eachAgent.getBp()))
+					{
+						aamenus = eachAgent.getMenu();
+					}
+
+				}
+
+
+				modelAndView.addObject("aamenus",aamenus);
+
+			}
 
 		}
 

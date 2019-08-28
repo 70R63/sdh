@@ -231,7 +231,7 @@ public class TramitesCrearPageController extends AbstractPageController
 			throws CMSItemNotFoundException
 	{
 
-		System.out.println("------------------En GET creacion caso------------------------");
+		System.out.println("------------------En POST creacion caso------------------------");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final TramitesSeleccionInfo tramitesSeleccionInfo = new TramitesSeleccionInfo();

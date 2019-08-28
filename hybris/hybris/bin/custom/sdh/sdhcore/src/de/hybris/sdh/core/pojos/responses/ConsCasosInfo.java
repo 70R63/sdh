@@ -17,6 +17,7 @@ public class ConsCasosInfo
 	private String cat02;
 	private String cat03;
 	private String cat04;
+	private String mensaje;
 
 
 	/**
@@ -151,6 +152,23 @@ public class ConsCasosInfo
 	public void setEstatus(final String estatus)
 	{
 		this.estatus = estatus;
+	}
+
+	/**
+	 * @return the mensaje
+	 */
+	public String getMensaje()
+	{
+		return mensaje;
+	}
+
+	/**
+	 * @param mensaje
+	 *           the mensaje to set
+	 */
+	public void setMensaje(final String mensaje)
+	{
+		this.mensaje = mensaje;
 	}
 
 
