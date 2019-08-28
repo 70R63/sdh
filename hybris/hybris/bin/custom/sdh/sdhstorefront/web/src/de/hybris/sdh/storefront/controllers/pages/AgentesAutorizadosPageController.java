@@ -59,7 +59,7 @@ public class AgentesAutorizadosPageController extends AbstractPageController
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Autorizados --------------------------");
 
-		sessionService.setAttribute("representado","");
+		sessionService.setAttribute("representado",null);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AGENTES_AUTORIZADOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AGENTES_AUTORIZADOS_CMS_PAGE));

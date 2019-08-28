@@ -58,7 +58,7 @@ public class HomePageController extends AbstractPageController
 			return REDIRECT_PREFIX + ROOT;
 		}
 
-		sessionService.setAttribute("representado","");
+		sessionService.setAttribute("representado",null);
 
 		sdhCustomerAccountService.cleanSessionAutorities();
 
