@@ -114,7 +114,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				+ anoGravable + " , CHIP=" + CHIP + " , Periodo=" + periodo + " , CUD=" + CUD + " , TipoDeIdentificacion="
 				+ tipoDeIdentificacion + " , NoIdentificacion=" + noIdentificacion + " , DV=" + DV + " , FechaLimiteDePago="
 				+ fechaLimiteDePago + " , PagoAdicional=" + pagoAdicional + " , Banco=" + banco + " , ValorAPagar=" + valorAPagar
-				+ " , IsoCurrency" + isoCurrency + " , TipoDeTarjeta" + tipoDeTarjeta + "]");
+				+ " , IsoCurrency=" + isoCurrency + " , TipoDeTarjeta=" + tipoDeTarjeta + "]");
 
 		modelService.saveAll(transactionLogModel);
 	}
