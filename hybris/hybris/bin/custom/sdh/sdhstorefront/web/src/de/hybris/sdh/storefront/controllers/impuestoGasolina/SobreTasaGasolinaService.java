@@ -868,6 +868,14 @@ public class SobreTasaGasolinaService
 				wsresponse = wsresponse.replace("\"ESTRUCTURA\":", "\"esctructura\":");
 				wsresponse = wsresponse.replace("\"CAMPO\":", "\"campo\":");
 				wsresponse = wsresponse.replace("\"FACTOR\":", "\"factor\":");
+				wsresponse = wsresponse.replace("\"ARCHIVOS\":", "\"archivos\":");
+				wsresponse = wsresponse.replace("\"ZZWCC_OBJECT_ID\":", "\"zzwcc_object_id\":");
+				wsresponse = wsresponse.replace("\"ZZWCC_DEPEND_ID\":", "\"zzwcc_depend_id\":");
+				wsresponse = wsresponse.replace("\"ZZWCC_SERIE_ID\":", "\"zzwcc_serie_id\":");
+				wsresponse = wsresponse.replace("\"ZZWCC_SSERIE_ID\":", "\"zzwcc_sserie_id\":");
+				wsresponse = wsresponse.replace("\"ZZWCC_TIPODOC_ID\":", "\"zzwcc_tipodoc_id\":");
+				wsresponse = wsresponse.replace("\"ZZWCC_DESC_TIPODOC\":", "\"zzwcc_desc_tipodoc\":");
+				wsresponse = wsresponse.replace("\"ZZWCC_ARCIVO\":", "\"zzwcc_arcivo\":");
 			}
 
 			responseInfo = mapper.readValue(wsresponse, Class.forName(nombreClase));

@@ -13,6 +13,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.TramitesConsultaCasoInfo;
+import de.hybris.sdh.core.pojos.responses.ConsCasosArchiResponse;
 import de.hybris.sdh.core.pojos.responses.ConsCasosInfo;
 import de.hybris.sdh.core.pojos.responses.ConsCasosInfoVista;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
@@ -209,7 +210,14 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 						}
 						if (resultadoActual.getCampo().equals("TEXT"))
 						{
-							infoConsulCasos.setMensaje(resultadoActual.getFactor());
+							if (infoConsulCasos.getMensaje() == null)
+							{
+								infoConsulCasos.setMensaje(resultadoActual.getFactor());
+							}
+							else
+							{
+								infoConsulCasos.setMensaje(infoConsulCasos.getMensaje() + resultadoActual.getFactor().trim());
+							}
 						}
 
 						mapResultado.put(resultadoActual.getProcess_type(), infoConsulCasos);
@@ -217,10 +225,35 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 
 					infoCasos = new ArrayList(mapResultado.values());
 				}
+				if (consCasosResponse.getArchivos() != null)
+				{
+					//					if (consCasosResponse.getARCHIVOS().size > 0){
+					//					for(ConsCasosArchiResponse archivoActual: consCasosResponse.getARCHIVOS()) {
+					infoConsulCasos = mapResultado.get(consCasosResponse.getArchivos().getZzwcc_object_id());
+					if (infoConsulCasos == null)
+					{
+						infoConsulCasos = new ConsCasosInfo();
+					}
+					else
+					{
+						mapResultado.remove(consCasosResponse.getArchivos().getZzwcc_object_id());
+					}
+					final ConsCasosArchiResponse archivoActual = consCasosResponse.getArchivos(); //ajustar
+					infoConsulCasos.setArchivos(archivoActual);
+
+					mapResultado.put(archivoActual.getZzwcc_object_id(), infoConsulCasos);
+					//					}
+					//}
+				}
+				if (!mapResultado.isEmpty())
+				{
+					infoCasos = new ArrayList(mapResultado.values());
+				}
 			}
 		}
 		else
 		{
+			infoVista.setMensaje("Ocurrio un error. No se genero el caso");
 		}
 		infoVista.setInfoCasos(infoCasos);
 		infoVista.setMensaje(mensaje);

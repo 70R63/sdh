@@ -213,7 +213,7 @@
 				<label class="control-label"><spring:theme
 						code="tramites.seguimiento.detalle.docad" /></label>
 				<div
-					style="border: 1px solid #000; min-height: 120px; max-height: 400px; min-width: 100%; max-width: 100%; border-radius: 5px"></div>
+					style="border: 1px solid #000; min-height: 180px; max-height: 400px; min-width: 100%; max-width: 100%; border-radius: 5px" id="docsAdjuntos"></div>
 			</div>
 		</div>
 

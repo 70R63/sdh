@@ -14,7 +14,7 @@ public class ConsCasosInfoVista
 {
 	private List<ConsCasosInfo> infoCasos;
 	private String mensaje;
-	
+
 	/**
 	 * @return the infoCasos
 	 */
@@ -22,7 +22,7 @@ public class ConsCasosInfoVista
 	{
 		return infoCasos;
 	}
-	
+
 	/**
 	 * @param infoCasos
 	 *           the infoCasos to set
@@ -31,7 +31,7 @@ public class ConsCasosInfoVista
 	{
 		this.infoCasos = infoCasos;
 	}
-	
+
 	/**
 	 * @return the mensaje
 	 */
@@ -39,7 +39,7 @@ public class ConsCasosInfoVista
 	{
 		return mensaje;
 	}
-	
+
 	/**
 	 * @param mensaje
 	 *           the mensaje to set
@@ -47,6 +47,17 @@ public class ConsCasosInfoVista
 	public void setMensaje(final String mensaje)
 	{
 		this.mensaje = mensaje;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ConsCasosInfoVista [infoCasos=" + infoCasos + ", mensaje=" + mensaje + "]";
 	}
 
 
