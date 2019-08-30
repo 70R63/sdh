@@ -216,7 +216,7 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 							}
 							else
 							{
-								infoConsulCasos.setMensaje(infoConsulCasos.getMensaje() + resultadoActual.getFactor().trim());
+								infoConsulCasos.setMensaje(infoConsulCasos.getMensaje() + "\n" + resultadoActual.getFactor().trim());
 							}
 						}
 
