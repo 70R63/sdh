@@ -8,6 +8,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -15,22 +17,15 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
-import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
-import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
-import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
-import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
-import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
-import de.hybris.sdh.core.pojos.responses.DetGasResponse;
-import de.hybris.sdh.core.pojos.responses.DetGasRevisorDeclaranteResponse;
-import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
-import de.hybris.sdh.core.pojos.responses.ErrorPubli;
-import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.requests.*;
+import de.hybris.sdh.core.pojos.responses.*;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
+import de.hybris.sdh.storefront.controllers.pages.SDHAbstractPageController;
+import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
+import de.hybris.sdh.storefront.forms.FirmantesForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
@@ -46,18 +41,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -72,7 +63,7 @@ import sun.misc.BASE64Decoder;
 @SessionAttributes(
 { "dataForm", "psePaymentForm" })
 
-public class SobreTasaGasolina extends AbstractSearchPageController
+public class SobreTasaGasolina extends SDHAbstractPageController
 {
 
 	private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
@@ -119,6 +110,12 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 
 	@Resource(name = "modelService")
 	private ModelService modelService;
+
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
+	@Resource(name="sdhEnviaFirmasFacade")
+	SDHEnviaFirmasFacade sdhEnviaFirmasFacade;
 
 	@ModelAttribute("productClassMaximumOccurrencies")
 	public Map<String, Integer> getProductClassMaximumOccurrencies()
@@ -318,7 +315,35 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 	}
 
 
+	@RequestMapping(value="/contribuyentes/gasolina/declaracion/firmar",method=RequestMethod.POST)
+	@ResponseBody
+	public EnviaFirmasResponse enviaFirmas(Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+	{
+		EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
 
+		enviaFirmasRequest.setNumForm(dataForm.getNumForm());
+
+
+		if(CollectionUtils.isNotEmpty(dataForm.getFirmantes()))
+		{
+			List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
+			for(FirmantesForm eachFirmante : dataForm.getFirmantes())
+			{
+				FirmanteRequest firmante = new FirmanteRequest();
+
+				firmante.setConfirmacion(eachFirmante.getConfirmacion());
+				firmante.setFirmante(eachFirmante.getFirmante());
+				firmante.setNumIdentif(eachFirmante.getNumIdentif());
+				firmante.setTipoIdent(eachFirmante.getTipoIdent());
+
+
+				firmantesList.add(firmante);
+			}
+			enviaFirmasRequest.setTablFirmante(firmantesList);
+		}
+
+		return sdhEnviaFirmasFacade.enviaFirmas(enviaFirmasRequest);
+	}
 
 
 
@@ -445,6 +470,8 @@ public class SobreTasaGasolina extends AbstractSearchPageController
 		String clavePeriodo = "";
 		String mensajeError = "";
 
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		addAgentsToModel(model, customerData);
 
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
