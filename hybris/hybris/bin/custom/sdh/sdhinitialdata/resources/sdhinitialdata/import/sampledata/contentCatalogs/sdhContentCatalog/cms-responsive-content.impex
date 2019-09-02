@@ -148,6 +148,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; RelPagosLink                 ; RELACION DE PAGOS LINK              ; "/contribuyentes/consultas/relacionpagos" ;;;;;
 ; ; EdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/contribuyentes/estado-de-cuenta" ;;;;;
 ; ; CertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/contribuyentes/consultas/certideclaraciones" ;;;;;
+; ; DeclaracionesLink			;DECLARACIONES LINK						;"/contribuyentes/consultas/declaraciones";;;;;
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 #->INI dev-maria Agregar submenu Reportantes 04/01/2019
 ; ; CargaLink               	 ; CARGA LINK              		; "/reportantes/cargadocumentos";;;;;
@@ -391,7 +392,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
-;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode
+;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode
 ;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertPagoNavNode, ARObligacionesPendNavNode, ARRelPagosNavNode, ARCertDeclaraNavNode
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
@@ -509,6 +510,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;RelPagosNavNode;;Relacion Pagos Link;RelPagosNavNode
 ;EdoCuentaNavNode;;Estado Cuenta Link;EdoCuentaNavNode
 ;CertDeclaraNavNode;; Certificacion Declaracion Link;CertDeclaraNavNode
+;DeclaracionesNavNode;; Declaraciones Link; DeclaracionesNavNode
 
 ;ARCertPagoNavNode;;Certificacion Pago Link;ARCertPagoNavNode
 ;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
@@ -631,6 +633,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;RelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;RelPagosNavNode;RelPagosLink
 ;EdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;EdoCuentaNavNode;EdoCuentaLink
 ;CertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;CertDeclaraNavNode;CertDeclaraLink
+;DeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;DeclaracionesNavNode;DeclaracionesLink
 
 
 ;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;CertPagoLink
@@ -1886,8 +1889,8 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 #->FIN dev-maria Agregar paginas para Relacion Pagos 01/03/2019		
 #->INI dev-maria Agregar paginas para Certificacion Declaracion 07/03/2019
 $contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;certiDeclaracionesPage 		;certificacion declaracion 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/certideclaraciones
@@ -2567,3 +2570,24 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 
 #->FIN dev-maria Agregar paginas para crear agentes
 
+#->INI dev-maria Agregar paginas paradeclaraciones
+$contentCatalog=sdhContentCatalog 
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;declaracionesPage 		;Declaraciones Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/declaraciones
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='declaracionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-declaracionesPage 		;SideContent				;															;SideContent-declaracionesPage						;;;
+								;						;BodyContent-declaracionesPage		;BodyContent				;															;BodyContent-declaracionesPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-declaracionesPage 	;Side Content Slot for Retenciones			;true	;								;;;
+							;							;BodyContent-declaracionesPage	;Body Content Slot for Retenciones			;true	;declaracionesPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;declaracionesPageComponent	;declaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/declaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;declaracionesPageComponent					
+#->FIN dev-maria Agregar paginas para declaraciones
