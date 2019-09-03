@@ -40,46 +40,46 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme code="" /></label> <input
-							disabled id="" name="" class="new_alto form-control" disabled type="text"
-							value="" maxlength="240" placeholder="Declarante" style="margin-top:4px">
+							disabled id="" name="" class="form-control PEFirmInterFunct" disabled type="text"
+							value="Declarante" maxlength="240" placeholder="Declarante" style="margin-top:4px">
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="ica.declaracion.firma.nombre" /></label> <input disabled id=""
-							name="" class="new_alto form-control" disabled type="text" value=""
-							maxlength="240"></input>
+								code="publicidad.declaracion.firma.nombre" /></label> <input disabled id=""
+																							 name="" class="form-control" disabled type="text" value="${customerData.completeName}"
+																							 maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
-							name="" class="new_alto form-control" disabled type="text" value=""
-							maxlength="240"></input>
+								code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id=""
+																							   name="" class="form-control DeclaranteDT" disabled type="text" value="${customerData.documentType}"
+																							   maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="ica.declaracion.firma.numide" /></label> <input disabled id=""
-							name="" class="new_alto form-control" disabled type="text" value=""
-							maxlength="240"></input>
+								code="publicidad.declaracion.firma.numide" /></label> <input disabled id=""
+																							 name="" class="form-control DeclaranteDN" disabled type="text" value="${customerData.documentNumber}"
+																							 maxlength="240"></input>
 					</div>
 				</div>
 
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="ica.declaracion.firma.numtarjeta" /></label> <input disabled
-							id="" name="" class="new_alto form-control" disabled type="text" value=""
-							maxlength="240"></input>
+								code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled
+																								 id="" name="" class="form-control" disabled type="text" value="${customerData.numBP}"
+																								 maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-1">
 					<label class="control-label"><spring:theme code="" /></label>
-					<button class="btn btn-primary" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
+					<button type="button" onclick="firmButtonDeclaranteClicked(this);" class="btn btn-primary PEFirmButton" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
 				</div>
 			</div>
 		</div>
@@ -88,61 +88,63 @@
 <div class="container" id="repre">
 
 	<div id="representante" class="row mt-3 representante"
-		style="display: none">
+		 style="display: none">
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label"><spring:theme code="" /></label> <select
-					class="new_alto form-control "
+					class="form-control PEFirmInterFunct"
 					style="font-size: 13px; padding: 0px; margin-top: 23px"
-					onchange="habfirmante(this)" id="selectfirmante">
-					<option>Seleccionar</option>
-					<option>Revisor</option>
-					<option>Contador</option>
-					<option>Representante</option>
-				</select>
+					onchange="internalFunctionSelected(this)" id="selectfirmante">
+				<option value="">Seleccionar</option>
+				<c:forEach items="${agentFunctionsMap}" var="eachFunction">
+
+					<option value="${eachFunction.key}">${eachFunction.value}</option>
+
+				</c:forEach>
+			</select>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label " style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.nombre" /></label> <select  id="selcnombre"
-					name="" class="new_alto form-control"><option>Seleccionar</option></select>
+						code="publicidad.declaracion.firma.nombre" /></label> <select  id="selcnombre" onchange="nameSelected(this)"
+																					   name="" class="form-control PEFirmSelectNombre"><option value="">Seleccionar</option></select>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label textocentrado" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.tipoiden" /></label> <input disabled id=""
-					name="" class="new_alto form-control" disabled type="text" value=""
-					maxlength="240"></input>
+						code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled id=""
+																					   name="" class="form-control PEFirmTipoId" disabled type="text" value=""
+																					   maxlength="240"></input>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.numide" /></label> <input disabled id=""
-					name="" class="new_alto form-control" disabled type="text" value=""
-					maxlength="240"></input>
+						code="publicidad.declaracion.firma.numide" /></label> <input disabled id=""
+																					 name="" class="form-control PEFirmNumId" disabled type="text" value=""
+																					 maxlength="240"></input>
 			</div>
 		</div>
 
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="ica.declaracion.firma.numtarjeta" /></label> <input disabled id=""
-					name="" class="new_alto form-control" disabled type="text" value=""
-					maxlength="240"></input>
+						code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled id=""
+																						 name="" class="form-control PEFirmTarjetaProf" disabled type="text" value=""
+																						 maxlength="240"></input>
 			</div>
 		</div>
 
 		<div class="col-md-1">
-			<button class="btn btn-primary ajustemargen">Firmar</button>
+			<button type="button" onclick="firmButtonClicked(this);" disabled class="btn btn-primary ajustemargen PEFirmButton">Firmar</button>
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">
 				<img onclick="fnaddFirmanteRep()"
-					src="${themeResourcePath}/images/adddelineacion.png"
-					style="width: 25px; margin-top: 55px;"></img> <img
+					 src="${themeResourcePath}/images/adddelineacion.png"
+					 style="width: 25px; margin-top: 55px;"></img> <img
 					onclick="delerepre()"
 					src="${themeResourcePath}/images/deledelineacion.png"
 					style="width: 25px; margin-top: 55px;"></img>
@@ -264,7 +266,7 @@
 
 		} else {
 
-			alert("No se pueden agregar m�s firmantes");
+			alert("No se pueden agregar m�s firmantes");
 
 		}
 	}
@@ -282,4 +284,135 @@
 			alert("No puede eliminar todos los registros");
 		}
 	}
+
+	function internalFunctionSelected(element) {
+		var internalFunctionSelected = $(element).val();
+		var nameSelect = $(element).closest(".representante").find(".PEFirmSelectNombre");
+		if (internalFunctionSelected == "") {
+			$(nameSelect).find('option').remove();
+			var o = new Option("SELECCIONAR", "");
+			/// jquerify the DOM object 'o' so we can use the html method
+			$(o).html("SELECCIONAR");
+			$(nameSelect).append(o);
+			$(element).closest(".representante").find(".PEFirmTipoId").val("");
+			$(element).closest(".representante").find(".PEFirmNumId").val("");
+			$(element).closest(".representante").find(".PEFirmTarjetaProf").val("");
+			return;
+		} else {
+
+			$.each(ACC.agentesFirmas[internalFunctionSelected], function (key, value) {
+				var o = new Option(value.completeName, key);
+				/// jquerify the DOM object 'o' so we can use the html method
+				$(o).html(value.completeName);
+				$(nameSelect).append(o);
+			});
+
+
+		}
+	}
+
+	function nameSelected(element){
+
+		var nameSelected = $(element).val();
+
+		if(nameSelected == "")
+		{
+			$(element).closest(".representante").find(".PEFirmTipoId").val("");
+			$(element).closest(".representante").find(".PEFirmNumId").val("");
+			$(element).closest(".representante").find(".PEFirmTarjetaProf").val("");
+			return;
+		}
+
+		var internalFunctionSelected = $(element).closest(".representante").find(".PEFirmInterFunct").val();
+
+		var documentNumber = ACC.agentesFirmas[internalFunctionSelected][nameSelected].documentNumber;
+
+		var documentType = ACC.agentesFirmas[internalFunctionSelected][nameSelected].documentType;
+
+		var tarjetaProf = ACC.agentesFirmas[internalFunctionSelected][nameSelected].bp;
+
+		$(element).closest(".representante").find(".PEFirmTipoId").val(documentType);
+		$(element).closest(".representante").find(".PEFirmNumId").val(documentNumber);
+		$(element).closest(".representante").find(".PEFirmTarjetaProf").val(tarjetaProf);
+
+
+	}
+
+	function firmButtonDeclaranteClicked(element) {
+
+		var numForm = $.trim($("#numForm").val());
+
+		if(numForm == ""  )
+		{
+			$( "#dialogICA" ).dialog( "open" );
+			$("#icaDialogContent").html("");
+			$("#icaDialogContent").html("Debe realizar el calculo primero");
+
+			return;
+		}
+
+		var firmantes =[];
+
+		var declarante = {};
+
+		declarante.tipoIdent = $(".DeclaranteDT").val();
+		declarante.numIdentif =  $(".DeclaranteDN").val();
+		declarante.firmante = "1";
+		declarante.confirmacion = "x";
+
+		firmantes.push(declarante);
+
+		$.each($(".representante"), function( index, value ) {
+
+			var representante = {};
+
+			representante.tipoIdent = $(value).find(".PEFirmTipoId").val();
+			representante.numIdentif =  $(value).find(".PEFirmNumId").val();
+			representante.firmante = index+2;
+			representante.confirmacion = "";
+
+			if(representante.tipoIdent != "" && representante.numIdentif != "")
+			{
+				firmantes.push(representante);
+			}
+		});
+
+
+
+
+
+		var data = {};
+
+
+
+		data.numForm=numForm;
+		data.firmantes =firmantes;
+
+		$.ajax({
+			url: ACC.gasolinaFirmar,
+			data: JSON.stringify(data),
+			type: "POST",
+			dataType: "json",
+			contentType: "application/json",
+			success: function (data) {
+				$( "#dialogICA" ).dialog( "open" );
+				$("#icaDialogContent").html("");
+				$.each(data.errores,function (index,value) {
+
+					if(value.idmsj != "")
+					{
+						$("#icaDialogContent").html($("#icaDialogContent").html()+value.txtmsj+"<br>");
+					}
+
+				});
+
+			},
+			error: function () {
+				$( "#dialogICA" ).dialog( "open" );
+				$("#icaDialogContent").html("");
+				$("#icaDialogContent").html("Hubo un error al intentar firmar la declaración, favor de intentarlo más tarde.")
+			}
+		});
+	}
+
 </script>
