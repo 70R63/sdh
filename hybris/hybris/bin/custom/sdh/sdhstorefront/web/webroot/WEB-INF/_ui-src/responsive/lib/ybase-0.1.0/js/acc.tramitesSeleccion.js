@@ -491,9 +491,10 @@ ACC.tramitesSeleccion = {
 		var doc = document.getElementById('documentos');
 		var mostrarTabDocs = false;
 		
+		dataCreacionCaso = null;
 		cantidadArchivos = 0;
 		if(docTramites.docTramitesResponse != null){
-			cantidadArchivos = docTramites.docTramitesResponse.documentos.length - 1;
+			cantidadArchivos = docTramites.docTramitesResponse.documentos.length;
 			$("#documentos").find("tr:gt(0)").remove();
 			$.each(docTramites.docTramitesResponse.documentos, function (index,value){
 				if(value.tipoDocumen_t != ''){
