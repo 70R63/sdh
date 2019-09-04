@@ -186,6 +186,42 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.clasdh" /></label> <input
+						id="" name="" class="newalto form-control" aria-required="true"
+						type="text" value="" maxlength="30" disabled="disabled">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.linhomo" /></label> <input
+						id="" name="" class="newalto form-control" aria-required="true"
+						type="text" value="" maxlength="30" disabled="disabled">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.tipvesdh" /></label> <input
+						id="" name="" class="newalto form-control" aria-required="true"
+						type="text" value="" maxlength="30" disabled="disabled">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.fuenhomo" /></label> <input
+						id="" name="" class="newalto form-control" aria-required="true"
+						type="text" value="" maxlength="30" disabled>
+				</div>
+			</div>
+		</div>
 	</form:form>
 </div>
 
