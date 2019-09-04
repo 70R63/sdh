@@ -161,7 +161,32 @@
 			</c:if>
 
 			<c:if
-				test="${certiFormPost.idimp == '3' and certiFormPost.idimp == '7' and  isPeriodoAnual == false}">
+				test="${certiFormPost.idimp == '3' and  isPeriodoAnual == false}">
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft" id="idPeriodo"
+					style="display: block;">
+					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
+					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
+					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
+					<div class="caja--ser-rel color-sr3">
+						<div class="form-group">
+							<label class="control-label required"><spring:theme
+									code="certificacion.inicial.periodo" /></label> <select id="periodo"
+								class="newalto form-control " name="periodo">
+								<option value="">Seleccionar</option>
+								<option value="B1">1 - Ene / Feb</option>
+								<option value="B2">2 - Mar / Abr</option>
+								<option value="B3">3 - May / Jun</option>
+								<option value="B4">4 - Jul / Ago</option>
+								<option value="B5">5 - Sep / Oct</option>
+								<option value="B6">6 - Nov / Dic</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</c:if>
+			
+			<c:if
+				test="${certiFormPost.idimp == '7'}">
 				<div class="col-md-4 col-xs-12 mb-20 no-marginleft" id="idPeriodo"
 					style="display: block;">
 					<span class="paso--tres pasos color-sr3 rajdhani">3</span>

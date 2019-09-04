@@ -485,9 +485,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 				final ConsultaPagoRequest consultaPagoRequest = new ConsultaPagoRequest();
 				consultaPagoRequest.setNumBP(certiFormPost.getNumBP());
 
-				if (customerData.getIcaTax() != null)
+				if (customerData.getReteIcaTax() != null)
 				{
-					consultaPagoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+					consultaPagoRequest.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
 				}
 
 
