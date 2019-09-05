@@ -178,8 +178,8 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 #->FIN dev-eduardo Agregar submenu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGO 04/01/2019
-;;GeneracionROPLink;"Generación de ROP";"Haga clic aquí para acceder a la opción de menú Generación de ROP"
-;;PagoLineaLink;"Pago en línea";"Haga clic aquí para acceder a la opción de menú pago en línea"
+#;;GeneracionROPLink;"Generación de ROP";"Haga clic aquí para acceder a la opción de menú Generación de ROP"
+#;;PagoLineaLink;"Pago en línea";"Haga clic aquí para acceder a la opción de menú pago en línea"
 #->FIN dev-eduardo Agregar submenu PAGO 04/01/2019
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
@@ -188,6 +188,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;RelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
 ;;EdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
 ;;CertDeclaraLink;"Certificaciones de declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
+;;DeclaracionesLink;"Declaraciones";"Haga clic aquí para acceder a la opción del menú Declaraciones"
 
 ;;CargaLink;"Carga de documentos";"Haga clic aquí para acceder a la opción de Carga de Documentos"
 ;;HistoricoLink;"Histórico de reportes";"Haga clic aquí para acceder a la opción de Histórico de reportes"

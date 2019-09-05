@@ -8,6 +8,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -19,33 +21,17 @@ import de.hybris.sdh.core.dao.impl.DefaultSDHICACityDao;
 import de.hybris.sdh.core.dao.impl.DefaultSDHICAEconomicActivityDao;
 import de.hybris.sdh.core.model.SDHICACityModel;
 import de.hybris.sdh.core.model.SDHICAEconomicActivityModel;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
-import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
-import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
-import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
-import de.hybris.sdh.core.pojos.responses.DetalleActivEconomicas;
-import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
-import de.hybris.sdh.core.pojos.responses.ErrorPubli;
-import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
-import de.hybris.sdh.core.pojos.responses.ICACalculoImpResponse;
-import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
-import de.hybris.sdh.core.pojos.responses.ICAInfoDeclara;
-import de.hybris.sdh.core.pojos.responses.ICAInfoIngFueraBog;
-import de.hybris.sdh.core.pojos.responses.ICAInfoIngNetosGrava;
-import de.hybris.sdh.core.pojos.responses.ICAInfoIngPorCiiu;
-import de.hybris.sdh.core.pojos.responses.ICAInfoValorRetenido;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.requests.*;
+import de.hybris.sdh.core.pojos.responses.*;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
+import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
-import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
-import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
-import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
+import de.hybris.sdh.storefront.forms.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -59,6 +45,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -82,7 +69,7 @@ import sun.misc.BASE64Decoder;
  */
 @Controller
 
-public class IcaPageController extends AbstractPageController
+public class IcaPageController extends SDHAbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
@@ -101,6 +88,12 @@ public class IcaPageController extends AbstractPageController
 	private static final String REDIRECT_TO_ICA_PAGE = REDIRECT_PREFIX + "/contribuyentes/ica";
 	private static final String REDIRECT_TO_ICA_DOS_PAGE = REDIRECT_PREFIX + "/contribuyentes/icados";
 	private static final String REDIRECT_TO_ICA_DECLARACION_PAGE = REDIRECT_PREFIX + "/contribuyentes/ica/declaracion";
+
+	@Resource(name="sdhEnviaFirmasFacade")
+	SDHEnviaFirmasFacade sdhEnviaFirmasFacade;
+
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
@@ -180,6 +173,8 @@ public class IcaPageController extends AbstractPageController
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET ICA --------------------------");
+
+
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
@@ -313,8 +308,8 @@ public class IcaPageController extends AbstractPageController
 			return REDIRECT_TO_ICA_PAGE;
 		}
 
-
-
+		addAgentsToModel(model, customerFacade.getCurrentCustomer());
+		model.addAttribute("customerData",customerFacade.getCurrentCustomer());
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 
@@ -528,6 +523,36 @@ public class IcaPageController extends AbstractPageController
 
 		return icaCalculoImpResponse;
 
+	}
+
+	@RequestMapping(value="/contribuyentes/ica/firmar",method=RequestMethod.POST)
+	@ResponseBody
+	public EnviaFirmasResponse enviaFirmas(Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+	{
+		EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
+
+		enviaFirmasRequest.setNumForm(dataForm.getNumForm());
+
+
+		if(CollectionUtils.isNotEmpty(dataForm.getFirmantes()))
+		{
+			List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
+			for(FirmantesForm eachFirmante : dataForm.getFirmantes())
+			{
+				FirmanteRequest firmante = new FirmanteRequest();
+
+				firmante.setConfirmacion(eachFirmante.getConfirmacion());
+				firmante.setFirmante(eachFirmante.getFirmante());
+				firmante.setNumIdentif(eachFirmante.getNumIdentif());
+				firmante.setTipoIdent(eachFirmante.getTipoIdent());
+
+
+				firmantesList.add(firmante);
+			}
+			enviaFirmasRequest.setTablFirmante(firmantesList);
+		}
+
+		return sdhEnviaFirmasFacade.enviaFirmas(enviaFirmasRequest);
 	}
 
 	@RequestMapping(value = "/generar", method = RequestMethod.POST)

@@ -18,6 +18,7 @@ public class ConsCasosInfo
 	private String cat03;
 	private String cat04;
 	private String mensaje;
+	private ConsCasosArchiResponse archivos;
 
 
 	/**
@@ -171,6 +172,35 @@ public class ConsCasosInfo
 		this.mensaje = mensaje;
 	}
 
+	/**
+	 * @return the archivos
+	 */
+	public ConsCasosArchiResponse getArchivos()
+	{
+		return archivos;
+	}
+
+	/**
+	 * @param archivos
+	 *           the archivos to set
+	 */
+	public void setArchivos(final ConsCasosArchiResponse archivos)
+	{
+		this.archivos = archivos;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ConsCasosInfo [num_caso=" + num_caso + ", num_radicado=" + num_radicado + ", tramite=" + tramite + ", estatus="
+				+ estatus + ", cat01=" + cat01 + ", cat02=" + cat02 + ", cat03=" + cat03 + ", cat04=" + cat04 + ", mensaje=" + mensaje
+				+ ", archivos=" + archivos + "]";
+	}
 
 
 

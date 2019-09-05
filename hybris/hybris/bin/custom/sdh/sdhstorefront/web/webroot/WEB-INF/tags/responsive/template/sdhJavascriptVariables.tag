@@ -176,6 +176,7 @@
             </c:if>
 
 			ACC.publicidadExteriorFirmar  = '<c:url value="/contribuyentes/publicidadexterior/declaracion/firmar"  />';
+			ACC.gasolinaFirmar  = '<c:url value="/contribuyentes/gasolina/declaracion/firmar"  />';
 
 			var countries=[{'isocode':'AD','name':'Andorra'},
 				{'isocode':'AE','name':'E.A.U.'},

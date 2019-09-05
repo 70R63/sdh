@@ -67,7 +67,7 @@ import sun.misc.BASE64Decoder;
  */
 @Controller
 @RequestMapping("/contribuyentes/publicidadexterior/declaracion")
-public class PublicidadExteriorDeclaracionPageController extends AbstractPageController {
+public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPageController {
 
 	private static final Logger LOG = Logger.getLogger(PublicidadExteriorPageController.class);
 
@@ -127,37 +127,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declarapublicidad";
 
-	private void addAgentsToModel(Model model, CustomerData customerData)
-	{
-		if(CollectionUtils.isNotEmpty(customerData.getAgentList()))
-		{
-			Map<String,List<SDHAgentData>> agents = new HashMap<String,List<SDHAgentData>>();
-			Map<String,String> agentFunctions = new HashMap<String,String>();
-			for(SDHAgentData eachAgent : customerData.getAgentList())
-			{
-				if("-".equalsIgnoreCase(eachAgent.getAgent()))
-				{
-					if(agents.containsKey(eachAgent.getInternalFunction().replace(" ","").replace(".","")))
-					{
-						agents.get(eachAgent.getInternalFunction().replace(" ","").replace(".","")).add(eachAgent);
-					}else{
-						List<SDHAgentData> initialList = new ArrayList<SDHAgentData>();
-						initialList.add(eachAgent);
-						agents.put(eachAgent.getInternalFunction().replace(" ","").replace(".",""),initialList);
-						agentFunctions.put(eachAgent.getInternalFunction().replace(" ","").replace(".",""),eachAgent.getInternalFunction());
-					}
-				}
-			}
-			Gson gson = new Gson();
-			String agentsString = gson.toJson(agents);
-			model.addAttribute("agents", agentsString);
-			String agentFunctionsString = gson.toJson(agentFunctions);
-			model.addAttribute("agentFunctions", agentFunctionsString);
-			model.addAttribute("agentFunctionsMap", agentFunctions);
 
-
-		}
-	}
 
 	//CMS PAGES
 	private static final String DECLARACION_PUBLICIDAD_CMS_PAGE = "DeclaraPublicidadPage";
@@ -549,7 +519,7 @@ public class PublicidadExteriorDeclaracionPageController extends AbstractPageCon
 		detallePublicidadRequest.setAnoGravable(calculaPublicidad2Response.getAnio_gravable());
 		detallePublicidadRequest.setTipoValla(calculaPublicidad2Response.getTipoValla());
 
-		addAgentsToModel(model, customerData);
+		super.addAgentsToModel(model, customerData);
 
 		try
 		{

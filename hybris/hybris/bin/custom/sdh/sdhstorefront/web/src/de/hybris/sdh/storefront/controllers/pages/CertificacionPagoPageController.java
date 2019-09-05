@@ -485,9 +485,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 				final ConsultaPagoRequest consultaPagoRequest = new ConsultaPagoRequest();
 				consultaPagoRequest.setNumBP(certiFormPost.getNumBP());
 
-				if (customerData.getIcaTax() != null)
+				if (customerData.getReteIcaTax() != null)
 				{
-					consultaPagoRequest.setNumObjeto(customerData.getIcaTax().getObjectNumber());
+					consultaPagoRequest.setNumObjeto(customerData.getReteIcaTax().getObjectNumber());
 				}
 
 
@@ -591,12 +591,15 @@ public class CertificacionPagoPageController extends AbstractPageController
 					if (consultaPagoResponse.getDeclaraciones() != null)
 					{
 						final List<ConsultaPagoDeclaraciones> declaracionesList = consultaPagoResponse.getDeclaraciones();
-						//final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
+						final String aniograv_periodo = certiFormPost.getAniograv().substring(2) + "A1";
 
 						for (final ConsultaPagoDeclaraciones element : declaracionesList)
 						{
-							declaracion = element;
-							break;
+							if (element.getClavePeriodo().equals(aniograv_periodo))
+							{
+								declaracion = element;
+								break;
+							}
 						}
 
 						if (declaracion != null)
