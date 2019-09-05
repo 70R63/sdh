@@ -10,6 +10,6 @@ import java.util.List;
 public interface SDHOnlinePaymentProviderMatcherFacade {
     SdhTaxTypesEnum getTaxByCode(String taxCode);
     List<OnlinePaymentSelectInputBoxData> getPaymentMethodList(SdhTaxTypesEnum taxType);
-    List<OnlinePaymentSelectInputBoxData> getBankList(SdhTaxTypesEnum taxType, SdhPaymentMethodTypeEnum paymentMethod);
+    List<OnlinePaymentSelectInputBoxData> getBankList(String taxCode, String paymentMethodCode);
     SdhOnlinePaymentProviderEnum getOnlinePaymentProvider(String taxCode, String paymentMethodCode, String bankCode);
 }

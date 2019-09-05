@@ -22,9 +22,8 @@ public class SdhOnlinePaymentMatcherController {
     @RequestMapping("/getBanks")
     public List<OnlinePaymentSelectInputBoxData> getBanks(@RequestParam(value="tax", defaultValue="") String tax,
                                                           @RequestParam(value="paymentMethod", defaultValue="") String paymentMethod) {
-       return sdhOnlinePaymentProviderMatcherFacade.
-               getBankList( SdhTaxTypesEnum.valueOf(tax),
-                            SdhPaymentMethodTypeEnum.valueOf(paymentMethod));
+
+       return sdhOnlinePaymentProviderMatcherFacade.getBankList(tax,paymentMethod);
 
     }
 }

@@ -251,9 +251,6 @@ public class PSEPaymentController extends AbstractPageController
 
 		model.addAttribute("psePaymentForm", new PSEPaymentForm());
 		model.addAttribute("debugMode", debugMode);
-
-
-
 		LOG.info("debugMode[" + debugMode + "]");
 
 		return getViewForPage(model);

@@ -49,13 +49,8 @@
 	    var url = window.location.href;
 	    url = url.replace("impuestos/pagoEnLinea/form", "onlinePaymentMatcher/getBanks");
 
-	    var paymentMethodSelect = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
-	    var paymentMethod = selectPaymentMethod.options[selectPaymentMethod.selectedIndex].text;
-	    var paymentMethodText = paymentMethod.toUpperCase();
-
-        var taxSelect = document.getElementById("psePaymentForm.tipoDeImpuesto");
-        var tax = taxSelect.options[taxSelect.selectedIndex].text;
-        var taxText = tax.toUpperCase();
+	    var paymentMethod = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
+	    var tax = document.getElementById("psePaymentForm.tipoDeImpuesto").value;
 
         var bankSelect = document.getElementById("psePaymentForm.banco");
         while (bankSelect.hasChildNodes()) {
@@ -69,7 +64,7 @@
         bankSelect.appendChild(option);
 
         $.ajax({
-            url     : url + '?tax='+taxText+'&paymentMethod='+paymentMethodText,
+            url     : url + '?tax='+tax+'&paymentMethod='+paymentMethod,
             method  : 'GET',
             success : function(resultText){
                 $.each(resultText,function(i,v){
@@ -101,10 +96,6 @@
 <c:set var = "buttonImageBBVA" scope = "session" value = "https://pbs.twimg.com/profile_images/907185208549572608/Hn65NsHV_400x400.jpg"/>
 <c:set var = "buttonImageDAVIVIENDA" scope = "session" value = "https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0029/4616/davivienda.png"/>
 
-<c:out value="${paymentMethodList}"/>
-
-
- 
 <c:choose>
   <c:when test="${disableFields eq 'true'}">
   	<c:set var = "disabled" value = "true"/> 

@@ -57,9 +57,9 @@ public class DefaultSDHOnlinePaymentProviderMatcherFacade implements SDHOnlinePa
     }
 
     @Override
-    public List<OnlinePaymentSelectInputBoxData> getBankList(SdhTaxTypesEnum taxType, SdhPaymentMethodTypeEnum paymentMethod) {
-        SDHTaxTypeModel taxTypeModel = sdhTaxTypeService.findUniqueByTaxByType(taxType);
-        SDHPaymentMethodModel paymentMethodModel = sdhPaymentMethodService.findUniqueByPaymentMethodCode(paymentMethod);
+    public List<OnlinePaymentSelectInputBoxData> getBankList(String taxCode, String paymentMethodCode) {
+        SDHTaxTypeModel taxTypeModel = sdhTaxTypeService.findUniqueByTaxCode(taxCode);
+        SDHPaymentMethodModel paymentMethodModel = sdhPaymentMethodService.findUniqueByPaymentMethodCodeString(paymentMethodCode);
         List<OlnPymntPvdMatcherModel> onlinePaymentProviderMatcherList = sdhOlinePaymentProviderMatcherService.findByTaxTypeAndPaymentMethod(taxTypeModel,paymentMethodModel);
         List<OnlinePaymentSelectInputBoxData> onlinePaymentProviderMatcherDataList = getOnlinePaymentMatcherFullBankConverter().convertAll(onlinePaymentProviderMatcherList);
         return deleteDuplicatedDataFromList(onlinePaymentProviderMatcherDataList);

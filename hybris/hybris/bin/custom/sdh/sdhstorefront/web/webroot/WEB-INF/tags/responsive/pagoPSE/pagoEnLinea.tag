@@ -8,8 +8,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<!-- <c:out value="ModeDebuge = ${debugMode}"/> -->
-<c:out value="paymentMethodList = ${paymentMethodList}"/>
+
 <div class="row" >
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">
