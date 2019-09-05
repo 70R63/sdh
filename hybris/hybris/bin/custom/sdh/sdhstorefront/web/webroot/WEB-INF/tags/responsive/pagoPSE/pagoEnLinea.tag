@@ -9,7 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <!-- <c:out value="ModeDebuge = ${debugMode}"/> -->
-
+<c:out value="paymentMethodList = ${paymentMethodList}"/>
 <div class="row" >
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">
@@ -23,7 +23,6 @@
 						<formElement:formSelectBox idKey="psePaymentForm.anoGravable" labelKey="psePaymentForm.anoGravable" path="anoGravable" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${anoGravable}" selectCSSClass="form-control" disabled="false"/>
 						<formElement:formSelectBox idKey="psePaymentForm.periodo" labelKey="psePaymentForm.periodo" path="periodo" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${periodo}" selectCSSClass="form-control" disabled="false"/>
 						<form:hidden path="debugMode" value="${debugMode}"/>
-						
 						<formElement:formInputBox idKey="numeroDeReferencia" labelKey="numeroDeReferencia" path="numeroDeReferencia" />
 						<formElement:formInputBox idKey="noIdentificacion" labelKey="noIdentificacion" path="noIdentificacion" />
 						<formElement:formInputBox idKey="DV" labelKey="DV" path="DV" />

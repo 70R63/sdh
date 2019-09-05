@@ -195,6 +195,8 @@
 			<value>/assisted-service/emulate</value>
 			<value>/register</value>
 			<value>/register/**</value>
+			<value>/onlinePaymentMatcher</value>
+			<value>/onlinePaymentMatcher/**</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />

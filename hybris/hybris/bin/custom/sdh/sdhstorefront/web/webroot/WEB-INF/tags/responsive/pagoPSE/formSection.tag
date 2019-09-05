@@ -7,33 +7,29 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:useBean id="controllerPseConstants" class="de.hybris.sdh.core.constants.ControllerPseConstants"/>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script>
 	function onChange() {
 		var varBanco = document.getElementById("psePaymentForm.banco").value;
 		var varTipoDeTarjeta = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
-		var divBottonPSE = document.getElementById("PSE");
-		var divBottonCRE = document.getElementById("CRE");
 
 		document.getElementById("hiddenBanco").value = varBanco;
 		document.getElementById("hiddenTipoDeTarjeta").value = varTipoDeTarjeta;
-	
-		hiddenTipoDeTarjeta
-	
-		if(varTipoDeTarjeta == '02'){ //credito
-			divBottonPSE.style.display = "none";
-			divBottonCRE.style.display = "block";
-		}else if(varTipoDeTarjeta == "01"){ //debito
-			divBottonCRE.style.display = "none";
-			divBottonPSE.style.display = "block";
-		}
+
 	}
 
 	function formSubmition(buttonType){	
-		document.getElementById("hiddenOnlinePaymentProvider").value = buttonType;
+		//document.getElementById("hiddenOnlinePaymentProvider").value = buttonType;
 		var form = document.getElementById("psePaymentFormSubmition");
-		form.submit();
+		var paymentMethodSelect = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
+		var bankSelect = document.getElementById("psePaymentForm.banco").value;
+
+		if(paymentMethodSelect == "0" || bankSelect == "0"){
+		    alert("Seleccione banco o metodo de pago");
+		}else{
+		    form.submit();
+		}
 	}
 	
 	function downloadPDF(pdf) {
@@ -41,14 +37,55 @@
 		if (pdf){
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 		    const downloadLink = document.createElement("a");
-		    const fileName = "Certificación_Pago.pdf";
+		    const fileName = "Certificaciï¿½n_Pago.pdf";
 	
 		    downloadLink.href = linkSource;
 		    downloadLink.download = fileName;
 		    downloadLink.click();
 		}    
 	}
-	
+
+	function sdhOnChange(selectPaymentMethod){
+	    var url = window.location.href;
+	    url = url.replace("impuestos/pagoEnLinea/form", "onlinePaymentMatcher/getBanks");
+
+	    var paymentMethodSelect = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
+	    var paymentMethod = selectPaymentMethod.options[selectPaymentMethod.selectedIndex].text;
+	    var paymentMethodText = paymentMethod.toUpperCase();
+
+        var taxSelect = document.getElementById("psePaymentForm.tipoDeImpuesto");
+        var tax = taxSelect.options[taxSelect.selectedIndex].text;
+        var taxText = tax.toUpperCase();
+
+        var bankSelect = document.getElementById("psePaymentForm.banco");
+        while (bankSelect.hasChildNodes()) {
+          bankSelect.removeChild(bankSelect.firstChild);
+        }
+
+        var option = document.createElement('option');
+        option.value = 00;
+        option.text = "------ Seleccionar ------";
+        option.innerHTML = "------ Seleccionar ------";
+        bankSelect.appendChild(option);
+
+        $.ajax({
+            url     : url + '?tax='+taxText+'&paymentMethod='+paymentMethodText,
+            method  : 'GET',
+            success : function(resultText){
+                $.each(resultText,function(i,v){
+                    var option = document.createElement('option');
+                    option.value = v.code;
+                    option.text = v.description;
+                    option.innerHTML = v.description;
+                    bankSelect.appendChild(option);
+                 });
+            },
+            error : function(jqXHR, exception){
+                console.log('Error occured!!');
+            }
+        });
+    }
+
 	downloadPDF('${imprimePagoResponse.stringPDF}');
 </script>
 
@@ -63,11 +100,9 @@
 <c:set var = "buttonImageCredibanco" scope = "session" value = "https://acis.org.co/portal/sites/default/files/5907822af25d3c0dd184dc45_credibanco.png"/>
 <c:set var = "buttonImageBBVA" scope = "session" value = "https://pbs.twimg.com/profile_images/907185208549572608/Hn65NsHV_400x400.jpg"/>
 <c:set var = "buttonImageDAVIVIENDA" scope = "session" value = "https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0029/4616/davivienda.png"/>
-<!-- <c:out value="${tipoDeImpuestoSeleccionado}"/> 
-<c:out value="${ControllerPseConstants.GASOLINA}"/>/
-<c:out value="${disableFields}"/> 
 
-<c:out value="ModeDebuge = ${debugMode}"/> -->
+<c:out value="${paymentMethodList}"/>
+
 
  
 <c:choose>
@@ -94,7 +129,6 @@
 			
 				<form:form method="post" commandName="psePaymentForm" action="">
 					<fieldset>					
-						<input type="hidden" value="" class="text" name="tipoDeImpuesto" id="psePaymentForm.tipoDeImpuesto">
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD ) && disabled eq true}">
 						<div class="col-xs-4">
 							<formElement:formInputBox  idKey="psePaymentForm.numeroDeReferencia" maxlength="240" labelKey="psePaymentForm.numeroDeReferencia" path="numeroDeReferencia"  mandatory="true" tabindex="0" disabled="${debugMode}"/>
@@ -161,16 +195,17 @@
 						</c:if>
 						
 						<formElement:formInputBox  idKey="psePaymentForm.valorAPagar" maxlength="240" labelKey="psePaymentForm.valorAPagar" path="valorAPagar" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
-						<formElement:formSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${tipoDeTarjeta}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>
-						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>					
-							
+						<formElement:sdhFormSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${paymentMethodList}" selectCSSClass="form-control" onchange="sdhOnChange(this)" disabled="${disabled}"/>
+						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>
+
+
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD) && !empty psePaymentForm.bankDateResponse }">
    						<formElement:formInputBox  idKey="psePaymentForm.bankDateResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
    						<formElement:formInputBox  idKey="psePaymentForm.bankTimeResponse" maxlength="240" labelKey="psePaymentForm.bankDateResponse" path="bankDateResponse" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
 					</c:if>
 					</fieldset>
 				</form:form>
-				
+
 				<form:form id="psePaymentFormSubmition" method="post" commandName="psePaymentForm" action="realizarPago">					
 					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
 					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
@@ -195,25 +230,14 @@
 					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>			
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq false}">
-									<div id="PSE" class="text-center" style="display: none">
-										<button id="buttonPSE" class="btn btn-secondary btn-lg" type="button" onclick="formSubmition('ACH')">
-											<img src="${buttonImagePSE}" width="80" />
+									<div id="PSE" class="text-center">
+										<button id="buttonPSE" class="btn btn-secondary btn-lg" type="button" onclick="formSubmition()">
+											Pagar
 										</button>
 										<button class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
 											<spring:theme code="impuestos.decGasolina.Pago.Regresar"/>
-										</button>	
+										</button>
 									</div>
-									<div id="CRE" class="text-center" style="display: none">
-										<button id="buttonPSE" class="btn btn-secondary btn-lg" type="button" onclick="formSubmition('ACH')">
-											<img src="${buttonImagePSE}" width="80" />
-										</button>
-										<button id="buttonCRE" class="btn btn-secondary btn-lg" type="button" onclick="formSubmition('CRE')">
-											<img src="${buttonImageCRE}" width="80" />
-										</button>										
-										<button class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
-											<spring:theme code="impuestos.decGasolina.Pago.Regresar"/>
-										</button>	
-									</div>																
 								</c:if>
 							</ycommerce:testId>
 						
@@ -265,4 +289,4 @@
 		</div>
 	</div>
 </div>
- 
+

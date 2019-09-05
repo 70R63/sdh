@@ -135,6 +135,13 @@
 		<property name="numID" type="String"/>
 		<property name="consecutive" type="String"/>
 	</bean>
+
+	<bean class="de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData">
+		<property name="code" type="String"/>
+		<property name="description" type="String"/>
+	</bean>
+
+
 	
 	
 </beans>

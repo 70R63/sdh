@@ -26,6 +26,9 @@ public class DefaultPseBankListCatalogDao extends DefaultGenericDao<PseBankListC
 	private static final String GET_ALL_BANK_ENTRY_QUERY = "Select {p:" + PseBankListCatalogModel.PK + "} from {"
 			+ PseBankListCatalogModel._TYPECODE + " AS p} ";
 
+	private static final String GET_BANK_ENTRY_BY_CODE = "Select {p:" + PseBankListCatalogModel.PK + "} from {"
+			+ PseBankListCatalogModel._TYPECODE + " AS p} WHERE {" + PseBankListCatalogModel.FINANCIALINSTITUTIONCODE + "} = ?"+PseBankListCatalogModel.FINANCIALINSTITUTIONCODE+"" ;
+
 
 	public DefaultPseBankListCatalogDao(final String typecode)
 	{
@@ -42,8 +45,9 @@ public class DefaultPseBankListCatalogDao extends DefaultGenericDao<PseBankListC
 	@Override
 	public PseBankListCatalogModel getBankByFinancialInstitutionCode(final String financialInstitutionCode)
 	{
-		// XXX Auto-generated method stub
-		return null;
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_BANK_ENTRY_BY_CODE);
+		query.addQueryParameter(PseBankListCatalogModel.FINANCIALINSTITUTIONCODE,financialInstitutionCode);
+		return getFlexibleSearchService().searchUnique(query);
 	}
 
 }

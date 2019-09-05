@@ -229,3 +229,5 @@ hybris/hybris/bin/custom/sdh/sdhbackoffice/platformhome.properties
 hybris/hybris/bin/custom/sdh/sdhbackoffice/extensioninfo.xsd
 hybris/hybris/bin/custom/sdh/sdhbackoffice/build.xml
 hybris/hybris/bin/custom/sdh/sdhstorefront/web/webroot/_ui/responsive/common/js/acc.aamenu.js
+idea-module-files/
+.idea/
