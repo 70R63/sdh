@@ -12,15 +12,15 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
-import de.hybris.sdh.core.pojos.responses.ConsulFirmasResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.facades.SDHConsultaFirmasFacade;
+import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 
 import javax.annotation.Resource;
 
-import de.hybris.sdh.facades.SDHConsultaFirmasFacade;
-import de.hybris.sdh.facades.SDHCustomerFacade;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +28,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -35,6 +36,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Maria Luisa
  *
  */
+
+@SessionAttributes(
+{ "dataForm" })
+
 @Controller
 public class AgentesAutorizadosInicialContribuyentePageController extends AbstractPageController
 {
@@ -71,22 +76,24 @@ public class AgentesAutorizadosInicialContribuyentePageController extends Abstra
 
 	@RequestMapping(value = "/autorizados/contribuyente/representando", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String autorizadoscontrib(final Model model, @RequestParam String representado) throws CMSItemNotFoundException
+	public String autorizadoscontrib(final Model model, @RequestParam final String representado) throws CMSItemNotFoundException
 	{
-		CustomerData currentUser = customerFacade.getCurrentCustomer();
+		final CustomerData currentUser = customerFacade.getCurrentCustomer();
 
-		SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+		final SDHValidaMailRolResponse representadoData = sdhCustomerFacade.getRepresentadoFromSAP(representado);
 
 		sessionService.getCurrentSession().setAttribute("representado",representado);
 
 		model.addAttribute("representado", representadoData);
 
 
-		ConsulFirmasRequest request = new ConsulFirmasRequest();
+		final ConsulFirmasRequest request = new ConsulFirmasRequest();
 		request.setAgente(currentUser.getNumBP());
 		request.setContribuyente(representado);
 
 		model.addAttribute("firmas",sdhConsultaFirmasFacade.getDeclaraciones(request));
+		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+		model.addAttribute("dataForm", dataForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_REPRE_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_REPRE_CMS_PAGE));
