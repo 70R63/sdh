@@ -23,7 +23,7 @@
 	<br>
 	<form:form action="">
 		<div class="row">
-			<div class="col-md-7 text-center">
+			<div class="col-md-8 text-center">
 				<div class="table-responsive">
 					<table class="table table-bordered" id="example">
 						<thead>
@@ -32,7 +32,7 @@
 											code="ica.inicial.activecono.actprin" /></label></td>
 								<td><label class="control-label labeltabletd inputcodciuu"><spring:theme
 											code="ica.inicial.activecono.ciiu" /></label></td>
-								<td><label class="control-label labeltabletd"><spring:theme
+								<td style="width:150%"><label class="control-label labeltabletd"><spring:theme
 											code="ica.inicial.activecono.denomi" /></label></td>
 								<td><label class="control-label labeltabletd tablefechas"><spring:theme
 											code="ica.inicial.activecono.feciniact" /></label></td>
@@ -57,7 +57,7 @@
 										type="text" /></td>
 									<td><input class="inputtextnew"
 										disabled="disabled"
-										value="${eachActivEconomicas.denominacion}" type="text" /></td>
+										value="${eachActivEconomicas.denominacion}" type="text"  style="width: 100%" /></td>
 									<td><input class="inputtextnew tablefechas"
 										disabled="disabled" value="${eachActivEconomicas.fechaIniAct}"
 										type="text" /></td>

@@ -24555,8 +24555,8 @@ th {
   min-height: 30px !important;
 }
 .etiqlargas {
-  height: 38px !important;
-  min-height: 30px !important;
+  height: 25px !important;
+  min-height: 10px !important;
   width: 28%;
 }
 .headline {
@@ -25083,4 +25083,17 @@ span.pasos {
 }
 .navigation--bottom .nav__links--primary .sub-navigation-section .sub-navigation-list li:hover {
   background: #00ccff !important;
+}
+.form-group .alto,
+.alto {
+  height: 25px !important;
+  min-height: 10px !important;
+  min-width: 20% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+.sel_etiqlargas {
+  height: 30px !important;
+  min-height: 10px !important;
+  width: 28%;
 }

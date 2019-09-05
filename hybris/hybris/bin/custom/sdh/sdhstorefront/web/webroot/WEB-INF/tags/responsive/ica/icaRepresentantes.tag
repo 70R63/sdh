@@ -50,7 +50,7 @@
 								var="eachRelation">
 								<c:if test="${not empty eachRelation.tipoRelacion }">
 									<tr>
-										<td><input class="inputtextnew tabletiprela"
+										<td><input class="inputtextnew"
 											disabled="disabled" value="${eachRelation.tipoRelacion}"
 											type="text" style="width: 303px;" /></td>
 										<td><input class="inputtextnew tableident"
@@ -59,8 +59,8 @@
 										<td><input class="inputtextnew tablenumiden"
 											disabled="disabled" value="${eachRelation.numDoc}"
 											type="text" style="text-align: center" /></td>
-										<td><input class="inputtextnew tablenombre" disabled="disabled"
-											value="${eachRelation.nombre}" type="text" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachRelation.nombre}" type="text" style="width: 100%;" /></td>
 										<td><input class="inputtextnew tablefechas"
 											disabled="disabled" value="${eachRelation.fechaDesde}"
 											type="text" /></td>

@@ -33,11 +33,11 @@
 							disabled type="text" value="${anoGravable }" maxlength="240"></input>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
 								code="ica.declaracion.generales.regitribut" /></label> <input disabled
-							id="" name="" class="newalto form-control" disabled type="text"
+							id="" name="" class="alto form-control" disabled type="text"
 							value="${icaInfObjetoFormResp.icaInfObjetoResponse.regimen }"
 							maxlength="240"></input>
 					</div>
