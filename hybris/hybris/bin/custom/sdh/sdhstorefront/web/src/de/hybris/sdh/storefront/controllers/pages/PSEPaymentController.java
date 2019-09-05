@@ -14,6 +14,9 @@ import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
+import de.hybris.sdh.core.enums.SdhOnlinePaymentProviderEnum;
+import de.hybris.sdh.core.enums.SdhPaymentMethodTypeEnum;
+import de.hybris.sdh.core.enums.SdhTaxTypesEnum;
 import de.hybris.sdh.core.model.PseBankListCatalogModel;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
@@ -33,6 +36,8 @@ import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInform
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
+import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData;
+import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
@@ -123,6 +128,9 @@ public class PSEPaymentController extends AbstractPageController
 	@Resource(name = "sdhCredibancoJwt")
 	SDHCredibancoJwt sdhCredibancoJwt;
 
+	@Resource(name = "sdhOnlinePaymentProviderMatcherFacade")
+	private DefaultSDHOnlinePaymentProviderMatcherFacade sdhOnlinePaymentProviderMatcherFacade;
+
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getIdTipoDeImpuesto()
 	{
@@ -179,7 +187,7 @@ public class PSEPaymentController extends AbstractPageController
 		return pagoAdicional;
 	}
 
-	@ModelAttribute("banco")
+	/*@ModelAttribute("banco")
 	public List<SelectAtomValue> getIdBanco()
 	{
 		final List<SelectAtomValue> banco = new ArrayList<SelectAtomValue>(); //
@@ -189,7 +197,7 @@ public class PSEPaymentController extends AbstractPageController
 		}
 
 		return banco;
-	}
+	}*/
 
 	@ModelAttribute("tipoDeTarjeta")
 	public List<SelectAtomValue> getIdTipoDeTarjeta()
@@ -230,11 +238,12 @@ public class PSEPaymentController extends AbstractPageController
 	@RequestMapping(value = "/pagoEnLinea", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String pagoEnLinea(final Model model, final RedirectAttributes redirectModel,
-			@RequestParam(required = false, defaultValue = "", value = "debugMode")
-			final String debugMode) throws CMSItemNotFoundException
+			@RequestParam(required = false, defaultValue = "", value = "debugMode") final String debugMode,
+			@RequestParam(required = false, defaultValue = "", value = "tax") final String tax,
+			@RequestParam(required = false, defaultValue = "", value = "paymentMethod") final String paymentMethod,
+			@RequestParam(required = false, defaultValue = "", value = "bankCode") final String bankCode
+		) throws CMSItemNotFoundException
 	{
-
-
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_EN_lINEA));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PAGO_LINEA));
@@ -242,6 +251,9 @@ public class PSEPaymentController extends AbstractPageController
 
 		model.addAttribute("psePaymentForm", new PSEPaymentForm());
 		model.addAttribute("debugMode", debugMode);
+
+
+
 		LOG.info("debugMode[" + debugMode + "]");
 
 		return getViewForPage(model);
@@ -486,6 +498,7 @@ public class PSEPaymentController extends AbstractPageController
 	@RequireHardLogIn
 	public String pagoEnLineaForm(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
+		SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_FORMA));
@@ -494,9 +507,7 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("debugMode", psePaymentForm.getDebugMode());
-
-		LOG.info("debugMode[" + psePaymentForm.getDebugMode() + "]");
-
+		model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 
 		return getViewForPage(model);
 	}
@@ -514,8 +525,10 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		String redirecUrl = getViewForPage(model);
 
+		SdhOnlinePaymentProviderEnum provider = sdhOnlinePaymentProviderMatcherFacade.getOnlinePaymentProvider(psePaymentForm.getTipoDeImpuesto(), psePaymentForm.getTipoDeTarjeta(), psePaymentForm.getBanco());
 
-		if (psePaymentForm.getOnlinePaymentProvider().equals(ControllerPseConstants.CREDIBANCO)) //Credibanco Payment
+
+		if (provider.equals(SdhOnlinePaymentProviderEnum.CREDIBANCO)) //Credibanco Payment
 		{
 			LOG.info("--------- Calling Credibanco/Bank Web Service ---------");
 			final InititalizeTransactionResponse response = this.doCredibancoPayment(psePaymentForm);
@@ -539,7 +552,7 @@ public class PSEPaymentController extends AbstractPageController
 			}
 			LOG.info(response);
 		}
-		else if (psePaymentForm.getOnlinePaymentProvider().equals(ControllerPseConstants.ACH_PSE)) // ACH Payment
+		else if (provider.equals(SdhOnlinePaymentProviderEnum.ACH)) // ACH Payment
 		{
 			LOG.info("--------- Calling PSE/Bank Web Service ---------");
 			final CreateTransactionPaymentResponseInformationType response = this.doPsePayment(psePaymentForm);
@@ -567,6 +580,11 @@ public class PSEPaymentController extends AbstractPageController
 
 		model.addAttribute("psePaymentForm", psePaymentForm);
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
+
+		LOG.info(psePaymentForm.getTipoDeImpuesto());
+		LOG.info(psePaymentForm.getBanco());
+		LOG.info(psePaymentForm.getTipoDeTarjeta());
+		LOG.info(provider);
 
 		return redirecUrl;
 	}

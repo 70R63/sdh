@@ -191,7 +191,6 @@
 	<bean id="genderData" class="de.hybris.sdh.facades.product.data.GenderData" scope="prototype"/>
 	
 	<bean id="sdhCustomerPopulator" class="de.hybris.sdh.facades.populators.SDHCustomerPopulator" />
-	
 	<bean parent="modifyPopulatorList">
 		<property name="list" ref="customerConverter" />
 		<property name="add" ref="sdhCustomerPopulator" />
@@ -217,5 +216,49 @@
 	<bean name="sdhEnviaFirmasFacade" class="de.hybris.sdh.facades.impl.DefaultSDHEnviaFirmasFacade" />
 
 	<bean id="sdhCalculaPublicidad2Facade" class="de.hybris.sdh.facades.impl.DefaultSDHCalculaPublicidad2Facade" />
+
+	<alias name="onlinePaymentMatcherFullPaymentMethodPopulator" alias="sdhOnlinePaymentMatcherFullPaymentMethodPopulator"/>
+	<bean id="onlinePaymentMatcherFullPaymentMethodPopulator" class="de.hybris.sdh.facades.populators.online.payment.provider.OnlinePaymentMatcherFullPaymentMethodPopulator" />
+
+	<alias name="onlinePaymentMatcherFullBankPopulator" alias="sdhOnlinePaymentMatcherFullBankPopulator"/>
+	<bean id="onlinePaymentMatcherFullBankPopulator" class="de.hybris.sdh.facades.populators.online.payment.provider.OnlinePaymentMatcherFullBankPopulator" />
+
+	<alias name="onlinePaymentMatcherFullProviderPopulator" alias="sdhOnlinePaymentMatcherFullProviderPopulator"/>
+	<bean id="onlinePaymentMatcherFullProviderPopulator" class="de.hybris.sdh.facades.populators.online.payment.provider.OnlinePaymentMatcherFullProviderPopulator" />
+
+	<bean id="onlinePaymentMatcherFullPaymentMethodConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sdhOnlinePaymentMatcherFullPaymentMethodPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="onlinePaymentMatcherFullBankConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sdhOnlinePaymentMatcherFullBankPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="onlinePaymentMatcherFullProviderConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData"/>
+		<property name="populators">
+			<list>
+				<ref bean="sdhOnlinePaymentMatcherFullProviderPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias alias="sdhOnlinePaymentProviderMatcherFacade" name="defaultSDHOnlinePaymentProviderMatcherFacade" />
+	<bean id="defaultSDHOnlinePaymentProviderMatcherFacade" class="de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade">
+		<property name="onlinePaymentMatcherFullPaymentMethodConverter" ref="onlinePaymentMatcherFullPaymentMethodConverter"/>
+		<property name="onlinePaymentMatcherFullBankConverter" ref="onlinePaymentMatcherFullBankConverter"/>
+		<property name="onlinePaymentMatcherFullProviderConverter" ref="onlinePaymentMatcherFullProviderConverter"/>
+	</bean>
+
 
 </beans>

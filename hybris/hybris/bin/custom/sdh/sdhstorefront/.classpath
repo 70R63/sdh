@@ -19,6 +19,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/sdhpsaddon"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/json-taglib-0.4.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/gson-2.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/sevenzipjbinding-AllPlatforms.jar"/>
 	<classpathentry exported="true" kind="lib" path="resources"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>

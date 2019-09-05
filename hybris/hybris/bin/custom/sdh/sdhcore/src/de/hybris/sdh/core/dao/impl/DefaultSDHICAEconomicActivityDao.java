@@ -13,13 +13,8 @@ import de.hybris.sdh.core.model.SDHICAEconomicActivityModel;
  */
 public class DefaultSDHICAEconomicActivityDao extends DefaultGenericDao<SDHICAEconomicActivityModel>
 {
-
-
 	public DefaultSDHICAEconomicActivityDao(final String typecode)
 	{
 		super(typecode);
 	}
-
-
-
 }

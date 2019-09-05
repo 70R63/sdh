@@ -12,9 +12,6 @@ import de.hybris.sdh.core.model.PseBankListCatalogModel;
  */
 public interface PseBankListCatalogDao
 {
-
 	public SearchResult<PseBankListCatalogModel> getAllBankEntries();
-
-
 	public PseBankListCatalogModel getBankByFinancialInstitutionCode(String financialInstitutionCode);
 }

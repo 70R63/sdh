@@ -45,11 +45,11 @@
 			<div class="control">
 				<form:select aria-required="${mandatory}" id="${escapedIdKey}" path="${escapedPath}" cssClass="${selectCSSClass}" tabindex="${tabindex}" disabled="${disabled}" onchange="${onchange}">
 					<c:if test="${skipBlank == null || skipBlank == false}">
-						<option value="" disabled="disabled" ${empty selectedValue ? 'selected="selected"' : ''}>
-							<spring:theme code='${skipBlankMessageKey}'/>
-						</option>
+						<option value="0">----- Seleccionar -----</option>
 					</c:if>
-					<form:options items="${items}" itemValue="${not empty itemValue ? itemValue :'code'}" itemLabel="${not empty itemLabel ? itemLabel :'name'}"/>
+					<c:forEach items="${items}" var="item">
+                        <option value="${item.code}">${item.description}</option>
+                    </c:forEach>
 				</form:select>
 			</div>
 	</ycommerce:testId>

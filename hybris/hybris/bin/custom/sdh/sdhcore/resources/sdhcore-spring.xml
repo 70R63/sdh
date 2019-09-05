@@ -670,4 +670,43 @@
 
 	<bean name="sdhCalPublicidad2Service" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcPublicidad2Service" />
 
+
+
+	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>
+	<bean id="defaultSDHTaxTypeDao" class="de.hybris.sdh.core.dao.impl.DefaultSDHTaxTypeDao">
+		<constructor-arg value="SDHTaxType"/>
+	</bean>
+
+	<alias alias="sdhPaymentMethodDao" name="defaultSDHPaymentMethodDao"/>
+	<bean id="defaultSDHPaymentMethodDao" class="de.hybris.sdh.core.dao.impl.DefaultSDHPaymentMethodDao">
+		<constructor-arg value="SDHPaymentMethod"/>
+	</bean>
+
+	<alias alias="sdhPaymentProvTypeDao" name="defaultSDHPaymentProvTypeDao"/>
+	<bean id="defaultSDHPaymentProvTypeDao" class="de.hybris.sdh.core.dao.impl.DefaultSDHPaymentProvTypeDao">
+		<constructor-arg value="SDHPaymentProvType"/>
+	</bean>
+
+	<alias alias="sdhOlinePaymentProviderMatcherDao" name="defaultOlnPymntPvdMatcherDao"/>
+	<bean id="defaultOlnPymntPvdMatcherDao" class="de.hybris.sdh.core.dao.impl.DefaultOlnPymntPvdMatcherDao">
+		<constructor-arg value="OlnPymntPvdMatcher"/>
+	</bean>
+
+
+
+	<alias alias="sdhTaxTypeService" name="defaultSDHTaxTypeService"/>
+	<bean name="defaultSDHTaxTypeService" class="de.hybris.sdh.core.services.impl.DefaultSDHTaxTypeService" />
+
+	<alias alias="sdhPaymentMethodService" name="defaultSDHPaymentMethodService"/>
+	<bean name="defaultSDHPaymentMethodService" class="de.hybris.sdh.core.services.impl.DefaultSDHPaymentMethodService" />
+
+	<alias alias="sdhPaymentProviderTypeService" name="defaultSDHPaymentProvTypeService"/>
+	<bean name="defaultSDHPaymentProvTypeService" class="de.hybris.sdh.core.services.impl.DefaultSDHPaymentProvTypeService" />
+
+    <alias alias="sdhOlinePaymentProviderMatcherService" name="defaultSDHOlinePaymentProviderMatcherService"/>
+    <bean name="defaultSDHOlinePaymentProviderMatcherService" class="de.hybris.sdh.core.services.impl.DefaultSDHOlinePaymentProviderMatcherService" />
+
+
+
+
 </beans>
