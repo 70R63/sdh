@@ -45,12 +45,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input class="inputtextnew tableident"
-								disabled="disabled" type="text" size="30" value="" /></td>
-							<td><input class="inputtextnew tablenumiden"
-								disabled="disabled" type="text" size="30" value="" /></td>
-							<td><input class="inputtextnew tablenombre"
-								disabled="disabled" type="text" size="30" value="" /></td>
+							<td><c:out value="${vehiculosForm.tipiden}" /></td>
+							<td><c:out value="${vehiculosForm.numide}" /></td>
+							<td><c:out value="${vehiculosForm.name}" /></td>
 						</tr>
 					</tbody>
 				</table>
