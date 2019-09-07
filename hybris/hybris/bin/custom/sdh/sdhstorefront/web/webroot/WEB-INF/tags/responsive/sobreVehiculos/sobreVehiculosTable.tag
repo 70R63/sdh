@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<div class="row mt-3">
-	<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
+		<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
 			<div class="table-responsive text-center">
 				<table class="table table-bordered">
 					<thead>
@@ -53,7 +53,7 @@
 				</table>
 			</div>
 		</div>
-</div>
+	</div>
 </div>
 
 <sf:form>
@@ -73,6 +73,7 @@
 		</div>
 
 
+
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table">
@@ -90,8 +91,8 @@
 										code="sobre.vehiculo.table.modelo" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.table.clase" /></label></th>
-										<th><label class="control-label labeltabletd"><spring:theme
-										code="sobre.vehiculo.table.carroceria" /></label></th>										
+							<th><label class="control-label labeltabletd"><spring:theme
+										code="sobre.vehiculo.table.carroceria" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.table.numpuertas" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
@@ -105,50 +106,54 @@
 
 						</tr>
 					</thead>
-
-					<tbody>
-						<tr>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="placa"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="marca"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="factura"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="linea"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="modelo"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="clase"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
+					<c:forEach items="${vehiculosForm.impvehicular }"
+						var="eachVehiculo">
+						<tbody>
+							<tr>
 								<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="carrocería"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Puertas"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="blindado"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="cilin"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="avaluo"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="submit"
-								value="<c:out value="Ver detalle"></c:out>" maxlength="240"
-								style="width: 100% !important;"></td>
-						</tr>
-					</tbody>
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.placa}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="${eachVehiculo.marca}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="Factura"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="${eachVehiculo.linea}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="${eachVehiculo.modelo}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="${eachVehiculo.clase}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="${eachVehiculo.carroceria}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="${eachVehiculo.numPuertas}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="${eachVehiculo.blindado}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="${eachVehiculo.cilindraje}"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="text"
+									readonly="readonly" value="<c:out value="avaluo"></c:out>"
+									maxlength="240" style="width: 100% !important;"></td>
+								<td><input id="" name="" class="inputtextnew" type="submit"
+									value="<c:out value="Ver detalle"></c:out>" maxlength="240"
+									style="width: 100% !important;"></td>
+							</tr>
+						</tbody>
+					</c:forEach>
 				</table>
 			</div>
 		</div>
+
 	</div>
 </sf:form>
 
