@@ -670,7 +670,7 @@
 
 	<bean name="sdhCalPublicidad2Service" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcPublicidad2Service" />
 	<bean name="sdhCalGasolina2Service" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcGasolina2Service" />
-
+	<bean name="sdhCalculaICA2Service" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcICA2Service" />
 
 
 	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>

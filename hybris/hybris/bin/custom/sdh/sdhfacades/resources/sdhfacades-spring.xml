@@ -217,6 +217,7 @@
 
 	<bean id="sdhCalculaPublicidad2Facade" class="de.hybris.sdh.facades.impl.DefaultSDHCalculaPublicidad2Facade" />
 	<bean id="sdhCalculaGasolina2Facade" class="de.hybris.sdh.facades.impl.DefaultSDHCalculaGasolina2Facade" />
+	<bean id="sdhCalculaICA2Facade" class="de.hybris.sdh.facades.impl.DefaultSDHCalculaICA2Facade" />
 
 	<alias name="onlinePaymentMatcherFullPaymentMethodPopulator" alias="sdhOnlinePaymentMatcherFullPaymentMethodPopulator"/>
 	<bean id="onlinePaymentMatcherFullPaymentMethodPopulator" class="de.hybris.sdh.facades.populators.online.payment.provider.OnlinePaymentMatcherFullPaymentMethodPopulator" />
