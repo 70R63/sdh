@@ -24,21 +24,21 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.marcas.marca" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.marcas.tipmarca" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.marcas.pormarcaa" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.marcas.mutfis" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.marcas.valexcencion" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.marcas.conshistori" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.marcas.fecdesde" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.marcas.fechasta" /></label></th>
 						</tr>
 					</thead>

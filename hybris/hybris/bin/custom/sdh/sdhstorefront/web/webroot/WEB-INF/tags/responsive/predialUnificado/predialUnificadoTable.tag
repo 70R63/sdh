@@ -8,19 +8,30 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container">
+<div class="container_new_page">
 	<div class="row">
-		<div class="avisoheadline">
-			<h3>
-				<span class="p"><spring:theme
-						code="predial.unificado.table.title" text="Predial Unificado" /></span>
-			</h3>
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr class="avisoheadline p">
+						<td style="text-align: center"><spring:theme
+								code="predial.unificado.table.title" /></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="avisobody">
+
+						<td><spring:theme code="predial.unificado.table.descripcion" /><a
+							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
+								información</a></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<p class="avisobody">
-			<spring:theme code="predial.unificado.table.descripcion" />
-		</p>
 	</div>
 </div>
+
+
 
 <sf:form>
 	<br>
@@ -29,29 +40,29 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.chip" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.matinmobi" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.factura" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.tipdirec" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.direcpred" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.codpostal" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.codLocalidad" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.estpredio" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.nomconarren" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.fecinactiva" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code="predial.unificado.table.indicador" /></label></th>
-						<th><label class="control-label "><spring:theme
+						<th><label class="control-label labeltabletd"><spring:theme
 									code=" " /></label></th>
 
 					</tr>

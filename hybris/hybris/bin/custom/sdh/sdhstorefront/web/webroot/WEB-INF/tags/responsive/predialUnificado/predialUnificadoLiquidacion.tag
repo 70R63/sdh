@@ -24,13 +24,13 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.liquidacion.basgrav" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.liquidacion.desthacen" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.liquidacion.tarif" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.liquidacion.valimp" /></label></th>
 						</tr>
 					</thead>
