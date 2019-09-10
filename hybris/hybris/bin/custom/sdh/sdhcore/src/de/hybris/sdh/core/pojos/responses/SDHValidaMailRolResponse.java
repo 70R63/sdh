@@ -25,6 +25,7 @@ public class SDHValidaMailRolResponse {
 	private ImpuestoICA ica;
 	private ReteICA reteIca;
 	//	private ImpuestoReteICA reteICA;
+	private List<ImpuestoVehiculos> vehicular; //Se agrega la  parte de vehiculos del response
 
 	/**
 	 * @return the infoContrib
@@ -171,7 +172,9 @@ public class SDHValidaMailRolResponse {
 		final StringBuilder nameBuilder = new StringBuilder();
 
 		if(this.getInfoContrib() == null)
+		{
 			return "";
+		}
 
 		if ("nit".equalsIgnoreCase(this.getInfoContrib().getTipoDoc()) || "nite".equalsIgnoreCase(this.getInfoContrib().getTipoDoc()))
 		{
@@ -216,6 +219,25 @@ public class SDHValidaMailRolResponse {
 
 		return nameBuilder.toString();
 	}
+
+	/**
+	 * @return the vehicular
+	 */
+	public List<ImpuestoVehiculos> getVehicular()
+	{
+		return vehicular;
+	}
+
+	/**
+	 * @param vehicular
+	 *           the vehicular to set
+	 */
+	public void setVehicular(final List<ImpuestoVehiculos> vehicular)
+	{
+		this.vehicular = vehicular;
+	}
+
+
 
 
 }
