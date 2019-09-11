@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -107,7 +108,7 @@
 						<label class="control-label"><spring:theme
 								code="ica.declaracion.generales.cantesta" /></label> <input
 							id="cantEstablec" name="cantEstablec" class="newalto form-control"
-							type="text" value="${infoDeclara.cantEstablec }" maxlength="240"
+							type="text" value="${fn:trim(infoDeclara.cantEstablec) }" maxlength="240"
 							${inputDisabled }></input>
 					</div>
 				</div>
