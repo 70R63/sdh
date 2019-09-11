@@ -9,9 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
-	var="infoDeclara" />
-
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -107,8 +105,8 @@
 						<label class="control-label"><spring:theme
 								code="ica.declaracion.generales.cantesta" /></label> <input
 							id="cantEstablec" name="cantEstablec" class="newalto form-control"
-							type="text" value="${infoDeclara.cantEstablec }" maxlength="240"
-							${inputDisabled }></input>
+							type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.cantEstablec}" maxlength="240"
+							${inputDisabled}></input>
 					</div>
 				</div>
 			</div>
@@ -131,7 +129,7 @@
 <script>
 	function disa() {
 		var cant = document.getElementById('cantEstablec');
-		cant.disabled = false;
+		cant.disabled = true;
 
 	}
 
