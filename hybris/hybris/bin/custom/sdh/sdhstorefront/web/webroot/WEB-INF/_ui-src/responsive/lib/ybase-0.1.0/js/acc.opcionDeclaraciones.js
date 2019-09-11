@@ -33,7 +33,7 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponse : function(infoActual,infoResponse) {
 
-		alert(infoResponse.textoMensaje);
+		alert(infoResponse.errores.textoMensaje);
 					
 				
 	}	
