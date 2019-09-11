@@ -101,6 +101,8 @@
 			ACC.casoCreacionURL= "<c:url value='/contribuyentes/tramites/creacionCaso' />";			
 
 			ACC.casoConsultaURL= "<c:url value='/contribuyentes/tramites/consultaCaso' />";			
+
+			ACC.declaracionPDFURL= "<c:url value='/contribuyentes/consultas/declaraciones/declaracionPDF' />";			
 			
 		  	ACC.currentURL = "${currentURL}";
 

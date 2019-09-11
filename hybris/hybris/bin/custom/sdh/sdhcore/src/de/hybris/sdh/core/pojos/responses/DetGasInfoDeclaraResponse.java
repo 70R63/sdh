@@ -13,7 +13,7 @@ public class DetGasInfoDeclaraResponse
 	String claseProd;
 	String galonesGra;
 	String precioRef;
-	String alcoholCarbu;
+	String alcoholCarbu; //En caso de regenerar el setter aplicar un trim en el valor recibido
 	String baseGravable;
 	String vlrSobretasa;
 
