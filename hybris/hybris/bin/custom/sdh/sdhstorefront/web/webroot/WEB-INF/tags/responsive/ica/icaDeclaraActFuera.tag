@@ -12,7 +12,7 @@
 		debugger;
 		var muni = selectObject.value;
 		if (muni == '000000011001') {
-			alert("Seleccione un municipio diferente, ya que las actividades deben ser fuera de Bogotá");
+			alert("Seleccione un municipio diferente, ya que las actividades deben ser fuera de Bogotï¿½");
 		}
 	}
 </script>
@@ -111,7 +111,8 @@
 				</div>
 			</c:if>
 		</c:forEach>
-		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
+
+		<!--  se agregan lï¿½neas para agregar siempre una linea en la tabla -->
 		<div class="row actvifuera" id="actvifuera">
 			<div class="col-md-7">
 				<select id="" class="alto form-control deno codCIIU"
@@ -152,7 +153,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- fin de código agregado -->
+		<!-- fin de cï¿½digo agregado -->
 
 		<!-- <div id="adjuntar" class="row" style="display: none;"> -->
 		<!-- 		<div class="col-md-3" style="margin-top: 20px !important"> -->
@@ -182,7 +183,7 @@
 					"")
 
 		} else {
-			alert("No se pueden agregar más registros");
+			alert("No se pueden agregar mï¿½s registros");
 		}
 
 	}
