@@ -1,6 +1,13 @@
-/**
-*
-*/
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with SAP.
+ */
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -8,9 +15,25 @@ import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadc
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
+import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
+
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,12 +43,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
- * @author Maria Luisa
- *
+ * Controller for home page
  */
 @Controller
 public class SobreVehiculosController extends AbstractPageController
 {
+
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.vehiculos";
 	private static final String DECLARACION_VEHICULOS_PROFILE = "Sobre Vehículos Declaración";
@@ -43,6 +66,28 @@ public class SobreVehiculosController extends AbstractPageController
 	private static final String REDIRECT_TO_DECLARACION_MOTOS_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/sobrevehiculosautomotores/declaracion/motos";
 
+
+	@Resource(name = "sdhEnviaFirmasFacade")
+	SDHEnviaFirmasFacade sdhEnviaFirmasFacade;
+
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "modelService")
+	ModelService modelService;
+
+	@Resource(name = "mediaService")
+	MediaService mediaService;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
@@ -51,6 +96,55 @@ public class SobreVehiculosController extends AbstractPageController
 	public String sobrevehiculosdetalle(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro Sobre Vehiculos detalle --------------------------");
+
+		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+
+
+		final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
+		if (customerModel.getNumBP() != null)
+		{
+			consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+			vehiculosForm.setNumBP(customerModel.getNumBP());
+			vehiculosForm.setTipiden(customerModel.getDocumentType());
+			vehiculosForm.setNumide(customerModel.getDocumentNumber());
+			vehiculosForm.setName(customerModel.getFirstName() + " " + customerModel.getLastName());
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
+
+				if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+						&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+				{
+					vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+							.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+				}
+
+			}
+			catch (final Exception e)
+			{
+				// XXX Auto-generated catch block
+				//				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+				//				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+			}
+
+		}
+		else
+		{
+			vehiculosForm.setNumBP("vacio");
+		}
+
+
+		model.addAttribute("vehiculosForm", vehiculosForm);
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
@@ -64,8 +158,7 @@ public class SobreVehiculosController extends AbstractPageController
 	@RequestMapping(value = "/contribuyentes/sobrevehiculosautomotores/detalle", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String sobrevehiculosdetallepost(final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes)
-			throws CMSItemNotFoundException
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("------------------entro al post de sobre vehiculos------------------------");
 
@@ -121,6 +214,5 @@ public class SobreVehiculosController extends AbstractPageController
 
 		return REDIRECT_TO_DECLARACION_MOTOS_PAGE;
 	}
-
 
 }

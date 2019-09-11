@@ -15,6 +15,7 @@ import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
@@ -33,7 +34,9 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
+import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
+import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.TramiteCatalogos;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -1072,6 +1075,45 @@ public class SobreTasaGasolinaService
 	}
 
 
+	public String obtenerNumDocDeclaraciones(final SDHValidaMailRolResponse customerData, final String claveImpuesto)
+	{
+		String numDoc = "";
+		List<ImpuestoGasolina> listaDocumentos_0005 = null;
+		ReteICA listaDocumentos_0004 = null;
+
+		switch (claveImpuesto)
+		{
+			case "0004": //Reteica
+				listaDocumentos_0004 = customerData.getReteIca();
+				if (listaDocumentos_0004 != null)
+				{
+					numDoc = listaDocumentos_0004.getNumObjeto();
+					break;
+				}
+				break;
+			case "0005": //Sobretasa Motor
+				listaDocumentos_0005 = customerData.getGasolina();
+				if (listaDocumentos_0005 != null)
+				{
+					for (int i = 0; i < listaDocumentos_0005.size(); i++)
+					{
+						if (!listaDocumentos_0005.get(i).toString().isEmpty())
+						{
+							numDoc = listaDocumentos_0005.get(i).getNumObjeto();
+							break;
+						}
+					}
+				}
+				break;
+
+			default:
+				break;
+		}
+
+		return numDoc;
+	}
+
+
 	/**
 	 * @param i
 	 * @return
@@ -1794,7 +1836,7 @@ public class SobreTasaGasolinaService
 			//			}
 			//			else
 			//			{
-				periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(1, 2));
+			periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(1, 2));
 			//			}
 		}
 		else
@@ -1867,6 +1909,13 @@ public class SobreTasaGasolinaService
 		return false;
 	}
 
+	public boolean ocurrioErrorDeclaraPDF(final OpcionDeclaracionesPDFResponse creaCasosResponse)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
+
+
 	/**
 	 * @param consCasosResponse
 	 * @return
@@ -1896,6 +1945,29 @@ public class SobreTasaGasolinaService
 
 		responseInfo = (ConsCasosResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet,
 				LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+	/**
+	 * @param consultaCasosRequest
+	 * @param sdhDetalleGasolinaWS
+	 * @param log
+	 * @return
+	 */
+	public OpcionDeclaracionesPDFResponse consultaDeclaraPDF(final OpcionDeclaracionesPDFRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		OpcionDeclaracionesPDFResponse responseInfo = new OpcionDeclaracionesPDFResponse();
+		final String confUrl = "sdh.declaraPDF.url";
+		final String confUser = "sdh.declaraPDF.user";
+		final String confPass = "sdh.declaraPDF.password";
+		final String wsNombre = "declaraPDF";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse";
+
+		responseInfo = (OpcionDeclaracionesPDFResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
 
 		return responseInfo;
 	}

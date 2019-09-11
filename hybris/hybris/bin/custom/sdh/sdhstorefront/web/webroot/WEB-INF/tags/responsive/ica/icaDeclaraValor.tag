@@ -87,7 +87,7 @@
 
 		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
 		<c:if test="${empty infoDeclara.valorRetenido}">
-			<div class="row valor">
+			<div class="row valor" id="valor">
 				<div class="col-md-1">
 					<input class="new_alto form-control anio anoGravable" type="text"
 						value="${infoDeclara.anoGravable }" />
@@ -156,7 +156,7 @@
 
 
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
-			<div class="row valor">
+			<div class="row valor" id="valor">
 				<div class="col-md-1">
 					<input class="new_alto form-control anio anoGravable" type="text"
 						value="${eachValor.anoGravable }" />
@@ -308,14 +308,33 @@
 	}
 
 	function delevalor() {
-		var i = $(".valor").length;
-		var val = i - 1;
-		if ($(".valor").length <= 20 && $(".valor").length > 1) {
+		var elem = document.getElementsByTagName("img");
+		var ElementosClick = new Array();
+		var HaHechoClick;
 
-			$($(".valor")[val]).closest($($(".valor")[val]).remove());
+		HaHechoClick = event.srcElement;
+		ElementosClick.push(HaHechoClick);
 
-		} else if ($(".valor").length <= 1) {
-			alert("No puede eliminar todos los registros");
+		for (var i = 0; i < elem.length; i++) {
+			var cual = elem[i];
+			var cual2 = ElementosClick[0];
+
+			if (cual == cual2) {
+				var eliminar = cual.parentNode;
+				while (eliminar.id != "valor") {
+					eliminar = eliminar.parentNode;
+				}
+				var h = $(".valor").length;
+				if ($(".valor").length <= 20 && $(".valor").length > 1) {
+					for (var j = 0; j < $(".valor").length; j++) {
+						eliminar.remove();
+					}
+				} else if ($(".valor").length <= 1) {
+					alert("No puede eliminar todos los registros");
+				}
+				break;
+			} else {
+			}
 		}
 	}
 

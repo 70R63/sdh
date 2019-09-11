@@ -12,7 +12,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <script>
 function SelectedAnio(selectObject) {
-	debugger;
+// 	debugger;
 	var value = selectObject.value;
 	//document.getElementById("Idanio").value = value;
 	var x = document.getElementById('seleccion').value;
@@ -71,7 +71,7 @@ function SelectedAnio(selectObject) {
 		</div>
 	</div>
 
-	<form:form id="" action="" method="post" commandName="">
+	<form:form id="" action="" method="post" commandName="dataForm">
 
 		<div class="row">
 			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
@@ -84,11 +84,14 @@ function SelectedAnio(selectObject) {
 					<select class="new_alto form-control seleccion" id="seleccion"
 						onchange="onChange(this)">
 						<option>Seleccionar</option>
-						<option value="3">ICA</option>
-						<option value="4">Publicidad Exterior</option>
-						<option value="5">Sobretasa Gasolina</option>
-						<option value="6">Delineación Urbana</option>
-						<option value="7">RETEICA</option>
+						<option value="0001">Predial</option>
+						<option value="0002">Vehículos</option>
+						<option value="0003">Industria y Comercio</option>
+						<option value="0004">Reteica</option>
+						<option value="0005">Sobretasa Motor</option>
+						<option value="0006">Delineación Urbana</option>
+						<option value="0007">Publicidad Exterior Visual</option>
+						<option value="0008">Fondo Unif. Pobres, Azar y Esp</option>						
 					</select>
 				</div>
 			</div>
@@ -321,9 +324,9 @@ function SelectedAnio(selectObject) {
 						<spring:theme code="certideclara.inicial.cancelar" />
 					</button>
 
-					<button type="submit" class="btn btn-primary btn-lg"
+					<button type="submit" class="btn btn-primary btn-lg !important consultaDecPDF"
 						id="generarPDFButton" name="generarPDFButton"
-						style="margin-top: 3px" onclic="">
+						style="margin-top: 3px" onclick="">
 						<spring:theme code="certideclara.inicial.generar" />
 					</button>
 				</div>
@@ -551,7 +554,7 @@ function SelectedAnio(selectObject) {
 		form.submit();
 	}
 	
-	<!-- se agrega control para tablas de delineación
+// 	<!-- se agrega control para tablas de delineación
 
 		function ShowSelected(selectObject) {
 			var value = selectObject.value;
@@ -568,7 +571,7 @@ function SelectedAnio(selectObject) {
 			} else {
 				idrad.style.display = 'none';
 			}
-		} -->
+		} 
 		
 </script>
 
@@ -625,15 +628,15 @@ function SelectedAnio(selectObject) {
 	}
 	
 	function onChange(selectObject){
-		debugger;
+// 		debugger;
 		var impuesto = selectObject.value;
 		var per = document.getElementById('Periodo1');
 		var per2 = document.getElementById('Periodo2');
 		
-		if(impuesto == '5'){
+		if(impuesto == '0005'){
 			per.style.display='block';
 			per2.style.display='none';
-		}else if (impuesto == '3' || impuesto =='7'){
+		}else if (impuesto == '0004'){
 			per2.style.display='block';
 			per.style.display='none';
 					

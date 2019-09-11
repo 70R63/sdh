@@ -74,9 +74,9 @@ public class CreaCasosRequest
 					{
 						if (this.getArchivosInfo().getArchivos().size() > 0)
 						{
-							stringBuilder.append("{");
-							stringBuilder.append(this.preparaArchivos("\"archivos\":"));
-							stringBuilder.append("}");
+							//							stringBuilder.append("{");
+							stringBuilder.append(this.preparaArchivos());
+							//							stringBuilder.append("}");
 						}
 					}
 				}
@@ -125,34 +125,40 @@ public class CreaCasosRequest
 		return valorRetorno;
 	}
 
-	private String preparaArchivos(final String nombreSegmento)
+	private String preparaArchivos()
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
-		CreaCasosArchiRequest infoArchivos;
+		//		CreaCasosArchiRequest infoArchivos;
 		String valorRetorno = "";
 
 
 		if (this.getArchivosInfo() != null && this.getArchivosInfo().getArchivos() != null
 				&& this.getArchivosInfo().getArchivos().size() > 0)
 		{
-			//			stringBuilder.append("{");
-			stringBuilder.append("\"linea\":\"" + this.getArchivosInfo().getLinea() + "\",");
-			stringBuilder.append("\"identificador\":\"" + this.getArchivosInfo().getIdentificador() + "\",");
-			stringBuilder.append("\"valor\":\"" + this.getArchivosInfo().getValor() + "\",");
-
-			stringBuilder.append("\"archivos\":");
-			stringBuilder.append("[");
-			for (int i = 0; i < this.getArchivosInfo().getArchivos().size() - 1; i++)
+			for (int i = 0; i <= this.getArchivosInfo().getArchivos().size() - 1; i++)
 			{
-				infoArchivos = this.getArchivosInfo().getArchivos().get(i);
+				stringBuilder.append("{");
+				stringBuilder.append("\"linea\":\"" + this.getArchivosInfo().getLinea() + "\",");
+				stringBuilder.append("\"identificador\":\"" + this.getArchivosInfo().getIdentificador() + "\",");
+				stringBuilder.append("\"valor\":\"" + this.getArchivosInfo().getValor() + "\",");
 
-				stringBuilder.append(infoArchivos.toString());
-				stringBuilder.append(",");
+				stringBuilder.append("\"archivos\":");
+				stringBuilder.append("[");
+				//				infoArchivos = this.getArchivosInfo().getArchivos().get(i);
+
+				//				stringBuilder.append(infoArchivos.toString());
+				stringBuilder.append(this.getArchivosInfo().getArchivos().get(i));
+				stringBuilder.append("]");
+				stringBuilder.append("}");
+				if (i < this.getArchivosInfo().getArchivos().size() - 1)
+				{
+					stringBuilder.append(",");
+				}
 			}
-			infoArchivos = this.getArchivosInfo().getArchivos().get(this.getArchivosInfo().getArchivos().size() - 1);
+			//			infoArchivos = this.getArchivosInfo().getArchivos().get(this.getArchivosInfo().getArchivos().size() - 1);
 
-			stringBuilder.append(infoArchivos.toString());
-			stringBuilder.append("]");
+			//		stringBuilder.append(infoArchivos.toString());
+			//			stringBuilder.append("]");
 			//			stringBuilder.append("}");
 		}
 

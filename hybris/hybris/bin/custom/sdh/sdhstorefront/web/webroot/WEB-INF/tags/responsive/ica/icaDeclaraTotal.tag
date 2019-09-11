@@ -31,7 +31,7 @@
 					<spring:theme code="ica.declaracion.total.actprinci" />
 				</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-7">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.total.denomi" />
 				</label>
@@ -45,7 +45,7 @@
 
 		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
 		<c:if test="${empty infoDeclara.ingNetosGrava}">
-			<div class="row totaluno">
+			<div class="row totaluno" id="totaluno">
 				<div class="col-md-1">
 
 					<input type="checkbox" name=""
@@ -54,11 +54,13 @@
 						size="10">
 				</div>
 
-				<div class="col-md-3">
-					<input class="new_alto form-control denomina codCIIU" type="text" value="" />
+				<div class="col-md-7">
+					<input class="alto form-control denomina codCIIU" type="text"
+						value="" />
 				</div>
 				<div class="col-md-2">
-					<input class="newalto form-control ingreso ingresos" type="text" value="" />
+					<input class="newalto form-control ingreso ingresos" type="text"
+						value="" />
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -75,7 +77,7 @@
 
 		<c:forEach items="${infoDeclara.ingNetosGrava }" var="eachIngreso">
 			<c:if test="${not empty eachIngreso.codCIIU }">
-				<div class="row totaluno">
+				<div class="row totaluno" id="totaluno">
 					<div class="col-md-1">
 						<c:choose>
 							<c:when test="${eachIngreso.actPrincipal eq 'X' }">
@@ -92,8 +94,8 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-	
-					<div class="col-md-3">
+
+					<div class="col-md-7">
 						<!-- 					<input class="form-control denomina codCIIU" type="text" -->
 						<%-- 						value="${eachIngreso.codCIIU}" /> --%>
 						<!--
@@ -116,12 +118,14 @@
 									- ${eachActivity.description }</option>
 							</c:forEach>
 						</select>
-						 -->		
-						 <!-- EJRR Adding data to select box -->			 
-						 <select id="" class="new_alto form-control codCIIU" style="height: 48px;">
+						 -->
+						<!-- EJRR Adding data to select box -->
+						<select id="" class="alto form-control codCIIU"
+							style="height: 48px;">
 							<option value="" selected>SELECCIONAR</option>
 							<c:forEach items="${gravableNetIncomes}" var="eachActivity">
-								<option value="${eachActivity.ciiu}">${eachActivity.ciiu} - ${eachActivity.denominacion}</option>
+								<option value="${eachActivity.ciiu}">${eachActivity.ciiu}
+									- ${eachActivity.denominacion}</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -141,28 +145,28 @@
 				</div>
 			</c:if>
 		</c:forEach>
-		<div class="row totaluno">
-					<div class="col-md-1">
-						<c:choose>
-							<c:when test="${eachIngreso.actPrincipal eq 'X' }">
-								<input type="checkbox" name=""
-									class="form-check-input mr-2 actividad actPrincipal"
-									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-									size="10" checked="checked">
-							</c:when>
-							<c:otherwise>
-								<input type="checkbox" name=""
-									class="form-check-input mr-2 actividad actPrincipal"
-									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-									size="10">
-							</c:otherwise>
-						</c:choose>
-					</div>
-	
-					<div class="col-md-3">
-						<!-- 					<input class="form-control denomina codCIIU" type="text" -->
-						<%-- 						value="${eachIngreso.codCIIU}" /> --%>
-						<!--
+		<div class="row totaluno" id="totaluno">
+			<div class="col-md-1">
+				<c:choose>
+					<c:when test="${eachIngreso.actPrincipal eq 'X' }">
+						<input type="checkbox" name=""
+							class="form-check-input mr-2 actividad actPrincipal"
+							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+							size="10" checked="checked">
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name=""
+							class="form-check-input mr-2 actividad actPrincipal"
+							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+							size="10">
+					</c:otherwise>
+				</c:choose>
+			</div>
+
+			<div class="col-md-7">
+				<!-- 					<input class="form-control denomina codCIIU" type="text" -->
+				<%-- 						value="${eachIngreso.codCIIU}" /> --%>
+				<!--
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
 	
@@ -182,47 +186,49 @@
 									- ${eachActivity.description }</option>
 							</c:forEach>
 						</select>
-						 -->		
-						 <!-- EJRR Adding data to select box -->			 
-						 <select id="" class="new_alto form-control codCIIU" style="height: 48px;">
-							<option value="" selected>SELECCIONAR</option>
-							<c:forEach items="${gravableNetIncomes}" var="eachActivity">
-								<option value="${eachActivity.ciiu}">${eachActivity.ciiu} - ${eachActivity.denominacion}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<div class="col-md-2">
-						<input class="newalto form-control ingreso ingresos" type="text"
-							value="${eachIngreso.ingresos}" />
-					</div>
-					<div class="col-md-1">
-						<div class="form-group ">
-							<img onclick="addtotaluno()"
-								src="${themeResourcePath}/images/adddelineacion.png"
-								style="width: 25px"></img> <img onclick="deletotaluno()"
-								src="${themeResourcePath}/images/deledelineacion.png"
-								style="width: 25px"></img>
-						</div>
-					</div>
+						 -->
+				<!-- EJRR Adding data to select box -->
+				<select id="" class="alto form-control codCIIU"
+					style="font-size:12px !important; padding: 0px !important">
+					<option value="" selected>SELECCIONAR</option>
+					<c:forEach items="${gravableNetIncomes}" var="eachActivity">
+						<option value="${eachActivity.ciiu}">${eachActivity.ciiu}
+							- ${eachActivity.denominacion}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<input class="newalto form-control ingreso ingresos" type="text"
+					value="${eachIngreso.ingresos}" />
+			</div>
+			<div class="col-md-1">
+				<div class="form-group ">
+					<img onclick="addtotaluno()"
+						src="${themeResourcePath}/images/adddelineacion.png"
+						style="width: 25px"></img> <img onclick="deletotaluno()"
+						src="${themeResourcePath}/images/deledelineacion.png"
+						style="width: 25px"></img>
 				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- 	se agrega boton para adjuntar archivo -->
 	<div class="container" style="margin-top: 15px !important">
 		<div class="row">
-<!-- 			<div class="col-md-3" style="margin-bottom: 3px !important"> -->
-<!-- 				<button style="margin-top: 25px!importan" class="btn btn-primary" -->
-<!-- 					data-toggle="modal" data-target="#fm-modal" type="button" -->
-<!-- 					onclick="addfiletotal()">Adjuntar archivo</button> -->
-<!-- 			</div> -->
+			<!-- 			<div class="col-md-3" style="margin-bottom: 3px !important"> -->
+			<!-- 				<button style="margin-top: 25px!importan" class="btn btn-primary" -->
+			<!-- 					data-toggle="modal" data-target="#fm-modal" type="button" -->
+			<!-- 					onclick="addfiletotal()">Adjuntar archivo</button> -->
+			<!-- 			</div> -->
 
-<!-- 			<div id="adjuntar-total" class="row" style="display: none;"> -->
-<!-- 				<div class="col-md-3" style="margin-top: 20px !important"> -->
+			<!-- 			<div id="adjuntar-total" class="row" style="display: none;"> -->
+			<!-- 				<div class="col-md-3" style="margin-top: 20px !important"> -->
 
-<!-- 					<input class="control-form" type="file"></input> -->
+			<!-- 					<input class="control-form" type="file"></input> -->
 
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
 		</div>
 	</div>
 	<!-- fin de codigo adjuntar archivo -->
@@ -284,14 +290,15 @@
 	</div>
 
 	<c:if test="${empty infoDeclara.ingPorCIIU }">
-		<div class="row totaldos">
+		<div class="row totaldos" id="totaldos">
 			<div class="col-md-1">
 				<input class="new_alto form-control anoGravable" type="text" />
 			</div>
 
 
 			<div class="col-md-1">
-				<select id="" class="new_alto form-control tipoID" style="height: 48px;">
+				<select id="" class="new_alto form-control tipoID"
+					style="height: 48px;">
 					<option value="">Seleccionar</option>
 					<option value="CC">CC Cédula de ciudadania</option>
 					<option value="CE">CE Cédula de extranjería</option>
@@ -321,7 +328,8 @@
 				<input class="new_alto form-control telefono" type="text" />
 			</div>
 			<div class="col-md-2">
-				<select id="" class="new_alto form-control codCIIU" style="height: 48px;">
+				<select id="" class="new_alto form-control codCIIU"
+					style="font-size:12px !important; padding: 0px !important">
 					<option value="">SELECCIONAR</option>
 					<c:forEach items="${ econActivities}" var="eachActivity">
 						<option value="${eachActivity.code}">${eachActivity.code}
@@ -348,7 +356,7 @@
 	</c:if>
 
 	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso">
-		<div class="row totaldos">
+		<div class="row totaldos" id="totaldos">
 			<div class="col-md-1">
 				<input class="new_alto form-control anoGravable" disabled="disabled"
 					type="text" value="${eachIngreso.anoGravable }" />
@@ -356,8 +364,8 @@
 
 
 			<div class="col-md-1">
-				<select id="" disabled="disabled" class="new_alto form-control tipoID"
-					style="height: 48px;">
+				<select id="" disabled="disabled"
+					class="new_alto form-control tipoID" style="height: 48px;">
 					<option value="">Seleccionar</option>
 					<c:forEach items="${ idTypes}" var="eachType">
 
@@ -373,8 +381,8 @@
 				</select>
 			</div>
 			<div class="col-md-1">
-				<input class="new_alto form-control numID" disabled="disabled" type="text"
-					value="${eachIngreso.numID }" />
+				<input class="new_alto form-control numID" disabled="disabled"
+					type="text" value="${eachIngreso.numID }" />
 			</div>
 			<div class="col-md-1">
 				<input class="new_alto form-control razonSocial" disabled="disabled"
@@ -389,16 +397,16 @@
 					type="text" value="${eachIngreso.desMunicipio }" />
 			</div>
 			<div class="col-md-1">
-				<input class="new_alto form-control telefono" disabled="disabled" type="text"
-					value="${eachIngreso.telefono }" />
+				<input class="new_alto form-control telefono" disabled="disabled"
+					type="text" value="${eachIngreso.telefono }" />
 			</div>
 			<div class="col-md-2">
 
 				<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 					pattern="#######################" var="codCIIUNumber" />
 
-				<select id="" disabled="disabled" class="new_alto form-control codCIIU"
-					style="height: 48px;">
+				<select id="" disabled="disabled"
+					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important">
 					<option value="">SELECCIONAR</option>
 					<c:forEach items="${ econActivities}" var="eachActivity">
 
@@ -421,8 +429,9 @@
 					disabled="disabled" value="${eachIngreso.ingBrutoSINIVA }" />
 			</div>
 			<div class="col-md-1">
-				<input class="new_alto form-control valorTotalDevol" disabled="disabled"
-					type="text" value="${eachIngreso.valorTotalDevo }" />
+				<input class="new_alto form-control valorTotalDevol"
+					disabled="disabled" type="text"
+					value="${eachIngreso.valorTotalDevo }" />
 			</div>
 			<div class="col-md-1">
 				<div class="form-group ">
@@ -458,14 +467,33 @@
 	}
 
 	function deletotaluno() {
-		var i = $(".totaluno").length;
-		var val = i - 1;
-		if ($(".totaluno").length <= 20 && $(".totaluno").length > 1) {
+		var elem = document.getElementsByTagName("img");
+		var ElementosClick = new Array();
+		var HaHechoClick;
 
-			$($(".totaluno")[val]).closest($($(".totaluno")[val]).remove());
+		HaHechoClick = event.srcElement;
+		ElementosClick.push(HaHechoClick);
 
-		} else if ($(".totaluno").length <= 1) {
-			alert("No puede eliminar todos los registros");
+		for (var i = 0; i < elem.length; i++) {
+			var cual = elem[i];
+			var cual2 = ElementosClick[0];
+
+			if (cual == cual2) {
+				var eliminar = cual.parentNode;
+				while (eliminar.id != "totaluno") {
+					eliminar = eliminar.parentNode;
+				}
+				var h = $(".totaluno").length;
+				if ($(".totaluno").length <= 20 && $(".totaluno").length > 1) {
+					for (var j = 0; j < $(".totaluno").length; j++) {
+						eliminar.remove();
+					}
+				} else if ($(".totaluno").length <= 1) {
+					alert("No puede eliminar todos los registros");
+				}
+				break;
+			} else {
+			}
 		}
 	}
 
@@ -500,15 +528,35 @@
 	}
 
 	function deletotaldos() {
-		var i = $(".totaldos").length;
-		var val = i - 1;
-		if ($(".totaldos").length <= 20 && $(".totaldos").length > 1) {
+		var elem = document.getElementsByTagName("img");
+		var ElementosClick = new Array();
+		var HaHechoClick;
 
-			$($(".totaldos")[val]).closest($($(".totaldos")[val]).remove());
+		HaHechoClick = event.srcElement;
+		ElementosClick.push(HaHechoClick);
 
-		} else if ($(".totaldos").length <= 1) {
-			alert("No puede eliminar todos los registros");
+		for (var i = 0; i < elem.length; i++) {
+			var cual = elem[i];
+			var cual2 = ElementosClick[0];
+
+			if (cual == cual2) {
+				var eliminar = cual.parentNode;
+				while (eliminar.id != "totaldos") {
+					eliminar = eliminar.parentNode;
+				}
+				var h = $(".totaldos").length;
+				if ($(".totaldos").length <= 20 && $(".totaldos").length > 1) {
+					for (var j = 0; j < $(".totaldos").length; j++) {
+						eliminar.remove();
+					}
+				} else if ($(".totaldos").length <= 1) {
+					alert("No puede eliminar todos los registros");
+				}
+				break;
+			} else {
+			}
 		}
+
 	}
 
 	function addfiletotal() {

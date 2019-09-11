@@ -33,19 +33,19 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.juridicos.tipdoc" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.juridicos.numdoc" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.juridicos.nomcomple" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.juridicos.calidad" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.juridicos.propiedad" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.juridicos.fecdesde" /></label></th>
-							<th><label class="control-label "><spring:theme
+							<th><label class="control-label labeltabletd"><spring:theme
 										code="predial.unificado.juridicos.fechasta" /></label></th>
 						</tr>
 					</thead>
