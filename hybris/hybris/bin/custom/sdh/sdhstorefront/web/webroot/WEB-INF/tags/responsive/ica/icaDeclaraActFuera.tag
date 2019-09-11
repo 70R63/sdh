@@ -35,7 +35,7 @@
 	<br>
 	<form:form action="">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-7">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.actifuera.ciiu" />
 				</label>
@@ -45,7 +45,7 @@
 					<spring:theme code="ica.declaracion.actifuera.municipio" />
 				</label>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.actifuera.ingre" />
 				</label>
@@ -59,13 +59,13 @@
 		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
 			<c:if test="${not empty eachIngreso.codCIIU }">
 				<div class="row actvifuera">
-					<div class="col-md-3">
+					<div class="col-md-7">
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
 
 
-						<select id="" class="new_alto form-control deno codCIIU"
-							style="height: 48px;">
+						<select id="" class="alto form-control deno codCIIU"
+							style="font-size: 11px !important">
 							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value="" />
 							<c:forEach items="${ econActivities}" var="eachActivity">
@@ -94,7 +94,7 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<input class="new_alto form-control ing ingresos" type="text"
 							value="${eachIngreso.ingresos }" />
 					</div>
@@ -113,9 +113,9 @@
 		</c:forEach>
 		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
 		<div class="row actvifuera" id="actvifuera">
-			<div class="col-md-3">
-				<select id="" class="new_alto form-control deno codCIIU"
-					style="height: 48px;">
+			<div class="col-md-7">
+				<select id="" class="alto form-control deno codCIIU"
+					style="font-size: 11px !important">
 					<option value="">SELECCIONAR</option>
 					<c:forEach items="${ econActivities}" var="eachActivity">
 						<option ${selected } value="${eachActivity.code}">${eachActivity.code}
@@ -138,7 +138,7 @@
 					</c:forEach>
 				</select>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<input class="new_alto form-control ing ingresos" type="text"
 					value="" />
 			</div>
