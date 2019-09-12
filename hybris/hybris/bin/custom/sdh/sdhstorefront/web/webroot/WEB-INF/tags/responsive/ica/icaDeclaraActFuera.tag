@@ -68,14 +68,14 @@
 							style="font-size: 11px !important">
 							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value="" />
-							<c:forEach items="${ econActivities}" var="eachActivity">
-								<fmt:formatNumber value="${ eachActivity.code}"
+							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+								<fmt:formatNumber value="${ eachActivity.ciiu}"
 									pattern="#######################" var="eachCodCIIUNumber" />
 								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}">
 									<c:set var="selected" value="selected" />
 								</c:if>
-								<option ${selected } value="${eachActivity.code}">${eachActivity.code}
-									- ${eachActivity.description }</option>
+								<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
+									- ${eachActivity.denominacion }</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -118,9 +118,9 @@
 				<select id="" class="alto form-control deno codCIIU"
 					style="font-size: 11px !important">
 					<option value="">SELECCIONAR</option>
-					<c:forEach items="${ econActivities}" var="eachActivity">
-						<option ${selected } value="${eachActivity.code}">${eachActivity.code}
-							- ${eachActivity.description }</option>
+					<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+						<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
+							- ${eachActivity.denominacion }</option>
 					</c:forEach>
 				</select>
 			</div>

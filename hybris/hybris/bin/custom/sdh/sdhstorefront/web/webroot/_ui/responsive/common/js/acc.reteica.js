@@ -219,7 +219,7 @@ ACC.reteica = {
 	     				$(period00).html("SELECCIONAR");
 	     				$("#reteICAPeriodo").append(period00);
 	     				var currentMonth = new Date().getMonth();
-	     				var bimester = Math.floor(  (currentMonth -1) / 2);
+	     				var bimester = Math.floor(  (currentMonth + 1) / 2);
 	     				
 	     				if(bimester > 0)
 	     				{
