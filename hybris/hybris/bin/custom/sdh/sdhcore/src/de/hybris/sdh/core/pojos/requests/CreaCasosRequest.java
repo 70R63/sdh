@@ -68,24 +68,24 @@ public class CreaCasosRequest
 				stringBuilder.append("{");
 				stringBuilder.append("\"parametros\":");
 				stringBuilder.append("[");
-				if (this.getArchivosInfo() != null)
-				{
-					if (this.getArchivosInfo().getArchivos() != null)
-					{
-						if (this.getArchivosInfo().getArchivos().size() > 0)
-						{
-							//							stringBuilder.append("{");
-							stringBuilder.append(this.preparaArchivos());
-							//							stringBuilder.append("}");
-						}
-					}
-				}
+				//				if (this.getArchivosInfo() != null)
+				//				{
+				//					if (this.getArchivosInfo().getArchivos() != null)
+				//					{
+				//						if (this.getArchivosInfo().getArchivos().size() > 0)
+				//						{
+				//							stringBuilder.append("{");
+				//							stringBuilder.append(this.preparaArchivos());
+				//							stringBuilder.append("}");
+				//						}
+				//					}
+				//				}
 				if (this.getAtributos() != null)
 				{
-					if (this.getArchivosInfo() != null)
-					{
-						stringBuilder.append(",");
-					}
+					//					if (this.getArchivosInfo() != null)
+					//					{
+					//						stringBuilder.append(",");
+					//					}
 					stringBuilder.append(this.preparaAtributos());
 				}
 				stringBuilder.append("]");
@@ -103,6 +103,7 @@ public class CreaCasosRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 		CreaCasosAtribRequest infoAtrib;
 		String valorRetorno = "";
+		int indiceArchivo = 0;
 
 
 		if (this.getAtributos() != null)
@@ -110,11 +111,19 @@ public class CreaCasosRequest
 			for (int i = 0; i < this.getAtributos().size() - 1; i++)
 			{
 				infoAtrib = this.getAtributos().get(i);
+				stringBuilder.append("{");
 				stringBuilder.append(infoAtrib.toString());
+				stringBuilder.append(preparaArchivoIndice(indiceArchivo));
+				indiceArchivo++;
+				stringBuilder.append("}");
 				stringBuilder.append(",");
 			}
 			infoAtrib = this.getAtributos().get(this.getAtributos().size() - 1);
+			stringBuilder.append("{");
 			stringBuilder.append(infoAtrib.toString());
+			stringBuilder.append(preparaArchivoIndice(indiceArchivo));
+			indiceArchivo++;
+			stringBuilder.append("}");
 		}
 
 		if (stringBuilder.toString() != null)
@@ -124,6 +133,51 @@ public class CreaCasosRequest
 
 		return valorRetorno;
 	}
+
+
+	private String preparaArchivoIndice(final int indiceArchivo)
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+		//		CreaCasosArchiRequest infoArchivos;
+		String valorRetorno = "";
+
+
+		if (this.getArchivosInfo() != null && this.getArchivosInfo().getArchivos() != null
+				&& this.getArchivosInfo().getArchivos().size() > 0 && indiceArchivo < this.getArchivosInfo().getArchivos().size())
+		{
+			stringBuilder.append(",");
+			//			stringBuilder.append("{");
+			//				stringBuilder.append("\"linea\":\"" + this.getArchivosInfo().getLinea() + "\",");
+			//				stringBuilder.append("\"identificador\":\"" + this.getArchivosInfo().getIdentificador() + "\",");
+			//				stringBuilder.append("\"valor\":\"" + this.getArchivosInfo().getValor() + "\",");
+
+			stringBuilder.append("\"archivos\":");
+			stringBuilder.append("[");
+			//				infoArchivos = this.getArchivosInfo().getArchivos().get(i);
+
+			//				stringBuilder.append(infoArchivos.toString());
+			stringBuilder.append(this.getArchivosInfo().getArchivos().get(indiceArchivo));
+			stringBuilder.append("]");
+			//			stringBuilder.append("}");
+			//				if (indiceArchivo < this.getArchivosInfo().getArchivos().size() - 1)
+			//				{
+			//					stringBuilder.append(",");
+			//				}
+		}
+		//			infoArchivos = this.getArchivosInfo().getArchivos().get(this.getArchivosInfo().getArchivos().size() - 1);
+
+		//		stringBuilder.append(infoArchivos.toString());
+		//			stringBuilder.append("]");
+		//			stringBuilder.append("}");
+
+		if (stringBuilder.toString() != null)
+		{
+			valorRetorno = stringBuilder.toString();
+		}
+
+		return valorRetorno;
+	}
+
 
 	private String preparaArchivos()
 	{
@@ -138,9 +192,9 @@ public class CreaCasosRequest
 			for (int i = 0; i <= this.getArchivosInfo().getArchivos().size() - 1; i++)
 			{
 				stringBuilder.append("{");
-				stringBuilder.append("\"linea\":\"" + this.getArchivosInfo().getLinea() + "\",");
-				stringBuilder.append("\"identificador\":\"" + this.getArchivosInfo().getIdentificador() + "\",");
-				stringBuilder.append("\"valor\":\"" + this.getArchivosInfo().getValor() + "\",");
+				//				stringBuilder.append("\"linea\":\"" + this.getArchivosInfo().getLinea() + "\",");
+				//				stringBuilder.append("\"identificador\":\"" + this.getArchivosInfo().getIdentificador() + "\",");
+				//				stringBuilder.append("\"valor\":\"" + this.getArchivosInfo().getValor() + "\",");
 
 				stringBuilder.append("\"archivos\":");
 				stringBuilder.append("[");
