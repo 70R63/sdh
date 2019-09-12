@@ -452,7 +452,7 @@ ACC.mirit = {
 	    	        	{
 	    	        		$( "#dialog" ).dialog( "open" );
 	    	            	$("#ritDialogContent").html("");
-	    	            	$("#ritDialogContent").html("Por favor indique una dirección de correo electrónico válida.");
+	    	            	$("#ritDialogContent").html("Escribe una dirección de correo electrónico válida");
 	    	            	return;
 	    	        	}
 		    	        

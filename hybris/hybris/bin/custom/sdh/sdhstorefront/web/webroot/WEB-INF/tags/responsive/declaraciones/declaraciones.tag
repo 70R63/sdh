@@ -11,55 +11,139 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <script>
-function SelectedAnio(selectObject) {
-// 	debugger;
-	var value = selectObject.value;
-	//document.getElementById("Idanio").value = value;
-	var x = document.getElementById('seleccion').value;
-	var tablepredial = document.getElementById('table-predial');
-	var tablevehiculos = document.getElementById('table-vehiculos');
-	var tableica = document.getElementById('table-ica');
-	var tablepublicidad = document.getElementById('table-publicidad');
-	var cdus = document.getElementById('CDU');
-	if (x == '1') {
+	function SelectedAnio(selectObject) {
+		debugger;
+		var value = selectObject.value;
+		//document.getElementById("Idanio").value = value;
+		var x = document.getElementById('seleccion').value;
+		var tablepredial = document.getElementById('table-predial');
+		var tablevehiculos = document.getElementById('table-vehiculos');
+		var tableica = document.getElementById('table-ica');
+		var tablepublicidad = document.getElementById('table-publicidad');
+		var cdus = document.getElementById('CDU');
 
-		tablepredial.style.display = 'block';
-		tablevehiculos.style.display = 'none';
-		tableica.style.display = 'none';
-		tablepublicidad.style.display = 'none';
-		cdus.style.display='none';
+		document.getElementById('periodo').value = '00';
+		if (x == '1') {
 
-	} else if (x == '2') {
+			tablepredial.style.display = 'block';
+			tablevehiculos.style.display = 'none';
+			tableica.style.display = 'none';
+			tablepublicidad.style.display = 'none';
+			cdus.style.display = 'none';
 
-		tablepredial.style.display = 'none';
-		tablevehiculos.style.display = 'block';
-		tableica.style.display = 'none';
-		tablepublicidad.style.display = 'none';
-		cdus.style.display='none';
+		} else if (x == '2') {
 
-	} else if (x == '4') {
-		tablepredial.style.display = 'none';
-		tablevehiculos.style.display = 'none';
-		tableica.style.display = 'none';
-		tablepublicidad.style.display = 'block';
-		cdus.style.display='none';
+			tablepredial.style.display = 'none';
+			tablevehiculos.style.display = 'block';
+			tableica.style.display = 'none';
+			tablepublicidad.style.display = 'none';
+			cdus.style.display = 'none';
 
-	} else if(x=='6'){
-		tablepredial.style.display = 'none';
-		tablevehiculos.style.display = 'none';
-		tableica.style.display = 'none';
-		tablepublicidad.style.display = 'none';
-		cdus.style.display='block';
-	}else {
+		} else if (x == '4') {
+			tablepredial.style.display = 'none';
+			tablevehiculos.style.display = 'none';
+			tableica.style.display = 'none';
+			tablepublicidad.style.display = 'block';
+			cdus.style.display = 'none';
 
-		tablepredial.style.display = 'none';
-		tablevehiculos.style.display = 'none';
-		tableica.style.display = 'none';
-		tablepublicidad.style.display = 'none';
-		cdus.style.display='none';
+		} else if (x == '6') {
+			tablepredial.style.display = 'none';
+			tablevehiculos.style.display = 'none';
+			tableica.style.display = 'none';
+			tablepublicidad.style.display = 'none';
+			cdus.style.display = 'block';
+		} else {
+
+			tablepredial.style.display = 'none';
+			tablevehiculos.style.display = 'none';
+			tableica.style.display = 'none';
+			tablepublicidad.style.display = 'none';
+			cdus.style.display = 'none';
+		}
+
 	}
 
-}
+	function valper(selectObject) {
+		debugger;
+		var per = selectObject.value;
+		var anio = document.getElementById('aniograv').value;
+		var fecha = new Date();
+		var anioact = fecha.getFullYear();
+		var mesact = fecha.getMonth();
+
+		if (anio < anioact) {
+
+		} else {
+			mesact = mesact + 1;
+			if (per < mesact) {
+
+			} else {
+				alert("Por favor, seleccione un mes anterior");
+			}
+
+		}
+
+	}
+
+	function vaperiodo(selectObject) {
+		debugger;
+		var per = selectObject.value;
+		var anio = document.getElementById('aniograv').value;
+		var fecha = new Date();
+		var anioact = fecha.getFullYear();
+		var mesact = fecha.getMonth();
+		var peract = '0';
+		var valor = '0';
+		var perselect = '0';
+
+		if (anio < anioact) {
+
+		} else {
+			if (per == 'B1') {
+				perselect = '1';
+			} else if (per == 'B2') {
+				perselect = '2';
+			} else if (per == 'B3') {
+				perselect = '3';
+			} else if (per == 'B4') {
+				perselect = '4';
+			} else if (per == 'B5') {
+				perselect = '5';
+			} else if(per == 'B6')
+			{
+				perselect = '6';
+			}
+
+			mesact = mesact + 1;
+			if (mesact == '1' || mesact == '2') {
+				peract = 'B1';
+				valor = '1';
+			} else if (mesact == '3' || mesact == '4') {
+				peract = 'B2';
+				valor = '2';
+			} else if (mesact == '5' || mesact == '6') {
+				peract = 'B3';
+				valor = '3';
+			} else if (mesact == '7' || mesact == '8') {
+				peract = 'B4';
+				valor = '4';
+			} else if (mesact == '9' || mesact == '10') {
+				peract = 'B5';
+				valor = '5';
+			} else if (mesact == '11' || mesact == '12') {
+				peract = 'B6';
+				valor = '6';
+			}
+			
+			if(perselect < valor){
+				
+			}else{
+				alert("Seleccione un periodo anterior");
+			}
+
+		}
+
+	}
 </script>
 
 <div class="container_new_page">
@@ -91,7 +175,7 @@ function SelectedAnio(selectObject) {
 						<option value="0005">Sobretasa Motor</option>
 						<option value="0006">Delineación Urbana</option>
 						<option value="0007">Publicidad Exterior Visual</option>
-						<option value="0008">Fondo Unif. Pobres, Azar y Esp</option>						
+						<option value="0008">Fondo Unif. Pobres, Azar y Esp</option>
 					</select>
 				</div>
 			</div>
@@ -106,7 +190,8 @@ function SelectedAnio(selectObject) {
 				</h2>
 				<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
 				<div class="caja--ser-rel color-sr2">
-					<select id="aniograv" class="new_alto form-control" name="aniograv" onchange="SelectedAnio(this)">
+					<select id="aniograv" class="new_alto form-control" name="aniograv"
+						onchange="SelectedAnio(this)">
 						<option value="">Seleccionar</option>
 						<option value="2019">2019</option>
 						<option value="2018">2018</option>
@@ -124,8 +209,9 @@ function SelectedAnio(selectObject) {
 					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 					<div class="caja--ser-rel color-sr3">
 						<select aria-required="true" id="periodo"
-							class="new_alto form-control " name="periodo" required='required'>
-							<option value="">Seleccionar</option>
+							class="new_alto form-control " name="periodo" required='required'
+							onchange="valper(this)">
+							<option value="00">Seleccionar</option>
 							<option value="01">1-Enero</option>
 							<option value="02">2-Febrero</option>
 							<option value="03">3-Marzo</option>
@@ -149,8 +235,9 @@ function SelectedAnio(selectObject) {
 				<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 				<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 				<div class="caja--ser-rel color-sr3">
-					<select id="periodo" class="new_alto form-control " name="periodo">
-						<option value="">Seleccionar</option>
+					<select id="periodo" class="new_alto form-control " name="periodo"
+						onchange="vaperiodo(this)">
+						<option value="00">Seleccionar</option>
 						<option value="B1">1 - Ene / Feb</option>
 						<option value="B2">2 - Mar / Abr</option>
 						<option value="B3">3 - May / Jun</option>
@@ -324,7 +411,8 @@ function SelectedAnio(selectObject) {
 						<spring:theme code="certideclara.inicial.cancelar" />
 					</button>
 
-					<button type="submit" class="btn btn-primary btn-lg !important consultaDecPDF"
+					<button type="submit"
+						class="btn btn-primary btn-lg !important consultaDecPDF"
 						id="generarPDFButton" name="generarPDFButton"
 						style="margin-top: 3px" onclick="">
 						<spring:theme code="certideclara.inicial.generar" />
@@ -336,7 +424,8 @@ function SelectedAnio(selectObject) {
 
 
 
-		<div class="col-md-9 col-md-offset-1 boder_section_cdu CDU" id="CDU" style="display:none">
+		<div class="col-md-9 col-md-offset-1 boder_section_cdu CDU" id="CDU"
+			style="display: none">
 			<br> <br>
 			<div class="row">
 				<div class="col-md-3">
@@ -382,17 +471,13 @@ function SelectedAnio(selectObject) {
 						</select>
 					</div>
 					<div class="col-sm-3">
-						<button type="button" class="btn-link"
-							onClick="">
+						<button type="button" class="btn-link" onClick="">
 							<spring:theme code="delineacion.urbana.radicados.declaracion.pdf" />
 						</button>
-						<br>
-						<br>
-						<br>
+						<br> <br> <br>
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 				<div class="row" id="" style="display: none">
 
 					<div class="row">
@@ -421,10 +506,10 @@ function SelectedAnio(selectObject) {
 
 	<br> <br>
 
-<!-- 	<button type="button" class="btn btn-primary btn-lg" id="regresar" -->
-<!-- 		onclick="reiniciaCertificaPublicidad()"> -->
-<%-- 		<spring:theme code="certificacion.inicial.regresar" /> --%>
-<!-- 	</button> -->
+	<!-- 	<button type="button" class="btn btn-primary btn-lg" id="regresar" -->
+	<!-- 		onclick="reiniciaCertificaPublicidad()"> -->
+	<%-- 		<spring:theme code="certificacion.inicial.regresar" /> --%>
+	<!-- 	</button> -->
 
 
 
@@ -480,19 +565,19 @@ function SelectedAnio(selectObject) {
 
 
 <script type="text/javascript">
-	
-	document.getElementById("btnCancelar").addEventListener("click", function(){
-		location = self.location;
-	});
-	
+	document.getElementById("btnCancelar").addEventListener("click",
+			function() {
+				location = self.location;
+			});
+
 	function Selected(selectObject) {
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;
 		var idAnio = document.getElementById('idAnio');
 		var idPeriodo = document.getElementById('idPeriodo');
-		
+
 		var idPeriodo = document.getElementById('idPeriodo');
-		
+
 		if (value == '1' || value == '2' || value == '4') {
 
 			idAnio.style.display = 'block';
@@ -500,20 +585,15 @@ function SelectedAnio(selectObject) {
 			;
 			document.getElementById("Idper").value = '';
 
-		}else if (value == '5' || value == '6' || value == '3') {
+		} else if (value == '5' || value == '6' || value == '3') {
 			idAnio.style.display = 'block';
 			idPeriodo.style.display = 'block';
 		} else {
 
 			idAnio.style.display = 'none';
-		
 
 		}
 	}
-
-
-
-
 
 	function SelectSobreDeli(selectObject) {
 		var value = selectObject.value;
@@ -530,49 +610,47 @@ function SelectedAnio(selectObject) {
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
 
-		} else if(x == '3'){
+		} else if (x == '3') {
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'block';
 			tablepublicidad.style.display = 'none';
-			
-		}	else {
+
+		} else {
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'none';
 		}
 	}
-	
-	
-	function reiniciaCertificaPublicidad(){
+
+	function reiniciaCertificaPublicidad() {
 		debugger;
 		impuesto = document.getElementById("tipoimp");
 		impuesto.value = "";
-		
+
 		form = document.getElementById("form_pdf");
 		form.submit();
 	}
-	
-// 	<!-- se agrega control para tablas de delineación
 
-		function ShowSelected(selectObject) {
-			var value = selectObject.value;
-			var idLic = document.getElementById('selectiplic');
-			var idrad = document.getElementById('idRadicados');
-			if (value == '1') {
-				idLic.disabled = false;
-				idLic.selectedIndex = "";
-				idrad.style.display = 'none';
-			} else if (value == '2') {
-				idLic.disabled = true;
-				idLic.selectedIndex = "1";
-				idrad.style.display = 'block';
-			} else {
-				idrad.style.display = 'none';
-			}
-		} 
-		
+	// 	<!-- se agrega control para tablas de delineación
+
+	function ShowSelected(selectObject) {
+		var value = selectObject.value;
+		var idLic = document.getElementById('selectiplic');
+		var idrad = document.getElementById('idRadicados');
+		if (value == '1') {
+			idLic.disabled = false;
+			idLic.selectedIndex = "";
+			idrad.style.display = 'none';
+		} else if (value == '2') {
+			idLic.disabled = true;
+			idLic.selectedIndex = "1";
+			idrad.style.display = 'block';
+		} else {
+			idrad.style.display = 'none';
+		}
+	}
 </script>
 
 <!-- se agrega control para tablas de delineación -->
@@ -602,48 +680,48 @@ function SelectedAnio(selectObject) {
 
 <script type="text/javascript">
 	function cargaInputDelineacion(cdu_retencion) {
-		
+
 		debugger;
-		
+
 		var valores = cdu_retencion.split('_');
-		var selectedCDU = document.querySelector('#inputDelineacion\\.selectedCDU');
-		var selectedRadicado = document.querySelector('#inputDelineacion\\.selectedRadicado');
-		var selectedTipoLicencia = document.querySelector('#inputDelineacion\\.selectedTipoLicencia');
-		
+		var selectedCDU = document
+				.querySelector('#inputDelineacion\\.selectedCDU');
+		var selectedRadicado = document
+				.querySelector('#inputDelineacion\\.selectedRadicado');
+		var selectedTipoLicencia = document
+				.querySelector('#inputDelineacion\\.selectedTipoLicencia');
+
 		form = document.getElementById("form_pdf");
-		
+
 		selectedCDU.value = valores[0];
-		
-		if (valores[1].length != 0)
-		{
+
+		if (valores[1].length != 0) {
 			selectedRadicado.value = valores[1];
 			selectedTipoLicencia.value = "retencion"
-		}
-		else{
+		} else {
 			selectedRadicado.value = "";
 			selectedTipoLicencia.value = "declaracion"
-		} 
-		
+		}
+
 		form.submit();
 	}
-	
-	function onChange(selectObject){
-// 		debugger;
+
+	function onChange(selectObject) {
+		// 		debugger;
 		var impuesto = selectObject.value;
 		var per = document.getElementById('Periodo1');
 		var per2 = document.getElementById('Periodo2');
-		
-		if(impuesto == '0005'){
-			per.style.display='block';
-			per2.style.display='none';
-		}else if (impuesto == '0004'){
-			per2.style.display='block';
-			per.style.display='none';
-					
-			
-		}else{
-			per.style.display='none';
-			per2.style.display='none';
+
+		if (impuesto == '0005') {
+			per.style.display = 'block';
+			per2.style.display = 'none';
+		} else if (impuesto == '0004') {
+			per2.style.display = 'block';
+			per.style.display = 'none';
+
+		} else {
+			per.style.display = 'none';
+			per2.style.display = 'none';
 		}
 	}
 </script>
