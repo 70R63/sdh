@@ -13,61 +13,11 @@ import java.util.List;
 public class CreaCasosArchiInfoRequest
 {
 
-	private String linea;
-	private String identificador;
-	private String valor;
+	//	private String linea;
+	//	private String identificador;
+	//	private String valor;
 	private List<CreaCasosArchiRequest> archivos;
 
-	/**
-	 * @return the linea
-	 */
-	public String getLinea()
-	{
-		return linea;
-	}
-
-	/**
-	 * @param linea
-	 *           the linea to set
-	 */
-	public void setLinea(final String linea)
-	{
-		this.linea = linea;
-	}
-
-	/**
-	 * @return the identificador
-	 */
-	public String getIdentificador()
-	{
-		return identificador;
-	}
-
-	/**
-	 * @param identificador
-	 *           the identificador to set
-	 */
-	public void setIdentificador(final String identificador)
-	{
-		this.identificador = identificador;
-	}
-
-	/**
-	 * @return the valor
-	 */
-	public String getValor()
-	{
-		return valor;
-	}
-
-	/**
-	 * @param valor
-	 *           the valor to set
-	 */
-	public void setValor(final String valor)
-	{
-		this.valor = valor;
-	}
 
 	/**
 	 * @return the archivos
@@ -88,15 +38,16 @@ public class CreaCasosArchiInfoRequest
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "CreaCasosArchiInfoRequest [linea=" + linea + ", identificador=" + identificador + ", valor=" + valor + ", archivos="
-				+ archivos + "]";
+		return "CreaCasosArchiInfoRequest [archivos=" + archivos + "]";
 	}
+
+
 
 
 }

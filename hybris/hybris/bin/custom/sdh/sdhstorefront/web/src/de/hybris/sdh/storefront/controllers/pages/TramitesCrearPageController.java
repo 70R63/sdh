@@ -456,9 +456,9 @@ public class TramitesCrearPageController extends AbstractPageController
 						archivos.add(archivoCarga);
 					}
 					archivosInfo = new CreaCasosArchiInfoRequest();
-					archivosInfo.setLinea("String 1");
-					archivosInfo.setIdentificador("PROCESS_TYPE");
-					archivosInfo.setValor(elementoSeleccionado.getProcessID());
+					//					archivosInfo.setLinea("String 1");
+					//					archivosInfo.setIdentificador("PROCESS_TYPE");
+					//					archivosInfo.setValor(elementoSeleccionado.getProcessID());
 					archivosInfo.setArchivos(archivos);
 				}
 

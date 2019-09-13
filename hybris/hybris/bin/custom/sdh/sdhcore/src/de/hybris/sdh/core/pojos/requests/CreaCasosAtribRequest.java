@@ -101,11 +101,11 @@ public class CreaCasosAtribRequest
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 
-		stringBuilder.append("{");
+		//		stringBuilder.append("{");
 		stringBuilder.append("\"linea\":\"" + this.getLinea() + "\",");
 		stringBuilder.append("\"identificador\":\"" + this.getIdentificador() + "\",");
 		stringBuilder.append("\"valor\":\"" + this.getValor() + "\"");
-		stringBuilder.append("}");
+		//		stringBuilder.append("}");
 
 
 		return stringBuilder.toString();
