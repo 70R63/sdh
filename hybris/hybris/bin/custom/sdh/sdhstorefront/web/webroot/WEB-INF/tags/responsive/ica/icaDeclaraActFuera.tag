@@ -135,7 +135,9 @@
 						<c:set var="selected" value="" />
 					</c:if>
 					<c:forEach items="${cities}" var="eachCity">
-						<option value="${ eachCity.code}">${eachCity.name}</option>
+						<c:if test="${eachCity.code ne '000000011001'}">
+							<option value="${ eachCity.code}">${eachCity.name}</option>
+						</c:if>	
 					</c:forEach>
 				</select>
 			</div>

@@ -19,8 +19,10 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totinord" /></label> <input disabled id="totalIngrPeriodo"
-						name="totalIngrPeriodo" class="etiqlargas form-control text-right !important" type="text" value="${infoDeclara.totalIngrPeriodo }" maxlength="240"></input>
+							code="ica.declaracion.liquidacion.totinord" /></label> 
+						<input
+						disabled id="totalingPeriodo" name="totalIngrPeriodo" class="etiqlargas form-control text-right !important" disabled type="text"
+						value="${infoDeclara.totalIngrPeriodo }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
