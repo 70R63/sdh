@@ -670,6 +670,14 @@
 
 	<bean name="sdhCalPublicidad2Service" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcPublicidad2Service" />
 	<bean name="sdhCalGasolina2Service" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcGasolina2Service" />
+	
+	<bean name="sdhObligacionesPublicidadService" class="de.hybris.sdh.core.services.impl.DefaultSDHObligacionesPublicidadService" />
+	
+	<bean name="sdhObligacionesGasolinaService" class="de.hybris.sdh.core.services.impl.DefaultSDHObligacionesGasolinaService" />
+	
+	<bean name="sdhObligacionesICAService" class="de.hybris.sdh.core.services.impl.DefaultSDHObligacionesICAService" />
+	
+	<bean name="sdhObligacionesDeliService" class="de.hybris.sdh.core.services.impl.DefaultSDHObligacionesDeliService" />
 
 
 
