@@ -28,4 +28,6 @@ public interface SDHCustomerFacade
 
 	CustomerData getRepresentadoDataFromSAP(String numBP);
 
+	void updateCustomerTaxRestrictions();
+
 }

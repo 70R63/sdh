@@ -20,12 +20,14 @@ import de.hybris.platform.commerceservices.event.ForgottenPwdEvent;
 import de.hybris.platform.commerceservices.security.SecureToken;
 import de.hybris.platform.core.model.security.PrincipalGroupModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserGroupModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.servicelayer.user.daos.UserGroupDao;
 import de.hybris.sdh.core.event.SDHRegistrationEvent;
 import de.hybris.sdh.core.exceptions.SameOldPasswordException;
 import de.hybris.sdh.core.model.SDHAddressModel;
@@ -54,22 +56,18 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+//import de.hybris.sdh.core.services.;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
 import de.hybris.sdh.core.services.SDHSendEmailService;
 import de.hybris.sdh.core.services.SDHUpdateCustomerCommPrefsService;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.xml.rpc.holders.StringHolder;
@@ -94,7 +92,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 
 	@Resource(name = "sdhConsultaContribuyenteBPService")
-	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+    SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	@Resource(name = "flexibleSearchService")
 	private FlexibleSearchService flexibleSearchService;
@@ -113,6 +111,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	@Resource(name = "sdhSendEmailService")
 	private SDHSendEmailService sdhSendEmailService;
+
+	@Resource(name = "userGroupDao")
+	private UserGroupDao userGroupDao;
 
 	/*
 	 * (non-Javadoc)
@@ -1327,6 +1328,66 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 
 	}
 
+	@Override
+	public void updateCustomerTaxRestrictions() {
+		LOG.info("Updating SDH Customer Tax Menu Restrictions");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		SDHValidaMailRolResponse sdhConsultaContribuyenteBPRespons = null;
+		String response = null;
+
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
+		try {
+			sdhConsultaContribuyenteBPRespons = mapper.readValue(response, SDHValidaMailRolResponse.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+		Set<PrincipalGroupModel> newGroupList = new HashSet<>();
+		for(PrincipalGroupModel group : groupList){
+			String groupUid = group.getUid();
+			if(!groupUid.contains("UsrTaxGrp")){
+				newGroupList.add(group);
+			}
+		}
+
+		if(Objects.nonNull(sdhConsultaContribuyenteBPRespons)){
+			if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getGasolina())){
+				addUsrGrpModelToList("gasolinaUsrTaxGrp" , newGroupList);
+            }
+            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getPublicidadExt())){
+				addUsrGrpModelToList("publicidadExtUsrTaxGrp" , newGroupList);
+            }
+            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getDelineacion())){
+				addUsrGrpModelToList("delineacionUsrTaxGrp" , newGroupList);
+            }
+            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getIca())){
+				addUsrGrpModelToList("ICAUsrTaxGrp" , newGroupList);
+            }
+            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getReteIca())){
+				addUsrGrpModelToList("reteICAUsrTaxGrp" , newGroupList);
+            }
+            if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getVehicular())){
+				addUsrGrpModelToList("vehicularUsrTaxGrp" , newGroupList);
+            }
+		}
+
+		customerModel.setGroups(newGroupList);
+		modelService.saveAll(customerModel);
+	}
+
+	private void addUsrGrpModelToList(String UserGroupUid, Set<PrincipalGroupModel> newGroupList){
+		UserGroupModel usrGrpModel = null;
+		usrGrpModel = userGroupDao.findUserGroupByUid(UserGroupUid);
+		if(Objects.nonNull(usrGrpModel)){
+			LOG.info("Added user tax group restriction: " + usrGrpModel.getUid());
+			newGroupList.add(usrGrpModel);
+		}
+	}
 
 
 }
