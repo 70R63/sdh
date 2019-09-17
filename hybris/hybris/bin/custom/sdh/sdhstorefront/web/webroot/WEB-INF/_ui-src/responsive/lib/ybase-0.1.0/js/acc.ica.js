@@ -1,6 +1,6 @@
 ACC.ica = {
 
-	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones"],
+	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones", "bindCalendarICA"],
 	 
 	 bindDeleteDeducciones: function(){
 		 $(document).on("click", ".delededucciones", function (e) {
@@ -548,7 +548,15 @@ ACC.ica = {
 	 },
 	 
 	    
-    
+    bindCalendarICA: function(){
+		$(".anoGravableICA").datepicker({
+		      changeMonth: true,
+		      changeYear: true,
+		      yearRange: "-200:+0",
+		    });
+		
+		$(".anoGravableICA").datepicker( $.datepicker.regional[ "es" ] );
+	},
     
     
 	    bindDialogICA: function(){
