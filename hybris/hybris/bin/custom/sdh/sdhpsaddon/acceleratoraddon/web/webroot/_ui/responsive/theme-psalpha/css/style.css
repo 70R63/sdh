@@ -25007,6 +25007,13 @@ span.pasos {
   min-width: 30% !important;
   max-width: 192px !important;
 }
+.new_alto_anio {
+  height: 25px !important;
+  min-height: 20px !important;
+  padding: 1px !important;
+  min-width: 30% !important;
+  max-width: 192px !important;
+}
 .btn {
   font-size: 14px !important;
 }
