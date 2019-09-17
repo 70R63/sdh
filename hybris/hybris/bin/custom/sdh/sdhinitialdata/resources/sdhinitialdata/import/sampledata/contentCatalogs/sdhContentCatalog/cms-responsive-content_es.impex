@@ -174,7 +174,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 
 #->INI dev-eduardo Agregar submenu DECLARACION 04/01/2019
 ;;PresentarDeclaracionLink;"Generar declaración";"Haga clic aquí para acceder a la opción de menú Generar declaración"
-;;ListaDeclaracionFirmaLink;"Lista de declaraciones a firmar";"Haga clic aquí para acceder a la opción de menú Lista de declaraciones a firmar"
+#;;ListaDeclaracionFirmaLink;"Lista de declaraciones a firmar";"Haga clic aquí para acceder a la opción de menú Lista de declaraciones a firmar"
 #->FIN dev-eduardo Agregar submenu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGO 04/01/2019
@@ -184,7 +184,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 ;;CertPagoLink;"Certificaciones de pago";"Haga clic aquí para acceder a la opción de menú Certificaciones de pago"
-;;ObligacionesPendLink;"Obligaciones";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
+;;ObligacionesPendLink;"Obligaciones Pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
 ;;RelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
 ;;EdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
 ;;CertDeclaraLink;"Certificaciones de declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
