@@ -192,7 +192,7 @@ INSERT_UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true]			;res
                                 ;						;PublicidadExteriorLink		;publicidadExtUsrTaxGrpRtn
                                 ;						;SobreVehiAutomotoresLink	;vehicularUsrTaxGrpRtn
                                 ;						;SobreTasaGasolinaLink		;gasolinaUsrTaxGrpRtn
- 
+
 
 
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); product(code,$productCV);target(code)[default = 'sameWindow'];;
