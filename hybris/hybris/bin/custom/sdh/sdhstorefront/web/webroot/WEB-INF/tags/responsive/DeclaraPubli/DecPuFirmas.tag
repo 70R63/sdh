@@ -21,23 +21,6 @@
 				</h2>
 			</div>
 
-			<%-- 			<form:form action=""> --%>
-			<div class="row margin-bottom-4" style="margin-top: 18px">
-				<div class="col-md-3" style="margin-top: 18px">
-					<div class="form-check">
-						<label class="form-check-label"
-							style="text-transform: none; font-size: 14px; font-weight: 400;">
-							<input type="checkbox" name="regimen" id="selectobligado"
-							class="form-check-input mr-2"
-							style="visibility: visible !important; min-height: 4px !important; margin-left: 12px;"
-							onclick="habradio()"> <spring:theme
-								code="ica.declaracion.firma.obligado" />
-						</label>
-					</div>
-				</div>
-			</div>
-
-
 		<c:choose>
 			<c:when test="${ empty firmantesActuales }" >
 

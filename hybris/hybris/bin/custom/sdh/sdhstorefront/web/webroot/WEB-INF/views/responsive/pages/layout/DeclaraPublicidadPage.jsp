@@ -1,6 +1,7 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
+<%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
@@ -19,7 +20,7 @@
 				<DeclaraPubli:DecPuGeneral />
 				<DeclaraPubli:DecPuInfoValla />
 				<DeclaraPubli:DecPuTotalPag />
-				<DeclaraPubli:DecPuFirmas />
+				<firmas:generalFirmas />
 			</form:form>
 			<DeclaraPubli:DecPuPago />
 <!-- 		</div> -->

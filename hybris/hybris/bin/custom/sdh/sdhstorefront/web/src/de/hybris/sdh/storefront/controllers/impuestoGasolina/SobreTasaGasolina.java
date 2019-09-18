@@ -502,6 +502,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		String mensajeError = "";
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData);
 
 
