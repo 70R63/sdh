@@ -87,7 +87,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ; ;MiRITLink; MI RIT LINK    ; "/contribuyentes/mirit" ;;;;;
-; ;MiBuzonLink; MI BUZON LINK    ; "/contribuyentes/mibuzontributario/inicial" ;;;;;
+; ;MiBuzonLink; MI BUZON LINK    ; /contribuyentes/mibuzon_tributario" ;;;;;
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "#" ;;;;;
 ; ;TramitesLink; TRAMITES LINK    ; "/contibuyentes/tramites" ;;;;;
 ; ;FacturacionLink; FACTURACION LINK    ; "#" ;;;;;
@@ -394,7 +394,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
-;MiBuzonNavigationServiceRequestsNavNodeMenu;;Mi Buzon Service Requests Menu;MiBuzonNavigationServiceRequestsNavNodeMenu #borrar
+;MiBuzonNavigationServiceRequestsNavNodeMenu;;Mi Buzon Service Requests Menu;MiBuzonNavigationServiceRequestsNavNodeMenu
 #->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
@@ -1731,31 +1731,6 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 
 #->FIN dev-maria Agregar paginas para impuesto predial unificado impex detalle 14/02/2019
 
-#->INI dev-maria Agregar paginas para mi buzón tributario 19/02/2019
-$contentCatalog=sdhContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
-
-INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;miBuzonPage 		;Mi buzon	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mibuzontributario/inicial
-
-
-###### SDH - UPDATE EXAMPLE FORM START ######
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='miBuzonPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
-								;						;SideContent-miBuzonPage 	;SideContent			;																	;SideContent-miBuzonPage				;;;
-								;						;BodyContent-miBuzonPage 	;BodyContent			;																	;BodyContent-miBuzonPage				;;;
-
-
-
-INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-miBuzonPage 	;Side Content Slot for Mi Buzon	;true	;								;;;
-							;							;BodyContent-miBuzonPage	;Body Content Slot for Mi buzon	;true	;miBuzonPageComponent		;;;
-
-
-INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;miBuzonPageComponent	;miBuzonPage Component	;/WEB-INF/views/responsive/pages/layout/miBuzonPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;miBuzonPageComponent
-
-#->FIN dev-maria Agregar paginas para mi buzón tributario 19/02/2019
 
 #->INI dev-maria Agregar paginas para Reportantes 19/02/2019
 ###INICIAL
@@ -2622,3 +2597,29 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;declaracionesPageComponent	;declaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/declaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;declaracionesPageComponent					
 #->FIN dev-maria Agregar paginas para declaraciones
+
+#->INI dev-maria Agregar paginas para mi buzón tributario 18/09/2019
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;buzonPage 		; buzon	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mibuzon_tributario
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='buzonPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-buzonPage 	;SideContent			;																	;SideContent-buzonPage				;;;
+								;						;BodyContent-buzonPage 	;BodyContent			;																	;BodyContent-buzonPage				;;;
+
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-buzonPage 	;Side Content Slot for  Buzon	;true	;								;;;
+							;							;BodyContent-buzonPage	;Body Content Slot for  buzon	;true	;buzonPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;buzonPageComponent	;buzonPage Component	;/WEB-INF/views/responsive/pages/layout/buzonPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;buzonPageComponent
+
+#->FIN dev-maria Agregar paginas para mi buzón tributario 18/09/2019
