@@ -25,7 +25,7 @@
 	<br>
 	<form:form action="">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.deducciones.deduccion" />
 				</label>
@@ -40,8 +40,8 @@
 		<fmt:parseNumber var="actnosubPA" type = "number" value = "${fn:trim(infoDeclara.deducciones.actnosubPA)}" />
 		<c:if test="${ actnosubPA != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important">
 						<option value="actnosubPA">1.- Actividad no sujeta por la producción Primaria Agricola</option>
 					</select>
 				</div>
@@ -62,8 +62,8 @@
 		<fmt:parseNumber var="enajActFijo" type = "number" value = "${fn:trim(infoDeclara.deducciones.enajActFijo)}" />
 		<c:if test="${ enajActFijo != 0  }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style=" text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important">
 						<option value="enajActFijo">2.- Enajenación de Activo Fijos</option>
 					</select>
 				</div>
@@ -84,8 +84,8 @@
 		<fmt:parseNumber var="exportBienes" type = "number" value = "${fn:trim(infoDeclara.deducciones.exportBienes)}" />
 		<c:if test="${ exportBienes != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style=" text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="exportBienes">3.- Exportación de bienes</option>
 					</select>
 				</div>
@@ -106,8 +106,8 @@
 		<fmt:parseNumber var="exportServ" type = "number" value = "${fn:trim(infoDeclara.deducciones.exportServ)}" />
 		<c:if test="${ exportServ != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style=" text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="exportServ">4.- Exportación de Servicios</option>
 					</select>
 				</div>
@@ -128,8 +128,8 @@
 		<fmt:parseNumber var="actnosub39" type = "number" value = "${fn:trim(infoDeclara.deducciones.actnosub39)}" />
 		<c:if test="${ actnosub39 != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style=" text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="actnosub39">5.- Actividad no sujeta Art. 39 Decreto 352 de 2002</option>
 					</select>
 				</div>
@@ -151,8 +151,8 @@
 		<fmt:parseNumber var="actnosubPH" type = "number" value = "${fn:trim(infoDeclara.deducciones.actnosubPH)}" />
 		<c:if test="${ actnosubPH != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style=" text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="actnosubPH">6.- Actividades no sujetas propias de obj.soc. de prop.horiz.</option>
 					</select>
 				</div>
@@ -173,8 +173,8 @@
 		<fmt:parseNumber var="juegoSuerteAzar" type = "number" value = "${fn:trim(infoDeclara.deducciones.juegoSuerteAzar)}" />
 		<c:if test="${ juegoSuerteAzar != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style=" text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="juegoSuerteAzar">7.- Explotación de los juegos de suerte y azar (Ley 643 de 2001)</option>
 					</select>
 				</div>
@@ -196,8 +196,8 @@
 		<fmt:parseNumber var="donaciones" type = "number" value = "${fn:trim(infoDeclara.deducciones.donaciones)}" />
 		<c:if test="${ donaciones != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style=" text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="donaciones">8.- Donaciones</option>
 					</select>
 				</div>
@@ -219,8 +219,8 @@
 		<fmt:parseNumber var="exenActos" type = "number" value = "${fn:trim(infoDeclara.deducciones.exenActos)}" />
 		<c:if test="${ exenActos != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="exenActos">9.- Exen.consec.de actos terroristas o catástrofes naturales</option>
 					</select>
 				</div>
@@ -242,8 +242,8 @@
 		<fmt:parseNumber var="baseGravEsp" type = "number" value = "${fn:trim(infoDeclara.deducciones.baseGravEsp)}" />
 		<c:if test="${ baseGravEsp != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="baseGravEsp">10.- Base gravable especial</option>
 					</select>
 				</div>
@@ -265,8 +265,8 @@
 		<fmt:parseNumber var="ingrActConsorc" type = "number" value = "${fn:trim(infoDeclara.deducciones.ingrActConsorc)}" />
 		<c:if test="${ ingrActConsorc != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="ingrActConsorc">11.- Ingresos por actividades realizadas a través de Consorcios</option>
 					</select>
 				</div>
@@ -288,8 +288,8 @@
 		<fmt:parseNumber var="diviNOGiroOrd" type = "number" value = "${fn:trim(infoDeclara.deducciones.diviNOGiroOrd)}" />
 		<c:if test="${ diviNOGiroOrd != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="diviNOGiroOrd">12.- Dividendos que no hacen parte del giro ordinario del negocio</option>
 					</select>
 				</div>
@@ -311,8 +311,8 @@
 		<fmt:parseNumber var="exenVictima" type = "number" value = "${fn:trim(infoDeclara.deducciones.exenVictima)}" />
 		<c:if test="${ exenVictima != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="exenVictima">13.- Exención víctima del secuestro o de la desaparición forzada</option>
 					</select>
 				</div>
@@ -334,8 +334,8 @@
 		<fmt:parseNumber var="correcMoneda" type = "number" value = "${fn:trim(infoDeclara.deducciones.correcMoneda)}" />
 		<c:if test="${ correcMoneda != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="correcMoneda">14.- Corrección monetaria y/o Diferencia en cambio</option>
 					</select>
 				</div>
@@ -360,8 +360,8 @@
 		<fmt:parseNumber var="reintegro" type = "number" value = "${fn:trim(infoDeclara.deducciones.reintegro)}" />
 		<c:if test="${ reintegro != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="reintegro">15.- Reintegro de costos y gastos</option>
 					</select>
 				</div>
@@ -386,8 +386,8 @@
 		<fmt:parseNumber var="salarios" type = "number" value = "${fn:trim(infoDeclara.deducciones.salarios)}" />
 		<c:if test="${ salarios != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="salarios">16.- Salarios</option>
 					</select>
 				</div>
@@ -412,8 +412,8 @@
 		<fmt:parseNumber var="devoluciones" type = "number" value = "${fn:trim(infoDeclara.deducciones.devoluciones)}" />
 		<c:if test="${ devoluciones != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="devoluciones">17.- Devoluciones</option>
 					</select>
 				</div>
@@ -434,8 +434,8 @@
 		<fmt:parseNumber var="rebajas" type = "number" value = "${fn:trim(infoDeclara.deducciones.rebajas)}" />
 		<c:if test="${ rebajas != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="rebajas">18.- Rebajas</option>
 					</select>
 				</div>
@@ -456,8 +456,8 @@
 		<fmt:parseNumber var="descuentos" type = "number" value = "${fn:trim(infoDeclara.deducciones.descuentos)}" />
 		<c:if test="${ descuentos != 0 }">
 			<div class="row deducciones">
-				<div class="col-md-4">
-					<select id="" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+				<div class="col-md-6">
+					<select id="" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 						<option value="descuentos">19.- Descuentos</option>
 					</select>
 				</div>
@@ -477,8 +477,8 @@
 		
 			
 		<div class="row deducciones"> 
-			<div class="col-md-4">
-				<select id="deduccionBase" class="new_alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 14px !important">
+			<div class="col-md-6">
+				<select id="deduccionBase" class="alto form-control deducci" style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
 					<option value="">Seleccionar</option>
 					<option value="actnosubPA">1.- Actividad no sujeta por la producción Primaria Agricola</option>
 					<option value="enajActFijo">2.- Enajenación de Activo Fijos</option>

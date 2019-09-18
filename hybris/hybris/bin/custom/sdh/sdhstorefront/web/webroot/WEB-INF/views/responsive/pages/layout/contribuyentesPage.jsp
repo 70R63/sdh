@@ -6,12 +6,10 @@
 
 
 
-
 <template:page pageTitle="${pageTitle}">
 
 	<cms:pageSlot position="YFormSlot" var="feature">
 		<cms:component component="${feature}" />
-
 	</cms:pageSlot>
 
 

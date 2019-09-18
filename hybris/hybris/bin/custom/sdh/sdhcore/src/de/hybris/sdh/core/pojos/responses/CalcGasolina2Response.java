@@ -24,6 +24,8 @@ public class CalcGasolina2Response
 	private String vlr_sobrestasa;
 	private String vlr_sanc_pagos;
 	private String interes_mora;
+	private String menosCompensa;
+	private String totalPagar;
 
 	private List<DetGasInfoDeclaraResponse> info_declara;
 
@@ -126,4 +128,40 @@ public class CalcGasolina2Response
 	public void setFirmantes(final List<FirmanteResponse> firmantes) {
 		this.firmantes = firmantes;
 	}
+
+	/**
+	 * @return the menosCompensa
+	 */
+	public String getMenosCompensa()
+	{
+		return menosCompensa;
+	}
+
+	/**
+	 * @param menosCompensa
+	 *           the menosCompensa to set
+	 */
+	public void setMenosCompensa(final String menosCompensa)
+	{
+		this.menosCompensa = menosCompensa;
+	}
+
+	/**
+	 * @return the totalPagar
+	 */
+	public String getTotalPagar()
+	{
+		return totalPagar;
+	}
+
+	/**
+	 * @param totalPagar
+	 *           the totalPagar to set
+	 */
+	public void setTotalPagar(final String totalPagar)
+	{
+		this.totalPagar = totalPagar;
+	}
+
+
 }

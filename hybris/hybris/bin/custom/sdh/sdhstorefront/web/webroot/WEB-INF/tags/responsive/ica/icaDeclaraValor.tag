@@ -89,7 +89,7 @@
 		<c:if test="${empty infoDeclara.valorRetenido}">
 			<div class="row valor" id="valor">
 				<div class="col-md-1">
-					<input class="new_alto form-control anio anoGravable" type="text"
+					<input class=" new_alto_anio form-control anio anoGravable " type="date"
 						value="${infoDeclara.anoGravable }" />
 				</div>
 				<div class="col-md-2">
@@ -158,7 +158,7 @@
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
 			<div class="row valor" id="valor">
 				<div class="col-md-1">
-					<input class="new_alto form-control anio anoGravable" type="text"
+					<input class="new_alto_anio form-control anio anoGravable " type="date"
 						value="${eachValor.anoGravable }" />
 				</div>
 				<div class="col-md-2">
@@ -300,6 +300,9 @@
 					"")
 			$($(".valor")[0]).parent().children().last().find(".valtotal").val(
 					"")
+					
+					
+						
 
 		} else {
 			alert("No se pueden agregar más registros");

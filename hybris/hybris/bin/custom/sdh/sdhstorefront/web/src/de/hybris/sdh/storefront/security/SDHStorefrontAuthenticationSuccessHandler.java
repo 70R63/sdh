@@ -48,6 +48,7 @@ public class SDHStorefrontAuthenticationSuccessHandler extends StorefrontAuthent
 		super.onAuthenticationSuccess(request, response, authentication);
 
 		sdhCustomerFacade.updateMiRitInfo();
+		sdhCustomerFacade.updateCustomerTaxRestrictions();
 
 	}
 }

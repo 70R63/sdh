@@ -13,6 +13,7 @@
 <div id="idtodos" style="display: block;">
 	<obligaciones:obliPendientesTodo />
 </div>
+
 	
 	
 <script>

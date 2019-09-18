@@ -993,8 +993,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			valoresDeclara.setVlrSancPagos(calcGasolina2Response.getVlr_sanc_pagos());
 			valoresDeclara.setInteresMora(calcGasolina2Response.getInteres_mora());
 			valoresDeclara.setVlrSobretasa(calcGasolina2Response.getVlr_sobrestasa());
-			valoresDeclara.setMenosCompensa(""); //FALTA EN WS
-			valoresDeclara.setTotalPagar(""); //FALTA EN WS
+			valoresDeclara.setMenosCompensa(calcGasolina2Response.getMenosCompensa());
+			valoresDeclara.setTotalPagar(calcGasolina2Response.getTotalPagar());
 
 			dataForm.setAnoGravable(calcGasolina2Response.getAnio_gravable());
 			dataForm.setPeriodo(calcGasolina2Response.getPeriodo());

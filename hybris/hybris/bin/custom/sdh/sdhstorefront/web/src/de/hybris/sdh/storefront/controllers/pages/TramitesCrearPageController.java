@@ -456,9 +456,9 @@ public class TramitesCrearPageController extends AbstractPageController
 						archivos.add(archivoCarga);
 					}
 					archivosInfo = new CreaCasosArchiInfoRequest();
-					archivosInfo.setLinea("String 1");
-					archivosInfo.setIdentificador("PROCESS_TYPE");
-					archivosInfo.setValor(elementoSeleccionado.getProcessID());
+					//					archivosInfo.setLinea("String 1");
+					//					archivosInfo.setIdentificador("PROCESS_TYPE");
+					//					archivosInfo.setValor(elementoSeleccionado.getProcessID());
 					archivosInfo.setArchivos(archivos);
 				}
 
@@ -790,13 +790,13 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0702____", "02", "Solicitud Externa", "ZT11", "A1ZTRT0002Z018");
 
 		//Declaración
-		agregarElementoTramites(elementos, "0800____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "0801____", "01", "Autorización por declaración valores inferiores al sugerido", "ZT12",
-				"A1ZTRT0002Z019");
-		agregarElementoTramites(elementos, "0802____", "02", "Porcentaje de copropiedad", "ZT12", "A1ZTRT0002Z020");
-		agregarElementoTramites(elementos, "0803____", "03", "Doble sujeción pasiva (Propietario, Poseedor)", "ZT12",
-				"A1ZTRT0002Z021");
-		agregarElementoTramites(elementos, "0804____", "04", "Pago Equivocado", "ZT12", "A1ZTRT0002Z022");
+		//		agregarElementoTramites(elementos, "0800____", "00", "Seleccionar");
+		//		agregarElementoTramites(elementos, "0801____", "01", "Autorización por declaración valores inferiores al sugerido", "ZT12",
+		//				"A1ZTRT0002Z019");
+		//		agregarElementoTramites(elementos, "0802____", "02", "Porcentaje de copropiedad", "ZT12", "A1ZTRT0002Z020");
+		//		agregarElementoTramites(elementos, "0803____", "03", "Doble sujeción pasiva (Propietario, Poseedor)", "ZT12",
+		//				"A1ZTRT0002Z021");
+		//		agregarElementoTramites(elementos, "0804____", "04", "Pago Equivocado", "ZT12", "A1ZTRT0002Z022");
 
 		//Agente Autorizado
 		agregarElementoTramites(elementos, "0900____", "00", "Seleccionar");

@@ -5,13 +5,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
-	var="infoDeclara" />
-
+<c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -107,8 +106,8 @@
 						<label class="control-label"><spring:theme
 								code="ica.declaracion.generales.cantesta" /></label> <input
 							id="cantEstablec" name="cantEstablec" class="newalto form-control"
-							type="text" value="${infoDeclara.cantEstablec }" maxlength="240"
-							${inputDisabled }></input>
+							type="text" value="${icaInfObjetoFormResp.icaInfObjetoResponse.cantEstablec}" maxlength="240"
+							${inputDisabled}></input>
 					</div>
 				</div>
 			</div>
@@ -131,7 +130,7 @@
 <script>
 	function disa() {
 		var cant = document.getElementById('cantEstablec');
-		cant.disabled = false;
+		cant.disabled = true;
 
 	}
 

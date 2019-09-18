@@ -34,7 +34,7 @@
 							<option value="05">Boletín de deudores Morosos del Estado</option>
 							<option value="06">Verificación de pagos</option>
 							<option value="07">Corrección de la información causada contablemente</option>
-							<option value="08">Declaración</option>
+<!-- 							<option value="08">Declaración</option> -->
 							<option value="09">Agente Autorizado</option>
 						</select>
 					</div>

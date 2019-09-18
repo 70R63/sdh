@@ -43,4 +43,6 @@ public interface SDHCustomerAccountService
 	void setAutorityOnSession(String role);
 
 	void cleanSessionAutorities();
+
+	void updateCustomerTaxRestrictions();
 }

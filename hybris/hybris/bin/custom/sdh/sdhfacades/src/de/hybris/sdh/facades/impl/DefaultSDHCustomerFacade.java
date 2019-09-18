@@ -254,4 +254,9 @@ public class DefaultSDHCustomerFacade extends DefaultCustomerFacade implements S
 		}
 		return null;
 	}
+
+	@Override
+	public void updateCustomerTaxRestrictions() {
+		sdhCustomerAccountService.updateCustomerTaxRestrictions();
+	}
 }

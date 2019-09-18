@@ -1,6 +1,6 @@
 ACC.oblipend = {
 
-	_autoload : [ "bindBuscarObliPend", "bindDetalle" ],
+	_autoload : [ "bindBuscarObliPend", "bindDetalle", "bindDetalledos" ],
 
 	bindBuscarObliPend : function() {
 
@@ -9,6 +9,8 @@ ACC.oblipend = {
 
 			$(".oblipend-table").hide();
 			$(".oblipend-tabledetalle").hide();
+			$(".oblipend-tabledetalledos").hide();
+			
 
 			var impuesto = $("#impuesto").val();
 
@@ -51,6 +53,7 @@ ACC.oblipend = {
 					e.preventDefault();
 					debugger;
 					$(".oblipend-tabledetalle").hide();
+					$(".oblipend-tabledetalledos").hide();
 
 					var fecha = new Date();
 					var impuesto = $("#impuesto").val();
@@ -99,6 +102,9 @@ ACC.oblipend = {
 
 						var numrespub = this.attributes[4].nodeValue;
 						var angravpub = this.attributes[3].nodeValue;
+						var orievalla = this.attributes[7].nodeValue;
+						var oblivalla = this.attributes[8].nodeValue;
+						var edooblivalla = this.attributes[9].nodeValue;
 
 						$("#detalle-publiext").show();
 						if (mes < 10) {
@@ -112,9 +118,47 @@ ACC.oblipend = {
 											+ (fecha.getMonth() + 1) + "/"
 											+ fecha.getFullYear());
 						}
+						if ("01" == orievalla || "1"== orievalla)
+						{
+							
+							$("#orivalla").val("Oriente-Occidente");
+							
+						}
+						else if ("02" == orievalla || "2"== orievalla)
+						{
+							$("#orivalla").val("Occidente-Oriente");
+						}
+						else if ("03" == orievalla || "3"== orievalla)
+						{
+							$("#orivalla").val("Norte-Sur");
+						}
+						else if ("04" == orievalla || "4"== orievalla)
+						{
+							$("#orivalla").val("Sur-Norte");
+						}
+						else if ("05" == orievalla || "5"== orievalla)
+						{
+							$("#orivalla").val("Derecha");
+						}
+						else if ("06" == orievalla || "6"== orievalla)
+						{
+							$("#orivalla").val("Izquierda");
+						}
+						else if ("07" == orievalla || "7"== orievalla)
+						{
+							$("#orivalla").val("Ambos sentidos");
+						}
+						else
+						{
+							$("#orivalla").val("-");
+						}
 
 						$("#numResOB").val(numrespub);
 						$("#angravPUB").val(angravpub);
+						$("#obliga").val(oblivalla);
+						$("#data-edoobli").val(edooblivalla);
+						
+						
 
 					} else if (impuesto == "5") {
 
@@ -133,6 +177,11 @@ ACC.oblipend = {
 
 					} else if (impuesto == "6") {
 						var cduDEL = this.attributes[2].nodeValue;
+						var aniograv = this.attributes[3].nodeValue;
+						var chipDelin = this.attributes[4].nodeValue;
+						var direcDeli = this.attributes[5].nodeValue;
+						var edoDelin = this.attributes[6].nodeValue;
+						var obliDelin = this.attributes[7].nodeValue;
 						
 						var division = cduDEL.split("U");
 						var anio = division[1].split('',2);
@@ -151,9 +200,32 @@ ACC.oblipend = {
 											+ (fecha.getMonth() + 1) + "/"
 											+ fecha.getFullYear());
 						}
-
-						$("#cduobDELI").val(cduDEL);
 						
+						$("#cduobDELI").val(cduDEL);
+						$("#angravabDELI").val(aniograv);
+						$("#chipDeli").val(chipDelin);
+						$("#direcDeli").val(direcDeli);
+						$("#edoobliDeli").val(edoDelin);
+						$("#obliDeli").val(obliDelin);
+						
+						
+						$("#varDeli").val(cduDEL);
+						
+						 var cdu  = $.trim($("#varDeli").val());
+					 	 
+				 	       var data = {};
+				 	       
+				 	       data.cdu = cdu;
+				 	       
+				 	       data.variableres=cdu;
+				 	       
+				 	      $("#varDeli").val(data.cdu);
+
+						
+						$("#varDeli").val(cduDEL);
+						
+						
+							
 						if (anioimp < 99){
 							
 							$("#angravDELI").val("20"+anioimp);
@@ -164,5 +236,86 @@ ACC.oblipend = {
 
 					}
 				});
+	},
+	
+	bindDetalledos : function() {
+		$(document).on("click", "#Detalledos", function(e) {
+			e.preventDefault();
+			debugger;
+			$(".oblipend-tabledetalledos").hide();
+
+			var impuesto = $("#impuesto").val();
+
+			if (impuesto == "1") {
+
+				$("#detalle-predial").show();
+
+			} else if (impuesto == "2") {
+
+				$("#detalle-vehiculos").show();
+
+			} else if (impuesto == "3") {
+
+				$("#detalle-dos-ica").show();
+				
+//				var numAnioICA = this.attributes[3].nodeValue;
+//				var perICA = this.attributes[4].nodeValue;
+//				var edoobligICA = this.attributes[5].nodeValue;
+//				var obligICA = this.attributes[6].nodeValue;
+//				
+//				$("#angravICA").val(numAnioICA);
+//				$("#periodoICA").val(perICA);
+//				$("#edoobliICA").val(edoobligICA);
+//				$("#obliICA").val(obligICA);
+ 
+
+			} else if (impuesto == "4") {
+				
+				var resolu = $("#numResOB").val();
+				var aniogravavble = $("#angravPUB").val();
+				var esobli = $("#data-edoobli").val();
+				var oblig = $("#obliga").val();
+ 
+
+				$("#detalle-dos-publiext").show();
+				$("#numResPUBLICI").val(resolu);
+				$("#angravPUBLICI").val(aniogravavble);
+				$("#esdobli").val(esobli);
+				$("#det-obli").val(oblig);
+
+
+			} else if (impuesto == "5") {
+
+				$("#detalle-dos-gasolina").show();
+				
+				var numAnioGas = this.attributes[3].nodeValue;
+				var perGas = this.attributes[4].nodeValue;
+				var edoobligGAS = this.attributes[5].nodeValue;
+				var obligGAS = this.attributes[6].nodeValue;
+				
+				$("#angravGAS").val(numAnioGas);
+				$("#periodoGAS").val(perGas);
+				$("#edoobliGAS").val(edoobligGAS);
+				$("#obliGAS").val(obligGAS);
+
+			} else if (impuesto == "6") {
+
+				$("#detalle-dos-delurbana").show();
+				
+				var cdusel = $("#cduobDELI").val();
+				var angravsel = $("#angravabDELI").val();
+				var chipsel = $("#chipDeli").val();
+				var dirsel = $("#direcDeli").val();
+				var edosel = $("#edoobliDeli").val();
+				var oblisel = $("#obliDeli").val();
+				
+				$("#anioselDeli").val(angravsel);
+				$("#cduselDeli").val(cdusel);
+				$("#edoobliselDELI").val(edosel);
+				$("#obliselDELI").val(oblisel);
+				
+
+			}
+		});
 	}
 };

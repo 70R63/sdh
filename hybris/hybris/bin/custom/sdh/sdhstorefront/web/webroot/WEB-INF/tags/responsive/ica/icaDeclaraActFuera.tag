@@ -12,7 +12,7 @@
 		debugger;
 		var muni = selectObject.value;
 		if (muni == '000000011001') {
-			alert("Seleccione un municipio diferente, ya que las actividades deben ser fuera de Bogotá");
+			alert("Seleccione un municipio diferente, ya que las actividades deben ser fuera de Bogotï¿½");
 		}
 	}
 </script>
@@ -35,7 +35,7 @@
 	<br>
 	<form:form action="">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-7">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.actifuera.ciiu" />
 				</label>
@@ -45,7 +45,7 @@
 					<spring:theme code="ica.declaracion.actifuera.municipio" />
 				</label>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.actifuera.ingre" />
 				</label>
@@ -59,23 +59,23 @@
 		<c:forEach items="${infoDeclara.ingFueraBog }" var="eachIngreso">
 			<c:if test="${not empty eachIngreso.codCIIU }">
 				<div class="row actvifuera">
-					<div class="col-md-3">
+					<div class="col-md-7">
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
 
 
-						<select id="" class="new_alto form-control deno codCIIU"
-							style="height: 48px;">
+						<select id="" class="alto form-control deno codCIIU"
+							style="font-size: 11px !important">
 							<option value="">SELECCIONAR</option>
 							<c:set var="selected" value="" />
-							<c:forEach items="${ econActivities}" var="eachActivity">
-								<fmt:formatNumber value="${ eachActivity.code}"
+							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+								<fmt:formatNumber value="${ eachActivity.ciiu}"
 									pattern="#######################" var="eachCodCIIUNumber" />
 								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}">
 									<c:set var="selected" value="selected" />
 								</c:if>
-								<option ${selected } value="${eachActivity.code}">${eachActivity.code}
-									- ${eachActivity.description }</option>
+								<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
+									- ${eachActivity.denominacion }</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -94,7 +94,7 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-1">
 						<input class="new_alto form-control ing ingresos" type="text"
 							value="${eachIngreso.ingresos }" />
 					</div>
@@ -111,15 +111,16 @@
 				</div>
 			</c:if>
 		</c:forEach>
-		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
+
+		<!--  se agregan lï¿½neas para agregar siempre una linea en la tabla -->
 		<div class="row actvifuera" id="actvifuera">
-			<div class="col-md-3">
-				<select id="" class="new_alto form-control deno codCIIU"
-					style="height: 48px;">
+			<div class="col-md-7">
+				<select id="" class="alto form-control deno codCIIU"
+					style="font-size: 11px !important">
 					<option value="">SELECCIONAR</option>
-					<c:forEach items="${ econActivities}" var="eachActivity">
-						<option ${selected } value="${eachActivity.code}">${eachActivity.code}
-							- ${eachActivity.description }</option>
+					<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+						<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
+							- ${eachActivity.denominacion }</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -134,11 +135,13 @@
 						<c:set var="selected" value="" />
 					</c:if>
 					<c:forEach items="${cities}" var="eachCity">
-						<option value="${ eachCity.code}">${eachCity.name}</option>
+						<c:if test="${eachCity.code ne '000000011001'}">
+							<option value="${ eachCity.code}">${eachCity.name}</option>
+						</c:if>	
 					</c:forEach>
 				</select>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<input class="new_alto form-control ing ingresos" type="text"
 					value="" />
 			</div>
@@ -152,7 +155,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- fin de código agregado -->
+		<!-- fin de cï¿½digo agregado -->
 
 		<!-- <div id="adjuntar" class="row" style="display: none;"> -->
 		<!-- 		<div class="col-md-3" style="margin-top: 20px !important"> -->
@@ -182,7 +185,7 @@
 					"")
 
 		} else {
-			alert("No se pueden agregar más registros");
+			alert("No se pueden agregar mï¿½s registros");
 		}
 
 	}

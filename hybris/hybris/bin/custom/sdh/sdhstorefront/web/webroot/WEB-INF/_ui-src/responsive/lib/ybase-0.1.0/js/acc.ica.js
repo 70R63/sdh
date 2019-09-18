@@ -1,6 +1,6 @@
 ACC.ica = {
 
-	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones"],
+	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones", "bindCalendarICA"],
 	 
 	 bindDeleteDeducciones: function(){
 		 $(document).on("click", ".delededucciones", function (e) {
@@ -446,12 +446,12 @@ ACC.ica = {
 	            		}else
 	            		{
 	            			$( "#dialogICA" ).dialog( "open" );
-	            			$("#icaDialogContent").html("El cálculo se ha realizado exitosamente.")
+	            			$("#icaDialogContent").html("El cálculo se ha realizado exitosamente.");
 	            			
 	            			
 	            			$("#totalingPeriodo").val(data.declaracion.totalingPeriodo);
-	            			$("#totalingFueraBog").val(data.declaracion.totalingFueraBog);
-	            			$("#totalingBrutos").val(data.declaracion.totalingBrutos);
+							$("#totalingFueraBog").val(data.declaracion.totalingFueraBog);
+							$("#totalingBrutos").val(data.declaracion.totalingBrutos);
 	            			$("#devolDescuentos").val(data.declaracion.devolDescuentos);
 	            			$("#totalDeduccion").val(data.declaracion.totalDeduccion);
 	            			$("#totalingNetos").val(data.declaracion.totalingNetos);
@@ -466,7 +466,7 @@ ACC.ica = {
 	            			$("#interesMora").val(data.declaracion.interesMora);
 	            			$("#totalPagar").val(data.declaracion.totalPagar);
 	            			$("#totalAporteVolun").val(data.declaracion.totalAporteVolun);
-	            			
+							
 	            			
 	            			
 	            			if(data.valRetenido)
@@ -489,7 +489,7 @@ ACC.ica = {
 	            			
 	            			
 	            			$("#numForm").val(data.numForm)
-	            			
+							
 	            			$("#icaPresentarDeclaracionButton").prop("disabled",false);
 	            		}
 	 	      		
@@ -548,7 +548,15 @@ ACC.ica = {
 	 },
 	 
 	    
-    
+    bindCalendarICA: function(){
+		$(".anoGravableICA").datepicker({
+		      changeMonth: true,
+		      changeYear: true,
+		      yearRange: "-200:+0",
+		    });
+		
+		$(".anoGravableICA").datepicker( $.datepicker.regional[ "es" ] );
+	},
     
     
 	    bindDialogICA: function(){

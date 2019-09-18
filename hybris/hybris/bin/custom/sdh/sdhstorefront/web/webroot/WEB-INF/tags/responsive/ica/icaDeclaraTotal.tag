@@ -31,7 +31,7 @@
 					<spring:theme code="ica.declaracion.total.actprinci" />
 				</label>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-7">
 				<label class="control-label text-capitalize !important" for="">
 					<spring:theme code="ica.declaracion.total.denomi" />
 				</label>
@@ -43,7 +43,7 @@
 			</div>
 		</div>
 
-		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
+		<!--  se agregan lï¿½neas para agregar siempre una linea en la tabla -->
 		<c:if test="${empty infoDeclara.ingNetosGrava}">
 			<div class="row totaluno" id="totaluno">
 				<div class="col-md-1">
@@ -54,8 +54,8 @@
 						size="10">
 				</div>
 
-				<div class="col-md-3">
-					<input class="new_alto form-control denomina codCIIU" type="text"
+				<div class="col-md-7">
+					<input class="alto form-control denomina codCIIU" type="text"
 						value="" />
 				</div>
 				<div class="col-md-2">
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 		</c:if>
-		<!-- fin de código agregado -->
+		<!-- fin de cï¿½digo agregado -->
 
 		<c:forEach items="${infoDeclara.ingNetosGrava }" var="eachIngreso">
 			<c:if test="${not empty eachIngreso.codCIIU }">
@@ -95,7 +95,7 @@
 						</c:choose>
 					</div>
 
-					<div class="col-md-3">
+					<div class="col-md-7">
 						<!-- 					<input class="form-control denomina codCIIU" type="text" -->
 						<%-- 						value="${eachIngreso.codCIIU}" /> --%>
 						<!--
@@ -119,8 +119,8 @@
 							</c:forEach>
 						</select>
 						 -->
-						<!-- EJRR Adding data to select box -->
-						<select id="" class="new_alto form-control codCIIU"
+						<!-- EJRR Adding data to select box eachActivity -->
+						<select id="" class="alto form-control codCIIU"
 							style="height: 48px;">
 							<option value="" selected>SELECCIONAR</option>
 							<c:forEach items="${gravableNetIncomes}" var="eachActivity">
@@ -163,7 +163,7 @@
 				</c:choose>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-7">
 				<!-- 					<input class="form-control denomina codCIIU" type="text" -->
 				<%-- 						value="${eachIngreso.codCIIU}" /> --%>
 				<!--
@@ -188,8 +188,8 @@
 						</select>
 						 -->
 				<!-- EJRR Adding data to select box -->
-				<select id="" class="new_alto form-control codCIIU"
-					style="height: 48px;">
+				<select id="" class="alto form-control codCIIU"
+					style="font-size:12px !important; padding: 0px !important">
 					<option value="" selected>SELECCIONAR</option>
 					<c:forEach items="${gravableNetIncomes}" var="eachActivity">
 						<option value="${eachActivity.ciiu}">${eachActivity.ciiu}
@@ -300,15 +300,15 @@
 				<select id="" class="new_alto form-control tipoID"
 					style="height: 48px;">
 					<option value="">Seleccionar</option>
-					<option value="CC">CC Cédula de ciudadania</option>
-					<option value="CE">CE Cédula de extranjería</option>
-					<option value="NIT">NIT Número de identificación
+					<option value="CC">CC Cï¿½dula de ciudadania</option>
+					<option value="CE">CE Cï¿½dula de extranjerï¿½a</option>
+					<option value="NIT">NIT Nï¿½mero de identificaciï¿½n
 						tributaria</option>
 					<option value="PA">PA Pasaporte</option>
 					<option value="TI">TI Tarjeta de identidad</option>
 					<option value="TIE">TIE Tarjeta de identidad de extranjero</option>
 					<option value="NITE">NITE NIT extranjero</option>
-					<option value="NUIP">NUIP Número único de identificación
+					<option value="NUIP">NUIP Nï¿½mero ï¿½nico de identificaciï¿½n
 						personal</option>
 				</select>
 			</div>
@@ -329,7 +329,7 @@
 			</div>
 			<div class="col-md-2">
 				<select id="" class="new_alto form-control codCIIU"
-					style="height: 48px;">
+					style="font-size:12px !important; padding: 0px !important">
 					<option value="">SELECCIONAR</option>
 					<c:forEach items="${ econActivities}" var="eachActivity">
 						<option value="${eachActivity.code}">${eachActivity.code}
@@ -406,7 +406,7 @@
 					pattern="#######################" var="codCIIUNumber" />
 
 				<select id="" disabled="disabled"
-					class="new_alto form-control codCIIU" style="height: 48px;">
+					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important">
 					<option value="">SELECCIONAR</option>
 					<c:forEach items="${ econActivities}" var="eachActivity">
 
@@ -461,7 +461,7 @@
 					.val("")
 
 		} else {
-			alert("No se pueden agregar más registros");
+			alert("No se pueden agregar mï¿½s registros");
 		}
 
 	}
@@ -522,7 +522,7 @@
 					.val("")
 
 		} else {
-			alert("No se pueden agregar más registros");
+			alert("No se pueden agregar mï¿½s registros");
 		}
 
 	}
