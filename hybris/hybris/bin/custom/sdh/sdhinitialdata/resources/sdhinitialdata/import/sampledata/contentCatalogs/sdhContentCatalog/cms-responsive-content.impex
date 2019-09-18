@@ -167,7 +167,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 INSERT_UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true]			;restrictions(uid,$contentCV)
                                 ;						;DelineacionUrbanaLink		;delineacionUsrTaxGrpRtn
                                 ;						;ICALink					;ICAUsrTaxGrpRtn
-#								;						;PredialUnificadoLink		;
+								;						;PredialUnificadoLink		;predialUsrTaxGrpRtn
                                 ;						;PublicidadExteriorLink		;publicidadExtUsrTaxGrpRtn
                                 ;						;SobreVehiAutomotoresLink	;vehicularUsrTaxGrpRtn
                                 ;						;SobreTasaGasolinaLink		;gasolinaUsrTaxGrpRtn
@@ -244,6 +244,7 @@ INSERT_UPDATE UserGroup;UID[unique=true];locname[lang=en];description;groups(uid
                        ;publicidadExtUsrTaxGrp			;Publicidad Ext User Tax Groups		;Delineacion User Tax Group 	;				;en 						;en ;
                        ;reteICAUsrTaxGrp				;Rete ICA User Tax Group			;Delineacion User Tax Group 	;				;en 						;en ;
                        ;vehicularUsrTaxGrp				;Vehicular User Tax Group			;Delineacion User Tax Group 	;				;en 						;en ;
+                       ;predialUsrTaxGrp				;Predial User Tax Group			    ;Predial User Tax Group 	    ;				;en 						;en ;
 
 # ----- SDH CMS Users Group Restriction-----
 INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];name;userGroups(uid);includeSubgroups;components(&linkRef)
@@ -253,6 +254,7 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];n
                                      ;		;publicidadExtUsrTaxGrpRtn		;Publicidad Ext User Tax Groups	Restriction		;publicidadExtUsrTaxGrp 	;true				;
                                      ;		;reteICAUsrTaxGrpRtn			;Rete ICA User Tax Group Restriction			;reteICAUsrTaxGrp 			;true				;
                                      ;		;vehicularUsrTaxGrpRtn			;Vehicular User Tax Group Restriction			;vehicularUsrTaxGrp 		;true				;
+                                     ;		;predialUsrTaxGrpRtn			;Predial User Tax Group Restriction			    ;predialUsrTaxGrp 		    ;true				;
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
