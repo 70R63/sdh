@@ -113,11 +113,6 @@
         </div>
     </div>
 
-    <div class="col-md-1">
-        <button type="button" onclick="" disabled class="btn btn-primary ajustemargen justFirm">Solo Firmar</button>
-    </div>
-    <div class="col-md-1">
-        <button type="button" onclick="" disabled class="btn btn-primary ajustemargen firmAndAdd">Firmar y Aregagar</button>
-    </div>
+
 
 </div>
