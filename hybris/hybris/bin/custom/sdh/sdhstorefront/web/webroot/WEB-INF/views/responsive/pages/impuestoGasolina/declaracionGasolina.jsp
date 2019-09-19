@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sobreTasaGasolina"
 	tagdir="/WEB-INF/tags/responsive/sobretasaGasolina"%>
+<%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
@@ -23,7 +24,8 @@
 	<sobreTasaGasolina:decGasolinaPagos />
 	<%-- 	<sobreTasaGasolina:decGasolinaDatRev /> --%>
 	<%-- 	<sobreTasaGasolina:decGasolinaInfFirma /> --%>
-	<sobreTasaGasolina:decGasolinaFirma />
+	<firmas:generalFirmas />
+<%--	<sobreTasaGasolina:decGasolinaFirma />--%>
 </sf:form>
 <sobreTasaGasolina:decGasolinaPago />
 

@@ -1374,6 +1374,9 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
             if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getVehicular())){
 				addUsrGrpModelToList("vehicularUsrTaxGrp" , newGroupList);
             }
+			if(Objects.nonNull(sdhConsultaContribuyenteBPRespons.getPredial())){
+				addUsrGrpModelToList("predialUsrTaxGrp" , newGroupList);
+			}
 		}
 
 		customerModel.setGroups(newGroupList);

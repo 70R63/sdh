@@ -2,10 +2,10 @@
 # 
 $contentCatalog=sdhContentCatalog 
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
- 
-$productCatalog=sdhProductCatalog 
-$productCatalogName=Public Sector Product Catalog 
-$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged] 
+
+$productCatalog=sdhProductCatalog
+$productCatalogName=Public Sector Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $picture=media(code, $contentCV) ;
 $siteResource=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $jarResourceCms=jar:de.hybris.sdh.initialdata.constants.SdhInitialDataConstants&/sdhinitialdata/import/sampledata/cockpits/cmscockpit
@@ -87,7 +87,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ; ;MiRITLink; MI RIT LINK    ; "/contribuyentes/mirit" ;;;;;
-; ;MiBuzonLink; MI BUZON LINK    ; "/contribuyentes/mibuzontributario/inicial" ;;;;;
+; ;MiBuzonLink; MI BUZON LINK    ; /contribuyentes/mibuzon_tributario" ;;;;;
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "#" ;;;;;
 ; ;TramitesLink; TRAMITES LINK    ; "/contibuyentes/tramites" ;;;;;
 ; ;FacturacionLink; FACTURACION LINK    ; "#" ;;;;;
@@ -120,6 +120,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes/publicidadexterior" ;;;;;
 ; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
 ; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; "/contribuyentes/sobretasa-gasolina" ;;;;;
+; ; NewSobreVehiNodeLink         ; NEW SOBRE VEHICULO                 ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
@@ -134,7 +135,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 ; ; PresentarDeclaracionLink     ; PRESENTAR DECLARACION               ; "/contribuyentes/presentar-declaracion" ;;;;;
-#; ; ListaDeclaracionFirmaLink    ; LISTA DECLARACION FIRMA             ; "/contribuyentes/declaraciones/listadeclafirmar";;;;;
+; ; ListaDeclaracionFirmaLink    ; LISTA DECLARACION FIRMA             ; "/contribuyentes/declaraciones/listadeclafirmar";;;;;
 #->FIN dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGOS 04/01/2019
@@ -162,6 +163,27 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
+# ----- EJRO adding users group
+# ----- SDH Users Group -----
+INSERT_UPDATE UserGroup;UID[unique=true];locname[lang=en];description;groups(uid);readableLanguages(isocode);writeableLanguages(isocode);
+                       ;ICAUsrTaxGrp					;ICA User Tax Group					;ICA User Tax Group 			;				;en 						;en ;
+                       ;delineacionUsrTaxGrp			;Delineacion User Tax Groups		;Delineacion User Tax Group 	;				;en 						;en ;
+                       ;gasolinaUsrTaxGrp				;Gasolina User Tax Group			;Delineacion User Tax Group 	;				;en 						;en ;
+                       ;publicidadExtUsrTaxGrp			;Publicidad Ext User Tax Groups		;Delineacion User Tax Group 	;				;en 						;en ;
+                       ;reteICAUsrTaxGrp				;Rete ICA User Tax Group			;Delineacion User Tax Group 	;				;en 						;en ;
+                       ;vehicularUsrTaxGrp				;Vehicular User Tax Group			;Delineacion User Tax Group 	;				;en 						;en ;
+                       ;predialUsrTaxGrp				;Predial User Tax Group			    ;Predial User Tax Group 	    ;				;en 						;en ;
+
+# ----- SDH CMS Users Group Restriction-----
+INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];name;userGroups(uid);includeSubgroups;components(&linkRef)
+                                     ;		;ICAUsrTaxGrpRtn				;CMS ICA User Tax Group Restriction				;ICAUsrTaxGrp				;true		 	  	;
+                                     ;		;delineacionUsrTaxGrpRtn		;CMS Delineacion User Tax Group Restriction		;delineacionUsrTaxGrp		;true				;
+                                     ;		;gasolinaUsrTaxGrpRtn			;Gasolina User Tax Group Restriction			;gasolinaUsrTaxGrp 			;true				;
+                                     ;		;publicidadExtUsrTaxGrpRtn		;Publicidad Ext User Tax Groups	Restriction		;publicidadExtUsrTaxGrp 	;true				;
+                                     ;		;reteICAUsrTaxGrpRtn			;Rete ICA User Tax Group Restriction			;reteICAUsrTaxGrp 			;true				;
+                                     ;		;vehicularUsrTaxGrpRtn			;Vehicular User Tax Group Restriction			;vehicularUsrTaxGrp 		;true				;
+                                     ;		;predialUsrTaxGrpRtn			;Predial User Tax Group Restriction			    ;predialUsrTaxGrp 		    ;true				;
+
 
 # EJRO Adding restrictions to menu links
 INSERT_UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true]			;restrictions(uid,$contentCV)
@@ -169,8 +191,9 @@ INSERT_UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true]			;res
                                 ;						;ICALink					;ICAUsrTaxGrpRtn
 								;						;PredialUnificadoLink		;predialUsrTaxGrpRtn
                                 ;						;PublicidadExteriorLink		;publicidadExtUsrTaxGrpRtn
-                                ;						;SobreVehiAutomotoresLink	;vehicularUsrTaxGrpRtn
+                                ;						;NewSobreVehiNodeLink	    ;vehicularUsrTaxGrpRtn
                                 ;						;SobreTasaGasolinaLink		;gasolinaUsrTaxGrpRtn
+
 
 
 INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; category(code, $productCV); product(code,$productCV);target(code)[default = 'sameWindow'];;
@@ -194,7 +217,7 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 
 
 
-# CMS Navigation Nodes  
+# CMS Navigation Nodes
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); children(uid, $contentCV)[mode = append]; links(uid, $contentCV); &nodeRef
 ; root                                   ; ; root                             ;                    ; ;                                                                                                ; root                                   ;
 ; AcceleratorNavNode                     ; ; Accelerator Pages                ; PublicSectorNavNode   ; ; AboutAcceleratorLink, FAQLink                                                                  ; AcceleratorNavNode
@@ -231,30 +254,8 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=tr
 ;;Agente Retenedor Category Nav Component Restriction;AgenteRetenedorCategoryNavComponentRestriction;sdh_04;AgenteRetenedorCategoryNavComponent
 ;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoCategoryNavComponent
 ## level 1. SiteRoot ##
-## level 2. children of SiteRoot ## 
+## level 2. children of SiteRoot ##
 # the following order of children is the display order on the site
-
-# ----- EJRO adding users group
-
-# ----- SDH Users Group -----
-INSERT_UPDATE UserGroup;UID[unique=true];locname[lang=en];description;groups(uid);readableLanguages(isocode);writeableLanguages(isocode);
-                       ;ICAUsrTaxGrp					;ICA User Tax Group					;ICA User Tax Group 			;				;en 						;en ;
-                       ;delineacionUsrTaxGrp			;Delineacion User Tax Groups		;Delineacion User Tax Group 	;				;en 						;en ;
-                       ;gasolinaUsrTaxGrp				;Gasolina User Tax Group			;Delineacion User Tax Group 	;				;en 						;en ;
-                       ;publicidadExtUsrTaxGrp			;Publicidad Ext User Tax Groups		;Delineacion User Tax Group 	;				;en 						;en ;
-                       ;reteICAUsrTaxGrp				;Rete ICA User Tax Group			;Delineacion User Tax Group 	;				;en 						;en ;
-                       ;vehicularUsrTaxGrp				;Vehicular User Tax Group			;Delineacion User Tax Group 	;				;en 						;en ;
-                       ;predialUsrTaxGrp				;Predial User Tax Group			    ;Predial User Tax Group 	    ;				;en 						;en ;
-
-# ----- SDH CMS Users Group Restriction-----
-INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];name;userGroups(uid);includeSubgroups;components(&linkRef)
-                                     ;		;ICAUsrTaxGrpRtn				;CMS ICA User Tax Group Restriction				;ICAUsrTaxGrp				;true		 	  	;
-                                     ;		;delineacionUsrTaxGrpRtn		;CMS Delineacion User Tax Group Restriction		;delineacionUsrTaxGrp		;true				;
-                                     ;		;gasolinaUsrTaxGrpRtn			;Gasolina User Tax Group Restriction			;gasolinaUsrTaxGrp 			;true				;
-                                     ;		;publicidadExtUsrTaxGrpRtn		;Publicidad Ext User Tax Groups	Restriction		;publicidadExtUsrTaxGrp 	;true				;
-                                     ;		;reteICAUsrTaxGrpRtn			;Rete ICA User Tax Group Restriction			;reteICAUsrTaxGrp 			;true				;
-                                     ;		;vehicularUsrTaxGrpRtn			;Vehicular User Tax Group Restriction			;vehicularUsrTaxGrp 		;true				;
-                                     ;		;predialUsrTaxGrpRtn			;Predial User Tax Group Restriction			    ;predialUsrTaxGrp 		    ;true				;
 
 
 #*->-------------------------------------------------------------------------------------------------------------------------
@@ -266,7 +267,7 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];n
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
 #;CategoryNavNode;;Categories;SiteRootNode;CategoryNavNode;MiRITNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,PagosNavigationNode,ConsultaNavigationNode,PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode, ReportantesNavigationNode, RetenedorDetalleNavigationNode, RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode
-;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,ConsultaNavigationNode 
+;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,ConsultaNavigationNode
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
 ;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
@@ -369,7 +370,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 ## level 4. children of NavNode ## (the following order of children is the display order on the site)
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;children(uid,$contentCV);links(&linkRef);
-## children of Report An Issue 
+## children of Report An Issue
 ;ReportAnIssuePopularServiceRequestsNavNodeMenu;;Report An Issue Popular Service Requests Menu;ReportAnIssuePopularServiceRequestsNavNodeMenu;ReportGraffitiNavNode, ReportAPotholeRINavNode, ReportAnIssueSeeAllServiceRequestsNavNode
 ;ReportAnIssuePopularCategoriesNavNodeMenu;;Report An Issue Popular Categories Nav Node Menu;ReportAnIssuePopularCategoriesNavNodeMenu;InTheCommunityNavNode, OnTheRoadNavNode, Environment&GarbageNavNode, ReportAnIssueSeeAllCategoriesNavNode
 
@@ -394,11 +395,11 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
-;MiBuzonNavigationServiceRequestsNavNodeMenu;;Mi Buzon Service Requests Menu;MiBuzonNavigationServiceRequestsNavNodeMenu #borrar
+;MiBuzonNavigationServiceRequestsNavNodeMenu;;Mi Buzon Service Requests Menu;MiBuzonNavigationServiceRequestsNavNodeMenu
 #->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
-;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,ICANavNode,PredialUnificadoNavNode,PublicidadExteriorNavNode,SobreVehiAutomotoresNavNode,SobreTasaGasolinaNavNode
+;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,ICANavNode,PredialUnificadoNavNode,PublicidadExteriorNavNode,NewSobreVehiNodeNavNode,SobreTasaGasolinaNavNode
 #->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
@@ -410,7 +411,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu DECLARACIONES 04/01/2019
-;DeclaracionesNavigationServiceRequestsNavNodeMenu;;Declaracion Service Requests Menu;DeclaracionesNavigationServiceRequestsNavNodeMenu;PresentarDeclaracionNavNode
+;DeclaracionesNavigationServiceRequestsNavNodeMenu;;Declaracion Service Requests Menu;DeclaracionesNavigationServiceRequestsNavNodeMenu;PresentarDeclaracionNavNode,ListaDeclaracionFirmaNavNode
 #->FIN dev-eduardo Agregar menu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
@@ -492,45 +493,46 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu MI RIT 04/01/2019
 ;CertRitNavNode ;;Certificacion RIT Link;CertRitNavNode
-;CertRitContribuyentesNavNode ;;Certificacion RIT Link;CertRitContribuyentesNavNode 
-;CertRitReportanteInformacionNavNode ;;Certificacion RIT Link;CertRitReportanteInformacionNavNode 
+;CertRitContribuyentesNavNode ;;Certificacion RIT Link;CertRitContribuyentesNavNode
+;CertRitReportanteInformacionNavNode ;;Certificacion RIT Link;CertRitReportanteInformacionNavNode
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
 #->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
-;DelineacionUrbanaNavNode ;;Delineación Urbana Link;DelineacionUrbanaNavNode 
-;ICANavNode ;;ICA Link;ICANavNode 
-;PredialUnificadoNavNode ;;Predial unificado Link;PredialUnificadoNavNode 
-;PublicidadExteriorNavNode ;;Publicidad exterior Link;PublicidadExteriorNavNode 
-;SobreVehiAutomotoresNavNode ;;Sobre vehículos automotores Link;SobreVehiAutomotoresNavNode 
-;SobreTasaGasolinaNavNode ;;Sobre tasa a la gasolina Link;SobreTasaGasolinaNavNode 
+;DelineacionUrbanaNavNode ;;Delineación Urbana Link;DelineacionUrbanaNavNode
+;ICANavNode ;;ICA Link;ICANavNode
+;PredialUnificadoNavNode ;;Predial unificado Link;PredialUnificadoNavNode
+;PublicidadExteriorNavNode ;;Publicidad exterior Link;PublicidadExteriorNavNode
+;SobreVehiAutomotoresNavNode ;;Sobre vehículos automotores Link;SobreVehiAutomotoresNavNode
+;SobreTasaGasolinaNavNode ;;Sobre tasa a la gasolina Link;SobreTasaGasolinaNavNode
+;NewSobreVehiNodeNavNode ;;New Sobre Vehiculo Node Link;NewSobreVehiNodeNavNode
 #->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
-#->;AnulacionFacturaNavNode ;;Anulacion Factura Link;AnulacionFacturaNavNode 
-#->;ModificacionFacturaNavNode ;;Modificacion Factura Link;ModificacionFacturaNavNode 
+#->;AnulacionFacturaNavNode ;;Anulacion Factura Link;AnulacionFacturaNavNode
+#->;ModificacionFacturaNavNode ;;Modificacion Factura Link;ModificacionFacturaNavNode
 #->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
-;DescargaFacturaNavNode ;;Descarga Factura Link;DescargaFacturaNavNode 
-;ReexpedicionFacturaNavNode ;;Reexpedicion Factura Link;ReexpedicionFacturaNavNode 
+;DescargaFacturaNavNode ;;Descarga Factura Link;DescargaFacturaNavNode
+;ReexpedicionFacturaNavNode ;;Reexpedicion Factura Link;ReexpedicionFacturaNavNode
 #->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu DECLARACIONES 04/01/2019
-;PresentarDeclaracionNavNode ;;Presentar Declaracion Link;PresentarDeclaracionNavNode 
-#;ListaDeclaracionFirmaNavNode ;;Lista Declaracion Firma Link;ListaDeclaracionFirmaNavNode 
+;PresentarDeclaracionNavNode ;;Presentar Declaracion Link;PresentarDeclaracionNavNode
+;ListaDeclaracionFirmaNavNode ;;Lista Declaracion Firma Link;ListaDeclaracionFirmaNavNode
 #->FIN dev-eduardo Agregar menu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
 
-#;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode 
+#;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode
 #;PagoLineaNavNode ;;Pago Linea Link;PagoLineaNavNode
-#;ARGeneracionROPNavNode ;;Generacion ROP Link;ARGeneracionROPNavNode 
+#;ARGeneracionROPNavNode ;;Generacion ROP Link;ARGeneracionROPNavNode
 #;ARPagoLineaNavNode ;;Pago Linea Link;ARPagoLineaNavNode
 
-#->;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode 
+#->;GeneracionROPNavNode ;;Generacion ROP Link;GeneracionROPNavNode
 #->;PagoLineaNavNode ;;Pago Linea Link;PagoLineaNavNode
 
 #->FIN dev-eduardo Agregar menu PAGOS 04/01/2019
@@ -629,6 +631,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;PublicidadExteriorNavNodeEntry;;Publicidad exterior Navigation Node Entry;PublicidadExteriorNavNode;PublicidadExteriorLink
 ;SobreVehiAutomotoresNavNodeEntry;;Sobre vehiculos automotores Navigation Node Entry;SobreVehiAutomotoresNavNode;SobreVehiAutomotoresLink
 ;SobreTasaGasolinaNavNodeEntry;;Sobre tasa gasolina Navigation Node Entry;SobreTasaGasolinaNavNode;SobreTasaGasolinaLink
+;NewSobreVehiNodeNavNodeEntry;;New Sobre Vehiculo Node Entry;NewSobreVehiNodeNavNode;NewSobreVehiNodeLink
 #->FIN dev-eduardo Agregar menu IMPUESTOS  04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
@@ -643,7 +646,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 #->INI dev-eduardo Agregar menu DECLARACION 04/01/2019
 ;PresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;PresentarDeclaracionNavNode;PresentarDeclaracionLink
-#;ListaDeclaracionFirmaNavNodeEntry;;Lista declaracion firma Navigation Node Entry;ListaDeclaracionFirmaNavNode;ListaDeclaracionFirmaLink
+;ListaDeclaracionFirmaNavNodeEntry;;Lista declaracion firma Navigation Node Entry;ListaDeclaracionFirmaNavNode;ListaDeclaracionFirmaLink
 #->FIN dev-eduardo Agregar menu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
@@ -683,7 +686,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 
 
-# ContentSlot 
+# ContentSlot
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
 ; ; VariantSelectorSlot    ; VariantSelector
 ; ; UpSellingSlot          ; Similar, Others
@@ -697,14 +700,14 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsCom
 ; ; TopContentSlot         ; FacebookOffersBanner
 ; ; ProductLeftRefinements ; RefinementFacetComponent, PSRetrieveADraftComponent
 
-# CMS Footer Component 
+# CMS Footer Component
 INSERT_UPDATE PSFooterComponent; $contentCV[unique = true]; uid[unique = true]; wrapAfter; navigationNodes(uid, $contentCV); &componentRef;;;
 ; ; FooterComponent ; 2 ;  ; FooterComponent ; ; ;
 
-# CMS Paragraph Component (Contact information) 
+# CMS Paragraph Component (Contact information)
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
 
-# Generic Banners 
+# Generic Banners
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink;;;
 ; ; FacebookOffersBanner ; Facebook Offers Banner ; FacebookOffersBanner ; http://www.facebook.com/hybrissoftware                                            ; ; ;
 ; ; MobileAppBanner      ; Mobile App Banner      ; MobileAppBanner      ; http://www.hybris.com/hybris/en/e-commerce-software/mobile-commerce-software.html ; ; ;
@@ -739,7 +742,7 @@ INSERT_UPDATE ShareOnSocialNetworkAction; $contentCV[unique = true]; uid[unique 
 INSERT_UPDATE CMSActionRestriction; $contentCV[unique = true]; uid[unique = true]; name;
 ; ; ActionRestriction ; A CMSAction restriction ;
 
-# CMS ProductReferences Components 
+# CMS ProductReferences Components
 INSERT_UPDATE ProductReferencesComponent; $contentCV[unique = true]; uid[unique = true]; name; productReferenceTypes(code); maximumNumberProducts; &componentRef;;
 ; ; CrossSelling ; Cross Selling ; CROSSELLING ; 5 ; CrossSelling ; ;
 ; ; Others       ; Others        ; OTHERS      ; 5 ; Others       ; ;
@@ -773,8 +776,8 @@ INSERT_UPDATE PSSearchResultsGridComponent; $contentCV[unique = true]; uid[uniqu
 ; ; PSSearchResultsGrid ; Public sector Search Result Grid Component ; ServiceListAddToCartAction ; PSSearchResultsGrid
 
 
-# Preview Image for use in the CMS Cockpit for special ContentPages 
-# Media 
+# Preview Image for use in the CMS Cockpit for special ContentPages
+# Media
 INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; folder(qualifier)[default = 'images'];;
 ; ; homepagePreview                     ; text/png ; Homepage.png                     ; $jarResourceCms/preview-images/sdh/Homepage.png                     ; ; ;
 ; ; serviceRequestDetailsPagePreview    ; text/png ; ServiceRequestDetails.png        ; $jarResourceCms/preview-images/sdh/serviceRequestDetails.png        ; ; ;
@@ -783,99 +786,99 @@ INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realf
 UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV); linkComponents(uid, $contentCV);;;;;
 ; ; homepage ; homepagePreview ; HomepageNavLink ; ; ; ;
 
-# Simple Content Pages 
+# Simple Content Pages
 
 UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; linkComponents(uid, $contentCV);;;;;
 ; ; storefinderPage ; StoreFinderLink ; ; ; ;
 ; ; login           ; LoginLink       ; ; ; ;
 
-# Product Details Page 
+# Product Details Page
 UPDATE ProductPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);;;;;
 ;;serviceRequestDetails;serviceRequestDetailsPagePreview;;;;;
 
 ###### Public Sector UK Homepage
 
-# Public Sector Search Results Page 
-# SimpleBannerComponent 
+# Public Sector Search Results Page
+# SimpleBannerComponent
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
 ; ; BuyOnlineSimpleBannerComponent ; Buy Online Simple Banner Component ; BuyOnlineSimpleBannerComponent ; ; ; ;
 
-# ContentSlot 
+# ContentSlot
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; Section2Slot-search ; Section2 Slot for Search Page ; true ; BuyOnlineSimpleBannerComponent ; ; ;
 
-# ContentSlotForPage 
+# ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'search']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; Section2-search ; Section2 ; ; Section2Slot-search ; ; ;
 
-# CMSParagraphComponent 
+# CMSParagraphComponent
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
 ; ; NoSearchResultsParagraphComponent ; No Search Results Paragraph Component ; NoSearchResultsParagraphComponent ; ; ; ;
 
-# ContentSlot 
+# ContentSlot
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; MiddleContent-searchEmpty ; Middle Slot for searchEmpty ; true ; NoSearchResultsParagraphComponent ; ; ;
 ; ; SideContent-searchEmpty   ; Narrow Slot for searchEmpty ; true ;                                   ; ; ;
 ; ; TopContent-searchEmpty    ; Top Slot for searchEmpty    ; true ;                                   ; ; ;
 
-# ContentSlotForPage 
+# ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'searchEmpty']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; Middle-searchEmpty ; MiddleContent ; ; MiddleContent-searchEmpty ; ; ;
 ; ; Side-searchEmpty   ; SideContent   ; ; SideContent-searchEmpty   ; ; ;
 ; ; Top-searchEmpty    ; TopContent    ; ; TopContent-searchEmpty    ; ; ;
 
-# Public Sector Cart Page  
-# SimpleBannerComponent 
+# Public Sector Cart Page
+# SimpleBannerComponent
 INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
 ; ; FreeDeliverySimpleBannerComponent     ; Free Delivery Simple Banner Component      ; FreeDeliverySimpleBannerComponent     ; ; ; ;
 ; ; HelpWithCheckoutSimpleBannerComponent ; Help With Checkout Simple Banner Component ; HelpWithCheckoutSimpleBannerComponent ; ; ; ;
 
-# CMSParagraphComponent 
+# CMSParagraphComponent
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
 ; ; EmptyCartParagraphComponent ; Empty Cart Paragraph Component ; EmptyCartParagraphComponent ; ; ; ;
 ; ; HelpParagraphComponent      ; Help Paragraph Component       ; HelpParagraphComponent      ; ; ; ;
 
-# Public Sector Checkout Summary \ Proceed to Checkout Page  
+# Public Sector Checkout Summary \ Proceed to Checkout Page
 
-# ContentSlot 
+# ContentSlot
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; SideContent-multiStepCheckoutSummaryPage ; Side Slot for multiStepCheckoutSummaryPage ; true ; HelpParagraphComponent ; ; ;
 
-# ContentSlotForPage 
+# ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true]; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; Side-multiStepCheckoutSummaryPage ; SideContent ; multiStepCheckoutSummaryPage ; SideContent-multiStepCheckoutSummaryPage ; ; ;
 
-# Public Sector UK FAQ Page  
+# Public Sector UK FAQ Page
 
-# CMS Paragraph Component (Contact information) 
-# CMSParagraphComponent 
+# CMS Paragraph Component (Contact information)
+# CMSParagraphComponent
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
 ; ; faqMenuParagraph ; FAQ Paragraph ; FAQMenuParagraph ; ; ; ;
 ; ; faqTextParagraph ; FAQ Paragraph ; FAQTextParagraph ; ; ; ;
 
-# ContentSlot 
+# ContentSlot
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; Section2ASlot-FAQ ; Section2A Slot for FAQ Page ; true ; FAQMenuParagraph ; ; ;
 ; ; Section2BSlot-FAQ ; Section2B Slot for FAQ Page ; true ; FAQTextParagraph ; ; ;
 
-# ContentSlotForPage 
+# ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'faq']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; Section2A-FAQ ; Section2A ; ; Section2ASlot-FAQ ; ; ;
 ; ; Section2B-FAQ ; Section2B ; ; Section2BSlot-FAQ ; ; ;
 
 # Public Sector UK Order Expired Page
 
-# CMSParagraphComponent 
+# CMSParagraphComponent
 INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;;;;
 ; ; orderExpiredMenuParagraph ; Order Expired Paragraph ; OrderExpiredMenuParagraph ; ; ; ;
 ; ; orderExpiredTextParagraph ; Order Expired Paragraph ; OrderExpiredTextParagraph ; ; ; ;
 
-# ContentSlot 
+# ContentSlot
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; Section2ASlot-OrderExpired ; Section2A Slot for Order Expired Page ; true ; OrderExpiredMenuParagraph ; ; ;
 ; ; Section2BSlot-OrderExpired ; Section2B Slot for Order Expired Page ; true ; OrderExpiredTextParagraph ; ; ;
 
-# ContentSlotForPage 
+# ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'orderExpired']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; Section2A-OrderExpired ; Section2A ; ; Section2ASlot-OrderExpired ; ; ;
 ; ; Section2B-OrderExpired ; Section2B ; ; Section2BSlot-OrderExpired ; ; ;
@@ -910,7 +913,7 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 ; ; DynamicBrandBanner ; Section2 ; ; Section2Slot-ProductGridPage ; ; ;
 
 # Brand banners
-# Media 
+# Media
 
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
 ; ; AccountPaymentDetailsComponent          ; Account Payment Details Component             ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountPaymentInfoPage.jsp         ;                 ; AccountPaymentDetailsComponent
@@ -1073,7 +1076,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'allOrders']; contentSlot(uid, $contentCV)[unique = true];;;
 ; ; BodyContent-myorders ; BodyContent ; ; BodyContent-myorders ; ; ;
 
-###### Account Documents 
+###### Account Documents
 
 # ContentSlot
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
@@ -1100,7 +1103,7 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 ; ; RightSideContent-retrievedraft ; RightSideContent ; ; RightSideContent-retrievedraft ; ; ;
 ; ; BodyContent-retrievedraft ; BodyContent ; ; BodyContent-retrievedraft ; ; ;
 
-###### Account My Expired Documents 
+###### Account My Expired Documents
 
 # ContentSlot
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
@@ -1164,7 +1167,7 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 ; ; RightContentSlot-checkout-login  ; RightContentSlot  ; ; RightContentSlot-checkout-login  ; ; ;
 
 
-###### Relationship-All-Bills 
+###### Relationship-All-Bills
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; SideContent-relationshipallbills ; Side Content Slot for My Account All Bills ; true ; ; ; ;
 ; ; BodyContent-relationshipallbills ; Body Content Slot for My Account All Bills ; true ; AccountRelationshipAllBillsComponent   ; ; ;
@@ -1188,7 +1191,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 INSERT_UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;showLanguageCurrency;&componentRef
 ;;FooterComponent;6;true;;
 
-################# PUBLIC SECTOR HOME PAGE START #################  
+################# PUBLIC SECTOR HOME PAGE START #################
 
 ###### Home page Section 1 ######
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -1201,14 +1204,14 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 ;publicSector-homepage-Carousel-en;PS_480x320_HomePageBanner_EN.jpg,PS_770x350_HomePageBanner_EN.jpg,PS_960x400_HomePageBanner_EN.jpg,PS_1400x813_HomePageBanner_EN.jpg
 
 ###  Home page splash Slot 1  #######
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink   
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
 ;;publicSectorBannerHome;Banner one;publicSectorBannerHome; "/"
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;Section1Slot-PublicSectorHomepage;Section1 Slot for PublicSectorHomepage;true;publicSectorBannerHome
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]  
-;;Section1-PublicSectorHomepage;Section1;;Section1Slot-PublicSectorHomepage   
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
+;;Section1-PublicSectorHomepage;Section1;;Section1Slot-PublicSectorHomepage
 
 ## Home Page Section 2A ####
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;product(code,$productCV);&linkRef;target(code)[default='sameWindow'];styleAttributes;
@@ -1217,7 +1220,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;pro
 ;;ApplyEventPermitLink;ApplyEventPermitLink;event-permit-application;ApplyEventPermitLink;;class="flow";
 ;;ReportPotholeLink;ReportPotholeLink;report-pothole;ReportPotholeLink;;class="flow";
 ;;ApplyMarriageCertificateLink;ApplyMarriageCertificateLink;apply-for-marriage-certificate;ApplyMarriageCertificateLink;;class="flow";
-;;ApplyCarLearnerPermitLink;ApplyCarLearnerPermitLink;apply-learner-driver-licence;ApplyCarLearnerPermitLink;;class="flow";																																															
+;;ApplyCarLearnerPermitLink;ApplyCarLearnerPermitLink;apply-learner-driver-licence;ApplyCarLearnerPermitLink;;class="flow";
 
 INSERT_UPDATE PSFeaturedLinksComponent;$contentCV[unique=true];uid[unique=true];name;title;links(&linkRef);&componentRef
 ;;FrequentlyUsedServices;Frequently Used Services;FREQUENTLY USED SERVICES;RegisterBirthLink,ApplyWokringWithChildrenCheckLink,ApplyEventPermitLink,ReportPotholeLink,ApplyMarriageCertificateLink,ApplyCarLearnerPermitLink;FrequentlyUsedServices
@@ -1225,7 +1228,7 @@ INSERT_UPDATE PSFeaturedLinksComponent;$contentCV[unique=true];uid[unique=true];
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;Section2ASlot-PublicSectorHomepage;Section2A Slot for PublicSectorHomepage;true;FrequentlyUsedServices;
 
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]  
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Section2A-PublicSectorHomepage;Section2A;;Section2ASlot-PublicSectorHomepage
 
 ### Home Page Section 2B ####
@@ -1273,11 +1276,11 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 #Footer Start
 
-# CMS Footer Component 
+# CMS Footer Component
 INSERT_UPDATE PSFooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef;showLanguageCurrency;navigationNodes(uid, $contentCV);socialNavigationNode(uid, $contentCV);
 ;;FooterComponent;6;FooterComponent;true;NoticiasNavNode,CalendarioTributarioNavNode,IndiceRecaudacionNavNode,PredialNavNode;;
 
-# CMS Navigation Nodes  
+# CMS Navigation Nodes
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); children(uid, $contentCV)[mode = append]; links(uid, $contentCV); &nodeRef
 ; root                                   ; ; root                             ;                    ; ;                                                                                                ; root                                   ;
 ; PublicSectorNavNode                    ; ; Public Sector Site               ; SiteRootNode       ; ; HomepageNavLink                                                                                ; PublicSectorNavNode                       ;
@@ -1382,7 +1385,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];actions(uid,$contentCV);
 ;;StoreFinderComponent;;
 
-# Include 
+# Include
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
 ;;AccountMyDraftServicesComponent;Account My Draft Services Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountDrafts.jsp;;AccountMyDraftServicesComponent
 ;;AccountMyOrderServicesComponent;Account My Order Services Component;/WEB-INF/views/addons/$addonExtensionName/responsive/pages/account/accountOrders.jsp;;AccountMyOrderServicesComponent
@@ -1428,12 +1431,12 @@ INSERT_UPDATE PSShareThisPageComponent;$contentCV[unique=true];uid[unique=true];
 ;;ServiceShareThisPageComponent;Share This Page;;ServiceShareThisPageComponent
 
 ### Service Request Details Page
- # ContentSlot 
+ # ContentSlot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
 ;;LeftSectionSlot-ServiceRequestDetails;Left Section Slot for Service Request Details Page;true;ServiceApplyOnlineComponent,ServiceApplyByEmailComponent,ServiceApplyByPhoneComponent;;;
 ;;RightSectionSlot-ServiceRequestDetails;Right Section Slot for Service Request Details Page;true;ServiceKeyFactsComponent,ServiceRelatedLinksComponent,ServiceHelpDeskComponent,ServiceShareThisPageComponent;;;
 
-# ContentSlotForPage 
+# ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='serviceRequestDetails'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;LeftSection-ServiceRequestDetails;LeftSection;;LeftSectionSlot-ServiceRequestDetails;;;
 ;;RightSection-ServiceRequestDetails;RightSection;;RightSectionSlot-ServiceRequestDetails;;;
@@ -1446,7 +1449,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ;;RightSideContent ; Side Content Slot for Draft Confirmation page ; true ; ServiceHelpDeskComponent ; ; ;
 
-# ContentSlot 
+# ContentSlot
 UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;SideContent-multiStepCheckoutSummaryPage;Side Slot for multiStepCheckoutSummaryPage;true;ServiceHelpDeskComponent;;;
 
@@ -1524,7 +1527,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ########### Changes for Assets pages #################
 # Assets List Page
 
-###### My-All-Bills 
+###### My-All-Bills
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; SideContent-myallassets ; Side Content Slot for My All Assets Page ; true ; ; ; ;
 ; ; BodyContent-myallassets ; Body Content Slot for My All Assets Page ; true ;PSAssetListComponent; ; ;
@@ -1541,7 +1544,7 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 
 # Asset Detail Page
 
-###### My-All-Bills 
+###### My-All-Bills
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
 ; ; SideContent-assetDetail ; Side Content Slot for Asset details Page ; true ; ; ; ;
 ; ; BodyContent-assetDetail ; Body Content Slot for Asset Detail Page ; true ;PSAssetDetailComponent; ; ;
@@ -1587,10 +1590,10 @@ INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];u
 
 
 #->INI dev-federico Agregar paginas para impuesto sobretasagasolina  17/01/2019
-# USE CTRL-SPACE for type-ahead support 
+# USE CTRL-SPACE for type-ahead support
 $productCatalogSDH=sdhProductCatalog
 $contentCatalogSDH=sdhContentCatalog
-$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online] 
+$productCVSDH=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalogSDH]),CatalogVersion.version[default=Online])[default=$productCatalogSDH:Online]
 
 INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;sobretasa-gasolina 		;Sobretasa Gasolina 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/contribuyentes/sobretasa-gasolina
@@ -1620,7 +1623,7 @@ INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;nam
 
 INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
 				 					;							;DeclaracionGasolinaComponent	;DeclaracionGasolinaComponent	;/WEB-INF/views/responsive/pages/impuestoGasolina/declaracionGasolina.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;DeclaracionGasolinaComponent
-																		
+
 
 INSERT_UPDATE ContentPage	;$productCVSDH[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$productCVSDH)							;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;preparacionPagarPSE 		;Preparacion Pagar PSE 	;AccountPageTemplate:$contentCatalogSDH:Staged	;/impuestos/preparacionPagarPSE
@@ -1635,13 +1638,14 @@ INSERT_UPDATE ContentSlot	;$productCVSDH[unique=true]	;uid[unique=true]					;nam
 
 INSERT_UPDATE JspIncludeComponent	;$productCVSDH[unique=true]	;uid[unique=true]				;name							;page																			;actions(uid,$productCVSDH)							;&componentRef
 				 					;							;preparacionPagarPSEComponent	;preparacionPagarPSEComponent	;/WEB-INF/views/responsive/pages/layout/preparacionPagarPSE.jsp		;ViewOrderAction:$contentCatalogSDH:Staged	;preparacionPagarPSEComponent
-									
+
 #->FIN dev-federico Agregar paginas para impuesto sobretasagasolina  17/01/2019
 
 #->INI dev-maria Agregar paginas para impuesto delineacionurbana  13/02/2019
 
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCatalog=sdhContentCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;delineacionUrbanaPage 		;Delineacion Urbana 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/delineacion-urbana
@@ -1651,7 +1655,7 @@ INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name				
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='delineacionUrbanaPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-delineacionUrbanaPage 	;SideContent			;																	;SideContent-delineacionUrbanaPage				;;;
 								;						;BodyContent-delineacionUrbanaPage 	;BodyContent			;																	;BodyContent-delineacionUrbanaPage				;;;
-								
+
 
 
 INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
@@ -1660,11 +1664,11 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;delineacionUrbanaPageComponent	;delineacionUrbanaPage Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaPageComponent	
+				 					;							;delineacionUrbanaPageComponent	;delineacionUrbanaPage Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaPageComponent
 
 $contentCatalog=sdhContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
-#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;delineacionUrbanaDeclaracionesPage 		;Declaracion Urbana	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/publicidadexterior/declaracion
@@ -1685,8 +1689,9 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 #->FIN dev-maria Agregar paginas para impuesto delineacionurbana  13/02/2019
 
 #->INI dev-maria Agregar paginas para impuesto sobrevehiculos impex detalle  14/02/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;sobreVehiculosAutomotoresPage 		;Sobre Vehiculos	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/sobrevehiculosautomotores/detalle
@@ -1702,13 +1707,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-sobreVehiculosAutomotoresPage	;Body Content Slot for Sobre Vehiculos	;true	;sobreVehiculosAutomotoresPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;sobreVehiculosAutomotoresPageComponent	;sobreVehiculosAutomotoresPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosAutomotoresPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosAutomotoresPageComponent	
+				 					;							;sobreVehiculosAutomotoresPageComponent	;sobreVehiculosAutomotoresPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosAutomotoresPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosAutomotoresPageComponent
 
 #->FIN dev-maria Agregar paginas para impuesto sobrevehiculos impex detalle  14/02/2019
 
 #->INI dev-maria Agregar paginas para impuesto predialunificado  impex detalle 14/02/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;predialUnificadoPage 		;Predial Unificado	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/predialunificado/detalle
@@ -1728,35 +1734,12 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 
 #->FIN dev-maria Agregar paginas para impuesto predial unificado impex detalle 14/02/2019
 
-#->INI dev-maria Agregar paginas para mi buzón tributario 19/02/2019
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
-
-INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;miBuzonPage 		;Mi buzon	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mibuzontributario/inicial
-
-
-###### SDH - UPDATE EXAMPLE FORM START ######
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='miBuzonPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
-								;						;SideContent-miBuzonPage 	;SideContent			;																	;SideContent-miBuzonPage				;;;
-								;						;BodyContent-miBuzonPage 	;BodyContent			;																	;BodyContent-miBuzonPage				;;;
-								
-
-
-INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-miBuzonPage 	;Side Content Slot for Mi Buzon	;true	;								;;;
-							;							;BodyContent-miBuzonPage	;Body Content Slot for Mi buzon	;true	;miBuzonPageComponent		;;;
-
-
-INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;miBuzonPageComponent	;miBuzonPage Component	;/WEB-INF/views/responsive/pages/layout/miBuzonPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;miBuzonPageComponent	
-
-#->FIN dev-maria Agregar paginas para mi buzón tributario 19/02/2019
 
 #->INI dev-maria Agregar paginas para Reportantes 19/02/2019
 ###INICIAL
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;reportantesPage 		;Reportantes	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes
@@ -1765,7 +1748,7 @@ INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name				
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-reportantesPage 	;SideContent			;																	;SideContent-reportantesPage				;;;
 								;						;BodyContent-reportantesPage 	;BodyContent			;																	;BodyContent-reportantesPage				;;;
-								
+
 
 
 INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
@@ -1774,12 +1757,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;reportantesPageComponent	;reportantesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesPageComponent	
+				 					;							;reportantesPageComponent	;reportantesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesPageComponent
 
 
 ###CARGA
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;reportantesInfoPage 		;Reportantes	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes/cargadocumentos
@@ -1787,7 +1771,7 @@ INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name				
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesInfoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-reportantesInfoPage 	;SideContent			;																	;SideContent-reportantesInfoPage				;;;
 								;						;BodyContent-reportantesInfoPage 	;BodyContent			;																	;BodyContent-reportantesInfoPage				;;;
-								
+
 
 
 INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
@@ -1796,11 +1780,12 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;reportantesInfoPageComponent	;reportantesInfoPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesInfoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesInfoPageComponent	
+				 					;							;reportantesInfoPageComponent	;reportantesInfoPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesInfoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesInfoPageComponent
 
 ####HISTORICO
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;reportantesHistoricoPage 		;Reportantes Historico	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes/historico
@@ -1808,7 +1793,7 @@ INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name				
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesHistoricoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-reportantesHistoricoPage 	;SideContent			;																	;SideContent-reportantesHistoricoPage				;;;
 								;						;BodyContent-reportantesHistoricoPage 	;BodyContent			;																	;BodyContent-reportantesHistoricoPage				;;;
-								
+
 
 
 INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
@@ -1817,11 +1802,12 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;reportantesHistoricoPageComponent	;reportantesHistoricoPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesHistoricoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesHistoricoPageComponent	
+				 					;							;reportantesHistoricoPageComponent	;reportantesHistoricoPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesHistoricoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesHistoricoPageComponent
 
 ###SANCIONES
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online] 
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;reportantesSancionesPage 		;Reportantes Sanciones	;AccountPageTemplate:sdhContentCatalog:Staged	;/reportantes/sanciones
@@ -1830,7 +1816,7 @@ INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name				
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='reportantesSancionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
 								;						;SideContent-reportantesSancionesPage 	;SideContent			;																	;SideContent-reportantesSancionesPage				;;;
 								;						;BodyContent-reportantesSancionesPage 	;BodyContent			;																	;BodyContent-reportantesSancionesPage				;;;
-								
+
 
 
 INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
@@ -1839,14 +1825,15 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;reportantesSancionesPageComponent	;reportantesSancionesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesSancionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesSancionesPageComponent	
+				 					;							;reportantesSancionesPageComponent	;reportantesSancionesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesSancionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesSancionesPageComponent
 
 #->FIN dev-maria Agregar paginas para Reportantes 19/02/2019
 
 #->INI dev-maria Agregar paginas para Certificacion de Pagos 28/02/2019
 
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;certiPagoPage 		;Certificacion Pago 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/certipagos
@@ -1861,14 +1848,15 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-certiPagoPage	;Body Content Slot for Certificacion Pago			;true	;certiPagoPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;certiPagoPageComponent	;certiPagoPage Component	;/WEB-INF/views/responsive/pages/layout/certiPagoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;certiPagoPageComponent					
-									
+				 					;							;certiPagoPageComponent	;certiPagoPage Component	;/WEB-INF/views/responsive/pages/layout/certiPagoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;certiPagoPageComponent
+
 #->FIN dev-maria Agregar paginas para Certificacion de Pagos 28/02/2019
 
 
 #->INI dev-maria Agregar paginas para Obligaciones Pendientes 01/03/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;obligacionesPendientesPage 		;Obligaciones Pendientes 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/obligaciones
@@ -1884,12 +1872,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-obligacionesPendientesPage	;Body Content Slot for Obligaciones Pendientes			;true	;obligacionesPendientesPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;obligacionesPendientesPagePageComponent	;obligacionesPendientesPage Component	;/WEB-INF/views/responsive/pages/layout/obligacionesPendientesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;obligacionesPendientesPageComponent					
-#->FIN dev-maria Agregar paginas para Obligaciones Pendientes 01/03/2019		
+				 					;							;obligacionesPendientesPagePageComponent	;obligacionesPendientesPage Component	;/WEB-INF/views/responsive/pages/layout/obligacionesPendientesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;obligacionesPendientesPageComponent
+#->FIN dev-maria Agregar paginas para Obligaciones Pendientes 01/03/2019
 
 #->INI dev-maria Agregar paginas para Relacion Pagos 01/03/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;relacionPagosPage 		;Relacion de pagos 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/relacionpagos
@@ -1905,11 +1894,12 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-relacionPagosPage	;Body Content Slot for Relacion Pagos			;true	;relacionPagosPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;relacionPagosPageComponent	;relacionPagosPage Component	;/WEB-INF/views/responsive/pages/layout/relacionPagosPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;relacionPagosPageComponent					
-#->FIN dev-maria Agregar paginas para Relacion Pagos 01/03/2019		
+				 					;							;relacionPagosPageComponent	;relacionPagosPage Component	;/WEB-INF/views/responsive/pages/layout/relacionPagosPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;relacionPagosPageComponent
+#->FIN dev-maria Agregar paginas para Relacion Pagos 01/03/2019
 #->INI dev-maria Agregar paginas para Certificacion Declaracion 07/03/2019
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCatalog=sdhContentCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;certiDeclaracionesPage 		;certificacion declaracion 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/certideclaraciones
@@ -1925,12 +1915,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-certiDeclaracionesPage	;Body Content Slot for certificacion declaracion			;true	;certiDeclaracionesPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;certiDeclaracionesPageComponent	;certiDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/certiDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;certiDeclaracionesPageComponent					
-#->FIN dev-maria Agregar paginas para Certificacion Declaracion 07/03/2019					
+				 					;							;certiDeclaracionesPageComponent	;certiDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/certiDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;certiDeclaracionesPageComponent
+#->FIN dev-maria Agregar paginas para Certificacion Declaracion 07/03/2019
 
 #->INI dev-maria Agregar paginas para Lista de Delieneacion Retencion 14/03/2019
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;delineacionUrbanaRadicados 		;Declaraciones Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/delineacionurbana/retencion
@@ -1946,13 +1937,35 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-delineacionUrbanaRadicados	;Body Content Slot for Retenciones			;true	;delineacionUrbanaRadicadosComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;delineacionUrbanaRadicadosComponent	;delineacionUrbanaRadicados Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaRadicados.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaRadicadosComponent					
-#->FIN dev-maria Agregar paginas para Delieneacion Retencion 14/03/2019	
-									
+				 					;							;delineacionUrbanaRadicadosComponent	;delineacionUrbanaRadicados Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaRadicados.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaRadicadosComponent
+#->FIN dev-maria Agregar paginas para Delieneacion Retencion 14/03/2019
+
+#->INI dev-maria Agregar paginas para Lista de declaraciones a Firmar 15/03/2019
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;declaraFirmarPage 		;Declaraciones Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/declaraciones/listadeclafirmar
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='declaraFirmarPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-declaraFirmarPage 		;SideContent				;															;SideContent-declaraFirmarPage						;;;
+								;						;BodyContent-declaraFirmarPage		;BodyContent				;															;BodyContent-declaraFirmarPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-declaraFirmarPage 	;Side Content Slot for Lista de Declaraciones			;true	;								;;;
+							;							;BodyContent-declaraFirmarPage	;Body Content Slot for Lista de Declaraciones			;true	;declaraFirmarPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;declaraFirmarPageComponent	;declaraFirmarPage Component	;/WEB-INF/views/responsive/pages/layout/declaraFirmarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;declaraFirmarPageComponent
+#->FIN dev-maria Agregar paginas para Lista de declaraciones a firmar 15/03/2019
 
 #->INI dev-maria Agregar paginas para ICA 18/03/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;icaPage 		;ICA 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/ica
@@ -1968,12 +1981,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-icaPage	;Body Content Slot for ICA			;true	;icaPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;icaPageComponent	;icaPage Component	;/WEB-INF/views/responsive/pages/layout/icaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaPageComponent					
-#->FIN dev-maria Agregar paginas para ICA 18/03/2019	
+				 					;							;icaPageComponent	;icaPage Component	;/WEB-INF/views/responsive/pages/layout/icaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaPageComponent
+#->FIN dev-maria Agregar paginas para ICA 18/03/2019
 
 #->INI dev-maria Agregar paginas para ICA DOS 01/04/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;icaDosPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/icados
@@ -1989,12 +2003,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-icaDosPage	;Body Content Slot for ICA Prop		;true	;icaDosPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;icaDosPageComponent	;icaDosPage Component	;/WEB-INF/views/responsive/pages/layout/icaDosPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDosPageComponent					
-#->FIN dev-maria Agregar paginas para ICA DOS 01/04/2019	
+				 					;							;icaDosPageComponent	;icaDosPage Component	;/WEB-INF/views/responsive/pages/layout/icaDosPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDosPageComponent
+#->FIN dev-maria Agregar paginas para ICA DOS 01/04/2019
 
 #->INI dev-maria Agregar paginas para ICA Declaracion 01/04/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;icaDeclaracionPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/ica/declaracion
@@ -2010,15 +2025,16 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-icaDeclaracionPage	;Body Content Slot for ICA Prop		;true	;icaDeclaracionPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;icaDeclaracionPageComponent	;icaDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/icaDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDeclaracionPageComponent					
-#->FIN dev-maria Agregar paginas para ICA Declaracion 01/04/2019	
+				 					;							;icaDeclaracionPageComponent	;icaDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/icaDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;icaDeclaracionPageComponent
+#->FIN dev-maria Agregar paginas para ICA Declaracion 01/04/2019
 
 #INI Agentes Retenedores  04/04/2019
 
-					
+
 #->INI dev-maria Agregar paginas para Terceros Autorizados 05/04/2019
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;tercerosReportesPage 		;ICA PROP 	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/reportar
@@ -2034,12 +2050,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-tercerosReportesPage	;Body Content Slot for ICA Prop		;true	;tercerosReportesPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;tercerosReportesPageComponent	;tercerosReportesPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosReportesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosReportesPageComponent					
+				 					;							;tercerosReportesPageComponent	;tercerosReportesPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosReportesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosReportesPageComponent
 #->FIN dev-maria Agregar paginas para Terceros Autorizados 05/04/2019
 
 #->INI dev-maria Agregar paginas para Retenedores Registro 10/04/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;retenedoresRegistroPage 		;Retenedores Registro 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/registroretenciones
@@ -2055,12 +2072,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-retenedoresRegistroPage	;Body Content Slot for Retenedores Registro 		;true	;retenedoresRegistroPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;retenedoresRegistroPageComponent	;retenedoresRegistroPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresRegistroPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresRegistroPageComponent					
-#->FIN dev-maria Agregar paginas para Retenedores Registro 10/04/2019	
+				 					;							;retenedoresRegistroPageComponent	;retenedoresRegistroPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresRegistroPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresRegistroPageComponent
+#->FIN dev-maria Agregar paginas para Retenedores Registro 10/04/2019
 
 #->INI dev-maria Agregar paginas para Retenedores Inicial 10/04/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;retenedoresPage 		;Retenedores Inicial 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores
@@ -2076,12 +2094,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-retenedoresPage	;Body Content Slot for Retenedores Inicial 		;true	;retenedoresPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;retenedoresPageComponent	;retenedoresPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresPageComponent					
-#->FIN dev-maria Agregar paginas para Retenedores Inicial 10/04/2019	
+				 					;							;retenedoresPageComponent	;retenedoresPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresPageComponent
+#->FIN dev-maria Agregar paginas para Retenedores Inicial 10/04/2019
 
 #->INI dev-maria Agregar paginas para Retenedores Estado Cargas 10/04/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;retenedoresEdoCargasPage 		;Retenedores Cargas 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/estadocargas
@@ -2097,11 +2116,12 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-retenedoresEdoCargasPage	;Body Content Slot for Retenedores Cargas 		;true	;retenedoresEdoCargasPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;retenedoresEdoCargasPageComponent	;retenedoresEdoCargasPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresEdoCargasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresEdoCargasPageComponent					
-#->FIN dev-maria Agregar paginas para Estado Cargas  10/04/2019	
+				 					;							;retenedoresEdoCargasPageComponent	;retenedoresEdoCargasPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresEdoCargasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresEdoCargasPageComponent
+#->FIN dev-maria Agregar paginas para Estado Cargas  10/04/2019
 #->INI dev-maria Agregar paginas para Retenedores Declaraciones Firmar 10/04/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;retenedoresDecFirmarPage 		;Retenedores Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/declaracionesfirmar
@@ -2117,12 +2137,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-retenedoresDecFirmarPage	;Body Content Slot for Retenedores Firmar 		;true	;retenedoresDecFirmarPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;retenedoresDecFirmarPageComponent	;retenedoresDecFirmarPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDecFirmarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDecFirmarPageComponent					
-#->FIN dev-maria Agregar paginas para Declaraciones Firmar 10/04/2019		
+				 					;							;retenedoresDecFirmarPageComponent	;retenedoresDecFirmarPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDecFirmarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDecFirmarPageComponent
+#->FIN dev-maria Agregar paginas para Declaraciones Firmar 10/04/2019
 
 #->INI dev-maria Agregar paginas para Retenedores Declaracion  10/05/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;retenedoresDeclaracionPage 		;Retenedores Declaracion 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/declaracion
@@ -2138,12 +2159,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-retenedoresDeclaracionPage	;Body Content Slot for Retenedores Declaracion 		;true	;retenedoresDeclaracionPageComponent			;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;retenedoresDeclaracionPageComponent	;retenedoresDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDeclaracionPageComponent					
-#->FIN dev-maria Agregar paginas para Declaraciones  10/05/2019				
+				 					;							;retenedoresDeclaracionPageComponent	;retenedoresDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/retenedoresDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;retenedoresDeclaracionPageComponent
+#->FIN dev-maria Agregar paginas para Declaraciones  10/05/2019
 
 #->INI dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion vehiculos  22/05/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;sobreVehiculosDeclaracionPage 		;Sobre Vehiculos	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/sobrevehiculosautomotores/declaracion
@@ -2158,13 +2180,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-sobreVehiculosDeclaracionPage	;Body Content Slot for Sobre Vehiculos Declaracion	;true	;sobreVehiculosDeclaracionPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;sobreVehiculosDeclaracionPageComponent	;sobreVehiculosDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosDeclaracionPageComponent	
+				 					;							;sobreVehiculosDeclaracionPageComponent	;sobreVehiculosDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosDeclaracionPageComponent
 
 #->FIN dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion vehiculos  22/05/2019
 
 #->INI dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion motos  22/05/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;sobreVehiculosMotosDeclaracionPage 		;Sobre Vehiculos	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/sobrevehiculosautomotores/declaracion/motos
@@ -2179,13 +2202,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-sobreVehiculosMotosDeclaracionPage	;Body Content Slot for Sobre Vehiculos Motos	;true	;sobreVehiculosMotosDeclaracionPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;sobreVehiculosMotosDeclaracionPageComponent	;sobreVehiculosMotosDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosMotosDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosMotosDeclaracionPageComponent	
+				 					;							;sobreVehiculosMotosDeclaracionPageComponent	;sobreVehiculosMotosDeclaracionPage Component	;/WEB-INF/views/responsive/pages/layout/sobreVehiculosMotosDeclaracionPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;sobreVehiculosMotosDeclaracionPageComponent
 
 #->FIN dev-maria Agregar paginas para impuesto sobrevehiculos impex declaracion motos  22/05/2019
 
 #->INI dev-maria Agregar paginas terceros consultas 07/06/2019
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;tercerosConsultas 		;Terceros Consultas	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/consultas/inicial
@@ -2200,13 +2224,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-tercerosConsultas	;Body Content Slot for Terceros Consultas	;true	;tercerosConsultasComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;tercerosConsultasComponent	;tercerosConsultas Component	;/WEB-INF/views/responsive/pages/layout/tercerosConsultas.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosConsultasComponent	
+				 					;							;tercerosConsultasComponent	;tercerosConsultas Component	;/WEB-INF/views/responsive/pages/layout/tercerosConsultas.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosConsultasComponent
 
 #->FIN dev-maria Agregar paginas para terceros consultas 07/06/2019
 
 #->INI dev-maria Agregar paginas agentes autorizados
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;autorizadosReportarInfoPage 		;Agentes Autorizados	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados/entidades/reportarinfo
@@ -2221,12 +2246,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-autorizadosReportarInfoPage	;Body Content Slot for Agentes Autorizados	;true	;autorizadosReportarInfoPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;autorizadosReportarInfoPageComponent	;autorizadosReportarInfoPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosReportarInfoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosReportarInfoPageComponent	
+				 					;							;autorizadosReportarInfoPageComponent	;autorizadosReportarInfoPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosReportarInfoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosReportarInfoPageComponent
 
 #->FIN dev-maria Agregar paginas para agentes autorizados
 #->INI dev-maria Agregar paginas agentes autorizados
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;autorizadosConsultasPage 		;Agentes Autorizados Consultas	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados/entidades/reportarinfo
@@ -2241,13 +2267,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-autorizadosConsultasPage	;Body Content Slot for Agentes Autorizados Consultas;true	;autorizadosConsultasPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;autorizadosConsultasPageComponent	;autorizadosConsultasPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosConsultasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosConsultasPageComponent	
+				 					;							;autorizadosConsultasPageComponent	;autorizadosConsultasPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosConsultasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosConsultasPageComponent
 
 #->FIN dev-maria Agregar paginas para agentes autorizados
 
 #->INI dev-maria Agregar paginas agentes autorizados
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;autorizadosInicialContribuyentePage 		;Agentes Autorizados Representando	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados/contribuyente/representando
@@ -2262,15 +2289,16 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-autorizadosInicialContribuyentePage	;Body Content Slot for Agentes Autorizados Representando;true	;autorizadosInicialContribuyentePageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;autorizadosInicialContribuyentePageComponent	;autorizadosInicialContribuyentePage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosInicialContribuyentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosInicialContribuyentePageComponent	
+				 					;							;autorizadosInicialContribuyentePageComponent	;autorizadosInicialContribuyentePage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosInicialContribuyentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosInicialContribuyentePageComponent
 
 #->FIN dev-maria Agregar paginas para agentes autorizados
 
 
 
 #->INI dev-maria Agregar paginas agentes autorizados
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;autorizadosListadeclaracionesPage 		;Agentes Autorizados declaracion	;AccountPageTemplate:sdhContentCatalog:Staged	;/autorizados/contribuyente/listadeclaraciones
@@ -2285,13 +2313,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-autorizadosListadeclaracionesPage	;Body Content Slot for Agentes Autorizados declaracion;true	;autorizadosListadeclaracionesPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;autorizadosListadeclaracionesPageComponent	;autorizadosListadeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosListadeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosListadeclaracionesPageComponent	
+				 					;							;autorizadosListadeclaracionesPageComponent	;autorizadosListadeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/autorizadosListadeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;autorizadosListadeclaracionesPageComponent
 
 #->FIN dev-maria Agregar paginas para agentes autorizados
 
 #->INI dev-maria Agregar paginas tramites
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;tramitesCrearPage 		;tramites crear	;AccountPageTemplate:sdhContentCatalog:Staged	;/contibuyentes/tramites/crear
@@ -2306,13 +2335,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-tramitesCrearPage	;Body Content Slot for tramites crear;true	;tramitesCrearPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;tramitesCrearPageComponent	;tramitesCrearPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesCrearPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesCrearPageComponent	
+				 					;							;tramitesCrearPageComponent	;tramitesCrearPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesCrearPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesCrearPageComponent
 
 #->FIN dev-maria Agregar paginas para tramites
 
 #->INI dev-maria Agregar paginas tramites
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;tramitesSeguimientoPage 		;tramites seguimiento	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/tramites/seguimiento
@@ -2327,13 +2357,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-tramitesSeguimientoPage	;Body Content Slot for tramites seguimiento;true	;tramitesSeguimientoPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;tramitesSeguimientoPageComponent	;tramitesSeguimientoPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesSeguimientoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesSeguimientoPageComponent	
+				 					;							;tramitesSeguimientoPageComponent	;tramitesSeguimientoPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesSeguimientoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesSeguimientoPageComponent
 
 #->FIN dev-maria Agregar paginas para tramites
 
 #->INI dev-maria Agregar paginas tramites
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;tramitesMenuPage 		;tramites menu	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/tramites
@@ -2348,12 +2379,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-tramitesMenuPage	;Body Content Slot for tramites menu;true	;tramitesMenuPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;tramitesMenuPageComponent	;tramitesMenuPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesMenuPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesMenuPageComponent	
+				 					;							;tramitesMenuPageComponent	;tramitesMenuPage Component	;/WEB-INF/views/responsive/pages/layout/tramitesMenuPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tramitesMenuPageComponent
 
 #->FIN dev-maria Agregar paginas para tramites
 #->INI dev-maria Agregar paginas rop
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;ropPage 		;Agentes Autorizados declaracion	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/rop
@@ -2368,13 +2400,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-ropPage	;Body Content Slot for Agentes Autorizados declaracion;true	;ropPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;ropPageComponent	;ropPage Component	;/WEB-INF/views/responsive/pages/layout/ropPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;ropPageComponent	
+				 					;							;ropPageComponent	;ropPage Component	;/WEB-INF/views/responsive/pages/layout/ropPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;ropPageComponent
 
 #->FIN dev-maria Agregar paginas para rop
 
 #->INI dev-maria Agregar paginas terceros autorizados menu
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;tercerosMenuPage 		;terceros Autorizados	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros
@@ -2389,13 +2422,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-tercerosMenuPage	;Body Content Slot for terceros Autorizados	;true	;tercerosMenuPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;tercerosMenuPageComponent	;tercerosMenuPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosMenuPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosMenuPageComponent	
+				 					;							;tercerosMenuPageComponent	;tercerosMenuPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosMenuPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosMenuPageComponent
 
 #->FIN dev-maria Agregar paginas para terceros autorizados menu
 
-#->INI dev-maria Agregar paginas terceros notarios buscar 
-$contentCatalog=sdhContentCatalog 
+#->INI dev-maria Agregar paginas terceros notarios buscar
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;tercerosNotarisBuscarPage 		;tramites notario buscar	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/notarios/buscar
@@ -2410,13 +2444,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-tercerosNotarisBuscarPage	;Body Content Slot for tramites notario buscar;true	;tercerosNotarisBuscarPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;tercerosNotarisBuscarPageComponent	;tercerosNotarisBuscarPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosNotarisBuscarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosNotarisBuscarPageComponent	
+				 					;							;tercerosNotarisBuscarPageComponent	;tercerosNotarisBuscarPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosNotarisBuscarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosNotarisBuscarPageComponent
 
 #->FIN dev-maria Agregar paginas para terceros noatarios buscar
 
-#->INI dev-maria Agregar paginas terceros sim buscar 
-$contentCatalog=sdhContentCatalog 
+#->INI dev-maria Agregar paginas terceros sim buscar
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;tercerosSIMBuscarPage 		;tramites sim buscar	;AccountPageTemplate:sdhContentCatalog:Staged	;/terceros/sim/buscar
@@ -2431,12 +2466,13 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-tercerosSIMBuscarPage	;Body Content Slot for tramites sim buscar;true	;tercerosSIMBuscarPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;tercerosSIMBuscarPageComponent	;tercerosSIMBuscarPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosSIMBuscarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosSIMBuscarPageComponent	
+				 					;							;tercerosSIMBuscarPageComponent	;tercerosSIMBuscarPage Component	;/WEB-INF/views/responsive/pages/layout/tercerosSIMBuscarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;tercerosSIMBuscarPageComponent
 
 #->FIN dev-maria Agregar paginas para terceros sim buscar
 #->INI dev-maria Agregar paginas descarga factura
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;descargaFacturaPage 		;descarga factura	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/descargafactura
@@ -2451,13 +2487,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-descargaFacturaPage	;Body Content Slot for descarga factyra;true	;descargaFacturaPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;descargaFacturaPageComponent	;descargaFacturaPage Component	;/WEB-INF/views/responsive/pages/layout/descargaFacturaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;descargaFacturaPageComponent	
+				 					;							;descargaFacturaPageComponent	;descargaFacturaPage Component	;/WEB-INF/views/responsive/pages/layout/descargaFacturaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;descargaFacturaPageComponent
 
 #->FIN dev-maria Agregar paginas para descarga factura
 
 #->INI dev-maria Agregar paginas reexpedicion factura
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged] 
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;reexpedicionFacturaPage 		;reexpedicion factura	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/reexpedicionfactura
@@ -2472,13 +2509,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-reexpedicionFacturaPage	;Body Content Slot for reexpedicion factura;true	;reexpedicionFacturaPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;reexpedicionFacturaPageComponent	;reexpedicionFacturaPage Component	;/WEB-INF/views/responsive/pages/layout/reexpedicionFacturaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reexpedicionFacturaPageComponent	
+				 					;							;reexpedicionFacturaPageComponent	;reexpedicionFacturaPage Component	;/WEB-INF/views/responsive/pages/layout/reexpedicionFacturaPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reexpedicionFacturaPageComponent
 
-#->FIN dev-maria Agregar paginas para reexpedicion factura 
+#->FIN dev-maria Agregar paginas para reexpedicion factura
 
 #->INI dev-maria Agregar paginas Escuela Virtual
-$contentCatalog=sdhContentCatalog 
+$contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;escuelaVirtualPage 		;Escuela Virtual	;AccountPageTemplate:sdhContentCatalog:Staged	;/escuelavirtual
@@ -2493,15 +2531,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-escuelaVirtualPage	;Body Content Slot for Escuela Virtual;true	;escuelaVirtualPageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;escuelaVirtualPageComponent	;escuelaVirtualPage Component	;/WEB-INF/views/responsive/pages/layout/escuelaVirtualPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;escuelaVirtualPageComponent	
+				 					;							;escuelaVirtualPageComponent	;escuelaVirtualPage Component	;/WEB-INF/views/responsive/pages/layout/escuelaVirtualPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;escuelaVirtualPageComponent
 
 #->FIN dev-maria Agregar paginas para Escuela Virtual
 
 #->INI dev-maria Agregar paginas asignarse agentes 02/08/2019
-
-
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCatalog=sdhContentCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;asignarseAgentePage 		;asignarse agente	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/asignarsecomoagente
@@ -2516,13 +2553,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-asignarsecomoAgente	;Body Content Slot for asignarse agente;true	;asignarseAgentePageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;asignarseAgentePageComponent	;asignarseAgentePage Component	;/WEB-INF/views/responsive/pages/layout/asignarseAgentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;asignarseAgentePageComponent	
+				 					;							;asignarseAgentePageComponent	;asignarseAgentePage Component	;/WEB-INF/views/responsive/pages/layout/asignarseAgentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;asignarseAgentePageComponent
 
 #->FIN dev-maria Agregar paginas para asignarse agentes
 
 #->INI dev-maria Agregar paginas crear agentes 02/08/2019
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCatalog=sdhContentCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;crearAgentePage 		;crear agente	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/crearagente
@@ -2537,13 +2575,14 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 							;							;BodyContent-crearAgentePage	;Body Content Slot for crear agente;true	;crearAgentePageComponent		;;;
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;crearAgentePageComponent	;crearAgentePage Component	;/WEB-INF/views/responsive/pages/layout/crearAgentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;crearAgentePageComponent	
+				 					;							;crearAgentePageComponent	;crearAgentePage Component	;/WEB-INF/views/responsive/pages/layout/crearAgentePage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;crearAgentePageComponent
 
 #->FIN dev-maria Agregar paginas para crear agentes
 
 #->INI dev-maria Agregar paginas paradeclaraciones
-$contentCatalog=sdhContentCatalog 
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCatalog=sdhContentCatalog
+#$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 			 				;							;declaracionesPage 		;Declaraciones Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/consultas/declaraciones
@@ -2561,3 +2600,29 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;declaracionesPageComponent	;declaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/declaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;declaracionesPageComponent					
 #->FIN dev-maria Agregar paginas para declaraciones
+
+#->INI dev-maria Agregar paginas para mi buzón tributario 18/09/2019
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;buzonPage 		; buzon	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/mibuzon_tributario
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='buzonPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-buzonPage 	;SideContent			;																	;SideContent-buzonPage				;;;
+								;						;BodyContent-buzonPage 	;BodyContent			;																	;BodyContent-buzonPage				;;;
+
+
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-buzonPage 	;Side Content Slot for  Buzon	;true	;								;;;
+							;							;BodyContent-buzonPage	;Body Content Slot for  buzon	;true	;buzonPageComponent		;;;
+
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;buzonPageComponent	;buzonPage Component	;/WEB-INF/views/responsive/pages/layout/buzonPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;buzonPageComponent
+
+#->FIN dev-maria Agregar paginas para mi buzón tributario 18/09/2019
