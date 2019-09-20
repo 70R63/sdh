@@ -266,7 +266,10 @@ public class PSEPaymentForm
 	 */
 	public void setValorAPagar(final String valorAPagar)
 	{
-		this.valorAPagar = valorAPagar;
+		String valorAPagaraux;
+		valorAPagaraux = valorAPagar;
+		valorAPagaraux = valorAPagaraux.replaceAll("(-?\\d*)(\\.)(\\d*)", "$1$3");
+		this.valorAPagar = valorAPagaraux;
 	}
 
 	/**
@@ -396,7 +399,7 @@ public class PSEPaymentForm
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

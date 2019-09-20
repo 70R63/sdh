@@ -861,6 +861,10 @@ public class SobreTasaGasolinaService
 
 
 			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
+			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
+
+
+
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse"))
 			{
 				wsresponse = wsresponse.replace("\"Uso\"", "\"uso\"");
