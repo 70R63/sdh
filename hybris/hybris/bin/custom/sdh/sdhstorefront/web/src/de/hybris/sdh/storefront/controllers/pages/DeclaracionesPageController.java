@@ -235,7 +235,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		SDHValidaMailRolResponse customerData = null;
 
 		String bp = "";
-		String objContrato = "";
+		String numObjeto = "";
 		String claseObjeto = "";
 		String anioGravable = "";
 		String periodo = "";
@@ -246,7 +246,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		customerData = sdhCustomerFacade.getRepresentadoFromSAP(bp);
 
 		claseObjeto = infoVista.getClaveImpuesto();
-		objContrato = infoVista.getObjContrato(); //gasolinaService.obtenerNumDocDeclaraciones(customerData2, claseObjeto);
+		numObjeto = infoVista.getObjContrato(); //gasolinaService.obtenerNumDocDeclaraciones(customerData2, claseObjeto);
 		anioGravable = infoVista.getAnoGravable();
 		periodo = infoVista.getPeriodo();
 		radicado = "";
@@ -255,7 +255,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		infoVista.setDeclaraPDFResponse(null);
 
 		declaraPDFRequest.setBp(bp);
-		declaraPDFRequest.setObjContrato(objContrato);
+		declaraPDFRequest.setNumObjeto(numObjeto);
 		declaraPDFRequest.setClaseObjeto(claseObjeto);
 		declaraPDFRequest.setAnioGravable(anioGravable);
 		declaraPDFRequest.setPeriodo(periodo);

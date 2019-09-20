@@ -57,11 +57,13 @@ ACC.opcionDeclaraciones = {
 		debugger;
 		if (infoResponse.declaraPDFResponse.errores != null){
 			alert(infoResponse.declaraPDFResponse.errores.textoMensaje);
+		}else{
+			if(infoResponse.urlDownload != null){
+				$("#downloadHelper").attr("href",infoResponse.urlDownload);
+				document.getElementById("downloadHelper").click();
+			}
 		}
-		if(infoResponse.urlDownload != null){
-			$("#downloadHelper").attr("href",infoResponse.urlDownload);
-			document.getElementById("downloadHelper").click();
-		}			
+		
 				
 	},
 	

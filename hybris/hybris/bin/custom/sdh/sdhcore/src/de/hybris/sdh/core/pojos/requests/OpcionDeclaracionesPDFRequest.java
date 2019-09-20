@@ -10,7 +10,7 @@ package de.hybris.sdh.core.pojos.requests;
 public class OpcionDeclaracionesPDFRequest
 {
 	private String bp;
-	private String objContrato;
+	private String numObjeto;
 	private String claseObjeto;
 	private String anioGravable;
 	private String periodo;
@@ -33,21 +33,23 @@ public class OpcionDeclaracionesPDFRequest
 		this.bp = bp;
 	}
 
+
+
 	/**
-	 * @return the objContrato
+	 * @return the numObjeto
 	 */
-	public String getObjContrato()
+	public String getNumObjeto()
 	{
-		return objContrato;
+		return numObjeto;
 	}
 
 	/**
-	 * @param objContrato
-	 *           the objContrato to set
+	 * @param numObjeto
+	 *           the numObjeto to set
 	 */
-	public void setObjContrato(final String objContrato)
+	public void setNumObjeto(final String numObjeto)
 	{
-		this.objContrato = objContrato;
+		this.numObjeto = numObjeto;
 	}
 
 	/**
@@ -130,7 +132,7 @@ public class OpcionDeclaracionesPDFRequest
 
 		stringBuilder.append("{");
 		stringBuilder.append(obtenerValorJson("\"bp\":\"", this.getBp(), "\","));
-		stringBuilder.append(obtenerValorJson("\"objContrato\":\"", this.getObjContrato(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\","));
 		stringBuilder.append(obtenerValorJson("\"claseObjeto\":\"", this.getClaseObjeto(), "\","));
 		stringBuilder.append(obtenerValorJson("\"anioGravable\":\"", this.getAnioGravable(), "\","));
 		stringBuilder.append(obtenerValorJson("\"Periodo\":\"", this.getPeriodo(), "\","));
