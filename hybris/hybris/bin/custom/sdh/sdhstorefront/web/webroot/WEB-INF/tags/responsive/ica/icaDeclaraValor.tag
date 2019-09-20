@@ -41,12 +41,12 @@
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label" style="margin-left: 30px !important; text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.tipdoc" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label class="control-label" style="text-transform: none !important"
+				<label style=" text-transform: none !important;" class="control-label"
 					for=""> <spring:theme code="ica.declaracion.valor.numide" />
 				</label>
 			</div>
@@ -89,11 +89,12 @@
 		<c:if test="${empty infoDeclara.valorRetenido}">
 			<div class="row valor" id="valor">
 				<div class="col-md-1">
-					<input class=" new_alto_anio form-control anio anoGravable " type="date"
-						value="${infoDeclara.anoGravable }" />
+					<input class=" new_alto_anio form-control anio anoGravable "
+						type="date" value="${infoDeclara.anoGravable }" />
 				</div>
 				<div class="col-md-2">
-					<select id="" class="new_alto form-control tipoID" style="height: 48px;">
+					<select id="" class="etiq_valor form-control tipoID"
+						style="height: 48px;">
 						<option value="">Seleccionar</option>
 						<option value="CC">CC Cédula de ciudadania</option>
 						<option value="CE">CE Cédula de extranjería</option>
@@ -158,11 +159,12 @@
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
 			<div class="row valor" id="valor">
 				<div class="col-md-1">
-					<input class="new_alto_anio form-control anio anoGravable " type="date"
-						value="${eachValor.anoGravable }" />
+					<input class="new_alto_anio form-control anio anoGravable "
+						type="date" value="${eachValor.anoGravable }" />
 				</div>
 				<div class="col-md-2">
-					<select id="" class="new_alto form-control tipoID" style="height: 48px;">
+					<select id="" class="etiq_valor form-control tipoID"
+						style="height: 48px;">
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ idTypes}" var="eachType">
 
@@ -213,7 +215,8 @@
 				<div class="col-md-1">
 					<!-- 						<input class="form-control tarifaApl" type="text" -->
 					<%-- 							value="${eachValor.tarifaApl }" /> --%>
-					<select id="" class="new_alto form-control tarifaApl" style="height: 48px;">
+					<select id="" class="new_alto form-control tarifaApl"
+						style="height: 48px;">
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ tarifasValorRetenido}" var="eachTarifa">
 
@@ -252,19 +255,19 @@
 
 
 		<div class="row">
-<!-- 			<div class="col-md-3" style="margin-bottom: 3px !important"> -->
-<!-- 				<button class="btn btn-primary" data-toggle="modal" -->
-<!-- 					data-target="#fm-modal" type="button" onclick="addfilevalor()" -->
-<!-- 					style="margin-top: 15px!importan">Adjuntar archivo</button> -->
-<!-- 			</div> -->
+			<!-- 			<div class="col-md-3" style="margin-bottom: 3px !important"> -->
+			<!-- 				<button class="btn btn-primary" data-toggle="modal" -->
+			<!-- 					data-target="#fm-modal" type="button" onclick="addfilevalor()" -->
+			<!-- 					style="margin-top: 15px!importan">Adjuntar archivo</button> -->
+			<!-- 			</div> -->
 
-<!-- 			<div id="adjuntar-valor" class="row" style="display: none;"> -->
-<!-- 				<div class="col-md-3" style="margin-top: 20px !important"> -->
+			<!-- 			<div id="adjuntar-valor" class="row" style="display: none;"> -->
+			<!-- 				<div class="col-md-3" style="margin-top: 20px !important"> -->
 
-<!-- 					<input class="control-form" type="file"></input> -->
+			<!-- 					<input class="control-form" type="file"></input> -->
 
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
 			<div class="row">
 				<div class="col-md-12 text-center" style="marging-top: 15px">
 					<button style="margin-top: 3px;" id="icaCalculoButton"
@@ -300,9 +303,6 @@
 					"")
 			$($(".valor")[0]).parent().children().last().find(".valtotal").val(
 					"")
-					
-					
-						
 
 		} else {
 			alert("No se pueden agregar más registros");

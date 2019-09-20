@@ -25012,6 +25012,7 @@ span.pasos {
   min-height: 20px !important;
   padding: 1px !important;
   min-width: 30% !important;
+  width: 133px !important;
   max-width: 192px !important;
 }
 .btn {
@@ -25103,4 +25104,13 @@ span.pasos {
   height: 30px !important;
   min-height: 10px !important;
   width: 28%;
+}
+
+.etiq_valor{
+ margin-left: 30px !important;	
+  height: 25px !important;
+  min-height: 20px !important;
+  padding: 1px !important;
+  min-width: 30% !important;
+  max-width: 192px !important;
 }
