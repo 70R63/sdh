@@ -15,6 +15,8 @@ import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
+import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesCatalogos;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
@@ -34,6 +36,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
+import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
@@ -883,6 +886,10 @@ public class SobreTasaGasolinaService
 				wsresponse = wsresponse.replace("\"ZZWCC_TIPODOC_ID\":", "\"zzwcc_tipodoc_id\":");
 				wsresponse = wsresponse.replace("\"ZZWCC_DESC_TIPODOC\":", "\"zzwcc_desc_tipodoc\":");
 				wsresponse = wsresponse.replace("\"ZZWCC_ARCIVO\":", "\"zzwcc_arcivo\":");
+			}
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse"))
+			{
+				wsresponse = wsresponse.replace(",\"errores\":\"\"", "");
 			}
 
 			responseInfo = mapper.readValue(wsresponse, Class.forName(nombreClase));
@@ -1907,13 +1914,20 @@ public class SobreTasaGasolinaService
 	 * @param creaCasosResponse
 	 * @return
 	 */
-	public boolean ocurrioErrorCreacionCaso(final CreaCasosResponse creaCasosResponse)
+	public boolean ocurrioErrorCreacionCaso(final CreaCasosResponse response)
 	{
 		// XXX Auto-generated method stub
 		return false;
 	}
 
-	public boolean ocurrioErrorDeclaraPDF(final OpcionDeclaracionesPDFResponse creaCasosResponse)
+	public boolean ocurrioErrorDeclaraPDF(final OpcionDeclaracionesPDFResponse response)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
+
+
+	public boolean ocurrioErrorListaDeclara(final ListaDeclaracionesResponse response)
 	{
 		// XXX Auto-generated method stub
 		return false;
@@ -1974,6 +1988,68 @@ public class SobreTasaGasolinaService
 				wsReqMet, LOG, nombreClase);
 
 		return responseInfo;
+	}
+
+
+	public ListaDeclaracionesResponse consultaListaDeclaraciones(final ListaDeclaracionesRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		ListaDeclaracionesResponse responseInfo = new ListaDeclaracionesResponse();
+		final String confUrl = "sdh.consulCertif.url";
+		final String confUser = "sdh.consulCertif.user";
+		final String confPass = "sdh.consulCertif.password";
+		final String wsNombre = "docs/consulCertif";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse";
+
+		responseInfo = (ListaDeclaracionesResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+	/**
+	 * @param customerData
+	 * @return
+	 */
+	public OpcionDeclaracionesCatalogos prepararCatalogosOpcionDeclaraciones(final SDHValidaMailRolResponse customerData)
+	{
+		final OpcionDeclaracionesCatalogos catalogosForm = new OpcionDeclaracionesCatalogos();
+		final Map<String, String> elementos = new LinkedHashMap<String, String>();
+
+		elementos.put("0", "Seleccionar");
+
+		if (customerData.getVehicular() != null) //vehicular
+		{
+			if (customerData.getVehicular().size() > 0)
+			{
+				elementos.put("0002", "Vehículos");
+			}
+		}
+		if (customerData.getIca() != null) // ica
+		{
+			if (!customerData.getIca().getNumObjeto().isEmpty())
+			{
+				elementos.put("0003", "Industria y Comercio");
+			}
+		}
+		if (customerData.getGasolina() != null) //gasolina
+		{
+			if (customerData.getGasolina().size() > 0)
+			{
+				elementos.put("0005", "Sobretasa Motor");
+			}
+		}
+		if (customerData.getPublicidadExt() != null) //publicidad
+		{
+			if (customerData.getPublicidadExt().size() > 0)
+			{
+				elementos.put("0007", "Publicidad Exterior Visual");
+			}
+		}
+
+		catalogosForm.setImpuesto(elementos);
+		return catalogosForm;
 	}
 
 
