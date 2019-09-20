@@ -35,13 +35,13 @@
 <form:form action="">
 	<div>
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-md-1" style="width: 10.5% !important">
 				<label class="control-label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.angrav" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label" style="margin-left: 30px !important; text-transform: none !important"
+				<label class="control-label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.tipdoc" />
 				</label>
 			</div>
@@ -88,7 +88,7 @@
 		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
 		<c:if test="${empty infoDeclara.valorRetenido}">
 			<div class="row valor" id="valor">
-				<div class="col-md-1">
+				<div class="col-md-1" style="width: 10.5% !important">
 					<input class=" new_alto_anio form-control anio anoGravable "
 						type="date" value="${infoDeclara.anoGravable }" />
 				</div>
@@ -142,7 +142,7 @@
 					<input class="new_alto form-control montoRetenido" type="text"
 						value="${infoDeclara.montoRetenido }" />
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="width: 5.9% !important">
 					<div class="form-group ">
 						<img onclick="addvalor()"
 							src="${themeResourcePath}/images/adddelineacion.png"
@@ -158,7 +158,7 @@
 
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
 			<div class="row valor" id="valor">
-				<div class="col-md-1">
+				<div class="col-md-1" style="width: 10.5% !important">
 					<input class="new_alto_anio form-control anio anoGravable "
 						type="date" value="${eachValor.anoGravable }" />
 				</div>
@@ -237,7 +237,7 @@
 					<input class="new_alto form-control montoRetenido" type="text"
 						value="${eachValor.montoRetenido }" />
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="width: 5.9% !important">
 					<div class="form-group ">
 						<img onclick="addvalor()"
 							src="${themeResourcePath}/images/adddelineacion.png"
