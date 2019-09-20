@@ -2040,6 +2040,13 @@ public class SobreTasaGasolinaService
 				elementos.put("0005", "Sobretasa Motor");
 			}
 		}
+		if (customerData.getDelineacion() != null) //delineacion
+		{
+			if (customerData.getDelineacion().size() > 0)
+			{
+				elementos.put("0006", "Delineación Urbana");
+			}
+		}
 		if (customerData.getPublicidadExt() != null) //publicidad
 		{
 			if (customerData.getPublicidadExt().size() > 0)
@@ -2047,6 +2054,7 @@ public class SobreTasaGasolinaService
 				elementos.put("0007", "Publicidad Exterior Visual");
 			}
 		}
+
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;
