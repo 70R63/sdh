@@ -7,6 +7,9 @@
 <%@ taglib prefix="icadecla" tagdir="/WEB-INF/tags/responsive/ica"%>
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
+
+	<%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
+
 	<icadecla:icaDeclaraInicial/>
 	<icadecla:icaDeclaraGenerales/>
 	
@@ -15,7 +18,11 @@
 	<icadecla:icaDeclaraTotal/>
 	<icadecla:icaDeclaraValor/>
 	<icadecla:icaDeclaraLiquidacion/>
-	<icadecla:icaDeclaraFirma/>
+
+	<c:url value='/contribuyentes/ica' var="taxRedirection"/>
+	<firmas:generalFirmas firmaContribuyenteRedirection="${taxRedirection}"/>
+
+	<icadecla:icaDeclaraButtons />
 
 	<div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
 	

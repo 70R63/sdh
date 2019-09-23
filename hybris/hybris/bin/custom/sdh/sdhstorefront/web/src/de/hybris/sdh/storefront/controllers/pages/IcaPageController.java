@@ -289,6 +289,10 @@ public class IcaPageController extends SDHAbstractPageController
 		String numObjeto;
 		String anoGravable;
 
+		final CustomerData customerData2 = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData",customerData2);
+		addAgentsToModel(model, customerData2,null);
+
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
 		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();

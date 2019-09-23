@@ -503,7 +503,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData);
+		addAgentsToModel(model, customerData,null);
 
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();

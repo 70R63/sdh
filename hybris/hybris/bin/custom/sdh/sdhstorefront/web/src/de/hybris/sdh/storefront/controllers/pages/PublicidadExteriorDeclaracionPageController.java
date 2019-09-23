@@ -146,8 +146,8 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 	{
 		String anoParaPSE = "";
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-
 		model.addAttribute("customerData",customerData);
+        addAgentsToModel(model, customerData,null);
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
@@ -156,7 +156,6 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 		detallePublicidadRequest.setAnoGravable(anoGravable);
 		detallePublicidadRequest.setTipoValla(tipoValla);
 
-		addAgentsToModel(model, customerData);
 
 		try
 		{

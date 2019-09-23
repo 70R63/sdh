@@ -20,7 +20,8 @@
 				<DeclaraPubli:DecPuGeneral />
 				<DeclaraPubli:DecPuInfoValla />
 				<DeclaraPubli:DecPuTotalPag />
-				<firmas:generalFirmas />
+				<c:url value='/contribuyentes/publicidadexterior' var="taxRedirection"/>
+				<firmas:generalFirmas firmaContribuyenteRedirection="${taxRedirection}"/>
 			</form:form>
 			<DeclaraPubli:DecPuPago />
 <!-- 		</div> -->
