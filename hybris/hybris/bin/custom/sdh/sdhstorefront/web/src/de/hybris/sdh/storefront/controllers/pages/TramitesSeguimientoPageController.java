@@ -227,23 +227,27 @@ public class TramitesSeguimientoPageController extends AbstractPageController
 				}
 				if (consCasosResponse.getArchivos() != null)
 				{
-					//					if (consCasosResponse.getARCHIVOS().size > 0){
-					//					for(ConsCasosArchiResponse archivoActual: consCasosResponse.getARCHIVOS()) {
-					infoConsulCasos = mapResultado.get(consCasosResponse.getArchivos().getZzwcc_object_id());
-					if (infoConsulCasos == null)
+					if (consCasosResponse.getArchivos().size() > 0)
 					{
-						infoConsulCasos = new ConsCasosInfo();
-					}
-					else
-					{
-						mapResultado.remove(consCasosResponse.getArchivos().getZzwcc_object_id());
-					}
-					final ConsCasosArchiResponse archivoActual = consCasosResponse.getArchivos(); //ajustar
-					infoConsulCasos.setArchivos(archivoActual);
+						for (final ConsCasosArchiResponse archivoActual : consCasosResponse.getArchivos())
+						{
+							infoConsulCasos = mapResultado.get(archivoActual.getZzwcc_object_id());
 
-					mapResultado.put(archivoActual.getZzwcc_object_id(), infoConsulCasos);
-					//					}
-					//}
+							if (infoConsulCasos == null)
+							{
+								infoConsulCasos = new ConsCasosInfo();
+							}
+							else
+							{
+								mapResultado.remove(archivoActual.getZzwcc_object_id());
+							}
+
+							infoConsulCasos.setArchivos(consCasosResponse.getArchivos());
+
+							mapResultado.put(archivoActual.getZzwcc_object_id(), infoConsulCasos);
+						}
+
+					}
 				}
 				if (!mapResultado.isEmpty())
 				{

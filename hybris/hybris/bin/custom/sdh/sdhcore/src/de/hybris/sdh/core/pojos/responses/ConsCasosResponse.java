@@ -15,7 +15,7 @@ public class ConsCasosResponse
 
 	private String txtmsj;
 	private List<ConsCasosResultadoResponse> resultado;
-	private ConsCasosArchiResponse archivos;
+	private List<ConsCasosArchiResponse> archivos;
 
 	/**
 	 * @return the txtmsj
@@ -51,10 +51,12 @@ public class ConsCasosResponse
 		this.resultado = resultado;
 	}
 
+
+
 	/**
 	 * @return the archivos
 	 */
-	public ConsCasosArchiResponse getArchivos()
+	public List<ConsCasosArchiResponse> getArchivos()
 	{
 		return archivos;
 	}
@@ -63,14 +65,14 @@ public class ConsCasosResponse
 	 * @param archivos
 	 *           the archivos to set
 	 */
-	public void setArchivos(final ConsCasosArchiResponse archivos)
+	public void setArchivos(final List<ConsCasosArchiResponse> archivos)
 	{
 		this.archivos = archivos;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

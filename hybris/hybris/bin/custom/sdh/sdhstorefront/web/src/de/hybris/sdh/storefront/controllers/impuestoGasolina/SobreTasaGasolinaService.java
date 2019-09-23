@@ -862,6 +862,7 @@ public class SobreTasaGasolinaService
 
 			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
 			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
+			System.out.println("Response de crm/consCasos: " + wsresponse);
 
 
 
