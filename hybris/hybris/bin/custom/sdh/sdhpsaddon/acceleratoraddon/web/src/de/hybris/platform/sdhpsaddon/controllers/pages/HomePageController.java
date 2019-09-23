@@ -112,7 +112,7 @@ public class HomePageController extends AbstractPageController
 		}
 		else if ("sdh_05".equals(role))
 		{
-			return REDIRECT_PREFIX + "/reportantes";
+			return REDIRECT_PREFIX + "/reportantes/cargadocumentos";
 		}
 
 		model.addAttribute("hideMenuBar", true);
