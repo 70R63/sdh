@@ -57,9 +57,9 @@ ACC.frimas = {
 
 		$(".justFirm").on("click",function(e){
 
-			var numIdentif = $.trim($(this).closest(".representante").find(".FirmTipoId").val());
+			var tipoIdent= $.trim($(this).closest(".representante").find(".FirmTipoId").val());
 
-			var tipoIdent = $.trim($(this).closest(".representante").find(".FirmNumId").val());
+			var numIdentif  = $.trim($(this).closest(".representante").find(".FirmNumId").val());
 
 			if(numIdentif == "" || tipoIdent=="")
 			{
@@ -122,6 +122,9 @@ ACC.frimas = {
 						{
 							$("#firmasDialogContent").html($("#firmasDialogContent").html()+value.txtmsj+"<br>");
 						}
+						if(value.idmsj == "0"){
+							$(".GeneraDeclaracionButton").attr("disabled",false);
+						}
 
 					});
 
@@ -136,9 +139,9 @@ ACC.frimas = {
 
 		$(".firmAndAdd").on("click",function(e){
 
-			var numIdentif = $.trim($(this).closest(".representante").find(".FirmTipoId").val());
+			var tipoIdent= $.trim($(this).closest(".representante").find(".FirmTipoId").val());
 
-			var tipoIdent = $.trim($(this).closest(".representante").find(".FirmNumId").val());
+			var  numIdentif  = $.trim($(this).closest(".representante").find(".FirmNumId").val());
 
 			if(numIdentif == "" || tipoIdent=="")
 			{
@@ -182,23 +185,12 @@ ACC.frimas = {
 
 			firmantes.push(firmante);
 
-			var newTipoIdent = $.trim($(this).closest(".representante").siblings().find(".FirmTipoId").val());
-			var newNumIdentif = $.trim($(this).closest(".representante").siblings().find(".FirmNumId").val());
-			var newPosicion = posicion+1;
-			var newConfirmacion = "Y";
-
-			if(newTipoIdent == "" || newNumIdentif == ""){
-				$("#dialogFirmas" ).dialog( "open" );
-				$("#firmasDialogContent").html("");
-				$("#firmasDialogContent").html("Introduzca los datos del nuevo firmante");
-				return;
-			}
 
 			var newFirmante = {};
-			newFirmante.tipoIdent = newTipoIdent;
-			newFirmante.numIdentif = newNumIdentif;
-			newFirmante.firmante = newPosicion;
-			newFirmante.confirmacion = newConfirmacion;
+			newFirmante.tipoIdent = "";
+			newFirmante.numIdentif = "";
+			newFirmante.firmante = 2;
+			newFirmante.confirmacion = "Y";
 
 			firmantes.push(newFirmante);
 
@@ -215,6 +207,8 @@ ACC.frimas = {
 				success: function (data) {
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");
+
+					var success = false;
 					$.each(data.errores,function (index,value) {
 
 						if(value.idmsj != "")
@@ -222,7 +216,22 @@ ACC.frimas = {
 							$("#firmasDialogContent").html($("#firmasDialogContent").html()+value.txtmsj+"<br>");
 						}
 
+						if(value.idmsj == "0"){
+							success=true;
+						}
+
+
+
 					});
+
+					if(success){
+						window.setTimeout(function(){
+
+							// Move to a new location or you can do something else
+							window.location.href = $("#taxTypeRedirection").val();
+
+						}, 3000);
+					}
 
 				},
 				error: function () {

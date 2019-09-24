@@ -26,9 +26,7 @@
 				onclick="goBack()">
 				<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
 			</button>
-			<button id="gasolinaGeneraDeclaracionButton" type="button"
-				<c:if test="${empty  dataForm.numForm}"></c:if>
-				class="btn btn-primary btn-lg">
+			<button id="gasolinaGeneraDeclaracionButton" disabled type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton">
 				<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
 			</button>
 			<sf:hidden path="numBP" />

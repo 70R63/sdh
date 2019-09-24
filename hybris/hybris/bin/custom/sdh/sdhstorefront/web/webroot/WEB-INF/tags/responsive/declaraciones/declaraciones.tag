@@ -12,7 +12,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <script>
 	function SelectedAnio(selectObject) {
-		debugger;
+// 		debugger;
 		var value = selectObject.value;
 		//document.getElementById("Idanio").value = value;
 		var x = document.getElementById('seleccion').value;
@@ -22,8 +22,8 @@
 		var tablepublicidad = document.getElementById('table-publicidad');
 		var cdus = document.getElementById('CDU');
 
-		document.getElementById('periodo').value = '00';
-		if (x == '1') {
+		document.getElementById('periodo').value = '00'; 
+		if (x == '1') {  //predial
 
 			tablepredial.style.display = 'block';
 			tablevehiculos.style.display = 'none';
@@ -31,7 +31,7 @@
 			tablepublicidad.style.display = 'none';
 			cdus.style.display = 'none';
 
-		} else if (x == '2') {
+		} else if (x == '0002') { //vehiculos
 
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'block';
@@ -39,14 +39,14 @@
 			tablepublicidad.style.display = 'none';
 			cdus.style.display = 'none';
 
-		} else if (x == '4') {
+		} else if (x == '0007') { //publicidad
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'none';
 			tablepublicidad.style.display = 'block';
 			cdus.style.display = 'none';
 
-		} else if (x == '6') {
+		} else if (x == '0006') { //delineacion
 			tablepredial.style.display = 'none';
 			tablevehiculos.style.display = 'none';
 			tableica.style.display = 'none';
@@ -60,6 +60,8 @@
 			tablepublicidad.style.display = 'none';
 			cdus.style.display = 'none';
 		}
+		
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 
 	}
 
@@ -146,6 +148,7 @@
 	}
 </script>
 
+<a id="downloadHelper" target="_blank"></a>
 <div class="container_new_page">
 	<div class="row">
 		<div class="headline">
@@ -165,18 +168,23 @@
 				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
 					deseas consultar.</p>
 				<div class="caja--ser-rel color-sr1">
-					<select class="new_alto form-control seleccion" id="seleccion"
-						onchange="onChange(this)">
-						<option>Seleccionar</option>
-						<option value="0001">Predial</option>
-						<option value="0002">Vehículos</option>
-						<option value="0003">Industria y Comercio</option>
-						<option value="0004">Reteica</option>
-						<option value="0005">Sobretasa Motor</option>
-						<option value="0006">Delineación Urbana</option>
-						<option value="0007">Publicidad Exterior Visual</option>
-						<option value="0008">Fondo Unif. Pobres, Azar y Esp</option>
-					</select>
+<!-- 					<select class="new_alto form-control seleccion" id="seleccion" -->
+<!-- 						onchange="onChange(this)"> -->
+<!-- 						<option>Seleccionar</option> -->
+<!-- 						<option value="0001">Predial</option> -->
+<!-- 						<option value="0002">Vehículos</option> -->
+<!-- 						<option value="0003">Industria y Comercio</option> -->
+<!-- 						<option value="0004">Reteica</option> -->
+<!-- 						<option value="0005">Sobretasa Motor</option> -->
+<!-- 						<option value="0006">Delineación Urbana</option> -->
+<!-- 						<option value="0007">Publicidad Exterior Visual</option> -->
+<!-- 						<option value="0008">Fondo Unif. Pobres, Azar y Esp</option> -->
+<!-- 					</select> -->
+					<sf:select class="new_alto form-control seleccion" id="seleccion" 
+						onchange="onChange(this)"
+						path="claveImpuesto" 
+						items="${dataForm.catalogos.impuesto}"
+						referenceData="${dataForm.catalogos.impuesto}" />
 				</div>
 			</div>
 
@@ -366,7 +374,7 @@
 
 		<div class="row" id="table-publicidad" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-publicidad1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -383,19 +391,19 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><c:out value="Resolucion"></c:out></td>
-							<td><c:out value="tipvalla"></c:out></td>
+<!-- 						<tr> -->
+<%-- 							<td><c:out value="Resolucion"></c:out></td> --%>
+<%-- 							<td><c:out value="tipvalla"></c:out></td> --%>
 							<%--<td><label style="color: #0358d8 !important"
 										data-numRes="${eachPubExtTax.numResolu}"
 										data-tipoValla="${eachPubExtTax.tipoVallaCode}"
 										class="text-capitalize !important labelVer "><spring:theme
 												code="publicidad.exterior.ver" /></label></td> --%>
 
-							<td><input id="action"
-								style="visibility: visible !important; margin: 0; min-height: 0;"
-								name="action" type="radio" value=""></td>
-						</tr>
+<!-- 							<td><input id="action" -->
+<!-- 								style="visibility: visible !important; margin: 0; min-height: 0;" -->
+<!-- 								name="action" type="radio" value=""></td> -->
+<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
@@ -711,6 +719,7 @@
 		var impuesto = selectObject.value;
 		var per = document.getElementById('Periodo1');
 		var per2 = document.getElementById('Periodo2');
+		var publicidadExt = document.getElementById('table-publicidad');
 
 		if (impuesto == '0005') {
 			per.style.display = 'block';
@@ -723,5 +732,6 @@
 			per.style.display = 'none';
 			per2.style.display = 'none';
 		}
+		publicidadExt.style.display = 'none';
 	}
 </script>
