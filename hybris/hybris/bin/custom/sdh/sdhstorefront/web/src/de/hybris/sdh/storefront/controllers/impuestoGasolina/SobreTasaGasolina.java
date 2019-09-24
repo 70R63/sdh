@@ -936,14 +936,18 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		String mensajeError = "";
 		DetGasRevisorDeclaranteResponse interlocutor = null;
 
-		final CustomerData customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
-		super.addAgentsToModel(model, customerData);
-		model.addAttribute("customerData", customerData);
+		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
+		CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+
+		model.addAttribute("contribuyenteData", contribuyenteData);
+		model.addAttribute("currentUserData", currentUserData);
+
 		final CalcGasolina2Request calculaGasolina2Request = new CalcGasolina2Request();
 		calculaGasolina2Request.setPartner(representado);
 		calculaGasolina2Request.setFormulario(numForm);
 		final CalcGasolina2Response calcGasolina2Response = sdhCalculaGasolina2Facade.calcula(calculaGasolina2Request);
 
+		super.addFirmantes(model,calcGasolina2Response,currentUserData);
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
 
@@ -999,10 +1003,10 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 			dataForm.setAnoGravable(calcGasolina2Response.getAnio_gravable());
 			dataForm.setPeriodo(calcGasolina2Response.getPeriodo());
-			dataForm.setNumDoc(customerData.getDocumentNumber());
+			dataForm.setNumDoc(contribuyenteData.getDocumentNumber());
 			dataForm.setOpcionUso(calcGasolina2Response.getOpcion_uso());
 			dataForm.setNumForm(numForm);
-			dataForm.setTipoDoc(customerData.getDocumentType());
+			dataForm.setTipoDoc(contribuyenteData.getDocumentType());
 			detalleGasolinaResponse.setInfoDeclara(calcGasolina2Response.getInfo_declara());
 
 
@@ -1027,9 +1031,9 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 				{
 //					if (calcGasolina2Response.getFirmantes().get(i).getTipoInterloc().equals(tipoRevisor) == true)
 					interlocutor = new DetGasRevisorDeclaranteResponse();
-					interlocutor.setTipoDoc(calcGasolina2Response.getFirmantes().get(i).getTipo_ident());
+					interlocutor.setTipoDoc(calcGasolina2Response.getFirmantes().get(i).getTipoIdent());
 					interlocutor.setTipoDocDESC(gasolinaService.getDescripcion(interlocutor.getTipoDoc(), catalogos.getTipoIdRev()));
-					interlocutor.setNumDoc(calcGasolina2Response.getFirmantes().get(i).getNum_identif());
+					interlocutor.setNumDoc(calcGasolina2Response.getFirmantes().get(i).getNumIdent());
 					interlocutor.setNombres(calcGasolina2Response.getFirmantes().get(i).getNombre());
 					interlocutor.setTarjetaProf(""); //FALTA EN WS
 

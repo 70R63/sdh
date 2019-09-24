@@ -3,6 +3,8 @@ package de.hybris.sdh.storefront.controllers.pages;
 import com.google.gson.Gson;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.sdh.core.pojos.responses.CalcGasolina2Response;
+import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
 import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.ui.Model;
@@ -54,6 +56,33 @@ public class SDHAbstractPageController extends AbstractSearchPageController {
             model.addAttribute("currentUser",agente);
             model.addAttribute("contribuyente",contribuyente);
         }
+    }
+
+    public void addFirmantes(Model model, CalcGasolina2Response calcGasolina2Response,CustomerData representanteData){
+
+        model.addAttribute("showFirmantes",true);
+        List<FirmanteResponse> firmantes = calcGasolina2Response.getFirmantes();
+
+        boolean showNewFirmRow= true;
+        boolean  showFirmAndAddButton = true;
+        boolean  showFirmButton = true;
+
+        if(CollectionUtils.isNotEmpty(firmantes) && firmantes.size()==3) {
+            showNewFirmRow = false;
+            showFirmAndAddButton=false;
+        }
+        for(FirmanteResponse eachFirmante : firmantes){
+            if(eachFirmante.getNumIdent().equalsIgnoreCase(representanteData.getDocumentNumber())){
+                showNewFirmRow=false;
+                showFirmAndAddButton=false;
+            }
+        }
+        model.addAttribute("showFirmButton",showFirmButton);
+        model.addAttribute("showNewFirmRow",showNewFirmRow);
+        model.addAttribute("showFirmAndAddButton",showFirmAndAddButton);
+        model.addAttribute("firmantes",firmantes);
+
+
     }
 
 
