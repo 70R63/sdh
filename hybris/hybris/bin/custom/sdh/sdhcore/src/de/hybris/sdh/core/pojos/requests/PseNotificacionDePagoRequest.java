@@ -214,14 +214,21 @@ public class PseNotificacionDePagoRequest
 	 *
 	 * @see java.lang.Object#toString()
 	 */
+
 	@Override
-	public String toString()
-	{
-		return "PseNotificacionDePagoRequest [idBancos=" + idBancos + ", modalidad=" + modalidad + ", procPago=" + procPago
-				+ ", fchRecaudo=" + fchRecaudo + ", horRecaudo=" + horRecaudo + ", codImpuesto=" + codImpuesto + ", refPago="
-				+ refPago + ", vlrRecuado=" + vlrRecuado + ", medioPago=" + medioPago + ", numOperacion="
-				+ numOperacion + ", objPago=" + objPago + "]";
+	public String toString() {
+		return "PseNotificacionDePagoRequest{" +
+				"idBancos='" + idBancos + '\'' +
+				", modalidad='" + modalidad + '\'' +
+				", procPago='" + procPago + '\'' +
+				", fchRecaudo='" + fchRecaudo + '\'' +
+				", horRecaudo='" + horRecaudo + '\'' +
+				", codImpuesto='" + codImpuesto + '\'' +
+				", refPago='" + refPago + '\'' +
+				", vlrRecuado='" + vlrRecuado + '\'' +
+				", medioPago='" + medioPago + '\'' +
+				", numOperacion='" + numOperacion + '\'' +
+				", objPago='" + objPago + '\'' +
+				'}';
 	}
-
-
 }
