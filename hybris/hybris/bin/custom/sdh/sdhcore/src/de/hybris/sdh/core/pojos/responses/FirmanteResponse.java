@@ -4,31 +4,45 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class FirmanteResponse {
 
-    private String Tipo_ident;
-    private String Num_identif;
-    private String Nombre;
+    private String tipoIdent;
+    private String numIdent;
+    private String nombre;
+    private String tarjetaProd;
 
-    public String getTipo_ident() {
-        return Tipo_ident;
+
+    public String getTipoIdent() {
+        return tipoIdent;
     }
+
     @JsonProperty("Tipo_ident")
-    public void setTipo_ident(String tipo_ident) {
-        Tipo_ident = tipo_ident;
+    public void setTipoIdent(String tipoIdent) {
+        this.tipoIdent = tipoIdent;
     }
 
-    public String getNum_identif() {
-        return Num_identif;
+    public String getNumIdent() {
+        return numIdent;
     }
+
     @JsonProperty("Num_identif")
-    public void setNum_identif(String num_identif) {
-        Num_identif = num_identif;
+    public void setNumIdent(String numIdent) {
+        this.numIdent = numIdent;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
+
     @JsonProperty("Nombre")
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
+    }
+
+    public String getTarjetaProd() {
+        return tarjetaProd;
+    }
+
+    @JsonProperty("Tarjeta_prof")
+    public void setTarjetaProd(String tarjetaProd) {
+        this.tarjetaProd = tarjetaProd;
     }
 }
