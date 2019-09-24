@@ -7,14 +7,14 @@ package de.hybris.sdh.core.pojos.requests;
  * @author Federico Flores Dimas
  *
  */
-public class OpcionDeclaracionesPDFRequest
+public class ListaDeclaracionesRequest
 {
+
 	private String bp;
-	private String numObjeto;
-	private String claseObjeto;
+	private String impuesto;
 	private String anioGravable;
 	private String periodo;
-	private String radicado;
+
 
 	/**
 	 * @return the bp
@@ -33,40 +33,21 @@ public class OpcionDeclaracionesPDFRequest
 		this.bp = bp;
 	}
 
-
-
 	/**
-	 * @return the numObjeto
+	 * @return the impuesto
 	 */
-	public String getNumObjeto()
+	public String getImpuesto()
 	{
-		return numObjeto;
+		return impuesto;
 	}
 
 	/**
-	 * @param numObjeto
-	 *           the numObjeto to set
+	 * @param impuesto
+	 *           the impuesto to set
 	 */
-	public void setNumObjeto(final String numObjeto)
+	public void setImpuesto(final String impuesto)
 	{
-		this.numObjeto = numObjeto;
-	}
-
-	/**
-	 * @return the claseObjeto
-	 */
-	public String getClaseObjeto()
-	{
-		return claseObjeto;
-	}
-
-	/**
-	 * @param claseObjeto
-	 *           the claseObjeto to set
-	 */
-	public void setClaseObjeto(final String claseObjeto)
-	{
-		this.claseObjeto = claseObjeto;
+		this.impuesto = impuesto;
 	}
 
 	/**
@@ -103,40 +84,16 @@ public class OpcionDeclaracionesPDFRequest
 		this.periodo = periodo;
 	}
 
-	/**
-	 * @return the radicado
-	 */
-	public String getRadicado()
-	{
-		return radicado;
-	}
-
-	/**
-	 * @param radicado
-	 *           the radicado to set
-	 */
-	public void setRadicado(final String radicado)
-	{
-		this.radicado = radicado;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString()
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append(obtenerValorJson("\"bp\":\"", this.getBp(), "\","));
-		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\","));
-		stringBuilder.append(obtenerValorJson("\"claseObjeto\":\"", this.getClaseObjeto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"BP\":\"", this.getBp(), "\","));
+		stringBuilder.append(obtenerValorJson("\"impuesto\":\"", this.getImpuesto(), "\","));
 		stringBuilder.append(obtenerValorJson("\"anioGravable\":\"", this.getAnioGravable(), "\","));
-		stringBuilder.append(obtenerValorJson("\"Periodo\":\"", this.getPeriodo(), "\","));
-		stringBuilder.append(obtenerValorJson("\"Radicado\":\"", this.getRadicado(), "\""));
+		stringBuilder.append(obtenerValorJson("\"periodo\":\"", this.getPeriodo(), "\""));
 		stringBuilder.append("}");
 
 

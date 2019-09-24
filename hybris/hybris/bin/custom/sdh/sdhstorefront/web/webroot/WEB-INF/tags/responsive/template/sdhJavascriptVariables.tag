@@ -104,6 +104,8 @@
 
 			ACC.declaracionPDFURL= "<c:url value='/contribuyentes/consultas/declaraciones/declaracionPDF' />";			
 			
+			ACC.listaDeclaracionesURL= "<c:url value='/contribuyentes/consultas/declaraciones/listaDeclaraciones' />";	
+			
 		  	ACC.currentURL = "${currentURL}";
 
 		  	ACC.generaROPURL = "<c:url value='/contribuyentes/rop' />";

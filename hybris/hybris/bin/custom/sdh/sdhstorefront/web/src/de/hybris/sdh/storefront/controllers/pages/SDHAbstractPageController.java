@@ -45,5 +45,16 @@ public class SDHAbstractPageController extends AbstractSearchPageController {
 
         }
     }
+    public void addAgentsToModel(Model model, CustomerData contribuyente,CustomerData agente)
+    {
+        if(agente == null){
+            model.addAttribute("currentUser",contribuyente);
+            model.addAttribute("contribuyente",contribuyente);
+        }else{
+            model.addAttribute("currentUser",agente);
+            model.addAttribute("contribuyente",contribuyente);
+        }
+    }
+
 
 }
