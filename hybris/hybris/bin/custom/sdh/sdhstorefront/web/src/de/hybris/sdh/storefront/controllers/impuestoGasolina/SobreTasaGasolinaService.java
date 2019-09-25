@@ -18,6 +18,7 @@ import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesCatalogos;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
@@ -34,7 +35,9 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
+import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
@@ -2017,7 +2020,7 @@ public class SobreTasaGasolinaService
 		final OpcionDeclaracionesCatalogos catalogosForm = new OpcionDeclaracionesCatalogos();
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put("0", "Seleccionar");
+		elementos.put("00", "Seleccionar");
 
 		if (customerData.getVehicular() != null) //vehicular
 		{
@@ -2058,6 +2061,140 @@ public class SobreTasaGasolinaService
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;
+	}
+
+	/**
+	 * @param infoVista
+	 * @param listaDeclaracionesResponse
+	 */
+	public void determinarRegistrosDeclaraciones(final OpcionDeclaracionesVista infoVista,
+			final ListaDeclaracionesResponse listaDeclaracionesResponse)
+	{
+
+		List<ImpuestoPublicidadExterior> publicidadExt = null;
+		List<ImpuestoGasolina> gasolina = null;
+		ImpuestoICA ica = null;
+		ReteICA reteica = null;
+		final List<ImpuestoVehiculos> vehiculos = null;
+		List<ImpuestoDelineacionUrbana> delineacion = null;
+
+
+		switch (infoVista.getClaveImpuesto())
+		{
+			case "0003": //ICA
+				ica = new ImpuestoICA();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						if (infoVista.getCustomerData().getIca().getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+						{
+							ica = infoVista.getCustomerData().getIca();
+						}
+					}
+
+					if (ica != null)
+					{
+						infoVista.setIca(ica);
+					}
+				}
+				break;
+
+
+			case "0004": //RETEICA
+				reteica = new ReteICA();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						if (infoVista.getCustomerData().getReteIca().getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+						{
+							reteica = infoVista.getCustomerData().getReteIca();
+						}
+					}
+
+					if (reteica != null)
+					{
+						infoVista.setReteIca(reteica);
+					}
+				}
+				break;
+
+
+			case "0005": //sobretasa gasolina
+				gasolina = new ArrayList<ImpuestoGasolina>();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						for (final ImpuestoGasolina gasolina_customer : infoVista.getCustomerData().getGasolina())
+						{
+							if (gasolina_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+							{
+								gasolina.add(gasolina_customer);
+							}
+						}
+					}
+
+					if (gasolina.size() > 0)
+					{
+						infoVista.setGasolina(gasolina);
+					}
+				}
+				break;
+
+
+			case "0006": //delineacion urbana
+				delineacion = new ArrayList<ImpuestoDelineacionUrbana>();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						for (final ImpuestoDelineacionUrbana delineacion_customer : infoVista.getCustomerData().getDelineacion())
+						{
+							if (delineacion_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+							{
+								delineacion.add(delineacion_customer);
+							}
+						}
+					}
+
+					if (delineacion.size() > 0)
+					{
+						infoVista.setDelineacion(delineacion);
+					}
+				}
+				break;
+
+
+			case "0007": //publicidad exterior
+				publicidadExt = new ArrayList<ImpuestoPublicidadExterior>();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						for (final ImpuestoPublicidadExterior publicidadExt_customer : infoVista.getCustomerData().getPublicidadExt())
+						{
+							if (publicidadExt_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto())
+									&& publicidadExt_customer.getAnoGravable().equals(infoVista.getAnoGravable()))
+							{
+								publicidadExt.add(publicidadExt_customer);
+							}
+						}
+					}
+
+					if (publicidadExt.size() > 0)
+					{
+						infoVista.setPublicidadExt(publicidadExt);
+					}
+				}
+				break;
+
+
+			default:
+				break;
+		}
+
 	}
 
 
