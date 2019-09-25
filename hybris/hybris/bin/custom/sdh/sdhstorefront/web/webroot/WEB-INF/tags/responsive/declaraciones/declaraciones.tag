@@ -383,83 +383,105 @@
 				</table>
 			</div>
 		</div>
-
-
-		<div class="col-md-9 col-md-offset-1 boder_section_cdu CDU" id="CDU"
-			style="display: none">
-			<br> <br>
-			<div class="row">
-				<div class="col-md-3">
-					<label class="control-label" for="" style="text-transform: none">
-						<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" />
-					</label>
-				</div>
-				<div class="col-md-3">
-					<label class="control-label" for="" style="text-transform: none">
-						<spring:theme code="impuestos.presentarDeclaracion.deliur.tipobli" />
-					</label>
-				</div>
-				<div class="col-md-3">
-					<label class="control-label" for="" style="text-transform: none">
-						<spring:theme code="impuestos.presentarDeclaracion.deliur.tiplic" />
-					</label>
-				</div>
-				<div class="col-md-3">
-					<label class="control-label" for="" style="text-transform: none">
-						<spring:theme code="Evento" />
-					</label>
-				</div>
-			</div>
-			<div class="table-resposive" id="CDU1">
-				<div class="row">
-					<div class="col-sm-3">
-						<input class="new_alto form-control" disabled="disabled"
-							type="text" value="" style="margin-bottom: 9px !important" />
-					</div>
-					<div class="col-sm-3">
-						<select id="selctipobliga" class="new_alto form-control"
-							onchange="ShowSelected(this)">
-							<option value="0">Seleccionar</option>
-							<option value="1">Declaración</option>
-							<option value="2">Retención</option>
-						</select>
-					</div>
-					<div class="col-sm-3">
-						<select id="" class="new_alto form-control">
-							<option value="00">Seleccionar</option>
-							<option value="01">Licencia</option>
-							<option value="02">Reconocimiento</option>
-						</select>
-					</div>
-					<div class="col-sm-3">
-						<button type="button" class="btn-link" onClick="">
-							<spring:theme code="delineacion.urbana.radicados.declaracion.pdf" />
-						</button>
-						<br> <br> <br>
-					</div>
-				</div>
-				<br> <br>
-				<div class="row" id="" style="display: none">
-
-					<div class="row">
-						<div class="col-sm-2"></div>
-						<div class="col-sm-4 text-right">Radicados:</div>
-						<div class="col-sm-3">
-							<input style="margin-bottom: 5px !important"
-								class="new_alto form-control" disabled="disabled" type="text"
-								value="" />
-						</div>
-						<div class="col-sm-3">
-							<button type="button" class="btn-link" id="" onClick="">
-								<spring:theme
-									code="delineacion.urbana.radicados.declaracion.pdf" />
-							</button>
-						</div>
-					</div>
-				</div>
-
+		
+		<div class="row" id="table-delineacion" style="display: none;">
+			<div class="col-md-6 col-md-offset-3">
+				<table class="table" id="table-delineacion1">
+					<thead style="cellspacing: 10 !important">
+						<tr>
+							<th style="text-align: center"><label class="control-label "
+								for=""><spring:theme
+										code="certideclara.inicial.delineacion.cdu" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.delineacion.radicado" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.delineacion.seleccionar" /></label></th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
 			</div>
 		</div>
+
+
+<!-- 		<div class="col-md-9 col-md-offset-1 boder_section_cdu CDU" id="CDU" -->
+<!-- 			style="display: none"> -->
+<!-- 			<br> <br> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-3"> -->
+<!-- 					<label class="control-label" for="" style="text-transform: none"> -->
+<%-- 						<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" /> --%>
+<!-- 					</label> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-3"> -->
+<!-- 					<label class="control-label" for="" style="text-transform: none"> -->
+<%-- 						<spring:theme code="impuestos.presentarDeclaracion.deliur.tipobli" /> --%>
+<!-- 					</label> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-3"> -->
+<!-- 					<label class="control-label" for="" style="text-transform: none"> -->
+<%-- 						<spring:theme code="impuestos.presentarDeclaracion.deliur.tiplic" /> --%>
+<!-- 					</label> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-3"> -->
+<!-- 					<label class="control-label" for="" style="text-transform: none"> -->
+<%-- 						<spring:theme code="Evento" /> --%>
+<!-- 					</label> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="table-resposive" id="CDU1"> -->
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<input class="new_alto form-control" disabled="disabled" -->
+<!-- 							type="text" value="" style="margin-bottom: 9px !important" /> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<select id="selctipobliga" class="new_alto form-control" -->
+<!-- 							onchange="ShowSelected(this)"> -->
+<!-- 							<option value="0">Seleccionar</option> -->
+<!-- 							<option value="1">Declaración</option> -->
+<!-- 							<option value="2">Retención</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<select id="" class="new_alto form-control"> -->
+<!-- 							<option value="00">Seleccionar</option> -->
+<!-- 							<option value="01">Licencia</option> -->
+<!-- 							<option value="02">Reconocimiento</option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<button type="button" class="btn-link" onClick=""> -->
+<%-- 							<spring:theme code="delineacion.urbana.radicados.declaracion.pdf" /> --%>
+<!-- 						</button> -->
+<!-- 						<br> <br> <br> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<br> <br> -->
+<!-- 				<div class="row" id="" style="display: none"> -->
+
+<!-- 					<div class="row"> -->
+<!-- 						<div class="col-sm-2"></div> -->
+<!-- 						<div class="col-sm-4 text-right">Radicados:</div> -->
+<!-- 						<div class="col-sm-3"> -->
+<!-- 							<input style="margin-bottom: 5px !important" -->
+<!-- 								class="new_alto form-control" disabled="disabled" type="text" -->
+<!-- 								value="" /> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-sm-3"> -->
+<!-- 							<button type="button" class="btn-link" id="" onClick=""> -->
+<%-- 								<spring:theme --%>
+<%-- 									code="delineacion.urbana.radicados.declaracion.pdf" /> --%>
+<!-- 							</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<!-- 			</div> -->
+<!-- 		</div> -->
 
 
 		<div class="row" id="formButtons">

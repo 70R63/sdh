@@ -15,10 +15,10 @@ public class ItemListaDeclaraciones
 	private String ctaContrato;
 	private String numObjeto;
 	private String clavePeriodo;
+	private String referencia;
+	private String numRadicado;
 	private String creacion;
 	private String modificacion;
-
-
 	/**
 	 * @return the numForm
 	 */
@@ -26,7 +26,7 @@ public class ItemListaDeclaraciones
 	{
 		return numForm;
 	}
-
+	
 	/**
 	 * @param numForm
 	 *           the numForm to set
@@ -35,7 +35,6 @@ public class ItemListaDeclaraciones
 	{
 		this.numForm = numForm;
 	}
-
 	/**
 	 * @return the taxpayer
 	 */
@@ -43,7 +42,7 @@ public class ItemListaDeclaraciones
 	{
 		return taxpayer;
 	}
-
+	
 	/**
 	 * @param taxpayer
 	 *           the taxpayer to set
@@ -52,7 +51,6 @@ public class ItemListaDeclaraciones
 	{
 		this.taxpayer = taxpayer;
 	}
-
 	/**
 	 * @return the ctaContrato
 	 */
@@ -60,7 +58,7 @@ public class ItemListaDeclaraciones
 	{
 		return ctaContrato;
 	}
-
+	
 	/**
 	 * @param ctaContrato
 	 *           the ctaContrato to set
@@ -69,7 +67,6 @@ public class ItemListaDeclaraciones
 	{
 		this.ctaContrato = ctaContrato;
 	}
-
 	/**
 	 * @return the numObjeto
 	 */
@@ -77,7 +74,7 @@ public class ItemListaDeclaraciones
 	{
 		return numObjeto;
 	}
-
+	
 	/**
 	 * @param numObjeto
 	 *           the numObjeto to set
@@ -86,7 +83,6 @@ public class ItemListaDeclaraciones
 	{
 		this.numObjeto = numObjeto;
 	}
-
 	/**
 	 * @return the clavePeriodo
 	 */
@@ -94,7 +90,7 @@ public class ItemListaDeclaraciones
 	{
 		return clavePeriodo;
 	}
-
+	
 	/**
 	 * @param clavePeriodo
 	 *           the clavePeriodo to set
@@ -102,6 +98,40 @@ public class ItemListaDeclaraciones
 	public void setClavePeriodo(final String clavePeriodo)
 	{
 		this.clavePeriodo = clavePeriodo;
+	}
+	
+	/**
+	 * @return the referencia
+	 */
+	public String getReferencia()
+	{
+		return referencia;
+	}
+
+	/**
+	 * @param referencia
+	 *           the referencia to set
+	 */
+	public void setReferencia(final String referencia)
+	{
+		this.referencia = referencia;
+	}
+
+	/**
+	 * @return the numRadicado
+	 */
+	public String getNumRadicado()
+	{
+		return numRadicado;
+	}
+
+	/**
+	 * @param numRadicado
+	 *           the numRadicado to set
+	 */
+	public void setNumRadicado(final String numRadicado)
+	{
+		this.numRadicado = numRadicado;
 	}
 
 	/**
@@ -111,7 +141,7 @@ public class ItemListaDeclaraciones
 	{
 		return creacion;
 	}
-
+	
 	/**
 	 * @param creacion
 	 *           the creacion to set
@@ -120,7 +150,6 @@ public class ItemListaDeclaraciones
 	{
 		this.creacion = creacion;
 	}
-
 	/**
 	 * @return the modificacion
 	 */
@@ -128,7 +157,7 @@ public class ItemListaDeclaraciones
 	{
 		return modificacion;
 	}
-
+	
 	/**
 	 * @param modificacion
 	 *           the modificacion to set
@@ -146,10 +175,12 @@ public class ItemListaDeclaraciones
 	@Override
 	public String toString()
 	{
-		return "ItemLlistaDeclaraciones [numForm=" + numForm + ", taxpayer=" + taxpayer + ", ctaContrato=" + ctaContrato
-				+ ", numObjeto=" + numObjeto + ", clavePeriodo=" + clavePeriodo + ", creacion=" + creacion + ", modificacion="
-				+ modificacion + "]";
+		return "ItemListaDeclaraciones [numForm=" + numForm + ", taxpayer=" + taxpayer + ", ctaContrato=" + ctaContrato
+				+ ", numObjeto=" + numObjeto + ", clavePeriodo=" + clavePeriodo + ", referencia=" + referencia + ", numRadicado="
+				+ numRadicado + ", creacion=" + creacion + ", modificacion=" + modificacion + "]";
 	}
+
+
 
 
 
