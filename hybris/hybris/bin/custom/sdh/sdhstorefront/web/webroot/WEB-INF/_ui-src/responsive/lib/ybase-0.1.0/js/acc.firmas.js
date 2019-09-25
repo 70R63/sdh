@@ -139,29 +139,6 @@ ACC.frimas = {
 
 		$(".firmAndAdd").on("click",function(e){
 
-			var tipoIdent= $.trim($(this).closest(".representante").find(".FirmTipoId").val());
-
-			var  numIdentif  = $.trim($(this).closest(".representante").find(".FirmNumId").val());
-
-			if(numIdentif == "" || tipoIdent=="")
-			{
-				$("#dialogFirmas" ).dialog( "open" );
-				$("#firmasDialogContent").html("");
-				$("#firmasDialogContent").html("Por favor introduzca los datos necesarios.");
-				return ;
-			}
-
-			var element = this;
-			var posicion =0;
-			$.each($(".firmAndAdd"),function (index,value) {
-
-				if($(value).is($(element))){
-					posicion = index+1;
-				}
-
-			});
-
-
 			var numForm = $("#numForm").val();
 
 			if(numForm == "" )
@@ -172,27 +149,41 @@ ACC.frimas = {
 				return;
 			}
 
-			var confirmacion = "X";
+			var currentRow = $.trim($(this).closest(".representante"));
 
 			var firmantes =[];
 
-			var firmante = {};
+			$.each($(".representante .row"),function (index,value) {
 
-			firmante.tipoIdent = tipoIdent;
-			firmante.numIdentif = numIdentif;
-			firmante.firmante = posicion;
-			firmante.confirmacion = confirmacion;
+				var tipoIdent= $.trim($(value).find(".FirmTipoId").val());
 
-			firmantes.push(firmante);
+				var  numIdentif  =$.trim($(value).find(".FirmNumId").val());
 
+				var confirmacion = "X";
 
-			var newFirmante = {};
-			newFirmante.tipoIdent = "";
-			newFirmante.numIdentif = "";
-			newFirmante.firmante = 2;
-			newFirmante.confirmacion = "Y";
+				var posicion = index+1;
 
-			firmantes.push(newFirmante);
+				var firmante = {};
+
+				firmante.tipoIdent = tipoIdent;
+				firmante.numIdentif = numIdentif;
+				firmante.firmante = posicion;
+				firmante.confirmacion = confirmacion;
+
+				firmantes.push(firmante);
+
+			});
+
+			if(firmantes.length < 3){
+
+				var newFirmante = {};
+				newFirmante.tipoIdent = "";
+				newFirmante.numIdentif = "";
+				newFirmante.firmante = firmantes.length+1;
+				newFirmante.confirmacion = "Y";
+
+				firmantes.push(newFirmante);
+			}
 
 
 			var data = {};
