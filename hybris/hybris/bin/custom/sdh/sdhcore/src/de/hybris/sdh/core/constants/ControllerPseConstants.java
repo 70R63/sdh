@@ -48,12 +48,12 @@ public class ControllerPseConstants
 	};
 
 	private final static String DEBITO_EN_CUENTA_POR_INTERNET 					= "15";
-	private final static String TARJETA_CREDITO_VISA 								= "50";
+	private final static String TARJETA_CREDITO_VISA 							= "50";
 	private final static String TARJETA_CREDITO_MASTERCARD 						= "51";
-	private final static String TARJETA_CREDITO_DINERR_CLUB 						= "52";
-	private final static String TARJETA_CREDITO_PROPIA_ENTIDAD_FINANCIERA 	= "53";
-	private final static String CRETIDO_ROTATIVO 									= "54";
-	private final static String TRAJETA_CREDITO_MASTER_CARD 						= "55";
+	private final static String TARJETA_CREDITO_DINERR_CLUB 					= "52";
+	private final static String TARJETA_CREDITO_PROPIA_ENTIDAD_FINANCIERA 		= "53";
+	private final static String CRETIDO_ROTATIVO 								= "54";
+	private final static String TRAJETA_CREDITO_MASTER_CARD 					= "55";
 	public final static HashMap<String, String> NOTIFICACION_DE_PAGO_MEDIO_PAGO = new HashMap<String, String>()
 	{
 		{
@@ -68,10 +68,10 @@ public class ControllerPseConstants
 	};
 
 	public final static String CREDIBANCO_IDENTIFIER_TRANSACTION = "CREDIBANCO_TRANSACTION";
-	public final static String CREDIBANCO_RESPONSE_PENDIENTE = "0";
+	public final static String CREDIBANCO_RESPONSE_PENDIENTE 	= "0";
 	public final static String CREDIBANCO_RESPONSE_APROBADA 	= "1";
-	public final static String CREDIBANCO_RESPONSE_RECHAZADA = "2";
-	public final static String CREDIBANCO_RESPONSE_FALLIDA 	= "3";
+	public final static String CREDIBANCO_RESPONSE_RECHAZADA 	= "2";
+	public final static String CREDIBANCO_RESPONSE_FALLIDA 		= "3";
 
 	public final static String CREDIBANCO_PAYMENT_METHOD_TARJETA_CREDITO_VISA 			= "1";
 	public final static String CREDIBANCO_PAYMENT_METHOD_TARJETA_CREDITO_MASTERCARD 	= "2";
@@ -79,15 +79,21 @@ public class ControllerPseConstants
 	public final static String CREDIBANCO_PAYMENT_METHOD_SOBREGIRO 						= "4";
 	public final static String CREDIBANCO_PAYMENT_METHOD_CREDITO_LIBRE_INVERSION 		= "5";
 	public final static String CREDIBANCO_PAYMENT_METHOD_AVANCE_EFECTIVO 				= "6";
+	public final static String CREDIBANCO_PAYMENT_METHOD_CREDITO_DINERS_CLUB			= "52";
+	public final static String CREDIBANCO_PAYMENT_METHOD_PROP_ENTIDAD_FINANCIERA		= "53";
+	public final static String CREDIBANCO_PAYMENT_METHOD_AMERICAN_EXPRESS 				= "55";
 	public final static HashMap<String, String> CREDIBANCO_NOTIFICACION_DE_PAGO_MEDIO_PAGO = new HashMap<String, String>()
 	{
 		{
 			put(CREDIBANCO_PAYMENT_METHOD_TARJETA_CREDITO_VISA			, TARJETA_CREDITO_VISA);
 			put(CREDIBANCO_PAYMENT_METHOD_TARJETA_CREDITO_MASTERCARD	, TARJETA_CREDITO_MASTERCARD);
-			put(CREDIBANCO_PAYMENT_METHOD_CREDITO_ROTATIVO				, "");
-			put(CREDIBANCO_PAYMENT_METHOD_SOBREGIRO						, "");
-			put(CREDIBANCO_PAYMENT_METHOD_CREDITO_LIBRE_INVERSION		, "");
-			put(CREDIBANCO_PAYMENT_METHOD_AVANCE_EFECTIVO				, "");
+			put(CREDIBANCO_PAYMENT_METHOD_CREDITO_ROTATIVO				, CRETIDO_ROTATIVO);
+			//put(CREDIBANCO_PAYMENT_METHOD_SOBREGIRO				    , "");
+			//put(CREDIBANCO_PAYMENT_METHOD_CREDITO_LIBRE_INVERSION		, "");
+			//put(CREDIBANCO_PAYMENT_METHOD_AVANCE_EFECTIVO				, "");
+			put(CREDIBANCO_PAYMENT_METHOD_CREDITO_DINERS_CLUB			, CREDIBANCO_PAYMENT_METHOD_CREDITO_DINERS_CLUB);
+			put(CREDIBANCO_PAYMENT_METHOD_PROP_ENTIDAD_FINANCIERA		, CREDIBANCO_PAYMENT_METHOD_PROP_ENTIDAD_FINANCIERA);
+			put(CREDIBANCO_PAYMENT_METHOD_AMERICAN_EXPRESS				, CREDIBANCO_PAYMENT_METHOD_AMERICAN_EXPRESS);
 		}
 	};
 
