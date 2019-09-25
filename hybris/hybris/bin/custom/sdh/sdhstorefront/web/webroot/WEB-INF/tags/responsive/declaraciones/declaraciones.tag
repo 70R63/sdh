@@ -13,54 +13,6 @@
 <script>
 	function SelectedAnio(selectObject) {
 // 		debugger;
-		var value = selectObject.value;
-		//document.getElementById("Idanio").value = value;
-		var x = document.getElementById('seleccion').value;
-		var tablepredial = document.getElementById('table-predial');
-		var tablevehiculos = document.getElementById('table-vehiculos');
-		var tableica = document.getElementById('table-ica');
-		var tablepublicidad = document.getElementById('table-publicidad');
-		var cdus = document.getElementById('CDU');
-
-		document.getElementById('periodo').value = '00'; 
-		if (x == '1') {  //predial
-
-			tablepredial.style.display = 'block';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			cdus.style.display = 'none';
-
-		} else if (x == '0002') { //vehiculos
-
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'block';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			cdus.style.display = 'none';
-
-		} else if (x == '0007') { //publicidad
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'block';
-			cdus.style.display = 'none';
-
-		} else if (x == '0006') { //delineacion
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			cdus.style.display = 'block';
-		} else {
-
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			cdus.style.display = 'none';
-		}
-		
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 
 	}
@@ -84,6 +36,7 @@
 			}
 
 		}
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 
 	}
 
@@ -200,7 +153,7 @@
 				<div class="caja--ser-rel color-sr2">
 					<select id="aniograv" class="new_alto form-control" name="aniograv"
 						onchange="SelectedAnio(this)">
-						<option value="">Seleccionar</option>
+						<option value="00">Seleccionar</option>
 						<option value="2019">2019</option>
 						<option value="2018">2018</option>
 						<option value="2017">2017</option>
@@ -281,21 +234,21 @@
 					</thead>
 					<tbody>
 
-						<tr>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="CHIP"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="Matricula"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="Direccion"></c:out>" /></td>
-							<td><input class="inputtextnew"
-								style="visibility: visible !important; width: 15px" type="radio"
-								id="" name="" value=""></td>
+<!-- 						<tr> -->
+<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 								value="<c:out value="CHIP"></c:out>" /></td> --%>
+<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 								value="<c:out value="Matricula"></c:out>" /></td> --%>
+<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 								value="<c:out value="Direccion"></c:out>" /></td> --%>
+<!-- 							<td><input class="inputtextnew" -->
+<!-- 								style="visibility: visible !important; width: 15px" type="radio" -->
+<!-- 								id="" name="" value=""></td> -->
 
-						</tr>
+<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
@@ -319,18 +272,18 @@
 					</thead>
 					<tbody>
 
-						<tr>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="PLACA"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="MARCA"></c:out>" /></td>
-							<td><input class="inputtextnew"
-								style="visibility: visible !important; width: 15px" type="radio"
-								id="" name="" value=""></td>
+<!-- 						<tr> -->
+<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 								value="<c:out value="PLACA"></c:out>" /></td> --%>
+<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
+<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
+<%-- 								value="<c:out value="MARCA"></c:out>" /></td> --%>
+<!-- 							<td><input class="inputtextnew" -->
+<!-- 								style="visibility: visible !important; width: 15px" type="radio" -->
+<!-- 								id="" name="" value=""></td> -->
 
-						</tr>
+<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
@@ -339,38 +292,49 @@
 
 		<div class="row" id="table-ica" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-ica1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
-										code="certideclara.inicial.ica.tipdocu" /></label></th>
+										code="certideclara.inicial.selcimpuesto" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.ica.numdocu" /></label></th>
+										code="certideclara.inicial.aniograv" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.ica.seleccionar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
-
-						<tr>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="TIPO DOCUMENTO"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="NUM DOCUMENTO"></c:out>" /></td>
-							<td><input class="inputtextnew"
-								style="visibility: visible !important; width: 15px" type="radio"
-								id="" name="" value=""></td>
-
-						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
+		
+
+		<div class="row" id="table-reteica" style="display: none;">
+			<div class="col-md-6 col-md-offset-3">
+				<table class="table" id="table-reteica1">
+					<thead style="cellspacing: 10 !important">
+						<tr>
+							<th style="text-align: center"><label class="control-label "
+								for=""><spring:theme
+										code="certideclara.inicial.reteica.numID" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.reteica.consecutivo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.reteica.seleccionar" /></label></th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
 
 		<div class="row" id="table-publicidad" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
@@ -391,45 +355,34 @@
 						</tr>
 					</thead>
 					<tbody>
-<!-- 						<tr> -->
-<%-- 							<td><c:out value="Resolucion"></c:out></td> --%>
-<%-- 							<td><c:out value="tipvalla"></c:out></td> --%>
-							<%--<td><label style="color: #0358d8 !important"
-										data-numRes="${eachPubExtTax.numResolu}"
-										data-tipoValla="${eachPubExtTax.tipoVallaCode}"
-										class="text-capitalize !important labelVer "><spring:theme
-												code="publicidad.exterior.ver" /></label></td> --%>
-
-<!-- 							<td><input id="action" -->
-<!-- 								style="visibility: visible !important; margin: 0; min-height: 0;" -->
-<!-- 								name="action" type="radio" value=""></td> -->
-<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
 		</div>
-
-
-		<div class="row" id="formButtons">
-			<div class="col-md-12 text-center">
-				<div class="form-group ">
-					<button type="button" class="btn btn-secondary btn-lg"
-						id="btnCancelar" name="action" value="cancelar"
-						style="margin-top: 3px">
-						<spring:theme code="certideclara.inicial.cancelar" />
-					</button>
-
-					<button type="submit"
-						class="btn btn-primary btn-lg !important consultaDecPDF"
-						id="generarPDFButton" name="generarPDFButton"
-						style="margin-top: 3px" onclick="">
-						<spring:theme code="certideclara.inicial.generar" />
-					</button>
-				</div>
+		
+		
+		
+		<div class="row" id="table-gasolina" style="display: none;">
+			<div class="col-md-6 col-md-offset-3">
+				<table class="table" id="table-gasolina1">
+					<thead style="cellspacing: 10 !important">
+						<tr>
+							<th style="text-align: center"><label class="control-label "
+								for=""><spring:theme
+										code="certideclara.inicial.gasolina.tipdocu" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.numdocu" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.seleccionar" /></label></th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
 			</div>
 		</div>
-
-
 
 
 		<div class="col-md-9 col-md-offset-1 boder_section_cdu CDU" id="CDU"
@@ -457,7 +410,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="table-resposive">
+			<div class="table-resposive" id="CDU1">
 				<div class="row">
 					<div class="col-sm-3">
 						<input class="new_alto form-control" disabled="disabled"
@@ -508,6 +461,25 @@
 			</div>
 		</div>
 
+
+		<div class="row" id="formButtons">
+			<div class="col-md-12 text-center">
+				<div class="form-group ">
+					<button type="button" class="btn btn-secondary btn-lg"
+						id="btnCancelar" name="action" value="cancelar"
+						style="margin-top: 3px">
+						<spring:theme code="certideclara.inicial.cancelar" />
+					</button>
+
+					<button type="submit"
+						class="btn btn-primary btn-lg !important consultaDecPDF"
+						id="generarPDFButton" name="generarPDFButton"
+						style="margin-top: 3px" onclick="">
+						<spring:theme code="certideclara.inicial.generar" />
+					</button>
+				</div>
+			</div>
+		</div>
 
 
 	</form:form>
@@ -719,7 +691,7 @@
 		var impuesto = selectObject.value;
 		var per = document.getElementById('Periodo1');
 		var per2 = document.getElementById('Periodo2');
-		var publicidadExt = document.getElementById('table-publicidad');
+		//var publicidadExt = document.getElementById('table-publicidad');
 
 		if (impuesto == '0005') {
 			per.style.display = 'block';
@@ -732,6 +704,9 @@
 			per.style.display = 'none';
 			per2.style.display = 'none';
 		}
-		publicidadExt.style.display = 'none';
+		//publicidadExt.style.display = 'none';
+		document.getElementById('aniograv').value = '00'; 
+		document.getElementById('periodo').value = '00'; 
+		ACC.opcionDeclaraciones.ocultarTablas();
 	}
 </script>

@@ -13,14 +13,15 @@ import java.util.List;
 public class ListaDeclaracionesResponse
 {
 
-	private List<ItemLlistaDeclaraciones> declaraciones;
+	private List<ItemListaDeclaraciones> declaraciones;
+	private List<ErrorEnWS> errores;
 
 
 
 	/**
 	 * @return the declaraciones
 	 */
-	public List<ItemLlistaDeclaraciones> getDeclaraciones()
+	public List<ItemListaDeclaraciones> getDeclaraciones()
 	{
 		return declaraciones;
 	}
@@ -29,9 +30,26 @@ public class ListaDeclaracionesResponse
 	 * @param declaraciones
 	 *           the declaraciones to set
 	 */
-	public void setDeclaraciones(final List<ItemLlistaDeclaraciones> declaraciones)
+	public void setDeclaraciones(final List<ItemListaDeclaraciones> declaraciones)
 	{
 		this.declaraciones = declaraciones;
+	}
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorEnWS> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<ErrorEnWS> errores)
+	{
+		this.errores = errores;
 	}
 
 	/*
@@ -42,8 +60,9 @@ public class ListaDeclaracionesResponse
 	@Override
 	public String toString()
 	{
-		return "ListaDeclaracionesResponse [declaraciones=" + declaraciones + "]";
+		return "ListaDeclaracionesResponse [declaraciones=" + declaraciones + ", errores=" + errores + "]";
 	}
+
 
 
 }

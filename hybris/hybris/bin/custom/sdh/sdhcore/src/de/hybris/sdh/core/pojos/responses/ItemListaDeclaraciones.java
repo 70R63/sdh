@@ -7,7 +7,7 @@ package de.hybris.sdh.core.pojos.responses;
  * @author Federico Flores Dimas
  *
  */
-public class ItemLlistaDeclaraciones
+public class ItemListaDeclaraciones
 {
 
 	private String numForm;
