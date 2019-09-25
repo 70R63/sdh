@@ -17,8 +17,8 @@ import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
+import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
-import de.hybris.sdh.core.pojos.responses.ItemLlistaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -30,7 +30,6 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -43,6 +42,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -53,6 +53,8 @@ import sun.misc.BASE64Decoder;
  *
  */
 @Controller
+@SessionAttributes(
+{ "dataForm" })
 //@RequestMapping("")
 public class DeclaracionesPageController extends AbstractPageController
 {
@@ -107,6 +109,8 @@ public class DeclaracionesPageController extends AbstractPageController
 
 		customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
+		infoVista.setCustomerData(customerData);
+
 		model.addAttribute("dataForm", infoVista);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_CMS_PAGE));
@@ -114,6 +118,8 @@ public class DeclaracionesPageController extends AbstractPageController
 
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+
 
 		return getViewForPage(model);
 	}
@@ -141,8 +147,8 @@ public class DeclaracionesPageController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final ListaDeclaracionesRequest listaDeclaracionesRequest = new ListaDeclaracionesRequest();
 		ListaDeclaracionesResponse listaDeclaracionesResponse = null;
-		SDHValidaMailRolResponse customerData = null;
-		List<ImpuestoPublicidadExterior> publicidadExt = null;
+		final List<ImpuestoPublicidadExterior> publicidadExt = null;
+		final List<ImpuestoGasolina> gasolina = null;
 
 		String bp = "";
 		String impuesto = "";
@@ -151,7 +157,11 @@ public class DeclaracionesPageController extends AbstractPageController
 
 
 		bp = customerModel.getNumBP();
-		customerData = sdhCustomerFacade.getRepresentadoFromSAP(bp);
+		if (infoVista.getCustomerData() == null)
+		{
+			infoVista.setCustomerData(sdhCustomerFacade.getRepresentadoFromSAP(bp));
+		}
+
 
 		impuesto = infoVista.getClaveImpuesto();
 		anioGravable = infoVista.getAnoGravable();
@@ -163,7 +173,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		infoVista.setDelineacion(null);
 		infoVista.setIca(null);
 		infoVista.setReteIca(null);
-		infoVista.setReteIca(null);
+		infoVista.setErrores(null);
 
 
 		listaDeclaracionesRequest.setBp(bp);
@@ -177,43 +187,13 @@ public class DeclaracionesPageController extends AbstractPageController
 		System.out.println("Response de docs/consulCertif: " + listaDeclaracionesResponse);
 		if (gasolinaService.ocurrioErrorListaDeclara(listaDeclaracionesResponse) != true)
 		{
-			switch (impuesto)
-			{
-				case "0007":
-					publicidadExt = new ArrayList<ImpuestoPublicidadExterior>();
-					if (listaDeclaracionesResponse.getDeclaraciones() != null)
-					{
-						for (final ItemLlistaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
-						{
-							for (final ImpuestoPublicidadExterior publicidadExt_customer : customerData.getPublicidadExt())
-							{
-								if (publicidadExt_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto())
-										&& publicidadExt_customer.getAnoGravable().equals(anioGravable))
-								{
-									publicidadExt.add(publicidadExt_customer);
-								}
-							}
-						}
-
-						if (publicidadExt.size() > 0)
-						{
-							infoVista.setPublicidadExt(publicidadExt);
-						}
-					}
-					break;
-
-				default:
-					break;
-			}
-
+			gasolinaService.determinarRegistrosDeclaraciones(infoVista, listaDeclaracionesResponse);
+			infoVista.setErrores(listaDeclaracionesResponse.getErrores());
 		}
 		else
 		{
 			//				declaraPDFResponse.setErrores(("Ocurrio un error. No se genero el PDF");
 		}
-
-		//		infoVista.setResponse(declaraPDFResponse);
-
 
 
 		return infoVista;
@@ -232,7 +212,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final OpcionDeclaracionesPDFRequest declaraPDFRequest = new OpcionDeclaracionesPDFRequest();
 		OpcionDeclaracionesPDFResponse declaraPDFResponse = null;
-		SDHValidaMailRolResponse customerData = null;
+		//		SDHValidaMailRolResponse customerData = null;
 
 		String bp = "";
 		String numObjeto = "";
@@ -243,7 +223,10 @@ public class DeclaracionesPageController extends AbstractPageController
 
 
 		bp = customerModel.getNumBP();
-		customerData = sdhCustomerFacade.getRepresentadoFromSAP(bp);
+		if (infoVista.getCustomerData() == null)
+		{
+			infoVista.setCustomerData(sdhCustomerFacade.getRepresentadoFromSAP(bp));
+		}
 
 		claseObjeto = infoVista.getClaveImpuesto();
 		numObjeto = infoVista.getObjContrato(); //gasolinaService.obtenerNumDocDeclaraciones(customerData2, claseObjeto);

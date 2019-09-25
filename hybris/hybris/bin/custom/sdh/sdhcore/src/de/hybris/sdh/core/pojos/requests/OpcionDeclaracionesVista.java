@@ -3,6 +3,7 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
@@ -10,6 +11,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class OpcionDeclaracionesVista
 	private String urlDownload;
 	private OpcionDeclaracionesPDFResponse declaraPDFResponse;
 	private OpcionDeclaracionesCatalogos catalogos;
+	private List<ErrorEnWS> errores;
 
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 	private List<ImpuestoGasolina> gasolina;
@@ -34,6 +37,43 @@ public class OpcionDeclaracionesVista
 	private ImpuestoICA ica;
 	private ReteICA reteIca;
 	private List<ImpuestoVehiculos> vehicular; //Se agrega la  parte de vehiculos del response
+
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorEnWS> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<ErrorEnWS> errores)
+	{
+		this.errores = errores;
+	}
+
+	private SDHValidaMailRolResponse customerData;
+
+	/**
+	 * @return the customerData
+	 */
+	public SDHValidaMailRolResponse getCustomerData()
+	{
+		return customerData;
+	}
+
+	/**
+	 * @param customerData
+	 *           the customerData to set
+	 */
+	public void setCustomerData(final SDHValidaMailRolResponse customerData)
+	{
+		this.customerData = customerData;
+	}
 
 	/**
 	 * @return the claveImpuesto
