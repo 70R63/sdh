@@ -74,8 +74,12 @@ public class SDHAbstractPageController extends AbstractSearchPageController {
         for(FirmanteResponse eachFirmante : firmantes){
             if(eachFirmante.getNumIdent().equalsIgnoreCase(representanteData.getDocumentNumber())){
                 showNewFirmRow=false;
-                
+
             }
+        }
+
+        if(CollectionUtils.isNotEmpty(firmantes) && firmantes.size() == 2 && showNewFirmRow == true){
+            showFirmAndAddButton = false;
         }
 
         model.addAttribute("showFirmButton",showFirmButton);
