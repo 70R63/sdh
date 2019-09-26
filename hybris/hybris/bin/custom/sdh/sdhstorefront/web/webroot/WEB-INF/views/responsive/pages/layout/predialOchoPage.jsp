@@ -9,8 +9,8 @@
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
 
-<predial:predialOchoGenerales />
-<predial:predialOchoDatLiq />
-<predial:predialOchoLiqPrivada />
+<predial:predialOchoGenerales/>
+<predial:predialOchoDatLiq/>
+<predial:predialOchoLiqPrivada/>
 <firmas:generalFirmas />
-<predial:predialOchoBotones />
+<predial:predialOchoBotones/>

@@ -27,7 +27,7 @@
 					<label class="control-label"><spring:theme
 							code="predialuno.datliquidacion.porcepropiedad" /></label> <input id=""
 						name="" class="newalto form-control" disabled type="text" value=""
-						maxlength="240"></input><label class="control-label"><spring:theme
+						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
 			</div>
@@ -36,7 +36,8 @@
 					<label class="control-label"><spring:theme
 							code="predialuno.datliquidacion.porcenexe" /></label> <input id=""
 						name="" class="newalto form-control" disabled type="text" value=""
-						maxlength="240"></input>%
+						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
+							code="%" /></label>
 				</div>
 			</div>
 		</div>
@@ -47,7 +48,8 @@
 					<label class="control-label"><spring:theme
 							code="predialuno.datliquidacion.porceexclu" /></label> <input id=""
 						name="" class="newalto form-control" disabled type="text" value=""
-						maxlength="240"></input>%
+						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
+							code="%" /></label>
 				</div>
 			</div>
 			<div class="col-md-2">

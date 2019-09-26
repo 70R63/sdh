@@ -10,6 +10,7 @@
 
 
 <predial:predialCuatroGenerales />
+<predial:predialCuatroDatPredio/>
 <predial:predialCuatroDatLiq />
 <predial:predialCuatroLiqPrivada />
 <firmas:generalFirmas />
