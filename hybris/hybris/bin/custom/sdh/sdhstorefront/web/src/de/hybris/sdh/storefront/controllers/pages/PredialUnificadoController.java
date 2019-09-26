@@ -27,66 +27,181 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class PredialUnificadoController extends AbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
+	private static final String TEXT_ACCOUNT_PROFILE = "Predial";
+	private static final String TEXT_BASES_PROFILE = "Predial Bases Presuntivas";
 
 	// CMS Pages
-	private static final String PREDIAL_UNIFICADO_CMS_PAGE = "predialUnificadoPage";
+	private static final String PREDIAL_UNO_CMS_PAGE = "predialUnoPage";
+	private static final String PREDIAL_DOS_CMS_PAGE = "predialDosPage";
+	private static final String PREDIAL_TRES_CMS_PAGE = "predialTresPage";
+	private static final String PREDIAL_CUATRO_CMS_PAGE = "predialCuatroPage";
+	private static final String PREDIAL_CINCO_CMS_PAGE = "predialCincoPage";
+	private static final String PREDIAL_SEIS_CMS_PAGE = "predialSeisPage";
+	private static final String PREDIAL_SIETE_CMS_PAGE = "predialSietePage";
+	private static final String PREDIAL_OCHO_CMS_PAGE = "predialOchoPage";
+	private static final String PREDIAL_BASES_PRESUNTIVAS_CMS_PAGE = "predialBasesPresuntivasPage";
 
-	private static final String REDIRECT_TO_PREDIAL_UNIFICADO_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado/detalle";
+	private static final String REDIRECT_TO_PREDIAL_UNO_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_1";
+	private static final String REDIRECT_TO_PREDIAL_DOS_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_2";
+	private static final String REDIRECT_TO_PREDIAL_TRES_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_3";
+	private static final String REDIRECT_TO_PREDIAL_CUATRO_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_4";
+	private static final String REDIRECT_TO_PREDIAL_CINCO_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_5";
+	private static final String REDIRECT_TO_PREDIAL_SEIS_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_6";
+	private static final String REDIRECT_TO_PREDIAL_SIETE_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_7";
+	private static final String REDIRECT_TO_PREDIAL_OCHO_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_8";
+	private static final String REDIRECT_TO_PREDIAL_BASES_PRESUNTIVAS_PAGE = REDIRECT_PREFIX
+			+ "/contribuyentes/predialunificado/basespresuntivas";
+
+
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
-	@RequestMapping(value = "/contribuyentes/predialunificado/detalle", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialunificadodetalle(final Model model) throws CMSItemNotFoundException
+	public String predialuno(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro predial unificado detalle --------------------------");
+		System.out.println("---------------- Hola entro predial unificado uno --------------------------");
 
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNIFICADO_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_UNIFICADO_CMS_PAGE));
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/contribuyentes/predialunificado/detalle", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/predialunificado_2", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialunificadodetallepost(final BindingResult bindingResult, final Model model,
+	public String predialdos(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificado DOS --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_DOS_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_DOS_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_3", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialtres(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificado TRES --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_TRES_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_TRES_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_4", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialcuatro(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificado CUATRO --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_CUATRO_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_CUATRO_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_5", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialcinco(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificado CINCO --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_CINCO_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_CINCO_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_6", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialseis(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificado SEIS --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_SEIS_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_SEIS_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_7", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialsiete(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificado Siete --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_SIETE_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_SIETE_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_8", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialocho(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificado OCHO --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_OCHO_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_OCHO_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado/basespresuntivas", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialbases(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificado BASES PRESUNTIVAS --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_BASES_PRESUNTIVAS_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_BASES_PRESUNTIVAS_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_BASES_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String predialunopost(final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("------------------entro al post de predial unificado------------------------");
+		System.out.println("------------------entro al post de predial unificado uno------------------------");
 
-		return REDIRECT_TO_PREDIAL_UNIFICADO_PAGE;
+		return REDIRECT_TO_PREDIAL_UNO_PAGE;
 	}
-
-	@RequestMapping(value = "/contribuyentes/predialunificado/declaracion", method = RequestMethod.GET)
-	@RequireHardLogIn
-	public String predialunificadodeclaracion(final Model model) throws CMSItemNotFoundException
-	{
-		System.out.println("---------------- Hola entro declaracion sobrevehiculos --------------------------");
-
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNIFICADO_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_UNIFICADO_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-
-		return getViewForPage(model);
-	}
-
-	@RequestMapping(value = "/contribuyentes/predialunificado/declaracion", method = RequestMethod.POST)
-	@RequireHardLogIn
-	public String predialunificadopost(final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
-	{
-		System.out.println("------------------entro al post de declaracion sobrevehiculos------------------------");
-
-		return REDIRECT_TO_PREDIAL_UNIFICADO_PAGE;
-	}
-
 
 }

@@ -26,16 +26,16 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.areterreno" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+							code="predial.basespresun.datospredio.areterreno" /></label> <input id="areaterreno"
+						name="areaterreno" class="newalto form-control areaterreno" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.areaconstru" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value=""
+							code="predial.basespresun.datospredio.areaconstru" /></label> <input id="areaconstruccion"
+						name="areaconstruccion" class="newalto form-control areaconstruccion" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -51,15 +51,17 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.prophorizon" /></label> <select id=""
-						name="" class="newalto form-control"><option>Seleccionar</option></select>
+							code="predial.basespresun.datospredio.prophorizon" /></label> <select id="prophorizontal"
+						name="prophorizontal" class="newalto form-control prophorizontal"><option>Seleccionar</option>
+						<option value="Si">Si</option>
+						<option value="No">No</option></select>
 				</div>
 			</div>
 		</div>
 			<div class="row">
 			<div class="col-md-3">
-				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+				<button style="margin-top: 3px;" id="buttonPrecalculo"
+					class="btn btn-primary btn-lg buttonPrecalculo" type="button">
 					<spring:theme code="predial.basespresun.datospredio.precalculo" />
 				</button>
 			</div>
