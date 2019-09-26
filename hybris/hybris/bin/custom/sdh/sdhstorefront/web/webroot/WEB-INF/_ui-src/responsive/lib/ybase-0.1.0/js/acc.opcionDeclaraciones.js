@@ -111,7 +111,7 @@ ACC.opcionDeclaraciones = {
 		$("#table-gasolina1").find("tr:gt(0)").remove();
 		$("#table-ica1").find("tr:gt(0)").remove();
 		$("#table-reteica1").find("tr:gt(0)").remove();
-//		$("#table-reteica1").find("tr:gt(0)").remove();
+		$("#table-delineacion1").find("tr:gt(0)").remove();
 		
 		
 		if (infoResponse.errores != null){
@@ -142,6 +142,20 @@ ACC.opcionDeclaraciones = {
 								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
 								"</tr>");
 					});
+				}
+			}
+			
+			if(infoActual.claveImpuesto == '0006'){
+				if(infoResponse.delineacion != null){
+					if(infoResponse.delineacion.length > 0){
+						$.each(infoResponse.delineacion, function (index,value){
+							$('#table-delineacion1').append("<tr>"+ 
+									'<td>' + value.cdu + '</td>'+
+									'<td>' + value.radicados[0].numRadicado + '</td>'+
+									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
+									"</tr>");
+						});
+					}
 				}
 			}
 
@@ -202,7 +216,7 @@ ACC.opcionDeclaraciones = {
 		var tablereteica = document.getElementById('table-reteica');
 		var tablepublicidad = document.getElementById('table-publicidad');
 		var tablegasolina = document.getElementById('table-gasolina');
-		var cdus = document.getElementById('CDU');
+		var cdus = document.getElementById('table-delineacion');
 
 // 		document.getElementById('periodo').value = '00'; 
 		

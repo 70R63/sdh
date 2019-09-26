@@ -4,7 +4,7 @@
 package de.hybris.sdh.core.pojos.requests;
 
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
-import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
@@ -33,7 +33,7 @@ public class OpcionDeclaracionesVista
 
 	private List<ImpuestoPublicidadExterior> publicidadExt;
 	private List<ImpuestoGasolina> gasolina;
-	private List<ImpuestoDelineacionUrbana> delineacion;
+	private List<ImpuestoDelineacionUrbanaWithRadicados> delineacion;
 	private ImpuestoICA ica;
 	private ReteICA reteIca;
 	private List<ImpuestoVehiculos> vehicular; //Se agrega la  parte de vehiculos del response
@@ -230,7 +230,7 @@ public class OpcionDeclaracionesVista
 	/**
 	 * @return the delineacion
 	 */
-	public List<ImpuestoDelineacionUrbana> getDelineacion()
+	public List<ImpuestoDelineacionUrbanaWithRadicados> getDelineacion()
 	{
 		return delineacion;
 	}
@@ -239,7 +239,7 @@ public class OpcionDeclaracionesVista
 	 * @param delineacion
 	 *           the delineacion to set
 	 */
-	public void setDelineacion(final List<ImpuestoDelineacionUrbana> delineacion)
+	public void setDelineacion(final List<ImpuestoDelineacionUrbanaWithRadicados> delineacion)
 	{
 		this.delineacion = delineacion;
 	}

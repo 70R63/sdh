@@ -17,8 +17,6 @@ import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
-import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
-import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -30,7 +28,6 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -147,8 +144,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final ListaDeclaracionesRequest listaDeclaracionesRequest = new ListaDeclaracionesRequest();
 		ListaDeclaracionesResponse listaDeclaracionesResponse = null;
-		final List<ImpuestoPublicidadExterior> publicidadExt = null;
-		final List<ImpuestoGasolina> gasolina = null;
+
 
 		String bp = "";
 		String impuesto = "";
