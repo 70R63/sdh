@@ -11,6 +11,8 @@ import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.PseNotificacionDePagoRequest;
 import de.hybris.sdh.core.services.SDHNotificacionPagoService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -92,6 +94,11 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 				{
 					fechaRecaudo = bankProcessDate.split(" ")[0];
 					horaRecaudo = bankProcessDate.split(" ")[1];
+				}else{
+					fechaRecaudo = bankProcessDate.replace("-","/");
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+					LocalDateTime now = LocalDateTime.now();
+					horaRecaudo = dtf.format(now);
 				}
 			}
 
@@ -109,10 +116,15 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
 
 			
-			if(transaction.getEntityCode().equals(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION)) { //Credibanco transaction
-				pseNotificacionDePagoRequest.setMedioPago(ControllerPseConstants.CREDIBANCO_NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(transaction.getCrePaymentMethod()));
+			if(transaction.getEntityCode().equals(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION))
+			{ //Credibanco transaction
+				pseNotificacionDePagoRequest.setMedioPago(
+						ControllerPseConstants.CREDIBANCO_NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
+								transaction.getCrePaymentMethod()));
 			}else { //ACH PSE Transaction
-				pseNotificacionDePagoRequest.setMedioPago(ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(transaction.getTipoDeTarjeta()));
+				pseNotificacionDePagoRequest.setMedioPago(
+						ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
+								transaction.getTipoDeTarjeta()));
 			}
 			
 			this.realizarNotificacion(pseNotificacionDePagoRequest);

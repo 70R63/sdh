@@ -5,14 +5,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="predial"
-	tagdir="/WEB-INF/tags/responsive/predial/predialBasesPresuntivas"%>
+	tagdir="/WEB-INF/tags/responsive/predial/predialPaginaTres"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
 
-<predial:predialBasesGenerales />
-<predial:predialBasesDatLiq />
-<div id="BasesDetalle" style="display: none">
-	<predial:predialBasesLiqPrivada />
-	<firmas:generalFirmas />
-	<predial:predialBasesBotones />
-</div>
+<predial:predialTresGenerales />
+<predial:predialTresDatLiq />
+<predial:predialTresLiqPrivada />
+<firmas:generalFirmas />
+<predial:predialTresBotones />

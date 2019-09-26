@@ -1,3 +1,5 @@
+
+
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
@@ -8,10 +10,11 @@
 	tagdir="/WEB-INF/tags/responsive/predial/predialBasesPresuntivas"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
-
 <predial:predialBasesGenerales />
+<predial:predialBasesDatPredio />
+
+<div class="BasesDetalle" id="BasesDetalle" style="display: none">
 <predial:predialBasesDatLiq />
-<div id="BasesDetalle" style="display: none">
 	<predial:predialBasesLiqPrivada />
 	<firmas:generalFirmas />
 	<predial:predialBasesBotones />
