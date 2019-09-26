@@ -3,8 +3,7 @@ ACC.predial = {
 	_autoload : [ "bindoptionNo","bindprophorizontal", "binbuttonPrecalculo" ],
 
 	bindoptionNo : function() {
-		$(document).on("click", ".optradio", function(e) {
-			e.preventDefault();
+		$(document).on("click", ".optradio", function() {
 			var valo = this.value;
 			var pro = document.getElementById('proyecto');
 			
