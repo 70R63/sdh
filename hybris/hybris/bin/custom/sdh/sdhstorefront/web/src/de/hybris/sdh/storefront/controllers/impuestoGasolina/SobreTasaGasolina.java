@@ -504,7 +504,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData,null);
-
+		model.addAttribute("redirectURL","/contribuyentes/sobretasa-gasolina");
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
 
@@ -941,7 +941,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 		model.addAttribute("contribuyenteData", contribuyenteData);
 		model.addAttribute("currentUserData", currentUserData);
-
+		model.addAttribute("redirectURL","/autorizados/contribuyente/representando?representado="+contribuyenteData.getNumBP());
 		final CalcGasolina2Request calculaGasolina2Request = new CalcGasolina2Request();
 		calculaGasolina2Request.setPartner(representado);
 		calculaGasolina2Request.setFormulario(numForm);
