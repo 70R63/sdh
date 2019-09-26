@@ -30,34 +30,9 @@
 			</table>
 		</div>
 	</div>
+</div>
 
-	<form:form>
-		<div class="row mt-3">
-			<div class="col-md-4 col-md-offset-4 d-flex align-items-center">
-				<div class="table-responsive text-center">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<td><label class="control-label labeltabletd tableident"><spring:theme
-											code="ica.inicial.table.tipdoc" /></label></td>
-								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="ica.inicial.table.numdoc" /></label></td>
-								<td><label class="control-label labeltabletd "><spring:theme
-											code="ica.inicial.table.nombre" /></label></td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-
+<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="headline">
@@ -127,9 +102,8 @@
 				</div>
 			</div>
 		</div>
-
-	</form:form>
 </div>
+
 
 
 

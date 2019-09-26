@@ -1,4 +1,4 @@
-<%@ tag body-content="scriptless" trimDirectiveWhitespaces="true"%>
+<%@ tag body-content="empty" trimDirectiveWhitespaces="true"%>>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>

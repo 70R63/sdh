@@ -204,4 +204,37 @@ public class PredialUnificadoController extends AbstractPageController
 		return REDIRECT_TO_PREDIAL_UNO_PAGE;
 	}
 
+	@RequestMapping(value = "/contribuyentes/predialunificado_2", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String predialdospost(final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("------------------entro al post de predial unificado uno------------------------");
+
+		return REDIRECT_TO_PREDIAL_DOS_PAGE;
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_3", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String predialtrespost(final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("------------------entro al post de predial unificado uno------------------------");
+
+		return REDIRECT_TO_PREDIAL_TRES_PAGE;
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_4", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String predialcuatropost(final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("------------------entro al post de predial unificado uno------------------------");
+
+		return REDIRECT_TO_PREDIAL_CUATRO_PAGE;
+	}
+
+
+
+
 }
