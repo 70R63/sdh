@@ -105,6 +105,10 @@
 			ACC.declaracionPDFURL= "<c:url value='/contribuyentes/consultas/declaraciones/declaracionPDF' />";			
 			
 			ACC.listaDeclaracionesURL= "<c:url value='/contribuyentes/consultas/declaraciones/listaDeclaraciones' />";	
+
+			ACC.certiPagosListaURL= "<c:url value='/contribuyentes/consultas/certipagos/listaPagos' />";	
+			
+			ACC.certiPagoImprimeURL= "<c:url value='/contribuyentes/consultas/certipagos/imprimir' />";	
 			
 		  	ACC.currentURL = "${currentURL}";
 

@@ -1,6 +1,6 @@
 ACC.opcionDeclaraciones = {
 		
-	_autoload : [ "bindDeclaracionPDF" ],
+	_autoload : [ "bindDeclaracionPDF", "bindCertiPagosImprime" ],
 
 	
 	bindDeclaracionPDF : function() {
@@ -54,11 +54,87 @@ ACC.opcionDeclaraciones = {
 		});
 	},
 	
+	
+	bindCertiPagosImprime : function() {
+		$(document).on("click", ".certiPagosImprime", function(e) {
+			e.preventDefault();	
+			
+			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
+//				debugger;
+				var nombreCampo;
+				var valorCampo;
+				var valNumObjeto;
+					
+				for (var i = 0; i < e.target.form.length; i++) {
+					nombreCampo = "registroNum_" + i;
+					valorCampo = null;
+					valorCampo = document.getElementById(nombreCampo);
+					if(valorCampo != null){
+						var seleccionado = valorCampo.checked;
+						if(seleccionado == true){
+							 valNumObjeto = $.trim($(valorCampo).attr("data-numObjeto")); 
+							 valCtaContrato = $.trim($(valorCampo).attr("data-ctaContrato")); 
+							 valClavePeriodo = $.trim($(valorCampo).attr("data-clavePeriodo")); 
+							 valImporte = $.trim($(valorCampo).attr("data-importe")); 
+							 break;
+						}
+					}else{
+						break;
+					}
+				}
+	 	        var claveImpuesto = $("#seleccion").val();  	       
+	 	        var anoGravable = $("#aniograv").val(); 	       
+	 	        var periodo = $("#periodo").val(); 	       
+				var dataActual = {};
+				var objContrato = valNumObjeto;
+							
+				dataActual.claveImpuesto = claveImpuesto;
+				dataActual.objContrato = objContrato;
+				dataActual.anoGravable = anoGravable;
+				dataActual.periodo = periodo;
+				
+				dataActual.ctaContrato = valCtaContrato;
+				dataActual.clavePeriodo = valClavePeriodo;
+				dataActual.importe = valImporte;
+				
+				
+	
+				$.ajax({
+					url : ACC.certiPagoImprimeURL,
+					data : dataActual,
+					type : "POST",
+					success : function(dataResponse) {
+						ACC.opcionDeclaraciones.updateFromResponseImprimir(dataActual,dataResponse);
+					},
+					error : function() {
+						alert("Error procesar la solicitud");	
+					}
+				});
+			}
+		});
+	},
+	
 	updateFromResponsePDF : function(infoActual,infoResponse) {
 
 		debugger;
 		if (infoResponse.declaraPDFResponse.errores != null){
 			alert(infoResponse.declaraPDFResponse.errores.textoMensaje);
+		}else{
+			if(infoResponse.urlDownload != null){
+				$("#downloadHelper").attr("href",infoResponse.urlDownload);
+				document.getElementById("downloadHelper").click();
+			}
+		}
+		
+				
+	},
+	
+	
+	updateFromResponseImprimir : function(infoActual,infoResponse) {
+
+		debugger;
+		if (infoResponse.impresionResponse.errores != null){
+			alert(infoResponse.impresionResponse.errores[0].txtmsj);
 		}else{
 			if(infoResponse.urlDownload != null){
 				$("#downloadHelper").attr("href",infoResponse.urlDownload);
@@ -93,6 +169,40 @@ ACC.opcionDeclaraciones = {
 				type : "GET",
 				success : function(dataResponse) {
 					ACC.opcionDeclaraciones.updateFromResponseSeleccion(dataActual,dataResponse);
+				},
+				error : function() {
+					alert("Error procesar la solicitud");	
+				}
+			});
+		}
+		
+		
+	},
+	
+	
+	obtenerListaDeclaraciones_certiPagos : function() {
+
+		debugger;
+		ACC.opcionDeclaraciones.ocultarTablas();
+		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
+	        var claveImpuesto = $("#seleccion").val();  	       
+	        var anoGravable = $("#aniograv").val(); 	       
+	        var periodo = $("#periodo").val(); 	       
+			var dataActual = {};
+			var validacionOK = false;
+
+		
+			dataActual.claveImpuesto = claveImpuesto;
+			dataActual.anoGravable = anoGravable;
+			dataActual.periodo = periodo;
+			
+			
+			$.ajax({
+				url : ACC.certiPagosListaURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(dataActual,dataResponse);
 				},
 				error : function() {
 					alert("Error procesar la solicitud");	
@@ -172,6 +282,86 @@ ACC.opcionDeclaraciones = {
 					}
 				}
 			}
+		}
+		
+	
+	},
+	
+	
+	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse) {
+
+		debugger;
+//		$("#table-publicidad1").find("tr:gt(0)").remove();
+		$("#table-gasolina1").find("tr:gt(0)").remove();
+//		$("#table-ica1").find("tr:gt(0)").remove();
+//		$("#table-reteica1").find("tr:gt(0)").remove();
+//		$("#table-delineacion1").find("tr:gt(0)").remove();
+		
+		
+		if (infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].idmsj != 0){
+			alert(infoResponse.errores[0].txtmsj);
+		}else{
+//			if(infoActual.claveImpuesto == '0003'){
+//				$('#table-ica1').append("<tr>"+ 
+//						'<td>' + "Industria y Comercio" + '</td>'+
+//						'<td>' + infoResponse.anoGravable + '</td>'+
+//						'<td><input id="registroNum_'+ 0 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ infoResponse.ica.numObjeto +'"' +">" + "</td>"+
+//						"</tr>");
+//			}
+//			
+//			if(infoActual.claveImpuesto == '0004'){
+//				$('#table-reteica1').append("<tr>"+ 
+//						'<td>' + infoResponse.reteica.numID + '</td>'+
+//						'<td>' + infoResponse.reteica.consecutivo + '</td>'+
+//						'<td><input id="registroNum_'+ 0 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ infoResponse.reteica.numObjeto +'"' +">" + "</td>"+
+//						"</tr>");
+//			}
+			
+			if(infoActual.claveImpuesto == '0005'){
+				if(infoResponse.declaracionesCertiPagos.declaraciones.length > 0){
+					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value){
+						if(value.numObjeto != "" ){
+							$('#table-gasolina1').append("<tr>"+ 
+								'<td>' + infoResponse.customerData.infoContrib.tipoDoc  + '</td>'+
+								'<td>' + infoResponse.customerData.infoContrib.numDoc + '</td>'+
+								'<td>' + value.clavePeriodo + '</td>'+
+								'<td>' + value.referencia + '</td>'+
+								'<td>' + value.importe + '</td>'+
+								'<td>' + value.moneda + '</td>'+
+								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'" data-ctaContrato="' + value.ctaContrato +'" data-clavePeriodo="' + value.clavePeriodo +'" data-importe="' + value.importe + '"' +">" + "</td>"+
+								"</tr>");
+						}
+					});
+				}
+			}
+			
+//			if(infoActual.claveImpuesto == '0006'){
+//				if(infoResponse.delineacion != null){
+//					if(infoResponse.delineacion.length > 0){
+//						$.each(infoResponse.delineacion, function (index,value){
+//							$('#table-delineacion1').append("<tr>"+ 
+//									'<td>' + value.cdu + '</td>'+
+//									'<td>' + value.radicados[0].numRadicado + '</td>'+
+//									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
+//									"</tr>");
+//						});
+//					}
+//				}
+//			}
+//
+//			if(infoActual.claveImpuesto == '0007'){
+//				if(infoResponse.publicidadExt != null){
+//					if(infoResponse.publicidadExt.length > 0){
+//						$.each(infoResponse.publicidadExt, function (index,value){
+//							$('#table-publicidad1').append("<tr>"+ 
+//									'<td>' + value.numResolu + '</td>'+
+//									'<td>' + value.tipoValla + '</td>'+
+//									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
+//									"</tr>");
+//						});
+//					}
+//				}
+//			}
 		}
 		
 	
