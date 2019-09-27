@@ -118,15 +118,18 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			
 			if(transaction.getEntityCode().equals(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION))
 			{ //Credibanco transaction
+                LOG.info("---- CREDIBANCO TRANSACTION ----");
 				pseNotificacionDePagoRequest.setMedioPago(
 						ControllerPseConstants.CREDIBANCO_NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
 								transaction.getCrePaymentMethod()));
 			}else { //ACH PSE Transaction
+                LOG.info("---- ACH/PSE TRANSACTION ----");
 				pseNotificacionDePagoRequest.setMedioPago(
 						ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
 								transaction.getTipoDeTarjeta()));
 			}
-			
+
+
 			this.realizarNotificacion(pseNotificacionDePagoRequest);
 
 			transaction.setNotificacionDeRecaudo("SI");
