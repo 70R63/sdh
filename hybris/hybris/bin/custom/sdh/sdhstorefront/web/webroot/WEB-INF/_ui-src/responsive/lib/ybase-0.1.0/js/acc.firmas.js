@@ -57,29 +57,6 @@ ACC.frimas = {
 
 		$(".justFirm").on("click",function(e){
 
-			var tipoIdent= $.trim($(this).closest(".representante").find(".FirmTipoId").val());
-
-			var numIdentif  = $.trim($(this).closest(".representante").find(".FirmNumId").val());
-
-			if(numIdentif == "" || tipoIdent=="")
-			{
-				$("#dialogFirmas" ).dialog( "open" );
-				$("#firmasDialogContent").html("");
-				$("#firmasDialogContent").html("Por favor introduzca los datos necesarios.");
-				return ;
-			}
-
-			var element = this;
-			var posicion =0;
-			$.each($(".justFirm"),function (index,value) {
-
-				if($(value).is($(element))){
-					posicion = index+1;
-				}
-
-			});
-
-
 			var numForm = $("#numForm").val();
 
 			if(numForm == "" )
@@ -90,19 +67,33 @@ ACC.frimas = {
 				return;
 			}
 
-			var confirmacion = "X";
+			var currentRow = $.trim($(this).closest(".representante"));
 
 			var firmantes =[];
 
-			var firmante = {};
+			$.each($(".representante .row"),function (index,value) {
 
-			firmante.numForm=numForm;
-			firmante.tipoIdent = tipoIdent;
-			firmante.numIdentif = numIdentif;
-			firmante.firmante = posicion;
-			firmante.confirmacion = confirmacion;
+				var tipoIdent= $.trim($(value).find(".FirmTipoId").val());
 
-			firmantes.push(firmante);
+				var  numIdentif  =$.trim($(value).find(".FirmNumId").val());
+
+				var confirmacion = "X";
+
+				var posicion = index+1;
+
+				var firmante = {};
+
+				firmante.tipoIdent = tipoIdent;
+				firmante.numIdentif = numIdentif;
+				firmante.firmante = posicion;
+				firmante.confirmacion = confirmacion;
+
+				firmantes.push(firmante);
+
+			});
+
+
+
 
 			var data = {};
 			data.numForm=numForm;

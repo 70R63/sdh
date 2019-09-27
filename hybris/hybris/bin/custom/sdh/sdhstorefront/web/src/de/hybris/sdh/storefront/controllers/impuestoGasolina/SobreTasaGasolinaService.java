@@ -9,6 +9,7 @@ import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
+import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
@@ -16,6 +17,7 @@ import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionCertiPagosImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesCatalogos;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
@@ -42,6 +44,7 @@ import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
+import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
@@ -1938,6 +1941,12 @@ public class SobreTasaGasolinaService
 		return false;
 	}
 
+	public boolean ocurrioErrorImprimePago(final OpcionCertiPagosImprimeResponse response)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
+
 
 	/**
 	 * @param consCasosResponse
@@ -1995,6 +2004,22 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
+	public OpcionCertiPagosImprimeResponse certiPagosImprimir(final OpcionCertiPagosImprimeRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		OpcionCertiPagosImprimeResponse responseInfo = new OpcionCertiPagosImprimeResponse();
+		final String confUrl = "sdh.imprimePago.url";
+		final String confUser = "sdh.imprimePago.user";
+		final String confPass = "sdh.imprimePago.password";
+		final String wsNombre = "docs/imprimePago";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse";
+
+		responseInfo = (OpcionCertiPagosImprimeResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
 
 	public ListaDeclaracionesResponse consultaListaDeclaraciones(final ListaDeclaracionesRequest requestInfo,
 			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
@@ -2004,6 +2029,24 @@ public class SobreTasaGasolinaService
 		final String confUser = "sdh.consulCertif.user";
 		final String confPass = "sdh.consulCertif.password";
 		final String wsNombre = "docs/consulCertif";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse";
+
+		responseInfo = (ListaDeclaracionesResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
+	public ListaDeclaracionesResponse consultaListaDeclaraciones_consulPagos(final ConsulPagosRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		ListaDeclaracionesResponse responseInfo = new ListaDeclaracionesResponse();
+		final String confUrl = "sdh.consulPagos.url";
+		final String confUser = "sdh.consulPagos.user";
+		final String confPass = "sdh.consulPagos.password";
+		final String wsNombre = "docs/consulPagos";
 		final String wsReqMet = "POST";
 		final String nombreClase = "de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse";
 

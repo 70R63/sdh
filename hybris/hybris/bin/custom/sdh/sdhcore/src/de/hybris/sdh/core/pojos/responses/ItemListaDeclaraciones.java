@@ -10,46 +10,37 @@ package de.hybris.sdh.core.pojos.responses;
 public class ItemListaDeclaraciones
 {
 
-	private String numForm;
-	private String taxpayer;
+	private String numBP;
 	private String ctaContrato;
 	private String numObjeto;
 	private String clavePeriodo;
 	private String referencia;
+	private String numForm;
+	private String taxpayer;
 	private String numRadicado;
 	private String creacion;
 	private String modificacion;
+	private String fechaCompensa; //Para consulPagos
+	private String importe; //Para consulPagos
+	private String moneda; //Para consulPagos
+	private String numfactForm; //Para consulPagos
+	private String numDocPago; //Para consulPagos
+	
 	/**
-	 * @return the numForm
+	 * @return the numBP
 	 */
-	public String getNumForm()
+	public String getNumBP()
 	{
-		return numForm;
+		return numBP;
 	}
 	
 	/**
-	 * @param numForm
-	 *           the numForm to set
+	 * @param numBP
+	 *           the numBP to set
 	 */
-	public void setNumForm(final String numForm)
+	public void setNumBP(final String numBP)
 	{
-		this.numForm = numForm;
-	}
-	/**
-	 * @return the taxpayer
-	 */
-	public String getTaxpayer()
-	{
-		return taxpayer;
-	}
-	
-	/**
-	 * @param taxpayer
-	 *           the taxpayer to set
-	 */
-	public void setTaxpayer(final String taxpayer)
-	{
-		this.taxpayer = taxpayer;
+		this.numBP = numBP;
 	}
 	/**
 	 * @return the ctaContrato
@@ -99,7 +90,6 @@ public class ItemListaDeclaraciones
 	{
 		this.clavePeriodo = clavePeriodo;
 	}
-	
 	/**
 	 * @return the referencia
 	 */
@@ -107,7 +97,7 @@ public class ItemListaDeclaraciones
 	{
 		return referencia;
 	}
-
+	
 	/**
 	 * @param referencia
 	 *           the referencia to set
@@ -115,6 +105,40 @@ public class ItemListaDeclaraciones
 	public void setReferencia(final String referencia)
 	{
 		this.referencia = referencia;
+	}
+	
+	/**
+	 * @return the numForm
+	 */
+	public String getNumForm()
+	{
+		return numForm;
+	}
+
+	/**
+	 * @param numForm
+	 *           the numForm to set
+	 */
+	public void setNumForm(final String numForm)
+	{
+		this.numForm = numForm;
+	}
+
+	/**
+	 * @return the taxpayer
+	 */
+	public String getTaxpayer()
+	{
+		return taxpayer;
+	}
+
+	/**
+	 * @param taxpayer
+	 *           the taxpayer to set
+	 */
+	public void setTaxpayer(final String taxpayer)
+	{
+		this.taxpayer = taxpayer;
 	}
 
 	/**
@@ -124,7 +148,7 @@ public class ItemListaDeclaraciones
 	{
 		return numRadicado;
 	}
-
+	
 	/**
 	 * @param numRadicado
 	 *           the numRadicado to set
@@ -133,7 +157,6 @@ public class ItemListaDeclaraciones
 	{
 		this.numRadicado = numRadicado;
 	}
-
 	/**
 	 * @return the creacion
 	 */
@@ -167,6 +190,91 @@ public class ItemListaDeclaraciones
 		this.modificacion = modificacion;
 	}
 
+	/**
+	 * @return the fechaCompensa
+	 */
+	public String getFechaCompensa()
+	{
+		return fechaCompensa;
+	}
+
+	/**
+	 * @param fechaCompensa
+	 *           the fechaCompensa to set
+	 */
+	public void setFechaCompensa(final String fechaCompensa)
+	{
+		this.fechaCompensa = fechaCompensa;
+	}
+
+	/**
+	 * @return the importe
+	 */
+	public String getImporte()
+	{
+		return importe;
+	}
+
+	/**
+	 * @param importe
+	 *           the importe to set
+	 */
+	public void setImporte(final String importe)
+	{
+		this.importe = importe;
+	}
+
+	/**
+	 * @return the moneda
+	 */
+	public String getMoneda()
+	{
+		return moneda;
+	}
+
+	/**
+	 * @param moneda
+	 *           the moneda to set
+	 */
+	public void setMoneda(final String moneda)
+	{
+		this.moneda = moneda;
+	}
+
+	/**
+	 * @return the numfactForm
+	 */
+	public String getNumfactForm()
+	{
+		return numfactForm;
+	}
+
+	/**
+	 * @param numfactForm
+	 *           the numfactForm to set
+	 */
+	public void setNumfactForm(final String numfactForm)
+	{
+		this.numfactForm = numfactForm;
+	}
+
+	/**
+	 * @return the numDocPago
+	 */
+	public String getNumDocPago()
+	{
+		return numDocPago;
+	}
+
+	/**
+	 * @param numDocPago
+	 *           the numDocPago to set
+	 */
+	public void setNumDocPago(final String numDocPago)
+	{
+		this.numDocPago = numDocPago;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -175,13 +283,11 @@ public class ItemListaDeclaraciones
 	@Override
 	public String toString()
 	{
-		return "ItemListaDeclaraciones [numForm=" + numForm + ", taxpayer=" + taxpayer + ", ctaContrato=" + ctaContrato
-				+ ", numObjeto=" + numObjeto + ", clavePeriodo=" + clavePeriodo + ", referencia=" + referencia + ", numRadicado="
-				+ numRadicado + ", creacion=" + creacion + ", modificacion=" + modificacion + "]";
+		return "ItemListaDeclaraciones [numBP=" + numBP + ", ctaContrato=" + ctaContrato + ", numObjeto=" + numObjeto
+				+ ", clavePeriodo=" + clavePeriodo + ", referencia=" + referencia + ", numForm=" + numForm + ", taxpayer=" + taxpayer
+				+ ", numRadicado=" + numRadicado + ", creacion=" + creacion + ", modificacion=" + modificacion + ", fechaCompensa="
+				+ fechaCompensa + ", importe=" + importe + ", moneda=" + moneda + ", numfactForm=" + numfactForm + ", numDocPago="
+				+ numDocPago + "]";
 	}
-
-
-
-
 
 }
