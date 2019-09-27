@@ -24,7 +24,7 @@
 	<sobreTasaGasolina:decGasolinaPagos />
 	<%-- 	<sobreTasaGasolina:decGasolinaDatRev /> --%>
 	<%-- 	<sobreTasaGasolina:decGasolinaInfFirma /> --%>
-	<c:url value='/contribuyentes/sobretasa-gasolina' var="taxRedirection"/>
+	<c:url value='${redirectURL}' var="taxRedirection"/>
 	<firmas:generalFirmas firmaContribuyenteRedirection="${taxRedirection}"/>
 <%--	<sobreTasaGasolina:decGasolinaFirma />--%>
 </sf:form>

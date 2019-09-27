@@ -27,11 +27,13 @@ import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
 import de.hybris.sdh.core.pojos.responses.DetGasInfoDeclaraResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.DetRadicadosResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
@@ -2077,7 +2079,10 @@ public class SobreTasaGasolinaService
 		ImpuestoICA ica = null;
 		ReteICA reteica = null;
 		final List<ImpuestoVehiculos> vehiculos = null;
-		List<ImpuestoDelineacionUrbana> delineacion = null;
+		List<ImpuestoDelineacionUrbanaWithRadicados> delineacion = null;
+		ImpuestoDelineacionUrbanaWithRadicados delineacion_customer_extendido = null;
+		List<DetRadicadosResponse> radicados = null;
+		DetRadicadosResponse infoRadicados = null;
 
 
 		switch (infoVista.getClaveImpuesto())
@@ -2146,7 +2151,7 @@ public class SobreTasaGasolinaService
 
 
 			case "0006": //delineacion urbana
-				delineacion = new ArrayList<ImpuestoDelineacionUrbana>();
+				delineacion = new ArrayList<ImpuestoDelineacionUrbanaWithRadicados>();
 				if (listaDeclaracionesResponse.getDeclaraciones() != null)
 				{
 					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
@@ -2155,7 +2160,23 @@ public class SobreTasaGasolinaService
 						{
 							if (delineacion_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
 							{
-								delineacion.add(delineacion_customer);
+								delineacion_customer_extendido = new ImpuestoDelineacionUrbanaWithRadicados();
+								delineacion_customer_extendido.setCdu(delineacion_customer.getCdu());
+								delineacion_customer_extendido.setLicenConst(delineacion_customer.getLicenConst());
+								delineacion_customer_extendido.setNumObjeto(delineacion_customer.getNumObjeto());
+
+								radicados = null;
+								if (itemDeclaracion.getNumRadicado() != null)
+								{
+									radicados = new ArrayList<DetRadicadosResponse>();
+									infoRadicados = new DetRadicadosResponse();
+
+									infoRadicados.setNumRadicado(itemDeclaracion.getNumRadicado());
+									radicados.add(infoRadicados);
+								}
+								delineacion_customer_extendido.setRadicados(radicados);
+
+								delineacion.add(delineacion_customer_extendido);
 							}
 						}
 					}

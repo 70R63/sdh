@@ -109,6 +109,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.rop.js"></script>
 		
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.certipago.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.predial.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
 
