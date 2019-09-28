@@ -94,12 +94,12 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 				{
 					fechaRecaudo = bankProcessDate.split(" ")[0];
 					horaRecaudo = bankProcessDate.split(" ")[1];
-				}else{
+				}/*else{
 					fechaRecaudo = bankProcessDate.replace("-","/");
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 					LocalDateTime now = LocalDateTime.now();
 					horaRecaudo = dtf.format(now);
-				}
+				}*/
 			}
 
 			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();

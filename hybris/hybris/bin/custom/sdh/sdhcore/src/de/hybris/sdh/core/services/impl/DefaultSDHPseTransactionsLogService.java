@@ -331,7 +331,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				pseTransactionsLogModel.setCreResponseStatus(response.getStatus());
 				pseTransactionsLogModel.setCreApprovalNumber(response.getApprovalNumber());
 				pseTransactionsLogModel.setCrePaymentMethod(response.getPaymentMethod());
-				pseTransactionsLogModel.setBankProcessDate(response.getTransactionDate());
+				pseTransactionsLogModel.setBankProcessDate(response.getTransactionDate() + " " + response.getTransactionHour());
 				pseTransactionsLogModel.setTransactionState(response.getDescription());
 				transactionState = response.getStatus();
 
