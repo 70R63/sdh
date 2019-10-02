@@ -101,6 +101,16 @@
 					</tr>
 				</thead>
 				<tbody>
+					<tr>
+						<td>
+							<input style="width:710px; font-size:9px !important" class="inputtextnew" disabled="disabled" 
+							type="text" size="30" id="docDescArchivo_0" value="DOCUMENTO DE IDENTIFICACIÓN">
+						</td>
+						<td>
+							<input style="width:405px" class="inputtextnew" type="file" size="150" id="docNombreArchivo_0" name="conA0">							
+						</td>
+					</tr>
+				
 				</tbody>
 			</table>
 		</div>

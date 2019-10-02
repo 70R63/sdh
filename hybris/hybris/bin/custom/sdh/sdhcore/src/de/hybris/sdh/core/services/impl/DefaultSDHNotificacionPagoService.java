@@ -94,12 +94,12 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 				{
 					fechaRecaudo = bankProcessDate.split(" ")[0];
 					horaRecaudo = bankProcessDate.split(" ")[1];
-				}else{
+				}/*else{
 					fechaRecaudo = bankProcessDate.replace("-","/");
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 					LocalDateTime now = LocalDateTime.now();
 					horaRecaudo = dtf.format(now);
-				}
+				}*/
 			}
 
 			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();
@@ -118,15 +118,18 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			
 			if(transaction.getEntityCode().equals(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION))
 			{ //Credibanco transaction
+                LOG.info("---- CREDIBANCO TRANSACTION ----");
 				pseNotificacionDePagoRequest.setMedioPago(
 						ControllerPseConstants.CREDIBANCO_NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
 								transaction.getCrePaymentMethod()));
 			}else { //ACH PSE Transaction
+                LOG.info("---- ACH/PSE TRANSACTION ----");
 				pseNotificacionDePagoRequest.setMedioPago(
 						ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
 								transaction.getTipoDeTarjeta()));
 			}
-			
+
+
 			this.realizarNotificacion(pseNotificacionDePagoRequest);
 
 			transaction.setNotificacionDeRecaudo("SI");

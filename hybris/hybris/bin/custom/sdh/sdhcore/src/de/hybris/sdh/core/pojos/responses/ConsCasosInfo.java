@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Federico Flores Dimas
  *
@@ -18,7 +21,7 @@ public class ConsCasosInfo
 	private String cat03;
 	private String cat04;
 	private String mensaje;
-	private ConsCasosArchiResponse archivos;
+	private List<ConsCasosArchiResponse> archivos;
 
 
 	/**
@@ -172,10 +175,16 @@ public class ConsCasosInfo
 		this.mensaje = mensaje;
 	}
 
+
+
+
+
+
+
 	/**
 	 * @return the archivos
 	 */
-	public ConsCasosArchiResponse getArchivos()
+	public List<ConsCasosArchiResponse> getArchivos()
 	{
 		return archivos;
 	}
@@ -184,14 +193,14 @@ public class ConsCasosInfo
 	 * @param archivos
 	 *           the archivos to set
 	 */
-	public void setArchivos(final ConsCasosArchiResponse archivos)
+	public void setArchivos(final List<ConsCasosArchiResponse> archivos)
 	{
 		this.archivos = archivos;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
