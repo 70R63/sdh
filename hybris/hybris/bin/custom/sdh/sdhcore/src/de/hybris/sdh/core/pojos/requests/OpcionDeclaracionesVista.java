@@ -9,6 +9,8 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
+import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -22,12 +24,19 @@ import java.util.List;
  */
 public class OpcionDeclaracionesVista
 {
+
+	private SDHValidaMailRolResponse customerData;
+
+
 	private String claveImpuesto;
 	private String anoGravable;
 	private String periodo;
 	private String objContrato;
 	private String urlDownload;
 	private OpcionDeclaracionesPDFResponse declaraPDFResponse;
+	private OpcionCertiPagosImprimeResponse impresionResponse;
+	private ListaDeclaracionesResponse declaracionesCertiPagos;
+
 	private OpcionDeclaracionesCatalogos catalogos;
 	private List<ErrorEnWS> errores;
 
@@ -38,6 +47,151 @@ public class OpcionDeclaracionesVista
 	private ReteICA reteIca;
 	private List<ImpuestoVehiculos> vehicular; //Se agrega la  parte de vehiculos del response
 
+
+	private String ctaContrato;
+	private String numObjeto;
+	private String numDoc;
+	private String tipoDoc;
+	private String clavePeriodo;
+	private String importe;
+
+
+	/**
+	 * @return the declaracionesCertiPagos
+	 */
+	public ListaDeclaracionesResponse getDeclaracionesCertiPagos()
+	{
+		return declaracionesCertiPagos;
+	}
+
+	/**
+	 * @param declaracionesCertiPagos
+	 *           the declaracionesCertiPagos to set
+	 */
+	public void setDeclaracionesCertiPagos(final ListaDeclaracionesResponse declaracionesCertiPagos)
+	{
+		this.declaracionesCertiPagos = declaracionesCertiPagos;
+	}
+
+
+	/**
+	 * @return the impresionResponse
+	 */
+	public OpcionCertiPagosImprimeResponse getImpresionResponse()
+	{
+		return impresionResponse;
+	}
+
+	/**
+	 * @param impresionResponse
+	 *           the impresionResponse to set
+	 */
+	public void setImpresionResponse(final OpcionCertiPagosImprimeResponse impresionResponse)
+	{
+		this.impresionResponse = impresionResponse;
+	}
+
+	/**
+	 * @return the ctaContrato
+	 */
+	public String getCtaContrato()
+	{
+		return ctaContrato;
+	}
+
+	/**
+	 * @param ctaContrato
+	 *           the ctaContrato to set
+	 */
+	public void setCtaContrato(final String ctaContrato)
+	{
+		this.ctaContrato = ctaContrato;
+	}
+
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
+	}
+
+	/**
+	 * @return the numDoc
+	 */
+	public String getNumDoc()
+	{
+		return numDoc;
+	}
+
+	/**
+	 * @param numDoc
+	 *           the numDoc to set
+	 */
+	public void setNumDoc(final String numDoc)
+	{
+		this.numDoc = numDoc;
+	}
+
+	/**
+	 * @return the tipoDoc
+	 */
+	public String getTipoDoc()
+	{
+		return tipoDoc;
+	}
+
+	/**
+	 * @param tipoDoc
+	 *           the tipoDoc to set
+	 */
+	public void setTipoDoc(final String tipoDoc)
+	{
+		this.tipoDoc = tipoDoc;
+	}
+
+	/**
+	 * @return the clavePeriodo
+	 */
+	public String getClavePeriodo()
+	{
+		return clavePeriodo;
+	}
+
+	/**
+	 * @param clavePeriodo
+	 *           the clavePeriodo to set
+	 */
+	public void setClavePeriodo(final String clavePeriodo)
+	{
+		this.clavePeriodo = clavePeriodo;
+	}
+
+	/**
+	 * @return the importe
+	 */
+	public String getImporte()
+	{
+		return importe;
+	}
+
+	/**
+	 * @param importe
+	 *           the importe to set
+	 */
+	public void setImporte(final String importe)
+	{
+		this.importe = importe;
+	}
 
 	/**
 	 * @return the errores
@@ -55,8 +209,6 @@ public class OpcionDeclaracionesVista
 	{
 		this.errores = errores;
 	}
-
-	private SDHValidaMailRolResponse customerData;
 
 	/**
 	 * @return the customerData

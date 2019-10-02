@@ -146,7 +146,9 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
+			LOG.info("----- Response Data GetTransactionInformationBodyType -------");
 			LOG.info(response);
+            LOG.info("----- Response Data GetTransactionInformationBodyType -------");
 
 			transactionState = this.updateResponse(pseTransactionsLogModel, response);
 		}
@@ -329,7 +331,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				pseTransactionsLogModel.setCreResponseStatus(response.getStatus());
 				pseTransactionsLogModel.setCreApprovalNumber(response.getApprovalNumber());
 				pseTransactionsLogModel.setCrePaymentMethod(response.getPaymentMethod());
-				pseTransactionsLogModel.setBankProcessDate(response.getTransactionDate());
+				pseTransactionsLogModel.setBankProcessDate(response.getTransactionDate() + " " + response.getTransactionHour());
 				pseTransactionsLogModel.setTransactionState(response.getDescription());
 				transactionState = response.getStatus();
 
