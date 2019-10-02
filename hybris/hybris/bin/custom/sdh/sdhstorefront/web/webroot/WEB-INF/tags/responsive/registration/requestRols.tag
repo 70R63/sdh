@@ -142,16 +142,21 @@
 	</div>
 
 
-	<div class="row">
-		<div class="col-md-6 text-center col-md-offset-3"
-			style="margin-top: 15px">
+	<div class="row documentos">
+		<div class="col-md-6 text-center" style="margin-top: 15px">
 			<table>
 				<thead>
 					<tr>
-						<th><label class="contorl-label labeltabletd"><spring:theme
-									code="tramites.crear.inicial.adjdoc" /></label></th>
-						<th><label class="contorl-label labeltabletd"><spring:theme
-									code="tramites.crear.inicial.adj" /></label></th>
+						<th>
+							<label class="contorl-label labeltabletd" >
+								<spring:theme code="tramites.crear.inicial.adjdoc" />
+							</label>
+						</th>
+						<th>
+							<label class="contorl-label labeltabletd required">
+								<spring:theme code="tramites.crear.inicial.adj" />
+							</label>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -169,6 +174,8 @@
 			</table>
 		</div>
 	</div>
+	
+	
 	
 	
 	
