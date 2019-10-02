@@ -10,7 +10,7 @@
 
 
 		<template:page pageTitle="${pageTitle}">
-<div class="container">
+<div class="container_menu">
 	<div class="row ">
 			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 				<a href="<c:url value='/autorizados/entidades/reportarinfo' />">

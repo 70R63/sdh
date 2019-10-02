@@ -9,13 +9,13 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container_menu">
+<div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline">
 				<h2>
 					<span class="col-md-10 "><spring:theme
-							code="autorizado.listacontib.titulo" /></span>
+							code="contribuyente.listacontib.titulo" /></span>
 				</h2>
 			</div>
 		</div>
@@ -31,20 +31,20 @@
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme
-											code="autorizado.listacontib.tipdoc" /></label></td>
+											code="contribuyente.listacontib.tipdoc" /></label></td>
 								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="autorizado.listacontib.numdoc" /></label></td>
+											code="contribuyente.listacontib.numdoc" /></label></td>
 								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="autorizado.listacontib.idcontrib" /></label></td>
+											code="contribuyente.listacontib.idcontrib" /></label></td>
 								<td><label class="control-label labeltabletd"><spring:theme
-											code="autorizado.listacontib.nombre" /></label></td>
+											code="contribuyente.listacontib.nombre" /></label></td>
 								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="autorizado.listacontib.seleccionar" /></label></td>
+											code="contribuyente.listacontib.seleccionar" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${currentCustomer.agentList}" var="eachAgent" >
-								<c:if test="${eachAgent.agent eq 'X'}" >
+							<c:forEach items="${actualCustomer.agentList}" var="eachAgent" >
+								<c:if test="${eachAgent.agent eq '-'}" >
 									<tr>
 										<td><input class="inputtextnew tableident"
 											disabled="disabled" type="text" size="30" value="${eachAgent.documentType}" /></td>
@@ -55,7 +55,7 @@
 										<td><input class="inputtextnew" disabled="disabled"
 											type="text" size="30" value="${eachAgent.completeName}" /></td>
 										<td
-											style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="/sdhstorefront/autorizados/contribuyente/representando?representado=${eachAgent.bp}">Ingresar</a></td>
+											style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="/sdhstorefront/contribuyentes/merepresentan?representado=${eachAgent.bp}">Ingresar</a></td>
 									</tr>
 								</c:if>
 							</c:forEach>

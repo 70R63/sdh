@@ -47,6 +47,20 @@
 </template:page>
 
 <script>
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	for (var i = 0; i < tam; i++) {
+		var valor = cosas[i].value;
+		if (valor == "") {
+			cosas[i].value = "-";
+
+		}
+	}
+
+}
 	window.onload = function() {
 		var inputcol = document.getElementsByTagName("input");
 		for (i = 0; i < inputcol.length; i++) {
