@@ -59,8 +59,8 @@
 <sf:form>
 	<br>
 	<div class="container">
-		<div class="col-md-1">
-			<label class="control-label"><spring:theme
+		<div class="col-md-2">
+			<label class="control-label format_label"><spring:theme
 					code="sobre.vehiculo.table.anigrav" /></label>
 		</div>
 		<div class="col-md-2">

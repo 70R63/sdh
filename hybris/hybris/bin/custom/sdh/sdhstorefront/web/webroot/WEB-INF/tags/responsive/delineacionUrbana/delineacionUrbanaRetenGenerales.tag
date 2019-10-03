@@ -9,7 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row">
-		<div class="col-md-6 headline" style="margin-left: 40px !important">
+		<div class="col-md-6 headline">
 			<h2>
 				<span><spring:theme
 						code="delineacion.urbana.dec.generales.title" /></span>

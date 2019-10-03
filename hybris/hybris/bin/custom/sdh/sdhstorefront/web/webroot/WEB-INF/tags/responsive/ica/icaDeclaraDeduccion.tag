@@ -26,12 +26,12 @@
 	<form:form action="">
 		<div class="row">
 			<div class="col-md-6">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.deducciones.deduccion" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.deducciones.monto" />
 				</label>
 			</div>

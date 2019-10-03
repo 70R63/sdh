@@ -36,17 +36,17 @@
 	<form:form action="">
 		<div class="row">
 			<div class="col-md-7">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.actifuera.ciiu" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.actifuera.municipio" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.actifuera.ingre" />
 				</label>
 			</div>
