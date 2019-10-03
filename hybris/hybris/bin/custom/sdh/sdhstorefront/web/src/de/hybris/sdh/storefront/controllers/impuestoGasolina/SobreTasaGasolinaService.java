@@ -17,6 +17,7 @@ import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionCertiDecImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionCertiPagosImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesCatalogos;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
@@ -44,6 +45,7 @@ import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
+import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
@@ -1949,6 +1951,13 @@ public class SobreTasaGasolinaService
 	}
 
 
+	public boolean ocurrioErrorDecImprime(final OpcionCertiDecImprimeResponse response)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
+
+
 	/**
 	 * @param consCasosResponse
 	 * @return
@@ -2017,6 +2026,23 @@ public class SobreTasaGasolinaService
 		final String nombreClase = "de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse";
 
 		responseInfo = (OpcionCertiPagosImprimeResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+	public OpcionCertiDecImprimeResponse certiDecImprimir(final OpcionCertiDecImprimeRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		OpcionCertiDecImprimeResponse responseInfo = new OpcionCertiDecImprimeResponse();
+		final String confUrl = "sdh.imprimeCertDeclara.url";
+		final String confUser = "sdh.imprimeCertDeclara.user";
+		final String confPass = "sdh.imprimeCertDeclara.password";
+		final String wsNombre = "docs/imprimeCertif";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse";
+
+		responseInfo = (OpcionCertiDecImprimeResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
 				wsReqMet, LOG, nombreClase);
 
 		return responseInfo;

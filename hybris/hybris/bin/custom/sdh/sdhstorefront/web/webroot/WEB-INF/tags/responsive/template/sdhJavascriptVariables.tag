@@ -102,13 +102,15 @@
 
 			ACC.casoConsultaURL= "<c:url value='/contribuyentes/tramites/consultaCaso' />";			
 
-			ACC.declaracionPDFURL= "<c:url value='/contribuyentes/consultas/declaraciones/declaracionPDF' />";			
+			ACC.declaracionPDFURL= "<c:url value='/contribuyentes/consultas/declaraciones/declaracionPDF' />";	
+
+			ACC.declaracionImprimirURL= "<c:url value='/contribuyentes/consultas/certideclaraciones/declaracionImprimir' />";	
 			
 			ACC.listaDeclaracionesURL= "<c:url value='/contribuyentes/consultas/declaraciones/listaDeclaraciones' />";	
 
 			ACC.certiPagosListaURL= "<c:url value='/contribuyentes/consultas/certipagos/listaPagos' />";	
 			
-			ACC.certiPagoImprimeURL= "<c:url value='/contribuyentes/consultas/certipagos/imprimir' />";	
+			ACC.certiPagoImprimeURL= "<c:url value='/contribuyentes/consultas/certipagos/pagoImprimir' />";	
 			
 		  	ACC.currentURL = "${currentURL}";
 
