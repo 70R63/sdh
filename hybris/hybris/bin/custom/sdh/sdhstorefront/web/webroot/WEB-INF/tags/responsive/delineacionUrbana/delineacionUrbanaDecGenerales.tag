@@ -10,14 +10,17 @@
 
 <input type="hidden" value="${tipoMarca}" id="tipoMarca" />
 <div class="container_new_page">
+
 	<div class="row">
-		<div class="col-md-6 headline">
+		<div class="col-md-6 headline" style="margin-left: 40px !important">
 			<h2>
 				<span><spring:theme
 						code="delineacion.urbana.dec.generales.title" /></span>
 			</h2>
 		</div>
 	</div>
+	
+	
 
 	<div class="row">
 		<div class="col-md-2">
@@ -160,9 +163,8 @@
 
 	</div>
 
-
-
-
 </div>
+
+
 
 

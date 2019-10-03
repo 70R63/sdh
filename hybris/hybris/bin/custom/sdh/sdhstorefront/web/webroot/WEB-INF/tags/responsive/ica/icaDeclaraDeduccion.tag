@@ -15,7 +15,7 @@
 		<div class="col-md-12">
 			<div class="headline">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span class="col-md-12 "><spring:theme
 							code="ica.declaracion.deducciones.titulo" /></span>
 				</h2>
 			</div>
