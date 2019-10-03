@@ -358,7 +358,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/consultas/certipagos/imprimir", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/consultas/certipagos/pagoImprimir", method = RequestMethod.GET)
 	@ResponseBody
 	public OpcionDeclaracionesVista certiPagoImprimePOST(@ModelAttribute("dataForm")
 	final OpcionDeclaracionesVista infoVista, final BindingResult bindingResult, final Model model,
