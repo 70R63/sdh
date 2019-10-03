@@ -184,7 +184,7 @@
 	<div class="row mt-3">
 		<div class="col-md-7 text-center">
 			<button style="margin-top: 5px;" id="" class="btn btn-primary btn-lg"
-				type="submit">
+				type="submit" onclick="changeMessage();">
 				<spring:theme code="tramites.crear.inicial.enviar" />
 			</button>
 		</div>
