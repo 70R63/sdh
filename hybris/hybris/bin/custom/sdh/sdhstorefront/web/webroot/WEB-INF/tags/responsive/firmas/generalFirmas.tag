@@ -19,7 +19,7 @@
 
 <div class="row mt-3 representante">
         <div class="col-md-12 mt-3">
-            <div class="">
+            <div class="headline" style="margin-left: 140px !important">
                 <h2>
                     <span><spring:theme code="publicidad.declaracion.firma.titulo"/></span>
                 </h2>

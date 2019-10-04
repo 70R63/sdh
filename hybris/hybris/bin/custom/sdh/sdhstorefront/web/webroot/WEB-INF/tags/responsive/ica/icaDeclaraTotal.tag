@@ -27,17 +27,17 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.total.actprinci" />
 				</label>
 			</div>
 			<div class="col-md-7">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.total.denomi" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.total.ingnet" />
 				</label>
 			</div>
@@ -236,53 +236,53 @@
 	<br>
 	<div class="row">
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.angrava" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.tipdoc" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.numide" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.nombre" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.direc" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.municipio" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.tel" />
 			</label>
 		</div>
 		<div class="col-md-2">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.denomi" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme
 					code="ica.declaracion.total.valtotaliva" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme
 					code="ica.declaracion.total.valtotaldev" />
 			</label>

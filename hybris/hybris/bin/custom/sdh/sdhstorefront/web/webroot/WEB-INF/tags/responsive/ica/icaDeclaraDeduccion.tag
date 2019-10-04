@@ -15,7 +15,7 @@
 		<div class="col-md-12">
 			<div class="headline">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span class="col-md-12 "><spring:theme
 							code="ica.declaracion.deducciones.titulo" /></span>
 				</h2>
 			</div>
@@ -26,12 +26,12 @@
 	<form:form action="">
 		<div class="row">
 			<div class="col-md-6">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.deducciones.deduccion" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.deducciones.monto" />
 				</label>
 			</div>
