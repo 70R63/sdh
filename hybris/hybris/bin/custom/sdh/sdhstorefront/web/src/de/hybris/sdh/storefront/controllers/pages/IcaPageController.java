@@ -5,7 +5,6 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
@@ -21,17 +20,43 @@ import de.hybris.sdh.core.dao.impl.DefaultSDHICACityDao;
 import de.hybris.sdh.core.dao.impl.DefaultSDHICAEconomicActivityDao;
 import de.hybris.sdh.core.model.SDHICACityModel;
 import de.hybris.sdh.core.model.SDHICAEconomicActivityModel;
-import de.hybris.sdh.core.pojos.requests.*;
-import de.hybris.sdh.core.pojos.responses.*;
+import de.hybris.sdh.core.pojos.requests.CalcICA2Request;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.EnviaFirmasRequest;
+import de.hybris.sdh.core.pojos.requests.FirmanteRequest;
+import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
+import de.hybris.sdh.core.pojos.requests.ICACalculoImpRequest;
+import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.pojos.responses.CalcICA2Response;
+import de.hybris.sdh.core.pojos.responses.DetalleActivEconomicas;
+import de.hybris.sdh.core.pojos.responses.EnviaFirmasResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.ICACalculoImpResponse;
+import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ICAInfoDeclara;
+import de.hybris.sdh.core.pojos.responses.ICAInfoIngFueraBog;
+import de.hybris.sdh.core.pojos.responses.ICAInfoIngNetosGrava;
+import de.hybris.sdh.core.pojos.responses.ICAInfoIngPorCiiu;
+import de.hybris.sdh.core.pojos.responses.ICAInfoValorRetenido;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.core.services.SDHICACalculoImpService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
+import de.hybris.sdh.facades.SDHCalculaICA2Facade;
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
-import de.hybris.sdh.storefront.forms.*;
+import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
+import de.hybris.sdh.storefront.forms.FirmantesForm;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
+import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
+import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -130,6 +155,12 @@ public class IcaPageController extends SDHAbstractPageController
 
 	@Resource(name = "sdhICAEconomicAcitivityDao")
 	DefaultSDHICAEconomicActivityDao sdhICAEconomicAcitivityDao;
+
+	@Resource(name = "sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
+
+	@Resource(name = "sdhCalculaICA2Facade")
+	SDHCalculaICA2Facade sdhCalculaICA2Facade;
 
 	@ModelAttribute("cities")
 	public List<SDHICACityModel> getCities()
@@ -425,10 +456,216 @@ public class IcaPageController extends SDHAbstractPageController
 		System.out.println("Response de validaCont: " + detalleContribuyente);
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
-			if (icaInfObjetoResponse.getAnoGravable() != null) 
-			{ 
-				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim()); 
-			} 
+			if (icaInfObjetoResponse.getAnoGravable() != null)
+			{
+				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim());
+			}
+			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
+			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+			infoPreviaPSE.setNumBP(numBP);
+			try
+			{
+				infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
+			}
+			catch (final Exception e)
+			{
+				infoPreviaPSE.setClavePeriodo(icaInfObjetoResponse.getPeriodo());
+			}
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());
+		}
+		else
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+		}
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+
+		model.addAttribute("gravableNetIncomes",
+				this.getGravableNetIncomes(numBP, numObjeto, anoGravable, icaInfObjetoRequest.getPeriodo()));
+		//informacion para PSE
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(DECLARACION_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+
+	@RequestMapping(value = "/contribuyentes/ica/declaracion/show", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String icadeclarainicial_aa(final Model model, @RequestParam(required = false, value = "anoGravable")
+	final String panoGravable, @ModelAttribute("dataFormResponseICA")
+	final SobreTasaGasolinaForm dataFormResponseICA, @ModelAttribute("periodoSeleccionado")
+	final String periodoSeleccionado, @RequestParam(required = true, value = "numForm")
+	final String numForm, @RequestParam(required = true, value = "representado")
+	final String representado) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Declaracion ICA Agente Autorizado GET --------------------------");
+
+		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final SDHValidaMailRolResponse contribuyenteData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+
+		model.addAttribute("contribuyenteData", contribuyenteData);
+		model.addAttribute("currentUserData", currentUserData);
+		model.addAttribute("redirectURL", "/autorizados/contribuyente/representando?representado=" + contribuyenteData.getNumBP());
+		final CalcICA2Request calcula2ImpuestoRequest = new CalcICA2Request();
+		calcula2ImpuestoRequest.setPartner(representado);
+		calcula2ImpuestoRequest.setFormulario(numForm);
+		final CalcICA2Response calcula2ImpuestoResponse = sdhCalculaICA2Facade.calcula(calcula2ImpuestoRequest);
+
+		super.addFirmantes_impuesto(model, calcula2ImpuestoResponse.getFirmantes(), currentUserData);
+
+		final String pnumObjeto = contribuyenteData2.getIca().getNumObjeto();
+
+		String numObjeto;
+		String anoGravable;
+
+		final CustomerData customerData2 = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData2);
+		addAgentsToModel(model, customerData2, null);
+		model.addAttribute("redirectURL", "/contribuyentes/ica");
+
+		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
+		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
+
+		if (StringUtils.isAllBlank(pnumObjeto, panoGravable))
+		{
+			numObjeto = dataFormResponseICA.getNumObjeto();
+			anoGravable = dataFormResponseICA.getAnoGravable();
+		}
+		else
+		{
+			numObjeto = pnumObjeto;
+			anoGravable = panoGravable;
+		}
+		if (StringUtils.isAllBlank(numObjeto, anoGravable))
+		{
+			return REDIRECT_TO_ICA_PAGE;
+		}
+
+		addAgentsToModel(model, customerFacade.getCurrentCustomer());
+		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+
+		icaInfObjetoRequest.setNumBP(representado);
+		icaInfObjetoRequest.setNumObjeto(numObjeto);
+		icaInfObjetoRequest.setAnoGravable(anoGravable);
+
+		if (!StringUtils.isBlank(periodoSeleccionado))
+		{
+			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
+		}
+		else
+		{
+			icaInfObjetoRequest.setPeriodo("");
+		}
+
+		try
+		{
+			icaInfObjetoFormResp = new ICAInfObjetoForm();
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
+			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+
+			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+
+			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
+			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
+			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
+			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
+
+			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
+					.getIngPorCIIU();
+
+			for (int i = 0; i < IngPorCIIUList.size(); i++)
+			{
+				if (IngPorCIIUList.get(i).getNumID() == null)
+				{
+					IngPorCIIUList.remove(i);
+				}
+			}
+			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
+
+
+			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = icaInfObjetoFormResp.getIcaInfObjetoResponse()
+					.getInfoDeclara().getValorRetenido();
+
+			for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
+			{
+				if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+				{
+					ICAInfoValorRetenidoList.remove(i);
+				}
+			}
+			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
+
+			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
+			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
+			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
+			//redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+
+			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
+			final List<ICAInfoIngFueraBog> listInfFueraBog = new ArrayList<ICAInfoIngFueraBog>();
+			final List<ICAInfoValorRetenido> listvalorRetenido = new ArrayList<ICAInfoValorRetenido>();
+			final List<ICAInfoIngNetosGrava> listIngNetosGrava = new ArrayList<ICAInfoIngNetosGrava>();
+			final List<ICAInfoIngPorCiiu> listIngPorCIIU = new ArrayList<ICAInfoIngPorCiiu>();
+
+
+			listInfFueraBog.add(new ICAInfoIngFueraBog());
+			listvalorRetenido.add(new ICAInfoValorRetenido());
+			listIngNetosGrava.add(new ICAInfoIngNetosGrava());
+			listIngPorCIIU.add(new ICAInfoIngPorCiiu());
+
+			infoDeclara.setIngFueraBog(listInfFueraBog);
+			infoDeclara.setValorRetenido(listvalorRetenido);
+			infoDeclara.setIngNetosGrava(listIngNetosGrava);
+			infoDeclara.setIngPorCIIU(listIngPorCIIU);
+
+			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
+			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
+			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+		}
+
+		//informacion para PSE
+		final CustomerModel customerData = (CustomerModel) userService.getCurrentUser();
+		final String numBP = customerData.getNumBP();
+
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		//		final String mensajeError = "";
+		String[] mensajesError;
+
+
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		{
+			if (icaInfObjetoResponse.getAnoGravable() != null)
+			{
+				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim());
+			}
 			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
 			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
 			infoPreviaPSE.setNumBP(numBP);
@@ -531,19 +768,19 @@ public class IcaPageController extends SDHAbstractPageController
 
 	@RequestMapping(value="/contribuyentes/ica/firmar",method=RequestMethod.POST)
 	@ResponseBody
-	public EnviaFirmasResponse enviaFirmas(Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+	public EnviaFirmasResponse enviaFirmas(final Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
 	{
-		EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
+		final EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
 
 		enviaFirmasRequest.setNumForm(dataForm.getNumForm());
 
 
 		if(CollectionUtils.isNotEmpty(dataForm.getFirmantes()))
 		{
-			List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
-			for(FirmantesForm eachFirmante : dataForm.getFirmantes())
+			final List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
+			for(final FirmantesForm eachFirmante : dataForm.getFirmantes())
 			{
-				FirmanteRequest firmante = new FirmanteRequest();
+				final FirmanteRequest firmante = new FirmanteRequest();
 
 				firmante.setConfirmacion(eachFirmante.getConfirmacion());
 				firmante.setFirmante(eachFirmante.getFirmante());
