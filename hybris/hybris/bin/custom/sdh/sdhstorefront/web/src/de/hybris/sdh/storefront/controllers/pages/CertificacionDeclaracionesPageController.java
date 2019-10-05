@@ -11,6 +11,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -23,10 +24,12 @@ import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimeCertDeclaraRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionCertiDecImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWSDeclaracionesPDF;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbanaWithRadicados;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
+import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
@@ -222,6 +225,8 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final OpcionCertiDecImprimeRequest decImprimeRequest = new OpcionCertiDecImprimeRequest();
 		OpcionCertiDecImprimeResponse decImprimeResponse = null;
 		//		SDHValidaMailRolResponse customerData = null;
+		OpcionDeclaracionesPDFResponse declaraPDFResponse = new OpcionDeclaracionesPDFResponse();
+		ErrorEnWSDeclaracionesPDF errorEnWSDeclaracionesPDF = new ErrorEnWSDeclaracionesPDF();
 
 		String bp = "";
 		String numObjeto = "";
@@ -276,9 +281,25 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 				modelService.refresh(mediaModel);
 
 				infoVista.setUrlDownload(mediaModel.getDownloadURL());
+
+				if (decImprimeResponse.getErrores() != null)
+				{
+					errorEnWSDeclaracionesPDF.setIdMensaje(decImprimeResponse.getErrores().getIdmsj());
+					errorEnWSDeclaracionesPDF.setTextoMensaje(decImprimeResponse.getErrores().getTxtmsj());
+					declaraPDFResponse.setErrores(errorEnWSDeclaracionesPDF);
+				}
+
+
+				infoVista.setDeclaraPDFResponse(declaraPDFResponse);
+
+
+				redirectAttributes.addFlashAttribute("infoResponse", infoVista);
+
+
 			}
 			catch (final Exception e)
 			{
+				LOG.error("error imprimeCertificadoGET: " + e.getMessage());
 			}
 		}
 		else

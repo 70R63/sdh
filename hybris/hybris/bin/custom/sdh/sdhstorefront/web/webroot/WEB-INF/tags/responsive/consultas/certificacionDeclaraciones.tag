@@ -124,12 +124,12 @@ function vaperiodo(selectObject) {
 		}			
 	}
 	
-	function downloadPDF(pdf) {
+	function downloadPDF(pdf, newfilename) {
 		debugger;
 		if (pdf){
 			const linkSource = 'data:application/pdf;base64,' + pdf;
 		    const downloadLink = document.createElement("a");
-		    const fileName = "Certificación_Declaracion.pdf";	
+		    var fileName = newfilename;	
 		    downloadLink.href = linkSource;
 		    downloadLink.download = fileName;
 		    downloadLink.click();
@@ -137,7 +137,8 @@ function vaperiodo(selectObject) {
 	}
 	
 	
-	downloadPDF('${imprimeCertiDeclaraResponse.stringPDF}');
+	downloadPDF('${imprimeCertiDeclaraResponse.stringPDF}','Certificación_Declaracion.pdf');
+	
 </script>
 
 <a id="downloadHelper" target="_blank"></a>

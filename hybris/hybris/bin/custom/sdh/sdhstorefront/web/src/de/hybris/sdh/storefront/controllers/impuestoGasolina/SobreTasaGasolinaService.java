@@ -902,6 +902,10 @@ public class SobreTasaGasolinaService
 			{
 				wsresponse = wsresponse.replace(",\"errores\":\"\"", "");
 			}
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse"))
+			{
+				wsresponse = wsresponse.replace("\"stringPDF\":", "\"pdf\":");
+			}
 
 			responseInfo = mapper.readValue(wsresponse, Class.forName(nombreClase));
 		}
