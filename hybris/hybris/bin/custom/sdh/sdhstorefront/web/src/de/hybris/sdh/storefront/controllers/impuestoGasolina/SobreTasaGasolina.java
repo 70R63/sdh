@@ -9,7 +9,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -187,6 +186,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 
 		generaDeclaracionRequest.setNumForm(numForm);
+		generaDeclaracionRequest.setTipo_id(customerModel.getDocumentType());
+		generaDeclaracionRequest.setNum_id(customerModel.getDocumentNumber());
 
 		try
 		{
@@ -937,7 +938,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		DetGasRevisorDeclaranteResponse interlocutor = null;
 
 		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
-		CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
 
 		model.addAttribute("contribuyenteData", contribuyenteData);
 		model.addAttribute("currentUserData", currentUserData);
@@ -953,10 +954,10 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 		final String[] mensajesError;
 		String numBP = "";
-		String numDoc = "";
-		String tipoDoc = "";
-		String anoGravable = "";
-		String periodo = "";
+		final String numDoc = "";
+		final String tipoDoc = "";
+		final String anoGravable = "";
+		final String periodo = "";
 
 
 		numBP = representado;

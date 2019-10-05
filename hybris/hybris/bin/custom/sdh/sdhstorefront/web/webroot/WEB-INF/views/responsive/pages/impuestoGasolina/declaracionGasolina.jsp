@@ -35,10 +35,12 @@ window.onload = function() {
 	debugger;
 	var cosas = $(":input");
 	var tam = cosas.length;
-	for (var i = 0; i < tam; i++) {
-		var valor = cosas[i].value;
-		if (valor == "") {
-			cosas[i].value = "-";
+	if (false){ //FFD-codigo comentado por observaciones en pruebas realizadas el 04 de octubre 2019
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+			}
 		}
 	}
 }
