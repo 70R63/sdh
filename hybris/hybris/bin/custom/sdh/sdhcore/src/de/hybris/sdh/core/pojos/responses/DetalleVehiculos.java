@@ -10,7 +10,7 @@ import java.util.List;
  * @author hybris
  *
  */
-public class DetalleVehiculosResponse
+public class DetalleVehiculos
 {
 	private String idServicio;
 	private String idEstado;
@@ -20,7 +20,6 @@ public class DetalleVehiculosResponse
 	private String capacidadPas;
 	private String capacidadTon;
 	private String fechaCambio;
-	private DetalleVehiculos detalle;
 	private DetalleJuridicosVehiculos datosJuridicos;
 	private List<DetalleMarcasVehiculos> marcas;
 	private List<DetalleLiquidacionVehiculos> liquidacion;
@@ -228,23 +227,6 @@ public class DetalleVehiculosResponse
 	public void setInfo_declara(final DetalleInfoDeclaraVehiculos info_declara)
 	{
 		this.info_declara = info_declara;
-	}
-
-	/**
-	 * @return the detalle
-	 */
-	public DetalleVehiculos getDetalle()
-	{
-		return detalle;
-	}
-
-	/**
-	 * @param detalle
-	 *           the detalle to set
-	 */
-	public void setDetalle(final DetalleVehiculos detalle)
-	{
-		this.detalle = detalle;
 	}
 
 

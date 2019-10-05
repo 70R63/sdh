@@ -6,20 +6,20 @@ ACC.vehiculos = {
 		$(document).on("click", ".labelVerDetalle", function(e) {
 			e.preventDefault();
 			debugger;
-			var placas = $.trim($(this).attr("data-placa"));
-			var numbp = $.trim($(this).attr("data-numbp"));
-			var anograv = $.trim($("#an").val());
+			var placa = $.trim($(this).attr("data-placa"));
+			var bpNum = $.trim($(this).attr("data-numbp"));
+			var anioGravable = $.trim($("#an").val());
 
-			if (anograv == "0") {
+			if (anioGravable == "0") {
 				alert("Por favor, selecciona el año a consultar");
 				return;
 			}
 
 			var data = {};
 
-			data.bpNum = numbp;
-			data.placa = placas;
-			data.anioGravable = anograv;
+			data.bpNum = bpNum;
+			data.placa = placa;
+			data.anioGravable = anioGravable;
 
 			$.ajax({
 				url : ACC.vehiculosDetalleURL,
