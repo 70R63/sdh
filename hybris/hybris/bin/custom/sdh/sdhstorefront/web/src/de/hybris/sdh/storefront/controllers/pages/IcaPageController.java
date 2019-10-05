@@ -814,6 +814,8 @@ public class IcaPageController extends SDHAbstractPageController
 
 
 		generaDeclaracionRequest.setNumForm(numForm);
+		generaDeclaracionRequest.setTipo_id(customerModel.getDocumentType());
+		generaDeclaracionRequest.setNum_id(customerModel.getDocumentNumber());
 
 		try
 		{
