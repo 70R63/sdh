@@ -26,7 +26,7 @@ ACC.vehiculos = {
 				data : data,
 				type : "GET",
 				success : function(data) {
-					ACC.vehiculos;
+					ACC.vehiculos.fillFieldsFromData(data);
 
 				},
 				error : function() {
@@ -37,18 +37,9 @@ ACC.vehiculos = {
 
 	},
 
-	bindDialogPublicidadExterior : function() {
+	fillFieldsFromData : function(data) {
 
-		$("#dialogPublicidadExterior").dialog({
-			autoOpen : false,
-			modal : true,
-			draggable : false,
-			buttons : {
-				Ok : function() {
-					$(this).dialog("close");
-				}
-			}
-		});
+		$("#placa").val(data.placa);
 
 	}
 

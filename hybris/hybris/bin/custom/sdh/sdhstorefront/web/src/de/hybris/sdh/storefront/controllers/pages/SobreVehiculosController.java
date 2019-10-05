@@ -181,8 +181,8 @@ public class SobreVehiculosController extends AbstractPageController
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
-		//		detalleVehiculosRequest.setBpNum(vehiculoInfo.getBpNum());
-		detalleVehiculosRequest.setBpNum("120");
+		detalleVehiculosRequest.setBpNum(vehiculoInfo.getBpNum());
+		//		detalleVehiculosRequest.setBpNum("120");
 		detalleVehiculosRequest.setPlaca(vehiculoInfo.getPlaca());
 		detalleVehiculosRequest.setAnioGravable(vehiculoInfo.getAnioGravable());
 
@@ -210,7 +210,7 @@ public class SobreVehiculosController extends AbstractPageController
 			//			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
-
+		model.addAttribute("vehiculosForm", vehiculosForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
