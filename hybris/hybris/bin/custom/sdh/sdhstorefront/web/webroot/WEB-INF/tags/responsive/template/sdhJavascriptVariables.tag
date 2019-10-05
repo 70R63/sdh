@@ -112,6 +112,8 @@
 			
 			ACC.certiPagoImprimeURL= "<c:url value='/contribuyentes/consultas/certipagos/pagoImprimir' />";	
 			
+			ACC.vehiculosDetalleURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/detalle/vehiculo' />";
+			
 		  	ACC.currentURL = "${currentURL}";
 
 		  	ACC.generaROPURL = "<c:url value='/contribuyentes/rop' />";

@@ -3,6 +3,8 @@
  */
 package de.hybris.sdh.storefront.forms;
 
+import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
+import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
@@ -19,10 +21,15 @@ public class VehiculosInfObjetoForm
 	private String tipiden;
 	private String numide;
 	private String name;
+	private String bpNum;
+	private String placa;
+	private String anioGravable;
 
 	private SDHValidaMailRolResponse vehiculos;
 
 	private List<ImpuestoVehiculos> impvehicular;
+	private DetalleVehiculosRequest detallerequest;
+	private DetalleVehiculosResponse detalle;
 
 	/**
 	 * @return the numBP
@@ -124,6 +131,91 @@ public class VehiculosInfObjetoForm
 	public void setImpvehicular(final List<ImpuestoVehiculos> impvehicular)
 	{
 		this.impvehicular = impvehicular;
+	}
+
+	/**
+	 * @return the detallerequest
+	 */
+	public DetalleVehiculosRequest getDetallerequest()
+	{
+		return detallerequest;
+	}
+
+	/**
+	 * @param detallerequest
+	 *           the detallerequest to set
+	 */
+	public void setDetallerequest(final DetalleVehiculosRequest detallerequest)
+	{
+		this.detallerequest = detallerequest;
+	}
+
+	/**
+	 * @return the detalle
+	 */
+	public DetalleVehiculosResponse getDetalle()
+	{
+		return detalle;
+	}
+
+	/**
+	 * @param detalle
+	 *           the detalle to set
+	 */
+	public void setDetalle(final DetalleVehiculosResponse detalle)
+	{
+		this.detalle = detalle;
+	}
+
+	/**
+	 * @return the bpNum
+	 */
+	public String getBpNum()
+	{
+		return bpNum;
+	}
+
+	/**
+	 * @param bpNum
+	 *           the bpNum to set
+	 */
+	public void setBpNum(final String bpNum)
+	{
+		this.bpNum = bpNum;
+	}
+
+	/**
+	 * @return the placa
+	 */
+	public String getPlaca()
+	{
+		return placa;
+	}
+
+	/**
+	 * @param placa
+	 *           the placa to set
+	 */
+	public void setPlaca(final String placa)
+	{
+		this.placa = placa;
+	}
+
+	/**
+	 * @return the anioGravable
+	 */
+	public String getAnioGravable()
+	{
+		return anioGravable;
+	}
+
+	/**
+	 * @param anioGravable
+	 *           the anioGravable to set
+	 */
+	public void setAnioGravable(final String anioGravable)
+	{
+		this.anioGravable = anioGravable;
 	}
 
 
