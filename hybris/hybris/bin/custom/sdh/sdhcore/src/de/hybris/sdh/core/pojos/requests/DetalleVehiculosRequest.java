@@ -76,7 +76,7 @@ public class DetalleVehiculosRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getBpNum() + "\",");
+		stringBuilder.append("\"bpNum\":\"" + this.getBpNum() + "\",");
 		stringBuilder.append("\"placa\":\"" + this.getPlaca() + "\",");
 		stringBuilder.append("\"anioGravable\":\"" + this.getAnioGravable() + "\"");
 		stringBuilder.append("}");

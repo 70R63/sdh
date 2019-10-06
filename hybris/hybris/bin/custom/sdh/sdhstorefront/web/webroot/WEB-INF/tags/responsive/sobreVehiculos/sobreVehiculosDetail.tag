@@ -25,9 +25,9 @@
 					code="sobre.vehiculo.detail.placa" /></label>
 		</div>
 		<div class="col-md-2">
-			<input id="" name="" class="newalto form-control" aria-required="true"
+			<input id="placa" name="" class="newalto form-control placa" aria-required="true"
 				type="text" readonly="readonly"
-				value="<c:out value="placa"></c:out>" maxlength="240">
+				value="<c:out value=""></c:out>" maxlength="240">
 		</div>
 		<br> <br>
 		<div class="row">
