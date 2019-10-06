@@ -75,8 +75,16 @@
 
 
                 </c:when>
-                <c:otherwise>
-                    <c:forEach items="${firmantes}" var="eachFirmante">
+                	<c:otherwise>
+                		<c:choose>
+                			<c:when test="${contribuyente.documentNumber ne 'NIT'}">
+                				<c:set var = "inicioFirmas" value = '0'/>
+                			</c:when>
+                			<c:otherwise>
+                				<c:set var = "inicioFirmas" value = '1'/>
+                			</c:otherwise>
+            			</c:choose>
+                    <c:forEach items="${firmantes}" var="eachFirmante" begin="${inicioFirmas}">
 
                         <div class="row mt-3">
                             <div class="col-md-2">
