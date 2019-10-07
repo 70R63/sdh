@@ -19,12 +19,20 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
+import de.hybris.sdh.core.pojos.responses.ContribFirmasResponse;
+import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.storefront.forms.ContribuyenteForm;
+
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,13 +74,15 @@ public class ContribuyentesPageController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "sdhConsulFirmasService")
+	SDHConsulFirmasService sdhConsulFirmasService;
+
 	//	@Resource(name = "sdhCreaModContribuyenteFacade")
 	//	SDHCreaModContribuyenteFacade sdhCreaModContribuyenteFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String showView(final Model model,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String showView(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Contribuyentes --------------------------");
 
@@ -80,7 +90,50 @@ public class ContribuyentesPageController extends AbstractPageController
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		model.addAttribute("actualCustomer", customerData);
+		final ConsulFirmasRequest consulFirmasRequest = new ConsulFirmasRequest();
+
+		if (customerModel.getNumBP() != null)
+		{
+			consulFirmasRequest.setContribuyente(customerModel.getNumBP());
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+				final ContribFirmasResponse contribFirmasResponse = mapper
+						.readValue(sdhConsulFirmasService.getDeclaraciones(consulFirmasRequest), ContribFirmasResponse.class);
+
+				final ContribuyenteForm contibForm = new ContribuyenteForm();
+
+					//					contibForm.setDetalle().setIdDeclaracion(eachDetalle.getIdDeclaracion());
+					contibForm.setDeclaraciones(contribFirmasResponse.getDeclaraciones().stream()
+						.filter(eachDetDecla -> StringUtils.isNotBlank(eachDetDecla.getIdDeclaracion())).collect(Collectors.toList()));
+
+				//
+				//				if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+				//						&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
+				//				{
+				//					vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
+				//							.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+				//				}
+
+			}
+			catch (final Exception e)
+			{
+				// XXX Auto-generated catch block
+				//				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+				//				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+			}
+
+		}
+		else
+		{
+			//			vehiculosForm.setNumBP("vacio");
+		}
+
+		//		model.addAttribute("actualCustomer", customerData);
+		//		model.addAttribute("actualCustomer", contibForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
@@ -90,8 +143,8 @@ public class ContribuyentesPageController extends AbstractPageController
 	}
 
 	@RequestMapping(value = "/delineacion-urbana/declaraciones", method = RequestMethod.GET)
-	public String delineacionUrbanaDeclaraciones(final Model model, final RedirectAttributes redirectModel,final HttpServletRequest request)
-			throws CMSItemNotFoundException
+	public String delineacionUrbanaDeclaraciones(final Model model, final RedirectAttributes redirectModel,
+			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		model.addAttribute("action", request.getParameter("action"));
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));
