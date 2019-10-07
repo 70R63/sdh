@@ -56,7 +56,7 @@
 	</div>
 </div>
 
-<sf:form>
+<%-- <sf:form> --%>
 	<br>
 	<div class="container">
 		<div class="col-md-2">
@@ -64,7 +64,7 @@
 					code="sobre.vehiculo.table.anigrav" /></label>
 		</div>
 		<div class="col-md-2">
-			<select id="an" class="form-control " name=" " onchange=" " disabled>
+			<select id="an" class="form-control an" name=" " onchange=" " disabled>
 				<option value="2019">2019</option>
 				<option value="2018">2018</option>
 				<option value="2017">2017</option>
@@ -115,46 +115,59 @@
 									value="<c:out value="${eachVehiculo.placa}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="${eachVehiculo.marca}"></c:out>"
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.marca}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
 									readonly="readonly" value="<c:out value="Factura"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="${eachVehiculo.linea}"></c:out>"
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.linea}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="${eachVehiculo.modelo}"></c:out>"
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.modelo}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="${eachVehiculo.clase}"></c:out>"
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.clase}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="${eachVehiculo.carroceria}"></c:out>"
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.carroceria}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="${eachVehiculo.numPuertas}"></c:out>"
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.numPuertas}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="${eachVehiculo.blindado}"></c:out>"
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.blindado}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="${eachVehiculo.cilindraje}"></c:out>"
+									readonly="readonly"
+									value="<c:out value="${eachVehiculo.cilindraje}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
 								<td><input id="" name="" class="inputtextnew" type="text"
 									readonly="readonly" value="<c:out value="avaluo"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
-								<td><input id="" name="" class="inputtextnew" type="submit"
-									value="<c:out value="Ver detalle"></c:out>" maxlength="240"
-									style="width: 100% !important;"></td>
+								<td><label style="color: #0358d8 !important"
+									data-placa="${eachVehiculo.placa}"
+									data-numbp="${vehiculosForm.numBP}"
+									class="text-capitalize !important labelVerDetalle "><spring:theme
+											code="sobre.vehiculo.table.verdetalle" /></label></td>
 							</tr>
 						</tbody>
 					</c:forEach>
 				</table>
 			</div>
 		</div>
+		
+		<input name="numbp" type="hidden" id="numbp" /> <input
+				name="placa" type="hidden" id="placa" />
 
 	</div>
-</sf:form>
+<%-- </sf:form> --%>
 
 
