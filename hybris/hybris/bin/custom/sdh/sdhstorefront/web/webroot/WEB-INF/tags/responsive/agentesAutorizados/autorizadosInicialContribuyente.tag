@@ -112,6 +112,14 @@
 										</c:when>
 										<c:otherwise>
 												<c:forEach items="${firmas.declaraciones}" var="eachDeclaracion" >
+												<c:choose>
+													<c:when test="${eachDeclaracion.estadoFirma eq '01'}">
+														<c:set var="desc_status" value='Pendiente por firmar'></c:set>
+													</c:when>
+													<c:when test="${eachDeclaracion.estadoFirma eq '02'}">
+														<c:set var="desc_status" value='Pendiente por presentar'></c:set>
+													</c:when>
+												</c:choose>
 												<tr>
 													<td><input class="inputtextnew tableident"
 															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.idDeclaracion}" /></td>
@@ -120,9 +128,9 @@
 													<td><input class="inputtextnew tablenumiden"
 															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.anioGravable}" /></td>
 													<td><input class="inputtextnew tablenumiden"
-															   disabled="disabled" type="text" size="30" value="<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />"</td>
+															   disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />' /></td>
 													<td><input class="inputtextnew" disabled="disabled"
-															   type="text" size="30" value="-" /></td>
+															   type="text" size="30" value="${desc_status}" /></td>
 
 													<c:choose>
 														<c:when test="${eachDeclaracion.impuesto eq '0007'}">
