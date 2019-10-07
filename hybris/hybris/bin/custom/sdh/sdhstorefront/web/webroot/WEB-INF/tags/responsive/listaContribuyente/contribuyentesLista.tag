@@ -10,13 +10,13 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="container_new_page">
-		<form:form action="">
+	<form:form action="">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="headline">
 					<h2>
 						<span class="col-md-10 "><spring:theme
-								code="autorizado.listadeclaraciones.titulo" /></span>
+								code="contribuyente.listadeclaraciones.titulo" /></span>
 					</h2>
 				</div>
 			</div>
@@ -30,79 +30,132 @@
 							<thead>
 								<tr>
 									<td><label class="control-label labeltabletd tableident"><spring:theme
-												code="autorizado.listadeclaraciones.declarcion" /></label></td>
+												code="contribuyente.listadeclaraciones.declarcion" /></label></td>
 									<td><label class="control-label labeltabletd "><spring:theme
-												code="autorizado.listadeclaraciones.impuesto" /></label></td>
+												code="contribuyente.listadeclaraciones.impuesto" /></label></td>
 									<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-												code="autorizado.listadeclaraciones.angrav" /></label></td>
+												code="contribuyente.listadeclaraciones.angrav" /></label></td>
 									<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-												code="autorizado.listadeclaraciones.periodo" /></label></td>
+												code="contribuyente.listadeclaraciones.periodo" /></label></td>
 									<td><label class="control-label labeltabletd "><spring:theme
-												code="autorizado.listadeclaraciones.estatus" /></label></td>
+												code="contribuyente.listadeclaraciones.estatus" /></label></td>
 									<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-												code="autorizado.listadeclaraciones.seleccionar" /></label></td>
+												code="contribuyente.listadeclaraciones.seleccionar" /></label></td>
 								</tr>
 							</thead>
 							<tbody>
-									<c:choose>
-										<c:when test="${empty firmas.declaraciones}">
+								<c:choose>
+									<c:when test="${empty contibForm.declaraciones}">
+										<tr>
+											<td><input class="inputtextnew tableident"
+												disabled="disabled" type="text" size="30" value="" /></td>
+											<td><input class="inputtextnew " disabled="disabled"
+												type="text" size="30" value="" /></td>
+											<td><input class="inputtextnew tablenumiden"
+												disabled="disabled" type="text" size="30" value="" /></td>
+											<td><input class="inputtextnew tablenumiden"
+												disabled="disabled" type="text" size="30" value="" /></td>
+											<td><input class="inputtextnew" disabled="disabled"
+												type="text" size="30"
+												value="No tiene declaraciones por firmar" /></td>
+											<td
+												style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${contibForm.declaraciones}"
+											var="eachDeclaracion">
+											<c:choose>
+												<c:when test="${eachDeclaracion.estadoFirma eq '01'}">
+													<c:set var="desc_status" value='Pendiente por firmar'></c:set>
+												</c:when>
+												<c:when test="${eachDeclaracion.estadoFirma eq '02'}">
+													<c:set var="desc_status" value='Pendiente por presentar'></c:set>
+												</c:when>
+											</c:choose>
 											<tr>
 												<td><input class="inputtextnew tableident"
-														   disabled="disabled" type="text" size="30" value="" /></td>
+													disabled="disabled" type="text" size="30"
+													value="${eachDeclaracion.idDeclaracion}" /></td>
 												<td><input class="inputtextnew " disabled="disabled"
-														   type="text" size="30" value="" /></td>
+													type="text" size="30"
+													value="<spring:theme code="autorizado.impuestos.${eachDeclaracion.impuesto}" />" /></td>
 												<td><input class="inputtextnew tablenumiden"
-														   disabled="disabled" type="text" size="30" value="" /></td>
+													disabled="disabled" type="text" size="30"
+													value="${eachDeclaracion.anioGravable}" /></td>
 												<td><input class="inputtextnew tablenumiden"
-														   disabled="disabled" type="text" size="30" value="" /></td>
-												<td><input class="inputtextnew" disabled="disabled"
-														   type="text" size="30" value="No tiene declaraciones por firmar" /></td>
-												<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-												<c:forEach items="${firmas.declaraciones}" var="eachDeclaracion" >
-												<c:choose>
-													<c:when test="${eachDeclaracion.estadoFirma eq '01'}">
-														<c:set var="desc_status" value='Pendiente por firmar'></c:set>
-													</c:when>
-													<c:when test="${eachDeclaracion.estadoFirma eq '02'}">
-														<c:set var="desc_status" value='Pendiente por presentar'></c:set>
-													</c:when>
-												</c:choose>
-												<tr>
-													<td><input class="inputtextnew tableident"
-															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.idDeclaracion}" /></td>
-													<td><input class="inputtextnew " disabled="disabled"
-															   type="text" size="30" value="<spring:theme code="autorizado.impuestos.${eachDeclaracion.impuesto}" />" /></td>
-													<td><input class="inputtextnew tablenumiden"
-															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.anioGravable}" /></td>
-													<td><input class="inputtextnew tablenumiden"
-															   disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />' /></td>
-													<td><input class="inputtextnew" disabled="disabled"
-															   type="text" size="30" value="${desc_status}" /></td>
+													disabled="disabled" type="text" size="30"
+													value='<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />' /></td>
+												<td><input class="inputtextnew detalleVerCont"
+													disabled="disabled" type="text" size="30"
+													value="${desc_status}" id="detalleVerCont" /></td>
 
-													<c:choose>
-														<c:when test="${eachDeclaracion.impuesto eq '0007'}">
-															<td ><a href="<c:url value="/contribuyentes/publicidadexterior/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}" />">Ver</a></td>
-														</c:when>
-														<c:when test="${eachDeclaracion.impuesto eq '0005'}">
-															<td ><a href="<c:url value="/contribuyentes/sobretasa-gasolina/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}" />">Ver</a></td>
-														</c:when>
-														<c:when test="${eachDeclaracion.impuesto eq '0003'}">
-															<td ><a href="<c:url value="/contribuyentes/ica/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}&periodoSeleccionado=${eachDeclaracion.periodo}&anoGravable=${eachDeclaracion.anioGravable}" />">Ver</a></td>
-														</c:when>
-														<c:otherwise>
-															<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
-														</c:otherwise>
-
-													</c:choose>
-
-
-												<tr>
-												</c:forEach>
-										</c:otherwise>
-									</c:choose>
+												<td
+													style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"
+													data-relacion1="${eachDeclaracion.relacion}"
+													data-tipo1="${eachDeclaracion.tipo_id1}"
+													data-num1="${eachDeclaracion.num_id1}"
+													data-nom="${eachDeclaracion.nombre1}"
+													data-relacion2="${eachDeclaracion.relacion2}"
+													data-tipo2="${eachDeclaracion.tipo_id2}"
+													data-num2="${eachDeclaracion.num_id2}"
+													data-nom2="${eachDeclaracion.nombre2}"
+													data-relacion3="${eachDeclaracion.relacion3}"
+													data-tipo3="${eachDeclaracion.tipo_id3}"
+													data-num3="${eachDeclaracion.num_id3}"
+													data-nom3="${eachDeclaracion.nombre3}">Ver</td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.relacion}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.tipo_id1}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.num_id1}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.nombre1}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.relacion2}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.tipo_id2}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.num_id2}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.nombre2}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.relacion3}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.tipo_id3}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.num_id3}" />' /></td>
+												<td style="display: none;"><input
+													class="inputtextnew tablenumiden" disabled="disabled"
+													type="text" size="30"
+													value='<spring:theme code="${eachDeclaracion.nombre3}" />' /></td>
+											<tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</tbody>
 						</table>
 					</div>
@@ -110,4 +163,28 @@
 			</div>
 		</div>
 	</form:form>
+	<div class="row mt-3" id="detalleRelacion">
+		<div class="col-md-8">
+			<form:form action="">
+				<div class="table-responsive text-center">
+					<table class="table table-bordered" id="tabRelacion" style="display: none">
+						<thead>
+							<tr>
+								<td><label class="control-label labeltabletd tableident"><spring:theme
+											code="contribuyente.listadeclaraciones.relacion" /></label></td>
+								<td><label class="control-label labeltabletd "><spring:theme
+											code="contribuyente.listadeclaraciones.tipid" /></label></td>
+								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
+											code="contribuyente.listadeclaraciones.numid" /></label></td>
+								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
+											code="contribuyente.listadeclaraciones.nombre" /></label></td>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</form:form>
+		</div>
+	</div>
 </div>
