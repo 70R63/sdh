@@ -120,9 +120,9 @@
 													<td><input class="inputtextnew tablenumiden"
 															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.anioGravable}" /></td>
 													<td><input class="inputtextnew tablenumiden"
-															   disabled="disabled" type="text" size="30" value="<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />"</td>
+															   disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />' /></td>
 													<td><input class="inputtextnew" disabled="disabled"
-															   type="text" size="30" value="-" /></td>
+															   type="text" size="30" value="${eachDeclaracion.estadoFirma}" /></td>
 
 													<c:choose>
 														<c:when test="${eachDeclaracion.impuesto eq '0007'}">
