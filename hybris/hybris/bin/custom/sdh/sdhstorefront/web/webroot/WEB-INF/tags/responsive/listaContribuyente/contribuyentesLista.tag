@@ -167,7 +167,7 @@
 		<div class="col-md-8">
 			<form:form action="">
 				<div class="table-responsive text-center">
-					<table class="table table-bordered" id="tabRelacion" style="display: none">
+					<table class="table table-bordered tabRelacion" id="tabRelacion" style="display: none">
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme

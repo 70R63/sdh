@@ -78,6 +78,12 @@ ACC.tramitesSeleccion = {
 			var numTres = $.trim($(this).attr("data-num3"));
 			var nomTres = $.trim($(this).attr("data-nom3"));
 			
+			if(relUno == "" || relUno =="null" && relDos == "" || relDos == "null" && relTres == "" || relTres =="null"){
+				$('#tabRelacion').append("<tr>");
+			}
+				
+			}if(relDos == "" || relUno =="null"){
+			
 			$('#tableInfo')
 			.append(
 					"<tr>"

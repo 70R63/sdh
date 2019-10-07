@@ -91,6 +91,7 @@ public class ContribuyentesPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
 		final ConsulFirmasRequest consulFirmasRequest = new ConsulFirmasRequest();
+		final ContribuyenteForm contibForm = new ContribuyenteForm();
 
 		if (customerModel.getNumBP() != null)
 		{
@@ -105,7 +106,7 @@ public class ContribuyentesPageController extends AbstractPageController
 				final ContribFirmasResponse contribFirmasResponse = mapper
 						.readValue(sdhConsulFirmasService.getDeclaraciones(consulFirmasRequest), ContribFirmasResponse.class);
 
-				final ContribuyenteForm contibForm = new ContribuyenteForm();
+
 
 					//					contibForm.setDetalle().setIdDeclaracion(eachDetalle.getIdDeclaracion());
 					contibForm.setDeclaraciones(contribFirmasResponse.getDeclaraciones().stream()
@@ -134,7 +135,7 @@ public class ContribuyentesPageController extends AbstractPageController
 		}
 
 		//		model.addAttribute("actualCustomer", customerData);
-		//		model.addAttribute("actualCustomer", contibForm);
+		model.addAttribute("contibForm", contibForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
