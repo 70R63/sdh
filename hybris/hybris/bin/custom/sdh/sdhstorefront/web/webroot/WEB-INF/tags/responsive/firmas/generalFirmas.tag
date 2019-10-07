@@ -25,9 +25,12 @@
 	<c:when test="${contribuyente.documentType ne 'NIT'}">
 		<c:set var="lblDeclarante" value="Declarante" />
 		<c:set var="lblBotonFirmarYAgregar" value="Firmar y Agregar" />
-		<c:set var="contribuyente_completeName" value="${contribuyente.completeName}" />
-		<c:set var="contribuyente_documentType" value="${contribuyente.documentType}" />
-		<c:set var="contribuyente_documentNumber" value="${contribuyente.documentNumber}" />
+		<c:set var="contribuyente_completeName"
+			value="${contribuyente.completeName}" />
+		<c:set var="contribuyente_documentType"
+			value="${contribuyente.documentType}" />
+		<c:set var="contribuyente_documentNumber"
+			value="${contribuyente.documentNumber}" />
 		<c:set var="contribuyente_numBP" value="${contribuyente.numBP}" />
 		<c:set var="flagMostrarSoloFirmar" value="true" />
 	</c:when>
@@ -41,6 +44,7 @@
 		<c:set var="flagMostrarSoloFirmar" value="false" />
 	</c:otherwise>
 </c:choose>
+
 
 <div class="row mt-3 representante">
 	<div class="col-md-12 mt-3">
@@ -58,8 +62,8 @@
 							<label class="control-label"><spring:theme code="" /></label> <input
 								disabled id="firmInterFunct" name="firmInterFunct"
 								class="form-control PEFirmInterFunct" disabled type="text"
-								value="${lblDeclarante}" maxlength="240" placeholder="Declarante"
-								style="margin-top: 4px">
+								value="${lblDeclarante}" maxlength="240"
+								placeholder="Declarante" style="margin-top: 4px">
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -76,7 +80,9 @@
 							<label class="control-label"><spring:theme
 									code="publicidad.declaracion.firma.tipoiden" /></label> <input
 								disabled class="form-control FirmTipoId" disabled type="text"
-								value="${contribuyente_documentType}" maxlength="240"></input>
+								value="${contribuyente_documentType}" maxlength="240"></input> <input
+								type="hidden" value="${contribuyente.documentType}"
+								id="contribuyente_documentType" />
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -116,65 +122,64 @@
 
 			<c:otherwise>
 				<c:forEach items="${firmantes}" var="eachFirmante">
-
-					<div class="row mt-3">
-						<div class="col-md-2">
-							<div class="form-group">
-								<label class="control-label"> <spring:theme
-										code="publicidad.declaracion.firma.nombre" /></label> <input disabled
-									id="firmCompleteName" name="firmCompleteName"
-									class="form-control" disabled type="text"
-									value="${eachFirmante.nombre}" maxlength="240"></input>
+					<c:if test="${!empty eachFirmante.tipoIdent}">
+						<div class="row mt-3">
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="control-label"> <spring:theme
+											code="publicidad.declaracion.firma.nombre" /></label> <input
+										disabled id="firmCompleteName" name="firmCompleteName"
+										class="form-control" disabled type="text"
+										value="${eachFirmante.nombre}" maxlength="240"></input>
+								</div>
 							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="control-label"><spring:theme
+											code="publicidad.declaracion.firma.tipoiden" /></label> <input
+										disabled class="form-control FirmTipoId" disabled type="text"
+										value="${eachFirmante.tipoIdent}" maxlength="240"></input>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="control-label"><spring:theme
+											code="publicidad.declaracion.firma.numide" /></label> <input
+										disabled class="form-control FirmNumId" disabled type="text"
+										value="${eachFirmante.numIdent}" maxlength="240"></input>
+								</div>
+							</div>
+
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="control-label"><spring:theme
+											code="publicidad.declaracion.firma.numtarjeta" /></label> <input
+										disabled class="form-control FirmTarjetaProf" disabled
+										type="text" value="${eachFirmante.tarjetaProd}"
+										maxlength="240"></input>
+								</div>
+							</div>
+
+							<c:if
+								test="${showFirmButton eq true && currentUserData.documentNumber eq eachFirmante.numIdent}">
+								<div class="col-md-1">
+									<label class="control-label"><spring:theme code="" /></label>
+									<button type="button" class="btn btn-primary justFirm"
+										style="margin-top: 4px">Solo Firmar</button>
+								</div>
+							</c:if>
+							<c:if
+								test="${showFirmAndAddButton eq true && currentUserData.documentNumber eq eachFirmante.numIdent}">
+								<div class="col-md-1">
+									<label class="control-label"><spring:theme code="" /></label>
+									<button type="button" class="btn btn-primary firmAndAdd"
+										style="margin-top: 4px">Firmar y Agregar</button>
+								</div>
+							</c:if>
 						</div>
-						<div class="col-md-2">
-							<div class="form-group">
-								<label class="control-label"><spring:theme
-										code="publicidad.declaracion.firma.tipoiden" /></label> <input
-									disabled class="form-control FirmTipoId" disabled type="text"
-									value="${eachFirmante.tipoIdent}" maxlength="240"></input>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="form-group">
-								<label class="control-label"><spring:theme
-										code="publicidad.declaracion.firma.numide" /></label> <input disabled
-									class="form-control FirmNumId" disabled type="text"
-									value="${eachFirmante.numIdent}" maxlength="240"></input>
-							</div>
-						</div>
-
-						<div class="col-md-2">
-							<div class="form-group">
-								<label class="control-label"><spring:theme
-										code="publicidad.declaracion.firma.numtarjeta" /></label> <input
-									disabled class="form-control FirmTarjetaProf" disabled
-									type="text" value="${eachFirmante.tarjetaProd}" maxlength="240"></input>
-							</div>
-						</div>
-
-						<c:if
-							test="${showFirmButton eq true && currentUserData.documentNumber eq eachFirmante.numIdent}">
-							<div class="col-md-1">
-								<label class="control-label"><spring:theme code="" /></label>
-								<button type="button" class="btn btn-primary justFirm"
-									style="margin-top: 4px">Solo Firmar</button>
-							</div>
-						</c:if>
-						<c:if
-							test="${showFirmAndAddButton eq true && currentUserData.documentNumber eq eachFirmante.numIdent}">
-							<div class="col-md-1">
-								<label class="control-label"><spring:theme code="" /></label>
-								<button type="button" class="btn btn-primary firmAndAdd"
-									style="margin-top: 4px">Firmar y Agregar</button>
-							</div>
-						</c:if>
-
-					</div>
-
+					</c:if>
 
 				</c:forEach>
-
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${showNewFirmRow}">
