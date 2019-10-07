@@ -95,6 +95,7 @@ public class ContribuyentesPageController extends AbstractPageController
 		if (customerModel.getNumBP() != null)
 		{
 			consulFirmasRequest.setContribuyente(customerModel.getNumBP());
+			consulFirmasRequest.setAgente("");
 
 			try
 			{
