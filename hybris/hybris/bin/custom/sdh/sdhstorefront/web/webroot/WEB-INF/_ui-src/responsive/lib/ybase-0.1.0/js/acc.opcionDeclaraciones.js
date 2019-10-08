@@ -172,14 +172,14 @@ ACC.opcionDeclaraciones = {
 	updateFromResponsePDF : function(infoActual,infoResponse) {
 
 		debugger;
-		if (infoResponse.impresionResponse.errores != null){
-			if (infoResponse.impresionResponse.errores[0].idmsj == "0"){
+		if (infoResponse.declaraPDFResponse.errores != null){
+			if (infoResponse.declaraPDFResponse.errores[0].idmsj == "0"){
 				if(infoResponse.urlDownload != null){
 					$("#downloadHelper").attr("href",infoResponse.urlDownload);
 					document.getElementById("downloadHelper").click();
 				}
 			}	
-			alert(infoResponse.impresionResponse.errores[0].txtmsj);
+			alert(infoResponse.declaraPDFResponse.errores[0].txtmsj);
 		}else{
 			if(infoResponse.urlDownload != null){
 				$("#downloadHelper").attr("href",infoResponse.urlDownload);

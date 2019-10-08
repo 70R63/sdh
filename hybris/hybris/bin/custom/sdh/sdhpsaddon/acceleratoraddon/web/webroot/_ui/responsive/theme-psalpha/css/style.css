@@ -25115,6 +25115,7 @@ span.pasos {
 .label1Ver:hover,
 .labelVer:hover,
 .detalleVerCont:hover,
+labelVerDetalle:hover,
 labelVerDetalle:hover {
   text-decoration: underline !important;
   cursor: pointer !important;
