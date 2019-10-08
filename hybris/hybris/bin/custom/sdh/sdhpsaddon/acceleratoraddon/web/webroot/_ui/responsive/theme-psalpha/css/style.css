@@ -25113,7 +25113,9 @@ span.pasos {
   max-width: 192px !important;
 }
 .label1Ver:hover,
-.labelVer:hover {
+.labelVer:hover,
+.detalleVerCont:hover,
+labelVerDetalle:hover {
   text-decoration: underline !important;
   cursor: pointer !important;
 }

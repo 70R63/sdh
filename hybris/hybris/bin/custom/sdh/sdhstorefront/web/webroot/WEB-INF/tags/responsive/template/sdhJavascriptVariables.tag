@@ -14,6 +14,7 @@
 				ACC.aamenus = "${aamenus}";
 			</c:if>
 
+			
 			ACC.certifNombURL ="<c:url value='/contribuyentes/mirit/certifNomb' />";
 			ACC.validaCurrentPasswrodURL ="<c:url value='/contribuyentes/mirit/validCurrentPassword' />";
 			ACC.validaEmailURL ="<c:url value='/contribuyentes/mirit/validNewEmail' />";
@@ -68,6 +69,10 @@
 			
 			ACC.publicidadExteriorDetalleURL = "<c:url value='/contribuyentes/publicidadexterior/detalle' />";
 			
+			ACC.contribList = "<c:url value='/contribuyentes'/>";
+			
+			ACC.generaROPURL = "<c:url value='/contribuyentes/rop' />";
+			
 			ACC.publicidadExteriorDeclararionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion' />";
 			
 			ACC.publicidadExteriorCalculoURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion/calculo' />";
@@ -114,9 +119,11 @@
 			
 			ACC.vehiculosDetalleURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/detalle/vehiculo' />";
 			
+			
+			
 		  	ACC.currentURL = "${currentURL}";
 
-		  	ACC.generaROPURL = "<c:url value='/contribuyentes/rop' />";
+		  	
 			
 		  	<c:if test="${not empty reteICATemplateURL}">
 		  		ACC.reteICADownloadTemplate ="${reteICATemplateURL}";
