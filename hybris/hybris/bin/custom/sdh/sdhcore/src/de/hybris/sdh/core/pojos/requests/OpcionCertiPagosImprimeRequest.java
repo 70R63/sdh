@@ -19,6 +19,26 @@ public class OpcionCertiPagosImprimeRequest
 	private String periodo;
 	private String importe;
 	private String clavePeriodo;
+	private String referencia;
+
+
+
+	/**
+	 * @return the referencia
+	 */
+	public String getReferencia()
+	{
+		return referencia;
+	}
+
+	/**
+	 * @param referencia
+	 *           the referencia to set
+	 */
+	public void setReferencia(final String referencia)
+	{
+		this.referencia = referencia;
+	}
 
 	/**
 	 * @return the numBP
@@ -187,6 +207,7 @@ public class OpcionCertiPagosImprimeRequest
 		stringBuilder.append(obtenerValorJson("\"numBP\":\"", this.getNumBP(), "\","));
 		stringBuilder.append(obtenerValorJson("\"ctaContrato\":\"", this.getCtaContrato(), "\","));
 		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"referencia\":\"", this.getReferencia(), "\","));
 		stringBuilder.append(obtenerValorJson("\"numDoc\":\"", this.getNumDoc(), "\","));
 		stringBuilder.append(obtenerValorJson("\"tipoDoc\":\"", this.getTipoDoc(), "\","));
 		stringBuilder.append(obtenerValorJson("\"anoGravable\":\"", this.getAnoGravable(), "\","));

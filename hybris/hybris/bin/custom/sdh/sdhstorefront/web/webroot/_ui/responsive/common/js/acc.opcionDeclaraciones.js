@@ -111,10 +111,14 @@ ACC.opcionDeclaraciones = {
 			e.preventDefault();	
 			
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
-//				debugger;
+				debugger;
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
+				var valCtaContrato;
+				var valClavePeriodo;
+				var valImporte;
+				var valReferencia
 					
 				for (var i = 0; i < e.target.form.length; i++) {
 					nombreCampo = "registroNum_" + i;
@@ -126,11 +130,10 @@ ACC.opcionDeclaraciones = {
 							 valNumObjeto = $.trim($(valorCampo).attr("data-numObjeto")); 
 							 valCtaContrato = $.trim($(valorCampo).attr("data-ctaContrato")); 
 							 valClavePeriodo = $.trim($(valorCampo).attr("data-clavePeriodo")); 
+							 valReferencia = $.trim($(valorCampo).attr("data-referencia")); 
 							 valImporte = $.trim($(valorCampo).attr("data-importe")); 
 							 break;
 						}
-					}else{
-						break;
 					}
 				}
 	 	        var claveImpuesto = $("#seleccion").val();  	       
@@ -146,6 +149,7 @@ ACC.opcionDeclaraciones = {
 				
 				dataActual.ctaContrato = valCtaContrato;
 				dataActual.clavePeriodo = valClavePeriodo;
+				dataActual.referencia = valReferencia;
 				dataActual.importe = valImporte;
 				
 				
@@ -168,8 +172,14 @@ ACC.opcionDeclaraciones = {
 	updateFromResponsePDF : function(infoActual,infoResponse) {
 
 		debugger;
-		if (infoResponse.declaraPDFResponse.errores != null){
-			alert(infoResponse.declaraPDFResponse.errores.textoMensaje);
+		if (infoResponse.impresionResponse.errores != null){
+			if (infoResponse.impresionResponse.errores[0].idmsj == "0"){
+				if(infoResponse.urlDownload != null){
+					$("#downloadHelper").attr("href",infoResponse.urlDownload);
+					document.getElementById("downloadHelper").click();
+				}
+			}	
+			alert(infoResponse.impresionResponse.errores[0].txtmsj);
 		}else{
 			if(infoResponse.urlDownload != null){
 				$("#downloadHelper").attr("href",infoResponse.urlDownload);
@@ -185,6 +195,12 @@ ACC.opcionDeclaraciones = {
 
 		debugger;
 		if (infoResponse.impresionResponse.errores != null){
+			if (infoResponse.impresionResponse.errores[0].idmsj == "0"){
+				if(infoResponse.urlDownload != null){
+					$("#downloadHelper").attr("href",infoResponse.urlDownload);
+					document.getElementById("downloadHelper").click();
+				}
+			}	
 			alert(infoResponse.impresionResponse.errores[0].txtmsj);
 		}else{
 			if(infoResponse.urlDownload != null){
@@ -371,7 +387,7 @@ ACC.opcionDeclaraciones = {
 										'<td>' + value1.referencia + '</td>'+
 										'<td>' + value1.importe + '</td>'+
 										'<td>' + value1.moneda + '</td>'+
-										'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo +'" data-importe="' + value1.importe + '"' +">" + "</td>"+
+										'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato + '" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 										"</tr>");
 								}
 							}
@@ -390,7 +406,7 @@ ACC.opcionDeclaraciones = {
 										'<td>' + value1.referencia + '</td>'+
 										'<td>' + value1.importe + '</td>'+
 										'<td>' + value1.moneda + '</td>'+
-										'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo +'" data-importe="' + value1.importe + '"' +">" + "</td>"+
+										'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia +'" data-importe="' + value1.importe + '"' +">" + "</td>"+
 										"</tr>");
 								}
 							}
@@ -409,7 +425,7 @@ ACC.opcionDeclaraciones = {
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
-											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo +'" data-importe="' + value1.importe + '"' +">" + "</td>"+
+											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 											"</tr>");
 									}
 								});
@@ -428,7 +444,7 @@ ACC.opcionDeclaraciones = {
 												'<td>' + value1.referencia + '</td>'+
 												'<td>' + value1.importe + '</td>'+
 												'<td>' + value1.moneda + '</td>'+
-												'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo +'" data-importe="' + value1.importe + '"' +">" + "</td>"+
+												'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 												"</tr>");
 									}
 								});
@@ -448,7 +464,7 @@ ACC.opcionDeclaraciones = {
 												'<td>' + value1.referencia + '</td>'+
 												'<td>' + value1.importe + '</td>'+
 												'<td>' + value1.moneda + '</td>'+
-												'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo +'" data-importe="' + value1.importe + '"' +">" + "</td>"+
+												'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia +'" data-importe="' + value1.importe + '"' +">" + "</td>"+
 												"</tr>");
 									}
 								});

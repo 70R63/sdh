@@ -11,6 +11,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -380,6 +381,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 		String ctaContrato = "";
 		String clavePeriodo = "";
+		String referencia = "";
 		String importe = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -394,6 +396,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		//		claseObjeto = infoVista.getClaveImpuesto();
 		numObjeto = infoVista.getObjContrato();
 		anioGravable = infoVista.getAnoGravable();
+		referencia = infoVista.getReferencia();
 		periodo = infoVista.getPeriodo();
 		radicado = "";
 		ctaContrato = infoVista.getCtaContrato();
@@ -414,6 +417,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		impresionRequest.setTipoDoc(tipoDoc);
 		impresionRequest.setClavePeriodo(clavePeriodo);
 		impresionRequest.setImporte(importe);
+		impresionRequest.setReferencia(referencia);
 
 
 		System.out.println("Request para docs/imprimePago: " + impresionRequest);

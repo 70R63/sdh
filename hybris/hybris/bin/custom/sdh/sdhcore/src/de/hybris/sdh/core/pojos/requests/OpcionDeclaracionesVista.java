@@ -53,8 +53,27 @@ public class OpcionDeclaracionesVista
 	private String numDoc;
 	private String tipoDoc;
 	private String clavePeriodo;
+	private String referencia;
 	private String importe;
 
+
+
+	/**
+	 * @return the referencia
+	 */
+	public String getReferencia()
+	{
+		return referencia;
+	}
+
+	/**
+	 * @param referencia
+	 *           the referencia to set
+	 */
+	public void setReferencia(final String referencia)
+	{
+		this.referencia = referencia;
+	}
 
 	/**
 	 * @return the declaracionesCertiPagos
