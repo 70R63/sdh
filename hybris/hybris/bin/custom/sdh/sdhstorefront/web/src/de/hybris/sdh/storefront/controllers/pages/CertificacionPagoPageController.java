@@ -11,7 +11,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -30,6 +29,7 @@ import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -346,6 +346,24 @@ public class CertificacionPagoPageController extends AbstractPageController
 		if (gasolinaService.ocurrioErrorListaDeclara(listaDeclaracionesResponse) != true)
 		{
 			//			gasolinaService.determinarRegistrosDeclaraciones(infoVista, listaDeclaracionesResponse);
+			final List<ItemListaDeclaraciones> declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+			int cont = 0;
+			for (final ItemListaDeclaraciones declaracionRow : listaDeclaracionesResponse.getDeclaraciones())
+			{
+				final String periodo = infoVista.getAnoGravable().substring(2) + infoVista.getPeriodo();
+
+				cont++;
+				System.out
+						.println("cont=" + cont + "  " + "periodo=" + periodo + "  " + "declaracionRow.getClavePeriodo()="
+								+ declaracionRow.getClavePeriodo());
+
+				if (declaracionRow.getClavePeriodo() != null && declaracionRow.getClavePeriodo().equals(periodo))
+				{
+					declaraciones_selected.add(declaracionRow);
+				}
+			}
+
+			listaDeclaracionesResponse.setDeclaraciones(declaraciones_selected);
 			infoVista.setDeclaracionesCertiPagos(listaDeclaracionesResponse);
 			infoVista.setErrores(listaDeclaracionesResponse.getErrores());
 		}
