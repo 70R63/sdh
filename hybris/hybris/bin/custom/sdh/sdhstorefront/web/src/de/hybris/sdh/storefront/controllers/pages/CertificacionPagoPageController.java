@@ -347,15 +347,10 @@ public class CertificacionPagoPageController extends AbstractPageController
 		{
 			//			gasolinaService.determinarRegistrosDeclaraciones(infoVista, listaDeclaracionesResponse);
 			final List<ItemListaDeclaraciones> declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
-			int cont = 0;
+
 			for (final ItemListaDeclaraciones declaracionRow : listaDeclaracionesResponse.getDeclaraciones())
 			{
 				final String periodo = infoVista.getAnoGravable().substring(2) + infoVista.getPeriodo();
-
-				cont++;
-				System.out
-						.println("cont=" + cont + "  " + "periodo=" + periodo + "  " + "declaracionRow.getClavePeriodo()="
-								+ declaracionRow.getClavePeriodo());
 
 				if (declaracionRow.getClavePeriodo() != null && declaracionRow.getClavePeriodo().equals(periodo))
 				{
