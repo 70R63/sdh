@@ -1,6 +1,6 @@
 ACC.vehiculos = {
 
-	_autoload : [ "bindLabelVerDetalle" ],
+	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh" ],
 
 	bindLabelVerDetalle : function() {
 		$(document).on("click", ".labelVerDetalle", function(e) {
@@ -124,9 +124,58 @@ ACC.vehiculos = {
 
 	},
 
+	
+	bindLabelVerDetVeh : function() {
+		$(document).on("click", ".labelVerDetVeh", function(e) {
+			e.preventDefault();
+			debugger;
+			var placa = $.trim($(this).attr("data-placa"));
+			var bpNum = $.trim($(this).attr("data-numbp"));
+			var anioGravable = $.trim($("#an").val());
+
+			if (anioGravable == "0") {
+				alert("Por favor, selecciona el año a consultar");
+				return;
+			}
+
+			var data = {};
+
+			data.bpNum = bpNum;
+			data.placa = placa;
+			data.anioGravable = anioGravable;
+
+			$.ajax({
+				url : ACC.vehiculosDetalleURL,
+				data : data,
+				type : "GET",
+				success : function(data) {
+					ACC.vehiculos.fillFieldsFromData(data);
+
+				},
+				error : function() {
+				}
+			});
+		});
+
+
+	},
+
+	
+	
 	fillFieldsFromData : function(data) {
 
-		$("#placa").val(data.placa);
+		$("#placas").val(data.placa);
+		$("#inidServicio").val(data.idServicio);
+		$("#inidEstado").val(data.idEstado);
+		$("#inwatts").val(data.watts);
+		$("#inclasico").val(data.clasicoAntig);
+		$("#intipvehiculo").val(data.tipoVeh);
+		$("#inpasajeros").val(data.capacidadPas);
+		$("#inton").val(data.capacidadTon);
+		$("#infecinacti").val(data.fechaDesde);
+		$("#infechacambio").val(data.fechaCambio);
+		$("#inTipo").val(data.tipoID);
+		$("#inNomcom").val(data.nombre)
 
 	}
 
