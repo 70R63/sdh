@@ -4,8 +4,12 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
-import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleInfoDeclaraVehiculos;
+import de.hybris.sdh.core.pojos.responses.DetalleLiquidacionVehiculos;
+import de.hybris.sdh.core.pojos.responses.DetalleMarcas;
+import de.hybris.sdh.core.pojos.responses.DetalleVehiculos;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.Infovehic;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
@@ -29,8 +33,45 @@ public class VehiculosInfObjetoForm
 
 	private List<ImpuestoVehiculos> impvehicular;
 	private DetalleVehiculosRequest detallerequest;
-	private DetalleVehiculosResponse detalle;
 
+	private DetalleVehiculos detalle;
+	private String idServicio;
+	private String idEstado;
+	private String watts;
+	private String clasicoAntig;
+	private String tipoVeh;
+	private String capacidadPas;
+	private String capacidadTon;
+	private String fechaCambio;
+
+
+
+	//	private List<DetalleJuridicosVehiculos> datosJuridicos;
+	private String tipoID;
+	private String nombre;
+	private String numID;
+	private String calidad;
+	private String procProp;
+	private String fechaDesde;
+	private String fechaHasta;
+
+	private List<DetalleMarcas> marcas;
+	private String tipoMarca;
+	private String codMarca;
+	private String valorExcencion;
+	private String ciiu;
+	private String descripMarca;
+	private String fechaDesdemarca;
+	private String fechaHastamarca;
+
+	private List<DetalleLiquidacionVehiculos> liquidacion;
+	private String anio;
+	private String avaluo;
+	private String tarifa;
+
+	private DetalleInfoDeclaraVehiculos info_declara;
+	private Infovehic infoVeh;
+	private String liquidaciondeclara;
 	/**
 	 * @return the numBP
 	 */
@@ -47,7 +88,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.numBP = numBP;
 	}
-
 	/**
 	 * @return the tipiden
 	 */
@@ -64,7 +104,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.tipiden = tipiden;
 	}
-
 	/**
 	 * @return the numide
 	 */
@@ -81,7 +120,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.numide = numide;
 	}
-
 	/**
 	 * @return the name
 	 */
@@ -98,75 +136,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.name = name;
 	}
-
-	/**
-	 * @return the vehiculos
-	 */
-	public SDHValidaMailRolResponse getVehiculos()
-	{
-		return vehiculos;
-	}
-
-	/**
-	 * @param vehiculos
-	 *           the vehiculos to set
-	 */
-	public void setVehiculos(final SDHValidaMailRolResponse vehiculos)
-	{
-		this.vehiculos = vehiculos;
-	}
-
-	/**
-	 * @return the impvehicular
-	 */
-	public List<ImpuestoVehiculos> getImpvehicular()
-	{
-		return impvehicular;
-	}
-
-	/**
-	 * @param impvehicular
-	 *           the impvehicular to set
-	 */
-	public void setImpvehicular(final List<ImpuestoVehiculos> impvehicular)
-	{
-		this.impvehicular = impvehicular;
-	}
-
-	/**
-	 * @return the detallerequest
-	 */
-	public DetalleVehiculosRequest getDetallerequest()
-	{
-		return detallerequest;
-	}
-
-	/**
-	 * @param detallerequest
-	 *           the detallerequest to set
-	 */
-	public void setDetallerequest(final DetalleVehiculosRequest detallerequest)
-	{
-		this.detallerequest = detallerequest;
-	}
-
-	/**
-	 * @return the detalle
-	 */
-	public DetalleVehiculosResponse getDetalle()
-	{
-		return detalle;
-	}
-
-	/**
-	 * @param detalle
-	 *           the detalle to set
-	 */
-	public void setDetalle(final DetalleVehiculosResponse detalle)
-	{
-		this.detalle = detalle;
-	}
-
 	/**
 	 * @return the bpNum
 	 */
@@ -183,7 +152,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.bpNum = bpNum;
 	}
-
 	/**
 	 * @return the placa
 	 */
@@ -200,7 +168,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.placa = placa;
 	}
-
 	/**
 	 * @return the anioGravable
 	 */
@@ -216,6 +183,589 @@ public class VehiculosInfObjetoForm
 	public void setAnioGravable(final String anioGravable)
 	{
 		this.anioGravable = anioGravable;
+	}
+	/**
+	 * @return the vehiculos
+	 */
+	public SDHValidaMailRolResponse getVehiculos()
+	{
+		return vehiculos;
+	}
+
+	/**
+	 * @param vehiculos
+	 *           the vehiculos to set
+	 */
+	public void setVehiculos(final SDHValidaMailRolResponse vehiculos)
+	{
+		this.vehiculos = vehiculos;
+	}
+	/**
+	 * @return the impvehicular
+	 */
+	public List<ImpuestoVehiculos> getImpvehicular()
+	{
+		return impvehicular;
+	}
+
+	/**
+	 * @param impvehicular
+	 *           the impvehicular to set
+	 */
+	public void setImpvehicular(final List<ImpuestoVehiculos> impvehicular)
+	{
+		this.impvehicular = impvehicular;
+	}
+	/**
+	 * @return the detallerequest
+	 */
+	public DetalleVehiculosRequest getDetallerequest()
+	{
+		return detallerequest;
+	}
+
+	/**
+	 * @param detallerequest
+	 *           the detallerequest to set
+	 */
+	public void setDetallerequest(final DetalleVehiculosRequest detallerequest)
+	{
+		this.detallerequest = detallerequest;
+	}
+	/**
+	 * @return the detalle
+	 */
+	public DetalleVehiculos getDetalle()
+	{
+		return detalle;
+	}
+
+	/**
+	 * @param detalle
+	 *           the detalle to set
+	 */
+	public void setDetalle(final DetalleVehiculos detalle)
+	{
+		this.detalle = detalle;
+	}
+	/**
+	 * @return the idServicio
+	 */
+	public String getIdServicio()
+	{
+		return idServicio;
+	}
+
+	/**
+	 * @param idServicio
+	 *           the idServicio to set
+	 */
+	public void setIdServicio(final String idServicio)
+	{
+		this.idServicio = idServicio;
+	}
+	/**
+	 * @return the idEstado
+	 */
+	public String getIdEstado()
+	{
+		return idEstado;
+	}
+
+	/**
+	 * @param idEstado
+	 *           the idEstado to set
+	 */
+	public void setIdEstado(final String idEstado)
+	{
+		this.idEstado = idEstado;
+	}
+	/**
+	 * @return the watts
+	 */
+	public String getWatts()
+	{
+		return watts;
+	}
+
+	/**
+	 * @param watts
+	 *           the watts to set
+	 */
+	public void setWatts(final String watts)
+	{
+		this.watts = watts;
+	}
+	/**
+	 * @return the clasicoAntig
+	 */
+	public String getClasicoAntig()
+	{
+		return clasicoAntig;
+	}
+
+	/**
+	 * @param clasicoAntig
+	 *           the clasicoAntig to set
+	 */
+	public void setClasicoAntig(final String clasicoAntig)
+	{
+		this.clasicoAntig = clasicoAntig;
+	}
+	/**
+	 * @return the tipoVeh
+	 */
+	public String getTipoVeh()
+	{
+		return tipoVeh;
+	}
+
+	/**
+	 * @param tipoVeh
+	 *           the tipoVeh to set
+	 */
+	public void setTipoVeh(final String tipoVeh)
+	{
+		this.tipoVeh = tipoVeh;
+	}
+	/**
+	 * @return the capacidadPas
+	 */
+	public String getCapacidadPas()
+	{
+		return capacidadPas;
+	}
+
+	/**
+	 * @param capacidadPas
+	 *           the capacidadPas to set
+	 */
+	public void setCapacidadPas(final String capacidadPas)
+	{
+		this.capacidadPas = capacidadPas;
+	}
+	/**
+	 * @return the capacidadTon
+	 */
+	public String getCapacidadTon()
+	{
+		return capacidadTon;
+	}
+
+	/**
+	 * @param capacidadTon
+	 *           the capacidadTon to set
+	 */
+	public void setCapacidadTon(final String capacidadTon)
+	{
+		this.capacidadTon = capacidadTon;
+	}
+	/**
+	 * @return the fechaCambio
+	 */
+	public String getFechaCambio()
+	{
+		return fechaCambio;
+	}
+
+	/**
+	 * @param fechaCambio
+	 *           the fechaCambio to set
+	 */
+	public void setFechaCambio(final String fechaCambio)
+	{
+		this.fechaCambio = fechaCambio;
+	}
+
+	//	/**
+	//	 * @return the datosJuridicos
+	//	 */
+	//	public List<DetalleJuridicosVehiculos> getDatosJuridicos()
+	//	{
+	//		return datosJuridicos;
+	//	}
+	//
+	//	/**
+	//	 * @param datosJuridicos
+	//	 *           the datosJuridicos to set
+	//	 */
+	//	public void setDatosJuridicos(final List<DetalleJuridicosVehiculos> datosJuridicos)
+	//	{
+	//		this.datosJuridicos = datosJuridicos;
+	//	}
+
+	/**
+	 * @return the tipoID
+	 */
+	public String getTipoID()
+	{
+		return tipoID;
+	}
+
+	/**
+	 * @param tipoID
+	 *           the tipoID to set
+	 */
+	public void setTipoID(final String tipoID)
+	{
+		this.tipoID = tipoID;
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre()
+	{
+		return nombre;
+	}
+
+	/**
+	 * @param nombre
+	 *           the nombre to set
+	 */
+	public void setNombre(final String nombre)
+	{
+		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the numID
+	 */
+	public String getNumID()
+	{
+		return numID;
+	}
+
+	/**
+	 * @param numID
+	 *           the numID to set
+	 */
+	public void setNumID(final String numID)
+	{
+		this.numID = numID;
+	}
+
+	/**
+	 * @return the calidad
+	 */
+	public String getCalidad()
+	{
+		return calidad;
+	}
+
+	/**
+	 * @param calidad
+	 *           the calidad to set
+	 */
+	public void setCalidad(final String calidad)
+	{
+		this.calidad = calidad;
+	}
+
+	/**
+	 * @return the procProp
+	 */
+	public String getProcProp()
+	{
+		return procProp;
+	}
+
+	/**
+	 * @param procProp
+	 *           the procProp to set
+	 */
+	public void setProcProp(final String procProp)
+	{
+		this.procProp = procProp;
+	}
+
+	/**
+	 * @return the fechaDesde
+	 */
+	public String getFechaDesde()
+	{
+		return fechaDesde;
+	}
+
+	/**
+	 * @param fechaDesde
+	 *           the fechaDesde to set
+	 */
+	public void setFechaDesde(final String fechaDesde)
+	{
+		this.fechaDesde = fechaDesde;
+	}
+
+	/**
+	 * @return the fechaHasta
+	 */
+	public String getFechaHasta()
+	{
+		return fechaHasta;
+	}
+
+	/**
+	 * @param fechaHasta
+	 *           the fechaHasta to set
+	 */
+	public void setFechaHasta(final String fechaHasta)
+	{
+		this.fechaHasta = fechaHasta;
+	}
+
+	/**
+	 * @return the marcas
+	 */
+	public List<DetalleMarcas> getMarcas()
+	{
+		return marcas;
+	}
+
+	/**
+	 * @param marcas
+	 *           the marcas to set
+	 */
+	public void setMarcas(final List<DetalleMarcas> marcas)
+	{
+		this.marcas = marcas;
+	}
+
+	/**
+	 * @return the tipoMarca
+	 */
+	public String getTipoMarca()
+	{
+		return tipoMarca;
+	}
+
+	/**
+	 * @param tipoMarca
+	 *           the tipoMarca to set
+	 */
+	public void setTipoMarca(final String tipoMarca)
+	{
+		this.tipoMarca = tipoMarca;
+	}
+
+	/**
+	 * @return the codMarca
+	 */
+	public String getCodMarca()
+	{
+		return codMarca;
+	}
+
+	/**
+	 * @param codMarca
+	 *           the codMarca to set
+	 */
+	public void setCodMarca(final String codMarca)
+	{
+		this.codMarca = codMarca;
+	}
+
+	/**
+	 * @return the valorExcencion
+	 */
+	public String getValorExcencion()
+	{
+		return valorExcencion;
+	}
+
+	/**
+	 * @param valorExcencion
+	 *           the valorExcencion to set
+	 */
+	public void setValorExcencion(final String valorExcencion)
+	{
+		this.valorExcencion = valorExcencion;
+	}
+
+	/**
+	 * @return the ciiu
+	 */
+	public String getCiiu()
+	{
+		return ciiu;
+	}
+
+	/**
+	 * @param ciiu
+	 *           the ciiu to set
+	 */
+	public void setCiiu(final String ciiu)
+	{
+		this.ciiu = ciiu;
+	}
+
+	/**
+	 * @return the descripMarca
+	 */
+	public String getDescripMarca()
+	{
+		return descripMarca;
+	}
+
+	/**
+	 * @param descripMarca
+	 *           the descripMarca to set
+	 */
+	public void setDescripMarca(final String descripMarca)
+	{
+		this.descripMarca = descripMarca;
+	}
+
+	/**
+	 * @return the fechaDesdemarca
+	 */
+	public String getFechaDesdemarca()
+	{
+		return fechaDesdemarca;
+	}
+
+	/**
+	 * @param fechaDesdemarca
+	 *           the fechaDesdemarca to set
+	 */
+	public void setFechaDesdemarca(final String fechaDesdemarca)
+	{
+		this.fechaDesdemarca = fechaDesdemarca;
+	}
+
+	/**
+	 * @return the fechaHastamarca
+	 */
+	public String getFechaHastamarca()
+	{
+		return fechaHastamarca;
+	}
+
+	/**
+	 * @param fechaHastamarca
+	 *           the fechaHastamarca to set
+	 */
+	public void setFechaHastamarca(final String fechaHastamarca)
+	{
+		this.fechaHastamarca = fechaHastamarca;
+	}
+
+	/**
+	 * @return the liquidacion
+	 */
+	public List<DetalleLiquidacionVehiculos> getLiquidacion()
+	{
+		return liquidacion;
+	}
+
+	/**
+	 * @param liquidacion
+	 *           the liquidacion to set
+	 */
+	public void setLiquidacion(final List<DetalleLiquidacionVehiculos> liquidacion)
+	{
+		this.liquidacion = liquidacion;
+	}
+
+	/**
+	 * @return the anio
+	 */
+	public String getAnio()
+	{
+		return anio;
+	}
+
+	/**
+	 * @param anio
+	 *           the anio to set
+	 */
+	public void setAnio(final String anio)
+	{
+		this.anio = anio;
+	}
+
+	/**
+	 * @return the avaluo
+	 */
+	public String getAvaluo()
+	{
+		return avaluo;
+	}
+
+	/**
+	 * @param avaluo
+	 *           the avaluo to set
+	 */
+	public void setAvaluo(final String avaluo)
+	{
+		this.avaluo = avaluo;
+	}
+
+	/**
+	 * @return the tarifa
+	 */
+	public String getTarifa()
+	{
+		return tarifa;
+	}
+
+	/**
+	 * @param tarifa
+	 *           the tarifa to set
+	 */
+	public void setTarifa(final String tarifa)
+	{
+		this.tarifa = tarifa;
+	}
+
+	/**
+	 * @return the info_declara
+	 */
+	public DetalleInfoDeclaraVehiculos getInfo_declara()
+	{
+		return info_declara;
+	}
+
+	/**
+	 * @param info_declara
+	 *           the info_declara to set
+	 */
+	public void setInfo_declara(final DetalleInfoDeclaraVehiculos info_declara)
+	{
+		this.info_declara = info_declara;
+	}
+
+	/**
+	 * @return the infoVeh
+	 */
+	public Infovehic getInfoVeh()
+	{
+		return infoVeh;
+	}
+
+	/**
+	 * @param infoVeh
+	 *           the infoVeh to set
+	 */
+	public void setInfoVeh(final Infovehic infoVeh)
+	{
+		this.infoVeh = infoVeh;
+	}
+
+	/**
+	 * @return the liquidaciondeclara
+	 */
+	public String getLiquidaciondeclara()
+	{
+		return liquidaciondeclara;
+	}
+
+	/**
+	 * @param liquidaciondeclara
+	 *           the liquidaciondeclara to set
+	 */
+	public void setLiquidaciondeclara(final String liquidaciondeclara)
+	{
+		this.liquidaciondeclara = liquidaciondeclara;
 	}
 
 

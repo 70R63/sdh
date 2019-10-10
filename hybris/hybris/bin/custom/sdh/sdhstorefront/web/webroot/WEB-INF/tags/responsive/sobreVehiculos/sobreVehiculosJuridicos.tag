@@ -44,11 +44,11 @@
 
 					<tbody>
 						<tr>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Tipo"></c:out>"
+							<td><input id="inTipo" name="" class="inputtextnew inTipo" type="text"
+								readonly="readonly" value=""
 								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="NomCompleto"></c:out>"
+							<td><input id="inNomcom" name="" class="inputtextnew inNomcom" type="text"
+								readonly="readonly" value=""
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly" value="<c:out value="Número"></c:out>"

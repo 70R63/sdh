@@ -155,7 +155,7 @@
 								<td><label style="color: #0358d8 !important"
 									data-placa="${eachVehiculo.placa}"
 									data-numbp="${vehiculosForm.numBP}"
-									class="text-capitalize !important labelVerDetalle "><spring:theme
+									class="text-capitalize !important labelVerDetVeh "><spring:theme
 											code="sobre.vehiculo.table.verdetalle" /></label></td>
 							</tr>
 						</tbody>
