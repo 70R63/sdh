@@ -34,6 +34,8 @@ import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -208,7 +210,19 @@ public class SobreVehiculosController extends AbstractPageController
 			vehiculosForm.setTipoVeh(detalleVehiculosResponse.getDetalle().getTipoVeh());
 			vehiculosForm.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
 			vehiculosForm.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
-			vehiculosForm.setFechaCambio(detalleVehiculosResponse.getDetalle().getFechaCambio());
+
+			//			vehiculosForm.setFechaCambio(detalleVehiculosResponse.getDetalle().getFechaCambio());
+			final String FechaCambio = detalleVehiculosResponse.getDetalle().getFechaCambio();
+			if (StringUtils.isNotBlank(FechaCambio) && !"00000000".equals(FechaCambio))
+			{
+				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+				final LocalDate localDate = LocalDate.parse(FechaCambio, formatter);
+
+				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+				vehiculosForm.setFechaCambio(localDate.format(formatter2));
+			}
 
 			//			if (detalleVehiculosResponse.getDatosJuridicos() != null && !detalleVehiculosResponse.getDatosJuridicos().isEmpty())
 			//			{
@@ -220,25 +234,40 @@ public class SobreVehiculosController extends AbstractPageController
 			//					vehiculosForm.setNumID(eachDetalleJur.getNumID());
 			//					vehiculosForm.setCalidad(eachDetalleJur.getCalidad());
 			//					vehiculosForm.setProcProp(eachDetalleJur.getProcProp());
-			//					vehiculosForm.setFechaDesde(eachDetalleJur.getFechaDesde());
-			//					vehiculosForm.setFechaHasta(eachDetalleJur.getFechaHasta());
+			//
+			//					//								vehiculosForm.setFechaDesde(eachDetalleJur.getFechaDesde());
+			//					final String FechaDesde = eachDetalleJur.getFechaDesde();
+			//					if (StringUtils.isNotBlank(FechaDesde) && !"00000000".equals(FechaDesde))
+			//					{
+			//						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+			//
+			//						final LocalDate localDate = LocalDate.parse(FechaDesde, formatter);
+			//
+			//						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			//
+			//						vehiculosForm.setFechaDesde(localDate.format(formatter2));
+			//					}
+			//
+			//					//					vehiculosForm.setFechaHasta(eachDetalleJur.getFechaHasta());
+			//					final String FechaHasta = eachDetalleJur.getFechaHasta();
+			//					if (StringUtils.isNotBlank(FechaHasta) && !"00000000".equals(FechaHasta))
+			//					{
+			//						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+			//
+			//						final LocalDate localDate = LocalDate.parse(FechaHasta, formatter);
+			//
+			//						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			//
+			//						vehiculosForm.setFechaHasta(localDate.format(formatter2));
+			//					}
 			//
 			//					break;
 			//				}
 			//
 			//			}
 
-
-
-
-
-			//			vehiculosForm.setDetalle().setIdServicio(detalleVehiculosResponse.getIdServicio());
-
-
-
-
-
-
+			vehiculosForm.setLiquidacion(detalleVehiculosResponse.getLiquidacion().stream()
+					.filter(eachDetLiq -> StringUtils.isNotBlank(eachDetLiq.getAnio())).collect(Collectors.toList()));
 		}
 		catch (final Exception e)
 		{
@@ -251,7 +280,7 @@ public class SobreVehiculosController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
-		//		return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
+
 		return vehiculosForm;
 	}
 
