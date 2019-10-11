@@ -17,8 +17,9 @@ public class CalcICA2Response
 	private String periodo;
 	private String opcion_uso;
 	private String cant_establec;
+	private String regimen;
 	private String total_ingr_periodo;
-	private String deducciones;
+	private ICAInfoDeducciones deducciones;
 
 	private String totaling_fuera_bog;
 	private String totaling_brutos;
@@ -40,9 +41,9 @@ public class CalcICA2Response
 	private String tarifa_aporte;
 	private String check_aporte;
 
-	private List<CalcICA2ing_fuera_bogResponse> ing_fuera_bog;
-	private List<CalcICA2ing_netos_gravaResponse> ing_netos_grava;
-	private List<CalcICA2ing_por_CIIUResponse> ing_por_CIIU;
+	private List<ICAInfoIngFueraBog> ingFueraBog;
+	private List<ICAInfoIngNetosGrava> ingNetosGrava;
+	private List<ICAInfoIngPorCiiu> ingPorCIIU;
 	private List<FirmanteResponse> firmantes;
 
 	/**
@@ -114,6 +115,23 @@ public class CalcICA2Response
 	}
 
 	/**
+	 * @return the regimen
+	 */
+	public String getRegimen()
+	{
+		return regimen;
+	}
+
+	/**
+	 * @param regimen
+	 *           the regimen to set
+	 */
+	public void setRegimen(final String regimen)
+	{
+		this.regimen = regimen;
+	}
+
+	/**
 	 * @return the total_ingr_periodo
 	 */
 	public String getTotal_ingr_periodo()
@@ -133,7 +151,7 @@ public class CalcICA2Response
 	/**
 	 * @return the deducciones
 	 */
-	public String getDeducciones()
+	public ICAInfoDeducciones getDeducciones()
 	{
 		return deducciones;
 	}
@@ -142,7 +160,7 @@ public class CalcICA2Response
 	 * @param deducciones
 	 *           the deducciones to set
 	 */
-	public void setDeducciones(final String deducciones)
+	public void setDeducciones(final ICAInfoDeducciones deducciones)
 	{
 		this.deducciones = deducciones;
 	}
@@ -471,37 +489,54 @@ public class CalcICA2Response
 	}
 
 	/**
-	 * @return the ing_netos_grava
+	 * @return the ingFueraBog
 	 */
-	public List<CalcICA2ing_netos_gravaResponse> getIng_netos_grava()
+	public List<ICAInfoIngFueraBog> getIngFueraBog()
 	{
-		return ing_netos_grava;
+		return ingFueraBog;
 	}
 
 	/**
-	 * @param ing_netos_grava
-	 *           the ing_netos_grava to set
+	 * @param ingFueraBog
+	 *           the ingFueraBog to set
 	 */
-	public void setIng_netos_grava(final List<CalcICA2ing_netos_gravaResponse> ing_netos_grava)
+	public void setIngFueraBog(final List<ICAInfoIngFueraBog> ingFueraBog)
 	{
-		this.ing_netos_grava = ing_netos_grava;
+		this.ingFueraBog = ingFueraBog;
 	}
 
 	/**
-	 * @return the ing_por_CIIU
+	 * @return the ingNetosGrava
 	 */
-	public List<CalcICA2ing_por_CIIUResponse> getIng_por_CIIU()
+	public List<ICAInfoIngNetosGrava> getIngNetosGrava()
 	{
-		return ing_por_CIIU;
+		return ingNetosGrava;
 	}
 
 	/**
-	 * @param ing_por_CIIU
-	 *           the ing_por_CIIU to set
+	 * @param ingNetosGrava
+	 *           the ingNetosGrava to set
 	 */
-	public void setIng_por_CIIU(final List<CalcICA2ing_por_CIIUResponse> ing_por_CIIU)
+	public void setIngNetosGrava(final List<ICAInfoIngNetosGrava> ingNetosGrava)
 	{
-		this.ing_por_CIIU = ing_por_CIIU;
+		this.ingNetosGrava = ingNetosGrava;
+	}
+
+	/**
+	 * @return the ingPorCIIU
+	 */
+	public List<ICAInfoIngPorCiiu> getIngPorCIIU()
+	{
+		return ingPorCIIU;
+	}
+
+	/**
+	 * @param ingPorCIIU
+	 *           the ingPorCIIU to set
+	 */
+	public void setIngPorCIIU(final List<ICAInfoIngPorCiiu> ingPorCIIU)
+	{
+		this.ingPorCIIU = ingPorCIIU;
 	}
 
 	/**
@@ -523,23 +558,24 @@ public class CalcICA2Response
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
 		return "CalcICA2Response [anio_gravable=" + anio_gravable + ", periodo=" + periodo + ", opcion_uso=" + opcion_uso
-				+ ", cant_establec=" + cant_establec + ", total_ingr_periodo=" + total_ingr_periodo + ", ing_fuera_bog="
-				+ ing_fuera_bog + ", deducciones=" + deducciones + ", totaling_fuera_bog=" + totaling_fuera_bog + ", totaling_brutos="
+				+ ", cant_establec=" + cant_establec + ", regimen=" + regimen + ", total_ingr_periodo=" + total_ingr_periodo
+				+ ", deducciones=" + deducciones + ", totaling_fuera_bog=" + totaling_fuera_bog + ", totaling_brutos="
 				+ totaling_brutos + ", Devol_descuentos=" + Devol_descuentos + ", total_deduccion=" + total_deduccion
 				+ ", totaling_netos=" + totaling_netos + ", imp_indus_comer=" + imp_indus_comer + ", impuesto_aviso=" + impuesto_aviso
 				+ ", total_unidad_adic=" + total_unidad_adic + ", impuesto_cargo=" + impuesto_cargo + ", valor_rete_indus_comer="
 				+ valor_rete_indus_comer + ", saldo_cargo=" + saldo_cargo + ", valor_pagar=" + valor_pagar + ", sanciones="
 				+ sanciones + ", interes_mora=" + interes_mora + ", total_pagar=" + total_pagar + ", total_aporte_volun="
 				+ total_aporte_volun + ", proyecto_aporte=" + proyecto_aporte + ", tarifa_aporte=" + tarifa_aporte + ", check_aporte="
-				+ check_aporte + ", ing_netos_grava=" + ing_netos_grava + ", ing_por_CIIU=" + ing_por_CIIU + ", firmantes="
-				+ firmantes + "]";
+				+ check_aporte + ", ingFueraBog=" + ingFueraBog + ", ingNetosGrava=" + ingNetosGrava + ", ingPorCIIU=" + ingPorCIIU
+				+ ", firmantes=" + firmantes + "]";
 	}
+
 
 }

@@ -30,22 +30,49 @@ public class DefaultSDHCalculaICA2Facade implements SDHCalculaICA2Facade
 			try
 			{
 				LOG.info(response);
-				response = response.replace(",\"\"", "");
+				//				response = response.replace("\"\",\"\"", "");
+				//				response = response.replace(",\"\"", "");
 				response = response.replace("\"Regimen\":", "\"regimen\":");
 				response = response.replace("\"Periodo\":", "\"periodo\":");
 				response = response.replace("\"Opcion_uso\":", "\"opcion_uso\":");
 				response = response.replace("\"Cant_establec\":", "\"cant_establec\":");
 				response = response.replace("\"Total_ingr_periodo\":", "\"total_ingr_periodo\":");
-				response = response.replace("\"Ing_fuera_bog\":", "\"ing_fuera_bog\":");
+				response = response.replace("\"Ing_fuera_bog\":", "\"ingFueraBog\":"); //---
+				//				componentes:
+				response = response.replace("\"cod_CIIU\":", "\"codCIIU\":");
+				response = response.replace("\"cod_municipio\":", "\"codMunicipio\":");
 				response = response.replace("\"Deducciones\":", "\"deducciones\":");
+				//				componentes:
+				response = response.replace("\"Actnosub_pa\":", "\"actnosubPA\":");
+				response = response.replace("\"enaj_act_fijo\":", "\"enajActFijo\":");
+				response = response.replace("\"Export_bienes\":", "\"exportBienes\":");
+				response = response.replace("\"Export_serv\":", "\"exportServ\":");
+				response = response.replace("\"Actnosub39\":", "\"actnosub39\":");
+				response = response.replace("\"Actnosub_ph\":", "\"actnosubPH\":");
+				response = response.replace("\"juego_suerte_azar\":", "\"juegoSuerteAzar\":");
+				response = response.replace("\"Donaciones\":", "\"donaciones\":");
+				response = response.replace("\"Exen_actos\":", "\"exenActos\":");
+				response = response.replace("\"Base_grav_esp\":", "\"baseGravEsp\":");
+				response = response.replace("\"Ingr_act_consorc\":", "\"ingrActConsorc\":");
+				response = response.replace("\"Divi_nogiro_ord\":", "\"diviNOGiroOrd\":");
+				response = response.replace("\"Exen_victima\":", "\"exenVictima\":");
+				response = response.replace("\"Correc_moneda\":", "\"correcMoneda\":");
+				response = response.replace("\"Reintegro\":", "\"reintegro\":");
+				response = response.replace("\"Salarios\":", "\"salarios\":");
+				response = response.replace("\"Devoluciones\":", "\"devoluciones\":");
+				response = response.replace("\"Rebajas\":", "\"rebajas\":");
+				response = response.replace("\"Descuentos\":", "\"descuentos\":");
 
-				response = response.replace("\"Ing_netos_grava\":", "\"ing_netos_grava\":");
-				response = response.replace("\"Act_principal\":", "\"act_principal\":");
-				response = response.replace("\"Cod_ciiu\":", "\"cod_ciiu\":");
+				//				componentes:
+				response = response.replace("\"Ing_netos_grava\":", "\"ingNetosGrava\":"); //---
+				response = response.replace("\"Act_principal\":", "\"actPrincipal\":");
+				response = response.replace("\"Cod_ciiu\":", "\"codCIIU\":");
 				response = response.replace("\"Ingresos\":", "\"ingresos\":");
-				//				response = response.replace("\"Ing_por_CIIU\":", "\"ing_por_CIIU\":");
-				response = response.replace("\"Firmantes\":", "\"firmantes\":");
 
+				//				response = response.replace("\"Ing_por_CIIU\":", "\"ing_por_CIIU\":"); //---
+				//				componentes:
+
+				response = response.replace("\"Firmantes\":", "\"firmantes\":");
 				response = response.replace("\"Totaling_fuera_bog\":", "\"totaling_fuera_bog\":");
 				response = response.replace("\"Totaling_brutos\":", "\"totaling_brutos\":");
 				response = response.replace("\"Devol_descuentos\":", "\"devol_descuentos\":");

@@ -119,6 +119,14 @@ public class DetalleDatosEconomicos
 		this.pasivoPatrim = pasivoPatrim;
 	}
 
+	/**
+	 *
+	 */
+	public DetalleDatosEconomicos()
+	{
+		super();
+	}
+
 
 
 }

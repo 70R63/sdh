@@ -9,6 +9,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -114,7 +115,7 @@ public class IcaPageController extends SDHAbstractPageController
 	private static final String REDIRECT_TO_ICA_DOS_PAGE = REDIRECT_PREFIX + "/contribuyentes/icados";
 	private static final String REDIRECT_TO_ICA_DECLARACION_PAGE = REDIRECT_PREFIX + "/contribuyentes/ica/declaracion";
 
-	@Resource(name="sdhEnviaFirmasFacade")
+	@Resource(name = "sdhEnviaFirmasFacade")
 	SDHEnviaFirmasFacade sdhEnviaFirmasFacade;
 
 	@Resource(name = "customerFacade")
@@ -261,8 +262,7 @@ public class IcaPageController extends SDHAbstractPageController
 
 			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
 
-			final ICAInfObjetoResponse icaInfObjetoResponse = mapper
-					.readValue(response, ICAInfObjetoResponse.class);
+			final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 
 			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
 			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
@@ -321,9 +321,9 @@ public class IcaPageController extends SDHAbstractPageController
 		String anoGravable;
 
 		final CustomerData customerData2 = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData",customerData2);
-		addAgentsToModel(model, customerData2,null);
-		model.addAttribute("redirectURL","/contribuyentes/ica");
+		model.addAttribute("customerData", customerData2);
+		addAgentsToModel(model, customerData2, null);
+		model.addAttribute("redirectURL", "/contribuyentes/ica");
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
 		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
@@ -344,7 +344,7 @@ public class IcaPageController extends SDHAbstractPageController
 		}
 
 		addAgentsToModel(model, customerFacade.getCurrentCustomer());
-		model.addAttribute("customerData",customerFacade.getCurrentCustomer());
+		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 
@@ -519,16 +519,19 @@ public class IcaPageController extends SDHAbstractPageController
 		calcula2ImpuestoRequest.setFormulario(numForm);
 		final CalcICA2Response calcula2ImpuestoResponse = sdhCalculaICA2Facade.calcula(calcula2ImpuestoRequest);
 
-		super.addFirmantes_impuesto(model, calcula2ImpuestoResponse.getFirmantes(), currentUserData);
+		if (calcula2ImpuestoResponse != null)
+		{
+			super.addFirmantes_impuesto(model, calcula2ImpuestoResponse.getFirmantes(), currentUserData);
+		}
 
 		final String pnumObjeto = contribuyenteData2.getIca().getNumObjeto();
 
 		String numObjeto;
 		String anoGravable;
 
-		final CustomerData customerData2 = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData2);
-		addAgentsToModel(model, customerData2, null);
+		//		final CustomerData customerData2 = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", currentUserData);
+		addAgentsToModel(model, currentUserData, null);
 		model.addAttribute("redirectURL", "/contribuyentes/ica");
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
@@ -549,35 +552,55 @@ public class IcaPageController extends SDHAbstractPageController
 			return REDIRECT_TO_ICA_PAGE;
 		}
 
-		addAgentsToModel(model, customerFacade.getCurrentCustomer());
-		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
+		//		addAgentsToModel(model, customerFacade.getCurrentCustomer());
+		//		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 
 		icaInfObjetoRequest.setNumBP(representado);
 		icaInfObjetoRequest.setNumObjeto(numObjeto);
 		icaInfObjetoRequest.setAnoGravable(anoGravable);
-
-		if (!StringUtils.isBlank(periodoSeleccionado))
-		{
-			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
-		}
-		else
-		{
-			icaInfObjetoRequest.setPeriodo("");
-		}
+		//
+		//		if (!StringUtils.isBlank(periodoSeleccionado))
+		//		{
+		//			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
+		//		}
+		//		else
+		//		{
+		//			icaInfObjetoRequest.setPeriodo("");
+		//		}
 
 		try
 		{
 			icaInfObjetoFormResp = new ICAInfObjetoForm();
 
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			//			final ObjectMapper mapper = new ObjectMapper();
+			//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
-			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+			//			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+			//
+			//						icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+			//			Remapeo INICIO
+			icaInfObjetoResponse = new ICAInfObjetoResponse();
 
-			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
+			//			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(calcula2ImpuestoResponse.get);
+			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
+			infoDeclara.setTotalIngrPeriodo(calcula2ImpuestoResponse.getTotal_ingr_periodo());
+			infoDeclara.setTotalingFueraBog(calcula2ImpuestoResponse.getTotaling_fuera_bog());
+			infoDeclara.setTotalingBrutos(calcula2ImpuestoResponse.getTotaling_brutos());
+			infoDeclara.setDevolDescuentos(calcula2ImpuestoResponse.getDevol_descuentos());
+			//			infoDeclara.set(calcula2ImpuestoResponse);
+
+			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
+
+			icaInfObjetoResponse.setAnoGravable(calcula2ImpuestoResponse.getAnio_gravable());
+			icaInfObjetoResponse.setPeriodo(calcula2ImpuestoResponse.getPeriodo());
+			icaInfObjetoResponse.setCantEstablec(calcula2ImpuestoResponse.getCant_establec());
+			icaInfObjetoResponse.setRegimen(calcula2ImpuestoResponse.getRegimen());
+			icaInfObjetoResponse.setOpcionUso(calcula2ImpuestoResponse.getOpcion_uso());
+			//			Remapeo FIN
 
 			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
 			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
@@ -587,11 +610,14 @@ public class IcaPageController extends SDHAbstractPageController
 			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
 					.getIngPorCIIU();
 
-			for (int i = 0; i < IngPorCIIUList.size(); i++)
+			if (IngPorCIIUList != null)
 			{
-				if (IngPorCIIUList.get(i).getNumID() == null)
+				for (int i = 0; i < IngPorCIIUList.size(); i++)
 				{
-					IngPorCIIUList.remove(i);
+					if (IngPorCIIUList.get(i).getNumID() == null)
+					{
+						IngPorCIIUList.remove(i);
+					}
 				}
 			}
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
@@ -600,11 +626,14 @@ public class IcaPageController extends SDHAbstractPageController
 			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = icaInfObjetoFormResp.getIcaInfObjetoResponse()
 					.getInfoDeclara().getValorRetenido();
 
-			for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
+			if (ICAInfoValorRetenidoList != null)
 			{
-				if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+				for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
 				{
-					ICAInfoValorRetenidoList.remove(i);
+					if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+					{
+						ICAInfoValorRetenidoList.remove(i);
+					}
 				}
 			}
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
@@ -766,19 +795,20 @@ public class IcaPageController extends SDHAbstractPageController
 
 	}
 
-	@RequestMapping(value="/contribuyentes/ica/firmar",method=RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/ica/firmar", method = RequestMethod.POST)
 	@ResponseBody
-	public EnviaFirmasResponse enviaFirmas(final Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+	public EnviaFirmasResponse enviaFirmas(final Model model, @RequestBody
+	final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
 	{
 		final EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
 
 		enviaFirmasRequest.setNumForm(dataForm.getNumForm());
 
 
-		if(CollectionUtils.isNotEmpty(dataForm.getFirmantes()))
+		if (CollectionUtils.isNotEmpty(dataForm.getFirmantes()))
 		{
 			final List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
-			for(final FirmantesForm eachFirmante : dataForm.getFirmantes())
+			for (final FirmantesForm eachFirmante : dataForm.getFirmantes())
 			{
 				final FirmanteRequest firmante = new FirmanteRequest();
 
@@ -876,8 +906,7 @@ public class IcaPageController extends SDHAbstractPageController
 	}
 
 	private List<DetalleActivEconomicas> getGravableNetIncomes(final String numBp, final String numObjeto,
-			final String anioGravable,
-			final String periodo)
+			final String anioGravable, final String periodo)
 	{
 		final ICAInfObjetoRequest ica = new ICAInfObjetoRequest();
 		ica.setNumBP(numBp);
@@ -892,187 +921,187 @@ public class IcaPageController extends SDHAbstractPageController
 	}
 
 
-//	@RequestMapping(value = "/contribuyentes/ica/declaracion/show", method = RequestMethod.GET)
-//	@RequireHardLogIn
-//	public String show(final Model model, @RequestParam(required = false, value = "numForm")
-//	final String numForm, @RequestParam(required = false, value = "partner")
-//	final String partner) throws CMSItemNotFoundException
-//	{
-//		CalcICA2Request request = new CalcICA2Request();
-//
-//		request.setFormulario(numForm);
-//		request.setPartner(partner);
-//
-//
-//		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
-//		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
-//
-//		if (StringUtils.isAllBlank(pnumObjeto, panoGravable))
-//		{
-//			numObjeto = dataFormResponseICA.getNumObjeto();
-//			anoGravable = dataFormResponseICA.getAnoGravable();
-//		}
-//		else
-//		{
-//			numObjeto = pnumObjeto;
-//			anoGravable = panoGravable;
-//		}
-//		if (StringUtils.isAllBlank(numObjeto, anoGravable))
-//		{
-//			return REDIRECT_TO_ICA_PAGE;
-//		}
-//
-//		addAgentsToModel(model, customerFacade.getCurrentCustomer());
-//		model.addAttribute("customerData",customerFacade.getCurrentCustomer());
-//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-//		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
-//
-//		icaInfObjetoRequest.setNumBP(customerModel.getNumBP());
-//		icaInfObjetoRequest.setNumObjeto(numObjeto);
-//		icaInfObjetoRequest.setAnoGravable(anoGravable);
-//
-//		if (!StringUtils.isBlank(periodoSeleccionado))
-//		{
-//			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
-//		}
-//		else
-//		{
-//			icaInfObjetoRequest.setPeriodo("");
-//		}
-//
-//		try
-//		{
-//			icaInfObjetoFormResp = new ICAInfObjetoForm();
-//
-//			final ObjectMapper mapper = new ObjectMapper();
-//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//
-//
-//			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
-//
-//			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
-//
-//			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
-//			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
-//			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
-//			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
-//
-//			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
-//					.getIngPorCIIU();
-//
-//			for (int i = 0; i < IngPorCIIUList.size(); i++)
-//			{
-//				if (IngPorCIIUList.get(i).getNumID() == null)
-//				{
-//					IngPorCIIUList.remove(i);
-//				}
-//			}
-//			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
-//
-//
-//			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = icaInfObjetoFormResp.getIcaInfObjetoResponse()
-//					.getInfoDeclara().getValorRetenido();
-//
-//			for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
-//			{
-//				if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
-//				{
-//					ICAInfoValorRetenidoList.remove(i);
-//				}
-//			}
-//			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
-//
-//			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-//			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
-//			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
-//			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
-//			//redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-//
-//
-//		}
-//		catch (final Exception e)
-//		{
-//			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
-//
-//			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
-//			final List<ICAInfoIngFueraBog> listInfFueraBog = new ArrayList<ICAInfoIngFueraBog>();
-//			final List<ICAInfoValorRetenido> listvalorRetenido = new ArrayList<ICAInfoValorRetenido>();
-//			final List<ICAInfoIngNetosGrava> listIngNetosGrava = new ArrayList<ICAInfoIngNetosGrava>();
-//			final List<ICAInfoIngPorCiiu> listIngPorCIIU = new ArrayList<ICAInfoIngPorCiiu>();
-//
-//
-//			listInfFueraBog.add(new ICAInfoIngFueraBog());
-//			listvalorRetenido.add(new ICAInfoValorRetenido());
-//			listIngNetosGrava.add(new ICAInfoIngNetosGrava());
-//			listIngPorCIIU.add(new ICAInfoIngPorCiiu());
-//
-//			infoDeclara.setIngFueraBog(listInfFueraBog);
-//			infoDeclara.setValorRetenido(listvalorRetenido);
-//			infoDeclara.setIngNetosGrava(listIngNetosGrava);
-//			infoDeclara.setIngPorCIIU(listIngPorCIIU);
-//
-//			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
-//			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
-//			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-//		}
-//
-//		//informacion para PSE
-//		final CustomerModel customerData = (CustomerModel) userService.getCurrentUser();
-//		final String numBP = customerData.getNumBP();
-//
-//		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-//		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
-//		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
-//		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
-//		//		final String mensajeError = "";
-//		String[] mensajesError;
-//
-//
-//		contribuyenteRequest.setNumBP(numBP);
-//
-//		System.out.println("Request de validaCont: " + contribuyenteRequest);
-//		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-//		System.out.println("Response de validaCont: " + detalleContribuyente);
-//		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
-//		{
-//			if (icaInfObjetoResponse.getAnoGravable() != null)
-//			{
-//				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim());
-//			}
-//			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
-//			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
-//			infoPreviaPSE.setNumBP(numBP);
-//			try
-//			{
-//				infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
-//			}
-//			catch (final Exception e)
-//			{
-//				infoPreviaPSE.setClavePeriodo(icaInfObjetoResponse.getPeriodo());
-//			}
-//			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
-//			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
-//			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());
-//		}
-//		else
-//		{
-//			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-//			mensajesError = gasolinaService.prepararMensajesError(
-//					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
-//		}
-//		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
-//
-//		model.addAttribute("gravableNetIncomes",
-//				this.getGravableNetIncomes(numBP, numObjeto, anoGravable, icaInfObjetoRequest.getPeriodo()));
-//		//informacion para PSE
-//
-//		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
-//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
-//		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(DECLARACION_ACCOUNT_PROFILE));
-//		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-//
-//		return getViewForPage(model);
-//	}
+	//	@RequestMapping(value = "/contribuyentes/ica/declaracion/show", method = RequestMethod.GET)
+	//	@RequireHardLogIn
+	//	public String show(final Model model, @RequestParam(required = false, value = "numForm")
+	//	final String numForm, @RequestParam(required = false, value = "partner")
+	//	final String partner) throws CMSItemNotFoundException
+	//	{
+	//		CalcICA2Request request = new CalcICA2Request();
+	//
+	//		request.setFormulario(numForm);
+	//		request.setPartner(partner);
+	//
+	//
+	//		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
+	//		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
+	//
+	//		if (StringUtils.isAllBlank(pnumObjeto, panoGravable))
+	//		{
+	//			numObjeto = dataFormResponseICA.getNumObjeto();
+	//			anoGravable = dataFormResponseICA.getAnoGravable();
+	//		}
+	//		else
+	//		{
+	//			numObjeto = pnumObjeto;
+	//			anoGravable = panoGravable;
+	//		}
+	//		if (StringUtils.isAllBlank(numObjeto, anoGravable))
+	//		{
+	//			return REDIRECT_TO_ICA_PAGE;
+	//		}
+	//
+	//		addAgentsToModel(model, customerFacade.getCurrentCustomer());
+	//		model.addAttribute("customerData",customerFacade.getCurrentCustomer());
+	//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+	//		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+	//
+	//		icaInfObjetoRequest.setNumBP(customerModel.getNumBP());
+	//		icaInfObjetoRequest.setNumObjeto(numObjeto);
+	//		icaInfObjetoRequest.setAnoGravable(anoGravable);
+	//
+	//		if (!StringUtils.isBlank(periodoSeleccionado))
+	//		{
+	//			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
+	//		}
+	//		else
+	//		{
+	//			icaInfObjetoRequest.setPeriodo("");
+	//		}
+	//
+	//		try
+	//		{
+	//			icaInfObjetoFormResp = new ICAInfObjetoForm();
+	//
+	//			final ObjectMapper mapper = new ObjectMapper();
+	//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	//
+	//
+	//			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+	//
+	//			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+	//
+	//			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
+	//			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
+	//			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
+	//			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
+	//
+	//			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
+	//					.getIngPorCIIU();
+	//
+	//			for (int i = 0; i < IngPorCIIUList.size(); i++)
+	//			{
+	//				if (IngPorCIIUList.get(i).getNumID() == null)
+	//				{
+	//					IngPorCIIUList.remove(i);
+	//				}
+	//			}
+	//			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
+	//
+	//
+	//			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = icaInfObjetoFormResp.getIcaInfObjetoResponse()
+	//					.getInfoDeclara().getValorRetenido();
+	//
+	//			for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
+	//			{
+	//				if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+	//				{
+	//					ICAInfoValorRetenidoList.remove(i);
+	//				}
+	//			}
+	//			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
+	//
+	//			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+	//			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
+	//			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
+	//			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
+	//			//redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+	//
+	//
+	//		}
+	//		catch (final Exception e)
+	//		{
+	//			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
+	//
+	//			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
+	//			final List<ICAInfoIngFueraBog> listInfFueraBog = new ArrayList<ICAInfoIngFueraBog>();
+	//			final List<ICAInfoValorRetenido> listvalorRetenido = new ArrayList<ICAInfoValorRetenido>();
+	//			final List<ICAInfoIngNetosGrava> listIngNetosGrava = new ArrayList<ICAInfoIngNetosGrava>();
+	//			final List<ICAInfoIngPorCiiu> listIngPorCIIU = new ArrayList<ICAInfoIngPorCiiu>();
+	//
+	//
+	//			listInfFueraBog.add(new ICAInfoIngFueraBog());
+	//			listvalorRetenido.add(new ICAInfoValorRetenido());
+	//			listIngNetosGrava.add(new ICAInfoIngNetosGrava());
+	//			listIngPorCIIU.add(new ICAInfoIngPorCiiu());
+	//
+	//			infoDeclara.setIngFueraBog(listInfFueraBog);
+	//			infoDeclara.setValorRetenido(listvalorRetenido);
+	//			infoDeclara.setIngNetosGrava(listIngNetosGrava);
+	//			infoDeclara.setIngPorCIIU(listIngPorCIIU);
+	//
+	//			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
+	//			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
+	//			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+	//		}
+	//
+	//		//informacion para PSE
+	//		final CustomerModel customerData = (CustomerModel) userService.getCurrentUser();
+	//		final String numBP = customerData.getNumBP();
+	//
+	//		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+	//		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+	//		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+	//		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+	//		//		final String mensajeError = "";
+	//		String[] mensajesError;
+	//
+	//
+	//		contribuyenteRequest.setNumBP(numBP);
+	//
+	//		System.out.println("Request de validaCont: " + contribuyenteRequest);
+	//		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+	//		System.out.println("Response de validaCont: " + detalleContribuyente);
+	//		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+	//		{
+	//			if (icaInfObjetoResponse.getAnoGravable() != null)
+	//			{
+	//				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim());
+	//			}
+	//			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
+	//			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+	//			infoPreviaPSE.setNumBP(numBP);
+	//			try
+	//			{
+	//				infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
+	//			}
+	//			catch (final Exception e)
+	//			{
+	//				infoPreviaPSE.setClavePeriodo(icaInfObjetoResponse.getPeriodo());
+	//			}
+	//			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
+	//			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+	//			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());
+	//		}
+	//		else
+	//		{
+	//			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+	//			mensajesError = gasolinaService.prepararMensajesError(
+	//					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+	//		}
+	//		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+	//
+	//		model.addAttribute("gravableNetIncomes",
+	//				this.getGravableNetIncomes(numBP, numObjeto, anoGravable, icaInfObjetoRequest.getPeriodo()));
+	//		//informacion para PSE
+	//
+	//		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
+	//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
+	//		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(DECLARACION_ACCOUNT_PROFILE));
+	//		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+	//
+	//		return getViewForPage(model);
+	//	}
 
 
 }
