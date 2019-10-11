@@ -80,7 +80,7 @@
 							<label class="control-label"><spring:theme
 									code="publicidad.declaracion.firma.tipoiden" /></label> <input
 								disabled class="form-control FirmTipoId" disabled type="text"
-								value="${contribuyente_documentType}" maxlength="240"></input> <input
+								value="${contribuyente_documentType}" maxlength="240" id="lblcontribuyente_documentType"></input> <input
 								type="hidden" value="${contribuyente.documentType}"
 								id="contribuyente_documentType" />
 						</div>
@@ -89,7 +89,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="publicidad.declaracion.firma.numide" /></label> <input disabled
-								class="form-control FirmNumId" disabled type="text"
+								class="form-control FirmNumId" disabled type="text" id= "contribuyente_documentNumber"
 								value="${contribuyente_documentNumber}" maxlength="240"></input>
 						</div>
 					</div>
@@ -98,7 +98,7 @@
 						<div class="form-group">
 							<label class="control-label"><spring:theme
 									code="publicidad.declaracion.firma.numtarjeta" /></label> <input
-								disabled class="form-control FirmTarjetaProf" disabled
+								disabled class="form-control FirmTarjetaProf" disabled id="contribuyente_numBP"
 								type="text" value="${contribuyente_numBP}" maxlength="240"></input>
 						</div>
 					</div>

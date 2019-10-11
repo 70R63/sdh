@@ -19,6 +19,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -33,12 +34,15 @@ import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +60,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/contribuyentes/sobrevehiculosautomotores/detalle")
 public class SobreVehiculosController extends AbstractPageController
 {
+	private static final Logger LOG = Logger.getLogger(SobreVehiculosController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.vehiculos";
@@ -182,32 +187,92 @@ public class SobreVehiculosController extends AbstractPageController
 
 		final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
 		detalleVehiculosRequest.setBpNum(vehiculoInfo.getBpNum());
-		//		detalleVehiculosRequest.setBpNum("120");
 		detalleVehiculosRequest.setPlaca(vehiculoInfo.getPlaca());
 		detalleVehiculosRequest.setAnioGravable(vehiculoInfo.getAnioGravable());
 
 
 		try
 		{
+			vehiculosForm.setPlaca(vehiculoInfo.getPlaca());
+
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 			final DetalleVehiculosResponse detalleVehiculosResponse = mapper
 					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
 
-			vehiculosForm.setPlaca(vehiculoInfo.getPlaca());
-			//			vehiculosForm.setDetalle().setIdServicio(detalleVehiculosResponse.getIdServicio());
+			vehiculosForm.setDetalle(detalleVehiculosResponse.getDetalle());
 
+			vehiculosForm.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
+			vehiculosForm.setIdEstado(detalleVehiculosResponse.getDetalle().getIdEstado());
+			vehiculosForm.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
+			vehiculosForm.setClasicoAntig(detalleVehiculosResponse.getDetalle().getClasicoAntig());
+			vehiculosForm.setTipoVeh(detalleVehiculosResponse.getDetalle().getTipoVeh());
+			vehiculosForm.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
+			vehiculosForm.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
 
+			//			vehiculosForm.setFechaCambio(detalleVehiculosResponse.getDetalle().getFechaCambio());
+			final String FechaCambio = detalleVehiculosResponse.getDetalle().getFechaCambio();
+			if (StringUtils.isNotBlank(FechaCambio) && !"00000000".equals(FechaCambio))
+			{
+				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
+				final LocalDate localDate = LocalDate.parse(FechaCambio, formatter);
 
+				final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+				vehiculosForm.setFechaCambio(localDate.format(formatter2));
+			}
 
+			//			if (detalleVehiculosResponse.getDatosJuridicos() != null && !detalleVehiculosResponse.getDatosJuridicos().isEmpty())
+			//			{
+			//
+			//				for (final JuridicosVehiculos eachDetalleJur : detalleVehiculosResponse.getDatosJuridicos())
+			//				{
+			//					vehiculosForm.setTipoID(eachDetalleJur.getTipoID());
+			//					vehiculosForm.setNombre(eachDetalleJur.getNombre());
+			//					vehiculosForm.setNumID(eachDetalleJur.getNumID());
+			//					vehiculosForm.setCalidad(eachDetalleJur.getCalidad());
+			//					vehiculosForm.setProcProp(eachDetalleJur.getProcProp());
+			//
+			//					//								vehiculosForm.setFechaDesde(eachDetalleJur.getFechaDesde());
+			//					final String FechaDesde = eachDetalleJur.getFechaDesde();
+			//					if (StringUtils.isNotBlank(FechaDesde) && !"00000000".equals(FechaDesde))
+			//					{
+			//						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+			//
+			//						final LocalDate localDate = LocalDate.parse(FechaDesde, formatter);
+			//
+			//						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			//
+			//						vehiculosForm.setFechaDesde(localDate.format(formatter2));
+			//					}
+			//
+			//					//					vehiculosForm.setFechaHasta(eachDetalleJur.getFechaHasta());
+			//					final String FechaHasta = eachDetalleJur.getFechaHasta();
+			//					if (StringUtils.isNotBlank(FechaHasta) && !"00000000".equals(FechaHasta))
+			//					{
+			//						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+			//
+			//						final LocalDate localDate = LocalDate.parse(FechaHasta, formatter);
+			//
+			//						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			//
+			//						vehiculosForm.setFechaHasta(localDate.format(formatter2));
+			//					}
+			//
+			//					break;
+			//				}
+			//
+			//			}
+
+			vehiculosForm.setLiquidacion(detalleVehiculosResponse.getLiquidacion().stream()
+					.filter(eachDetLiq -> StringUtils.isNotBlank(eachDetLiq.getAnio())).collect(Collectors.toList()));
 		}
 		catch (final Exception e)
 		{
 			// XXX Auto-generated catch block
-			//			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
 		model.addAttribute("vehiculosForm", vehiculosForm);
@@ -215,7 +280,7 @@ public class SobreVehiculosController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_CMS_PAGE));
-		//		return REDIRECT_TO_DECLARACIONES_PUBLICIDAD_PAGE;
+
 		return vehiculosForm;
 	}
 
