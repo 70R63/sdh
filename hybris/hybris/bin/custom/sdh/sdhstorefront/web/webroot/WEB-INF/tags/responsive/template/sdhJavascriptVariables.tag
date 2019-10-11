@@ -14,6 +14,7 @@
 				ACC.aamenus = "${aamenus}";
 			</c:if>
 
+			
 			ACC.certifNombURL ="<c:url value='/contribuyentes/mirit/certifNomb' />";
 			ACC.validaCurrentPasswrodURL ="<c:url value='/contribuyentes/mirit/validCurrentPassword' />";
 			ACC.validaEmailURL ="<c:url value='/contribuyentes/mirit/validNewEmail' />";
@@ -68,6 +69,10 @@
 			
 			ACC.publicidadExteriorDetalleURL = "<c:url value='/contribuyentes/publicidadexterior/detalle' />";
 			
+			ACC.contribList = "<c:url value='/contribuyentes'/>";
+			
+			ACC.generaROPURL = "<c:url value='/contribuyentes/rop' />";
+			
 			ACC.publicidadExteriorDeclararionURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion' />";
 			
 			ACC.publicidadExteriorCalculoURL = "<c:url value='/contribuyentes/publicidadexterior/declaracion/calculo' />";
@@ -102,17 +107,23 @@
 
 			ACC.casoConsultaURL= "<c:url value='/contribuyentes/tramites/consultaCaso' />";			
 
-			ACC.declaracionPDFURL= "<c:url value='/contribuyentes/consultas/declaraciones/declaracionPDF' />";			
+			ACC.declaracionPDFURL= "<c:url value='/contribuyentes/consultas/declaraciones/declaracionPDF' />";	
+
+			ACC.declaracionImprimirURL= "<c:url value='/contribuyentes/consultas/certideclaraciones/declaracionImprimir' />";	
 			
 			ACC.listaDeclaracionesURL= "<c:url value='/contribuyentes/consultas/declaraciones/listaDeclaraciones' />";	
 
 			ACC.certiPagosListaURL= "<c:url value='/contribuyentes/consultas/certipagos/listaPagos' />";	
 			
-			ACC.certiPagoImprimeURL= "<c:url value='/contribuyentes/consultas/certipagos/imprimir' />";	
+			ACC.certiPagoImprimeURL= "<c:url value='/contribuyentes/consultas/certipagos/pagoImprimir' />";	
+			
+			ACC.vehiculosDetalleURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/detalle/vehiculo' />";
+			
+			
 			
 		  	ACC.currentURL = "${currentURL}";
 
-		  	ACC.generaROPURL = "<c:url value='/contribuyentes/rop' />";
+		  	
 			
 		  	<c:if test="${not empty reteICATemplateURL}">
 		  		ACC.reteICADownloadTemplate ="${reteICATemplateURL}";

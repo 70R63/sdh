@@ -13,22 +13,35 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.CreaCasosArchiInfoRequest;
+import de.hybris.sdh.core.pojos.requests.CreaCasosArchiRequest;
+import de.hybris.sdh.core.pojos.requests.CreaCasosAtribRequest;
+import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.ValidaContribuyenteRequest;
+import de.hybris.sdh.core.pojos.responses.CreaCasoArchVista;
+import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
+import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.QuestionForRegistrationResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.responses.TramitesCreacionCasoInfo;
+import de.hybris.sdh.core.pojos.responses.TramitesSeleccionInfo;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHCustomerAccountService;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGetQuestionsForRegistration;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHValidaContribuyenteFacade;
 import de.hybris.sdh.storefront.checkout.steps.validation.impl.SDHRegistrationValidator;
 import de.hybris.sdh.storefront.controllers.ControllerConstants;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.SDHRegisterForm;
 import de.hybris.sdh.storefront.forms.SearchUserForm;
 import de.hybris.sdh.storefront.forms.SecretAnswerForm;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -77,8 +90,14 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 	@Resource(name = "sdhCustomerAccountService")
 	private SDHCustomerAccountService sdhCustomerAccountService;
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "sdhDetalleGasolina")
+	SDHDetalleGasolina sdhDetalleGasolinaWS;
 
 	@Override
 	protected AbstractPageModel getCmsPage() throws CMSItemNotFoundException
@@ -233,6 +252,135 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 		return getDefaultRegistrationPage(model);
 	}
 
+
+	@RequestMapping(value = "/postRol", method = RequestMethod.POST)
+	public String postRol(final Model model, final TramitesCreacionCasoInfo tramitesCreacionCasoInfo)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("------------------En POST creacion rol------------------------");
+
+		//customerModel = (CustomerModel) userService.getCurrentUser();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final TramitesSeleccionInfo tramitesSeleccionInfo = new TramitesSeleccionInfo();
+		//final List<ItemSelectOption> elementosResponse = new ArrayList<ItemSelectOption>();
+		final List<TramiteOpcion> elementos = new ArrayList<TramiteOpcion>();
+		TramiteOpcion elementoSeleccionado = null;
+		String busquedaSubKey = "";
+		final CreaCasosRequest creaCasosRequest = new CreaCasosRequest();
+		CreaCasosResponse creaCasosResponse = new CreaCasosResponse();
+		final List<CreaCasosAtribRequest> atributos = new ArrayList<CreaCasosAtribRequest>();
+		final List<CreaCasosArchiRequest> archivos = new ArrayList<CreaCasosArchiRequest>();
+		final List<CreaCasoArchVista> inputInfoArchivos = new ArrayList<CreaCasoArchVista>();
+		CreaCasoArchVista inputInfoArchivo_tmp = null;
+		CreaCasosArchiRequest archivoCarga = null;
+		CreaCasosArchiInfoRequest archivosInfo = null;
+		CreaCasosAtribRequest atributo = null;
+		String processType = "";
+		String categoriza = "";
+		String descripcion = "";
+		String canal = "";
+		String bp = "";
+		String mensaje = "";
+
+
+
+		//01010101
+		agregarElementoTramites(elementos, "01010101", "01", "Persona Natural", "ZT02", "A1ZTRT0004Z065");
+		agregarElementoTramites(elementos, "01010102", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z065");
+
+
+		tramitesSeleccionInfo.setNivelSeleccion(tramitesCreacionCasoInfo.getNivelSeleccion());
+		tramitesSeleccionInfo.setValorN0(tramitesCreacionCasoInfo.getValorN0());
+		tramitesSeleccionInfo.setValorN1(tramitesCreacionCasoInfo.getValorN1());
+		tramitesSeleccionInfo.setValorN2(tramitesCreacionCasoInfo.getValorN2());
+		tramitesSeleccionInfo.setValorN3(tramitesCreacionCasoInfo.getValorN3());
+
+		if (tramitesCreacionCasoInfo.getDesA0() != null)
+		{
+			if (!tramitesCreacionCasoInfo.getDesA0().equals(""))
+			{
+				inputInfoArchivo_tmp = new CreaCasoArchVista();
+				inputInfoArchivo_tmp.setDescArchivo(tramitesCreacionCasoInfo.getDesA0());
+				inputInfoArchivo_tmp.setContenidoArchivo(tramitesCreacionCasoInfo.getConA0());
+				inputInfoArchivo_tmp.setSerie_id(tramitesCreacionCasoInfo.getSeri0());
+				inputInfoArchivo_tmp.setSserie_id(tramitesCreacionCasoInfo.getSser0());
+				inputInfoArchivo_tmp.setDepend_id(tramitesCreacionCasoInfo.getDepe0());
+				inputInfoArchivo_tmp.setTipoDoc_id(tramitesCreacionCasoInfo.getTipd0());
+				inputInfoArchivos.add(inputInfoArchivo_tmp);
+			}
+		}
+
+		busquedaSubKey = obtenerKeyCrearTramite(tramitesSeleccionInfo);
+
+		for (final TramiteOpcion elemento : elementos)
+		{
+			if (elemento.getKey().equals(busquedaSubKey))
+			{
+				elementoSeleccionado = elemento;
+			}
+		}
+
+		if (elementoSeleccionado != null)
+		{
+			if (elementoSeleccionado.getProcessID() != null && elementoSeleccionado.getCategorizacion() != null)
+			{
+				processType = elementoSeleccionado.getProcessID();
+				categoriza = elementoSeleccionado.getCategorizacion();
+				descripcion = elementoSeleccionado.getTramiteOpcion().getLabel();
+				bp = getSessionService().getAttribute("numBP");
+				canal = "03";
+				mensaje = tramitesCreacionCasoInfo.getMensaje();
+
+
+				atributo = new CreaCasosAtribRequest("String 1", "PROCESS_TYPE", processType);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "DESCRIPCION", descripcion);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "ID_DESCRIPCION", categoriza);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "CONTRIBUYENTE", bp);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "CANAL", canal);
+				atributos.add(atributo);
+				atributo = new CreaCasosAtribRequest("String 1", "COMENTARIO", mensaje);
+				atributos.add(atributo);
+
+				if (inputInfoArchivos.size() > 0)
+				{
+					for (final CreaCasoArchVista elemento : inputInfoArchivos)
+					{
+            		archivoCarga = new CreaCasosArchiRequest();
+            		archivoCarga.setZZWCC_DEPEND_ID(elemento.getDepend_id());
+            		archivoCarga.setZZWCC_SERIE_ID(elemento.getSerie_id());
+            		archivoCarga.setZZWCC_SSERIE_ID(elemento.getSserie_id());
+            		archivoCarga.setZZWCC_TIPODOC_ID(elemento.getTipoDoc_id());
+            		archivoCarga.setZZWCC_DESC_TIPODOC(elemento.getDescArchivo());
+            		archivoCarga.setZZWCC_ARCIVO(elemento.getContenidoArchivo());
+            		archivos.add(archivoCarga);
+					}
+					archivosInfo = new CreaCasosArchiInfoRequest();
+					archivosInfo.setArchivos(archivos);
+				}
+
+				creaCasosRequest.setAtributos(atributos);
+				creaCasosRequest.setArchivosInfo(archivosInfo);
+
+				System.out.println("Request para crm/creaCasos: " + creaCasosRequest);
+				creaCasosResponse = gasolinaService.creacionCaso(creaCasosRequest, sdhDetalleGasolinaWS, LOG);
+				System.out.println("Response de crm/creaCasos: " + creaCasosResponse);
+				if (gasolinaService.ocurrioErrorCreacionCaso(creaCasosResponse) != true)
+				{
+				}
+				else
+				{
+				}
+			}
+		}
+
+
+		return "redirect:/login";
+	}
+
 	@RequestMapping(value = "/getQuestion", method = RequestMethod.GET)
 	public String getQuestions(final Model model, @RequestParam(value = "currentQuestion", defaultValue = "0")
 	final int currentQuestion, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
@@ -255,6 +403,7 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 					|| sdhConsultaContribuyenteBPResponse.getRoles().isEmpty()))
 			{
 				model.addAttribute("currentSection", "requestRols");
+				model.addAttribute("tramitesCreacionCasoInfo", new TramitesCreacionCasoInfo());
 				return getDefaultRegistrationPage(model);
 			}
 		}
@@ -453,5 +602,51 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 
 		return processRegisterUserRequest(null, form, bindingResult, model, request, response, redirectModel);
 
+	}
+
+	private void agregarElementoTramites(final List<TramiteOpcion> elementos, final String claveBusqueda,
+			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String processID,
+			final String idCategorizacion)
+	{
+		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion), processID,
+				idCategorizacion, "02"));
+
+	}
+
+	private String obtenerKeyCrearTramite(final TramitesSeleccionInfo infoSeleccion)
+	{
+		final StringBuffer sb = new StringBuffer();
+
+
+		if (infoSeleccion.getValorN0() != null && !infoSeleccion.getValorN0().isEmpty())
+		{
+			sb.append(infoSeleccion.getValorN0());
+			if (infoSeleccion.getValorN1() != null && !infoSeleccion.getValorN1().isEmpty())
+			{
+				sb.append(infoSeleccion.getValorN1());
+				if (infoSeleccion.getValorN2() != null && !infoSeleccion.getValorN2().isEmpty())
+				{
+					sb.append(infoSeleccion.getValorN2());
+					if (infoSeleccion.getValorN3() != null && !infoSeleccion.getValorN3().isEmpty())
+					{
+						sb.append(infoSeleccion.getValorN3());
+					}
+					else
+					{
+						sb.append("__");
+					}
+				}
+				else
+				{
+					sb.append("____");
+				}
+			}
+			else
+			{
+				sb.append("______");
+			}
+		}
+
+		return sb.toString();
 	}
 }

@@ -32,3 +32,14 @@
 		</c:otherwise>
 	</c:choose>
 </template:page>
+
+<script  type="text/javascript">
+function changeMessage() {
+	debugger;
+	var rol = document.getElementById("rol").value;
+	var email = document.getElementById("email").value;
+	var mensaje = document.getElementById("mensaje").value;
+	mensaje = "(rol="+rol+")"+"(email="+email+")"+"(mensaje="+mensaje+")";
+	document.getElementById("mensaje").value = mensaje;
+}
+</script>

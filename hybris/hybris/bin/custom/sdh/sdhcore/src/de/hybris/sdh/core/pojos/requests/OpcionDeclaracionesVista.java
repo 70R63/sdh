@@ -53,8 +53,82 @@ public class OpcionDeclaracionesVista
 	private String numDoc;
 	private String tipoDoc;
 	private String clavePeriodo;
+	private String referencia;
 	private String importe;
 
+	private String fechaCompensa;
+	private String moneda;
+	private String numDocPago;
+
+
+
+	/**
+	 * @return the fechaCompensa
+	 */
+	public String getFechaCompensa()
+	{
+		return fechaCompensa;
+	}
+
+	/**
+	 * @param fechaCompensa
+	 *           the fechaCompensa to set
+	 */
+	public void setFechaCompensa(final String fechaCompensa)
+	{
+		this.fechaCompensa = fechaCompensa;
+	}
+
+	/**
+	 * @return the moneda
+	 */
+	public String getMoneda()
+	{
+		return moneda;
+	}
+
+	/**
+	 * @param moneda
+	 *           the moneda to set
+	 */
+	public void setMoneda(final String moneda)
+	{
+		this.moneda = moneda;
+	}
+
+	/**
+	 * @return the numDocPago
+	 */
+	public String getNumDocPago()
+	{
+		return numDocPago;
+	}
+
+	/**
+	 * @param numDocPago
+	 *           the numDocPago to set
+	 */
+	public void setNumDocPago(final String numDocPago)
+	{
+		this.numDocPago = numDocPago;
+	}
+
+	/**
+	 * @return the referencia
+	 */
+	public String getReferencia()
+	{
+		return referencia;
+	}
+
+	/**
+	 * @param referencia
+	 *           the referencia to set
+	 */
+	public void setReferencia(final String referencia)
+	{
+		this.referencia = referencia;
+	}
 
 	/**
 	 * @return the declaracionesCertiPagos

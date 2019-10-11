@@ -9,10 +9,10 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<h3>
+		<h2>
 			<span><spring:theme
 					code="declaracion.publicidad.FirmaDeclarante" /></span>
-		</h3>
+		</h2>
 	</div>
 </div>
 

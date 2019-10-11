@@ -14,10 +14,10 @@
 
 		<div class="row">
 			<div class="col-md-6 headline">
-				<h3>
+				<h2>
 					<span tabindex="0"><spring:theme
 							code="impuestos.decGasolina.DatosRevisor.titulo" /></span>
-				</h3>
+				</h2>
 			</div>
 		</div>
 

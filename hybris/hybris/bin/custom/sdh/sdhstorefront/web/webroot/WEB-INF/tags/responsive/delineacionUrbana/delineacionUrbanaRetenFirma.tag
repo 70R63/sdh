@@ -14,9 +14,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
-			<h3>
+			<h2>
 				<span><spring:theme code="delineacion.urbana.dec.firm.title" /></span>
-			</h3>
+			</h2>
 		</div>
 	</div>
 

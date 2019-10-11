@@ -106,7 +106,6 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
 ;;TramitesLink;"Formalites";"Click here for menu item Formalites"
 ;;FacturacionLink;"Billing";"Click here for menu item Billing"
 ;;DeclaracionesLink;"Declaratios";"Click here for menu item Declarations"
-;;PagosLink;"Payments";"Click here for menu item Payments"
 ;;ConsultasLink;"Queries";"Click here for menu item Queries"
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
@@ -128,8 +127,6 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
-;;AnulacionFacturaLink;"Bill Cancellation";"Click here for menu item menu Bill Cancellation"
-;;ModificacionFacturaLink;"Bill Modification";"Click here for menu item menu Bill Modification"
 #->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
@@ -139,12 +136,9 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
 
 #->INI dev-eduardo Agregar submenu DECLARACION 04/01/2019
 ;;PresentarDeclaracionLink;"Submit Statement";"Click here for menu item menu Submit Statement"
-;;ListaDeclaracionFirmaLink;"Declaration List to sign";"Click here for menu item menu Declaration List to sign"
 #->FIN dev-eduardo Agregar submenu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGO 04/01/2019
-;;GeneracionROPLink;"ROP Generation";"Click here for menu item menu ROP Generation"
-;;PagoLineaLink;"Online Payment";"Click here for menu item menu Online Payment"
 #->FIN dev-eduardo Agregar submenu PAGO 04/01/2019
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019

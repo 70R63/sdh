@@ -30,7 +30,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4 col-md-offset-3">
-				<label class="control-label "><spring:theme
+				<label class="control-label format_label "><spring:theme
 						code="delineacion.urbana.radicados.question1" /></label> <input
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important"
 					type="radio" name="optradio" id="optradio1" onclick="seleccion2(this)" value="1">

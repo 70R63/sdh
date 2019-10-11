@@ -6,12 +6,13 @@ public class ConsulFirmasDeclaracionesResponse {
     String impuesto;
     String anioGravable;
     String periodo;
+	private String estadoFirma;
 
     public String getIdDeclaracion() {
         return idDeclaracion;
     }
 
-    public void setIdDeclaracion(String idDeclaracion) {
+    public void setIdDeclaracion(final String idDeclaracion) {
         this.idDeclaracion = idDeclaracion;
     }
 
@@ -19,7 +20,7 @@ public class ConsulFirmasDeclaracionesResponse {
         return impuesto;
     }
 
-    public void setImpuesto(String impuesto) {
+    public void setImpuesto(final String impuesto) {
         this.impuesto = impuesto;
     }
 
@@ -27,7 +28,7 @@ public class ConsulFirmasDeclaracionesResponse {
         return anioGravable;
     }
 
-    public void setAnioGravable(String anioGravable) {
+    public void setAnioGravable(final String anioGravable) {
         this.anioGravable = anioGravable;
     }
 
@@ -35,7 +36,36 @@ public class ConsulFirmasDeclaracionesResponse {
         return periodo;
     }
 
-    public void setPeriodo(String periodo) {
+    public void setPeriodo(final String periodo) {
         this.periodo = periodo;
     }
+
+	/**
+	 * @return the estadoFirma
+	 */
+	public String getEstadoFirma()
+	{
+		return estadoFirma;
+	}
+
+	/**
+	 * @param estadoFirma
+	 *           the estadoFirma to set
+	 */
+	public void setEstadoFirma(final String estadoFirma)
+	{
+		this.estadoFirma = estadoFirma;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ConsulFirmasDeclaracionesResponse [idDeclaracion=" + idDeclaracion + ", impuesto=" + impuesto + ", anioGravable="
+				+ anioGravable + ", periodo=" + periodo + ", estadoFirma=" + estadoFirma + "]";
+	}
 }

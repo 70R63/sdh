@@ -36,50 +36,50 @@
 	<div>
 		<div class="row">
 			<div class="col-md-1" style="width: 10.5% !important">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.angrav" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.tipdoc" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label style=" text-transform: none !important;" class="control-label"
+				<label style=" text-transform: none !important;" class="control-label format_label"
 					for=""> <spring:theme code="ica.declaracion.valor.numide" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.nombre" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme
 						code="ica.declaracion.valor.direccion" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.tel" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme
 						code="ica.declaracion.valor.municipio" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme
 						code="ica.declaracion.valor.taraplicada" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label class="control-label" style="text-transform: none !important"
+				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.montoret" />
 				</label>
 			</div>

@@ -28,6 +28,22 @@
 	
 	
 <script>	
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){ //EMP-codigo comentado por observaciones en pruebas realizadas el 04 de octubre 2019
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+
+}
 	function goBack() {
 		window.history.back();
 	}
