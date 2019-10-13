@@ -127,6 +127,9 @@ public class DetalleDatosEconomicos
 		super();
 	}
 
-
+	public DetalleDatosEconomicos(final String str)
+	{
+		super();
+	}
 
 }
