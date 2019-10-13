@@ -583,7 +583,7 @@ public class IcaPageController extends SDHAbstractPageController
 			//						icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 			//			Remapeo INICIO
 			icaInfObjetoResponse = new ICAInfObjetoResponse();
-			List<ICAInfoValorRetenido> valorRetenido = new ArrayList<ICAInfoValorRetenido>();
+			final List<ICAInfoValorRetenido> valorRetenido = new ArrayList<ICAInfoValorRetenido>();
 
 			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
@@ -617,7 +617,7 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setTotalAporteVolun(calcula2ImpuestoResponse.getTotalAporteVolun());
 
 			//			private String valorImpAviso;
-			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
+
 
 			icaInfObjetoResponse.setAnoGravable(calcula2ImpuestoResponse.getAnio_gravable());
 			icaInfObjetoResponse.setPeriodo(calcula2ImpuestoResponse.getPeriodo());
@@ -631,36 +631,42 @@ public class IcaPageController extends SDHAbstractPageController
 			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
 			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
 
-			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
-					.getIngPorCIIU();
+			final List<ICAInfoIngPorCiiu> IngPorCIIUList = infoDeclara.getIngPorCIIU();
 
 			if (IngPorCIIUList != null)
 			{
 				for (int i = 0; i < IngPorCIIUList.size(); i++)
 				{
-					if (IngPorCIIUList.get(i).getNumID() == null)
+					if (IngPorCIIUList.get(i) != null)
 					{
-						IngPorCIIUList.remove(i);
+						if (IngPorCIIUList.get(i).getNumID() == null)
+						{
+							IngPorCIIUList.remove(i);
+						}
 					}
 				}
 			}
-			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
+			infoDeclara.setIngPorCIIU(IngPorCIIUList);
 
 
-			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = icaInfObjetoFormResp.getIcaInfObjetoResponse()
-					.getInfoDeclara().getValorRetenido();
+			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = infoDeclara.getValorRetenido();
 
 			if (ICAInfoValorRetenidoList != null)
 			{
 				for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
 				{
-					if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+					if (ICAInfoValorRetenidoList.get(i) != null)
 					{
-						ICAInfoValorRetenidoList.remove(i);
+						if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+						{
+							ICAInfoValorRetenidoList.remove(i);
+						}
 					}
 				}
 			}
-			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
+			infoDeclara.setValorRetenido(ICAInfoValorRetenidoList);
+
+			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
