@@ -64,7 +64,7 @@ public class DefaultSDHCalculaICA2Facade implements SDHCalculaICA2Facade
 				//				response = response.replace("\"descrip_ciiu\":", "\"_\":"); //Este no esta en el pojo
 				response = response.replace("\"Ing_bruto_siniva\":", "\"ingBrutoSINIVA\":");
 				response = response.replace("\"Valor_total_devol\":", "\"valorTotalDevo\":");
-				//				response = response.replace("\"Deducciones\":", "\"deducciones\":"); //---
+				response = response.replace("\"Deducciones\":", "\"deducciones\":"); //---
 				//				componentes:
 				response = response.replace("\"Actnosub_pa\":", "\"actnosubPA\":");
 				response = response.replace("\"enaj_act_fijo\":", "\"enajActFijo\":");

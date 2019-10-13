@@ -9,7 +9,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -591,6 +590,7 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setTotalingFueraBog(calcula2ImpuestoResponse.getTotalingFueraBog());
 			infoDeclara.setTotalingBrutos(calcula2ImpuestoResponse.getTotalingBrutos());
 			infoDeclara.setDevolDescuentos(calcula2ImpuestoResponse.getDevolDescuentos());
+			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
 
 			valorRetenido.add(calcula2ImpuestoResponse.getValorRetenido());
 			infoDeclara.setValorRetenido(valorRetenido);
@@ -624,6 +624,7 @@ public class IcaPageController extends SDHAbstractPageController
 			icaInfObjetoResponse.setCantEstablec(calcula2ImpuestoResponse.getCantEstablec());
 			icaInfObjetoResponse.setRegimen(calcula2ImpuestoResponse.getRegimen());
 			icaInfObjetoResponse.setOpcionUso(calcula2ImpuestoResponse.getOpcionUso());
+			icaInfObjetoResponse.setNumForm(numForm);
 			//			Remapeo FIN
 
 			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
@@ -716,9 +717,10 @@ public class IcaPageController extends SDHAbstractPageController
 
 		contribuyenteRequest.setNumBP(numBP);
 
-		System.out.println("Request de validaCont: " + contribuyenteRequest);
-		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-		System.out.println("Response de validaCont: " + detalleContribuyente);
+		//		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		//		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		//		System.out.println("Response de validaCont: " + detalleContribuyente);
+		detalleContribuyente = contribuyenteData2;
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
 			if (icaInfObjetoResponse.getAnoGravable() != null)
