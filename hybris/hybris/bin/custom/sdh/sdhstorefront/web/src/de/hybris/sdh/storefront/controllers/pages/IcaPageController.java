@@ -560,15 +560,15 @@ public class IcaPageController extends SDHAbstractPageController
 		icaInfObjetoRequest.setNumBP(representado);
 		icaInfObjetoRequest.setNumObjeto(numObjeto);
 		icaInfObjetoRequest.setAnoGravable(anoGravable);
-		//
-		//		if (!StringUtils.isBlank(periodoSeleccionado))
-		//		{
-		//			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
-		//		}
-		//		else
-		//		{
-		//			icaInfObjetoRequest.setPeriodo("");
-		//		}
+
+		if (!StringUtils.isBlank(periodoSeleccionado))
+		{
+			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
+		}
+		else
+		{
+			icaInfObjetoRequest.setPeriodo("");
+		}
 
 		try
 		{
