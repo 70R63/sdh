@@ -583,23 +583,47 @@ public class IcaPageController extends SDHAbstractPageController
 			//						icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 			//			Remapeo INICIO
 			icaInfObjetoResponse = new ICAInfObjetoResponse();
+			List<ICAInfoValorRetenido> valorRetenido = new ArrayList<ICAInfoValorRetenido>();
 
 			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
-			//			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(calcula2ImpuestoResponse.get);
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
-			infoDeclara.setTotalIngrPeriodo(calcula2ImpuestoResponse.getTotal_ingr_periodo());
-			infoDeclara.setTotalingFueraBog(calcula2ImpuestoResponse.getTotaling_fuera_bog());
-			infoDeclara.setTotalingBrutos(calcula2ImpuestoResponse.getTotaling_brutos());
-			infoDeclara.setDevolDescuentos(calcula2ImpuestoResponse.getDevol_descuentos());
-			//			infoDeclara.set(calcula2ImpuestoResponse);
+			infoDeclara.setTotalIngrPeriodo(calcula2ImpuestoResponse.getTotalIngrPeriodo());
+			infoDeclara.setTotalingFueraBog(calcula2ImpuestoResponse.getTotalingFueraBog());
+			infoDeclara.setTotalingBrutos(calcula2ImpuestoResponse.getTotalingBrutos());
+			infoDeclara.setDevolDescuentos(calcula2ImpuestoResponse.getDevolDescuentos());
 
+			valorRetenido.add(calcula2ImpuestoResponse.getValorRetenido());
+			infoDeclara.setValorRetenido(valorRetenido);
+			infoDeclara.setIngNetosGrava(calcula2ImpuestoResponse.getIngNetosGrava());
+			infoDeclara.setIngFueraBog(calcula2ImpuestoResponse.getIngFueraBog());
+			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
+			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
+
+			infoDeclara.setTotalDeduccion(calcula2ImpuestoResponse.getTotalDeduccion());
+			infoDeclara.setTotalingNetos(calcula2ImpuestoResponse.getTotalingNetos());
+			infoDeclara.setImpIndusComer(calcula2ImpuestoResponse.getImpIndusComer());
+			infoDeclara.setImpuestoAviso(calcula2ImpuestoResponse.getImpuestoAviso());
+			infoDeclara.setTotalUnidadAdic(calcula2ImpuestoResponse.getTotalUnidadAdic());
+			infoDeclara.setImpuestoCargo(calcula2ImpuestoResponse.getImpuestoCargo());
+			infoDeclara.setValorReteIndus(calcula2ImpuestoResponse.getValorReteIndus());
+			infoDeclara.setSaldoCargo(calcula2ImpuestoResponse.getSaldoCargo());
+			infoDeclara.setValorPagar(calcula2ImpuestoResponse.getValorPagar());
+			infoDeclara.setSanciones(calcula2ImpuestoResponse.getSanciones());
+			infoDeclara.setInteresMora(calcula2ImpuestoResponse.getInteresMora());
+			infoDeclara.setTotalPagar(calcula2ImpuestoResponse.getTotalPagar());
+			infoDeclara.setCheckAporte(calcula2ImpuestoResponse.getCheckAporte());
+			infoDeclara.setProyectoAporte(calcula2ImpuestoResponse.getProyectoAporte());
+			infoDeclara.setTarifaAporte(calcula2ImpuestoResponse.getTarifaAporte());
+			infoDeclara.setTotalAporteVolun(calcula2ImpuestoResponse.getTotalAporteVolun());
+
+			//			private String valorImpAviso;
 			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
 
 			icaInfObjetoResponse.setAnoGravable(calcula2ImpuestoResponse.getAnio_gravable());
 			icaInfObjetoResponse.setPeriodo(calcula2ImpuestoResponse.getPeriodo());
-			icaInfObjetoResponse.setCantEstablec(calcula2ImpuestoResponse.getCant_establec());
+			icaInfObjetoResponse.setCantEstablec(calcula2ImpuestoResponse.getCantEstablec());
 			icaInfObjetoResponse.setRegimen(calcula2ImpuestoResponse.getRegimen());
-			icaInfObjetoResponse.setOpcionUso(calcula2ImpuestoResponse.getOpcion_uso());
+			icaInfObjetoResponse.setOpcionUso(calcula2ImpuestoResponse.getOpcionUso());
 			//			Remapeo FIN
 
 			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
@@ -642,7 +666,7 @@ public class IcaPageController extends SDHAbstractPageController
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
 			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
 			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
-			//redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
+			//			redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 
 
 		}

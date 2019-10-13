@@ -34,14 +34,36 @@ public class DefaultSDHCalculaICA2Facade implements SDHCalculaICA2Facade
 				//				response = response.replace(",\"\"", "");
 				response = response.replace("\"Regimen\":", "\"regimen\":");
 				response = response.replace("\"Periodo\":", "\"periodo\":");
-				response = response.replace("\"Opcion_uso\":", "\"opcion_uso\":");
-				response = response.replace("\"Cant_establec\":", "\"cant_establec\":");
-				response = response.replace("\"Total_ingr_periodo\":", "\"total_ingr_periodo\":");
+				response = response.replace("\"Opcion_uso\":", "\"opcionUso\":");
+				response = response.replace("\"Cant_establec\":", "\"cantEstablec\":");
+				response = response.replace("\"Total_ingr_periodo\":", "\"totalIngrPeriodo\":");
 				response = response.replace("\"Ing_fuera_bog\":", "\"ingFueraBog\":"); //---
 				//				componentes:
 				response = response.replace("\"cod_CIIU\":", "\"codCIIU\":");
 				response = response.replace("\"cod_municipio\":", "\"codMunicipio\":");
-				response = response.replace("\"Deducciones\":", "\"deducciones\":");
+				response = response.replace("\"Valor_retenido\":", "\"valorRetenido\":"); //---
+				//				componentes:
+				response = response.replace("\"Anio_gravable\":", "\"anoGravable\":");
+				response = response.replace("\"Tipo_id\":", "\"tipoID\":");
+				response = response.replace("\"Num_id\":", "\"numID\":");
+				response = response.replace("\"Telefono\":", "\"telefono\":");
+				response = response.replace("\"Tarifa_apl\":", "\"tarifaApl\":");
+				response = response.replace("\"Monto_retenido\":", "\"montoRetenido\":");
+				response = response.replace("\"Ing_por_CIIU\":", "\"ingPorCIIU\":"); //---
+				//				componentes:
+				//				response = response.replace("\"Anio_gravable\":", "\"anoGravable\":");
+				//				response = response.replace("\"Tipo_id\":", "\"tipoID\":");
+				//				response = response.replace("\"Num_id\":", "\"numID\":");
+				response = response.replace("\"Razon_social\":", "\"razonSocial\":");
+				response = response.replace("\"Direccion\":", "\"direccion\":");
+				response = response.replace("\"Cod_municipio\":", "\"codMunicipio\":");
+				//				response = response.replace("\"Des_municipio\":", "\"_\":"); //Este no esta en el pojo
+				//				response = response.replace("\"Telefono\":", "\"telefono\":");
+				response = response.replace("\"Cod_ciiu\":", "\"codCIIU\":");
+				//				response = response.replace("\"descrip_ciiu\":", "\"_\":"); //Este no esta en el pojo
+				response = response.replace("\"Ing_bruto_siniva\":", "\"ingBrutoSINIVA\":");
+				response = response.replace("\"Valor_total_devol\":", "\"valorTotalDevo\":");
+				//				response = response.replace("\"Deducciones\":", "\"deducciones\":"); //---
 				//				componentes:
 				response = response.replace("\"Actnosub_pa\":", "\"actnosubPA\":");
 				response = response.replace("\"enaj_act_fijo\":", "\"enajActFijo\":");
@@ -73,25 +95,26 @@ public class DefaultSDHCalculaICA2Facade implements SDHCalculaICA2Facade
 				//				componentes:
 
 				response = response.replace("\"Firmantes\":", "\"firmantes\":");
-				response = response.replace("\"Totaling_fuera_bog\":", "\"totaling_fuera_bog\":");
-				response = response.replace("\"Totaling_brutos\":", "\"totaling_brutos\":");
-				response = response.replace("\"Devol_descuentos\":", "\"devol_descuentos\":");
-				response = response.replace("\"Total_deduccion\":", "\"total_deduccion\":");
-				response = response.replace("\"Totaling_netos\":", "\"totaling_netos\":");
-				response = response.replace("\"Imp_indus_comer\":", "\"imp_indus_comer\":");
-				response = response.replace("\"Impuesto_aviso\":", "\"impuesto_aviso\":");
-				response = response.replace("\"Total_unidad_adic\":", "\"total_unidad_adic\":");
-				response = response.replace("\"Impuesto_cargo\":", "\"impuesto_cargo\":");
-				response = response.replace("\"Valor_rete_indus_comer\":", "\"valor_rete_indus_comer\":");
-				response = response.replace("\"Saldo_cargo\":", "\"saldo_cargo\":");
-				response = response.replace("\"Valor_pagar\":", "\"valor_pagar\":");
+
+				response = response.replace("\"Totaling_fuera_bog\":", "\"totalingFueraBog\":");
+				response = response.replace("\"Totaling_brutos\":", "\"totalingBrutos\":");
+				response = response.replace("\"Devol_descuentos\":", "\"devolDescuentos\":");
+				response = response.replace("\"Total_deduccion\":", "\"totalDeduccion\":");
+				response = response.replace("\"Totaling_netos\":", "\"totalingNetos\":");
+				response = response.replace("\"Imp_indus_comer\":", "\"impIndusComer\":");
+				response = response.replace("\"Impuesto_aviso\":", "\"impuestoAviso\":");
+				response = response.replace("\"Total_unidad_adic\":", "\"totalUnidadAdic\":");
+				response = response.replace("\"Impuesto_cargo\":", "\"impuestoCargo\":");
+				response = response.replace("\"Valor_rete_indus_comer\":", "\"valorReteIndus\":");
+				response = response.replace("\"Saldo_cargo\":", "\"saldoCargo\":");
+				response = response.replace("\"Valor_pagar\":", "\"valorPagar\":");
 				response = response.replace("\"Sanciones\":", "\"sanciones\":");
-				response = response.replace("\"Interes_mora\":", "\"interes_mora\":");
-				response = response.replace("\"Total_pagar\":", "\"total_pagar\":");
-				response = response.replace("\"Total_aporte_volun\":", "\"total_aporte_volun\":");
-				response = response.replace("\"Proyecto_aporte\":", "\"proyecto_aporte\":");
-				response = response.replace("\"Tarifa_aporte\":", "\"tarifa_aporte\":");
-				response = response.replace("\"Check_aporte\":", "\"check_aporte\":");
+				response = response.replace("\"Interes_mora\":", "\"interesMora\":");
+				response = response.replace("\"Total_pagar\":", "\"totalPagar\":");
+				response = response.replace("\"Total_aporte_volun\":", "\"totalAporteVolun\":");
+				response = response.replace("\"Proyecto_aporte\":", "\"proyectoAporte\":");
+				response = response.replace("\"Tarifa_aporte\":", "\"tarifaAporte\":");
+				response = response.replace("\"Check_aporte\":", "\"checkAporte\":");
 
 
 				final ObjectMapper mapper = new ObjectMapper();
