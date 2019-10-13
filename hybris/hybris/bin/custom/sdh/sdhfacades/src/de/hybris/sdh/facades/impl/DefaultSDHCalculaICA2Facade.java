@@ -32,6 +32,7 @@ public class DefaultSDHCalculaICA2Facade implements SDHCalculaICA2Facade
 				LOG.info(response);
 				//				response = response.replace("\"\",\"\"", "");
 				response = response.replace(",\"\"]", "]");
+				response = response.replace(",\"\"", "");
 				response = response.replace("\"Regimen\":", "\"regimen\":");
 				response = response.replace("\"Periodo\":", "\"periodo\":");
 				response = response.replace("\"Opcion_uso\":", "\"opcionUso\":");
