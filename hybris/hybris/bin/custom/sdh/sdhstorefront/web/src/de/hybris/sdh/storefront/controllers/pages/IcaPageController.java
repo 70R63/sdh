@@ -594,10 +594,28 @@ public class IcaPageController extends SDHAbstractPageController
 
 			valorRetenido.add(calcula2ImpuestoResponse.getValorRetenido());
 			infoDeclara.setValorRetenido(valorRetenido);
-			infoDeclara.setIngNetosGrava(calcula2ImpuestoResponse.getIngNetosGrava());
+
 			infoDeclara.setIngFueraBog(calcula2ImpuestoResponse.getIngFueraBog());
 			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
+
+			if (calcula2ImpuestoResponse.getIngNetosGrava() != null)
+			{
+				for (int i = 0; i < calcula2ImpuestoResponse.getIngNetosGrava().size(); i++)
+				{
+					if (calcula2ImpuestoResponse.getIngNetosGrava().get(i) != null)
+					{
+						if (calcula2ImpuestoResponse.getIngNetosGrava().get(i).getCodCIIU() == null)
+						{
+							calcula2ImpuestoResponse.getIngNetosGrava().get(i).setCodCIIU(
+									StringUtils.stripStart(calcula2ImpuestoResponse.getIngNetosGrava().get(i).getCodCIIU(), "0"));
+						}
+					}
+				}
+			}
+			infoDeclara.setIngNetosGrava(calcula2ImpuestoResponse.getIngNetosGrava());
+
+
 
 			infoDeclara.setTotalDeduccion(calcula2ImpuestoResponse.getTotalDeduccion());
 			infoDeclara.setTotalingNetos(calcula2ImpuestoResponse.getTotalingNetos());
