@@ -739,14 +739,14 @@ public class IcaPageController extends SDHAbstractPageController
 		//		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
 		//		System.out.println("Response de validaCont: " + detalleContribuyente);
 		detalleContribuyente = contribuyenteData2;
-		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		if (gasolinaService.ocurrioErrorValcont(contribuyenteData2) != true)
 		{
 			if (icaInfObjetoResponse.getAnoGravable() != null)
 			{
 				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim());
 			}
-			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
-			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+			infoPreviaPSE.setTipoDoc(contribuyenteData2.getInfoContrib().getTipoDoc());
+			infoPreviaPSE.setNumDoc(contribuyenteData2.getInfoContrib().getNumDoc());
 			infoPreviaPSE.setNumBP(representado);
 			try
 			{
@@ -756,8 +756,8 @@ public class IcaPageController extends SDHAbstractPageController
 			{
 				infoPreviaPSE.setClavePeriodo(icaInfObjetoResponse.getPeriodo());
 			}
-			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
-			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(contribuyenteData2));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(contribuyenteData2));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());
 		}
 		else
