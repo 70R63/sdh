@@ -22,7 +22,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<br>
-				<table class="table">
+				<table class="table tableLiq" id="tableLiq">
 					<thead>
 						<tr>
 						<th><label class="control-label labeltabletd"><spring:theme
@@ -36,16 +36,7 @@
 
 					<tbody>
 						<tr>
-						<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Año"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Avalúo"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Tarifa"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-						</tr>
+
 					</tbody>
 				</table>
 			</div>

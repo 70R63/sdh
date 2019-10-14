@@ -9,7 +9,7 @@ ACC.vehiculos = {
 						".labelVerDetalle",
 						function(e) {
 							e.preventDefault();
-							debugger;
+						
 							var tabRel = document.getElementById('tabRelacion');
 							tabRel.style.display = 'none';
 							$('#tabRelacion tbody').empty();
@@ -98,7 +98,7 @@ ACC.vehiculos = {
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {
 			e.preventDefault();
-			debugger;
+		
 			var placa = $.trim($(this).attr("data-placa"));
 			var bpNum = $.trim($(this).attr("data-numbp"));
 			var anioGravable = $.trim($("#an").val());
@@ -206,16 +206,130 @@ ACC.vehiculos = {
 		$("#infechacambio").val(data.fechaCambio);
 		$("#inTipo").val(data.tipoID);
 		$("#inNomcom").val(data.nombre)
-
-		var liq = data.liquidacion
-
-		if (liq == null) {
-			for (var i = 0; liq.length; i++) {
+		
+		var jur = data.datosJuridicos;
+		
+		if (jur != null) {
+			for (var i = 0; i<jur.length; i++) {
+				
+				if(jur[i].calidad == "1"){
+					jur[i].calidad = "PROPIETARIO";
+					
+				}else if(jur[i].calidad == "2"){
+					jur[i].calidad = "FIDEICOMETENTE";
+				}else if(jur[i].calidad == "3"){
+					jur[i].calidad = "POSEEDOR";
+				}else if(jur[i].calidad == "4"){
+					jur[i].calidad = "BENEFICIARIO";
+				}else if(jur[i].calidad == "5"){
+					jur[i].calidad = "USUFRUCTUARIO";
+				}else if(jur[i].calidad == "6"){
+					jur[i].calidad = "ARRENDATARIO";
+				}else{
+					jur[i].calidad = "-";				
+				}
+					
+				
+				
+				$('#tableJur')
+				.append(
+						"<tr>"
+								+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+								+ jur[i].calidad
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ jur[i].procProp
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ jur[i].fechaDesde
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ jur[i].fechaHasta + '" /></td>');
 
 			}
 		} else {
-
+			$('#tableJur')
+			.append(
+					"<tr>"
+							+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
 		}
+		
+		var marca = data.marcas;
+		if (marca != null) {
+			for (var i = 0; i<marca.length; i++) {
+				debugger;
+//				var fec1 = marca[i].fechaDesde;
+//				 fec2 = fec1.slice(8, 10) + '/'  
+//                 + fec1.slice(5, 7) + '/'  
+//                 + fec1.slice(0,10); 
+//				
+//				marca[i].fechaDesde = fec2;
+				
+				$('#tablemarcas')
+				.append(
+						"<tr>"
+								+ '<td><input style="width: 95px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+								+ marca[i].codigoMarca
+								+ '" /></td>'
+								+ '<td><input style="width: 495px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ marca[i].descripcion
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ marca[i].porcExencion
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ marca[i].valorExencion
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ marca[i].fechaDesde
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ marca[i].fechaHasta + '" /></td>');
+
+			}
+		} else {
+			$('#tablemarcas')
+			.append(
+					"<tr>"
+							+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+		}
+		
+
+		var liq = data.liquidacion
+
+		if (liq != null) {
+			for (var i = 0; i<liq.length; i++) {
+				
+				$('#tableLiq')
+				.append(
+						"<tr>"
+								+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+								+ liq[i].anio
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ liq[i].avaluo
+								+ '" /></td>'
+								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+								+ liq[i].tarifa + '" /></td>');
+
+			}
+		} else {
+			$('#tableLiq')
+			.append(
+					"<tr>"
+							+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+		}
+		
 
 	}
 

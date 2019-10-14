@@ -16,7 +16,6 @@ public class JuridicosVehiculos
 	private String procProp;
 	private String fechaDesde;
 	private String fechaHasta;
-
 	/**
 	 * @return the tipoID
 	 */
@@ -24,7 +23,7 @@ public class JuridicosVehiculos
 	{
 		return tipoID;
 	}
-
+	
 	/**
 	 * @param tipoID
 	 *           the tipoID to set
@@ -33,7 +32,6 @@ public class JuridicosVehiculos
 	{
 		this.tipoID = tipoID;
 	}
-
 	/**
 	 * @return the nombre
 	 */
@@ -41,7 +39,7 @@ public class JuridicosVehiculos
 	{
 		return nombre;
 	}
-
+	
 	/**
 	 * @param nombre
 	 *           the nombre to set
@@ -50,7 +48,6 @@ public class JuridicosVehiculos
 	{
 		this.nombre = nombre;
 	}
-
 	/**
 	 * @return the numID
 	 */
@@ -58,7 +55,7 @@ public class JuridicosVehiculos
 	{
 		return numID;
 	}
-
+	
 	/**
 	 * @param numID
 	 *           the numID to set
@@ -67,7 +64,6 @@ public class JuridicosVehiculos
 	{
 		this.numID = numID;
 	}
-
 	/**
 	 * @return the calidad
 	 */
@@ -75,7 +71,7 @@ public class JuridicosVehiculos
 	{
 		return calidad;
 	}
-
+	
 	/**
 	 * @param calidad
 	 *           the calidad to set
@@ -84,7 +80,6 @@ public class JuridicosVehiculos
 	{
 		this.calidad = calidad;
 	}
-
 	/**
 	 * @return the procProp
 	 */
@@ -92,7 +87,7 @@ public class JuridicosVehiculos
 	{
 		return procProp;
 	}
-
+	
 	/**
 	 * @param procProp
 	 *           the procProp to set
@@ -101,7 +96,6 @@ public class JuridicosVehiculos
 	{
 		this.procProp = procProp;
 	}
-
 	/**
 	 * @return the fechaDesde
 	 */
@@ -109,7 +103,7 @@ public class JuridicosVehiculos
 	{
 		return fechaDesde;
 	}
-
+	
 	/**
 	 * @param fechaDesde
 	 *           the fechaDesde to set
@@ -118,7 +112,6 @@ public class JuridicosVehiculos
 	{
 		this.fechaDesde = fechaDesde;
 	}
-
 	/**
 	 * @return the fechaHasta
 	 */
@@ -126,7 +119,7 @@ public class JuridicosVehiculos
 	{
 		return fechaHasta;
 	}
-
+	
 	/**
 	 * @param fechaHasta
 	 *           the fechaHasta to set
@@ -135,7 +128,6 @@ public class JuridicosVehiculos
 	{
 		this.fechaHasta = fechaHasta;
 	}
-
 
 
 

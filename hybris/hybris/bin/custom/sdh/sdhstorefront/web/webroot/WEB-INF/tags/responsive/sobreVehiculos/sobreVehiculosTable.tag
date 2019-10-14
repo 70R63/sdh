@@ -83,8 +83,8 @@
 										code="sobre.vehiculo.table.placa" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.table.marca" /></label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
-										code="sobre.vehiculo.table.factura" /></label></th>
+<%-- 							<th><label class="control-label labeltabletd"><spring:theme --%>
+<%-- 										code="sobre.vehiculo.table.factura" /></label></th> --%>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.table.linea" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
@@ -99,8 +99,8 @@
 										code="sobre.vehiculo.table.blindado" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.table.cilindraje" /></label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
-										code="sobre.vehiculo.table.avaluo" /></label></th>
+<%-- 							<th><label class="control-label labeltabletd"><spring:theme --%>
+<%-- 										code="sobre.vehiculo.table.avaluo" /></label></th> --%>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code=" " /></label></th>
 
@@ -118,9 +118,9 @@
 									readonly="readonly"
 									value="<c:out value="${eachVehiculo.marca}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
-								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="Factura"></c:out>"
-									maxlength="240" style="width: 100% !important;"></td>
+<!-- 								<td><input id="" name="" class="inputtextnew" type="text" -->
+<%-- 									readonly="readonly" value="<c:out value="Factura"></c:out>" --%>
+<!-- 									maxlength="240" style="width: 100% !important;"></td> -->
 								<td><input id="" name="" class="inputtextnew" type="text"
 									readonly="readonly"
 									value="<c:out value="${eachVehiculo.linea}"></c:out>"
@@ -149,9 +149,9 @@
 									readonly="readonly"
 									value="<c:out value="${eachVehiculo.cilindraje}"></c:out>"
 									maxlength="240" style="width: 100% !important;"></td>
-								<td><input id="" name="" class="inputtextnew" type="text"
-									readonly="readonly" value="<c:out value="avaluo"></c:out>"
-									maxlength="240" style="width: 100% !important;"></td>
+<!-- 								<td><input id="" name="" class="inputtextnew" type="text" -->
+<%-- 									readonly="readonly" value="<c:out value="avaluo"></c:out>" --%>
+<!-- 									maxlength="240" style="width: 100% !important;"></td> -->
 								<td><label style="color: #0358d8 !important"
 									data-placa="${eachVehiculo.placa}"
 									data-numbp="${vehiculosForm.numBP}"
