@@ -747,7 +747,7 @@ public class IcaPageController extends SDHAbstractPageController
 			}
 			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
 			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
-			infoPreviaPSE.setNumBP(numBP);
+			infoPreviaPSE.setNumBP(representado);
 			try
 			{
 				infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
