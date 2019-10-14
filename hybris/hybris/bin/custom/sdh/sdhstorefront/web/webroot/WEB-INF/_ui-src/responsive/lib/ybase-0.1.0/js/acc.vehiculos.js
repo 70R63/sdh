@@ -131,12 +131,75 @@ ACC.vehiculos = {
 
 	fillFieldsFromData : function(data) {
 		debugger;
+
 		$("#placas").val(data.placa);
+		
+		if (data.idServicio == "01") {
+			data.idServicio="PARTICULAR";
+		} else if (data.idServicio == "02") {
+			data.idServicio="PÚBLICO";
+		} else if (data.idServicio == "03") {
+			data.idServicio="OFICIAL";
+		}else {
+			data.idServicio="-";
+		}
 		$("#inidServicio").val(data.idServicio);
+		
+		
+		if (data.idEstado == "1") {
+			data.idEstado="ACTIVO";
+		} else if (data.idEstado == "7") {
+			data.idEstado="INHABILITADO";
+		} else if (data.idEstado == "8") {
+			data.idEstado="CANCELACIÓN";
+		}else if (data.idEstado == "9") {
+			data.idEstado="TRASLADADO";
+		}else {
+			data.idEstado="-";
+		}
+		
+		
 		$("#inidEstado").val(data.idEstado);
 		$("#inwatts").val(data.watts);
+		
+		if (data.clasicoAntig == "0") {
+			data.clasicoAntig="NO APLICA";
+		} else if (data.clasicoAntig == "1") {
+			data.clasicoAntig="ANTIGUO";
+		} else if (data.clasicoAntig == "2") {
+			data.clasicoAntig="CLASICO";
+		}else {
+			data.clasicoAntig="-";
+		}
 		$("#inclasico").val(data.clasicoAntig);
+		
+		if (data.tipoVeh == "1") {
+			data.tipoVeh="AUTOMÓVILES";
+		} else if (data.tipoVeh == "2") {
+			data.tipoVeh="CAMPEROS Y CAMIONETAS";
+		} else if (data.tipoVeh == "3") {
+			data.tipoVeh="CAMIONETAS DOBLE CABINA";
+
+		} else if (data.tipoVeh == "4") {
+			data.tipoVeh="ELÉCTRICOS";
+
+		} else if (data.tipoVeh == "5") {
+			data.tipoVeh="MOTOS Y MOTOCARROS";
+
+		} else if (data.tipoVeh == "6") {
+			data.tipoVeh="PASAJEROS";
+
+		} else if (data.tipoVeh == "7") {
+			data.tipoVeh="CARGA";
+		} else if (data.tipoVeh == "8") {
+			data.tipoVeh="AMBULANCIAS";
+		} else {
+			data.tipoVeh="-";
+
+		}
+
 		$("#intipvehiculo").val(data.tipoVeh);
+
 		$("#inpasajeros").val(data.capacidadPas);
 		$("#inton").val(data.capacidadTon);
 		$("#infecinacti").val(data.fechaDesde);
@@ -150,8 +213,8 @@ ACC.vehiculos = {
 			for (var i = 0; liq.length; i++) {
 
 			}
-		}else{
-			
+		} else {
+
 		}
 
 	}
