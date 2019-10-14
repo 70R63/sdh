@@ -528,7 +528,6 @@ public class IcaPageController extends SDHAbstractPageController
 		String numObjeto;
 		String anoGravable;
 
-		//		final CustomerData customerData2 = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", currentUserData);
 		addAgentsToModel(model, currentUserData, null);
 		model.addAttribute("redirectURL", "/contribuyentes/ica");
@@ -551,8 +550,6 @@ public class IcaPageController extends SDHAbstractPageController
 			return REDIRECT_TO_ICA_PAGE;
 		}
 
-		//		addAgentsToModel(model, customerFacade.getCurrentCustomer());
-		//		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 
@@ -572,14 +569,6 @@ public class IcaPageController extends SDHAbstractPageController
 		try
 		{
 			icaInfObjetoFormResp = new ICAInfObjetoForm();
-
-			//			final ObjectMapper mapper = new ObjectMapper();
-			//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-
-			//			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
-			//
-			//						icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 			//			Remapeo INICIO
 			icaInfObjetoResponse = new ICAInfObjetoResponse();
 			final List<ICAInfoValorRetenido> valorRetenido = new ArrayList<ICAInfoValorRetenido>();
@@ -599,24 +588,6 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
 
-			if (calcula2ImpuestoResponse.getIngNetosGrava() != null)
-			{
-				for (int i = 0; i < calcula2ImpuestoResponse.getIngNetosGrava().size(); i++)
-				{
-					if (calcula2ImpuestoResponse.getIngNetosGrava().get(i) != null)
-					{
-						if (calcula2ImpuestoResponse.getIngNetosGrava().get(i).getCodCIIU() == null)
-						{
-							calcula2ImpuestoResponse.getIngNetosGrava().get(i).setCodCIIU(
-									StringUtils.stripStart(calcula2ImpuestoResponse.getIngNetosGrava().get(i).getCodCIIU(), "0"));
-						}
-					}
-				}
-			}
-			infoDeclara.setIngNetosGrava(calcula2ImpuestoResponse.getIngNetosGrava());
-
-
-
 			infoDeclara.setTotalDeduccion(calcula2ImpuestoResponse.getTotalDeduccion());
 			infoDeclara.setTotalingNetos(calcula2ImpuestoResponse.getTotalingNetos());
 			infoDeclara.setImpIndusComer(calcula2ImpuestoResponse.getImpIndusComer());
@@ -633,9 +604,6 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setProyectoAporte(calcula2ImpuestoResponse.getProyectoAporte());
 			infoDeclara.setTarifaAporte(calcula2ImpuestoResponse.getTarifaAporte());
 			infoDeclara.setTotalAporteVolun(calcula2ImpuestoResponse.getTotalAporteVolun());
-
-			//			private String valorImpAviso;
-
 
 			icaInfObjetoResponse.setAnoGravable(calcula2ImpuestoResponse.getAnio_gravable());
 			icaInfObjetoResponse.setPeriodo(calcula2ImpuestoResponse.getPeriodo());
@@ -667,7 +635,6 @@ public class IcaPageController extends SDHAbstractPageController
 			}
 			infoDeclara.setIngPorCIIU(IngPorCIIUList);
 
-
 			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = infoDeclara.getValorRetenido();
 
 			if (ICAInfoValorRetenidoList != null)
@@ -685,14 +652,29 @@ public class IcaPageController extends SDHAbstractPageController
 			}
 			infoDeclara.setValorRetenido(ICAInfoValorRetenidoList);
 
+			if (calcula2ImpuestoResponse.getIngNetosGrava() != null)
+			{
+				for (int i = 0; i < calcula2ImpuestoResponse.getIngNetosGrava().size(); i++)
+				{
+					if (calcula2ImpuestoResponse.getIngNetosGrava().get(i) != null)
+					{
+						if (calcula2ImpuestoResponse.getIngNetosGrava().get(i).getCodCIIU() == null)
+						{
+							calcula2ImpuestoResponse.getIngNetosGrava().get(i).setCodCIIU(
+									StringUtils.stripStart(calcula2ImpuestoResponse.getIngNetosGrava().get(i).getCodCIIU(), "0"));
+						}
+					}
+				}
+			}
+			infoDeclara.setIngNetosGrava(calcula2ImpuestoResponse.getIngNetosGrava());
+
+
 			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
 			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
 			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
-			//			redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-
 
 		}
 		catch (final Exception e)
@@ -722,31 +704,20 @@ public class IcaPageController extends SDHAbstractPageController
 		}
 
 		//informacion para PSE
-		final CustomerModel customerData = (CustomerModel) userService.getCurrentUser();
-		final String numBP = customerData.getNumBP();
-
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
-		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
-		//		final String mensajeError = "";
+		final SDHValidaMailRolResponse detalleContribuyente = contribuyenteData2;
 		String[] mensajesError;
 
-
-		contribuyenteRequest.setNumBP(numBP);
-
-		//		System.out.println("Request de validaCont: " + contribuyenteRequest);
-		//		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-		//		System.out.println("Response de validaCont: " + detalleContribuyente);
-		detalleContribuyente = contribuyenteData2;
-		if (gasolinaService.ocurrioErrorValcont(contribuyenteData2) != true)
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
 			if (icaInfObjetoResponse.getAnoGravable() != null)
 			{
 				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim());
 			}
-			infoPreviaPSE.setTipoDoc(contribuyenteData2.getInfoContrib().getTipoDoc());
-			infoPreviaPSE.setNumDoc(contribuyenteData2.getInfoContrib().getNumDoc());
+			infoPreviaPSE.setTipoDoc(detalleContribuyente.getInfoContrib().getTipoDoc());
+			infoPreviaPSE.setNumDoc(detalleContribuyente.getInfoContrib().getNumDoc());
 			infoPreviaPSE.setNumBP(representado);
 			try
 			{
@@ -756,8 +727,8 @@ public class IcaPageController extends SDHAbstractPageController
 			{
 				infoPreviaPSE.setClavePeriodo(icaInfObjetoResponse.getPeriodo());
 			}
-			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(contribuyenteData2));
-			infoPreviaPSE.setDv(gasolinaService.prepararDV(contribuyenteData2));
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
 			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());
 		}
 		else
@@ -769,7 +740,7 @@ public class IcaPageController extends SDHAbstractPageController
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 
 		model.addAttribute("gravableNetIncomes",
-				this.getGravableNetIncomes(numBP, numObjeto, anoGravable, icaInfObjetoRequest.getPeriodo()));
+				this.getGravableNetIncomes(representado, numObjeto, anoGravable, icaInfObjetoRequest.getPeriodo()));
 		//informacion para PSE
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
