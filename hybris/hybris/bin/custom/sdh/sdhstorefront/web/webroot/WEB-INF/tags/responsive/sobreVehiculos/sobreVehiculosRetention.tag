@@ -9,9 +9,9 @@
 
 		<div class="row">
 			<div class="headline">
-				<h3>
+				<h2>
 					<span tabindex="0"><spring:theme code="delineacion.urbana.declarations.idData" /></span>
-				</h3>
+				</h2>
 			</div>	
 		</div> 
 		<br/>

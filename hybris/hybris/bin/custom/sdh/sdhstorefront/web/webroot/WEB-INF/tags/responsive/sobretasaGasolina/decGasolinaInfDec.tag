@@ -27,31 +27,31 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme
 						code="impuestos.decGasolina.InformacionDec.claseProducto" />
 				</label>
 			</div>
 			<div class="col-md-1" style="padding-left: 12px;">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="impuestos.decGasolina.InformacionDec.galones" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important"><spring:theme
+				<label class="control-label format_label"><spring:theme
 						code="impuestos.decGasolina.InformacionDec.preciosReferencia" /></label>
 			</div>
 
 			<div class="col-md-1" style="padding-left: 0px;">
-				<label class="col-md-4 control-label text-capitalize !important"><spring:theme
+				<label class="col-md-4 control-label format_label"><spring:theme
 						code="impuestos.decGasolina.InformacionDec.porcentajeAlcohol" /></label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important"><spring:theme
+				<label class="control-label format_label"><spring:theme
 						code="impuestos.decGasolina.InformacionDec.baseGravable" /></label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important"><spring:theme
+				<label class="control-label format_label"><spring:theme
 						code="impuestos.decGasolina.InformacionDec.valorSobretasa" /></label>
 			</div>
 			<div class="col-md-1">

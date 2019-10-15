@@ -84,7 +84,8 @@ public class DefaultSDHGeneraDeclaracionService implements SDHGeneraDeclaracionS
 			}
 
 
-			final String result = builder.toString();
+			String result = builder.toString();
+			result = result.replaceAll("\"errores\":\\{([\"])(.*)(\"\\})", "\"errores\":[{\"$2\"}]");
 			LOG.info("response: " + result);
 
 			return result;

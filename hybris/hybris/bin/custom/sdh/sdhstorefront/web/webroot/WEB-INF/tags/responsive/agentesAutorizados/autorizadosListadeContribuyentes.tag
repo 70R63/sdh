@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container">
+<div class="container_menu">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline">

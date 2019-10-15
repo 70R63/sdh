@@ -25,13 +25,13 @@
 		<!-- 				</label> -->
 		<!-- 			</div> -->
 		<div class="col-md-3">
-			<label class="control-label" for=""
+			<label class="control-label format_label" for=""
 				style="text-transform: none !important"> <spring:theme
 					code="delineacion.urbana.dec.areasusos.uso" />
 			</label>
 		</div>
 		<div class="col-md-2">
-			<label class="control-label" for=""
+			<label class="control-label format_label" for=""
 				style="text-transform: none !important"> <spring:theme
 					code="delineacion.urbana.dec.areasusos.netuso" /></label>
 		</div>
@@ -132,13 +132,13 @@
 	<div class="row">
 		<div class="row">
 			<div class="col-md-3">
-				<label class="control-label" for=""
+				<label class="control-label format_label" for=""
 					style="text-transform: none !important"> <spring:theme
 						code="delineacion.urbana.dec.areasusos.areainve" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label" for=""
+				<label class="control-label format_label" for=""
 					style="text-transform: none !important"> <spring:theme
 						code="delineacion.urbana.dec.areasusos.m2area" />
 				</label>
@@ -207,14 +207,14 @@
 
 		<div class="col-md-3">
 
-			<label class="control-label" for=""
+			<label class="control-label format_label" for=""
 				style="text-transform: none !important"> <spring:theme
 					code="delineacion.urbana.dec.areasusos.areaproyin" />
 			</label>
 		</div>
 		<div class="col-md-2">
 
-			<label class="control-label" for=""
+			<label class="control-label format_label" for=""
 				style="text-transform: none !important"> <spring:theme
 					code="delineacion.urbana.dec.areasusos.aream2" />
 			</label>

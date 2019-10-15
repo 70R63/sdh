@@ -200,7 +200,7 @@
 		
 				<div class="row" id="table-predial" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-predial1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -241,7 +241,7 @@
 
 		<div class="row" id="table-vehiculos" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-vehiculos1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -285,7 +285,16 @@
 										code="certideclara.inicial.selcimpuesto" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.aniograv" /></label></th>
+										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.ica.seleccionar" /></label></th>
@@ -311,6 +320,18 @@
 										code="certideclara.inicial.reteica.consecutivo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
 										code="certideclara.inicial.reteica.seleccionar" /></label></th>
 						</tr>
 					</thead>
@@ -332,6 +353,18 @@
 							<th style="text-align: center"><label class="control-label">
 									<spring:theme code="certideclara.inicial.publicidad.tipvalla" />
 							</label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label">
 									<spring:theme
 										code="certideclara.inicial.publicidad.seleccionar" />
@@ -391,7 +424,16 @@
 										code="certideclara.inicial.delineacion.cdu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.delineacion.radicado" /></label></th>
+										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.delineacion.seleccionar" /></label></th>

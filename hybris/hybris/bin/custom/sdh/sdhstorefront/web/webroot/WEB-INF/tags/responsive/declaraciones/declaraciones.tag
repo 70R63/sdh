@@ -18,7 +18,7 @@
 	}
 
 	function valper(selectObject) {
-		debugger;
+// 		debugger;
 		var per = selectObject.value;
 		var anio = document.getElementById('aniograv').value;
 		var fecha = new Date();
