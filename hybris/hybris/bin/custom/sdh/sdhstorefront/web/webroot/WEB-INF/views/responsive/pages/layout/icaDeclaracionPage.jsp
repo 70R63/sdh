@@ -19,7 +19,7 @@
 	<icadecla:icaDeclaraValor/>
 	<icadecla:icaDeclaraLiquidacion/>
 
-	<c:url value='/contribuyentes/ica' var="taxRedirection"/>
+	<c:url value='${redirectURL}' var="taxRedirection"/>
 	<firmas:generalFirmas firmaContribuyenteRedirection="${taxRedirection}"/>
 
 	<icadecla:icaDeclaraButtons />

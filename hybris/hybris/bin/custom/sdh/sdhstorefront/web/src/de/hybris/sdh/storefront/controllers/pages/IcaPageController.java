@@ -530,7 +530,7 @@ public class IcaPageController extends SDHAbstractPageController
 
 		model.addAttribute("customerData", currentUserData);
 		addAgentsToModel(model, currentUserData, null);
-		model.addAttribute("redirectURL", "/contribuyentes/ica");
+		//		model.addAttribute("redirectURL", "/contribuyentes/ica");
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
 		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
