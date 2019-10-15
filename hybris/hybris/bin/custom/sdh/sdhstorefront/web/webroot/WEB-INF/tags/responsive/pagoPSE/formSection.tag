@@ -7,8 +7,8 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:useBean id="controllerPseConstants" class="de.hybris.sdh.core.constants.ControllerPseConstants"/>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<script src="jquery.min.js"></script>
 <script>
 	function onChange() {
 		var varBanco = document.getElementById("psePaymentForm.banco").value;

@@ -64,6 +64,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -875,7 +876,7 @@ public class SobreTasaGasolinaService
 
 			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
 			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
-			System.out.println("Response de crm/consCasos: " + wsresponse);
+			//			System.out.println("Response de crm/consCasos: " + wsresponse);
 
 
 
@@ -1858,7 +1859,7 @@ public class SobreTasaGasolinaService
 		String periodoConvertidoPagar = "";
 
 
-		if (periodo != null)
+		if (periodo != null && !StringUtils.isBlank(periodo))
 		{
 			//			if (periodo.substring(2, 3).equals(" "))
 			//			{

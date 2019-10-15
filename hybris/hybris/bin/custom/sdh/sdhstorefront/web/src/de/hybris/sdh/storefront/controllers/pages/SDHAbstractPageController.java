@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.ui.Model;
 
 import com.google.gson.Gson;
@@ -107,16 +108,27 @@ public class SDHAbstractPageController extends AbstractSearchPageController
 
 	}
 
-	public void addFirmantes_impuesto(final Model model, final List<FirmanteResponse> firmantes,
+	public void addFirmantes_impuesto(final Model model, List<FirmanteResponse> firmantes,
 			final CustomerData representanteData)
 	{
 
 		model.addAttribute("showFirmantes", true);
+		final List<FirmanteResponse> firmantes_tmp = new ArrayList<FirmanteResponse>();
 		//       List<FirmanteResponse> firmantes = calcGasolina2Response.getFirmantes();
 
 		boolean showNewFirmRow = true;
 		boolean showFirmAndAddButton = true;
 		final boolean showFirmButton = true;
+
+		//Elimina los firmantes vacios (que no tengan tipo de documento se consideran vacios)
+		for (final FirmanteResponse eachFirmante : firmantes)
+		{
+			if (eachFirmante.getTipoIdent() != null && !StringUtils.isAllBlank(eachFirmante.getTipoIdent()))
+			{
+				firmantes_tmp.add(eachFirmante);
+			}
+		}
+		firmantes = firmantes_tmp;
 
 		if (CollectionUtils.isNotEmpty(firmantes) && firmantes.size() == 3)
 		{

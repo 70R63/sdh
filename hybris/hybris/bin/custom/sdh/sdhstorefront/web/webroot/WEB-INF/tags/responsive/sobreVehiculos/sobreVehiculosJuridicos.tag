@@ -20,17 +20,11 @@
 
 	
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-5">
 				<br>
-				<table class="table">
+				<table class="table tableJur" id="tableJur">
 					<thead>
 						<tr>
-							<th><label class="control-label labeltabletd"><spring:theme
-										code="sobre.vehiculo.juridicos.tipo" /></label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
-										code="sobre.vehiculo.juridicos.nomcomple" /></label></th>
-							<th><label class="control-label labeltabletd"><spring:theme
-										code="sobre.vehiculo.juridicos.numero" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.juridicos.calidsuje" /></label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
@@ -43,29 +37,7 @@
 					</thead>
 
 					<tbody>
-						<tr>
-							<td><input id="inTipo" name="" class="inputtextnew inTipo" type="text"
-								readonly="readonly" value=""
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="inNomcom" name="" class="inputtextnew inNomcom" type="text"
-								readonly="readonly" value=""
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Número"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="calidsujeto"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="propiedad"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="fechdesde"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="fechasta"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-						</tr>
+						
 					</tbody>
 				</table>
 			</div>

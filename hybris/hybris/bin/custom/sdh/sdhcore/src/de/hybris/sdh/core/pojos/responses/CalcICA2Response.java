@@ -15,35 +15,39 @@ public class CalcICA2Response
 
 	private String anio_gravable;
 	private String periodo;
-	private String opcion_uso;
-	private String cant_establec;
-	private String total_ingr_periodo;
-	private String deducciones;
+	private String opcionUso;
+	private String cantEstablec;
+	private String regimen;
+	private String totalIngrPeriodo;
+	private ICAInfoDeducciones deducciones;
 
-	private String totaling_fuera_bog;
-	private String totaling_brutos;
-	private String Devol_descuentos;
-	private String total_deduccion;
-	private String totaling_netos;
-	private String imp_indus_comer;
-	private String impuesto_aviso;
-	private String total_unidad_adic;
-	private String impuesto_cargo;
-	private String valor_rete_indus_comer;
-	private String saldo_cargo;
-	private String valor_pagar;
+	private String totalingFueraBog;
+	private String totalingBrutos;
+	private String devolDescuentos;
+	private String totalDeduccion;
+	private String totalingNetos;
+	private String impIndusComer;
+	private String impuestoAviso;
+	private String totalUnidadAdic;
+	private String impuestoCargo;
+	private String valorReteIndus;
+	private String saldoCargo;
+	private String valorPagar;
 	private String sanciones;
-	private String interes_mora;
-	private String total_pagar;
-	private String total_aporte_volun;
-	private String proyecto_aporte;
-	private String tarifa_aporte;
-	private String check_aporte;
+	private String interesMora;
+	private String totalPagar;
+	private String totalAporteVolun;
+	private String proyectoAporte;
+	private String tarifaAporte;
+	private String checkAporte;
 
-	private List<CalcICA2ing_fuera_bogResponse> ing_fuera_bog;
-	private List<CalcICA2ing_netos_gravaResponse> ing_netos_grava;
-	private List<CalcICA2ing_por_CIIUResponse> ing_por_CIIU;
+	private List<ICAInfoIngFueraBog> ingFueraBog;
+	private ICAInfoValorRetenido valorRetenido;
+	private List<ICAInfoIngNetosGrava> ingNetosGrava;
+	private List<ICAInfoIngPorCiiu> ingPorCIIU;
 	private List<FirmanteResponse> firmantes;
+
+
 
 	/**
 	 * @return the anio_gravable
@@ -80,60 +84,77 @@ public class CalcICA2Response
 	}
 
 	/**
-	 * @return the opcion_uso
+	 * @return the opcionUso
 	 */
-	public String getOpcion_uso()
+	public String getOpcionUso()
 	{
-		return opcion_uso;
+		return opcionUso;
 	}
 
 	/**
-	 * @param opcion_uso
-	 *           the opcion_uso to set
+	 * @param opcionUso
+	 *           the opcionUso to set
 	 */
-	public void setOpcion_uso(final String opcion_uso)
+	public void setOpcionUso(final String opcionUso)
 	{
-		this.opcion_uso = opcion_uso;
+		this.opcionUso = opcionUso;
 	}
 
 	/**
-	 * @return the cant_establec
+	 * @return the cantEstablec
 	 */
-	public String getCant_establec()
+	public String getCantEstablec()
 	{
-		return cant_establec;
+		return cantEstablec;
 	}
 
 	/**
-	 * @param cant_establec
-	 *           the cant_establec to set
+	 * @param cantEstablec
+	 *           the cantEstablec to set
 	 */
-	public void setCant_establec(final String cant_establec)
+	public void setCantEstablec(final String cantEstablec)
 	{
-		this.cant_establec = cant_establec;
+		this.cantEstablec = cantEstablec;
 	}
 
 	/**
-	 * @return the total_ingr_periodo
+	 * @return the regimen
 	 */
-	public String getTotal_ingr_periodo()
+	public String getRegimen()
 	{
-		return total_ingr_periodo;
+		return regimen;
 	}
 
 	/**
-	 * @param total_ingr_periodo
-	 *           the total_ingr_periodo to set
+	 * @param regimen
+	 *           the regimen to set
 	 */
-	public void setTotal_ingr_periodo(final String total_ingr_periodo)
+	public void setRegimen(final String regimen)
 	{
-		this.total_ingr_periodo = total_ingr_periodo;
+		this.regimen = regimen;
+	}
+
+	/**
+	 * @return the totalIngrPeriodo
+	 */
+	public String getTotalIngrPeriodo()
+	{
+		return totalIngrPeriodo;
+	}
+
+	/**
+	 * @param totalIngrPeriodo
+	 *           the totalIngrPeriodo to set
+	 */
+	public void setTotalIngrPeriodo(final String totalIngrPeriodo)
+	{
+		this.totalIngrPeriodo = totalIngrPeriodo;
 	}
 
 	/**
 	 * @return the deducciones
 	 */
-	public String getDeducciones()
+	public ICAInfoDeducciones getDeducciones()
 	{
 		return deducciones;
 	}
@@ -142,213 +163,213 @@ public class CalcICA2Response
 	 * @param deducciones
 	 *           the deducciones to set
 	 */
-	public void setDeducciones(final String deducciones)
+	public void setDeducciones(final ICAInfoDeducciones deducciones)
 	{
 		this.deducciones = deducciones;
 	}
 
 	/**
-	 * @return the totaling_fuera_bog
+	 * @return the totalingFueraBog
 	 */
-	public String getTotaling_fuera_bog()
+	public String getTotalingFueraBog()
 	{
-		return totaling_fuera_bog;
+		return totalingFueraBog;
 	}
 
 	/**
-	 * @param totaling_fuera_bog
-	 *           the totaling_fuera_bog to set
+	 * @param totalingFueraBog
+	 *           the totalingFueraBog to set
 	 */
-	public void setTotaling_fuera_bog(final String totaling_fuera_bog)
+	public void setTotalingFueraBog(final String totalingFueraBog)
 	{
-		this.totaling_fuera_bog = totaling_fuera_bog;
+		this.totalingFueraBog = totalingFueraBog;
 	}
 
 	/**
-	 * @return the totaling_brutos
+	 * @return the totalingBrutos
 	 */
-	public String getTotaling_brutos()
+	public String getTotalingBrutos()
 	{
-		return totaling_brutos;
+		return totalingBrutos;
 	}
 
 	/**
-	 * @param totaling_brutos
-	 *           the totaling_brutos to set
+	 * @param totalingBrutos
+	 *           the totalingBrutos to set
 	 */
-	public void setTotaling_brutos(final String totaling_brutos)
+	public void setTotalingBrutos(final String totalingBrutos)
 	{
-		this.totaling_brutos = totaling_brutos;
+		this.totalingBrutos = totalingBrutos;
 	}
 
 	/**
-	 * @return the devol_descuentos
+	 * @return the devolDescuentos
 	 */
-	public String getDevol_descuentos()
+	public String getDevolDescuentos()
 	{
-		return Devol_descuentos;
+		return devolDescuentos;
 	}
 
 	/**
-	 * @param devol_descuentos
-	 *           the devol_descuentos to set
+	 * @param devolDescuentos
+	 *           the devolDescuentos to set
 	 */
-	public void setDevol_descuentos(final String devol_descuentos)
+	public void setDevolDescuentos(final String devolDescuentos)
 	{
-		Devol_descuentos = devol_descuentos;
+		this.devolDescuentos = devolDescuentos;
 	}
 
 	/**
-	 * @return the total_deduccion
+	 * @return the totalDeduccion
 	 */
-	public String getTotal_deduccion()
+	public String getTotalDeduccion()
 	{
-		return total_deduccion;
+		return totalDeduccion;
 	}
 
 	/**
-	 * @param total_deduccion
-	 *           the total_deduccion to set
+	 * @param totalDeduccion
+	 *           the totalDeduccion to set
 	 */
-	public void setTotal_deduccion(final String total_deduccion)
+	public void setTotalDeduccion(final String totalDeduccion)
 	{
-		this.total_deduccion = total_deduccion;
+		this.totalDeduccion = totalDeduccion;
 	}
 
 	/**
-	 * @return the totaling_netos
+	 * @return the totalingNetos
 	 */
-	public String getTotaling_netos()
+	public String getTotalingNetos()
 	{
-		return totaling_netos;
+		return totalingNetos;
 	}
 
 	/**
-	 * @param totaling_netos
-	 *           the totaling_netos to set
+	 * @param totalingNetos
+	 *           the totalingNetos to set
 	 */
-	public void setTotaling_netos(final String totaling_netos)
+	public void setTotalingNetos(final String totalingNetos)
 	{
-		this.totaling_netos = totaling_netos;
+		this.totalingNetos = totalingNetos;
 	}
 
 	/**
-	 * @return the imp_indus_comer
+	 * @return the impIndusComer
 	 */
-	public String getImp_indus_comer()
+	public String getImpIndusComer()
 	{
-		return imp_indus_comer;
+		return impIndusComer;
 	}
 
 	/**
-	 * @param imp_indus_comer
-	 *           the imp_indus_comer to set
+	 * @param impIndusComer
+	 *           the impIndusComer to set
 	 */
-	public void setImp_indus_comer(final String imp_indus_comer)
+	public void setImpIndusComer(final String impIndusComer)
 	{
-		this.imp_indus_comer = imp_indus_comer;
+		this.impIndusComer = impIndusComer;
 	}
 
 	/**
-	 * @return the impuesto_aviso
+	 * @return the impuestoAviso
 	 */
-	public String getImpuesto_aviso()
+	public String getImpuestoAviso()
 	{
-		return impuesto_aviso;
+		return impuestoAviso;
 	}
 
 	/**
-	 * @param impuesto_aviso
-	 *           the impuesto_aviso to set
+	 * @param impuestoAviso
+	 *           the impuestoAviso to set
 	 */
-	public void setImpuesto_aviso(final String impuesto_aviso)
+	public void setImpuestoAviso(final String impuestoAviso)
 	{
-		this.impuesto_aviso = impuesto_aviso;
+		this.impuestoAviso = impuestoAviso;
 	}
 
 	/**
-	 * @return the total_unidad_adic
+	 * @return the totalUnidadAdic
 	 */
-	public String getTotal_unidad_adic()
+	public String getTotalUnidadAdic()
 	{
-		return total_unidad_adic;
+		return totalUnidadAdic;
 	}
 
 	/**
-	 * @param total_unidad_adic
-	 *           the total_unidad_adic to set
+	 * @param totalUnidadAdic
+	 *           the totalUnidadAdic to set
 	 */
-	public void setTotal_unidad_adic(final String total_unidad_adic)
+	public void setTotalUnidadAdic(final String totalUnidadAdic)
 	{
-		this.total_unidad_adic = total_unidad_adic;
+		this.totalUnidadAdic = totalUnidadAdic;
 	}
 
 	/**
-	 * @return the impuesto_cargo
+	 * @return the impuestoCargo
 	 */
-	public String getImpuesto_cargo()
+	public String getImpuestoCargo()
 	{
-		return impuesto_cargo;
+		return impuestoCargo;
 	}
 
 	/**
-	 * @param impuesto_cargo
-	 *           the impuesto_cargo to set
+	 * @param impuestoCargo
+	 *           the impuestoCargo to set
 	 */
-	public void setImpuesto_cargo(final String impuesto_cargo)
+	public void setImpuestoCargo(final String impuestoCargo)
 	{
-		this.impuesto_cargo = impuesto_cargo;
+		this.impuestoCargo = impuestoCargo;
 	}
 
 	/**
-	 * @return the valor_rete_indus_comer
+	 * @return the valorReteIndus
 	 */
-	public String getValor_rete_indus_comer()
+	public String getValorReteIndus()
 	{
-		return valor_rete_indus_comer;
+		return valorReteIndus;
 	}
 
 	/**
-	 * @param valor_rete_indus_comer
-	 *           the valor_rete_indus_comer to set
+	 * @param valorReteIndus
+	 *           the valorReteIndus to set
 	 */
-	public void setValor_rete_indus_comer(final String valor_rete_indus_comer)
+	public void setValorReteIndus(final String valorReteIndus)
 	{
-		this.valor_rete_indus_comer = valor_rete_indus_comer;
+		this.valorReteIndus = valorReteIndus;
 	}
 
 	/**
-	 * @return the saldo_cargo
+	 * @return the saldoCargo
 	 */
-	public String getSaldo_cargo()
+	public String getSaldoCargo()
 	{
-		return saldo_cargo;
+		return saldoCargo;
 	}
 
 	/**
-	 * @param saldo_cargo
-	 *           the saldo_cargo to set
+	 * @param saldoCargo
+	 *           the saldoCargo to set
 	 */
-	public void setSaldo_cargo(final String saldo_cargo)
+	public void setSaldoCargo(final String saldoCargo)
 	{
-		this.saldo_cargo = saldo_cargo;
+		this.saldoCargo = saldoCargo;
 	}
 
 	/**
-	 * @return the valor_pagar
+	 * @return the valorPagar
 	 */
-	public String getValor_pagar()
+	public String getValorPagar()
 	{
-		return valor_pagar;
+		return valorPagar;
 	}
 
 	/**
-	 * @param valor_pagar
-	 *           the valor_pagar to set
+	 * @param valorPagar
+	 *           the valorPagar to set
 	 */
-	public void setValor_pagar(final String valor_pagar)
+	public void setValorPagar(final String valorPagar)
 	{
-		this.valor_pagar = valor_pagar;
+		this.valorPagar = valorPagar;
 	}
 
 	/**
@@ -369,139 +390,173 @@ public class CalcICA2Response
 	}
 
 	/**
-	 * @return the interes_mora
+	 * @return the interesMora
 	 */
-	public String getInteres_mora()
+	public String getInteresMora()
 	{
-		return interes_mora;
+		return interesMora;
 	}
 
 	/**
-	 * @param interes_mora
-	 *           the interes_mora to set
+	 * @param interesMora
+	 *           the interesMora to set
 	 */
-	public void setInteres_mora(final String interes_mora)
+	public void setInteresMora(final String interesMora)
 	{
-		this.interes_mora = interes_mora;
+		this.interesMora = interesMora;
 	}
 
 	/**
-	 * @return the total_pagar
+	 * @return the totalPagar
 	 */
-	public String getTotal_pagar()
+	public String getTotalPagar()
 	{
-		return total_pagar;
+		return totalPagar;
 	}
 
 	/**
-	 * @param total_pagar
-	 *           the total_pagar to set
+	 * @param totalPagar
+	 *           the totalPagar to set
 	 */
-	public void setTotal_pagar(final String total_pagar)
+	public void setTotalPagar(final String totalPagar)
 	{
-		this.total_pagar = total_pagar;
+		this.totalPagar = totalPagar;
 	}
 
 	/**
-	 * @return the total_aporte_volun
+	 * @return the totalAporteVolun
 	 */
-	public String getTotal_aporte_volun()
+	public String getTotalAporteVolun()
 	{
-		return total_aporte_volun;
+		return totalAporteVolun;
 	}
 
 	/**
-	 * @param total_aporte_volun
-	 *           the total_aporte_volun to set
+	 * @param totalAporteVolun
+	 *           the totalAporteVolun to set
 	 */
-	public void setTotal_aporte_volun(final String total_aporte_volun)
+	public void setTotalAporteVolun(final String totalAporteVolun)
 	{
-		this.total_aporte_volun = total_aporte_volun;
+		this.totalAporteVolun = totalAporteVolun;
 	}
 
 	/**
-	 * @return the proyecto_aporte
+	 * @return the proyectoAporte
 	 */
-	public String getProyecto_aporte()
+	public String getProyectoAporte()
 	{
-		return proyecto_aporte;
+		return proyectoAporte;
 	}
 
 	/**
-	 * @param proyecto_aporte
-	 *           the proyecto_aporte to set
+	 * @param proyectoAporte
+	 *           the proyectoAporte to set
 	 */
-	public void setProyecto_aporte(final String proyecto_aporte)
+	public void setProyectoAporte(final String proyectoAporte)
 	{
-		this.proyecto_aporte = proyecto_aporte;
+		this.proyectoAporte = proyectoAporte;
 	}
 
 	/**
-	 * @return the tarifa_aporte
+	 * @return the tarifaAporte
 	 */
-	public String getTarifa_aporte()
+	public String getTarifaAporte()
 	{
-		return tarifa_aporte;
+		return tarifaAporte;
 	}
 
 	/**
-	 * @param tarifa_aporte
-	 *           the tarifa_aporte to set
+	 * @param tarifaAporte
+	 *           the tarifaAporte to set
 	 */
-	public void setTarifa_aporte(final String tarifa_aporte)
+	public void setTarifaAporte(final String tarifaAporte)
 	{
-		this.tarifa_aporte = tarifa_aporte;
+		this.tarifaAporte = tarifaAporte;
 	}
 
 	/**
-	 * @return the check_aporte
+	 * @return the checkAporte
 	 */
-	public String getCheck_aporte()
+	public String getCheckAporte()
 	{
-		return check_aporte;
+		return checkAporte;
 	}
 
 	/**
-	 * @param check_aporte
-	 *           the check_aporte to set
+	 * @param checkAporte
+	 *           the checkAporte to set
 	 */
-	public void setCheck_aporte(final String check_aporte)
+	public void setCheckAporte(final String checkAporte)
 	{
-		this.check_aporte = check_aporte;
+		this.checkAporte = checkAporte;
 	}
 
 	/**
-	 * @return the ing_netos_grava
+	 * @return the ingFueraBog
 	 */
-	public List<CalcICA2ing_netos_gravaResponse> getIng_netos_grava()
+	public List<ICAInfoIngFueraBog> getIngFueraBog()
 	{
-		return ing_netos_grava;
+		return ingFueraBog;
 	}
 
 	/**
-	 * @param ing_netos_grava
-	 *           the ing_netos_grava to set
+	 * @param ingFueraBog
+	 *           the ingFueraBog to set
 	 */
-	public void setIng_netos_grava(final List<CalcICA2ing_netos_gravaResponse> ing_netos_grava)
+	public void setIngFueraBog(final List<ICAInfoIngFueraBog> ingFueraBog)
 	{
-		this.ing_netos_grava = ing_netos_grava;
+		this.ingFueraBog = ingFueraBog;
 	}
 
 	/**
-	 * @return the ing_por_CIIU
+	 * @return the valorRetenido
 	 */
-	public List<CalcICA2ing_por_CIIUResponse> getIng_por_CIIU()
+	public ICAInfoValorRetenido getValorRetenido()
 	{
-		return ing_por_CIIU;
+		return valorRetenido;
 	}
 
 	/**
-	 * @param ing_por_CIIU
-	 *           the ing_por_CIIU to set
+	 * @param valorRetenido
+	 *           the valorRetenido to set
 	 */
-	public void setIng_por_CIIU(final List<CalcICA2ing_por_CIIUResponse> ing_por_CIIU)
+	public void setValorRetenido(final ICAInfoValorRetenido valorRetenido)
 	{
-		this.ing_por_CIIU = ing_por_CIIU;
+		this.valorRetenido = valorRetenido;
+	}
+
+	/**
+	 * @return the ingNetosGrava
+	 */
+	public List<ICAInfoIngNetosGrava> getIngNetosGrava()
+	{
+		return ingNetosGrava;
+	}
+
+	/**
+	 * @param ingNetosGrava
+	 *           the ingNetosGrava to set
+	 */
+	public void setIngNetosGrava(final List<ICAInfoIngNetosGrava> ingNetosGrava)
+	{
+		this.ingNetosGrava = ingNetosGrava;
+	}
+
+	/**
+	 * @return the ingPorCIIU
+	 */
+	public List<ICAInfoIngPorCiiu> getIngPorCIIU()
+	{
+		return ingPorCIIU;
+	}
+
+	/**
+	 * @param ingPorCIIU
+	 *           the ingPorCIIU to set
+	 */
+	public void setIngPorCIIU(final List<ICAInfoIngPorCiiu> ingPorCIIU)
+	{
+		this.ingPorCIIU = ingPorCIIU;
 	}
 
 	/**
@@ -529,17 +584,17 @@ public class CalcICA2Response
 	@Override
 	public String toString()
 	{
-		return "CalcICA2Response [anio_gravable=" + anio_gravable + ", periodo=" + periodo + ", opcion_uso=" + opcion_uso
-				+ ", cant_establec=" + cant_establec + ", total_ingr_periodo=" + total_ingr_periodo + ", ing_fuera_bog="
-				+ ing_fuera_bog + ", deducciones=" + deducciones + ", totaling_fuera_bog=" + totaling_fuera_bog + ", totaling_brutos="
-				+ totaling_brutos + ", Devol_descuentos=" + Devol_descuentos + ", total_deduccion=" + total_deduccion
-				+ ", totaling_netos=" + totaling_netos + ", imp_indus_comer=" + imp_indus_comer + ", impuesto_aviso=" + impuesto_aviso
-				+ ", total_unidad_adic=" + total_unidad_adic + ", impuesto_cargo=" + impuesto_cargo + ", valor_rete_indus_comer="
-				+ valor_rete_indus_comer + ", saldo_cargo=" + saldo_cargo + ", valor_pagar=" + valor_pagar + ", sanciones="
-				+ sanciones + ", interes_mora=" + interes_mora + ", total_pagar=" + total_pagar + ", total_aporte_volun="
-				+ total_aporte_volun + ", proyecto_aporte=" + proyecto_aporte + ", tarifa_aporte=" + tarifa_aporte + ", check_aporte="
-				+ check_aporte + ", ing_netos_grava=" + ing_netos_grava + ", ing_por_CIIU=" + ing_por_CIIU + ", firmantes="
-				+ firmantes + "]";
+		return "CalcICA2Response [anio_gravable=" + anio_gravable + ", periodo=" + periodo + ", opcionUso=" + opcionUso
+				+ ", cantEstablec=" + cantEstablec + ", regimen=" + regimen + ", totalIngrPeriodo=" + totalIngrPeriodo
+				+ ", deducciones=" + deducciones + ", totalingFueraBog=" + totalingFueraBog + ", totalingBrutos=" + totalingBrutos
+				+ ", devolDescuentos=" + devolDescuentos + ", totalDeduccion=" + totalDeduccion + ", totalingNetos=" + totalingNetos
+				+ ", impIndusComer=" + impIndusComer + ", impuestoAviso=" + impuestoAviso + ", totalUnidadAdic=" + totalUnidadAdic
+				+ ", impuestoCargo=" + impuestoCargo + ", valorReteIndus=" + valorReteIndus + ", saldoCargo=" + saldoCargo
+				+ ", valorPagar=" + valorPagar + ", sanciones=" + sanciones + ", interesMora=" + interesMora + ", totalPagar="
+				+ totalPagar + ", totalAporteVolun=" + totalAporteVolun + ", proyectoAporte=" + proyectoAporte + ", tarifaAporte="
+				+ tarifaAporte + ", checkAporte=" + checkAporte + ", ingFueraBog=" + ingFueraBog + ", valorRetenido=" + valorRetenido
+				+ ", ingNetosGrava=" + ingNetosGrava + ", ingPorCIIU=" + ingPorCIIU + ", firmantes=" + firmantes + "]";
 	}
+
 
 }

@@ -5,11 +5,14 @@ package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.responses.DetalleInfoDeclaraVehiculos;
+import de.hybris.sdh.core.pojos.responses.DetalleJuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleLiquidacionVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleMarcas;
+import de.hybris.sdh.core.pojos.responses.DetalleMarcasVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculos;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.Infovehic;
+import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
@@ -46,7 +49,7 @@ public class VehiculosInfObjetoForm
 
 
 
-	//	private List<DetalleJuridicosVehiculos> datosJuridicos;
+	private List<DetalleJuridicosVehiculos> datosJuridicosForm;
 	private String tipoID;
 	private String nombre;
 	private String numID;
@@ -55,7 +58,7 @@ public class VehiculosInfObjetoForm
 	private String fechaDesde;
 	private String fechaHasta;
 
-	private List<DetalleMarcas> marcas;
+	private List<DetalleMarcas> marcasForm;
 	private String tipoMarca;
 	private String codMarca;
 	private String valorExcencion;
@@ -72,6 +75,10 @@ public class VehiculosInfObjetoForm
 	private DetalleInfoDeclaraVehiculos info_declara;
 	private Infovehic infoVeh;
 	private String liquidaciondeclara;
+
+
+	private List<JuridicosVehiculos> datosJuridicos;
+	private List<DetalleMarcasVehiculos> marcas;
 	/**
 	 * @return the numBP
 	 */
@@ -79,7 +86,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numBP;
 	}
-
+	
 	/**
 	 * @param numBP
 	 *           the numBP to set
@@ -95,7 +102,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipiden;
 	}
-
+	
 	/**
 	 * @param tipiden
 	 *           the tipiden to set
@@ -111,7 +118,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numide;
 	}
-
+	
 	/**
 	 * @param numide
 	 *           the numide to set
@@ -127,7 +134,7 @@ public class VehiculosInfObjetoForm
 	{
 		return name;
 	}
-
+	
 	/**
 	 * @param name
 	 *           the name to set
@@ -143,7 +150,7 @@ public class VehiculosInfObjetoForm
 	{
 		return bpNum;
 	}
-
+	
 	/**
 	 * @param bpNum
 	 *           the bpNum to set
@@ -159,7 +166,7 @@ public class VehiculosInfObjetoForm
 	{
 		return placa;
 	}
-
+	
 	/**
 	 * @param placa
 	 *           the placa to set
@@ -175,7 +182,7 @@ public class VehiculosInfObjetoForm
 	{
 		return anioGravable;
 	}
-
+	
 	/**
 	 * @param anioGravable
 	 *           the anioGravable to set
@@ -191,7 +198,7 @@ public class VehiculosInfObjetoForm
 	{
 		return vehiculos;
 	}
-
+	
 	/**
 	 * @param vehiculos
 	 *           the vehiculos to set
@@ -207,7 +214,7 @@ public class VehiculosInfObjetoForm
 	{
 		return impvehicular;
 	}
-
+	
 	/**
 	 * @param impvehicular
 	 *           the impvehicular to set
@@ -223,7 +230,7 @@ public class VehiculosInfObjetoForm
 	{
 		return detallerequest;
 	}
-
+	
 	/**
 	 * @param detallerequest
 	 *           the detallerequest to set
@@ -239,7 +246,7 @@ public class VehiculosInfObjetoForm
 	{
 		return detalle;
 	}
-
+	
 	/**
 	 * @param detalle
 	 *           the detalle to set
@@ -255,7 +262,7 @@ public class VehiculosInfObjetoForm
 	{
 		return idServicio;
 	}
-
+	
 	/**
 	 * @param idServicio
 	 *           the idServicio to set
@@ -271,7 +278,7 @@ public class VehiculosInfObjetoForm
 	{
 		return idEstado;
 	}
-
+	
 	/**
 	 * @param idEstado
 	 *           the idEstado to set
@@ -287,7 +294,7 @@ public class VehiculosInfObjetoForm
 	{
 		return watts;
 	}
-
+	
 	/**
 	 * @param watts
 	 *           the watts to set
@@ -303,7 +310,7 @@ public class VehiculosInfObjetoForm
 	{
 		return clasicoAntig;
 	}
-
+	
 	/**
 	 * @param clasicoAntig
 	 *           the clasicoAntig to set
@@ -319,7 +326,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoVeh;
 	}
-
+	
 	/**
 	 * @param tipoVeh
 	 *           the tipoVeh to set
@@ -335,7 +342,7 @@ public class VehiculosInfObjetoForm
 	{
 		return capacidadPas;
 	}
-
+	
 	/**
 	 * @param capacidadPas
 	 *           the capacidadPas to set
@@ -351,7 +358,7 @@ public class VehiculosInfObjetoForm
 	{
 		return capacidadTon;
 	}
-
+	
 	/**
 	 * @param capacidadTon
 	 *           the capacidadTon to set
@@ -367,7 +374,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaCambio;
 	}
-
+	
 	/**
 	 * @param fechaCambio
 	 *           the fechaCambio to set
@@ -376,24 +383,22 @@ public class VehiculosInfObjetoForm
 	{
 		this.fechaCambio = fechaCambio;
 	}
-
-	//	/**
-	//	 * @return the datosJuridicos
-	//	 */
-	//	public List<DetalleJuridicosVehiculos> getDatosJuridicos()
-	//	{
-	//		return datosJuridicos;
-	//	}
-	//
-	//	/**
-	//	 * @param datosJuridicos
-	//	 *           the datosJuridicos to set
-	//	 */
-	//	public void setDatosJuridicos(final List<DetalleJuridicosVehiculos> datosJuridicos)
-	//	{
-	//		this.datosJuridicos = datosJuridicos;
-	//	}
-
+	/**
+	 * @return the datosJuridicosForm
+	 */
+	public List<DetalleJuridicosVehiculos> getDatosJuridicosForm()
+	{
+		return datosJuridicosForm;
+	}
+	
+	/**
+	 * @param datosJuridicosForm
+	 *           the datosJuridicosForm to set
+	 */
+	public void setDatosJuridicosForm(final List<DetalleJuridicosVehiculos> datosJuridicosForm)
+	{
+		this.datosJuridicosForm = datosJuridicosForm;
+	}
 	/**
 	 * @return the tipoID
 	 */
@@ -401,7 +406,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoID;
 	}
-
+	
 	/**
 	 * @param tipoID
 	 *           the tipoID to set
@@ -410,7 +415,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.tipoID = tipoID;
 	}
-
 	/**
 	 * @return the nombre
 	 */
@@ -418,7 +422,7 @@ public class VehiculosInfObjetoForm
 	{
 		return nombre;
 	}
-
+	
 	/**
 	 * @param nombre
 	 *           the nombre to set
@@ -427,7 +431,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.nombre = nombre;
 	}
-
 	/**
 	 * @return the numID
 	 */
@@ -435,7 +438,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numID;
 	}
-
+	
 	/**
 	 * @param numID
 	 *           the numID to set
@@ -444,7 +447,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.numID = numID;
 	}
-
 	/**
 	 * @return the calidad
 	 */
@@ -452,7 +454,7 @@ public class VehiculosInfObjetoForm
 	{
 		return calidad;
 	}
-
+	
 	/**
 	 * @param calidad
 	 *           the calidad to set
@@ -461,7 +463,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.calidad = calidad;
 	}
-
 	/**
 	 * @return the procProp
 	 */
@@ -469,7 +470,7 @@ public class VehiculosInfObjetoForm
 	{
 		return procProp;
 	}
-
+	
 	/**
 	 * @param procProp
 	 *           the procProp to set
@@ -478,7 +479,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.procProp = procProp;
 	}
-
 	/**
 	 * @return the fechaDesde
 	 */
@@ -486,7 +486,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaDesde;
 	}
-
+	
 	/**
 	 * @param fechaDesde
 	 *           the fechaDesde to set
@@ -495,7 +495,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.fechaDesde = fechaDesde;
 	}
-
 	/**
 	 * @return the fechaHasta
 	 */
@@ -503,7 +502,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaHasta;
 	}
-
+	
 	/**
 	 * @param fechaHasta
 	 *           the fechaHasta to set
@@ -512,24 +511,22 @@ public class VehiculosInfObjetoForm
 	{
 		this.fechaHasta = fechaHasta;
 	}
-
 	/**
-	 * @return the marcas
+	 * @return the marcasForm
 	 */
-	public List<DetalleMarcas> getMarcas()
+	public List<DetalleMarcas> getMarcasForm()
 	{
-		return marcas;
+		return marcasForm;
 	}
-
+	
 	/**
-	 * @param marcas
-	 *           the marcas to set
+	 * @param marcasForm
+	 *           the marcasForm to set
 	 */
-	public void setMarcas(final List<DetalleMarcas> marcas)
+	public void setMarcasForm(final List<DetalleMarcas> marcasForm)
 	{
-		this.marcas = marcas;
+		this.marcasForm = marcasForm;
 	}
-
 	/**
 	 * @return the tipoMarca
 	 */
@@ -537,7 +534,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoMarca;
 	}
-
+	
 	/**
 	 * @param tipoMarca
 	 *           the tipoMarca to set
@@ -546,7 +543,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.tipoMarca = tipoMarca;
 	}
-
 	/**
 	 * @return the codMarca
 	 */
@@ -554,7 +550,7 @@ public class VehiculosInfObjetoForm
 	{
 		return codMarca;
 	}
-
+	
 	/**
 	 * @param codMarca
 	 *           the codMarca to set
@@ -563,7 +559,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.codMarca = codMarca;
 	}
-
 	/**
 	 * @return the valorExcencion
 	 */
@@ -571,7 +566,7 @@ public class VehiculosInfObjetoForm
 	{
 		return valorExcencion;
 	}
-
+	
 	/**
 	 * @param valorExcencion
 	 *           the valorExcencion to set
@@ -580,7 +575,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.valorExcencion = valorExcencion;
 	}
-
 	/**
 	 * @return the ciiu
 	 */
@@ -588,7 +582,7 @@ public class VehiculosInfObjetoForm
 	{
 		return ciiu;
 	}
-
+	
 	/**
 	 * @param ciiu
 	 *           the ciiu to set
@@ -597,7 +591,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.ciiu = ciiu;
 	}
-
 	/**
 	 * @return the descripMarca
 	 */
@@ -605,7 +598,7 @@ public class VehiculosInfObjetoForm
 	{
 		return descripMarca;
 	}
-
+	
 	/**
 	 * @param descripMarca
 	 *           the descripMarca to set
@@ -614,7 +607,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.descripMarca = descripMarca;
 	}
-
 	/**
 	 * @return the fechaDesdemarca
 	 */
@@ -622,7 +614,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaDesdemarca;
 	}
-
+	
 	/**
 	 * @param fechaDesdemarca
 	 *           the fechaDesdemarca to set
@@ -631,7 +623,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.fechaDesdemarca = fechaDesdemarca;
 	}
-
 	/**
 	 * @return the fechaHastamarca
 	 */
@@ -639,7 +630,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaHastamarca;
 	}
-
+	
 	/**
 	 * @param fechaHastamarca
 	 *           the fechaHastamarca to set
@@ -648,7 +639,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.fechaHastamarca = fechaHastamarca;
 	}
-
 	/**
 	 * @return the liquidacion
 	 */
@@ -656,7 +646,7 @@ public class VehiculosInfObjetoForm
 	{
 		return liquidacion;
 	}
-
+	
 	/**
 	 * @param liquidacion
 	 *           the liquidacion to set
@@ -665,7 +655,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.liquidacion = liquidacion;
 	}
-
 	/**
 	 * @return the anio
 	 */
@@ -673,7 +662,7 @@ public class VehiculosInfObjetoForm
 	{
 		return anio;
 	}
-
+	
 	/**
 	 * @param anio
 	 *           the anio to set
@@ -682,7 +671,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.anio = anio;
 	}
-
 	/**
 	 * @return the avaluo
 	 */
@@ -690,7 +678,7 @@ public class VehiculosInfObjetoForm
 	{
 		return avaluo;
 	}
-
+	
 	/**
 	 * @param avaluo
 	 *           the avaluo to set
@@ -699,7 +687,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.avaluo = avaluo;
 	}
-
 	/**
 	 * @return the tarifa
 	 */
@@ -707,7 +694,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tarifa;
 	}
-
+	
 	/**
 	 * @param tarifa
 	 *           the tarifa to set
@@ -716,7 +703,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.tarifa = tarifa;
 	}
-
 	/**
 	 * @return the info_declara
 	 */
@@ -724,7 +710,7 @@ public class VehiculosInfObjetoForm
 	{
 		return info_declara;
 	}
-
+	
 	/**
 	 * @param info_declara
 	 *           the info_declara to set
@@ -733,7 +719,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.info_declara = info_declara;
 	}
-
 	/**
 	 * @return the infoVeh
 	 */
@@ -741,7 +726,7 @@ public class VehiculosInfObjetoForm
 	{
 		return infoVeh;
 	}
-
+	
 	/**
 	 * @param infoVeh
 	 *           the infoVeh to set
@@ -750,7 +735,6 @@ public class VehiculosInfObjetoForm
 	{
 		this.infoVeh = infoVeh;
 	}
-
 	/**
 	 * @return the liquidaciondeclara
 	 */
@@ -758,7 +742,7 @@ public class VehiculosInfObjetoForm
 	{
 		return liquidaciondeclara;
 	}
-
+	
 	/**
 	 * @param liquidaciondeclara
 	 *           the liquidaciondeclara to set
@@ -768,6 +752,39 @@ public class VehiculosInfObjetoForm
 		this.liquidaciondeclara = liquidaciondeclara;
 	}
 
+	/**
+	 * @return the datosJuridicos
+	 */
+	public List<JuridicosVehiculos> getDatosJuridicos()
+	{
+		return datosJuridicos;
+	}
+
+	/**
+	 * @param datosJuridicos
+	 *           the datosJuridicos to set
+	 */
+	public void setDatosJuridicos(final List<JuridicosVehiculos> datosJuridicos)
+	{
+		this.datosJuridicos = datosJuridicos;
+	}
+
+	/**
+	 * @return the marcas
+	 */
+	public List<DetalleMarcasVehiculos> getMarcas()
+	{
+		return marcas;
+	}
+
+	/**
+	 * @param marcas
+	 *           the marcas to set
+	 */
+	public void setMarcas(final List<DetalleMarcasVehiculos> marcas)
+	{
+		this.marcas = marcas;
+	}
 
 
 }

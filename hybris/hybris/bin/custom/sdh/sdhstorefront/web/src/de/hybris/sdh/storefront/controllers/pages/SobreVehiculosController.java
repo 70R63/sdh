@@ -28,6 +28,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
@@ -224,47 +225,53 @@ public class SobreVehiculosController extends AbstractPageController
 				vehiculosForm.setFechaCambio(localDate.format(formatter2));
 			}
 
-			//			if (detalleVehiculosResponse.getDatosJuridicos() != null && !detalleVehiculosResponse.getDatosJuridicos().isEmpty())
-			//			{
-			//
-			//				for (final JuridicosVehiculos eachDetalleJur : detalleVehiculosResponse.getDatosJuridicos())
-			//				{
-			//					vehiculosForm.setTipoID(eachDetalleJur.getTipoID());
-			//					vehiculosForm.setNombre(eachDetalleJur.getNombre());
-			//					vehiculosForm.setNumID(eachDetalleJur.getNumID());
-			//					vehiculosForm.setCalidad(eachDetalleJur.getCalidad());
-			//					vehiculosForm.setProcProp(eachDetalleJur.getProcProp());
-			//
-			//					//								vehiculosForm.setFechaDesde(eachDetalleJur.getFechaDesde());
-			//					final String FechaDesde = eachDetalleJur.getFechaDesde();
-			//					if (StringUtils.isNotBlank(FechaDesde) && !"00000000".equals(FechaDesde))
-			//					{
-			//						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-			//
-			//						final LocalDate localDate = LocalDate.parse(FechaDesde, formatter);
-			//
-			//						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			//
-			//						vehiculosForm.setFechaDesde(localDate.format(formatter2));
-			//					}
-			//
-			//					//					vehiculosForm.setFechaHasta(eachDetalleJur.getFechaHasta());
-			//					final String FechaHasta = eachDetalleJur.getFechaHasta();
-			//					if (StringUtils.isNotBlank(FechaHasta) && !"00000000".equals(FechaHasta))
-			//					{
-			//						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-			//
-			//						final LocalDate localDate = LocalDate.parse(FechaHasta, formatter);
-			//
-			//						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			//
-			//						vehiculosForm.setFechaHasta(localDate.format(formatter2));
-			//					}
-			//
-			//					break;
-			//				}
-			//
-			//			}
+			if (detalleVehiculosResponse.getDatosJuridicos() != null && !detalleVehiculosResponse.getDatosJuridicos().isEmpty())
+			{
+
+				for (final JuridicosVehiculos eachDetalleJur : detalleVehiculosResponse.getDatosJuridicos())
+				{
+					vehiculosForm.setTipoID(eachDetalleJur.getTipoID());
+					vehiculosForm.setNombre(eachDetalleJur.getNombre());
+					vehiculosForm.setNumID(eachDetalleJur.getNumID());
+					vehiculosForm.setCalidad(eachDetalleJur.getCalidad());
+					vehiculosForm.setProcProp(eachDetalleJur.getProcProp());
+
+					//								vehiculosForm.setFechaDesde(eachDetalleJur.getFechaDesde());
+					final String FechaDesde = eachDetalleJur.getFechaDesde();
+					if (StringUtils.isNotBlank(FechaDesde) && !"00000000".equals(FechaDesde))
+					{
+						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+						final LocalDate localDate = LocalDate.parse(FechaDesde, formatter);
+
+						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+						vehiculosForm.setFechaDesde(localDate.format(formatter2));
+					}
+
+					//					vehiculosForm.setFechaHasta(eachDetalleJur.getFechaHasta());
+					final String FechaHasta = eachDetalleJur.getFechaHasta();
+					if (StringUtils.isNotBlank(FechaHasta) && !"00000000".equals(FechaHasta))
+					{
+						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+						final LocalDate localDate = LocalDate.parse(FechaHasta, formatter);
+
+						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+						vehiculosForm.setFechaHasta(localDate.format(formatter2));
+					}
+
+					break;
+				}
+
+			}
+
+			vehiculosForm.setDatosJuridicos(detalleVehiculosResponse.getDatosJuridicos().stream()
+					.filter(eachDetJur -> StringUtils.isNotBlank(eachDetJur.getCalidad())).collect(Collectors.toList()));
+
+			vehiculosForm.setMarcas(detalleVehiculosResponse.getMarcas().stream()
+					.filter(eachDetMarcas -> StringUtils.isNotBlank(eachDetMarcas.getCodigoMarca())).collect(Collectors.toList()));
 
 			vehiculosForm.setLiquidacion(detalleVehiculosResponse.getLiquidacion().stream()
 					.filter(eachDetLiq -> StringUtils.isNotBlank(eachDetLiq.getAnio())).collect(Collectors.toList()));
