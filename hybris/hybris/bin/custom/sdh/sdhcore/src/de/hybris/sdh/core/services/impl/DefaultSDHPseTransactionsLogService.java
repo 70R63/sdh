@@ -337,8 +337,8 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 				modelService.saveAll(pseTransactionsLogModel);
 
-				LOG.info(response);
 				LOG.info("UpdateCredibancoTransaction:[ numeroReferencia(NUS)=" + pseTransactionsLogModel.getNumeroDeReferencia() + "]");
+                LOG.info(response);
 			}
 			else
 			{
