@@ -9,7 +9,7 @@ ACC.vehiculos = {
 						".labelVerDetalle",
 						function(e) {
 							e.preventDefault();
-						
+
 							var tabRel = document.getElementById('tabRelacion');
 							tabRel.style.display = 'none';
 							$('#tabRelacion tbody').empty();
@@ -98,7 +98,7 @@ ACC.vehiculos = {
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {
 			e.preventDefault();
-		
+
 			var placa = $.trim($(this).attr("data-placa"));
 			var bpNum = $.trim($(this).attr("data-numbp"));
 			var anioGravable = $.trim($("#an").val());
@@ -133,68 +133,66 @@ ACC.vehiculos = {
 		debugger;
 
 		$("#placas").val(data.placa);
-		
+
 		if (data.idServicio == "01") {
-			data.idServicio="PARTICULAR";
+			data.idServicio = "PARTICULAR";
 		} else if (data.idServicio == "02") {
-			data.idServicio="PÚBLICO";
+			data.idServicio = "PÚBLICO";
 		} else if (data.idServicio == "03") {
-			data.idServicio="OFICIAL";
-		}else {
-			data.idServicio="-";
+			data.idServicio = "OFICIAL";
+		} else {
+			data.idServicio = "-";
 		}
 		$("#inidServicio").val(data.idServicio);
-		
-		
+
 		if (data.idEstado == "1") {
-			data.idEstado="ACTIVO";
+			data.idEstado = "ACTIVO";
 		} else if (data.idEstado == "7") {
-			data.idEstado="INHABILITADO";
+			data.idEstado = "INHABILITADO";
 		} else if (data.idEstado == "8") {
-			data.idEstado="CANCELACIÓN";
-		}else if (data.idEstado == "9") {
-			data.idEstado="TRASLADADO";
-		}else {
-			data.idEstado="-";
+			data.idEstado = "CANCELACIÓN";
+		} else if (data.idEstado == "9") {
+			data.idEstado = "TRASLADADO";
+		} else {
+			data.idEstado = "-";
 		}
-		
-		
+
 		$("#inidEstado").val(data.idEstado);
 		$("#inwatts").val(data.watts);
-		
+
 		if (data.clasicoAntig == "0") {
-			data.clasicoAntig="NO APLICA";
+			data.clasicoAntig = "NO APLICA";
 		} else if (data.clasicoAntig == "1") {
-			data.clasicoAntig="ANTIGUO";
+			data.clasicoAntig = "ANTIGUO";
 		} else if (data.clasicoAntig == "2") {
-			data.clasicoAntig="CLASICO";
-		}else {
-			data.clasicoAntig="-";
+			data.clasicoAntig = "CLASICO";
+		} else {
+			data.clasicoAntig = "-";
 		}
 		$("#inclasico").val(data.clasicoAntig);
-		
+
 		if (data.tipoVeh == "1") {
-			data.tipoVeh="AUTOMÓVILES";
+			data.tipoVeh = "AUTOMÓVILES";
 		} else if (data.tipoVeh == "2") {
-			data.tipoVeh="CAMPEROS Y CAMIONETAS";
+			data.tipoVeh = "CAMPEROS Y CAMIONETAS";
 		} else if (data.tipoVeh == "3") {
-			data.tipoVeh="CAMIONETAS DOBLE CABINA";
+			data.tipoVeh = "CAMIONETAS DOBLE CABINA";
 
 		} else if (data.tipoVeh == "4") {
-			data.tipoVeh="ELÉCTRICOS";
+			data.tipoVeh = "ELÉCTRICOS";
 
 		} else if (data.tipoVeh == "5") {
-			data.tipoVeh="MOTOS Y MOTOCARROS";
+			data.tipoVeh = "MOTOS Y MOTOCARROS";
 
 		} else if (data.tipoVeh == "6") {
-			data.tipoVeh="PASAJEROS";
+			data.tipoVeh = "PASAJEROS";
 
 		} else if (data.tipoVeh == "7") {
-			data.tipoVeh="CARGA";
+			data.tipoVeh = "CARGA";
 		} else if (data.tipoVeh == "8") {
-			data.tipoVeh="AMBULANCIAS";
+			data.tipoVeh = "AMBULANCIAS";
 		} else {
-			data.tipoVeh="-";
+			data.tipoVeh = "-";
 
 		}
 
@@ -206,130 +204,143 @@ ACC.vehiculos = {
 		$("#infechacambio").val(data.fechaCambio);
 		$("#inTipo").val(data.tipoID);
 		$("#inNomcom").val(data.nombre)
-		
+
 		var jur = data.datosJuridicos;
-		
+
 		if (jur != null) {
-			for (var i = 0; i<jur.length; i++) {
-				
-				if(jur[i].calidad == "1"){
+			for (var i = 0; i < jur.length; i++) {
+
+				if (jur[i].calidad == "1") {
 					jur[i].calidad = "PROPIETARIO";
-					
-				}else if(jur[i].calidad == "2"){
+
+				} else if (jur[i].calidad == "2") {
 					jur[i].calidad = "FIDEICOMETENTE";
-				}else if(jur[i].calidad == "3"){
+				} else if (jur[i].calidad == "3") {
 					jur[i].calidad = "POSEEDOR";
-				}else if(jur[i].calidad == "4"){
+				} else if (jur[i].calidad == "4") {
 					jur[i].calidad = "BENEFICIARIO";
-				}else if(jur[i].calidad == "5"){
+				} else if (jur[i].calidad == "5") {
 					jur[i].calidad = "USUFRUCTUARIO";
-				}else if(jur[i].calidad == "6"){
+				} else if (jur[i].calidad == "6") {
 					jur[i].calidad = "ARRENDATARIO";
-				}else{
-					jur[i].calidad = "-";				
+				} else {
+					jur[i].calidad = "-";
 				}
-					
-				
-				
+
+				var fec1 = jur[i].fechaDesde;
+
+				var anio = fec1.slice(0, 4);
+				var mes = fec1.slice(4, 6);
+				var dia = fec1.slice(6);
+				jur[i].fechaDesde = dia + '/' + mes + '/' + anio;
+
+				var fechasta = jur[i].fechaHasta;
+				var anioh = fechasta.slice(0, 4);
+				var mesh = fechasta.slice(4, 6);
+				var diah = fechasta.slice(6);
+				jur[i].fechaHasta = diah + '/' + mesh + '/' + anioh;
 				$('#tableJur')
-				.append(
-						"<tr>"
-								+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
-								+ jur[i].calidad
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ jur[i].procProp
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ jur[i].fechaDesde
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ jur[i].fechaHasta + '" /></td>');
+						.append(
+								"<tr>"
+										+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+										+ jur[i].calidad
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ jur[i].procProp
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ jur[i].fechaDesde
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ jur[i].fechaHasta + '" /></td>');
 
 			}
 		} else {
 			$('#tableJur')
-			.append(
-					"<tr>"
-							+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+					.append(
+							"<tr>"
+									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
 		}
-		
+
 		var marca = data.marcas;
 		if (marca != null) {
-			for (var i = 0; i<marca.length; i++) {
+			for (var i = 0; i < marca.length; i++) {
 				debugger;
-//				var fec1 = marca[i].fechaDesde;
-//				 fec2 = fec1.slice(8, 10) + '/'  
-//                 + fec1.slice(5, 7) + '/'  
-//                 + fec1.slice(0,10); 
-//				
-//				marca[i].fechaDesde = fec2;
-				
+				var fec1 = marca[i].fechaDesde;
+
+				var anio = fec1.slice(0, 4);
+				var mes = fec1.slice(4, 6);
+				var dia = fec1.slice(6);
+				marca[i].fechaDesde = dia + '/' + mes + '/' + anio;
+
+				var fechasta = marca[i].fechaHasta;
+				var anioh = fechasta.slice(0, 4);
+				var mesh = fechasta.slice(4, 6);
+				var diah = fechasta.slice(6);
+				marca[i].fechaHasta = diah + '/' + mesh + '/' + anioh;
 				$('#tablemarcas')
-				.append(
-						"<tr>"
-								+ '<td><input style="width: 95px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
-								+ marca[i].codigoMarca
-								+ '" /></td>'
-								+ '<td><input style="width: 495px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ marca[i].descripcion
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ marca[i].porcExencion
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ marca[i].valorExencion
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ marca[i].fechaDesde
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ marca[i].fechaHasta + '" /></td>');
+						.append(
+								"<tr>"
+										+ '<td><input style="width: 95px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+										+ marca[i].codigoMarca
+										+ '" /></td>'
+										+ '<td><input style="width: 495px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ marca[i].descripcion
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ marca[i].porcExencion
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ marca[i].valorExencion
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ marca[i].fechaDesde
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ marca[i].fechaHasta + '" /></td>');
 
 			}
 		} else {
 			$('#tablemarcas')
-			.append(
-					"<tr>"
-							+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+					.append(
+							"<tr>"
+									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
 		}
-		
 
 		var liq = data.liquidacion
 
 		if (liq != null) {
-			for (var i = 0; i<liq.length; i++) {
-				
+			for (var i = 0; i < liq.length; i++) {
+
 				$('#tableLiq')
-				.append(
-						"<tr>"
-								+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
-								+ liq[i].anio
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ liq[i].avaluo
-								+ '" /></td>'
-								+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-								+ liq[i].tarifa + '" /></td>');
+						.append(
+								"<tr>"
+										+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+										+ liq[i].anio
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ liq[i].avaluo
+										+ '" /></td>'
+										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ liq[i].tarifa + '" /></td>');
 
 			}
 		} else {
 			$('#tableLiq')
-			.append(
-					"<tr>"
-							+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-							+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+					.append(
+							"<tr>"
+									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
 		}
-		
 
 	}
 

@@ -2760,3 +2760,21 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;predialBasesPresuntivasPageComponent	;predialBasesPresuntivasPage Component	;/WEB-INF/views/responsive/pages/layout/predialBasesPresuntivasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;predialBasesPresuntivasPageComponent
 
 #->FIN dev-maria Agregar paginas para impuesto predial unificado impex bases 25/09/2019
+
+# Inicio Gestion Bancaria Upload File
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;gestionBancariaFileUploadPage 		;Predial Unificado bases	;AccountPageTemplate:sdhContentCatalog:Staged	;/gestionBancaria/uploadFile
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='gestionBancariaFileUploadPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-gestionBancariaFileUploadPage 	;SideContent			;																	;SideContent-gestionBancariaFileUploadPage				;;;
+								;						;BodyContent-gestionBancariaFileUploadPage 	;BodyContent			;																	;BodyContent-gestionBancariaFileUploadPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-gestionBancariaFileUploadPage 	;Side Content Slot for Predial unificado bases	;true	;								;;;
+							;							;BodyContent-gestionBancariaFileUploadPage	;Body Content Slot for Predial unificado bases	;true	;gestionBancariaFileUploadPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;gestionBancariaFileUploadPageComponent	;gestionBancariaFileUploadPage Component	;/WEB-INF/views/responsive/pages/layout/gestionBancariaFileUploadPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;gestionBancariaFileUploadPageComponent
+# Fin Gestion Bancaria Upload File
