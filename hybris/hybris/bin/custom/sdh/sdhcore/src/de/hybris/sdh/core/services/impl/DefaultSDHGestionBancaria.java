@@ -29,8 +29,8 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         String nameFile = this.updateFileToServer(multipartFile);
         if(Objects.nonNull(nameFile)){
             isValid =  this.verifyFile(updatedFilesFolder + nameFile , approvedFilesFolder + nameFile);
-            LOG.info(updatedFilesFolder + nameFile);
-            LOG.info(approvedFilesFolder + nameFile);
+            LOG.info("updatedFilesFolder:" + updatedFilesFolder + nameFile);
+            LOG.info("updatedFilesFolder:" + approvedFilesFolder + nameFile);
         }
 
         return isValid;
@@ -50,7 +50,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
             e.printStackTrace();
         }
         LOG.info("PpdateFileToServer");
-        LOG.info("FileCreated: " + corePath +  multipartFile.getOriginalFilename());
+        LOG.info("FileCreatedFolder: " + corePath +  multipartFile.getOriginalFilename());
         return fileName;
     }
 
@@ -85,7 +85,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 
         LOG.info("VerifyFile");
         LOG.info("Resultado " + resultado);
-        LOG.info("autoridadesPath: " + autoridadesPath);
+        LOG.info("autoridadesFolderPath: " + autoridadesPath);
         return isValidCertificate;
     }
 
