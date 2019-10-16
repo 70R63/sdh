@@ -1591,6 +1591,44 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 #end Conciliaciones page
 
+#new gestionBancaria page
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;gestionBancariaPageTemplate;Publicidad Exterior Template;layout/gestionBancariaFileUploadPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='gestionBancariaPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='gestionBancariaPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-gestionBancariaPageTemplate;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-gestionBancariaPageTemplate;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-gestionBancariaPageTemplate;NavigationBar;;NavigationBarSlot;true
+;;Footer-gestionBancariaPageTemplate;Footer;;FooterSlot;true
+;;HeaderLinks-gestionBancariaPageTemplate;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-gestionBancariaPageTemplate;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-gestionBancariaPageTemplate;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-gestionBancariaPageTemplate;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-gestionBancariaPageTemplate;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;gestionBancariaPage;gestionBancaria Page;gestionBancariaPageTemplate;gestionBancaria
+
+#end gestionBancaria page
 
 #new Publicidad Exterior Declaracion page
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		            ;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']

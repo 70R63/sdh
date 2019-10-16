@@ -718,7 +718,8 @@
     <alias alias="sdhOlinePaymentProviderMatcherService" name="defaultSDHOlinePaymentProviderMatcherService"/>
     <bean name="defaultSDHOlinePaymentProviderMatcherService" class="de.hybris.sdh.core.services.impl.DefaultSDHOlinePaymentProviderMatcherService" />
 
-
+	<alias alias="sdhGestionBancaria" name="defaultSDHGestionBancaria"/>
+	<bean name="defaultSDHGestionBancaria" class="de.hybris.sdh.core.services.impl.DefaultSDHGestionBancaria" />
 
 
 </beans>
