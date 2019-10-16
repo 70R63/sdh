@@ -20,7 +20,6 @@
 	}
 
 	window.onload = function() {
-		debugger;
 		var cosas = $(":input");
 		var tam = cosas.length;
 		for (var i = 0; i < tam; i++) {
