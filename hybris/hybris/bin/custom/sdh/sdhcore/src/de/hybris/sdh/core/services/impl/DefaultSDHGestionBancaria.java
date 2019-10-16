@@ -51,9 +51,12 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         }
         LOG.info("PpdateFileToServer");
         LOG.info("FileCreatedFolder: " + corePath +  multipartFile.getOriginalFilename());
+        LOG.info(corePath);
+        LOG.info(multipartFile.getOriginalFilename());
         return fileName;
     }
 
+    @Override
     public boolean verifyFile(String source, String target){
         boolean isValidCertificate = false;
         FileSignVerifier fv = null;
