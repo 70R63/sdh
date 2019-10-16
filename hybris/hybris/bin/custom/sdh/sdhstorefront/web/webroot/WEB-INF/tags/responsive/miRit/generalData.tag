@@ -54,7 +54,7 @@
 						<div class="form-group ">
 							<label class="control-label required" for="claseIC"> <spring:theme
 									code="mirit.generalData.classIC" />
-							</label> <select id="claseIC" name="claseIC" class="newalto form-control"
+							</label> <select id="claseIC" name="claseIC" class="alto_select form-control"
 								disabled="disabled">
 								<option value="${miRitForm.claseIC}"><spring:theme
 										code="rit.claseIC.c${miRitForm.claseIC}" /></option>
