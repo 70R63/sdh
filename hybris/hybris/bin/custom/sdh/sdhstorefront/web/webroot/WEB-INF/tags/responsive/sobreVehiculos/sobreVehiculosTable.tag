@@ -75,7 +75,7 @@
 
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-10">
 			<table class="table">
 				<thead>
 					<tr>
@@ -118,8 +118,7 @@
 								value='<spring:theme code="vehiculos.detalle.marca.${eachVehiculo.marca}"/>'
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value="<c:out value="${eachVehiculo.linea}"></c:out>"
+								readonly="readonly" value='<spring:theme code="vehiculos.detalle.linea.${eachVehiculo.linea}"/>'
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly"
