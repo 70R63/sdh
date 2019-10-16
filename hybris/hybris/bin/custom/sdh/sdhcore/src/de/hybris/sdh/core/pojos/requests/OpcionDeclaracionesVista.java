@@ -31,6 +31,7 @@ public class OpcionDeclaracionesVista
 	private String claveImpuesto;
 	private String anoGravable;
 	private String periodo;
+	private String tipoPeriodoDec; //0-Anual,1-Mensual,2-bimestral
 	private String objContrato;
 	private String urlDownload;
 	private OpcionDeclaracionesPDFResponse declaraPDFResponse;
@@ -350,6 +351,23 @@ public class OpcionDeclaracionesVista
 	public void setPeriodo(final String periodo)
 	{
 		this.periodo = periodo;
+	}
+
+	/**
+	 * @return the tipoPeriodoDec
+	 */
+	public String getTipoPeriodoDec()
+	{
+		return tipoPeriodoDec;
+	}
+
+	/**
+	 * @param tipoPeriodoDec
+	 *           the tipoPeriodoDec to set
+	 */
+	public void setTipoPeriodoDec(final String tipoPeriodoDec)
+	{
+		this.tipoPeriodoDec = tipoPeriodoDec;
 	}
 
 	/**
