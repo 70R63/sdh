@@ -29,7 +29,6 @@ import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
-import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -336,7 +335,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 		listaDeclaracionesRequest.setBp(bp);
 		listaDeclaracionesRequest.setImpuesto(impuesto);
 		listaDeclaracionesRequest.setAnioGravable(anioGravable);
-		listaDeclaracionesRequest.setNumObjeto(infoVista.getCustomerData().getGasolina().get(0).getNumObjeto());
+		listaDeclaracionesRequest
+				.setNumObjeto(gasolinaService.prepararNumObjeto_certipagos(infoVista, infoVista.getCustomerData()));
 
 		System.out.println("Request para docs/consulPagos: " + listaDeclaracionesRequest);
 		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest,
@@ -345,33 +345,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 		System.out.println("Response de docs/consulPagos: " + listaDeclaracionesResponse);
 		if (gasolinaService.ocurrioErrorListaDeclara(listaDeclaracionesResponse) != true)
 		{
-			//			gasolinaService.determinarRegistrosDeclaraciones(infoVista, listaDeclaracionesResponse);
-			final List<ItemListaDeclaraciones> declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
-			int cont = 0;
-			String periodo = null;
-			for (final ItemListaDeclaraciones declaracionRow : listaDeclaracionesResponse.getDeclaraciones())
-			{
+			listaDeclaracionesResponse.setDeclaraciones(gasolinaService.determinarRegistrosDeclaraciones_certipagos(infoVista,
+					listaDeclaracionesResponse, gasolinaService));
 
-				if (infoVista.getPeriodo().equals("00"))
-				{
-					periodo = infoVista.getAnoGravable().substring(2) + "A1";
-				}
-				else
-				{
-					periodo = infoVista.getAnoGravable().substring(2) + infoVista.getPeriodo();
-				}
-
-				cont++;
-				System.out.println("cont=" + cont + "  " + "periodo=" + periodo + "  " + "declaracionRow.getClavePeriodo()="
-						+ declaracionRow.getClavePeriodo());
-
-				if (declaracionRow.getClavePeriodo() != null && declaracionRow.getClavePeriodo().equals(periodo))
-				{
-					declaraciones_selected.add(declaracionRow);
-				}
-			}
-
-			listaDeclaracionesResponse.setDeclaraciones(declaraciones_selected);
 			infoVista.setDeclaracionesCertiPagos(listaDeclaracionesResponse);
 			infoVista.setErrores(listaDeclaracionesResponse.getErrores());
 		}

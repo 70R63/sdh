@@ -2298,4 +2298,122 @@ public class SobreTasaGasolinaService
 	}
 
 
+	public List<ItemListaDeclaraciones> determinarRegistrosDeclaraciones_certipagos(final OpcionDeclaracionesVista infoVista,
+			final ListaDeclaracionesResponse listaDeclaracionesResponse, final SobreTasaGasolinaService gasolinaService)
+	{
+
+		List<ItemListaDeclaraciones> declaraciones_selected = null;
+
+
+		switch (infoVista.getClaveImpuesto())
+		{
+			//implementar la logica para cada impuesto
+			case "0003": //ICA
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+
+				break;
+
+			//			case "0004": //RETEICA
+			//				break;
+
+
+			case "0005": //sobretasa gasolina
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				String periodo = null;
+				for (final ItemListaDeclaraciones declaracionRow : listaDeclaracionesResponse.getDeclaraciones())
+				{
+
+					if (infoVista.getPeriodo().equals("00"))
+					{
+						periodo = gasolinaService.prepararPeriodoAnualPago(infoVista.getAnoGravable());
+					}
+					else
+					{
+						periodo = infoVista.getAnoGravable().substring(2) + infoVista.getPeriodo();
+					}
+
+					if (declaracionRow.getClavePeriodo() != null && declaracionRow.getClavePeriodo().equals(periodo))
+					{
+						declaraciones_selected.add(declaracionRow);
+					}
+				}
+
+				break;
+
+			//			case "0006": //delineacion urbana
+			//
+			//				break;
+			//
+			//
+			//			case "0007": //publicidad exterior
+			//
+			//				break;
+			default:
+
+				break;
+		}
+
+		return declaraciones_selected;
+	}
+
+	/**
+	 * @param claveImpuesto
+	 * @param customerData
+	 * @return
+	 */
+	public String prepararNumObjeto_certipagos(final OpcionDeclaracionesVista infoVista,
+			final SDHValidaMailRolResponse customerData)
+	{
+		String numObjeto = null;
+
+		switch (infoVista.getClaveImpuesto())
+		{
+			//implementar la logica para cada impuesto
+			case "0003": //ICA
+				if (customerData != null)
+				{
+					if (customerData.getIca() != null)
+					{
+						numObjeto = customerData.getIca().getNumObjeto();
+					}
+				}
+
+				break;
+
+			//			case "0004": //RETEICA
+			//				break;
+
+
+			case "0005": //sobretasa gasolina
+				if (customerData != null)
+				{
+					if (customerData.getGasolina() != null)
+					{
+						if (customerData.getGasolina().get(0) != null)
+						{
+							numObjeto = customerData.getGasolina().get(0).getNumObjeto();
+						}
+					}
+				}
+
+				break;
+
+			//			case "0006": //delineacion urbana
+			//
+			//				break;
+			//
+			//
+			//			case "0007": //publicidad exterior
+			//
+			//				break;
+			default:
+
+				break;
+		}
+
+		return numObjeto;
+	}
+
+
 }
