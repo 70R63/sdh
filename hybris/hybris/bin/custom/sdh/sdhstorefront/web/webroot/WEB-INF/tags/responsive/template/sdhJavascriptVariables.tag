@@ -5267,5 +5267,14 @@
 				{'locId':'1','name':'Usaqu�n'},
 				{'locId':'5','name':'Usme'}];			
 			
+			
+			var des_periodoB = [
+				{'itemId':'B1','itemValue':'1 - Ene / Feb'},
+				{'itemId':'B2','itemValue':'2 - Mar / Abr'},
+				{'itemId':'B3','itemValue':'3 - May / Jun'},
+				{'itemId':'B4','itemValue':'4 - Jul / Ago'},
+				{'itemId':'B5','itemValue':'5 - Sep / Oct'},
+				{'itemId':'B6','itemValue':'6 - Nov / Dic'}];
+			
 		/*]]>*/
 	</script>

@@ -322,7 +322,7 @@ ACC.opcionDeclaraciones = {
 	
 	obtenerListaDeclaraciones_certiPagos : function() {
 
-		debugger;
+//		debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
 	        var claveImpuesto = $("#seleccion").val();  	       
@@ -436,14 +436,15 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse) {
 
-//		debugger;
+
 		$("#table-publicidad1").find("tr:gt(0)").remove();
 		$("#table-gasolina1").find("tr:gt(0)").remove();
 		$("#table-ica1").find("tr:gt(0)").remove();
 		$("#table-reteica1").find("tr:gt(0)").remove();
 		$("#table-delineacion1").find("tr:gt(0)").remove();
+		var desc_clavePeriodo = "";
 		
-		
+//		debugger;
 		if (infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].idmsj != 0){
 			alert(infoResponse.errores[0].txtmsj);
 		}else{
@@ -454,9 +455,10 @@ ACC.opcionDeclaraciones = {
 						$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 							if(value1.numObjeto != ""){
 								if(value1.numObjeto == infoResponse.customerData.ica.numObjeto){
+									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
 									$('#table-ica1').append("<tr>"+ 
 										'<td>' + "Industria y Comercio" + '</td>'+
-										'<td>' + value1.clavePeriodo + '</td>'+
+										'<td>' + desc_clavePeriodo + '</td>'+
 										'<td>' + value1.referencia + '</td>'+
 										'<td>' + value1.importe + '</td>'+
 										'<td>' + value1.moneda + '</td>'+
@@ -598,6 +600,27 @@ ACC.opcionDeclaraciones = {
 		}
 		
 		return validacionOK;
+	},
+	
+	
+	obtener_desc_clavePeriodo : function (clavePeriodo){
+		debugger;
+		var descripcion = "";
+		
+		tipo_periodo = clavePeriodo.substring(2,3);
+		if(tipo_periodo == "B"){
+			id_periodo = clavePeriodo.substring(2,4);
+			
+			des_periodoB.forEach(function (eachItem) {
+    	    	if(eachItem.itemId == id_periodo)
+    	    		des_periodo = eachItem.itemValue;
+    		});
+		}
+		des_anio = clavePeriodo.substring(0,2);
+		descripcion = "20" + des_anio + " periodo " + des_periodo;
+		
+		
+		return descripcion;
 	},
 	
 	

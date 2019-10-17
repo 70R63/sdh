@@ -285,7 +285,7 @@
 										code="certideclara.inicial.selcimpuesto" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.referencia" /></label></th>
@@ -320,7 +320,7 @@
 										code="certideclara.inicial.reteica.consecutivo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.referencia" /></label></th>
@@ -355,7 +355,7 @@
 							</label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.referencia" /></label></th>
@@ -393,7 +393,7 @@
 										code="certideclara.inicial.gasolina.numdocu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.referencia" /></label></th>
@@ -424,7 +424,7 @@
 										code="certideclara.inicial.delineacion.cdu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.referencia" /></label></th>

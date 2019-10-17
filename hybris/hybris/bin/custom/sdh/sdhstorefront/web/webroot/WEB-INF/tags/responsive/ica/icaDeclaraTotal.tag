@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!-- Total ingresos netos gravables -->
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
@@ -120,12 +121,20 @@
 						</select>
 						 -->
 						<!-- EJRR Adding data to select box eachActivity -->
+						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
+							pattern="#######################" var="codCIIUNumber" />
 						<select id="" class="alto form-control codCIIU"
 							style="height: 48px;">
 							<option value="" selected>SELECCIONAR</option>
-							<c:forEach items="${gravableNetIncomes}" var="eachActivity">
-								<option value="${eachActivity.ciiu}">${eachActivity.ciiu}
-									- ${eachActivity.denominacion}</option>
+							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+								<c:set var="selected" value="" />
+								<fmt:formatNumber value="${ eachActivity.ciiu}"
+									pattern="#######################" var="eachCodCIIUNumber" />
+								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}">
+									<c:set var="selected" value="selected" />
+								</c:if>
+								<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
+									- ${eachActivity.denominacion }</option>
 							</c:forEach>
 						</select>
 					</div>
