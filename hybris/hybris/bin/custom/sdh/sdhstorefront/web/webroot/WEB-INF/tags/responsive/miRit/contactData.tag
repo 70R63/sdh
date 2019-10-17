@@ -303,12 +303,12 @@ toddir.style.width= '900px'
 			<div class="card-body">
 				<!--  First column of form -->
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="form-group ">
 							<label class="control-label required" for="direccionNotificacion">
 								<spring:theme code="mirit.contactData.notificationAddress" />
 							</label> <input id="direccionNotificacion" name="direccionNotificacion"
-								class="newalto form-control" aria-required="true" type="text"
+								class="newalto_dir form-control" aria-required="true" type="text"
 								data-original="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
 								" disabled="disabled"
 								value="${miRitForm.direccionNotificacion.STREET} ${miRitForm.direccionNotificacion.STR_SUPPL1 } ${miRitForm.direccionNotificacion.STR_SUPPL2 }"
@@ -332,7 +332,7 @@ toddir.style.width= '900px'
 							<label class="control-label " for="countryDireccionNotificacion">
 								<spring:theme code="mirit.contactData.country" />
 							</label> <select disabled="disabled" id="countryDireccionNotificacion"
-								class="newalto form-control" onchange="">
+								class="alto_select form-control" onchange="">
 							</select>
 						</div>
 
@@ -343,7 +343,7 @@ toddir.style.width= '900px'
 								for="deparmentDireccionNotificacion"> <spring:theme
 									code="mirit.contactData.department" />
 							</label> <select disabled="disabled" id="deparmentDireccionNotificacion"
-								class="newalto form-control " onchange="">
+								class="alto_select form-control " onchange="">
 							</select>
 						</div>
 					</div>
@@ -354,7 +354,7 @@ toddir.style.width= '900px'
 								for="municipioDireccionNotificacion"> <spring:theme
 									code="mirit.contactData.county" />
 							</label> <select disabled="disabled" id="municipioDireccionNotificacion"
-								class="newalto form-control" onchange="municipioDNChanged();">
+								class="alto_select form-control" onchange="municipioDNChanged();">
 							</select>
 						</div>
 					</div>
@@ -364,7 +364,7 @@ toddir.style.width= '900px'
 								for="postalCodeDireccionNotificacion"> <spring:theme
 									code="mirit.contactData.postalCode" />
 							</label> <select disabled="disabled" id="postalCodeDireccionNotificacion"
-								class="newalto form-control" onchange="">
+								class="alto_select form-control" onchange="">
 							</select>
 						</div>
 					</div>
@@ -382,12 +382,12 @@ toddir.style.width= '900px'
 
 				<br> <br>
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="form-group ">
 							<label class="control-label required" for="direccionContacto">
 								<spring:theme code="mirit.contactData.anotherContactAddress" />
 							</label> <input id="direccionContacto" name="direccionContacto"
-								class="newalto form-control" aria-required="true" type="text"
+								class="newalto_dir form-control" aria-required="true" type="text"
 								disabled="disabled"
 								data-original="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }"
 								value="${miRitForm.direccionContacto.STREET } ${miRitForm.direccionContacto.STR_SUPPL1 } ${miRitForm.direccionContacto.STR_SUPPL2 }"
@@ -415,7 +415,7 @@ toddir.style.width= '900px'
 							<label class="control-label " for="countryDireccionContacto">
 								<spring:theme code="mirit.contactData.country" />
 							</label> <select disabled="disabled" id="countryDireccionContacto"
-								class="newalto form-control" onchange="countryACChanged();">
+								class="alto_select form-control" onchange="countryACChanged();">
 							</select>
 						</div>
 
@@ -425,7 +425,7 @@ toddir.style.width= '900px'
 							<label class="control-label " for="deparmentDireccionContacto">
 								<spring:theme code="mirit.contactData.department" />
 							</label> <select disabled="disabled" id="deparmentDireccionContacto"
-								class="newalto form-control " onchange="departmentACChanged();">
+								class="alto_select form-control " onchange="departmentACChanged();">
 							</select>
 						</div>
 					</div>
@@ -435,7 +435,7 @@ toddir.style.width= '900px'
 							<label class="control-label " for="municipioDireccionContacto">
 								<spring:theme code="mirit.contactData.county" />
 							</label> <select disabled="disabled" id="municipioDireccionContacto"
-								class="newalto form-control" onchange="municipioDNChanged();">
+								class="alto_select form-control" onchange="municipioDNChanged();">
 							</select>
 						</div>
 					</div>
@@ -444,7 +444,7 @@ toddir.style.width= '900px'
 							<label class="control-label " for="postalCodeDireccionContacto">
 								<spring:theme code="mirit.contactData.postalCode" />
 							</label> <select disabled="disabled" id="postalCodeDireccionContacto"
-								class="newalto form-control" onchange="">
+								class="alto_select form-control" onchange="">
 							</select>
 						</div>
 					</div>

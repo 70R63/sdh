@@ -246,10 +246,10 @@ ACC.vehiculos = {
 										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ jur[i].procProp
 										+ '" /></td>'
-										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ jur[i].fechaDesde
 										+ '" /></td>'
-										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ jur[i].fechaHasta + '" /></td>');
 
 			}
@@ -294,10 +294,10 @@ ACC.vehiculos = {
 										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ marca[i].valorExencion
 										+ '" /></td>'
-										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ marca[i].fechaDesde
 										+ '" /></td>'
-										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ marca[i].fechaHasta + '" /></td>');
 
 			}
@@ -309,8 +309,8 @@ ACC.vehiculos = {
 									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
 									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
 									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
 		}
 
 		var liq = data.liquidacion
@@ -321,7 +321,7 @@ ACC.vehiculos = {
 				$('#tableLiq')
 						.append(
 								"<tr>"
-										+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 										+ liq[i].anio
 										+ '" /></td>'
 										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'

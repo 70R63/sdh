@@ -25128,3 +25128,22 @@ span.pasos {
   text-transform: none !important;
   font-weight: 400 !important;
 }
+.form-group .alto_select,
+.alto_select {
+  height: 25px !important;
+  min-height: 10px !important;
+  min-width: 20% !important;
+  max-width: 200% !important;
+  width: 103% !important;
+  font-size: 10.9px !important;
+  padding-left: 0px !important;
+  padding-right: 1px !important;
+}
+.form-group .newalto_dir,
+.newalto_dir {
+  height: 25px !important;
+  min-height: 20px !important;
+  padding: 1px 1px 1px 1px!important;
+  min-width: 20% !important;
+  max-width: 101% !important;
+}
