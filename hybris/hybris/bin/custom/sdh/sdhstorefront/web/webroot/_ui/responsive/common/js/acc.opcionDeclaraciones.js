@@ -224,14 +224,22 @@ ACC.opcionDeclaraciones = {
 	
 	obtenerListaDeclaraciones : function() {
 
-//		debugger;
+		debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
 	        var claveImpuesto = $("#seleccion").val();  	       
 	        var anoGravable = $("#aniograv").val(); 	       
-	        var periodo = $("#periodo").val(); 	       
+	        var periodo = '00';
+	        var periodoM = $("#periodoM").val();
+	        var periodoB = $("#periodoB").val();
+	        var perBimestral = document.getElementById('Periodo2'); //bimestral
 			var dataActual = {};
-			var validacionOK = false;
+			
+			if(perBimestral.style.display == 'block'){
+				periodo = periodoB;
+			}else{
+				periodo = periodoM;
+			}
 
 		
 			dataActual.claveImpuesto = claveImpuesto;
@@ -250,6 +258,62 @@ ACC.opcionDeclaraciones = {
 					alert("Error procesar la solicitud");	
 				}
 			});
+		}
+		
+		
+	},
+	
+	
+	prepararPeriodo : function() {
+
+		debugger;
+		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
+	        var claveImpuesto = $("#seleccion").val();  	       
+			var dataActual = {};
+		
+			dataActual.claveImpuesto = claveImpuesto;
+			
+			
+			$.ajax({
+				url : ACC.tipoPeriodoDeclaracionURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.opcionDeclaraciones.updateFromResponsePeriodo(dataActual,dataResponse);
+				},
+				error : function() {
+					alert("Error procesar la solicitud obtener tipo de periodo");	
+				}
+			});
+		}
+		
+		
+	},
+	
+	updateFromResponsePeriodo : function(infoActual,infoResponse) {
+
+		debugger;
+		var perMensual = document.getElementById('Periodo1'); //mensual
+		var perBimestral = document.getElementById('Periodo2'); //bimestral
+		var perAnual = document.getElementById('aniograv');
+		var perMensualValue = document.getElementById('periodoM'); 
+		var perBimestralValue = document.getElementById('periodoB'); 
+		
+		perAnual.value = '00';
+		perMensualValue.value = '00';
+		perBimestralValue.value = '00';
+		
+		perMensual.style.display = 'none';
+		perBimestral.style.display = 'none';
+		perAnual.style.display = 'none';
+		if (infoResponse.tipoPeriodoDec == '0') {
+			perAnual.style.display = 'block';
+		} else if (infoResponse.tipoPeriodoDec == '1') {
+			perAnual.style.display = 'block';
+			perMensual.style.display = 'block';
+		} else if (infoResponse.tipoPeriodoDec == '2') {
+			perAnual.style.display = 'block';
+			perBimestral.style.display = 'block';
 		}
 		
 		
@@ -494,22 +558,43 @@ ACC.opcionDeclaraciones = {
 //		debugger;
         var claveImpuesto = $("#seleccion").val();  	       
         var anoGravable = $("#aniograv").val(); 	       
-        var periodo = $("#periodo").val(); 	       
+        var periodoM = $("#periodoM").val();
+        var periodoB = $("#periodoB").val();
+		var perBimestral = document.getElementById('Periodo2'); //bimestral
 		var validacionOK = false;
 
-		if(claveImpuesto == "0001" || claveImpuesto == "0002" || claveImpuesto == "0003" || claveImpuesto == "0004" || claveImpuesto == "0006" || claveImpuesto == "0007"){
+		if(claveImpuesto == "0001" || claveImpuesto == "0002" || claveImpuesto == "0006" || claveImpuesto == "0007"){
 			if(anoGravable != "" && anoGravable != "00"){
 				validacionOK = true;
-			}else{
-				validacionOK = false;
+			}
+		}else if( claveImpuesto == "0003" || claveImpuesto == "0004" ){
+			if(anoGravable != "" && anoGravable != "00"){
+				if(perBimestral.style.display == 'block'){
+					if( periodoB != "" && periodoB != '00'){
+						validacionOK = true;
+					}
+				}else{
+					validacionOK = true; 
+				}
 			}
 		}
 		if(claveImpuesto == "0005"){
 			if(anoGravable != "" && anoGravable != "00" && periodo != "" && periodo != "00"){
 				validacionOK = true;
-			}else{
-				validacionOK = false;
 			}
+		}
+		
+		return validacionOK;
+	},
+	
+	validarAntesSubmitPeriodo : function() {
+
+//		debugger;
+        var claveImpuesto = $("#seleccion").val();
+		var validacionOK = false;
+
+		if(claveImpuesto == "0003" || claveImpuesto == "0004" || claveImpuesto == "0005"){
+			validacionOK = true;
 		}
 		
 		return validacionOK;

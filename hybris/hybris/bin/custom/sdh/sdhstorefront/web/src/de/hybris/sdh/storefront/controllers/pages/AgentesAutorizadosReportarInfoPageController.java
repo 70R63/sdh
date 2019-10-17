@@ -8,19 +8,24 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHUpdateRitService;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 /**
  * @author Maria Luisa
@@ -45,6 +50,9 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 
 	@Resource(name = "sdhCertificaRITService")
 	SDHCertificaRITService sdhCertificaRITService;
+
+	@Resource(name = "sdhUpdateRitService")
+	SDHUpdateRitService sdhUpdateRitService;
 
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
@@ -73,6 +81,30 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 			throws CMSItemNotFoundException
 	{
 		System.out.println("------------------Entro al POST de Agentes Autorizados reportar------------------------");
+
+		final UpdateRitRequest request = new UpdateRitRequest();
+		UpdateRitResponse response = new UpdateRitResponse();
+		response.setRitUpdated(false);
+		final String strinResponse = sdhUpdateRitService.updateRit(request);
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			response = mapper.readValue(strinResponse, UpdateRitResponse.class);
+			response.setRitUpdated(true);
+
+
+			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Error en la carga de archivos : " + e.getMessage());
+		}
 
 		return REDIRECT_TO_AUTORIZADOS_REPORTAR_PAGE;
 	}
