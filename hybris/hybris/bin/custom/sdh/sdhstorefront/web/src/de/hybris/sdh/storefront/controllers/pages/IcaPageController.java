@@ -584,7 +584,6 @@ public class IcaPageController extends SDHAbstractPageController
 			valorRetenido.add(calcula2ImpuestoResponse.getValorRetenido());
 			infoDeclara.setValorRetenido(valorRetenido);
 
-			infoDeclara.setIngFueraBog(calcula2ImpuestoResponse.getIngFueraBog());
 			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
 
@@ -667,6 +666,22 @@ public class IcaPageController extends SDHAbstractPageController
 				}
 			}
 			infoDeclara.setIngNetosGrava(calcula2ImpuestoResponse.getIngNetosGrava());
+
+			if (calcula2ImpuestoResponse.getIngFueraBog() != null)
+			{
+				for (int i = 0; i < calcula2ImpuestoResponse.getIngFueraBog().size(); i++)
+				{
+					if (calcula2ImpuestoResponse.getIngFueraBog().get(i) != null)
+					{
+						if (calcula2ImpuestoResponse.getIngFueraBog().get(i).getCodCIIU() == null)
+						{
+							calcula2ImpuestoResponse.getIngFueraBog().get(i).setCodCIIU(
+									StringUtils.stripStart(calcula2ImpuestoResponse.getIngFueraBog().get(i).getCodCIIU(), "0"));
+						}
+					}
+				}
+			}
+			infoDeclara.setIngFueraBog(calcula2ImpuestoResponse.getIngFueraBog());
 
 
 			icaInfObjetoResponse.setInfoDeclara(infoDeclara);

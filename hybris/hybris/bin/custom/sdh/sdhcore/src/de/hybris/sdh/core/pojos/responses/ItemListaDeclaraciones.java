@@ -14,6 +14,7 @@ public class ItemListaDeclaraciones
 	private String ctaContrato;
 	private String numObjeto;
 	private String clavePeriodo;
+	private String desc_clavePeriodo;
 	private String referencia;
 	private String numForm;
 	private String taxpayer;
@@ -25,7 +26,7 @@ public class ItemListaDeclaraciones
 	private String moneda; //Para consulPagos
 	private String numfactForm; //Para consulPagos
 	private String numDocPago; //Para consulPagos
-	
+
 	/**
 	 * @return the numBP
 	 */
@@ -33,7 +34,7 @@ public class ItemListaDeclaraciones
 	{
 		return numBP;
 	}
-	
+
 	/**
 	 * @param numBP
 	 *           the numBP to set
@@ -49,7 +50,7 @@ public class ItemListaDeclaraciones
 	{
 		return ctaContrato;
 	}
-	
+
 	/**
 	 * @param ctaContrato
 	 *           the ctaContrato to set
@@ -65,7 +66,7 @@ public class ItemListaDeclaraciones
 	{
 		return numObjeto;
 	}
-	
+
 	/**
 	 * @param numObjeto
 	 *           the numObjeto to set
@@ -81,7 +82,7 @@ public class ItemListaDeclaraciones
 	{
 		return clavePeriodo;
 	}
-	
+
 	/**
 	 * @param clavePeriodo
 	 *           the clavePeriodo to set
@@ -90,6 +91,24 @@ public class ItemListaDeclaraciones
 	{
 		this.clavePeriodo = clavePeriodo;
 	}
+	
+	/**
+	 * @return the desc_clavePeriodo
+	 */
+	public String getDesc_clavePeriodo()
+	{
+		return desc_clavePeriodo;
+	}
+
+	/**
+	 * @param desc_clavePeriodo
+	 *           the desc_clavePeriodo to set
+	 */
+	public void setDesc_clavePeriodo(final String desc_clavePeriodo)
+	{
+		this.desc_clavePeriodo = desc_clavePeriodo;
+	}
+
 	/**
 	 * @return the referencia
 	 */
@@ -97,7 +116,7 @@ public class ItemListaDeclaraciones
 	{
 		return referencia;
 	}
-	
+
 	/**
 	 * @param referencia
 	 *           the referencia to set
@@ -106,7 +125,7 @@ public class ItemListaDeclaraciones
 	{
 		this.referencia = referencia;
 	}
-	
+
 	/**
 	 * @return the numForm
 	 */
@@ -148,7 +167,7 @@ public class ItemListaDeclaraciones
 	{
 		return numRadicado;
 	}
-	
+
 	/**
 	 * @param numRadicado
 	 *           the numRadicado to set
@@ -164,7 +183,7 @@ public class ItemListaDeclaraciones
 	{
 		return creacion;
 	}
-	
+
 	/**
 	 * @param creacion
 	 *           the creacion to set
@@ -180,7 +199,7 @@ public class ItemListaDeclaraciones
 	{
 		return modificacion;
 	}
-	
+
 	/**
 	 * @param modificacion
 	 *           the modificacion to set
@@ -277,7 +296,7 @@ public class ItemListaDeclaraciones
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
