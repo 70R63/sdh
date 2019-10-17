@@ -374,8 +374,12 @@ public class MiRitPageController extends AbstractPageController
 						eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && "X".equalsIgnoreCase(eachAgente.getAgente()))
 						.collect(Collectors.toList()));
 
+				//				miRitForm.setRepresentados(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
+				//						eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && StringUtils.isBlank(eachAgente.getAgente()))
+				//						.collect(Collectors.toList()));
+
 				miRitForm.setRepresentados(sdhConsultaContribuyenteBPResponse.getAgentes().stream().filter(
-						eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && StringUtils.isBlank(eachAgente.getAgente()))
+						eachAgente -> StringUtils.isNotBlank(eachAgente.getTipoDoc()) && "-".equalsIgnoreCase(eachAgente.getAgente()))
 						.collect(Collectors.toList()));
 			}
 
