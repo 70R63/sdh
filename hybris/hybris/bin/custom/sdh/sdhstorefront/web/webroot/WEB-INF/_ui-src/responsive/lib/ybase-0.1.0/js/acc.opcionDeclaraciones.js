@@ -67,6 +67,7 @@ ACC.opcionDeclaraciones = {
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
+				var valNumRadicado;
 					
 				for (var i = 0; i < e.target.form.length; i++) {
 					nombreCampo = "registroNum_" + i;
@@ -76,6 +77,7 @@ ACC.opcionDeclaraciones = {
 						var seleccionado = valorCampo.checked;
 						if(seleccionado == true){
 							 valNumObjeto = $.trim($(valorCampo).attr("data-numObjeto")); 
+							 valNumRadicado = $.trim($(valorCampo).attr("data-numRadicado")); 
 							 break;
 						}
 					}else{
@@ -92,6 +94,7 @@ ACC.opcionDeclaraciones = {
 				dataActual.objContrato = objContrato;
 				dataActual.anoGravable = anoGravable;
 				dataActual.periodo = periodo;
+				dataActual.referencia = valNumRadicado;
 				
 	
 				$.ajax({
@@ -346,7 +349,7 @@ ACC.opcionDeclaraciones = {
 					debugger;
 					ACC.opcionDeclaraciones.dataActual_backup = dataActual;
 					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
-					ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(dataActual,dataResponse,null);
+//					ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(dataActual,dataResponse,null);
 					ACC.opcionDeclaraciones.habilitarFiltroPeriodo(dataActual,dataResponse);
 				},
 				error : function() {
