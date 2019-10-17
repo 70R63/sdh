@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!-- Actividades económicas Ingresos recibidos fuera de Bogotá --> 
 
 <script>
 	function bogota(selectObject) {
@@ -62,13 +63,11 @@
 					<div class="col-md-7">
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
-
-
 						<select id="" class="alto form-control deno codCIIU"
 							style="font-size: 11px !important">
-							<option value="">SELECCIONAR</option>
-							<c:set var="selected" value="" />
+							<option value="" selected>SELECCIONAR</option>
 							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+								<c:set var="selected" value="" />
 								<fmt:formatNumber value="${ eachActivity.ciiu}"
 									pattern="#######################" var="eachCodCIIUNumber" />
 								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}">
