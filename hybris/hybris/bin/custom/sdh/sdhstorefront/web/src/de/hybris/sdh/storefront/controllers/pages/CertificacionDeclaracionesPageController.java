@@ -11,7 +11,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -225,15 +224,15 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final OpcionCertiDecImprimeRequest decImprimeRequest = new OpcionCertiDecImprimeRequest();
 		OpcionCertiDecImprimeResponse decImprimeResponse = null;
 		//		SDHValidaMailRolResponse customerData = null;
-		OpcionDeclaracionesPDFResponse declaraPDFResponse = new OpcionDeclaracionesPDFResponse();
-		ErrorEnWSDeclaracionesPDF errorEnWSDeclaracionesPDF = new ErrorEnWSDeclaracionesPDF();
+		final OpcionDeclaracionesPDFResponse declaraPDFResponse = new OpcionDeclaracionesPDFResponse();
+		final ErrorEnWSDeclaracionesPDF errorEnWSDeclaracionesPDF = new ErrorEnWSDeclaracionesPDF();
 
 		String bp = "";
 		String numObjeto = "";
 		String claseObjeto = "";
 		String anioGravable = "";
 		String periodo = "";
-		String radicado = "";
+		String referencia = "";
 
 
 		bp = customerModel.getNumBP();
@@ -246,14 +245,14 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		numObjeto = infoVista.getObjContrato(); //gasolinaService.obtenerNumDocDeclaraciones(customerData2, claseObjeto);
 		anioGravable = infoVista.getAnoGravable();
 		periodo = infoVista.getPeriodo();
-		radicado = "";
+		referencia = infoVista.getReferencia();
 
 		infoVista.setUrlDownload(null);
 		//		infoVista.setDeclaraPDFResponse(null);
 
 		decImprimeRequest.setNumBP(bp);
 		decImprimeRequest.setNumObjeto(numObjeto);
-		decImprimeRequest.setRetencion("");
+		decImprimeRequest.setRetencion(referencia);
 		decImprimeRequest.setAnoGravable(anioGravable);
 		decImprimeRequest.setPeriodo(periodo);
 
