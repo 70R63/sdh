@@ -56,8 +56,8 @@
 			</div>
 			<div class="col-md-4">
 
-				<button type="submit" class="btn btn-primary "
-					id="" name="" value="regresar">
+				<button type="submit" class="generaDeclaracionVehiculosButton btn btn-primary "
+					id="generaDeclaracionVehiculosButton" name="" value="declaracion">
 					<spring:theme code="sobre.vehiculo.liqui.presdecla" />
 				</button>
 			</div>

@@ -40,6 +40,7 @@ import de.hybris.sdh.core.model.SDHReteICATaxModel;
 import de.hybris.sdh.core.model.SDHRolModel;
 import de.hybris.sdh.core.model.SDHSocialNetworkModel;
 import de.hybris.sdh.core.model.SDHUrbanDelineationsTaxModel;
+import de.hybris.sdh.core.model.SDHVehiculosTaxModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.SendEmailRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateCustomerCommPrefsRequest;
@@ -53,6 +54,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.InfoContribResponse;
 import de.hybris.sdh.core.pojos.responses.NombreRolResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -67,7 +69,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.xml.rpc.holders.StringHolder;
@@ -477,7 +486,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 	}
 
 	@Override
-	public CustomerModel  updateMiRitInfo(CustomerModel customerModel)
+	public CustomerModel  updateMiRitInfo(final CustomerModel customerModel)
 	{
 		final String numBP = customerModel.getNumBP();
 
@@ -792,6 +801,55 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 			else
 			{
 				customerModel.setRolList(null);
+			}
+
+
+			//clean old vehiculos taxes
+
+			final List<SDHVehiculosTaxModel> oldVETaxModels = customerModel.getVehiculosTaxList();
+
+			if (oldVETaxModels != null && !oldVETaxModels.isEmpty())
+			{
+				modelService.removeAll(oldVETaxModels);
+			}
+
+			final List<ImpuestoVehiculos> vehiculos = sdhConsultaContribuyenteBPResponse.getVehicular();
+
+			if (vehiculos != null && !vehiculos.isEmpty())
+			{
+
+				final List<SDHVehiculosTaxModel> newVETaxModels = new ArrayList<SDHVehiculosTaxModel>();
+
+				for (final ImpuestoVehiculos eachVETax : vehiculos)
+				{
+					if (StringUtils.isBlank(eachVETax.getPlaca()))
+					{
+						continue;
+					}
+
+					final SDHVehiculosTaxModel eachNewVETaxModel = new SDHVehiculosTaxModel();
+					eachNewVETaxModel.setPlaca(eachVETax.getPlaca());
+					eachNewVETaxModel.setMarca(eachVETax.getMarca());
+					eachNewVETaxModel.setLinea(eachVETax.getLinea());
+					eachNewVETaxModel.setModelo(eachVETax.getModelo());
+					eachNewVETaxModel.setClase(eachVETax.getClase());
+					eachNewVETaxModel.setCarroceria(eachVETax.getCarroceria());
+					eachNewVETaxModel.setNumPuertas(eachVETax.getNumPuertas());
+					eachNewVETaxModel.setBlindado(eachVETax.getBlindado());
+					eachNewVETaxModel.setCilindraje(eachVETax.getCilindraje());
+					eachNewVETaxModel.setNumObjeto(eachVETax.getNumObjeto());
+
+					newVETaxModels.add(eachNewVETaxModel);
+
+				}
+
+				modelService.saveAll(newVETaxModels);
+
+				customerModel.setVehiculosTaxList(newVETaxModels);
+			}
+			else
+			{
+				customerModel.setVehiculosTaxList(null);
 			}
 
 
@@ -1342,14 +1400,14 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		response = sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest);
 		try {
 			sdhConsultaContribuyenteBPRespons = mapper.readValue(response, SDHValidaMailRolResponse.class);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 
-		Set<PrincipalGroupModel> groupList = customerModel.getGroups();
-		Set<PrincipalGroupModel> newGroupList = new HashSet<>();
-		for(PrincipalGroupModel group : groupList){
-			String groupUid = group.getUid();
+		final Set<PrincipalGroupModel> groupList = customerModel.getGroups();
+		final Set<PrincipalGroupModel> newGroupList = new HashSet<>();
+		for(final PrincipalGroupModel group : groupList){
+			final String groupUid = group.getUid();
 			if(!groupUid.contains("UsrTaxGrp")){
 				newGroupList.add(group);
 			}
@@ -1383,7 +1441,7 @@ public class DefaultSDHCustomerAccountService extends DefaultCustomerAccountServ
 		modelService.saveAll(customerModel);
 	}
 
-	private void addUsrGrpModelToList(String UserGroupUid, Set<PrincipalGroupModel> newGroupList){
+	private void addUsrGrpModelToList(final String UserGroupUid, final Set<PrincipalGroupModel> newGroupList){
 		UserGroupModel usrGrpModel = null;
 		usrGrpModel = userGroupDao.findUserGroupByUid(UserGroupUid);
 		if(Objects.nonNull(usrGrpModel)){

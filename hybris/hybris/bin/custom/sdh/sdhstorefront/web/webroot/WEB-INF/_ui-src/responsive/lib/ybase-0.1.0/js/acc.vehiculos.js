@@ -1,6 +1,6 @@
 ACC.vehiculos = {
 
-	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh" ],
+	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh", "bindGeneraDeclaracionVehiculosButton"],
 
 	bindLabelVerDetalle : function() {
 		$(document)
@@ -94,6 +94,33 @@ ACC.vehiculos = {
 						});
 
 	},
+	
+	bindGeneraDeclaracionVehiculosButton: function () {
+		 $(document).on("click", "#generaDeclaracionVehiculosButton", function (e) {
+	 	        e.preventDefault();
+	 	        debugger;
+	 	        
+	 	        var anioGravable = $.trim($("#an").val());
+	 	        var placa = $.trim($("#placas").val());
+	 	       var numBPP  = $.trim($("#numBPP").val());
+
+	 	      
+	 	      if(anioGravable == "0")
+	 	        {	
+	 	        	alert("Por favor, selecciona el año a consultar");
+	 	        	return;
+	 	        }
+	 	        	
+	 	        if(placa == "" || placa == "-")
+	 	        {
+	 	        	alert("Por favor, selecciona un vehiculo");
+	 	        	return;
+	 	        }
+	 	       
+	 	      window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP;
+	 	       
+		 });
+	 },
 
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {

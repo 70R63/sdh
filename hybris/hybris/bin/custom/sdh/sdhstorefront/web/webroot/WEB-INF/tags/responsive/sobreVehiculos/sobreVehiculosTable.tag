@@ -118,17 +118,20 @@
 								value='<spring:theme code="vehiculos.detalle.marca.${eachVehiculo.marca}"/>'
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value='<spring:theme code="vehiculos.detalle.linea.${eachVehiculo.linea}"/>'
+								readonly="readonly"
+								value='<spring:theme code="vehiculos.detalle.linea.${eachVehiculo.linea}"/>'
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly"
 								value="<c:out value="${eachVehiculo.modelo}"></c:out>"
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value='<spring:theme code="vehiculos.detalle.clase.${eachVehiculo.clase}"/>'
+								readonly="readonly"
+								value='<spring:theme code="vehiculos.detalle.clase.${eachVehiculo.clase}"/>'
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value='<spring:theme code="vehiculos.detalle.carroceria.${eachVehiculo.carroceria}"/>'
+								readonly="readonly"
+								value='<spring:theme code="vehiculos.detalle.carroceria.${eachVehiculo.carroceria}"/>'
 								maxlength="240" style="width: 100% !important;"></td>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly"
@@ -154,8 +157,8 @@
 		</div>
 	</div>
 
-	<input name="numbp" type="hidden" id="numbp" /> <input name="placa"
-		type="hidden" id="placa" />
+	<input name="numBPP" type="hidden" id="numBPP"
+		value="${vehiculosForm.numBP}" />
 
 </div>
 <%-- </sf:form> --%>

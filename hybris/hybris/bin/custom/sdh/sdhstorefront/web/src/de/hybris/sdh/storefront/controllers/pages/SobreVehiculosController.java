@@ -19,7 +19,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -65,20 +64,12 @@ public class SobreVehiculosController extends AbstractPageController
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.vehiculos";
-	private static final String DECLARACION_VEHICULOS_PROFILE = "Sobre Vehículos Declaración";
-	private static final String DECLARACION_MOTOS_PROFILE = "Sobre Vehículos Declaración Motos";
 
 	// CMS Pages
 	private static final String SOBRE_VEHICULOS_CMS_PAGE = "sobreVehiculosAutomotoresPage";
-	private static final String DECLRACION_VEHICULOS_CMS_PAGE = "sobreVehiculosDeclaracionPage";
-	private static final String DECLARCION_MOTOS_CMS_PAGE = "sobreVehiculosMotosDeclaracionPage";
 
 	private static final String REDIRECT_TO_SOBRE_VEHICULOS_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/sobrevehiculosautomotores/detalle";
-	private static final String REDIRECT_TO_DECLARACION_VEHICULOS_PAGE = REDIRECT_PREFIX
-			+ "/contribuyentes/sobrevehiculosautomotores/declaracion";
-	private static final String REDIRECT_TO_DECLARACION_MOTOS_PAGE = REDIRECT_PREFIX
-			+ "/contribuyentes/sobrevehiculosautomotores/declaracion/motos";
 
 
 	@Resource(name = "sdhEnviaFirmasFacade")

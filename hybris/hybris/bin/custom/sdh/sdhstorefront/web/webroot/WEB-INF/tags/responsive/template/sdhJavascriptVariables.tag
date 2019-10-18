@@ -123,6 +123,8 @@
 			
 			ACC.gestionBancariaCargaArchivo = "<c:url value='/autorizados/entidades/reportarinfo' />";
 			
+			ACC.vehiculosDeclararionURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/declaracion' />";
+			
 			
 			
 		  	ACC.currentURL = "${currentURL}";

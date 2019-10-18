@@ -57,6 +57,7 @@
 		<property name="urbanDelineationsTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHUrbanDelineationsTaxData>"/>
 		<property name="icaTax" type="de.hybris.sdh.facades.questions.data.SDHICATaxData"/>
 		<property name="reteIcaTax" type="de.hybris.sdh.facades.questions.data.SDHReteICATaxData"/>
+		<property name="vehiculosTaxList" type="java.util.List&lt;de.hybris.sdh.facades.questions.data.SDHVehiculosTaxData>"/>
 		
 	</bean>
 	
@@ -139,6 +140,12 @@
 	<bean class="de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData">
 		<property name="code" type="String"/>
 		<property name="description" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.sdh.facades.questions.data.SDHVehiculosTaxData">	
+		<property name="documentNumber" type="String"/>
+		<property name="documentType" type="String"/>
+		<property name="objectNumber" type="String"/>
 	</bean>
 
 

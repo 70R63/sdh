@@ -75,6 +75,8 @@ public class VehiculosInfObjetoForm
 	private DetalleInfoDeclaraVehiculos info_declara;
 	private Infovehic infoVeh;
 	private String liquidaciondeclara;
+	private String opcionUso;
+
 
 
 	private List<JuridicosVehiculos> datosJuridicos;
@@ -86,7 +88,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numBP;
 	}
-	
+
 	/**
 	 * @param numBP
 	 *           the numBP to set
@@ -102,7 +104,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipiden;
 	}
-	
+
 	/**
 	 * @param tipiden
 	 *           the tipiden to set
@@ -118,7 +120,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numide;
 	}
-	
+
 	/**
 	 * @param numide
 	 *           the numide to set
@@ -134,7 +136,7 @@ public class VehiculosInfObjetoForm
 	{
 		return name;
 	}
-	
+
 	/**
 	 * @param name
 	 *           the name to set
@@ -150,7 +152,7 @@ public class VehiculosInfObjetoForm
 	{
 		return bpNum;
 	}
-	
+
 	/**
 	 * @param bpNum
 	 *           the bpNum to set
@@ -166,7 +168,7 @@ public class VehiculosInfObjetoForm
 	{
 		return placa;
 	}
-	
+
 	/**
 	 * @param placa
 	 *           the placa to set
@@ -182,7 +184,7 @@ public class VehiculosInfObjetoForm
 	{
 		return anioGravable;
 	}
-	
+
 	/**
 	 * @param anioGravable
 	 *           the anioGravable to set
@@ -198,7 +200,7 @@ public class VehiculosInfObjetoForm
 	{
 		return vehiculos;
 	}
-	
+
 	/**
 	 * @param vehiculos
 	 *           the vehiculos to set
@@ -214,7 +216,7 @@ public class VehiculosInfObjetoForm
 	{
 		return impvehicular;
 	}
-	
+
 	/**
 	 * @param impvehicular
 	 *           the impvehicular to set
@@ -230,7 +232,7 @@ public class VehiculosInfObjetoForm
 	{
 		return detallerequest;
 	}
-	
+
 	/**
 	 * @param detallerequest
 	 *           the detallerequest to set
@@ -246,7 +248,7 @@ public class VehiculosInfObjetoForm
 	{
 		return detalle;
 	}
-	
+
 	/**
 	 * @param detalle
 	 *           the detalle to set
@@ -262,7 +264,7 @@ public class VehiculosInfObjetoForm
 	{
 		return idServicio;
 	}
-	
+
 	/**
 	 * @param idServicio
 	 *           the idServicio to set
@@ -278,7 +280,7 @@ public class VehiculosInfObjetoForm
 	{
 		return idEstado;
 	}
-	
+
 	/**
 	 * @param idEstado
 	 *           the idEstado to set
@@ -294,7 +296,7 @@ public class VehiculosInfObjetoForm
 	{
 		return watts;
 	}
-	
+
 	/**
 	 * @param watts
 	 *           the watts to set
@@ -310,7 +312,7 @@ public class VehiculosInfObjetoForm
 	{
 		return clasicoAntig;
 	}
-	
+
 	/**
 	 * @param clasicoAntig
 	 *           the clasicoAntig to set
@@ -326,7 +328,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoVeh;
 	}
-	
+
 	/**
 	 * @param tipoVeh
 	 *           the tipoVeh to set
@@ -342,7 +344,7 @@ public class VehiculosInfObjetoForm
 	{
 		return capacidadPas;
 	}
-	
+
 	/**
 	 * @param capacidadPas
 	 *           the capacidadPas to set
@@ -358,7 +360,7 @@ public class VehiculosInfObjetoForm
 	{
 		return capacidadTon;
 	}
-	
+
 	/**
 	 * @param capacidadTon
 	 *           the capacidadTon to set
@@ -374,7 +376,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaCambio;
 	}
-	
+
 	/**
 	 * @param fechaCambio
 	 *           the fechaCambio to set
@@ -390,7 +392,7 @@ public class VehiculosInfObjetoForm
 	{
 		return datosJuridicosForm;
 	}
-	
+
 	/**
 	 * @param datosJuridicosForm
 	 *           the datosJuridicosForm to set
@@ -406,7 +408,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoID;
 	}
-	
+
 	/**
 	 * @param tipoID
 	 *           the tipoID to set
@@ -422,7 +424,7 @@ public class VehiculosInfObjetoForm
 	{
 		return nombre;
 	}
-	
+
 	/**
 	 * @param nombre
 	 *           the nombre to set
@@ -438,7 +440,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numID;
 	}
-	
+
 	/**
 	 * @param numID
 	 *           the numID to set
@@ -454,7 +456,7 @@ public class VehiculosInfObjetoForm
 	{
 		return calidad;
 	}
-	
+
 	/**
 	 * @param calidad
 	 *           the calidad to set
@@ -470,7 +472,7 @@ public class VehiculosInfObjetoForm
 	{
 		return procProp;
 	}
-	
+
 	/**
 	 * @param procProp
 	 *           the procProp to set
@@ -486,7 +488,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaDesde;
 	}
-	
+
 	/**
 	 * @param fechaDesde
 	 *           the fechaDesde to set
@@ -502,7 +504,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaHasta;
 	}
-	
+
 	/**
 	 * @param fechaHasta
 	 *           the fechaHasta to set
@@ -518,7 +520,7 @@ public class VehiculosInfObjetoForm
 	{
 		return marcasForm;
 	}
-	
+
 	/**
 	 * @param marcasForm
 	 *           the marcasForm to set
@@ -534,7 +536,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoMarca;
 	}
-	
+
 	/**
 	 * @param tipoMarca
 	 *           the tipoMarca to set
@@ -550,7 +552,7 @@ public class VehiculosInfObjetoForm
 	{
 		return codMarca;
 	}
-	
+
 	/**
 	 * @param codMarca
 	 *           the codMarca to set
@@ -566,7 +568,7 @@ public class VehiculosInfObjetoForm
 	{
 		return valorExcencion;
 	}
-	
+
 	/**
 	 * @param valorExcencion
 	 *           the valorExcencion to set
@@ -582,7 +584,7 @@ public class VehiculosInfObjetoForm
 	{
 		return ciiu;
 	}
-	
+
 	/**
 	 * @param ciiu
 	 *           the ciiu to set
@@ -598,7 +600,7 @@ public class VehiculosInfObjetoForm
 	{
 		return descripMarca;
 	}
-	
+
 	/**
 	 * @param descripMarca
 	 *           the descripMarca to set
@@ -614,7 +616,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaDesdemarca;
 	}
-	
+
 	/**
 	 * @param fechaDesdemarca
 	 *           the fechaDesdemarca to set
@@ -630,7 +632,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaHastamarca;
 	}
-	
+
 	/**
 	 * @param fechaHastamarca
 	 *           the fechaHastamarca to set
@@ -646,7 +648,7 @@ public class VehiculosInfObjetoForm
 	{
 		return liquidacion;
 	}
-	
+
 	/**
 	 * @param liquidacion
 	 *           the liquidacion to set
@@ -662,7 +664,7 @@ public class VehiculosInfObjetoForm
 	{
 		return anio;
 	}
-	
+
 	/**
 	 * @param anio
 	 *           the anio to set
@@ -678,7 +680,7 @@ public class VehiculosInfObjetoForm
 	{
 		return avaluo;
 	}
-	
+
 	/**
 	 * @param avaluo
 	 *           the avaluo to set
@@ -694,7 +696,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tarifa;
 	}
-	
+
 	/**
 	 * @param tarifa
 	 *           the tarifa to set
@@ -710,7 +712,7 @@ public class VehiculosInfObjetoForm
 	{
 		return info_declara;
 	}
-	
+
 	/**
 	 * @param info_declara
 	 *           the info_declara to set
@@ -726,7 +728,7 @@ public class VehiculosInfObjetoForm
 	{
 		return infoVeh;
 	}
-	
+
 	/**
 	 * @param infoVeh
 	 *           the infoVeh to set
@@ -742,7 +744,7 @@ public class VehiculosInfObjetoForm
 	{
 		return liquidaciondeclara;
 	}
-	
+
 	/**
 	 * @param liquidaciondeclara
 	 *           the liquidaciondeclara to set
@@ -784,6 +786,23 @@ public class VehiculosInfObjetoForm
 	public void setMarcas(final List<DetalleMarcasVehiculos> marcas)
 	{
 		this.marcas = marcas;
+	}
+
+	/**
+	 * @return the opcionUso
+	 */
+	public String getOpcionUso()
+	{
+		return opcionUso;
+	}
+
+	/**
+	 * @param opcionUso
+	 *           the opcionUso to set
+	 */
+	public void setOpcionUso(final String opcionUso)
+	{
+		this.opcionUso = opcionUso;
 	}
 
 
