@@ -19,12 +19,16 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
@@ -110,7 +114,8 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
 		//        addAgentsToModel(model, customerData,null);
-
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(numBPP);
 		final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
 		final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
 		detalleVehiculosRequest.setBpNum(numBPP);
@@ -131,8 +136,42 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 			final DetalleVehiculosResponse detalleVehiculosResponse = mapper
 					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
 
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
 			vehiculosFormDeclaracion.setOpcionUso(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso());
 			vehiculosFormDeclaracion.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
+			vehiculosFormDeclaracion.setTipoVeh(detalleVehiculosResponse.getDetalle().getTipoVeh());
+			vehiculosFormDeclaracion.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
+			vehiculosFormDeclaracion.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
+			vehiculosFormDeclaracion.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
+
+			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
+					&& !sdhConsultaContribuyenteBPResponse.getVehicular().isEmpty())
+			{
+
+				for (final ImpuestoVehiculos eachVehResponse : sdhConsultaContribuyenteBPResponse.getVehicular())
+				{
+
+					if (placa.equals(eachVehResponse.getPlaca()))
+					{
+						vehiculosFormDeclaracion.setClase(eachVehResponse.getClase());
+						vehiculosFormDeclaracion.setCarroceria(eachVehResponse.getCarroceria());
+						vehiculosFormDeclaracion.setMarca(eachVehResponse.getMarca());
+						vehiculosFormDeclaracion.setCilindraje(eachVehResponse.getCilindraje());
+						vehiculosFormDeclaracion.setLinea(eachVehResponse.getLinea());
+						vehiculosFormDeclaracion.setModelo(eachVehResponse.getModelo());
+						vehiculosFormDeclaracion.setBlindado(eachVehResponse.getBlindado());
+						break;
+					}
+					else
+					{
+						vehiculosFormDeclaracion.setClase("no exisye clase");
+					}
+					break;
+				}
+			}
 
 
 
@@ -144,6 +183,8 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
 
+
+		model.addAttribute("vehiculosFormDeclaracion", vehiculosFormDeclaracion);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLRACION_VEHICULOS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLRACION_VEHICULOS_CMS_PAGE));

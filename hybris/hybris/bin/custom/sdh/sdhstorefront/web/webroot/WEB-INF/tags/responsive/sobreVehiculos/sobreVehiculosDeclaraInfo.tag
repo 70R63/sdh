@@ -36,7 +36,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.captone" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.capacidadTon}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -47,7 +47,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.clase" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.clase}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.carroceria" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.carroceria}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.marca" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.marca}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.cilindra" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.cilindraje}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.linea}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -97,7 +97,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.tipvehi" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.tipoVeh}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.modelo" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.modelo}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -139,7 +139,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.clasant" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.blindado}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -151,7 +151,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.cappasa" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.capacidadPas}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -160,7 +160,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.idservicio" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.idServicio}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -181,7 +181,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.watts" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.watts}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
