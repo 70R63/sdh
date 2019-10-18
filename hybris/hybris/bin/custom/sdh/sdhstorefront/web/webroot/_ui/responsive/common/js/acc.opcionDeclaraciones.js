@@ -15,6 +15,7 @@ ACC.opcionDeclaraciones = {
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
+				var valNumRadicado;
 					
 				for (var i = 0; i < e.target.form.length; i++) {
 					nombreCampo = "registroNum_" + i;
@@ -24,6 +25,7 @@ ACC.opcionDeclaraciones = {
 						var seleccionado = valorCampo.checked;
 						if(seleccionado == true){
 							 valNumObjeto = $.trim($(valorCampo).attr("data-numObjeto")); 
+							 valNumRadicado = $.trim($(valorCampo).attr("data-numRadicado")); 
 							 break;
 						}
 					}else{
@@ -37,7 +39,9 @@ ACC.opcionDeclaraciones = {
 				var objContrato = valNumObjeto;
 							
 				dataActual.claveImpuesto = claveImpuesto;
+				dataActual.referencia = valNumRadicado;
 				dataActual.objContrato = objContrato;
+				dataActual.numObjeto = valNumObjeto;
 				dataActual.anoGravable = anoGravable;
 				dataActual.periodo = periodo;
 				
@@ -63,7 +67,7 @@ ACC.opcionDeclaraciones = {
 			e.preventDefault();	
 			
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
-//				debugger;
+				debugger;
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
@@ -91,10 +95,11 @@ ACC.opcionDeclaraciones = {
 				var objContrato = valNumObjeto;
 							
 				dataActual.claveImpuesto = claveImpuesto;
+				dataActual.numObjeto = valNumObjeto;
+				dataActual.referencia = valNumRadicado;
 				dataActual.objContrato = objContrato;
 				dataActual.anoGravable = anoGravable;
 				dataActual.periodo = periodo;
-				dataActual.referencia = valNumRadicado;
 				
 	
 				$.ajax({
@@ -190,13 +195,14 @@ ACC.opcionDeclaraciones = {
 
 		debugger;
 		if (infoResponse.declaraPDFResponse.errores != null){
-			if (infoResponse.declaraPDFResponse.errores[0].idmsj == "0"){
+			if (infoResponse.declaraPDFResponse.errores.idMensaje == "0"){
 				if(infoResponse.urlDownload != null){
 					$("#downloadHelper").attr("href",infoResponse.urlDownload);
 					document.getElementById("downloadHelper").click();
 				}
-			}	
-			alert(infoResponse.declaraPDFResponse.errores[0].txtmsj);
+			}else{
+				alert(infoResponse.declaraPDFResponse.errores.textoMensaje);
+			}
 		}else{
 			if(infoResponse.urlDownload != null){
 				$("#downloadHelper").attr("href",infoResponse.urlDownload);
@@ -403,7 +409,7 @@ ACC.opcionDeclaraciones = {
 					if(infoResponse.delineacion.length > 0){
 						$.each(infoResponse.delineacion, function (index,value){
 							var numRadicado = "";
-							
+							debugger
 							if(value.radicados!= null){
 								numRadicado = value.radicados[0].numRadicado;
 							}
@@ -411,7 +417,7 @@ ACC.opcionDeclaraciones = {
 							$('#table-delineacion1').append("<tr>"+ 
 									'<td>' + value.cdu + '</td>'+
 									'<td>' + numRadicado + '</td>'+
-									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
+									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto + '" data-numRadicado="'+ numRadicado +'"' +">" + "</td>"+
 									"</tr>");
 						});
 					}

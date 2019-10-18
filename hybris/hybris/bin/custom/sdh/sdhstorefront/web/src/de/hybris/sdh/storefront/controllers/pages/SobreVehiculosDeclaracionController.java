@@ -146,6 +146,7 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 			vehiculosFormDeclaracion.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
 			vehiculosFormDeclaracion.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
 			vehiculosFormDeclaracion.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
+			vehiculosFormDeclaracion.setClasicoAntig(detalleVehiculosResponse.getDetalle().getClasicoAntig());
 
 			if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
 					&& !sdhConsultaContribuyenteBPResponse.getVehicular().isEmpty())

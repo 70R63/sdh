@@ -145,7 +145,7 @@
 
 		<div class="row">
 			<div class="col-md-3">
-				<button id="" class="btn btn-primary" type="button"
+				<button id="calcularVehButton" class="btn btn-primary calcularVehButton" type="button"
 					style="margin-top: 28px !important">
 					<spring:theme
 						code="sobre.vehiculo.declaracion.vehiculo.liq.calcular" />

@@ -83,8 +83,6 @@
 									code="sobre.vehiculo.table.placa" /></label></th>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.marca" /></label></th>
-						<%-- 							<th><label class="control-label labeltabletd"><spring:theme --%>
-						<%-- 										code="sobre.vehiculo.table.factura" /></label></th> --%>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.linea" /></label></th>
 						<th><label class="control-label labeltabletd"><spring:theme
@@ -99,8 +97,6 @@
 									code="sobre.vehiculo.table.blindado" /></label></th>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.cilindraje" /></label></th>
-						<%-- 							<th><label class="control-label labeltabletd"><spring:theme --%>
-						<%-- 										code="sobre.vehiculo.table.avaluo" /></label></th> --%>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code=" " /></label></th>
 
