@@ -60,8 +60,8 @@
 							code="sobre.vehiculo.declaracion.vehiculo.info.carroceria" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.carroceria}" maxlength="30"
-						disabled="disabled">
+						value='<spring:theme code="vehiculos.detalle.carroceria.${vehiculosFormDeclaracion.carroceria}"/>'
+						maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
@@ -95,8 +95,8 @@
 							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.linea}" maxlength="30"
-						disabled="disabled">
+						value='<spring:theme code="vehiculos.detalle.linea.${vehiculosFormDeclaracion.linea}"/>'
+						maxlength="30" disabled="disabled">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -105,8 +105,8 @@
 							code="sobre.vehiculo.declaracion.vehiculo.info.tipvehi" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.tipoVeh}" maxlength="30"
-						disabled="disabled">
+						value='<spring:theme code="vehiculos.detalle.tipoVeh.${vehiculosFormDeclaracion.tipoVeh}"/>'
+						maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
@@ -140,8 +140,8 @@
 							code="sobre.vehiculo.declaracion.vehiculo.info.blindado" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.blindado}" maxlength="30"
-						disabled="disabled">
+						value='<spring:theme code="vehiculos.detalle.blindado.${vehiculosFormDeclaracion.blindado}"/>'
+						maxlength="30" disabled="disabled">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -150,8 +150,8 @@
 							code="sobre.vehiculo.declaracion.vehiculo.info.clasant" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.clasicoAntig}" maxlength="30"
-						disabled="disabled">
+						value='<spring:theme code="vehiculos.detalle.clasicoAntig.${vehiculosFormDeclaracion.clasicoAntig}"/>'
+						maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
@@ -173,8 +173,8 @@
 							code="sobre.vehiculo.declaracion.vehiculo.info.idservicio" /></label> <input
 						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.idServicio}" maxlength="30"
-						disabled="disabled">
+						value='<spring:theme code="vehiculos.detalle.idServicio.${vehiculosFormDeclaracion.idServicio}"/>'
+						maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
