@@ -145,7 +145,7 @@
 
 		<input type="hidden" value="${vehiculosFormDeclaracion.numBP}"
 			id="numBPcal" class="numBPcal" />
-		<input type="text" value="" id="numFormcal" class="numFormcal" />
+		<input type="hidden" value="" id="numFormcal" class="numFormcal" />
 		<input type="hidden" value="${vehiculosFormDeclaracion.anioGravable}" id="anioGravablecal" class="anioGravablecal"/>
 		<input type="hidden" value="${vehiculosFormDeclaracion.opcionUso}" id="opcionUsocal" class="opcionUsocal"/>
 		<input type="hidden" value="${vehiculosFormDeclaracion.clase}" id="clasecal" class="clasecal"/>
