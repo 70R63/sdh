@@ -53,7 +53,6 @@ ACC.publicidadexterior = {
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#calculoButton", function (e) {
 	 	        e.preventDefault();
-	 	        debugger;
 	 	       //$("#calculoButton").prop('disabled', true); //Se comenta línea derivado del incidente 38-A 05/09/2019 dev-Maria
 	 	       var anograv  = $.trim($("#anograv").val());
 	 	       var numresol = $.trim($("#numresol").val());

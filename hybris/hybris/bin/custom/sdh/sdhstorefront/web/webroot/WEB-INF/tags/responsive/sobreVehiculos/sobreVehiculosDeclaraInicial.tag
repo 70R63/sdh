@@ -46,7 +46,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.placa" /></label> <input
-						id="" name="" class="newalto form-control"
+						id="placaDec" name="" class="newalto form-control placaDec"
 						aria-required="true" type="text" value="${vehiculosFormDeclaracion.placa}" maxlength="30"
 						disabled="disabled">
 				</div>

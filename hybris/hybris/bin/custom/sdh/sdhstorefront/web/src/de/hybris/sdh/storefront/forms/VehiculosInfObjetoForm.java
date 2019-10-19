@@ -10,6 +10,7 @@ import de.hybris.sdh.core.pojos.responses.DetalleLiquidacionVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleMarcas;
 import de.hybris.sdh.core.pojos.responses.DetalleMarcasVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculos;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.Infovehic;
 import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
@@ -91,6 +92,28 @@ public class VehiculosInfObjetoForm
 	private String blindado;
 	private String cilindraje;
 	private String numObjeto;
+
+	private String numForm;
+
+	private String clasicoAntiguo;
+	private String checkAporte;
+	private String proyectoAporte;
+	private String claseSdh;
+	private String tipoVehSdh;
+	private String lineaHomologa;
+	private String fuenteHomologa;
+
+	private String impuestoCargo;
+	private String tarifaActual;
+	private String sancion;
+	private String intereses;
+	private String valorSemafor;
+	private String descuentoProntop;
+	private String totalPagar;
+	private String valorPagar;
+	private String totalPagoVol;
+
+	private List<ErrorPubli> errores;
 	/**
 	 * @return the numBP
 	 */
@@ -966,6 +989,312 @@ public class VehiculosInfObjetoForm
 	public void setNumObjeto(final String numObjeto)
 	{
 		this.numObjeto = numObjeto;
+	}
+
+	/**
+	 * @return the numForm
+	 */
+	public String getNumForm()
+	{
+		return numForm;
+	}
+
+	/**
+	 * @param numForm
+	 *           the numForm to set
+	 */
+	public void setNumForm(final String numForm)
+	{
+		this.numForm = numForm;
+	}
+
+	/**
+	 * @return the clasicoAntiguo
+	 */
+	public String getClasicoAntiguo()
+	{
+		return clasicoAntiguo;
+	}
+
+	/**
+	 * @param clasicoAntiguo
+	 *           the clasicoAntiguo to set
+	 */
+	public void setClasicoAntiguo(final String clasicoAntiguo)
+	{
+		this.clasicoAntiguo = clasicoAntiguo;
+	}
+
+	/**
+	 * @return the checkAporte
+	 */
+	public String getCheckAporte()
+	{
+		return checkAporte;
+	}
+
+	/**
+	 * @param checkAporte
+	 *           the checkAporte to set
+	 */
+	public void setCheckAporte(final String checkAporte)
+	{
+		this.checkAporte = checkAporte;
+	}
+
+	/**
+	 * @return the proyectoAporte
+	 */
+	public String getProyectoAporte()
+	{
+		return proyectoAporte;
+	}
+
+	/**
+	 * @param proyectoAporte
+	 *           the proyectoAporte to set
+	 */
+	public void setProyectoAporte(final String proyectoAporte)
+	{
+		this.proyectoAporte = proyectoAporte;
+	}
+
+	/**
+	 * @return the claseSdh
+	 */
+	public String getClaseSdh()
+	{
+		return claseSdh;
+	}
+
+	/**
+	 * @param claseSdh
+	 *           the claseSdh to set
+	 */
+	public void setClaseSdh(final String claseSdh)
+	{
+		this.claseSdh = claseSdh;
+	}
+
+	/**
+	 * @return the tipoVehSdh
+	 */
+	public String getTipoVehSdh()
+	{
+		return tipoVehSdh;
+	}
+
+	/**
+	 * @param tipoVehSdh
+	 *           the tipoVehSdh to set
+	 */
+	public void setTipoVehSdh(final String tipoVehSdh)
+	{
+		this.tipoVehSdh = tipoVehSdh;
+	}
+
+	/**
+	 * @return the lineaHomologa
+	 */
+	public String getLineaHomologa()
+	{
+		return lineaHomologa;
+	}
+
+	/**
+	 * @param lineaHomologa
+	 *           the lineaHomologa to set
+	 */
+	public void setLineaHomologa(final String lineaHomologa)
+	{
+		this.lineaHomologa = lineaHomologa;
+	}
+
+	/**
+	 * @return the fuenteHomologa
+	 */
+	public String getFuenteHomologa()
+	{
+		return fuenteHomologa;
+	}
+
+	/**
+	 * @param fuenteHomologa
+	 *           the fuenteHomologa to set
+	 */
+	public void setFuenteHomologa(final String fuenteHomologa)
+	{
+		this.fuenteHomologa = fuenteHomologa;
+	}
+
+	/**
+	 * @return the impuestoCargo
+	 */
+	public String getImpuestoCargo()
+	{
+		return impuestoCargo;
+	}
+
+	/**
+	 * @param impuestoCargo
+	 *           the impuestoCargo to set
+	 */
+	public void setImpuestoCargo(final String impuestoCargo)
+	{
+		this.impuestoCargo = impuestoCargo;
+	}
+
+	/**
+	 * @return the tarifaActual
+	 */
+	public String getTarifaActual()
+	{
+		return tarifaActual;
+	}
+
+	/**
+	 * @param tarifaActual
+	 *           the tarifaActual to set
+	 */
+	public void setTarifaActual(final String tarifaActual)
+	{
+		this.tarifaActual = tarifaActual;
+	}
+
+	/**
+	 * @return the sancion
+	 */
+	public String getSancion()
+	{
+		return sancion;
+	}
+
+	/**
+	 * @param sancion
+	 *           the sancion to set
+	 */
+	public void setSancion(final String sancion)
+	{
+		this.sancion = sancion;
+	}
+
+	/**
+	 * @return the intereses
+	 */
+	public String getIntereses()
+	{
+		return intereses;
+	}
+
+	/**
+	 * @param intereses
+	 *           the intereses to set
+	 */
+	public void setIntereses(final String intereses)
+	{
+		this.intereses = intereses;
+	}
+
+	/**
+	 * @return the valorSemafor
+	 */
+	public String getValorSemafor()
+	{
+		return valorSemafor;
+	}
+
+	/**
+	 * @param valorSemafor
+	 *           the valorSemafor to set
+	 */
+	public void setValorSemafor(final String valorSemafor)
+	{
+		this.valorSemafor = valorSemafor;
+	}
+
+	/**
+	 * @return the descuentoProntop
+	 */
+	public String getDescuentoProntop()
+	{
+		return descuentoProntop;
+	}
+
+	/**
+	 * @param descuentoProntop
+	 *           the descuentoProntop to set
+	 */
+	public void setDescuentoProntop(final String descuentoProntop)
+	{
+		this.descuentoProntop = descuentoProntop;
+	}
+
+	/**
+	 * @return the totalPagar
+	 */
+	public String getTotalPagar()
+	{
+		return totalPagar;
+	}
+
+	/**
+	 * @param totalPagar
+	 *           the totalPagar to set
+	 */
+	public void setTotalPagar(final String totalPagar)
+	{
+		this.totalPagar = totalPagar;
+	}
+
+	/**
+	 * @return the valorPagar
+	 */
+	public String getValorPagar()
+	{
+		return valorPagar;
+	}
+
+	/**
+	 * @param valorPagar
+	 *           the valorPagar to set
+	 */
+	public void setValorPagar(final String valorPagar)
+	{
+		this.valorPagar = valorPagar;
+	}
+
+	/**
+	 * @return the totalPagoVol
+	 */
+	public String getTotalPagoVol()
+	{
+		return totalPagoVol;
+	}
+
+	/**
+	 * @param totalPagoVol
+	 *           the totalPagoVol to set
+	 */
+	public void setTotalPagoVol(final String totalPagoVol)
+	{
+		this.totalPagoVol = totalPagoVol;
+	}
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorPubli> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<ErrorPubli> errores)
+	{
+		this.errores = errores;
 	}
 
 

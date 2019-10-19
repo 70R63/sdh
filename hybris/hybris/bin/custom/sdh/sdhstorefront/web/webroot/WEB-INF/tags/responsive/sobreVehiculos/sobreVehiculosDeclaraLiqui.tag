@@ -45,7 +45,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.proyecto" /></label><select
 						id="proyecto" name="proyecto" class="newalto form-control"
-						aria-required="true" disabled="disabled"><option>Seleccionar</option></select>
+						aria-required="true" disabled="disabled"><option value="01"> FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option></select>
 				</div>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.valimpcar" /></label><input
-						id="" name="numresol" class="newalto form-control"
+						id="valimpcar" name="numresol" class="newalto form-control valimpcar"
 						aria-required="true" type="text" value="" maxlength="30"
 						disabled="disabled">
 				</div>
@@ -63,7 +63,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.valsemafo" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
+						id="valsemafo" name="valsemafo" class="newalto form-control" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -82,7 +82,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.despronpag" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
+						id="despronpag" name="" class="newalto form-control despronpag" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.taract" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
+						id="taract" name="" class="newalto form-control taract" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -100,7 +100,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.totpag" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
+						id="totpag" name="" class="newalto form-control totpag" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -111,7 +111,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.sancion" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
+						id="sancion" name="" class="newalto form-control sancion" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -119,7 +119,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.valpagar" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
+						id="valpagar" name="" class="newalto form-control valpagar" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -129,7 +129,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.intereses" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
+						id="intereses" name="" class="newalto form-control intereses" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
@@ -137,15 +137,35 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.totpagvol" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
+						id="totpagvol" name="" class="newalto form-control totpagvol" aria-required="true"
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
 
+		<input type="hidden" value="${vehiculosFormDeclaracion.numBP}"
+			id="numBPcal" class="numBPcal" />
+		<input type="text" value="" id="numFormcal" class="numFormcal" />
+		<input type="hidden" value="${vehiculosFormDeclaracion.anioGravable}" id="anioGravablecal" class="anioGravablecal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.opcionUso}" id="opcionUsocal" class="opcionUsocal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.clase}" id="clasecal" class="clasecal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.idServicio}" id="idServiciocal" class="idServiciocal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.cilindraje}" id="cilindrajecal" class="cilindrajecal" />
+		<input type="hidden" value="${vehiculosFormDeclaracion.marca}" id="marcacal" class="marcacal" />
+		<input type="hidden" value="${vehiculosFormDeclaracion.linea}" id="lineacal" class="lineacal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.modelo}" id="modelocal" class="modelocal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.clasicoAntig}" id="clasicoAntiguocal" class="clasicoAntiguocal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.blindado}" id="blindadocal" class="blindadocal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.capacidadTon}" id="capacidadToncal" class="capacidadToncal"/>
+		<input type="hidden" value="${vehiculosFormDeclaracion.capacidadPas}" id="capacidadPascal" class="capacidadPascal"/>
+		<input type="hidden" id="checkAportecal" class="checkAportecal"/>
+		
+		
+
 		<div class="row">
 			<div class="col-md-3">
-				<button id="calcularVehButton" class="btn btn-primary calcularVehButton" type="button"
+				<button id="calcularVehButton"
+					class="btn btn-primary calcularVehButton" type="button"
 					style="margin-top: 28px !important">
 					<spring:theme
 						code="sobre.vehiculo.declaracion.vehiculo.liq.calcular" />
@@ -159,12 +179,14 @@
 	function proyecthabi() {
 		debugger;
 		var proyec = document.getElementById('proyecto');
+		document.getElementById("checkAportecal").value = "X";
 		proyec.disabled = false;
 
 	}
 
 	function proyectdeshabi() {
 		var proyec = document.getElementById('proyecto');
+		document.getElementById("checkAportecal").value = "";
 		proyec.disabled = true;
 	}
 </script>

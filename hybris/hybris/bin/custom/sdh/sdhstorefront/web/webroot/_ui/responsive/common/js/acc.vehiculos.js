@@ -126,35 +126,127 @@ ACC.vehiculos = {
 			$(document).on("click", ".calcularVehButton", function(e) {
 				e.preventDefault();
 
-				var placa = $.trim($(this).attr("data-placa"));
-				var bpNum = $.trim($(this).attr("data-numbp"));
-				var anioGravable = $.trim($("#an").val());
-
-				if (anioGravable == "0") {
-					alert("Por favor, selecciona el año a consultar");
-					return;
+				var bpNum=$.trim($("#numBPcal").val());
+				var placa=$.trim($("#placaDec").val());
+				var numForm=$.trim($("#numFormcal").val());
+				var anioGravable=$.trim($("#anioGravablecal").val());
+				var opcionUso=$.trim($("#opcionUsocal").val());
+				var clase=$.trim($("#clasecal").val());
+				var idServicio=$.trim($("#idServiciocal").val());
+				var cilindraje=$.trim($("#cilindrajecal").val());
+				var marca=$.trim($("#marcacal").val());
+				var linea=$.trim($("#lineacal").val());
+				var modelo=$.trim($("#modelocal").val());
+				var clasicoAntiguo=$.trim($("#clasicoAntiguocal").val());
+				var checkAporte=$.trim($("#checkAportecal").val());
+				var proyectoAporte=$.trim($("#proyecto").val());
+				var blindado=$.trim($("#blindadocal").val());
+				if(blindado == "S" || blindado == "s"){
+					blindado = "X";
+				}else{
+				blindado = "";
 				}
+				var capacidadTon=$.trim($("#capacidadToncal").val());
+				var capacidadPas=$.trim($("#capacidadPascal").val());
+				var avaluo=$.trim($("#an").val());
+				var claseSdh=$.trim($("#an").val());
+				var tipoVehSdh=$.trim($("#an").val());
+				var lineaHomologa=$.trim($("#an").val());
+				var fuenteHomologa=$.trim($("#an").val());
 
 				var data = {};
 
-				data.bpNum = bpNum;
-				data.placa = placa;
-				data.anioGravable = anioGravable;
+				data.bpNum=bpNum;
+				data.placa=placa;
+				data.numForm=numForm;
+				data.anioGravable=anioGravable;
+				data.opcionUso=opcionUso;
+				data.clase=clase;
+				data.idServicio=idServicio;
+				data.cilindraje=cilindraje;
+				data.marca=marca;
+				data.linea=linea;
+				data.modelo=modelo;
+				data.clasicoAntiguo=clasicoAntiguo;
+				data.checkAporte=checkAporte;
+				data.proyectoAporte=proyectoAporte;
+				data.blindado=blindado;
+				data.capacidadTon=capacidadTon;
+				data.capacidadPas=capacidadPas;
+				data.avaluo=avaluo;
+				data.claseSdh=claseSdh;
+				data.tipoVehSdh=tipoVehSdh;
+				data.lineaHomologa=lineaHomologa;
+				data.fuenteHomologa=fuenteHomologa;
 
 				$.ajax({
-					url : ACC.vehiculosDetalleURL,
+					url : ACC.vehiculosDeclaCalculoURL,
 					data : data,
-					type : "GET",
+					type : "POST",
 					success : function(data) {
-						ACC.vehiculos.fillFieldsFromData(data);
+						debugger;
+		            	if(data.errores == null)
+	            		{
+		            		$( "#dialogVehiculos" ).dialog( "open" );
+		            		$("#vehiculosDialogContent").html("");
+		            		$.each(data.errores, function( index, value ) {
+    	            			$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+    	            		});
+		            		
+		            		$("#valimpcar").val("");
+	            			$("#valsemafo").val("");
+	            			$("#despronpag").val("");
+	            			$("#taract").val("");
+	            			$("#totpag").val("");
+	            			$("#sancion").val("");
+	            			$("#valpagar").val("");
+	            			$("#intereses").val("");
+	            			$("#totpagvol").val("");
+	            			$("#numFormcal").val("");
+		            	
+	            			
+//	            			$('#generaDeclaracionButton').prop("disabled", true);
+		            		
+	            		}else
+	            		{	            			
+	            			$("#valimpcar").val(data.impuestoCargo);
+	            			$("#valsemafo").val(data.valorSemafor);
+	            			$("#despronpag").val(data.descuentoProntop);
+	            			$("#taract").val(data.tarifaActual);
+	            			$("#totpag").val(data.totalPagar);
+	            			$("#sancion").val(data.sancion);
+	            			$("#valpagar").val(data.valorPagar);
+	            			$("#intereses").val(data.intereses);
+	            			$("#totpagvol").val(data.totalPagoVol);
+	            			$("#numFormcal").val(data.numForm);
+	            			
+	            			
+//	            			$('#generaDeclaracionButton').prop("disabled", false);
+	            			
+	            		}
+	 	      		
+		            
 
-					},
-					error : function() {
-					}
-				});
-			});
-
-		},
+		},error: function () {
+        	$( "#dialogVehiculos" ).dialog( "open" );
+        	$("#vehiculosDialogContent").html("");
+        	$("#vehiculosDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
+        	$("#valimpcar").val("");
+			$("#valsemafo").val("");
+			$("#despronpag").val("");
+			$("#taract").val("");
+			$("#totpag").val("");
+			$("#sancion").val("");
+			$("#valpagar").val("");
+			$("#intereses").val("");
+			$("#totpagvol").val("");
+			$("#numFormcal").val("");
+//			$("#calculoButton").prop('disabled', false);
+        }
+    });
+    
+});
+},
 
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {

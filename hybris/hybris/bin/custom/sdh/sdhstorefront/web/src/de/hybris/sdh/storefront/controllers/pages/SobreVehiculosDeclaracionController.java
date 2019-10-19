@@ -24,15 +24,22 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
+import de.hybris.sdh.core.pojos.responses.CalcVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHCalVehiculosService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -40,9 +47,11 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -96,6 +105,9 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 
 	@Resource(name = "sdhDetalleVehiculosService")
 	SDHDetalleVehiculosService sdhDetalleVehiculosService;
+
+	@Resource(name = "sdhCalcVehiculosService")
+	SDHCalVehiculosService sdhCalcVehiculosService;
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
 	{
@@ -168,7 +180,7 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 					}
 					else
 					{
-						vehiculosFormDeclaracion.setClase("no exisye clase");
+						vehiculosFormDeclaracion.setClase("No existe Placa");
 					}
 					break;
 				}
@@ -193,6 +205,110 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/calculo", method = RequestMethod.POST)
+	@ResponseBody
+	public CalcVehiculosResponse calculo(@ModelAttribute("vehiculosFormDeclaracion")
+	final VehiculosInfObjetoForm dataForm) throws CMSItemNotFoundException
+	{
+		CalcVehiculosResponse calcVehiculosResponse = new CalcVehiculosResponse();
+
+		//		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+		final CalcVehiculosRequest calcVehiculosRequest = new CalcVehiculosRequest();
+
+		//		calcVehiculosRequest.setBpNum("0000062009");
+		//		calcVehiculosRequest.setPlaca("BDM080");
+		//		calcVehiculosRequest.setNumForm("020000000613");
+		//		calcVehiculosRequest.setAnioGravable("2016");
+		//		calcVehiculosRequest.setOpcionUso("01");
+		//		calcVehiculosRequest.setClase("001");
+		//		calcVehiculosRequest.setIdServicio("01");
+		//		calcVehiculosRequest.setCilindraje("2587");
+		//		calcVehiculosRequest.setMarca("000025");
+		//		calcVehiculosRequest.setLinea("3928");
+		//		calcVehiculosRequest.setModelo("1992");
+		//		calcVehiculosRequest.setClasicoAntiguo("1");
+		//		calcVehiculosRequest.setCheckAporte("X");
+		//		calcVehiculosRequest.setProyectoAporte("PROYECTO");
+		//		calcVehiculosRequest.setBlindado("X");
+		//		calcVehiculosRequest.setCapacidadTon("0.00");
+		//		calcVehiculosRequest.setCapacidadPas("5");
+		//		calcVehiculosRequest.setAvaluo("");
+		//		calcVehiculosRequest.setClaseSdh("");
+		//		calcVehiculosRequest.setTipoVehSdh("");
+		//		calcVehiculosRequest.setLineaHomologa("");
+		//		calcVehiculosRequest.setFuenteHomologa("");
+
+		calcVehiculosRequest.setBpNum(dataForm.getBpNum());
+		calcVehiculosRequest.setPlaca(dataForm.getPlaca());
+		calcVehiculosRequest.setNumForm(dataForm.getNumForm());
+		calcVehiculosRequest.setAnioGravable(dataForm.getAnioGravable());
+		calcVehiculosRequest.setOpcionUso(dataForm.getOpcionUso());
+		calcVehiculosRequest.setClase(dataForm.getClase());
+		calcVehiculosRequest.setIdServicio(dataForm.getIdServicio());
+		calcVehiculosRequest.setCilindraje(dataForm.getCilindraje());
+		calcVehiculosRequest.setMarca(dataForm.getMarca());
+		calcVehiculosRequest.setLinea(dataForm.getLinea());
+		calcVehiculosRequest.setModelo(dataForm.getModelo());
+		calcVehiculosRequest.setClasicoAntiguo(dataForm.getClasicoAntiguo());
+		calcVehiculosRequest.setCheckAporte(dataForm.getCheckAporte());
+		calcVehiculosRequest.setProyectoAporte(dataForm.getProyectoAporte());
+		calcVehiculosRequest.setBlindado(dataForm.getBlindado());
+		calcVehiculosRequest.setCapacidadTon(dataForm.getCapacidadTon());
+		calcVehiculosRequest.setCapacidadPas(dataForm.getCapacidadPas());
+		calcVehiculosRequest.setAvaluo(dataForm.getAvaluo());
+		calcVehiculosRequest.setClaseSdh(dataForm.getClaseSdh());
+		calcVehiculosRequest.setTipoVehSdh(dataForm.getTipoVehSdh());
+		calcVehiculosRequest.setLineaHomologa(dataForm.getLineaHomologa());
+		calcVehiculosRequest.setFuenteHomologa(dataForm.getFuenteHomologa());
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			calcVehiculosResponse = mapper.readValue(sdhCalcVehiculosService.calcVehiculos(calcVehiculosRequest),
+					CalcVehiculosResponse.class);
+
+			final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
+
+			vehiculosFormDeclaracion.setNumForm(calcVehiculosResponse.getNumForm());
+			vehiculosFormDeclaracion.setImpuestoCargo(calcVehiculosResponse.getImpuestoCargo());
+			vehiculosFormDeclaracion.setTarifaActual(calcVehiculosResponse.getTarifaActual());
+			vehiculosFormDeclaracion.setSancion(calcVehiculosResponse.getSancion());
+			vehiculosFormDeclaracion.setIntereses(calcVehiculosResponse.getIntereses());
+			vehiculosFormDeclaracion.setValorSemafor(calcVehiculosResponse.getValorSemafor());
+			vehiculosFormDeclaracion.setDescuentoProntop(calcVehiculosResponse.getDescuentoProntop());
+			vehiculosFormDeclaracion.setTotalPagar(calcVehiculosResponse.getTotalPagar());
+			vehiculosFormDeclaracion.setValorPagar(calcVehiculosResponse.getValorPagar());
+			vehiculosFormDeclaracion.setTotalPagoVol(calcVehiculosResponse.getTotalPagoVol());
+		}
+
+
+
+
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+
+			final ErrorPubli error = new ErrorPubli();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
+
+			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
+
+			errores.add(error);
+
+			calcVehiculosResponse.setErrores(errores);
+
+		}
+
+
+		return calcVehiculosResponse;
+
 	}
 
 
