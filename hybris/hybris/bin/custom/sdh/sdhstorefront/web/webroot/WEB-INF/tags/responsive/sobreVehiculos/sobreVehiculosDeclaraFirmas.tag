@@ -164,7 +164,7 @@
 				type="button">
 				<spring:theme code="vehiculos.declaracion.firma.prendecla" />
 			</button>
-			<
+			
 			<button class="btn btn-primary btn-lg" type="submit" id="action"
 				name="pagar" value="pagar">
 				<spring:theme code="vehiculos.declaracion.firma.pagliena" />

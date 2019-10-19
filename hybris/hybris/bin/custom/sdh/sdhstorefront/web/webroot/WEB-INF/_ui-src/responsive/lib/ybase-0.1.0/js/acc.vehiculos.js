@@ -251,6 +251,8 @@ ACC.vehiculos = {
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {
 			e.preventDefault();
+			var doc = document.getElementById('detalleVehiculos');
+			doc.style.display='block';
 
 			var placa = $.trim($(this).attr("data-placa"));
 			var bpNum = $.trim($(this).attr("data-numbp"));
@@ -474,6 +476,12 @@ ACC.vehiculos = {
 
 		if (liq != null) {
 			for (var i = 0; i < liq.length; i++) {
+				
+				var fecjur1 = liq[i].anio;
+
+				var anio = fecjur1.slice(0, 4);
+				
+				liq[i].anio = anio;
 
 				$('#tableLiq')
 						.append(

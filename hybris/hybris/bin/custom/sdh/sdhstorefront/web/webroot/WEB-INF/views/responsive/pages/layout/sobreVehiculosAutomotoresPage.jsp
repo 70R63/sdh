@@ -9,10 +9,12 @@
 
 
 <sobreVehiculos:sobreVehiculosTable />
+<div id="detalleVehiculos" style="display: none">
 <sobreVehiculos:sobreVehiculosDetail />
 <sobreVehiculos:sobreVehiculosJuridicos />
 <sobreVehiculos:sobreVehiculosMarcas />
 <sobreVehiculos:sobreVehiculosLiquida />
+</div>
 
 <script>
 	function goBack() {

@@ -40,11 +40,11 @@
 					</label>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.proyecto" /></label><select
-						id="proyecto" name="proyecto" class="newalto form-control"
+						id="proyecto" name="proyecto" class="alto_select form-control"
 						aria-required="true" disabled="disabled"><option value="01"> FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option></select>
 				</div>
 			</div>
