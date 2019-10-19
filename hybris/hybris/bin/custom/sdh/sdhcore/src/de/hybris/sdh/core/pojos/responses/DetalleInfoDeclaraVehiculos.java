@@ -14,7 +14,7 @@ public class DetalleInfoDeclaraVehiculos
 {
 
 	private Infovehic infoVeh;
-	private String liquidacion;
+	private liquidacionVehiculos liquidacion;
 
 	private List<ErrorEnWS> errores;
 
@@ -38,7 +38,7 @@ public class DetalleInfoDeclaraVehiculos
 	/**
 	 * @return the liquidacion
 	 */
-	public String getLiquidacion()
+	public liquidacionVehiculos getLiquidacion()
 	{
 		return liquidacion;
 	}
@@ -47,7 +47,7 @@ public class DetalleInfoDeclaraVehiculos
 	 * @param liquidacion
 	 *           the liquidacion to set
 	 */
-	public void setLiquidacion(final String liquidacion)
+	public void setLiquidacion(final liquidacionVehiculos liquidacion)
 	{
 		this.liquidacion = liquidacion;
 	}
