@@ -56,7 +56,7 @@ ACC.frimas = {
 		});
 
 		$(".justFirm").on("click",function(e){
-
+			debugger;
 			var numForm = $("#numForm").val();
 
 			if(numForm == "" )

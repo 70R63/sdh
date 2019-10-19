@@ -13,6 +13,26 @@ public class ConsulPagosRequest
 	private String impuesto;
 	private String anioGravable;
 	private String numObjeto;
+	private String periodo;
+
+
+
+	/**
+	 * @return the periodo
+	 */
+	public String getPeriodo()
+	{
+		return periodo;
+	}
+
+	/**
+	 * @param periodo
+	 *           the periodo to set
+	 */
+	public void setPeriodo(final String periodo)
+	{
+		this.periodo = periodo;
+	}
 
 	/**
 	 * @return the bp
@@ -91,6 +111,7 @@ public class ConsulPagosRequest
 		stringBuilder.append("\"BP\":\"" + this.getBp() + "\",");
 		stringBuilder.append("\"impuesto\":\"" + this.getImpuesto() + "\",");
 		stringBuilder.append("\"anioGravable\":\"" + this.getAnioGravable() + "\",");
+		stringBuilder.append("\"periodo\":\"" + this.getPeriodo() + "\",");
 		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\"");
 		stringBuilder.append("}");
 

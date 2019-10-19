@@ -13,6 +13,81 @@
 <spring:url value="/contribuyentes/consultas/certipagos"
 	var="certificacionURL" htmlEscape="false" />
 
+
+<script>
+
+	function SelectedAnio(selectObject) {
+//		debugger;
+	ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+
+	}
+	
+	function valper(selectObject) {
+		debugger;
+		var per = selectObject.value;
+		var anio = document.getElementById('aniograv').value;
+		var fecha = new Date();
+		var anioact = fecha.getFullYear();
+		var mesact = fecha.getMonth();
+
+		if (anio < anioact) {
+
+		} else {
+			mesact = mesact + 1;
+			if (per < mesact) {
+
+			} else {
+				alert("Por favor, seleccione un mes anterior");
+			}
+
+		}
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+
+	}
+	
+	
+	function vaperiodo(selectObject) {
+		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+
+	}
+	
+	function onChange_anterior(anoGravableGasolina,anoGravablePublicidad) {
+			form = document.getElementById("form_pdf");
+
+			input = document.createElement('input');
+	        input.setAttribute('name', 'rowFrompublicidadTable');
+	        input.setAttribute('value', 'X');
+	        input.setAttribute('type', 'hidden');
+	        
+	        form.appendChild(input);
+			form.submit();
+		
+	}
+	
+	function onChangeAnioGravable() {
+		impuesto = document.getElementById("Idimp").value;
+		if(impuesto == 4){
+			form = document.getElementById("form_pdf");
+			form.submit();
+		}			
+	}
+	
+	function downloadPDF(pdf) {
+		debugger;
+		if (pdf){
+			const linkSource = 'data:application/pdf;base64,' + pdf;
+		    const downloadLink = document.createElement("a");
+		    const fileName = "Certificación_Pago.pdf";	
+		    downloadLink.href = linkSource;
+		    downloadLink.download = fileName;
+		    downloadLink.click();
+		}    
+	}	
+// 	downloadPDF('${imprimePagoResponse.stringPDF}');
+</script>
+
+
 <a id="downloadHelper" target="_blank"></a>
 <c:choose>
 	<c:when test="${certiFormPost.idimp == 4}">
@@ -115,6 +190,7 @@
 				<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 				<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 				<div class="caja--ser-rel color-sr3">
+
 					<select id="periodoB" class="new_alto form-control " name="periodo"
 						onchange="vaperiodo(this)">
 						<option value="00">Seleccionar</option>

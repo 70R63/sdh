@@ -2117,6 +2117,13 @@ public class SobreTasaGasolinaService
 				elementos.put("0003", "Industria y Comercio");
 			}
 		}
+		if (customerData.getReteIca() != null) // reteICA
+		{
+			if (!customerData.getReteIca().getNumObjeto().isEmpty())
+			{
+				elementos.put("0004", "Retención ICA");
+			}
+		}
 		if (customerData.getGasolina() != null) //gasolina
 		{
 			if (customerData.getGasolina().size() > 0)
@@ -2314,8 +2321,13 @@ public class SobreTasaGasolinaService
 
 				break;
 
-			//			case "0004": //RETEICA
-			//				break;
+
+			case "0004": //RETEICA
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+
+				break;
+
 
 
 			case "0005": //sobretasa gasolina
@@ -2381,8 +2393,18 @@ public class SobreTasaGasolinaService
 
 				break;
 
-			//			case "0004": //RETEICA
-			//				break;
+
+			//implementar la logica para cada impuesto
+			case "0004": //RETEICA
+				if (customerData != null)
+				{
+					if (customerData.getReteIca() != null)
+					{
+						numObjeto = customerData.getReteIca().getNumObjeto();
+					}
+				}
+
+				break;
 
 
 			case "0005": //sobretasa gasolina

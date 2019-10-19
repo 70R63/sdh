@@ -342,6 +342,12 @@ ACC.opcionDeclaraciones = {
 	        var claveImpuesto = $("#seleccion").val();  	       
 	        var anoGravable = $("#aniograv").val(); 	       
 			var dataActual = {};
+			
+			var validacionOK = false;
+			
+			if (periodo == "00"){
+				periodo = $("#periodoB").val(); 	       
+			}	
 		
 			
 			dataActual.claveImpuesto = claveImpuesto;
@@ -445,11 +451,6 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse,filtroPeriodo) {
 
-		ACC.opcionDeclaraciones.vaciarTablasInfo();
-
-		var desc_clavePeriodo = "";
-		
-//		debugger;
 		if (infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].idmsj != 0){
 			alert(infoResponse.errores[0].txtmsj);
 		}else{
@@ -480,7 +481,7 @@ ACC.opcionDeclaraciones = {
 					if(infoActual.claveImpuesto == '0004'){
 						$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 							if(value1.numObjeto != ""){
-								if(value1.numObjeto == infoResponse.customerData.reteICA.numObjeto){
+								if(value1.numObjeto == infoResponse.customerData.reteIca.numObjeto){
 									$('#table-reteica1').append("<tr>"+ 
 										'<td>' + infoResponse.customerData.reteIca.numID  + '</td>'+
 										'<td>' + infoResponse.customerData.reteIca.consecutivo + '</td>'+
