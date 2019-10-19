@@ -310,6 +310,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		String bp = "";
 		String impuesto = "";
 		String anioGravable = "";
+		String periodo = "";
 
 
 		bp = customerModel.getNumBP();
@@ -321,6 +322,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 		impuesto = infoVista.getClaveImpuesto();
 		anioGravable = infoVista.getAnoGravable();
+		periodo = infoVista.getPeriodo();
 
 		infoVista.setUrlDownload(null);
 		infoVista.setPublicidadExt(null);
@@ -335,6 +337,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		listaDeclaracionesRequest.setBp(bp);
 		listaDeclaracionesRequest.setImpuesto(impuesto);
 		listaDeclaracionesRequest.setAnioGravable(anioGravable);
+		listaDeclaracionesRequest.setPeriodo(periodo);
 		listaDeclaracionesRequest
 				.setNumObjeto(gasolinaService.prepararNumObjeto_certipagos(infoVista, infoVista.getCustomerData()));
 

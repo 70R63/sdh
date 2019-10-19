@@ -44,6 +44,13 @@
 
 	}
 	
+	
+	function vaperiodo(selectObject) {
+		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+
+	}
+	
 	function onChange_anterior(anoGravableGasolina,anoGravablePublicidad) {
 			form = document.getElementById("form_pdf");
 
@@ -181,7 +188,7 @@
 				<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 				<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 				<div class="caja--ser-rel color-sr3">
-					<select id="periodo" class="new_alto form-control " name="periodo"
+					<select id="periodo2" class="new_alto form-control " name="periodo"
 						onchange="vaperiodo(this)">
 						<option value="00">Seleccionar</option>
 						<option value="B1">1 - Ene / Feb</option>

@@ -330,7 +330,11 @@ ACC.opcionDeclaraciones = {
 	        var periodo = $("#periodo").val(); 	       
 			var dataActual = {};
 			var validacionOK = false;
-
+			
+			if (periodo == "00"){
+				periodo = $("#periodo2").val(); 	       
+			}	
+				
 		
 			dataActual.claveImpuesto = claveImpuesto;
 			dataActual.anoGravable = anoGravable;
@@ -436,7 +440,7 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse) {
 
-//		debugger;
+		debugger;
 		$("#table-publicidad1").find("tr:gt(0)").remove();
 		$("#table-gasolina1").find("tr:gt(0)").remove();
 		$("#table-ica1").find("tr:gt(0)").remove();
@@ -471,7 +475,7 @@ ACC.opcionDeclaraciones = {
 					if(infoActual.claveImpuesto == '0004'){
 						$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 							if(value1.numObjeto != ""){
-								if(value1.numObjeto == infoResponse.customerData.reteICA.numObjeto){
+								if(value1.numObjeto == infoResponse.customerData.reteIca.numObjeto){
 									$('#table-reteica1').append("<tr>"+ 
 										'<td>' + infoResponse.customerData.reteIca.numID  + '</td>'+
 										'<td>' + infoResponse.customerData.reteIca.consecutivo + '</td>'+
