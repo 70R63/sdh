@@ -45,7 +45,9 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.proyecto" /></label><select
 						id="proyecto" name="proyecto" class="alto_select form-control"
-						aria-required="true" disabled="disabled"><option value="01"> FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option></select>
+						aria-required="true" disabled="disabled">
+						<option value="00">SELECCIONAR</option>
+						<option value="01"> FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option></select>
 				</div>
 			</div>
 		</div>
