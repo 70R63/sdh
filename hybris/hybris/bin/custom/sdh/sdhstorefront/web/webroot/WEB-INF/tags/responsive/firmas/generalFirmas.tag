@@ -111,11 +111,13 @@
 									style="margin-top: 4px">Solo Firmar</button>
 							</div>
 						</c:if>
-						<div class="col-md-1">
-							<label class="control-label"><spring:theme code="" /></label>
-							<button type="button" class="btn btn-primary firmAndAdd"
-								style="margin-top: 4px">${lblBotonFirmarYAgregar}</button>
-						</div>
+						<c:if test="${showFirmAndAddButton eq true }">
+							<div class="col-md-1">
+								<label class="control-label"><spring:theme code="" /></label>
+								<button type="button" class="btn btn-primary firmAndAdd"
+									style="margin-top: 4px">${lblBotonFirmarYAgregar}</button>
+							</div>
+						</c:if>
 					</c:if>
 				</div>
 			</c:when>
