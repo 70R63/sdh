@@ -15,25 +15,28 @@
 <div class="container">
 
 	<div class="row" style="marging-top: 5px">
-		<div class="col-md-12 centercol-md-8 text-center">
-
-
-			<button style="margin-top: 3px;" id="regresar"
-				class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
-				<spring:theme code="vehiculos.declaracion.firma.regresar" />
-			</button>
-
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button">
-				<spring:theme code="vehiculos.declaracion.firma.prendecla" />
-			</button>
-			
-			<button class="btn btn-primary btn-lg" type="submit" id="action"
-				name="pagar" value="pagar">
-				<spring:theme code="vehiculos.declaracion.firma.pagliena" />
-			</button>
-
-		</div>
+		<sf:form action="${pagarURL}" method="POST"
+			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
+			<div class="col-md-12 centercol-md-8 text-center">
+	
+	
+				<button style="margin-top: 3px;" id="regresar"
+					class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
+					<spring:theme code="vehiculos.declaracion.firma.regresar" />
+				</button>
+	
+				<button style="margin-top: 3px;" id="generaDeclaracionVehiculosButton" class="btn btn-primary btn-lg"
+					type="button">
+					<spring:theme code="vehiculos.declaracion.firma.prendecla" />
+				</button>
+				
+				<button class="btn btn-primary btn-lg" type="submit" id="action"
+					name="pagar" value="pagar">
+					<spring:theme code="vehiculos.declaracion.firma.pagliena" />
+				</button>
+	
+			</div>
+		</sf:form>
 	</div>
 
 </div>
