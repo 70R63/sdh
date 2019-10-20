@@ -107,15 +107,26 @@ public class ConsulPagosRequest
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 
+
 		stringBuilder.append("{");
-		stringBuilder.append("\"BP\":\"" + this.getBp() + "\",");
-		stringBuilder.append("\"impuesto\":\"" + this.getImpuesto() + "\",");
-		stringBuilder.append("\"anioGravable\":\"" + this.getAnioGravable() + "\",");
-		stringBuilder.append("\"periodo\":\"" + this.getPeriodo() + "\",");
-		stringBuilder.append("\"numObjeto\":\"" + this.getNumObjeto() + "\"");
+		stringBuilder.append(obtenerValorJson("\"BP\":\"", this.getBp(), "\","));
+		stringBuilder.append(obtenerValorJson("\"impuesto\":\"", this.getImpuesto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"anioGravable\":\"", this.getAnioGravable(), "\","));
+		stringBuilder.append(obtenerValorJson("\"periodo\":\"", this.getPeriodo(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\""));
 		stringBuilder.append("}");
 
 		return stringBuilder.toString();
+	}
+
+	private String obtenerValorJson(final String cadena1, final String valor, final String cadena2)
+	{
+		String valorVariable = "";
+
+		valorVariable = (valor != null) ? cadena1 + valor + cadena2 : cadena1 + cadena2;
+
+
+		return valorVariable;
 	}
 
 
