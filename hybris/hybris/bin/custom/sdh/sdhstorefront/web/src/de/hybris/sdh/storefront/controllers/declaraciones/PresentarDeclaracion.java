@@ -28,6 +28,7 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
@@ -112,7 +113,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	@Resource(name = "sdhICAInfObjetoService")
 	SDHICAInfObjetoService sdhICAInfObjetoService;
 
-
+	@Resource(name = "sdhDetalleVehiculosService")
+	SDHDetalleVehiculosService sdhDetalleVehiculosService;
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
