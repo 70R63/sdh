@@ -129,7 +129,7 @@ ACC.vehiculos = {
 
 				var bpNum=$.trim($("#numBPcal").val());
 				var placa=$.trim($("#placaDec").val());
-				var numForm=$.trim($("#numFormcal").val());
+				var numForm=$.trim($("#numForm").val());
 				var anioGravable=$.trim($("#anioGravablecal").val());
 				var opcionUso=$.trim($("#opcionUsocal").val());
 				var clase=$.trim($("#clasecal").val());
@@ -203,7 +203,7 @@ ACC.vehiculos = {
 	            			$("#valpagar").val("");
 	            			$("#intereses").val("");
 	            			$("#totpagvol").val("");
-	            			$("#numFormcal").val("");
+	            			$("#numForm").val("");
 		            	
 	            			
 //	            			$('#generaDeclaracionButton').prop("disabled", true);
@@ -219,7 +219,7 @@ ACC.vehiculos = {
 	            			$("#valpagar").val(data.valorPagar);
 	            			$("#intereses").val(data.intereses);
 	            			$("#totpagvol").val(data.totalPagoVol);
-	            			$("#numFormcal").val(data.numForm);
+	            			$("#numForm").val(data.numForm);
 	            			
 	            			
 //	            			$('#generaDeclaracionButton').prop("disabled", false);
@@ -241,7 +241,7 @@ ACC.vehiculos = {
 			$("#valpagar").val("");
 			$("#intereses").val("");
 			$("#totpagvol").val("");
-			$("#numFormcal").val("");
+			$("#numForm").val("");
 //			$("#calculoButton").prop('disabled', false);
         }
     });
