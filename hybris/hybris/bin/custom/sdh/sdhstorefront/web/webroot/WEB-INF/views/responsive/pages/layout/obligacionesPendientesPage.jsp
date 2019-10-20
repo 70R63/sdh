@@ -22,14 +22,15 @@ window.onload = function() {
 	debugger;
 	var cosas = $(":input");
 	var tam = cosas.length;
-	for (var i = 0; i < tam; i++) {
-		var valor = cosas[i].value;
-		if (valor == "") {
-			cosas[i].value = "-";
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
 
+			}
 		}
 	}
-
 }
 function goBack() {
 	window.history.back();

@@ -29,13 +29,15 @@
 		debugger;
 		var cosas = $(":input");
 		var tam = cosas.length;
-		for (var i = 0; i < tam; i++) {
-			if((cosas[i].name != "firmInterFunct")&&(cosas[i].id != "firmCompleteName")&&(cosas[i].id != "lblcontribuyente_documentType")&&(cosas[i].id != "contribuyente_documentNumber")&&(cosas[i].id != "contribuyente_numBP")){
-				var valor = cosas[i].value;
-				if (valor == "") {
-					cosas[i].value = "-";
+		if (false){
+			for (var i = 0; i < tam; i++) {
+				if((cosas[i].name != "firmInterFunct")&&(cosas[i].id != "firmCompleteName")&&(cosas[i].id != "lblcontribuyente_documentType")&&(cosas[i].id != "contribuyente_documentNumber")&&(cosas[i].id != "contribuyente_numBP")){
+					var valor = cosas[i].value;
+					if (valor == "") {
+						cosas[i].value = "-";
+					}
 				}
 			}
-		}
+		}	
 	}
 </script>

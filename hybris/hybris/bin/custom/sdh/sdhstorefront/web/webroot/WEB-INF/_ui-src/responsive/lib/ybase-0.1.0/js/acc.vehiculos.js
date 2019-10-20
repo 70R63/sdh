@@ -349,7 +349,7 @@ ACC.vehiculos = {
 		} else if (data.tipoVeh == "8") {
 			data.tipoVeh = "AMBULANCIAS";
 		} else {
-			data.tipoVeh = "-";
+			data.tipoVeh = "";
 
 		}
 
