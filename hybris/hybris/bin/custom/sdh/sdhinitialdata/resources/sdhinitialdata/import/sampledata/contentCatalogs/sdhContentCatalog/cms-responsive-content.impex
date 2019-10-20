@@ -91,7 +91,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "#" ;;;;;
 ; ;TramitesLink; TRAMITES LINK    ; "/contibuyentes/tramites" ;;;;;
 ; ;FacturacionLink; FACTURACION LINK    ; "#" ;;;;;
-; ;DeclaracionesLink; DECLARACIONES LINK    ; "#" ;;;;;
+; ;DeclaracionesMenuLink; DECLARACIONES LINK    ; "#" ;;;;;
 #->; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
@@ -351,7 +351,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ImpuestosNavigationNodeEntry;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosLink;
 ;TramitesNavigationNodeEntry;;Tramites Menu;TramitesNavigationNode;TramitesLink;
 ;FacturacionNavigationNodeEntry;;Facturacion Menu;FacturacionNavigationNode;FacturacionLink;
-;DeclaracionesNavigationNodeEntry;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesLink;
+;DeclaracionesNavigationNodeEntry;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesMenuLink;
 
 #;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
 #;ARPagosNavigationNodeEntry;;Pagos Menu;ARPagosNavigationNode;PagosLink;
@@ -1567,7 +1567,7 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 ;;ImpuestosLink Logged in User;anonymousUserRestriction;ImpuestosLinkloggedInUser;ImpuestosLink
 ;;TramitesLink Logged in User;anonymousUserRestriction;TramitesLinkloggedInUser;TramitesLink
 ;;FacturacionLink Logged in User;anonymousUserRestriction;FacturacionLinkloggedInUser;FacturacionLink
-;;DeclaracionesLink Logged in User;anonymousUserRestriction;DeclaracionesLinkloggedInUser;DeclaracionesLink
+;;DeclaracionesMenuLink Logged in User;anonymousUserRestriction;DeclaracionesMenuLinkloggedInUser;DeclaracionesMenuLink
 #->;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
 ;;ConsultasLink Logged in User;anonymousUserRestriction;ConsultasLinkloggedInUser;ConsultasLink
 ;;ReportantesLink Logged in User;anonymousUserRestriction;RecaudacionLinkloggedInUser;ReportantesLink

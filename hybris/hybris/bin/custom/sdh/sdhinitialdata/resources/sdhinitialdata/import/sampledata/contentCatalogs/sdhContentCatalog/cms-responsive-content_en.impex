@@ -105,7 +105,7 @@ UPDATE PSCMSLinkComponent;$contentCV;uid[unique=true];linkName[lang=$lang];title
 ;;ImpuestosLink;"Taxes";"Click here for menu item Taxes"
 ;;TramitesLink;"Formalites";"Click here for menu item Formalites"
 ;;FacturacionLink;"Billing";"Click here for menu item Billing"
-;;DeclaracionesLink;"Declaratios";"Click here for menu item Declarations"
+;;DeclaracionesMenuLink;"Declaratios";"Click here for menu item Declarations"
 ;;ConsultasLink;"Queries";"Click here for menu item Queries"
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
