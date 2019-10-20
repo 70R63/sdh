@@ -132,6 +132,31 @@ public class SDHCustomerPopulator implements Populator<CustomerModel, CustomerDa
 
 		}
 		target.setExteriorPublicityTaxList(peTaxDatas);
+		
+		final List<SDHVehiculosTaxModel> veTaxModels = source.getVehiculosTaxList();
+		final List<SDHVehiculosTaxData> veTaxDatas = new ArrayList<SDHVehiculosTaxData>();
+		if (null != veTaxModels && !veTaxModels.isEmpty())
+		{
+
+			for (final SDHVehiculosTaxModel eachModel : veTaxModels)
+			{
+				final SDHVehiculosTaxData eachData = new SDHVehiculosTaxData();
+
+				eachData.setPlaca(eachModel.getPlaca());
+				eachData.setMarca(eachModel.getMarca());
+				eachData.setLinea(eachModel.getLinea());
+				eachData.setModelo(eachModel.getModelo());
+				eachData.setClase(eachModel.getClase());
+				eachData.setCarroceria(eachModel.getCarroceria());
+				eachData.setNumPuertas(eachModel.getNumPuertas());
+				eachData.setBlindado(eachModel.getBlindado());
+				eachData.setCilindraje(eachModel.getCilindraje());
+				eachData.setNumObjeto(eachModel.getNumObjeto());
+				veTaxDatas.add(eachData);
+			}
+
+		}
+		target.setVehiculosTaxList(veTaxDatas);
 
 		final List<SDHGasTaxModel> gasTaxModels = source.getGasTaxList();
 		final List<SDHGasTaxData> gasTaxDatas = new ArrayList<SDHGasTaxData>();

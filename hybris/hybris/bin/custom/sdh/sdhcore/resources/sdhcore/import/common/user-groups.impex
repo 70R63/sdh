@@ -51,6 +51,7 @@ INSERT_UPDATE Employee;uid[unique=true];name;groups(uid);backOfficeLoginDisabled
  ;;;;SDHSocialNetwork;+;+;-;-;-
  ;;;;SDHRol;+;+;-;-;-
  ;;;;SDHExteriorPublicityTax;+;+;-;-;-
+ ;;;;SDHVehiculosTax;+;+;-;-;-
  ;;;;SDHGasTax;+;+;-;-;-
  ;;;;SDHAgent;+;+;-;-;-
  ;;;;SDHUrbanDelineationsTax;+;+;-;-;-

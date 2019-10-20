@@ -103,6 +103,7 @@ ACC.vehiculos = {
 	 	        var anioGravable = $.trim($("#an").val());
 	 	        var placa = $.trim($("#placas").val());
 	 	       var numBPP  = $.trim($("#numBPP").val());
+	 	       var numForma = $.trim($("#numFormdet").val());
 
 	 	      
 	 	      if(anioGravable == "0")
@@ -117,7 +118,7 @@ ACC.vehiculos = {
 	 	        	return;
 	 	        }
 	 	       
-	 	      window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP;
+	 	      window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
 	 	       
 		 });
 	 },
@@ -289,6 +290,7 @@ ACC.vehiculos = {
 		$('#tableJur tbody').empty();
 		$('#tablemarcas tbody').empty();
 		$('#tableLiq tbody').empty();
+		$('#numFormdet').val(data.numForm);
 		$("#placas").val(data.placa);
 
 		if (data.idServicio == "01") {

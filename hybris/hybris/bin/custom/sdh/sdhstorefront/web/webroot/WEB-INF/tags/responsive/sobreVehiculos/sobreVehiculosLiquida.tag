@@ -40,6 +40,7 @@
 				</table>
 			</div>
 		</div>
+		<input type="hidden" value="" id="numFormdet" class="numFormdet" />
 		<div class="row">
 			<div class="col-md-2">
 				<button  type="button" class="btn btn-secondary "

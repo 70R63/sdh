@@ -11,6 +11,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -118,6 +119,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
+		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		{
+			dataForm.setOptionVehicular("2");
+		}
 
 		if (customerData.getIcaTax() != null)
 		{
@@ -140,7 +145,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("tpImpuesto",
-				this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(), dataForm.getOptionIca(),
+				this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
+						dataForm.getOptionIca(),
 						dataForm.getOptionDeli()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -373,7 +379,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
 		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
 		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
-				dataForm.getOptionDeli(), dataForm.getOptionIca()));
+				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -384,14 +390,19 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	private Map<String, String> getTpImpuesto(final String optionGas, final String optionPubExt, final String optionIca,
-			final String optionDeli)
+	private Map<String, String> getTpImpuesto(final String optionVehicular, final String optionGas, final String optionPubExt,
+			final String optionIca, final String optionDeli)
 	{
 		final Map<String, String> map;
-		if (optionGas != "" || optionPubExt != "" || optionIca != "" || optionDeli != "")
+		if (optionGas != "" || optionPubExt != "" || optionIca != "" || optionDeli != "" || optionVehicular != "")
 		{
 			map = new HashMap<String, String>();
 			map.put("0", "Seleccionar");
+
+			if (optionVehicular != "")
+			{
+				map.put("2", "Sobre Vehiculos");
+			}
 
 			if (optionIca != "")
 			{

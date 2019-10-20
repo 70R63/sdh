@@ -118,7 +118,8 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 	@RequestMapping(method = RequestMethod.GET)
 	public String sobrevehiculosdecla(final Model model, @RequestParam(required = true, value = "anioGravable")
 	final String anioGravable, @RequestParam(required = true, value = "placa")
-	final String placa, @RequestParam(required = true, value = "numBPP")
+	final String placa, @RequestParam(required = false, value = "numForma")
+	final String numForma, @RequestParam(required = true, value = "numBPP")
 	final String numBPP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro Sobre Vehiculos declaracion --------------------------");
@@ -141,6 +142,7 @@ public class SobreVehiculosDeclaracionController extends AbstractPageController
 			vehiculosFormDeclaracion.setNumBP(numBPP);
 			vehiculosFormDeclaracion.setAnioGravable(anioGravable);
 			vehiculosFormDeclaracion.setPlaca(placa);
+			vehiculosFormDeclaracion.setNumForm(numForma);
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);

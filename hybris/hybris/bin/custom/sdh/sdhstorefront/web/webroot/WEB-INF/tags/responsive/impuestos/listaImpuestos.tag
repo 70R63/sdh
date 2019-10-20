@@ -96,7 +96,7 @@
 			</c:if>
 
 			<c:if
-				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
+				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6' and dataForm.impuesto ne '2'}">
 				
 				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
 					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
