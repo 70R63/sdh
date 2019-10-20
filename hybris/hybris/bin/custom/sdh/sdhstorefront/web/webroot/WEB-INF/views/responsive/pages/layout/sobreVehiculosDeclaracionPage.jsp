@@ -14,9 +14,9 @@
 <sobreVehiculos:sobreVehiculosDeclaraInfo />
 <sobreVehiculos:sobreVehiculosDeclaraLiqui />
 <%-- <sobreVehiculos:sobreVehiculosDeclaraFirma /> --%>
-<%-- <sobreVehiculos:sobreVehiculosDeclaraFirmas/> --%>
 <c:url value='${redirectURL}' var="taxRedirection"/>
 <firmas:generalFirmas firmaContribuyenteRedirection="${taxRedirection}"/>
+<sobreVehiculos:sobreVehiculosDeclaraFirmas/>
 
 <div id="dialogVehiculos" title="Vehiculos" ><div id="vehiculosDialogContent"></div></div>
 
