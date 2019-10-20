@@ -2315,19 +2315,14 @@ public class SobreTasaGasolinaService
 		switch (infoVista.getClaveImpuesto())
 		{
 			//implementar la logica para cada impuesto
-			case "0003": //ICA
-				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
-				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
-
-				break;
-
-
-			case "0004": //RETEICA
-				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
-				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
-
-				break;
-
+			//			case "0002": //Vehiculos
+			//				break;
+			//
+			//			case "0003": //ICA
+			//				break;
+			//
+			//			case "0004": //RETEICA
+			//				break;
 
 
 			case "0005": //sobretasa gasolina
@@ -2350,19 +2345,17 @@ public class SobreTasaGasolinaService
 						declaraciones_selected.add(declaracionRow);
 					}
 				}
-
 				break;
 
-			//			case "0006": //delineacion urbana
+			//				case "0006": //Delineacion Urbana
+			//					break;
 			//
-			//				break;
-			//
-			//
-			//			case "0007": //publicidad exterior
-			//
-			//				break;
-			default:
+			//				case "0007": //Publicidad Exterior
+			//					break;
 
+			default:
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
 				break;
 		}
 

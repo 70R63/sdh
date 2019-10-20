@@ -14,80 +14,6 @@
 	var="certificacionURL" htmlEscape="false" />
 
 
-<script>
-
-	function SelectedAnio(selectObject) {
-//		debugger;
-	ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
-
-	}
-	
-	function valper(selectObject) {
-		debugger;
-		var per = selectObject.value;
-		var anio = document.getElementById('aniograv').value;
-		var fecha = new Date();
-		var anioact = fecha.getFullYear();
-		var mesact = fecha.getMonth();
-
-		if (anio < anioact) {
-
-		} else {
-			mesact = mesact + 1;
-			if (per < mesact) {
-
-			} else {
-				alert("Por favor, seleccione un mes anterior");
-			}
-
-		}
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
-
-	}
-	
-	
-	function vaperiodo(selectObject) {
-		debugger;
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
-
-	}
-	
-	function onChange_anterior(anoGravableGasolina,anoGravablePublicidad) {
-			form = document.getElementById("form_pdf");
-
-			input = document.createElement('input');
-	        input.setAttribute('name', 'rowFrompublicidadTable');
-	        input.setAttribute('value', 'X');
-	        input.setAttribute('type', 'hidden');
-	        
-	        form.appendChild(input);
-			form.submit();
-		
-	}
-	
-	function onChangeAnioGravable() {
-		impuesto = document.getElementById("Idimp").value;
-		if(impuesto == 4){
-			form = document.getElementById("form_pdf");
-			form.submit();
-		}			
-	}
-	
-	function downloadPDF(pdf) {
-		debugger;
-		if (pdf){
-			const linkSource = 'data:application/pdf;base64,' + pdf;
-		    const downloadLink = document.createElement("a");
-		    const fileName = "Certificación_Pago.pdf";	
-		    downloadLink.href = linkSource;
-		    downloadLink.download = fileName;
-		    downloadLink.click();
-		}    
-	}	
-// 	downloadPDF('${imprimePagoResponse.stringPDF}');
-</script>
-
-
 <a id="downloadHelper" target="_blank"></a>
 <c:choose>
 	<c:when test="${certiFormPost.idimp == 4}">
@@ -165,7 +91,7 @@
 					<div class="caja--ser-rel color-sr3">
 						<select aria-required="true" id="periodoM"
 							class="new_alto form-control " name="periodo" required='required'
-							onchange="valper(this)">
+							onchange="onChangeMensual(this)">
 							<option value="00">Seleccionar</option>
 							<option value="01">1-Enero</option>
 							<option value="02">2-Febrero</option>
@@ -192,7 +118,7 @@
 				<div class="caja--ser-rel color-sr3">
 
 					<select id="periodoB" class="new_alto form-control " name="periodo"
-						onchange="vaperiodo(this)">
+						onchange="onChangeBimestral(this)">
 						<option value="00">Seleccionar</option>
 						<option value="B1">1 - Ene / Feb</option>
 						<option value="B2">2 - Mar / Abr</option>
@@ -233,9 +159,9 @@
 			</div>
 		</div>
 
-		<div class="row" id="table-vehiculos" style="display: none;">
+		<div class="row" id="table-vehicular" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table" id="table-vehiculos1">
+				<table class="table" id="table-vehicular1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -244,6 +170,18 @@
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.vehiculo.marca" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.vehiculo.seleccionar" /></label></th>
@@ -468,25 +406,23 @@
 //			debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
+		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
 	}
 
 	
 	function SelectedAnio(selectObject) {
 //		debugger;
-		ACC.opcionDeclaraciones.ocultarPeriodo("1");
-		ACC.opcionDeclaraciones.ocultarPeriodo("2");
-		ACC.opcionDeclaraciones.reiniciaPeriodo("1");
-		ACC.opcionDeclaraciones.reiniciaPeriodo("2");
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
-
+		ACC.opcionDeclaraciones.reiniciaPeriodosMB();
+		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
 	}
 	
-	function vaperiodo(selectObject) {
+	function onChangeBimestral(selectObject) {
 		debugger;
 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 	}
 	
-	function valper(selectObject) {
+	function onChangeMensual(selectObject) {
 		debugger;
 		var per = selectObject.value;
 		var anio = document.getElementById('aniograv').value;
@@ -505,11 +441,9 @@
 			}
 
 		}
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 
 	}
- 	
-
-	
 </script>
 
