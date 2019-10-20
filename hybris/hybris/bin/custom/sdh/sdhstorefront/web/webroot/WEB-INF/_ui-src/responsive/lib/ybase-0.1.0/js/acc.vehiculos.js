@@ -300,7 +300,7 @@ ACC.vehiculos = {
 		} else if (data.idServicio == "03") {
 			data.idServicio = "OFICIAL";
 		} else {
-			data.idServicio = "-";
+			data.idServicio = "";
 		}
 		$("#inidServicio").val(data.idServicio);
 
@@ -313,7 +313,7 @@ ACC.vehiculos = {
 		} else if (data.idEstado == "9") {
 			data.idEstado = "TRASLADADO";
 		} else {
-			data.idEstado = "-";
+			data.idEstado = "";
 		}
 
 		$("#inidEstado").val(data.idEstado);
@@ -326,7 +326,7 @@ ACC.vehiculos = {
 		} else if (data.clasicoAntig == "2") {
 			data.clasicoAntig = "CLASICO";
 		} else {
-			data.clasicoAntig = "-";
+			data.clasicoAntig = "";
 		}
 		$("#inclasico").val(data.clasicoAntig);
 
@@ -383,7 +383,7 @@ ACC.vehiculos = {
 				} else if (jur[i].calidad == "6") {
 					jur[i].calidad = "ARRENDATARIO";
 				} else {
-					jur[i].calidad = "-";
+					jur[i].calidad = "";
 				}
 
 				var fec1 = jur[i].fechaDesde;
@@ -419,9 +419,9 @@ ACC.vehiculos = {
 					.append(
 							"<tr>"
 									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con datos de marcas" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>');
 		}
 
 		var marca = data.marcas;
@@ -467,11 +467,11 @@ ACC.vehiculos = {
 					.append(
 							"<tr>"
 									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>');
 		}
 
 		var liq = data.liquidacion
@@ -504,8 +504,8 @@ ACC.vehiculos = {
 					.append(
 							"<tr>"
 									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con datos de Liquidación" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>');
 		}
 
 	}
