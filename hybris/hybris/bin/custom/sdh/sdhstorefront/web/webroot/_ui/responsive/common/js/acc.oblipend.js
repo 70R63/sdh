@@ -150,7 +150,7 @@ ACC.oblipend = {
 						}
 						else
 						{
-							$("#orivalla").val("");
+							$("#orivalla").val("-");
 						}
 
 						$("#numResOB").val(numrespub);

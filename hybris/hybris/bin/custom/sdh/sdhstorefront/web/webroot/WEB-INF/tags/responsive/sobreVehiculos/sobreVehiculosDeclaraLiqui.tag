@@ -57,7 +57,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.valimpcar" /></label><input
 						id="valimpcar" name="numresol" class="newalto form-control valimpcar"
-						aria-required="true" type="text" value="" maxlength="30"
+						aria-required="true" type="text" value="${vehiculosFormDeclaracion.impuestoCargo}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
@@ -66,7 +66,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.valsemafo" /></label> <input
 						id="valsemafo" name="valsemafo" class="newalto form-control" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.valorSemafor}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 
@@ -85,7 +85,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.despronpag" /></label> <input
 						id="despronpag" name="" class="newalto form-control despronpag" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.descuentoProntop}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
@@ -95,7 +95,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.taract" /></label> <input
 						id="taract" name="" class="newalto form-control taract" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.descuentoProntop}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -103,7 +103,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.totpag" /></label> <input
 						id="totpag" name="" class="newalto form-control totpag" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.tarifaActual}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 
@@ -114,7 +114,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.sancion" /></label> <input
 						id="sancion" name="" class="newalto form-control sancion" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.sancion}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -122,7 +122,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.valpagar" /></label> <input
 						id="valpagar" name="" class="newalto form-control valpagar" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.valorPagar}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
@@ -132,7 +132,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.intereses" /></label> <input
 						id="intereses" name="" class="newalto form-control intereses" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.intereses}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -140,7 +140,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.totpagvol" /></label> <input
 						id="totpagvol" name="" class="newalto form-control totpagvol" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.totalPagar}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
