@@ -2163,7 +2163,7 @@ public class SobreTasaGasolinaService
 		List<ImpuestoGasolina> gasolina = null;
 		ImpuestoICA ica = null;
 		ReteICA reteica = null;
-		final List<ImpuestoVehiculos> vehiculos = null;
+		List<ImpuestoVehiculos> vehiculos = null;
 		List<ImpuestoDelineacionUrbanaWithRadicados> delineacion = null;
 		ImpuestoDelineacionUrbanaWithRadicados delineacion_customer_extendido = null;
 		List<DetRadicadosResponse> radicados = null;
@@ -2172,6 +2172,27 @@ public class SobreTasaGasolinaService
 
 		switch (infoVista.getClaveImpuesto())
 		{
+			case "0002": //Vehiculos
+				vehiculos = new ArrayList<ImpuestoVehiculos>();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						for (final ImpuestoVehiculos vehiculos_customer : infoVista.getCustomerData().getVehicular())
+						{
+							if (vehiculos_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+							{
+								vehiculos.add(vehiculos_customer);
+							}
+						}
+					}
+
+					if (vehiculos.size() > 0)
+					{
+						infoVista.setVehicular(vehiculos);
+					}
+				}
+				break;
 			case "0003": //ICA
 				ica = new ImpuestoICA();
 				if (listaDeclaracionesResponse.getDeclaraciones() != null)
@@ -2315,14 +2336,19 @@ public class SobreTasaGasolinaService
 		switch (infoVista.getClaveImpuesto())
 		{
 			//implementar la logica para cada impuesto
-			//			case "0002": //Vehiculos
-			//				break;
-			//
+
+			case "0002":
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+
+				break;
+
 			//			case "0003": //ICA
 			//				break;
 			//
 			//			case "0004": //RETEICA
 			//				break;
+
 
 
 			case "0005": //sobretasa gasolina
@@ -2374,7 +2400,22 @@ public class SobreTasaGasolinaService
 
 		switch (infoVista.getClaveImpuesto())
 		{
+
 			//implementar la logica para cada impuesto
+			case "0002": //vehiculos
+				if (customerData != null)
+				{
+					if (customerData.getVehicular() != null)
+					{
+						if (customerData.getVehicular().get(0) != null)
+						{
+							numObjeto = customerData.getVehicular().get(0).getNumObjeto();
+						}
+					}
+				}
+
+				break;
+
 			case "0003": //ICA
 				if (customerData != null)
 				{

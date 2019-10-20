@@ -18,9 +18,12 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
@@ -34,13 +37,18 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
+import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -182,6 +190,149 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		if (action.equals("presentarDeclaracion"))
 		{
+			if (dataFormResponse.getImpuesto().equals("2") && !dataFormResponse.getAnoGravable().equals("")
+					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
+			{
+				System.out.println("---------------- En ESTAS EN VEHICULOS MORRA --------------------------");
+
+				final CustomerModel customerModel;
+				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+				final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+				final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
+				String numBP = "";
+				String anioGravable = "";
+				String placa = "";
+				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+				final DetGasResponse detalleResponse;
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
+				List<SobreTasaGasolinaTabla> tablaDocs;
+				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+				SDHValidaMailRolResponse detalleContribuyente;
+				String[] mensajesError;
+
+
+				customerModel = (CustomerModel) userService.getCurrentUser();
+
+				numBP = customerModel.getNumBP();
+
+				contribuyenteRequest.setNumBP(numBP);
+
+				detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
+						LOG);
+				if (detalleContribuyente.getIdmsj() != 0)
+				{
+					LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+					//					GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+					mensajesError = gasolinaService.prepararMensajesError(
+							gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"error.impuestoGasolina.sobretasa.error2", mensajesError);
+				}
+
+				anioGravable = dataFormResponse.getAnoGravable();
+				placa = detalleContribuyente.getVehicular().get(0).getPlaca();
+
+				final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+				detalleVehiculosRequest.setBpNum(numBP);
+				detalleVehiculosRequest.setPlaca(placa);
+				detalleVehiculosRequest.setAnioGravable(anioGravable);
+
+
+				try
+				{
+
+					final ObjectMapper mapper = new ObjectMapper();
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+					final DetalleVehiculosResponse detalleVehiculosResponse = mapper.readValue(
+							sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+
+					vehiculosForm.setDetalle(detalleVehiculosResponse.getDetalle());
+
+					vehiculosForm.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
+					vehiculosForm.setIdEstado(detalleVehiculosResponse.getDetalle().getIdEstado());
+					vehiculosForm.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
+					vehiculosForm.setClasicoAntig(detalleVehiculosResponse.getDetalle().getClasicoAntig());
+					vehiculosForm.setTipoVeh(detalleVehiculosResponse.getDetalle().getTipoVeh());
+					vehiculosForm.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
+					vehiculosForm.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
+					vehiculosForm.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
+
+					//			vehiculosForm.setFechaCambio(detalleVehiculosResponse.getDetalle().getFechaCambio());
+					final String FechaCambio = detalleVehiculosResponse.getDetalle().getFechaCambio();
+					if (StringUtils.isNotBlank(FechaCambio) && !"00000000".equals(FechaCambio))
+					{
+						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+						final LocalDate localDate = LocalDate.parse(FechaCambio, formatter);
+
+						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+						vehiculosForm.setFechaCambio(localDate.format(formatter2));
+					}
+
+					if (detalleVehiculosResponse.getDatosJuridicos() != null
+							&& !detalleVehiculosResponse.getDatosJuridicos().isEmpty())
+					{
+
+						for (final JuridicosVehiculos eachDetalleJur : detalleVehiculosResponse.getDatosJuridicos())
+						{
+							vehiculosForm.setTipoID(eachDetalleJur.getTipoID());
+							vehiculosForm.setNombre(eachDetalleJur.getNombre());
+							vehiculosForm.setNumID(eachDetalleJur.getNumID());
+							vehiculosForm.setCalidad(eachDetalleJur.getCalidad());
+							vehiculosForm.setProcProp(eachDetalleJur.getProcProp());
+
+							//								vehiculosForm.setFechaDesde(eachDetalleJur.getFechaDesde());
+							final String FechaDesde = eachDetalleJur.getFechaDesde();
+							if (StringUtils.isNotBlank(FechaDesde) && !"00000000".equals(FechaDesde))
+							{
+								final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+								final LocalDate localDate = LocalDate.parse(FechaDesde, formatter);
+
+								final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+								vehiculosForm.setFechaDesde(localDate.format(formatter2));
+							}
+
+							//					vehiculosForm.setFechaHasta(eachDetalleJur.getFechaHasta());
+							final String FechaHasta = eachDetalleJur.getFechaHasta();
+							if (StringUtils.isNotBlank(FechaHasta) && !"00000000".equals(FechaHasta))
+							{
+								final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+								final LocalDate localDate = LocalDate.parse(FechaHasta, formatter);
+
+								final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+								vehiculosForm.setFechaHasta(localDate.format(formatter2));
+							}
+
+							break;
+						}
+
+					}
+
+					vehiculosForm.setDatosJuridicos(detalleVehiculosResponse.getDatosJuridicos().stream()
+							.filter(eachDetJur -> StringUtils.isNotBlank(eachDetJur.getCalidad())).collect(Collectors.toList()));
+
+					vehiculosForm.setMarcas(detalleVehiculosResponse.getMarcas().stream()
+							.filter(eachDetMarcas -> StringUtils.isNotBlank(eachDetMarcas.getCodigoMarca()))
+							.collect(Collectors.toList()));
+
+					vehiculosForm.setLiquidacion(detalleVehiculosResponse.getLiquidacion().stream()
+							.filter(eachDetLiq -> StringUtils.isNotBlank(eachDetLiq.getAnio())).collect(Collectors.toList()));
+				}
+				catch (final Exception e)
+				{
+					// XXX Auto-generated catch block
+					LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
+					GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+				}
+				model.addAttribute("vehiculosForm", vehiculosForm);
+			}
+
 			if (dataFormResponse.getImpuesto().equals("5") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
@@ -323,6 +474,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		{
+			dataForm.setOptionVehicular("2");
+		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
 			dataForm.setOptionPubliExt("4");
@@ -401,7 +556,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 			if (optionVehicular != "")
 			{
-				map.put("2", "Sobre Vehiculos");
+				map.put("2", "Sobre Vehiculos Automotores");
 			}
 
 			if (optionIca != "")
