@@ -17,21 +17,39 @@
 	<div class="row" style="marging-top: 5px">
 		<div class="col-md-12 centercol-md-8 text-center">
 
+			<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
+				<button style="margin-top: 3px;" id="regresar"
+					class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
+					<spring:theme code="vehiculos.declaracion.firma.regresar" />
+				</button>
 
-			<button style="margin-top: 3px;" id="regresar"
-				class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
-				<spring:theme code="vehiculos.declaracion.firma.regresar" />
-			</button>
-
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button">
-				<spring:theme code="vehiculos.declaracion.firma.prendecla" />
-			</button>
-			
-			<button class="btn btn-primary btn-lg" type="submit" id="action"
-				name="pagar" value="pagar">
-				<spring:theme code="vehiculos.declaracion.firma.pagliena" />
-			</button>
+				<div class="col-md-3">
+					<a id="downloadHelper" target="_blank"></a>
+					<button id="duGeneraDeclaracionButton" type="button"
+						<c:out value='${empty vehiculosFormDeclaracion.numForm ? "disabled":""}'/>
+						class="btn btn-primary btn-lg" onclick="pagarlinea()">
+						<spring:theme code="delineacion.urbana.dec.firm.predec" />
+					</button>
+				</div>
+	
+				<sf:hidden path="tipoImpuesto" />
+				<sf:hidden path="numBP" />
+				<sf:hidden path="numDoc" />
+				<sf:hidden path="tipoDoc" />
+				<sf:hidden path="anoGravable" />
+				<sf:hidden path="periodo" />
+				<sf:hidden path="clavePeriodo" />
+				<sf:hidden path="dv" />
+				<sf:hidden path="numObjeto" />
+				<sf:hidden path="CDU" />
+				<sf:hidden path="anticipo" />
+				<div class="col-md-3">
+					<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
+						name="pagar" value="pagar" disabled="true">
+						<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
+					</sf:button>
+				</div>
+			</sf:form>
 
 		</div>
 	</div>

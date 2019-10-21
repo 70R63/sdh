@@ -18,14 +18,15 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.CalcVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
@@ -35,6 +36,7 @@ import de.hybris.sdh.core.services.SDHCalVehiculosService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
 import java.util.ArrayList;
@@ -242,6 +244,45 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLRACION_VEHICULOS_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(DECLARACION_VEHICULOS_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		//informacion para PSE
+		final String numBP = numBPP;
+		final String anoParaPSE = anioGravable;
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		final String mensajeError = "";
+		String[] mensajesError;
+
+
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		{
+			infoPreviaPSE.setAnoGravable(anoParaPSE);
+			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
+			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
+			infoPreviaPSE.setNumBP(numBP);
+			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente, placa));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
+		}
+		else
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+		}
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+		//informacion para PSE
+
 
 		return getViewForPage(model);
 	}

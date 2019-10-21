@@ -40,4 +40,17 @@
 			}
 		}	
 	}
+	
+	function pagarlinea() {
+
+		var btnpaglinea = document.getElementById('action');
+		btnpaglinea.disabled = false;
+
+	}
+	
+	function presdec() {
+		var btnpresdec = document.getElementById('duGeneraDeclaracionButton');
+		btnpresdec.disabled = false;
+
+	}
 </script>
