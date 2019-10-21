@@ -140,7 +140,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.totpagvol" /></label> <input
 						id="totpagvol" name="" class="newalto form-control totpagvol" aria-required="true"
-						type="text" value="${vehiculosFormDeclaracion.totalPagoVolunt}" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.totalPagoVol}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
