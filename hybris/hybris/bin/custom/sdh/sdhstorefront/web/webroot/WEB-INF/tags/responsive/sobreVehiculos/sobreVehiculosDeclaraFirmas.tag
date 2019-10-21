@@ -9,15 +9,17 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
-	htmlEscape="false" />
+<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL" htmlEscape="false" />
+
+
 
 <div class="container">
+	
 
 	<div class="row" style="marging-top: 5px">
 
-
-<div class="col-md-12 centercol-md-8 text-center">
+		<div class="col-md-12 centercol-md-8 text-center">
+			
 
 			<sf:form action="${pagarURL}" method="POST" modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 				<button style="margin-top: 3px;" id="regresar"
@@ -54,7 +56,7 @@
 			</sf:form>	
 
 		</div>
-
+	</div>
 </div>
 
 <script>

@@ -127,6 +127,7 @@
 			
 			ACC.vehiculosDeclaCalculoURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/declaracion/calculo' />";
 			
+			ACC.vehiculosGeneraDeclaracionURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/declaracion/generar' />";
 			
 			
 		  	ACC.currentURL = "${currentURL}";

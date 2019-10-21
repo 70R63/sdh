@@ -1,6 +1,6 @@
 ACC.vehiculos = {
 
-	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh", "bindGeneraDeclaracionVehiculosButton","bindCalcularVehButton"],
+	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh","bindPresentarDeclaracionVehiculoButton", "bindGeneraDeclaracionVehiculosButton","bindCalcularVehButton"],
 
 	bindLabelVerDetalle : function() {
 		$(document)
@@ -95,8 +95,8 @@ ACC.vehiculos = {
 
 	},
 	
-	bindGeneraDeclaracionVehiculosButton: function () {
-		 $(document).on("click", "#generaDeclaracionVehiculosButton", function (e) {
+	bindPresentarDeclaracionVehiculoButton: function () {
+		 $(document).on("click", "#bindPresentarDeclaracionVehiculoButton", function (e) {
 	 	        e.preventDefault();
 	 	        debugger;
 	 	        
@@ -119,6 +119,53 @@ ACC.vehiculos = {
 	 	        }
 	 	       
 	 	      window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
+	 	       
+		 });
+	 },
+	 
+	  bindGeneraDeclaracionVehiculosButton: function () {
+		 $(document).on("click", "#generaDeclaracionVehiculosButton", function (e) {
+				debugger;
+	 	        e.preventDefault();
+	 	        
+	 	       var numForm  = $.trim($("#numForm").val());
+	 	 
+	 	       var data = {};
+	 	       
+	 	       data.numForm=numForm;
+	 	
+	 	      $.ajax({
+		            url: ACC.vehiculosGeneraDeclaracionURL,
+		            data: data,
+		            type: "POST",
+		            success: function (data) {
+						
+		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
+		            	if(data.errores)
+	            		{
+		            		$("#publicidadExteriorDialogContent").html("");
+		            		$.each(data.errores, function( index, value ) {
+    	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+    	            		});
+		            		
+		            		
+	            		}else
+	            		{
+	            			$("#publicidadExteriorDialogContent").html("");
+	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
+	            			
+	            			$("#downloadHelper").attr("href",data.urlDownload);
+	            			document.getElementById("downloadHelper").click();
+							document.getElementById("action").disabled = false;
+							
+	            		}
+	 	      		
+		            },
+		            error: function () {
+		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
+		            	$("#publicidadExteriorDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            }
+		        });
 	 	       
 		 });
 	 },

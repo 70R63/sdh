@@ -14,10 +14,12 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -26,24 +28,34 @@ import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
+import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.CalcVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalVehiculosService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
+import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -54,6 +66,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import sun.misc.BASE64Decoder;
 
 
 /**
@@ -109,6 +123,9 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 	@Resource(name = "sdhCalcVehiculosService")
 	SDHCalVehiculosService sdhCalcVehiculosService;
+
+	@Resource(name = "sdhGeneraDeclaracionService")
+	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
 	{
@@ -388,6 +405,83 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 
 		return calcVehiculosResponse;
+
+	}
+
+	@RequestMapping(value = "/generar", method = RequestMethod.POST)
+	@ResponseBody
+	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		String numForm = request.getParameter("numForm");
+
+		if (StringUtils.isBlank(numForm))
+		{
+			numForm = dataForm.getNumForm();
+		}
+
+		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
+
+
+		generaDeclaracionRequest.setNumForm(numForm);
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
+					GeneraDeclaracionResponse.class);
+
+			if (generaDeclaracionResponse != null && generaDeclaracionResponse.getStringPDF() != null)
+			{
+				final String encodedBytes = generaDeclaracionResponse.getStringPDF();
+
+				final BASE64Decoder decoder = new BASE64Decoder();
+				byte[] decodedBytes;
+				final FileOutputStream fop;
+				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+
+
+
+				final String fileName = numForm + "-" + customerData.getNumBP() + ".pdf";
+
+				final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+
+				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				modelService.save(mediaModel);
+				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+				modelService.refresh(mediaModel);
+
+				generaDeclaracionResponse.setUrlDownload(mediaModel.getDownloadURL());
+
+
+			}
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error generating declaration : " + e.getMessage());
+
+			final ErrorPubli error = new ErrorPubli();
+
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al generar la declaración, por favor intentalo más tarde");
+
+			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
+
+			errores.add(error);
+
+			generaDeclaracionResponse.setErrores(errores);
+
+		}
+
+		return generaDeclaracionResponse;
 
 	}
 

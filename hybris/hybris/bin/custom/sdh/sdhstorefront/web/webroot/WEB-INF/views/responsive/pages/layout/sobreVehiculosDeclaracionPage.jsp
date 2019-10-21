@@ -18,7 +18,9 @@
 <firmas:generalFirmas firmaContribuyenteRedirection="${taxRedirection}"/>
 <sobreVehiculos:sobreVehiculosDeclaraFirmas/>
 
-<div id="dialogVehiculos" title="Vehiculos" ><div id="vehiculosDialogContent"></div></div>
+<div id="dialogVehiculos" title="Vehiculos" >
+	<div id="vehiculosDialogContent"></div>
+</div>
 
 <script>
 	function goBack() {
