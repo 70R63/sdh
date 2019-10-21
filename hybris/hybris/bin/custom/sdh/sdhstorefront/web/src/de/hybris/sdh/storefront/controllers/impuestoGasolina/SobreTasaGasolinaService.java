@@ -2471,5 +2471,38 @@ public class SobreTasaGasolinaService
 		return numObjeto;
 	}
 
+	/**
+	 * @param detalleContribuyente
+	 * @param placa
+	 * @return
+	 */
+	public String prepararNumObjetoVehicular(final SDHValidaMailRolResponse detalleContribuyente, final String placa)
+	{
+		String numObjeto = "";
+		List<ImpuestoVehiculos> detalleImpuesto = null;
+
+
+		detalleImpuesto = detalleContribuyente.getVehicular();
+		if (detalleContribuyente != null && detalleImpuesto != null)
+		{
+			for (int i = 0; i < detalleImpuesto.size(); i++)
+			{
+				if (detalleImpuesto.get(i) != null)
+				{
+					if (detalleImpuesto.get(i).getPlaca() != null)
+					{
+						if (detalleImpuesto.get(i).getPlaca().equals(placa))
+						{
+							numObjeto = detalleImpuesto.get(i).getNumObjeto();
+						}
+					}
+				}
+			}
+		}
+
+
+		return numObjeto;
+	}
+
 
 }
