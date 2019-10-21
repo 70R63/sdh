@@ -2180,9 +2180,12 @@ public class SobreTasaGasolinaService
 					{
 						for (final ImpuestoVehiculos vehiculos_customer : infoVista.getCustomerData().getVehicular())
 						{
-							if (vehiculos_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+							if (vehiculos_customer.getNumObjeto() != null && itemDeclaracion.getNumObjeto() != null)
 							{
-								vehiculos.add(vehiculos_customer);
+								if (vehiculos_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+								{
+									vehiculos.add(vehiculos_customer);
+								}
 							}
 						}
 					}
