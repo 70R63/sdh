@@ -95,7 +95,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.taract" /></label> <input
 						id="taract" name="" class="newalto form-control taract" aria-required="true"
-						type="text" value="${vehiculosFormDeclaracion.descuentoProntop}" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.tarifaActual}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -103,7 +103,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.totpag" /></label> <input
 						id="totpag" name="" class="newalto form-control totpag" aria-required="true"
-						type="text" value="${vehiculosFormDeclaracion.tarifaActual}" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.totalPagar}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 
@@ -140,7 +140,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.totpagvol" /></label> <input
 						id="totpagvol" name="" class="newalto form-control totpagvol" aria-required="true"
-						type="text" value="${vehiculosFormDeclaracion.totalPagar}" maxlength="30" disabled="disabled">
+						type="text" value="${vehiculosFormDeclaracion.totalPagoVolunt}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>
