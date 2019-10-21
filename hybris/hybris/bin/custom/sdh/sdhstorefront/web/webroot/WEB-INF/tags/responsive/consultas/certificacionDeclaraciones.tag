@@ -199,9 +199,9 @@ function vaperiodo(selectObject) {
 			</div>
 		</div>
 
-		<div class="row" id="table-vehiculos" style="display: none;">
+		<div class="row" id="table-vehicular" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-vehicular1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
