@@ -271,7 +271,7 @@ ACC.opcionDeclaraciones = {
 	
 	obtenerListaDeclaraciones_certiPagos : function() {
 
-//		debugger;
+		debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
 			var claveImpuesto = $("#seleccion").val();  	       
@@ -476,7 +476,8 @@ ACC.opcionDeclaraciones = {
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse,filtroPeriodo) {
 		var desc_clavePeriodo = "";
 		
-//debugger;
+		
+debugger;
 		if(infoResponse.declaracionesCertiPagos.declaraciones != null){
 			if(infoResponse.declaracionesCertiPagos.declaraciones.length > 0){
 				
@@ -788,6 +789,7 @@ ACC.opcionDeclaraciones = {
 	obtener_desc_clavePeriodo : function (clavePeriodo){
 //		debugger;
 		var descripcion = "";
+		var des_periodo = "";
 		
 		tipo_periodo = ACC.opcionDeclaraciones.obtener_tipoPeriodo(clavePeriodo);
 		if(tipo_periodo == "B"){
@@ -799,7 +801,11 @@ ACC.opcionDeclaraciones = {
     		});
 		}
 		des_anio = clavePeriodo.substring(0,2);
-		descripcion = "20" + des_anio + " periodo " + des_periodo;
+		if(des_periodo == ""){
+			descripcion = "20" + des_anio;	
+		} else{
+			descripcion = "20" + des_anio + " periodo " + des_periodo;	
+		}
 		
 		
 		return descripcion;
