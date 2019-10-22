@@ -233,29 +233,32 @@ ACC.vehiculos = {
 					type : "POST",
 					success : function(data) {
 						debugger;
-		            	if(data.errores[0] != null)
+		            	if(data.errores != null)
 	            		{
-		            		alert(data.errores[0].txtmsj);
-							
-							//$( "#dialogVehiculos" ).dialog( "open" );
-		            		//$("#vehiculosDialogContent").html("");
-		            		//$.each(data.errores, function( index, value ) {
-    	            		//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
-    	            		//});
 		            		
-		            		$("#valimpcar").val("");
-	            			$("#valsemafo").val("");
-	            			$("#despronpag").val("");
-	            			$("#taract").val("");
-	            			$("#totpag").val("");
-	            			$("#sancion").val("");
-	            			$("#valpagar").val("");
-	            			$("#intereses").val("");
-	            			$("#totpagvol").val("");
-	            			$("#numForm").val("");
-		            	
-	            			
-//	            			$('#generaDeclaracionButton').prop("disabled", true);
+							if (data.errores[0].txtmsj != null){
+								alert(data.errores[0].txtmsj);
+								
+								//$( "#dialogVehiculos" ).dialog( "open" );
+								//$("#vehiculosDialogContent").html("");
+								//$.each(data.errores, function( index, value ) {
+								//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+								//});
+								
+								$("#valimpcar").val("");
+								$("#valsemafo").val("");
+								$("#despronpag").val("");
+								$("#taract").val("");
+								$("#totpag").val("");
+								$("#sancion").val("");
+								$("#valpagar").val("");
+								$("#intereses").val("");
+								$("#totpagvol").val("");
+								$("#numForm").val("");
+							
+								
+		            			//$('#generaDeclaracionButton').prop("disabled", true);
+							}
 		            		
 	            		}else
 	            		{	            			

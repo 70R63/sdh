@@ -145,7 +145,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;ReportantesLink;"Mi información reportada";"Haga clic aquí para ir a su Información Reportada"
 
 ;;RetenedorRegistroLink;"Registro de Retenciones";"Haga clic aquí para ir al registro de sus retenciones"
-;;RetenedorDeclaracionesLink;"Delaraciones por firmar";"Haga clic aquí para ir a las Declaraciones por Firmar"
+;;RetenedorDeclaracionesLink;"Delaraciones por firmar";"Haga clic aquí para ir a las Declaraciones pendientes"
 
 
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -194,6 +194,15 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;CargaLink;"Carga de documentos";"Haga clic aquí para acceder a la opción de Carga de Documentos"
 ;;HistoricoLink;"Histórico de reportes";"Haga clic aquí para acceder a la opción de Histórico de reportes"
 ;;SancionesLink;"Sanciones impuestas";"Haga clic aquí para acceder a la opción Sanciones impuestas"
+
+
+
+;;ARCertPagoLink;"Certificaciones de pago";"Haga clic aquí para acceder a la opción de menú Certificaciones de pago"
+;;ARObligacionesPendLink;"Obligaciones Pendientes";"Haga clic aquí para acceder a la opción de menú Obligaciones pendientes"
+;;ARRelPagosLink;"Relación de pagos";"Haga clic aquí para acceder a la opción de menú Relación de pagos"
+;;AREdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
+;;ARCertDeclaraLink;"Certificaciones de declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
+;;ARDeclaracionesLink;"Declaraciones";"Haga clic aquí para acceder a la opción del menú Declaraciones"
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 ;;EdoCargasLink;"Estado de cargas";"Haga clic aquí para consultar el estado de sus cargas"
