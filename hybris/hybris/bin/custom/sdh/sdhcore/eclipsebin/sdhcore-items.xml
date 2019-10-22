@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <collectiontypes>
+        <collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true" type="set"/>
+<!--                          -->
+        <collectiontype code="SDHAddressList" elementtype="SDHAddress" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHPhoneList" elementtype="SDHPhone" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHAgentList" elementtype="SDHAgent" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHSocialNetworkList" elementtype="SDHSocialNetwork" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHRolList" elementtype="SDHRol" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHExteriorPublicityTaxList" elementtype="SDHExteriorPublicityTax" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHGasTaxList" elementtype="SDHGasTax" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHUrbanDelineationsTaxList" elementtype="SDHUrbanDelineationsTax" autocreate="true" generate="true" type="list"/>
+
+        
+        
+    </collectiontypes>
+
+    <enumtypes>
+        <enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
+            <value code="BLACK"/>
+            <value code="BLUE"/>
+            <value code="BROWN"/>
+            <value code="GREEN"/>
+            <value code="GREY"/>
+            <value code="ORANGE"/>
+            <value code="PINK"/>
+            <value code="PURPLE"/>
+            <value code="RED"/>
+            <value code="SILVER"/>
+            <value code="WHITE"/>
+            <value code="YELLOW"/>
+        </enumtype>
+		<enumtype generate="true" code="SdhTaxTypesEnum" autocreate="true" dynamic="true">
+			<value code="PREDIAL"/>
+			<value code="DELINEACION"/>
+			<value code="VEHICULAR"/>
+			<value code="PUBLICIDAD"/>
+			<value code="GASOLINA"/>
+			<value code="ICA"/>
+			<value code="RETENCIONDU"/>
+			<value code="SOBRETASA"/>
+			<value code="RETEICA"/>
+		</enumtype>
+		<enumtype generate="true" code="SdhPaymentMethodTypeEnum" autocreate="true" dynamic="true">
+			<value code="CREDITO"/>
+			<value code="DEBITO"/>
+		</enumtype>
+		<enumtype generate="true" code="SdhOnlinePaymentProviderEnum" autocreate="true" dynamic="true">
+			<value code="ACH"/>
+			<value code="CREDIBANCO"/>
+		</enumtype>
+    </enumtypes>
+
+    <itemtypes>
+
+        <!-- Add your item definitions here -->
+
+
+        <!-- TypeGroups are for structure of this file only -->
+
+        <typegroup name="Apparel">
+            <itemtype code="ApparelProduct" extends="Product"
+                      autocreate="true" generate="true"
+                      jaloclass="de.hybris.sdh.core.jalo.ApparelProduct">
+                <description>Base apparel product extension that contains additional attributes.</description>
+                <attributes>
+                    <attribute qualifier="genders" type="GenderList">
+                        <description>List of genders that the ApparelProduct is designed for</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="ApparelStyleVariantProduct" extends="VariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="de.hybris.sdh.core.jalo.ApparelStyleVariantProduct">
+                <description>Apparel style variant type that contains additional attribute describing variant style.
+                </description>
+                <attributes>
+                    <attribute qualifier="style" type="localized:java.lang.String"
+                               metatype="VariantAttributeDescriptor">
+                        <description>Color/Pattern of the product.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="swatchColors" type="SwatchColorSet">
+                        <description>A normalized color mapping to a standardized front-end navigable name.
+                        </description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+
+            </itemtype>
+
+            <itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="de.hybris.sdh.core.jalo.ApparelSizeVariantProduct">
+                <description>Apparel size variant type that contains additional attribute describing variant size.
+                </description>
+                <attributes>
+                    <attribute qualifier="size" type="localized:java.lang.String"
+                               metatype="VariantAttributeDescriptor">
+                        <description>Size of the product.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
+        <typegroup name="Electronics">
+            <itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
+                      autocreate="true" generate="true"
+                      jaloclass="de.hybris.sdh.core.jalo.ElectronicsColorVariantProduct">
+                <description>Electronics color variant type that contains additional attribute describing variant color.
+                </description>
+                <attributes>
+                    <attribute qualifier="color" type="localized:java.lang.String"
+                               metatype="VariantAttributeDescriptor">
+                        <description>Color of the product.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+		<typegroup name="SDH">
+		    <itemtype code="User" autocreate="false" generate="false">
+		      	<description>Added to extend user model for SDH model</description>
+       			<attributes>
+       				<attribute qualifier="blockedSince" type="java.util.Date">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+        	<itemtype code="Customer" autocreate="false" generate="false">
+        		<description>Added to extend customer model for SDH model</description>
+        		<attributes>
+        			<attribute qualifier="numBP"  type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="documentType"  type="java.lang.String" >
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="documentNumber" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="documentExpeditionDate" type="java.util.Date">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="firstName" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="middleName" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="lastName" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="secondLastName" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="sex" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="nationality" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="birthDate" type="java.util.Date">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="birthPlace" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="originCountry" type="Country">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="useEmailForNotifications" type="java.lang.Boolean">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="useInformationForInstitutionalPurposes" type="java.lang.Boolean">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="sdhType" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="sdhTitle" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="nameOrg1" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="nameOrg2" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="nameOrg3" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="nameOrg4" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="digVer" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="legalEntity" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="legalOrg" type="java.lang.String">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="addressList" type="SDHAddressList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="phoneList" type="SDHPhoneList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="agentList" type="SDHAgentList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="networkList" type="SDHSocialNetworkList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="rolList" type="SDHRolList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="exteriorPublicityTaxList" type="SDHExteriorPublicityTaxList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="gasTaxList" type="SDHGasTaxList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="urbanDelineationsTaxList" type="SDHUrbanDelineationsTaxList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="icaTaxList" type="SDHICATax">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="reteIcaTax" type="SDHReteICATax">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="reteIcaTaxList" type="SDHReteICATax">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
+        		</attributes>
+        	</itemtype>
+        	<itemtype code="SDHAddress" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save address data</description>
+        		<deployment table="SDHADDRESS" typecode="15001"/>
+       			<attributes>
+       				<attribute qualifier="addKind" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="street" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="city" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="country" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="region" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="postalCode" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        <itemtype code="SDHPhone" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save phone data</description>
+        		<deployment table="SDHPHONE" typecode="15002"/>
+       			<attributes>
+       				<attribute qualifier="phoneKind" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="phoneNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="extension" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        <itemtype code="SDHSocialNetwork" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save social network data</description>
+        		<deployment table="SDHSOCNET" typecode="15003"/>
+       			<attributes>
+       				<attribute qualifier="socialNetwork" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="username" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        <itemtype code="SDHRol" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save rol data</description>
+        		<deployment table="SDHROL" typecode="15004"/>
+       			<attributes>
+       				<attribute qualifier="rol" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        <itemtype code="SDHExteriorPublicityTax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save exterior publicity data</description>
+        		<deployment table="SDHEXTPUBTAX" typecode="15005"/>
+       			<attributes>
+       				<attribute qualifier="resolutionNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="fenceType" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="objectNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="anoGravable" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        <itemtype code="SDHGasTax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save gas data</description>
+        		<deployment table="SDHGASTAX" typecode="15007"/>
+       			<attributes>
+       				<attribute qualifier="documentNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="documentType" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="objectNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+
+
+	        <itemtype code="SDHAgent" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save agent data</description>
+        		<deployment table="SDHAGENT" typecode="15008"/>
+       			<attributes>
+       				<attribute qualifier="agent" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       				<attribute qualifier="documentNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="documentType" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="completeName" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="internalFunction" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+					<attribute qualifier="bp" type="java.lang.String">
+						<persistence type="property"></persistence>
+					</attribute>
+       			</attributes>
+	        </itemtype>
+	        
+	        <itemtype code="SDHUrbanDelineationsTax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save urban delineations data</description>
+        		<deployment  table="SDHURBANDELTAX" typecode="15009"/>
+       			<attributes>
+       				<attribute qualifier="objectNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="cdu" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="licenConst" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="expDate" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        
+	        <itemtype code="SDHICATax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save ICA data</description>
+        		<deployment  table="SDHICATAX" typecode="15010"/>
+       			<attributes>
+       				<attribute qualifier="objectNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>        			
+       			</attributes>
+	        </itemtype>
+	        <itemtype code="SDHReteICATax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save ReteICA data</description>
+        		<deployment  table="SDHReteICATAX" typecode="15013"/>
+       			<attributes>
+       				<attribute qualifier="consecutive" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>   
+       				<attribute qualifier="objectNumber" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>   
+        			<attribute qualifier="numID" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>     			
+       			</attributes>
+	        </itemtype>
+	        
+        	<itemtype code="SDHCustomerRegistrationProcess" extends="StoreFrontCustomerProcess" autocreate="true" generate="true">
+				<attributes>
+					<attribute qualifier="token" type="java.lang.String">
+						<persistence type="property" />
+						<description>Token to allow customers activate their accounts</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype generate="true" code="PseBankListCatalog" extends="GenericItem" autocreate="true" >
+				<deployment table="PseBankListCatalog" typecode="20000" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="financialInstitutionCode">
+						<description>Financial Institution Code</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="financialInstitutionName">
+						<description>Financial Institution Name</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="sdhIsBankUsed">
+						<description>Verifica Si El Canco Aplica Aara SDH</description>
+						<modifiers optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype generate="true" code="SDHTaxType" extends="GenericItem" autocreate="true" >
+				<deployment table="SDHTaxType" typecode="20003" />
+				<attributes>
+					<attribute type="SdhTaxTypesEnum" qualifier="sdhTaxType">
+						<description>uuid</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Tax Type code</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="name">
+						<description>Tax Type Name</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype generate="true" code="SDHPaymentMethod" extends="GenericItem" autocreate="true" >
+				<deployment table="SDHPaymentMethod" typecode="20004" />
+				<attributes>
+					<attribute type="SdhPaymentMethodTypeEnum" qualifier="sdhPaymentMethod">
+						<description>uuid</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Payment Method Type code</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="name">
+						<description>Payment Method Type Name</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype generate="true" code="SDHPaymentProvType" extends="GenericItem" autocreate="true" >
+				<deployment table="SDHPaymentProvType" typecode="20005" />
+				<attributes>
+					<attribute type="SdhOnlinePaymentProviderEnum" qualifier="sdhPaymentProvType">
+						<description>uuid</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>Online Payment Provider Type Code</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="name">
+						<description>Online Payment Provider Type Name</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype generate="true" code="OlnPymntPvdMatcher" extends="GenericItem" autocreate="true" >
+				<deployment table="OlnPymntPvdMatcher" typecode="20006" />
+				<attributes>
+					<attribute type="SDHTaxType" qualifier="taxType">
+						<description>Financial Institution Code</description>
+						<modifiers optional="false" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="SDHPaymentMethod" qualifier="paymentMethod">
+						<description>Financial Institution Name</description>
+						<modifiers optional="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="PseBankListCatalog" qualifier="bank">
+						<description>Verifica Si El Canco Aplica Aara SDH</description>
+						<modifiers optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="SDHPaymentProvType" qualifier="onlinePaymentProviderType">
+						<description>Verifica Si El Canco Aplica Aara SDH</description>
+						<modifiers optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype generate="true" code="PseTransactionsLog" extends="GenericItem" autocreate="true" >
+				<deployment table="PseTransactionsLog" typecode="20001" />
+				<attributes>
+					<!-- ConstantConnectionData -->
+					<attribute type="java.lang.String" qualifier="entityCode">
+						<description>Entity Code (ppeCode)</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<!-- PSEPaymentForm -->
+					<attribute type="java.lang.String" qualifier="numeroDeReferencia">
+						<description>Numero De Referencia (TicketId)</description>
+						<modifiers unique="true"/>						
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="tipoDeImpuesto">
+						<description>Tipo De Impuesto (serviceCode)</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="impuesto">
+						<description>Impuesto</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="anoGravable">
+						<description>Año Gravable</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="CHIP">
+						<description>CHIP</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="periodo">
+						<description>Periodo</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="CUD">
+						<description>CUD</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="tipoDeIdentificacion">
+						<description>Tipo De Identificacion</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="noIdentificacion">
+						<description>No. De Identificacion</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>					
+					<attribute type="java.lang.String" qualifier="DV">
+						<description>DV</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="fechaLimiteDePago">
+						<description>Fecha Limite De Pago</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="pagoAdicional">
+						<description>Pago Adicional Si/No</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="banco">
+						<description>banco</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="valorAPagar">
+						<description>Valor A Pagar</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="isoCurrency">
+						<description>Moneda</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="tipoDeTarjeta">
+						<description>Tipo De Tarjeta</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<!-- CreateTransactionPaymentResponseInformationType -->
+					<attribute type="java.lang.String" qualifier="trazabilityCode">
+						<description>Trazability Code</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="returnCode">
+						<description>Return Code</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="bankUrl">
+						<description>Bank Url</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="transactionCycle">
+						<description>Transaction Cycle</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<!-- GetTransactionInformationResponseBodyType -->
+					<attribute type="java.lang.String" qualifier="soliciteDate">
+						<description>soliciteDate</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="bankProcessDate">
+						<description>bankProcessDate</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="transactionState">
+						<description>transactionState</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<!-- indicador de recaudo -->
+					<attribute type="java.lang.String" qualifier="notificacionDeRecaudo">
+						<description>Notificacion De Recaudo</description>
+						<modifiers optional="true" />
+						 <defaultvalue>"NO"</defaultvalue>  
+						<persistence type="property"></persistence>
+					</attribute>					
+					<attribute type="java.lang.String" qualifier="objPago">
+						<description>Objeto de pago</description>
+						<modifiers optional="true" /> 
+						<persistence type="property"></persistence>
+					</attribute>
+					<!-- Credibanco Response -->
+					<attribute type="java.lang.String" qualifier="creApprovalNumber">
+						<description>Get Approval Number</description>
+						<modifiers optional="true" /> 
+						<persistence type="property"></persistence>
+					</attribute>					
+					<attribute type="java.lang.String" qualifier="crePaymentMethod">
+						<description>Get Payment Method</description>
+						<modifiers optional="true" /> 
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="creResponseStatus">
+						<description>Get Payment Method</description>
+						<modifiers optional="true" /> 
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="CatalogUnawareMedia" autocreate="false" generate="false">
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="deleteByCronjob">
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+        	<itemtype code="BaseStore" autocreate="false" generate="false">
+				<description>Extending BaseStore type with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.Boolean" qualifier="captchaCheckEnabled">
+						<persistence type="property"/>
+						<modifiers optional="false"/>
+						<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+						<description>Determines whether the site should use captcha during registration.</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="SDHICACity" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save ICA Cities</description>
+        		<deployment  table="SDHICACity" typecode="15011"/>
+       			<attributes>
+       				<attribute qualifier="code" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        				<modifiers unique="true" />
+        			</attribute>
+        			<attribute qualifier="name" type="localized:java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>          			
+       			</attributes>
+	        </itemtype>
+	        <itemtype code="SDHICAEconomicActivity" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save ICA Economic Activity</description>
+        		<deployment  table="SDHICAECONACT" typecode="15012"/>
+       			<attributes>
+       				<attribute qualifier="code" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        				<modifiers unique="true" />
+        			</attribute>
+        			<attribute qualifier="description" type="localized:java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>        			
+       			</attributes>
+	        </itemtype>
+        </typegroup>
+    </itemtypes>
+</items>

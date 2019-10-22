@@ -130,8 +130,6 @@ ACC.vehiculos = {
 	},
 
 	fillFieldsFromData : function(data) {
-		debugger;
-
 		$("#placas").val(data.placa);
 
 		if (data.idServicio == "01") {
@@ -268,7 +266,7 @@ ACC.vehiculos = {
 		var marca = data.marcas;
 		if (marca != null) {
 			for (var i = 0; i < marca.length; i++) {
-				debugger;
+	
 				var fec1 = marca[i].fechaDesde;
 
 				var anio = fec1.slice(0, 4);
