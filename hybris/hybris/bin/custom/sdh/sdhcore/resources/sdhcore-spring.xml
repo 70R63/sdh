@@ -682,6 +682,8 @@
 	<bean name="sdhObligacionesDeliService" class="de.hybris.sdh.core.services.impl.DefaultSDHObligacionesDeliService" />
 	
 	<bean name="sdhDetalleVehiculosService" class="de.hybris.sdh.core.services.impl.DefaultSDHDetalleVehiculoService" />
+	
+	<bean name="sdhCalcVehiculosService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcVehiculosService" />
 
 
 	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>

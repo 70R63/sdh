@@ -35,7 +35,7 @@
 								<label class="control-label required" for="tipoDoc"> <spring:theme
 										code="mirit.personalData.documentType"
 										text="Mis datos personales" />
-								</label> <select id="documentType" class="newalto form-control"
+								</label> <select id="documentType" class="alto_select form-control"
 									disabled="disabled">
 									<option value="${miRitForm.tipoDoc }"><spring:theme
 											code="register.id.types.${miRitForm.tipoDoc}" /></option>
@@ -138,7 +138,7 @@
 							<div class="form-group ">
 								<label class="control-label required" for="numDoc"> <spring:theme
 										code="mirit.pj.formajuridica" />
-								</label> <select class="newalto form-control" disabled="disabled"
+								</label> <select class="alto_select form-control" disabled="disabled"
 									id="formaJuridica" name="formaJuridica">
 									<option value="${miRitForm.formaJuridica }"><spring:theme
 											code="rit.legal.entity.${miRitForm.formaJuridica}" /></option>
@@ -182,11 +182,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<div class="form-group ">
 								<label class="control-label required" for="tipoRetenedor">
 									<spring:theme code="mirit.pj.retainerType" />
-								</label> <select class="newalto form-control" disabled="disabled"
+								</label> <select class="alto_select form-control" disabled="disabled"
 									id="tipoRetenedor" name="tipoRetenedor">
 									<option value="${miRitForm.tipoRetenedor}"><spring:theme
 											code="rit.legal.org.${miRitForm.tipoRetenedor}" /></option>
@@ -200,11 +200,11 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-2">
 							<div class="form-group ">
 								<label class="control-label required" for="numDoc"> <spring:theme
 										code="mirit.pj.claseIC" />
-								</label> <select class="newalto form-control" disabled="disabled">
+								</label> <select class="alto_select form-control" disabled="disabled">
 									<option value="">Persona Jurídica</option>
 								</select>
 								<div class="help-block">

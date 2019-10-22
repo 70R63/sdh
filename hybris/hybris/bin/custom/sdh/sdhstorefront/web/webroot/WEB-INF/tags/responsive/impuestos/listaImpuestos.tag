@@ -96,9 +96,9 @@
 			</c:if>
 
 			<c:if
-				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
+				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6' and dataForm.impuesto ne '2'}">
 				
-				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft" id="seccionPeriodo2">
 					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
 					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
@@ -275,6 +275,41 @@
 			</div>
 		</div>
 	</c:if>
+	
+	<div class="row" id="table-vehicular" style="display: none;">
+		<div class="col-md-6 col-md-offset-3">
+			<table class="table" id="table-vehicular1">
+				<thead style="cellspacing: 10 !important">
+					<tr>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.placa" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.marca" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.linea" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.modelo" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.clase" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.carroceria" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.numpuertas" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.blindado" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.cilindraje" /></label></th>
+						<th style="text-align: center"><label class="control-label"
+							for=""> <spring:theme
+									code="impuestos.presentarDeclaracion.PresentarDeclaracion" /></label></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
 </div>
 <br>
 <br>

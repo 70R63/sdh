@@ -35,12 +35,12 @@
 					</thead>
 
 					<tbody>
-						<tr>
-
+					
 					</tbody>
 				</table>
 			</div>
 		</div>
+		<input type="hidden" value="" id="numFormdet" class="numFormdet" />
 		<div class="row">
 			<div class="col-md-2">
 				<button  type="button" class="btn btn-secondary "
@@ -56,8 +56,8 @@
 			</div>
 			<div class="col-md-4">
 
-				<button type="submit" class="btn btn-primary "
-					id="" name="" value="regresar">
+				<button type="submit" class="bindPresentarDeclaracionVehiculoButton btn btn-primary "
+					id="bindPresentarDeclaracionVehiculoButton" name="" value="declaracion">
 					<spring:theme code="sobre.vehiculo.liqui.presdecla" />
 				</button>
 			</div>

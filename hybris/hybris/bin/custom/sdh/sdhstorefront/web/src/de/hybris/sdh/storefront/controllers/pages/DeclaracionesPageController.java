@@ -337,7 +337,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		numObjeto = infoVista.getObjContrato(); //gasolinaService.obtenerNumDocDeclaraciones(customerData2, claseObjeto);
 		anioGravable = infoVista.getAnoGravable();
 		periodo = infoVista.getPeriodo();
-		radicado = "";
+		radicado = infoVista.getReferencia();
 
 		infoVista.setUrlDownload(null);
 		infoVista.setDeclaraPDFResponse(null);

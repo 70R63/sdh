@@ -60,7 +60,7 @@
 
 	</div>
 
-	<form:form action="">
+	<form:form action="/sdhstorefront/es/autorizados/entidades/reportarinfo" method="POST"	>
 		<div class="row" style="margin-top: 6px;">
 			<div class="col-md-4">
 				<div class="form-group">
@@ -109,10 +109,11 @@
 					<spring:theme code="autorizado.reportar.info.cancelar" />
 				</button>
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="submit">
 					<spring:theme code="autorizado.reportar.info.enviar" />
 				</button>
 			</div>
 		</div>
+		
 	</form:form>
 </div>

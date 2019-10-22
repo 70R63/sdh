@@ -23,6 +23,7 @@
         <collectiontype code="SDHExteriorPublicityTaxList" elementtype="SDHExteriorPublicityTax" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHGasTaxList" elementtype="SDHGasTax" autocreate="true" generate="true" type="list"/>
         <collectiontype code="SDHUrbanDelineationsTaxList" elementtype="SDHUrbanDelineationsTax" autocreate="true" generate="true" type="list"/>
+        <collectiontype code="SDHVehiculosTaxList" elementtype="SDHVehiculosTax" autocreate="true" generate="true" type="list"/>
 
         
         
@@ -292,6 +293,10 @@
         				<description>SDH custom field</description>
         				<persistence type="property"></persistence>
         			</attribute>
+        			<attribute qualifier="vehiculosTaxList" type="SDHVehiculosTaxList">
+        				<description>SDH custom field</description>
+        				<persistence type="property"></persistence>
+        			</attribute>
         		</attributes>
         	</itemtype>
         	<itemtype code="SDHAddress" autocreate="true" generate="true">
@@ -372,6 +377,45 @@
         			</attribute>
        			</attributes>
 	        </itemtype>
+	        
+	        <itemtype code="SDHVehiculosTax" autocreate="true" generate="true">
+        		<description>Custom SDH Model to save vehiculos data</description>
+        		<deployment table="SDHVEHICULOSTAX" typecode="15020"/>
+       			<attributes>
+       				<attribute qualifier="placa" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="marca" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="linea" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="modelo" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="clase" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="carroceria" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="numPuertas" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="blindado" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="cilindraje" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+        			<attribute qualifier="numObjeto" type="java.lang.String">
+        				<persistence type="property"></persistence>
+        			</attribute>
+       			</attributes>
+	        </itemtype>
+	        
+	        
 	        <itemtype code="SDHGasTax" autocreate="true" generate="true">
         		<description>Custom SDH Model to save gas data</description>
         		<deployment table="SDHGASTAX" typecode="15007"/>

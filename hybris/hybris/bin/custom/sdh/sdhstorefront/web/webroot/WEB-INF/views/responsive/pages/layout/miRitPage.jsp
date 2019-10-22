@@ -52,20 +52,22 @@ window.onload = function() {
 	debugger;
 	var cosas = $(":input");
 	var tam = cosas.length;
-	for (var i = 0; i < tam; i++) {
-		var valor = cosas[i].value;
-		if (valor == "") {
-			cosas[i].value = "-";
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
 
+			}
 		}
 	}
-
 }
 	window.onload = function() {
+		debugger;
 		var inputcol = document.getElementsByTagName("input");
 		for (i = 0; i < inputcol.length; i++) {
 			var texto = inputcol[i].value;
-			inputcol[i].style.width = (texto.length + 1) * 9 + 'px';
+			inputcol[i].style.width = (texto.length + 1) * 10 + 'px';
 		}
 
 	};

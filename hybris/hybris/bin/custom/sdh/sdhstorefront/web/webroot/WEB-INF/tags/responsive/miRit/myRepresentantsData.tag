@@ -71,7 +71,7 @@
 							<div class="col-md-3">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="new_alto form-control" disabled="disabled"
+										class="newalto_dir form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
 										maxlength="240">
@@ -96,7 +96,7 @@
 							<div class="col-md-3">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="new_alto form-control" disabled="disabled"
+										class="newalto_dir form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="${eachAgent.nomCompleto}" maxlength="240">
 									<div class="help-block">
@@ -188,7 +188,7 @@
 							<div class="col-md-3">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="new_alto form-control" disabled="disabled"
+										class="newalto_dir form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="<spring:theme code="register.id.types.${eachAgent.tipoDoc}"/>"
 										maxlength="240">
@@ -213,7 +213,7 @@
 							<div class="col-md-3">
 								<div class="form-group ">
 									<input id="address.surname" name="lastName"
-										class="new_alto form-control" disabled="disabled"
+										class="newalto_dir form-control" disabled="disabled"
 										aria-required="true" type="text"
 										value="${eachAgent.nomCompleto}" maxlength="240">
 									<div class="help-block">

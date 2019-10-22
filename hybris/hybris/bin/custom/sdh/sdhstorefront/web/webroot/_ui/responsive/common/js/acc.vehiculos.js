@@ -1,6 +1,6 @@
 ACC.vehiculos = {
 
-	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh" ],
+	_autoload : [ "bindLabelVerDetalle", "bindLabelVerDetVeh","bindPresentarDeclaracionVehiculoButton", "bindGeneraDeclaracionVehiculosButton","bindCalcularVehButton"],
 
 	bindLabelVerDetalle : function() {
 		$(document)
@@ -95,9 +95,214 @@ ACC.vehiculos = {
 
 	},
 
+	bindPresentarDeclaracionVehiculoButton: function () {
+		 $(document).on("click", "#bindPresentarDeclaracionVehiculoButton", function (e) {
+	 	        e.preventDefault();
+	 	        debugger;
+
+	 	        var anioGravable = $.trim($("#an").val());
+	 	        var placa = $.trim($("#placas").val());
+	 	       var numBPP  = $.trim($("#numBPP").val());
+	 	       var numForma = $.trim($("#numFormdet").val());
+
+
+	 	      if(anioGravable == "0")
+	 	        {
+	 	        	alert("Por favor, selecciona el año a consultar");
+	 	        	return;
+	 	        }
+
+	 	        if(placa == "" || placa == "-")
+	 	        {
+	 	        	alert("Por favor, selecciona un vehiculo");
+	 	        	return;
+	 	        }
+
+	 	      window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
+
+		 });
+	 },
+
+	  bindGeneraDeclaracionVehiculosButton: function () {
+		 $(document).on("click", "#generaDeclaracionVehiculosButton", function (e) {
+				debugger;
+	 	        e.preventDefault();
+
+	 	       var numForm  = $.trim($("#numForm").val());
+
+	 	       var data = {};
+
+	 	       data.numForm=numForm;
+
+	 	      $.ajax({
+		            url: ACC.vehiculosGeneraDeclaracionURL,
+		            data: data,
+		            type: "POST",
+		            success: function (data) {
+
+		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
+		            	if(data.errores)
+	            		{
+		            		$("#publicidadExteriorDialogContent").html("");
+		            		$.each(data.errores, function( index, value ) {
+    	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+    	            		});
+
+
+	            		}else
+	            		{
+	            			$("#publicidadExteriorDialogContent").html("");
+	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
+
+	            			$("#downloadHelper").attr("href",data.urlDownload);
+	            			document.getElementById("downloadHelper").click();
+							document.getElementById("action").disabled = false;
+
+	            		}
+
+		            },
+		            error: function () {
+		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
+		            	$("#publicidadExteriorDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            }
+		        });
+
+		 });
+	 },
+
+	 bindCalcularVehButton : function() {
+			$(document).on("click", ".calcularVehButton", function(e) {
+				e.preventDefault();
+
+				var bpNum=$.trim($("#numBPcal").val());
+				var placa=$.trim($("#placaDec").val());
+				var numForm=$.trim($("#numForm").val());
+				var anioGravable=$.trim($("#anioGravablecal").val());
+				var opcionUso=$.trim($("#opcionUsocal").val());
+				var clase=$.trim($("#clasecal").val());
+				var idServicio=$.trim($("#idServiciocal").val());
+				var cilindraje=$.trim($("#cilindrajecal").val());
+				var marca=$.trim($("#marcacal").val());
+				var linea=$.trim($("#lineacal").val());
+				var modelo=$.trim($("#modelocal").val());
+				var clasicoAntiguo=$.trim($("#clasicoAntiguocal").val());
+				var checkAporte=$.trim($("#checkAportecal").val());
+				var proyectoAporte=$.trim($("#proyecto").val());
+				var blindado=$.trim($("#blindadocal").val());
+				if(blindado == "S" || blindado == "s"){
+					blindado = "X";
+				}else{
+				blindado = "";
+				}
+				var capacidadTon=$.trim($("#capacidadToncal").val());
+				var capacidadPas=$.trim($("#capacidadPascal").val());
+				var avaluo=$.trim($("#an").val());
+				var claseSdh=$.trim($("#an").val());
+				var tipoVehSdh=$.trim($("#an").val());
+				var lineaHomologa=$.trim($("#an").val());
+				var fuenteHomologa=$.trim($("#an").val());
+
+				var data = {};
+
+				data.bpNum=bpNum;
+				data.placa=placa;
+				data.numForm=numForm;
+				data.anioGravable=anioGravable;
+				data.opcionUso=opcionUso;
+				data.clase=clase;
+				data.idServicio=idServicio;
+				data.cilindraje=cilindraje;
+				data.marca=marca;
+				data.linea=linea;
+				data.modelo=modelo;
+				data.clasicoAntiguo=clasicoAntiguo;
+				data.checkAporte=checkAporte;
+				data.proyectoAporte=proyectoAporte;
+				data.blindado=blindado;
+				data.capacidadTon=capacidadTon;
+				data.capacidadPas=capacidadPas;
+				data.avaluo=avaluo;
+				data.claseSdh=claseSdh;
+				data.tipoVehSdh=tipoVehSdh;
+				data.lineaHomologa=lineaHomologa;
+				data.fuenteHomologa=fuenteHomologa;
+
+				$.ajax({
+					url : ACC.vehiculosDeclaCalculoURL,
+					data : data,
+					type : "POST",
+					success : function(data) {
+						debugger;
+		            	if(data.errores[0] != null)
+	            		{
+		            		alert(data.errores[0].txtmsj);
+
+							//$( "#dialogVehiculos" ).dialog( "open" );
+		            		//$("#vehiculosDialogContent").html("");
+		            		//$.each(data.errores, function( index, value ) {
+    	            		//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+    	            		//});
+
+		            		$("#valimpcar").val("");
+	            			$("#valsemafo").val("");
+	            			$("#despronpag").val("");
+	            			$("#taract").val("");
+	            			$("#totpag").val("");
+	            			$("#sancion").val("");
+	            			$("#valpagar").val("");
+	            			$("#intereses").val("");
+	            			$("#totpagvol").val("");
+	            			$("#numForm").val("");
+
+
+//	            			$('#generaDeclaracionButton').prop("disabled", true);
+
+	            		}else
+	            		{
+	            			$("#valimpcar").val(data.impuestoCargo);
+	            			$("#valsemafo").val(data.valorSemafor);
+	            			$("#despronpag").val(data.descuentoProntop);
+	            			$("#taract").val(data.tarifaActual);
+	            			$("#totpag").val(data.totalPagar);
+	            			$("#sancion").val(data.sancion);
+	            			$("#valpagar").val(data.valorPagar);
+	            			$("#intereses").val(data.intereses);
+	            			$("#totpagvol").val(data.totalPagoVol);
+	            			$("#numForm").val(data.numForm);
+
+
+//	            			$('#generaDeclaracionButton').prop("disabled", false);
+
+	            		}
+
+
+
+		},error: function () {
+        	$( "#dialogVehiculos" ).dialog( "open" );
+        	$("#vehiculosDialogContent").html("");
+        	$("#vehiculosDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
+        	$("#valimpcar").val("");
+			$("#valsemafo").val("");
+			$("#despronpag").val("");
+			$("#taract").val("");
+			$("#totpag").val("");
+			$("#sancion").val("");
+			$("#valpagar").val("");
+			$("#intereses").val("");
+			$("#totpagvol").val("");
+			$("#numForm").val("");
+//			$("#calculoButton").prop('disabled', false);
+        }
+    });
+
+});
+},
+
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {
 			e.preventDefault();
+			var doc = document.getElementById('detalleVehiculos');
+			doc.style.display='block';
 
 			var placa = $.trim($(this).attr("data-placa"));
 			var bpNum = $.trim($(this).attr("data-numbp"));
@@ -130,6 +335,11 @@ ACC.vehiculos = {
 	},
 
 	fillFieldsFromData : function(data) {
+
+		$('#tableJur tbody').empty();
+		$('#tablemarcas tbody').empty();
+		$('#tableLiq tbody').empty();
+		$('#numFormdet').val(data.numForm);
 		$("#placas").val(data.placa);
 
 		if (data.idServicio == "01") {
@@ -139,7 +349,7 @@ ACC.vehiculos = {
 		} else if (data.idServicio == "03") {
 			data.idServicio = "OFICIAL";
 		} else {
-			data.idServicio = "-";
+			data.idServicio = "";
 		}
 		$("#inidServicio").val(data.idServicio);
 
@@ -152,7 +362,7 @@ ACC.vehiculos = {
 		} else if (data.idEstado == "9") {
 			data.idEstado = "TRASLADADO";
 		} else {
-			data.idEstado = "-";
+			data.idEstado = "";
 		}
 
 		$("#inidEstado").val(data.idEstado);
@@ -165,7 +375,7 @@ ACC.vehiculos = {
 		} else if (data.clasicoAntig == "2") {
 			data.clasicoAntig = "CLASICO";
 		} else {
-			data.clasicoAntig = "-";
+			data.clasicoAntig = "";
 		}
 		$("#inclasico").val(data.clasicoAntig);
 
@@ -190,7 +400,7 @@ ACC.vehiculos = {
 		} else if (data.tipoVeh == "8") {
 			data.tipoVeh = "AMBULANCIAS";
 		} else {
-			data.tipoVeh = "-";
+			data.tipoVeh = "";
 
 		}
 
@@ -222,7 +432,7 @@ ACC.vehiculos = {
 				} else if (jur[i].calidad == "6") {
 					jur[i].calidad = "ARRENDATARIO";
 				} else {
-					jur[i].calidad = "-";
+					jur[i].calidad = "";
 				}
 
 				var fec1 = jur[i].fechaDesde;
@@ -246,10 +456,10 @@ ACC.vehiculos = {
 										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ jur[i].procProp
 										+ '" /></td>'
-										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ jur[i].fechaDesde
 										+ '" /></td>'
-										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ jur[i].fechaHasta + '" /></td>');
 
 			}
@@ -257,16 +467,16 @@ ACC.vehiculos = {
 			$('#tableJur')
 					.append(
 							"<tr>"
-									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con datos de marcas" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>');
 		}
 
 		var marca = data.marcas;
 		if (marca != null) {
 			for (var i = 0; i < marca.length; i++) {
-	
+
 				var fec1 = marca[i].fechaDesde;
 
 				var anio = fec1.slice(0, 4);
@@ -294,10 +504,10 @@ ACC.vehiculos = {
 										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ marca[i].valorExencion
 										+ '" /></td>'
-										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ marca[i].fechaDesde
 										+ '" /></td>'
-										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 										+ marca[i].fechaHasta + '" /></td>');
 
 			}
@@ -306,11 +516,11 @@ ACC.vehiculos = {
 					.append(
 							"<tr>"
 									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>');
 		}
 
 		var liq = data.liquidacion
@@ -318,10 +528,17 @@ ACC.vehiculos = {
 		if (liq != null) {
 			for (var i = 0; i < liq.length; i++) {
 
+				var fecjur1 = liq[i].anio;
+				var mes = fecjur1.slice(4, 6);
+				var dia = fecjur1.slice(6);
+				var anio = fecjur1.slice(0, 4);
+
+				liq[i].anio = dia + '/' + mes + '/' + anio;;
+
 				$('#tableLiq')
 						.append(
 								"<tr>"
-										+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+										+ '<td><input style="width: 80px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 										+ liq[i].anio
 										+ '" /></td>'
 										+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
@@ -335,9 +552,9 @@ ACC.vehiculos = {
 			$('#tableLiq')
 					.append(
 							"<tr>"
-									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con dato Juridicos" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>'
-									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="-" /></td>');
+									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="No cuenta con datos de Liquidación" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>');
 		}
 
 	}

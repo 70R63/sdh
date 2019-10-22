@@ -2117,6 +2117,13 @@ public class SobreTasaGasolinaService
 				elementos.put("0003", "Industria y Comercio");
 			}
 		}
+		if (customerData.getReteIca() != null) // reteICA
+		{
+			if (!customerData.getReteIca().getNumObjeto().isEmpty())
+			{
+				elementos.put("0004", "Retención ICA");
+			}
+		}
 		if (customerData.getGasolina() != null) //gasolina
 		{
 			if (customerData.getGasolina().size() > 0)
@@ -2156,7 +2163,7 @@ public class SobreTasaGasolinaService
 		List<ImpuestoGasolina> gasolina = null;
 		ImpuestoICA ica = null;
 		ReteICA reteica = null;
-		final List<ImpuestoVehiculos> vehiculos = null;
+		List<ImpuestoVehiculos> vehiculos = null;
 		List<ImpuestoDelineacionUrbanaWithRadicados> delineacion = null;
 		ImpuestoDelineacionUrbanaWithRadicados delineacion_customer_extendido = null;
 		List<DetRadicadosResponse> radicados = null;
@@ -2165,6 +2172,30 @@ public class SobreTasaGasolinaService
 
 		switch (infoVista.getClaveImpuesto())
 		{
+			case "0002": //Vehiculos
+				vehiculos = new ArrayList<ImpuestoVehiculos>();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						for (final ImpuestoVehiculos vehiculos_customer : infoVista.getCustomerData().getVehicular())
+						{
+							if (vehiculos_customer.getNumObjeto() != null && itemDeclaracion.getNumObjeto() != null)
+							{
+								if (vehiculos_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+								{
+									vehiculos.add(vehiculos_customer);
+								}
+							}
+						}
+					}
+
+					if (vehiculos.size() > 0)
+					{
+						infoVista.setVehicular(vehiculos);
+					}
+				}
+				break;
 			case "0003": //ICA
 				ica = new ImpuestoICA();
 				if (listaDeclaracionesResponse.getDeclaraciones() != null)
@@ -2295,6 +2326,185 @@ public class SobreTasaGasolinaService
 				break;
 		}
 
+	}
+
+
+	public List<ItemListaDeclaraciones> determinarRegistrosDeclaraciones_certipagos(final OpcionDeclaracionesVista infoVista,
+			final ListaDeclaracionesResponse listaDeclaracionesResponse, final SobreTasaGasolinaService gasolinaService)
+	{
+
+		List<ItemListaDeclaraciones> declaraciones_selected = null;
+
+
+		switch (infoVista.getClaveImpuesto())
+		{
+			//implementar la logica para cada impuesto
+
+			case "0002":
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+
+				break;
+
+			//			case "0003": //ICA
+			//				break;
+			//
+			//			case "0004": //RETEICA
+			//				break;
+
+
+
+			case "0005": //sobretasa gasolina
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				String periodo = null;
+				for (final ItemListaDeclaraciones declaracionRow : listaDeclaracionesResponse.getDeclaraciones())
+				{
+
+					if (infoVista.getPeriodo().equals("00"))
+					{
+						periodo = gasolinaService.prepararPeriodoAnualPago(infoVista.getAnoGravable());
+					}
+					else
+					{
+						periodo = infoVista.getAnoGravable().substring(2) + infoVista.getPeriodo();
+					}
+
+					if (declaracionRow.getClavePeriodo() != null && declaracionRow.getClavePeriodo().equals(periodo))
+					{
+						declaraciones_selected.add(declaracionRow);
+					}
+				}
+				break;
+
+			//				case "0006": //Delineacion Urbana
+			//					break;
+			//
+			//				case "0007": //Publicidad Exterior
+			//					break;
+
+			default:
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+				break;
+		}
+
+		return declaraciones_selected;
+	}
+
+	/**
+	 * @param claveImpuesto
+	 * @param customerData
+	 * @return
+	 */
+	public String prepararNumObjeto_certipagos(final OpcionDeclaracionesVista infoVista,
+			final SDHValidaMailRolResponse customerData)
+	{
+		String numObjeto = null;
+
+		switch (infoVista.getClaveImpuesto())
+		{
+
+			//implementar la logica para cada impuesto
+			case "0002": //vehiculos
+				if (customerData != null)
+				{
+					if (customerData.getVehicular() != null)
+					{
+						if (customerData.getVehicular().get(0) != null)
+						{
+							numObjeto = customerData.getVehicular().get(0).getNumObjeto();
+						}
+					}
+				}
+
+				break;
+
+			case "0003": //ICA
+				if (customerData != null)
+				{
+					if (customerData.getIca() != null)
+					{
+						numObjeto = customerData.getIca().getNumObjeto();
+					}
+				}
+
+				break;
+
+
+			//implementar la logica para cada impuesto
+			case "0004": //RETEICA
+				if (customerData != null)
+				{
+					if (customerData.getReteIca() != null)
+					{
+						numObjeto = customerData.getReteIca().getNumObjeto();
+					}
+				}
+
+				break;
+
+
+			case "0005": //sobretasa gasolina
+				if (customerData != null)
+				{
+					if (customerData.getGasolina() != null)
+					{
+						if (customerData.getGasolina().get(0) != null)
+						{
+							numObjeto = customerData.getGasolina().get(0).getNumObjeto();
+						}
+					}
+				}
+
+				break;
+
+			//			case "0006": //delineacion urbana
+			//
+			//				break;
+			//
+			//
+			//			case "0007": //publicidad exterior
+			//
+			//				break;
+			default:
+
+				break;
+		}
+
+		return numObjeto;
+	}
+
+	/**
+	 * @param detalleContribuyente
+	 * @param placa
+	 * @return
+	 */
+	public String prepararNumObjetoVehicular(final SDHValidaMailRolResponse detalleContribuyente, final String placa)
+	{
+		String numObjeto = "";
+		List<ImpuestoVehiculos> detalleImpuesto = null;
+
+
+		detalleImpuesto = detalleContribuyente.getVehicular();
+		if (detalleContribuyente != null && detalleImpuesto != null)
+		{
+			for (int i = 0; i < detalleImpuesto.size(); i++)
+			{
+				if (detalleImpuesto.get(i) != null)
+				{
+					if (detalleImpuesto.get(i).getPlaca() != null)
+					{
+						if (detalleImpuesto.get(i).getPlaca().equals(placa))
+						{
+							numObjeto = detalleImpuesto.get(i).getNumObjeto();
+						}
+					}
+				}
+			}
+		}
+
+
+		return numObjeto;
 	}
 
 

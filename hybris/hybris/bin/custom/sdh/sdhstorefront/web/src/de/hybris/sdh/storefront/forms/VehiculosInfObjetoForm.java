@@ -10,6 +10,7 @@ import de.hybris.sdh.core.pojos.responses.DetalleLiquidacionVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleMarcas;
 import de.hybris.sdh.core.pojos.responses.DetalleMarcasVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculos;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.Infovehic;
 import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
@@ -75,10 +76,44 @@ public class VehiculosInfObjetoForm
 	private DetalleInfoDeclaraVehiculos info_declara;
 	private Infovehic infoVeh;
 	private String liquidaciondeclara;
+	private String opcionUso;
+
 
 
 	private List<JuridicosVehiculos> datosJuridicos;
 	private List<DetalleMarcasVehiculos> marcas;
+
+	private String marca;
+	private String linea;
+	private String modelo;
+	private String clase;
+	private String carroceria;
+	private String numPuertas;
+	private String blindado;
+	private String cilindraje;
+	private String numObjeto;
+
+	private String numForm;
+
+	private String clasicoAntiguo;
+	private String checkAporte;
+	private String proyectoAporte;
+	private String claseSdh;
+	private String tipoVehSdh;
+	private String lineaHomologa;
+	private String fuenteHomologa;
+
+	private String impuestoCargo;
+	private String tarifaActual;
+	private String sancion;
+	private String intereses;
+	private String valorSemafor;
+	private String descuentoProntop;
+	private String totalPagar;
+	private String valorPagar;
+	private String totalPagoVol;
+
+	private List<ErrorPubli> errores;
 	/**
 	 * @return the numBP
 	 */
@@ -86,7 +121,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numBP;
 	}
-	
+
 	/**
 	 * @param numBP
 	 *           the numBP to set
@@ -102,7 +137,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipiden;
 	}
-	
+
 	/**
 	 * @param tipiden
 	 *           the tipiden to set
@@ -118,7 +153,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numide;
 	}
-	
+
 	/**
 	 * @param numide
 	 *           the numide to set
@@ -134,7 +169,7 @@ public class VehiculosInfObjetoForm
 	{
 		return name;
 	}
-	
+
 	/**
 	 * @param name
 	 *           the name to set
@@ -150,7 +185,7 @@ public class VehiculosInfObjetoForm
 	{
 		return bpNum;
 	}
-	
+
 	/**
 	 * @param bpNum
 	 *           the bpNum to set
@@ -166,7 +201,7 @@ public class VehiculosInfObjetoForm
 	{
 		return placa;
 	}
-	
+
 	/**
 	 * @param placa
 	 *           the placa to set
@@ -182,7 +217,7 @@ public class VehiculosInfObjetoForm
 	{
 		return anioGravable;
 	}
-	
+
 	/**
 	 * @param anioGravable
 	 *           the anioGravable to set
@@ -198,7 +233,7 @@ public class VehiculosInfObjetoForm
 	{
 		return vehiculos;
 	}
-	
+
 	/**
 	 * @param vehiculos
 	 *           the vehiculos to set
@@ -214,7 +249,7 @@ public class VehiculosInfObjetoForm
 	{
 		return impvehicular;
 	}
-	
+
 	/**
 	 * @param impvehicular
 	 *           the impvehicular to set
@@ -230,7 +265,7 @@ public class VehiculosInfObjetoForm
 	{
 		return detallerequest;
 	}
-	
+
 	/**
 	 * @param detallerequest
 	 *           the detallerequest to set
@@ -246,7 +281,7 @@ public class VehiculosInfObjetoForm
 	{
 		return detalle;
 	}
-	
+
 	/**
 	 * @param detalle
 	 *           the detalle to set
@@ -262,7 +297,7 @@ public class VehiculosInfObjetoForm
 	{
 		return idServicio;
 	}
-	
+
 	/**
 	 * @param idServicio
 	 *           the idServicio to set
@@ -278,7 +313,7 @@ public class VehiculosInfObjetoForm
 	{
 		return idEstado;
 	}
-	
+
 	/**
 	 * @param idEstado
 	 *           the idEstado to set
@@ -294,7 +329,7 @@ public class VehiculosInfObjetoForm
 	{
 		return watts;
 	}
-	
+
 	/**
 	 * @param watts
 	 *           the watts to set
@@ -310,7 +345,7 @@ public class VehiculosInfObjetoForm
 	{
 		return clasicoAntig;
 	}
-	
+
 	/**
 	 * @param clasicoAntig
 	 *           the clasicoAntig to set
@@ -326,7 +361,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoVeh;
 	}
-	
+
 	/**
 	 * @param tipoVeh
 	 *           the tipoVeh to set
@@ -342,7 +377,7 @@ public class VehiculosInfObjetoForm
 	{
 		return capacidadPas;
 	}
-	
+
 	/**
 	 * @param capacidadPas
 	 *           the capacidadPas to set
@@ -358,7 +393,7 @@ public class VehiculosInfObjetoForm
 	{
 		return capacidadTon;
 	}
-	
+
 	/**
 	 * @param capacidadTon
 	 *           the capacidadTon to set
@@ -374,7 +409,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaCambio;
 	}
-	
+
 	/**
 	 * @param fechaCambio
 	 *           the fechaCambio to set
@@ -390,7 +425,7 @@ public class VehiculosInfObjetoForm
 	{
 		return datosJuridicosForm;
 	}
-	
+
 	/**
 	 * @param datosJuridicosForm
 	 *           the datosJuridicosForm to set
@@ -406,7 +441,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoID;
 	}
-	
+
 	/**
 	 * @param tipoID
 	 *           the tipoID to set
@@ -422,7 +457,7 @@ public class VehiculosInfObjetoForm
 	{
 		return nombre;
 	}
-	
+
 	/**
 	 * @param nombre
 	 *           the nombre to set
@@ -438,7 +473,7 @@ public class VehiculosInfObjetoForm
 	{
 		return numID;
 	}
-	
+
 	/**
 	 * @param numID
 	 *           the numID to set
@@ -454,7 +489,7 @@ public class VehiculosInfObjetoForm
 	{
 		return calidad;
 	}
-	
+
 	/**
 	 * @param calidad
 	 *           the calidad to set
@@ -470,7 +505,7 @@ public class VehiculosInfObjetoForm
 	{
 		return procProp;
 	}
-	
+
 	/**
 	 * @param procProp
 	 *           the procProp to set
@@ -486,7 +521,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaDesde;
 	}
-	
+
 	/**
 	 * @param fechaDesde
 	 *           the fechaDesde to set
@@ -502,7 +537,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaHasta;
 	}
-	
+
 	/**
 	 * @param fechaHasta
 	 *           the fechaHasta to set
@@ -518,7 +553,7 @@ public class VehiculosInfObjetoForm
 	{
 		return marcasForm;
 	}
-	
+
 	/**
 	 * @param marcasForm
 	 *           the marcasForm to set
@@ -534,7 +569,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tipoMarca;
 	}
-	
+
 	/**
 	 * @param tipoMarca
 	 *           the tipoMarca to set
@@ -550,7 +585,7 @@ public class VehiculosInfObjetoForm
 	{
 		return codMarca;
 	}
-	
+
 	/**
 	 * @param codMarca
 	 *           the codMarca to set
@@ -566,7 +601,7 @@ public class VehiculosInfObjetoForm
 	{
 		return valorExcencion;
 	}
-	
+
 	/**
 	 * @param valorExcencion
 	 *           the valorExcencion to set
@@ -582,7 +617,7 @@ public class VehiculosInfObjetoForm
 	{
 		return ciiu;
 	}
-	
+
 	/**
 	 * @param ciiu
 	 *           the ciiu to set
@@ -598,7 +633,7 @@ public class VehiculosInfObjetoForm
 	{
 		return descripMarca;
 	}
-	
+
 	/**
 	 * @param descripMarca
 	 *           the descripMarca to set
@@ -614,7 +649,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaDesdemarca;
 	}
-	
+
 	/**
 	 * @param fechaDesdemarca
 	 *           the fechaDesdemarca to set
@@ -630,7 +665,7 @@ public class VehiculosInfObjetoForm
 	{
 		return fechaHastamarca;
 	}
-	
+
 	/**
 	 * @param fechaHastamarca
 	 *           the fechaHastamarca to set
@@ -646,7 +681,7 @@ public class VehiculosInfObjetoForm
 	{
 		return liquidacion;
 	}
-	
+
 	/**
 	 * @param liquidacion
 	 *           the liquidacion to set
@@ -662,7 +697,7 @@ public class VehiculosInfObjetoForm
 	{
 		return anio;
 	}
-	
+
 	/**
 	 * @param anio
 	 *           the anio to set
@@ -678,7 +713,7 @@ public class VehiculosInfObjetoForm
 	{
 		return avaluo;
 	}
-	
+
 	/**
 	 * @param avaluo
 	 *           the avaluo to set
@@ -694,7 +729,7 @@ public class VehiculosInfObjetoForm
 	{
 		return tarifa;
 	}
-	
+
 	/**
 	 * @param tarifa
 	 *           the tarifa to set
@@ -710,7 +745,7 @@ public class VehiculosInfObjetoForm
 	{
 		return info_declara;
 	}
-	
+
 	/**
 	 * @param info_declara
 	 *           the info_declara to set
@@ -726,7 +761,7 @@ public class VehiculosInfObjetoForm
 	{
 		return infoVeh;
 	}
-	
+
 	/**
 	 * @param infoVeh
 	 *           the infoVeh to set
@@ -742,7 +777,7 @@ public class VehiculosInfObjetoForm
 	{
 		return liquidaciondeclara;
 	}
-	
+
 	/**
 	 * @param liquidaciondeclara
 	 *           the liquidaciondeclara to set
@@ -784,6 +819,482 @@ public class VehiculosInfObjetoForm
 	public void setMarcas(final List<DetalleMarcasVehiculos> marcas)
 	{
 		this.marcas = marcas;
+	}
+
+	/**
+	 * @return the opcionUso
+	 */
+	public String getOpcionUso()
+	{
+		return opcionUso;
+	}
+
+	/**
+	 * @param opcionUso
+	 *           the opcionUso to set
+	 */
+	public void setOpcionUso(final String opcionUso)
+	{
+		this.opcionUso = opcionUso;
+	}
+
+	/**
+	 * @return the marca
+	 */
+	public String getMarca()
+	{
+		return marca;
+	}
+
+	/**
+	 * @param marca
+	 *           the marca to set
+	 */
+	public void setMarca(final String marca)
+	{
+		this.marca = marca;
+	}
+
+	/**
+	 * @return the linea
+	 */
+	public String getLinea()
+	{
+		return linea;
+	}
+
+	/**
+	 * @param linea
+	 *           the linea to set
+	 */
+	public void setLinea(final String linea)
+	{
+		this.linea = linea;
+	}
+
+	/**
+	 * @return the modelo
+	 */
+	public String getModelo()
+	{
+		return modelo;
+	}
+
+	/**
+	 * @param modelo
+	 *           the modelo to set
+	 */
+	public void setModelo(final String modelo)
+	{
+		this.modelo = modelo;
+	}
+
+	/**
+	 * @return the clase
+	 */
+	public String getClase()
+	{
+		return clase;
+	}
+
+	/**
+	 * @param clase
+	 *           the clase to set
+	 */
+	public void setClase(final String clase)
+	{
+		this.clase = clase;
+	}
+
+	/**
+	 * @return the carroceria
+	 */
+	public String getCarroceria()
+	{
+		return carroceria;
+	}
+
+	/**
+	 * @param carroceria
+	 *           the carroceria to set
+	 */
+	public void setCarroceria(final String carroceria)
+	{
+		this.carroceria = carroceria;
+	}
+
+	/**
+	 * @return the numPuertas
+	 */
+	public String getNumPuertas()
+	{
+		return numPuertas;
+	}
+
+	/**
+	 * @param numPuertas
+	 *           the numPuertas to set
+	 */
+	public void setNumPuertas(final String numPuertas)
+	{
+		this.numPuertas = numPuertas;
+	}
+
+	/**
+	 * @return the blindado
+	 */
+	public String getBlindado()
+	{
+		return blindado;
+	}
+
+	/**
+	 * @param blindado
+	 *           the blindado to set
+	 */
+	public void setBlindado(final String blindado)
+	{
+		this.blindado = blindado;
+	}
+
+	/**
+	 * @return the cilindraje
+	 */
+	public String getCilindraje()
+	{
+		return cilindraje;
+	}
+
+	/**
+	 * @param cilindraje
+	 *           the cilindraje to set
+	 */
+	public void setCilindraje(final String cilindraje)
+	{
+		this.cilindraje = cilindraje;
+	}
+
+	/**
+	 * @return the numObjeto
+	 */
+	public String getNumObjeto()
+	{
+		return numObjeto;
+	}
+
+	/**
+	 * @param numObjeto
+	 *           the numObjeto to set
+	 */
+	public void setNumObjeto(final String numObjeto)
+	{
+		this.numObjeto = numObjeto;
+	}
+
+	/**
+	 * @return the numForm
+	 */
+	public String getNumForm()
+	{
+		return numForm;
+	}
+
+	/**
+	 * @param numForm
+	 *           the numForm to set
+	 */
+	public void setNumForm(final String numForm)
+	{
+		this.numForm = numForm;
+	}
+
+	/**
+	 * @return the clasicoAntiguo
+	 */
+	public String getClasicoAntiguo()
+	{
+		return clasicoAntiguo;
+	}
+
+	/**
+	 * @param clasicoAntiguo
+	 *           the clasicoAntiguo to set
+	 */
+	public void setClasicoAntiguo(final String clasicoAntiguo)
+	{
+		this.clasicoAntiguo = clasicoAntiguo;
+	}
+
+	/**
+	 * @return the checkAporte
+	 */
+	public String getCheckAporte()
+	{
+		return checkAporte;
+	}
+
+	/**
+	 * @param checkAporte
+	 *           the checkAporte to set
+	 */
+	public void setCheckAporte(final String checkAporte)
+	{
+		this.checkAporte = checkAporte;
+	}
+
+	/**
+	 * @return the proyectoAporte
+	 */
+	public String getProyectoAporte()
+	{
+		return proyectoAporte;
+	}
+
+	/**
+	 * @param proyectoAporte
+	 *           the proyectoAporte to set
+	 */
+	public void setProyectoAporte(final String proyectoAporte)
+	{
+		this.proyectoAporte = proyectoAporte;
+	}
+
+	/**
+	 * @return the claseSdh
+	 */
+	public String getClaseSdh()
+	{
+		return claseSdh;
+	}
+
+	/**
+	 * @param claseSdh
+	 *           the claseSdh to set
+	 */
+	public void setClaseSdh(final String claseSdh)
+	{
+		this.claseSdh = claseSdh;
+	}
+
+	/**
+	 * @return the tipoVehSdh
+	 */
+	public String getTipoVehSdh()
+	{
+		return tipoVehSdh;
+	}
+
+	/**
+	 * @param tipoVehSdh
+	 *           the tipoVehSdh to set
+	 */
+	public void setTipoVehSdh(final String tipoVehSdh)
+	{
+		this.tipoVehSdh = tipoVehSdh;
+	}
+
+	/**
+	 * @return the lineaHomologa
+	 */
+	public String getLineaHomologa()
+	{
+		return lineaHomologa;
+	}
+
+	/**
+	 * @param lineaHomologa
+	 *           the lineaHomologa to set
+	 */
+	public void setLineaHomologa(final String lineaHomologa)
+	{
+		this.lineaHomologa = lineaHomologa;
+	}
+
+	/**
+	 * @return the fuenteHomologa
+	 */
+	public String getFuenteHomologa()
+	{
+		return fuenteHomologa;
+	}
+
+	/**
+	 * @param fuenteHomologa
+	 *           the fuenteHomologa to set
+	 */
+	public void setFuenteHomologa(final String fuenteHomologa)
+	{
+		this.fuenteHomologa = fuenteHomologa;
+	}
+
+	/**
+	 * @return the impuestoCargo
+	 */
+	public String getImpuestoCargo()
+	{
+		return impuestoCargo;
+	}
+
+	/**
+	 * @param impuestoCargo
+	 *           the impuestoCargo to set
+	 */
+	public void setImpuestoCargo(final String impuestoCargo)
+	{
+		this.impuestoCargo = impuestoCargo;
+	}
+
+	/**
+	 * @return the tarifaActual
+	 */
+	public String getTarifaActual()
+	{
+		return tarifaActual;
+	}
+
+	/**
+	 * @param tarifaActual
+	 *           the tarifaActual to set
+	 */
+	public void setTarifaActual(final String tarifaActual)
+	{
+		this.tarifaActual = tarifaActual;
+	}
+
+	/**
+	 * @return the sancion
+	 */
+	public String getSancion()
+	{
+		return sancion;
+	}
+
+	/**
+	 * @param sancion
+	 *           the sancion to set
+	 */
+	public void setSancion(final String sancion)
+	{
+		this.sancion = sancion;
+	}
+
+	/**
+	 * @return the intereses
+	 */
+	public String getIntereses()
+	{
+		return intereses;
+	}
+
+	/**
+	 * @param intereses
+	 *           the intereses to set
+	 */
+	public void setIntereses(final String intereses)
+	{
+		this.intereses = intereses;
+	}
+
+	/**
+	 * @return the valorSemafor
+	 */
+	public String getValorSemafor()
+	{
+		return valorSemafor;
+	}
+
+	/**
+	 * @param valorSemafor
+	 *           the valorSemafor to set
+	 */
+	public void setValorSemafor(final String valorSemafor)
+	{
+		this.valorSemafor = valorSemafor;
+	}
+
+	/**
+	 * @return the descuentoProntop
+	 */
+	public String getDescuentoProntop()
+	{
+		return descuentoProntop;
+	}
+
+	/**
+	 * @param descuentoProntop
+	 *           the descuentoProntop to set
+	 */
+	public void setDescuentoProntop(final String descuentoProntop)
+	{
+		this.descuentoProntop = descuentoProntop;
+	}
+
+	/**
+	 * @return the totalPagar
+	 */
+	public String getTotalPagar()
+	{
+		return totalPagar;
+	}
+
+	/**
+	 * @param totalPagar
+	 *           the totalPagar to set
+	 */
+	public void setTotalPagar(final String totalPagar)
+	{
+		this.totalPagar = totalPagar;
+	}
+
+	/**
+	 * @return the valorPagar
+	 */
+	public String getValorPagar()
+	{
+		return valorPagar;
+	}
+
+	/**
+	 * @param valorPagar
+	 *           the valorPagar to set
+	 */
+	public void setValorPagar(final String valorPagar)
+	{
+		this.valorPagar = valorPagar;
+	}
+
+	/**
+	 * @return the totalPagoVol
+	 */
+	public String getTotalPagoVol()
+	{
+		return totalPagoVol;
+	}
+
+	/**
+	 * @param totalPagoVol
+	 *           the totalPagoVol to set
+	 */
+	public void setTotalPagoVol(final String totalPagoVol)
+	{
+		this.totalPagoVol = totalPagoVol;
+	}
+
+	/**
+	 * @return the errores
+	 */
+	public List<ErrorPubli> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<ErrorPubli> errores)
+	{
+		this.errores = errores;
 	}
 
 
