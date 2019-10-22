@@ -239,7 +239,7 @@ ACC.opcionDeclaraciones = {
 	
 	obtenerListaDeclaraciones : function() {
 
-		//debugger;
+		debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
 	        var claveImpuesto = $("#seleccion").val();  	       
@@ -271,7 +271,7 @@ ACC.opcionDeclaraciones = {
 	
 	obtenerListaDeclaraciones_certiPagos : function() {
 
-//		debugger;
+		debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
 			var claveImpuesto = $("#seleccion").val();  	       
@@ -388,27 +388,23 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponseSeleccion : function(infoActual,infoResponse) {
 
-		//debugger;
+		debugger;
 		ACC.opcionDeclaraciones.vaciarTablasInfo();
 		
 		if (infoResponse.errores != null){
 			alert(infoResponse.errores[0].txtmsj);
 		}else{
 			if(infoActual.claveImpuesto == '0002'){
-				$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index1,value1){
-					if(value1.numObjeto != ""){
-						$.each(infoResponse.customerData.vehicular, function (index2,value2){
-							if(value1.numObjeto == value2.numObjeto){
-//								desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
-								$('#table-vehicular1').append("<tr>"+ 
-										'<td>' + value2.placa + '</td>'+
-										'<td>' + value2.marca + '</td>'+
-										'<td><input id="registroNum_'+ index1 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'"' +">" + "</td>"+
-										"</tr>");
-							}
-						});
-					}
-				});
+				if(infoResponse.vehicular.length > 0){
+					$.each(infoResponse.vehicular, function (index,value){
+						$('#table-vehicular1').append("<tr>"+ 
+								'<td>' + value.placa + '</td>'+
+								'<td>' + value.marca + '</td>'+
+								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
+								"</tr>");
+					});
+				}
+				
 			}
 			if(infoActual.claveImpuesto == '0003'){
 				$('#table-ica1').append("<tr>"+ 
@@ -480,7 +476,8 @@ ACC.opcionDeclaraciones = {
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse,filtroPeriodo) {
 		var desc_clavePeriodo = "";
 		
-//debugger;
+		
+debugger;
 		if(infoResponse.declaracionesCertiPagos.declaraciones != null){
 			if(infoResponse.declaracionesCertiPagos.declaraciones.length > 0){
 				
@@ -792,6 +789,7 @@ ACC.opcionDeclaraciones = {
 	obtener_desc_clavePeriodo : function (clavePeriodo){
 //		debugger;
 		var descripcion = "";
+		var des_periodo = "";
 		
 		tipo_periodo = ACC.opcionDeclaraciones.obtener_tipoPeriodo(clavePeriodo);
 		if(tipo_periodo == "B"){
@@ -803,7 +801,11 @@ ACC.opcionDeclaraciones = {
     		});
 		}
 		des_anio = clavePeriodo.substring(0,2);
-		descripcion = "20" + des_anio + " periodo " + des_periodo;
+		if(des_periodo == ""){
+			descripcion = "20" + des_anio;	
+		} else{
+			descripcion = "20" + des_anio + " periodo " + des_periodo;	
+		}
 		
 		
 		return descripcion;

@@ -293,7 +293,6 @@ public class DeclaracionesPageController extends AbstractPageController
 		if (gasolinaService.ocurrioErrorListaDeclara(listaDeclaracionesResponse) != true)
 		{
 			gasolinaService.determinarRegistrosDeclaraciones(infoVista, listaDeclaracionesResponse);
-			infoVista.setDeclaracionesCertiPagos(listaDeclaracionesResponse);
 			infoVista.setErrores(listaDeclaracionesResponse.getErrores());
 		}
 		else
