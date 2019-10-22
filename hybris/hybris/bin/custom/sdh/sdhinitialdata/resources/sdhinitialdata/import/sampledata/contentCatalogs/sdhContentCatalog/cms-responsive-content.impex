@@ -659,7 +659,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 #->INI dev-eduardo Agregar menu DECLARACION 04/01/2019
 ;PresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;PresentarDeclaracionNavNode;PresentarDeclaracionLink
-;ListaDeclaracionFirmaNavNodeEntry;;Lista declaracion firma Navigation Node Entry;ListaDeclaracionFirmaNavNode;ListaDeclaracionFirmaLink
+#->;ListaDeclaracionFirmaNavNodeEntry;;Lista declaracion firma Navigation Node Entry;ListaDeclaracionFirmaNavNode;ListaDeclaracionFirmaLink
 #->FIN dev-eduardo Agregar menu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
