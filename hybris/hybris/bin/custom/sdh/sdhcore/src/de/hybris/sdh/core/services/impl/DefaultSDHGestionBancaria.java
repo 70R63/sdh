@@ -24,11 +24,13 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     public boolean validade7ZipCertificates(MultipartFile multipartFile) {
         String updatedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.path");
         String approvedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.aprobados.path");
+        String autoridadesPath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.autoridades.path");
+
         boolean isValid = false;
 
         String nameFile = this.updateFileToServer(multipartFile);
         if(Objects.nonNull(nameFile)){
-            isValid =  this.verifyFile(updatedFilesFolder + nameFile , approvedFilesFolder + nameFile);
+            isValid =  this.verifyFile(updatedFilesFolder + nameFile , approvedFilesFolder + nameFile, autoridadesPath);
             LOG.info("updatedFilesFolder:" + updatedFilesFolder + nameFile);
             LOG.info("updatedFilesFolder:" + approvedFilesFolder + nameFile);
         }
@@ -57,16 +59,14 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-    public boolean verifyFile(String source, String target){
+    public boolean verifyFile(String source, String target, String autoridades){
         boolean isValidCertificate = false;
         FileSignVerifier fv = null;
         String resultado = "";
         CACertificateManager caManager = new CACertificateManager();
-        String autoridadesPath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.autoridades.path");
-
 
         try {
-            caManager.setPathTrustedCA(autoridadesPath);
+            caManager.setPathTrustedCA(autoridades);
             fv = new FileSignVerifier(caManager);
             resultado = fv.signatureCheck(source, target);
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 
         LOG.info("VerifyFile");
         LOG.info("Resultado " + resultado);
-        LOG.info("autoridadesFolderPath: " + autoridadesPath);
+        LOG.info("autoridadesFolderPath: " + autoridades);
         return isValidCertificate;
     }
 
