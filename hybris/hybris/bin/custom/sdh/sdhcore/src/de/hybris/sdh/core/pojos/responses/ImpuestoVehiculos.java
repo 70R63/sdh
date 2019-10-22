@@ -19,7 +19,8 @@ public class ImpuestoVehiculos
 	private String blindado;
 	private String cilindraje;
 	private String numObjeto;
-	
+	private String anioGravable;
+
 	/**
 	 * @return the placa
 	 */
@@ -138,7 +139,7 @@ public class ImpuestoVehiculos
 	{
 		this.numPuertas = numPuertas;
 	}
-	
+
 	/**
 	 * @return the blindado
 	 */
@@ -146,7 +147,7 @@ public class ImpuestoVehiculos
 	{
 		return blindado;
 	}
-	
+
 	/**
 	 * @param blindado
 	 *           the blindado to set
@@ -155,7 +156,7 @@ public class ImpuestoVehiculos
 	{
 		this.blindado = blindado;
 	}
-	
+
 	/**
 	 * @return the cilindraje
 	 */
@@ -163,7 +164,7 @@ public class ImpuestoVehiculos
 	{
 		return cilindraje;
 	}
-	
+
 	/**
 	 * @param cilindraje
 	 *           the cilindraje to set
@@ -179,7 +180,7 @@ public class ImpuestoVehiculos
 	{
 		return numObjeto;
 	}
-	
+
 	/**
 	 * @param numObjeto
 	 *           the numObjeto to set
@@ -187,6 +188,23 @@ public class ImpuestoVehiculos
 	public void setNumObjeto(final String numObjeto)
 	{
 		this.numObjeto = numObjeto;
+	}
+
+	/**
+	 * @return the anioGravable
+	 */
+	public String getAnioGravable()
+	{
+		return anioGravable;
+	}
+
+	/**
+	 * @param anioGravable
+	 *           the anioGravable to set
+	 */
+	public void setAnioGravable(final String anioGravable)
+	{
+		this.anioGravable = anioGravable;
 	}
 
 

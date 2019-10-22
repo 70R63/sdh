@@ -609,6 +609,53 @@ debugger;
 	},
 	
 	
+	updateFromResponseSeleccion_presentarDec : function(infoActual,infoResponse) {
+
+		var flagHuboRegistros = false;
+		debugger;
+		ACC.opcionDeclaraciones.vaciarTablasInfo_presentarDec();
+		
+		if (infoResponse.errores != null){
+			alert(infoResponse.errores[0].txtmsj);
+		}else{
+			if(infoActual.claveImpuesto == '2'){
+				var urlDeclaracion = "contribuyentes/sobrevehiculosautomotores/declaracion";
+				var urlPrefijo = obtenerURLBase();
+				if(infoResponse.customerData.vehicular.length > 0){
+					$.each(infoResponse.customerData.vehicular, function (index,value){
+						if( ( value.numObjeto != null  && value.numObjeto != "" ) 
+								//&& (value.anioGravable == infoActual.anoGravable)
+								){
+							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + value.anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.customerData.infoContrib.numBP + '&numForma=' ;
+							$('#table-vehicular1').append("<tr>"+ 
+									'<td>' + value.placa + '</td>'+
+									'<td>' + value.marca + '</td>'+ 
+									'<td>' + value.linea + '</td>'+ 
+									'<td>' + value.modelo + '</td>'+ 
+									'<td>' + value.clase + '</td>'+ 
+									'<td>' + value.carroceria + '</td>'+ 
+									'<td>' + value.numPuertas + '</td>'+ 
+									'<td>' + value.blindado + '</td>'+ 
+									'<td>' + value.cilindraje + '</td>'+ 
+									'<td><a href="' + url + '">Presentar Declaracion</a> </td>'+
+									"</tr>");
+						}
+					});
+				}
+				
+			}
+		}
+		
+		if(flagHuboRegistros == true){
+	        var btnAction = document.getElementById('action');
+	        btnAction.style.display = 'block';
+		}
+		
+	
+	},
+	
+	
+	
 	habilitarFiltroPeriodo : function(infoActual,infoResponse) {
 
 		
@@ -736,6 +783,23 @@ debugger;
 
 		if(claveImpuesto == "0003" || claveImpuesto == "0004" || claveImpuesto == "0005"){
 			validacionOK = true;
+		}
+		
+		return validacionOK;
+	},
+	
+	
+	validarAntesSubmit_presentarDec : function() {
+
+//		debugger;
+        var claveImpuesto = $("#impuesto").val();  	       
+        var anoGravable = $("#anoGravable").val(); 	       
+		var validacionOK = false;
+
+		if(claveImpuesto == "2"){
+			if(anoGravable != "" && anoGravable != "00"){
+				validacionOK = true;
+			}
 		}
 		
 		return validacionOK;
@@ -948,7 +1012,73 @@ debugger;
 		}
 		
 		
-	}
+	},
+	
+	
+	obtenerListaDeclaraciones_presentarDec : function(claveImpuesto) {
+
+		debugger;
+		if(ACC.opcionDeclaraciones.validarAntesSubmit_presentarDec()){
+	        var anoGravable = $("#anoGravable").val();
+			var dataActual = {};
+
+			
+			dataActual.claveImpuesto = claveImpuesto;
+			dataActual.anoGravable = anoGravable;
+			
+			
+			$.ajax({
+				url : ACC.presentarDecListaDeclaracionesURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.opcionDeclaraciones.updateFromResponseSeleccion_presentarDec(dataActual,dataResponse);
+				},
+				error : function() {
+					alert("Error procesar la solicitud");	
+				}
+			});
+		}
+		
+		
+	},
+	
+	
+	prepararVehicular_presentarDec : function(claveImpuesto){
+		
+//		debugger;
+		if(claveImpuesto == '2'){ 
+	        var divPeriodo2 = document.getElementById('seccionPeriodo2');
+	        divPeriodo2.style.display = 'none';
+	        
+	        var btnAction = document.getElementById('action');
+	        btnAction.style.display = 'none';
+	        
+	        var tblVehicular = document.getElementById('table-vehicular');
+	        tblVehicular.style.display = 'block';
+	        
+	        var anoGravable = document.getElementById('anoGravable');
+	        var d = new Date();
+	        var n = d.getFullYear();
+	        
+			$("#anoGravable").find("option:gt(0)").remove();
+
+			$('#anoGravable').append('<option value="'+ n +'">'+ n + "</option>");
+			n--;
+			$('#anoGravable').append('<option value="'+ n +'">'+ n + "</option>");
+			n--;
+			$('#anoGravable').append('<option value="'+ n +'">'+ n + "</option>");
+			
+			
+		}
+		
+	},
+	
+	
+	vaciarTablasInfo_presentarDec : function(){
+		$("#table-vehicular1").find("tr:gt(0)").remove();
+		$("#table-myTable").find("tr:gt(0)").remove();
+	},
 
 	
 

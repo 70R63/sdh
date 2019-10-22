@@ -67,32 +67,42 @@
 	};
 
 	function onChange() {
-
-		debugger;
-		form = document.getElementById("forma");
-
-		input = document.createElement('input');
-		input.setAttribute('name', 'skipReques');
-		input.setAttribute('value', 'X');
-		input.setAttribute('type', 'hidden');
-		form.appendChild(input);
-
-		form.submit();
+		var tipoImpuesto = document.getElementById("impuesto").value;
+		
+// 		debugger;
+		if(tipoImpuesto == '2'){ //vehicular
+			ACC.opcionDeclaraciones.prepararVehicular_presentarDec(tipoImpuesto);
+		}else{ //otros impuestos
+			form = document.getElementById("forma");
+	
+			input = document.createElement('input');
+			input.setAttribute('name', 'skipReques');
+			input.setAttribute('value', 'X');
+			input.setAttribute('type', 'hidden');
+			form.appendChild(input);
+	
+			form.submit();
+		}
 	}
 
 	function onChangeAnioGravable() {
+// 		debugger;
 		var impuestoVal = document.getElementById("impuesto").value;
-		if (impuestoVal == "4" || impuestoVal == "6") {
-			form = document.getElementById("forma");
-			input = document.createElement('input');
-			input.setAttribute('name', 'skipReques');
-			input.setAttribute('value', '');
-			input.setAttribute('type', 'hidden');
-			form.appendChild(input);
-			form.submit();
+		if(impuestoVal == '2'){ //vehicular
+			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_presentarDec(impuestoVal);
+		}else{ //otros impuestos
+			if (impuestoVal == "4" || impuestoVal == "6") {
+				form = document.getElementById("forma");
+				input = document.createElement('input');
+				input.setAttribute('name', 'skipReques');
+				input.setAttribute('value', '');
+				input.setAttribute('type', 'hidden');
+				form.appendChild(input);
+				form.submit();
+			}
+	
+			ajustaPeriodo();
 		}
-
-		ajustaPeriodo();
 	}
 
 	function ajustaPeriodo() {
@@ -121,5 +131,10 @@
 			}
 		}
 
+	}
+	
+	function obtenerURLBase(){
+		debugger;
+		return '<c:url value="/" />';
 	}
 </script>

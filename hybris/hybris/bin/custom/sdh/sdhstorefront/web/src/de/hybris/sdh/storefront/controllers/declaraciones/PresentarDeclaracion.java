@@ -11,7 +11,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -20,6 +19,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
@@ -31,6 +31,7 @@ import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
@@ -59,6 +60,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -115,6 +117,9 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 	@Resource(name = "sdhDetalleVehiculosService")
 	SDHDetalleVehiculosService sdhDetalleVehiculosService;
+
+	@Resource(name = "sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
@@ -207,7 +212,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
 				final DetGasResponse detalleResponse;
 				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
-				List<SobreTasaGasolinaTabla> tablaDocs;
+				final List<SobreTasaGasolinaTabla> tablaDocs;
 				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 				SDHValidaMailRolResponse detalleContribuyente;
 				String[] mensajesError;
@@ -614,6 +619,48 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		map.put("2016", "2016");
 
 		return map;
+	}
+
+
+	@RequestMapping(value = "/contribuyentes/presentar-declaracion/listaDeclaraciones", method = RequestMethod.GET)
+	@ResponseBody
+	public OpcionDeclaracionesVista listaDeclaracionesGET(@ModelAttribute("infoVista")
+	final OpcionDeclaracionesVista infoVista, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+
+		System.out.println("------------------En GET Presentar declaracion lista declaraciones------------------------");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+
+		String bp = "";
+		String impuesto = "";
+		String anioGravable = "";
+		String periodo = "";
+
+
+		bp = customerModel.getNumBP();
+		if (infoVista.getCustomerData() == null)
+		{
+			infoVista.setCustomerData(sdhCustomerFacade.getRepresentadoFromSAP(bp));
+		}
+
+
+		impuesto = infoVista.getClaveImpuesto();
+		anioGravable = infoVista.getAnoGravable();
+		periodo = infoVista.getPeriodo();
+
+		infoVista.setUrlDownload(null);
+		infoVista.setPublicidadExt(null);
+		infoVista.setGasolina(null);
+		infoVista.setDelineacion(null);
+		infoVista.setIca(null);
+		infoVista.setReteIca(null);
+		infoVista.setErrores(null);
+
+
+
+		return infoVista;
 	}
 
 
