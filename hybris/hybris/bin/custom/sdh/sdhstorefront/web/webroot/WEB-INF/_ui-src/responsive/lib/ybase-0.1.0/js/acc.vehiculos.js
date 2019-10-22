@@ -236,7 +236,7 @@ ACC.vehiculos = {
 		            	if(data.errores != null)
 	            		{
 		            		
-							if (data.errores[0].txtmsj != null){
+							if (data.errores[0].txtmsj != null && data.errores[0].txtmsj != ""){
 								alert(data.errores[0].txtmsj);
 								
 								//$( "#dialogVehiculos" ).dialog( "open" );
@@ -258,6 +258,17 @@ ACC.vehiculos = {
 							
 								
 		            			//$('#generaDeclaracionButton').prop("disabled", true);
+							}else{
+								$("#valimpcar").val(data.impuestoCargo);
+								$("#valsemafo").val(data.valorSemafor);
+								$("#despronpag").val(data.descuentoProntop);
+								$("#taract").val(data.tarifaActual);
+								$("#totpag").val(data.totalPagar);
+								$("#sancion").val(data.sancion);
+								$("#valpagar").val(data.valorPagar);
+								$("#intereses").val(data.intereses);
+								$("#totpagvol").val(data.totalPagoVol);
+								$("#numForm").val(data.numForm);
 							}
 		            		
 	            		}else
