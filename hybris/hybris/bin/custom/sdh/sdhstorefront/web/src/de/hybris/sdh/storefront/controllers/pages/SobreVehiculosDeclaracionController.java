@@ -19,7 +19,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -366,8 +365,11 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			calcVehiculosResponse = mapper.readValue(sdhCalcVehiculosService.calcVehiculos(calcVehiculosRequest),
-					CalcVehiculosResponse.class);
+
+			String wsresponse = sdhCalcVehiculosService.calcVehiculos(calcVehiculosRequest);
+			wsresponse = wsresponse.replaceAll("\"id_Msj\"", "\"idmsj\"");
+			wsresponse = wsresponse.replaceAll("\"txt_msj\"", "\"txtmsj\"");
+			calcVehiculosResponse = mapper.readValue(wsresponse, CalcVehiculosResponse.class);
 
 			final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
 
@@ -381,6 +383,8 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 			vehiculosFormDeclaracion.setTotalPagar(calcVehiculosResponse.getTotalPagar());
 			vehiculosFormDeclaracion.setValorPagar(calcVehiculosResponse.getValorPagar());
 			vehiculosFormDeclaracion.setTotalPagoVol(calcVehiculosResponse.getTotalPagoVol());
+
+
 		}
 
 

@@ -233,13 +233,15 @@ ACC.vehiculos = {
 					type : "POST",
 					success : function(data) {
 						debugger;
-		            	if(data.errores == null)
+		            	if(data.errores[0] != null)
 	            		{
-		            		$( "#dialogVehiculos" ).dialog( "open" );
-		            		$("#vehiculosDialogContent").html("");
-		            		$.each(data.errores, function( index, value ) {
-    	            			$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
-    	            		});
+		            		alert(data.errores[0].txtmsj);
+							
+							//$( "#dialogVehiculos" ).dialog( "open" );
+		            		//$("#vehiculosDialogContent").html("");
+		            		//$.each(data.errores, function( index, value ) {
+    	            		//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+    	            		//});
 		            		
 		            		$("#valimpcar").val("");
 	            			$("#valsemafo").val("");

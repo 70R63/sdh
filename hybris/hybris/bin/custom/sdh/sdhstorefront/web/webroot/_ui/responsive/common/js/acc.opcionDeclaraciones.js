@@ -394,6 +394,22 @@ ACC.opcionDeclaraciones = {
 		if (infoResponse.errores != null){
 			alert(infoResponse.errores[0].txtmsj);
 		}else{
+			if(infoActual.claveImpuesto == '0002'){
+				$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index1,value1){
+					if(value1.numObjeto != ""){
+						$.each(infoResponse.customerData.vehicular, function (index2,value2){
+							if(value1.numObjeto == value2.numObjeto){
+//								desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
+								$('#table-vehicular1').append("<tr>"+ 
+										'<td>' + value2.placa + '</td>'+
+										'<td>' + value2.marca + '</td>'+
+										'<td><input id="registroNum_'+ index1 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'"' +">" + "</td>"+
+										"</tr>");
+							}
+						});
+					}
+				});
+			}
 			if(infoActual.claveImpuesto == '0003'){
 				$('#table-ica1').append("<tr>"+ 
 						'<td>' + "Industria y Comercio" + '</td>'+
