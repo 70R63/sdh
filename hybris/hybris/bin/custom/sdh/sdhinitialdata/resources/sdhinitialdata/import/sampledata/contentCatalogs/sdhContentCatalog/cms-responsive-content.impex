@@ -151,6 +151,19 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; DeclaracionesLink			 ; DECLARACIONES LINK   				   ;"/contribuyentes/consultas/declaraciones";;;;;
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
+
+#->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+; ; ARCertPagoLink                 ; CONSULTAS LINK                      ; "/agenteRetenedor/consultas/certipagos" ;;;;;
+; ; ARObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/agenteRetenedor/consultas/obligaciones" ;;;;;
+; ; ARRelPagosLink                 ; RELACION DE PAGOS LINK              ; "/agenteRetenedor/consultas/relacionpagos" ;;;;;
+; ; AREdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/agenteRetenedor/estado-de-cuenta" ;;;;;
+; ; ARCertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/agenteRetenedor/consultas/certideclaraciones" ;;;;;
+; ; ARDeclaracionesLink			 ; DECLARACIONES LINK   				   ;"/agenteRetenedor/consultas/declaraciones";;;;;
+#->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
+
+
+
 #->INI dev-maria Agregar submenu Reportantes 04/01/2019
 ; ; CargaLink               	 ; CARGA LINK              		; "/reportantes/cargadocumentos";;;;;
 ; ; HistoricoLink                ; HISTORICO LINK              ;  "/reportantes/historico";;;;;
@@ -424,7 +437,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
 ;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode
-;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertPagoNavNode, ARObligacionesPendNavNode, ARRelPagosNavNode, ARCertDeclaraNavNode
+;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, ARDeclaracionesNavNode, AREdoCuentaNavNode
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
 ;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
@@ -548,7 +561,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
 ;ARRelPagosNavNode;;Relacion Pagos Link;ARRelPagosNavNode
 ;ARCertDeclaraNavNode;; Certificacion Declaracion Link;ARCertDeclaraNavNode
-
+;ARDeclaracionesNavNode;; Declaraciones Link; ARDeclaracionesNavNode
+;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
 
 ;CargaNavNode;;Carga Link;CargaNavNode
 ;HistoricoNavNode;;Historico Link;HistoricoNavNode
@@ -669,11 +683,12 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;DeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;DeclaracionesNavNode;DeclaracionesLink
 
 
-;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;CertPagoLink
-;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ObligacionesPendLink
-;ARRelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;ARRelPagosNavNode;RelPagosLink
-;ARCertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;ARCertDeclaraNavNode;CertDeclaraLink
-
+;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;ARCertPagoLink
+;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ARObligacionesPendLink
+;ARRelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;ARRelPagosNavNode;ARRelPagosLink
+;ARCertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;ARCertDeclaraNavNode;ARCertDeclaraLink
+;ARDeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;ARDeclaracionesNavNode;ARDeclaracionesLink
+;AREdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;AREdoCuentaNavNode;AREdoCuentaLink
 
 ;CargaNavNodeEntry;;Carga Navigation Node Entry;CargaNavNode;CargaLink
 ;HistoricoNavNodeEntry;;Historico Navigation Node Entry;HistoricoNavNode;HistoricoLink
