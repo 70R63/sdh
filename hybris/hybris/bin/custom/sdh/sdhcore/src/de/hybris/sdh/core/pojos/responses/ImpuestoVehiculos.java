@@ -20,6 +20,7 @@ public class ImpuestoVehiculos
 	private String cilindraje;
 	private String numObjeto;
 	private String anioGravable;
+	private String numForm;
 
 	/**
 	 * @return the placa
@@ -205,6 +206,23 @@ public class ImpuestoVehiculos
 	public void setAnioGravable(final String anioGravable)
 	{
 		this.anioGravable = anioGravable;
+	}
+
+	/**
+	 * @return the numForm
+	 */
+	public String getNumForm()
+	{
+		return numForm;
+	}
+
+	/**
+	 * @param numForm
+	 *           the numForm to set
+	 */
+	public void setNumForm(final String numForm)
+	{
+		this.numForm = numForm;
 	}
 
 

@@ -621,12 +621,10 @@ debugger;
 			if(infoActual.claveImpuesto == '2'){
 				var urlDeclaracion = "contribuyentes/sobrevehiculosautomotores/declaracion";
 				var urlPrefijo = obtenerURLBase();
-				if(infoResponse.customerData.vehicular.length > 0){
-					$.each(infoResponse.customerData.vehicular, function (index,value){
-						if( ( value.numObjeto != null  && value.numObjeto != "" ) 
-								//&& (value.anioGravable == infoActual.anoGravable)
-								){
-							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + value.anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.customerData.infoContrib.numBP + '&numForma=' ;
+				if(infoResponse.vehicular.length > 0){
+					$.each(infoResponse.vehicular, function (index,value){
+						if(value.placa != null && value.placa !=""){
+							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + value.anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP + '&numForma=' + value.numForm ;
 							$('#table-vehicular1').append("<tr>"+ 
 									'<td>' + value.placa + '</td>'+
 									'<td>' + value.marca + '</td>'+ 

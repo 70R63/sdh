@@ -61,7 +61,7 @@ public class OpcionDeclaracionesVista
 	private String moneda;
 	private String numDocPago;
 
-
+	private String numBP;
 
 	/**
 	 * @return the fechaCompensa
@@ -537,6 +537,23 @@ public class OpcionDeclaracionesVista
 	public void setVehicular(final List<ImpuestoVehiculos> vehicular)
 	{
 		this.vehicular = vehicular;
+	}
+
+	/**
+	 * @return the numBP
+	 */
+	public String getNumBP()
+	{
+		return numBP;
+	}
+
+	/**
+	 * @param numBP
+	 *           the numBP to set
+	 */
+	public void setNumBP(final String numBP)
+	{
+		this.numBP = numBP;
 	}
 
 
