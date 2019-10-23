@@ -53,14 +53,23 @@ public class GestionBancariaController extends AbstractPageController {
     public String pagoEnLineaForm(@ModelAttribute("importConciliacionForm") final ImportConciliacionForm importConciliacionForm,
                                   final RedirectAttributes redirectAttributes ) throws IOException
     {
+        boolean verifiedOk = sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
         redirectAttributes.addFlashAttribute("importConciliacionForm", importConciliacionForm);
-        GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
-                "conciliaciones.upload.messages.success", new Object[]
-                        { importConciliacionForm.getConciliacionFile().getOriginalFilename() });
 
         LOG.info("File-reading");
         LOG.info(importConciliacionForm.getConciliacionFile());
-        LOG.info(sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile()));
+        LOG.info("Result: " + verifiedOk);
+
+        if(verifiedOk){
+            GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
+                    "conciliaciones.upload.messages.success", new Object[]
+                            { importConciliacionForm.getConciliacionFile().getOriginalFilename() });
+        }else{
+            GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+                    "conciliaciones.upload.messages.error", new Object[]
+                            { importConciliacionForm.getConciliacionFile().getOriginalFilename() });
+        }
+
 
         return "redirect:/gestionBancaria/uploadFile";
     }
