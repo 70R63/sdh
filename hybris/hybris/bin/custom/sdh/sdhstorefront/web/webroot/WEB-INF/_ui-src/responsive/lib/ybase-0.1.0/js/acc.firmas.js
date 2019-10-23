@@ -114,7 +114,7 @@ ACC.frimas = {
 							$("#firmasDialogContent").html($("#firmasDialogContent").html()+value.txtmsj+"<br>");
 						}
 						if(value.idmsj == "0"){
-							$(".GeneraDeclaracionButton").attr("disabled",false);
+							$(".generaDeclaracionVehiculosButton").attr("disabled",false);
 						}
 
 					});
