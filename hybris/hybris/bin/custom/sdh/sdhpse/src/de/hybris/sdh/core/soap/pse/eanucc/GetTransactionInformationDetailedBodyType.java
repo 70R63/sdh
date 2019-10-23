@@ -152,4 +152,11 @@ public class GetTransactionInformationDetailedBodyType  implements java.io.Seria
             _javaType, _xmlType, typeDesc);
     }
 
+    @Override
+    public String toString() {
+        return "GetTransactionInformationDetailedBodyType{" +
+                "entityCode='" + entityCode + '\'' +
+                ", trazabilityCode='" + trazabilityCode + '\'' +
+                '}';
+    }
 }

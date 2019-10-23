@@ -16,9 +16,7 @@ import de.hybris.sdh.core.services.SDHCredibancoJwt;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
-import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationBodyType;
-import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.*;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
 import java.text.DateFormat;
@@ -141,14 +139,24 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
 			getTransactionInformationBodyType.setTrazabilityCode(trazabilityCode);
 
-
-			//LOG.error("getTransactionInformationBodyType:" + getTransactionInformationBodyType);
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
+
+			final GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType = new GetTransactionInformationDetailedBodyType();
+			getTransactionInformationDetailedBodyType.setTrazabilityCode(trazabilityCode);
+
+			final GetTransactionInformationDetailedResponseBodyType response1 = pseServices.getTransactionInformationDetailed(
+					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationDetailedBodyType);
+
+
 
 			LOG.info("----- Response Data GetTransactionInformationBodyType -------");
 			LOG.info(response);
             LOG.info("----- Response Data GetTransactionInformationBodyType -------");
+
+			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
+			LOG.info(response1);
+			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
 
 			transactionState = this.updateResponse(pseTransactionsLogModel, response);
 		}
