@@ -71,6 +71,6 @@ public class GestionBancariaController extends AbstractPageController {
         }
 
 
-        return "redirect:/gestionBancaria/uploadFile";
+        return "redirect:/autorizados/entidades/reportarinfo";
     }
 }

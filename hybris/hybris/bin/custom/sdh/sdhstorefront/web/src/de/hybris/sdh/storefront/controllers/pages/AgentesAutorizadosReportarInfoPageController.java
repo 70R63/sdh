@@ -6,6 +6,7 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
@@ -14,15 +15,18 @@ import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHGestionBancaria;
 import de.hybris.sdh.core.services.SDHUpdateRitService;
 
 import javax.annotation.Resource;
 
+import de.hybris.sdh.storefront.controllers.pages.forms.ImportConciliacionForm;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -57,6 +61,9 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "sdhGestionBancaria")
+	private SDHGestionBancaria sdhGestionBancaria;
+
 	@RequestMapping(value = "/autorizados/entidades/reportarinfo", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String autorizados(final Model model) throws CMSItemNotFoundException
@@ -74,14 +81,13 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/autorizados/entidades/reportarinfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/autorizados/entidades", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String autorizadosreportarpost(final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes)
-			throws CMSItemNotFoundException
+	public String autorizadosreportarpost(@ModelAttribute("importConciliacionForm") final ImportConciliacionForm importConciliacionForm,
+										  final RedirectAttributes redirectAttributes )throws CMSItemNotFoundException
 	{
 		System.out.println("------------------Entro al POST de Agentes Autorizados reportar------------------------");
-
+		boolean verifiedOk = sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
 		final UpdateRitRequest request = new UpdateRitRequest();
 		UpdateRitResponse response = new UpdateRitResponse();
 		response.setRitUpdated(false);
@@ -106,7 +112,18 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 			LOG.error("Error en la carga de archivos : " + e.getMessage());
 		}
 
-		return REDIRECT_TO_AUTORIZADOS_REPORTAR_PAGE;
+		if(verifiedOk){
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
+					"conciliaciones.upload.messages.success", new Object[]
+							{ importConciliacionForm.getConciliacionFile().getOriginalFilename() });
+		}else{
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"conciliaciones.upload.messages.error", new Object[]
+							{ importConciliacionForm.getConciliacionFile().getOriginalFilename() });
+		}
+
+
+		return "redirect:/autorizados/entidades/reportarinfo";
 	}
 
 }

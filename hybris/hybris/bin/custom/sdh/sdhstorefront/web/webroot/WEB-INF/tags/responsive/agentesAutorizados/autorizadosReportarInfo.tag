@@ -7,6 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -28,7 +29,6 @@
 			</table>
 		</div>
 	</div>
-
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline text-center">
@@ -60,40 +60,34 @@
 
 	</div>
 
-	<form:form action="/sdhstorefront/es/autorizados/entidades/reportarinfo" method="POST"	>
+	<form:form commandName="importConciliacionForm" enctype="multipart/form-data" action="/sdhstorefront/es/gestionBancaria/uploadFile" method="POST"	>
 		<div class="row" style="margin-top: 6px;">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label class="control-label required"
-						style="text-transform: none"><spring:theme
-							code="autorizado.reportar.info.tiparch" /></label> <select
-						class="new_alto form-control">
+					<label class="control-label required" style="text-transform: none">
+					        <spring:theme code="autorizado.reportar.info.tiparch" />
+					</label>
+					<select class="new_alto form-control">
 						<option value="Seleccionar">Seleccionar</option>
-						<option value="Formularios">Formularios no generados por
-							la administración</option>
-						<option value="Pagos con debito">Pagos con débito</option>
-						<option value="Pagos con tarjeta de credito">Pagos con
-							tarjeta de crédito</option>
+						<option value="Formularios">Formularios no generados por la administraciï¿½n</option>
+						<option value="Pagos con debito">Pagos con dï¿½bito</option>
+						<option value="Pagos con tarjeta de credito">Pagos con tarjeta de crï¿½dito</option>
 						<option value="Declaraciones">Declaraciones</option>
-						<option value="Electronicos">Electrónicos</option>
-						<option value="Facturas, cupones y ROP's">Facturas,
-							cupones y ROP's</option>
-						<option value="Reportes de adhesivos">Reportes de
-							adhesivos</option>
+						<option value="Electronicos">Electrï¿½nicos</option>
+						<option value="Facturas, cupones y ROP's">Facturas, cupones y ROP's</option>
+						<option value="Reportes de adhesivos">Reportes de adhesivos</option>
 						<option value="Consignaciones">Consignaciones</option>
 						<option value="Publicidad exterior">Publicidad exterior</option>
-						<option value="Sobretasa de la gasolina">Sobretasa de la
-							gasolina</option>
+						<option value="Sobretasa de la gasolina">Sobretasa de la gasolina</option>
 					</select>
-
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label required"
-						style="text-transform: capitalize"><spring:theme
-							code="autorizado.reportar.info.selarch" /></label><input type="file"
-						class="new_alto form-control" id="exampleFormControlFile1" accept=".txt">
+					<label class="control-label required" style="text-transform: capitalize">
+					    <spring:theme code="autorizado.reportar.info.selarch" />
+					 </label>
+					 <input type="file" id="conciliacionFile" name="conciliacionFile" >
 				</div>
 			</div>
 		</div>
@@ -114,6 +108,6 @@
 				</button>
 			</div>
 		</div>
-		
+
 	</form:form>
 </div>
