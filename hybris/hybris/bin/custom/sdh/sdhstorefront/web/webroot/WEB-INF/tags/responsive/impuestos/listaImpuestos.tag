@@ -277,7 +277,7 @@
 	</c:if>
 	
 	<div class="row" id="table-vehicular" style="display: none;">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-6 col-md-offset-2">
 			<table class="table" id="table-vehicular1">
 				<thead style="cellspacing: 10 !important">
 					<tr>
@@ -299,9 +299,11 @@
 									code="sobre.vehiculo.table.blindado" /></label></th>
 						<th><label class="control-label labeltabletd"><spring:theme
 									code="sobre.vehiculo.table.cilindraje" /></label></th>
-						<th style="text-align: center"><label class="control-label"
-							for=""> <spring:theme
-									code="impuestos.presentarDeclaracion.PresentarDeclaracion" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.presndecla" /></label></th>
+<!-- 						<th style="text-align: center"><label class="control-label" -->
+<%-- 							for=""> <spring:theme --%>
+<%-- 									code="impuestos.presentarDeclaracion.PresentarDeclaracion" /></label></th> --%>
 					</tr>
 				</thead>
 				<tbody>

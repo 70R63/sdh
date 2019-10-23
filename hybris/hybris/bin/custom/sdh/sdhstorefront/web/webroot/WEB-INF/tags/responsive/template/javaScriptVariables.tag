@@ -55,6 +55,8 @@
 	</script>
 	
 	<template:sdhJavascriptVariables/>
+	<template:sdhJavascriptVariables2/>
+	<template:sdhJavascriptVariables3/>
 	
 	<template:javaScriptAddOnsVariables/>
 	

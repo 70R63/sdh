@@ -612,7 +612,7 @@ debugger;
 	updateFromResponseSeleccion_presentarDec : function(infoActual,infoResponse) {
 
 		var flagHuboRegistros = false;
-		debugger;
+	
 		ACC.opcionDeclaraciones.vaciarTablasInfo_presentarDec();
 		
 		if (infoResponse.errores != null){
@@ -626,7 +626,6 @@ debugger;
 						if(value.placa != null && value.placa !=""){
 							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + value.anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP + '&numForma=' + value.numForm ;
 							
-							debugger;
 							blindado_vehi.forEach(function (eachBLI) {
 						    		if(eachBLI.id_blindado== value.blindado)
 						    		{
@@ -655,6 +654,26 @@ debugger;
 						    			value.clase = nuevo_clase;
 						    		}
 						    	});
+							 var linea_inicial = value.linea;
+							 
+							 linea_vehi.forEach(function (eachLIN) {
+						    		if(eachLIN.id_linea == value.linea)
+						    		{
+						    			var nuevo_linea = eachLIN.item_linea;
+						    			value.linea = nuevo_linea;
+						    		}
+						    	});
+							 debugger;
+							 if(linea_inicial == value.linea)
+								 {
+								 linea_vehi2.forEach(function (eachLIN) {
+							    		if(eachLIN.id_linea == value.linea)
+							    		{
+							    			var nuevo_linea = eachLIN.item_linea;
+							    			value.linea = nuevo_linea;
+							    		}
+							    	});
+								 }
 							
 
 
