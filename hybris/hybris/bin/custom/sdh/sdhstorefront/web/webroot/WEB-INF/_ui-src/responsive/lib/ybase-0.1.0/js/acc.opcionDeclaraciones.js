@@ -625,6 +625,39 @@ debugger;
 					$.each(infoResponse.vehicular, function (index,value){
 						if(value.placa != null && value.placa !=""){
 							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + value.anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP + '&numForma=' + value.numForm ;
+							
+							debugger;
+							blindado_vehi.forEach(function (eachBLI) {
+						    		if(eachBLI.id_blindado== value.blindado)
+						    		{
+						    			var nuevo_blindado = eachBLI.item_blindado;
+						    			value.blindado = nuevo_blindado;
+						    		}
+						    	});
+							 marca_vehi.forEach(function (eachMAR) {
+						    		if(eachMAR.id_marca == value.marca)
+						    		{
+						    			var nuevo_marca = eachMAR.item_marca;
+						    			value.marca = nuevo_marca;
+						    		}
+						    	});
+							 carroceria_vehi.forEach(function (eachCAR) {
+						    		if(eachCAR.id_carroceria == value.carroceria)
+						    		{
+						    			var nuevo_carroceria = eachCAR.item_carriceria;
+						    			value.carroceria = nuevo_carroceria;
+						    		}
+						    	});
+							 clase_vehi.forEach(function (eachCLA) {
+						    		if(eachCLA.id_clase == value.clase)
+						    		{
+						    			var nuevo_clase = eachCLA.item_clase;
+						    			value.clase = nuevo_clase;
+						    		}
+						    	});
+							
+
+
 							$('#table-vehicular1').append("<tr>"+ 
 									'<td>' + value.placa + '</td>'+
 									'<td>' + value.marca + '</td>'+ 
