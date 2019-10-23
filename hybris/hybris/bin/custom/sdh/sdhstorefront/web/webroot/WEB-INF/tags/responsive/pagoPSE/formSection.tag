@@ -222,9 +222,21 @@
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq false}">
 									<div id="PSE" class="text-center">
-										<button id="buttonPSE" class="btn btn-secondary btn-lg" type="button" onclick="formSubmition()">
-											Pagar
-										</button>
+
+									    <c:choose>
+                                            <c:when test="${empty psePaymentForm.numeroDeReferencia}">
+                                                <button id="buttonPSE" class="btn btn-secondary btn-lg" type="button" onclick="formSubmition()" disabled>
+                                                    Pagar
+                                                </button>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <button id="buttonPSE" class="btn btn-secondary btn-lg" type="button" onclick="formSubmition()" >
+                                                    Pagar
+                                                </button>
+                                            </c:otherwise>
+                                        </c:choose>
+
+
 										<button class="btn btn-secondary btn-lg" type="button" onclick="goBack()">
 											<spring:theme code="impuestos.decGasolina.Pago.Regresar"/>
 										</button>
