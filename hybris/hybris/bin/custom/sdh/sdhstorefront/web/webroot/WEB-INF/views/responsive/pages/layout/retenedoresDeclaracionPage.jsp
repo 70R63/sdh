@@ -5,10 +5,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="retenedores" tagdir="/WEB-INF/tags/responsive/retenedores"%>
+<%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
 
 <retenedores:retenedoresDeclaracionTable />
 <retenedores:retenedoresDeclaracionJuridico />
+<c:url value='${redirectURL}' var="taxRedirection"/>
+<firmas:generalFirmas firmaContribuyenteRedirection="${taxRedirection}"/>
 <retenedores:retenedoresDeclaracionFirma />
 
 <div id="dialogReteICA" title="ReteICA" ><div id="reteICADialogContent"></div></div>
