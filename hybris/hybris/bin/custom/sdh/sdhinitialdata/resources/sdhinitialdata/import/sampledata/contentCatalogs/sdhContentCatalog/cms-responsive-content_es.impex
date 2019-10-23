@@ -145,7 +145,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;ReportantesLink;"Mi información reportada";"Haga clic aquí para ir a su Información Reportada"
 
 ;;RetenedorRegistroLink;"Registro de Retenciones";"Haga clic aquí para ir al registro de sus retenciones"
-;;RetenedorDeclaracionesLink;"Delaraciones por firmar";"Haga clic aquí para ir a las Declaraciones pendientes"
+;;RetenedorDeclaracionesLink;"Declaraciones";"Haga clic aquí para ir a las Declaraciones pendientes"
 
 
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -203,6 +203,9 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;AREdoCuentaLink;"Estado de cuenta";"Haga clic aquí para acceder a la opción de menú Estado de cuenta"
 ;;ARCertDeclaraLink;"Certificaciones de declaración";"Haga clic aquí para acceder a la opción de menú Certificaciones de Declaración"
 ;;ARDeclaracionesLink;"Declaraciones";"Haga clic aquí para acceder a la opción del menú Declaraciones"
+
+
+;;ARPresentarDeclaracionLink;"Generar declaración";"Haga clic aquí para acceder a la opción de menú Generar declaración"
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 ;;EdoCargasLink;"Estado de cargas";"Haga clic aquí para consultar el estado de sus cargas"

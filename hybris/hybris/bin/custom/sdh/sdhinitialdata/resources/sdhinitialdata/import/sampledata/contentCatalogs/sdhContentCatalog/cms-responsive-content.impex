@@ -153,12 +153,14 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
-; ; ARCertPagoLink                 ; CONSULTAS LINK                      ; "/agenteRetenedor/consultas/certipagos" ;;;;;
+; ; ARCertPagoLink                 ; CONSULTAS LINK                      ; "/agenteRetenedor/consultas/arCertipagos" ;;;;;
 ; ; ARObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/agenteRetenedor/consultas/obligaciones" ;;;;;
 ; ; ARRelPagosLink                 ; RELACION DE PAGOS LINK              ; "/agenteRetenedor/consultas/relacionpagos" ;;;;;
 ; ; AREdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/agenteRetenedor/estado-de-cuenta" ;;;;;
 ; ; ARCertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/agenteRetenedor/consultas/certideclaraciones" ;;;;;
-; ; ARDeclaracionesLink			 ; DECLARACIONES LINK   				   ;"/agenteRetenedor/consultas/declaraciones";;;;;
+; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
+; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/presentar-declaracion" ;;;;;
+
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 
@@ -437,14 +439,14 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
 ;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode
-;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, ARDeclaracionesNavNode, AREdoCuentaNavNode
+;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, AREdoCuentaNavNode, ARDeclaracionesNavNode 
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
 ;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
 
 ;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;;Retenedores Detalle Service Requests Menu;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;
 ;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;EdoCargasNavNode
-;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;
+;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode
 #*->-------------------------------------------------------------------------------------------------------------------------
 
 
@@ -563,6 +565,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;ARCertDeclaraNavNode;; Certificacion Declaracion Link;ARCertDeclaraNavNode
 ;ARDeclaracionesNavNode;; Declaraciones Link; ARDeclaracionesNavNode
 ;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
+;ARPresentarDeclaracionNavNode ;;Presentar Declaracion Link;ARPresentarDeclaracionNavNode
+
 
 ;CargaNavNode;;Carga Link;CargaNavNode
 ;HistoricoNavNode;;Historico Link;HistoricoNavNode
@@ -689,6 +693,8 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ARCertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;ARCertDeclaraNavNode;ARCertDeclaraLink
 ;ARDeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;ARDeclaracionesNavNode;ARDeclaracionesLink
 ;AREdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;AREdoCuentaNavNode;AREdoCuentaLink
+
+;ARPresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;ARPresentarDeclaracionNavNode;ARPresentarDeclaracionLink
 
 ;CargaNavNodeEntry;;Carga Navigation Node Entry;CargaNavNode;CargaLink
 ;HistoricoNavNodeEntry;;Historico Navigation Node Entry;HistoricoNavNode;HistoricoLink
@@ -1856,6 +1862,30 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;certiPagoPageComponent	;certiPagoPage Component	;/WEB-INF/views/responsive/pages/layout/certiPagoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;certiPagoPageComponent
 
 #->FIN dev-maria Agregar paginas para Certificacion de Pagos 28/02/2019
+
+
+
+#->INI dev-eduardo Agregar paginas para Certificacion de Pagos 28/02/2019
+
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;arCertiPagoPage 		;Certificacion Pago 	;AccountPageTemplate:sdhContentCatalog:Staged	;/agenteRetenedor/consultas/arCertipagos
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='arCertiPagoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-arCertiPagoPage 		;SideContent				;															;SideContent-arCertiPagoPage						;;;
+								;						;BodyContent-arCertiPagoPage		;BodyContent				;															;BodyContent-arCertiPagoPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-arCertiPagoPage 	;Side Content Slot for Certificacion Pago			;true	;								;;;
+							;							;BodyContent-arCertiPagoPage	;Body Content Slot for Certificacion Pago			;true	;arCertiPagoPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;arCertiPagoPageComponent	;arCertiPagoPage Component	;/WEB-INF/views/responsive/pages/layout/arCertiPagoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;arCertiPagoPageComponent
+
+#->FIN dev-eduardo Agregar paginas para Certificacion de Pagos 28/02/2019
 
 
 #->INI dev-maria Agregar paginas para Obligaciones Pendientes 01/03/2019
