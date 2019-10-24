@@ -21,9 +21,8 @@ import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Stream;
 
 import javax.annotation.Resource;
 
@@ -158,7 +157,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			LOG.info(response1);
 			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
 
-			transactionState = this.updateResponse(pseTransactionsLogModel, response);
+			transactionState = this.updateResponse(pseTransactionsLogModel, response, response1);
 		}
 		else
 		{
@@ -189,11 +188,18 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
 			getTransactionInformationBodyType.setTrazabilityCode(trazabilityCode);
 
-			//ACH Updating Transactions
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
-			this.updateResponse(pseTransactionsLogModel, response);
+
+
+			final GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType = new GetTransactionInformationDetailedBodyType();
+			getTransactionInformationDetailedBodyType.setTrazabilityCode(trazabilityCode);
+
+			final GetTransactionInformationDetailedResponseBodyType response1 = pseServices.getTransactionInformationDetailed(
+					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationDetailedBodyType);
+
+			this.updateResponse(pseTransactionsLogModel, response, response1);
 
 			LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
 					+ pseTransactionsLogModel.getTransactionState() + "] ");
@@ -220,16 +226,21 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	}
 
 	private String updateResponse(final PseTransactionsLogModel pseTransactionsLogModel,
-			final GetTransactionInformationResponseBodyType response)
+			final GetTransactionInformationResponseBodyType response,
+			final GetTransactionInformationDetailedResponseBodyType responseDetailed)
 	{
 		final DateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		HashMap<String, String> map = this.transactionInformationDetailedResponseToHash(responseDetailed);
+
 		String transactionState = null;
 		if (response != null)
 		{
-
 			pseTransactionsLogModel.setSoliciteDate(dateTimeFormat.format(response.getSoliciteDate()));
-			pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(response.getBankProcessDate()));
+			//pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(response.getBankProcessDate()));
+			pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(map.get("bankProcessDate")));
 			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+			pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
+			pseTransactionsLogModel.setPaymentMode(map.get("bankProcessDate"));
 
 			transactionState = response.getTransactionState().getValue();
 
@@ -372,5 +383,20 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	{
 		// XXX Auto-generated method stub
 
+	}
+
+	private HashMap<String, String> transactionInformationDetailedResponseToHash(GetTransactionInformationDetailedResponseBodyType transactionInformationDetailed){
+		HashMap<String, String> map = new HashMap<>();
+
+		LOG.info("-------- TransactionInformationDetailedResponseToHash -------");
+		if(Objects.nonNull(transactionInformationDetailed)){
+			LOG.info("Return Code: " + transactionInformationDetailed.getReturnCode());
+			Stream<GetTransactionInformationDetailedResponseFieldType> stream = Arrays.stream(transactionInformationDetailed.getField());
+			stream.forEach(data -> map.put(data.getName(),data.getValue()));
+		}
+		LOG.info(map);
+		LOG.info("-------- TransactionInformationDetailedResponseToHash -------");
+
+		return map;
 	}
 }

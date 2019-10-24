@@ -760,6 +760,16 @@
 						<modifiers optional="true" /> 
 						<persistence type="property"></persistence>
 					</attribute>
+					<attribute type="java.lang.String" qualifier="paymentOrigin">
+						<description>paymentOrigin</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="paymentMode">
+						<description>paymentMode</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
 					<!-- Credibanco Response -->
 					<attribute type="java.lang.String" qualifier="creApprovalNumber">
 						<description>Get Approval Number</description>
