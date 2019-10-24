@@ -11,6 +11,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -181,11 +182,14 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/contribuyentes/consultas/certideclaraciones", method = RequestMethod.GET)
+	@RequestMapping(value =
+	{ "/contribuyentes/consultas/certideclaraciones",
+			"/agenteRetenedor/consultas/certideclaraciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String certideclaracionesGET(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Declaraciones --------------------------");
+
 
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
@@ -694,6 +698,9 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 		return "redirect:/contribuyentes/consultas/certideclaraciones";
 	}
+
+
+
 
 	private String getAnioGravableFromPublicidadPeriodo(final String perido)
 	{
