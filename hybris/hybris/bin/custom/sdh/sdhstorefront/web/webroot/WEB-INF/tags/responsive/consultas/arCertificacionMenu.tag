@@ -10,7 +10,7 @@
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/contribuyentes/consultas/certipagos"
+<spring:url value="/contribuyentes/consultas/arCertipagos"
 	var="certificacionURL" htmlEscape="false" />
 
 
@@ -49,10 +49,10 @@
 			<div class="col-md-4 col-xs-12 mb-20 no-marginright" id="idImpuesto"
 				style="display: block;">
 				<span class="paso--uno pasos color-sr1">1</span>
-				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICACIÓN DE
-					PAGO</h2>
-				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
-					deseas consultar.</p>
+				
+				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICACIÓN DE PAGO</h2>
+				<p class="pasoClase1 metrophobic">Selecciona el impuesto que deseas consultar.</p>
+				
 				<div class="caja--ser-rel color-sr1">
 					<div class="form-group">
 						<sf:select class="new_alto form-control seleccion" id="seleccion"
@@ -61,9 +61,9 @@
 							referenceData="${dataForm.catalogos.impuesto}" />
 					</div>
 				</div>
+				
 			</div>
-
-
+			
 			<div id="Periodo0" class="col-md-4 col-xs-12 mb-20 no-margincol">
 				<span class="paso--dos pasos color-sr2">2</span>
 				<h2 class="titulo-caja--ser-rel color-sr2 ">
@@ -419,6 +419,7 @@
 	
 	function onChangeBimestral(selectObject) {
 		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 	}
 	

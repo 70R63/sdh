@@ -77,7 +77,7 @@ import sun.misc.BASE64Decoder;
 @Controller
 @SessionAttributes(
 { "dataForm" })
-/* @RequestMapping("/contribuyentes/certipagos") */
+/* @RequestMapping("/agenteRetenedor/certipagos") */
 public class ArCertificacionPagoPageController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
@@ -90,7 +90,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 	// CMS Pages
 	private static final String CERTIFICACION_PAGOS_CMS_PAGE = "arCertiPagoPage";
 
-	private static final String REDIRECT_TO_MI_BUZON_PAGE = REDIRECT_PREFIX + "/contribuyentes/consultas/arCertipagos";
+	private static final String REDIRECT_TO_MI_BUZON_PAGE = REDIRECT_PREFIX + "/agenteRetenedor/consultas/arCertipagos";
 
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
@@ -156,7 +156,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 
 
 
-	//	@RequestMapping(value = "/contribuyentes/consultas/certipagos", method = RequestMethod.GET)
+	//	@RequestMapping(value = "/agenteRetenedor/consultas/certipagos", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String certipagos(final Model model, @ModelAttribute("error")
 	final String error) throws CMSItemNotFoundException
@@ -268,7 +268,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/consultas/arCertipagos", method = RequestMethod.GET)
+	@RequestMapping(value = "/agenteRetenedor/consultas/arCertipagos", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String pagosGET(final Model model) throws CMSItemNotFoundException
 	{
@@ -296,7 +296,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/consultas/arCertipagos/listaPagos", method = RequestMethod.GET)
+	@RequestMapping(value = "/agenteRetenedor/consultas/arCertipagos/listaPagos", method = RequestMethod.GET)
 	@ResponseBody
 	public OpcionDeclaracionesVista listaPagosGET(@ModelAttribute("dataForm")
 	final OpcionDeclaracionesVista infoVista, final BindingResult bindingResult, final Model model,
@@ -366,7 +366,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/consultas/arCertipagos/pagoImprimir", method = RequestMethod.GET)
+	@RequestMapping(value = "/agenteRetenedor/consultas/arCertipagos/pagoImprimir", method = RequestMethod.GET)
 	@ResponseBody
 	public OpcionDeclaracionesVista certiPagoImprimePOST(@ModelAttribute("dataForm")
 	final OpcionDeclaracionesVista infoVista, final BindingResult bindingResult, final Model model,
@@ -478,7 +478,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/consultas/arCertipagos", method = RequestMethod.POST)
+	@RequestMapping(value = "/agenteRetenedor/consultas/arCertipagos", method = RequestMethod.POST)
 	public String certipdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("certiFormPost")
 	final CertificacionPagoForm certiFormPost) throws CMSItemNotFoundException
 	{
@@ -570,7 +570,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 				{
 					redirectModel.addFlashAttribute("error", "sinPdf");
 				}
-				return "redirect:/contribuyentes/consultas/certipagos";
+				return "redirect:/agenteRetenedor/consultas/arCertipagos";
 
 			}
 			redirectModel.addFlashAttribute("publicidadMode", false);
@@ -719,7 +719,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 				{
 					redirectModel.addFlashAttribute("error", "sinPdf");
 				}
-				return "redirect:/contribuyentes/consultas/certipagos";
+				return "redirect:/agenteRetenedor/consultas/arCertipagos";
 
 			}
 			redirectModel.addFlashAttribute("publicidadMode", false);
@@ -807,7 +807,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 				{
 					redirectModel.addFlashAttribute("error", "sinPdf");
 				}
-				return "redirect:/contribuyentes/consultas/certipagos";
+				return "redirect:/agenteRetenedor/consultas/arCertipagos";
 
 			}
 			redirectModel.addFlashAttribute("publicidadMode", false);
@@ -888,7 +888,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 				{
 					redirectModel.addFlashAttribute("error", "sinPdf");
 				}
-				return "redirect:/contribuyentes/consultas/certipagos";
+				return "redirect:/agenteRetenedor/consultas/arCertipagos";
 
 			}
 			redirectModel.addFlashAttribute("publicidadMode", false);
@@ -902,7 +902,7 @@ public class ArCertificacionPagoPageController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 
-		return "redirect:/contribuyentes/consultas/arCertipagos";
+		return "redirect:/agenteRetenedor/consultas/arCertipagos";
 	}
 
 }

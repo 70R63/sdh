@@ -118,6 +118,7 @@ ACC.frimas = {
 						}
 
 					});
+					$(".generaDeclaracionVehiculosButton").attr("disabled",false);
 
 				},
 				error: function () {

@@ -105,6 +105,7 @@ ACC.frimas = {
 				type: "POST",
 				contentType: "application/json",
 				success: function (data) {
+					debugger;
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");
 					$.each(data.errores,function (index,value) {
@@ -118,6 +119,7 @@ ACC.frimas = {
 						}
 
 					});
+					$(".generaDeclaracionVehiculosButton").attr("disabled",false);
 
 				},
 				error: function () {

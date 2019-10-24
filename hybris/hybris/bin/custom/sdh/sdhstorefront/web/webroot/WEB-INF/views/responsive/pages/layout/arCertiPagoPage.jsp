@@ -9,6 +9,6 @@
 
 
 
-	<certificacion:certificacionMenu />
+	<certificacion:arCertificacionMenu />
 
 
