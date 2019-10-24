@@ -206,6 +206,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 
 
 ;;ARPresentarDeclaracionLink;"Generar declaración";"Haga clic aquí para acceder a la opción de menú Generar declaración"
+;;ARListaDeclaracionLink;"Lista de declaraciones a firmar";"Haga clic aquí para acceder a la opción de menu Lista de declaraciones"
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 ;;EdoCargasLink;"Estado de cargas";"Haga clic aquí para consultar el estado de sus cargas"
