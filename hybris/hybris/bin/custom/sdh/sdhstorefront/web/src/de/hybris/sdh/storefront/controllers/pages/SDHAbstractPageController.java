@@ -121,11 +121,14 @@ public class SDHAbstractPageController extends AbstractSearchPageController
 		final boolean showFirmButton = true;
 
 		//Elimina los firmantes vacios (que no tengan tipo de documento se consideran vacios)
-		for (final FirmanteResponse eachFirmante : firmantes)
+		if (firmantes != null)
 		{
-			if (eachFirmante.getTipoIdent() != null && !StringUtils.isAllBlank(eachFirmante.getTipoIdent()))
+			for (final FirmanteResponse eachFirmante : firmantes)
 			{
-				firmantes_tmp.add(eachFirmante);
+				if (eachFirmante.getTipoIdent() != null && !StringUtils.isAllBlank(eachFirmante.getTipoIdent()))
+				{
+					firmantes_tmp.add(eachFirmante);
+				}
 			}
 		}
 		firmantes = firmantes_tmp;

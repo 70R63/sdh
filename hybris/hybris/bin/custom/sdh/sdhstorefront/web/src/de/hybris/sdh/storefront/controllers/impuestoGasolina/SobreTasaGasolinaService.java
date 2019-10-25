@@ -8,6 +8,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
+import de.hybris.sdh.core.pojos.requests.CalculoReteIca2Request;
 import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
@@ -24,6 +25,7 @@ import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
+import de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
@@ -1338,6 +1340,25 @@ public class SobreTasaGasolinaService
 		return numObjeto;
 	}
 
+	public String prepararNumObjetoReteICA(final SDHValidaMailRolResponse detalleContribuyente)
+	{
+		String numObjeto = null;
+
+
+		if (detalleContribuyente != null)
+		{
+			if (detalleContribuyente.getReteIca() != null)
+			{
+				if (detalleContribuyente.getReteIca().getNumObjeto() != null)
+				{
+					numObjeto = detalleContribuyente.getReteIca().getNumObjeto().trim();
+				}
+			}
+		}
+
+		return numObjeto;
+	}
+
 
 	/**
 	 * @param detalleContribuyente
@@ -1523,21 +1544,28 @@ public class SobreTasaGasolinaService
 	{
 
 		boolean ocurrioError = false;
-		if (detallePagoResponse.getFechVenc() == null && detallePagoResponse.getNumBP() == null
-				&& detallePagoResponse.getNumRef() == null && detallePagoResponse.getTotalPagar() == null)
+		if (detallePagoResponse == null)
 		{
 			ocurrioError = true;
 		}
-		//		else if (detallePagoResponse.getErrores() != null)
-		//		{
-		//			if (detallePagoResponse.getErrores().get(0) != null)
-		//			{
-		//				if (detallePagoResponse.getErrores().get(0).getIdmsj().equals("0") != true)
-		//				{
-		//					ocurrioError = true;
-		//				}
-		//			}
-		//		}
+		else
+		{
+			if (detallePagoResponse.getFechVenc() == null && detallePagoResponse.getNumBP() == null
+					&& detallePagoResponse.getNumRef() == null && detallePagoResponse.getTotalPagar() == null)
+			{
+				ocurrioError = true;
+			}
+			//		else if (detallePagoResponse.getErrores() != null)
+			//		{
+			//			if (detallePagoResponse.getErrores().get(0) != null)
+			//			{
+			//				if (detallePagoResponse.getErrores().get(0).getIdmsj().equals("0") != true)
+			//				{
+			//					ocurrioError = true;
+			//				}
+			//			}
+			//		}
+		}
 
 		return ocurrioError;
 	}
@@ -2092,6 +2120,24 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
+
+	public CalculoReteIca2Response consultaReteIca2(final CalculoReteIca2Request requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		CalculoReteIca2Response responseInfo = null;
+		final String confUrl = "sdh.ReteIca2.url";
+		final String confUser = "sdh.ReteIca2.user";
+		final String confPass = "sdh.ReteIca2.password";
+		final String wsNombre = "calculoImp/ReteIca2";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response";
+
+		responseInfo = (CalculoReteIca2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
 	/**
 	 * @param customerData
 	 * @return
@@ -2505,6 +2551,16 @@ public class SobreTasaGasolinaService
 
 
 		return numObjeto;
+	}
+
+	/**
+	 * @param calculoResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorCalc2Reteica(final CalculoReteIca2Response calculoResponse)
+	{
+		// XXX Auto-generated method stub
+		return false;
 	}
 
 

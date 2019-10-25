@@ -10,7 +10,6 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -30,7 +29,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 /**
  * Base controller for all page controllers. Provides common functionality for all page controllers.
  */
-public abstract class RetenedoresAbstractPageController extends AbstractPageController
+public abstract class RetenedoresAbstractPageController extends SDHAbstractPageController
 {
 
 	static final String RETEICA_TEMPLATE_ID = "reteICATemplate";
