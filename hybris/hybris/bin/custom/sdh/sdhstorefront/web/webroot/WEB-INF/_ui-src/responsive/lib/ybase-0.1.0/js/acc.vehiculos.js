@@ -173,6 +173,8 @@ ACC.vehiculos = {
 	 bindCalcularVehButton : function() {
 			$(document).on("click", ".calcularVehButton", function(e) {
 				e.preventDefault();
+				
+				debugger;
 
 				var bpNum=$.trim($("#numBPcal").val());
 				var placa=$.trim($("#placaDec").val());
