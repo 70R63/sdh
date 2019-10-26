@@ -42,9 +42,12 @@
 		<c:set var="contribuyente_documentNumber" value="" />
 		<c:set var="contribuyente_numBP" value="" />
 		<c:set var="flagMostrarSoloFirmar" value="false" />
+		<c:set var="showFirmButton" value="false" />
 	</c:otherwise>
 </c:choose>
-
+<sf:form commandName="contribuyente">
+<sf:hidden path="documentType" id="firmas_contribuyente_documentType"/>
+</sf:form>
 
 <div class="row mt-3 representante">
 	<div class="col-md-12 mt-3">

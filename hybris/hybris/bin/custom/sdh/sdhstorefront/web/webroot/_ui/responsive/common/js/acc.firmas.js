@@ -131,7 +131,7 @@ ACC.frimas = {
 		});
 
 		$(".firmAndAdd").on("click",function(e){
-
+debugger;
 			var numForm = $("#numForm").val();
 
 			if(numForm == "" )
@@ -152,7 +152,7 @@ ACC.frimas = {
 
 				var  numIdentif  =$.trim($(value).find(".FirmNumId").val());
 
-				var tipoDocEl = document.getElementById("contribuyente_documentType");
+				var tipoDocEl = document.getElementById("firmas_contribuyente_documentType");
 				var tipoDoc = "";
 				if(tipoDocEl != null){
 					tipoDoc = tipoDocEl.value;
