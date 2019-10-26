@@ -45,9 +45,7 @@
 		<c:set var="showFirmButton" value="false" />
 	</c:otherwise>
 </c:choose>
-<sf:form commandName="contribuyente">
-<sf:hidden path="documentType" id="firmas_contribuyente_documentType"/>
-</sf:form>
+<input value="${contribuyente.documentType}" type="hidden" id="firmas_contribuyente_documentType"/>
 
 <div class="row mt-3 representante">
 	<div class="col-md-12 mt-3">
@@ -235,7 +233,7 @@
 					<div class="col-md-1">
 						<label class="control-label"><spring:theme code="" /></label>
 						<button type="button" class="btn btn-primary firmAndAdd"
-							style="margin-top: 4px">Firmar y Agregar</button>
+							style="margin-top: 4px">${lblBotonFirmarYAgregar}</button>
 					</div>
 				</c:if>
 
