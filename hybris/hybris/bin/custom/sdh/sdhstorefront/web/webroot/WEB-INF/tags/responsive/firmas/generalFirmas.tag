@@ -46,7 +46,7 @@
 	</c:otherwise>
 </c:choose>
 <input value="${contribuyente.documentType}" type="hidden" id="firmas_contribuyente_documentType"/>
-<%-- ${contribuyente.documentType} --%>
+<%-- --${contribuyente.documentType}-- --%>
 <div class="row mt-3 representante">
 	<div class="col-md-12 mt-3">
 		<div class="headline" style="margin-left: 140px !important">

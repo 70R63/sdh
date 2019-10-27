@@ -107,6 +107,9 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 
 		final CustomerData customerData = getCustomerFacade().getCurrentCustomer();
 		final CalculoReteIcaRequest request = new CalculoReteIcaRequest();
+		super.addFirmantes_impuesto(model, null, customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "/retenedores/registroretenciones");
 
 		request.setNumBP(customerData.getNumBP());
 		request.setNumForm(numForm);
@@ -261,7 +264,7 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 		model.addAttribute("contribuyenteData", contribuyenteData);
 		model.addAttribute("currentUserData", currentUserData);
 		model.addAttribute("redirectURL",
-				"https://publicsector.local:9002/sdhstorefront/es/retenedores/registroretenciones?representado="
+				"/retenedores/registroretenciones?representado="
 						+ contribuyenteData.getNumBP());
 
 		model.addAttribute("customerData", currentUserData);
