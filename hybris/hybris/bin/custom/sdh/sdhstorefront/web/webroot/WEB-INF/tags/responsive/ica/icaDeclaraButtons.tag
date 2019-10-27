@@ -32,7 +32,7 @@
 					<c:when
 						test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.numForm }">
 						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" disabled class="btn btn-primary btn-lg GeneraDeclaracionButton"
+							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
 							type="button">
 							<spring:theme code="ica.declaracion.firma.prendecla" />
 						</button>
