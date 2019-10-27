@@ -160,6 +160,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; ARCertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/agenteRetenedor/consultas/certideclaraciones" ;;;;;
 ; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
 ; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/presentar-declaracion" ;;;;;
+; ; ARListaDeclaracionLink	   	   ; LISTA LINK   				 			;"/agenteRetenedor/lista-declaraciones" ;;;;;
 
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
@@ -446,7 +447,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 ;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;;Retenedores Detalle Service Requests Menu;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;
 ;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;EdoCargasNavNode
-;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode
+;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode,ARListaDeclaracionNavNode
 #*->-------------------------------------------------------------------------------------------------------------------------
 
 
@@ -566,6 +567,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;ARDeclaracionesNavNode;; Declaraciones Link; ARDeclaracionesNavNode
 ;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
 ;ARPresentarDeclaracionNavNode ;;Presentar Declaracion Link;ARPresentarDeclaracionNavNode
+;ARListaDeclaracionNavNode ;; Lista Declaraciones Link;ARListaDeclaracionNavNode
 
 
 ;CargaNavNode;;Carga Link;CargaNavNode
@@ -695,6 +697,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;AREdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;AREdoCuentaNavNode;AREdoCuentaLink
 
 ;ARPresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;ARPresentarDeclaracionNavNode;ARPresentarDeclaracionLink
+;ARListaDeclaracionNavNodeEntry;; Lista Declaraciones Firma AR Navigation Node Entry;ARListaDeclaracionNavNode;ARListaDeclaracionLink
 
 ;CargaNavNodeEntry;;Carga Navigation Node Entry;CargaNavNode;CargaLink
 ;HistoricoNavNodeEntry;;Historico Navigation Node Entry;HistoricoNavNode;HistoricoLink
@@ -2823,3 +2826,25 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;gestionBancariaFileUploadPageComponent	;gestionBancariaFileUploadPage Component	;/WEB-INF/views/responsive/pages/layout/gestionBancariaFileUploadPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;gestionBancariaFileUploadPageComponent
 # Fin Gestion Bancaria Upload File
+
+#->INI dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;arListaDeclaracionesPage 		;Predial Unificado bases	;AccountPageTemplate:sdhContentCatalog:Staged	;/agenteRetenedor/lista-declaraciones
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='arListaDeclaracionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-arListaDeclaracionesPage 	;SideContent			;																	;SideContent-arListaDeclaracionesPage				;;;
+								;						;BodyContent-arListaDeclaracionesPage 	;BodyContent			;																	;BodyContent-arListaDeclaracionesPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-arListaDeclaracionesPage 	;Side Content Slot for AR Lista Declaraciones;true	;								;;;
+							;							;BodyContent-arListaDeclaracionesPage	;Body Content Slot for AR Lista DEclaraciones	;true	;arListaDeclaracionesPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;arListaDeclaracionesPageComponent	;arListaDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/arListaDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;arListaDeclaracionesPageComponent
+
+#->FIN dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019

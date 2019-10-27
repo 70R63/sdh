@@ -42,10 +42,11 @@
 		<c:set var="contribuyente_documentNumber" value="" />
 		<c:set var="contribuyente_numBP" value="" />
 		<c:set var="flagMostrarSoloFirmar" value="false" />
+		<c:set var="showFirmButton" value="false" />
 	</c:otherwise>
 </c:choose>
-
-
+<input value="${contribuyente.documentType}" type="hidden" id="firmas_contribuyente_documentType"/>
+<%-- ${contribuyente.documentType} --%>
 <div class="row mt-3 representante">
 	<div class="col-md-12 mt-3">
 		<div class="headline" style="margin-left: 140px !important">
@@ -56,6 +57,7 @@
 		</div>
 		<c:choose>
 			<c:when test="${showFirmantes ne true}">
+<!-- <div>aqui1inicio</div> -->
 				<div class="row mt-3">
 					<div class="col-md-2">
 						<div class="form-group">
@@ -120,9 +122,11 @@
 						</c:if>
 					</c:if>
 				</div>
+<!-- <div>aqui1fin</div> -->
 			</c:when>
 
 			<c:otherwise>
+<!-- <div>aqui2inicio</div> -->
 				<c:forEach items="${firmantes}" var="eachFirmante">
 					<c:if test="${!empty eachFirmante.tipoIdent}">
 						<div class="row mt-3">
@@ -180,11 +184,12 @@
 							</c:if>
 						</div>
 					</c:if>
-
 				</c:forEach>
+<!-- <div>aqui2fin</div> -->
 			</c:otherwise>
 		</c:choose>
 		<c:if test="${showNewFirmRow}">
+<!-- <div>aqui3inicio</div> -->
 			<div class="row mt-3">
 				<div class="col-md-2">
 					<div class="form-group">
@@ -192,7 +197,7 @@
 								code="publicidad.declaracion.firma.nombre" /></label> <input disabled
 							id="firmCompleteName" name="firmCompleteName"
 							class="form-control" disabled type="text"
-							value="${currentUserData.completeName}" maxlength="240"></input>
+							value="${contribuyente_completeName}" maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-2">
@@ -200,7 +205,7 @@
 						<label class="control-label"><spring:theme
 								code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled
 							class="form-control FirmTipoId" disabled type="text"
-							value="${currentUserData.documentType}" maxlength="240"></input>
+							value="${contribuyente_documentType}" maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-2">
@@ -208,7 +213,7 @@
 						<label class="control-label"><spring:theme
 								code="publicidad.declaracion.firma.numide" /></label> <input disabled
 							class="form-control FirmNumId" disabled type="text"
-							value="${currentUserData.documentNumber}" maxlength="240"></input>
+							value="${contribuyente_documentNumber}" maxlength="240"></input>
 					</div>
 				</div>
 
@@ -217,7 +222,7 @@
 						<label class="control-label"><spring:theme
 								code="publicidad.declaracion.firma.numtarjeta" /></label> <input
 							disabled class="form-control FirmTarjetaProf" disabled
-							type="text" value="${currentUserData.numBP}" maxlength="240"></input>
+							type="text" value="${contribuyente_numBP}" maxlength="240"></input>
 					</div>
 				</div>
 
@@ -232,11 +237,13 @@
 					<div class="col-md-1">
 						<label class="control-label"><spring:theme code="" /></label>
 						<button type="button" class="btn btn-primary firmAndAdd"
-							style="margin-top: 4px">Firmar y Agregar</button>
+							style="margin-top: 4px">${lblBotonFirmarYAgregar}</button>
 					</div>
 				</c:if>
 
 			</div>
+<!-- <div>aqui3fin</div> -->
+			
 		</c:if>
 	</div>
 </div>

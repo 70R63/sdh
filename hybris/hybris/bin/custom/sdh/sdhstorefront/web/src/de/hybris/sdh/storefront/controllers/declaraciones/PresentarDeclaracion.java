@@ -514,7 +514,9 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
-				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+				String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+				response = response.replaceAll("(\"cantEstablec\":{1})(\\w*)(,)", "$1\"$2\"$3");
+
 				icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 
 				if (icaInfObjetoResponse.getRegimen() != null)

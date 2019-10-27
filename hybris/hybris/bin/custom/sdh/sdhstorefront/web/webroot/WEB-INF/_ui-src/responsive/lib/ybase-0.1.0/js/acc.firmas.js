@@ -105,6 +105,7 @@ ACC.frimas = {
 				type: "POST",
 				contentType: "application/json",
 				success: function (data) {
+					debugger;
 					$( "#dialogFirmas" ).dialog( "open" );
 					$("#firmasDialogContent").html("");
 					$.each(data.errores,function (index,value) {
@@ -114,10 +115,11 @@ ACC.frimas = {
 							$("#firmasDialogContent").html($("#firmasDialogContent").html()+value.txtmsj+"<br>");
 						}
 						if(value.idmsj == "0"){
-							$(".generaDeclaracionVehiculosButton").attr("disabled",false);
+							$("#generaDeclaracionVehiculosButton").attr("disabled",false);
 						}
 
 					});
+					$("#generaDeclaracionVehiculosButton").attr("disabled",false);
 
 				},
 				error: function () {
@@ -129,7 +131,7 @@ ACC.frimas = {
 		});
 
 		$(".firmAndAdd").on("click",function(e){
-
+debugger;
 			var numForm = $("#numForm").val();
 
 			if(numForm == "" )
@@ -150,7 +152,7 @@ ACC.frimas = {
 
 				var  numIdentif  =$.trim($(value).find(".FirmNumId").val());
 
-				var tipoDocEl = document.getElementById("contribuyente_documentType");
+				var tipoDocEl = document.getElementById("firmas_contribuyente_documentType");
 				var tipoDoc = "";
 				if(tipoDocEl != null){
 					tipoDoc = tipoDocEl.value;

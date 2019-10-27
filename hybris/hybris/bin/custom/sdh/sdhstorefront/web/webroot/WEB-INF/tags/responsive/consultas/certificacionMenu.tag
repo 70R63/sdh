@@ -403,7 +403,7 @@
 
  	
 	function onChange(selectObject) {
-//			debugger;
+			debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
@@ -411,7 +411,7 @@
 
 	
 	function SelectedAnio(selectObject) {
-//		debugger;
+		debugger;
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 		ACC.opcionDeclaraciones.reiniciaPeriodosMB();
 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();

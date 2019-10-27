@@ -11,7 +11,7 @@ ACC.opcionDeclaraciones = {
 			e.preventDefault();	
 			
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
-//				debugger;
+				debugger;
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
@@ -67,7 +67,7 @@ ACC.opcionDeclaraciones = {
 			e.preventDefault();	
 			
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
-				//debugger;
+				debugger;
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
@@ -123,7 +123,7 @@ ACC.opcionDeclaraciones = {
 			e.preventDefault();	
 			
 			if(ACC.opcionDeclaraciones.validarAntesSubmit()){
-				//debugger;
+				debugger;
 				var nombreCampo;
 				var valorCampo;
 				var valNumObjeto;
@@ -193,7 +193,7 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponsePDF : function(infoActual,infoResponse) {
 
-		//debugger;
+		debugger;
 		if (infoResponse.declaraPDFResponse.errores != null){
 			if (infoResponse.declaraPDFResponse.errores.idMensaje == "0"){
 				if(infoResponse.urlDownload != null){
@@ -216,7 +216,7 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponseImprimir : function(infoActual,infoResponse) {
 
-		//debugger;
+		debugger;
 		if (infoResponse.impresionResponse.errores != null){
 			if (infoResponse.impresionResponse.errores[0].idmsj == "0"){
 				if(infoResponse.urlDownload != null){
@@ -289,7 +289,7 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-//					debugger;
+					debugger;
 					ACC.opcionDeclaraciones.dataActual_backup = dataActual;
 					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
 					ACC.opcionDeclaraciones.mostrarErrores_certiPagos(dataResponse);
@@ -307,6 +307,7 @@ ACC.opcionDeclaraciones = {
 	
 	
 	obtenerPeriodoPorImpuesto : function(claveImpuesto){
+		debugger;
         var periodoM = $("#periodoM").val();
         var periodoB = $("#periodoB").val();
         var perBimestral = document.getElementById('Periodo2'); //bimestral
@@ -324,7 +325,7 @@ ACC.opcionDeclaraciones = {
 	
 	prepararPeriodo : function() {
 
-		//debugger;
+		debugger;
 		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
 	        var claveImpuesto = $("#seleccion").val();  	       
 			var dataActual = {};
@@ -350,7 +351,7 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponsePeriodo : function(infoActual,infoResponse) {
 
-		//debugger;
+		debugger;
 		var perMensual = document.getElementById('Periodo1'); //mensual
 		var perBimestral = document.getElementById('Periodo2'); //bimestral
 		var perAnual = document.getElementById('aniograv');
@@ -379,7 +380,7 @@ ACC.opcionDeclaraciones = {
 	
 	
 	mostrarErrores_certiPagos : function (infoResponse) {
-		//debugger;
+		debugger;
 		if (infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].idmsj != 0){
 			alert(infoResponse.errores[0].txtmsj);
 		}
@@ -610,7 +611,7 @@ debugger;
 	
 	
 	updateFromResponseSeleccion_presentarDec : function(infoActual,infoResponse) {
-
+		debugger;
 		var flagHuboRegistros = false;
 	
 		ACC.opcionDeclaraciones.vaciarTablasInfo_presentarDec();
@@ -715,7 +716,7 @@ debugger;
 		var perBimestral = document.getElementById('Periodo2'); //bimestral
 		var tipoPeriodo = "";
 		
-//		debugger;
+		debugger;
 		if (infoResponse.errores != null && infoResponse.errores[0] != null && infoResponse.errores[0].idmsj != 0){
 			
 		}else{
@@ -793,7 +794,7 @@ debugger;
 	
 	validarAntesSubmit : function() {
 
-//		debugger;
+		debugger;
         var claveImpuesto = $("#seleccion").val();  	       
         var anoGravable = $("#aniograv").val(); 	       
         var periodoM = $("#periodoM").val();
@@ -827,7 +828,7 @@ debugger;
 	
 	validarAntesSubmitPeriodo : function() {
 
-//		debugger;
+		debugger;
         var claveImpuesto = $("#seleccion").val();
 		var validacionOK = false;
 
@@ -841,7 +842,7 @@ debugger;
 	
 	validarAntesSubmit_presentarDec : function() {
 
-//		debugger;
+		debugger;
         var claveImpuesto = $("#impuesto").val();  	       
         var anoGravable = $("#anoGravable").val(); 	       
 		var validacionOK = false;
@@ -857,7 +858,7 @@ debugger;
 	
 	
 	obtener_desc_clavePeriodo : function (clavePeriodo){
-		//debugger;
+		debugger;
 		var descripcion = "";
 		var des_periodo = clavePeriodo;
 		
@@ -879,7 +880,7 @@ debugger;
 	
 	
 	validarFiltro : function (itemInfo,idPeriodoFiltro){
-		//debugger;
+		debugger;
 		var validacionOK = false;
 		var tipo_periodo = "";
 		var idPeriodoItem = null;
@@ -901,7 +902,7 @@ debugger;
 	
 	
 	obtener_desc_clavePeriodo : function (clavePeriodo){
-//		debugger;
+		debugger;
 		var descripcion = "";
 		var des_periodo = "";
 		
@@ -941,7 +942,7 @@ debugger;
 	
 	ocultarTablas : function() {
 
-//		debugger;
+		debugger;
 		var x = document.getElementById('seleccion').value;
 		
 		var tablepredial = document.getElementById('table-predial');
@@ -1044,7 +1045,7 @@ debugger;
 	
 	reiniciaPeriodosMB : function(){
 
-//		debugger;
+		debugger;
 		ACC.opcionDeclaraciones.ocultarPeriodo("1");
 		ACC.opcionDeclaraciones.ocultarPeriodo("2");
 		ACC.opcionDeclaraciones.reiniciaPeriodo("1");
@@ -1054,11 +1055,15 @@ debugger;
 	
 	determinaPeriodoMBCertipagos : function(){
 		
-//		debugger;
+		debugger;
 		var claveImpuesto = document.getElementById('seleccion').value;
 		
 		if(claveImpuesto == '0005'){
 			ACC.opcionDeclaraciones.mostrarPeriodo(1);
+		}
+		
+		if(claveImpuesto == '0004'){
+			ACC.opcionDeclaraciones.mostrarPeriodo(2);
 		}
 		
 		
@@ -1096,7 +1101,7 @@ debugger;
 	
 	prepararVehicular_presentarDec : function(claveImpuesto){
 		
-//		debugger;
+		debugger;
 		if(claveImpuesto == '2'){ 
 	        var divPeriodo2 = document.getElementById('seccionPeriodo2');
 	        divPeriodo2.style.display = 'none';

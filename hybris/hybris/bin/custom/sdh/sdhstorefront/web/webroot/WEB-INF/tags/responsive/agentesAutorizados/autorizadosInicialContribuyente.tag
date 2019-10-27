@@ -142,6 +142,9 @@
 														<c:when test="${eachDeclaracion.impuesto eq '0003'}">
 															<td ><a href="<c:url value="/contribuyentes/ica/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}&periodoSeleccionado=${eachDeclaracion.periodo}&anoGravable=${eachDeclaracion.anioGravable}" />">Ver</a></td>
 														</c:when>
+														<c:when test="${eachDeclaracion.impuesto eq '0004'}">
+															<td ><a href="<c:url value="/reteica/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}&anoGravable=${eachDeclaracion.anioGravable}&perRepor=${eachDeclaracion.periodo}" />">Ver</a></td>
+														</c:when>
 														<c:otherwise>
 															<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
 														</c:otherwise>

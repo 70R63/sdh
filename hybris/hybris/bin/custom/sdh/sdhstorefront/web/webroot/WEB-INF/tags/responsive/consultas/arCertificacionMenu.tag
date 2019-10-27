@@ -10,89 +10,23 @@
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/contribuyentes/consultas/certipagos"
-	var="certideclaraURL" htmlEscape="false" />
+<spring:url value="/contribuyentes/consultas/arCertipagos"
+	var="certificacionURL" htmlEscape="false" />
 
-
-<script>
-window.onload = function() {
-	//Se agrega funcionalidad para agentes Retenedores
-	var url = window.parent.location.href;
-	var contenido_url = url.includes('contribuyentes');
-	
-	if(contenido_url == true){
-		var contrib_select = document.getElementById('certicontrib');
-		contrib_select.style.display = 'block';
-	}else{
-		var contrib_select = document.getElementById('certiagente');
-		contrib_select.style.display = 'block';
-
-		$("#seleccion").val("0004");
-		var obj=document.getElementById("seleccion");
-		
- 		document.getElementById("BanderaAgete").value= "X";
-		
-		ACC.opcionDeclaraciones.ocultarTablas();
-		ACC.opcionDeclaraciones.prepararPeriodo();
-		
-	}
-}
-function SelectedAnio(selectObject) {
-	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-
-}
-
-function valper(selectObject) {
-	var per = selectObject.value;
-	var anio = document.getElementById('aniograv').value;
-	var fecha = new Date();
-	var anioact = fecha.getFullYear();
-	var mesact = fecha.getMonth();
-
-	if (anio < anioact) {
-
-	} else {
-		mesact = mesact + 1;
-		if (per < mesact) {
-
-		} else {
-			alert("Por favor, seleccione un mes anterior");
-		}
-
-	}
-	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-
-}
-
-function vaperiodo(selectObject) {
-
-	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-}
-	
-	function downloadPDF(pdf, newfilename) {
-		debugger;
-		if (pdf){
-			const linkSource = 'data:application/pdf;base64,' + pdf;
-		    const downloadLink = document.createElement("a");
-		    var fileName = newfilename;	
-		    downloadLink.href = linkSource;
-		    downloadLink.download = fileName;
-		    downloadLink.click();
-		}    
-	}
-	
-	
-	downloadPDF('${imprimeCertiDeclaraResponse.stringPDF}','Certificación_Declaracion.pdf');
-	
-</script>
 
 <a id="downloadHelper" target="_blank"></a>
 <c:choose>
-	<c:when test="${certiFormPost.idimp == '4'}">
-		<c:set var="aniGravable" value="${anoGravablePublicidad}" />
+	<c:when test="${certiFormPost.idimp == 4}">
+		<c:set var="anioGravable" value="${anoGravablePublicidad}" />
 	</c:when>
+
+	<c:when
+		test="${certiFormPost.idimp == 5 or certiFormPost.idimp == 3 or certiFormPost.idimp == 7  or certiFormPost.idimp == 6}">
+		<c:set var="anioGravable" value="${anoGravableGasolina}" />
+	</c:when>
+
+
 	<c:otherwise>
-		<c:set var="aniGravable" value="${anoGravableGasolina}" />
 	</c:otherwise>
 </c:choose>
 
@@ -101,43 +35,36 @@ function vaperiodo(selectObject) {
 	<div class="row">
 		<div class="headline">
 			<h2 align="center">
-				<span><spring:theme code="certideclara.inicial.titulo" /></span>
+				<span><spring:theme code="certificacion.inicial.titulo" /> </span>
 			</h2>
 		</div>
 	</div>
 
 	<form:form id="form_pdf" action="" method="post" commandName="dataForm">
 
-
 		<input type="hidden" name="numBP" value="${certiForm.numBP}" />
 		<input type="hidden" name="rowFrompublicidadTable" value="" />
-		<input type="hidden" name="BanderaAgete" id="BanderaAgete" value="" />
 
 		<div class="row">
-			<div class="col-md-4 col-xs-12 mb-20 no-marginright certicontrib" id="certicontrib" style="display: none">
+			<div class="col-md-4 col-xs-12 mb-20 no-marginright" id="idImpuesto"
+				style="display: block;">
 				<span class="paso--uno pasos color-sr1">1</span>
-				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICAR DECLARACIÓN</h2>
+				
+				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICACIÓN DE PAGO</h2>
 				<p class="pasoClase1 metrophobic">Selecciona el impuesto que deseas consultar.</p>
+				
 				<div class="caja--ser-rel color-sr1">
-					<sf:select class="new_alto form-control seleccion" id="seleccion"
-						onchange="onChange(this)" path="claveImpuesto"
-						items="${dataForm.catalogos.impuesto}"
-						referenceData="${dataForm.catalogos.impuesto}" />
+					<div class="form-group">
+						<sf:select class="new_alto form-control seleccion" id="seleccion"
+							onchange="onChange(this)" path="claveImpuesto"
+							items="${dataForm.catalogos.impuesto}"
+							referenceData="${dataForm.catalogos.impuesto}" />
+					</div>
 				</div>
+				
 			</div>
 			
-				<div class="col-md-4 col-xs-12 mb-20 no-marginright certiagente" id="certiagente" style="display: none">
-				<span class="paso--uno pasos color-sr1">1</span>
-				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICAR DECLARACIÓN</h2>
-				<p class="pasoClase1 metrophobic">El Impuesto a consultar es:</p>
-				<div class="caja--ser-rel color-sr1">
-					<input id="0004"
-						name="" class="newalto form-control" disabled type="text" value="Retención ICA"
-						maxlength="240" style="display: inline-block !important;"></input>
-				</div>
-			</div>
-			
-			<div class="col-md-4 col-xs-12 mb-20 no-margincol">
+			<div id="Periodo0" class="col-md-4 col-xs-12 mb-20 no-margincol">
 				<span class="paso--dos pasos color-sr2">2</span>
 				<h2 class="titulo-caja--ser-rel color-sr2 ">
 					<span class="paso2">AÑO GRAVABLE</span>
@@ -164,7 +91,7 @@ function vaperiodo(selectObject) {
 					<div class="caja--ser-rel color-sr3">
 						<select aria-required="true" id="periodoM"
 							class="new_alto form-control " name="periodo" required='required'
-							onchange="valper(this)">
+							onchange="onChangeMensual(this)">
 							<option value="00">Seleccionar</option>
 							<option value="01">1-Enero</option>
 							<option value="02">2-Febrero</option>
@@ -189,26 +116,27 @@ function vaperiodo(selectObject) {
 				<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 				<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 				<div class="caja--ser-rel color-sr3">
+
 					<select id="periodoB" class="new_alto form-control " name="periodo"
-						onchange="vaperiodo(this)">
+						onchange="onChangeBimestral(this)">
 						<option value="00">Seleccionar</option>
-						<option value="01">1 - Ene / Feb</option>
-						<option value="02">2 - Mar / Abr</option>
-						<option value="03">3 - May / Jun</option>
-						<option value="04">4 - Jul / Ago</option>
-						<option value="05">5 - Sep / Oct</option>
-						<option value="06">6 - Nov / Dic</option>
+						<option value="B1">1 - Ene / Feb</option>
+						<option value="B2">2 - Mar / Abr</option>
+						<option value="B3">3 - May / Jun</option>
+						<option value="B4">4 - Jul / Ago</option>
+						<option value="B5">5 - Sep / Oct</option>
+						<option value="B6">6 - Nov / Dic</option>
 					</select>
 				</div>
 			</div>
 		</div>
 
+
 		<br>
-
-
-		<div class="row" id="table-predial" style="display: none;">
+		
+				<div class="row" id="table-predial" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-predial1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -244,6 +172,18 @@ function vaperiodo(selectObject) {
 										code="certideclara.inicial.vehiculo.marca" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
 										code="certideclara.inicial.vehiculo.seleccionar" /></label></th>
 						</tr>
 					</thead>
@@ -264,7 +204,16 @@ function vaperiodo(selectObject) {
 										code="certideclara.inicial.selcimpuesto" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.aniograv" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.ica.seleccionar" /></label></th>
@@ -290,6 +239,18 @@ function vaperiodo(selectObject) {
 										code="certideclara.inicial.reteica.consecutivo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
 										code="certideclara.inicial.reteica.seleccionar" /></label></th>
 						</tr>
 					</thead>
@@ -311,6 +272,18 @@ function vaperiodo(selectObject) {
 							<th style="text-align: center"><label class="control-label">
 									<spring:theme code="certideclara.inicial.publicidad.tipvalla" />
 							</label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label">
 									<spring:theme
 										code="certideclara.inicial.publicidad.seleccionar" />
@@ -339,6 +312,18 @@ function vaperiodo(selectObject) {
 										code="certideclara.inicial.gasolina.numdocu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.seleccionar" /></label></th>
 						</tr>
 					</thead>
@@ -358,7 +343,16 @@ function vaperiodo(selectObject) {
 										code="certideclara.inicial.delineacion.cdu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.delineacion.radicado" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.delineacion.seleccionar" /></label></th>
@@ -369,47 +363,88 @@ function vaperiodo(selectObject) {
 				</table>
 			</div>
 		</div>
+		
 
-
-		<div class="row" id="formButtons">
+		<div class="row">
 			<div class="col-md-12 text-center">
 				<div class="form-group ">
-					<button type="button" class="btn btn-secondary btn-lg"
+					<button type="button" class="btn btn-primary btn-lg"
 						id="btnCancelar" name="action" value="cancelar"
 						style="margin-top: 3px">
-						<spring:theme code="certideclara.inicial.cancelar" />
+						<spring:theme code="certificacion.inicial.cancelar" />
 					</button>
 
-					<button type="submit"
-						class="btn btn-primary btn-lg !important declaracionImprime"
-						id="imprimirDecButton" name="imprimirDecButton"
-						style="margin-top: 3px" onclick="">
-						<spring:theme code="certideclara.inicial.generar" />
+					<button type="submit" class="btn btn-primary btn-lg !important certiPagosImprime"
+						id="certiPagosImprimeButton" name="certiPagosImprimeButton"
+						style="margin-top: 3px">
+						<spring:theme code="certificacion.inicial.generar" />
 					</button>
 				</div>
 			</div>
 		</div>
 
 	</form:form>
-		
+
+
+
+	
+
 </div>
-
-
-<div id="dialog" title="Generar certideclara">
+<div id="dialog" title="Generar Certificacion">
 	<div id="certiDialogContent"></div>
 </div>
 
 
 <script type="text/javascript">
 	
-	document.getElementById("btnCancelar").addEventListener("click", function(){
-		location = self.location;
+ 	document.getElementById("btnCancelar").addEventListener("click", function(){
+ 		location = self.location;
 	});
-	
+
+ 	
 	function onChange(selectObject) {
+			debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
-		ACC.opcionDeclaraciones.prepararPeriodo();
+		ACC.opcionDeclaraciones.reiniciaCertipagos();
+		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
+	}
+
+	
+	function SelectedAnio(selectObject) {
+		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+		ACC.opcionDeclaraciones.reiniciaPeriodosMB();
+		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
 	}
 	
+	function onChangeBimestral(selectObject) {
+		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
+	}
 	
+	function onChangeMensual(selectObject) {
+		debugger;
+		var per = selectObject.value;
+		var anio = document.getElementById('aniograv').value;
+		var fecha = new Date();
+		var anioact = fecha.getFullYear();
+		var mesact = fecha.getMonth();
+
+		if (anio < anioact) {
+
+		} else {
+			mesact = mesact + 1;
+			if (per < mesact) {
+
+			} else {
+				alert("Por favor, seleccione un mes anterior");
+			}
+
+		}
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
+
+	}
 </script>
+

@@ -2,7 +2,6 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.sdh.core.pojos.responses.CalcGasolina2Response;
 import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
 import de.hybris.sdh.facades.questions.data.SDHAgentData;
 
@@ -70,43 +69,6 @@ public class SDHAbstractPageController extends AbstractSearchPageController
 		}
 	}
 
-	public void addFirmantes(final Model model, final CalcGasolina2Response calcGasolina2Response,
-			final CustomerData representanteData)
-	{
-
-		model.addAttribute("showFirmantes", true);
-		final List<FirmanteResponse> firmantes = calcGasolina2Response.getFirmantes();
-
-		boolean showNewFirmRow = true;
-		boolean showFirmAndAddButton = true;
-		final boolean showFirmButton = true;
-
-		if (CollectionUtils.isNotEmpty(firmantes) && firmantes.size() == 3)
-		{
-			showNewFirmRow = false;
-			showFirmAndAddButton = false;
-		}
-		for (final FirmanteResponse eachFirmante : firmantes)
-		{
-			if (eachFirmante.getNumIdent().equalsIgnoreCase(representanteData.getDocumentNumber()))
-			{
-				showNewFirmRow = false;
-
-			}
-		}
-
-		if (CollectionUtils.isNotEmpty(firmantes) && firmantes.size() == 2 && showNewFirmRow == true)
-		{
-			showFirmAndAddButton = false;
-		}
-
-		model.addAttribute("showFirmButton", showFirmButton);
-		model.addAttribute("showNewFirmRow", showNewFirmRow);
-		model.addAttribute("showFirmAndAddButton", showFirmAndAddButton);
-		model.addAttribute("firmantes", firmantes);
-
-
-	}
 
 	public void addFirmantes_impuesto(final Model model, List<FirmanteResponse> firmantes,
 			final CustomerData representanteData)
@@ -121,11 +83,14 @@ public class SDHAbstractPageController extends AbstractSearchPageController
 		final boolean showFirmButton = true;
 
 		//Elimina los firmantes vacios (que no tengan tipo de documento se consideran vacios)
-		for (final FirmanteResponse eachFirmante : firmantes)
+		if (firmantes != null)
 		{
-			if (eachFirmante.getTipoIdent() != null && !StringUtils.isAllBlank(eachFirmante.getTipoIdent()))
+			for (final FirmanteResponse eachFirmante : firmantes)
 			{
-				firmantes_tmp.add(eachFirmante);
+				if (eachFirmante.getTipoIdent() != null && !StringUtils.isAllBlank(eachFirmante.getTipoIdent()))
+				{
+					firmantes_tmp.add(eachFirmante);
+				}
 			}
 		}
 		firmantes = firmantes_tmp;
