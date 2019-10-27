@@ -311,8 +311,7 @@
 					<option value="">Seleccionar</option>
 					<option value="CC">CC C�dula de ciudadania</option>
 					<option value="CE">CE C�dula de extranjer�a</option>
-					<option value="NIT">NIT N�mero de identificaci�n
-						tributaria</option>
+					<option value="NIT">NIT N�mero de identificaci�n tributaria</option>
 					<option value="PA">PA Pasaporte</option>
 					<option value="TI">TI Tarjeta de identidad</option>
 					<option value="TIE">TIE Tarjeta de identidad de extranjero</option>

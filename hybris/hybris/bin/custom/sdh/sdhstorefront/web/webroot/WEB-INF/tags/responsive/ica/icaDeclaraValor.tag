@@ -85,7 +85,7 @@
 			</div>
 		</div>
 
-		<!--  se agregan líneas para agregar siempre una linea en la tabla -->
+		<!--  se agregan lï¿½neas para agregar siempre una linea en la tabla -->
 		<c:if test="${empty infoDeclara.valorRetenido}">
 			<div class="row valor" id="valor">
 				<div class="col-md-1" style="width: 10.5% !important">
@@ -96,16 +96,16 @@
 					<select id="" class="etiq_valor form-control tipoID"
 						style="height: 48px;">
 						<option value="">Seleccionar</option>
-						<option value="CC">CC Cédula de ciudadania</option>
-						<option value="CE">CE Cédula de extranjería</option>
-						<option value="NIT">NIT Número de identificación
+						<option value="CC">CC Cï¿½dula de ciudadania</option>
+						<option value="CE">CE Cï¿½dula de extranjerï¿½a</option>
+						<option value="NIT">NIT Nï¿½mero de identificaciï¿½n
 							tributaria</option>
 						<option value="PA">PA Pasaporte</option>
 						<option value="TI">TI Tarjeta de identidad</option>
 						<option value="TIE">TIE Tarjeta de identidad de
 							extranjero</option>
 						<option value="NITE">NITE NIT extranjero</option>
-						<option value="NUIP">NUIP Número único de identificación
+						<option value="NUIP">NUIP Nï¿½mero ï¿½nico de identificaciï¿½n
 							personal</option>
 					</select>
 				</div>
@@ -153,7 +153,7 @@
 				</div>
 			</div>
 		</c:if>
-		<!-- fin de código agregado -->
+		<!-- fin de cï¿½digo agregado -->
 
 
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
@@ -305,7 +305,7 @@
 					"")
 
 		} else {
-			alert("No se pueden agregar más registros");
+			alert("No se pueden agregar mï¿½s registros");
 		}
 
 	}

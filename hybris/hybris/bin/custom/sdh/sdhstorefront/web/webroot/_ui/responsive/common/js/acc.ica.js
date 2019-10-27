@@ -439,7 +439,7 @@ ACC.ica = {
 		            	if(actualErrors.length > 0)
 	            		{
 		            		$( "#dialogICA" ).dialog( "open" );
-		            		$("#icaDialogContent").html("Error");
+		            		$("#icaDialogContent").html("Error: ");
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#icaDialogContent").html($("#icaDialogContent").html()+value.txtmsj+"<br>");
     	            		});
@@ -492,7 +492,6 @@ ACC.ica = {
 	            			
 	            			
 	            			$("#numForm").val(data.numForm)
-							
 	            			$("#icaPresentarDeclaracionButton").prop("disabled",false);
 	            		}
 	 	      		
@@ -510,11 +509,11 @@ ACC.ica = {
 	 	        e.preventDefault();
 	 	       $("#icaPresentarDeclaracionButton").prop('disabled', true);
 	 	       var numForm  = $.trim($("#numForm").val());
-	 		 	 
+
 	 	       var data = {};
-	 	       
+
 	 	       data.numForm=numForm;
-	 	
+
 	 	      $.ajax({
 		            url: ACC.generaDeclaracionURL,
 		            data: data,
@@ -527,18 +526,19 @@ ACC.ica = {
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#icaDialogContent").html($("#icaDialogContent").html()+value.txtmsj+"<br>");
     	            		});
-		            		
+
 		            		$("#icaPresentarDeclaracionButton").prop('disabled', false);
 	            		}else
 	            		{
 	            			$("#icaDialogContent").html("");
 	            			$("#dialogICA").html("La declaración se ha generado exitosamente.")
-	            			
+
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
-	            			$("#icaPresentarDeclaracionButton").prop('disabled', false);
+	            			$("#icaPresentarDeclaracionButton").prop('disabled', true);
+	            			$("#action").prop('disabled', false);
 	            		}
-	 	      		
+
 		            },
 		            error: function () {
 		            	$( "#dialogICA" ).dialog( "open" );
@@ -546,7 +546,7 @@ ACC.ica = {
 		            	$("#icaPresentarDeclaracionButton").prop('disabled', false);
 		            }
 		        });
-	 	       
+
 		 });
 	 },
 	 
