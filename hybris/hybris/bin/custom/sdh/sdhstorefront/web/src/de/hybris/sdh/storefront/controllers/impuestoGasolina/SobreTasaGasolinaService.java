@@ -1244,7 +1244,7 @@ public class SobreTasaGasolinaService
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2).trim() + "B" + periodo;
+			periodoConvertidoPagar = anoGravable.substring(2).trim() + "B" + periodo.substring(1).trim();
 		}
 
 
