@@ -414,11 +414,9 @@ ACC.opcionDeclaraciones = {
 						'<td><input id="registroNum_'+ 0 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ infoResponse.ica.numObjeto +'"' +">" + "</td>"+
 						"</tr>");
 			}
-			
 			if(infoResponse.reteIca.consecutivo == null){
 				infoResponse.reteIca.consecutivo ="-";
 			}
-			
 			
 			if(infoActual.claveImpuesto == '0004'){
 				$('#table-reteica1').append("<tr>"+ 
