@@ -245,7 +245,6 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		if (response != null)
 		{
 			pseTransactionsLogModel.setSoliciteDate(dateTimeFormat.format(response.getSoliciteDate()));
-			//pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(response.getBankProcessDate()));
 			try
 			{
 				pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(map.get("bankProcessDate")));
@@ -253,10 +252,9 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			catch (final Exception e)
 			{
 				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
-			}
-			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
-			pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
-			pseTransactionsLogModel.setPaymentMode(map.get("bankProcessDate"));
+			}			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
+			//pseTransactionsLogModel.setPaymentMode(map.get("bankProcessDate"));
 
 			transactionState = response.getTransactionState().getValue();
 

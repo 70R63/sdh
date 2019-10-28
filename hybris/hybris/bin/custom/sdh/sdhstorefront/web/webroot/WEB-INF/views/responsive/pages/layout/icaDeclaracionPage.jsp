@@ -12,7 +12,6 @@
 
 	<icadecla:icaDeclaraInicial/>
 	<icadecla:icaDeclaraGenerales/>
-	
 	<icadecla:icaDeclaraActFuera/>
 	<icadecla:icaDeclaraDeduccion/>
 	<icadecla:icaDeclaraTotal/>

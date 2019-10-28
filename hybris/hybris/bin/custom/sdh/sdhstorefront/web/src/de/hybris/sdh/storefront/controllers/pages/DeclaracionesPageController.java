@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -107,7 +108,8 @@ public class DeclaracionesPageController extends AbstractPageController
 	SDHReteIcaService sdhReteICAInfObjetoService;
 
 
-	@RequestMapping(value = "/contribuyentes/consultas/declaraciones", method = RequestMethod.GET)
+	@RequestMapping(value =
+	{ "/contribuyentes/consultas/declaraciones", "/agenteRetenedor/consultas/declaraciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String declaracionesGET(final Model model) throws CMSItemNotFoundException
 	{
