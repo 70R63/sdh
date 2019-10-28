@@ -182,6 +182,8 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 
 
 		generaDeclaracionRequest.setNumForm(numForm);
+		generaDeclaracionRequest.setNum_id(customerData.getNumBP());
+		generaDeclaracionRequest.setTipo_id(customerData.getDocumentType());
 
 		try
 		{
