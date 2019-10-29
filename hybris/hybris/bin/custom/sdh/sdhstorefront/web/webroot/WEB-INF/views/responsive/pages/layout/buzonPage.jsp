@@ -7,7 +7,7 @@
 <%@ taglib prefix="mibuzon" tagdir="/WEB-INF/tags/responsive/buzon"%>
 
 
-
+<div class="loader"></div>
 
 <mibuzon:buzonInicio />
 <div id="idNotifi" style="display: none;">
@@ -33,6 +33,7 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 	function myFunction(idButton) {
 

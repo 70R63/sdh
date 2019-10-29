@@ -7,6 +7,7 @@
 <%@ taglib prefix="sobreVehiculos"
 	tagdir="/WEB-INF/tags/responsive/sobreVehiculos"%>
 
+<div class="loader"></div>
 
 <sobreVehiculos:sobreMotosDeclaraInicial />
 <sobreVehiculos:sobreMotosDeclaraInfo />
@@ -30,5 +31,6 @@
 				}
 			}
 		}	
+		 $(".loader").fadeOut("slow");
 	}
 </script>

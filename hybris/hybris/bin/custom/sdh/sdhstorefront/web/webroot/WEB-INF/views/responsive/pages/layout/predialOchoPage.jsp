@@ -8,6 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/predial/predialPaginaOcho"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
+<div class="loader"></div>
 
 <predial:predialOchoGenerales/>
 <predial:predialOchoDatLiq/>
@@ -30,5 +31,6 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 </script>

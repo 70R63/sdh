@@ -16,12 +16,21 @@ import de.hybris.sdh.core.services.SDHCredibancoJwt;
 import de.hybris.sdh.core.services.SDHPseTransactionsLogService;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
-import de.hybris.sdh.core.soap.pse.eanucc.*;
+import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseFieldType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import javax.annotation.Resource;
@@ -230,15 +239,20 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationDetailedResponseBodyType responseDetailed)
 	{
 		final DateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		HashMap<String, String> map = this.transactionInformationDetailedResponseToHash(responseDetailed);
+		final HashMap<String, String> map = this.transactionInformationDetailedResponseToHash(responseDetailed);
 
 		String transactionState = null;
 		if (response != null)
 		{
 			pseTransactionsLogModel.setSoliciteDate(dateTimeFormat.format(response.getSoliciteDate()));
-			pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(response.getBankProcessDate()));
-			//pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(map.get("bankProcessDate")));
-			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+			try
+			{
+				pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(map.get("bankProcessDate")));
+			}
+			catch (final Exception e)
+			{
+				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
+			}			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
 			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
 			//pseTransactionsLogModel.setPaymentMode(map.get("bankProcessDate"));
 
@@ -385,13 +399,13 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 	}
 
-	private HashMap<String, String> transactionInformationDetailedResponseToHash(GetTransactionInformationDetailedResponseBodyType transactionInformationDetailed){
-		HashMap<String, String> map = new HashMap<>();
+	private HashMap<String, String> transactionInformationDetailedResponseToHash(final GetTransactionInformationDetailedResponseBodyType transactionInformationDetailed){
+		final HashMap<String, String> map = new HashMap<>();
 
 		LOG.info("-------- TransactionInformationDetailedResponseToHash -------");
 		if(Objects.nonNull(transactionInformationDetailed)){
 			LOG.info("Return Code: " + transactionInformationDetailed.getReturnCode());
-			Stream<GetTransactionInformationDetailedResponseFieldType> stream = Arrays.stream(transactionInformationDetailed.getField());
+			final Stream<GetTransactionInformationDetailedResponseFieldType> stream = Arrays.stream(transactionInformationDetailed.getField());
 			stream.forEach(data -> map.put(data.getName(),data.getValue()));
 		}
 		LOG.info(map);

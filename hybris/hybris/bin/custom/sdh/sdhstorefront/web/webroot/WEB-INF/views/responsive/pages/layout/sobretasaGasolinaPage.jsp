@@ -37,9 +37,11 @@ window.onload = function() {
 				cosas[i].value = "-";
 			}
 		}
-	}	
+	}
+	 $(".loader").fadeOut("slow");
 }
 	function goBack() {
 		window.history.back();
 	}
 </script>
+

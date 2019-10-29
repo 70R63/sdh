@@ -31,9 +31,13 @@
 		<c:otherwise>
 		</c:otherwise>
 	</c:choose>
-</template:page>
+
 
 <script  type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
 function changeMessage() {
 	debugger;
 	var rol = document.getElementById("rol").value;
@@ -43,3 +47,4 @@ function changeMessage() {
 	document.getElementById("mensaje").value = mensaje;
 }
 </script>
+</template:page>

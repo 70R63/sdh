@@ -8,6 +8,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<div class="loader"></div>
 <template:page>
 	<div class="container">
 		<c:url var="importGestion" value="uploadFile" />
@@ -20,6 +21,13 @@
 		  <button type="submit" class="btn btn-default">Submit</button>
          </form:form>
 	</div>
+	
+			<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
 </template:page>
 
 x

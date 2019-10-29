@@ -10,6 +10,8 @@
 	tagdir="/WEB-INF/tags/responsive/predial/predialBasesPresuntivas"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
+<div class="loader"></div>
+
 <predial:predialBasesGenerales />
 <predial:predialBasesDatPredio />
 
@@ -23,7 +25,7 @@
 <script>
 
 window.onload = function() {
-	debugger;
+	
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){
@@ -35,5 +37,6 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 </script>

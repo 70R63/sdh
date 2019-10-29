@@ -7,6 +7,7 @@
 <%@ taglib prefix="reportantes"
 	tagdir="/WEB-INF/tags/responsive/reportantesInformacion"%>
 
+<div class="loader"></div>
 
 <div class="container_new_page">
 	<reportantes:reportantesInicial></reportantes:reportantesInicial>
@@ -24,4 +25,9 @@
 	</div>
 </div>
 
-
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

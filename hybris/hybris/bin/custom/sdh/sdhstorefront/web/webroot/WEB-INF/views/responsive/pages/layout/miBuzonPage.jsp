@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="mibuzon" tagdir="/WEB-INF/tags/responsive/miBuzon"%>
 
-
+<div class="loader"></div>
 
 
 	<mibuzon:miBuzonInicial />
@@ -33,6 +33,7 @@ window.onload = function() {
 			}
 		}
 	}
+	 $(".loader").fadeOut("slow");
 }
 	function myFunction(idButton) {
 

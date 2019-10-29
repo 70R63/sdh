@@ -10,7 +10,7 @@
 
 <spring:url value="/contribuyentes/delineacionurbana/retencion"
 	var="duRetencionURL" htmlEscape="false" />
-
+<div class="loader"></div>
 
 <sf:form action="${duRetencionURL}" method="POST"
 	modelAttribute="dataForm" id="forma">
@@ -39,6 +39,7 @@ window.onload = function() {
 
 			}
 	}
+		$(".loader").fadeOut("slow");
 
 }
 	function goBack() {

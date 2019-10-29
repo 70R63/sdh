@@ -8,6 +8,8 @@
 <%@ taglib prefix="asigna"
 	tagdir="/WEB-INF/tags/responsive/asignarsecomoAgente"%>
 
+<div class="loader"></div>
+
 <asigna:buscarContrib />
 <div id="IdDetalleCrear" style="display: none">
 	<asigna:selecCalidad />
@@ -33,6 +35,7 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 	function detalleBP() {
 		debugger;

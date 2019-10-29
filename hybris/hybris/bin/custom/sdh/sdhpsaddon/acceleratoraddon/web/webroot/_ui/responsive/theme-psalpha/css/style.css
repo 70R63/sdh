@@ -24515,13 +24515,13 @@ th {
 .tabledomatri,
 .tablecodpost,
 .tabledoobli {
-  width: 80px !important;
+  width: 85px !important;
   text-align: center !important;
 }
 .tablefechas,
 .tableident,
 .tableangrav {
-  width: 75px !important;
+  width: 83px !important;
   text-align: center !important;
 }
 .tablenombre,
@@ -24773,7 +24773,7 @@ span.pasos {
   }
   .tableident,
   .tableangrav {
-    width: 25% !important;
+    width: 27% !important;
     text-align: center !important;
   }
   .tablenombre,
@@ -24823,7 +24823,7 @@ span.pasos {
   }
   .tableident,
   .tableangrav {
-    width: 25% !important;
+    width: 27% !important;
     text-align: center !important;
   }
   .tablenombre,
@@ -25146,4 +25146,14 @@ span.pasos {
   padding: 1px 1px 1px 1px!important;
   min-width: 20% !important;
   max-width: 101% !important;
+}
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('../images/CARGANDO.gif') 50% 50% no-repeat #f9f9f9;
+  opacity: .8;
 }

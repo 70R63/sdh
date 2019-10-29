@@ -10,14 +10,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div class="loader"></div>
 
 <impuestos:listaImpuestos />
 
 
 
 <script type="text/javascript">
-	window.onload = function data() {
-
+	
+		window.onload = function() {
+			
+		    $(".loader").fadeOut("slow");
+		}
+		
 		//debugger;
 
 		//var div = document.getElementById("impuestoGas");

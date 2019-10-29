@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="delineacionUrbana" tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 	<div class="container">
 		<div class="row">
@@ -957,13 +958,7 @@
 		
 	</div>	
 	
-	
-	
-	
-	
-	
-	
-</template:page>
+
 
 <script>
 
@@ -980,8 +975,10 @@ window.onload = function() {
 			}
 		}
 	}
+	 $(".loader").fadeOut("slow");
 }
   $( function() {
     $( "#tabs" ).tabs();
   } );
   </script>
+  </template:page>

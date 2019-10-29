@@ -8,6 +8,18 @@
 	tagdir="/WEB-INF/tags/responsive/listaContribuyente"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<div class="loader"></div>
+
 <template:page pageTitle="${pageTitle}">
 <cont:contribuyentesLista/>
+	<script type="text/javascript">
+	debugger;
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
+
 </template:page>
+
+

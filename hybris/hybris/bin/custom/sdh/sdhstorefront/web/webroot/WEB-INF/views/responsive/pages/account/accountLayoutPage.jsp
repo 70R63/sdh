@@ -29,4 +29,14 @@
         <cms:pageSlot position="BottomContent" var="feature" element="div" class="accountPageBottomContent">
             <cms:component component="${feature}" />
         </cms:pageSlot>
+
+<script type="text/javascript">
+	debugger;
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
 </template:page>
+
+	

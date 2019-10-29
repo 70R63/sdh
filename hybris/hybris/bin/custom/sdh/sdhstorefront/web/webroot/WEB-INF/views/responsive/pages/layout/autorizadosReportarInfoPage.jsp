@@ -6,6 +6,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="autorizados" tagdir="/WEB-INF/tags/responsive/agentesAutorizados"%>
 
+<div class="loader"></div>
+
 <autorizados:autorizadosReportarInfo />
 
 
@@ -28,6 +30,7 @@
 				}
 			}
 		}
+		 $(".loader").fadeOut("slow");
 	}
 </script>
 

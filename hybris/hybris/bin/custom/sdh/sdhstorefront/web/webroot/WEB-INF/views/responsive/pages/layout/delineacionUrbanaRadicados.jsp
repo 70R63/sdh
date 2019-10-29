@@ -8,7 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-
+<div class="loader"></div>
 <spring:url value="/contribuyentes/delineacionurbana/retencion"
 	var="duRetencionURL" htmlEscape="false" />
 
@@ -39,6 +39,7 @@ window.onload = function() {
 			}
 		}
 	}
+    $(".loader").fadeOut("slow");
 }
 	function goBack() {
 		var declaracion = '${param.declaracion}';

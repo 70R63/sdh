@@ -7,7 +7,7 @@
 <%@ taglib prefix="obligaciones"
 	tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
 
-
+<div class="loader"></div>
 
 <obligaciones:obliPendientesMenu />
 <div id="idtodos" style="display: block;">
@@ -31,6 +31,7 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 function goBack() {
 	window.history.back();

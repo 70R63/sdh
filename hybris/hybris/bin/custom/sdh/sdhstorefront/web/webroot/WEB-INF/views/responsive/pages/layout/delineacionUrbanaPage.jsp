@@ -7,7 +7,7 @@
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-
+<div class="loader"></div>
 
 <delineacionUrbana:delineacionUrbanaIDs />
 <delineacionUrbana:delineacionUrbanaCDUs />
@@ -30,6 +30,7 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 	function goBack() {
 		window.history.back();

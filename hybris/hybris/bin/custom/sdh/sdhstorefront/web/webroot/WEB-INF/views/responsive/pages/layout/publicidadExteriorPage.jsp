@@ -12,7 +12,7 @@
 	
 <spring:htmlEscape defaultHtmlEscape="true" />	
 
-
+<div class="loader"></div>
 <style>
 #divAvisos { }
 #divConvencional { }
@@ -43,7 +43,7 @@
 	
 	
 	
-</template:page>
+
 
 <script>
 
@@ -61,11 +61,16 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 
 	function goBack() {
 		window.history.back();
 	}
 </script>
+
+</template:page>
+
+
 
 

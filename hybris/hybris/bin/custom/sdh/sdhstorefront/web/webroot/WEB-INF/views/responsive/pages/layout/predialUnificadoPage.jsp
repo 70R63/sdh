@@ -8,6 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/predial/predialBasesPresuntivas"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
+<div class="loader"></div>
 
 <predial:predialBasesGenerales />
 <predial:predialBasesDatLiq />
@@ -32,5 +33,7 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 </script>
+

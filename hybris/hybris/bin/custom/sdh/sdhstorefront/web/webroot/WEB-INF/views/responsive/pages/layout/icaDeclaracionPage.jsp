@@ -10,6 +10,7 @@
 
 	<%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
+<div class="loader"></div>
 	<icadecla:icaDeclaraInicial/>
 	<icadecla:icaDeclaraGenerales/>
 	<icadecla:icaDeclaraActFuera/>
@@ -25,7 +26,7 @@
 
 	<div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
 	
-	
+
 <script>	
 
 window.onload = function() {
@@ -41,6 +42,7 @@ window.onload = function() {
 			}
 		}
 	}
+	 $(".loader").fadeOut("slow");
 
 }
 	function goBack() {

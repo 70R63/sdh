@@ -8,13 +8,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
 
 
-
+<div class="loader"></div>
 
 <div class="row" >
     <script>
 	
 	window.onload = function() {
-		debugger;
 		var cosas = $(":input");
 		var tam = cosas.length;
 		if (false){
@@ -26,6 +25,7 @@
 				}
 			}
 		}
+		  $(".loader").fadeOut("slow");
 	}
 		function downloadPDF(pdf) {
 			    const linkSource = 'data:application/pdf;base64,' + pdf;

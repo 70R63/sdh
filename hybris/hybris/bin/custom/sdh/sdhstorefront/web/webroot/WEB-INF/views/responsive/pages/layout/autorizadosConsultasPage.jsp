@@ -7,10 +7,15 @@
 <%@ taglib prefix="agentes"
 	tagdir="/WEB-INF/tags/responsive/agentesAutorizadosConsulta"%>
 
+
+<div class="loader"></div>
+
 <agentes:consultainicial />
 <div id="tabla" style="display: none;">
 	<agentes:consultaTable />
 </div>
+
+
 
 <script type="text/javascript">
 
@@ -27,6 +32,7 @@ window.onload = function() {
 			}
 		}
 	}
+	  $(".loader").fadeOut("slow");
 }
 	function goBack() {
 		window.history.back();

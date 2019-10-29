@@ -12,7 +12,79 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/contribuyentes/consultas/arCertipagos"
 	var="certificacionURL" htmlEscape="false" />
+<script>
+window.onload = function() {
+	//Se agrega funcionalidad para agentes Retenedores
+	debugger;
+	var url = window.parent.location.href;
+	var contenido_url = url.includes('contribuyentes');
+	
+	if(contenido_url == true){
+		var contrib_select = document.getElementById('idImpuesto');
+		contrib_select.style.display = 'block';
+	}else{
+		var contrib_select = document.getElementById('idImpuestoAgente');
+		contrib_select.style.display = 'block';
 
+		$("#seleccion").val("0004");
+		var obj=document.getElementById("seleccion");
+		
+//  		document.getElementById("BanderaAgete").value= "X";
+		
+		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.prepararPeriodo();
+		
+	}
+	$(".loader").fadeOut("slow");
+}
+function SelectedAnio(selectObject) {
+	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+
+}
+
+function valper(selectObject) {
+	var per = selectObject.value;
+	var anio = document.getElementById('aniograv').value;
+	var fecha = new Date();
+	var anioact = fecha.getFullYear();
+	var mesact = fecha.getMonth();
+
+	if (anio < anioact) {
+
+	} else {
+		mesact = mesact + 1;
+		if (per < mesact) {
+
+		} else {
+			alert("Por favor, seleccione un mes anterior");
+		}
+
+	}
+	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+
+}
+
+function vaperiodo(selectObject) {
+
+	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+}
+	
+	function downloadPDF(pdf, newfilename) {
+		debugger;
+		if (pdf){
+			const linkSource = 'data:application/pdf;base64,' + pdf;
+		    const downloadLink = document.createElement("a");
+		    var fileName = newfilename;	
+		    downloadLink.href = linkSource;
+		    downloadLink.download = fileName;
+		    downloadLink.click();
+		}    
+	}
+	
+	
+	downloadPDF('${imprimeCertiDeclaraResponse.stringPDF}','Certificación_Declaracion.pdf');
+	
+</script>
 
 <a id="downloadHelper" target="_blank"></a>
 <c:choose>
@@ -47,7 +119,7 @@
 
 		<div class="row">
 			<div class="col-md-4 col-xs-12 mb-20 no-marginright" id="idImpuesto"
-				style="display: block;">
+				style="display: none;">
 				<span class="paso--uno pasos color-sr1">1</span>
 				
 				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICACIÓN DE PAGO</h2>
@@ -63,6 +135,24 @@
 				</div>
 				
 			</div>
+			
+				<div class="col-md-4 col-xs-12 mb-20 no-marginright" id="idImpuestoAgente"
+				style="display: none;">
+				<span class="paso--uno pasos color-sr1">1</span>
+				
+				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICACIÓN DE PAGO</h2>
+				<p class="pasoClase1 metrophobic">El impuesto a consultar es:</p>
+				
+				<div class="caja--ser-rel color-sr1">
+					<div class="form-group">
+					<input id="0004"
+						name="" class="newalto form-control" disabled type="text" value="Retención ICA"
+						maxlength="240" style="display: inline-block !important;"></input>
+					</div>
+				</div>
+				
+			</div>
+
 			
 			<div id="Periodo0" class="col-md-4 col-xs-12 mb-20 no-margincol">
 				<span class="paso--dos pasos color-sr2">2</span>

@@ -7,7 +7,7 @@
 
 
 		<spring:htmlEscape defaultHtmlEscape="true" />
-
+<div class="loader"></div>
 
 		<template:page pageTitle="${pageTitle}">
 <div class="container_menu">
@@ -41,4 +41,10 @@
 		</div>	
 	</div>
 </div>
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
 	</template:page>

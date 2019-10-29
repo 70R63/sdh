@@ -6,6 +6,8 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="lista" tagdir="/WEB-INF/tags/responsive/arListaDeclaraciones"%>
 
+<div class="loader"></div>
+
 <lista:agentesLista/>
 
 
@@ -23,7 +25,8 @@
 
 				}
 			}
-		}	
+		}
+		$(".loader").fadeOut("slow");
 
 	}
 

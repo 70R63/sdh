@@ -9,7 +9,7 @@
 	
 <spring:htmlEscape defaultHtmlEscape="true" />	
 
-
+<div class="loader"></div>
 <template:page>
 
 <div class="container">
@@ -67,6 +67,13 @@
 	<div id="dialogConciliaciones" title="Conciliaciones" ><div id="conciliacionesDialogContent"></div></div>
 </div>
 	
+	
+	<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
 </template:page>
 
 

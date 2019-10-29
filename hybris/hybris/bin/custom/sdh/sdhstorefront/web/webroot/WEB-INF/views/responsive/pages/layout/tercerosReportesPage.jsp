@@ -8,12 +8,17 @@
 	tagdir="/WEB-INF/tags/responsive/terceroautorizado"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<div class="loader"></div>
 
 <terceros:terceroReportarIn/>
 
 
-
 <script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function goBack() {
 		window.history.back();
 	}

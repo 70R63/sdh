@@ -7,7 +7,7 @@
 <%@ taglib prefix="miRit" tagdir="/WEB-INF/tags/responsive/miRit"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 	<div class="container_new_page">
 		<p>
@@ -44,7 +44,7 @@
 
 
 
-</template:page>
+
 
 <script>
 
@@ -69,7 +69,7 @@ window.onload = function() {
 			var texto = inputcol[i].value;
 			inputcol[i].style.width = (texto.length + 1) * 10 + 'px';
 		}
-
+		$(".loader").fadeOut("slow");
 	};
 
 	function ajustar(selectObject) {
@@ -80,4 +80,6 @@ window.onload = function() {
 
 
 </script>
+
+</template:page>
 

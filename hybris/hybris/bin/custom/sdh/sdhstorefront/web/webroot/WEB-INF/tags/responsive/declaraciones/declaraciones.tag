@@ -11,6 +11,30 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <script>
+
+window.onload = function() {
+	debugger;
+	//Se agrega funcionalidad para agentes Retenedores
+	var url = window.parent.location.href;
+	var contenido_url = url.includes('contribuyentes');
+	
+	if(contenido_url == true){
+		var contrib_select = document.getElementById('imprimirCont');
+		contrib_select.style.display = 'block';
+	}else{
+		var contrib_select = document.getElementById('imprimirAR');
+		contrib_select.style.display = 'block';
+
+		$("#seleccion").val("0004");
+		var obj=document.getElementById("seleccion");
+		
+ 		document.getElementById("BanderaAgete").value= "X";
+		
+		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.prepararPeriodo();
+		
+	}
+}
 	function SelectedAnio(selectObject) {
 // 		debugger;
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
@@ -58,9 +82,10 @@
 	</div>
 
 	<form:form id="" action="" method="post" commandName="dataForm">
+	<input type="hidden" name="BanderaAgete" id="BanderaAgete" value="" />
 
 		<div class="row">
-			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
+			<div class="col-md-4 col-xs-12 mb-20 no-marginright imprimirCont" id="imprimirCont" style="display: none">
 				<span class="paso--uno pasos color-sr1">1</span>
 				<h2 class="titulo-caja--ser-rel color-sr1 ">IMPRIMIR
 					DECLARACIÓN</h2>
@@ -72,6 +97,18 @@
 						path="claveImpuesto" 
 						items="${dataForm.catalogos.impuesto}"
 						referenceData="${dataForm.catalogos.impuesto}" />
+				</div>
+			</div>
+			
+				<div class="col-md-4 col-xs-12 mb-20 no-marginright imprimirAR" id="imprimirAR" style="display: none">
+				<span class="paso--uno pasos color-sr1">1</span>
+				<h2 class="titulo-caja--ser-rel color-sr1 ">IMPRIMIR
+					DECLARACIÓN</h2>
+				<p class="pasoClase1 metrophobic">El impuesto a consultar es:</p>
+				<div class="caja--ser-rel color-sr1">
+					<input id="0004"
+						name="" class="newalto form-control" disabled type="text" value="Retención ICA"
+						maxlength="240" style="display: inline-block !important;"></input>
 				</div>
 			</div>
 

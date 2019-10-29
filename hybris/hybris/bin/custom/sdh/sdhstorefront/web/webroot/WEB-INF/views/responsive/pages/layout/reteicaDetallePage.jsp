@@ -6,6 +6,14 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="rete" tagdir="/WEB-INF/tags/responsive/reteICA"%>
 
+<div class="loader"></div>
 
 <rete:reteicaTable />
 <rete:reteicaDetalle />
+
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
