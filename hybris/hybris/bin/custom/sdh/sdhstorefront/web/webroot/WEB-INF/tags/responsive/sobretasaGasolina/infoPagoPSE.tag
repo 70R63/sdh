@@ -35,7 +35,7 @@
 		<sf:hidden path="objPago" />
 		<sf:hidden path="CUD" />
 		<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-			name="pagar" value="pagar" disabled="false">
+			name="pagar" value="pagar" disabled="true">
 			<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 		</sf:button>
 	</sf:form>
