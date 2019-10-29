@@ -10,6 +10,8 @@
 	value="/contibuyentes/tramites/crear"
 	var="enviarURL" htmlEscape="false" />
 
+<div class="loader"></div>
+
 <sf:form action="${enviarURL}" method="POST" modelAttribute="dataForm" id="forma" onsubmit="return validarAntesSubmit();">
 	<tramite:crearTramite/>
 </sf:form>

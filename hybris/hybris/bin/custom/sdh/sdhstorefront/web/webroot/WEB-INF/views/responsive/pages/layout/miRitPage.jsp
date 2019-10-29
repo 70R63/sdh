@@ -7,7 +7,7 @@
 <%@ taglib prefix="miRit" tagdir="/WEB-INF/tags/responsive/miRit"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 	<div class="container_new_page">
 		<p>

@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
 
 
-
+<div class="loader"></div>
 
 <div class="row" >
     <script>

@@ -7,7 +7,7 @@
 <%@ taglib prefix="certificacion"
 	tagdir="/WEB-INF/tags/responsive/consultas"%>
 
-
+<div class="loader"></div>
 
 	<certificacion:arCertificacionMenu />
 

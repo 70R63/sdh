@@ -9,6 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<div class="loader"></div>
 
 <sobreTasaGasolina:infoPagoPSE />
 <body onload="myFunction()" />

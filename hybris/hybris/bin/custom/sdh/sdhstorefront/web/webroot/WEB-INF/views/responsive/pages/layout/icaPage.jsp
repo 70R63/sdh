@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="ica" tagdir="/WEB-INF/tags/responsive/ica"%>
 
+<div class="loader"></div>
 <ica:icaTable />
 <ica:icaDetalle />
 <ica:icaActividades />

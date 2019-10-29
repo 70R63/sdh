@@ -9,6 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div class="loader"></div>
 
 	<div id="dialogRop" title="Generar ROP">
 	<div id="ropDialogContent"></div>

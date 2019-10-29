@@ -7,6 +7,7 @@
 <%@ taglib prefix="sobreVehiculos"
 	tagdir="/WEB-INF/tags/responsive/sobreVehiculos"%>
 
+<div class="loader"></div>
 
 <sobreVehiculos:sobreVehiculosTable />
 <div id="detalleVehiculos" style="display: none">
