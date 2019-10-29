@@ -3,7 +3,9 @@
  */
 package de.hybris.sdh.core.services;
 
-import de.hybris.sdh.core.pojos.responses.TypFileBancoListResponse;
+import de.hybris.sdh.core.form.SelectAtomValue;
+
+import java.util.List;
 
 /**
  * @author edson.roa
@@ -11,5 +13,5 @@ import de.hybris.sdh.core.pojos.responses.TypFileBancoListResponse;
  */
 public interface SDHValidateBankFiles
 {
-	TypFileBancoListResponse getTypeFileBank(String codbk);
+	List<SelectAtomValue> getTypeFileBank(String codbk);
 }

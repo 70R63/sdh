@@ -4,6 +4,7 @@
 package de.hybris.sdh.core.services.impl;
 
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.sdh.core.form.SelectAtomValue;
 import de.hybris.sdh.core.pojos.responses.TypFileBancoListResponse;
 import de.hybris.sdh.core.pojos.responses.TypFileBancoResponse;
 import de.hybris.sdh.core.services.SDHValidateBankFiles;
@@ -46,9 +47,11 @@ public class DefaultSDHValidateBankFiles implements SDHValidateBankFiles
 	 * @see de.hybris.sdh.core.services.SDHValidateBankFiles#getTypeFileBank(java.lang.String)
 	 */
 	@Override
-	public TypFileBancoListResponse getTypeFileBank(final String codbk)
+	public List<SelectAtomValue> getTypeFileBank(final String codbk)
 	{
 
+		List<SelectAtomValue> returnData = new ArrayList<>();
+		SelectAtomValue atomData = null;
 		final RestTemplate restTemplate = new RestTemplate();
 		final TypFileBancoListResponse typFileBancoListResponse = new TypFileBancoListResponse();
 		final List<TypFileBancoResponse> arrayTipos = new ArrayList<>();
@@ -83,15 +86,14 @@ public class DefaultSDHValidateBankFiles implements SDHValidateBankFiles
 		final JsonNode tipos = Objects.isNull(root) ? null : root.path("tipos");
 		for (final JsonNode objNode : tipos)
 		{
-			typFileBancoResponse = new TypFileBancoResponse();
-			typFileBancoResponse.setFTYPE(objNode.path("FTYPE").isInt() ? String.valueOf(objNode.path("FTYPE").intValue())  : objNode.path("FTYPE").textValue());
-			typFileBancoResponse.setFNAME(objNode.path("FNAME").textValue());
-
-			arrayTipos.add(typFileBancoResponse);
+			atomData = new SelectAtomValue(
+					objNode.path("FTYPE").isInt() ? String.valueOf(objNode.path("FTYPE").intValue())  : objNode.path("FTYPE").textValue(),
+					objNode.path("FNAME").textValue()
+			);
+			returnData.add(atomData);
 		}
 
-		typFileBancoListResponse.setTipos(arrayTipos);
-		return typFileBancoListResponse;
+		return returnData;
 
 	}
 

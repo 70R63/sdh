@@ -13,10 +13,8 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
-import de.hybris.sdh.core.services.SDHCertificaRITService;
-import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
-import de.hybris.sdh.core.services.SDHGestionBancaria;
-import de.hybris.sdh.core.services.SDHUpdateRitService;
+import de.hybris.sdh.core.services.*;
+import de.hybris.sdh.core.form.SelectAtomValue;
 
 import javax.annotation.Resource;
 
@@ -30,6 +28,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 /**
  * @author Maria Luisa
@@ -64,13 +64,21 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 	@Resource(name = "sdhGestionBancaria")
 	private SDHGestionBancaria sdhGestionBancaria;
 
+
+	@Resource(name = "sdhValidateBankFiles")
+	private SDHValidateBankFiles sdhValidateBankFiles;
+
+	@ModelAttribute("tipoDeImpuesto")
+	public List<SelectAtomValue> getIdTipoDeImpuesto()
+	{
+		return sdhValidateBankFiles.getTypeFileBank("");
+	}
+
 	@RequestMapping(value = "/autorizados/entidades/reportarinfo", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String autorizados(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Autorizados reportar --------------------------");
-
-
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(AUTORIZADOS_REPORTAR_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(AUTORIZADOS_REPORTAR_CMS_PAGE));
