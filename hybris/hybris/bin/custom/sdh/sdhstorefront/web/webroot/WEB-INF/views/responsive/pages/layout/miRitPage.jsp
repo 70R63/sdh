@@ -44,7 +44,7 @@
 
 
 
-</template:page>
+
 
 <script>
 
@@ -80,4 +80,6 @@ window.onload = function() {
 
 
 </script>
+
+</template:page>
 

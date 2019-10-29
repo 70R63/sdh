@@ -43,7 +43,7 @@
 	
 	
 	
-</template:page>
+
 
 <script>
 
@@ -67,5 +67,7 @@ window.onload = function() {
 		window.history.back();
 	}
 </script>
+
+</template:page>
 
 

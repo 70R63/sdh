@@ -487,6 +487,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 	{
 		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
 
+
+
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetGasRevisorDeclaranteResponse revisor = new DetGasRevisorDeclaranteResponse();
 		final DetGasRevisorDeclaranteResponse declarante = new DetGasRevisorDeclaranteResponse();
@@ -669,6 +671,8 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Declaracion gasolina POST --------------------------");
+
+
 
 		List<DetGasInfoDeclaraResponse> infoDeclaraDefault;
 		List<DetGasRevisorDeclaranteResponse> revisorDeclaranteDefault;

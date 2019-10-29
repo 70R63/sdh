@@ -8,6 +8,9 @@
 	tagdir="/WEB-INF/tags/responsive/listaContribuyente"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+
 <template:page pageTitle="${pageTitle}">
 <cont:contribuyentesLista/>
 </template:page>
+
+
