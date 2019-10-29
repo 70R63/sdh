@@ -12,15 +12,18 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
 import de.hybris.sdh.core.pojos.responses.ContribFirmasResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleDeclaraciones;
 import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.ContribuyenteForm;
@@ -95,26 +98,33 @@ public class ARListaDeclaracionesPageController extends AbstractPageController
 				final ContribFirmasResponse contribFirmasResponse = mapper
 						.readValue(sdhConsulFirmasService.getDeclaraciones(consulFirmasRequest), ContribFirmasResponse.class);
 
+				for (final DetalleDeclaraciones eachPeriodo : contribFirmasResponse.getDeclaraciones())
+				{
+					String anoGravable = "";
+					String perRepor = "";
+
+					if ("0004".equals(eachPeriodo.getImpuesto()))
+					{
+						anoGravable = eachPeriodo.getAnioGravable();
+						perRepor = eachPeriodo.getPeriodo();
+
+						eachPeriodo.setPeriodo("B" + perRepor);
+
+					}
 
 
-					//					contibForm.setDetalle().setIdDeclaracion(eachDetalle.getIdDeclaracion());
+				}
+
 					contibForm.setDeclaraciones(contribFirmasResponse.getDeclaraciones().stream()
 						.filter(eachDetDecla -> StringUtils.isNotBlank(eachDetDecla.getIdDeclaracion())).collect(Collectors.toList()));
 
-				//
-				//				if (sdhConsultaContribuyenteBPResponse.getVehicular() != null
-				//						&& CollectionUtils.isNotEmpty(sdhConsultaContribuyenteBPResponse.getVehicular()))
-				//				{
-				//					vehiculosForm.setImpvehicular(sdhConsultaContribuyenteBPResponse.getVehicular().stream()
-				//							.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
-				//				}
 
 			}
 			catch (final Exception e)
 			{
 				// XXX Auto-generated catch block
-				//				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-				//				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 			}
 
 		}

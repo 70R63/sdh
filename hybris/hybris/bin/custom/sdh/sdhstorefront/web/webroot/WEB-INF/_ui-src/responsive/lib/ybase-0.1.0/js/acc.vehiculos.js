@@ -46,7 +46,7 @@ ACC.vehiculos = {
 														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ numUno
 														+ '" /></td>'
-														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+														+ '<td><input style="width: 203px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ nomUno + '" /></td>');
 							} else {
 
@@ -65,7 +65,7 @@ ACC.vehiculos = {
 														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ numDos
 														+ '" /></td>'
-														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+														+ '<td><input style="width: 203px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ nomDos + '" /></td>');
 							} else {
 
@@ -84,7 +84,7 @@ ACC.vehiculos = {
 														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ numTres
 														+ '" /></td>'
-														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+														+ '<td><input style="width: 203px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ nomTres + '" /></td>');
 							} else {
 
