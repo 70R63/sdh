@@ -10,19 +10,18 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
-<div class="loader"></div>
+
 <sobreTasaGasolina:infoPagoPSE />
 <body onload="myFunction()" />
 
 
 <script type="text/javascript">
-
 	function myFunction() {
 
 		var form = document.getElementById("psePaymentForm");
 
 		form.submit();
-$(".loader").fadeOut("slow");
+		$(".loader").fadeOut("slow");
 
 	}
 </script>
