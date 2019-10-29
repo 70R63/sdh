@@ -8,6 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/predial/predialPaginaTres"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
+<div class="loader"></div>
 
 <predial:predialTresGenerales />
 <predial:predialTresDatLiq />

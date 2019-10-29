@@ -7,7 +7,7 @@
 
 
 		<spring:htmlEscape defaultHtmlEscape="true" />
-
+<div class="loader"></div>
 
 		<template:page pageTitle="${pageTitle}">
 <div class="container_menu">

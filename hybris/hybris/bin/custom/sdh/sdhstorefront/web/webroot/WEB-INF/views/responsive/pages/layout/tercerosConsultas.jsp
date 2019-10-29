@@ -7,6 +7,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="tercero"
 	tagdir="/WEB-INF/tags/responsive/terceroconsulta"%>
+<div class="loader"></div>
 
 <tercero:consultainicial/>
 <div id="tabla" style="display: none;">

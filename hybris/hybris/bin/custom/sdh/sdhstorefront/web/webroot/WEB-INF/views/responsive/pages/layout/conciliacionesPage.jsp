@@ -9,7 +9,7 @@
 	
 <spring:htmlEscape defaultHtmlEscape="true" />	
 
-
+<div class="loader"></div>
 <template:page>
 
 <div class="container">

@@ -7,7 +7,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="desfac"
 	tagdir="/WEB-INF/tags/responsive/facturacion"%>
-
+<div class="loader"></div>
 
 <desfac:descargaFactura/>
 

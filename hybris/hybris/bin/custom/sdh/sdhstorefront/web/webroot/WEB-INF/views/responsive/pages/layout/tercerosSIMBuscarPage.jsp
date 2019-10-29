@@ -8,6 +8,9 @@
 	tagdir="/WEB-INF/tags/responsive/terceroautorizado"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+
+<div class="loader"></div>
+
 <terceros:terceroSIMBuscar/>
 
 

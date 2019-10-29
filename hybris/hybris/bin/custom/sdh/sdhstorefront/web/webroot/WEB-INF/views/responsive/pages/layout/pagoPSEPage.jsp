@@ -6,42 +6,29 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="pagoPSE" tagdir="/WEB-INF/tags/responsive/pagoPSE"%>
 
-<<<<<<< HEAD
-<template:page pageTitle="${pageTitle}">
-	<div class="container">
-		<pagoPSE:formSection/>
-	</div>	
 
-<script type="text/javascript">
-window.onload = function() {
-	
-    $(".loader").fadeOut("slow");
-}
-
-=======
---flagSuccessView:${flagSuccessView}--
---${empty flagSuccessView}--
+--flagSuccessView:${flagSuccessView}-- --${empty flagSuccessView}--
 <c:choose>
 	<c:when test="${empty flagSuccessView}">
 		<template:page pageTitle="${pageTitle}">
 			<div class="container">
-				<pagoPSE:formSection/>
-			</div>	
+				<pagoPSE:formSection />
+			</div>
 		</template:page>
 	</c:when>
 	<c:otherwise>
 		<template:page pageTitle="${pageTitle}">
 			<div class="container">
-				<pagoPSE:formSection_success/>
-			</div>	
+				<pagoPSE:formSection_success />
+			</div>
 		</template:page>
 	</c:otherwise>
 </c:choose>
+
 <script>
->>>>>>> dev-federico
-function goBack() {
-  window.history.back();
-}
+
+	function goBack() {
+		window.history.back();
+	}
 </script>
 
-</template:page> 

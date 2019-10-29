@@ -7,6 +7,8 @@
 <%@ taglib prefix="relacionpagos"
 	tagdir="/WEB-INF/tags/responsive/relacionPagos"%>
 
+<div class="loader"></div>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 	<relacionpagos:relacionPagosMenu />

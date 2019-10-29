@@ -7,6 +7,8 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="crea" tagdir="/WEB-INF/tags/responsive/crearAgente"%>
 
+<div class="loader"></div>
+
 <crea:buscarContrib />
 <div id="IdDetalleCrear" style="display: none">
 	<crea:selecCalidad />

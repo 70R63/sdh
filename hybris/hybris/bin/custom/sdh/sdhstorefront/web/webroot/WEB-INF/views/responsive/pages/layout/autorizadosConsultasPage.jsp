@@ -7,6 +7,9 @@
 <%@ taglib prefix="agentes"
 	tagdir="/WEB-INF/tags/responsive/agentesAutorizadosConsulta"%>
 
+
+<div class="loader"></div>
+
 <agentes:consultainicial />
 <div id="tabla" style="display: none;">
 	<agentes:consultaTable />

@@ -8,6 +8,7 @@
 <%@ taglib prefix="reex"
 	tagdir="/WEB-INF/tags/responsive/facturacion"%>
 
+<div class="loader"></div>
 
 <reex:reexpedicionFactura/>
 

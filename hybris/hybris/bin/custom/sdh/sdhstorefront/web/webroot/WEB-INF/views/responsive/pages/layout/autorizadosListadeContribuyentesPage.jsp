@@ -15,7 +15,7 @@
 
 
     <spring:htmlEscape defaultHtmlEscape="true" />
-
+<div class="loader"></div>
 
     <template:page pageTitle="${pageTitle}">
 <agente:autorizadosListadeContribuyentes/>

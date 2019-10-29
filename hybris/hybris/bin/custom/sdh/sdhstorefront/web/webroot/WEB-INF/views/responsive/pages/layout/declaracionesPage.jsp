@@ -7,6 +7,8 @@
 <%@ taglib prefix="declara"
 	tagdir="/WEB-INF/tags/responsive/declaraciones"%>
 
+<div class="loader"></div>
+
 <declara:declaraciones/>
 
 

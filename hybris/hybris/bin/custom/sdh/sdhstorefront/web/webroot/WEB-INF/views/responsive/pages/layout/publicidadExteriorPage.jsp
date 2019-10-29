@@ -12,7 +12,7 @@
 	
 <spring:htmlEscape defaultHtmlEscape="true" />	
 
-
+<div class="loader"></div>
 <style>
 #divAvisos { }
 #divConvencional { }

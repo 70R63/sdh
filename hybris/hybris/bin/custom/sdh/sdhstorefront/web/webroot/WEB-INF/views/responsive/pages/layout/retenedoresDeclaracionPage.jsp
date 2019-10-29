@@ -7,6 +7,7 @@
 <%@ taglib prefix="retenedores" tagdir="/WEB-INF/tags/responsive/retenedores"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
+<div class="loader"></div>
 
 <retenedores:retenedoresDeclaracionTable />
 <retenedores:retenedoresDeclaracionJuridico />

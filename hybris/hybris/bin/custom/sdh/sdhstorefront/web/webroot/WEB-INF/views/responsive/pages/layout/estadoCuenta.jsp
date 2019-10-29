@@ -9,7 +9,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-
+<div class="loader"></div>
 
 <sf:form action="" method="POST" modelAttribute="dataForm" id="forma">
 	<consultas:estadoCuentaMenu />

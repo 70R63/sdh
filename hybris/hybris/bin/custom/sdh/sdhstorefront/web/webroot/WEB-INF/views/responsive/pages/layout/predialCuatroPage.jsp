@@ -8,6 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/predial/predialPaginaCuatro"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
+<div class="loader"></div>
 
 <predial:predialCuatroGenerales />
 <predial:predialCuatroDatPredio/>

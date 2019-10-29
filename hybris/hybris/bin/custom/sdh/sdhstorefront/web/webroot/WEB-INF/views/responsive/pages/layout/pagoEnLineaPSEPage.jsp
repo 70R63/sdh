@@ -8,13 +8,6 @@
 
 <template:page pageTitle="${pageTitle}">
 	<div class="container">
-		<pagoPSE:pagoEnLinea/>
-	</div>	
-	
-	<script type="text/javascript">
-window.onload = function() {
-	
-    $(".loader").fadeOut("slow");
-}
-</script>
+		<pagoPSE:pagoEnLinea />
+	</div>
 </template:page>

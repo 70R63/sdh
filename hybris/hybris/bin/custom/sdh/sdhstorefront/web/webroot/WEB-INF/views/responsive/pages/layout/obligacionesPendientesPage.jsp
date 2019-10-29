@@ -7,7 +7,7 @@
 <%@ taglib prefix="obligaciones"
 	tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
 
-
+<div class="loader"></div>
 
 <obligaciones:obliPendientesMenu />
 <div id="idtodos" style="display: block;">

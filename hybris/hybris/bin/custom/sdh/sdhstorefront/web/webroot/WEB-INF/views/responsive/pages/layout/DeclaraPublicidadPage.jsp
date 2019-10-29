@@ -9,6 +9,7 @@
 	tagdir="/WEB-INF/tags/responsive/DeclaraPubli"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<div class="loader"></div>
 
 <!-- <div class="row"> -->
 	<!-- 	<div class="container"> -->

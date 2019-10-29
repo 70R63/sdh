@@ -9,7 +9,15 @@
 <spring:url
 	value="/contibuyentes/tramites/seguimiento"
 	var="seguimientoURL" htmlEscape="false" />
+	
+<div class="loader"></div>
 
 <sf:form action="${seguimientoURL}" method="POST" modelAttribute="dataForm" id="forma" >
 <tramite:seguimientoTramite/>
 </sf:form>
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

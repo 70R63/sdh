@@ -7,6 +7,7 @@
 <%@ taglib prefix="reportantes"
 	tagdir="/WEB-INF/tags/responsive/reportantesInformacion"%>
 
+<div class="loader"></div>
 
 <div class="container_new_page">
 	<reportantes:reportantesSancionesInicial />
