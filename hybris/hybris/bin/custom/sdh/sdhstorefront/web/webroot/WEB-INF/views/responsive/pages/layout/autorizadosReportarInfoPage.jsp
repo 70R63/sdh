@@ -28,6 +28,7 @@
 				}
 			}
 		}
+		 $(".loader").fadeOut("slow");
 	}
 </script>
 

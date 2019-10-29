@@ -15,7 +15,13 @@
 <retenedores:retenedoresDeclaracionFirma />
 
 <div id="dialogReteICA" title="ReteICA" ><div id="reteICADialogContent"></div></div>
+
 <script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function goBack() {
 		window.history.back();
 	}

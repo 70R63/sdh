@@ -17,6 +17,7 @@
 <script>
 window.onload = function() {
 	//Se agrega funcionalidad para agentes Retenedores
+	debugger;
 	var url = window.parent.location.href;
 	var contenido_url = url.includes('contribuyentes');
 	
@@ -36,6 +37,7 @@ window.onload = function() {
 		ACC.opcionDeclaraciones.prepararPeriodo();
 		
 	}
+	$(".loader").fadeOut("slow");
 }
 function SelectedAnio(selectObject) {
 	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();

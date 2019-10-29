@@ -14,7 +14,12 @@
 <body onload="myFunction()" />
 
 
-<script>
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function myFunction() {
 
 		var form = document.getElementById("psePaymentForm");

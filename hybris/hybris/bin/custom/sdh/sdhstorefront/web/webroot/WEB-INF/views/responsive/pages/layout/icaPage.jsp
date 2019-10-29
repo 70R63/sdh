@@ -25,7 +25,7 @@
 // 	}
 
 // }
-	
+
 	window.onload = function() {
 		debugger;
 		var cosas = $(":input");
@@ -39,6 +39,7 @@
 				}
 			}
 		}	
+		$(".loader").fadeOut("slow");
 
 	}
 

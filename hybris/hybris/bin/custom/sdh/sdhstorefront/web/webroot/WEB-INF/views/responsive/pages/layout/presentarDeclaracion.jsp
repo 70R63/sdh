@@ -16,8 +16,12 @@
 
 
 <script type="text/javascript">
-	window.onload = function data() {
-
+	
+		window.onload = function() {
+			
+		    $(".loader").fadeOut("slow");
+		}
+		
 		//debugger;
 
 		//var div = document.getElementById("impuestoGas");

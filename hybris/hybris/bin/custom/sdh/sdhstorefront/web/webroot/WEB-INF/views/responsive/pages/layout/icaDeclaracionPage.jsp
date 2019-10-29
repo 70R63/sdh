@@ -25,7 +25,7 @@
 
 	<div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
 	
-	
+
 <script>	
 
 window.onload = function() {
@@ -41,6 +41,7 @@ window.onload = function() {
 			}
 		}
 	}
+	 $(".loader").fadeOut("slow");
 
 }
 	function goBack() {

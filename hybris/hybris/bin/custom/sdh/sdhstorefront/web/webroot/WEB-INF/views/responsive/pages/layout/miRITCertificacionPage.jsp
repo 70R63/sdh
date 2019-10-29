@@ -14,7 +14,6 @@
     <script>
 	
 	window.onload = function() {
-		debugger;
 		var cosas = $(":input");
 		var tam = cosas.length;
 		if (false){
@@ -26,6 +25,7 @@
 				}
 			}
 		}
+		  $(".loader").fadeOut("slow");
 	}
 		function downloadPDF(pdf) {
 			    const linkSource = 'data:application/pdf;base64,' + pdf;

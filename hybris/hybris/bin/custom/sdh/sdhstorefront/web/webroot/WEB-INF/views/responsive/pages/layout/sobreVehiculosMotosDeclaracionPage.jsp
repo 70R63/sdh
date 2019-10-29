@@ -30,5 +30,6 @@
 				}
 			}
 		}	
+		 $(".loader").fadeOut("slow");
 	}
 </script>

@@ -23,7 +23,8 @@
 
 				}
 			}
-		}	
+		}
+		$(".loader").fadeOut("slow");
 
 	}
 

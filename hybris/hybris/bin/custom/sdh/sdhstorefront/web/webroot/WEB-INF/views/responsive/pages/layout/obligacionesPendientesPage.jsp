@@ -31,6 +31,7 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 function goBack() {
 	window.history.back();

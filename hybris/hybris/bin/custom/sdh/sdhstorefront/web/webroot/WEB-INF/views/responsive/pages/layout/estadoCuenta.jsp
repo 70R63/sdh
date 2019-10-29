@@ -19,8 +19,12 @@
 	<consultas:estadoCuentaImpuesto />
 
 </sf:form>
+		<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
 
-<script type="text/javascript">
 	function Selected(selectObject) {
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;

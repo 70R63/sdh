@@ -69,7 +69,7 @@ window.onload = function() {
 			var texto = inputcol[i].value;
 			inputcol[i].style.width = (texto.length + 1) * 10 + 'px';
 		}
-
+		$(".loader").fadeOut("slow");
 	};
 
 	function ajustar(selectObject) {

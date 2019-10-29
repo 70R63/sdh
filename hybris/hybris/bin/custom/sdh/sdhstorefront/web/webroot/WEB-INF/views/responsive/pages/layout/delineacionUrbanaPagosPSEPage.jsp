@@ -162,6 +162,7 @@
 	</div>	
 </template:page>
 
+		
 <script>
 
 window.onload = function() {
@@ -177,5 +178,6 @@ window.onload = function() {
 			}
 		}
 	}
+	 $(".loader").fadeOut("slow");
 }
 </script>

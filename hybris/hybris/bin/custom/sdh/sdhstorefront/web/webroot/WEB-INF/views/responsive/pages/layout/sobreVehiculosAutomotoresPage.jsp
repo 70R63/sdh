@@ -32,5 +32,8 @@
 				}
 			}
 		}	
+		 $(".loader").fadeOut("slow");
 	}
 </script>
+
+

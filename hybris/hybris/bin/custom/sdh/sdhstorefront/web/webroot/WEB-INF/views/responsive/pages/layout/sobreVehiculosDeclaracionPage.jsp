@@ -41,6 +41,7 @@
 				}
 			}
 		}	
+		 $(".loader").fadeOut("slow");
 	}
 	
 	function pagarlinea() {
@@ -56,3 +57,5 @@
 
 	}
 </script>
+
+

@@ -15,7 +15,13 @@
 	</div>
 	<relacionpagos:relacionPagosImpuesto/>
 	
+	
 	<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function Selected(selectObject) {
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;

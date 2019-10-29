@@ -61,6 +61,7 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 
 	function goBack() {
@@ -69,5 +70,7 @@ window.onload = function() {
 </script>
 
 </template:page>
+
+
 
 

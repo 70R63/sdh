@@ -38,3 +38,11 @@
     </cms:pageSlot>
 
 </template:page>
+
+	<script type="text/javascript">
+	debugger;
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

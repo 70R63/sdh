@@ -33,6 +33,7 @@ window.onload = function() {
 			}
 		}
 	}
+	 $(".loader").fadeOut("slow");
 }
 	function myFunction(idButton) {
 

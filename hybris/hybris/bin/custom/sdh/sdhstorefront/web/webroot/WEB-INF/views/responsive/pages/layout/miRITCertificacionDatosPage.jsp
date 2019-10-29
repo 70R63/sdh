@@ -26,7 +26,7 @@ input[type=radio] {
 <script>
 
 window.onload = function() {
-	debugger;
+
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){
@@ -38,6 +38,7 @@ window.onload = function() {
 			}
 		}
 	}
+	$(".loader").fadeOut("slow");
 }
 	function downloadPDF(pdf) {
 		debugger;

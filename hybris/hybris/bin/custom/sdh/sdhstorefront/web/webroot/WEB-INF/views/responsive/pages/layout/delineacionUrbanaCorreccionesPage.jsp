@@ -957,13 +957,7 @@
 		
 	</div>	
 	
-	
-	
-	
-	
-	
-	
-</template:page>
+
 
 <script>
 
@@ -980,8 +974,10 @@ window.onload = function() {
 			}
 		}
 	}
+	 $(".loader").fadeOut("slow");
 }
   $( function() {
     $( "#tabs" ).tabs();
   } );
   </script>
+  </template:page>

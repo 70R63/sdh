@@ -80,3 +80,10 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

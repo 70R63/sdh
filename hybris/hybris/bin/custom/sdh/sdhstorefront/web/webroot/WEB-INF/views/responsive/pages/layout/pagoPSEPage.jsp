@@ -10,10 +10,16 @@
 	<div class="container">
 		<pagoPSE:formSection/>
 	</div>	
-</template:page>
 
-<script>
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 function goBack() {
   window.history.back();
 }
-</script> 
+</script>
+
+</template:page> 

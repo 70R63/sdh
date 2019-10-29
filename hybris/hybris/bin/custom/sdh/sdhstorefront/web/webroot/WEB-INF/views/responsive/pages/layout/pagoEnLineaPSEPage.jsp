@@ -10,4 +10,11 @@
 	<div class="container">
 		<pagoPSE:pagoEnLinea/>
 	</div>	
+	
+	<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
 </template:page>

@@ -17,6 +17,12 @@
 
 
 <script>
+
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 function validarAntesSubmit() {
 
 		

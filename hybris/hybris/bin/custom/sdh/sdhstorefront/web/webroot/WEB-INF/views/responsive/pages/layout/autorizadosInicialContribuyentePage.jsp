@@ -8,3 +8,9 @@
 <%@ taglib prefix="agente" tagdir="/WEB-INF/tags/responsive/agentesAutorizados"%>
 
 <agente:autorizadosInicialContribuyente/>
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

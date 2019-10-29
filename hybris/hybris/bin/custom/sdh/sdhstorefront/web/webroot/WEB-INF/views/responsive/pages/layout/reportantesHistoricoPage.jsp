@@ -24,8 +24,12 @@
 	</div>
 </div>
 
-
 <script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function ShowSelected(selectObject) {
 		var value = selectObject.value;
 		document.getElementById("Idinrepor").value = value;

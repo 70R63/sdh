@@ -39,6 +39,7 @@ window.onload = function() {
 			}
 		}
 	}
+    $(".loader").fadeOut("slow");
 }
 	function goBack() {
 		var declaracion = '${param.declaracion}';

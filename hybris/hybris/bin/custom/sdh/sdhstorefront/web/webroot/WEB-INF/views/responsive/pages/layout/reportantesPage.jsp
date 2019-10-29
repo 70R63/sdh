@@ -10,6 +10,11 @@
         <cms:component component="${feature}"  />
     </cms:pageSlot>
 
-
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
 
 
