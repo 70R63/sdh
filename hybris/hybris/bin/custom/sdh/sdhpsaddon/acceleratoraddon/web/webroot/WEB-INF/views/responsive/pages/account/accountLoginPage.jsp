@@ -5,6 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 	<div class="row">
 		

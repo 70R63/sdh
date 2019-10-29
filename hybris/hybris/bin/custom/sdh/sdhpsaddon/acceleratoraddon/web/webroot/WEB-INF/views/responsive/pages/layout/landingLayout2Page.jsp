@@ -5,6 +5,7 @@
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 
 <div class="container_menu">

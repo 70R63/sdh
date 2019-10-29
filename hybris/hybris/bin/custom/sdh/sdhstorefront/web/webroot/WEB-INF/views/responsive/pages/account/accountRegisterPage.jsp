@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="registration" tagdir="/WEB-INF/tags/responsive/registration" %>
 
-
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 	<c:choose>
 		<c:when test="${currentSection eq 'requestRols' }">
