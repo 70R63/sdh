@@ -111,7 +111,7 @@
     <c:set var = "debugMode" value = "true"/> 
 </c:if>
 
-
+--flagReintetarPago:${flagReintetarPago}--
 <div class="row" >
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">
@@ -186,8 +186,8 @@
 						</c:if>
 						
 						<formElement:formInputBox  idKey="psePaymentForm.valorAPagar" maxlength="240" labelKey="psePaymentForm.valorAPagar" path="valorAPagar" inputCSS="text" mandatory="true" tabindex="0" disabled="${debugMode}"/>
-						<formElement:sdhFormSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${paymentMethodList}" selectCSSClass="form-control" onchange="sdhOnChange(this)" disabled="${disabled}"/>
-						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control" onchange="onChange()" disabled="${disabled}"/>
+						<formElement:sdhFormSelectBox idKey="psePaymentForm.tipoDeTarjeta" labelKey="psePaymentForm.tipoDeTarjeta" path="tipoDeTarjeta" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${paymentMethodList}" selectCSSClass="form-control" onchange="sdhOnChange(this)"/>
+						<formElement:formSelectBox idKey="psePaymentForm.banco" labelKey="psePaymentForm.banco" path="banco" mandatory="true" skipBlank="false" skipBlankMessageKey="----- Seleccionar -----"  items="${banco}" selectCSSClass="form-control" onchange="onChange()"/>
 
 
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD) && !empty psePaymentForm.bankDateResponse }">
@@ -220,7 +220,7 @@
 					<form:hidden id="hiddenOnlinePaymentProvider" path="onlinePaymentProvider" value=""/>				
 					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>			
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
-								<c:if test = "${disabled eq false}">
+								<c:if test = "${disabled eq false or not empty flagReintetarPago}">
 									<div id="PSE" class="text-center">
 
 									    <c:choose>
