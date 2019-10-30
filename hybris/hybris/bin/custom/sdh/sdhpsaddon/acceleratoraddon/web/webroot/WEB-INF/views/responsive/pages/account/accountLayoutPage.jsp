@@ -1,7 +1,7 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
-<div class="loader"></div>
+
 <template:page pageTitle="${pageTitle}">
 		<cms:pageSlot position="SideContent" var="feature" class="accountPageSideContent">
 			<cms:component component="${feature}" />
