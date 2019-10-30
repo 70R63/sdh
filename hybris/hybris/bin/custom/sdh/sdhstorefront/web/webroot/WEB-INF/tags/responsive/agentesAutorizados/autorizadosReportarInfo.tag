@@ -69,16 +69,10 @@
 					</label>
 					<select class="new_alto form-control">
 						<option value="Seleccionar">Seleccionar</option>
-						<option value="Formularios">Formularios no generados por la administraci�n</option>
-						<option value="Pagos con debito">Pagos con d�bito</option>
-						<option value="Pagos con tarjeta de credito">Pagos con tarjeta de cr�dito</option>
-						<option value="Declaraciones">Declaraciones</option>
-						<option value="Electronicos">Electr�nicos</option>
-						<option value="Facturas, cupones y ROP's">Facturas, cupones y ROP's</option>
-						<option value="Reportes de adhesivos">Reportes de adhesivos</option>
-						<option value="Consignaciones">Consignaciones</option>
-						<option value="Publicidad exterior">Publicidad exterior</option>
-						<option value="Sobretasa de la gasolina">Sobretasa de la gasolina</option>
+						<c:forEach items="${tipoDeArchivo}" var="tipoArchivo">
+                          <option value="${tipoArchivo.code}"><c:out value="${tipoArchivo.name}"/></option>
+                        </c:forEach>
+
 					</select>
 				</div>
 			</div>

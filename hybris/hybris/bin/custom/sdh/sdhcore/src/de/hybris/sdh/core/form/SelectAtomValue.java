@@ -59,5 +59,11 @@ public class SelectAtomValue
 		this.name = name;
 	}
 
-
+	@Override
+	public String toString() {
+		return "SelectAtomValue{" +
+				"code='" + code + '\'' +
+				", name='" + name + '\'' +
+				'}';
+	}
 }

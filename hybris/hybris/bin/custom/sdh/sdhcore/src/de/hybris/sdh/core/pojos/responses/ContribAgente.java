@@ -17,6 +17,7 @@ public class ContribAgente
 	private String funcionInterl;
 	private String bp;
 	private String menu;
+	private String entBanco;
 
 	/**
 	 * @return the tipoDoc
@@ -135,6 +136,29 @@ public class ContribAgente
 
 	public void setMenu(String menu) {
 		this.menu = menu;
+	}
+
+	public String getEntBanco() {
+		return entBanco;
+	}
+
+	public void setEntBanco(String entBanco) {
+		this.entBanco = entBanco;
+	}
+
+	@Override
+	public String toString() {
+		return "ContribAgente{" +
+				"agente='" + agente + '\'' +
+				", tipoDoc='" + tipoDoc + '\'' +
+				", numDoc='" + numDoc + '\'' +
+				", nomCompleto='" + nomCompleto + '\'' +
+				", impuesto='" + impuesto + '\'' +
+				", funcionInterl='" + funcionInterl + '\'' +
+				", bp='" + bp + '\'' +
+				", menu='" + menu + '\'' +
+				", entBanco='" + entBanco + '\'' +
+				'}';
 	}
 }
 
