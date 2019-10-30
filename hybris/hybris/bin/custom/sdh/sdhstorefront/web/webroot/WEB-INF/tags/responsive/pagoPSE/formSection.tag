@@ -96,6 +96,8 @@
 <c:set var = "buttonImageBBVA" scope = "session" value = "https://pbs.twimg.com/profile_images/907185208549572608/Hn65NsHV_400x400.jpg"/>
 <c:set var = "buttonImageDAVIVIENDA" scope = "session" value = "https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0029/4616/davivienda.png"/>
 
+--disableFields:${disableFields}--
+--disabled:${disabled}--
 <c:choose>
   <c:when test="${disableFields eq 'true'}">
   	<c:set var = "disabled" value = "true"/> 
@@ -111,7 +113,11 @@
     <c:set var = "debugMode" value = "true"/> 
 </c:if>
 
-<%-- --flagReintetarPago:${flagReintetarPago}-- --%>
+--flagReintetarPago:${flagReintetarPago}--
+--disableFields:${disableFields}--
+--disabled:${disabled}--
+--debugMode:${debugMode}--
+--flagSuccessView:${flagSuccessView}--
 <div class="row" >
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">
@@ -119,6 +125,9 @@
 				<c:url var="action" value="/register/validateAnswers"/> 
 			
 				<form:form method="post" commandName="psePaymentForm" action="">
+				<div class="row" >
+				--psePaymentForm.numeroDeReferencia:${psePaymentForm.numeroDeReferencia}--
+				</div>
 					<fieldset>					
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD ) && disabled eq true}">
 						<div class="col-xs-4">
