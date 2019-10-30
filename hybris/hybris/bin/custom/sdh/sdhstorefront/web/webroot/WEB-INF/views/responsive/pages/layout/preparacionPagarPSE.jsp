@@ -21,7 +21,7 @@
 		var form = document.getElementById("psePaymentForm");
 
 		form.submit();
-		$(".loader").fadeOut("slow");
+	
 
 	}
 </script>
