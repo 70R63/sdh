@@ -8,6 +8,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
@@ -64,14 +66,21 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 	@Resource(name = "sdhGestionBancaria")
 	private SDHGestionBancaria sdhGestionBancaria;
 
-
 	@Resource(name = "sdhValidateBankFiles")
 	private SDHValidateBankFiles sdhValidateBankFiles;
 
-	@ModelAttribute("tipoDeImpuesto")
-	public List<SelectAtomValue> getIdTipoDeImpuesto()
+	@Resource(name = "customerFacade")
+	private CustomerFacade customerFacade;
+
+	@ModelAttribute("tipoDeArchivo")
+	public List<SelectAtomValue> getTipoDeArchivo()
 	{
-		return sdhValidateBankFiles.getTypeFileBank("");
+		String bp = customerFacade.getCurrentCustomer().getNumBP();
+		String entidadBancaria = sdhConsultaContribuyenteBPService.getEntidadBancaria(bp);
+		LOG.info("AgentesAutorizadosReportarInfoPageController BP:" + bp);
+		LOG.info("AgentesAutorizadosReportarInfoPageController entidad bancaria:" + entidadBancaria);
+
+		return sdhValidateBankFiles.getTypeFileBank(entidadBancaria);
 	}
 
 	@RequestMapping(value = "/autorizados/entidades/reportarinfo", method = RequestMethod.GET)
