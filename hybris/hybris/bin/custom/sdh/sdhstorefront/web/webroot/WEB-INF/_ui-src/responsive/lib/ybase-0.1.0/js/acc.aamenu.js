@@ -34,6 +34,10 @@ ACC.aamenu = {
 		{
 			$("a:contains('Consultas')").closest("li").remove()
 		}
+		if(ACC.aamenus.indexOf("ZM08") === -1)
+		{
+			$("a:contains('Reportar Información')").closest("li").remove()
+		}
 
 	}
 };

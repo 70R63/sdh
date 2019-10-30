@@ -101,8 +101,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ;;TerceroAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/terceros/reportar";;;;;
 ;;TerceroAutorizadoConsultasLink;CONSULTAS;"/terceros/consultas";;;;;
 
-;;AgenteAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/autorizados/entidades/reportarinfo";;;;;
-;;AgenteAutorizadoConsultasLink;CONSULTAS;"/autorizados/entidades/consultas";;;;;
+;;AgenteAutorizadoReportarInformacionLink;REPORTAR INFORMACION LINK;"/autorizados/entidades/reportarinfo";;;;;
+;;AgenteAutorizadoConsultasLink;CONSULTAS LINK;"/autorizados/entidades/consultas";;;;;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 
@@ -163,7 +163,6 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; ARListaDeclaracionLink	   	   ; LISTA LINK   				 			;"/agenteRetenedor/lista-declaraciones" ;;;;;
 
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
-
 
 
 
@@ -250,11 +249,12 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
 #;;CategoryNavComponent; Category Navigation Component;;CategoryNavComponent;CategoryNavNode;10
 ;;ContribuyentesCategoryNavComponent;Contribuyentes Category Navigation Component;;ContribuyenteCategoryNavComponent;ContribuyentesCategoryNavNode;10
-#;;AutorizadosCategoryNavComponent;Autorizados Category Navigation Component;;AutorizadosCategoryNavComponent;AutorizadosCategoryNavNode;10
+;;AutorizadosCategoryNavComponent;Autorizados Category Navigation Component;;AutorizadosCategoryNavComponent;AutorizadosCategoryNavNode;10
 ;;ReportantesInformacionCategoryNavComponent;Reportantes Informacion Category Navigation Component;;ReportantesInformacionCategoryNavComponent;ReportantesInformacionCategoryNavNode;10
 ;;AgenteRetenedorCategoryNavComponent;Agente Retenedor Category Navigation Component;;AgenteRetenedorCategoryNavComponent;AgenteRetenedorCategoryNavNode;10
 ;;TerceroAutorizadoCategoryNavComponent;Tercero Autorizado Category Navigation Component;;TerceroAutorizadoCategoryNavComponent;TerceroAutorizadoCategoryNavNode;10
 ;;AnonnymousCategoryNavComponent; Anonnymous Category Navigation Component;;AnonnymousCategoryNavComponent;AnnonymousCategoryNavNode;10
+;;TerceroAutorizadoNewCategoryNavComponent;Tercero Autorizado New Category Navigation Component;;TerceroAutorizadoNewCategoryNavComponent;TerceroAutorizadoNewCategoryNavNode;10
 
 #INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(uid,$contentCV)
 #;;CategoryNavComponent Logged in User;anonymousUserRestriction;CategoryNavComponentloggedInUser;CategoryNavComponent
@@ -263,13 +263,16 @@ INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];u
 ;;Anonnymous Category Nav Component Restriction;AnonnymousCategoryNavComponentRestriction;anonymous;AnonnymousCategoryNavComponent
 
 INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=true];userGroups(uid);components(uid,$contentCV)
-;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01,sdh_02;ContribuyentesCategoryNavComponent
-#;;Autorizados Category Nav Componet Restriction;AutorizadosCategoryNavComponentRestriction;sdh_02;AutorizadosCategoryNavComponent
+#;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01,sdh_02;ContribuyentesCategoryNavComponent
+;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01;ContribuyentesCategoryNavComponent
+#;;Autorizados Category Nav Componet Restriction;AutorizadosCategoryNavComponentRestriction;sdh_01;AutorizadosCategoryNavComponent
 ;;Reportantes Informacion Category Nav Component Restriction;ReportantesInformacionCategoryNavComponentRestriction;sdh_05;ReportantesInformacionCategoryNavComponent
 ;;Agente Retenedor Category Nav Component Restriction;AgenteRetenedorCategoryNavComponentRestriction;sdh_04;AgenteRetenedorCategoryNavComponent
-;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoCategoryNavComponent
+;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_02;TerceroAutorizadoCategoryNavComponent
+;;Tercero Autorizado New Category Nav Component Restriction;TerceroAutorizadoNewCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoNewCategoryNavComponent
+
 ## level 1. SiteRoot ##
-## level 2. children of SiteRoot ##
+## level 2. children of SiteRoot ##ContribuyentesCategoryNavComponentRestriction
 # the following order of children is the display order on the site
 
 
@@ -286,7 +289,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
 ;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
-;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
+;TerceroAutorizadoNewCategoryNavNode;;Tercero Autorizado New Categories;SiteRootNode;TerceroAutorizadoNewCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
+;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -356,6 +360,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 ;AgenteAutorizadoReportarInformacionNavigationNodeEntry;;Agente Autorizado Reportar Informacion Menu;AgenteAutorizadoReportarInformacionNavigationNode;AgenteAutorizadoReportarInformacionLink;
 ;AgeteAutorizadoConsultasNavigationNodeEntry;;Agente Autorizado Consultas Menu;AgenteAutorizadoConsultasNavigationNode;AgenteAutorizadoConsultasLink;
+
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
@@ -448,6 +453,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;;Retenedores Detalle Service Requests Menu;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;
 ;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;EdoCargasNavNode
 ;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode,ARListaDeclaracionNavNode
+
+
 #*->-------------------------------------------------------------------------------------------------------------------------
 
 

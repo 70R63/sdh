@@ -210,6 +210,8 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 ;;EdoCargasLink;"Estado de cargas";"Haga clic aquí para consultar el estado de sus cargas"
+;;AAutorizadoReportarInformacionLink;"Reportar informacion"; "Haga clic aquí para reportar informacion"
+;;AAutorizadoConsultasLink;"Consultas";"Haga clic aquí para hacer sus consultas"
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 
