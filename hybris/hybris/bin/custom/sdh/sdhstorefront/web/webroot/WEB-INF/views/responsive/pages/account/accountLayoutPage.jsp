@@ -12,6 +12,7 @@
 <spring:url value="/my-account/payment-details" var="paymentDetailsUrl"/>
 <spring:url value="/my-account/orders" var="ordersUrl"/>
 
+
 <template:page pageTitle="${pageTitle}">
 		<cms:pageSlot position="SideContent" var="feature" class="accountPageSideContent">
 			<cms:component component="${feature}" />
