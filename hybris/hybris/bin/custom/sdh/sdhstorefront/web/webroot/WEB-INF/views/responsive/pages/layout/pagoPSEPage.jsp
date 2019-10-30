@@ -7,7 +7,7 @@
 <%@ taglib prefix="pagoPSE" tagdir="/WEB-INF/tags/responsive/pagoPSE"%>
 
 
---flagSuccessView:${flagSuccessView}-- --${empty flagSuccessView}--
+<%-- --flagSuccessView:${flagSuccessView}-- --${empty flagSuccessView}-- --%>
 <c:choose>
 	<c:when test="${empty flagSuccessView}">
 		<template:page pageTitle="${pageTitle}">
