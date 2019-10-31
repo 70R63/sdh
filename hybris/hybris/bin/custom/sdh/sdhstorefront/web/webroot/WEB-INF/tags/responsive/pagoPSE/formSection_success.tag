@@ -9,7 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
---disabled:${disabled}--
+<%-- --disabled:${disabled}-- --%>
 <c:choose>
   <c:when test="${disableFields eq 'true'}">
   	<c:set var = "disabled" value = "true"/> 
@@ -25,8 +25,8 @@
     <c:set var = "debugMode" value = "true"/> 
 </c:if>
 
---debugMode:${debugMode}--
---disabled:${disabled}--
+<%-- --debugMode:${debugMode}-- --%>
+<%-- --disabled:${disabled}-- --%>
 <div class="row" >
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">

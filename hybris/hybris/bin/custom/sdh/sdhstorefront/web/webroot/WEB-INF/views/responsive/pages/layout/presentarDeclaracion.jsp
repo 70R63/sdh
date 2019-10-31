@@ -69,7 +69,7 @@
 		//alert("Usted no cuenta con ningun impuesto para declarar");
 		///}
 
-	};
+
 
 	function onChange() {
 		var tipoImpuesto = document.getElementById("impuesto").value;
