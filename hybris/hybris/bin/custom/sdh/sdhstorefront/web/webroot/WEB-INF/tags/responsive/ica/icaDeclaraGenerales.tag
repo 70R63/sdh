@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<!-- Datos generales --> 
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -73,7 +74,7 @@
 						<c:set var="inputDisabled" value="" />
 						<c:choose>
 							<c:when
-								test="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.entFinanciera eq 'x'}">
+								test="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.entFinanciera.equalsIgnoreCase('X')}">
 								<c:set var="yesChecked" value="checked" />
 							</c:when>
 							<c:otherwise>

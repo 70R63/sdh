@@ -9,7 +9,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -508,6 +507,7 @@ public class IcaPageController extends SDHAbstractPageController
 	{
 		System.out.println("---------------- En Declaracion ICA Agente Autorizado GET --------------------------");
 
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
 		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
 		final SDHValidaMailRolResponse contribuyenteData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
@@ -606,9 +606,10 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setTarifaAporte(calcula2ImpuestoResponse.getTarifaAporte());
 			infoDeclara.setTotalAporteVolun(calcula2ImpuestoResponse.getTotalAporteVolun());
 			infoDeclara.setValorImpAviso(calcula2ImpuestoResponse.getImpuestoAviso());
+			infoDeclara.setEntFinanciera(calcula2ImpuestoResponse.getEntFinanciera());
 
 			icaInfObjetoResponse.setAnoGravable(calcula2ImpuestoResponse.getAnio_gravable());
-			icaInfObjetoResponse.setPeriodo(calcula2ImpuestoResponse.getPeriodo());
+			icaInfObjetoResponse.setPeriodo(gasolinaService.prepararDescPeriodoBimestral_ICA(calcula2ImpuestoResponse.getPeriodo()));
 			icaInfObjetoResponse.setCantEstablec(calcula2ImpuestoResponse.getCantEstablec());
 			icaInfObjetoResponse.setRegimen(calcula2ImpuestoResponse.getRegimen());
 			icaInfObjetoResponse.setOpcionUso(calcula2ImpuestoResponse.getOpcionUso());
@@ -722,7 +723,6 @@ public class IcaPageController extends SDHAbstractPageController
 		}
 
 		//informacion para PSE
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		final SDHValidaMailRolResponse detalleContribuyente = contribuyenteData2;

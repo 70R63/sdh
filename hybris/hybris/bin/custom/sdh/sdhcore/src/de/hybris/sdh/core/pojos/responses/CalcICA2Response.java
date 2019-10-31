@@ -5,6 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 
 /**
  * @author Federico Flores Dimas
@@ -16,6 +18,7 @@ public class CalcICA2Response
 	private String anio_gravable;
 	private String periodo;
 	private String opcionUso;
+	private String entFinanciera;
 	private String cantEstablec;
 	private String regimen;
 	private String totalIngrPeriodo;
@@ -98,6 +101,25 @@ public class CalcICA2Response
 	public void setOpcionUso(final String opcionUso)
 	{
 		this.opcionUso = opcionUso;
+	}
+
+
+	/**
+	 * @return the entFinanciera
+	 */
+	public String getEntFinanciera()
+	{
+		return entFinanciera;
+	}
+
+	/**
+	 * @param entFinanciera
+	 *           the entFinanciera to set
+	 */
+	@JsonProperty("Ent_financiera")
+	public void setEntFinanciera(final String entFinanciera)
+	{
+		this.entFinanciera = entFinanciera;
 	}
 
 	/**
