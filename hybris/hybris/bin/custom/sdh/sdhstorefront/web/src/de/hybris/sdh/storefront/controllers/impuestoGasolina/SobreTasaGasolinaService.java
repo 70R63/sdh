@@ -526,7 +526,7 @@ public class SobreTasaGasolinaService
 
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put("01", "SELECCIONAR");
+		elementos.put("00", "SELECCIONAR");
 		elementos.put("01", "Enero");
 		elementos.put("02", "Febrero");
 		elementos.put("03", "Marzo");
@@ -2561,6 +2561,49 @@ public class SobreTasaGasolinaService
 	{
 		// XXX Auto-generated method stub
 		return false;
+	}
+
+	/**
+	 * @param periodo
+	 * @return
+	 */
+	public String prepararDescPeriodoBimestral_ICA(String periodo)
+	{
+		String descripcion = "";
+
+		if (periodo != null)
+		{
+			periodo = StringUtils.trim(periodo);
+			if (!StringUtils.isAllEmpty(periodo))
+			{
+				switch (periodo)
+				{
+					case "01":
+						descripcion = "01 - Ene / Feb";
+						break;
+					case "02":
+						descripcion = "02 - Mar / Abr";
+						break;
+					case "03":
+						descripcion = "03 - May / Jun";
+						break;
+					case "04":
+						descripcion = "04 - Jul / Ago";
+						break;
+					case "05":
+						descripcion = "05 - Sep / Oct";
+						break;
+					case "06":
+						descripcion = "06 - Nov / Dic";
+						break;
+
+					default:
+						break;
+				}
+			}
+		}
+
+		return descripcion;
 	}
 
 
