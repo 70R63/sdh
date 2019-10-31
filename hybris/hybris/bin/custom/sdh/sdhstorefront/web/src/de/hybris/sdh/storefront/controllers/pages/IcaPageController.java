@@ -605,6 +605,7 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setProyectoAporte(calcula2ImpuestoResponse.getProyectoAporte());
 			infoDeclara.setTarifaAporte(calcula2ImpuestoResponse.getTarifaAporte());
 			infoDeclara.setTotalAporteVolun(calcula2ImpuestoResponse.getTotalAporteVolun());
+			infoDeclara.setValorImpAviso(calcula2ImpuestoResponse.getImpuestoAviso());
 
 			icaInfObjetoResponse.setAnoGravable(calcula2ImpuestoResponse.getAnio_gravable());
 			icaInfObjetoResponse.setPeriodo(calcula2ImpuestoResponse.getPeriodo());

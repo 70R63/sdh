@@ -307,7 +307,8 @@ public class PSEPaymentController extends AbstractPageController
 		LOG.info("estatus: " + estatus);
 		if (estatus == "impreso")
 		{
-			model.addAttribute("psePaymentForm", psePaymentFormResp);
+			//			model.addAttribute("psePaymentForm", psePaymentFormResp);
+			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 		}
 
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
