@@ -109,6 +109,7 @@
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="rolList"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="exteriorPublicityTaxList"/>
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="gasTaxList"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="vehiculosTaxList"/>
 				</editorArea:section>
 			</editorArea:tab>
 		</editorArea:editorArea>
@@ -145,6 +146,13 @@
         <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
             <y:labels>
                 <y:label>resolutionNumber</y:label>
+			</y:labels>
+		</y:base>
+    </context>
+	 <context merge-by="type" parent="GenericItem" type="SDHVehiculosTax" component="base" module="sdhbackoffice">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+            <y:labels>
+                <y:label>placa</y:label>
 			</y:labels>
 		</y:base>
     </context>

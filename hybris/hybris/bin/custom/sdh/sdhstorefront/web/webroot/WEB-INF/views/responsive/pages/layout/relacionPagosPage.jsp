@@ -7,6 +7,8 @@
 <%@ taglib prefix="relacionpagos"
 	tagdir="/WEB-INF/tags/responsive/relacionPagos"%>
 
+<div class="loader"></div>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 	<relacionpagos:relacionPagosMenu />
@@ -15,7 +17,13 @@
 	</div>
 	<relacionpagos:relacionPagosImpuesto/>
 	
+	
 	<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function Selected(selectObject) {
 		var value = selectObject.value;
 		document.getElementById("Idimp").value = value;

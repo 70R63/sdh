@@ -15,7 +15,7 @@
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
 		
-			<div class="headline">
+			<div class="col-md-12 headline">
 				<h2>
 					<span><spring:theme code="delineacion.declaracion.firma.titulo" /></span>
 				</h2>
@@ -196,9 +196,10 @@
 			<sf:hidden path="numObjeto" />
 			<sf:hidden path="CDU" />
 			<sf:hidden path="anticipo" />
+<!-- 			Se deja habilitado el boton pagar en linea 28/10/2019 Maria Luisa Torres -->
 			<div class="col-md-3">
 				<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-					name="pagar" value="pagar" disabled="true">
+					name="pagar" value="pagar">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 				</sf:button>
 			</div>

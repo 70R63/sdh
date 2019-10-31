@@ -32,7 +32,7 @@
 					<c:when
 						test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.numForm }">
 						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" disabled class="btn btn-primary btn-lg GeneraDeclaracionButton"
+							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
 							type="button">
 							<spring:theme code="ica.declaracion.firma.prendecla" />
 						</button>
@@ -56,10 +56,16 @@
 				<sf:hidden path="dv" />
 				<sf:hidden path="numObjeto" />
 
-				<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
+				<!-- <sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 					name="pagar" value="pagar">
 					<spring:theme code="ica.declaracion.firma.pagliena" />
-				</sf:button>
+				</sf:button> -->
+<!-- se queita disabled de boton pagar en linea 27-10-2019 Maria -->
+				<button style="margin-top: 3px;"
+                	id="action" class="btn btn-primary btn-lg"
+                	type="submit" name="pagar" value="pagar">
+                	<spring:theme code="ica.declaracion.firma.pagliena" />
+                </button>
 			</sf:form>
 		</div>
 	</div>

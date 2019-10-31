@@ -13,64 +13,6 @@
 <div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
-			<div class="headline">
-				<h2>
-					<span><spring:theme code="reteica.declaracion.firma.titulo" /></span>
-				</h2>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label"><spring:theme
-								code="reteica.declaracion.firma.agregarfirmantes" /></label>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<label class="control-label"><spring:theme code="" /></label>
-						<button id="agregarFirma" class="btn btn-primary btn-lg"
-							type="button" onclick="addfirma()">
-							<spring:theme code="reteica.declaracion.firma.agregar" />
-						</button>
-					</div>
-				</div>
-			</div>
-			<div class="firma row">
-				<div class="col-md-2">
-					<div class="form-group tipdoc">
-						<label class="control-label "><spring:theme
-								code="reteica.declaracion.firma.tipdoc" /></label> <input disabled
-							id="" name="" class="form-control" disabled type="text" value=""
-							maxlength="240"></input>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-group numdoc">
-						<label class="control-label "><spring:theme
-								code="reteica.declaracion.firma.numdoc" /></label> <input disabled
-							id="" name="" class="form-control" disabled type="text" value=""
-							maxlength="240"></input>
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="form-group name">
-						<label class="control-label"><spring:theme
-								code="reteica.declaracion.firma.nombre" /></label> <input disabled
-							id="" name="" class="form-control" disabled type="text" value=""
-							maxlength="240"></input>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-						<label class="control-label"><spring:theme code="" /></label>
-						<button style="margin-top: 25px;" id=""
-							class="btn btn-primary btn-lg" type="button">
-							<spring:theme code="reteica.declaracion.firma.firma" />
-						</button>
-					</div>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-3">
 					<c:url value="/retenedores/estadocargas" var="edoCargasURL"/>

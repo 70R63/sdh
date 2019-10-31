@@ -35,28 +35,33 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.aniograv" /></label> <select
-						id="aniograv" class="newalto form-control" disabled="disabled">
-						<option value="">2019</option>
-					</select>
+							code="sobre.vehiculo.declaracion.vehiculo.aniograv" /></label> <input
+						id="numresol" name="numresol" class="newalto form-control"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.anioGravable}" maxlength="30"
+						disabled="disabled">
+
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.placa" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text" value="" maxlength="30"
+						id="placaDec" name="" class="newalto form-control placaDec"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.placa}" maxlength="30"
 						disabled="disabled">
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.opuso" /></label> <select
-						id="aniograv" class="new_alto form-control" disabled="disabled">
-						<option value="">Declaración</option>
-					</select>
+							code="sobre.vehiculo.declaracion.vehiculo.opuso" /></label> <input id=""
+						name="" class="newalto form-control"
+						value='<spring:theme code="vehiculos.detalle.opuso.${vehiculosFormDeclaracion.opcionUso}"/>'
+						aria-required="true" type="text" maxlength="30"
+						disabled="disabled">
+
 				</div>
 			</div>
 		</div>

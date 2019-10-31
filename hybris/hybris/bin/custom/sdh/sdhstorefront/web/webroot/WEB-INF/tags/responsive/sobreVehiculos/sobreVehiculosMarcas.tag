@@ -22,7 +22,7 @@
 		<div class="row">
 			<div class="col-md-9">
 				<br>
-				<table class="table">
+				<table class="table tablemarcas" id="tablemarcas">
 					<thead>
 						<tr>
 							<th><label class="control-label labeltabletd"><spring:theme
@@ -41,26 +41,6 @@
 					</thead>
 
 					<tbody>
-						<tr>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Código"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="NomCompleto"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Número"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="calidsujeto"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="fechdesde"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="fechasta"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-						</tr>
 					</tbody>
 				</table>
 			</div>

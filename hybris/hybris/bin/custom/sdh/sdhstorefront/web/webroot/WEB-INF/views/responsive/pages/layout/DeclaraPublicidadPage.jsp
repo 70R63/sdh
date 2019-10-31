@@ -9,6 +9,7 @@
 	tagdir="/WEB-INF/tags/responsive/DeclaraPubli"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<div class="loader"></div>
 
 <!-- <div class="row"> -->
 	<!-- 	<div class="container"> -->
@@ -32,3 +33,24 @@
 <div id="dialogPublicidadExterior" title="Publicidad Exterior">
 	<div id="publicidadExteriorDialogContent"></div>
 </div>
+
+<script>
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			if((cosas[i].name != "firmInterFunct")&&(cosas[i].id != "firmCompleteName")&&(cosas[i].id != "lblcontribuyente_documentType")&&(cosas[i].id != "contribuyente_documentNumber")&&(cosas[i].id != "contribuyente_numBP")){
+				var valor = cosas[i].value;
+				if (valor == "") {
+					cosas[i].value = "-";
+		
+				}
+			}
+		}
+	}
+	 $(".loader").fadeOut("slow");
+}
+</script>

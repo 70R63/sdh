@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!-- Total ingresos netos gravables -->
 
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
@@ -27,17 +28,17 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.total.actprinci" />
 				</label>
 			</div>
 			<div class="col-md-7">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.total.denomi" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.total.ingnet" />
 				</label>
 			</div>
@@ -120,12 +121,20 @@
 						</select>
 						 -->
 						<!-- EJRR Adding data to select box eachActivity -->
+						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
+							pattern="#######################" var="codCIIUNumber" />
 						<select id="" class="alto form-control codCIIU"
 							style="height: 48px;">
 							<option value="" selected>SELECCIONAR</option>
-							<c:forEach items="${gravableNetIncomes}" var="eachActivity">
-								<option value="${eachActivity.ciiu}">${eachActivity.ciiu}
-									- ${eachActivity.denominacion}</option>
+							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+								<c:set var="selected" value="" />
+								<fmt:formatNumber value="${ eachActivity.ciiu}"
+									pattern="#######################" var="eachCodCIIUNumber" />
+								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}">
+									<c:set var="selected" value="selected" />
+								</c:if>
+								<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
+									- ${eachActivity.denominacion }</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -236,53 +245,53 @@
 	<br>
 	<div class="row">
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.angrava" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.tipdoc" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.numide" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.nombre" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.direc" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.municipio" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.tel" />
 			</label>
 		</div>
 		<div class="col-md-2">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme code="ica.declaracion.total.denomi" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme
 					code="ica.declaracion.total.valtotaliva" />
 			</label>
 		</div>
 		<div class="col-md-1">
-			<label class="control-label" style="text-transform: none !important"
+			<label class="control-label format_label" style="text-transform: none !important"
 				for=""> <spring:theme
 					code="ica.declaracion.total.valtotaldev" />
 			</label>
@@ -302,8 +311,7 @@
 					<option value="">Seleccionar</option>
 					<option value="CC">CC C�dula de ciudadania</option>
 					<option value="CE">CE C�dula de extranjer�a</option>
-					<option value="NIT">NIT N�mero de identificaci�n
-						tributaria</option>
+					<option value="NIT">NIT N�mero de identificaci�n tributaria</option>
 					<option value="PA">PA Pasaporte</option>
 					<option value="TI">TI Tarjeta de identidad</option>
 					<option value="TIE">TIE Tarjeta de identidad de extranjero</option>

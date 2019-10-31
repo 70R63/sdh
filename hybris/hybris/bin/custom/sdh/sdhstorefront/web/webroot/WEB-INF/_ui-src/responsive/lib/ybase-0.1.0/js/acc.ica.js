@@ -62,7 +62,9 @@ ACC.ica = {
 	 
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#icaCalculoButton", function (e) {
-	 	        e.preventDefault();
+	 	        debugger;
+				
+				e.preventDefault();
 	 	        
 //	 	        $("#icaCalculoButton").prop('disabled', true);
 	 	       var icaCalculaDeclaracionForm = {};
@@ -157,24 +159,25 @@ ACC.ica = {
 			 	var deducciones = {};
 			 	
 			 	var deduccionValue= 0;
-			 	
+			 	var numberRegex = /\d{1,3}(.\d{3})*/;
+				
 			 	deduccionValue = $('.deducci option[value="actnosubPA"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+				if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.actnosubPA = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="enajActFijo"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.enajActFijo = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="exportBienes"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.exportBienes = deduccionValue;
 		 		}
@@ -182,112 +185,112 @@ ACC.ica = {
 			 	
 			 	deduccionValue = $('.deducci option[value="exportServ"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.exportServ = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="actnosub39"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.actnosub39 = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="actnosubPH"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.actnosubPH = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="juegoSuerteAzar"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.juegoSuerteAzar = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="donaciones"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.donaciones = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="exenActos"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.exenActos = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="baseGravEsp"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.baseGravEsp = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="ingrActConsorc"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.ingrActConsorc = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="diviNOGiroOrd"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.diviNOGiroOrd = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="exenVictima"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.exenVictima = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="correcMoneda"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.correcMoneda = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="reintegro"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.reintegro = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="salarios"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.salarios = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="devoluciones"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.devoluciones = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="rebajas"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.rebajas = deduccionValue;
 		 		}
 			 	
 			 	deduccionValue = $('.deducci option[value="descuentos"]:selected').parent().parent().parent().find(".valordedu").val();
 			 	
-			 	if($.isNumeric(deduccionValue))
+			 	if(numberRegex.test(deduccionValue))
 			 	{	
 			 		deducciones.descuentos = deduccionValue;
 		 		}

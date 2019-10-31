@@ -25,9 +25,8 @@
 					code="sobre.vehiculo.detail.placa" /></label>
 		</div>
 		<div class="col-md-2">
-			<input id="" name="" class="newalto form-control" aria-required="true"
-				type="text" readonly="readonly"
-				value="<c:out value="placa"></c:out>" maxlength="240">
+			<input id="placas" name="" class="newalto form-control placas"
+				type="text" readonly="readonly" maxlength="240">
 		</div>
 		<br> <br>
 		<div class="row">
@@ -59,32 +58,34 @@
 
 					<tbody>
 						<tr>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="id-Servicio"></c:out>"
+							<td><input id="inidServicio" name=""
+								class="inputtextnew inidServicio" type="text"
+								readonly="readonly" value="" maxlength="240"
+								style="width: 100% !important;"></td>
+							<td><input id="inidEstado" name=""
+								class="inputtextnew inidEstado" type="text" readonly="readonly"
+								value="" maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="inwatts" name="" class="inputtextnew inwatts"
+								type="text" readonly="readonly" value="" maxlength="240"
+								style="width: 100% !important;"></td>
+							<td><input id="inclasico" name=""
+								class="inputtextnew inclasico" type="text" readonly="readonly"
+								value="" maxlength="240" style="width: 100% !important;"></td>
+							<td><input id="intipvehiculo" name=""
+								class="inputtextnew intipvehiculo" type="text"
+								readonly="readonly" value="" maxlength="240"
+								style="width: 100% !important;"></td>
+							<td><input id="inpasajeros" name="" class="inputtextnew inpasajeros" type="text"
+								readonly="readonly" value=""
 								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="idEstado"></c:out>"
+							<td><input id="inton" name="" class="inputtextnew inton" type="text"
+								readonly="readonly" value=""
 								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="watts"></c:out>"
+							<td><input id="infecinacti" name="" class="inputtextnew infecinacti" type="text"
+								readonly="readonly" value=""
 								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="clásico"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="tip vehiculo"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="pasajeros"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="ton"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="fecinacti"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="fechacambio"></c:out>"
+							<td><input id="infechacambio" name="" class="inputtextnew infechacambio" type="text"
+								readonly="readonly" value=""
 								maxlength="240" style="width: 100% !important;"></td>
 						</tr>
 					</tbody>

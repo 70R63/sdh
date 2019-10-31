@@ -7,7 +7,7 @@
 <%@ taglib prefix="mibuzon" tagdir="/WEB-INF/tags/responsive/buzon"%>
 
 
-
+<div class="loader"></div>
 
 <mibuzon:buzonInicio />
 <div id="idNotifi" style="display: none;">
@@ -19,6 +19,22 @@
 
 
 <script>
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+	$(".loader").fadeOut("slow");
+}
 	function myFunction(idButton) {
 
 		var idNotifi = document.getElementById('idNotifi');

@@ -13,71 +13,6 @@
 <spring:url value="/contribuyentes/consultas/certipagos"
 	var="certificacionURL" htmlEscape="false" />
 
-<script>
-
-	function SelectedAnio(selectObject) {
-//		debugger;
-	ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
-
-	}
-	
-	function valper(selectObject) {
-		debugger;
-		var per = selectObject.value;
-		var anio = document.getElementById('aniograv').value;
-		var fecha = new Date();
-		var anioact = fecha.getFullYear();
-		var mesact = fecha.getMonth();
-
-		if (anio < anioact) {
-
-		} else {
-			mesact = mesact + 1;
-			if (per < mesact) {
-
-			} else {
-				alert("Por favor, seleccione un mes anterior");
-			}
-
-		}
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
-
-	}
-	
-	function onChange_anterior(anoGravableGasolina,anoGravablePublicidad) {
-			form = document.getElementById("form_pdf");
-
-			input = document.createElement('input');
-	        input.setAttribute('name', 'rowFrompublicidadTable');
-	        input.setAttribute('value', 'X');
-	        input.setAttribute('type', 'hidden');
-	        
-	        form.appendChild(input);
-			form.submit();
-		
-	}
-	
-	function onChangeAnioGravable() {
-		impuesto = document.getElementById("Idimp").value;
-		if(impuesto == 4){
-			form = document.getElementById("form_pdf");
-			form.submit();
-		}			
-	}
-	
-	function downloadPDF(pdf) {
-		debugger;
-		if (pdf){
-			const linkSource = 'data:application/pdf;base64,' + pdf;
-		    const downloadLink = document.createElement("a");
-		    const fileName = "Certificación_Pago.pdf";	
-		    downloadLink.href = linkSource;
-		    downloadLink.download = fileName;
-		    downloadLink.click();
-		}    
-	}	
-// 	downloadPDF('${imprimePagoResponse.stringPDF}');
-</script>
 
 <a id="downloadHelper" target="_blank"></a>
 <c:choose>
@@ -129,7 +64,7 @@
 			</div>
 
 
-			<div class="col-md-4 col-xs-12 mb-20 no-margincol">
+			<div id="Periodo0" class="col-md-4 col-xs-12 mb-20 no-margincol">
 				<span class="paso--dos pasos color-sr2">2</span>
 				<h2 class="titulo-caja--ser-rel color-sr2 ">
 					<span class="paso2">AÑO GRAVABLE</span>
@@ -154,9 +89,9 @@
 					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 					<div class="caja--ser-rel color-sr3">
-						<select aria-required="true" id="periodo"
+						<select aria-required="true" id="periodoM"
 							class="new_alto form-control " name="periodo" required='required'
-							onchange="valper(this)">
+							onchange="onChangeMensual(this)">
 							<option value="00">Seleccionar</option>
 							<option value="01">1-Enero</option>
 							<option value="02">2-Febrero</option>
@@ -181,8 +116,9 @@
 				<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 				<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 				<div class="caja--ser-rel color-sr3">
-					<select id="periodo" class="new_alto form-control " name="periodo"
-						onchange="vaperiodo(this)">
+
+					<select id="periodoB" class="new_alto form-control " name="periodo"
+						onchange="onChangeBimestral(this)">
 						<option value="00">Seleccionar</option>
 						<option value="B1">1 - Ene / Feb</option>
 						<option value="B2">2 - Mar / Abr</option>
@@ -200,7 +136,7 @@
 		
 				<div class="row" id="table-predial" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-predial1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -218,30 +154,14 @@
 						</tr>
 					</thead>
 					<tbody>
-
-<!-- 						<tr> -->
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="CHIP"></c:out>" /></td> --%>
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="Matricula"></c:out>" /></td> --%>
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="Direccion"></c:out>" /></td> --%>
-<!-- 							<td><input class="inputtextnew" -->
-<!-- 								style="visibility: visible !important; width: 15px" type="radio" -->
-<!-- 								id="" name="" value=""></td> -->
-
-<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
 		</div>
 
-		<div class="row" id="table-vehiculos" style="display: none;">
+		<div class="row" id="table-vehicular" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-vehicular1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -252,23 +172,22 @@
 										code="certideclara.inicial.vehiculo.marca" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
 										code="certideclara.inicial.vehiculo.seleccionar" /></label></th>
 						</tr>
 					</thead>
 					<tbody>
-
-<!-- 						<tr> -->
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="PLACA"></c:out>" /></td> --%>
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="MARCA"></c:out>" /></td> --%>
-<!-- 							<td><input class="inputtextnew" -->
-<!-- 								style="visibility: visible !important; width: 15px" type="radio" -->
-<!-- 								id="" name="" value=""></td> -->
-
-<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
@@ -285,7 +204,16 @@
 										code="certideclara.inicial.selcimpuesto" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.aniograv" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.ica.seleccionar" /></label></th>
@@ -311,6 +239,18 @@
 										code="certideclara.inicial.reteica.consecutivo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
 										code="certideclara.inicial.reteica.seleccionar" /></label></th>
 						</tr>
 					</thead>
@@ -332,6 +272,18 @@
 							<th style="text-align: center"><label class="control-label">
 									<spring:theme code="certideclara.inicial.publicidad.tipvalla" />
 							</label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label">
 									<spring:theme
 										code="certideclara.inicial.publicidad.seleccionar" />
@@ -360,7 +312,7 @@
 										code="certideclara.inicial.gasolina.numdocu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.clavePeriodo" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.referencia" /></label></th>
@@ -391,7 +343,16 @@
 										code="certideclara.inicial.delineacion.cdu" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
-										code="certideclara.inicial.delineacion.radicado" /></label></th>
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.delineacion.seleccionar" /></label></th>
@@ -439,193 +400,50 @@
  	document.getElementById("btnCancelar").addEventListener("click", function(){
  		location = self.location;
 	});
-	
-	
-	function ShowSelected(selectObject) {
-		var value = selectObject.value;
 
-		var idImpuesto = document.getElementById('idImpuesto');
-		var idAnio = document.getElementById('idAnio');
-		var idPeriodo = document.getElementById('idPeriodo');
-		var tablepredial = document.getElementById('table-predial');
-		var tablevehiculos = document.getElementById('table-vehiculos');
-		var tableica = document.getElementById('table-ica');
-		var tablepublicidad = document.getElementById('table-publicidad');
-
-		if (value == '1') {
-			idImpuesto.style.display = 'block';
-			idAnio.style.display = 'none';
-			idPeriodo.style.display = 'none';
-			document.getElementById("Idper").value = '';
-		} else if (value == '2') {
-			idImpuesto.style.display = 'none';
-			idAnio.style.display = 'block';
-			idPeriodo.style.display = 'none';
-			
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			document.getElementById("Idimp").value = '';
-			document.getElementById("Idper").value = '';
-		} else {
-			idImpuesto.style.display = 'none';
-			idAnio.style.display = 'none';
-			idPeriodo.style.display = 'none';
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-			document.getElementById("Idper").value = '';
-		}
-	}
-	function Selected(selectObject) {
-		var value = selectObject.value;
-		document.getElementById("Idimp").value = value;
-		var idAnio = document.getElementById('idAnio');
-		var idPeriodo = document.getElementById('idPeriodo');
-		
-		var idPeriodo = document.getElementById('idPeriodo');
-		
-		if (value == '1' || value == '2' || value == '4') {
-
-			idAnio.style.display = 'block';
-			idPeriodo.style.display = 'none';
-			;
-			document.getElementById("Idper").value = '';
-
-		}else if (value == '5' || value == '6' || value == '3') {
-			idAnio.style.display = 'block';
-			idPeriodo.style.display = 'block';
-		} else {
-
-			idAnio.style.display = 'none';
-		
-
-		}
-	}
-
-// 	function SelectedAnio(selectObject) {
-// 		var value = selectObject.value;
-// 		document.getElementById("Idanio").value = value;
-// 		var x = document.getElementById('Idimp').value;
-// 		var tablepredial = document.getElementById('table-predial');
-// 		var tablevehiculos = document.getElementById('table-vehiculos');
-// 		var tableica = document.getElementById('table-ica');
-// 		var tablepublicidad = document.getElementById('table-publicidad');
-// 		if (x == '1') {
-
-// 			tablepredial.style.display = 'block';
-// 			tablevehiculos.style.display = 'none';
-// 			tableica.style.display = 'none';
-// 			tablepublicidad.style.display = 'none';
-
-// 		} else if (x == '2') {
-
-// 			tablepredial.style.display = 'none';
-// 			tablevehiculos.style.display = 'block';
-// 			tableica.style.display = 'none';
-// 			tablepublicidad.style.display = 'none';
-
-// 		} else if (x == '4') {
-// 			tablepredial.style.display = 'none';
-// 			tablevehiculos.style.display = 'none';
-// 			tableica.style.display = 'none';
-// 			tablepublicidad.style.display = 'block';
-
-// 		} else {
-
-// 			tablepredial.style.display = 'none';
-// 			tablevehiculos.style.display = 'none';
-// 			tableica.style.display = 'none';
-// 			tablepublicidad.style.display = 'none';
-// 		}
-
-// 	}
-
-
-
-	function SelectSobreDeli(selectObject) {
-		var value = selectObject.value;
-		document.getElementById("Idper").value = value;
-		var x = document.getElementById('Idimp').value;
-		var tablepredial = document.getElementById('table-predial');
-		var tablevehiculos = document.getElementById('table-vehiculos');
-		var tableica = document.getElementById('table-ica');
-		var tablepublicidad = document.getElementById('table-publicidad');
-		if (x == '5' || x == '6') {
-
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-
-		} else if(x == '3'){
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'block';
-			tablepublicidad.style.display = 'none';
-			
-		}	else {
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-		}
-	}
-	
-	function reiniciaConsultaPublicidad(){
-		debugger;
-		impuesto = document.getElementById("Idimp");
-		impuesto.value = "";
-		
-		form = document.getElementById("form_pdf");
-		form.submit();
-	}
-	
-	<!-- se agrega control para tablas de delineación -->
-
-	function ShowSelected(selectObject) {
-		var value = selectObject.value;
-		var idLic = document.getElementById('selectiplic');
-		var idrad = document.getElementById('idRadicados');
-		if (value == '1') {
-			idLic.disabled = false;
-			idLic.selectedIndex = "";
-			idrad.style.display = 'none';
-		} else if (value == '2') {
-			idLic.disabled = true;
-			idLic.selectedIndex = "1";
-			idrad.style.display = 'block';
-		} else {
-			idrad.style.display = 'none';
-		}
-	}
-	
+ 	
 	function onChange(selectObject) {
-// 				debugger;
-		var impuesto = selectObject.value;
-		var per = document.getElementById('Periodo1');
-		var per2 = document.getElementById('Periodo2');
-
-		if (impuesto == '0005') {
-			per.style.display = 'block';
-			per2.style.display = 'none';
-		} else if (impuesto == '0004') {
-			per2.style.display = 'block';
-			per.style.display = 'none';
-
-		} else {
-			per.style.display = 'none';
-			per2.style.display = 'none';
-		}
-		document.getElementById('aniograv').value = '00'; 
-		document.getElementById('periodo').value = '00'; 
+			debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.reiniciaCertipagos();
+		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
+	}
+
+	
+	function SelectedAnio(selectObject) {
+		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+		ACC.opcionDeclaraciones.reiniciaPeriodosMB();
+		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
 	}
 	
+	function onChangeBimestral(selectObject) {
+		debugger;
+		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
+	}
 	
+	function onChangeMensual(selectObject) {
+		debugger;
+		var per = selectObject.value;
+		var anio = document.getElementById('aniograv').value;
+		var fecha = new Date();
+		var anioact = fecha.getFullYear();
+		var mesact = fecha.getMonth();
 
-	
+		if (anio < anioact) {
+
+		} else {
+			mesact = mesact + 1;
+			if (per < mesact) {
+
+			} else {
+				alert("Por favor, seleccione un mes anterior");
+			}
+
+		}
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
+
+	}
 </script>
 

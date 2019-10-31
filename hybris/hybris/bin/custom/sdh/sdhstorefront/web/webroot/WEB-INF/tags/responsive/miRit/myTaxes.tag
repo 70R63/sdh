@@ -79,7 +79,7 @@
 											code="mirit.gas.tax.tipoDoc" />
 									</label> <input id="gasolina[${status.index }].tipoDoc"
 										disabled="disabled" name="gasolina[${status.index }].tipoDoc"
-										class="newalto form-control" aria-required="true"
+										class="newalto_dir form-control" aria-required="true"
 										type="text"
 										value="<spring:theme code="register.id.types.${eachGasTax.tipoDoc }" />"
 										maxlength="240">
@@ -166,8 +166,7 @@
 						</div>
 						</c:forEach>
 						</c:if>
-						<br>
-						<br>
+
 				<!-- 		<div class="form-group "> -->
 				<!-- 			<label class="control-label " > -->
 				<%-- 				<spring:theme code="mirit.taxesData.unifiedPropertyTax"/> --%>

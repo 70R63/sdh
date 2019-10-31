@@ -36,7 +36,7 @@
 								<label class="control-label required" for="tipoDoc"> <spring:theme
 										code="mirit.personalData.documentType"
 										text="Mis datos personales" />
-								</label> <select id="documentType" class="newalto form-control "
+								</label> <select id="documentType" class="alto_select form-control "
 									disabled="disabled">
 									<option value="${miRitForm.tipoDoc }"><spring:theme
 											code="register.id.types.${miRitForm.tipoDoc}" /></option>

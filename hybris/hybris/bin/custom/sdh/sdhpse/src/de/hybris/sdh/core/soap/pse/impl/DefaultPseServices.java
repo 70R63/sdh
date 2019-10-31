@@ -3,18 +3,7 @@ package de.hybris.sdh.core.soap.pse.impl;
 import de.hybris.sdh.core.soap.pse.MainServices;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
-import de.hybris.sdh.core.soap.pse.eanucc.ConfirmTransactionPaymentInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.ConfirmTransactionPaymentResponseInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.ConfirmTransactionPaymentTransactionStateCodeList;
-import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.FinalizeTransactionPaymentInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.FinalizeTransactionPaymentResponseInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationBodyType;
-import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
-import de.hybris.sdh.core.soap.pse.eanucc.GetbankListInformationType;
-import de.hybris.sdh.core.soap.pse.eanucc.UserTypeListType;
+import de.hybris.sdh.core.soap.pse.eanucc.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -176,6 +165,37 @@ public class DefaultPseServices implements PseServices
 		LOG.info(messageHeader);
 		LOG.info(getTransactionInformationBodyType);
 		LOG.info("----------- Input Parameters GetTransactionInformation   WS  ----------");
+
+		return result;
+	}
+
+	@Override
+	public GetTransactionInformationDetailedResponseBodyType getTransactionInformationDetailed(ConstantConnectionData constantConnectionData,
+																					   MessageHeader messageHeader,
+																					   GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType) {
+
+		constantConnectionDataInt = constantConnectionData;
+		MainServicesSoapStub cli = null;
+		GetTransactionInformationDetailedResponseBodyType result = null;
+
+		try
+		{
+			cli = getMainServices();
+			cli.setMessageHeader(messageHeader);
+
+			getTransactionInformationDetailedBodyType.setEntityCode(constantConnectionDataInt.getPpeCode());
+			result = cli.getTransactionInformationDetailed(getTransactionInformationDetailedBodyType);
+		}
+		catch (MalformedURLException | ServiceException | RemoteException e)
+		{
+			this.printExceptionMessage(e);
+		}
+
+		LOG.info("----------- Input Parameters getTransactionInformationDetailed   WS ----------");
+		LOG.info(constantConnectionData);
+		LOG.info(messageHeader);
+		LOG.info(getTransactionInformationDetailedBodyType);
+		LOG.info("----------- Input Parameters getTransactionInformationDetailed   WS  ----------");
 
 		return result;
 	}

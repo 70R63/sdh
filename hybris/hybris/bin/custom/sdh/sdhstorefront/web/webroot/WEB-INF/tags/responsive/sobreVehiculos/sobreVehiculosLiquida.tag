@@ -22,7 +22,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<br>
-				<table class="table">
+				<table class="table tableLiq" id="tableLiq">
 					<thead>
 						<tr>
 						<th><label class="control-label labeltabletd"><spring:theme
@@ -35,21 +35,12 @@
 					</thead>
 
 					<tbody>
-						<tr>
-						<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Año"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Avalúo"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly" value="<c:out value="Tarifa"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-						</tr>
+					
 					</tbody>
 				</table>
 			</div>
 		</div>
+		<input type="hidden" value="" id="numFormdet" class="numFormdet" />
 		<div class="row">
 			<div class="col-md-2">
 				<button  type="button" class="btn btn-secondary "
@@ -65,8 +56,8 @@
 			</div>
 			<div class="col-md-4">
 
-				<button type="submit" class="btn btn-primary "
-					id="" name="" value="regresar">
+				<button type="submit" class="bindPresentarDeclaracionVehiculoButton btn btn-primary "
+					id="bindPresentarDeclaracionVehiculoButton" name="" value="declaracion">
 					<spring:theme code="sobre.vehiculo.liqui.presdecla" />
 				</button>
 			</div>

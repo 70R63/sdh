@@ -6,6 +6,12 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="virtual" tagdir="/WEB-INF/tags/responsive/escuelavirtual"%>
 
-
+<div class="loader"></div>
 <virtual:escuelaVirtual/>
 
+		<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

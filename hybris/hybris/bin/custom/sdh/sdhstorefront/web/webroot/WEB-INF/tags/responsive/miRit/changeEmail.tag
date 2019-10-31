@@ -28,7 +28,7 @@
 						<div class="form-group ">
 							<label class="control-label required" for="currentMail">
 								<spring:theme code="mirit.changeEmail.email" />
-							</label> <input id="currentMail" name="currentMail" class="newalto form-control "
+							</label> <input id="currentMail" name="currentMail" class="newalto_dir form-control "
 								aria-required="true" type="text" value="${miRitForm.email }"
 								maxlength="240" onkeyup="ajustar(this)">
 							<div class="help-block">

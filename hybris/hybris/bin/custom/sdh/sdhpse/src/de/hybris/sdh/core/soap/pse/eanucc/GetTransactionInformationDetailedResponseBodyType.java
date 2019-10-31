@@ -169,4 +169,6 @@ public class GetTransactionInformationDetailedResponseBodyType  implements java.
             _javaType, _xmlType, typeDesc);
     }
 
+
+
 }

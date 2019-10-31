@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="registration" tagdir="/WEB-INF/tags/responsive/registration" %>
 
-
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 	<c:choose>
 		<c:when test="${currentSection eq 'requestRols' }">
@@ -31,4 +31,20 @@
 		<c:otherwise>
 		</c:otherwise>
 	</c:choose>
+
+
+<script  type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+function changeMessage() {
+	debugger;
+	var rol = document.getElementById("rol").value;
+	var email = document.getElementById("email").value;
+	var mensaje = document.getElementById("mensaje").value;
+	mensaje = "(rol="+rol+")"+"(email="+email+")"+"(mensaje="+mensaje+")";
+	document.getElementById("mensaje").value = mensaje;
+}
+</script>
 </template:page>

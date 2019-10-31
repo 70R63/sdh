@@ -178,6 +178,8 @@
 		<entry key="/import/csv/*" value-ref="importCSVMultipartFilter"/>
 		<entry key="/conciliaciones/*" value-ref="importP7ZultipartFilter"/>
 		<entry key="/retenedores/*" value-ref="importRetencionesMultipartFilter"/>
+		<entry key="/gestionBancaria/*" value-ref="importGestionBancariaMultipartFilter"/>
+
 	</util:map>
 
 	<bean id="fileUploadFilter" class="de.hybris.sdh.storefront.filters.FileUploadFilter" >
@@ -232,6 +234,10 @@
 	<bean id="importRetencionesMultipartFilter" class="org.springframework.web.multipart.support.MultipartFilter">
 		<property name="multipartResolverBeanName" value="importRetencionesMultipartResolver"/>
 	</bean>
+
+	<bean id="importGestionBancariaMultipartFilter" class="org.springframework.web.multipart.support.MultipartFilter">
+		<property name="multipartResolverBeanName" value="importGestionBancariaMultipartResolver"/>
+	</bean>
 	
 	<bean id="importCSVMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="#{configurationService.configuration.getProperty('import.csv.max.upload.size.bytes')}" />
@@ -242,6 +248,10 @@
 	</bean>
 	
 	<bean id="importRetencionesMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="#{configurationService.configuration.getProperty('sdh.reteica.file.max.upload.size.bytes')}" />
+	</bean>
+
+	<bean id="importGestionBancariaMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="#{configurationService.configuration.getProperty('sdh.reteica.file.max.upload.size.bytes')}" />
 	</bean>
 </beans>

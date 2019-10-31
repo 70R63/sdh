@@ -7,13 +7,16 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="desfac"
 	tagdir="/WEB-INF/tags/responsive/facturacion"%>
-
+<div class="loader"></div>
 
 <desfac:descargaFactura/>
 
 
-
-<script type="text/javascript">
+		<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
 	function goBack() {
 		window.history.back();
 	}

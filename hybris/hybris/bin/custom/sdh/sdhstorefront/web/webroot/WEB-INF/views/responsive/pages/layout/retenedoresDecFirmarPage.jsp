@@ -8,14 +8,19 @@
 	tagdir="/WEB-INF/tags/responsive/retenedores"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<div class="loader"></div>
+
 <sf:form>
 	<retenedores:retenedoresDecFirmar/>
 </sf:form>
 
 
-
-
 <script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function goBack() {
 		window.history.back();
 	}

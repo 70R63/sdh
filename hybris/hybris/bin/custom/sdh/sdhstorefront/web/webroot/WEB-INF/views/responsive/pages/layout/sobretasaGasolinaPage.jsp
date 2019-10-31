@@ -26,7 +26,22 @@
 </template:page>
 
 <script>
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+			}
+		}
+	}
+	 $(".loader").fadeOut("slow");
+}
 	function goBack() {
 		window.history.back();
 	}
 </script>
+

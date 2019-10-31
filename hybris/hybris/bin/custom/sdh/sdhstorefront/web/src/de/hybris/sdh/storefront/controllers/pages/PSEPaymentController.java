@@ -267,6 +267,8 @@ public class PSEPaymentController extends AbstractPageController
 			final String estatus)
 			throws CMSItemNotFoundException
 	{
+		String flagSuccessView = null;
+		String flagReintetarPago = null;
 
 		if (error == "sinPdf")
 		{
@@ -290,13 +292,16 @@ public class PSEPaymentController extends AbstractPageController
 			{
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
+				flagSuccessView = "X";
 			}else {	//Transaccion con error
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId)); //new PSEPaymentForm());
 				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+				flagReintetarPago = "X";
 			}
 		}else {
 			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+			flagReintetarPago = "X";
 		}
 
 		LOG.info("estatus: " + estatus);
@@ -307,6 +312,8 @@ public class PSEPaymentController extends AbstractPageController
 
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("disableFields", "true");
+		model.addAttribute("flagSuccessView", flagSuccessView);
+		model.addAttribute("flagReintetarPago", flagReintetarPago);
 
 		return getViewForPage(model);
 	}

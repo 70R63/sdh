@@ -7,7 +7,7 @@
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-
+<div class="loader"></div>
 
 <delineacionUrbana:delineacionUrbanaIDs />
 <delineacionUrbana:delineacionUrbanaCDUs />
@@ -16,6 +16,22 @@
 
 
 <script type="text/javascript">
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+	$(".loader").fadeOut("slow");
+}
 	function goBack() {
 		window.history.back();
 	}
@@ -61,6 +77,21 @@
 	function show() {
 		var idRad = document.getElementById('idRadicados');
 		idRad.style.display = 'block';
+
+	}
+	
+	
+	window.onload = function() {
+		debugger;
+		var cosas = $(":input");
+		var tam = cosas.length;
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
 
 	}
 </script>

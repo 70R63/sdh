@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="ica" tagdir="/WEB-INF/tags/responsive/ica"%>
 
+<div class="loader"></div>
 <ica:icaTable />
 <ica:icaDetalle />
 <ica:icaActividades />
@@ -25,6 +26,23 @@
 // 	}
 
 // }
+
+	window.onload = function() {
+		debugger;
+		var cosas = $(":input");
+		var tam = cosas.length;
+		if (false){ //EMP-codigo comentado por observaciones en pruebas realizadas el 04 de octubre 2019
+			for (var i = 0; i < tam; i++) {
+				var valor = cosas[i].value;
+				if (valor == "") {
+					cosas[i].value = "-";
+
+				}
+			}
+		}	
+		$(".loader").fadeOut("slow");
+
+	}
 
 	function goBack() {
 		window.history.back();

@@ -9,8 +9,9 @@
 	
 <spring:htmlEscape defaultHtmlEscape="true" />	
 
-
+<div class="loader"></div>
 <template:page>
+
 
 <div class="container">
 	<div class="row">
@@ -56,7 +57,7 @@
 		 <form:form commandName="importConciliacionForm" enctype="multipart/form-data" method="post" action="${importConciliacion}" class="">
 		 	<div class="form-group">
 			    <label for="exampleInputFile">File input</label>
-			    <input type="file" id="conciliacionFile" name="conciliacionFile" >
+			    <input type="file" id="" name="conciliacionFile" >
 			    <p class="help-block">Example block-level help text here.</p>
 			  </div>
 		  <button type="submit" class="btn btn-default">Submit</button>
@@ -67,6 +68,13 @@
 	<div id="dialogConciliaciones" title="Conciliaciones" ><div id="conciliacionesDialogContent"></div></div>
 </div>
 	
+	
+	<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
 </template:page>
 
 

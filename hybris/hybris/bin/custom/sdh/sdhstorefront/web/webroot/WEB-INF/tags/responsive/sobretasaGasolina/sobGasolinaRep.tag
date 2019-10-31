@@ -17,10 +17,10 @@
 	<div class="col-md-12">
 		<div class="row">
 			<div class="col-md-12">
-				<h3>
+				<h2>
 					<span tabindex="0 headline"><spring:theme
 							code="impuestos.sobreTasaGasolina.representantes.titulo" /></span>
-				</h3>
+				</h2>
 			</div>
 		</div>
 		<div class="row text-center">

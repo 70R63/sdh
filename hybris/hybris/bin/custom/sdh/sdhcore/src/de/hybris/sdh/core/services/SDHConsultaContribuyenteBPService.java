@@ -12,4 +12,5 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 public interface SDHConsultaContribuyenteBPService
 {
 	String consultaContribuyenteBP(ConsultaContribuyenteBPRequest request);
+	String getEntidadBancaria(String bp);
 }

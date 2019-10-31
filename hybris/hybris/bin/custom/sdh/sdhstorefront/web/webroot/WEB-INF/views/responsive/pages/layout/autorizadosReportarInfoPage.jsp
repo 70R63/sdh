@@ -6,6 +6,9 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="autorizados" tagdir="/WEB-INF/tags/responsive/agentesAutorizados"%>
 
+<div class="loader"></div>
+
+
 <autorizados:autorizadosReportarInfo />
 
 
@@ -13,6 +16,23 @@
 	function goBack() {
 		window.history.back();
 	}	
+	
+	
+	window.onload = function() {
+		debugger;
+		var cosas = $(":input");
+		var tam = cosas.length;
+		if (false){
+			for (var i = 0; i < tam; i++) {
+				var valor = cosas[i].value;
+				if (valor == "") {
+					cosas[i].value = "-";
+
+				}
+			}
+		}
+		 $(".loader").fadeOut("slow");
+	}
 </script>
 
 

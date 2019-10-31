@@ -9,6 +9,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<div class="loader"></div>
 
 	<div id="dialogRop" title="Generar ROP">
 	<div id="ropDialogContent"></div>
@@ -82,7 +83,13 @@
 
 	</form:form>
 </div>
-<script>
+
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function goBack() {
 		window.history.back();
 	}

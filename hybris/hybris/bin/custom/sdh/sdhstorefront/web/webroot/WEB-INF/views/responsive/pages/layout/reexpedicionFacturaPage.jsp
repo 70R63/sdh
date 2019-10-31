@@ -8,11 +8,17 @@
 <%@ taglib prefix="reex"
 	tagdir="/WEB-INF/tags/responsive/facturacion"%>
 
+<div class="loader"></div>
 
 <reex:reexpedicionFactura/>
 
 
 <script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function goBack() {
 		window.history.back();
 	}

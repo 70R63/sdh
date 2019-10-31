@@ -8,10 +8,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
 
 
-
+<div class="loader"></div>
 
 <div class="row" >
     <script>
+	
+	window.onload = function() {
+		var cosas = $(":input");
+		var tam = cosas.length;
+		if (false){
+			for (var i = 0; i < tam; i++) {
+				var valor = cosas[i].value;
+				if (valor == "") {
+					cosas[i].value = "-";
+
+				}
+			}
+		}
+		  $(".loader").fadeOut("slow");
+	}
 		function downloadPDF(pdf) {
 			    const linkSource = 'data:application/pdf;base64,' + pdf;
 			    const downloadLink = document.createElement("a");

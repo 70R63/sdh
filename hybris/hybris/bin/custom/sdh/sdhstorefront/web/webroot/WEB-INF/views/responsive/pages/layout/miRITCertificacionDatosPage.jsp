@@ -7,7 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
+<div class="loader"></div>
 <style>
 #myDIV {
 	
@@ -24,6 +24,22 @@ input[type=radio] {
 
 
 <script>
+
+window.onload = function() {
+
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+	$(".loader").fadeOut("slow");
+}
 	function downloadPDF(pdf) {
 		debugger;
 		if (pdf) {

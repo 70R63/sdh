@@ -310,6 +310,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		String bp = "";
 		String impuesto = "";
 		String anioGravable = "";
+		String periodo = "";
 
 
 		bp = customerModel.getNumBP();
@@ -321,6 +322,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 		impuesto = infoVista.getClaveImpuesto();
 		anioGravable = infoVista.getAnoGravable();
+		periodo = infoVista.getPeriodo();
 
 		infoVista.setUrlDownload(null);
 		infoVista.setPublicidadExt(null);
@@ -335,7 +337,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 		listaDeclaracionesRequest.setBp(bp);
 		listaDeclaracionesRequest.setImpuesto(impuesto);
 		listaDeclaracionesRequest.setAnioGravable(anioGravable);
-		listaDeclaracionesRequest.setNumObjeto(infoVista.getCustomerData().getGasolina().get(0).getNumObjeto());
+		listaDeclaracionesRequest.setPeriodo(periodo);
+		listaDeclaracionesRequest
+				.setNumObjeto(gasolinaService.prepararNumObjeto_certipagos(infoVista, infoVista.getCustomerData()));
 
 		System.out.println("Request para docs/consulPagos: " + listaDeclaracionesRequest);
 		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest,
@@ -344,7 +348,9 @@ public class CertificacionPagoPageController extends AbstractPageController
 		System.out.println("Response de docs/consulPagos: " + listaDeclaracionesResponse);
 		if (gasolinaService.ocurrioErrorListaDeclara(listaDeclaracionesResponse) != true)
 		{
-			//			gasolinaService.determinarRegistrosDeclaraciones(infoVista, listaDeclaracionesResponse);
+			listaDeclaracionesResponse.setDeclaraciones(gasolinaService.determinarRegistrosDeclaraciones_certipagos(infoVista,
+					listaDeclaracionesResponse, gasolinaService));
+
 			infoVista.setDeclaracionesCertiPagos(listaDeclaracionesResponse);
 			infoVista.setErrores(listaDeclaracionesResponse.getErrores());
 		}
@@ -358,7 +364,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 	}
 
 
-	@RequestMapping(value = "/contribuyentes/consultas/certipagos/imprimir", method = RequestMethod.POST)
+	@RequestMapping(value = "/contribuyentes/consultas/certipagos/pagoImprimir", method = RequestMethod.GET)
 	@ResponseBody
 	public OpcionDeclaracionesVista certiPagoImprimePOST(@ModelAttribute("dataForm")
 	final OpcionDeclaracionesVista infoVista, final BindingResult bindingResult, final Model model,
@@ -380,6 +386,10 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 		String ctaContrato = "";
 		String clavePeriodo = "";
+		String referencia = "";
+		String fechaCompensa = "";
+		String moneda = "";
+		String numDocPago = "";
 		String importe = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -394,6 +404,10 @@ public class CertificacionPagoPageController extends AbstractPageController
 		//		claseObjeto = infoVista.getClaveImpuesto();
 		numObjeto = infoVista.getObjContrato();
 		anioGravable = infoVista.getAnoGravable();
+		referencia = infoVista.getReferencia();
+		fechaCompensa = infoVista.getFechaCompensa();
+		moneda = infoVista.getMoneda();
+		numDocPago = infoVista.getNumDocPago();
 		periodo = infoVista.getPeriodo();
 		radicado = "";
 		ctaContrato = infoVista.getCtaContrato();
@@ -414,6 +428,10 @@ public class CertificacionPagoPageController extends AbstractPageController
 		impresionRequest.setTipoDoc(tipoDoc);
 		impresionRequest.setClavePeriodo(clavePeriodo);
 		impresionRequest.setImporte(importe);
+		impresionRequest.setReferencia(referencia);
+		impresionRequest.setFechaCompensa(fechaCompensa);
+		impresionRequest.setMoneda(moneda);
+		impresionRequest.setNumDocPago(numDocPago);
 
 
 		System.out.println("Request para docs/imprimePago: " + impresionRequest);
