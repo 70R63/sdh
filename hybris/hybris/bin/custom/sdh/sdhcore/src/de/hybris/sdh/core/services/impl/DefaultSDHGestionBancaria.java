@@ -4,7 +4,12 @@ import com.bdg.ca.CACertificateManager;
 import com.bdg.verifiers.FileSignVerifier;
 import com.bdg.verifiers.SignerInfo;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.sdh.core.pojos.requests.FileConciliaRequest;
+import de.hybris.sdh.core.pojos.responses.FileConciliaResponse;
 import de.hybris.sdh.core.services.SDHGestionBancaria;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.client.support.BasicAuthorizationInterceptor;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -90,6 +95,23 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         LOG.info("Resultado " + resultado);
         LOG.info("autoridadesFolderPath: " + autoridades);
         return isValidCertificate;
+    }
+
+    @Override
+    public FileConciliaResponse fileConcilia(FileConciliaRequest fileConciliaRequest) {
+
+        final String usuario = configurationService.getConfiguration().getString("gestion.bancaria.ws.fileConcilia.user");
+        final String password = configurationService.getConfiguration().getString("gestion.bancaria.ws.fileConcilia.password");
+        final String urlService = configurationService.getConfiguration().getString("gestion.bancaria.ws.fileConcilia.url");
+
+        final RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(usuario, password));
+        final HttpEntity<FileConciliaRequest> request = new HttpEntity<>(fileConciliaRequest);
+
+        final FileConciliaResponse fileConciliaResponse = restTemplate.postForObject(urlService, request, FileConciliaResponse.class);
+        LOG.info(fileConciliaResponse);
+
+        return fileConciliaResponse;
     }
 
 }
