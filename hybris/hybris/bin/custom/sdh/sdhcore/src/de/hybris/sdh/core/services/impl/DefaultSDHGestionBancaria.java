@@ -109,7 +109,10 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         final HttpEntity<FileConciliaRequest> request = new HttpEntity<>(fileConciliaRequest);
 
         final FileConciliaResponse fileConciliaResponse = restTemplate.postForObject(urlService, request, FileConciliaResponse.class);
+
+        LOG.info(fileConciliaRequest);
         LOG.info(fileConciliaResponse);
+
 
         return fileConciliaResponse;
     }

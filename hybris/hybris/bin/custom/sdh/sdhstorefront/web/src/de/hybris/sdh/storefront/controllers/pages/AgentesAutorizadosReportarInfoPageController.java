@@ -72,6 +72,13 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 	@Resource(name = "customerFacade")
 	private CustomerFacade customerFacade;
 
+	@ModelAttribute("entidadBancaria")
+	public String getEntidadBancaria()
+	{
+		String bp = customerFacade.getCurrentCustomer().getNumBP();
+		return  sdhConsultaContribuyenteBPService.getEntidadBancaria(bp);
+	}
+
 	@ModelAttribute("tipoDeArchivo")
 	public List<SelectAtomValue> getTipoDeArchivo()
 	{

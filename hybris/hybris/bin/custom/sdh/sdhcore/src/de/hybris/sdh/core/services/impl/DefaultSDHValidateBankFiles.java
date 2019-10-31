@@ -90,7 +90,7 @@ public class DefaultSDHValidateBankFiles implements SDHValidateBankFiles
 					objNode.path("FTYPE").isInt() ? String.valueOf(objNode.path("FTYPE").intValue())  : objNode.path("FTYPE").textValue(),
 					objNode.path("FNAME").textValue()
 			);
-            LOG.info(atomData);
+            LOG.debug(atomData);
 			returnData.add(atomData);
 		}
 
