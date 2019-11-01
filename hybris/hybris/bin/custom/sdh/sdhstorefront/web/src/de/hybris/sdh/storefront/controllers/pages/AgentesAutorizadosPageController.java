@@ -7,6 +7,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
@@ -18,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -52,6 +54,20 @@ public class AgentesAutorizadosPageController extends AbstractPageController
 
 	@Resource(name = "sessionService")
 	private SessionService sessionService;
+
+	@Resource(name = "customerFacade")
+	private CustomerFacade customerFacade;
+
+	@ModelAttribute("entidadBancaria")
+	public String getEntidadBancaria()
+	{
+		String bp = customerFacade.getCurrentCustomer().getNumBP();
+		String entidadBancaria = sdhConsultaContribuyenteBPService.getEntidadBancaria(bp);
+		LOG.info("AgentesAutorizadosPageController BP:" + bp);
+		LOG.info("AgentesAutorizadosPageController entidad bancaria:" + entidadBancaria);
+
+		return entidadBancaria;
+	}
 
 	@RequestMapping(value = "/autorizados", method = RequestMethod.GET)
 	@RequireHardLogIn
