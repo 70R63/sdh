@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImportConciliacionForm
 {
 	private MultipartFile conciliacionFile;
+	private String tipoArchivo;
+	private String entidadBancaria;
 
 	/**
 	 * @return the conciliacionFile
@@ -34,4 +36,19 @@ public class ImportConciliacionForm
 		this.conciliacionFile = conciliacionFile;
 	}
 
+	public String getTipoArchivo() {
+		return tipoArchivo;
+	}
+
+	public void setTipoArchivo(String tipoArchivo) {
+		this.tipoArchivo = tipoArchivo;
+	}
+
+	public String getEntidadBancaria() {
+		return entidadBancaria;
+	}
+
+	public void setEntidadBancaria(String entidadBancaria) {
+		this.entidadBancaria = entidadBancaria;
+	}
 }

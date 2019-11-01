@@ -1,5 +1,8 @@
 package de.hybris.sdh.core.pojos.requests;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class FileConciliaRequest {
     private String  idBanco;
     private String  tipoFile;
@@ -10,6 +13,23 @@ public class FileConciliaRequest {
     private String  rutaarchivo;
     //private String registros;
 
+    public FileConciliaRequest(){
+
+    }
+
+    public FileConciliaRequest(String idBanco, String tipoFile, String fileName, String flag, String rutaarchivo) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatDateTime = now.format(formatter);
+
+        this.idBanco = idBanco;
+        this.tipoFile = tipoFile;
+        this.fileName = fileName;
+        this.fchRecep = formatDateTime.split(" ")[0];
+        this.horRecep = formatDateTime.split(" ")[1];;
+        this.flag = flag;
+        this.rutaarchivo = rutaarchivo;
+    }
 
     public String getIdBanco() {
         return idBanco;
