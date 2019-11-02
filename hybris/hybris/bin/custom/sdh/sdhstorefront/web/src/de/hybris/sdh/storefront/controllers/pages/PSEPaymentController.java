@@ -361,7 +361,7 @@ public class PSEPaymentController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
+	//	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
 	public String pagoPdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("psePaymentForm")
 	final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
@@ -493,7 +493,71 @@ public class PSEPaymentController extends AbstractPageController
 	}
 
 
+	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
+	public String imprimirpagoPdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("psePaymentForm")
+	final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En imprimir comprobante pago POST --------------------------");
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final ImprimePagoRequest imprimePagoRequest = new ImprimePagoRequest();
+		ImprimePagoResponse imprimePagoResponse = null;
 
+		final String numBP = customerData.getNumBP();
+		final String cuentaContrato = "";
+		final String numObjeto = "";
+		final String clavePeriodo = "";
+		final String referencia = psePaymentForm.getNumeroDeReferencia();
+		final String fechaCompensa = "";
+		final String importe = psePaymentForm.getValorAPagar();
+		final String moneda = "";
+		final String numfactForm = "";
+		final String numDocPago = "";
+		final String refROP = "";
+
+
+		try
+		{
+			imprimePagoRequest.setNumBP(numBP);
+			imprimePagoRequest.setCtaContrato(cuentaContrato);
+			imprimePagoRequest.setNumObjeto(numObjeto);
+			imprimePagoRequest.setClavePeriodo(clavePeriodo);
+			imprimePagoRequest.setReferencia(referencia);
+			imprimePagoRequest.setFechaCompensa(fechaCompensa);
+			imprimePagoRequest.setImporte(importe);
+			imprimePagoRequest.setMoneda(moneda);
+			imprimePagoRequest.setNumfactForm(numfactForm);
+			imprimePagoRequest.setNumDocPago(numDocPago);
+			imprimePagoRequest.setRefROP(refROP);
+
+			System.out.println("Request de docs/imprimePago: " + imprimePagoRequest);
+			final String resp = sdhImprimePagoService.imprimePago(imprimePagoRequest);
+			System.out.println("Response de docs/imprimePago: " + resp);
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error al leer in: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+			redirectModel.addFlashAttribute("error", "sinPdf");
+			return "redirect:/impuestos/pagoEnLinea/pseResponse";
+
+		}
+		redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
+		redirectModel.addFlashAttribute("psePaymentFormResp", psePaymentForm);
+		redirectModel.addFlashAttribute("estatus", "impreso");
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return "redirect:/impuestos/pagoEnLinea/pseResponse";
+
+	}
 
 
 
