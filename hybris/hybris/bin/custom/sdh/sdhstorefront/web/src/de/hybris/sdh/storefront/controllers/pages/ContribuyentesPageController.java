@@ -17,7 +17,6 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
@@ -111,8 +110,11 @@ public class ContribuyentesPageController extends AbstractPageController
 				final ObjectMapper mapper = new ObjectMapper();
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+				String response = sdhConsulFirmasService.getDeclaraciones(consulFirmasRequest);
+				response = response.replaceAll("\"declaraciones\":\\s*\\{([\"])(.*)(\"\\})", "\"declaraciones\":[{\"$2$3]");
+
 				final ContribFirmasResponse contribFirmasResponse = mapper
-						.readValue(sdhConsulFirmasService.getDeclaraciones(consulFirmasRequest), ContribFirmasResponse.class);
+						.readValue(response, ContribFirmasResponse.class);
 
 
 				for (final DetalleDeclaraciones eachPeriodo : contribFirmasResponse.getDeclaraciones())
