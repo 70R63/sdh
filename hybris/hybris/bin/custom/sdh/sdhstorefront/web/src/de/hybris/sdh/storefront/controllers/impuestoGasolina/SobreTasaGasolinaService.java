@@ -2392,11 +2392,15 @@ public class SobreTasaGasolinaService
 
 				break;
 
-			//			case "0003": //ICA
-			//				break;
-			//
-			//			case "0004": //RETEICA
-			//				break;
+			case "0003": //ICA
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+				break;
+
+			case "0004": //RETEICA
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+				break;
 
 
 

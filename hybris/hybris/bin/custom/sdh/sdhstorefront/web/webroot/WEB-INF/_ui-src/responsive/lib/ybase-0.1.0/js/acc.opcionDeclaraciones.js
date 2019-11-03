@@ -507,7 +507,7 @@ debugger;
 				}
 				
 				if(infoActual.claveImpuesto == '0003'){
-					if(filtroPeriodo != null){
+					if(infoResponse.declaracionesCertiPagos != null){
 						$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 							if(value1.numObjeto != null && value1.numObjeto != ""){
 								if(value1.numObjeto == infoResponse.customerData.ica.numObjeto){
