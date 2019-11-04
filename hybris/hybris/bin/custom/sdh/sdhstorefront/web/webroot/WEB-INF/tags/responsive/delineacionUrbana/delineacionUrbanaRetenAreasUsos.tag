@@ -64,7 +64,7 @@
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control" readOnly="true" disabled="true"></sf:select>
+								class="new_alto form-control" disabled="false"></sf:select>
 						</c:if>
 
 					</div>
@@ -83,7 +83,7 @@
 							<sf:input class="newalto form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
-								readOnly="true" disabled="true" onkeyup="numberFormat(this)"
+								 disabled="false" onkeyup="numberFormat(this)"
 								onclick="numberFormat(this)" />
 						</c:if>
 					</div>

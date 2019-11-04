@@ -31,7 +31,7 @@
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.radic" /></label>
-				<sf:input class="newalto form-control" readonly="true"
+				<sf:input class="new_alto form-control" readonly="true"
 					aria-required="true" maxlength="240" path="input.selectedRadicado" />
 			</div>
 		</div>
@@ -154,5 +154,5 @@
 
 	}
 
-	function presupuestoObraLOAD();
+	function presupuestoObraLOAD()
 </script>
