@@ -58,7 +58,7 @@
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control"></sf:select>
+								class="new_alto form-control" disabled="true"></sf:select>
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
@@ -77,7 +77,7 @@
 							<sf:input class="newalto form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
-								onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
+								onkeyup="numberFormat(this)" onclick="numberFormat(this)" disabled="true" />
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 							<sf:input class="newalto form-control" readonly="false"
