@@ -261,7 +261,36 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			}
 			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
 			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
-			//pseTransactionsLogModel.setPaymentMode(map.get("bankProcessDate"));
+			if (map.get("bankProcessDate").equals("Débito en Cuenta"))
+			{
+				pseTransactionsLogModel.setPaymentMode("15");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Visa"))
+			{
+				pseTransactionsLogModel.setPaymentMode("50");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Master Card"))
+			{
+				pseTransactionsLogModel.setPaymentMode("51");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Diners Club"))
+			{
+				pseTransactionsLogModel.setPaymentMode("52");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Propia Entidad Financiera"))
+			{
+				pseTransactionsLogModel.setPaymentMode("53");
+			}
+			else if (map.get("bankProcessDate").equals("Crédito Rotativo"))
+			{
+				pseTransactionsLogModel.setPaymentMode("54");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito American Express"))
+			{
+				pseTransactionsLogModel.setPaymentMode("55");
+			}
+
+
 
 			transactionState = response.getTransactionState().getValue();
 
