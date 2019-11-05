@@ -195,6 +195,7 @@ window.onload = function() {
 			tot.readOnly=true;
 			pres.readOnly=true;
 		}
+	    $(".loader").fadeOut("slow");
 	}
 	
 </script>
