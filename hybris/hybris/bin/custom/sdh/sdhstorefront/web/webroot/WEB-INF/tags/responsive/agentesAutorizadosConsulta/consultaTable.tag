@@ -9,6 +9,14 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<script type="text/javascript">
+    window.downloadPDF = function downloadPDF() {
+        var dlnk = document.getElementById('dwnldLnk');
+            dlnk.href = 'data:application/octet-stream;base64,' + '${fileConsultaResponse.resultado.stringFile}';
+            dlnk.click();
+    }
+</script>
+
 <div class="container">
 	<div class="row" style="margin-top: 50px !important">
 		<div class="col-md-7">
@@ -45,25 +53,27 @@
 					<tbody>
 						<tr>
 							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value=""
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.nosecuencia}"
 								maxlength="240"></td>
 							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value=""
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.tiparchivo}"
 								maxlength="240"></td>
 							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value=""
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.idenvio}"
 								maxlength="240"></td>
 							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value=""
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.fecenvio}"
 								maxlength="240"></td>
 							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value=""
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.fecnoti}"
 								maxlength="240"></td>
 							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value=""
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.tipresultado}"
 								maxlength="240"></td>
-							<td><label class="control-label labeltabletd tablefechas" style="color:#0000FF !importat; text-decoration: underline;"><spring:theme
-										code="" /></label></td>
+							<td>
+							    <a id='dwnldLnk' download='archivo.pdf' style="display:none;" />
+							    <a href="#" onclick="downloadPDF();" title='archivo.pdf'>Descargar</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>

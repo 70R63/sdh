@@ -723,5 +723,8 @@
 	<alias alias="sdhGestionBancaria" name="defaultSDHGestionBancaria"/>
 	<bean name="defaultSDHGestionBancaria" class="de.hybris.sdh.core.services.impl.DefaultSDHGestionBancaria" />
 
+	<alias alias="sdhFileConsultaService" name="defaultSDHFileConsultaService"/>
+	<bean name="defaultSDHFileConsultaService" class="de.hybris.sdh.core.services.impl.DefaultSDHFileConsultaService" />
+
 
 </beans>

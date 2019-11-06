@@ -10,11 +10,11 @@
 
 <div class="loader"></div>
 
-<agentes:consultainicial />
-<div id="tabla" style="display: none;">
-	<agentes:consultaTable />
-</div>
 
+<agentes:consultainicial />
+<c:if test="${not empty fileConsultaResponse.resultado.stringFile}">
+    <agentes:consultaTable />
+</c:if>
 
 
 <script type="text/javascript">
@@ -56,7 +56,7 @@ window.onload = function() {
 								"oPaginate" : {
 									"sPrevious" : " Anterior ",
 									"sNext" : " Siguiente ",
-									"sLast" : " Última ",
+									"sLast" : " ï¿½ltima ",
 									"sFirst" : " Primera "
 								},
 								"sLengthMenu" : 'Mostrar <select>'
