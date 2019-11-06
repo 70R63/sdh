@@ -71,7 +71,7 @@
 					<div class="form-check">
 						<c:set var="noChecked" value="" />
 						<c:set var="yesChecked" value="" />
-						<c:set var="inputDisabled" value="" />
+						<c:set var="inputDisabled" value="disabled" />
 						<c:choose>
 							<c:when
 								test="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.entFinanciera.equalsIgnoreCase('X')}">
@@ -79,7 +79,6 @@
 							</c:when>
 							<c:otherwise>
 								<c:set var="noChecked" value="checked" />
-								<c:set var="inputDisabled" value="disabled" />
 							</c:otherwise>
 						</c:choose>
 						<label class="form-check-label"
