@@ -4,8 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -45,30 +45,45 @@
 			</h2>
 		</div>
 	</div>
-	<form action="">
+
+
+	<form:form method="post" commandName="fileConsultaForm" action="consultas">
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="autorizado.consultas.inicial.idenvio" /></label> <input id="" name=""
-						class="newalto form-control" type="text" value="" maxlength="240">
+					<label class="control-label">
+					    <spring:theme   code="autorizado.consultas.inicial.idenvio" />
+					 </label>
+					<input id="idenvio" name="idenvio" value="${fileConsultaForm.idenvio}" class="newalto form-control" type="text" value="" maxlength="240">
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="autorizado.consultas.inicial.nosecuencia" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240">
+					<label class="control-label">
+					    <spring:theme code="autorizado.consultas.inicial.nosecuencia" />
+					</label>
+					<input id="nosecuencia" name="nosecuencia" value="${fileConsultaForm.nosecuencia}" class="newalto form-control" type="text" value="" maxlength="240">
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="autorizado.consultas.inicial.tiparchivo" /></label> <select
-						class="newalto form-control">
-						<option>Seleccionar</option>
+					<label class="control-label">
+					    <spring:theme code="autorizado.consultas.inicial.tiparchivo" />
+					</label>
+					<select id="tiparchivo" name="tiparchivo" class="newalto form-control">
+					    <option value="">--- Seleccionar ---</option>
+					    <c:forEach items="${tipoDeArchivo}" var="tipoArchivo">
+					        <c:choose>
+                                <c:when test="${fileConsultaForm.tiparchivo==tipoArchivo.code}">
+                                    <option value="${tipoArchivo.code}" selected><c:out value="${tipoArchivo.name}"/></option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${tipoArchivo.code}"><c:out value="${tipoArchivo.name}"/></option>
+                                </c:otherwise>
+                            </c:choose>
+                         </c:forEach>
 					</select>
 				</div>
 			</div>
@@ -78,17 +93,21 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<div class="form-check form-check-inline">
-						<label class="form-check-label" style="text-transform:none !important; font-weight: 400 !important; font-size: 14px !importat;"><spring:theme
-								code="autorizado.consultas.inicial.tipresultado" /></label> <label
-							class="form-check-label" style="text-transform:none !important; font-weight: 400 !important; font-size: 14px !importat;"> <input type="radio"
-							name="tiporesultado" id="" value="" style="min-height: 0px !important; visibility: visible !important; margin-left: 20px !important;"> <spring:theme
-								code="autorizado.consultas.inicial.aceptado" /></label> <label
-							class="form-check-label" style="text-transform:none !important; font-weight: 400 !important; font-size: 14px !importat;"> <input type="radio"
-							name="tiporesultado" id="" value="" style="min-height: 0px !important; visibility: visible !important; margin-left: 20px !important;"> <spring:theme
-								code="autorizado.consultas.inicial.rechazado" /></label> <label
-							class="form-check-label" style="text-transform:none !important; font-weight: 400 !important; font-size: 14px !importat;"> <input type="radio"
-							name="tiporesultado" id="" value="" style="min-height: 0px !important; visibility: visible !important; margin-left: 20px !important;"> <spring:theme
-								code="autorizado.consultas.inicial.pendiente" /></label>
+						<label class="form-check-label" style="text-transform:none !important; font-weight: 400 !important; font-size: 14px !importat;">
+						    <spring:theme code="autorizado.consultas.inicial.tipresultado" />
+						 </label>
+
+						 <label class="form-check-label" style="text-transform:none !important; font-weight: 400 !important; font-size: 14px !importat;">
+                            <input type="radio" name="tipresultado" id="tiporesultado1" ${fileConsultaForm.tipresultado=='02'?'checked':''}
+                                value="02" style="min-height: 0px !important; visibility: visible !important; margin-left: 20px !important;">
+    						<spring:theme code="autorizado.consultas.inicial.aceptado" />
+    					 </label>
+
+    					 <label class="form-check-label" style="text-transform:none !important; font-weight: 400 !important; font-size: 14px !importat;">
+    				        <input type="radio" name="tipresultado" id="tiporesultado2" ${fileConsultaForm.tipresultado=='01'?'checked':''}
+    				            value="01" style="min-height: 0px !important; visibility: visible !important; margin-left: 20px !important;">
+    				        <spring:theme code="autorizado.consultas.inicial.rechazado" />
+    				     </label>
 					</div>
 				</div>
 			</div>
@@ -96,18 +115,18 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="autorizado.consultas.inicial.fecenvio" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value="" maxlength="240"
-						placeholder="dd/mm/aaaa">
+					<label class="control-label">
+					    <spring:theme code="autorizado.consultas.inicial.fecenvio" />
+					 </label>
+					 <input id="fecenvio" name="fecenvio" value="${fileConsultaForm.fecenvio}" class="newalto form-control" type="text" value="" maxlength="240" placeholder="aaaa-mm-dd">
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="autorizado.consultas.inicial.fecnoti" /></label> <input id="" name=""
-						class="newalto form-control" type="text" value="" maxlength="240"
-						placeholder="dd/mm/aaaa">
+					<label class="control-label">
+					    <spring:theme code="autorizado.consultas.inicial.fecnoti" />
+					 </label>
+					 <input id="fecnoti" name="fecnoti" value="${fileConsultaForm.fecnoti}" class="newalto form-control" type="text" value="" maxlength="240" placeholder="aaaa-mm-dd">
 				</div>
 			</div>
 		</div>
@@ -125,15 +144,14 @@
 					</button>
 				</div>
 				<div class="col-md-2">
-				<button type="button" class="btn btn-primary btn-lg" id="" name=""
-				value="Buscar" onclick="show()">
+				<button type="submit" class="btn btn-primary btn-lg" id="" name=""
+				value="Buscar" onclick="">
 				<spring:theme code="autorizado.consultas.inicial.buscar" />
 			</button>
 			</div>
 		</div>
-		
-	</form>
-
-
-
+	</form:form>
 </div>
+
+
+
