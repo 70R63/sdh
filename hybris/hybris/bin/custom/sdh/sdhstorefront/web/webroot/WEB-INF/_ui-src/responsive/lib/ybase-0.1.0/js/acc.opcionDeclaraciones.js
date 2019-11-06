@@ -290,11 +290,11 @@ ACC.opcionDeclaraciones = {
 				type : "GET",
 				success : function(dataResponse) {
 					debugger;
-					ACC.opcionDeclaraciones.dataActual_backup = dataActual;
-					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
+//					ACC.opcionDeclaraciones.dataActual_backup = dataActual;
+//					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
 					ACC.opcionDeclaraciones.mostrarErrores_certiPagos(dataResponse);
 					ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(dataActual,dataResponse,null);					
-					ACC.opcionDeclaraciones.habilitarFiltroPeriodo(dataActual,dataResponse);
+//					ACC.opcionDeclaraciones.habilitarFiltroPeriodo(dataActual,dataResponse);
 				},
 				error : function() {
 					alert("Error procesar la solicitud");	
@@ -1069,6 +1069,9 @@ debugger;
 			ACC.opcionDeclaraciones.mostrarPeriodo(2);
 		}
 		
+		if(claveImpuesto == '0003'){
+			ACC.opcionDeclaraciones.mostrarPeriodo(2);
+		}
 		
 	},
 	
