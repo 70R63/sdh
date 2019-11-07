@@ -58,7 +58,7 @@
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control" disabled="true"></sf:select>
+								class="new_alto form-control" disabled="false"></sf:select>
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
@@ -77,7 +77,7 @@
 							<sf:input class="newalto form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
-								onkeyup="numberFormat(this)" onclick="numberFormat(this)" disabled="true" />
+								onkeyup="numberFormat(this)" onclick="numberFormat(this)" disabled="false" />
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 							<sf:input class="newalto form-control" readonly="false"
@@ -112,14 +112,14 @@
 			<div class="col-md-3">
 				<div class="form-group ">
 					<input id="inputareainter" class="new_alto form-control"
-						maxlength="30" value="Total" disabled></input>
+						maxlength="30" value="Total" disabled="disabled" readonly="readonly"></input>
 				</div>
 			</div>
 
 			<div class="col-md-2 offset-md-3">
 				<div class="form-group ">
 					<sf:input id="inputareainter" class="newalto form-control"
-						maxlength="30" path="infObjetoDelineacion.infoDeclara.totalUsos"></sf:input>
+						maxlength="30" path="infObjetoDelineacion.infoDeclara.totalUsos"  disabled="true"></sf:input>
 				</div>
 			</div>
 		</div>
@@ -187,7 +187,7 @@
 			<div class="col-md-3">
 				<div class="form-group ">
 					<input id="inputareainter" class="new_alto form-control"
-						maxlength="30" value="Total" disabled></input>
+						maxlength="30" value="Total" disabled="disabled" readonly="readonly"></input>
 				</div>
 			</div>
 
@@ -195,7 +195,7 @@
 				<div class="form-group ">
 					<input id="inputareainter" class="newalto form-control"
 						maxlength="30"
-						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreai}"></input>
+						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreai}" disabled="disabled" readonly="readonly"></input>
 				</div>
 			</div>
 		</div>
@@ -271,7 +271,7 @@
 			<div class="col-md-2">
 				<div class="form-group ">
 					<input class="newalto form-control" maxlength="30"
-						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}"></input>
+						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}" disabled="true"></input>
 				</div>
 			</div>
 		</div>

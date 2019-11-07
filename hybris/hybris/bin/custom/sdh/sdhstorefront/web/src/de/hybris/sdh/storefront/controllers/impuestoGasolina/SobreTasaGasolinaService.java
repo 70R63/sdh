@@ -1895,7 +1895,7 @@ public class SobreTasaGasolinaService
 			//			}
 			//			else
 			//			{
-			periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(1, 2));
+			periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(0, 2));
 			//			}
 		}
 		else
