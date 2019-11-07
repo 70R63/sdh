@@ -53,6 +53,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -62,6 +63,9 @@
 						type="text" value="" maxlength="30" disabled="disabled">
 				</div>
 			</div>
+		</div>
+		
+		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -72,9 +76,8 @@
 						maxlength="30" disabled="disabled">
 				</div>
 			</div>
-
-
 		</div>
+		
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -86,6 +89,9 @@
 						disabled="disabled">
 				</div>
 			</div>
+		</div>
+		
+		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -96,9 +102,8 @@
 						disabled="disabled">
 				</div>
 			</div>
-
-
 		</div>
+		
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -110,6 +115,9 @@
 						disabled="disabled">
 				</div>
 			</div>
+		</div>
+		
+		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -120,8 +128,8 @@
 						maxlength="30" disabled="disabled">
 				</div>
 			</div>
-
 		</div>
+		
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -133,6 +141,9 @@
 						disabled="disabled">
 				</div>
 			</div>
+		</div>
+
+		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -143,10 +154,9 @@
 						disabled="disabled">
 				</div>
 			</div>
-
 		</div>
+		
 		<div class="row">
-
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -157,8 +167,10 @@
 						disabled="disabled">
 				</div>
 			</div>
+		</div>
+		
+		<div class="row">
 			<div class="col-md-3">
-
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.taract" /></label> <input
