@@ -738,7 +738,7 @@ ACC.mirit = {
     bindCertifNombButton: function () {
     $(document).on("click", "#certifNombButton", function (e) {
 	        e.preventDefault();
-	        
+	        debugger;
 	        var data={};
 	        
 	        data.name1 = $("#primNom").val();
@@ -753,9 +753,10 @@ ACC.mirit = {
 	            async: false,
 	            success: function (data) {
 	            	$( "#dialog" ).dialog( "open" );
+	            	debugger;
 	            	if(data.success==true)
 	            	{
-	            		$("#ritDialogContent").html("Nombre válido. Tu nombre será acutalizado cuando clickes ACTUALIZAR RIT");
+	            		$("#ritDialogContent").html("Nombre válido. El nombre quedará actualizado en dar clic en  ACTUALIZAR RIT");
 	            	}else
 	            	{
 	            		$("#ritDialogContent").html("Nombre inválido.<br> El nuevo nombre tiene un porcentaje de "+parseInt(100*data.porcentaje)+"%<br>El porcentaje mínimo necesario para actualizar tu nombre es "+parseInt(100*data.minPercentage)+"%");
