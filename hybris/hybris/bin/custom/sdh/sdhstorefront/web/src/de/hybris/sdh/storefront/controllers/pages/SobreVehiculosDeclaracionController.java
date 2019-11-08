@@ -210,6 +210,10 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 									vehiculosFormDeclaracion.setNumForm(formas);
 									vehiculosFormDeclaracion.setImpuestoCargo(
 											detalleVehiculosResponse.getInfo_declara().getLiquidacion().getImpuestoCargo());
+								vehiculosFormDeclaracion
+										.setCheckAporte(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getCheckAPorte());
+								vehiculosFormDeclaracion
+										.setProyectoAporte(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getProyectoAporte());
 									vehiculosFormDeclaracion
 											.setTarifaActual(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getTarifaActual());
 									vehiculosFormDeclaracion
