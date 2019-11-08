@@ -10,6 +10,7 @@ package de.hybris.sdh.core.pojos.responses;
 public class liquidacionVehiculos
 {
 
+	private String checkAPorte;
 	private String proyectoAporte;
 	private String impuestoCargo;
 	private String avaluoActual;
@@ -21,6 +22,24 @@ public class liquidacionVehiculos
 	private String totalPagar;
 	private String valorPagar;
 	private String totalPagoVolunt;
+
+
+	/**
+	 * @return the checkAPorte
+	 */
+	public String getCheckAPorte()
+	{
+		return checkAPorte;
+	}
+
+	/**
+	 * @param checkAPorte
+	 *           the checkAPorte to set
+	 */
+	public void setCheckAPorte(final String checkAPorte)
+	{
+		this.checkAPorte = checkAPorte;
+	}
 
 	/**
 	 * @return the proyectoAporte
@@ -191,7 +210,7 @@ public class liquidacionVehiculos
 	{
 		this.valorPagar = valorPagar;
 	}
-	
+
 	/**
 	 * @return the totalPagoVolunt
 	 */
@@ -199,7 +218,7 @@ public class liquidacionVehiculos
 	{
 		return totalPagoVolunt;
 	}
-	
+
 	/**
 	 * @param totalPagoVolunt
 	 *           the totalPagoVolunt to set
