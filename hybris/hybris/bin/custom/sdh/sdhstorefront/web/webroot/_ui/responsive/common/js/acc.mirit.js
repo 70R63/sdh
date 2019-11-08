@@ -738,7 +738,7 @@ ACC.mirit = {
     bindCertifNombButton: function () {
     $(document).on("click", "#certifNombButton", function (e) {
 	        e.preventDefault();
-	        debugger;
+	        
 	        var data={};
 	        
 	        data.name1 = $("#primNom").val();
@@ -753,7 +753,6 @@ ACC.mirit = {
 	            async: false,
 	            success: function (data) {
 	            	$( "#dialog" ).dialog( "open" );
-	            	debugger;
 	            	if(data.success==true)
 	            	{
 	            		$("#ritDialogContent").html("Nombre válido. El nombre quedará actualizado en dar clic en  ACTUALIZAR RIT");
