@@ -40,7 +40,7 @@
 				<%-- 						test='${(not empty tipoMarca) && (dataForm.infObjetoDelineacion.infoDeclara.tipoLicencia == "02")}'> --%>
 				<sf:input id="valorExen" name="" class="newalto form-control"
 					aria-required="true" type="text" readonly="false"
-					path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240" onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
+					path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240" onkeyup="numberFormat(this)" onclick="numberFormat(this)" disabled="true" />
 				<%-- 					</c:when> --%>
 				<%-- 					<c:otherwise> --%>
 				<%-- 						<sf:input id="valorExen" name="" class="form-control" --%>

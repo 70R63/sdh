@@ -100,6 +100,9 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 				}*/
 			}
 
+
+
+
 			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();
 			pseNotificacionDePagoRequest.setIdBancos(getBankId(transaction.getBanco()));
 			pseNotificacionDePagoRequest.setModalidad(transaction.getTipoDeTarjeta());
@@ -110,8 +113,11 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
 
-			pseNotificacionDePagoRequest.setNumOperacion("9999999");
+			pseNotificacionDePagoRequest.setNumOperacion(transaction.getTrazabilityCode());
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
+
+
+
 
 
 			if(transaction.getEntityCode().equals(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION))
@@ -124,7 +130,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
                 LOG.info("---- ACH/PSE TRANSACTION ----");
 				pseNotificacionDePagoRequest.setMedioPago(
 						ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
-								transaction.getTipoDeTarjeta()));
+								transaction.getPaymentMode()));
 			}
 
 
