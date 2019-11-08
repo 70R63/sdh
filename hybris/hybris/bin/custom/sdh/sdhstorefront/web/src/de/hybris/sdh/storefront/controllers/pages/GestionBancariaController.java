@@ -99,6 +99,10 @@ public class GestionBancariaController extends AbstractPageController {
                         "conciliaciones.upload.messages.ws.fileConcilia.error", new Object[]
                                 { fileConciliaResponse1.getMsjResp() });
             }
+        }else{
+            GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+                    "conciliaciones.upload.messages.ws.fileConcilia.error", new Object[]
+                            { "Error con el servidor intente nuevamente" });
         }
 
 

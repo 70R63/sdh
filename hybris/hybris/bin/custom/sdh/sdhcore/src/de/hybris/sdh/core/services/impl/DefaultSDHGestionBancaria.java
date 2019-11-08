@@ -46,7 +46,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
                 this.extractAndUpdateTxtFileFrom7zip(approvedFilesFolder + nameFile, approvedFilesFolder);
             }
             LOG.info("updatedFilesFolder:" + updatedFilesFolder + nameFile);
-            LOG.info("updatedFilesFolder:" + approvedFilesFolder + nameFile);
+            LOG.info("approvedFilesFolder:" + approvedFilesFolder + nameFile);
         }
 
         return isValid;
@@ -176,6 +176,8 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         LOG.info("VerifyFile");
         LOG.info("Resultado " + resultado);
         LOG.info("autoridadesFolderPath: " + autoridades);
+        LOG.info("verifyFile Source: " + source);
+        LOG.info("verifyFile Target: " + target);
         return isValidCertificate;
     }
 
