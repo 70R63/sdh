@@ -79,8 +79,9 @@ public class GestionBancariaController extends AbstractPageController {
 
         FileConciliaResponse fileConciliaResponse1 = sdhGestionBancaria.fileConcilia(fileConciliaRequest);
 
-        if(Objects.nonNull(fileConciliaResponse1)){
-            if(fileConciliaResponse1.getIdEnvio().equals("000")){
+        /*if(Objects.nonNull(fileConciliaResponse1)){
+            if(fileConciliaResponse1.getIdEnvio().equals("000")){*/
+
                 boolean verifiedOk = sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
                 LOG.info("verifiedOk Result: " + verifiedOk);
                 if(verifiedOk){
@@ -94,7 +95,8 @@ public class GestionBancariaController extends AbstractPageController {
                             "conciliaciones.upload.messages.error", new Object[]
                                     { importConciliacionForm.getConciliacionFile().getOriginalFilename() });
                 }
-            }else{
+
+        /*    }else{
                 GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
                         "conciliaciones.upload.messages.ws.fileConcilia.error", new Object[]
                                 { fileConciliaResponse1.getMsjResp() });
@@ -103,7 +105,7 @@ public class GestionBancariaController extends AbstractPageController {
             GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
                     "conciliaciones.upload.messages.ws.fileConcilia.error", new Object[]
                             { "Error con el servidor intente nuevamente" });
-        }
+        }*/
 
 
 
