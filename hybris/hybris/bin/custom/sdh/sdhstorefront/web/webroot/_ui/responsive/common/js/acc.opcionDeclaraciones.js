@@ -616,6 +616,7 @@ debugger;
 	updateFromResponseSeleccion_presentarDec : function(infoActual,infoResponse) {
 		debugger;
 		var flagHuboRegistros = false;
+		var anioGravable = document.getElementById("anoGravable").value;
 	
 		ACC.opcionDeclaraciones.vaciarTablasInfo_presentarDec();
 		
@@ -628,7 +629,7 @@ debugger;
 				if(infoResponse.vehicular.length > 0){
 					$.each(infoResponse.vehicular, function (index,value){
 						if(value.placa != null && value.placa !=""){
-							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + value.anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP + '&numForma=' + value.numForm ;
+							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP + '&numForma=' + value.numForm ;
 							
 							blindado_vehi.forEach(function (eachBLI) {
 						    		if(eachBLI.id_blindado== value.blindado)

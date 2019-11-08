@@ -1851,6 +1851,24 @@ public class SobreTasaGasolinaService
 
 	}
 
+	/**
+	 * @param InfoDelineacion
+	 */
+	public void prepararValorcausalExcepDESCRIPCIONDUR(final InfoDelineacion fuente)
+	{
+
+		String campoDESCRIPCION = "";
+		final String separador = " ";
+
+		if (fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() != null)
+		{
+			campoDESCRIPCION = fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() + separador
+					+ obtenerListaCausalExencion().get(fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep());
+		}
+
+		fuente.getInfObjetoDelineacion().getInfoDeclara().setCausalExcepDESCRIPCION(campoDESCRIPCION);
+
+	}
 	public void prepararValortipoDocDESCRIPCIONDU(final SDHValidaMailRolResponse fuente)
 	{
 
