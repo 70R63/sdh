@@ -244,6 +244,12 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		String transactionState = null;
 		if (response != null)
 		{
+			LOG.info("----- Response Data GetTransactionInformationResponseBodyType -------");
+			LOG.info(response);
+			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
+			LOG.info(responseDetailed);
+			LOG.info("-----------------------------------------------------------------------------");
+
 			pseTransactionsLogModel.setSoliciteDate(dateTimeFormat.format(response.getSoliciteDate()));
 			try
 			{
@@ -252,9 +258,39 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			catch (final Exception e)
 			{
 				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
-			}			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+			}
+			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
 			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
-			//pseTransactionsLogModel.setPaymentMode(map.get("bankProcessDate"));
+			if (map.get("bankProcessDate").equals("Débito en Cuenta"))
+			{
+				pseTransactionsLogModel.setPaymentMode("15");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Visa"))
+			{
+				pseTransactionsLogModel.setPaymentMode("50");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Master Card"))
+			{
+				pseTransactionsLogModel.setPaymentMode("51");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Diners Club"))
+			{
+				pseTransactionsLogModel.setPaymentMode("52");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Propia Entidad Financiera"))
+			{
+				pseTransactionsLogModel.setPaymentMode("53");
+			}
+			else if (map.get("bankProcessDate").equals("Crédito Rotativo"))
+			{
+				pseTransactionsLogModel.setPaymentMode("54");
+			}
+			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito American Express"))
+			{
+				pseTransactionsLogModel.setPaymentMode("55");
+			}
+
+
 
 			transactionState = response.getTransactionState().getValue();
 
