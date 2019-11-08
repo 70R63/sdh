@@ -9,7 +9,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -509,6 +508,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData,null);
 		model.addAttribute("redirectURL","/contribuyentes/sobretasa-gasolina");
+		super.addFirmantes_impuesto(model, null, customerData);
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
 
