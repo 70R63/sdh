@@ -78,6 +78,7 @@ public class GestionBancariaController extends AbstractPageController {
                 pathFiles);
 
         FileConciliaResponse fileConciliaResponse1 = sdhGestionBancaria.fileConcilia(fileConciliaRequest);
+
         if(Objects.nonNull(fileConciliaResponse1)){
             if(fileConciliaResponse1.getIdEnvio().equals("000")){
                 boolean verifiedOk = sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
@@ -100,13 +101,6 @@ public class GestionBancariaController extends AbstractPageController {
             }
         }
 
-        /*if(verifiedOk){
-
-        }else{
-            GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-                    "conciliaciones.upload.messages.error", new Object[]
-                            { importConciliacionForm.getConciliacionFile().getOriginalFilename() });
-        }*/
 
 
         return "redirect:/autorizados/entidades/reportarinfo";

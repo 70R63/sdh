@@ -53,7 +53,7 @@
 		CONCILIACIONES!
 		<c:url var="importConciliacion" value="/conciliaciones/upload" />
 		
-		 <form:form commandName="importConciliacionForm" enctype="multipart/form-data" method="post" action="${importConciliacion}" class="">
+		 <form:form commandName="7zip" enctype="multipart/form-data" method="post" action="${importConciliacion}" class="">
 		 	<div class="form-group">
 			    <label for="exampleInputFile">File input</label>
 			    <input type="file" id="" name="conciliacionFile" >

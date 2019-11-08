@@ -90,7 +90,7 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 		return sdhValidateBankFiles.getTypeFileBank(entidadBancaria);
 	}
 
-	@RequestMapping(value = "/autorizados/entidades/reportarinfo", method = RequestMethod.GET)
+		@RequestMapping(value = "/autorizados/entidades/reportarinfo", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String autorizados(final Model model) throws CMSItemNotFoundException
 	{
@@ -112,6 +112,7 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 	{
 		System.out.println("------------------Entro al POST de Agentes Autorizados reportar------------------------");
 		boolean verifiedOk = sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
+
 		final UpdateRitRequest request = new UpdateRitRequest();
 		UpdateRitResponse response = new UpdateRitResponse();
 		response.setRitUpdated(false);
