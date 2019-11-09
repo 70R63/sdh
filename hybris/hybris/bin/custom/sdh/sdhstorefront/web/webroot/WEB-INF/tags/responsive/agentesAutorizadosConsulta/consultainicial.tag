@@ -118,7 +118,7 @@
 					<label class="control-label">
 					    <spring:theme code="autorizado.consultas.inicial.fecenvio" />
 					 </label>
-					 <input id="fecenvio" name="fecenvio" value="${fileConsultaForm.fecenvio}" class="newalto form-control" type="text" value="" maxlength="240" placeholder="aaaa-mm-dd">
+					 <input id="fecenvio" name="fecenvio" value="${fileConsultaForm.fecenvio}" class="newalto form-control" type="date" value="" maxlength="240" placeholder="aaaa-mm-dd">
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -126,7 +126,7 @@
 					<label class="control-label">
 					    <spring:theme code="autorizado.consultas.inicial.fecnoti" />
 					 </label>
-					 <input id="fecnoti" name="fecnoti" value="${fileConsultaForm.fecnoti}" class="newalto form-control" type="text" value="" maxlength="240" placeholder="aaaa-mm-dd">
+					 <input id="fecnoti" name="fecnoti" value="${fileConsultaForm.fecnoti}" class="newalto form-control" type="date" value="" maxlength="240" placeholder="aaaa-mm-dd">
 				</div>
 			</div>
 		</div>
