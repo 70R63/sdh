@@ -414,8 +414,10 @@ ACC.opcionDeclaraciones = {
 						'<td><input id="registroNum_'+ 0 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ infoResponse.ica.numObjeto +'"' +">" + "</td>"+
 						"</tr>");
 			}
-			if(infoResponse.reteIca.consecutivo == null){
-				infoResponse.reteIca.consecutivo ="-";
+			if(infoResponse.reteIca != null){
+				if(infoResponse.reteIca.consecutivo == null){
+					infoResponse.reteIca.consecutivo ="-";
+				}
 			}
 			
 			if(infoActual.claveImpuesto == '0004'){
@@ -803,6 +805,7 @@ debugger;
         var anoGravable = $("#aniograv").val(); 	       
         var periodoM = $("#periodoM").val();
         var periodoB = $("#periodoB").val();
+		var perMensual = document.getElementById('Periodo1'); //mensual
 		var perBimestral = document.getElementById('Periodo2'); //bimestral
 		var validacionOK = false;
 
@@ -820,8 +823,7 @@ debugger;
 					validacionOK = true; 
 				}
 			}
-		}
-		if(claveImpuesto == "0005"){
+		}else if(claveImpuesto == "0005"){
 			if(anoGravable != "" && anoGravable != "00" && periodoM != "" && periodoM != "00"){
 				validacionOK = true;
 			}
