@@ -194,7 +194,7 @@ ACC.vehiculos = {
 				if(blindado == "S" || blindado == "s"){
 					blindado = "X";
 				}else{
-				blindado = "";
+				blindado = "N";
 				}
 				var capacidadTon=$.trim($("#capacidadToncal").val());
 				var capacidadPas=$.trim($("#capacidadPascal").val());
