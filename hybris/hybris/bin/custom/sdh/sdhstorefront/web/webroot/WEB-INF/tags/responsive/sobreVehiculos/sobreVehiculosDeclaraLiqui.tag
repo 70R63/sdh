@@ -84,8 +84,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.avalact" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						id="avaluoAct" name="" class="newalto form-control avaluoAct" aria-required="true"
+						type="text" value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>

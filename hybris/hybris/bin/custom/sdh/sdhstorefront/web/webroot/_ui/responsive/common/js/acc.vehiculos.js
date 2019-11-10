@@ -194,11 +194,11 @@ ACC.vehiculos = {
 				if(blindado == "S" || blindado == "s"){
 					blindado = "X";
 				}else{
-				blindado = "";
+				blindado = "N";
 				}
 				var capacidadTon=$.trim($("#capacidadToncal").val());
 				var capacidadPas=$.trim($("#capacidadPascal").val());
-				var avaluo=$.trim($("#an").val());
+				var avaluo=$.trim($("#avaluoAct").val());
 				var claseSdh=$.trim($("#an").val());
 				var tipoVehSdh=$.trim($("#an").val());
 				var lineaHomologa=$.trim($("#an").val());
@@ -247,6 +247,7 @@ ACC.vehiculos = {
 								//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
 								//});
 								
+								$("#avaluoAct").val("");
 								$("#valimpcar").val("");
 								$("#valsemafo").val("");
 								$("#despronpag").val("");
@@ -261,6 +262,7 @@ ACC.vehiculos = {
 								
 		            			//$('#generaDeclaracionButton').prop("disabled", true);
 							}else{
+								$("#avaluoAct").val(data.avaluo);
 								$("#valimpcar").val(data.impuestoCargo);
 								$("#valsemafo").val(data.valorSemafor);
 								$("#despronpag").val(data.descuentoProntop);
@@ -275,6 +277,7 @@ ACC.vehiculos = {
 		            		
 	            		}else
 	            		{	            			
+							$("#avaluoAct").val(data.avaluo);
 	            			$("#valimpcar").val(data.impuestoCargo);
 	            			$("#valsemafo").val(data.valorSemafor);
 	            			$("#despronpag").val(data.descuentoProntop);
@@ -297,7 +300,8 @@ ACC.vehiculos = {
         	$( "#dialogVehiculos" ).dialog( "open" );
         	$("#vehiculosDialogContent").html("");
         	$("#vehiculosDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
-        	$("#valimpcar").val("");
+        	$("#avaluoAct").val("");
+			$("#valimpcar").val("");
 			$("#valsemafo").val("");
 			$("#despronpag").val("");
 			$("#taract").val("");
