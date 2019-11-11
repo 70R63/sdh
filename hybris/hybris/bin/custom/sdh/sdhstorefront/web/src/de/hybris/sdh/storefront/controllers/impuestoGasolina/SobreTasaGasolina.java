@@ -893,6 +893,9 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 				mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
 				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 						"error.impuestoGasolina.sobretasa.error4", mensajesError);
+
+				model.addAttribute("dataForm", dataForm);
+				return REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE;
 			}
 		}
 		else
