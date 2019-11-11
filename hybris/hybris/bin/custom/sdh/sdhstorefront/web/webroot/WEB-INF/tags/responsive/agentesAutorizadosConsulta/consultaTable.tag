@@ -51,35 +51,30 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${fileConsultaForm.resultado}" var="resultado">
-							<c:if test="${resultado.idEnvio != ''}">
-								<tr>
-									<td><input id="" name="" class="inputtextnew tablefechas"
-										aria-required="true" type="text" readonly="readonly" value="${resultado.nosecuencia}"
-										maxlength="240"></td>
-									<td><input id="" name="" class="inputtextnew tablefechas"
-										aria-required="true" type="text" readonly="readonly" value="${resultado.tiparchivo}"
-										maxlength="240"></td>
-									<td><input id="" name="" class="inputtextnew tablefechas"
-										aria-required="true" type="text" readonly="readonly" value="${resultado.idenvio}"
-										maxlength="240"></td>
-									<td><input id="" name="" class="inputtextnew tablefechas"
-										aria-required="true" type="text" readonly="readonly" value="${resultado.fecenvio}"
-										maxlength="240"></td>
-									<td><input id="" name="" class="inputtextnew tablefechas"
-										aria-required="true" type="text" readonly="readonly" value="${resultado.fecnoti}"
-										maxlength="240"></td>
-									<td><input id="" name="" class="inputtextnew tablefechas"
-										aria-required="true" type="text" readonly="readonly" value="${resultado.tipresultado}"
-										maxlength="240"></td>
-									<td>
-									    <a id='dwnldLnk' download='archivo.pdf' style="display:none;" />
-									    <a href="#" onclick="downloadPDF();" title='archivo.pdf'>Descargar</a>
-									</td>	
-									
-								</tr>
-							</c:if>	
-						</c:forEach>	
+						<tr>
+							<td><input id="" name="" class="inputtextnew tablefechas"
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.nosecuencia}"
+								maxlength="240"></td>
+							<td><input id="" name="" class="inputtextnew tablefechas"
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.tiparchivo}"
+								maxlength="240"></td>
+							<td><input id="" name="" class="inputtextnew tablefechas"
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.idenvio}"
+								maxlength="240"></td>
+							<td><input id="" name="" class="inputtextnew tablefechas"
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.fecenvio}"
+								maxlength="240"></td>
+							<td><input id="" name="" class="inputtextnew tablefechas"
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.fecnoti}"
+								maxlength="240"></td>
+							<td><input id="" name="" class="inputtextnew tablefechas"
+								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.tipresultado}"
+								maxlength="240"></td>
+							<td>
+							    <a id='dwnldLnk' download='archivo.pdf' style="display:none;" />
+							    <a href="#" onclick="downloadPDF();" title='archivo.pdf'>Descargar</a>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
