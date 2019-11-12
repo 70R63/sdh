@@ -10,10 +10,19 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <script type="text/javascript">
-    window.downloadPDF = function downloadPDF() {
+ 	var resultado = new Array();
+ 	<c:forEach items="${fileConsultaResponse.resultado}" var="resul" varStatus="status">
+ 		resultado[${status.index}] = "${resul.stringFile}";
+ 	</c:forEach>
+ 	
+ 	
+    function downloadPDF(indexItem) {
+    	debugger;
         var dlnk = document.getElementById('dwnldLnk');
-            dlnk.href = 'data:application/octet-stream;base64,' + '${fileConsultaResponse.resultado.stringFile}';
-            dlnk.click();
+			if(resultado != null){ 
+ 	            dlnk.href = 'data:application/octet-stream;base64,' + resultado[indexItem];
+    	        dlnk.click();
+			}
     }
 </script>
 
@@ -50,31 +59,33 @@
 							</label></th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.nosecuencia}"
-								maxlength="240"></td>
-							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.tiparchivo}"
-								maxlength="240"></td>
-							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.idenvio}"
-								maxlength="240"></td>
-							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.fecenvio}"
-								maxlength="240"></td>
-							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.fecnoti}"
-								maxlength="240"></td>
-							<td><input id="" name="" class="inputtextnew tablefechas"
-								aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.tipresultado}"
-								maxlength="240"></td>
-							<td>
-							    <a id='dwnldLnk' download='archivo.pdf' style="display:none;" />
-							    <a href="#" onclick="downloadPDF();" title='archivo.pdf'>Descargar</a>
-							</td>
-						</tr>
+					<tbody data-customvalueone="${beanName.attrName}">
+						<c:forEach items="${fileConsultaResponse.resultado}" var="itemResultado" varStatus="loopStatus">
+							<tr>
+								<td><input id="" name="" class="inputtextnew tablefechas"
+									aria-required="true" type="text" readonly="readonly" value="${itemResultado.nroSecuencia}"
+									maxlength="240"></td>
+								<td><input id="" name="" class="inputtextnew tablefechas"
+									aria-required="true" type="text" readonly="readonly" value="${itemResultado.tipoFile}"
+									maxlength="240"></td>
+								<td><input id="" name="" class="inputtextnew tablefechas"
+									aria-required="true" type="text" readonly="readonly" value="${itemResultado.idEnvio}"
+									maxlength="240"></td>
+								<td><input id="" name="" class="inputtextnew tablefechas"
+									aria-required="true" type="text" readonly="readonly" value="${itemResultado.fchEnvio}"
+									maxlength="240"></td>
+								<td><input id="" name="" class="inputtextnew tablefechas"
+									aria-required="true" type="text" readonly="readonly" value="${itemResultado.fchEnvio}"
+									maxlength="240"></td>
+								<td><input id="" name="" class="inputtextnew tablefechas"
+									aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.tipresultado}"
+									maxlength="240"></td>
+								<td>
+								    <a id='dwnldLnk' download='archivo.pdf' style="display:none;" > </a>
+								    <a href="#" onclick='downloadPDF("${loopStatus.index}");' title='archivo.pdf'>Descargar</a>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

@@ -1,9 +1,12 @@
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 public class FileConsultaResponse {
     private String idmsj;
     private String txtmsj;
-	private FileConsultaResultado resultado;
+	private List<FileConsultaResultado> resultado;
 
     public String getIdmsj() {
         return idmsj;
@@ -25,7 +28,7 @@ public class FileConsultaResponse {
 	/**
 	 * @return the resultado
 	 */
-	public FileConsultaResultado getResultado()
+	public List<FileConsultaResultado> getResultado()
 	{
 		return resultado;
 	}
@@ -34,7 +37,7 @@ public class FileConsultaResponse {
 	 * @param resultado
 	 *           the resultado to set
 	 */
-	public void setResultado(final FileConsultaResultado resultado)
+	public void setResultado(final List<FileConsultaResultado> resultado)
 	{
 		this.resultado = resultado;
 	}
