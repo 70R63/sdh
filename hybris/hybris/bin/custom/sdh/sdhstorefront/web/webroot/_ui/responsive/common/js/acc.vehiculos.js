@@ -151,6 +151,7 @@ ACC.vehiculos = {
 		            		
 	            		}else
 	            		{
+	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#publicidadExteriorDialogContent").html("");
 	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
 	            			

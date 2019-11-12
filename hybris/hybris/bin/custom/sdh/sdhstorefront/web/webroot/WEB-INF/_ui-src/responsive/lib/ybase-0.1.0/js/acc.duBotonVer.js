@@ -103,6 +103,7 @@ ACC.duBotonVer = {
 		            		
 	            		}else
 	            		{
+	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#duDialogContent").html("");
 	            			$("#duDialogContent").html("La declaración se ha generado exitosamente.")
 	            			

@@ -60,10 +60,10 @@
 					name="pagar" value="pagar">
 					<spring:theme code="ica.declaracion.firma.pagliena" />
 				</sf:button> -->
-<!-- se queita disabled de boton pagar en linea 27-10-2019 Maria -->
+
 				<button style="margin-top: 3px;"
-                	id="action" class="btn btn-primary btn-lg"
-                	type="submit" name="pagar" value="pagar">
+                	id="action" class="btn btn-primary btn-lg pagarbtn"
+                	type="submit" name="pagar" value="pagar" disabled="disabled">
                 	<spring:theme code="ica.declaracion.firma.pagliena" />
                 </button>
 			</sf:form>

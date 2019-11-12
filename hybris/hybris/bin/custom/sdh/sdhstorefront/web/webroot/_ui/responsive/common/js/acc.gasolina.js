@@ -57,6 +57,7 @@ ACC.gasolina = {
 	            			
 	            			document.getElementById("downloadHelper").click();
 	            			document.getElementById("pagar").disabled = false;
+	            			$(".pagarbtn").attr("disabled", false);
 	            			
 	            		}
 	 	      		
