@@ -260,7 +260,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
 			}
 			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
-			pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
+			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
 			if (map.get("paymentMode").equals("Débito en Cuenta"))
 			{
 				pseTransactionsLogModel.setPaymentMode("15");
