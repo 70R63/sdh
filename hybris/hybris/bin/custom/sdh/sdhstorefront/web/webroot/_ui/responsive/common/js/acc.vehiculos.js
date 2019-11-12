@@ -548,13 +548,13 @@ ACC.vehiculos = {
 
 		if (liq != null) {
 			for (var i = 0; i < liq.length; i++) {
-				
-				var fecjur1 = liq[i].anio;
-				var mes = fecjur1.slice(4, 6);
-				var dia = fecjur1.slice(6);
-				var anio = fecjur1.slice(0, 4);
-				
-				liq[i].anio = dia + '/' + mes + '/' + anio;;
+//				
+//				var fecjur1 = liq[i].anio;
+//				var mes = fecjur1.slice(4, 6);
+//				var dia = fecjur1.slice(6);
+//				var anio = fecjur1.slice(0, 4);
+//				
+//				liq[i].anio = dia + '/' + mes + '/' + anio;;
 
 				$('#tableLiq')
 						.append(
