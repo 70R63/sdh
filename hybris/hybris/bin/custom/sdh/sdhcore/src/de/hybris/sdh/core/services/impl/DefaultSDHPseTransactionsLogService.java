@@ -277,7 +277,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			{
 				pseTransactionsLogModel.setPaymentMode("52");
 			}
-			else if (map.get("paymentMode").equals("TTarjeta de Crédito Propia Entidad Financiera"))
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Propia Entidad Financiera"))
 			{
 				pseTransactionsLogModel.setPaymentMode("53");
 			}
