@@ -78,7 +78,7 @@
 									aria-required="true" type="text" readonly="readonly" value="${itemResultado.fchEnvio}"
 									maxlength="240"></td>
 								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value="${fileConsultaForm.tipresultado}"
+									aria-required="true" type="text" readonly="readonly" value="${itemResultado.estado}"
 									maxlength="240"></td>
 								<td>
 								    <a id='dwnldLnk' download='archivo.pdf' style="display:none;" > </a>
