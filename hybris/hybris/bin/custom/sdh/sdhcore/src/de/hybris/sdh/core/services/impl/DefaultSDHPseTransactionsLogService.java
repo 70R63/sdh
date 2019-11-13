@@ -269,7 +269,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			{
 				pseTransactionsLogModel.setPaymentMode("50");
 			}
-			else if (map.get("paymentMode").equals("Tarjeta de Crédito Master Card"))
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito  Master Card"))
 			{
 				pseTransactionsLogModel.setPaymentMode("51");
 			}
@@ -277,7 +277,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			{
 				pseTransactionsLogModel.setPaymentMode("52");
 			}
-			else if (map.get("paymentMode").equals("Tarjeta de Crédito Propia Entidad Financiera"))
+			else if (map.get("paymentMode").equals("TTarjeta de Crédito Propia Entidad Financiera"))
 			{
 				pseTransactionsLogModel.setPaymentMode("53");
 			}
@@ -285,9 +285,13 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			{
 				pseTransactionsLogModel.setPaymentMode("54");
 			}
-			else if (map.get("paymentMode").equals("Tarjeta de Crédito American Express"))
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito  American Express"))
 			{
 				pseTransactionsLogModel.setPaymentMode("55");
+			}
+			else
+			{
+				pseTransactionsLogModel.setPaymentMode("");
 			}
 
 
@@ -295,6 +299,14 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			if (map.get("paymentOrigin").equals("Crédito"))
 			{
 				pseTransactionsLogModel.setPaymentOrigin("01");
+			}
+			else if (map.get("paymentOrigin").equals("Débito"))
+			{
+				pseTransactionsLogModel.setPaymentOrigin("02");
+			}
+			else
+			{
+				pseTransactionsLogModel.setPaymentOrigin("");
 			}
 
 
