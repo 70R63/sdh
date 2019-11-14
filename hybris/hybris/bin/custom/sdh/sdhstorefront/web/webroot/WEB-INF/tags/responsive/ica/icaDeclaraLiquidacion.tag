@@ -38,17 +38,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="row mt-3">
-			<div class="col-md-5">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totinbrut" /></label> <input disabled
-						id="totalingBrutos" name="totalingBrutos" class="etiqlargas form-control text-right !important" disabled type="text"
-						value="${infoDeclara.totalingBrutos }" maxlength="240"></input>
-				</div>
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
@@ -59,17 +48,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-5">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
-						id="totalDeduccion" name="totalDeduccion" class="etiqlargas form-control text-right !important" disabled type="text"
-						value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
-				</div>
-			</div>
-		</div>
-		<div class="row">
+			<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -79,7 +58,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
@@ -90,6 +68,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<c:choose>
 			<c:when test="${empty infoDeclara.valorImpAviso or fn:trim(infoDeclara.valorImpAviso) le '0.00'}">
 				<c:set var="impavtableros_checkedSI" value=""/>
@@ -154,39 +133,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col-md-5">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.valret" /></label> <input disabled
-						id="valorReteIndusComer" name="valorReteIndusComer" class="etiqlargas form-control text-right !important" disabled type="text"
-						value="${infoDeclara.valorReteIndus }" maxlength="240"></input>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-5">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totsaldo" /></label> <input disabled
-						id="saldoCargo" name="saldoCargo" class="etiqlargas form-control text-right !important" disabled type="text"
-						value="${infoDeclara.saldoCargo }" maxlength="240"></input>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-5">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.valpag" /></label> <input id="valorPagar"
-						name="valorPagar" class="etiqlargas form-control text-right !important" type="text"
-						value="${infoDeclara.valorPagar }" maxlength="240"></input>
-				</div>
-			</div>
-		</div>
-
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
@@ -197,6 +143,27 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totsaldo" /></label> <input disabled
+						id="saldoCargo" name="saldoCargo" class="etiqlargas form-control text-right !important" disabled type="text"
+						value="${infoDeclara.saldoCargo }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+			<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.valpag" /></label> <input id="valorPagar"
+						name="valorPagar" class="etiqlargas form-control text-right !important" type="text"
+						value="${infoDeclara.valorPagar }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>	
 
 		<div class="row">
 			<div class="col-md-5">
@@ -208,6 +175,27 @@
 				</div>
 			</div>
 		</div>
+	<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totpagvol" /></label> <input disabled
+						id="totalAporteVolun" name="totalAporteVolun" class="etiqlargas form-control text-right !important" disabled type="text"
+						value="${infoDeclara.totalAporteVolun }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.valret" /></label> <input disabled
+						id="valorReteIndusComer" name="valorReteIndusComer" class="etiqlargas form-control text-right !important" disabled type="text"
+						value="${infoDeclara.valorReteIndus }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
@@ -376,13 +364,24 @@
 			</div>
 			
 		</div>
+	
+		<div class="row mt-3">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.totinbrut" /></label> <input disabled
+						id="totalingBrutos" name="totalingBrutos" class="etiqlargas form-control text-right !important" disabled type="text"
+						value="${infoDeclara.totalingBrutos }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totpagvol" /></label> <input disabled
-						id="totalAporteVolun" name="totalAporteVolun" class="etiqlargas form-control text-right !important" disabled type="text"
-						value="${infoDeclara.totalAporteVolun }" maxlength="240"></input>
+							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
+						id="totalDeduccion" name="totalDeduccion" class="etiqlargas form-control text-right !important" disabled type="text"
+						value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
