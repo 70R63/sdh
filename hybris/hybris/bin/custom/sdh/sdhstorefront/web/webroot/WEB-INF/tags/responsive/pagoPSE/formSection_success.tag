@@ -58,7 +58,7 @@
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq true}">
 									<div id="continuar">										
-										<button class="btn btn-secondary btn-lg" type="submit">
+										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/sdhstorefront/es/contribuyentes/consultas/certipagos' />';">
 											<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
 										</button>
 										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
