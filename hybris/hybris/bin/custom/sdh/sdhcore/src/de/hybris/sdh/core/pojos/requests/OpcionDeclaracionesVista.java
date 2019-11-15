@@ -60,8 +60,30 @@ public class OpcionDeclaracionesVista
 	private String fechaCompensa;
 	private String moneda;
 	private String numDocPago;
+	private String numfactForm;
 
 	private String numBP;
+
+
+
+
+	/**
+	 * @return the numfactForm
+	 */
+	public String getNumfactForm()
+	{
+		return numfactForm;
+	}
+
+	/**
+	 * @param numfactForm
+	 *           the numfactForm to set
+	 */
+	public void setNumfactForm(final String numfactForm)
+	{
+		this.numfactForm = numfactForm;
+	}
+
 
 	/**
 	 * @return the fechaCompensa
