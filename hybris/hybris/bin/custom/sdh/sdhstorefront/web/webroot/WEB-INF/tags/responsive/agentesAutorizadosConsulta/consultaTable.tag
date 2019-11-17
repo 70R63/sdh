@@ -77,9 +77,56 @@
 								<td><input id="" name="" class="inputtextnew tablefechas"
 									aria-required="true" type="text" readonly="readonly" value="${itemResultado.fchEnvio}"
 									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value="${itemResultado.estado}"
-									maxlength="240"></td>
+								<td>
+									<c:choose>
+										<c:when test="${itemResultado.estado=='01'}">
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value="ARCHIVO MAGNÉTICO RECIBIDO Y VALIDADO CON ERROR"
+											maxlength="240">
+										</c:when> 
+										<c:when test="${itemResultado.estado=='02'}">
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value="ARCHIVO MAGNÉTICO RECIBIDO Y VALIDADO SIN ERROR"
+											maxlength="240">
+										</c:when> 
+										<c:when test="${itemResultado.estado=='03'}">
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO ACEPTADO"
+											maxlength="240">
+										</c:when> 
+										<c:when test="${itemResultado.estado=='04'}">
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE CONSIGNACIÓN VALIDADO SIN ERRORES"
+											maxlength="240">
+										</c:when>
+										<c:when test="${itemResultado.estado=='05'}">
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE CONSIGNACIÓN VALIDADO CON ERRORES"
+											maxlength="240">
+										</c:when>
+										<c:when test="${itemResultado.estado=='06'}">
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE DECLARACIONES DIGITALIZADO"
+											maxlength="240">
+										</c:when>
+										<c:when test="${itemResultado.estado=='07'}">
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE DECLARACIONES DIGITALIZADO CON ERROR"
+											maxlength="240">
+										</c:when>
+										<c:when test="${itemResultado.estado=='08'}">
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE DECLARACIONES DIGITALIZADO SIN ERROR"
+											maxlength="240">
+										</c:when>
+										<c:otherwise>
+											<input id="" name="" class="inputtextnew tablefechas"
+											aria-required="true" type="text" readonly="readonly" value=""
+											maxlength="240">
+										</c:otherwise>
+									</c:choose>
+									
+								</td>
 								<td>
 								    <a id='dwnldLnk' download='archivo.pdf' style="display:none;" > </a>
 								    <a href="#" onclick='downloadPDF("${loopStatus.index}");' title='archivo.pdf'>Descargar</a>
