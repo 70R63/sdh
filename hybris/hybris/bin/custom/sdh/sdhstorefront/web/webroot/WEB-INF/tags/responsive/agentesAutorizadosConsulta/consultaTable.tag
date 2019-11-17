@@ -81,47 +81,12 @@
 									<c:choose>
 										<c:when test="${itemResultado.estado=='01'}">
 											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="ARCHIVO MAGNÉTICO RECIBIDO Y VALIDADO CON ERROR"
+											aria-required="true" type="text" readonly="readonly" value="Aceptado"
 											maxlength="240">
 										</c:when> 
-										<c:when test="${itemResultado.estado=='02'}">
-											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="ARCHIVO MAGNÉTICO RECIBIDO Y VALIDADO SIN ERROR"
-											maxlength="240">
-										</c:when> 
-										<c:when test="${itemResultado.estado=='03'}">
-											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO ACEPTADO"
-											maxlength="240">
-										</c:when> 
-										<c:when test="${itemResultado.estado=='04'}">
-											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE CONSIGNACIÓN VALIDADO SIN ERRORES"
-											maxlength="240">
-										</c:when>
-										<c:when test="${itemResultado.estado=='05'}">
-											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE CONSIGNACIÓN VALIDADO CON ERRORES"
-											maxlength="240">
-										</c:when>
-										<c:when test="${itemResultado.estado=='06'}">
-											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE DECLARACIONES DIGITALIZADO"
-											maxlength="240">
-										</c:when>
-										<c:when test="${itemResultado.estado=='07'}">
-											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE DECLARACIONES DIGITALIZADO CON ERROR"
-											maxlength="240">
-										</c:when>
-										<c:when test="${itemResultado.estado=='08'}">
-											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="MEDIO FÍSICO DE DECLARACIONES DIGITALIZADO SIN ERROR"
-											maxlength="240">
-										</c:when>
 										<c:otherwise>
 											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value=""
+											aria-required="true" type="text" readonly="readonly" value="Rechazado"
 											maxlength="240">
 										</c:otherwise>
 									</c:choose>
