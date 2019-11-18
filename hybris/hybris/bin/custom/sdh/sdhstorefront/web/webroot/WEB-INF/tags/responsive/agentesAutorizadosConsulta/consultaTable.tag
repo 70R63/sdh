@@ -81,12 +81,12 @@
 									<c:choose>
 										<c:when test="${itemResultado.estado=='01'}">
 											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="Aceptado"
+											aria-required="true" type="text" readonly="readonly" value="Rechazado"
 											maxlength="240">
 										</c:when> 
 										<c:otherwise>
 											<input id="" name="" class="inputtextnew tablefechas"
-											aria-required="true" type="text" readonly="readonly" value="Rechazado"
+											aria-required="true" type="text" readonly="readonly" value="Aceptado"
 											maxlength="240">
 										</c:otherwise>
 									</c:choose>
