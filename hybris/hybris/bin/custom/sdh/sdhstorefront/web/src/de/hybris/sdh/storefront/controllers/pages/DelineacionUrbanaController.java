@@ -9,7 +9,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -494,6 +493,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		String dv = "";
 		String numObjeto = "";
 		String CDU = "";
+		String radicado = "";
 
 		final String tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R")
 				? new ControllerPseConstants().getRETENCIONDU()
@@ -522,6 +522,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		dv = infoDelineacion.getValCont().getInfoContrib().getAdicionales().getDIGVERIF();
 		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
 		CDU = infoDelineacion.getInput().getSelectedCDU();
+		radicado = infoDelineacion.getInput().getSelectedRadicado();
 
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
@@ -535,7 +536,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
-
+		infoPreviaPSE.setRadicado(radicado);
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("dataForm", infoDelineacion);

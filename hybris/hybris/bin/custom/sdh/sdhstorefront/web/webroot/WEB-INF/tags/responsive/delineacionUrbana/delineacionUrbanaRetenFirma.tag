@@ -100,6 +100,8 @@
 				<sf:hidden path="numObjeto" />
 				<sf:hidden path="CDU" />
 				<sf:hidden path="anticipo" />
+				<sf:hidden path="radicado" />
+				
 				<div class="col-md-3">
 				<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit" id="action" name="pagar" value="pagar"  disabled="true">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar"/>

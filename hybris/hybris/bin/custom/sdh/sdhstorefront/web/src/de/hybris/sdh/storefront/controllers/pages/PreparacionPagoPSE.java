@@ -121,7 +121,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 		detallePagoRequest.setNumBP(infoPreviaPSE.getNumBP());
 		detallePagoRequest.setClavePeriodo(infoPreviaPSE.getClavePeriodo());
 		detallePagoRequest.setNumObjeto(infoPreviaPSE.getNumObjeto());
-		detallePagoRequest.setAnticipo(infoPreviaPSE.getCDU());
+		detallePagoRequest.setAnticipo(infoPreviaPSE.getRadicado());
 
 		System.out.println("Request de consulPago: " + detallePagoRequest);
 		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
