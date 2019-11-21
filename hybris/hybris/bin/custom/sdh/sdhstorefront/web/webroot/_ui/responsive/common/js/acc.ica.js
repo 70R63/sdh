@@ -531,12 +531,14 @@ ACC.ica = {
 		            		$("#icaPresentarDeclaracionButton").prop('disabled', false);
 	            		}else
 	            		{
+	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#icaDialogContent").html("");
 	            			$("#dialogICA").html("La declaración se ha generado exitosamente.")
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
 	            			$("#icaPresentarDeclaracionButton").prop('disabled', false);
+	            			
 	            		}
 	 	      		
 		            },

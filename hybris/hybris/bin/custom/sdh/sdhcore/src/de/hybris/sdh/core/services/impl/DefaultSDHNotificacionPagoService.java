@@ -128,9 +128,15 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 								transaction.getCrePaymentMethod()));
 			}else { //ACH PSE Transaction
                 LOG.info("---- ACH/PSE TRANSACTION ----");
-				pseNotificacionDePagoRequest.setMedioPago(
-						ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
-								transaction.getPaymentMode()));
+				if (transaction.getPaymentMode() != null)
+				{
+					pseNotificacionDePagoRequest.setMedioPago(transaction.getPaymentMode());
+				}
+				else
+				{
+					pseNotificacionDePagoRequest.setMedioPago("");
+				}
+
 			}
 
 

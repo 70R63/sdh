@@ -23,8 +23,28 @@ public class OpcionCertiPagosImprimeRequest
 	private String fechaCompensa;
 	private String moneda;
 	private String numDocPago;
+	private String numfactForm;
 
 
+
+
+
+	/**
+	 * @return the numfactForm
+	 */
+	public String getNumfactForm()
+	{
+		return numfactForm;
+	}
+
+	/**
+	 * @param numfactForm
+	 *           the numfactForm to set
+	 */
+	public void setNumfactForm(final String numfactForm)
+	{
+		this.numfactForm = numfactForm;
+	}
 
 	/**
 	 * @return the fechaCompensa
@@ -270,6 +290,7 @@ public class OpcionCertiPagosImprimeRequest
 		stringBuilder.append(obtenerValorJson("\"anoGravable\":\"", this.getAnoGravable(), "\","));
 		stringBuilder.append(obtenerValorJson("\"clavePeriodo\":\"", this.getClavePeriodo(), "\","));
 		stringBuilder.append(obtenerValorJson("\"Periodo\":\"", this.getPeriodo(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numfactForm\":\"", this.getNumfactForm(), "\","));
 		stringBuilder.append(obtenerValorJson("\"importe\":\"", this.getImporte(), "\""));
 		stringBuilder.append("}");
 

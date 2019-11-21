@@ -21,15 +21,15 @@
 
 	<c:set var="noChecked" value="" />
 	<c:set var="yesChecked" value="" />
-	<c:choose>
-		<c:when
- 			test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}"> 
- 			<c:set var="yesChecked" value="checked" /> 
- 		</c:when> 
- 		<c:otherwise> 
- 			<c:set var="noChecked" value="checked" /> 
- 		</c:otherwise> 
- 	</c:choose> 
+<%-- 	<c:choose> --%>
+<%-- 		<c:when --%>
+<%--  			test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}">  --%>
+<%--  			<c:set var="yesChecked" value="checked" />  --%>
+<%--  		</c:when>  --%>
+<%--  		<c:otherwise>  --%>
+<%--  			<c:set var="noChecked" value="checked" />  --%>
+<%--  		</c:otherwise>  --%>
+<%--  	</c:choose>  --%>
 	<form:form action="">
 		<div class="row mt-3">
 			<div class="col-md-3">
@@ -42,29 +42,29 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						value="si" ${yesChecked} onclick="proyecthabi()"> Si
+						value="si" ${yesChecked} onclick="proyecthabi()" disabled="disabled"> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						value="no" ${noChecked} onclick="proyectdeshabi()"> No
+						value="no" ${noChecked} onclick="proyectdeshabi()" disabled="disabled"> No
 					</label>
 				</div>
 			</div>
 			
 			<c:set var="option01Selected" value="" />
 			<c:set var="projectDisable" value="disabled" />
-			<c:choose>
-				<c:when test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}">
-					<c:set var="projectDisable" value="" />
-					<c:choose>
-						<c:when test="${fn:trim(vehiculosFormDeclaracion.proyectoAporte) eq '01' or fn:trim(vehiculosFormDeclaracion.proyectoAporte) eq '1'}">
-							<c:set var="option01Selected" value="selected" />
-						</c:when>
-					</c:choose>
-				</c:when>
-			</c:choose>
+<%-- 			<c:choose> --%>
+<%-- 				<c:when test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}"> --%>
+<%-- 					<c:set var="projectDisable" value="" /> --%>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${fn:trim(vehiculosFormDeclaracion.proyectoAporte) eq '01' or fn:trim(vehiculosFormDeclaracion.proyectoAporte) eq '1'}"> --%>
+<%-- 							<c:set var="option01Selected" value="selected" /> --%>
+<%-- 						</c:when> --%>
+<%-- 					</c:choose> --%>
+<%-- 				</c:when> --%>
+<%-- 			</c:choose> --%>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -84,8 +84,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.liq.avalact" /></label> <input
-						id="" name="" class="newalto form-control" aria-required="true"
-						type="text" value="" maxlength="30" disabled="disabled">
+						id="avaluoAct" name="" class="newalto form-control avaluoAct" aria-required="true"
+						type="text" value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" disabled="disabled">
 				</div>
 			</div>
 		</div>

@@ -40,7 +40,7 @@
 					<c:set var = "deshabilitarPagar" value = "false"/>	
 				</c:otherwise>
 			</c:choose>
-			<sf:button class="btn btn-primary btn-lg" type="submit" id="pagar"
+			<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit" id="pagar"
 				name="action" value="pagar" disabled="${deshabilitarPagar}">
 				<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 			</sf:button>

@@ -12,7 +12,7 @@
 
 
 <agentes:consultainicial />
-<c:if test="${not empty fileConsultaResponse.resultado.stringFile}">
+<c:if test="${fileConsultaResponse.resultado != null}">
     <agentes:consultaTable />
 </c:if>
 

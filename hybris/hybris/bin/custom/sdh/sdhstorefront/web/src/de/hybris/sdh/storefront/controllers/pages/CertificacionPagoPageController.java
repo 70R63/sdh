@@ -385,6 +385,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		String radicado = "";
 
 		String ctaContrato = "";
+		String numfactForm = "";
 		String clavePeriodo = "";
 		String referencia = "";
 		String fechaCompensa = "";
@@ -411,6 +412,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		periodo = infoVista.getPeriodo();
 		radicado = "";
 		ctaContrato = infoVista.getCtaContrato();
+		numfactForm = infoVista.getNumfactForm();
 		clavePeriodo = infoVista.getClavePeriodo();
 		importe = infoVista.getImporte();
 		numDoc = infoVista.getCustomerData().getInfoContrib().getNumDoc();
@@ -432,6 +434,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 		impresionRequest.setFechaCompensa(fechaCompensa);
 		impresionRequest.setMoneda(moneda);
 		impresionRequest.setNumDocPago(numDocPago);
+		impresionRequest.setNumfactForm(numfactForm);
 
 
 		System.out.println("Request para docs/imprimePago: " + impresionRequest);

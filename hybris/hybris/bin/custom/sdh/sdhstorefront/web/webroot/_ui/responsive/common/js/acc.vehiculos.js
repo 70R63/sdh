@@ -151,6 +151,7 @@ ACC.vehiculos = {
 		            		
 	            		}else
 	            		{
+	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#publicidadExteriorDialogContent").html("");
 	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
 	            			
@@ -194,11 +195,11 @@ ACC.vehiculos = {
 				if(blindado == "S" || blindado == "s"){
 					blindado = "X";
 				}else{
-				blindado = "";
+				blindado = "N";
 				}
 				var capacidadTon=$.trim($("#capacidadToncal").val());
 				var capacidadPas=$.trim($("#capacidadPascal").val());
-				var avaluo=$.trim($("#an").val());
+				var avaluo=$.trim($("#avaluoAct").val());
 				var claseSdh=$.trim($("#an").val());
 				var tipoVehSdh=$.trim($("#an").val());
 				var lineaHomologa=$.trim($("#an").val());
@@ -247,6 +248,7 @@ ACC.vehiculos = {
 								//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
 								//});
 								
+								$("#avaluoAct").val("");
 								$("#valimpcar").val("");
 								$("#valsemafo").val("");
 								$("#despronpag").val("");
@@ -261,6 +263,7 @@ ACC.vehiculos = {
 								
 		            			//$('#generaDeclaracionButton').prop("disabled", true);
 							}else{
+								$("#avaluoAct").val(data.avaluo);
 								$("#valimpcar").val(data.impuestoCargo);
 								$("#valsemafo").val(data.valorSemafor);
 								$("#despronpag").val(data.descuentoProntop);
@@ -275,6 +278,7 @@ ACC.vehiculos = {
 		            		
 	            		}else
 	            		{	            			
+							$("#avaluoAct").val(data.avaluo);
 	            			$("#valimpcar").val(data.impuestoCargo);
 	            			$("#valsemafo").val(data.valorSemafor);
 	            			$("#despronpag").val(data.descuentoProntop);
@@ -297,7 +301,8 @@ ACC.vehiculos = {
         	$( "#dialogVehiculos" ).dialog( "open" );
         	$("#vehiculosDialogContent").html("");
         	$("#vehiculosDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
-        	$("#valimpcar").val("");
+        	$("#avaluoAct").val("");
+			$("#valimpcar").val("");
 			$("#valsemafo").val("");
 			$("#despronpag").val("");
 			$("#taract").val("");
@@ -544,12 +549,12 @@ ACC.vehiculos = {
 		if (liq != null) {
 			for (var i = 0; i < liq.length; i++) {
 				
-				var fecjur1 = liq[i].anio;
-				var mes = fecjur1.slice(4, 6);
-				var dia = fecjur1.slice(6);
-				var anio = fecjur1.slice(0, 4);
+//				var fecjur1 = liq[i].anio;
+//				var mes = fecjur1.slice(4, 6);
+//				var dia = fecjur1.slice(6);
+//				var anio = fecjur1.slice(0, 4);
 				
-				liq[i].anio = dia + '/' + mes + '/' + anio;;
+//				liq[i].anio = dia + '/' + mes + '/' + anio;;
 
 				$('#tableLiq')
 						.append(

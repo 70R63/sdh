@@ -19,8 +19,27 @@ public class InfoPreviaPSE
 	private String dv;
 	private String numObjeto;
 	private String CDU;
+	private String radicado;
 	private String anticipo;
 
+
+
+	/**
+	 * @return the radicado
+	 */
+	public String getRadicado()
+	{
+		return radicado;
+	}
+
+	/**
+	 * @param radicado
+	 *           the radicado to set
+	 */
+	public void setRadicado(final String radicado)
+	{
+		this.radicado = radicado;
+	}
 
 	/**
 	 * @return the tipoImpuesto
@@ -206,7 +225,7 @@ public class InfoPreviaPSE
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

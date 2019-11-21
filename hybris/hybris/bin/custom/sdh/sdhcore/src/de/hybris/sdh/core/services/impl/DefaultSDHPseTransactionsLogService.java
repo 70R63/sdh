@@ -261,33 +261,52 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			}
 			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
 			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
-			if (map.get("bankProcessDate").equals("Débito en Cuenta"))
+			if (map.get("paymentMode").equals("Débito en Cuenta"))
 			{
 				pseTransactionsLogModel.setPaymentMode("15");
 			}
-			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Visa"))
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Visa"))
 			{
 				pseTransactionsLogModel.setPaymentMode("50");
 			}
-			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Master Card"))
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito  Master Card"))
 			{
 				pseTransactionsLogModel.setPaymentMode("51");
 			}
-			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Diners Club"))
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Diners Club"))
 			{
 				pseTransactionsLogModel.setPaymentMode("52");
 			}
-			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito Propia Entidad Financiera"))
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Propia Entidad Financiera"))
 			{
 				pseTransactionsLogModel.setPaymentMode("53");
 			}
-			else if (map.get("bankProcessDate").equals("Crédito Rotativo"))
+			else if (map.get("paymentMode").equals("Crédito Rotativo"))
 			{
 				pseTransactionsLogModel.setPaymentMode("54");
 			}
-			else if (map.get("bankProcessDate").equals("Tarjeta de Crédito American Express"))
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito  American Express"))
 			{
 				pseTransactionsLogModel.setPaymentMode("55");
+			}
+			else
+			{
+				pseTransactionsLogModel.setPaymentMode("");
+			}
+
+
+
+			if (map.get("paymentOrigin").equals("Crédito"))
+			{
+				pseTransactionsLogModel.setPaymentOrigin("01");
+			}
+			else if (map.get("paymentOrigin").equals("Débito"))
+			{
+				pseTransactionsLogModel.setPaymentOrigin("02");
+			}
+			else
+			{
+				pseTransactionsLogModel.setPaymentOrigin("");
 			}
 
 
