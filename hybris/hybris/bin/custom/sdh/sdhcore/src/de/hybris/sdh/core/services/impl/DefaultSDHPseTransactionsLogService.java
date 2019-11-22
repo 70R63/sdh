@@ -313,9 +313,14 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 			transactionState = response.getTransactionState().getValue();
 
+			if (transactionState.equals("PENDING"))
+			{
+				pseTransactionsLogModel.setTransactionState("OK");
+			}
+
 			LOG.info("Updated PseTransactionsLogModel [" + pseTransactionsLogModel.getNumeroDeReferencia() + ","
 					+ response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", "
-					+ response.getTransactionState().getValue() + "]");
+					+ pseTransactionsLogModel.getTransactionState() + "]");
 
 			modelService.saveAll(pseTransactionsLogModel);
 		}
