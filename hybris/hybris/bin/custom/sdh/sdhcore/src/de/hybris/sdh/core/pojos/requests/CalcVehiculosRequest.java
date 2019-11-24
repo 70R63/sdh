@@ -614,7 +614,7 @@ public class CalcVehiculosRequest
 		stringBuilder.append("\"blindado\":\"" + this.getBlindado() + "\",");
 		stringBuilder.append("\"capacidadTon\":\"" + this.getCapacidadTon() + "\",");
 		stringBuilder.append("\"capacidadPas\":\"" + this.getCapacidadPas() + "\",");
-		stringBuilder.append("\"avaluo\":\"" + this.getAvaluo() + "\",");
+		stringBuilder.append("\"avaluoActual\":\"" + this.getAvaluo() + "\",");
 		stringBuilder.append("\"claseSdh\":\"" + this.getClaseSdh() + "\",");
 		stringBuilder.append("\"tipoVehSdh\":\"" + this.getTipoVehSdh() + "\",");
 		stringBuilder.append("\"lineaHomologa\":\"" + this.getLineaHomologa() + "\",");
