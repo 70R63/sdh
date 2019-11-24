@@ -34,7 +34,7 @@ public class Infovehic
 	{
 		return opcionUso;
 	}
-	
+
 	/**
 	 * @param opcionUso
 	 *           the opcionUso to set
@@ -260,6 +260,7 @@ public class Infovehic
 	 * @param avaluo
 	 *           the avaluo to set
 	 */
+	@JsonProperty("avaluoActual")
 	public void setAvaluo(final String avaluo)
 	{
 		this.avaluo = avaluo;
