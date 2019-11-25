@@ -24,19 +24,9 @@
 					<div class="form-group">
 						<label class="control-label required"><spring:theme
 								code="tramites.crear.inicial.tiptramite" /></label> 
-						<select data-nivel="0"
-							class="  form-control !important tramitestSN" id="selectNivel0">
-							<option value="00">Seleccionar</option>
-							<option value="01">RIT</option>
-							<option value="02">Novedades de registro</option>
-							<option value="03">Facturación</option>
-							<option value="04">Analisis de la cuenta</option>
-							<option value="05">Boletín de deudores Morosos del Estado</option>
-							<option value="06">Verificación de pagos</option>
-							<option value="07">Corrección de la información causada contablemente</option>
-<!-- 							<option value="08">Declaración</option> -->
-							<option value="09">Agente Autorizado</option>
-						</select>
+						<sf:select data-nivel="0" class="  form-control !important tramitestSN" id="selectNivel0" 
+							path="valorN0" items="${opcionesN0}" referenceData="${opcionesN0}" >
+						</sf:select>
 					</div>
 				</div>
 			</div>
