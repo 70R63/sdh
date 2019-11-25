@@ -296,11 +296,11 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 
 
-			if (map.get("paymentOrigin").equals("Crédito"))
+			if (map.get("paymentOrigin").equals("Débito"))
 			{
 				pseTransactionsLogModel.setPaymentOrigin("01");
 			}
-			else if (map.get("paymentOrigin").equals("Débito"))
+			else if (map.get("paymentOrigin").equals("Crédito"))
 			{
 				pseTransactionsLogModel.setPaymentOrigin("02");
 			}
