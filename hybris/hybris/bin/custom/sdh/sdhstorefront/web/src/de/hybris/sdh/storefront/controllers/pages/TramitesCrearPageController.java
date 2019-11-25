@@ -30,7 +30,9 @@ import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -87,6 +89,24 @@ public class TramitesCrearPageController extends AbstractPageController
 	public String tramitescreaar(final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET TRAMITES crear --------------------------");
+		final Map<String,String> elementosResponse = new LinkedHashMap<String, String>();
+		final List<TramiteOpcion> elementos = new ArrayList<TramiteOpcion>();
+		final TramitesSeleccionInfoVista infoVista = new TramitesSeleccionInfoVista();
+		String busquedaSubKeyOpciones = "";
+
+
+		llenarElementosTramites(elementos);
+		busquedaSubKeyOpciones = obtenerKeySelNivel(new TramitesSeleccionInfo());
+
+		for (final TramiteOpcion elemento : elementos)
+		{
+			if (elemento.getKey().matches(busquedaSubKeyOpciones))
+			{
+				elementosResponse
+						.put(elemento.getTramiteOpcion().getKey(), elemento.getTramiteOpcion().getLabel());
+			}
+		}
+		model.addAttribute("opcionesN0", elementosResponse);
 
 		final TramitesSeleccionInfo dataForm = new TramitesSeleccionInfo();
 
@@ -519,6 +539,10 @@ public class TramitesCrearPageController extends AbstractPageController
 				sb.append("\\d\\d____");
 			}
 		}
+		else
+		{
+			sb.append("\\d\\d______");
+		}
 
 		return sb.toString();
 	}
@@ -568,6 +592,18 @@ public class TramitesCrearPageController extends AbstractPageController
 	 */
 	private void llenarElementosTramites(final List<TramiteOpcion> elementos)
 	{
+
+
+		//Nivel 0
+		agregarElementoTramites(elementos, "00______", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "01______", "01", "RIT");
+		agregarElementoTramites(elementos, "02______", "02", "Novedades de registro");
+		agregarElementoTramites(elementos, "03______", "03", "Facturación");
+		agregarElementoTramites(elementos, "04______", "04", "Analisis de la cuenta");
+		agregarElementoTramites(elementos, "05______", "05", "Boletín de deudores Morosos del Estado");
+		agregarElementoTramites(elementos, "06______", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006");
+		agregarElementoTramites(elementos, "07______", "07", "Corrección de la información causada contablemente");
+		agregarElementoTramites(elementos, "09______", "09", "Agente Autorizado");
 
 		//RIT
 		agregarElementoTramites(elementos, "0100____", "00", "Seleccionar");
@@ -783,6 +819,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0503____", "03", "Existe acuerdo de pago vigente", "ZT09", "A1ZTRT0002Z015");
 		agregarElementoTramites(elementos, "0504____", "04", "Otra cual", "ZT09", "A1ZTRT0002Z016");
 
+		//Verificacion de pagos
 
 		//Corrección de la información causada contablemente
 		agregarElementoTramites(elementos, "0700____", "00", "Seleccionar");
