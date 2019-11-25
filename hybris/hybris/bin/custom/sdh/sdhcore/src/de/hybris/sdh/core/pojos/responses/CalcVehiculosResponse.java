@@ -5,6 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 
 /**
  * @author hybris
@@ -22,6 +24,7 @@ public class CalcVehiculosResponse
 	private String totalPagar;
 	private String valorPagar;
 	private String totalPagoVol;
+	private String avaluo;
 
 	private List<ErrorPubli> errores;
 
@@ -212,7 +215,23 @@ public class CalcVehiculosResponse
 		this.errores = errores;
 	}
 
+	/**
+	 * @return the avaluoActual
+	 */
+	public String getAvaluo()
+	{
+		return avaluo;
+	}
 
+	/**
+	 * @param avaluoActual
+	 *           the avaluoActual to set
+	 */
+	@JsonProperty("avaluoActual")
+	public void setAvaluo(final String avaluo)
+	{
+		this.avaluo = avaluo;
+	}
 
 
 }

@@ -331,7 +331,7 @@
 <script>
 	function addinfoareuso() {
 
-		if ($(".areasusos").length < 3) {
+		if ($(".areasusos").length < 10000) {
 			$($(".areasusos")[0]).parent()
 					.append($($(".areasusos")[0]).clone());
 
@@ -350,7 +350,7 @@
 	function deleinfoareuso() {
 		var i = $(".areasusos").length;
 		var val = i - 1;
-		if ($(".areasusos").length <= 3 && $(".areasusos").length > 1) {
+		if ($(".areasusos").length <= 10000 && $(".areasusos").length > 1) {
 
 			$($(".areasusos")[val]).closest($($(".areasusos")[val]).remove());
 
@@ -389,7 +389,7 @@
 
 	function addinfoareuso3() {
 
-		if ($(".areausosdos").length < 3) {
+		if ($(".areausosdos").length < 10000) {
 			$($(".areausosdos")[0]).parent().append(
 					$($(".areausosdos")[0]).clone());
 			$($(".areausosdos")[0]).parent().children().last().find(".sel5")
@@ -403,7 +403,7 @@
 	function deleinfoareusotable3() {
 		var i = $(".areausosdos").length;
 		var val = i - 1;
-		if ($(".areausosdos").length <= 3 && $(".areausosdos").length > 1) {
+		if ($(".areausosdos").length <= 10000 && $(".areausosdos").length > 1) {
 
 			$($(".areausosdos")[val]).closest(
 					$($(".areausosdos")[val]).remove());

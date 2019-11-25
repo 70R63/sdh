@@ -219,7 +219,8 @@
 
 	 <!-- Comment out to see error stack for development -->
 	<error-page>
-		<location>/WEB-INF/common/pages/error/serverError.jsp</location>
+<!-- 		<location>/WEB-INF/common/pages/error/serverError.jsp</location> -->
+		<location>/WEB-INF/common/pages/error/serverErrorGeneral.jsp</location>
 	</error-page>
 
 
