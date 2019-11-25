@@ -201,7 +201,6 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
 
-
 			final GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType = new GetTransactionInformationDetailedBodyType();
 			getTransactionInformationDetailedBodyType.setTrazabilityCode(trazabilityCode);
 
@@ -313,10 +312,11 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 			transactionState = response.getTransactionState().getValue();
 
-			if (transactionState.equals("PENDING"))
+			//Comentar Forzado de trasnacciones PENDING
+			/*if (transactionState.equals("PENDING"))
 			{
 				pseTransactionsLogModel.setTransactionState("OK");
-			}
+			}*/
 
 			LOG.info("Updated PseTransactionsLogModel [" + pseTransactionsLogModel.getNumeroDeReferencia() + ","
 					+ response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", "
