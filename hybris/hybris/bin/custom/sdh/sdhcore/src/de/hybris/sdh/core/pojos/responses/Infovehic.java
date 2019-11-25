@@ -3,9 +3,6 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
-
 /**
  * @author Consultor
  *
@@ -263,7 +260,6 @@ public class Infovehic
 	 * @param avaluo
 	 *           the avaluo to set
 	 */
-	@JsonProperty("avaluoActual")
 	public void setAvaluo(final String avaluo)
 	{
 		this.avaluo = avaluo;
