@@ -282,7 +282,7 @@
 <script>
 	function addinfoareuso() {
 
-		if ($(".areasusos").length < 3) {
+		if ($(".areasusos").length < 10000) {
 			$($(".areasusos")[0]).parent()
 					.append($($(".areasusos")[0]).clone());
 
@@ -302,7 +302,7 @@
 	function deleinfoareuso() {
 		var i = $(".areasusos").length;
 		var val = i - 1;
-		if ($(".areasusos").length <= 5 && $(".areasusos").length > 1) {
+		if ($(".areasusos").length <= 10000 && $(".areasusos").length > 1) {
 
 			$($(".areasusos")[val]).closest($($(".areasusos")[val]).remove());
 
@@ -313,7 +313,7 @@
 
 	function addinfoareusotable2() {
 debugger;
-if ($(".arearquitec").length < 3) {
+if ($(".arearquitec").length < 10000) {
 	$($(".arearquitec")[0]).parent()
 			.append($($(".arearquitec")[0]).clone());
 
@@ -335,7 +335,7 @@ if ($(".arearquitec").length < 3) {
 		debugger;
 		var i = $(".arearquitec").length;
 		var val = i - 1;
-		if ($(".arearquitec").length <= 5 && $(".arearquitec").length > 1) {
+		if ($(".arearquitec").length <= 10000 && $(".arearquitec").length > 1) {
 
 			$($(".arearquitec")[val]).closest(
 					$($(".arearquitec")[val]).remove());
@@ -348,7 +348,7 @@ if ($(".arearquitec").length < 3) {
 
 	function addinfoareuso3() {
 
-		if ($(".areausosdos").length < 3) {
+		if ($(".areausosdos").length < 10000) {
 			$($(".areausosdos")[0]).parent().append(
 					$($(".areausosdos")[0]).clone());
 			$($(".areausosdos")[0]).parent().children().last().find(".sel5")
@@ -364,7 +364,7 @@ if ($(".arearquitec").length < 3) {
 	function deleinfoareusotable3() {
 		var i = $(".areausosdos").length;
 		var val = i - 1;
-		if ($(".areausosdos").length <= 5 && $(".areausosdos").length > 1) {
+		if ($(".areausosdos").length <= 10000 && $(".areausosdos").length > 1) {
 
 			$($(".areausosdos")[val]).closest(
 					$($(".areausosdos")[val]).remove());
