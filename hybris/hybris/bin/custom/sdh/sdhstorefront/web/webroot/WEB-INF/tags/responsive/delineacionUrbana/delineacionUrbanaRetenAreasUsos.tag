@@ -55,8 +55,7 @@
 				<div class="col-md-3">
 					<div class="form-group ">
 						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-							<sf:select id="select1"
-								path="infObjetoDelineacion.usos[${loop.index}].uso"
+							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
 								class="new_alto form-control" disabled="false"></sf:select>
@@ -288,7 +287,6 @@
 
 <script>
 	function addinfoareuso() {
-		debugger;
 		if ($(".areasusos").length < 10000) {
 
 			var tam = $(".areasusos").length;
@@ -299,8 +297,21 @@
 			for (var j = 0; j <= tam; j++) {
 				var arr = $(".areasusos");
 				if (j == tam) {
+					
 					$($(".areasusos")[j]).find('select').val("00");
+					var area = $($(".areasusos")[j]).find('select');
+					var nom = "infObjetoDelineacion.usos[" + tam + "].uso";
+					var nomid = "infObjetoDelineacion.usos" + tam + ".uso";
+					area.attr("name", nom);
+					area.attr("id", nomid);
+					
 					$($(".areasusos")[j]).find('input').val("");
+					var areainp = $($(".areasusos")[j]).find('input');
+					var nom2 = "infObjetoDelineacion.usos[" + tam + "].areaNeta";
+					var nomid2 = "infObjetoDelineacion.usos" + tam + ".areaNeta";
+					areainp.attr("name", nom2);
+					areainp.attr("id", nomid2);
+					
 				}
 			}
 		} else {
@@ -331,8 +342,21 @@
 			for (var j = 0; j <= tam; j++) {
 				var arr = $(".arearquitec");
 				if (j == tam) {
+					
 					$($(".arearquitec")[j]).find('select').val("00");
+					var area = $($(".arearquitec")[j]).find('select');
+					var nom = "infObjetoDelineacion.areaProyecto[" + tam + "].areaProy";
+					var nomid = "infObjetoDelineacion.areaProyecto" + tam + ".areaProy";
+					area.attr("name", nom);
+					area.attr("id", nomid);
+					
 					$($(".arearquitec")[j]).find('input').val("");
+					var areainp = $($(".arearquitec")[j]).find('input');
+					var nom2 = "infObjetoDelineacion.areaProyecto[" + tam + "].aream2";
+					var nomid2 = "infObjetoDelineacion.areaProyecto" + tam + ".aream2";
+					areainp.attr("name", nom2);
+					areainp.attr("id", nomid2);
+					
 				}
 			}
 
@@ -343,7 +367,7 @@
 	}
 
 	function deleinfoareusotable2() {
-		debugger;
+	
 		var i = $(".arearquitec").length;
 		var val = i - 1;
 		if ($(".arearquitec").length <= 10000 && $(".arearquitec").length > 1) {
@@ -358,7 +382,7 @@
 	}
 
 	function addinfoareuso3() {
-		debugger;
+	
 		var tam = $(".areausosdos").length;
 		var i = tam - 1;
 		if ($(".areausosdos").length < 10000) {
@@ -368,8 +392,22 @@
 			for (var j = 0; j <= tam; j++) {
 				var arr = $(".areausosdos");
 				if (j == tam) {
+					
 					$($(".areausosdos")[j]).find('select').val("00");
+					var areau = $($(".areasusosdos")[j]).find('select');
+					var nom = "infObjetoDelineacion.areaIntervenida[" + tam + "].areaInter";
+					var nomid = "infObjetoDelineacion.areaIntervenida" + tam + ".areaInter";
+					$($(".areausosdos")[j]).find('select').attr("name", nom);
+					$($(".areausosdos")[j]).find('select').attr("id", nomid);
+
+					
 					$($(".areausosdos")[j]).find('input').val("");
+					var areainpu = $($(".areasusosdos")[j]).find('input');
+					var nom2 = "infObjetoDelineacion.areaIntervenida[" + tam + "].aream2";
+					var nomid2 = "infObjetoDelineacion.areaIntervenida" + tam + ".aream2";
+					$($(".areausosdos")[j]).find('input').attr("name", nom2);
+					$($(".areausosdos")[j]).find('input').attr("id", nomid2);
+
 				}
 			}
 		} else {
