@@ -290,11 +290,11 @@
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
 			$($(".valor")[0]).parent().children().last().find(".anio").val("")
 			$($(".valor")[0]).parent().children().last().find(".tipo").val("")
-			$($(".valor")[0]).parent().children().last().find(".numiden").val(
+			$($(".valor")[0]).parent().children().last().find(".numID").val(
 					"")
-			$($(".valor")[0]).parent().children().last().find(".nombre")
+			$($(".valor")[0]).parent().children().last().find(".razonSocial")
 					.val("")
-			$($(".valor")[0]).parent().children().last().find(".direc").val("")
+			$($(".valor")[0]).parent().children().last().find(".direccion").val("")
 			$($(".valor")[0]).parent().children().last().find(".telefono").val(
 					"")
 			$($(".valor")[0]).parent().children().last().find(".denoact").val(
@@ -303,6 +303,7 @@
 					"")
 			$($(".valor")[0]).parent().children().last().find(".valtotal").val(
 					"")
+			$($(".valor")[0]).parent().children().last().find(".montoRetenido").val("")
 
 		} else {
 			alert("No se pueden agregar m�s registros");
