@@ -15,9 +15,7 @@ import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.enums.SdhOnlinePaymentProviderEnum;
-import de.hybris.sdh.core.enums.SdhPaymentMethodTypeEnum;
 import de.hybris.sdh.core.enums.SdhTaxTypesEnum;
-import de.hybris.sdh.core.model.PseBankListCatalogModel;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
@@ -36,7 +34,6 @@ import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInform
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
-import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData;
 import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
@@ -44,7 +41,6 @@ import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -567,7 +563,7 @@ public class PSEPaymentController extends AbstractPageController
 	@RequireHardLogIn
 	public String pagoEnLineaForm(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
-		SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
+		final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_FORMA));
@@ -594,7 +590,7 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		String redirecUrl = getViewForPage(model);
 
-		SdhOnlinePaymentProviderEnum provider = sdhOnlinePaymentProviderMatcherFacade.getOnlinePaymentProvider(psePaymentForm.getTipoDeImpuesto(), psePaymentForm.getTipoDeTarjeta(), psePaymentForm.getBanco());
+		final SdhOnlinePaymentProviderEnum provider = sdhOnlinePaymentProviderMatcherFacade.getOnlinePaymentProvider(psePaymentForm.getTipoDeImpuesto(), psePaymentForm.getTipoDeTarjeta(), psePaymentForm.getBanco());
 
 
 		if (provider.equals(SdhOnlinePaymentProviderEnum.CREDIBANCO)) //Credibanco Payment
@@ -672,7 +668,10 @@ public class PSEPaymentController extends AbstractPageController
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
-				psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), "ACH Host Copy Rights", "NonRed#1"));
+				new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()).toString(),
+				psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), ""));
+		//createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
+		//		psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), "ACH Host Copy Rights", "NonRed#1"));
 
 
 		return pseServices

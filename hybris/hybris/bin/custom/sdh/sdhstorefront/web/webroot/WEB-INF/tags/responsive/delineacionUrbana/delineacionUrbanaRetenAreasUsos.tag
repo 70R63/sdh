@@ -77,13 +77,14 @@
 							<sf:input class="newalto form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
-								onkeyup="numberFormat(this)" onclick="numberFormat(this)" disabled="false" />
+								onkeyup="numberFormat(this)" onclick="numberFormat(this)"
+								disabled="false" />
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 							<sf:input class="newalto form-control" readonly="false"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
-								 disabled="false" onkeyup="numberFormat(this)"
+								disabled="false" onkeyup="numberFormat(this)"
 								onclick="numberFormat(this)" />
 						</c:if>
 					</div>
@@ -112,14 +113,16 @@
 			<div class="col-md-3">
 				<div class="form-group ">
 					<input id="inputareainter" class="new_alto form-control"
-						maxlength="30" value="Total" disabled="disabled" readonly="readonly"></input>
+						maxlength="30" value="Total" disabled="disabled"
+						readonly="readonly"></input>
 				</div>
 			</div>
 
 			<div class="col-md-2 offset-md-3">
 				<div class="form-group ">
 					<sf:input id="inputareainter" class="newalto form-control"
-						maxlength="30" path="infObjetoDelineacion.infoDeclara.totalUsos"  disabled="true"></sf:input>
+						maxlength="30" path="infObjetoDelineacion.infoDeclara.totalUsos"
+						disabled="true"></sf:input>
 				</div>
 			</div>
 		</div>
@@ -152,7 +155,7 @@
 			<div class="row areausosdos">
 				<div class="col-md-3">
 					<div class="form-group ">
-						<sf:select
+						<sf:select id="select"
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
 							items="${dataForm.catalogos.areaInter}"
 							referenceData="${dataForm.catalogos.areaInter}"
@@ -187,7 +190,8 @@
 			<div class="col-md-3">
 				<div class="form-group ">
 					<input id="inputareainter" class="new_alto form-control"
-						maxlength="30" value="Total" disabled="disabled" readonly="readonly"></input>
+						maxlength="30" value="Total" disabled="disabled"
+						readonly="readonly"></input>
 				</div>
 			</div>
 
@@ -195,7 +199,8 @@
 				<div class="form-group ">
 					<input id="inputareainter" class="newalto form-control"
 						maxlength="30"
-						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreai}" disabled="disabled" readonly="readonly"></input>
+						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreai}"
+						disabled="disabled" readonly="readonly"></input>
 				</div>
 			</div>
 		</div>
@@ -226,7 +231,7 @@
 	<c:forEach items="${dataForm.infObjetoDelineacion.areaProyecto}"
 		var="varAreaIntervenida" varStatus="loop">
 		<div class="row">
-			<div class=" arearquitec row" id="arearquitec"> 
+			<div class=" arearquitec row" id="arearquitec">
 				<div class="col-md-3">
 					<div class="form-group ">
 						<sf:select
@@ -271,7 +276,8 @@
 			<div class="col-md-2">
 				<div class="form-group ">
 					<input class="newalto form-control" maxlength="30"
-						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}" disabled="true"></input>
+						value="${dataForm.infObjetoDelineacion.infoDeclara.totalAreap}"
+						disabled="true"></input>
 				</div>
 			</div>
 		</div>
@@ -281,20 +287,34 @@
 
 <script>
 	function addinfoareuso() {
-
 		if ($(".areasusos").length < 10000) {
-			$($(".areasusos")[0]).parent()
-					.append($($(".areasusos")[0]).clone());
 
-			$($(".areasusos")[0]).parent().children().last().find(".select1")
-					.val("")
-			$($(".areasusos")[0]).parent().children().last().find(".select2")
-					.val("")
-			$($(".areasusos")[0]).parent().children().last().find(".input1")
-					.val("")
-			$($(".areasusos")[0]).parent().children().last().find(".input2")
-					.val("M2")
-		}else{
+			var tam = $(".areasusos").length;
+			var i = tam - 1;
+			$($(".areasusos")[i]).parent()
+					.append($($(".areasusos")[i]).clone()) //.find('select').val("00"));
+
+			for (var j = 0; j <= tam; j++) {
+				var arr = $(".areasusos");
+				if (j == tam) {
+					
+					$($(".areasusos")[j]).find('select').val("00");
+					var area = $($(".areasusos")[j]).find('select');
+					var nom = "infObjetoDelineacion.usos[" + tam + "].uso";
+					var nomid = "infObjetoDelineacion.usos" + tam + ".uso";
+					area.attr("name", nom);
+					area.attr("id", nomid);
+					
+					$($(".areasusos")[j]).find('input').val("");
+					var areainp = $($(".areasusos")[j]).find('input');
+					var nom2 = "infObjetoDelineacion.usos[" + tam + "].areaNeta";
+					var nomid2 = "infObjetoDelineacion.usos" + tam + ".areaNeta";
+					areainp.attr("name", nom2);
+					areainp.attr("id", nomid2);
+					
+				}
+			}
+		} else {
 			alert("No puede agregar más registros");
 		}
 
@@ -312,27 +332,42 @@
 	}
 
 	function addinfoareusotable2() {
-debugger;
-if ($(".arearquitec").length < 10000) {
-	$($(".arearquitec")[0]).parent()
-			.append($($(".arearquitec")[0]).clone());
 
-// 	$($(".areasusos")[0]).parent().children().last().find(".select1")
-// 			.val("")
-// 	$($(".areasusos")[0]).parent().children().last().find(".select2")
-// 			.val("")
-// 	$($(".areasusos")[0]).parent().children().last().find(".input1")
-// 			.val("")
-// 	$($(".areasusos")[0]).parent().children().last().find(".input2")
-// 			.val("M2")
-}else{
-	alert("No puede agregar más registros");
-}
+		var tam = $(".arearquitec").length;
+		var i = tam - 1;
+		if ($(".arearquitec").length < 10000) {
+			$($(".arearquitec")[i]).parent().append(
+					$($(".arearquitec")[i]).clone());
+
+			for (var j = 0; j <= tam; j++) {
+				var arr = $(".arearquitec");
+				if (j == tam) {
+					
+					$($(".arearquitec")[j]).find('select').val("00");
+					var area = $($(".arearquitec")[j]).find('select');
+					var nom = "infObjetoDelineacion.areaProyecto[" + tam + "].areaProy";
+					var nomid = "infObjetoDelineacion.areaProyecto" + tam + ".areaProy";
+					area.attr("name", nom);
+					area.attr("id", nomid);
+					
+					$($(".arearquitec")[j]).find('input').val("");
+					var areainp = $($(".arearquitec")[j]).find('input');
+					var nom2 = "infObjetoDelineacion.areaProyecto[" + tam + "].aream2";
+					var nomid2 = "infObjetoDelineacion.areaProyecto" + tam + ".aream2";
+					areainp.attr("name", nom2);
+					areainp.attr("id", nomid2);
+					
+				}
+			}
+
+		} else {
+			alert("No puede agregar más registros");
+		}
 
 	}
 
 	function deleinfoareusotable2() {
-		debugger;
+	
 		var i = $(".arearquitec").length;
 		var val = i - 1;
 		if ($(".arearquitec").length <= 10000 && $(".arearquitec").length > 1) {
@@ -347,15 +382,35 @@ if ($(".arearquitec").length < 10000) {
 	}
 
 	function addinfoareuso3() {
-
+	
+		var tam = $(".areausosdos").length;
+		var i = tam - 1;
 		if ($(".areausosdos").length < 10000) {
-			$($(".areausosdos")[0]).parent().append(
-					$($(".areausosdos")[0]).clone());
-			$($(".areausosdos")[0]).parent().children().last().find(".sel5")
-					.val("")
-			$($(".areausosdos")[0]).parent().children().last().find(".input5")
-					.val("")
-		}else{
+			$($(".areausosdos")[i]).parent().append(
+					$($(".areausosdos")[i]).clone());
+
+			for (var j = 0; j <= tam; j++) {
+				var arr = $(".areausosdos");
+				if (j == tam) {
+					
+					$($(".areausosdos")[j]).find('select').val("00");
+					var areau = $($(".areasusosdos")[j]).find('select');
+					var nom = "infObjetoDelineacion.areaIntervenida[" + tam + "].areaInter";
+					var nomid = "infObjetoDelineacion.areaIntervenida" + tam + ".areaInter";
+					$($(".areausosdos")[j]).find('select').attr("name", nom);
+					$($(".areausosdos")[j]).find('select').attr("id", nomid);
+
+					
+					$($(".areausosdos")[j]).find('input').val("");
+					var areainpu = $($(".areasusosdos")[j]).find('input');
+					var nom2 = "infObjetoDelineacion.areaIntervenida[" + tam + "].aream2";
+					var nomid2 = "infObjetoDelineacion.areaIntervenida" + tam + ".aream2";
+					$($(".areausosdos")[j]).find('input').attr("name", nom2);
+					$($(".areausosdos")[j]).find('input').attr("id", nomid2);
+
+				}
+			}
+		} else {
 			alert("No puede agregar más registros");
 		}
 
@@ -374,8 +429,4 @@ if ($(".arearquitec").length < 10000) {
 		}
 
 	}
-	
-	
-	
-	
 </script>
