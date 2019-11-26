@@ -207,10 +207,12 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationDetailedResponseBodyType response1 = pseServices.getTransactionInformationDetailed(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationDetailedBodyType);
 
+            LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+                    + pseTransactionsLogModel.getTransactionState() + " -> " + response.getTransactionState().getValue() + "] ");
+
 			this.updateResponse(pseTransactionsLogModel, response, response1);
 
-			LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
-					+ pseTransactionsLogModel.getTransactionState() + "] ");
+
 		}
 
 	}
@@ -258,7 +260,10 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			{
 				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
 			}
+
 			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+
+
 			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
 			if (map.get("paymentMode").equals("Débito en Cuenta"))
 			{
