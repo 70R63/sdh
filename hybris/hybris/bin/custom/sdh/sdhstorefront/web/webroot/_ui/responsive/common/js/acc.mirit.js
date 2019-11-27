@@ -504,7 +504,7 @@ ACC.mirit = {
              	            	{
          	        	        	$( "#dialog" ).dialog( "open" );
         	    	            	$("#ritDialogContent").html("");
-        	    	            	$("#ritDialogContent").html("Correo no disponible, por favor indique otro.");
+        	    	            	$("#ritDialogContent").html("Correo no disponible está siendo utilizado por otro usuario, introduzca otro");
              	            	}
              	            },
              	            error: function () {
@@ -815,7 +815,7 @@ ACC.mirit = {
          	            		}else
              	            	{
          	            			$("#newEmailErrors").removeClass("hidden");
-         	            			$("#newEmailErrors").html("Correo no disponible, por favor indique otro.");
+         	            			$("#newEmailErrors").html("Correo no disponible está siendo utilizado por otro usuario, introduzca otro");
          	        	        	$("#newEmail").parents(".form-group ").addClass("has-error");
          	        	        	hasErrors = true;
              	            	}
