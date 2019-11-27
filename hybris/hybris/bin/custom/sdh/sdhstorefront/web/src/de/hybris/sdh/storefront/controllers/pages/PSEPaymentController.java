@@ -289,7 +289,13 @@ public class PSEPaymentController extends AbstractPageController
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 				flagSuccessView = "X";
-			}else {	//Transaccion con error
+			}
+			else if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue())) //Transaccion pendiente
+			{
+				flagSuccessView = "X";
+			}
+			else
+			{ //Transaccion con error
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId)); //new PSEPaymentForm());
 				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 				flagReintetarPago = "X";
