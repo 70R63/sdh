@@ -585,6 +585,7 @@ ACC.ica = {
     
     
 	 validaAntesCalcular: function(){
+		 return true;
 		 var validacionValores = true;
 		 
 	 	 $.each($(".valor"),function(index,value){
