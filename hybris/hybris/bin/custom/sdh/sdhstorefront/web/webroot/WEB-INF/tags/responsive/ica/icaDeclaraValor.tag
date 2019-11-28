@@ -90,7 +90,7 @@
 			<div class="row valor" id="valor">
 				<div class="col-md-1" style="width: 10.5% !important">
 					<input class=" new_alto_anio form-control anio anoGravable "
-						type="date" value="${infoDeclara.anoGravable }" />
+						type="date" />
 				</div>
 				<div class="col-md-2">
 					<select id="" class="etiq_valor form-control tipoID"
@@ -111,19 +111,19 @@
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control numID" type="text"
-						value="${infoDeclara.numID }" />
+						/>
 				</div>
 				<div class="col-md-2">
 					<input class="new_alto form-control razonSocial" type="text"
-						value="${infoDeclara.razonSocial }" />
+						/>
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control direccion" type="text"
-						value="${infoDeclara.direccion }" />
+						 />
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control telefono" type="text"
-						value="${infoDeclara.telefono }" />
+						 />
 				</div>
 				<div class="col-md-1">
 					<select id="" class="form-control codMunicipio"
@@ -136,11 +136,11 @@
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control tarifaApl" type="text"
-						value="${infoDeclara.tarifaApl }" />
+						/>
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control montoRetenido" type="text"
-						value="${infoDeclara.montoRetenido }" />
+						 />
 				</div>
 				<div class="col-md-1" style="width: 5.9% !important">
 					<div class="form-group ">

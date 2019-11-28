@@ -573,7 +573,6 @@ public class IcaPageController extends SDHAbstractPageController
 			icaInfObjetoFormResp = new ICAInfObjetoForm();
 			//			Remapeo INICIO
 			icaInfObjetoResponse = new ICAInfObjetoResponse();
-			final List<ICAInfoValorRetenido> valorRetenido = new ArrayList<ICAInfoValorRetenido>();
 
 			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
@@ -583,8 +582,7 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setDevolDescuentos(calcula2ImpuestoResponse.getDevolDescuentos());
 			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
 
-			valorRetenido.add(calcula2ImpuestoResponse.getValorRetenido());
-			infoDeclara.setValorRetenido(valorRetenido);
+			infoDeclara.setValorRetenido(calcula2ImpuestoResponse.getValorRetenido());
 
 			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
