@@ -8,38 +8,19 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new_page">
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr class="avisoheadline p">
-						<td style="text-align: center"><spring:theme
-								code="predial.inicial.table.titulo" /></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="avisobody">
-
-						<td><spring:theme code="predial.inicial.table.descripcion" /></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+<div class="container">
 
 	<form:form>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.inicial.table.buscar" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
-						maxlength="240"></input>
+				<div class="headline">
+					<h2>
+						<span class="col-md-10 "><spring:theme
+								code="predial.inicial.liquidacion.titulo" /></span>
+					</h2>
 				</div>
 			</div>
 		</div>
-
 		<div class="row mt-3">
 			<div class="col-md-10 d-flex align-items-center">
 				<div class="table-responsive text-center">
@@ -47,13 +28,13 @@
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme
-											code="predial.inicial.table.chip" /></label></td>
+											code="predial.inicial.liquidacion.base" /></label></td>
 								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="predial.inicial.table.matinmo" /></label></td>
+											code="predial.inicial.liquidacion.destino" /></label></td>
 								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.dir" /></label></td>
+											code="predial.inicial.liquidacion.tarifa" /></label></td>
 								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.nocotrato" /></label></td>
+											code="predial.inicial.liquidacion.valor" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -70,16 +51,12 @@
 								<td><input id="" name="" class="inputtextnew tablefechas"
 									aria-required="true" type="text" readonly="readonly" value=""
 									maxlength="240"></td>
-								<td><label style="color: #0358d8 !important"
-									class="text-capitalize !important" onclick="mostrar()"><spring:theme
-											code="predial.inicial.table.ver" /></label></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-
 	</form:form>
 </div>
 

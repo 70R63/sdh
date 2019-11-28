@@ -8,38 +8,19 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container_new_page">
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr class="avisoheadline p">
-						<td style="text-align: center"><spring:theme
-								code="predial.inicial.table.titulo" /></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="avisobody">
-
-						<td><spring:theme code="predial.inicial.table.descripcion" /></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+<div class="container">
 
 	<form:form>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.inicial.table.buscar" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
-						maxlength="240"></input>
+				<div class="headline">
+					<h2>
+						<span class="col-md-10 "><spring:theme
+								code="predial.inicial.marcas.titulo" /></span>
+					</h2>
 				</div>
 			</div>
 		</div>
-
 		<div class="row mt-3">
 			<div class="col-md-10 d-flex align-items-center">
 				<div class="table-responsive text-center">
@@ -47,13 +28,15 @@
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme
-											code="predial.inicial.table.chip" /></label></td>
+											code="predial.inicial.marcas.marca" /></label></td>
 								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="predial.inicial.table.matinmo" /></label></td>
+											code="predial.inicial.marcas.tipmarca" /></label></td>
 								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.dir" /></label></td>
+											code="predial.inicial.marcas.pormarca" /></label></td>
 								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.nocotrato" /></label></td>
+											code="predial.inicial.marcas.valex" /></label></td>
+								<td><label class="control-label labeltabletd "><spring:theme
+											code="predial.inicial.marcas.conservacion" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -70,16 +53,35 @@
 								<td><input id="" name="" class="inputtextnew tablefechas"
 									aria-required="true" type="text" readonly="readonly" value=""
 									maxlength="240"></td>
-								<td><label style="color: #0358d8 !important"
-									class="text-capitalize !important" onclick="mostrar()"><spring:theme
-											code="predial.inicial.table.ver" /></label></td>
+								<td><input id="" name="" class="inputtextnew tablefechas"
+									aria-required="true" type="text" readonly="readonly" value=""
+									maxlength="240"></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+		<div class="col-md-12 centercol-md-8 text-center">
+			<button style="margin-top: 3px;" id="" class="btn btn-secondary btn-lg"
+				type="button">
+				<spring:theme code="predial.inicial.marcas.btnregresar" />
+			</button>
 
+			<button class="btn btn-primary btn-lg" type="submit" id="action"
+				name="pagar" value="pagar">
+				<spring:theme code="predial.inicial.marcas.btndescar" />
+			</button>
+			
+			
+			<button class="btn btn-primary btn-lg" type="submit" id="action"
+				name="pagar" value="pagar">
+				<spring:theme code="predial.inicial.marcas.generar" />
+			</button>
+
+		</div>
+		</div>
 	</form:form>
 </div>
 
