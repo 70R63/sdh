@@ -39,7 +39,22 @@ window.onload = function() {
 			}
 		}
 	}
+// 	var tipnot = document.getElementById('tipnota').val;
+// 	var tipnotshow1 = document.getElementById('notaCon');
+// 	var tipnotshow2 = document.getElementById('notaEmp');
+// 		if(tipnot == 'NIT'){
+// 			tipnotshow2.style.display = 'block';
+			
+// 		}else{
+// 			tipnotshow1.style.display = 'block';
+// 		}
+		
+	
+	
+	
 		$(".loader").fadeOut("slow");
+		
+		
 
 }
 	function goBack() {
