@@ -25,7 +25,28 @@
 				value='${dataForm.valCont.infoContrib.tipoDoc}' />
 			<c:set var="nombreCompleto"
 				value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
-
+<c:choose>
+<c:when test="${infoPreviaPSE.tipoDoc ne 'NIT'}">
+				<div class="row mt-3">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="control-label"><spring:theme
+									code="firmas.natural.nota" /></label>
+						</div>
+					</div>
+				</div>
+				</c:when>
+				<c:otherwise>
+				<div class="row mt-3">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="control-label"><spring:theme
+									code="firmas.natural.nota2" /></label>
+						</div>
+					</div>
+				</div>
+				</c:otherwise>
+				</c:choose>
 			<input disabled id="tipnota" name="tipnota"
 				class="new_alto form-control tipnota" disabled type="text"
 				value="${infoPreviaPSE.tipoDoc}" maxlength="240" style="display: none"></input>
