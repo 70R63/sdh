@@ -587,7 +587,7 @@ ACC.ica = {
 	 validaAntesCalcular: function(){
 		 var validacionValores = true;
 		 
-		 if(validacion_valorRetenido != null){
+		 if(ACC.ica.validacion_valorRetenido != null){
 		 	 $.each($(".valor"),function(index,value){
 			 		
 		 		 if(validacionValores != false){
