@@ -79,6 +79,19 @@
 			</div>
 		</div>
 		
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.taract" /></label> <input
+						id="taract" name="" class="newalto form-control taract"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.tarifaActual}" maxlength="30"
+						disabled="disabled">
+				</div>
+			</div>
+		</div>
+		
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -194,18 +207,7 @@
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.liq.taract" /></label> <input
-						id="taract" name="" class="newalto form-control taract"
-						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.tarifaActual}" maxlength="30"
-						disabled="disabled">
-				</div>
-			</div>
-		</div>
+		
 
 		<input type="hidden" value="${vehiculosFormDeclaracion.numBP}"
 			id="numBPcal" class="numBPcal" />

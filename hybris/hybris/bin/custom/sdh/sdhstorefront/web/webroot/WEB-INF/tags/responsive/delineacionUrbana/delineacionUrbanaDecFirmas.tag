@@ -14,16 +14,39 @@
 <div class="container">
 	<div class="row mt-3">
 		<div class="col-md-12 mt-3">
-		
+
 			<div class="col-md-12 headline">
 				<h2>
-					<span><spring:theme code="delineacion.declaracion.firma.titulo" /></span>
+					<span><spring:theme
+							code="delineacion.declaracion.firma.titulo" /></span>
 				</h2>
 			</div>
 			<c:set var="tipoDescripcionID"
 				value='${dataForm.valCont.infoContrib.tipoDoc}' />
 			<c:set var="nombreCompleto"
 				value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
+
+			<input disabled id="tipnota" name="tipnota"
+				class="new_alto form-control tipnota" disabled type="text"
+				value="${infoPreviaPSE.tipoDoc}" maxlength="240" style="display: none"></input>
+
+
+			<div id="notaCon" class="col-md-12 headline notaCon"
+				style="display: none">
+				<div class="form-group">
+					<label class="control-label"> <span><spring:theme
+								code="firmas.natural.nota" /></span>
+					</label>
+				</div>
+			</div>
+			<div id="notaEmp" class="col-md-12 headline notaEmp"
+				style="display: none">
+				<div class="form-group">
+					<label class="control-label"> <span><spring:theme
+								code="firmas.natural.nota2" /></span>
+					</label>
+				</div>
+			</div>
 
 			<%-- 			<form:form action=""> --%>
 			<div class="row margin-bottom-4" style="margin-top: 18px">
@@ -44,46 +67,48 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme code="" /></label> <input
-							disabled id="" name="" class="new_alto form-control" disabled type="text"
-							value="" maxlength="240" placeholder="Declarante" style="margin-top:4px">
+							disabled id="" name="" class="new_alto form-control" disabled
+							type="text" value="" maxlength="240" placeholder="Declarante"
+							style="margin-top: 4px">
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="delineacion.declaracion.firma.nombre" /></label> <input disabled id=""
-							name="" class="new_alto form-control" disabled type="text" value="${nombreCompleto}"
-							maxlength="240"></input>
+								code="delineacion.declaracion.firma.nombre" /></label> <input disabled
+							id="" name="" class="new_alto form-control" disabled type="text"
+							value="${nombreCompleto}" maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="delineacion.declaracion.firma.tipoiden" /></label> <input disabled id=""
-							name="" class="new_alto form-control" disabled type="text" value="${tipoDescripcionID}"
-							maxlength="240"></input>
+								code="delineacion.declaracion.firma.tipoiden" /></label> <input
+							disabled id="" name="" class="new_alto form-control" disabled
+							type="text" value="${tipoDescripcionID}" maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="delineacion.declaracion.firma.numide" /></label> <input disabled id=""
-							name="" class="new_alto form-control" disabled type="text" value="${dataForm.valCont.infoContrib.numDoc}"
-							maxlength="240"></input>
+								code="delineacion.declaracion.firma.numide" /></label> <input disabled
+							id="" name="" class="new_alto form-control" disabled type="text"
+							value="${dataForm.valCont.infoContrib.numDoc}" maxlength="240"></input>
 					</div>
 				</div>
 
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="delineacion.declaracion.firma.numtarjeta" /></label> <input disabled
-							id="" name="" class="new_alto form-control" disabled type="text" value=""
-							maxlength="240"></input>
+								code="delineacion.declaracion.firma.numtarjeta" /></label> <input
+							disabled id="" name="" class="new_alto form-control" disabled
+							type="text" value="" maxlength="240"></input>
 					</div>
 				</div>
 				<div class="col-md-1">
 					<label class="control-label"><spring:theme code="" /></label>
-					<button class="btn btn-primary" id="btnfirmardeclarante" style="margin-top:4px">Firmar</button>
+					<button class="btn btn-primary" id="btnfirmardeclarante"
+						style="margin-top: 4px">Firmar</button>
 				</div>
 			</div>
 		</div>
@@ -109,33 +134,33 @@
 		<div class="col-md-2">
 			<div class=" form-group">
 				<label class="control-label " style="margin-top: 20px"><spring:theme
-						code="delineacion.declaracion.firma.nombre" /></label> <select  id="selcnombre"
-					name="" class="new_alto form-control"><option>Seleccionar</option></select>
+						code="delineacion.declaracion.firma.nombre" /></label> <select
+					id="selcnombre" name="" class="new_alto form-control"><option>Seleccionar</option></select>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label textocentrado" style="margin-top: 20px"><spring:theme
-						code="delineacion.declaracion.firma.tipoiden" /></label> <input disabled id=""
-					name="" class="new_alto form-control" disabled type="text" value=""
-					maxlength="240"></input>
+						code="delineacion.declaracion.firma.tipoiden" /></label> <input disabled
+					id="" name="" class="new_alto form-control" disabled type="text"
+					value="" maxlength="240"></input>
 			</div>
 		</div>
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="delineacion.declaracion.firma.numide" /></label> <input disabled id=""
-					name="" class="new_alto form-control" disabled type="text" value=""
-					maxlength="240"></input>
+						code="delineacion.declaracion.firma.numide" /></label> <input disabled
+					id="" name="" class="new_alto form-control" disabled type="text"
+					value="" maxlength="240"></input>
 			</div>
 		</div>
 
 		<div class="col-md-2">
 			<div class="form-group">
 				<label class="control-label" style="margin-top: 20px"><spring:theme
-						code="delineacion.declaracion.firma.numtarjeta" /></label> <input disabled id=""
-					name="" class="new_alto form-control" disabled type="text" value=""
-					maxlength="240"></input>
+						code="delineacion.declaracion.firma.numtarjeta" /></label> <input
+					disabled id="" name="" class="new_alto form-control" disabled
+					type="text" value="" maxlength="240"></input>
 			</div>
 		</div>
 
@@ -198,8 +223,8 @@
 			<sf:hidden path="anticipo" />
 
 			<div class="col-md-3">
-				<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit" id="action"
-					name="pagar" value="pagar" disabled="true">
+				<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit"
+					id="action" name="pagar" value="pagar" disabled="true">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 				</sf:button>
 			</div>
@@ -216,6 +241,7 @@
 function goBack4() {
   window.history.back();
 }
+
 
 function habradio() {
 	debugger;
