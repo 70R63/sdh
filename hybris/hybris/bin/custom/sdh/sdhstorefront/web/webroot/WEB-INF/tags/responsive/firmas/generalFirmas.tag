@@ -139,6 +139,8 @@
 
 			<c:otherwise>
 				<!-- <div>aqui2inicio</div> -->
+				<c:choose>
+		<c:when test="${contribuyente.documentType ne 'NIT'}">
 				<div class="row mt-3">
 					<div class="col-md-12">
 						<div class="form-group">
@@ -147,6 +149,18 @@
 						</div>
 					</div>
 				</div>
+				</c:when>
+				<c:otherwise>
+				<div class="row mt-3">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label class="control-label"><spring:theme
+									code="firmas.natural.nota2" /></label>
+						</div>
+					</div>
+				</div>
+				</c:otherwise>
+				</c:choose>
 				<c:forEach items="${firmantes}" var="eachFirmante">
 
 					<c:if test="${!empty eachFirmante.tipoIdent}">
