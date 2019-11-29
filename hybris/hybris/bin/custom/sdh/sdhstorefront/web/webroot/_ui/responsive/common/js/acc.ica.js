@@ -1,5 +1,5 @@
 ACC.ica = {
-
+		validacion_valorRetenido:{},
 	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones", "bindCalendarICA"],
 	 
 	 bindDeleteDeducciones: function(){
@@ -587,26 +587,28 @@ ACC.ica = {
 	 validaAntesCalcular: function(){
 		 var validacionValores = true;
 		 
-	 	 $.each($(".valor"),function(index,value){
-		 		
-	 		 if(validacionValores != false){
-		 		var anoGravable=$.trim($(value).find(".anoGravable").val());
-		 		var tipoID=$.trim($(value).find(".tipoID").val());
-		 		var numID=$.trim($(value).find(".numID").val());
-		 		var razonSocial=$.trim($(value).find(".razonSocial").val());
-		 		var codMunicipio=$.trim($(value).find(".codMunicipio").val());
-		 		var direccion=$.trim($(value).find(".direccion").val());
-		 		var telefono=$.trim($(value).find(".telefono").val());
-		 		var tarifaApl=$.trim($(value).find(".tarifaApl").val());
-		 		var montoRetenido=$.trim($(value).find(".montoRetenido").val());
-
-    	        	if(anoGravable == "" || tipoID == "" || numID == "" || razonSocial == "" || direccion == "" || telefono == "" || codMunicipio == "" || tarifaApl == "" || montoRetenido == "")
-    	        	{
-    	        		validacionValores = false;
-    	        	}
-	 		 }
-    	        	
-    	 });
+		 if(ACC.ica.validacion_valorRetenido != null){
+		 	 $.each($(".valor"),function(index,value){
+			 		
+		 		 if(validacionValores != false){
+			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
+			 		var tipoID=$.trim($(value).find(".tipoID").val());
+			 		var numID=$.trim($(value).find(".numID").val());
+			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
+			 		var codMunicipio=$.trim($(value).find(".codMunicipio").val());
+			 		var direccion=$.trim($(value).find(".direccion").val());
+			 		var telefono=$.trim($(value).find(".telefono").val());
+			 		var tarifaApl=$.trim($(value).find(".tarifaApl").val());
+			 		var montoRetenido=$.trim($(value).find(".montoRetenido").val());
+	
+	    	        	if(anoGravable == "" || tipoID == "" || numID == "" || razonSocial == "" || direccion == "" || telefono == "" || codMunicipio == "" || tarifaApl == "" || montoRetenido == "")
+	    	        	{
+	    	        		validacionValores = false;
+	    	        	}
+		 		 }
+	    	        	
+	    	 });
+		 }
 		
 	 	 return validacionValores;
 	 }
