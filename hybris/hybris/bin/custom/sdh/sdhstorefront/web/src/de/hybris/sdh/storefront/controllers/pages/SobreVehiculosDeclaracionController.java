@@ -144,6 +144,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData, null);
+		super.addFirmantes_impuesto(model, null, customerData);
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(numBPP);
 		final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
