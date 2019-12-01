@@ -313,20 +313,7 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				pseTransactionsLogModel.setPaymentOrigin("");
 			}
 
-
-			final String[] a_reference2 = map.get("reference2").split("-", 2);
-
-			final int i_guiones = 14 - (a_reference2[0].length() + a_reference2[1].length());
-
-			String s_guiones = new String();
-			for (int i = 1; i <= i_guiones; i++)
-			{
-				s_guiones = s_guiones + "-";
-			}
-
-			final String s_reference2 = a_reference2[0] + s_guiones + a_reference2[1];
-
-			pseTransactionsLogModel.setObjPago(map.get(s_reference2));
+			pseTransactionsLogModel.setObjPago(map.get("reference2"));
 
 			transactionState = response.getTransactionState().getValue();
 
