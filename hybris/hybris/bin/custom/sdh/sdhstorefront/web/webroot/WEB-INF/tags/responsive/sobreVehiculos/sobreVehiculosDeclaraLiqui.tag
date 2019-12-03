@@ -18,7 +18,25 @@
 			</h2>
 		</div>
 	</div>
-
+	
+	<div class="row mt-3">
+			<div class="col-md-3">
+				<div class="form-check">
+					<label class="form-check-label"
+						style="text-transform: none !important; font-weight: normal !important"><spring:theme
+							code="Declaración en banco" /> </label> <label
+						class="form-check-label"
+						style="text-transform: capitalize !important; font-weight: normal !important">
+						<input type="checkbox" name="avaluocheck" id=""
+						class="form-check-input mr-2"
+						style="visibility: visible !important; min-height: 4px !important;"
+						value="avaluo" onclick="habavaluo()"> 
+					</label> 
+				</div>
+			</div>
+			</div>
+			
+<c:set var="avaluoChecked" value=""></c:set>
 	<c:set var="noChecked" value="" />
 	<c:set var="yesChecked" value="" />
 <%-- 	<c:choose> --%>
@@ -271,5 +289,18 @@
 		proyec.disabled = true;
 		proyec.value = "00";
 	}
+	
+	function habavaluo() {
+		debugger;
+		var avaluo = document.getElementById('avaluoAct');
+		
+		if(avaluo.disabled == false){
+			avaluo.disabled = true;
+		}else{
+		avaluo.disabled = false;
+		}
+
+	}
+	
 </script>
 
