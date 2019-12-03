@@ -567,7 +567,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 			if (optionVehicular != "")
 			{
-				map.put("2", "Sobre Vehiculos Automotores");
+				map.put("2", "Impuestos de Vehículos");
 			}
 
 			if (optionIca != "")
