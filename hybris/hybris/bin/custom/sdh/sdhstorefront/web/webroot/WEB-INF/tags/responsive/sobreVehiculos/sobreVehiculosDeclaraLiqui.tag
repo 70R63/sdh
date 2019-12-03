@@ -24,7 +24,7 @@
 				<div class="form-check">
 					<label class="form-check-label"
 						style="text-transform: none !important; font-weight: normal !important"><spring:theme
-							code="Declaración en banco" /> </label> <label
+							code="Declaración en blanco" /> </label> <label
 						class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
 						<input type="checkbox" name="avaluocheck" id=""
