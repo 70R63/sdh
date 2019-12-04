@@ -137,7 +137,7 @@
 			<div class="form-group ">
 				<label class="control-label "><spring:theme
 						code="delineacion.urbana.dec.generales.cauexen" /></label>
-				<sf:input id="cauexen" class="newalto_dir form-control" readonly="true"
+				<sf:input id="cauexen" class="newalto_dir form-control cauexen" readonly="true"
 					aria-required="true" maxlength="240"
 					path="infObjetoDelineacion.infoDeclara.causalExcepDESCRIPCION" />
 				<%-- 				<sf:select class="form-control" onchange="costoshabil(this)" path="infObjetoDelineacion.infoDeclara.causalExcep" --%>

@@ -48,7 +48,16 @@ window.onload = function() {
 // 		}else{
 // 			tipnotshow1.style.display = 'block';
 // 		}
-		
+debugger;
+		var valexe = document.getElementById('valorExen');
+		var causex = document.getElementById('cauexen').value;
+		if (causex != '00' || valex != null)
+			{
+			 valexe.disable = false;
+			}
+		else{
+			 valexe.disable = true;
+		}
 	
 	
 	
