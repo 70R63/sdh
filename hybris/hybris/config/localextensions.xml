@@ -25,9 +25,9 @@
 <!--     <extension name='assistedserviceatddtests' /> -->
 <!--     <extension name='smarteditaddon' /> -->
 <!--     <extension name='smarteditwebservices' /> -->
-<!--     <extension name='cmssmartedit' /> -->
+    <extension name='cmssmartedit' />
     <extension name='cmswebservices' />
-<!--     <extension name='cmssmarteditwebservices' /> -->
+    <extension name='cmssmarteditwebservices' />
     <extension name='npmtestancillary' />
     <extension name='previewwebservices' />
     <extension name='permissionswebservices' />
