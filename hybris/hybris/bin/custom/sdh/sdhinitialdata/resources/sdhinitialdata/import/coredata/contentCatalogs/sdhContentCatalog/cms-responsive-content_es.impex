@@ -10,7 +10,7 @@ $lang=es
 
 # Content Pages
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];keywords[lang=$lang];description[lang=$lang]
- ;;account;"Mi cuenta";"Cuenta";"Mi cuenta"
+ #;;account;"Mi cuenta";"Cuenta";"Mi cuenta"
  ;;add-edit-address;"Añadir/Tratar dirección";"Añadir/Tratar dirección";"Añadir/Tratar dirección"
  ;;address-book;"Libreta de direcciones";"Libreta de direcciones";"Libreta de direcciones"
  ;;checkout-login;"Efectuar check out";"Inicio sesión check out";"Efectuar check out"
@@ -35,7 +35,7 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];ke
  ;;retrieve-draft;"Recuperar borrador";"Recuperar borrador";"Recuperar borrador"
  ;;update-email;"Actualizar dirección de correo electrónico";"Actualizar correo electrónico";"Actualizar dirección de correo electrónico"
  ;;update-profile;"Actualizar detalles personales";"Actualizar perfil";"Actualizar detalles personales"
- ;;dashboardPage;"Mi cuenta";"Página de dashboard";"Mi cuenta"
+ #;;dashboardPage;"Mi cuenta";"Página de dashboard";"Mi cuenta"
  ;;my-assets;"Activos fijos";"Mis activos fijos";"Mis activos fijos"
  ;;asset-detail;"Detalles de activos fijos";"Detalle de activo fijo";"Detalles de activos fijos"
  ;;register;"Registro"
@@ -48,10 +48,10 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang];ke
  ;;PredialUnificadoCorrecionesPage;"Predial Unificado Correcciones"
  ;;PredialUnificadoDeclaracionesPage;"Predial Unificado Declaraciones Page"
  ;;PredialUnificadoPagosPSEPage;"Predial Unificado - Pagos"
- ;;SobreVehiculosAutomotoresPage;"Sobre Vehiculos Automotores"
+ ;;SobreVehiculosAutomotoresPage;"Impuestos de Vehículos"
  ;;IcaReteIcaPage;"Ica ReteIca"
  ;;DelineacionUrbanaPagosPSEPage;"Delineación Urbana - Pagos"
- ;;SobretasaGasolinaPage;"Sobretasa a la Gasolina Motor"
+ ;;SobretasaGasolinaPage;"Sobretasa a la Gasolina"
  ;;ActivateAccountPage;"Activar Cuenta"
  ;;PublicidadExteriorPage;"Publicidad Exterior"
   ;;ConciliacionesPage;"Conciliaciones"

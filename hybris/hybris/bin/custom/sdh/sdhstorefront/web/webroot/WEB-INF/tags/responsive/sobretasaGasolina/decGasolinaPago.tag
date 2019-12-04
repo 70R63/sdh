@@ -48,7 +48,7 @@
 	</div>
 
 	<br>
-	<div class="col-md-12">
+	<div class="col-md-10 col-md-offset-3">
 		<div class="table-responsive">
 			<div class="form-group">
 				<span tabindex="0"><spring:theme

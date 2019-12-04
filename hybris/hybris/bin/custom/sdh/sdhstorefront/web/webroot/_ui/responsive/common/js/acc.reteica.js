@@ -361,8 +361,9 @@ ACC.reteica = {
 			 
 			 var taxNumber = "04";
 			 var fileName = $("#retencionesFile").prop('files')[0].name;
+			 var numIDesperado = ACC.reteica.formarNumIDEsperado();
 			 
-			 if(fileName.length-4 != 21 || fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != ACC.customerNIT)
+			 if(fileName.length-4 != 21 || fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != numIDesperado)
 			 {
 				 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");
@@ -420,6 +421,26 @@ ACC.reteica = {
 			 
 			
 		 
+	 },
+	 
+	 
+	 
+	 formarNumIDEsperado: function(){
+		var numIDformado = null;
+		var longitudEsperada = 11;
+		var numID = ACC.customerNIT.toString();
+		
+		if(numID.length == longitudEsperada ){
+			numIDformado = ACC.customerNIT;
+		}else if(numID.length < longitudEsperada){
+			do {
+				numID = "0" + numID;
+			}
+		while (numID.length < longitudEsperada);
+			numIDformado = numID;
+		}
+		 
+		return numIDformado;
 	 },
 	 
 	 

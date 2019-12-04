@@ -3,7 +3,20 @@ package de.hybris.sdh.core.soap.pse.impl;
 import de.hybris.sdh.core.soap.pse.MainServices;
 import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
-import de.hybris.sdh.core.soap.pse.eanucc.*;
+import de.hybris.sdh.core.soap.pse.eanucc.ConfirmTransactionPaymentInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.ConfirmTransactionPaymentResponseInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.ConfirmTransactionPaymentTransactionStateCodeList;
+import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.FinalizeTransactionPaymentInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.FinalizeTransactionPaymentResponseInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetbankListInformationType;
+import de.hybris.sdh.core.soap.pse.eanucc.UserTypeListType;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -78,9 +91,46 @@ public class DefaultPseServices implements PseServices
 			cli = getMainServices();
 			cli.setMessageHeader(messageHeader);
 
+			if (constantConnectionDataInt.getServiceCode().equals("5101"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Predial");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5102"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("ICA");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5103"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Vehicular");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5106"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Delineacion");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5131"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Retencion ICA");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5132"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Retencion De Delineacion Urbana");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5154"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Publicidad");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("0108"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Gasolina");
+			}
+
+
+
 			createTransactionPaymentInformationType.setEntityCode(constantConnectionDataInt.getPpeCode());
 			createTransactionPaymentInformationType.setFinancialInstitutionCode(constantConnectionDataInt.getBankCode());
-			createTransactionPaymentInformationType.setServiceCode(constantConnectionDataInt.getServiceCode());
+			final String serviceCode = constantConnectionDataInt.getBankCode().substring(2, 4)
+					+ constantConnectionDataInt.getServiceCode().substring(2, 4);
+			createTransactionPaymentInformationType.setServiceCode(serviceCode);
 			createTransactionPaymentInformationType.setEntityurl(constantConnectionDataInt.getEntityUrl());
 			createTransactionPaymentInformationType.setSoliciteDate(date);
 			createTransactionPaymentInformationType.setUserType(UserTypeListType._value1);
@@ -170,9 +220,9 @@ public class DefaultPseServices implements PseServices
 	}
 
 	@Override
-	public GetTransactionInformationDetailedResponseBodyType getTransactionInformationDetailed(ConstantConnectionData constantConnectionData,
-																					   MessageHeader messageHeader,
-																					   GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType) {
+	public GetTransactionInformationDetailedResponseBodyType getTransactionInformationDetailed(final ConstantConnectionData constantConnectionData,
+																					   final MessageHeader messageHeader,
+																					   final GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType) {
 
 		constantConnectionDataInt = constantConnectionData;
 		MainServicesSoapStub cli = null;

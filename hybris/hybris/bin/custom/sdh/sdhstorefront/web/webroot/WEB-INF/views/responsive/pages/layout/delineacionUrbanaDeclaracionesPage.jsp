@@ -39,7 +39,31 @@ window.onload = function() {
 			}
 		}
 	}
+// 	var tipnot = document.getElementById('tipnota').val;
+// 	var tipnotshow1 = document.getElementById('notaCon');
+// 	var tipnotshow2 = document.getElementById('notaEmp');
+// 		if(tipnot == 'NIT'){
+// 			tipnotshow2.style.display = 'block';
+			
+// 		}else{
+// 			tipnotshow1.style.display = 'block';
+// 		}
+debugger;
+		var valexe = document.getElementById('valorExen');
+		var causex = document.getElementById('cauexen').value;
+		if (causex != '00' || valex != null)
+			{
+			 valexe.disable = false;
+			}
+		else{
+			 valexe.disable = true;
+		}
+	
+	
+	
 		$(".loader").fadeOut("slow");
+		
+		
 
 }
 	function goBack() {

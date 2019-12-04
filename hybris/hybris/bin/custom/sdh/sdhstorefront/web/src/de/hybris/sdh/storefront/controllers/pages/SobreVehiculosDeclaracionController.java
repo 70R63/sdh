@@ -79,7 +79,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 	private static final Logger LOG = Logger.getLogger(SobreVehiculosDeclaracionController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String DECLARACION_VEHICULOS_PROFILE = "Sobre Vehículos Declaración";
+	private static final String DECLARACION_VEHICULOS_PROFILE = "Impuestos de vehículos Declaración";
 	private static final String DECLARACION_MOTOS_PROFILE = "Sobre Vehículos Declaración Motos";
 
 	// CMS Pages
@@ -144,6 +144,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData, null);
+		super.addFirmantes_impuesto(model, null, customerData);
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(numBPP);
 		final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();

@@ -45,7 +45,7 @@ public class CalcICA2Response
 	private String checkAporte;
 
 	private List<ICAInfoIngFueraBog> ingFueraBog;
-	private ICAInfoValorRetenido valorRetenido;
+	private List<ICAInfoValorRetenido> valorRetenido;
 	private List<ICAInfoIngNetosGrava> ingNetosGrava;
 	private List<ICAInfoIngPorCiiu> ingPorCIIU;
 	private List<FirmanteResponse> firmantes;
@@ -533,7 +533,7 @@ public class CalcICA2Response
 	/**
 	 * @return the valorRetenido
 	 */
-	public ICAInfoValorRetenido getValorRetenido()
+	public List<ICAInfoValorRetenido> getValorRetenido()
 	{
 		return valorRetenido;
 	}
@@ -542,7 +542,7 @@ public class CalcICA2Response
 	 * @param valorRetenido
 	 *           the valorRetenido to set
 	 */
-	public void setValorRetenido(final ICAInfoValorRetenido valorRetenido)
+	public void setValorRetenido(final List<ICAInfoValorRetenido> valorRetenido)
 	{
 		this.valorRetenido = valorRetenido;
 	}

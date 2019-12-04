@@ -289,7 +289,13 @@ public class PSEPaymentController extends AbstractPageController
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 				flagSuccessView = "X";
-			}else {	//Transaccion con error
+			}
+			else if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue())) //Transaccion pendiente
+			{
+				flagSuccessView = "X";
+			}
+			else
+			{ //Transaccion con error
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId)); //new PSEPaymentForm());
 				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 				flagReintetarPago = "X";
@@ -667,9 +673,20 @@ public class PSEPaymentController extends AbstractPageController
 		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
-		createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
-				new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()).toString(),
-				psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), ""));
+
+
+		final int i_ceros = 14 - (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());
+
+		String s_ceros = new String();
+		for (int i = 1; i <= i_ceros; i++)
+		{
+			s_ceros = s_ceros + "0";
+		}
+
+		final String s_reference2 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+
+		createTransactionPaymentInformationType.setReferenceNumber(
+				this.getReferences(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()).toString(), s_reference2, ""));
 		//createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
 		//		psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), "ACH Host Copy Rights", "NonRed#1"));
 

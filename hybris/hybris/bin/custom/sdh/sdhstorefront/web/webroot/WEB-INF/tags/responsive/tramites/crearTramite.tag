@@ -72,7 +72,10 @@
 							style="min-height: 220px; max-height: 600px; min-width: 100%; max-width: 100%;" maxlength="1000"></textarea>
 						<small class="form-text text-muted"
 							style="text-align: right !important"><spring:theme
-								code="tramites.crear.inicial.nota" /></small>
+								code="tramites.crear.inicial.nota" /></small><br>
+								<small class="form-text text-muted"
+							style="text-align: right !important"><spring:theme
+								code="tramites.crear.inicial.nota2" /></small>
 					</div>
 				</div>
 			</div>

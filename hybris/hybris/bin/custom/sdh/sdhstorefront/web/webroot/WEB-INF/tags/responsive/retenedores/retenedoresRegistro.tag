@@ -41,7 +41,8 @@
 											code="reteica.declaracion.table.tipodoc" /></label></td>
 								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
 											code="reteica.declaracion.table.numdoc" /></label></td>
-								<td><label class="control-label labeltabletd tablenombre" style="width: 18%"><spring:theme
+								<td><label class="control-label labeltabletd tablenombre"
+									style="width: 18%"><spring:theme
 											code="reteica.declaracion.table.nombre" /></label></td>
 							</tr>
 						</thead>
@@ -61,13 +62,22 @@
 			</div>
 		</div>
 		<div class="container">
+			<div class="row mt-3">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="reteica.inicial.carga.nota" /></label>
+					</div>
+				</div>
+			</div>
 
 			<div class="row mt-3">
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="reteica.inicial.carga.anio" /></label> <select id="reteICAAnoGravable"
-							name="reteICAAnoGravable" class="newalto form-control">
+								code="reteica.inicial.carga.anio" /></label> <select
+							id="reteICAAnoGravable" name="reteICAAnoGravable"
+							class="newalto form-control">
 							<option value="">Seleccionar</option>
 							<c:forEach items="${ years}" var="eachYear">
 								<option value="${ eachYear}">${eachYear }</option>
@@ -78,14 +88,15 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label class="control-label"><spring:theme
-								code="reteica.inicial.carga.periodo" /></label> <select id="reteICAPeriodo"
-							name="reteICAPeriodo" class="new_alto form-control">
+								code="reteica.inicial.carga.periodo" /></label> <select
+							id="reteICAPeriodo" name="reteICAPeriodo"
+							class="new_alto form-control">
 							<option value="">Seleccionar</option>
-<%-- 							<c:forEach items="${ perdiods}" var="eachPeriod"> --%>
-<%-- 								<option value="${ eachPeriod}"><spring:theme --%>
-<%-- 										code="reteica.registro.period.${eachPeriod}" /> --%>
-<!-- 								</option> -->
-<%-- 							</c:forEach> --%>
+							<%-- 							<c:forEach items="${ perdiods}" var="eachPeriod"> --%>
+							<%-- 								<option value="${ eachPeriod}"><spring:theme --%>
+							<%-- 										code="reteica.registro.period.${eachPeriod}" /> --%>
+							<!-- 								</option> -->
+							<%-- 							</c:forEach> --%>
 						</select>
 					</div>
 				</div>
