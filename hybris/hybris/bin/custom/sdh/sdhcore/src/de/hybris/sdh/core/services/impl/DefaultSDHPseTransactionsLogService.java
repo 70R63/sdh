@@ -323,9 +323,10 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			//	pseTransactionsLogModel.setTransactionState("OK");
 			//}
 
-			LOG.info("Updated PseTransactionsLogModel [" + pseTransactionsLogModel.getNumeroDeReferencia() + ","
-					+ response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", "
-					+ pseTransactionsLogModel.getTransactionState() + "]");
+			LOG.info("Updated PseTransactionsLogModel [ " + pseTransactionsLogModel.getNumeroDeReferencia() + ", "
+					+ pseTransactionsLogModel.getPaymentMode() + ", " + pseTransactionsLogModel.getPaymentOrigin() + ", "
+					+ pseTransactionsLogModel.getObjPago() + pseTransactionsLogModel.getSoliciteDate() + ", "
+					+ pseTransactionsLogModel.getBankProcessDate() + ", " + pseTransactionsLogModel.getTransactionState() + " ]");
 
 			modelService.saveAll(pseTransactionsLogModel);
 		}
