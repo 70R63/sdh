@@ -10,7 +10,7 @@
     <extension name='sdhinitialdata' />
     <extension name='sdhpsaddon' />
     <extension name='sdhpse' />
-    <extension name='sdhbackoffice' />
+     <extension name='sdhbackoffice' />
 <!--     <extension name='sdhtest' /> -->
 <!--     <extension name='sdhcockpits' /> -->
     <extension name='ycommercewebservices' />

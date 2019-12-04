@@ -1,7 +1,5 @@
 package de.hybris.sdh.storefront.controllers.rest;
 
-import de.hybris.sdh.core.enums.SdhPaymentMethodTypeEnum;
-import de.hybris.sdh.core.enums.SdhTaxTypesEnum;
 import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData;
 import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -19,6 +19,11 @@
 !/hybris/hybris/config
 /hybris/hybris/config/*
 
+!/hybris/hybris/config-dev
+!/hybris/hybris/config-local
+!/hybris/hybris/config-prd
+!/hybris/hybris/config-stg
+
 !/hybris/hybris/bin/ext-publicsector
 /hybris/hybris/bin/ext-publicsector/*
 
