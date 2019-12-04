@@ -184,6 +184,8 @@
 			<c:if test="${hasRIRol and fn:contains(currentURL, 'reportantes')}">
 			</c:if>
 			
+			debugger;
+			
 			<c:choose>
 				<c:when test="${not empty reteIcaMaxFileSize}">
 					ACC.reteIcaMaxFileSize = ${reteIcaMaxFileSize};

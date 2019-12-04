@@ -6,7 +6,7 @@ ACC.reteica = {
 		
 		 $(document).on("click", ".reteICARecargar", function (e) {
 	 	        e.preventDefault();
-	 	        
+	 	      debugger;    
 	 	      var estado = $(this).attr("data-estado");
 	 	      if(estado=="02")
  	    	  {
@@ -32,7 +32,7 @@ ACC.reteica = {
 	 bindGeneraDeclaracionReteICAButton: function () {
 		 $(document).on("click", "#generaDeclaracionReteICAButton", function (e) {
 	 	        e.preventDefault();
-	 	        
+	 	       debugger; 
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
 	 	       var data = {};
@@ -76,7 +76,7 @@ ACC.reteica = {
 	 bindActualizarButton: function(){
 		 $(document).on("click", "#actualizarButton", function (e) {
 			 e.preventDefault();
-			 
+			 debugger;
 			 var valorPagar =  $.trim( $("#valorPagar").val());
 			 
 			 if(valorPagar == "")
@@ -167,7 +167,7 @@ ACC.reteica = {
 		
 		 $(document).on("click", "#downloadTemplateButton", function (e) {
 			 e.preventDefault();
-			 
+			 debugger;
 			 $("#reteICADownloadHelper").attr("href",ACC.reteICADownloadTemplate);
 			 document.getElementById("reteICADownloadHelper").download = "Ayuda Rete ICA -Hybris.xlsm";
 			 document.getElementById("reteICADownloadHelper").click();
@@ -180,7 +180,7 @@ ACC.reteica = {
 	 bindReteICAEDOAnoGravable: function(){
 	    	
 	    	$( document ).on("change","#reteICAEDOAnoGravable",function(e) {
-	    		
+	    		debugger;
 	    		var anoGravable =  $.trim( $("#reteICAEDOAnoGravable").val());
 	    		
 	    		if(anoGravable != "")
@@ -194,9 +194,10 @@ ACC.reteica = {
 	    	},
 	    	
 	    	bindReteICAAnoGravable: function(){
+				
 	 	    	
 	 	    	$( document ).on("change","#reteICAAnoGravable",function(e) {
-	 	    		
+	 	    		debugger;
 	 	    		var anoGravable =  $.trim( $("#reteICAAnoGravable").val());
 	 	    		
 	 	    		var currentYear = new Date().getFullYear()
@@ -325,6 +326,8 @@ ACC.reteica = {
 		 $(document).on("click", "#bindCargarButton", function (e) {
 			 e.preventDefault();
 			 
+			 debugger;
+			 
 			 var formData = new FormData();
 			 
 			 var anoGravable = $.trim( $("#reteICAAnoGravable").val());
@@ -361,8 +364,9 @@ ACC.reteica = {
 			 
 			 var taxNumber = "04";
 			 var fileName = $("#retencionesFile").prop('files')[0].name;
+			 var numIDesperado = ACC.reteica.formarNumIDEsperado();
 			 
-			 if(fileName.length-4 != 21 || fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != ACC.customerNIT)
+			 if(fileName.length-4 != 21 || fileName.substring(0,2) != taxNumber || fileName.substring(2,6) != anoGravable || fileName.substring(6,8) != periodo || fileName.substring(8,19)  != numIDesperado)
 			 {
 				 $( "#dialogReteICA" ).dialog( "open" );
 	     	 		$("#reteICADialogContent").html("");
@@ -423,8 +427,30 @@ ACC.reteica = {
 	 },
 	 
 	 
-	 uploadFile: function(){
+	 
+	 formarNumIDEsperado: function(){
+		debugger;
+		var customerNIT = $.trim( $("#customerNIT").val());
+		var numIDformado = null;
+		var longitudEsperada = 11;
+		var numID = customerNIT;
+		
+		if(numID.length == longitudEsperada ){
+			numIDformado = customerNIT;
+		}else if(numID.length < longitudEsperada){
+			do {
+				numID = "0" + numID;
+			}
+		while (numID.length < longitudEsperada);
+			numIDformado = numID;
+		}
 		 
+		return numIDformado;
+	 },
+	 
+	 
+	 uploadFile: function(){
+		 debugger;
 		 var formData = new FormData();
 		 
 		 var anoGravable = $.trim( $("#reteICAAnoGravable").val());
@@ -444,7 +470,7 @@ ACC.reteica = {
 	            contentType: false,
 	            processData: false ,
 	            success: function (data) {
-	            	
+	            	debugger;
 	            	if(!data.errores)
 	            	{
 		            	$( "#dialogReteICA" ).dialog( "open" );

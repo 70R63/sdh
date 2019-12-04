@@ -9,6 +9,8 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
+	<input id="customerNIT" name="customerNIT" type="hidden" value="${customerNIT}">
+
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
