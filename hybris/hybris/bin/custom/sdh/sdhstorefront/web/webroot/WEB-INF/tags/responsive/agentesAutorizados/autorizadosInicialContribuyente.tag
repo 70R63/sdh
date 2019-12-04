@@ -127,8 +127,16 @@
 															   type="text" size="30" value="<spring:theme code="autorizado.impuestos.${eachDeclaracion.impuesto}" />" /></td>
 													<td><input class="inputtextnew tablenumiden"
 															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.anioGravable}" /></td>
-													<td><input class="inputtextnew tablenumiden"
-															   disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.reteIca.${eachDeclaracion.periodo}" />' /></td>
+													<c:choose>
+														<c:when test="${eachDeclaracion.impuesto eq '0005'}">
+															<td><input class="inputtextnew tablenumiden"
+																disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />' /></td>
+														</c:when>
+														<c:otherwise>
+															<td><input class="inputtextnew tablenumiden"
+																disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.reteIca.${eachDeclaracion.periodo}" />' /></td>
+														</c:otherwise>
+													</c:choose>
 													<td><input class="inputtextnew" disabled="disabled"
 															   type="text" size="30" value="${desc_status}" /></td>
 
