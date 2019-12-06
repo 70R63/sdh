@@ -102,6 +102,17 @@
 						</div>
 					</div>
 				</c:if>
+				<c:if test='${dataForm.input.tipoFlujo == "R"}'>
+					<div class="col-md-1">
+						<div class="form-group ">
+							<img onclick="addinfoareuso()"
+								src="${themeResourcePath}/images/adddelineacion.png"
+								style="width: 25px"></img> <img onclick="deleinfoareuso()"
+								src="${themeResourcePath}/images/deledelineacion.png"
+								style="width: 25px"></img>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</c:forEach>
