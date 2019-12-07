@@ -36,20 +36,28 @@ public class SdhOnlinePaymentMatcherController {
 
 
 
-		final List<OnlinePaymentSelectInputBoxData> bankSelection = new ArrayList<OnlinePaymentSelectInputBoxData>();
-
-		final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionData(),
-				this.getMessageHeader());
-
-		for (final GetBankListResponseInformationType bank : bankList)
+		if (tax.equals("5154") || tax.equals("0108"))
 		{
-			final OnlinePaymentSelectInputBoxData singleBank = new OnlinePaymentSelectInputBoxData();
-			singleBank.setCode(bank.getFinancialInstitutionCode());
-			singleBank.setDescription(bank.getFinancialInstitutionName());
-			bankSelection.add(singleBank);
-		}
+			final List<OnlinePaymentSelectInputBoxData> bankSelection = new ArrayList<OnlinePaymentSelectInputBoxData>();
 
-		return sdhOnlinePaymentProviderMatcherFacade.getBankList(tax, paymentMethod);
+			final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionData(),
+					this.getMessageHeader());
+
+			for (final GetBankListResponseInformationType bank : bankList)
+			{
+				final OnlinePaymentSelectInputBoxData singleBank = new OnlinePaymentSelectInputBoxData();
+				singleBank.setCode(bank.getFinancialInstitutionCode());
+				singleBank.setDescription(bank.getFinancialInstitutionName());
+				bankSelection.add(singleBank);
+			}
+
+			return bankSelection;
+
+		}
+		else
+		{
+			return sdhOnlinePaymentProviderMatcherFacade.getBankList(tax, paymentMethod);
+		}
 
     }
 
