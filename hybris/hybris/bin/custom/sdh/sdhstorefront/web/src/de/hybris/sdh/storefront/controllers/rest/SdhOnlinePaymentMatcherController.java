@@ -7,6 +7,7 @@ import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData;
 import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -36,8 +37,19 @@ public class SdhOnlinePaymentMatcherController {
                                                           @RequestParam(value="paymentMethod", defaultValue="") String paymentMethod) {
 
 
+
+		final List<OnlinePaymentSelectInputBoxData> bankSelection = new ArrayList<OnlinePaymentSelectInputBoxData>();
+
 		final GetBankListResponseInformationType[] bankList = pseServices.getBankList(this.getConstantConnectionData(),
 				this.getMessageHeader());
+
+		for (final GetBankListResponseInformationType bank : bankList)
+		{
+			final OnlinePaymentSelectInputBoxData singleBank = new OnlinePaymentSelectInputBoxData();
+			singleBank.setCode(bank.getFinancialInstitutionCode());
+			singleBank.setDescription(bank.getFinancialInstitutionName());
+			bankSelection.add(singleBank);
+		}
 
 		return sdhOnlinePaymentProviderMatcherFacade.getBankList(tax, paymentMethod);
 
