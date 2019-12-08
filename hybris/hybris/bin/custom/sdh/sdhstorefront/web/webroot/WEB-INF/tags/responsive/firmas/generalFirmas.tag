@@ -21,6 +21,7 @@
 </div>
 
 
+<c:choose> <c:when test="${infoPreviaPSE.tipoImpuesto ne 5103}">
 <c:choose>
 	<c:when test="${contribuyente.documentType ne 'NIT'}">
 		<c:set var="lblDeclarante" value="Declarante" />
@@ -44,6 +45,17 @@
 		<c:set var="flagMostrarSoloFirmar" value="false" />
 		<c:set var="showFirmButton" value="false" />
 	</c:otherwise>
+</c:choose>
+</c:when>
+<c:otherwise>
+		<c:set var="contribuyente_completeName"
+			value="${contribuyente.completeName}" />
+		<c:set var="contribuyente_documentType"
+			value="${contribuyente.documentType}" />
+		<c:set var="contribuyente_documentNumber"
+			value="${contribuyente.documentNumber}" />
+		<c:set var="contribuyente_numBP" value="${contribuyente.numBP}" />
+</c:otherwise>
 </c:choose>
 <input value="${contribuyente.documentType}" type="hidden"
 	id="firmas_contribuyente_documentType" />
@@ -116,6 +128,7 @@
 								value="${contribuyente_numBP}" maxlength="240"></input>
 						</div>
 					</div>
+					<c:if test="${infoPreviaPSE.tipoImpuesto ne 5103}">
 					<c:if
 						test="${contribuyente.documentNumber eq currentUser.documentNumber}">
 						<c:if test="${flagMostrarSoloFirmar == true}">
@@ -132,6 +145,7 @@
 									style="margin-top: 4px">${lblBotonFirmarYAgregar}</button>
 							</div>
 						</c:if>
+					</c:if>
 					</c:if>
 				</div>
 				<!-- <div>aqui1fin</div> -->
@@ -201,6 +215,7 @@
 								</div>
 							</div>
 
+							<c:if test="${infoPreviaPSE.tipoImpuesto ne 5103}">
 							<c:if
 								test="${showFirmButton eq true && currentUserData.documentNumber eq eachFirmante.numIdent}">
 								<div class="col-md-1">
@@ -216,6 +231,7 @@
 									<button type="button" class="btn btn-primary firmAndAdd"
 										style="margin-top: 4px">Firmar y Agregar</button>
 								</div>
+							</c:if>
 							</c:if>
 						</div>
 					</c:if>
@@ -261,6 +277,7 @@
 					</div>
 				</div>
 
+				<c:if test="${infoPreviaPSE.tipoImpuesto ne 5103}">
 				<c:if test="${showFirmButton eq true }">
 					<div class="col-md-1">
 						<label class="control-label"><spring:theme code="" /></label>
@@ -274,6 +291,7 @@
 						<button type="button" class="btn btn-primary firmAndAdd"
 							style="margin-top: 4px">${lblBotonFirmarYAgregar}</button>
 					</div>
+				</c:if>
 				</c:if>
 
 			</div>
