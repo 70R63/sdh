@@ -34,10 +34,11 @@ public class SdhOnlinePaymentMatcherController {
     public List<OnlinePaymentSelectInputBoxData> getBanks(@RequestParam(value="tax", defaultValue="") final String tax,
                                                           @RequestParam(value="paymentMethod", defaultValue="") final String paymentMethod) {
 
-		
-		return sdhOnlinePaymentProviderMatcherFacade.getBankList(tax, paymentMethod);
 
-		if (tax.equals("5154") || tax.equals("0108"))
+
+
+		//if (tax.equals("5154") || tax.equals("0108"))
+		if ("A" == "B")
 		{
 			final List<OnlinePaymentSelectInputBoxData> bankSelection = new ArrayList<OnlinePaymentSelectInputBoxData>();
 
