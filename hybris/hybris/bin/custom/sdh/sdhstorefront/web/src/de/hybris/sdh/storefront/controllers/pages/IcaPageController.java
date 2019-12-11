@@ -520,6 +520,7 @@ public class IcaPageController extends SDHAbstractPageController
 		calcula2ImpuestoRequest.setFormulario(numForm);
 		final CalcICA2Response calcula2ImpuestoResponse = sdhCalculaICA2Facade.calcula(calcula2ImpuestoRequest);
 
+		addAgentsToModel(model, contribuyenteData, currentUserData);
 		if (calcula2ImpuestoResponse != null)
 		{
 			super.addFirmantes_impuesto(model, calcula2ImpuestoResponse.getFirmantes(), currentUserData);
@@ -531,7 +532,7 @@ public class IcaPageController extends SDHAbstractPageController
 		String anoGravable;
 
 		model.addAttribute("customerData", currentUserData);
-		addAgentsToModel(model, currentUserData, null);
+
 		//		model.addAttribute("redirectURL", "/contribuyentes/ica");
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
