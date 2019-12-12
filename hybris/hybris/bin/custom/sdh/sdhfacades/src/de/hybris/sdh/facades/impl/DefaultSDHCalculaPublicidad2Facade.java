@@ -2,14 +2,14 @@ package de.hybris.sdh.facades.impl;
 
 import de.hybris.sdh.core.pojos.requests.CalcPublicidad2Request;
 import de.hybris.sdh.core.pojos.responses.CalcPublicidad2Response;
-import de.hybris.sdh.core.pojos.responses.CertifNombResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidad2Service;
 import de.hybris.sdh.facades.SDHCalculaPublicidad2Facade;
+
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
-
-import javax.annotation.Resource;
 
 public class DefaultSDHCalculaPublicidad2Facade implements SDHCalculaPublicidad2Facade {
 
@@ -19,9 +19,10 @@ public class DefaultSDHCalculaPublicidad2Facade implements SDHCalculaPublicidad2
     SDHCalPublicidad2Service sdhCalculaPublicidad2Service;
 
     @Override
-    public CalcPublicidad2Response calcula(CalcPublicidad2Request request) {
+    public CalcPublicidad2Response calcula(final CalcPublicidad2Request request) {
 
         String response = sdhCalculaPublicidad2Service.calcPublicidad(request);
+		response = response.replace("\"},\"\"]}", "\"}]}");
 
         if (StringUtils.isNotBlank(response)) {
             try {
