@@ -184,7 +184,7 @@ public class IcaPageController extends SDHAbstractPageController
 	public List<String> getTarifaValorRetenido()
 	{
 
-		final List<String> tarifasValorRetenido = Arrays.asList("4.14", "6.90", "7.00", "8.00", "9.66", "11.04", "13.80");
+		final List<String> tarifasValorRetenido = Arrays.asList("4,14", "6,90", "7,00", "8,00", "9,66", "11,04", "13,80");
 
 		return tarifasValorRetenido;
 	}
