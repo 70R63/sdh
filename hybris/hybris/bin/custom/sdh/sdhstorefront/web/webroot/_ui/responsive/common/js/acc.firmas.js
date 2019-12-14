@@ -77,7 +77,18 @@ ACC.frimas = {
 
 				var  numIdentif  =$.trim($(value).find(".FirmNumId").val());
 
-				var confirmacion = "X";
+				var tipoDocEl = document.getElementById("firmas_contribuyente_documentType");
+				var tipoDoc = "";
+				if(tipoDocEl != null){
+					tipoDoc = tipoDocEl.value;
+				}
+				var confirmacion = "";
+				
+				if(tipoDoc == "NIT"){
+					confirmacion = "Y";
+				}else{
+					confirmacion = "X";
+				}
 
 				var posicion = index+1;
 

@@ -611,6 +611,27 @@ debugger;
 					});
 				}
 				
+				
+				if(infoActual.claveImpuesto == '0008'){
+					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
+						if(value1.numObjeto != ""){
+							$.each(infoResponse.customerData.delineacion, function (index,value2){
+								if(value1.numObjeto == value2.numObjeto){
+									$('#table-delineacion1').append("<tr>"+ 
+											'<td>' + value2.cdu + '</td>'+
+											'<td>' + value1.clavePeriodo + '</td>'+
+											'<td>' + value1.referencia + '</td>'+
+											'<td>' + value1.importe + '</td>'+
+											'<td>' + value1.moneda + '</td>'+
+											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+											"</tr>");
+								}
+							});
+						}	
+					});	
+				}
+				
+				
 			}
 		}
 		
@@ -987,7 +1008,9 @@ debugger;
 			cdus.style.display = 'block';
 		} else if (x == '0007') { //publicidad
 			tablepublicidad.style.display = 'block';
-		}
+		} else if (x == '0008') { //delineacion
+			cdus.style.display = 'block';
+		} 
 		
 		
 	},

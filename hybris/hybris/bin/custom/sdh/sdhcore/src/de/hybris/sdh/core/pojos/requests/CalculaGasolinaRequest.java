@@ -312,10 +312,24 @@ public class CalculaGasolinaRequest
 
 		if (this.getRevisorDeclarante() != null)
 		{
-			stringBuilder.append("[");
-			for (int i = 0; i < this.getRevisorDeclarante().size() - 1; i++)
+
+			if (this.getRevisorDeclarante().size() != 0)
 			{
-				infoDeclara = this.getRevisorDeclarante().get(i);
+
+				stringBuilder.append("[");
+				for (int i = 0; i < this.getRevisorDeclarante().size() - 1; i++)
+				{
+					infoDeclara = this.getRevisorDeclarante().get(i);
+
+					stringBuilder.append("{");
+					stringBuilder.append(obtenerValorJson("\"tipoInterloc\":\"", infoDeclara.getTipoInterloc(), "\","));
+					stringBuilder.append(obtenerValorJson("\"tipoDoc\":\"", infoDeclara.getTipoDoc(), "\","));
+					stringBuilder.append(obtenerValorJson("\"numDoc\":\"", infoDeclara.getNumDoc(), "\","));
+					stringBuilder.append(obtenerValorJson("\"nombres\":\"", infoDeclara.getNombres(), "\","));
+					stringBuilder.append(obtenerValorJson("\"tarjetaProf\":\"", infoDeclara.getTarjetaProf(), "\""));
+					stringBuilder.append("},");
+				}
+				infoDeclara = this.getRevisorDeclarante().get(this.getRevisorDeclarante().size() - 1);
 
 				stringBuilder.append("{");
 				stringBuilder.append(obtenerValorJson("\"tipoInterloc\":\"", infoDeclara.getTipoInterloc(), "\","));
@@ -323,19 +337,10 @@ public class CalculaGasolinaRequest
 				stringBuilder.append(obtenerValorJson("\"numDoc\":\"", infoDeclara.getNumDoc(), "\","));
 				stringBuilder.append(obtenerValorJson("\"nombres\":\"", infoDeclara.getNombres(), "\","));
 				stringBuilder.append(obtenerValorJson("\"tarjetaProf\":\"", infoDeclara.getTarjetaProf(), "\""));
-				stringBuilder.append("},");
+				stringBuilder.append("}");
+
+				stringBuilder.append("]");
 			}
-			infoDeclara = this.getRevisorDeclarante().get(this.getRevisorDeclarante().size() - 1);
-
-			stringBuilder.append("{");
-			stringBuilder.append(obtenerValorJson("\"tipoInterloc\":\"", infoDeclara.getTipoInterloc(), "\","));
-			stringBuilder.append(obtenerValorJson("\"tipoDoc\":\"", infoDeclara.getTipoDoc(), "\","));
-			stringBuilder.append(obtenerValorJson("\"numDoc\":\"", infoDeclara.getNumDoc(), "\","));
-			stringBuilder.append(obtenerValorJson("\"nombres\":\"", infoDeclara.getNombres(), "\","));
-			stringBuilder.append(obtenerValorJson("\"tarjetaProf\":\"", infoDeclara.getTarjetaProf(), "\""));
-			stringBuilder.append("}");
-
-			stringBuilder.append("]");
 		}
 
 		if (stringBuilder.toString() != null)
