@@ -184,7 +184,7 @@ public class IcaPageController extends SDHAbstractPageController
 	public List<String> getTarifaValorRetenido()
 	{
 
-		final List<String> tarifasValorRetenido = Arrays.asList("4.14", "6.90", "7.00", "8.00", "9.66", "11.04", "13.80");
+		final List<String> tarifasValorRetenido = Arrays.asList("4,14", "6,90", "7,00", "8,00", "9,66", "11,04", "13,80");
 
 		return tarifasValorRetenido;
 	}
@@ -520,6 +520,7 @@ public class IcaPageController extends SDHAbstractPageController
 		calcula2ImpuestoRequest.setFormulario(numForm);
 		final CalcICA2Response calcula2ImpuestoResponse = sdhCalculaICA2Facade.calcula(calcula2ImpuestoRequest);
 
+		addAgentsToModel(model, contribuyenteData, currentUserData);
 		if (calcula2ImpuestoResponse != null)
 		{
 			super.addFirmantes_impuesto(model, calcula2ImpuestoResponse.getFirmantes(), currentUserData);
@@ -531,7 +532,7 @@ public class IcaPageController extends SDHAbstractPageController
 		String anoGravable;
 
 		model.addAttribute("customerData", currentUserData);
-		addAgentsToModel(model, currentUserData, null);
+
 		//		model.addAttribute("redirectURL", "/contribuyentes/ica");
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();

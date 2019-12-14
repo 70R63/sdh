@@ -157,10 +157,11 @@
 
 
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
+		<c:set var="anoGravable_formateado" value="${fn:substring(eachValor.anoGravable, 6, 10)}-${fn:substring(eachValor.anoGravable, 3, 5)}-${fn:substring(eachValor.anoGravable, 0, 2)}" />
 			<div class="row valor" id="valor">
 				<div class="col-md-1" style="width: 10.5% !important">
 					<input class="new_alto_anio form-control anio anoGravable "
-						type="date" value="${eachValor.anoGravable }" onchange="activarValidacion_valorRetenido()"/>
+						type="date" value="${anoGravable_formateado}"  onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-2">
 					<select id="" class="etiq_valor form-control tipoID"

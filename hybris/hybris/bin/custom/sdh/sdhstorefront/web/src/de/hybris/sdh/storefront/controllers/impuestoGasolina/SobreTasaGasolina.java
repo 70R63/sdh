@@ -957,7 +957,10 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		final CalcGasolina2Response calcGasolina2Response = sdhCalculaGasolina2Facade.calcula(calculaGasolina2Request);
 
 		addAgentsToModel(model, contribuyenteData, currentUserData);
-		super.addFirmantes_impuesto(model, calcGasolina2Response.getFirmantes(), currentUserData);
+		if (calcGasolina2Response != null)
+		{
+			super.addFirmantes_impuesto(model, calcGasolina2Response.getFirmantes(), currentUserData);
+		}
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
 

@@ -156,10 +156,10 @@
 											</c:otherwise>
 										</c:choose>
 										<td>
-											<c:if test="${eachArchivo.estado ne  '02' }">
+<%-- 											<c:if test="${eachArchivo.estado ne  '02' }"> --%>
 												<c:url value="/retenedores/download/log" var="urlDownload" />
 												<a href="${urlDownload}?nomArchivo=${eachArchivo.nomArchivo}">Ver log</a>
-											</c:if>
+<%-- 											</c:if> --%>
 										</td>
 										<c:choose>
 											<c:when test='${(eachArchivo.bandera == "X")}'>

@@ -168,7 +168,9 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 		String anoParaPSE = "";
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData",customerData);
-        addAgentsToModel(model, customerData,null);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "/contribuyentes/publicidadexterior");
+		super.addFirmantes_impuesto(model, null, customerData);
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
@@ -405,19 +407,19 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 	@RequestMapping(value="/firmar",method=RequestMethod.POST)
     @ResponseBody
-    public EnviaFirmasResponse enviaFirmas(Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+    public EnviaFirmasResponse enviaFirmas(final Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
     {
-        EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
+        final EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
 
         enviaFirmasRequest.setNumForm(dataForm.getNumForm());
 
 
         if(CollectionUtils.isNotEmpty(dataForm.getFirmantes()))
 		{
-			List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
-			for(FirmantesForm eachFirmante : dataForm.getFirmantes())
+			final List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
+			for(final FirmantesForm eachFirmante : dataForm.getFirmantes())
 			{
-				FirmanteRequest firmante = new FirmanteRequest();
+				final FirmanteRequest firmante = new FirmanteRequest();
 
 				firmante.setConfirmacion(eachFirmante.getConfirmacion());
 				firmante.setFirmante(eachFirmante.getFirmante());
@@ -522,17 +524,18 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 	{
 		String anoParaPSE = "";
 
-		CustomerData customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final CustomerData customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
 
 		model.addAttribute("customerData",customerData);
 
 
-		CalcPublicidad2Request calculaPublicidad2Request = new CalcPublicidad2Request();
+		final CalcPublicidad2Request calculaPublicidad2Request = new CalcPublicidad2Request();
 		calculaPublicidad2Request.setFormulario(numForm);
 		calculaPublicidad2Request.setPartner(representado);
-		CalcPublicidad2Response calculaPublicidad2Response = sdhCalculaPublicidad2Facade.calcula(calculaPublicidad2Request);
+		final CalcPublicidad2Response calculaPublicidad2Response = sdhCalculaPublicidad2Facade.calcula(calculaPublicidad2Request);
 
-		model.addAttribute("firmantesActuales",calculaPublicidad2Response.getFirmantes());
+		//		model.addAttribute("firmantesActuales",calculaPublicidad2Response.getFirmantes());
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
@@ -552,6 +555,14 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+
+
+			model.addAttribute("redirectURL", "/autorizados/contribuyente/representando?representado=" + customerData.getNumBP());
+			addAgentsToModel(model, customerData, currentUserData);
+			if (detallePublicidadResponse != null)
+			{
+				super.addFirmantes_impuesto(model, calculaPublicidad2Response.getFirmantes(), currentUserData);
+			}
 
 			anoParaPSE = detallePublicidadResponse.getAnoGravable();
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();
