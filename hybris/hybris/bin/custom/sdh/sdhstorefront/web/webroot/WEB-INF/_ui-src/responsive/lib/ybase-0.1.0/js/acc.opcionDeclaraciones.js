@@ -845,7 +845,7 @@ debugger;
 		var perBimestral = document.getElementById('Periodo2'); //bimestral
 		var validacionOK = false;
 
-		if(claveImpuesto == "0001" || claveImpuesto == "0002" || claveImpuesto == "0006" || claveImpuesto == "0007"){
+		if(claveImpuesto == "0001" || claveImpuesto == "0002" || claveImpuesto == "0006" || claveImpuesto == "0007" || claveImpuesto == "0008"){
 			if(anoGravable != "" && anoGravable != "00"){
 				validacionOK = true;
 			}
