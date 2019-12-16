@@ -21,6 +21,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalcPublicidad2Request;
@@ -130,6 +131,9 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 	@Resource(name = "modelService")
 	private ModelService modelService;
+
+	@Resource(name = "sessionService")
+	SessionService sessionService;
 
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
@@ -328,8 +332,13 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 		final CalcPublicidadRequest calcPublicidadRequest = new CalcPublicidadRequest();
 
+		String numBP = sessionService.getCurrentSession().getAttribute("representado");
+		if (numBP == null)
+		{
+			numBP = customerData.getNumBP();
+		}
 
-		calcPublicidadRequest.setNumBP(customerData.getNumBP());
+		calcPublicidadRequest.setNumBP(numBP);
 		calcPublicidadRequest.setNumResolu(dataForm.getNumresol());
 		calcPublicidadRequest.setNumForm(dataForm.getNumform());
 		calcPublicidadRequest.setAnoGravable(dataForm.getAnograv());
