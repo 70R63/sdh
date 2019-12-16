@@ -13,6 +13,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
@@ -128,6 +129,9 @@ public class IcaPageController extends SDHAbstractPageController
 
 	@Resource(name = "modelService")
 	ModelService modelService;
+
+	@Resource(name = "sessionService")
+	SessionService sessionService;
 
 	@Resource(name = "mediaService")
 	MediaService mediaService;
@@ -778,11 +782,17 @@ public class IcaPageController extends SDHAbstractPageController
 		ICACalculoImpResponse icaCalculoImpResponse = new ICACalculoImpResponse();
 		final ICACalculoImpRequest icaCalculoImpRequest = new ICACalculoImpRequest();
 
+		String numBP = sessionService.getCurrentSession().getAttribute("representado");
+		if (numBP == null)
+		{
+			numBP = customerModel.getNumBP();
+		}
+
 		icaCalculoImpRequest.setNumObjeto(icaCalculaDeclaracionForm.getNumObjeto());
 		icaCalculoImpRequest.setNumForm(icaCalculaDeclaracionForm.getNumForm());
 		icaCalculoImpRequest.setAnoGravable(icaCalculaDeclaracionForm.getAnoGravable());
 		icaCalculoImpRequest.setPeriodo(icaCalculaDeclaracionForm.getPeriodo());
-		icaCalculoImpRequest.setNumBP(customerModel.getNumBP());
+		icaCalculoImpRequest.setNumBP(numBP);
 		icaCalculoImpRequest.setCantEstablec(icaCalculaDeclaracionForm.getCantEstablec());
 		icaCalculoImpRequest.setEntFinanciera(icaCalculaDeclaracionForm.getEntFinanciera());
 		icaCalculoImpRequest.setImpuestoAviso(icaCalculaDeclaracionForm.getImpuestoAviso());
