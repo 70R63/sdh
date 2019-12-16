@@ -313,7 +313,7 @@ public class CalculaGasolinaRequest
 		if (this.getRevisorDeclarante() != null)
 		{
 
-			if (this.getRevisorDeclarante().size() != 0)
+			if (this.getRevisorDeclarante().size() > 0)
 			{
 
 				stringBuilder.append("[");
