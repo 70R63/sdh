@@ -24,7 +24,47 @@ public class SecretAnswerForm
 	private String REL03;
 	private String REL04;
 	private String REL05;
+	private String DIR2_0001;
+	private String DIR_0002;
 
+
+
+
+
+
+	/**
+	 * @return the dIR_0002
+	 */
+	public String getDIR_0002()
+	{
+		return DIR_0002;
+	}
+
+	/**
+	 * @param dIR_0002
+	 *           the dIR_0002 to set
+	 */
+	public void setDIR_0002(final String dIR_0002)
+	{
+		DIR_0002 = dIR_0002;
+	}
+
+	/**
+	 * @return the dIR2_0001
+	 */
+	public String getDIR2_0001()
+	{
+		return DIR2_0001;
+	}
+
+	/**
+	 * @param dIR2_0001
+	 *           the dIR2_0001 to set
+	 */
+	public void setDIR2_0001(final String dIR2_0001)
+	{
+		DIR2_0001 = dIR2_0001;
+	}
 
 	/**
 	 * @return the fNAM
