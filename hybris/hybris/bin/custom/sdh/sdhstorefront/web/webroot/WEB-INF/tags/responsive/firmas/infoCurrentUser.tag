@@ -16,7 +16,7 @@
 
 
 
-<div class="col-md-2">
+<div class="col-md-3">
 	<div class="form-group">
 		<label class="control-label"> <spring:theme
 				code="publicidad.declaracion.firma.nombre" /></label> <input disabled
@@ -56,17 +56,20 @@
 <div>
 	<c:if test="${mostrarBotonesFirmas eq true}">
 		<c:if test="${flagMostrarSoloFirmar eq true}">
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<label class="control-label"><spring:theme code="" /></label>
-				<button type="button" class="btn btn-primary justFirm"
-					style="margin-top: 8px">Solo Firmar</button>
+				<button type="button" class="newaltobtn btn btn-primary justFirm">Solo
+					Firmar</button>
 			</div>
 		</c:if>
 		<c:if test="${showFirmAndAddButton eq true }">
 			<div class="col-md-2">
+			<div class="form-group">
+				<label class="control-label"><spring:theme
+				code="" /></label> 
 				<label class="control-label"><spring:theme code="" /></label>
-				<button type="button" class="btn btn-primary firmAndAdd"
-					style="margin-top: 8px">${lblBotonFirmarYAgregar}</button>
+				<button type="button" class="newaltobtn btn btn-primary firmAndAdd">${lblBotonFirmarYAgregar}</button>
+			</div>
 			</div>
 		</c:if>
 	</c:if>

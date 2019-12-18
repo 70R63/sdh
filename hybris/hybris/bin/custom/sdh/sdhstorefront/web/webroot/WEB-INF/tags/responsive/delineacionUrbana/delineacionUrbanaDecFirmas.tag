@@ -128,7 +128,7 @@
 				</div>
 				<div class="col-md-1">
 					<label class="control-label"><spring:theme code="" /></label>
-					<button class="btn btn-primary" id="btnfirmardeclarante"
+					<button class="newaltobtn btn btn-primary" id="btnfirmardeclarante"
 						style="margin-top: 4px">Firmar</button>
 				</div>
 			</div>
@@ -186,7 +186,7 @@
 		</div>
 
 		<div class="col-md-1">
-			<button class="btn btn-primary ajustemargen">Firmar</button>
+			<button class="newaltobtn btn btn-primary ajustemargen">Firmar</button>
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">

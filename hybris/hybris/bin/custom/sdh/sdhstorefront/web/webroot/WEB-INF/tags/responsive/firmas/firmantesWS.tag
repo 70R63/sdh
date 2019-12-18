@@ -8,7 +8,7 @@
 <c:forEach items="${firmantes}" var="eachFirmante">
 	<c:if test="${!empty eachFirmante.tipoIdent}">
 		<div class="row mt-3">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"> <spring:theme
 							code="publicidad.declaracion.firma.nombre" /></label> <input disabled
@@ -48,7 +48,7 @@
 					test="${showFirmButton eq true && currentUserData.documentNumber eq eachFirmante.numIdent}">
 					<div class="col-md-1">
 						<label class="control-label"><spring:theme code="" /></label>
-						<button type="button" class="btn btn-primary justFirm"
+						<button type="button" class="newaltobtn btn btn-primary justFirm"
 							style="margin-top: 4px">Solo Firmar</button>
 					</div>
 				</c:if>
@@ -56,7 +56,7 @@
 					test="${showFirmAndAddButton eq true && currentUserData.documentNumber eq eachFirmante.numIdent}">
 					<div class="col-md-1">
 						<label class="control-label"><spring:theme code="" /></label>
-						<button type="button" class="btn btn-primary firmAndAdd"
+						<button type="button" class="newaltobtn btn btn-primary firmAndAdd"
 							style="margin-top: 4px">Firmar y Agregar</button>
 					</div>
 				</c:if>
