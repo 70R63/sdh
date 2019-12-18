@@ -15,9 +15,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="headline">
+			<div class="headline"  style="margin-left: 0px !important">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span class="hwomargin"><spring:theme
 							code="ica.declaracion.generales.titulo" /></span>
 				</h2>
 			</div>

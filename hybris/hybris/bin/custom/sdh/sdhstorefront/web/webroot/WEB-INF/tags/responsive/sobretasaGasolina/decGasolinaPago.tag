@@ -48,11 +48,11 @@
 	</div>
 
 	<br>
-	<div class="col-md-10 col-md-offset-3">
+	<div class="col-md-12">
 		<div class="table-responsive">
-			<div class="form-group">
-				<span tabindex="0"><spring:theme
-						code="impuestos.decGasolina.Pago.nota" /></span>
+			<div class="form-group" style="text-align: center !important">
+				<spring:theme
+						code="impuestos.decGasolina.Pago.nota" />
 			</div>
 		</div>
 	</div>

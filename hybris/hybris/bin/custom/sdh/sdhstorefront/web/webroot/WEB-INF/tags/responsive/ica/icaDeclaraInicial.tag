@@ -43,7 +43,7 @@
 	<div class="col-md-4 col-md-offset-4 d-flex align-items-center">
 		<form:form action="">
 			<div class="table-responsive">
-				<table class="table col-md-2 table-bordered">
+				<table class="table col-md-2 table-bordered" style="width:auto !important">
 					<thead>
 						<tr>
 							<td><label class="control-label labeltabletd tableident"><spring:theme

@@ -15,19 +15,21 @@
 	type="java.lang.String"%>
 
 
+
 <div class="col-md-2">
 	<div class="form-group">
 		<label class="control-label"> <spring:theme
 				code="publicidad.declaracion.firma.nombre" /></label> <input disabled
-			id="firmCompleteName" name="firmCompleteName" class="form-control"
-			disabled type="text" value="${user_completeName}" maxlength="240"></input>
+			id="firmCompleteName" name="firmCompleteName"
+			class="newalto_dir form-control" disabled type="text"
+			value="${user_completeName}" maxlength="240"></input>
 	</div>
 </div>
 <div class="col-md-2">
 	<div class="form-group">
 		<label class="control-label"><spring:theme
 				code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled
-			class="form-control FirmTipoId" disabled type="text"
+			class="newalto form-control FirmTipoId" disabled type="text"
 			value="${user_documentType}" maxlength="240"
 			id="lblcontribuyente_documentType">
 	</div>
@@ -36,7 +38,7 @@
 	<div class="form-group">
 		<label class="control-label"><spring:theme
 				code="publicidad.declaracion.firma.numide" /></label> <input disabled
-			class="form-control FirmNumId" disabled type="text"
+			class="newalto form-control FirmNumId" disabled type="text"
 			id="contribuyente_documentNumber" value="${user_documentNumber}"
 			maxlength="240"></input>
 	</div>
@@ -46,7 +48,7 @@
 	<div class="form-group">
 		<label class="control-label"><spring:theme
 				code="publicidad.declaracion.firma.numtarjeta" /></label> <input disabled
-			class="form-control FirmTarjetaProf" disabled
+			class="newalto form-control FirmTarjetaProf" disabled
 			id="contribuyente_numBP" type="text" value="${user_numBP}"
 			maxlength="240"></input>
 	</div>
@@ -54,21 +56,22 @@
 <div>
 	<c:if test="${mostrarBotonesFirmas eq true}">
 		<c:if test="${flagMostrarSoloFirmar eq true}">
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<label class="control-label"><spring:theme code="" /></label>
 				<button type="button" class="btn btn-primary justFirm"
-					style="margin-top: 4px">Solo Firmar</button>
+					style="margin-top: 8px">Solo Firmar</button>
 			</div>
 		</c:if>
 		<c:if test="${showFirmAndAddButton eq true }">
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<label class="control-label"><spring:theme code="" /></label>
 				<button type="button" class="btn btn-primary firmAndAdd"
-					style="margin-top: 4px">${lblBotonFirmarYAgregar}</button>
+					style="margin-top: 8px">${lblBotonFirmarYAgregar}</button>
 			</div>
 		</c:if>
 	</c:if>
 </div>
+
 
 
 

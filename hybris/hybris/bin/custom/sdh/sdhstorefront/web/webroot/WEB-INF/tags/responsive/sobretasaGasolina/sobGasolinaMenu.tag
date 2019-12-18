@@ -40,16 +40,16 @@
 
 
 <div class="row mt-3">
-	<div class="col-md-7 col-md-offset-3 d-flex align-items-center">
+	<div class="col-md-12 col-md-offset-4 d-flex align-items-center">
 		<div class="table-responsive text-center">
-			<table class="table table-bordered">
+			<table class="table table-bordered" style="width:auto !important">
 				<thead>
 					<tr>
 						<td><label class="control-label labeltabletd tableident"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.tipoDocumento" /></label></td>
 						<td><label class="control-label labeltabletd tablenumiden"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.numeroDocumento" /></label></td>
-						<td><label class="control-label labeltabletd tablenombre"><spring:theme
+						<td><label class="control-label labeltabletd"><spring:theme
 									code="impuestos.sobreTasaGasolina.menu.nombre" /></label></td>
 					</tr>
 				</thead>
@@ -68,7 +68,7 @@
 									class="inputtextnew tablenumiden" aria-required="true"
 									maxlength="30" size="30" disabled="disabled" type="text"  readonly="true"/></td>
 							<td><sf:input path="NAME_ORG1" value="" readonly="true"
-									class="inputtextnew tablenombre" 
+									class="inputtextnew" 
 									maxlength="30" size="30" disabled="disabled" type="text" /></td>
 						</tr>
 					</c:forEach>

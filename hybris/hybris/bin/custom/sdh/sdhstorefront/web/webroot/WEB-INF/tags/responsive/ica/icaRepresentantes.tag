@@ -11,9 +11,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="headline">
+			<div class="hwomargin headline">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span class="hwomargin"><spring:theme
 							code="ica.inicial.representantes.title" /></span>
 				</h2>
 			</div>
@@ -22,7 +22,7 @@
 
 
 	<br>
-	<form:form action="">
+	<form:form action="" style="padding-left: 0px !important">
 		<div class="row text-center">
 			<div class="col-md-8">
 				<div class="table-responsive">

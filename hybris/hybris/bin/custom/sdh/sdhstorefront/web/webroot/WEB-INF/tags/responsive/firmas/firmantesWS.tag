@@ -12,7 +12,7 @@
 				<div class="form-group">
 					<label class="control-label"> <spring:theme
 							code="publicidad.declaracion.firma.nombre" /></label> <input disabled
-						id="firmCompleteName" name="firmCompleteName" class="form-control"
+						id="firmCompleteName" name="firmCompleteName" class="newalto form-control"
 						disabled type="text" value="${eachFirmante.nombre}"
 						maxlength="240"></input>
 				</div>
@@ -21,7 +21,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="publicidad.declaracion.firma.tipoiden" /></label> <input disabled
-						class="form-control FirmTipoId" disabled type="text"
+						class="newalto form-control FirmTipoId" disabled type="text"
 						value="${eachFirmante.tipoIdent}" maxlength="240"></input>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="publicidad.declaracion.firma.numide" /></label> <input disabled
-						class="form-control FirmNumId" disabled type="text"
+						class="newalto form-control FirmNumId" disabled type="text"
 						value="${eachFirmante.numIdent}" maxlength="240"></input>
 				</div>
 			</div>
@@ -38,7 +38,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="publicidad.declaracion.firma.numtarjeta" /></label> <input
-						disabled class="form-control FirmTarjetaProf" disabled type="text"
+						disabled class="newalto form-control FirmTarjetaProf" disabled type="text"
 						value="${eachFirmante.tarjetaProd}" maxlength="240"></input>
 				</div>
 			</div>

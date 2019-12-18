@@ -7,7 +7,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 
@@ -33,7 +33,7 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Reexpedición de factura";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.reexpedicionFac";
 
 	// CMS Pages
 	private static final String REEXPEDICION_FACTURA_CMS_PAGE = "reexpedicionFacturaPage";
@@ -41,7 +41,8 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 	private static final String REDIRECT_TO_REEXPEDICION_FACTURA_PAGE = REDIRECT_PREFIX + "/contribuyentes/reexpedicionfactura";
 
 	@Resource(name = "customBreadcrumbBuilder")
-	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+	private DefaultResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+
 
 	@Resource(name = "sdhCertificaRITService")
 	SDHCertificaRITService sdhCertificaRITService;

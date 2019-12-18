@@ -34,10 +34,10 @@
 <c:set var="nombreCompleto"
 	value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
 <div class="row mt-3">
-	<div class="col-md-4 col-md-offset-4 d-flex align-items-center">
+	<div class="col-md-12 col-md-offset-4 d-flex align-items-center">
 		<form:form action="">
 			<div class="table-responsive text-center">
-				<table class="table table-bordered">
+				<table class="table table-bordered" style="width:auto !important">
 					<thead>
 						<tr>
 							<td><label class="control-label labeltabletd tableident"><spring:theme
