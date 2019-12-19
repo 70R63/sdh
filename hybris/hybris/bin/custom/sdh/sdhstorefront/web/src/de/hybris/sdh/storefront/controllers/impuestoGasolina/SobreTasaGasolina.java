@@ -710,7 +710,6 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		final String tipoDeclarante = "2";
 
 
-		numBP = customerModel.getNumBP();
 		if (dataForm != null)
 		{
 			tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
