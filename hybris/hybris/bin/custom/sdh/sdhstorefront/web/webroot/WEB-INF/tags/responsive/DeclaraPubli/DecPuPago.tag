@@ -37,7 +37,7 @@
 			<div class="col-md-3 text-center">
 				<a id="downloadHelper" target="_blank"></a>
 				<sf:button id="generaDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
-					name="generaDeclaracionButton" type="button"  disabled="true">					
+					name="generaDeclaracionButton" type="button"  disabled="false">					
 					<spring:theme code="declaracion.publicidad.button.presdec" />
 				</sf:button>
 			</div>

@@ -27,7 +27,7 @@
 				<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
 			</button>
 			<button id="gasolinaGeneraDeclaracionButton"  type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton">
-				<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
+				<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" disabled="false"/>
 			</button>
 			<sf:hidden path="numBP" />
 			<sf:hidden path="clavePeriodo" />

@@ -29,9 +29,9 @@
 
 				<div class="col-md-3">
 					<a id="downloadHelper" target="_blank"></a>
-					<button id="generaDeclaracionVehiculosButton" type="button"
-						<c:out value='${empty vehiculosFormDeclaracion.numForm ? "disabled":""}'/>
-						class="btn btn-primary btn-lg" onclick="pagarlinea()">
+					<button id="generaDeclaracionVehiculosButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()">
+					<!-- 	<c:out value='${empty vehiculosFormDeclaracion.numForm ? "disabled":""}'/>
+						class="btn btn-primary btn-lg" onclick="pagarlinea()">-->
 						<spring:theme code="delineacion.urbana.dec.firm.predec" />
 					</button>
 				</div>
