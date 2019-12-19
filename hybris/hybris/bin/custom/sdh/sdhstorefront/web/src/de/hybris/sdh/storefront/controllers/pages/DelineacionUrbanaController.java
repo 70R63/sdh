@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -595,7 +596,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 			infoDelineacionRequest.setRetencion(""); //Se indico que para retencion va una X
 		}
 
-		System.out.println("Request para calculo	/Delineacion: " + infoDelineacionRequest);
+		System.out.println("Request para calculoImp/Delineacion: " + infoDelineacionRequest);
 		try
 		{
 			infoDelineacionResponse = gasolinaService.calcularImpuestoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
