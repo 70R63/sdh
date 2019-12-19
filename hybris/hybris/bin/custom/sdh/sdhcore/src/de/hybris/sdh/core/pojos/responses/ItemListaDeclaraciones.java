@@ -19,6 +19,7 @@ public class ItemListaDeclaraciones
 	private String numForm;
 	private String taxpayer;
 	private String numRadicado;
+	private String noRadicado;
 	private String creacion;
 	private String modificacion;
 	private String fechaCompensa; //Para consulPagos
@@ -26,6 +27,45 @@ public class ItemListaDeclaraciones
 	private String moneda; //Para consulPagos
 	private String numfactForm; //Para consulPagos
 	private String numDocPago; //Para consulPagos
+
+
+
+
+
+
+	/**
+	 * @return the numRadicado
+	 */
+	public String getNumRadicado()
+	{
+		return numRadicado;
+	}
+
+	/**
+	 * @param numRadicado
+	 *           the numRadicado to set
+	 */
+	public void setNumRadicado(final String numRadicado)
+	{
+		this.numRadicado = numRadicado;
+	}
+
+	/**
+	 * @return the noRadicado
+	 */
+	public String getNoRadicado()
+	{
+		return noRadicado;
+	}
+
+	/**
+	 * @param noRadicado
+	 *           the noRadicado to set
+	 */
+	public void setNoRadicado(final String noRadicado)
+	{
+		this.noRadicado = noRadicado;
+	}
 
 	/**
 	 * @return the numBP
@@ -91,7 +131,7 @@ public class ItemListaDeclaraciones
 	{
 		this.clavePeriodo = clavePeriodo;
 	}
-	
+
 	/**
 	 * @return the desc_clavePeriodo
 	 */
@@ -160,22 +200,7 @@ public class ItemListaDeclaraciones
 		this.taxpayer = taxpayer;
 	}
 
-	/**
-	 * @return the numRadicado
-	 */
-	public String getNumRadicado()
-	{
-		return numRadicado;
-	}
 
-	/**
-	 * @param numRadicado
-	 *           the numRadicado to set
-	 */
-	public void setNumRadicado(final String numRadicado)
-	{
-		this.numRadicado = numRadicado;
-	}
 	/**
 	 * @return the creacion
 	 */
@@ -304,7 +329,8 @@ public class ItemListaDeclaraciones
 	{
 		return "ItemListaDeclaraciones [numBP=" + numBP + ", ctaContrato=" + ctaContrato + ", numObjeto=" + numObjeto
 				+ ", clavePeriodo=" + clavePeriodo + ", referencia=" + referencia + ", numForm=" + numForm + ", taxpayer=" + taxpayer
-				+ ", numRadicado=" + numRadicado + ", creacion=" + creacion + ", modificacion=" + modificacion + ", fechaCompensa="
+				+ ", numRadicado=" + numRadicado + ", noRadicado=" + noRadicado + ", creacion=" + creacion + ", modificacion="
+				+ modificacion + ", fechaCompensa="
 				+ fechaCompensa + ", importe=" + importe + ", moneda=" + moneda + ", numfactForm=" + numfactForm + ", numDocPago="
 				+ numDocPago + "]";
 	}
