@@ -90,7 +90,7 @@
 							user_completeName="${currentUser_completeName}"
 							user_documentType="${currentUser_documentType}"
 							user_documentNumber="${currentUser_documentNumber}"
-							user_numBP="${currentUser_numBP}"
+							user_numBP=""
 							mostrarBotonesFirmas="${mostrarBotonesFirmas}"
 							flagMostrarSoloFirmar="${flagMostrarSoloFirmar}"
 							lblBotonFirmarYAgregar="${lblBotonFirmarYAgregar}" />
@@ -111,7 +111,7 @@
 						user_completeName="${currentUser_completeName}"
 						user_documentType="${currentUser_documentType}"
 						user_documentNumber="${currentUser_documentNumber}"
-						user_numBP="${currentUser_numBP}"
+						user_numBP=""
 						mostrarBotonesFirmas="${mostrarBotonesFirmas}"
 						flagMostrarSoloFirmar="${flagMostrarSoloFirmar}"
 						lblBotonFirmarYAgregar="${lblBotonFirmarYAgregar}" />
