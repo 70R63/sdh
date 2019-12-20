@@ -23,6 +23,7 @@ import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -441,8 +442,15 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-				model.addAttribute("publicidadExtList", sdhValidaContribuyenteService
-						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
+				final List<ImpuestoPublicidadExterior> publicidadExtList = sdhValidaContribuyenteService
+						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable());
+				model.addAttribute("publicidadExtList", publicidadExtList);
+				if (publicidadExtList == null || publicidadExtList.isEmpty())
+				{
+					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"error.presentarDeclaracion.publicidadExt.listaVacia");
+					GlobalMessages.addErrorMessage(model, "error.presentarDeclaracion.publicidadExt.listaVacia");
+				}
 			}
 			else if (dataFormResponse.getImpuesto().equals("6") && !dataFormResponse.getAnoGravable().equals("X")
 					&& !dataFormResponse.getAnoGravable().isEmpty())
