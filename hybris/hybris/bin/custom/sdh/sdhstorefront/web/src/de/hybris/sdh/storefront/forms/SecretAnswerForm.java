@@ -25,10 +25,28 @@ public class SecretAnswerForm
 	private String REL04;
 	private String REL05;
 	private String DIR2_0001;
+	private String DIR_0001;
 	private String DIR_0002;
 
+	
+	/**
+	 * @return the dIR_0001
+	 */
+	public String getDIR_0001()
+	{
+		return DIR_0001;
+	}
 
+	/**
+	 * @param dIR_0001
+	 *           the dIR_0001 to set
+	 */
+	public void setDIR_0001(final String dIR_0001)
+	{
+		DIR_0001 = dIR_0001;
+	}
 
+	
 
 
 
