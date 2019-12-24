@@ -231,7 +231,7 @@
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<select id="btnTpLic_${item.cdu}" class="newalto form-control">
+							<select id="btnTpLic_${item.cdu}" class="newalto form-control" onchange="establecerTipoLicencia(this)">
 								<option value="00">Seleccionar</option>
 								<option value="01">Licencia</option>
 								<option value="02">Reconocimiento</option>
@@ -240,9 +240,10 @@
 						<div class="col-sm-3">
 							<form:form method="post" commandName="inputDelineacion"
 								action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+								<c:set var="idCampoTipoLicencia" value='tipoLicenciaSeleccionada_${item.cdu}' />
 								<form:hidden path="selectedCDU" value="${item.cdu}" />
 								<form:hidden path="selectedRadicado" value="" />
-								<form:hidden path="selectedTipoLicencia" value="" />
+								<form:hidden path="selectedTipoLicencia" value="" id="${idCampoTipoLicencia}" />
 								<form:hidden path="selectedAnoPresDeclaracion" value="" />
 
 								<button type="submit" class="btn-link" id="btn_${item.cdu}"
@@ -370,6 +371,17 @@
 			tipoLicencia.disabled = false;
 			btnDeclaracion.disabled = false;
 		}
+	}
+	
+	
+	function establecerTipoLicencia(selectObject){
+		var value = selectObject.value;
+		var selected = selectObject.id;
+		var div = selected.substring(9);
+		div = "tipoLicenciaSeleccionada_" + div;
+		var tipoLicencia = document.getElementById(div);
+		tipoLicencia.value = value;
+		
 	}
 </script>
 

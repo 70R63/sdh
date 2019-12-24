@@ -448,6 +448,12 @@ public class DelineacionUrbanaController extends AbstractPageController
 				tipoMarca = infoDelineacion.getValCont().getDelineacion().get(i).getTipoMarca();
 			}
 		}
+		//Cuando se establecio el tipo de licencia desde la pantalla presentar declaracion
+		if (infoDelineacion.getInput().getSelectedTipoLicencia() != null)
+		{
+			infoDelineacion.getInfObjetoDelineacion().getInfoDeclara()
+					.setTipoLicencia(infoDelineacion.getInput().getSelectedTipoLicencia());
+		}
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("dataForm", infoDelineacion);
