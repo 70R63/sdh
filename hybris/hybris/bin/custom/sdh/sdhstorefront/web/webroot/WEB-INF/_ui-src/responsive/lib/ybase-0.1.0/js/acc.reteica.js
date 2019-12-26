@@ -45,7 +45,8 @@ ACC.reteica = {
 		            type: "POST",
 		            success: function (data) {
 		            	$( "#dialogReteICA" ).dialog( "open" );
-		            	if(data.errores)
+						debugger;
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
 	            		{
 		            		$("#reteICADialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {
