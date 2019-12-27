@@ -129,7 +129,7 @@ INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target
 ;navigation;PSCMSLinkComponent
 
 INSERT_UPDATE CatalogUnawareMedia;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];mime[default='text/plain']
-;reteICATemplate;AyudaReteICA.xlsm;$jarResourceCommon/AyudaReteICA.xlsm;pplication/vnd.ms-excel.sheet.macroEnabled.12
+;reteICATemplate;AyudaReteICA.xlsm;$jarResourceCommon/AyudaReteICA 3.xlsm;pplication/vnd.ms-excel.sheet.macroEnabled.12
 
 INSERT_UPDATE SiteTheme;code[unique=true]
 ;psalpha
