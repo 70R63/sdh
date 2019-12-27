@@ -141,7 +141,7 @@ ACC.vehiculos = {
 		            success: function (data) {
 						
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
-		            	if(data.errores)
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
 		            		$("#publicidadExteriorDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {

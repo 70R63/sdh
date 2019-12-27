@@ -534,7 +534,7 @@ ACC.ica = {
 		            type: "POST",
 		            success: function (data) {
 		            	$( "#dialogICA" ).dialog( "open" );
-		            	if(data.errores)
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
 		            		$("#icaDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {

@@ -46,7 +46,7 @@ ACC.reteica = {
 		            success: function (data) {
 		            	$( "#dialogReteICA" ).dialog( "open" );
 						debugger;
-		            	if(data.errores)
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
 	            		{
 		            		$("#reteICADialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {

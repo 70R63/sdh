@@ -36,7 +36,7 @@ ACC.gasolina = {
 		            type: "GET",
 		            success: function (data) {
 		            	$( "#dialogGasolina" ).dialog( "open" );
-		            	if(data.errores)
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
 	            		{
 		            		$("#gasolinaDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {
