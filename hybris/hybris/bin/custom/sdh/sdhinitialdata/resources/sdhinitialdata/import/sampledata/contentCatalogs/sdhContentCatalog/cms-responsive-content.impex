@@ -159,7 +159,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; AREdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/agenteRetenedor/estado-de-cuenta" ;;;;;
 ; ; ARCertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/agenteRetenedor/consultas/certideclaraciones" ;;;;;
 ; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
-; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/presentar-declaracion" ;;;;;
+; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/retenedores/estadocargas";;;;;
 ; ; ARListaDeclaracionLink	   	   ; LISTA LINK   				 			;"/agenteRetenedor/lista-declaraciones" ;;;;;
 
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
