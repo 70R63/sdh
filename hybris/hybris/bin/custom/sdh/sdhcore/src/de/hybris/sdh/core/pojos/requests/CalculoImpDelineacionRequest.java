@@ -289,7 +289,8 @@ public class CalculoImpDelineacionRequest
 		stringBuilder.append(obtenerValorJson("\"fechaEjecutaria\":\"", info.getFechaEjecutaria(), "\","));
 		stringBuilder.append(obtenerValorJson("\"fechaFinObra\":\"", info.getFechaFinalObra(), "\","));
 		stringBuilder.append(obtenerValorJson("\"fechaUltAbono\":\"", info.getFechaUltAbono(), "\","));
-		stringBuilder.append(obtenerValorJson("\"modalidad\":\"", info.getModalidad(), "\""));
+		stringBuilder.append(obtenerValorJson("\"modalidad\":\"", info.getModalidad(), "\","));
+		stringBuilder.append(obtenerValorJson("\"valorExen\":\"", info.getValorExen(), "\""));
 		stringBuilder.append("}");
 
 

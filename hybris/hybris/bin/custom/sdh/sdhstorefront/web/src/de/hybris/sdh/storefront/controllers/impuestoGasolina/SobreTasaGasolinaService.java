@@ -1049,9 +1049,9 @@ public class SobreTasaGasolinaService
 	{
 		final Calendar c = Calendar.getInstance();
 		int month = c.get(Calendar.MONTH);
-		final String monthSTR;
+		String monthSTR = null;
 
-		month = month == 11 ? 12 : month;
+		month = month == 0 ? 11 : month;
 		monthSTR = month < 10 ? "0" + Integer.toString(month) : Integer.toString(month);
 
 		return monthSTR;
@@ -2207,6 +2207,13 @@ public class SobreTasaGasolinaService
 			if (customerData.getPublicidadExt().size() > 0)
 			{
 				elementos.put("0007", "Publicidad Exterior Visual");
+			}
+		}
+		if (customerData.getDelineacion() != null) //Retedelineacion
+		{
+			if (customerData.getPublicidadExt().size() > 0)
+			{
+				elementos.put("0008", "Retención Delineación Urbana");
 			}
 		}
 

@@ -1,8 +1,17 @@
 ACC.ica = {
 		validacion_valorRetenido:{},
-	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones", "bindCalendarICA"],
+	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones", "bindCalendarICA", "bindBorrar"],
 	 
 	 bindDeleteDeducciones: function(){
+		 $(document).on("click", ".delededucciones", function (e) {
+			 e.preventDefault();
+			 $(this).parent().parent().parent().remove();
+			 
+		 });
+		 
+	 } ,
+	 
+	 bindBorrar: function(){
 		 $(document).on("click", ".delededucciones", function (e) {
 			 e.preventDefault();
 			 $(this).parent().parent().parent().remove();
@@ -525,7 +534,7 @@ ACC.ica = {
 		            type: "POST",
 		            success: function (data) {
 		            	$( "#dialogICA" ).dialog( "open" );
-		            	if(data.errores)
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
 		            		$("#icaDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {

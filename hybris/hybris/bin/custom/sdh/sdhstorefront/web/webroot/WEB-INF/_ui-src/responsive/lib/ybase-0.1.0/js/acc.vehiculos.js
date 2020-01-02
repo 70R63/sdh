@@ -141,7 +141,7 @@ ACC.vehiculos = {
 		            success: function (data) {
 						
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
-		            	if(data.errores)
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
 		            		$("#publicidadExteriorDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {
@@ -274,6 +274,7 @@ ACC.vehiculos = {
 								$("#intereses").val(data.intereses);
 								$("#totpagvol").val(data.totalPagoVol);
 								$("#numForm").val(data.numForm);
+								ACC.vehiculos.habilitarBotonPresentarDeclaracion();
 							}
 		            		
 	            		}else
@@ -289,6 +290,7 @@ ACC.vehiculos = {
 	            			$("#intereses").val(data.intereses);
 	            			$("#totpagvol").val(data.totalPagoVol);
 	            			$("#numForm").val(data.numForm);
+	            			ACC.vehiculos.habilitarBotonPresentarDeclaracion();
 	            			
 	            			
 //	            			$('#generaDeclaracionButton').prop("disabled", false);
@@ -318,6 +320,14 @@ ACC.vehiculos = {
     
 });
 },
+
+
+	habilitarBotonPresentarDeclaracion: function(){
+		var btnPresentarDec = document.getElementById("generaDeclaracionVehiculosButton");
+		
+		btnPresentarDec.disabled = false;
+	},
+
 
 	bindLabelVerDetVeh : function() {
 		$(document).on("click", ".labelVerDetVeh", function(e) {

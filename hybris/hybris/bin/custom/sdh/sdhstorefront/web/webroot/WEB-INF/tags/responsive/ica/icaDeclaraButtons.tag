@@ -39,8 +39,8 @@
 					</c:when>
 					<c:otherwise>
 						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" disabled class="btn btn-primary btn-lg GeneraDeclaracionButton"
-							type="button">
+							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
+							type="button"> <!-- se quita atributo disabled 19/12/2019 Maria torres -->
 							<spring:theme code="ica.declaracion.firma.prendecla" />
 						</button>
 					</c:otherwise>

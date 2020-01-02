@@ -51,6 +51,8 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -79,6 +81,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_CERTIFICA_DECLARACION = "Certificaciones de Declaración";
+	private static final String TEXT_CERTIFICA_DECLARACION_CONTRIB = "text.account.profile.certiDeclara";
 	private static final String VACIO = "";
 
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
@@ -156,7 +159,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 	//	@RequestMapping(value = "/contribuyentes/consultas/certideclaraciones", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String oblipendi(final Model model, @ModelAttribute("error")
-	final String error) throws CMSItemNotFoundException
+	final String error, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		LOG.debug("----------------  GET Obligaciones Pendientes--------------------------");
 
@@ -186,7 +189,8 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 	{ "/contribuyentes/consultas/certideclaraciones",
 			"/agenteRetenedor/consultas/certideclaraciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String certideclaracionesGET(final Model model) throws CMSItemNotFoundException
+	public String certideclaracionesGET(final Model model, final HttpServletRequest request, final HttpServletResponse response,
+			final String resolvedUrlPath) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Declaraciones --------------------------");
 
@@ -194,24 +198,47 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final OpcionDeclaracionesVista infoVista = new OpcionDeclaracionesVista();
+		final String urlIni;
 		SDHValidaMailRolResponse customerData = null;
+
+		request.getHeaders(CMS_PAGE_MODEL);
+		request.getAttribute(getSiteName());
+		final String resolvedUrl = response.encodeURL(request.getContextPath() + resolvedUrlPath);
+		final String urlIDD = request.getServletPath();
+
 
 
 		customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
 		infoVista.setCustomerData(customerData);
 
-		model.addAttribute("dataForm", infoVista);
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
+		//model.addAttribute("dataForm", infoVista);
 
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_CERTIFICA_DECLARACION));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		//storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
+		//setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
 
+		if (urlIDD.contains("contribuyentes"))
+		{
+			model.addAttribute("dataForm", infoVista);
 
+			storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_CERTIFICA_DECLARACION_CONTRIB));
+			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+			return getViewForPage(model);
+		}
+		else
+		{
+			model.addAttribute("dataForm", infoVista);
 
-		return getViewForPage(model);
+			storeCmsPageInModel(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CERTIFICACION_DECLARACIONES_CMS_PAGE));
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_CERTIFICA_DECLARACION));
+			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+			return getViewForPage(model);
+		}
+
 	}
 
 
@@ -321,8 +348,8 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 
 	@RequestMapping(value = "/contribuyentes/consultas/certideclaraciones", method = RequestMethod.POST)
 	public String certipdf(@ModelAttribute("dataForm")
-	final SobreTasaGasolinaForm dataFormResponse,
-			final Model model, final RedirectAttributes redirectModel, @ModelAttribute("certiFormPost")
+	final SobreTasaGasolinaForm dataFormResponse, final Model model, final RedirectAttributes redirectModel,
+			@ModelAttribute("certiFormPost")
 			final CertificacionPagoForm certiFormPost) throws CMSItemNotFoundException
 	{
 		LOG.debug("---------------- POST certificacion de pagos--------------------------");
@@ -446,8 +473,7 @@ public class CertificacionDeclaracionesPageController extends AbstractPageContro
 			if (certiFormPost.getAniograv() != null)
 			{
 				final List<ImpuestoDelineacionUrbanaWithRadicados> delineacionWithRadicadosList = sdhValidaContribuyenteService
-						.getDelineacionListByBpAndYearWithRadicados(customerModel.getNumBP(),
-								certiFormPost.getAniograv());
+						.getDelineacionListByBpAndYearWithRadicados(customerModel.getNumBP(), certiFormPost.getAniograv());
 
 				redirectModel.addFlashAttribute("delineacionWithRadicadosList", delineacionWithRadicadosList);
 			}

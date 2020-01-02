@@ -81,9 +81,9 @@
 <!-- 						value="retencion"> -->
 <%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>
 <!-- 					</button> -->
-		<button id="duGeneraDeclaracionButton" type="button"
-			<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
-			class="btn btn-primary btn-lg" onclick="pagarlinea()" >
+		<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()" >
+			<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
+			class="btn btn-primary btn-lg" onclick="pagarlinea()" >   Se comenta linea para habilitar boton 19/12/2019 Maria Torres--> 
 			<spring:theme code="delineacion.urbana.dec.firm.prerete" />
 		</button>
 					

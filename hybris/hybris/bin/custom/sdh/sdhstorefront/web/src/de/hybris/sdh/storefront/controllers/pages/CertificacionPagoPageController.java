@@ -29,6 +29,7 @@ import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -49,6 +50,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -320,7 +322,17 @@ public class CertificacionPagoPageController extends AbstractPageController
 		}
 
 
-		impuesto = infoVista.getClaveImpuesto();
+
+		if (infoVista.getClaveImpuesto().equals("0008"))//ajuste para diferenciar retedelineacion
+		{
+			impuesto = "0006";
+		}
+		else
+		{
+			impuesto = infoVista.getClaveImpuesto();
+		}
+
+
 		anioGravable = infoVista.getAnoGravable();
 		periodo = infoVista.getPeriodo();
 
@@ -354,9 +366,18 @@ public class CertificacionPagoPageController extends AbstractPageController
 			infoVista.setDeclaracionesCertiPagos(listaDeclaracionesResponse);
 			infoVista.setErrores(listaDeclaracionesResponse.getErrores());
 		}
-		else
+
+		if (infoVista.getClaveImpuesto().equals("0008"))//ajuste para diferenciar retedelineacion
 		{
-			//				declaraPDFResponse.setErrores(("Ocurrio un error. No se genero el PDF");
+			final Iterator<ItemListaDeclaraciones> itemListaDeclaraciones = listaDeclaracionesResponse.getDeclaraciones().iterator();
+
+			while (itemListaDeclaraciones.hasNext())
+			{
+				if (itemListaDeclaraciones.next().getNoRadicado() == null)
+				{
+					itemListaDeclaraciones.remove();
+				}
+			}
 		}
 
 
@@ -815,7 +836,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 			redirectModel.addFlashAttribute("publicidadMode", false);
 		}
 
-		if (certiFormPost.getIdimp().equals("6"))//Delineacion
+		if (certiFormPost.getIdimp().equals("6") || certiFormPost.getIdimp().equals("8"))//Delineacion
 		{
 			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
 			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());

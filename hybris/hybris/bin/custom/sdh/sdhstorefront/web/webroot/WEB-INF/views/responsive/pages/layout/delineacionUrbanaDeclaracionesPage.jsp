@@ -51,12 +51,14 @@ window.onload = function() {
 debugger;
 		var valexe = document.getElementById('valorExen');
 		var causex = document.getElementById('cauexen').value;
-		if (causex != '00' || valex != null)
+		if (causex == '00' || causex == null || causex == "" || causex == " ")
 			{
-			 valexe.disable = false;
+			 valexe.disabled = true;
+			 valexe.readonly=true;
 			}
 		else{
-			 valexe.disable = true;
+			 valexe.disabled = false;
+			 valexe.readonly= false;
 		}
 	
 	

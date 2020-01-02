@@ -44,6 +44,7 @@ window.onload = function() {
 		}
 	}
 	 $(".loader").fadeOut("slow");
+	 document.getElementById("gasolinaGeneraDeclaracionButton").disabled = false; //Se agrega linea para habilitar boton de declaracion 19/12/2019 Maria Torres
 }
 </script>
 

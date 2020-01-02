@@ -130,7 +130,7 @@
 						Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="impAviso" id="" value="no"
+						<input  type="radio" name="impAviso" id="" value="no"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
 						onclick="deshabilitar()" ${impavtableros_checkedNO}> No
@@ -260,13 +260,13 @@
 							code="ica.declaracion.liquidacion.aportvol" /> </label> <label
 						class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="aporte" id=""
+						<input disabled="disabled" readOnly="readonly" type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
 						onclick="disab()" ${aporteSI} value="si"> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="aporte" id=""
+						<input disabled="disabled" readOnly="readonly" type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
 						${aporteNO} onclick="disab2()" value="no"> No

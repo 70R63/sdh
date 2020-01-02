@@ -128,7 +128,7 @@
 				</div>
 				<div class="col-md-1">
 					<label class="control-label"><spring:theme code="" /></label>
-					<button class="btn btn-primary" id="btnfirmardeclarante"
+					<button class="newaltobtn btn btn-primary" id="btnfirmardeclarante"
 						style="margin-top: 4px">Firmar</button>
 				</div>
 			</div>
@@ -186,7 +186,7 @@
 		</div>
 
 		<div class="col-md-1">
-			<button class="btn btn-primary ajustemargen">Firmar</button>
+			<button class="newaltobtn btn btn-primary ajustemargen">Firmar</button>
 		</div>
 		<div class="col-md-1">
 			<div class="form-group ">
@@ -224,9 +224,9 @@
 
 			<div class="col-md-3">
 				<a id="downloadHelper" target="_blank"></a>
-				<button id="duGeneraDeclaracionButton" type="button"
-					<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
-					class="btn btn-primary btn-lg" onclick="pagarlinea()">
+				<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()">
+					<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
+					class="btn btn-primary btn-lg" onclick="pagarlinea()">  Se comenta linea para habilitar botón 19/12/2019 Maria Torres-->
 					<spring:theme code="delineacion.urbana.dec.firm.predec" />
 				</button>
 			</div>

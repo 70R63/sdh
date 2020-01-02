@@ -30,16 +30,16 @@
 		</div>
 	</div>
 	<div class="row mt-3">
-		<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
+		<div class="col-md-12 col-md-offset-4 d-flex align-items-center">
 			<div class="table-responsive text-center">
-				<table class="table table-bordered">
+				<table class="table table-bordered" style="width:auto !important">
 					<thead>
 						<tr>
 							<td><label class="control-label labeltabletd tableident"><spring:theme
 										code="sobre.vehiculo.table.tipdoc" /></label></td>
 							<td><label class="control-label labeltabletd tablenumiden"><spring:theme
 										code="sobre.vehiculo.table.numdoc" /></label></td>
-							<td><label class="control-label labeltabletd tablenombre"><spring:theme
+							<td><label class="control-label labeltabletd"><spring:theme
 										code="sobre.vehiculo.table.nombre" /></label></td>
 						</tr>
 					</thead>

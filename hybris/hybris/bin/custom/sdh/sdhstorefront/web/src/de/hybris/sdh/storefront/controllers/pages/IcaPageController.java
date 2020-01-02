@@ -13,6 +13,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
@@ -129,6 +130,9 @@ public class IcaPageController extends SDHAbstractPageController
 	@Resource(name = "modelService")
 	ModelService modelService;
 
+	@Resource(name = "sessionService")
+	SessionService sessionService;
+
 	@Resource(name = "mediaService")
 	MediaService mediaService;
 
@@ -184,7 +188,7 @@ public class IcaPageController extends SDHAbstractPageController
 	public List<String> getTarifaValorRetenido()
 	{
 
-		final List<String> tarifasValorRetenido = Arrays.asList("4.14", "6.90", "7.00", "8.00", "9.66", "11.04", "13.80");
+		final List<String> tarifasValorRetenido = Arrays.asList("4,14", "6,90", "7,00", "8,00", "9,66", "11,04", "13,80");
 
 		return tarifasValorRetenido;
 	}
@@ -520,6 +524,7 @@ public class IcaPageController extends SDHAbstractPageController
 		calcula2ImpuestoRequest.setFormulario(numForm);
 		final CalcICA2Response calcula2ImpuestoResponse = sdhCalculaICA2Facade.calcula(calcula2ImpuestoRequest);
 
+		addAgentsToModel(model, contribuyenteData, currentUserData);
 		if (calcula2ImpuestoResponse != null)
 		{
 			super.addFirmantes_impuesto(model, calcula2ImpuestoResponse.getFirmantes(), currentUserData);
@@ -531,7 +536,7 @@ public class IcaPageController extends SDHAbstractPageController
 		String anoGravable;
 
 		model.addAttribute("customerData", currentUserData);
-		addAgentsToModel(model, currentUserData, null);
+
 		//		model.addAttribute("redirectURL", "/contribuyentes/ica");
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
@@ -777,11 +782,17 @@ public class IcaPageController extends SDHAbstractPageController
 		ICACalculoImpResponse icaCalculoImpResponse = new ICACalculoImpResponse();
 		final ICACalculoImpRequest icaCalculoImpRequest = new ICACalculoImpRequest();
 
+		String numBP = sessionService.getCurrentSession().getAttribute("representado");
+		if (numBP == null)
+		{
+			numBP = customerModel.getNumBP();
+		}
+
 		icaCalculoImpRequest.setNumObjeto(icaCalculaDeclaracionForm.getNumObjeto());
 		icaCalculoImpRequest.setNumForm(icaCalculaDeclaracionForm.getNumForm());
 		icaCalculoImpRequest.setAnoGravable(icaCalculaDeclaracionForm.getAnoGravable());
 		icaCalculoImpRequest.setPeriodo(icaCalculaDeclaracionForm.getPeriodo());
-		icaCalculoImpRequest.setNumBP(customerModel.getNumBP());
+		icaCalculoImpRequest.setNumBP(numBP);
 		icaCalculoImpRequest.setCantEstablec(icaCalculaDeclaracionForm.getCantEstablec());
 		icaCalculoImpRequest.setEntFinanciera(icaCalculaDeclaracionForm.getEntFinanciera());
 		icaCalculoImpRequest.setImpuestoAviso(icaCalculaDeclaracionForm.getImpuestoAviso());

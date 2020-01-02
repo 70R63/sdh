@@ -27,7 +27,7 @@
 				<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
 			</button>
 			<button id="gasolinaGeneraDeclaracionButton"  type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton">
-				<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
+				<spring:theme code="impuestos.decGasolina.Pago.PresentarDec"/>
 			</button>
 			<sf:hidden path="numBP" />
 			<sf:hidden path="clavePeriodo" />
@@ -48,11 +48,11 @@
 	</div>
 
 	<br>
-	<div class="col-md-10 col-md-offset-3">
+	<div class="col-md-12">
 		<div class="table-responsive">
-			<div class="form-group">
-				<span tabindex="0"><spring:theme
-						code="impuestos.decGasolina.Pago.nota" /></span>
+			<div class="form-group" style="text-align: center !important">
+				<spring:theme
+						code="impuestos.decGasolina.Pago.nota" />
 			</div>
 		</div>
 	</div>
