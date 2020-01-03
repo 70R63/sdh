@@ -420,8 +420,9 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		{
 			tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
 			numDoc = gasolinaService.obtenerNumDoc(dataForm.getListaDocumentos());
-			anioGravable = Integer.toString(gasolinaService.obtenerAnoGravableActual());
 			periodo = gasolinaService.obtenerPeriodoActual();
+			anioGravable = Integer.toString(gasolinaService.obtenerAnoGravableActual());
+
 
 			detalleGasolinaRequest.setNumBP(numBP);
 			detalleGasolinaRequest.setNumDoc(numDoc);

@@ -326,7 +326,7 @@ public class PSEPaymentController extends AbstractPageController
 		final String bpRepresentado = sessionService.getCurrentSession().getAttribute("representado");
 		if (bpRepresentado != null)
 		{
-			model.addAttribute("representado", "false");
+			model.addAttribute("representado", "true");
 		}
 		else
 		{

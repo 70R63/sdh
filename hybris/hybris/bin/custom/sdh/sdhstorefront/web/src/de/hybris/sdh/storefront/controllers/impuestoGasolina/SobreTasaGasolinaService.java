@@ -1019,7 +1019,7 @@ public class SobreTasaGasolinaService
 		int year = c.get(Calendar.YEAR);
 		final boolean esCambioAnio = false;
 
-		year = ocurrioCambioAnio() == false ? year : year--;
+		year = ocurrioCambioAnio() ? --year : year;
 
 		return year;
 	}
@@ -1035,7 +1035,7 @@ public class SobreTasaGasolinaService
 		final int month = c.get(Calendar.MONTH);
 		boolean esCambioAnio = false;
 
-		esCambioAnio = month != 0 ? false : true;
+		esCambioAnio = month == 0 ? true : false;
 
 
 		return esCambioAnio;
@@ -1051,7 +1051,7 @@ public class SobreTasaGasolinaService
 		int month = c.get(Calendar.MONTH);
 		String monthSTR = null;
 
-		month = month == 0 ? 11 : month;
+		month = month == 0 ? 12 : month;
 		monthSTR = month < 10 ? "0" + Integer.toString(month) : Integer.toString(month);
 
 		return monthSTR;
