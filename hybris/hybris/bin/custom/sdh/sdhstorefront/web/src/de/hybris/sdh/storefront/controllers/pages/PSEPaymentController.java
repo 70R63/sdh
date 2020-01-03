@@ -9,6 +9,7 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
@@ -126,6 +127,10 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "sdhOnlinePaymentProviderMatcherFacade")
 	private DefaultSDHOnlinePaymentProviderMatcherFacade sdhOnlinePaymentProviderMatcherFacade;
+
+
+	@Resource(name = "sessionService")
+	SessionService sessionService;
 
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getIdTipoDeImpuesto()
@@ -317,6 +322,16 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute("disableFields", "true");
 		model.addAttribute("flagSuccessView", flagSuccessView);
 		model.addAttribute("flagReintetarPago", flagReintetarPago);
+
+		final String bpRepresentado = sessionService.getCurrentSession().getAttribute("representado");
+		if (bpRepresentado != null)
+		{
+			model.addAttribute("representado", "false");
+		}
+		else
+		{
+			model.addAttribute("representado", "false");
+		}
 
 		return getViewForPage(model);
 	}
