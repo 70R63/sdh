@@ -7,6 +7,8 @@
 <%@ taglib prefix="pagoPSE" tagdir="/WEB-INF/tags/responsive/pagoPSE"%>
 
 
+<div id="pagoARResponse" title="ReteICA" ><div id="pagoARResponseContent"></div></div>
+
 <%-- --flagSuccessView:${flagSuccessView}-- --${empty flagSuccessView}-- --%>
 <c:choose>
 	<c:when test="${empty flagSuccessView}">
