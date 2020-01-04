@@ -201,17 +201,18 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
 
-
 			final GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType = new GetTransactionInformationDetailedBodyType();
 			getTransactionInformationDetailedBodyType.setTrazabilityCode(trazabilityCode);
 
 			final GetTransactionInformationDetailedResponseBodyType response1 = pseServices.getTransactionInformationDetailed(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationDetailedBodyType);
 
+            LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+                    + pseTransactionsLogModel.getTransactionState() + " -> " + response.getTransactionState().getValue() + "] ");
+
 			this.updateResponse(pseTransactionsLogModel, response, response1);
 
-			LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
-					+ pseTransactionsLogModel.getTransactionState() + "] ");
+
 		}
 
 	}
@@ -244,6 +245,12 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		String transactionState = null;
 		if (response != null)
 		{
+			LOG.info("----- Response Data GetTransactionInformationResponseBodyType -------");
+			LOG.info(response);
+			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
+			LOG.info(responseDetailed);
+			LOG.info("-----------------------------------------------------------------------------");
+
 			pseTransactionsLogModel.setSoliciteDate(dateTimeFormat.format(response.getSoliciteDate()));
 			try
 			{
@@ -252,15 +259,76 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			catch (final Exception e)
 			{
 				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
-			}			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+			}
+
+			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+
+
 			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
-			//pseTransactionsLogModel.setPaymentMode(map.get("bankProcessDate"));
+			if (map.get("paymentMode").equals("Débito en Cuenta"))
+			{
+				pseTransactionsLogModel.setPaymentMode("15");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Visa"))
+			{
+				pseTransactionsLogModel.setPaymentMode("50");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito  Master Card"))
+			{
+				pseTransactionsLogModel.setPaymentMode("51");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Diners Club"))
+			{
+				pseTransactionsLogModel.setPaymentMode("52");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Propia Entidad Financiera"))
+			{
+				pseTransactionsLogModel.setPaymentMode("53");
+			}
+			else if (map.get("paymentMode").equals("Crédito Rotativo"))
+			{
+				pseTransactionsLogModel.setPaymentMode("54");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito  American Express"))
+			{
+				pseTransactionsLogModel.setPaymentMode("55");
+			}
+			else
+			{
+				pseTransactionsLogModel.setPaymentMode("");
+			}
+
+
+
+			if (map.get("paymentOrigin").equals("Débito"))
+			{
+				pseTransactionsLogModel.setPaymentOrigin("01");
+				pseTransactionsLogModel.setTipoDeTarjeta("01");
+			}
+			else if (map.get("paymentOrigin").equals("Crédito"))
+			{
+				pseTransactionsLogModel.setPaymentOrigin("02");
+				pseTransactionsLogModel.setTipoDeTarjeta("02");
+			}
+			else
+			{
+				pseTransactionsLogModel.setPaymentOrigin("");
+			}
+
+			pseTransactionsLogModel.setObjPago(map.get("reference2"));
 
 			transactionState = response.getTransactionState().getValue();
 
-			LOG.info("Updated PseTransactionsLogModel [" + pseTransactionsLogModel.getNumeroDeReferencia() + ","
-					+ response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", "
-					+ response.getTransactionState().getValue() + "]");
+			//Comentar Forzado de trasnacciones PENDING
+			//if (transactionState.equals("PENDING"))
+			//{
+			//	pseTransactionsLogModel.setTransactionState("OK");
+			//}
+
+			LOG.info("Updated PseTransactionsLogModel [ " + pseTransactionsLogModel.getNumeroDeReferencia() + ", "
+					+ pseTransactionsLogModel.getPaymentMode() + ", " + pseTransactionsLogModel.getPaymentOrigin() + ", "
+					+ pseTransactionsLogModel.getObjPago() + pseTransactionsLogModel.getSoliciteDate() + ", "
+					+ pseTransactionsLogModel.getBankProcessDate() + ", " + pseTransactionsLogModel.getTransactionState() + " ]");
 
 			modelService.saveAll(pseTransactionsLogModel);
 		}

@@ -46,6 +46,7 @@
 	}
 
 	function sdhOnChange(selectPaymentMethod){
+		debugger;
 	    var url = window.location.href;
 	    url = url.replace("impuestos/pagoEnLinea/form", "onlinePaymentMatcher/getBanks");
 
@@ -67,6 +68,7 @@
             url     : url + '?tax='+tax+'&paymentMethod='+paymentMethod,
             method  : 'GET',
             success : function(resultText){
+				debugger;
                 $.each(resultText,function(i,v){
                     var option = document.createElement('option');
                     option.value = v.code;
@@ -96,8 +98,10 @@
 <c:set var = "buttonImageBBVA" scope = "session" value = "https://pbs.twimg.com/profile_images/907185208549572608/Hn65NsHV_400x400.jpg"/>
 <c:set var = "buttonImageDAVIVIENDA" scope = "session" value = "https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0029/4616/davivienda.png"/>
 
+<!--
 --disableFields:${disableFields}--
 --disabled:${disabled}--
+-->
 <c:choose>
   <c:when test="${disableFields eq 'true'}">
   	<c:set var = "disabled" value = "true"/> 
@@ -113,11 +117,13 @@
     <c:set var = "debugMode" value = "true"/> 
 </c:if>
 
+<!--
 --flagReintetarPago:${flagReintetarPago}--
 --disableFields:${disableFields}--
 --disabled:${disabled}--
 --debugMode:${debugMode}--
 --flagSuccessView:${flagSuccessView}--
+-->
 <div class="row" >
 	<div class="col-md-6 col-md-offset-3">
 		<div class="item_container_holder ">
@@ -126,7 +132,7 @@
 			
 				<form:form method="post" commandName="psePaymentForm" action="">
 				<div class="row" >
-				--psePaymentForm.numeroDeReferencia:${psePaymentForm.numeroDeReferencia}--
+				<!-- --psePaymentForm.numeroDeReferencia:${psePaymentForm.numeroDeReferencia}-- -->
 				</div>
 					<fieldset>					
 					<c:if test = "${(tipoDeImpuestoSeleccionado eq ControllerPseConstants.GASOLINA || tipoDeImpuestoSeleccionado eq ControllerPseConstants.PUBLICIDAD ) && disabled eq true}">
@@ -256,44 +262,44 @@
 				</form:form>
 				
 				
+
+<%-- 				<form:form method="post" commandName="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">		 --%>
+<%-- 					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/> --%>
+<%-- 					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/> --%>
+<%-- 					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/> --%>
+<%-- 					<form:hidden path="impuesto" value="${psePaymentForm.impuesto}"/> --%>
+<%-- 					<form:hidden path="anoGravable" value="${psePaymentForm.anoGravable}"/> --%>
+<%-- 					<form:hidden path="CHIP" value="${psePaymentForm.CHIP}"/> --%>
+<%-- 					<form:hidden path="periodo" value="${psePaymentForm.periodo}"/> --%>
+<%-- 					<form:hidden path="CUD" value="${psePaymentForm.CUD}"/> --%>
+<%-- 					<form:hidden path="noIdentificacion" value="${psePaymentForm.noIdentificacion}"/> --%>
+<%-- 					<form:hidden path="DV" value="${psePaymentForm.DV}"/> --%>
+<%-- 					<form:hidden path="tipoDeIdentificacion" value="${psePaymentForm.tipoDeIdentificacion}"/> --%>
+<%-- 					<form:hidden path="fechaLimiteDePago" value="${psePaymentForm.fechaLimiteDePago}"/> --%>
+<%-- 					<form:hidden path="pagoAdicional" value="${psePaymentForm.pagoAdicional}"/> --%>
+<%-- 					<form:hidden id="hiddenBanco" path="banco" value="${varBanco}"/> --%>
+<%-- 					<form:hidden path="valorAPagar" value="${psePaymentForm.valorAPagar}"/> --%>
+<%-- 					<form:hidden id="hiddenTipoDeTarjeta" path="tipoDeTarjeta" value="${varTipoDeTarjeta}"/> --%>
+<%-- 					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>		 --%>
+<%-- 					<form:hidden path="bankDateResponse" value="${psePaymentForm.bankDateResponse}"/> --%>
+<%-- 					<form:hidden path="bankTimeResponse" value="${psePaymentForm.bankTimeResponse}"/>			 --%>
+<%-- 					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/> --%>
 				
-				<form:form method="post" commandName="psePaymentForm" action="/sdhstorefront/es/impuestos/pagoEnLinea/pseResponse">		
-					<form:hidden path="tipoDeImpuesto" value="${psePaymentForm.tipoDeImpuesto}"/>
-					<form:hidden path="trazabilityCode" value="${psePaymentForm.trazabilityCode}"/>
-					<form:hidden path="numeroDeReferencia" value="${psePaymentForm.numeroDeReferencia}"/>
-					<form:hidden path="impuesto" value="${psePaymentForm.impuesto}"/>
-					<form:hidden path="anoGravable" value="${psePaymentForm.anoGravable}"/>
-					<form:hidden path="CHIP" value="${psePaymentForm.CHIP}"/>
-					<form:hidden path="periodo" value="${psePaymentForm.periodo}"/>
-					<form:hidden path="CUD" value="${psePaymentForm.CUD}"/>
-					<form:hidden path="noIdentificacion" value="${psePaymentForm.noIdentificacion}"/>
-					<form:hidden path="DV" value="${psePaymentForm.DV}"/>
-					<form:hidden path="tipoDeIdentificacion" value="${psePaymentForm.tipoDeIdentificacion}"/>
-					<form:hidden path="fechaLimiteDePago" value="${psePaymentForm.fechaLimiteDePago}"/>
-					<form:hidden path="pagoAdicional" value="${psePaymentForm.pagoAdicional}"/>
-					<form:hidden id="hiddenBanco" path="banco" value="${varBanco}"/>
-					<form:hidden path="valorAPagar" value="${psePaymentForm.valorAPagar}"/>
-					<form:hidden id="hiddenTipoDeTarjeta" path="tipoDeTarjeta" value="${varTipoDeTarjeta}"/>
-					<form:hidden path="debugMode" value="${psePaymentForm.debugMode}"/>		
-					<form:hidden path="bankDateResponse" value="${psePaymentForm.bankDateResponse}"/>
-					<form:hidden path="bankTimeResponse" value="${psePaymentForm.bankTimeResponse}"/>			
-					<form:hidden path="objPago" value="${psePaymentForm.objPago}"/>
-				
-					<div class="text-center">
-							<ycommerce:testId code="login_forgotPasswordSubmit_button">
-								<c:if test = "${disabled eq true}">
-									<div id="continuar">										
-										<button class="btn btn-secondary btn-lg" type="submit">
-											<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
-										</button>
-										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
-											<spring:theme code="impuestos.Pago.PSE.continuar"/>
-										</button>
-									</div>
-								</c:if>
-							</ycommerce:testId>
-						</div>
-				</form:form>
+<!-- 					<div class="text-center"> -->
+<%-- 							<ycommerce:testId code="login_forgotPasswordSubmit_button"> --%>
+<%-- 								<c:if test = "${disabled eq true}"> --%>
+<!-- 									<div id="continuar">										 -->
+<!-- 										<button class="btn btn-secondary btn-lg" type="submit"> -->
+<%-- 											<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/> --%>
+<!-- 										</button> -->
+<%-- 										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';"> --%>
+<%-- 											<spring:theme code="impuestos.Pago.PSE.continuar"/> --%>
+<!-- 										</button> -->
+<!-- 									</div> -->
+<%-- 								</c:if> --%>
+<%-- 							</ycommerce:testId> --%>
+<!-- 						</div> -->
+<%-- 				</form:form> --%>
 				
 						
 				

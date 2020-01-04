@@ -26,8 +26,8 @@
 				onclick="goBack()">
 				<spring:theme code="impuestos.decGasolina.Pago.Regresar" />
 			</button>
-			<button id="gasolinaGeneraDeclaracionButton" disabled type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton">
-				<spring:theme code="impuestos.decGasolina.Pago.PresentarDec" />
+			<button id="gasolinaGeneraDeclaracionButton"  type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton">
+				<spring:theme code="impuestos.decGasolina.Pago.PresentarDec"/>
 			</button>
 			<sf:hidden path="numBP" />
 			<sf:hidden path="clavePeriodo" />
@@ -40,7 +40,7 @@
 					<c:set var = "deshabilitarPagar" value = "false"/>	
 				</c:otherwise>
 			</c:choose>
-			<sf:button class="btn btn-primary btn-lg" type="submit" id="pagar"
+			<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit" id="pagar"
 				name="action" value="pagar" disabled="${deshabilitarPagar}">
 				<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 			</sf:button>
@@ -50,9 +50,9 @@
 	<br>
 	<div class="col-md-12">
 		<div class="table-responsive">
-			<div class="form-group">
-				<span tabindex="0"><spring:theme
-						code="impuestos.decGasolina.Pago.nota" /></span>
+			<div class="form-group" style="text-align: center !important">
+				<spring:theme
+						code="impuestos.decGasolina.Pago.nota" />
 			</div>
 		</div>
 	</div>

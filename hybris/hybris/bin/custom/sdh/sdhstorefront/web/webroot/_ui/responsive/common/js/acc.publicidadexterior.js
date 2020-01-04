@@ -21,7 +21,7 @@ ACC.publicidadexterior = {
 		            success: function (data) {
 						
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
-		            	if(data.errores)
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
 		            		$("#publicidadExteriorDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {
@@ -52,6 +52,7 @@ ACC.publicidadexterior = {
 	 
 	 bindCalculoButton: function () {
 		 $(document).on("click", "#calculoButton", function (e) {
+				debugger;
 	 	        e.preventDefault();
 	 	       //$("#calculoButton").prop('disabled', true); //Se comenta línea derivado del incidente 38-A 05/09/2019 dev-Maria
 	 	       var anograv  = $.trim($("#anograv").val());
@@ -89,6 +90,7 @@ ACC.publicidadexterior = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
+						debugger;
 		            	if(data.errores)
 	            		{
 		            		$( "#dialogPublicidadExterior" ).dialog( "open" );
@@ -123,6 +125,7 @@ ACC.publicidadexterior = {
 	 	      		
 		            },
 		            error: function () {
+						debugger;
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	$("#publicidadExteriorDialogContent").html("");
 		            	$("#publicidadExteriorDialogContent").html("Hubo un error al realizar el cálculo, por favor intentalo más tarde");

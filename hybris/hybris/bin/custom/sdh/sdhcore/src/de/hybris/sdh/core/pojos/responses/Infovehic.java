@@ -34,7 +34,7 @@ public class Infovehic
 	{
 		return opcionUso;
 	}
-	
+
 	/**
 	 * @param opcionUso
 	 *           the opcionUso to set

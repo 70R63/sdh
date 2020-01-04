@@ -21,6 +21,12 @@
 		window.onload = function() {
 			
 		    $(".loader").fadeOut("slow");
+		    debugger;
+		    var tipoImpuesto = document.getElementById("impuesto").value;
+		    if(tipoImpuesto == '6'){
+				var nota = document.getElementById("notas_deli");
+				nota.style.display='block'
+			}
 		}
 		
 		//debugger;
@@ -74,10 +80,11 @@
 	function onChange() {
 		var tipoImpuesto = document.getElementById("impuesto").value;
 		
-// 		debugger;
+ 		debugger;
 		if(tipoImpuesto == '2'){ //vehicular
 			ACC.opcionDeclaraciones.prepararVehicular_presentarDec(tipoImpuesto);
 		}else{ //otros impuestos
+			
 			form = document.getElementById("forma");
 	
 			input = document.createElement('input');
@@ -87,6 +94,7 @@
 			form.appendChild(input);
 	
 			form.submit();
+			
 		}
 	}
 

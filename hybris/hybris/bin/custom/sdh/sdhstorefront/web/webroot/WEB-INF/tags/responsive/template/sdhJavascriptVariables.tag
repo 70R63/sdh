@@ -130,6 +130,8 @@
 			ACC.vehiculosDeclaCalculoURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/declaracion/calculo' />";
 			
 			ACC.vehiculosGeneraDeclaracionURL = "<c:url value='/contribuyentes/sobrevehiculosautomotores/declaracion/generar' />";
+
+			ACC.tramiteExitosoURL = "<c:url value='/contribuyentes/tramites' />";
 			
 			
 		  	ACC.currentURL = "${currentURL}";
@@ -181,6 +183,8 @@
 			</c:if>
 			<c:if test="${hasRIRol and fn:contains(currentURL, 'reportantes')}">
 			</c:if>
+			
+			debugger;
 			
 			<c:choose>
 				<c:when test="${not empty reteIcaMaxFileSize}">

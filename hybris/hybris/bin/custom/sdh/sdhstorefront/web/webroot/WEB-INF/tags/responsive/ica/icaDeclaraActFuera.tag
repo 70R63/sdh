@@ -24,9 +24,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="headline">
+			<div class="hwomargin headline">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span class="hwomargin"><spring:theme
 							code="ica.declaracion.actifuera.titulo" /></span>
 				</h2>
 			</div>
@@ -34,7 +34,7 @@
 	</div>
 
 	<br>
-	<form:form action="">
+	<form:form action="" style="padding-left: 0px !important">
 		<div class="row">
 			<div class="col-md-7">
 				<label class="control-label format_label" for="">

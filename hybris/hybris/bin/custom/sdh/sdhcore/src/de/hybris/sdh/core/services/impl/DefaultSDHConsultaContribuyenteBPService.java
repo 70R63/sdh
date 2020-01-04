@@ -134,7 +134,7 @@ public class DefaultSDHConsultaContribuyenteBPService implements SDHConsultaCont
 			if(Objects.nonNull(agentes)){
 				for(ContribAgente agente : agentes){
 					String entidadBancaria = agente.getEntBanco();
-					LOG.info(agente);
+					LOG.debug(agente);
 					if(Objects.nonNull(entidadBancaria)){
 						if(!entidadBancaria.equals("")){
 							entidad = entidadBancaria;

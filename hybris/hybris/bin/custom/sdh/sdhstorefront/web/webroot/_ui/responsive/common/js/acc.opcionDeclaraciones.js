@@ -134,6 +134,7 @@ ACC.opcionDeclaraciones = {
 				var valFechaCompensa;
 				var valMoneda;
 				var valNumDocPago;
+				var valNumfactForm;
 					
 				for (var i = 0; i < e.target.form.length; i++) {
 					nombreCampo = "registroNum_" + i;
@@ -150,6 +151,7 @@ ACC.opcionDeclaraciones = {
 							 valFechaCompensa = $.trim($(valorCampo).attr("data-fechaCompensa")); 
 							 valMoneda = $.trim($(valorCampo).attr("data-moneda")); 
 							 valNumDocPago = $.trim($(valorCampo).attr("data-numDocPago")); 
+							 valNumfactForm = $.trim($(valorCampo).attr("data-numfactForm")); 
 
 							 break;
 						}
@@ -172,7 +174,8 @@ ACC.opcionDeclaraciones = {
 				dataActual.importe = valImporte;
 				dataActual.fechaCompensa = valFechaCompensa;
 				dataActual.moneda = valMoneda;
-				dataActual.numDocPago = valNumDocPago
+				dataActual.numDocPago = valNumDocPago;
+				dataActual.numfactForm = valNumfactForm;
 				
 	
 				$.ajax({
@@ -290,11 +293,11 @@ ACC.opcionDeclaraciones = {
 				type : "GET",
 				success : function(dataResponse) {
 					debugger;
-					ACC.opcionDeclaraciones.dataActual_backup = dataActual;
-					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
+//					ACC.opcionDeclaraciones.dataActual_backup = dataActual;
+//					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
 					ACC.opcionDeclaraciones.mostrarErrores_certiPagos(dataResponse);
 					ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(dataActual,dataResponse,null);					
-					ACC.opcionDeclaraciones.habilitarFiltroPeriodo(dataActual,dataResponse);
+//					ACC.opcionDeclaraciones.habilitarFiltroPeriodo(dataActual,dataResponse);
 				},
 				error : function() {
 					alert("Error procesar la solicitud");	
@@ -414,8 +417,10 @@ ACC.opcionDeclaraciones = {
 						'<td><input id="registroNum_'+ 0 +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ infoResponse.ica.numObjeto +'"' +">" + "</td>"+
 						"</tr>");
 			}
-			if(infoResponse.reteIca.consecutivo == null){
-				infoResponse.reteIca.consecutivo ="-";
+			if(infoResponse.reteIca != null){
+				if(infoResponse.reteIca.consecutivo == null){
+					infoResponse.reteIca.consecutivo ="-";
+				}
 			}
 			
 			if(infoActual.claveImpuesto == '0004'){
@@ -479,13 +484,14 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse,filtroPeriodo) {
 		var desc_clavePeriodo = "";
-		
+		var indiceTabla = 0;
 		
 debugger;
 		if(infoResponse.declaracionesCertiPagos.declaraciones != null){
 			if(infoResponse.declaracionesCertiPagos.declaraciones.length > 0){
 				
 				if(infoActual.claveImpuesto == '0002'){
+					indiceTabla = 0;
 					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.vehicular, function (index,value2){
@@ -498,8 +504,9 @@ debugger;
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
-											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 											"</tr>");
+										indiceTabla++;
 								}
 							});
 						}
@@ -507,7 +514,8 @@ debugger;
 				}
 				
 				if(infoActual.claveImpuesto == '0003'){
-					if(filtroPeriodo != null){
+					indiceTabla = 0;
+					if(infoResponse.declaracionesCertiPagos != null){
 						$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 							if(value1.numObjeto != null && value1.numObjeto != ""){
 								if(value1.numObjeto == infoResponse.customerData.ica.numObjeto){
@@ -519,8 +527,9 @@ debugger;
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
-											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato + '" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato + '" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 											"</tr>");
+										indiceTabla++;
 									}
 								}
 							}
@@ -530,6 +539,7 @@ debugger;
 			
 		
 				if(infoActual.claveImpuesto == '0004'){
+					indiceTabla = 0;
 					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 						if(value1.numObjeto != ""){
 							if(value1.numObjeto == infoResponse.customerData.reteIca.numObjeto){
@@ -540,14 +550,16 @@ debugger;
 									'<td>' + value1.referencia + '</td>'+
 									'<td>' + value1.importe + '</td>'+
 									'<td>' + value1.moneda + '</td>'+
-									'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia +  '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+									'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia +  '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 									"</tr>");
+								indiceTabla++;
 							}
 						}
 					});
 				}
 		
 				if(infoActual.claveImpuesto == '0005'){
+					indiceTabla = 0;
 					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.gasolina, function (index,value2){
@@ -559,8 +571,9 @@ debugger;
 										'<td>' + value1.referencia + '</td>'+
 										'<td>' + value1.importe + '</td>'+
 										'<td>' + value1.moneda + '</td>'+
-										'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago +  '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+										'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm +  '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 										"</tr>");
+									indiceTabla++;
 								}
 							});
 						}
@@ -568,6 +581,7 @@ debugger;
 				}
 		
 				if(infoActual.claveImpuesto == '0006'){
+					indiceTabla = 0;
 					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.delineacion, function (index,value2){
@@ -578,8 +592,9 @@ debugger;
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
-											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 											"</tr>");
+									indiceTabla++;
 								}
 							});
 						}	
@@ -587,6 +602,7 @@ debugger;
 				}
 
 				if(infoActual.claveImpuesto == '0007'){
+					indiceTabla = 0;
 					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.publicidadExt, function (index,value2){
@@ -598,13 +614,35 @@ debugger;
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
-											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 											"</tr>");
+									indiceTabla++;
 								}
 							});
 						}
 					});
 				}
+				
+				
+				if(infoActual.claveImpuesto == '0008'){
+					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
+						if(value1.numObjeto != ""){
+							$.each(infoResponse.customerData.delineacion, function (index,value2){
+								if(value1.numObjeto == value2.numObjeto){
+									$('#table-delineacion1').append("<tr>"+ 
+											'<td>' + value2.cdu + '</td>'+
+											'<td>' + value1.clavePeriodo + '</td>'+
+											'<td>' + value1.referencia + '</td>'+
+											'<td>' + value1.importe + '</td>'+
+											'<td>' + value1.moneda + '</td>'+
+											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+											"</tr>");
+								}
+							});
+						}	
+					});	
+				}
+				
 				
 			}
 		}
@@ -616,6 +654,7 @@ debugger;
 	updateFromResponseSeleccion_presentarDec : function(infoActual,infoResponse) {
 		debugger;
 		var flagHuboRegistros = false;
+		var anioGravable = document.getElementById("anoGravable").value;
 	
 		ACC.opcionDeclaraciones.vaciarTablasInfo_presentarDec();
 		
@@ -628,7 +667,7 @@ debugger;
 				if(infoResponse.vehicular.length > 0){
 					$.each(infoResponse.vehicular, function (index,value){
 						if(value.placa != null && value.placa !=""){
-							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + value.anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP + '&numForma=' + value.numForm ;
+							var url = urlPrefijo + urlDeclaracion + '?anioGravable=' + anioGravable + '&placa=' + value.placa + '&numBPP=' + infoResponse.numBP + '&numForma=' + value.numForm ;
 							
 							blindado_vehi.forEach(function (eachBLI) {
 						    		if(eachBLI.id_blindado== value.blindado)
@@ -802,10 +841,11 @@ debugger;
         var anoGravable = $("#aniograv").val(); 	       
         var periodoM = $("#periodoM").val();
         var periodoB = $("#periodoB").val();
+		var perMensual = document.getElementById('Periodo1'); //mensual
 		var perBimestral = document.getElementById('Periodo2'); //bimestral
 		var validacionOK = false;
 
-		if(claveImpuesto == "0001" || claveImpuesto == "0002" || claveImpuesto == "0006" || claveImpuesto == "0007"){
+		if(claveImpuesto == "0001" || claveImpuesto == "0002" || claveImpuesto == "0006" || claveImpuesto == "0007" || claveImpuesto == "0008"){
 			if(anoGravable != "" && anoGravable != "00"){
 				validacionOK = true;
 			}
@@ -819,8 +859,7 @@ debugger;
 					validacionOK = true; 
 				}
 			}
-		}
-		if(claveImpuesto == "0005"){
+		}else if(claveImpuesto == "0005"){
 			if(anoGravable != "" && anoGravable != "00" && periodoM != "" && periodoM != "00"){
 				validacionOK = true;
 			}
@@ -981,7 +1020,9 @@ debugger;
 			cdus.style.display = 'block';
 		} else if (x == '0007') { //publicidad
 			tablepublicidad.style.display = 'block';
-		}
+		} else if (x == '0008') { //delineacion
+			cdus.style.display = 'block';
+		} 
 		
 		
 	},
@@ -1069,6 +1110,9 @@ debugger;
 			ACC.opcionDeclaraciones.mostrarPeriodo(2);
 		}
 		
+		if(claveImpuesto == '0003'){
+			ACC.opcionDeclaraciones.mostrarPeriodo(2);
+		}
 		
 	},
 	

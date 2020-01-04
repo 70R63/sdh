@@ -11,8 +11,6 @@ import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.PseNotificacionDePagoRequest;
 import de.hybris.sdh.core.services.SDHNotificacionPagoService;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -102,8 +100,11 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 				}*/
 			}
 
+
+
+
 			pseNotificacionDePagoRequest = new PseNotificacionDePagoRequest();
-			pseNotificacionDePagoRequest.setIdBancos(getBankId(transaction.getTipoDeImpuesto()));
+			pseNotificacionDePagoRequest.setIdBancos(getBankId(transaction.getBanco()));
 			pseNotificacionDePagoRequest.setModalidad(transaction.getTipoDeTarjeta());
 			pseNotificacionDePagoRequest.setProcPago(ControllerPseConstants.PSE_PROC_PAGO.get(transaction.getTipoDeTarjeta()));
 			pseNotificacionDePagoRequest.setFchRecaudo(fechaRecaudo);
@@ -111,11 +112,14 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 			pseNotificacionDePagoRequest.setCodImpuesto(getImpuestoId(transaction.getTipoDeImpuesto()));
 			pseNotificacionDePagoRequest.setRefPago(transaction.getNumeroDeReferencia());
 			pseNotificacionDePagoRequest.setVlrRecuado(transaction.getValorAPagar());
-			
-			pseNotificacionDePagoRequest.setNumOperacion("9999999");
+
+			pseNotificacionDePagoRequest.setNumOperacion(transaction.getTrazabilityCode());
 			pseNotificacionDePagoRequest.setObjPago(transaction.getObjPago());
 
-			
+
+
+
+
 			if(transaction.getEntityCode().equals(ControllerPseConstants.CREDIBANCO_IDENTIFIER_TRANSACTION))
 			{ //Credibanco transaction
                 LOG.info("---- CREDIBANCO TRANSACTION ----");
@@ -124,9 +128,15 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 								transaction.getCrePaymentMethod()));
 			}else { //ACH PSE Transaction
                 LOG.info("---- ACH/PSE TRANSACTION ----");
-				pseNotificacionDePagoRequest.setMedioPago(
-						ControllerPseConstants.NOTIFICACION_DE_PAGO_MEDIO_PAGO.get(
-								transaction.getTipoDeTarjeta()));
+				if (transaction.getPaymentMode() != null)
+				{
+					pseNotificacionDePagoRequest.setMedioPago(transaction.getPaymentMode());
+				}
+				else
+				{
+					pseNotificacionDePagoRequest.setMedioPago("");
+				}
+
 			}
 
 
@@ -160,7 +170,7 @@ public class DefaultSDHNotificacionPagoService implements SDHNotificacionPagoSer
 		 *
 		 * }
 		 */
-		return Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(0, 2) : null;
+		return Objects.nonNull(tipoDeImpuesto) ? tipoDeImpuesto.substring(2, 4) : null;
 	}
 
 	private String getImpuestoId(final String tipoDeImpuesto)

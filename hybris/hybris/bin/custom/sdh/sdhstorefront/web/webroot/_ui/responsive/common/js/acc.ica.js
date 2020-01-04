@@ -1,8 +1,17 @@
 ACC.ica = {
-
-	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones", "bindCalendarICA"],
+		validacion_valorRetenido:{},
+	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones", "bindCalendarICA", "bindBorrar"],
 	 
 	 bindDeleteDeducciones: function(){
+		 $(document).on("click", ".delededucciones", function (e) {
+			 e.preventDefault();
+			 $(this).parent().parent().parent().remove();
+			 
+		 });
+		 
+	 } ,
+	 
+	 bindBorrar: function(){
 		 $(document).on("click", ".delededucciones", function (e) {
 			 e.preventDefault();
 			 $(this).parent().parent().parent().remove();
@@ -65,6 +74,10 @@ ACC.ica = {
 	 	        debugger;
 				
 				e.preventDefault();
+				if(ACC.ica.validaAntesCalcular() == false){
+					alert("Los campos en la sección Valor Retenido son obligatorios");
+					return;
+				}
 	 	        
 //	 	        $("#icaCalculoButton").prop('disabled', true);
 	 	       var icaCalculaDeclaracionForm = {};
@@ -521,7 +534,7 @@ ACC.ica = {
 		            type: "POST",
 		            success: function (data) {
 		            	$( "#dialogICA" ).dialog( "open" );
-		            	if(data.errores)
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
 		            		$("#icaDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {
@@ -531,12 +544,14 @@ ACC.ica = {
 		            		$("#icaPresentarDeclaracionButton").prop('disabled', false);
 	            		}else
 	            		{
+	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#icaDialogContent").html("");
 	            			$("#dialogICA").html("La declaración se ha generado exitosamente.")
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
 	            			$("#icaPresentarDeclaracionButton").prop('disabled', false);
+	            			
 	            		}
 	 	      		
 		            },
@@ -575,7 +590,37 @@ ACC.ica = {
     	    } 
     	});
     	
-    }
+    },
+    
+    
+	 validaAntesCalcular: function(){
+		 var validacionValores = true;
+		 
+		 if(ACC.ica.validacion_valorRetenido != null){
+		 	 $.each($(".valor"),function(index,value){
+			 		
+		 		 if(validacionValores != false){
+			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
+			 		var tipoID=$.trim($(value).find(".tipoID").val());
+			 		var numID=$.trim($(value).find(".numID").val());
+			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
+			 		var codMunicipio=$.trim($(value).find(".codMunicipio").val());
+			 		var direccion=$.trim($(value).find(".direccion").val());
+			 		var telefono=$.trim($(value).find(".telefono").val());
+			 		var tarifaApl=$.trim($(value).find(".tarifaApl").val());
+			 		var montoRetenido=$.trim($(value).find(".montoRetenido").val());
+	
+	    	        	if(anoGravable == "" || tipoID == "" || numID == "" || razonSocial == "" || direccion == "" || telefono == "" || codMunicipio == "" || tarifaApl == "" || montoRetenido == "")
+	    	        	{
+	    	        		validacionValores = false;
+	    	        	}
+		 		 }
+	    	        	
+	    	 });
+		 }
+		
+	 	 return validacionValores;
+	 }
 
     
 

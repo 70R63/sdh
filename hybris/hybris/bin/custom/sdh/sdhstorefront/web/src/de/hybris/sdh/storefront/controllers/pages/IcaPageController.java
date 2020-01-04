@@ -9,11 +9,11 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
@@ -130,6 +130,9 @@ public class IcaPageController extends SDHAbstractPageController
 	@Resource(name = "modelService")
 	ModelService modelService;
 
+	@Resource(name = "sessionService")
+	SessionService sessionService;
+
 	@Resource(name = "mediaService")
 	MediaService mediaService;
 
@@ -185,7 +188,7 @@ public class IcaPageController extends SDHAbstractPageController
 	public List<String> getTarifaValorRetenido()
 	{
 
-		final List<String> tarifasValorRetenido = Arrays.asList("4.14", "6.90", "7.00", "8.00", "9.66", "11.04", "13.80");
+		final List<String> tarifasValorRetenido = Arrays.asList("4,14", "6,90", "7,00", "8,00", "9,66", "11,04", "13,80");
 
 		return tarifasValorRetenido;
 	}
@@ -508,6 +511,7 @@ public class IcaPageController extends SDHAbstractPageController
 	{
 		System.out.println("---------------- En Declaracion ICA Agente Autorizado GET --------------------------");
 
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
 		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
 		final SDHValidaMailRolResponse contribuyenteData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
@@ -520,6 +524,7 @@ public class IcaPageController extends SDHAbstractPageController
 		calcula2ImpuestoRequest.setFormulario(numForm);
 		final CalcICA2Response calcula2ImpuestoResponse = sdhCalculaICA2Facade.calcula(calcula2ImpuestoRequest);
 
+		addAgentsToModel(model, contribuyenteData, currentUserData);
 		if (calcula2ImpuestoResponse != null)
 		{
 			super.addFirmantes_impuesto(model, calcula2ImpuestoResponse.getFirmantes(), currentUserData);
@@ -531,7 +536,7 @@ public class IcaPageController extends SDHAbstractPageController
 		String anoGravable;
 
 		model.addAttribute("customerData", currentUserData);
-		addAgentsToModel(model, currentUserData, null);
+
 		//		model.addAttribute("redirectURL", "/contribuyentes/ica");
 
 		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
@@ -573,7 +578,6 @@ public class IcaPageController extends SDHAbstractPageController
 			icaInfObjetoFormResp = new ICAInfObjetoForm();
 			//			Remapeo INICIO
 			icaInfObjetoResponse = new ICAInfObjetoResponse();
-			final List<ICAInfoValorRetenido> valorRetenido = new ArrayList<ICAInfoValorRetenido>();
 
 			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
@@ -583,8 +587,7 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setDevolDescuentos(calcula2ImpuestoResponse.getDevolDescuentos());
 			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
 
-			valorRetenido.add(calcula2ImpuestoResponse.getValorRetenido());
-			infoDeclara.setValorRetenido(valorRetenido);
+			infoDeclara.setValorRetenido(calcula2ImpuestoResponse.getValorRetenido());
 
 			infoDeclara.setDeducciones(calcula2ImpuestoResponse.getDeducciones());
 			infoDeclara.setIngPorCIIU(calcula2ImpuestoResponse.getIngPorCIIU());
@@ -605,9 +608,11 @@ public class IcaPageController extends SDHAbstractPageController
 			infoDeclara.setProyectoAporte(calcula2ImpuestoResponse.getProyectoAporte());
 			infoDeclara.setTarifaAporte(calcula2ImpuestoResponse.getTarifaAporte());
 			infoDeclara.setTotalAporteVolun(calcula2ImpuestoResponse.getTotalAporteVolun());
+			infoDeclara.setValorImpAviso(calcula2ImpuestoResponse.getImpuestoAviso());
+			infoDeclara.setEntFinanciera(calcula2ImpuestoResponse.getEntFinanciera());
 
 			icaInfObjetoResponse.setAnoGravable(calcula2ImpuestoResponse.getAnio_gravable());
-			icaInfObjetoResponse.setPeriodo(calcula2ImpuestoResponse.getPeriodo());
+			icaInfObjetoResponse.setPeriodo(gasolinaService.prepararDescPeriodoBimestral_ICA(calcula2ImpuestoResponse.getPeriodo()));
 			icaInfObjetoResponse.setCantEstablec(calcula2ImpuestoResponse.getCantEstablec());
 			icaInfObjetoResponse.setRegimen(calcula2ImpuestoResponse.getRegimen());
 			icaInfObjetoResponse.setOpcionUso(calcula2ImpuestoResponse.getOpcionUso());
@@ -721,7 +726,6 @@ public class IcaPageController extends SDHAbstractPageController
 		}
 
 		//informacion para PSE
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
 		final SDHValidaMailRolResponse detalleContribuyente = contribuyenteData2;
@@ -778,11 +782,17 @@ public class IcaPageController extends SDHAbstractPageController
 		ICACalculoImpResponse icaCalculoImpResponse = new ICACalculoImpResponse();
 		final ICACalculoImpRequest icaCalculoImpRequest = new ICACalculoImpRequest();
 
+		String numBP = sessionService.getCurrentSession().getAttribute("representado");
+		if (numBP == null)
+		{
+			numBP = customerModel.getNumBP();
+		}
+
 		icaCalculoImpRequest.setNumObjeto(icaCalculaDeclaracionForm.getNumObjeto());
 		icaCalculoImpRequest.setNumForm(icaCalculaDeclaracionForm.getNumForm());
 		icaCalculoImpRequest.setAnoGravable(icaCalculaDeclaracionForm.getAnoGravable());
 		icaCalculoImpRequest.setPeriodo(icaCalculaDeclaracionForm.getPeriodo());
-		icaCalculoImpRequest.setNumBP(customerModel.getNumBP());
+		icaCalculoImpRequest.setNumBP(numBP);
 		icaCalculoImpRequest.setCantEstablec(icaCalculaDeclaracionForm.getCantEstablec());
 		icaCalculoImpRequest.setEntFinanciera(icaCalculaDeclaracionForm.getEntFinanciera());
 		icaCalculoImpRequest.setImpuestoAviso(icaCalculaDeclaracionForm.getImpuestoAviso());

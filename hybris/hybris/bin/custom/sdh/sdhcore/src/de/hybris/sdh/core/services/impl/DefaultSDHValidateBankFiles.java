@@ -53,9 +53,6 @@ public class DefaultSDHValidateBankFiles implements SDHValidateBankFiles
 		List<SelectAtomValue> returnData = new ArrayList<>();
 		SelectAtomValue atomData = null;
 		final RestTemplate restTemplate = new RestTemplate();
-		final TypFileBancoListResponse typFileBancoListResponse = new TypFileBancoListResponse();
-		final List<TypFileBancoResponse> arrayTipos = new ArrayList<>();
-		TypFileBancoResponse typFileBancoResponse;
 		final String usuario = configurationService.getConfiguration().getString("sdh.reteica.bankFileValidation.getTypeFile.user");
 		final String password = configurationService.getConfiguration().getString("sdh.reteica.bankFileValidation.getTypeFile.password");
 		final String urlService = configurationService.getConfiguration().getString("sdh.reteica.bankFileValidation.getTypeFile.url");
@@ -90,7 +87,7 @@ public class DefaultSDHValidateBankFiles implements SDHValidateBankFiles
 					objNode.path("FTYPE").isInt() ? String.valueOf(objNode.path("FTYPE").intValue())  : objNode.path("FTYPE").textValue(),
 					objNode.path("FNAME").textValue()
 			);
-            LOG.info(atomData);
+            LOG.debug(atomData);
 			returnData.add(atomData);
 		}
 

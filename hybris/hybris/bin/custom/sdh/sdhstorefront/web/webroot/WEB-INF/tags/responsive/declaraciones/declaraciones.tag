@@ -35,40 +35,7 @@ window.onload = function() {
 		
 	}
 }
-	function SelectedAnio(selectObject) {
-// 		debugger;
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 
-	}
-
-	function valper(selectObject) {
-// 		debugger;
-		var per = selectObject.value;
-		var anio = document.getElementById('aniograv').value;
-		var fecha = new Date();
-		var anioact = fecha.getFullYear();
-		var mesact = fecha.getMonth();
-
-		if (anio < anioact) {
-
-		} else {
-			mesact = mesact + 1;
-			if (per < mesact) {
-
-			} else {
-				alert("Por favor, seleccione un mes anterior");
-			}
-
-		}
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-
-	}
-
-	function vaperiodo(selectObject) {
-// 		debugger;
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-
-	}
 </script>
 
 <a id="downloadHelper" target="_blank"></a>
@@ -142,7 +109,7 @@ window.onload = function() {
 					<div class="caja--ser-rel color-sr3">
 						<select aria-required="true" id="periodoM"
 							class="new_alto form-control " name="periodo" required='required'
-							onchange="valper(this)">
+							onchange="onChangeMensual(this)">
 							<option value="00">Seleccionar</option>
 							<option value="01">1-Enero</option>
 							<option value="02">2-Febrero</option>
@@ -168,7 +135,7 @@ window.onload = function() {
 				<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 				<div class="caja--ser-rel color-sr3">
 					<select id="periodoB" class="new_alto form-control " name="periodo"
-						onchange="vaperiodo(this)">
+						onchange="onChangeBimestral(this)">
 						<option value="00">Seleccionar</option>
 						<option value="01">1 - Ene / Feb</option>
 						<option value="02">2 - Mar / Abr</option>
@@ -392,5 +359,40 @@ window.onload = function() {
 		// 		debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.prepararPeriodo();
+	}
+	
+	function SelectedAnio(selectObject) {
+// 		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+
+	}
+
+	function onChangeMensual(selectObject) {
+// 		debugger;
+		var per = selectObject.value;
+		var anio = document.getElementById('aniograv').value;
+		var fecha = new Date();
+		var anioact = fecha.getFullYear();
+		var mesact = fecha.getMonth();
+
+		if (anio < anioact) {
+
+		} else {
+			mesact = mesact + 1;
+			if (per < mesact) {
+
+			} else {
+				alert("Por favor, seleccione un mes anterior");
+			}
+
+		}
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+
+	}
+
+	function onChangeBimestral(selectObject) {
+// 		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+
 	}
 </script>

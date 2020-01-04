@@ -163,9 +163,9 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 ;;ICALink;"ICA";"Haga clic aquí para acceder a la opción de menú ICA"
 ;;PredialUnificadoLink;"Predial unificado";"Haga clic aquí para acceder a la opción de menú Predial unificado"
 ;;PublicidadExteriorLink;"Publicidad exterior";"Haga clic aquí para acceder a la opción de menú Publicidad exterior"
-;;SobreVehiAutomotoresLink;"Sobre vehículos automotores";"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
+;;SobreVehiAutomotoresLink;"Impuestos de Vehículos";"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
 ;;SobreTasaGasolinaLink;"Sobretasa a la gasolina";"Haga clic aquí para acceder a la opción de menú Sobretasa a la gasolina"
-;;NewSobreVehiNodeLink	;"Sobre Vehiculo Automotores"  ;"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
+;;NewSobreVehiNodeLink	;"Impuestos de Vehículos"  ;"Haga clic aquí para acceder a la opción de menú Sobre vehículos automotores"
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
@@ -210,8 +210,8 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
 
 ;;EdoCargasLink;"Estado de cargas";"Haga clic aquí para consultar el estado de sus cargas"
-;;AAutorizadoReportarInformacionLink;"Reportar informacion"; "Haga clic aquí para reportar informacion"
-;;AAutorizadoConsultasLink;"Consultas";"Haga clic aquí para hacer sus consultas"
+#;;AAutorizadoReportarInformacionLink;"Reportar informacion"; "Haga clic aquí para reportar informacion"
+#;;AAutorizadoConsultasLink;"Consultas";"Haga clic aquí para hacer sus consultas"
 
 #*->-------------------------------------------------------------------------------------------------------------------------
 

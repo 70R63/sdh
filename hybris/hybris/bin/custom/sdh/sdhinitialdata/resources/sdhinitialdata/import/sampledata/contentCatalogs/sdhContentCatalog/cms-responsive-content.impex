@@ -159,7 +159,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; AREdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/agenteRetenedor/estado-de-cuenta" ;;;;;
 ; ; ARCertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/agenteRetenedor/consultas/certideclaraciones" ;;;;;
 ; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
-; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/presentar-declaracion" ;;;;;
+; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/retenedores/estadocargas";;;;;
 ; ; ARListaDeclaracionLink	   	   ; LISTA LINK   				 			;"/agenteRetenedor/lista-declaraciones" ;;;;;
 
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
@@ -2853,5 +2853,27 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;arListaDeclaracionesPageComponent	;arListaDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/arListaDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;arListaDeclaracionesPageComponent
+
+#->FIN dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019
+
+#->INI dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;predialInicialPage 		;Predial Unificado bases	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/predialunificado_inicio
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='predialInicialPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-predialInicialPage 	;SideContent			;																	;SideContent-predialInicialPage				;;;
+								;						;BodyContent-predialInicialPage 	;BodyContent			;																	;BodyContent-predialInicialPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-predialInicialPage 	;Side Content Slot for Predial InicialPage;true	;								;;;
+							;							;BodyContent-predialInicialPage	;Body Content Slot for Predial InicialPage	;true	;predialInicialPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;predialInicialPageComponent	;predialInicialPage Component	;/WEB-INF/views/responsive/pages/layout/predialInicialPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;predialInicialPageComponent
 
 #->FIN dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019

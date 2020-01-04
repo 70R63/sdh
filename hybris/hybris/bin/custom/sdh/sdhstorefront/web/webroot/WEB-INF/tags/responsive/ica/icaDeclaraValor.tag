@@ -90,11 +90,11 @@
 			<div class="row valor" id="valor">
 				<div class="col-md-1" style="width: 10.5% !important">
 					<input class=" new_alto_anio form-control anio anoGravable "
-						type="date" value="${infoDeclara.anoGravable }" />
+						type="date" onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-2">
 					<select id="" class="etiq_valor form-control tipoID"
-						style="height: 48px;">
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">Seleccionar</option>
 						<option value="CC">CC C�dula de ciudadania</option>
 						<option value="CE">CE C�dula de extranjer�a</option>
@@ -111,23 +111,23 @@
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control numID" type="text"
-						value="${infoDeclara.numID }" />
+						onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-2">
 					<input class="new_alto form-control razonSocial" type="text"
-						value="${infoDeclara.razonSocial }" />
+						onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control direccion" type="text"
-						value="${infoDeclara.direccion }" />
+						onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control telefono" type="text"
-						value="${infoDeclara.telefono }" />
+						onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1">
 					<select id="" class="form-control codMunicipio"
-						style="height: 48px;">
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
 							<option value="${eachCity.code}">${eachCity.name}</option>
@@ -136,11 +136,11 @@
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control tarifaApl" type="text"
-						value="${infoDeclara.tarifaApl }" />
+						onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control montoRetenido" type="text"
-						value="${infoDeclara.montoRetenido }" />
+						onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1" style="width: 5.9% !important">
 					<div class="form-group ">
@@ -157,14 +157,15 @@
 
 
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
+		<c:set var="anoGravable_formateado" value="${fn:substring(eachValor.anoGravable, 6, 10)}-${fn:substring(eachValor.anoGravable, 3, 5)}-${fn:substring(eachValor.anoGravable, 0, 2)}" />
 			<div class="row valor" id="valor">
 				<div class="col-md-1" style="width: 10.5% !important">
 					<input class="new_alto_anio form-control anio anoGravable "
-						type="date" value="${eachValor.anoGravable }" />
+						type="date" value="${anoGravable_formateado}"  onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-2">
 					<select id="" class="etiq_valor form-control tipoID"
-						style="height: 48px;">
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ idTypes}" var="eachType">
 
@@ -183,23 +184,23 @@
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control numID" type="text"
-						value="${eachValor.numID }" />
+						value="${eachValor.numID }" onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-2">
 					<input class="new_alto form-control razonSocial" type="text"
-						value="${eachValor.razonSocial }" />
+						value="${eachValor.razonSocial }" onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control direccion" type="text"
-						value="${eachValor.direccion }" />
+						value="${eachValor.direccion }" onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control telefono" type="text"
-						value="${eachValor.telefono }" />
+						value="${eachValor.telefono }" onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1">
 					<select id="" class="new_alto form-control codMunicipio"
-						style="height: 48px;">
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
 
@@ -216,7 +217,7 @@
 					<!-- 						<input class="form-control tarifaApl" type="text" -->
 					<%-- 							value="${eachValor.tarifaApl }" /> --%>
 					<select id="" class="new_alto form-control tarifaApl"
-						style="height: 48px;">
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ tarifasValorRetenido}" var="eachTarifa">
 
@@ -235,7 +236,7 @@
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control montoRetenido" type="text"
-						value="${eachValor.montoRetenido }" />
+						value="${eachValor.montoRetenido }" onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1" style="width: 5.9% !important">
 					<div class="form-group ">
@@ -290,11 +291,11 @@
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
 			$($(".valor")[0]).parent().children().last().find(".anio").val("")
 			$($(".valor")[0]).parent().children().last().find(".tipo").val("")
-			$($(".valor")[0]).parent().children().last().find(".numiden").val(
+			$($(".valor")[0]).parent().children().last().find(".numID").val(
 					"")
-			$($(".valor")[0]).parent().children().last().find(".nombre")
+			$($(".valor")[0]).parent().children().last().find(".razonSocial")
 					.val("")
-			$($(".valor")[0]).parent().children().last().find(".direc").val("")
+			$($(".valor")[0]).parent().children().last().find(".direccion").val("")
 			$($(".valor")[0]).parent().children().last().find(".telefono").val(
 					"")
 			$($(".valor")[0]).parent().children().last().find(".denoact").val(
@@ -303,6 +304,7 @@
 					"")
 			$($(".valor")[0]).parent().children().last().find(".valtotal").val(
 					"")
+			$($(".valor")[0]).parent().children().last().find(".montoRetenido").val("")
 
 		} else {
 			alert("No se pueden agregar m�s registros");
@@ -345,5 +347,9 @@
 		debugger;
 		var subir = document.getElementById('adjuntar-valor');
 		subir.style.display = 'block';
+	}
+	
+	function activarValidacion_valorRetenido(){
+		ACC.ica.validacion_valorRetenido = 'X';
 	}
 </script>

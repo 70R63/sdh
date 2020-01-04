@@ -14,7 +14,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
@@ -67,15 +67,16 @@ public class DeclaracionesPageController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Declaraciones";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declaraciones";
 
 	// CMS Pages
 	private static final String DECLARACIONES_CMS_PAGE = "declaracionesPage";
 
 	private static final String REDIRECT_TO_DECLARACIONES_PAGE = REDIRECT_PREFIX + "/contribuyentes/consultas/declaraciones";
 
+
 	@Resource(name = "customBreadcrumbBuilder")
-	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+	private DefaultResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhCertificaRITService")
 	SDHCertificaRITService sdhCertificaRITService;
@@ -223,7 +224,7 @@ public class DeclaracionesPageController extends AbstractPageController
 					break;
 
 				case "0005":
-					infoVista.setTipoPeriodoDec("0");
+					infoVista.setTipoPeriodoDec("1");
 					break;
 				default:
 					infoVista.setTipoPeriodoDec("0");

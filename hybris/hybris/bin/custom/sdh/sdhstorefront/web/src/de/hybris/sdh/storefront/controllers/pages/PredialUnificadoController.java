@@ -31,6 +31,7 @@ public class PredialUnificadoController extends AbstractPageController
 	private static final String TEXT_BASES_PROFILE = "Predial Bases Presuntivas";
 
 	// CMS Pages
+	private static final String PREDIAL_INICIAL_CMS_PAGE = "predialInicialPage";
 	private static final String PREDIAL_UNO_CMS_PAGE = "predialUnoPage";
 	private static final String PREDIAL_DOS_CMS_PAGE = "predialDosPage";
 	private static final String PREDIAL_TRES_CMS_PAGE = "predialTresPage";
@@ -41,6 +42,7 @@ public class PredialUnificadoController extends AbstractPageController
 	private static final String PREDIAL_OCHO_CMS_PAGE = "predialOchoPage";
 	private static final String PREDIAL_BASES_PRESUNTIVAS_CMS_PAGE = "predialBasesPresuntivasPage";
 
+	private static final String REDIRECT_TO_PREDIAL_INICIAL_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_inicio";
 	private static final String REDIRECT_TO_PREDIAL_UNO_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_1";
 	private static final String REDIRECT_TO_PREDIAL_DOS_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_2";
 	private static final String REDIRECT_TO_PREDIAL_TRES_PAGE = REDIRECT_PREFIX + "/contribuyentes/predialunificado_3";
@@ -56,6 +58,22 @@ public class PredialUnificadoController extends AbstractPageController
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_inicio", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialinicio(final Model model) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial unificadoINICIO --------------------------");
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_INICIAL_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_INICIAL_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.GET)
 	@RequireHardLogIn

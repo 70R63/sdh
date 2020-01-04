@@ -120,12 +120,12 @@
 					<select id="periodoB" class="new_alto form-control " name="periodo"
 						onchange="onChangeBimestral(this)">
 						<option value="00">Seleccionar</option>
-						<option value="B1">1 - Ene / Feb</option>
-						<option value="B2">2 - Mar / Abr</option>
-						<option value="B3">3 - May / Jun</option>
-						<option value="B4">4 - Jul / Ago</option>
-						<option value="B5">5 - Sep / Oct</option>
-						<option value="B6">6 - Nov / Dic</option>
+						<option value="01">1 - Ene / Feb</option>
+						<option value="02">2 - Mar / Abr</option>
+						<option value="03">3 - May / Jun</option>
+						<option value="04">4 - Jul / Ago</option>
+						<option value="05">5 - Sep / Oct</option>
+						<option value="06">6 - Nov / Dic</option>
 					</select>
 				</div>
 			</div>
@@ -227,7 +227,7 @@
 		
 
 		<div class="row" id="table-reteica" style="display: none;">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-11 col-md-offset-1">
 				<table class="table" id="table-reteica1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
@@ -249,7 +249,7 @@
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.moneda" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center; width: 110px !important"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.reteica.seleccionar" /></label></th>
 						</tr>
@@ -406,20 +406,14 @@
 			debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
-		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
+// 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
+		ACC.opcionDeclaraciones.prepararPeriodo();
 	}
 
 	
 	function SelectedAnio(selectObject) {
 		debugger;
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
-		ACC.opcionDeclaraciones.reiniciaPeriodosMB();
-		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
-	}
-	
-	function onChangeBimestral(selectObject) {
-		debugger;
-		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 	}
 	
 	function onChangeMensual(selectObject) {
@@ -444,6 +438,12 @@
 		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 
+	}
+	
+	function onChangeBimestral(selectObject) {
+		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+// 		ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(ACC.opcionDeclaraciones.dataActual_backup,ACC.opcionDeclaraciones.dataResponse_backup,selectObject.value);
 	}
 </script>
 

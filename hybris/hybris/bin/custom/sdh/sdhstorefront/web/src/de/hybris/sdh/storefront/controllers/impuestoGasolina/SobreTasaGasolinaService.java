@@ -526,7 +526,7 @@ public class SobreTasaGasolinaService
 
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put("01", "SELECCIONAR");
+		elementos.put("00", "SELECCIONAR");
 		elementos.put("01", "Enero");
 		elementos.put("02", "Febrero");
 		elementos.put("03", "Marzo");
@@ -1019,7 +1019,7 @@ public class SobreTasaGasolinaService
 		int year = c.get(Calendar.YEAR);
 		final boolean esCambioAnio = false;
 
-		year = ocurrioCambioAnio() == false ? year : year--;
+		year = ocurrioCambioAnio() ? --year : year;
 
 		return year;
 	}
@@ -1035,7 +1035,7 @@ public class SobreTasaGasolinaService
 		final int month = c.get(Calendar.MONTH);
 		boolean esCambioAnio = false;
 
-		esCambioAnio = month != 0 ? false : true;
+		esCambioAnio = month == 0 ? true : false;
 
 
 		return esCambioAnio;
@@ -1049,9 +1049,9 @@ public class SobreTasaGasolinaService
 	{
 		final Calendar c = Calendar.getInstance();
 		int month = c.get(Calendar.MONTH);
-		final String monthSTR;
+		String monthSTR = null;
 
-		month = month == 11 ? 12 : month;
+		month = month == 0 ? 12 : month;
 		monthSTR = month < 10 ? "0" + Integer.toString(month) : Integer.toString(month);
 
 		return monthSTR;
@@ -1851,6 +1851,24 @@ public class SobreTasaGasolinaService
 
 	}
 
+	/**
+	 * @param InfoDelineacion
+	 */
+	public void prepararValorcausalExcepDESCRIPCIONDUR(final InfoDelineacion fuente)
+	{
+
+		String campoDESCRIPCION = "";
+		final String separador = " ";
+
+		if (fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() != null)
+		{
+			campoDESCRIPCION = fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() + separador
+					+ obtenerListaCausalExencion().get(fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep());
+		}
+
+		fuente.getInfObjetoDelineacion().getInfoDeclara().setCausalExcepDESCRIPCION(campoDESCRIPCION);
+
+	}
 	public void prepararValortipoDocDESCRIPCIONDU(final SDHValidaMailRolResponse fuente)
 	{
 
@@ -1895,7 +1913,7 @@ public class SobreTasaGasolinaService
 			//			}
 			//			else
 			//			{
-			periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(1, 2));
+			periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(0, 2));
 			//			}
 		}
 		else
@@ -2191,6 +2209,13 @@ public class SobreTasaGasolinaService
 				elementos.put("0007", "Publicidad Exterior Visual");
 			}
 		}
+		if (customerData.getDelineacion() != null) //Retedelineacion
+		{
+			if (customerData.getPublicidadExt().size() > 0)
+			{
+				elementos.put("0008", "Retención Delineación Urbana");
+			}
+		}
 
 
 		catalogosForm.setImpuesto(elementos);
@@ -2392,11 +2417,15 @@ public class SobreTasaGasolinaService
 
 				break;
 
-			//			case "0003": //ICA
-			//				break;
-			//
-			//			case "0004": //RETEICA
-			//				break;
+			case "0003": //ICA
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+				break;
+
+			case "0004": //RETEICA
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+				break;
 
 
 
@@ -2561,6 +2590,49 @@ public class SobreTasaGasolinaService
 	{
 		// XXX Auto-generated method stub
 		return false;
+	}
+
+	/**
+	 * @param periodo
+	 * @return
+	 */
+	public String prepararDescPeriodoBimestral_ICA(String periodo)
+	{
+		String descripcion = "";
+
+		if (periodo != null)
+		{
+			periodo = StringUtils.trim(periodo);
+			if (!StringUtils.isAllEmpty(periodo))
+			{
+				switch (periodo)
+				{
+					case "01":
+						descripcion = "01 - Ene / Feb";
+						break;
+					case "02":
+						descripcion = "02 - Mar / Abr";
+						break;
+					case "03":
+						descripcion = "03 - May / Jun";
+						break;
+					case "04":
+						descripcion = "04 - Jul / Ago";
+						break;
+					case "05":
+						descripcion = "05 - Sep / Oct";
+						break;
+					case "06":
+						descripcion = "06 - Nov / Dic";
+						break;
+
+					default:
+						break;
+				}
+			}
+		}
+
+		return descripcion;
 	}
 
 

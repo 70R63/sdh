@@ -11,7 +11,6 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
@@ -24,6 +23,7 @@ import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
+import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
@@ -79,7 +79,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 	private static final Logger LOG = Logger.getLogger(SobreVehiculosDeclaracionController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String DECLARACION_VEHICULOS_PROFILE = "Sobre Vehículos Declaración";
+	private static final String DECLARACION_VEHICULOS_PROFILE = "text.account.profile.vehiculos.declaracion";
 	private static final String DECLARACION_MOTOS_PROFILE = "Sobre Vehículos Declaración Motos";
 
 	// CMS Pages
@@ -114,8 +114,8 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@Resource(name = "accountBreadcrumbBuilder")
-	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+	@Resource(name = "customBreadcrumbBuilder")
+	private DefaultResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhDetalleVehiculosService")
 	SDHDetalleVehiculosService sdhDetalleVehiculosService;
@@ -144,6 +144,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData, null);
+		super.addFirmantes_impuesto(model, null, customerData);
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		consultaContribuyenteBPRequest.setNumBP(numBPP);
 		final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
@@ -155,7 +156,6 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 		try
 		{
-
 			vehiculosFormDeclaracion.setNumBP(numBPP);
 			vehiculosFormDeclaracion.setAnioGravable(anioGravable);
 			vehiculosFormDeclaracion.setPlaca(placa);
@@ -201,6 +201,8 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 								String formas = "";
 							formas = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm();
 							vehiculosFormDeclaracion
+									.setAvaluo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getAvaluoActual());
+							vehiculosFormDeclaracion
 									.setImpuestoCargo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getImpuestoCargo());
 								if (formas.equals(numForma))
 								{
@@ -210,6 +212,10 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 									vehiculosFormDeclaracion.setNumForm(formas);
 									vehiculosFormDeclaracion.setImpuestoCargo(
 											detalleVehiculosResponse.getInfo_declara().getLiquidacion().getImpuestoCargo());
+								vehiculosFormDeclaracion
+										.setCheckAporte(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getCheckAPorte());
+								vehiculosFormDeclaracion
+										.setProyectoAporte(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getProyectoAporte());
 									vehiculosFormDeclaracion
 											.setTarifaActual(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getTarifaActual());
 									vehiculosFormDeclaracion

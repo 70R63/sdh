@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
@@ -67,13 +68,13 @@
 					<label class="control-label required" style="text-transform: none">
 					        <spring:theme code="autorizado.reportar.info.tiparch" />
 					</label>
-					<select class="new_alto form-control">
+					<select class="new_alto form-control" id="tipoArchivo" name="tipoArchivo">
 						<option value="Seleccionar">Seleccionar</option>
 						<c:forEach items="${tipoDeArchivo}" var="tipoArchivo">
                           <option value="${tipoArchivo.code}"><c:out value="${tipoArchivo.name}"/></option>
                         </c:forEach>
-
 					</select>
+                    <input id="entidadBancaria" name="entidadBancaria" type="hidden" value="${entidadBancaria}">
 				</div>
 			</div>
 			<div class="col-md-6">

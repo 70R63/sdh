@@ -58,9 +58,17 @@
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq true}">
 									<div id="continuar">										
-										<button class="btn btn-secondary btn-lg" type="submit">
-											<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
-										</button>
+										<c:if test = "${representado eq true}">										
+											<button class="btn btn-secondary btn-lg pagoARResponse" type="button" >
+												<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
+											</button>
+										</c:if>
+										
+										<c:if test = "${representado eq false}">										
+											<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/contribuyentes/consultas/certipagos' />';">
+												<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
+											</button>
+										</c:if>	
 										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
 											<spring:theme code="impuestos.Pago.PSE.continuar"/>
 										</button>

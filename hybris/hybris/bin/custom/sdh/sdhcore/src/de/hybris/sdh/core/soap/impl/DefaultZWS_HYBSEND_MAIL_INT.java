@@ -5,6 +5,7 @@ package de.hybris.sdh.core.soap.impl;
 
 import de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_INT;
 import de.hybirs.sdh.core.soap.ZWS_HYSEND_MAIL_PortType;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 
 import java.rmi.RemoteException;
 
@@ -21,6 +22,9 @@ public class DefaultZWS_HYBSEND_MAIL_INT implements ZWS_HYSEND_MAIL_INT
 
 	@Resource(name = "ZWS_HYSEND_MAIL_locator")
 	ZWS_HYSEND_MAIL_ServiceLocator locator;
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
 	/*
 	 * (non-Javadoc)
 	 *
@@ -37,8 +41,11 @@ public class DefaultZWS_HYBSEND_MAIL_INT implements ZWS_HYSEND_MAIL_INT
 			final ZWS_HYSEND_MAIL_PortType proxy = locator.getZWS_HYSEND_MAIL();
 			final ZWS_HYSEND_MAIL_BindingStub proxyParam = (ZWS_HYSEND_MAIL_BindingStub) proxy;
 
-			proxyParam.setUsername("oarredondo");
-			proxyParam.setPassword("inicio2018");
+			final String  usuario = configurationService.getConfiguration().getString("sdh.zwsHybSendMailInt.user");
+			final String  password = configurationService.getConfiguration().getString("sdh.zwsHybSendMailInt.password");
+
+			proxyParam.setUsername(usuario);
+			proxyParam.setPassword(password);
 			proxyParam.setTimeout(10000);
 
 			proxy.zcrmfHysendMail(PiEmail, PiMessage, PiSubject, EpCode, EpMessage);

@@ -9,11 +9,11 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
@@ -126,6 +126,9 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 	@Resource(name = "userService")
 	UserService userService;
 
+	@Resource(name = "sessionService")
+	SessionService sessionService;
+
 	@Resource(name = "sdhDetalleGasolina")
 	SDHDetalleGasolina sdhDetalleGasolinaWS;
 
@@ -188,7 +191,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 
 		generaDeclaracionRequest.setNumForm(numForm);
 		generaDeclaracionRequest.setTipo_id(customerModel.getDocumentType());
-		generaDeclaracionRequest.setNum_id(customerModel.getDocumentNumber());
+		generaDeclaracionRequest.setNum_id(customerModel.getNumBP());
 
 		try
 		{
@@ -417,8 +420,9 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		{
 			tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
 			numDoc = gasolinaService.obtenerNumDoc(dataForm.getListaDocumentos());
-			anioGravable = Integer.toString(gasolinaService.obtenerAnoGravableActual());
 			periodo = gasolinaService.obtenerPeriodoActual();
+			anioGravable = Integer.toString(gasolinaService.obtenerAnoGravableActual());
+
 
 			detalleGasolinaRequest.setNumBP(numBP);
 			detalleGasolinaRequest.setNumDoc(numDoc);
@@ -509,6 +513,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		model.addAttribute("customerData", customerData);
 		addAgentsToModel(model, customerData,null);
 		model.addAttribute("redirectURL","/contribuyentes/sobretasa-gasolina");
+		super.addFirmantes_impuesto(model, null, customerData);
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
 
@@ -686,7 +691,11 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		int claveError;
 		List infoDeclaraDefaultTMP;
 
-		String numBP = customerModel.getNumBP();
+		String numBP = sessionService.getCurrentSession().getAttribute("representado");
+		if (numBP == null)
+		{
+			numBP = customerModel.getNumBP();
+		}
 		String numDoc = customerModel.getDocumentNumber();
 		String tipoDoc = "";
 		String anoGravable = "";
@@ -702,7 +711,6 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		final String tipoDeclarante = "2";
 
 
-		numBP = customerModel.getNumBP();
 		if (dataForm != null)
 		{
 			tipoDoc = gasolinaService.obtenerTipoDoc(dataForm.getListaDocumentos());
@@ -893,6 +901,9 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 				mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
 				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
 						"error.impuestoGasolina.sobretasa.error4", mensajesError);
+
+				model.addAttribute("dataForm", dataForm);
+				return REDIRECT_TO_DECLARACIONES_GASOLINA_PAGE;
 			}
 		}
 		else
@@ -923,7 +934,7 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 			final String numForm, @RequestParam(required = true, value = "representado")
 			final String representado, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- En Declaracion gasolina GET --------------------------");
+		System.out.println("---------------- En Declaracion gasolina Agente Autorizado --------------------------");
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final DetGasRevisorDeclaranteResponse revisor = null;
@@ -953,7 +964,11 @@ public class SobreTasaGasolina extends SDHAbstractPageController
 		calculaGasolina2Request.setFormulario(numForm);
 		final CalcGasolina2Response calcGasolina2Response = sdhCalculaGasolina2Facade.calcula(calculaGasolina2Request);
 
-		super.addFirmantes_impuesto(model, calcGasolina2Response.getFirmantes(), currentUserData);
+		addAgentsToModel(model, contribuyenteData, currentUserData);
+		if (calcGasolina2Response != null)
+		{
+			super.addFirmantes_impuesto(model, calcGasolina2Response.getFirmantes(), currentUserData);
+		}
 
 		final SobreTasaGasolinaCatalogos catalogos = gasolinaService.prepararCatalogos();
 
