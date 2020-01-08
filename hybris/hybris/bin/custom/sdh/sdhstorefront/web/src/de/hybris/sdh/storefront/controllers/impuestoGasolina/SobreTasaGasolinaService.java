@@ -2211,7 +2211,7 @@ public class SobreTasaGasolinaService
 		}
 		if (customerData.getDelineacion() != null) //Retedelineacion
 		{
-			if (customerData.getPublicidadExt().size() > 0)
+			if (customerData.getDelineacion().size() > 0)
 			{
 				elementos.put("0008", "Retención Delineación Urbana");
 			}
