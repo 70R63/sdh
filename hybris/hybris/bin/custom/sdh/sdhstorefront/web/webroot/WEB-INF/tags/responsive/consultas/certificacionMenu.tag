@@ -227,7 +227,7 @@
 		
 
 		<div class="row" id="table-reteica" style="display: none;">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-11 col-md-offset-1">
 				<table class="table" id="table-reteica1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
@@ -249,7 +249,7 @@
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.moneda" /></label></th>
-							<th style="text-align: center"><label class="control-label"
+							<th style="text-align: center; width: 110px !important"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.reteica.seleccionar" /></label></th>
 						</tr>
