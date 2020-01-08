@@ -484,6 +484,7 @@ ACC.opcionDeclaraciones = {
 	
 	updateFromResponseSeleccion_certiPagos : function(infoActual,infoResponse,filtroPeriodo) {
 		var desc_clavePeriodo = "";
+		var reteIca_consecutivo = "";
 		var indiceTabla = 0;
 		
 debugger;
@@ -543,10 +544,12 @@ debugger;
 					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 						if(value1.numObjeto != ""){
 							if(value1.numObjeto == infoResponse.customerData.reteIca.numObjeto){
+								desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
+								reteIca_consecutivo = ACC.opcionDeclaraciones.obtener_desc_consecutivo(infoResponse.customerData.reteIca.consecutivo);
 								$('#table-reteica1').append("<tr>"+ 
 									'<td>' + infoResponse.customerData.reteIca.numID  + '</td>'+
-									'<td>' + infoResponse.customerData.reteIca.consecutivo + '</td>'+
-									'<td>' + value1.clavePeriodo + '</td>'+
+									'<td>' + reteIca_consecutivo + '</td>'+
+									'<td>' + desc_clavePeriodo + '</td>'+
 									'<td>' + value1.referencia + '</td>'+
 									'<td>' + value1.importe + '</td>'+
 									'<td>' + value1.moneda + '</td>'+
@@ -564,10 +567,11 @@ debugger;
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.gasolina, function (index,value2){
 								if(value1.numObjeto == value2.numObjeto){
+									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
 									$('#table-gasolina1').append("<tr>"+ 
 										'<td>' + value2.tipoDoc  + '</td>'+
 										'<td>' + value2.numDoc + '</td>'+
-										'<td>' + value1.clavePeriodo + '</td>'+
+										'<td>' + desc_clavePeriodo + '</td>'+
 										'<td>' + value1.referencia + '</td>'+
 										'<td>' + value1.importe + '</td>'+
 										'<td>' + value1.moneda + '</td>'+
@@ -586,9 +590,10 @@ debugger;
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.delineacion, function (index,value2){
 								if(value1.numObjeto == value2.numObjeto){
+									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
 									$('#table-delineacion1').append("<tr>"+ 
 											'<td>' + value2.cdu + '</td>'+
-											'<td>' + value1.clavePeriodo + '</td>'+
+											'<td>' + desc_clavePeriodo + '</td>'+
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
@@ -607,10 +612,11 @@ debugger;
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.publicidadExt, function (index,value2){
 								if(value1.numObjeto == value2.numObjeto){
+									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
 									$('#table-publicidad1').append("<tr>"+ 
 											'<td>' + value2.numResolu + '</td>'+
 											'<td>' + value2.tipoValla + '</td>'+
-											'<td>' + value1.clavePeriodo + '</td>'+
+											'<td>' + desc_clavePeriodo + '</td>'+
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
@@ -629,9 +635,10 @@ debugger;
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.delineacion, function (index,value2){
 								if(value1.numObjeto == value2.numObjeto){
+									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
 									$('#table-delineacion1').append("<tr>"+ 
 											'<td>' + value2.cdu + '</td>'+
-											'<td>' + value1.clavePeriodo + '</td>'+
+											'<td>' + desc_clavePeriodo + '</td>'+
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
@@ -899,28 +906,6 @@ debugger;
 	},
 	
 	
-	obtener_desc_clavePeriodo : function (clavePeriodo){
-		debugger;
-		var descripcion = "";
-		var des_periodo = clavePeriodo;
-		
-		tipo_periodo = ACC.opcionDeclaraciones.obtener_tipoPeriodo(clavePeriodo);
-		if(tipo_periodo == "B"){
-			id_periodo = ACC.opcionDeclaraciones.obtener_valorPeriodo(clavePeriodo);
-			
-			des_periodoB.forEach(function (eachItem) {
-    	    	if(eachItem.itemId == id_periodo)
-    	    		des_periodo = eachItem.itemValue;
-    		});
-		}
-		des_anio = clavePeriodo.substring(0,2);
-		descripcion = "20" + des_anio + " periodo " + des_periodo;
-		
-		
-		return descripcion;
-	},
-	
-	
 	validarFiltro : function (itemInfo,idPeriodoFiltro){
 		debugger;
 		var validacionOK = false;
@@ -967,6 +952,18 @@ debugger;
 		
 		return descripcion;
 	},
+	
+	
+	obtener_desc_consecutivo : function ( info_input ){
+		var info_valor = "-";
+		
+		if(info_input!= null){
+			reteIca_consecutivo = info_input;
+		}
+		
+		return info_valor;
+	},
+	
 	
 	
 	obtener_tipoPeriodo : function(clavePeriodo) {
