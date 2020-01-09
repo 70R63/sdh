@@ -33,9 +33,22 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 	@Override
 	public SearchResult<PseTransactionsLogModel> getAllOutstandingTransactions(final String transactionState)
 	{
-		final String GET_ALL_OUTSTANDING_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
-		      + PseTransactionsLogModel._TYPECODE + " AS p} Where "
-				+ "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '" + transactionState + "' ";
+
+		String GET_ALL_OUTSTANDING_TRANSACTIONS = new String();
+
+		if (transactionState.length() == 0)
+		{
+			GET_ALL_OUTSTANDING_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
+					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE
+					+ "} is null and " + "{p:" + PseTransactionsLogModel.TRAZABILITYCODE + "} <> '-1' ";
+		}
+		else
+		{
+			GET_ALL_OUTSTANDING_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
+					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE + "} = '"
+					+ transactionState + "' ";
+		}
+
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_ALL_OUTSTANDING_TRANSACTIONS);
 		return getFlexibleSearchService().search(query);
@@ -83,7 +96,7 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * de.hybris.sdh.core.dao.PseTransactionsLogDao#getAllCredibancoTransactionsNotNotifiedPaymentAndStatusAproved(java.
 	 * lang.String, java.lang.String)

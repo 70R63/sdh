@@ -15,6 +15,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
+import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
@@ -34,6 +35,7 @@ import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetRadicadosResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
@@ -2156,6 +2158,25 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
+
+	public DetalleVehiculos2Response consultaVehicular2(final DetalleVehiculos2Request requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		DetalleVehiculos2Response responseInfo = null;
+		final String confUrl = "sdh.detalle.vehiculo2.url";
+		final String confUser = "sdh.detalle.vehiculo2.user";
+		final String confPass = "sdh.detalle.vehiculo2.password";
+		final String wsNombre = "calculoImp/Vehicular2";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response";
+
+		responseInfo = (DetalleVehiculos2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
 	/**
 	 * @param customerData
 	 * @return
@@ -2211,7 +2232,7 @@ public class SobreTasaGasolinaService
 		}
 		if (customerData.getDelineacion() != null) //Retedelineacion
 		{
-			if (customerData.getPublicidadExt().size() > 0)
+			if (customerData.getDelineacion().size() > 0)
 			{
 				elementos.put("0008", "Retención Delineación Urbana");
 			}

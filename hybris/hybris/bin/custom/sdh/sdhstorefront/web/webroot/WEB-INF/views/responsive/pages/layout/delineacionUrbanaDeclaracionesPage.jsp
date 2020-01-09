@@ -38,6 +38,7 @@ window.onload = function() {
 
 			}
 		}
+		
 	}
 // 	var tipnot = document.getElementById('tipnota').val;
 // 	var tipnotshow1 = document.getElementById('notaCon');
@@ -48,7 +49,7 @@ window.onload = function() {
 // 		}else{
 // 			tipnotshow1.style.display = 'block';
 // 		}
-debugger;
+
 		var valexe = document.getElementById('valorExen');
 		var causex = document.getElementById('cauexen').value;
 		if (causex == '00' || causex == null || causex == "" || causex == " ")
@@ -60,7 +61,18 @@ debugger;
 			 valexe.disabled = false;
 			 valexe.readonly= false;
 		}
-	
+		debugger;
+		
+		var tiplic = $.trim($("#tipoDeLicencia").val());
+		 var valor = document.getElementById('infObjetoDelineacion.infoDeclara.valorEjecutado');
+		 if(tiplic=="Reconocimiento" || tiplic=="02"){
+			 valor.disabled = true;
+			 valor.readonly=true;
+			 
+		 }else{
+			 valor.disabled = false;
+			 valor.readonly=false;
+		 }
 	
 	
 		$(".loader").fadeOut("slow");

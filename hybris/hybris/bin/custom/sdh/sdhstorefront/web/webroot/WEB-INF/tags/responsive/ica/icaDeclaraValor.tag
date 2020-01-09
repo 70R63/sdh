@@ -34,65 +34,100 @@
 
 <form:form action="">
 	<div>
-		<div class="row">
-			<div class="col-md-1" style="width: 10.5% !important">
+		<div class="row" style="padding-left: 46px;">
+			<!-- 	<div class="col-md-1" style="width: 10.5% !important">
 				<label class="control-label format_label" style="text-transform: none !important"
 					for=""> <spring:theme code="ica.declaracion.valor.angrav" />
 				</label>
-			</div>
-			<div class="col-md-2">
-				<label class="control-label format_label" style="text-transform: none !important"
-					for=""> <spring:theme code="ica.declaracion.valor.tipdoc" />
+			</div>-->
+			<div class="col-md-1" style="padding-left: 5px; padding-right: 2px; width: 5% !important">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
+						code="Día" />
 				</label>
 			</div>
-			<div class="col-md-1">
-				<label style=" text-transform: none !important;" class="control-label format_label"
-					for=""> <spring:theme code="ica.declaracion.valor.numide" />
+			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
+						code="Mes" />
 				</label>
 			</div>
-			<div class="col-md-2">
-				<label class="control-label format_label" style="text-transform: none !important"
-					for=""> <spring:theme code="ica.declaracion.valor.nombre" />
+			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
+						code="Año" />
 				</label>
 			</div>
-			<div class="col-md-1">
-				<label class="control-label format_label" style="text-transform: none !important"
-					for=""> <spring:theme
+			<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
+						code="ica.declaracion.valor.tipdoc" />
+				</label>
+			</div>
+			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<label style="text-transform: none !important;"
+					class="control-label format_label" for=""> <spring:theme
+						code="ica.declaracion.valor.numide" />
+				</label>
+			</div>
+			<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
+						code="ica.declaracion.valor.nombre" />
+				</label>
+			</div>
+			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.direccion" />
 				</label>
 			</div>
-			<div class="col-md-1">
-				<label class="control-label format_label" style="text-transform: none !important"
-					for=""> <spring:theme code="ica.declaracion.valor.tel" />
+			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
+						code="ica.declaracion.valor.tel" />
 				</label>
 			</div>
-			<div class="col-md-1">
-				<label class="control-label format_label" style="text-transform: none !important"
-					for=""> <spring:theme
+			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.municipio" />
 				</label>
 			</div>
-			<div class="col-md-1">
-				<label class="control-label format_label" style="text-transform: none !important"
-					for=""> <spring:theme
+			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
 						code="ica.declaracion.valor.taraplicada" />
 				</label>
 			</div>
-			<div class="col-md-1">
-				<label class="control-label format_label" style="text-transform: none !important"
-					for=""> <spring:theme code="ica.declaracion.valor.montoret" />
+			<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
+				<label class="control-label format_label"
+					style="text-transform: none !important" for=""> <spring:theme
+						code="ica.declaracion.valor.montoret" />
 				</label>
 			</div>
 		</div>
 
 		<!--  se agregan lï¿½neas para agregar siempre una linea en la tabla -->
 		<c:if test="${empty infoDeclara.valorRetenido}">
-			<div class="row valor" id="valor">
-				<div class="col-md-1" style="width: 10.5% !important">
+			<div class="row valor" id="valor" style="padding-left: 45px;">
+				<!--  <div class="col-md-1" style="width: 10.5% !important">
 					<input class=" new_alto_anio form-control anio anoGravable "
 						type="date" onchange="activarValidacion_valorRetenido()"/>
+				</div>-->
+				<div class="col-md-1" style="padding-left: 5px; padding-right: 2px; width: 5% !important">
+					<input class=" new_alto form-control anio anoGravable "
+						type="text" onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
+					<input class=" new_alto form-control anio anoGravable "
+						type="text" onchange="activarValidacion_valorRetenido()" />
+				</div>
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
+					<input class=" new_alto form-control anio anoGravable "
+						type="text" onchange="activarValidacion_valorRetenido()" />
+				</div>
+				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
 					<select id="" class="etiq_valor form-control tipoID"
 						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">Seleccionar</option>
@@ -105,27 +140,27 @@
 						<option value="TIE">TIE Tarjeta de identidad de
 							extranjero</option>
 						<option value="NITE">NITE NIT extranjero</option>
-						<option value="NUIP">NUIP Nï¿½mero ï¿½nico de identificaciï¿½n
-							personal</option>
+						<option value="NUIP">NUIP Nï¿½mero ï¿½nico de
+							identificaciï¿½n personal</option>
 					</select>
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control numID" type="text"
-						onchange="activarValidacion_valorRetenido()"/>
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
 					<input class="new_alto form-control razonSocial" type="text"
 						onchange="activarValidacion_valorRetenido()"/>
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control direccion" type="text"
-						onchange="activarValidacion_valorRetenido()"/>
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control telefono" type="text"
-						onchange="activarValidacion_valorRetenido()"/>
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<select id="" class="form-control codMunicipio"
 						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">SELECCIONAR</option>
@@ -134,13 +169,13 @@
 						</c:forEach>
 					</select>
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control tarifaApl" type="text"
-						onchange="activarValidacion_valorRetenido()"/>
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
 				<div class="col-md-1">
 					<input class="new_alto form-control montoRetenido" type="text"
-						onchange="activarValidacion_valorRetenido()"/>
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
 				<div class="col-md-1" style="width: 5.9% !important">
 					<div class="form-group ">
@@ -157,13 +192,29 @@
 
 
 		<c:forEach items="${infoDeclara.valorRetenido }" var="eachValor">
-		<c:set var="anoGravable_formateado" value="${fn:substring(eachValor.anoGravable, 6, 10)}-${fn:substring(eachValor.anoGravable, 3, 5)}-${fn:substring(eachValor.anoGravable, 0, 2)}" />
-			<div class="row valor" id="valor">
-				<div class="col-md-1" style="width: 10.5% !important">
+			<c:set var="anoGravable_formateado"
+				value="${fn:substring(eachValor.anoGravable, 6, 10)}-${fn:substring(eachValor.anoGravable, 3, 5)}-${fn:substring(eachValor.anoGravable, 0, 2)}" />
+			<div class="row valor" id="valor" style="padding-left: 45px;">
+				<!-- 		<div class="col-md-1" style="width: 10.5% !important">
 					<input class="new_alto_anio form-control anio anoGravable "
 						type="date" value="${anoGravable_formateado}"  onchange="activarValidacion_valorRetenido()"/>
+				</div> -->
+				<div class="col-md-1" style="padding-left: 5px; padding-right: 2px; width: 5% !important">
+					<input class="new_alto form-control anio anoGravable "
+						type="text" value="${anoGravable_formateado}"
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
+					<input class="new_alto form-control anio anoGravable "
+						type="text" value="${anoGravable_formateado}"
+						onchange="activarValidacion_valorRetenido()" />
+				</div>
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
+					<input class="new_alto form-control anio anoGravable "
+						type="text" value="${anoGravable_formateado}"
+						onchange="activarValidacion_valorRetenido()" />
+				</div>
+				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
 					<select id="" class="etiq_valor form-control tipoID"
 						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">Seleccionar</option>
@@ -182,23 +233,27 @@
 
 					</select>
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control numID" type="text"
-						value="${eachValor.numID }" onchange="activarValidacion_valorRetenido()"/>
+						value="${eachValor.numID }"
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 15% !important"">
 					<input class="new_alto form-control razonSocial" type="text"
-						value="${eachValor.razonSocial }" onchange="activarValidacion_valorRetenido()"/>
+						value="${eachValor.razonSocial }"
+						onchange="activarValidacion_valorRetenido()"/>
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control direccion" type="text"
-						value="${eachValor.direccion }" onchange="activarValidacion_valorRetenido()"/>
+						value="${eachValor.direccion }"
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control telefono" type="text"
-						value="${eachValor.telefono }" onchange="activarValidacion_valorRetenido()"/>
+						value="${eachValor.telefono }"
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<select id="" class="new_alto form-control codMunicipio"
 						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
 						<option value="">SELECCIONAR</option>
@@ -213,7 +268,7 @@
 						</c:forEach>
 					</select>
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<!-- 						<input class="form-control tarifaApl" type="text" -->
 					<%-- 							value="${eachValor.tarifaApl }" /> --%>
 					<select id="" class="new_alto form-control tarifaApl"
@@ -234,11 +289,12 @@
 					</select>
 
 				</div>
-				<div class="col-md-1">
+				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control montoRetenido" type="text"
-						value="${eachValor.montoRetenido }" onchange="activarValidacion_valorRetenido()"/>
+						value="${eachValor.montoRetenido }"
+						onchange="activarValidacion_valorRetenido()" />
 				</div>
-				<div class="col-md-1" style="width: 5.9% !important">
+				<div class="col-md-1" style="width: 5.9% !important; padding-left: 2px; padding-right: 2px;"">
 					<div class="form-group ">
 						<img onclick="addvalor()"
 							src="${themeResourcePath}/images/adddelineacion.png"
@@ -291,11 +347,11 @@
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
 			$($(".valor")[0]).parent().children().last().find(".anio").val("")
 			$($(".valor")[0]).parent().children().last().find(".tipo").val("")
-			$($(".valor")[0]).parent().children().last().find(".numID").val(
-					"")
+			$($(".valor")[0]).parent().children().last().find(".numID").val("")
 			$($(".valor")[0]).parent().children().last().find(".razonSocial")
 					.val("")
-			$($(".valor")[0]).parent().children().last().find(".direccion").val("")
+			$($(".valor")[0]).parent().children().last().find(".direccion")
+					.val("")
 			$($(".valor")[0]).parent().children().last().find(".telefono").val(
 					"")
 			$($(".valor")[0]).parent().children().last().find(".denoact").val(
@@ -304,7 +360,8 @@
 					"")
 			$($(".valor")[0]).parent().children().last().find(".valtotal").val(
 					"")
-			$($(".valor")[0]).parent().children().last().find(".montoRetenido").val("")
+			$($(".valor")[0]).parent().children().last().find(".montoRetenido")
+					.val("")
 
 		} else {
 			alert("No se pueden agregar mï¿½s registros");
@@ -348,8 +405,8 @@
 		var subir = document.getElementById('adjuntar-valor');
 		subir.style.display = 'block';
 	}
-	
-	function activarValidacion_valorRetenido(){
+
+	function activarValidacion_valorRetenido() {
 		ACC.ica.validacion_valorRetenido = 'X';
 	}
 </script>

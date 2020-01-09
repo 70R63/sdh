@@ -260,17 +260,18 @@
 							code="ica.declaracion.liquidacion.aportvol" /> </label> <label
 						class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input disabled="disabled" readOnly="readonly" type="radio" name="aporte" id=""
+						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
 						onclick="disab()" ${aporteSI} value="si"> Si
-					</label> <label class="form-check-label"
+					</label> <!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
+					<label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input disabled="disabled" readOnly="readonly" type="radio" name="aporte" id=""
+						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
 						${aporteNO} onclick="disab2()" value="no"> No
-					</label>
+					</label> <!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 				</div>
 			</div>
 		</div>

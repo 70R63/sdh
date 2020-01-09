@@ -26,19 +26,24 @@ import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.CalcVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.Infovehic;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalVehiculosService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
@@ -125,6 +130,12 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 	@Resource(name = "sdhGeneraDeclaracionService")
 	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
+
+	@Resource(name = "sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
+
+	@Resource(name = "sdhDetalleGasolina")
+	SDHDetalleGasolina sdhDetalleGasolinaWS;
 
 	protected void updatePageTitle(final Model model, final AbstractPageModel cmsPage)
 	{
@@ -495,6 +506,150 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 		return generaDeclaracionResponse;
 
+	}
+
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String show(final Model model, @RequestParam(required = true, value = "numForm")
+	final String numForm, @RequestParam(required = true, value = "representado")
+	final String representado, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Declaracion vehiculos Agente Autorizado --------------------------");
+
+		final VehiculosInfObjetoForm vehiculosFormDeclaracion = new VehiculosInfObjetoForm();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+
+		//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+
+		model.addAttribute("contribuyenteData", contribuyenteData);
+		model.addAttribute("currentUserData", currentUserData);
+		model.addAttribute("redirectURL", "/autorizados/contribuyente/representando?representado=" + contribuyenteData.getNumBP());
+		final DetalleVehiculos2Request vehicular2request = new DetalleVehiculos2Request();
+		vehicular2request.setPartner(representado);
+		vehicular2request.setFormulario(numForm);
+		System.out.println("Request de calculoImp/Vehicular2: " + vehicular2request);
+		final DetalleVehiculos2Response vehicular2response = gasolinaService.consultaVehicular2(vehicular2request,
+				sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de calculoImp/Vehicular2: " + vehicular2response);
+
+
+		addAgentsToModel(model, contribuyenteData, currentUserData);
+		if (vehicular2response != null)
+		{
+			super.addFirmantes_impuesto(model, vehicular2response.getFirmantes(), currentUserData);
+		}
+		//		inicio de remapeo
+		vehiculosFormDeclaracion.setNumBP(representado);
+		vehiculosFormDeclaracion.setAnioGravable(vehicular2response.getInfo_vehiculo().getAnio_Gravable());
+		vehiculosFormDeclaracion.setPlaca(vehicular2response.getInfo_vehiculo().getPlaca());
+		vehiculosFormDeclaracion.setNumForm(numForm);
+
+		vehiculosFormDeclaracion.setOpcionUso(vehicular2response.getInfo_vehiculo().getOpcion_uso());
+		vehiculosFormDeclaracion.setCapacidadTon(vehicular2response.getInfo_vehiculo().getCapacidad_ton());
+		vehiculosFormDeclaracion.setTipoVeh(vehicular2response.getInfo_vehiculo().getTipo_vehiculo());
+		vehiculosFormDeclaracion.setCapacidadPas(vehicular2response.getInfo_vehiculo().getCapacidad_pas());
+		vehiculosFormDeclaracion.setIdServicio(vehicular2response.getInfo_vehiculo().getId_servicio());
+		vehiculosFormDeclaracion.setWatts(vehicular2response.getInfo_vehiculo().getWatts());
+		vehiculosFormDeclaracion.setClasicoAntig(vehicular2response.getInfo_vehiculo().getClasico_antiguo());
+
+		vehiculosFormDeclaracion.setClase(vehicular2response.getInfo_vehiculo().getClase());
+		vehiculosFormDeclaracion.setCarroceria(vehicular2response.getInfo_vehiculo().getCarroceria());
+		vehiculosFormDeclaracion.setMarca(vehicular2response.getInfo_vehiculo().getMarca());
+		vehiculosFormDeclaracion.setCilindraje(vehicular2response.getInfo_vehiculo().getCilindraje());
+		vehiculosFormDeclaracion.setLinea(vehicular2response.getInfo_vehiculo().getLinea());
+		vehiculosFormDeclaracion.setModelo(vehicular2response.getInfo_vehiculo().getModelo());
+		vehiculosFormDeclaracion.setBlindado(vehicular2response.getInfo_vehiculo().getBlindado());
+
+		vehiculosFormDeclaracion.setAvaluo(vehicular2response.getLiquidacion().getAvaluo_actual());
+		vehiculosFormDeclaracion.setImpuestoCargo(vehicular2response.getLiquidacion().getImpuesto_cargo());
+
+		final Infovehic infoVeh = new Infovehic();
+
+		infoVeh.setOpcionUso(vehicular2response.getInfo_vehiculo().getOpcion_uso());
+		infoVeh.setObjetoCont(vehicular2response.getInfo_vehiculo().getObjeto_cont());
+		infoVeh.setClase(vehicular2response.getInfo_vehiculo().getClase());
+		infoVeh.setMarca(vehicular2response.getInfo_vehiculo().getMarca());
+		infoVeh.setLinea(vehicular2response.getInfo_vehiculo().getLinea());
+		infoVeh.setModelo(vehicular2response.getInfo_vehiculo().getModelo());
+		infoVeh.setBlindado(vehicular2response.getInfo_vehiculo().getBlindado());
+		infoVeh.setCapacidadPas(vehicular2response.getInfo_vehiculo().getCapacidad_pas());
+		infoVeh.setFechaFactura(vehicular2response.getInfo_vehiculo().getFecha_factura());
+		infoVeh.setCapacidadTon(vehicular2response.getInfo_vehiculo().getCapacidad_ton());
+		infoVeh.setCarroceria(vehicular2response.getInfo_vehiculo().getCarroceria());
+		infoVeh.setCilindraje(vehicular2response.getInfo_vehiculo().getCilindraje());
+		infoVeh.setTipoVehiculo(vehicular2response.getInfo_vehiculo().getTipo_vehiculo());
+		infoVeh.setAvaluo(vehicular2response.getLiquidacion().getAvaluo_actual());
+		infoVeh.setClasicoAntiguo(vehicular2response.getInfo_vehiculo().getClasico_antiguo());
+		infoVeh.setIdServicio(vehicular2response.getInfo_vehiculo().getId_servicio());
+		infoVeh.setNumForm(numForm);
+
+		vehiculosFormDeclaracion.setInfoVeh(infoVeh);
+		vehiculosFormDeclaracion.setNumForm(numForm);
+		vehiculosFormDeclaracion.setCheckAporte(vehicular2response.getLiquidacion().getCheck_aporte());
+		vehiculosFormDeclaracion.setProyectoAporte(vehicular2response.getLiquidacion().getProyecto_aporte());
+		vehiculosFormDeclaracion.setTarifaActual(vehicular2response.getLiquidacion().getTarifa_actual());
+		vehiculosFormDeclaracion.setSancion(vehicular2response.getLiquidacion().getSancion());
+		vehiculosFormDeclaracion.setIntereses(vehicular2response.getLiquidacion().getIntereses());
+		vehiculosFormDeclaracion.setValorSemafor(vehicular2response.getLiquidacion().getValor_semafo());
+		vehiculosFormDeclaracion.setDescuentoProntop(vehicular2response.getLiquidacion().getDesc_pronto_pago());
+		vehiculosFormDeclaracion.setTotalPagar(vehicular2response.getLiquidacion().getTotal_pagar());
+		vehiculosFormDeclaracion.setValorPagar(vehicular2response.getLiquidacion().getValor_pagar());
+		vehiculosFormDeclaracion.setTotalPagoVol(vehicular2response.getLiquidacion().getTotal_pago_volunt());
+		//fin de remapeo
+
+
+
+		//informacion para PSE
+		final String numBP = representado;
+			final String anoParaPSE = vehicular2response.getInfo_vehiculo().getAnio_Gravable();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
+		final String mensajeError = "";
+		String[] mensajesError;
+
+
+		contribuyenteRequest.setNumBP(numBP);
+
+		System.out.println("Request de validaCont: " + contribuyenteRequest);
+		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+		System.out.println("Response de validaCont: " + detalleContribuyente);
+		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
+		{
+			infoPreviaPSE.setAnoGravable(anoParaPSE);
+				infoPreviaPSE.setTipoDoc(currentUserData.getDocumentType());
+				infoPreviaPSE.setNumDoc(currentUserData.getDocumentNumber());
+			infoPreviaPSE.setNumBP(numBP);
+			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
+				infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente,
+						vehicular2response.getInfo_vehiculo().getPlaca()));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
+			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getVEHICULAR());
+		}
+		else
+		{
+			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+			mensajesError = gasolinaService.prepararMensajesError(
+					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"error.impuestoGasolina.sobretasa.error2", mensajesError);
+		}
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+		//informacion para PSE
+
+
+		model.addAttribute("vehiculosFormDeclaracion", vehiculosFormDeclaracion);
+		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLRACION_VEHICULOS_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLRACION_VEHICULOS_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(DECLARACION_VEHICULOS_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+
+
+		return getViewForPage(model);
 	}
 
 
