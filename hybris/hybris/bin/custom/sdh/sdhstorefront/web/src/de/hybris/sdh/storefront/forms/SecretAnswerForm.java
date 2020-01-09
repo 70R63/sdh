@@ -25,6 +25,7 @@ public class SecretAnswerForm
 	private String REL04;
 	private String REL05;
 	private String DIR2_0001;
+	private String DIR2_0002;
 	private String DIR_0001;
 	private String DIR_0002;
 	private String PLA_0001;
@@ -360,6 +361,11 @@ public class SecretAnswerForm
 	}
 
 
+	public String getDIR2_0002() {
+		return DIR2_0002;
+	}
 
-
+	public void setDIR2_0002(String DIR2_0002) {
+		this.DIR2_0002 = DIR2_0002;
+	}
 }
