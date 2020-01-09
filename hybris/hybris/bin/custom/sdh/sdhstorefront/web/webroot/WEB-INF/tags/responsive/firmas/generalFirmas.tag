@@ -21,7 +21,7 @@
 	<div id="firmasDialogContent"></div>
 </div>
 
-
+<c:set var="modo_debug" value="false"/>
 <c:set var="currentUser_completeName"
 	value="${currentUser.completeName}" />
 <c:set var="currentUser_documentType"
@@ -29,29 +29,32 @@
 <c:set var="currentUser_documentNumber"
 	value="${currentUser.documentNumber}" />
 <c:set var="currentUser_numBP" value="${currentUser.numBP}" />
-<c:set var="mostrarBotonesFirmas" value="false" />
-<c:choose>
-	<c:when test="${infoPreviaPSE.tipoImpuesto ne 5103}">
-		<c:set var="lblDeclarante" value="Declarante" />
-		<c:set var="lblBotonFirmarYAgregar" value="Firmar y Agregar" />
-		<c:set var="flagMostrarSoloFirmar" value="true" />
-		<c:set var="mostrarBotonesFirmas" value="true" />
-		<c:if
-			test="${contribuyente.documentType eq 'NIT' and contribuyente.numBP eq currentUser.numBP }">
-			<c:set var="lblDeclarante" value="" />
-			<c:set var="lblBotonFirmarYAgregar" value="Agregar firmantes" />
-			<c:set var="flagMostrarSoloFirmar" value="false" />
-			<c:set var="showFirmButton" value="false" />
-			<c:set var="currentUser_completeName" value="" />
-			<c:set var="currentUser_documentType" value="" />
-			<c:set var="currentUser_documentNumber" value="" />
-			<c:set var="currentUser_numBP" value="" />
-			<input value="${contribuyente.documentType}" type="hidden"
-				id="firmas_contribuyente_documentType" />
-		</c:if>
-	</c:when>
-</c:choose>
-<%-- --${contribuyente.documentType}-- --%>
+
+<c:set var="lblDeclarante" value="Declarante" />
+<c:set var="lblBotonFirmarYAgregar" value="Firmar y Agregar" />
+<c:set var="flagMostrarSoloFirmar" value="true" />
+<c:set var="mostrarBotonesFirmas" value="true" />
+<c:if
+	test="${contribuyente.documentType eq 'NIT' and contribuyente.numBP eq currentUser.numBP }">
+	<c:set var="lblDeclarante" value="" />
+	<c:set var="lblBotonFirmarYAgregar" value="Agregar firmantes" />
+	<c:set var="flagMostrarSoloFirmar" value="false" />
+	<c:set var="showFirmButton" value="false" />
+	<c:set var="currentUser_completeName" value="" />
+	<c:set var="currentUser_documentType" value="" />
+	<c:set var="currentUser_documentNumber" value="" />
+	<c:set var="currentUser_numBP" value="" />
+	<input value="${contribuyente.documentType}" type="hidden"
+		id="firmas_contribuyente_documentType" />
+</c:if>
+<c:if test="${modo_debug eq 'true'}">
+--${contribuyente.documentType}--
+--${contribuyente.numBP}--
+--${currentUser.numBP}--
+--${mostrarBotonesFirmas}--
+--${infoPreviaPSE.tipoImpuesto}--
+</c:if>
+
 <div class="container">
 	<div class="row mt-3 representante">
 		<div class="col-md-12 mt-3">
@@ -63,7 +66,9 @@
 			</div>
 			<c:choose>
 				<c:when test="${showFirmantes ne true}">
-					<!-- 				<div>seccion1inicio</div> -->
+					<c:if test="${modo_debug eq 'true'}">
+						<div>seccion1inicio</div>
+					</c:if>
 					<c:if
 						test="${contribuyente.documentNumber eq currentUser.documentNumber}">
 						<c:set var="mostrarBotonesFirmas" value="false" />
@@ -95,17 +100,25 @@
 							flagMostrarSoloFirmar="${flagMostrarSoloFirmar}"
 							lblBotonFirmarYAgregar="${lblBotonFirmarYAgregar}" />
 					</div>
-					<!-- 				<div>seccion1fin</div> -->
+					<c:if test="${modo_debug eq 'true'}">
+						<div>seccion1fin</div>
+					</c:if>
 				</c:when>
 				<c:otherwise>
 					<firmas:mensajeProceso />
-					<!-- 				<div>seccion2inicio</div> -->
+					<c:if test="${modo_debug eq 'true'}">
+						<div>seccion2inicio</div>
+					</c:if>
 					<firmas:firmantesWS mostrarBotonesFirmas="${mostrarBotonesFirmas}" />
-					<!-- 				<div>seccion2fin</div> -->
+					<c:if test="${modo_debug eq 'true'}">
+						<div>seccion2fin</div>
+					</c:if>
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${showNewFirmRow}">
-				<!-- 			<div>seccion3inicio</div> -->
+				<c:if test="${modo_debug eq 'true'}">
+					<div>seccion3inicio</div>
+				</c:if>
 				<div class="row mt-3">
 					<firmas:infoCurrentUser
 						user_completeName="${currentUser_completeName}"
@@ -116,7 +129,9 @@
 						flagMostrarSoloFirmar="${flagMostrarSoloFirmar}"
 						lblBotonFirmarYAgregar="${lblBotonFirmarYAgregar}" />
 				</div>
-				<!-- 			<div>seccion3fin</div> -->
+				<c:if test="${modo_debug eq 'true'}">
+					<div>seccion3fin</div>
+				</c:if>
 
 			</c:if>
 		</div>
