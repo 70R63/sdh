@@ -9,25 +9,25 @@ package de.hybris.sdh.storefront.forms;
  */
 public class SecretAnswerForm
 {
-	private String FNAM;
-	private String REDS;
-	private String TELM;
-	private String DIR;
-	private String AGE;
-	private String DIR2;
-	private String IMP;
-	private String PLA;
-	private String MAT;
-	private String BAN;
-	private String REL01;
-	private String REL02;
-	private String REL03;
-	private String REL04;
-	private String REL05;
-	private String DIR2_0001;
-	private String DIR2_0002;
-	private String DIR_0001;
-	private String DIR_0002;
+	private String FNAM; //-
+	private String REDS; //-
+	private String TELM; //-
+	private String DIR; //-
+	private String AGE; //-
+	private String DIR2; //-
+	private String IMP; //-
+	private String PLA; //-
+	private String MAT; //-
+	private String BAN; //-
+	private String REL01; //-
+	private String REL02; //-
+	private String REL03; //-
+	private String REL04; //-
+	private String REL05; //-
+	private String DIR2_0001; //-
+	private String DIR2_0002; //-
+	private String DIR_0001; //-
+	private String DIR_0002; //-
 	private String PLA_0001;
 
 
