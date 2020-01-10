@@ -23,6 +23,7 @@ import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
@@ -86,6 +87,9 @@ public class DelineacionUrbanaController extends AbstractPageController
 	private static final String REDIRECT_TO_DELINEACION_URBANA_DECLARACION_CMS_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/delineacionurbana/declaracion";
 	private static final String REDIRECT_TO_DELINEACION_URBANA_CMS_PAGE = REDIRECT_PREFIX + "/contribuyentes/delineacion-urbana";
+
+	private static final String REDIRECT_TO_PRESENTAR_DECLARACION_CMS_PAGE = REDIRECT_PREFIX
+			+ "/contribuyentes/presentar-declaracion";
 
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -254,6 +258,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
 		String mensajeError = "";
 		String paginaDestino = "";
+		String mensajeErrorDel = "";
 		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
 		final InfoDelineacion infoDelineacion = new InfoDelineacion();
@@ -272,6 +277,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 			mensajeError = detalleContribuyente.getTxtmsj();
 			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
 			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+
 		}
 
 		System.out.println("---------------- En Delineacion urbana POST --------------------------");
@@ -319,21 +325,52 @@ public class DelineacionUrbanaController extends AbstractPageController
 		System.out.println("Request para infObjeto/Delineacion: " + infoDelineacionRequest);
 		infoDelineacionResponse = gasolinaService.consultaInfoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
 		System.out.println("Response de infObjeto/Delineacion: " + infoDelineacionResponse);
-		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
-		{
-			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
-			gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
-			gasolinaService.prepararValortipoDocDESCRIPCIONDU(infoDelineacion.getValCont());
 
-			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
-			infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
-		}
-		else
+		if (infoDelineacionResponse.getErrores() != null)
 		{
-			//			mensajeError = detalleContribuyente.getTxtmsj();
-			//			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
-			//			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+			String paginaDestinoInicial = paginaDestino;
+
+			for (final ErrorEnWS eachError : infoDelineacionResponse.getErrores())
+			{
+
+				if (eachError.getTxtmsj() == null || eachError.getTxtmsj() == "" || eachError.getTxtmsj().isEmpty())
+				{
+					if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
+					{
+
+						gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+						gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
+						gasolinaService.prepararValortipoDocDESCRIPCIONDU(infoDelineacion.getValCont());
+						infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
+						infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
+						paginaDestino = paginaDestinoInicial;
+					}
+				}
+				else
+				{
+					mensajeErrorDel = eachError.getTxtmsj();
+					System.out.println(eachError.getTxtmsj());
+					redirectAttributes.addFlashAttribute("mensajeDelinea", mensajeErrorDel);
+					paginaDestino = REDIRECT_TO_PRESENTAR_DECLARACION_CMS_PAGE;
+					break;
+				}
+
+			}
+
+
+
 		}
+		/*
+		 * if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true) {
+		 * gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+		 * gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
+		 * gasolinaService.prepararValortipoDocDESCRIPCIONDU(infoDelineacion.getValCont());
+		 *
+		 * infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
+		 * infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse); } else { // mensajeError =
+		 * detalleContribuyente.getTxtmsj(); // LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+		 * // GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2"); }
+		 */
 
 
 		model.addAttribute("dataForm", infoDelineacion);
