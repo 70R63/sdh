@@ -636,8 +636,9 @@ debugger;
 							$.each(infoResponse.customerData.delineacion, function (index,value2){
 								if(value1.numObjeto == value2.numObjeto){
 									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
-									$('#table-delineacion1').append("<tr>"+ 
+									$('#table-retedelineacion1').append("<tr>"+ 
 											'<td>' + value2.cdu + '</td>'+
+											'<td>' + value1.noRadicado + '</td>'+
 											'<td>' + desc_clavePeriodo + '</td>'+
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
@@ -991,6 +992,7 @@ debugger;
 		var tablepublicidad = document.getElementById('table-publicidad');
 		var tablegasolina = document.getElementById('table-gasolina');
 		var cdus = document.getElementById('table-delineacion');
+		var rcdus = document.getElementById('table-retedelineacion');
 		
 		
 		tablepredial.style.display = 'none';
@@ -999,6 +1001,7 @@ debugger;
 		tablereteica.style.display = 'none';
 		tablegasolina.style.display = 'none';
 		cdus.style.display = 'none';
+		rcdus.style.display = 'none';
 		tablepublicidad.style.display = 'none';
 		
 		ACC.opcionDeclaraciones.vaciarTablasInfo();
@@ -1017,8 +1020,8 @@ debugger;
 			cdus.style.display = 'block';
 		} else if (x == '0007') { //publicidad
 			tablepublicidad.style.display = 'block';
-		} else if (x == '0008') { //delineacion
-			cdus.style.display = 'block';
+		} else if (x == '0008') { //retedelineacion
+			rcdus.style.display = 'block';
 		} 
 		
 		
@@ -1031,6 +1034,7 @@ debugger;
 		$("#table-ica1").find("tr:gt(0)").remove();
 		$("#table-reteica1").find("tr:gt(0)").remove();
 		$("#table-delineacion1").find("tr:gt(0)").remove();
+		$("#table-retedelineacion1").find("tr:gt(0)").remove();
 	},
 	
 	
@@ -1068,6 +1072,7 @@ debugger;
 	},
 	
 	reiniciaCertipagos : function(){
+		debugger;
 		var claveImpuesto = document.getElementById('seleccion').value;
 		
 		ACC.opcionDeclaraciones.dataActual_backup = null;

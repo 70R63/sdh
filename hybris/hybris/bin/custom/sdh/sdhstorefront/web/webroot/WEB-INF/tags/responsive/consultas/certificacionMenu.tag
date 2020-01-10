@@ -364,6 +364,41 @@
 			</div>
 		</div>
 		
+		
+		<div class="row" id="table-retedelineacion" style="display: none;">
+			<div class="col-md-6 col-md-offset-3">
+				<table class="table" id="table-retedelineacion1">
+					<thead style="cellspacing: 10 !important">
+						<tr>
+							<th style="text-align: center"><label class="control-label "
+								for=""><spring:theme
+										code="certideclara.inicial.delineacion.cdu" /></label></th>
+							<th style="text-align: center"><label class="control-label "
+								for=""><spring:theme
+										code="certideclara.inicial.delineacion.radicado" /></label></th>			
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.referencia" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.importe" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.gasolina.moneda" /></label></th>
+							<th style="text-align: center"><label class="control-label"
+								for=""> <spring:theme
+										code="certideclara.inicial.delineacion.seleccionar" /></label></th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
 
 		<div class="row">
 			<div class="col-md-12 text-center">
