@@ -91,6 +91,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 	private static final String REDIRECT_TO_PRESENTAR_DECLARACION_CMS_PAGE = REDIRECT_PREFIX
 			+ "/contribuyentes/presentar-declaracion";
 
+	private static final String REDIRECT_TO_DELINEACION_INICIAL = REDIRECT_PREFIX + "/contribuyentes/delineacion-urbana";
+
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
@@ -183,6 +185,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
 		final String mensajeError = "";
 		String paginaDestino = "";
+		String mensajeErrorDel = "";
 		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
 
@@ -216,23 +219,54 @@ public class DelineacionUrbanaController extends AbstractPageController
 		System.out.println("Request para infObjeto/Delineacion: " + infoDelineacionRequest);
 		infoDelineacionResponse = gasolinaService.consultaInfoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
 		System.out.println("Response de infObjeto/Delineacion: " + infoDelineacionResponse);
-		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
+
+		if (infoDelineacionResponse.getErrores() != null)
 		{
+			String paginaDestinoInicial = paginaDestino;
+
+			for (final ErrorEnWS eachError : infoDelineacionResponse.getErrores())
+			{
+
+				if (eachError.getTxtmsj() == null || eachError.getTxtmsj() == "" || eachError.getTxtmsj().isEmpty())
+				{
+					if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
+					{
+
+						gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+						gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
+						gasolinaService.prepararValortipoDocDESCRIPCIONDU(infoDelineacion.getValCont());
+						infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
+						infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
+						paginaDestino = paginaDestinoInicial;
+					}
+				}
+				else
+				{
+					mensajeErrorDel = eachError.getTxtmsj();
+					System.out.println(eachError.getTxtmsj());
+					redirectAttributes.addFlashAttribute("mensajeDelinea", mensajeErrorDel);
+					paginaDestino = REDIRECT_TO_DELINEACION_INICIAL;
+					break;
+				}
+
+			}
 
 
-			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
-			gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
 
-			infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
-
-			infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse);
 		}
-		else
-		{
-			//			mensajeError = detalleContribuyente.getTxtmsj();
-			//			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
-			//			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
-		}
+		/*
+		 * if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true) {
+		 *
+		 *
+		 * gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
+		 * gasolinaService.prepararValorcausalExcepDESCRIPCIONDU(infoDelineacionResponse);
+		 *
+		 * infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
+		 *
+		 * infoDelineacion.setInfObjetoDelineacion(infoDelineacionResponse); } else { // mensajeError =
+		 * detalleContribuyente.getTxtmsj(); // LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+		 * // GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2"); }
+		 */
 
 
 		model.addAttribute("dataForm", infoDelineacion);
