@@ -49,4 +49,21 @@ window.onload = function() {
 	function goBack() {
 		window.history.back();
 	}
+	
+	
+	
+	
+	debugger;
+	 var mesesInfo = new Array();
+	 var mesDetalles = null;
+	 
+	 <c:forEach items ="${icaInfObjetoFormResp.catalogos.valor_retenido_dias}" var="diasDelMes" varStatus="status">
+	     mesDetalles = new Object();
+	     mesDetalles.mes = "${diasDelMes.key}";
+	     mesDetalles.diasEnMes = "${diasDelMes.label}";
+	     mesesInfo.push(mesDetalles);
+	 </c:forEach>
+	 
+	 
+ 
 </script>	

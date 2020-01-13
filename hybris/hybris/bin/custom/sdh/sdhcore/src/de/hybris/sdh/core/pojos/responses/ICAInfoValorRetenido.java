@@ -10,7 +10,7 @@ package de.hybris.sdh.core.pojos.responses;
 public class ICAInfoValorRetenido
 {
 
-	private String anoGravable;
+	private String anoGravable; //NO REGENERAR GETTER Y SETTER: Este atributo es la combinacion de los atributos dia/mes/anio
 	private String tipoID;
 	private String numID;
 	private String razonSocial;
@@ -19,13 +19,17 @@ public class ICAInfoValorRetenido
 	private String telefono;
 	private String tarifaApl;
 	private String montoRetenido;
+	private String dia;
+	private String mes;
+	private String anio;
 
 	/**
 	 * @return the anoGravable
 	 */
 	public String getAnoGravable()
 	{
-		return anoGravable;
+		//		return anoGravable;
+		return this.dia + "/" + this.mes + "/" + this.anio;
 	}
 
 	/**
@@ -35,6 +39,9 @@ public class ICAInfoValorRetenido
 	public void setAnoGravable(final String anoGravable)
 	{
 		this.anoGravable = anoGravable;
+		this.anio = anoGravable.substring(6, 10);
+		this.mes = anoGravable.substring(3, 5);
+		this.dia = anoGravable.substring(0, 2);
 	}
 
 	/**
@@ -173,6 +180,57 @@ public class ICAInfoValorRetenido
 	public void setMontoRetenido(final String montoRetenido)
 	{
 		this.montoRetenido = montoRetenido;
+	}
+
+	/**
+	 * @return the dia
+	 */
+	public String getDia()
+	{
+		return dia;
+	}
+
+	/**
+	 * @param dia
+	 *           the dia to set
+	 */
+	public void setDia(final String dia)
+	{
+		this.dia = dia;
+	}
+
+	/**
+	 * @return the mes
+	 */
+	public String getMes()
+	{
+		return mes;
+	}
+
+	/**
+	 * @param mes
+	 *           the mes to set
+	 */
+	public void setMes(final String mes)
+	{
+		this.mes = mes;
+	}
+
+	/**
+	 * @return the anio
+	 */
+	public String getAnio()
+	{
+		return anio;
+	}
+
+	/**
+	 * @param anio
+	 *           the anio to set
+	 */
+	public void setAnio(final String anio)
+	{
+		this.anio = anio;
 	}
 
 
