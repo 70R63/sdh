@@ -620,6 +620,14 @@ public class RegisterPageController extends SDHAbstractRegisterPageController
 			}
 		}
 
+        if (form.getPLA_0002() != null)
+        {
+            if (form.getPLA_0002().equals(responseWS.getCorrectAnswer("PLA_0002")))
+            {
+                i++;
+            }
+        }
+
 		if (i < 3)
 		{
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,msg);

@@ -29,6 +29,7 @@ public class SecretAnswerForm
 	private String DIR_0001; //-
 	private String DIR_0002; //-
 	private String PLA_0001;
+	private String PLA_0002;
 
 
 
@@ -368,4 +369,13 @@ public class SecretAnswerForm
 	public void setDIR2_0002(String DIR2_0002) {
 		this.DIR2_0002 = DIR2_0002;
 	}
+
+	public String getPLA_0002() {
+		return PLA_0002;
+	}
+
+	public void setPLA_0002(String PLA_0002) {
+		this.PLA_0002 = PLA_0002;
+	}
 }
+
