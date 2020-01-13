@@ -60,6 +60,23 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- Se agrega para Select de ROL 13.01.2020 Maria Torres -->
+			<div id="divRol" class="row mt-3" style="display: none;"> 
+				<div class="col-md-12 text-center">
+					<div class="form-group">
+						<label class="control-label required"><spring:theme
+								code="tramites.crear.inicial.rol" /></label> 
+						<select data-nivel="4" class=" form-control !important tramitestSN" id="selectNivel4" >
+						<option>Seleccionar</option>
+						<option>Contribuyente</option>
+						<option>Agente Retenedor</option>
+						<option>Reportante de la Información</option>
+						<option>Terceros Autorizados</option>
+						</select>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="row mt-3">

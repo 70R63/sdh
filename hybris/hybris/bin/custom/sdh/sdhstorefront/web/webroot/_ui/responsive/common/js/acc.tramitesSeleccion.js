@@ -22,9 +22,10 @@ ACC.tramitesSeleccion = {
 					dataActual.valorN2 = "";
 					dataActual.valorN3 = "";
 
-					// debugger;
+					 debugger;
 					var doc = document.getElementById('documentos');
 					doc.style.display = 'none';
+					var rol=$("#divRol")[0];
 
 					if (dataActual.nivelSeleccion == 0) {
 						ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
@@ -49,6 +50,7 @@ ACC.tramitesSeleccion = {
 						dataActual.valorN1 = $("#selectNivel1").val();
 						dataActual.valorN2 = $("#selectNivel2").val();
 						dataActual.valorN3 = $("#selectNivel3").val();
+						rol.style.display='block';
 					}
 
 					$.ajax({
