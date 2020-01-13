@@ -9,6 +9,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -42,6 +43,7 @@ import de.hybris.sdh.core.pojos.responses.ICAInfoIngFueraBog;
 import de.hybris.sdh.core.pojos.responses.ICAInfoIngNetosGrava;
 import de.hybris.sdh.core.pojos.responses.ICAInfoIngPorCiiu;
 import de.hybris.sdh.core.pojos.responses.ICAInfoValorRetenido;
+import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -57,14 +59,18 @@ import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
 import de.hybris.sdh.storefront.forms.FirmantesForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
+import de.hybris.sdh.storefront.forms.ICADeclaracionCatalogos;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.annotation.Resource;
@@ -398,14 +404,22 @@ public class IcaPageController extends SDHAbstractPageController
 			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = icaInfObjetoFormResp.getIcaInfObjetoResponse()
 					.getInfoDeclara().getValorRetenido();
 
-			for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
+			for (int i = ICAInfoValorRetenidoList.size() - 1; i >= 0; i--)
 			{
+				if (ICAInfoValorRetenidoList.get(i).getAnio() == null)
+				{
+					ICAInfoValorRetenidoList.get(i).setAnio(icaInfObjetoResponse.getAnoGravable());
+				}
 				if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
 				{
 					ICAInfoValorRetenidoList.remove(i);
 				}
 			}
+			agregarRegistroDefault(ICAInfoValorRetenidoList, icaInfObjetoResponse);
+
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
+			icaInfObjetoFormResp
+					.setCatalogos(obtenerCatalogos(icaInfObjetoResponse.getAnoGravable(), icaInfObjetoResponse.getPeriodo()));
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
@@ -645,10 +659,14 @@ public class IcaPageController extends SDHAbstractPageController
 
 			if (ICAInfoValorRetenidoList != null)
 			{
-				for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
+				for (int i = ICAInfoValorRetenidoList.size() - 1; i >= 0; i--)
 				{
 					if (ICAInfoValorRetenidoList.get(i) != null)
 					{
+						if (ICAInfoValorRetenidoList.get(i).getAnio() == null)
+						{
+							ICAInfoValorRetenidoList.get(i).setAnio(icaInfObjetoResponse.getAnoGravable());
+						}
 						if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
 						{
 							ICAInfoValorRetenidoList.remove(i);
@@ -656,6 +674,8 @@ public class IcaPageController extends SDHAbstractPageController
 					}
 				}
 			}
+			agregarRegistroDefault(ICAInfoValorRetenidoList, icaInfObjetoResponse);
+
 			infoDeclara.setValorRetenido(ICAInfoValorRetenidoList);
 
 			if (calcula2ImpuestoResponse.getIngNetosGrava() != null)
@@ -692,6 +712,8 @@ public class IcaPageController extends SDHAbstractPageController
 
 
 			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
+			icaInfObjetoFormResp
+					.setCatalogos(obtenerCatalogos(icaInfObjetoResponse.getAnoGravable(), icaInfObjetoResponse.getPeriodo()));
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
@@ -969,187 +991,150 @@ public class IcaPageController extends SDHAbstractPageController
 	}
 
 
-	//	@RequestMapping(value = "/contribuyentes/ica/declaracion/show", method = RequestMethod.GET)
-	//	@RequireHardLogIn
-	//	public String show(final Model model, @RequestParam(required = false, value = "numForm")
-	//	final String numForm, @RequestParam(required = false, value = "partner")
-	//	final String partner) throws CMSItemNotFoundException
-	//	{
-	//		CalcICA2Request request = new CalcICA2Request();
-	//
-	//		request.setFormulario(numForm);
-	//		request.setPartner(partner);
-	//
-	//
-	//		ICAInfObjetoForm icaInfObjetoFormResp = new ICAInfObjetoForm();
-	//		ICAInfObjetoResponse icaInfObjetoResponse = new ICAInfObjetoResponse();
-	//
-	//		if (StringUtils.isAllBlank(pnumObjeto, panoGravable))
-	//		{
-	//			numObjeto = dataFormResponseICA.getNumObjeto();
-	//			anoGravable = dataFormResponseICA.getAnoGravable();
-	//		}
-	//		else
-	//		{
-	//			numObjeto = pnumObjeto;
-	//			anoGravable = panoGravable;
-	//		}
-	//		if (StringUtils.isAllBlank(numObjeto, anoGravable))
-	//		{
-	//			return REDIRECT_TO_ICA_PAGE;
-	//		}
-	//
-	//		addAgentsToModel(model, customerFacade.getCurrentCustomer());
-	//		model.addAttribute("customerData",customerFacade.getCurrentCustomer());
-	//		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-	//		final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
-	//
-	//		icaInfObjetoRequest.setNumBP(customerModel.getNumBP());
-	//		icaInfObjetoRequest.setNumObjeto(numObjeto);
-	//		icaInfObjetoRequest.setAnoGravable(anoGravable);
-	//
-	//		if (!StringUtils.isBlank(periodoSeleccionado))
-	//		{
-	//			icaInfObjetoRequest.setPeriodo(periodoSeleccionado);
-	//		}
-	//		else
-	//		{
-	//			icaInfObjetoRequest.setPeriodo("");
-	//		}
-	//
-	//		try
-	//		{
-	//			icaInfObjetoFormResp = new ICAInfObjetoForm();
-	//
-	//			final ObjectMapper mapper = new ObjectMapper();
-	//			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-	//
-	//
-	//			final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
-	//
-	//			icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
-	//
-	//			icaInfObjetoFormResp.setDocumentType(customerModel.getDocumentType());
-	//			icaInfObjetoFormResp.setDocumentNumber(customerModel.getDocumentNumber());
-	//			icaInfObjetoFormResp.setCompleteName(customerModel.getFirstName() + " " + customerModel.getLastName());
-	//			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
-	//
-	//			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
-	//					.getIngPorCIIU();
-	//
-	//			for (int i = 0; i < IngPorCIIUList.size(); i++)
-	//			{
-	//				if (IngPorCIIUList.get(i).getNumID() == null)
-	//				{
-	//					IngPorCIIUList.remove(i);
-	//				}
-	//			}
-	//			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
-	//
-	//
-	//			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = icaInfObjetoFormResp.getIcaInfObjetoResponse()
-	//					.getInfoDeclara().getValorRetenido();
-	//
-	//			for (int i = 0; i < ICAInfoValorRetenidoList.size(); i++)
-	//			{
-	//				if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
-	//				{
-	//					ICAInfoValorRetenidoList.remove(i);
-	//				}
-	//			}
-	//			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
-	//
-	//			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-	//			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
-	//			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
-	//			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
-	//			//redirectModel.addFlashAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-	//
-	//
-	//		}
-	//		catch (final Exception e)
-	//		{
-	//			LOG.error("error getting customer info from SAP for ICA details page: " + e.getMessage());
-	//
-	//			final ICAInfoDeclara infoDeclara = new ICAInfoDeclara();
-	//			final List<ICAInfoIngFueraBog> listInfFueraBog = new ArrayList<ICAInfoIngFueraBog>();
-	//			final List<ICAInfoValorRetenido> listvalorRetenido = new ArrayList<ICAInfoValorRetenido>();
-	//			final List<ICAInfoIngNetosGrava> listIngNetosGrava = new ArrayList<ICAInfoIngNetosGrava>();
-	//			final List<ICAInfoIngPorCiiu> listIngPorCIIU = new ArrayList<ICAInfoIngPorCiiu>();
-	//
-	//
-	//			listInfFueraBog.add(new ICAInfoIngFueraBog());
-	//			listvalorRetenido.add(new ICAInfoValorRetenido());
-	//			listIngNetosGrava.add(new ICAInfoIngNetosGrava());
-	//			listIngPorCIIU.add(new ICAInfoIngPorCiiu());
-	//
-	//			infoDeclara.setIngFueraBog(listInfFueraBog);
-	//			infoDeclara.setValorRetenido(listvalorRetenido);
-	//			infoDeclara.setIngNetosGrava(listIngNetosGrava);
-	//			infoDeclara.setIngPorCIIU(listIngPorCIIU);
-	//
-	//			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
-	//			icaInfObjetoFormResp.setIcaInfObjetoResponse(icaInfObjetoResponse);
-	//			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
-	//		}
-	//
-	//		//informacion para PSE
-	//		final CustomerModel customerData = (CustomerModel) userService.getCurrentUser();
-	//		final String numBP = customerData.getNumBP();
-	//
-	//		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-	//		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
-	//		final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
-	//		SDHValidaMailRolResponse detalleContribuyente = new SDHValidaMailRolResponse();
-	//		//		final String mensajeError = "";
-	//		String[] mensajesError;
-	//
-	//
-	//		contribuyenteRequest.setNumBP(numBP);
-	//
-	//		System.out.println("Request de validaCont: " + contribuyenteRequest);
-	//		detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
-	//		System.out.println("Response de validaCont: " + detalleContribuyente);
-	//		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
-	//		{
-	//			if (icaInfObjetoResponse.getAnoGravable() != null)
-	//			{
-	//				infoPreviaPSE.setAnoGravable(icaInfObjetoResponse.getAnoGravable().trim());
-	//			}
-	//			infoPreviaPSE.setTipoDoc(customerData.getDocumentType());
-	//			infoPreviaPSE.setNumDoc(customerData.getDocumentNumber());
-	//			infoPreviaPSE.setNumBP(numBP);
-	//			try
-	//			{
-	//				infoPreviaPSE.setClavePeriodo(gasolinaService.prepararClavePeriodoICA(icaInfObjetoResponse));
-	//			}
-	//			catch (final Exception e)
-	//			{
-	//				infoPreviaPSE.setClavePeriodo(icaInfObjetoResponse.getPeriodo());
-	//			}
-	//			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoICA(detalleContribuyente));
-	//			infoPreviaPSE.setDv(gasolinaService.prepararDV(detalleContribuyente));
-	//			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getICA());
-	//		}
-	//		else
-	//		{
-	//			LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
-	//			mensajesError = gasolinaService.prepararMensajesError(
-	//					gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
-	//		}
-	//		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
-	//
-	//		model.addAttribute("gravableNetIncomes",
-	//				this.getGravableNetIncomes(numBP, numObjeto, anoGravable, icaInfObjetoRequest.getPeriodo()));
-	//		//informacion para PSE
-	//
-	//		storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
-	//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ICA_DECLARACION_CMS_PAGE));
-	//		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(DECLARACION_ACCOUNT_PROFILE));
-	//		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-	//
-	//		return getViewForPage(model);
-	//	}
+	private ICADeclaracionCatalogos obtenerCatalogos(final String anoGravable, String periodo)
+	{
+		final ICADeclaracionCatalogos catalogos = new ICADeclaracionCatalogos();
+		Map<String, String> meses = null;
+		List<ItemSelectOption> dias = null;
+
+
+		if (periodo != null && !periodo.isEmpty() && periodo.length() >= 2)
+		{
+			periodo = periodo.substring(0, 2);
+			switch (periodo)
+			{
+				case "01":
+					meses = new LinkedHashMap<String, String>();
+					meses.put("00", "SELECCIONAR");
+					meses.put("01", "Enero");
+					meses.put("02", "Febrero");
+					break;
+				case "02":
+					meses = new LinkedHashMap<String, String>();
+					meses.put("00", "SELECCIONAR");
+					meses.put("03", "Marzo");
+					meses.put("04", "Abril");
+					break;
+
+				case "03":
+					meses = new LinkedHashMap<String, String>();
+					meses.put("00", "SELECCIONAR");
+					meses.put("05", "Mayo");
+					meses.put("06", "Junio");
+					break;
+
+				case "04":
+					meses = new LinkedHashMap<String, String>();
+					meses.put("00", "SELECCIONAR");
+					meses.put("07", "Julio");
+					meses.put("08", "Agosto");
+					break;
+
+				case "05":
+					meses = new LinkedHashMap<String, String>();
+					meses.put("00", "SELECCIONAR");
+					meses.put("09", "Septiembre");
+					meses.put("10", "Octubre");
+					break;
+
+				case "06":
+					meses = new LinkedHashMap<String, String>();
+					meses.put("00", "SELECCIONAR");
+					meses.put("11", "Noviembre");
+					meses.put("12", "Diciembre");
+					break;
+
+				default:
+					break;
+			}
+		}
+		else
+		{
+			meses = new LinkedHashMap<String, String>();
+			meses.put("", "SELECCIONAR");
+			meses.put("01", "Enero");
+			meses.put("02", "Febrero");
+			meses.put("03", "Marzo");
+			meses.put("04", "Abril");
+			meses.put("05", "Mayo");
+			meses.put("06", "Junio");
+			meses.put("07", "Julio");
+			meses.put("08", "Agosto");
+			meses.put("09", "Septiembre");
+			meses.put("10", "Octubre");
+			meses.put("11", "Noviembre");
+			meses.put("12", "Diciembre");
+		}
+
+		if (anoGravable != null && !anoGravable.isEmpty())
+		{
+			dias = determinarDiasDeMeses(anoGravable);
+		}
+
+		catalogos.setValor_retenido_meses(meses);
+		catalogos.setValor_retenido_dias(dias);
+		catalogos.setDiasMes1("31");
+
+
+		return catalogos;
+	}
+
+
+	/**
+	 * @param anoGravable
+	 * @param periodo
+	 * @return
+	 */
+	private List<ItemSelectOption> determinarDiasDeMeses(final String anoGravable)
+	{
+		final List<ItemSelectOption> dias = new ArrayList<ItemSelectOption>();
+		YearMonth yearMonthObject = null;
+		int daysInMonth = 0;
+		String idMesFormateado = null;
+		String idDiasDelMesFormateado = null;
+
+
+		ItemSelectOption diasDelMes = null;
+		for (int i = 1; i <= 12; i++)
+		{
+			yearMonthObject = YearMonth.of(Integer.parseInt(anoGravable.trim()), i);
+			daysInMonth = yearMonthObject.lengthOfMonth();
+			idMesFormateado = i < 10 ? "0" + Integer.toString(i) : Integer.toString(i);
+			idDiasDelMesFormateado = daysInMonth < 10 ? "0" + Integer.toString(daysInMonth) : Integer.toString(daysInMonth);
+			diasDelMes = new ItemSelectOption(idMesFormateado, idDiasDelMesFormateado);
+			dias.add(diasDelMes);
+		}
+
+
+
+		//		if (daysInMonth > 0)
+		//		{
+		//			diasDelMes = new ArrayList<ItemSelectOption>();
+		//			ItemSelectOption diaDelMes = null;
+		//			for (int i = 1; i <= daysInMonth; i++)
+		//			{
+		//				diaDelMes = new ItemSelectOption(Integer.toString(i), Integer.toString(i));
+		//				diasDelMes.add(diaDelMes);
+		//			}
+		//		}
+		//		dias.setKey(Integer.toString(periodo));
+		//		dias.setDias(diasDelMes);
+
+
+		return dias;
+	}
+
+
+	private void agregarRegistroDefault(List<ICAInfoValorRetenido> listaResgistros, ICAInfObjetoResponse infoAdicional)
+	{
+		if (listaResgistros.isEmpty())
+		{
+			ICAInfoValorRetenido registroDefault = new ICAInfoValorRetenido();
+			registroDefault.setAnio(infoAdicional.getAnoGravable());
+			listaResgistros.add(registroDefault);
+		}
+
+	}
 
 
 }

@@ -18,6 +18,8 @@ public class ICAInfObjetoForm
 
 	private ICAInfObjetoResponse icaInfObjetoResponse;
 
+	private ICADeclaracionCatalogos catalogos;
+
 	/**
 	 * @return the documentType
 	 */
@@ -84,6 +86,23 @@ public class ICAInfObjetoForm
 	public void setIcaInfObjetoResponse(final ICAInfObjetoResponse icaInfObjetoResponse)
 	{
 		this.icaInfObjetoResponse = icaInfObjetoResponse;
+	}
+
+	/**
+	 * @return the catalogos
+	 */
+	public ICADeclaracionCatalogos getCatalogos()
+	{
+		return catalogos;
+	}
+
+	/**
+	 * @param catalogos
+	 *           the catalogos to set
+	 */
+	public void setCatalogos(final ICADeclaracionCatalogos catalogos)
+	{
+		this.catalogos = catalogos;
 	}
 
 
