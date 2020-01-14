@@ -119,18 +119,18 @@
 			<div class="row valor" id="valor" style="padding-left: 45px;">
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
 
-					<sf:input class="new_alto form-control anio anoGravable " 
+					<sf:input class="new_alto form-control anio_anoGravable " 
 					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].anio"
 					readonly="true" onchange="activarValidacion_valorRetenido()"/>
 				</div>
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
-					<sf:select class="new_alto form-control mes anoGravable " 
+					<sf:select class="new_alto form-control mes_anoGravable " 
 					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].mes" 
 					items="${icaInfObjetoFormResp.catalogos.valor_retenido_meses}" 
 					onchange="realizarUpdateMes_valorRetenido(this)" id="${idMes}"></sf:select>
 				</div>
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
-					<sf:select class="new_alto form-control mes anoGravable " 
+					<sf:select class="new_alto form-control dia_anoGravable " 
 					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].dia" 
 					items="${icaInfObjetoFormResp.catalogos.valor_retenido_meses}" 
 					onchange="activarValidacion_valorRetenido()" id="${idDia}" disabled="true"></sf:select>
