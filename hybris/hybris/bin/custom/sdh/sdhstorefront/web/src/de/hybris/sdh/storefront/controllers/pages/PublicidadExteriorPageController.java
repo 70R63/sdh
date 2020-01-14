@@ -222,6 +222,10 @@ public class PublicidadExteriorPageController extends AbstractPageController
 			//Datos Basicos
 
 			final String fechResolu = detallePublicidadResponse.getFechResolu();
+			publicidadForm.setOpcionUso(detallePublicidadResponse.getInfoDeclara().getOpcionUso());
+			LOG.info("setOpcionUso -> " + detallePublicidadResponse.getInfoDeclara().getOpcionUso());
+
+
 			if (StringUtils.isNotBlank(fechResolu) && !"00000000".equals(fechResolu))
 			{
 				final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");

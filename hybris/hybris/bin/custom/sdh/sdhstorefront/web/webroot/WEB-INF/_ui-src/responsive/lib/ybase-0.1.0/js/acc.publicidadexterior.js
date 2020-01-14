@@ -146,75 +146,84 @@ ACC.publicidadexterior = {
 		 $(document).on("click", "#presentarDeclaracionButton", function (e) {
 	 	        e.preventDefault();
 	 	        
-	 	       var anoGravable  = $.trim($("#anio").val());
-	 	       var numResolu =  $("#selectedNumRes").val();
+	 	      var anoGravable  = $.trim($("#anio").val());
+	 	      var numResolu =  $("#selectedNumRes").val();
 	 	      var tipoValla = $("#selectedTipoValla").val();
-	 	      
+
 	 	      if(anoGravable == "0")
-	 	        {	
+	 	        {
 	 	        	alert("Por favor, selecciona el año a consultar");
 	 	        	return;
 	 	        }
-	 	        	
+
 	 	        if(numResolu == "" || numResolu == "")
 	 	        {
 	 	        	alert("Por favor, selecciona el impuesto a consultar");
 	 	        	return;
 	 	        }
-	 	       
-	 	      window.location.href = ACC.publicidadExteriorDeclararionURL+"?numResolu="+numResolu+"&anoGravable="+anoGravable+"&tipoValla="+tipoValla;
-	 	       
-		 });
+
+	 	        //Modificacion Jair Roa
+	 	        if(document.getElementById("opcionUsoHidden").value == '02'){
+                    var response = confirm("Ya tiene una declaración inicial desea realizar la corrección, ¿Desea Continuar?");
+                    if (response == true) {
+                      window.location.href = ACC.publicidadExteriorDeclararionURL+"?numResolu="+numResolu+"&anoGravable="+anoGravable+"&tipoValla="+tipoValla;
+                    } else {
+                      return;
+                    }
+	 	        }else{
+	 	            window.location.href = ACC.publicidadExteriorDeclararionURL+"?numResolu="+numResolu+"&anoGravable="+anoGravable+"&tipoValla="+tipoValla;
+	 	        }
+	 	 });
 	 },
-	 
+
 	    bindSearchButton: function () {
 	    	 $(document).on("click", "#searchDetailButton", function (e) {
 		 	        e.preventDefault();
-		 	        
+
 		 	        var anoGravable  = $.trim($("#anio").val());
 		 	       var tipoValla = $("#selectedTipoValla").val();
 		 	       var numResolu =  $("#selectedNumRes").val();
-		 	        
+
 		 	        if(anoGravable == "0")
-		 	        {	
+		 	        {
 		 	        	alert("Por favor, selecciona el año a consultar");
 		 	        	return;
 		 	        }
-		 	        	
+
 		 	        if(tipoValla == "" || numResolu == "")
 		 	        {
 		 	        	alert("Por favor, selecciona el impuesto a consultar");
 		 	        	return;
 		 	        }
-		 	        
-		 	        
+
+
 		 	       var data={};
-			        
+
 			       data.numResolu = numResolu;
 			       data.anoGravable = anoGravable;
 			       data.tipoValla = tipoValla;
-			       
+
 			        $.ajax({
 			            url: ACC.publicidadExteriorDetalleURL,
 			            data: data,
 			            type: "GET",
 			            success: function (data) {
-			            	
-			            	
+
+
 			            	ACC.publicidadexterior.fillFieldsFromData(data);
-			            	
+
 			            },
 			            error: function () {
 			            }
 			        });
-		 	        
-		 	        
+
+
 		 	  });
-	    	
+
 	    },
-	    
+
 	    fillFieldsFromData:function(data){
-	    	
+
 	    	var tipoValla = $("#selectedTipoValla").val();
 
 	    	$("#divPublicidadExteriorDetail").show();
@@ -223,27 +232,27 @@ ACC.publicidadexterior = {
         	$("#divTubularObra").hide();
         	$("#divObraConvencional").hide();
         	$("#divPantallaLed").hide();
-	    	
+
 	    	if(tipoValla == "Valla Tubular Comercial"||tipoValla == "01")
     		{
         		$("#divTubularComercial").show();
         		$(".inputtextnew").val();
-        		
+
         		$("#fechResolu").val(data.fechResolu);
         		$("#fechNotif").val(data.fechNotif);
         		$("#tipoSolicitud").val(data.tipoSolicitud);
-        		
+
         		$("#tubularComercialDireccion").val(data.direccion);
         		$("#tubularComercialAreaElemento").val(data.areaElemento);
-        		
+
         		var localidadText  = data.localidad;
-        		
+
         		localidades.forEach(function (eachLoc) {
 	    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
 	    	    		localidadText = eachLoc.name;
         		});
-        		
-        		
+
+
         		$("#tubularComercialLocalidad").val(localidadText);
         		$("#tubularComercialOrientacion").val(data.orientacion);
         		$("#tubularComercialCodPostal").val(data.codPostal);
@@ -255,11 +264,11 @@ ACC.publicidadexterior = {
     		{
     			$("#divVehiculos").show();
         		$(".inputtextnew").val();
-        		
+
         		$("#fechResolu").val(data.fechResolu);
         		$("#fechNotif").val(data.fechNotif);
         		$("#tipoSolicitud").val(data.tipoSolicitud);
-        		
+
         		$("#vehiculoModelo").val(data.modelo);
         		$("#vehiculoTipoPublici").val(data.tipoPublici);
         		$("#vehiculoPlaca").val(data.placa);
@@ -267,26 +276,26 @@ ACC.publicidadexterior = {
         		$("#vehiculoNumLicenciaTrans").val(data.numLicenciaTrans);
         		$("#vehiculoOrientacion").val(data.orientacion);
         		$("#vehiculoTipoServicio").val(data.tipoServicio);
-        		
+
     		}else if(tipoValla == "Valla Tubular de Obra"||tipoValla == "03")
     		{
     			$("#divTubularObra").show();
         		$(".inputtextnew").val();
-        		
+
         		$("#fechResolu").val(data.fechResolu);
         		$("#fechNotif").val(data.fechNotif);
         		$("#tipoSolicitud").val(data.tipoSolicitud);
-        		
+
         		$("#tubularObraDireccion").val(data.direccion);
         		$("#tubularObraLicenciaUrb").val(data.licenciaUrb);
-        		
+
         		var localidadText  = data.localidad;
-        		
+
         		localidades.forEach(function (eachLoc) {
 	    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
 	    	    		localidadText = eachLoc.name;
         		});
-        		
+
         		$("#tubularObraLocalidad").val(localidadText);
         		$("#tubularObraContratoObra").val(data.contratoObra);
         		$("#tubularObraCodPostal").val(data.codPostal);
@@ -299,27 +308,27 @@ ACC.publicidadexterior = {
         		$("#tubularObraPeriodicidad").val(data.periodicidad);
         		$("#tubularObraOrientacion").val(data.orientacion);
         		$("#tubularObraNumcaras").val(data.numCaras);
-    			
+
     		}else if(tipoValla == "Valla de Obra Convencional"||tipoValla == "04")
     		{
-    			
+
     			$("#divObraConvencional").show();
         		$(".inputtextnew").val();
-        		
+
         		$("#fechResolu").val(data.fechResolu);
         		$("#fechNotif").val(data.fechNotif);
         		$("#tipoSolicitud").val(data.tipoSolicitud);
-        		
+
         		$("#obraConvencionalDireccion").val(data.direccion);
         		$("#obraConvencionaltipoPublici").val(data.tipoPublici);
-        		
+
         		var localidadText  = data.localidad;
-        		
+
         		localidades.forEach(function (eachLoc) {
 	    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
 	    	    		localidadText = eachLoc.name;
         		});
-        		
+
         		$("#obraConvencionalLocalidad").val(localidadText);
         		$("#obraConvencionalUbicacion").val(data.ubicacion);
         		$("#obraConvencionalCodPostal").val(data.codPostal);
@@ -332,21 +341,21 @@ ACC.publicidadexterior = {
     		{
     			$("#divPantallaLed").show();
         		$(".inputtextnew").val();
-        		
+
         		$("#fechResolu").val(data.fechResolu);
         		$("#fechNotif").val(data.fechNotif);
         		$("#tipoSolicitud").val(data.tipoSolicitud);
-        		
+
         		$("#pantallaLedDireccion").val(data.direccion);
         		$("#pantallaLedMatricula").val(data.matricula);
-        		
+
         		var localidadText  = data.localidad;
-        		
+
         		localidades.forEach(function (eachLoc) {
 	    	    	if(parseInt(eachLoc.locId) == parseInt(data.localidad))
 	    	    		localidadText = eachLoc.name;
         		});
-        		
+
         		$("#pantallaLedLocalidad").val(localidadText);
         		$("#pantallaLedUbicacion").val(data.ubicacion);
         		$("#pantallaLedCodPostal").val(data.codPostal);
@@ -356,44 +365,46 @@ ACC.publicidadexterior = {
         		$("#pantallaLedAreaTotal").val(data.areaElemento);
     		}
 	    },
-	    
+
 	    bindLabelVerButton: function () {
 	    	 $(document).on("click", ".labelVer", function (e) {
 		 	        e.preventDefault();
-		 	        
+
+
 		 	        var anoGravable  = $.trim($(this).attr("data-anogravable"));
 		 	        var tipoValla = $.trim($(this).attr("data-tipoValla"));
 		 	       var numResolu = $.trim($(this).attr("data-numRes"));
-		 	        
+
 		 	        if(anoGravable == "0")
-		 	        {	
+		 	        {
 		 	        	alert("Por favor, selecciona el año a consultar");
 		 	        	return;
 		 	        }
-		 	        	
+
 		 	        if(tipoValla == "" || numResolu == "")
 		 	        {
 		 	        	alert("Por favor, selecciona el impuesto a consultar");
 		 	        	return;
 		 	        }
-		 	        
+
 		 	        $("#selectedTipoValla").val(tipoValla);
 		 	       $("#selectedNumRes").val(numResolu);
 		 	      $("#anio").val(anoGravable)
 		 	       var data={};
-			        
+
 			       data.numResolu = numResolu;
 			       data.anoGravable = anoGravable;
 			       data.tipoValla = tipoValla;
-			       
+
 			        $.ajax({
 			            url: ACC.publicidadExteriorDetalleURL,
 			            data: data,
 			            type: "GET",
 			            success: function (data) {
 			            	ACC.publicidadexterior.fillFieldsFromData(data);
-			            	
-			            },
+			            	//Modificacion Jair Roa
+			            	document.getElementById("opcionUsoHidden").value = data.opcionUso;
+			         },
 			            error: function () {
 			            }
 			        });

@@ -7,6 +7,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
+
 	<div id="divPantallaLed" style="display: none;">
 		<div class="row">
 			<div class="headline">
@@ -22,7 +23,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="publicidad.exterior.pantalla.address" text="Dirección" /></label>
+							code="publicidad.exterior.pantalla.address" text="Direcciï¿½n" /></label>
 					<input id="pantallaLedDireccion" name="pantallaLedDireccion"
 						class="form-control new_alto" aria-required="true" type="text"
 						value="" maxlength="240" disabled>
@@ -33,7 +34,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="publicidad.exterior.pantalla.postalcode"
-							text="Código postal" /></label> <input id="pantallaLedCodPostal"
+							text="Cï¿½digo postal" /></label> <input id="pantallaLedCodPostal"
 						name="pantallaLedCodPostal" class="form-control newalto"
 						aria-required="true" type="text" value="" maxlength="240" disabled>
 				</div>
@@ -51,7 +52,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="publicidad.exterior.pantalla.ubicacion" text="Ubicación" /></label>
+							code="publicidad.exterior.pantalla.ubicacion" text="Ubicaciï¿½n" /></label>
 					<input id="pantallaLedUbicacion" name="pantallaLedUbicacion"
 						class="form-control newalto" aria-required="true" type="text"
 						value="" maxlength="240" disabled>
@@ -61,7 +62,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="publicidad.exterior.pantalla.matricula"
-							text="Matrícula inmobilaria" /></label> <input id="pantallaLedMatricula"
+							text="Matrï¿½cula inmobilaria" /></label> <input id="pantallaLedMatricula"
 						name="pantallaLedMatricula" class="form-control newalto"
 						aria-required="true" type="text" value="" maxlength="240" disabled>
 				</div>
@@ -94,7 +95,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="publicidad.exterior.pantalla.orientacionVisual"
-							text="Orientación visual" /></label> <input
+							text="Orientaciï¿½n visual" /></label> <input
 						id="pantallaLedOrientacionVisual"
 						name="pantallaLedOrientacionVisual" class="form-control newalto"
 						aria-required="true" type="text" value="" maxlength="240" disabled>
@@ -103,7 +104,7 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="publicidad.exterior.pantalla.areaTotal" text="Área total" /></label>
+							code="publicidad.exterior.pantalla.areaTotal" text="ï¿½rea total" /></label>
 					<input id="pantallaLedAreaTotal" name="pantallaLedAreaTotal"
 						class="form-control newalto" aria-required="true" type="text"
 						value="" maxlength="240" disabled>

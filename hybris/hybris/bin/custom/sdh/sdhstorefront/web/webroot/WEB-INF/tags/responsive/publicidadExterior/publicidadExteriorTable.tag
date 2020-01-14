@@ -24,7 +24,7 @@
 					<tr class="avisobody">
 						<td><spring:theme code="publicidad.exterior.description" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								información</a></td>
+								informaciï¿½n</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -82,8 +82,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach varStatus="loop" items="${publicidadForm.publicidadExt}"
-						var="eachPubExtTax">
+					<c:forEach varStatus="loop" items="${publicidadForm.publicidadExt}" var="eachPubExtTax">
 						<tr>
 							<td><c:out value="${eachPubExtTax.numResolu}"></c:out></td>
 							<td><c:out value="${eachPubExtTax.tipoValla}"></c:out></td>
