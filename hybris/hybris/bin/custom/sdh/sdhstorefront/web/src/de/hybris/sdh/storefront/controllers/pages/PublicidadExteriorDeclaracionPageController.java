@@ -10,23 +10,36 @@
  */
 package de.hybris.sdh.storefront.controllers.pages;
 
-import com.google.gson.Gson;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
-import de.hybris.sdh.core.jalo.SDHAgent;
-import de.hybris.sdh.core.pojos.requests.*;
-import de.hybris.sdh.core.pojos.responses.*;
+import de.hybris.sdh.core.pojos.requests.CalcPublicidad2Request;
+import de.hybris.sdh.core.pojos.requests.CalcPublicidadRequest;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePublicidadRequest;
+import de.hybris.sdh.core.pojos.requests.EnviaFirmasRequest;
+import de.hybris.sdh.core.pojos.requests.FirmanteRequest;
+import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.pojos.responses.CalcPublicidad2Response;
+import de.hybris.sdh.core.pojos.responses.CalcPublicidadResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePubli;
+import de.hybris.sdh.core.pojos.responses.DetallePublicidadResponse;
+import de.hybris.sdh.core.pojos.responses.EnviaFirmasResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalPublicidadService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
@@ -35,16 +48,20 @@ import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHCalculaPublicidad2Facade;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
-import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
-import de.hybris.sdh.storefront.forms.*;
+import de.hybris.sdh.storefront.forms.DeclaPublicidadController;
+import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
+import de.hybris.sdh.storefront.forms.FirmantesForm;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
+import de.hybris.sdh.storefront.forms.PublicidadForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +73,12 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -110,6 +132,9 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 	@Resource(name = "modelService")
 	private ModelService modelService;
 
+	@Resource(name = "sessionService")
+	SessionService sessionService;
+
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
 
@@ -147,7 +172,9 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 		String anoParaPSE = "";
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData",customerData);
-        addAgentsToModel(model, customerData,null);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "/contribuyentes/publicidadexterior");
+		super.addFirmantes_impuesto(model, null, customerData);
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
@@ -305,8 +332,13 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 		final CalcPublicidadRequest calcPublicidadRequest = new CalcPublicidadRequest();
 
+		String numBP = sessionService.getCurrentSession().getAttribute("representado");
+		if (numBP == null)
+		{
+			numBP = customerData.getNumBP();
+		}
 
-		calcPublicidadRequest.setNumBP(customerData.getNumBP());
+		calcPublicidadRequest.setNumBP(numBP);
 		calcPublicidadRequest.setNumResolu(dataForm.getNumresol());
 		calcPublicidadRequest.setNumForm(dataForm.getNumform());
 		calcPublicidadRequest.setAnoGravable(dataForm.getAnograv());
@@ -384,19 +416,19 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 	@RequestMapping(value="/firmar",method=RequestMethod.POST)
     @ResponseBody
-    public EnviaFirmasResponse enviaFirmas(Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+    public EnviaFirmasResponse enviaFirmas(final Model model, @RequestBody final EnviaFirmasForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
     {
-        EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
+        final EnviaFirmasRequest enviaFirmasRequest = new EnviaFirmasRequest();
 
         enviaFirmasRequest.setNumForm(dataForm.getNumForm());
 
 
         if(CollectionUtils.isNotEmpty(dataForm.getFirmantes()))
 		{
-			List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
-			for(FirmantesForm eachFirmante : dataForm.getFirmantes())
+			final List<FirmanteRequest> firmantesList = new ArrayList<FirmanteRequest>();
+			for(final FirmantesForm eachFirmante : dataForm.getFirmantes())
 			{
-				FirmanteRequest firmante = new FirmanteRequest();
+				final FirmanteRequest firmante = new FirmanteRequest();
 
 				firmante.setConfirmacion(eachFirmante.getConfirmacion());
 				firmante.setFirmante(eachFirmante.getFirmante());
@@ -430,6 +462,8 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 
 		generaDeclaracionRequest.setNumForm(numForm);
+		generaDeclaracionRequest.setNum_id(customerData.getNumBP());
+		generaDeclaracionRequest.setTipo_id(customerData.getDocumentType());
 
 		try
 		{
@@ -499,17 +533,18 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 	{
 		String anoParaPSE = "";
 
-		CustomerData customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final CustomerData customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
 
 		model.addAttribute("customerData",customerData);
 
 
-		CalcPublicidad2Request calculaPublicidad2Request = new CalcPublicidad2Request();
+		final CalcPublicidad2Request calculaPublicidad2Request = new CalcPublicidad2Request();
 		calculaPublicidad2Request.setFormulario(numForm);
 		calculaPublicidad2Request.setPartner(representado);
-		CalcPublicidad2Response calculaPublicidad2Response = sdhCalculaPublicidad2Facade.calcula(calculaPublicidad2Request);
+		final CalcPublicidad2Response calculaPublicidad2Response = sdhCalculaPublicidad2Facade.calcula(calculaPublicidad2Request);
 
-		model.addAttribute("firmantesActuales",calculaPublicidad2Response.getFirmantes());
+		//		model.addAttribute("firmantesActuales",calculaPublicidad2Response.getFirmantes());
 
 		final DetallePublicidadRequest detallePublicidadRequest = new DetallePublicidadRequest();
 		final String numBP = customerData.getNumBP();
@@ -529,6 +564,14 @@ public class PublicidadExteriorDeclaracionPageController extends SDHAbstractPage
 
 			final DetallePublicidadResponse detallePublicidadResponse = mapper.readValue(
 					sdhDetallePublicidadService.detallePublicidad(detallePublicidadRequest), DetallePublicidadResponse.class);
+
+
+			model.addAttribute("redirectURL", "/autorizados/contribuyente/representando?representado=" + customerData.getNumBP());
+			addAgentsToModel(model, customerData, currentUserData);
+			if (detallePublicidadResponse != null)
+			{
+				super.addFirmantes_impuesto(model, calculaPublicidad2Response.getFirmantes(), currentUserData);
+			}
 
 			anoParaPSE = detallePublicidadResponse.getAnoGravable();
 			final DeclaPublicidadController declaPublicidadForm = new DeclaPublicidadController();

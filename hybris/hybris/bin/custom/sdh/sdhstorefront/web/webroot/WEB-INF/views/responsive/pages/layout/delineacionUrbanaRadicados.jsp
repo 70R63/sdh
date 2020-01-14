@@ -8,7 +8,7 @@
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
-
+<div class="loader"></div>
 <spring:url value="/contribuyentes/delineacionurbana/retencion"
 	var="duRetencionURL" htmlEscape="false" />
 
@@ -25,6 +25,22 @@
 
 
 <script>
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+    $(".loader").fadeOut("slow");
+}
 	function goBack() {
 		var declaracion = '${param.declaracion}';
 
@@ -179,6 +195,7 @@
 			tot.readOnly=true;
 			pres.readOnly=true;
 		}
+	    $(".loader").fadeOut("slow");
 	}
 	
 </script>

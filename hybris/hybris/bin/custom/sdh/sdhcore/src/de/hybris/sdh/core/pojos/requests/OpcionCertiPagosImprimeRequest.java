@@ -19,6 +19,100 @@ public class OpcionCertiPagosImprimeRequest
 	private String periodo;
 	private String importe;
 	private String clavePeriodo;
+	private String referencia;
+	private String fechaCompensa;
+	private String moneda;
+	private String numDocPago;
+	private String numfactForm;
+
+
+
+
+
+	/**
+	 * @return the numfactForm
+	 */
+	public String getNumfactForm()
+	{
+		return numfactForm;
+	}
+
+	/**
+	 * @param numfactForm
+	 *           the numfactForm to set
+	 */
+	public void setNumfactForm(final String numfactForm)
+	{
+		this.numfactForm = numfactForm;
+	}
+
+	/**
+	 * @return the fechaCompensa
+	 */
+	public String getFechaCompensa()
+	{
+		return fechaCompensa;
+	}
+
+	/**
+	 * @param fechaCompensa
+	 *           the fechaCompensa to set
+	 */
+	public void setFechaCompensa(final String fechaCompensa)
+	{
+		this.fechaCompensa = fechaCompensa;
+	}
+
+	/**
+	 * @return the moneda
+	 */
+	public String getMoneda()
+	{
+		return moneda;
+	}
+
+	/**
+	 * @param moneda
+	 *           the moneda to set
+	 */
+	public void setMoneda(final String moneda)
+	{
+		this.moneda = moneda;
+	}
+
+	/**
+	 * @return the numDocPago
+	 */
+	public String getNumDocPago()
+	{
+		return numDocPago;
+	}
+
+	/**
+	 * @param numDocPago
+	 *           the numDocPago to set
+	 */
+	public void setNumDocPago(final String numDocPago)
+	{
+		this.numDocPago = numDocPago;
+	}
+
+	/**
+	 * @return the referencia
+	 */
+	public String getReferencia()
+	{
+		return referencia;
+	}
+
+	/**
+	 * @param referencia
+	 *           the referencia to set
+	 */
+	public void setReferencia(final String referencia)
+	{
+		this.referencia = referencia;
+	}
 
 	/**
 	 * @return the numBP
@@ -187,11 +281,16 @@ public class OpcionCertiPagosImprimeRequest
 		stringBuilder.append(obtenerValorJson("\"numBP\":\"", this.getNumBP(), "\","));
 		stringBuilder.append(obtenerValorJson("\"ctaContrato\":\"", this.getCtaContrato(), "\","));
 		stringBuilder.append(obtenerValorJson("\"numObjeto\":\"", this.getNumObjeto(), "\","));
+		stringBuilder.append(obtenerValorJson("\"referencia\":\"", this.getReferencia(), "\","));
+		stringBuilder.append(obtenerValorJson("\"fechaCompensa\":\"", this.getFechaCompensa(), "\","));
+		stringBuilder.append(obtenerValorJson("\"moneda\":\"", this.getMoneda(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numDocPago\":\"", this.getNumDocPago(), "\","));
 		stringBuilder.append(obtenerValorJson("\"numDoc\":\"", this.getNumDoc(), "\","));
 		stringBuilder.append(obtenerValorJson("\"tipoDoc\":\"", this.getTipoDoc(), "\","));
 		stringBuilder.append(obtenerValorJson("\"anoGravable\":\"", this.getAnoGravable(), "\","));
 		stringBuilder.append(obtenerValorJson("\"clavePeriodo\":\"", this.getClavePeriodo(), "\","));
 		stringBuilder.append(obtenerValorJson("\"Periodo\":\"", this.getPeriodo(), "\","));
+		stringBuilder.append(obtenerValorJson("\"numfactForm\":\"", this.getNumfactForm(), "\","));
 		stringBuilder.append(obtenerValorJson("\"importe\":\"", this.getImporte(), "\""));
 		stringBuilder.append("}");
 

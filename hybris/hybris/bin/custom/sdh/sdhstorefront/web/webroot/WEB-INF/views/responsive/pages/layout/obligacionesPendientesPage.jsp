@@ -7,7 +7,7 @@
 <%@ taglib prefix="obligaciones"
 	tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
 
-
+<div class="loader"></div>
 
 <obligaciones:obliPendientesMenu />
 <div id="idtodos" style="display: block;">
@@ -17,6 +17,22 @@
 	
 	
 <script>
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+	$(".loader").fadeOut("slow");
+}
 function goBack() {
 	window.history.back();
 }

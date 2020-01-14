@@ -5,6 +5,7 @@
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 
 <div class="container_menu">
@@ -13,7 +14,7 @@
 			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 				<a href="<c:url value='/setRole?role=sdh_01' />">
 					<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
-						<img title="Contribuyente" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/contribuyentes.png">
+						<img title="Contribuyente" alt="Contribuyente" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/Contribuyente.png" width="91">
 					</div>
 					<div class="card-section  col-xs-8 col-sm-10 col-md-10">
 						<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="taxpayers.title" /></span></h2></div>
@@ -28,7 +29,7 @@
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_02' />">
 				<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
-					<img title="Agentes Autorizados" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/agentes_autorizados.png">
+					<img title="Agentes Autorizados" alt="Agentes Autorizados" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/AgenteAutorizado.png" width="91">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
 					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="authorizedAgents.title" /></span></h2></div>
@@ -43,7 +44,7 @@
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_03' />">
 				<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
-					<img title="Terceros Autorizados" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/terceros_autorizados.png">
+					<img title="Terceros Autorizados" alt="Terceros Autorizados" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/TerceroAutorizado.png" width="91">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
 					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="thirdAutorized.title" /></span></h2></div>
@@ -58,7 +59,7 @@
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_04' />">
 				<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
-					<img title="Agente Retenedor" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/agente_retenedor.png">
+					<img title="Agente Retenedor" alt="Agente Retenedor" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/AgenteRetenedor.png" width="91">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
 					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="retainingAgent.title" /></span></h2></div>
@@ -73,7 +74,7 @@
 		<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 			<a href="<c:url value='/setRole?role=sdh_05' />">
 				<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
-					<img title="Reportates de Información" alt="Kennedy" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/reportante_de_informacion.png">
+					<img title="Reportates de Información" alt="Reportates de Información" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/ReportanteInformacion.png" width="91">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
 					<div class="card-section-h2"><h2><span tabindex="0"><spring:theme code="informationReporters.title" /></span></h2></div>
@@ -88,3 +89,10 @@
 </div>
 
 </template:page>
+
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

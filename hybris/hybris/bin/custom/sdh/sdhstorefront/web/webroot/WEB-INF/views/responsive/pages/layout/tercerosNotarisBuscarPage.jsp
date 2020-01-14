@@ -8,8 +8,15 @@
 	tagdir="/WEB-INF/tags/responsive/terceroautorizado"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<div class="loader"></div>
+
 <terceros:terceroNotarioBuscar/>
 
 
-
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
 

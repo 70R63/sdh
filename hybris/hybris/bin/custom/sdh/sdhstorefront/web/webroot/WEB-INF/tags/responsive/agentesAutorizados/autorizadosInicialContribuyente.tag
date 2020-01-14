@@ -112,6 +112,14 @@
 										</c:when>
 										<c:otherwise>
 												<c:forEach items="${firmas.declaraciones}" var="eachDeclaracion" >
+												<c:choose>
+													<c:when test="${eachDeclaracion.estadoFirma eq '01'}">
+														<c:set var="desc_status" value='Pendiente por firmar'></c:set>
+													</c:when>
+													<c:when test="${eachDeclaracion.estadoFirma eq '02'}">
+														<c:set var="desc_status" value='Pendiente por presentar'></c:set>
+													</c:when>
+												</c:choose>
 												<tr>
 													<td><input class="inputtextnew tableident"
 															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.idDeclaracion}" /></td>
@@ -119,10 +127,18 @@
 															   type="text" size="30" value="<spring:theme code="autorizado.impuestos.${eachDeclaracion.impuesto}" />" /></td>
 													<td><input class="inputtextnew tablenumiden"
 															   disabled="disabled" type="text" size="30" value="${eachDeclaracion.anioGravable}" /></td>
-													<td><input class="inputtextnew tablenumiden"
-															   disabled="disabled" type="text" size="30" value="<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />"</td>
+													<c:choose>
+														<c:when test="${eachDeclaracion.impuesto eq '0005'}">
+															<td><input class="inputtextnew tablenumiden"
+																disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.${eachDeclaracion.periodo}" />' /></td>
+														</c:when>
+														<c:otherwise>
+															<td><input class="inputtextnew tablenumiden"
+																disabled="disabled" type="text" size="30" value='<spring:theme code="autorizado.periodo.mes.reteIca.${eachDeclaracion.periodo}" />' /></td>
+														</c:otherwise>
+													</c:choose>
 													<td><input class="inputtextnew" disabled="disabled"
-															   type="text" size="30" value="-" /></td>
+															   type="text" size="30" value="${desc_status}" /></td>
 
 													<c:choose>
 														<c:when test="${eachDeclaracion.impuesto eq '0007'}">
@@ -130,6 +146,15 @@
 														</c:when>
 														<c:when test="${eachDeclaracion.impuesto eq '0005'}">
 															<td ><a href="<c:url value="/contribuyentes/sobretasa-gasolina/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}" />">Ver</a></td>
+														</c:when>
+														<c:when test="${eachDeclaracion.impuesto eq '0003'}">
+															<td ><a href="<c:url value="/contribuyentes/ica/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}&periodoSeleccionado=${eachDeclaracion.periodo}&anoGravable=${eachDeclaracion.anioGravable}" />">Ver</a></td>
+														</c:when>
+														<c:when test="${eachDeclaracion.impuesto eq '0004'}">
+															<td ><a href="<c:url value="/reteica/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}&anoGravable=${eachDeclaracion.anioGravable}&perRepor=${eachDeclaracion.periodo}" />">Ver</a></td>
+														</c:when>
+														<c:when test="${eachDeclaracion.impuesto eq '0002'}">
+															<td ><a href="<c:url value="/contribuyentes/sobrevehiculosautomotores/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}" />">Ver</a></td>
 														</c:when>
 														<c:otherwise>
 															<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>

@@ -19,6 +19,11 @@
 !/hybris/hybris/config
 /hybris/hybris/config/*
 
+!/hybris/hybris/config-dev
+!/hybris/hybris/config-local
+!/hybris/hybris/config-prd
+!/hybris/hybris/config-stg
+
 !/hybris/hybris/bin/ext-publicsector
 /hybris/hybris/bin/ext-publicsector/*
 
@@ -231,3 +236,6 @@ hybris/hybris/bin/custom/sdh/sdhbackoffice/build.xml
 hybris/hybris/bin/custom/sdh/sdhstorefront/web/webroot/_ui/responsive/common/js/acc.aamenu.js
 idea-module-files/
 .idea/
+gestionBancaria/updatedCertificates/31223_0722001423.zip.p7z.zip
+gestionBancaria/updatedCertificates/35375_5122001692.zip.p7z.zip
+hybris/hybris/bin/custom/sdh/sdhpsaddon/velocity.log

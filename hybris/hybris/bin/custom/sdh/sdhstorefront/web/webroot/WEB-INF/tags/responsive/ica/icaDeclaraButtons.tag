@@ -32,15 +32,15 @@
 					<c:when
 						test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.numForm }">
 						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" disabled class="btn btn-primary btn-lg GeneraDeclaracionButton"
+							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
 							type="button">
 							<spring:theme code="ica.declaracion.firma.prendecla" />
 						</button>
 					</c:when>
 					<c:otherwise>
 						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" disabled class="btn btn-primary btn-lg GeneraDeclaracionButton"
-							type="button">
+							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
+							type="button"> <!-- se quita atributo disabled 19/12/2019 Maria torres -->
 							<spring:theme code="ica.declaracion.firma.prendecla" />
 						</button>
 					</c:otherwise>
@@ -56,10 +56,16 @@
 				<sf:hidden path="dv" />
 				<sf:hidden path="numObjeto" />
 
-				<sf:button class="btn btn-primary btn-lg" type="submit" id="action"
+				<!-- <sf:button class="btn btn-primary btn-lg" type="submit" id="action"
 					name="pagar" value="pagar">
 					<spring:theme code="ica.declaracion.firma.pagliena" />
-				</sf:button>
+				</sf:button> -->
+
+				<button style="margin-top: 3px;"
+                	id="action" class="btn btn-primary btn-lg pagarbtn"
+                	type="submit" name="pagar" value="pagar" disabled="disabled">
+                	<spring:theme code="ica.declaracion.firma.pagliena" />
+                </button>
 			</sf:form>
 		</div>
 	</div>

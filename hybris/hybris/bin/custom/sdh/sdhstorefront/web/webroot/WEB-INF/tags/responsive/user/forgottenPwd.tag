@@ -5,6 +5,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<div class="loader"></div>
 <div class="container">
 <div class="container">
 <div class="container">
@@ -28,3 +29,9 @@
 </div>
 </div>
 </div>
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

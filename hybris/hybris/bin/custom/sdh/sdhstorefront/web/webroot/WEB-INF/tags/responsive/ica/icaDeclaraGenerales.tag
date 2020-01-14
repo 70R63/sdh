@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<!-- Datos generales --> 
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -14,9 +15,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="headline">
+			<div class="headline"  style="margin-left: 0px !important">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span class="hwomargin"><spring:theme
 							code="ica.declaracion.generales.titulo" /></span>
 				</h2>
 			</div>
@@ -70,15 +71,14 @@
 					<div class="form-check">
 						<c:set var="noChecked" value="" />
 						<c:set var="yesChecked" value="" />
-						<c:set var="inputDisabled" value="" />
+						<c:set var="inputDisabled" value="disabled" />
 						<c:choose>
 							<c:when
-								test="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.entFinanciera eq 'x'}">
+								test="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.entFinanciera.equalsIgnoreCase('X')}">
 								<c:set var="yesChecked" value="checked" />
 							</c:when>
 							<c:otherwise>
 								<c:set var="noChecked" value="checked" />
-								<c:set var="inputDisabled" value="disabled" />
 							</c:otherwise>
 						</c:choose>
 						<label class="form-check-label"

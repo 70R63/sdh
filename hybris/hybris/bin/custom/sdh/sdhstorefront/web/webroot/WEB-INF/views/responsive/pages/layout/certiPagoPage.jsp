@@ -8,7 +8,12 @@
 	tagdir="/WEB-INF/tags/responsive/consultas"%>
 
 
-
+<div class="loader"></div>
 	<certificacion:certificacionMenu />
 
-
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

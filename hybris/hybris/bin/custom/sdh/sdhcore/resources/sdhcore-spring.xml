@@ -680,6 +680,10 @@
 	<bean name="sdhObligacionesICAService" class="de.hybris.sdh.core.services.impl.DefaultSDHObligacionesICAService" />
 	
 	<bean name="sdhObligacionesDeliService" class="de.hybris.sdh.core.services.impl.DefaultSDHObligacionesDeliService" />
+	
+	<bean name="sdhDetalleVehiculosService" class="de.hybris.sdh.core.services.impl.DefaultSDHDetalleVehiculoService" />
+	
+	<bean name="sdhCalcVehiculosService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalcVehiculosService" />
 
 
 	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>
@@ -716,7 +720,11 @@
     <alias alias="sdhOlinePaymentProviderMatcherService" name="defaultSDHOlinePaymentProviderMatcherService"/>
     <bean name="defaultSDHOlinePaymentProviderMatcherService" class="de.hybris.sdh.core.services.impl.DefaultSDHOlinePaymentProviderMatcherService" />
 
+	<alias alias="sdhGestionBancaria" name="defaultSDHGestionBancaria"/>
+	<bean name="defaultSDHGestionBancaria" class="de.hybris.sdh.core.services.impl.DefaultSDHGestionBancaria" />
 
+	<alias alias="sdhFileConsultaService" name="defaultSDHFileConsultaService"/>
+	<bean name="defaultSDHFileConsultaService" class="de.hybris.sdh.core.services.impl.DefaultSDHFileConsultaService" />
 
 
 </beans>

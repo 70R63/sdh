@@ -9,7 +9,7 @@
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -20,9 +20,21 @@
 
 
 <div class="container_new_page">
+
+
 	<sf:form action="presentar-declaracion?action=presentarDeclaracion"
 		method="POST" modelAttribute="dataForm" id="forma">
 
+
+		<c:if test="${mensajeDelinea != null}">
+			<div class="row">
+				<div class="col-12 notas_deli">
+					<div class="alert alert-danger mt-3">
+						<spring:theme code="${mensajeDelinea}" />
+					</div>
+				</div>
+			</div>
+		</c:if>
 		<div class="row">
 			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
 				<span class="paso--uno pasos color-sr1">1</span>
@@ -86,19 +98,19 @@
 									code="impuestos.presentarDeclaracion.anioGravableConsultar" /></label>
 
 
-							<sf:select path="anoGravable" id="anoGravable" 
-								items="${icaAnioGravable}" 
-								referenceData="${icaAnioGravable}" 
-								class="newalto form-control"  onchange="onChangeAnioGravable()" />
+							<sf:select path="anoGravable" id="anoGravable"
+								items="${icaAnioGravable}" referenceData="${icaAnioGravable}"
+								class="newalto form-control" onchange="onChangeAnioGravable()" />
 						</div>
 					</div>
 				</div>
 			</c:if>
 
 			<c:if
-				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6'}">
-				
-				<div class="col-md-4 col-xs-12 mb-20 no-marginleft">
+				test="${dataForm.impuesto ne '3' and dataForm.impuesto ne '4' and dataForm.impuesto ne '6' and dataForm.impuesto ne '2'}">
+
+				<div class="col-md-4 col-xs-12 mb-20 no-marginleft"
+					id="seccionPeriodo2">
 					<span class="paso--tres pasos color-sr3 rajdhani">3</span>
 					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
@@ -106,17 +118,18 @@
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.Periodo" /></label>
-									
-									
 
-							<sf:select id="periodo" path="periodo" items="${dataForm.catalogosSo.periodo}"
+
+
+							<sf:select id="periodo" path="periodo"
+								items="${dataForm.catalogosSo.periodo}"
 								referenceData="${dataForm.catalogosSo.periodo}"
-								class="newalto form-control"  />
+								class="newalto form-control" />
 						</div>
 					</div>
 				</div>
 
-				
+
 			</c:if>
 
 			<c:if test="${dataForm.impuesto == '3' and  isPeriodoAnual == false}">
@@ -128,13 +141,13 @@
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
 									code="impuestos.presentarDeclaracion.Periodo" /></label>
-									
+
 							<sf:select id="periodo" path="periodo" items="${icaPeriodo}"
 								referenceData="${icaPeriodo}" class="new_alto form-control" />
 						</div>
 					</div>
 				</div>
-				
+
 			</c:if>
 		</div>
 
@@ -175,6 +188,17 @@
 			</c:forEach>
 		</table>
 	</c:if>
+
+	<div class="col-12 notas_deli" id="notas_deli" style="display: none">
+		<div class="alert alert-success mt-3">
+			<strong>Anticipo Delineación:</strong>
+			<spring:theme code="impuestos.presentarDeclaracion.deliur.nota1" />
+		</div>
+		<div class="alert alert-info mt-3">
+			<strong>Declaración Delineación:</strong>
+			<spring:theme code="impuestos.presentarDeclaracion.deliur.nota2" />
+		</div>
+	</div>
 
 
 	<c:out value="${dataFormDelineacion.valCont}" />
@@ -221,7 +245,8 @@
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<select id="btnTpLic_${item.cdu}" class="newalto form-control">
+							<select id="btnTpLic_${item.cdu}" class="newalto form-control"
+								onchange="establecerTipoLicencia(this)">
 								<option value="00">Seleccionar</option>
 								<option value="01">Licencia</option>
 								<option value="02">Reconocimiento</option>
@@ -230,9 +255,12 @@
 						<div class="col-sm-3">
 							<form:form method="post" commandName="inputDelineacion"
 								action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+								<c:set var="idCampoTipoLicencia"
+									value='tipoLicenciaSeleccionada_${item.cdu}' />
 								<form:hidden path="selectedCDU" value="${item.cdu}" />
 								<form:hidden path="selectedRadicado" value="" />
-								<form:hidden path="selectedTipoLicencia" value="" />
+								<form:hidden path="selectedTipoLicencia" value=""
+									id="${idCampoTipoLicencia}" />
 								<form:hidden path="selectedAnoPresDeclaracion" value="" />
 
 								<button type="submit" class="btn-link" id="btn_${item.cdu}"
@@ -275,6 +303,43 @@
 			</div>
 		</div>
 	</c:if>
+
+	<div class="row" id="table-vehicular" style="display: none;">
+		<div class="col-md-6 col-md-offset-2">
+			<table class="table" id="table-vehicular1">
+				<thead style="cellspacing: 10 !important">
+					<tr>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.placa" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.marca" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.linea" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.modelo" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.clase" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.carroceria" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.numpuertas" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.blindado" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.cilindraje" /></label></th>
+						<th><label class="control-label labeltabletd"><spring:theme
+									code="sobre.vehiculo.table.presndecla" /></label></th>
+						<!-- 						<th style="text-align: center"><label class="control-label" -->
+						<%-- 							for=""> <spring:theme --%>
+						<%-- 									code="impuestos.presentarDeclaracion.PresentarDeclaracion" /></label></th> --%>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
 </div>
 <br>
 <br>
@@ -323,6 +388,16 @@
 			tipoLicencia.disabled = false;
 			btnDeclaracion.disabled = false;
 		}
+	}
+
+	function establecerTipoLicencia(selectObject) {
+		var value = selectObject.value;
+		var selected = selectObject.id;
+		var div = selected.substring(9);
+		div = "tipoLicenciaSeleccionada_" + div;
+		var tipoLicencia = document.getElementById(div);
+		tipoLicencia.value = value;
+
 	}
 </script>
 

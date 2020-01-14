@@ -7,7 +7,7 @@
 <%@ taglib prefix="miRit" tagdir="/WEB-INF/tags/responsive/miRit"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 	<div class="container_new_page">
 		<p>
@@ -44,16 +44,32 @@
 
 
 
-</template:page>
+
 
 <script>
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+}
 	window.onload = function() {
+		debugger;
 		var inputcol = document.getElementsByTagName("input");
 		for (i = 0; i < inputcol.length; i++) {
 			var texto = inputcol[i].value;
-			inputcol[i].style.width = (texto.length + 1) * 9 + 'px';
+			inputcol[i].style.width = (texto.length + 1) * 10 + 'px';
 		}
-
+		$(".loader").fadeOut("slow");
 	};
 
 	function ajustar(selectObject) {
@@ -64,4 +80,6 @@
 
 
 </script>
+
+</template:page>
 

@@ -3,6 +3,7 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
+<div class="loader"></div>
 <template:page pageTitle="${pageTitle}">
 	<div class="row">
 		<div class="col-md-6">
@@ -16,4 +17,14 @@
 			</cms:pageSlot>
 		</div>
 	</div>
+		<script type="text/javascript">
+	debugger;
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>
+	
+
 </template:page>
+

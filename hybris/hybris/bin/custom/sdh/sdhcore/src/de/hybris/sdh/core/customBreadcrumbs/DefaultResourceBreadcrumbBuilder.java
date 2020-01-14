@@ -311,6 +311,47 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		}
 		//*->FIN GASOLINA--------------------------------------------------------------------------
 
+		//*->INI vehiculos--------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.vehiculos"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.vehiculos", subTreeMap);
+		}
+
+
+		if (resourceKey.equals("text.account.profile.vehiculos.declaracion"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3,
+					new CustomBreadcrumb("text.account.profile.vehiculos", "/contribuyentes/sobrevehiculosautomotores/detalle"));
+			treeMap.put("text.account.profile.vehiculos.declaracion", subTreeMap);
+		}
+		//*->FIN vehiculos--------------------------------------------------------------------------
+
+		//*->INI Descarga Factura--------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.descargaFac"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.descargaFac", subTreeMap);
+		}
+		//*->FIN Descarga Factura--------------------------------------------------------------------------
+
+		//*->INI Reexpedición Factura--------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.reexpedicionFac"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.reexpedicionFac", subTreeMap);
+		}
+		//*->FIN Reexpedición Factura--------------------------------------------------------------------------
+
 
 		//*->INI PRESENTAR DECLARACION-------------------------------------------------------------
 		if (resourceKey.equals("text.account.profile.presendecla"))
@@ -390,6 +431,29 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 			treeMap.put("Certificaciones de Declaración", subTreeMap);
 		}
 		//*->FIN CONSULTAS CERTIFICACIONES DECLARACION------------------------------------
+
+		//*->INI CONSULTAS CERTIFICACIONES DECLARACION------------------------------------
+		if (resourceKey.equals("text.account.profile.certiDeclara"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.certiDeclara", subTreeMap);
+		}
+		//*->FIN CONSULTAS CERTIFICACIONES DECLARACION------------------------------------
+
+		//*->INI CONSULTAS CERTIFICACIONES DECLARACIONDECLARACIONES------------------------------------
+		if (resourceKey.equals("text.account.profile.declaraciones"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.declaraciones", subTreeMap);
+		}
+		//*->FIN CONSULTAS DECLARACIONES------------------------------------
+
 
 
 
@@ -483,6 +547,89 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 			treeMap.put("Registro de Retenciones", subTreeMap);
 		}
 		//*->FIN AGENTES REGISTRO RETENCIONES-------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+		//*->INI CONSULTAS CERTIFICACION PAGOS-----------------------------------------------------
+		if (resourceKey.equals("text.account.profile.arCertipagos"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.arCertipagos", subTreeMap);
+		}
+		//*->FIN CONSULTAS CERTIFICACION PAGOS-----------------------------------------------------
+
+		//*->INI CONSULTAS OBLIGACIONES PENDIENTES-------------------------------------------------
+		if (resourceKey.equals("text.account.profile.arOblipendienetes"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.arOblipendienetes", subTreeMap);
+		}
+		//*->FIN CONSULTAS OBLIGACIONES PENDIENTES-------------------------------------------------
+
+
+		//*->INI CONSULTAS RELACION PAGOS-------------------------------------------------
+		if (resourceKey.equals("text.account.profile.arRelapagos"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.arRelapagos", subTreeMap);
+		}
+		//*->FIN CONSULTAS RELACION PAGOS-------------------------------------------------
+
+		//*->INI CONSULTAS ESTADO CUENTA--------------------------------------------------
+		if (resourceKey.equals("text.account.profile.arEstadocuenta"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.arEstadocuenta", subTreeMap);
+		}
+		//*->FIN CONSULTAS ESTADO CUENTA--------------------------------------------------
+
+
+		//*->INI CONSULTAS CERTIFICACIONES DECLARACION------------------------------------
+		if (resourceKey.equals("Certificaciones de Declaración"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("Certificaciones de Declaración", subTreeMap);
+		}
+		//*->FIN CONSULTAS CERTIFICACIONES DECLARACION------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		//*->INI AGENTES ESTADO DE CARGAS-----------------------------------------------------------
 		if (resourceKey.equals("Estado de Cargas"))

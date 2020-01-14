@@ -17,4 +17,5 @@
         <cms:pageSlot position="BottomContent" var="feature" element="div" class="accountPageBottomContent">
             <cms:component component="${feature}" />
         </cms:pageSlot>
+
 </template:page>

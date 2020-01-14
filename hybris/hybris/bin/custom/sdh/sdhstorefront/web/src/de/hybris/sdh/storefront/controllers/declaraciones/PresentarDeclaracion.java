@@ -17,15 +17,23 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.core.services.SDHValidaContribuyenteService;
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
@@ -33,13 +41,19 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
+import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -49,6 +63,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -103,7 +118,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	@Resource(name = "sdhICAInfObjetoService")
 	SDHICAInfObjetoService sdhICAInfObjetoService;
 
+	@Resource(name = "sdhDetalleVehiculosService")
+	SDHDetalleVehiculosService sdhDetalleVehiculosService;
 
+	@Resource(name = "sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
 
 	//-----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.GET)
@@ -118,6 +137,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		//dataForm.setAnoGravable("2019");
 		//dataForm.setPeriodo("1");
+		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		{
+			dataForm.setOptionVehicular("2");
+		}
 
 		if (customerData.getIcaTax() != null)
 		{
@@ -140,7 +163,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("tpImpuesto",
-				this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(), dataForm.getOptionIca(),
+				this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
+						dataForm.getOptionIca(),
 						dataForm.getOptionDeli()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -176,6 +200,149 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		if (action.equals("presentarDeclaracion"))
 		{
+			if (dataFormResponse.getImpuesto().equals("2") && !dataFormResponse.getAnoGravable().equals("")
+					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
+			{
+				System.out.println("---------------- En ESTAS EN VEHICULOS MORRA --------------------------");
+
+				final CustomerModel customerModel;
+				final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+				final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+				final VehiculosInfObjetoForm vehiculosForm = new VehiculosInfObjetoForm();
+				String numBP = "";
+				String anioGravable = "";
+				String placa = "";
+				final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+				final DetGasResponse detalleResponse;
+				final SobreTasaGasolinaCatalogos dataFormCatalogos = gasolinaService.prepararCatalogos();
+				final List<SobreTasaGasolinaTabla> tablaDocs;
+				final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
+				SDHValidaMailRolResponse detalleContribuyente;
+				String[] mensajesError;
+
+
+				customerModel = (CustomerModel) userService.getCurrentUser();
+
+				numBP = customerModel.getNumBP();
+
+				contribuyenteRequest.setNumBP(numBP);
+
+				detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService,
+						LOG);
+				if (detalleContribuyente.getIdmsj() != 0)
+				{
+					LOG.error("Error al leer informacion del Contribuyente: " + detalleContribuyente.getTxtmsj());
+					//					GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+					mensajesError = gasolinaService.prepararMensajesError(
+							gasolinaService.convertirListaError(detalleContribuyente.getIdmsj(), detalleContribuyente.getTxtmsj()));
+					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"error.impuestoGasolina.sobretasa.error2", mensajesError);
+				}
+
+				anioGravable = dataFormResponse.getAnoGravable();
+				placa = detalleContribuyente.getVehicular().get(0).getPlaca();
+
+				final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+				detalleVehiculosRequest.setBpNum(numBP);
+				detalleVehiculosRequest.setPlaca(placa);
+				detalleVehiculosRequest.setAnioGravable(anioGravable);
+
+
+				try
+				{
+
+					final ObjectMapper mapper = new ObjectMapper();
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+					final DetalleVehiculosResponse detalleVehiculosResponse = mapper.readValue(
+							sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+
+					vehiculosForm.setDetalle(detalleVehiculosResponse.getDetalle());
+
+					vehiculosForm.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
+					vehiculosForm.setIdEstado(detalleVehiculosResponse.getDetalle().getIdEstado());
+					vehiculosForm.setWatts(detalleVehiculosResponse.getDetalle().getWatts());
+					vehiculosForm.setClasicoAntig(detalleVehiculosResponse.getDetalle().getClasicoAntig());
+					vehiculosForm.setTipoVeh(detalleVehiculosResponse.getDetalle().getTipoVeh());
+					vehiculosForm.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
+					vehiculosForm.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
+					vehiculosForm.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
+
+					//			vehiculosForm.setFechaCambio(detalleVehiculosResponse.getDetalle().getFechaCambio());
+					final String FechaCambio = detalleVehiculosResponse.getDetalle().getFechaCambio();
+					if (StringUtils.isNotBlank(FechaCambio) && !"00000000".equals(FechaCambio))
+					{
+						final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+						final LocalDate localDate = LocalDate.parse(FechaCambio, formatter);
+
+						final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+						vehiculosForm.setFechaCambio(localDate.format(formatter2));
+					}
+
+					if (detalleVehiculosResponse.getDatosJuridicos() != null
+							&& !detalleVehiculosResponse.getDatosJuridicos().isEmpty())
+					{
+
+						for (final JuridicosVehiculos eachDetalleJur : detalleVehiculosResponse.getDatosJuridicos())
+						{
+							vehiculosForm.setTipoID(eachDetalleJur.getTipoID());
+							vehiculosForm.setNombre(eachDetalleJur.getNombre());
+							vehiculosForm.setNumID(eachDetalleJur.getNumID());
+							vehiculosForm.setCalidad(eachDetalleJur.getCalidad());
+							vehiculosForm.setProcProp(eachDetalleJur.getProcProp());
+
+							//								vehiculosForm.setFechaDesde(eachDetalleJur.getFechaDesde());
+							final String FechaDesde = eachDetalleJur.getFechaDesde();
+							if (StringUtils.isNotBlank(FechaDesde) && !"00000000".equals(FechaDesde))
+							{
+								final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+								final LocalDate localDate = LocalDate.parse(FechaDesde, formatter);
+
+								final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+								vehiculosForm.setFechaDesde(localDate.format(formatter2));
+							}
+
+							//					vehiculosForm.setFechaHasta(eachDetalleJur.getFechaHasta());
+							final String FechaHasta = eachDetalleJur.getFechaHasta();
+							if (StringUtils.isNotBlank(FechaHasta) && !"00000000".equals(FechaHasta))
+							{
+								final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+								final LocalDate localDate = LocalDate.parse(FechaHasta, formatter);
+
+								final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+								vehiculosForm.setFechaHasta(localDate.format(formatter2));
+							}
+
+							break;
+						}
+
+					}
+
+					vehiculosForm.setDatosJuridicos(detalleVehiculosResponse.getDatosJuridicos().stream()
+							.filter(eachDetJur -> StringUtils.isNotBlank(eachDetJur.getCalidad())).collect(Collectors.toList()));
+
+					vehiculosForm.setMarcas(detalleVehiculosResponse.getMarcas().stream()
+							.filter(eachDetMarcas -> StringUtils.isNotBlank(eachDetMarcas.getCodigoMarca()))
+							.collect(Collectors.toList()));
+
+					vehiculosForm.setLiquidacion(detalleVehiculosResponse.getLiquidacion().stream()
+							.filter(eachDetLiq -> StringUtils.isNotBlank(eachDetLiq.getAnio())).collect(Collectors.toList()));
+				}
+				catch (final Exception e)
+				{
+					// XXX Auto-generated catch block
+					LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
+					GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+				}
+				model.addAttribute("vehiculosForm", vehiculosForm);
+			}
+
 			if (dataFormResponse.getImpuesto().equals("5") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
@@ -275,8 +442,15 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
 			{
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-				model.addAttribute("publicidadExtList", sdhValidaContribuyenteService
-						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable()));
+				final List<ImpuestoPublicidadExterior> publicidadExtList = sdhValidaContribuyenteService
+						.getpublicidadExtListByBpAndYear(customerModel.getNumBP(), dataFormResponse.getAnoGravable());
+				model.addAttribute("publicidadExtList", publicidadExtList);
+				if (publicidadExtList == null || publicidadExtList.isEmpty())
+				{
+					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"error.presentarDeclaracion.publicidadExt.listaVacia");
+					GlobalMessages.addErrorMessage(model, "error.presentarDeclaracion.publicidadExt.listaVacia");
+				}
 			}
 			else if (dataFormResponse.getImpuesto().equals("6") && !dataFormResponse.getAnoGravable().equals("X")
 					&& !dataFormResponse.getAnoGravable().isEmpty())
@@ -317,6 +491,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		if (customerData.getVehiculosTaxList() != null && !customerData.getVehiculosTaxList().isEmpty())
+		{
+			dataForm.setOptionVehicular("2");
+		}
 		if (customerData.getExteriorPublicityTaxList() != null && !customerData.getExteriorPublicityTaxList().isEmpty())
 		{
 			dataForm.setOptionPubliExt("4");
@@ -344,7 +522,9 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
-				final String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+				String response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+				response = response.replaceAll("(\"cantEstablec\":{1})(\\w*)(,)", "$1\"$2\"$3");
+
 				icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 
 				if (icaInfObjetoResponse.getRegimen() != null)
@@ -373,7 +553,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
 		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
 		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
-				dataForm.getOptionDeli(), dataForm.getOptionIca()));
+				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -384,14 +564,19 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	private Map<String, String> getTpImpuesto(final String optionGas, final String optionPubExt, final String optionIca,
-			final String optionDeli)
+	private Map<String, String> getTpImpuesto(final String optionVehicular, final String optionGas, final String optionPubExt,
+			final String optionIca, final String optionDeli)
 	{
 		final Map<String, String> map;
-		if (optionGas != "" || optionPubExt != "" || optionIca != "" || optionDeli != "")
+		if (optionGas != "" || optionPubExt != "" || optionIca != "" || optionDeli != "" || optionVehicular != "")
 		{
 			map = new HashMap<String, String>();
 			map.put("0", "Seleccionar");
+
+			if (optionVehicular != "")
+			{
+				map.put("2", "Impuestos de Vehículos");
+			}
 
 			if (optionIca != "")
 			{
@@ -446,6 +631,91 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		map.put("2016", "2016");
 
 		return map;
+	}
+
+
+	@RequestMapping(value = "/contribuyentes/presentar-declaracion/listaDeclaraciones", method = RequestMethod.GET)
+	@ResponseBody
+	public OpcionDeclaracionesVista listaDeclaracionesGET(@ModelAttribute("infoVista")
+	final OpcionDeclaracionesVista infoVista, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("------------------En GET Presentar declaracion lista declaraciones------------------------");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final String periodo = "";
+		final String numBP = customerModel.getNumBP();
+
+		infoVista.setUrlDownload(null);
+		infoVista.setPublicidadExt(null);
+		infoVista.setGasolina(null);
+		infoVista.setDelineacion(null);
+		infoVista.setIca(null);
+		infoVista.setReteIca(null);
+		infoVista.setErrores(null);
+
+		//		if (infoVista.getCustomerData() == null)
+		//		{
+		//
+		//			infoVista.setCustomerData(sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP()));
+		//		}
+		if (infoVista.getClaveImpuesto().equals("2"))
+		{
+			final List<ImpuestoVehiculos> listaInfoVehiculos = new ArrayList<ImpuestoVehiculos>();
+			ImpuestoVehiculos infoVehiculos = null;
+			DetalleVehiculosResponse detalleVehiculosResponse = null;
+
+			for (final ImpuestoVehiculos impuesto_element : sdhCustomerFacade.getRepresentadoFromSAP(numBP)
+					.getVehicular())
+			{
+				if (!impuesto_element.getPlaca().isEmpty())
+				{
+					infoVehiculos = new ImpuestoVehiculos();
+					infoVehiculos.setPlaca(impuesto_element.getPlaca());
+					infoVehiculos.setMarca(impuesto_element.getMarca());
+					infoVehiculos.setLinea(impuesto_element.getLinea());
+					infoVehiculos.setModelo(impuesto_element.getModelo());
+					infoVehiculos.setClase(impuesto_element.getClase());
+					infoVehiculos.setCarroceria(impuesto_element.getCarroceria());
+					infoVehiculos.setNumPuertas(impuesto_element.getNumPuertas());
+					infoVehiculos.setBlindado(impuesto_element.getBlindado());
+					infoVehiculos.setCilindraje(impuesto_element.getCilindraje());
+					infoVehiculos.setNumObjeto(impuesto_element.getNumObjeto());
+					infoVehiculos.setAnioGravable(impuesto_element.getAnioGravable());
+
+					final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+					detalleVehiculosRequest.setBpNum(numBP);
+					detalleVehiculosRequest.setPlaca(impuesto_element.getPlaca());
+					detalleVehiculosRequest.setAnioGravable(infoVista.getAnoGravable());
+
+
+					final ObjectMapper mapper = new ObjectMapper();
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+					try
+					{
+						detalleVehiculosResponse = mapper.readValue(
+								sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+						if (detalleVehiculosResponse.getInfo_declara() != null
+								&& detalleVehiculosResponse.getInfo_declara().getInfoVeh() != null)
+						{
+							infoVehiculos.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
+
+						}
+					}
+					catch (final Exception e)
+					{
+						LOG.error("Error en la respuesta del servicio detalle de Vehiculos " + e.getMessage());
+					}
+
+					listaInfoVehiculos.add(infoVehiculos);
+				}
+			}
+			infoVista.setVehicular(listaInfoVehiculos);
+			infoVista.setNumBP(numBP);
+		}
+
+
+		return infoVista;
 	}
 
 

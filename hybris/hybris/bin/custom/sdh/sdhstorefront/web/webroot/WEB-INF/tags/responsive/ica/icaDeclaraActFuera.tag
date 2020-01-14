@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!-- Actividades económicas Ingresos recibidos fuera de Bogotá --> 
 
 <script>
 	function bogota(selectObject) {
@@ -23,9 +24,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="headline">
+			<div class="hwomargin headline">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span class="hwomargin"><spring:theme
 							code="ica.declaracion.actifuera.titulo" /></span>
 				</h2>
 			</div>
@@ -33,20 +34,20 @@
 	</div>
 
 	<br>
-	<form:form action="">
+	<form:form action="" style="padding-left: 0px !important">
 		<div class="row">
 			<div class="col-md-7">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.actifuera.ciiu" />
 				</label>
 			</div>
 			<div class="col-md-2">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.actifuera.municipio" />
 				</label>
 			</div>
 			<div class="col-md-1">
-				<label class="control-label text-capitalize !important" for="">
+				<label class="control-label format_label" for="">
 					<spring:theme code="ica.declaracion.actifuera.ingre" />
 				</label>
 			</div>
@@ -62,13 +63,11 @@
 					<div class="col-md-7">
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
-
-
 						<select id="" class="alto form-control deno codCIIU"
 							style="font-size: 11px !important">
-							<option value="">SELECCIONAR</option>
-							<c:set var="selected" value="" />
+							<option value="" selected>SELECCIONAR</option>
 							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+								<c:set var="selected" value="" />
 								<fmt:formatNumber value="${ eachActivity.ciiu}"
 									pattern="#######################" var="eachCodCIIUNumber" />
 								<c:if test="${codCIIUNumber eq eachCodCIIUNumber}">

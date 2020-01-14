@@ -14,9 +14,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
-			<h3>
+			<h2>
 				<span><spring:theme code="delineacion.urbana.dec.firm.title" /></span>
-			</h3>
+			</h2>
 		</div>
 	</div>
 
@@ -81,9 +81,9 @@
 <!-- 						value="retencion"> -->
 <%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>
 <!-- 					</button> -->
-		<button id="duGeneraDeclaracionButton" type="button"
-			<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
-			class="btn btn-primary btn-lg" onclick="pagarlinea()" >
+		<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()" >
+			<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
+			class="btn btn-primary btn-lg" onclick="pagarlinea()" >   Se comenta linea para habilitar boton 19/12/2019 Maria Torres--> 
 			<spring:theme code="delineacion.urbana.dec.firm.prerete" />
 		</button>
 					
@@ -100,9 +100,11 @@
 				<sf:hidden path="numObjeto" />
 				<sf:hidden path="CDU" />
 				<sf:hidden path="anticipo" />
+				<sf:hidden path="radicado" />
+				
 				<div class="col-md-3">
-				<sf:button class="btn btn-primary btn-lg" type="submit" id="action" name="pagar" value="pagar" disabled="true">
-					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
+				<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit" id="action" name="pagar" value="pagar"  disabled="true">
+					<spring:theme code="impuestos.decGasolina.Pago.Pagar"/>
 				</sf:button>
 				</div>
 				</sf:form>

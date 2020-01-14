@@ -11,94 +11,31 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <script>
-	function SelectedAnio(selectObject) {
-// 		debugger;
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 
+window.onload = function() {
+	debugger;
+	//Se agrega funcionalidad para agentes Retenedores
+	var url = window.parent.location.href;
+	var contenido_url = url.includes('contribuyentes');
+	
+	if(contenido_url == true){
+		var contrib_select = document.getElementById('imprimirCont');
+		contrib_select.style.display = 'block';
+	}else{
+		var contrib_select = document.getElementById('imprimirAR');
+		contrib_select.style.display = 'block';
+
+		$("#seleccion").val("0004");
+		var obj=document.getElementById("seleccion");
+		
+ 		document.getElementById("BanderaAgete").value= "X";
+		
+		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.prepararPeriodo();
+		
 	}
+}
 
-	function valper(selectObject) {
-		debugger;
-		var per = selectObject.value;
-		var anio = document.getElementById('aniograv').value;
-		var fecha = new Date();
-		var anioact = fecha.getFullYear();
-		var mesact = fecha.getMonth();
-
-		if (anio < anioact) {
-
-		} else {
-			mesact = mesact + 1;
-			if (per < mesact) {
-
-			} else {
-				alert("Por favor, seleccione un mes anterior");
-			}
-
-		}
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-
-	}
-
-	function vaperiodo(selectObject) {
-		debugger;
-		var per = selectObject.value;
-		var anio = document.getElementById('aniograv').value;
-		var fecha = new Date();
-		var anioact = fecha.getFullYear();
-		var mesact = fecha.getMonth();
-		var peract = '0';
-		var valor = '0';
-		var perselect = '0';
-
-		if (anio < anioact) {
-
-		} else {
-			if (per == 'B1') {
-				perselect = '1';
-			} else if (per == 'B2') {
-				perselect = '2';
-			} else if (per == 'B3') {
-				perselect = '3';
-			} else if (per == 'B4') {
-				perselect = '4';
-			} else if (per == 'B5') {
-				perselect = '5';
-			} else if(per == 'B6')
-			{
-				perselect = '6';
-			}
-
-			mesact = mesact + 1;
-			if (mesact == '1' || mesact == '2') {
-				peract = 'B1';
-				valor = '1';
-			} else if (mesact == '3' || mesact == '4') {
-				peract = 'B2';
-				valor = '2';
-			} else if (mesact == '5' || mesact == '6') {
-				peract = 'B3';
-				valor = '3';
-			} else if (mesact == '7' || mesact == '8') {
-				peract = 'B4';
-				valor = '4';
-			} else if (mesact == '9' || mesact == '10') {
-				peract = 'B5';
-				valor = '5';
-			} else if (mesact == '11' || mesact == '12') {
-				peract = 'B6';
-				valor = '6';
-			}
-			
-			if(perselect < valor){
-				
-			}else{
-				alert("Seleccione un periodo anterior");
-			}
-
-		}
-
-	}
 </script>
 
 <a id="downloadHelper" target="_blank"></a>
@@ -112,32 +49,33 @@
 	</div>
 
 	<form:form id="" action="" method="post" commandName="dataForm">
+	<input type="hidden" name="BanderaAgete" id="BanderaAgete" value="" />
 
 		<div class="row">
-			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
+			<div class="col-md-4 col-xs-12 mb-20 no-marginright imprimirCont" id="imprimirCont" style="display: none">
 				<span class="paso--uno pasos color-sr1">1</span>
 				<h2 class="titulo-caja--ser-rel color-sr1 ">IMPRIMIR
 					DECLARACIÓN</h2>
 				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
 					deseas consultar.</p>
 				<div class="caja--ser-rel color-sr1">
-<!-- 					<select class="new_alto form-control seleccion" id="seleccion" -->
-<!-- 						onchange="onChange(this)"> -->
-<!-- 						<option>Seleccionar</option> -->
-<!-- 						<option value="0001">Predial</option> -->
-<!-- 						<option value="0002">Vehículos</option> -->
-<!-- 						<option value="0003">Industria y Comercio</option> -->
-<!-- 						<option value="0004">Reteica</option> -->
-<!-- 						<option value="0005">Sobretasa Motor</option> -->
-<!-- 						<option value="0006">Delineación Urbana</option> -->
-<!-- 						<option value="0007">Publicidad Exterior Visual</option> -->
-<!-- 						<option value="0008">Fondo Unif. Pobres, Azar y Esp</option> -->
-<!-- 					</select> -->
 					<sf:select class="new_alto form-control seleccion" id="seleccion" 
 						onchange="onChange(this)"
 						path="claveImpuesto" 
 						items="${dataForm.catalogos.impuesto}"
 						referenceData="${dataForm.catalogos.impuesto}" />
+				</div>
+			</div>
+			
+				<div class="col-md-4 col-xs-12 mb-20 no-marginright imprimirAR" id="imprimirAR" style="display: none">
+				<span class="paso--uno pasos color-sr1">1</span>
+				<h2 class="titulo-caja--ser-rel color-sr1 ">IMPRIMIR
+					DECLARACIÓN</h2>
+				<p class="pasoClase1 metrophobic">El impuesto a consultar es:</p>
+				<div class="caja--ser-rel color-sr1">
+					<input id="0004"
+						name="" class="newalto form-control" disabled type="text" value="Retención ICA"
+						maxlength="240" style="display: inline-block !important;"></input>
 				</div>
 			</div>
 
@@ -169,9 +107,9 @@
 					<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 					<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 					<div class="caja--ser-rel color-sr3">
-						<select aria-required="true" id="periodo"
+						<select aria-required="true" id="periodoM"
 							class="new_alto form-control " name="periodo" required='required'
-							onchange="valper(this)">
+							onchange="onChangeMensual(this)">
 							<option value="00">Seleccionar</option>
 							<option value="01">1-Enero</option>
 							<option value="02">2-Febrero</option>
@@ -196,15 +134,15 @@
 				<h2 class="titulo-caja--ser-rel color-sr3 paso3">PERIODO</h2>
 				<p class="pasoClase3 metrophobic">Selecciona el periodo.</p>
 				<div class="caja--ser-rel color-sr3">
-					<select id="periodo" class="new_alto form-control " name="periodo"
-						onchange="vaperiodo(this)">
+					<select id="periodoB" class="new_alto form-control " name="periodo"
+						onchange="onChangeBimestral(this)">
 						<option value="00">Seleccionar</option>
-						<option value="B1">1 - Ene / Feb</option>
-						<option value="B2">2 - Mar / Abr</option>
-						<option value="B3">3 - May / Jun</option>
-						<option value="B4">4 - Jul / Ago</option>
-						<option value="B5">5 - Sep / Oct</option>
-						<option value="B6">6 - Nov / Dic</option>
+						<option value="01">1 - Ene / Feb</option>
+						<option value="02">2 - Mar / Abr</option>
+						<option value="03">3 - May / Jun</option>
+						<option value="04">4 - Jul / Ago</option>
+						<option value="05">5 - Sep / Oct</option>
+						<option value="06">6 - Nov / Dic</option>
 					</select>
 				</div>
 			</div>
@@ -233,30 +171,14 @@
 						</tr>
 					</thead>
 					<tbody>
-
-<!-- 						<tr> -->
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="CHIP"></c:out>" /></td> --%>
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="Matricula"></c:out>" /></td> --%>
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="Direccion"></c:out>" /></td> --%>
-<!-- 							<td><input class="inputtextnew" -->
-<!-- 								style="visibility: visible !important; width: 15px" type="radio" -->
-<!-- 								id="" name="" value=""></td> -->
-
-<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
 		</div>
 
-		<div class="row" id="table-vehiculos" style="display: none;">
+		<div class="row" id="table-vehicular" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="table-vehicular1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -271,19 +193,6 @@
 						</tr>
 					</thead>
 					<tbody>
-
-<!-- 						<tr> -->
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="PLACA"></c:out>" /></td> --%>
-<!-- 							<td><input style="width: 100%" class="inputtextnew" -->
-<!-- 								maxlength="30" size="30" disabled="disabled" type="text" -->
-<%-- 								value="<c:out value="MARCA"></c:out>" /></td> --%>
-<!-- 							<td><input class="inputtextnew" -->
-<!-- 								style="visibility: visible !important; width: 15px" type="radio" -->
-<!-- 								id="" name="" value=""></td> -->
-
-<!-- 						</tr> -->
 					</tbody>
 				</table>
 			</div>
@@ -406,84 +315,6 @@
 			</div>
 		</div>
 
-
-<!-- 		<div class="col-md-9 col-md-offset-1 boder_section_cdu CDU" id="CDU" -->
-<!-- 			style="display: none"> -->
-<!-- 			<br> <br> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-md-3"> -->
-<!-- 					<label class="control-label" for="" style="text-transform: none"> -->
-<%-- 						<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" /> --%>
-<!-- 					</label> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-md-3"> -->
-<!-- 					<label class="control-label" for="" style="text-transform: none"> -->
-<%-- 						<spring:theme code="impuestos.presentarDeclaracion.deliur.tipobli" /> --%>
-<!-- 					</label> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-md-3"> -->
-<!-- 					<label class="control-label" for="" style="text-transform: none"> -->
-<%-- 						<spring:theme code="impuestos.presentarDeclaracion.deliur.tiplic" /> --%>
-<!-- 					</label> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-md-3"> -->
-<!-- 					<label class="control-label" for="" style="text-transform: none"> -->
-<%-- 						<spring:theme code="Evento" /> --%>
-<!-- 					</label> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="table-resposive" id="CDU1"> -->
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-sm-3"> -->
-<!-- 						<input class="new_alto form-control" disabled="disabled" -->
-<!-- 							type="text" value="" style="margin-bottom: 9px !important" /> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-sm-3"> -->
-<!-- 						<select id="selctipobliga" class="new_alto form-control" -->
-<!-- 							onchange="ShowSelected(this)"> -->
-<!-- 							<option value="0">Seleccionar</option> -->
-<!-- 							<option value="1">Declaración</option> -->
-<!-- 							<option value="2">Retención</option> -->
-<!-- 						</select> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-sm-3"> -->
-<!-- 						<select id="" class="new_alto form-control"> -->
-<!-- 							<option value="00">Seleccionar</option> -->
-<!-- 							<option value="01">Licencia</option> -->
-<!-- 							<option value="02">Reconocimiento</option> -->
-<!-- 						</select> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-sm-3"> -->
-<!-- 						<button type="button" class="btn-link" onClick=""> -->
-<%-- 							<spring:theme code="delineacion.urbana.radicados.declaracion.pdf" /> --%>
-<!-- 						</button> -->
-<!-- 						<br> <br> <br> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<br> <br> -->
-<!-- 				<div class="row" id="" style="display: none"> -->
-
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-sm-2"></div> -->
-<!-- 						<div class="col-sm-4 text-right">Radicados:</div> -->
-<!-- 						<div class="col-sm-3"> -->
-<!-- 							<input style="margin-bottom: 5px !important" -->
-<!-- 								class="new_alto form-control" disabled="disabled" type="text" -->
-<!-- 								value="" /> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-sm-3"> -->
-<!-- 							<button type="button" class="btn-link" id="" onClick=""> -->
-<%-- 								<spring:theme --%>
-<%-- 									code="delineacion.urbana.radicados.declaracion.pdf" /> --%>
-<!-- 							</button> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-
-<!-- 			</div> -->
-<!-- 		</div> -->
-
-
 		<div class="row" id="formButtons">
 			<div class="col-md-12 text-center">
 				<div class="form-group ">
@@ -508,55 +339,6 @@
 
 	<br> <br>
 
-	<!-- 	<button type="button" class="btn btn-primary btn-lg" id="regresar" -->
-	<!-- 		onclick="reiniciaCertificaPublicidad()"> -->
-	<%-- 		<spring:theme code="certificacion.inicial.regresar" /> --%>
-	<!-- 	</button> -->
-
-
-
-
-	<!--  
-		<c:if test="${not empty consultaPagoDelineacionList}">
-			<table id="myTable">
-				<tr>
-					<th>CDU</th>
-					<th>FECHA DE EXPEDICION</th>
-					<th>IMPRIMIR</th>
-				</tr>
-				<c:forEach var="item" items="${consultaPagoDelineacionList}">
-					<tr>
-						<td><c:out value="${item.cdu}" /></td>
-						<td><c:out value="${item.fechaExp}" /></td>
-						<td><form:form id="form_pdf"
-								action="/sdhstorefront/es/contribuyentes/consultas/certideclaraciones"
-								method="post" commandName="certiFormPost">
-								<input type="hidden" name="tipoImp" value="1" />
-								<input type="hidden" name="Idimp" value="6" />
-								<input type="hidden" name="rowFrompublicidadTable" value="X" />
-								<input type="hidden" name="numObjeto" value="${item.numObjeto}" />
-								<input type="hidden" name="aniograv" value="${item.fechaExp}" />
-							
-								<button type="submit" class="btn btn-primary btn-lg"
-									id="generarPDFButton" name="generarPDFButton">
-									<spring:theme code="certificacion.inicial.generar" />
-								</button>
-							</form:form></td>
-					</tr>
-				</c:forEach>
-			</table>
-
-			<br>
-			<br>
-
-			<button type="button" class="btn btn-primary btn-lg" id="regresar"
-				onclick="reiniciaCertificaPublicidad()">
-				<spring:theme code="certificacion.inicial.regresar" />
-			</button>
-
-		</c:if>-->
-
-
 
 </div>
 <br>
@@ -572,163 +354,45 @@
 				location = self.location;
 			});
 
-	function Selected(selectObject) {
-		var value = selectObject.value;
-		document.getElementById("Idimp").value = value;
-		var idAnio = document.getElementById('idAnio');
-		var idPeriodo = document.getElementById('idPeriodo');
-
-		var idPeriodo = document.getElementById('idPeriodo');
-
-		if (value == '1' || value == '2' || value == '4') {
-
-			idAnio.style.display = 'block';
-			idPeriodo.style.display = 'none';
-			;
-			document.getElementById("Idper").value = '';
-
-		} else if (value == '5' || value == '6' || value == '3') {
-			idAnio.style.display = 'block';
-			idPeriodo.style.display = 'block';
-		} else {
-
-			idAnio.style.display = 'none';
-
-		}
-	}
-
-	function SelectSobreDeli(selectObject) {
-		var value = selectObject.value;
-		document.getElementById("Idper").value = value;
-		var x = document.getElementById('Idimp').value;
-		var tablepredial = document.getElementById('table-predial');
-		var tablevehiculos = document.getElementById('table-vehiculos');
-		var tableica = document.getElementById('table-ica');
-		var tablepublicidad = document.getElementById('table-publicidad');
-		if (x == '5' || x == '6') {
-
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-
-		} else if (x == '3') {
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'block';
-			tablepublicidad.style.display = 'none';
-
-		} else {
-			tablepredial.style.display = 'none';
-			tablevehiculos.style.display = 'none';
-			tableica.style.display = 'none';
-			tablepublicidad.style.display = 'none';
-		}
-	}
-
-	function reiniciaCertificaPublicidad() {
-		debugger;
-		impuesto = document.getElementById("tipoimp");
-		impuesto.value = "";
-
-		form = document.getElementById("form_pdf");
-		form.submit();
-	}
-
-	// 	<!-- se agrega control para tablas de delineación
-
-	function ShowSelected(selectObject) {
-		var value = selectObject.value;
-		var idLic = document.getElementById('selectiplic');
-		var idrad = document.getElementById('idRadicados');
-		if (value == '1') {
-			idLic.disabled = false;
-			idLic.selectedIndex = "";
-			idrad.style.display = 'none';
-		} else if (value == '2') {
-			idLic.disabled = true;
-			idLic.selectedIndex = "1";
-			idrad.style.display = 'block';
-		} else {
-			idrad.style.display = 'none';
-		}
-	}
-</script>
-
-<!-- se agrega control para tablas de delineación -->
-<script type="text/javascript">
-	function ShowSelected(selectObject) {
-		var value = selectObject.value;
-		var selected = value.substring(0, 1);
-		var div = value.substring(2, value.length);
-		var x = document.getElementById(div);
-		var tipoLicencia = document.getElementById("btnTpLic_" + div);
-		var btnDeclaracion = document.getElementById("btn_" + div);
-
-		if (selected === "2") {
-			x.style.display = "block";
-			tipoLicencia.selectedIndex = "1"
-			tipoLicencia.disabled = true;
-			btnDeclaracion.disabled = true;
-		} else {
-			x.style.display = "none";
-			tipoLicencia.selectedIndex = "0"
-			tipoLicencia.disabled = false;
-			btnDeclaracion.disabled = false;
-		}
-	}
-</script>
-
-
-<script type="text/javascript">
-	function cargaInputDelineacion(cdu_retencion) {
-
-		debugger;
-
-		var valores = cdu_retencion.split('_');
-		var selectedCDU = document
-				.querySelector('#inputDelineacion\\.selectedCDU');
-		var selectedRadicado = document
-				.querySelector('#inputDelineacion\\.selectedRadicado');
-		var selectedTipoLicencia = document
-				.querySelector('#inputDelineacion\\.selectedTipoLicencia');
-
-		form = document.getElementById("form_pdf");
-
-		selectedCDU.value = valores[0];
-
-		if (valores[1].length != 0) {
-			selectedRadicado.value = valores[1];
-			selectedTipoLicencia.value = "retencion"
-		} else {
-			selectedRadicado.value = "";
-			selectedTipoLicencia.value = "declaracion"
-		}
-
-		form.submit();
-	}
 
 	function onChange(selectObject) {
 		// 		debugger;
-		var impuesto = selectObject.value;
-		var per = document.getElementById('Periodo1');
-		var per2 = document.getElementById('Periodo2');
-		//var publicidadExt = document.getElementById('table-publicidad');
+		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.prepararPeriodo();
+	}
+	
+	function SelectedAnio(selectObject) {
+// 		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 
-		if (impuesto == '0005') {
-			per.style.display = 'block';
-			per2.style.display = 'none';
-		} else if (impuesto == '0004') {
-			per2.style.display = 'block';
-			per.style.display = 'none';
+	}
+
+	function onChangeMensual(selectObject) {
+// 		debugger;
+		var per = selectObject.value;
+		var anio = document.getElementById('aniograv').value;
+		var fecha = new Date();
+		var anioact = fecha.getFullYear();
+		var mesact = fecha.getMonth();
+
+		if (anio < anioact) {
 
 		} else {
-			per.style.display = 'none';
-			per2.style.display = 'none';
+			mesact = mesact + 1;
+			if (per < mesact) {
+
+			} else {
+				alert("Por favor, seleccione un mes anterior");
+			}
+
 		}
-		//publicidadExt.style.display = 'none';
-		document.getElementById('aniograv').value = '00'; 
-		document.getElementById('periodo').value = '00'; 
-		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+
+	}
+
+	function onChangeBimestral(selectObject) {
+// 		debugger;
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+
 	}
 </script>

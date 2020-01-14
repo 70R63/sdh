@@ -8,21 +8,25 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
+import de.hybris.sdh.core.pojos.requests.CalculoReteIca2Request;
 import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
+import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
+import de.hybris.sdh.core.pojos.requests.OpcionCertiDecImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionCertiPagosImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesCatalogos;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
+import de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
@@ -31,6 +35,7 @@ import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetRadicadosResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
@@ -44,6 +49,7 @@ import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
+import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
@@ -62,6 +68,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -521,7 +528,7 @@ public class SobreTasaGasolinaService
 
 		final Map<String, String> elementos = new LinkedHashMap<String, String>();
 
-		elementos.put("01", "SELECCIONAR");
+		elementos.put("00", "SELECCIONAR");
 		elementos.put("01", "Enero");
 		elementos.put("02", "Febrero");
 		elementos.put("03", "Marzo");
@@ -873,6 +880,7 @@ public class SobreTasaGasolinaService
 
 			String wsresponse = sdhConsultaWS.consultaWS(infoRequest, confUrl, confUser, confPass, wsNombre, wsReqMet);
 			wsresponse = wsresponse.replaceAll("\"ARCHIVOS\":\\{([\"])(.*)(\"\\})", "\"ARCHIVOS\":[{\"$2\"}]");
+			//			System.out.println("Response de crm/consCasos: " + wsresponse);
 
 
 
@@ -898,6 +906,14 @@ public class SobreTasaGasolinaService
 			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse"))
 			{
 				wsresponse = wsresponse.replace(",\"errores\":\"\"", "");
+			}
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse"))
+			{
+				wsresponse = wsresponse.replace("\"stringPDF\":", "\"pdf\":");
+			}
+			if (nombreClase.equals("de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse"))
+			{
+				wsresponse = wsresponse.replace("\"stringPDF\":", "\"pdf\":");
 			}
 
 			responseInfo = mapper.readValue(wsresponse, Class.forName(nombreClase));
@@ -1005,7 +1021,7 @@ public class SobreTasaGasolinaService
 		int year = c.get(Calendar.YEAR);
 		final boolean esCambioAnio = false;
 
-		year = ocurrioCambioAnio() == false ? year : year--;
+		year = ocurrioCambioAnio() ? --year : year;
 
 		return year;
 	}
@@ -1021,7 +1037,7 @@ public class SobreTasaGasolinaService
 		final int month = c.get(Calendar.MONTH);
 		boolean esCambioAnio = false;
 
-		esCambioAnio = month != 0 ? false : true;
+		esCambioAnio = month == 0 ? true : false;
 
 
 		return esCambioAnio;
@@ -1035,9 +1051,9 @@ public class SobreTasaGasolinaService
 	{
 		final Calendar c = Calendar.getInstance();
 		int month = c.get(Calendar.MONTH);
-		final String monthSTR;
+		String monthSTR = null;
 
-		month = month == 11 ? 12 : month;
+		month = month == 0 ? 12 : month;
 		monthSTR = month < 10 ? "0" + Integer.toString(month) : Integer.toString(month);
 
 		return monthSTR;
@@ -1230,7 +1246,7 @@ public class SobreTasaGasolinaService
 
 		if (anoGravable != null)
 		{
-			periodoConvertidoPagar = anoGravable.substring(2).trim() + "B" + periodo;
+			periodoConvertidoPagar = anoGravable.substring(2).trim() + "B" + periodo.substring(1).trim();
 		}
 
 
@@ -1322,6 +1338,25 @@ public class SobreTasaGasolinaService
 			numObjeto = infoImpuesto.getNumObjeto().trim();
 		}
 
+
+		return numObjeto;
+	}
+
+	public String prepararNumObjetoReteICA(final SDHValidaMailRolResponse detalleContribuyente)
+	{
+		String numObjeto = null;
+
+
+		if (detalleContribuyente != null)
+		{
+			if (detalleContribuyente.getReteIca() != null)
+			{
+				if (detalleContribuyente.getReteIca().getNumObjeto() != null)
+				{
+					numObjeto = detalleContribuyente.getReteIca().getNumObjeto().trim();
+				}
+			}
+		}
 
 		return numObjeto;
 	}
@@ -1511,21 +1546,28 @@ public class SobreTasaGasolinaService
 	{
 
 		boolean ocurrioError = false;
-		if (detallePagoResponse.getFechVenc() == null && detallePagoResponse.getNumBP() == null
-				&& detallePagoResponse.getNumRef() == null && detallePagoResponse.getTotalPagar() == null)
+		if (detallePagoResponse == null)
 		{
 			ocurrioError = true;
 		}
-		//		else if (detallePagoResponse.getErrores() != null)
-		//		{
-		//			if (detallePagoResponse.getErrores().get(0) != null)
-		//			{
-		//				if (detallePagoResponse.getErrores().get(0).getIdmsj().equals("0") != true)
-		//				{
-		//					ocurrioError = true;
-		//				}
-		//			}
-		//		}
+		else
+		{
+			if (detallePagoResponse.getFechVenc() == null && detallePagoResponse.getNumBP() == null
+					&& detallePagoResponse.getNumRef() == null && detallePagoResponse.getTotalPagar() == null)
+			{
+				ocurrioError = true;
+			}
+			//		else if (detallePagoResponse.getErrores() != null)
+			//		{
+			//			if (detallePagoResponse.getErrores().get(0) != null)
+			//			{
+			//				if (detallePagoResponse.getErrores().get(0).getIdmsj().equals("0") != true)
+			//				{
+			//					ocurrioError = true;
+			//				}
+			//			}
+			//		}
+		}
 
 		return ocurrioError;
 	}
@@ -1811,6 +1853,24 @@ public class SobreTasaGasolinaService
 
 	}
 
+	/**
+	 * @param InfoDelineacion
+	 */
+	public void prepararValorcausalExcepDESCRIPCIONDUR(final InfoDelineacion fuente)
+	{
+
+		String campoDESCRIPCION = "";
+		final String separador = " ";
+
+		if (fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() != null)
+		{
+			campoDESCRIPCION = fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() + separador
+					+ obtenerListaCausalExencion().get(fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep());
+		}
+
+		fuente.getInfObjetoDelineacion().getInfoDeclara().setCausalExcepDESCRIPCION(campoDESCRIPCION);
+
+	}
 	public void prepararValortipoDocDESCRIPCIONDU(final SDHValidaMailRolResponse fuente)
 	{
 
@@ -1847,7 +1907,7 @@ public class SobreTasaGasolinaService
 		String periodoConvertidoPagar = "";
 
 
-		if (periodo != null)
+		if (periodo != null && !StringUtils.isBlank(periodo))
 		{
 			//			if (periodo.substring(2, 3).equals(" "))
 			//			{
@@ -1855,7 +1915,7 @@ public class SobreTasaGasolinaService
 			//			}
 			//			else
 			//			{
-			periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(1, 2));
+			periodoConvertidoPagar = prepararPeriodoBimestralPago(anoGravable, periodo.substring(0, 2));
 			//			}
 		}
 		else
@@ -1948,6 +2008,13 @@ public class SobreTasaGasolinaService
 	}
 
 
+	public boolean ocurrioErrorDecImprime(final OpcionCertiDecImprimeResponse response)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
+
+
 	/**
 	 * @param consCasosResponse
 	 * @return
@@ -2021,6 +2088,23 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
+	public OpcionCertiDecImprimeResponse certiDecImprimir(final OpcionCertiDecImprimeRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		OpcionCertiDecImprimeResponse responseInfo = new OpcionCertiDecImprimeResponse();
+		final String confUrl = "sdh.imprimeCertDeclara.url";
+		final String confUser = "sdh.imprimeCertDeclara.user";
+		final String confPass = "sdh.imprimeCertDeclara.password";
+		final String wsNombre = "docs/imprimeCertif";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse";
+
+		responseInfo = (OpcionCertiDecImprimeResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
 	public ListaDeclaracionesResponse consultaListaDeclaraciones(final ListaDeclaracionesRequest requestInfo,
 			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
 	{
@@ -2056,6 +2140,43 @@ public class SobreTasaGasolinaService
 		return responseInfo;
 	}
 
+
+	public CalculoReteIca2Response consultaReteIca2(final CalculoReteIca2Request requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		CalculoReteIca2Response responseInfo = null;
+		final String confUrl = "sdh.ReteIca2.url";
+		final String confUser = "sdh.ReteIca2.user";
+		final String confPass = "sdh.ReteIca2.password";
+		final String wsNombre = "calculoImp/ReteIca2";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response";
+
+		responseInfo = (CalculoReteIca2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
+	public DetalleVehiculos2Response consultaVehicular2(final DetalleVehiculos2Request requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		DetalleVehiculos2Response responseInfo = null;
+		final String confUrl = "sdh.detalle.vehiculo2.url";
+		final String confUser = "sdh.detalle.vehiculo2.user";
+		final String confPass = "sdh.detalle.vehiculo2.password";
+		final String wsNombre = "calculoImp/Vehicular2";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response";
+
+		responseInfo = (DetalleVehiculos2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
 	/**
 	 * @param customerData
 	 * @return
@@ -2081,6 +2202,13 @@ public class SobreTasaGasolinaService
 				elementos.put("0003", "Industria y Comercio");
 			}
 		}
+		if (customerData.getReteIca() != null) // reteICA
+		{
+			if (!customerData.getReteIca().getNumObjeto().isEmpty())
+			{
+				elementos.put("0004", "Retención ICA");
+			}
+		}
 		if (customerData.getGasolina() != null) //gasolina
 		{
 			if (customerData.getGasolina().size() > 0)
@@ -2102,6 +2230,13 @@ public class SobreTasaGasolinaService
 				elementos.put("0007", "Publicidad Exterior Visual");
 			}
 		}
+		if (customerData.getDelineacion() != null) //Retedelineacion
+		{
+			if (customerData.getDelineacion().size() > 0)
+			{
+				elementos.put("0008", "Retención Delineación Urbana");
+			}
+		}
 
 
 		catalogosForm.setImpuesto(elementos);
@@ -2120,7 +2255,7 @@ public class SobreTasaGasolinaService
 		List<ImpuestoGasolina> gasolina = null;
 		ImpuestoICA ica = null;
 		ReteICA reteica = null;
-		final List<ImpuestoVehiculos> vehiculos = null;
+		List<ImpuestoVehiculos> vehiculos = null;
 		List<ImpuestoDelineacionUrbanaWithRadicados> delineacion = null;
 		ImpuestoDelineacionUrbanaWithRadicados delineacion_customer_extendido = null;
 		List<DetRadicadosResponse> radicados = null;
@@ -2129,6 +2264,30 @@ public class SobreTasaGasolinaService
 
 		switch (infoVista.getClaveImpuesto())
 		{
+			case "0002": //Vehiculos
+				vehiculos = new ArrayList<ImpuestoVehiculos>();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						for (final ImpuestoVehiculos vehiculos_customer : infoVista.getCustomerData().getVehicular())
+						{
+							if (vehiculos_customer.getNumObjeto() != null && itemDeclaracion.getNumObjeto() != null)
+							{
+								if (vehiculos_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+								{
+									vehiculos.add(vehiculos_customer);
+								}
+							}
+						}
+					}
+
+					if (vehiculos.size() > 0)
+					{
+						infoVista.setVehicular(vehiculos);
+					}
+				}
+				break;
 			case "0003": //ICA
 				ica = new ImpuestoICA();
 				if (listaDeclaracionesResponse.getDeclaraciones() != null)
@@ -2259,6 +2418,242 @@ public class SobreTasaGasolinaService
 				break;
 		}
 
+	}
+
+
+	public List<ItemListaDeclaraciones> determinarRegistrosDeclaraciones_certipagos(final OpcionDeclaracionesVista infoVista,
+			final ListaDeclaracionesResponse listaDeclaracionesResponse, final SobreTasaGasolinaService gasolinaService)
+	{
+
+		List<ItemListaDeclaraciones> declaraciones_selected = null;
+
+
+		switch (infoVista.getClaveImpuesto())
+		{
+			//implementar la logica para cada impuesto
+
+			case "0002":
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+
+				break;
+
+			case "0003": //ICA
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+				break;
+
+			case "0004": //RETEICA
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+				break;
+
+
+
+			case "0005": //sobretasa gasolina
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				String periodo = null;
+				for (final ItemListaDeclaraciones declaracionRow : listaDeclaracionesResponse.getDeclaraciones())
+				{
+
+					if (infoVista.getPeriodo().equals("00"))
+					{
+						periodo = gasolinaService.prepararPeriodoAnualPago(infoVista.getAnoGravable());
+					}
+					else
+					{
+						periodo = infoVista.getAnoGravable().substring(2) + infoVista.getPeriodo();
+					}
+
+					if (declaracionRow.getClavePeriodo() != null && declaracionRow.getClavePeriodo().equals(periodo))
+					{
+						declaraciones_selected.add(declaracionRow);
+					}
+				}
+				break;
+
+			//				case "0006": //Delineacion Urbana
+			//					break;
+			//
+			//				case "0007": //Publicidad Exterior
+			//					break;
+
+			default:
+				declaraciones_selected = new ArrayList<ItemListaDeclaraciones>();
+				declaraciones_selected.addAll(listaDeclaracionesResponse.getDeclaraciones());
+				break;
+		}
+
+		return declaraciones_selected;
+	}
+
+	/**
+	 * @param claveImpuesto
+	 * @param customerData
+	 * @return
+	 */
+	public String prepararNumObjeto_certipagos(final OpcionDeclaracionesVista infoVista,
+			final SDHValidaMailRolResponse customerData)
+	{
+		String numObjeto = null;
+
+		switch (infoVista.getClaveImpuesto())
+		{
+
+			//implementar la logica para cada impuesto
+			case "0002": //vehiculos
+				if (customerData != null)
+				{
+					if (customerData.getVehicular() != null)
+					{
+						if (customerData.getVehicular().get(0) != null)
+						{
+							numObjeto = customerData.getVehicular().get(0).getNumObjeto();
+						}
+					}
+				}
+
+				break;
+
+			case "0003": //ICA
+				if (customerData != null)
+				{
+					if (customerData.getIca() != null)
+					{
+						numObjeto = customerData.getIca().getNumObjeto();
+					}
+				}
+
+				break;
+
+
+			//implementar la logica para cada impuesto
+			case "0004": //RETEICA
+				if (customerData != null)
+				{
+					if (customerData.getReteIca() != null)
+					{
+						numObjeto = customerData.getReteIca().getNumObjeto();
+					}
+				}
+
+				break;
+
+
+			case "0005": //sobretasa gasolina
+				if (customerData != null)
+				{
+					if (customerData.getGasolina() != null)
+					{
+						if (customerData.getGasolina().get(0) != null)
+						{
+							numObjeto = customerData.getGasolina().get(0).getNumObjeto();
+						}
+					}
+				}
+
+				break;
+
+			//			case "0006": //delineacion urbana
+			//
+			//				break;
+			//
+			//
+			//			case "0007": //publicidad exterior
+			//
+			//				break;
+			default:
+
+				break;
+		}
+
+		return numObjeto;
+	}
+
+	/**
+	 * @param detalleContribuyente
+	 * @param placa
+	 * @return
+	 */
+	public String prepararNumObjetoVehicular(final SDHValidaMailRolResponse detalleContribuyente, final String placa)
+	{
+		String numObjeto = "";
+		List<ImpuestoVehiculos> detalleImpuesto = null;
+
+
+		detalleImpuesto = detalleContribuyente.getVehicular();
+		if (detalleContribuyente != null && detalleImpuesto != null)
+		{
+			for (int i = 0; i < detalleImpuesto.size(); i++)
+			{
+				if (detalleImpuesto.get(i) != null)
+				{
+					if (detalleImpuesto.get(i).getPlaca() != null)
+					{
+						if (detalleImpuesto.get(i).getPlaca().equals(placa))
+						{
+							numObjeto = detalleImpuesto.get(i).getNumObjeto();
+						}
+					}
+				}
+			}
+		}
+
+
+		return numObjeto;
+	}
+
+	/**
+	 * @param calculoResponse
+	 * @return
+	 */
+	public boolean ocurrioErrorCalc2Reteica(final CalculoReteIca2Response calculoResponse)
+	{
+		// XXX Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * @param periodo
+	 * @return
+	 */
+	public String prepararDescPeriodoBimestral_ICA(String periodo)
+	{
+		String descripcion = "";
+
+		if (periodo != null)
+		{
+			periodo = StringUtils.trim(periodo);
+			if (!StringUtils.isAllEmpty(periodo))
+			{
+				switch (periodo)
+				{
+					case "01":
+						descripcion = "01 - Ene / Feb";
+						break;
+					case "02":
+						descripcion = "02 - Mar / Abr";
+						break;
+					case "03":
+						descripcion = "03 - May / Jun";
+						break;
+					case "04":
+						descripcion = "04 - Jul / Ago";
+						break;
+					case "05":
+						descripcion = "05 - Sep / Oct";
+						break;
+					case "06":
+						descripcion = "06 - Nov / Dic";
+						break;
+
+					default:
+						break;
+				}
+			}
+		}
+
+		return descripcion;
 	}
 
 

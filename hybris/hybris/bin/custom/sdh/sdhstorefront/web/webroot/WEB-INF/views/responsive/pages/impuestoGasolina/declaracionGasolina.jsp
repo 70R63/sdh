@@ -30,6 +30,23 @@
 </sf:form>
 <sobreTasaGasolina:decGasolinaPago />
 
+<script>
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){ //FFD-codigo comentado por observaciones en pruebas realizadas el 04 de octubre 2019
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+			}
+		}
+	}
+	 $(".loader").fadeOut("slow");
+	 document.getElementById("gasolinaGeneraDeclaracionButton").disabled = false; //Se agrega linea para habilitar boton de declaracion 19/12/2019 Maria Torres
+}
+</script>
 
 <script>
 	function goBack() {

@@ -35,11 +35,11 @@
 			</h2>
 
 			<div class="col-md-12">
-				<label class="control-label" style="text-transform: none"><spring:theme
+				<label class="control-label format_label" style="text-transform: none"><spring:theme
 						code="tramites.seguimiento.inicial.desc" /></label>
 			</div>
 			<div class="col-md-12">
-				<label class="control-label" style="text-transform: none"><spring:theme
+				<label class="control-label format_label" style="text-transform: none"><spring:theme
 						code="tramites.seguimiento.inicial.des" /></label>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 		<div class="row mt-3">
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
+					<label class="control-label format_label"><spring:theme
 							code="tramites.seguimiento.inicial.numcaso" /></label><input
 						id="num_caso" name="" class="newalto form-control" type="text"
 						maxlength="240"></input>
@@ -55,7 +55,7 @@
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
-					<label class="control-label"><spring:theme
+					<label class="control-label format_label"><spring:theme
 							code="tramites.seguimiento.inicial.numrad" /></label><input
 						id="radicado" name="" class="newalto form-control" type="text"
 						value="" maxlength="240"></input>

@@ -91,7 +91,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "#" ;;;;;
 ; ;TramitesLink; TRAMITES LINK    ; "/contibuyentes/tramites" ;;;;;
 ; ;FacturacionLink; FACTURACION LINK    ; "#" ;;;;;
-; ;DeclaracionesLink; DECLARACIONES LINK    ; "#" ;;;;;
+; ;DeclaracionesMenuLink; DECLARACIONES LINK    ; "#" ;;;;;
 #->; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
@@ -101,8 +101,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ;;TerceroAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/terceros/reportar";;;;;
 ;;TerceroAutorizadoConsultasLink;CONSULTAS;"/terceros/consultas";;;;;
 
-;;AgenteAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/autorizados/entidades/reportarinfo";;;;;
-;;AgenteAutorizadoConsultasLink;CONSULTAS;"/autorizados/entidades/consultas";;;;;
+;;AgenteAutorizadoReportarInformacionLink;REPORTAR INFORMACION LINK;"/autorizados/entidades/reportarinfo";;;;;
+;;AgenteAutorizadoConsultasLink;CONSULTAS LINK;"/autorizados/entidades/consultas";;;;;
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
 
 
@@ -135,7 +135,6 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 ; ; PresentarDeclaracionLink     ; PRESENTAR DECLARACION               ; "/contribuyentes/presentar-declaracion" ;;;;;
-; ; ListaDeclaracionFirmaLink    ; LISTA DECLARACION FIRMA             ; "/contribuyentes/declaraciones/listadeclafirmar";;;;;
 #->FIN dev-eduardo Agregar submenu DECLARACIONES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu PAGOS 04/01/2019
@@ -151,6 +150,21 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; CertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/contribuyentes/consultas/certideclaraciones" ;;;;;
 ; ; DeclaracionesLink			 ; DECLARACIONES LINK   				   ;"/contribuyentes/consultas/declaraciones";;;;;
 #->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
+
+#->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+; ; ARCertPagoLink                 ; CONSULTAS LINK                      ; "/agenteRetenedor/consultas/arCertipagos" ;;;;;
+; ; ARObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/agenteRetenedor/consultas/obligaciones" ;;;;;
+; ; ARRelPagosLink                 ; RELACION DE PAGOS LINK              ; "/agenteRetenedor/consultas/relacionpagos" ;;;;;
+; ; AREdoCuentaLink                ; ESTADO DE CUENTAS LINK              ; "/agenteRetenedor/estado-de-cuenta" ;;;;;
+; ; ARCertDeclaraLink              ; CERTIFICACION DECLARACION LINK      ; "/agenteRetenedor/consultas/certideclaraciones" ;;;;;
+; ; ARDeclaracionesLink			   ; DECLARACIONES LINK   				 ;"/agenteRetenedor/consultas/declaraciones";;;;;
+; ; ARPresentarDeclaracionLink	   ; DECLARACIONES LINK   				 ;"/retenedores/estadocargas";;;;;
+; ; ARListaDeclaracionLink	   	   ; LISTA LINK   				 			;"/agenteRetenedor/lista-declaraciones" ;;;;;
+
+#->FIN dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
+
 
 #->INI dev-maria Agregar submenu Reportantes 04/01/2019
 ; ; CargaLink               	 ; CARGA LINK              		; "/reportantes/cargadocumentos";;;;;
@@ -235,11 +249,12 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
 #;;CategoryNavComponent; Category Navigation Component;;CategoryNavComponent;CategoryNavNode;10
 ;;ContribuyentesCategoryNavComponent;Contribuyentes Category Navigation Component;;ContribuyenteCategoryNavComponent;ContribuyentesCategoryNavNode;10
-#;;AutorizadosCategoryNavComponent;Autorizados Category Navigation Component;;AutorizadosCategoryNavComponent;AutorizadosCategoryNavNode;10
+;;AutorizadosCategoryNavComponent;Autorizados Category Navigation Component;;AutorizadosCategoryNavComponent;AutorizadosCategoryNavNode;10
 ;;ReportantesInformacionCategoryNavComponent;Reportantes Informacion Category Navigation Component;;ReportantesInformacionCategoryNavComponent;ReportantesInformacionCategoryNavNode;10
 ;;AgenteRetenedorCategoryNavComponent;Agente Retenedor Category Navigation Component;;AgenteRetenedorCategoryNavComponent;AgenteRetenedorCategoryNavNode;10
 ;;TerceroAutorizadoCategoryNavComponent;Tercero Autorizado Category Navigation Component;;TerceroAutorizadoCategoryNavComponent;TerceroAutorizadoCategoryNavNode;10
 ;;AnonnymousCategoryNavComponent; Anonnymous Category Navigation Component;;AnonnymousCategoryNavComponent;AnnonymousCategoryNavNode;10
+;;TerceroAutorizadoNewCategoryNavComponent;Tercero Autorizado New Category Navigation Component;;TerceroAutorizadoNewCategoryNavComponent;TerceroAutorizadoNewCategoryNavNode;10
 
 #INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestriction(&userRestriction)[allownull=true];uid[unique=true];components(uid,$contentCV)
 #;;CategoryNavComponent Logged in User;anonymousUserRestriction;CategoryNavComponentloggedInUser;CategoryNavComponent
@@ -248,13 +263,16 @@ INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];name;uid[unique=true];u
 ;;Anonnymous Category Nav Component Restriction;AnonnymousCategoryNavComponentRestriction;anonymous;AnonnymousCategoryNavComponent
 
 INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];name;uid[unique=true];userGroups(uid);components(uid,$contentCV)
-;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01,sdh_02;ContribuyentesCategoryNavComponent
-#;;Autorizados Category Nav Componet Restriction;AutorizadosCategoryNavComponentRestriction;sdh_02;AutorizadosCategoryNavComponent
+#;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01,sdh_02;ContribuyentesCategoryNavComponent
+;;Contribuyentes Category Nav Component Restriction;ContribuyentesCategoryNavComponentRestriction;sdh_01;ContribuyentesCategoryNavComponent
+#;;Autorizados Category Nav Componet Restriction;AutorizadosCategoryNavComponentRestriction;sdh_01;AutorizadosCategoryNavComponent
 ;;Reportantes Informacion Category Nav Component Restriction;ReportantesInformacionCategoryNavComponentRestriction;sdh_05;ReportantesInformacionCategoryNavComponent
 ;;Agente Retenedor Category Nav Component Restriction;AgenteRetenedorCategoryNavComponentRestriction;sdh_04;AgenteRetenedorCategoryNavComponent
-;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoCategoryNavComponent
+;;Tercero Autorizado Category Nav Component Restriction;TerceroAutorizadoCategoryNavComponentRestriction;sdh_02;TerceroAutorizadoCategoryNavComponent
+;;Tercero Autorizado New Category Nav Component Restriction;TerceroAutorizadoNewCategoryNavComponentRestriction;sdh_03;TerceroAutorizadoNewCategoryNavComponent
+
 ## level 1. SiteRoot ##
-## level 2. children of SiteRoot ##
+## level 2. children of SiteRoot ##ContribuyentesCategoryNavComponentRestriction
 # the following order of children is the display order on the site
 
 
@@ -271,7 +289,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
 ;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
-;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
+;TerceroAutorizadoNewCategoryNavNode;;Tercero Autorizado New Categories;SiteRootNode;TerceroAutorizadoNewCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
+;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
 
 #->FIN dev-eduardo Agregar menu SDH 04/01/2019
@@ -342,6 +361,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;AgenteAutorizadoReportarInformacionNavigationNodeEntry;;Agente Autorizado Reportar Informacion Menu;AgenteAutorizadoReportarInformacionNavigationNode;AgenteAutorizadoReportarInformacionLink;
 ;AgeteAutorizadoConsultasNavigationNodeEntry;;Agente Autorizado Consultas Menu;AgenteAutorizadoConsultasNavigationNode;AgenteAutorizadoConsultasLink;
 
+
 #*->-------------------------------------------------------------------------------------------------------------------------
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ;MiRITNavigationNodeEntry;;Mi RIT Menu;MiRITNavigationNode;MiRITLink;
@@ -352,7 +372,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;ImpuestosNavigationNodeEntry;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosLink;
 ;TramitesNavigationNodeEntry;;Tramites Menu;TramitesNavigationNode;TramitesLink;
 ;FacturacionNavigationNodeEntry;;Facturacion Menu;FacturacionNavigationNode;FacturacionLink;
-;DeclaracionesNavigationNodeEntry;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesLink;
+;DeclaracionesNavigationNodeEntry;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesMenuLink;
 
 #;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
 #;ARPagosNavigationNodeEntry;;Pagos Menu;ARPagosNavigationNode;PagosLink;
@@ -425,14 +445,16 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 
 #->INI dev-eduardo Agregar menu CONSULTAS 04/01/2019
 ;ConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ConsultaNavigationServiceRequestsNavNodeMenu;CertPagoNavNode, ObligacionesPendNavNode, RelPagosNavNode, EdoCuentaNavNode, CertDeclaraNavNode, DeclaracionesNavNode
-;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertPagoNavNode, ARObligacionesPendNavNode, ARRelPagosNavNode, ARCertDeclaraNavNode
+;ARConsultaNavigationServiceRequestsNavNodeMenu;;Consulta Service Requests Menu;ARConsultaNavigationServiceRequestsNavNodeMenu;ARCertDeclaraNavNode,ARCertPagoNavNode, ARObligacionesPendNavNode, AREdoCuentaNavNode, ARDeclaracionesNavNode 
 #->FIN dev-eduardo Agregar menu CONSULTAS 04/01/2019
 
 ;ReportantesNavigationServiceRequestsNavNodeMenu;;Reportantes Service Requests Menu;ReportantesNavigationServiceRequestsNavNodeMenu;CargaNavNode, HistoricoNavNode, SancionesNavNode
 
 ;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;;Retenedores Detalle Service Requests Menu;RetenedorDetalleNavigationServiceRequestsNavNodeMenu;
 ;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;;Retenedores Registro Service Requests;RetenedorRegistroNavigationServiceRequestsNavNodeMenu;EdoCargasNavNode
-;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;
+;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;;Retenedores Declaracion Service Requests;RetenedorDeclaracionesNavigationServiceRequestsNavNodeMenu;ARPresentarDeclaracionNavNode,ARListaDeclaracionNavNode
+
+
 #*->-------------------------------------------------------------------------------------------------------------------------
 
 
@@ -549,6 +571,10 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;ARObligacionesPendNavNode;;Obligaciones Pendientes Link;ARObligacionesPendNavNode
 ;ARRelPagosNavNode;;Relacion Pagos Link;ARRelPagosNavNode
 ;ARCertDeclaraNavNode;; Certificacion Declaracion Link;ARCertDeclaraNavNode
+;ARDeclaracionesNavNode;; Declaraciones Link; ARDeclaracionesNavNode
+;AREdoCuentaNavNode;;Estado Cuenta Link; AREdoCuentaNavNode
+;ARPresentarDeclaracionNavNode ;;Presentar Declaracion Link;ARPresentarDeclaracionNavNode
+;ARListaDeclaracionNavNode ;; Lista Declaraciones Link;ARListaDeclaracionNavNode
 
 
 ;CargaNavNode;;Carga Link;CargaNavNode
@@ -646,7 +672,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 #->INI dev-eduardo Agregar menu DECLARACION 04/01/2019
 ;PresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;PresentarDeclaracionNavNode;PresentarDeclaracionLink
-;ListaDeclaracionFirmaNavNodeEntry;;Lista declaracion firma Navigation Node Entry;ListaDeclaracionFirmaNavNode;ListaDeclaracionFirmaLink
+#->;ListaDeclaracionFirmaNavNodeEntry;;Lista declaracion firma Navigation Node Entry;ListaDeclaracionFirmaNavNode;ListaDeclaracionFirmaLink
 #->FIN dev-eduardo Agregar menu DECLARACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu PAGOS 04/01/2019
@@ -670,11 +696,15 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;DeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;DeclaracionesNavNode;DeclaracionesLink
 
 
-;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;CertPagoLink
-;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ObligacionesPendLink
-;ARRelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;ARRelPagosNavNode;RelPagosLink
-;ARCertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;ARCertDeclaraNavNode;CertDeclaraLink
+;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;ARCertPagoLink
+;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ARObligacionesPendLink
+;ARRelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;ARRelPagosNavNode;ARRelPagosLink
+;ARCertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;ARCertDeclaraNavNode;ARCertDeclaraLink
+;ARDeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;ARDeclaracionesNavNode;ARDeclaracionesLink
+;AREdoCuentaNavNodeEntry;;Estado de cuenta Navigation Node Entry;AREdoCuentaNavNode;AREdoCuentaLink
 
+;ARPresentarDeclaracionNavNodeEntry;;Presentar declaracion Navigation Node Entry;ARPresentarDeclaracionNavNode;ARPresentarDeclaracionLink
+;ARListaDeclaracionNavNodeEntry;; Lista Declaraciones Firma AR Navigation Node Entry;ARListaDeclaracionNavNode;ARListaDeclaracionLink
 
 ;CargaNavNodeEntry;;Carga Navigation Node Entry;CargaNavNode;CargaLink
 ;HistoricoNavNodeEntry;;Historico Navigation Node Entry;HistoricoNavNode;HistoricoLink
@@ -1568,7 +1598,7 @@ INSERT_UPDATE CMSInverseRestriction;$contentCV[unique=true];name;originalRestric
 ;;ImpuestosLink Logged in User;anonymousUserRestriction;ImpuestosLinkloggedInUser;ImpuestosLink
 ;;TramitesLink Logged in User;anonymousUserRestriction;TramitesLinkloggedInUser;TramitesLink
 ;;FacturacionLink Logged in User;anonymousUserRestriction;FacturacionLinkloggedInUser;FacturacionLink
-;;DeclaracionesLink Logged in User;anonymousUserRestriction;DeclaracionesLinkloggedInUser;DeclaracionesLink
+;;DeclaracionesMenuLink Logged in User;anonymousUserRestriction;DeclaracionesMenuLinkloggedInUser;DeclaracionesMenuLink
 #->;;PagosLink Logged in User;anonymousUserRestriction;PagosLinkloggedInUser;PagosLink
 ;;ConsultasLink Logged in User;anonymousUserRestriction;ConsultasLinkloggedInUser;ConsultasLink
 ;;ReportantesLink Logged in User;anonymousUserRestriction;RecaudacionLinkloggedInUser;ReportantesLink
@@ -1844,6 +1874,30 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 #->FIN dev-maria Agregar paginas para Certificacion de Pagos 28/02/2019
 
 
+
+#->INI dev-eduardo Agregar paginas para Certificacion de Pagos 28/02/2019
+
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;arCertiPagoPage 		;Certificacion Pago 	;AccountPageTemplate:sdhContentCatalog:Staged	;/agenteRetenedor/consultas/arCertipagos
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='arCertiPagoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-arCertiPagoPage 		;SideContent				;															;SideContent-arCertiPagoPage						;;;
+								;						;BodyContent-arCertiPagoPage		;BodyContent				;															;BodyContent-arCertiPagoPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-arCertiPagoPage 	;Side Content Slot for Certificacion Pago			;true	;								;;;
+							;							;BodyContent-arCertiPagoPage	;Body Content Slot for Certificacion Pago			;true	;arCertiPagoPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;arCertiPagoPageComponent	;arCertiPagoPage Component	;/WEB-INF/views/responsive/pages/layout/arCertiPagoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;arCertiPagoPageComponent
+
+#->FIN dev-eduardo Agregar paginas para Certificacion de Pagos 28/02/2019
+
+
 #->INI dev-maria Agregar paginas para Obligaciones Pendientes 01/03/2019
 $contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
@@ -1927,26 +1981,6 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;delineacionUrbanaRadicadosComponent	;delineacionUrbanaRadicados Component	;/WEB-INF/views/responsive/pages/layout/delineacionUrbanaRadicados.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;delineacionUrbanaRadicadosComponent
 #->FIN dev-maria Agregar paginas para Delieneacion Retencion 14/03/2019
 
-#->INI dev-maria Agregar paginas para Lista de declaraciones a Firmar 15/03/2019
-$contentCatalog=sdhContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-
-INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;declaraFirmarPage 		;Declaraciones Firmar 	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/declaraciones/listadeclafirmar
-
-
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='declaraFirmarPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
-								;						;SideContent-declaraFirmarPage 		;SideContent				;															;SideContent-declaraFirmarPage						;;;
-								;						;BodyContent-declaraFirmarPage		;BodyContent				;															;BodyContent-declaraFirmarPage						;;;
-
-INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-declaraFirmarPage 	;Side Content Slot for Lista de Declaraciones			;true	;								;;;
-							;							;BodyContent-declaraFirmarPage	;Body Content Slot for Lista de Declaraciones			;true	;declaraFirmarPageComponent			;;;
-
-INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;declaraFirmarPageComponent	;declaraFirmarPage Component	;/WEB-INF/views/responsive/pages/layout/declaraFirmarPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;declaraFirmarPageComponent
-#->FIN dev-maria Agregar paginas para Lista de declaraciones a firmar 15/03/2019
 
 #->INI dev-maria Agregar paginas para ICA 18/03/2019
 $contentCatalog=sdhContentCatalog
@@ -2781,3 +2815,65 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;predialBasesPresuntivasPageComponent	;predialBasesPresuntivasPage Component	;/WEB-INF/views/responsive/pages/layout/predialBasesPresuntivasPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;predialBasesPresuntivasPageComponent
 
 #->FIN dev-maria Agregar paginas para impuesto predial unificado impex bases 25/09/2019
+
+# Inicio Gestion Bancaria Upload File
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;gestionBancariaFileUploadPage 		;Predial Unificado bases	;AccountPageTemplate:sdhContentCatalog:Staged	;/gestionBancaria/uploadFile
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='gestionBancariaFileUploadPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-gestionBancariaFileUploadPage 	;SideContent			;																	;SideContent-gestionBancariaFileUploadPage				;;;
+								;						;BodyContent-gestionBancariaFileUploadPage 	;BodyContent			;																	;BodyContent-gestionBancariaFileUploadPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-gestionBancariaFileUploadPage 	;Side Content Slot for Predial unificado bases	;true	;								;;;
+							;							;BodyContent-gestionBancariaFileUploadPage	;Body Content Slot for Predial unificado bases	;true	;gestionBancariaFileUploadPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;gestionBancariaFileUploadPageComponent	;gestionBancariaFileUploadPage Component	;/WEB-INF/views/responsive/pages/layout/gestionBancariaFileUploadPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;gestionBancariaFileUploadPageComponent
+# Fin Gestion Bancaria Upload File
+
+#->INI dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;arListaDeclaracionesPage 		;Predial Unificado bases	;AccountPageTemplate:sdhContentCatalog:Staged	;/agenteRetenedor/lista-declaraciones
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='arListaDeclaracionesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-arListaDeclaracionesPage 	;SideContent			;																	;SideContent-arListaDeclaracionesPage				;;;
+								;						;BodyContent-arListaDeclaracionesPage 	;BodyContent			;																	;BodyContent-arListaDeclaracionesPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-arListaDeclaracionesPage 	;Side Content Slot for AR Lista Declaraciones;true	;								;;;
+							;							;BodyContent-arListaDeclaracionesPage	;Body Content Slot for AR Lista DEclaraciones	;true	;arListaDeclaracionesPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;arListaDeclaracionesPageComponent	;arListaDeclaracionesPage Component	;/WEB-INF/views/responsive/pages/layout/arListaDeclaracionesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;arListaDeclaracionesPageComponent
+
+#->FIN dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019
+
+#->INI dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;predialInicialPage 		;Predial Unificado bases	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/predialunificado_inicio
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='predialInicialPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-predialInicialPage 	;SideContent			;																	;SideContent-predialInicialPage				;;;
+								;						;BodyContent-predialInicialPage 	;BodyContent			;																	;BodyContent-predialInicialPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-predialInicialPage 	;Side Content Slot for Predial InicialPage;true	;								;;;
+							;							;BodyContent-predialInicialPage	;Body Content Slot for Predial InicialPage	;true	;predialInicialPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;predialInicialPageComponent	;predialInicialPage Component	;/WEB-INF/views/responsive/pages/layout/predialInicialPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;predialInicialPageComponent
+
+#->FIN dev-maria Agregar paginas para agentes retenedores Lista de declaraciones a firmar 23/10/2019

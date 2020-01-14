@@ -12,17 +12,31 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ConsulFirmasRequest;
+import de.hybris.sdh.core.pojos.responses.ContribFirmasResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleDeclaraciones;
+import de.hybris.sdh.core.services.SDHConsulFirmasService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.storefront.forms.ContribuyenteForm;
+
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,8 +56,6 @@ public class ContribuyentesPageController extends AbstractPageController
 
 	private static final String CONTRIBUYENTES_CMS_PAGE = "ContribuyentesPage";
 
-	private static final String Mi_RIT_CMS_PAGE = "MiRitPage";
-
 	private static final String DELINEACION_URBANA_CMS_PAGE = "DelineacionUrbanaPage";
 
 	private static final String DELINEACION_URBANA_CORRECIONES_CMS_PAGE = "DelineacionUrbanaCorrecionesPage";
@@ -60,19 +72,88 @@ public class ContribuyentesPageController extends AbstractPageController
 	@Resource(name = "userService")
 	UserService userService;
 
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "sdhConsulFirmasService")
+	SDHConsulFirmasService sdhConsulFirmasService;
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
 
 	//	@Resource(name = "sdhCreaModContribuyenteFacade")
 	//	SDHCreaModContribuyenteFacade sdhCreaModContribuyenteFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String showView(final Model model,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String showView(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+		System.out.println("---------------- Hola entro al GET Contribuyentes --------------------------");
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final ConsulFirmasRequest consulFirmasRequest = new ConsulFirmasRequest();
+		final ContribuyenteForm contibForm = new ContribuyenteForm();
+
+		if (customerModel.getNumBP() != null)
+		{
+			consulFirmasRequest.setContribuyente(customerModel.getNumBP());
+			consulFirmasRequest.setAgente("");
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+				String response = sdhConsulFirmasService.getDeclaraciones(consulFirmasRequest);
+				response = response.replaceAll("\"declaraciones\":\\s*\\{([\"])(.*)(\"\\})", "\"declaraciones\":[{\"$2$3]");
+
+				final ContribFirmasResponse contribFirmasResponse = mapper
+						.readValue(response, ContribFirmasResponse.class);
+
+
+				for (final DetalleDeclaraciones eachPeriodo : contribFirmasResponse.getDeclaraciones())
+				{
+					String anoGravable = "";
+					String perRepor = "";
+
+					if ("0004".equals(eachPeriodo.getImpuesto()))
+					{
+						anoGravable = eachPeriodo.getAnioGravable();
+						perRepor = eachPeriodo.getPeriodo();
+
+						eachPeriodo.setPeriodo("B" + perRepor);
+
+					}
+
+
+				}
+
+					contibForm.setDeclaraciones(contribFirmasResponse.getDeclaraciones().stream()
+						.filter(eachDetDecla -> StringUtils.isNotBlank(eachDetDecla.getIdDeclaracion())).collect(Collectors.toList()));
+
+
+			}
+			catch (final Exception e)
+			{
+				// XXX Auto-generated catch block
+				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+			}
+
+		}
+		else
+		{
+			//			vehiculosForm.setNumBP("vacio");
+		}
+
+		//		model.addAttribute("actualCustomer", customerData);
+		model.addAttribute("contibForm", contibForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONTRIBUYENTES_CMS_PAGE));
@@ -81,123 +162,9 @@ public class ContribuyentesPageController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	//	@RequestMapping(value = "/mirit/updatePersonalData", method = RequestMethod.POST)
-	//	public String miritUpdatePersonalData(final Model model, final MiRitForm miRitForm)
-	//			throws CMSItemNotFoundException
-	//	{
-	//
-	//		model.addAttribute("miRitForm", miRitForm);
-	//
-	//
-	//
-	//		final CreaModContribuyenteRequest request = new CreaModContribuyenteRequest();
-	//
-	//		request.setNumBP("0000000171");
-	//		request.setTipoDoc("CC");
-	//		request.setNumDoc("10284644");
-	//		request.setBuzon("0");
-	//
-	//		final boolean userUpdated = sdhCreaModContribuyenteFacade.creaModContribuyent(request);
-	//
-	//		model.addAttribute("userUpdated", userUpdated);
-	//
-	//		storeCmsPageInModel(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
-	//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
-	//		updatePageTitle(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
-	//
-	//		return getViewForPage(model);
-	//	}
-
-	//	protected void populateFormFromValidaMailResponeInSession(final MiRitForm miRitForm)
-	//	{
-	//		final SDHValidaMailRolResponse sdhValidaMailRolResponse = sessionService.getAttribute("sdhValidaMailRolResponse");
-	//
-	//		miRitForm.setNumBP(sdhValidaMailRolResponse.getInfoContrib().getNumBP());
-	//		miRitForm.setTipoDoc(sdhValidaMailRolResponse.getInfoContrib().getTipoDoc());
-	//		miRitForm.setNumDoc(sdhValidaMailRolResponse.getInfoContrib().getNumDoc());
-	//		miRitForm.setFchExp(sdhValidaMailRolResponse.getInfoContrib().getFchExp());
-	//		miRitForm.setPrimNom(sdhValidaMailRolResponse.getInfoContrib().getPrimNom());
-	//		miRitForm.setSegNom(sdhValidaMailRolResponse.getInfoContrib().getSegNom());
-	//		miRitForm.setPrimApe(sdhValidaMailRolResponse.getInfoContrib().getPrimApe());
-	//		miRitForm.setSegApe(sdhValidaMailRolResponse.getInfoContrib().getSegApe());
-	//		miRitForm.setDepartExp(sdhValidaMailRolResponse.getInfoContrib().getDepartExp());
-	//		miRitForm.setMunicipio(sdhValidaMailRolResponse.getInfoContrib().getMunicipio());
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//	}
-
-
-	//Se anexa el mapeo de la pagina predialunificado //GRD
-	/*
-	 * @RequestMapping(value = "/predialunificado", method = RequestMethod.GET) public String predialUnidicado(final
-	 * Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException {
-	 *
-	 * storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNIFICADO_CMS_PAGE));
-	 * setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_UNIFICADO_CMS_PAGE)); updatePageTitle(model,
-	 * getContentPageForLabelOrId(PREDIAL_UNIFICADO_CMS_PAGE));
-	 *
-	 * return getViewForPage(model); }
-	 *
-	 * //Se anexa el mapeo de la pagina sobrevehiculosautomotores //GRD
-	 *
-	 * @RequestMapping(value = "/sobrevehiculosautomotores", method = RequestMethod.GET) public String
-	 * sobreVehiculosAutomotores(final Model model, final RedirectAttributes redirectModel) throws
-	 * CMSItemNotFoundException {
-	 *
-	 * storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_AUTOMOTORES_CMS_PAGE));
-	 * setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_AUTOMOTORES_CMS_PAGE));
-	 * updatePageTitle(model, getContentPageForLabelOrId(SOBRE_VEHICULOS_AUTOMOTORES_CMS_PAGE));
-	 *
-	 * return getViewForPage(model); }
-	 *
-	 * //Se anexa el mapeo de la pagina ica y reteica //GRD
-	 *
-	 * @RequestMapping(value = "/icareteica", method = RequestMethod.GET) public String icaReteIca(final Model model,
-	 * final RedirectAttributes redirectModel) throws CMSItemNotFoundException {
-	 *
-	 * storeCmsPageInModel(model, getContentPageForLabelOrId(ICA_Y_RETEICA_CMS_PAGE)); setUpMetaDataForContentPage(model,
-	 * getContentPageForLabelOrId(ICA_Y_RETEICA_CMS_PAGE)); updatePageTitle(model,
-	 * getContentPageForLabelOrId(ICA_Y_RETEICA_CMS_PAGE));
-	 *
-	 * return getViewForPage(model); }
-	 */
-
-	/*
-	//#->INI dev-federico 17/01/2019 comentado para usar otro controller para Sobretasa Gasolina
-	@RequestMapping(value = "/sobretasa-gasolina", method = RequestMethod.GET)
-	public String sobretasaGasoline(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	{
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-		updatePageTitle(model, getContentPageForLabelOrId(SOBRETASA_GASOLINA_CMS_PAGE));
-
-		return getViewForPage(model);
-	}
-	//#->FIN dev-federico 17/01/2019 comentado para usar otro controller para Sobretasa Gasolina
-	*/
-
-	//#->INI dev-federico 26/02/2019 comentado para usar otro controller para Delineacion urbana
-	//	@RequestMapping(value = "/delineacion-urbana", method = RequestMethod.GET)
-	//	public String delineacionUrbana(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
-	//	{
-	//
-	//		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
-	//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
-	//		updatePageTitle(model, getContentPageForLabelOrId(DELINEACION_URBANA_CMS_PAGE));
-	//
-	//		return getViewForPage(model);
-	//	}
-	//#->INI dev-federico 26/02/2019 comentado para usar otro controller para Delineacion urbana
-
 	@RequestMapping(value = "/delineacion-urbana/declaraciones", method = RequestMethod.GET)
-	public String delineacionUrbanaDeclaraciones(final Model model, final RedirectAttributes redirectModel,final HttpServletRequest request)
-			throws CMSItemNotFoundException
+	public String delineacionUrbanaDeclaraciones(final Model model, final RedirectAttributes redirectModel,
+			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		model.addAttribute("action", request.getParameter("action"));
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));

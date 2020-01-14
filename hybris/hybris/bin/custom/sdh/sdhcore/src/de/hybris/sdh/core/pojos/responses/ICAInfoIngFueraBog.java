@@ -83,6 +83,22 @@ public class ICAInfoIngFueraBog
 		this.ingresos = ingresos;
 	}
 
+	/**
+	 *
+	 */
+	public ICAInfoIngFueraBog(final String str)
+	{
+		super();
+	}
+
+	/**
+	 *
+	 */
+	public ICAInfoIngFueraBog()
+	{
+		super();
+	}
+
 
 
 }

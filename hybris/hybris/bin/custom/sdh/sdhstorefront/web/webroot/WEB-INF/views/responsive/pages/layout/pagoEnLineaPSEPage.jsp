@@ -8,6 +8,6 @@
 
 <template:page pageTitle="${pageTitle}">
 	<div class="container">
-		<pagoPSE:pagoEnLinea/>
-	</div>	
+		<pagoPSE:pagoEnLinea />
+	</div>
 </template:page>

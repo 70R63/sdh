@@ -60,6 +60,7 @@
 <body class="${pageBodyCssClasses} ${cmsPageRequestContextData.liveEdit ? ' yCmsLiveEdit' : ''} language-${currentLanguage.isocode}">
 
 	<%-- Inject the page body here --%>
+<%-- <div class="loader"></div> --%>
 	<jsp:doBody />
 
 
@@ -73,7 +74,9 @@
 	<template:javaScript />
 
 	<%-- Inject any additional JavaScript required by the page --%>
+
 	<jsp:invoke fragment="pageScripts" />
+
 
 	<%-- Inject CMS Components from addons using the placeholder slot--%>
 	<addonScripts:addonScripts />

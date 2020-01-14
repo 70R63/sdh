@@ -13,9 +13,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
-			<h3>
+			<h2>
 				<span><spring:theme code="declaracion.publicidad.infovalla" /></span>
-			</h3>
+			</h2>
 		</div>
 	</div>
 
@@ -103,12 +103,12 @@
 
 				<c:choose>
 					<c:when test="${declaPublicidadForm.luginst eq '01'}">
-						<select id="tamValla" style="height: 25px !important; min-height: 10px !important; width: 100%; text-align: left !important; padding: 0px;" class="form-control">
+						<select id="tamValla" style="height: 25px !important; min-height: 10px ; width: 100%; text-align: left !important; padding: 0px;" class="form-control">
 							<c:set var="selected" value="" />
 							<c:if test="${declaPublicidadForm.basegrav eq '01' }">
 								<c:set var="selected" value="selected" />
 							</c:if>
-							<option ${selected } value="01">Vallas de más de 8 m2
+							<option ${selected} value="01">Vallas de más de 8 m2
 								hasta 24 m2</option>
 							<c:set var="selected" value="" />
 							<c:if test="${declaPublicidadForm.basegrav eq '02' }">
@@ -124,14 +124,20 @@
 						</select>
 					</c:when>
 					<c:when test="${declaPublicidadForm.luginst eq '02'}">
-						<select style="height: 25px !important; min-height: 10px !important; width: 100%; text-align: left !important; padding: 0px;" class="form-control">
+						<select id="tamValla" style="height: 25px !important; min-height: 10px !important; width: 100%; text-align: left !important; padding: 0px;" class="form-control">
 							<option value="04">Vallas en vehículos automotores con
 								dimensión superior a 8 m2</option>
 						</select>
 					</c:when>
+					
+					<c:when test="${declaPublicidadForm.luginst eq 'null'}">
+						<select id="tamValla" style="height: 25px !important; min-height: 10px !important; width: 100%; text-align: left !important; padding: 0px;" class="form-control">
+							<option value="00">Prueba seleccionar</option>
+						</select>
+					</c:when>
 
 					<c:otherwise>
-						<select id="tamValla" style="height: 25px !important; min-height: 10px !important; width: 100%; text-align: left !important; padding: 0px;" class="form-control" >
+						<select id="tamValla" class="tamValla" style="height: 25px !important; min-height: 10px !important; width: 100%; text-align: left !important; padding: 0px;" class="form-control" >
 							<option value=" ">Seleccionar</option>
 						</select>
 					</c:otherwise>

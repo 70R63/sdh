@@ -9,15 +9,14 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionRequest;
 import de.hybris.sdh.core.credibanco.InititalizeTransactionResponse;
 import de.hybris.sdh.core.dao.PseBankListCatalogDao;
 import de.hybris.sdh.core.dao.PseTransactionsLogDao;
 import de.hybris.sdh.core.enums.SdhOnlinePaymentProviderEnum;
-import de.hybris.sdh.core.enums.SdhPaymentMethodTypeEnum;
 import de.hybris.sdh.core.enums.SdhTaxTypesEnum;
-import de.hybris.sdh.core.model.PseBankListCatalogModel;
 import de.hybris.sdh.core.model.PseTransactionsLogModel;
 import de.hybris.sdh.core.pojos.requests.ConsultaPagoRequest;
 import de.hybris.sdh.core.pojos.requests.ImprimePagoRequest;
@@ -36,7 +35,6 @@ import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInform
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseReturnCodeList;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseTransactionStateCodeList;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
-import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData;
 import de.hybris.sdh.facades.online.payment.impl.DefaultSDHOnlinePaymentProviderMatcherFacade;
 import de.hybris.sdh.facades.questions.data.SDHGasTaxData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
@@ -44,7 +42,6 @@ import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PSEPaymentForm;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -130,6 +127,10 @@ public class PSEPaymentController extends AbstractPageController
 
 	@Resource(name = "sdhOnlinePaymentProviderMatcherFacade")
 	private DefaultSDHOnlinePaymentProviderMatcherFacade sdhOnlinePaymentProviderMatcherFacade;
+
+
+	@Resource(name = "sessionService")
+	SessionService sessionService;
 
 	@ModelAttribute("tipoDeImpuesto")
 	public List<SelectAtomValue> getIdTipoDeImpuesto()
@@ -267,6 +268,8 @@ public class PSEPaymentController extends AbstractPageController
 			final String estatus)
 			throws CMSItemNotFoundException
 	{
+		String flagSuccessView = null;
+		String flagReintetarPago = null;
 
 		if (error == "sinPdf")
 		{
@@ -290,23 +293,45 @@ public class PSEPaymentController extends AbstractPageController
 			{
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
-			}else {	//Transaccion con error
+				flagSuccessView = "X";
+			}
+			else if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.PENDING.getValue())) //Transaccion pendiente
+			{
+				flagSuccessView = "X";
+			}
+			else
+			{ //Transaccion con error
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId)); //new PSEPaymentForm());
 				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+				flagReintetarPago = "X";
 			}
 		}else {
 			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
+			flagReintetarPago = "X";
 		}
 
 		LOG.info("estatus: " + estatus);
 		if (estatus == "impreso")
 		{
-			model.addAttribute("psePaymentForm", psePaymentFormResp);
+			//			model.addAttribute("psePaymentForm", psePaymentFormResp);
+			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
 		}
 
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
 		model.addAttribute("disableFields", "true");
+		model.addAttribute("flagSuccessView", flagSuccessView);
+		model.addAttribute("flagReintetarPago", flagReintetarPago);
+
+		final String bpRepresentado = sessionService.getCurrentSession().getAttribute("representado");
+		if (bpRepresentado != null)
+		{
+			model.addAttribute("representado", "true");
+		}
+		else
+		{
+			model.addAttribute("representado", "false");
+		}
 
 		return getViewForPage(model);
 	}
@@ -353,7 +378,7 @@ public class PSEPaymentController extends AbstractPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
+	//	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
 	public String pagoPdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("psePaymentForm")
 	final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
@@ -485,7 +510,71 @@ public class PSEPaymentController extends AbstractPageController
 	}
 
 
+	@RequestMapping(value = "/pagoEnLinea/pseResponse", method = RequestMethod.POST)
+	public String imprimirpagoPdf(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("psePaymentForm")
+	final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En imprimir comprobante pago POST --------------------------");
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final ImprimePagoRequest imprimePagoRequest = new ImprimePagoRequest();
+		ImprimePagoResponse imprimePagoResponse = null;
 
+		final String numBP = customerData.getNumBP();
+		final String cuentaContrato = "";
+		final String numObjeto = "";
+		final String clavePeriodo = "";
+		final String referencia = psePaymentForm.getNumeroDeReferencia();
+		final String fechaCompensa = "";
+		final String importe = psePaymentForm.getValorAPagar();
+		final String moneda = "";
+		final String numfactForm = "";
+		final String numDocPago = "";
+		final String refROP = "";
+
+
+		try
+		{
+			imprimePagoRequest.setNumBP(numBP);
+			imprimePagoRequest.setCtaContrato(cuentaContrato);
+			imprimePagoRequest.setNumObjeto(numObjeto);
+			imprimePagoRequest.setClavePeriodo(clavePeriodo);
+			imprimePagoRequest.setReferencia(referencia);
+			imprimePagoRequest.setFechaCompensa(fechaCompensa);
+			imprimePagoRequest.setImporte(importe);
+			imprimePagoRequest.setMoneda(moneda);
+			imprimePagoRequest.setNumfactForm(numfactForm);
+			imprimePagoRequest.setNumDocPago(numDocPago);
+			imprimePagoRequest.setRefROP(refROP);
+
+			System.out.println("Request de docs/imprimePago: " + imprimePagoRequest);
+			final String resp = sdhImprimePagoService.imprimePago(imprimePagoRequest);
+			System.out.println("Response de docs/imprimePago: " + resp);
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			imprimePagoResponse = mapper.readValue(resp, ImprimePagoResponse.class);
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error al leer in: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "No se encontraron datos.");
+			redirectModel.addFlashAttribute("error", "sinPdf");
+			return "redirect:/impuestos/pagoEnLinea/pseResponse";
+
+		}
+		redirectModel.addFlashAttribute("imprimePagoResponse", imprimePagoResponse);
+		redirectModel.addFlashAttribute("psePaymentFormResp", psePaymentForm);
+		redirectModel.addFlashAttribute("estatus", "impreso");
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return "redirect:/impuestos/pagoEnLinea/pseResponse";
+
+	}
 
 
 
@@ -495,7 +584,7 @@ public class PSEPaymentController extends AbstractPageController
 	@RequireHardLogIn
 	public String pagoEnLineaForm(final Model model, final PSEPaymentForm psePaymentForm) throws CMSItemNotFoundException
 	{
-		SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
+		final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade.getTaxByCode(psePaymentForm.getTipoDeImpuesto());
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_FORMA));
@@ -522,7 +611,7 @@ public class PSEPaymentController extends AbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		String redirecUrl = getViewForPage(model);
 
-		SdhOnlinePaymentProviderEnum provider = sdhOnlinePaymentProviderMatcherFacade.getOnlinePaymentProvider(psePaymentForm.getTipoDeImpuesto(), psePaymentForm.getTipoDeTarjeta(), psePaymentForm.getBanco());
+		final SdhOnlinePaymentProviderEnum provider = sdhOnlinePaymentProviderMatcherFacade.getOnlinePaymentProvider(psePaymentForm.getTipoDeImpuesto(), psePaymentForm.getTipoDeTarjeta(), psePaymentForm.getBanco());
 
 
 		if (provider.equals(SdhOnlinePaymentProviderEnum.CREDIBANCO)) //Credibanco Payment
@@ -599,8 +688,21 @@ public class PSEPaymentController extends AbstractPageController
 		createTransactionPaymentInformationType.setTicketId(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()));
 		createTransactionPaymentInformationType.setTransactionValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
 		createTransactionPaymentInformationType.setVatValue(this.getAmount("COP", psePaymentForm.getValorAPagar()));
-		createTransactionPaymentInformationType.setReferenceNumber(this.getReferences(
-				psePaymentForm.getTipoDeIdentificacion() + " - " + psePaymentForm.getNoIdentificacion(), "ACH Host Copy Rights", "NonRed#1"));
+
+
+		final int i_ceros = 14 - (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());
+
+		String s_ceros = new String();
+		for (int i = 1; i <= i_ceros; i++)
+		{
+			s_ceros = s_ceros + "0";
+		}
+
+		final String s_reference2 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+
+		createTransactionPaymentInformationType.setReferenceNumber(
+				this.getReferences(new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()).toString(), s_reference2,
+						new NonNegativeInteger(psePaymentForm.getNumeroDeReferencia()).toString()));
 
 
 		return pseServices

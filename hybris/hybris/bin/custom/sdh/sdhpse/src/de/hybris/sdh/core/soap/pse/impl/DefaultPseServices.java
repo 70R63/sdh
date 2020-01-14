@@ -12,6 +12,8 @@ import de.hybris.sdh.core.soap.pse.eanucc.FinalizeTransactionPaymentInformationT
 import de.hybris.sdh.core.soap.pse.eanucc.FinalizeTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetBankListResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseBodyType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetbankListInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.UserTypeListType;
@@ -89,9 +91,46 @@ public class DefaultPseServices implements PseServices
 			cli = getMainServices();
 			cli.setMessageHeader(messageHeader);
 
+			if (constantConnectionDataInt.getServiceCode().equals("5101"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Predial");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5102"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("ICA");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5103"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Vehicular");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5106"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Delineacion");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5131"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Retencion ICA");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5132"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Retencion De Delineacion Urbana");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("5154"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Publicidad");
+			}
+			else if (constantConnectionDataInt.getServiceCode().equals("0108"))
+			{
+				createTransactionPaymentInformationType.setPaymentDescription("Gasolina");
+			}
+
+
+
 			createTransactionPaymentInformationType.setEntityCode(constantConnectionDataInt.getPpeCode());
 			createTransactionPaymentInformationType.setFinancialInstitutionCode(constantConnectionDataInt.getBankCode());
-			createTransactionPaymentInformationType.setServiceCode(constantConnectionDataInt.getServiceCode());
+			final String serviceCode = constantConnectionDataInt.getBankCode().substring(2, 4)
+					+ constantConnectionDataInt.getServiceCode().substring(2, 4);
+			createTransactionPaymentInformationType.setServiceCode(serviceCode);
 			createTransactionPaymentInformationType.setEntityurl(constantConnectionDataInt.getEntityUrl());
 			createTransactionPaymentInformationType.setSoliciteDate(date);
 			createTransactionPaymentInformationType.setUserType(UserTypeListType._value1);
@@ -176,6 +215,37 @@ public class DefaultPseServices implements PseServices
 		LOG.info(messageHeader);
 		LOG.info(getTransactionInformationBodyType);
 		LOG.info("----------- Input Parameters GetTransactionInformation   WS  ----------");
+
+		return result;
+	}
+
+	@Override
+	public GetTransactionInformationDetailedResponseBodyType getTransactionInformationDetailed(final ConstantConnectionData constantConnectionData,
+																					   final MessageHeader messageHeader,
+																					   final GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType) {
+
+		constantConnectionDataInt = constantConnectionData;
+		MainServicesSoapStub cli = null;
+		GetTransactionInformationDetailedResponseBodyType result = null;
+
+		try
+		{
+			cli = getMainServices();
+			cli.setMessageHeader(messageHeader);
+
+			getTransactionInformationDetailedBodyType.setEntityCode(constantConnectionDataInt.getPpeCode());
+			result = cli.getTransactionInformationDetailed(getTransactionInformationDetailedBodyType);
+		}
+		catch (MalformedURLException | ServiceException | RemoteException e)
+		{
+			this.printExceptionMessage(e);
+		}
+
+		LOG.info("----------- Input Parameters getTransactionInformationDetailed   WS ----------");
+		LOG.info(constantConnectionData);
+		LOG.info(messageHeader);
+		LOG.info(getTransactionInformationDetailedBodyType);
+		LOG.info("----------- Input Parameters getTransactionInformationDetailed   WS  ----------");
 
 		return result;
 	}

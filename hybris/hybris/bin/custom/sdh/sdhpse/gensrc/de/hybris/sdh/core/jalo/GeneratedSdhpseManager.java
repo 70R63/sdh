@@ -1,11 +1,11 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 24-sep-2019 17:21:59                        ---
+ * --- Generated at 10/01/2020 05:37:18 PM                      ---
  * ----------------------------------------------------------------
  *  
  * [y] hybris Platform
- * Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+ * Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
  * This software is the confidential and proprietary information of SAP
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the

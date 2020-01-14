@@ -11,18 +11,18 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="headline">
+			<div class="hwomargin headline">
 				<h2>
-					<span class="col-md-10 "><spring:theme
+					<span class="hwomargin"><spring:theme
 							code="ica.inicial.representantes.title" /></span>
 				</h2>
 			</div>
 		</div>
 	</div>
-	
-		
+
+
 	<br>
-	<form:form action="">
+	<form:form action="" style="padding-left: 0px !important">
 		<div class="row text-center">
 			<div class="col-md-8">
 				<div class="table-responsive">
@@ -50,9 +50,9 @@
 								var="eachRelation">
 								<c:if test="${not empty eachRelation.tipoRelacion }">
 									<tr>
-										<td><input class="inputtextnew"
-											disabled="disabled" value="${eachRelation.tipoRelacion}"
-											type="text" style="width: 303px;" /></td>
+										<td><input class="inputtextnew" disabled="disabled"
+											value="${eachRelation.tipoRelacion}" type="text"
+											style="width: 303px;" /></td>
 										<td><input class="inputtextnew tableident"
 											disabled="disabled" value="${eachRelation.tipoDoc}"
 											type="text" style="visibility: visibility !important" /></td>
@@ -60,7 +60,8 @@
 											disabled="disabled" value="${eachRelation.numDoc}"
 											type="text" style="text-align: center" /></td>
 										<td><input class="inputtextnew" disabled="disabled"
-											value="${eachRelation.nombre}" type="text" style="width: 100%;" /></td>
+											value="${eachRelation.nombre}" type="text"
+											style="width: 100%;" /></td>
 										<td><input class="inputtextnew tablefechas"
 											disabled="disabled" value="${eachRelation.fechaDesde}"
 											type="text" /></td>
@@ -80,23 +81,24 @@
 			<div class="col-md-3 centercol-md-8 text-center">
 
 				<button style="margin-top: 3px;" id="regresar"
-					class="btn btn-secondary btn-lg"
-					onclick="goBack()"
-					type="button">
+					class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
 					<spring:theme code="ica.inicial.representantes.regresar" />
 				</button>
 				<%-- 				<button style="margin-top: 3px;" id="" onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?anoGravable=${fn:substring(icaInfObjetoFormResp.icaInfObjetoResponse.fechaIniAct,0,4)}&numObjeto=${numObjeto}' />';" --%>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<button style="margin-top: 3px;" id=""
+						onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?&numObjeto=${numObjeto}' />';"
+						class="btn btn-primary btn-lg" type="button">
+						<spring:theme code="ica.inicial.representantes.presendecla" />
+					</button>
 				</div>
-				<div class="col-md-6">
-				<button style="margin-top: 3px;" id=""
-					onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?&numObjeto=${numObjeto}' />';"
-					class="btn btn-primary btn-lg" type="button">
-					<spring:theme code="ica.inicial.representantes.presendecla" />
-				</button>
 			</div>
 		</div>
-			<div class="row">
-			<div class="col-md-12" style="background: #d2d2d2; margin-top: 20px !important;">
+		<div class="row">
+			<div class="col-md-12"
+				style="background: #d2d2d2; margin-top: 20px !important;">
 				<label class="control-label "><spring:theme
 						code="ica.inicial.representantes.nota1" /></label>
 				<div class="form-group">

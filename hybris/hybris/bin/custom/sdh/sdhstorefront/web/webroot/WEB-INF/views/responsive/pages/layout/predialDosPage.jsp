@@ -8,9 +8,29 @@
 	tagdir="/WEB-INF/tags/responsive/predial/predialPaginaDos"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
+<div class="loader"></div>
 
 <predial:predialDosGenerales />
 <predial:predialDosDatLiq />
 <predial:predialDosLiqPrivada />
 <firmas:generalFirmas />
 <predial:predialDosBotones />
+
+<script>
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+	$(".loader").fadeOut("slow");
+}
+</script>

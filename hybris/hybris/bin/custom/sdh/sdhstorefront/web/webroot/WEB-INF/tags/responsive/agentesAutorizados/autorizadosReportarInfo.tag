@@ -5,7 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -28,14 +30,13 @@
 			</table>
 		</div>
 	</div>
-
 	<div class="row">
 		<div class="col-md-12">
 			<div class="headline text-center">
-				<h1>
+				<h2>
 					<span class="col-md-10 "><spring:theme
 							code="autorizado.reportar.reportar.titulo" /></span>
-				</h1>
+				</h2>
 			</div>
 		</div>
 		<div class="col-md-12 text-center">
@@ -60,40 +61,28 @@
 
 	</div>
 
-	<form:form action="">
+	<form:form commandName="importConciliacionForm" enctype="multipart/form-data" action="/sdhstorefront/es/gestionBancaria/uploadFile" method="POST"	>
 		<div class="row" style="margin-top: 6px;">
 			<div class="col-md-4">
 				<div class="form-group">
-					<label class="control-label required"
-						style="text-transform: none"><spring:theme
-							code="autorizado.reportar.info.tiparch" /></label> <select
-						class="new_alto form-control">
+					<label class="control-label required" style="text-transform: none">
+					        <spring:theme code="autorizado.reportar.info.tiparch" />
+					</label>
+					<select class="new_alto form-control" id="tipoArchivo" name="tipoArchivo">
 						<option value="Seleccionar">Seleccionar</option>
-						<option value="Formularios">Formularios no generados por
-							la administración</option>
-						<option value="Pagos con debito">Pagos con débito</option>
-						<option value="Pagos con tarjeta de credito">Pagos con
-							tarjeta de crédito</option>
-						<option value="Declaraciones">Declaraciones</option>
-						<option value="Electronicos">Electrónicos</option>
-						<option value="Facturas, cupones y ROP's">Facturas,
-							cupones y ROP's</option>
-						<option value="Reportes de adhesivos">Reportes de
-							adhesivos</option>
-						<option value="Consignaciones">Consignaciones</option>
-						<option value="Publicidad exterior">Publicidad exterior</option>
-						<option value="Sobretasa de la gasolina">Sobretasa de la
-							gasolina</option>
+						<c:forEach items="${tipoDeArchivo}" var="tipoArchivo">
+                          <option value="${tipoArchivo.code}"><c:out value="${tipoArchivo.name}"/></option>
+                        </c:forEach>
 					</select>
-
+                    <input id="entidadBancaria" name="entidadBancaria" type="hidden" value="${entidadBancaria}">
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label required"
-						style="text-transform: capitalize"><spring:theme
-							code="autorizado.reportar.info.selarch" /></label><input type="file"
-						class="new_alto form-control" id="exampleFormControlFile1" accept=".txt">
+					<label class="control-label required" style="text-transform: capitalize">
+					    <spring:theme code="autorizado.reportar.info.selarch" />
+					 </label>
+					 <input type="file" id="conciliacionFile" name="conciliacionFile" >
 				</div>
 			</div>
 		</div>
@@ -109,10 +98,11 @@
 					<spring:theme code="autorizado.reportar.info.cancelar" />
 				</button>
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="submit">
 					<spring:theme code="autorizado.reportar.info.enviar" />
 				</button>
 			</div>
 		</div>
+
 	</form:form>
 </div>

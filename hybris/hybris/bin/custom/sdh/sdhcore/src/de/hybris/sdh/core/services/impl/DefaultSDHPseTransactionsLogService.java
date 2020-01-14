@@ -18,14 +18,20 @@ import de.hybris.sdh.core.soap.pse.PseServices;
 import de.hybris.sdh.core.soap.pse.beans.ConstantConnectionData;
 import de.hybris.sdh.core.soap.pse.eanucc.CreateTransactionPaymentResponseInformationType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseBodyType;
+import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationDetailedResponseFieldType;
 import de.hybris.sdh.core.soap.pse.eanucc.GetTransactionInformationResponseBodyType;
 import de.hybris.sdh.core.soap.pse.impl.MessageHeader;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import javax.annotation.Resource;
 
@@ -141,16 +147,26 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
 			getTransactionInformationBodyType.setTrazabilityCode(trazabilityCode);
 
-
-			//LOG.error("getTransactionInformationBodyType:" + getTransactionInformationBodyType);
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
+
+			final GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType = new GetTransactionInformationDetailedBodyType();
+			getTransactionInformationDetailedBodyType.setTrazabilityCode(trazabilityCode);
+
+			final GetTransactionInformationDetailedResponseBodyType response1 = pseServices.getTransactionInformationDetailed(
+					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationDetailedBodyType);
+
+
 
 			LOG.info("----- Response Data GetTransactionInformationBodyType -------");
 			LOG.info(response);
             LOG.info("----- Response Data GetTransactionInformationBodyType -------");
 
-			transactionState = this.updateResponse(pseTransactionsLogModel, response);
+			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
+			LOG.info(response1);
+			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
+
+			transactionState = this.updateResponse(pseTransactionsLogModel, response, response1);
 		}
 		else
 		{
@@ -181,14 +197,22 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 			final GetTransactionInformationBodyType getTransactionInformationBodyType = new GetTransactionInformationBodyType();
 			getTransactionInformationBodyType.setTrazabilityCode(trazabilityCode);
 
-			//ACH Updating Transactions
 			final GetTransactionInformationResponseBodyType response = pseServices.getTransactionInformation(
 					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationBodyType);
 
-			this.updateResponse(pseTransactionsLogModel, response);
 
-			LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
-					+ pseTransactionsLogModel.getTransactionState() + "] ");
+			final GetTransactionInformationDetailedBodyType getTransactionInformationDetailedBodyType = new GetTransactionInformationDetailedBodyType();
+			getTransactionInformationDetailedBodyType.setTrazabilityCode(trazabilityCode);
+
+			final GetTransactionInformationDetailedResponseBodyType response1 = pseServices.getTransactionInformationDetailed(
+					this.getConstantConnectionData(), this.getMessageHeader(), getTransactionInformationDetailedBodyType);
+
+            LOG.info("Actualizando Informacion PSE Transaction[" + pseTransactionsLogModel.getNumeroDeReferencia() + " - "
+                    + pseTransactionsLogModel.getTransactionState() + " -> " + response.getTransactionState().getValue() + "] ");
+
+			this.updateResponse(pseTransactionsLogModel, response, response1);
+
+
 		}
 
 	}
@@ -212,22 +236,99 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	}
 
 	private String updateResponse(final PseTransactionsLogModel pseTransactionsLogModel,
-			final GetTransactionInformationResponseBodyType response)
+			final GetTransactionInformationResponseBodyType response,
+			final GetTransactionInformationDetailedResponseBodyType responseDetailed)
 	{
 		final DateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		final HashMap<String, String> map = this.transactionInformationDetailedResponseToHash(responseDetailed);
+
 		String transactionState = null;
 		if (response != null)
 		{
+			LOG.info("----- Response Data GetTransactionInformationResponseBodyType -------");
+			LOG.info(response);
+			LOG.info("----- Response Data GetTransactionInformationDetailedResponseBodyType -------");
+			LOG.info(responseDetailed);
+			LOG.info("-----------------------------------------------------------------------------");
 
 			pseTransactionsLogModel.setSoliciteDate(dateTimeFormat.format(response.getSoliciteDate()));
-			pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(response.getBankProcessDate()));
+			try
+			{
+				pseTransactionsLogModel.setBankProcessDate(dateTimeFormat.format(map.get("bankProcessDate")));
+			}
+			catch (final Exception e)
+			{
+				pseTransactionsLogModel.setBankProcessDate(map.get("bankProcessDate"));
+			}
+
 			pseTransactionsLogModel.setTransactionState(response.getTransactionState().getValue());
+
+
+			//pseTransactionsLogModel.setPaymentOrigin(map.get("bankProcessDate"));
+			if (map.get("paymentMode").equals("Débito en Cuenta"))
+			{
+				pseTransactionsLogModel.setPaymentMode("15");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Visa"))
+			{
+				pseTransactionsLogModel.setPaymentMode("50");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito  Master Card"))
+			{
+				pseTransactionsLogModel.setPaymentMode("51");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Diners Club"))
+			{
+				pseTransactionsLogModel.setPaymentMode("52");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito Propia Entidad Financiera"))
+			{
+				pseTransactionsLogModel.setPaymentMode("53");
+			}
+			else if (map.get("paymentMode").equals("Crédito Rotativo"))
+			{
+				pseTransactionsLogModel.setPaymentMode("54");
+			}
+			else if (map.get("paymentMode").equals("Tarjeta de Crédito  American Express"))
+			{
+				pseTransactionsLogModel.setPaymentMode("55");
+			}
+			else
+			{
+				pseTransactionsLogModel.setPaymentMode("");
+			}
+
+
+
+			if (map.get("paymentOrigin").equals("Débito"))
+			{
+				pseTransactionsLogModel.setPaymentOrigin("01");
+				pseTransactionsLogModel.setTipoDeTarjeta("01");
+			}
+			else if (map.get("paymentOrigin").equals("Crédito"))
+			{
+				pseTransactionsLogModel.setPaymentOrigin("02");
+				pseTransactionsLogModel.setTipoDeTarjeta("02");
+			}
+			else
+			{
+				pseTransactionsLogModel.setPaymentOrigin("");
+			}
+
+			pseTransactionsLogModel.setObjPago(map.get("reference2"));
 
 			transactionState = response.getTransactionState().getValue();
 
-			LOG.info("Updated PseTransactionsLogModel [" + pseTransactionsLogModel.getNumeroDeReferencia() + ","
-					+ response.getSoliciteDate().toString() + ", " + response.getBankProcessDate().toString() + ", "
-					+ response.getTransactionState().getValue() + "]");
+			//Comentar Forzado de trasnacciones PENDING
+			//if (transactionState.equals("PENDING"))
+			//{
+			//	pseTransactionsLogModel.setTransactionState("OK");
+			//}
+
+			LOG.info("Updated PseTransactionsLogModel [ " + pseTransactionsLogModel.getNumeroDeReferencia() + ", "
+					+ pseTransactionsLogModel.getPaymentMode() + ", " + pseTransactionsLogModel.getPaymentOrigin() + ", "
+					+ pseTransactionsLogModel.getObjPago() + pseTransactionsLogModel.getSoliciteDate() + ", "
+					+ pseTransactionsLogModel.getBankProcessDate() + ", " + pseTransactionsLogModel.getTransactionState() + " ]");
 
 			modelService.saveAll(pseTransactionsLogModel);
 		}
@@ -337,8 +438,8 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 
 				modelService.saveAll(pseTransactionsLogModel);
 
-				LOG.info(response);
 				LOG.info("UpdateCredibancoTransaction:[ numeroReferencia(NUS)=" + pseTransactionsLogModel.getNumeroDeReferencia() + "]");
+                LOG.info(response);
 			}
 			else
 			{
@@ -364,5 +465,20 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 	{
 		// XXX Auto-generated method stub
 
+	}
+
+	private HashMap<String, String> transactionInformationDetailedResponseToHash(final GetTransactionInformationDetailedResponseBodyType transactionInformationDetailed){
+		final HashMap<String, String> map = new HashMap<>();
+
+		LOG.info("-------- TransactionInformationDetailedResponseToHash -------");
+		if(Objects.nonNull(transactionInformationDetailed)){
+			LOG.info("Return Code: " + transactionInformationDetailed.getReturnCode());
+			final Stream<GetTransactionInformationDetailedResponseFieldType> stream = Arrays.stream(transactionInformationDetailed.getField());
+			stream.forEach(data -> map.put(data.getName(),data.getValue()));
+		}
+		LOG.info(map);
+		LOG.info("-------- TransactionInformationDetailedResponseToHash -------");
+
+		return map;
 	}
 }

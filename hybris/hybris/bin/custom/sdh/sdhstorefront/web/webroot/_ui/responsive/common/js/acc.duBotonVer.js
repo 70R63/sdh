@@ -80,6 +80,8 @@ ACC.duBotonVer = {
 	bindGeneraDeclaracionButton: function () {
 		 $(document).on("click", "#duGeneraDeclaracionButton", function (e) {
 	 	        e.preventDefault();
+				
+			   debugger;	
 	 	        
 	 	       var numForm  = $.trim($("#numForm").val());
 	 	 
@@ -93,7 +95,8 @@ ACC.duBotonVer = {
 		            type: "GET",
 		            success: function (data) {
 		            	$( "#dialogDU" ).dialog( "open" );
-		            	if(data.errores)
+						debugger;
+		            	if(data.errores && ( data.errores[0].idmsj != 0 ))
 	            		{
 		            		$("#duDialogContent").html("");
 		            		$.each(data.errores, function( index, value ) {
@@ -103,6 +106,7 @@ ACC.duBotonVer = {
 		            		
 	            		}else
 	            		{
+	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#duDialogContent").html("");
 	            			$("#duDialogContent").html("La declaración se ha generado exitosamente.")
 	            			

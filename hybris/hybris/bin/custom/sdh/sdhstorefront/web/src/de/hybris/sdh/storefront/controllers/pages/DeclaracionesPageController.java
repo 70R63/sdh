@@ -8,21 +8,28 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
+import de.hybris.sdh.core.pojos.requests.ReteIcaRequest;
+import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
+import de.hybris.sdh.core.pojos.responses.ReteIcaResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHICAInfObjetoService;
+import de.hybris.sdh.core.services.SDHReteIcaService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 
@@ -31,7 +38,9 @@ import java.io.InputStream;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,15 +67,16 @@ public class DeclaracionesPageController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Declaraciones";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declaraciones";
 
 	// CMS Pages
 	private static final String DECLARACIONES_CMS_PAGE = "declaracionesPage";
 
 	private static final String REDIRECT_TO_DECLARACIONES_PAGE = REDIRECT_PREFIX + "/contribuyentes/consultas/declaraciones";
 
+
 	@Resource(name = "customBreadcrumbBuilder")
-	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+	private DefaultResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "sdhCertificaRITService")
 	SDHCertificaRITService sdhCertificaRITService;
@@ -92,7 +102,15 @@ public class DeclaracionesPageController extends AbstractPageController
 	@Resource(name = "mediaService")
 	private MediaService mediaService;
 
-	@RequestMapping(value = "/contribuyentes/consultas/declaraciones", method = RequestMethod.GET)
+	@Resource(name = "sdhICAInfObjetoService")
+	SDHICAInfObjetoService sdhICAInfObjetoService;
+
+	@Resource(name = "sdhReteIcaService")
+	SDHReteIcaService sdhReteICAInfObjetoService;
+
+
+	@RequestMapping(value =
+	{ "/contribuyentes/consultas/declaraciones", "/agenteRetenedor/consultas/declaraciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String declaracionesGET(final Model model) throws CMSItemNotFoundException
 	{
@@ -129,6 +147,100 @@ public class DeclaracionesPageController extends AbstractPageController
 		System.out.println("------------------Entro al POST de Agentes Declaraciones------------------------");
 
 		return REDIRECT_TO_DECLARACIONES_PAGE;
+	}
+
+
+	@RequestMapping(value = "/contribuyentes/consultas/declaraciones/tipoPeriodoDec", method = RequestMethod.GET)
+	@ResponseBody
+	public OpcionDeclaracionesVista tipoPeriodoDecGET(@ModelAttribute("dataForm")
+	final OpcionDeclaracionesVista infoVista, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("------------------En GET tipo de periodo para declaracion------------------------");
+
+		final ObjectMapper mapper = new ObjectMapper();
+		String response = null;
+		final String impuesto = "";
+
+
+		infoVista.setTipoPeriodoDec(null);
+
+		try
+		{
+			if (infoVista.getCustomerData() == null)
+			{
+				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+				infoVista.setCustomerData(sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP()));
+			}
+
+			switch (infoVista.getClaveImpuesto())
+			{
+				case "0003":
+					final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
+					icaInfObjetoRequest.setNumBP(infoVista.getCustomerData().getInfoContrib().getNumBP());
+					icaInfObjetoRequest.setNumObjeto(infoVista.getCustomerData().getIca().getNumObjeto());
+					icaInfObjetoRequest.setAnoGravable("");
+					icaInfObjetoRequest.setPeriodo("");
+
+
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
+					final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
+
+					if (StringUtils.isAllEmpty(icaInfObjetoResponse.getPeriodo()))
+					{
+						infoVista.setTipoPeriodoDec("0");
+					}
+					else
+					{
+						infoVista.setTipoPeriodoDec("2");
+					}
+					break;
+
+
+				case "0004":
+
+					final ReteIcaRequest reteicaInfObjetoRequest = new ReteIcaRequest();
+					reteicaInfObjetoRequest.setNumBP(infoVista.getCustomerData().getInfoContrib().getNumBP());
+					reteicaInfObjetoRequest.setNumObjeto(infoVista.getCustomerData().getReteIca().getNumObjeto());
+					reteicaInfObjetoRequest.setAnoGravable("");
+					reteicaInfObjetoRequest.setPeriodo("");
+
+					mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+					response = sdhReteICAInfObjetoService.reteICA(reteicaInfObjetoRequest);
+					final ReteIcaResponse reteicaInfObjetoResponse = mapper.readValue(response, ReteIcaResponse.class);
+
+
+
+					//					if (StringUtils.isAllEmpty(reteicaInfObjetoResponse.getPeriodo()))
+					if (reteicaInfObjetoResponse == null)
+					{
+						infoVista.setTipoPeriodoDec("0");
+					}
+					else
+					{
+						infoVista.setTipoPeriodoDec("2");
+					}
+					break;
+
+				case "0005":
+					infoVista.setTipoPeriodoDec("1");
+					break;
+				default:
+					infoVista.setTipoPeriodoDec("0");
+					break;
+			}
+
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error al determinar tipo de periodo para el impuesto: " + e.getMessage());
+		}
+
+
+
+		return infoVista;
 	}
 
 
@@ -228,7 +340,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		numObjeto = infoVista.getObjContrato(); //gasolinaService.obtenerNumDocDeclaraciones(customerData2, claseObjeto);
 		anioGravable = infoVista.getAnoGravable();
 		periodo = infoVista.getPeriodo();
-		radicado = "";
+		radicado = infoVista.getReferencia();
 
 		infoVista.setUrlDownload(null);
 		infoVista.setDeclaraPDFResponse(null);

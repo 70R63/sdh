@@ -4,8 +4,9 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<div class="loader"></div>
 
-<div class="container">
+<div class="container_new_page">
 	<div class="row ">
 			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
 				<a href="<c:url value='/terceros/sim/buscar' />">
@@ -36,3 +37,10 @@
 		</div>	
 	</div>
 </div>
+
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

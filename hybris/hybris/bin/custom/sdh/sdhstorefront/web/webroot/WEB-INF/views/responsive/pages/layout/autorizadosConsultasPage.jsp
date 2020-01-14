@@ -7,12 +7,33 @@
 <%@ taglib prefix="agentes"
 	tagdir="/WEB-INF/tags/responsive/agentesAutorizadosConsulta"%>
 
+
+<div class="loader"></div>
+
+
 <agentes:consultainicial />
-<div id="tabla" style="display: none;">
-	<agentes:consultaTable />
-</div>
+<c:if test="${fileConsultaResponse.resultado != null}">
+    <agentes:consultaTable />
+</c:if>
+
 
 <script type="text/javascript">
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+	  $(".loader").fadeOut("slow");
+}
 	function goBack() {
 		window.history.back();
 	}
@@ -35,7 +56,7 @@
 								"oPaginate" : {
 									"sPrevious" : " Anterior ",
 									"sNext" : " Siguiente ",
-									"sLast" : " Última ",
+									"sLast" : " ï¿½ltima ",
 									"sFirst" : " Primera "
 								},
 								"sLengthMenu" : 'Mostrar <select>'

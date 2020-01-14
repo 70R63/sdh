@@ -9,18 +9,24 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
+import de.hybris.sdh.core.pojos.requests.CalculoReteIca2Request;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIcaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response;
+import de.hybris.sdh.core.pojos.responses.CalculoReteIcaInfoDeclara;
 import de.hybris.sdh.core.pojos.responses.CalculoReteIcaResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHReteIcaFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.pages.forms.ReteICACalculoForm;
@@ -45,6 +51,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
 
@@ -80,6 +87,9 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 
+	@Resource(name = "sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
+
 
 	@RequestMapping(value = "/retenedores/declaracion", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -97,6 +107,9 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 
 		final CustomerData customerData = getCustomerFacade().getCurrentCustomer();
 		final CalculoReteIcaRequest request = new CalculoReteIcaRequest();
+		super.addFirmantes_impuesto(model, null, customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "/retenedores/registroretenciones");
 
 		request.setNumBP(customerData.getNumBP());
 		request.setNumForm(numForm);
@@ -169,6 +182,8 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 
 
 		generaDeclaracionRequest.setNumForm(numForm);
+		generaDeclaracionRequest.setNum_id(customerData.getNumBP());
+		generaDeclaracionRequest.setTipo_id(customerData.getDocumentType());
 
 		try
 		{
@@ -226,6 +241,103 @@ public class RetenedoresDeclaracionPageController extends RetenedoresAbstractPag
 
 		return generaDeclaracionResponse;
 
+	}
+
+
+	@RequestMapping(value = "/reteica/declaracion/show", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String retenedoricadeclaracion_show(@RequestParam(value = "representado")
+	final String representado, @RequestParam(value = "numForm")
+	final String numForm, @RequestParam(value = "anoGravable")
+	final String anoGravable, @RequestParam(value = "perRepor")
+	final String perRepor, final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En ReteIca2 Agente Autorizado GET --------------------------");
+		if (StringUtils.isBlank(numForm))
+		{
+			return "redirect:" + "/retenedores/estadocargas";
+		}
+
+
+		final CustomerData currentUserData = this.getCustomerFacade().getCurrentCustomer();
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final SDHValidaMailRolResponse contribuyenteData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+
+		model.addAttribute("contribuyenteData", contribuyenteData);
+		model.addAttribute("currentUserData", currentUserData);
+		model.addAttribute("redirectURL",
+				"/retenedores/registroretenciones?representado="
+						+ contribuyenteData.getNumBP());
+
+		model.addAttribute("customerData", currentUserData);
+		addAgentsToModel(model, currentUserData, null);
+
+
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+		CalculoReteIcaResponse calculoResponse = null;
+		CalculoReteIca2Response calculo2Response = null;
+		final CalculoReteIca2Request request = new CalculoReteIca2Request();
+
+		request.setPartner(representado);
+		request.setFormulario(numForm);
+
+
+		System.out.println("Request para calculoImp/ReteIca2: " + request);
+		calculo2Response = gasolinaService.consultaReteIca2(request, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de calculoImp/ReteIca2: " + calculo2Response);
+		if (gasolinaService.ocurrioErrorCalc2Reteica(calculo2Response) != true)
+		{
+
+			if (calculo2Response != null)
+			{
+				super.addFirmantes_impuesto(model, calculo2Response.getIcaFirmantes(), currentUserData);
+				calculoResponse = new CalculoReteIcaResponse();
+				final CalculoReteIcaInfoDeclara infoDeclara = new CalculoReteIcaInfoDeclara();
+				infoDeclara.setBaseReten(calculo2Response.getInfoDeclara().getBaseReten());
+				infoDeclara.setDescDevol(calculo2Response.getInfoDeclara().getDescDevol());
+				infoDeclara.setInteresMora(calculo2Response.getInfoDeclara().getInteresMora());
+				infoDeclara.setSancion(calculo2Response.getInfoDeclara().getSancion());
+				infoDeclara.setTotalPagar(calculo2Response.getInfoDeclara().getTotalPagar());
+				infoDeclara.setTotalReteDecl(calculo2Response.getInfoDeclara().getTotalReteDecl());
+				infoDeclara.setTotalRetePer(calculo2Response.getInfoDeclara().getTotalRetePer());
+				infoDeclara.setTotalSaldo(calculo2Response.getInfoDeclara().getTotalSaldo());
+				infoDeclara.setValorPagar(calculo2Response.getInfoDeclara().getValorPagar());
+				calculoResponse.setInfoDeclara(infoDeclara);
+				calculoResponse.setNumForm(calculo2Response.getNumForm());
+			}
+
+
+			//			final SDHValidaMailRolResponse customerData2 = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+			infoPreviaPSE.setAnoGravable(anoGravable);
+			infoPreviaPSE.setTipoDoc(contribuyenteData2.getInfoContrib().getTipoDoc());
+			infoPreviaPSE.setNumDoc(contribuyenteData2.getInfoContrib().getNumDoc());
+			infoPreviaPSE.setNumBP(contribuyenteData2.getInfoContrib().getNumBP());
+			infoPreviaPSE.setPeriodo(perRepor);
+			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoBimestralPago(anoGravable, perRepor));
+			infoPreviaPSE.setDv(gasolinaService.prepararDV(contribuyenteData2));
+			infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoReteICA(contribuyenteData2));
+			infoPreviaPSE.setTipoImpuesto(new ControllerPseConstants().getRETEICA());
+		}
+		else
+		{
+			//			mensajeError = detalleContribuyente.getTxtmsj();
+			//			LOG.error("Error al leer informacion del Contribuyente: " + mensajeError);
+			//			GlobalMessages.addErrorMessage(model, "error.impuestoGasolina.sobretasa.error2");
+		}
+
+		model.addAttribute("calculoResponse", calculoResponse);
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(RETEICA_DECLARACION_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(RETEICA_DECLARACION_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(RETEICA_DECLARACION_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+
+
+		return getViewForPage(model);
 	}
 
 }

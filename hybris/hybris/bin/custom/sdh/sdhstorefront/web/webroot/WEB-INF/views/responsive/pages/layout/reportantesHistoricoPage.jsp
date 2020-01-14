@@ -7,6 +7,7 @@
 <%@ taglib prefix="reportantes"
 	tagdir="/WEB-INF/tags/responsive/reportantesInformacion"%>
 
+<div class="loader"></div>
 
 <div class="container_new_page">
 	<reportantes:reportantesHistoricoInicial />
@@ -24,8 +25,12 @@
 	</div>
 </div>
 
-
 <script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+
 	function ShowSelected(selectObject) {
 		var value = selectObject.value;
 		document.getElementById("Idinrepor").value = value;

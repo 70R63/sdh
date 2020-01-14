@@ -14,10 +14,12 @@ public class ItemListaDeclaraciones
 	private String ctaContrato;
 	private String numObjeto;
 	private String clavePeriodo;
+	private String desc_clavePeriodo;
 	private String referencia;
 	private String numForm;
 	private String taxpayer;
 	private String numRadicado;
+	private String noRadicado;
 	private String creacion;
 	private String modificacion;
 	private String fechaCompensa; //Para consulPagos
@@ -25,7 +27,46 @@ public class ItemListaDeclaraciones
 	private String moneda; //Para consulPagos
 	private String numfactForm; //Para consulPagos
 	private String numDocPago; //Para consulPagos
-	
+
+
+
+
+
+
+	/**
+	 * @return the numRadicado
+	 */
+	public String getNumRadicado()
+	{
+		return numRadicado;
+	}
+
+	/**
+	 * @param numRadicado
+	 *           the numRadicado to set
+	 */
+	public void setNumRadicado(final String numRadicado)
+	{
+		this.numRadicado = numRadicado;
+	}
+
+	/**
+	 * @return the noRadicado
+	 */
+	public String getNoRadicado()
+	{
+		return noRadicado;
+	}
+
+	/**
+	 * @param noRadicado
+	 *           the noRadicado to set
+	 */
+	public void setNoRadicado(final String noRadicado)
+	{
+		this.noRadicado = noRadicado;
+	}
+
 	/**
 	 * @return the numBP
 	 */
@@ -33,7 +74,7 @@ public class ItemListaDeclaraciones
 	{
 		return numBP;
 	}
-	
+
 	/**
 	 * @param numBP
 	 *           the numBP to set
@@ -49,7 +90,7 @@ public class ItemListaDeclaraciones
 	{
 		return ctaContrato;
 	}
-	
+
 	/**
 	 * @param ctaContrato
 	 *           the ctaContrato to set
@@ -65,7 +106,7 @@ public class ItemListaDeclaraciones
 	{
 		return numObjeto;
 	}
-	
+
 	/**
 	 * @param numObjeto
 	 *           the numObjeto to set
@@ -81,7 +122,7 @@ public class ItemListaDeclaraciones
 	{
 		return clavePeriodo;
 	}
-	
+
 	/**
 	 * @param clavePeriodo
 	 *           the clavePeriodo to set
@@ -90,6 +131,24 @@ public class ItemListaDeclaraciones
 	{
 		this.clavePeriodo = clavePeriodo;
 	}
+
+	/**
+	 * @return the desc_clavePeriodo
+	 */
+	public String getDesc_clavePeriodo()
+	{
+		return desc_clavePeriodo;
+	}
+
+	/**
+	 * @param desc_clavePeriodo
+	 *           the desc_clavePeriodo to set
+	 */
+	public void setDesc_clavePeriodo(final String desc_clavePeriodo)
+	{
+		this.desc_clavePeriodo = desc_clavePeriodo;
+	}
+
 	/**
 	 * @return the referencia
 	 */
@@ -97,7 +156,7 @@ public class ItemListaDeclaraciones
 	{
 		return referencia;
 	}
-	
+
 	/**
 	 * @param referencia
 	 *           the referencia to set
@@ -106,7 +165,7 @@ public class ItemListaDeclaraciones
 	{
 		this.referencia = referencia;
 	}
-	
+
 	/**
 	 * @return the numForm
 	 */
@@ -141,22 +200,7 @@ public class ItemListaDeclaraciones
 		this.taxpayer = taxpayer;
 	}
 
-	/**
-	 * @return the numRadicado
-	 */
-	public String getNumRadicado()
-	{
-		return numRadicado;
-	}
-	
-	/**
-	 * @param numRadicado
-	 *           the numRadicado to set
-	 */
-	public void setNumRadicado(final String numRadicado)
-	{
-		this.numRadicado = numRadicado;
-	}
+
 	/**
 	 * @return the creacion
 	 */
@@ -164,7 +208,7 @@ public class ItemListaDeclaraciones
 	{
 		return creacion;
 	}
-	
+
 	/**
 	 * @param creacion
 	 *           the creacion to set
@@ -180,7 +224,7 @@ public class ItemListaDeclaraciones
 	{
 		return modificacion;
 	}
-	
+
 	/**
 	 * @param modificacion
 	 *           the modificacion to set
@@ -277,7 +321,7 @@ public class ItemListaDeclaraciones
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -285,7 +329,8 @@ public class ItemListaDeclaraciones
 	{
 		return "ItemListaDeclaraciones [numBP=" + numBP + ", ctaContrato=" + ctaContrato + ", numObjeto=" + numObjeto
 				+ ", clavePeriodo=" + clavePeriodo + ", referencia=" + referencia + ", numForm=" + numForm + ", taxpayer=" + taxpayer
-				+ ", numRadicado=" + numRadicado + ", creacion=" + creacion + ", modificacion=" + modificacion + ", fechaCompensa="
+				+ ", numRadicado=" + numRadicado + ", noRadicado=" + noRadicado + ", creacion=" + creacion + ", modificacion="
+				+ modificacion + ", fechaCompensa="
 				+ fechaCompensa + ", importe=" + importe + ", moneda=" + moneda + ", numfactForm=" + numfactForm + ", numDocPago="
 				+ numDocPago + "]";
 	}

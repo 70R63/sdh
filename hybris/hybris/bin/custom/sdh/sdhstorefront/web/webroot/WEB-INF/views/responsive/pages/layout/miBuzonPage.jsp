@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="mibuzon" tagdir="/WEB-INF/tags/responsive/miBuzon"%>
 
-
+<div class="loader"></div>
 
 
 	<mibuzon:miBuzonInicial />
@@ -19,6 +19,22 @@
 
 
 <script>
+
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
+
+			}
+		}
+	}
+	 $(".loader").fadeOut("slow");
+}
 	function myFunction(idButton) {
 
 		var idNotifi = document.getElementById('idNotifi');

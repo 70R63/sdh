@@ -7,6 +7,8 @@
 	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/nav"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<div class="loader"></div>
+
 <div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
@@ -32,7 +34,7 @@
 			<a href="<c:url value='/contibuyentes/tramites/crear' />">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
 					<img title="crear" alt="crear" class="card-section-content imgagen_tran"
-						src="${themeResourcePath}/images/crear_tramites.jpg">
+						src="${themeResourcePath}/images/Contribuyente.png" width="91">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
 					<div class="card-section-h2">
@@ -58,7 +60,7 @@
 			<a href="<c:url value='/contibuyentes/tramites/seguimiento' />">
 				<div class=" card-section col-xs-3 col-sm-2 col-md-2 col-lg-1">
 					<img title="seguimiento" alt="seguimiento" class="card-section-content imgagen_tran"
-						src="${themeResourcePath}/images/seguimiento_tramites.jpg">
+						src="${themeResourcePath}/images/ReportanteInformacion.png" width="91">
 				</div>
 				<div class="card-section  col-xs-8 col-sm-10 col-md-10">
 					<div class="card-section-h2">
@@ -80,3 +82,10 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+window.onload = function() {
+	
+    $(".loader").fadeOut("slow");
+}
+</script>

@@ -9,22 +9,102 @@ package de.hybris.sdh.storefront.forms;
  */
 public class SecretAnswerForm
 {
-	private String FNAM;
-	private String REDS;
-	private String TELM;
-	private String DIR;
-	private String AGE;
-	private String DIR2;
-	private String IMP;
-	private String PLA;
-	private String MAT;
-	private String BAN;
-	private String REL01;
-	private String REL02;
-	private String REL03;
-	private String REL04;
-	private String REL05;
+	private String FNAM; //-
+	private String REDS; //-
+	private String TELM; //-
+	private String DIR; //-
+	private String AGE; //-
+	private String DIR2; //-
+	private String IMP; //-
+	private String PLA; //-
+	private String MAT; //-
+	private String BAN; //-
+	private String REL01; //-
+	private String REL02; //-
+	private String REL03; //-
+	private String REL04; //-
+	private String REL05; //-
+	private String DIR2_0001; //-
+	private String DIR2_0002; //-
+	private String DIR_0001; //-
+	private String DIR_0002; //-
+	private String PLA_0001;
+	private String PLA_0002;
 
+
+
+
+	/**
+	 * @return the pLA_0001
+	 */
+	public String getPLA_0001()
+	{
+		return PLA_0001;
+	}
+
+	/**
+	 * @param pLA_0001
+	 *           the pLA_0001 to set
+	 */
+	public void setPLA_0001(final String pLA_0001)
+	{
+		PLA_0001 = pLA_0001;
+	}
+
+	/**
+	 * @return the dIR_0001
+	 */
+	public String getDIR_0001()
+	{
+		return DIR_0001;
+	}
+
+	/**
+	 * @param dIR_0001
+	 *           the dIR_0001 to set
+	 */
+	public void setDIR_0001(final String dIR_0001)
+	{
+		DIR_0001 = dIR_0001;
+	}
+
+
+
+
+
+	/**
+	 * @return the dIR_0002
+	 */
+	public String getDIR_0002()
+	{
+		return DIR_0002;
+	}
+
+	/**
+	 * @param dIR_0002
+	 *           the dIR_0002 to set
+	 */
+	public void setDIR_0002(final String dIR_0002)
+	{
+		DIR_0002 = dIR_0002;
+	}
+
+	/**
+	 * @return the dIR2_0001
+	 */
+	public String getDIR2_0001()
+	{
+		return DIR2_0001;
+	}
+
+	/**
+	 * @param dIR2_0001
+	 *           the dIR2_0001 to set
+	 */
+	public void setDIR2_0001(final String dIR2_0001)
+	{
+		DIR2_0001 = dIR2_0001;
+	}
 
 	/**
 	 * @return the fNAM
@@ -282,6 +362,20 @@ public class SecretAnswerForm
 	}
 
 
+	public String getDIR2_0002() {
+		return DIR2_0002;
+	}
 
+	public void setDIR2_0002(String DIR2_0002) {
+		this.DIR2_0002 = DIR2_0002;
+	}
 
+	public String getPLA_0002() {
+		return PLA_0002;
+	}
+
+	public void setPLA_0002(String PLA_0002) {
+		this.PLA_0002 = PLA_0002;
+	}
 }
+

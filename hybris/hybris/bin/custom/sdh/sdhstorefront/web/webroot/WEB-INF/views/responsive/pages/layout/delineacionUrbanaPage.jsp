@@ -7,61 +7,162 @@
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-
+<div class="loader"></div>
 
 <delineacionUrbana:delineacionUrbanaIDs />
 <delineacionUrbana:delineacionUrbanaCDUs />
 <delineacionUrbana:delineacionUrbanaRadicados />
 
+<script>
 
+window.onload = function() {
+	debugger;
+	var cosas = $(":input");
+	var tam = cosas.length;
+	if (false){
+		for (var i = 0; i < tam; i++) {
+			var valor = cosas[i].value;
+			if (valor == "") {
+				cosas[i].value = "-";
 
-<script type="text/javascript">
+			}
+		}
+	}
+		$(".loader").fadeOut("slow");
+
+}
 	function goBack() {
-		window.history.back();
-	}
-	document.onreadystatechange = function() {
-		if (document.readyState == "complete") {
-			datatable();
+		var declaracion = '${param.declaracion}';
+
+		if (declaracion) {
+			window.location.href = "/sdhstorefront/es/contribuyentes/presentar-declaracion";
+		} else {
+			window.history.back();
 		}
 	}
 
-	function datatable(e) {
-		if ($.fn.dataTable.isDataTable('#example')) {
-			table = $('#example').DataTable();
-			table.destroy();
+	function nuevos(selectObject) {
+
+		var value = selectObject.value;
+		var cauex = document.getElementById('cauexen').value;
+		var auex = document.getElementById('valorExen');
+
+		if (value == '09' && (cauex == '00' || cauex == '')) {
+			auex.readonly = true;
+		} else if (value == '09' && (cauex != '00' || cauex != '')) {
+			auex.readonly = true;
+		} else if (value != '09'
+				&& (cauex == '00' || cauex == '' || cauex == "")) {
+			auex.readonly = true;
+		} else {
+			auex.readonly = false;
 		}
-		var tabla = $("#example")
-				.DataTable(
-						{
-							"sPaginationType" : "full_numbers",
-							"oLanguage" : {
-								"oPaginate" : {
-									"sPrevious" : " Anterior ",
-									"sNext" : " Siguiente ",
-									"sLast" : " Última ",
-									"sFirst" : " Primera "
-								},
-								"sLengthMenu" : 'Mostrar <select>'
-										+ '<option value="5">5</option>'
-										+ '<option value="10">10</option>'
-										+ '<option value="15">15</option>'
-										+ '<option value="20">20</option>'
-										+ '<option value="30">30</option>'
-										+ '</select> registros',
-								"sInfo" : "Mostrando _START_ al _END_ de _TOTAL_ registros",
-								"sInfoFiltered" : " Filtrados de MAX registros",
-								"sInfoEmpty" : " ",
-								"sZeroRecords" : "No se encontraron registros",
-								"sProcessing" : "Espere, por favor...",
-								"sSearch" : "Buscar:",
-							}
-						});
+
+	}
+	window.onload = function data() {
+		debugger;
+
+		
+// 	var value = document.getElementById("selecmodlicen");
+// 		var areaintervenida = document.getElementById('selectareinter');
+// 		var inareainter = document.getElementById('inputareainter');
+// 		var mod = document.getElementById('an').val;
+// 		var cauex = document.getElementById('cauexen').value;
+// 		var auex = document.getElementById('valorExen');
+// 		var tiplin = document.getElementById('tipoDeLicencia');
+
+// 		if (mod == '09' && (cauex == '00' || cauex == '')) {
+// 			auex.readonly = true;
+// 		} else if (mod == '09' && (cauex != '00' || cauex != '')) {
+// 			auex.readonly = true;
+// 		} else if (mod != '09' && (cauex == '00' || cauex == '' || cauex == "")) {
+// 			auex.readonly = true;
+// 		} else {
+// 			auex.readonly = false;
+// 		}
+
+// 		if (cauex == '' || cauex == "00") {
+// 			tiplin.readonly = true;
+// 		}
+
+// 		if (value == '6') {
+
+// 			areaintervenida.readonly = false;
+// 			inareainter.readonly = false;
+
+// 		} else {
+// 			areaintervenida.readonly = true;
+// 			inareainter.readonly = true;
+// 		}
+		$(".loader").fadeOut("slow");
 	}
 
-	function show() {
-		var idRad = document.getElementById('idRadicados');
-		idRad.style.display = 'block';
+	function tipoLicenciaCHANGE(selectObject) {
 
+		//Validacion tipo de licencia = 02
+		var valorExen = document.getElementById('valorExen');
+		var tipoMarca = document.getElementById('tipoMarca');
+		var tipoDeLicencia = selectObject.value;
+
+		if ((tipoDeLicencia == "02") && (tipoMarca.value != "")) {
+			valorExen.disabled = false;
+			valorExen.readonly = false;
+
+		} else {
+			valorExen.disabled = true;
+			valorExen.readonly = true;
+		}
+
+	}
+
+	function pagarlinea() {
+
+		var btnpaglinea = document.getElementById('action');
+		btnpaglinea.disabled = false;
+
+	}
+
+	function presdec() {
+		var btnpresdec = document.getElementById('duGeneraDeclaracionButton');
+		btnpresdec.disabled = false;
+
+	}
+
+	function numberFormat(selectObject) {
+		var numero = selectObject.value;
+		var idinput = selectObject.id;
+		var resultado = "";
+
+		if (numero[0] == "-") {
+			nuevoNumero = numero.replace(/\./g, '').substring(1);
+		} else {
+
+			nuevoNumero = numero.toString().replace(/\./g, '');
+		}
+
+		if (numero.toString().indexOf(",") >= 0)
+			nuevoNumero = nuevoNumero.substring(0, nuevoNumero.indexOf(","));
+
+		for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++) {
+			resultado = nuevoNumero.charAt(i)
+					+ ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
+
+			if (numero.toString().indexOf(",") >= 0)
+				resultado += numero.substring(numero.indexOf(","));
+
+			if (numero[0] == "-") {
+
+				document.getElementById(idinput).value = "-" + resultado;
+				return "-" + resultado;
+			} else {
+				document.getElementById(idinput).value = resultado;
+				return resultado;
+
+			}
+
+		}
 	}
 </script>
+
+
 

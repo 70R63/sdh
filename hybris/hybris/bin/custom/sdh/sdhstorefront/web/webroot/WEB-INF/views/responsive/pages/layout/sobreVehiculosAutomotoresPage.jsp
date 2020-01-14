@@ -7,15 +7,34 @@
 <%@ taglib prefix="sobreVehiculos"
 	tagdir="/WEB-INF/tags/responsive/sobreVehiculos"%>
 
+<div class="loader"></div>
 
 <sobreVehiculos:sobreVehiculosTable />
+<div id="detalleVehiculos" style="display: none">
 <sobreVehiculos:sobreVehiculosDetail />
 <sobreVehiculos:sobreVehiculosJuridicos />
 <sobreVehiculos:sobreVehiculosMarcas />
 <sobreVehiculos:sobreVehiculosLiquida />
+</div>
 
 <script>
 	function goBack() {
 		window.history.back();
 	}
+
+	window.onload = function() {
+		var cosas = $(":input");
+		var tam = cosas.length;
+		if (false){
+			for (var i = 0; i < tam; i++) {
+				var valor = cosas[i].value;
+				if (valor == "") {
+					cosas[i].value = "-";
+				}
+			}
+		}	
+		 $(".loader").fadeOut("slow");
+	}
 </script>
+
+
