@@ -59,7 +59,7 @@
 								<c:if test = "${disabled eq true}">
 									<div id="continuar">										
 										<c:if test = "${representado eq true}">										
-											<button class="btn btn-secondary btn-lg pagoARResponse" type="button" >
+											<button class="btn btn-secondary btn-lg pagoARResponses" type="button" onclick="msgARImpresion()" >
 												<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
 											</button>
 										</c:if>
@@ -83,6 +83,10 @@
 </div>
 
 <script>
+	function msgARImpresion(){		
+		alert("La impresion de certificado se realiza con usuario del contribuyente o usuario NIT");
+	}
+
 	function downloadPDF(pdf) {
 		debugger;
 		if (pdf){
