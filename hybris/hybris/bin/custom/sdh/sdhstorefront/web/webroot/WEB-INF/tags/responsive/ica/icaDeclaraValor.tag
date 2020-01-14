@@ -265,11 +265,10 @@
 
 		debugger;
 		var tam = $(".valor").length;
-		var idMes = "mesValorRetenido_"+tam;
 		if ($(".valor").length < 20) {
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
-			$($(".valor")[0]).parent().children().last().find(".mes").val("")
-			$($(".valor")[0]).parent().children().last().find(".dia").val("")
+			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").val("")
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").val("")
 			$($(".valor")[0]).parent().children().last().find(".tipo").val("")
 			$($(".valor")[0]).parent().children().last().find(".numID").val("")
 			$($(".valor")[0]).parent().children().last().find(".razonSocial")
@@ -287,11 +286,11 @@
 			$($(".valor")[0]).parent().children().last().find(".montoRetenido")
 					.val("")
 
-			$($(".valor")[0]).parent().children().last().find(".mes").attr("id",
+			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").attr("id",
 				"mesValorRetenido_"+tam);
-			$($(".valor")[0]).parent().children().last().find(".dia").attr("id",
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").attr("id",
 				"diaValorRetenido_"+tam);
-			$($(".valor")[0]).parent().children().last().find(".dia").attr("disabled",
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").attr("disabled",
 					"disabled");
 		} else {
 			alert("No se pueden agregar m�s registros");
