@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -717,6 +718,20 @@ public class PSEPaymentController extends AbstractPageController
 
 	private InititalizeTransactionResponse doCredibancoPayment(final PSEPaymentForm psePaymentForm)
 	{
+
+		final int i_ceros = 14
+				- (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());
+
+		String s_ceros = new String();
+		for (int i = 1; i <= i_ceros; i++)
+		{
+			s_ceros = s_ceros + "0";
+		}
+
+		final String s_reference3 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
+
+
+
 		final InititalizeTransactionRequest inititalizeTransactionRequest = new InititalizeTransactionRequest(
 				psePaymentForm.getNumeroDeReferencia(),
 				"0" + psePaymentForm.getTipoDeImpuesto(),
@@ -727,8 +742,8 @@ public class PSEPaymentController extends AbstractPageController
 				psePaymentForm.getValorAPagar(),
 				"0", //Tax
 				"NonRef#1",
-				"NonRef#2",
-				"NonRef#3",
+				psePaymentForm.getNumeroDeReferencia(), //NonRef#2
+				s_reference3, //NonRef#3
 				psePaymentForm.getBanco()); //bankCode
 
 		return sdhCredibancoJwt.inititalizeTransaction(inititalizeTransactionRequest);

@@ -992,7 +992,6 @@ debugger;
 		var tablepublicidad = document.getElementById('table-publicidad');
 		var tablegasolina = document.getElementById('table-gasolina');
 		var cdus = document.getElementById('table-delineacion');
-		var rcdus = document.getElementById('table-retedelineacion');
 		
 		
 		tablepredial.style.display = 'none';
@@ -1001,7 +1000,6 @@ debugger;
 		tablereteica.style.display = 'none';
 		tablegasolina.style.display = 'none';
 		cdus.style.display = 'none';
-		rcdus.style.display = 'none';
 		tablepublicidad.style.display = 'none';
 		
 		ACC.opcionDeclaraciones.vaciarTablasInfo();
@@ -1020,8 +1018,6 @@ debugger;
 			cdus.style.display = 'block';
 		} else if (x == '0007') { //publicidad
 			tablepublicidad.style.display = 'block';
-		} else if (x == '0008') { //retedelineacion
-			rcdus.style.display = 'block';
 		} 
 		
 		
@@ -1034,7 +1030,7 @@ debugger;
 		$("#table-ica1").find("tr:gt(0)").remove();
 		$("#table-reteica1").find("tr:gt(0)").remove();
 		$("#table-delineacion1").find("tr:gt(0)").remove();
-		$("#table-retedelineacion1").find("tr:gt(0)").remove();
+		
 	},
 	
 	
