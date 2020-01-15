@@ -396,7 +396,10 @@ ACC.ica = {
 	    	        	
 			 		 	
 			 		 		
-			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
+			 		var anoGravable = "";
+			 		var anio_anoGravable=$.trim($(value).find(".anio_anoGravable").val());
+			 		var mes_anoGravable=$.trim($(value).find(".mes_anoGravable").val());
+			 		var dia_anoGravable=$.trim($(value).find(".dia_anoGravable").val());
 			 		var tipoID=$.trim($(value).find(".tipoID").val());
 			 		var numID=$.trim($(value).find(".numID").val());
 			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
@@ -405,6 +408,9 @@ ACC.ica = {
 			 		var telefono=$.trim($(value).find(".telefono").val());
 			 		var tarifaApl=$.trim($(value).find(".tarifaApl").val());
 			 		var montoRetenido=$.trim($(value).find(".montoRetenido").val());
+			 		if(anio_anoGravable != "" && mes_anoGravable != "" && dia_anoGravable != "" && anio_anoGravable != "00" && mes_anoGravable != "00" && dia_anoGravable != "00"){
+			 			anoGravable = dia_anoGravable + "/" + mes_anoGravable + "/" + anio_anoGravable;
+			 		}
 
 	    	        	
 	    	        	if(anoGravable != "" && tipoID != "" && numID != "" && razonSocial != "" && direccion != "" && telefono != "" && codMunicipio != "" && tarifaApl != "" && montoRetenido != "")
@@ -600,7 +606,9 @@ ACC.ica = {
 		 	 $.each($(".valor"),function(index,value){
 			 		
 		 		 if(validacionValores != false){
-			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
+			 		var anio_anoGravable=$.trim($(value).find(".anio_anoGravable").val());
+			 		var mes_anoGravable=$.trim($(value).find(".mes_anoGravable").val());
+			 		var dia_anoGravable=$.trim($(value).find(".dia_anoGravable").val());
 			 		var tipoID=$.trim($(value).find(".tipoID").val());
 			 		var numID=$.trim($(value).find(".numID").val());
 			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
@@ -610,7 +618,7 @@ ACC.ica = {
 			 		var tarifaApl=$.trim($(value).find(".tarifaApl").val());
 			 		var montoRetenido=$.trim($(value).find(".montoRetenido").val());
 	
-	    	        	if(anoGravable == "" || tipoID == "" || numID == "" || razonSocial == "" || direccion == "" || telefono == "" || codMunicipio == "" || tarifaApl == "" || montoRetenido == "")
+	    	        	if(anio_anoGravable == "" || mes_anoGravable == "" || dia_anoGravable == "" || tipoID == "" || numID == "" || razonSocial == "" || direccion == "" || telefono == "" || codMunicipio == "" || tarifaApl == "" || montoRetenido == "")
 	    	        	{
 	    	        		validacionValores = false;
 	    	        	}
