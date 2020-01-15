@@ -10,6 +10,7 @@
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
+<div id="divValoresRetenidos" style="display: none;">
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -132,7 +133,7 @@
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
 					<sf:select class="new_alto form-control dia_anoGravable " 
 					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].dia" 
-					items="${icaInfObjetoFormResp.catalogos.valor_retenido_meses}" 
+					items="${icaInfObjetoFormResp.catalogos.valor_retenido_dias}" 
 					onchange="activarValidacion_valorRetenido()" id="${idDia}" disabled="true"></sf:select>
 				</div>
 				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
@@ -259,7 +260,7 @@
 	</div>
 	<!-- fin de codigo adjuntar archivo -->
 </sf:form>
-
+</div>
 <script type="text/javascript">
 	function addvalor() {
 
@@ -267,8 +268,8 @@
 		var tam = $(".valor").length;
 		if ($(".valor").length < 20) {
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
-			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").val("")
-			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").val("")
+			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").val("00")
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").val("00")
 			$($(".valor")[0]).parent().children().last().find(".tipo").val("")
 			$($(".valor")[0]).parent().children().last().find(".numID").val("")
 			$($(".valor")[0]).parent().children().last().find(".razonSocial")
@@ -292,6 +293,8 @@
 				"diaValorRetenido_"+tam);
 			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").attr("disabled",
 					"disabled");
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").find("option:gt(0)").remove();
+
 		} else {
 			alert("No se pueden agregar m�s registros");
 		}
@@ -341,8 +344,14 @@
 	
 	function realizarUpdateMes_valorRetenido(infoMes) {
 		
-		debugger;
-		var idElemento = 'diaValorRetenido_'+infoMes.id.substring(17);
+		establecerCampoDia(infoMes.value,infoMes.id.substring(17),"");	
+		activarValidacion_valorRetenido();
+	}
+	
+	function establecerCampoDia(valMes,idCampoDia,valDia){
+		
+// 		debugger;
+		var idElemento = 'diaValorRetenido_'+idCampoDia;
 		var sel = document.getElementById(idElemento);
 		sel.disabled = '';
 		sel.value = '';
@@ -355,11 +364,12 @@
 	    
 		var opt = document.createElement('option');
 		opt.appendChild( document.createTextNode('Seleccionar') );
-		opt.value = ''; sel.appendChild(opt); 
+		opt.value = '00'; 
+		sel.appendChild(opt); 
 
 		var diaFormateado = "";
 		for(j = 0 ; j<mesesInfo.length ; j++){
-			if(mesesInfo[j].mes == infoMes.value){
+			if(mesesInfo[j].mes == valMes){
 			    for(i = 1 ; i <= mesesInfo[j].diasEnMes ; i++){
 					opt = document.createElement('option');
 					diaFormateado = i.toString();
@@ -372,10 +382,8 @@
 			    }
 			}
 	    }
-	    
-	    debugger;
-	   
-		
-		activarValidacion_valorRetenido();
+		if(valDia!=null && valDia!="" && valDia!="00"){
+			sel.value = valDia;	
+		}
 	}
 </script>
