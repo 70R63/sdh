@@ -58,25 +58,24 @@ window.onload = function() {
 			codigosCIIU.push(item_codigosCIIU);
 		</c:if>
 	 </c:forEach>
-	 var mostrarValoresRetenidos = false;
+	 var mostrarTablaING = false;
 	 for (var i = 0; i < codigosCIIU.length; i++) {
 		for(var j = 0; j < cat_habilitar_valorRetenido.length; j++){
 			 if (codigosCIIU[i].idCodigoCIIU == cat_habilitar_valorRetenido[j].itemId) {
 				 if(cat_habilitar_valorRetenido[j].habilitado == "X"){
-					mostrarValoresRetenidos = true;
+					mostrarTablaING = true;
 					break;
 				 }
 		 	}
 		 }
-		if(mostrarValoresRetenidos == true){
+		if(mostrarTablaING == true){
 			break;
 		}
 	 }
 	 
-	 if(mostrarValoresRetenidos == true){
-		var divValoresRetenidosElemento = document.getElementById("divValoresRetenidos");
-		divValoresRetenidosElemento.style.display = 'block';
-		 
+	 if(mostrarTablaING == true){
+		var divTablaINGElemento = document.getElementById("divTablaING");
+		divTablaINGElemento.style.display = 'block';		 
 	 }
 	 
 	 

@@ -10,7 +10,7 @@
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div id="divValoresRetenidos" style="display: none;">
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -260,7 +260,6 @@
 	</div>
 	<!-- fin de codigo adjuntar archivo -->
 </sf:form>
-</div>
 <script type="text/javascript">
 	function addvalor() {
 
