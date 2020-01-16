@@ -587,13 +587,15 @@
 			<div class="col-md-2">
 				<input class="newalto form-control valordedu" type="text" />
 			</div>
-			<div class="borrar col-md-1" style="height: 20px;" onclick="borrar(this)">
-					<!--  <div class="form-group ">-->
-						<img onclick="borrar(this)" class="delededucciones"  id="delededucciones"
-							src="${themeResourcePath}/images/deledelineacion.png"
-							style="width: 20px; margin-top: 0px; margin-bottom:2px !important"></img>
-					<!-- </div>-->
-				</div>
+			<div class="borrar col-md-1" style="height: 20px;"
+				onclick="borrar(this)">
+				<!--  <div class="form-group ">-->
+				<img onclick="borrar(this)" class="delededucciones"
+					id="delededucciones"
+					src="${themeResourcePath}/images/deledelineacion.png"
+					style="width: 20px; margin-top: 0px; margin-bottom: 2px !important"></img>
+				<!-- </div>-->
+			</div>
 
 		</div>
 	</form:form>
@@ -612,6 +614,7 @@
 		for (var i = 0; i < elem.length; i++) {
 			var cual = elem[i];
 			var cual2 = ElementosClick[0];
+			var texto = cual2.parentNode.innerText;
 
 			if (cual == cual2) {
 				var eliminar = cual.parentNode;
@@ -632,8 +635,8 @@
 			}
 		}
 	}
-	
-	function borrar(SelectObject){
+
+	function borrar(SelectObject) {
 		debugger;
 		var dele = SelectObject;
 		//dele.remove()
@@ -643,28 +646,32 @@
 
 		HaHechoClick = event.srcElement;
 		ElementosClick.push(HaHechoClick);
+		var cual2 = ElementosClick[0];
+		var texto = cual2.parentNode.innerText;
+		if (texto.includes('Seleccionar')) {
+			alert("No se puede eliminar esta línea ya que no se podrán seguir agregando campos");
+		} else {
+			for (var i = 0; i < elem.length; i++) {
+				var cual = elem[i];
 
-		for (var i = 0; i < elem.length; i++) {
-			var cual = elem[i];
-			var cual2 = ElementosClick[0];
-
-			if (cual == cual2) {
-				debugger;
-				var eliminar = cual.parentNode;
-				while (eliminar.id != "deducciones") {
-					eliminar = eliminar.parentNode;
-				}
-				var h = $(".deducciones").length;
-				if ($(".deducciones").length <= 2000
-						&& $(".deducciones").length > 1) {
-					for (var j = 0; j < $(".deducciones").length; j++) {
-						eliminar.remove();
+				if (cual == cual2) {
+					debugger;
+					var eliminar = cual.parentNode;
+					while (eliminar.id != "deducciones") {
+						eliminar = eliminar.parentNode;
 					}
-				} else if ($(".deducciones").length <= 1) {
-					alert("No puede eliminar todos los registros");
+					var h = $(".deducciones").length;
+					if ($(".deducciones").length <= 2000
+							&& $(".deducciones").length > 1) {
+						for (var j = 0; j < $(".deducciones").length; j++) {
+							eliminar.remove();
+						}
+					} else if ($(".deducciones").length <= 1) {
+						alert("No puede eliminar todos los registros");
+					}
+					break;
+				} else {
 				}
-				break;
-			} else {
 			}
 		}
 	}
