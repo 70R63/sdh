@@ -26,13 +26,68 @@ public class SecretAnswerForm
 	private String REL05; //-
 	private String DIR2_0001; //-
 	private String DIR2_0002; //-
+	private String DIR2_0003; //-
+	private String DIR2_0004; //-
 	private String DIR_0001; //-
 	private String DIR_0002; //-
+	private String DIR_0003;
 	private String PLA_0001;
 	private String PLA_0002;
 
 
 
+
+
+	/**
+	 * @return the dIR2_0003
+	 */
+	public String getDIR2_0003()
+	{
+		return DIR2_0003;
+	}
+
+	/**
+	 * @param dIR2_0003
+	 *           the dIR2_0003 to set
+	 */
+	public void setDIR2_0003(final String dIR2_0003)
+	{
+		DIR2_0003 = dIR2_0003;
+	}
+
+	/**
+	 * @return the dIR2_0004
+	 */
+	public String getDIR2_0004()
+	{
+		return DIR2_0004;
+	}
+
+	/**
+	 * @param dIR2_0004
+	 *           the dIR2_0004 to set
+	 */
+	public void setDIR2_0004(final String dIR2_0004)
+	{
+		DIR2_0004 = dIR2_0004;
+	}
+
+	/**
+	 * @return the dIR_0003
+	 */
+	public String getDIR_0003()
+	{
+		return DIR_0003;
+	}
+
+	/**
+	 * @param dIR_0003
+	 *           the dIR_0003 to set
+	 */
+	public void setDIR_0003(final String dIR_0003)
+	{
+		DIR_0003 = dIR_0003;
+	}
 
 	/**
 	 * @return the pLA_0001
@@ -366,7 +421,7 @@ public class SecretAnswerForm
 		return DIR2_0002;
 	}
 
-	public void setDIR2_0002(String DIR2_0002) {
+	public void setDIR2_0002(final String DIR2_0002) {
 		this.DIR2_0002 = DIR2_0002;
 	}
 
@@ -374,7 +429,7 @@ public class SecretAnswerForm
 		return PLA_0002;
 	}
 
-	public void setPLA_0002(String PLA_0002) {
+	public void setPLA_0002(final String PLA_0002) {
 		this.PLA_0002 = PLA_0002;
 	}
 }
