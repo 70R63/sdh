@@ -39,9 +39,25 @@ public class ICAInfoValorRetenido
 	public void setAnoGravable(final String anoGravable)
 	{
 		this.anoGravable = anoGravable;
-		this.anio = anoGravable.substring(6, 10);
-		this.mes = anoGravable.substring(3, 5);
-		this.dia = anoGravable.substring(0, 2);
+		this.anio = "";
+		this.mes = "";
+		this.dia = "";
+
+		if (anoGravable != null)
+		{
+			if (anoGravable.length() == 10)
+			{
+				try
+				{
+					this.anio = anoGravable.substring(6, 10);
+					this.mes = anoGravable.substring(3, 5);
+					this.dia = anoGravable.substring(0, 2);
+				}
+				catch (final Exception e)
+				{
+				}
+			}
+		}
 	}
 
 	/**
