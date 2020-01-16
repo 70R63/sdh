@@ -116,10 +116,13 @@ function vaperiodo(selectObject) {
 		<input type="hidden" name="BanderaAgete" id="BanderaAgete" value="" />
 
 		<div class="row">
-			<div class="col-md-4 col-xs-12 mb-20 no-marginright certicontrib" id="certicontrib" style="display: none">
+			<div class="col-md-4 col-xs-12 mb-20 no-marginright certicontrib"
+				id="certicontrib" style="display: none">
 				<span class="paso--uno pasos color-sr1">1</span>
-				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICAR DECLARACIÓN</h2>
-				<p class="pasoClase1 metrophobic">Selecciona el impuesto que deseas consultar.</p>
+				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICAR
+					DECLARACIÓN</h2>
+				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
+					deseas consultar.</p>
 				<div class="caja--ser-rel color-sr1">
 					<sf:select class="new_alto form-control seleccion" id="seleccion"
 						onchange="onChange(this)" path="claveImpuesto"
@@ -127,18 +130,20 @@ function vaperiodo(selectObject) {
 						referenceData="${dataForm.catalogos.impuesto}" />
 				</div>
 			</div>
-			
-				<div class="col-md-4 col-xs-12 mb-20 no-marginright certiagente" id="certiagente" style="display: none">
+
+			<div class="col-md-4 col-xs-12 mb-20 no-marginright certiagente"
+				id="certiagente" style="display: none">
 				<span class="paso--uno pasos color-sr1">1</span>
-				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICAR DECLARACIÓN</h2>
+				<h2 class="titulo-caja--ser-rel color-sr1 ">CERTIFICAR
+					DECLARACIÓN</h2>
 				<p class="pasoClase1 metrophobic">El Impuesto a consultar es:</p>
 				<div class="caja--ser-rel color-sr1">
-					<input id="0004"
-						name="" class="newalto form-control" disabled type="text" value="Retención ICA"
-						maxlength="240" style="display: inline-block !important;"></input>
+					<input id="0004" name="" class="newalto form-control" disabled
+						type="text" value="Retención ICA" maxlength="240"
+						style="display: inline-block !important;"></input>
 				</div>
 			</div>
-			
+
 			<div class="col-md-4 col-xs-12 mb-20 no-margincol">
 				<span class="paso--dos pasos color-sr2">2</span>
 				<h2 class="titulo-caja--ser-rel color-sr2 ">
@@ -146,7 +151,7 @@ function vaperiodo(selectObject) {
 				</h2>
 				<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
 				<div class="caja--ser-rel color-sr2">
-					<select id="aniograv" class="new_alto form-control" name="aniograv"
+					<select id="aniograv" class="new_alto form-control aniograv" name="aniograv"
 						onchange="SelectedAnio(this)">
 						<option value="00">Seleccionar</option>
 						<option value="2020">2020</option>
@@ -278,7 +283,7 @@ function vaperiodo(selectObject) {
 				</table>
 			</div>
 		</div>
-		
+
 
 		<div class="row" id="table-reteica" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
@@ -301,7 +306,7 @@ function vaperiodo(selectObject) {
 				</table>
 			</div>
 		</div>
-		
+
 
 		<div class="row" id="table-publicidad" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
@@ -326,9 +331,9 @@ function vaperiodo(selectObject) {
 				</table>
 			</div>
 		</div>
-		
-		
-		
+
+
+
 		<div class="row" id="table-gasolina" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table" id="table-gasolina1">
@@ -350,7 +355,7 @@ function vaperiodo(selectObject) {
 				</table>
 			</div>
 		</div>
-		
+
 		<div class="row" id="table-delineacion" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
 				<table class="table" id="table-delineacion1">
@@ -394,7 +399,7 @@ function vaperiodo(selectObject) {
 		</div>
 
 	</form:form>
-		
+
 </div>
 
 
@@ -410,6 +415,8 @@ function vaperiodo(selectObject) {
 	});
 	
 	function onChange(selectObject) {
+		debugger;
+		ACC.opcionDeclaraciones.preparaAnioGravable();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.prepararPeriodo();
 	}

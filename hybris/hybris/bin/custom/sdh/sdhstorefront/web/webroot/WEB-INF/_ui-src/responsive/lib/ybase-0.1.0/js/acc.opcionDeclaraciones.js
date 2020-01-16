@@ -1179,9 +1179,24 @@ debugger;
 		$("#table-vehicular1").find("tr:gt(0)").remove();
 		$("#table-myTable").find("tr:gt(0)").remove();
 	},
-
 	
-
-	
-
+	preparaAnioGravable : function(){
+		debugger;
+		var claveImpuesto = document.getElementById('seleccion').value;
+		  var d = new Date();
+	        var n = d.getFullYear();
+		$("#aniograv").find("option:gt(0)").remove();
+		if(claveImpuesto == '0002' || claveImpuesto == '0001'){ 
+	        for(var i=0; i<4; i++){
+	        	$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");
+	        	n--;  	
+	        }
+		}else{
+			for(var i=0; i<4; i++){
+				n--;
+	        	$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");	
+	        }
+		}
+		
+	}
 };

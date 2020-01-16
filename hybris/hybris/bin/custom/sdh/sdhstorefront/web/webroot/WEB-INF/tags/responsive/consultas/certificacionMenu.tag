@@ -71,7 +71,7 @@
 				</h2>
 				<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
 				<div class="caja--ser-rel color-sr2">
-					<select id="aniograv" class="new_alto form-control" name="aniograv"
+					<select id="aniograv" class="new_alto form-control aniograv" name="aniograv"
 						onchange="SelectedAnio(this)">
 						<option value="00">Seleccionar</option>
 						<option value="2020">2020</option>
@@ -408,10 +408,12 @@
  	
 	function onChange(selectObject) {
 			debugger;
+		ACC.opcionDeclaraciones.preparaAnioGravable();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
 // 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
 		ACC.opcionDeclaraciones.prepararPeriodo();
+		
 	}
 
 	
