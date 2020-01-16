@@ -18,7 +18,6 @@ public class ICADeclaracionCatalogos
 
 	private Map<String, String> valor_retenido_meses;
 	private List<ItemSelectOption> valor_retenido_dias;
-	private String diasMes1;
 
 	/**
 	 * @return the valor_retenido_meses
@@ -51,23 +50,6 @@ public class ICADeclaracionCatalogos
 	public void setValor_retenido_dias(final List<ItemSelectOption> valor_retenido_dias)
 	{
 		this.valor_retenido_dias = valor_retenido_dias;
-	}
-
-	/**
-	 * @return the diasMes1
-	 */
-	public String getDiasMes1()
-	{
-		return diasMes1;
-	}
-
-	/**
-	 * @param diasMes1
-	 *           the diasMes1 to set
-	 */
-	public void setDiasMes1(final String diasMes1)
-	{
-		this.diasMes1 = diasMes1;
 	}
 
 

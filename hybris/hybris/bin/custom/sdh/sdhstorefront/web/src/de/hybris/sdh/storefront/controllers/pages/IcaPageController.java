@@ -1073,7 +1073,6 @@ public class IcaPageController extends SDHAbstractPageController
 
 		catalogos.setValor_retenido_meses(meses);
 		catalogos.setValor_retenido_dias(dias);
-		catalogos.setDiasMes1("31");
 
 
 		return catalogos;
