@@ -57,16 +57,16 @@
 							code="sobre.vehiculo.declaracion.vehiculo.liq.aporte" /> </label> <label
 						class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="aporte" id=""
+						<input type="radio" name="aporte" id="aporteSi"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						value="si" ${yesChecked} onclick="proyecthabi()" disabled="disabled"> Si
+						value="si" ${yesChecked} onclick="proyecthabi()"> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="radio" name="aporte" id=""
+						<input type="radio" name="aporte" id="aporteNo"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						value="no" ${noChecked} onclick="proyectdeshabi()" disabled="disabled"> No
+						value="no" ${noChecked} onclick="proyectdeshabi()"> No
 					</label>
 				</div>
 			</div>
