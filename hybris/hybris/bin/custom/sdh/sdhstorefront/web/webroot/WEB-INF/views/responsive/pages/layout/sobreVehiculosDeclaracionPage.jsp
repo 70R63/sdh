@@ -58,6 +58,14 @@
 		 var proyecto = document.getElementById('proyecto');
 		 var aportesi = document.getElementById('aporteSi');
 		 var aporteno = document.getElementById('aporteNo');
+		 var aniograv = document.getElementById('aniograv').value;
+		 
+		 if(aniograv != currentano){
+			 proyecto.disabled = true;
+			  aportesi.disabled = true;
+			  aporteno.disabled = true;
+			 
+		 }else{
 		 
 		    if(currentmes == "6"){
 		  
@@ -101,7 +109,7 @@
 				  aporteno.disabled = true;
 			  }
 		    }
-			  
+		 }
 	}
 	
 	function pagarlinea() {
