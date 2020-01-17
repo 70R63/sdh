@@ -410,7 +410,7 @@ public class IcaPageController extends SDHAbstractPageController
 				{
 					ICAInfoValorRetenidoList.get(i).setAnio(icaInfObjetoResponse.getAnoGravable());
 				}
-				if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+				if (ICAInfoValorRetenidoList.get(i).getNumID() == null || ICAInfoValorRetenidoList.get(i).getNumID().isEmpty())
 				{
 					ICAInfoValorRetenidoList.remove(i);
 				}
@@ -667,7 +667,7 @@ public class IcaPageController extends SDHAbstractPageController
 						{
 							ICAInfoValorRetenidoList.get(i).setAnio(icaInfObjetoResponse.getAnoGravable());
 						}
-						if (ICAInfoValorRetenidoList.get(i).getNumID() == null)
+						if (ICAInfoValorRetenidoList.get(i).getNumID() == null || ICAInfoValorRetenidoList.get(i).getNumID().isEmpty())
 						{
 							ICAInfoValorRetenidoList.remove(i);
 						}
