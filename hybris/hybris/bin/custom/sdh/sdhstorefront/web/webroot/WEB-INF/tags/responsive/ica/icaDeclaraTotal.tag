@@ -4,13 +4,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- Total ingresos netos gravables -->
 
 <c:set var="roIngNetosGrava" value=""/>
 <c:set var="disabledIngNetosGrava" value=""/>
-<c:if test="${icaInfObjetoFormResp.controlCampos.ingFueraBog == true}">
+<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava == true}">
 	<c:set var="roIngNetosGrava" value='readonly="readonly"'/>
 	<c:set var="disabledIngNetosGrava" value='disabled="disabled"'/>
 </c:if>
@@ -30,7 +30,7 @@
 	</div>
 </div>
 <br>
-<form:form action="" style="padding-left: 0px !important">
+<sf:form action="" style="padding-left: 0px !important" commandName="icaInfObjetoFormResp">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1">
@@ -161,7 +161,7 @@
 			</c:if>
 		</c:forEach>
 		
-		<c:if test="${icaInfObjetoFormResp.controlCampos.ingFueraBog != true}">
+		<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true}">
 			<div class="row totaluno" id="totaluno">
 				<div class="col-md-1">
 					<c:choose>
@@ -373,16 +373,16 @@
  		</div> 
  	</c:if> 
 
- 	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso"> 
+ 	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso" varStatus="infoLoop"> 
  		<div class="row totaldos" id="totaldos"> 
  			<div class="col-md-1"> 
- 				<input class="new_alto form-control anoGravable" disabled="disabled" 
- 					type="text" value="${eachIngreso.anoGravable }" /> 
+ 				<sf:input class="new_alto form-control anoGravable" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].anoGravable"/>
  			</div> 
 
 
  			<div class="col-md-1"> 
- 				<select id="" disabled="disabled" 
+<%--  			value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].tipoID}" --%>
+ 				<select id="" 
  					class="new_alto form-control tipoID" style="height: 48px;"> 
  					<option value="">Seleccionar</option> 
  					<c:forEach items="${ idTypes}" var="eachType"> 
@@ -399,31 +399,26 @@
  				</select> 
  			</div> 
  			<div class="col-md-1"> 
- 				<input class="new_alto form-control numID" disabled="disabled" 
- 					type="text" value="${eachIngreso.numID }" /> 
+				<sf:input class="new_alto form-control numID" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].numID"/> 					
  			</div> 
  			<div class="col-md-1"> 
- 				<input class="new_alto form-control razonSocial" disabled="disabled" 
- 					type="text" value="${eachIngreso.razonSocial }" /> 
+				<sf:input class="new_alto form-control razonSocial" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].razonSocial"/>
  			</div> 
  			<div class="col-md-1"> 
- 				<input class="new_alto form-control direccion" disabled="disabled" 
- 					type="text" value="${eachIngreso.direccion }" /> 
+				<sf:input class="new_alto form-control direccion" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].direccion"/>
  			</div> 
  			<div class="col-md-1"> 
- 				<input class="new_alto form-control municipio" disabled="disabled" 
- 					type="text" value="${eachIngreso.desMunicipio }" /> 
+ 				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio"/>
  			</div> 
  			<div class="col-md-1"> 
- 				<input class="new_alto form-control telefono" disabled="disabled" 
- 					type="text" value="${eachIngreso.telefono }" /> 
+ 				 <sf:input class="new_alto form-control telefono" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].telefono"/>
  			</div> 
  			<div class="col-md-2"> 
 
  				<fmt:formatNumber value="${ eachIngreso.codCIIU}" 
  					pattern="#######################" var="codCIIUNumber" /> 
 
- 				<select id="" disabled="disabled" 
+ 				<select id="" 
  					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important"> 
  					<option value="">SELECCIONAR</option> 
  					<c:forEach items="${ econActivities}" var="eachActivity"> 
@@ -443,13 +438,10 @@
 
  			</div> 
  			<div class="col-md-1"> 
- 				<input class="new_alto form-control ingBrutoSINIVA" type="text" 
- 					disabled="disabled" value="${eachIngreso.ingBrutoSINIVA }" /> 
+ 				<sf:input class="new_alto form-control ingBrutoSINIVA" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].ingBrutoSINIVA"/>
  			</div> 
  			<div class="col-md-1"> 
- 				<input class="new_alto form-control valorTotalDevol" 
- 					disabled="disabled" type="text" 
- 					value="${eachIngreso.valorTotalDevo }" /> 
+				<sf:input class="new_alto form-control valorTotalDevol" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].valorTotalDevol"/>
  			</div> 
  			<div class="col-md-1"> 
  				<div class="form-group "> 
@@ -463,7 +455,7 @@
  		</div> 
  	</c:forEach> 
 </div>
-</form:form>
+</sf:form>
 
 
 <script>
