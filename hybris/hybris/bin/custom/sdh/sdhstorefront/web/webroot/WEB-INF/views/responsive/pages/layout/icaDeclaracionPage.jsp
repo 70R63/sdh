@@ -45,7 +45,12 @@ window.onload = function() {
 	}
 	
 	 <c:forEach items ="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorRetenido}" var="valorRetenidoItem" varStatus="status">
-	     establecerCampoDia("${valorRetenidoItem.mes}","${status.index}","${valorRetenidoItem.dia}");	
+	 	var habilitarDia = true;
+		<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido == true}">
+			habilitarDia = false;
+			habilitarMes("${status.index}",false);
+		</c:if>
+	 	establecerCampoDia("${valorRetenidoItem.mes}","${status.index}","${valorRetenidoItem.dia}",habilitarDia);	
 	 </c:forEach>
 	 
 	 var codigosCIIU = new Array();

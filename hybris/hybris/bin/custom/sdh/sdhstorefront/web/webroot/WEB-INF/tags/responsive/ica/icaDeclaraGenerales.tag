@@ -11,6 +11,10 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<c:set var="roTotalIngrPeriodo" value=""/>
+<c:if test="${icaInfObjetoFormResp.controlCampos.totalIngrPeriodo == true}">
+	<c:set var="roTotalIngrPeriodo" value='readonly="readonly"'/>
+</c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }" var="infoDeclara" />
 <div class="container">
 	<div class="row">
@@ -118,7 +122,7 @@
 								code="ica.declaracion.liquidacion.totinord" /></label> <input
 							id="totalIngrPeriodo" name="totalIngrPeriodo"
 							class="newalto form-control text-right !important" type="text"
-							value="${infoDeclara.totalIngrPeriodo }" maxlength="240"></input>
+							value="${infoDeclara.totalIngrPeriodo }" maxlength="240" ${roTotalIngrPeriodo}></input>
 					</div>
 				</div>
 			</div>

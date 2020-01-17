@@ -49,9 +49,10 @@ public class ICAInfoValorRetenido
 			{
 				try
 				{
-					this.anio = anoGravable.substring(6, 10);
-					this.mes = anoGravable.substring(3, 5);
-					this.dia = anoGravable.substring(0, 2);
+					final String anoGravableConvertido = anoGravable.replaceAll("[^0-9]", "");
+					this.anio = anoGravableConvertido.substring(4, 8);
+					this.mes = anoGravableConvertido.substring(2, 4);
+					this.dia = anoGravableConvertido.substring(0, 2);
 				}
 				catch (final Exception e)
 				{

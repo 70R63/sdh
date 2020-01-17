@@ -8,6 +8,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!-- Total Ingresos ordinarios y extraordinarios de periodo -->
 
+<c:set var="roValorPagar" value=""/>
+<c:set var="disabledValorPagar" value=''/>
+<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido == true}">
+	<c:set var="roValorPagar" value='readonly="readonly"'/>
+	<c:set var="disabledValorPagar" value='disabled="disabled"'/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<c:set
@@ -211,7 +217,7 @@
 							code="ica.declaracion.liquidacion.valpag" /></label> <input
 						id="valorPagar" name="valorPagar"
 						class="etiqlargas form-control text-right !important" type="text"
-						value="${infoDeclara.valorPagar }" maxlength="240"></input>
+						value="${infoDeclara.valorPagar }" maxlength="240" ${roValorPagar}></input>
 				</div>
 			</div>
 		</div>

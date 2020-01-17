@@ -59,6 +59,7 @@ import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
 import de.hybris.sdh.storefront.forms.FirmantesForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
+import de.hybris.sdh.storefront.forms.ICAControlCamposDec;
 import de.hybris.sdh.storefront.forms.ICADeclaracionCatalogos;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
@@ -714,6 +715,7 @@ public class IcaPageController extends SDHAbstractPageController
 			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
 			icaInfObjetoFormResp
 					.setCatalogos(obtenerCatalogos(icaInfObjetoResponse.getAnoGravable(), icaInfObjetoResponse.getPeriodo()));
+			icaInfObjetoFormResp.setControlCampos(establecerCamposICADec("sdh_02"));
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
@@ -1135,5 +1137,28 @@ public class IcaPageController extends SDHAbstractPageController
 
 	}
 
+	private ICAControlCamposDec establecerCamposICADec(String rol)
+	{
+		ICAControlCamposDec controlCampos = null;
+
+		switch (rol)
+		{
+			case "sdh_02":
+				controlCampos = new ICAControlCamposDec();
+				controlCampos.setTotalIngrPeriodo(true);
+				controlCampos.setIngFueraBog(true);
+				controlCampos.setDeducciones(true);
+				controlCampos.setIngNetosGrava(true);
+				controlCampos.setValorRetenido(true);
+				controlCampos.setValorPagar(true);
+
+				break;
+
+			default:
+				break;
+		}
+
+		return controlCampos;
+	}
 
 }
