@@ -136,6 +136,8 @@ public class ICACalculoImpRequest
 				stringBuilder.append("\"numID\":\"" + ((StringUtils.isBlank(eachIngreso.getNumID())) ? "" : eachIngreso.getNumID()) + "\",");
 				stringBuilder.append("\"razonSocial\":\""+ ((StringUtils.isBlank(eachIngreso.getRazonSocial())) ? "" : eachIngreso.getRazonSocial()) + "\",");
 				stringBuilder.append("\"direccion\":\""+ ((StringUtils.isBlank(eachIngreso.getDireccion())) ? "" : eachIngreso.getDireccion()) + "\",");
+				stringBuilder.append("\"codMunicipio\":\""
+						+ ((StringUtils.isBlank(eachIngreso.getCodMunicipio())) ? "" : eachIngreso.getCodMunicipio()) + "\",");
 				stringBuilder.append("\"telefono\":\""+ ((StringUtils.isBlank(eachIngreso.getTelefono())) ? "" : eachIngreso.getTelefono()) + "\",");
 				stringBuilder.append("\"codCIIU\":\"" + ((StringUtils.isBlank(eachIngreso.getCodCIIU())) ? "" : eachIngreso.getCodCIIU()) + "\",");
 				stringBuilder.append("\"ingBrutoSINIVA\":\""+ ((StringUtils.isBlank(eachIngreso.getIngBrutoSINIVA())) ? "0.00" : eachIngreso.getIngBrutoSINIVA()) + "\",");
@@ -569,7 +571,7 @@ public class ICACalculoImpRequest
 	/**
 	 * @param valorImpAviso the valorImpAviso to set
 	 */
-	public void setValorImpAviso(String valorImpAviso)
+	public void setValorImpAviso(final String valorImpAviso)
 	{
 		this.valorImpAviso = valorImpAviso;
 	}
