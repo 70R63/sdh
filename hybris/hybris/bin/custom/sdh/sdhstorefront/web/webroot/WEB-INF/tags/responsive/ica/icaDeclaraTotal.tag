@@ -423,9 +423,9 @@
  				<select id="" 
  					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important" ${disabledIngNetosGrava}> 
  					<option value="">SELECCIONAR</option> 
- 					<c:forEach items="${ econActivities}" var="eachActivity"> 
+ 					<c:forEach items="${ gravableNetIncomes}" var="eachActivity"> 
 
- 						<fmt:formatNumber value="${ eachActivity.code}" 
+ 						<fmt:formatNumber value="${ eachActivity.ciiu}" 
  							pattern="#######################" var="eachCodCIIUNumber" /> 
 
  						<c:set var="selected" value="" /> 
@@ -433,8 +433,8 @@
  							<c:set var="selected" value="selected" /> 
  						</c:if> 
 
- 						<option value="${eachActivity.code}" ${selected }>${eachActivity.code} 
- 							- ${eachActivity.description }</option> 
+ 						<option value="${eachActivity.ciiu}" ${selected }>${eachActivity.ciiu} 
+ 							- ${eachActivity.denominacion }</option> 
  					</c:forEach> 
  				</select> 
 

@@ -75,10 +75,10 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
-						id="totalingNetos" name="totalingNetos"
+							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
+						id="totalDeduccion" name="totalDeduccion"
 						class="etiqlargas form-control text-right !important" disabled
-						type="text" value="${infoDeclara.totalingNetos }" maxlength="240"></input>
+						type="text" value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -86,10 +86,10 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
-						id="totalDeduccion" name="totalDeduccion"
+							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
+						id="totalingNetos" name="totalingNetos"
 						class="etiqlargas form-control text-right !important" disabled
-						type="text" value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
+						type="text" value="${infoDeclara.totalingNetos }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
