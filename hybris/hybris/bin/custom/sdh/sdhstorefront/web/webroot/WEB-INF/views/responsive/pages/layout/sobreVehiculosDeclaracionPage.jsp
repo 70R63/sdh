@@ -28,7 +28,7 @@
 	}
 	
 	window.onload = function() {
-		debugger;
+	
 		var cosas = $(":input");
 		var tam = cosas.length;
 		if (false){
@@ -42,6 +42,74 @@
 			}
 		}	
 		 $(".loader").fadeOut("slow");
+		 
+		debugger;
+		 
+		 var date = new Date();
+		 var currentday = date.getDate(); //obteniendo dia
+		 var currentmes = date.getMonth()+1; //obteniendo mes
+		  var currentano = date.getFullYear(); //obteniendo año
+		  var currentwday = date.getDay(); //obtiene el dia de la semana
+		  
+		 var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+		 var yearday = primerDia.getDay();
+		 var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		 
+		 var proyecto = document.getElementById('proyecto');
+		 var aportesi = document.getElementById('aporteSi');
+		 var aporteno = document.getElementById('aporteNo');
+		 var aniograv = document.getElementById('aniograv').value;
+		 
+		 if(aniograv != currentano){
+			 proyecto.disabled = true;
+			  aportesi.disabled = true;
+			  aporteno.disabled = true;
+			 
+		 }else{
+		 
+		    if(currentmes == "6"){
+		  
+			  if(currentday == "27" && yearday=="0" ){
+				  proyecto.disabled = true;
+				  aportesi.disabled = true;
+				  aporteno.disabled = true;
+				  
+			  }	  
+			  
+			  if(currentday == "26" && yearday=="1"){
+				  proyecto.disabled = true;
+				  aportesi.disabled = true;
+				  aporteno.disabled = true;
+			  }
+		
+			  if(currentday == "25" && yearday=="2"){
+				  proyecto.disabled = true;
+				  aportesi.disabled = true;
+				  aporteno.disabled = true;
+			  }
+			  
+			  if(currentday == "24" && yearday=="3"){
+				  proyecto.disabled = true;
+				  aportesi.disabled = true;
+				  aporteno.disabled = true;
+			  }
+			  if(currentday == "23" && yearday=="4"){
+				  proyecto.disabled = true;
+				  aportesi.disabled = true;
+				  aporteno.disabled = true;
+			  }
+			  if(currentday == "22" && yearday=="5"){
+				  proyecto.disabled = true;
+				  aportesi.disabled = true;
+				  aporteno.disabled = true;
+			  }
+			  if(currentday == "28" && yearday=="6"){
+				  proyecto.disabled = true;
+				  aportesi.disabled = true;
+				  aporteno.disabled = true;
+			  }
+		    }
+		 }
 	}
 	
 	function pagarlinea() {

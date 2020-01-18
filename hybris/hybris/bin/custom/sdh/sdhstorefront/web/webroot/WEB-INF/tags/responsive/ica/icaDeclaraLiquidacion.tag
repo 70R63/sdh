@@ -8,6 +8,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!-- Total Ingresos ordinarios y extraordinarios de periodo -->
 
+<c:set var="roValorPagar" value=""/>
+<c:set var="disabledValorPagar" value=''/>
+<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido == true}">
+	<c:set var="roValorPagar" value='readonly="readonly"'/>
+	<c:set var="disabledValorPagar" value='disabled="disabled"'/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<c:set
@@ -130,7 +136,7 @@
 						Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input  type="radio" name="impAviso" id="" value="no"
+						<input type="radio" name="impAviso" id="" value="no"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
 						onclick="deshabilitar()" ${impavtableros_checkedNO}> No
@@ -174,6 +180,17 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
+							code="ica.declaracion.liquidacion.valret" /></label> <input disabled
+						id="valorReteIndusComer" name="valorReteIndusComer"
+						class="etiqlargas form-control text-right !important" disabled
+						type="text" value="${infoDeclara.valorReteIndus }" maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
 							code="ica.declaracion.liquidacion.sanciones" /></label> <input disabled
 						id="sanciones" name="sanciones"
 						class="etiqlargas form-control text-right !important" disabled
@@ -200,7 +217,7 @@
 							code="ica.declaracion.liquidacion.valpag" /></label> <input
 						id="valorPagar" name="valorPagar"
 						class="etiqlargas form-control text-right !important" type="text"
-						value="${infoDeclara.valorPagar }" maxlength="240"></input>
+						value="${infoDeclara.valorPagar }" maxlength="240" ${roValorPagar}></input>
 				</div>
 			</div>
 		</div>
@@ -217,17 +234,7 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-md-5">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.valret" /></label> <input disabled
-						id="valorReteIndusComer" name="valorReteIndusComer"
-						class="etiqlargas form-control text-right !important" disabled
-						type="text" value="${infoDeclara.valorReteIndus }" maxlength="240"></input>
-				</div>
-			</div>
-		</div>
+
 
 		<div class="row">
 			<div class="col-md-5">
@@ -264,14 +271,16 @@
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
 						onclick="disab()" ${aporteSI} value="si"> Si
-					</label> <!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
+					</label>
+					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 					<label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
 						${aporteNO} onclick="disab2()" value="no"> No
-					</label> <!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
+					</label>
+					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 				</div>
 			</div>
 		</div>

@@ -7,9 +7,16 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+<c:set var="roValorRetenido" value=""/>
+<c:set var="disabledValorRetenido" value=''/>
+<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido == true}">
+	<c:set var="roValorRetenido" value='readonly="readonly"'/>
+	<c:set var="disabledValorRetenido" value='disabled="disabled"'/>
+</c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -121,7 +128,7 @@
 
 					<sf:input class="new_alto form-control anio_anoGravable " 
 					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].anio"
-					readonly="true" onchange="activarValidacion_valorRetenido()"/>
+					readonly="true" onchange="activarValidacion_valorRetenido()" />
 				</div>
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
 					<sf:select class="new_alto form-control mes_anoGravable " 
@@ -132,12 +139,12 @@
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px; width: 5% !important">
 					<sf:select class="new_alto form-control dia_anoGravable " 
 					path="icaInfObjetoResponse.infoDeclara.valorRetenido[${loopStatusInfo.index}].dia" 
-					items="${icaInfObjetoFormResp.catalogos.valor_retenido_meses}" 
+					items="${icaInfObjetoFormResp.catalogos.valor_retenido_dias}" 
 					onchange="activarValidacion_valorRetenido()" id="${idDia}" disabled="true"></sf:select>
 				</div>
 				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 10% !important">
 					<select id="" class="etiq_valor form-control tipoID"
-						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledValorRetenido}>
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ idTypes}" var="eachType">
 
@@ -157,26 +164,26 @@
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control numID" type="text"
 						value="${eachValor.numID }"
-						onchange="activarValidacion_valorRetenido()" />
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
 				</div>
 				<div class="col-md-2" style="padding-left: 2px; padding-right: 2px; width: 15% !important">
 					<input class="new_alto form-control razonSocial" type="text"
 						value="${eachValor.razonSocial }"
-						onchange="activarValidacion_valorRetenido()"/>
+						onchange="activarValidacion_valorRetenido()"${roValorRetenido}/>
 				</div>
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control direccion" type="text"
 						value="${eachValor.direccion }"
-						onchange="activarValidacion_valorRetenido()" />
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
 				</div>
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control telefono" type="text"
 						value="${eachValor.telefono }"
-						onchange="activarValidacion_valorRetenido()" />
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
 				</div>
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<select id="" class="new_alto form-control codMunicipio"
-						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledValorRetenido}>
 						<option value="">SELECCIONAR</option>
 						<c:forEach items="${cities}" var="eachCity">
 
@@ -193,7 +200,7 @@
 					<!-- 						<input class="form-control tarifaApl" type="text" -->
 					<%-- 							value="${eachValor.tarifaApl }" /> --%>
 					<select id="" class="new_alto form-control tarifaApl"
-						style="height: 48px;" onchange="activarValidacion_valorRetenido()">
+						style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledValorRetenido}>
 						<option value="">Seleccionar</option>
 						<c:forEach items="${ tarifasValorRetenido}" var="eachTarifa">
 
@@ -213,7 +220,7 @@
 				<div class="col-md-1" style="padding-left: 2px; padding-right: 2px;">
 					<input class="new_alto form-control montoRetenido" type="text"
 						value="${eachValor.montoRetenido }"
-						onchange="activarValidacion_valorRetenido()" />
+						onchange="activarValidacion_valorRetenido()" ${roValorRetenido}/>
 				</div>
 				<div class="col-md-1" style="width: 5.9% !important; padding-left: 2px; padding-right: 2px;">
 					<div class="form-group ">
@@ -259,17 +266,15 @@
 	</div>
 	<!-- fin de codigo adjuntar archivo -->
 </sf:form>
-
 <script type="text/javascript">
 	function addvalor() {
 
 		debugger;
 		var tam = $(".valor").length;
-		var idMes = "mesValorRetenido_"+tam;
 		if ($(".valor").length < 20) {
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
-			$($(".valor")[0]).parent().children().last().find(".mes").val("")
-			$($(".valor")[0]).parent().children().last().find(".dia").val("")
+			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").val("00")
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").val("00")
 			$($(".valor")[0]).parent().children().last().find(".tipo").val("")
 			$($(".valor")[0]).parent().children().last().find(".numID").val("")
 			$($(".valor")[0]).parent().children().last().find(".razonSocial")
@@ -287,12 +292,14 @@
 			$($(".valor")[0]).parent().children().last().find(".montoRetenido")
 					.val("")
 
-			$($(".valor")[0]).parent().children().last().find(".mes").attr("id",
+			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").attr("id",
 				"mesValorRetenido_"+tam);
-			$($(".valor")[0]).parent().children().last().find(".dia").attr("id",
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").attr("id",
 				"diaValorRetenido_"+tam);
-			$($(".valor")[0]).parent().children().last().find(".dia").attr("disabled",
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").attr("disabled",
 					"disabled");
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").find("option:gt(0)").remove();
+
 		} else {
 			alert("No se pueden agregar m�s registros");
 		}
@@ -342,11 +349,21 @@
 	
 	function realizarUpdateMes_valorRetenido(infoMes) {
 		
-		debugger;
-		var idElemento = 'diaValorRetenido_'+infoMes.id.substring(17);
+		establecerCampoDia(infoMes.value,infoMes.id.substring(17),"",true);	
+		activarValidacion_valorRetenido();
+	}
+	
+	function establecerCampoDia(valMes,idCampoDia,valDia,banderaHabilitado){
+		
+// 		debugger;
+		var idElemento = 'diaValorRetenido_'+idCampoDia;
 		var sel = document.getElementById(idElemento);
-		sel.disabled = '';
-		sel.value = '';
+		if(banderaHabilitado==true){
+			sel.disabled = '';			
+		}else{
+			sel.disabled = 'true';	
+		}
+		sel.value = '00';
 		
 	    var i;
 	    for(i = sel.options.length - 1 ; i >= 0 ; i--)
@@ -356,11 +373,12 @@
 	    
 		var opt = document.createElement('option');
 		opt.appendChild( document.createTextNode('Seleccionar') );
-		opt.value = ''; sel.appendChild(opt); 
+		opt.value = '00'; 
+		sel.appendChild(opt); 
 
 		var diaFormateado = "";
 		for(j = 0 ; j<mesesInfo.length ; j++){
-			if(mesesInfo[j].mes == infoMes.value){
+			if(mesesInfo[j].mes == valMes){
 			    for(i = 1 ; i <= mesesInfo[j].diasEnMes ; i++){
 					opt = document.createElement('option');
 					diaFormateado = i.toString();
@@ -373,10 +391,29 @@
 			    }
 			}
 	    }
-	    
-	    debugger;
-	   
+		if(valDia!=null && valDia!="" && valDia!="00"){
+			sel.value = valDia;	
+		}
+	}
+	
+	
+	function establecerCampoMes(valMes,idCampoMes){
 		
-		activarValidacion_valorRetenido();
+		debugger;
+		var idElemento = 'mesValorRetenido_'+idCampoMes;
+		var sel = document.getElementById(idElemento);
+		sel.value = valMes;
+	}
+	
+	function habilitarMes(idCampoMes,banderaHabilitado){
+		
+		debugger;
+		var idElemento = 'mesValorRetenido_'+idCampoMes;
+		var sel = document.getElementById(idElemento);
+		if(banderaHabilitado==true){
+			sel.disabled = '';			
+		}else{
+			sel.disabled = 'true';	
+		}
 	}
 </script>

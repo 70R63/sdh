@@ -4,10 +4,16 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- Total ingresos netos gravables -->
 
+<c:set var="roIngNetosGrava" value=""/>
+<c:set var="disabledIngNetosGrava" value=""/>
+<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava == true}">
+	<c:set var="roIngNetosGrava" value='readonly="readonly"'/>
+	<c:set var="disabledIngNetosGrava" value='disabled="disabled"'/>
+</c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -24,7 +30,7 @@
 	</div>
 </div>
 <br>
-<form:form action="" style="padding-left: 0px !important">
+<sf:form action="" style="padding-left: 0px !important" commandName="icaInfObjetoFormResp">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1">
@@ -52,16 +58,16 @@
 					<input type="checkbox" name=""
 						class="form-check-input mr-2 actividad actPrincipal"
 						style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-						size="10">
+						size="10" ${roIngNetosGrava}>
 				</div>
 
 				<div class="col-md-7">
 					<input class="alto form-control denomina codCIIU" type="text"
-						value="" />
+						value="" ${roIngNetosGrava}/>
 				</div>
 				<div class="col-md-2">
 					<input class="newalto form-control ingreso ingresos" type="text"
-						value="" />
+						value="" ${roIngNetosGrava}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -85,13 +91,13 @@
 								<input type="checkbox" name=""
 									class="form-check-input mr-2 actividad actPrincipal"
 									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-									size="10" checked="checked">
+									size="10" checked="checked" ${roIngNetosGrava}>
 							</c:when>
 							<c:otherwise>
 								<input type="checkbox" name=""
 									class="form-check-input mr-2 actividad actPrincipal"
 									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-									size="10">
+									size="10" ${roIngNetosGrava}>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -124,7 +130,7 @@
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
 						<select id="" class="alto form-control codCIIU"
-							style="height: 48px;">
+							style="height: 48px;" ${disabledIngNetosGrava}>
 							<option value="" selected>SELECCIONAR</option>
 							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
 								<c:set var="selected" value="" />
@@ -140,7 +146,7 @@
 					</div>
 					<div class="col-md-2">
 						<input class="newalto form-control ingreso ingresos" type="text"
-							value="${eachIngreso.ingresos}" />
+							value="${eachIngreso.ingresos}" ${roIngNetosGrava}/>
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">
@@ -154,72 +160,75 @@
 				</div>
 			</c:if>
 		</c:forEach>
-		<div class="row totaluno" id="totaluno">
-			<div class="col-md-1">
-				<c:choose>
-					<c:when test="${eachIngreso.actPrincipal eq 'X' }">
-						<input type="checkbox" name=""
-							class="form-check-input mr-2 actividad actPrincipal"
-							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-							size="10" checked="checked">
-					</c:when>
-					<c:otherwise>
-						<input type="checkbox" name=""
-							class="form-check-input mr-2 actividad actPrincipal"
-							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-							size="10">
-					</c:otherwise>
-				</c:choose>
-			</div>
-
-			<div class="col-md-7">
-				<!-- 					<input class="form-control denomina codCIIU" type="text" -->
-				<%-- 						value="${eachIngreso.codCIIU}" /> --%>
-				<!--
-						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
-							pattern="#######################" var="codCIIUNumber" />
+		
+		<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true}">
+			<div class="row totaluno" id="totaluno">
+				<div class="col-md-1">
+					<c:choose>
+						<c:when test="${eachIngreso.actPrincipal eq 'X' }">
+							<input type="checkbox" name=""
+								class="form-check-input mr-2 actividad actPrincipal"
+								style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+								size="10" checked="checked">
+						</c:when>
+						<c:otherwise>
+							<input type="checkbox" name=""
+								class="form-check-input mr-2 actividad actPrincipal"
+								style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+								size="10">
+						</c:otherwise>
+					</c:choose>
+				</div>
 	
-						<select id="" class="form-control codCIIU" style="height: 48px;">
-							<option value="">SELECCIONAR</option>
-							<c:forEach items="${ econActivities}" var="eachActivity">
-	
-								<fmt:formatNumber value="${ eachActivity.code}"
-									pattern="#######################" var="eachCodCIIUNumber" />
-	
-								<c:set var="selected" value="" />
-								<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
-									<c:set var="selected" value="selected" />
-								</c:if>
-	
-								<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
-									- ${eachActivity.description }</option>
-							</c:forEach>
-						</select>
-						 -->
-				<!-- EJRR Adding data to select box -->
-				<select id="" class="alto form-control codCIIU"
-					style="font-size:12px !important; padding: 0px !important">
-					<option value="" selected>SELECCIONAR</option>
-					<c:forEach items="${gravableNetIncomes}" var="eachActivity">
-						<option value="${eachActivity.ciiu}">${eachActivity.ciiu}
-							- ${eachActivity.denominacion}</option>
-					</c:forEach>
-				</select>
-			</div>
-			<div class="col-md-2">
-				<input class="newalto form-control ingreso ingresos" type="text"
-					value="${eachIngreso.ingresos}" />
-			</div>
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addtotaluno()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img> <img onclick="deletotaluno()"
-						src="${themeResourcePath}/images/deledelineacion.png"
-						style="width: 25px"></img>
+				<div class="col-md-7">
+					<!-- 					<input class="form-control denomina codCIIU" type="text" -->
+					<%-- 						value="${eachIngreso.codCIIU}" /> --%>
+					<!--
+							<fmt:formatNumber value="${ eachIngreso.codCIIU}"
+								pattern="#######################" var="codCIIUNumber" />
+		
+							<select id="" class="form-control codCIIU" style="height: 48px;">
+								<option value="">SELECCIONAR</option>
+								<c:forEach items="${ econActivities}" var="eachActivity">
+		
+									<fmt:formatNumber value="${ eachActivity.code}"
+										pattern="#######################" var="eachCodCIIUNumber" />
+		
+									<c:set var="selected" value="" />
+									<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
+										<c:set var="selected" value="selected" />
+									</c:if>
+		
+									<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
+										- ${eachActivity.description }</option>
+								</c:forEach>
+							</select>
+							 -->
+					<!-- EJRR Adding data to select box -->
+					<select id="" class="alto form-control codCIIU"
+						style="font-size:12px !important; padding: 0px !important" >
+						<option value="" selected>SELECCIONAR</option>
+						<c:forEach items="${gravableNetIncomes}" var="eachActivity">
+							<option value="${eachActivity.ciiu}">${eachActivity.ciiu}
+								- ${eachActivity.denominacion}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="col-md-2">
+					<input class="newalto form-control ingreso ingresos" type="text"
+						value="${eachIngreso.ingresos}"/>
+				</div>
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addtotaluno()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deletotaluno()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:if>
 	</div>
 
 	<!-- 	se agrega boton para adjuntar archivo -->
@@ -243,216 +252,210 @@
 	<!-- fin de codigo adjuntar archivo -->
 
 	<br>
-<!-- 	<div class="row"> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme code="ica.declaracion.total.angrava" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme code="ica.declaracion.total.tipdoc" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme code="ica.declaracion.total.numide" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme code="ica.declaracion.total.nombre" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme code="ica.declaracion.total.direc" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme code="ica.declaracion.total.municipio" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme code="ica.declaracion.total.tel" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-2"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme code="ica.declaracion.total.denomi" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme --%>
-<%-- 					code="ica.declaracion.total.valtotaliva" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-1"> -->
-<!-- 			<label class="control-label format_label" style="text-transform: none !important" -->
-<%-- 				for=""> <spring:theme --%>
-<%-- 					code="ica.declaracion.total.valtotaldev" /> --%>
-<!-- 			</label> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+<div id="divTablaING" style="display: none;">
+ 	<div class="row"> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme code="ica.declaracion.total.angrava" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme code="ica.declaracion.total.tipdoc" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme code="ica.declaracion.total.numide" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme code="ica.declaracion.total.nombre" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme code="ica.declaracion.total.direc" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme code="ica.declaracion.total.municipio" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme code="ica.declaracion.total.tel" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-2"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme code="ica.declaracion.total.denomi" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme 
+ 					code="ica.declaracion.total.valtotaliva" /> 
+ 			</label> 
+ 		</div> 
+ 		<div class="col-md-1"> 
+ 			<label class="control-label format_label" style="text-transform: none !important" 
+ 				for=""> <spring:theme 
+ 					code="ica.declaracion.total.valtotaldev" /> 
+ 			</label> 
+ 		</div> 
+ 	</div> 
 
-<%-- 	<c:if test="${empty infoDeclara.ingPorCIIU }"> --%>
-<!-- 		<div class="row totaldos" id="totaldos"> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control anoGravable" type="text" /> -->
-<!-- 			</div> -->
-
-
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<select id="" class="new_alto form-control tipoID" -->
-<!-- 					style="height: 48px;"> -->
-<!-- 					<option value="">Seleccionar</option> -->
-<!-- 					<option value="CC">CC C�dula de ciudadania</option> -->
-<!-- 					<option value="CE">CE C�dula de extranjer�a</option> -->
-<!-- 					<option value="NIT">NIT N�mero de identificaci�n tributaria</option> -->
-<!-- 					<option value="PA">PA Pasaporte</option> -->
-<!-- 					<option value="TI">TI Tarjeta de identidad</option> -->
-<!-- 					<option value="TIE">TIE Tarjeta de identidad de extranjero</option> -->
-<!-- 					<option value="NITE">NITE NIT extranjero</option> -->
-<!-- 					<option value="NUIP">NUIP N�mero �nico de identificaci�n -->
-<!-- 						personal</option> -->
-<!-- 				</select> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control numID" type="text" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control razonSocial" type="text" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control direccion" type="text" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control municipio" type="text" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control telefono" type="text" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-2"> -->
-<!-- 				<select id="" class="new_alto form-control codCIIU" -->
-<!-- 					style="font-size:12px !important; padding: 0px !important"> -->
-<!-- 					<option value="">SELECCIONAR</option> -->
-<%-- 					<c:forEach items="${ econActivities}" var="eachActivity"> --%>
-<%-- 						<option value="${eachActivity.code}">${eachActivity.code} --%>
-<%-- 							- ${eachActivity.description }</option> --%>
-<%-- 					</c:forEach> --%>
-<!-- 				</select> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control ingBrutoSINIVA" type="text" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control valorTotalDevol" type="text" /> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<div class="form-group "> -->
-<!-- 					<img onclick="addtotaldos()" -->
-<%-- 						src="${themeResourcePath}/images/adddelineacion.png" --%>
-<!-- 						style="width: 25px"></img> <img onclick="deletotaldos()" -->
-<%-- 						src="${themeResourcePath}/images/deledelineacion.png" --%>
-<!-- 						style="width: 25px"></img> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<%-- 	</c:if> --%>
-
-<%-- 	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso"> --%>
-<!-- 		<div class="row totaldos" id="totaldos"> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control anoGravable" disabled="disabled" -->
-<%-- 					type="text" value="${eachIngreso.anoGravable }" /> --%>
-<!-- 			</div> -->
+ 	<c:if test="${empty infoDeclara.ingPorCIIU }"> 
+ 		<div class="row totaldos" id="totaldos"> 
+ 			<div class="col-md-1"> 
+ 				<input class="new_alto form-control anoGravable" type="text" /> 
+ 			</div> 
 
 
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<select id="" disabled="disabled" -->
-<!-- 					class="new_alto form-control tipoID" style="height: 48px;"> -->
-<!-- 					<option value="">Seleccionar</option> -->
-<%-- 					<c:forEach items="${ idTypes}" var="eachType"> --%>
+ 			<div class="col-md-1"> 
+ 				<select id="" class="new_alto form-control tipoID" 
+ 					style="height: 48px;"> 
+ 					<option value="">Seleccionar</option> 
+ 					<option value="CC">CC C�dula de ciudadania</option> 
+ 					<option value="CE">CE C�dula de extranjer�a</option> 
+ 					<option value="NIT">NIT N�mero de identificaci�n tributaria</option> 
+ 					<option value="PA">PA Pasaporte</option> 
+ 					<option value="TI">TI Tarjeta de identidad</option> 
+ 					<option value="TIE">TIE Tarjeta de identidad de extranjero</option> 
+ 					<option value="NITE">NITE NIT extranjero</option> 
+ 					<option value="NUIP">NUIP N�mero �nico de identificaci�n 
+ 						personal</option> 
+ 				</select> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<input class="new_alto form-control numID" type="text" /> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<input class="new_alto form-control razonSocial" type="text" /> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<input class="new_alto form-control direccion" type="text" /> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<input class="new_alto form-control municipio" type="text" /> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<input class="new_alto form-control telefono" type="text" /> 
+ 			</div> 
+ 			<div class="col-md-2"> 
+ 				<select id="" class="new_alto form-control codCIIU" 
+ 					style="font-size:12px !important; padding: 0px !important"> 
+ 					<option value="">SELECCIONAR</option> 
+ 					<c:forEach items="${ econActivities}" var="eachActivity"> 
+ 						<option value="${eachActivity.code}">${eachActivity.code} 
+ 							- ${eachActivity.description }</option> 
+ 					</c:forEach> 
+ 				</select> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<input class="new_alto form-control ingBrutoSINIVA" type="text" /> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<input class="new_alto form-control valorTotalDevol" type="text" /> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<div class="form-group "> 
+ 					<img onclick="addtotaldos()" 
+ 						src="${themeResourcePath}/images/adddelineacion.png" 
+ 						style="width: 25px"></img> <img onclick="deletotaldos()" 
+ 						src="${themeResourcePath}/images/deledelineacion.png" 
+ 						style="width: 25px"></img> 
+ 				</div> 
+ 			</div> 
+ 		</div> 
+ 	</c:if> 
 
-<%-- 						<c:set var="selected" value="" /> --%>
-<%-- 						<c:if test="${eachIngreso.tipoID  eq  eachType}"> --%>
-<%-- 							<c:set var="selected" value="selected" /> --%>
-<%-- 						</c:if> --%>
+ 	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso" varStatus="infoLoop"> 
+ 		<div class="row totaldos" id="totaldos"> 
+ 			<div class="col-md-1"> 
+ 				<sf:input class="new_alto form-control anoGravable" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].anoGravable"/>
+ 			</div> 
 
-<%-- 						<option value="${eachType}" ${selected }><spring:theme --%>
-<%-- 								code="register.id.types.${eachType }" /></option> --%>
 
-<%-- 					</c:forEach> --%>
-<!-- 				</select> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control numID" disabled="disabled" -->
-<%-- 					type="text" value="${eachIngreso.numID }" /> --%>
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control razonSocial" disabled="disabled" -->
-<%-- 					type="text" value="${eachIngreso.razonSocial }" /> --%>
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control direccion" disabled="disabled" -->
-<%-- 					type="text" value="${eachIngreso.direccion }" /> --%>
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control municipio" disabled="disabled" -->
-<%-- 					type="text" value="${eachIngreso.desMunicipio }" /> --%>
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control telefono" disabled="disabled" -->
-<%-- 					type="text" value="${eachIngreso.telefono }" /> --%>
-<!-- 			</div> -->
-<!-- 			<div class="col-md-2"> -->
+ 			<div class="col-md-1"> 
+<%--  			value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].tipoID}" --%>
+ 				<select id="" 
+ 					class="new_alto form-control tipoID" style="height: 48px;"> 
+ 					<option value="">Seleccionar</option> 
+ 					<c:forEach items="${ idTypes}" var="eachType"> 
 
-<%-- 				<fmt:formatNumber value="${ eachIngreso.codCIIU}" --%>
-<%-- 					pattern="#######################" var="codCIIUNumber" /> --%>
+ 						<c:set var="selected" value="" /> 
+ 						<c:if test="${eachIngreso.tipoID  eq  eachType}"> 
+ 							<c:set var="selected" value="selected" /> 
+ 						</c:if> 
 
-<!-- 				<select id="" disabled="disabled" -->
-<!-- 					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important"> -->
-<!-- 					<option value="">SELECCIONAR</option> -->
-<%-- 					<c:forEach items="${ econActivities}" var="eachActivity"> --%>
+ 						<option value="${eachType}" ${selected }><spring:theme 
+ 								code="register.id.types.${eachType }" /></option> 
 
-<%-- 						<fmt:formatNumber value="${ eachActivity.code}" --%>
-<%-- 							pattern="#######################" var="eachCodCIIUNumber" /> --%>
+ 					</c:forEach> 
+ 				</select> 
+ 			</div> 
+ 			<div class="col-md-1"> 
+				<sf:input class="new_alto form-control numID" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].numID"/> 					
+ 			</div> 
+ 			<div class="col-md-1"> 
+				<sf:input class="new_alto form-control razonSocial" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].razonSocial"/>
+ 			</div> 
+ 			<div class="col-md-1"> 
+				<sf:input class="new_alto form-control direccion" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].direccion"/>
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio"/>
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				 <sf:input class="new_alto form-control telefono" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].telefono"/>
+ 			</div> 
+ 			<div class="col-md-2"> 
 
-<%-- 						<c:set var="selected" value="" /> --%>
-<%-- 						<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}"> --%>
-<%-- 							<c:set var="selected" value="selected" /> --%>
-<%-- 						</c:if> --%>
+ 				<fmt:formatNumber value="${ eachIngreso.codCIIU}" 
+ 					pattern="#######################" var="codCIIUNumber" /> 
 
-<%-- 						<option value="${eachActivity.code}" ${selected }>${eachActivity.code} --%>
-<%-- 							- ${eachActivity.description }</option> --%>
-<%-- 					</c:forEach> --%>
-<!-- 				</select> -->
+ 				<select id="" 
+ 					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important"> 
+ 					<option value="">SELECCIONAR</option> 
+ 					<c:forEach items="${ econActivities}" var="eachActivity"> 
 
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control ingBrutoSINIVA" type="text" -->
-<%-- 					disabled="disabled" value="${eachIngreso.ingBrutoSINIVA }" /> --%>
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<input class="new_alto form-control valorTotalDevol" -->
-<!-- 					disabled="disabled" type="text" -->
-<%-- 					value="${eachIngreso.valorTotalDevo }" /> --%>
-<!-- 			</div> -->
-<!-- 			<div class="col-md-1"> -->
-<!-- 				<div class="form-group "> -->
-<!-- 					<img onclick="addtotaldos()" -->
-<%-- 						src="${themeResourcePath}/images/adddelineacion.png" --%>
-<!-- 						style="width: 25px"></img> <img onclick="deletotaldos()" -->
-<%-- 						src="${themeResourcePath}/images/deledelineacion.png" --%>
-<!-- 						style="width: 25px"></img> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<%-- 	</c:forEach> --%>
-</form:form>
+ 						<fmt:formatNumber value="${ eachActivity.code}" 
+ 							pattern="#######################" var="eachCodCIIUNumber" /> 
+
+ 						<c:set var="selected" value="" /> 
+ 						<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}"> 
+ 							<c:set var="selected" value="selected" /> 
+ 						</c:if> 
+
+ 						<option value="${eachActivity.code}" ${selected }>${eachActivity.code} 
+ 							- ${eachActivity.description }</option> 
+ 					</c:forEach> 
+ 				</select> 
+
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<sf:input class="new_alto form-control ingBrutoSINIVA" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].ingBrutoSINIVA"/>
+ 			</div> 
+ 			<div class="col-md-1"> 
+				<sf:input class="new_alto form-control valorTotalDevol" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].valorTotalDevol"/>
+ 			</div> 
+ 			<div class="col-md-1"> 
+ 				<div class="form-group "> 
+ 					<img onclick="addtotaldos()" 
+ 						src="${themeResourcePath}/images/adddelineacion.png" 
+ 						style="width: 25px"></img> <img onclick="deletotaldos()" 
+ 						src="${themeResourcePath}/images/deledelineacion.png" 
+ 						style="width: 25px"></img> 
+ 				</div> 
+ 			</div> 
+ 		</div> 
+ 	</c:forEach> 
+</div>
+</sf:form>
 
 
 <script>

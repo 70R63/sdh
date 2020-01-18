@@ -30,7 +30,7 @@
 <script>	
 
 window.onload = function() {
-	debugger;
+
 	ACC.ica.validacion_valorRetenido = null;
 	var cosas = $(":input");
 	var tam = cosas.length;
@@ -43,6 +43,48 @@ window.onload = function() {
 			}
 		}
 	}
+	
+	 <c:forEach items ="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorRetenido}" var="valorRetenidoItem" varStatus="status">
+	 	var habilitarDia = true;
+		<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido == true}">
+			habilitarDia = false;
+			habilitarMes("${status.index}",false);
+		</c:if>
+	 	establecerCampoDia("${valorRetenidoItem.mes}","${status.index}","${valorRetenidoItem.dia}",habilitarDia);	
+	 </c:forEach>
+	 
+	 var codigosCIIU = new Array();
+	 var item_codigosCIIU = null;
+	 
+	 <c:forEach items ="${gravableNetIncomes}" var="itemNetIncomes" varStatus="status">
+	 	<c:if test="${not empty itemNetIncomes.ciiu}">
+			item_codigosCIIU = new Object();
+			item_codigosCIIU.idCodigoCIIU = "${itemNetIncomes.ciiu}";
+			codigosCIIU.push(item_codigosCIIU);
+		</c:if>
+	 </c:forEach>
+	 var mostrarTablaING = false;
+	 for (var i = 0; i < codigosCIIU.length; i++) {
+		for(var j = 0; j < cat_habilitar_valorRetenido.length; j++){
+			 if (codigosCIIU[i].idCodigoCIIU == cat_habilitar_valorRetenido[j].itemId) {
+				 if(cat_habilitar_valorRetenido[j].habilitado == "X"){
+					mostrarTablaING = true;
+					break;
+				 }
+		 	}
+		 }
+		if(mostrarTablaING == true){
+			break;
+		}
+	 }
+	 
+	 if(mostrarTablaING == true){
+		var divTablaINGElemento = document.getElementById("divTablaING");
+		divTablaINGElemento.style.display = 'block';		 
+	 }
+	 
+	 
+
 	 $(".loader").fadeOut("slow");
 
 }
@@ -52,8 +94,6 @@ window.onload = function() {
 	
 	
 	
-	
-	debugger;
 	 var mesesInfo = new Array();
 	 var mesDetalles = null;
 	 

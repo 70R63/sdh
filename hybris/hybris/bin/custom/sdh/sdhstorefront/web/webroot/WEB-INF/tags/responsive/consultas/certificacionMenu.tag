@@ -71,9 +71,10 @@
 				</h2>
 				<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
 				<div class="caja--ser-rel color-sr2">
-					<select id="aniograv" class="new_alto form-control" name="aniograv"
+					<select id="aniograv" class="new_alto form-control aniograv" name="aniograv"
 						onchange="SelectedAnio(this)">
 						<option value="00">Seleccionar</option>
+						<option value="2020">2020</option>
 						<option value="2019">2019</option>
 						<option value="2018">2018</option>
 						<option value="2017">2017</option>
@@ -365,39 +366,7 @@
 		</div>
 		
 		
-		<div class="row" id="table-retedelineacion" style="display: none;">
-			<div class="col-md-6 col-md-offset-3">
-				<table class="table" id="table-retedelineacion1">
-					<thead style="cellspacing: 10 !important">
-						<tr>
-							<th style="text-align: center"><label class="control-label "
-								for=""><spring:theme
-										code="certideclara.inicial.delineacion.cdu" /></label></th>
-							<th style="text-align: center"><label class="control-label "
-								for=""><spring:theme
-										code="certideclara.inicial.delineacion.radicado" /></label></th>			
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.referencia" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.importe" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
-										code="certideclara.inicial.gasolina.moneda" /></label></th>
-							<th style="text-align: center"><label class="control-label"
-								for=""> <spring:theme
-										code="certideclara.inicial.delineacion.seleccionar" /></label></th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-			</div>
-		</div>
+		
 		
 
 		<div class="row">
@@ -439,10 +408,12 @@
  	
 	function onChange(selectObject) {
 			debugger;
+		ACC.opcionDeclaraciones.preparaAnioGravable();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
 // 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
 		ACC.opcionDeclaraciones.prepararPeriodo();
+		
 	}
 
 	

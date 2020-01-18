@@ -40,7 +40,7 @@ public class DefaultPseTransactionsLogDao extends DefaultGenericDao<PseTransacti
 		{
 			GET_ALL_OUTSTANDING_TRANSACTIONS = "Select {p:" + PseTransactionsLogModel.PK + "} from {"
 					+ PseTransactionsLogModel._TYPECODE + " AS p} Where " + "{p:" + PseTransactionsLogModel.TRANSACTIONSTATE
-					+ "} is null and " + "{p:" + PseTransactionsLogModel.TRAZABILITYCODE + "} not in ('-1', '') ";
+					+ "}  in (null, '')  and " + "{p:" + PseTransactionsLogModel.TRAZABILITYCODE + "} not in ('-1', '') ";
 		}
 		else
 		{

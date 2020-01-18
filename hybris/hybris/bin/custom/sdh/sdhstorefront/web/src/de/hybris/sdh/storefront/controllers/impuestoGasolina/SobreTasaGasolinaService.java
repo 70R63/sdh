@@ -2230,14 +2230,7 @@ public class SobreTasaGasolinaService
 				elementos.put("0007", "Publicidad Exterior Visual");
 			}
 		}
-		if (customerData.getDelineacion() != null) //Retedelineacion
-		{
-			if (customerData.getDelineacion().size() > 0)
-			{
-				elementos.put("0008", "Retención Delineación Urbana");
-			}
-		}
-
+		
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;

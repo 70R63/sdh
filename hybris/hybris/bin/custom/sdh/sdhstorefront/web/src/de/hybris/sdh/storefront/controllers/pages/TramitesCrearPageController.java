@@ -600,7 +600,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "02______", "02", "Novedades de registro");
 		agregarElementoTramites(elementos, "03______", "03", "Facturación");
 		agregarElementoTramites(elementos, "04______", "04", "Analisis de la cuenta");
-		agregarElementoTramites(elementos, "05______", "05", "Boletín de deudores Morosos del Estado");
+		agregarElementoTramites(elementos, "05______", "05", "Boletín de deudores Morosos"); //se modifica etiqueta, valor anterior = Boletín de deudores Morosos del Estado 14-01-2020 Maria Torres
 		agregarElementoTramites(elementos, "06______", "06", "Verificación de pagos", "ZT10", "A1ZTRT0001Z006");
 		agregarElementoTramites(elementos, "07______", "07", "Corrección de la información causada contablemente");
 		agregarElementoTramites(elementos, "09______", "09", "Agente Autorizado");
@@ -761,11 +761,11 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "02030203", "03",
 				"Organismos internacionales adscritos y/o entidades que hayan firmado tratados internacionales con Colombia", "ZT13",
 				"A1ZTRT0004Z114");
-		//Novedades de registro-No Sujeción-Delineación
-		agregarElementoTramites(elementos, "02030200", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "02030201", "01", "Cruz Roja Colombiana", "ZT13", "A1ZTRT0004Z115");
-		agregarElementoTramites(elementos, "02030202", "02", "Misiones Diplomáticas", "ZT13", "A1ZTRT0004Z116");
-		agregarElementoTramites(elementos, "02030203", "03",
+		//Novedades de registro-No Sujeción-Delineación ---Se cambia clave de 02030200 a 02030300 para corregir incidente del día 14-01-2020 Maria Torres
+		agregarElementoTramites(elementos, "02030300", "00", "Seleccionar");
+		agregarElementoTramites(elementos, "02030301", "01", "Cruz Roja Colombiana", "ZT13", "A1ZTRT0004Z115");
+		agregarElementoTramites(elementos, "02030302", "02", "Misiones Diplomáticas", "ZT13", "A1ZTRT0004Z116");
+		agregarElementoTramites(elementos, "02030303", "03",
 				"Organismos internacionales adscritos y/o entidades que hayan firmado tratados internacionales con Colombia", "ZT13",
 				"A1ZTRT0004Z117");
 		//Novedades de registro-Tratamiento especial de tarifas y/o cambio de destino hacendario
@@ -898,7 +898,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0403____", "03", "Ajuste por situaciones administrativas", "ZT08", "A1ZTRT0002Z011");
 		//		agregarElementoTramites(elementos, "0404____", "04", "Revisión de datos SAP", "ZT08", "A1ZTRT0002Z012");
 
-		//Boletín de deudores Morosos del Estado
+		//Boletín de deudores Morosos
 		agregarElementoTramites(elementos, "0500____", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "0501____", "01", "Deuda Cancelada", "ZT09", "A1ZTRT0002Z013");
 		agregarElementoTramites(elementos, "0502____", "02", "Saneamiento de información", "ZT09", "A1ZTRT0002Z014");

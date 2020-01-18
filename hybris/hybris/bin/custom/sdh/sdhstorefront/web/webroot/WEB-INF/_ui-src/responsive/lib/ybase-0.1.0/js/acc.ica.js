@@ -350,45 +350,47 @@ ACC.ica = {
 			 	
 			 	
 			 	
-//			 	var ingPorCIIU = new Array();
-//			 	 
-//			 	 $.each($(".totaldos"),function(index,value){
-//	    	        	
-//			 		 	
-//			 		 		
-//			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
-//			 		var tipoID=$.trim($(value).find(".tipoID").val());
-//			 		var numID=$.trim($(value).find(".numID").val());
-//			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
-//			 		var direccion=$.trim($(value).find(".direccion").val());
-//			 		var telefono=$.trim($(value).find(".telefono").val());
-//			 		var codCIIU=$.trim($(value).find(".codCIIU").val());
-//			 		var ingBrutoSINIVA=$.trim($(value).find(".ingBrutoSINIVA").val());
-//			 		var valorTotalDevol=$.trim($(value).find(".valorTotalDevol").val());
-//
-//	    	        	
-//	    	        	if(anoGravable != "" && tipoID != "" && numID != "" && razonSocial != "" && direccion != "" && telefono != "" && codCIIU != "" && ingBrutoSINIVA != "" && valorTotalDevol != "")
-//	    	        	{
-//		    	        	var eachIngreso=new Object();
-//		    	        	
-//		    	        	eachIngreso.anoGravable=anoGravable;
-//		    	        	eachIngreso.tipoID=tipoID;
-//		    	        	eachIngreso.numID=numID;
-//		    	        	eachIngreso.razonSocial=razonSocial;
-//		    	        	eachIngreso.direccion=direccion;
-//		    	        	eachIngreso.telefono=telefono;
-//		    	        	eachIngreso.codCIIU=codCIIU;
-//		    	        	eachIngreso.ingBrutoSINIVA=ingBrutoSINIVA;
-//		    	        	eachIngreso.valorTotalDevol=valorTotalDevol;
-//		    	        	
-//		    	        	ingPorCIIU.push(eachIngreso);
-//		    	        	
-//		    	        	
-//	    	        	}
-//	    	        	
-//	    	        });
-//			 	 
-//			 	icaCalculaDeclaracionForm.ingPorCIIU=ingPorCIIU;
+			 	var ingPorCIIU = new Array();
+			 	 
+			 	 $.each($(".totaldos"),function(index,value){
+	    	        	
+			 		 	
+			 		 		
+			 		var anoGravable=$.trim($(value).find(".anoGravable").val());
+			 		var tipoID=$.trim($(value).find(".tipoID").val());
+			 		var numID=$.trim($(value).find(".numID").val());
+			 		var razonSocial=$.trim($(value).find(".razonSocial").val());
+			 		var direccion=$.trim($(value).find(".direccion").val());
+			 		var codMunicipio=$.trim($(value).find(".municipio").val());
+			 		var telefono=$.trim($(value).find(".telefono").val());
+			 		var codCIIU=$.trim($(value).find(".codCIIU").val());
+			 		var ingBrutoSINIVA=$.trim($(value).find(".ingBrutoSINIVA").val());
+			 		var valorTotalDevol=$.trim($(value).find(".valorTotalDevol").val());
+
+	    	        	
+	    	        	if(anoGravable != "" && tipoID != "" && numID != "" && razonSocial != "" && direccion != "" && telefono != "" && codCIIU != "" && ingBrutoSINIVA != "" && valorTotalDevol != "")
+	    	        	{
+		    	        	var eachIngreso=new Object();
+		    	        	
+		    	        	eachIngreso.anoGravable=anoGravable;
+		    	        	eachIngreso.tipoID=tipoID;
+		    	        	eachIngreso.numID=numID;
+		    	        	eachIngreso.razonSocial=razonSocial;
+		    	        	eachIngreso.direccion=direccion;
+		    	        	eachIngreso.codMunicipio=codMunicipio;
+		    	        	eachIngreso.telefono=telefono;
+		    	        	eachIngreso.codCIIU=codCIIU;
+		    	        	eachIngreso.ingBrutoSINIVA=ingBrutoSINIVA;
+		    	        	eachIngreso.valorTotalDevol=valorTotalDevol;
+		    	        	
+		    	        	ingPorCIIU.push(eachIngreso);
+		    	        	
+		    	        	
+	    	        	}
+	    	        	
+	    	        });
+			 	 
+			 	icaCalculaDeclaracionForm.ingPorCIIU=ingPorCIIU;
 			 	
 			 	var valorRetenido = new Array();
 			 	 
