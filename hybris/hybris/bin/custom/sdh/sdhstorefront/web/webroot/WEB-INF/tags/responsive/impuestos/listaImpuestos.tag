@@ -5,11 +5,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="formElement"
-	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="jquery.min.js"></script>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -23,7 +23,7 @@
 
 
 	<sf:form action="presentar-declaracion?action=presentarDeclaracion"
-		method="POST" modelAttribute="dataForm" id="forma">
+		method="POST" modelAttribute="dataForm" id="forma" onsubmit="return validateForm()">
 
 
 		<c:if test="${mensajeDelinea != null}">
@@ -39,7 +39,7 @@
 			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
 				<span class="paso--uno pasos color-sr1">1</span>
 				<h2 class="titulo-caja--ser-rel color-sr1 label-control">PRESENTAR
-					DECLARACIÓN</h2>
+					DECLARACIï¿½N</h2>
 				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
 					deseas consultar.</p>
 				<div class="caja--ser-rel color-sr1">
@@ -68,9 +68,9 @@
 				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
 					<span class="paso--dos pasos color-sr2">2</span>
 					<h2 class="titulo-caja--ser-rel color-sr2 ">
-						<span class="paso2">AÑO GRAVABLE</span>
+						<span class="paso2">Aï¿½O GRAVABLE</span>
 					</h2>
-					<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+					<p class="pasoClase2 metrophobic">Selecciona el aï¿½o gravable.</p>
 					<div class="caja--ser-rel color-sr2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
@@ -89,9 +89,9 @@
 				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
 					<span class="paso--dos pasos color-sr2">2</span>
 					<h2 class="titulo-caja--ser-rel color-sr2 ">
-						<span class="paso2">AÑO GRAVABLE</span>
+						<span class="paso2">Aï¿½O GRAVABLE</span>
 					</h2>
-					<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+					<p class="pasoClase2 metrophobic">Selecciona el aï¿½o gravable.</p>
 					<div class="caja--ser-rel color-sr2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
@@ -151,9 +151,8 @@
 			</c:if>
 		</div>
 
-
-		<c:if
-			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
+        <!-- Jair Roa -New modification - opcionUso validation -->
+		<c:if test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
 					<sf:button action="${presentarDeclaracionUrl}" type="submit"
@@ -191,11 +190,11 @@
 
 	<div class="col-12 notas_deli" id="notas_deli" style="display: none">
 		<div class="alert alert-success mt-3">
-			<strong>Anticipo Delineación:</strong>
+			<strong>Anticipo Delineaciï¿½n:</strong>
 			<spring:theme code="impuestos.presentarDeclaracion.deliur.nota1" />
 		</div>
 		<div class="alert alert-info mt-3">
-			<strong>Declaración Delineación:</strong>
+			<strong>Declaraciï¿½n Delineaciï¿½n:</strong>
 			<spring:theme code="impuestos.presentarDeclaracion.deliur.nota2" />
 		</div>
 	</div>
@@ -240,8 +239,8 @@
 							<select id="selctipobliga" class="newalto form-control"
 								onchange="ShowSelected(this)">
 								<option value="0-${item.cdu}">Seleccionar</option>
-								<option value="1-${item.cdu}">Declaración</option>
-								<option value="2-${item.cdu}">Retención</option>
+								<option value="1-${item.cdu}">Declaraciï¿½n</option>
+								<option value="2-${item.cdu}">Retenciï¿½n</option>
 							</select>
 						</div>
 						<div class="col-sm-3">
@@ -367,7 +366,7 @@
 <br>
 <br>
 
-<!-- se agrega control para tablas de delineación -->
+<!-- se agrega control para tablas de delineaciï¿½n -->
 <script type="text/javascript">
 	function ShowSelected(selectObject) {
 		var value = selectObject.value;
@@ -399,5 +398,34 @@
 		tipoLicencia.value = value;
 
 	}
+
+	function validateForm(){
+        var anioGravable = document.getElementById("anoGravable").value;
+        var periodo = document.getElementById("periodo").value;
+        var currentUrl = window.location.href;
+        var targetUrl = "infoObject/getUseOptionSobreTasaGasolina?anioGravable="+anioGravable+"&periodo="+periodo;
+        currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion?action=presentarDeclaracion", targetUrl);
+
+	    $.ajax({
+            url: currentUrl,
+            type: "GET",
+            success: function (data) {
+                if(data.opcionUso == '01'){
+                    var r = confirm("Ya tiene una declaraciÃ³n inicial desea realizar la correcciÃ³n, Â¿Desea Continuar?");
+                    if (r == true) {
+                      document.getElementById("forma").submit();
+                    } else {
+                      window.location.href = "presentar-declaracion";
+                    }
+                }else{
+                    return true;
+                }
+            },error: function () {
+                alert("Error");
+            }
+        });
+	}
+
+
 </script>
 

@@ -197,6 +197,8 @@
 			<value>/register/**</value>
 			<value>/onlinePaymentMatcher</value>
 			<value>/onlinePaymentMatcher/**</value>
+			<value>/infoObject</value>
+			<value>/infoObject/**</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />
