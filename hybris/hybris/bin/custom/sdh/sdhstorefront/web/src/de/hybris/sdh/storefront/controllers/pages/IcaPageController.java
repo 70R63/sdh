@@ -392,7 +392,7 @@ public class IcaPageController extends SDHAbstractPageController
 			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
 					.getIngPorCIIU();
 
-			for (int i = 0; i < IngPorCIIUList.size(); i++)
+			for (int i = IngPorCIIUList.size() - 1; i >= 0; i--)
 			{
 				if (IngPorCIIUList.get(i).getNumID() == null)
 				{
@@ -643,11 +643,11 @@ public class IcaPageController extends SDHAbstractPageController
 
 			if (IngPorCIIUList != null)
 			{
-				for (int i = 0; i < IngPorCIIUList.size(); i++)
+				for (int i = IngPorCIIUList.size() - 1; i >= 0; i--)
 				{
 					if (IngPorCIIUList.get(i) != null)
 					{
-						if (IngPorCIIUList.get(i).getNumID() == null)
+						if (IngPorCIIUList.get(i).getNumID() == null || IngPorCIIUList.get(i).getNumID().isEmpty())
 						{
 							IngPorCIIUList.remove(i);
 						}

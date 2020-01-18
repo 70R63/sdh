@@ -9,9 +9,11 @@
 <!-- Total ingresos netos gravables -->
 
 <c:set var="roIngNetosGrava" value=""/>
+<c:set var="roIngNetosGravaBoolean" value='false'/>
 <c:set var="disabledIngNetosGrava" value=""/>
 <c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava == true}">
 	<c:set var="roIngNetosGrava" value='readonly="readonly"'/>
+	<c:set var="roIngNetosGravaBoolean" value='true'/>
 	<c:set var="disabledIngNetosGrava" value='disabled="disabled"'/>
 </c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
@@ -376,14 +378,14 @@
  	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso" varStatus="infoLoop"> 
  		<div class="row totaldos" id="totaldos"> 
  			<div class="col-md-1"> 
- 				<sf:input class="new_alto form-control anoGravable" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].anoGravable"/>
+ 				<sf:input class="new_alto form-control anoGravable" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].anoGravable" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
 
 
  			<div class="col-md-1"> 
 <%--  			value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].tipoID}" --%>
  				<select id="" 
- 					class="new_alto form-control tipoID" style="height: 48px;"> 
+ 					class="new_alto form-control tipoID" style="height: 48px;" ${disabledIngNetosGrava}> 
  					<option value="">Seleccionar</option> 
  					<c:forEach items="${ idTypes}" var="eachType"> 
 
@@ -399,19 +401,19 @@
  				</select> 
  			</div> 
  			<div class="col-md-1"> 
-				<sf:input class="new_alto form-control numID" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].numID"/> 					
+				<sf:input class="new_alto form-control numID" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].numID" readonly="${roIngNetosGravaBoolean}"/> 					
  			</div> 
  			<div class="col-md-1"> 
-				<sf:input class="new_alto form-control razonSocial" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].razonSocial"/>
+				<sf:input class="new_alto form-control razonSocial" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].razonSocial" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
-				<sf:input class="new_alto form-control direccion" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].direccion"/>
+				<sf:input class="new_alto form-control direccion" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].direccion" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
- 				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio"/>
+ 				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
- 				 <sf:input class="new_alto form-control telefono" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].telefono"/>
+ 				 <sf:input class="new_alto form-control telefono" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].telefono" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-2"> 
 
@@ -419,7 +421,7 @@
  					pattern="#######################" var="codCIIUNumber" /> 
 
  				<select id="" 
- 					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important"> 
+ 					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important" ${disabledIngNetosGrava}> 
  					<option value="">SELECCIONAR</option> 
  					<c:forEach items="${ econActivities}" var="eachActivity"> 
 
@@ -438,10 +440,10 @@
 
  			</div> 
  			<div class="col-md-1"> 
- 				<sf:input class="new_alto form-control ingBrutoSINIVA" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].ingBrutoSINIVA"/>
+ 				<sf:input class="new_alto form-control ingBrutoSINIVA" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].ingBrutoSINIVA" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
-				<sf:input class="new_alto form-control valorTotalDevol" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].valorTotalDevol"/>
+				<sf:input class="new_alto form-control valorTotalDevol" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].valorTotalDevol" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
  				<div class="form-group "> 
