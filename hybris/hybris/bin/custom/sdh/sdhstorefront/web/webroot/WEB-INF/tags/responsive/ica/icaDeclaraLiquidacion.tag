@@ -270,7 +270,7 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						onclick="disab()" ${aporteSI} value="si"> Si
+						onclick="disab()" ${aporteSI} value="si" disabled="disabled"> Si
 					</label>
 					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 					<label class="form-check-label"
@@ -278,7 +278,7 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						${aporteNO} onclick="disab2()" value="no"> No
+						${aporteNO} onclick="disab2()" value="no" disabled="disabled"> No
 					</label>
 					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 				</div>
