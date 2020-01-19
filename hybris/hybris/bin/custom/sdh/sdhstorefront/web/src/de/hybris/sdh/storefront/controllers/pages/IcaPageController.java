@@ -399,6 +399,7 @@ public class IcaPageController extends SDHAbstractPageController
 					IngPorCIIUList.remove(i);
 				}
 			}
+			agregarRegistroDefault_ING(IngPorCIIUList, icaInfObjetoResponse);
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
 
 
@@ -416,7 +417,7 @@ public class IcaPageController extends SDHAbstractPageController
 					ICAInfoValorRetenidoList.remove(i);
 				}
 			}
-			agregarRegistroDefault(ICAInfoValorRetenidoList, icaInfObjetoResponse);
+			agregarRegistroDefault_VR(ICAInfoValorRetenidoList, icaInfObjetoResponse);
 
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
 			icaInfObjetoFormResp
@@ -654,6 +655,7 @@ public class IcaPageController extends SDHAbstractPageController
 					}
 				}
 			}
+			agregarRegistroDefault_ING(IngPorCIIUList, icaInfObjetoResponse);
 			infoDeclara.setIngPorCIIU(IngPorCIIUList);
 
 			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = infoDeclara.getValorRetenido();
@@ -675,7 +677,7 @@ public class IcaPageController extends SDHAbstractPageController
 					}
 				}
 			}
-			agregarRegistroDefault(ICAInfoValorRetenidoList, icaInfObjetoResponse);
+			agregarRegistroDefault_VR(ICAInfoValorRetenidoList, icaInfObjetoResponse);
 
 			infoDeclara.setValorRetenido(ICAInfoValorRetenidoList);
 
@@ -1126,12 +1128,22 @@ public class IcaPageController extends SDHAbstractPageController
 	}
 
 
-	private void agregarRegistroDefault(List<ICAInfoValorRetenido> listaResgistros, ICAInfObjetoResponse infoAdicional)
+	private void agregarRegistroDefault_VR(List<ICAInfoValorRetenido> listaResgistros, ICAInfObjetoResponse infoAdicional)
 	{
 		if (listaResgistros.isEmpty())
 		{
 			ICAInfoValorRetenido registroDefault = new ICAInfoValorRetenido();
 			registroDefault.setAnio(infoAdicional.getAnoGravable());
+			listaResgistros.add(registroDefault);
+		}
+
+	}
+
+	private void agregarRegistroDefault_ING(List<ICAInfoIngPorCiiu> listaResgistros, ICAInfObjetoResponse infoAdicional)
+	{
+		if (listaResgistros.isEmpty())
+		{
+			ICAInfoIngPorCiiu registroDefault = new ICAInfoIngPorCiiu();
 			listaResgistros.add(registroDefault);
 		}
 
