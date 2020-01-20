@@ -59,6 +59,7 @@ import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
 import de.hybris.sdh.storefront.forms.FirmantesForm;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.ICACalculaDeclaracionForm;
+import de.hybris.sdh.storefront.forms.ICAControlCamposDec;
 import de.hybris.sdh.storefront.forms.ICADeclaracionCatalogos;
 import de.hybris.sdh.storefront.forms.ICAInfObjetoForm;
 
@@ -391,13 +392,14 @@ public class IcaPageController extends SDHAbstractPageController
 			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
 					.getIngPorCIIU();
 
-			for (int i = 0; i < IngPorCIIUList.size(); i++)
+			for (int i = IngPorCIIUList.size() - 1; i >= 0; i--)
 			{
 				if (IngPorCIIUList.get(i).getNumID() == null)
 				{
 					IngPorCIIUList.remove(i);
 				}
 			}
+			agregarRegistroDefault_ING(IngPorCIIUList, icaInfObjetoResponse);
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
 
 
@@ -415,7 +417,7 @@ public class IcaPageController extends SDHAbstractPageController
 					ICAInfoValorRetenidoList.remove(i);
 				}
 			}
-			agregarRegistroDefault(ICAInfoValorRetenidoList, icaInfObjetoResponse);
+			agregarRegistroDefault_VR(ICAInfoValorRetenidoList, icaInfObjetoResponse);
 
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
 			icaInfObjetoFormResp
@@ -642,17 +644,18 @@ public class IcaPageController extends SDHAbstractPageController
 
 			if (IngPorCIIUList != null)
 			{
-				for (int i = 0; i < IngPorCIIUList.size(); i++)
+				for (int i = IngPorCIIUList.size() - 1; i >= 0; i--)
 				{
 					if (IngPorCIIUList.get(i) != null)
 					{
-						if (IngPorCIIUList.get(i).getNumID() == null)
+						if (IngPorCIIUList.get(i).getNumID() == null || IngPorCIIUList.get(i).getNumID().isEmpty())
 						{
 							IngPorCIIUList.remove(i);
 						}
 					}
 				}
 			}
+			agregarRegistroDefault_ING(IngPorCIIUList, icaInfObjetoResponse);
 			infoDeclara.setIngPorCIIU(IngPorCIIUList);
 
 			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = infoDeclara.getValorRetenido();
@@ -674,7 +677,7 @@ public class IcaPageController extends SDHAbstractPageController
 					}
 				}
 			}
-			agregarRegistroDefault(ICAInfoValorRetenidoList, icaInfObjetoResponse);
+			agregarRegistroDefault_VR(ICAInfoValorRetenidoList, icaInfObjetoResponse);
 
 			infoDeclara.setValorRetenido(ICAInfoValorRetenidoList);
 
@@ -714,6 +717,7 @@ public class IcaPageController extends SDHAbstractPageController
 			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
 			icaInfObjetoFormResp
 					.setCatalogos(obtenerCatalogos(icaInfObjetoResponse.getAnoGravable(), icaInfObjetoResponse.getPeriodo()));
+			icaInfObjetoFormResp.setControlCampos(establecerCamposICADec("sdh_02"));
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
@@ -1124,7 +1128,7 @@ public class IcaPageController extends SDHAbstractPageController
 	}
 
 
-	private void agregarRegistroDefault(List<ICAInfoValorRetenido> listaResgistros, ICAInfObjetoResponse infoAdicional)
+	private void agregarRegistroDefault_VR(List<ICAInfoValorRetenido> listaResgistros, ICAInfObjetoResponse infoAdicional)
 	{
 		if (listaResgistros.isEmpty())
 		{
@@ -1135,5 +1139,38 @@ public class IcaPageController extends SDHAbstractPageController
 
 	}
 
+	private void agregarRegistroDefault_ING(List<ICAInfoIngPorCiiu> listaResgistros, ICAInfObjetoResponse infoAdicional)
+	{
+		if (listaResgistros.isEmpty())
+		{
+			ICAInfoIngPorCiiu registroDefault = new ICAInfoIngPorCiiu();
+			listaResgistros.add(registroDefault);
+		}
+
+	}
+
+	private ICAControlCamposDec establecerCamposICADec(String rol)
+	{
+		ICAControlCamposDec controlCampos = null;
+
+		switch (rol)
+		{
+			case "sdh_02":
+				controlCampos = new ICAControlCamposDec();
+				controlCampos.setTotalIngrPeriodo(true);
+				controlCampos.setIngFueraBog(true);
+				controlCampos.setDeducciones(true);
+				controlCampos.setIngNetosGrava(true);
+				controlCampos.setValorRetenido(true);
+				controlCampos.setValorPagar(true);
+
+				break;
+
+			default:
+				break;
+		}
+
+		return controlCampos;
+	}
 
 }

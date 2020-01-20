@@ -18,6 +18,12 @@
 	}
 </script>
 
+<c:set var="roIngFueraBog" value=""/>
+<c:set var="disabledIngFueraBog" value=""/>
+<c:if test="${icaInfObjetoFormResp.controlCampos.ingFueraBog == true}">
+	<c:set var="roIngFueraBog" value='readonly="readonly"'/>
+	<c:set var="disabledIngFueraBog" value='disabled="disabled"'/>
+</c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -64,7 +70,7 @@
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
 						<select id="" class="alto form-control deno codCIIU"
-							style="font-size: 11px !important">
+							style="font-size: 11px !important" ${disabledIngFueraBog}>
 							<option value="" selected>SELECCIONAR</option>
 							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
 								<c:set var="selected" value="" />
@@ -81,7 +87,7 @@
 
 					<div class="col-md-2">
 						<select id="" class="new_alto form-control mun codMunicipio"
-							style="height: 48px;">
+							style="height: 48px;" ${disabledIngFueraBog}>
 							<option value="">SELECCIONAR</option>
 
 							<c:forEach items="${cities}" var="eachCity">
@@ -95,66 +101,70 @@
 					</div>
 					<div class="col-md-1">
 						<input class="new_alto form-control ing ingresos" type="text"
-							value="${eachIngreso.ingresos }" />
+							value="${eachIngreso.ingresos }" ${roIngFueraBog}/>
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">
+							<c:if test="${icaInfObjetoFormResp.controlCampos.ingFueraBog != true}">
 							<img onclick="addactvifuera()"
 								src="${themeResourcePath}/images/adddelineacion.png"
 								style="width: 25px"></img> <img id="dele"
 								onclick="deleactvifuera(this)"
 								src="${themeResourcePath}/images/deledelineacion.png"
 								style="width: 25px"></img>
+							</c:if>
 						</div>
 					</div>
 				</div>
 			</c:if>
 		</c:forEach>
 
-		<!--  se agregan l�neas para agregar siempre una linea en la tabla -->
-		<div class="row actvifuera" id="actvifuera">
-			<div class="col-md-7">
-				<select id="" class="alto form-control deno codCIIU"
-					style="font-size: 11px !important">
-					<option value="">SELECCIONAR</option>
-					<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
-						<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
-							- ${eachActivity.denominacion }</option>
-					</c:forEach>
-				</select>
-			</div>
-
-
-			<div class="col-md-2">
-				<select id="" class="new_alto form-control mun codMunicipio"
-					style="height: 48px;" onchange="bogota(this)">
-					<option value="">SELECCIONAR</option>
-					<c:set var="selected" value="" />
-					<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
+		<c:if test="${icaInfObjetoFormResp.controlCampos.ingFueraBog != true}">
+			<!--  se agregan l�neas para agregar siempre una linea en la tabla -->
+			<div class="row actvifuera" id="actvifuera">
+				<div class="col-md-7">
+					<select id="" class="alto form-control deno codCIIU"
+						style="font-size: 11px !important">
+						<option value="">SELECCIONAR</option>
+						<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
+							<option ${selected } value="${eachActivity.ciiu}">${eachActivity.ciiu}
+								- ${eachActivity.denominacion }</option>
+						</c:forEach>
+					</select>
+				</div>
+	
+	
+				<div class="col-md-2">
+					<select id="" class="new_alto form-control mun codMunicipio"
+						style="height: 48px;" onchange="bogota(this)">
+						<option value="">SELECCIONAR</option>
 						<c:set var="selected" value="" />
-					</c:if>
-					<c:forEach items="${cities}" var="eachCity">
-						<c:if test="${eachCity.code ne '000000011001'}">
-							<option value="${ eachCity.code}">${eachCity.name}</option>
-						</c:if>	
-					</c:forEach>
-				</select>
-			</div>
-			<div class="col-md-1">
-				<input class="new_alto form-control ing ingresos" type="text"
-					value="" />
-			</div>
-			<div class="col-md-1">
-				<div class="form-group ">
-					<img onclick="addactvifuera()"
-						src="${themeResourcePath}/images/adddelineacion.png"
-						style="width: 25px"></img> <img onclick="deleactvifuera()"
-						src="${themeResourcePath}/images/deledelineacion.png"
-						style="width: 25px"></img>
+						<c:if test="${eachIngreso.codMunicipio eq eachCity.code}">
+							<c:set var="selected" value="" />
+						</c:if>
+						<c:forEach items="${cities}" var="eachCity">
+							<c:if test="${eachCity.code ne '000000011001'}">
+								<option value="${ eachCity.code}">${eachCity.name}</option>
+							</c:if>	
+						</c:forEach>
+					</select>
+				</div>
+				<div class="col-md-1">
+					<input class="new_alto form-control ing ingresos" type="text"
+						value="" />
+				</div>
+				<div class="col-md-1">
+					<div class="form-group ">
+						<img onclick="addactvifuera()"
+							src="${themeResourcePath}/images/adddelineacion.png"
+							style="width: 25px"></img> <img onclick="deleactvifuera()"
+							src="${themeResourcePath}/images/deledelineacion.png"
+							style="width: 25px"></img>
+					</div>
 				</div>
 			</div>
-		</div>
 		<!-- fin de c�digo agregado -->
+		</c:if>
 
 		<!-- <div id="adjuntar" class="row" style="display: none;"> -->
 		<!-- 		<div class="col-md-3" style="margin-top: 20px !important"> -->

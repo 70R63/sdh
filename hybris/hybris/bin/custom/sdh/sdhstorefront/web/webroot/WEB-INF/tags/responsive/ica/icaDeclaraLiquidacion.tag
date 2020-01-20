@@ -8,6 +8,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!-- Total Ingresos ordinarios y extraordinarios de periodo -->
 
+<c:set var="roValorPagar" value=""/>
+<c:set var="disabledValorPagar" value=''/>
+<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido == true}">
+	<c:set var="roValorPagar" value='readonly="readonly"'/>
+	<c:set var="disabledValorPagar" value='disabled="disabled"'/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<c:set
@@ -69,10 +75,10 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
-						id="totalingNetos" name="totalingNetos"
+							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
+						id="totalDeduccion" name="totalDeduccion"
 						class="etiqlargas form-control text-right !important" disabled
-						type="text" value="${infoDeclara.totalingNetos }" maxlength="240"></input>
+						type="text" value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -80,10 +86,10 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
-						id="totalDeduccion" name="totalDeduccion"
+							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
+						id="totalingNetos" name="totalingNetos"
 						class="etiqlargas form-control text-right !important" disabled
-						type="text" value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
+						type="text" value="${infoDeclara.totalingNetos }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -211,7 +217,7 @@
 							code="ica.declaracion.liquidacion.valpag" /></label> <input
 						id="valorPagar" name="valorPagar"
 						class="etiqlargas form-control text-right !important" type="text"
-						value="${infoDeclara.valorPagar }" maxlength="240"></input>
+						value="${infoDeclara.valorPagar }" maxlength="240" ${roValorPagar}></input>
 				</div>
 			</div>
 		</div>
@@ -264,7 +270,7 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						onclick="disab()" ${aporteSI} value="si"> Si
+						onclick="disab()" ${aporteSI} value="si" disabled="disabled"> Si
 					</label>
 					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 					<label class="form-check-label"
@@ -272,7 +278,7 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						${aporteNO} onclick="disab2()" value="no"> No
+						${aporteNO} onclick="disab2()" value="no" disabled="disabled"> No
 					</label>
 					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 				</div>

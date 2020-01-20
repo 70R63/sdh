@@ -36,7 +36,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.aniograv" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
+						id="aniograv" name="aniograv" class="newalto form-control"
 						aria-required="true" type="text"
 						value="${vehiculosFormDeclaracion.anioGravable}" maxlength="30"
 						disabled="disabled">

@@ -45,7 +45,62 @@ window.onload = function() {
 	}
 	
 	 <c:forEach items ="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorRetenido}" var="valorRetenidoItem" varStatus="status">
-	     establecerCampoDia("${valorRetenidoItem.mes}","${status.index}","${valorRetenidoItem.dia}");	
+	 	var habilitarDia = true;
+		<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido == true}">
+			habilitarDia = false;
+			habilitarMes("${status.index}",false);
+		</c:if>
+	 	establecerCampoDia("${valorRetenidoItem.mes}","${status.index}","${valorRetenidoItem.dia}",habilitarDia);	
+	 </c:forEach>
+	 
+	 habilitarTablaING_general();
+	 
+	 
+
+	 $(".loader").fadeOut("slow");
+
+}
+	function banderaHayRegistrosExcel(){
+		var mostrarTablaING = false;
+		
+		if(codigosCIIU != null && cat_habilitar_valorRetenido != null)
+		 for (var i = 0; i < codigosCIIU.length; i++) {
+			for(var j = 0; j < cat_habilitar_valorRetenido.length; j++){
+				 if (codigosCIIU[i].idCodigoCIIU == cat_habilitar_valorRetenido[j].itemId) {
+					 if(cat_habilitar_valorRetenido[j].habilitado == "X"){
+						mostrarTablaING = true;
+						break;
+					 }
+			 	}
+			 }
+			if(mostrarTablaING == true){
+				break;
+			}
+		 }
+		
+		return mostrarTablaING;
+	}
+	function habilitarTablaING_general(){
+		var divTablaINGElemento = document.getElementById("divTablaING");
+		divTablaINGElemento.style.display = 'none';
+		var mostrarTablaING = banderaHayRegistrosExcel();
+		 
+		 if(mostrarTablaING == true){			
+			divTablaINGElemento.style.display = 'block';		 
+		 }
+	}
+	function goBack() {
+		window.history.back();
+	}
+	
+	 var mesesInfo = new Array();
+	 var mesDetalles = null;
+	 
+	 <c:forEach items ="${icaInfObjetoFormResp.catalogos.valor_retenido_dias}" var="diasDelMes" varStatus="status">
+	     mesDetalles = new Object();
+	     mesDetalles.mes = "${diasDelMes.key}";
+	     mesDetalles.diasEnMes = "${diasDelMes.label}";
+	     mesesInfo.push(mesDetalles);
 	 </c:forEach>
 	 
 	 var codigosCIIU = new Array();
@@ -58,47 +113,5 @@ window.onload = function() {
 			codigosCIIU.push(item_codigosCIIU);
 		</c:if>
 	 </c:forEach>
-	 var mostrarTablaING = false;
-	 for (var i = 0; i < codigosCIIU.length; i++) {
-		for(var j = 0; j < cat_habilitar_valorRetenido.length; j++){
-			 if (codigosCIIU[i].idCodigoCIIU == cat_habilitar_valorRetenido[j].itemId) {
-				 if(cat_habilitar_valorRetenido[j].habilitado == "X"){
-					mostrarTablaING = true;
-					break;
-				 }
-		 	}
-		 }
-		if(mostrarTablaING == true){
-			break;
-		}
-	 }
-	 
-	 if(mostrarTablaING == true){
-		var divTablaINGElemento = document.getElementById("divTablaING");
-		divTablaINGElemento.style.display = 'block';		 
-	 }
-	 
-	 
-
-	 $(".loader").fadeOut("slow");
-
-}
-	function goBack() {
-		window.history.back();
-	}
-	
-	
-	
-	 var mesesInfo = new Array();
-	 var mesDetalles = null;
-	 
-	 <c:forEach items ="${icaInfObjetoFormResp.catalogos.valor_retenido_dias}" var="diasDelMes" varStatus="status">
-	     mesDetalles = new Object();
-	     mesDetalles.mes = "${diasDelMes.key}";
-	     mesDetalles.diasEnMes = "${diasDelMes.label}";
-	     mesesInfo.push(mesDetalles);
-	 </c:forEach>
-	 
-	 
  
 </script>	

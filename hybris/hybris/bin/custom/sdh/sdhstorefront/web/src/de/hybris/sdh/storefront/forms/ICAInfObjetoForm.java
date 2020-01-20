@@ -19,6 +19,7 @@ public class ICAInfObjetoForm
 	private ICAInfObjetoResponse icaInfObjetoResponse;
 
 	private ICADeclaracionCatalogos catalogos;
+	private ICAControlCamposDec controlCampos;
 
 	/**
 	 * @return the documentType
@@ -103,6 +104,23 @@ public class ICAInfObjetoForm
 	public void setCatalogos(final ICADeclaracionCatalogos catalogos)
 	{
 		this.catalogos = catalogos;
+	}
+
+	/**
+	 * @return the controlCampos
+	 */
+	public ICAControlCamposDec getControlCampos()
+	{
+		return controlCampos;
+	}
+
+	/**
+	 * @param controlCampos
+	 *           the controlCampos to set
+	 */
+	public void setControlCampos(final ICAControlCamposDec controlCampos)
+	{
+		this.controlCampos = controlCampos;
 	}
 
 

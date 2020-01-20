@@ -8,6 +8,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<c:set var="roDeducciones" value=""/>
+<c:set var="disabledDeducciones" value=""/>
+<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones == true}">
+	<c:set var="roDeducciones" value='readonly="readonly"'/>
+	<c:set var="disabledDeducciones" value='disabled="disabled"'/>
+</c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
 	var="infoDeclara" />
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -44,7 +50,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="actnosubPA">1.- Actividad no sujeta por la
 							producción Primaria Agricola</option>
 					</select>
@@ -52,13 +58,15 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.actnosubPA}" />
+						value="${infoDeclara.deducciones.actnosubPA}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -70,7 +78,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="enajActFijo">2.- Enajenación de Activo
 							Fijos</option>
 					</select>
@@ -82,9 +90,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -96,7 +106,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="exportBienes">3.- Exportación de bienes</option>
 					</select>
 				</div>
@@ -107,9 +117,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -121,7 +133,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="exportServ">4.- Exportación de Servicios</option>
 					</select>
 				</div>
@@ -132,9 +144,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -146,7 +160,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important"${disabledDeducciones}>
 						<option value="actnosub39">5.- Actividad no sujeta Art.
 							39 Decreto 352 de 2002</option>
 					</select>
@@ -158,9 +172,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -173,7 +189,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="actnosubPH">6.- Actividades no sujetas
 							propias de obj.soc. de prop.horiz.</option>
 					</select>
@@ -185,9 +201,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -199,7 +217,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="juegoSuerteAzar">7.- Explotación de los
 							juegos de suerte y azar (Ley 643 de 2001)</option>
 					</select>
@@ -211,9 +229,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -226,7 +246,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="donaciones">8.- Donaciones</option>
 					</select>
 				</div>
@@ -237,9 +257,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -252,7 +274,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="exenActos">9.- Exen.consec.de actos
 							terroristas o catástrofes naturales</option>
 					</select>
@@ -264,9 +286,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -279,7 +303,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="baseGravEsp">10.- Base gravable especial</option>
 					</select>
 				</div>
@@ -290,9 +314,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -305,7 +331,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="ingrActConsorc">11.- Ingresos por
 							actividades realizadas a través de Consorcios</option>
 					</select>
@@ -317,9 +343,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -332,7 +360,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="diviNOGiroOrd">12.- Dividendos que no
 							hacen parte del giro ordinario del negocio</option>
 					</select>
@@ -344,9 +372,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -359,7 +389,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="exenVictima">13.- Exención víctima del
 							secuestro o de la desaparición forzada</option>
 					</select>
@@ -371,9 +401,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -386,7 +418,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="correcMoneda">14.- Corrección monetaria
 							y/o Diferencia en cambio</option>
 					</select>
@@ -401,9 +433,11 @@
 						<!-- 						<img onclick="adddeducciones()" -->
 						<%-- 							src="${themeResourcePath}/images/adddelineacion.png" --%>
 						<!-- 							style="width: 25px"></img>  -->
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -416,7 +450,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="reintegro">15.- Reintegro de costos y
 							gastos</option>
 					</select>
@@ -431,9 +465,11 @@
 						<!-- 						<img onclick="adddeducciones()" -->
 						<%-- 							src="${themeResourcePath}/images/adddelineacion.png" --%>
 						<!-- 							style="width: 25px"></img>  -->
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -446,7 +482,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="salarios">16.- Salarios</option>
 					</select>
 				</div>
@@ -460,9 +496,11 @@
 						<!-- 						<img onclick="adddeducciones()" -->
 						<%-- 							src="${themeResourcePath}/images/adddelineacion.png" --%>
 						<!-- 							style="width: 25px"></img>  -->
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -475,7 +513,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="devoluciones">17.- Devoluciones</option>
 					</select>
 				</div>
@@ -486,9 +524,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -500,7 +540,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="rebajas">18.- Rebajas</option>
 					</select>
 				</div>
@@ -511,9 +551,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -525,7 +567,7 @@
 			<div class="row deducciones">
 				<div class="col-md-6">
 					<select id="" class="alto form-control deducci"
-						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important" ${disabledDeducciones}>
 						<option value="descuentos">19.- Descuentos</option>
 					</select>
 				</div>
@@ -536,68 +578,73 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
 		</c:if>
 
 
-		<div class="row deducciones" id="deducciones">
-			<div class="col-md-6">
-				<select id="deduccionBase" class="alto form-control deducci"
-					style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
-					<option value="">Seleccionar</option>
-					<option value="actnosubPA">1.- Actividad no sujeta por la
-						producción Primaria Agricola</option>
-					<option value="enajActFijo">2.- Enajenación de Activo
-						Fijos</option>
-					<option value="exportBienes">3.- Exportación de bienes</option>
-					<option value="exportServ">4.- Exportación de Servicios</option>
-					<option value="actnosub39">5.- Actividad no sujeta Art. 39
-						Decreto 352 de 2002</option>
-					<option value="actnosubPH">6.- Actividades no sujetas
-						propias de obj.soc. de prop.horiz.</option>
-					<option value="juegoSuerteAzar">7.- Explotación de los
-						juegos de suerte y azar (Ley 643 de 2001)</option>
-					<option value="donaciones">8.- Donaciones</option>
-					<option value="exenActos">9.- Exen.consec.de actos
-						terroristas o catástrofes naturales</option>
-					<option value="baseGravEsp">10.- Base gravable especial</option>
-					<option value="ingrActConsorc">11.- Ingresos por
-						actividades realizadas a través de Consorcios</option>
-					<option value="diviNOGiroOrd">12.- Dividendos que no hacen
-						parte del giro ordinario del negocio</option>
-					<option value="exenVictima">13.- Exención víctima del
-						secuestro o de la desaparición forzada</option>
-					<option value="correcMoneda">14.- Corrección monetaria y/o
-						Diferencia en cambio</option>
-					<option value="reintegro">15.- Reintegro de costos y
-						gastos</option>
-					<option value="salarios">16.- Salarios</option>
-					<option value="devoluciones">17.- Devoluciones</option>
-					<option value="rebajas">18.- Rebajas</option>
-					<option value="descuentos">19.- Descuentos</option>
-				</select>
+		<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
+			<div class="row deducciones" id="deducciones">
+				<div class="col-md-6">
+					<select id="deduccionBase" class="alto form-control deducci"
+						style="height: 48px; text-transform: none !important; font-size: 12px !important; padding: 0px !important">
+						<option value="">Seleccionar</option>
+						<option value="actnosubPA">1.- Actividad no sujeta por la
+							producción Primaria Agricola</option>
+						<option value="enajActFijo">2.- Enajenación de Activo
+							Fijos</option>
+						<option value="exportBienes">3.- Exportación de bienes</option>
+						<option value="exportServ">4.- Exportación de Servicios</option>
+						<option value="actnosub39">5.- Actividad no sujeta Art. 39
+							Decreto 352 de 2002</option>
+						<option value="actnosubPH">6.- Actividades no sujetas
+							propias de obj.soc. de prop.horiz.</option>
+						<option value="juegoSuerteAzar">7.- Explotación de los
+							juegos de suerte y azar (Ley 643 de 2001)</option>
+						<option value="donaciones">8.- Donaciones</option>
+						<option value="exenActos">9.- Exen.consec.de actos
+							terroristas o catástrofes naturales</option>
+						<option value="baseGravEsp">10.- Base gravable especial</option>
+						<option value="ingrActConsorc">11.- Ingresos por
+							actividades realizadas a través de Consorcios</option>
+						<option value="diviNOGiroOrd">12.- Dividendos que no hacen
+							parte del giro ordinario del negocio</option>
+						<option value="exenVictima">13.- Exención víctima del
+							secuestro o de la desaparición forzada</option>
+						<option value="correcMoneda">14.- Corrección monetaria y/o
+							Diferencia en cambio</option>
+						<option value="reintegro">15.- Reintegro de costos y
+							gastos</option>
+						<option value="salarios">16.- Salarios</option>
+						<option value="devoluciones">17.- Devoluciones</option>
+						<option value="rebajas">18.- Rebajas</option>
+						<option value="descuentos">19.- Descuentos</option>
+					</select>
+				</div>
+	
+	
+				<div class="col-md-2">
+					<input class="newalto form-control valordedu" type="text" />
+				</div>
+				<div class="borrar col-md-1" style="height: 20px;"
+					onclick="borrar(this)">
+					<!--  <div class="form-group ">-->
+					<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
+					<img onclick="borrar(this)" class="delededucciones"
+						id="delededucciones"
+						src="${themeResourcePath}/images/deledelineacion.png"
+						style="width: 20px; margin-top: 0px; margin-bottom: 2px !important"></img>
+					</c:if>
+					<!-- </div>-->
+				</div>
 			</div>
-
-
-			<div class="col-md-2">
-				<input class="newalto form-control valordedu" type="text" />
-			</div>
-			<div class="borrar col-md-1" style="height: 20px;"
-				onclick="borrar(this)">
-				<!--  <div class="form-group ">-->
-				<img onclick="borrar(this)" class="delededucciones"
-					id="delededucciones"
-					src="${themeResourcePath}/images/deledelineacion.png"
-					style="width: 20px; margin-top: 0px; margin-bottom: 2px !important"></img>
-				<!-- </div>-->
-			</div>
-
-		</div>
+		</c:if>
 	</form:form>
 </div>
 
