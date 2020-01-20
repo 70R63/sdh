@@ -60,7 +60,6 @@
 			<c:if test="${eachIngreso.actPrincipal eq 'X' }">
 				<c:set var="checkAEP" value='checked="checked"'/>
 			</c:if>
-			<c:if test="${not empty eachIngreso.codCIIU }">
 				<div class="row totaluno" id="totaluno">
 					<div class="col-md-1">
 						<input type="checkbox" name=""
@@ -104,7 +103,6 @@
 						</div>
 					</div>
 				</div>
-			</c:if>
 		</c:forEach>
 		
 		<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true and 1==2}">
