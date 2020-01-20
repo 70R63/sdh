@@ -86,7 +86,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.enajActFijo}" />
+						value="${infoDeclara.deducciones.enajActFijo}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -113,7 +113,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.exportBienes}" />
+						value="${infoDeclara.deducciones.exportBienes}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -140,7 +140,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.exportServ}" />
+						value="${infoDeclara.deducciones.exportServ}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -168,7 +168,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.actnosub39}" />
+						value="${infoDeclara.deducciones.actnosub39}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -197,7 +197,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.actnosubPH}" />
+						value="${infoDeclara.deducciones.actnosubPH}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -225,7 +225,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.juegoSuerteAzar}" />
+						value="${infoDeclara.deducciones.juegoSuerteAzar}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -253,7 +253,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.donaciones}" />
+						value="${infoDeclara.deducciones.donaciones}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -282,7 +282,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.exenActos}" />
+						value="${infoDeclara.deducciones.exenActos}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -310,7 +310,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.baseGravEsp}" />
+						value="${infoDeclara.deducciones.baseGravEsp}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -339,7 +339,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.ingrActConsorc}" />
+						value="${infoDeclara.deducciones.ingrActConsorc}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -368,7 +368,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.diviNOGiroOrd}" />
+						value="${infoDeclara.deducciones.diviNOGiroOrd}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -397,7 +397,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.exenVictima}" />
+						value="${infoDeclara.deducciones.exenVictima}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -426,7 +426,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.correcMoneda}" />
+						value="${infoDeclara.deducciones.correcMoneda}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -458,7 +458,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.reintegro}" />
+						value="${infoDeclara.deducciones.reintegro}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -489,7 +489,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.salarios}" />
+						value="${infoDeclara.deducciones.salarios}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -520,7 +520,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.devoluciones}" />
+						value="${infoDeclara.deducciones.devoluciones}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -547,7 +547,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.rebajas}" />
+						value="${infoDeclara.deducciones.rebajas}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -574,7 +574,7 @@
 
 				<div class="col-md-2">
 					<input class="newalto form-control valordedu" type="text"
-						value="${infoDeclara.deducciones.descuentos}" />
+						value="${infoDeclara.deducciones.descuentos}" ${roDeducciones}/>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
@@ -630,7 +630,7 @@
 	
 	
 				<div class="col-md-2">
-					<input class="newalto form-control valordedu" type="text" />
+					<input class="newalto form-control valordedu" type="text" ${roDeducciones}/>
 				</div>
 				<div class="borrar col-md-1" style="height: 20px;"
 					onclick="borrar(this)">
