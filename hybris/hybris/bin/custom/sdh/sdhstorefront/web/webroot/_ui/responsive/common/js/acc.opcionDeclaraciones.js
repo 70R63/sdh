@@ -1194,7 +1194,7 @@ debugger;
 	        }
 		}else{
 			for(var i=0; i<4; i++){
-				n--;
+				--n;
 	        	$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");	
 	        }
 		}

@@ -1193,8 +1193,8 @@ debugger;
 	        	n--;  	
 	        }
 		}else{
-			for(var i=0; i<4; i++){
-				n--;
+			for(var i=0; i<5; i++){
+				--n;
 	        	$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");	
 	        }
 		}

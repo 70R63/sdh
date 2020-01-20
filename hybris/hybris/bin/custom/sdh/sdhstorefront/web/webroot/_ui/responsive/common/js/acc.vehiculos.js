@@ -139,7 +139,7 @@ ACC.vehiculos = {
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-						debugger;
+						
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
