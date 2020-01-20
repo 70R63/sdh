@@ -94,11 +94,13 @@
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">
+				 			<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true}">
 							<img onclick="addtotaluno()"
 								src="${themeResourcePath}/images/adddelineacion.png"
 								style="width: 25px"></img> <img onclick="deletotaluno()"
 								src="${themeResourcePath}/images/deledelineacion.png"
 								style="width: 25px"></img>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -125,29 +127,6 @@
 				</div>
 	
 				<div class="col-md-7">
-					<!-- 					<input class="form-control denomina codCIIU" type="text" -->
-					<%-- 						value="${eachIngreso.codCIIU}" /> --%>
-					<!--
-							<fmt:formatNumber value="${ eachIngreso.codCIIU}"
-								pattern="#######################" var="codCIIUNumber" />
-		
-							<select id="" class="form-control codCIIU" style="height: 48px;">
-								<option value="">SELECCIONAR</option>
-								<c:forEach items="${ econActivities}" var="eachActivity">
-		
-									<fmt:formatNumber value="${ eachActivity.code}"
-										pattern="#######################" var="eachCodCIIUNumber" />
-		
-									<c:set var="selected" value="" />
-									<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
-										<c:set var="selected" value="selected" />
-									</c:if>
-		
-									<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
-										- ${eachActivity.description }</option>
-								</c:forEach>
-							</select>
-							 -->
 					<!-- EJRR Adding data to select box -->
 					<select id="" class="alto form-control codCIIU"
 						style="font-size:12px !important; padding: 0px !important" >
@@ -352,7 +331,18 @@
 				<sf:input class="new_alto form-control direccion" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].direccion" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
- 				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio" readonly="${roIngNetosGravaBoolean}"/>
+<%--  				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio" readonly="${roIngNetosGravaBoolean}"/> --%>
+				<select id="" class="new_alto form-control codMunicipioING"
+					style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledIngNetosGrava}>
+					<option value="">SELECCIONAR</option>
+					<c:forEach items="${cities}" var="eachCity">
+						<c:set var="selected" value="" />
+						<c:if test="${eachCity.code eq  eachIngreso.codMunicipio}">
+							<c:set var="selected" value="selected" />
+						</c:if>
+						<option value="${ eachCity.code}" ${selected }>${eachCity.name}</option>
+					</c:forEach>
+				</select>
  			</div> 
  			<div class="col-md-1"> 
  				 <sf:input class="new_alto form-control telefono" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].telefono" readonly="${roIngNetosGravaBoolean}"/>
@@ -389,12 +379,14 @@
  			</div> 
  			<div class="col-md-1"> 
  				<div class="form-group "> 
+		 			<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true}">
  					<img onclick="addtotaldos()" 
  						src="${themeResourcePath}/images/adddelineacion.png" 
  						style="width: 25px"></img> <img onclick="deletotaldos()" 
  						src="${themeResourcePath}/images/deledelineacion.png" 
  						style="width: 25px"></img> 
- 				</div> 
+ 					</c:if>
+ 				</div>
  			</div> 
  		</div> 
  	</c:forEach> 

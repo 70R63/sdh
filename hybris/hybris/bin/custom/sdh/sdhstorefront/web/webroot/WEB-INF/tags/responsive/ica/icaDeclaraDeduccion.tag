@@ -62,9 +62,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -88,9 +90,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -113,9 +117,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -138,9 +144,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -164,9 +172,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -191,9 +201,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -217,9 +229,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -243,9 +257,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -270,9 +286,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -296,9 +314,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -323,9 +343,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -350,9 +372,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -377,9 +401,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -407,9 +433,11 @@
 						<!-- 						<img onclick="adddeducciones()" -->
 						<%-- 							src="${themeResourcePath}/images/adddelineacion.png" --%>
 						<!-- 							style="width: 25px"></img>  -->
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -437,9 +465,11 @@
 						<!-- 						<img onclick="adddeducciones()" -->
 						<%-- 							src="${themeResourcePath}/images/adddelineacion.png" --%>
 						<!-- 							style="width: 25px"></img>  -->
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -466,9 +496,11 @@
 						<!-- 						<img onclick="adddeducciones()" -->
 						<%-- 							src="${themeResourcePath}/images/adddelineacion.png" --%>
 						<!-- 							style="width: 25px"></img>  -->
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -492,9 +524,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -517,9 +551,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -542,9 +578,11 @@
 				</div>
 				<div class="col-md-1">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 						<img class="delededucciones"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -597,10 +635,12 @@
 				<div class="borrar col-md-1" style="height: 20px;"
 					onclick="borrar(this)">
 					<!--  <div class="form-group ">-->
+					<c:if test="${icaInfObjetoFormResp.controlCampos.deducciones != true}">
 					<img onclick="borrar(this)" class="delededucciones"
 						id="delededucciones"
 						src="${themeResourcePath}/images/deledelineacion.png"
 						style="width: 20px; margin-top: 0px; margin-bottom: 2px !important"></img>
+					</c:if>
 					<!-- </div>-->
 				</div>
 			</div>
