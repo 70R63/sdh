@@ -17,6 +17,7 @@ public class GeneraDeclaracionResponse
 	private List<ErrorPubli> errores;
 	private String stringPDF;
 	private String urlDownload;
+	private String mensajeErrorVeh;
 
 	/**
 	 * @return the errores
@@ -69,7 +70,21 @@ public class GeneraDeclaracionResponse
 		this.urlDownload = urlDownload;
 	}
 
+	/**
+	 * @return the mensajeErrorVeh
+	 */
+	public String getMensajeErrorVeh()
+	{
+		return mensajeErrorVeh;
+	}
 
-
+	/**
+	 * @param mensajeErrorVeh
+	 *           the mensajeErrorVeh to set
+	 */
+	public void setMensajeErrorVeh(final String mensajeErrorVeh)
+	{
+		this.mensajeErrorVeh = mensajeErrorVeh;
+	}
 
 }
