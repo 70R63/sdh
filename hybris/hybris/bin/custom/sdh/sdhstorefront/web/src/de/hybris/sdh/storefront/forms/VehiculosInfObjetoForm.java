@@ -114,6 +114,9 @@ public class VehiculosInfObjetoForm
 	private String totalPagoVol;
 
 	private List<ErrorPubli> errores;
+
+	private String mensajeErrorVeh;
+	private String mensajeVehiculos;
 	/**
 	 * @return the numBP
 	 */
@@ -1296,6 +1299,42 @@ public class VehiculosInfObjetoForm
 	{
 		this.errores = errores;
 	}
+
+	/**
+	 * @return the mensajeErrorVeh
+	 */
+	public String getMensajeErrorVeh()
+	{
+		return mensajeErrorVeh;
+	}
+
+	/**
+	 * @param mensajeErrorVeh
+	 *           the mensajeErrorVeh to set
+	 */
+	public void setMensajeErrorVeh(final String mensajeErrorVeh)
+	{
+		this.mensajeErrorVeh = mensajeErrorVeh;
+	}
+
+	/**
+	 * @return the mensajeVehiculos
+	 */
+	public String getMensajeVehiculos()
+	{
+		return mensajeVehiculos;
+	}
+
+	/**
+	 * @param mensajeVehiculos
+	 *           the mensajeVehiculos to set
+	 */
+	public void setMensajeVehiculos(final String mensajeVehiculos)
+	{
+		this.mensajeVehiculos = mensajeVehiculos;
+	}
+
+
 
 
 }
