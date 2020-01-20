@@ -90,9 +90,10 @@
 				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
 					<span class="paso--dos pasos color-sr2">2</span>
 					<h2 class="titulo-caja--ser-rel color-sr2 ">
-						<span class="paso2">A�O GRAVABLE</span>
+						<span class="paso2"><spring:theme
+									code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span>
 					</h2>
-					<p class="pasoClase2 metrophobic">Selecciona el a�o gravable.</p>
+					<p class="pasoClase2 metrophobic"><spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" /></p>
 					<div class="caja--ser-rel color-sr2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
