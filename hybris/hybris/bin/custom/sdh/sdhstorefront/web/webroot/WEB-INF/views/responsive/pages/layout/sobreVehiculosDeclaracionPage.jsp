@@ -10,6 +10,8 @@
 
 <div class="loader"></div>
 
+	
+	
 <sobreVehiculos:sobreVehiculosDeclaraInicial />
 <sobreVehiculos:sobreVehiculosDeclaraInfo />
 <sobreVehiculos:sobreVehiculosDeclaraLiqui />
@@ -21,7 +23,7 @@
 <div id="dialogVehiculos" title="Vehiculos" >
 	<div id="vehiculosDialogContent"></div>
 </div>
-
+<div id="dialogPublicidadExterior" title="Impuesto de Sobre Vehiculos Automotores" ><div id="publicidadExteriorDialogContent"></div></div>
 <script>
 	function goBack() {
 		window.history.back();
