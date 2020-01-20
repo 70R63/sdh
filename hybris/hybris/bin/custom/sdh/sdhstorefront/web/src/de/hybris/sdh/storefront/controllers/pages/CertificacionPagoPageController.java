@@ -836,7 +836,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 			redirectModel.addFlashAttribute("publicidadMode", false);
 		}
 
-		if (certiFormPost.getIdimp().equals("6") || certiFormPost.getIdimp().equals("8"))//Delineacion
+		if (certiFormPost.getIdimp().equals("6") )//Delineacion
 		{
 			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
 			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());
