@@ -592,7 +592,7 @@ debugger;
 								if(value1.numObjeto == value2.numObjeto){
 									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
 									$('#table-delineacion1').append("<tr>"+ 
-											'<td>' + value2.cdu + '</td>'+
+											'<td>' + value1.numRadicado + '</td>'+
 											'<td>' + value1.noRadicado + '</td>'+
 											'<td>' + desc_clavePeriodo + '</td>'+
 											'<td>' + value1.referencia + '</td>'+
