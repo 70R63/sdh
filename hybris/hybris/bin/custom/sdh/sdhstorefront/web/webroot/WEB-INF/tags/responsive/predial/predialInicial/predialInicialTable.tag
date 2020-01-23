@@ -7,6 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row">
@@ -57,23 +58,27 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><label style="color: #0358d8 !important"
-									class="text-capitalize !important" onclick="mostrar()"><spring:theme
-											code="predial.inicial.table.ver" /></label></td>
-							</tr>
+							    <c:forEach items="${predial}" var="current">
+                                     <tr>
+                                        <td>
+                                            <c:out value="${current.CHIP}"/>
+                                        </td>
+                                        <td>
+                                            <c:out value="${current.matrInmobiliaria}"/>
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+                                            <c:out value="${current.contratoArrenda}"/>
+                                        </td>
+                                        <td>
+                                            <label style="color: #0358d8 !important" class="text-capitalize !important" onclick="mostrar()">
+                                                <spring:theme code="predial.inicial.table.ver" />
+                                            </label>
+                                        </td>
+                                     </tr>
+                                </c:forEach>
 						</tbody>
 					</table>
 				</div>

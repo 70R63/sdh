@@ -11,12 +11,20 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 
 import javax.annotation.Resource;
 
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 
 /**
@@ -59,18 +67,40 @@ public class PredialUnificadoController extends AbstractPageController
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
+	@Resource(name = "sdhConsultaContribuyenteBPService")
+	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_inicio", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String predialinicio(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro predial unificadoINICIO --------------------------");
+		System.out.println("---------------- Hola entro predial unificadoINICIO --------------------------");		;
 
+		System.out.println("---------------- Hola entro predial unificadoINICIO --------------------------");
+		SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = null;
+
+		ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+		consultaContribuyenteBPRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		try {
+			sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_INICIAL_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_INICIAL_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		model.addAttribute("predial", sdhConsultaContribuyenteBPResponse.getPredial() );
 
 		return getViewForPage(model);
 	}
