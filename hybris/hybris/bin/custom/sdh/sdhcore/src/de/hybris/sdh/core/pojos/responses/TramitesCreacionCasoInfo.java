@@ -14,6 +14,7 @@ public class TramitesCreacionCasoInfo
 	private String valorN1;
 	private String valorN2;
 	private String valorN3;
+	private String valorN4;
 	private String mensaje;
 	private String desA0;
 	private String conA0;
@@ -329,6 +330,23 @@ public class TramitesCreacionCasoInfo
 	public void setValorN3(final String valorN3)
 	{
 		this.valorN3 = valorN3;
+	}
+
+	/**
+	 * @return the valorN4
+	 */
+	public String getValorN4()
+	{
+		return valorN4;
+	}
+
+	/**
+	 * @param valorN4
+	 *           the valorN4 to set
+	 */
+	public void setValorN4(final String valorN4)
+	{
+		this.valorN4 = valorN4;
 	}
 
 	/**
