@@ -28,6 +28,7 @@ import de.hybris.sdh.core.pojos.responses.ConsultaPagoDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ConsultaPagoResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImprimePagoResponse;
+import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
@@ -50,8 +51,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -323,14 +325,8 @@ public class CertificacionPagoPageController extends AbstractPageController
 
 
 
-		if (infoVista.getClaveImpuesto().equals("0008"))//ajuste para diferenciar retedelineacion
-		{
-			impuesto = "0006";
-		}
-		else
-		{
-			impuesto = infoVista.getClaveImpuesto();
-		}
+
+		impuesto = infoVista.getClaveImpuesto();
 
 
 		anioGravable = infoVista.getAnoGravable();
@@ -363,27 +359,61 @@ public class CertificacionPagoPageController extends AbstractPageController
 			listaDeclaracionesResponse.setDeclaraciones(gasolinaService.determinarRegistrosDeclaraciones_certipagos(infoVista,
 					listaDeclaracionesResponse, gasolinaService));
 
+			listaDeclaracionesResponse = this.ajustaListaDeclaracion(impuesto, infoVista, listaDeclaracionesResponse);
 			infoVista.setDeclaracionesCertiPagos(listaDeclaracionesResponse);
 			infoVista.setErrores(listaDeclaracionesResponse.getErrores());
 		}
 
-		if (infoVista.getClaveImpuesto().equals("0008"))//ajuste para diferenciar retedelineacion
-		{
-			final Iterator<ItemListaDeclaraciones> itemListaDeclaraciones = listaDeclaracionesResponse.getDeclaraciones().iterator();
-
-			while (itemListaDeclaraciones.hasNext())
-			{
-				if (itemListaDeclaraciones.next().getNoRadicado() == null)
-				{
-					itemListaDeclaraciones.remove();
-				}
-			}
-		}
-
-
 		return infoVista;
 	}
 
+
+	/**
+	 * @param impuesto
+	 * @param infoVista
+	 * @param listaDeclaracionesResponse
+	 * @return
+	 */
+	private ListaDeclaracionesResponse ajustaListaDeclaracion(final String impuesto, final OpcionDeclaracionesVista infoVista,
+			final ListaDeclaracionesResponse listaDeclaracionesResponse)
+	{
+		ListaDeclaracionesResponse listaDeclaracionesResponseSorted = new ListaDeclaracionesResponse();
+		listaDeclaracionesResponseSorted = listaDeclaracionesResponse;
+
+		if (impuesto.equals("0006"))
+		{
+			final List<ImpuestoDelineacionUrbana> listImpuestoDelineacionUrbana = infoVista.getCustomerData().getDelineacion();
+			for (final ItemListaDeclaraciones itemListaDeclaracionesResponse : listaDeclaracionesResponseSorted.getDeclaraciones())
+			{
+				final String objetoContrato = itemListaDeclaracionesResponse.getNumObjeto();
+				final ImpuestoDelineacionUrbana itemImpuestoDelineacionUrbana = listImpuestoDelineacionUrbana.stream()
+						.filter(x -> objetoContrato.equals(x.getNumObjeto())).findAny().orElse(null);
+				if (itemImpuestoDelineacionUrbana != null)
+				{
+					itemListaDeclaracionesResponse.setNumRadicado(itemImpuestoDelineacionUrbana.getCdu());
+				}
+				else
+				{
+					itemListaDeclaracionesResponse.setNumRadicado("");
+				}
+
+				if (itemListaDeclaracionesResponse.getNoRadicado() == null)
+				{
+					itemListaDeclaracionesResponse.setNoRadicado("");
+				}
+
+			}
+
+			listaDeclaracionesResponseSorted.setDeclaraciones(listaDeclaracionesResponseSorted.getDeclaraciones().stream().sorted(
+					Comparator.comparing(ItemListaDeclaraciones::getNumRadicado).thenComparing(ItemListaDeclaraciones::getNoRadicado)
+							.thenComparing(ItemListaDeclaraciones::getReferencia))
+					.collect(Collectors.toList()));
+
+
+			return listaDeclaracionesResponseSorted;
+		}
+		return listaDeclaracionesResponse;
+	}
 
 	@RequestMapping(value = "/contribuyentes/consultas/certipagos/pagoImprimir", method = RequestMethod.GET)
 	@ResponseBody
@@ -836,7 +866,7 @@ public class CertificacionPagoPageController extends AbstractPageController
 			redirectModel.addFlashAttribute("publicidadMode", false);
 		}
 
-		if (certiFormPost.getIdimp().equals("6") || certiFormPost.getIdimp().equals("8"))//Delineacion
+		if (certiFormPost.getIdimp().equals("6") )//Delineacion
 		{
 			final CertificacionPagoForm certiFormPostRedirect = new CertificacionPagoForm();
 			certiFormPostRedirect.setTipoImp(certiFormPost.getTipoImp());

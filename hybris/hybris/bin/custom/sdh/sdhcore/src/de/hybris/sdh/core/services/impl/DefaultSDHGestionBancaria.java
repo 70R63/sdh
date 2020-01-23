@@ -1,29 +1,38 @@
 package de.hybris.sdh.core.services.impl;
 
-import com.bdg.ca.CACertificateManager;
-import com.bdg.verifiers.FileSignVerifier;
-import com.bdg.verifiers.SignerInfo;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.sdh.core.pojos.requests.FileConciliaRequest;
 import de.hybris.sdh.core.pojos.responses.FileConciliaResponse;
 import de.hybris.sdh.core.services.SDHGestionBancaria;
-import net.sf.sevenzipjbinding.*;
-import net.sf.sevenzipjbinding.impl.RandomAccessFileInStream;
-import net.sf.sevenzipjbinding.simple.ISimpleInArchive;
-import net.sf.sevenzipjbinding.simple.ISimpleInArchiveItem;
-import org.apache.commons.io.IOUtils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.Arrays;
+import java.util.Objects;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
-import java.io.*;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.UUID;
+import com.bdg.ca.CACertificateManager;
+import com.bdg.verifiers.FileSignVerifier;
+import com.bdg.verifiers.SignerInfo;
 
-import org.apache.log4j.Logger;
+import net.sf.sevenzipjbinding.ExtractOperationResult;
+import net.sf.sevenzipjbinding.ISequentialOutStream;
+import net.sf.sevenzipjbinding.ISevenZipInArchive;
+import net.sf.sevenzipjbinding.SevenZip;
+import net.sf.sevenzipjbinding.SevenZipException;
+import net.sf.sevenzipjbinding.impl.RandomAccessFileInStream;
+import net.sf.sevenzipjbinding.simple.ISimpleInArchive;
+import net.sf.sevenzipjbinding.simple.ISimpleInArchiveItem;
 
 public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 
@@ -33,13 +42,13 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     private ConfigurationService configurationService;
 
     @Override
-    public boolean validade7ZipCertificates(MultipartFile multipartFile) {
-        String updatedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.path");
-        String approvedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.aprobados.path");
-        String autoridadesPath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.autoridades.path");
+    public boolean validade7ZipCertificates(final MultipartFile multipartFile) {
+        final String updatedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.path");
+        final String approvedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.aprobados.path");
+        final String autoridadesPath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.autoridades.path");
 
         boolean isValid = false;
-        String nameFile = this.updateFileToServer(multipartFile);
+        final String nameFile = this.updateFileToServer(multipartFile);
         if(Objects.nonNull(nameFile)){
             isValid =  this.verifyFile(updatedFilesFolder + nameFile , approvedFilesFolder + nameFile, autoridadesPath);
             if(isValid){ //Extract .txt file from p7zip if file is valid
@@ -53,16 +62,16 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-    public String updateFileToServer(MultipartFile multipartFile){
+    public String updateFileToServer(final MultipartFile multipartFile){
         String filePath = null;
         String fileName = null;
-        String corePath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.path");
+        final String corePath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.path");
 
         try {
             filePath = corePath +  multipartFile.getOriginalFilename();
             multipartFile.transferTo(new File(filePath) );
             fileName = multipartFile.getOriginalFilename();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
 
@@ -74,11 +83,11 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-    public void extractAndUpdateTxtFileFrom7zip(String zipFilePath, String targetFilePath){
+    public void extractAndUpdateTxtFileFrom7zip(final String zipFilePath, final String targetFilePath){
         ISevenZipInArchive inArchive = null;
         ISimpleInArchive simpleInArchive = null;
         RandomAccessFile randomAccessFile = null;
-        File zip = null;
+        final File zip = null;
 
         try{
             randomAccessFile = new RandomAccessFile(zipFilePath, "r");
@@ -87,27 +96,28 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 
             for (final ISimpleInArchiveItem item : simpleInArchive.getArchiveItems()){
                 final int[] hash = new int[] { 0 };
-                if(item.getPath().contains(".txt")){
+				if (item.getPath().contains(".txt") || item.getPath().contains(".TXT"))
+				{
                     ExtractOperationResult result;
                     final long[] sizeArray = new long[1];
 
                     result = item.extractSlow(new ISequentialOutStream() {
-                        public int write(byte[] data) throws SevenZipException {
+                        public int write(final byte[] data) throws SevenZipException {
 
                             //Write to file
                             System.out.println(item.getPath());
                             FileOutputStream fos;
                             try {
-                                File file = new File(targetFilePath + item.getPath());
+                                final File file = new File(targetFilePath + item.getPath());
                                 file.getParentFile().mkdirs();
                                 fos = new FileOutputStream(file);
                                 fos.write(data);
                                 fos.close();
 
-                            } catch (FileNotFoundException e) {
+                            } catch (final FileNotFoundException e) {
                                 // TODO Auto-generated catch block
                                 LOG.error("Error extracting item: " + e.toString());
-                            } catch (IOException e) {
+                            } catch (final IOException e) {
                                 // TODO Auto-generated catch block
                                 LOG.error("Error extracting item: " + e.toString());
                             }
@@ -125,20 +135,20 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
                     }
                 }
             }
-        }catch (Exception e) {
+        }catch (final Exception e) {
             LOG.error("Error occurs: " + e);
         }finally {
             if (inArchive != null) {
                 try {
                     inArchive.close();
-                } catch (SevenZipException e) {
+                } catch (final SevenZipException e) {
                     LOG.error("Error closing archive: " + e);
                 }
             }
             if (randomAccessFile != null) {
                 try {
                     randomAccessFile.close();
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     LOG.error("Error closing file: " + e);
                 }
             }
@@ -146,17 +156,17 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-    public boolean verifyFile(String source, String target, String autoridades){
+    public boolean verifyFile(final String source, final String target, final String autoridades){
         boolean isValidCertificate = false;
         FileSignVerifier fv = null;
         String resultado = "";
-        CACertificateManager caManager = new CACertificateManager();
+        final CACertificateManager caManager = new CACertificateManager();
 
         try {
             caManager.setPathTrustedCA(autoridades);
             fv = new FileSignVerifier(caManager);
             resultado = fv.signatureCheck(source, target);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -165,7 +175,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
             isValidCertificate = true;
             LOG.info("Firmantes Del Archivo OK" + source);
             // Se recorre el arreglo de firmantes​
-            for (SignerInfo signer : fv.getSigners()) {
+            for (final SignerInfo signer : fv.getSigners()) {
                 // aquí se consultan los OIDs que se requieran para el ejemplo solo puse el Common Name​
                 LOG.info(signer.getOID("CN"));
             }
@@ -182,7 +192,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-    public FileConciliaResponse fileConcilia(FileConciliaRequest fileConciliaRequest) {
+    public FileConciliaResponse fileConcilia(final FileConciliaRequest fileConciliaRequest) {
         final String usuario = configurationService.getConfiguration().getString("gestion.bancaria.ws.fileConcilia.user");
         final String password = configurationService.getConfiguration().getString("gestion.bancaria.ws.fileConcilia.password");
         final String urlService = configurationService.getConfiguration().getString("gestion.bancaria.ws.fileConcilia.url");

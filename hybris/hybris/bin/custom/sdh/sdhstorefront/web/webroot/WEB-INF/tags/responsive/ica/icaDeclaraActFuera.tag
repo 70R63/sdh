@@ -105,12 +105,14 @@
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">
+							<c:if test="${icaInfObjetoFormResp.controlCampos.ingFueraBog != true}">
 							<img onclick="addactvifuera()"
 								src="${themeResourcePath}/images/adddelineacion.png"
 								style="width: 25px"></img> <img id="dele"
 								onclick="deleactvifuera(this)"
 								src="${themeResourcePath}/images/deledelineacion.png"
 								style="width: 25px"></img>
+							</c:if>
 						</div>
 					</div>
 				</div>

@@ -392,13 +392,14 @@ public class IcaPageController extends SDHAbstractPageController
 			final List<ICAInfoIngPorCiiu> IngPorCIIUList = icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara()
 					.getIngPorCIIU();
 
-			for (int i = 0; i < IngPorCIIUList.size(); i++)
+			for (int i = IngPorCIIUList.size() - 1; i >= 0; i--)
 			{
 				if (IngPorCIIUList.get(i).getNumID() == null)
 				{
 					IngPorCIIUList.remove(i);
 				}
 			}
+			agregarRegistroDefault_IngCIIU(IngPorCIIUList);
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setIngPorCIIU(IngPorCIIUList);
 
 
@@ -416,9 +417,11 @@ public class IcaPageController extends SDHAbstractPageController
 					ICAInfoValorRetenidoList.remove(i);
 				}
 			}
-			agregarRegistroDefault(ICAInfoValorRetenidoList, icaInfObjetoResponse);
-
+			agregarRegistroDefault_VR(ICAInfoValorRetenidoList, icaInfObjetoResponse);
 			icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().setValorRetenido(ICAInfoValorRetenidoList);
+
+			agregarRegistroDefault_ING(icaInfObjetoFormResp.getIcaInfObjetoResponse().getInfoDeclara().getIngNetosGrava());
+
 			icaInfObjetoFormResp
 					.setCatalogos(obtenerCatalogos(icaInfObjetoResponse.getAnoGravable(), icaInfObjetoResponse.getPeriodo()));
 
@@ -643,17 +646,18 @@ public class IcaPageController extends SDHAbstractPageController
 
 			if (IngPorCIIUList != null)
 			{
-				for (int i = 0; i < IngPorCIIUList.size(); i++)
+				for (int i = IngPorCIIUList.size() - 1; i >= 0; i--)
 				{
 					if (IngPorCIIUList.get(i) != null)
 					{
-						if (IngPorCIIUList.get(i).getNumID() == null)
+						if (IngPorCIIUList.get(i).getNumID() == null || IngPorCIIUList.get(i).getNumID().isEmpty())
 						{
 							IngPorCIIUList.remove(i);
 						}
 					}
 				}
 			}
+			agregarRegistroDefault_IngCIIU(IngPorCIIUList);
 			infoDeclara.setIngPorCIIU(IngPorCIIUList);
 
 			final List<ICAInfoValorRetenido> ICAInfoValorRetenidoList = infoDeclara.getValorRetenido();
@@ -675,9 +679,9 @@ public class IcaPageController extends SDHAbstractPageController
 					}
 				}
 			}
-			agregarRegistroDefault(ICAInfoValorRetenidoList, icaInfObjetoResponse);
-
+			agregarRegistroDefault_VR(ICAInfoValorRetenidoList, icaInfObjetoResponse);
 			infoDeclara.setValorRetenido(ICAInfoValorRetenidoList);
+
 
 			if (calcula2ImpuestoResponse.getIngNetosGrava() != null)
 			{
@@ -693,6 +697,7 @@ public class IcaPageController extends SDHAbstractPageController
 					}
 				}
 			}
+			agregarRegistroDefault_ING(calcula2ImpuestoResponse.getIngNetosGrava());
 			infoDeclara.setIngNetosGrava(calcula2ImpuestoResponse.getIngNetosGrava());
 
 			if (calcula2ImpuestoResponse.getIngFueraBog() != null)
@@ -1126,7 +1131,7 @@ public class IcaPageController extends SDHAbstractPageController
 	}
 
 
-	private void agregarRegistroDefault(List<ICAInfoValorRetenido> listaResgistros, ICAInfObjetoResponse infoAdicional)
+	private void agregarRegistroDefault_VR(List<ICAInfoValorRetenido> listaResgistros, ICAInfObjetoResponse infoAdicional)
 	{
 		if (listaResgistros.isEmpty())
 		{
@@ -1134,6 +1139,53 @@ public class IcaPageController extends SDHAbstractPageController
 			registroDefault.setAnio(infoAdicional.getAnoGravable());
 			listaResgistros.add(registroDefault);
 		}
+
+	}
+
+	private void agregarRegistroDefault_IngCIIU(List<ICAInfoIngPorCiiu> listaResgistros)
+	{
+		if (listaResgistros.isEmpty())
+		{
+			ICAInfoIngPorCiiu registroDefault = new ICAInfoIngPorCiiu();
+			listaResgistros.add(registroDefault);
+		}
+
+	}
+
+	private void agregarRegistroDefault_ING(List<ICAInfoIngNetosGrava> listaResgistros)
+	{
+
+		if (listaResgistros != null)
+		{
+			for (int i = listaResgistros.size() - 1; i >= 0; i--)
+			{
+				if (listaResgistros.get(i) == null)
+				{
+					listaResgistros.remove(i);
+				}
+			}
+			for (int i = listaResgistros.size() - 1; i >= 0; i--)
+			{
+				if (listaResgistros.get(i) != null)
+				{
+					if (listaResgistros.get(i).getCodCIIU() == null || listaResgistros.get(i).getCodCIIU().isEmpty())
+					{
+						listaResgistros.remove(i);
+					}
+				}
+			}
+		}
+
+		if (listaResgistros.isEmpty())
+		{
+			ICAInfoIngNetosGrava registroDefault = new ICAInfoIngNetosGrava();
+			registroDefault.setActPrincipal("");
+			registroDefault.setCodCIIU("");
+			registroDefault.setIngresos("");
+			listaResgistros.add(registroDefault);
+		}
+
+
 
 	}
 

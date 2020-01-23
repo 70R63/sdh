@@ -9,9 +9,11 @@
 <!-- Total ingresos netos gravables -->
 
 <c:set var="roIngNetosGrava" value=""/>
+<c:set var="roIngNetosGravaBoolean" value='false'/>
 <c:set var="disabledIngNetosGrava" value=""/>
 <c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava == true}">
 	<c:set var="roIngNetosGrava" value='readonly="readonly"'/>
+	<c:set var="roIngNetosGravaBoolean" value='true'/>
 	<c:set var="disabledIngNetosGrava" value='disabled="disabled"'/>
 </c:if>
 <c:set value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara }"
@@ -50,87 +52,28 @@
 			</div>
 		</div>
 
-		<!--  se agregan l�neas para agregar siempre una linea en la tabla -->
-		<c:if test="${empty infoDeclara.ingNetosGrava}">
-			<div class="row totaluno" id="totaluno">
-				<div class="col-md-1">
 
-					<input type="checkbox" name=""
-						class="form-check-input mr-2 actividad actPrincipal"
-						style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-						size="10" ${roIngNetosGrava}>
-				</div>
-
-				<div class="col-md-7">
-					<input class="alto form-control denomina codCIIU" type="text"
-						value="" ${roIngNetosGrava}/>
-				</div>
-				<div class="col-md-2">
-					<input class="newalto form-control ingreso ingresos" type="text"
-						value="" ${roIngNetosGrava}/>
-				</div>
-				<div class="col-md-1">
-					<div class="form-group ">
-						<img onclick="addtotaluno()"
-							src="${themeResourcePath}/images/adddelineacion.png"
-							style="width: 25px"></img> <img onclick="deletotaluno()"
-							src="${themeResourcePath}/images/deledelineacion.png"
-							style="width: 25px"></img>
-					</div>
-				</div>
-			</div>
-		</c:if>
-		<!-- fin de c�digo agregado -->
-
-		<c:forEach items="${infoDeclara.ingNetosGrava }" var="eachIngreso">
-			<c:if test="${not empty eachIngreso.codCIIU }">
+		<c:forEach items="${infoDeclara.ingNetosGrava }" var="eachIngreso" varStatus="loopStatusInfo" >
+			<c:set var="idAEP_principal" value='AEPprincipal_${loopStatusInfo.index}'/>
+			<c:set var="idDEA_CIIU" value='DEAciiu_${loopStatusInfo.index}'/>
+			<c:set var="checkAEP" value=""/>
+			<c:if test="${eachIngreso.actPrincipal eq 'X' }">
+				<c:set var="checkAEP" value='checked="checked"'/>
+			</c:if>
 				<div class="row totaluno" id="totaluno">
 					<div class="col-md-1">
-						<c:choose>
-							<c:when test="${eachIngreso.actPrincipal eq 'X' }">
-								<input type="checkbox" name=""
-									class="form-check-input mr-2 actividad actPrincipal"
-									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-									size="10" checked="checked" ${roIngNetosGrava}>
-							</c:when>
-							<c:otherwise>
-								<input type="checkbox" name=""
-									class="form-check-input mr-2 actividad actPrincipal"
-									style="visibility: visible !important; min-height: 4px !important; width: 20px;"
-									size="10" ${roIngNetosGrava}>
-							</c:otherwise>
-						</c:choose>
+						<input type="checkbox" name=""
+							class="form-check-input mr-2 actividad actPrincipal"
+							style="visibility: visible !important; min-height: 4px !important; width: 20px;"
+							size="10" ${checkAEP} ${roIngNetosGrava} id="${idAEP_principal}">
 					</div>
 
 					<div class="col-md-7">
-						<!-- 					<input class="form-control denomina codCIIU" type="text" -->
-						<%-- 						value="${eachIngreso.codCIIU}" /> --%>
-						<!--
-						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
-							pattern="#######################" var="codCIIUNumber" />
-	
-						<select id="" class="form-control codCIIU" style="height: 48px;">
-							<option value="">SELECCIONAR</option>
-							<c:forEach items="${ econActivities}" var="eachActivity">
-	
-								<fmt:formatNumber value="${ eachActivity.code}"
-									pattern="#######################" var="eachCodCIIUNumber" />
-	
-								<c:set var="selected" value="" />
-								<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
-									<c:set var="selected" value="selected" />
-								</c:if>
-	
-								<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
-									- ${eachActivity.description }</option>
-							</c:forEach>
-						</select>
-						 -->
 						<!-- EJRR Adding data to select box eachActivity -->
 						<fmt:formatNumber value="${ eachIngreso.codCIIU}"
 							pattern="#######################" var="codCIIUNumber" />
-						<select id="" class="alto form-control codCIIU"
-							style="height: 48px;" ${disabledIngNetosGrava}>
+						<select id="${idDEA_CIIU}" class="alto form-control codCIIU"
+							style="height: 48px;" ${disabledIngNetosGrava} onchange="habilitarTablaING_onChange()">
 							<option value="" selected>SELECCIONAR</option>
 							<c:forEach items="${ gravableNetIncomes}" var="eachActivity">
 								<c:set var="selected" value="" />
@@ -150,18 +93,19 @@
 					</div>
 					<div class="col-md-1">
 						<div class="form-group ">
+				 			<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true}">
 							<img onclick="addtotaluno()"
 								src="${themeResourcePath}/images/adddelineacion.png"
 								style="width: 25px"></img> <img onclick="deletotaluno()"
 								src="${themeResourcePath}/images/deledelineacion.png"
 								style="width: 25px"></img>
+							</c:if>
 						</div>
 					</div>
 				</div>
-			</c:if>
 		</c:forEach>
 		
-		<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true}">
+		<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true and 1==2}">
 			<div class="row totaluno" id="totaluno">
 				<div class="col-md-1">
 					<c:choose>
@@ -181,29 +125,6 @@
 				</div>
 	
 				<div class="col-md-7">
-					<!-- 					<input class="form-control denomina codCIIU" type="text" -->
-					<%-- 						value="${eachIngreso.codCIIU}" /> --%>
-					<!--
-							<fmt:formatNumber value="${ eachIngreso.codCIIU}"
-								pattern="#######################" var="codCIIUNumber" />
-		
-							<select id="" class="form-control codCIIU" style="height: 48px;">
-								<option value="">SELECCIONAR</option>
-								<c:forEach items="${ econActivities}" var="eachActivity">
-		
-									<fmt:formatNumber value="${ eachActivity.code}"
-										pattern="#######################" var="eachCodCIIUNumber" />
-		
-									<c:set var="selected" value="" />
-									<c:if test="${eachCodCIIUNumber eq  codCIIUNumber}">
-										<c:set var="selected" value="selected" />
-									</c:if>
-		
-									<option value="${eachActivity.code}" ${selected }>${eachActivity.code}
-										- ${eachActivity.description }</option>
-								</c:forEach>
-							</select>
-							 -->
 					<!-- EJRR Adding data to select box -->
 					<select id="" class="alto form-control codCIIU"
 						style="font-size:12px !important; padding: 0px !important" >
@@ -376,14 +297,14 @@
  	<c:forEach items="${infoDeclara.ingPorCIIU }" var="eachIngreso" varStatus="infoLoop"> 
  		<div class="row totaldos" id="totaldos"> 
  			<div class="col-md-1"> 
- 				<sf:input class="new_alto form-control anoGravable" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].anoGravable"/>
+ 				<sf:input class="new_alto form-control anoGravable" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].anoGravable" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
 
 
  			<div class="col-md-1"> 
 <%--  			value="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].tipoID}" --%>
  				<select id="" 
- 					class="new_alto form-control tipoID" style="height: 48px;"> 
+ 					class="new_alto form-control tipoID" style="height: 48px;" ${disabledIngNetosGrava}> 
  					<option value="">Seleccionar</option> 
  					<c:forEach items="${ idTypes}" var="eachType"> 
 
@@ -399,19 +320,30 @@
  				</select> 
  			</div> 
  			<div class="col-md-1"> 
-				<sf:input class="new_alto form-control numID" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].numID"/> 					
+				<sf:input class="new_alto form-control numID" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].numID" readonly="${roIngNetosGravaBoolean}"/> 					
  			</div> 
  			<div class="col-md-1"> 
-				<sf:input class="new_alto form-control razonSocial" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].razonSocial"/>
+				<sf:input class="new_alto form-control razonSocial" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].razonSocial" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
-				<sf:input class="new_alto form-control direccion" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].direccion"/>
+				<sf:input class="new_alto form-control direccion" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].direccion" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
- 				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio"/>
+<%--  				<sf:input class="new_alto form-control municipio" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].codMunicipio" readonly="${roIngNetosGravaBoolean}"/> --%>
+				<select id="" class="new_alto form-control codMunicipioING"
+					style="height: 48px;" onchange="activarValidacion_valorRetenido()" ${disabledIngNetosGrava}>
+					<option value="">SELECCIONAR</option>
+					<c:forEach items="${cities}" var="eachCity">
+						<c:set var="selected" value="" />
+						<c:if test="${eachCity.code eq  eachIngreso.codMunicipio}">
+							<c:set var="selected" value="selected" />
+						</c:if>
+						<option value="${ eachCity.code}" ${selected }>${eachCity.name}</option>
+					</c:forEach>
+				</select>
  			</div> 
  			<div class="col-md-1"> 
- 				 <sf:input class="new_alto form-control telefono" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].telefono"/>
+ 				 <sf:input class="new_alto form-control telefono" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].telefono" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-2"> 
 
@@ -419,11 +351,11 @@
  					pattern="#######################" var="codCIIUNumber" /> 
 
  				<select id="" 
- 					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important"> 
+ 					class="new_alto form-control codCIIU" style="font-size:12px !important; padding: 0px !important" ${disabledIngNetosGrava}> 
  					<option value="">SELECCIONAR</option> 
- 					<c:forEach items="${ econActivities}" var="eachActivity"> 
+ 					<c:forEach items="${ gravableNetIncomes}" var="eachActivity"> 
 
- 						<fmt:formatNumber value="${ eachActivity.code}" 
+ 						<fmt:formatNumber value="${ eachActivity.ciiu}" 
  							pattern="#######################" var="eachCodCIIUNumber" /> 
 
  						<c:set var="selected" value="" /> 
@@ -431,26 +363,28 @@
  							<c:set var="selected" value="selected" /> 
  						</c:if> 
 
- 						<option value="${eachActivity.code}" ${selected }>${eachActivity.code} 
- 							- ${eachActivity.description }</option> 
+ 						<option value="${eachActivity.ciiu}" ${selected }>${eachActivity.ciiu} 
+ 							- ${eachActivity.denominacion }</option> 
  					</c:forEach> 
  				</select> 
 
  			</div> 
  			<div class="col-md-1"> 
- 				<sf:input class="new_alto form-control ingBrutoSINIVA" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].ingBrutoSINIVA"/>
+ 				<sf:input class="new_alto form-control ingBrutoSINIVA" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].ingBrutoSINIVA" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
-				<sf:input class="new_alto form-control valorTotalDevol" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].valorTotalDevol"/>
+				<sf:input class="new_alto form-control valorTotalDevol" path="icaInfObjetoResponse.infoDeclara.ingPorCIIU[${infoLoop.index}].valorTotalDevol" readonly="${roIngNetosGravaBoolean}"/>
  			</div> 
  			<div class="col-md-1"> 
  				<div class="form-group "> 
+		 			<c:if test="${icaInfObjetoFormResp.controlCampos.ingNetosGrava != true}">
  					<img onclick="addtotaldos()" 
  						src="${themeResourcePath}/images/adddelineacion.png" 
  						style="width: 25px"></img> <img onclick="deletotaldos()" 
  						src="${themeResourcePath}/images/deledelineacion.png" 
  						style="width: 25px"></img> 
- 				</div> 
+ 					</c:if>
+ 				</div>
  			</div> 
  		</div> 
  	</c:forEach> 
@@ -460,17 +394,27 @@
 
 <script>
 	function addtotaluno() {
-
+debugger;
 		var tam = $(".totaluno").length;
 		if ($(".totaluno").length < 20) {
 			$($(".totaluno")[0]).parent().append($($(".totaluno")[0]).clone());
 			$($(".totaluno")[0]).parent().children().last().find(".actividad")
 					.val("")
+			$($(".totaluno")[0]).parent().children().last().find(".codCIIU")
+					.val("")
 			$($(".totaluno")[0]).parent().children().last().find(".denomina")
 					.val("")
 			$($(".totaluno")[0]).parent().children().last().find(".ingreso")
 					.val("")
+					
+			$($(".totaluno")[0]).parent().children().last().find(".codCIIU").attr("id",
+					"DEAciiu_"+tam);
+			$($(".totaluno")[0]).parent().children().last().find(".actividad").attr("id",
+					"AEPprincipal_"+tam);
 
+			var elemento = document.getElementById("AEPprincipal_"+tam);
+			elemento.checked = "";
+			
 		} else {
 			alert("No se pueden agregar m�s registros");
 		}
@@ -574,5 +518,34 @@
 
 		var subir = document.getElementById('adjuntar-total');
 		subir.style.display = 'block';
+	}
+	
+	function habilitarTablaING_onChange(){
+		debugger;
+		llenarTablaING_CIIU();
+		habilitarTablaING_general();
+		
+	}
+	
+	function llenarTablaING_CIIU(){
+		var idElemento = "";
+		var selElemento = null;
+		
+		codigosCIIU = new Array();
+		for(var i = 0;i < 50; i++){
+			idElemento = "DEAciiu_"+i;
+			selElemento = document.getElementById(idElemento);
+			
+			if(selElemento == null){
+				break;
+			}
+			
+			if(selElemento.value != "" ){
+				item_codigosCIIU = new Object();
+				item_codigosCIIU.idCodigoCIIU = selElemento.value;
+				codigosCIIU.push(item_codigosCIIU);
+			}
+		}
+
 	}
 </script>

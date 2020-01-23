@@ -342,6 +342,9 @@
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
 										code="certideclara.inicial.delineacion.cdu" /></label></th>
+							<th style="text-align: center"><label class="control-label "
+								for=""><spring:theme
+										code="certideclara.inicial.delineacion.radicado" /></label></th>			
 							<th style="text-align: center"><label class="control-label"
 								for=""> <spring:theme
 										code="certideclara.inicial.gasolina.desc_clavePeriodo" /></label></th>

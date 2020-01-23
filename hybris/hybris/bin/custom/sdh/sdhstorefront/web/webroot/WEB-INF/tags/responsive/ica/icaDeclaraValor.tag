@@ -224,11 +224,13 @@
 				</div>
 				<div class="col-md-1" style="width: 5.9% !important; padding-left: 2px; padding-right: 2px;">
 					<div class="form-group ">
+						<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido != true}">
 						<img onclick="addvalor()"
 							src="${themeResourcePath}/images/adddelineacion.png"
 							style="width: 25px"></img> <img onclick="delevalor()"
 							src="${themeResourcePath}/images/deledelineacion.png"
 							style="width: 25px"></img>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -255,10 +257,12 @@
 			<!-- 			</div> -->
 			<div class="row">
 				<div class="col-md-12 text-center" style="marging-top: 15px">
+					<c:if test="${icaInfObjetoFormResp.controlCampos.valorRetenido != true}">
 					<button style="margin-top: 3px;" id="icaCalculoButton"
 						class="btn btn-primary btn-lg" type="button">
 						<spring:theme code="ica.declaracion.valor.calcular" />
 					</button>
+					</c:if>
 				</div>
 			</div>
 		</div>

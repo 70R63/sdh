@@ -87,7 +87,7 @@ window.onload = function() {
 				<h2 class="titulo-caja--ser-rel color-sr2 ">
 					<span class="paso2">AÑO GRAVABLE</span>
 				</h2>
-				<p class="pasoClase2 metrophobic">Selecciona el año gravable.</p>
+				<p class="pasoClase2 metrophobic"><spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" /></p>
 				<div class="caja--ser-rel color-sr2">
 					<select id="aniograv" class="new_alto form-control aniograv" name="aniograv"
 						onchange="SelectedAnio(this)">

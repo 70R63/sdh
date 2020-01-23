@@ -75,10 +75,10 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
-						id="totalingNetos" name="totalingNetos"
+							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
+						id="totalDeduccion" name="totalDeduccion"
 						class="etiqlargas form-control text-right !important" disabled
-						type="text" value="${infoDeclara.totalingNetos }" maxlength="240"></input>
+						type="text" value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -86,10 +86,10 @@
 			<div class="col-md-5">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="ica.declaracion.liquidacion.dedexeact" /></label> <input disabled
-						id="totalDeduccion" name="totalDeduccion"
+							code="ica.declaracion.liquidacion.totinnetos" /></label> <input disabled
+						id="totalingNetos" name="totalingNetos"
 						class="etiqlargas form-control text-right !important" disabled
-						type="text" value="${infoDeclara.totalDeduccion }" maxlength="240"></input>
+						type="text" value="${infoDeclara.totalingNetos }" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -270,7 +270,7 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						onclick="disab()" ${aporteSI} value="si"> Si
+						onclick="disab()" ${aporteSI} value="si" disabled="disabled"> Si
 					</label>
 					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 					<label class="form-check-label"
@@ -278,7 +278,7 @@
 						<input type="radio" name="aporte" id=""
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						${aporteNO} onclick="disab2()" value="no"> No
+						${aporteNO} onclick="disab2()" value="no" disabled="disabled"> No
 					</label>
 					<!-- Se quitan atributos disabled="disabled" readOnly="readonly" Maria Torres 08/01/2020 -->
 				</div>
