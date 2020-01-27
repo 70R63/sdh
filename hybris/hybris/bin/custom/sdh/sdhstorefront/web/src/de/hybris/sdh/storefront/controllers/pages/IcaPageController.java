@@ -1012,41 +1012,41 @@ public class IcaPageController extends SDHAbstractPageController
 			{
 				case "01":
 					meses = new LinkedHashMap<String, String>();
-					meses.put("00", "SELECCIONAR");
+					meses.put("", "SELECCIONAR");
 					meses.put("01", "Enero");
 					meses.put("02", "Febrero");
 					break;
 				case "02":
 					meses = new LinkedHashMap<String, String>();
-					meses.put("00", "SELECCIONAR");
+					meses.put("", "SELECCIONAR");
 					meses.put("03", "Marzo");
 					meses.put("04", "Abril");
 					break;
 
 				case "03":
 					meses = new LinkedHashMap<String, String>();
-					meses.put("00", "SELECCIONAR");
+					meses.put("", "SELECCIONAR");
 					meses.put("05", "Mayo");
 					meses.put("06", "Junio");
 					break;
 
 				case "04":
 					meses = new LinkedHashMap<String, String>();
-					meses.put("00", "SELECCIONAR");
+					meses.put("", "SELECCIONAR");
 					meses.put("07", "Julio");
 					meses.put("08", "Agosto");
 					break;
 
 				case "05":
 					meses = new LinkedHashMap<String, String>();
-					meses.put("00", "SELECCIONAR");
+					meses.put("", "SELECCIONAR");
 					meses.put("09", "Septiembre");
 					meses.put("10", "Octubre");
 					break;
 
 				case "06":
 					meses = new LinkedHashMap<String, String>();
-					meses.put("00", "SELECCIONAR");
+					meses.put("", "SELECCIONAR");
 					meses.put("11", "Noviembre");
 					meses.put("12", "Diciembre");
 					break;

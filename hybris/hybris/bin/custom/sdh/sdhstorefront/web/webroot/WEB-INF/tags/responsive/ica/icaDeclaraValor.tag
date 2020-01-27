@@ -277,8 +277,8 @@
 		var tam = $(".valor").length;
 		if ($(".valor").length < 20) {
 			$($(".valor")[0]).parent().append($($(".valor")[0]).clone());
-			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").val("00")
-			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").val("00")
+			$($(".valor")[0]).parent().children().last().find(".mes_anoGravable").val("")
+			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").val("")
 			$($(".valor")[0]).parent().children().last().find(".tipo").val("")
 			$($(".valor")[0]).parent().children().last().find(".numID").val("")
 			$($(".valor")[0]).parent().children().last().find(".razonSocial")
@@ -367,7 +367,7 @@
 		}else{
 			sel.disabled = 'true';	
 		}
-		sel.value = '00';
+		sel.value = "";
 		
 	    var i;
 	    for(i = sel.options.length - 1 ; i >= 0 ; i--)
@@ -377,7 +377,7 @@
 	    
 		var opt = document.createElement('option');
 		opt.appendChild( document.createTextNode('Seleccionar') );
-		opt.value = '00'; 
+		opt.value = ""; 
 		sel.appendChild(opt); 
 
 		var diaFormateado = "";
@@ -395,7 +395,7 @@
 			    }
 			}
 	    }
-		if(valDia!=null && valDia!="" && valDia!="00"){
+		if(valDia!=null && valDia!=""){
 			sel.value = valDia;	
 		}
 	}
