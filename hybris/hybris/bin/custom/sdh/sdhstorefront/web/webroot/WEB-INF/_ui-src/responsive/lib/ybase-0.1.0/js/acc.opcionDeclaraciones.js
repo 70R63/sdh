@@ -331,9 +331,11 @@ ACC.opcionDeclaraciones = {
 		debugger;
 		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
 	        var claveImpuesto = $("#seleccion").val();  	       
+	        var anoGravable = $("aniograv").val();  	       
 			var dataActual = {};
 		
 			dataActual.claveImpuesto = claveImpuesto;
+			dataActual.anoGravable = anoGravable;
 			
 			
 			$.ajax({
@@ -347,6 +349,60 @@ ACC.opcionDeclaraciones = {
 					alert("Error procesar la solicitud obtener tipo de periodo");	
 				}
 			});
+		}
+		
+		
+	},
+	
+	obtenerListaDeclaraciones_porAnio : function() {
+
+		debugger;
+		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
+	        var claveImpuesto = $("#seleccion").val();  	       
+	        var anoGravable = $("#aniograv").val();  	       
+			var dataActual = {};
+		
+			dataActual.claveImpuesto = claveImpuesto;
+			dataActual.anoGravable = anoGravable;
+			
+			
+			$.ajax({
+				url : ACC.tipoPeriodoDeclaracionURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
+					ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+				},
+				error : function() {
+					alert("Error procesar la solicitud obtener tipo de periodo");	
+				}
+			});
+		}else{
+			ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+		}
+		
+		
+	},
+	
+	
+	updateFromResponsePeriodo_porAnio : function(infoActual,infoResponse) {
+
+		debugger;
+		var perMensual = document.getElementById('Periodo1'); //mensual
+		var perBimestral = document.getElementById('Periodo2'); //bimestral
+		var perMensualValue = document.getElementById('periodoM'); 
+		var perBimestralValue = document.getElementById('periodoB'); 
+		
+		perMensualValue.value = '00';
+		perBimestralValue.value = '00';
+		
+		perMensual.style.display = 'none';
+		perBimestral.style.display = 'none';
+		if (infoResponse.tipoPeriodoDec == '1') {
+			perMensual.style.display = 'block';
+		} else if (infoResponse.tipoPeriodoDec == '2') {
+			perBimestral.style.display = 'block';
 		}
 		
 		

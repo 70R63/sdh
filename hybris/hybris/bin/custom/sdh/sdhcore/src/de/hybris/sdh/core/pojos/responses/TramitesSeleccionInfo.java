@@ -14,6 +14,7 @@ public class TramitesSeleccionInfo
 	private String valorN1;
 	private String valorN2;
 	private String valorN3;
+	private String valorN4;
 	/**
 	 * @return the nivelSeleccion
 	 */
@@ -95,6 +96,23 @@ public class TramitesSeleccionInfo
 		this.valorN3 = valorN3;
 	}
 
+	/**
+	 * @return the valorN4
+	 */
+	public String getValorN4()
+	{
+		return valorN4;
+	}
+
+	/**
+	 * @param valorN4
+	 *           the valorN4 to set
+	 */
+	public void setValorN4(final String valorN4)
+	{
+		this.valorN4 = valorN4;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -104,7 +122,7 @@ public class TramitesSeleccionInfo
 	public String toString()
 	{
 		return "TramitesSeleccionInfo [nivelSeleccion=" + nivelSeleccion + ", valorN0=" + valorN0 + ", valorN1=" + valorN1
-				+ ", valorN2=" + valorN2 + ", valorN3=" + valorN3 + "]";
+				+ ", valorN2=" + valorN2 + ", valorN3=" + valorN3 + ", valorN4=" + valorN4 + "]";
 	}
 
 
