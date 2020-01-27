@@ -9,7 +9,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -222,7 +221,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		if (infoDelineacionResponse.getErrores() != null)
 		{
-			String paginaDestinoInicial = paginaDestino;
+			final String paginaDestinoInicial = paginaDestino;
 
 			for (final ErrorEnWS eachError : infoDelineacionResponse.getErrores())
 			{
@@ -362,7 +361,7 @@ public class DelineacionUrbanaController extends AbstractPageController
 
 		if (infoDelineacionResponse.getErrores() != null)
 		{
-			String paginaDestinoInicial = paginaDestino;
+			final String paginaDestinoInicial = paginaDestino;
 
 			for (final ErrorEnWS eachError : infoDelineacionResponse.getErrores())
 			{
@@ -687,6 +686,14 @@ public class DelineacionUrbanaController extends AbstractPageController
 		System.out.println("Response de calculoImp/Delineacion: " + infoDelineacionResponse);
 		if (gasolinaService.ocurrioErrorInfoDelineacion(infoDelineacionResponse) != true)
 		{
+
+			if (infoDelineacionResponse.getErrores().get(0).getIdmsj().equals("99"))
+			{
+				mensajesError = gasolinaService.prepararMensajesError(infoDelineacionResponse.getErrores());
+				LOG.info("Alerta al leer informacion del calculo: " + mensajeError);
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.INFO_MESSAGES_HOLDER,
+						"error.impuestoDelineacion.calculoImpuesto.error1.attrib1", mensajesError);
+			}
 
 			gasolinaService.prepararValorUsoDU(infoDelineacionResponse);
 
