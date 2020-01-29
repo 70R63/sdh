@@ -2230,7 +2230,8 @@ public class SobreTasaGasolinaService
 				elementos.put("0007", "Publicidad Exterior Visual");
 			}
 		}
-		
+
+		elementos.put("0008", "Predial");
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;

@@ -141,7 +141,6 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			dataForm.setOptionVehicular("2");
 		}
-
 		if (customerData.getIcaTax() != null)
 		{
 			dataForm.setOptionGas("3");
@@ -158,6 +157,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			dataForm.setOptionGas("6");
 		}
+		//Predial
+		dataForm.setOptionPredial("7");
 
 
 
@@ -165,7 +166,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		model.addAttribute("tpImpuesto",
 				this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
 						dataForm.getOptionIca(),
-						dataForm.getOptionDeli()));
+						dataForm.getOptionDeli(), dataForm.getOptionPredial()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -553,7 +554,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());
 		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
 		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
-				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular()));
+				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular(), dataForm.getOptionPredial()));
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -565,10 +566,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	}
 
 	private Map<String, String> getTpImpuesto(final String optionVehicular, final String optionGas, final String optionPubExt,
-			final String optionIca, final String optionDeli)
+			final String optionIca, final String optionDeli, final String predial)
 	{
 		final Map<String, String> map;
-		if (optionGas != "" || optionPubExt != "" || optionIca != "" || optionDeli != "" || optionVehicular != "")
+		if (optionGas != "" || optionPubExt != "" || optionIca != "" || optionDeli != "" || optionVehicular != "" || predial != "")
 		{
 			map = new HashMap<String, String>();
 			map.put("0", "Seleccionar");
@@ -593,6 +594,11 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			if (optionDeli != "")
 			{
 				map.put("6", "Delineacion Urbana");
+			}
+
+			if (predial != "")
+			{
+				map.put("7", "Predial");
 			}
 
 		}

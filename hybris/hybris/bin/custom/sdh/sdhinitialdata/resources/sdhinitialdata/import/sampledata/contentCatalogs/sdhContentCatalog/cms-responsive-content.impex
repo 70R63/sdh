@@ -120,7 +120,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; PublicidadExteriorLink       ; PUBLICIDAD EXTERIOR                 ; "/contribuyentes/publicidadexterior" ;;;;;
 ; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
 ; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; "/contribuyentes/sobretasa-gasolina" ;;;;;
-; ; NewSobreVehiNodeLink         ; NEW SOBRE VEHICULO                 ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
+; ; NewSobreVehiNodeLink         ; NEW SOBRE VEHICULO                  ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
+; ; NewPredialLink               ; NewPredial                          ; "/contribuyentes/predialunificado/detalle" ;;;;;
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
@@ -203,10 +204,11 @@ INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];n
 INSERT_UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true]			;restrictions(uid,$contentCV)
                                 ;						;DelineacionUrbanaLink		;delineacionUsrTaxGrpRtn
                                 ;						;ICALink					;ICAUsrTaxGrpRtn
-								;						;PredialUnificadoLink		;predialUsrTaxGrpRtn
+   							    ;						;PredialUnificadoLink		;predialUsrTaxGrpRtn
                                 ;						;PublicidadExteriorLink		;publicidadExtUsrTaxGrpRtn
                                 ;						;NewSobreVehiNodeLink	    ;vehicularUsrTaxGrpRtn
                                 ;						;SobreTasaGasolinaLink		;gasolinaUsrTaxGrpRtn
+                                ;						;NewPredialLink				;predialUsrTaxGrpRtn
 
 
 
@@ -419,7 +421,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
-;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,ICANavNode,PredialUnificadoNavNode,PublicidadExteriorNavNode,NewSobreVehiNodeNavNode,SobreTasaGasolinaNavNode
+;ImpuestosNavigationServiceRequestsNavNodeMenu;;Impuestos Service Requests Menu;ImpuestosNavigationServiceRequestsNavNodeMenu;DelineacionUrbanaNavNode,NewPredialNavNode,ICANavNode,PredialUnificadoNavNode,PublicidadExteriorNavNode,NewSobreVehiNodeNavNode,SobreTasaGasolinaNavNode
 #->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
@@ -530,6 +532,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;SobreVehiAutomotoresNavNode ;;Sobre vehículos automotores Link;SobreVehiAutomotoresNavNode
 ;SobreTasaGasolinaNavNode ;;Sobre tasa a la gasolina Link;SobreTasaGasolinaNavNode
 ;NewSobreVehiNodeNavNode ;;New Sobre Vehiculo Node Link;NewSobreVehiNodeNavNode
+;NewPredialNavNode ;;NewPredial Link;NewPredialNavNode
 #->FIN dev-eduardo Agregar menu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
@@ -658,6 +661,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;SobreVehiAutomotoresNavNodeEntry;;Sobre vehiculos automotores Navigation Node Entry;SobreVehiAutomotoresNavNode;SobreVehiAutomotoresLink
 ;SobreTasaGasolinaNavNodeEntry;;Sobre tasa gasolina Navigation Node Entry;SobreTasaGasolinaNavNode;SobreTasaGasolinaLink
 ;NewSobreVehiNodeNavNodeEntry;;New Sobre Vehiculo Node Entry;NewSobreVehiNodeNavNode;NewSobreVehiNodeLink
+;NewPredialNavNodeEntry;;NewPredial Navigation Node Entry;NewPredialNavNode;NewPredialLink
 #->FIN dev-eduardo Agregar menu IMPUESTOS  04/01/2019
 
 #->INI dev-eduardo Agregar menu TRAMITES 04/01/2019
