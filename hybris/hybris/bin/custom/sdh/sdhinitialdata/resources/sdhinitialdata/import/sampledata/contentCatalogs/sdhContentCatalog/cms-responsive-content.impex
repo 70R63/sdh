@@ -87,6 +87,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ; ;MiRITLink; MI RIT LINK    ; "/contribuyentes/mirit" ;;;;;
+; ;RIMiRITLink; MI RIT LINK    ; "/reportantes/mirit" ;;;;;
 ; ;MiBuzonLink; MI BUZON LINK    ; /contribuyentes/mibuzon_tributario" ;;;;;
 ; ;ARMiBuzonLink; MI BUZON LINK    ; /agenteRetenedor/mibuzon_tributario" ;;;;;
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "#" ;;;;;
@@ -372,7 +373,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ;MiRITNavigationNodeEntry;;Mi RIT Menu;MiRITNavigationNode;MiRITLink;
 ;MiRITContribuyentesNavigationNodeEntry;;Mi RIT Menu;MiRITContribuyentesNavigationNode;MiRITLink;
-;MiRITReportanteInformacionNavigationNodeEntry;;Mi RIT Menu;MiRITReportanteInformacionNavigationNode;MiRITLink;
+;MiRITReportanteInformacionNavigationNodeEntry;;Mi RIT Menu;MiRITReportanteInformacionNavigationNode;RIMiRITLink;
 ;MiBuzonNavigationNodeEntry;;Mi Buzon Menu;MiBuzonNavigationNode;MiBuzonLink;
 ;MiBuzonContribuyentesNavigationNodeEntry;;Mi Buzon Menu;MiBuzonContribuyentesNavigationNode;MiBuzonLink;
 ;ImpuestosNavigationNodeEntry;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosLink;

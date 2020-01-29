@@ -93,7 +93,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * Controller for home page
  */
 @Controller
-@RequestMapping(value= {"/contribuyentes/mirit", "/agenteRetenedor/mirit"})
+@RequestMapping(value =
+{ "/contribuyentes/mirit", "/agenteRetenedor/mirit", "/reportantes/mirit" })
 public class MiRitPageController extends AbstractPageController
 {
 
@@ -425,9 +426,13 @@ public class MiRitPageController extends AbstractPageController
 		{
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE_RETE));
 		}
-		else
+		else if (referrer.contains("reportantes"))
 		{
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE_REPO));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
 		}
 
 

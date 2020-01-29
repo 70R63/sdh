@@ -137,6 +137,7 @@ UPDATE PSCMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ;;MiRITLink;"Mi RIT";"Haga clic aquí para ir a Mi RIT"
 ;;ARMiRITLink;"Mi RIT";"Haga clic aquí para ir a Mi RIT"
+;;RIMiRITLink;"Mi RIT";"Haga clic aquí para ir a Mi RIT"
 ;;MiBuzonLink;"Mi Buzón";"Haga clic aquí para ir a Mi Buzón"
 ;;ARMiBuzonLink;"Mi Buzón";"Haga clic aquí para ir a Mi Buzón"
 ;;ImpuestosLink;"Impuestos";"Haga clic aquí para ir a Impuestos"
