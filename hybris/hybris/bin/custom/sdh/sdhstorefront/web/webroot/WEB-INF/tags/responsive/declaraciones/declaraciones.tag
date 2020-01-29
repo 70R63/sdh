@@ -365,7 +365,7 @@ window.onload = function() {
 	
 	function SelectedAnio(selectObject) {
 // 		debugger;
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_porAnio();
 
 	}
 
