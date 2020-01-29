@@ -16,6 +16,8 @@ public class ICAControlCamposDec
 	private boolean ingNetosGrava;
 	private boolean valorRetenido;
 	private boolean valorPagar;
+	private boolean btnPresentarDec;
+	private boolean btnPagarDec;
 
 
 	/**
@@ -118,6 +120,40 @@ public class ICAControlCamposDec
 	public void setValorPagar(final boolean valorPagar)
 	{
 		this.valorPagar = valorPagar;
+	}
+
+	/**
+	 * @return the btnPresentarDec
+	 */
+	public boolean isBtnPresentarDec()
+	{
+		return btnPresentarDec;
+	}
+
+	/**
+	 * @param btnPresentarDec
+	 *           the btnPresentarDec to set
+	 */
+	public void setBtnPresentarDec(final boolean btnPresentarDec)
+	{
+		this.btnPresentarDec = btnPresentarDec;
+	}
+
+	/**
+	 * @return the btnPagarDec
+	 */
+	public boolean isBtnPagarDec()
+	{
+		return btnPagarDec;
+	}
+
+	/**
+	 * @param btnPagarDec
+	 *           the btnPagarDec to set
+	 */
+	public void setBtnPagarDec(final boolean btnPagarDec)
+	{
+		this.btnPagarDec = btnPagarDec;
 	}
 
 

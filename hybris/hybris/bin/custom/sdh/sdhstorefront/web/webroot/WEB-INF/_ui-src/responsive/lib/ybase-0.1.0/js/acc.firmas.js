@@ -127,10 +127,12 @@ ACC.frimas = {
 						}
 						if(value.idmsj == "0"){
 							$("#generaDeclaracionVehiculosButton").attr("disabled",false);
+							ACC.frimas.habilitaPresentarDec("justFirm");
 						}
 
 					});
 					$("#generaDeclaracionVehiculosButton").attr("disabled",false);
+					ACC.frimas.habilitaPresentarDec("justFirm");
 
 				},
 				error: function () {
@@ -231,12 +233,13 @@ debugger;
 					});
 
 					if(success){
-						window.setTimeout(function(){
-
-							// Move to a new location or you can do something else
-							window.location.href = $("#taxTypeRedirection").val();
-
-						}, 3000);
+						ACC.frimas.habilitaPresentarDec("firmAndAdd");
+//						window.setTimeout(function(){
+//
+//							// Move to a new location or you can do something else
+//							window.location.href = $("#taxTypeRedirection").val();
+//
+//						}, 3000);
 					}
 
 				},
@@ -261,6 +264,21 @@ debugger;
 			}
 		});
 
+	},
+	
+	
+	habilitaPresentarDec: function(){
+		
+		if(botonActivado == "justFirm"){
+			$(".GeneraDeclaracionButton").attr("disabled",false);
+		}else if(botonActivado == "firmAndAdd"){
+			var contribuyenteNoNIT = document.getElementById("contribuyenteNoNIT");
+			
+			if(contribuyenteNoNIT == null || contribuyenteNoNIT.value!="X"){
+				$(".GeneraDeclaracionButton").attr("disabled",false);
+			}			
+		}
+		
 	}
 
 

@@ -558,7 +558,7 @@ ACC.ica = {
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
-	            			$("#icaPresentarDeclaracionButton").prop('disabled', false);
+	            			$("#icaPresentarDeclaracionButton").prop('disabled', true);
 	            			
 	            		}
 	 	      		

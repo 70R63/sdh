@@ -53,6 +53,7 @@ import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.facades.SDHCalculaICA2Facade;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.EnviaFirmasForm;
@@ -720,7 +721,7 @@ public class IcaPageController extends SDHAbstractPageController
 			icaInfObjetoResponse.setInfoDeclara(infoDeclara);
 			icaInfObjetoFormResp
 					.setCatalogos(obtenerCatalogos(icaInfObjetoResponse.getAnoGravable(), icaInfObjetoResponse.getPeriodo()));
-			icaInfObjetoFormResp.setControlCampos(establecerCamposICADec("sdh_02"));
+			icaInfObjetoFormResp.setControlCampos(establecerCamposICADec("sdh_02", contribuyenteData, currentUserData));
 
 			model.addAttribute("icaInfObjetoFormResp", icaInfObjetoFormResp);
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
@@ -1131,28 +1132,28 @@ public class IcaPageController extends SDHAbstractPageController
 	}
 
 
-	private void agregarRegistroDefault_VR(List<ICAInfoValorRetenido> listaResgistros, ICAInfObjetoResponse infoAdicional)
+	private void agregarRegistroDefault_VR(final List<ICAInfoValorRetenido> listaResgistros, final ICAInfObjetoResponse infoAdicional)
 	{
 		if (listaResgistros.isEmpty())
 		{
-			ICAInfoValorRetenido registroDefault = new ICAInfoValorRetenido();
+			final ICAInfoValorRetenido registroDefault = new ICAInfoValorRetenido();
 			registroDefault.setAnio(infoAdicional.getAnoGravable());
 			listaResgistros.add(registroDefault);
 		}
 
 	}
 
-	private void agregarRegistroDefault_IngCIIU(List<ICAInfoIngPorCiiu> listaResgistros)
+	private void agregarRegistroDefault_IngCIIU(final List<ICAInfoIngPorCiiu> listaResgistros)
 	{
 		if (listaResgistros.isEmpty())
 		{
-			ICAInfoIngPorCiiu registroDefault = new ICAInfoIngPorCiiu();
+			final ICAInfoIngPorCiiu registroDefault = new ICAInfoIngPorCiiu();
 			listaResgistros.add(registroDefault);
 		}
 
 	}
 
-	private void agregarRegistroDefault_ING(List<ICAInfoIngNetosGrava> listaResgistros)
+	private void agregarRegistroDefault_ING(final List<ICAInfoIngNetosGrava> listaResgistros)
 	{
 
 		if (listaResgistros != null)
@@ -1178,7 +1179,7 @@ public class IcaPageController extends SDHAbstractPageController
 
 		if (listaResgistros.isEmpty())
 		{
-			ICAInfoIngNetosGrava registroDefault = new ICAInfoIngNetosGrava();
+			final ICAInfoIngNetosGrava registroDefault = new ICAInfoIngNetosGrava();
 			registroDefault.setActPrincipal("");
 			registroDefault.setCodCIIU("");
 			registroDefault.setIngresos("");
@@ -1189,9 +1190,10 @@ public class IcaPageController extends SDHAbstractPageController
 
 	}
 
-	private ICAControlCamposDec establecerCamposICADec(String rol)
+	private ICAControlCamposDec establecerCamposICADec(final String rol, final CustomerData contribuyenteData, final CustomerData currentUserData)
 	{
 		ICAControlCamposDec controlCampos = null;
+		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
 
 		switch (rol)
 		{
@@ -1203,6 +1205,25 @@ public class IcaPageController extends SDHAbstractPageController
 				controlCampos.setIngNetosGrava(true);
 				controlCampos.setValorRetenido(true);
 				controlCampos.setValorPagar(true);
+				controlCampos.setBtnPresentarDec(true);
+				controlCampos.setBtnPagarDec(true);
+
+				if (contribuyenteData.getAgentList() != null)
+				{
+					for (final SDHAgentData infoAgente : contribuyenteData.getAgentList())
+					{
+						if (infoAgente != null)
+						{
+							if (infoAgente.getInternalFunction() != null && infoAgente.getBp() != null
+									&& infoAgente.getBp().equals(currentUserData.getNumBP())
+									&& infoAgente.getInternalFunction().equals(strRepresentanteLegalPrincipal))
+							{
+								controlCampos.setBtnPresentarDec(false);
+								controlCampos.setBtnPagarDec(false);
+							}
+						}
+					}
+				}
 
 				break;
 
