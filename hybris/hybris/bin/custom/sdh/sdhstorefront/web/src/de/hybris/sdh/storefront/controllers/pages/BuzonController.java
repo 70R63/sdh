@@ -14,6 +14,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiBuzon;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -36,6 +37,7 @@ public class BuzonController extends AbstractPageController
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.buzon";
+	private static final String TEXT_ACCOUNT_PROFILE_RETE = "text.account.profile.buzonRETE";
 
 	// CMS Pages
 	private static final String MI_BUZON_CMS_PAGE = "buzonPage";
@@ -51,11 +53,14 @@ public class BuzonController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/contribuyentes/mibuzon_tributario", method = RequestMethod.GET)
+	@RequestMapping(value =
+	{ "/contribuyentes/mibuzon_tributario", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String buzoninicizl(final Model model) throws CMSItemNotFoundException
+	public String buzoninicizl(final Model model, HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET mi buzon inicial --------------------------");
+
+		String referrer = request.getHeader("referer");
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final MiBuzon miBuzon = new MiBuzon();
@@ -66,18 +71,36 @@ public class BuzonController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		model.addAttribute("miBuzon", miBuzon);
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		if (referrer.contains("contribuyentes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		}
+		else if (referrer.contains("retenedor") || referrer.contains("agenteRetenedor"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_RETE));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		}
+
 
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/contribuyentes/mibuzon_tributario", method = RequestMethod.POST)
+	@RequestMapping(value =
+	{ "/contribuyentes/mibuzon_tributario", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String buzonpost(final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
+	public String buzonpost(final BindingResult bindingResult, HttpServletRequest request, final Model model,
+			final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("------------------Entro al POST de mi buzon inicial------------------------");
+
+		String referrer = request.getHeader("referer");
 
 		return REDIRECT_TO_MI_BUZON_PAGE;
 	}

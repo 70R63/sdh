@@ -10,6 +10,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -22,6 +23,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiRitCertificacionForm;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -40,6 +42,8 @@ public class MiRitCertificacionPageController extends AbstractPageController
 	private static final String ERROR_CMS_PAGE = "notFound";
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String BREADCRUMBS_VALUE = "breadcrumb.certificacion";
+	private static final String BREADCRUMBS_VALUE_RETE = "breadcrumb.certificacionRETE";
+	private static final String BREADCRUMBS_VALUE_REPO = "breadcrumb.certificacionREPO";
 
 
 	private static final String VACIO = "";
@@ -63,7 +67,8 @@ public class MiRitCertificacionPageController extends AbstractPageController
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
-	@RequestMapping(value = "/contribuyentes/mirit/certificacion-datos", method = RequestMethod.POST)
+	@RequestMapping(value =
+	{ "/contribuyentes/mirit/certificacion-datos", "/agenteRetenedor/mirit/certificacion-datos" }, method = RequestMethod.POST)
 	public String showView(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("miRitCertificacionForm")
 	final MiRitCertificacionForm miRitCertificacionFormDatos) throws CMSItemNotFoundException
 	{
@@ -150,13 +155,15 @@ public class MiRitCertificacionPageController extends AbstractPageController
 
 
 
-	@RequestMapping(value = "/contribuyentes/mirit/certificacion-datos")
-	public String showCertificacionDatos(final Model model, @ModelAttribute("error")
+	@RequestMapping(value =
+	{ "/contribuyentes/mirit/certificacion-datos", "/agenteRetenedor/mirit/certificacion-datos" })
+	public String showCertificacionDatos(final Model model, HttpServletRequest request, @ModelAttribute("error")
 	final String error, @ModelAttribute("miRitCertificacionFormResp")
 	final MiRitCertificacionForm miRitCertificacionFormResp)
 			throws CMSItemNotFoundException
 	{
 		String returnURL = "/";
+		String referrer = request.getHeader("referer");
 
 		final MiRitCertificacionForm miRitCertificacionForm = new MiRitCertificacionForm();
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
@@ -174,7 +181,20 @@ public class MiRitCertificacionPageController extends AbstractPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_RIT_CERTIFICACION_DATOS_CMS_PAGE));
 		model.addAttribute("miRitCertificacionForm", miRitCertificacionForm);
 		model.addAttribute("miRitCertificacionFormResp", miRitCertificacionFormResp);
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
+
+		if (referrer.contains("contribuyentes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
+		}
+		else if (referrer.contains("retenedor") || referrer.contains("agenteRetenedor"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE_RETE));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE_REPO));
+		}
+
 
 		returnURL = getViewForPage(model);
 
