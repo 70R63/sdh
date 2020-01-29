@@ -39,7 +39,6 @@ import java.io.InputStream;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -188,7 +187,7 @@ public class DeclaracionesPageController extends AbstractPageController
 					final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 					icaInfObjetoRequest.setNumBP(infoVista.getCustomerData().getInfoContrib().getNumBP());
 					icaInfObjetoRequest.setNumObjeto(infoVista.getCustomerData().getIca().getNumObjeto());
-					icaInfObjetoRequest.setAnoGravable("");
+					icaInfObjetoRequest.setAnoGravable(infoVista.getAnoGravable());
 					icaInfObjetoRequest.setPeriodo("");
 
 
@@ -196,13 +195,20 @@ public class DeclaracionesPageController extends AbstractPageController
 					response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
 					final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 
-					if (StringUtils.isAllEmpty(icaInfObjetoResponse.getPeriodo()))
+					if (icaInfObjetoResponse.getRegimen() != null)
 					{
-						infoVista.setTipoPeriodoDec("0");
-					}
-					else
-					{
-						infoVista.setTipoPeriodoDec("2");
+						String tipoRegimen = icaInfObjetoResponse.getRegimen().substring(0, 1);
+
+						switch (tipoRegimen)
+						{
+							case "3":
+								infoVista.setTipoPeriodoDec("2");
+								break;
+
+							default:
+								infoVista.setTipoPeriodoDec("0");
+								break;
+						}
 					}
 					break;
 

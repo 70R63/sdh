@@ -7,6 +7,7 @@
 <%@ taglib prefix="icadecla" tagdir="/WEB-INF/tags/responsive/ica"%>
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 	<%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
@@ -55,6 +56,18 @@ window.onload = function() {
 	 
 	 habilitarTablaING_general();
 	 
+	 ACC.ica.original_tablaValorRetenido = new Array();
+	 var item_valorRetenido = null;
+	 
+	 debugger;
+	<c:forEach items="${icaInfObjetoFormResp.icaInfObjetoResponse.infoDeclara.valorRetenido }" var="eachValor" varStatus="loopStatusInfo" >
+ 		item_valorRetenido = new Object();
+ 		item_valorRetenido.keyComparacion = "${fn:trim(eachValor.anio)}"+"${fn:trim(eachValor.mes)}"+
+ 		"${fn:trim(eachValor.dia)}"+"${fn:trim(eachValor.tipoID)}"+"${fn:trim(eachValor.numID)}"+
+ 		"${fn:trim(eachValor.razonSocial)}"+"${fn:trim(eachValor.direccion)}"+"${fn:trim(eachValor.telefono)}"+
+ 		"${fn:trim(eachValor.codMunicipio)}"+"${fn:trim(eachValor.tarifaApl)}"+"${fn:trim(eachValor.montoRetenido)}";
+ 		ACC.ica.original_tablaValorRetenido.push(item_valorRetenido);
+	 </c:forEach>
 	 
 
 	 $(".loader").fadeOut("slow");

@@ -1755,7 +1755,8 @@ public class SobreTasaGasolinaService
 			for (int i = 0; i < infoDelineacionResponse.getErrores().size(); i++)
 			{
 				if (!infoDelineacionResponse.getErrores().get(i).getIdmsj().isEmpty()
-						&& !infoDelineacionResponse.getErrores().get(i).getIdmsj().equals("0"))
+						&& !infoDelineacionResponse.getErrores().get(i).getIdmsj().equals("0")
+						&& !infoDelineacionResponse.getErrores().get(i).getIdmsj().equals("99"))
 				{
 					ocurrioError = true;
 					break;
@@ -2230,7 +2231,7 @@ public class SobreTasaGasolinaService
 				elementos.put("0007", "Publicidad Exterior Visual");
 			}
 		}
-		
+
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;

@@ -6,6 +6,19 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<c:set var="flagPresentarDeclaracion" value="false" />
+<c:set var="flagPagarEnLinea" value="false" />
+<c:if test="${icaInfObjetoFormResp.controlCampos.btnPresentarDec == false}">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+</c:if>
+<c:if test="${icaInfObjetoFormResp.controlCampos.btnPagarDec == false}">
+	<c:set var="flagPagarEnLinea" value="true" />
+</c:if>
+<c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+	<c:set var="flagPagarEnLinea" value="true" />
+	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
+</c:if>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -28,23 +41,13 @@
 					class="btn btn-secondary btn-lg" onclick="goBack()" type="button">
 					<spring:theme code="ica.declaracion.firma.regresar" />
 				</button>
-				<c:choose>
-					<c:when
-						test="${not empty icaInfObjetoFormResp.icaInfObjetoResponse.numForm }">
-						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
-							type="button">
-							<spring:theme code="ica.declaracion.firma.prendecla" />
-						</button>
-					</c:when>
-					<c:otherwise>
-						<button style="margin-top: 3px;"
-							id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
-							type="button"> <!-- se quita atributo disabled 19/12/2019 Maria torres -->
-							<spring:theme code="ica.declaracion.firma.prendecla" />
-						</button>
-					</c:otherwise>
-				</c:choose>
+				<c:if test="${flagPresentarDeclaracion eq true}">
+					<button style="margin-top: 3px;"
+						id="icaPresentarDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
+						type="button" disabled="disabled">
+						<spring:theme code="ica.declaracion.firma.prendecla" />
+					</button>
+				</c:if>
 
 				<sf:hidden path="tipoImpuesto" />
 				<sf:hidden path="numBP" />
@@ -55,17 +58,13 @@
 				<sf:hidden path="clavePeriodo" />
 				<sf:hidden path="dv" />
 				<sf:hidden path="numObjeto" />
-
-				<!-- <sf:button class="btn btn-primary btn-lg" type="submit" id="action"
-					name="pagar" value="pagar">
-					<spring:theme code="ica.declaracion.firma.pagliena" />
-				</sf:button> -->
-
-				<button style="margin-top: 3px;"
-                	id="action" class="btn btn-primary btn-lg pagarbtn"
-                	type="submit" name="pagar" value="pagar" disabled="disabled">
-                	<spring:theme code="ica.declaracion.firma.pagliena" />
-                </button>
+				<c:if test="${flagPagarEnLinea eq true}">
+					<button style="margin-top: 3px;"
+	                	id="action" class="btn btn-primary btn-lg pagarbtn"
+	                	type="submit" name="pagar" value="pagar" disabled="disabled">
+	                	<spring:theme code="ica.declaracion.firma.pagliena" />
+	                </button>
+	            </c:if>
 			</sf:form>
 		</div>
 	</div>
