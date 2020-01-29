@@ -19,6 +19,7 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.ChangeUIDEvent;
 import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
@@ -71,6 +72,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -87,12 +89,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 /**
  * Controller for home page
  */
 @Controller
-@RequestMapping("/contribuyentes/mirit")
+@RequestMapping(value =
+{ "/contribuyentes/mirit", "/agenteRetenedor/mirit", "/reportantes/mirit" })
 public class MiRitPageController extends AbstractPageController
 {
 
@@ -102,7 +104,8 @@ public class MiRitPageController extends AbstractPageController
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String BREADCRUMBS_VALUE = "breadcrumb.miRIT";
-
+	private static final String BREADCRUMBS_VALUE_RETE = "Mi RIT";
+	private static final String BREADCRUMBS_VALUE_REPO = "breadcrumb.miRITREPO";
 
 	@Resource(name = "sessionService")
 	SessionService sessionService;
@@ -149,8 +152,9 @@ public class MiRitPageController extends AbstractPageController
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String showView(final Model model,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+			final RedirectAttributes redirectModel, HttpServletRequest request) throws CMSItemNotFoundException
 	{
+
 
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
@@ -158,6 +162,8 @@ public class MiRitPageController extends AbstractPageController
 
 
 		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+
+		String referrer = request.getHeader("referer");
 
 		try
 		{
@@ -412,8 +418,22 @@ public class MiRitPageController extends AbstractPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 		updatePageTitle(model, getContentPageForLabelOrId(Mi_RIT_CMS_PAGE));
 
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
-
+		if (referrer.contains("contribuyentes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
+		}
+		else if (referrer.contains("retenedores"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE_RETE));
+		}
+		else if (referrer.contains("reportantes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE_REPO));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_VALUE));
+		}
 
 
 		return getViewForPage(model);

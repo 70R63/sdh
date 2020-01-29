@@ -14,6 +14,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiBuzon;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -30,13 +31,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
-@RequestMapping("/contribuyentes/mibuzontributario/inicial")
+@RequestMapping(value =
+{ "/contribuyentes/mibuzontributario/inicial", "/agenteRetenedor/mibuzon_tributario" })
 public class MiBuzonController extends AbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(MiRitCertificacionPageController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.buzon";
+	private static final String TEXT_ACCOUNT_PROFILE_RETE = "text.account.profile.buzonRETE";
+	private static final String TEXT_ACCOUNT_PROFILE_REPO = "text.account.profile.buzonREPO";
 
 	// CMS Pages
 	private static final String MI_BUZON_CMS_PAGE = "miBuzonPage";
@@ -52,12 +56,13 @@ public class MiBuzonController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@RequestMapping(value = "/contribuyentes/mibuzontributario/inicial", method = RequestMethod.GET)
+	@RequestMapping(value =
+	{ "/contribuyentes/mibuzontributario/inicial", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String mibuzoninicial(final Model model) throws CMSItemNotFoundException
+	public String mibuzoninicial(final Model model, HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET mi buzon inicial --------------------------");
-
+		String referrer = request.getHeader("referer");
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final MiBuzon miBuzon = new MiBuzon();
 		final ObjectMapper mapper = new ObjectMapper();
@@ -67,7 +72,20 @@ public class MiBuzonController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		model.addAttribute("miBuzon", miBuzon);
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+
+		if (referrer.contains("contribuyentes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		}
+		else if (referrer.contains("retenedor") || referrer.contains("agenteRetenedor"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_RETE));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_REPO));
+		}
+		//model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);

@@ -61,14 +61,23 @@ window.onload = function() {
 			}
 		}
 	}
+	debugger;
+	var url = window.parent.location.href;
+	var contenido_url = url.includes('contribuyentes');
 }
 	window.onload = function() {
-		debugger;
+	debugger;
 		var inputcol = document.getElementsByTagName("input");
 		for (i = 0; i < inputcol.length; i++) {
 			var texto = inputcol[i].value;
 			inputcol[i].style.width = (texto.length + 1) * 10 + 'px';
 		}
+		
+		debugger;
+		var url = window.parent.location.href;
+		var contenido_url = url.includes('contribuyentes');
+		
+	
 		$(".loader").fadeOut("slow");
 	};
 

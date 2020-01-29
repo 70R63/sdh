@@ -7,7 +7,7 @@ import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 
 
 /**
- * @author fede
+ * @author Federico Flores Dimas
  *
  */
 public class TramiteOpcion
@@ -18,6 +18,8 @@ public class TramiteOpcion
 	private String categorizacion;
 	private String canal;
 	private String urlAccion;
+	private TramiteRolAccion rolAccion;
+
 
 
 	/**
@@ -124,6 +126,23 @@ public class TramiteOpcion
 	}
 
 	/**
+	 * @return the rolAccion
+	 */
+	public TramiteRolAccion getRolAccion()
+	{
+		return rolAccion;
+	}
+
+	/**
+	 * @param rolAccion
+	 *           the rolAccion to set
+	 */
+	public void setRolAccion(final TramiteRolAccion rolAccion)
+	{
+		this.rolAccion = rolAccion;
+	}
+
+	/**
 	 * @param key
 	 * @param tramiteOpcion
 	 */
@@ -159,6 +178,14 @@ public class TramiteOpcion
 		this.key = key;
 		this.tramiteOpcion = tramiteSelectOpcion;
 		this.urlAccion = url;
+	}
+
+	public TramiteOpcion(final String key, final ItemSelectOption tramiteSelectOpcion, final TramiteRolAccion rolAccion)
+	{
+		super();
+		this.key = key;
+		this.tramiteOpcion = tramiteSelectOpcion;
+		this.rolAccion = rolAccion;
 	}
 
 

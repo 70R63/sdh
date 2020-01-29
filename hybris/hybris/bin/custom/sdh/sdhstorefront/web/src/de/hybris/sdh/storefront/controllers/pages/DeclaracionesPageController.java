@@ -37,8 +37,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -52,7 +52,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
-
 
 /**
  * @author Maria Luisa
@@ -68,6 +67,7 @@ public class DeclaracionesPageController extends AbstractPageController
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.declaraciones";
+	private static final String TEXT_ACCOUNT_PROFILE2 = "text.account.profile.declaraciones2";
 
 	// CMS Pages
 	private static final String DECLARACIONES_CMS_PAGE = "declaracionesPage";
@@ -112,7 +112,7 @@ public class DeclaracionesPageController extends AbstractPageController
 	@RequestMapping(value =
 	{ "/contribuyentes/consultas/declaraciones", "/agenteRetenedor/consultas/declaraciones" }, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String declaracionesGET(final Model model) throws CMSItemNotFoundException
+	public String declaracionesGET(final Model model, HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Agentes Declaraciones --------------------------");
 
@@ -120,7 +120,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final OpcionDeclaracionesVista infoVista = new OpcionDeclaracionesVista();
 		SDHValidaMailRolResponse customerData = null;
-
+		String referrer = request.getHeader("referer");
 
 		customerData = sdhCustomerFacade.getRepresentadoFromSAP(customerModel.getNumBP());
 		infoVista.setCatalogos(gasolinaService.prepararCatalogosOpcionDeclaraciones(customerData));
@@ -131,9 +131,17 @@ public class DeclaracionesPageController extends AbstractPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(DECLARACIONES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DECLARACIONES_CMS_PAGE));
 
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		//		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
+		if (referrer.contains("contribuyentes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE2));
+		}
 
 
 		return getViewForPage(model);
@@ -179,7 +187,7 @@ public class DeclaracionesPageController extends AbstractPageController
 					final ICAInfObjetoRequest icaInfObjetoRequest = new ICAInfObjetoRequest();
 					icaInfObjetoRequest.setNumBP(infoVista.getCustomerData().getInfoContrib().getNumBP());
 					icaInfObjetoRequest.setNumObjeto(infoVista.getCustomerData().getIca().getNumObjeto());
-					icaInfObjetoRequest.setAnoGravable("");
+					icaInfObjetoRequest.setAnoGravable(infoVista.getAnoGravable());
 					icaInfObjetoRequest.setPeriodo("");
 
 
@@ -187,13 +195,20 @@ public class DeclaracionesPageController extends AbstractPageController
 					response = sdhICAInfObjetoService.consultaICAInfObjeto(icaInfObjetoRequest);
 					final ICAInfObjetoResponse icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
 
-					if (StringUtils.isAllEmpty(icaInfObjetoResponse.getPeriodo()))
+					if (icaInfObjetoResponse.getRegimen() != null)
 					{
-						infoVista.setTipoPeriodoDec("0");
-					}
-					else
-					{
-						infoVista.setTipoPeriodoDec("2");
+						String tipoRegimen = icaInfObjetoResponse.getRegimen().substring(0, 1);
+
+						switch (tipoRegimen)
+						{
+							case "3":
+								infoVista.setTipoPeriodoDec("2");
+								break;
+
+							default:
+								infoVista.setTipoPeriodoDec("0");
+								break;
+						}
 					}
 					break;
 

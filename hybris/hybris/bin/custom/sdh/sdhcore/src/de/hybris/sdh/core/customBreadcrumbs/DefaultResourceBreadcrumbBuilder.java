@@ -548,7 +548,32 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		}
 		//*->FIN AGENTES REGISTRO RETENCIONES-------------------------------------------------------
 
+		if (resourceKey.equals("Mi RIT"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			treeMap.put("Mi RIT", subTreeMap);
+		}
 
+		if (resourceKey.equals("breadcrumb.certificacionRETE"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			subTreeMap.put(3, new CustomBreadcrumb("Mi RIT", "/agenteRetenedor/mirit"));
+			treeMap.put("breadcrumb.certificacionRETE", subTreeMap);
+		}
+
+		//*->INI MI BUZON-------------------------------------------------------------------------------
+		if (resourceKey.equals("text.account.profile.buzonRETE"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			treeMap.put("text.account.profile.buzonRETE", subTreeMap);
+		}
+		//*->FIN MI BUZON-------------------------------------------------------------------------------
 
 
 
@@ -614,6 +639,17 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		}
 		//*->FIN CONSULTAS CERTIFICACIONES DECLARACION------------------------------------
 
+		//*->INI CONSULTAS DECLARACIONES------------------------------------
+		if (resourceKey.equals("text.account.profile.declaraciones2"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
+			subTreeMap.put(3, new CustomBreadcrumb("Consultas", "#"));
+			treeMap.put("text.account.profile.declaraciones2", subTreeMap);
+		}
+		//*->FIN CONSULTAS DECLARACIONES------------------------------------
+
 
 
 
@@ -661,7 +697,18 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		}
 		//*->FIN AGENTES DECLARACION POR FIRMAR-----------------------------------------------------
 
+
+
 		//*->INI REPORTANTE CARGA DOCUMENTOS-----------------------------------------------------
+		if (resourceKey.equals("TEXT_ACCOUNT_PROFILE_REPO"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Reportante", "/reportantes"));
+			treeMap.put("TEXT_ACCOUNT_PROFILE_REPO", subTreeMap);
+		}
+		//*->FIN REPORTANTE CARGA DOCUMENTOS-----------------------------------------------------
+
 		if (resourceKey.equals("breadcrumb.reportante.carga"))
 		{
 			subTreeMap.clear();
@@ -669,7 +716,24 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 			subTreeMap.put(2, new CustomBreadcrumb("Reportante", "/reportantes"));
 			treeMap.put("breadcrumb.reportante.carga", subTreeMap);
 		}
+		//*->MIRIT REPORTANTE CARGA DOCUMENTOS
+		if (resourceKey.equals("breadcrumb.miRITREPO"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Reportante", "/reportantes"));
+			treeMap.put("breadcrumb.miRITREPO", subTreeMap);
+		}
+
+		if (resourceKey.equals("breadcrumb.certificacionREPO"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Reportante", "/reportantes"));
+			treeMap.put("breadcrumb.certificacionREPO", subTreeMap);
+		}
 		//*->FIN REPORTANTE CARGA DOCUMENTOS-----------------------------------------------------
+
 
 
 		//*->INI REPORTANTE HISTORICO-----------------------------------------------------

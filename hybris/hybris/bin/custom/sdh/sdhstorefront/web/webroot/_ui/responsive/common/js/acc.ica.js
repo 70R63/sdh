@@ -1,5 +1,5 @@
 ACC.ica = {
-		validacion_valorRetenido:{},
+		validacion_valorRetenido:{}, original_tablaValorRetenido:{},
 	 _autoload: [ "bindCalculoButton","bindPresentarDeclaracionButton","bindDialogICA","bindDeduccionesLists","bindDeleteDeducciones", "bindCalendarICA", "bindBorrar"],
 	 
 	 bindDeleteDeducciones: function(){
@@ -410,7 +410,7 @@ ACC.ica = {
 			 		var telefono=$.trim($(value).find(".telefono").val());
 			 		var tarifaApl=$.trim($(value).find(".tarifaApl").val());
 			 		var montoRetenido=$.trim($(value).find(".montoRetenido").val());
-			 		if(anio_anoGravable != "" && mes_anoGravable != "" && dia_anoGravable != "" && anio_anoGravable != "00" && mes_anoGravable != "00" && dia_anoGravable != "00"){
+			 		if(anio_anoGravable != "" && mes_anoGravable != "" && dia_anoGravable != "" ){
 			 			anoGravable = dia_anoGravable + "/" + mes_anoGravable + "/" + anio_anoGravable;
 			 		}
 
@@ -558,7 +558,7 @@ ACC.ica = {
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
-	            			$("#icaPresentarDeclaracionButton").prop('disabled', false);
+	            			$("#icaPresentarDeclaracionButton").prop('disabled', true);
 	            			
 	            		}
 	 	      		
@@ -604,7 +604,7 @@ ACC.ica = {
 	 validaAntesCalcular: function(){
 		 var validacionValores = true;
 		 
-		 if(ACC.ica.validacion_valorRetenido != null){
+		 if(ACC.ica.validacion_valorRetenido != null && ACC.ica.huboCambios_valorRetenido()){
 		 	 $.each($(".valor"),function(index,value){
 			 		
 		 		 if(validacionValores != false){
@@ -630,6 +630,43 @@ ACC.ica = {
 		 }
 		
 	 	 return validacionValores;
+	 },
+	 
+	 
+	 huboCambios_valorRetenido: function(){
+		 var actual_tablaValorRetenido = new Array();
+		 var item_valorRetenido = null;
+		 var keyComparacion = "";
+		 var flagCambios = false;
+		 
+	 	 $.each($(".valor"),function(index,value){
+	 		item_valorRetenido = new Object();
+	 		item_valorRetenido.keyComparacion = $.trim($(value).find(".anio_anoGravable").val())+
+	 			$.trim($(value).find(".mes_anoGravable").val())+
+		 		$.trim($(value).find(".dia_anoGravable").val())+
+		 		$.trim($(value).find(".tipoID").val())+
+		 		$.trim($(value).find(".numID").val())+
+		 		$.trim($(value).find(".razonSocial").val())+
+		 		$.trim($(value).find(".codMunicipio").val())+
+		 		$.trim($(value).find(".direccion").val())+
+		 		$.trim($(value).find(".telefono").val())+
+		 		$.trim($(value).find(".tarifaApl").val())+
+		 		$.trim($(value).find(".montoRetenido").val());
+	 		actual_tablaValorRetenido.push(item_valorRetenido);
+    	 });
+	 	 
+	 	 if(ACC.ica.original_tablaValorRetenido.length == actual_tablaValorRetenido.length){
+		 	 for(var i=0; i<ACC.ica.original_tablaValorRetenido.length; i++){
+		 		if(ACC.ica.original_tablaValorRetenido[i].keyComparacion != actual_tablaValorRetenido[i].keyComparacion){
+		 			flagCambios = true;
+		 		}
+		 	 }
+	 	 }else{
+	 		flagCambios = true;
+	 	 }
+
+	 	 
+	 	 return flagCambios;
 	 }
 
     

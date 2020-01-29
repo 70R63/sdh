@@ -87,7 +87,9 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ; ;MiRITLink; MI RIT LINK    ; "/contribuyentes/mirit" ;;;;;
+; ;RIMiRITLink; MI RIT LINK    ; "/reportantes/mirit" ;;;;;
 ; ;MiBuzonLink; MI BUZON LINK    ; /contribuyentes/mibuzon_tributario" ;;;;;
+; ;ARMiBuzonLink; MI BUZON LINK    ; /agenteRetenedor/mibuzon_tributario" ;;;;;
 ; ;ImpuestosLink; IMPUESTOS LINK    ; "#" ;;;;;
 ; ;TramitesLink; TRAMITES LINK    ; "/contibuyentes/tramites" ;;;;;
 ; ;FacturacionLink; FACTURACION LINK    ; "#" ;;;;;
@@ -95,6 +97,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->; ;PagosLink; PAGOS LINK    ; "#" ;;;;;
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
+; ;ARMiRITLink; MI RIT LINK    ; "/agenteRetenedor/mirit" ;;;;;
 ; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
 ; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "/retenedores/declaracionesfirmar" ;;;;;
 
@@ -108,6 +111,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 #->INI dev-eduardo Agregar submenu MI RIT 04/01/2019
 ; ; CertRitLink        ; CERTIFICACION RIT                             ; "/contribuyentes/mirit/certificacion-datos" ;;;;;
+; ; ARCertRitLink        ; ARCERTIFICACION RIT                             ; "/agenteRetenedor/mirit/certificacion-datos" ;;;;;
 #->FIN dev-eduardo Agregar submenu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar submenu MI BUZON 04/01/2019
@@ -154,6 +158,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 
 
 #->INI dev-eduardo Agregar submenu CONSULTAS 04/01/2019
+
 ; ; ARCertPagoLink                 ; CONSULTAS LINK                      ; "/agenteRetenedor/consultas/arCertipagos" ;;;;;
 ; ; ARObligacionesPendLink         ; OBLIGACIONES PENDIENTES LINK        ; "/agenteRetenedor/consultas/obligaciones" ;;;;;
 ; ; ARRelPagosLink                 ; RELACION DE PAGOS LINK              ; "/agenteRetenedor/consultas/relacionpagos" ;;;;;
@@ -290,7 +295,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;ContribuyentesCategoryNavNode;;Contributentes Categories;SiteRootNode;ContribuyentesCategoryNavNode;MiRITContribuyentesNavigationNode,MiBuzonContribuyentesNavigationNode,ImpuestosNavigationNode,TramitesNavigationNode,FacturacionNavigationNode,DeclaracionesNavigationNode,ConsultaNavigationNode
 ;AutorizadosCategoryNavNode;;Autorizados Categories;SiteRootNode;AutorizadosCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;ReportantesInformacionCategoryNavNode;;Reportantes Categories;SiteRootNode;ReportantesInformacionCategoryNavNode;MiRITReportanteInformacionNavigationNode,ReportantesNavigationNode
-;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;MiRITNavigationNode,MiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
+;AgenteRetenedorCategoryNavNode;;Agente Retenedor Categories;SiteRootNode;AgenteRetenedorCategoryNavNode;ARMiRITNavigationNode,ARMiBuzonNavigationNode,RetenedorRegistroNavigationNode, RetenedorDeclaracionesNavigationNode,ARConsultaNavigationNode
 ;TerceroAutorizadoNewCategoryNavNode;;Tercero Autorizado New Categories;SiteRootNode;TerceroAutorizadoNewCategoryNavNode;TerceroAutorizadoReportarInformacionNavigationNode,TerceroAutorizadoConsultasNavigationNode
 ;TerceroAutorizadoCategoryNavNode;;Tercero Autorizado Categories;SiteRootNode;TerceroAutorizadoCategoryNavNode;AgenteAutorizadoReportarInformacionNavigationNode,AgenteAutorizadoConsultasNavigationNode
 ;AnnonymousCategoryNavNode;;Anonnymous Categories;SiteRootNode;AnnonymousCategoryNavNode;PreguntasFrecuentesNavigationNode,EscuelaVirtualNavigationNode
@@ -333,6 +338,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;FacturacionNavigationNode;;Facturacion Menu;FacturacionNavigationNode;FacturacionNavigationServiceRequestsNavNodeMenu
 ;DeclaracionesNavigationNode;;Declaraciones Menu;DeclaracionesNavigationNode;DeclaracionesNavigationServiceRequestsNavNodeMenu
 #;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
+;ARMiBuzonNavigationNode;;ARMi Buzon Menu;ARMiBuzonNavigationNode;
+;ARMiRITNavigationNode;;ARMi RIT Retenedores Menu;ARMiRITNavigationNode;ARMiRITNavigationServiceRequestsNavNodeMenu
 #;ARPagosNavigationNode;;Pagos Menu;ARPagosNavigationNode;ARPagosNavigationServiceRequestsNavNodeMenu
 #->;PagosNavigationNode;;Pagos Menu;PagosNavigationNode;PagosNavigationServiceRequestsNavNodeMenu
 ;ConsultaNavigationNode;;Consultas Menu;ConsultaNavigationNode;ConsultaNavigationServiceRequestsNavNodeMenu
@@ -368,7 +375,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #->INI dev-eduardo Agregar menu SDH 04/01/2019
 ;MiRITNavigationNodeEntry;;Mi RIT Menu;MiRITNavigationNode;MiRITLink;
 ;MiRITContribuyentesNavigationNodeEntry;;Mi RIT Menu;MiRITContribuyentesNavigationNode;MiRITLink;
-;MiRITReportanteInformacionNavigationNodeEntry;;Mi RIT Menu;MiRITReportanteInformacionNavigationNode;MiRITLink;
+;MiRITReportanteInformacionNavigationNodeEntry;;Mi RIT Menu;MiRITReportanteInformacionNavigationNode;RIMiRITLink;
 ;MiBuzonNavigationNodeEntry;;Mi Buzon Menu;MiBuzonNavigationNode;MiBuzonLink;
 ;MiBuzonContribuyentesNavigationNodeEntry;;Mi Buzon Menu;MiBuzonContribuyentesNavigationNode;MiBuzonLink;
 ;ImpuestosNavigationNodeEntry;;Impuestos Menu;ImpuestosNavigationNode;ImpuestosLink;
@@ -382,6 +389,8 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #->;PagosNavigationNodeEntry;;Pagos Menu;PagosNavigationNode;PagosLink;
 
 ;ConsultaNavigationNodeEntry;;Consulta Menu;ConsultaNavigationNode;ConsultasLink;
+;ARMiBuzonNavigationNodeEntry;;ARMi Buzon Menu;ARMiBuzonNavigationNode;ARMiBuzonLink;
+;ARMiRITNavigationNodeEntry;;ARMi RIT Menu;ARMiRITNavigationNode;ARMiRITLink;
 ;ARConsultaNavigationNodeEntry;;Consulta Menu;ARConsultaNavigationNode;ConsultasLink;
 ;ReportantesNavigationNodeEntry;;Reportantes Menu;ReportantesNavigationNode;ReportantesLink;
 ;RetenedorRegistroNavigationNodeEntry;;Retenedor Registro;RetenedorRegistroNavigationNode;RetenedorRegistroLink;
@@ -414,10 +423,12 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;MiRITNavigationServiceRequestsNavNodeMenu;;Mi RIT Service Requests Menu;MiRITNavigationServiceRequestsNavNodeMenu;CertRitNavNode
 ;MiRITContribuyentesNavigationServiceRequestsNavNodeMenu;;Mi RIT Service Requests Menu;MiRITContribuyentesNavigationServiceRequestsNavNodeMenu;CertRitContribuyentesNavNode
 ;MiRITReportanteInformacionNavigationServiceRequestsNavNodeMenu;;Mi RIT Service Requests Menu;MiRITReportanteInformacionNavigationServiceRequestsNavNodeMenu;CertRitReportanteInformacionNavNode
+;ARMiRITNavigationServiceRequestsNavNodeMenu;;ARMi RIT Service Requests Menu;ARMiRITNavigationServiceRequestsNavNodeMenu;ARCertRitNavNode
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
 ;MiBuzonNavigationServiceRequestsNavNodeMenu;;Mi Buzon Service Requests Menu;MiBuzonNavigationServiceRequestsNavNodeMenu
+;ARMiBuzonNavigationServiceRequestsNavNodeMenu;;ARMi Buzon Service Requests Menu;ARMiBuzonNavigationServiceRequestsNavNodeMenu
 #->FIN dev-eduardo Agregar menu MI BUZON 04/01/2019
 
 #->INI dev-eduardo Agregar menu IMPUESTOS 04/01/2019
@@ -519,6 +530,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 ;CertRitNavNode ;;Certificacion RIT Link;CertRitNavNode
 ;CertRitContribuyentesNavNode ;;Certificacion RIT Link;CertRitContribuyentesNavNode
 ;CertRitReportanteInformacionNavNode ;;Certificacion RIT Link;CertRitReportanteInformacionNavNode
+;ARCertRitNavNode ;;ARCertificacion RIT Link;ARCertRitNavNode
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
@@ -648,6 +660,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;CertRitNavNodeEntry;;Certificacion RIT Navigation Node Entry;CertRitNavNode;CertRitLink
 ;CertRitContribuyentesNavNodeEntry;;Certificacion RIT Navigation Node Entry;CertRitContribuyentesNavNode;CertRitLink
 ;CertRitReportanteInformacionNavNodeEntry;;Certificacion RIT Navigation Node Entry;CertRitReportanteInformacionNavNode;CertRitLink
+;ARCertRitNavNodeEntry;;ARCertificacion RIT Navigation Node Entry;ARCertRitNavNode;ARCertRitLink
 #->FIN dev-eduardo Agregar menu MI RIT 04/01/2019
 
 #->INI dev-eduardo Agregar menu MI BUZON 04/01/2019
@@ -699,7 +712,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ;CertDeclaraNavNodeEntry;;Certificacion declaracion Navigation Node entry;CertDeclaraNavNode;CertDeclaraLink
 ;DeclaracionesNavNodeEntry;;Declaraciones Navigation Node Entry;DeclaracionesNavNode;DeclaracionesLink
 
-
+#;AR
 ;ARCertPagoNavNodeEntry;;Certificacion Pago Navigation Node Entry;ARCertPagoNavNode;ARCertPagoLink
 ;ARObligacionesPendNavNodeEntry;;Obligaciones Pendientes Navigation Node Entry;ARObligacionesPendNavNode;ARObligacionesPendLink
 ;ARRelPagosNavNodeEntry;;Relaciones Pagos Navigation Node Entry;ARRelPagosNavNode;ARRelPagosLink

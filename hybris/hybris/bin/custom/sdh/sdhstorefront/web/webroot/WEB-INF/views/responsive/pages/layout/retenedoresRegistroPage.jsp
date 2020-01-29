@@ -20,7 +20,9 @@
 
 <script type="text/javascript">
 window.onload = function() {
-	
+	debugger;
+	var url = window.parent.location.href;
+	var contenido_url = url.includes('retenedores');
     $(".loader").fadeOut("slow");
 }
 

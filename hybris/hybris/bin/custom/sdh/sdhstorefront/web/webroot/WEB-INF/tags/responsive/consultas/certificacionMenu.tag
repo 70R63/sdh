@@ -419,8 +419,7 @@
 
 	
 	function SelectedAnio(selectObject) {
-		debugger;
-		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_porAnio();
 	}
 	
 	function onChangeMensual(selectObject) {
