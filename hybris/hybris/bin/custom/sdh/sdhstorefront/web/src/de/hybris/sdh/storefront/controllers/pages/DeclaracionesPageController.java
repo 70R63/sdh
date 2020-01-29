@@ -296,7 +296,7 @@ public class DeclaracionesPageController extends AbstractPageController
 		listaDeclaracionesRequest.setPeriodo(periodo);
 
 		System.out.println("Request para docs/consulCertif: " + listaDeclaracionesRequest);
-		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones(listaDeclaracionesRequest, sdhDetalleGasolinaWS,
+		listaDeclaracionesResponse = gasolinaService.consultaListaDeclaraciones_consulPagos(listaDeclaracionesRequest, sdhDetalleGasolinaWS,
 				LOG);
 		System.out.println("Response de docs/consulCertif: " + listaDeclaracionesResponse);
 		if (gasolinaService.ocurrioErrorListaDeclara(listaDeclaracionesResponse) != true)

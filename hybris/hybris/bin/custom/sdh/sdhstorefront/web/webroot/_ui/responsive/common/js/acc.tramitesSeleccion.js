@@ -15,17 +15,17 @@ ACC.tramitesSeleccion = {
 					var valorNivel = $.trim($(this).attr("data-nivel"));
 					var valorActual = this.value;
 					var dataActual = {};
-
+//debugger;
 					dataActual.nivelSeleccion = valorNivel;
 					dataActual.valorN0 = "";
 					dataActual.valorN1 = "";
 					dataActual.valorN2 = "";
 					dataActual.valorN3 = "";
+					dataActual.valorN4 = "";
 
 					// debugger;
 					var doc = document.getElementById('documentos');
 					doc.style.display = 'none';
-					var rol=$("#divRol")[0];
 
 					if (dataActual.nivelSeleccion == 0) {
 						ACC.tramitesSeleccion.clearFieldsFromDataSelN0();
@@ -50,7 +50,14 @@ ACC.tramitesSeleccion = {
 						dataActual.valorN1 = $("#selectNivel1").val();
 						dataActual.valorN2 = $("#selectNivel2").val();
 						dataActual.valorN3 = $("#selectNivel3").val();
-						rol.style.display='block';
+					}
+					
+					if (dataActual.nivelSeleccion == 4) {
+						dataActual.valorN0 = $("#selectNivel0").val();
+						dataActual.valorN1 = $("#selectNivel1").val();
+						dataActual.valorN2 = $("#selectNivel2").val();
+						dataActual.valorN3 = $("#selectNivel3").val();
+						dataActual.valorN4 = $("#selectNivel4").val();
 					}
 
 					$.ajax({
@@ -89,13 +96,15 @@ ACC.tramitesSeleccion = {
 									"#selectNivel2").val();
 							ACC.tramitesSeleccion.dataCreacionCaso.valorN3 = $(
 									"#selectNivel3").val();
+							ACC.tramitesSeleccion.dataCreacionCaso.valorN4 = $(
+									"#selectNivel4").val();
 							ACC.tramitesSeleccion.dataCreacionCaso.mensaje = $(
 									"#mensaje").val();
 
 							validacion = ACC.tramitesSeleccion
 									.validarInfoAntesSubmit(ACC.tramitesSeleccion.dataCreacionCaso);
 
-							// debugger;
+//							 debugger;
 							if (validacion == true) {
 								var itemSeleccionado;
 								var idItemSeleccionado;
@@ -104,116 +113,125 @@ ACC.tramitesSeleccion = {
 								var valorCampo = "";
 
 								ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos = 0;
-								for (var i = 0; i < e.target.form.length; i++) {
-									itemSeleccionado = e.target.form[i];
-									idItemSeleccionado = e.target.form[i].id
-											.substring(0, 17);
-
-									if (idItemSeleccionado == "docNombreArchivo_") {
-										indiceItemSeleccionado = e.target.form[i].id
-												.substring(17, 18);
-
-										// debugger;
-										let file = e.target.form[i].files[0];
-										let reader = new FileReader();
-										reader.readAsDataURL(file);
-
-										reader.onload = function(evt) {
-											// console.log("onload");
+								if(ACC.tramitesSeleccion.cantidadArchivos > 0){
+									for (var i = 0; i < e.target.form.length; i++) {
+										itemSeleccionado = e.target.form[i];
+										idItemSeleccionado = e.target.form[i].id
+												.substring(0, 17);
+	
+										if (idItemSeleccionado == "docNombreArchivo_") {
+											indiceItemSeleccionado = e.target.form[i].id
+													.substring(17, 18);
+	
 											// debugger;
-											indiceItemSeleccionado = ACC.tramitesSeleccion
-													.obtenerIndiceArchivos(file.name);
-
-											indiceArchivo = ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos;
-											ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos++;
-
-											campoEnPantalla = "#docLeido_"
-													+ indiceItemSeleccionado;
-											$(campoEnPantalla).val("X");
-
-											valorCampo = reader.result
-													.substring(28);
-											campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.conA"
-													+ indiceArchivo;
-											eval(campoEnData + "="
-													+ eval('"valorCampo"'));
-											// var mensaje = file.name +
-											// valorCampo;
-											// console.log(mensaje);
-
-											campoEnPantalla = "#docDescArchivo_"
-													+ indiceItemSeleccionado;
-											valorCampo = $(campoEnPantalla)
-													.val();
-											campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.desA"
-													+ indiceArchivo;
-											eval(campoEnData + "="
-													+ eval('"valorCampo"'));
-
-											campoEnPantalla = "#docDependencia_"
-													+ indiceItemSeleccionado;
-											valorCampo = $(campoEnPantalla)
-													.val();
-											campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.depe"
-													+ indiceArchivo;
-											eval(campoEnData + "="
-													+ eval('"valorCampo"'));
-
-											campoEnPantalla = "#docSerieID_"
-													+ indiceItemSeleccionado;
-											valorCampo = $(campoEnPantalla)
-													.val();
-											campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.seri"
-													+ indiceArchivo;
-											eval(campoEnData + "="
-													+ eval('"valorCampo"'));
-
-											campoEnPantalla = "#docSSerieID_"
-													+ indiceItemSeleccionado;
-											valorCampo = $(campoEnPantalla)
-													.val();
-											campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.sser"
-													+ indiceArchivo;
-											eval(campoEnData + "="
-													+ eval('"valorCampo"'));
-
-											campoEnPantalla = "#docTipoDoc_"
-													+ indiceItemSeleccionado;
-											valorCampo = $(campoEnPantalla)
-													.val();
-											campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.tipd"
-													+ indiceArchivo;
-											eval(campoEnData + "="
-													+ eval('"valorCampo"'));
-
-											indiceArchivo++;
-											if (indiceArchivo == ACC.tramitesSeleccion.cantidadArchivos) {
-
-												$
-														.ajax({
-															url : ACC.casoCreacionURL,
-															data : ACC.tramitesSeleccion.dataCreacionCaso,
-															type : "POST",
-															success : function(
-																	dataResponse) {
-																ACC.tramitesSeleccion
-																		.resultadoCreacionCaso(
-																				ACC.tramitesSeleccion.dataCreacionCaso,
-																				dataResponse);
-															},
-															error : function() {
-															}
-														});
-											}
-										};
-
+											let file = e.target.form[i].files[0];
+											let reader = new FileReader();
+											reader.readAsDataURL(file);
+	
+											reader.onload = function(evt) {
+												// console.log("onload");
+												// debugger;
+												indiceItemSeleccionado = ACC.tramitesSeleccion
+														.obtenerIndiceArchivos(file.name);
+	
+												indiceArchivo = ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos;
+												ACC.tramitesSeleccion.dataCreacionCaso.archivosLeidos++;
+	
+												campoEnPantalla = "#docLeido_"
+														+ indiceItemSeleccionado;
+												$(campoEnPantalla).val("X");
+	
+												valorCampo = reader.result
+														.substring(28);
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.conA"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+												// var mensaje = file.name +
+												// valorCampo;
+												// console.log(mensaje);
+	
+												campoEnPantalla = "#docDescArchivo_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.desA"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												campoEnPantalla = "#docDependencia_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.depe"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												campoEnPantalla = "#docSerieID_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.seri"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												campoEnPantalla = "#docSSerieID_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.sser"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												campoEnPantalla = "#docTipoDoc_"
+														+ indiceItemSeleccionado;
+												valorCampo = $(campoEnPantalla)
+														.val();
+												campoEnData = "ACC.tramitesSeleccion.dataCreacionCaso.tipd"
+														+ indiceArchivo;
+												eval(campoEnData + "="
+														+ eval('"valorCampo"'));
+	
+												indiceArchivo++;
+												if (indiceArchivo == ACC.tramitesSeleccion.cantidadArchivos) {
+													ACC.tramitesSeleccion.llamarWSCreacionCaso();
+												}
+											};
+	
+										}
 									}
+								}else{
+									ACC.tramitesSeleccion.llamarWSCreacionCaso();
 								}
-
 							}
 
 						});
 	},
+
+	
+	llamarWSCreacionCaso : function(){
+		$
+		.ajax({
+			url : ACC.casoCreacionURL,
+			data : ACC.tramitesSeleccion.dataCreacionCaso,
+			type : "POST",
+			success : function(
+					dataResponse) {
+				ACC.tramitesSeleccion
+						.resultadoCreacionCaso(
+								ACC.tramitesSeleccion.dataCreacionCaso,
+								dataResponse);
+			},
+			error : function() {
+			}
+		});
+		
+	},
+
 
 	obtenerIndiceArchivos : function(nombreArchivo) {
 		var indiceArchivo = -1;
@@ -429,6 +447,12 @@ ACC.tramitesSeleccion = {
 								if (infoActual.valorN3 != null) {
 									if (infoActual.valorN3 == "00") {
 										validacion = false;
+									}else{
+										if (infoActual.valorN4 != null) {
+											if (infoActual.valorN4 == "00") {
+												validacion = false;
+											}
+										}
 									}
 								}
 							}
@@ -534,6 +558,19 @@ ACC.tramitesSeleccion = {
 									+ "</option>");
 				})
 				$("#divSubCategoria").show();
+			}
+		}
+		
+		if (infoActual.nivelSeleccion == 3) {
+			ACC.tramitesSeleccion.clearFieldsFromDataSelN3();
+
+			if (infoResponse.opciones.length > 0) {
+				$.each(infoResponse.opciones, function(index, value) {
+					$('#selectNivel4').append(
+							"<option value=" + value.key + ">" + value.label
+									+ "</option>");
+				})
+				$("#divRol").show();
 			}
 		}
 
@@ -659,6 +696,7 @@ ACC.tramitesSeleccion = {
 
 	clearFieldsFromDataSelN0 : function() {
 
+		$("#divRol").hide();
 		$("#divSubCategoria").hide();
 		$("#divCategoria").hide();
 		$("#divSubtramite").hide();
@@ -668,24 +706,41 @@ ACC.tramitesSeleccion = {
 		$("#selectNivel2").find("option:eq(0)").remove();
 		$("#selectNivel3").find("option:gt(0)").remove();
 		$("#selectNivel3").find("option:eq(0)").remove();
+		$("#selectNivel4").find("option:gt(0)").remove();
+		$("#selectNivel4").find("option:eq(0)").remove();
 
 	},
 
 	clearFieldsFromDataSelN1 : function() {
 
+		$("#divRol").hide();
 		$("#divSubCategoria").hide();
 		$("#divCategoria").hide();
 		$("#selectNivel2").find("option:gt(0)").remove();
 		$("#selectNivel2").find("option:eq(0)").remove();
 		$("#selectNivel3").find("option:gt(0)").remove();
 		$("#selectNivel3").find("option:eq(0)").remove();
+		$("#selectNivel4").find("option:gt(0)").remove();
+		$("#selectNivel4").find("option:eq(0)").remove();
 
 	},
 
 	clearFieldsFromDataSelN2 : function() {
+		
+		$("#divRol").hide();
 		$("#divSubCategoria").hide();
 		$("#selectNivel3").find("option:gt(0)").remove();
 		$("#selectNivel3").find("option:eq(0)").remove();
+		$("#selectNivel4").find("option:gt(0)").remove();
+		$("#selectNivel4").find("option:eq(0)").remove();
+
+	},
+	
+	clearFieldsFromDataSelN3 : function() {
+		
+		$("#divRol").hide();
+		$("#selectNivel4").find("option:gt(0)").remove();
+		$("#selectNivel4").find("option:eq(0)").remove();
 
 	}
 
