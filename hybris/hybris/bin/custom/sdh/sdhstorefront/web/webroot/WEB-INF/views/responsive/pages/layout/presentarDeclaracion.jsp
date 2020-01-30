@@ -23,10 +23,22 @@
 			
 		    $(".loader").fadeOut("slow");
 		    var tipoImpuesto = document.getElementById("impuesto").value;
+		    var anio = document.getElementById("anoGravable").value;
+		    var nota2 = document.getElementById("notaVehPre");
+			var notaotros = document.getElementById("notaOtros");
 		    if(tipoImpuesto == '6'){
 				var nota = document.getElementById("notas_deli");
 				nota.style.display='block'
 			}
+		    debugger;
+		    if(anio != "" ){
+		    if(tipoImpuesto == '2' || tipoImpuesto == '7'){ //vehicular y predial
+	 			nota2.style.display='block';
+	 				notaotros.style.display='none';
+			}else{
+				nota2.style.display='none';
+				notaotros.style.display='block';
+			}}
 		}
 		
 		
@@ -53,7 +65,7 @@
 	}
 
 	function onChangeAnioGravable() {
-		debugger;
+		
 		var impuestoVal = document.getElementById("impuesto").value;
 		var nota = document.getElementById("notaVehPre");
 		var notaotros = document.getElementById("notaOtros");
