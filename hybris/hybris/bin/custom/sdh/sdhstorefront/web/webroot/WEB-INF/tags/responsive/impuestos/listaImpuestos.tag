@@ -444,8 +444,7 @@
 						"contribuyentes/presentar-declaracion?action=presentarDeclaracion",
 						targetUrl);
 
-		$
-				.ajax({
+		$.ajax({
 					url : currentUrl,
 					type : "GET",
 					success : function(data) {
