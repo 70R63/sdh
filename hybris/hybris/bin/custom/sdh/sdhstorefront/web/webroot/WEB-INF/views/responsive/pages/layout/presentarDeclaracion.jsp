@@ -22,7 +22,6 @@
 		window.onload = function() {
 			
 		    $(".loader").fadeOut("slow");
-		    debugger;
 		    var tipoImpuesto = document.getElementById("impuesto").value;
 		    if(tipoImpuesto == '6'){
 				var nota = document.getElementById("notas_deli");
@@ -30,58 +29,12 @@
 			}
 		}
 		
-		//debugger;
-
-		//var div = document.getElementById("impuestoGas");
-		//var valGas = div.attributes[0].value;
-		//var div = document.getElementById("impuestoPE");
-		//var valPE = div.attributes[0].value;
-
-		//if (valGas != "" && valPE != "") {
-		//var x = document.getElementById("impuesto");
-
-		//var option = document.createElement("option");
-		//option.value = "0"
-		//option.text = "Seleccionar";
-		//x.appendChild(option);
-		//var option = document.createElement("option");
-		//option.value = "4"
-		//option.text = "Publicidad Exterior";
-		//x.appendChild(option);
-		//var option = document.createElement("option");
-		//option.value = "5"
-		//option.text = "Sobretasa Gasolina";
-		//x.appendChild(option);
-		//} else if (valGas != "" && valPE == ""){
-		//var x = document.getElementById("impuesto");
-		//var option = document.createElement("option");
-		//option.value = "0"
-		//option.text = "Seleccionar";
-		//x.appendChild(option);
-		//var option = document.createElement("option");
-		//option.value = "5"
-		//option.text = "Sobretasa Gasolina";
-		//x.appendChild(option);
-		//}else if (valGas == "" && valPE != ""){
-		//var x = document.getElementById("impuesto");
-		//var option = document.createElement("option");
-		//option.value = "0"
-		//option.text = "Seleccionar";
-		//x.appendChild(option);
-		//var option = document.createElement("option");
-		//option.value = "4"
-		//option.text = "Publicidad Exterior";
-		//x.appendChild(option);
-		//}else{
-		//alert("Usted no cuenta con ningun impuesto para declarar");
-		///}
+		
 
 
 
 	function onChange() {
 		var tipoImpuesto = document.getElementById("impuesto").value;
-		
- 		debugger;
 		if(tipoImpuesto == '2'){ //vehicular
 			ACC.opcionDeclaraciones.prepararVehicular_presentarDec(tipoImpuesto);
 		}else{ //otros impuestos
@@ -100,8 +53,18 @@
 	}
 
 	function onChangeAnioGravable() {
-// 		debugger;
+		debugger;
 		var impuestoVal = document.getElementById("impuesto").value;
+		var nota = document.getElementById("notaVehPre");
+		var notaotros = document.getElementById("notaOtros");
+ 	
+ 		if(impuestoVal == '2' || impuestoVal == '7'){ //vehicular y predial
+ 			nota.style.display='block';
+ 				notaotros.style.display='none';
+		}else{
+			nota.style.display='none';
+			notaotros.style.display='block';
+		}
 		if(impuestoVal == '2'){ //vehicular
 			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_presentarDec(impuestoVal);
 		}else{ //otros impuestos

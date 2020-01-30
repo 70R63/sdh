@@ -144,6 +144,17 @@
 	<%-- 	<button type="button" class="btn btn-primary btn-lg" onclick="window.location.href ='<c:url value='/contribuyentes/sobretasa-gasolina/generar?numForm=${ dataForm.dataForm.numForm}' />';">Generar Declaración</button> --%>
 
 </div>
+<div class="row">
+		<div class="col-md-12"
+			style="background: #d2d2d2; margin-top: 20px !important;">
+			<label class="control-label "><spring:theme
+					code="ica.inicial.representantes.nota1" /></label>
+			<div class="form-group">
+				<label class="control-label "><spring:theme
+						code="ica.inicial.representantes.nota2" /></label>
+			</div>
+		</div>
+	</div>
 
 <div class="row"></div>
 

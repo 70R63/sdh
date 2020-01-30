@@ -5,7 +5,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
+<%@ taglib prefix="formElement"
+	tagdir="/WEB-INF/tags/addons/sdhpsaddon/responsive/formElement"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -23,7 +24,8 @@
 
 
 	<sf:form action="presentar-declaracion?action=presentarDeclaracion"
-		method="POST" modelAttribute="dataForm" id="forma" onsubmit="return validateForm()">
+		method="POST" modelAttribute="dataForm" id="forma"
+		onsubmit="return validateForm()">
 
 
 		<c:if test="${mensajeDelinea != null}">
@@ -35,11 +37,36 @@
 				</div>
 			</div>
 		</c:if>
+
+		<div class="row" id="notaVehPre" style="display: none">
+			<div class="col-md-12"
+				style="background: #d2d2d2; margin-top: 20px !important;">
+				<label class="control-label "><spring:theme
+						code="ica.inicial.representantes.nota1" /></label>
+				<div class="form-group">
+					<label class="control-label "><spring:theme
+							code="impuestos.presentarDeclaracion.notaPredial" /></label>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="notaOtros" style="display: none">
+			<div class="col-md-12"
+				style="background: #d2d2d2; margin-top: 20px !important;">
+				<label class="control-label "><spring:theme
+						code="ica.inicial.representantes.nota1" /></label>
+				<div class="form-group">
+					<label class="control-label "><spring:theme
+							code="impuestos.presentarDeclaracion.notaOtros" /></label>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-4 col-xs-12 mb-20 no-marginright">
 				<span class="paso--uno pasos color-sr1">1</span>
-				<h2 class="titulo-caja--ser-rel color-sr1 label-control " >
-				<spring:theme code="impuestos.presentarDeclaracion.PresentarDeclaracionUpper" /></h2>
+				<h2 class="titulo-caja--ser-rel color-sr1 label-control ">
+					<spring:theme
+						code="impuestos.presentarDeclaracion.PresentarDeclaracionUpper" />
+				</h2>
 				<p class="pasoClase1 metrophobic">Selecciona el impuesto que
 					deseas consultar.</p>
 				<div class="caja--ser-rel color-sr1">
@@ -69,9 +96,11 @@
 					<span class="paso--dos pasos color-sr2">2</span>
 					<h2 class="titulo-caja--ser-rel color-sr2 ">
 						<span class="paso2"><spring:theme
-									code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span>
+								code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span>
 					</h2>
-					<p class="pasoClase2 metrophobic"><spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" /></p>
+					<p class="pasoClase2 metrophobic">
+						<spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" />
+					</p>
 					<div class="caja--ser-rel color-sr2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
@@ -91,9 +120,11 @@
 					<span class="paso--dos pasos color-sr2">2</span>
 					<h2 class="titulo-caja--ser-rel color-sr2 ">
 						<span class="paso2"><spring:theme
-									code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span>
+								code="impuestos.presentarDeclaracion.anioGravableConsultarUpper" /></span>
 					</h2>
-					<p class="pasoClase2 metrophobic"><spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" /></p>
+					<p class="pasoClase2 metrophobic">
+						<spring:theme code="impuestos.presentarDeclaracion.seleccionaAnio" />
+					</p>
 					<div class="caja--ser-rel color-sr2">
 						<div class="form-group ">
 							<label class="control-label required"><spring:theme
@@ -153,8 +184,9 @@
 			</c:if>
 		</div>
 
-        <!-- Jair Roa -New modification - opcionUso validation -->
-		<c:if test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
+		<!-- Jair Roa -New modification - opcionUso validation -->
+		<c:if
+			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
 					<sf:button action="${presentarDeclaracionUrl}" type="submit"
@@ -401,33 +433,37 @@
 
 	}
 
-	function validateForm(){
-        var anioGravable = document.getElementById("anoGravable").value;
-        var periodo = document.getElementById("periodo").value;
-        var currentUrl = window.location.href;
-        var targetUrl = "infoObject/getUseOptionSobreTasaGasolina?anioGravable="+anioGravable+"&periodo="+periodo;
-        currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion?action=presentarDeclaracion", targetUrl);
+	function validateForm() {
+		var anioGravable = document.getElementById("anoGravable").value;
+		var periodo = document.getElementById("periodo").value;
+		var currentUrl = window.location.href;
+		var targetUrl = "infoObject/getUseOptionSobreTasaGasolina?anioGravable="
+				+ anioGravable + "&periodo=" + periodo;
+		currentUrl = currentUrl
+				.replace(
+						"contribuyentes/presentar-declaracion?action=presentarDeclaracion",
+						targetUrl);
 
-	    $.ajax({
-            url: currentUrl,
-            type: "GET",
-            success: function (data) {
-                if(data.opcionUso == '01'){
-                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
-                    if (r == true) {
-                      document.getElementById("forma").submit();
-                    } else {
-                      window.location.href = "presentar-declaracion";
-                    }
-                }else{
-                    return true;
-                }
-            },error: function () {
-                alert("Error");
-            }
-        });
+		$
+				.ajax({
+					url : currentUrl,
+					type : "GET",
+					success : function(data) {
+						if (data.opcionUso == '01') {
+							var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+							if (r == true) {
+								document.getElementById("forma").submit();
+							} else {
+								window.location.href = "presentar-declaracion";
+							}
+						} else {
+							return true;
+						}
+					},
+					error : function() {
+						alert("Error");
+					}
+				});
 	}
-
-
 </script>
 

@@ -37,7 +37,7 @@
 								<td><label class="control-label labeltabletd tablefechas"><spring:theme
 											code="ica.inicial.activecono.feciniact" /></label></td>
 								<td><label class="control-label labeltabletd tablefechas"><spring:theme
-											code="ica.inicial.activecono.feciniact" /></label></td>
+											code="ica.inicial.activecono.fecceseact" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
