@@ -60,46 +60,11 @@ window.onload = function() {
 
 	}
 	window.onload = function data() {
-		debugger;
-
-		
-// 	var value = document.getElementById("selecmodlicen");
-// 		var areaintervenida = document.getElementById('selectareinter');
-// 		var inareainter = document.getElementById('inputareainter');
-// 		var mod = document.getElementById('an').val;
-// 		var cauex = document.getElementById('cauexen').value;
-// 		var auex = document.getElementById('valorExen');
-// 		var tiplin = document.getElementById('tipoDeLicencia');
-
-// 		if (mod == '09' && (cauex == '00' || cauex == '')) {
-// 			auex.readonly = true;
-// 		} else if (mod == '09' && (cauex != '00' || cauex != '')) {
-// 			auex.readonly = true;
-// 		} else if (mod != '09' && (cauex == '00' || cauex == '' || cauex == "")) {
-// 			auex.readonly = true;
-// 		} else {
-// 			auex.readonly = false;
-// 		}
-
-// 		if (cauex == '' || cauex == "00") {
-// 			tiplin.readonly = true;
-// 		}
-
-// 		if (value == '6') {
-
-// 			areaintervenida.readonly = false;
-// 			inareainter.readonly = false;
-
-// 		} else {
-// 			areaintervenida.readonly = true;
-// 			inareainter.readonly = true;
-// 		}
 		$(".loader").fadeOut("slow");
 	}
 
 	function tipoLicenciaCHANGE(selectObject) {
 
-		//Validacion tipo de licencia = 02
 		var valorExen = document.getElementById('valorExen');
 		var tipoMarca = document.getElementById('tipoMarca');
 		var tipoDeLicencia = selectObject.value;

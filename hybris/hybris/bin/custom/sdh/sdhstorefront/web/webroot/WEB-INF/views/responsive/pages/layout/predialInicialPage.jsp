@@ -44,4 +44,38 @@
 		var show = document.getElementById('InicialDetalle');
 		show.style.display = 'block';
 	}
+
+	
+function datatable(e) {
+	debugger;
+		if ($.fn.dataTable.isDataTable('#example')) {
+			table = $('#example').DataTable();
+			table.destroy();
+		}
+		var tabla = $("#example")
+				.DataTable(
+						{
+							"sPaginationType" : "full_numbers",
+							"oLanguage" : {
+								"oPaginate" : {
+									"sPrevious" : " Anterior ",
+									"sNext" : " Siguiente ",
+									"sLast" : " Última ",
+									"sFirst" : " Primera "
+								},
+								"sLengthMenu" : 'Mostrar <select>'
+										
+										+ '<option value="10">10</option>'
+										+ '<option value="20">20</option>'
+										+ '<option value="30">30</option>'
+										+ '</select> registros',
+								"sInfo" : "Mostrando _START_ al _END_ de _TOTAL_ registros",
+								"sInfoFiltered" : " Filtrados de MAX registros",
+								"sInfoEmpty" : " ",
+								"sZeroRecords" : "No se encontraron registros",
+								"sProcessing" : "Espere, por favor...",
+								"sSearch" : "Buscar:",
+							}
+						});
+	}
 </script>
