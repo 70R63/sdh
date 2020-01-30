@@ -125,7 +125,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; SobreVehiAutomotoresLink     ; SOBRE VEHICULOS AUTOMOTORES         ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
 ; ; SobreTasaGasolinaLink        ; SOBRE TASA GASOLINA                 ; "/contribuyentes/sobretasa-gasolina" ;;;;;
 ; ; NewSobreVehiNodeLink         ; NEW SOBRE VEHICULO                  ; "/contribuyentes/sobrevehiculosautomotores/detalle" ;;;;;
-; ; NewPredialLink               ; NewPredial                          ; "/contribuyentes/predialunificado/detalle" ;;;;;
+; ; NewPredialLink               ; NewPredial                          ; "/contribuyentes/predialunificado_inicio" ;;;;;
 #->FIN dev-eduardo Agregar submenu IMPUESTOS 04/01/2019
 
 #->INI dev-eduardo Agregar submenu TRAMITES 04/01/2019
