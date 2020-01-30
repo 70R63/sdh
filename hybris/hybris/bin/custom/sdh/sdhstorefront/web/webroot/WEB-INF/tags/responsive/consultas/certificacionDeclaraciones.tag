@@ -14,80 +14,6 @@
 	var="certideclaraURL" htmlEscape="false" />
 
 
-<script>
-// window.onload = function() {
-// 	//Se agrega funcionalidad para agentes Retenedores
-// 	debugger;
-// 	var url = window.parent.location.href;
-// 	var contenido_url = url.includes('contribuyentes');
-	
-// 	if(contenido_url == true){
-// 		var contrib_select = document.getElementById('certicontrib');
-// 		contrib_select.style.display = 'block';
-// 	}else{
-// 		var contrib_select = document.getElementById('certiagente');
-// 		contrib_select.style.display = 'block';
-
-// 		$("#seleccion").val("0004");
-// 		var obj=document.getElementById("seleccion");
-		
-//  		document.getElementById("BanderaAgete").value= "X";
-		
-// 		ACC.opcionDeclaraciones.ocultarTablas();
-// 		ACC.opcionDeclaraciones.prepararPeriodo();
-		
-// 	}
-// 	$(".loader").fadeOut("slow");
-// }
-function SelectedAnio(selectObject) {
-	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-
-}
-
-function valper(selectObject) {
-	var per = selectObject.value;
-	var anio = document.getElementById('aniograv').value;
-	var fecha = new Date();
-	var anioact = fecha.getFullYear();
-	var mesact = fecha.getMonth();
-
-	if (anio < anioact) {
-
-	} else {
-		mesact = mesact + 1;
-		if (per < mesact) {
-
-		} else {
-			alert("Por favor, seleccione un mes anterior");
-		}
-
-	}
-	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-
-}
-
-function vaperiodo(selectObject) {
-
-	ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
-}
-	
-	function downloadPDF(pdf, newfilename) {
-		debugger;
-		if (pdf){
-			const linkSource = 'data:application/pdf;base64,' + pdf;
-		    const downloadLink = document.createElement("a");
-		    var fileName = newfilename;	
-		    downloadLink.href = linkSource;
-		    downloadLink.download = fileName;
-		    downloadLink.click();
-		}    
-	}
-	
-	
-	downloadPDF('${imprimeCertiDeclaraResponse.stringPDF}','Certificación_Declaracion.pdf');
-	
-</script>
-
 <a id="downloadHelper" target="_blank"></a>
 <c:choose>
 	<c:when test="${certiFormPost.idimp == '4'}">
@@ -421,5 +347,49 @@ function vaperiodo(selectObject) {
 		ACC.opcionDeclaraciones.prepararPeriodo();
 	}
 	
+	function SelectedAnio(selectObject) {
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones_porAnio();
+
+	}
+
+	function valper(selectObject) {
+		var per = selectObject.value;
+		var anio = document.getElementById('aniograv').value;
+		var fecha = new Date();
+		var anioact = fecha.getFullYear();
+		var mesact = fecha.getMonth();
+
+		if (anio < anioact) {
+
+		} else {
+			mesact = mesact + 1;
+			if (per < mesact) {
+
+			} else {
+				alert("Por favor, seleccione un mes anterior");
+			}
+
+		}
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+
+	}
+
+	function vaperiodo(selectObject) {
+
+		ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
+	}
+		
+		function downloadPDF(pdf, newfilename) {
+			debugger;
+			if (pdf){
+				const linkSource = 'data:application/pdf;base64,' + pdf;
+			    const downloadLink = document.createElement("a");
+			    var fileName = newfilename;	
+			    downloadLink.href = linkSource;
+			    downloadLink.download = fileName;
+			    downloadLink.click();
+			}    
+		}
 	
+		downloadPDF('${imprimeCertiDeclaraResponse.stringPDF}','Certificación_Declaracion.pdf');
 </script>

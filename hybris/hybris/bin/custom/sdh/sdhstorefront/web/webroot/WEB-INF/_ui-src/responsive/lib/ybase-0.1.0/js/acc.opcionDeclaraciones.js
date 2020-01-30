@@ -388,6 +388,37 @@ ACC.opcionDeclaraciones = {
 		
 	},
 	
+	obtenerListaDeclaraciones_certiPagos_porAnio : function() {
+
+		debugger;
+		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
+	        var claveImpuesto = $("#seleccion").val();  	       
+	        var anoGravable = $("#aniograv").val();  	       
+			var dataActual = {};
+		
+			dataActual.claveImpuesto = claveImpuesto;
+			dataActual.anoGravable = anoGravable;
+			
+			
+			$.ajax({
+				url : ACC.tipoPeriodoDeclaracionURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					debugger;
+					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
+					ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+				},
+				error : function() {
+					alert("Error procesar la solicitud obtener tipo de periodo");	
+				}
+			});
+		}else{
+			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+		}
+		
+	},
+	
 	
 	updateFromResponsePeriodo_porAnio : function(infoActual,infoResponse) {
 
