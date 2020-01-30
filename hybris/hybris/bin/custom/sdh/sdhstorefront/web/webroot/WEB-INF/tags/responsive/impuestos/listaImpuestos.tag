@@ -413,8 +413,7 @@
             type: "GET",
             success: function (data) {
                 if(data.opcionUso == '01'){
-                    var r = confirm("Ya tienes una declaración presentada por este impuesto, a\u00F1o gravable y periodo. " +
-                    + "Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                     if (r == true) {
                       document.getElementById("forma").submit();
                     } else {

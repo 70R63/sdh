@@ -164,8 +164,7 @@ ACC.publicidadexterior = {
 
 	 	        //Modificacion Jair Roa
 	 	        if(document.getElementById("opcionUsoHidden").value == '02'){
-                    var response = confirm("Ya tienes una declaración presentada por este impuesto, a\u00F1o gravable y periodo. " +
-                                         + "Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                    var response = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                     if (response == true) {
                       window.location.href = ACC.publicidadExteriorDeclararionURL+"?numResolu="+numResolu+"&anoGravable="+anoGravable+"&tipoValla="+tipoValla;
                     } else {
