@@ -77,7 +77,7 @@
 
 	<div class="row">
 		<div class="col-md-10">
-			<table class="table">
+			<table class="table" id="example">
 				<thead>
 					<tr>
 						<th><label class="control-label labeltabletd"><spring:theme

@@ -240,38 +240,6 @@ ACC.opcionDeclaraciones = {
 	},
 	
 	
-	obtenerListaDeclaraciones : function() {
-
-		debugger;
-		ACC.opcionDeclaraciones.ocultarTablas();
-		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
-	        var claveImpuesto = $("#seleccion").val();  	       
-	        var anoGravable = $("#aniograv").val();
-			var dataActual = {};
-
-			
-			dataActual.claveImpuesto = claveImpuesto;
-			dataActual.anoGravable = anoGravable;
-			dataActual.periodo = ACC.opcionDeclaraciones.obtenerPeriodoPorImpuesto(claveImpuesto);
-			
-			
-			$.ajax({
-				url : ACC.listaDeclaracionesURL,
-				data : dataActual,
-				type : "GET",
-				success : function(dataResponse) {
-					ACC.opcionDeclaraciones.updateFromResponseSeleccion(dataActual,dataResponse);
-				},
-				error : function() {
-					alert("Error procesar la solicitud");	
-				}
-			});
-		}
-		
-		
-	},
-	
-	
 	obtenerListaDeclaraciones_certiPagos : function() {
 
 		debugger;
@@ -307,6 +275,41 @@ ACC.opcionDeclaraciones = {
 		
 		
 	},
+	
+	
+	obtenerListaDeclaraciones : function() {
+
+		debugger;
+		ACC.opcionDeclaraciones.ocultarTablas();
+		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
+	        var claveImpuesto = $("#seleccion").val();  	       
+	        var anoGravable = $("#aniograv").val();
+			var dataActual = {};
+
+			
+			dataActual.claveImpuesto = claveImpuesto;
+			dataActual.anoGravable = anoGravable;
+			dataActual.periodo = ACC.opcionDeclaraciones.obtenerPeriodoPorImpuesto(claveImpuesto);
+			
+			
+			$.ajax({
+				url : ACC.listaDeclaracionesURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.opcionDeclaraciones.updateFromResponseSeleccion(dataActual,dataResponse);
+				},
+				error : function() {
+					alert("Error procesar la solicitud");	
+				}
+			});
+		}
+		
+		
+	},
+	
+	
+	
 	
 	
 	obtenerPeriodoPorImpuesto : function(claveImpuesto){
@@ -382,6 +385,37 @@ ACC.opcionDeclaraciones = {
 			ACC.opcionDeclaraciones.obtenerListaDeclaraciones();
 		}
 		
+		
+	},
+	
+	obtenerListaDeclaraciones_certiPagos_porAnio : function() {
+
+		debugger;
+		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
+	        var claveImpuesto = $("#seleccion").val();  	       
+	        var anoGravable = $("#aniograv").val();  	       
+			var dataActual = {};
+		
+			dataActual.claveImpuesto = claveImpuesto;
+			dataActual.anoGravable = anoGravable;
+			
+			
+			$.ajax({
+				url : ACC.tipoPeriodoDeclaracionURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					debugger;
+					ACC.opcionDeclaraciones.updateFromResponsePeriodo_porAnio(dataActual,dataResponse);
+					ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+				},
+				error : function() {
+					alert("Error procesar la solicitud obtener tipo de periodo");	
+				}
+			});
+		}else{
+			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_certiPagos();
+		}
 		
 	},
 	

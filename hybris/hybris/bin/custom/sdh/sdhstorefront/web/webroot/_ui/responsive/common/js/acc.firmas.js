@@ -267,7 +267,7 @@ debugger;
 	},
 	
 	
-	habilitaPresentarDec: function(){
+	habilitaPresentarDec: function(botonActivado){
 		
 		if(botonActivado == "justFirm"){
 			$(".GeneraDeclaracionButton").attr("disabled",false);
