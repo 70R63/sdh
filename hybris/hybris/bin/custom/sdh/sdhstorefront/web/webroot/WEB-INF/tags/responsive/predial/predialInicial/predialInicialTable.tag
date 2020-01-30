@@ -55,6 +55,8 @@
 											code="predial.inicial.table.dir" /></label></td>
 								<td><label class="control-label labeltabletd "><spring:theme
 											code="predial.inicial.table.nocotrato" /></label></td>
+								<td><label class="control-label labeltabletd "><spring:theme
+											code="Detalle" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -65,7 +67,7 @@
 									<td></td>
 									<td><c:out value="${current.contratoArrenda}" /></td>
 									<td><label style="color: #0358d8 !important"
-										class="text-capitalize !important" onclick="mostrar()">
+										class="text-capitalize !important labelVerDetVeh" onclick="mostrar()">
 											<spring:theme code="predial.inicial.table.ver" />
 									</label></td>
 								</tr>
