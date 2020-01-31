@@ -423,21 +423,39 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				return URLdeterminada;
 			}
 			else if (dataFormResponse.getImpuesto().equals("3") && !dataFormResponse.getAnoGravable().equals("")
-					&& !dataFormResponse.getSkipReques().equals("X"))
+					&& !dataFormResponse.getSkipReques().equals("X") && dataFormResponse.getPeriodicidadImpuesto() != null)
 			{
-				final String periodoSeleccionado;
+				boolean redirecciona = false;
+
+				switch (dataFormResponse.getPeriodicidadImpuesto())
+				{
+					case "0": //anual
+						redirecciona = true;
+						break;
+					case "2": //bimestral
+						if (dataFormResponse.getPeriodo() != null && !dataFormResponse.getPeriodo().isEmpty())
+						{
+							redirecciona = true;
+						}
+						break;
+
+					default:
+						break;
+				}
+
+				String periodoSeleccionado = "";
 				if (dataFormResponse.getPeriodo() != null)
 				{
 					periodoSeleccionado = dataFormResponse.getPeriodo();
 				}
-				else
+
+				if (redirecciona)
 				{
-					periodoSeleccionado = "";
+					redirectAttributes.addFlashAttribute("dataFormResponseICA", dataFormResponse);
+					redirectAttributes.addFlashAttribute("periodoSeleccionado", periodoSeleccionado);
+					return "redirect:/contribuyentes/ica/declaracion";
 				}
 
-				redirectAttributes.addFlashAttribute("dataFormResponseICA", dataFormResponse);
-				redirectAttributes.addFlashAttribute("periodoSeleccionado", periodoSeleccionado);
-				return "redirect:/contribuyentes/ica/declaracion";
 			}
 			else if (dataFormResponse.getImpuesto().equals("4") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
@@ -504,7 +522,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		{
 			dataForm.setOptionGas("5");
 		}
-		if (customerData.getIcaTax() != null && dataFormResponse.getImpuesto().equals("3"))
+		if (customerData.getIcaTax() != null && dataFormResponse.getImpuesto().equals("3")
+				&& !dataFormResponse.getAnoGravable().equals(""))
 		{
 			dataForm.setOptionIca("3");
 			dataForm.setNumObjeto(customerData.getIcaTax().getObjectNumber());
@@ -527,13 +546,14 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				response = response.replaceAll("(\"cantEstablec\":{1})(\\w*)(,)", "$1\"$2\"$3");
 
 				icaInfObjetoResponse = mapper.readValue(response, ICAInfObjetoResponse.class);
-
+				dataFormResponse.setPeriodicidadImpuesto("2"); //bimestral
 				if (icaInfObjetoResponse.getRegimen() != null)
 				{
-					if (icaInfObjetoResponse.getRegimen().charAt(0) == '2')
+					if (icaInfObjetoResponse.getRegimen().charAt(0) != '3')
 					{
 						isPeriodoAnual = true;
 						dataFormResponse.setPeriodo("");
+						dataFormResponse.setPeriodicidadImpuesto("0");//anual
 					}
 				}
 
@@ -549,6 +569,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		dataForm.setImpuesto(dataFormResponse.getImpuesto());
 		dataForm.setAnoGravable(dataFormResponse.getAnoGravable());
 		dataForm.setPeriodo(dataFormResponse.getPeriodo());
+		dataForm.setPeriodicidadImpuesto(dataFormResponse.getPeriodicidadImpuesto());
 		model.addAttribute("dataForm", dataForm);
 		model.addAttribute("icaPeriodo", this.getIcaPeriodo());
 		model.addAttribute("icaAnioGravable", this.getIcaAnoGravable());

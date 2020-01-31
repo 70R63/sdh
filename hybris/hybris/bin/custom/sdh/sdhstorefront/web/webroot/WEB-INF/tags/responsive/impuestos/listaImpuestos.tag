@@ -89,7 +89,8 @@
 				<input value="${dataForm.optionGas}" id="impuestoGas" />
 			</div>
 
-			<input type="hidden" name="skipReques" value="" />
+			<input type="hidden" name="skipReques" value="" id="skipReques"/>
+			<sf:hidden path="periodicidadImpuesto"/>
 
 			<c:if test="${dataForm.impuesto != '3'}">
 				<div class="col-md-4 col-xs-12 mb-20 no-margincol">

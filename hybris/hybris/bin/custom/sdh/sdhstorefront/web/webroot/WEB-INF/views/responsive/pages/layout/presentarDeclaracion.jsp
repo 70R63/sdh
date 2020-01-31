@@ -57,7 +57,12 @@
 			input.setAttribute('name', 'skipReques');
 			input.setAttribute('value', 'X');
 			input.setAttribute('type', 'hidden');
-			form.appendChild(input);
+			var skipRequesElemento = document.getElementById("skipReques");
+			if(skipRequesElemento==null){
+				form.appendChild(input);
+			}else{
+				skipRequesElemento.value = "X";
+			}
 	
 			form.submit();
 			
@@ -80,13 +85,18 @@
 		if(impuestoVal == '2'){ //vehicular
 			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_presentarDec(impuestoVal);
 		}else{ //otros impuestos
-			if (impuestoVal == "4" || impuestoVal == "6") {
+			if (impuestoVal == "4" || impuestoVal == "6" || impuestoVal == "3") {
 				form = document.getElementById("forma");
 				input = document.createElement('input');
 				input.setAttribute('name', 'skipReques');
 				input.setAttribute('value', '');
 				input.setAttribute('type', 'hidden');
-				form.appendChild(input);
+				var skipRequesElemento = document.getElementById("skipReques");
+				if(skipRequesElemento==null){
+					form.appendChild(input);
+				}else{
+					skipRequesElemento.value = "";
+				}
 				form.submit();
 			}
 	
