@@ -184,7 +184,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 	@RequestMapping(value = "/contribuyentes/presentar-declaracion", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String handlePOST_ST(@ModelAttribute("dataForm")
-	final SobreTasaGasolinaForm dataFormResponse, @RequestParam(value = "action")
+	final SobreTasaGasolinaForm dataFormResponse, @RequestParam(value = "action", required = false)
 	final String action, final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
@@ -199,7 +199,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 		boolean isPeriodoAnual = false;
 
-		if (action.equals("presentarDeclaracion"))
+		if (action != null && action.equals("presentarDeclaracion"))
 		{
 			if (dataFormResponse.getImpuesto().equals("2") && !dataFormResponse.getAnoGravable().equals("")
 					&& !dataFormResponse.getPeriodo().equals("") && !dataFormResponse.getSkipReques().equals("X"))
