@@ -236,7 +236,7 @@ ACC.mirit = {
 				        	        	if(data.ritUpdated==true)
 				        	        	{
 				        	        		$("#ritDialogContent").html("");
-					    	            	$("#ritDialogContent").html("Tus redes sociales han sido actualizadas.");
+					    	            	$("#ritDialogContent").html(data.errores[0].txtmsj);
 				        	        	}else
 				        	        	{
 				        	        		$("#ritDialogContent").html("");
