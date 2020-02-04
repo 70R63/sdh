@@ -2231,7 +2231,7 @@ public class SobreTasaGasolinaService
 			}
 		}
 
-		elementos.put("0008", "Predial");
+		elementos.put("0001", "Predial");
 
 		catalogosForm.setImpuesto(elementos);
 		return catalogosForm;

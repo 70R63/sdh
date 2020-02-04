@@ -1289,5 +1289,34 @@ debugger;
 	        }
 		}
 		
+	},
+	
+	
+	preparaAnioGravable_certipagos : function(){
+		debugger;
+		var claveImpuesto = document.getElementById('seleccion').value;
+		var d = new Date();
+		var n = d.getFullYear();
+		
+		$("#aniograv").find("option:gt(0)").remove();
+		if(claveImpuesto == '0001' || claveImpuesto == '0002'){ // predial vehicular 
+			for(var i=0; i<7; i++){
+				$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");
+				n--;
+			}
+		}else if(claveImpuesto == '0006'){ // delineacion
+			for(var i=0; i<7; i++){
+				n--;
+				$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");
+			}
+		}else{
+			for(var i=0; i<6; i++){
+				--n;
+	        	$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");	
+	        }
+		}
+		
 	}
+	
+	
 };
