@@ -14,8 +14,8 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/contribuyentes/presentar-declaracion"
-	var="presentarDeclaracionUrl" htmlEscape="false" />
+<c:url value="/contribuyentes/presentar-declaracion"
+	var="presentarDeclaracionUrl"/>
 
 <br>
 
@@ -23,9 +23,9 @@
 <div class="container_new_page">
 
 
-	<sf:form action="presentar-declaracion?action=presentarDeclaracion"
-		method="POST" modelAttribute="dataForm" id="forma"
-		onsubmit="return validateForm()">
+	<sf:form action="${presentarDeclaracionUrl}"
+		method="POST" id="forma" commandName="dataForm"
+		>
 
 
 		<c:if test="${mensajeDelinea != null}">
@@ -89,7 +89,8 @@
 				<input value="${dataForm.optionGas}" id="impuestoGas" />
 			</div>
 
-			<input type="hidden" name="skipReques" value="" />
+			<input type="hidden" name="skipReques" value="" id="skipReques"/>
+			<sf:hidden path="periodicidadImpuesto"/>
 
 			<c:if test="${dataForm.impuesto != '3'}">
 				<div class="col-md-4 col-xs-12 mb-20 no-margincol">
@@ -189,8 +190,8 @@
 			test="${dataForm.impuesto ne '4' and dataForm.impuesto ne ' ' and dataForm.impuesto ne '6'}">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
-					<sf:button action="${presentarDeclaracionUrl}" type="submit"
-						class="btn btn-primary btn-lg" id="action" name="" value=""
+					<sf:button type="submit"
+						class="btn btn-primary btn-lg" id="action" name="action" value="presentarDeclaracion"
 						style="margin-top: 15px">
 						<spring:theme
 							code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
@@ -441,7 +442,7 @@
 				+ anioGravable + "&periodo=" + periodo;
 		currentUrl = currentUrl
 				.replace(
-						"contribuyentes/presentar-declaracion?action=presentarDeclaracion",
+						"contribuyentes/presentar-declaracion",
 						targetUrl);
 
 		$.ajax({

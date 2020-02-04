@@ -57,6 +57,7 @@ public class SobreTasaGasolinaForm
 	private String bDelineacionUrbana;
 
 	private String skipReques;
+	private String periodicidadImpuesto;
 
 
 
@@ -607,6 +608,23 @@ public class SobreTasaGasolinaForm
 	public void setHabilitaPagarEnLinea(final String habilitaPagarEnLinea)
 	{
 		this.habilitaPagarEnLinea = habilitaPagarEnLinea;
+	}
+
+	/**
+	 * @return the periodicidadImpuesto
+	 */
+	public String getPeriodicidadImpuesto()
+	{
+		return periodicidadImpuesto;
+	}
+
+	/**
+	 * @param periodicidadImpuesto
+	 *           the periodicidadImpuesto to set
+	 */
+	public void setPeriodicidadImpuesto(final String periodicidadImpuesto)
+	{
+		this.periodicidadImpuesto = periodicidadImpuesto;
 	}
 
 	/*
