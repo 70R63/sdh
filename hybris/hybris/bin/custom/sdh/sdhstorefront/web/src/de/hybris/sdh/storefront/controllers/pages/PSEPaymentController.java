@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -293,6 +292,9 @@ public class PSEPaymentController extends AbstractPageController
 			if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue())) //Transaccion exitosa
 			{
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+				final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+						.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
+				model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 				flagSuccessView = "X";
 			}
@@ -303,11 +305,17 @@ public class PSEPaymentController extends AbstractPageController
 			else
 			{ //Transaccion con error
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId)); //new PSEPaymentForm());
+				final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+						.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
+				model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 				flagReintetarPago = "X";
 			}
 		}else {
 			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+					.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
+			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 			flagReintetarPago = "X";
 		}
@@ -317,6 +325,9 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			//			model.addAttribute("psePaymentForm", psePaymentFormResp);
 			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+					.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
+			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 		}
 
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());

@@ -47,8 +47,12 @@
 
 	function sdhOnChange(selectPaymentMethod){
 		debugger;
+		
 	    var url = window.location.href;
-	    url = url.replace("impuestos/pagoEnLinea/form", "onlinePaymentMatcher/getBanks");
+	    var n = url.indexOf("impuestos");
+	    url = url.substring(0,n);
+	    url = url.concat("onlinePaymentMatcher/getBanks")
+	    //url = url.replace("impuestos/pagoEnLinea/form", "onlinePaymentMatcher/getBanks");
 
 	    var paymentMethod = document.getElementById("psePaymentForm.tipoDeTarjeta").value;
 	    var tax = document.getElementById("psePaymentForm.tipoDeImpuesto").value;
