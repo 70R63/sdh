@@ -293,6 +293,9 @@ public class PSEPaymentController extends AbstractPageController
 			if (codeResponse.equals(GetTransactionInformationResponseTransactionStateCodeList.OK.getValue())) //Transaccion exitosa
 			{
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+				final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+						.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
+				model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 				GlobalMessages.addInfoMessage(model, "pse.message.info.success.transaction");
 				flagSuccessView = "X";
 			}
@@ -303,11 +306,17 @@ public class PSEPaymentController extends AbstractPageController
 			else
 			{ //Transaccion con error
 				model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId)); //new PSEPaymentForm());
+				final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+						.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
+				model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 				GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 				flagReintetarPago = "X";
 			}
 		}else {
 			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+					.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
+			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 			GlobalMessages.addErrorMessage(model, "pse.message.info.error.transaction.try.again");
 			flagReintetarPago = "X";
 		}
@@ -317,6 +326,9 @@ public class PSEPaymentController extends AbstractPageController
 		{
 			//			model.addAttribute("psePaymentForm", psePaymentFormResp);
 			model.addAttribute("psePaymentForm", this.getPSEPaymentForm(ticketId));
+			final SdhTaxTypesEnum tax = sdhOnlinePaymentProviderMatcherFacade
+					.getTaxByCode(this.getPSEPaymentForm(ticketId).getTipoDeImpuesto());
+			model.addAttribute("paymentMethodList", sdhOnlinePaymentProviderMatcherFacade.getPaymentMethodList(tax));
 		}
 
 		model.addAttribute("ControllerPseConstants", new ControllerPseConstants());
@@ -731,17 +743,55 @@ public class PSEPaymentController extends AbstractPageController
 		final String s_reference3 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
 
 
+		String concept = "0" + psePaymentForm.getBanco().substring(2, 4) + psePaymentForm.getTipoDeImpuesto().substring(2, 4);
+		String description;
+
+		if (constantConnectionDataInt.getServiceCode().equals("5101"))
+		{
+			description = "Predial";
+		}
+		else if (constantConnectionDataInt.getServiceCode().equals("5102"))
+		{
+			description = "ICA";
+		}
+		else if (constantConnectionDataInt.getServiceCode().equals("5103"))
+		{
+			description = "Vehicular";
+		}
+		else if (constantConnectionDataInt.getServiceCode().equals("5106"))
+		{
+			description = "Delineacion";
+		}
+		else if (constantConnectionDataInt.getServiceCode().equals("5131"))
+		{
+			description = "Retencion ICA";
+		}
+		else if (constantConnectionDataInt.getServiceCode().equals("5132"))
+		{
+			description = "Retencion De Delineacion Urbana";
+		}
+		else if (constantConnectionDataInt.getServiceCode().equals("5154"))
+		{
+			description = "Publicidad";
+		}
+		else if (constantConnectionDataInt.getServiceCode().equals("0108"))
+		{
+			description = "Gasolina";
+		}
+
+		description = psePaymentForm.getObjPago() + " " + concept + " " + psePaymentForm.getTipoDeIdentificacion() + " "
+				+ description;
 
 		final InititalizeTransactionRequest inititalizeTransactionRequest = new InititalizeTransactionRequest(
 				psePaymentForm.getNumeroDeReferencia(),
-				"0" + psePaymentForm.getTipoDeImpuesto(),
-				//psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago(),
-				psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago() + "-" + psePaymentForm.getTipoDeImpuesto() + "-" + psePaymentForm.getTipoDeIdentificacion(),
+				concept,
+				description,
+				//psePaymentForm.getTipoDeIdentificacion() + "-" + psePaymentForm.getObjPago() + "-" + psePaymentForm.getTipoDeImpuesto() + "-" + psePaymentForm.getTipoDeIdentificacion(),
 				CREDIBANCO_PERSON_TYPE_DOCUMENT_TYPE.get(psePaymentForm.getTipoDeIdentificacion()),
 				configurationService.getConfiguration().getString("credibanco.response.url").concat("?ticketId=").concat(psePaymentForm.getNumeroDeReferencia()),
 				psePaymentForm.getValorAPagar(),
 				"0", //Tax
-				"NonRef#1",
+				psePaymentForm.getNumeroDeReferencia(), //NonRef#1
 				psePaymentForm.getNumeroDeReferencia(), //NonRef#2
 				s_reference3, //NonRef#3
 				psePaymentForm.getBanco()); //bankCode
