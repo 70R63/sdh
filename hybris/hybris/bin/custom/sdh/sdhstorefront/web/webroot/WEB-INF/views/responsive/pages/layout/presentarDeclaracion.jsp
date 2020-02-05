@@ -40,6 +40,7 @@
 				notaotros.style.display='block';
 			}}
 		    ACC.opcionDeclaraciones.preparaAnioGravable_presentarDec(tipoImpuesto);
+		    document.getElementById("anoGravable").value = anio;
 		}
 		
 		
@@ -51,7 +52,7 @@
 		if(tipoImpuesto == '2'){ //vehicular
 			ACC.opcionDeclaraciones.prepararVehicular_presentarDec(tipoImpuesto);
 		}else{ //otros impuestos
-			
+			document.getElementById("anoGravable").value = "";
 			form = document.getElementById("forma");
 	
 			input = document.createElement('input');

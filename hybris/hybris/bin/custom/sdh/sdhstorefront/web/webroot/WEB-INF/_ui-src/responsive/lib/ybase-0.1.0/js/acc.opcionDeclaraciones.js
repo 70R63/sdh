@@ -1240,13 +1240,19 @@ debugger;
 		debugger;
 		if(claveImpuesto == '2'){ 
 	        var divPeriodo2 = document.getElementById('seccionPeriodo2');
-	        divPeriodo2.style.display = 'none';
+	        if(divPeriodo2!=null){
+	        	divPeriodo2.style.display = 'none';
+	        }
 	        
 	        var btnAction = document.getElementById('action');
-	        btnAction.style.display = 'none';
+	        if(btnAction!=null){
+	        	btnAction.style.display = 'none';
+	        }
 	        
 	        var tblVehicular = document.getElementById('table-vehicular');
-	        tblVehicular.style.display = 'block';
+	        if(tblVehicular!=null){
+	        	tblVehicular.style.display = 'block';
+	        }
 	        
 	        var d = new Date();
 	        var anoGravableBase = d.getFullYear();
