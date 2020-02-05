@@ -1248,19 +1248,51 @@ debugger;
 	        var tblVehicular = document.getElementById('table-vehicular');
 	        tblVehicular.style.display = 'block';
 	        
-	        var anoGravable = document.getElementById('anoGravable');
 	        var d = new Date();
-	        var n = d.getFullYear();
-	        
-			$("#anoGravable").find("option:gt(0)").remove();
+	        var anoGravableBase = d.getFullYear();
 
-			$('#anoGravable').append('<option value="'+ n +'">'+ n + "</option>");
-			n--;
-			$('#anoGravable').append('<option value="'+ n +'">'+ n + "</option>");
-			n--;
-			$('#anoGravable').append('<option value="'+ n +'">'+ n + "</option>");
-			
-			
+	        ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,7);
+		}
+		
+	},
+	
+	
+	preparaCatAnioGravable_presentarDec : function(anoGravableBase,cantidadAnos){
+        
+		$("#anoGravable").find("option:gt(0)").remove();
+		for(var i=0;i<cantidadAnos;i++){
+			$('#anoGravable').append('<option value="'+ anoGravableBase +'">'+ anoGravableBase + "</option>");
+			anoGravableBase--;			
+		}
+		
+	},
+	
+	
+	preparaCatAnioGravable : function(anoGravableBase,cantidadAnos){
+        
+		$("#aniograv").find("option:gt(0)").remove();
+		for(var i=0;i<cantidadAnos;i++){
+			$('#aniograv').append('<option value="'+ anoGravableBase +'">'+ anoGravableBase + "</option>");
+			anoGravableBase--;			
+		}
+		
+	},
+	
+	
+	preparaAnioGravable_presentarDec : function(claveImpuesto){
+
+		var d = new Date();
+		var anoGravableBase = d.getFullYear();
+		
+		$("#anoGravable").find("option:gt(0)").remove();
+		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,7);
+		}else if(claveImpuesto == '6'){ // delineacion
+			anoGravableBase--;
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,7);
+		}else{
+			anoGravableBase--;
+			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,6);
 		}
 		
 	},
@@ -1275,24 +1307,17 @@ debugger;
 	preparaAnioGravable : function(){
 		var claveImpuesto = document.getElementById('seleccion').value;
 		var d = new Date();
-		var n = d.getFullYear();
+		var anoGravableBase = d.getFullYear();
 		
 		$("#aniograv").find("option:gt(0)").remove();
 		if(claveImpuesto == '0001' || claveImpuesto == '0002'){ // predial vehicular 
-			for(var i=0; i<7; i++){
-				$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");
-				n--;
-			}
+			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,7);
 		}else if(claveImpuesto == '0006'){ // delineacion
-			for(var i=0; i<7; i++){
-				n--;
-				$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");
-			}
+			anoGravableBase--;
+			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,7);
 		}else{
-			for(var i=0; i<6; i++){
-				--n;
-	        	$('#aniograv').append('<option value="'+ n +'">'+ n + "</option>");	
-	        }
+			anoGravableBase--;
+			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,6);
 		}
 		
 	}

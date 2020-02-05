@@ -39,6 +39,7 @@
 				nota2.style.display='none';
 				notaotros.style.display='block';
 			}}
+		    ACC.opcionDeclaraciones.preparaAnioGravable_presentarDec(tipoImpuesto);
 		}
 		
 		
