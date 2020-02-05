@@ -744,37 +744,37 @@ public class PSEPaymentController extends AbstractPageController
 
 
 		String concept = "0" + psePaymentForm.getBanco().substring(2, 4) + psePaymentForm.getTipoDeImpuesto().substring(2, 4);
-		String description;
+		String description = new String();
 
-		if (constantConnectionDataInt.getServiceCode().equals("5101"))
+		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
 		{
 			description = "Predial";
 		}
-		else if (constantConnectionDataInt.getServiceCode().equals("5102"))
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5102"))
 		{
 			description = "ICA";
 		}
-		else if (constantConnectionDataInt.getServiceCode().equals("5103"))
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5103"))
 		{
 			description = "Vehicular";
 		}
-		else if (constantConnectionDataInt.getServiceCode().equals("5106"))
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5106"))
 		{
 			description = "Delineacion";
 		}
-		else if (constantConnectionDataInt.getServiceCode().equals("5131"))
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5131"))
 		{
 			description = "Retencion ICA";
 		}
-		else if (constantConnectionDataInt.getServiceCode().equals("5132"))
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5132"))
 		{
 			description = "Retencion De Delineacion Urbana";
 		}
-		else if (constantConnectionDataInt.getServiceCode().equals("5154"))
+		else if (psePaymentForm.getTipoDeImpuesto().equals("5154"))
 		{
 			description = "Publicidad";
 		}
-		else if (constantConnectionDataInt.getServiceCode().equals("0108"))
+		else if (psePaymentForm.getTipoDeImpuesto().equals("0108"))
 		{
 			description = "Gasolina";
 		}
