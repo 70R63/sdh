@@ -404,7 +404,7 @@
  	
 	function onChange(selectObject) {
 			debugger;
-		ACC.opcionDeclaraciones.preparaAnioGravable_certipagos();
+		ACC.opcionDeclaraciones.preparaAnioGravable();
 		ACC.opcionDeclaraciones.ocultarTablas();
 		ACC.opcionDeclaraciones.reiniciaCertipagos();
 // 		ACC.opcionDeclaraciones.determinaPeriodoMBCertipagos();
