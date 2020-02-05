@@ -41,8 +41,6 @@
 		<div class="row" id="notaVehPre" style="display: none">
 			<div class="col-md-12"
 				style="background: #d2d2d2; margin-top: 20px !important;">
-				<label class="control-label "><spring:theme
-						code="ica.inicial.representantes.nota1" /></label>
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.presentarDeclaracion.notaPredial" /></label>
@@ -52,8 +50,6 @@
 		<div class="row" id="notaOtros" style="display: none">
 			<div class="col-md-12"
 				style="background: #d2d2d2; margin-top: 20px !important;">
-				<label class="control-label "><spring:theme
-						code="ica.inicial.representantes.nota1" /></label>
 				<div class="form-group">
 					<label class="control-label "><spring:theme
 							code="impuestos.presentarDeclaracion.notaOtros" /></label>

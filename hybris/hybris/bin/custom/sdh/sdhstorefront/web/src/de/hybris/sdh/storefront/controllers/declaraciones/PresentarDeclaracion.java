@@ -158,7 +158,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			dataForm.setOptionGas("6");
 		}
 		//Predial
-		dataForm.setOptionPredial("7");
+		dataForm.setOptionPredial("1");
 
 
 

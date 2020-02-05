@@ -103,8 +103,8 @@
 
 					</tr>
 				</thead>
-				<c:forEach items="${vehiculosForm.impvehicular }" var="eachVehiculo">
-					<tbody>
+				<tbody>
+					<c:forEach items="${vehiculosForm.impvehicular }" var="eachVehiculo">
 						<tr>
 							<td><input id="" name="" class="inputtextnew" type="text"
 								readonly="readonly"
@@ -148,8 +148,8 @@
 								class="text-capitalize !important labelVerDetVeh "><spring:theme
 										code="sobre.vehiculo.table.verdetalle" /></label></td>
 						</tr>
-					</tbody>
-				</c:forEach>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 	</div>
