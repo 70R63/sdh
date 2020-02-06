@@ -471,7 +471,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 					GlobalMessages.addErrorMessage(model, "error.presentarDeclaracion.publicidadExt.listaVacia");
 				}
 			}
-			else if (dataFormResponse.getImpuesto().equals("6") && !dataFormResponse.getAnoGravable().equals("X")
+		}
+		else
+		{
+			if (dataFormResponse.getImpuesto().equals("6") && !dataFormResponse.getAnoGravable().equals("X")
 					&& !dataFormResponse.getAnoGravable().isEmpty())
 			{
 				final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();

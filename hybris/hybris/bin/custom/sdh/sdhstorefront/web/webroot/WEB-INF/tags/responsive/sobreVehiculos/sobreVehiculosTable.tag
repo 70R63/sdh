@@ -59,7 +59,7 @@
 <%-- <sf:form> --%>
 <br>
 <div class="container">
-	<div class="col-md-2">
+	<%-- <div class="col-md-2">
 		<label class="control-label format_label"><spring:theme
 				code="sobre.vehiculo.table.anigrav" /></label>
 	</div>
@@ -71,13 +71,13 @@
 			<option value="2017">2017</option>
 			<option value="2016">2016</option>
 		</select>
-	</div>
+	</div> --%>
 
 
 
 	<div class="row">
 		<div class="col-md-10">
-			<table class="table" id="example">
+			<table class="table" id="example" class="newtd">
 				<thead>
 					<tr>
 						<th><label class="control-label labeltabletd"><spring:theme
@@ -106,42 +106,15 @@
 				<tbody>
 					<c:forEach items="${vehiculosForm.impvehicular }" var="eachVehiculo">
 						<tr>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value="<c:out value="${eachVehiculo.placa}"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value='<spring:theme code="vehiculos.detalle.marca.${eachVehiculo.marca}"/>'
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value='<spring:theme code="vehiculos.detalle.linea.${eachVehiculo.linea}"/>'
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value="<c:out value="${eachVehiculo.modelo}"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value='<spring:theme code="vehiculos.detalle.clase.${eachVehiculo.clase}"/>'
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value='<spring:theme code="vehiculos.detalle.carroceria.${eachVehiculo.carroceria}"/>'
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value="<c:out value="${eachVehiculo.numPuertas}"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value='<spring:theme code="vehiculos.detalle.blindado.${eachVehiculo.blindado}"/>'
-								maxlength="240" style="width: 100% !important;"></td>
-							<td><input id="" name="" class="inputtextnew" type="text"
-								readonly="readonly"
-								value="<c:out value="${eachVehiculo.cilindraje}"></c:out>"
-								maxlength="240" style="width: 100% !important;"></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachVehiculo.placa}"></c:out></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.marca.${eachVehiculo.marca}"/></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.linea.${eachVehiculo.linea}"/></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachVehiculo.modelo}"></c:out></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.clase.${eachVehiculo.clase}"/></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.carroceria.${eachVehiculo.carroceria}"/></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachVehiculo.numPuertas}"></c:out></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><spring:theme code="vehiculos.detalle.blindado.${eachVehiculo.blindado}"/></td>
+							<td style="font-family: 'Helvetica Normal', 'Helvetica'; font-size: 12px !important; font-weight: 400; font-style: normal; text-transform: none !important;"><c:out value="${eachVehiculo.cilindraje}"></c:out></td>
 							<td><label style="color: #0358d8 !important"
 								data-placa="${eachVehiculo.placa}"
 								data-numbp="${vehiculosForm.numBP}"
