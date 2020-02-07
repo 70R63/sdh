@@ -7,6 +7,9 @@
 <%@ taglib prefix="ica" tagdir="/WEB-INF/tags/responsive/ica"%>
 
 <div class="loader"></div>
+
+<c:out value="${opcionUso}"/>
+<input type="hidden" id="icaOpcionUso" name="icaOpcionUso" value="${opcionUso}">
 <ica:icaTable />
 <ica:icaDetalle />
 <ica:icaActividades />
@@ -60,7 +63,7 @@
 								"oPaginate" : {
 									"sPrevious" : "Anterior",
 									"sNext" : "Siguiente",
-									"sLast" : "Ãltima",
+									"sLast" : "ï¿½ltima",
 									"sFirst" : "Primera"
 								},
 								"sLengthMenu" : 'Mostrar <select>'
@@ -91,7 +94,7 @@
 								"oPaginate" : {
 									"sPrevious" : "Anterior",
 									"sNext" : "Siguiente",
-									"sLast" : "Ãltima",
+									"sLast" : "ï¿½ltima",
 									"sFirst" : "Primera"
 								},
 								"sLengthMenu" : 'Mostrar <select>'
@@ -111,7 +114,19 @@
 						});
 	}
 	
-	
+	function onClick(numObject) {
+	        var opcUso = document.getElementById("icaOpcionUso").value;
+	        var redirectedUrl = window.location.href + '/declaracion?&numObjeto=' + numObject;
+	        if(opcUso == '02'){
+	            var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                if (r == true) {
+                    window.location.href = redirectedUrl;
+                }
+	        }else{
+                window.location.href = redirectedUrl;
+	        }
+
+    	}
 	
 	
 	

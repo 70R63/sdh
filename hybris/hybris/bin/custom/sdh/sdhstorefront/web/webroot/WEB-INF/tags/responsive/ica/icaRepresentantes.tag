@@ -7,6 +7,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -89,7 +91,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<button style="margin-top: 3px;" id=""
-						onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?&numObjeto=${numObjeto}' />';"
+						onclick="onClick('<c:url value='${numObjeto}' />');"
 						class="btn btn-primary btn-lg" type="button">
 						<spring:theme code="ica.inicial.representantes.presendecla" />
 					</button>
@@ -109,3 +111,4 @@
 		</div>
 	</form:form>
 </div>
+

@@ -76,6 +76,42 @@ public class SdhInfoObjectUseOptionController {
 		return detalleGasolinaResponse;
     }
 
+    @RequestMapping("/getUseOptionIca")
+    public DetGasResponse getUseOptionIca(@RequestParam(value="anioGravable", defaultValue="") String anioGravable,
+                                                        @RequestParam(value="periodo", defaultValue="") String periodo) {
+
+        LOG.info("getUseOptionIca");
+        final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+        final DetalleGasolinaRequest detalleGasolinaRequest = new DetalleGasolinaRequest();
+        final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+        final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+
+        detalleGasolinaRequest.setNumBP(customerModel.getNumBP());
+        detalleGasolinaRequest.setNumDoc(customerModel.getDocumentNumber());
+        detalleGasolinaRequest.setAnoGravable(anioGravable);
+        detalleGasolinaRequest.setPeriodo(periodo);
+
+        contribuyenteRequest.setNumBP(customerModel.getNumBP());
+        SDHValidaMailRolResponse detalleContribuyente = gasolinaService.consultaContribuyente(
+                contribuyenteRequest,
+                sdhConsultaContribuyenteBPService,
+                LOG);
+
+        List<SobreTasaGasolinaTabla> tablaDocs = gasolinaService.prepararTablaDeclaracion(detalleContribuyente.getGasolina());
+        if (tablaDocs != null){
+            for (int i = 0; i < tablaDocs.size(); i++){
+                if (!tablaDocs.get(i).toString().isEmpty()){
+                    String tipoDoc = tablaDocs.get(i).getTipoDocumento();
+                    detalleGasolinaRequest.setTipoDoc(tipoDoc);
+                    break;
+                }
+            }
+        }
+
+        DetGasResponse detalleGasolinaResponse = gasolinaService.consultaDetGasolina(detalleGasolinaRequest, sdhDetalleGasolinaWS, LOG);
+        return detalleGasolinaResponse;
+    }
+
 
 
 }
