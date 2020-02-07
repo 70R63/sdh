@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -743,7 +742,7 @@ public class PSEPaymentController extends AbstractPageController
 		final String s_reference3 = s_ceros + psePaymentForm.getTipoDeIdentificacion() + psePaymentForm.getNoIdentificacion();
 
 
-		String concept = "0" + psePaymentForm.getBanco().substring(2, 4) + psePaymentForm.getTipoDeImpuesto().substring(2, 4);
+		final String concept = psePaymentForm.getBanco().substring(2, 4) + psePaymentForm.getTipoDeImpuesto().substring(2, 4);
 		String description = new String();
 
 		if (psePaymentForm.getTipoDeImpuesto().equals("5101"))
@@ -779,8 +778,6 @@ public class PSEPaymentController extends AbstractPageController
 			description = "Gasolina";
 		}
 
-		description = psePaymentForm.getObjPago() + " " + concept + " " + psePaymentForm.getTipoDeIdentificacion() + " "
-				+ description;
 
 		final InititalizeTransactionRequest inititalizeTransactionRequest = new InititalizeTransactionRequest(
 				psePaymentForm.getNumeroDeReferencia(),
