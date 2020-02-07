@@ -117,7 +117,7 @@
 	function onClick(numObject) {
 	        var opcUso = document.getElementById("icaOpcionUso").value;
 	        var redirectedUrl = window.location.href + '/declaracion?&numObjeto=' + numObject;
-	        if(opcUso == '01'){
+	        if(opcUso == '02'){
 	            var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                 if (r == true) {
                     window.location.href = redirectedUrl;
