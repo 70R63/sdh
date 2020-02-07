@@ -284,6 +284,10 @@ public class IcaPageController extends SDHAbstractPageController
 			model.addAttribute("numObjeto", icaInfObjetoRequest.getNumObjeto());
 			model.addAttribute("anoGravable", icaInfObjetoResponse.getAnoGravable());
 			model.addAttribute("periodo", icaInfObjetoResponse.getPeriodo());
+			model.addAttribute("opcionUso",
+					Objects.isNull(icaInfObjetoResponse.getOpcionUso()) ?
+							null :
+							icaInfObjetoResponse.getOpcionUso().replace(" ","").split("-")[0]);
 		}
 		catch (final Exception e)
 		{
@@ -1089,7 +1093,7 @@ public class IcaPageController extends SDHAbstractPageController
 
 	/**
 	 * @param anoGravable
-	 * @param periodo
+	 * @param
 	 * @return
 	 */
 	private List<ItemSelectOption> determinarDiasDeMeses(final String anoGravable)
