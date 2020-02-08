@@ -12,22 +12,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="jquery.min.js"></script>
 
-
 <spring:htmlEscape defaultHtmlEscape="true" />
 <c:url value="/contribuyentes/presentar-declaracion"
 	var="presentarDeclaracionUrl"/>
-
 <br>
 
-
 <div class="container_new_page">
-
-
 	<sf:form action="${presentarDeclaracionUrl}"
-		method="POST" id="forma" commandName="dataForm"
-		>
-
-
+		method="POST" id="forma" commandName="dataForm">
 		<c:if test="${mensajeDelinea != null}">
 			<div class="row">
 				<div class="col-12 notas_deli">
@@ -187,11 +179,21 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 text-center">
 					<sf:button type="submit"
-						class="btn btn-primary btn-lg" id="action" name="action" value="presentarDeclaracion"
+						class="btn btn-primary btn-lg" id="action" name="action"
+						onClick="validateForm();"
+						value="presentarDeclaracion"
 						style="margin-top: 15px">
 						<spring:theme
 							code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
 					</sf:button>
+
+					<sf:button type="submit"
+                        class="btn btn-primary btn-lg" id="actionHidden" name="action"
+                    	value="presentarDeclaracion"
+                    	style="display:none;">
+                    	<spring:theme
+                    	    code="impuestos.presentarDeclaracion.PresentarDeclaracion" />
+                    	</sf:button>
 				</div>
 			</div>
 		</c:if>
@@ -431,39 +433,49 @@
 	}
 
 	function validateForm() {
-		var anioGravable = document.getElementById("anoGravable").value;
-		var periodo = document.getElementById("periodo").value;
-		var currentUrl = window.location.href;
-		var targetUrl = "infoObject/getUseOptionSobreTasaGasolina?anioGravable="
-				+ anioGravable + "&periodo=" + periodo;
-		currentUrl = currentUrl
-				.replace(
-						"contribuyentes/presentar-declaracion",
-						targetUrl);
+	    var anioGravable = document.getElementById("anoGravable").value;
+	    var impuesto = document.getElementById("impuesto");
+	    var periodo = "00";
 
-		$.ajax({
-					url : currentUrl,
-					type : "GET",
-					success : function(data) {
-					    var opcUso = data.opcionUso;
-					    opcUso = opcUso.replace(" ", "");
-					    opcUso = opcUso.split("-")[0];
+        impuesto = impuesto.options[impuesto.selectedIndex].value;
 
-						if (opcUso == '01') {
-							var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
-							if (r == true) {
-								document.getElementById("forma").submit();
-							} else {
-								window.location.href = "presentar-declaracion";
-							}
-						} else {
-							return true;
-						}
-					},
-					error : function() {
-						alert("Error");
-					}
-				});
+        //Si - Sobretasa a la gasolina - obtener periodo
+        if(impuesto == "5"){
+            periodo = document.getElementById("periodo").value;
+        }
+
+        var currentUrl = window.location.href;
+        var targetUrl = "infoObject/getUseOption?anioGravable="	+
+        		    anioGravable + "&periodo=" +
+        		    periodo + "&taxType=" + impuesto;
+        currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
+
+        $.ajax({
+            url : currentUrl,
+        	type : "GET",
+        	success : function(data) {
+        	    var opcUso = data;
+                if (impuesto == '5' && opcUso == '01') {//Sobretasa a la gasolina
+                    promtConfirmation();
+        		}else if(impuesto == '3' && opcUso == '02'){//ICA
+        		    promtConfirmation();
+        		} else {
+                    return true;
+                }
+        	},
+        	error : function() {
+        	    alert("Error");
+        	}
+        });
 	}
+
+    function promtConfirmation(){
+        var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+        if (r == true) {
+            document.getElementById("actionHidden").click();
+        } else {
+            window.location.href = "presentar-declaracion";
+        }
+    }
 </script>
 
