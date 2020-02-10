@@ -10,6 +10,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoDelineacionUrbana;
 import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
+import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 
 import java.util.List;
 
@@ -74,6 +75,7 @@ public class MiRitForm
 	private List<ContribAgente> representantes;
 	private ImpuestoICA impuestoICA;
 	private List<ImpuestoDelineacionUrbana> delineacion;
+	private List<ImpuestoVehiculos> vehicular;
 
 
 	//*->INI dev-eduardo ajuste de menu impuestos
@@ -102,6 +104,23 @@ public class MiRitForm
 		this.delineacion = delineacion;
 	}
 
+
+	/**
+	 * @return the vehicular
+	 */
+	public List<ImpuestoVehiculos> getVehicular()
+	{
+		return vehicular;
+	}
+
+	/**
+	 * @param vehicular
+	 *           the vehicular to set
+	 */
+	public void setVehicular(final List<ImpuestoVehiculos> vehicular)
+	{
+		this.vehicular = vehicular;
+	}
 
 	/**
 	 * @return the impuestoICA
