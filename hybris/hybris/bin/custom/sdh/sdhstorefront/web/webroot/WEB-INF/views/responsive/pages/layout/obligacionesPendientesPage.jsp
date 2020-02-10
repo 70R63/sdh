@@ -42,39 +42,39 @@
 			debugger;
 			table = $('#example').DataTable();
 			table.destroy();
-		}
-		var tabla = $("#example")
-				.DataTable(
-						{
-							"sPaginationType" : "full_numbers",
-							"oLanguage" : {
-								"oPaginate" : {
-									"sPrevious" : " Anterior ",
-									"sNext" : " Siguiente ",
-									"sLast" : "Ultima",
-									"sFirst" : " Primera "
-								},
-								"sLengthMenu" : 'Mostrar <select>'
-										+ '<option value="10">10</option>'
-										+ '<option value="15">15</option>'
-										+ '<option value="20">20</option>'
-										+ '<option value="30">30</option>'
-										+ '</select> registros',
-								"sInfo" : "Mostrando _START_ al _END_ de _TOTAL_ registros",
-								"sInfoFiltered" : " Filtrados de MAX registros",
-								"sInfoEmpty" : " ",
-								"sZeroRecords" : "No se encontraron registros",
-								"sProcessing" : "Espere, por favor...",
-								"sSearch" : "Buscar:",
-							}
-						});
-
-		if ($.fn.dataTable.isDataTable('#example2')) {
 			
-			table = $('#example2').DataTable();
+		}
+		var tabla = $("#example").DataTable(
+						{
+							"sPaginationType" : "full_numbers",
+							"oLanguage" : {
+								"oPaginate" : {
+									"sPrevious" : " Anterior ",
+									"sNext" : " Siguiente ",
+									"sLast" : "Ultima",
+									"sFirst" : " Primera "
+								},
+								"sLengthMenu" : 'Mostrar <select>'
+										+ '<option value="10">10</option>'
+										+ '<option value="15">15</option>'
+										+ '<option value="20">20</option>'
+										+ '<option value="30">30</option>'
+										+ '</select> registros',
+								"sInfo" : "Mostrando _START_ al _END_ de _TOTAL_ registros",
+								"sInfoFiltered" : " Filtrados de MAX registros",
+								"sInfoEmpty" : " ",
+								"sZeroRecords" : "No se encontraron registros",
+								"sProcessing" : "Espere, por favor...",
+								"sSearch" : "Buscar:",
+							}
+						});
+
+		if ($.fn.dataTable.isDataTable('#example_vehiculos')) {
+			
+			table = $('#example_vehiculos').DataTable();
 			table.destroy();
 		}
-		var tabla = $("#example2")
+		var tabla = $("#example_vehiculos")
 				.DataTable(
 						{
 							"sPaginationType" : "full_numbers",
@@ -100,12 +100,12 @@
 							}
 						});
 
-		if ($.fn.dataTable.isDataTable('#example3')) {
+		if ($.fn.dataTable.isDataTable('#example_ica')) {
 			debugger;
-			table = $('#example3').DataTable();
+			table = $('#example_ica').DataTable();
 			table.destroy();
 		}
-		var tabla = $("#example3")
+		var tabla = $("#example_ica")
 				.DataTable(
 						{
 							"sPaginationType" : "full_numbers",
@@ -131,11 +131,11 @@
 							}
 						});
 
-		if ($.fn.dataTable.isDataTable('#example4')) {
-			table = $('#example4').DataTable();
+		if ($.fn.dataTable.isDataTable('#example_gasolina')) {
+			table = $('#example_gasolina').DataTable();
 			table.destroy();
 		}
-		var tabla = $("#example4")
+		var tabla = $("#gasolina")
 				.DataTable(
 						{
 							"sPaginationType" : "full_numbers",
@@ -161,11 +161,11 @@
 							}
 						});
 
-		if ($.fn.dataTable.isDataTable('#example5')) {
-			table = $('#example5').DataTable();
+		if ($.fn.dataTable.isDataTable('#example_publicidad')) {
+			table = $('#example_publicidad').DataTable();
 			table.destroy();
 		}
-		var tabla = $("#example5")
+		var tabla = $("#example_publicidad")
 				.DataTable(
 						{
 							"sPaginationType" : "full_numbers",
@@ -191,11 +191,11 @@
 							}
 						});
 
-		if ($.fn.dataTable.isDataTable('#example6')) {
-			table = $('#example6').DataTable();
+		if ($.fn.dataTable.isDataTable('#ejemplo_delineacion')) {
+			table = $('#ejemplo_delineacion').DataTable();
 			table.destroy();
 		}
-		var tabla = $("#example6")
+		var tabla = $("#ejemplo_delineacion")
 				.DataTable(
 						{
 							"sPaginationType" : "full_numbers",
