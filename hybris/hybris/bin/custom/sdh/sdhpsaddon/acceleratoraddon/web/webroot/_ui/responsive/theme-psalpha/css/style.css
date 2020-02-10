@@ -25170,3 +25170,7 @@ span.pasos {
   font-size: 11px !important;
   margin-top: 25px !important;
 }
+.tablesearch tbody tr td {
+  font-size: 12px !important;
+  font-family: 'Helvetica', 'Arial', sans-serif !important;
+}

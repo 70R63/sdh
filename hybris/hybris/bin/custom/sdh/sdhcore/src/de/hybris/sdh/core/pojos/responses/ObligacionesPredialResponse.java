@@ -10,14 +10,15 @@ import java.util.List;
  * @author Consultor
  *
  */
-public class ObligacionesICAResponse
+public class ObligacionesPredialResponse
 {
-	private List<ObligacionesCabeceraICA> header;
+
+	private List<ObligacionesCabeceraPredial> header;
 
 	/**
 	 * @return the header
 	 */
-	public List<ObligacionesCabeceraICA> getHeader()
+	public List<ObligacionesCabeceraPredial> getHeader()
 	{
 		return header;
 	}
@@ -26,11 +27,10 @@ public class ObligacionesICAResponse
 	 * @param header
 	 *           the header to set
 	 */
-	public void setHeader(final List<ObligacionesCabeceraICA> header)
+	public void setHeader(final List<ObligacionesCabeceraPredial> header)
 	{
 		this.header = header;
 	}
-
 
 
 }
