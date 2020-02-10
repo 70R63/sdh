@@ -1,6 +1,6 @@
 ACC.publicidadexterior = {
 
-	 _autoload: ["bindLabelVerButton","bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior","bindDataTable"],
+	 _autoload: ["bindLabelVerButton","bindGeneraDeclaracionButton", "bindCalculoButton","bindSearchButton","bindPresentarDeclaracionButton","bindDialogPublicidadExterior","bindDataTable","bindDataTablesPagination"],
 	 
 	
 	 
@@ -449,6 +449,51 @@ ACC.publicidadexterior = {
 								}
 							});
 	    	
+	    },
+	    
+
+	    bindDataTablesPagination: function () {
+	    	var nombrePrefijo = "#tabPaginacion";
+	    	var cantidadTablas = 7;
+	    	var idTabla = null;
+	    	
+	    	for(var i = 0;i<cantidadTablas;i++){
+	    		idTabla = nombrePrefijo+i;
+	    		ACC.publicidadexterior.bindDataTables_id(idTabla);
+	    	}
+	    	
+	    },
+	    
+	    bindDataTables_id(idTable){
+	    	if ($.fn.dataTable.isDataTable(idTable)) {
+				table = $(idTable).DataTable();
+				table.destroy();
+			}
+			var tabla = $(idTable)
+					.DataTable(
+							{
+								"sPagingType" : "full_numbers",
+								"oLanguage" : {
+									"oPaginate" : {
+										"sPrevious" : " Anterior ",
+
+										"sNext" : " Siguiente ",
+										"sLast" : " >> ",
+										"sFirst" : " << "
+									},
+									"sLengthMenu" : 'Mostrando <select >'
+											+ '<option value="10">10</option>'
+											+ '<option value="20">20</option>'
+											+ '<option value="30">30</option>'
+											+ '</select> datos por página',
+									"sInfo" : "Mostrando del _START_ a _END_ (Total: _TOTAL_ resultados)",
+									"sInfoFiltered" : " Filtrados de MAX registros",
+									"sInfoEmpty" : " ",
+									"sZeroRecords" : "No se encontraron registros",
+									"sProcessing" : "Espere, por favor...",
+									"sSearch" : "Buscar:",
+								}
+							});
 	    },
     
     
