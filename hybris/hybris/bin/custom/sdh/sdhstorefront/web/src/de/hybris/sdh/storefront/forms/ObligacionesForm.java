@@ -6,7 +6,11 @@ package de.hybris.sdh.storefront.forms;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraDeli;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraGasolina;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraICA;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraPredial;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraPublicidad;
+import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraVehiculos;
+import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
+import de.hybris.sdh.core.pojos.responses.ObligacionesPredialResponse;
 
 import java.util.List;
 
@@ -21,9 +25,13 @@ public class ObligacionesForm
 	private List<ObligacionesCabeceraPublicidad> header;
 	private String variableres;
 	private List<ObligacionesCabeceraGasolina> headergas;
-	private ObligacionesCabeceraICA headerica;
+	private List<ObligacionesCabeceraICA> headerica;
 	private List<ObligacionesCabeceraDeli> headerdeli;
+	private List<ObligacionesPredialResponse> headerPredial;
+	private List<ObligacionesDeliResponse> headerDelienacion;
 
+	private List<ObligacionesCabeceraPredial> headerPred;
+	private List<ObligacionesCabeceraVehiculos> headerVehiculos;
 	/**
 	 * @return the header
 	 */
@@ -31,7 +39,7 @@ public class ObligacionesForm
 	{
 		return header;
 	}
-
+	
 	/**
 	 * @param header
 	 *           the header to set
@@ -40,7 +48,6 @@ public class ObligacionesForm
 	{
 		this.header = header;
 	}
-
 	/**
 	 * @return the variableres
 	 */
@@ -48,7 +55,7 @@ public class ObligacionesForm
 	{
 		return variableres;
 	}
-
+	
 	/**
 	 * @param variableres
 	 *           the variableres to set
@@ -57,7 +64,6 @@ public class ObligacionesForm
 	{
 		this.variableres = variableres;
 	}
-
 	/**
 	 * @return the headergas
 	 */
@@ -65,7 +71,7 @@ public class ObligacionesForm
 	{
 		return headergas;
 	}
-
+	
 	/**
 	 * @param headergas
 	 *           the headergas to set
@@ -74,24 +80,22 @@ public class ObligacionesForm
 	{
 		this.headergas = headergas;
 	}
-
 	/**
 	 * @return the headerica
 	 */
-	public ObligacionesCabeceraICA getHeaderica()
+	public List<ObligacionesCabeceraICA> getHeaderica()
 	{
 		return headerica;
 	}
-
+	
 	/**
 	 * @param headerica
 	 *           the headerica to set
 	 */
-	public void setHeaderica(final ObligacionesCabeceraICA headerica)
+	public void setHeaderica(final List<ObligacionesCabeceraICA> headerica)
 	{
 		this.headerica = headerica;
 	}
-
 	/**
 	 * @return the headerdeli
 	 */
@@ -99,7 +103,7 @@ public class ObligacionesForm
 	{
 		return headerdeli;
 	}
-
+	
 	/**
 	 * @param headerdeli
 	 *           the headerdeli to set
@@ -108,7 +112,72 @@ public class ObligacionesForm
 	{
 		this.headerdeli = headerdeli;
 	}
+	/**
+	 * @return the headerPredial
+	 */
+	public List<ObligacionesPredialResponse> getHeaderPredial()
+	{
+		return headerPredial;
+	}
+	
+	/**
+	 * @param headerPredial
+	 *           the headerPredial to set
+	 */
+	public void setHeaderPredial(final List<ObligacionesPredialResponse> headerPredial)
+	{
+		this.headerPredial = headerPredial;
+	}
+	/**
+	 * @return the headerDelienacion
+	 */
+	public List<ObligacionesDeliResponse> getHeaderDelienacion()
+	{
+		return headerDelienacion;
+	}
+	
+	/**
+	 * @param headerDelienacion
+	 *           the headerDelienacion to set
+	 */
+	public void setHeaderDelienacion(final List<ObligacionesDeliResponse> headerDelienacion)
+	{
+		this.headerDelienacion = headerDelienacion;
+	}
 
+	/**
+	 * @return the headerPred
+	 */
+	public List<ObligacionesCabeceraPredial> getHeaderPred()
+	{
+		return headerPred;
+	}
+
+	/**
+	 * @param headerPred
+	 *           the headerPred to set
+	 */
+	public void setHeaderPred(final List<ObligacionesCabeceraPredial> headerPred)
+	{
+		this.headerPred = headerPred;
+	}
+
+	/**
+	 * @return the headerVehiculos
+	 */
+	public List<ObligacionesCabeceraVehiculos> getHeaderVehiculos()
+	{
+		return headerVehiculos;
+	}
+
+	/**
+	 * @param headerVehiculos
+	 *           the headerVehiculos to set
+	 */
+	public void setHeaderVehiculos(final List<ObligacionesCabeceraVehiculos> headerVehiculos)
+	{
+		this.headerVehiculos = headerVehiculos;
+	}
 
 
 }

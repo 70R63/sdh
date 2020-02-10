@@ -10,6 +10,12 @@ ACC.oblipend = {
 			$(".oblipend-table").hide();
 			$(".oblipend-tabledetalle").hide();
 			$(".oblipend-tabledetalledos").hide();
+			$("#oblipend-predial").hide();
+			$("#oblipend-vehiculos").hide();
+			$("#oblipend-ica").hide();
+			$("#oblipend-publiext").hide();
+			$("#oblipend-gasolina").hide();
+			$("#oblipend-delurbana").hide();
 			
 
 			var impuesto = $("#impuesto").val();
@@ -36,6 +42,14 @@ ACC.oblipend = {
 
 			} else if (impuesto == "6") {
 
+				$("#oblipend-delurbana").show();
+
+			}else if (impuesto == "7") {
+				$("#oblipend-predial").show();
+				$("#oblipend-vehiculos").show();
+				$("#oblipend-ica").show();
+				$("#oblipend-publiext").show();
+				$("#oblipend-gasolina").show();
 				$("#oblipend-delurbana").show();
 
 			}

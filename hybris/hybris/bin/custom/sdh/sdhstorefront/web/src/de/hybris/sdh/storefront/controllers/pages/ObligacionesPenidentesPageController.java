@@ -6,7 +6,6 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
@@ -18,11 +17,15 @@ import de.hybris.sdh.core.pojos.requests.ObligacionesRequest;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesICAResponse;
+import de.hybris.sdh.core.pojos.responses.ObligacionesPredialResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesResponse;
+import de.hybris.sdh.core.pojos.responses.ObligacionesVehiculosResponse;
 import de.hybris.sdh.core.services.SDHObligacionesDeliService;
 import de.hybris.sdh.core.services.SDHObligacionesGasolinaService;
 import de.hybris.sdh.core.services.SDHObligacionesICAService;
+import de.hybris.sdh.core.services.SDHObligacionesPredialService;
 import de.hybris.sdh.core.services.SDHObligacionesPublicidadService;
+import de.hybris.sdh.core.services.SDHObligacionesVehiculosService;
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
 
 import java.util.stream.Collectors;
@@ -81,21 +84,29 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	@Resource(name = "sdhObligacionesDeliService")
 	SDHObligacionesDeliService sdhObligacionesDeliService;
 
+	@Resource(name = "sdhObligacionesPredialService")
+	SDHObligacionesPredialService sdhObligacionesPredialService;
+
+	@Resource(name = "sdhObligacionesVehiculosService")
+	SDHObligacionesVehiculosService sdhObligacionesVehiculosService;
+
 
 	@RequestMapping(value = "/contribuyentes/consultas/obligaciones", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String oblipendi(final Model model, final RedirectAttributes redirectModel, @ModelAttribute("obligacionesForm")
 	final ObligacionesForm obligacionesForm) throws CMSItemNotFoundException
 	{
+
+		System.out.println("Se encuentra dentro del get de OBLIGACIONES PENDIENTES");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		final ObligacionesRequest obligacionesRequest = new ObligacionesRequest();
 		obligacionesRequest.setBp(customerModel.getNumBP());
-
+		final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
 		try
 		{
-			final ObligacionesForm obligacionesFormuno = new ObligacionesForm();
+
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -104,38 +115,48 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			final ObligacionesResponse obligacionesResponse = mapper
 					.readValue(sdhObligacionesPublicidadService.obligacionesRequest(obligacionesRequest), ObligacionesResponse.class);
 
-			final ObligacionesGasolinaResponse obligacionesGasolinaResponse = mapper.readValue(
-					sdhObligacionesGasolinaService.obligacionesRequest(obligacionesRequest), ObligacionesGasolinaResponse.class);
-
-			final ObligacionesICAResponse obligacionesICAResponse = mapper
-					.readValue(sdhObligacionesICAService.obligacionesRequest(obligacionesRequest), ObligacionesICAResponse.class);
-
-			final ObligacionesDeliResponse obligacionesDeliResponse = mapper
-					.readValue(sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest), ObligacionesDeliResponse.class);
-
 			obligacionesFormuno.setHeader(obligacionesResponse.getHeader().stream()
 					.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
+
+			final ObligacionesGasolinaResponse obligacionesGasolinaResponse = mapper.readValue(
+					sdhObligacionesGasolinaService.obligacionesRequest(obligacionesRequest), ObligacionesGasolinaResponse.class);
 
 			obligacionesFormuno.setHeadergas(obligacionesGasolinaResponse.getHeader().stream()
 					.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
 
+			final ObligacionesICAResponse obligacionesICAResponse = mapper
+					.readValue(sdhObligacionesICAService.obligacionesRequest(obligacionesRequest), ObligacionesICAResponse.class);
+
 			obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
+
+			final ObligacionesDeliResponse obligacionesDeliResponse = mapper
+					.readValue(sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest), ObligacionesDeliResponse.class);
 
 			obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
 					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
 
+			final ObligacionesPredialResponse obligacionesPredResponse = mapper
+					.readValue(sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest),
+							ObligacionesPredialResponse.class);
 
-			model.addAttribute("obligacionesFormuno", obligacionesFormuno);
+			obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getAniogravable())).collect(Collectors.toList()));
 
+			final ObligacionesVehiculosResponse obligacionesVehiResponse = mapper.readValue(
+					sdhObligacionesVehiculosService.obligacionesRequest(obligacionesRequest), ObligacionesVehiculosResponse.class);
 
+			obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
 		}
 		catch (final Exception e)
 		{
 			//LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+			//	GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
 
+		model.addAttribute("obligacionesFormuno", obligacionesFormuno);
 		model.addAttribute("customerData", customerData);
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(OBLIGACIONES_PENDIENTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(OBLIGACIONES_PENDIENTES_CMS_PAGE));

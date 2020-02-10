@@ -43,6 +43,7 @@
 
 	<sf:form>
 		<div class="row">
+		
 			<div class="col-md-6"></div>
 			<div class="col-md-3" id="idImpuesto">
 				<div class="form-group">
@@ -50,12 +51,13 @@
 							code="obligacion.inicial.selcimpuesto" /></label> <select id="impuesto"
 						class="new_alto form-control " name="impuesto">
 						<option value="0">Seleccionar</option>
-						<!-- 						<option value="1">Predial Unificado</option> -->
-						<!-- 						<option value="2">Vehículos</option> -->
+						<option value="1">Predial Unificado</option>
+						<option value="2">Vehículos</option>
 						<option value="3">ICA</option>
 						<option value="4">Publicidad Exterior</option>
 						<option value="5">Sobretasa Gasolina</option>
 						<option value="6">Delineación Urbana</option>
+						<option value= "7">Todo</option>
 					</select>
 				</div>
 			</div>
