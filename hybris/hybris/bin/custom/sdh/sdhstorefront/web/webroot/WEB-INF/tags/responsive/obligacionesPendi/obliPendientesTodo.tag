@@ -22,6 +22,8 @@
 			<input id="Idimp" value="">
 		</div>
 		<br>
+
+
 		<div id="oblipend-predial" class="oblipend-table"
 			style="display: none;">
 
@@ -33,57 +35,61 @@
 				</div>
 			</div>
 
-
-			<div class="row">
-				<div class="col-md-4">
-					<table class="table">
-						<thead style="cellspacing: 10 !important">
-							<tr>
-								<th><label class="control-label labeltabletd"><spring:theme
-											code="obligacion.inicial.predio.chip" /></label></th>
-								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.predio.matricula" />
-								</label></th>
-								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.predio.direccion" />
-								</label></th>
-								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.estatus" />
-								</label></th>
-								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.predio.visualizar" /></label></th>
-								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.imprimir" />
-								</label></th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="CHIP"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="Matricula"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="Direccion"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" /></td>
-								<td><label class="control-label"
-									style="visibility: visible !important; width: 100%; text-transform: none; color: #0358d8 !important"
-									onclick="" id="Detalle">Detalle</label></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" /></td>
-
-							</tr>
-						</tbody>
-					</table>
+			<c:if test="${not empty obligacionesFormuno.headerPred}">
+				<div class="row">
+					<div class="col-md-10">
+						<table class="tablesearch table" id="example">
+							<thead style="cellspacing: 10 !important">
+								<tr>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="obligacion.inicial.predio.aniograv" /></label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.chip" />
+									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.edoobli" />
+									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.obligacion" />
+									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.numForm" /></label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.numRef" />
+									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.obcontra" />
+									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.rop" />
+									</label></th>
+									<th><label class="control-label labeltabletd"> <spring:theme
+												code="obligacion.inicial.predio.pagar" />
+									</label></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${obligacionesFormuno.headerPred }"
+									var="eachObPred">
+									<tr>
+										<td><c:out value="${eachObPred.aniogravable}" /></td>
+										<td><c:out value="${eachObPred.objetoContrato}" /></td>
+										<td><c:out value="${eachObPred.details.estadoObligacion}" /></td>
+										<td><c:out value="${eachObPred.details.obligacion}" /></td>
+										<td><c:out value="${eachObPred.details.numFormulario}" /></td>
+										<td><c:out value="${eachObPred.details.numReferencia}" /></td>
+										<td><c:out value="${eachObPred.details.objetoContrato}" /></td>
+										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><label class="control-label"
+											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+											id="Detalle">Pagar</label></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 
 		<div id="oblipend-vehiculos" class="oblipend-table"
@@ -96,76 +102,87 @@
 					</h2>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<table class="table">
-						<thead>
-							<tr>
-								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="obligacion.inicial.vehiculo.placa" /></label></th>
-								<th><label class="control-label labeltabletd" for=""><spring:theme
-											code="obligacion.inicial.vehiculo.modelo" /></label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.vehiculo.marca" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.vehiculo.linea" />
-								</label></th>
-								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.estatus" />
-								</label></th>
-								<th><label class="control-label labeltabletd" for="">
-										<spring:theme code="obligacion.inicial.vehiculo.visualizar" />
-								</label></th>
-								<th><label class="control-label labeltabletd"> <spring:theme
-											code="obligacion.inicial.imprimir" />
-								</label></th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="CHIP"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="PLACA"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="MARCA"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="MARCA"></c:out>" /></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" /></td>
-								<td><label class="control-label"
-									style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-									id="Detalle">Detalle</label></td>
-								<td><input style="width: 100%" class="inputtextnew"
-									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" /></td>
-
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-
-		<c:if test="${not empty customerData.icaTax}">
-			<div id="oblipend-ica" class="oblipend-table" style="display: none;">
+			<c:if test="${not empty obligacionesFormuno.headerVehiculos}">
 				<div class="row">
-					<div class="headline">
-						<h2>
-							<span><spring:theme code="obligacion.sujeto.ica.titulo" /></span>
-						</h2>
+					<div class="col-md-6">
+						<table class="tablesearch table" id="example2">
+							<thead>
+								<tr>
+									<th><label class="control-label labeltabletd" for=""><spring:theme
+												code="obligacion.inicial.vehiculo.aniograv" /></label></th>
+									<th><label class="control-label labeltabletd" for=""><spring:theme
+												code="obligacion.inicial.vehiculo.placa" /></label></th>
+									<th><label class="control-label labeltabletd" for=""><spring:theme
+												code="obligacion.inicial.vehiculo.modelo" /></label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.marca" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.linea" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.edoobli" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.obligacion" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.numForm" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.numRef" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.obcontra" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.rop" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.vehiculo.pagar" />
+									</label></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${obligacionesFormuno.headerVehiculos }"
+									var="eachObVehi">
+									<tr>
+										<td><c:out value="${eachObVehi.anioGravable}" /></td>
+										<td><c:out value="${eachObVehi.placa}" /></td>
+										<td><c:out value="${eachObVehi.modelo}" /></td>
+										<td><spring:theme code="vehiculos.detalle.marca.${eachObVehi.marca}"/></td>
+										<td><spring:theme code="vehiculos.detalle.linea.${eachObVehi.linea}"/></td>
+										<td><c:out value="${eachObVehi.details.estadoObligacion}" /></td>
+										<td><c:out value="${eachObVehi.details.obligacion}" /></td>
+										<td><c:out value="${eachObVehi.details.numFormulario}" /></td>
+										<td><c:out value="${eachObVehi.details.numReferencia}" /></td>
+										<td><c:out value="${eachObVehi.details.objetoContrato}" /></td>
+										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><label class="control-label"
+											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+											id="Detalle">Pagar</label></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
 					</div>
 				</div>
+			</c:if>
+		</div>
+
+
+		<div id="oblipend-ica" class="oblipend-table" style="display: none;">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme code="obligacion.sujeto.ica.titulo" /></span>
+					</h2>
+				</div>
+			</div>
+			<c:if test="${not empty obligacionesFormuno.headerica}">
 				<div class="row">
-					<div class="col-md-3">
-						<table class="table">
+					<div class="col-md-12">
+						<table class="tablesearch table" id="example3">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -174,85 +191,128 @@
 											<spring:theme code="obligacion.inicial.ica.numdocu" />
 									</label></th>
 									<th><label class="control-label labeltabletd" for="">
-											<spring:theme code="obligacion.inicial.ica.visualizar" />
+											<spring:theme code="obligacion.inicial.ica.aniograv" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.ica.periodo" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.ica.edoobli" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.ica.obligacion" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.ica.numForm" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.ica.numRef" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.ica.obcontra" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.ica.rop" />
+									</label></th>
+									<th><label class="control-label labeltabletd" for="">
+											<spring:theme code="obligacion.inicial.ica.pagar" />
 									</label></th>
 								</tr>
 							</thead>
 							<tbody>
-
-								<tr>
-									<td><input style="width: 100%"
-										class="inputtextnew text-center" maxlength="30" size="30"
-										disabled="disabled" type="text"
-										value="<c:out value="${customerData.documentType}"></c:out>" /></td>
-									<td><input style="width: 100%" class="inputtextnew"
-										maxlength="30" size="30" disabled="disabled" type="text"
-										value="<c:out value="${customerData.documentNumber}"></c:out>" /></td>
-									<td><label class="control-label"
-										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-										id="Detalle">Detalle</label></td>
-								</tr>
+								<c:forEach items="${obligacionesFormuno.headerica }"
+									var="eachObIca">
+									<tr>
+										<td><c:out value="${eachObIca.tipoIdentificacion}" /></td>
+										<td><c:out value="${eachObIca.noIdentificacion}" /></td>
+										<td><c:out value="${eachObIca.anioGravable}" /></td>
+										<td><c:out value="${eachObIca.periodo}" /></td>
+										<td><c:out value="${eachObIca.details.estadoObligacion}" /></td>
+										<td><c:out value="${eachObIca.details.obligacion}" /></td>
+										<td><c:out value="${eachObIca.details.numFormulario}" /></td>
+										<td><c:out value="${eachObIca.details.numReferencia}" /></td>
+										<td><c:out value="${eachObIca.details.objetoContrato}" /></td>
+										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><label class="control-label"
+											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+											id="Detalle">Pagar</label></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
-			</div>
-		</c:if>
+			</c:if>
+		</div>
 
 
-		<c:if test="${not empty obligacionesFormuno.header}">
-			<div id="oblipend-publiext" class="oblipend-table"
-				style="display: none;">
-				<div class="row">
-					<div class="headline">
-						<h2>
-							<span><spring:theme
-									code="obligacion.sujeto.publiext.titulo" /></span>
-						</h2>
-					</div>
+		<div id="oblipend-publiext" class="oblipend-table"
+			style="display: none;">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="obligacion.sujeto.publiext.titulo" /></span>
+					</h2>
 				</div>
+			</div>
 
-
+			<c:if test="${not empty obligacionesFormuno.header}">
 				<div class="row">
-					<div class="col-md-6 text-center">
+					<div class="col-md-12 text-center">
 						<div class="table-responsive">
-							<table class="table table-bordered" id="">
+							<table class="tablesearch table table-bordered" id="example4">
 								<thead>
 									<tr>
+										<th><label class="control-label labeltabletd" for=""><spring:theme
+													code="obligacion.inicial.publicidad.aniograv" /></label></th>
 										<th><label class="control-label labeltabletd" for=""><spring:theme
 													code="obligacion.inicial.publicidad.numresol" /></label></th>
 										<th><label class="control-label labeltabletd" for="">
-												<spring:theme code="obligacion.inicial.publicidad.tipvalla" />
+												<spring:theme code="obligacion.inicial.publicidad.orivalla" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.publicidad.edoobli" />
 										</label></th>
 										<th><label class="control-label labeltabletd" for="">
 												<spring:theme
-													code="obligacion.inicial.publicidad.visualizar" />
+													code="obligacion.inicial.publicidad.obligacion" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.publicidad.numForm" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.publicidad.numRef" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.publicidad.obcontra" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.publicidad.rop" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.publicidad.pagar" />
 										</label></th>
 
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${obligacionesFormuno.header }"
+									<c:forEach items="${obligacionesFormuno.header}"
 										var="eachPubExtTax">
 										<tr>
 
-											<td><input style="width: 100%" class="inputtextnew"
-												maxlength="30" size="30" disabled="disabled" type="text"
-												value="<c:out value="${eachPubExtTax.numResolucion }"></c:out>" /></td>
-											<td><input style="width: 100%" class="inputtextnew"
-												maxlength="30" size="30" disabled="disabled" type="text"
-												value="<c:out value=""></c:out>" /></td>
+											<td><c:out value="${eachPubExtTax.anioGravable}" /></td>
+											<td><c:out value="${eachPubExtTax.numResolucion}" /></td>
+											<td><c:out value="${eachPubExtTax.orientacionValla}" /></td>
+											<td><c:out value="${eachPubExtTax.details.estadoObligacion}" /></td>
+											<td><c:out value="${eachPubExtTax.details.obligacion}" /></td>
+											<td><c:out value="${eachPubExtTax.details.numFormulario}" /></td>
+											<td><c:out value="${eachPubExtTax.details.numReferencia}" /></td>
+											<td><c:out value="${eachPubExtTax.details.objetoContrato}" /></td>
+											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle"
-												data-anoGravable="${eachPubExtTax.anioGravable }"
-												data-numResolu="${eachPubExtTax.numResolucion }"
-												data-tipoValla="tres" data-dirvalla="cuatro"
-												data-orValla="${eachPubExtTax.orientacionValla}"
-												data-obligacion="${eachPubExtTax.details.obligacion}"
-												data-edoobligacion="${eachPubExtTax.details.estadoObligacion}">Detalle</label><input
-												type="hidden" id="data-edoobli"></td>
-
+												id="Detalle">Pagar</label></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -260,52 +320,74 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</c:if>
+			</c:if>
+		</div>
 
 
-		<c:if test="${not empty customerData.gasTaxList }">
-			<div id="oblipend-gasolina" class="oblipend-table"
-				style="display: none;">
-				<div class="row">
-					<div class="headline">
-						<h2>
-							<span><spring:theme
-									code="obligacion.sujeto.gasolina.titulo" /></span>
-						</h2>
-					</div>
+
+
+		<div id="oblipend-gasolina" class="oblipend-table"
+			style="display: none;">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="obligacion.sujeto.gasolina.titulo" /></span>
+					</h2>
 				</div>
+			</div>
 
-
+			<c:if test="${not empty obligacionesFormuno.headergas}">
 				<div class="row">
-					<div class="col-md-5">
+					<div class="col-md-12">
 						<div class="table-responsive">
-							<table class="table table-bordered" id="">
+							<table class="tablesearch table table-bordered" id="example5">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd" for=""><spring:theme
-													code="obligacion.inicial.gasolina.tipiden" /></label></th>
+													code="obligacion.inicial.gasolina.aniograv" /></label></th>
 										<th><label class="control-label labeltabletd" for="">
-												<spring:theme code="obligacion.inicial.gasolina.numiden" />
+												<spring:theme code="obligacion.inicial.gasolina.periodo" />
 										</label></th>
 										<th><label class="control-label labeltabletd" for="">
-												<spring:theme code="obligacion.inicial.gasolina.visualizar" />
+												<spring:theme code="obligacion.inicial.gasolina.edoobli" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.gasolina.obligacion" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.gasolina.numForm" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.gasolina.numRef" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.gasolina.obcontra" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.gasolina.rop" />
+										</label></th>
+										<th><label class="control-label labeltabletd" for="">
+												<spring:theme code="obligacion.inicial.gasolina.pagar" />
 										</label></th>
 									</tr>
 								</thead>
 								<tbody>
 
-									<c:forEach items="${customerData.gasTaxList }" var="eachGasTax">
+									<c:forEach items="${obligacionesFormuno.headergas}"
+										var="eachObGas">
 										<tr>
-											<td><input style="width: 100%" class="inputtextnew"
-												maxlength="30" size="30" disabled="disabled" type="text"
-												value="<c:out value="${eachGasTax.documentType}"></c:out>" /></td>
-											<td><input style="width: 100%" class="inputtextnew"
-												maxlength="30" size="30" disabled="disabled" type="text"
-												value="<c:out value="${eachGasTax.documentNumber}"></c:out>" /></td>
+											<td><c:out value="${eachObGas.anioGravable}" /></td>
+											<td><c:out value="${eachObGas.periodo}" /></td>
+											<td><c:out value="${eachObGas.details.estadoObligacion}" /></td>
+											<td><c:out value="${eachObGas.details.obligacion}" /></td>
+											<td><c:out value="${eachObGas.details.numFormulario}" /></td>
+											<td><c:out value="${eachObGas.details.numReferencia}" /></td>
+											<td><c:out value="${eachObGas.details.objetoContrato}" /></td>
+											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle">Detalle</label></td>
+												id="Detalle">Pagar</label></td>
 										</tr>
 									</c:forEach>
 
@@ -314,40 +396,50 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</c:if>
+			</c:if>
+		</div>
 
 
 
-
-
-
-		<c:if test="${not empty obligacionesFormuno.headerdeli}">
-			<div id="oblipend-delurbana" class="oblipend-table"
-				style="display: none;">
-				<div class="row">
-					<div class="headline">
-						<h2>
-							<span><spring:theme
-									code="obligacion.sujeto.delurbana.titulo" /></span>
-						</h2>
-					</div>
+		<div id="oblipend-delurbana" class="oblipend-table"
+			style="display: none;">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="obligacion.sujeto.delurbana.titulo" /></span>
+					</h2>
 				</div>
-
+			</div>
+			<c:if test="${not empty obligacionesFormuno.headerdeli}">
 				<div class="row">
-					<div class="col-md-6 text-center">
+					<div class="col-md-12 text-center">
 						<div class="table-responsive">
-							<table class="table table-bordered" id="">
+							<table class="tablesearch table table-bordered" id="example6">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+													code="obligacion.inicial.delineacion.aniograv" /> </label></th>
+										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="obligacion.inicial.delineacion.cdu" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="obligacion.inicial.delineacion.licconstr" /> </label></th>
-										<th><label class="control-label labeltabletd tableangrav"><spring:theme
+													code="obligacion.inicial.delineacion.chip" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
 													code="obligacion.inicial.delineacion.direccion" /> </label></th>
 										<th><label class="control-label labeltabletd tableangrav"><spring:theme
-													code="obligacion.inicial.delineacion.visualizar" /> </label></th>
+													code="obligacion.inicial.delineacion.edoobli" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.obligacion" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.numForm" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.numRef" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.obcontra" /> </label></th>
+										<th><label class="control-label labeltabletd "><spring:theme
+													code="obligacion.inicial.delineacion.rop" /> </label></th>
+										<th><label class="control-label labeltabletd"><spring:theme
+													code="obligacion.inicial.delineacion.pagar" /> </label></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -355,22 +447,19 @@
 										var="eachDeli">
 										<tr>
 
-											<td><input style="width: 100%" class="inputtextnew"
-												maxlength="30" size="30" disabled="disabled" type="text"
-												value="<c:out value="${eachDeli.cdu}"></c:out>" /></td>
-											<td><input style="width: 100%" class="inputtextnew"
-												maxlength="30" size="30" disabled="disabled" type="text"
-												value="<c:out value=""></c:out>" /></td>
-											<td><input style="width: 100%" class="inputtextnew"
-												maxlength="30" size="30" disabled="disabled" type="text"
-												value="<c:out value=""></c:out>" /></td>
+											<td><c:out value="${eachDeli.anioGravable}" /></td>
+											<td><c:out value="${eachDeli.cdu}" /></td>
+											<td><c:out value="${eachDeli.chip}" /></td>
+											<td><c:out value="${eachDeli.direccion}" /></td>
+											<td><c:out value="${eachDeli.details.estadoObligacion}" /></td>
+											<td><c:out value="${eachDeli.details.obligacion}" /></td>
+											<td><c:out value="${eachDeli.details.numFormulario}" /></td>
+											<td><c:out value="${eachDeli.details.numReferencia}" /></td>
+											<td><c:out value="${eachDeli.details.objetoContrato}" /></td>
+											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												data-cdu="${eachDeli.cdu}"
-												data-aniogravDeli="${eachDeli.anioGravable}"
-												data-chipDeli="${eachDeli.chip}" data-dirDeli="${eachDeli.direccion}"
-												data-edoobliDeli="${eachDeli.details.estadoObligacion}"
-												data-obliDeli="${eachDeli.details.obligacion}" id="Detalle">Detalle</label></td>
+												id="Detalle">Pagar</label></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -378,8 +467,9 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</c:if>
+			</c:if>
+		</div>
+
 
 
 		<!-- 			tablas de detalle -->
@@ -472,7 +562,7 @@
 			</div>
 		</div>
 
-		<c:if test="${not empty obligacionesFormuno.headerica}">
+		<c:if test="">
 			<div id="detalle-ica" class="oblipend-tabledetalle"
 				style="display: none;">
 				<div class="row">
@@ -504,14 +594,11 @@
 										<td><input style="width: 100%"
 											class="inputtextnew tableangrav" maxlength="30" size="30"
 											disabled="disabled" type="text"
-											value="<c:out value="${obligacionesFormuno.headerica.anioGravable}"></c:out>" /></td>
+											value="<c:out value=""></c:out>" /></td>
 										<td><input class="inputtextnew tabledoobli"
-											disabled="disabled"
-											value="${obligacionesFormuno.headerica.periodo}" type="text" /></td>
+											disabled="disabled" value="" type="text" /></td>
 										<td><input class="inputtextnew tabledoobli"
-											disabled="disabled"
-											value="${obligacionesFormuno.headerica.details.obligacion}"
-											type="text" /></td>
+											disabled="disabled" value="" type="text" /></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 											id="Detalledos">Detalle</label></td>
@@ -665,14 +752,14 @@
 										disabled="disabled" type="text" id="angravabDELI" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" id="cduobDELI" /></td>
-									<td><input class="inputtextnew"
-										disabled="disabled" value="" type="text" id="chipDeli" /></td>
-									<td><input class="inputtextnew"
-										disabled="disabled" value="" type="text"  id="direcDeli"/></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="" type="text" id="chipDeli" /></td>
+									<td><input class="inputtextnew" disabled="disabled"
+										value="" type="text" id="direcDeli" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" id="edoobliDeli" /></td>
 									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" id="obliDeli"/></td>
+										disabled="disabled" value="" type="text" id="obliDeli" /></td>
 									<td><label class="control-label"
 										style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 										id="Detalledos">Detalle</label></td>
@@ -695,7 +782,7 @@
 
 
 
-		<c:if test="${not empty obligacionesFormuno.headergas}">
+		<c:if test="">
 			<div id="detalle-gasolina" class="oblipend-tabledetalle"
 				style="display: none">
 				<div class="row">
@@ -729,7 +816,7 @@
 											<td><input style="width: 100%"
 												class="inputtextnew tableangrav" maxlength="30" size="30"
 												disabled="disabled" type="text"
-												value="<c:out value="${eachGasObli.anioGravable}"></c:out>" /></td>
+												value="<c:out value=""></c:out>" /></td>
 											<td><input class="inputtextnew tabledoobli"
 												disabled="disabled" value="${eachGasObli.periodo}"
 												type="text" /></td>
@@ -738,7 +825,7 @@
 												value="${eachGasObli.details.obligacion}" type="text" /></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalledos" data-angravgas="${eachGasObli.anioGravable}"
+												id="Detalledos" data-angravgas=""
 												data-perigas="${eachGasObli.periodo}"
 												data-edoobligaciongas="${eachGasObli.details.estadoObligacion}"
 												data-obligaciongas="${eachGasObli.details.obligacion}">Detalle</label></td>
@@ -968,12 +1055,10 @@
 								<tr>
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
-										disabled="disabled" type="text" id="angravICA"
-										value="${obligacionesFormuno.headerica.anioGravable}" /></td>
+										disabled="disabled" type="text" id="angravICA" value="" /></td>
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
-										disabled="disabled" type="text" id="periodoICA"
-										value="${obligacionesFormuno.headerica.periodo}" /></td>
+										disabled="disabled" type="text" id="periodoICA" value="" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -1000,12 +1085,10 @@
 								<tr>
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
-										disabled="disabled" type="text" id="edoobliICA"
-										value="${obligacionesFormuno.headerica.details.estadoObligacion}" /></td>
+										disabled="disabled" type="text" id="edoobliICA" value="" /></td>
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
-										disabled="disabled" type="text" id="obliICA"
-										value="${obligacionesFormuno.headerica.details.obligacion}" /></td>
+										disabled="disabled" type="text" id="obliICA" value="" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 								</tr>
