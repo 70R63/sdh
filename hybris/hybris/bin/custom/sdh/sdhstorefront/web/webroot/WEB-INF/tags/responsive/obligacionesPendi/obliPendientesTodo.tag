@@ -38,7 +38,7 @@
 			<c:if test="${not empty obligacionesFormuno.headerPred}">
 				<div class="row">
 					<div class="col-md-10">
-						<table class="tablesearch table" id="example">
+						<table class="tablesearch table" id="tabPaginacion0">
 							<thead style="cellspacing: 10 !important">
 								<tr>
 									<th><label class="control-label labeltabletd"><spring:theme
@@ -105,7 +105,7 @@
 			<c:if test="${not empty obligacionesFormuno.headerVehiculos}">
 				<div class="row">
 					<div class="col-md-6">
-						<table class="tablesearch table" id="example2">
+						<table class="tablesearch table" id="tabPaginacion1">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -182,7 +182,7 @@
 			<c:if test="${not empty obligacionesFormuno.headerica}">
 				<div class="row">
 					<div class="col-md-12">
-						<table class="tablesearch table" id="example3">
+						<table class="tablesearch table" id="tabPaginacion2">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -261,7 +261,7 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="table-responsive">
-							<table class="tablesearch table table-bordered" id="example4">
+							<table class="tablesearch table table-bordered" id="tabPaginacion3">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -341,7 +341,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive">
-							<table class="tablesearch table table-bordered" id="example5">
+							<table class="tablesearch table table-bordered" id="tabPaginacion4">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -415,7 +415,7 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="table-responsive">
-							<table class="tablesearch table table-bordered" id="example6">
+							<table class="tablesearch table table-bordered" id="tabPaginacion5">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme

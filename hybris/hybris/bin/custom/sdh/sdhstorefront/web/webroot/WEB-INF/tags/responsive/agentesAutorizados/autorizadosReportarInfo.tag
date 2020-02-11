@@ -9,6 +9,21 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
+
+<script>
+	window.onload = function() {
+		debugger;
+		if($(".bProcesado")){
+			document.getElementById("gasolinaGeneraDeclaracionButton").disabled = false;	
+		} 
+	}
+	
+	function fncEnviarReporInfo(){
+		debugger;
+		document.getElementById("gasolinaGeneraDeclaracionButton").disabled = true;
+	} 
+</script>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -97,8 +112,8 @@
 					class="btn btn-primary btn-lg" type="button">
 					<spring:theme code="autorizado.reportar.info.cancelar" />
 				</button>
-				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="submit">
+				<button style="margin-top: 3px;" id="btnEnviarReporInfo"
+					class="btn btn-primary btn-lg " type="submit" onclick="fncEnviarReporInfo()">
 					<spring:theme code="autorizado.reportar.info.enviar" />
 				</button>
 			</div>
@@ -106,3 +121,7 @@
 
 	</form:form>
 </div>
+
+
+
+
