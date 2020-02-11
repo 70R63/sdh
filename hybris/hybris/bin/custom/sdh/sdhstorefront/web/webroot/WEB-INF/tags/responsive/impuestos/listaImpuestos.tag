@@ -455,7 +455,7 @@
         	type : "GET",
         	success : function(data) {
         	    var opcUso = data;
-                if (impuesto == '5' && opcUso == '01') {//Sobretasa a la gasolina
+                if (impuesto == '5' && opcUso == '02') {//Sobretasa a la gasolina
                     promtConfirmation();
         		}else if(impuesto == '3' && opcUso == '02'){//ICA
         		    promtConfirmation();
