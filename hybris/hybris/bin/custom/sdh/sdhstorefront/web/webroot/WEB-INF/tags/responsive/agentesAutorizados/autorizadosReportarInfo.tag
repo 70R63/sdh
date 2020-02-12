@@ -10,20 +10,6 @@
 
 
 
-<script>
-	window.onload = function() {
-		debugger;
-		if($(".bProcesado") == true){
-			document.getElementById("btnEnviarReporInfo").disabled = false;	
-		} 
-			
-	}
-	
-	function fncEnviarReporInfo(){
-		debugger;
-		document.getElementById("btnEnviarReporInfo").disabled = true;
-	} 
-</script>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
@@ -77,7 +63,7 @@
 
 	</div>
 
-	<form:form commandName="importConciliacionForm" enctype="multipart/form-data" action="/sdhstorefront/es/gestionBancaria/uploadFile" method="POST"	>
+	<form:form commandName="importConciliacionForm" enctype="multipart/form-data" action="/sdhstorefront/es/gestionBancaria/uploadFile" method="POST" onsubmit="return fncEnviarReporInfo(this);">
 		<div class="row" style="margin-top: 6px;">
 			<div class="col-md-4">
 				<div class="form-group">
@@ -114,7 +100,7 @@
 					<spring:theme code="autorizado.reportar.info.cancelar" />
 				</button>
 				<button style="margin-top: 3px;" id="btnEnviarReporInfo"
-					class="btn btn-primary btn-lg " type="submit" onclick="fncEnviarReporInfo()">
+					class="btn btn-primary btn-lg " type="submit" >
 					<spring:theme code="autorizado.reportar.info.enviar" />
 				</button>
 			</div>
