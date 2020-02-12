@@ -23,6 +23,12 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHRopService;
 import de.hybris.sdh.storefront.forms.RopForm;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -32,15 +38,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import sun.misc.BASE64Decoder;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import sun.misc.BASE64Decoder;
 
 
 /**
@@ -89,11 +91,13 @@ public class RopPageController extends AbstractPageController
 	@RequireHardLogIn
 	public String rop(final Model model, @ModelAttribute("error")
 	final String error, @ModelAttribute("ropFormRequest")
-	final RopForm ropFormRequest) throws CMSItemNotFoundException
+	final RopForm ropFormRequest, @RequestParam(value = "obligacion", required = false)
+	final String obligacion, @RequestParam(value = "totalPagar", required = false)
+	final String totalPagar) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Generar ROP -------------------------");
 
-		String returnURL = "/";
+		final String returnURL = "/";
 
 		final RopForm ropForm = new RopForm();
 		final RopRequest ropRequest = new RopRequest();
@@ -107,6 +111,8 @@ public class RopPageController extends AbstractPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ROP_CMS_PAGE));
 		model.addAttribute("ropForm", ropForm);
 		model.addAttribute("ropFormResquest", ropFormRequest);
+		model.addAttribute("obligacion", obligacion);
+		model.addAttribute("totalPagar", totalPagar);
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 
 		return getViewForPage(model);
@@ -122,10 +128,10 @@ public class RopPageController extends AbstractPageController
 			final RopForm ropFormDatos) throws CMSItemNotFoundException
 	{
 
-		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
+		final GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
 
 		System.out.println("------------------Entro al POST de Agentes Generar ROP----------------------");
-		String returnURL = "/";
+		final String returnURL = "/";
 		final RopRequest ropRequest = new RopRequest();
 
 		ropRequest.setTipoImp("06");
