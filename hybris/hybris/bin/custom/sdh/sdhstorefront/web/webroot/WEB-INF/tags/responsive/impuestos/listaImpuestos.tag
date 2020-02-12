@@ -223,11 +223,11 @@
 
 	<div class="col-12 notas_deli" id="notas_deli" style="display: none">
 		<div class="alert alert-success mt-3">
-			<strong>Anticipo Delineaci�n:</strong>
+			<strong><spring:theme code="impuestos.presentarDeclaracion.deliur.tituloNota1" /></strong>
 			<spring:theme code="impuestos.presentarDeclaracion.deliur.nota1" />
 		</div>
 		<div class="alert alert-info mt-3">
-			<strong>Declaraci�n Delineaci�n:</strong>
+			<strong><spring:theme code="impuestos.presentarDeclaracion.deliur.tituloNota2" /></strong>
 			<spring:theme code="impuestos.presentarDeclaracion.deliur.nota2" />
 		</div>
 	</div>

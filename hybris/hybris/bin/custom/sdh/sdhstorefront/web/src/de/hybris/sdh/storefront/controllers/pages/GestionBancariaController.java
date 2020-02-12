@@ -98,7 +98,8 @@ public class GestionBancariaController extends AbstractPageController {
                             { "Error con el servidor intente nuevamente" });
         }
 
-
+		final Boolean bProcesado = true;
+		redirectAttributes.addFlashAttribute("procesado", bProcesado);
 
         return "redirect:/autorizados/entidades/reportarinfo";
     }
