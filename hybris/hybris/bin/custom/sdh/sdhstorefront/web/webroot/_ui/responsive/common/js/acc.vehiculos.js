@@ -164,7 +164,11 @@ ACC.vehiculos = {
 	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#publicidadExteriorDialogContent").html("");
 	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
+<<<<<<< HEAD
 
+=======
+	            			
+>>>>>>> parent of 2ef00279... se agregan cambios para etiquetas de vehiculos
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
 							document.getElementById("action").disabled = false;
