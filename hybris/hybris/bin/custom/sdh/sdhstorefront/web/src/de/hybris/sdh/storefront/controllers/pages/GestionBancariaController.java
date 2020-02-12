@@ -52,7 +52,7 @@ public class GestionBancariaController extends AbstractPageController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     @RequireHardLogIn
     public String pagoEnLineaForm(@ModelAttribute("importConciliacionForm") final ImportConciliacionForm importConciliacionForm,
-                                  final RedirectAttributes redirectAttributes ) throws IOException
+			final RedirectAttributes redirectAttributes, final Model model) throws IOException
     {
 
         redirectAttributes.addFlashAttribute("importConciliacionForm", importConciliacionForm);
@@ -99,7 +99,8 @@ public class GestionBancariaController extends AbstractPageController {
         }
 
 		final Boolean bProcesado = true;
-		redirectAttributes.addFlashAttribute("procesado", bProcesado);
+		model.addAttribute("procesado", bProcesado);
+
 
         return "redirect:/autorizados/entidades/reportarinfo";
     }
