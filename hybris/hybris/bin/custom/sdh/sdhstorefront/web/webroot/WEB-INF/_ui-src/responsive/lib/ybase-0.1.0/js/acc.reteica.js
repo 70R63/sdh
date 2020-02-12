@@ -57,7 +57,7 @@ ACC.reteica = {
 	            		}else
 	            		{
 	            			$("#reteICADialogContent").html("");
-	            			$("#reteICADialogContent").html("La declaración se ha generado exitosamente.")
+	            			$("#reteICADialogContent").html("La Declaración se ha presentado correctamente.")
 	            			
 	            			$("#downloadReteICADeclaracionHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadReteICADeclaracionHelper").click();
