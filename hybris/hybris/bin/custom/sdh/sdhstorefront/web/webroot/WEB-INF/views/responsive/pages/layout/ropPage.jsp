@@ -29,7 +29,7 @@
 					<label class="control-label"> <spring:theme
 							code="rop.generar.valobli" />
 					</label> <input class="form-control new_alto" disabled="disabled"
-						type="text" size="30" value="" />
+						type="text" size="30" value="${obligacion}" />
 				</div>
 			</div>
 		</div>

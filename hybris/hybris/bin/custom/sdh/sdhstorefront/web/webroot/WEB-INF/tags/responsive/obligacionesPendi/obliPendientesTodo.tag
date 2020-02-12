@@ -79,7 +79,7 @@
 										<td><c:out value="${eachObPred.details.numFormulario}" /></td>
 										<td><c:out value="${eachObPred.details.numReferencia}" /></td>
 										<td><c:out value="${eachObPred.details.objetoContrato}" /></td>
-										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObPred.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 											id="Detalle">Pagar</label></td>
@@ -157,7 +157,7 @@
 										<td><c:out value="${eachObVehi.details.numFormulario}" /></td>
 										<td><c:out value="${eachObVehi.details.numReferencia}" /></td>
 										<td><c:out value="${eachObVehi.details.objetoContrato}" /></td>
-										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehi.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 											id="Detalle">Pagar</label></td>
@@ -232,7 +232,7 @@
 										<td><c:out value="${eachObIca.details.numFormulario}" /></td>
 										<td><c:out value="${eachObIca.details.numReferencia}" /></td>
 										<td><c:out value="${eachObIca.details.objetoContrato}" /></td>
-										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObIca.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 											id="Detalle">Pagar</label></td>
@@ -309,7 +309,7 @@
 											<td><c:out value="${eachPubExtTax.details.numFormulario}" /></td>
 											<td><c:out value="${eachPubExtTax.details.numReferencia}" /></td>
 											<td><c:out value="${eachPubExtTax.details.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTax.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle">Pagar</label></td>
@@ -384,7 +384,7 @@
 											<td><c:out value="${eachObGas.details.numFormulario}" /></td>
 											<td><c:out value="${eachObGas.details.numReferencia}" /></td>
 											<td><c:out value="${eachObGas.details.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObGas.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle">Pagar</label></td>
@@ -456,7 +456,7 @@
 											<td><c:out value="${eachDeli.details.numFormulario}" /></td>
 											<td><c:out value="${eachDeli.details.numReferencia}" /></td>
 											<td><c:out value="${eachDeli.details.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeli.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle">Pagar</label></td>
