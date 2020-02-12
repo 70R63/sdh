@@ -13,14 +13,15 @@
 <script>
 	window.onload = function() {
 		debugger;
-		if($(".bProcesado")){
-			document.getElementById("gasolinaGeneraDeclaracionButton").disabled = false;	
+		if($(".bProcesado") == true){
+			document.getElementById("btnEnviarReporInfo").disabled = false;	
 		} 
+			
 	}
 	
 	function fncEnviarReporInfo(){
 		debugger;
-		document.getElementById("gasolinaGeneraDeclaracionButton").disabled = true;
+		document.getElementById("btnEnviarReporInfo").disabled = true;
 	} 
 </script>
 
