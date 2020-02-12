@@ -9,6 +9,7 @@
 
 <div class="loader"></div>
 
+<input type="hidden" id="opcionUso" class="opcionUso" value=""/>
 <sobreVehiculos:sobreVehiculosTable />
 <div id="detalleVehiculos" style="display: none">
 <sobreVehiculos:sobreVehiculosDetail />

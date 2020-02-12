@@ -36,6 +36,7 @@ import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -199,6 +200,7 @@ public class SobreVehiculosController extends AbstractPageController
 					.readValue(sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
 
 			vehiculosForm.setDetalle(detalleVehiculosResponse.getDetalle());
+			String opcUso = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
 
 			vehiculosForm.setIdServicio(detalleVehiculosResponse.getDetalle().getIdServicio());
 			vehiculosForm.setIdEstado(detalleVehiculosResponse.getDetalle().getIdEstado());
@@ -208,6 +210,7 @@ public class SobreVehiculosController extends AbstractPageController
 			vehiculosForm.setCapacidadPas(detalleVehiculosResponse.getDetalle().getCapacidadPas());
 			vehiculosForm.setCapacidadTon(detalleVehiculosResponse.getDetalle().getCapacidadTon());
 			vehiculosForm.setNumForm(detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm());
+			vehiculosForm.setOpcionUso(Objects.isNull(opcUso) ? null : opcUso.replace(" ", "").split("-")[0]);
 
 			//			vehiculosForm.setFechaCambio(detalleVehiculosResponse.getDetalle().getFechaCambio());
 			final String FechaCambio = detalleVehiculosResponse.getDetalle().getFechaCambio();

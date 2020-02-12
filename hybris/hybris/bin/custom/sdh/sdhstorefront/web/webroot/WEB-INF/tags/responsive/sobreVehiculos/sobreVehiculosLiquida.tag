@@ -35,7 +35,7 @@
 					</thead>
 
 					<tbody>
-					
+
 					</tbody>
 				</table>
 			</div>
@@ -55,7 +55,6 @@
 				</button>
 			</div>
 			<div class="col-md-4">
-
 				<button type="submit" class="bindPresentarDeclaracionVehiculoButton btn btn-primary "
 					id="bindPresentarDeclaracionVehiculoButton" name="" value="declaracion">
 					<spring:theme code="sobre.vehiculo.liqui.presdecla" />

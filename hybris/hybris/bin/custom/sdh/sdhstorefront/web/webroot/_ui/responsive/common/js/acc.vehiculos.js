@@ -105,41 +105,51 @@ ACC.vehiculos = {
 	 	       var numBPP  = $.trim($("#numBPP").val());
 	 	       var numForma = $.trim($("#numFormdet").val());
 
-	 	      
 	 	      if(anioGravable == "0")
-	 	        {	
+	 	        {
 	 	        	alert("Por favor, selecciona el año a consultar");
 	 	        	return;
 	 	        }
-	 	        	
+
 	 	        if(placa == "" || placa == "-")
 	 	        {
 	 	        	alert("Por favor, selecciona un vehiculo");
 	 	        	return;
 	 	        }
-	 	       
-	 	      window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
-	 	       
+
+
+	 	      if(document.getElementById('opcionUso').value == "02"){
+	 	        var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                if (r == true) {
+                    window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
+                } else {
+                    return;
+                }
+	 	      }else{
+	 	        window.location.href = ACC.vehiculosDeclararionURL+"?anioGravable="+anioGravable+"&placa="+placa+"&numBPP="+numBPP+"&numForma="+numForma;
+	 	      }
+
+
 		 });
 	 },
-	 
+
 	  bindGeneraDeclaracionVehiculosButton: function () {
 		 $(document).on("click", "#generaDeclaracionVehiculosButton", function (e) {
 				debugger;
 	 	        e.preventDefault();
-	 	        
+
 	 	       var numForm  = $.trim($("#numForm").val());
-	 	 
+
 	 	       var data = {};
-	 	       
+
 	 	       data.numForm=numForm;
-	 	
+
 	 	      $.ajax({
 		            url: ACC.vehiculosGeneraDeclaracionURL,
 		            data: data,
 		            type: "POST",
 		            success: function (data) {
-						
+
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	if(data.errores && ( data.errores[0].idmsj != 0 ) )
 	            		{
@@ -147,34 +157,34 @@ ACC.vehiculos = {
 		            		$.each(data.errores, function( index, value ) {
     	            			$("#publicidadExteriorDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
     	            		});
-		            		
-		            		
+
+
 	            		}else
 	            		{
 	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#publicidadExteriorDialogContent").html("");
 	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
-	            			
+
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
 							document.getElementById("action").disabled = false;
-							
+
 	            		}
-	 	      		
+
 		            },
 		            error: function () {
 		            	$( "#dialogPublicidadExterior" ).dialog( "open" );
 		            	$("#publicidadExteriorDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
 		            }
 		        });
-	 	       
+
 		 });
 	 },
-	 
+
 	 bindCalcularVehButton : function() {
 			$(document).on("click", ".calcularVehButton", function(e) {
 				e.preventDefault();
-				
+
 				debugger;
 
 				var bpNum=$.trim($("#numBPcal").val());
@@ -238,16 +248,16 @@ ACC.vehiculos = {
 						debugger;
 		            	if(data.errores != null)
 	            		{
-		            		
+
 							if (data.errores[0].txtmsj != null && data.errores[0].txtmsj != ""){
 								alert(data.errores[0].txtmsj);
-								
+
 								//$( "#dialogVehiculos" ).dialog( "open" );
 								//$("#vehiculosDialogContent").html("");
 								//$.each(data.errores, function( index, value ) {
 								//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
 								//});
-								
+
 								$("#avaluoAct").val("");
 								$("#valimpcar").val("");
 								$("#valsemafo").val("");
@@ -259,8 +269,8 @@ ACC.vehiculos = {
 								$("#intereses").val("");
 								$("#totpagvol").val("");
 								$("#numForm").val("");
-							
-								
+
+
 		            			//$('#generaDeclaracionButton').prop("disabled", true);
 							}else{
 								$("#avaluoAct").val(data.avaluo);
@@ -276,9 +286,9 @@ ACC.vehiculos = {
 								$("#numForm").val(data.numForm);
 								ACC.vehiculos.habilitarBotonPresentarDeclaracion();
 							}
-		            		
+
 	            		}else
-	            		{	            			
+	            		{
 							$("#avaluoAct").val(data.avaluo);
 	            			$("#valimpcar").val(data.impuestoCargo);
 	            			$("#valsemafo").val(data.valorSemafor);
@@ -291,13 +301,13 @@ ACC.vehiculos = {
 	            			$("#totpagvol").val(data.totalPagoVol);
 	            			$("#numForm").val(data.numForm);
 	            			ACC.vehiculos.habilitarBotonPresentarDeclaracion();
-	            			
-	            			
+
+
 //	            			$('#generaDeclaracionButton').prop("disabled", false);
-	            			
+
 	            		}
-	 	      		
-		            
+
+
 
 		},error: function () {
         	$( "#dialogVehiculos" ).dialog( "open" );
@@ -317,14 +327,14 @@ ACC.vehiculos = {
 //			$("#calculoButton").prop('disabled', false);
         }
     });
-    
+
 });
 },
 
 
 	habilitarBotonPresentarDeclaracion: function(){
 		var btnPresentarDec = document.getElementById("generaDeclaracionVehiculosButton");
-		
+
 		btnPresentarDec.disabled = false;
 	},
 
@@ -350,13 +360,14 @@ ACC.vehiculos = {
 			data.placa = placa;
 			data.anioGravable = anioGravable;
 
+
 			$.ajax({
 				url : ACC.vehiculosDetalleURL,
 				data : data,
 				type : "GET",
 				success : function(data) {
+				    document.getElementById('opcionUso').value = data.opcionUso;
 					ACC.vehiculos.fillFieldsFromData(data);
-
 				},
 				error : function() {
 				}
