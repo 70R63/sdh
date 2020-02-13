@@ -17,6 +17,8 @@ public class DetalleVehiculos
 	private String capacidadPas;
 	private String capacidadTon;
 	private String fechaCambio;
+	private String fechaInacti;
+
 	/**
 	 * @return the idServicio
 	 */
@@ -153,6 +155,11 @@ public class DetalleVehiculos
 		this.fechaCambio = fechaCambio;
 	}
 
+	public String getFechaInacti() {
+		return fechaInacti;
+	}
 
-
+	public void setFechaInacti(String fechaInacti) {
+		this.fechaInacti = fechaInacti;
+	}
 }

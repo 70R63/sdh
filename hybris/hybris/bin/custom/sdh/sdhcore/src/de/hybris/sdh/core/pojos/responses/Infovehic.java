@@ -27,6 +27,8 @@ public class Infovehic
 	private String clasicoAntiguo;
 	private String idServicio;
 	private String numForm;
+	private String watts;
+
 	/**
 	 * @return the opcionUso
 	 */
@@ -316,5 +318,11 @@ public class Infovehic
 		this.numForm = numForm;
 	}
 
+	public String getWatts() {
+		return watts;
+	}
 
+	public void setWatts(String watts) {
+		this.watts = watts;
+	}
 }

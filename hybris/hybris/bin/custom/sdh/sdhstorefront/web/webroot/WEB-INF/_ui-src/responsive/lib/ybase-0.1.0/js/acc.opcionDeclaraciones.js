@@ -828,25 +828,60 @@ debugger;
 									'<td>' + value.carroceria + '</td>'+ 
 									'<td>' + value.numPuertas + '</td>'+ 
 									'<td>' + value.blindado + '</td>'+ 
-									'<td>' + value.cilindraje + '</td>'+ 
-									'<td><a href="' + url + '">Presentar Declaracion</a> </td>'+
+									'<td>' + value.cilindraje + '</td>'+
+									'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracion(\''+url+'\',\''+value.placa+'\');">Presentar Declaracion</a> </td>'+
+									//'<td><a href="' + url + '">Presentar Declaracion</a> </td>'+
 									"</tr>");
 						}
 					});
 				}
-				
+
 			}
 		}
-		
+
 		if(flagHuboRegistros == true){
 	        var btnAction = document.getElementById('action');
 	        btnAction.style.display = 'block';
 		}
-		
-	
+
+
 	},
-	
-	
+
+	validarDeclaracion : function(url,placa){
+	    var anioGravable = document.getElementById("anoGravable").value;
+	    var impuesto = document.getElementById("impuesto");
+	    impuesto = impuesto.options[impuesto.selectedIndex].value;
+
+	    var currentUrl = window.location.href;
+        var targetUrl = "infoObject/getUseOption?anioGravable="	+
+               		    anioGravable + "&placa=" +
+               		    placa + "&taxType=" + impuesto;
+
+        currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion#",targetUrl);
+        $.ajax({
+            url : currentUrl,
+            type : "GET",
+            success : function(data) {
+                if(data == "02"){
+                    ACC.opcionDeclaraciones.promtConfirmation(url);
+                }else{
+                    return false;
+                }
+           	},
+            error : function() {
+                alert("Error");
+            }
+        });
+	},
+
+	promtConfirmation : function(url){
+        var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+        if (r == true) {
+            window.location.href = url;
+        } else {
+            return false;
+        }
+    },
 	
 	habilitarFiltroPeriodo : function(infoActual,infoResponse) {
 

@@ -22,6 +22,10 @@ public class liquidacionVehiculos
 	private String totalPagar;
 	private String valorPagar;
 	private String totalPagoVolunt;
+	private String claseSDH;
+	private String tipoVehSDH;
+	private String lineaHomologa;
+	private String fuenteHomolo;
 
 
 	/**
@@ -229,4 +233,35 @@ public class liquidacionVehiculos
 	}
 
 
+	public String getClaseSDH() {
+		return claseSDH;
+	}
+
+	public void setClaseSDH(String claseSDH) {
+		this.claseSDH = claseSDH;
+	}
+
+	public String getTipoVehSDH() {
+		return tipoVehSDH;
+	}
+
+	public void setTipoVehSDH(String tipoVehSDH) {
+		this.tipoVehSDH = tipoVehSDH;
+	}
+
+	public String getLineaHomologa() {
+		return lineaHomologa;
+	}
+
+	public void setLineaHomologa(String lineaHomologa) {
+		this.lineaHomologa = lineaHomologa;
+	}
+
+	public String getFuenteHomolo() {
+		return fuenteHomolo;
+	}
+
+	public void setFuenteHomolo(String fuenteHomolo) {
+		this.fuenteHomolo = fuenteHomolo;
+	}
 }

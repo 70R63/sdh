@@ -5,12 +5,15 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHICAInfObjetoService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData;
@@ -51,23 +54,30 @@ public class SdhInfoObjectUseOptionController {
     @Resource(name = "sdhCustomerFacade")
     SDHCustomerFacade sdhCustomerFacade;
 
+    @Resource(name = "sdhDetalleVehiculosService")
+    SDHDetalleVehiculosService sdhDetalleVehiculosService;
+
     private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
 
     @RequestMapping("/getUseOption")
 	public String getUseOption(@RequestParam(value="anioGravable", defaultValue="") String anioGravable,
                                    @RequestParam(value="periodo", defaultValue="") String periodo,
-                                   @RequestParam(value="taxType", defaultValue="") String taxType) {
+                                   @RequestParam(value="taxType", defaultValue="") String taxType,
+                                   @RequestParam(value="placa", defaultValue="") String placa) {
         String opcionUso = null;
         LOG.info("getUseOptionSobreTasaGasolina");
         LOG.info("anioGravable: "+anioGravable);
         LOG.info("periodo: "+periodo);
         LOG.info("taxType: "+taxType);
+        LOG.info("placa: "+placa);
 
         if(Objects.nonNull(taxType)){
             if(taxType.equals("5")){//Sobretasa a la gasolina
                 opcionUso = this.getOpcionUsosobreTasaGasolina(anioGravable, periodo);
             }else if(taxType.equals("3")){ //ICA
                 opcionUso = this.getOpcionUsoIca(anioGravable, periodo);
+            }else if(taxType.equals("2")){ //Vehicular
+                opcionUso = this.getOpcionUsoVehicular(anioGravable, placa);
             }
         }
 
@@ -128,6 +138,27 @@ public class SdhInfoObjectUseOptionController {
         }
 
         return icaInfObjetoResponse.getOpcionUso();
+    }
+
+    private String getOpcionUsoVehicular(String anioGravable, String placa){
+        final ObjectMapper mapper = new ObjectMapper();
+        final DetalleVehiculosRequest detalleVehiculosRequest = new DetalleVehiculosRequest();
+        final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+        DetalleVehiculosResponse detalleVehiculosResponse = null;
+
+        detalleVehiculosRequest.setBpNum(customerModel.getNumBP());
+        detalleVehiculosRequest.setPlaca(placa);
+        detalleVehiculosRequest.setAnioGravable(anioGravable);
+
+
+        try {
+            detalleVehiculosResponse = mapper.readValue(
+                    sdhDetalleVehiculosService.detalleVehiculos(detalleVehiculosRequest), DetalleVehiculosResponse.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
     }
 
 

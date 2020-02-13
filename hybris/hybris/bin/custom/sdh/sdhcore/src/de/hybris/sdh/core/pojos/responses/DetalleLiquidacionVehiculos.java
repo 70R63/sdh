@@ -12,6 +12,7 @@ public class DetalleLiquidacionVehiculos
 	private String anio;
 	private String avaluo;
 	private String tarifa;
+	private String claseSDH;
 
 	/**
 	 * @return the anio
@@ -65,5 +66,11 @@ public class DetalleLiquidacionVehiculos
 	}
 
 
+	public String getClaseSDH() {
+		return claseSDH;
+	}
 
+	public void setClaseSDH(String claseSDH) {
+		this.claseSDH = claseSDH;
+	}
 }
