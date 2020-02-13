@@ -512,7 +512,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
+										value="<c:out value="Año gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledomatri"
@@ -659,7 +659,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
+										value="<c:out value="Año gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"

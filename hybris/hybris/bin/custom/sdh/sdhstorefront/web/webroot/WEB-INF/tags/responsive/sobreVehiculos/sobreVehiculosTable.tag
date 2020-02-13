@@ -23,7 +23,7 @@
 
 						<td><spring:theme code="sobre.vehiculos.table.descripcion" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								informaciï¿½n</a></td>
+								información</a></td>
 					</tr>
 				</tbody>
 			</table>

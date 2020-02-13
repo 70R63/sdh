@@ -272,8 +272,8 @@
 							<select id="selctipobliga" class="newalto form-control"
 								onchange="ShowSelected(this)">
 								<option value="0-${item.cdu}">Seleccionar</option>
-								<option value="1-${item.cdu}">Declaraci�n</option>
-								<option value="2-${item.cdu}">Retenci�n</option>
+								<option value="1-${item.cdu}">Declaraci&oacuten</option>
+								<option value="2-${item.cdu}">Retenci&oacuten</option>
 							</select>
 						</div>
 						<div class="col-sm-3">
