@@ -172,10 +172,10 @@
 							<option value="Modificada">Modificada</option>
 							<option value="Adecuada">Adecuada</option>
 							<option value="Reconocimiento">Reconocimiento</option>
-							<option value="Conservaci�n/Restaruaci�n">Conservaci�n/Restaruaci�n</option>
+							<option value="Conservacion/Restaruacion">Conservaci&oacuten/Restaruaci&oacuten</option>
 							<option value="Reforzamiento estructural">Reforzamiento
 								estructural</option>
-							<option value="Demolici�n">Demolici�n</option>
+							<option value="Demolicion">Demolici&oacuten</option>
 							<option value="Metros lineales Cerramiento">Metros
 								lineales Cerramiento</option>
 							<option value="Reconocimiento">Reconocimiento</option>
@@ -246,7 +246,7 @@
 
 							<option value="Seleccionar">Seleccionar</option>
 							<option value="Lote">Lote</option>
-							<option value="S�tano">S�tano</option>
+							<option value="Sotano">S&oacutetano</option>
 							<option value="Semisotano(s)">Semisotano(s)</option>
 							<option value="Primer Piso">Primer Piso</option>
 							<option value="Pisos Restantes">Pisos Restantes</option>

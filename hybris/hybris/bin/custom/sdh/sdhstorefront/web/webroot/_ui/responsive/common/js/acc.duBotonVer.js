@@ -108,7 +108,7 @@ ACC.duBotonVer = {
 	            		{
 	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#duDialogContent").html("");
-	            			$("#duDialogContent").html("La declaración se ha generado exitosamente.")
+	            			$("#duDialogContent").html("La Declaración se ha presentado correctamente.")
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			

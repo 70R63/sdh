@@ -13,7 +13,7 @@
 		debugger;
 		var muni = selectObject.value;
 		if (muni == '000000011001') {
-			alert("Seleccione un municipio diferente, ya que las actividades deben ser fuera de Bogotï¿½");
+			alert("Seleccione un municipio diferente, ya que las actividades deben ser fuera de Bogot&aacute");
 		}
 	}
 </script>
@@ -194,7 +194,7 @@
 					"")
 
 		} else {
-			alert("No se pueden agregar mï¿½s registros");
+			alert("No se pueden agregar más registros");
 		}
 
 	}

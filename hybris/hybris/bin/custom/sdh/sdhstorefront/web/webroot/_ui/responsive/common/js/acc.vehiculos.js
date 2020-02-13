@@ -117,8 +117,7 @@ ACC.vehiculos = {
 	 	        	alert("Por favor, selecciona un vehiculo");
 	 	        	return;
 	 	        }
-
-	 	       //Confirmation message - sobrevehiculosautomotores
+	 	       
 	 	      if(document.getElementById('opcionUso').value == "02"){
                 var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                 if (r == true) {
@@ -162,7 +161,7 @@ ACC.vehiculos = {
 	            		{
 	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#publicidadExteriorDialogContent").html("");
-	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
+	            			$("#publicidadExteriorDialogContent").html("La Declaración se ha presentado correctamente.")
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();

@@ -215,7 +215,7 @@
 
 		} else {
 
-			alert("No se pueden agregar mï¿½s firmantes");
+			alert("No se pueden agregar más firmantes");
 
 		}
 	}
@@ -357,7 +357,7 @@
 			error: function () {
 				$( "#dialogGasolina" ).dialog( "open" );
 				$("#gasolinaDialogContent").html("");
-				$("#gasolinaDialogContent").html("Hubo un error al intentar firmar la declaraciÃ³n, favor de intentarlo mÃ¡s tarde.")
+				$("#gasolinaDialogContent").html("Hubo un error al intentar firmar la declaración, favor de intentarlo mÃ¡s tarde.")
 			}
 		});
 	}

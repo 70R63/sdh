@@ -63,7 +63,7 @@
 								"oPaginate" : {
 									"sPrevious" : "Anterior",
 									"sNext" : "Siguiente",
-									"sLast" : "�ltima",
+									"sLast" : "Ultima",
 									"sFirst" : "Primera"
 								},
 								"sLengthMenu" : 'Mostrar <select>'
@@ -94,7 +94,7 @@
 								"oPaginate" : {
 									"sPrevious" : "Anterior",
 									"sNext" : "Siguiente",
-									"sLast" : "�ltima",
+									"sLast" : "Ultima",
 									"sFirst" : "Primera"
 								},
 								"sLengthMenu" : 'Mostrar <select>'

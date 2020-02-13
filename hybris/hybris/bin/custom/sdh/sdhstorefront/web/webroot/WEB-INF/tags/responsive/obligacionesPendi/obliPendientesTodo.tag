@@ -79,7 +79,7 @@
 										<td><c:out value="${eachObPred.details.numFormulario}" /></td>
 										<td><c:out value="${eachObPred.details.numReferencia}" /></td>
 										<td><c:out value="${eachObPred.details.objetoContrato}" /></td>
-										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObPred.details.obligacion}&totalPagar=${eachObPred.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 											id="Detalle">Pagar</label></td>
@@ -157,7 +157,7 @@
 										<td><c:out value="${eachObVehi.details.numFormulario}" /></td>
 										<td><c:out value="${eachObVehi.details.numReferencia}" /></td>
 										<td><c:out value="${eachObVehi.details.objetoContrato}" /></td>
-										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehi.details.obligacion}&totalPagar=${eachObVehi.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 											id="Detalle">Pagar</label></td>
@@ -232,7 +232,7 @@
 										<td><c:out value="${eachObIca.details.numFormulario}" /></td>
 										<td><c:out value="${eachObIca.details.numReferencia}" /></td>
 										<td><c:out value="${eachObIca.details.objetoContrato}" /></td>
-										<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObIca.details.obligacion}&totalPagar=${eachObIca.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 											id="Detalle">Pagar</label></td>
@@ -309,7 +309,7 @@
 											<td><c:out value="${eachPubExtTax.details.numFormulario}" /></td>
 											<td><c:out value="${eachPubExtTax.details.numReferencia}" /></td>
 											<td><c:out value="${eachPubExtTax.details.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTax.details.obligacion}&totalPagar=${eachPubExtTax.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle">Pagar</label></td>
@@ -384,7 +384,7 @@
 											<td><c:out value="${eachObGas.details.numFormulario}" /></td>
 											<td><c:out value="${eachObGas.details.numReferencia}" /></td>
 											<td><c:out value="${eachObGas.details.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObGas.details.obligacion}&totalPagar=${eachObGas.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle">Pagar</label></td>
@@ -456,7 +456,7 @@
 											<td><c:out value="${eachDeli.details.numFormulario}" /></td>
 											<td><c:out value="${eachDeli.details.numReferencia}" /></td>
 											<td><c:out value="${eachDeli.details.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop" />">Generar ROP</a></td>
+											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeli.details.obligacion}&totalPagar=${eachDeli.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle">Pagar</label></td>
@@ -512,7 +512,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
+										value="<c:out value="Año gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledomatri"
@@ -659,7 +659,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
+										value="<c:out value="Año gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"

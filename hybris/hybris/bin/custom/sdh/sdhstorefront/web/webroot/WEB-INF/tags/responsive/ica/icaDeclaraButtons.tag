@@ -131,7 +131,7 @@
 
 		} else {
 
-			alert("No se pueden agregar m�s firmantes");
+			alert("No se pueden agregar más firmantes");
 
 		}
 	}

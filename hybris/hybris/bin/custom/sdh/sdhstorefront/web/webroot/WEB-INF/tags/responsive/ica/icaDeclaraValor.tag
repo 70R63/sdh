@@ -305,7 +305,7 @@
 			$($(".valor")[0]).parent().children().last().find(".dia_anoGravable").find("option:gt(0)").remove();
 
 		} else {
-			alert("No se pueden agregar mï¿½s registros");
+			alert("No se pueden agregar más registros");
 		}
 
 	}

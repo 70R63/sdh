@@ -162,7 +162,7 @@ ACC.vehiculos = {
 	            		{
 	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#publicidadExteriorDialogContent").html("");
-	            			$("#publicidadExteriorDialogContent").html("La declaración se ha generado exitosamente.")
+	            			$("#publicidadExteriorDialogContent").html("La Declaración se ha presentado correctamente.")
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();

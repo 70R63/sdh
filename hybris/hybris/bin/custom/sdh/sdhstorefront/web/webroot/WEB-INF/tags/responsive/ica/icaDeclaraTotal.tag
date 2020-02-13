@@ -240,14 +240,14 @@
  				<select id="" class="new_alto form-control tipoID" 
  					style="height: 48px;"> 
  					<option value="">Seleccionar</option> 
- 					<option value="CC">CC Cï¿½dula de ciudadania</option> 
- 					<option value="CE">CE Cï¿½dula de extranjerï¿½a</option> 
- 					<option value="NIT">NIT Nï¿½mero de identificaciï¿½n tributaria</option> 
+ 					<option value="CC">CC C&eacutedula de ciudadania</option> 
+ 					<option value="CE">CE C&eacutedula de extranjer&iacutea</option> 
+ 					<option value="NIT">NIT N&uacutemero de identificaci&oacuten tributaria</option> 
  					<option value="PA">PA Pasaporte</option> 
  					<option value="TI">TI Tarjeta de identidad</option> 
  					<option value="TIE">TIE Tarjeta de identidad de extranjero</option> 
  					<option value="NITE">NITE NIT extranjero</option> 
- 					<option value="NUIP">NUIP Nï¿½mero ï¿½nico de identificaciï¿½n 
+ 					<option value="NUIP">NUIP N&uacutemero unico de identificaci&oacuten 
  						personal</option> 
  				</select> 
  			</div> 
@@ -416,7 +416,7 @@ debugger;
 			elemento.checked = "";
 			
 		} else {
-			alert("No se pueden agregar mï¿½s registros");
+			alert("No se pueden agregar más registros");
 		}
 
 	}
@@ -477,7 +477,7 @@ debugger;
 					.val("")
 
 		} else {
-			alert("No se pueden agregar mï¿½s registros");
+			alert("No se pueden agregar más registros");
 		}
 
 	}

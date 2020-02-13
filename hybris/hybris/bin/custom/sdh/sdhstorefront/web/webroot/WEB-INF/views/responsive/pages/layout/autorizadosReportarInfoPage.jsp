@@ -15,7 +15,15 @@
 <script type="text/javascript">
 	function goBack() {
 		window.history.back();
-	}	
+	}
+	
+	function fncEnviarReporInfo(){
+		debugger;
+		
+		document.getElementById("btnEnviarReporInfo").disabled = true;
+		return true;
+		
+	}
 	
 	
 	window.onload = function() {
@@ -32,8 +40,10 @@
 			}
 		}
 		 $(".loader").fadeOut("slow");
+		 
+		 if($(".procesado") == true){
+				document.getElementById("btnEnviarReporInfo").disabled = false;	
+		}
 	}
 </script>
-
-
 

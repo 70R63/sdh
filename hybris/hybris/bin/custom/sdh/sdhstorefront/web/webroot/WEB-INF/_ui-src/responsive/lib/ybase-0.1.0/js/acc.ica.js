@@ -554,7 +554,7 @@ ACC.ica = {
 	            		{
 	            			$(".pagarbtn").attr("disabled", false);
 	            			$("#icaDialogContent").html("");
-	            			$("#dialogICA").html("La declaración se ha generado exitosamente.")
+	            			$("#dialogICA").html("La Declaración se ha presentado correctamente.")
 	            			
 	            			$("#downloadHelper").attr("href",data.urlDownload);
 	            			document.getElementById("downloadHelper").click();
