@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -54,12 +55,16 @@
 						disabled="disabled">
 				</div>
 			</div>
+			<c:set var="opuso" value="${fn:trim(vehiculosFormDeclaracion.opcionUso)}"/>
+			<c:if test="${fn:length(opuso) > 2}">
+				<c:set var="opuso" value="${fn:substring(opuso, 0, 2)}"/>
+			</c:if>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.opuso" /></label> <input id=""
 						name="" class="newalto form-control"
-						value='<spring:theme code="vehiculos.detalle.opuso.${vehiculosFormDeclaracion.opcionUso}"/>'
+						value='<spring:theme code="vehiculos.detalle.opuso.${opuso}"/>'
 						aria-required="true" type="text" maxlength="30"
 						disabled="disabled">
 
