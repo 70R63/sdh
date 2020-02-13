@@ -13,6 +13,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.ObligacionesRequest;
 import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraPublicidad;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
@@ -187,6 +188,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 		model.addAttribute("obligacionesFormuno", obligacionesFormuno);
 		model.addAttribute("customerData", customerData);
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(OBLIGACIONES_PENDIENTES_CMS_PAGE));
