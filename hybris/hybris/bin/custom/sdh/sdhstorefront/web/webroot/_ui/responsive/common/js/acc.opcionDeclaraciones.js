@@ -865,7 +865,8 @@ debugger;
                 if(data == "02"){
                     ACC.opcionDeclaraciones.promtConfirmation(url);
                 }else{
-                    return false;
+                    window.location.href = url;
+                    //return false;
                 }
            	},
             error : function() {
