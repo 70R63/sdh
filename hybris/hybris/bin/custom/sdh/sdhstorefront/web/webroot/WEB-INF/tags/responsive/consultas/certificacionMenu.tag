@@ -130,7 +130,7 @@
 		
 				<div class="row" id="table-predial" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table" id="table-predial1">
+				<table class="table tabPaginacion" id="table-predial1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -155,7 +155,7 @@
 
 		<div class="row" id="table-vehicular" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table" id="table-vehicular1">
+				<table class="table tabPaginacion" id="table-vehicular1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -190,7 +190,7 @@
 
 		<div class="row" id="table-ica" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table" id="table-ica1">
+				<table class="table tabPaginacion" id="table-ica1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -222,7 +222,7 @@
 
 		<div class="row" id="table-reteica" style="display: none;">
 			<div class="col-md-11 col-md-offset-1">
-				<table class="table" id="table-reteica1">
+				<table class="table tabPaginacion" id="table-reteica1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -257,7 +257,7 @@
 
 		<div class="row" id="table-publicidad" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table" id="table-publicidad1">
+				<table class="table tabPaginacion" id="table-publicidad1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -295,7 +295,7 @@
 		
 		<div class="row" id="table-gasolina" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table" id="table-gasolina1">
+				<table class="table tabPaginacion" id="table-gasolina1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
@@ -329,7 +329,7 @@
 		
 		<div class="row" id="table-delineacion" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table" id="table-delineacion1">
+				<table class="table tabPaginacion" id="table-delineacion1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "

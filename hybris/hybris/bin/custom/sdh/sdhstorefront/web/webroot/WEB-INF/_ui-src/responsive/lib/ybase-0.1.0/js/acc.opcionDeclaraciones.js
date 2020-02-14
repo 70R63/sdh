@@ -244,6 +244,8 @@ ACC.opcionDeclaraciones = {
 
 		debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.publicidadexterior.bindDataTable_Class_refresh();
+		ACC.opcionDeclaraciones.vaciarTablasInfo();
 		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
 			var claveImpuesto = $("#seleccion").val();  	       
 			var anoGravable = $("#aniograv").val(); 	       
@@ -265,6 +267,7 @@ ACC.opcionDeclaraciones = {
 //					ACC.opcionDeclaraciones.dataResponse_backup = dataResponse;
 					ACC.opcionDeclaraciones.mostrarErrores_certiPagos(dataResponse);
 					ACC.opcionDeclaraciones.updateFromResponseSeleccion_certiPagos(dataActual,dataResponse,null);					
+					ACC.publicidadexterior.bindDataTable_Class();
 //					ACC.opcionDeclaraciones.habilitarFiltroPeriodo(dataActual,dataResponse);
 				},
 				error : function() {
@@ -722,6 +725,7 @@ debugger;
 				
 				
 				if(infoActual.claveImpuesto == '0008'){
+					indiceTabla = 0;
 					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index,value1){
 						if(value1.numObjeto != ""){
 							$.each(infoResponse.customerData.delineacion, function (index,value2){
@@ -734,8 +738,9 @@ debugger;
 											'<td>' + value1.referencia + '</td>'+
 											'<td>' + value1.importe + '</td>'+
 											'<td>' + value1.moneda + '</td>'+
-											'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
+											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe + '"' +">" + "</td>"+
 											"</tr>");
+									indiceTabla++;
 								}
 							});
 						}	
