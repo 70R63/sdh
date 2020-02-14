@@ -829,7 +829,7 @@ debugger;
 									'<td>' + value.numPuertas + '</td>'+ 
 									'<td>' + value.blindado + '</td>'+ 
 									'<td>' + value.cilindraje + '</td>'+
-									'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracion(\''+url+'\',\''+value.placa+'\');">Presentar Declaracion</a> </td>'+
+									'<td><a href="#" onclick="ACC.opcionDeclaraciones.validarDeclaracion(\''+url+'\',\''+value.placa+'\');">Generar Declaracion</a> </td>'+
 									//'<td><a href="' + url + '">Presentar Declaracion</a> </td>'+
 									"</tr>");
 						}

@@ -387,7 +387,7 @@
 											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObGas.details.obligacion}&totalPagar=${eachObGas.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle">Pagar</label></td>
+												id="Detalle" onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGas.details.objetoContrato}')">Pagar</label></td>
 										</tr>
 									</c:forEach>
 
