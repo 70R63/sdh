@@ -3,14 +3,8 @@ package de.hybris.sdh.storefront.controllers.rest;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
-import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
-import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
-import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
-import de.hybris.sdh.core.pojos.responses.DetGasResponse;
-import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
-import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
-import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.pojos.requests.*;
+import de.hybris.sdh.core.pojos.responses.*;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
@@ -20,6 +14,7 @@ import de.hybris.sdh.facades.online.payment.data.OnlinePaymentSelectInputBoxData
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
+import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,19 +52,22 @@ public class SdhInfoObjectUseOptionController {
     @Resource(name = "sdhDetalleVehiculosService")
     SDHDetalleVehiculosService sdhDetalleVehiculosService;
 
-    private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
+    private static final Logger LOG = Logger.getLogger(SdhInfoObjectUseOptionController.class);
 
     @RequestMapping("/getUseOption")
 	public String getUseOption(@RequestParam(value="anioGravable", defaultValue="") String anioGravable,
                                    @RequestParam(value="periodo", defaultValue="") String periodo,
                                    @RequestParam(value="taxType", defaultValue="") String taxType,
-                                   @RequestParam(value="placa", defaultValue="") String placa) {
+                                   @RequestParam(value="placa", defaultValue="") String placa,
+                                   @RequestParam(value="cdu", defaultValue="") String cdu,
+                                   @RequestParam(value="numRadicado", defaultValue="") String numRadicado) {
         String opcionUso = null;
         LOG.info("getUseOptionSobreTasaGasolina");
         LOG.info("anioGravable: "+anioGravable);
         LOG.info("periodo: "+periodo);
         LOG.info("taxType: "+taxType);
         LOG.info("placa: "+placa);
+        LOG.info("cdu: "+cdu);
 
         if(Objects.nonNull(taxType)){
             if(taxType.equals("5")){//Sobretasa a la gasolina
@@ -78,6 +76,8 @@ public class SdhInfoObjectUseOptionController {
                 opcionUso = this.getOpcionUsoIca(anioGravable, periodo);
             }else if(taxType.equals("2")){ //Vehicular
                 opcionUso = this.getOpcionUsoVehicular(anioGravable, placa);
+            }else if(taxType.equals("6")){ //Delineacion Urbana
+                opcionUso = this.getOpcionUsoDelineacionUrbana(cdu, numRadicado);
             }
         }
 
@@ -161,6 +161,32 @@ public class SdhInfoObjectUseOptionController {
         return detalleVehiculosResponse.getInfo_declara().getInfoVeh().getOpcionUso();
     }
 
+    private String getOpcionUsoDelineacionUrbana(String cdu, String numRadicado){
+        InfoObjetoDelineacionRequest infoDelineacionRequest = new InfoObjetoDelineacionRequest();
+        CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+        InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
+        SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+        final ConsultaContribuyenteBPRequest contribuyenteRequest = new ConsultaContribuyenteBPRequest();
+        SDHValidaMailRolResponse detalleContribuyente;
 
+        contribuyenteRequest.setNumBP(customerModel.getNumBP());
+        detalleContribuyente = gasolinaService.consultaContribuyente(contribuyenteRequest, sdhConsultaContribuyenteBPService, LOG);
+
+        InfoDelineacionInput infoDelineacionInput = new InfoDelineacionInput();
+        infoDelineacionInput.setSelectedCDU(cdu);
+
+        infoDelineacionRequest.setNumBP(customerModel.getNumBP());
+        //infoDelineacionRequest.setAnoGravable(gasolinaService.getAnoGravableDU(detalleContribuyente.getDelineacion(), infoDelineacionInput));
+        infoDelineacionRequest.setAnoGravable("2020");
+        infoDelineacionRequest.setCdu(cdu);
+        infoDelineacionRequest.setNumRadicado(numRadicado);
+        infoDelineacionRequest.setTipoLicencia("");
+        LOG.info(infoDelineacionRequest);
+
+        infoDelineacionResponse =  gasolinaService.consultaInfoDelineacion(infoDelineacionRequest, sdhDetalleGasolinaWS, LOG);
+        LOG.info(infoDelineacionResponse);
+
+        return infoDelineacionResponse.getInfoDeclara().getOpcionUso();
+    }
 
 }

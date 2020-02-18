@@ -99,10 +99,10 @@
 				</div>
 				<div class="col-md-4  ">
 					<div class="form-group ">
-						<!-- 				<button class="btn btn-primary btn-lg" type="button" -->
-						<!-- 					id="declaradelibutton" disabled="disabled"> -->
-						<%-- 					<spring:theme code="delineacion.urbana.radicados.declaracion" /> --%>
-						<!-- 				</button> -->
+						<sf:button class="btn btn-primary btn-lg" name="action"
+                            id="declaradelibutton1" value="declaracion" disabled="true" onclick="formValidator();">
+                            <spring:theme code="delineacion.urbana.radicados.generar.declaracion" />
+                        </sf:button>
 						<sf:button class="btn btn-primary btn-lg" name="action"
 							id="declaradelibutton1" value="declaracion" disabled="true">
 							<spring:theme code="delineacion.urbana.radicados.generar.declaracion" />
@@ -164,4 +164,32 @@
 		}
 
 	}
+
+	function formValidator(){
+	    var hiddenCdu = document.getElementById("hiddenCdu").value;
+
+	    var nowUrl = window.location.href;
+        var targetUrl = "infoObject/getUseOption?cdu="+hiddenCdu+"&taxType=6";
+        currentUrl = nowUrl.replace("contribuyentes/delineacion-urbana",targetUrl);
+
+	    $.ajax({
+            url : currentUrl,
+           	type : "GET",
+        	success : function(dataResponse) {
+                if(dataResponse == "01"){
+                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                    if (r == true) {
+                        return true;
+                    } else {
+                        window.location.href = nowUrl;
+                    }
+                }else{
+                   return true;
+                 }
+        	},
+        	error : function() {
+        	}
+        });
+	}
+
 </script>

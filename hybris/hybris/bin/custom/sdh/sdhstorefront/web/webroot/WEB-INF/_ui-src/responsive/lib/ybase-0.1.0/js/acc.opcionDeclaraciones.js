@@ -284,6 +284,8 @@ ACC.opcionDeclaraciones = {
 
 		debugger;
 		ACC.opcionDeclaraciones.ocultarTablas();
+		ACC.publicidadexterior.bindDataTable_Class_refresh();
+		ACC.opcionDeclaraciones.vaciarTablasInfo();
 		if(ACC.opcionDeclaraciones.validarAntesSubmit()){
 	        var claveImpuesto = $("#seleccion").val();  	       
 	        var anoGravable = $("#aniograv").val();
@@ -301,6 +303,7 @@ ACC.opcionDeclaraciones = {
 				type : "GET",
 				success : function(dataResponse) {
 					ACC.opcionDeclaraciones.updateFromResponseSeleccion(dataActual,dataResponse);
+					ACC.publicidadexterior.bindDataTable_Class();
 				},
 				error : function() {
 					alert("Error procesar la solicitud");	

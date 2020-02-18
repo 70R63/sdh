@@ -882,8 +882,8 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "0302______", "02", "Por Vehículos");
 		//Facturación-Por Predial
 		agregarElementoTramites(elementos, "030100____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "030101____", "01", "Descarga de Factura", "ZT06", "A1ZTRT0003Z016");
-		agregarElementoTramites(elementos, "030102____", "02", "Descuento adicional del 1%", "ZT06", "A1ZTRT0003Z017");
+		//		agregarElementoTramites(elementos, "030101____", "01", "Descarga de Factura", "ZT06", "A1ZTRT0003Z016");
+		//		agregarElementoTramites(elementos, "030102____", "02", "Descuento adicional del 1%", "ZT06", "A1ZTRT0003Z017");
 		agregarElementoTramites(elementos, "030103____", "03", "Reexpedicion de facturas", "ZT06", "A1ZTRT0003Z018");
 		agregarElementoTramites(elementos, "030104____", "04", "Solicitud de moficación de Factura");
 		agregarElementoTramites(elementos, "030105____", "05", "Solicitud de anulacion de facturas ");
@@ -912,7 +912,7 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "03010504__", "04", "Exclusión total del  objeto", "ZT07", "A1ZTRT0004Z057");
 		//Facturación-Por Vehículos
 		agregarElementoTramites(elementos, "030200____", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "030201____", "01", "Descarga de Factura", "ZT06", "A1ZTRT0003Z021");
+		//		agregarElementoTramites(elementos, "030201____", "01", "Descarga de Factura", "ZT06", "A1ZTRT0003Z021");
 		agregarElementoTramites(elementos, "030202____", "02", "Reexpedición de Factura", "ZT06", "A1ZTRT0003Z022");
 		agregarElementoTramites(elementos, "030203____", "03", "Moficación de Factura");
 		agregarElementoTramites(elementos, "030204____", "04", "Anulación de Factura");
@@ -1011,7 +1011,7 @@ public class TramitesCrearPageController extends AbstractPageController
 	}
 
 	private void agregarElementoTramites_rol(final List<TramiteOpcion> elementos, final String claveBusqueda,
-			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String rolAccion, String rolIndicador)
+			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String rolAccion, final String rolIndicador)
 	{
 		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion),
 				new TramiteRolAccion(rolAccion, rolIndicador)));
