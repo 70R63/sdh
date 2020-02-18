@@ -9,6 +9,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <div class="loader"></div>
 
+<input type="hidden" id="hiddenCdu" name="hiddenCdu" value="">
 <delineacionUrbana:delineacionUrbanaIDs />
 <delineacionUrbana:delineacionUrbanaCDUs />
 <delineacionUrbana:delineacionUrbanaRadicados />
