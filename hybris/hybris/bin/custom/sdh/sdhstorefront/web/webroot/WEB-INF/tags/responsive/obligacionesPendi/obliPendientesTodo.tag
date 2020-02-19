@@ -82,7 +82,7 @@
 										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObPred.details.obligacion}&totalPagar=${eachObPred.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-											id="Detalle">Pagar</label></td>
+											id="Detalle" onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPred.details.objetoContrato}')">Pagar</label></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -160,7 +160,7 @@
 										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehi.details.obligacion}&totalPagar=${eachObVehi.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-											id="Detalle">Pagar</label></td>
+											id="Detalle" onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehi.details.objetoContrato}')">Pagar</label></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -235,7 +235,7 @@
 										<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObIca.details.obligacion}&totalPagar=${eachObIca.details.obligacion}" />">Generar ROP</a></td>
 										<td><label class="control-label"
 											style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-											id="Detalle">Pagar</label></td>
+											id="Detalle" onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIca.details.objetoContrato}')">Pagar</label></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -312,7 +312,7 @@
 											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTax.details.obligacion}&totalPagar=${eachPubExtTax.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle">Pagar</label></td>
+												id="Detalle" onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTax.details.objetoContrato}')">Pagar</label></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -459,7 +459,7 @@
 											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeli.details.obligacion}&totalPagar=${eachDeli.details.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle">Pagar</label></td>
+												id="Detalle" onclick="pagarEnLinea('5106','${eachDeli.anioGravable}','','${eachDeli.details.objetoContrato}')">Pagar</label></td>
 										</tr>
 									</c:forEach>
 								</tbody>
