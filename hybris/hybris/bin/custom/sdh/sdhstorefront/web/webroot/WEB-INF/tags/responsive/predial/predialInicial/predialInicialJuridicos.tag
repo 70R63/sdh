@@ -37,8 +37,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.inicial.juridicos.tipdoc" /></label> <input id="" name=""
-						class="newalto form-control areaterreno" disabled type="text"
-						value="" maxlength="240"></input>
+						class="newalto form-control areaterreno tipdocPredial" disabled type="text"
+						value="" maxlength="240" id="tipdocPredial"></input>
 				</div>
 			</div>
 			<div class="col-md-3">
