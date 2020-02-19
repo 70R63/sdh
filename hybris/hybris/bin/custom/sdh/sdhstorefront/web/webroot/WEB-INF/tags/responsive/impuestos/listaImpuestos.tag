@@ -291,14 +291,16 @@
 									value='tipoLicenciaSeleccionada_${item.cdu}' />
 								<form:hidden path="selectedCDU" value="${item.cdu}" />
 								<form:hidden path="selectedRadicado" value="" />
-								<form:hidden path="selectedTipoLicencia" value=""
-									id="${idCampoTipoLicencia}" />
+								<form:hidden path="selectedTipoLicencia" value="" id="${idCampoTipoLicencia}" />
 								<form:hidden path="selectedAnoPresDeclaracion" value="" />
-
 								<button type="submit" class="btn-link" id="btn_${item.cdu}"
-									name="action" value="declaracion">
+									name="action" value="" onClick="return validarDelineacionform();">
 									<spring:theme code="delineacion.urbana.radicados.declara" />
 								</button>
+								<button type="submit" class="btn-link" id="auxbtn_${item.cdu}"
+                                    name="action" value="declaracion" hidden="hidden">
+                                	<spring:theme code="delineacion.urbana.radicados.declara" />
+                                </button>
 							</form:form>
 						</div>
 					</div>
@@ -477,5 +479,37 @@
             window.location.href = "presentar-declaracion";
         }
     }
+
+    function validarDelineacionform(){
+        var hiddenCdu = document.getElementById("selectedCDU").value;
+        var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
+
+        var nowUrl = window.location.href;
+        var targetUrl = "infoObject/getUseOption?cdu="+hiddenCdu+"&taxType=6";
+        currentUrl = nowUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
+
+	    $.ajax({
+            url : currentUrl,
+           	type : "GET",
+        	success : function(dataResponse) {
+                if(dataResponse == "02"){
+                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                    if (r == true) {
+                        btnSelected.click();
+                    } else {
+                        return false;
+                    }
+                }else{
+                   btnSelected.click();
+                 }
+        	},
+        	error : function() {
+        	}
+        });
+
+        return false;
+
+    }
+
 </script>
 
