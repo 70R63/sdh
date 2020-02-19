@@ -40,10 +40,7 @@
 		$(".loader").fadeOut("slow");
 	}
 
-	function mostrar() {
-		var show = document.getElementById('InicialDetalle');
-		show.style.display = 'block';
-	}
+	
 
 	
 function datatable(e) {

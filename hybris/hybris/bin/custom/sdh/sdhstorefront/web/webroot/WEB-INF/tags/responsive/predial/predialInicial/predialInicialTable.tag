@@ -30,17 +30,6 @@
 	</div>
 
 	<form:form>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.inicial.table.buscar" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
-						maxlength="240"></input>
-				</div>
-			</div>
-		</div>
-
 		<div class="row mt-3">
 			<div class="col-md-10 d-flex align-items-center">
 				<div class="table-responsive">
@@ -64,11 +53,15 @@
 								<tr>
 									<td><c:out value="${current.CHIP}" /></td>
 									<td><c:out value="${current.matrInmobiliaria}" /></td>
-									<td></td>
+									<td><c:out value="${current.direccionPredio}" /></td>
 									<td><c:out value="${current.contratoArrenda}" /></td>
 									<td><label style="color: #0358d8 !important"
-										class="text-capitalize !important labelVerDetVeh" onclick="mostrar()">
-											<spring:theme code="predial.inicial.table.ver" />
+										data-anioGravable="${current.anioGravable}"
+										data-chip="${current.CHIP}"
+										data-matrInmobiliaria="${current.matrInmobiliaria}"
+										class="text-capitalize !important showDetailPredio"
+										id="showDetailPredio"> <spring:theme
+												code="predial.inicial.table.ver" />
 									</label></td>
 								</tr>
 							</c:forEach>

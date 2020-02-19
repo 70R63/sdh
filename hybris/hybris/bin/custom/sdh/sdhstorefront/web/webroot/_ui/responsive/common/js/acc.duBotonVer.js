@@ -18,6 +18,7 @@ ACC.duBotonVer = {
 			$("#selectedCDU").val(valorCDU);
 
 			var data = {};
+
 			data.cdu = valorCDU;
 
 			$.ajax({

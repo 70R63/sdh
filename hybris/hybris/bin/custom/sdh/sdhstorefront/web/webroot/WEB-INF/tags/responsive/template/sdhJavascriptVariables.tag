@@ -133,6 +133,7 @@
 
 			ACC.tramiteExitosoURL = "<c:url value='/contribuyentes/tramites' />";
 			
+			ACC.predialDetalleURL="<c:url value='/contribuyentes/predialunificado_inicio' />";
 			
 		  	ACC.currentURL = "${currentURL}";
 

@@ -11,7 +11,7 @@
 <div class="container_menu">
 	<div class="row ">
 		<c:if test="${hasCORol }">
-			<div class="card col-xs-12 col-sm-12 col-md-11 col-lg-9 col-lg-offset-3">
+			<div class="card col-xs-12 col-sm-12 col-md-3 col-lg-3 col-lg-offset-3">
 				<a href="<c:url value='/setRole?role=sdh_01' />">
 					<div class=" card-section col-xs-5 col-sm-2 col-md-2 col-lg-1">
 						<img title="Contribuyente" alt="Contribuyente" class="card-section-content imgagen_tran" src="${themeResourcePath}/images/Contribuyente.png" width="91">
