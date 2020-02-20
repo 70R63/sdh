@@ -1,7 +1,7 @@
 ACC.predial = {
 
 	_autoload : [ "bindoptionNo", "bindprophorizontal", "binbuttonPrecalculo",
-			"bindDetallePredial" ],
+			"bindDetallePredial","bindDeclaracionPredial"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -60,21 +60,32 @@ ACC.predial = {
 			var anio = $.trim($(this).attr("data-anioGravable"));
 			var chip = $.trim($(this).attr("data-chip"));
 			var matric = $.trim($(this).attr("data-matrInmobiliaria"));
-
+			
+			$('#DatosEconomicos tbody').empty();
+			$('#DatosFisicosPredial tbody').empty();
+			$('#DatosLiquidaPredial tbody').empty();
+			$('#MarcasPredial tbody').empty();
+				
+		
 			var data = {};
 
 			data.anioGravable = anio;
-			data.chip = chip;
+			data.CHIP = chip;
 			data.matrInmobiliaria = matric;
+			 debugger;
+			$("#reCHIP").val(data.CHIP);
+			$("#rematrInmobiliaria").val(data.matrInmobiliaria);
+			$("#reanioGravable").val(data.anioGravable);
 
 			$.ajax({
 				url : ACC.predialDetalleURL,
 				data : data,
-				type : "POST",
-				success : function(data) {
+				type : "GET",
+				success : function(result) {
 					debugger;
-					$(".chip").val(data.CHIP);
-					var econo = data.datosEconomicos;
+					console.log(result);
+					$(".chip").val(result.chip);
+					var econo = result.datosEconomicos;
 					$('#DatosEconomicos')
 					.append(
 							"<tr>"
@@ -89,8 +100,81 @@ ACC.predial = {
 									+ '" /></td>'
 									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 									+ econo.avaluoMejoraConstruccion + '" /></td>');
+					
+					var datJur = result.datosJuridicos;
+					$("#JurOtros").val(datJur.otros);
+					$("#JurProp").val(datJur.porcentajePropiedad);
+					$("#JurCal").val(datJur.calidadSujecion);
+					$("#JurTipDoc").val(result.tipDoc);
+					$("#JurNom").val(result.compleName);
+					$("#JurNumDoc").val(result.numDoc);
+					
+					
+					var datFis = result.datosFisicos;
+					$('#DatosFisicosPredial')
+					.append(
+							"<tr>"
+									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+									+ datFis.areaConstruida
+									+ '" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+									+ datFis.areaTerrenoCatastro
+									+ '" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+									+ datFis.codigoEstrato
+									+ '" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+									+ datFis.areaTerrenoMejora
+									+ '" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+									+ datFis.areaTerrenoMatrizMejora
+									+ '" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+									+ datFis.areaTerrenoMejoraCatastro + '" /></td>');
+					
+					var datLiq = result.estrLiquidacionPredial;
+					
+					$('#DatosLiquidaPredial')
+					.append(
+							"<tr>"
+									+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+									+ datLiq.baseGravable
+									+ '" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+									+ datLiq.destinoHacendario
+									+ '" /></td>'
+									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+									+ datLiq.tarifaLiquidacion
+									+ '" /></td>'
+									+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+									+ datLiq.valorImpuesto + '" /></td>');
+					
+					var marc = result.marcas;
+					
+					if (marc != null) {
+						for (var i = 0; i < marc.length; i++) {
+							$('#MarcasPredial')
+									.append(
+											"<tr>"
+													+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+													+ marc[i].marca
+													+ '" /></td>'
+													+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+													+ marc[i].tipoMarca
+													+ '" /></td>'
+													+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+													+ marc[i].porcMarca
+													+ '" /></td>'
+													+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+													+ marc[i].valorExencion
+													+ '" /></td>'
+													+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+													+ marc[i].conservacionHistorica + '" /></td>');
 
-				
+						}
+					
+
+					}
 				},
 				error : function() {
 					alert("ERROR");
@@ -98,6 +182,38 @@ ACC.predial = {
 			});
 
 		});
+	},
+	
+	bindDeclaracionPredial: function() {
+		$(document).on("click", "#generarDeclaracionPredial", function(e) {
+			e.preventDefault();
+			debugger;
+			var chip = $("#reCHIP").val();
+			var inmo = $("#rematrInmobiliaria").val();
+			var anio = $("#reanioGravable").val();
+			
+			var data = {};
+			
+			data.anioGravable = anio;
+			data.CHIP = chip;
+			data.matrInmobiliaria = inmo;
+			
+			$.ajax({
+				url : ACC.predialDeclaraURL,
+				data : data,
+				type : "GET",
+				success : function(result) {
+					debugger;
+					console.log(result);
+				},
+				error : function() {
+					alert("ERROR");
+				}
+			});
+
+
+		});
 	}
+
 
 };

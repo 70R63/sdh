@@ -1,7 +1,7 @@
 ACC.predial = {
 
 	_autoload : [ "bindoptionNo", "bindprophorizontal", "binbuttonPrecalculo",
-			"bindDetallePredial"],
+			"bindDetallePredial","bindDeclaracionPredial"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -65,15 +65,17 @@ ACC.predial = {
 			$('#DatosFisicosPredial tbody').empty();
 			$('#DatosLiquidaPredial tbody').empty();
 			$('#MarcasPredial tbody').empty();
-			
-			
-			
-
+				
+		
 			var data = {};
 
 			data.anioGravable = anio;
-			data.chip = chip;
+			data.CHIP = chip;
 			data.matrInmobiliaria = matric;
+			 debugger;
+			$("#reCHIP").val(data.CHIP);
+			$("#rematrInmobiliaria").val(data.matrInmobiliaria);
+			$("#reanioGravable").val(data.anioGravable);
 
 			$.ajax({
 				url : ACC.predialDetalleURL,
@@ -180,6 +182,38 @@ ACC.predial = {
 			});
 
 		});
+	},
+	
+	bindDeclaracionPredial: function() {
+		$(document).on("click", "#generarDeclaracionPredial", function(e) {
+			e.preventDefault();
+			debugger;
+			var chip = $("#reCHIP").val();
+			var inmo = $("#rematrInmobiliaria").val();
+			var anio = $("#reanioGravable").val();
+			
+			var data = {};
+			
+			data.anioGravable = anio;
+			data.CHIP = chip;
+			data.matrInmobiliaria = inmo;
+			
+			$.ajax({
+				url : ACC.predialDeclaraURL,
+				data : data,
+				type : "GET",
+				success : function(result) {
+					debugger;
+					console.log(result);
+				},
+				error : function() {
+					alert("ERROR");
+				}
+			});
+
+
+		});
 	}
+
 
 };

@@ -5,10 +5,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<div class="container">
+<spring:url value="/contribuyentes/predialunificado_1" var="declarar"
+	htmlEscape="false" />
+<sf:form action="${declarar}" method="POST"
+	modelAttribute="predialFormIni" id="declarar">
+	<div class="container">
 
 
 		<div class="row">
@@ -24,7 +28,8 @@
 		<div class="row mt-3">
 			<div class="col-md-10 d-flex align-items-center">
 				<div class="table-responsive text-center">
-					<table class="table table-bordered MarcasPredial" id="MarcasPredial">
+					<table class="table table-bordered MarcasPredial"
+						id="MarcasPredial">
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme
@@ -40,34 +45,41 @@
 							</tr>
 						</thead>
 						<tbody>
-							
+
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-md-12 centercol-md-8 text-center">
-			<button style="margin-top: 3px;" id="" class="btn btn-secondary btn-lg"
-				type="button">
-				<spring:theme code="predial.inicial.marcas.btnregresar" />
-			</button>
 
-			<button class="btn btn-primary btn-lg" type="submit" id="action"
-				name="pagar" value="pagar">
-				<spring:theme code="predial.inicial.marcas.btndescar" />
-			</button>
-			
-			
-			<button class="btn btn-primary btn-lg" type="submit" id="action"
-				name="pagar" value="pagar">
-				<spring:theme code="predial.inicial.marcas.generar" />
-			</button>
+			<sf:input type="hidden" id="reCHIP" path="CHIP" /> 
+			<sf:input type="hidden" id="rematrInmobiliaria" path="matrInmobiliaria"/> 
+			<sf:input type="hidden" id="reanioGravable" path="anioGravable" />
+			<sf:input type="hidden" id="renumBP" path="numBP" />
+			<div class="col-md-12 centercol-md-8 text-center">
+				<button style="margin-top: 3px;" id=""
+					class="btn btn-secondary btn-lg" type="button">
+					<spring:theme code="predial.inicial.marcas.btnregresar" />
+				</button>
+
+				<button class="btn btn-primary btn-lg" type="button" id="action"
+					name="pagar" value="pagar">
+					<spring:theme code="predial.inicial.marcas.btndescar" />
+				</button>
+
+
+				<button class="btn btn-primary btn-lg" type="submit" id="" name=""
+					value="">
+					<spring:theme code="predial.inicial.marcas.generar" />
+				</button>
+
+			</div>
 
 		</div>
-		</div>
 
-</div>
+	</div>
+</sf:form>
 
 
 

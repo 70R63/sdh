@@ -48,9 +48,9 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
+								<td><c:out value="${predialFormdos.tipDoc}" /></td>
+								<td><c:out value="${predialFormdos.numDoc}" /></td>
+								<td><c:out value="${predialFormdos.compleName}" /></td>
 							</tr>
 						</tbody>
 					</table>
