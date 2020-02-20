@@ -365,7 +365,7 @@ ACC.vehiculos = {
 				type : "GET",
 				success : function(data) {
 					ACC.vehiculos.fillFieldsFromData(data);
-
+                    document.getElementById('opcionUso').value = data.opcionUso;
 				},
 				error : function() {
 				}
