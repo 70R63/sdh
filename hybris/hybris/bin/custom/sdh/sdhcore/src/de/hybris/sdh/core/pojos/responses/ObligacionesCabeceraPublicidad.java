@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Maria Luisa Torres
  *
@@ -13,8 +16,8 @@ public class ObligacionesCabeceraPublicidad
 	private String anioGravable;
 	private String numResolucion;
 	private String orientacionValla;
-	private ObligacionesDetallePublicidad details;
-	
+	private List<ObligacionesDetallePublicidad> details;
+
 	/**
 	 * @return the anioGravable
 	 */
@@ -22,7 +25,7 @@ public class ObligacionesCabeceraPublicidad
 	{
 		return anioGravable;
 	}
-	
+
 	/**
 	 * @return the numResolucion
 	 */
@@ -30,7 +33,7 @@ public class ObligacionesCabeceraPublicidad
 	{
 		return numResolucion;
 	}
-	
+
 	/**
 	 * @return the orientacionValla
 	 */
@@ -38,15 +41,8 @@ public class ObligacionesCabeceraPublicidad
 	{
 		return orientacionValla;
 	}
-	
-	/**
-	 * @return the details
-	 */
-	public ObligacionesDetallePublicidad getDetails()
-	{
-		return details;
-	}
-	
+
+
 	/**
 	 * @param anioGravable
 	 *           the anioGravable to set
@@ -55,7 +51,7 @@ public class ObligacionesCabeceraPublicidad
 	{
 		this.anioGravable = anioGravable;
 	}
-	
+
 	/**
 	 * @param numResolucion
 	 *           the numResolucion to set
@@ -64,7 +60,7 @@ public class ObligacionesCabeceraPublicidad
 	{
 		this.numResolucion = numResolucion;
 	}
-	
+
 	/**
 	 * @param orientacionValla
 	 *           the orientacionValla to set
@@ -73,14 +69,24 @@ public class ObligacionesCabeceraPublicidad
 	{
 		this.orientacionValla = orientacionValla;
 	}
-	
+
+	/**
+	 * @return the details
+	 */
+	public List<ObligacionesDetallePublicidad> getDetails()
+	{
+		return details;
+	}
+
 	/**
 	 * @param details
 	 *           the details to set
 	 */
-	public void setDetails(final ObligacionesDetallePublicidad details)
+	public void setDetails(final List<ObligacionesDetallePublicidad> details)
 	{
 		this.details = details;
 	}
+
+
 
 }

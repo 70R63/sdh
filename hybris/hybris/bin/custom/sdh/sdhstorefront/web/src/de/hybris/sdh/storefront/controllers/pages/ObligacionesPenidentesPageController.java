@@ -28,6 +28,7 @@ import de.hybris.sdh.core.services.SDHObligacionesICAService;
 import de.hybris.sdh.core.services.SDHObligacionesPredialService;
 import de.hybris.sdh.core.services.SDHObligacionesPublicidadService;
 import de.hybris.sdh.core.services.SDHObligacionesVehiculosService;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.forms.ObligacionesForm;
 
 import java.util.stream.Collectors;
@@ -35,6 +36,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,6 +94,8 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 	@Resource(name = "sdhObligacionesVehiculosService")
 	SDHObligacionesVehiculosService sdhObligacionesVehiculosService;
 
+	private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
+
 
 	@RequestMapping(value = "/contribuyentes/consultas/obligaciones", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -112,6 +116,36 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final ObligacionesGasolinaResponse obligacionesGasolinaResponse = mapper.readValue(
+					sdhObligacionesGasolinaService.obligacionesRequest(obligacionesRequest), ObligacionesGasolinaResponse.class);
+
+			obligacionesFormuno.setHeadergas(obligacionesGasolinaResponse.getHeader().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
+
+			final ObligacionesICAResponse obligacionesICAResponse = mapper
+					.readValue(sdhObligacionesICAService.obligacionesRequest(obligacionesRequest), ObligacionesICAResponse.class);
+
+			obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
+
+			final ObligacionesDeliResponse obligacionesDeliResponse = mapper
+					.readValue(sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest), ObligacionesDeliResponse.class);
+
+			obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+
+			final ObligacionesPredialResponse obligacionesPredResponse = mapper.readValue(
+					sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest), ObligacionesPredialResponse.class);
+
+			obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getAniogravable())).collect(Collectors.toList()));
+
+			final ObligacionesVehiculosResponse obligacionesVehiResponse = mapper.readValue(
+					sdhObligacionesVehiculosService.obligacionesRequest(obligacionesRequest), ObligacionesVehiculosResponse.class);
+
+			obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+
 
 
 			final ObligacionesResponse obligacionesResponse = mapper
@@ -151,37 +185,10 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			obligacionesFormuno.setHeader(obligacionesResponse.getHeader().stream()
 					.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
 
-			final ObligacionesGasolinaResponse obligacionesGasolinaResponse = mapper.readValue(
-					sdhObligacionesGasolinaService.obligacionesRequest(obligacionesRequest), ObligacionesGasolinaResponse.class);
-
-			obligacionesFormuno.setHeadergas(obligacionesGasolinaResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
-
-			final ObligacionesICAResponse obligacionesICAResponse = mapper
-					.readValue(sdhObligacionesICAService.obligacionesRequest(obligacionesRequest), ObligacionesICAResponse.class);
-
-			obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
-
-			final ObligacionesDeliResponse obligacionesDeliResponse = mapper
-					.readValue(sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest), ObligacionesDeliResponse.class);
-
-			obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
-
-			final ObligacionesPredialResponse obligacionesPredResponse = mapper.readValue(
-					sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest), ObligacionesPredialResponse.class);
-
-			obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getAniogravable())).collect(Collectors.toList()));
-
-			final ObligacionesVehiculosResponse obligacionesVehiResponse = mapper.readValue(
-					sdhObligacionesVehiculosService.obligacionesRequest(obligacionesRequest), ObligacionesVehiculosResponse.class);
-
-			obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
 		}
 		catch (final Exception e)
 		{
+			LOG.error("error generating declaration : " + e.getMessage());
 			//LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
 			//	GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}

@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Maria Luisa Torres
  *
@@ -14,7 +17,7 @@ public class ObligacionesCabeceraDeli
 	private String cdu;
 	private String chip;
 	private String direccion;
-	private ObligacionesDetallePublicidad details;
+	private List<ObligacionesDetallePublicidad> details;
 	/**
 	 * @return the anioGravable
 	 */
@@ -38,13 +41,8 @@ public class ObligacionesCabeceraDeli
 	{
 		return chip;
 	}
-	/**
-	 * @return the details
-	 */
-	public ObligacionesDetallePublicidad getDetails()
-	{
-		return details;
-	}
+
+
 
 	/**
 	 * @param anioGravable
@@ -73,14 +71,6 @@ public class ObligacionesCabeceraDeli
 		this.chip = chip;
 	}
 
-	/**
-	 * @param details
-	 *           the details to set
-	 */
-	public void setDetails(final ObligacionesDetallePublicidad details)
-	{
-		this.details = details;
-	}
 
 	/**
 	 * @return the direccion
@@ -98,6 +88,25 @@ public class ObligacionesCabeceraDeli
 	{
 		this.direccion = direccion;
 	}
+
+	/**
+	 * @return the details
+	 */
+	public List<ObligacionesDetallePublicidad> getDetails()
+	{
+		return details;
+	}
+
+	/**
+	 * @param details
+	 *           the details to set
+	 */
+	public void setDetails(final List<ObligacionesDetallePublicidad> details)
+	{
+		this.details = details;
+	}
+
+
 
 
 }

@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Maria Luisa Torres
  *
@@ -14,7 +17,7 @@ public class ObligacionesCabeceraICA
 	private String noIdentificacion;
 	private String anioGravable;
 	private String periodo;
-	private ObligacionesDetalleIca details;
+	private List<ObligacionesDetalleIca> details;
 
 	/**
 	 * @return the tipoIdentificacion
@@ -87,7 +90,7 @@ public class ObligacionesCabeceraICA
 	/**
 	 * @return the details
 	 */
-	public ObligacionesDetalleIca getDetails()
+	public List<ObligacionesDetalleIca> getDetails()
 	{
 		return details;
 	}
@@ -96,10 +99,11 @@ public class ObligacionesCabeceraICA
 	 * @param details
 	 *           the details to set
 	 */
-	public void setDetails(final ObligacionesDetalleIca details)
+	public void setDetails(final List<ObligacionesDetalleIca> details)
 	{
 		this.details = details;
 	}
+
 
 
 }
