@@ -6,21 +6,21 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="predial"
+<%@ taglib prefix="predialIni"
 	tagdir="/WEB-INF/tags/responsive/predial/predialInicial"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
 <div class="loader"></div>
 
-<predial:predialInicialTable></predial:predialInicialTable>
+<predialIni:predialInicialTable></predialIni:predialInicialTable>
 
 
 <div class="InicialDetalle" id="InicialDetalle" style="display: none">
-<predial:predialInicialJuridicos />
-	<predial:predialInicialEconomicos />
-	<predial:predialInicialFisicos />
-	<predial:predialInicialLiquidacion />
-	<predial:predialInicialMarcas />
+<predialIni:predialInicialJuridicos />
+	<predialIni:predialInicialEconomicos />
+	<predialIni:predialInicialFisicos />
+	<predialIni:predialInicialLiquidacion />
+	<predialIni:predialInicialMarcas />
 </div>
 
 <script>

@@ -100,7 +100,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.chip" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predial.CHIP}"
 						maxlength="240"></input>
 				</div>
 			</div>

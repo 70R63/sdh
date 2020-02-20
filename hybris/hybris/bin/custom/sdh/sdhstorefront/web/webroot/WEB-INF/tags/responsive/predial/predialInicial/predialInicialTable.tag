@@ -49,7 +49,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${predial}" var="current">
+							<c:forEach items="${predial.predial}" var="current">
 								<tr>
 									<td><c:out value="${current.CHIP}" /></td>
 									<td><c:out value="${current.matrInmobiliaria}" /></td>
@@ -57,7 +57,7 @@
 									<td><c:out value="${current.contratoArrenda}" /></td>
 									<td><label style="color: #0358d8 !important"
 										data-anioGravable="${current.anioGravable}"
-										data-chip="${current.CHIP}"
+										data-CHIP="${current.CHIP}"
 										data-matrInmobiliaria="${current.matrInmobiliaria}"
 										class="text-capitalize !important showDetailPredio"
 										id="showDetailPredio"> <spring:theme
