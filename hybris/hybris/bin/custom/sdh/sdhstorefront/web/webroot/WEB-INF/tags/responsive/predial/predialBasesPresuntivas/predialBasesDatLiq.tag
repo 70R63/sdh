@@ -27,15 +27,16 @@
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.porcepropiedad" /></label> <input
 						id="" name="" class="newalto form-control" disabled type="text"
-						value="" maxlength="240"></input><label class="control-label"><spring:theme
+						value="${predialFormbases.datosJuridicos.porcentajePropiedad}" maxlength="240"></input><label class="control-label"><spring:theme
 							code="%" /></label>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datliquidacion.destino" /></label> <select
-						id="" name="" class="newalto form-control"><option>Seleccionar</option></select>
+							code="predial.basespresun.datliquidacion.destino" /></label> <input id=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.estrLiquidacionPredial.destinoHacendario}"
+						maxlength="240"></input></select>
 				</div>
 			</div>
 		</div>
@@ -46,7 +47,7 @@
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.calidad" /></label> <input
 						id="" name="" class="newalto form-control" disabled type="text"
-						value="" maxlength="240"></input>
+						value="${predialFormbases.datosJuridicos.calidadSujecion}" maxlength="240"></input>
 				</div>
 			</div>
 
@@ -54,7 +55,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.basegrav" /></label> <input
-						id="" name="" class="newalto form-control" type="text" value=""
+						id="" name="" class="newalto form-control" type="text" value="${predialFormbases.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -66,7 +67,7 @@
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.tarliqui" /></label> <input
 						id="" name="" class="newalto form-control" disabled type="text"
-						value="" maxlength="240"></input>
+						value="${predialFormbases.estrLiquidacionPredial.tarifaLiquidacion}" maxlength="240"></input>
 				</div>
 			</div>
 		</div>

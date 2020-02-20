@@ -48,9 +48,9 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
+								<td><c:out value="${predialFormocho.tipDoc}" /></td>
+								<td><c:out value="${predialFormocho.numDoc}" /></td>
+								<td><c:out value="${predialFormocho.compleName}" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -74,13 +74,13 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.generales.anigrav" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormocho.anioGravable}"
 						maxlength="240"></input>
 				</div>
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.generales.opuso" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormocho.opcionuso}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.generales.matricula" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormocho.matrInmobiliaria}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -98,7 +98,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.generales.chip" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormocho.CHIP}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -106,7 +106,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.generales.cedula" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormocho.estrDatosGenerales.cedulaCatastral}"
 						maxlength="240"></input>
 				</div>
 			</div>
