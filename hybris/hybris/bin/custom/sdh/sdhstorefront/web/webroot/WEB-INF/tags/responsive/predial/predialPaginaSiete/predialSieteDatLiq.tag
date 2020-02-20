@@ -27,7 +27,9 @@
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.porcepropiedad" /></label> <input
 						id="" name="" class="newalto form-control" disabled type="text"
-						value="" maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
+						value="${predialFormsiete.datosJuridicos.porcentajePropiedad}"
+						maxlength="240" style="display: inline-block !important;"></input><label
+						class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
 			</div>
@@ -36,7 +38,8 @@
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.porcenexe" /></label> <input id=""
 						name="" class="newalto form-control" disabled type="text" value=""
-						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
+						maxlength="240" style="display: inline-block !important;"></input><label
+						class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
 			</div>
@@ -46,7 +49,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.calidad" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormsiete.datosJuridicos.calidadSujecion}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -54,7 +57,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.tarliqui" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormsiete.estrLiquidacionPredial.tarifaLiquidacion}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -66,7 +69,8 @@
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.porceexclu" /></label> <input id=""
 						name="" class="newalto form-control" disabled type="text" value=""
-						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
+						maxlength="240" style="display: inline-block !important;"></input><label
+						class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
 			</div>
@@ -74,7 +78,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.basegrav" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value=""
+						name="" class="newalto form-control" type="text" value="${predialFormsiete.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -85,7 +89,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormsiete.estrLiquidacionPredial.destinoHacendario}"
 						maxlength="240"></input>
 				</div>
 			</div>

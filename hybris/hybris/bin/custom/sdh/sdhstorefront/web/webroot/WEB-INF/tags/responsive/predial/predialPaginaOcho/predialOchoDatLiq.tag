@@ -26,7 +26,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.datliquidacion.porcepropiedad" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormocho.datosJuridicos.porcentajePropiedad}"
 						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
@@ -47,7 +47,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.datliquidacion.calidad" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormocho.datosJuridicos.calidadSujecion}"
 						maxlength="240">
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.datliquidacion.tarliqui" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormocho.estrLiquidacionPredial.tarifaLiquidacion}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -76,7 +76,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.datliquidacion.basegrav" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormocho.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -87,7 +87,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormocho.estrLiquidacionPredial.destinoHacendario}"
 						maxlength="240"></input>
 				</div>
 			</div>

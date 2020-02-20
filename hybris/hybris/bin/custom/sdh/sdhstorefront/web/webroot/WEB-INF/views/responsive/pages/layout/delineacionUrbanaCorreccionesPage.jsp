@@ -186,7 +186,7 @@
 			<div class="col-md-4">
 				<div class="form-group ">
 					<select id="u2492_input" class="form-control">
-                      <option value="Calcular con Base en la Resolución de la Secretaría de Hacienda y Planeación">Calcular con Base en la Resolución de la Secretaría de Hacienda y Planeación</option>
+                      <option value="Calcular con Base en la Resoluciï¿½n de la Secretarï¿½a de Hacienda y Planeaciï¿½n">Calcular con Base en la Resoluciï¿½n de la Secretarï¿½a de Hacienda y Planeaciï¿½n</option>
                       <option value="Incorporar el valor de su presupuesto estimado">Incorporar el valor de su presupuesto estimado</option>
                     </select>
 				</div>
@@ -270,7 +270,7 @@
 						<div class="form-group ">
 							<select id="u2514_input" class="form-control">
 	                            <option value="Inicial">Inicial</option>
-	                            <option value="Modificación de la Licencia">Modificación de la Licencia</option>
+	                            <option value="Modificaciï¿½n de la Licencia">Modificaciï¿½n de la Licencia</option>
 	                          </select>
 						</div>
 			</div>
@@ -282,8 +282,8 @@
 			<div class="col-md-2">
 						<div class="form-group ">
 							<select id="u2516_input" class="form-control">
-                            <option value="Adecuación">Adecuación</option>
-                            <option value="Ampliación">Ampliación</option>
+                            <option value="Adecuaciï¿½n">Adecuaciï¿½n</option>
+                            <option value="Ampliaciï¿½n">Ampliaciï¿½n</option>
                           </select>
 						</div>
 			</div>
@@ -305,8 +305,8 @@
 			<div class="col-md-1">
 						<div class="form-group ">
 							<select id="u2516_input" class="form-control">
-                            <option value="Adecuación">NO</option>
-                            <option value="Ampliación">SI</option>
+                            <option value="Adecuaciï¿½n">NO</option>
+                            <option value="Ampliaciï¿½n">SI</option>
                           </select>
 						</div>
 			</div>

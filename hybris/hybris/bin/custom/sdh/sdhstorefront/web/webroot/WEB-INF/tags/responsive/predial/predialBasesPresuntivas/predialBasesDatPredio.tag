@@ -27,7 +27,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datospredio.areterreno" /></label> <input id="areaterreno"
-						name="areaterreno" class="newalto form-control areaterreno" disabled type="text" value=""
+						name="areaterreno" class="newalto form-control areaterreno" disabled type="text" value="${predialFormbases.datosFisicos.areaTerrenoCatastro}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datospredio.areaconstru" /></label> <input id="areaconstruccion"
-						name="areaconstruccion" class="newalto form-control areaconstruccion" disabled type="text" value=""
+						name="areaconstruccion" class="newalto form-control areaconstruccion" disabled type="text" value="${predialFormbases.datosFisicos.areaConstruida}"
 						maxlength="240"></input>
 				</div>
 			</div>

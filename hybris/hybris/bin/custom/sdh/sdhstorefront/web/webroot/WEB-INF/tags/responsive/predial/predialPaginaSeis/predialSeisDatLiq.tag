@@ -26,7 +26,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialseis.datliquidacion.porcepropiedad" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.datosJuridicos.porcentajePropiedad}"
 						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialseis.datliquidacion.calidad" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.datosJuridicos.calidadSujecion}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -66,7 +66,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialseis.datliquidacion.tarliqui" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPredial.tarifaLiquidacion}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialseis.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPredial.destinoHacendario}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialseis.datliquidacion.basegrav" /></label> <input id=""
-						name="" class="newalto form-control"  type="text" value=""
+						name="" class="newalto form-control"  type="text" value="${predialFormseis.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>

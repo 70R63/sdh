@@ -71,6 +71,7 @@
 							<tbody>
 								<c:forEach items="${obligacionesFormuno.headerPred }"
 									var="eachObPred">
+
 									<c:forEach items="${eachObPred.details }"
 									var="eachObPredDet">
 										<tr>
@@ -149,6 +150,7 @@
 							<tbody>
 								<c:forEach items="${obligacionesFormuno.headerVehiculos }"
 									var="eachObVehi">
+									
 									<c:forEach items="${eachObVehi.details }"
 									var="eachObVehiDet">
 										<tr>

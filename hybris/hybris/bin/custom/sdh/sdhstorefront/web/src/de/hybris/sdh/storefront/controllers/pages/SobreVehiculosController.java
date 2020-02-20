@@ -113,7 +113,6 @@ public class SobreVehiculosController extends AbstractPageController
 
 		//		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 
 

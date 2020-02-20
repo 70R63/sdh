@@ -10,7 +10,6 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 
-	<form:form>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="headline">
@@ -24,7 +23,7 @@
 		<div class="row mt-3">
 			<div class="col-md-10 d-flex align-items-center">
 				<div class="table-responsive text-center">
-					<table class="table table-bordered">
+					<table class="table table-bordered DatosFisicosPredial" id="DatosFisicosPredial">
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme
@@ -42,32 +41,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-								<td><input id="" name="" class="inputtextnew tablefechas"
-									aria-required="true" type="text" readonly="readonly" value=""
-									maxlength="240"></td>
-							</tr>
+						
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-	</form:form>
+
 </div>
 
 

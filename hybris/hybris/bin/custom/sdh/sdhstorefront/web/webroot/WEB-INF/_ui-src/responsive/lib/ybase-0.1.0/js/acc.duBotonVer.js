@@ -26,8 +26,8 @@ ACC.duBotonVer = {
 				data : data,
 				type : "GET",
 				success : function(dataResponse) {
+				    document.getElementById("hiddenCdu").value = valorCDU;
 					ACC.duBotonVer.fillFieldsFromData(dataResponse);
-
 				},
 				error : function() {
 				}

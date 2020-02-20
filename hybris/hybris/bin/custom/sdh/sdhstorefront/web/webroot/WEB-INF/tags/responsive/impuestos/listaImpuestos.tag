@@ -202,7 +202,7 @@
 	<br>
 
 	<c:if test="${not empty publicidadExtList}">
-		<table id="myTable">
+		<table id="myTable" class="tabPaginacion">
 			<tr>
 				<th>NUMERO DE RESOLUCION</th>
 				<th>TIPO DE VALLA</th>
@@ -236,55 +236,55 @@
 	<c:out value="${dataFormDelineacion.valCont}" />
 
 	<c:if test="${not empty delineacionWithRadicadosList}">
-		<div class="col-md-9 col-md-offset-1">
-			<br> <br>
-			<div class="row">
-				<div class="col-md-2">
-					<label class="control-label" for="" style="text-transform: none">
-						<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" />
-					</label>
-				</div>
-				<div class="col-md-3">
-					<label class="control-label" for="" style="text-transform: none">
-						<spring:theme code="impuestos.presentarDeclaracion.deliur.tipobli" />
-					</label>
-				</div>
-				<div class="col-md-3">
-					<label class="control-label" for="" style="text-transform: none">
-						<spring:theme code="impuestos.presentarDeclaracion.deliur.tiplic" />
-					</label>
-				</div>
-				<div class="col-md-3">
-					<label class="control-label" for="" style="text-transform: none">
-						<spring:theme code="Evento" />
-					</label>
-				</div>
-			</div>
-			<div class="table-resposive">
+		<table class="table tabPaginacion">
+			<thead>
+				<tr>
+					<td class="col-md-2">
+						<label class="control-label" for="" style="text-transform: none">
+							<spring:theme code="impuestos.presentarDeclaracion.deliur.cdu" />
+						</label>
+					</td>
+					<td class="col-md-3">
+						<label class="control-label" for="" style="text-transform: none">
+							<spring:theme code="impuestos.presentarDeclaracion.deliur.tipobli" />
+						</label>
+					</td>
+					<td class="col-md-3">
+						<label class="control-label" for="" style="text-transform: none">
+							<spring:theme code="impuestos.presentarDeclaracion.deliur.tiplic" />
+						</label>
+					</td>
+					<td class="col-md-3">
+						<label class="control-label" for="" style="text-transform: none">
+							<spring:theme code="Evento" />
+						</label>
+					</td>
+				</tr>
+			</thead>
+
+			<tbody>
 				<c:forEach var="item" items="${delineacionWithRadicadosList}">
-					<div class="row">
-						<div class="col-sm-2">
-							<input class="new_alto form-control" disabled="disabled"
-								type="text" value="${item.cdu}"
-								style="height: 32px !important; margin-bottom: 9px !important" />
-						</div>
-						<div class="col-sm-3">
+					<tr>
+						<td class="col-sm-2">
+							<label>${item.cdu}</label>
+						</td>
+						<td class="col-sm-3">
 							<select id="selctipobliga" class="newalto form-control"
 								onchange="ShowSelected(this)">
 								<option value="0-${item.cdu}">Seleccionar</option>
 								<option value="1-${item.cdu}">Declaraci&oacuten</option>
 								<option value="2-${item.cdu}">Retenci&oacuten</option>
 							</select>
-						</div>
-						<div class="col-sm-3">
+						</td>
+						<td class="col-sm-3">
 							<select id="btnTpLic_${item.cdu}" class="newalto form-control"
 								onchange="establecerTipoLicencia(this)">
 								<option value="00">Seleccionar</option>
 								<option value="01">Licencia</option>
 								<option value="02">Reconocimiento</option>
 							</select>
-						</div>
-						<div class="col-sm-3">
+						</td>
+						<td class="col-sm-3">
 							<form:form method="post" commandName="inputDelineacion"
 								action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
 								<c:set var="idCampoTipoLicencia"
@@ -295,50 +295,56 @@
 									id="${idCampoTipoLicencia}" />
 								<form:hidden path="selectedAnoPresDeclaracion" value="" />
 
-								<button type="submit" class="btn-link" id="btn_${item.cdu}"
-									name="action" value="declaracion">
+								<button type="submit" id="btn_${item.cdu}"
+									name="action" value="declaracion" disabled="disabled" class="btn-primary">
 									<spring:theme code="delineacion.urbana.radicados.declara" />
 								</button>
 							</form:form>
-						</div>
-					</div>
-					<div class="row" id="${item.cdu}" style="display: none">
-						<c:forEach var="radicado" items="${item.radicados}">
-							<div class="row">
-								<div class="col-sm-2"></div>
-								<div class="col-sm-3 text-right">Radicados:</div>
-								<div class="col-sm-3">
-									<input style="margin-bottom: 5px !important"
-										class="newalto form-control" disabled="disabled" type="text"
-										value="${radicado.numRadicado}" />
-								</div>
-								<div class="col-sm-3">
-									<form:form method="post" commandName="inputDelineacion"
-										action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
-										<form:hidden path="selectedCDU" value="${item.cdu}" />
-										<form:hidden path="selectedRadicado"
-											value="${radicado.numRadicado}" />
-										<form:hidden path="selectedTipoLicencia" value="" />
-										<form:hidden path="selectedAnoPresDeclaracion" value="" />
+						</td>
+					</tr>
 
-										<button type="submit" class="btn-link"
-											id="retenciondelibutton1" name="action" value="retencion">
-											<spring:theme
-												code="delineacion.urbana.radicados.retencion.generar" />
-										</button>
-									</form:form>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
+					<c:forEach var="radicado" items="${item.radicados}" varStatus="loopStatus">
+						<tr id="${item.cdu}" >
+													<td class="col-sm-2">
+							<label hidden="true">${item.cdu}</label>
+						</td>
+							<c:choose>
+								<c:when test="${loopStatus.index == 0}">
+									<td><label>Radicados:</label></td>
+								</c:when>
+								<c:otherwise>
+								<td/>
+								</c:otherwise>
+							</c:choose>
+							<td class="col-sm-3">
+								<label>${radicado.numRadicado}</label>
+							</td>
+							<td class="col-sm-3">
+								<form:form method="post" commandName="inputDelineacion"
+									action="/sdhstorefront/es/contribuyentes/delineacion-urbana/declaracion">
+									<form:hidden path="selectedCDU" value="${item.cdu}" />
+									<form:hidden path="selectedRadicado"
+										value="${radicado.numRadicado}" />
+									<form:hidden path="selectedTipoLicencia" value="" />
+									<form:hidden path="selectedAnoPresDeclaracion" value="" />
+
+									<button type="submit" 
+										id="btn_presRetencion_${item.cdu}_${loopStatus.index}" name="action" value="retencion" class="btn-primary" disabled="disabled">
+										<spring:theme
+											code="delineacion.urbana.radicados.retencion.generar" />
+									</button>
+								</form:form>
+							</td>
+						</tr>
+					</c:forEach>
 				</c:forEach>
-			</div>
-		</div>
+			</tbody>
+		</table>
 	</c:if>
 
 	<div class="row" id="table-vehicular" style="display: none;">
 		<div class="col-md-6 col-md-offset-2">
-			<table class="table" id="table-vehicular1">
+			<table class="table tabPaginacion" id="table-vehicular1">
 				<thead style="cellspacing: 10 !important">
 					<tr>
 						<th><label class="control-label labeltabletd"><spring:theme
@@ -408,17 +414,35 @@
 		var x = document.getElementById(div);
 		var tipoLicencia = document.getElementById("btnTpLic_" + div);
 		var btnDeclaracion = document.getElementById("btn_" + div);
-
-		if (selected === "2") {
-			x.style.display = "block";
+	
+		if (selected == "2") { //retencion
 			tipoLicencia.selectedIndex = "1"
 			tipoLicencia.disabled = true;
 			btnDeclaracion.disabled = true;
-		} else {
-			x.style.display = "none";
+			
+			configurarBotonRetencion(div,false);
+		} else if(selected == "1"){ //declaracion
 			tipoLicencia.selectedIndex = "0"
 			tipoLicencia.disabled = false;
 			btnDeclaracion.disabled = false;
+			configurarBotonRetencion(div,true);
+		} else {
+			tipoLicencia.selectedIndex = "0"
+			tipoLicencia.disabled = false;
+			btnDeclaracion.disabled = true;
+			configurarBotonRetencion(div,true);
+		}
+	}
+	
+	function configurarBotonRetencion(cdu,valDisabled){
+		var btnDeclaracion = null;
+		for(var i=0;i<100;i++){
+			btnPresRetencion = document.getElementById("btn_presRetencion_"+cdu+"_"+i);
+			if(btnPresRetencion!=null){
+				btnPresRetencion.disabled=valDisabled;
+			}else{
+				break;
+			}
 		}
 	}
 
@@ -477,5 +501,37 @@
             window.location.href = "presentar-declaracion";
         }
     }
+
+    function validarDelineacionform(){
+        var hiddenCdu = document.getElementById("selectedCDU").value;
+        var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
+
+        var nowUrl = window.location.href;
+        var targetUrl = "infoObject/getUseOption?cdu="+hiddenCdu+"&taxType=6";
+        currentUrl = nowUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
+
+	    $.ajax({
+            url : currentUrl,
+           	type : "GET",
+        	success : function(dataResponse) {
+                if(dataResponse == "02"){
+                    var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+                    if (r == true) {
+                        btnSelected.click();
+                    } else {
+                        return false;
+                    }
+                }else{
+                   btnSelected.click();
+                 }
+        	},
+        	error : function() {
+        	}
+        });
+
+        return false;
+
+    }
+
 </script>
 

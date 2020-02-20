@@ -42,7 +42,7 @@
 				</ycommerce:testId>
 			</div>
 		<ycommerce:testId code="loginAndCheckoutButton">
-			<button type="submit" class="btn btn-primary redtam tam_button">
+			<button type="submit" class="btn redtam tam_button">
 				<spring:theme code="${actionNameKey}" />
 			</button>
 		</ycommerce:testId>

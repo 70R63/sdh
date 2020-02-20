@@ -48,9 +48,9 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
+								<td><c:out value="${predialFormdos.tipDoc}" /></td>
+								<td><c:out value="${predialFormdos.numDoc}" /></td>
+								<td><c:out value="${predialFormdos.compleName}" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -74,7 +74,15 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialdos.generales.anigrav" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormdos.anioGravable}"
+						maxlength="240"></input>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predialdos.generales.opuso" /></label> <input id="" name=""
+						class="newalto form-control" disabled type="text" value="${predialFormdos.opcionuso}"
 						maxlength="240"></input>
 				</div>
 			</div>
