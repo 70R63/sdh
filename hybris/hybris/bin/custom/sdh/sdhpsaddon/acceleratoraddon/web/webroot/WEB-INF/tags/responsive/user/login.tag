@@ -11,9 +11,9 @@
 <c:set var="hideDescription" value="checkout.login.loginAndCheckout" />
 
 <div class="headline">
-	<h2 style="margin-bottom: 0px !important;margin-top: 0px !important;">
-		<span tabindex="0"><spring:theme code="login.title" /></span>
-	</h2>
+
+		<span tabindex="0" class="new_title"><spring:theme code="login.title" /></span>
+
 </div>
 
 <form:form action="${action}" method="post" commandName="loginForm">
@@ -27,8 +27,8 @@
 			</span>
 		</c:if>
 
-		<formElement:formInputBox idKey="j_username" placeholder=" " labelKey="login.email" path="j_username" mandatory="true" inputCSS="tamnew form-control redtam tamnew"/>
-		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="tamnew form-control redtam tamnew" mandatory="true"/>
+		<formElement:formInputBox idKey="j_username" placeholder=" " labelKey="login.email" path="j_username" mandatory="true" inputCSS="input-login"/>
+		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="input-login" mandatory="true"/>
 		<input type="hidden" id="registeredCheckout" name="registeredCheckout" value="${registeredCheckout}" />
 
 		<c:choose>
@@ -42,7 +42,7 @@
 
 		<div class="forgotten-password" style="margin-bottom: 1px !important">
 			<ycommerce:testId code="login_forgotPassword_link">
-				<a href="<c:url value='/login/pw/request/external'/>" class="" data-cbox-title="<spring:theme code="forgottenPwd.title"/>"> <spring:theme code="login.link.forgottenPwd" />
+				<a href="<c:url value='/login/pw/request/external'/>" class="pssword" data-cbox-title="<spring:theme code="forgottenPwd.title"/>"> <spring:theme code="login.link.forgottenPwd" />
 				</a>
 			</ycommerce:testId>
 		</div>
@@ -54,7 +54,7 @@
 			</ycommerce:testId>
 		</div>
 		<ycommerce:testId code="loginAndCheckoutButton">
-			<button type="submit" class="btn btn-primary redtam tam_button">
+			<button type="submit" class="btn redtam tam_button">
 				<spring:theme code="${actionNameKey}" />
 			</button>
 		</ycommerce:testId>

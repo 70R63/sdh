@@ -24409,7 +24409,7 @@ ul.nav__links li {
   margin-right: -15px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
   padding-left: 25px;
   padding-right: 5px;
   margin-bottom: 0;
@@ -25173,4 +25173,80 @@ span.pasos {
 .tablesearch tbody tr td {
   font-size: 12px !important;
   font-family: 'Helvetica', 'Arial', sans-serif !important;
+}
+.new_title {
+  font-family: 'Alegreya Sans', 'Museo Sans Cond' !important;
+  font-size: 28px !important;
+  color: #E80B2C !important;
+}
+.container_new {
+  padding-top: 25%;
+}
+.navigation--bottom {
+  background-color: #fff !important;
+}
+#accNavComponentDesktopOne ul.nav__links li a,
+#accNavComponentDesktopTwo ul.nav__links li a {
+  color: #000000;
+}
+.main-header .navigation.navigation--top {
+  background-color: #fff !important;
+}
+.navigation--middle {
+  background-color: #fff !important;
+}
+ul.nav__links li {
+  border: 0px !important;
+  color: #000 !important;
+}
+.main-header .navigation--bottom {
+  color: #000000 !important;
+}
+.navigation--bottom .nav__links--products li a {
+  color: #E80B2C !important;
+}
+.navigation--bottom ul.nav__links--products > li > span > a {
+  color: #E80B2C !important;
+  font-weight: 750 !important;
+}
+.form-group .input-login {
+  width: 220px;
+  height: 28px !important;
+  border: 1px solid #7070702C;
+  -webkit-transform: skew(20deg);
+  -moz-transform: skew(20deg);
+  -ms-transform: skew(20deg);
+  -o-transform: skew(20deg);
+  transform: skew(-15deg);
+}
+input {
+  min-height: 2px !important;
+}
+.pssword {
+  color: #FFB71B !important;
+}
+.navigation--bottom ul.nav__links--products > li > span > a:hover {
+  background: #f2f2f2 !important;
+}
+.tam_button {
+  background: #BFBFBF !important;
+  color: #ffffff !important;
+}
+.navigation--bottom .show-sub .nav__link a:after {
+  border-bottom: 0px;
+}
+.footer-left {
+  border-bottom: 2px solid #E80B2C !important;
+}
+.main-footer .copyright .pop-over-toggle {
+  background-color: #FFB71C;
+  border-color: #FFB71C;
+}
+.navigation--bottom .nav__links--products {
+  font-family: 'Alegreya Sans', 'Museo Sans Cond' !important;
+  font-size: 28px !important;
+  border-bottom: 1px solid #000000 !important;
+}
+header {
+  background: #ffffff !important;
 }

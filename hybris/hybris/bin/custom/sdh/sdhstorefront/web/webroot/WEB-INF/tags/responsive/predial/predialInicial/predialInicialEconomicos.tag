@@ -24,7 +24,7 @@
 		<div class="row mt-3">
 			<div class="col-md-10 d-flex align-items-center">
 				<div class="table-responsive text-center">
-					<table class="table table-bordered">
+					<table class="table table-bordered DatosEconomicos" id="DatosEconomicos">
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme
