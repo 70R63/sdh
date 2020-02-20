@@ -118,7 +118,7 @@ ACC.vehiculos = {
 	 	        	return;
 	 	        }
 
-	 	       //Confirmation message - sobrevehiculosautomotores
+	 	       //Confirmation message - sobrevehiculosautomotores - jair
 	 	      if(document.getElementById('opcionUso').value == "02"){
                 var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                 if (r == true) {
@@ -365,7 +365,7 @@ ACC.vehiculos = {
 				type : "GET",
 				success : function(data) {
 					ACC.vehiculos.fillFieldsFromData(data);
-
+					document.getElementById('opcionUso').value = data.opcionUso;
 				},
 				error : function() {
 				}
