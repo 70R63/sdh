@@ -24,6 +24,7 @@
 				<sf:hidden path="clavePeriodo" id="pagarEnLinea_clavePeriodo"/>
 				<sf:hidden path="dv" id="pagarEnLinea_dv"/>
 				<sf:hidden path="numObjeto" id="pagarEnLinea_numObjeto"/>
+				<sf:hidden path="chip" id="pagarEnLinea_chip"/>
 			</div>
 		</sf:form>
 

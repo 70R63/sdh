@@ -66,6 +66,7 @@
 		$("#pagarEnLinea_clavePeriodo").val(clavePeriodo);
 		$("#pagarEnLinea_dv").val(dv);
 		$("#pagarEnLinea_numObjeto").val(numObjeto);
+		$("#pagarEnLinea_chip").val(chip);
 		
 		
 		form = document.getElementById("infoPreviaPSE");
