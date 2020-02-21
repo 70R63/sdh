@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Maria Luisa Torres
  *
@@ -15,7 +18,7 @@ public class ObligacionesCabeceraVehiculos
    private String modelo;
    private String marca;
    private String linea;
-	private ObligacionesDetalleVehiculos details;
+	private List<ObligacionesDetalleVehiculos> details;
 
 	/**
 	 * @return the anioGravable
@@ -105,7 +108,7 @@ public class ObligacionesCabeceraVehiculos
 	/**
 	 * @return the details
 	 */
-	public ObligacionesDetalleVehiculos getDetails()
+	public List<ObligacionesDetalleVehiculos> getDetails()
 	{
 		return details;
 	}
@@ -114,10 +117,11 @@ public class ObligacionesCabeceraVehiculos
 	 * @param details
 	 *           the details to set
 	 */
-	public void setDetails(final ObligacionesDetalleVehiculos details)
+	public void setDetails(final List<ObligacionesDetalleVehiculos> details)
 	{
 		this.details = details;
 	}
+
 
 
 

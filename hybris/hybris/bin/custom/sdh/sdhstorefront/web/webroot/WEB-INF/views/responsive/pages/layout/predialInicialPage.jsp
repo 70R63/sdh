@@ -6,21 +6,24 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="predial"
+<%@ taglib prefix="predialIni"
 	tagdir="/WEB-INF/tags/responsive/predial/predialInicial"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
+<%@ taglib prefix="obligaciones" tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
 
 <div class="loader"></div>
 
-<predial:predialInicialTable></predial:predialInicialTable>
+<obligaciones:obliPendientesPagar />
+<a id="downloadHelper" target="_blank"></a>
+<predialIni:predialInicialTable></predialIni:predialInicialTable>
 
 
 <div class="InicialDetalle" id="InicialDetalle" style="display: none">
-<predial:predialInicialJuridicos />
-	<predial:predialInicialEconomicos />
-	<predial:predialInicialFisicos />
-	<predial:predialInicialLiquidacion />
-	<predial:predialInicialMarcas />
+<predialIni:predialInicialJuridicos />
+	<predialIni:predialInicialEconomicos />
+	<predialIni:predialInicialFisicos />
+	<predialIni:predialInicialLiquidacion />
+	<predialIni:predialInicialMarcas />
 </div>
 
 <script>
@@ -39,40 +42,39 @@
 		}
 		$(".loader").fadeOut("slow");
 	}
-
 	
-
-	
-function datatable(e) {
-	debugger;
-		if ($.fn.dataTable.isDataTable('#example')) {
-			table = $('#example').DataTable();
-			table.destroy();
-		}
-		var tabla = $("#example")
-				.DataTable(
-						{
-							"sPaginationType" : "full_numbers",
-							"oLanguage" : {
-								"oPaginate" : {
-									"sPrevious" : " Anterior ",
-									"sNext" : " Siguiente ",
-									"sLast" : " Última ",
-									"sFirst" : " Primera "
-								},
-								"sLengthMenu" : 'Mostrar <select>'
-										
-										+ '<option value="10">10</option>'
-										+ '<option value="20">20</option>'
-										+ '<option value="30">30</option>'
-										+ '</select> registros',
-								"sInfo" : "Mostrando _START_ al _END_ de _TOTAL_ registros",
-								"sInfoFiltered" : " Filtrados de MAX registros",
-								"sInfoEmpty" : " ",
-								"sZeroRecords" : "No se encontraron registros",
-								"sProcessing" : "Espere, por favor...",
-								"sSearch" : "Buscar:",
-							}
-						});
+	function presentarDeclaracion(CHIP,anioGravable){
+		ACC.opcionDeclaraciones.predial_presentarDec(CHIP,anioGravable);
+		
 	}
+
+	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip){
+		debugger;
+		var numBP = "${infoContrib.numBP}";
+		var numDoc = "${infoContrib.numDoc}";
+		var tipoDoc = "${infoContrib.tipoDoc}";
+		var clavePeriodo = anoGravable.substr(2,2).concat("A1");
+		var dv = "${infoContrib.adicionales.DIGVERIF}";
+		
+		
+		$("#pagarEnLinea_tipoImpuesto").val(tipoImpuesto);
+		$("#pagarEnLinea_numBP").val(numBP);
+		$("#pagarEnLinea_numDoc").val(numDoc);
+		$("#pagarEnLinea_tipoDoc").val(tipoDoc);		
+		$("#pagarEnLinea_anoGravable").val(anoGravable);
+		$("#pagarEnLinea_periodo").val(periodo);
+		$("#pagarEnLinea_clavePeriodo").val(clavePeriodo);
+		$("#pagarEnLinea_dv").val(dv);
+		$("#pagarEnLinea_numObjeto").val(numObjeto);
+		$("#pagarEnLinea_chip").val(chip);
+		
+		
+		form = document.getElementById("infoPreviaPSE");
+		if(form!=null){
+			form.submit();
+		}
+		
+	}
+	
+
 </script>

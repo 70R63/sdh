@@ -24,6 +24,7 @@ import de.hybris.sdh.core.pojos.requests.OpcionCertiPagosImprimeRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesCatalogos;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesPDFRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
+import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response;
@@ -52,6 +53,7 @@ import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
+import de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -2172,6 +2174,24 @@ public class SobreTasaGasolinaService
 		final String nombreClase = "de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response";
 
 		responseInfo = (DetalleVehiculos2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
+	public PredialPresentarDecResponse predialPresentarDec(final PredialPresentarDecRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		PredialPresentarDecResponse responseInfo = null;
+		final String confUrl = "sdh.predialTEST.url";
+		final String confUser = "sdh.predialTEST.user";
+		final String confPass = "sdh.predialTEST.password";
+		final String wsNombre = "calculoimpuesto/TEST";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse";
+
+		responseInfo = (PredialPresentarDecResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
 				wsReqMet, LOG, nombreClase);
 
 		return responseInfo;

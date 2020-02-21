@@ -3,8 +3,10 @@ ACC.oblipend = {
 	_autoload : [ "bindBuscarObliPend", "bindDetalle", "bindDetalledos" ],
 
 	bindBuscarObliPend : function() {
-
+		
 		$(document).on("click", "#buscarObliPend", function(e) {
+			
+			debugger;
 			e.preventDefault();
 
 			$(".oblipend-table").hide();
@@ -64,8 +66,10 @@ ACC.oblipend = {
 				"click",
 				"#Detalle",
 				function(e) {
-					e.preventDefault();
 					debugger;
+					
+					e.preventDefault();
+					
 					$(".oblipend-tabledetalle").hide();
 					$(".oblipend-tabledetalledos").hide();
 
@@ -254,8 +258,9 @@ ACC.oblipend = {
 	
 	bindDetalledos : function() {
 		$(document).on("click", "#Detalledos", function(e) {
-			e.preventDefault();
 			debugger;
+					
+			e.preventDefault();
 			$(".oblipend-tabledetalledos").hide();
 
 			var impuesto = $("#impuesto").val();

@@ -8,6 +8,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -359,6 +360,8 @@ public class PSEPaymentController extends AbstractPageController
 	{
 		LOG.info("Credibanco Ticke Id: " + ticketId);
 
+		String flagSuccessView = null;
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_PAGO_PSE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_PSE_RESPUESTA));
@@ -375,10 +378,12 @@ public class PSEPaymentController extends AbstractPageController
 			if (codeResponse.equals(ControllerPseConstants.CREDIBANCO_RESPONSE_APROBADA))
 			{
 				GlobalMessages.addInfoMessage(model, "credibanco.message.info.done.transaction.with.status");
+				flagSuccessView = "X";
 			}
 			else
 			{
 				GlobalMessages.addErrorMessage(model, "credibanco.message.error.response.transaction");
+				flagSuccessView = "X";
 			}
 		}
 		else
@@ -386,6 +391,7 @@ public class PSEPaymentController extends AbstractPageController
 			GlobalMessages.addErrorMessage(model, "credibanco.message.error.response.transaction");
 		}
 
+		model.addAttribute("flagSuccessView", flagSuccessView);
 
 		return getViewForPage(model);
 	}

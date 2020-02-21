@@ -11,6 +11,7 @@ import de.hybris.sdh.core.pojos.responses.PredialEstDatosGenerales;
 import de.hybris.sdh.core.pojos.responses.PredialEstLiquidacion;
 import de.hybris.sdh.core.pojos.responses.PredialEstLiquidacionPrivada;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.PredialTblErrores;
 
 import java.util.List;
@@ -21,6 +22,8 @@ import java.util.List;
  */
 public class PredialForm
 {
+
+	private List<PredialResponse> predial;
 
 	private String numBP;
 	private String CHIP;
@@ -42,6 +45,10 @@ public class PredialForm
 	private List<PredialTblErrores> tblErrores;
 
 	private DetallePredialResponse detallePredio;
+
+	private String tipDoc;
+	private String compleName;
+	private String numDoc;
 
 	/**
 	 * @return the detallePredio
@@ -318,6 +325,74 @@ public class PredialForm
 	public void setAnioGravable(final String anioGravable)
 	{
 		this.anioGravable = anioGravable;
+	}
+
+	/**
+	 * @return the predial
+	 */
+	public List<PredialResponse> getPredial()
+	{
+		return predial;
+	}
+
+	/**
+	 * @param predial
+	 *           the predial to set
+	 */
+	public void setPredial(final List<PredialResponse> predial)
+	{
+		this.predial = predial;
+	}
+
+	/**
+	 * @return the tipDoc
+	 */
+	public String getTipDoc()
+	{
+		return tipDoc;
+	}
+
+	/**
+	 * @param tipDoc
+	 *           the tipDoc to set
+	 */
+	public void setTipDoc(final String tipDoc)
+	{
+		this.tipDoc = tipDoc;
+	}
+
+	/**
+	 * @return the compleName
+	 */
+	public String getCompleName()
+	{
+		return compleName;
+	}
+
+	/**
+	 * @param compleName
+	 *           the compleName to set
+	 */
+	public void setCompleName(final String compleName)
+	{
+		this.compleName = compleName;
+	}
+
+	/**
+	 * @return the numDoc
+	 */
+	public String getNumDoc()
+	{
+		return numDoc;
+	}
+
+	/**
+	 * @param numDoc
+	 *           the numDoc to set
+	 */
+	public void setNumDoc(final String numDoc)
+	{
+		this.numDoc = numDoc;
 	}
 
 

@@ -1307,6 +1307,74 @@ debugger;
 	},
 	
 	
+	predial_presentarDec : function(chip,anioGravable){
+
+		debugger;
+		if(ACC.opcionDeclaraciones.validarAntesSubmit_predial_presentarDec()){
+			var dataActual = {};
+		
+			dataActual.chip = chip;
+			dataActual.anioGravable = anioGravable;
+			
+			
+			$.ajax({
+				url : ACC.predial_presentarDecURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					ACC.opcionDeclaraciones.updateFromResponse_predial_presentarDec(dataActual,dataResponse);
+				},
+				error : function() {
+					alert("Error procesar la solicitud presentar declaración");	
+				}
+			});
+		}
+
+		
+	},
+	
+	
+	updateFromResponse_predial_presentarDec : function(infoActual,infoResponse){
+		debugger;
+		var nombreTotalPagar_valor = "totalPagar_"+infoActual.chip;
+		var nombrePagarEnLinea_boton = "btnPagarEnLinea_"+infoActual.chip;
+		var lblTotalPagar_valor = document.getElementById(nombreTotalPagar_valor);
+		var btnPagarEnLinea_boton = document.getElementById(nombrePagarEnLinea_boton);
+		var idError = "";
+		var mensajeError = "";
+		var mensajes = "";
+		
+		
+		lblTotalPagar_valor.hidden = false;
+		btnPagarEnLinea_boton.hidden = false;
+		lblTotalPagar_valor.innerHTML = infoResponse.total;
+		
+		$("#downloadHelper").attr("href",infoResponse.urlDownload);
+		document.getElementById("downloadHelper").click();
+		
+		if(infoResponse.errores !=null){
+			for(var i = 0; i<infoResponse.errores.length;i++){
+				if(infoResponse.errores[i].id != null && infoResponse.errores[i].id != ""){
+					idError = infoResponse.errores[i].id;
+					mensajeError = infoResponse.errores[i].mensaje;
+					mensajes = mensajes+"ID: "+idError+" MENSAJE: "+ mensajeError+"\n";
+				}
+			}
+			if(mensajes!=""){
+				alert(mensajes);
+			}
+
+		}
+	},
+	
+	
+	validarAntesSubmit_predial_presentarDec : function(){
+		var validacionOK = true;
+		
+		return validacionOK;
+	},
+	
+	
 	preparaCatAnioGravable_presentarDec : function(anoGravableBase,cantidadAnos){
         
 		$("#anoGravable").find("option:gt(0)").remove();

@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author Maria Luisa Torres
  *
@@ -12,7 +15,7 @@ public class ObligacionesCabeceraPredial
 
 	private String aniogravable;
 	private String objetoContrato;
-	private ObligacionesDetallePredial details;
+	private List<ObligacionesDetallePredial> details;
 
 	/**
 	 * @return the aniogravable
@@ -51,7 +54,7 @@ public class ObligacionesCabeceraPredial
 	/**
 	 * @return the details
 	 */
-	public ObligacionesDetallePredial getDetails()
+	public List<ObligacionesDetallePredial> getDetails()
 	{
 		return details;
 	}
@@ -60,10 +63,12 @@ public class ObligacionesCabeceraPredial
 	 * @param details
 	 *           the details to set
 	 */
-	public void setDetails(final ObligacionesDetallePredial details)
+	public void setDetails(final List<ObligacionesDetallePredial> details)
 	{
 		this.details = details;
 	}
+
+
 
 
 

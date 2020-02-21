@@ -21,6 +21,7 @@ public class InfoPreviaPSE
 	private String CDU;
 	private String radicado;
 	private String anticipo;
+	private String chip;
 
 
 
@@ -223,9 +224,26 @@ public class InfoPreviaPSE
 		this.anticipo = anticipo;
 	}
 
+	/**
+	 * @return the chip
+	 */
+	public String getChip()
+	{
+		return chip;
+	}
+
+	/**
+	 * @param chip
+	 *           the chip to set
+	 */
+	public void setChip(final String chip)
+	{
+		this.chip = chip;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -233,8 +251,8 @@ public class InfoPreviaPSE
 	{
 		return "InfoPreviaPSE [tipoImpuesto=" + tipoImpuesto + ", numBP=" + numBP + ", numDoc=" + numDoc + ", tipoDoc=" + tipoDoc
 				+ ", anoGravable=" + anoGravable + ", periodo=" + periodo + ", clavePeriodo=" + clavePeriodo + ", dv=" + dv
-				+ ", numObjeto=" + numObjeto + ", CDU=" + CDU + ", anticipo=" + anticipo + "]";
+				+ ", numObjeto=" + numObjeto + ", CDU=" + CDU + ", radicado=" + radicado + ", anticipo=" + anticipo + ", chip=" + chip
+				+ "]";
 	}
-
 
 }

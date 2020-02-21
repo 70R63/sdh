@@ -27,7 +27,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialcuatro.datospredio.avaluo" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormcua.estrDatosGenerales.avaluoProrrateado}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialcuatro.datospredio.avaluoindice" /></label> <input id=""
-						name="" class="newalto form-control" type="text" value=""
+						name="" class="newalto form-control" type="text" value="${predialFormcua.estrDatosGenerales.avaluoIndiceEdificabilidad}"
 						maxlength="240"></input>
 				</div>
 			</div>

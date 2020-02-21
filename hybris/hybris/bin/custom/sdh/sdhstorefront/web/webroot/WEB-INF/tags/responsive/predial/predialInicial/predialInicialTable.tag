@@ -45,24 +45,39 @@
 								<td><label class="control-label labeltabletd "><spring:theme
 											code="predial.inicial.table.nocotrato" /></label></td>
 								<td><label class="control-label labeltabletd "><spring:theme
-											code="Detalle" /></label></td>
+											code="predial.inicial.table.detalle" /></label></td>
+								<td><label class="control-label labeltabletd "><spring:theme
+											code="predial.inicial.table.TotalPagar" /></label></td>
+								<td><label class="control-label labeltabletd "><spring:theme
+											code="predial.inicial.table.pagarEnLinea" /></label></td>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${predial}" var="current">
+							<c:forEach items="${predial.predial}" var="current">
+								<c:set var="nombrePresentarDec" value="btnPresentarDec_${current.CHIP}"/>
+								<c:set var="nombrePagarEnLinea" value="btnPagarEnLinea_${current.CHIP}"/>
+								<c:set var="nombreTotalPagar" value="totalPagar_${current.CHIP}"/>
 								<tr>
 									<td><c:out value="${current.CHIP}" /></td>
 									<td><c:out value="${current.matrInmobiliaria}" /></td>
 									<td><c:out value="${current.direccionPredio}" /></td>
 									<td><c:out value="${current.contratoArrenda}" /></td>
-									<td><label style="color: #0358d8 !important"
-										data-anioGravable="${current.anioGravable}"
-										data-chip="${current.CHIP}"
-										data-matrInmobiliaria="${current.matrInmobiliaria}"
-										class="text-capitalize !important showDetailPredio"
-										id="showDetailPredio"> <spring:theme
-												code="predial.inicial.table.ver" />
-									</label></td>
+									<td>
+										<button type="button" id="${nombrePresentarDec}"
+											name="${btnPresentarDec}" value="presentarDec" class="btn-primary"
+											onclick="presentarDeclaracion('${current.CHIP}','${current.anioGravable}')">
+											<spring:theme code="predial.inicial.table.presentarDeclaracion" />
+										</button>
+									</td>
+									<td><label class="text-capitalize !important " id="${nombreTotalPagar}" hidden="true"></label>
+									</td>
+									<td>
+										<button type="button" id="${nombrePagarEnLinea}"
+											name="${nombrePagarEnLinea}" value="pagarEnLinea" class="btn-primary" hidden="true"
+											onclick="pagarEnLinea('5101','${current.anioGravable}','','${current.numObjeto}','${current.CHIP}')">
+											<spring:theme code="predial.inicial.table.pagarEnLinea" />
+										</button>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -75,38 +90,7 @@
 </div>
 
 <script>
-	function datatable(e) {
-		debugger;
-		if ($.fn.dataTable.isDataTable('#example')) {
-			table = $('#example').DataTable();
-			table.destroy();
-		}
-		var tabla = $("#example")
-				.DataTable(
-						{
-							"sPaginationType" : "full_numbers",
-							"oLanguage" : {
-								"oPaginate" : {
-									"sPrevious" : " Anterior ",
-									"sNext" : " Siguiente ",
-									"sLast" : " Última ",
-									"sFirst" : " Primera "
-								},
-								"sLengthMenu" : 'Mostrar <select>'
 
-								+ '<option value="10">10</option>'
-										+ '<option value="20">20</option>'
-										+ '<option value="30">30</option>'
-										+ '</select> registros',
-								"sInfo" : "Mostrando _START_ al _END_ de _TOTAL_ registros",
-								"sInfoFiltered" : " Filtrados de MAX registros",
-								"sInfoEmpty" : " ",
-								"sZeroRecords" : "No se encontraron registros",
-								"sProcessing" : "Espere, por favor...",
-								"sSearch" : "Buscar:",
-							}
-						});
-	}
 </script>
 
 

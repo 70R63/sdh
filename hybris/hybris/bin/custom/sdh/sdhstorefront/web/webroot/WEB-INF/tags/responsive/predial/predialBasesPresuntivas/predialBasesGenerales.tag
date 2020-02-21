@@ -21,7 +21,8 @@
 				<tbody>
 					<tr class="avisobody">
 
-						<td><spring:theme code="predial.basespresun.generales.descripcion1" /><a
+						<td><spring:theme
+								code="predial.basespresun.generales.descripcion1" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
 								información</a><br> <spring:theme
 								code="predial.basespresun.generales.descripcion2" /></td>
@@ -48,9 +49,9 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
+								<td><c:out value="${predialFormbases.tipDoc}" /></td>
+								<td><c:out value="${predialFormbases.numDoc}" /></td>
+								<td><c:out value="${predialFormbases.compleName}" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -73,24 +74,24 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.generales.anigrav" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+							code="predial.basespresun.generales.anigrav" /></label> <input id=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.anioGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.generales.opuso" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+							code="predial.basespresun.generales.opuso" /></label> <input id=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.opcionuso}"
 						maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.generales.matricula" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+							code="predial.basespresun.generales.matricula" /></label> <input id=""
+						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.matrInmobiliaria}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -99,8 +100,8 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.generales.direccion" /></label> <input id="" name=""
-						class="alto form-control" disabled type="text" value=""
+							code="predial.basespresun.generales.direccion" /></label> <input id=""
+						name="" class="alto form-control" disabled type="text" value=""
 						maxlength="240"></input>
 				</div>
 			</div>

@@ -48,9 +48,9 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
-								<td><c:out value="" /></td>
+								<td><c:out value="${predialFormtres.tipDoc}" /></td>
+								<td><c:out value="${predialFormtres.numDoc}" /></td>
+								<td><c:out value="${predialFormtres.compleName}" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -74,7 +74,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialtres.generales.anigrav" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormtres.anioGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -82,7 +82,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialtres.generales.opuso" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormtres.opcionuso}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialtres.generales.chip" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormtres.CHIP}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -100,7 +100,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialtres.generales.cedula" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialFormtres.estrDatosGenerales.cedulaCatastral}"
 						maxlength="240"></input>
 				</div>
 			</div>
