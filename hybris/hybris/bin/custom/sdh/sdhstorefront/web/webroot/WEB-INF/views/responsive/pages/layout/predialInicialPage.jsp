@@ -53,7 +53,7 @@
 		var numBP = "${infoContrib.numBP}";
 		var numDoc = "${infoContrib.numDoc}";
 		var tipoDoc = "${infoContrib.tipoDoc}";
-		var clavePeriodo = "";
+		var clavePeriodo = anoGravable.substr(2,2).concat("A1");
 		var dv = "${infoContrib.adicionales.DIGVERIF}";
 		
 		
