@@ -7,22 +7,42 @@ import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLo
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
+import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
+import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.PredialForm;
+import de.hybris.sdh.storefront.forms.PredialPresentarDecForm;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +52,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import sun.misc.BASE64Decoder;
 /**
  * @author Maria Luisa
  *
@@ -84,6 +106,20 @@ public class PredialUnificadoController extends AbstractPageController
 	@Resource(name = "userService")
 	UserService userService;
 
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+	@Resource(name = "sdhDetalleGasolina")
+	private SDHDetalleGasolina sdhDetalleGasolinaWS;
+
+	@Resource(name = "mediaService")
+	private MediaService mediaService;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
+
+	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
+
 	@RequestMapping(value = "/contribuyentes/predialunificado_inicio", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String predialinicio(@ModelAttribute("predialFormIni")
@@ -116,6 +152,8 @@ public class PredialUnificadoController extends AbstractPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		model.addAttribute("predial", predialFormIni);
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+		model.addAttribute("infoContrib", sdhConsultaContribuyenteBPResponse.getInfoContrib());
 
 		return getViewForPage(model);
 	}
@@ -834,6 +872,80 @@ public class PredialUnificadoController extends AbstractPageController
 		System.out.println("------------------entro al post de predial unificado uno------------------------");
 
 		return REDIRECT_TO_PREDIAL_CUATRO_PAGE;
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado_inicio/presentarDec", method = RequestMethod.GET)
+	@ResponseBody
+	public PredialPresentarDecResponse presentarDec(final PredialPresentarDecForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Predial Presentar Declaracion --------------------------");
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final PredialPresentarDecRequest presentaDecRequest = new PredialPresentarDecRequest();
+		PredialPresentarDecResponse presentaDecResponse = null;
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+
+
+		presentaDecRequest.setBp(customerModel.getNumBP());
+		presentaDecRequest.setChip(dataForm.getChip());
+		presentaDecRequest.setAnioGravable(dataForm.getAnioGravable());
+
+		try
+		{
+			System.out.println("Request de calculoimpuesto/TEST: " + presentaDecRequest);
+			presentaDecResponse = gasolinaService.predialPresentarDec(presentaDecRequest, sdhDetalleGasolinaWS, LOG);
+			System.out.println("Response de calculoimpuesto/TEST: " + presentaDecResponse);
+
+
+
+			if (presentaDecResponse != null && presentaDecResponse.getStringPDF() != null)
+			{
+				final String encodedBytes = presentaDecResponse.getStringPDF();
+
+				final BASE64Decoder decoder = new BASE64Decoder();
+				byte[] decodedBytes;
+				final FileOutputStream fop;
+				decodedBytes = new BASE64Decoder().decodeBuffer(encodedBytes);
+
+
+
+				final String fileName = "Predial-" + customerModel.getNumBP() + ".pdf";
+
+				final InputStream is = new ByteArrayInputStream(decodedBytes);
+
+
+				final CatalogUnawareMediaModel mediaModel = modelService.create(CatalogUnawareMediaModel.class);
+				mediaModel.setCode(System.currentTimeMillis() + "_" + fileName);
+				mediaModel.setDeleteByCronjob(Boolean.TRUE.booleanValue());
+				modelService.save(mediaModel);
+				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
+				modelService.refresh(mediaModel);
+
+				presentaDecResponse.setUrlDownload(mediaModel.getDownloadURL());
+
+
+			}
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error generating declaration : " + e.getMessage());
+
+			final ErrorEnWS error = new ErrorEnWS();
+
+			error.setId("0");
+			error.setMensaje("Hubo un error al generar la declaración, por favor intentalo más tarde");
+
+			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+
+			errores.add(error);
+
+			presentaDecResponse.setErrores(errores);
+
+		}
+		return presentaDecResponse;
+
+
 	}
 
 
