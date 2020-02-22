@@ -19,6 +19,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ICAInfObjetoRequest;
+import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.OpcionDeclaracionesVista;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
@@ -26,6 +27,7 @@ import de.hybris.sdh.core.pojos.responses.ICAInfObjetoResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.JuridicosVehiculos;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHConsultaPagoService;
@@ -167,6 +169,8 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				this.getTpImpuesto(dataForm.getOptionVehicular(), dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
 						dataForm.getOptionIca(),
 						dataForm.getOptionDeli(), dataForm.getOptionPredial()));
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+		model.addAttribute("customerData", customerData);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -579,6 +583,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		model.addAttribute("isPeriodoAnual", isPeriodoAnual);
 		model.addAttribute("tpImpuesto", this.getTpImpuesto(dataForm.getOptionGas(), dataForm.getOptionPubliExt(),
 				dataForm.getOptionDeli(), dataForm.getOptionIca(), dataForm.getOptionVehicular(), dataForm.getOptionPredial()));
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PRESENTAR_DECLARACION_CMS_PAGE));
@@ -622,7 +627,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 
 			if (predial != "")
 			{
-				map.put("7", "Predial");
+				map.put("1", "Predial");
 			}
 
 		}
@@ -682,6 +687,7 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 		infoVista.setIca(null);
 		infoVista.setReteIca(null);
 		infoVista.setErrores(null);
+		infoVista.setPredial(null);
 
 		//		if (infoVista.getCustomerData() == null)
 		//		{
@@ -741,6 +747,22 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 				}
 			}
 			infoVista.setVehicular(listaInfoVehiculos);
+			infoVista.setNumBP(numBP);
+		}
+		else if (infoVista.getClaveImpuesto().equals("1")) //predial
+		{
+			final List<PredialResponse> predial_listaInicial = sdhCustomerFacade.getRepresentadoFromSAP(numBP).getPredial();
+			List<PredialResponse> predial_filtrado = null;
+
+			//			obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
+			//					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+
+			predial_filtrado = predial_listaInicial.stream().filter(d -> StringUtils.isNotBlank(d.getCHIP()))
+					.collect(Collectors.toList());
+			predial_filtrado = predial_filtrado.stream().filter(d -> infoVista.getAnoGravable().equals(d.getAnioGravable()))
+					.collect(Collectors.toList());
+
+			infoVista.setPredial(predial_filtrado);
 			infoVista.setNumBP(numBP);
 		}
 
