@@ -866,6 +866,7 @@ debugger;
                		    placa + "&taxType=" + impuesto;
 
         currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion#",targetUrl);
+        alert(currentUrl);
         $.ajax({
             url : currentUrl,
             type : "GET",
@@ -873,7 +874,6 @@ debugger;
                 if(data == "02"){
                     ACC.opcionDeclaraciones.promtConfirmation(url);
                 }else{
-                    //return false;
                     window.location.href = url;
                 }
            	},

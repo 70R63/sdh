@@ -865,6 +865,7 @@ debugger;
                		    anioGravable + "&placa=" +
                		    placa + "&taxType=" + impuesto;
 
+
         currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion#",targetUrl);
         $.ajax({
             url : currentUrl,
@@ -873,7 +874,6 @@ debugger;
                 if(data == "02"){
                     ACC.opcionDeclaraciones.promtConfirmation(url);
                 }else{
-                    //return false;
                     window.location.href = url;
                 }
            	},
