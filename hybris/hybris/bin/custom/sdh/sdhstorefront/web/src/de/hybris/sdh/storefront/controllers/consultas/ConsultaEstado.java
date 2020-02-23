@@ -8,27 +8,34 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
+import de.hybris.sdh.core.pojos.requests.EdoCuentaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
+import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
+import de.hybris.sdh.core.services.SDHEdoCuentaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
+import de.hybris.sdh.storefront.forms.EdoCuentaForm;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -77,6 +84,12 @@ public class ConsultaEstado extends AbstractSearchPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
+	@Resource(name = "sdhEdoCuentaService")
+	SDHEdoCuentaService sdhEdoCuentaService;
+
 
 
 
@@ -86,11 +99,65 @@ public class ConsultaEstado extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String handleGET_PD(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- En Presentar Declaracion GET --------------------------");
+		System.out.println("---------------- En Estado de Cuenta GET --------------------------");
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		model.addAttribute("dataForm", dataForm);
+
+		final EdoCuentaForm ctaForm = new EdoCuentaForm();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final EdoCuentaRequest edoCuentaRequest = new EdoCuentaRequest();
+
+		ctaForm.setCompleName(customerData.getCompleteName());
+		ctaForm.setTipDoc(customerData.getDocumentType());
+		ctaForm.setNumBP(customerModel.getNumBP());
+
+		try
+		{
+			edoCuentaRequest.setBp(customerModel.getNumBP());
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final EdoCuentaResponse edoCuentaResponse = mapper.readValue(sdhEdoCuentaService.detalleEdoCta(edoCuentaRequest),
+					EdoCuentaResponse.class);
+
+
+			ctaForm.setCompleName(customerData.getCompleteName());
+			ctaForm.setTipDoc(customerData.getDocumentType());
+			ctaForm.setNumBP(customerModel.getNumBP());
+			ctaForm.setTasaInteres(edoCuentaResponse.getTasaInteres());
+			ctaForm.setPredialSaldoCargo(edoCuentaResponse.getPredialSaldoCargo());
+			ctaForm.setPredialSaldoFavor(edoCuentaResponse.getPredialSaldoFavor());
+			ctaForm.setICASaldoCargo(edoCuentaResponse.getICASaldoCargo());
+			ctaForm.setICASaldoFavor(edoCuentaResponse.getICASaldoFavor());
+			ctaForm.setVehicularSaldoCargo(edoCuentaResponse.getVehicularSaldoCargo());
+			ctaForm.setVehicularSaldoFavor(edoCuentaResponse.getVehicularSaldoFavor());
+			ctaForm.setDelineacionSaldoCargo(edoCuentaResponse.getDelineacionSaldoCargo());
+			ctaForm.setDelineacionSaldoFavor(edoCuentaResponse.getDelineacionSaldoFavor());
+			ctaForm.setGasolinaSaldoCargo(edoCuentaResponse.getGasolinaSaldoCargo());
+			ctaForm.setGasolinaSaldoFavor(edoCuentaResponse.getGasolinaSaldoFavor());
+			ctaForm.setPublicidadSaldoCargo(edoCuentaResponse.getPublicidadSaldoCargo());
+			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getPublicidadSaldoFavor());
+			ctaForm.setPredial(edoCuentaResponse.getPredial());
+			ctaForm.setTablaICA(edoCuentaResponse.getTablaICA());
+			ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
+			ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion());
+			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
+			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
+
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("there was an error while parsing redsocial JSON");
+			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+		}
+
+		model.addAttribute("ctaForm", ctaForm);
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
