@@ -221,7 +221,7 @@ ACC.opcionDeclaraciones = {
 
 		debugger;
 		if (infoResponse.impresionResponse.errores != null){
-			if (infoResponse.impresionResponse.errores[0].idmsj == "0"){
+			if (infoResponse.impresionResponse.errores[0].idmsj == "0" || infoResponse.impresionResponse.errores[0].idmsj == ""){
 				if(infoResponse.urlDownload != null){
 					$("#downloadHelper").attr("href",infoResponse.urlDownload);
 					document.getElementById("downloadHelper").click();
@@ -586,6 +586,26 @@ ACC.opcionDeclaraciones = {
 debugger;
 		if(infoResponse.declaracionesCertiPagos.declaraciones != null){
 			if(infoResponse.declaracionesCertiPagos.declaraciones.length > 0){
+				
+				if(infoActual.claveImpuesto == '0001'){
+					indiceTabla = 0;
+					$.each(infoResponse.declaracionesCertiPagos.declaraciones, function (index1,value1){
+						if(value1.numObjeto != ""){
+							$.each(infoResponse.customerData.predial, function (index2,value2){
+								if( value1.numObjeto.replace(/^0+/, '').trim() == value2.numObjeto.replace(/^0+/, '').trim() ){
+									desc_clavePeriodo = ACC.opcionDeclaraciones.obtener_desc_clavePeriodo(value1.clavePeriodo);
+									$('#table-predial1').append("<tr>"+ 
+											'<td>' + value2.chip + '</td>'+
+											'<td>' + value2.matrInmobiliaria + '</td>'+
+											'<td>' + value2.direccionPredio + '</td>'+
+											'<td><input id="registroNum_'+ indiceTabla +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value1.numObjeto  +'" data-ctaContrato="' + value1.ctaContrato +'" data-clavePeriodo="' + value1.clavePeriodo + '" data-referencia="' + value1.referencia + '" data-fechaCompensa="' + value1.fechaCompensa + '" data-moneda="' + value1.moneda + '" data-numDocPago="' + value1.numDocPago + '" data-numfactForm="' + value1.numfactForm + '" data-importe="' + value1.importe.replace(/,/g, '') + '"' +">" + "</td>"+
+											"</tr>");
+										indiceTabla++;
+								}
+							});
+						}
+					});
+				}
 				
 				if(infoActual.claveImpuesto == '0002'){
 					indiceTabla = 0;
