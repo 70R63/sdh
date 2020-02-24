@@ -23,7 +23,7 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="table-responsive text-center">
-						<table class="table tableedocuenta" id="tabPaginacion0">
+						<table class="table tableedocuenta" id="">
 							<thead>
 								<tr>
 									<th colspan="4"><label
