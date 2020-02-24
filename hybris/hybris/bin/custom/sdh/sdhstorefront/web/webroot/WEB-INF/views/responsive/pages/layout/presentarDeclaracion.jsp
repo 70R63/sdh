@@ -8,13 +8,15 @@
 	tagdir="/WEB-INF/tags/responsive/impuestos"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="obligaciones" tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="loader"></div>
 
 
 <impuestos:listaImpuestos />
-
+<obligaciones:obliPendientesPagar />
+<a id="downloadHelper" target="_blank"></a>
 
 
 <script type="text/javascript">
@@ -32,7 +34,7 @@
 			}
 		    debugger;
 		    if(anio != "" ){
-		    if(tipoImpuesto == '2' || tipoImpuesto == '7'){ //vehicular y predial
+		    if(tipoImpuesto == '2' || tipoImpuesto == '1'){ //vehicular predial
 	 			nota2.style.display='block';
 	 				notaotros.style.display='none';
 			}else{
@@ -48,9 +50,10 @@
 
 
 	function onChange() {
+		debugger;
 		var tipoImpuesto = document.getElementById("impuesto").value;
-		if(tipoImpuesto == '2'){ //vehicular
-			ACC.opcionDeclaraciones.prepararVehicular_presentarDec(tipoImpuesto);
+		if(tipoImpuesto == '2' || tipoImpuesto == '1'){ //vehicular predial
+			ACC.opcionDeclaraciones.prepararImpuesto_presentarDec(tipoImpuesto);
 		}else{ //otros impuestos
 			document.getElementById("anoGravable").value = "";
 			form = document.getElementById("forma");
@@ -72,19 +75,19 @@
 	}
 
 	function onChangeAnioGravable() {
-		
+		debugger
 		var impuestoVal = document.getElementById("impuesto").value;
 		var nota = document.getElementById("notaVehPre");
 		var notaotros = document.getElementById("notaOtros");
  	
- 		if(impuestoVal == '2' || impuestoVal == '7'){ //vehicular y predial
+ 		if(impuestoVal == '2' || impuestoVal == '1'){ //vehicular y predial
  			nota.style.display='block';
  				notaotros.style.display='none';
 		}else{
 			nota.style.display='none';
 			notaotros.style.display='block';
 		}
-		if(impuestoVal == '2'){ //vehicular
+		if(impuestoVal == '2' || impuestoVal == '1' ){ //vehicular predial
 			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_presentarDec(impuestoVal);
 		}else{ //otros impuestos
 			if (impuestoVal == "4" || impuestoVal == "6" || impuestoVal == "3") {
@@ -138,4 +141,22 @@
 		debugger;
 		return '<c:url value="/" />';
 	}
+	
+	function presentarDeclaracion(CHIP,anioGravable){
+		ACC.opcionDeclaraciones.predial_presentarDec(CHIP,anioGravable);
+		
+	}
+
+	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip){
+		debugger;
+		var numBP = "${customerData.numBP}";
+		var numDoc = "${customerData.documentNumber}";
+		var tipoDoc = "${customerData.documentType}";
+		var clavePeriodo = anoGravable.substr(2,2).concat("A1");
+		var dv = "${customerData.digVer}";
+		
+		
+		ACC.opcionDeclaraciones.llamarPrepararPagoPSE(tipoImpuesto,numBP,numDoc,tipoDoc,anoGravable,periodo,clavePeriodo,dv,numObjeto,chip);		
+	}
+
 </script>

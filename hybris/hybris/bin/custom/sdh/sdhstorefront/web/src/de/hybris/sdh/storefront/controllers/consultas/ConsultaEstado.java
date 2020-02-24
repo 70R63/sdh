@@ -8,35 +8,33 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+<<<<<<< HEAD
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.GenericSearchConstants.LOG;
+=======
+>>>>>>> dev
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
-import de.hybris.sdh.core.pojos.requests.EdoCuentaRequest;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
-import de.hybris.sdh.core.pojos.responses.EdoCuentaResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
-import de.hybris.sdh.core.services.SDHEdoCuentaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaForm;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
-import de.hybris.sdh.storefront.forms.EdoCuentaForm;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -85,12 +83,6 @@ public class ConsultaEstado extends AbstractSearchPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
-	@Resource(name = "customerFacade")
-	CustomerFacade customerFacade;
-
-	@Resource(name = "sdhEdoCuentaService")
-	SDHEdoCuentaService sdhEdoCuentaService;
-
 
 
 
@@ -100,12 +92,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String handleGET_PD(final Model model) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- En Estado de Cuenta GET --------------------------");
+		System.out.println("---------------- En Presentar Declaracion GET --------------------------");
 
 		final SobreTasaGasolinaForm dataForm = new SobreTasaGasolinaForm();
 		dataForm.setCatalogosSo(new SobreTasaGasolinaService(configurationService).prepararCatalogos());
 		model.addAttribute("dataForm", dataForm);
 
+<<<<<<< HEAD
 		final EdoCuentaForm ctaForm = new EdoCuentaForm();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
@@ -161,6 +154,8 @@ public class ConsultaEstado extends AbstractSearchPageController
 		model.addAttribute("ctaForm", ctaForm);
 
 
+=======
+>>>>>>> dev
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ESTADO_DE_CUENTA_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));

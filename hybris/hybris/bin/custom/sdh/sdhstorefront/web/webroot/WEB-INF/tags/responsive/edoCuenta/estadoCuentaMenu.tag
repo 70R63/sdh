@@ -54,7 +54,7 @@
 										code="edocuenta.inicial.tipiden" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value="${ctaForm.tipoDoc}"></c:out>" />
+									value="<c:out value=""></c:out>" />
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -63,7 +63,7 @@
 										code="edocuenta.inicial.numiden" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value="${ctaForm.numDoc}"></c:out>" />
+									value="<c:out value=""></c:out>" />
 							</div>
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.nom" /></label> <input class="newalto form-control"
 									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value="${ctaForm.compleName}"></c:out>" />
+									value="<c:out value=""></c:out>" />
 							</div>
 						</div>
 					</div>
