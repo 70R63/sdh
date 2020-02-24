@@ -13,10 +13,10 @@
 
 <div class="loader"></div>
 
+
+<impuestos:listaImpuestos />
 <obligaciones:obliPendientesPagar />
 <a id="downloadHelper" target="_blank"></a>
-<impuestos:listaImpuestos />
-
 
 
 <script type="text/javascript">
