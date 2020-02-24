@@ -36,20 +36,20 @@
 					<table class="table" id="example">
 						<thead>
 							<tr>
-								<td><label class="control-label labeltabletd tableident"><spring:theme
-											code="predial.inicial.table.chip" /></label></td>
-								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
-											code="predial.inicial.table.matinmo" /></label></td>
-								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.dir" /></label></td>
-								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.nocotrato" /></label></td>
-								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.detalle" /></label></td>
-								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.TotalPagar" /></label></td>
-								<td><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.pagarEnLinea" /></label></td>
+								<th><label class="control-label labeltabletd tableident"><spring:theme
+											code="predial.inicial.table.chip" /></label></th>
+								<th><label class="control-label labeltabletd tablenumiden"><spring:theme
+											code="predial.inicial.table.matinmo" /></label></th>
+								<th><label class="control-label labeltabletd "><spring:theme
+											code="predial.inicial.table.dir" /></label></th>
+								<th><label class="control-label labeltabletd "><spring:theme
+											code="predial.inicial.table.nocotrato" /></label></th>
+								<th><label class="control-label labeltabletd "><spring:theme
+											code="predial.inicial.table.detalle" /></label></th>
+								<th><label class="control-label labeltabletd "><spring:theme
+											code="predial.inicial.table.TotalPagar" /></label></th>
+								<th><label class="control-label labeltabletd "><spring:theme
+											code="predial.inicial.table.pagarEnLinea" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -64,7 +64,7 @@
 									<td><c:out value="${current.contratoArrenda}" /></td>
 									<td>
 										<button type="button" id="${nombrePresentarDec}"
-											name="${btnPresentarDec}" value="presentarDec" class="btn-primary"
+											name="${nombrePresentarDec}" value="presentarDec" class="btn-primary"
 											onclick="presentarDeclaracion('${current.CHIP}','${current.anioGravable}')">
 											<spring:theme code="predial.inicial.table.presentarDeclaracion" />
 										</button>
