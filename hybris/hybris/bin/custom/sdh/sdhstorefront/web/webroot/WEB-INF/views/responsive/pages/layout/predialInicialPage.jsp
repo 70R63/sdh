@@ -57,23 +57,7 @@
 		var dv = "${infoContrib.adicionales.DIGVERIF}";
 		
 		
-		$("#pagarEnLinea_tipoImpuesto").val(tipoImpuesto);
-		$("#pagarEnLinea_numBP").val(numBP);
-		$("#pagarEnLinea_numDoc").val(numDoc);
-		$("#pagarEnLinea_tipoDoc").val(tipoDoc);		
-		$("#pagarEnLinea_anoGravable").val(anoGravable);
-		$("#pagarEnLinea_periodo").val(periodo);
-		$("#pagarEnLinea_clavePeriodo").val(clavePeriodo);
-		$("#pagarEnLinea_dv").val(dv);
-		$("#pagarEnLinea_numObjeto").val(numObjeto);
-		$("#pagarEnLinea_chip").val(chip);
-		
-		
-		form = document.getElementById("infoPreviaPSE");
-		if(form!=null){
-			form.submit();
-		}
-		
+		ACC.opcionDeclaraciones.llamarPrepararPagoPSE(tipoImpuesto,numBP,numDoc,tipoDoc,anoGravable,periodo,clavePeriodo,dv,numObjeto,chip);		
 	}
 	
 

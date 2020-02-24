@@ -12,6 +12,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.ListaDeclaracionesResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
@@ -47,6 +48,7 @@ public class OpcionDeclaracionesVista
 	private ImpuestoICA ica;
 	private ReteICA reteIca;
 	private List<ImpuestoVehiculos> vehicular; //Se agrega la  parte de vehiculos del response
+	private List<PredialResponse> predial; //Se agrega la  parte de predial del response
 
 
 	private String ctaContrato;
@@ -559,6 +561,23 @@ public class OpcionDeclaracionesVista
 	public void setVehicular(final List<ImpuestoVehiculos> vehicular)
 	{
 		this.vehicular = vehicular;
+	}
+
+	/**
+	 * @return the predial
+	 */
+	public List<PredialResponse> getPredial()
+	{
+		return predial;
+	}
+
+	/**
+	 * @param predial
+	 *           the predial to set
+	 */
+	public void setPredial(final List<PredialResponse> predial)
+	{
+		this.predial = predial;
 	}
 
 	/**
