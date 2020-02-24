@@ -866,7 +866,7 @@ debugger;
                		    placa + "&taxType=" + impuesto;
 
         currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion#",targetUrl);
-        alert(currentUrl);
+
         $.ajax({
             url : currentUrl,
             type : "GET",
