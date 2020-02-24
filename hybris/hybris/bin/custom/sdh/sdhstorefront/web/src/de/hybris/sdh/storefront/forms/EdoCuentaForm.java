@@ -37,7 +37,7 @@ public class EdoCuentaForm
 	private String GasolinaSaldoFavor;
 	private String PublicidadSaldoCargo;
 	private String PublicidadSaldoFavor;
-	private EdoCtaPredial predial;
+	private List<EdoCtaPredial> predial;
 	private List<EdoCtaIca> tablaICA;
 	private List<EdoCtaVehiculos> tablaVehicular;
 	private List<EdoCtaDeli> tablaDelineacion;
@@ -316,10 +316,12 @@ public class EdoCuentaForm
 		PublicidadSaldoFavor = publicidadSaldoFavor;
 	}
 
+
+
 	/**
 	 * @return the predial
 	 */
-	public EdoCtaPredial getPredial()
+	public List<EdoCtaPredial> getPredial()
 	{
 		return predial;
 	}
@@ -328,7 +330,7 @@ public class EdoCuentaForm
 	 * @param predial
 	 *           the predial to set
 	 */
-	public void setPredial(final EdoCtaPredial predial)
+	public void setPredial(final List<EdoCtaPredial> predial)
 	{
 		this.predial = predial;
 	}

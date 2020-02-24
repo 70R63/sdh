@@ -53,33 +53,37 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tableangrav"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledomatri"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-								</tr>
-								<tr>
-									<td colspan="4" class="td-colspann"
-										style="border: 0px !important;"></td>
-									<td class="td-total"><label
-										class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
-												code="edocuenta.inicial.predio.total" /> </label></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tableangrav"
-										disabled="disabled" value="" type="text" /></td>
-								</tr>
+								<c:forEach varStatus="loop" items="${ctaForm.predial}"
+									var="eachPredial">
+									<tr>
+										<td><c:out value="${eachPredial.CHIP}" /></td>
+										<c:forEach varStatus="loop" items="${eachPredial.detallePredial}"
+											var="eachPredialDetail">
+											<td><c:out
+													value="${eachPredial.eachPredialDetail.anioGravable}" /></td>
+											<td><c:out
+													value="${eachPredial.eachPredialDetail.destinohacendario}" /></td>
+											<td><c:out value="${eachPredial.eachPredialDetail.estado}" /></td>
+											<td><c:out
+													value="${eachPredial.eachPredialDetail.porcParticipacion}" /></td>
+											<td><c:out
+													value="${eachPredial.eachPredialDetail.saldoCargo}" /></td>
+											<td><c:out
+													value="${eachPredial.eachPredialDetail.saldoFavor}" /></td>
+										</c:forEach>
+									</tr>
+									<tr>
+										<td colspan="4" class="td-colspann"
+											style="border: 0px !important;"></td>
+										<td class="td-total"><label
+											class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
+													code="edocuenta.inicial.predio.total" /> </label></td>
+										<td><input class="inputtextnew tabledoobli"
+											disabled="disabled" value="" type="text" /></td>
+										<td><input class="inputtextnew tableangrav"
+											disabled="disabled" value="" type="text" /></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
