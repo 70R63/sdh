@@ -54,7 +54,7 @@
 										code="edocuenta.inicial.tipiden" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.tipoDoc}"></c:out>" />
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -63,7 +63,7 @@
 										code="edocuenta.inicial.numiden" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.numDoc}"></c:out>" />
 							</div>
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.nom" /></label> <input class="newalto form-control"
 									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.compleName}"></c:out>" />
 							</div>
 						</div>
 					</div>
@@ -110,7 +110,7 @@
 										code="edocuenta.inicial.selcimpuesto" /></label> <select
 									id="impuesto" class="new_alto form-control " name="impuesto"
 									onchange="Selected(this)">
-									<option value="0">Seleccionar</option>
+									<option value="0">Todo</option>
 									<option value="1">Predial Unificado</option>
 									<option value="2">Vehículos</option>
 									<option value="3">ICA</option>
@@ -180,4 +180,97 @@
 	</sf:form>
 </div>
 
+<script type="text/javascript">
+	function Selected(selectObject) {
+		var value = selectObject.value;
+		document.getElementById("Idimp").value = value;
+	}
+
+	function showdetail(selectObject) {
+
+		debugger;
+		var value = selectObject.value;
+		var x = document.getElementById('Idimp').value;
+
+		var todo = document.getElementById('idtodos');
+		var detpred = document.getElementById('predial');
+		var detica = document.getElementById('ica');
+		var detvehi = document.getElementById('vehiculos');
+		var detdeli = document.getElementById('delurbana');
+		var detgas = document.getElementById('gasolina');
+		var detplubliext = document.getElementById('publiext');
+
+		if (x == '1') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'block';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'none';
+
+		} else if (x == '2') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'block';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'none';
+
+		} else if (x == '3') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'block';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'none';
+
+		} else if (x == '4') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'block';
+
+		} else if (x == '5') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'block';
+			detplubliext.style.display = 'none';
+
+		} else if (x == '6') {
+
+			todo.style.display = 'none';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detgas.style.display = 'none';
+			detdeli.style.display = 'block';
+			detplubliext.style.display = 'none';
+
+		} else {
+
+			todo.style.display = 'block';
+			detpred.style.display = 'none';
+			detica.style.display = 'none';
+			detvehi.style.display = 'none';
+			detdeli.style.display = 'none';
+			detgas.style.display = 'none';
+			detplubliext.style.display = 'none';
+		}
+
+	}
+</script>
 

@@ -25,18 +25,18 @@ public class EdoCuentaForm
 	private String tipoDoc;
 	private String numDoc;
 	private String tasaInteres;
-	private String PredialSaldoCargo;
-	private String PredialSaldoFavor;
-	private String ICASaldoCargo;
-	private String ICASaldoFavor;
-	private String VehicularSaldoCargo;
-	private String VehicularSaldoFavor;
-	private String DelineacionSaldoCargo;
-	private String DelineacionSaldoFavor;
-	private String GasolinaSaldoCargo;
-	private String GasolinaSaldoFavor;
-	private String PublicidadSaldoCargo;
-	private String PublicidadSaldoFavor;
+	private String predialSaldoCargo;
+	private String predialSaldoFavor;
+	private String iCASaldoCargo;
+	private String iCASaldoFavor;
+	private String vehicularSaldoCargo;
+	private String vehicularSaldoFavor;
+	private String delineacionSaldoCargo;
+	private String delineacionSaldoFavor;
+	private String gasolinaSaldoCargo;
+	private String gasolinaSaldoFavor;
+	private String publicidadSaldoCargo;
+	private String publicidadSaldoFavor;
 	private List<EdoCtaPredial> predial;
 	private List<EdoCtaIca> tablaICA;
 	private List<EdoCtaVehiculos> tablaVehicular;
@@ -112,12 +112,13 @@ public class EdoCuentaForm
 		this.tasaInteres = tasaInteres;
 	}
 
+
 	/**
 	 * @return the predialSaldoCargo
 	 */
 	public String getPredialSaldoCargo()
 	{
-		return PredialSaldoCargo;
+		return predialSaldoCargo;
 	}
 
 	/**
@@ -126,7 +127,7 @@ public class EdoCuentaForm
 	 */
 	public void setPredialSaldoCargo(final String predialSaldoCargo)
 	{
-		PredialSaldoCargo = predialSaldoCargo;
+		this.predialSaldoCargo = predialSaldoCargo;
 	}
 
 	/**
@@ -134,7 +135,7 @@ public class EdoCuentaForm
 	 */
 	public String getPredialSaldoFavor()
 	{
-		return PredialSaldoFavor;
+		return predialSaldoFavor;
 	}
 
 	/**
@@ -143,41 +144,41 @@ public class EdoCuentaForm
 	 */
 	public void setPredialSaldoFavor(final String predialSaldoFavor)
 	{
-		PredialSaldoFavor = predialSaldoFavor;
+		this.predialSaldoFavor = predialSaldoFavor;
 	}
 
 	/**
 	 * @return the iCASaldoCargo
 	 */
-	public String getICASaldoCargo()
+	public String getiCASaldoCargo()
 	{
-		return ICASaldoCargo;
+		return iCASaldoCargo;
 	}
 
 	/**
 	 * @param iCASaldoCargo
 	 *           the iCASaldoCargo to set
 	 */
-	public void setICASaldoCargo(final String iCASaldoCargo)
+	public void setiCASaldoCargo(final String iCASaldoCargo)
 	{
-		ICASaldoCargo = iCASaldoCargo;
+		this.iCASaldoCargo = iCASaldoCargo;
 	}
 
 	/**
 	 * @return the iCASaldoFavor
 	 */
-	public String getICASaldoFavor()
+	public String getiCASaldoFavor()
 	{
-		return ICASaldoFavor;
+		return iCASaldoFavor;
 	}
 
 	/**
 	 * @param iCASaldoFavor
 	 *           the iCASaldoFavor to set
 	 */
-	public void setICASaldoFavor(final String iCASaldoFavor)
+	public void setiCASaldoFavor(final String iCASaldoFavor)
 	{
-		ICASaldoFavor = iCASaldoFavor;
+		this.iCASaldoFavor = iCASaldoFavor;
 	}
 
 	/**
@@ -185,7 +186,7 @@ public class EdoCuentaForm
 	 */
 	public String getVehicularSaldoCargo()
 	{
-		return VehicularSaldoCargo;
+		return vehicularSaldoCargo;
 	}
 
 	/**
@@ -194,7 +195,7 @@ public class EdoCuentaForm
 	 */
 	public void setVehicularSaldoCargo(final String vehicularSaldoCargo)
 	{
-		VehicularSaldoCargo = vehicularSaldoCargo;
+		this.vehicularSaldoCargo = vehicularSaldoCargo;
 	}
 
 	/**
@@ -202,7 +203,7 @@ public class EdoCuentaForm
 	 */
 	public String getVehicularSaldoFavor()
 	{
-		return VehicularSaldoFavor;
+		return vehicularSaldoFavor;
 	}
 
 	/**
@@ -211,7 +212,7 @@ public class EdoCuentaForm
 	 */
 	public void setVehicularSaldoFavor(final String vehicularSaldoFavor)
 	{
-		VehicularSaldoFavor = vehicularSaldoFavor;
+		this.vehicularSaldoFavor = vehicularSaldoFavor;
 	}
 
 	/**
@@ -219,7 +220,7 @@ public class EdoCuentaForm
 	 */
 	public String getDelineacionSaldoCargo()
 	{
-		return DelineacionSaldoCargo;
+		return delineacionSaldoCargo;
 	}
 
 	/**
@@ -228,7 +229,7 @@ public class EdoCuentaForm
 	 */
 	public void setDelineacionSaldoCargo(final String delineacionSaldoCargo)
 	{
-		DelineacionSaldoCargo = delineacionSaldoCargo;
+		this.delineacionSaldoCargo = delineacionSaldoCargo;
 	}
 
 	/**
@@ -236,7 +237,7 @@ public class EdoCuentaForm
 	 */
 	public String getDelineacionSaldoFavor()
 	{
-		return DelineacionSaldoFavor;
+		return delineacionSaldoFavor;
 	}
 
 	/**
@@ -245,7 +246,7 @@ public class EdoCuentaForm
 	 */
 	public void setDelineacionSaldoFavor(final String delineacionSaldoFavor)
 	{
-		DelineacionSaldoFavor = delineacionSaldoFavor;
+		this.delineacionSaldoFavor = delineacionSaldoFavor;
 	}
 
 	/**
@@ -253,7 +254,7 @@ public class EdoCuentaForm
 	 */
 	public String getGasolinaSaldoCargo()
 	{
-		return GasolinaSaldoCargo;
+		return gasolinaSaldoCargo;
 	}
 
 	/**
@@ -262,7 +263,7 @@ public class EdoCuentaForm
 	 */
 	public void setGasolinaSaldoCargo(final String gasolinaSaldoCargo)
 	{
-		GasolinaSaldoCargo = gasolinaSaldoCargo;
+		this.gasolinaSaldoCargo = gasolinaSaldoCargo;
 	}
 
 	/**
@@ -270,7 +271,7 @@ public class EdoCuentaForm
 	 */
 	public String getGasolinaSaldoFavor()
 	{
-		return GasolinaSaldoFavor;
+		return gasolinaSaldoFavor;
 	}
 
 	/**
@@ -279,7 +280,7 @@ public class EdoCuentaForm
 	 */
 	public void setGasolinaSaldoFavor(final String gasolinaSaldoFavor)
 	{
-		GasolinaSaldoFavor = gasolinaSaldoFavor;
+		this.gasolinaSaldoFavor = gasolinaSaldoFavor;
 	}
 
 	/**
@@ -287,7 +288,7 @@ public class EdoCuentaForm
 	 */
 	public String getPublicidadSaldoCargo()
 	{
-		return PublicidadSaldoCargo;
+		return publicidadSaldoCargo;
 	}
 
 	/**
@@ -296,7 +297,7 @@ public class EdoCuentaForm
 	 */
 	public void setPublicidadSaldoCargo(final String publicidadSaldoCargo)
 	{
-		PublicidadSaldoCargo = publicidadSaldoCargo;
+		this.publicidadSaldoCargo = publicidadSaldoCargo;
 	}
 
 	/**
@@ -304,7 +305,7 @@ public class EdoCuentaForm
 	 */
 	public String getPublicidadSaldoFavor()
 	{
-		return PublicidadSaldoFavor;
+		return publicidadSaldoFavor;
 	}
 
 	/**
@@ -313,10 +314,8 @@ public class EdoCuentaForm
 	 */
 	public void setPublicidadSaldoFavor(final String publicidadSaldoFavor)
 	{
-		PublicidadSaldoFavor = publicidadSaldoFavor;
+		this.publicidadSaldoFavor = publicidadSaldoFavor;
 	}
-
-
 
 	/**
 	 * @return the predial

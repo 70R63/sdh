@@ -5,6 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 
 /**
  * @author hybris
@@ -13,24 +15,26 @@ import java.util.List;
 public class EdoCuentaResponse
 {
 	private String tasaInteres;
-	private String PredialSaldoCargo;
-	private String PredialSaldoFavor;
-	private String ICASaldoCargo;
-	private String ICASaldoFavor;
-	private String VehicularSaldoCargo;
-	private String VehicularSaldoFavor;
-	private String DelineacionSaldoCargo;
-	private String DelineacionSaldoFavor;
-	private String GasolinaSaldoCargo;
-	private String GasolinaSaldoFavor;
-	private String PublicidadSaldoCargo;
-	private String PublicidadSaldoFavor;
+	private String newPredialSaldoCargo;
+	private String newPredialSaldoFavor;
+	private String newICASaldoCargo;
+	private String newICASaldoFavor;
+	private String newVehicularSaldoCargo;
+	private String newVehicularSaldoFavor;
+	private String newDelineacionSaldoCargo;
+	private String newDelineacionSaldoFavor;
+	private String newGasolinaSaldoCargo;
+	private String newGasolinaSaldoFavor;
+	private String newPublicidadSaldoCargo;
+	private String newPublicidadSaldoFavor;
 	private List<EdoCtaPredial> predial;
 	private List<EdoCtaIca> tablaICA;
 	private List<EdoCtaVehiculos> tablaVehicular;
 	private List<EdoCtaDeli> tablaDelineacion;
 	private List<EdoCtaGas> tablaGasolina;
 	private List<EdoCtaPublicidad> tablaPublicidad;
+
+
 
 	/**
 	 * @return the tasaInteres
@@ -49,211 +53,223 @@ public class EdoCuentaResponse
 		this.tasaInteres = tasaInteres;
 	}
 
+
+
 	/**
-	 * @return the predialSaldoCargo
+	 * @return the newPredialSaldoCargo
 	 */
-	public String getPredialSaldoCargo()
+	public String getNewPredialSaldoCargo()
 	{
-		return PredialSaldoCargo;
+		return newPredialSaldoCargo;
 	}
 
 	/**
-	 * @param predialSaldoCargo
-	 *           the predialSaldoCargo to set
+	 * @param newPredialSaldoCargo
+	 *           the newPredialSaldoCargo to set
 	 */
-	public void setPredialSaldoCargo(final String predialSaldoCargo)
+	@JsonProperty("PredialSaldoCargo")
+	public void setNewPredialSaldoCargo(final String newPredialSaldoCargo)
 	{
-		PredialSaldoCargo = predialSaldoCargo;
+		this.newPredialSaldoCargo = newPredialSaldoCargo;
 	}
 
 	/**
-	 * @return the predialSaldoFavor
+	 * @return the newPredialSaldoFavor
 	 */
-	public String getPredialSaldoFavor()
+	public String getNewPredialSaldoFavor()
 	{
-		return PredialSaldoFavor;
+		return newPredialSaldoFavor;
 	}
 
 	/**
-	 * @param predialSaldoFavor
-	 *           the predialSaldoFavor to set
+	 * @param newPredialSaldoFavor
+	 *           the newPredialSaldoFavor to set
 	 */
-	public void setPredialSaldoFavor(final String predialSaldoFavor)
+	@JsonProperty("PredialSaldoFavor")
+	public void setNewPredialSaldoFavor(final String newPredialSaldoFavor)
 	{
-		PredialSaldoFavor = predialSaldoFavor;
+		this.newPredialSaldoFavor = newPredialSaldoFavor;
 	}
 
 	/**
-	 * @return the iCASaldoCargo
+	 * @return the newICASaldoCargo
 	 */
-	public String getICASaldoCargo()
+	public String getNewICASaldoCargo()
 	{
-		return ICASaldoCargo;
+		return newICASaldoCargo;
 	}
 
 	/**
-	 * @param iCASaldoCargo
-	 *           the iCASaldoCargo to set
+	 * @param newICASaldoCargo
+	 *           the newICASaldoCargo to set
 	 */
-	public void setICASaldoCargo(final String iCASaldoCargo)
+	@JsonProperty("ICASaldoCargo")
+	public void setNewICASaldoCargo(final String newICASaldoCargo)
 	{
-		ICASaldoCargo = iCASaldoCargo;
+		this.newICASaldoCargo = newICASaldoCargo;
 	}
 
 	/**
-	 * @return the iCASaldoFavor
+	 * @return the newICASaldoFavor
 	 */
-	public String getICASaldoFavor()
+	public String getNewICASaldoFavor()
 	{
-		return ICASaldoFavor;
+		return newICASaldoFavor;
 	}
 
 	/**
-	 * @param iCASaldoFavor
-	 *           the iCASaldoFavor to set
+	 * @param newICASaldoFavor
+	 *           the newICASaldoFavor to set
 	 */
-	public void setICASaldoFavor(final String iCASaldoFavor)
+	@JsonProperty("ICASaldoFavor")
+	public void setNewICASaldoFavor(final String newICASaldoFavor)
 	{
-		ICASaldoFavor = iCASaldoFavor;
+		this.newICASaldoFavor = newICASaldoFavor;
 	}
 
 	/**
-	 * @return the vehicularSaldoCargo
+	 * @return the newVehicularSaldoCargo
 	 */
-	public String getVehicularSaldoCargo()
+	public String getNewVehicularSaldoCargo()
 	{
-		return VehicularSaldoCargo;
+		return newVehicularSaldoCargo;
 	}
 
 	/**
-	 * @param vehicularSaldoCargo
-	 *           the vehicularSaldoCargo to set
+	 * @param newVehicularSaldoCargo
+	 *           the newVehicularSaldoCargo to set
 	 */
-	public void setVehicularSaldoCargo(final String vehicularSaldoCargo)
+	@JsonProperty("VehicularSaldoCargo")
+	public void setNewVehicularSaldoCargo(final String newVehicularSaldoCargo)
 	{
-		VehicularSaldoCargo = vehicularSaldoCargo;
+		this.newVehicularSaldoCargo = newVehicularSaldoCargo;
 	}
 
 	/**
-	 * @return the vehicularSaldoFavor
+	 * @return the newVehicularSaldoFavor
 	 */
-	public String getVehicularSaldoFavor()
+	public String getNewVehicularSaldoFavor()
 	{
-		return VehicularSaldoFavor;
+		return newVehicularSaldoFavor;
 	}
 
 	/**
-	 * @param vehicularSaldoFavor
-	 *           the vehicularSaldoFavor to set
+	 * @param newVehicularSaldoFavor
+	 *           the newVehicularSaldoFavor to set
 	 */
-	public void setVehicularSaldoFavor(final String vehicularSaldoFavor)
+	@JsonProperty("VehicularSaldoFavor")
+	public void setNewVehicularSaldoFavor(final String newVehicularSaldoFavor)
 	{
-		VehicularSaldoFavor = vehicularSaldoFavor;
+		this.newVehicularSaldoFavor = newVehicularSaldoFavor;
 	}
 
 	/**
-	 * @return the delineacionSaldoCargo
+	 * @return the newDelineacionSaldoCargo
 	 */
-	public String getDelineacionSaldoCargo()
+	public String getNewDelineacionSaldoCargo()
 	{
-		return DelineacionSaldoCargo;
+		return newDelineacionSaldoCargo;
 	}
 
 	/**
-	 * @param delineacionSaldoCargo
-	 *           the delineacionSaldoCargo to set
+	 * @param newDelineacionSaldoCargo
+	 *           the newDelineacionSaldoCargo to set
 	 */
-	public void setDelineacionSaldoCargo(final String delineacionSaldoCargo)
+	@JsonProperty("DelineacionSaldoCargo")
+	public void setNewDelineacionSaldoCargo(final String newDelineacionSaldoCargo)
 	{
-		DelineacionSaldoCargo = delineacionSaldoCargo;
+		this.newDelineacionSaldoCargo = newDelineacionSaldoCargo;
 	}
 
 	/**
-	 * @return the delineacionSaldoFavor
+	 * @return the newDelineacionSaldoFavor
 	 */
-	public String getDelineacionSaldoFavor()
+	public String getNewDelineacionSaldoFavor()
 	{
-		return DelineacionSaldoFavor;
+		return newDelineacionSaldoFavor;
 	}
 
 	/**
-	 * @param delineacionSaldoFavor
-	 *           the delineacionSaldoFavor to set
+	 * @param newDelineacionSaldoFavor
+	 *           the newDelineacionSaldoFavor to set
 	 */
-	public void setDelineacionSaldoFavor(final String delineacionSaldoFavor)
+	@JsonProperty("DelineacionSaldoFavor")
+	public void setNewDelineacionSaldoFavor(final String newDelineacionSaldoFavor)
 	{
-		DelineacionSaldoFavor = delineacionSaldoFavor;
+		this.newDelineacionSaldoFavor = newDelineacionSaldoFavor;
 	}
 
 	/**
-	 * @return the gasolinaSaldoCargo
+	 * @return the newGasolinaSaldoCargo
 	 */
-	public String getGasolinaSaldoCargo()
+	public String getNewGasolinaSaldoCargo()
 	{
-		return GasolinaSaldoCargo;
+		return newGasolinaSaldoCargo;
 	}
 
 	/**
-	 * @param gasolinaSaldoCargo
-	 *           the gasolinaSaldoCargo to set
+	 * @param newGasolinaSaldoCargo
+	 *           the newGasolinaSaldoCargo to set
 	 */
-	public void setGasolinaSaldoCargo(final String gasolinaSaldoCargo)
+	@JsonProperty("GasolinaSaldoCargo")
+	public void setNewGasolinaSaldoCargo(final String newGasolinaSaldoCargo)
 	{
-		GasolinaSaldoCargo = gasolinaSaldoCargo;
+		this.newGasolinaSaldoCargo = newGasolinaSaldoCargo;
 	}
 
 	/**
-	 * @return the gasolinaSaldoFavor
+	 * @return the newGasolinaSaldoFavor
 	 */
-	public String getGasolinaSaldoFavor()
+	public String getNewGasolinaSaldoFavor()
 	{
-		return GasolinaSaldoFavor;
+		return newGasolinaSaldoFavor;
 	}
 
 	/**
-	 * @param gasolinaSaldoFavor
-	 *           the gasolinaSaldoFavor to set
+	 * @param newGasolinaSaldoFavor
+	 *           the newGasolinaSaldoFavor to set
 	 */
-	public void setGasolinaSaldoFavor(final String gasolinaSaldoFavor)
+	@JsonProperty("GasolinaSaldoFavor")
+	public void setNewGasolinaSaldoFavor(final String newGasolinaSaldoFavor)
 	{
-		GasolinaSaldoFavor = gasolinaSaldoFavor;
+		this.newGasolinaSaldoFavor = newGasolinaSaldoFavor;
 	}
 
 	/**
-	 * @return the publicidadSaldoCargo
+	 * @return the newPublicidadSaldoCargo
 	 */
-	public String getPublicidadSaldoCargo()
+	public String getNewPublicidadSaldoCargo()
 	{
-		return PublicidadSaldoCargo;
+		return newPublicidadSaldoCargo;
 	}
 
 	/**
-	 * @param publicidadSaldoCargo
-	 *           the publicidadSaldoCargo to set
+	 * @param newPublicidadSaldoCargo
+	 *           the newPublicidadSaldoCargo to set
 	 */
-	public void setPublicidadSaldoCargo(final String publicidadSaldoCargo)
+	@JsonProperty("PublicidadSaldoCargo")
+	public void setNewPublicidadSaldoCargo(final String newPublicidadSaldoCargo)
 	{
-		PublicidadSaldoCargo = publicidadSaldoCargo;
+		this.newPublicidadSaldoCargo = newPublicidadSaldoCargo;
 	}
 
 	/**
-	 * @return the publicidadSaldoFavor
+	 * @return the newPublicidadSaldoFavor
 	 */
-	public String getPublicidadSaldoFavor()
+	public String getNewPublicidadSaldoFavor()
 	{
-		return PublicidadSaldoFavor;
+		return newPublicidadSaldoFavor;
 	}
 
 	/**
-	 * @param publicidadSaldoFavor
-	 *           the publicidadSaldoFavor to set
+	 * @param newPublicidadSaldoFavor
+	 *           the newPublicidadSaldoFavor to set
 	 */
-	public void setPublicidadSaldoFavor(final String publicidadSaldoFavor)
+	@JsonProperty("PublicidadSaldoFavor")
+	public void setNewPublicidadSaldoFavor(final String newPublicidadSaldoFavor)
 	{
-		PublicidadSaldoFavor = publicidadSaldoFavor;
+		this.newPublicidadSaldoFavor = newPublicidadSaldoFavor;
 	}
-
-
 
 	/**
 	 * @return the predial
@@ -356,7 +372,6 @@ public class EdoCuentaResponse
 	{
 		this.tablaPublicidad = tablaPublicidad;
 	}
-
 
 
 }

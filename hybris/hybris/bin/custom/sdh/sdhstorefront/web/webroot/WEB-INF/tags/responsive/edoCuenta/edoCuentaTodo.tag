@@ -21,9 +21,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-12">
 					<div class="table-responsive text-center">
-						<table class="table tableedocuenta" id="">
+						<table class="table tableedocuenta" id="tabPaginacion0">
 							<thead>
 								<tr>
 									<th colspan="4"><label
@@ -55,35 +55,33 @@
 							<tbody>
 								<c:forEach varStatus="loop" items="${ctaForm.predial}"
 									var="eachPredial">
-									<tr>
-										<td><c:out value="${eachPredial.CHIP}" /></td>
-										<c:forEach varStatus="loop" items="${eachPredial.detallePredial}"
-											var="eachPredialDetail">
+
+									<c:forEach varStatus="loop"
+										items="${eachPredial.detallePredial}" var="eachPredialDetail">
+										<tr>
+											<td><c:out value="${eachPredial.newCHIP}" /></td>
+											<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
 											<td><c:out
-													value="${eachPredial.eachPredialDetail.anioGravable}" /></td>
+													value="${eachPredialDetail.destinohacendario}" /></td>
+											<td><c:out value="${eachPredialDetail.estado}" /></td>
 											<td><c:out
-													value="${eachPredial.eachPredialDetail.destinohacendario}" /></td>
-											<td><c:out value="${eachPredial.eachPredialDetail.estado}" /></td>
-											<td><c:out
-													value="${eachPredial.eachPredialDetail.porcParticipacion}" /></td>
-											<td><c:out
-													value="${eachPredial.eachPredialDetail.saldoCargo}" /></td>
-											<td><c:out
-													value="${eachPredial.eachPredialDetail.saldoFavor}" /></td>
-										</c:forEach>
-									</tr>
-									<tr>
-										<td colspan="4" class="td-colspann"
-											style="border: 0px !important;"></td>
-										<td class="td-total"><label
-											class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
-													code="edocuenta.inicial.predio.total" /> </label></td>
-										<td><input class="inputtextnew tabledoobli"
-											disabled="disabled" value="" type="text" /></td>
-										<td><input class="inputtextnew tableangrav"
-											disabled="disabled" value="" type="text" /></td>
-									</tr>
+													value="${eachPredialDetail.porcParticipacion}" /></td>
+											<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
+											<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
+										</tr>
+									</c:forEach>
+
 								</c:forEach>
+								<tr>
+									<td colspan="4" class="td-colspann"
+										style="border: 0px !important;"></td>
+									<td class="td-total"><label
+										class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
+												code="edocuenta.inicial.predio.total" /> </label></td>
+									<td><c:out value="${ctaForm.predialSaldoCargo}" /></td>
+									<td><c:out value="${ctaForm.predialSaldoFavor}" /></td>
+								</tr>
+
 							</tbody>
 						</table>
 					</div>
@@ -103,9 +101,9 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-6 text-center">
+				<div class="col-md-12 text-center">
 					<div class="table-responsive">
-						<table class="table tableedocuenta" id="">
+						<table class="table tableedocuenta" id="tabPaginacion1">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -121,28 +119,28 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tableangrav"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-								</tr>
+								<c:forEach varStatus="loop" items="${ctaForm.tablaVehicular}"
+									var="eachVehicular">
+									<c:forEach varStatus="loop"
+										items="${eachVehicular.detalleVehicular}"
+										var="eachVehicularDetail">
+										<tr>
+											<td><c:out value="${eachVehicular.placa}" /></td>
+											<td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
+											<td><c:out value="${eachVehicularDetail.estado}" /></td>
+											<td><c:out value="${eachVehicularDetail.saldoCargo}" /></td>
+											<td><c:out value="${eachVehicularDetail.saldoFavor}" /></td>
+										</tr>
+									</c:forEach>
+								</c:forEach>
 								<tr>
 									<td colspan="2" class="td-colspann"
 										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd"><spring:theme
 												code="edocuenta.inicial.vehiculo.total" /> </label></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
+									<td><c:out value="${ctaForm.vehicularSaldoCargo}" /></td>
+									<td><c:out value="${ctaForm.vehicularSaldoFavor}" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -159,21 +157,21 @@
 					</h2>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-2">
-					<div class="form-group">
-						<label class="control-label"> <spring:theme
-								code="edocuenta.inicial.ica.tiporegimen" /></label> <input
-							class="form-cntrol" disabled="disabled" value="" type="text" />
-					</div>
-				</div>
-			</div>
+			<!-- 			<div class="row"> -->
+			<!-- 				<div class="col-md-2"> -->
+			<!-- 					<div class="form-group"> -->
+			<%-- 						<label class="control-label"> <spring:theme --%>
+			<%-- 								code="edocuenta.inicial.ica.tiporegimen" /></label> <input --%>
+			<!-- 							class="form-cntrol" disabled="disabled" value="" type="text" /> -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
 
 
 			<div class="row">
-				<div class="col-md-6 text-center">
+				<div class="col-md-12 text-center">
 					<div class="table-responsive">
-						<table class="table tableedocuenta" id="">
+						<table class="table tableedocuenta" id="tabPaginacion2">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -190,28 +188,27 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-								</tr>
+								<c:forEach varStatus="loop" items="${ctaForm.tablaICA}"
+									var="eachICA">
+									<c:forEach varStatus="loop" items="${eachICA.newDetalleICA}"
+										var="eachICADetail">
+										<tr>
+											<td><c:out value="${eachICADetail.anioGravable}" /></td>
+											<td><c:out value="${eachICADetail.periodo}" /></td>
+											<td><c:out value="${eachICADetail.estado}" /></td>
+											<td><c:out value="${eachICADetail.saldoCargo}" /></td>
+											<td><c:out value="${eachICADetail.saldoFavor}" /></td>
+										</tr>
+									</c:forEach>
+								</c:forEach>
 								<tr>
 									<td colspan="2" class="td-colspann"
 										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd"><spring:theme
 												code="edocuenta.inicial.ica.total" /> </label></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
+									<td><c:out value="${ctaForm.iCASaldoCargo}" /></td>
+									<td><c:out value="${ctaForm.iCASaldoFavor}" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -232,9 +229,9 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-7 text-center">
+				<div class="col-md-12 text-center">
 					<div class="table-responsive">
-						<table class="table tableedocuenta" id="">
+						<table class="table tableedocuenta" id="tabPaginacion3">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -252,30 +249,28 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tableangrav"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-								</tr>
+								<c:forEach varStatus="loop" items="${ctaForm.tablaDelineacion}"
+									var="eachDeli">
+									<c:forEach varStatus="loop"
+										items="${eachDeli.detalleDelineacion}" var="eachDeliDetail">
+										<tr>
+											<td><c:out value="${eachDeli.newCDU}" /></td>
+											<td><c:out value="${eachDeliDetail.radicado}" /></td>
+											<td><c:out value="${eachDeliDetail.anioGravable}" /></td>
+											<td><c:out value="${eachDeliDetail.estado}" /></td>
+											<td><c:out value="${eachDeliDetail.saldoCargo}" /></td>
+											<td><c:out value="${eachDeliDetail.saldoFavor}" /></td>
+										</tr>
+									</c:forEach>
+								</c:forEach>
 								<tr>
 									<td colspan="3" class="td-colspann"
 										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.deliurbana.total" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
+									<td><c:out value="${ctaForm.delineacionSaldoCargo}" /></td>
+									<td><c:out value="${ctaForm.delineacionSaldoFavor}" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -298,7 +293,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="table-responsive">
-						<table class="table tableedocuenta" id="">
+						<table class="table tableedocuenta" id="tabPaginacion4">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd"><spring:theme
@@ -315,28 +310,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-								</tr>
+								<c:forEach varStatus="loop" items="${ctaForm.tablaGasolina}"
+									var="eachGas">
+									<c:forEach varStatus="loop" items="${eachGas.detalleGasolina}"
+										var="eachGasDetail">
+										<tr>
+											<td><c:out
+													value="${eachGasDetail.anioGravable}" /></td>
+											<td><c:out
+													value="${eachGasDetail.periodo}" /></td>
+											<td><c:out
+													value="${eachGasDetail.estado}" /></td>
+											<td><c:out
+													value="${eachGasDetail.saldoCargo}" /></td>
+											<td><c:out
+													value="${eachGasDetail.saldoFavor}" /></td>
+										</tr>
+									</c:forEach>
+								</c:forEach>
 								<tr>
 									<td colspan="2" class="td-colspann"
 										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.gasolina.total" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
+									<td><c:out
+													value="${ctaForm.gasolinaSaldoCargo}" /></td>
+									<td><c:out
+													value="${ctaForm.gasolinaSaldoFavor}" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -360,7 +361,7 @@
 			<div class="row">
 				<div class="col-md-7 text-center">
 					<div class="table-responsive">
-						<table class="table tableedocuenta" id="">
+						<table class="table tableedocuenta" id="tabPaginacion5">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd"><spring:theme
@@ -378,30 +379,28 @@
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach varStatus="loop" items="${ctaForm.tablaPublicidad}"
+									var="eachPubli">
+									<c:forEach varStatus="loop" items="${eachPubli.detallePublicidad}"
+									var="eachPubliDetail">
 								<tr>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tableangrav"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
+									<td><c:out value="${eachPubli.cabecera.noResolucion}" /></td>
+									<td><c:out value="${eachPubliDetail.anioGravable}" /></td>
+									<td><c:out value="${eachPubliDetail.destinoHacendario}" /></td>
+									<td><c:out value="${eachPubliDetail.estado}" /></td>
+									<td><c:out value="${eachPubliDetail.saldoCargo}" /></td>
+									<td><c:out value="${eachPubliDetail.saldoFavor}" /></td>
 								</tr>
+								</c:forEach>
+								</c:forEach>
 								<tr>
 									<td colspan="3" class="td-colspann"
 										style="border: 0px !important;"></td>
 									<td class="td-total"><label
 										class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.publicidad.total" /> </label></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
-									<td><input class="inputtextnew tabledoobli"
-										disabled="disabled" value="" type="text" /></td>
+									<td><c:out value="${ctaForm.publicidadSaldoCargo}" /></td>
+									<td><c:out value="${ctaForm.publicidadSaldoFavor}" /></td>
 								</tr>
 							</tbody>
 						</table>
@@ -425,7 +424,7 @@
 			<div class="row">
 				<div class="col-md-6 text-center">
 					<div class="table-responsive">
-						<table class="table tableedocuenta" id="">
+						<table class="table tableedocuenta" id="tabPaginacion6">
 							<thead>
 								<tr>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
