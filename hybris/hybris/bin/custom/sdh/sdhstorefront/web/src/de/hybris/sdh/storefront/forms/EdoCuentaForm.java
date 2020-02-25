@@ -6,6 +6,7 @@ package de.hybris.sdh.storefront.forms;
 import de.hybris.sdh.core.pojos.responses.EdoCtaDeli;
 import de.hybris.sdh.core.pojos.responses.EdoCtaGas;
 import de.hybris.sdh.core.pojos.responses.EdoCtaIca;
+import de.hybris.sdh.core.pojos.responses.EdoCtaOblig;
 import de.hybris.sdh.core.pojos.responses.EdoCtaPredial;
 import de.hybris.sdh.core.pojos.responses.EdoCtaPublicidad;
 import de.hybris.sdh.core.pojos.responses.EdoCtaVehiculos;
@@ -43,6 +44,7 @@ public class EdoCuentaForm
 	private List<EdoCtaDeli> tablaDelineacion;
 	private List<EdoCtaGas> tablaGasolina;
 	private List<EdoCtaPublicidad> tablaPublicidad;
+	private List<EdoCtaOblig> obligNoTributaria;
 
 	/**
 	 * @return the numBP
@@ -433,6 +435,23 @@ public class EdoCuentaForm
 	public void setCompleName(final String compleName)
 	{
 		this.compleName = compleName;
+	}
+
+	/**
+	 * @return the obligNoTributaria
+	 */
+	public List<EdoCtaOblig> getObligNoTributaria()
+	{
+		return obligNoTributaria;
+	}
+
+	/**
+	 * @param obligNoTributaria
+	 *           the obligNoTributaria to set
+	 */
+	public void setObligNoTributaria(final List<EdoCtaOblig> obligNoTributaria)
+	{
+		this.obligNoTributaria = obligNoTributaria;
 	}
 
 

@@ -33,6 +33,7 @@ public class EdoCuentaResponse
 	private List<EdoCtaDeli> tablaDelineacion;
 	private List<EdoCtaGas> tablaGasolina;
 	private List<EdoCtaPublicidad> tablaPublicidad;
+	private List<EdoCtaOblig> obligNoTributaria;
 
 
 
@@ -371,6 +372,23 @@ public class EdoCuentaResponse
 	public void setTablaPublicidad(final List<EdoCtaPublicidad> tablaPublicidad)
 	{
 		this.tablaPublicidad = tablaPublicidad;
+	}
+
+	/**
+	 * @return the obligNoTributaria
+	 */
+	public List<EdoCtaOblig> getObligNoTributaria()
+	{
+		return obligNoTributaria;
+	}
+
+	/**
+	 * @param obligNoTributaria
+	 *           the obligNoTributaria to set
+	 */
+	public void setObligNoTributaria(final List<EdoCtaOblig> obligNoTributaria)
+	{
+		this.obligNoTributaria = obligNoTributaria;
 	}
 
 

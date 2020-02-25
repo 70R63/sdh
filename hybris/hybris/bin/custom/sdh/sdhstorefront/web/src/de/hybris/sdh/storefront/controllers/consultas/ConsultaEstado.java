@@ -32,9 +32,11 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTa
 import de.hybris.sdh.storefront.forms.EdoCuentaForm;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -143,10 +145,27 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setGasolinaSaldoFavor(edoCuentaResponse.getNewGasolinaSaldoFavor());
 			ctaForm.setPublicidadSaldoCargo(edoCuentaResponse.getNewPublicidadSaldoCargo());
 			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
-			ctaForm.setPredial(edoCuentaResponse.getPredial());
+			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
+			{
+				ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
+			}
+
+			//ctaForm.setPredial(edoCuentaResponse.getPredial());
 			ctaForm.setTablaICA(edoCuentaResponse.getTablaICA());
-			ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
-			ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion());
+
+			if (edoCuentaResponse.getTablaVehicular() != null && !edoCuentaResponse.getTablaVehicular().isEmpty())
+			{
+				ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getPlaca())).collect(Collectors.toList()));
+			}
+			//ctaForm.setTablaVehicular(edoCuentaResponse.getTablaVehicular());
+			if (edoCuentaResponse.getTablaDelineacion() != null && !edoCuentaResponse.getTablaDelineacion().isEmpty())
+			{
+				ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion().stream()
+						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCDU())).collect(Collectors.toList()));
+			}
+			//ctaForm.setTablaDelineacion(edoCuentaResponse.getTablaDelineacion());
 			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
 			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
 
@@ -155,7 +174,7 @@ public class ConsultaEstado extends AbstractSearchPageController
 		catch (final Exception e)
 		{
 			LOG.error("there was an error while parsing redsocial JSON");
-			LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
+			LOG.error("Error en el servicio: " + e.getMessage());
 		}
 
 		model.addAttribute("ctaForm", ctaForm);
