@@ -27,7 +27,7 @@
 
 	function Selected(selectObject) {
 		var value = selectObject.value;
-		document.getElementById("Idimp").val() = value;
+		document.getElementById("impuesto").val() = value;
 	}
 
 	function Selectedver(selectObject) {
@@ -36,7 +36,7 @@
 		var xx = document.getElementById('impuesto');
 		var x = xx.value;
 
-		var todo = document.getElementById('idtodos');
+		// 		var todo = document.getElementById('idtodos');
 		var detpred = document.getElementById('predial');
 		var detica = document.getElementById('ica');
 		var detvehi = document.getElementById('vehiculos');
@@ -47,7 +47,7 @@
 
 		if (x == '1') {
 
-			todo.style.display = 'none';
+			// 			todo.style.display = 'none';
 			detpred.style.display = 'block';
 			detica.style.display = 'none';
 			detvehi.style.display = 'none';
@@ -58,7 +58,7 @@
 
 		} else if (x == '2') {
 
-			todo.style.display = 'none';
+			// 			todo.style.display = 'none';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
 			detvehi.style.display = 'block';
@@ -69,7 +69,7 @@
 
 		} else if (x == '3') {
 
-			todo.style.display = 'none';
+			// 			todo.style.display = 'none';
 			detpred.style.display = 'none';
 			detica.style.display = 'block';
 			detvehi.style.display = 'none';
@@ -80,7 +80,7 @@
 
 		} else if (x == '4') {
 
-			todo.style.display = 'none';
+			// 			todo.style.display = 'none';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
 			detvehi.style.display = 'none';
@@ -91,7 +91,7 @@
 
 		} else if (x == '5') {
 
-			todo.style.display = 'none';
+			// 			todo.style.display = 'none';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
 			detvehi.style.display = 'none';
@@ -102,7 +102,7 @@
 
 		} else if (x == '6') {
 
-			todo.style.display = 'none';
+			// 			todo.style.display = 'none';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
 			detvehi.style.display = 'none';
@@ -113,7 +113,7 @@
 
 		} else if (x == '7') {
 
-			todo.style.display = 'none';
+			// 			todo.style.display = 'none';
 			detpred.style.display = 'none';
 			detica.style.display = 'none';
 			detvehi.style.display = 'none';
@@ -122,15 +122,26 @@
 			detplubliext.style.display = 'none';
 			oblig.style.display = 'block';
 
+		} else if (x == '0') {
+
+			// 			todo.style.display = 'block';
+			detpred.style.display = 'block';
+			detica.style.display = 'block';
+			detvehi.style.display = 'block';
+			detdeli.style.display = 'block';
+			detgas.style.display = 'block';
+			detplubliext.style.display = 'block';
+			oblig.style.display = 'block';
 		} else {
 
-			todo.style.display = 'block';
-			// 			detpred.style.display = 'none';
-			// 			detica.style.display = 'none';
-			// 			detvehi.style.display = 'none';
-			// 			detdeli.style.display = 'none';
-			// 			detgas.style.display = 'none';
-			// 			detplubliext.style.display = 'none';
+			// 			todo.style.display = 'block';
+			detpred.style.display = 'block';
+			detica.style.display = 'block';
+			detvehi.style.display = 'block';
+			detdeli.style.display = 'block';
+			detgas.style.display = 'block';
+			detplubliext.style.display = 'block';
+			oblig.style.display = 'block';
 		}
 
 	}

@@ -12,7 +12,7 @@
 
 <div class="container">
 	<sf:form>
-		<div id="idtodos" style="display: block;">
+		
 			<div id="predial">
 				<div class="row">
 					<div class="headline">
@@ -459,7 +459,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+
 		</div>
 	</sf:form>
 </div>

@@ -915,13 +915,19 @@ debugger;
 	    var anioGravable = document.getElementById("anoGravable").value;
 	    var impuesto = document.getElementById("impuesto");
 	    impuesto = impuesto.options[impuesto.selectedIndex].value;
+	    var currentUrl_tmp = "";
 
 	    var currentUrl = window.location.href;
         var targetUrl = "infoObject/getUseOption?anioGravable="	+
                		    anioGravable + "&placa=" +
                		    placa + "&taxType=" + impuesto;
 
-        currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion#",targetUrl);
+        currentUrl_tmp = currentUrl.replace("contribuyentes/presentar-declaracion",targetUrl);
+        if(currentUrl_tmp != currentUrl){
+        	currentUrl = currentUrl_tmp;
+        }else{
+        	currentUrl = currentUrl.replace("contribuyentes/presentar-declaracion#",targetUrl);
+        }
 
         $.ajax({
             url : currentUrl,
@@ -1555,7 +1561,7 @@ debugger;
 		if(claveImpuesto == '0001' || claveImpuesto == '0002'){ // predial vehicular 
 			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,7);
 		}else if(claveImpuesto == '0006'){ // delineacion
-			anoGravableBase--;
+			//anoGravableBase--;
 			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,7);
 		}else{
 			anoGravableBase--;
