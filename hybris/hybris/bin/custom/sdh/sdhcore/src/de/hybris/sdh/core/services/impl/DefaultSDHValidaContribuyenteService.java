@@ -254,7 +254,7 @@ public class DefaultSDHValidaContribuyenteService implements SDHValidaContribuye
 			for (final ImpuestoDelineacionUrbana delineacion : contribuyente.getDelineacion())
 			{
 
-				if (Objects.nonNull(delineacion.getFechaExp()))
+				if (Objects.nonNull(delineacion.getFechaExp()) && !delineacion.getFechaExp().equals(""))
 				{
 					final String anio = delineacion.getFechaExp().split("/")[2];
 					System.out.println("getDelineacionListByBpAndYear ----- > " + anio);

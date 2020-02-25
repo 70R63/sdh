@@ -1513,7 +1513,7 @@ debugger;
 		if(claveImpuesto == '1' || claveImpuesto == '2'){ // predial vehicular 
 			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,7);
 		}else if(claveImpuesto == '6'){ // delineacion
-			anoGravableBase--;
+			//anoGravableBase--;
 			ACC.opcionDeclaraciones.preparaCatAnioGravable_presentarDec(anoGravableBase,7);
 		}else{
 			anoGravableBase--;
