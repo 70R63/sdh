@@ -22,7 +22,7 @@
 	<c:url value='/contribuyentes/delineacion-urbana' var="duRedirection"/>
 	<firmas:generalFirmas firmaContribuyenteRedirection="${duRedirection}"/>
 </sf:form>
-<%-- <delineacionUrbana:delineacionUrbanaRetenFirma /> --%>
+<delineacionUrbana:delineacionUrbanaRetenFirma />
 
 
 

@@ -23,7 +23,7 @@
 	<firmas:generalFirmas firmaContribuyenteRedirection="${duRedirection}"/>	
 </sf:form>
 <%-- 	<delineacionUrbana:delineacionUrbanaDecFirma /> --%>
-<%-- <delineacionUrbana:delineacionUrbanaDecFirmas /> --%>
+<delineacionUrbana:delineacionUrbanaDecFirmas />
 
 
 
