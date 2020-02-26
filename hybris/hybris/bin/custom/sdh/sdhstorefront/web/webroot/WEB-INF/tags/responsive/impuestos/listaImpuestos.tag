@@ -296,9 +296,13 @@
 								<form:hidden path="selectedAnoPresDeclaracion" value="" />
 
 								<button type="submit" id="btn_${item.cdu}"
-									name="action" value="declaracion" disabled="disabled" class="btn-primary">
+									name="action" value="declaracion" disabled="disabled" class="btn-primary" onclick="return validarDelineacionform('${item.cdu}');">
 									<spring:theme code="delineacion.urbana.radicados.declara" />
 								</button>
+								<button type="submit" class="btn-link" id="auxbtn_${item.cdu}"
+									name="action" value="declaracion" hidden="hidden" >
+									<spring:theme code="delineacion.urbana.radicados.declara" />
+								</button>								
 							</form:form>
 						</td>
 					</tr>
@@ -531,8 +535,7 @@
         }
     }
 
-    function validarDelineacionform(){
-        var hiddenCdu = document.getElementById("selectedCDU").value;
+    function validarDelineacionform(hiddenCdu){
         var btnSelected = document.getElementById("auxbtn_"+hiddenCdu);
 
         var nowUrl = window.location.href;

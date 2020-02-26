@@ -54,7 +54,7 @@
 										code="edocuenta.inicial.tipiden" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.tipoDoc}"></c:out>" />
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -63,7 +63,7 @@
 										code="edocuenta.inicial.numiden" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.numDoc}"></c:out>" />
 							</div>
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 								<label class="control-label"><spring:theme
 										code="edocuenta.inicial.nom" /></label> <input class="newalto form-control"
 									maxlength="30" size="30" disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.compleName}"></c:out>" />
 							</div>
 						</div>
 					</div>
@@ -110,7 +110,7 @@
 										code="edocuenta.inicial.selcimpuesto" /></label> <select
 									id="impuesto" class="new_alto form-control " name="impuesto"
 									onchange="Selected(this)">
-									<option value="0">Seleccionar</option>
+									<option value="0">Todo</option>
 									<option value="1">Predial Unificado</option>
 									<option value="2">Vehículos</option>
 									<option value="3">ICA</option>
@@ -122,7 +122,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<%--div class="row">
 						<div class="col-md-10">
 							<div class="form-group">
 								<label class="control-label text-right"><spring:theme
@@ -134,7 +134,7 @@
 								</select>
 							</div>
 						</div>
-					</div>
+					</div--%>
 					
 				</div>
 			</div>
@@ -180,4 +180,11 @@
 	</sf:form>
 </div>
 
+<script type="text/javascript">
+	function Selected(selectObject) {
+		var value = selectObject.value;
+		document.getElementById("impuesto").value = value;
+	}
+
+	</script>
 

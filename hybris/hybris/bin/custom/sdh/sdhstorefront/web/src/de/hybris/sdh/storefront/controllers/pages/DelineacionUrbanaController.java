@@ -5,10 +5,11 @@ package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -68,7 +69,7 @@ import sun.misc.BASE64Decoder;
 @Controller
 @SessionAttributes("dataForm")
 
-public class DelineacionUrbanaController extends AbstractPageController
+public class DelineacionUrbanaController extends SDHAbstractPageController
 {
 	private static final Logger LOG = Logger.getLogger(SobreTasaGasolina.class);
 
@@ -116,8 +117,8 @@ public class DelineacionUrbanaController extends AbstractPageController
 	@Resource(name = "mediaService")
 	private MediaService mediaService;
 
-	//	@Resource(name = "customerFacade")
-	//	CustomerFacade customerFacade;
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
 	//
 	//	@Resource(name = "sdhDetallePublicidadService")
 	//	SDHDetallePublicidadService sdhDetallePublicidadService;
@@ -446,6 +447,11 @@ public class DelineacionUrbanaController extends AbstractPageController
 	final InfoDelineacion infoDelineacion, final Model model) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro a declaracion delineacion --------------------------");
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "/contribuyentes/delineacion-urbana");
+		super.addFirmantes_impuesto(model, null, customerData);
 
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
@@ -556,6 +562,11 @@ public class DelineacionUrbanaController extends AbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 
 		System.out.println("---------------- Hola entro a retencion delineacion --------------------------");
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "/contribuyentes/delineacion-urbana");
+		super.addFirmantes_impuesto(model, null, customerData);
 
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
