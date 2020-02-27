@@ -11,46 +11,10 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-6 headline">
-			<h2>
-				<span><spring:theme code="delineacion.urbana.dec.firm.title" /></span>
-			</h2>
-		</div>
-	</div>
 
 <c:set var="tipoDescripcionID" value='${dataForm.valCont.infoContrib.tipoDoc}'/>
 <%-- ${dataForm.valCont.infoContrib.tipoDocDescripcion}' /> --%>
 <c:set var="nombreCompleto" value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
-		<div class="row">
-			<div class="col-md-3">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.firm.tipiden" /></label> <input id=""
-						name="" class="new_alto form-control" aria-required="true" type="text"
-						readonly="readonly" value="${tipoDescripcionID}" maxlength="240">
-				</div>
-			</div>
-
-			<div class="col-md-3">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.firm.numide" /></label> <input id=""
-						name="" class="new_alto form-control" aria-required="true" type="text"
-						readonly="readonly" value="${dataForm.valCont.infoContrib.numDoc}" maxlength="240">
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="form-group ">
-					<label class="control-label"><spring:theme
-							code="delineacion.urbana.dec.firm.nombraz" /></label> <input id=""
-						name="" class="new_alto form-control" aria-required="true" type="text"
-						value="${nombreCompleto}" maxlength="240" disabled>
-				</div>
-			</div>
-		</div>
 
 		<br>
 		<div class="container">
@@ -111,7 +75,6 @@
 			</div>
 		</div>
 
-</div>
 
 
 <div class="row"></div>

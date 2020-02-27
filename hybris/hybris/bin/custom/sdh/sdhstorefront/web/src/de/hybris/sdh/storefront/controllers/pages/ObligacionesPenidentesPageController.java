@@ -106,6 +106,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		System.out.println("Se encuentra dentro del get de OBLIGACIONES PENDIENTES");
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		String wsResponse = null;
 
 		final ObligacionesRequest obligacionesRequest = new ObligacionesRequest();
 		obligacionesRequest.setBp(customerModel.getNumBP());
@@ -117,73 +118,88 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final ObligacionesGasolinaResponse obligacionesGasolinaResponse = mapper.readValue(
-					sdhObligacionesGasolinaService.obligacionesRequest(obligacionesRequest), ObligacionesGasolinaResponse.class);
-
-			obligacionesFormuno.setHeadergas(obligacionesGasolinaResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
-
-			final ObligacionesICAResponse obligacionesICAResponse = mapper
-					.readValue(sdhObligacionesICAService.obligacionesRequest(obligacionesRequest), ObligacionesICAResponse.class);
-
-			obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
-
-			final ObligacionesDeliResponse obligacionesDeliResponse = mapper
-					.readValue(sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest), ObligacionesDeliResponse.class);
-
-			obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
-
-			final ObligacionesPredialResponse obligacionesPredResponse = mapper.readValue(
-					sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest), ObligacionesPredialResponse.class);
-
-			obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getAniogravable())).collect(Collectors.toList()));
-
-			final ObligacionesVehiculosResponse obligacionesVehiResponse = mapper.readValue(
-					sdhObligacionesVehiculosService.obligacionesRequest(obligacionesRequest), ObligacionesVehiculosResponse.class);
-
-			obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
-
-
-
-			final ObligacionesResponse obligacionesResponse = mapper
-					.readValue(sdhObligacionesPublicidadService.obligacionesRequest(obligacionesRequest), ObligacionesResponse.class);
-
-			for (final ObligacionesCabeceraPublicidad obligaPubli : obligacionesResponse.getHeader())
+			wsResponse = sdhObligacionesGasolinaService.obligacionesRequest(obligacionesRequest);
+			if (wsResponse != null)
 			{
-				if ("01".equals(obligaPubli.getOrientacionValla()))
-				{
-					obligaPubli.setOrientacionValla("Comercial");
-				}
-				else if ("02".equals(obligaPubli.getOrientacionValla()))
-				{
-					obligaPubli.setOrientacionValla("Institucional");
-				}
-				else if ("03".equals(obligaPubli.getOrientacionValla()))
-				{
-					obligaPubli.setOrientacionValla("Cultural");
-				}
-				else if ("04".equals(obligaPubli.getOrientacionValla()))
-				{
-					obligaPubli.setOrientacionValla("Política");
-				}
-				else if ("05".equals(obligaPubli.getOrientacionValla()))
-				{
-					obligaPubli.setOrientacionValla("Deportiva");
-				}
-				else if ("06".equals(obligaPubli.getOrientacionValla()))
-				{
-					obligaPubli.setOrientacionValla("Otra");
-				}
-				else
-				{
-					obligaPubli.setOrientacionValla("-");
-				}
+				final ObligacionesGasolinaResponse obligacionesGasolinaResponse = mapper.readValue(wsResponse,
+						ObligacionesGasolinaResponse.class);
+				obligacionesFormuno.setHeadergas(obligacionesGasolinaResponse.getHeader().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
 			}
-			obligacionesFormuno.setHeader(obligacionesResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
+
+			wsResponse = sdhObligacionesICAService.obligacionesRequest(obligacionesRequest);
+			if (wsResponse != null)
+			{
+				final ObligacionesICAResponse obligacionesICAResponse = mapper.readValue(wsResponse, ObligacionesICAResponse.class);
+				obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
+			}
+
+			wsResponse = sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest);
+			if (wsResponse != null)
+			{
+				final ObligacionesDeliResponse obligacionesDeliResponse = mapper.readValue(wsResponse,
+						ObligacionesDeliResponse.class);
+				obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+			}
+
+			wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
+			if (wsResponse != null)
+			{
+				final ObligacionesPredialResponse obligacionesPredResponse = mapper.readValue(wsResponse,
+						ObligacionesPredialResponse.class);
+				obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
+					.filter(d -> StringUtils.isNotBlank(d.getAniogravable())).collect(Collectors.toList()));
+			}
+
+			wsResponse = sdhObligacionesVehiculosService.obligacionesRequest(obligacionesRequest);
+			if (wsResponse != null)
+			{
+				final ObligacionesVehiculosResponse obligacionesVehiResponse = mapper.readValue(wsResponse,
+						ObligacionesVehiculosResponse.class);
+				obligacionesFormuno.setHeaderVehiculos(obligacionesVehiResponse.getHeader().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getPlaca())).collect(Collectors.toList()));
+			}
+
+			wsResponse = sdhObligacionesPublicidadService.obligacionesRequest(obligacionesRequest);
+			if (wsResponse != null)
+			{
+				final ObligacionesResponse obligacionesResponse = mapper.readValue(wsResponse, ObligacionesResponse.class);
+
+				for (final ObligacionesCabeceraPublicidad obligaPubli : obligacionesResponse.getHeader())
+				{
+					if ("01".equals(obligaPubli.getOrientacionValla()))
+					{
+						obligaPubli.setOrientacionValla("Comercial");
+					}
+					else if ("02".equals(obligaPubli.getOrientacionValla()))
+					{
+						obligaPubli.setOrientacionValla("Institucional");
+					}
+					else if ("03".equals(obligaPubli.getOrientacionValla()))
+					{
+						obligaPubli.setOrientacionValla("Cultural");
+					}
+					else if ("04".equals(obligaPubli.getOrientacionValla()))
+					{
+						obligaPubli.setOrientacionValla("Política");
+					}
+					else if ("05".equals(obligaPubli.getOrientacionValla()))
+					{
+						obligaPubli.setOrientacionValla("Deportiva");
+					}
+					else if ("06".equals(obligaPubli.getOrientacionValla()))
+					{
+						obligaPubli.setOrientacionValla("Otra");
+					}
+					else
+					{
+						obligaPubli.setOrientacionValla("-");
+					}
+				}
+				obligacionesFormuno.setHeader(obligacionesResponse.getHeader().stream()
+						.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
+			}
 
 		}
 		catch (final Exception e)

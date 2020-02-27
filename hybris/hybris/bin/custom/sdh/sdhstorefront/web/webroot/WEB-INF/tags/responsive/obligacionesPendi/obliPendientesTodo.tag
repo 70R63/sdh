@@ -77,7 +77,7 @@
 										<tr>
 											<td><c:out value="${eachObPred.aniogravable}" /></td>
 											<td><c:out value="${eachObPred.objetoContrato}" /></td>
-											<td><c:out value="${eachObPredDet.details.estadoObligacion}" /></td>
+											<td><c:out value="${eachObPredDet.estadoObligacion}" /></td>
 											<td><c:out value="${eachObPredDet.obligacion}" /></td>
 											<td><c:out value="${eachObPredDet.numFormulario}" /></td>
 											<td><c:out value="${eachObPredDet.numReferencia}" /></td>
