@@ -9,7 +9,8 @@
 <%@ taglib prefix="predialIni"
 	tagdir="/WEB-INF/tags/responsive/predial/predialInicial"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
-<%@ taglib prefix="obligaciones" tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
+<%@ taglib prefix="obligaciones"
+	tagdir="/WEB-INF/tags/responsive/obligacionesPendi"%>
 
 <div class="loader"></div>
 
@@ -19,7 +20,7 @@
 
 
 <div class="InicialDetalle" id="InicialDetalle" style="display: none">
-<predialIni:predialInicialJuridicos />
+	<predialIni:predialInicialJuridicos />
 	<predialIni:predialInicialEconomicos />
 	<predialIni:predialInicialFisicos />
 	<predialIni:predialInicialLiquidacion />
@@ -42,23 +43,28 @@
 		}
 		$(".loader").fadeOut("slow");
 	}
-	
-	function presentarDeclaracion(CHIP,anioGravable){
-		ACC.opcionDeclaraciones.predial_presentarDec(CHIP,anioGravable);
-		
+
+	function presentarDeclaracion(CHIP, anioGravable) {
+		ACC.opcionDeclaraciones.predial_presentarDec(CHIP, anioGravable);
+
 	}
 
-	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip){
+	function pagarEnLinea(tipoImpuesto, anoGravable, periodo, numObjeto, chip) {
 		debugger;
 		var numBP = "${infoContrib.numBP}";
 		var numDoc = "${infoContrib.numDoc}";
 		var tipoDoc = "${infoContrib.tipoDoc}";
-		var clavePeriodo = anoGravable.substr(2,2).concat("A1");
+		var clavePeriodo = anoGravable.substr(2, 2).concat("A1");
 		var dv = "${infoContrib.adicionales.DIGVERIF}";
+
+		ACC.opcionDeclaraciones.llamarPrepararPagoPSE(tipoImpuesto, numBP,
+				numDoc, tipoDoc, anoGravable, periodo, clavePeriodo, dv,
+				numObjeto, chip);
+	}
+
+	function showDetailPredio(anioGravable, chip, matrInmobiliaria) {
 		
-		
-		ACC.opcionDeclaraciones.llamarPrepararPagoPSE(tipoImpuesto,numBP,numDoc,tipoDoc,anoGravable,periodo,clavePeriodo,dv,numObjeto,chip);		
+		ACC.predial.detalle_tres(anioGravable, chip, matrInmobiliaria);
 	}
 	
-
 </script>
