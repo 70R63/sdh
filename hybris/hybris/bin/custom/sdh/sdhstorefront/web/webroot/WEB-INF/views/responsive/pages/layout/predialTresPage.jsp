@@ -11,6 +11,7 @@
 <div class="loader"></div>
 
 <predial:predialTresGenerales />
+<predial:predialTresDatPredio></predial:predialTresDatPredio>
 <predial:predialTresDatLiq />
 <predial:predialTresLiqPrivada />
 <firmas:generalFirmas />

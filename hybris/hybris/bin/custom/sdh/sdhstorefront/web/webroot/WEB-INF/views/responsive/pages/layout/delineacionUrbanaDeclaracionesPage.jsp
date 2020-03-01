@@ -7,6 +7,7 @@
 <%@ taglib prefix="delineacionUrbana"
 	tagdir="/WEB-INF/tags/responsive/delineacionUrbana"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
 
 <spring:url value="/contribuyentes/delineacionurbana/retencion"
 	var="duRetencionURL" htmlEscape="false" />
@@ -18,6 +19,8 @@
 	<delineacionUrbana:delineacionUrbanaRetenAreasUsos />
 	<delineacionUrbana:delineacionUrbanaDecAreasUsosFechas />
 	<delineacionUrbana:delineacionUrbanaDecLiqPriva />
+	<c:url value='/contribuyentes/delineacion-urbana' var="duRedirection"/>
+	<firmas:generalFirmas firmaContribuyenteRedirection="${duRedirection}"/>	
 </sf:form>
 <%-- 	<delineacionUrbana:delineacionUrbanaDecFirma /> --%>
 <delineacionUrbana:delineacionUrbanaDecFirmas />

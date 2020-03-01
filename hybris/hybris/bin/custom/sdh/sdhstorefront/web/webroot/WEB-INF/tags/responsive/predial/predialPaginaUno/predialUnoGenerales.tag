@@ -5,9 +5,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+
 <div class="container_new_page">
 	<div class="row">
 		<div class="col-md-12">
@@ -31,16 +33,16 @@
 		</div>
 	</div>
 
-	<form:form>
+	<sf:form>
 		<div class="row mt-3">
-			<div class="col-md-4 col-md-offset-4 d-flex align-items-center">
+			<div class="col-md-6 col-md-offset-4 d-flex align-items-center">
 				<div class="table-responsive text-center">
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<td><label class="control-label labeltabletd tableident"><spring:theme
+								<td><label class="control-label labeltabletd "><spring:theme
 											code="ica.inicial.table.tipdoc" /></label></td>
-								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
+								<td><label class="control-label labeltabletd "><spring:theme
 											code="ica.inicial.table.numdoc" /></label></td>
 								<td><label class="control-label labeltabletd "><spring:theme
 											code="ica.inicial.table.nombre" /></label></td>
@@ -51,6 +53,7 @@
 								<td><c:out value="${predialForm.tipDoc}" /></td>
 								<td><c:out value="${predialForm.numDoc}" /></td>
 								<td><c:out value="${predialForm.compleName}" /></td>
+
 							</tr>
 						</tbody>
 					</table>
@@ -74,24 +77,24 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.anigrav" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialForm.anioGravable}"
-						maxlength="240"></input>
+						class="newalto form-control" disabled type="text"
+						value="${predialForm.anioGravable}" maxlength="240"></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.opuso" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialForm.opcionuso}"
-						maxlength="240"></input>
+						class="newalto form-control" disabled type="text"
+						value="${predialForm.opcionuso}" maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.matricula" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialForm.matrInmobiliaria}"
-						maxlength="240"></input>
+						class="newalto form-control" disabled type="text"
+						value="${predialForm.matrInmobiliaria}" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -100,15 +103,16 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.chip" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialForm.CHIP}"
-						maxlength="240"></input>
+						class="newalto form-control" disabled type="text"
+						value="${predialForm.CHIP}" maxlength="240"></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.cedula" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialForm.estrDatosGenerales.cedulaCatastral}"
+						class="newalto form-control" disabled type="text"
+						value="${predialForm.estrDatosGenerales.cedulaCatastral}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -130,13 +134,13 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.calidad" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value=""
+						class="newalto form-control" disabled type="text" value="${predialForm.desCalidad}"
 						maxlength="240"></input>
 				</div>
 			</div>
 		</div>
 
-	</form:form>
+	</sf:form>
 </div>
 
 

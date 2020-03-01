@@ -8,8 +8,9 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/contribuyentes/predialunificado_1" var="declarar"
+<spring:url value="/contribuyentes/predialunificado/URL" var="declarar"
 	htmlEscape="false" />
+	
 <sf:form action="${declarar}" method="POST"
 	modelAttribute="predialFormIni" id="declarar">
 	<div class="container">
@@ -54,9 +55,10 @@
 		<div class="row">
 
 			<sf:input type="hidden" id="reCHIP" path="CHIP" /> 
-			<sf:input type="hidden" id="rematrInmobiliaria" path="matrInmobiliaria"/> 
-			<sf:input type="hidden" id="reanioGravable" path="anioGravable" />
-			<sf:input type="hidden" id="renumBP" path="numBP" />
+			<sf:input type="hidden" id="rematrInmobiliaria"  path="matrInmobiliaria" /> 
+			<sf:input type="hidden" id="reanioGravable"  path="anioGravable" />
+			<sf:input type="hidden" id="renumBP"  path="numBP" />
+			<sf:input type="hidden" id="retipRegistro"  class="retipRegistro" path="retipRegistro"/>
 			<div class="col-md-12 centercol-md-8 text-center">
 				<button style="margin-top: 3px;" id=""
 					class="btn btn-secondary btn-lg" type="button">
@@ -69,8 +71,8 @@
 				</button>
 
 
-				<button class="btn btn-primary btn-lg" type="submit" id="" name=""
-					value="">
+				<button class="btn btn-primary btn-lg generarDeclracinPredial" type="submit" id="" name=""
+					value="" id="generarDeclracinPredial">
 					<spring:theme code="predial.inicial.marcas.generar" />
 				</button>
 

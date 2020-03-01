@@ -137,7 +137,16 @@
 			
 			ACC.predialDetalleURL="<c:url value='/contribuyentes/predialunificado_inicio/detalle' />";
 			
-			ACC.predialDeclaraURL="<c:url value='/contribuyentes/predialunificado_1' />";
+			ACC.predialDeclaraURL="<c:url value='/contribuyentes/predialunificado/URL' />";
+			ACC.predialDeclaradosURL="<c:url value='/contribuyentes/predialunificado_2' />";
+			ACC.predialDeclaratresURL="<c:url value='/contribuyentes/predialunificado_3' />";
+			ACC.predialDeclaracuatroURL="<c:url value='/contribuyentes/predialunificado_4' />";
+			ACC.predialDeclaracincoURL="<c:url value='/contribuyentes/predialunificado_5' />";
+			ACC.predialDeclaraseisURL="<c:url value='/contribuyentes/predialunificado_6' />";
+			ACC.predialDeclarasieteURL="<c:url value='/contribuyentes/predialunificado_7' />";
+			ACC.predialDeclaraochoURL="<c:url value='/contribuyentes/predialunificado_8' />";
+			ACC.predialDeclarabasesURL="<c:url value='/contribuyentes/predialunificado/basespresuntivas' />";
+
 
 		  	ACC.currentURL = "${currentURL}";
 
