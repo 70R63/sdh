@@ -49,6 +49,10 @@ public class PredialForm
 	private String tipDoc;
 	private String compleName;
 	private String numDoc;
+	private String retipRegistro;
+	private String decExencion;
+	private String decExclusion;
+	private String desCalidad;
 
 	/**
 	 * @return the detallePredio
@@ -393,6 +397,74 @@ public class PredialForm
 	public void setNumDoc(final String numDoc)
 	{
 		this.numDoc = numDoc;
+	}
+
+	/**
+	 * @return the retipRegistro
+	 */
+	public String getRetipRegistro()
+	{
+		return retipRegistro;
+	}
+
+	/**
+	 * @param retipRegistro
+	 *           the retipRegistro to set
+	 */
+	public void setRetipRegistro(final String retipRegistro)
+	{
+		this.retipRegistro = retipRegistro;
+	}
+
+	/**
+	 * @return the decExencion
+	 */
+	public String getDecExencion()
+	{
+		return decExencion;
+	}
+
+	/**
+	 * @param decExencion
+	 *           the decExencion to set
+	 */
+	public void setDecExencion(final String decExencion)
+	{
+		this.decExencion = decExencion;
+	}
+
+	/**
+	 * @return the decExclusion
+	 */
+	public String getDecExclusion()
+	{
+		return decExclusion;
+	}
+
+	/**
+	 * @param decExclusion
+	 *           the decExclusion to set
+	 */
+	public void setDecExclusion(final String decExclusion)
+	{
+		this.decExclusion = decExclusion;
+	}
+
+	/**
+	 * @return the desCalidad
+	 */
+	public String getDesCalidad()
+	{
+		return desCalidad;
+	}
+
+	/**
+	 * @param desCalidad
+	 *           the desCalidad to set
+	 */
+	public void setDesCalidad(final String desCalidad)
+	{
+		this.desCalidad = desCalidad;
 	}
 
 
