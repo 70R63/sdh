@@ -14,24 +14,28 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
+import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacion2Request;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacion2Response;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 
@@ -93,6 +97,9 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 	private static final String REDIRECT_TO_DELINEACION_INICIAL = REDIRECT_PREFIX + "/contribuyentes/delineacion-urbana";
 
+	@Resource(name = "sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
+
 	@Resource(name = "customBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
@@ -119,6 +126,9 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
+
+	@Resource(name = "sessionService")
+	SessionService sessionService;
 	//
 	//	@Resource(name = "sdhDetallePublicidadService")
 	//	SDHDetallePublicidadService sdhDetallePublicidadService;
@@ -650,12 +660,19 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 		final CalculoImpDelineacionRequest infoDelineacionRequest = new CalculoImpDelineacionRequest();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		InfoObjetoDelineacionResponse infoDelineacionResponse = new InfoObjetoDelineacionResponse();
 		String mensajeError = "";
 		String paginaDestino = "";
 		String[] mensajesError;
 		//		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 
+		String numeroBP = sessionService.getCurrentSession().getAttribute("representado");
+		if (numeroBP == null)
+		{
+			numeroBP = customerModel.getNumBP();
+		}
+		infoDelineacion.getValCont().getInfoContrib().setNumBP(numeroBP);
 
 
 		infoDelineacionRequest.setNumBP(infoDelineacion.getValCont().getInfoContrib().getNumBP());
@@ -886,6 +903,132 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		return generaDeclaracionResponse;
 
 
+	}
+
+
+	@RequestMapping(value = "/contribuyentes/delineacionurbana/declaracion/show", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String delineacionUrbanadeclaracionShowGET(final Model model,
+			@RequestParam(required = true, value = "numForm")
+			final String numForm, @RequestParam(required = true, value = "representado")
+			final String representado) throws CMSItemNotFoundException
+	{
+		System.out
+				.println("---------------- Hola entro a declaracion delineacion vista Agente Autorizado--------------------------");
+
+		final InfoDelineacion infoDelineacion = new InfoDelineacion();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final CustomerData currentUserData = customerFacade.getCurrentCustomer();
+		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+
+		model.addAttribute("customerData", currentUserData);
+		model.addAttribute("contribuyenteData", contribuyenteData);
+		model.addAttribute("redirectURL", "/autorizados/contribuyente/representando?representado=" + contribuyenteData.getNumBP());
+
+		final InfoObjetoDelineacion2Request infoImpuesto2Request = new InfoObjetoDelineacion2Request();
+		infoImpuesto2Request.setPartner(representado);
+		infoImpuesto2Request.setFormulario(numForm);
+		System.out.println("Request de liquidador2/calculoDelineacion: " + infoImpuesto2Request);
+		final InfoObjetoDelineacion2Response infoImpuesto2Response = gasolinaService.consultaInfoDelineacionAA(infoImpuesto2Request,
+				sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de liquidador2/calculoDelineacion: " + infoImpuesto2Response);
+
+
+		addAgentsToModel(model, contribuyenteData, currentUserData);
+		if (infoImpuesto2Response != null)
+		{
+			super.addFirmantes_impuesto(model, infoImpuesto2Response.getFirmantes(), currentUserData);
+		}
+
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
+		//final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
+		String numBP = "";
+		String numDoc = "";
+		String tipoDoc = "";
+		String anoGravable = "";
+		String periodo = "";
+		String clavePeriodo = "";
+		String dv = "";
+		final String numObjeto = "";
+		final String CDU = "";
+		final String cauex = "";
+
+		final String tipoImpuesto = infoImpuesto2Response.getRetencion().equals("X")
+				? new ControllerPseConstants().getRETENCIONDU()
+				: new ControllerPseConstants().getDELINEACION();
+		final String anticipo = infoImpuesto2Response.getRetencion().equals("X") ? "X" : "";
+		numBP = contribuyenteData.getNumBP();
+		numDoc = contribuyenteData.getDocumentNumber();
+		tipoDoc = contribuyenteData.getDocumentType();
+
+		final InfoObjetoDelineacionResponse infObjetoDelineacion = new InfoObjetoDelineacionResponse();
+		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
+		if (infoImpuesto2Response.getAnoGravable() == null)
+		{
+			infObjetoDelineacionExtras.setAnoGravable(Integer.toString(gasolinaService.obtenerAnoGravableActual()));
+		}
+		else
+		{
+			infObjetoDelineacionExtras.setAnoGravable(infoImpuesto2Response.getAnoGravable());
+		}
+		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
+
+		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
+		periodo = "01";
+		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
+		dv = contribuyenteData.getDigVer();
+		//		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
+		//		CDU = infoDelineacion.getInput().getSelectedCDU();
+
+		//		cauex = infoDelineacion.getInfObjetoDelineacion().getInfoDeclara().getCausalExcepDESCRIPCION();
+		//		if (cauex == null)
+		//		{
+		//			gasolinaService.prepararValorcausalExcepDESCRIPCIONDUR(infoDelineacion);
+		//		}
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(numBP);
+		infoPreviaPSE.setNumDoc(numDoc);
+		infoPreviaPSE.setTipoDoc(tipoDoc);
+		infoPreviaPSE.setAnoGravable(anoGravable);
+		infoPreviaPSE.setPeriodo(periodo);
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		//		infoPreviaPSE.setNumObjeto(numObjeto);
+		//		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setAnticipo(anticipo);
+
+
+
+		final String tipoMarca = "";
+
+		//		for (int i = 0; i < infoDelineacion.getValCont().getDelineacion().size(); i++)
+		//		{
+		//			if (infoDelineacion.getValCont().getDelineacion().get(i).getCdu().equals(infoDelineacion.getInput().getSelectedCDU()))
+		//			{
+		//				tipoMarca = infoDelineacion.getValCont().getDelineacion().get(i).getTipoMarca();
+		//			}
+		//		}
+		//Cuando se establecio el tipo de licencia desde la pantalla presentar declaracion
+		//		if (infoDelineacion.getInput().getSelectedTipoLicencia() != null)
+		//		{
+		//			infoDelineacion.getInfObjetoDelineacion().getInfoDeclara()
+		//					.setTipoLicencia(infoDelineacion.getInput().getSelectedTipoLicencia());
+		//		}
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+		model.addAttribute("dataForm", infoDelineacion);
+		model.addAttribute("tipoMarca", tipoMarca);
+
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_DECLARACION));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
 	}
 
 
