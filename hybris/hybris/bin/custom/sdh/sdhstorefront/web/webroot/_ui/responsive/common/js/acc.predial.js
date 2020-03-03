@@ -458,7 +458,7 @@ ACC.predial = {
 		DatosLiquidacion.exclusionParcial = $("#ExclusionParcial").val();
 		
 		data.DatosLiquidacion = DatosLiquidacion;
-		
+		debugger;
 		var LiquidacionPrivada ={};
 		
 		LiquidacionPrivada.aporteVoluntario = $("#AporteVoluntario").val();

@@ -324,7 +324,7 @@ public class PredialUnificadoController extends AbstractPageController
 		}
 		else
 		{
-			String Error = "Su predio no cuenta con Tipo de registro";
+			String Error = "Su predio no cuenta con Tipo de registro, por lo que no se puede detrminar la declaración a realizar";
 			redirectAttributes.addFlashAttribute("Error", Error);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_inicio";

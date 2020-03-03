@@ -10,6 +10,15 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
+<c:if test="${Error != null}">
+			<div class="row">
+				<div class="col-12 notas_deli">
+					<div class="alert alert-danger mt-3">
+						<spring:theme code="${Error}" />
+					</div>
+				</div>
+			</div>
+		</c:if>
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">

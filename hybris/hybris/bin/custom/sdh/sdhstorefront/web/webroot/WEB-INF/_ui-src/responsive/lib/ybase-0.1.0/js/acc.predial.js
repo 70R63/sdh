@@ -474,35 +474,22 @@ ACC.predial = {
 				debugger;
 				alert("respuesta del controller");
 				$("#ValorImpuestoAjustadoActual").val(resul.liquidacionPrivada.valorAporteVoluntario);
-
+				$("#DescuentoPorIncrementoDiferencias").val(resul.liquidacionPrivada.descuentoIncrementoDiferencial);
+				$("#ValorImpuestoAjustadoActual").val(resul.liquidacionPrivada.valorImpuestoAjustadoActual);
+				$("#Sancion").val(resul.liquidacionPrivada.sancion);
+				$("#TotalSaldoACargo").val(resul.liquidacionPrivada.totalSaldoACargo);
+				$("#ValorAPagar").val(resul.liquidacionPrivada.valorAPagar);
+				$("#DescuentoPorProntoPago").val(resul.liquidacionPrivada.descuentoPorProntoPago);
+				$("#DescuendoAdicional1").val(resul.liquidacionPrivada.descuendoAdicional1);
+				$("#Intereses").val(resul.liquidacionPrivada.intereses);
+				$("#TotalAPagar").val(resul.liquidacionPrivada.totalAPagar);
+				$("#ValorAporteVoluntario").val(resul.liquidacionPrivada.valorAporteVoluntario);
+				$("#TotalConPagoVoluntario").val(resul.liquidacionPrivada.totalConPagoVoluntario);
 			},
 			error : function() {
 				alert("ERROR");
 			}
 		});
 	}
-
-// bindDeclaracionPredial : function(){
-// $(document).on("click", "#generarDeclracinPredial", function(e){
-// e.preventDefault();
-// debugger;
-//			
-// var chip = $("#reCHIP").val();
-// var inmo = $("#rematrInmobiliaria").val();
-// var anio = $("#reanioGravable").val();
-// var tipReg = $("#retipRegistro").val();
-//			
-// var data = {};
-//			
-// data.anioGravable = anio;
-// data.CHIP = chip;
-// data.matrInmobiliaria = inmo;
-// data.retipRegistro = tipReg;
-//			
-//			
-//			
-// });
-//		
-// }
 
 };
