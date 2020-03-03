@@ -692,6 +692,8 @@
 	<bean name="sdhDetallePredialService" class="de.hybris.sdh.core.services.impl.DefaultSDHDetallePredialService" />
 	
 	<bean name="sdhEdoCuentaService" class="de.hybris.sdh.core.services.impl.DefaultSDHEdoCuentaService" />
+	
+	<bean name="sdhCalculoPredialService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalculoPredialService" />
 
 
 	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>

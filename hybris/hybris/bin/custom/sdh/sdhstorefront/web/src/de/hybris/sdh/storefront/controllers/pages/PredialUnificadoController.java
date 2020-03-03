@@ -18,15 +18,18 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
+import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
 import de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHCalculoPredialService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
@@ -123,6 +126,9 @@ public class PredialUnificadoController extends AbstractPageController
 
 	@Resource(name = "modelService")
 	private ModelService modelService;
+
+	@Resource(name = "sdhCalculoPredialService")
+	private SDHCalculoPredialService sdhCalculoPredialService;
 
 	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
 
@@ -339,8 +345,8 @@ public class PredialUnificadoController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialuno(final Model model, final RedirectAttributes redirectAttributes,
-			final HttpServletRequest request) throws CMSItemNotFoundException
+	public String predialuno(final Model model, final RedirectAttributes redirectAttributes, final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado uno --------------------------");
 		final PredialForm predialFormuno = new PredialForm();
@@ -1438,7 +1444,65 @@ public class PredialUnificadoController extends AbstractPageController
 
 	}
 
+	@RequestMapping(value = "/contribuyentes/predialunificado/calculo", method = RequestMethod.GET)
+	@ResponseBody
+	public PredialForm calculoPredial(final PredialForm dataForm, final HttpServletResponse response,
+			final HttpServletRequest request) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Predial Calculo--------------------------");
+		final CalculoPredialRequest calculoPredialRequest = new CalculoPredialRequest();
+		CalculoPredialResponse calculoPredialResponse = null;
+		final PredialForm prediaFormcal = new PredialForm();
 
 
+		calculoPredialRequest.setNumBP(dataForm.getNumBP());
+		calculoPredialRequest.setCHIP(dataForm.getCHIP());
+		calculoPredialRequest.setMatrInmobiliaria(dataForm.getMatrInmobiliaria());
+		calculoPredialRequest.setAnioGravable(dataForm.getAnioGravable());
+		calculoPredialRequest.setOpcionUso(dataForm.getOpcionuso());
+		//eachDatLiq = calculoPredialRequest.setDatosLiquidacion();
+		//eachDatLiq.setTipoDeclaracion(dataForm.getTipoDeclaracion());
+		calculoPredialRequest.setDatosLiquidacion(dataForm.getDatosLiquidacion());
+		calculoPredialRequest.setLiquidacionPrivada(dataForm.getCalcLiquidacionPrivada());
+		//		calculoPredialRequest.setDatosLiquidacion.setPorcentajePropiedad(dataForm.getTipoDeclaracion());
+		//		//	calculoPredialRequest.setDatosLiquidacion().setPorcentajeExclusion(dataForm.);
+		//		// calculoPredialRequest.setDatosLiquidacion().setPorcentajeExencion(dataForm.);
+		//		calculoPredialRequest.setDatosLiquidacion.setTarifaLiquidacion(dataForm.getTarifaLiquidacion());
+		//		calculoPredialRequest.setDatosLiquidacion.setDestinoHacendario(dataForm.getDestinoHacendario());
+		//		calculoPredialRequest.setDatosLiquidacion.setBaseGravable(dataForm.getBaseGravable());
+		//		calculoPredialRequest.setDatosLiquidacion.setCanonArrendamiento(dataForm.getCanonArrendamiento());
+		//		//	calculoPredialRequest.setDatosLiquidacion().setNumeroContratoArrendamiento(dataForm.);
+		//		calculoPredialRequest.setDatosLiquidacion.setCalidadSujecion(dataForm.getCalidadSujecion());
+		//		calculoPredialRequest.setDatosLiquidacion.setAvaluoMatrizMejora(dataForm.getAvaluoMatrizMejora());
+		//		calculoPredialRequest.setDatosLiquidacion.setAreaTerrenoMejoraContribuye(dataForm.getAreaTerrenoMejoraContrib());
+		//		calculoPredialRequest.setDatosLiquidacion.setAvaluoProrrateado(dataForm.getAvaluoProrrateado());
+		//		calculoPredialRequest.setDatosLiquidacion.setAvaluoIndiceEdificabilidad(dataForm.getAvaluoIndiceEdificabilidad());
+		//		calculoPredialRequest.setDatosLiquidacion.setExclusionParcial(dataForm.getExclusionParcial());
+		//		calculoPredialRequest.setLiquidacionPrivada.setAporteVoluntario(dataForm.getAporteVoluntario());
+		//		calculoPredialRequest.setLiquidacionPrivada.setProyecto(dataForm.getProyecto());
+		//calculoPredialRequest.setLiquidacionPrivada(dataForm.getLiquidacionPrivada());
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			calculoPredialResponse = mapper.readValue(sdhCalculoPredialService.calculoPredial(calculoPredialRequest),
+					CalculoPredialResponse.class);
+
+			prediaFormcal.setNumFrom(calculoPredialResponse.getNumFrom());
+			prediaFormcal.setLiquidacionPrivada(calculoPredialResponse.getLiquidacionPrivada());
+			prediaFormcal.setErrores(calculoPredialResponse.getErrores());
+
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error calculo declaration : " + e.getMessage());
+
+		}
+
+		return prediaFormcal;
+	}
 
 }

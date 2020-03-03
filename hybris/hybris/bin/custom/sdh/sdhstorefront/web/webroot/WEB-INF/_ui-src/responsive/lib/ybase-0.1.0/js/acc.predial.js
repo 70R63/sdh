@@ -3,8 +3,23 @@ ACC.predial = {
 	_autoload : [ "bindoptionNo", "bindprophorizontal", "binbuttonPrecalculo",
 			"bindDetallePredial", "bindDeclaracionPredial" ],
 
+	bindoptionNo : function() {
+		$(document).on("click", ".optradio", function() {
+			debugger;
+			var valo = this.value;
+			var pro = document.getElementById('proyecto');
+
+			if (valo == '2') {
+				pro.style.display = 'none';
+			} else if (valo == '1') {
+				pro.style.display = 'block';
+			}
+
+		});
+	},
+
 	detalle_tres : function(anioGravable, chip, matrInmobiliaria) {
-		debugger;
+	
 		var show = document.getElementById('InicialDetalle');
 		show.style.display = 'block';
 
@@ -29,7 +44,6 @@ ACC.predial = {
 					data : data,
 					type : "GET",
 					success : function(result) {
-						debugger;
 						console.log(result);
 						$(".chip").val(result.chip);
 						var econo = result.datosEconomicos;
@@ -149,135 +163,182 @@ ACC.predial = {
 						if (marc != null) {
 							for (var i = 0; i < marc.length; i++) {
 								var desmarc = "";
-								if(marc[i].marca== "1" && marc[i].tipoMarca=="1"){
+								if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "1") {
 									desmarc = "SALÓN COMUNAL";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="10"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "10") {
 									desmarc = "INSTALACIONES MILITARES Y DE POLICÍA";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="11"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "11") {
 									desmarc = "PARQUES PÚBLICOS";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="13"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "13") {
 									desmarc = "RAMA JUDICIAL";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="16"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "16") {
 									desmarc = "PREDIOS RESIDENCIALES ESTRATO 1  Y 2 NO OBLIG";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="2"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "2") {
 									desmarc = "SSP NO OBLIGADOS";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="4"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "4") {
 									desmarc = "IGLESIA";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="5"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "5") {
 									desmarc = "BIENES DE USO PÚBLICO";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="6"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "6") {
 									desmarc = "DEFENSA CIVIL COLOMBIANA";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="7"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "7") {
 									desmarc = "DISTRITAL";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="8"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "8") {
 									desmarc = "CRUZ ROJA COLOMBIANA";
-								}else if(marc[i].marca== "1" && marc[i].tipoMarca=="9"){
+								} else if (marc[i].marca == "1"
+										&& marc[i].tipoMarca == "9") {
 									desmarc = "EMBAJADAS";
-								}else if(marc[i].marca== "2" && marc[i].tipoMarca=="1"){
+								} else if (marc[i].marca == "2"
+										&& marc[i].tipoMarca == "1") {
 									desmarc = "SECUESTRADO";
-								}else if(marc[i].marca== "2" && marc[i].tipoMarca=="2"){
+								} else if (marc[i].marca == "2"
+										&& marc[i].tipoMarca == "2") {
 									desmarc = "ATENTADO O CATÁSTROFE";
-								}else if(marc[i].marca== "2" && marc[i].tipoMarca=="3"){
+								} else if (marc[i].marca == "2"
+										&& marc[i].tipoMarca == "3") {
 									desmarc = "BIEN DE INTERÉS CULTURAL";
-								}else if(marc[i].marca== "2" && marc[i].tipoMarca=="4"){
+								} else if (marc[i].marca == "2"
+										&& marc[i].tipoMarca == "4") {
 									desmarc = "BANCO DE SUELOS DISTRITAL";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="1"){
-									desmarc ="SIN AVALÚO CATASTRAL";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="10"){
-									desmarc ="SIN SUJETO VALIDO";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="11"){
-									desmarc ="PREDIOS INCAUTADOS IMPRODUCTIVOS";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="12"){
-									desmarc ="PREDIOS INCAUTADOS PRODUCTIVOS";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="2"){
-									desmarc ="LOTES EN PH SIN CONSTRUIR";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="3"){
-										desmarc ="AREA CONSTRUIDA 0 Y ÁREA TERRENO 0";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="4"){
-									desmarc ="DESTINO HACENDARIO 0";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="5"){
-									desmarc ="INCONSISTENCIA POR ÁREA CONSTRUIDA";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="6"){
-									desmarc ="INCONSISTENCIA POR USO CATASTRAL";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="7"){
-									desmarc ="RESIDENCIAL URBANO SIN ESTRATO";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="8"){
-									desmarc ="SIN DIRECCIÓN DE NOTIFICACIÓN";
-								}else if(marc[i].marca== "3" && marc[i].tipoMarca=="9"){
-									desmarc ="IMPUESTO CERO";
-								}else if(marc[i].marca== "4" && marc[i].tipoMarca=="1"){
-									desmarc ="DISTRITO PARCIAL";
-								}else if(marc[i].marca== "4" && marc[i].tipoMarca=="2"){
-									desmarc ="IGLESIA PARCIAL";
-								}else if(marc[i].marca== "4" && marc[i].tipoMarca=="3"){
-									desmarc ="SALON PARCIAL";
-								}else if(marc[i].marca== "4" && marc[i].tipoMarca=="4"){
-									desmarc ="USO PÚBLICO PARCIAL";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="1"){
-									desmarc ="FINANCIERO";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="10"){
-									desmarc ="RESIDENCIALES SUELO EXPANSION";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="11"){
-									desmarc ="DEPÓSITO";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="12"){
-									desmarc ="RESTRICCIÓN ÍNDICE OCUPACIÓN";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="13"){
-									desmarc ="ID MEJORA MATRIZ";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="14"){
-									desmarc ="IMPACTO PREDIO";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="15"){
-									desmarc ="MUTACION FISICA";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="16"){
-									desmarc ="OPAIN";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="2"){
-									desmarc ="ZONA FRANCA";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="3"){
-									desmarc ="ÁREAS PROTEGIDAS";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="4"){
-									desmarc ="TENDERO";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="5"){
-									desmarc ="PREDIOS RESID. TARIFA ESPECIAL";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="6"){
-									desmarc ="NO URBANIZABLES";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="7"){
-									desmarc ="PPR-UAF";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="8"){
-									desmarc ="GARAJES Y DEPOSITOS CON USO 090";
-								}else if(marc[i].marca== "5" && marc[i].tipoMarca=="9"){
-									desmarc ="ASISTENCIA PÚBLICA";
-								}else{
-									desmarc ="-";
-								}
-								
-								var destipmarc = "";
-								if(marc[i].tipoMarca=="1"){
-									destipmarc = "EXCLUIDO";
-								}else if(marc[i].tipoMarca=="2"){
-									destipmarc = "EXENTO";
-								}else if(marc[i].tipoMarca=="3"){
-									destipmarc = "INCONSISTENTE";
-								}else if(marc[i].tipoMarca=="4"){
-									destipmarc = "EXCLUSION PARCIAL";
-								}else if(marc[i].tipoMarca=="5"){
-									destipmarc = "AFECTA LIQUIDACIÓN";
-								}else{
-									destipmarc = "-";
-								}
-								
-								var conhis = "";
-								
-								if(marc[i].conservacionHistorica=="I"){
-									conhis="CONSERVACIÓN INTEGRAL";
-								}else if(marc[i].conservacionHistorica=="M"){
-									conhis="CONSERVACIÓN MONUMENTAL";
-								}else if(marc[i].conservacionHistorica=="N"){
-									conhis="SIN CONSERVACIÓN (VALOR POR DEFECTO)";
-								}else	if(marc[i].conservacionHistorica=="T"){
-									conhis="CONSERVACIÓN TIPOLÓGICA";
-								}else{
-									"-";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "1") {
+									desmarc = "SIN AVALÚO CATASTRAL";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "10") {
+									desmarc = "SIN SUJETO VALIDO";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "11") {
+									desmarc = "PREDIOS INCAUTADOS IMPRODUCTIVOS";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "12") {
+									desmarc = "PREDIOS INCAUTADOS PRODUCTIVOS";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "2") {
+									desmarc = "LOTES EN PH SIN CONSTRUIR";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "3") {
+									desmarc = "AREA CONSTRUIDA 0 Y ÁREA TERRENO 0";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "4") {
+									desmarc = "DESTINO HACENDARIO 0";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "5") {
+									desmarc = "INCONSISTENCIA POR ÁREA CONSTRUIDA";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "6") {
+									desmarc = "INCONSISTENCIA POR USO CATASTRAL";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "7") {
+									desmarc = "RESIDENCIAL URBANO SIN ESTRATO";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "8") {
+									desmarc = "SIN DIRECCIÓN DE NOTIFICACIÓN";
+								} else if (marc[i].marca == "3"
+										&& marc[i].tipoMarca == "9") {
+									desmarc = "IMPUESTO CERO";
+								} else if (marc[i].marca == "4"
+										&& marc[i].tipoMarca == "1") {
+									desmarc = "DISTRITO PARCIAL";
+								} else if (marc[i].marca == "4"
+										&& marc[i].tipoMarca == "2") {
+									desmarc = "IGLESIA PARCIAL";
+								} else if (marc[i].marca == "4"
+										&& marc[i].tipoMarca == "3") {
+									desmarc = "SALON PARCIAL";
+								} else if (marc[i].marca == "4"
+										&& marc[i].tipoMarca == "4") {
+									desmarc = "USO PÚBLICO PARCIAL";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "1") {
+									desmarc = "FINANCIERO";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "10") {
+									desmarc = "RESIDENCIALES SUELO EXPANSION";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "11") {
+									desmarc = "DEPÓSITO";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "12") {
+									desmarc = "RESTRICCIÓN ÍNDICE OCUPACIÓN";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "13") {
+									desmarc = "ID MEJORA MATRIZ";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "14") {
+									desmarc = "IMPACTO PREDIO";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "15") {
+									desmarc = "MUTACION FISICA";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "16") {
+									desmarc = "OPAIN";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "2") {
+									desmarc = "ZONA FRANCA";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "3") {
+									desmarc = "ÁREAS PROTEGIDAS";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "4") {
+									desmarc = "TENDERO";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "5") {
+									desmarc = "PREDIOS RESID. TARIFA ESPECIAL";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "6") {
+									desmarc = "NO URBANIZABLES";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "7") {
+									desmarc = "PPR-UAF";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "8") {
+									desmarc = "GARAJES Y DEPOSITOS CON USO 090";
+								} else if (marc[i].marca == "5"
+										&& marc[i].tipoMarca == "9") {
+									desmarc = "ASISTENCIA PÚBLICA";
+								} else {
+									desmarc = "-";
 								}
 
+								var destipmarc = "";
+								if (marc[i].tipoMarca == "1") {
+									destipmarc = "EXCLUIDO";
+								} else if (marc[i].tipoMarca == "2") {
+									destipmarc = "EXENTO";
+								} else if (marc[i].tipoMarca == "3") {
+									destipmarc = "INCONSISTENTE";
+								} else if (marc[i].tipoMarca == "4") {
+									destipmarc = "EXCLUSION PARCIAL";
+								} else if (marc[i].tipoMarca == "5") {
+									destipmarc = "AFECTA LIQUIDACIÓN";
+								} else {
+									destipmarc = "-";
+								}
+
+								var conhis = "";
+
+								if (marc[i].conservacionHistorica == "I") {
+									conhis = "CONSERVACIÓN INTEGRAL";
+								} else if (marc[i].conservacionHistorica == "M") {
+									conhis = "CONSERVACIÓN MONUMENTAL";
+								} else if (marc[i].conservacionHistorica == "N") {
+									conhis = "SIN CONSERVACIÓN (VALOR POR DEFECTO)";
+								} else if (marc[i].conservacionHistorica == "T") {
+									conhis = "CONSERVACIÓN TIPOLÓGICA";
+								} else {
+									"-";
+								}
 
 								$('#MarcasPredial')
 										.append(
@@ -295,8 +356,7 @@ ACC.predial = {
 														+ marc[i].valorExencion
 														+ '" /></td>'
 														+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
-														+ conhis
-														+ '" /></td>');
+														+ conhis + '" /></td>');
 
 							}
 
@@ -315,17 +375,13 @@ ACC.predial = {
 
 	declaracionPredial : function() {
 
-		debugger;
 
 		var chip = $("#reCHIP").val();
 		var inmo = $("#rematrInmobiliaria").val();
 		var anio = $("#reanioGravable").val();
 		var tipReg = $("#retipRegistro").val();
 
-		var data
-		{
-		}
-		;
+		var data ={};
 
 		data.anioGravable = anio;
 		data.CHIP = chip;
@@ -363,9 +419,67 @@ ACC.predial = {
 		} else {
 			alert("El tipo de registro no existe");
 		}
-		
-		
 
+	},
+
+	calculoPredial : function() {
+		var data = {};
+		data.numBP = $("#NumBP").val();
+		data.CHIP = $("#CHIP").val();
+		data.matrInmobiliaria = $("#MatrInmobiliaria").val();
+		data.anioGravable = $("#AnioGravable").val();
+		data.opcionuso = $("#OpcionUso").val();
+		data.tipoDeclaracion = $("#TipoDeclaracion").val();
+		data.porcentajePropiedad =$("#PorcentajePropiedad").val();
+		data.tarifaLiquidacion = $("#TarifaLiquidacion").val();
+		data.destinoHacendario = $("#DestinoHacendario").val();
+		data.baseGravable = $("#BaseGravable").val();
+		data.canonArrendamiento = $("#CanonArrendamiento").val();
+		data.calidadSujecion = $("#CalidadSujecion").val();
+		data.avaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
+		data.areaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
+		data.avaluoProrrateado = $("#AvaluoProrrateado").val();
+		data.avaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
+		data.exclusionParcial = $("#ExclusionParcial").val();
+		data.aporteVoluntario = $("#AporteVoluntario").val();
+		data.proyecto = $("#Proyecto").val();
+		var DatosLiquidacion = {};
+		DatosLiquidacion.TipoDeclaracion = $("#TipoDeclaracion").val();
+		DatosLiquidacion.porcentajePropiedad =$("#PorcentajePropiedad").val();
+		DatosLiquidacion.tarifaLiquidacion = $("#TarifaLiquidacion").val();
+		DatosLiquidacion.destinoHacendario = $("#DestinoHacendario").val();
+		DatosLiquidacion.baseGravable = $("#BaseGravable").val();
+		DatosLiquidacion.canonArrendamiento = $("#CanonArrendamiento").val();
+		DatosLiquidacion.calidadSujecion = $("#CalidadSujecion").val();
+		DatosLiquidacion.avaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
+		DatosLiquidacion.areaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
+		DatosLiquidacion.avaluoProrrateado = $("#AvaluoProrrateado").val();
+		DatosLiquidacion.avaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
+		DatosLiquidacion.exclusionParcial = $("#ExclusionParcial").val();
+		
+		data.DatosLiquidacion = DatosLiquidacion;
+		
+		var LiquidacionPrivada ={};
+		
+		LiquidacionPrivada.aporteVoluntario = $("#AporteVoluntario").val();
+		LiquidacionPrivada.proyecto = $("#Proyecto").val();
+		
+		data.LiquidacionPrivada = LiquidacionPrivada;
+		
+		$.ajax({
+			url : ACC.calculoPredialURL,
+			data : data,
+			type : "GET",
+			success : function(result) {
+				debugger;
+				alert("respuesta del controller");
+				$("#ValorImpuestoAjustadoActual").val(resul.liquidacionPrivada.valorAporteVoluntario);
+
+			},
+			error : function() {
+				alert("ERROR");
+			}
+		});
 	}
 
 // bindDeclaracionPredial : function(){

@@ -60,9 +60,8 @@
 										data-CHIP="${current.CHIP}"
 										data-matrInmobiliaria="${current.matrInmobiliaria}"
 										class="text-capitalize !important showDetailPredio"
-										id="showDetailPredio"> <spring:theme
-												code="predial.inicial.table.ver" />
-									</label></td>
+										id="showDetailPredio" onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')"> <spring:theme
+											code="predial.inicial.table.ver" /></label></td>
 								</tr>
 							</c:forEach>
 						</tbody>
