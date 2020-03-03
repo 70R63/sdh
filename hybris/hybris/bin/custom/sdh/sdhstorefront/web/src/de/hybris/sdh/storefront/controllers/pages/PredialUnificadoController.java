@@ -55,6 +55,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -1444,9 +1445,10 @@ public class PredialUnificadoController extends AbstractPageController
 
 	}
 
-	@RequestMapping(value = "/contribuyentes/predialunificado/calculo", method = RequestMethod.GET)
+	@RequestMapping(value = "/contribuyentes/predialunificado/calculo", method = RequestMethod.POST)
 	@ResponseBody
-	public PredialForm calculoPredial(final PredialForm dataForm, final HttpServletResponse response,
+	public PredialForm calculoPredial(@RequestBody
+	final PredialForm dataForm, final HttpServletResponse response,
 			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Predial Calculo--------------------------");
@@ -1460,27 +1462,9 @@ public class PredialUnificadoController extends AbstractPageController
 		calculoPredialRequest.setMatrInmobiliaria(dataForm.getMatrInmobiliaria());
 		calculoPredialRequest.setAnioGravable(dataForm.getAnioGravable());
 		calculoPredialRequest.setOpcionUso(dataForm.getOpcionuso());
-		//eachDatLiq = calculoPredialRequest.setDatosLiquidacion();
-		//eachDatLiq.setTipoDeclaracion(dataForm.getTipoDeclaracion());
-		calculoPredialRequest.setDatosLiquidacion(dataForm.getDatosLiquidacion());
+		calculoPredialRequest.setDatosLiquidacion(dataForm.getNewDatosLiquidacion());
 		calculoPredialRequest.setLiquidacionPrivada(dataForm.getCalcLiquidacionPrivada());
-		//		calculoPredialRequest.setDatosLiquidacion.setPorcentajePropiedad(dataForm.getTipoDeclaracion());
-		//		//	calculoPredialRequest.setDatosLiquidacion().setPorcentajeExclusion(dataForm.);
-		//		// calculoPredialRequest.setDatosLiquidacion().setPorcentajeExencion(dataForm.);
-		//		calculoPredialRequest.setDatosLiquidacion.setTarifaLiquidacion(dataForm.getTarifaLiquidacion());
-		//		calculoPredialRequest.setDatosLiquidacion.setDestinoHacendario(dataForm.getDestinoHacendario());
-		//		calculoPredialRequest.setDatosLiquidacion.setBaseGravable(dataForm.getBaseGravable());
-		//		calculoPredialRequest.setDatosLiquidacion.setCanonArrendamiento(dataForm.getCanonArrendamiento());
-		//		//	calculoPredialRequest.setDatosLiquidacion().setNumeroContratoArrendamiento(dataForm.);
-		//		calculoPredialRequest.setDatosLiquidacion.setCalidadSujecion(dataForm.getCalidadSujecion());
-		//		calculoPredialRequest.setDatosLiquidacion.setAvaluoMatrizMejora(dataForm.getAvaluoMatrizMejora());
-		//		calculoPredialRequest.setDatosLiquidacion.setAreaTerrenoMejoraContribuye(dataForm.getAreaTerrenoMejoraContrib());
-		//		calculoPredialRequest.setDatosLiquidacion.setAvaluoProrrateado(dataForm.getAvaluoProrrateado());
-		//		calculoPredialRequest.setDatosLiquidacion.setAvaluoIndiceEdificabilidad(dataForm.getAvaluoIndiceEdificabilidad());
-		//		calculoPredialRequest.setDatosLiquidacion.setExclusionParcial(dataForm.getExclusionParcial());
-		//		calculoPredialRequest.setLiquidacionPrivada.setAporteVoluntario(dataForm.getAporteVoluntario());
-		//		calculoPredialRequest.setLiquidacionPrivada.setProyecto(dataForm.getProyecto());
-		//calculoPredialRequest.setLiquidacionPrivada(dataForm.getLiquidacionPrivada());
+
 
 		try
 		{

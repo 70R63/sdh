@@ -109,7 +109,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="calculoPredSinAporte()">
 					<spring:theme code="predialsiete.liquidacionpriv.calcular" />
 				</button>
 			</div>
@@ -117,4 +117,8 @@
 	</div>
 </form:form>
 
-
+<script type="text/javascript">
+	function calculoPredSinAporte() {
+		ACC.predial.calculoPredialSinAporte();
+	}
+</script>

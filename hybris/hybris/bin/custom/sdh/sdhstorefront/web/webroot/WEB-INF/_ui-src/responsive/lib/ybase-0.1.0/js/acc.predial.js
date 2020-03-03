@@ -423,73 +423,104 @@ ACC.predial = {
 	},
 
 	calculoPredial : function() {
-		var data = {};
-		data.numBP = $("#NumBP").val();
-		data.CHIP = $("#CHIP").val();
-		data.matrInmobiliaria = $("#MatrInmobiliaria").val();
-		data.anioGravable = $("#AnioGravable").val();
-		data.opcionuso = $("#OpcionUso").val();
-		data.tipoDeclaracion = $("#TipoDeclaracion").val();
-		data.porcentajePropiedad =$("#PorcentajePropiedad").val();
-		data.tarifaLiquidacion = $("#TarifaLiquidacion").val();
-		data.destinoHacendario = $("#DestinoHacendario").val();
-		data.baseGravable = $("#BaseGravable").val();
-		data.canonArrendamiento = $("#CanonArrendamiento").val();
-		data.calidadSujecion = $("#CalidadSujecion").val();
-		data.avaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
-		data.areaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
-		data.avaluoProrrateado = $("#AvaluoProrrateado").val();
-		data.avaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
-		data.exclusionParcial = $("#ExclusionParcial").val();
-		data.aporteVoluntario = $("#AporteVoluntario").val();
-		data.proyecto = $("#Proyecto").val();
+		var dataForm = {};
+		dataForm.numBP = $("#NumBP").val();
+		dataForm.CHIP = $("#CHIP").val();
+		dataForm.matrInmobiliaria = $("#MatrInmobiliaria").val();
+		dataForm.anioGravable = $("#AnioGravable").val();
+		dataForm.opcionuso = $("#OpcionUso").val();
+//		dataForm.tipoDeclaracion = $("#TipoDeclaracion").val();
+//		dataForm.porcentajePropiedad =$("#PorcentajePropiedad").val();
+//		dataForm.tarifaLiquidacion = $("#TarifaLiquidacion").val();
+//		dataForm.destinoHacendario = $("#DestinoHacendario").val();
+//		data.baseGravable = $("#BaseGravable").val();
+//		data.canonArrendamiento = $("#CanonArrendamiento").val();
+//		data.calidadSujecion = $("#CalidadSujecion").val();
+//		data.avaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
+//		data.areaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
+//		data.avaluoProrrateado = $("#AvaluoProrrateado").val();
+//		data.avaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
+//		data.exclusionParcial = $("#ExclusionParcial").val();
+//		data.aporteVoluntario = $("#AporteVoluntario").val();
+//		dataForm.proyecto = $("#Proyecto").val();
 		var DatosLiquidacion = {};
 		DatosLiquidacion.TipoDeclaracion = $("#TipoDeclaracion").val();
-		DatosLiquidacion.porcentajePropiedad =$("#PorcentajePropiedad").val();
-		DatosLiquidacion.tarifaLiquidacion = $("#TarifaLiquidacion").val();
-		DatosLiquidacion.destinoHacendario = $("#DestinoHacendario").val();
-		DatosLiquidacion.baseGravable = $("#BaseGravable").val();
-		DatosLiquidacion.canonArrendamiento = $("#CanonArrendamiento").val();
-		DatosLiquidacion.calidadSujecion = $("#CalidadSujecion").val();
-		DatosLiquidacion.avaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
-		DatosLiquidacion.areaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
-		DatosLiquidacion.avaluoProrrateado = $("#AvaluoProrrateado").val();
-		DatosLiquidacion.avaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
-		DatosLiquidacion.exclusionParcial = $("#ExclusionParcial").val();
+		DatosLiquidacion.PorcentajePropiedad =$("#PorcentajePropiedad").val();
+		DatosLiquidacion.TarifaLiquidacion = $("#TarifaLiquidacion").val();
+		DatosLiquidacion.DestinoHacendario = $("#DestinoHacendario").val();
+		DatosLiquidacion.BaseGravable = $("#BaseGravable").val();
+		DatosLiquidacion.CanonArrendamiento = $("#CanonArrendamiento").val();
+		DatosLiquidacion.CalidadSujecion = $("#CalidadSujecion").val();
+		DatosLiquidacion.AvaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
+		DatosLiquidacion.AreaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
+		DatosLiquidacion.AvaluoProrrateado = $("#AvaluoProrrateado").val();
+		DatosLiquidacion.AvaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
+		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
 		
-		data.DatosLiquidacion = DatosLiquidacion;
+		dataForm.newDatosLiquidacion = DatosLiquidacion;
 		
 		var LiquidacionPrivada ={};
 		
-		LiquidacionPrivada.aporteVoluntario = $("#AporteVoluntario").val();
-		LiquidacionPrivada.proyecto = $("#Proyecto").val();
+		LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
+		LiquidacionPrivada.Proyecto = $("#Proyecto").val();
 		
-		data.LiquidacionPrivada = LiquidacionPrivada;
+		dataForm.calcLiquidacionPrivada = LiquidacionPrivada;
 		
 		$.ajax({
 			url : ACC.calculoPredialURL,
-			data : data,
-			type : "GET",
+			data: JSON.stringify(dataForm),
+			//data : data,
+			type : "POST",
+			 dataType: "json",
+			contentType: "application/json",
 			success : function(result) {
 				debugger;
+				var actualErrors = [];
+            	
+            	if(result)
+            	{
+            		$.each(result.errores, function( index, value ) {
+            			if(value.idmsj != "0")
+            			actualErrors.push(value);
+            		});
+            	}
+            	if(actualErrors.length > 0)
+        		{
+            		$( "#dialogPredial" ).dialog( "open" );
+            		$("#predialDialogContent").html("Error");
+            		$.each(result.errores, function( index, value ) {
+            			$("#predialDialogContent").html($("#predialDialogContent").html()+value.txtmsj+"<br>");
+            		});
+            		
+            		//$("#icaPresentarDeclaracionButton").prop("disabled",true);           		
+        		}else
+        		{
 				alert("respuesta del controller");
-				$("#ValorImpuestoAjustadoActual").val(resul.liquidacionPrivada.valorAporteVoluntario);
-				$("#DescuentoPorIncrementoDiferencias").val(resul.liquidacionPrivada.descuentoIncrementoDiferencial);
-				$("#ValorImpuestoAjustadoActual").val(resul.liquidacionPrivada.valorImpuestoAjustadoActual);
-				$("#Sancion").val(resul.liquidacionPrivada.sancion);
-				$("#TotalSaldoACargo").val(resul.liquidacionPrivada.totalSaldoACargo);
-				$("#ValorAPagar").val(resul.liquidacionPrivada.valorAPagar);
-				$("#DescuentoPorProntoPago").val(resul.liquidacionPrivada.descuentoPorProntoPago);
-				$("#DescuendoAdicional1").val(resul.liquidacionPrivada.descuendoAdicional1);
-				$("#Intereses").val(resul.liquidacionPrivada.intereses);
-				$("#TotalAPagar").val(resul.liquidacionPrivada.totalAPagar);
-				$("#ValorAporteVoluntario").val(resul.liquidacionPrivada.valorAporteVoluntario);
-				$("#TotalConPagoVoluntario").val(resul.liquidacionPrivada.totalConPagoVoluntario);
+				$( "#dialogPredial" ).dialog( "open" );
+    			$("#predialDialogContent").html("El cálculo se ha realizado exitosamente.");
+    			
+				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorAporteVoluntario);
+				$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoIncrementoDiferencial);
+				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorImpuestoAjustadoActual);
+				$("#Sancion").val(result.liquidacionPrivada.sancion);
+				$("#TotalSaldoACargo").val(result.liquidacionPrivada.totalSaldoACargo);
+				$("#ValorAPagar").val(result.liquidacionPrivada.valorAPagar);
+				$("#DescuentoPorProntoPago").val(result.liquidacionPrivada.descuentoPorProntoPago);
+				$("#DescuendoAdicional1").val(result.liquidacionPrivada.descuendoAdicional1);
+				$("#Intereses").val(result.liquidacionPrivada.intereses);
+				$("#TotalAPagar").val(result.liquidacionPrivada.totalAPagar);
+				$("#ValorAporteVoluntario").val(result.liquidacionPrivada.valorAporteVoluntario);
+				$("#TotalConPagoVoluntario").val(result.liquidacionPrivada.totalConPagoVoluntario);
+        		}
 			},
 			error : function() {
 				alert("ERROR");
 			}
 		});
+	},
+	
+	calculoPredialSinAporte : function(){
+		
 	}
 
 };

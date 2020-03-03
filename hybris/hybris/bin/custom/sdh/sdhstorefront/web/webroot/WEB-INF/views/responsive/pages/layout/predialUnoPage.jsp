@@ -16,10 +16,10 @@
 <firmas:generalFirmas />
 <predial:predialUnoBotones />
 
+<div id="dialogPredial" title="PREDIAL" ><div id="predialDialogContent"></div></div>
 <script>
 
 window.onload = function() {
-	debugger;
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){

@@ -36,7 +36,7 @@
  <input type="hidden" value="${predialForm.estrLiquidacionPrivada.aporteVoluntario}" id="AporteVoluntario"/>
  <input type="hidden" value="${predialForm.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
-<!-- Fin de campos para caluclo -->
+<!-- Fin de campos para calculo -->
 
 	<div class="row" style="marging-top: 5px">
 		<div class="col-md-12 centercol-md-8 text-center">

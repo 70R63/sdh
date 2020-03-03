@@ -64,6 +64,7 @@ public class PredialForm
 	private CalculoPredialLiqPriv liquidacionPrivada;
 	private List<CalPredialErrores> Errores;
 	private CalPredialDatLiq DatosLiquidacion;
+	private CalPredialDatLiq newDatosLiquidacion;
 	private CalPredialLiqPriv calcLiquidacionPrivada;
 	//campos para request de calculo
 
@@ -828,6 +829,23 @@ public class PredialForm
 	public void setProyecto(final String proyecto)
 	{
 		this.proyecto = proyecto;
+	}
+
+	/**
+	 * @return the newDatosLiquidacion
+	 */
+	public CalPredialDatLiq getNewDatosLiquidacion()
+	{
+		return newDatosLiquidacion;
+	}
+
+	/**
+	 * @param newDatosLiquidacion
+	 *           the newDatosLiquidacion to set
+	 */
+	public void setNewDatosLiquidacion(final CalPredialDatLiq newDatosLiquidacion)
+	{
+		this.newDatosLiquidacion = newDatosLiquidacion;
 	}
 
 
