@@ -22,8 +22,64 @@ public class InfoPreviaPSE
 	private String radicado;
 	private String anticipo;
 	private String chip;
+	private String fechaVenc;
+	private String numRef;
+	private String totalPagar;
 
 
+
+
+
+	/**
+	 * @return the fechaVenc
+	 */
+	public String getFechaVenc()
+	{
+		return fechaVenc;
+	}
+
+	/**
+	 * @param fechaVenc
+	 *           the fechaVenc to set
+	 */
+	public void setFechaVenc(final String fechaVenc)
+	{
+		this.fechaVenc = fechaVenc;
+	}
+
+	/**
+	 * @return the numRef
+	 */
+	public String getNumRef()
+	{
+		return numRef;
+	}
+
+	/**
+	 * @param numRef
+	 *           the numRef to set
+	 */
+	public void setNumRef(final String numRef)
+	{
+		this.numRef = numRef;
+	}
+
+	/**
+	 * @return the totalPagar
+	 */
+	public String getTotalPagar()
+	{
+		return totalPagar;
+	}
+
+	/**
+	 * @param totalPagar
+	 *           the totalPagar to set
+	 */
+	public void setTotalPagar(final String totalPagar)
+	{
+		this.totalPagar = totalPagar;
+	}
 
 	/**
 	 * @return the radicado
@@ -243,7 +299,7 @@ public class InfoPreviaPSE
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

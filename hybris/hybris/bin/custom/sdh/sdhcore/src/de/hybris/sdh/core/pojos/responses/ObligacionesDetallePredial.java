@@ -15,6 +15,28 @@ public class ObligacionesDetallePredial
 	private String numFormulario;
 	private String numReferencia;
 	private String objetoContrato;
+	private String fechaVencimiento;
+
+
+
+
+	/**
+	 * @return the fechaVencimiento
+	 */
+	public String getFechaVencimiento()
+	{
+		return fechaVencimiento;
+	}
+
+	/**
+	 * @param fechaVencimiento
+	 *           the fechaVencimiento to set
+	 */
+	public void setFechaVencimiento(final String fechaVencimiento)
+	{
+		this.fechaVencimiento = fechaVencimiento;
+	}
+
 	/**
 	 * @return the estadoObligacion
 	 */
@@ -22,7 +44,7 @@ public class ObligacionesDetallePredial
 	{
 		return estadoObligacion;
 	}
-	
+
 	/**
 	 * @param estadoObligacion
 	 *           the estadoObligacion to set
@@ -31,7 +53,7 @@ public class ObligacionesDetallePredial
 	{
 		this.estadoObligacion = estadoObligacion;
 	}
-	
+
 	/**
 	 * @return the obligacion
 	 */
@@ -39,7 +61,7 @@ public class ObligacionesDetallePredial
 	{
 		return obligacion;
 	}
-	
+
 	/**
 	 * @param obligacion
 	 *           the obligacion to set
@@ -48,7 +70,7 @@ public class ObligacionesDetallePredial
 	{
 		this.obligacion = obligacion;
 	}
-	
+
 	/**
 	 * @return the numFormulario
 	 */
@@ -56,7 +78,7 @@ public class ObligacionesDetallePredial
 	{
 		return numFormulario;
 	}
-	
+
 	/**
 	 * @param numFormulario
 	 *           the numFormulario to set
@@ -65,7 +87,7 @@ public class ObligacionesDetallePredial
 	{
 		this.numFormulario = numFormulario;
 	}
-	
+
 	/**
 	 * @return the numReferencia
 	 */
@@ -73,7 +95,7 @@ public class ObligacionesDetallePredial
 	{
 		return numReferencia;
 	}
-	
+
 	/**
 	 * @param numReferencia
 	 *           the numReferencia to set
@@ -82,7 +104,7 @@ public class ObligacionesDetallePredial
 	{
 		this.numReferencia = numReferencia;
 	}
-	
+
 	/**
 	 * @return the objetoContrato
 	 */
@@ -90,7 +112,7 @@ public class ObligacionesDetallePredial
 	{
 		return objetoContrato;
 	}
-	
+
 	/**
 	 * @param objetoContrato
 	 *           the objetoContrato to set

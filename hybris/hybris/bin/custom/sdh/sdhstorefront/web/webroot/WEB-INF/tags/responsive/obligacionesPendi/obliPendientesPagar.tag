@@ -25,8 +25,10 @@
 				<sf:hidden path="dv" id="pagarEnLinea_dv"/>
 				<sf:hidden path="numObjeto" id="pagarEnLinea_numObjeto"/>
 				<sf:hidden path="chip" id="pagarEnLinea_chip"/>
+				<sf:hidden path="fechaVenc" id="pagarEnLinea_fechaVenc"/>
+				<sf:hidden path="numRef" id="pagarEnLinea_numRef"/>
+				<sf:hidden path="totalPagar" id="pagarEnLinea_totalPagar"/>
 			</div>
 		</sf:form>
-
 	</div>
 </div>

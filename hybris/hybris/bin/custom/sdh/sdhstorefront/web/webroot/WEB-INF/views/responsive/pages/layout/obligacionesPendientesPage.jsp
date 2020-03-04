@@ -17,12 +17,12 @@
 
 
 <script>
-	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto){
+	function pagarEnLinea(tipoImpuesto,anoGravable,periodo,numObjeto,chip,fechaVenc,numRef,totalPagar){
 		debugger;
 		var numBP = "${customerData.numBP}";
 		var numDoc = "${customerData.documentNumber}";
 		var tipoDoc = "${customerData.documentType}";
-		var clavePeriodo = "";
+		var clavePeriodo = anoGravable.substr(2,2).concat("A1");
 		var dv = "${customerData.digVer}";
 		
 		
@@ -35,9 +35,13 @@
 		$("#pagarEnLinea_clavePeriodo").val(clavePeriodo);
 		$("#pagarEnLinea_dv").val(dv);
 		$("#pagarEnLinea_numObjeto").val(numObjeto);
+		$("#pagarEnLinea_chip").val(chip);
+		$("#pagarEnLinea_fechaVenc").val(fechaVenc);
+		$("#pagarEnLinea_numRef").val(numRef);
+		$("#pagarEnLinea_totalPagar").val(totalPagar);
 		
 		
-		form = document.getElementById("infoPreviaPSE");
+		var form = document.getElementById("infoPreviaPSE");
 		if(form!=null){
 			form.submit();
 		}
@@ -248,6 +252,8 @@
 							}
 						});
 	}
+	
+	
 </script>
 
 
