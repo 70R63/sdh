@@ -153,6 +153,9 @@
 														<c:when test="${eachDeclaracion.impuesto eq '0004'}">
 															<td ><a href="<c:url value="/reteica/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}&anoGravable=${eachDeclaracion.anioGravable}&perRepor=${eachDeclaracion.periodo}" />">Ver</a></td>
 														</c:when>
+														<c:when test="${eachDeclaracion.impuesto eq '0006'}">
+															<td ><a href="<c:url value="/contribuyentes/delineacionurbana/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}&anoGravable=${eachDeclaracion.anioGravable}&perRepor=${eachDeclaracion.periodo}" />">Ver</a></td>
+														</c:when>														
 														<c:when test="${eachDeclaracion.impuesto eq '0002'}">
 															<td ><a href="<c:url value="/contribuyentes/sobrevehiculosautomotores/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}" />">Ver</a></td>
 														</c:when>

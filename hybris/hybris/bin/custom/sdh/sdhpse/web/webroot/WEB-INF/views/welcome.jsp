@@ -8,7 +8,7 @@
 <div class="container">
     <img src="<c:url value="${logoUrl}" />" alt="Hybris platform logo"/>
 
-    <h2>Welcome to "sdhpse" extension</h2>
+    <h2>Welcome to "sdhpse" extension</h2>r
 
     <h3><b>Getting started</b></h3>
 

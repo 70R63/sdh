@@ -11,11 +11,12 @@
 <div class="loader"></div>
 
 <predial:predialTresGenerales />
+<predial:predialTresDatPredio></predial:predialTresDatPredio>
 <predial:predialTresDatLiq />
 <predial:predialTresLiqPrivada />
 <firmas:generalFirmas />
 <predial:predialTresBotones />
-
+<div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
 <script>
 
 window.onload = function() {

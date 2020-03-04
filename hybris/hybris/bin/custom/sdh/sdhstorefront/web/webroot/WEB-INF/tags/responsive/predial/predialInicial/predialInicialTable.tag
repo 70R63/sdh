@@ -10,6 +10,15 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
+	<c:if test="${Error != null}">
+		<div class="row">
+			<div class="col-12 notas_deli">
+				<div class="alert alert-danger mt-3">
+					<spring:theme code="${Error}" />
+				</div>
+			</div>
+		</div>
+	</c:if>
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
@@ -46,39 +55,27 @@
 											code="predial.inicial.table.nocotrato" /></label></th>
 								<th><label class="control-label labeltabletd "><spring:theme
 											code="predial.inicial.table.detalle" /></label></th>
-								<th><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.TotalPagar" /></label></th>
-								<th><label class="control-label labeltabletd "><spring:theme
-											code="predial.inicial.table.pagarEnLinea" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${predial.predial}" var="current">
-								<c:set var="nombrePresentarDec" value="btnPresentarDec_${current.CHIP}"/>
-								<c:set var="nombrePagarEnLinea" value="btnPagarEnLinea_${current.CHIP}"/>
-								<c:set var="nombreTotalPagar" value="totalPagar_${current.CHIP}"/>
-								<tr>
-									<td><c:out value="${current.CHIP}" /></td>
-									<td><c:out value="${current.matrInmobiliaria}" /></td>
-									<td><c:out value="${current.direccionPredio}" /></td>
-									<td><c:out value="${current.contratoArrenda}" /></td>
-									<td>
-										<button type="button" id="${nombrePresentarDec}"
-											name="${nombrePresentarDec}" value="presentarDec" class="btn-primary"
-											onclick="presentarDeclaracion('${current.CHIP}','${current.anioGravable}')">
-											<spring:theme code="predial.inicial.table.presentarDeclaracion" />
-										</button>
-									</td>
-									<td><label class="text-capitalize !important " id="${nombreTotalPagar}" hidden="true"></label>
-									</td>
-									<td>
-										<button type="button" id="${nombrePagarEnLinea}"
-											name="${nombrePagarEnLinea}" value="pagarEnLinea" class="btn-primary" hidden="true"
-											onclick="pagarEnLinea('5101','${current.anioGravable}','','${current.numObjeto}','${current.CHIP}')">
-											<spring:theme code="predial.inicial.table.pagarEnLinea" />
-										</button>
-									</td>
-								</tr>
+								<c:if test="${current.CHIP != ''}">
+									<tr>
+										<td><c:out value="${current.CHIP}" /></td>
+										<td><c:out value="${current.matrInmobiliaria}" /></td>
+										<td><c:out value="${current.direccionPredio}" /></td>
+										<td><c:out value="${current.contratoArrenda}" /></td>
+										<td><label style="color: #0358d8 !important"
+											data-anioGravable="${current.anioGravable}"
+											data-CHIP="${current.CHIP}"
+											data-matrInmobiliaria="${current.matrInmobiliaria}"
+											class="text-capitalize !important showDetailPredio"
+											id="showDetailPredio"
+											onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
+												<spring:theme code="predial.inicial.table.ver" />
+										</label></td>
+									</tr>
+								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -90,7 +87,7 @@
 </div>
 
 <script>
-
+	
 </script>
 
 

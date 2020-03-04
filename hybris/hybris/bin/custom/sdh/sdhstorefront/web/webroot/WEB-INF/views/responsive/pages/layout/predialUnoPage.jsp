@@ -16,10 +16,10 @@
 <firmas:generalFirmas />
 <predial:predialUnoBotones />
 
+	<div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
 <script>
 
 window.onload = function() {
-	debugger;
 	var cosas = $(":input");
 	var tam = cosas.length;
 	if (false){

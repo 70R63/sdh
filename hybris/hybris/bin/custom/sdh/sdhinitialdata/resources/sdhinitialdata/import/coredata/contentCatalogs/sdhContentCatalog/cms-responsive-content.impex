@@ -1036,7 +1036,43 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
 ;;PagoEnLineaPSEPage;Pago PSE Page;PagoEnLineaPSEPageTemplate;Pago PSE Page
-#----------------  new Pago En Linea - PSE page  ---------------- 
+#----------------  new Pago En Linea - PSE page  ----------------
+
+#---------------- new chat page ----------------
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;chatPageTemplate;Pago PSE Page Template;layout/chatPage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='chatPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;Section1;;;wide
+;Section2A;;;wide
+;Section2B;;;narrow
+;Section2C;;;narrow
+;Section3;;;wide
+;Section4;;;narrow
+;Section5;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='chatPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-chatPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-chatPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-chatPage;NavigationBar;;NavigationBarSlot;true
+;;Footer-chatPage;Footer;;FooterSlot;true
+;;HeaderLinks-chatPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-chatPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-chatPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-chatPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-chatPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;chatPage;Pago PSE Page;chatPageTemplate;Pago PSE Page
+#----------------  end chat page ----------------
 
 
 #new delineacion urbana page
@@ -1767,7 +1803,6 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;reportantesPageComponent	;reportantesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesPageComponent
-
 
 #new agentesAutorizadosMenuPageTemplate
 
