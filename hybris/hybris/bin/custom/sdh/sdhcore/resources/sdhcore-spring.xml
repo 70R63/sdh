@@ -16,7 +16,9 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
 
      <context:annotation-config/>
 
@@ -692,6 +694,8 @@
 	<bean name="sdhDetallePredialService" class="de.hybris.sdh.core.services.impl.DefaultSDHDetallePredialService" />
 	
 	<bean name="sdhEdoCuentaService" class="de.hybris.sdh.core.services.impl.DefaultSDHEdoCuentaService" />
+	
+	<bean name="sdhCalculoPredialService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalculoPredialService" />
 
 
 	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>

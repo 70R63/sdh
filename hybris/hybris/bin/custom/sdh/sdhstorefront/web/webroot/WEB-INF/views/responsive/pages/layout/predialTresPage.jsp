@@ -16,7 +16,7 @@
 <predial:predialTresLiqPrivada />
 <firmas:generalFirmas />
 <predial:predialTresBotones />
-
+<div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
 <script>
 
 window.onload = function() {
