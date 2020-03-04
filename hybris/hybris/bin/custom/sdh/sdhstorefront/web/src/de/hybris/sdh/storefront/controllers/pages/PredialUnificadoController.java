@@ -192,16 +192,16 @@ public class PredialUnificadoController extends AbstractPageController
 
 		final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
-		//				detallePredialRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
-		//				detallePredialRequest.setAnioGravable(predialInfo.getAnioGravable());
-		//				detallePredialRequest.setCHIP(predialInfo.getCHIP());
-		//				detallePredialRequest.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
+		detallePredialRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
+		detallePredialRequest.setAnioGravable(predialInfo.getAnioGravable());
+		detallePredialRequest.setCHIP(predialInfo.getCHIP());
+		detallePredialRequest.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
 
 
-		detallePredialRequest.setNumBP("1000010203");
-		detallePredialRequest.setAnioGravable("2019");
-		detallePredialRequest.setCHIP("AAA0080KECZ");
-		detallePredialRequest.setMatrInmobiliaria("050N1178178");
+		//		detallePredialRequest.setNumBP("1000010203");
+		//		detallePredialRequest.setAnioGravable("2019");
+		//		detallePredialRequest.setCHIP("AAA0080KECZ");
+		//		detallePredialRequest.setMatrInmobiliaria("050N1178178");
 
 
 		try
