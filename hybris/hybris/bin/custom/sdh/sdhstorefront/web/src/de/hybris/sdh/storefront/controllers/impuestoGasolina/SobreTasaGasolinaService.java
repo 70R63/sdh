@@ -17,6 +17,7 @@ import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
+import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacion2Request;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.ListaDeclaracionesRequest;
 import de.hybris.sdh.core.pojos.requests.OpcionCertiDecImprimeRequest;
@@ -46,6 +47,7 @@ import de.hybris.sdh.core.pojos.responses.ImpuestoGasolina;
 import de.hybris.sdh.core.pojos.responses.ImpuestoICA;
 import de.hybris.sdh.core.pojos.responses.ImpuestoPublicidadExterior;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
+import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacion2Response;
 import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.ItemListaDeclaraciones;
 import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
@@ -1737,6 +1739,24 @@ public class SobreTasaGasolinaService
 		final String nombreClase = "de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse";
 
 		responseInfo = (InfoObjetoDelineacionResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
+	public InfoObjetoDelineacion2Response consultaInfoDelineacionAA(final InfoObjetoDelineacion2Request requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		InfoObjetoDelineacion2Response responseInfo = new InfoObjetoDelineacion2Response();
+		final String confUrl = "sdh.infObjetoDelineacion2.url";
+		final String confUser = "sdh.infObjetoDelineacion2.user";
+		final String confPass = "sdh.infObjetoDelineacion2.password";
+		final String wsNombre = "liquidador2/calculoDelineacion";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacion2Response";
+
+		responseInfo = (InfoObjetoDelineacion2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
 				wsReqMet, LOG, nombreClase);
 
 		return responseInfo;
