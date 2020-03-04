@@ -3,6 +3,7 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.sdh.core.pojos.chatws.Message;
 import de.hybris.sdh.core.pojos.chatws.MessageDecoder;
 import de.hybris.sdh.core.pojos.chatws.MessageEncoder;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,8 +26,11 @@ public class ChatWebSocketController {
     private static final Set<ChatWebSocketController> chatEndpoints = new CopyOnWriteArraySet<>();
     private static HashMap<String, String> users = new HashMap<>();
 
+    //private static final Logger LOG = Logger.getLogger(ChatWebSocketController.class);
+
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) throws IOException, EncodeException {
+        //LOG.info("New user has connected: [" + username + "]");
         this.session = session;
         chatEndpoints.add(this);
         users.put(session.getId(), username);
@@ -45,6 +49,7 @@ public class ChatWebSocketController {
 
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
+        //LOG.info("User [" + users.get(session.getId()) + "] has disconnected");
         chatEndpoints.remove(this);
         Message message = new Message();
         message.setFrom(users.get(session.getId()));

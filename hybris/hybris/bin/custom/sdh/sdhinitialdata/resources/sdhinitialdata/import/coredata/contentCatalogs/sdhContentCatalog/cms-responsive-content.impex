@@ -1804,21 +1804,6 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;reportantesPageComponent	;reportantesPage Component	;/WEB-INF/views/responsive/pages/layout/reportantesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;reportantesPageComponent
 
-###### SDH CHAT ######
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='chatPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
-								;						;SideContent-chatPage 	;SideContent			;																	;SideContent-chatPage				;;;
-								;						;BodyContent-chatPage 	;BodyContent			;																	;BodyContent-chatPage				;;;
-chatPage
-
-
-INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-chatPage 	;Side Content Slot for chat	;true	;								;;;
-							;							;BodyContent-chatPage	;Body Content Slot for chat	;true	;chatPageComponent		;;;
-
-
-INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;chatPageComponent	;chatPage Component	;/WEB-INF/views/responsive/pages/layout/chatPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;chatPageComponent
-
 #new agentesAutorizadosMenuPageTemplate
 
 INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
