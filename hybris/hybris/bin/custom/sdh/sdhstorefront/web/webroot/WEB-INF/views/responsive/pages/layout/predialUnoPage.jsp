@@ -16,7 +16,7 @@
 <firmas:generalFirmas />
 <predial:predialUnoBotones />
 
-<div id="dialogPredial" title="PREDIAL" ><div id="predialDialogContent"></div></div>
+	<div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
 <script>
 
 window.onload = function() {

@@ -82,6 +82,7 @@ public class PredialForm
 	private String exclusionParcial;
 	private String aporteVoluntario;
 	private String proyecto;
+	private String chipcalculo;
 
 	/**
 	 * @return the detallePredio
@@ -846,6 +847,23 @@ public class PredialForm
 	public void setNewDatosLiquidacion(final CalPredialDatLiq newDatosLiquidacion)
 	{
 		this.newDatosLiquidacion = newDatosLiquidacion;
+	}
+
+	/**
+	 * @return the chipcalculo
+	 */
+	public String getChipcalculo()
+	{
+		return chipcalculo;
+	}
+
+	/**
+	 * @param chipcalculo
+	 *           the chipcalculo to set
+	 */
+	public void setChipcalculo(final String chipcalculo)
+	{
+		this.chipcalculo = chipcalculo;
 	}
 
 

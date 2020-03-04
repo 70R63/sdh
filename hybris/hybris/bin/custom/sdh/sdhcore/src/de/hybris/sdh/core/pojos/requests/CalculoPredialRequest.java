@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
+
 /**
  * @author hybris
  *
@@ -14,8 +17,8 @@ public class CalculoPredialRequest
 	private String MatrInmobiliaria;
 	private String AnioGravable;
 	private String OpcionUso;
-	public CalPredialDatLiq DatosLiquidacion;
-	public CalPredialLiqPriv LiquidacionPrivada;
+	public CalPredialDatLiq datosLiquidacion;
+	public CalPredialLiqPriv liquidacionPrivada;
 
 
 
@@ -125,17 +128,12 @@ public class CalculoPredialRequest
 
 
 
-
-
-
-
-
 	/**
 	 * @return the datosLiquidacion
 	 */
 	public CalPredialDatLiq getDatosLiquidacion()
 	{
-		return DatosLiquidacion;
+		return datosLiquidacion;
 	}
 
 
@@ -144,9 +142,10 @@ public class CalculoPredialRequest
 	 * @param datosLiquidacion
 	 *           the datosLiquidacion to set
 	 */
+	@JsonProperty("DatosLiquidacion")
 	public void setDatosLiquidacion(final CalPredialDatLiq datosLiquidacion)
 	{
-		DatosLiquidacion = datosLiquidacion;
+		this.datosLiquidacion = datosLiquidacion;
 	}
 
 
@@ -156,7 +155,7 @@ public class CalculoPredialRequest
 	 */
 	public CalPredialLiqPriv getLiquidacionPrivada()
 	{
-		return LiquidacionPrivada;
+		return liquidacionPrivada;
 	}
 
 
@@ -165,9 +164,10 @@ public class CalculoPredialRequest
 	 * @param liquidacionPrivada
 	 *           the liquidacionPrivada to set
 	 */
+	@JsonProperty("LiquidacionPrivada")
 	public void setLiquidacionPrivada(final CalPredialLiqPriv liquidacionPrivada)
 	{
-		LiquidacionPrivada = liquidacionPrivada;
+		this.liquidacionPrivada = liquidacionPrivada;
 	}
 
 

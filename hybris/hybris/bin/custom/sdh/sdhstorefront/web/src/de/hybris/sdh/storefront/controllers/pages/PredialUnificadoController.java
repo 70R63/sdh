@@ -23,6 +23,7 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
+import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
@@ -191,16 +192,16 @@ public class PredialUnificadoController extends AbstractPageController
 
 		final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
-		detallePredialRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
-		detallePredialRequest.setAnioGravable(predialInfo.getAnioGravable());
-		detallePredialRequest.setCHIP(predialInfo.getCHIP());
-		detallePredialRequest.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
+		//				detallePredialRequest.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
+		//				detallePredialRequest.setAnioGravable(predialInfo.getAnioGravable());
+		//				detallePredialRequest.setCHIP(predialInfo.getCHIP());
+		//				detallePredialRequest.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
 
 
-		//		detallePredialRequest.setNumBP("1000010203");
-		//		detallePredialRequest.setAnioGravable("2019");
-		//		detallePredialRequest.setCHIP("AAA0080KECZ");
-		//		detallePredialRequest.setMatrInmobiliaria("050N1178178");
+		detallePredialRequest.setNumBP("1000010203");
+		detallePredialRequest.setAnioGravable("2019");
+		detallePredialRequest.setCHIP("AAA0080KECZ");
+		detallePredialRequest.setMatrInmobiliaria("050N1178178");
 
 
 		try
@@ -1448,8 +1449,8 @@ public class PredialUnificadoController extends AbstractPageController
 	@RequestMapping(value = "/contribuyentes/predialunificado/calculo", method = RequestMethod.POST)
 	@ResponseBody
 	public PredialForm calculoPredial(@RequestBody
-	final PredialForm dataForm, final HttpServletResponse response,
-			final HttpServletRequest request) throws CMSItemNotFoundException
+	final PredialForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- En Predial Calculo--------------------------");
 		final CalculoPredialRequest calculoPredialRequest = new CalculoPredialRequest();
@@ -1458,7 +1459,7 @@ public class PredialUnificadoController extends AbstractPageController
 
 
 		calculoPredialRequest.setNumBP(dataForm.getNumBP());
-		calculoPredialRequest.setCHIP(dataForm.getCHIP());
+		calculoPredialRequest.setCHIP(dataForm.getChipcalculo());
 		calculoPredialRequest.setMatrInmobiliaria(dataForm.getMatrInmobiliaria());
 		calculoPredialRequest.setAnioGravable(dataForm.getAnioGravable());
 		calculoPredialRequest.setOpcionUso(dataForm.getOpcionuso());
@@ -1483,6 +1484,17 @@ public class PredialUnificadoController extends AbstractPageController
 		catch (final Exception e)
 		{
 			LOG.error("error calculo declaration : " + e.getMessage());
+			final CalPredialErrores error = new CalPredialErrores();
+
+			error.setIdError("0");
+			error.setDescError("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
+
+
+			final List<CalPredialErrores> errores = new ArrayList<CalPredialErrores>();
+
+			errores.add(error);
+
+			prediaFormcal.setErrores(errores);
 
 		}
 
