@@ -18,15 +18,19 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
+import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
+import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
 import de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
+import de.hybris.sdh.core.services.SDHCalculoPredialService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
@@ -52,6 +56,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -123,6 +128,9 @@ public class PredialUnificadoController extends AbstractPageController
 
 	@Resource(name = "modelService")
 	private ModelService modelService;
+
+	@Resource(name = "sdhCalculoPredialService")
+	private SDHCalculoPredialService sdhCalculoPredialService;
 
 	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
 
@@ -318,7 +326,7 @@ public class PredialUnificadoController extends AbstractPageController
 		}
 		else
 		{
-			String Error = "Su predio no cuenta con Tipo de registro";
+			String Error = "Su predio no cuenta con Tipo de registro, por lo que no se puede detrminar la declaración a realizar";
 			redirectAttributes.addFlashAttribute("Error", Error);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_inicio";
@@ -339,8 +347,8 @@ public class PredialUnificadoController extends AbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialuno(final Model model, final RedirectAttributes redirectAttributes,
-			final HttpServletRequest request) throws CMSItemNotFoundException
+	public String predialuno(final Model model, final RedirectAttributes redirectAttributes, final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado uno --------------------------");
 		final PredialForm predialFormuno = new PredialForm();
@@ -1438,7 +1446,59 @@ public class PredialUnificadoController extends AbstractPageController
 
 	}
 
+	@RequestMapping(value = "/contribuyentes/predialunificado/calculo", method = RequestMethod.POST)
+	@ResponseBody
+	public PredialForm calculoPredial(@RequestBody
+	final PredialForm dataForm, final HttpServletResponse response, final HttpServletRequest request)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Predial Calculo--------------------------");
+		final CalculoPredialRequest calculoPredialRequest = new CalculoPredialRequest();
+		CalculoPredialResponse calculoPredialResponse = null;
+		final PredialForm prediaFormcal = new PredialForm();
 
 
+		calculoPredialRequest.setNumBP(dataForm.getNumBP());
+		calculoPredialRequest.setCHIP(dataForm.getChipcalculo());
+		calculoPredialRequest.setMatrInmobiliaria(dataForm.getMatrInmobiliaria());
+		calculoPredialRequest.setAnioGravable(dataForm.getAnioGravable());
+		calculoPredialRequest.setOpcionUso(dataForm.getOpcionuso());
+		calculoPredialRequest.setDatosLiquidacion(dataForm.getNewDatosLiquidacion());
+		calculoPredialRequest.setLiquidacionPrivada(dataForm.getCalcLiquidacionPrivada());
+
+
+		try
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			calculoPredialResponse = mapper.readValue(sdhCalculoPredialService.calculoPredial(calculoPredialRequest),
+					CalculoPredialResponse.class);
+
+			prediaFormcal.setNumFrom(calculoPredialResponse.getNumFrom());
+			prediaFormcal.setLiquidacionPrivada(calculoPredialResponse.getLiquidacionPrivada());
+			prediaFormcal.setErrores(calculoPredialResponse.getErrores());
+
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error calculo declaration : " + e.getMessage());
+			final CalPredialErrores error = new CalPredialErrores();
+
+			error.setIdError("0");
+			error.setDescError("Hubo un error al realizar el cálculo, por favor intentalo más tarde");
+
+
+			final List<CalPredialErrores> errores = new ArrayList<CalPredialErrores>();
+
+			errores.add(error);
+
+			prediaFormcal.setErrores(errores);
+
+		}
+
+		return prediaFormcal;
+	}
 
 }

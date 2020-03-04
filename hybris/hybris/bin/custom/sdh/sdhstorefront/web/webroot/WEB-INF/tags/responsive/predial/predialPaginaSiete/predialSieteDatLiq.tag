@@ -36,8 +36,8 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialsiete.datliquidacion.porcenexe" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+							code="predialsiete.datliquidacion.porcenexe" /></label> <input id="porcenexe"
+						name="" class="newalto form-control" disabled type="text" value="${predialForm.decExencion}"
 						maxlength="240" style="display: inline-block !important;"></input><label
 						class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
@@ -67,8 +67,8 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialsiete.datliquidacion.porceexclu" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value=""
+							code="predialsiete.datliquidacion.porceexclu" /></label> <input id="porceexclu"
+						name="" class="newalto form-control" disabled type="text" value="${predialForm.decExclusion}"
 						maxlength="240" style="display: inline-block !important;"></input><label
 						class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>

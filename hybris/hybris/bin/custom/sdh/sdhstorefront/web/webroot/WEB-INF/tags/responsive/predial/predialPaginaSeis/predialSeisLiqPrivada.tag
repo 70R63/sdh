@@ -46,7 +46,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialseis.liquidacionpriv.valimp" /></label> <input id=""
+							code="predialseis.liquidacionpriv.valimp" /></label> <input id="ValorImpuestoACargo"
 						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPrivada.valorImpuestoCargo}"
 						maxlength="240"></input>
 				</div>
@@ -57,7 +57,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialseis.liquidacionpriv.descuento" /></label> <input id=""
+							code="predialseis.liquidacionpriv.descuento" /></label> <input id="DescuentoPorIncrementoDiferencias"
 						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPrivada.descuentoIncrementoDiferencial}"
 						maxlength="240"></input>
 				</div>
@@ -68,7 +68,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialseis.liquidacionpriv.impajustado" /></label> <input id=""
+							code="predialseis.liquidacionpriv.impajustado" /></label> <input id="ValorImpuestoAjustadoActual"
 						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPrivada.valorImpuestoAjustadoActual}"
 						maxlength="240"></input>
 				</div>
@@ -79,7 +79,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialseis.liquidacionpriv.sancion" /></label> <input id=""
+							code="predialseis.liquidacionpriv.sancion" /></label> <input id="Sancion"
 						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPrivada.sancion}"
 						maxlength="240"></input>
 				</div>
@@ -90,7 +90,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialseis.liquidacionpriv.saldo" /></label> <input id="" name=""
+							code="predialseis.liquidacionpriv.saldo" /></label> <input id="TotalSaldoACargo" name=""
 						class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPrivada.totalSaldoCargo}"
 						maxlength="240"></input>
 				</div>
@@ -101,7 +101,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialseis.liquidacionpriv.valpagar" /></label> <input id=""
+							code="predialseis.liquidacionpriv.valpagar" /></label> <input id="ValorAPagar"
 						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPrivada.valorAPagar}"
 						maxlength="240"></input>
 				</div>
@@ -111,7 +111,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialseis.liquidacionpriv.intereses" /></label> <input id=""
+							code="predialseis.liquidacionpriv.intereses" /></label> <input id="Intereses"
 						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPrivada.intereses}"
 						maxlength="240"></input>
 				</div>
@@ -121,7 +121,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialseis.liquidacionpriv.totpag" /></label> <input id=""
+							code="predialseis.liquidacionpriv.totpag" /></label> <input id="TotalAPagar"
 						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPrivada.totalPagar}"
 						maxlength="240"></input>
 				</div>
@@ -130,7 +130,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="calculoPred()">
 					<spring:theme code="predialseis.liquidacionpriv.calcular" />
 				</button>
 			</div>
@@ -138,4 +138,9 @@
 	</div>
 </form:form>
 
+<script type="text/javascript">
+	function calculoPred() {
+		ACC.predial.calculoPredial();
+	}
+</script>
 

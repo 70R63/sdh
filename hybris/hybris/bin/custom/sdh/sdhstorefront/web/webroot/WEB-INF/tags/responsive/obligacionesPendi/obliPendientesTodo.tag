@@ -74,19 +74,21 @@
 
 									<c:forEach items="${eachObPred.details }"
 									var="eachObPredDet">
-										<tr>
-											<td><c:out value="${eachObPred.aniogravable}" /></td>
-											<td><c:out value="${eachObPred.objetoContrato}" /></td>
-											<td><c:out value="${eachObPredDet.estadoObligacion}" /></td>
-											<td><c:out value="${eachObPredDet.obligacion}" /></td>
-											<td><c:out value="${eachObPredDet.numFormulario}" /></td>
-											<td><c:out value="${eachObPredDet.numReferencia}" /></td>
-											<td><c:out value="${eachObPredDet.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}" />">Generar ROP</a></td>
-											<td><label class="control-label"
-												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle">Pagar</label></td>
-										</tr>
+										<c:if test="${not empty eachObPredDet.numReferencia }">
+											<tr>
+												<td><c:out value="${eachObPred.aniogravable}" /></td>
+												<td><c:out value="${eachObPred.objetoContrato}" /></td>
+												<td><c:out value="${eachObPredDet.estadoObligacion}" /></td>
+												<td><c:out value="${eachObPredDet.obligacion}" /></td>
+												<td><c:out value="${eachObPredDet.numFormulario}" /></td>
+												<td><c:out value="${eachObPredDet.numReferencia}" /></td>
+												<td><c:out value="${eachObPredDet.objetoContrato}" /></td>
+												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}" />">Generar ROP</a></td>
+												<td><label class="control-label"
+													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+												    id="Detalle" onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${current.CHIP}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}' )">Pagar</label></td>											
+											</tr>
+										</c:if>	
 									</c:forEach>
 								</c:forEach>
 							</tbody>
@@ -153,22 +155,24 @@
 									
 									<c:forEach items="${eachObVehi.details }"
 									var="eachObVehiDet">
-										<tr>
-											<td><c:out value="${eachObVehi.anioGravable}" /></td>
-											<td><c:out value="${eachObVehi.placa}" /></td>
-											<td><c:out value="${eachObVehi.modelo}" /></td>
-											<td><spring:theme code="vehiculos.detalle.marca.${eachObVehi.marca}"/></td>
-											<td><spring:theme code="vehiculos.detalle.linea.${eachObVehi.linea}"/></td>
-											<td><c:out value="${eachObVehiDet.estadoObligacion}" /></td>
-											<td><c:out value="${eachObVehiDet.obligacion}" /></td>
-											<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
-											<td><c:out value="${eachObVehiDet.numReferencia}" /></td>
-											<td><c:out value="${eachObVehiDet.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}" />">Generar ROP</a></td>
-											<td><label class="control-label"
-												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle">Pagar</label></td>
-										</tr>
+										<c:if test="${ not empty eachObVehiDet.numReferencia}">
+											<tr>
+												<td><c:out value="${eachObVehi.anioGravable}" /></td>
+												<td><c:out value="${eachObVehi.placa}" /></td>
+												<td><c:out value="${eachObVehi.modelo}" /></td>
+												<td><spring:theme code="vehiculos.detalle.marca.${eachObVehi.marca}"/></td>
+												<td><spring:theme code="vehiculos.detalle.linea.${eachObVehi.linea}"/></td>
+												<td><c:out value="${eachObVehiDet.estadoObligacion}" /></td>
+												<td><c:out value="${eachObVehiDet.obligacion}" /></td>
+												<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
+												<td><c:out value="${eachObVehiDet.numReferencia}" /></td>
+												<td><c:out value="${eachObVehiDet.objetoContrato}" /></td>
+												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}" />">Generar ROP</a></td>
+												<td><label class="control-label"
+													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+													id="Detalle" onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}' )">Pagar</label></td>
+											</tr>
+										</c:if>
 									</c:forEach>
 								</c:forEach>
 							</tbody>
@@ -232,6 +236,7 @@
 									var="eachObIca">
 									<c:forEach items="${eachObIca.details }"
 									var="eachObIcaDet">
+										<c:if test="${not empty eachObIcaDet.numReferencia }">
 										<tr>
 											<td><c:out value="${eachObIca.tipoIdentificacion}" /></td>
 											<td><c:out value="${eachObIca.noIdentificacion}" /></td>
@@ -245,8 +250,9 @@
 											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle">Pagar</label></td>
+												id="Detalle" onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}' )">Pagar</label></td>
 										</tr>
+										</c:if>
 									</c:forEach>	
 								</c:forEach>
 							</tbody>
@@ -312,20 +318,22 @@
 										var="eachPubExtTax">
 										<c:forEach items="${eachPubExtTax.details}"
 										var="eachPubExtTaxDet">
-											<tr>
-												<td><c:out value="${eachPubExtTax.anioGravable}" /></td>
-												<td><c:out value="${eachPubExtTax.numResolucion}" /></td>
-												<td><c:out value="${eachPubExtTax.orientacionValla}" /></td>
-												<td><c:out value="${eachPubExtTaxDet.estadoObligacion}" /></td>
-												<td><c:out value="${eachPubExtTaxDet.obligacion}" /></td>
-												<td><c:out value="${eachPubExtTaxDet.numFormulario}" /></td>
-												<td><c:out value="${eachPubExtTaxDet.numReferencia}" /></td>
-												<td><c:out value="${eachPubExtTaxDet.objetoContrato}" /></td>
-												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}" />">Generar ROP</a></td>
-												<td><label class="control-label"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="Detalle">Pagar</label></td>
-											</tr>
+											<c:if test="${ not empty eachPubExtTaxDet.numReferencia }">
+												<tr>
+													<td><c:out value="${eachPubExtTax.anioGravable}" /></td>
+													<td><c:out value="${eachPubExtTax.numResolucion}" /></td>
+													<td><c:out value="${eachPubExtTax.orientacionValla}" /></td>
+													<td><c:out value="${eachPubExtTaxDet.estadoObligacion}" /></td>
+													<td><c:out value="${eachPubExtTaxDet.obligacion}" /></td>
+													<td><c:out value="${eachPubExtTaxDet.numFormulario}" /></td>
+													<td><c:out value="${eachPubExtTaxDet.numReferencia}" /></td>
+													<td><c:out value="${eachPubExtTaxDet.objetoContrato}" /></td>
+													<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}" />">Generar ROP</a></td>
+													<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle" onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}' )">Pagar</label></td>
+												</tr>
+											</c:if>
 										</c:forEach>	
 									</c:forEach>
 								</tbody>
@@ -391,19 +399,21 @@
 										var="eachObGas">
 										<c:forEach items="${eachObGas.details}"
 										var="eachObGasDet">
-											<tr>
-												<td><c:out value="${eachObGas.anioGravable}" /></td>
-												<td><c:out value="${eachObGas.periodo}" /></td>
-												<td><c:out value="${eachObGasDet.estadoObligacion}" /></td>
-												<td><c:out value="${eachObGasDet.obligacion}" /></td>
-												<td><c:out value="${eachObGasDet.numFormulario}" /></td>
-												<td><c:out value="${eachObGasDet.numReferencia}" /></td>
-												<td><c:out value="${eachObGasDet.objetoContrato}" /></td>
-												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGasDet.obligacion}" />">Generar ROP</a></td>
-												<td><label class="control-label"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="Detalle" onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}')">Pagar</label></td>
-											</tr>
+											<c:if test="${not empty eachObGasDet.numReferencia}">
+												<tr>
+													<td><c:out value="${eachObGas.anioGravable}" /></td>
+													<td><c:out value="${eachObGas.periodo}" /></td>
+													<td><c:out value="${eachObGasDet.estadoObligacion}" /></td>
+													<td><c:out value="${eachObGasDet.obligacion}" /></td>
+													<td><c:out value="${eachObGasDet.numFormulario}" /></td>
+													<td><c:out value="${eachObGasDet.numReferencia}" /></td>
+													<td><c:out value="${eachObGasDet.objetoContrato}" /></td>
+													<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGasDet.obligacion}" />">Generar ROP</a></td>
+													<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle" onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}', '${eachDeliDet.obligacion}')">Pagar</label></td>																										
+												</tr>
+											</c:if>
 										</c:forEach>	
 									</c:forEach>
 
@@ -463,22 +473,23 @@
 										var="eachDeli">
 										<c:forEach items="${eachDeli.details}"
 										var="eachDeliDet">
-											<tr>
-
-												<td><c:out value="${eachDeli.anioGravable}" /></td>
-												<td><c:out value="${eachDeli.cdu}" /></td>
-												<td><c:out value="${eachDeli.chip}" /></td>
-												<td><c:out value="${eachDeli.direccion}" /></td>
-												<td><c:out value="${eachDeliDet.estadoObligacion}" /></td>
-												<td><c:out value="${eachDeliDet.obligacion}" /></td>
-												<td><c:out value="${eachDeliDet.numFormulario}" /></td>
-												<td><c:out value="${eachDeliDet.numReferencia}" /></td>
-												<td><c:out value="${eachDeliDet.objetoContrato}" /></td>
-												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}" />">Generar ROP</a></td>
-												<td><label class="control-label"
-													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="Detalle">Pagar</label></td>
-											</tr>
+											<c:if test="${not empty eachDeliDet.numReferencia}">
+												<tr>
+													<td><c:out value="${eachDeli.anioGravable}" /></td>
+													<td><c:out value="${eachDeli.cdu}" /></td>
+													<td><c:out value="${eachDeli.chip}" /></td>
+													<td><c:out value="${eachDeli.direccion}" /></td>
+													<td><c:out value="${eachDeliDet.estadoObligacion}" /></td>
+													<td><c:out value="${eachDeliDet.obligacion}" /></td>
+													<td><c:out value="${eachDeliDet.numFormulario}" /></td>
+													<td><c:out value="${eachDeliDet.numReferencia}" /></td>
+													<td><c:out value="${eachDeliDet.objetoContrato}" /></td>
+													<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}" />">Generar ROP</a></td>
+													<td><label class="control-label"
+														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+														id="Detalle" onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}' )">Pagar</label></td>
+												</tr>
+											</c:if>	
 										</c:forEach>	
 									</c:forEach>
 								</tbody>

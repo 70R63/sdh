@@ -146,6 +146,9 @@
 			ACC.predialDeclarasieteURL="<c:url value='/contribuyentes/predialunificado_7' />";
 			ACC.predialDeclaraochoURL="<c:url value='/contribuyentes/predialunificado_8' />";
 			ACC.predialDeclarabasesURL="<c:url value='/contribuyentes/predialunificado/basespresuntivas' />";
+			
+			ACC.calculoPredialURL="<c:url value='/contribuyentes/predialunificado/calculo' />";
+
 
 
 		  	ACC.currentURL = "${currentURL}";

@@ -33,7 +33,7 @@
 
 	<form:form>
 		<div class="row mt-3">
-			<div class="col-md-6 col-md-offset-4 d-flex align-items-center">
+			<div class="col-md-6 col-md-offset-3 d-flex align-items-center">
 				<div class="table-responsive text-center">
 					<table class="table table-bordered">
 						<thead>

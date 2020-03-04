@@ -118,15 +118,8 @@ public class PreparacionPagoPSE extends AbstractPageController
 		final DetallePagoResponse detallePagoResponse;
 		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
 
-		detallePagoRequest.setNumBP(infoPreviaPSE.getNumBP());
-		detallePagoRequest.setClavePeriodo(infoPreviaPSE.getClavePeriodo());
-		detallePagoRequest.setNumObjeto(infoPreviaPSE.getNumObjeto());
-		detallePagoRequest.setAnticipo(infoPreviaPSE.getRadicado());
 
-		System.out.println("Request de consulPago: " + detallePagoRequest);
-		detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
-		System.out.println("Response de consulPago: " + detallePagoResponse);
-		if (gasolinaService.ocurrioErrorPSE(detallePagoResponse) != true)
+		if (infoPreviaPSE.getNumRef() != null)
 		{
 			psePaymentForm.setTipoDeImpuesto(infoPreviaPSE.getTipoImpuesto());
 			psePaymentForm.setAnoGravable(infoPreviaPSE.getAnoGravable());
@@ -137,18 +130,47 @@ public class PreparacionPagoPSE extends AbstractPageController
 			psePaymentForm.setObjPago(infoPreviaPSE.getNumObjeto());
 			psePaymentForm.setCUD(infoPreviaPSE.getCDU());
 
-			psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
-			psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
-			psePaymentForm.setFechaLimiteDePago(detallePagoResponse.getFechVenc());
+			psePaymentForm.setValorAPagar(infoPreviaPSE.getTotalPagar());
+			psePaymentForm.setNumeroDeReferencia(infoPreviaPSE.getNumRef());
+			psePaymentForm.setFechaLimiteDePago(infoPreviaPSE.getFechaVenc());
 			psePaymentForm.setCHIP(infoPreviaPSE.getChip());
 		}
 		else
 		{
-			mensajeError = gasolinaService.obtenerMensajeError(detallePagoResponse.getErrores(), 0);
-			LOG.error("Error al leer detalle de pago: " + mensajeError);
-			mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"error.Pago.PSE.error1", mensajesError);
+			detallePagoRequest.setNumBP(infoPreviaPSE.getNumBP());
+			detallePagoRequest.setClavePeriodo(infoPreviaPSE.getClavePeriodo());
+			detallePagoRequest.setNumObjeto(infoPreviaPSE.getNumObjeto());
+			detallePagoRequest.setAnticipo(infoPreviaPSE.getRadicado());
+
+
+			System.out.println("Request de consulPago: " + detallePagoRequest);
+			detallePagoResponse = gasolinaService.consultaDetallePago(detallePagoRequest, sdhDetalleGasolinaWS, LOG);
+			System.out.println("Response de consulPago: " + detallePagoResponse);
+
+			if (gasolinaService.ocurrioErrorPSE(detallePagoResponse) != true)
+			{
+				psePaymentForm.setTipoDeImpuesto(infoPreviaPSE.getTipoImpuesto());
+				psePaymentForm.setAnoGravable(infoPreviaPSE.getAnoGravable());
+				psePaymentForm.setPeriodo(infoPreviaPSE.getClavePeriodo());
+				psePaymentForm.setTipoDeIdentificacion(infoPreviaPSE.getTipoDoc());
+				psePaymentForm.setNoIdentificacion(infoPreviaPSE.getNumDoc());
+				psePaymentForm.setDV(infoPreviaPSE.getDv());
+				psePaymentForm.setObjPago(infoPreviaPSE.getNumObjeto());
+				psePaymentForm.setCUD(infoPreviaPSE.getCDU());
+
+				psePaymentForm.setValorAPagar(detallePagoResponse.getTotalPagar());
+				psePaymentForm.setNumeroDeReferencia(detallePagoResponse.getNumRef());
+				psePaymentForm.setFechaLimiteDePago(detallePagoResponse.getFechVenc());
+				psePaymentForm.setCHIP(infoPreviaPSE.getChip());
+			}
+			else
+			{
+				mensajeError = gasolinaService.obtenerMensajeError(detallePagoResponse.getErrores(), 0);
+				LOG.error("Error al leer detalle de pago: " + mensajeError);
+				mensajesError = gasolinaService.prepararMensajesError(detallePagoResponse.getErrores());
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER, "error.Pago.PSE.error1",
+						mensajesError);
+			}
 		}
 		model.addAttribute("psePaymentForm", psePaymentForm);
 
