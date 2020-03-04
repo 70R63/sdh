@@ -13,7 +13,8 @@
 <predial:predialUnoGenerales />
 <predial:predialUnoDatLiq />
 <predial:predialUnoLiqPrivada />
-<firmas:generalFirmas />
+<c:url value='contribuyentes/predialunificado_1' var="linkRedirection"/>
+<firmas:generalFirmas firmaContribuyenteRedirection="${linkRedirection}"/>
 <predial:predialUnoBotones />
 
 	<div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
