@@ -6,13 +6,11 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -70,7 +68,7 @@ import sun.misc.BASE64Decoder;
  *
  */
 @Controller
-public class PredialUnificadoController extends AbstractPageController
+public class PredialUnificadoController extends SDHAbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "Predial";
@@ -326,7 +324,7 @@ public class PredialUnificadoController extends AbstractPageController
 		}
 		else
 		{
-			String Error = "Su predio no cuenta con Tipo de registro, por lo que no se puede detrminar la declaración a realizar";
+			final String Error = "Su predio no cuenta con Tipo de registro, por lo que no se puede detrminar la declaración a realizar";
 			redirectAttributes.addFlashAttribute("Error", Error);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_inicio";
@@ -351,6 +349,13 @@ public class PredialUnificadoController extends AbstractPageController
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado uno --------------------------");
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "contribuyentes/predialunificado_1");
+		super.addFirmantes_impuesto(model, null, customerData);
+
 		final PredialForm predialFormuno = new PredialForm();
 		final PredialForm predialInfoIniUno = (PredialForm) model.asMap().get("predialFormurl");
 		try
@@ -390,7 +395,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormuno.setCHIP(detallePredialRequest.getCHIP());
 			predialFormuno.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormuno.getDatosJuridicos().getCalidadSujecion() == "1")
 			{
@@ -468,6 +473,12 @@ public class PredialUnificadoController extends AbstractPageController
 	{
 		System.out.println("---------------- Hola entro predial unificado DOS --------------------------");
 
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "contribuyentes/predialunificado_2");
+		super.addFirmantes_impuesto(model, null, customerData);
+
 		final PredialForm predialFormdos = new PredialForm();
 
 		final PredialForm predialInfoInidos = (PredialForm) model.asMap().get("predialFormurl");
@@ -506,7 +517,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormdos.setNumBP(detallePredialRequest.getNumBP());
 			predialFormdos.setCHIP(detallePredialRequest.getCHIP());
 			predialFormdos.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormdos.getDatosJuridicos().getCalidadSujecion() == "1")
 			{
@@ -583,6 +594,13 @@ public class PredialUnificadoController extends AbstractPageController
 	public String predialtres(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado TRES --------------------------");
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "contribuyentes/predialunificado_3");
+		super.addFirmantes_impuesto(model, null, customerData);
+
 		final PredialForm predialFormtres = new PredialForm();
 
 		final PredialForm predialInfoInitres = (PredialForm) model.asMap().get("predialFormurl");
@@ -619,7 +637,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormtres.setCHIP(detallePredialRequest.getCHIP());
 			predialFormtres.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormtres.getDatosJuridicos().getCalidadSujecion() == "1")
 			{
@@ -690,6 +708,13 @@ public class PredialUnificadoController extends AbstractPageController
 	public String predialcuatro(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CUATRO --------------------------");
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "contribuyentes/predialunificado_4");
+		super.addFirmantes_impuesto(model, null, customerData);
+
 		final PredialForm predialFormcua = new PredialForm();
 		final PredialForm predialInfoInicuatro = (PredialForm) model.asMap().get("predialFormurl");
 
@@ -726,7 +751,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormcua.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcua.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "1")
 			{
@@ -797,6 +822,13 @@ public class PredialUnificadoController extends AbstractPageController
 	public String predialcinco(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CINCO --------------------------");
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "contribuyentes/predialunificado_5");
+		super.addFirmantes_impuesto(model, null, customerData);
+
 		final PredialForm predialFormcinco = new PredialForm();
 
 		final PredialForm predialInfoInicinco = (PredialForm) model.asMap().get("predialFormurl");
@@ -833,7 +865,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormcinco.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcinco.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "1")
 			{
@@ -905,6 +937,13 @@ public class PredialUnificadoController extends AbstractPageController
 	public String predialseis(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado SEIS --------------------------");
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "contribuyentes/predialunificado_6");
+		super.addFirmantes_impuesto(model, null, customerData);
+
 		final PredialForm predialFormseis = new PredialForm();
 
 		final PredialForm predialInfoIniseis = (PredialForm) model.asMap().get("predialFormurl");
@@ -941,7 +980,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormseis.setCHIP(detallePredialRequest.getCHIP());
 			predialFormseis.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "1")
 			{
@@ -1013,6 +1052,12 @@ public class PredialUnificadoController extends AbstractPageController
 	{
 		System.out.println("---------------- Hola entro predial unificado Siete --------------------------");
 
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "contribuyentes/predialunificado_7");
+		super.addFirmantes_impuesto(model, null, customerData);
+
 		final PredialForm predialFormsiete = new PredialForm();
 
 		final PredialForm predialInfoInisiete = (PredialForm) model.asMap().get("predialFormurl");
@@ -1049,7 +1094,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormsiete.setNumBP(detallePredialRequest.getNumBP());
 			predialFormsiete.setCHIP(detallePredialRequest.getCHIP());
 			predialFormsiete.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "1")
 			{
@@ -1119,6 +1164,13 @@ public class PredialUnificadoController extends AbstractPageController
 	public String predialocho(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado OCHO --------------------------");
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		model.addAttribute("customerData", customerData);
+		addAgentsToModel(model, customerData, null);
+		model.addAttribute("redirectURL", "contribuyentes/predialunificado_8");
+		super.addFirmantes_impuesto(model, null, customerData);
+
 		final PredialForm predialFormocho = new PredialForm();
 
 		final PredialForm predialInfoIniocho = (PredialForm) model.asMap().get("predialFormurl");
@@ -1155,7 +1207,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormocho.setCHIP(detallePredialRequest.getCHIP());
 			predialFormocho.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "1")
 			{
@@ -1263,7 +1315,7 @@ public class PredialUnificadoController extends AbstractPageController
 			predialFormbases.setCHIP(detallePredialRequest.getCHIP());
 			predialFormbases.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 
-			String idCalidad = "";
+			final String idCalidad = "";
 
 			if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "1")
 			{

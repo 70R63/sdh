@@ -140,7 +140,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 				final ObligacionesDeliResponse obligacionesDeliResponse = mapper.readValue(wsResponse,
 						ObligacionesDeliResponse.class);
 				obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
 			}
 
 			wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
