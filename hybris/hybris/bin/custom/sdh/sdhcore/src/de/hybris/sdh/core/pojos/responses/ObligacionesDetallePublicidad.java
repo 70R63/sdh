@@ -15,6 +15,26 @@ public class ObligacionesDetallePublicidad
 	private String numFormulario;
 	private String numReferencia;
 	private String objetoContrato;
+	private String fechaVencimiento;
+
+
+
+	/**
+	 * @return the fechaVencimiento
+	 */
+	public String getFechaVencimiento()
+	{
+		return fechaVencimiento;
+	}
+
+	/**
+	 * @param fechaVencimiento
+	 *           the fechaVencimiento to set
+	 */
+	public void setFechaVencimiento(final String fechaVencimiento)
+	{
+		this.fechaVencimiento = fechaVencimiento;
+	}
 
 	/**
 	 * @return the estadoObligacion
@@ -39,7 +59,7 @@ public class ObligacionesDetallePublicidad
 	{
 		return numFormulario;
 	}
-	
+
 	/**
 	 * @return the numReferencia
 	 */
@@ -47,7 +67,7 @@ public class ObligacionesDetallePublicidad
 	{
 		return numReferencia;
 	}
-	
+
 	/**
 	 * @return the objetoContrato
 	 */
@@ -55,7 +75,7 @@ public class ObligacionesDetallePublicidad
 	{
 		return objetoContrato;
 	}
-	
+
 	/**
 	 * @param estadoObligacion
 	 *           the estadoObligacion to set
@@ -64,7 +84,7 @@ public class ObligacionesDetallePublicidad
 	{
 		this.estadoObligacion = estadoObligacion;
 	}
-	
+
 	/**
 	 * @param obligacion
 	 *           the obligacion to set
@@ -73,7 +93,7 @@ public class ObligacionesDetallePublicidad
 	{
 		this.obligacion = obligacion;
 	}
-	
+
 	/**
 	 * @param numFormulario
 	 *           the numFormulario to set
@@ -82,7 +102,7 @@ public class ObligacionesDetallePublicidad
 	{
 		this.numFormulario = numFormulario;
 	}
-	
+
 	/**
 	 * @param numReferencia
 	 *           the numReferencia to set

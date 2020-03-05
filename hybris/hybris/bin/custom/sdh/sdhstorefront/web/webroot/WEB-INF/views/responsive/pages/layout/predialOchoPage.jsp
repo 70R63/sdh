@@ -13,7 +13,8 @@
 <predial:predialOchoGenerales/>
 <predial:predialOchoDatLiq/>
 <predial:predialOchoLiqPrivada/>
-<firmas:generalFirmas />
+<c:url value='contribuyentes/predialunificado_8' var="linkRedirection"/>
+<firmas:generalFirmas firmaContribuyenteRedirection="${linkRedirection}"/>
 <predial:predialOchoBotones/>
 
 <script>
