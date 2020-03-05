@@ -26,7 +26,7 @@ public class ChatBrokerController extends AbstractPageController {
     @Resource(name = "accountBreadcrumbBuilder")
     private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
-    @RequestMapping(value = "/conversation", method = RequestMethod.GET)
+    @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public String conversation(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
     {
         storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_CHAT));
