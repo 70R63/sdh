@@ -382,35 +382,6 @@
 		</div>
 	</div>
 
-
-	<div class="row" id="table-predial" style="display: none;">
-		<div class="col-md-6 col-md-offset-2">
-			<table class="table tabPaginacion" id="table-predial1">
-				<thead style="cellspacing: 10 !important">
-					<tr>
-						<th><label class="control-label labeltabletd tableident"><spring:theme
-									code="predial.inicial.table.chip" /></label></th>
-						<th><label class="control-label labeltabletd tablenumiden"><spring:theme
-									code="predial.inicial.table.matinmo" /></label></th>
-						<th><label class="control-label labeltabletd "><spring:theme
-									code="predial.inicial.table.dir" /></label></th>
-						<th><label class="control-label labeltabletd "><spring:theme
-									code="predial.inicial.table.nocotrato" /></label></th>
-						<th><label class="control-label labeltabletd "><spring:theme
-									code="predial.inicial.table.detalle" /></label></th>
-						<th><label class="control-label labeltabletd "><spring:theme
-									code="predial.inicial.table.TotalPagar" /></label></th>
-						<th><label class="control-label labeltabletd "><spring:theme
-									code="predial.inicial.table.pagarEnLinea" /></label></th>
-					</tr>
-				</thead>
-				<tbody>
-
-				</tbody>
-			</table>
-		</div>
-	</div>
-
 </div>
 <br>
 <br>
