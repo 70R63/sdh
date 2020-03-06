@@ -42,16 +42,18 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     private ConfigurationService configurationService;
 
     @Override
-    public boolean validade7ZipCertificates(final MultipartFile multipartFile) {
+	public String validade7ZipCertificates(final MultipartFile multipartFile)
+	{
         final String updatedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.path");
         final String approvedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.aprobados.path");
         final String autoridadesPath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.autoridades.path");
 
-        boolean isValid = false;
+		String isValid = null;
         final String nameFile = this.updateFileToServer(multipartFile);
         if(Objects.nonNull(nameFile)){
-            isValid =  this.verifyFile(updatedFilesFolder + nameFile , approvedFilesFolder + nameFile, autoridadesPath);
-            if(isValid){ //Extract .txt file from p7zip if file is valid
+			isValid = this.verifyFile(updatedFilesFolder + nameFile, approvedFilesFolder + nameFile, autoridadesPath);
+			if (isValid == null)
+			{ //Extract .txt file from p7zip if file is valid
                 this.extractAndUpdateTxtFileFrom7zip(approvedFilesFolder + nameFile, approvedFilesFolder);
             }
             LOG.info("updatedFilesFolder:" + updatedFilesFolder + nameFile);
@@ -156,8 +158,10 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-    public boolean verifyFile(final String source, final String target, final String autoridades){
+	public String verifyFile(final String source, final String target, final String autoridades)
+	{
         boolean isValidCertificate = false;
+		String respuesta = null;
         FileSignVerifier fv = null;
         String resultado = "";
         final CACertificateManager caManager = new CACertificateManager();
@@ -166,21 +170,30 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
             caManager.setPathTrustedCA(autoridades);
             fv = new FileSignVerifier(caManager);
             resultado = fv.signatureCheck(source, target);
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
 
-        // Si la validación es exitosa el resultado es OK​, sino se retorna un mensaje con el error
-        if (resultado.equalsIgnoreCase("OK")) {
-            isValidCertificate = true;
-            LOG.info("Firmantes Del Archivo OK" + source);
-            // Se recorre el arreglo de firmantes​
-            for (final SignerInfo signer : fv.getSigners()) {
-                // aquí se consultan los OIDs que se requieran para el ejemplo solo puse el Common Name​
-                LOG.info(signer.getOID("CN"));
-            }
-        }else{
-            LOG.info("Firmantes Del Archivo FAIL" + source);
+			// Si la validación es exitosa el resultado es OK​, sino se retorna un mensaje con el error
+			if (resultado.equalsIgnoreCase("OK"))
+			{
+				isValidCertificate = true;
+				respuesta = null;
+				LOG.info("Firmantes Del Archivo OK" + source);
+				// Se recorre el arreglo de firmantes​
+				for (final SignerInfo signer : fv.getSigners())
+				{
+					// aquí se consultan los OIDs que se requieran para el ejemplo solo puse el Common Name​
+					LOG.info(signer.getOID("CN"));
+				}
+			}
+			else
+			{
+				respuesta = "Error al validar la firma digital";
+				LOG.info("Firmantes Del Archivo FAIL" + source);
+			}
+
+
+        } catch (final Exception e) {
+			respuesta = "Error en los certificados digitales";
+            e.printStackTrace();
         }
 
         LOG.info("VerifyFile");
@@ -188,7 +201,7 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         LOG.info("autoridadesFolderPath: " + autoridades);
         LOG.info("verifyFile Source: " + source);
         LOG.info("verifyFile Target: " + target);
-        return isValidCertificate;
+		return respuesta;
     }
 
     @Override
