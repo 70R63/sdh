@@ -302,6 +302,7 @@ ACC.opcionDeclaraciones = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+					debugger;
 					ACC.opcionDeclaraciones.updateFromResponseSeleccion(dataActual,dataResponse);
 					ACC.publicidadexterior.bindDataTable_Class();
 				},
@@ -365,7 +366,6 @@ ACC.opcionDeclaraciones = {
 	
 	obtenerListaDeclaraciones_porAnio : function() {
 
-		debugger;
 		if(ACC.opcionDeclaraciones.validarAntesSubmitPeriodo()){
 	        var claveImpuesto = $("#seleccion").val();  	       
 	        var anoGravable = $("#aniograv").val();  	       
@@ -494,6 +494,20 @@ ACC.opcionDeclaraciones = {
 		if (infoResponse.errores != null){
 			alert(infoResponse.errores[0].txtmsj);
 		}else{
+			
+			if(infoActual.claveImpuesto == '0001'){
+				if(infoResponse.predial.length > 0){
+					$.each(infoResponse.predial, function (index,value){
+						$('#table-vehicular1').append("<tr>"+ 
+								'<td>' + value.CHIP + '</td>'+
+								'<td>' + value.matrInmobiliaria + '</td>'+
+								'<td>' + value.direccionPredio + '</td>'+
+								'<td><input id="registroNum_'+ index +'" style="visibility: visible !important; margin: 0; min-height: 0;" name="action" type="radio" value="" data-numObjeto="'+ value.numObjeto +'"' +">" + "</td>"+
+								"</tr>");
+					});
+				}
+			}
+			
 			if(infoActual.claveImpuesto == '0002'){
 				if(infoResponse.vehicular.length > 0){
 					$.each(infoResponse.vehicular, function (index,value){

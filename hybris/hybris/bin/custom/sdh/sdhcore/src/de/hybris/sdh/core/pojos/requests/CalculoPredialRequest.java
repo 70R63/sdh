@@ -183,15 +183,20 @@ public class CalculoPredialRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"CHIP\":\"" + this.getCHIP() + "\",");
-		stringBuilder.append("\"matrInmobiliaria\":\"" + this.getMatrInmobiliaria() + "\",");
-		stringBuilder.append("\"DatosLiquidacion\":\"" + this.getDatosLiquidacion() + "\",");
-		stringBuilder.append("\"LiquidacionPrivada\":\"" + this.getLiquidacionPrivada() + "\",");
-		stringBuilder.append("\"anioGravable\":\"" + this.getAnioGravable() + "\"");
+		stringBuilder.append("\"NumBP\":\"" + (this.getNumBP() != null ? this.getNumBP() : "") + "\",");
+		stringBuilder.append("\"CHIP\":\"" + (this.getCHIP() != null ? this.getCHIP() : "") + "\",");
+		stringBuilder
+				.append("\"MatrInmobiliaria\":\"" + (this.getMatrInmobiliaria() != null ? this.getMatrInmobiliaria() : "") + "\",");
+		stringBuilder.append("\"AnioGravable\":\"" + (this.getAnioGravable() != null ? this.getAnioGravable() : "") + "\",");
+		stringBuilder.append("\"OpcionUso\":\"" + (this.getOpcionUso() != null ? this.getOpcionUso() : "") + "\",");
+		stringBuilder.append("\"DatosLiquidacion\":" + this.getDatosLiquidacion() + ",");
+		stringBuilder.append("\"LiquidacionPrivada\":" + this.getLiquidacionPrivada());
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
+
+
+
 	}
 
 
