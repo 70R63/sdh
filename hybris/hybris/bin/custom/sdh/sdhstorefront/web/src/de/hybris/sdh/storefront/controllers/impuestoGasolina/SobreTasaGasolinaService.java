@@ -56,6 +56,7 @@ import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -2295,10 +2296,36 @@ public class SobreTasaGasolinaService
 		ImpuestoDelineacionUrbanaWithRadicados delineacion_customer_extendido = null;
 		List<DetRadicadosResponse> radicados = null;
 		DetRadicadosResponse infoRadicados = null;
+		List<PredialResponse> predial = null;
 
 
 		switch (infoVista.getClaveImpuesto())
 		{
+			case "0001": //Predial
+				predial = new ArrayList<PredialResponse>();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						for (final PredialResponse predial_customer : infoVista.getCustomerData().getPredial())
+						{
+							if (predial_customer.getNumObjeto() != null && itemDeclaracion.getNumObjeto() != null)
+							{
+								if (predial_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+								{
+									predial.add(predial_customer);
+								}
+							}
+						}
+					}
+
+					if (predial.size() > 0)
+					{
+						infoVista.setPredial(predial);
+					}
+				}
+				break;
+
 			case "0002": //Vehiculos
 				vehiculos = new ArrayList<ImpuestoVehiculos>();
 				if (listaDeclaracionesResponse.getDeclaraciones() != null)
