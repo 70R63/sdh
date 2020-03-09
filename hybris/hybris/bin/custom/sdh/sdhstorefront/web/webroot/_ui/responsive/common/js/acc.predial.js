@@ -17,6 +17,31 @@ ACC.predial = {
 
 		});
 	},
+	
+	bindprophorizontal : function() {
+		$(document).on("change", ".prophorizontal", function(e) {
+			e.preventDefault();
+			var val = this.value;
+
+			if (val == 'Si') {
+				$('#areaconstruccion').prop('disabled', false);
+				;
+				$('#areaterreno').prop('disabled', true);
+				;
+			} else if (val == 'No') {
+				$('#areaconstruccion').prop('disabled', false);
+				;
+				$('#areaterreno').prop('disabled', false);
+				;
+			} else {
+				$('#areaconstruccion').prop('disabled', true);
+				;
+				$('#areaterreno').prop('disabled', true);
+				;
+			}
+
+		});
+	},
 
 	detalle_tres : function(anioGravable, chip, matrInmobiliaria) {
 	

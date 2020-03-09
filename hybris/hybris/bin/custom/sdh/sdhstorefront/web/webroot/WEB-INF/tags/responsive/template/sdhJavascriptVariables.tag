@@ -149,6 +149,8 @@
 			
 			ACC.calculoPredialURL="<c:url value='/contribuyentes/predialunificado/calculo' />";
 
+			ACC.declaracionPredialURL="<c:url value='/contribuyentes/predialunificado/URL/declara' />";
+
 
 
 		  	ACC.currentURL = "${currentURL}";

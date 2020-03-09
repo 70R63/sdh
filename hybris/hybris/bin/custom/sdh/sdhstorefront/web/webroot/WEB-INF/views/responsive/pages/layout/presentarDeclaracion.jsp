@@ -48,7 +48,8 @@
 
 	function onChange() {
 		var tipoImpuesto = document.getElementById("impuesto").value;
-		if(tipoImpuesto == '2'){ //vehicular
+		debugger;
+		if(tipoImpuesto == '2' || tipoImpuesto == '1'){ //vehicular
 			ACC.opcionDeclaraciones.prepararImpuesto_presentarDec(tipoImpuesto);
 		}else{ //otros impuestos
 			document.getElementById("anoGravable").value = "";
@@ -71,6 +72,8 @@
 	}
 
 	function onChangeAnioGravable() {
+		debugger;
+		
 		var impuestoVal = document.getElementById("impuesto").value;
 		var nota = document.getElementById("notaVehPre");
 		var notaotros = document.getElementById("notaOtros");
@@ -82,7 +85,7 @@
 			nota.style.display='none';
 			notaotros.style.display='block';
 		}
-		if(impuestoVal == '2'){ //vehicular
+		if(impuestoVal == '2' || impuestoVal == '1'){ //vehicular
 			ACC.opcionDeclaraciones.obtenerListaDeclaraciones_presentarDec(impuestoVal);
 		}else{ //otros impuestos
 			if (impuestoVal == "4" || impuestoVal == "6" || impuestoVal == "3") {
