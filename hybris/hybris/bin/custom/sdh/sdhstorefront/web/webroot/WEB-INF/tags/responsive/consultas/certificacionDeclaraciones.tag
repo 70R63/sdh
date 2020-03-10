@@ -137,7 +137,7 @@
 
 		<div class="row" id="table-predial" style="display: none;">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table tabPaginacion" id="table-predial1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
 							<th style="text-align: center"><label class="control-label "
