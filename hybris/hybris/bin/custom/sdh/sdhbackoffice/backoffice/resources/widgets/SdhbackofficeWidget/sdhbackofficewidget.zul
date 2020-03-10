@@ -3,20 +3,98 @@
 <widget xmlns="http://www.zkoss.org/2005/zul"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:h="http://www.w3.org/1999/xhtml"
+		xmlns:n="native"
 		xmlns:w="http://www.zkoss.org/2005/zk/client"
 		xmlns:zk="http://www.zkoss.org/2005/zk"
-		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul
+		http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
  		height="100%">
- 		
-	<div height="100%" style="background: #ccc;">
-		<div>
-			<label id="label" value="${labels.hello} sdhbackoffice" />
-		</div>
-		<div>
-			<image src="${wr}/images/headline_icon.png"/>
-		</div>
-		<div>
-			<label value="${labels.hello} sdhbackoffice" sclass="yw-labelstyle"/>
-		</div>
+
+    <script>
+        function connect() {
+             var frame = document.getElementById("chatSpaceOne").contentWindow;
+             frame.postMessage('Hello to iframe from parent!', 'https://publicsector.local:9002/backoffice');
+        } 
+    </script>
+
+	<div height="100%" style="background-color:white">
+        <n:table class="sdhBackofficeWidget">
+            <n:tr height="5%">
+                <n:th class="header">Clientes Activos</n:th>
+                <n:th class="header">Sesiones</n:th>
+            </n:tr>
+            <n:tr height="95%">
+                <n:td>
+                    <n:table class="sdhBackofficeWidget">
+                        <n:tr height="5%">
+                            <n:td>
+                                <n:table class="sdhBackofficeWidget">
+                                    <n:tr height="5%">
+                                        <n:td class="subHeader">ID USUARIO</n:td>
+                                        <n:td class="subHeader">NOMBRE</n:td>
+                                        <n:td class="subHeader">FECHA/HORA</n:td>
+                                        <n:td class="subHeader">TOMAR</n:td>
+                                    </n:tr>
+                                 </n:table>
+                             </n:td>
+                        </n:tr>
+                        <n:tr height="95%">
+                            <n:td valign="top">
+                                <div class="table-container">
+                                    <n:table class="scroll" >
+                                        <n:tbody class="scroll">
+                                            <n:tr class="scroll">
+                                                <n:td width="25%">jair.r04@gmail.com</n:td>
+                                                <n:td width="25%">Edson Jair</n:td>
+                                                <n:td width="25%">10/03/20 12:46:00</n:td>
+                                                <n:td width="25%">
+                                                    <n:button label="Gumball" onclick="connect()">TOMAR USUARIO</n:button>
+                                                </n:td>
+                                            </n:tr>
+                                            <n:tr class="scroll">
+                                                <n:td width="25%">aiko.lozadaf@gmail.com</n:td>
+                                                <n:td width="25%">Aiko Falcon</n:td>
+                                                <n:td width="25%">10/03/20 12:46:00</n:td>
+                                                <n:td width="25%">
+                                                    <n:button label="Gumball" onclick="connect()">TOMAR USUARIO</n:button>
+                                                </n:td>
+                                            </n:tr>
+                                        </n:tbody>
+                                    </n:table>
+                                </div>
+                            </n:td>
+                        </n:tr>
+                    </n:table>
+                </n:td>
+                <n:td>
+                    <n:table class="sdhBackofficeWidget">
+                        <n:tr height="5%">
+                            <n:td class="subHeader">Sesión #1</n:td>
+                        </n:tr>
+                        <n:tr height="45%">
+                            <n:td>
+                                <n:iframe style="width:100%;height:100%"
+                                    frameborder="0.5"
+                                    id="chatSpaceOne"
+                                    src="https://publicsector.local:9002/sdhstorefront/chat/customer">
+                                </n:iframe>
+                            </n:td>
+                        </n:tr>
+                        <n:tr height="5%">
+                            <n:td class="subHeader">Sesión #2</n:td>
+                        </n:tr>
+                        <n:tr height="45%">
+                            <n:td>
+                                <n:iframe style="width:100%;height:100%"
+                                    frameborder="0.5"
+                                    id="chatSpaceTwo"
+                                    src="https://publicsector.local:9002/sdhstorefront/chat/customer">
+                                </n:iframe>
+                            </n:td>
+                        </n:tr>
+                    </n:table>
+                </n:td>
+            </n:tr>
+        </n:table>
 	</div>
 </widget>

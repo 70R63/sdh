@@ -84,6 +84,46 @@ public class PredialForm
 	private String proyecto;
 	private String chipcalculo;
 
+	private String url;
+	private String caso;
+
+	private String autoavaluo;
+	private String direccionPredio;
+
+	/**
+	 * @return the caso
+	 */
+	public String getCaso()
+	{
+		return caso;
+	}
+
+	/**
+	 * @param caso
+	 *           the caso to set
+	 */
+	public void setCaso(final String caso)
+	{
+		this.caso = caso;
+	}
+
+	/**
+	 * @return the url
+	 */
+	public String getUrl()
+	{
+		return url;
+	}
+
+	/**
+	 * @param url
+	 *           the url to set
+	 */
+	public void setUrl(final String url)
+	{
+		this.url = url;
+	}
+
 	/**
 	 * @return the detallePredio
 	 */
@@ -864,6 +904,40 @@ public class PredialForm
 	public void setChipcalculo(final String chipcalculo)
 	{
 		this.chipcalculo = chipcalculo;
+	}
+
+	/**
+	 * @return the autoavaluo
+	 */
+	public String getAutoavaluo()
+	{
+		return autoavaluo;
+	}
+
+	/**
+	 * @param autoavaluo
+	 *           the autoavaluo to set
+	 */
+	public void setAutoavaluo(final String autoavaluo)
+	{
+		this.autoavaluo = autoavaluo;
+	}
+
+	/**
+	 * @return the direccionPredio
+	 */
+	public String getDireccionPredio()
+	{
+		return direccionPredio;
+	}
+
+	/**
+	 * @param direccionPredio
+	 *           the direccionPredio to set
+	 */
+	public void setDireccionPredio(final String direccionPredio)
+	{
+		this.direccionPredio = direccionPredio;
 	}
 
 

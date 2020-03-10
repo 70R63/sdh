@@ -27,7 +27,7 @@ public class ChatBrokerController extends AbstractPageController {
     private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
-    public String conversation(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+    public String customer(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
     {
         storeCmsPageInModel(model, getContentPageForLabelOrId(CMS_SITE_PAGE_CHAT));
         setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CMS_SITE_PAGE_CHAT));
@@ -35,4 +35,5 @@ public class ChatBrokerController extends AbstractPageController {
         model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
         return getViewForPage(model);
     }
+
 }

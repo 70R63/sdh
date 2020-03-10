@@ -9,6 +9,7 @@ import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIca2Request;
+import de.hybris.sdh.core.pojos.requests.CatalogoVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
@@ -29,6 +30,7 @@ import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response;
+import de.hybris.sdh.core.pojos.responses.CatalogoVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
@@ -1758,6 +1760,49 @@ public class SobreTasaGasolinaService
 		final String nombreClase = "de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacion2Response";
 
 		responseInfo = (InfoObjetoDelineacion2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
+	public CatalogoVehiculosResponse consultaCatalogosVehicular(final CatalogoVehiculosRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG, final String nombreWS)
+	{
+		CatalogoVehiculosResponse responseInfo = null;
+		final String wsNombre = nombreWS;
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.CatalogoVehiculosResponse";
+		String confUrl = null;
+		String confUser = null;
+		String confPass = null;
+
+		switch (requestInfo.getCampo_catalogo())
+		{
+			case "linea":
+				confUrl = "sdh.catLinea.vehiculo.url";
+				confUser = "sdh.catLinea.vehiculo.user";
+				confPass = "sdh.catLinea.vehiculo.password";
+				break;
+
+			case "cilindraje":
+				confUrl = "sdh.catCilindraje.vehiculo.url";
+				confUser = "sdh.catCilindraje.vehiculo.user";
+				confPass = "sdh.catCilindraje.vehiculo.password";
+				break;
+
+			case "avaluo":
+				confUrl = "sdh.catAvaluo.vehiculo.url";
+				confUser = "sdh.catAvaluo.vehiculo.user";
+				confPass = "sdh.catAvaluo.vehiculo.password";
+				break;
+
+			default:
+				break;
+		}
+
+
+		responseInfo = (CatalogoVehiculosResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
 				wsReqMet, LOG, nombreClase);
 
 		return responseInfo;

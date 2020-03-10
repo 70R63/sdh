@@ -119,7 +119,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialcinco.generales.direccion" /></label> <input id="" name=""
-						class="alto form-control" disabled type="text" value=""
+						class="alto form-control" disabled type="text" value="${predialFormcinco.direccionPredio}"
 						maxlength="240"></input>
 				</div>
 			</div>
