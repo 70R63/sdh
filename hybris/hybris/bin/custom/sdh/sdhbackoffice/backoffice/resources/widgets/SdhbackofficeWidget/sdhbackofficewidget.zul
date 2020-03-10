@@ -14,7 +14,7 @@
         function connect() {
              var frame = document.getElementById("chatSpaceOne").contentWindow;
              frame.postMessage('Hello to iframe from parent!', 'https://publicsector.local:9002/backoffice');
-        }
+        } 
     </script>
 
 	<div height="100%" style="background-color:white">
