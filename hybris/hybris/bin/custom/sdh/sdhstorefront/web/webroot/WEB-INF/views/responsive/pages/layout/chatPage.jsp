@@ -9,7 +9,6 @@
         <title>Chat</title>
     </head>
     <body>
-
         <table>
             <tr>
                 <td colspan="2">
@@ -19,7 +18,7 @@
             </tr>
             <tr>
                 <td>
-                    <textarea readonly="true" rows="10" cols="80" id="log"></textarea>
+                    <textarea readonly="true" rows="10" cols="52" id="log"></textarea>
                 </td>
             </tr>
             <tr>

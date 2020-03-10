@@ -280,4 +280,51 @@ public class CalPredialDatLiq
 		ExclusionParcial = exclusionParcial;
 	}
 
+	@Override
+	public String toString()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+
+
+		stringBuilder.append("{");
+		stringBuilder
+				.append("\"TipoDeclaracion\":\"" + (this.getTipoDeclaracion() != null ? this.getTipoDeclaracion() : "") + "\",");
+		stringBuilder.append(
+				"\"PorcentajePropiedad\":\"" + (this.getPorcentajePropiedad() != null ? this.getPorcentajePropiedad() : "") + "\",");
+		stringBuilder.append(
+				"\"PorcentajeExclusion\":\"" + (this.getPorcentajeExclusion() != null ? this.getPorcentajeExclusion() : "") + "\",");
+		stringBuilder.append(
+				"\"PorcentajeExencion\":\"" + (this.getPorcentajeExencion() != null ? this.getPorcentajeExencion() : "") + "\",");
+		stringBuilder
+				.append(
+						"\"TarifaLiquidacion\":\"" + (this.getTarifaLiquidacion() != null ? this.getTarifaLiquidacion() : "") + "\",");
+		stringBuilder
+				.append(
+						"\"DestinoHacendario\":\"" + (this.getDestinoHacendario() != null ? this.getDestinoHacendario() : "") + "\",");
+		stringBuilder.append("\"BaseGravable\":\"" + (this.getBaseGravable() != null ? this.getBaseGravable() : "") + "\",");
+		stringBuilder.append(
+				"\"CanonArrendamiento\":\"" + (this.getCanonArrendamiento() != null ? this.getCanonArrendamiento() : "") + "\",");
+		stringBuilder.append("\"NumeroContratoArrendamiento\":\"" + (this.getNumeroContratoArrendamiento() != null
+				? this.getNumeroContratoArrendamiento()
+				: "") + "\",");
+		stringBuilder
+				.append("\"CalidadSujecion\":\"" + (this.getCalidadSujecion() != null ? this.getCalidadSujecion() : "") + "\",");
+		stringBuilder.append(
+				"\"AvaluoMatrizMejora\":\"" + (this.getAvaluoMatrizMejora() != null ? this.getAvaluoMatrizMejora() : "") + "\",");
+		stringBuilder.append("\"AreaTerrenoMejoraContribuye\":\"" + (this.getAreaTerrenoMejoraContribuye() != null
+				? this.getAreaTerrenoMejoraContribuye()
+				: "") + "\",");
+		stringBuilder
+				.append(
+						"\"AvaluoProrrateado\":\"" + (this.getAvaluoProrrateado() != null ? this.getAvaluoProrrateado() : "") + "\",");
+		stringBuilder.append("\"AvaluoIndiceEdificabilidad\":\"" + (this.getAvaluoIndiceEdificabilidad() != null
+				? this.getAvaluoIndiceEdificabilidad()
+				: "") + "\",");
+		stringBuilder
+				.append("\"ExclusionParcial\":\"" + (this.getExclusionParcial() != null ? this.getExclusionParcial() : "") + "\"");
+		stringBuilder.append("}");
+		// XXX Auto-generated method stub
+		return stringBuilder.toString();
+	}
+
 }

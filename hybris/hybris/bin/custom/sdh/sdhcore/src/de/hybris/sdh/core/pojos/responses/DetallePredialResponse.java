@@ -16,6 +16,8 @@ public class DetallePredialResponse
 	private String opcionuso;
 	private String indicadorspac;
 	private String indicadorbasegravable;
+	private String autoavaluo;
+	private String direccionPredio;
 
 	private PredialDatosJuridicos datosJuridicos;
 	private PredialDatosEconomicos datosEconomicos;
@@ -32,7 +34,7 @@ public class DetallePredialResponse
 	{
 		return fechaInactivacion;
 	}
-	
+
 	/**
 	 * @param fechaInactivacion
 	 *           the fechaInactivacion to set
@@ -48,7 +50,7 @@ public class DetallePredialResponse
 	{
 		return opcionuso;
 	}
-	
+
 	/**
 	 * @param opcionuso
 	 *           the opcionuso to set
@@ -64,7 +66,7 @@ public class DetallePredialResponse
 	{
 		return indicadorspac;
 	}
-	
+
 	/**
 	 * @param indicadorspac
 	 *           the indicadorspac to set
@@ -80,7 +82,7 @@ public class DetallePredialResponse
 	{
 		return indicadorbasegravable;
 	}
-	
+
 	/**
 	 * @param indicadorbasegravable
 	 *           the indicadorbasegravable to set
@@ -96,7 +98,7 @@ public class DetallePredialResponse
 	{
 		return datosJuridicos;
 	}
-	
+
 	/**
 	 * @param datosJuridicos
 	 *           the datosJuridicos to set
@@ -112,7 +114,7 @@ public class DetallePredialResponse
 	{
 		return datosEconomicos;
 	}
-	
+
 	/**
 	 * @param datosEconomicos
 	 *           the datosEconomicos to set
@@ -128,7 +130,7 @@ public class DetallePredialResponse
 	{
 		return datosFisicos;
 	}
-	
+
 	/**
 	 * @param datosFisicos
 	 *           the datosFisicos to set
@@ -144,7 +146,7 @@ public class DetallePredialResponse
 	{
 		return marcas;
 	}
-	
+
 	/**
 	 * @param marcas
 	 *           the marcas to set
@@ -160,7 +162,7 @@ public class DetallePredialResponse
 	{
 		return estrLiquidacionPredial;
 	}
-	
+
 	/**
 	 * @param estrLiquidacionPredial
 	 *           the estrLiquidacionPredial to set
@@ -176,7 +178,7 @@ public class DetallePredialResponse
 	{
 		return estrDatosGenerales;
 	}
-	
+
 	/**
 	 * @param estrDatosGenerales
 	 *           the estrDatosGenerales to set
@@ -192,7 +194,7 @@ public class DetallePredialResponse
 	{
 		return estrLiquidacionPrivada;
 	}
-	
+
 	/**
 	 * @param estrLiquidacionPrivada
 	 *           the estrLiquidacionPrivada to set
@@ -208,7 +210,7 @@ public class DetallePredialResponse
 	{
 		return tblErrores;
 	}
-	
+
 	/**
 	 * @param tblErrores
 	 *           the tblErrores to set
@@ -216,6 +218,40 @@ public class DetallePredialResponse
 	public void setTblErrores(final List<PredialTblErrores> tblErrores)
 	{
 		this.tblErrores = tblErrores;
+	}
+
+	/**
+	 * @return the autoavaluo
+	 */
+	public String getAutoavaluo()
+	{
+		return autoavaluo;
+	}
+
+	/**
+	 * @param autoavaluo
+	 *           the autoavaluo to set
+	 */
+	public void setAutoavaluo(final String autoavaluo)
+	{
+		this.autoavaluo = autoavaluo;
+	}
+
+	/**
+	 * @return the direccionPredio
+	 */
+	public String getDireccionPredio()
+	{
+		return direccionPredio;
+	}
+
+	/**
+	 * @param direccionPredio
+	 *           the direccionPredio to set
+	 */
+	public void setDireccionPredio(final String direccionPredio)
+	{
+		this.direccionPredio = direccionPredio;
 	}
 
 

@@ -1,11 +1,12 @@
 var ws;
 
 function connect() {
+
     var username = document.getElementById("username").value;
-    
     var host = document.location.host;
     ws = new WebSocket("wss://"+host+"/sdhstorefront/chatEndPoint/" + username);
 
+    console.log(username);
     ws.onmessage = function(event) {
     var log = document.getElementById("log");
         console.log(event.data);
@@ -21,17 +22,4 @@ function send() {
     });
 
     ws.send(json);
-}
-
-function displayMessage (evt) {
-	var message;
-	message = "I got " + evt.data + " from " + evt.origin;
-	document.getElementById("log").innerHTML = message;
-}
-
-if (window.addEventListener) {
-	window.addEventListener("message", displayMessage, false);
-}
-else {
-	window.attachEvent("onmessage", displayMessage);
 }

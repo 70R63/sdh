@@ -24,16 +24,15 @@ import javax.websocket.server.ServerEndpoint;
 public class ChatWebSocketController {
     private Session session;
     private static final Set<ChatWebSocketController> chatEndpoints = new CopyOnWriteArraySet<>();
-    private static HashMap<String, String> users = new HashMap<>();
-
-    //private static final Logger LOG = Logger.getLogger(ChatWebSocketController.class);
+    private static HashMap<String, String> activeUsers = new HashMap<>();
+    private static final Logger LOG = Logger.getLogger(ChatWebSocketController.class);
 
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) throws IOException, EncodeException {
-        //LOG.info("New user has connected: [" + username + "]");
+        LOG.debug("New user has connected: [" + username + "]");
         this.session = session;
         chatEndpoints.add(this);
-        users.put(session.getId(), username);
+        activeUsers.put(session.getId(), username);
 
         Message message = new Message();
         message.setFrom(username);
@@ -43,23 +42,23 @@ public class ChatWebSocketController {
 
     @OnMessage
     public void onMessage(Session session, Message message) throws IOException, EncodeException {
-        message.setFrom(users.get(session.getId()));
+        message.setFrom(activeUsers.get(session.getId()));
         broadcast(message);
     }
 
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
-        //LOG.info("User [" + users.get(session.getId()) + "] has disconnected");
+        LOG.debug("User [" + activeUsers.get(session.getId()) + "] has disconnected");
         chatEndpoints.remove(this);
         Message message = new Message();
-        message.setFrom(users.get(session.getId()));
+        message.setFrom(activeUsers.get(session.getId()));
         message.setContent("Disconnected!");
         broadcast(message);
     }
 
     @OnError
     public void onError(Session session, Throwable throwable) {
-        // Do error handling here
+        LOG.debug("Error: " + throwable.toString());
     }
 
     private static void broadcast(Message message) throws IOException, EncodeException {
@@ -69,7 +68,7 @@ public class ChatWebSocketController {
                     endpoint.session.getBasicRemote()
                             .sendObject(message);
                 } catch (IOException | EncodeException e) {
-                    e.printStackTrace();
+                    LOG.info("WS Warnign (Couldn't sent message to an actived user): " + e.toString());
                 }
             }
         });

@@ -64,5 +64,21 @@ public class CalPredialLiqPriv
 		Autoavaluo = autoavaluo;
 	}
 
+	@Override
+	public String toString()
+	{
+		final StringBuilder stringBuilder = new StringBuilder();
+
+
+		stringBuilder.append("{");
+		stringBuilder
+				.append("\"AporteVoluntario\":\"" + (this.getAporteVoluntario() != null ? this.getAporteVoluntario() : "") + "\",");
+		stringBuilder.append("\"Proyecto\":\"" + (this.getProyecto() != null ? this.getProyecto() : "") + "\",");
+		stringBuilder.append("\"Autoavaluo\":\"" + (this.getAutoavaluo() != null ? this.getAutoavaluo() : "") + "\"");
+		stringBuilder.append("}");
+		// XXX Auto-generated method stub
+		return stringBuilder.toString();
+	}
+
 
 }

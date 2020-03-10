@@ -14,7 +14,8 @@
 <predial:predialCuatroDatPredio/>
 <predial:predialCuatroDatLiq />
 <predial:predialCuatroLiqPrivada />
-<firmas:generalFirmas />
+<c:url value='contribuyentes/predialunificado_4' var="linkRedirection"/>
+<firmas:generalFirmas firmaContribuyenteRedirection="${linkRedirection}"/>
 <predial:predialCuatroBotones />
 <div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
 <script>

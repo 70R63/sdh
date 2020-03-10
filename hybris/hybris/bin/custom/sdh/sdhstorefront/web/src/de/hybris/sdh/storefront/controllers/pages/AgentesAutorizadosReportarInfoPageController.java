@@ -9,29 +9,32 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
-import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.form.SelectAtomValue;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.UpdateRitRequest;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.pojos.responses.UpdateRitResponse;
-import de.hybris.sdh.core.services.*;
-import de.hybris.sdh.core.form.SelectAtomValue;
+import de.hybris.sdh.core.services.SDHCertificaRITService;
+import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHGestionBancaria;
+import de.hybris.sdh.core.services.SDHUpdateRitService;
+import de.hybris.sdh.core.services.SDHValidateBankFiles;
+import de.hybris.sdh.storefront.controllers.pages.forms.ImportConciliacionForm;
+
+import java.util.List;
 
 import javax.annotation.Resource;
 
-import de.hybris.sdh.storefront.controllers.pages.forms.ImportConciliacionForm;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 /**
  * @author Maria Luisa
@@ -75,15 +78,15 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 	@ModelAttribute("entidadBancaria")
 	public String getEntidadBancaria()
 	{
-		String bp = customerFacade.getCurrentCustomer().getNumBP();
+		final String bp = customerFacade.getCurrentCustomer().getNumBP();
 		return  sdhConsultaContribuyenteBPService.getEntidadBancaria(bp);
 	}
 
 	@ModelAttribute("tipoDeArchivo")
 	public List<SelectAtomValue> getTipoDeArchivo()
 	{
-		String bp = customerFacade.getCurrentCustomer().getNumBP();
-		String entidadBancaria = sdhConsultaContribuyenteBPService.getEntidadBancaria(bp);
+		final String bp = customerFacade.getCurrentCustomer().getNumBP();
+		final String entidadBancaria = sdhConsultaContribuyenteBPService.getEntidadBancaria(bp);
 		LOG.info("AgentesAutorizadosReportarInfoPageController BP:" + bp);
 		LOG.info("AgentesAutorizadosReportarInfoPageController entidad bancaria:" + entidadBancaria);
 
@@ -111,40 +114,47 @@ public class AgentesAutorizadosReportarInfoPageController extends AbstractPageCo
 										  final RedirectAttributes redirectAttributes )throws CMSItemNotFoundException
 	{
 		System.out.println("------------------Entro al POST de Agentes Autorizados reportar------------------------");
-		boolean verifiedOk = sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
+		final String verifiedOk = sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
 
-		final UpdateRitRequest request = new UpdateRitRequest();
-		UpdateRitResponse response = new UpdateRitResponse();
-		response.setRitUpdated(false);
-		final String strinResponse = sdhUpdateRitService.updateRit(request);
-
-		try
+		if (verifiedOk == null || verifiedOk.isEmpty())
 		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			response = mapper.readValue(strinResponse, UpdateRitResponse.class);
-			response.setRitUpdated(true);
+
+			final UpdateRitRequest request = new UpdateRitRequest();
+			UpdateRitResponse response = new UpdateRitResponse();
+			response.setRitUpdated(false);
+			final String strinResponse = sdhUpdateRitService.updateRit(request);
+
+			try
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+				response = mapper.readValue(strinResponse, UpdateRitResponse.class);
+				response.setRitUpdated(true);
 
 
-			final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
-			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
-					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
-					SDHValidaMailRolResponse.class);
+				final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+				final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+						sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+						SDHValidaMailRolResponse.class);
 
-		}
-		catch (final Exception e)
-		{
-			LOG.error("Error en la carga de archivos : " + e.getMessage());
-		}
+			}
+			catch (final Exception e)
+			{
+				LOG.error("Error en la carga de archivos : " + e.getMessage());
+			}
 
-		if(verifiedOk){
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
-					"conciliaciones.upload.messages.success", new Object[]
-							{ importConciliacionForm.getConciliacionFile().getOriginalFilename() });
-		}else{
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-					"conciliaciones.upload.messages.error", new Object[]
-							{ importConciliacionForm.getConciliacionFile().getOriginalFilename() });
+			if (verifiedOk == null)
+			{
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
+						"conciliaciones.upload.messages.success", new Object[]
+						{ importConciliacionForm.getConciliacionFile().getOriginalFilename() });
+			}
+			else
+			{
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+						"conciliaciones.upload.messages.error.firma", new Object[]
+						{ importConciliacionForm.getConciliacionFile().getOriginalFilename(), verifiedOk });
+			}
 		}
 
 
