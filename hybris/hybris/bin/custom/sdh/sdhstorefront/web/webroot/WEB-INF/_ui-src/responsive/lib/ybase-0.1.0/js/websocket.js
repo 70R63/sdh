@@ -22,3 +22,16 @@ function send() {
 
     ws.send(json);
 }
+
+function displayMessage (evt) {
+	var message;
+	message = "I got " + evt.data + " from " + evt.origin;
+	document.getElementById("log").innerHTML = message;
+}
+
+if (window.addEventListener) {
+	window.addEventListener("message", displayMessage, false);
+}
+else {
+	window.attachEvent("onmessage", displayMessage);
+}

@@ -9,14 +9,11 @@
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
 -->
-<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
 
     <widget-extension widgetId="backofficeMainSlot">
-        <widget id="sdhbackoffice-perspective" widgetDefinitionId="com.sdh.widgets.sdhbackofficewidget"
-            template="false" slotId="perspectives" title="Hello sdhbackoffice">
-            <setting key="perspectiveImageUrl" value="/cng/images/perspective.png"
-                type="String" />
+        <widget id="sdhbackoffice-perspective" widgetDefinitionId="com.sdh.widgets.sdhbackofficewidget" template="false" slotId="perspectives" title="sdh.customer.service.chat">
+            <setting key="perspectiveImageUrl" value="/cng/images/perspective.png" type="String" />
         </widget>
     </widget-extension>
 
