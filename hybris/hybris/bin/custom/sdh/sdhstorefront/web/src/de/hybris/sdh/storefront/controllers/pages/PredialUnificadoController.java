@@ -840,29 +840,29 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcua.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcua.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idCalidad = predialFormcua.getDatosJuridicos().getCalidadSujecion();
 
-			if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "1")
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormcua.setDesCalidad("Propietario");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormcua.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormcua.setDesCalidad("Poseedor");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormcua.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormcua.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormcua.setDesCalidad("Arrendatario");
 			}
@@ -976,29 +976,29 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcinco.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcinco.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idCalidad = predialFormcinco.getDatosJuridicos().getCalidadSujecion();
 
-			if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "1")
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormcinco.setDesCalidad("Propietario");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormcinco.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormcinco.setDesCalidad("Poseedor");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormcinco.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormcinco.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormcinco.setDesCalidad("Arrendatario");
 			}
@@ -1114,29 +1114,29 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormseis.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
 
-			final String idCalidad = "";
+			String idCalidad = predialFormseis.getDatosJuridicos().getCalidadSujecion();
 
-			if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "1")
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormseis.setDesCalidad("Propietario");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormseis.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormseis.setDesCalidad("Poseedor");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormseis.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormseis.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormseis.setDesCalidad("Arrendatario");
 			}
@@ -1251,29 +1251,29 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormsiete.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormsiete.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idCalidad = predialFormsiete.getDatosJuridicos().getCalidadSujecion();
 
-			if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "1")
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormsiete.setDesCalidad("Propietario");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormsiete.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormsiete.setDesCalidad("Poseedor");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormsiete.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormsiete.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormsiete.setDesCalidad("Arrendatario");
 			}
@@ -1386,29 +1386,29 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormocho.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormocho.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idCalidad = predialFormocho.getDatosJuridicos().getCalidadSujecion();
 
-			if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "1")
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormocho.setDesCalidad("Propietario");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormocho.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormocho.setDesCalidad("Poseedor");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormocho.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormocho.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormocho.setDesCalidad("Arrendatario");
 			}
@@ -1518,29 +1518,29 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormbases.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormbases.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idCalidad = predialFormbases.getDatosJuridicos().getCalidadSujecion();
 
-			if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "1")
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormbases.setDesCalidad("Propietario");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormbases.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormbases.setDesCalidad("Poseedor");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormbases.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormbases.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormbases.setDesCalidad("Arrendatario");
 			}
