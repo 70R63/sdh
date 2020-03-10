@@ -9,6 +9,7 @@ import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.pojos.requests.CalculaGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoImpDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.CalculoReteIca2Request;
+import de.hybris.sdh.core.pojos.requests.CatalogoVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsCasosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsulPagosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
@@ -29,6 +30,7 @@ import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
 import de.hybris.sdh.core.pojos.responses.CalculaGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.CalculoReteIca2Response;
+import de.hybris.sdh.core.pojos.responses.CatalogoVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ConsCasosResponse;
 import de.hybris.sdh.core.pojos.responses.CreaCasosResponse;
 import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
@@ -56,6 +58,7 @@ import de.hybris.sdh.core.pojos.responses.OpcionCertiDecImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionCertiPagosImprimeResponse;
 import de.hybris.sdh.core.pojos.responses.OpcionDeclaracionesPDFResponse;
 import de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.ReteICA;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -1763,6 +1766,49 @@ public class SobreTasaGasolinaService
 	}
 
 
+	public CatalogoVehiculosResponse consultaCatalogosVehicular(final CatalogoVehiculosRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG, final String nombreWS)
+	{
+		CatalogoVehiculosResponse responseInfo = null;
+		final String wsNombre = nombreWS;
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.CatalogoVehiculosResponse";
+		String confUrl = null;
+		String confUser = null;
+		String confPass = null;
+
+		switch (requestInfo.getCampo_catalogo())
+		{
+			case "linea":
+				confUrl = "sdh.catLinea.vehiculo.url";
+				confUser = "sdh.catLinea.vehiculo.user";
+				confPass = "sdh.catLinea.vehiculo.password";
+				break;
+
+			case "cilindraje":
+				confUrl = "sdh.catCilindraje.vehiculo.url";
+				confUser = "sdh.catCilindraje.vehiculo.user";
+				confPass = "sdh.catCilindraje.vehiculo.password";
+				break;
+
+			case "avaluo":
+				confUrl = "sdh.catAvaluo.vehiculo.url";
+				confUser = "sdh.catAvaluo.vehiculo.user";
+				confPass = "sdh.catAvaluo.vehiculo.password";
+				break;
+
+			default:
+				break;
+		}
+
+
+		responseInfo = (CatalogoVehiculosResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+
+		return responseInfo;
+	}
+
+
 	/**
 	 * @param infoDelineacionResponse
 	 * @return
@@ -2295,10 +2341,36 @@ public class SobreTasaGasolinaService
 		ImpuestoDelineacionUrbanaWithRadicados delineacion_customer_extendido = null;
 		List<DetRadicadosResponse> radicados = null;
 		DetRadicadosResponse infoRadicados = null;
+		List<PredialResponse> predial = null;
 
 
 		switch (infoVista.getClaveImpuesto())
 		{
+			case "0001": //Predial
+				predial = new ArrayList<PredialResponse>();
+				if (listaDeclaracionesResponse.getDeclaraciones() != null)
+				{
+					for (final ItemListaDeclaraciones itemDeclaracion : listaDeclaracionesResponse.getDeclaraciones())
+					{
+						for (final PredialResponse predial_customer : infoVista.getCustomerData().getPredial())
+						{
+							if (predial_customer.getNumObjeto() != null && itemDeclaracion.getNumObjeto() != null)
+							{
+								if (predial_customer.getNumObjeto().equals(itemDeclaracion.getNumObjeto()))
+								{
+									predial.add(predial_customer);
+								}
+							}
+						}
+					}
+
+					if (predial.size() > 0)
+					{
+						infoVista.setPredial(predial);
+					}
+				}
+				break;
+
 			case "0002": //Vehiculos
 				vehiculos = new ArrayList<ImpuestoVehiculos>();
 				if (listaDeclaracionesResponse.getDeclaraciones() != null)

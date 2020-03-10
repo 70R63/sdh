@@ -40,12 +40,12 @@
 					type="text" value="" maxlength="240" id="tipdocPredial"></input>
 			</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-5">
 			<div class="form-group">
 				<label class="control-label"><spring:theme
 						code="predial.inicial.juridicos.nomcom" /></label> <input id="JurNom" name=""
 					class="JurNom newalto form-control" disabled type="text" value=""
-					maxlength="240"></input>
+					maxlength="240" style="width: 100% !important; max-width: 100% !important; font-size:12px !important"></input>
 			</div>
 		</div>
 		<div class="col-md-3">
