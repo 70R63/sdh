@@ -597,6 +597,127 @@ ACC.vehiculos = {
 									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>');
 		}
 
+	},
+	
+	
+	obtenerCatalogosInicialVehiculos : function(cat_valores_actuales) {
+
+		dataActual = null;
+		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("linea",cat_valores_actuales);
+		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"linea",cat_valores_actuales);
+		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("cilindraje",cat_valores_actuales);
+		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",cat_valores_actuales);
+		
+		
+	},
+	
+	
+	obtenerCatalogosVehiculos : function(dataActual, campo_catalogo, cat_valores_actuales) {
+
+		$.ajax({
+			url : ACC.vehiculosCatalogosURL,
+			data : dataActual,
+			type : "GET",
+			success : function(dataResponse) {
+				ACC.vehiculos.updateFromResponse_catalogos(campo_catalogo,cat_valores_actuales,dataActual,dataResponse);					
+			},
+			error : function() {
+				alert("Error al obtener el catalogo de:"+campo_catalogo);
+			}
+		});
+		
+		
+	},
+	
+	
+	updateFromResponse_catalogos : function(campo_catalogo, cat_valores_actuales, infoActual, infoResponse){
+		
+		debugger;
+		if(campo_catalogo == 'linea'){
+			$("#linea").find("option:gt(0)").remove();
+			$("#linea").find("option:eq(0)").remove();
+			
+			$('#linea').append('<option value="">'+ "Seleccionar" + "</option>");
+			$.each(infoResponse.catalogo.vehicularlinearesponse, function (index,value){
+				$('#linea').append('<option value="'+ value.linea +'">'+ value.desc_linea + "</option>");
+			});
+			$("#linea").val(cat_valores_actuales[3]);
+		}else if(campo_catalogo == 'cilindraje'){
+			$("#cilindraje").find("option:gt(0)").remove();
+			$("#cilindraje").find("option:eq(0)").remove();
+			
+			$('#cilindraje').append('<option value="">'+ "Seleccionar" + "</option>");
+			$.each(infoResponse.catalogo.vehicularcilindrajeresponse, function (index,value){
+				$('#cilindraje').append('<option value="'+ value.cilindraje +'">'+ value.cilindraje + "</option>");
+			});
+			var valueSelected = "";
+			if(cat_valores_actuales!=null){
+				valueSelected = cat_valores_actuales[1];
+			}
+			$("#cilindraje").val(valueSelected);
+		}else if(campo_catalogo == 'avaluo'){
+			$("#avaluoAct").val(infoResponse.catalogo.avaluoactual);
+		}
+		
+		
+	},
+	
+	
+	determinarInfoParaCatalogo : function(campo_catalogo){
+		var data = {};
+		
+		data.campo_catalogo = campo_catalogo;
+		if(campo_catalogo == 'linea'){
+			data.marca = ACC.vehiculos.obtenerCampo('marca');
+		}else if(campo_catalogo == 'cilindraje'){
+			data.marca = ACC.vehiculos.obtenerCampo('marca');
+			data.linea = ACC.vehiculos.obtenerCampo('linea');
+			data.modelo = ACC.vehiculos.obtenerCampo('modelo');
+		}else if(campo_catalogo == 'avaluo'){
+			data.clase = ACC.vehiculos.obtenerCampo('clase');
+			data.cilindraje = ACC.vehiculos.obtenerCampo('cilindraje');
+			data.marca = ACC.vehiculos.obtenerCampo('marca');
+			data.linea = ACC.vehiculos.obtenerCampo('linea');
+			data.modelo = ACC.vehiculos.obtenerCampo('modelo');
+			data.carroceria = ACC.vehiculos.obtenerCampo('carroceria');
+		}
+		
+		return data;
+	},
+	
+	
+	determinarInfoInicialParaCatalogo : function(campo_catalogo,cat_valores_actuales){
+		var data = {};
+		
+		data.campo_catalogo = campo_catalogo;
+		if(campo_catalogo == 'linea'){
+			data.marca = cat_valores_actuales[2];
+		}else if(campo_catalogo == 'cilindraje'){
+			data.marca = cat_valores_actuales[2];
+			data.linea = cat_valores_actuales[3];
+			data.modelo = cat_valores_actuales[4];
+		}else if(campo_catalogo == 'avaluo'){
+			data.clase = cat_valores_actuales[0];
+			data.cilindraje = cat_valores_actuales[1];
+			data.marca = cat_valores_actuales[2];
+			data.linea = cat_valores_actuales[3];
+			data.modelo = cat_valores_actuales[4];
+			data.carroceria = cat_valores_actuales[5];
+		}
+		
+		return data;
+	},
+	
+	
+	obtenerCampo : function(nombre_campo){
+		 var campo = document.getElementById(nombre_campo);
+		 var val_campo = "";
+		 
+		 if(campo!=null){
+			 val_campo = campo.value;
+		 }
+		 
+		 return val_campo;
 	}
 
 };
