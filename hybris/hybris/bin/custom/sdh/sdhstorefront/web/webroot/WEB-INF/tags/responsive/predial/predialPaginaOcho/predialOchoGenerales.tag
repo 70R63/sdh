@@ -77,11 +77,13 @@
 						class="newalto form-control" disabled type="text" value="${predialFormocho.anioGravable}"
 						maxlength="240"></input>
 				</div>
+				<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialocho.generales.opuso" /></label> <input id="" name=""
 						class="newalto form-control" disabled type="text" value="${predialFormocho.opcionuso}"
 						maxlength="240"></input>
+				</div>
 				</div>
 			</div>
 			<div class="col-md-2">

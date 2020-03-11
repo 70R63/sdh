@@ -74,22 +74,24 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.generales.anigrav" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormsiete.anioGravable}"
-						maxlength="240"></input>
+						class="newalto form-control" disabled type="text"
+						value="${predialFormsiete.anioGravable}" maxlength="240"></input>
 				</div>
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predialsiete.generales.opuso" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormsiete.opcionuso}"
-						maxlength="240"></input>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="predialsiete.generales.opuso" /></label> <input id="" name=""
+							class="newalto form-control" disabled type="text"
+							value="${predialFormsiete.opcionuso}" maxlength="240"></input>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.generales.matricula" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormsiete.matrInmobiliaria}"
-						maxlength="240"></input>
+						class="newalto form-control" disabled type="text"
+						value="${predialFormsiete.matrInmobiliaria}" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -98,15 +100,16 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.generales.chip" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormsiete.CHIP}"
-						maxlength="240"></input>
+						class="newalto form-control" disabled type="text"
+						value="${predialFormsiete.CHIP}" maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.generales.cedula" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormsiete.estrDatosGenerales.cedulaCatastral}"
+						class="newalto form-control" disabled type="text"
+						value="${predialFormsiete.estrDatosGenerales.cedulaCatastral}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -117,8 +120,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.generales.direccion" /></label> <input id="" name=""
-						class="alto form-control" disabled type="text" value="${predialFormsiete.direccionPredio}"
-						maxlength="240"></input>
+						class="alto form-control" disabled type="text"
+						value="${predialFormsiete.direccionPredio}" maxlength="240"></input>
 				</div>
 			</div>
 		</div>

@@ -58,7 +58,8 @@ public class PredialForm
 	private String decExencion;
 	private String decExclusion;
 	private String desCalidad;
-
+	private String desDestino;
+	private String retipDeclaracion;
 	//campos para calculo
 	private String numFrom;
 	private CalculoPredialLiqPriv liquidacionPrivada;
@@ -938,6 +939,40 @@ public class PredialForm
 	public void setDireccionPredio(final String direccionPredio)
 	{
 		this.direccionPredio = direccionPredio;
+	}
+
+	/**
+	 * @return the desDestino
+	 */
+	public String getDesDestino()
+	{
+		return desDestino;
+	}
+
+	/**
+	 * @param desDestino
+	 *           the desDestino to set
+	 */
+	public void setDesDestino(final String desDestino)
+	{
+		this.desDestino = desDestino;
+	}
+
+	/**
+	 * @return the retipDeclaracion
+	 */
+	public String getRetipDeclaracion()
+	{
+		return retipDeclaracion;
+	}
+
+	/**
+	 * @param retipDeclaracion
+	 *           the retipDeclaracion to set
+	 */
+	public void setRetipDeclaracion(final String retipDeclaracion)
+	{
+		this.retipDeclaracion = retipDeclaracion;
 	}
 
 

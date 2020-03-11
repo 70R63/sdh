@@ -26,7 +26,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialdos.datliquidacion.calidad" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.datosJuridicos.calidadSujecion}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.desCalidad}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialdos.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.estrLiquidacionPredial.destinoHacendario}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.desDestino}"
 						maxlength="240"></input>
 				</div>
 			</div>
