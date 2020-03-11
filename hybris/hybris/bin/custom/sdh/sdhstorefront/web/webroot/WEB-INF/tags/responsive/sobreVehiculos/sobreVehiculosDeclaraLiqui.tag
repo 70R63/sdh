@@ -34,6 +34,16 @@
 <%--  		</c:otherwise>  --%>
 <%--  	</c:choose>  --%>
 	<form:form action="">
+		<c:set var="flagDisabled_capacidadPas" value='disabled="disabled"'/>
+		<c:set var="flagDisabled_capacidadTon" value='disabled="disabled"'/>
+		<c:choose>
+			<c:when test="${vehiculosFormDeclaracion.tipoVeh == 6}">
+				<c:set var="flagDisabled_capacidadPas" value=''/>
+			</c:when>
+			<c:when test="${vehiculosFormDeclaracion.tipoVeh == 7}">
+				<c:set var="flagDisabled_capacidadTon" value=''/>
+			</c:when>
+		</c:choose>
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -49,7 +59,7 @@
 						id="numresol" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
 						value="${vehiculosFormDeclaracion.capacidadTon}" maxlength="30"
-						disabled="disabled">
+						${flagDisabled_capacidadTon}>
 				</div>
 			</div>
 		</div>
@@ -68,7 +78,7 @@
 							id="numresol" name="numresol" class="newalto form-control"
 							aria-required="true" type="text"
 							value="${vehiculosFormDeclaracion.capacidadPas}" maxlength="30"
-							disabled="disabled">
+							${flagDisabled_capacidadPas}>
 					</div>
 				</div>
 		</div>
