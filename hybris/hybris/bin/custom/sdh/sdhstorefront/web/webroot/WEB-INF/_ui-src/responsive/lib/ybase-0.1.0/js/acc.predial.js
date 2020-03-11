@@ -5,7 +5,7 @@ ACC.predial = {
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
-			debugger;
+			
 			var valo = this.value;
 			var pro = document.getElementById('proyecto');
 
@@ -185,8 +185,10 @@ ACC.predial = {
 
 						var marc = result.marcas;
 
-						if (marc != null) {
+						
 							for (var i = 0; i < marc.length; i++) {
+								if (marc.marca != null) {
+								
 								var desmarc = "";
 								if (marc[i].marca == "1"
 										&& marc[i].tipoMarca == "1") {
@@ -368,7 +370,7 @@ ACC.predial = {
 								$('#MarcasPredial')
 										.append(
 												"<tr>"
-														+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+														+ '<td><input style="width: 190px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 														+ desmarc
 														+ '" /></td>'
 														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
@@ -380,7 +382,7 @@ ACC.predial = {
 														+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ marc[i].valorExencion
 														+ '" /></td>'
-														+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+														+ '<td><input style="width: 190px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ conhis + '" /></td>');
 
 							}
@@ -389,6 +391,9 @@ ACC.predial = {
 
 						var tipoRegistro = result.estrLiquidacionPrivada;
 						$("#retipRegistro").val(tipoRegistro.tipoRegistro);
+						
+						var tipdeclar = result.estrDatosGenerales;
+						$("#retipDeclaracion").val(tipdeclar.tipoDeclaracion);
 
 					},
 					error : function() {
@@ -471,8 +476,7 @@ ACC.predial = {
 		DatosLiquidacion.AvaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
 		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
-		
-		debugger;
+
 		var calcLiquidacionPrivada ={};
 		
 		var checkAporteRadio = $("input[name='optradio']:checked"). val();
@@ -499,7 +503,7 @@ ACC.predial = {
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-				debugger;
+			
 				var actualErrors = [];
             	
             	if(result.errores)
@@ -567,11 +571,8 @@ ACC.predial = {
 		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
 		
-		debugger;
 		var LiquidacionPrivada ={};
-		
-		
-		
+			
 		LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
 		LiquidacionPrivada.Proyecto = $("#Proyecto").val();
 		
@@ -585,7 +586,7 @@ ACC.predial = {
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-				debugger;
+		
 				var actualErrors = [];
             	
             	if(result.errores)

@@ -227,6 +227,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialForm.setEstrLiquidacionPredial(detallePredialResponse.getEstrLiquidacionPredial());
 			predialForm.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
 			predialForm.setTblErrores(detallePredialResponse.getTblErrores());
+			predialForm.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
 
 			model.addAttribute("predialForm", predialForm);
 
@@ -267,57 +268,57 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		String tipreg = "";
 
-		tipreg = predialInfoIniURL.getRetipRegistro();
+		tipreg = predialInfoIniURL.getRetipDeclaracion();
 
-		if (tipreg.equals("1"))
+		if (tipreg.equals("1") || tipreg.equals("1 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_1";
 		}
-		else if (tipreg.equals("2"))
+		else if (tipreg.equals("2") || tipreg.equals("2 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_2";
 		}
-		else if (tipreg.equals("3"))
+		else if (tipreg.equals("3") || tipreg.equals("3 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_3";
 		}
-		else if (tipreg.equals("4"))
+		else if (tipreg.equals("4") || tipreg.equals("4 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_4";
 		}
-		else if (tipreg.equals("5"))
+		else if (tipreg.equals("5") || tipreg.equals("5 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_5";
 		}
-		else if (tipreg.equals("6"))
+		else if (tipreg.equals("6") || tipreg.equals("6 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_6";
 		}
-		else if (tipreg.equals("7"))
+		else if (tipreg.equals("7") || tipreg.equals("7 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_7";
 		}
-		else if (tipreg.equals("8"))
+		else if (tipreg.equals("8") || tipreg.equals("8 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_8";
 		}
-		else if (tipreg.equals("9"))
+		else if (tipreg.equals("9") || tipreg.equals("9 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
@@ -325,23 +326,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 		else
 		{
-			final String Error = "Su predio no cuenta con Tipo de registro, por lo que no se puede detrminar la declaración a realizar";
+			final String Error = "Su predio no cuenta con Tipo de declaración, por lo que no se puede detrminar la declaración a realizar";
 			redirectAttributes.addFlashAttribute("Error", Error);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_inicio";
 		}
-
-
-
-
-		//model.addAttribute("predialFormurl", predialFormurl);
-
-		//		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
-		//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
-		//		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-		//		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		//
-		//		return "redirect:/contribuyentes/predialunificado_1";
 	}
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.GET)
@@ -416,7 +405,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormuno.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormuno.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-
+			String idDestino = predialFormuno.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormuno.setDesDestino(destinoHacendario(idDestino));
 
 			String idCalidad = predialFormuno.getDatosJuridicos().getCalidadSujecion();
 
@@ -454,12 +444,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormuno.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormuno.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -562,6 +553,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormdos.setCHIP(detallePredialRequest.getCHIP());
 			predialFormdos.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormdos.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+
+			String idDestino = predialFormdos.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormdos.setDesDestino(destinoHacendario(idDestino));
 
 			String idCalidad = predialFormdos.getDatosJuridicos().getCalidadSujecion();
 
@@ -705,6 +699,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormtres.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormtres.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
+			String idDestino = predialFormtres.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormtres.setDesDestino(destinoHacendario(idDestino));
+
 			String idCalidad = predialFormtres.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
@@ -839,6 +836,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcua.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcua.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcua.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+
+			String idDestino = predialFormcua.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormcua.setDesDestino(destinoHacendario(idDestino));
 
 			String idCalidad = predialFormcua.getDatosJuridicos().getCalidadSujecion();
 
@@ -975,6 +975,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcinco.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcinco.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcinco.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+
+			String idDestino = predialFormcinco.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormcinco.setDesDestino(destinoHacendario(idDestino));
 
 			String idCalidad = predialFormcinco.getDatosJuridicos().getCalidadSujecion();
 
@@ -1113,6 +1116,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormseis.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormseis.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
+			String idDestino = predialFormseis.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormseis.setDesDestino(destinoHacendario(idDestino));
 
 			String idCalidad = predialFormseis.getDatosJuridicos().getCalidadSujecion();
 
@@ -1251,6 +1256,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormsiete.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormsiete.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
+			String idDestino = predialFormsiete.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormsiete.setDesDestino(destinoHacendario(idDestino));
+
 			String idCalidad = predialFormsiete.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
@@ -1386,6 +1394,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormocho.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormocho.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
+			String idDestino = predialFormocho.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormocho.setDesDestino(destinoHacendario(idDestino));
+
 			String idCalidad = predialFormocho.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
@@ -1517,6 +1528,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormbases.setCHIP(detallePredialRequest.getCHIP());
 			predialFormbases.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormbases.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+
+			String idDestino = predialFormbases.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormbases.setDesDestino(destinoHacendario(idDestino));
 
 			String idCalidad = predialFormbases.getDatosJuridicos().getCalidadSujecion();
 
@@ -1750,6 +1764,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequestcalc), DetallePredialResponse.class);
 
 			prediaFormcaldec.setRetipRegistro(detallePredialResponse.getEstrLiquidacionPrivada().getTipoRegistro());
+			prediaFormcaldec.setRetipDeclaracion(detallePredialResponse.getEstrDatosGenerales().getTipoDeclaracion());
 
 			final CustomerData customerData = customerFacade.getCurrentCustomer();
 
@@ -1763,7 +1778,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			String tipreg = "";
 
-			tipreg = prediaFormcaldec.getRetipRegistro();
+			tipreg = prediaFormcaldec.getRetipDeclaracion();
 			final String numbp = prediaFormcaldec.getNumBP();
 			final String chip = prediaFormcaldec.getCHIP();
 			final String matricula = prediaFormcaldec.getMatrInmobiliaria();
@@ -1771,7 +1786,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			String url = "";
 
-			if (tipreg.equals("1"))
+			if (tipreg.equals("1") || tipreg.equals("1 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1779,7 +1794,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				prediaFormcaldec.setUrl(url);
 				return prediaFormcaldec;
 			}
-			else if (tipreg.equals("2"))
+			else if (tipreg.equals("2") || tipreg.equals("2 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1789,7 +1804,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				return prediaFormcaldec;
 			}
-			else if (tipreg.equals("3"))
+			else if (tipreg.equals("3") || tipreg.equals("3 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1799,7 +1814,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				return prediaFormcaldec;
 			}
-			else if (tipreg.equals("4"))
+			else if (tipreg.equals("4") || tipreg.equals("4 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1809,7 +1824,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				return prediaFormcaldec;
 			}
-			else if (tipreg.equals("5"))
+			else if (tipreg.equals("5") || tipreg.equals("5 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1819,7 +1834,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				return prediaFormcaldec;
 			}
-			else if (tipreg.equals("6"))
+			else if (tipreg.equals("6") || tipreg.equals("6 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1829,7 +1844,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				return prediaFormcaldec;
 			}
-			else if (tipreg.equals("7"))
+			else if (tipreg.equals("7") || tipreg.equals("7 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1839,7 +1854,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				return prediaFormcaldec;
 			}
-			else if (tipreg.equals("8"))
+			else if (tipreg.equals("8") || tipreg.equals("8 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1849,7 +1864,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				return prediaFormcaldec;
 			}
-			else if (tipreg.equals("9"))
+			else if (tipreg.equals("9") || tipreg.equals("9 "))
 			{
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
@@ -1883,5 +1898,61 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		return prediaFormcaldec;
 	}
 
+	private String destinoHacendario(final String idDestino)
+	{
+		String idDestinos = idDestino;
+		if (idDestino.equals("00"))
+		{
+			return idDestinos = "-";
+		}
+		else if (idDestino.equals("61"))
+		{
+			return idDestinos = "RESIDENCIALES URBANOS Y RURALES";
+		}
+		else if (idDestino.equals("62"))
+		{
+			return idDestinos = "COMERCIALES URBANOS Y RURALES";
+		}
+		else if (idDestino.equals("63"))
+		{
+			return idDestinos = "FINANCIERO";
+		}
+		else if (idDestino.equals("64"))
+		{
+			return idDestinos = "INDUSTRIALES URBANOS Y RURALES";
+		}
+		else if (idDestino.equals("65"))
+		{
+			return idDestinos = "DEPOSITOS Y PARQUEADEROS";
+		}
+		else if (idDestino.equals("66"))
+		{
+			return idDestinos = "DOTACIONALES";
+		}
+		else if (idDestino.equals("67"))
+		{
+			return idDestinos = "LOTE/URBANIZABLES NO URBANIZADOS/URBANIZADOS NO EDIFICADOS";
+		}
+		else if (idDestino.equals("69"))
+		{
+			return idDestinos = "PEQUEÑA PROPIEDAD RURAL PARA PRODUCCIÓN AGORPECUARIA";
+		}
+		else if (idDestino.equals("70"))
+		{
+			return idDestinos = "NO URBANIZABLES";
+		}
+		else if (idDestino.equals("71"))
+		{
+			return idDestinos = "RURALES";
+		}
+		else if (idDestino.equals("72"))
+		{
+			return idDestinos = "SISTEMA DE AREAS PROTEGIDAS";
+		}
+		else
+		{
+			return idDestinos = "-";
+		}
+	}
 
 }
