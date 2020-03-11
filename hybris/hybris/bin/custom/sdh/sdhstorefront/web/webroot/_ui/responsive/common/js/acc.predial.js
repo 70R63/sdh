@@ -186,13 +186,9 @@ ACC.predial = {
 
 						var marc = result.marcas;
 
-						
+						if (marc != null) {
 							for (var i = 0; i < marc.length; i++) {
-<<<<<<< HEAD
 								
-=======
-								if (marc.marca != null) {
->>>>>>> dev
 								
 								var desmarc = "";
 								if (marc[i].marca == "1"
@@ -399,6 +395,8 @@ ACC.predial = {
 						
 						var tipdeclar = result.estrDatosGenerales;
 						$("#retipDeclaracion").val(tipdeclar.tipoDeclaracion);
+
+
 
 					},
 					error : function() {
