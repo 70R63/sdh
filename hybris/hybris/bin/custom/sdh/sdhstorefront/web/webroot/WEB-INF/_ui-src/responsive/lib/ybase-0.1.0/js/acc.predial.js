@@ -71,6 +71,7 @@ ACC.predial = {
 					success : function(result) {
 						console.log(result);
 						$(".chip").val(result.chip);
+						$("#opcUsoPredialUni").val(result.opcionuso);
 						var econo = result.datosEconomicos;
 						$('#DatosEconomicos')
 								.append(
@@ -394,6 +395,8 @@ ACC.predial = {
 						
 						var tipdeclar = result.estrDatosGenerales;
 						$("#retipDeclaracion").val(tipdeclar.tipoDeclaracion);
+
+
 
 					},
 					error : function() {

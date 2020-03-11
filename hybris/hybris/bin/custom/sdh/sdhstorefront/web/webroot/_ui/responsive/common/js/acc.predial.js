@@ -71,6 +71,7 @@ ACC.predial = {
 					success : function(result) {
 						console.log(result);
 						$(".chip").val(result.chip);
+						$("#opcUsoPredialUni").val(result.opcionuso);
 						var econo = result.datosEconomicos;
 						$('#DatosEconomicos')
 								.append(
@@ -185,9 +186,13 @@ ACC.predial = {
 
 						var marc = result.marcas;
 
-						if (marc != null) {
+						
 							for (var i = 0; i < marc.length; i++) {
+<<<<<<< HEAD
 								
+=======
+								if (marc.marca != null) {
+>>>>>>> dev
 								
 								var desmarc = "";
 								if (marc[i].marca == "1"
