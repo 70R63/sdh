@@ -78,7 +78,7 @@
 						maxlength="240"></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialtres.generales.opuso" /></label> <input id="" name=""

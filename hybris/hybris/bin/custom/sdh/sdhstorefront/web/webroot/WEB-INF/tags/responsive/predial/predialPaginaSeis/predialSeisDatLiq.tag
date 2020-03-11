@@ -77,7 +77,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialseis.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.estrLiquidacionPredial.destinoHacendario}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormseis.desDestino}"
 						maxlength="240"></input>
 				</div>
 			</div>

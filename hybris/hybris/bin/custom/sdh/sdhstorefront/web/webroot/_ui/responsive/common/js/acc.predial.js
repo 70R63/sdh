@@ -187,6 +187,8 @@ ACC.predial = {
 
 						if (marc != null) {
 							for (var i = 0; i < marc.length; i++) {
+								if (marc[i].marca != null || marc[i].marca != "") {
+								debugger;
 								var desmarc = "";
 								if (marc[i].marca == "1"
 										&& marc[i].tipoMarca == "1") {
@@ -368,7 +370,7 @@ ACC.predial = {
 								$('#MarcasPredial')
 										.append(
 												"<tr>"
-														+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
+														+ '<td><input style="width: 190px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 														+ desmarc
 														+ '" /></td>'
 														+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
@@ -380,15 +382,18 @@ ACC.predial = {
 														+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ marc[i].valorExencion
 														+ '" /></td>'
-														+ '<td><input style="width: 80px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+														+ '<td><input style="width: 190px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 														+ conhis + '" /></td>');
 
 							}
 
-						}
+						}}
 
 						var tipoRegistro = result.estrLiquidacionPrivada;
 						$("#retipRegistro").val(tipoRegistro.tipoRegistro);
+						
+						var tipdeclar = result.estrDatosGenerales;
+						$("#retipDeclaracion").val(tipdeclar.tipoDeclaracion);
 
 					},
 					error : function() {

@@ -14,19 +14,19 @@
         function connect() {
              var frame = document.getElementById("chatSpaceOne").contentWindow;
              frame.postMessage('Hello to iframe from parent!', 'https://publicsector.local:9002/backoffice');
-        } 
+        }
     </script>
 
 	<div height="100%" style="background-color:white">
         <n:table class="sdhBackofficeWidget">
             <n:tr height="5%">
-                <n:th class="header">Clientes Activos</n:th>
-                <n:th class="header">Sesiones</n:th>
+                <n:th class="header" width="60%">Clientes Activos</n:th>
+                <n:th class="header" width="40%">Sesiones</n:th>
             </n:tr>
             <n:tr height="95%">
-                <n:td>
+                <n:td width="60%">
                     <n:table class="sdhBackofficeWidget">
-                        <n:tr height="5%">
+                        <n:tr height="41px">
                             <n:td>
                                 <n:table class="sdhBackofficeWidget">
                                     <n:tr height="5%">
@@ -38,7 +38,7 @@
                                  </n:table>
                              </n:td>
                         </n:tr>
-                        <n:tr height="95%">
+                        <n:tr >
                             <n:td valign="top">
                                 <div class="table-container">
                                     <n:table class="scroll" >
@@ -66,28 +66,13 @@
                         </n:tr>
                     </n:table>
                 </n:td>
-                <n:td>
+                <n:td width="40%">
                     <n:table class="sdhBackofficeWidget">
-                        <n:tr height="5%">
-                            <n:td class="subHeader">Sesión #1</n:td>
-                        </n:tr>
-                        <n:tr height="45%">
+                        <n:tr height="100%">
                             <n:td>
                                 <n:iframe style="width:100%;height:100%"
                                     frameborder="0.5"
                                     id="chatSpaceOne"
-                                    src="https://publicsector.local:9002/sdhstorefront/chat/customer">
-                                </n:iframe>
-                            </n:td>
-                        </n:tr>
-                        <n:tr height="5%">
-                            <n:td class="subHeader">Sesión #2</n:td>
-                        </n:tr>
-                        <n:tr height="45%">
-                            <n:td>
-                                <n:iframe style="width:100%;height:100%"
-                                    frameborder="0.5"
-                                    id="chatSpaceTwo"
                                     src="https://publicsector.local:9002/sdhstorefront/chat/customer">
                                 </n:iframe>
                             </n:td>

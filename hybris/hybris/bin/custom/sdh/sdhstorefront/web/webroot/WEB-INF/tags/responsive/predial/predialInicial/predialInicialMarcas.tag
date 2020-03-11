@@ -27,13 +27,13 @@
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-md-10 d-flex align-items-center">
+			<div class="col-md-11 d-flex align-items-center">
 				<div class="table-responsive text-center">
 					<table class="table table-bordered MarcasPredial"
 						id="MarcasPredial">
 						<thead>
 							<tr>
-								<td><label class="control-label labeltabletd tableident"><spring:theme
+								<td><label class="control-label labeltabletd "><spring:theme
 											code="predial.inicial.marcas.marca" /></label></td>
 								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
 											code="predial.inicial.marcas.tipmarca" /></label></td>
@@ -59,6 +59,7 @@
 			<sf:input type="hidden" id="reanioGravable"  path="anioGravable" />
 			<sf:input type="hidden" id="renumBP"  path="numBP" />
 			<sf:input type="hidden" id="retipRegistro"  class="retipRegistro" path="retipRegistro"/>
+			<sf:input type="hidden" id="retipDeclaracion"  class="retipDeclaracion" path="retipDeclaracion"/>
 			<div class="col-md-12 centercol-md-8 text-center">
 				<button style="margin-top: 3px;" id=""
 					class="btn btn-secondary btn-lg" type="button">
