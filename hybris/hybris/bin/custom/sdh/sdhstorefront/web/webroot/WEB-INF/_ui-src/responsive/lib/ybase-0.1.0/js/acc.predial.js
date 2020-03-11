@@ -185,9 +185,9 @@ ACC.predial = {
 
 						var marc = result.marcas;
 
-						
+						if (marc != null) {
 							for (var i = 0; i < marc.length; i++) {
-								if (marc.marca != null) {
+								
 								
 								var desmarc = "";
 								if (marc[i].marca == "1"
