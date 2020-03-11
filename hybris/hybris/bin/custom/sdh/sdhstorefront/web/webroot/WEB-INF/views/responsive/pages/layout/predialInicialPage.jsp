@@ -18,7 +18,7 @@
 <a id="downloadHelper" target="_blank"></a>
 <predialIni:predialInicialTable></predialIni:predialInicialTable>
 
-
+<input type="hidden" id="opcUsoPredialUni" value="">
 <div class="InicialDetalle" id="InicialDetalle" style="display: none">
 	<predialIni:predialInicialJuridicos />
 	<predialIni:predialInicialEconomicos />
@@ -63,7 +63,6 @@
 	}
 
 	function showDetailPredio(anioGravable, chip, matrInmobiliaria) {
-		
 		ACC.predial.detalle_tres(anioGravable, chip, matrInmobiliaria);
 	}
 	

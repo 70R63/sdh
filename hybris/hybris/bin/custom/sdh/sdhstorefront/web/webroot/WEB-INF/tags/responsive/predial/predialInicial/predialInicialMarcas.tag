@@ -8,14 +8,11 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<spring:url value="/contribuyentes/predialunificado/URL" var="declarar"
-	htmlEscape="false" />
+<spring:url value="/contribuyentes/predialunificado/URL" var="declarar" htmlEscape="false" />
 	
 <sf:form action="${declarar}" method="POST"
 	modelAttribute="predialFormIni" id="declarar">
 	<div class="container">
-
-
 		<div class="row">
 			<div class="col-md-12">
 				<div class="headline">
@@ -72,11 +69,12 @@
 				</button>
 
 
-				<button class="btn btn-primary btn-lg generarDeclracinPredial" type="submit" id="" name=""
+				<button class="btn btn-primary btn-lg generarDeclracinPredial"
+				    type="submit" id="" name=""
+				    onClick="return validateForm();"
 					value="" id="generarDeclracinPredial">
 					<spring:theme code="predial.inicial.marcas.generar" />
 				</button>
-
 			</div>
 
 		</div>
@@ -85,4 +83,22 @@
 </sf:form>
 
 
+<script type="text/javascript">
+    function validateForm() {
+        var myform = document.getElementById("myForm");
+        var opcUso = document.getElementById("opcUsoPredialUni").value;
+        opcUso = opcUso.substring(0, 2);
 
+        if(opcUso == "02"){
+            var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
+            if (r == true) {
+                  myform.submit();
+             } else {
+                return false;
+             }
+         }else{
+            myform.submit();
+         }
+        return false;
+    }
+</script>

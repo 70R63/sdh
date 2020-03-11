@@ -5,7 +5,7 @@ ACC.predial = {
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
-			debugger;
+			
 			var valo = this.value;
 			var pro = document.getElementById('proyecto');
 
@@ -71,6 +71,7 @@ ACC.predial = {
 					success : function(result) {
 						console.log(result);
 						$(".chip").val(result.chip);
+						$("#opcUsoPredialUni").val(result.opcionuso);
 						var econo = result.datosEconomicos;
 						$('#DatosEconomicos')
 								.append(
@@ -185,10 +186,10 @@ ACC.predial = {
 
 						var marc = result.marcas;
 
-						if (marc != null) {
+						
 							for (var i = 0; i < marc.length; i++) {
-								if (marc[i].marca != null || marc[i].marca != "") {
-								debugger;
+								if (marc.marca != null) {
+								
 								var desmarc = "";
 								if (marc[i].marca == "1"
 										&& marc[i].tipoMarca == "1") {
@@ -387,7 +388,7 @@ ACC.predial = {
 
 							}
 
-						}}
+						}
 
 						var tipoRegistro = result.estrLiquidacionPrivada;
 						$("#retipRegistro").val(tipoRegistro.tipoRegistro);
@@ -476,8 +477,7 @@ ACC.predial = {
 		DatosLiquidacion.AvaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
 		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
-		
-		debugger;
+
 		var calcLiquidacionPrivada ={};
 		
 		var checkAporteRadio = $("input[name='optradio']:checked"). val();
@@ -504,7 +504,7 @@ ACC.predial = {
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-				debugger;
+			
 				var actualErrors = [];
             	
             	if(result.errores)
@@ -572,11 +572,8 @@ ACC.predial = {
 		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
 		
-		debugger;
 		var LiquidacionPrivada ={};
-		
-		
-		
+			
 		LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
 		LiquidacionPrivada.Proyecto = $("#Proyecto").val();
 		
@@ -590,7 +587,7 @@ ACC.predial = {
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-				debugger;
+		
 				var actualErrors = [];
             	
             	if(result.errores)
