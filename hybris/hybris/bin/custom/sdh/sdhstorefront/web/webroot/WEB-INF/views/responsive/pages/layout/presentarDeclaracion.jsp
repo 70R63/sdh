@@ -49,7 +49,7 @@
 	function onChange() {
 		var tipoImpuesto = document.getElementById("impuesto").value;
 		debugger;
-		if(tipoImpuesto == '2' || tipoImpuesto == '1'){ //vehicular
+		if(tipoImpuesto == '2' || tipoImpuesto == '1'){ //vehicular y predial
 			ACC.opcionDeclaraciones.prepararImpuesto_presentarDec(tipoImpuesto);
 		}else{ //otros impuestos
 			document.getElementById("anoGravable").value = "";
