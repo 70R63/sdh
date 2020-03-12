@@ -3,7 +3,7 @@ ACC.opcionDeclaraciones = {
 	dataActual_backup:{},
 	dataResponse_backup:{},
 	
-	_autoload : [ "bindDeclaracionPDF", "bindCertiPagosImprime", "bindDeclaracionImprime"],
+	_autoload : [ "bindDeclaracionPDF", "bindCertiPagosImprime", "bindDeclaracionImprime","bindDialogDeclaracionGenerica"],
 
 	
 	bindDeclaracionPDF : function() {
@@ -1672,7 +1672,66 @@ debugger;
 			ACC.opcionDeclaraciones.preparaCatAnioGravable(anoGravableBase,6);
 		}
 		
-	}
+	},
+	
+	
+	presentarDeclaracionGenerica(){
+       var numForm  = $.trim($("#numForm").val());
+	 	 
+       var data = {};
+       
+       data.numForm=numForm;
+
+      $.ajax({
+            url: ACC.predial_presentarDecURL,
+            data: data,
+            type: "GET",
+            success: function (data) {
+            	$( "#dialogDeclaracion" ).dialog( "open" );
+            	if(data.errores && ( data.errores[0].idmsj != 0 ))
+        		{
+            		$("#declaracionDialogContent").html("");
+            		$.each(data.errores, function( index, value ) {
+            			$("#declaracionDialogContent").html($("#declaracionDialogContent").html()+value.txtmsj+"<br>");
+            		});
+            		
+            		
+        		}else
+        		{
+        			$("#declaracionDialogContent").html("");
+        			$("#declaracionDialogContent").html("La Declaración se ha presentado correctamente.")
+					
+        			
+        			$("#downloadHelper").attr("href",data.urlDownload);
+        			
+        			document.getElementById("downloadHelper").click();
+        			document.getElementById("pagar").disabled = false;
+        			$(".pagarbtn").attr("disabled", false);
+        			
+        		}
+      		
+            },
+            error: function () {
+            	$( "#dialogDeclaracion" ).dialog( "open" );
+            	$("#declaracionDialogContent").html("Hubo un error al generar la declaración, por favor inténtalo más tarde");
+            }
+        });
+	},
+	
+	bindDialogDeclaracionGenerica: function(){
+    	
+    	$( "#dialogDeclaracion" ).dialog({ 
+    		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
+    		buttons: {
+    			Ok: function() {
+    				$( this ).dialog( "close" );
+    			}
+    	    } 
+    	});
+    	
+    },
 	
 	
 };
