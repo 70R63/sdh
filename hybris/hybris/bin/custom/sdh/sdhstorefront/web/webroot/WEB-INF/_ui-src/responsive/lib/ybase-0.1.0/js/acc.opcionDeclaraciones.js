@@ -3,7 +3,7 @@ ACC.opcionDeclaraciones = {
 	dataActual_backup:{},
 	dataResponse_backup:{},
 	
-	_autoload : [ "bindDeclaracionPDF", "bindCertiPagosImprime", "bindDeclaracionImprime"],
+	_autoload : [ "bindDeclaracionPDF", "bindCertiPagosImprime", "bindDeclaracionImprime","bindDialogDeclaracionGenerica"],
 
 	
 	bindDeclaracionPDF : function() {
@@ -1716,7 +1716,22 @@ debugger;
             	$("#declaracionDialogContent").html("Hubo un error al generar la declaración, por favor inténtalo más tarde");
             }
         });
-	}
+	},
+	
+	bindDialogDeclaracionGenerica: function(){
+    	
+    	$( "#dialogDeclaracion" ).dialog({ 
+    		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
+    		buttons: {
+    			Ok: function() {
+    				$( this ).dialog( "close" );
+    			}
+    	    } 
+    	});
+    	
+    },
 	
 	
 };
