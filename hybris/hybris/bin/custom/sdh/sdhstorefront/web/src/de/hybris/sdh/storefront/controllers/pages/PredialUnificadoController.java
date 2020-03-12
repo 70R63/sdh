@@ -700,6 +700,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormtres.setCHIP(detallePredialRequest.getCHIP());
 			predialFormtres.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormtres.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormtres.setNumDoc(predialInfoInitres.getNumDoc());
+			predialFormtres.setCompleName(predialInfoInitres.getCompleName());
+			predialFormtres.setTipDoc(predialInfoInitres.getTipDoc());
 
 			String idDestino = predialFormtres.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormtres.setDesDestino(destinoHacendario(idDestino));
