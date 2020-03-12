@@ -1,7 +1,6 @@
 ACC.predial = {
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal", "binbuttonPrecalculo",
-			"bindDetallePredial", "bindDeclaracionPredial" ],
+	_autoload : [ "bindoptionNo", "bindprophorizontal"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
