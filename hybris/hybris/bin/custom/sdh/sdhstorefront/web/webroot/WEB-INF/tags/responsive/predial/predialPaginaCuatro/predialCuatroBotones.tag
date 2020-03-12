@@ -39,13 +39,13 @@
 <!-- Fin de campos para calculo -->
 	<div class="row" style="marging-top: 5px">
 		<div class="col-md-12 centercol-md-8 text-center">
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button">
+			<button style="margin-top: 3px;" id="predialGeneraDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
+				type="button" disabled="disabled">
 				<spring:theme code="predialtres.firma.presendecla" />
 			</button>
 
-			<button class="btn btn-primary btn-lg" type="submit" id="action"
-				name="pagar" value="pagar">
+			<button class="btn btn-primary btn-lg pagarbtn" type="submit" id="pagar"
+				name="pagar" value="pagar" disabled="disabled">
 				<spring:theme code="predialtres.firma.paglinea" />
 			</button>
 			

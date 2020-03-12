@@ -20,22 +20,22 @@ import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
+import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
-import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
 import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
-import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
-import de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalculoPredialService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
-import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PredialForm;
-import de.hybris.sdh.storefront.forms.PredialPresentarDecForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -130,6 +130,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@Resource(name = "sdhCalculoPredialService")
 	private SDHCalculoPredialService sdhCalculoPredialService;
+
+	@Resource(name = "sdhGeneraDeclaracionService")
+	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
 
 	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
 
@@ -1614,31 +1617,36 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_inicio/presentarDec", method = RequestMethod.GET)
 	@ResponseBody
-	public PredialPresentarDecResponse presentarDec(final PredialPresentarDecForm dataForm, final HttpServletResponse response,
+	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
 			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- En Predial Presentar Declaracion --------------------------");
+		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final PredialPresentarDecRequest presentaDecRequest = new PredialPresentarDecRequest();
-		PredialPresentarDecResponse presentaDecResponse = null;
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		String numForm = request.getParameter("numForm");
+
+		if (StringUtils.isBlank(numForm))
+		{
+			numForm = dataForm.getNumForm();
+		}
+
+		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
 
 
-		presentaDecRequest.setBp(customerModel.getNumBP());
-		presentaDecRequest.setChip(dataForm.getChip());
-		presentaDecRequest.setAnioGravable(dataForm.getAnioGravable());
+		generaDeclaracionRequest.setNumForm(numForm);
+		generaDeclaracionRequest.setTipo_id(customerModel.getDocumentType());
+		generaDeclaracionRequest.setNum_id(customerModel.getNumBP());
 
 		try
 		{
-			System.out.println("Request de calculoimpuesto/TEST: " + presentaDecRequest);
-			presentaDecResponse = gasolinaService.predialPresentarDec(presentaDecRequest, sdhDetalleGasolinaWS, LOG);
-			System.out.println("Response de calculoimpuesto/TEST: " + presentaDecResponse);
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
+					GeneraDeclaracionResponse.class);
 
-
-			if (presentaDecResponse != null && presentaDecResponse.getStringPDF() != null)
+			if (generaDeclaracionResponse != null && generaDeclaracionResponse.getStringPDF() != null)
 			{
-				final String encodedBytes = presentaDecResponse.getStringPDF();
+				final String encodedBytes = generaDeclaracionResponse.getStringPDF();
 
 				final BASE64Decoder decoder = new BASE64Decoder();
 				byte[] decodedBytes;
@@ -1647,7 +1655,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 
-				final String fileName = "Predial-" + customerModel.getNumBP() + ".pdf";
+				final String fileName = numForm + "-" + customerModel.getNumBP() + ".pdf";
 
 				final InputStream is = new ByteArrayInputStream(decodedBytes);
 
@@ -1659,7 +1667,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);
 
-				presentaDecResponse.setUrlDownload(mediaModel.getDownloadURL());
+				generaDeclaracionResponse.setUrlDownload(mediaModel.getDownloadURL());
 
 
 			}
@@ -1669,20 +1677,19 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		{
 			LOG.error("error generating declaration : " + e.getMessage());
 
-			final ErrorEnWS error = new ErrorEnWS();
+			final ErrorPubli error = new ErrorPubli();
 
-			error.setId("0");
-			error.setMensaje("Hubo un error al generar la declaración, por favor intentalo más tarde");
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al generar la declaración, por favor intentalo más tarde");
 
-			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
 
 			errores.add(error);
 
-			presentaDecResponse.setErrores(errores);
+			generaDeclaracionResponse.setErrores(errores);
 
 		}
-		return presentaDecResponse;
-
+		return generaDeclaracionResponse;
 
 	}
 

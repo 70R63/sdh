@@ -1,6 +1,6 @@
 ACC.predial = {
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal"],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -529,6 +529,7 @@ ACC.predial = {
 				
         			$( "#dialogICA" ).dialog( "open" );
         			$("#icaDialogContent").html("El cálculo se ha realizado exitosamente.");
+        			$("#numForm").val(result.numFrom);
     			
 				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorAporteVoluntario);
 				$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoIncrementoDiferencial);
@@ -634,6 +635,14 @@ ACC.predial = {
 			}
 		});
 		
-	}
+	},
+	
+	bindGeneraDeclaracionButton_predial: function () {
+		 $(document).on("click", "#predialGeneraDeclaracionButton", function (e) {
+	 	        e.preventDefault();
+	 	       ACC.opcionDeclaraciones.presentarDeclaracionGenerica();
+	 	       
+		 });
+	 }
 
 };
