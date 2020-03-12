@@ -25,18 +25,21 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalcVehiculosRequest;
+import de.hybris.sdh.core.pojos.requests.CatalogoVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.CalcVehiculosResponse;
+import de.hybris.sdh.core.pojos.responses.CatalogoVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.ImpuestoVehiculos;
 import de.hybris.sdh.core.pojos.responses.Infovehic;
+import de.hybris.sdh.core.pojos.responses.ItemSelectOption;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalVehiculosService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -650,6 +653,93 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 
 		return getViewForPage(model);
+	}
+
+
+	@RequestMapping(value = "/catalogos", method = RequestMethod.GET)
+	@ResponseBody
+	public VehiculosInfObjetoForm catalogo(@ModelAttribute("dataForm")
+	final VehiculosInfObjetoForm dataForm) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- En Catalogos de Vehicular GET --------------------------");
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		final List<ItemSelectOption> catalogos = new ArrayList<ItemSelectOption>();
+		final CatalogoVehiculosRequest catalogoRequest = obtenerRequest_Catalogos(dataForm);
+		CatalogoVehiculosResponse catalogoResponse = null;
+		String wsNombre = null;
+
+		try
+		{
+			switch (dataForm.getCampo_catalogo())
+			{
+				case "linea":
+					wsNombre = "consultavehicular/linea";
+					break;
+
+				case "cilindraje":
+					wsNombre = "consultavehicular/cilindraje";
+					break;
+
+				case "avaluo":
+					wsNombre = "consultavehicular/avaluo";
+					break;
+
+				default:
+					break;
+			}
+
+			System.out.println("Request para " + wsNombre + ": " + catalogoRequest);
+			catalogoResponse = gasolinaService.consultaCatalogosVehicular(catalogoRequest, sdhDetalleGasolinaWS, LOG, wsNombre);
+			System.out.println("Response de " + wsNombre + ": " + catalogoResponse);
+			dataForm.setCatalogo(catalogoResponse);
+
+
+		}
+
+		catch (final Exception e)
+		{
+
+		}
+
+
+		return dataForm;
+
+	}
+
+	private CatalogoVehiculosRequest obtenerRequest_Catalogos(final VehiculosInfObjetoForm dataForm)
+	{
+
+
+		final CatalogoVehiculosRequest catalogoRequest = new CatalogoVehiculosRequest();
+
+		catalogoRequest.setCampo_catalogo(dataForm.getCampo_catalogo());
+		switch (dataForm.getCampo_catalogo())
+		{
+			case "linea":
+				catalogoRequest.setMarca(dataForm.getMarca());
+				break;
+
+			case "cilindraje":
+				catalogoRequest.setMarca(dataForm.getMarca());
+				catalogoRequest.setLinea(dataForm.getLinea());
+				catalogoRequest.setModelo(dataForm.getModelo());
+				break;
+
+			case "avaluo":
+				catalogoRequest.setClase(dataForm.getClase());
+				catalogoRequest.setCilindraje(dataForm.getCilindraje());
+				catalogoRequest.setMarca(dataForm.getMarca());
+				catalogoRequest.setLinea(dataForm.getLinea());
+				catalogoRequest.setModelo(dataForm.getModelo());
+				catalogoRequest.setCarroceria(dataForm.getCarroceria());
+				break;
+
+			default:
+				break;
+		}
+
+
+		return catalogoRequest;
 	}
 
 

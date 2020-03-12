@@ -21,15 +21,6 @@
 <div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
 
 <script type="text/javascript">
-// window.onload = function() {
-// 	var inputcol = document.getElementsByTagName("input");
-// 	for (i = 0; i < inputcol.length; i++) {
-// 		var texto = inputcol[i].value;
-// 		inputcol[i].style.width = (texto.length + 1) * 7 + 'px';
-// 	}
-
-// }
-
 	window.onload = function() {
 		var cosas = $(":input");
 		var tam = cosas.length;
@@ -43,6 +34,25 @@
 			}
 		}	
 		$(".loader").fadeOut("slow");
+		
+		//Ingresamos un mensaje a mostrar
+		var mensaje = confirm("Si tienes más de 20 registros a declarar necesitas pasar a ayuda ICA ");
+		//Detectamos si el usuario acepto el mensaje
+		var currentUrl = window.location.href;  
+		if (mensaje) {
+			  
+			  
+			  var targetUrl = "/contribuyentes/registroretenciones";
+         	 currentUrl_tmp = currentUrl.replace("/contribuyentes/ica",targetUrl);
+              newurl = currentUrl.replace("/contribuyentes/ica#",targetUrl);
+         	 window.location.href =  currentUrl_tmp;
+		//alert("¡Gracias por aceptar!");
+		}
+		//Detectamos si el usuario denegó el mensaje
+		else {
+			//window.location.href =  currentUrl;
+		}
+		
 
 	}
 
@@ -127,8 +137,6 @@
 	        }
 
     	}
-	
-	
 	
 </script>
 

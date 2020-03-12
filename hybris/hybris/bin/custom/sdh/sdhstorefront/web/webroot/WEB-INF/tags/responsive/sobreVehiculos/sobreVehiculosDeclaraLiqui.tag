@@ -19,22 +19,7 @@
 		</div>
 	</div>
 	
-	<div class="row mt-3">
-			<div class="col-md-3">
-				<div class="form-check">
-					<label class="form-check-label"
-						style="text-transform: none !important; font-weight: normal !important"><spring:theme
-							code="Declaración en blanco" /> </label> <label
-						class="form-check-label"
-						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="checkbox" name="avaluocheck" id=""
-						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important;"
-						value="avaluo" onclick="habavaluo()"> 
-					</label> 
-				</div>
-			</div>
-			</div>
+
 			
 <c:set var="avaluoChecked" value=""></c:set>
 	<c:set var="noChecked" value="" />
@@ -49,6 +34,64 @@
 <%--  		</c:otherwise>  --%>
 <%--  	</c:choose>  --%>
 	<form:form action="">
+		<c:set var="flagDisabled_capacidadPas" value='disabled="disabled"'/>
+		<c:set var="flagDisabled_capacidadTon" value='disabled="disabled"'/>
+		<c:choose>
+			<c:when test="${vehiculosFormDeclaracion.tipoVeh == 6}">
+				<c:set var="flagDisabled_capacidadPas" value=''/>
+			</c:when>
+			<c:when test="${vehiculosFormDeclaracion.tipoVeh == 7}">
+				<c:set var="flagDisabled_capacidadTon" value=''/>
+			</c:when>
+		</c:choose>
+		<div class="row mt-3">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> 
+					<select id="linea" class="alto_select form-control" aria-required="true" onchange='actualizarCampo("cilindraje")'></select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.info.captone" /></label> <input
+						id="numresol" name="numresol" class="newalto form-control"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.capacidadTon}" maxlength="30"
+						${flagDisabled_capacidadTon}>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-3">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="sobre.vehiculo.declaracion.vehiculo.info.cilindra" /></label> 
+						<select id="cilindraje" class="alto_select form-control" aria-required="true" onchange='actualizarCampo("avaluo")'></select>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="sobre.vehiculo.declaracion.vehiculo.info.cappasa" /></label> <input
+							id="numresol" name="numresol" class="newalto form-control"
+							aria-required="true" type="text"
+							value="${vehiculosFormDeclaracion.capacidadPas}" maxlength="30"
+							${flagDisabled_capacidadPas}>
+					</div>
+				</div>
+		</div>
+		<div class="row mt-3">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="control-label"><spring:theme
+								code="sobre.vehiculo.declaracion.vehiculo.liq.avalact" /></label> <input
+							id="avaluoAct" name="" class="newalto form-control avaluoAct" aria-required="true"
+							type="text" value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" >
+					</div>
+				</div>
+		</div>
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-check">
@@ -110,16 +153,6 @@
 			</div>
 		</div>
 		
-		<div class="row mt-3">
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.liq.avalact" /></label> <input
-						id="avaluoAct" name="" class="newalto form-control avaluoAct" aria-required="true"
-						type="text" value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" disabled="disabled">
-				</div>
-			</div>
-		</div>
 		
 		<div class="row">
 			<div class="col-md-3">

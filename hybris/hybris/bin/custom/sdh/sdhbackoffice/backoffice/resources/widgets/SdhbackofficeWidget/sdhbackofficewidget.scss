@@ -1,4 +1,49 @@
 .yw-labelstyle
 {
-	color: red;
+	color: blue;
+}
+
+.yw-labelstyle1
+{
+	color: green;
+}
+
+table.sdhBackofficeWidget {
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.table-container {
+    height: 43em;
+}
+table.scroll {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+}
+table.scroll thead.scroll {
+    flex: 0 0 auto;
+    width: 100%;
+}
+table.scroll tbody.scroll {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: scroll;
+}
+table.scroll tbody.scroll tr.scroll {
+    width: 100%;
+}
+table.scroll thead.scroll, table.scroll tbody.scroll tr.scroll {
+    display: table;
+    table-layout: fixed;
+}
+th.header, td.header{
+  background-color: #1A2830;
+  color: white;
+}
+th.subHeader, td.subHeader{
+  background-color: #008DCA;
+  color: white;
 }

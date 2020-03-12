@@ -2,17 +2,17 @@ var ws;
 
 function connect() {
     var username = document.getElementById("username").value;
-    
     var host = document.location.host;
-    var pathname = document.location.pathname;
-    
-    ws = new WebSocket("wss://sdhdev.local:9002/sdhstorefront/chatEndPoint/" + username);
-
+    ws = new WebSocket("wss://"+host+"/sdhstorefront/chatEndPoint/" + username);
     ws.onmessage = function(event) {
-    var log = document.getElementById("log");
         console.log(event.data);
         var message = JSON.parse(event.data);
-        log.innerHTML += message.from + " : " + message.content + "\n";
+        document.getElementById("chatMessages").innerHTML +=
+        "<ul id=\"chatMessages\" class=\"chat\"> <li class=\"left clearfix\"><span class=\"chat-img pull-left\">"
+        + "<img src=\"http://placehold.it/50/55C1E7/fff&text=U\" alt=\"User Avatar\" class=\"img-circle\" />"
+        + "</span> <div class=\"chat-body clearfix\"><div class=\"header\"><strong class=\"primary-font\">"
+        + "Jack Sparrow</strong> <small class=\"pull-right text-muted\"><span class=\"glyphicon glyphicon-time\">"
+        + "</span>12 mins ago</small></div><p>"+message.content+"</p></div></li></ul>";
     };
 }
 
@@ -23,4 +23,22 @@ function send() {
     });
 
     ws.send(json);
+}
+
+function displayMessage (evt) {
+	var message;
+	message = "I got " + evt.data + " from " + evt.origin;
+	document.getElementById("chatMessages").innerHTML +=
+            "<ul id=\"chatMessages\" class=\"chat\"> <li class=\"left clearfix\"><span class=\"chat-img pull-left\">"
+            + "<img src=\"http://placehold.it/50/55C1E7/fff&text=U\" alt=\"User Avatar\" class=\"img-circle\" />"
+            + "</span> <div class=\"chat-body clearfix\"><div class=\"header\"><strong class=\"primary-font\">"
+            + "Jack Sparrow</strong> <small class=\"pull-right text-muted\"><span class=\"glyphicon glyphicon-time\">"
+            + "</span>12 mins ago</small></div><p>"+message+"</p></div></li></ul>";
+}
+
+if (window.addEventListener) {
+	window.addEventListener("message", displayMessage, false);
+}
+else {
+	window.attachEvent("onmessage", displayMessage);
 }

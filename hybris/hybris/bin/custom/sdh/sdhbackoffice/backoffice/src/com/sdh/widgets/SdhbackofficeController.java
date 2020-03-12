@@ -31,6 +31,6 @@ public class SdhbackofficeController extends DefaultWidgetController
 	public void initialize(final Component comp)
 	{
 		super.initialize(comp);
-		label.setValue(sdhbackofficeService.getHello() + " SdhbackofficeController");
+		//label.setValue(sdhbackofficeService.getHello() + " SdhbackofficeController");
 	}
 }

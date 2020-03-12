@@ -4,37 +4,38 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
+import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
-import de.hybris.sdh.core.pojos.requests.PredialPresentarDecRequest;
 import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
-import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
+import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
-import de.hybris.sdh.core.pojos.responses.PredialPresentarDecResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalculoPredialService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
-import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PredialForm;
-import de.hybris.sdh.storefront.forms.PredialPresentarDecForm;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -52,11 +53,11 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -73,6 +74,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "Predial";
 	private static final String TEXT_BASES_PROFILE = "Predial Bases Presuntivas";
+	private static final String TEXT_ACCOUNT_DECLARACION_PROFILE = "text.declaracion.predial";
 
 	// CMS Pages
 	private static final String PREDIAL_INICIAL_CMS_PAGE = "predialInicialPage";
@@ -99,9 +101,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			+ "/contribuyentes/predialunificado/basespresuntivas";
 
 
-
-	@Resource(name = "accountBreadcrumbBuilder")
-	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+	@Resource(name = "customBreadcrumbBuilder")
+	ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
@@ -129,6 +130,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@Resource(name = "sdhCalculoPredialService")
 	private SDHCalculoPredialService sdhCalculoPredialService;
+
+	@Resource(name = "sdhGeneraDeclaracionService")
+	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
 
 	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
 
@@ -226,6 +230,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialForm.setEstrLiquidacionPredial(detallePredialResponse.getEstrLiquidacionPredial());
 			predialForm.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
 			predialForm.setTblErrores(detallePredialResponse.getTblErrores());
+			predialForm.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
 
 			model.addAttribute("predialForm", predialForm);
 
@@ -266,57 +271,57 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		String tipreg = "";
 
-		tipreg = predialInfoIniURL.getRetipRegistro();
+		tipreg = predialInfoIniURL.getRetipDeclaracion();
 
-		if (tipreg.equals("1"))
+		if (tipreg.equals("1") || tipreg.equals("1 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_1";
 		}
-		else if (tipreg.equals("2"))
+		else if (tipreg.equals("2") || tipreg.equals("2 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_2";
 		}
-		else if (tipreg.equals("3"))
+		else if (tipreg.equals("3") || tipreg.equals("3 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_3";
 		}
-		else if (tipreg.equals("4"))
+		else if (tipreg.equals("4") || tipreg.equals("4 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_4";
 		}
-		else if (tipreg.equals("5"))
+		else if (tipreg.equals("5") || tipreg.equals("5 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_5";
 		}
-		else if (tipreg.equals("6"))
+		else if (tipreg.equals("6") || tipreg.equals("6 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_6";
 		}
-		else if (tipreg.equals("7"))
+		else if (tipreg.equals("7") || tipreg.equals("7 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_7";
 		}
-		else if (tipreg.equals("8"))
+		else if (tipreg.equals("8") || tipreg.equals("8 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_8";
 		}
-		else if (tipreg.equals("9"))
+		else if (tipreg.equals("9") || tipreg.equals("9 "))
 		{
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
@@ -324,28 +329,20 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 		else
 		{
-			final String Error = "Su predio no cuenta con Tipo de registro, por lo que no se puede detrminar la declaración a realizar";
+			final String Error = "Su predio no cuenta con Tipo de declaración, por lo que no se puede detrminar la declaración a realizar";
 			redirectAttributes.addFlashAttribute("Error", Error);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_inicio";
 		}
-
-
-
-
-		//model.addAttribute("predialFormurl", predialFormurl);
-
-		//		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
-		//		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
-		//		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-		//		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		//
-		//		return "redirect:/contribuyentes/predialunificado_1";
 	}
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialuno(final Model model, final RedirectAttributes redirectAttributes, final HttpServletRequest request)
+	public String predialuno(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes, final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado uno --------------------------");
@@ -357,10 +354,25 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		super.addFirmantes_impuesto(model, null, customerData);
 
 		final PredialForm predialFormuno = new PredialForm();
-		final PredialForm predialInfoIniUno = (PredialForm) model.asMap().get("predialFormurl");
+		PredialForm predialInfoIniUno = new PredialForm();
+
 		try
 		{
-
+			if (anioGravable != null)
+			{
+				predialInfoIniUno.setAnioGravable(anioGravable);
+				predialInfoIniUno.setNumBP(numBP);
+				predialInfoIniUno.setCHIP(chip);
+				predialInfoIniUno.setMatrInmobiliaria(matricula);
+				predialInfoIniUno.setTipDoc(customerData.getDocumentType());
+				predialInfoIniUno.setNumDoc(customerData.getDocumentNumber());
+				predialInfoIniUno.setCompleName(customerData.getCompleteName());
+				predialInfoIniUno.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoIniUno = (PredialForm) model.asMap().get("predialFormurl");
+			}
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
 			detallePredialRequest.setNumBP(predialInfoIniUno.getNumBP());
@@ -394,30 +406,34 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormuno.setNumBP(detallePredialRequest.getNumBP());
 			predialFormuno.setCHIP(detallePredialRequest.getCHIP());
 			predialFormuno.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+			predialFormuno.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idDestino = predialFormuno.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormuno.setDesDestino(destinoHacendario(idDestino));
 
-			if (predialFormuno.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idCalidad = predialFormuno.getDatosJuridicos().getCalidadSujecion();
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormuno.setDesCalidad("Propietario");
 			}
-			else if (predialFormuno.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormuno.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormuno.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormuno.setDesCalidad("Poseedor");
 			}
-			else if (predialFormuno.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormuno.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormuno.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormuno.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormuno.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormuno.setDesCalidad("Arrendatario");
 			}
@@ -431,12 +447,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormuno.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormuno.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -461,7 +478,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
+
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -469,7 +487,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_2", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialdos(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialdos(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado DOS --------------------------");
 
@@ -480,11 +502,28 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		super.addFirmantes_impuesto(model, null, customerData);
 
 		final PredialForm predialFormdos = new PredialForm();
+		PredialForm predialInfoInidos = new PredialForm();
 
-		final PredialForm predialInfoInidos = (PredialForm) model.asMap().get("predialFormurl");
+		//final PredialForm predialInfoInidos = (PredialForm) model.asMap().get("predialFormurl");
 
 		try
 		{
+
+			if (anioGravable != null)
+			{
+				predialInfoInidos.setAnioGravable(anioGravable);
+				predialInfoInidos.setNumBP(numBP);
+				predialInfoInidos.setCHIP(chip);
+				predialInfoInidos.setMatrInmobiliaria(matricula);
+				predialInfoInidos.setTipDoc(customerData.getDocumentType());
+				predialInfoInidos.setNumDoc(customerData.getDocumentNumber());
+				predialInfoInidos.setCompleName(customerData.getCompleteName());
+				predialInfoInidos.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoInidos = (PredialForm) model.asMap().get("predialFormurl");
+			}
 
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 			detallePredialRequest.setNumBP(predialInfoInidos.getNumBP());
@@ -517,29 +556,35 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormdos.setNumBP(detallePredialRequest.getNumBP());
 			predialFormdos.setCHIP(detallePredialRequest.getCHIP());
 			predialFormdos.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
-			final String idCalidad = "";
+			predialFormdos.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			if (predialFormdos.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idDestino = predialFormdos.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormdos.setDesDestino(destinoHacendario(idDestino));
+
+			String idCalidad = predialFormdos.getDatosJuridicos().getCalidadSujecion();
+
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormdos.setDesCalidad("Propietario");
 			}
-			else if (predialFormdos.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormdos.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormdos.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormdos.setDesCalidad("Poseedor");
 			}
-			else if (predialFormdos.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormdos.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormdos.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormdos.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormdos.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormdos.setDesCalidad("Arrendatario");
 			}
@@ -552,12 +597,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormdos.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormdos.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -591,7 +637,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_3", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialtres(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialtres(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado TRES --------------------------");
 
@@ -603,9 +653,25 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		final PredialForm predialFormtres = new PredialForm();
 
-		final PredialForm predialInfoInitres = (PredialForm) model.asMap().get("predialFormurl");
+		PredialForm predialInfoInitres = new PredialForm();
 		try
 		{
+
+			if (anioGravable != null)
+			{
+				predialInfoInitres.setAnioGravable(anioGravable);
+				predialInfoInitres.setNumBP(numBP);
+				predialInfoInitres.setCHIP(chip);
+				predialInfoInitres.setMatrInmobiliaria(matricula);
+				predialInfoInitres.setTipDoc(customerData.getDocumentType());
+				predialInfoInitres.setNumDoc(customerData.getDocumentNumber());
+				predialInfoInitres.setCompleName(customerData.getCompleteName());
+				predialInfoInitres.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoInitres = (PredialForm) model.asMap().get("predialFormurl");
+			}
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
 			detallePredialRequest.setNumBP(predialInfoInitres.getNumBP());
@@ -636,30 +702,37 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormtres.setNumBP(detallePredialRequest.getNumBP());
 			predialFormtres.setCHIP(detallePredialRequest.getCHIP());
 			predialFormtres.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+			predialFormtres.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormtres.setNumDoc(predialInfoInitres.getNumDoc());
+			predialFormtres.setCompleName(predialInfoInitres.getCompleName());
+			predialFormtres.setTipDoc(predialInfoInitres.getTipDoc());
 
-			final String idCalidad = "";
+			String idDestino = predialFormtres.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormtres.setDesDestino(destinoHacendario(idDestino));
 
-			if (predialFormtres.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idCalidad = predialFormtres.getDatosJuridicos().getCalidadSujecion();
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormtres.setDesCalidad("Propietario");
 			}
-			else if (predialFormtres.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormtres.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormtres.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormtres.setDesCalidad("Poseedor");
 			}
-			else if (predialFormtres.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormtres.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormtres.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormtres.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormtres.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormtres.setDesCalidad("Arrendatario");
 			}
@@ -672,12 +745,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormtres.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormtres.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -697,7 +771,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_TRES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_TRES_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -705,7 +779,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_4", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialcuatro(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialcuatro(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CUATRO --------------------------");
 
@@ -716,10 +794,26 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		super.addFirmantes_impuesto(model, null, customerData);
 
 		final PredialForm predialFormcua = new PredialForm();
-		final PredialForm predialInfoInicuatro = (PredialForm) model.asMap().get("predialFormurl");
-
+		//	final PredialForm predialInfoInicuatro = (PredialForm) model.asMap().get("predialFormurl");
+		PredialForm predialInfoInicuatro = new PredialForm();
 		try
 		{
+
+			if (anioGravable != null)
+			{
+				predialInfoInicuatro.setAnioGravable(anioGravable);
+				predialInfoInicuatro.setNumBP(numBP);
+				predialInfoInicuatro.setCHIP(chip);
+				predialInfoInicuatro.setMatrInmobiliaria(matricula);
+				predialInfoInicuatro.setTipDoc(customerData.getDocumentType());
+				predialInfoInicuatro.setNumDoc(customerData.getDocumentNumber());
+				predialInfoInicuatro.setCompleName(customerData.getCompleteName());
+				predialInfoInicuatro.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoInicuatro = (PredialForm) model.asMap().get("predialFormurl");
+			}
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
 			detallePredialRequest.setNumBP(predialInfoInicuatro.getNumBP());
@@ -750,30 +844,34 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcua.setNumBP(detallePredialRequest.getNumBP());
 			predialFormcua.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcua.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+			predialFormcua.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idDestino = predialFormcua.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormcua.setDesDestino(destinoHacendario(idDestino));
 
-			if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idCalidad = predialFormcua.getDatosJuridicos().getCalidadSujecion();
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormcua.setDesCalidad("Propietario");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormcua.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormcua.setDesCalidad("Poseedor");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormcua.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormcua.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormcua.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormcua.setDesCalidad("Arrendatario");
 			}
@@ -786,12 +884,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormcua.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormcua.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -819,7 +918,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_5", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialcinco(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialcinco(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CINCO --------------------------");
 
@@ -831,9 +934,26 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		final PredialForm predialFormcinco = new PredialForm();
 
-		final PredialForm predialInfoInicinco = (PredialForm) model.asMap().get("predialFormurl");
+		//		final PredialForm predialInfoInicinco = (PredialForm) model.asMap().get("predialFormurl");
+		PredialForm predialInfoInicinco = new PredialForm();
 		try
 		{
+
+			if (anioGravable != null)
+			{
+				predialInfoInicinco.setAnioGravable(anioGravable);
+				predialInfoInicinco.setNumBP(numBP);
+				predialInfoInicinco.setCHIP(chip);
+				predialInfoInicinco.setMatrInmobiliaria(matricula);
+				predialInfoInicinco.setTipDoc(customerData.getDocumentType());
+				predialInfoInicinco.setNumDoc(customerData.getDocumentNumber());
+				predialInfoInicinco.setCompleName(customerData.getCompleteName());
+				predialInfoInicinco.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoInicinco = (PredialForm) model.asMap().get("predialFormurl");
+			}
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
 			detallePredialRequest.setNumBP(predialInfoInicinco.getNumBP());
@@ -864,30 +984,34 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcinco.setNumBP(detallePredialRequest.getNumBP());
 			predialFormcinco.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcinco.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+			predialFormcinco.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idDestino = predialFormcinco.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormcinco.setDesDestino(destinoHacendario(idDestino));
 
-			if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idCalidad = predialFormcinco.getDatosJuridicos().getCalidadSujecion();
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormcinco.setDesCalidad("Propietario");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormcinco.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormcinco.setDesCalidad("Poseedor");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormcinco.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormcinco.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormcinco.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormcinco.setDesCalidad("Arrendatario");
 			}
@@ -900,12 +1024,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormcinco.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormcinco.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -926,7 +1051,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_CINCO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_CINCO_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -934,7 +1059,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_6", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialseis(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialseis(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado SEIS --------------------------");
 
@@ -946,9 +1075,26 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		final PredialForm predialFormseis = new PredialForm();
 
-		final PredialForm predialInfoIniseis = (PredialForm) model.asMap().get("predialFormurl");
+		//final PredialForm predialInfoIniseis = (PredialForm) model.asMap().get("predialFormurl");
+		PredialForm predialInfoIniseis = new PredialForm();
 		try
 		{
+
+			if (anioGravable != null)
+			{
+				predialInfoIniseis.setAnioGravable(anioGravable);
+				predialInfoIniseis.setNumBP(numBP);
+				predialInfoIniseis.setCHIP(chip);
+				predialInfoIniseis.setMatrInmobiliaria(matricula);
+				predialInfoIniseis.setTipDoc(customerData.getDocumentType());
+				predialInfoIniseis.setNumDoc(customerData.getDocumentNumber());
+				predialInfoIniseis.setCompleName(customerData.getCompleteName());
+				predialInfoIniseis.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoIniseis = (PredialForm) model.asMap().get("predialFormurl");
+			}
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
 			detallePredialRequest.setNumBP(predialInfoIniseis.getNumBP());
@@ -979,30 +1125,34 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormseis.setNumBP(detallePredialRequest.getNumBP());
 			predialFormseis.setCHIP(detallePredialRequest.getCHIP());
 			predialFormseis.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+			predialFormseis.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idDestino = predialFormseis.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormseis.setDesDestino(destinoHacendario(idDestino));
 
-			if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idCalidad = predialFormseis.getDatosJuridicos().getCalidadSujecion();
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormseis.setDesCalidad("Propietario");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormseis.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormseis.setDesCalidad("Poseedor");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormseis.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormseis.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormseis.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormseis.setDesCalidad("Arrendatario");
 			}
@@ -1015,15 +1165,17 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+
+					String exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormseis.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormseis.setDecExencion(eachMarca.getPorcMarca());
 					}
+
 
 				}
 			}
@@ -1040,7 +1192,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_SEIS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_SEIS_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -1048,7 +1200,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_7", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialsiete(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialsiete(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado Siete --------------------------");
 
@@ -1060,9 +1216,26 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		final PredialForm predialFormsiete = new PredialForm();
 
-		final PredialForm predialInfoInisiete = (PredialForm) model.asMap().get("predialFormurl");
+		//final PredialForm predialInfoInisiete = (PredialForm) model.asMap().get("predialFormurl");
+		PredialForm predialInfoInisiete = new PredialForm();
 		try
 		{
+
+			if (anioGravable != null)
+			{
+				predialInfoInisiete.setAnioGravable(anioGravable);
+				predialInfoInisiete.setNumBP(numBP);
+				predialInfoInisiete.setCHIP(chip);
+				predialInfoInisiete.setMatrInmobiliaria(matricula);
+				predialInfoInisiete.setTipDoc(customerData.getDocumentType());
+				predialInfoInisiete.setNumDoc(customerData.getDocumentNumber());
+				predialInfoInisiete.setCompleName(customerData.getCompleteName());
+				predialInfoInisiete.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoInisiete = (PredialForm) model.asMap().get("predialFormurl");
+			}
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
 			detallePredialRequest.setNumBP(predialFormsiete.getNumBP());
@@ -1094,29 +1267,34 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormsiete.setNumBP(detallePredialRequest.getNumBP());
 			predialFormsiete.setCHIP(detallePredialRequest.getCHIP());
 			predialFormsiete.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
-			final String idCalidad = "";
+			predialFormsiete.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idDestino = predialFormsiete.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormsiete.setDesDestino(destinoHacendario(idDestino));
+
+			String idCalidad = predialFormsiete.getDatosJuridicos().getCalidadSujecion();
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormsiete.setDesCalidad("Propietario");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormsiete.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormsiete.setDesCalidad("Poseedor");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormsiete.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormsiete.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormsiete.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormsiete.setDesCalidad("Arrendatario");
 			}
@@ -1129,12 +1307,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormsiete.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormsiete.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -1153,7 +1332,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_SIETE_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_SIETE_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -1161,7 +1340,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_8", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialocho(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialocho(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado OCHO --------------------------");
 
@@ -1173,9 +1356,26 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		final PredialForm predialFormocho = new PredialForm();
 
-		final PredialForm predialInfoIniocho = (PredialForm) model.asMap().get("predialFormurl");
+		//		final PredialForm predialInfoIniocho = (PredialForm) model.asMap().get("predialFormurl");
+		PredialForm predialInfoIniocho = new PredialForm();
 		try
 		{
+
+			if (anioGravable != null)
+			{
+				predialInfoIniocho.setAnioGravable(anioGravable);
+				predialInfoIniocho.setNumBP(numBP);
+				predialInfoIniocho.setCHIP(chip);
+				predialInfoIniocho.setMatrInmobiliaria(matricula);
+				predialInfoIniocho.setTipDoc(customerData.getDocumentType());
+				predialInfoIniocho.setNumDoc(customerData.getDocumentNumber());
+				predialInfoIniocho.setCompleName(customerData.getCompleteName());
+				predialInfoIniocho.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoIniocho = (PredialForm) model.asMap().get("predialFormurl");
+			}
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
 			detallePredialRequest.setNumBP(predialInfoIniocho.getNumBP());
@@ -1206,30 +1406,34 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormocho.setNumBP(detallePredialRequest.getNumBP());
 			predialFormocho.setCHIP(detallePredialRequest.getCHIP());
 			predialFormocho.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+			predialFormocho.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idDestino = predialFormocho.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormocho.setDesDestino(destinoHacendario(idDestino));
 
-			if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idCalidad = predialFormocho.getDatosJuridicos().getCalidadSujecion();
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormocho.setDesCalidad("Propietario");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormocho.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormocho.setDesCalidad("Poseedor");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormocho.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormocho.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormocho.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormocho.setDesCalidad("Arrendatario");
 			}
@@ -1242,16 +1446,16 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormocho.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormocho.setDecExencion(eachMarca.getPorcMarca());
 					}
-
 				}
 			}
 		}
@@ -1268,7 +1472,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_OCHO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_OCHO_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -1276,14 +1480,37 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado/basespresuntivas", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialbases(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialbases(final Model model, @RequestParam(required = false, value = "anioGravable")
+	final String anioGravable, @RequestParam(required = false, value = "chip")
+	final String chip, @RequestParam(required = false, value = "matricula")
+	final String matricula, @RequestParam(required = false, value = "numBP")
+	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado BASES PRESUNTIVAS --------------------------");
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
 		final PredialForm predialFormbases = new PredialForm();
 
-		final PredialForm predialInfoInibases = (PredialForm) model.asMap().get("predialFormurl");
+		//		final PredialForm predialInfoInibases = (PredialForm) model.asMap().get("predialFormurl");
+		PredialForm predialInfoInibases = new PredialForm();
 		try
 		{
+
+			if (anioGravable != null)
+			{
+				predialInfoInibases.setAnioGravable(anioGravable);
+				predialInfoInibases.setNumBP(numBP);
+				predialInfoInibases.setCHIP(chip);
+				predialInfoInibases.setMatrInmobiliaria(matricula);
+				predialInfoInibases.setTipDoc(customerData.getDocumentType());
+				predialInfoInibases.setNumDoc(customerData.getDocumentNumber());
+				predialInfoInibases.setCompleName(customerData.getCompleteName());
+				predialInfoInibases.setNumBP(customerData.getNumBP());
+			}
+			else
+			{
+				predialInfoInibases = (PredialForm) model.asMap().get("predialFormurl");
+			}
 			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
 			detallePredialRequest.setNumBP(predialInfoInibases.getNumBP());
@@ -1314,30 +1541,34 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormbases.setNumBP(detallePredialRequest.getNumBP());
 			predialFormbases.setCHIP(detallePredialRequest.getCHIP());
 			predialFormbases.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+			predialFormbases.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			final String idCalidad = "";
+			String idDestino = predialFormbases.getEstrLiquidacionPredial().getDestinoHacendario();
+			predialFormbases.setDesDestino(destinoHacendario(idDestino));
 
-			if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "1")
+			String idCalidad = predialFormbases.getDatosJuridicos().getCalidadSujecion();
+
+			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
 				predialFormbases.setDesCalidad("Propietario");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "2")
+			else if (idCalidad == "2" || idCalidad.equals("2"))
 			{
 				predialFormbases.setDesCalidad("Fideicometente");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "3")
+			else if (idCalidad == "3" || idCalidad.equals("3"))
 			{
 				predialFormbases.setDesCalidad("Poseedor");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "4")
+			else if (idCalidad == "4" || idCalidad.equals("4"))
 			{
 				predialFormbases.setDesCalidad("Beneficiario");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "5")
+			else if (idCalidad == "5" || idCalidad.equals("5"))
 			{
 				predialFormbases.setDesCalidad("Usufructuario");
 			}
-			else if (predialFormbases.getDatosJuridicos().getCalidadSujecion() == "6")
+			else if (idCalidad == "6" || idCalidad.equals("6"))
 			{
 				predialFormbases.setDesCalidad("Arrendatario");
 			}
@@ -1350,12 +1581,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormbases.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormbases.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -1376,81 +1608,45 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_BASES_PRESUNTIVAS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_BASES_PRESUNTIVAS_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_BASES_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
 	}
 
 
-	//	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.POST)
-	//	@RequireHardLogIn
-	//	public String predialunopost(final BindingResult bindingResult, final Model model,
-	//			final RedirectAttributes redirectAttributes)
-	//			throws CMSItemNotFoundException
-	//	{
-	//		System.out.println("------------------entro al post de predial unificado uno------------------------");
-	//
-	//		return REDIRECT_TO_PREDIAL_UNO_PAGE;
-	//	}
-
-	@RequestMapping(value = "/contribuyentes/predialunificado_2", method = RequestMethod.POST)
-	@RequireHardLogIn
-	public String predialdospost(final BindingResult bindingResult, final Model model, final RedirectAttributes redirectAttributes)
-			throws CMSItemNotFoundException
-	{
-		System.out.println("------------------entro al post de predial unificado uno------------------------");
-
-		return REDIRECT_TO_PREDIAL_DOS_PAGE;
-	}
-
-	@RequestMapping(value = "/contribuyentes/predialunificado_3", method = RequestMethod.POST)
-	@RequireHardLogIn
-	public String predialtrespost(final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
-	{
-		System.out.println("------------------entro al post de predial unificado uno------------------------");
-
-		return REDIRECT_TO_PREDIAL_TRES_PAGE;
-	}
-
-	@RequestMapping(value = "/contribuyentes/predialunificado_4", method = RequestMethod.POST)
-	@RequireHardLogIn
-	public String predialcuatropost(final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
-	{
-		System.out.println("------------------entro al post de predial unificado uno------------------------");
-
-		return REDIRECT_TO_PREDIAL_CUATRO_PAGE;
-	}
-
 	@RequestMapping(value = "/contribuyentes/predialunificado_inicio/presentarDec", method = RequestMethod.GET)
 	@ResponseBody
-	public PredialPresentarDecResponse presentarDec(final PredialPresentarDecForm dataForm, final HttpServletResponse response,
+	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
 			final HttpServletRequest request) throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- En Predial Presentar Declaracion --------------------------");
+		GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
-		final PredialPresentarDecRequest presentaDecRequest = new PredialPresentarDecRequest();
-		PredialPresentarDecResponse presentaDecResponse = null;
-		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		String numForm = request.getParameter("numForm");
+
+		if (StringUtils.isBlank(numForm))
+		{
+			numForm = dataForm.getNumForm();
+		}
+
+		final GeneraDeclaracionRequest generaDeclaracionRequest = new GeneraDeclaracionRequest();
 
 
-		presentaDecRequest.setBp(customerModel.getNumBP());
-		presentaDecRequest.setChip(dataForm.getChip());
-		presentaDecRequest.setAnioGravable(dataForm.getAnioGravable());
+		generaDeclaracionRequest.setNumForm(numForm);
+		generaDeclaracionRequest.setTipo_id(customerModel.getDocumentType());
+		generaDeclaracionRequest.setNum_id(customerModel.getNumBP());
 
 		try
 		{
-			System.out.println("Request de calculoimpuesto/TEST: " + presentaDecRequest);
-			presentaDecResponse = gasolinaService.predialPresentarDec(presentaDecRequest, sdhDetalleGasolinaWS, LOG);
-			System.out.println("Response de calculoimpuesto/TEST: " + presentaDecResponse);
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+			generaDeclaracionResponse = mapper.readValue(sdhGeneraDeclaracionService.generaDeclaracion(generaDeclaracionRequest),
+					GeneraDeclaracionResponse.class);
 
-
-			if (presentaDecResponse != null && presentaDecResponse.getStringPDF() != null)
+			if (generaDeclaracionResponse != null && generaDeclaracionResponse.getStringPDF() != null)
 			{
-				final String encodedBytes = presentaDecResponse.getStringPDF();
+				final String encodedBytes = generaDeclaracionResponse.getStringPDF();
 
 				final BASE64Decoder decoder = new BASE64Decoder();
 				byte[] decodedBytes;
@@ -1459,7 +1655,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 
-				final String fileName = "Predial-" + customerModel.getNumBP() + ".pdf";
+				final String fileName = numForm + "-" + customerModel.getNumBP() + ".pdf";
 
 				final InputStream is = new ByteArrayInputStream(decodedBytes);
 
@@ -1471,7 +1667,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				mediaService.setStreamForMedia(mediaModel, is, fileName, "application/pdf");
 				modelService.refresh(mediaModel);
 
-				presentaDecResponse.setUrlDownload(mediaModel.getDownloadURL());
+				generaDeclaracionResponse.setUrlDownload(mediaModel.getDownloadURL());
 
 
 			}
@@ -1481,20 +1677,19 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		{
 			LOG.error("error generating declaration : " + e.getMessage());
 
-			final ErrorEnWS error = new ErrorEnWS();
+			final ErrorPubli error = new ErrorPubli();
 
-			error.setId("0");
-			error.setMensaje("Hubo un error al generar la declaración, por favor intentalo más tarde");
+			error.setIdmsj("0");
+			error.setTxtmsj("Hubo un error al generar la declaración, por favor intentalo más tarde");
 
-			final List<ErrorEnWS> errores = new ArrayList<ErrorEnWS>();
+			final List<ErrorPubli> errores = new ArrayList<ErrorPubli>();
 
 			errores.add(error);
 
-			presentaDecResponse.setErrores(errores);
+			generaDeclaracionResponse.setErrores(errores);
 
 		}
-		return presentaDecResponse;
-
+		return generaDeclaracionResponse;
 
 	}
 
@@ -1551,6 +1746,232 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 
 		return prediaFormcal;
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado/URL/declara", method = RequestMethod.GET)
+	@RequireHardLogIn
+	@ResponseBody
+	public PredialForm predialurldeclara(@ModelAttribute("predialInfoIniURL")
+	final PredialForm predialInfoIniURL, final Model model, final RedirectAttributes redirectAttributes)
+			throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial declaraciones --------------------------");
+
+		final DetallePredialRequest detallePredialRequestcalc = new DetallePredialRequest();
+
+		final PredialForm prediaFormcaldec = new PredialForm();
+		detallePredialRequestcalc.setNumBP(customerFacade.getCurrentCustomer().getNumBP());
+		detallePredialRequestcalc.setAnioGravable(predialInfoIniURL.getAnioGravable());
+		detallePredialRequestcalc.setCHIP(predialInfoIniURL.getCHIP());
+		detallePredialRequestcalc.setMatrInmobiliaria(predialInfoIniURL.getMatrInmobiliaria());
+
+
+		//		detallePredialRequestcalc.setNumBP("1000010203");
+		//		detallePredialRequestcalc.setAnioGravable("2019");
+		//		detallePredialRequestcalc.setCHIP("AAA0080KECZ");
+		//		detallePredialRequestcalc.setMatrInmobiliaria("050N1178178");
+
+
+		try
+		{
+
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final DetallePredialResponse detallePredialResponse = mapper
+					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequestcalc), DetallePredialResponse.class);
+
+			prediaFormcaldec.setRetipRegistro(detallePredialResponse.getEstrLiquidacionPrivada().getTipoRegistro());
+			prediaFormcaldec.setRetipDeclaracion(detallePredialResponse.getEstrDatosGenerales().getTipoDeclaracion());
+
+			final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+			prediaFormcaldec.setTipDoc(customerData.getDocumentType());
+			prediaFormcaldec.setNumDoc(customerData.getDocumentNumber());
+			prediaFormcaldec.setCompleName(customerData.getCompleteName());
+			prediaFormcaldec.setNumBP(customerData.getNumBP());
+			prediaFormcaldec.setCHIP(predialInfoIniURL.getCHIP());
+			prediaFormcaldec.setMatrInmobiliaria(predialInfoIniURL.getMatrInmobiliaria());
+			prediaFormcaldec.setAnioGravable(predialInfoIniURL.getAnioGravable());
+
+			String tipreg = "";
+
+			tipreg = prediaFormcaldec.getRetipDeclaracion();
+			final String numbp = prediaFormcaldec.getNumBP();
+			final String chip = prediaFormcaldec.getCHIP();
+			final String matricula = prediaFormcaldec.getMatrInmobiliaria();
+			final String anio = prediaFormcaldec.getAnioGravable();
+
+			String url = "";
+
+			if (tipreg.equals("1") || tipreg.equals("1 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "1";
+				prediaFormcaldec.setUrl(url);
+				return prediaFormcaldec;
+			}
+			else if (tipreg.equals("2") || tipreg.equals("2 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "2";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+			else if (tipreg.equals("3") || tipreg.equals("3 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "3";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+			else if (tipreg.equals("4") || tipreg.equals("4 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "4";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+			else if (tipreg.equals("5") || tipreg.equals("5 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "5";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+			else if (tipreg.equals("6") || tipreg.equals("6 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "6";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+			else if (tipreg.equals("7") || tipreg.equals("7 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "7";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+			else if (tipreg.equals("8") || tipreg.equals("8 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "8";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+			else if (tipreg.equals("9") || tipreg.equals("9 "))
+			{
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "9";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+			else
+			{
+				final String Error = "Su predio no cuenta con Tipo de registro, por lo que no se puede detrminar la declaración a realizar";
+				redirectAttributes.addFlashAttribute("Error", Error);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
+				model.addAttribute("predialFormurl", prediaFormcaldec);
+				url = "10";
+
+				prediaFormcaldec.setUrl(url);
+
+				return prediaFormcaldec;
+			}
+		}
+		catch (final IOException e)
+		{
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+
+		}
+
+		return prediaFormcaldec;
+	}
+
+	private String destinoHacendario(final String idDestino)
+	{
+		String idDestinos = idDestino;
+		if (idDestino.equals("00"))
+		{
+			return idDestinos = "-";
+		}
+		else if (idDestino.equals("61"))
+		{
+			return idDestinos = "RESIDENCIALES URBANOS Y RURALES";
+		}
+		else if (idDestino.equals("62"))
+		{
+			return idDestinos = "COMERCIALES URBANOS Y RURALES";
+		}
+		else if (idDestino.equals("63"))
+		{
+			return idDestinos = "FINANCIERO";
+		}
+		else if (idDestino.equals("64"))
+		{
+			return idDestinos = "INDUSTRIALES URBANOS Y RURALES";
+		}
+		else if (idDestino.equals("65"))
+		{
+			return idDestinos = "DEPOSITOS Y PARQUEADEROS";
+		}
+		else if (idDestino.equals("66"))
+		{
+			return idDestinos = "DOTACIONALES";
+		}
+		else if (idDestino.equals("67"))
+		{
+			return idDestinos = "LOTE/URBANIZABLES NO URBANIZADOS/URBANIZADOS NO EDIFICADOS";
+		}
+		else if (idDestino.equals("69"))
+		{
+			return idDestinos = "PEQUEÑA PROPIEDAD RURAL PARA PRODUCCIÓN AGORPECUARIA";
+		}
+		else if (idDestino.equals("70"))
+		{
+			return idDestinos = "NO URBANIZABLES";
+		}
+		else if (idDestino.equals("71"))
+		{
+			return idDestinos = "RURALES";
+		}
+		else if (idDestino.equals("72"))
+		{
+			return idDestinos = "SISTEMA DE AREAS PROTEGIDAS";
+		}
+		else
+		{
+			return idDestinos = "-";
+		}
 	}
 
 }

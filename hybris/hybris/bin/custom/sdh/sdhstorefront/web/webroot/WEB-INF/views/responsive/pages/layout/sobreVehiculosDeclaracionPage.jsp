@@ -112,8 +112,32 @@
 			  }
 		    }
 		 }
+		 
+		 var cat_valores_actuales = [
+			 "${vehiculosFormDeclaracion.clase}", //0 - clase
+			 "${vehiculosFormDeclaracion.cilindraje}", //1 - cilindraje
+			 "${vehiculosFormDeclaracion.marca}", //2 - marca
+			 "${vehiculosFormDeclaracion.linea}", //3 - linea
+			 "${vehiculosFormDeclaracion.modelo}", //4 - modelo
+			 "${vehiculosFormDeclaracion.modelo}", //5 - carroceria
+			 "${vehiculosFormDeclaracion.avaluo}" //6 - avaluo
+			 ];
+		ACC.vehiculos.obtenerCatalogosInicialVehiculos(cat_valores_actuales);
 	}
 	
+	function actualizarCampo(campo_catalogo){
+		if(campo_catalogo == "cilindraje"){
+			$("#cilindraje").val("");
+			$("#avaluoAct").val("");
+			var dataActual = ACC.vehiculos.determinarInfoParaCatalogo("cilindraje");
+			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",null);
+		}else if(campo_catalogo == "avaluo"){
+			$("#avaluoAct").val("");
+			var dataActual = ACC.vehiculos.determinarInfoParaCatalogo("avaluo");
+			ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"avaluo",null);
+		}
+	}
+		
 	function pagarlinea() {
 
 		var btnpaglinea = document.getElementById('action');
