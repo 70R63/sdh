@@ -91,6 +91,8 @@ public class PredialForm
 	private String autoavaluo;
 	private String direccionPredio;
 
+	private PredialControlCamposDec controlCampos;
+
 	/**
 	 * @return the caso
 	 */
@@ -973,6 +975,23 @@ public class PredialForm
 	public void setRetipDeclaracion(final String retipDeclaracion)
 	{
 		this.retipDeclaracion = retipDeclaracion;
+	}
+
+	/**
+	 * @return the controlCampos
+	 */
+	public PredialControlCamposDec getControlCampos()
+	{
+		return controlCampos;
+	}
+
+	/**
+	 * @param controlCampos
+	 *           the controlCampos to set
+	 */
+	public void setControlCampos(final PredialControlCamposDec controlCampos)
+	{
+		this.controlCampos = controlCampos;
 	}
 
 
