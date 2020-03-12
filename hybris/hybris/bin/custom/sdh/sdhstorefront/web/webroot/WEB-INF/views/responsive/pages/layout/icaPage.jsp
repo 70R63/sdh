@@ -21,15 +21,6 @@
 <div id="dialogICA" title="ICA" ><div id="icaDialogContent"></div></div>
 
 <script type="text/javascript">
-// window.onload = function() {
-// 	var inputcol = document.getElementsByTagName("input");
-// 	for (i = 0; i < inputcol.length; i++) {
-// 		var texto = inputcol[i].value;
-// 		inputcol[i].style.width = (texto.length + 1) * 7 + 'px';
-// 	}
-
-// }
-
 	window.onload = function() {
 		var cosas = $(":input");
 		var tam = cosas.length;
