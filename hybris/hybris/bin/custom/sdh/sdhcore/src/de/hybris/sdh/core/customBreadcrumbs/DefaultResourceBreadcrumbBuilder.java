@@ -332,6 +332,27 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		}
 		//*->FIN vehiculos--------------------------------------------------------------------------
 
+		//*->INI Predial--------------------------------------------------------------------------
+		if (resourceKey.equals("Predial"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("Predial", subTreeMap);
+		}
+
+
+		if (resourceKey.equals("text.declaracion.predial"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			subTreeMap.put(3, new CustomBreadcrumb("Predial", "/contribuyentes/predialunificado_inicio"));
+			treeMap.put("text.declaracion.predial", subTreeMap);
+		}
+		//*->FIN Predial--------------------------------------------------------------------------
+
+
 		//*->INI Descarga Factura--------------------------------------------------------------------------
 		if (resourceKey.equals("text.account.profile.descargaFac"))
 		{
@@ -454,6 +475,15 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 		}
 		//*->FIN CONSULTAS DECLARACIONES------------------------------------
 
+		//*->INI CONTRIBUYENTES RETEICA------------------------------------
+		if (resourceKey.equals("text.account.profile.registroretenciones"))
+		{
+			subTreeMap.clear();
+			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
+			subTreeMap.put(2, new CustomBreadcrumb("Contribuyentes", "/contribuyentes"));
+			treeMap.put("text.account.profile.declaraciones", subTreeMap);
+		}
+		//*->FIN CONTRIBUYENTES RETEICA-----------------------------------
 
 
 

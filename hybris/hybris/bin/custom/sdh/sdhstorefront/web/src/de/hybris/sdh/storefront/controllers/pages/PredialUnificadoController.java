@@ -4,7 +4,6 @@
 package de.hybris.sdh.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
@@ -17,6 +16,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
@@ -74,6 +74,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "Predial";
 	private static final String TEXT_BASES_PROFILE = "Predial Bases Presuntivas";
+	private static final String TEXT_ACCOUNT_DECLARACION_PROFILE = "text.declaracion.predial";
 
 	// CMS Pages
 	private static final String PREDIAL_INICIAL_CMS_PAGE = "predialInicialPage";
@@ -100,9 +101,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			+ "/contribuyentes/predialunificado/basespresuntivas";
 
 
-
-	@Resource(name = "accountBreadcrumbBuilder")
-	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
+	@Resource(name = "customBreadcrumbBuilder")
+	ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@Resource(name = "customerFacade")
 	CustomerFacade customerFacade;
@@ -475,7 +475,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
+
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -593,12 +594,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormdos.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormdos.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -698,6 +700,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormtres.setCHIP(detallePredialRequest.getCHIP());
 			predialFormtres.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormtres.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormtres.setNumDoc(predialInfoInitres.getNumDoc());
+			predialFormtres.setCompleName(predialInfoInitres.getCompleName());
+			predialFormtres.setTipDoc(predialInfoInitres.getTipDoc());
 
 			String idDestino = predialFormtres.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormtres.setDesDestino(destinoHacendario(idDestino));
@@ -737,12 +742,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormtres.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormtres.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -762,7 +768,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_TRES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_TRES_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -875,12 +881,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormcua.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormcua.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -1014,12 +1021,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormcinco.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormcinco.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -1040,7 +1048,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_CINCO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_CINCO_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -1154,15 +1162,17 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+
+					String exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormseis.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormseis.setDecExencion(eachMarca.getPorcMarca());
 					}
+
 
 				}
 			}
@@ -1179,7 +1189,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_SEIS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_SEIS_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -1294,12 +1304,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormsiete.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormsiete.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -1318,7 +1329,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_SIETE_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_SIETE_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -1432,16 +1443,16 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormocho.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormocho.setDecExencion(eachMarca.getPorcMarca());
 					}
-
 				}
 			}
 		}
@@ -1458,7 +1469,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_OCHO_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_OCHO_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
@@ -1567,12 +1578,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			{
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
-					final String exMarca = "";
-					if (exMarca == "1" || exMarca == "4")
+					String exMarca = "";
+					exMarca = eachMarca.getTipoMarca();
+					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormbases.setDecExclusion(eachMarca.getPorcMarca());
 					}
-					if (exMarca == "2")
+					if (exMarca == "2" || exMarca.equals("2"))
 					{
 						predialFormbases.setDecExencion(eachMarca.getPorcMarca());
 					}
@@ -1593,7 +1605,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_BASES_PRESUNTIVAS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PREDIAL_BASES_PRESUNTIVAS_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_BASES_PROFILE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_DECLARACION_PROFILE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
