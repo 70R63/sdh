@@ -455,6 +455,7 @@ ACC.predial = {
 	},
 
 	calculoPredial : function() {
+		debugger;
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
 		dataForm.chipcalculo = $("#CHIP").val();
@@ -505,13 +506,13 @@ ACC.predial = {
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-			
+			    debugger;
 				var actualErrors = [];
             	
             	if(result.errores)
             	{
             		$.each(result.errores, function( index, value ) {
-            			if(value.idError == "0")
+            			if(value.idError != "0" || value.idError != "00" || value.idError != "")
             			actualErrors.push(value);
             		});
             	}
