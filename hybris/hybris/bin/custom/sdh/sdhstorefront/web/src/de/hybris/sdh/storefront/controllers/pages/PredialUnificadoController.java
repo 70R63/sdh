@@ -10,7 +10,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -409,10 +408,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormuno.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormuno.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			String idDestino = predialFormuno.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormuno.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormuno.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormuno.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormuno.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
@@ -559,10 +558,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormdos.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormdos.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			String idDestino = predialFormdos.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormdos.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormdos.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormdos.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormdos.getDatosJuridicos().getCalidadSujecion();
 
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
@@ -708,10 +707,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormtres.setCompleName(predialInfoInitres.getCompleName());
 			predialFormtres.setTipDoc(predialInfoInitres.getTipDoc());
 
-			String idDestino = predialFormtres.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormtres.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormtres.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormtres.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormtres.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
@@ -847,10 +846,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcua.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcua.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			String idDestino = predialFormcua.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormcua.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormcua.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormcua.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormcua.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
@@ -987,10 +986,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcinco.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcinco.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			String idDestino = predialFormcinco.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormcinco.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormcinco.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormcinco.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormcinco.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
@@ -1128,10 +1127,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormseis.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormseis.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			String idDestino = predialFormseis.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormseis.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormseis.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormseis.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormseis.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
@@ -1167,7 +1166,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
 				{
 
-					String exMarca = eachMarca.getTipoMarca();
+					final String exMarca = eachMarca.getTipoMarca();
 					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
 					{
 						predialFormseis.setDecExclusion(eachMarca.getPorcMarca());
@@ -1270,10 +1269,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormsiete.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormsiete.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			String idDestino = predialFormsiete.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormsiete.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormsiete.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormsiete.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormsiete.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
@@ -1409,10 +1408,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormocho.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormocho.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			String idDestino = predialFormocho.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormocho.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormocho.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormocho.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormocho.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
@@ -1544,10 +1543,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormbases.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormbases.setDireccionPredio(detallePredialResponse.getDireccionPredio());
 
-			String idDestino = predialFormbases.getEstrLiquidacionPredial().getDestinoHacendario();
+			final String idDestino = predialFormbases.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormbases.setDesDestino(destinoHacendario(idDestino));
 
-			String idCalidad = predialFormbases.getDatosJuridicos().getCalidadSujecion();
+			final String idCalidad = predialFormbases.getDatosJuridicos().getCalidadSujecion();
 
 			if (idCalidad == "1" || idCalidad.equals("1"))
 			{
@@ -1720,8 +1719,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			calculoPredialResponse = mapper.readValue(sdhCalculoPredialService.calculoPredial(calculoPredialRequest),
-					CalculoPredialResponse.class);
+			final String responseCalculo = sdhCalculoPredialService.calculoPredial(calculoPredialRequest);
+			calculoPredialResponse = mapper.readValue(responseCalculo, CalculoPredialResponse.class);
 
 			prediaFormcal.setNumFrom(calculoPredialResponse.getNumFrom());
 			prediaFormcal.setLiquidacionPrivada(calculoPredialResponse.getLiquidacionPrivada());

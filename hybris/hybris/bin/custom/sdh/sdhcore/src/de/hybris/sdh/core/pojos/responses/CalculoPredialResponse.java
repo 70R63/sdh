@@ -49,6 +49,7 @@ public class CalculoPredialResponse
 	 * @param liquidacionPrivada
 	 *           the liquidacionPrivada to set
 	 */
+	@JsonProperty("LiquidacionPrivada")
 	public void setLiquidacionPrivada(final CalculoPredialLiqPriv liquidacionPrivada)
 	{
 		this.liquidacionPrivada = liquidacionPrivada;

@@ -512,7 +512,7 @@ ACC.predial = {
             	if(result.errores)
             	{
             		$.each(result.errores, function( index, value ) {
-            			if(value.idError != "0" || value.idError != "00" || value.idError != "")
+            			if(value.idError != "0" && value.idError != "00" && value.idError != "")
             			actualErrors.push(value);
             		});
             	}
