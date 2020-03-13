@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -257,7 +258,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	final PredialForm predialInfoIniURL, final Model model, final RedirectAttributes redirectAttributes)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro predial unificado uno --------------------------");
+		System.out.println("---------------- Hola entro predial unificado uno POST--------------------------");
 		final PredialForm predialFormurl = new PredialForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
@@ -345,7 +346,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	final String numBP, final RedirectAttributes redirectAttributes, final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{
-		System.out.println("---------------- Hola entro predial unificado uno --------------------------");
+		System.out.println("---------------- Hola entro predial unificado uno GET--------------------------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		model.addAttribute("customerData", customerData);
@@ -1794,6 +1795,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			prediaFormcaldec.setCHIP(predialInfoIniURL.getCHIP());
 			prediaFormcaldec.setMatrInmobiliaria(predialInfoIniURL.getMatrInmobiliaria());
 			prediaFormcaldec.setAnioGravable(predialInfoIniURL.getAnioGravable());
+			prediaFormcaldec.setOpcionuso(Objects.isNull(detallePredialResponse.getOpcionuso()) ? "" :
+					detallePredialResponse.getOpcionuso().replace(" ", "").split("-")[0]);
 
 			String tipreg = "";
 
