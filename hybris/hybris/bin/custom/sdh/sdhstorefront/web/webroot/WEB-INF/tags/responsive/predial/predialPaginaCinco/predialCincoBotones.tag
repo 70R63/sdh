@@ -7,6 +7,20 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
+<c:set var="flagPresentarDeclaracion" value="false" />
+<c:set var="flagPagarEnLinea" value="false" />
+<c:if test="${predialForm.controlCampos.btnPresentarDec == false}">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+</c:if>
+<c:if test="${predialForm.controlCampos.btnPagarDec == false}">
+	<c:set var="flagPagarEnLinea" value="true" />
+</c:if>
+<c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+	<c:set var="flagPagarEnLinea" value="true" />
+	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
+</c:if>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="container">
@@ -39,16 +53,19 @@
 <!-- Fin de campos para calculo -->
 	<div class="row" style="marging-top: 5px">
 		<div class="col-md-12 centercol-md-8 text-center">
-			<button style="margin-top: 3px;" id="predialGeneraDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
-				type="button" disabled="disabled">
-				<spring:theme code="predialuno.firma.presendecla" />
-			</button>
+			<c:if test="${flagPresentarDeclaracion eq true}">
+				<button style="margin-top: 3px;" id="predialGeneraDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
+					type="button" disabled="disabled">
+					<spring:theme code="predialuno.firma.presendecla" />
+				</button>
+			</c:if>
 
-			<button class="btn btn-primary btn-lg pagarbtn" type="submit" id="pagar"
-				name="pagar" value="pagar" disabled="disabled">
-				<spring:theme code="predialuno.firma.paglinea" />
-			</button>
-			
+			<c:if test="${flagPagarEnLinea eq true}">
+				<button class="btn btn-primary btn-lg pagarbtn" type="submit" id="pagar"
+					name="pagar" value="pagar" disabled="disabled">
+					<spring:theme code="predialuno.firma.paglinea" />
+				</button>
+			</c:if>
 			
 			<button class="btn btn-primary btn-lg" type="submit" id="action"
 				name="pagar" value="pagar">
