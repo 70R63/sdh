@@ -17,6 +17,7 @@ import de.hybris.sdh.core.pojos.responses.PredialEstLiquidacionPrivada;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.PredialTblErrores;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
 
@@ -92,6 +93,7 @@ public class PredialForm
 	private String direccionPredio;
 
 	private PredialControlCamposDec controlCampos;
+	private SDHValidaMailRolResponse contribuyenteData;
 
 	/**
 	 * @return the caso
@@ -992,6 +994,23 @@ public class PredialForm
 	public void setControlCampos(final PredialControlCamposDec controlCampos)
 	{
 		this.controlCampos = controlCampos;
+	}
+
+	/**
+	 * @return the contribuyenteData
+	 */
+	public SDHValidaMailRolResponse getContribuyenteData()
+	{
+		return contribuyenteData;
+	}
+
+	/**
+	 * @param contribuyenteData
+	 *           the contribuyenteData to set
+	 */
+	public void setContribuyenteData(final SDHValidaMailRolResponse contribuyenteData)
+	{
+		this.contribuyenteData = contribuyenteData;
 	}
 
 
