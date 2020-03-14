@@ -62,7 +62,7 @@
 
 			<c:if test="${flagPagarEnLinea eq true}">
 				<button class="btn btn-primary btn-lg pagarbtn" type="submit" id="pagar"
-					name="pagar" value="pagar" disabled="disabled">
+					name="pagar" value="pagar" disabled="disabled" onclick="pagarEnLinea('5101','${predialForm.anioGravable}','01','${predialForm.contribuyenteData.predial[0].numObjeto}','${predialForm.CHIP}')">
 					<spring:theme code="predialocho.firma.paglinea" />
 				</button>
 			</c:if>
