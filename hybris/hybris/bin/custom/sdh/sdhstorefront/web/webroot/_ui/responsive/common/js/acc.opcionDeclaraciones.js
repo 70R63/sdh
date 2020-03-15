@@ -946,13 +946,12 @@ debugger;
             	//var newurl = "";
         	    //var currentUrl = window.location.href;
                 //alert(data.opcionuso);
-                if(data.opcionuso == "01"){
+                if(data.opcionuso == "02"){
                     var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                     if (r == true) {
                         ACC.opcionDeclaraciones.redirectRequestPredial(data.url, data.anioGravable, data.chip, data.matrInmobiliaria, data.numBP);
                     } else {
                         window.location.href =  currentUrl;
-                        alert("Hubo un error en la declaración");
                     }
                 }else{
                     ACC.opcionDeclaraciones.redirectRequestPredial(data.url, data.anioGravable, data.chip, data.matrInmobiliaria, data.numBP);
