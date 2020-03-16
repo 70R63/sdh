@@ -884,17 +884,17 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "030100____", "00", "Seleccionar");
 		//		agregarElementoTramites(elementos, "030101____", "01", "Descarga de Factura", "ZT06", "A1ZTRT0003Z016");
 		//		agregarElementoTramites(elementos, "030102____", "02", "Descuento adicional del 1%", "ZT06", "A1ZTRT0003Z017");
-		agregarElementoTramites(elementos, "030103____", "03", "Reexpedicion de facturas", "ZT06", "A1ZTRT0003Z018");
+		//		agregarElementoTramites(elementos, "030103____", "03", "Reexpedicion de facturas", "ZT06", "A1ZTRT0003Z018");
 		agregarElementoTramites(elementos, "030104____", "04", "Solicitud de moficación de Factura");
 		agregarElementoTramites(elementos, "030105____", "05", "Solicitud de anulacion de facturas ");
 		//Facturación-Por Predial-Reexpedicion de facturas
-		agregarElementoTramites(elementos, "03010300__", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "03010301__", "01", "Cambio de Nombre", "ZT06", "A1ZTRT0004Z118");
-		agregarElementoTramites(elementos, "03010302__", "02", "Tipo de Documento", "ZT06", "A1ZTRT0004Z119");
-		agregarElementoTramites(elementos, "03010303__", "03", "Número de Documento", "ZT06", "A1ZTRT0004Z120");
-		agregarElementoTramites(elementos, "03010304__", "04", "Dirección de Notificación", "ZT06", "A1ZTRT0004Z121");
-		agregarElementoTramites(elementos, "03010305__", "05", "Teléfono fijo, Celular, Correo electrónico", "ZT06",
-				"A1ZTRT0004Z122");
+		//		agregarElementoTramites(elementos, "03010300__", "00", "Seleccionar");
+		//		agregarElementoTramites(elementos, "03010301__", "01", "Cambio de Nombre", "ZT06", "A1ZTRT0004Z118");
+		//		agregarElementoTramites(elementos, "03010302__", "02", "Tipo de Documento", "ZT06", "A1ZTRT0004Z119");
+		//		agregarElementoTramites(elementos, "03010303__", "03", "Número de Documento", "ZT06", "A1ZTRT0004Z120");
+		//		agregarElementoTramites(elementos, "03010304__", "04", "Dirección de Notificación", "ZT06", "A1ZTRT0004Z121");
+		//		agregarElementoTramites(elementos, "03010305__", "05", "Teléfono fijo, Celular, Correo electrónico", "ZT06",
+		//				"A1ZTRT0004Z122");
 		//Facturación-Por Predial-Solicitud de moficación de Factura
 		agregarElementoTramites(elementos, "03010400__", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "03010401__", "01", "Modificación Avaluó Catastral", "ZT07", "A1ZTRT0004Z047");

@@ -531,7 +531,8 @@ ACC.predial = {
         			$( "#dialogICA" ).dialog( "open" );
         			$("#icaDialogContent").html("El cálculo se ha realizado exitosamente.");
         			$("#numForm").val(result.numFrom);
-    			
+        			var liq = result.liquidacionPrivada;
+    			$("#ValorImpuestoACargo").val(liq.valorImpuestoACargo);
 				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.aporteVoluntario);
 				$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoIncrementoDiferencial);
 				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorImpuestoAjustadoActual);
@@ -545,7 +546,7 @@ ACC.predial = {
 				$("#ValorAporteVoluntario").val(result.liquidacionPrivada.valorAporteVoluntario);
 				$("#TotalConPagoVoluntario").val(result.liquidacionPrivada.totalConPagoVoluntario);
 				
-				var liq = result.liquidacionPrivada;
+				
 				if(liq.proyecto == "1"){
 					$("#proyectoLiq").val('01');
 				}else if(liq.proyecto == "2"){
