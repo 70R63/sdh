@@ -15,6 +15,7 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
@@ -27,6 +28,7 @@ import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalculoPredialService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -361,6 +363,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		final PredialForm predialFormuno = new PredialForm();
 		PredialForm predialInfoIniUno = new PredialForm();
 
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
 		try
 		{
 			if (anioGravable != null)
@@ -484,7 +488,36 @@ public class PredialUnificadoController extends SDHAbstractPageController
 						.collect(Collectors.toList()));
 		predialFormuno.setContribuyenteData(contribuyenteData);
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoIniUno.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormuno.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormuno.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormuno.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormuno.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormuno.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormuno.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormuno.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+
+
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialForm", predialFormuno);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));

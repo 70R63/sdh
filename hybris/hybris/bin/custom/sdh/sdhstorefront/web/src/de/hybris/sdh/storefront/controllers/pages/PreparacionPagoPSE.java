@@ -119,7 +119,7 @@ public class PreparacionPagoPSE extends AbstractPageController
 		final PSEPaymentForm psePaymentForm = new PSEPaymentForm();
 
 
-		if (infoPreviaPSE.getNumRef() != null)
+		if (infoPreviaPSE.getNumRef() != null && !infoPreviaPSE.getNumRef().equals(""))
 		{
 			psePaymentForm.setTipoDeImpuesto(infoPreviaPSE.getTipoImpuesto());
 			psePaymentForm.setAnoGravable(infoPreviaPSE.getAnoGravable());
