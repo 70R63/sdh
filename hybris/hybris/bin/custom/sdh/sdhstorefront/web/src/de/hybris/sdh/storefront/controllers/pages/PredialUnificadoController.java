@@ -33,6 +33,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
+import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
 import de.hybris.sdh.storefront.forms.PredialForm;
 
@@ -43,6 +44,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -133,6 +135,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@Resource(name = "sdhGeneraDeclaracionService")
 	SDHGeneraDeclaracionService sdhGeneraDeclaracionService;
+
+	@Resource(name = "sdhCustomerFacade")
+	SDHCustomerFacade sdhCustomerFacade;
 
 	private static final Logger LOG = Logger.getLogger(PredialUnificadoController.class);
 
@@ -473,7 +478,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 		}
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(
+				contribuyenteData.getPredial().stream().filter(d -> predialFormuno.getCHIP().equals(d.getCHIP()))
+						.collect(Collectors.toList()));
+		predialFormuno.setContribuyenteData(contribuyenteData);
 
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialForm", predialFormuno);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
@@ -623,8 +634,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 
 		}
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
+				.filter(d -> predialFormdos.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		predialFormdos.setContribuyenteData(contribuyenteData);
 
-
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormdos", predialFormdos);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_DOS_CMS_PAGE));
@@ -766,7 +781,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
+				.filter(d -> predialFormtres.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		predialFormtres.setContribuyenteData(contribuyenteData);
 
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormtres", predialFormtres);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_TRES_CMS_PAGE));
@@ -905,7 +925,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
+				.filter(d -> predialFormcua.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		predialFormcua.setContribuyenteData(contribuyenteData);
 
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormcua", predialFormcua);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_CUATRO_CMS_PAGE));
@@ -1044,7 +1069,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
+				.filter(d -> predialFormcinco.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		predialFormcinco.setContribuyenteData(contribuyenteData);
 
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormcinco", predialFormcinco);
 
 
@@ -1186,7 +1216,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
+				.filter(d -> predialFormseis.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		predialFormseis.setContribuyenteData(contribuyenteData);
 
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormseis", predialFormseis);
 
 
@@ -1327,7 +1362,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
+				.filter(d -> predialFormsiete.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		predialFormsiete.setContribuyenteData(contribuyenteData);
 
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormsiete", predialFormsiete);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_SIETE_CMS_PAGE));
@@ -1465,7 +1505,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
+				.filter(d -> predialFormocho.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		predialFormocho.setContribuyenteData(contribuyenteData);
 
+		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormocho", predialFormocho);
 
 
