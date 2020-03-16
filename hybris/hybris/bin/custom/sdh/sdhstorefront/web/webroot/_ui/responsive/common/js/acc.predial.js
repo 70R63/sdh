@@ -532,7 +532,7 @@ ACC.predial = {
         			$("#icaDialogContent").html("El cálculo se ha realizado exitosamente.");
         			$("#numForm").val(result.numFrom);
     			
-				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorAporteVoluntario);
+				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.aporteVoluntario);
 				$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoIncrementoDiferencial);
 				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorImpuestoAjustadoActual);
 				$("#Sancion").val(result.liquidacionPrivada.sancion);
@@ -544,6 +544,16 @@ ACC.predial = {
 				$("#TotalAPagar").val(result.liquidacionPrivada.totalAPagar);
 				$("#ValorAporteVoluntario").val(result.liquidacionPrivada.valorAporteVoluntario);
 				$("#TotalConPagoVoluntario").val(result.liquidacionPrivada.totalConPagoVoluntario);
+				
+				var liq = result.liquidacionPrivada;
+				if(liq.proyecto == "1"){
+					$("#proyectoLiq").val('01');
+				}else if(liq.proyecto == "2"){
+					$("#proyectoLiq").val('02');
+        		}else{
+        			$("#proyectoLiq").val('00');
+        		}
+        		
         		}
 			},
 			error : function() {
