@@ -10,23 +10,30 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePredial2Request;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
+import de.hybris.sdh.core.pojos.responses.ContribAgente;
+import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
+import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
+import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCalculoPredialService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
@@ -34,7 +41,9 @@ import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHDetallePredialService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
+import de.hybris.sdh.storefront.forms.PredialControlCamposDec;
 import de.hybris.sdh.storefront.forms.PredialForm;
 
 import java.io.ByteArrayInputStream;
@@ -55,12 +64,14 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sun.misc.BASE64Decoder;
@@ -71,6 +82,8 @@ import sun.misc.BASE64Decoder;
  *
  */
 @Controller
+@SessionAttributes(
+{ "dataForm" })
 public class PredialUnificadoController extends SDHAbstractPageController
 {
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
@@ -280,18 +293,21 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		if (tipreg.equals("1") || tipreg.equals("1 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_1";
 		}
 		else if (tipreg.equals("2") || tipreg.equals("2 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_2";
 		}
 		else if (tipreg.equals("3") || tipreg.equals("3 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_3";
@@ -343,23 +359,30 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_1", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialuno(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes, final HttpServletRequest request)
+	public String predialuno(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes, final HttpServletRequest request)
 			throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado uno GET--------------------------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData, null);
-		model.addAttribute("redirectURL", "contribuyentes/predialunificado_1");
-		super.addFirmantes_impuesto(model, null, customerData);
+		final PredialForm infoReemplazo = new PredialForm();
+		prepararInfoAgenteAutorizado(model, customerData, predialInfo, "1", infoReemplazo);
+		if (infoReemplazo.getNumBP() != null && infoReemplazo.getCHIP() != null && infoReemplazo.getAnioGravable() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+		}
 
 		final PredialForm predialFormuno = new PredialForm();
 		PredialForm predialInfoIniUno = new PredialForm();
+
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
 		try
 		{
@@ -483,8 +506,39 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				contribuyenteData.getPredial().stream().filter(d -> predialFormuno.getCHIP().equals(d.getCHIP()))
 						.collect(Collectors.toList()));
 		predialFormuno.setContribuyenteData(contribuyenteData);
+		predialFormuno.setControlCampos(
+				establecerCamposImpuestoDec("sdh_02", contribuyenteData, customerFacade.getCurrentCustomer()));
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoIniUno.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormuno.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormuno.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormuno.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormuno.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormuno.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormuno.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormuno.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+
+
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialForm", predialFormuno);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_UNO_CMS_PAGE));
@@ -498,19 +552,25 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_2", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialdos(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialdos(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado DOS --------------------------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData, null);
-		model.addAttribute("redirectURL", "contribuyentes/predialunificado_2");
-		super.addFirmantes_impuesto(model, null, customerData);
+		final PredialForm infoReemplazo = new PredialForm();
+		prepararInfoAgenteAutorizado(model, customerData, predialInfo, "2", infoReemplazo);
+		if (infoReemplazo.getNumBP() != null && infoReemplazo.getCHIP() != null && infoReemplazo.getAnioGravable() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+		}
+
 
 		final PredialForm predialFormdos = new PredialForm();
 		PredialForm predialInfoInidos = new PredialForm();
@@ -638,6 +698,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormdos.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormdos.setContribuyenteData(contribuyenteData);
+		predialFormdos
+				.setControlCampos(
+						establecerCamposImpuestoDec("sdh_02", contribuyenteData, customerFacade.getCurrentCustomer()));
 
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormdos", predialFormdos);
@@ -652,19 +715,24 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_3", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialtres(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialtres(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado TRES --------------------------");
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData, null);
-		model.addAttribute("redirectURL", "contribuyentes/predialunificado_3");
-		super.addFirmantes_impuesto(model, null, customerData);
+		final PredialForm infoReemplazo = new PredialForm();
+		prepararInfoAgenteAutorizado(model, customerData, predialInfo, "3", infoReemplazo);
+		if (infoReemplazo.getNumBP() != null && infoReemplazo.getCHIP() != null && infoReemplazo.getAnioGravable() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+		}
 
 		final PredialForm predialFormtres = new PredialForm();
 
@@ -785,6 +853,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormtres.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormtres.setContribuyenteData(contribuyenteData);
+		predialFormtres.setControlCampos(
+				establecerCamposImpuestoDec("sdh_02", contribuyenteData, customerFacade.getCurrentCustomer()));
 
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormtres", predialFormtres);
@@ -2019,6 +2089,190 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		{
 			return idDestinos = "-";
 		}
+	}
+
+	@RequestMapping(value = "/contribuyentes/predialunificado/show", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String predialurl_aa(@ModelAttribute("predialInfoIniURL")
+	final PredialForm predialInfoIniURL, final Model model, final RedirectAttributes redirectAttributes,
+			final BindingResult bindingResult, @RequestParam(required = true, value = "numForm")
+			final String numForm, @RequestParam(required = true, value = "representado")
+			final String representado) throws CMSItemNotFoundException
+	{
+		System.out.println("---------------- Hola entro predial vista agente autorizado--------------------------");
+		final PredialForm predialFormurl = new PredialForm();
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		String tipreg = "1";
+		String urlReturn = "";
+
+
+		final DetallePredial2Request detallePredial2Request = new DetallePredial2Request();
+		DetallePredial2Response detallePredial2Response = null;
+
+		detallePredial2Request.setPartner(representado);
+		detallePredial2Request.setFormulario(numForm);
+		System.out.println("Request para validaCont: " + detallePredial2Request);
+		detallePredial2Response = gasolinaService.consultaPredial2(detallePredial2Request, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de validaCont: " + detallePredial2Response);
+
+		if (detallePredial2Response != null)
+		{
+			tipreg = detallePredial2Response.getInfopredio().getDatosgenerales().getTipoDeclaracion().trim();
+			predialFormurl.setRepresentado(representado);
+			predialFormurl.setNumFrom(numForm);
+			predialFormurl.setCHIP(detallePredial2Response.getInfopredio().getDatosgenerales().getChip());
+			predialFormurl.setMatrInmobiliaria(detallePredial2Response.getInfopredio().getDatosgenerales().getMatrInmobiliaria());
+			predialFormurl.setAnioGravable(detallePredial2Response.getInfopredio().getDatosgenerales().getAnioAgravable());
+			predialFormurl.setDetallePredial2Response(detallePredial2Response);
+		}
+
+		switch (tipreg)
+		{
+			case "1":
+			case "2":
+			case "3":
+			case "4":
+			case "5":
+			case "6":
+			case "7":
+			case "8":
+				model.addAttribute("predialFormurl", predialFormurl);
+				model.addAttribute("dataForm", predialFormurl);
+				urlReturn = "redirect:/contribuyentes/predialunificado_" + tipreg;
+				break;
+
+			case "9":
+				redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
+				model.addAttribute("predialFormurl", predialFormurl);
+				urlReturn = "redirect:/contribuyentes/basespresuntivas";
+			default:
+				final String Error = "Su predio no cuenta con Tipo de declaración, por lo que no se puede detrminar la declaración a realizar";
+				redirectAttributes.addFlashAttribute("Error", Error);
+				model.addAttribute("predialFormurl", predialFormurl);
+				urlReturn = "redirect:/contribuyentes/predialunificado_inicio";
+				break;
+		}
+
+
+		return urlReturn;
+	}
+
+
+	private void prepararInfoAgenteAutorizado(final Model model, final CustomerData customerData, final PredialForm predialInfo,
+			final String tiporeg, final PredialForm infoReemplazo)
+	{
+		CustomerData agenteAutorizadoData = null;
+		CustomerData customerData2 = null;
+		CustomerData customerData_tmp = customerData;
+		List<FirmanteResponse> firmantes = null;
+		String tipoUsuario = "C";
+
+		if (predialInfo != null)
+		{
+			if (predialInfo.getRepresentado() != null)
+			{
+				System.out
+						.println("---------------- Hola entro predial unificado uno GET Agente Autorizado--------------------------");
+				tipoUsuario = "A";
+				infoReemplazo.setNumBP(predialInfo.getRepresentado());
+				infoReemplazo.setCHIP(predialInfo.getCHIP());
+				agenteAutorizadoData = customerData;
+				customerData2 = sdhCustomerFacade.getRepresentadoDataFromSAP(infoReemplazo.getNumBP());
+				customerData_tmp = customerData2;
+				infoReemplazo.setAnioGravable(predialInfo.getAnioGravable());
+				infoReemplazo.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
+				firmantes = predialInfo.getDetallePredial2Response().getFirmantes();
+			}
+		}
+		establecerInfoFirmas(model, customerData_tmp, agenteAutorizadoData, firmantes, tipoUsuario,
+				"contribuyentes/predialunificado_" + tiporeg);
+
+		if (customerData2 != null)
+		{
+			customerData.setNumBP(customerData2.getNumBP());
+			customerData.setDocumentType(customerData2.getDocumentType());
+			customerData.setDocumentNumber(customerData2.getDocumentNumber());
+			customerData.setCompleteName(customerData2.getCompleteName());
+		}
+	}
+
+
+	private void establecerInfoFirmas(final Model model, final CustomerData contribuyenteData,
+			final CustomerData agenteAutorizadoData, final List<FirmanteResponse> firmantes, final String tipoUsuario,
+			final String url)
+	{
+		switch (tipoUsuario)
+		{
+			case "C": //contribuyente
+				model.addAttribute("customerData", contribuyenteData);
+
+				addAgentsToModel(model, contribuyenteData, null);
+
+				model.addAttribute("redirectURL", url);
+				super.addFirmantes_impuesto(model, null, contribuyenteData);
+
+				break;
+
+			case "A": //agente autorizado
+				model.addAttribute("contribuyenteData", contribuyenteData);
+				model.addAttribute("currentUserData", agenteAutorizadoData);
+
+				addAgentsToModel(model, contribuyenteData, agenteAutorizadoData);
+
+				model.addAttribute("redirectURL",
+						"/autorizados/contribuyente/representando?representado=" + contribuyenteData.getNumBP());
+
+				if (firmantes != null)
+				{
+					super.addFirmantes_impuesto(model, firmantes, agenteAutorizadoData);
+				}
+				break;
+
+
+			default:
+				break;
+		}
+
+
+	}
+
+	private PredialControlCamposDec establecerCamposImpuestoDec(final String rol, final SDHValidaMailRolResponse contribuyenteData,
+			final CustomerData currentUserData)
+	{
+		PredialControlCamposDec controlCampos = null;
+		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
+
+		switch (rol)
+		{
+			case "sdh_02":
+				controlCampos = new PredialControlCamposDec();
+				controlCampos.setBtnPresentarDec(true);
+				controlCampos.setBtnPagarDec(true);
+
+				if (contribuyenteData.getAgentes() != null)
+				{
+					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
+					{
+						if (infoAgente != null)
+						{
+							if (infoAgente.getFuncionInterl() != null && infoAgente.getBp() != null
+									&& infoAgente.getBp().equals(currentUserData.getNumBP())
+									&& infoAgente.getFuncionInterl().equals(strRepresentanteLegalPrincipal))
+							{
+								controlCampos.setBtnPresentarDec(false);
+								controlCampos.setBtnPagarDec(false);
+							}
+						}
+					}
+				}
+
+				break;
+
+			default:
+				break;
+		}
+
+		return controlCampos;
 	}
 
 }

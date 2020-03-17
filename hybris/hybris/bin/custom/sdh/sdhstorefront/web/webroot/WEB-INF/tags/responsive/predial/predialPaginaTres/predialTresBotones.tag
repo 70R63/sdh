@@ -9,10 +9,10 @@
 
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
-<c:if test="${predialForm.controlCampos.btnPresentarDec == false}">
+<c:if test="${predialFormtres.controlCampos.btnPresentarDec == false}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
-<c:if test="${predialForm.controlCampos.btnPagarDec == false}">
+<c:if test="${predialFormtres.controlCampos.btnPagarDec == false}">
 	<c:set var="flagPagarEnLinea" value="true" />
 </c:if>
 <c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
