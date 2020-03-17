@@ -68,6 +68,8 @@ public class PredialForm
 	private CalPredialDatLiq DatosLiquidacion;
 	private CalPredialDatLiq newDatosLiquidacion;
 	private CalPredialLiqPriv calcLiquidacionPrivada;
+	private CalPredialLiqPriv newLiquidacionRequ;
+
 	//campos para request de calculo
 
 	private String tipoDeclaracion;
@@ -1011,6 +1013,23 @@ public class PredialForm
 	public void setContribuyenteData(final SDHValidaMailRolResponse contribuyenteData)
 	{
 		this.contribuyenteData = contribuyenteData;
+	}
+
+	/**
+	 * @return the newLiquidacionRequ
+	 */
+	public CalPredialLiqPriv getNewLiquidacionRequ()
+	{
+		return newLiquidacionRequ;
+	}
+
+	/**
+	 * @param newLiquidacionRequ
+	 *           the newLiquidacionRequ to set
+	 */
+	public void setNewLiquidacionRequ(final CalPredialLiqPriv newLiquidacionRequ)
+	{
+		this.newLiquidacionRequ = newLiquidacionRequ;
 	}
 
 
