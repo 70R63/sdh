@@ -159,6 +159,9 @@
 														<c:when test="${eachDeclaracion.impuesto eq '0002'}">
 															<td ><a href="<c:url value="/contribuyentes/sobrevehiculosautomotores/declaracion/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}" />">Ver</a></td>
 														</c:when>
+														<c:when test="${eachDeclaracion.impuesto eq '0001'}">
+															<td ><a href="<c:url value="/contribuyentes/predialunificado/show?representado=${representado.infoContrib.numBP}&numForm=${eachDeclaracion.idDeclaracion}" />">Ver</a></td>
+														</c:when>
 														<c:otherwise>
 															<td style="color: #2196f3; text-decoration: underline !important; font-size: 14px;">Ver</td>
 														</c:otherwise>

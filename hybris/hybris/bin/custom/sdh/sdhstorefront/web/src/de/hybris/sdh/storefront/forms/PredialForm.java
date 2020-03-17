@@ -7,6 +7,7 @@ import de.hybris.sdh.core.pojos.requests.CalPredialDatLiq;
 import de.hybris.sdh.core.pojos.requests.CalPredialLiqPriv;
 import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialLiqPriv;
+import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.PredialDatosEconomicos;
 import de.hybris.sdh.core.pojos.responses.PredialDatosFisicos;
@@ -96,6 +97,8 @@ public class PredialForm
 
 	private PredialControlCamposDec controlCampos;
 	private SDHValidaMailRolResponse contribuyenteData;
+	private String representado;
+	private DetallePredial2Response detallePredial2Response;
 
 	/**
 	 * @return the caso
@@ -982,6 +985,23 @@ public class PredialForm
 	}
 
 	/**
+	 * @return the newLiquidacionRequ
+	 */
+	public CalPredialLiqPriv getNewLiquidacionRequ()
+	{
+		return newLiquidacionRequ;
+	}
+
+	/**
+	 * @param newLiquidacionRequ
+	 *           the newLiquidacionRequ to set
+	 */
+	public void setNewLiquidacionRequ(final CalPredialLiqPriv newLiquidacionRequ)
+	{
+		this.newLiquidacionRequ = newLiquidacionRequ;
+	}
+
+	/**
 	 * @return the controlCampos
 	 */
 	public PredialControlCamposDec getControlCampos()
@@ -1016,21 +1036,39 @@ public class PredialForm
 	}
 
 	/**
-	 * @return the newLiquidacionRequ
+	 * @return the representado
 	 */
-	public CalPredialLiqPriv getNewLiquidacionRequ()
+	public String getRepresentado()
 	{
-		return newLiquidacionRequ;
+		return representado;
 	}
 
 	/**
-	 * @param newLiquidacionRequ
-	 *           the newLiquidacionRequ to set
+	 * @param representado
+	 *           the representado to set
 	 */
-	public void setNewLiquidacionRequ(final CalPredialLiqPriv newLiquidacionRequ)
+	public void setRepresentado(final String representado)
 	{
-		this.newLiquidacionRequ = newLiquidacionRequ;
+		this.representado = representado;
 	}
+
+	/**
+	 * @return the detallePredial2Response
+	 */
+	public DetallePredial2Response getDetallePredial2Response()
+	{
+		return detallePredial2Response;
+	}
+
+	/**
+	 * @param detallePredial2Response
+	 *           the detallePredial2Response to set
+	 */
+	public void setDetallePredial2Response(final DetallePredial2Response detallePredial2Response)
+	{
+		this.detallePredial2Response = detallePredial2Response;
+	}
+
 
 
 
