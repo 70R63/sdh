@@ -24,7 +24,7 @@
 
 
 	<div class="row mt-3">
-		<div class="col-md-7">
+		<div class="col-md-9">
 			<form:form action="">
 				<div class="table-responsive text-center">
 					<table class="table table-bordered" id="example">
@@ -54,7 +54,7 @@
 											disabled="disabled" type="text" size="30" value="${eachAgent.bp}" /></td>
 <!-- 										<td><input class="inputtextnew" disabled="disabled" -->
 <%-- 											type="text" size="30" value="${eachAgent.completeName}" /></td> --%>
-										<td><c:out value="${eachAgent.bp}" /></td>
+										<td><c:out value="${eachAgent.completeName}" /></td>
 										<td
 											style="color: #2196f3; text-decoration: underline !important; font-size: 14px;"><a href="/sdhstorefront/autorizados/contribuyente/representando?representado=${eachAgent.bp}">Ingresar</a></td>
 									</tr>
