@@ -7,6 +7,7 @@ import de.hybris.sdh.core.pojos.requests.CalPredialDatLiq;
 import de.hybris.sdh.core.pojos.requests.CalPredialLiqPriv;
 import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialLiqPriv;
+import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.PredialDatosEconomicos;
 import de.hybris.sdh.core.pojos.responses.PredialDatosFisicos;
@@ -94,6 +95,8 @@ public class PredialForm
 
 	private PredialControlCamposDec controlCampos;
 	private SDHValidaMailRolResponse contribuyenteData;
+	private String representado;
+	private DetallePredial2Response detallePredial2Response;
 
 	/**
 	 * @return the caso
@@ -1011,6 +1014,40 @@ public class PredialForm
 	public void setContribuyenteData(final SDHValidaMailRolResponse contribuyenteData)
 	{
 		this.contribuyenteData = contribuyenteData;
+	}
+
+	/**
+	 * @return the representado
+	 */
+	public String getRepresentado()
+	{
+		return representado;
+	}
+
+	/**
+	 * @param representado
+	 *           the representado to set
+	 */
+	public void setRepresentado(final String representado)
+	{
+		this.representado = representado;
+	}
+
+	/**
+	 * @return the detallePredial2Response
+	 */
+	public DetallePredial2Response getDetallePredial2Response()
+	{
+		return detallePredial2Response;
+	}
+
+	/**
+	 * @param detallePredial2Response
+	 *           the detallePredial2Response to set
+	 */
+	public void setDetallePredial2Response(final DetallePredial2Response detallePredial2Response)
+	{
+		this.detallePredial2Response = detallePredial2Response;
 	}
 
 
