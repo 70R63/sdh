@@ -1826,7 +1826,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		calculoPredialRequest.setAnioGravable(dataForm.getAnioGravable());
 		calculoPredialRequest.setOpcionUso(dataForm.getOpcionuso());
 		calculoPredialRequest.setDatosLiquidacion(dataForm.getNewDatosLiquidacion());
-		calculoPredialRequest.setLiquidacionPrivada(dataForm.getCalcLiquidacionPrivada());
+		//	calculoPredialRequest.setLiquidacionPrivada(dataForm.getCalcLiquidacionPrivada());
+		//calculoPredialRequest.setLiquidacionPrivada(dataForm.getLiquidacionPrivada());
+		calculoPredialRequest.setLiquidacionPrivada(dataForm.getNewLiquidacionRequ());
 
 
 		try

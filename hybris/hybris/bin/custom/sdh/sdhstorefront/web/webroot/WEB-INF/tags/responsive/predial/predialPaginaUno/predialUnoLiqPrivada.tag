@@ -33,7 +33,7 @@
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
 					type="radio" name="optradio" id="optionNo" value="2">No
 			</div>
-			<div class="col-md-2" id="proyecto">
+			<div class="col-md-6" id="proyecto">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.liquidacionpriv.proyecto" /></label> <select id="proyectoLiq"
