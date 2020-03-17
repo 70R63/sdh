@@ -27,7 +27,7 @@
 		<div class="col-md-7">
 			<form:form action="">
 				<div class="table-responsive text-center">
-					<table class="table table-bordered">
+					<table class="table table-bordered" id="example">
 						<thead>
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme
