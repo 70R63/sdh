@@ -964,6 +964,7 @@ debugger;
 	},
 
 	redirectRequestPredial : function(url, anioGravable, chip, inmobiliatia, numBp){
+		debugger;
 	    var currentUrl_tmp = "";
         var newurl = "";
         var currentUrl = window.location.href;

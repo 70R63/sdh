@@ -313,36 +313,42 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 		else if (tipreg.equals("4") || tipreg.equals("4 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_4";
 		}
 		else if (tipreg.equals("5") || tipreg.equals("5 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_5";
 		}
 		else if (tipreg.equals("6") || tipreg.equals("6 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_6";
 		}
 		else if (tipreg.equals("7") || tipreg.equals("7 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_7";
 		}
 		else if (tipreg.equals("8") || tipreg.equals("8 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_8";
 		}
 		else if (tipreg.equals("9") || tipreg.equals("9 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado/basespresuntivas";
@@ -2166,6 +2172,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			if (tipreg.equals("1") || tipreg.equals("1 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "1";
@@ -2174,6 +2181,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("2") || tipreg.equals("2 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "2";
@@ -2184,6 +2192,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("3") || tipreg.equals("3 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "3";
@@ -2194,6 +2203,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("4") || tipreg.equals("4 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "4";
@@ -2204,6 +2214,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("5") || tipreg.equals("5 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "5";
@@ -2214,6 +2225,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("6") || tipreg.equals("6 "))
 			{
+
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "6";
@@ -2224,6 +2237,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("7") || tipreg.equals("7 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "7";
@@ -2234,6 +2248,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("8") || tipreg.equals("8 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "8";
@@ -2244,6 +2259,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("9") || tipreg.equals("9 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "9";
