@@ -10,7 +10,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -314,36 +313,42 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 		else if (tipreg.equals("4") || tipreg.equals("4 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_4";
 		}
 		else if (tipreg.equals("5") || tipreg.equals("5 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_5";
 		}
 		else if (tipreg.equals("6") || tipreg.equals("6 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_6";
 		}
 		else if (tipreg.equals("7") || tipreg.equals("7 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_7";
 		}
 		else if (tipreg.equals("8") || tipreg.equals("8 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado_8";
 		}
 		else if (tipreg.equals("9") || tipreg.equals("9 "))
 		{
+			model.addAttribute("dataForm", new PredialForm());
 			redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 			model.addAttribute("predialFormurl", predialFormurl);
 			return "redirect:/contribuyentes/predialunificado/basespresuntivas";
@@ -574,6 +579,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		final PredialForm predialFormdos = new PredialForm();
 		PredialForm predialInfoInidos = new PredialForm();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
 		//final PredialForm predialInfoInidos = (PredialForm) model.asMap().get("predialFormurl");
 
@@ -702,7 +708,40 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				.setControlCampos(
 						establecerCamposImpuestoDec("sdh_02", contribuyenteData, customerFacade.getCurrentCustomer()));
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+
+
+
+
+
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoInidos.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormdos.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormdos.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormdos.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormdos.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormdos.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormdos.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormdos.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+
+
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialFormdos", predialFormdos);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_DOS_CMS_PAGE));
@@ -737,6 +776,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		final PredialForm predialFormtres = new PredialForm();
 
 		PredialForm predialInfoInitres = new PredialForm();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
 		try
 		{
 
@@ -856,7 +897,34 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		predialFormtres.setControlCampos(
 				establecerCamposImpuestoDec("sdh_02", contribuyenteData, customerFacade.getCurrentCustomer()));
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoInitres.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormtres.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormtres.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormtres.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormtres.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormtres.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormtres.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormtres.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+
+
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialFormtres", predialFormtres);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_TRES_CMS_PAGE));
@@ -886,6 +954,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		final PredialForm predialFormcua = new PredialForm();
 		//	final PredialForm predialInfoInicuatro = (PredialForm) model.asMap().get("predialFormurl");
 		PredialForm predialInfoInicuatro = new PredialForm();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
 		try
 		{
 
@@ -1000,7 +1070,37 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				.filter(d -> predialFormcua.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormcua.setContribuyenteData(contribuyenteData);
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+
+
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoInicuatro.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormcua.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormcua.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormcua.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormcua.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormcua.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormcua.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormcua.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+
+
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialFormcua", predialFormcua);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_CUATRO_CMS_PAGE));
@@ -1031,6 +1131,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		//		final PredialForm predialInfoInicinco = (PredialForm) model.asMap().get("predialFormurl");
 		PredialForm predialInfoInicinco = new PredialForm();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
 		try
 		{
 
@@ -1144,7 +1246,33 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				.filter(d -> predialFormcinco.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormcinco.setContribuyenteData(contribuyenteData);
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoInicinco.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormcinco.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormcinco.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormcinco.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormcinco.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormcinco.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormcinco.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormcinco.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialFormcinco", predialFormcinco);
 
 
@@ -1177,6 +1305,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		//final PredialForm predialInfoIniseis = (PredialForm) model.asMap().get("predialFormurl");
 		PredialForm predialInfoIniseis = new PredialForm();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
 		try
 		{
 
@@ -1291,7 +1421,32 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				.filter(d -> predialFormseis.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormseis.setContribuyenteData(contribuyenteData);
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoIniseis.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormseis.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormseis.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormseis.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormseis.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormseis.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormseis.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormseis.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialFormseis", predialFormseis);
 
 
@@ -1323,6 +1478,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		//final PredialForm predialInfoInisiete = (PredialForm) model.asMap().get("predialFormurl");
 		PredialForm predialInfoInisiete = new PredialForm();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
 		try
 		{
 
@@ -1437,7 +1594,35 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				.filter(d -> predialFormsiete.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormsiete.setContribuyenteData(contribuyenteData);
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+
+
+
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoInisiete.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormsiete.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormsiete.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormsiete.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormsiete.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormsiete.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormsiete.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormsiete.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialFormsiete", predialFormsiete);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PREDIAL_SIETE_CMS_PAGE));
@@ -1468,6 +1653,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		//		final PredialForm predialInfoIniocho = (PredialForm) model.asMap().get("predialFormurl");
 		PredialForm predialInfoIniocho = new PredialForm();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
 		try
 		{
 
@@ -1580,7 +1767,32 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				.filter(d -> predialFormocho.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormocho.setContribuyenteData(contribuyenteData);
 
-		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoIniocho.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormocho.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormocho.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormocho.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormocho.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormocho.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormocho.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormocho.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("predialFormocho", predialFormocho);
 
 
@@ -1608,6 +1820,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		//		final PredialForm predialInfoInibases = (PredialForm) model.asMap().get("predialFormurl");
 		PredialForm predialInfoInibases = new PredialForm();
+		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
+
 		try
 		{
 
@@ -1717,6 +1931,40 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 
 		}
+
+		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
+		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
+				.filter(d -> predialFormbases.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
+		predialFormbases.setContribuyenteData(contribuyenteData);
+
+
+		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
+		final String clavePeriodo = predialInfoInibases.getAnioGravable().substring(2, 4) + "A1";
+		final String dv = contribuyenteData.getInfoContrib().getAdicionales().getDIGVERIF();
+		final List<PredialResponse> predialList = new ArrayList<PredialResponse>();
+
+
+		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
+		infoPreviaPSE.setNumBP(predialFormbases.getNumBP());
+		infoPreviaPSE.setNumDoc(predialFormbases.getNumDoc());
+		infoPreviaPSE.setTipoDoc(predialFormbases.getTipDoc());
+		infoPreviaPSE.setAnoGravable(predialFormbases.getAnioGravable());
+		infoPreviaPSE.setClavePeriodo(clavePeriodo);
+		infoPreviaPSE.setDv(dv);
+		infoPreviaPSE.setChip(predialFormbases.getCHIP());
+
+
+		for (final PredialResponse predialItem : contribuyenteData.getPredial())
+		{
+			if (predialItem.getAnioGravable().equals(predialFormbases.getAnioGravable())
+					&& predialItem.getCHIP().equals(predialFormbases.getCHIP()))
+			{
+				infoPreviaPSE.setNumObjeto(predialItem.getNumObjeto());
+			}
+		}
+
+		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
+
 
 		model.addAttribute("predialFormbases", predialFormbases);
 
@@ -1926,6 +2174,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			if (tipreg.equals("1") || tipreg.equals("1 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "1";
@@ -1934,6 +2183,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("2") || tipreg.equals("2 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "2";
@@ -1944,6 +2194,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("3") || tipreg.equals("3 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "3";
@@ -1954,6 +2205,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("4") || tipreg.equals("4 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "4";
@@ -1964,6 +2216,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("5") || tipreg.equals("5 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "5";
@@ -1974,6 +2227,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("6") || tipreg.equals("6 "))
 			{
+
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "6";
@@ -1984,6 +2239,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("7") || tipreg.equals("7 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "7";
@@ -1994,6 +2250,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("8") || tipreg.equals("8 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "8";
@@ -2004,6 +2261,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 			else if (tipreg.equals("9") || tipreg.equals("9 "))
 			{
+				model.addAttribute("dataForm", new PredialForm());
 				redirectAttributes.addFlashAttribute("predialFormurl", prediaFormcaldec);
 				model.addAttribute("predialFormurl", prediaFormcaldec);
 				url = "9";
