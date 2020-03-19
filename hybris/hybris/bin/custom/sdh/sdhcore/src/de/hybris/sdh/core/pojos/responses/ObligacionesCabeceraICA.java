@@ -3,8 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 /**
  * @author Maria Luisa Torres
@@ -103,7 +104,4 @@ public class ObligacionesCabeceraICA
 	{
 		this.details = details;
 	}
-
-
-
 }
