@@ -55,6 +55,7 @@
  <input type="hidden" value="${predialFormdos.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
 <!-- Fin de campos para calculo -->
+	<input type="hidden" id="numForm" value="${predialFormdos.numFrom}"/>
 	<div class="row" style="marging-top: 5px">
 		<sf:form action="${pagarURL}" method="POST" 
 			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
@@ -83,7 +84,7 @@
 	
 				<c:if test="${flagPagarEnLinea eq true}">
 					<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit"
-						id="action" name="pagar" value="pagar" disabled="true">	
+						id="pagar" name="pagar" value="pagar" disabled="true">	
 						<spring:theme code="predialdos.firma.paglinea" />
 					</sf:button>
 				</c:if>

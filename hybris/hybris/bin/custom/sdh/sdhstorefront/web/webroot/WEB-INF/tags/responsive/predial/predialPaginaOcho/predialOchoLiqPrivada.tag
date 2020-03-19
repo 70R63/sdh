@@ -7,6 +7,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+<c:set var="disabledLiquidacionPrivada" value=""/>
+<c:if test="${predialFormocho.controlCampos.liquidacionPrivada == true}">
+	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"'/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
 	<div class="container">
@@ -108,10 +112,12 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3">
+				<c:if test="${predialFormocho.controlCampos.liquidacionPrivada != true}">
 				<button style="margin-top: 3px;" id=""
 					class="btn btn-primary btn-lg" type="button" onclick="calculoPredSinAporte()">
 					<spring:theme code="predialocho.liquidacionpriv.calcular" />
 				</button>
+				</c:if>
 			</div>
 		</div>
 	</div>

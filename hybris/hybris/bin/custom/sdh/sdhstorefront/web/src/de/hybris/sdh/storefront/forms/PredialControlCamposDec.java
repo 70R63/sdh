@@ -12,6 +12,7 @@ public class PredialControlCamposDec
 
 	private boolean btnPresentarDec;
 	private boolean btnPagarDec;
+	private boolean liquidacionPrivada;
 
 
 	/**
@@ -46,6 +47,23 @@ public class PredialControlCamposDec
 	public void setBtnPagarDec(final boolean btnPagarDec)
 	{
 		this.btnPagarDec = btnPagarDec;
+	}
+
+	/**
+	 * @return the liquidacionPrivada
+	 */
+	public boolean isLiquidacionPrivada()
+	{
+		return liquidacionPrivada;
+	}
+
+	/**
+	 * @param liquidacionPrivada
+	 *           the liquidacionPrivada to set
+	 */
+	public void setLiquidacionPrivada(final boolean liquidacionPrivada)
+	{
+		this.liquidacionPrivada = liquidacionPrivada;
 	}
 
 

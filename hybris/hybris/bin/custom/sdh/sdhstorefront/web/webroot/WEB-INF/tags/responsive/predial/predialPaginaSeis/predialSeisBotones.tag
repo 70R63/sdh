@@ -9,10 +9,10 @@
 
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
-<c:if test="${predialForm.controlCampos.btnPresentarDec == false}">
+<c:if test="${predialFormseis.controlCampos.btnPresentarDec == false}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
-<c:if test="${predialForm.controlCampos.btnPagarDec == false}">
+<c:if test="${predialFormseis.controlCampos.btnPagarDec == false}">
 	<c:set var="flagPagarEnLinea" value="true" />
 </c:if>
 <c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
@@ -54,6 +54,7 @@
  <input type="hidden" value="${predialFormseis.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
 <!-- Fin de campos para calculo -->
+	<input type="hidden" id="numForm" value="${predialFormseis.numFrom}"/>
 	<div class="row" style="marging-top: 5px">
 		<sf:form action="${pagarURL}" method="POST" 
 			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
@@ -81,7 +82,7 @@
 	
 				<c:if test="${flagPagarEnLinea eq true}">
 					<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit"
-						id="action" name="pagar" value="pagar" disabled="true">	
+						id="pagar" name="pagar" value="pagar" disabled="true">	
 						<spring:theme code="predialseis.firma.paglinea" />
 					</sf:button>
 				</c:if>
