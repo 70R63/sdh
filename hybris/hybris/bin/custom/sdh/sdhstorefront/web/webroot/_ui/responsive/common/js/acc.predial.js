@@ -469,15 +469,15 @@ ACC.predial = {
 				
 				if(checkAporteRadio == '1')
 				{
-					newLiquidacionRequ.AporteVoluntario="X";
+					newLiquidacionRequ.aporteVoluntario="X";
 					
 				
 				}else{
-					newLiquidacionRequ.AporteVoluntario="";
+					newLiquidacionRequ.aporteVoluntario="";
 				}
 				
 				//LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
-				newLiquidacionRequ.Proyecto = $("#proyectoLiq").val();
+				newLiquidacionRequ.proyecto = $("#proyectoLiq").val();
 				
 				dataForm.newLiquidacionRequ = newLiquidacionRequ;
 	
@@ -506,15 +506,15 @@ ACC.predial = {
 		
 		if(checkAporteRadio == '1')
 		{ 
-			calcLiquidacionPrivada.aporteVoluntario="X";
+			calcLiquidacionPrivada.AporteVoluntario="X";
 			
 		
 		}else{
-			calcLiquidacionPrivada.aporteVoluntario="";
+			calcLiquidacionPrivada.AporteVoluntario="";
 		}
 		
 		//LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
-		calcLiquidacionPrivada.proyecto = $("#proyectoLiq").val();
+		calcLiquidacionPrivada.Proyecto = $("#proyectoLiq").val();
 		
 		dataForm.calcLiquidacionPrivada = calcLiquidacionPrivada;
 		
@@ -524,15 +524,15 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		
 		if(checkAporteRadio == '1')
 		{
-			newLiquidacionRequ.aporteVoluntario="X";
+			newLiquidacionRequ.AporteVoluntario="X";
 			
 		
 		}else{
-			newLiquidacionRequ.aporteVoluntario="";
+			newLiquidacionRequ.AporteVoluntario="";
 		}
 		
 		//LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
-		newLiquidacionRequ.proyecto = $("#proyectoLiq").val();
+		newLiquidacionRequ.Proyecto = $("#proyectoLiq").val();
 		
 		dataForm.newLiquidacionRequ = newLiquidacionRequ;
 		

@@ -118,7 +118,7 @@ ACC.vehiculos = {
 	 	        	return;
 	 	        }
 
-	 	       //Confirmation message - sobrevehiculosautomotores
+	 	       // Confirmation message - sobrevehiculosautomotores
 	 	      if(document.getElementById('opcionUso').value == "02"){
                 var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                 if (r == true) {
@@ -251,11 +251,12 @@ ACC.vehiculos = {
 							if (data.errores[0].txtmsj != null && data.errores[0].txtmsj != ""){
 								alert(data.errores[0].txtmsj);
 								
-								//$( "#dialogVehiculos" ).dialog( "open" );
-								//$("#vehiculosDialogContent").html("");
-								//$.each(data.errores, function( index, value ) {
-								//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
-								//});
+								// $( "#dialogVehiculos" ).dialog( "open" );
+								// $("#vehiculosDialogContent").html("");
+								// $.each(data.errores, function( index, value )
+								// {
+								// $("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+								// });
 								
 								$("#avaluoAct").val("");
 								$("#valimpcar").val("");
@@ -270,7 +271,8 @@ ACC.vehiculos = {
 								$("#numForm").val("");
 							
 								
-		            			//$('#generaDeclaracionButton').prop("disabled", true);
+		            			// $('#generaDeclaracionButton').prop("disabled",
+								// true);
 							}else{
 								$("#avaluoAct").val(data.avaluo);
 								$("#valimpcar").val(data.impuestoCargo);
@@ -302,7 +304,7 @@ ACC.vehiculos = {
 	            			ACC.vehiculos.habilitarBotonPresentarDeclaracion();
 	            			
 	            			
-//	            			$('#generaDeclaracionButton').prop("disabled", false);
+// $('#generaDeclaracionButton').prop("disabled", false);
 	            			
 	            		}
 	 	      		
@@ -323,7 +325,7 @@ ACC.vehiculos = {
 			$("#intereses").val("");
 			$("#totpagvol").val("");
 			$("#numForm").val("");
-//			$("#calculoButton").prop('disabled', false);
+// $("#calculoButton").prop('disabled', false);
         }
     });
     
@@ -568,12 +570,12 @@ ACC.vehiculos = {
 		if (liq != null) {
 			for (var i = 0; i < liq.length; i++) {
 				
-//				var fecjur1 = liq[i].anio;
-//				var mes = fecjur1.slice(4, 6);
-//				var dia = fecjur1.slice(6);
-//				var anio = fecjur1.slice(0, 4);
+// var fecjur1 = liq[i].anio;
+// var mes = fecjur1.slice(4, 6);
+// var dia = fecjur1.slice(6);
+// var anio = fecjur1.slice(0, 4);
 				
-//				liq[i].anio = dia + '/' + mes + '/' + anio;;
+// liq[i].anio = dia + '/' + mes + '/' + anio;;
 
 				$('#tableLiq')
 						.append(
@@ -647,16 +649,31 @@ ACC.vehiculos = {
 			$("#cilindraje").find("option:eq(0)").remove();
 			
 			$('#cilindraje').append('<option value="">'+ "Seleccionar" + "</option>");
+			if(cat_valores_actuales == null){
+				$('#cilindraje').append('<option value="">'+ "No se encontraron opciones" + "</option>");
+			}else{
 			$.each(infoResponse.catalogo.vehicularcilindrajeresponse, function (index,value){
 				$('#cilindraje').append('<option value="'+ value.cilindraje +'">'+ value.cilindraje + "</option>");
-			});
+			});}
 			var valueSelected = "";
 			if(cat_valores_actuales!=null){
 				valueSelected = cat_valores_actuales[1];
 			}
 			$("#cilindraje").val(valueSelected);
 		}else if(campo_catalogo == 'avaluo'){
+			if(infoResponse.catalogo.avaluoactual  == null || infoResponse.catalogo.avaluoactual == ""){
+				var error = infoResponse.catalogo.errores;
+				var tam = error.length;
+				var showerror = $("#AvaluoMensaje");
+				showerror.style.display = 'block';
+				for(var i = 0; i<=tam; i++){
+				$("#mensajeAvaluo").val(error.txt_msj);
+				}
+			}else{
+				var showerror = $("#AvaluoMensaje");
+				showerror.style.display = 'none';
 			$("#avaluoAct").val(infoResponse.catalogo.avaluoactual);
+			}
 		}
 		
 		
