@@ -51,6 +51,7 @@
  <input type="hidden" value="${predialFormdos.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
 <!-- Fin de campos para calculo -->
+	<input type="hidden" id="numForm" value="${predialFormdos.numFrom}">
 	<div class="row" style="marging-top: 5px">
 		<div class="col-md-12 centercol-md-8 text-center">
 			<c:if test="${flagPresentarDeclaracion eq true}">
@@ -62,7 +63,7 @@
 
 			<c:if test="${flagPagarEnLinea eq true}">
 				<button class="btn btn-primary btn-lg pagarbtn" type="submit" id="pagar"
-					name="pagar" value="pagar" disabled="disabled" onclick="pagarEnLinea('5101','${predialForm.anioGravable}','01','${predialForm.contribuyenteData.predial[0].numObjeto}','${predialForm.CHIP}')">
+					name="pagar" value="pagar" disabled="disabled" onclick="pagarEnLinea('5101','${predialFormdos.anioGravable}','01','${predialFormdos.contribuyenteData.predial[0].numObjeto}','${predialFormdos.CHIP}')">
 					<spring:theme code="predialdos.firma.paglinea" />
 				</button>
 			</c:if>

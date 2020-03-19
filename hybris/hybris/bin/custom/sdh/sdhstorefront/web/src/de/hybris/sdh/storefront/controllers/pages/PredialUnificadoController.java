@@ -372,12 +372,14 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
 		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
-		if (infoReemplazo.getNumBP() != null && infoReemplazo.getCHIP() != null && infoReemplazo.getAnioGravable() != null)
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
 		{
 			numBP = infoReemplazo.getNumBP();
 			chip = infoReemplazo.getCHIP();
 			anioGravable = infoReemplazo.getAnioGravable();
 			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
 		}
 		customerData = infoRelacion.getContribuyente();
 
@@ -510,6 +512,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		predialFormuno.setContribuyenteData(contribuyenteData);
 		predialFormuno.setControlCampos(
 				establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormuno.setNumFrom(numForm);
 
 
 		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
@@ -566,12 +569,14 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
 		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "2", infoReemplazo);
-		if (infoReemplazo.getNumBP() != null && infoReemplazo.getCHIP() != null && infoReemplazo.getAnioGravable() != null)
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
 		{
 			numBP = infoReemplazo.getNumBP();
 			chip = infoReemplazo.getCHIP();
 			anioGravable = infoReemplazo.getAnioGravable();
 			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
 		}
 		customerData = infoRelacion.getContribuyente();
 
@@ -705,6 +710,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		predialFormdos
 				.setControlCampos(
 						establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormdos.setNumFrom(numForm);
 
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormdos", predialFormdos);
@@ -731,12 +737,14 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
 		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "3", infoReemplazo);
-		if (infoReemplazo.getNumBP() != null && infoReemplazo.getCHIP() != null && infoReemplazo.getAnioGravable() != null)
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
 		{
 			numBP = infoReemplazo.getNumBP();
 			chip = infoReemplazo.getCHIP();
 			anioGravable = infoReemplazo.getAnioGravable();
 			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
 		}
 		customerData = infoRelacion.getContribuyente();
 
@@ -861,6 +869,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		predialFormtres.setContribuyenteData(contribuyenteData);
 		predialFormtres.setControlCampos(
 				establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormtres.setNumFrom(numForm);
 
 		model.addAttribute("infoPreviaPSE", new InfoPreviaPSE());
 		model.addAttribute("predialFormtres", predialFormtres);
@@ -2185,6 +2194,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				infoReemplazo.setCHIP(predialInfo.getCHIP());
 				infoReemplazo.setAnioGravable(predialInfo.getAnioGravable());
 				infoReemplazo.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
+			infoReemplazo.setNumFrom(predialInfo.getNumFrom());
+			infoReemplazo.setRepresentado(predialInfo.getRepresentado());
 				firmantes = predialInfo.getDetallePredial2Response().getFirmantes();
 		}
 		else
