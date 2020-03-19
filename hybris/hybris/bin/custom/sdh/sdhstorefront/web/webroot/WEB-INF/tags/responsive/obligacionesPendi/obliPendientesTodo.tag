@@ -76,7 +76,7 @@
 									var="eachObPredDet">
 										<c:if test="${not empty eachObPredDet.numReferencia }">
 											<tr>
-												<td><c:out value="${eachObPred.aniogravable}" /></td>
+												<td><c:out value="${eachObPred.anioGravable}" /></td>
 												<td><c:out value="${eachObPred.objetoContrato}" /></td>
 												<td><c:out value="${eachObPredDet.estadoObligacion}" /></td>
 												<td><c:out value="${eachObPredDet.obligacion}" /></td>
