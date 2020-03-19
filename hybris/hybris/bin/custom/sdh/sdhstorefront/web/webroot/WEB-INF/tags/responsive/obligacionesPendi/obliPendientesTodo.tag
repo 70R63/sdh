@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -167,7 +168,7 @@
 												<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
 												<td><c:out value="${eachObVehiDet.numReferencia}" /></td>
 												<td><c:out value="${eachObVehiDet.objetoContrato}" /></td>
-												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${eachObVehi.anioGravable}&tpImp=03" />">Generar ROP</a></td>
+												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle" onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}' )">Pagar</label></td>
