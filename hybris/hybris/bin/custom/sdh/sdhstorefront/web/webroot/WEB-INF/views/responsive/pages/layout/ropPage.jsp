@@ -19,10 +19,12 @@
 <div class="container_new_page">
 	<form:form id="form_pdf" action="/sdhstorefront/es/contribuyentes/rop"
 		method="post" commandName="ropForm">
-		<input type="hidden" id="tipoImp" name="tipoImp" value="${ropFormRequest.tipoImp}" />
-		<input type="hidden" id="numObjeto" name="numObjeto" value="${ropFormRequest.numObjeto}" />
-		<input type="hidden" id="numBP" name="numBP" value="${ropFormRequest.numBP}" />
-		<input type="hidden" id="clavePeriodo" name="clavePeriodo" value="${ropFormRequest.clavePeriodo}" />
+
+		<form:hidden path="tipoImp" value="${ropFormRequest.tipoImp}"/>
+		<form:hidden path="numObjeto" value="${ropFormRequest.numObjeto}"/>
+		<form:hidden path="numBP" value="${ropFormRequest.numBP}"/>
+		<form:hidden path="clavePeriodo" value="${ropFormRequest.clavePeriodo}"/>
+
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">

@@ -167,7 +167,7 @@
 												<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
 												<td><c:out value="${eachObVehiDet.numReferencia}" /></td>
 												<td><c:out value="${eachObVehiDet.objetoContrato}" /></td>
-												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}" />">Generar ROP</a></td>
+												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${eachObVehi.anioGravable}&tpImp=03" />">Generar ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle" onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}' )">Pagar</label></td>
@@ -542,7 +542,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledomatri"
@@ -689,7 +689,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"
