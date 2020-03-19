@@ -167,7 +167,6 @@
 												<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
 												<td><c:out value="${eachObVehiDet.numReferencia}" /></td>
 												<td><c:out value="${eachObVehiDet.objetoContrato}" /></td>
-												jair roa
 												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${eachObVehi.anioGravable}&tpImp=03" />">Generar ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
