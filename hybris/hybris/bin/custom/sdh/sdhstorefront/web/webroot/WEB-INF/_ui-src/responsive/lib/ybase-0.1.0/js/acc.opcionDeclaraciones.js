@@ -1710,7 +1710,10 @@ debugger;
         			$("#downloadHelper").attr("href",data.urlDownload);
         			
         			document.getElementById("downloadHelper").click();
-        			document.getElementById("pagar").disabled = false;
+        			var botonPagar = document.getElementById("pagar");
+        			if(botonPagar!=null){
+        				document.getElementById("pagar").disabled = false;
+        			}
         			$(".pagarbtn").attr("disabled", false);
         			
         		}

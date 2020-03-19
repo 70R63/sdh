@@ -953,19 +953,28 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_4", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialcuatro(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialcuatro(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CUATRO --------------------------");
 
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData, null);
-		model.addAttribute("redirectURL", "contribuyentes/predialunificado_4");
-		super.addFirmantes_impuesto(model, null, customerData);
+		CustomerData customerData = null;
+		RelContribuyenteAgenteAutorizado infoRelacion = null;
+		final PredialForm infoReemplazo = new PredialForm();
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
+		}
+		customerData = infoRelacion.getContribuyente();
 
 		final PredialForm predialFormcua = new PredialForm();
 		//	final PredialForm predialInfoInicuatro = (PredialForm) model.asMap().get("predialFormurl");
@@ -1085,6 +1094,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormcua.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormcua.setContribuyenteData(contribuyenteData);
+		predialFormcua
+				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormcua.setNumFrom(numForm);
 
 
 
@@ -1129,19 +1141,28 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_5", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialcinco(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialcinco(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado CINCO --------------------------");
 
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData, null);
-		model.addAttribute("redirectURL", "contribuyentes/predialunificado_5");
-		super.addFirmantes_impuesto(model, null, customerData);
+		CustomerData customerData = null;
+		RelContribuyenteAgenteAutorizado infoRelacion = null;
+		final PredialForm infoReemplazo = new PredialForm();
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
+		}
+		customerData = infoRelacion.getContribuyente();
 
 		final PredialForm predialFormcinco = new PredialForm();
 
@@ -1261,6 +1282,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormcinco.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormcinco.setContribuyenteData(contribuyenteData);
+		predialFormcinco
+				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormcinco.setNumFrom(numForm);
 
 
 		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
@@ -1303,19 +1327,28 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_6", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialseis(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialseis(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado SEIS --------------------------");
 
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData, null);
-		model.addAttribute("redirectURL", "contribuyentes/predialunificado_6");
-		super.addFirmantes_impuesto(model, null, customerData);
+		CustomerData customerData = null;
+		RelContribuyenteAgenteAutorizado infoRelacion = null;
+		final PredialForm infoReemplazo = new PredialForm();
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
+		}
+		customerData = infoRelacion.getContribuyente();
 
 		final PredialForm predialFormseis = new PredialForm();
 
@@ -1436,6 +1469,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormseis.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormseis.setContribuyenteData(contribuyenteData);
+		predialFormseis
+				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormseis.setNumFrom(numForm);
 
 		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
 		final String clavePeriodo = predialInfoIniseis.getAnioGravable().substring(2, 4) + "A1";
@@ -1476,19 +1512,28 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_7", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialsiete(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialsiete(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado Siete --------------------------");
 
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData, null);
-		model.addAttribute("redirectURL", "contribuyentes/predialunificado_7");
-		super.addFirmantes_impuesto(model, null, customerData);
+		CustomerData customerData = null;
+		RelContribuyenteAgenteAutorizado infoRelacion = null;
+		final PredialForm infoReemplazo = new PredialForm();
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
+		}
+		customerData = infoRelacion.getContribuyente();
 
 		final PredialForm predialFormsiete = new PredialForm();
 
@@ -1609,6 +1654,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormsiete.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormsiete.setContribuyenteData(contribuyenteData);
+		predialFormsiete
+				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormsiete.setNumFrom(numForm);
 
 
 
@@ -1651,19 +1699,28 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_8", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialocho(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialocho(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado OCHO --------------------------");
 
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		model.addAttribute("customerData", customerData);
-		addAgentsToModel(model, customerData, null);
-		model.addAttribute("redirectURL", "contribuyentes/predialunificado_8");
-		super.addFirmantes_impuesto(model, null, customerData);
+		CustomerData customerData = null;
+		RelContribuyenteAgenteAutorizado infoRelacion = null;
+		final PredialForm infoReemplazo = new PredialForm();
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
+		}
+		customerData = infoRelacion.getContribuyente();
 
 		final PredialForm predialFormocho = new PredialForm();
 
@@ -1782,6 +1839,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormocho.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormocho.setContribuyenteData(contribuyenteData);
+		predialFormocho
+				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormocho.setNumFrom(numForm);
 
 		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
 		final String clavePeriodo = predialInfoIniocho.getAnioGravable().substring(2, 4) + "A1";

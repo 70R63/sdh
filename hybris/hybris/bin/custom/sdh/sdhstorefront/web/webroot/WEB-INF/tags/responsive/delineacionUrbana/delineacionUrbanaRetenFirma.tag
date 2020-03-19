@@ -11,7 +11,19 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-
+<c:set var="flagPresentarDeclaracion" value="false" />
+<c:set var="flagPagarEnLinea" value="false" />
+<c:if test="${dataForm.controlCampos.btnPresentarDec == false}">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+</c:if>
+<c:if test="${dataForm.controlCampos.btnPagarDec == false}">
+	<c:set var="flagPagarEnLinea" value="true" />
+</c:if>
+<c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+	<c:set var="flagPagarEnLinea" value="true" />
+	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
+</c:if>
 <c:set var="tipoDescripcionID" value='${dataForm.valCont.infoContrib.tipoDoc}'/>
 <%-- ${dataForm.valCont.infoContrib.tipoDocDescripcion}' /> --%>
 <c:set var="nombreCompleto" value='${dataForm.valCont.infoContrib.primNom} ${dataForm.valCont.infoContrib.primApe}' />
@@ -45,11 +57,13 @@
 <!-- 						value="retencion"> -->
 <%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>
 <!-- 					</button> -->
-		<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()" >
+		<c:if test="${flagPresentarDeclaracion eq true}">
+		<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()" disabled="disabled">
 			<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
 			class="btn btn-primary btn-lg" onclick="pagarlinea()" >   Se comenta linea para habilitar boton 19/12/2019 Maria Torres--> 
 			<spring:theme code="delineacion.urbana.dec.firm.prerete" />
 		</button>
+		</c:if>
 					
 				</div>
 
@@ -67,9 +81,11 @@
 				<sf:hidden path="radicado" />
 				
 				<div class="col-md-3">
+				<c:if test="${flagPagarEnLinea eq true}">
 				<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit" id="action" name="pagar" value="pagar"  disabled="true">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar"/>
 				</sf:button>
+				</c:if>
 				</div>
 				</sf:form>
 			</div>
