@@ -908,7 +908,7 @@ public class IcaPageController extends SDHAbstractPageController
 		return sdhEnviaFirmasFacade.enviaFirmas(enviaFirmasRequest);
 	}
 
-	@RequestMapping(value = "/generar", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
 	public GeneraDeclaracionResponse generar(final GeneraDeclaracionForm dataForm, final HttpServletResponse response,
 			final HttpServletRequest request) throws CMSItemNotFoundException

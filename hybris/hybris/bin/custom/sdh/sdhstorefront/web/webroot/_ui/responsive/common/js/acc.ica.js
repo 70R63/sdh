@@ -565,7 +565,7 @@ ACC.ica = {
 		            },
 		            error: function () {
 		            	$( "#dialogICA" ).dialog( "open" );
-		            	$("#icaDialogContent").html("Hubo un error al generar la declaración, por favor intentalo más tarde");
+		            	$("#icaDialogContent").html("Hubo un error al  la declaración, por favor intentalo más tarde");
 		            	$("#icaPresentarDeclaracionButton").prop('disabled', false);
 		            }
 		        });
