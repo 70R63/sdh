@@ -185,7 +185,6 @@
 				</div>
 			</div>
 		</div>
-		<input type="hidden" value="" id="numForm" class="numForm"></input>
 		<div class="row">
 			<div class="col-md-3">
 				<c:if test="${predialForm.controlCampos.liquidacionPrivada != true}">
