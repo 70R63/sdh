@@ -16,7 +16,7 @@ public class DetallePredial2Response
 	private DetallePredial2Response_liquidacion liquidacion;
 	private PredialEstLiquidacionPrivada liquidacionprivada;
 	private List<DetallePredial2Response_marcas> marcas;
-	private List<FirmanteResponse> firmantes;
+	private List<FirmanteResponsePredial2> firmantes;
 	/**
 	 * @return the infopredio
 	 */
@@ -73,17 +73,18 @@ public class DetallePredial2Response
 	{
 		this.marcas = marcas;
 	}
+
 	/**
 	 * @return the firmantes
 	 */
-	public List<FirmanteResponse> getFirmantes()
+	public List<FirmanteResponsePredial2> getFirmantes()
 	{
 		return firmantes;
 	}
 	/**
 	 * @param firmantes the firmantes to set
 	 */
-	public void setFirmantes(final List<FirmanteResponse> firmantes)
+	public void setFirmantes(final List<FirmanteResponsePredial2> firmantes)
 	{
 		this.firmantes = firmantes;
 	}
