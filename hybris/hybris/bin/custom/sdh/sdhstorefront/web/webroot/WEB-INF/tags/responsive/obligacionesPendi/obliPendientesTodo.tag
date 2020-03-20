@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -167,7 +168,7 @@
 												<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
 												<td><c:out value="${eachObVehiDet.numReferencia}" /></td>
 												<td><c:out value="${eachObVehiDet.objetoContrato}" /></td>
-												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${eachObVehi.anioGravable}&tpImp=03" />">Generar ROP</a></td>
+												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 													id="Detalle" onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}' )">Pagar</label></td>
@@ -238,16 +239,25 @@
 									var="eachObIcaDet">
 										<c:if test="${not empty eachObIcaDet.numReferencia }">
 										<tr>
+										    <jsp:useBean id="peridoDesc" class="java.util.HashMap" scope="request"/>
+                                            <c:set target="${peridoDesc}" property="01" value="Enero - Febrero"/>
+                                            <c:set target="${peridoDesc}" property="02" value="Marzo - Abril"/>
+                                            <c:set target="${peridoDesc}" property="03" value="Mayo - Junio"/>
+                                            <c:set target="${peridoDesc}" property="04" value="Julio - Agosto"/>
+                                            <c:set target="${peridoDesc}" property="05" value="Septiembre - Octubre"/>
+                                            <c:set target="${peridoDesc}" property="06" value="Noviembre - Diciembre"/>
+
 											<td><c:out value="${eachObIca.tipoIdentificacion}" /></td>
 											<td><c:out value="${eachObIca.noIdentificacion}" /></td>
 											<td><c:out value="${eachObIca.anioGravable}" /></td>
-											<td><c:out value="${eachObIca.periodo}" /></td>
+											<!-- <td><c:out value="${eachObIca.periodo}" /></td> -->
+											<td><c:out value="${peridoDesc[eachObIca.periodo]}"/></td>
 											<td><c:out value="${eachObIcaDet.estadoObligacion}" /></td>
 											<td><c:out value="${eachObIcaDet.obligacion}" /></td>
 											<td><c:out value="${eachObIcaDet.numFormulario}" /></td>
 											<td><c:out value="${eachObIcaDet.numReferencia}" /></td>
 											<td><c:out value="${eachObIcaDet.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}" />">Generar ROP</a></td>
+											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&&objCont=${eachObIcaDet.objetoContrato}&clvPer=${eachObIca.anioGravable}${eachObIca.periodo}" />">Generar ROP</a></td>
 											<td><label class="control-label"
 												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
 												id="Detalle" onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}' )">Pagar</label></td>

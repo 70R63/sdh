@@ -10,6 +10,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -27,10 +28,16 @@ import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
+import de.hybris.sdh.core.pojos.responses.DetallePredial2Response_marcas;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
+import de.hybris.sdh.core.pojos.responses.PredialDatosEconomicos;
+import de.hybris.sdh.core.pojos.responses.PredialDatosFisicos;
+import de.hybris.sdh.core.pojos.responses.PredialDatosJuridicos;
+import de.hybris.sdh.core.pojos.responses.PredialEstDatosGenerales;
+import de.hybris.sdh.core.pojos.responses.PredialEstLiquidacion;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
@@ -418,11 +425,19 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setCHIP(predialInfoIniUno.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoIniUno.getMatrInmobiliaria());
 
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			DetallePredialResponse detallePredialResponse = null;
+			if (infoReemplazo.getRepresentado() != null)
+			{
+				detallePredialResponse = remapeoDesdePedial2(predialInfo);
+			}
+			else
+			{
+				final ObjectMapper mapper = new ObjectMapper();
+				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			final DetallePredialResponse detallePredialResponse = mapper
+				detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
+			}
 
 			predialFormuno.setNumDoc(predialInfoIniUno.getNumDoc());
 			predialFormuno.setCompleName(predialInfoIniUno.getCompleName());
@@ -560,6 +575,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		return getViewForPage(model);
 	}
+
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_2", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -2588,13 +2604,14 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				controlCampos.setBtnPagarDec(true);
 				controlCampos.setLiquidacionPrivada(true);
 
-				if (contribuyenteData.getAgentes() != null)
+				if (contribuyenteData.getAgentes() != null && currentUserData != null)
 				{
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
 					{
 						if (infoAgente != null)
 						{
-							if (infoAgente.getFuncionInterl() != null && infoAgente.getBp() != null
+							if (!StringUtils.isEmpty(infoAgente.getBp()) && !StringUtils.isEmpty(infoAgente.getFuncionInterl())
+									&& infoAgente.getFuncionInterl() != null && infoAgente.getBp() != null
 									&& infoAgente.getBp().equals(currentUserData.getNumBP())
 									&& infoAgente.getFuncionInterl().equals(strRepresentanteLegalPrincipal))
 							{
@@ -2612,6 +2629,93 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 
 		return controlCampos;
+	}
+
+	/**
+	 * @param predialInfo
+	 * @return
+	 */
+	private DetallePredialResponse remapeoDesdePedial2(final PredialForm predialInfo)
+	{
+		DetallePredialResponse responseRemapeo = null;
+
+		if (predialInfo.getDetallePredial2Response() != null)
+		{
+			responseRemapeo = new DetallePredialResponse();
+
+
+			responseRemapeo
+					.setOpcionuso(predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getOpcionuso());
+			responseRemapeo.setDireccionPredio(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getDireccionPredio());
+
+			final PredialDatosJuridicos datosJuridicos = new PredialDatosJuridicos();
+			datosJuridicos.setCalidadSujecion(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getCalidadSujecion());
+			responseRemapeo.setDatosJuridicos(datosJuridicos);
+
+
+			final PredialDatosEconomicos datosEconomicos = new PredialDatosEconomicos();
+			datosEconomicos.setBaseGravable(predialInfo.getDetallePredial2Response().getLiquidacion().getBaseGravable());
+			responseRemapeo.setDatosEconomicos(datosEconomicos);
+
+			final PredialDatosFisicos datosFisicos = new PredialDatosFisicos();
+			datosFisicos
+					.setAreaConstruida(predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getAreaConstruida());
+			datosFisicos.setAreaTerrenoCatastro(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getAreaTerrenoCatastro());
+			datosFisicos.setAreaTerrenoMejora(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getAreaTerrenoMejora());
+			responseRemapeo.setDatosFisicos(datosFisicos);
+
+			final List<PredialMarcas> marcas = new ArrayList<PredialMarcas>();
+			for (final DetallePredial2Response_marcas marcaOrigen : predialInfo.getDetallePredial2Response().getMarcas())
+			{
+				if (!StringUtils.isEmpty(marcaOrigen.getMarca()))
+				{
+					final PredialMarcas marcaDestino = new PredialMarcas();
+					marcaDestino.setMarca(marcaOrigen.getMarca());
+					marcaDestino.setTipoMarca(marcaOrigen.getTipoMarca());
+					marcaDestino.setPorcMarca(marcaOrigen.getPorcMarca());
+					marcas.add(marcaDestino);
+				}
+			}
+			responseRemapeo.setMarcas(marcas);
+
+			final PredialEstLiquidacion estrLiquidacionPredial = new PredialEstLiquidacion();
+			estrLiquidacionPredial.setBaseGravable(predialInfo.getDetallePredial2Response().getLiquidacion().getBaseGravable());
+			estrLiquidacionPredial
+					.setDestinoHacendario(predialInfo.getDetallePredial2Response().getLiquidacion().getDestinoHacendario());
+			estrLiquidacionPredial
+					.setTarifaLiquidacion(predialInfo.getDetallePredial2Response().getLiquidacion().getTarifaLiquidacion());
+			responseRemapeo.setEstrLiquidacionPredial(estrLiquidacionPredial);
+
+			final PredialEstDatosGenerales estrDatosGenerales = new PredialEstDatosGenerales();
+			estrDatosGenerales.setCedulaCatastral(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getCedulaCatastral());
+			estrDatosGenerales.setTipoDeclaracion(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getTipoDeclaracion());
+			estrDatosGenerales.setCanonArrendamiento(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getCanonArrendamiento());
+			estrDatosGenerales.setAvaluoMatrizMejora(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getAvaluoMatrizMejora());
+			estrDatosGenerales.setAvaluoProrrateado(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getAvaluoProrrateado());
+			estrDatosGenerales.setAvaluoIndiceEdificabilidad(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getAvaluoIndiceEdificabilidad());
+			estrDatosGenerales.setExclusionParcial(predialInfo.getDetallePredial2Response().getLiquidacion().getExclusionParcial());
+			estrDatosGenerales.setCaracterizacionPredio(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getCaracterizacionPredio());
+			estrDatosGenerales.setPropiedadHorizontal(
+					predialInfo.getDetallePredial2Response().getInfopredio().getDatospredio().getPropiedadHorizontal());
+			responseRemapeo.setEstrDatosGenerales(estrDatosGenerales);
+
+			responseRemapeo.setEstrLiquidacionPrivada(predialInfo.getDetallePredial2Response().getLiquidacionprivada());
+
+
+		}
+
+		return responseRemapeo;
 	}
 
 }
