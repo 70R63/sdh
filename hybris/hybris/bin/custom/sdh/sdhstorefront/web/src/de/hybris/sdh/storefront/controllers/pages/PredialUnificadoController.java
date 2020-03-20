@@ -2600,12 +2600,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		{
 			case "sdh_02":
 				controlCampos = new PredialControlCamposDec();
-				controlCampos.setBtnPresentarDec(true);
-				controlCampos.setBtnPagarDec(true);
-				controlCampos.setLiquidacionPrivada(true);
+				if (contribuyenteData.getAgentes() != null && currentUserData != null){
+					controlCampos.setBtnPresentarDec(true);
+					controlCampos.setBtnPagarDec(true);
+					controlCampos.setLiquidacionPrivada(true);
 
-				if (contribuyenteData.getAgentes() != null && currentUserData != null)
-				{
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
 					{
 						if (infoAgente != null)
