@@ -2595,6 +2595,18 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	{
 		PredialControlCamposDec controlCampos = null;
 		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
+		final String strContador = "Contador";
+		String funcionInterlocultorValida = null;
+
+		switch (contribuyenteData.getInfoContrib().getTipoDoc())
+		{
+			case "NIT":
+				funcionInterlocultorValida = strContador;
+				break;
+			default:
+				funcionInterlocultorValida = strRepresentanteLegalPrincipal;
+				break;
+		}
 
 		switch (rol)
 		{
@@ -2612,7 +2624,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 							if (!StringUtils.isEmpty(infoAgente.getBp()) && !StringUtils.isEmpty(infoAgente.getFuncionInterl())
 									&& infoAgente.getFuncionInterl() != null && infoAgente.getBp() != null
 									&& infoAgente.getBp().equals(currentUserData.getNumBP())
-									&& infoAgente.getFuncionInterl().equals(strRepresentanteLegalPrincipal))
+									&& infoAgente.getFuncionInterl().equals(funcionInterlocultorValida))
 							{
 								controlCampos.setBtnPresentarDec(false);
 								controlCampos.setBtnPagarDec(false);
