@@ -10,7 +10,6 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -425,20 +424,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setCHIP(predialInfoIniUno.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoIniUno.getMatrInmobiliaria());
 
-			DetallePredialResponse detallePredialResponse = null;
-			if (infoReemplazo.getRepresentado() != null)
-			{
-				detallePredialResponse = remapeoDesdePedial2(predialInfo);
-			}
-			else
-			{
-				final ObjectMapper mapper = new ObjectMapper();
-				mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo,
+					detallePredialRequest);
 
-				detallePredialResponse = mapper
-					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
-			}
-
+			if (detallePredialResponse != null)
+			{
 			predialFormuno.setNumDoc(predialInfoIniUno.getNumDoc());
 			predialFormuno.setCompleName(predialInfoIniUno.getCompleName());
 			predialFormuno.setTipDoc(predialInfoIniUno.getTipDoc());
@@ -515,8 +505,15 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			}
 
 
+
 		}
-		catch (final IOException e)
+			else
+			{
+				return "redirect:/contribuyentes/predialunificado_inicio";
+			}
+
+		}
+		catch (final Exception e)
 		{
 
 			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
@@ -634,12 +631,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setCHIP(predialInfoInidos.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInidos.getMatrInmobiliaria());
 
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo,
+					detallePredialRequest);
 
-			final DetallePredialResponse detallePredialResponse = mapper
-					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
-
+			if (detallePredialResponse != null)
+			{
 			predialFormdos.setNumDoc(predialInfoInidos.getNumDoc());
 			predialFormdos.setCompleName(predialInfoInidos.getCompleName());
 			predialFormdos.setTipDoc(predialInfoInidos.getTipDoc());
@@ -713,10 +709,14 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				}
 			}
-
+			}
+			else
+			{
+				return "redirect:/contribuyentes/predialunificado_inicio";
+			}
 
 		}
-		catch (final IOException e)
+		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
@@ -778,6 +778,41 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		return getViewForPage(model);
 	}
+
+	/**
+	 * @param infoReemplazo
+	 * @param predialInfo
+	 * @param detallePredialRequest
+	 * @return
+	 */
+	private DetallePredialResponse determinaResponse(final PredialForm infoReemplazo, final PredialForm predialInfo,
+			final DetallePredialRequest detallePredialRequest)
+	{
+		DetallePredialResponse detallePredialResponse = null;
+
+		if (infoReemplazo.getRepresentado() != null)
+		{
+			detallePredialResponse = remapeoDesdePedial2(predialInfo);
+		}
+		else
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			try
+			{
+				detallePredialResponse = mapper.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest),
+						DetallePredialResponse.class);
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			}
+		}
+
+		return detallePredialResponse;
+	}
+
 
 	@RequestMapping(value = "/contribuyentes/predialunificado_3", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -2601,10 +2636,10 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		switch (contribuyenteData.getInfoContrib().getTipoDoc())
 		{
 			case "NIT":
-				funcionInterlocultorValida = strContador;
+				funcionInterlocultorValida = strRepresentanteLegalPrincipal;
 				break;
 			default:
-				funcionInterlocultorValida = strRepresentanteLegalPrincipal;
+				funcionInterlocultorValida = strContador;
 				break;
 		}
 
@@ -2628,6 +2663,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 							{
 								controlCampos.setBtnPresentarDec(false);
 								controlCampos.setBtnPagarDec(false);
+								break;
 							}
 						}
 					}
