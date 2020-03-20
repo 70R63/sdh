@@ -31,6 +31,7 @@ import de.hybris.sdh.core.pojos.responses.DetallePredial2Response_marcas;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
+import de.hybris.sdh.core.pojos.responses.FirmanteResponsePredial2;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.PredialDatosEconomicos;
 import de.hybris.sdh.core.pojos.responses.PredialDatosFisicos;
@@ -2557,7 +2558,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		if (predialInfo != null && predialInfo.getRepresentado() != null)
 			{
-			System.out.println("---------- En predial unificado uno GET Agente Autorizado ----------");
+			System.out.println("---------- En predial unificado " + tiporeg + " GET Agente Autorizado ----------");
 				tipoUsuario = "A";
 			customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(predialInfo.getRepresentado());
 			agenteAutorizadoData = customerFacade.getCurrentCustomer();
@@ -2568,7 +2569,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				infoReemplazo.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
 			infoReemplazo.setNumFrom(predialInfo.getNumFrom());
 			infoReemplazo.setRepresentado(predialInfo.getRepresentado());
-				firmantes = predialInfo.getDetallePredial2Response().getFirmantes();
+			firmantes = rempaeoFirmantes(predialInfo.getDetallePredial2Response().getFirmantes());
 		}
 		else
 		{
@@ -2581,6 +2582,36 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		infoRelacion.setAgenteAutorizado(agenteAutorizadoData);
 
 		return infoRelacion;
+	}
+
+
+	/**
+	 * @param firmantes
+	 * @return
+	 */
+	private List<FirmanteResponse> rempaeoFirmantes(final List<FirmanteResponsePredial2> firmantesOrigen)
+	{
+		List<FirmanteResponse> firmantesDestino = null;
+		FirmanteResponse firmaDestinoActual = null;
+
+		if (firmantesOrigen != null)
+		{
+			firmantesDestino = new ArrayList<FirmanteResponse>();
+			for (final FirmanteResponsePredial2 firmaOrigenActual : firmantesOrigen)
+			{
+				if (firmaOrigenActual.getTipoIdent() != null)
+				{
+					firmaDestinoActual = new FirmanteResponse();
+					firmaDestinoActual.setTipoIdent(firmaOrigenActual.getTipoIdent());
+					firmaDestinoActual.setNumIdent(firmaOrigenActual.getNumIdent());
+					firmaDestinoActual.setNombre(firmaOrigenActual.getNombre());
+					firmaDestinoActual.setTarjetaProd(firmaOrigenActual.getTarjetaProd());
+					firmantesDestino.add(firmaDestinoActual);
+				}
+			}
+		}
+
+		return firmantesDestino;
 	}
 
 
@@ -2628,10 +2659,16 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	private PredialControlCamposDec establecerCamposImpuestoDec(final String rol, final SDHValidaMailRolResponse contribuyenteData,
 			final CustomerData currentUserData)
 	{
-		PredialControlCamposDec controlCampos = null;
+		final PredialControlCamposDec controlCampos = new PredialControlCamposDec();
 		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
 		final String strContador = "Contador";
 		String funcionInterlocultorValida = null;
+
+		if (contribuyenteData.getInfoContrib().getTipoDoc().equals("NIT") || currentUserData != null)
+		{
+			controlCampos.setBtnPresentarDec(true);
+			controlCampos.setBtnPagarDec(true);
+		}
 
 		switch (contribuyenteData.getInfoContrib().getTipoDoc())
 		{
@@ -2646,10 +2683,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		switch (rol)
 		{
 			case "sdh_02":
-				controlCampos = new PredialControlCamposDec();
 				if (contribuyenteData.getAgentes() != null && currentUserData != null){
-					controlCampos.setBtnPresentarDec(true);
-					controlCampos.setBtnPagarDec(true);
 					controlCampos.setLiquidacionPrivada(true);
 
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
