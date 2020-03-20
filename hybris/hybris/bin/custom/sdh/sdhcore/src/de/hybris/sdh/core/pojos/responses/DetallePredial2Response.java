@@ -13,8 +13,10 @@ import java.util.List;
 public class DetallePredial2Response
 {
 	private DetallePredial2Response_infopredio infopredio;
+	private DetallePredial2Response_liquidacion liquidacion;
+	private PredialEstLiquidacionPrivada liquidacionprivada;
+	private List<DetallePredial2Response_marcas> marcas;
 	private List<FirmanteResponse> firmantes;
-
 	/**
 	 * @return the infopredio
 	 */
@@ -22,16 +24,55 @@ public class DetallePredial2Response
 	{
 		return infopredio;
 	}
-	
 	/**
-	 * @param infopredio
-	 *           the infopredio to set
+	 * @param infopredio the infopredio to set
 	 */
 	public void setInfopredio(final DetallePredial2Response_infopredio infopredio)
 	{
 		this.infopredio = infopredio;
 	}
-	
+	/**
+	 * @return the liquidacion
+	 */
+	public DetallePredial2Response_liquidacion getLiquidacion()
+	{
+		return liquidacion;
+	}
+	/**
+	 * @param liquidacion the liquidacion to set
+	 */
+	public void setLiquidacion(final DetallePredial2Response_liquidacion liquidacion)
+	{
+		this.liquidacion = liquidacion;
+	}
+	/**
+	 * @return the liquidacionprivada
+	 */
+	public PredialEstLiquidacionPrivada getLiquidacionprivada()
+	{
+		return liquidacionprivada;
+	}
+	/**
+	 * @param liquidacionprivada the liquidacionprivada to set
+	 */
+	public void setLiquidacionprivada(final PredialEstLiquidacionPrivada liquidacionprivada)
+	{
+		this.liquidacionprivada = liquidacionprivada;
+	}
+	/**
+	 * @return the marcas
+	 */
+	public List<DetallePredial2Response_marcas> getMarcas()
+	{
+		return marcas;
+	}
+	/**
+	 * @param marcas the marcas to set
+	 */
+	public void setMarcas(final List<DetallePredial2Response_marcas> marcas)
+	{
+		this.marcas = marcas;
+	}
 	/**
 	 * @return the firmantes
 	 */
@@ -39,27 +80,22 @@ public class DetallePredial2Response
 	{
 		return firmantes;
 	}
-	
 	/**
-	 * @param firmantes
-	 *           the firmantes to set
+	 * @param firmantes the firmantes to set
 	 */
 	public void setFirmantes(final List<FirmanteResponse> firmantes)
 	{
 		this.firmantes = firmantes;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString()
 	{
-		return "DetallePredial2Response [infopredio=" + infopredio + ", firmantes=" + firmantes + "]";
+		return "DetallePredial2Response [infopredio=" + infopredio + ", liquidacion=" + liquidacion + ", liquidacionprivada="
+				+ liquidacionprivada + ", marcas=" + marcas + ", firmantes=" + firmantes + "]";
 	}
-
 
 
 }

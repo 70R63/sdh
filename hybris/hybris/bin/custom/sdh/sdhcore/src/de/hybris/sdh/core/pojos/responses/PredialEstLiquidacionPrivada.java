@@ -280,6 +280,23 @@ public class PredialEstLiquidacionPrivada
 		this.totalPagoVoluntario = totalPagoVoluntario;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "PredialEstLiquidacionPrivada [tipoRegistro=" + tipoRegistro + ", aporteVoluntario=" + aporteVoluntario
+				+ ", proyecto=" + proyecto + ", valorImpuestoCargo=" + valorImpuestoCargo + ", descuentoIncrementoDiferencial="
+				+ descuentoIncrementoDiferencial + ", valorImpuestoAjustadoActual=" + valorImpuestoAjustadoActual + ", sancion="
+				+ sancion + ", totalSaldoCargo=" + totalSaldoCargo + ", valorAPagar=" + valorAPagar + ", descuentoProntoPago="
+				+ descuentoProntoPago + ", descuentoAdicional=" + descuentoAdicional + ", intereses=" + intereses + ", totalPagar="
+				+ totalPagar + ", valorAporteVoluntario=" + valorAporteVoluntario + ", totalPagoVoluntario=" + totalPagoVoluntario
+				+ "]";
+	}
+
 
 
 
