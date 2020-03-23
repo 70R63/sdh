@@ -173,7 +173,7 @@ ACC.predial = {
 												+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 												+ datLiq.baseGravable
 												+ '" /></td>'
-												+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+												+ '<td><input style="width: 403px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 												+ destino
 												+ '" /></td>'
 												+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
