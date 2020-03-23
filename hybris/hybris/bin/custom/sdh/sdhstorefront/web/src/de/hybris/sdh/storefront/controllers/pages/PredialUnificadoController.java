@@ -1390,7 +1390,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		CustomerData customerData = null;
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
-		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "6", infoReemplazo);
 		String numForm = null;
 		if (infoReemplazo.getRepresentado() != null)
 		{
@@ -1433,12 +1433,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setCHIP(predialInfoIniseis.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoIniseis.getMatrInmobiliaria());
 
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo,
+					detallePredialRequest);
 
-			final DetallePredialResponse detallePredialResponse = mapper
-					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
-
+			if (detallePredialResponse != null)
+			{
 
 			predialFormseis.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormseis.setOpcionuso(detallePredialResponse.getOpcionuso());
@@ -1510,8 +1509,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				}
 			}
+			}
+			else
+			{
+				return "redirect:/contribuyentes/predialunificado_inicio";
+			}
 		}
-		catch (final IOException e)
+		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
