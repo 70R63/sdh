@@ -37,11 +37,11 @@
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
 					type="radio" name="optradio" id="optionNo" value="2" ${disabledLiquidacionPrivada}>No
 			</div>
-			<div class="col-md-2" id="proyecto">
+			<div class="col-md-4" id="proyecto">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.liquidacionpriv.proyecto" /></label> <select id="proyectoLiq"
-						name="" class="newalto form-control" ${disabledLiquidacionPrivada}><option value="00" >Seleccionar</option>
+						name="" class="alto_select alto form-control" ${disabledLiquidacionPrivada}><option value="00" >Seleccionar</option>
 						<option value="01">FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option>
 						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option></select>
 				</div>

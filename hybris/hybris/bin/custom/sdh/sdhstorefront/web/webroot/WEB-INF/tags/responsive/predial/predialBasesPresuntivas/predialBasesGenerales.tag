@@ -83,7 +83,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.generales.opuso" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.opcionuso}"
+						name="" class="alto form-control" disabled type="text" value="${predialFormbases.opcionuso}"
 						maxlength="240"></input>
 				</div>
 			</div>
