@@ -103,10 +103,6 @@
                             id="declaradelibutton1" value="declaracion" disabled="true" onclick="formValidator();">
                             <spring:theme code="delineacion.urbana.radicados.generar.declaracion" />
                         </sf:button>
-						<sf:button class="btn btn-primary btn-lg" name="action"
-							id="declaradelibutton1" value="declaracion" disabled="true">
-							<spring:theme code="delineacion.urbana.radicados.generar.declaracion" />
-						</sf:button>
 					</div>
 				</div>
 			</div>

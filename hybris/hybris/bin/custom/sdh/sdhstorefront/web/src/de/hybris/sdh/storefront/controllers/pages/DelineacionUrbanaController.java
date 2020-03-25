@@ -10,6 +10,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -25,6 +26,13 @@ import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacion2Request;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.RadicaDelinRequest;
+import de.hybris.sdh.core.pojos.responses.DelineacionU2_areaIntervenida;
+import de.hybris.sdh.core.pojos.responses.DelineacionU2_areaProyecto;
+import de.hybris.sdh.core.pojos.responses.DelineacionU2_usos;
+import de.hybris.sdh.core.pojos.responses.DelineacionUAreaIntervenida;
+import de.hybris.sdh.core.pojos.responses.DelineacionUAreaProyecto;
+import de.hybris.sdh.core.pojos.responses.DelineacionUInfoDeclara;
+import de.hybris.sdh.core.pojos.responses.DelineacionUUsos;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
@@ -36,8 +44,10 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolina;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
+import de.hybris.sdh.storefront.forms.DelineacionUrbanaControlCamposDec;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
@@ -920,8 +930,10 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
 		final CustomerData currentUserData = customerFacade.getCurrentCustomer();
 		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
+		final SDHValidaMailRolResponse valCont = sdhCustomerFacade.getRepresentadoFromSAP(representado);
 
 		model.addAttribute("customerData", currentUserData);
+		model.addAttribute("currentUserData", currentUserData);
 		model.addAttribute("contribuyenteData", contribuyenteData);
 		model.addAttribute("redirectURL", "/autorizados/contribuyente/representando?representado=" + contribuyenteData.getNumBP());
 
@@ -942,7 +954,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		//final String tipoImpuesto = new ControllerPseConstants().getDELINEACION();
+		String tipoImpuesto = "";
 		String numBP = "";
 		String numDoc = "";
 		String tipoDoc = "";
@@ -950,19 +962,23 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		String periodo = "";
 		String clavePeriodo = "";
 		String dv = "";
-		final String numObjeto = "";
-		final String CDU = "";
-		final String cauex = "";
+		String numObjeto = "";
+		String CDU = "";
+		String cauex = "";
 
-		final String tipoImpuesto = infoImpuesto2Response.getRetencion().equals("X")
+
+		final String anticipo = infoImpuesto2Response.getRetencion().equals("X") ? "X" : "";
+		tipoImpuesto = anticipo.equals("X")
 				? new ControllerPseConstants().getRETENCIONDU()
 				: new ControllerPseConstants().getDELINEACION();
-		final String anticipo = infoImpuesto2Response.getRetencion().equals("X") ? "X" : "";
 		numBP = contribuyenteData.getNumBP();
 		numDoc = contribuyenteData.getDocumentNumber();
 		tipoDoc = contribuyenteData.getDocumentType();
 
 		final InfoObjetoDelineacionResponse infObjetoDelineacion = new InfoObjetoDelineacionResponse();
+		remapeoDesdeDelineacion2(infObjetoDelineacion, infoImpuesto2Response);
+		remapeoDesdeParametros(infObjetoDelineacion, numForm);
+
 		final InfoObjetoDelineacionExtras infObjetoDelineacionExtras = new InfoObjetoDelineacionExtras();
 		if (infoImpuesto2Response.getAnoGravable() == null)
 		{
@@ -972,20 +988,39 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		{
 			infObjetoDelineacionExtras.setAnoGravable(infoImpuesto2Response.getAnoGravable());
 		}
+
+		final InfoDelineacionInput input = new InfoDelineacionInput();
+		input.setSelectedAnoPresDeclaracion(infObjetoDelineacionExtras.getAnoGravable());
+		input.setSelectedCDU(infoImpuesto2Response.getCdu());
+		input.setSelectedRadicado(infoImpuesto2Response.getNumRadicado());
+		input.setSelectedTipoLicencia(infoImpuesto2Response.getTipoLicencia());
+		if(infoImpuesto2Response.getRetencion().equals("X")) {
+			input.setTipoFlujo("R");
+		}
+		else {
+			input.setTipoFlujo("D");
+		}
+
+
 		infoDelineacion.setInfObjetoDelineacionExtras(infObjetoDelineacionExtras);
+		infoDelineacion.setInfObjetoDelineacion(infObjetoDelineacion);
+		infoDelineacion.setInput(input);
+		infoDelineacion.setCatalogos(gasolinaService.prepararCatalogosDelineacionU());
+		infoDelineacion.setValCont(valCont);
+
 
 		anoGravable = infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable();
 		periodo = "01";
 		clavePeriodo = gasolinaService.prepararPeriodoAnualPago(infoDelineacion.getInfObjetoDelineacionExtras().getAnoGravable());
 		dv = contribuyenteData.getDigVer();
-		//		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
-		//		CDU = infoDelineacion.getInput().getSelectedCDU();
+		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
+		CDU = infoImpuesto2Response.getCdu();
 
-		//		cauex = infoDelineacion.getInfObjetoDelineacion().getInfoDeclara().getCausalExcepDESCRIPCION();
-		//		if (cauex == null)
-		//		{
-		//			gasolinaService.prepararValorcausalExcepDESCRIPCIONDUR(infoDelineacion);
-		//		}
+		cauex = infoDelineacion.getInfObjetoDelineacion().getInfoDeclara().getCausalExcepDESCRIPCION();
+		if (cauex == null)
+		{
+			gasolinaService.prepararValorcausalExcepDESCRIPCIONDUR(infoDelineacion);
+		}
 
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
@@ -996,8 +1031,8 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		infoPreviaPSE.setPeriodo(periodo);
 		infoPreviaPSE.setClavePeriodo(clavePeriodo);
 		infoPreviaPSE.setDv(dv);
-		//		infoPreviaPSE.setNumObjeto(numObjeto);
-		//		infoPreviaPSE.setCDU(CDU);
+		infoPreviaPSE.setNumObjeto(numObjeto);
+		infoPreviaPSE.setCDU(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
 
 
@@ -1017,6 +1052,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		//			infoDelineacion.getInfObjetoDelineacion().getInfoDeclara()
 		//					.setTipoLicencia(infoDelineacion.getInput().getSelectedTipoLicencia());
 		//		}
+		infoDelineacion.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, currentUserData));
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		model.addAttribute("dataForm", infoDelineacion);
@@ -1029,6 +1065,171 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
+	}
+
+	/**
+	 * @param infObjetoDelineacion
+	 * @param numForm
+	 */
+	private void remapeoDesdeParametros(final InfoObjetoDelineacionResponse responseRemapeo, final String numForm)
+	{
+		if (responseRemapeo != null)
+		{
+			responseRemapeo.setNumForm(numForm);
+		}
+
+	}
+
+
+
+	/**
+	 * @param infoImpuesto2Response
+	 * @return
+	 */
+	private void remapeoDesdeDelineacion2(final InfoObjetoDelineacionResponse responseRemapeo,
+			final InfoObjetoDelineacion2Response infoImpuesto2Response)
+	{
+
+		if (responseRemapeo != null)
+		{
+			final DelineacionUInfoDeclara infoDeclara = new DelineacionUInfoDeclara();
+			infoDeclara.setCdu(infoImpuesto2Response.getCdu());
+			infoDeclara.setNumRadicado(infoImpuesto2Response.getNumRadicado());
+			infoDeclara.setOpcionUso(infoImpuesto2Response.getOpcionUso());
+			infoDeclara.setTipoLicencia(infoImpuesto2Response.getTipoLicencia());
+			infoDeclara.setObjetoLicen(infoImpuesto2Response.getObjetoLicen());
+			infoDeclara.setModalidad(infoImpuesto2Response.getModalidad());
+			infoDeclara.setPresupuestoObra(infoImpuesto2Response.getPresupuestoObra());
+			infoDeclara.setFechaEjecutaria(infoImpuesto2Response.getFechaEjecutaria());
+			infoDeclara.setFechaFinalObra(infoImpuesto2Response.getFechaFinalObra());
+			infoDeclara.setFechaUltAbono(infoImpuesto2Response.getFechaUltAbono());
+			infoDeclara.setTotalPresupuesto(infoImpuesto2Response.getTotalPresupuesto());
+			infoDeclara.setValorExen(infoImpuesto2Response.getValorExen());
+			infoDeclara.setValorEjecutado(infoImpuesto2Response.getValorEjecutado());
+			infoDeclara.setImpuestoCargo(infoImpuesto2Response.getImpuestoCargo());
+			infoDeclara.setValorSancion(infoImpuesto2Response.getValorSancion());
+			infoDeclara.setTotalRetencion(infoImpuesto2Response.getTotalRetencion());
+			infoDeclara.setSaldoImpCargo(infoImpuesto2Response.getSaldoImpCargo());
+			infoDeclara.setSaldoFavor(infoImpuesto2Response.getSaldoFavor());
+			infoDeclara.setValorPagar(infoImpuesto2Response.getValorPagar());
+			infoDeclara.setInteresesMora(infoImpuesto2Response.getInteresMora());
+			infoDeclara.setTotalPagar(infoImpuesto2Response.getTotalPagar());
+			infoDeclara.setCausalExcep(infoImpuesto2Response.getCausalExcep());
+
+
+			responseRemapeo.setInfoDeclara(infoDeclara);
+
+			if (infoImpuesto2Response.getUsos() != null && !infoImpuesto2Response.getUsos().isEmpty())
+			{
+
+				final List<DelineacionUUsos> usos = new ArrayList<DelineacionUUsos>();
+				for (final DelineacionU2_usos datoOrigen : infoImpuesto2Response.getUsos())
+				{
+					final DelineacionUUsos datoDestino = new DelineacionUUsos();
+					datoDestino.setAreaNeta(datoOrigen.getAreaNeta());
+					datoDestino.setCodUso(datoOrigen.getCodUso());
+					datoDestino.setNumUnidad(datoOrigen.getNumUnidad());
+					datoDestino.setUso(datoOrigen.getUso());
+					datoDestino.setUsoCatalogo(datoOrigen.getUsoCatalogo());
+
+					usos.add(datoDestino);
+				}
+
+
+				responseRemapeo.setUsos(usos);
+			}
+
+			if (infoImpuesto2Response.getAreaIntervenida() != null && !infoImpuesto2Response.getAreaIntervenida().isEmpty())
+			{
+
+				final List<DelineacionUAreaIntervenida> areaIntervenida = new ArrayList<DelineacionUAreaIntervenida>();
+				for (final DelineacionU2_areaIntervenida datoOrigen : infoImpuesto2Response.getAreaIntervenida())
+				{
+					final DelineacionUAreaIntervenida datoDestino = new DelineacionUAreaIntervenida();
+					datoDestino.setAreaInter(datoOrigen.getAreaInter());
+					datoDestino.setAream2(datoOrigen.getAream2());
+
+					areaIntervenida.add(datoDestino);
+				}
+
+				responseRemapeo.setAreaIntervenida(areaIntervenida);
+			}
+
+			if (infoImpuesto2Response.getAreaProyecto() != null && !infoImpuesto2Response.getAreaProyecto().isEmpty())
+			{
+
+				final List<DelineacionUAreaProyecto> areaProyecto = new ArrayList<DelineacionUAreaProyecto>();
+
+				for (final DelineacionU2_areaProyecto datoOrigen : infoImpuesto2Response.getAreaProyecto())
+				{
+					final DelineacionUAreaProyecto datoDestino = new DelineacionUAreaProyecto();
+					datoDestino.setAreaProy(datoOrigen.getAreaProy());
+					datoDestino.setAream2(datoOrigen.getAream2());
+
+					areaProyecto.add(datoDestino);
+				}
+
+				responseRemapeo.setAreaProyecto(areaProyecto);
+			}
+		}
+
+	}
+
+
+	private DelineacionUrbanaControlCamposDec establecerCamposImpuestoDec(final String rol, final CustomerData contribuyenteData,
+			final CustomerData currentUserData)
+	{
+		final DelineacionUrbanaControlCamposDec controlCampos = new DelineacionUrbanaControlCamposDec();
+		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
+		final String strContador = "Contador";
+		String funcionInterlocultorValida = null;
+
+		if (contribuyenteData.getDocumentType().equals("NIT") || currentUserData != null)
+		{
+			controlCampos.setBtnPresentarDec(true);
+			controlCampos.setBtnPagarDec(true);
+		}
+
+		switch (contribuyenteData.getDocumentType())
+		{
+			case "NIT":
+				funcionInterlocultorValida = strRepresentanteLegalPrincipal;
+				break;
+			default:
+				funcionInterlocultorValida = strContador;
+				break;
+		}
+
+		switch (rol)
+		{
+			case "sdh_02":
+				if (contribuyenteData.getAgentList() != null && currentUserData != null)
+				{
+
+					for (final SDHAgentData infoAgente : contribuyenteData.getAgentList())
+					{
+						if (infoAgente != null)
+						{
+							if (!StringUtils.isEmpty(infoAgente.getBp()) && !StringUtils.isEmpty(infoAgente.getInternalFunction())
+									&& infoAgente.getInternalFunction() != null && infoAgente.getBp() != null
+									&& infoAgente.getBp().equals(currentUserData.getNumBP())
+									&& infoAgente.getInternalFunction().equals(funcionInterlocultorValida))
+							{
+								controlCampos.setBtnPresentarDec(false);
+								controlCampos.setBtnPagarDec(false);
+								break;
+							}
+						}
+					}
+				}
+
+				break;
+
+			default:
+				break;
+		}
+
+		return controlCampos;
 	}
 
 

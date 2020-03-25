@@ -58,7 +58,7 @@
 <%-- 						<spring:theme code="delineacion.urbana.dec.firm.prerete" /> --%>
 <!-- 					</button> -->
 		<c:if test="${flagPresentarDeclaracion eq true}">
-		<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()" disabled="disabled">
+		<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()" disabled="disabled">
 			<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
 			class="btn btn-primary btn-lg" onclick="pagarlinea()" >   Se comenta linea para habilitar boton 19/12/2019 Maria Torres--> 
 			<spring:theme code="delineacion.urbana.dec.firm.prerete" />
