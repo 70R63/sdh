@@ -7,6 +7,7 @@ import de.hybris.sdh.core.pojos.responses.InfoObjetoDelineacionResponse;
 import de.hybris.sdh.core.pojos.responses.RadicaDelinResponse;
 import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaCatalogos;
+import de.hybris.sdh.storefront.forms.DelineacionUrbanaControlCamposDec;
 
 
 /**
@@ -23,6 +24,7 @@ public class InfoDelineacion
 	private InfoObjetoDelineacionResponse calculoImpDelineacion;
 	private InfoObjetoDelineacionExtras infObjetoDelineacionExtras;
 	private SobreTasaGasolinaCatalogos catalogos;
+	private DelineacionUrbanaControlCamposDec controlCampos;
 
 	/**
 	 * @return the calculoImpDelineacion
@@ -142,6 +144,25 @@ public class InfoDelineacion
 	{
 		this.radicaDelin = radicaDelin;
 	}
+
+	/**
+	 * @return the controlCampos
+	 */
+	public DelineacionUrbanaControlCamposDec getControlCampos()
+	{
+		return controlCampos;
+	}
+
+	/**
+	 * @param controlCampos
+	 *           the controlCampos to set
+	 */
+	public void setControlCampos(final DelineacionUrbanaControlCamposDec controlCampos)
+	{
+		this.controlCampos = controlCampos;
+	}
+
+
 
 
 
