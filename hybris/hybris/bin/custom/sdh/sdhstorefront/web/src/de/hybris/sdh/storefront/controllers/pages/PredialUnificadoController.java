@@ -10,6 +10,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -1058,6 +1059,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setCHIP(predialInfoInicuatro.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInicuatro.getMatrInmobiliaria());
 
+
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -1082,6 +1084,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcua.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcua.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcua.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormcua.setNumDoc(customerData.getDocumentNumber());
+			predialFormcua.setCompleName(customerData.getCompleteName());
+			predialFormcua.setNumBP(customerData.getNumBP());
 
 			final String idDestino = predialFormcua.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormcua.setDesDestino(destinoHacendario(idDestino));
@@ -1253,7 +1258,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
-
+			predialFormcinco.setNumDoc(customerData.getDocumentNumber());
+			predialFormcinco.setCompleName(customerData.getCompleteName());
+			predialFormcinco.setNumBP(customerData.getNumBP());
 			predialFormcinco.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormcinco.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormcinco.setIndicadorspac(detallePredialResponse.getIndicadorspac());
@@ -1438,7 +1445,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			if (detallePredialResponse != null)
 			{
-
+				predialFormseis.setNumDoc(customerData.getDocumentNumber());
+				predialFormseis.setCompleName(customerData.getCompleteName());
+				predialFormseis.setNumBP(customerData.getNumBP());
 			predialFormseis.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormseis.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormseis.setIndicadorspac(detallePredialResponse.getIndicadorspac());
@@ -1629,6 +1638,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
+			predialFormsiete.setNumDoc(customerData.getDocumentNumber());
+			predialFormsiete.setCompleName(customerData.getCompleteName());
+			predialFormsiete.setNumBP(customerData.getNumBP());
 
 			predialFormsiete.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormsiete.setOpcionuso(detallePredialResponse.getOpcionuso());
@@ -1816,6 +1828,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
 
+			predialFormocho.setNumDoc(customerData.getDocumentNumber());
+			predialFormocho.setCompleName(customerData.getCompleteName());
+			predialFormocho.setNumBP(customerData.getNumBP());
 			predialFormocho.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormocho.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormocho.setIndicadorspac(detallePredialResponse.getIndicadorspac());
@@ -1986,6 +2001,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
 
+			predialFormbases.setNumDoc(customerData.getDocumentNumber());
+			predialFormbases.setCompleName(customerData.getCompleteName());
+			predialFormbases.setNumBP(customerData.getNumBP());
 			predialFormbases.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormbases.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormbases.setIndicadorspac(detallePredialResponse.getIndicadorspac());
