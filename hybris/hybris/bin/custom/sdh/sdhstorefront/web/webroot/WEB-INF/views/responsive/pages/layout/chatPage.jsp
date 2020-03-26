@@ -69,13 +69,31 @@
     background-color: #555;
 }
 
+    #outer{
+      position:static;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:aliceblue;
+    }
+    #inner{
+      width: 80%;
+      height: auto;
+      top: 20px;
+      margin: 0 auto;
+      position: relative;
+      background-color:white;
+      border-radius: 30px;
+    }
+
 </style>
+
 
 <html>
     <head>
         <title>Chat</title>
     </head>
-
     <!-- <body>
         <table>
             <tr>
@@ -97,69 +115,110 @@
             </tr>
         </table>
     </body> -->
-                <input type="hidden" id="username" value="jair.r04@gmail.com">
-                <div class="panel panel-primary"
-                    style="border-top: 2px solid white; border-bottom: white; border-right: white; border-left: white; ">
-                    <div class="panel-heading" style="height: 7%">
-                        <span class="glyphicon glyphicon-comment"></span> Chat
-                        <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-chevron-down"></span>
-                            </button>
-                            <ul class="dropdown-menu slidedown">
-                                <li><a href="#" onclick="connect();"><span class="glyphicon glyphicon-ok-sign"></span>
-                                    Available</a></li>
-                                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-off"></span>
-                                    Sign Out</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="panel-body" style="height: 80%">
-                        <ul id="chatMessages" class="chat">
-                            <li class="right clearfix"><span class="chat-img pull-right">
-                                                        <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
-                                                    </span>
-                                                        <div class="chat-body clearfix">
-                                                            <div class="header">
-                                                                <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
-                                                                <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                                            </div>
-                                                            <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                                                dolor, quis ullamcorper ligula sodales.
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                                                    <li class="left clearfix"><span class="chat-img pull-left">
-                                                        <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-                                                    </span>
-                                                        <div class="chat-body clearfix">
-                                                            <div class="header">
-                                                                <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                                                    <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
-                                                            </div>
-                                                            <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                                                dolor, quis ullamcorper ligula sodales.
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                        </ul>
-                    </div>
-                    <div class="panel-footer" style="height: 8%">
-                        <div class="input-group">
-                            <input id="msg" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                            <span class="input-group-btn">
-                                <button class="btn btn-warning btn-sm" id="btn-chat" onclick="send();">
-                                    Send
-                                </button>
-                            </span>
-                        </div>
+
+<c:set var = "userType" scope = "session" value = "${param.userType}"/>
+<body style="background-color: aliceblue;">
+    <div class="container"  id="outer" >
+        </br>
+        <div class="row align-center" id="inner">
+        <h3 class="text-center">Inicio</h3>
+        </br>
+            <form class="form-horizontal col-lg-11" id="chatForm">
+                <div class="form-group">
+                    <div class="input-group col-lg-9 col-lg-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input class="form-control" id="email" type="email" placeholder="email@email.com" required>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="input-group  col-lg-9 col-lg-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input class="form-control" id="userName" type="text" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group  col-lg-9 col-lg-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select class="form-control" id="tipoAsunto">
+                            <option>- Seleccionar -</option>
+                            <option>Opcion 1</option>
+                            <option>Opcion 2</option>
+                            <option>Opcion 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-2">
+                        <textarea class="form-control" rows="10" id="comentario" placeholder="&iquest;En que podemos ayudarte?"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-2 text-right">
+                        <button type="button" class="btn btn-info" onclick="sendForm()">Aceptar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div >
+        <div id="chatMode" >
+            <input type="hidden" id="receiverUser" value="">
+            <div class="panel panel-info"  style="border-top: 0px solid white; border-bottom: white; border-right: white; border-left: white; ">
+                <div class="panel-heading" style="height: 41px">
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </button>
+                        <ul class="dropdown-menu slidedown">
+                            <!--<li><a href="#" onclick="connect('CUSTOMER');"><span class="glyphicon glyphicon-ok-sign"></span>
+                                Available</a></li>-->
+                            <li><a href="#" onclick="closeSession();"><span class="glyphicon glyphicon-off"></span>
+                                Cerrar Session</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 80%">
+                    <ul id="chatMessages" class="chat">
+                    </ul>
+                </div>
+                <div class="panel-footer" style="height: 8%">
+                    <div class="input-group">
+                        <input id="msg" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="send();">
+                                Send
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+    <script>
+        function sendForm() {
+            $("#chatMode").show();
+            $("#outer").hide();
+            connect();
+        }
 
+        $(document).ready(function(){
+            var usrType = '${userType}';
+            if(usrType == "AGENT"){
+                $("#chatMode").show();
+                $("#outer").hide();
+            }else{
+                $("#chatMode").hide();
+            }
+        });
 
+        function refreshPage(){
+            location.reload();
+        }
+    </script>
+</body>
 </html>
 
