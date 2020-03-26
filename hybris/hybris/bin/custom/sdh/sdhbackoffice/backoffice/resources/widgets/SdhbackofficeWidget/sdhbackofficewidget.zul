@@ -50,6 +50,9 @@
                      }
                 };
 
+                var frame = document.getElementById("chatSpaceOne");
+                var currentUrl = window.location.href;
+                frame.src = currentUrl.replace("backoffice/", "sdhstorefront/chat/customer?userType=AGENT");;
             });
 
             function addCustomer(userId, usarName, subjectType, content, sessionId, isPicked){
@@ -102,8 +105,7 @@
             <div sclass="area" vflex="1"  hflex="3">
                 <n:iframe style="width:100%;height:100%"
                     frameborder="0.5"
-                    id="chatSpaceOne"
-                    src="https://publicsector.local:9002/sdhstorefront/chat/customer?userType=AGENT">
+                    id="chatSpaceOne">
                 </n:iframe>
             </div>
         </splitlayout>
