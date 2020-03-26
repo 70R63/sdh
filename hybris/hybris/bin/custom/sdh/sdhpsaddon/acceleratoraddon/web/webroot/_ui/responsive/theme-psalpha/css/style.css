@@ -25174,3 +25174,8 @@ span.pasos {
   font-size: 12px !important;
   font-family: 'Helvetica', 'Arial', sans-serif !important;
 }
+.form-group .alto_select,
+.alto_select {
+  font-size: 12px !important;
+  padding: 1px !important;
+}
