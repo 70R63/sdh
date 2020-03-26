@@ -10,9 +10,63 @@ package de.hybris.sdh.storefront.forms;
 public class DelineacionUrbanaControlCamposDec
 {
 
+	private boolean datosGenerales;
+	private boolean informacionAreaUso;
+	private boolean liquidacion;
 	private boolean btnPresentarDec;
 	private boolean btnPagarDec;
 
+
+	/**
+	 * @return the datosGenerales
+	 */
+	public boolean isDatosGenerales()
+	{
+		return datosGenerales;
+	}
+
+	/**
+	 * @param datosGenerales
+	 *           the datosGenerales to set
+	 */
+	public void setDatosGenerales(final boolean datosGenerales)
+	{
+		this.datosGenerales = datosGenerales;
+	}
+
+	/**
+	 * @return the informacionAreaUso
+	 */
+	public boolean isInformacionAreaUso()
+	{
+		return informacionAreaUso;
+	}
+
+	/**
+	 * @param informacionAreaUso
+	 *           the informacionAreaUso to set
+	 */
+	public void setInformacionAreaUso(final boolean informacionAreaUso)
+	{
+		this.informacionAreaUso = informacionAreaUso;
+	}
+
+	/**
+	 * @return the liquidacion
+	 */
+	public boolean isLiquidacion()
+	{
+		return liquidacion;
+	}
+
+	/**
+	 * @param liquidacion
+	 *           the liquidacion to set
+	 */
+	public void setLiquidacion(final boolean liquidacion)
+	{
+		this.liquidacion = liquidacion;
+	}
 
 	/**
 	 * @return the btnPresentarDec

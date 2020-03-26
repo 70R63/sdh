@@ -1933,7 +1933,8 @@ public class SobreTasaGasolinaService
 		String campoDESCRIPCION = "";
 		final String separador = " ";
 
-		if (fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() != null)
+		if (fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() != null
+				&& !fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep().isEmpty())
 		{
 			campoDESCRIPCION = fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() + separador
 					+ obtenerListaCausalExencion().get(fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep());
