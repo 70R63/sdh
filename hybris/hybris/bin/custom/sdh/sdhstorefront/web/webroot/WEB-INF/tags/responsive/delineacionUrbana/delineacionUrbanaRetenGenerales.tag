@@ -6,6 +6,10 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<c:set var="disabledDatosGenerales" value=""/>
+<c:if test="${dataForm.controlCampos.datosGenerales == true}">
+	<c:set var="disabledDatosGenerales" value="true"/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container_new_page">
 	<div class="row">
@@ -60,7 +64,7 @@
 					<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicen"
 						items="${dataForm.catalogos.objetoLicencia}"
 						referenceData="${dataForm.catalogos.objetoLicencia}"
-						class="new_alto form-control"></sf:select>
+						class="new_alto form-control" disabled="${disabledDatosGenerales}"></sf:select>
 				</div>
 			</div>
 		</div>
@@ -72,7 +76,7 @@
 				<sf:select class="new_alto form-control" id="an"
 					onchange="obranueva(this)"
 					path="infObjetoDelineacion.infoDeclara.modalidad"
-					items="${dataForm.catalogos.modalidadLicencia}">
+					items="${dataForm.catalogos.modalidadLicencia}" disabled="${disabledDatosGenerales}">
 				</sf:select>
 			</div>
 		</div>
@@ -83,7 +87,7 @@
 				<sf:select class="new_alto form-control" name="presupuestoObra"
 					id="presupuestoObra" onchange="presupuestoObraCHANGE(this)"
 					path="infObjetoDelineacion.infoDeclara.presupuestoObra"
-					items="${dataForm.catalogos.presupuestoObra}"></sf:select>
+					items="${dataForm.catalogos.presupuestoObra}" disabled="${disabledDatosGenerales}"></sf:select>
 			</div>
 		</div>
 	</div>

@@ -6,6 +6,11 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+
+<c:set var="disabledLiquidacion" value=""/>
+<c:if test="${dataForm.controlCampos.liquidacion == true}">
+	<c:set var="disabledLiquidacion" value='true'/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -40,7 +45,7 @@
 				<%-- 						test='${(not empty tipoMarca) && (dataForm.infObjetoDelineacion.infoDeclara.tipoLicencia == "02")}'> --%>
 				<sf:input id="valorExen" name="" class="newalto form-control"
 					aria-required="true" type="text" readonly="false"
-					path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240" onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
+					path="infObjetoDelineacion.infoDeclara.valorExen" maxlength="240" onkeyup="numberFormat(this)" onclick="numberFormat(this)"/>
 				<%-- 					</c:when> --%>
 				<%-- 					<c:otherwise> --%>
 				<%-- 						<sf:input id="valorExen" name="" class="form-control" --%>
@@ -57,9 +62,9 @@
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.valorcons" /></label>
-				<sf:input class="newalto form-control" readonly="false" aria-required="true"
+				<sf:input class="newalto form-control" readonly="${disabledLiquidacion}" aria-required="true"
 					maxlength="240"
-					path="infObjetoDelineacion.infoDeclara.valorEjecutado" onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
+					path="infObjetoDelineacion.infoDeclara.valorEjecutado" onkeyup="numberFormat(this)" onclick="numberFormat(this)"/>
 			</div>
 		</div>
 	</div>
@@ -168,10 +173,12 @@
 	</div>
 
 	<div class="container">
+		<c:if test="${dataForm.controlCampos.liquidacion != true}">
 		<sf:button class="btn btn-primary btn-lg" name="action" id="calcular"
 			value="calcular" disabled="false" onclick="presdec()">
 			<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
 		</sf:button>
+		</c:if>
 	</div>
 
 </div>
