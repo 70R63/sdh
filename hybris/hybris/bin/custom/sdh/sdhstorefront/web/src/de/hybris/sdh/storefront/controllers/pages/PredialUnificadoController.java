@@ -10,6 +10,7 @@ import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
@@ -31,6 +32,7 @@ import de.hybris.sdh.core.pojos.responses.DetallePredial2Response_marcas;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
+import de.hybris.sdh.core.pojos.responses.FirmanteResponsePredial2;
 import de.hybris.sdh.core.pojos.responses.GeneraDeclaracionResponse;
 import de.hybris.sdh.core.pojos.responses.PredialDatosEconomicos;
 import de.hybris.sdh.core.pojos.responses.PredialDatosFisicos;
@@ -1057,6 +1059,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setCHIP(predialInfoInicuatro.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoInicuatro.getMatrInmobiliaria());
 
+
 			final ObjectMapper mapper = new ObjectMapper();
 			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -1081,6 +1084,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcua.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcua.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcua.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormcua.setNumDoc(customerData.getDocumentNumber());
+			predialFormcua.setCompleName(customerData.getCompleteName());
+			predialFormcua.setNumBP(customerData.getNumBP());
 
 			final String idDestino = predialFormcua.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormcua.setDesDestino(destinoHacendario(idDestino));
@@ -1252,7 +1258,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
-
+			predialFormcinco.setNumDoc(customerData.getDocumentNumber());
+			predialFormcinco.setCompleName(customerData.getCompleteName());
+			predialFormcinco.setNumBP(customerData.getNumBP());
 			predialFormcinco.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormcinco.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormcinco.setIndicadorspac(detallePredialResponse.getIndicadorspac());
@@ -1389,7 +1397,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		CustomerData customerData = null;
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
-		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "6", infoReemplazo);
 		String numForm = null;
 		if (infoReemplazo.getRepresentado() != null)
 		{
@@ -1432,13 +1440,14 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			detallePredialRequest.setCHIP(predialInfoIniseis.getCHIP());
 			detallePredialRequest.setMatrInmobiliaria(predialInfoIniseis.getMatrInmobiliaria());
 
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo,
+					detallePredialRequest);
 
-			final DetallePredialResponse detallePredialResponse = mapper
-					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
-
-
+			if (detallePredialResponse != null)
+			{
+				predialFormseis.setNumDoc(customerData.getDocumentNumber());
+				predialFormseis.setCompleName(customerData.getCompleteName());
+				predialFormseis.setNumBP(customerData.getNumBP());
 			predialFormseis.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormseis.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormseis.setIndicadorspac(detallePredialResponse.getIndicadorspac());
@@ -1509,8 +1518,13 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				}
 			}
+			}
+			else
+			{
+				return "redirect:/contribuyentes/predialunificado_inicio";
+			}
 		}
-		catch (final IOException e)
+		catch (final Exception e)
 		{
 			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
@@ -1624,6 +1638,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
+			predialFormsiete.setNumDoc(customerData.getDocumentNumber());
+			predialFormsiete.setCompleName(customerData.getCompleteName());
+			predialFormsiete.setNumBP(customerData.getNumBP());
 
 			predialFormsiete.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormsiete.setOpcionuso(detallePredialResponse.getOpcionuso());
@@ -1811,6 +1828,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
 
+			predialFormocho.setNumDoc(customerData.getDocumentNumber());
+			predialFormocho.setCompleName(customerData.getCompleteName());
+			predialFormocho.setNumBP(customerData.getNumBP());
 			predialFormocho.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormocho.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormocho.setIndicadorspac(detallePredialResponse.getIndicadorspac());
@@ -1981,6 +2001,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
 
+			predialFormbases.setNumDoc(customerData.getDocumentNumber());
+			predialFormbases.setCompleName(customerData.getCompleteName());
+			predialFormbases.setNumBP(customerData.getNumBP());
 			predialFormbases.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormbases.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormbases.setIndicadorspac(detallePredialResponse.getIndicadorspac());
@@ -2557,7 +2580,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		if (predialInfo != null && predialInfo.getRepresentado() != null)
 			{
-			System.out.println("---------- En predial unificado uno GET Agente Autorizado ----------");
+			System.out.println("---------- En predial unificado " + tiporeg + " GET Agente Autorizado ----------");
 				tipoUsuario = "A";
 			customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(predialInfo.getRepresentado());
 			agenteAutorizadoData = customerFacade.getCurrentCustomer();
@@ -2568,7 +2591,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				infoReemplazo.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
 			infoReemplazo.setNumFrom(predialInfo.getNumFrom());
 			infoReemplazo.setRepresentado(predialInfo.getRepresentado());
-				firmantes = predialInfo.getDetallePredial2Response().getFirmantes();
+			firmantes = rempaeoFirmantes(predialInfo.getDetallePredial2Response().getFirmantes());
 		}
 		else
 		{
@@ -2581,6 +2604,36 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		infoRelacion.setAgenteAutorizado(agenteAutorizadoData);
 
 		return infoRelacion;
+	}
+
+
+	/**
+	 * @param firmantes
+	 * @return
+	 */
+	private List<FirmanteResponse> rempaeoFirmantes(final List<FirmanteResponsePredial2> firmantesOrigen)
+	{
+		List<FirmanteResponse> firmantesDestino = null;
+		FirmanteResponse firmaDestinoActual = null;
+
+		if (firmantesOrigen != null)
+		{
+			firmantesDestino = new ArrayList<FirmanteResponse>();
+			for (final FirmanteResponsePredial2 firmaOrigenActual : firmantesOrigen)
+			{
+				if (firmaOrigenActual.getTipoIdent() != null)
+				{
+					firmaDestinoActual = new FirmanteResponse();
+					firmaDestinoActual.setTipoIdent(firmaOrigenActual.getTipoIdent());
+					firmaDestinoActual.setNumIdent(firmaOrigenActual.getNumIdent());
+					firmaDestinoActual.setNombre(firmaOrigenActual.getNombre());
+					firmaDestinoActual.setTarjetaProd(firmaOrigenActual.getTarjetaProd());
+					firmantesDestino.add(firmaDestinoActual);
+				}
+			}
+		}
+
+		return firmantesDestino;
 	}
 
 
@@ -2628,10 +2681,16 @@ public class PredialUnificadoController extends SDHAbstractPageController
 	private PredialControlCamposDec establecerCamposImpuestoDec(final String rol, final SDHValidaMailRolResponse contribuyenteData,
 			final CustomerData currentUserData)
 	{
-		PredialControlCamposDec controlCampos = null;
+		final PredialControlCamposDec controlCampos = new PredialControlCamposDec();
 		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
 		final String strContador = "Contador";
 		String funcionInterlocultorValida = null;
+
+		if (contribuyenteData.getInfoContrib().getTipoDoc().equals("NIT") || currentUserData != null)
+		{
+			controlCampos.setBtnPresentarDec(true);
+			controlCampos.setBtnPagarDec(true);
+		}
 
 		switch (contribuyenteData.getInfoContrib().getTipoDoc())
 		{
@@ -2646,10 +2705,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		switch (rol)
 		{
 			case "sdh_02":
-				controlCampos = new PredialControlCamposDec();
 				if (contribuyenteData.getAgentes() != null && currentUserData != null){
-					controlCampos.setBtnPresentarDec(true);
-					controlCampos.setBtnPagarDec(true);
 					controlCampos.setLiquidacionPrivada(true);
 
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())

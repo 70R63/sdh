@@ -49,7 +49,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.calidad" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormsiete.datosJuridicos.calidadSujecion}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormsiete.desCalidad}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -85,11 +85,11 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormsiete.desDestino}"
+						name="" class="alto form-control" disabled type="text" value="${predialFormsiete.desDestino}"
 						maxlength="240"></input>
 				</div>
 			</div>

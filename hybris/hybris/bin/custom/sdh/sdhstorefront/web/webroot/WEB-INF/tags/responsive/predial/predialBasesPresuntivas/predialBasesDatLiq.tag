@@ -31,12 +31,12 @@
 							code="%" /></label>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.desDestino}"
-						maxlength="240"></input></select>
+						name="" class="alto form-control" disabled type="text" value="${predialFormbases.desDestino}"
+						maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.calidad" /></label> <input
 						id="" name="" class="newalto form-control" disabled type="text"
-						value="${predialFormbases.datosJuridicos.calidadSujecion}" maxlength="240"></input>
+						value="${predialFormbases.desCalidad}" maxlength="240"></input>
 				</div>
 			</div>
 
