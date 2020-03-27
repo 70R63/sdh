@@ -10,8 +10,10 @@ ACC.predial = {
 
 			if (valo == '2') {
 				pro.style.display = 'none';
+				$('#ValorAporteVoluntario').prop('disabled', true);				
 			} else if (valo == '1') {
 				pro.style.display = 'block';
+				$('#ValorAporteVoluntario').prop('disabled', false);				
 			}
 
 		});
