@@ -930,6 +930,8 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		final CustomerData currentUserData = customerFacade.getCurrentCustomer();
 		final CustomerData contribuyenteData = sdhCustomerFacade.getRepresentadoDataFromSAP(representado);
 		final SDHValidaMailRolResponse valCont = sdhCustomerFacade.getRepresentadoFromSAP(representado);
+		String paginaDestino = "";
+		String breadcrumbs = "";
 
 		model.addAttribute("customerData", currentUserData);
 		model.addAttribute("currentUserData", currentUserData);
@@ -1058,9 +1060,20 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		model.addAttribute("tipoMarca", tipoMarca);
 
 
-		storeCmsPageInModel(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(DELINEACION_URBANA_DECLARACIONES_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE_DECLARACION));
+		if (infoDelineacion.getInput().getTipoFlujo().equals("R"))
+		{
+			paginaDestino = DELINEACION_URBANA_RETENCION_CMS_PAGE;
+			breadcrumbs = TEXT_ACCOUNT_PROFILE_RETENCION;
+		}
+		if (infoDelineacion.getInput().getTipoFlujo().equals("D"))
+		{
+			paginaDestino = DELINEACION_URBANA_DECLARACIONES_CMS_PAGE;
+			breadcrumbs = TEXT_ACCOUNT_PROFILE_DECLARACION;
+		}
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(paginaDestino));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(paginaDestino));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(breadcrumbs));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);

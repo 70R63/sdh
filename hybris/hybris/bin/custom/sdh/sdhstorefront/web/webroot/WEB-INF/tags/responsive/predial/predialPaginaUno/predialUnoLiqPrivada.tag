@@ -124,7 +124,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.liquidacionpriv.desprontopago" /></label> <input id="DescuentoPorProntoPago"
-						name="" class="newalto form-control" type="text"
+						name="" class="newalto form-control" disabled type="text"
 						value="${predialForm.estrLiquidacionPrivada.descuentoProntoPago}"
 						maxlength="240" ${disabledLiquidacionPrivada}></input>
 				</div>
@@ -168,7 +168,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.liquidacionpriv.valaportevol" /></label> <input id="ValorAporteVoluntario"
-						name="" class="newalto form-control" disabled type="text"
+						name="" class="newalto form-control"  type="text"
 						value="${predialForm.estrLiquidacionPrivada.valorAporteVoluntario}"
 						maxlength="240"></input>
 				</div>
