@@ -46,6 +46,7 @@ public class DelineacionU2_areaIntervenida
 	 * @param aream2
 	 *           the aream2 to set
 	 */
+	@JsonProperty("Aream2")
 	public void setAream2(final String aream2)
 	{
 		this.aream2 = aream2;
