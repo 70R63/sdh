@@ -137,7 +137,7 @@
 							class="chat-text form-control chat-textarea chat-message" name="chat.message"
 							id="chat-message"> </textarea>
 					</div>
-					<spring:message code="chatbox.start.chat" var="startChatText" />
+					<spring:message code="" var="startChatText" />
 					<input type="submit" name="submit"
 						class="btn btn-black btn-block btn-chat" value="${fn:escapeXml(startChatText)}"></input>
 					<br />

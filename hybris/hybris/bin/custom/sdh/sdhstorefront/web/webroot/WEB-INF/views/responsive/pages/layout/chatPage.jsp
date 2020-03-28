@@ -78,9 +78,9 @@
       background:aliceblue;
     }
     #inner{
-      width: 80%;
+      width: 99%;
       height: auto;
-      top: 20px;
+      top: 1%;
       margin: 0 auto;
       position: relative;
       background-color:white;
@@ -94,30 +94,8 @@
     <head>
         <title>Chat</title>
     </head>
-    <!-- <body>
-        <table>
-            <tr>
-                <td colspan="2">
-                    <input type="text" id="username" placeholder="Username"/>
-                    <button type="button" onclick="connect();" >Connect</button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <textarea readonly="true" rows="10" cols="52" id="log"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="text" size="51" id="msg" placeholder="Message"/>
-                    <button type="button" onclick="send();" >Send</button>
-                </td>
-            </tr>
-        </table>
-    </body> -->
-
 <c:set var = "userType" scope = "session" value = "${param.userType}"/>
-<body style="background-color: aliceblue;">
+<body style="background-color: aliceblue; ">
     <div class="container"  id="outer" >
         </br>
         <div class="row align-center" id="inner">
@@ -149,7 +127,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-lg-9 col-lg-offset-2">
-                        <textarea class="form-control" rows="10" id="comentario" placeholder="&iquest;En que podemos ayudarte?"></textarea>
+                        <textarea class="form-control" rows="11" id="comentario" placeholder="&iquest;En que podemos ayudarte?"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
