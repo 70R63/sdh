@@ -58,7 +58,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -453,8 +452,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormuno.setCHIP(detallePredialRequest.getCHIP());
 				predialFormuno.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 				predialFormuno.setDireccionPredio(detallePredialResponse.getDireccionPredio());
-				predialFormuno.setMostrarAporteVoluntario(isBefore3erViernesJunio());
-
+				predialFormuno
+						.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 				final String idDestino = predialFormuno.getEstrLiquidacionPredial().getDestinoHacendario();
 				predialFormuno.setDesDestino(destinoHacendario(idDestino));
@@ -659,7 +658,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormdos.setCHIP(detallePredialRequest.getCHIP());
 				predialFormdos.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 				predialFormdos.setDireccionPredio(detallePredialResponse.getDireccionPredio());
-				predialFormdos.setMostrarAporteVoluntario(isBefore3erViernesJunio());
+				predialFormdos
+						.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 			final String idDestino = predialFormdos.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormdos.setDesDestino(destinoHacendario(idDestino));
@@ -900,7 +900,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormtres.setNumDoc(predialInfoInitres.getNumDoc());
 			predialFormtres.setCompleName(predialInfoInitres.getCompleName());
 			predialFormtres.setTipDoc(predialInfoInitres.getTipDoc());
-			predialFormtres.setMostrarAporteVoluntario(isBefore3erViernesJunio());
+			predialFormtres
+					.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 			final String idDestino = predialFormtres.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormtres.setDesDestino(destinoHacendario(idDestino));
@@ -1090,7 +1091,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcua.setNumDoc(customerData.getDocumentNumber());
 			predialFormcua.setCompleName(customerData.getCompleteName());
 			predialFormcua.setNumBP(customerData.getNumBP());
-			predialFormcua.setMostrarAporteVoluntario(isBefore3erViernesJunio());
+			predialFormcua.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 			final String idDestino = predialFormcua.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormcua.setDesDestino(destinoHacendario(idDestino));
@@ -1282,7 +1283,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcinco.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcinco.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcinco.setDireccionPredio(detallePredialResponse.getDireccionPredio());
-			predialFormcinco.setMostrarAporteVoluntario(isBefore3erViernesJunio());
+			predialFormcinco
+					.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 			final String idDestino = predialFormcinco.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormcinco.setDesDestino(destinoHacendario(idDestino));
@@ -1471,7 +1473,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormseis.setCHIP(detallePredialRequest.getCHIP());
 				predialFormseis.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 				predialFormseis.setDireccionPredio(detallePredialResponse.getDireccionPredio());
-				predialFormseis.setMostrarAporteVoluntario(isBefore3erViernesJunio());
+				predialFormseis
+						.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 				final String idDestino = predialFormseis.getEstrLiquidacionPredial().getDestinoHacendario();
 				predialFormseis.setDesDestino(destinoHacendario(idDestino));
@@ -1666,7 +1669,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormsiete.setCHIP(detallePredialRequest.getCHIP());
 			predialFormsiete.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormsiete.setDireccionPredio(detallePredialResponse.getDireccionPredio());
-			predialFormsiete.setMostrarAporteVoluntario(isBefore3erViernesJunio());
+			predialFormsiete
+					.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 			final String idDestino = predialFormsiete.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormsiete.setDesDestino(destinoHacendario(idDestino));
@@ -1856,7 +1860,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormocho.setCHIP(detallePredialRequest.getCHIP());
 			predialFormocho.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormocho.setDireccionPredio(detallePredialResponse.getDireccionPredio());
-			predialFormocho.setMostrarAporteVoluntario(isBefore3erViernesJunio());
+			predialFormocho
+					.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 			final String idDestino = predialFormocho.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormocho.setDesDestino(destinoHacendario(idDestino));
@@ -2030,7 +2035,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormbases.setCHIP(detallePredialRequest.getCHIP());
 			predialFormbases.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormbases.setDireccionPredio(detallePredialResponse.getDireccionPredio());
-			predialFormbases.setMostrarAporteVoluntario(isBefore3erViernesJunio());
+			predialFormbases
+					.setMostrarAporteVoluntario(isBefore3erViernesJunio(new Integer(detallePredialRequest.getAnioGravable())));
 
 			final String idDestino = predialFormbases.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormbases.setDesDestino(destinoHacendario(idDestino));
@@ -2831,9 +2837,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		return responseRemapeo;
 	}
 
-	private boolean isBefore3erViernesJunio()
+	private boolean isBefore3erViernesJunio(final Integer anioGravable)
 	{
-		final LocalDate d = LocalDate.of(Year.now().getValue(), 6, 21);
+		final LocalDate d = LocalDate.of(anioGravable.intValue(), 6, 21);
 		//d = d.with(TemporalAdjusters.dayOfWeekInMonth(3, DayOfWeek.FRIDAY));
 
 		if (LocalDate.now().isBefore(d))
