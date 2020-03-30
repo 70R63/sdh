@@ -19,7 +19,7 @@ public class ChatBrokerController extends AbstractPageController {
 
     private static final Logger LOG = Logger.getLogger(ChatBrokerController.class);
 
-    private static final String CMS_SITE_PAGE_CHAT = "chatPage";
+    private static final String CMS_SITE_PAGE_CHAT = "chatPageTemplate";
     private static final String TEXT_CHAT= "Chat Broker";
     private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 
