@@ -1,6 +1,6 @@
 ACC.predial = {
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial"],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -18,6 +18,20 @@ ACC.predial = {
 
 		});
 	},
+	
+	bindMostrarAporteVolintario : function(){
+		debugger;
+		var mostrarAporteVoluntario = document.getElementById('mostrarAporteVoluntario');
+		if (mostrarAporteVoluntario.value == "true"){
+			$('#proyectoLiq').prop('disabled', false);
+			$('#optionSi').prop('disabled', false);
+			$('#optionNo').prop('disabled', false);
+		}else{
+			$('#proyectoLiq').prop('disabled', true);
+			$('#optionSi').prop('disabled', true);
+			$('#optionNo').prop('disabled', true);
+		}		
+	},	
 	
 	bindprophorizontal : function() {
 		$(document).on("change", ".prophorizontal", function(e) {
