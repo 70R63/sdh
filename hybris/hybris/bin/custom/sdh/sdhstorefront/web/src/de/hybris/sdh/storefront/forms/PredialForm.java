@@ -100,6 +100,29 @@ public class PredialForm
 	private String representado;
 	private DetallePredial2Response detallePredial2Response;
 
+	//bandera para aporte voluntario
+	private boolean mostrarAporteVoluntario;
+
+
+
+
+	/**
+	 * @return the mostrarAporteVoluntario
+	 */
+	public boolean isMostrarAporteVoluntario()
+	{
+		return mostrarAporteVoluntario;
+	}
+
+	/**
+	 * @param mostrarAporteVoluntario
+	 *           the mostrarAporteVoluntario to set
+	 */
+	public void setMostrarAporteVoluntario(final boolean mostrarAporteVoluntario)
+	{
+		this.mostrarAporteVoluntario = mostrarAporteVoluntario;
+	}
+
 	/**
 	 * @return the caso
 	 */

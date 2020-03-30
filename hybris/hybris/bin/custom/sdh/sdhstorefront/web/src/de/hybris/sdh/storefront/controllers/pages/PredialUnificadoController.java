@@ -57,6 +57,8 @@ import java.io.ByteArrayInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -430,84 +432,84 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			if (detallePredialResponse != null)
 			{
-			predialFormuno.setNumDoc(predialInfoIniUno.getNumDoc());
-			predialFormuno.setCompleName(predialInfoIniUno.getCompleName());
-			predialFormuno.setTipDoc(predialInfoIniUno.getTipDoc());
-			predialFormuno.setDatosEconomicos(detallePredialResponse.getDatosEconomicos());
-			predialFormuno.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
-			predialFormuno.setOpcionuso(detallePredialResponse.getOpcionuso());
-			predialFormuno.setIndicadorspac(detallePredialResponse.getIndicadorspac());
-			predialFormuno.setIndicadorbasegravable(detallePredialResponse.getIndicadorbasegravable());
-			predialFormuno.setDatosJuridicos(detallePredialResponse.getDatosJuridicos());
-			predialFormuno.setDatosEconomicos(detallePredialResponse.getDatosEconomicos());
-			predialFormuno.setDatosFisicos(detallePredialResponse.getDatosFisicos());
-			predialFormuno.setMarcas(detallePredialResponse.getMarcas());
-			predialFormuno.setEstrLiquidacionPredial(detallePredialResponse.getEstrLiquidacionPredial());
-			predialFormuno.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
-			predialFormuno.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
-			predialFormuno.setTblErrores(detallePredialResponse.getTblErrores());
-			predialFormuno.setAnioGravable(detallePredialRequest.getAnioGravable());
-			predialFormuno.setNumBP(detallePredialRequest.getNumBP());
-			predialFormuno.setCHIP(detallePredialRequest.getCHIP());
-			predialFormuno.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
-			predialFormuno.setDireccionPredio(detallePredialResponse.getDireccionPredio());
-
-			final String idDestino = predialFormuno.getEstrLiquidacionPredial().getDestinoHacendario();
-			predialFormuno.setDesDestino(destinoHacendario(idDestino));
-
-			final String idCalidad = predialFormuno.getDatosJuridicos().getCalidadSujecion();
-
-			if (idCalidad == "1" || idCalidad.equals("1"))
-			{
-				predialFormuno.setDesCalidad("Propietario");
-			}
-			else if (idCalidad == "2" || idCalidad.equals("2"))
-			{
-				predialFormuno.setDesCalidad("Fideicometente");
-			}
-			else if (idCalidad == "3" || idCalidad.equals("3"))
-			{
-				predialFormuno.setDesCalidad("Poseedor");
-			}
-			else if (idCalidad == "4" || idCalidad.equals("4"))
-			{
-				predialFormuno.setDesCalidad("Beneficiario");
-			}
-			else if (idCalidad == "5" || idCalidad.equals("5"))
-			{
-				predialFormuno.setDesCalidad("Usufructuario");
-			}
-			else if (idCalidad == "6" || idCalidad.equals("6"))
-			{
-				predialFormuno.setDesCalidad("Arrendatario");
-			}
-			else
-			{
-				predialFormuno.setDesCalidad("-");
-			}
+				predialFormuno.setNumDoc(predialInfoIniUno.getNumDoc());
+				predialFormuno.setCompleName(predialInfoIniUno.getCompleName());
+				predialFormuno.setTipDoc(predialInfoIniUno.getTipDoc());
+				predialFormuno.setDatosEconomicos(detallePredialResponse.getDatosEconomicos());
+				predialFormuno.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
+				predialFormuno.setOpcionuso(detallePredialResponse.getOpcionuso());
+				predialFormuno.setIndicadorspac(detallePredialResponse.getIndicadorspac());
+				predialFormuno.setIndicadorbasegravable(detallePredialResponse.getIndicadorbasegravable());
+				predialFormuno.setDatosJuridicos(detallePredialResponse.getDatosJuridicos());
+				predialFormuno.setDatosEconomicos(detallePredialResponse.getDatosEconomicos());
+				predialFormuno.setDatosFisicos(detallePredialResponse.getDatosFisicos());
+				predialFormuno.setMarcas(detallePredialResponse.getMarcas());
+				predialFormuno.setEstrLiquidacionPredial(detallePredialResponse.getEstrLiquidacionPredial());
+				predialFormuno.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
+				predialFormuno.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
+				predialFormuno.setTblErrores(detallePredialResponse.getTblErrores());
+				predialFormuno.setAnioGravable(detallePredialRequest.getAnioGravable());
+				predialFormuno.setNumBP(detallePredialRequest.getNumBP());
+				predialFormuno.setCHIP(detallePredialRequest.getCHIP());
+				predialFormuno.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+				predialFormuno.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+				predialFormuno.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
 
-			for (final PredialMarcas eachMarca : predialFormuno.getMarcas())
-			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+				final String idDestino = predialFormuno.getEstrLiquidacionPredial().getDestinoHacendario();
+				predialFormuno.setDesDestino(destinoHacendario(idDestino));
+
+				final String idCalidad = predialFormuno.getDatosJuridicos().getCalidadSujecion();
+
+				if (idCalidad == "1" || idCalidad.equals("1"))
 				{
-					String exMarca = "";
-					exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
-					{
-						predialFormuno.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormuno.setDecExencion(eachMarca.getPorcMarca());
-					}
-
+					predialFormuno.setDesCalidad("Propietario");
 				}
+				else if (idCalidad == "2" || idCalidad.equals("2"))
+				{
+					predialFormuno.setDesCalidad("Fideicometente");
+				}
+				else if (idCalidad == "3" || idCalidad.equals("3"))
+				{
+					predialFormuno.setDesCalidad("Poseedor");
+				}
+				else if (idCalidad == "4" || idCalidad.equals("4"))
+				{
+					predialFormuno.setDesCalidad("Beneficiario");
+				}
+				else if (idCalidad == "5" || idCalidad.equals("5"))
+				{
+					predialFormuno.setDesCalidad("Usufructuario");
+				}
+				else if (idCalidad == "6" || idCalidad.equals("6"))
+				{
+					predialFormuno.setDesCalidad("Arrendatario");
+				}
+				else
+				{
+					predialFormuno.setDesCalidad("-");
+				}
+
+
+				for (final PredialMarcas eachMarca : predialFormuno.getMarcas())
+				{
+					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+					{
+						String exMarca = "";
+						exMarca = eachMarca.getTipoMarca();
+						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						{
+							predialFormuno.setDecExclusion(eachMarca.getPorcMarca());
+						}
+						if (exMarca == "2" || exMarca.equals("2"))
+						{
+							predialFormuno.setDecExencion(eachMarca.getPorcMarca());
+						}
+
+					}
+				}
+
 			}
-
-
-
-		}
 			else
 			{
 				return "redirect:/contribuyentes/predialunificado_inicio";
@@ -637,26 +639,27 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			if (detallePredialResponse != null)
 			{
-			predialFormdos.setNumDoc(predialInfoInidos.getNumDoc());
-			predialFormdos.setCompleName(predialInfoInidos.getCompleName());
-			predialFormdos.setTipDoc(predialInfoInidos.getTipDoc());
-			predialFormdos.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
-			predialFormdos.setOpcionuso(detallePredialResponse.getOpcionuso());
-			predialFormdos.setIndicadorspac(detallePredialResponse.getIndicadorspac());
-			predialFormdos.setIndicadorbasegravable(detallePredialResponse.getIndicadorbasegravable());
-			predialFormdos.setDatosJuridicos(detallePredialResponse.getDatosJuridicos());
-			predialFormdos.setDatosEconomicos(detallePredialResponse.getDatosEconomicos());
-			predialFormdos.setDatosFisicos(detallePredialResponse.getDatosFisicos());
-			predialFormdos.setMarcas(detallePredialResponse.getMarcas());
-			predialFormdos.setEstrLiquidacionPredial(detallePredialResponse.getEstrLiquidacionPredial());
-			predialFormdos.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
-			predialFormdos.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
-			predialFormdos.setTblErrores(detallePredialResponse.getTblErrores());
-			predialFormdos.setAnioGravable(detallePredialRequest.getAnioGravable());
-			predialFormdos.setNumBP(detallePredialRequest.getNumBP());
-			predialFormdos.setCHIP(detallePredialRequest.getCHIP());
-			predialFormdos.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
-			predialFormdos.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+				predialFormdos.setNumDoc(predialInfoInidos.getNumDoc());
+				predialFormdos.setCompleName(predialInfoInidos.getCompleName());
+				predialFormdos.setTipDoc(predialInfoInidos.getTipDoc());
+				predialFormdos.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
+				predialFormdos.setOpcionuso(detallePredialResponse.getOpcionuso());
+				predialFormdos.setIndicadorspac(detallePredialResponse.getIndicadorspac());
+				predialFormdos.setIndicadorbasegravable(detallePredialResponse.getIndicadorbasegravable());
+				predialFormdos.setDatosJuridicos(detallePredialResponse.getDatosJuridicos());
+				predialFormdos.setDatosEconomicos(detallePredialResponse.getDatosEconomicos());
+				predialFormdos.setDatosFisicos(detallePredialResponse.getDatosFisicos());
+				predialFormdos.setMarcas(detallePredialResponse.getMarcas());
+				predialFormdos.setEstrLiquidacionPredial(detallePredialResponse.getEstrLiquidacionPredial());
+				predialFormdos.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
+				predialFormdos.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
+				predialFormdos.setTblErrores(detallePredialResponse.getTblErrores());
+				predialFormdos.setAnioGravable(detallePredialRequest.getAnioGravable());
+				predialFormdos.setNumBP(detallePredialRequest.getNumBP());
+				predialFormdos.setCHIP(detallePredialRequest.getCHIP());
+				predialFormdos.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+				predialFormdos.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+				predialFormdos.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
 			final String idDestino = predialFormdos.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormdos.setDesDestino(destinoHacendario(idDestino));
@@ -897,6 +900,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormtres.setNumDoc(predialInfoInitres.getNumDoc());
 			predialFormtres.setCompleName(predialInfoInitres.getCompleName());
 			predialFormtres.setTipDoc(predialInfoInitres.getTipDoc());
+			predialFormtres.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
 			final String idDestino = predialFormtres.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormtres.setDesDestino(destinoHacendario(idDestino));
@@ -1086,6 +1090,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcua.setNumDoc(customerData.getDocumentNumber());
 			predialFormcua.setCompleName(customerData.getCompleteName());
 			predialFormcua.setNumBP(customerData.getNumBP());
+			predialFormcua.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
 			final String idDestino = predialFormcua.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormcua.setDesDestino(destinoHacendario(idDestino));
@@ -1277,6 +1282,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormcinco.setCHIP(detallePredialRequest.getCHIP());
 			predialFormcinco.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormcinco.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormcinco.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
 			final String idDestino = predialFormcinco.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormcinco.setDesDestino(destinoHacendario(idDestino));
@@ -1448,76 +1454,77 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				predialFormseis.setTipDoc(customerData.getDocumentType());
 				predialFormseis.setCompleName(customerData.getCompleteName());
 				predialFormseis.setNumBP(customerData.getNumBP());
-			predialFormseis.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
-			predialFormseis.setOpcionuso(detallePredialResponse.getOpcionuso());
-			predialFormseis.setIndicadorspac(detallePredialResponse.getIndicadorspac());
-			predialFormseis.setIndicadorbasegravable(detallePredialResponse.getIndicadorbasegravable());
-			predialFormseis.setDatosJuridicos(detallePredialResponse.getDatosJuridicos());
-			predialFormseis.setDatosEconomicos(detallePredialResponse.getDatosEconomicos());
-			predialFormseis.setDatosFisicos(detallePredialResponse.getDatosFisicos());
-			predialFormseis.setMarcas(detallePredialResponse.getMarcas());
-			predialFormseis.setEstrLiquidacionPredial(detallePredialResponse.getEstrLiquidacionPredial());
-			predialFormseis.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
-			predialFormseis.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
-			predialFormseis.setTblErrores(detallePredialResponse.getTblErrores());
-			predialFormseis.setAnioGravable(detallePredialRequest.getAnioGravable());
-			predialFormseis.setNumBP(detallePredialRequest.getNumBP());
-			predialFormseis.setCHIP(detallePredialRequest.getCHIP());
-			predialFormseis.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
-			predialFormseis.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+				predialFormseis.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
+				predialFormseis.setOpcionuso(detallePredialResponse.getOpcionuso());
+				predialFormseis.setIndicadorspac(detallePredialResponse.getIndicadorspac());
+				predialFormseis.setIndicadorbasegravable(detallePredialResponse.getIndicadorbasegravable());
+				predialFormseis.setDatosJuridicos(detallePredialResponse.getDatosJuridicos());
+				predialFormseis.setDatosEconomicos(detallePredialResponse.getDatosEconomicos());
+				predialFormseis.setDatosFisicos(detallePredialResponse.getDatosFisicos());
+				predialFormseis.setMarcas(detallePredialResponse.getMarcas());
+				predialFormseis.setEstrLiquidacionPredial(detallePredialResponse.getEstrLiquidacionPredial());
+				predialFormseis.setEstrDatosGenerales(detallePredialResponse.getEstrDatosGenerales());
+				predialFormseis.setEstrLiquidacionPrivada(detallePredialResponse.getEstrLiquidacionPrivada());
+				predialFormseis.setTblErrores(detallePredialResponse.getTblErrores());
+				predialFormseis.setAnioGravable(detallePredialRequest.getAnioGravable());
+				predialFormseis.setNumBP(detallePredialRequest.getNumBP());
+				predialFormseis.setCHIP(detallePredialRequest.getCHIP());
+				predialFormseis.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
+				predialFormseis.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+				predialFormseis.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
-			final String idDestino = predialFormseis.getEstrLiquidacionPredial().getDestinoHacendario();
-			predialFormseis.setDesDestino(destinoHacendario(idDestino));
+				final String idDestino = predialFormseis.getEstrLiquidacionPredial().getDestinoHacendario();
+				predialFormseis.setDesDestino(destinoHacendario(idDestino));
 
-			final String idCalidad = predialFormseis.getDatosJuridicos().getCalidadSujecion();
+				final String idCalidad = predialFormseis.getDatosJuridicos().getCalidadSujecion();
 
-			if (idCalidad == "1" || idCalidad.equals("1"))
-			{
-				predialFormseis.setDesCalidad("Propietario");
-			}
-			else if (idCalidad == "2" || idCalidad.equals("2"))
-			{
-				predialFormseis.setDesCalidad("Fideicometente");
-			}
-			else if (idCalidad == "3" || idCalidad.equals("3"))
-			{
-				predialFormseis.setDesCalidad("Poseedor");
-			}
-			else if (idCalidad == "4" || idCalidad.equals("4"))
-			{
-				predialFormseis.setDesCalidad("Beneficiario");
-			}
-			else if (idCalidad == "5" || idCalidad.equals("5"))
-			{
-				predialFormseis.setDesCalidad("Usufructuario");
-			}
-			else if (idCalidad == "6" || idCalidad.equals("6"))
-			{
-				predialFormseis.setDesCalidad("Arrendatario");
-			}
-			else
-			{
-				predialFormseis.setDesCalidad("-");
-			}
-
-			for (final PredialMarcas eachMarca : predialFormseis.getMarcas())
-			{
-				if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+				if (idCalidad == "1" || idCalidad.equals("1"))
 				{
-
-					final String exMarca = eachMarca.getTipoMarca();
-					if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
-					{
-						predialFormseis.setDecExclusion(eachMarca.getPorcMarca());
-					}
-					if (exMarca == "2" || exMarca.equals("2"))
-					{
-						predialFormseis.setDecExencion(eachMarca.getPorcMarca());
-					}
-
-
+					predialFormseis.setDesCalidad("Propietario");
 				}
-			}
+				else if (idCalidad == "2" || idCalidad.equals("2"))
+				{
+					predialFormseis.setDesCalidad("Fideicometente");
+				}
+				else if (idCalidad == "3" || idCalidad.equals("3"))
+				{
+					predialFormseis.setDesCalidad("Poseedor");
+				}
+				else if (idCalidad == "4" || idCalidad.equals("4"))
+				{
+					predialFormseis.setDesCalidad("Beneficiario");
+				}
+				else if (idCalidad == "5" || idCalidad.equals("5"))
+				{
+					predialFormseis.setDesCalidad("Usufructuario");
+				}
+				else if (idCalidad == "6" || idCalidad.equals("6"))
+				{
+					predialFormseis.setDesCalidad("Arrendatario");
+				}
+				else
+				{
+					predialFormseis.setDesCalidad("-");
+				}
+
+				for (final PredialMarcas eachMarca : predialFormseis.getMarcas())
+				{
+					if (StringUtils.isNotBlank(eachMarca.getTipoMarca()))
+					{
+
+						final String exMarca = eachMarca.getTipoMarca();
+						if (exMarca == "1" || exMarca.equals("1") || exMarca == "4" || exMarca.equals("4"))
+						{
+							predialFormseis.setDecExclusion(eachMarca.getPorcMarca());
+						}
+						if (exMarca == "2" || exMarca.equals("2"))
+						{
+							predialFormseis.setDecExencion(eachMarca.getPorcMarca());
+						}
+
+
+					}
+				}
 			}
 			else
 			{
@@ -1659,6 +1666,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormsiete.setCHIP(detallePredialRequest.getCHIP());
 			predialFormsiete.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormsiete.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormsiete.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
 			final String idDestino = predialFormsiete.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormsiete.setDesDestino(destinoHacendario(idDestino));
@@ -1848,6 +1856,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormocho.setCHIP(detallePredialRequest.getCHIP());
 			predialFormocho.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormocho.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormocho.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
 			final String idDestino = predialFormocho.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormocho.setDesDestino(destinoHacendario(idDestino));
@@ -2021,6 +2030,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormbases.setCHIP(detallePredialRequest.getCHIP());
 			predialFormbases.setMatrInmobiliaria(detallePredialRequest.getMatrInmobiliaria());
 			predialFormbases.setDireccionPredio(detallePredialResponse.getDireccionPredio());
+			predialFormbases.setMostrarAporteVoluntario(isBefore3erViernesJunio());
 
 			final String idDestino = predialFormbases.getEstrLiquidacionPredial().getDestinoHacendario();
 			predialFormbases.setDesDestino(destinoHacendario(idDestino));
@@ -2819,6 +2829,19 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		}
 
 		return responseRemapeo;
+	}
+
+	private boolean isBefore3erViernesJunio()
+	{
+		final LocalDate d = LocalDate.of(Year.now().getValue(), 6, 21);
+		//d = d.with(TemporalAdjusters.dayOfWeekInMonth(3, DayOfWeek.FRIDAY));
+
+		if (LocalDate.now().isBefore(d))
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 }
