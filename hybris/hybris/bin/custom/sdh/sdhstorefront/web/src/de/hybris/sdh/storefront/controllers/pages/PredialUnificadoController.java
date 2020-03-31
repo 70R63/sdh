@@ -2839,10 +2839,11 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	private boolean isBefore3erViernesJunio(final Integer anioGravable)
 	{
-		final LocalDate d = LocalDate.of(anioGravable.intValue(), 6, 21);
+		final LocalDate tercerViernesJunio = LocalDate.of(anioGravable.intValue(), 6, 21);
+		final LocalDate hoy = LocalDate.now();
 		//d = d.with(TemporalAdjusters.dayOfWeekInMonth(3, DayOfWeek.FRIDAY));
 
-		if (LocalDate.now().isBefore(d))
+		if (hoy.isBefore(tercerViernesJunio))
 		{
 			return true;
 		}

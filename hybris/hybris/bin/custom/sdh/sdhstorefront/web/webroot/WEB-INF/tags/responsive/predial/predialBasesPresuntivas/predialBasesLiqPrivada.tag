@@ -7,6 +7,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+<input type="hidden" value="${predialForm.mostrarAporteVoluntario}" id="mostrarAporteVoluntario"/>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
 	<div class="container">

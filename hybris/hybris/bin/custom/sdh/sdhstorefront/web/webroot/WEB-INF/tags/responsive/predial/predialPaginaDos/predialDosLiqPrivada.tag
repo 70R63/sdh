@@ -6,7 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
+<input type="hidden" value="${predialForm.mostrarAporteVoluntario}" id="mostrarAporteVoluntario"/>
 <c:set var="disabledLiquidacionPrivada" value=""/>
 <c:if test="${predialFormdos.controlCampos.liquidacionPrivada == true}">
 	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"'/>
