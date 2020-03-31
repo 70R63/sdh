@@ -145,11 +145,9 @@
 	</div>
 
 	<script>
-	    function openChatWindow(){
-	       //open chat windows
-            var url = window.location.href;
-	       url = url.replace("sdhstorefront/es/login", "sdhstorefront/chat/customer");
-	       myWindow = window.open(url, "", "width=345, height=575");
-	    }
-
+        function openChatWindow(){
+           var url = window.location.href;
+           url = url.substring(0, url.indexOf("sdhstorefront")) + "sdhstorefront/chat/customer";
+           myWindow = window.open(url, "", "width=345, height=575");
+        }
     </script>
