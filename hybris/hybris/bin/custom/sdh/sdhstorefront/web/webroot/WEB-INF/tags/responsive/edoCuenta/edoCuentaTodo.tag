@@ -230,281 +230,281 @@
 				</div>
 			</div>
 
+		</div>
 
-
-			<div id="delurbana">
-				<div class="row">
-					<div class="headline">
-						<h2>
-							<span><spring:theme
-									code="edocuenta.inicial.deliurbana.titulo" /></span>
-						</h2>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="table-responsive">
-							<table class="table tableedocuenta" id="tabPaginacion3">
-								<thead>
-									<tr>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.deliurbana.cdu" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.deliurbana.radicado" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.deliurbana.aniograv" /> </label></th>
-										<th><label class="control-label labeltabletd tableangrav"><spring:theme
-													code="edocuenta.inicial.deliurbana.estado" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.deliurbana.saldocargo" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.deliurbana.saldofavor" /> </label></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach varStatus="loop" items="${ctaForm.tablaDelineacion}"
-										var="eachDeli">
-										<c:forEach varStatus="loop"
-											items="${eachDeli.detalleDelineacion}" var="eachDeliDetail">
-											<tr>
-												<td><c:out value="${eachDeli.newCDU}" /></td>
-												<td><c:out value="${eachDeliDetail.radicado}" /></td>
-												<td><c:out value="${eachDeliDetail.anioGravable}" /></td>
-												<td><c:out value="${eachDeliDetail.estado}" /></td>
-												<td><c:out value="${eachDeliDetail.saldoCargo}" /></td>
-												<td><c:out value="${eachDeliDetail.saldoFavor}" /></td>
-											</tr>
-										</c:forEach>
-									</c:forEach>
-
-								</tbody>
-							</table>
-						</div>
-						<div class="col-md-offset-6">
-							<table class="table tableedocuenta">
-								<tbody>
-									<tr>
-										<td colspan="3" class="td-colspann"
-											style="border: 0px !important;"></td>
-										<td class="td-total" style="width: 264px;"><label
-											class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.deliurbana.total" /></td>
-										<td><c:out value="${ctaForm.delineacionSaldoCargo}" /></td>
-										<td><c:out value="${ctaForm.delineacionSaldoFavor}" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+		<div id="delurbana">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="edocuenta.inicial.deliurbana.titulo" /></span>
+					</h2>
 				</div>
 			</div>
 
-
-			<div id="gasolina">
-				<div class="row">
-					<div class="headline">
-						<h2>
-							<span><spring:theme
-									code="edocuenta.inicial.gasolina.titulo" /></span>
-						</h2>
-					</div>
-				</div>
-
-
-				<div class="row">
-					<div class="col-md-7">
-						<div class="table-responsive">
-							<table class="table tableedocuenta" id="tabPaginacion4">
-								<thead>
-									<tr>
-										<th><label class="control-label labeltabletd"><spring:theme
-													code="edocuenta.inicial.gasolina.anigrav" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.gasolina.periodo" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.gasolina.estado" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.gasolina.saldocargo" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.gasolina.saldofavor" /> </label></th>
-
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach varStatus="loop" items="${ctaForm.tablaGasolina}"
-										var="eachGas">
-										<c:forEach varStatus="loop" items="${eachGas.detalleGasolina}"
-											var="eachGasDetail">
-											<tr>
-												<td><c:out value="${eachGasDetail.anioGravable}" /></td>
-												<td><c:out value="${eachGasDetail.periodo}" /></td>
-												<td><c:out value="${eachGasDetail.estado}" /></td>
-												<td><c:out value="${eachGasDetail.saldoCargo}" /></td>
-												<td><c:out value="${eachGasDetail.saldoFavor}" /></td>
-											</tr>
-										</c:forEach>
-									</c:forEach>
-
-								</tbody>
-							</table>
-
-						</div>
-						<div class="col-md-offset-3">
-							<table class="table tableedocuenta">
-								<tbody>
-									<tr>
-										<td colspan="2" class="td-colspann"
-											style="border: 0px !important;"></td>
-										<td class="td-total" style="width: 264px;"><label
-											class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.gasolina.total" /></td>
-										<td><c:out value="${ctaForm.gasolinaSaldoCargo}" /></td>
-										<td><c:out value="${ctaForm.gasolinaSaldoFavor}" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div id="publiext">
-				<div class="row">
-					<div class="headline">
-						<h2>
-							<span><spring:theme
-									code="edocuenta.inicial.publicidad.titulo" /></span>
-						</h2>
-					</div>
-				</div>
-
-
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="table-responsive">
-							<table class="table tableedocuenta" id="tabPaginacion5">
-								<thead>
-									<tr>
-										<th><label class="control-label labeltabletd"><spring:theme
-													code="edocuenta.inicial.publicidad.numresol" /> </label></th>
-										<th><label class="control-label labeltabletd"><spring:theme
-													code="edocuenta.inicial.publicidad.anigrav" /> </label></th>
-										<th><label class="control-label labeltabletd tableangrav"><spring:theme
-													code="edocuenta.inicial.publicidad.tipvalla" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.publicidad.estado" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.publicidad.saldocargo" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.publicidad.saldofavor" /> </label></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach varStatus="loop" items="${ctaForm.tablaPublicidad}"
-										var="eachPubli">
-										<c:forEach varStatus="loop"
-											items="${eachPubli.detallePublicidad}" var="eachPubliDetail">
-											<tr>
-												<td><c:out value="${eachPubli.cabecera.noResolucion}" /></td>
-												<td><c:out value="${eachPubliDetail.anioGravable}" /></td>
-												<td><spring:theme
-														code="destino.idTipValla.${eachPubli.cabecera.tipoValla}" /></td>
-												<td><c:out value="${eachPubliDetail.estado}" /></td>
-												<td><c:out value="${eachPubliDetail.saldoCargo}" /></td>
-												<td><c:out value="${eachPubliDetail.saldoFavor}" /></td>
-											</tr>
-										</c:forEach>
-									</c:forEach>
-
-								</tbody>
-							</table>
-						</div>
-						<div class="col-md-offset-6">
-							<table class="table tableedocuenta">
-								<tbody>
-									<tr>
-										<td colspan="3" class="td-colspann"
-											style="border: 0px !important;"></td>
-										<td class="td-total" style="width: 264px;"><label
-											class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.publicidad.total" /> </label></td>
-										<td><c:out value="${ctaForm.publicidadSaldoCargo}" /></td>
-										<td><c:out value="${ctaForm.publicidadSaldoFavor}" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-
-			<div id="obli-no-tributarias">
-				<div class="row">
-					<div class="headline">
-						<h2>
-							<span><spring:theme
-									code="edocuenta.inicial.obligaciones.titulo" /></span>
-						</h2>
-					</div>
-				</div>
-
-
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="table-responsive">
-							<table class="table tableedocuenta" id="tabPaginacion6">
-								<thead>
-									<tr>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.obligaciones.concepto" /> </label></th>
-										<th><label class="control-label labeltabletd"><spring:theme
-													code="edocuenta.inicial.obligaciones.anigrav" /> </label></th>
-										<th><label class="control-label labeltabletd tableangrav"><spring:theme
-													code="edocuenta.inicial.obligaciones.estado" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.obligaciones.saldocargo" /> </label></th>
-										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.obligaciones.saldofavor" /> </label></th>
-									</tr>
-								</thead>
-								<tbody>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="table-responsive">
+						<table class="table tableedocuenta" id="tabPaginacion3">
+							<thead>
+								<tr>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.deliurbana.cdu" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.deliurbana.radicado" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.deliurbana.aniograv" /> </label></th>
+									<th><label class="control-label labeltabletd tableangrav"><spring:theme
+												code="edocuenta.inicial.deliurbana.estado" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.deliurbana.saldocargo" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.deliurbana.saldofavor" /> </label></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach varStatus="loop" items="${ctaForm.tablaDelineacion}"
+									var="eachDeli">
 									<c:forEach varStatus="loop"
-										items="${ctaForm.obligNoTributaria}" var="eachOblig">
+										items="${eachDeli.detalleDelineacion}" var="eachDeliDetail">
 										<tr>
-											<td><c:out value="${eachOblig.concepto}" /></td>
-											<td><c:out value="${eachOblig.anioGravable}" /></td>
-											<td><c:out value="${eachOblig.estado}" /></td>
-											<td><c:out value="${eachOblig.saldoCargo}" /></td>
-											<td><c:out value="${eachOblig.saldoFavor}" /></td>
+											<td><c:out value="${eachDeli.newCDU}" /></td>
+											<td><c:out value="${eachDeliDetail.radicado}" /></td>
+											<td><c:out value="${eachDeliDetail.anioGravable}" /></td>
+											<td><c:out value="${eachDeliDetail.estado}" /></td>
+											<td><c:out value="${eachDeliDetail.saldoCargo}" /></td>
+											<td><c:out value="${eachDeliDetail.saldoFavor}" /></td>
 										</tr>
 									</c:forEach>
+								</c:forEach>
 
-								</tbody>
-							</table>
-						</div>
-						<div class="col-md-offset-6">
-							<table class="table tableedocuenta">
-								<tbody>
-									<tr>
-										<td colspan="2" class="td-colspann"
-											style="border: 0px !important;"></td>
-										<td class="td-total" style="width: 264px;"><label
-											class="control-label labeltabletd tabledoobli"><spring:theme
-													code="edocuenta.inicial.obligaciones.total" /> </label></td>
-										<td><c:out value="" /></td>
-										<td><c:out value="" /></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-md-offset-5">
+						<table class="table tableedocuenta">
+							<tbody>
+								<tr>
+									<td colspan="3" class="td-colspann"
+										style="border: 0px !important;"></td>
+									<td class="td-total" style="width: 264px;"><label
+										class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.deliurbana.total" /></td>
+									<td><c:out value="${ctaForm.delineacionSaldoCargo}" /></td>
+									<td><c:out value="${ctaForm.delineacionSaldoFavor}" /></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-
 			</div>
+		</div>
+
+
+		<div id="gasolina">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="edocuenta.inicial.gasolina.titulo" /></span>
+					</h2>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-7">
+					<div class="table-responsive">
+						<table class="table tableedocuenta" id="tabPaginacion4">
+							<thead>
+								<tr>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="edocuenta.inicial.gasolina.anigrav" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.gasolina.periodo" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.gasolina.estado" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.gasolina.saldocargo" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.gasolina.saldofavor" /> </label></th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach varStatus="loop" items="${ctaForm.tablaGasolina}"
+									var="eachGas">
+									<c:forEach varStatus="loop" items="${eachGas.detalleGasolina}"
+										var="eachGasDetail">
+										<tr>
+											<td><c:out value="${eachGasDetail.anioGravable}" /></td>
+											<td><c:out value="${eachGasDetail.periodo}" /></td>
+											<td><c:out value="${eachGasDetail.estado}" /></td>
+											<td><c:out value="${eachGasDetail.saldoCargo}" /></td>
+											<td><c:out value="${eachGasDetail.saldoFavor}" /></td>
+										</tr>
+									</c:forEach>
+								</c:forEach>
+
+							</tbody>
+						</table>
+
+					</div>
+					<div class="col-md-offset-3">
+						<table class="table tableedocuenta">
+							<tbody>
+								<tr>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
+									<td class="td-total" style="width: 264px;"><label
+										class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.gasolina.total" /></td>
+									<td><c:out value="${ctaForm.gasolinaSaldoCargo}" /></td>
+									<td><c:out value="${ctaForm.gasolinaSaldoFavor}" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="publiext">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="edocuenta.inicial.publicidad.titulo" /></span>
+					</h2>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="table-responsive">
+						<table class="table tableedocuenta" id="tabPaginacion5">
+							<thead>
+								<tr>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="edocuenta.inicial.publicidad.numresol" /> </label></th>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="edocuenta.inicial.publicidad.anigrav" /> </label></th>
+									<th><label class="control-label labeltabletd tableangrav"><spring:theme
+												code="edocuenta.inicial.publicidad.tipvalla" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.publicidad.estado" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.publicidad.saldocargo" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.publicidad.saldofavor" /> </label></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach varStatus="loop" items="${ctaForm.tablaPublicidad}"
+									var="eachPubli">
+									<c:forEach varStatus="loop"
+										items="${eachPubli.detallePublicidad}" var="eachPubliDetail">
+										<tr>
+											<td><c:out value="${eachPubli.cabecera.noResolucion}" /></td>
+											<td><c:out value="${eachPubliDetail.anioGravable}" /></td>
+											<td><spring:theme
+													code="destino.idTipValla.${eachPubli.cabecera.tipoValla}" /></td>
+											<td><c:out value="${eachPubliDetail.estado}" /></td>
+											<td><c:out value="${eachPubliDetail.saldoCargo}" /></td>
+											<td><c:out value="${eachPubliDetail.saldoFavor}" /></td>
+										</tr>
+									</c:forEach>
+								</c:forEach>
+
+							</tbody>
+						</table>
+					</div>
+					<div class="col-md-offset-6">
+						<table class="table tableedocuenta">
+							<tbody>
+								<tr>
+									<td colspan="3" class="td-colspann"
+										style="border: 0px !important;"></td>
+									<td class="td-total" style="width: 264px;"><label
+										class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.publicidad.total" /> </label></td>
+									<td><c:out value="${ctaForm.publicidadSaldoCargo}" /></td>
+									<td><c:out value="${ctaForm.publicidadSaldoFavor}" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div id="obli-no-tributarias">
+			<div class="row">
+				<div class="headline">
+					<h2>
+						<span><spring:theme
+								code="edocuenta.inicial.obligaciones.titulo" /></span>
+					</h2>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="table-responsive">
+						<table class="table tableedocuenta" id="tabPaginacion6">
+							<thead>
+								<tr>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.obligaciones.concepto" /> </label></th>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="edocuenta.inicial.obligaciones.anigrav" /> </label></th>
+									<th><label class="control-label labeltabletd tableangrav"><spring:theme
+												code="edocuenta.inicial.obligaciones.estado" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.obligaciones.saldocargo" /> </label></th>
+									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.obligaciones.saldofavor" /> </label></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach varStatus="loop" items="${ctaForm.obligNoTributaria}"
+									var="eachOblig">
+									<tr>
+										<td><c:out value="${eachOblig.concepto}" /></td>
+										<td><c:out value="${eachOblig.anioGravable}" /></td>
+										<td><c:out value="${eachOblig.estado}" /></td>
+										<td><c:out value="${eachOblig.saldoCargo}" /></td>
+										<td><c:out value="${eachOblig.saldoFavor}" /></td>
+									</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+					</div>
+					<div class="col-md-offset-6">
+						<table class="table tableedocuenta">
+							<tbody>
+								<tr>
+									<td colspan="2" class="td-colspann"
+										style="border: 0px !important;"></td>
+									<td class="td-total" style="width: 264px;"><label
+										class="control-label labeltabletd tabledoobli"><spring:theme
+												code="edocuenta.inicial.obligaciones.total" /> </label></td>
+									<td><c:out value="" /></td>
+									<td><c:out value="" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
 	</sf:form>
 </div>
 
