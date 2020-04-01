@@ -68,10 +68,10 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-7">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
-										code="edocuenta.inicial.nom" /></label> <input class="newalto form-control"
+										code="edocuenta.inicial.nom" /></label> <input class="alto form-control"
 									maxlength="30" size="30" disabled="disabled" type="text"
 									value="<c:out value="${ctaForm.compleName}"></c:out>" />
 							</div>
@@ -84,7 +84,7 @@
 										code="edocuenta.inicial.fecgen" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.fechageneracion}"></c:out>" />
 							</div>
 						</div>
 
@@ -94,7 +94,7 @@
 										code="edocuenta.inicial.tasint" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.tasaInteres}"></c:out>" />
 							</div>
 						</div>
 					</div>
