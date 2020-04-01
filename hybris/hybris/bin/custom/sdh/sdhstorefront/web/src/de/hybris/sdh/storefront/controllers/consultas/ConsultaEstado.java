@@ -31,6 +31,9 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
 import de.hybris.sdh.storefront.forms.EdoCuentaForm;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,8 +49,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
-
 
 /**
  * @author Federico Flores Dimas
@@ -169,6 +170,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
 			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
 
+			Date date = new Date();
+
+			//Caso 2: obtener la fecha y salida por pantalla con formato:
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			System.out.println("Fecha: " + dateFormat.format(date));
+
+			ctaForm.setFechageneracion(dateFormat.format(date));
 
 		}
 		catch (final Exception e)

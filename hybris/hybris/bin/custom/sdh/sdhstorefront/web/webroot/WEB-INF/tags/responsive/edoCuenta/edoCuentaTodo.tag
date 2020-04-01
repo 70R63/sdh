@@ -24,7 +24,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive text-center">
-							<table class="table tableedocuenta" id="">
+							<table class="table tableedocuenta" id="example">
 								<thead>
 									<tr>
 										<th colspan="4"><label
@@ -103,9 +103,9 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-12 text-center">
+					<div class="col-md-10 text-center">
 						<div class="table-responsive">
-							<table class="table tableedocuenta" id="tabPaginacion1">
+							<table class="table tableedocuenta" id="example">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -293,7 +293,7 @@
 
 
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-7">
 						<div class="table-responsive">
 							<table class="table tableedocuenta" id="tabPaginacion4">
 								<thead>
@@ -364,7 +364,7 @@
 										<th><label class="control-label labeltabletd"><spring:theme
 													code="edocuenta.inicial.publicidad.anigrav" /> </label></th>
 										<th><label class="control-label labeltabletd tableangrav"><spring:theme
-													code="edocuenta.inicial.publicidad.desthacen" /> </label></th>
+													code="edocuenta.inicial.publicidad.tipvalla" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 													code="edocuenta.inicial.publicidad.estado" /> </label></th>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
