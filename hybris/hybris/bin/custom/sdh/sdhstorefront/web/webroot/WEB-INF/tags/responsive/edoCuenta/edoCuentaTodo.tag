@@ -24,7 +24,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive text-center">
-							<table class="table tableedocuenta" id="example">
+							<table class="table tableedocuenta" id="tabPaginacion0">
 								<thead>
 									<tr>
 										<th colspan="4"><label
@@ -105,7 +105,7 @@
 				<div class="row">
 					<div class="col-md-10 text-center">
 						<div class="table-responsive">
-							<table class="table tableedocuenta" id="example">
+							<table class="table tableedocuenta" id="tabPaginacion1">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
