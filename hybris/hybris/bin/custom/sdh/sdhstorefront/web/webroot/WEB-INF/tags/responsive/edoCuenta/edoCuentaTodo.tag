@@ -381,7 +381,8 @@
 											<tr>
 												<td><c:out value="${eachPubli.cabecera.noResolucion}" /></td>
 												<td><c:out value="${eachPubliDetail.anioGravable}" /></td>
-												<td><c:out value="${eachPubliDetail.destinoHacendario}" /></td>
+												<td><spring:theme
+													code="destino.idTipValla.${eachPubli.cabecera.tipoValla}" /></td>
 												<td><c:out value="${eachPubliDetail.estado}" /></td>
 												<td><c:out value="${eachPubliDetail.saldoCargo}" /></td>
 												<td><c:out value="${eachPubliDetail.saldoFavor}" /></td>
