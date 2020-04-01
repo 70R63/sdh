@@ -20,9 +20,9 @@ ACC.predial = {
 	},
 	
 	bindMostrarAporteVolintario : function(){
-		debugger;
+//		debugger;
 		var mostrarAporteVoluntario = document.getElementById('mostrarAporteVoluntario');
-		if (mostrarAporteVoluntario.value == "true"){
+		if (mostrarAporteVoluntario != null && mostrarAporteVoluntario.value == "true"){
 			$('#proyectoLiq').prop('disabled', false);
 			$('#optionSi').prop('disabled', false);
 			$('#optionNo').prop('disabled', false);
