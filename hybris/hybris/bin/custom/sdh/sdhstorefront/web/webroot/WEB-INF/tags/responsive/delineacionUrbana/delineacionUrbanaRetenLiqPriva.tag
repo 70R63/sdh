@@ -60,7 +60,7 @@
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
 					name="" class="newalto form-control" aria-required="true" type="text"
-					readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.valorPagar}" maxlength="240">
+					readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPagar}" maxlength="240">
 			</div>
 		</div>
 	</div>
