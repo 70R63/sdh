@@ -1,6 +1,6 @@
 ACC.predial = {
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario"],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -10,26 +10,45 @@ ACC.predial = {
 
 			if (valo == '2') {
 				pro.style.display = 'none';
-				$('#ValorAporteVoluntario').prop('disabled', true);				
 			} else if (valo == '1') {
 				pro.style.display = 'block';
-				$('#ValorAporteVoluntario').prop('disabled', false);				
 			}
 
 		});
 	},
 	
+	bindNoAceptaFactura : function() {
+		$(document).on("click", ".predialNoAceptaFactura", function() {
+			debugger;
+			
+			var valPredialNoAceptaFactura = this.checked;
+			
+			if (valPredialNoAceptaFactura) {
+				$('#basegrav').prop('disabled', false);						
+			} else {
+				$('#basegrav').prop('disabled', true);				
+			}
+		});
+		
+		$(document).on("change", ".basegrav", function() {
+			debugger;
+			var nuevoValor = this.value;
+			$('#BaseGravable').prop('value', nuevoValor);
+		});
+	},
+	
+	
 	bindMostrarAporteVolintario : function(){
-		debugger;
+//		debugger;
 		var mostrarAporteVoluntario = document.getElementById('mostrarAporteVoluntario');
-		if (mostrarAporteVoluntario.value == "true"){
+		if (mostrarAporteVoluntario != null && mostrarAporteVoluntario.value == "true"){
 			$('#proyectoLiq').prop('disabled', false);
 			$('#optionSi').prop('disabled', false);
 			$('#optionNo').prop('disabled', false);
 		}else{
 			$('#proyectoLiq').prop('disabled', true);
 			$('#optionSi').prop('disabled', true);
-			$('#optionNo').prop('disabled', true);
+			$('#optionNo').prop('disabled', true);			
 		}		
 	},	
 	

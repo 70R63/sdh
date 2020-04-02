@@ -26,7 +26,20 @@
 				</div>
 			</div>
 		</div>
-
+		
+		
+		<div class="row">
+			<div class="col-md-4">
+				<label class="control-label "
+					style="font-weight: 400; text-transform: none !important;"><spring:theme
+						code="predialuno.liquidacionpriv.aceptaFactura" />
+				<input	class="predialNoAceptaFactura"
+					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
+					type="checkbox" name="optionSiAceptaFactura" id="predialNoAceptaFactura" value="true" >
+				</label>			
+			</div>
+			
+		</div>
 		
 		
 		
@@ -51,16 +64,6 @@
 						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option></select>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<label class="control-label "
-					style="font-weight: 400; text-transform: none !important;"><spring:theme
-						code="predialuno.liquidacionpriv.aceptaFactura" />
-				<input	class=""
-					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
-					type="checkbox" name="optionSiAceptaFactura" id="optionSiAceptaFactura" value="1" >
-				</label>			
-			</div>
-			
 		</div>
 
 		<div class="row">
@@ -183,7 +186,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.liquidacionpriv.valaportevol" /></label> <input id="ValorAporteVoluntario"
-						name="" class="newalto form-control"  type="text"
+						name="" class="newalto form-control"  disabled type="text"
 						value="${predialForm.estrLiquidacionPrivada.valorAporteVoluntario}"
 						maxlength="240"></input>
 				</div>

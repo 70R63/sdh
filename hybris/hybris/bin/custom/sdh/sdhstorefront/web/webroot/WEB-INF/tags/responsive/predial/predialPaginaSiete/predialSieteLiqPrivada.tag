@@ -27,15 +27,19 @@
 			</div>
 		</div>
 		
-		<div class="col-md-4">
-			<label class="control-label "
-				style="font-weight: 400; text-transform: none !important;"><spring:theme
-					code="predialuno.liquidacionpriv.aceptaFactura" />
-			<input	class=""
-				style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
-				type="checkbox" name="optionSiAceptaFactura" id="optionSiAceptaFactura" value="1" >
-			</label>			
+		<div class="row">
+			<div class="col-md-4">
+				<label class="control-label "
+					style="font-weight: 400; text-transform: none !important;"><spring:theme
+						code="predialuno.liquidacionpriv.aceptaFactura" />
+				<input	class="predialNoAceptaFactura"
+					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
+					type="checkbox" name="optionSiAceptaFactura" id="predialNoAceptaFactura" value="true" >
+				</label>			
+			</div>
+			
 		</div>
+	
 
 		<div class="row">
 			<div class="col-md-3">
