@@ -27,19 +27,7 @@
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="col-md-4">
-				<label class="control-label "
-					style="font-weight: 400; text-transform: none !important;"><spring:theme
-						code="predialuno.liquidacionpriv.aceptaFactura" /></label> <input
-					class=""
-					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
-					type="radio" name="optradio" id="optionSiAceptaFactura" value="1" > Si <input
-					class=""
-					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
-					type="radio" name="optradio" id="optionNoAceptaFactura" value="2" >No
-			</div>
-		</div>
+		
 
 		<div class="row">
 			<div class="col-md-4">
@@ -61,6 +49,16 @@
 						<option value="01">FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option>
 						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option></select>
 				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<label class="control-label "
+					style="font-weight: 400; text-transform: none !important;"><spring:theme
+						code="predialuno.liquidacionpriv.aceptaFactura" />
+				<input	class=""
+					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
+					type="checkbox" name="optionSiAceptaFactura" id="optionSiAceptaFactura" value="1" >
+				</label>			
 			</div>
 		</div>
 
