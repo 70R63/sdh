@@ -132,7 +132,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialdos.liquidacionpriv.desprontopago" /></label> <input id="DescuentoPorProntoPago"
-						name="" class="newalto form-control" type="text" value="${predialFormdos.estrLiquidacionPrivada.descuentoProntoPago}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.estrLiquidacionPrivada.descuentoProntoPago}"
 						maxlength="240" ${disabledLiquidacionPrivada}></input>
 				</div>
 			</div>
