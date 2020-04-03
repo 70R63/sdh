@@ -28,7 +28,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<label class="control-label "
 					style="font-weight: 400; text-transform: none !important;"><spring:theme
 						code="predialuno.liquidacionpriv.aceptaFactura" />

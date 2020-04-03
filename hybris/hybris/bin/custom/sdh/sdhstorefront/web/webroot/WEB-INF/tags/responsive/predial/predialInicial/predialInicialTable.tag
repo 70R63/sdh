@@ -59,7 +59,7 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${predial.predial}" var="current">
-								<c:if test="${current.CHIP != ''}">
+<%-- 								<c:if test="${current.CHIP != ''}"> --%>
 									<tr>
 										<td><c:out value="${current.CHIP}" /></td>
 										<td><c:out value="${current.matrInmobiliaria}" /></td>
@@ -75,7 +75,7 @@
 												<spring:theme code="predial.inicial.table.ver" />
 										</label></td>
 									</tr>
-								</c:if>
+<%-- 								</c:if> --%>
 							</c:forEach>
 						</tbody>
 					</table>
