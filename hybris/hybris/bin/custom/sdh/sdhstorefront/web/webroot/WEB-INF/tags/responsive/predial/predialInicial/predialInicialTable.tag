@@ -59,23 +59,86 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${predial.predial}" var="current">
-<%-- 								<c:if test="${current.CHIP != ''}"> --%>
-									<tr>
-										<td><c:out value="${current.CHIP}" /></td>
-										<td><c:out value="${current.matrInmobiliaria}" /></td>
-										<td><c:out value="${current.direccionPredio}" /></td>
-										<td><c:out value="${current.contratoArrenda}" /></td>
-										<td><label style="color: #0358d8 !important"
-											data-anioGravable="${current.anioGravable}"
-											data-CHIP="${current.CHIP}"
-											data-matrInmobiliaria="${current.matrInmobiliaria}"
-											class="text-capitalize !important showDetailPredio"
-											id="showDetailPredio"
-											onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
-												<spring:theme code="predial.inicial.table.ver" />
-										</label></td>
-									</tr>
-<%-- 								</c:if> --%>
+								<%-- 								<c:if test="${current.CHIP != ''}"> --%>
+								<tr>
+									<td><c:out value="${current.CHIP}" /></td>
+									<td><c:out value="${current.matrInmobiliaria}" /></td>
+									<td><c:out value="${current.direccionPredio}" /></td>
+									<td><c:out value="${current.contratoArrenda}" /></td>
+									<td><label style="color: #0358d8 !important"
+										data-anioGravable="${current.anioGravable}"
+										data-CHIP="${current.CHIP}"
+										data-matrInmobiliaria="${current.matrInmobiliaria}"
+										class="text-capitalize !important showDetailPredio"
+										id="showDetailPredio"
+										onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
+											<spring:theme code="predial.inicial.table.ver" />
+									</label></td>
+								</tr>
+								<%-- 								</c:if> --%>
+
+								<c:choose>
+									<c:when
+										test="${current.CHIP != ''} && ${current.matrInmobiliaria != ''}">
+										<tr>
+											<td><c:out value="${current.CHIP}" /></td>
+											<td><c:out value="${current.matrInmobiliaria}" /></td>
+											<td><c:out value="${current.direccionPredio}" /></td>
+											<td><c:out value="${current.contratoArrenda}" /></td>
+											<td><label style="color: #0358d8 !important"
+												data-anioGravable="${current.anioGravable}"
+												data-CHIP="${current.CHIP}"
+												data-matrInmobiliaria="${current.matrInmobiliaria}"
+												class="text-capitalize !important showDetailPredio"
+												id="showDetailPredio"
+												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
+													<spring:theme code="predial.inicial.table.ver" />
+											</label></td>
+										</tr>
+									</c:when>
+									<c:when
+										test="${current.CHIP != ''} && ${current.matrInmobiliaria == ''}">
+										<tr>
+											<td><c:out value="${current.CHIP}" /></td>
+											<td><c:out value="${current.matrInmobiliaria}" /></td>
+											<td><c:out value="${current.direccionPredio}" /></td>
+											<td><c:out value="${current.contratoArrenda}" /></td>
+											<td><label style="color: #0358d8 !important"
+												data-anioGravable="${current.anioGravable}"
+												data-CHIP="${current.CHIP}"
+												data-matrInmobiliaria="${current.matrInmobiliaria}"
+												class="text-capitalize !important showDetailPredio"
+												id="showDetailPredio"
+												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
+													<spring:theme code="predial.inicial.table.ver" />
+											</label></td>
+										</tr>
+									</c:when>
+									<c:when
+										test="${current.CHIP == ''} && ${current.matrInmobiliaria != ''}">
+										<tr>
+											<td><c:out value="${current.CHIP}" /></td>
+											<td><c:out value="${current.matrInmobiliaria}" /></td>
+											<td><c:out value="${current.direccionPredio}" /></td>
+											<td><c:out value="${current.contratoArrenda}" /></td>
+											<td><label style="color: #0358d8 !important"
+												data-anioGravable="${current.anioGravable}"
+												data-CHIP="${current.CHIP}"
+												data-matrInmobiliaria="${current.matrInmobiliaria}"
+												class="text-capitalize !important showDetailPredio"
+												id="showDetailPredio"
+												onclick="showDetailPredio('${current.anioGravable}','${current.CHIP}','${current.matrInmobiliaria}')">
+													<spring:theme code="predial.inicial.table.ver" />
+											</label></td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+
+									</c:otherwise>
+								</c:choose>
+
+
+
 							</c:forEach>
 						</tbody>
 					</table>
