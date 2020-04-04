@@ -80,6 +80,11 @@
  <input type="hidden" value="${predialForm.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
 <!-- Fin de campos para calculo -->
+<!-- Campos para precalculo -->
+<input type="hidden" value="${predialFormbases.numBP}" id="numBP"/>
+<input type="hidden" value="${predialFormbases.CHIP}" id="chip"/>
+<input type="hidden" value="${predialFormbases.anioGravable}" id="anioGravable"/>
+<!-- Fin de campos para precalculo -->
 
 	<div class="row" style="marging-top: 5px">
 		<sf:form action="${pagarURL}" method="POST" 

@@ -20,6 +20,7 @@ import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.CalculoPredialRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredial2Request;
+import de.hybris.sdh.core.pojos.requests.DetallePredialBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredialRequest;
 import de.hybris.sdh.core.pojos.requests.GeneraDeclaracionRequest;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
@@ -28,6 +29,7 @@ import de.hybris.sdh.core.pojos.responses.CalculoPredialResponse;
 import de.hybris.sdh.core.pojos.responses.ContribAgente;
 import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
 import de.hybris.sdh.core.pojos.responses.DetallePredial2Response_marcas;
+import de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorPubli;
 import de.hybris.sdh.core.pojos.responses.FirmanteResponse;
@@ -49,6 +51,7 @@ import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
+import de.hybris.sdh.storefront.forms.PredialCatalogos;
 import de.hybris.sdh.storefront.forms.PredialControlCamposDec;
 import de.hybris.sdh.storefront.forms.PredialForm;
 import de.hybris.sdh.storefront.forms.RelContribuyenteAgenteAutorizado;
@@ -59,7 +62,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -781,40 +786,6 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);
-	}
-
-	/**
-	 * @param infoReemplazo
-	 * @param predialInfo
-	 * @param detallePredialRequest
-	 * @return
-	 */
-	private DetallePredialResponse determinaResponse(final PredialForm infoReemplazo, final PredialForm predialInfo,
-			final DetallePredialRequest detallePredialRequest)
-	{
-		DetallePredialResponse detallePredialResponse = null;
-
-		if (infoReemplazo.getRepresentado() != null)
-		{
-			detallePredialResponse = remapeoDesdePedial2(predialInfo);
-		}
-		else
-		{
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			try
-			{
-				detallePredialResponse = mapper.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest),
-						DetallePredialResponse.class);
-			}
-			catch (final Exception e)
-			{
-				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-			}
-		}
-
-		return detallePredialResponse;
 	}
 
 
@@ -1598,7 +1569,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		CustomerData customerData = null;
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
-		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "7", infoReemplazo);
 		String numForm = null;
 		if (infoReemplazo.getRepresentado() != null)
 		{
@@ -1790,7 +1761,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		CustomerData customerData = null;
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
-		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "8", infoReemplazo);
 		String numForm = null;
 		if (infoReemplazo.getRepresentado() != null)
 		{
@@ -1968,54 +1939,63 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 	@RequestMapping(value = "/contribuyentes/predialunificado/basespresuntivas", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String predialbases(final Model model, @RequestParam(required = false, value = "anioGravable")
-	final String anioGravable, @RequestParam(required = false, value = "chip")
-	final String chip, @RequestParam(required = false, value = "matricula")
-	final String matricula, @RequestParam(required = false, value = "numBP")
-	final String numBP, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	public String predialbases(final Model model, @RequestParam(required = false, value = "anioGravable") String anioGravable,
+			@RequestParam(required = false, value = "chip") String chip,
+			@RequestParam(required = false, value = "matricula") String matricula,
+			@RequestParam(required = false, value = "numBP") String numBP, @ModelAttribute("dataForm")
+			final PredialForm predialInfo, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro predial unificado BASES PRESUNTIVAS --------------------------");
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+		CustomerData customerData = null;
+		RelContribuyenteAgenteAutorizado infoRelacion = null;
+		final PredialForm infoReemplazo = new PredialForm();
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "9", infoReemplazo);
+		String numForm = null;
+		if (infoReemplazo.getRepresentado() != null)
+		{
+			numBP = infoReemplazo.getNumBP();
+			chip = infoReemplazo.getCHIP();
+			anioGravable = infoReemplazo.getAnioGravable();
+			matricula = infoReemplazo.getMatrInmobiliaria();
+			numForm = infoReemplazo.getNumFrom();
+		}
+		customerData = infoRelacion.getContribuyente();
 
 		final PredialForm predialFormbases = new PredialForm();
 
-		//		final PredialForm predialInfoInibases = (PredialForm) model.asMap().get("predialFormurl");
 		PredialForm predialInfoInibases = new PredialForm();
 		final InfoPreviaPSE infoPreviaPSE = new InfoPreviaPSE();
 
-		try
+
+		if (anioGravable != null)
 		{
+			predialInfoInibases.setAnioGravable(anioGravable);
+			predialInfoInibases.setNumBP(numBP);
+			predialInfoInibases.setCHIP(chip);
+			predialInfoInibases.setMatrInmobiliaria(matricula);
+			predialInfoInibases.setTipDoc(customerData.getDocumentType());
+			predialInfoInibases.setNumDoc(customerData.getDocumentNumber());
+			predialInfoInibases.setCompleName(customerData.getCompleteName());
+			predialInfoInibases.setNumBP(customerData.getNumBP());
+		}
+		else
+		{
+			predialInfoInibases = (PredialForm) model.asMap().get("predialFormurl");
+		}
+		final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
 
-			if (anioGravable != null)
-			{
-				predialInfoInibases.setAnioGravable(anioGravable);
-				predialInfoInibases.setNumBP(numBP);
-				predialInfoInibases.setCHIP(chip);
-				predialInfoInibases.setMatrInmobiliaria(matricula);
-				predialInfoInibases.setTipDoc(customerData.getDocumentType());
-				predialInfoInibases.setNumDoc(customerData.getDocumentNumber());
-				predialInfoInibases.setCompleName(customerData.getCompleteName());
-				predialInfoInibases.setNumBP(customerData.getNumBP());
-			}
-			else
-			{
-				predialInfoInibases = (PredialForm) model.asMap().get("predialFormurl");
-			}
-			final DetallePredialRequest detallePredialRequest = new DetallePredialRequest();
+		detallePredialRequest.setNumBP(predialInfoInibases.getNumBP());
+		detallePredialRequest.setAnioGravable(predialInfoInibases.getAnioGravable());
+		detallePredialRequest.setCHIP(predialInfoInibases.getCHIP());
+		detallePredialRequest.setMatrInmobiliaria(predialInfoInibases.getMatrInmobiliaria());
 
-			detallePredialRequest.setNumBP(predialInfoInibases.getNumBP());
-			detallePredialRequest.setAnioGravable(predialInfoInibases.getAnioGravable());
-			detallePredialRequest.setCHIP(predialInfoInibases.getCHIP());
-			detallePredialRequest.setMatrInmobiliaria(predialInfoInibases.getMatrInmobiliaria());
+		final DetallePredialResponse detallePredialResponse = determinaResponse(infoReemplazo, predialInfo, detallePredialRequest);
 
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-			final DetallePredialResponse detallePredialResponse = mapper
-					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
-
-
+		if (detallePredialResponse != null)
+		{
 			predialFormbases.setNumDoc(customerData.getDocumentNumber());
+			predialFormbases.setTipDoc(customerData.getDocumentType());
 			predialFormbases.setCompleName(customerData.getCompleteName());
 			predialFormbases.setNumBP(customerData.getNumBP());
 			predialFormbases.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
@@ -2089,19 +2069,17 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 				}
 			}
-
 		}
-		catch (final IOException e)
+		else
 		{
-			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-
 		}
 
 		final SDHValidaMailRolResponse contribuyenteData = sdhCustomerFacade.getRepresentadoFromSAP(customerData.getNumBP());
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormbases.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormbases.setContribuyenteData(contribuyenteData);
+		predialFormbases.setCatalogos(obtenerCatalogos());
 
 
 		final String tipoImpuesto = new ControllerPseConstants().getPREDIAL();
@@ -2528,18 +2506,17 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		System.out.println("---------------- Hola entro predial vista agente autorizado--------------------------");
 		final PredialForm predialFormurl = new PredialForm();
 		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
-		String tipreg = "1";
+		String tipreg = "";
 		String urlReturn = "";
-
 
 		final DetallePredial2Request detallePredial2Request = new DetallePredial2Request();
 		DetallePredial2Response detallePredial2Response = null;
 
 		detallePredial2Request.setPartner(representado);
 		detallePredial2Request.setFormulario(numForm);
-		System.out.println("Request para validaCont: " + detallePredial2Request);
+		System.out.println("Request para calculoImp/Predial2: " + detallePredial2Request);
 		detallePredial2Response = gasolinaService.consultaPredial2(detallePredial2Request, sdhDetalleGasolinaWS, LOG);
-		System.out.println("Response de validaCont: " + detallePredial2Response);
+		System.out.println("Response de calculoImp/Predial2: " + detallePredial2Response);
 
 		if (detallePredial2Response != null)
 		{
@@ -2547,10 +2524,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			predialFormurl.setRepresentado(representado);
 			predialFormurl.setNumFrom(numForm);
 			predialFormurl.setCHIP(detallePredial2Response.getInfopredio().getDatosgenerales().getChip());
-			predialFormurl.setMatrInmobiliaria(detallePredial2Response.getInfopredio().getDatosgenerales().getMatrInmobiliaria());
+			predialFormurl
+					.setMatrInmobiliaria(detallePredial2Response.getInfopredio().getDatosgenerales().getMatrInmobiliaria());
 			predialFormurl.setAnioGravable(detallePredial2Response.getInfopredio().getDatosgenerales().getAnioAgravable());
 			predialFormurl.setDetallePredial2Response(detallePredial2Response);
 		}
+
 
 		switch (tipreg)
 		{
@@ -2570,7 +2549,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			case "9":
 				redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 				model.addAttribute("predialFormurl", predialFormurl);
-				urlReturn = "redirect:/contribuyentes/basespresuntivas";
+				urlReturn = "redirect:/contribuyentes/predialunificado/basespresuntivas";
+				break;
 			default:
 				final String Error = "Su predio no cuenta con Tipo de declaración, por lo que no se puede detrminar la declaración a realizar";
 				redirectAttributes.addFlashAttribute("Error", Error);
@@ -2597,14 +2577,14 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		if (predialInfo != null && predialInfo.getRepresentado() != null)
 			{
 			System.out.println("---------- En predial unificado " + tiporeg + " GET Agente Autorizado ----------");
-				tipoUsuario = "A";
+			tipoUsuario = "A";
 			customerData = sdhCustomerFacade.getRepresentadoDataFromSAP(predialInfo.getRepresentado());
 			agenteAutorizadoData = customerFacade.getCurrentCustomer();
 
-				infoReemplazo.setNumBP(predialInfo.getRepresentado());
-				infoReemplazo.setCHIP(predialInfo.getCHIP());
-				infoReemplazo.setAnioGravable(predialInfo.getAnioGravable());
-				infoReemplazo.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
+			infoReemplazo.setNumBP(predialInfo.getRepresentado());
+			infoReemplazo.setCHIP(predialInfo.getCHIP());
+			infoReemplazo.setAnioGravable(predialInfo.getAnioGravable());
+			infoReemplazo.setMatrInmobiliaria(predialInfo.getMatrInmobiliaria());
 			infoReemplazo.setNumFrom(predialInfo.getNumFrom());
 			infoReemplazo.setRepresentado(predialInfo.getRepresentado());
 			firmantes = rempaeoFirmantes(predialInfo.getDetallePredial2Response().getFirmantes());
@@ -2850,5 +2830,170 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 		return false;
 	}
+
+
+	/**
+	 * @param infoReemplazo
+	 * @param predialInfo
+	 * @param detallePredialRequest
+	 * @return
+	 */
+	private DetallePredialResponse determinaResponse(final PredialForm infoReemplazo, final PredialForm predialInfo,
+			final DetallePredialRequest detallePredialRequest)
+	{
+		DetallePredialResponse detallePredialResponse = null;
+
+		if (infoReemplazo.getRepresentado() != null)
+		{
+			if (predialInfo != null && predialInfo.getDetallePredial2Response() != null
+					&& predialInfo.getDetallePredial2Response().getInfopredio() != null
+					&& predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales() != null
+					&& predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getTipoDeclaracion() != null)
+			{
+				switch (predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getTipoDeclaracion())
+				{
+					case "1":
+					case "2":
+					case "3":
+					case "4":
+					case "5":
+					case "6":
+					case "7":
+					case "8":
+					case "9":
+						detallePredialResponse = remapeoDesdePedial2(predialInfo);
+						break;
+					default:
+						break;
+				}
+
+			}
+
+		}
+		else
+		{
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			try
+			{
+				detallePredialResponse = mapper.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest),
+						DetallePredialResponse.class);
+			}
+			catch (final Exception e)
+			{
+				LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			}
+		}
+
+		return detallePredialResponse;
+	}
+
+
+	/**
+	 * @param predialBPinfo
+	 * @return
+	 */
+	private DetallePredialResponse remapeoDesdePedialBP(final DetallePredialBPResponse predialBPinfo)
+	{
+		DetallePredialResponse responseRemapeo = new DetallePredialResponse();
+
+		if (predialBPinfo != null)
+		{
+			responseRemapeo = new DetallePredialResponse();
+		}
+
+
+
+		return responseRemapeo;
+	}
+
+
+	/**
+	 * @param predialInfo
+	 * @return
+	 */
+	@RequestMapping(value = "/contribuyentes/predialunificado_inicio/precalculoPredialBP", method = RequestMethod.GET)
+	@ResponseBody
+	public DetallePredialBPResponse llamarWSpredialBP(@ModelAttribute("predialInfo")
+	final PredialForm predialInfo, final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		System.out.println("---------- En predial bases presuntivas ----------");
+		final SobreTasaGasolinaService gasolinaService = new SobreTasaGasolinaService(configurationService);
+		DetallePredialBPResponse detallePredialBPResponse = null;
+		final DetallePredialBPRequest detallePredialBPRequest = new DetallePredialBPRequest();
+
+
+		detallePredialBPRequest.setNumBP(predialInfo.getNumBP());
+		detallePredialBPRequest.setChip(predialInfo.getCHIP());
+		detallePredialBPRequest.setAnioGravable(predialInfo.getAnioGravable());
+		detallePredialBPRequest.setAreaConstruida(predialInfo.getAreaConstruida());
+		detallePredialBPRequest.setAreaTerrenoCatastro(predialInfo.getAreaTerrenoCatastro());
+		detallePredialBPRequest.setCaracterizacionPredio(predialInfo.getCaracterizacionPredio());
+		detallePredialBPRequest.setPropiedadHorizontal(predialInfo.getPropiedadHorizontal());
+		detallePredialBPRequest.setDestinoHacendario(predialInfo.getDestinoHacendario());
+
+		System.out.println("Request para basespresuntivas: " + detallePredialBPRequest);
+		detallePredialBPResponse = gasolinaService.consultaPredialBP(detallePredialBPRequest, sdhDetalleGasolinaWS, LOG);
+		System.out.println("Response de basespresuntivas: " + detallePredialBPResponse);
+
+
+		return detallePredialBPResponse;
+	}
+
+
+	/**
+	 * @return
+	 */
+	private PredialCatalogos obtenerCatalogos()
+	{
+		final PredialCatalogos catalogos = new PredialCatalogos();
+
+		Map<String, String> elementos = null;
+
+		//Caracterización del predio
+		elementos = new LinkedHashMap<String, String>();
+		elementos.put("", "Seleccionar");
+		elementos.put("1", "Vertical");
+		elementos.put("2", "Horizontal");
+
+		catalogos.setCaracterizacionPredio(elementos);
+
+
+		//Propiedad horizontal
+		elementos = new LinkedHashMap<String, String>();
+		elementos.put("", "Seleccionar");
+		elementos.put("0", "");
+		elementos.put("1", "PH");
+		elementos.put("2", "CONDOMINIO");
+		elementos.put("3", "URBANIZACIÓN");
+		elementos.put("4", "EMBAJADA");
+
+		catalogos.setPropiedadHorizontal(elementos);
+
+
+		//Destino hacendario
+		elementos = new LinkedHashMap<String, String>();
+		elementos.put("", "Seleccionar");
+		elementos.put("00", "");
+		elementos.put("61", "RESIDENCIALES URBANOS Y RURALES");
+		elementos.put("62", "COMERCIALES URBANOS Y RURALES");
+		elementos.put("63", "FINANCIERO");
+		elementos.put("64", "INDUSTRIALES URBANOS Y RURALES");
+		elementos.put("65", "DEPOSITOS Y PARQUEADEROS");
+		elementos.put("66", "DOTACIONALES");
+		elementos.put("67", "LOTE/URBANIZABLES NO URBANIZADOS/URBANIZADOS NO EDIFICADOS");
+		elementos.put("69", "PEQUEÑA PROPIEDAD RURAL PARA PRODUCCIÓN AGROPECUARIA");
+		elementos.put("70", "NO URBANIZABLES");
+		elementos.put("71", "RURALES");
+		elementos.put("72", "SISTEMA DE AREAS PROTEGIDAS");
+
+		catalogos.setDestinoHacendario(elementos);
+
+
+		return catalogos;
+	}
+
+
 
 }

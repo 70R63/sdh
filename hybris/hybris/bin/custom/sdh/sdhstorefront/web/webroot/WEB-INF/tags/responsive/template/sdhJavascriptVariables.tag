@@ -138,6 +138,7 @@
 			ACC.tramiteExitosoURL = "<c:url value='/contribuyentes/tramites' />";
 			
 			ACC.predialDetalleURL="<c:url value='/contribuyentes/predialunificado_inicio/detalle' />";
+			ACC.precalculoPredialBPURL="<c:url value='/contribuyentes/predialunificado_inicio/precalculoPredialBP' />";
 			
 			ACC.predialDeclaraURL="<c:url value='/contribuyentes/predialunificado/URL' />";
 			ACC.predialDeclaradosURL="<c:url value='/contribuyentes/predialunificado_2' />";
