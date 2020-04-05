@@ -992,7 +992,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		CustomerData customerData = null;
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
-		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "4", infoReemplazo);
 		String numForm = null;
 		if (infoReemplazo.getRepresentado() != null)
 		{
@@ -1185,7 +1185,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		CustomerData customerData = null;
 		RelContribuyenteAgenteAutorizado infoRelacion = null;
 		final PredialForm infoReemplazo = new PredialForm();
-		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "1", infoReemplazo);
+		infoRelacion = prepararInfoAgenteAutorizado(model, predialInfo, "5", infoReemplazo);
 		String numForm = null;
 		if (infoReemplazo.getRepresentado() != null)
 		{
@@ -2617,7 +2617,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			firmantesDestino = new ArrayList<FirmanteResponse>();
 			for (final FirmanteResponsePredial2 firmaOrigenActual : firmantesOrigen)
 			{
-				if (firmaOrigenActual.getTipoIdent() != null)
+				if (firmaOrigenActual.getTipoIdent() != null && !firmaOrigenActual.getTipoIdent().isEmpty())
 				{
 					firmaDestinoActual = new FirmanteResponse();
 					firmaDestinoActual.setTipoIdent(firmaOrigenActual.getTipoIdent());
@@ -2850,7 +2850,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 					&& predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales() != null
 					&& predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getTipoDeclaracion() != null)
 			{
-				switch (predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getTipoDeclaracion())
+				switch (predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getTipoDeclaracion().trim())
 				{
 					case "1":
 					case "2":
