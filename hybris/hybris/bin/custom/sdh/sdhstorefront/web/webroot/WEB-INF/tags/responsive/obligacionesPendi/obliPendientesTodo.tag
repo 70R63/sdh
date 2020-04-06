@@ -254,8 +254,8 @@
 									<c:forEach items="${eachObIca.details }" var="eachObIcaDet">
 										<c:if test="${not empty eachObIcaDet.numReferencia }">
 											<tr>
-												<td><c:out value="${eachObIca.tipoIdentificacion}" /></td>
-												<td><c:out value="${eachObIca.noIdentificacion}" /></td>
+<%-- 												<td><c:out value="${eachObIca.tipoIdentificacion}" /></td> --%>
+<%-- 												<td><c:out value="${eachObIca.noIdentificacion}" /></td> --%>
 												<td><c:out value="${eachObIca.anioGravable}" /></td>
 												<!-- <td><c:out value="${eachObIca.periodo}" /></td> -->
 												<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td>
