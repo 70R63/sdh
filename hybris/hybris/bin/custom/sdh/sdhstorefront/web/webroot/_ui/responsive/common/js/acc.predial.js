@@ -731,6 +731,49 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 	 	       ACC.opcionDeclaraciones.presentarDeclaracionGenerica();
 	 	       
 		 });
+	 },
+	 
+	 
+	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
+
+		if(ACC.predial.validarAntesSubmit_precalculoBP()){
+			var dataActual = {};	
+		
+			
+			dataActual.numBP = numBP;
+			dataActual.CHIP = chip;
+			dataActual.anioGravable = anioGravable;
+			dataActual.areaConstruida = areaConstruida;
+			dataActual.areaTerrenoCatastro = areaTerrenoCatastro;
+			dataActual.caracterizacionPredio = caracterizacionPredio;
+			dataActual.propiedadHorizontal = propiedadHorizontal;
+			dataActual.destinoHacendario = destinoHacendario;
+			
+			
+			$.ajax({
+				url : ACC.precalculoPredialBPURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					$("#basegrav").val(dataResponse.baseGravable);
+					var basesDetalle = document.getElementById("BasesDetalle");
+					if(basesDetalle != null){
+						basesDetalle.style.display = 'block';
+					}
+				},
+				error : function() {
+					alert("Error procesar la solicitud de basespresuntivas");	
+				}
+			});
+		}
+	 },
+		 
+		 
+	 validarAntesSubmit_precalculoBP : function (){
+		 var flagValidacion = true;
+		 
+		 
+		 return flagValidacion;
 	 }
 
 };
