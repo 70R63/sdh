@@ -52,7 +52,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datospredio.prophorizon" /></label> 
-							<form:select id="propiedadHorizontal" path="propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}"></form:select>
+							<form:select class="newalto form-control prophorizontal" id="propiedadHorizontal" path="propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}"></form:select>
 							
 				</div>
 			</div>

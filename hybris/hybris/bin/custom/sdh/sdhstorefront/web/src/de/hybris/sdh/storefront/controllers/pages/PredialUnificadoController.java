@@ -2966,11 +2966,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		//Propiedad horizontal
 		elementos = new LinkedHashMap<String, String>();
 		elementos.put("", "Seleccionar");
-		elementos.put("0", "");
-		elementos.put("1", "PH");
-		elementos.put("2", "CONDOMINIO");
-		elementos.put("3", "URBANIZACIÓN");
-		elementos.put("4", "EMBAJADA");
+		elementos.put("1", "SI");
+		elementos.put("2", "NO");
 
 		catalogos.setPropiedadHorizontal(elementos);
 

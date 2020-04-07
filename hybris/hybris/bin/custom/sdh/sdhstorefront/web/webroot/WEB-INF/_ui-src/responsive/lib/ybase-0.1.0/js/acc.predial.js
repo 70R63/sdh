@@ -57,12 +57,12 @@ ACC.predial = {
 			e.preventDefault();
 			var val = this.value;
 
-			if (val == 'Si') {
+			if (val == '1') {
 				$('#areaconstruccion').prop('disabled', false);
 				;
 				$('#areaterreno').prop('disabled', true);
 				;
-			} else if (val == 'No') {
+			} else if (val == '2') {
 				$('#areaconstruccion').prop('disabled', false);
 				;
 				$('#areaterreno').prop('disabled', false);
