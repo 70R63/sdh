@@ -770,10 +770,17 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		 
 		 
 	 validarAntesSubmit_precalculoBP : function (){
-		 var flagValidacion = true;
+		 var flagValidacion = false;
+		 
+		 if($("#caracterizacionPredio").val()!= null && $("#caracterizacionPredio").val()!= null &&
+				 $("#caracterizacionPredio").val()!= "" && $("#caracterizacionPredio").val()!= ""){
+			 flagValidacion = true;
+		 }else{
+			 alert("Los campos Destino Hacendario y Caracterización del predio son obligatorios");
+		 }
 		 
 		 
 		 return flagValidacion;
 	 }
-
+	 
 };

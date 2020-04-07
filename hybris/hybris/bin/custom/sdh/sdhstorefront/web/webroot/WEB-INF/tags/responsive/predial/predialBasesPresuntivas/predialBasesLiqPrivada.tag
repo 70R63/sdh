@@ -10,6 +10,10 @@
 <input type="hidden" value="${predialForm.mostrarAporteVoluntario}"
 	id="mostrarAporteVoluntario" />
 
+<c:set var="disabledLiquidacionPrivada" value="" />
+<c:if test="${predialFormbases.controlCampos.liquidacionPrivada == true}">
+	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"' />
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
 	<div class="container">
@@ -46,7 +50,7 @@
 					class="predialNoAceptaFactura"
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
 					type="checkbox" name="optionSiAceptaFactura"
-					id="predialNoAceptaFactura" value="true"> </label>
+					id="predialNoAceptaFactura" value="true" ${disabledLiquidacionPrivada}> </label>
 			</div>
 		</div>
 
@@ -142,7 +146,7 @@
 							code="predial.basespresun.liquidacionpriv.desprontopago" /></label> <input
 						id="" name="" class="newalto form-control" type="text"
 						value="${predialFormbases.estrLiquidacionPrivada.descuentoProntoPago}"
-						maxlength="240"></input>
+						maxlength="240" ${disabledLiquidacionPrivada}></input>
 				</div>
 			</div>
 		</div>
@@ -203,10 +207,12 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3">
+				<c:if test="${predialFormbases.controlCampos.liquidacionPrivada != true}">
 				<button style="margin-top: 3px;" id=""
 					class="btn btn-primary btn-lg" type="button">
 					<spring:theme code="predial.basespresun.liquidacionpriv.calcular" />
 				</button>
+				</c:if>
 			</div>
 		</div>
 	</div>

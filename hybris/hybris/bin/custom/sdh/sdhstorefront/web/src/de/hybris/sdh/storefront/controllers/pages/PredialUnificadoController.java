@@ -2079,6 +2079,9 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		contribuyenteData.setPredial(contribuyenteData.getPredial().stream()
 				.filter(d -> predialFormbases.getCHIP().equals(d.getCHIP())).collect(Collectors.toList()));
 		predialFormbases.setContribuyenteData(contribuyenteData);
+		predialFormbases
+				.setControlCampos(establecerCamposImpuestoDec("sdh_02", contribuyenteData, infoRelacion.getAgenteAutorizado()));
+		predialFormbases.setNumFrom(numForm);
 		predialFormbases.setCatalogos(obtenerCatalogos());
 
 
@@ -2549,6 +2552,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			case "9":
 				redirectAttributes.addFlashAttribute("predialFormurl", predialFormurl);
 				model.addAttribute("predialFormurl", predialFormurl);
+				model.addAttribute("dataForm", predialFormurl);
 				urlReturn = "redirect:/contribuyentes/predialunificado/basespresuntivas";
 				break;
 			default:
@@ -2703,6 +2707,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			case "sdh_02":
 				if (contribuyenteData.getAgentes() != null && currentUserData != null){
 					controlCampos.setLiquidacionPrivada(true);
+					controlCampos.setLiquidacion(true);
 
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
 					{
@@ -2954,8 +2959,6 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		//Caracterización del predio
 		elementos = new LinkedHashMap<String, String>();
 		elementos.put("", "Seleccionar");
-		elementos.put("1", "Vertical");
-		elementos.put("2", "Horizontal");
 
 		catalogos.setCaracterizacionPredio(elementos);
 
@@ -2975,18 +2978,12 @@ public class PredialUnificadoController extends SDHAbstractPageController
 		//Destino hacendario
 		elementos = new LinkedHashMap<String, String>();
 		elementos.put("", "Seleccionar");
-		elementos.put("00", "");
-		elementos.put("61", "RESIDENCIALES URBANOS Y RURALES");
-		elementos.put("62", "COMERCIALES URBANOS Y RURALES");
-		elementos.put("63", "FINANCIERO");
-		elementos.put("64", "INDUSTRIALES URBANOS Y RURALES");
-		elementos.put("65", "DEPOSITOS Y PARQUEADEROS");
-		elementos.put("66", "DOTACIONALES");
-		elementos.put("67", "LOTE/URBANIZABLES NO URBANIZADOS/URBANIZADOS NO EDIFICADOS");
-		elementos.put("69", "PEQUEÑA PROPIEDAD RURAL PARA PRODUCCIÓN AGROPECUARIA");
-		elementos.put("70", "NO URBANIZABLES");
-		elementos.put("71", "RURALES");
-		elementos.put("72", "SISTEMA DE AREAS PROTEGIDAS");
+		elementos.put("61", "RESIDENCIAL");
+		elementos.put("62", "COMERCIAL");
+		elementos.put("66", "DOTACIONAL");
+		elementos.put("64", "INDUSTRIAL");
+		elementos.put("65", "DEPOSITO Y PARQUEADERO");
+		elementos.put("67", "URBANIZABLE NO URBANIZADO Y URBANIZADO NO EDIFICADO");
 
 		catalogos.setDestinoHacendario(elementos);
 

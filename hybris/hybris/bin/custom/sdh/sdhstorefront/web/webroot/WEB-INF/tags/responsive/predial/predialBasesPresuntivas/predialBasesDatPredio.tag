@@ -41,11 +41,11 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.caracpredio" /></label> 
-						<form:select id="caracterizacionPredio" path="caracterizacionPredio" items="${predialFormbases.catalogos.caracterizacionPredio}"></form:select>
+							code="predial.basespresun.datliquidacion.destino" /></label> 
+						<form:select id="destinoHacendario" path="destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()"></form:select>
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -57,12 +57,12 @@
 				</div>
 			</div>
 		</div>
-			<div class="row">
+		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datliquidacion.destino" /></label> 
-						<form:select id="destinoHacendario" path="destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}"></form:select>
+							code="predial.basespresun.datospredio.caracpredio" /></label> 
+						<form:select id="caracterizacionPredio" path="caracterizacionPredio" items="${predialFormbases.catalogos.caracterizacionPredio}"></form:select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -92,6 +92,19 @@ function accionPreCalculo(){
 	
 	ACC.predial.ejecutarPreCalculoPB(numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario);
 	
+}
+
+function accionCat_destinoHacendario(){
+
+	$("#caracterizacionPredio").find("option:gt(0)").remove();	
+	if($("#destinoHacendario").val() != null){
+		for(var i=0;i<cat_predial_caracterizacionPredio.length;i++){
+			if(cat_predial_caracterizacionPredio[i].destinoHacendario == $("#destinoHacendario").val()){
+				$('#caracterizacionPredio').append('<option value="'+ cat_predial_caracterizacionPredio[i].itemId +'">'+ cat_predial_caracterizacionPredio[i].itemValue + "</option>");
+			}
+		}		
+	}
+
 }
 </script>
 

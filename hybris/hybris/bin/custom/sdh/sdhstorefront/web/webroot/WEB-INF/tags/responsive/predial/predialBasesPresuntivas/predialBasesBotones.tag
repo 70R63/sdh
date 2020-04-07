@@ -35,10 +35,10 @@
 
 <c:set var="flagPresentarDeclaracion" value="false" />
 <c:set var="flagPagarEnLinea" value="false" />
-<c:if test="${predialForm.controlCampos.btnPresentarDec == false}">
+<c:if test="${predialFormbases.controlCampos.btnPresentarDec == false}">
 	<c:set var="flagPresentarDeclaracion" value="true" />
 </c:if>
-<c:if test="${predialForm.controlCampos.btnPagarDec == false}">
+<c:if test="${predialFormbases.controlCampos.btnPagarDec == false}">
 	<c:set var="flagPagarEnLinea" value="true" />
 </c:if>
 <c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
@@ -80,6 +80,7 @@
  <input type="hidden" value="${predialForm.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
 <!-- Fin de campos para calculo -->
+<input type="hidden" id="numForm" value="${predialFormbases.numFrom}"/>
 <!-- Campos para precalculo -->
 <input type="hidden" value="${predialFormbases.numBP}" id="numBP"/>
 <input type="hidden" value="${predialFormbases.CHIP}" id="chip"/>
