@@ -38,11 +38,11 @@
 
 			<c:if test="${not empty obligacionesFormuno.headerPred}">
 				<div class="row">
-					<div class="col-md-10">
+					<div class="col-md-11">
 						<table class="tablesearch table" id="tabPaginacion0">
 							<thead style="cellspacing: 10 !important">
 								<tr>
-									<th><label class="control-label labeltabletd"><spring:theme
+									<th style="text-align: center !important"><label class="control-label labeltabletd"><spring:theme
 												code="obligacion.inicial.predio.aniograv" /></label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.chip" />
@@ -55,7 +55,7 @@
 									</label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.numForm" /></label></th>
-									<th><label class="control-label labeltabletd"> <spring:theme
+									<th style="text-align: center !important"><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.numRef" />
 									</label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
@@ -113,7 +113,7 @@
 			</div>
 			<c:if test="${not empty obligacionesFormuno.headerVehiculos}">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-11">
 						<table class="tablesearch table" id="tabPaginacion1">
 							<thead>
 								<tr>
