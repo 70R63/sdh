@@ -10,7 +10,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -148,8 +147,9 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
 			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
 			{
-				ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
-						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
+//				ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
+//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
+				ctaForm.setPredial(edoCuentaResponse.getPredial());
 			}
 
 			//ctaForm.setPredial(edoCuentaResponse.getPredial());
@@ -170,10 +170,10 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
 			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
 
-			Date date = new Date();
+			final Date date = new Date();
 
 			//Caso 2: obtener la fecha y salida por pantalla con formato:
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			System.out.println("Fecha: " + dateFormat.format(date));
 
 			ctaForm.setFechageneracion(dateFormat.format(date));
