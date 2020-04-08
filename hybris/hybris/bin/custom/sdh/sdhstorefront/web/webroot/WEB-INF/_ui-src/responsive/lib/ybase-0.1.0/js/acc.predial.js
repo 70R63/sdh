@@ -1,6 +1,6 @@
 ACC.predial = {
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura"],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura", "bindDialogoMensajes"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -755,6 +755,10 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
+	            	$("#dialogMensajes" ).dialog( "open" );
+					$("#dialogMensajesContent").html("");
+            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
+					
 					$("#basegrav").val(dataResponse.baseGravable);
 					var basesDetalle = document.getElementById("BasesDetalle");
 					if(basesDetalle != null){
@@ -781,6 +785,20 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		 
 		 
 		 return flagValidacion;
+	 },
+	 
+	 
+	 bindDialogoMensajes : function (){
+    	$( "#dialogMensajes" ).dialog({ 
+    		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
+    		buttons: {
+    			Ok: function() {
+    				$( this ).dialog( "close" );
+    			}
+    	    } 
+    	});
 	 }
 	 
 };

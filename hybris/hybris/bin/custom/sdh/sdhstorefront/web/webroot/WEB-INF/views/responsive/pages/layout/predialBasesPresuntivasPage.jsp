@@ -22,6 +22,9 @@
 	<predial:predialBasesBotones />
 </div>
 
+<div id="dialogMensajes" title="Predial">
+	<div id="dialogMensajesContent"></div>
+</div>
 <script>
 
 window.onload = function() {

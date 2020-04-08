@@ -35,14 +35,6 @@
 							code="%" /></label>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.basespresun.datliquidacion.destino" /></label> <input id=""
-						name="" class="alto form-control" disabled type="text" value="${predialFormbases.desDestino}"
-						maxlength="240"></input>
-				</div>
-			</div>
 		</div>
 
 		<div class="row">
