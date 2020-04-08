@@ -755,9 +755,11 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-	            	$("#dialogMensajes" ).dialog( "open" );
-					$("#dialogMensajesContent").html("");
-            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
+					if(dataResponse.errores.txtMsj.trim() != ""){
+		            	$("#dialogMensajes" ).dialog( "open" );
+						$("#dialogMensajesContent").html("");
+	            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
+					}
 					
 					$("#basegrav").val(dataResponse.baseGravable);
 					var basesDetalle = document.getElementById("BasesDetalle");

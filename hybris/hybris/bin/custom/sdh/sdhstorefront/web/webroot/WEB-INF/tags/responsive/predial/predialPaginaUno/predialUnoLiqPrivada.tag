@@ -148,9 +148,9 @@
 					<label class="control-label"><spring:theme
 							code="predialuno.liquidacionpriv.desprontopago" /></label> <input
 						id="DescuentoPorProntoPago" name="" class="newalto form-control"
-						disabled type="text"
+						 type="text"
 						value="${predialForm.estrLiquidacionPrivada.descuentoProntoPago}"
-						maxlength="240" ${disabledLiquidacionPrivada}></input>
+						maxlength="240" disabled="disabled"></input>
 				</div>
 			</div>
 		</div>

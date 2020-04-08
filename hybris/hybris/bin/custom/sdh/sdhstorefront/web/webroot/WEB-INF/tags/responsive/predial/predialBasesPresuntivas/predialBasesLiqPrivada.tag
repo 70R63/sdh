@@ -146,7 +146,7 @@
 							code="predial.basespresun.liquidacionpriv.desprontopago" /></label> <input
 						id="" name="" class="newalto form-control" type="text"
 						value="${predialFormbases.estrLiquidacionPrivada.descuentoProntoPago}"
-						maxlength="240" ${disabledLiquidacionPrivada}></input>
+						maxlength="240" disabled="disabled"></input>
 				</div>
 			</div>
 		</div>

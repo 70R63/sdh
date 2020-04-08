@@ -151,7 +151,7 @@
 						id="DescuentoPorProntoPago" name="" class="newalto form-control"
 						type="text"
 						value="${predialFormtres.estrLiquidacionPrivada.descuentoProntoPago}"
-						maxlength="240" ${disabledLiquidacionPrivada} disabled></input>
+						maxlength="240" disabled="disabled"></input>
 				</div>
 			</div>
 		</div>
