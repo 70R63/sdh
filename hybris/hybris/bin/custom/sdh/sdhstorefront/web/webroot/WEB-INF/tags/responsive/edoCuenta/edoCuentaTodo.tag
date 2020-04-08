@@ -30,6 +30,8 @@
 								<tr>
 									<th><label class="control-label labeltabletd"><spring:theme
 												code="edocuenta.inicial.predio.chip" /> </label></th>
+									<th><label class="control-label labeltabletd"><spring:theme
+												code="edocuenta.inicial.predio.matricula" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
 												code="edocuenta.inicial.predio.aniograv" /> </label></th>
 									<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -47,29 +49,14 @@
 							<tbody>
 								<c:forEach varStatus="loop" items="${ctaForm.predial}"
 									var="eachPredial">
-
 									<c:forEach varStatus="loop"
 										items="${eachPredial.detallePredial}" var="eachPredialDetail">
-										<tr>
-											<td><c:out value="${eachPredial.newCHIP}" /></td>
-											<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
-											<td><c:out
-													value="${eachPredialDetail.destinohacendario}" /></td>
-											<td><c:out value="${eachPredialDetail.estado}" /></td>
-											<td><c:out
-													value="${eachPredialDetail.porcParticipacion}" /></td>
-											<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
-											<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
-										</tr>
-
-
-
 										<c:choose>
 											<c:when
 												test="${eachPredial.newCHIP != '' && eachPredial.matrInmobiliaria != ''}">
 												<tr>
-												<tr>
 													<td><c:out value="${eachPredial.newCHIP}" /></td>
+													<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
 													<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
 													<td><c:out
 															value="${eachPredialDetail.destinohacendario}" /></td>
