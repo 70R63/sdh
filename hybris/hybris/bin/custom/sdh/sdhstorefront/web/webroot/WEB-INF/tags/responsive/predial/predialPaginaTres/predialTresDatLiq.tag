@@ -20,35 +20,53 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.datliquidacion.porcepropiedad" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormtres.datosJuridicos.porcentajePropiedad}"
-						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
-							code="%" /></label>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predialuno.datliquidacion.porcenexe" /></label> <input id="porcenexe"
-						name="" class="newalto form-control" disabled type="text" value="${predialForm.decExencion}"
-						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
+						name="" class="newalto form-control" disabled type="text"
+						value="${predialFormtres.datosJuridicos.porcentajePropiedad}"
+						maxlength="240" style="display: inline-block !important;"></input><label
+						class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.datliquidacion.porceexclu" /></label> <input id="porceexclu"
-						name="" class="newalto form-control" disabled type="text" value="${predialForm.decExclusion}"
-						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
+							code="predialuno.generales.calidad" /></label> <input id="" name=""
+						class="newalto form-control" disabled type="text"
+						value="${predialFormtres.desCalidad}" maxlength="240"></input>
+				</div>
+			</div>
+
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predialuno.datliquidacion.porcenexe" /></label> <input
+						id="porcenexe" name="" class="newalto form-control" disabled
+						type="text" value="${predialFormtres.decExencion}" maxlength="240"
+						style="display: inline-block !important;"></input><label
+						class="control-label" style="display: inline-block !important;"><spring:theme
+							code="%" /></label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predialuno.datliquidacion.porceexclu" /></label> <input
+						id="porceexclu" name="" class="newalto form-control" disabled
+						type="text" value="${predialFormtres.decExclusion}"
+						maxlength="240" style="display: inline-block !important;"></input><label
+						class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
 			</div>
@@ -56,7 +74,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.datliquidacion.tarliqui" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormtres.estrLiquidacionPredial.tarifaLiquidacion}"
+						name="" class="newalto form-control" disabled type="text"
+						value="${predialFormtres.estrLiquidacionPredial.tarifaLiquidacion}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -67,8 +86,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.datliquidacion.destino" /></label> <input id="" name=""
-						class="alto form-control" disabled type="text" value="${predialFormtres.desDestino}"
-						maxlength="240"></input>
+						class="alto form-control" disabled type="text"
+						value="${predialFormtres.desDestino}" maxlength="240"></input>
 				</div>
 			</div>
 		</div>
@@ -77,8 +96,10 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.datliquidacion.basegrav" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormtres.estrLiquidacionPredial.baseGravable}"
+							code="predialuno.datliquidacion.basegrav" /></label> <input
+						id="basegrav" name="basegrav" class="newalto form-control"
+						disabled type="text"
+						value="${predialFormtres.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>

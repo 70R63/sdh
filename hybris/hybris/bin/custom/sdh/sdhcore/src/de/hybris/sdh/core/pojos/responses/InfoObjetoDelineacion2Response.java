@@ -51,6 +51,9 @@ public class InfoObjetoDelineacion2Response
 	private String valorPagar;
 	private String interesMora;
 	private String totalPagar;
+	private String totalUsos;
+	private String totalAreap;
+	private String totalAreai;
 
 
 
@@ -639,6 +642,57 @@ public class InfoObjetoDelineacion2Response
 		this.interesMora = interesMora;
 	}
 
+	/**
+	 * @return the totalUsos
+	 */
+	public String getTotalUsos()
+	{
+		return totalUsos;
+	}
+
+	/**
+	 * @param totalUsos
+	 *           the totalUsos to set
+	 */
+	public void setTotalUsos(final String totalUsos)
+	{
+		this.totalUsos = totalUsos;
+	}
+
+	/**
+	 * @return the totalAreap
+	 */
+	public String getTotalAreap()
+	{
+		return totalAreap;
+	}
+
+	/**
+	 * @param totalAreap
+	 *           the totalAreap to set
+	 */
+	public void setTotalAreap(final String totalAreap)
+	{
+		this.totalAreap = totalAreap;
+	}
+
+	/**
+	 * @return the totalAreai
+	 */
+	public String getTotalAreai()
+	{
+		return totalAreai;
+	}
+
+	/**
+	 * @param totalAreai
+	 *           the totalAreai to set
+	 */
+	public void setTotalAreai(final String totalAreai)
+	{
+		this.totalAreai = totalAreai;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -656,8 +710,10 @@ public class InfoObjetoDelineacion2Response
 				+ fechaFinalObra + ", fechaUltAbono=" + fechaUltAbono + ", totalPresupuesto=" + totalPresupuesto + ", valorExen="
 				+ valorExen + ", valorEjecutado=" + valorEjecutado + ", impuestoCargo=" + impuestoCargo + ", valorSancion="
 				+ valorSancion + ", totalRetencion=" + totalRetencion + ", saldoImpCargo=" + saldoImpCargo + ", saldoFavor="
-				+ saldoFavor + ", valorPagar=" + valorPagar + ", interesMora=" + interesMora + ", totalPagar=" + totalPagar + "]";
+				+ saldoFavor + ", valorPagar=" + valorPagar + ", interesMora=" + interesMora + ", totalPagar=" + totalPagar
+				+ ", totalUsos=" + totalUsos + ", totalAreap=" + totalAreap + ", totalAreai=" + totalAreai + "]";
 	}
+
 
 
 }

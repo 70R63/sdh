@@ -12,6 +12,7 @@
 <div class="loader"></div>
 
 <predial:predialDosGenerales />
+<<predial:predialDosDatPredio></predial:predialDosDatPredio>
 <predial:predialDosDatLiq />
 <predial:predialDosLiqPrivada />
 <c:url value='contribuyentes/predialunificado_2' var="linkRedirection"/>

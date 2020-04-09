@@ -17,6 +17,7 @@ import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePredial2Request;
+import de.hybris.sdh.core.pojos.requests.DetallePredialBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacion2Request;
@@ -41,6 +42,7 @@ import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetRadicadosResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
+import de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
@@ -2280,6 +2282,22 @@ public class SobreTasaGasolinaService
 
 		return (DetallePredial2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
 				wsReqMet, LOG, nombreClase);
+	}
+
+
+	public DetallePredialBPResponse consultaPredialBP(final DetallePredialBPRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		final String confUrl = "sdh.detpredialBP.url";
+		final String confUser = "sdh.detpredialBP.user";
+		final String confPass = "sdh.detpredialBP.password";
+		final String wsNombre = "basespresuntivas";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse";
+
+
+		return (DetallePredialBPResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG,
+				nombreClase);
 	}
 
 

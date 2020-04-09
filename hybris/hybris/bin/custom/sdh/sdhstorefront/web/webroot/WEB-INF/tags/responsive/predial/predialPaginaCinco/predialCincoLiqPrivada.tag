@@ -7,9 +7,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<c:set var="disabledLiquidacionPrivada" value=""/>
-<c:if test="${predialFormcinco.controlCampos.liquidacionPrivada == true}">
-	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"'/>
+<input type="hidden" value="${predialForm.mostrarAporteVoluntario}"
+	id="mostrarAporteVoluntario" />
+
+<c:set var="disabledLiquidacionPrivada" value="" />
+<c:if
+	test="${predialFormcinco.controlCampos.liquidacionPrivada == true}">
+	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"' />
 </c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
@@ -25,24 +29,40 @@
 			</div>
 		</div>
 
+		<div class="row"></div>
+
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<label class="control-label "
 					style="font-weight: 400; text-transform: none !important;"><spring:theme
 						code="predialuno.liquidacionpriv.aporte" /></label> <input
 					class="optradio"
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
-					type="radio" name="optradio" id="optionSi" value="1" ${disabledLiquidacionPrivada}> Si <input
-					class="optradio"
+					type="radio" name="optradio" id="optionSi" value="1"
+					${disabledLiquidacionPrivada}> Si <input class="optradio"
 					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
-					type="radio" name="optradio" id="optionNo" value="2" ${disabledLiquidacionPrivada}>No
+					type="radio" name="optradio" id="optionNo" value="2"
+					${disabledLiquidacionPrivada}>No
 			</div>
+			<div class="col-md-5">
+				<label class="control-label "
+					style="font-weight: 400; text-transform: none !important;"><spring:theme
+						code="predialuno.liquidacionpriv.aceptaFactura" /> <input
+					class="predialNoAceptaFactura"
+					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
+					type="checkbox" name="optionSiAceptaFactura"
+					id="predialNoAceptaFactura" value="true"> </label>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-4" id="proyecto">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.proyecto" /></label> <select id="proyectoLiq"
-						name="" class="alto_select alto form-control" ${disabledLiquidacionPrivada}><option value="00" >Seleccionar</option>
-						<option value="01">FORTALECIMIENTO DE LA SEGURIDAD CIUDADANA</option>
+							code="predialuno.liquidacionpriv.proyecto" /></label> <select
+						id="proyectoLiq" name="" class="alto_select alto form-control"
+						${disabledLiquidacionPrivada}><option value="00">Seleccionar</option>
+						<option value="01">FORTALECIMIENTO DE LA SEGURIDAD
+							CIUDADANA</option>
 						<option value="02">FINANCIACIÓN DE LA EDUCACIÓN SUPERIOR</option></select>
 				</div>
 			</div>
@@ -52,8 +72,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.valimp" /></label> <input id="ValorImpuestoACargo" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.valorImpuestoCargo}"
+							code="predialuno.liquidacionpriv.valimp" /></label> <input
+						id="ValorImpuestoACargo" name="" class="newalto form-control"
+						disabled type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.valorImpuestoCargo}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -63,8 +85,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.descuento" /></label> <input id="DescuentoPorIncrementoDiferencias"
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.descuentoIncrementoDiferencial}"
+							code="predialuno.liquidacionpriv.descuento" /></label> <input
+						id="DescuentoPorIncrementoDiferencias" name=""
+						class="newalto form-control" disabled type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.descuentoIncrementoDiferencial}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -74,8 +98,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.impajustado" /></label> <input id="ValorImpuestoAjustadoActual"
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.valorImpuestoAjustadoActual}"
+							code="predialuno.liquidacionpriv.impajustado" /></label> <input
+						id="ValorImpuestoAjustadoActual" name=""
+						class="newalto form-control" disabled type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.valorImpuestoAjustadoActual}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -86,7 +112,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.liquidacionpriv.sancion" /></label> <input id="Sancion"
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.sancion}"
+						name="" class="newalto form-control" disabled type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.sancion}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -96,8 +123,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.saldo" /></label> <input id="TotalSaldoACargo" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.totalSaldoCargo}"
+							code="predialuno.liquidacionpriv.saldo" /></label> <input
+						id="TotalSaldoACargo" name="" class="newalto form-control"
+						disabled type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.totalSaldoCargo}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -107,8 +136,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.valpagar" /></label> <input id="ValorAPagar"
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.valorAPagar}"
+							code="predialuno.liquidacionpriv.valpagar" /></label> <input
+						id="ValorAPagar" name="" class="newalto form-control" disabled
+						type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.valorAPagar}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -117,9 +148,11 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.desprontopago" /></label> <input id="DescuentoPorProntoPago"
-						name="" class="newalto form-control" type="text" value="${predialFormcinco.estrLiquidacionPrivada.descuentoProntoPago}"
-						maxlength="240" ${disabledLiquidacionPrivada}></input>
+							code="predialuno.liquidacionpriv.desprontopago" /></label> <input
+						id="DescuentoPorProntoPago" name="" class="newalto form-control"
+						type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.descuentoProntoPago}"
+						maxlength="240" disabled="disabled"></input>
 				</div>
 			</div>
 		</div>
@@ -127,8 +160,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.descuadicional" /></label> <input id="DescuendoAdicional1"
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.descuentoAdicional}"
+							code="predialuno.liquidacionpriv.descuadicional" /></label> <input
+						id="DescuendoAdicional1" name="" class="newalto form-control"
+						disabled type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.descuentoAdicional}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -137,8 +172,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.intereses" /></label> <input id="Intereses"
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.intereses}"
+							code="predialuno.liquidacionpriv.intereses" /></label> <input
+						id="Intereses" name="" class="newalto form-control" disabled
+						type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.intereses}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -147,8 +184,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.totpag" /></label> <input id="TotalAPagar" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.totalPagar}"
+							code="predialuno.liquidacionpriv.totpag" /></label> <input
+						id="TotalAPagar" name="" class="newalto form-control" disabled
+						type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.totalPagar}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -157,8 +196,10 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.valaportevol" /></label> <input id="ValorAporteVoluntario"
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.valorAporteVoluntario}"
+							code="predialuno.liquidacionpriv.valaportevol" /></label> <input
+						id="ValorAporteVoluntario" name="" class="newalto form-control"
+						disabled type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.valorAporteVoluntario}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -167,19 +208,23 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.totpagvolun" /></label> <input id="TotalConPagoVoluntario"
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcinco.estrLiquidacionPrivada.totalPagoVoluntario}"
+							code="predialuno.liquidacionpriv.totpagvolun" /></label> <input
+						id="TotalConPagoVoluntario" name="" class="newalto form-control"
+						disabled type="text"
+						value="${predialFormcinco.estrLiquidacionPrivada.totalPagoVoluntario}"
 						maxlength="240"></input>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
-				<c:if test="${predialFormcinco.controlCampos.liquidacionPrivada != true}">
-				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button" onclick="calculoPred()">
-					<spring:theme code="predialuno.liquidacionpriv.calcular" />
-				</button>
+				<c:if
+					test="${predialFormcinco.controlCampos.liquidacionPrivada != true}">
+					<button style="margin-top: 3px;" id=""
+						class="btn btn-primary btn-lg" type="button"
+						onclick="calculoPred()">
+						<spring:theme code="predialuno.liquidacionpriv.calcular" />
+					</button>
 				</c:if>
 			</div>
 		</div>

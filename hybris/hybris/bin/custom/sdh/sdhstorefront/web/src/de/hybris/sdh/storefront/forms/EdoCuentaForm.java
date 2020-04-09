@@ -45,6 +45,7 @@ public class EdoCuentaForm
 	private List<EdoCtaGas> tablaGasolina;
 	private List<EdoCtaPublicidad> tablaPublicidad;
 	private List<EdoCtaOblig> obligNoTributaria;
+	private String fechageneracion;
 
 	/**
 	 * @return the numBP
@@ -452,6 +453,23 @@ public class EdoCuentaForm
 	public void setObligNoTributaria(final List<EdoCtaOblig> obligNoTributaria)
 	{
 		this.obligNoTributaria = obligNoTributaria;
+	}
+
+	/**
+	 * @return the fechageneracion
+	 */
+	public String getFechageneracion()
+	{
+		return fechageneracion;
+	}
+
+	/**
+	 * @param fechageneracion
+	 *           the fechageneracion to set
+	 */
+	public void setFechageneracion(final String fechageneracion)
+	{
+		this.fechageneracion = fechageneracion;
 	}
 
 

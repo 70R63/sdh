@@ -66,7 +66,7 @@
 
 
 		<div class="row">
-			<div class="col-md-6"></div>
+			<div class="col-md-5"></div>
 			<!-- 			<div class="col-md-3"> -->
 			<!-- 				<div class="form-group"> -->
 			<!-- 					<button type="submit" class="btn btn-secondary btn-lg" id="action" -->
@@ -83,11 +83,19 @@
 			<!-- 					</button> -->
 			<!-- 				</div> -->
 			<!-- 			</div> -->
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<button type="button" class="btn btn-secondary btn-lg" id="action"
 					name="action" value="cancelar" style="margin-top: 3px"
 					onclick="window.location.href ='<c:url value='/contribuyentes' />';">
 					<spring:theme code="obligacion.inicial.cancelar" />
+				</button>
+
+			</div>
+				<div class="col-md-2">
+				<button type="button" class="btn btn-primary btn-lg" id="action"
+					name="action" value="Imprimir" style="margin-top: 3px"
+					onclick="window.location.href ='<c:url value='#' />';">
+					<spring:theme code="obligacion.inicial.imprimir" />
 				</button>
 
 			</div>

@@ -1,6 +1,6 @@
 ACC.predial = {
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario"],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura", "bindDialogoMensajes"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -10,26 +10,45 @@ ACC.predial = {
 
 			if (valo == '2') {
 				pro.style.display = 'none';
-				$('#ValorAporteVoluntario').prop('disabled', true);				
 			} else if (valo == '1') {
 				pro.style.display = 'block';
-				$('#ValorAporteVoluntario').prop('disabled', false);				
 			}
 
 		});
 	},
 	
+	bindNoAceptaFactura : function() {
+		$(document).on("click", ".predialNoAceptaFactura", function() {
+			debugger;
+			
+			var valPredialNoAceptaFactura = this.checked;
+			
+			if (valPredialNoAceptaFactura) {
+				$('#basegrav').prop('disabled', false);						
+			} else {
+				$('#basegrav').prop('disabled', true);				
+			}
+		});
+		
+		$(document).on("change", ".basegrav", function() {
+			debugger;
+			var nuevoValor = this.value;
+			$('#BaseGravable').prop('value', nuevoValor);
+		});
+	},
+	
+	
 	bindMostrarAporteVolintario : function(){
-		debugger;
+//		debugger;
 		var mostrarAporteVoluntario = document.getElementById('mostrarAporteVoluntario');
-		if (mostrarAporteVoluntario.value == "true"){
+		if (mostrarAporteVoluntario != null && mostrarAporteVoluntario.value == "true"){
 			$('#proyectoLiq').prop('disabled', false);
 			$('#optionSi').prop('disabled', false);
 			$('#optionNo').prop('disabled', false);
 		}else{
 			$('#proyectoLiq').prop('disabled', true);
 			$('#optionSi').prop('disabled', true);
-			$('#optionNo').prop('disabled', true);
+			$('#optionNo').prop('disabled', true);			
 		}		
 	},	
 	
@@ -38,12 +57,12 @@ ACC.predial = {
 			e.preventDefault();
 			var val = this.value;
 
-			if (val == 'Si') {
+			if (val == '1') {
 				$('#areaconstruccion').prop('disabled', false);
 				;
 				$('#areaterreno').prop('disabled', true);
 				;
-			} else if (val == 'No') {
+			} else if (val == '2') {
 				$('#areaconstruccion').prop('disabled', false);
 				;
 				$('#areaterreno').prop('disabled', false);
@@ -712,6 +731,88 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 	 	       ACC.opcionDeclaraciones.presentarDeclaracionGenerica();
 	 	       
 		 });
-	 }
+	 },
+	 
+	 
+	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
 
+		ACC.predial.visualizacionBasesDetalle(false);
+		if(ACC.predial.validarAntesSubmit_precalculoBP()){
+			var dataActual = {};	
+		
+			
+			dataActual.numBP = numBP;
+			dataActual.CHIP = chip;
+			dataActual.anioGravable = anioGravable;
+			dataActual.areaConstruida = areaConstruida;
+			dataActual.areaTerrenoCatastro = areaTerrenoCatastro;
+			dataActual.caracterizacionPredio = caracterizacionPredio;
+			dataActual.propiedadHorizontal = propiedadHorizontal;
+			dataActual.destinoHacendario = destinoHacendario;
+			
+			
+			$.ajax({
+				url : ACC.precalculoPredialBPURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					if(dataResponse != null){
+						if(dataResponse.errores.txtMsj.trim() != ""){
+			            	$("#dialogMensajes" ).dialog( "open" );
+							$("#dialogMensajesContent").html("");
+		            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
+						}
+						
+						$("#basegrav").val(dataResponse.baseGravable);
+						ACC.predial.visualizacionBasesDetalle(true);
+					}
+				},
+				error : function() {
+					alert("Error procesar la solicitud de basespresuntivas");	
+				}
+			});
+		}
+	 },
+	 
+	 visualizacionBasesDetalle : function (flagVisible){
+		var valDisplay = 'none';
+		var basesDetalle = document.getElementById("BasesDetalle");
+		if(basesDetalle != null){
+			if(flagVisible){
+				valDisplay = 'block';
+			}
+			basesDetalle.style.display = valDisplay;
+		}
+		 
+	 },
+		 
+		 
+	 validarAntesSubmit_precalculoBP : function (){
+		 var flagValidacion = false;
+		 
+		 if($("#caracterizacionPredio").val()!= null && $("#caracterizacionPredio").val()!= null &&
+				 $("#caracterizacionPredio").val()!= "" && $("#caracterizacionPredio").val()!= ""){
+			 flagValidacion = true;
+		 }else{
+			 alert("Los campos Destino Hacendario y Caracterización del predio son obligatorios");
+		 }
+		 
+		 
+		 return flagValidacion;
+	 },
+	 
+	 
+	 bindDialogoMensajes : function (){
+    	$( "#dialogMensajes" ).dialog({ 
+    		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
+    		buttons: {
+    			Ok: function() {
+    				$( this ).dialog( "close" );
+    			}
+    	    } 
+    	});
+	 }
+	 
 };

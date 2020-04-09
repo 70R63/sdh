@@ -99,10 +99,16 @@ public class PredialForm
 	private SDHValidaMailRolResponse contribuyenteData;
 	private String representado;
 	private DetallePredial2Response detallePredial2Response;
+	private PredialCatalogos catalogos;
 
 	//bandera para aporte voluntario
 	private boolean mostrarAporteVoluntario;
+	private String caracterizacionPredio;
+	private String propiedadHorizontal;
 
+	//campos para precalculo
+	private String areaConstruida;
+	private String areaTerrenoCatastro;
 
 
 
@@ -1090,6 +1096,91 @@ public class PredialForm
 	public void setDetallePredial2Response(final DetallePredial2Response detallePredial2Response)
 	{
 		this.detallePredial2Response = detallePredial2Response;
+	}
+
+	/**
+	 * @return the catalogos
+	 */
+	public PredialCatalogos getCatalogos()
+	{
+		return catalogos;
+	}
+
+	/**
+	 * @param catalogos
+	 *           the catalogos to set
+	 */
+	public void setCatalogos(final PredialCatalogos catalogos)
+	{
+		this.catalogos = catalogos;
+	}
+
+	/**
+	 * @return the caracterizacionPredio
+	 */
+	public String getCaracterizacionPredio()
+	{
+		return caracterizacionPredio;
+	}
+
+	/**
+	 * @param caracterizacionPredio
+	 *           the caracterizacionPredio to set
+	 */
+	public void setCaracterizacionPredio(final String caracterizacionPredio)
+	{
+		this.caracterizacionPredio = caracterizacionPredio;
+	}
+
+	/**
+	 * @return the propiedadHorizontal
+	 */
+	public String getPropiedadHorizontal()
+	{
+		return propiedadHorizontal;
+	}
+
+	/**
+	 * @param propiedadHorizontal
+	 *           the propiedadHorizontal to set
+	 */
+	public void setPropiedadHorizontal(final String propiedadHorizontal)
+	{
+		this.propiedadHorizontal = propiedadHorizontal;
+	}
+
+	/**
+	 * @return the areaConstruida
+	 */
+	public String getAreaConstruida()
+	{
+		return areaConstruida;
+	}
+
+	/**
+	 * @param areaConstruida
+	 *           the areaConstruida to set
+	 */
+	public void setAreaConstruida(final String areaConstruida)
+	{
+		this.areaConstruida = areaConstruida;
+	}
+
+	/**
+	 * @return the areaTerrenoCatastro
+	 */
+	public String getAreaTerrenoCatastro()
+	{
+		return areaTerrenoCatastro;
+	}
+
+	/**
+	 * @param areaTerrenoCatastro
+	 *           the areaTerrenoCatastro to set
+	 */
+	public void setAreaTerrenoCatastro(final String areaTerrenoCatastro)
+	{
+		this.areaTerrenoCatastro = areaTerrenoCatastro;
 	}
 
 

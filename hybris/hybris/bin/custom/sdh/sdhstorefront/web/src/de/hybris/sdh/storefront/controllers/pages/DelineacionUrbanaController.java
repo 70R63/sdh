@@ -1127,6 +1127,9 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 			infoDeclara.setInteresesMora(infoImpuesto2Response.getInteresMora());
 			infoDeclara.setTotalPagar(infoImpuesto2Response.getTotalPagar());
 			infoDeclara.setCausalExcep(infoImpuesto2Response.getCausalExcep());
+			infoDeclara.setTotalUsos(infoImpuesto2Response.getTotalUsos());
+			infoDeclara.setTotalAreap(infoImpuesto2Response.getTotalAreap());
+			infoDeclara.setTotalAreai(infoImpuesto2Response.getTotalAreai());
 
 
 			responseRemapeo.setInfoDeclara(infoDeclara);

@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 
-	<form:form>
+	<form:form commandName="predialFormbases">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="headline">
@@ -41,33 +41,70 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.caracpredio" /></label> <select id=""
-						name="" class="newalto form-control"><option>Seleccionar</option></select>
+							code="predial.basespresun.datliquidacion.destino" /></label> 
+						<form:select id="destinoHacendario" path="destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()"></form:select>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.datospredio.prophorizon" /></label> <select id="prophorizontal"
-						name="prophorizontal" class="newalto form-control prophorizontal"><option>Seleccionar</option>
-						<option value="Si">Si</option>
-						<option value="No">No</option></select>
+							code="predial.basespresun.datospredio.prophorizon" /></label> 
+							<form:select class="newalto form-control prophorizontal" id="propiedadHorizontal" path="propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}"></form:select>
+							
 				</div>
 			</div>
 		</div>
-			<div class="row">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predial.basespresun.datospredio.caracpredio" /></label> 
+						<form:select id="caracterizacionPredio" path="caracterizacionPredio" items="${predialFormbases.catalogos.caracterizacionPredio}"></form:select>
+				</div>
+			</div>
 			<div class="col-md-3">
-				<button style="margin-top: 3px;" id="buttonPrecalculo"
-					class="btn btn-primary btn-lg buttonPrecalculo" type="button">
+				<div class="form-group">
+				<button id="buttonPrecalculo"
+					class="btn btn-primary btn-lg buttonPrecalculo" type="button" onclick="accionPreCalculo()">
 					<spring:theme code="predial.basespresun.datospredio.precalculo" />
 				</button>
+				</div>
 			</div>
 		</div>
 	</form:form>
 </div>
 
+<script type="text/javascript">
 
+function accionPreCalculo(){
+	
+	var numBP = $('#numBP').val();
+	var chip = $('#chip').val();
+	var anioGravable = $('#anioGravable').val();
+	var areaConstruida = $('#areaconstruccion').val();
+	var areaTerrenoCatastro = $('#areaterreno').val();
+	var caracterizacionPredio = $('#caracterizacionPredio').val();
+	var propiedadHorizontal = $('#propiedadHorizontal').val();
+	var destinoHacendario = $('#destinoHacendario').val();
+	
+	ACC.predial.ejecutarPreCalculoPB(numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario);
+	
+}
+
+function accionCat_destinoHacendario(){
+
+	$("#caracterizacionPredio").find("option:gt(0)").remove();	
+	if($("#destinoHacendario").val() != null){
+		for(var i=0;i<cat_predial_caracterizacionPredio.length;i++){
+			if(cat_predial_caracterizacionPredio[i].destinoHacendario == $("#destinoHacendario").val()){
+				$('#caracterizacionPredio').append('<option value="'+ cat_predial_caracterizacionPredio[i].itemId +'">'+ cat_predial_caracterizacionPredio[i].itemValue + "</option>");
+			}
+		}		
+	}
+
+}
+</script>
 

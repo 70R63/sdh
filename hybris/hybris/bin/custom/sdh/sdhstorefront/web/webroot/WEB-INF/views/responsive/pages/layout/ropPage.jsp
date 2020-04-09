@@ -73,7 +73,7 @@
 				<a id="downloadROPHelper" target="_blank"></a>
 			</div>
 
-			<div class="col-md-2">
+			<!--  <div class="col-md-2">
 				<button style="margin-top: 26px; margin-bottom: 15px;" id=""
 					class="btn btn-primary btn-lg"
 					onclick="window.location.href ='<c:url value='/impuestos/pagoEnLinea/form'/>';"
@@ -81,6 +81,7 @@
 					<spring:theme code="rop.generar.pagolinea" />
 				</button>
 			</div>
+			-->
 		</div>
 
 	</form:form>

@@ -138,6 +138,7 @@
 			ACC.tramiteExitosoURL = "<c:url value='/contribuyentes/tramites' />";
 			
 			ACC.predialDetalleURL="<c:url value='/contribuyentes/predialunificado_inicio/detalle' />";
+			ACC.precalculoPredialBPURL="<c:url value='/contribuyentes/predialunificado_inicio/precalculoPredialBP' />";
 			
 			ACC.predialDeclaraURL="<c:url value='/contribuyentes/predialunificado/URL' />";
 			ACC.predialDeclaradosURL="<c:url value='/contribuyentes/predialunificado_2' />";
@@ -7020,5 +7021,32 @@
 				{'itemId':'46612','habilitado':'X'},
 				{'itemId':'46632','habilitado':'X'}
 				];
+			var cat_predial_caracterizacionPredio = [
+				{'destinoHacendario':'61','itemId':'E1','itemValue':'ESTRATO 1'},
+				{'destinoHacendario':'61','itemId':'E2','itemValue':'ESTRATO 2'},
+				{'destinoHacendario':'61','itemId':'E3','itemValue':'ESTRATO 3'},
+				{'destinoHacendario':'61','itemId':'E4','itemValue':'ESTRATO 4'},
+				{'destinoHacendario':'61','itemId':'E5','itemValue':'ESTRATO 5'},
+				{'destinoHacendario':'61','itemId':'E6','itemValue':'ESTRATO 6'},
+				{'destinoHacendario':'62','itemId':'C1','itemValue':'PUNTUAL'},
+				{'destinoHacendario':'62','itemId':'C2','itemValue':'ZONAL'},
+				{'destinoHacendario':'62','itemId':'C3','itemValue':'URBANO'},
+				{'destinoHacendario':'62','itemId':'C4','itemValue':'METROPOLITANO'},
+				{'destinoHacendario':'62','itemId':'C5','itemValue':'FINANCIERO'},
+				{'destinoHacendario':'64','itemId':'NA','itemValue':'NO APLICA'},
+				{'destinoHacendario':'65','itemId':'D1','itemValue':'ESTRATOS 1,2 Y 3'},
+				{'destinoHacendario':'65','itemId':'E4','itemValue':'ESTRATO 4'},
+				{'destinoHacendario':'65','itemId':'E5','itemValue':'ESTRATO 5'},
+				{'destinoHacendario':'65','itemId':'E6','itemValue':'ESTRATO 6'},
+				{'destinoHacendario':'65','itemId':'D2','itemValue':'COMERCIAL Y OTROS'},
+				{'destinoHacendario':'66','itemId':'NA','itemValue':'NO APLICA'},
+				{'destinoHacendario':'67','itemId':'E1','itemValue':'ESTRATO 1'},
+				{'destinoHacendario':'67','itemId':'E2','itemValue':'ESTRATO 2'},
+				{'destinoHacendario':'67','itemId':'E3','itemValue':'ESTRATO 3'},
+				{'destinoHacendario':'67','itemId':'E4','itemValue':'ESTRATO 4'},
+				{'destinoHacendario':'67','itemId':'E5','itemValue':'ESTRATO 5'},
+				{'destinoHacendario':'67','itemId':'E6','itemValue':'ESTRATO 6'}
+				];
+
 		/*]]>*/
 	</script>
