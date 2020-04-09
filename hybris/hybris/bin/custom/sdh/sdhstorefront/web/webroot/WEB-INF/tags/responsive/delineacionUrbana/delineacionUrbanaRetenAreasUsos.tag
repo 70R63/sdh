@@ -6,6 +6,11 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+
+<c:set var="disabledInformacionAreaUso" value=""/>
+<c:if test="${dataForm.controlCampos.informacionAreaUso == true}">
+	<c:set var="disabledInformacionAreaUso" value='true'/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -58,13 +63,13 @@
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control" disabled="false"></sf:select>
+								class="new_alto form-control" disabled="${disabledInformacionAreaUso}"></sf:select>
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
 							<sf:select path="infObjetoDelineacion.usos[${loop.index}].uso"
 								items="${dataForm.catalogos.codUso}"
 								referenceData="${dataForm.catalogos.codUso}"
-								class="new_alto form-control" disabled="false"></sf:select>
+								class="new_alto form-control" disabled="${disabledInformacionAreaUso}"></sf:select>
 						</c:if>
 
 					</div>
@@ -74,14 +79,14 @@
 				<div class="col-md-2">
 					<div class="form-group ">
 						<c:if test='${dataForm.input.tipoFlujo == "D"}'>
-							<sf:input class="newalto form-control" readonly="false"
+							<sf:input class="newalto form-control" readonly="${disabledInformacionAreaUso}"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
 								onkeyup="numberFormat(this)" onclick="numberFormat(this)"
 								disabled="false" />
 						</c:if>
 						<c:if test='${dataForm.input.tipoFlujo == "R"}'>
-							<sf:input class="newalto form-control" readonly="false"
+							<sf:input class="newalto form-control" readonly="${disabledInformacionAreaUso}"
 								aria-required="true" maxlength="240"
 								path="infObjetoDelineacion.usos[${loop.index}].areaNeta"
 								disabled="false" onkeyup="numberFormat(this)"
@@ -90,7 +95,7 @@
 					</div>
 				</div>
 
-
+				<c:if test="${dataForm.controlCampos.informacionAreaUso != true}">
 				<c:if test='${dataForm.input.tipoFlujo == "D"}'>
 					<div class="col-md-1">
 						<div class="form-group ">
@@ -112,6 +117,7 @@
 								style="width: 25px"></img>
 						</div>
 					</div>
+				</c:if>
 				</c:if>
 			</div>
 		</div>
@@ -170,18 +176,19 @@
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].areaInter"
 							items="${dataForm.catalogos.areaInter}"
 							referenceData="${dataForm.catalogos.areaInter}"
-							class="new_alto form-control"></sf:select>
+							class="new_alto form-control" disabled="${disabledInformacionAreaUso}"></sf:select>
 					</div>
 				</div>
 
 				<div class="col-md-2">
 					<div class="form-group ">
-						<sf:input class="newalto form-control" readonly="false"
+						<sf:input class="newalto form-control" readonly="${disabledInformacionAreaUso}"
 							aria-required="true" maxlength="240"
 							path="infObjetoDelineacion.areaIntervenida[${loop.index}].aream2"
 							onkeyup="numberFormat(this)" onclick="numberFormat(this)" />
 					</div>
 				</div>
+				<c:if test="${dataForm.controlCampos.informacionAreaUso != true}">
 				<div class="col-md-1">
 					<div class="form-group ">
 						<img onclick="addinfoareuso3()"
@@ -191,6 +198,7 @@
 							style="width: 25px"></img>
 					</div>
 				</div>
+				</c:if>
 			</div>
 		</div>
 	</c:forEach>
@@ -249,19 +257,20 @@
 							path="infObjetoDelineacion.areaProyecto[${loop.index}].areaProy"
 							items="${dataForm.catalogos.areaProy}"
 							referenceData="${dataForm.catalogos.areaProy}"
-							class="new_alto form-control"></sf:select>
+							class="new_alto form-control" disabled="${disabledInformacionAreaUso}"></sf:select>
 					</div>
 
 				</div>
 
 				<div class="col-md-2">
 					<div class="form-group ">
-						<sf:input class="newalto form-control" readonly="false"
+						<sf:input class="newalto form-control" readonly="${disabledInformacionAreaUso}"
 							aria-required="true" maxlength="240"
 							path="infObjetoDelineacion.areaProyecto[${loop.index}].aream2" />
 					</div>
 				</div>
 
+				<c:if test="${dataForm.controlCampos.informacionAreaUso != true}">
 				<div class="col-md-1">
 					<div class="form-group ">
 						<img onclick="addinfoareusotable2()"
@@ -271,6 +280,7 @@
 							style="width: 25px"></img>
 					</div>
 				</div>
+				</c:if>
 			</div>
 		</div>
 	</c:forEach>

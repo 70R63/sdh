@@ -55,48 +55,72 @@ public class GestionBancariaController extends AbstractPageController {
 			final RedirectAttributes redirectAttributes, final Model model) throws IOException
     {
 
+		final String extension_origen = ".zip.p7z";
+		final String extension_destino = ".txt";
+
         redirectAttributes.addFlashAttribute("importConciliacionForm", importConciliacionForm);
 
-        LOG.info("File-reading");
-        LOG.info("getConciliacionFile:" + importConciliacionForm.getConciliacionFile());
-        LOG.info("getTipoArchivo" + importConciliacionForm.getTipoArchivo());
 
-        final String pathFiles = configurationService.getConfiguration().getString("gestion.bancaria.certificados.aprobados.path");
-        final FileConciliaRequest fileConciliaRequest = new FileConciliaRequest(
-                importConciliacionForm.getEntidadBancaria(),
-                importConciliacionForm.getTipoArchivo(),
-                importConciliacionForm.getConciliacionFile().getOriginalFilename().replaceAll(".zip.p7z",".txt"),
-                "1",
-                pathFiles);
+		if (!importConciliacionForm.getConciliacionFile().getOriginalFilename().contains(extension_origen))
+		{
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+					"conciliaciones.upload.messages.error.extension", new Object[]
+					{ importConciliacionForm.getConciliacionFile().getOriginalFilename(), extension_origen });
 
-        final FileConciliaResponse fileConciliaResponse1 = sdhGestionBancaria.fileConcilia(fileConciliaRequest);
+		}
+		else
+		{
 
-        if(Objects.nonNull(fileConciliaResponse1)){
-            if(fileConciliaResponse1.getIdEnvio().equals("000")){
-                final boolean verifiedOk = sdhGestionBancaria.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
-                LOG.info("verifiedOk Result: " + verifiedOk);
-                if(verifiedOk){
-                    fileConciliaRequest.setFlag("0");
-                    final FileConciliaResponse fileConciliaResponse2 = sdhGestionBancaria.fileConcilia(fileConciliaRequest);
-                    GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
-                            "conciliaciones.upload.messages.ws.fileConcilia.success", new Object[]
-							{ fileConciliaResponse2.getMsjResp() + "Id de Envio = " + fileConciliaResponse2.getIdEnvio() });
-                }else{
-                    GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-                            "conciliaciones.upload.messages.error", new Object[]
-                                    { importConciliacionForm.getConciliacionFile().getOriginalFilename() });
-                }
+			LOG.info("File-reading");
+			LOG.info("getConciliacionFile:" + importConciliacionForm.getConciliacionFile());
+			LOG.info("getTipoArchivo" + importConciliacionForm.getTipoArchivo());
 
-            }else{
-                GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-                        "conciliaciones.upload.messages.ws.fileConcilia.error", new Object[]
-                                { fileConciliaResponse1.getMsjResp() });
-            }
-        }else{
-            GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
-                    "conciliaciones.upload.messages.ws.fileConcilia.error", new Object[]
-                            { "Error con el servidor intente nuevamente" });
-        }
+			final String pathFiles = configurationService.getConfiguration()
+					.getString("gestion.bancaria.certificados.aprobados.path");
+			final FileConciliaRequest fileConciliaRequest = new FileConciliaRequest(importConciliacionForm.getEntidadBancaria(),
+					importConciliacionForm.getTipoArchivo(),
+					importConciliacionForm.getConciliacionFile().getOriginalFilename().replaceAll(extension_origen, extension_destino),
+					"1", pathFiles);
+
+			final FileConciliaResponse fileConciliaResponse1 = sdhGestionBancaria.fileConcilia(fileConciliaRequest);
+
+			if (Objects.nonNull(fileConciliaResponse1))
+			{
+				if (fileConciliaResponse1.getIdEnvio().equals("000"))
+				{
+					final String verifiedOk = sdhGestionBancaria
+							.validade7ZipCertificates(importConciliacionForm.getConciliacionFile());
+					LOG.info("verifiedOk Result: " + verifiedOk);
+					if (verifiedOk == null)
+					{
+						fileConciliaRequest.setFlag("0");
+						final FileConciliaResponse fileConciliaResponse2 = sdhGestionBancaria.fileConcilia(fileConciliaRequest);
+						GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
+								"conciliaciones.upload.messages.ws.fileConcilia.success", new Object[]
+								{ fileConciliaResponse2.getMsjResp() + "Id de Envio = " + fileConciliaResponse2.getIdEnvio() });
+					}
+					else
+					{
+						GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+								"conciliaciones.upload.messages.error.firma", new Object[]
+								{ importConciliacionForm.getConciliacionFile().getOriginalFilename(), verifiedOk });
+					}
+
+				}
+				else
+				{
+					GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+							"conciliaciones.upload.messages.ws.fileConcilia.error", new Object[]
+							{ fileConciliaResponse1.getMsjResp() });
+				}
+			}
+			else
+			{
+				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.ERROR_MESSAGES_HOLDER,
+						"conciliaciones.upload.messages.ws.fileConcilia.error.servicio", new Object[]
+						{ " " });
+			}
+		}
 
 		final Boolean bProcesado = true;
 		model.addAttribute("procesado", bProcesado);

@@ -85,7 +85,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.opuso" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text"
+						class="alto form-control" disabled type="text"
 						value="${predialForm.opcionuso}" maxlength="240"></input>
 				</div>
 			</div>
@@ -123,7 +123,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialuno.generales.direccion" /></label> <input id="" name=""
-						class="alto form-control" disabled type="text" value=""
+						class="alto form-control" disabled type="text" value="${predialForm.direccionPredio}"
 						maxlength="240"></input>
 				</div>
 			</div>

@@ -7,6 +7,7 @@ import de.hybris.sdh.core.pojos.requests.CalPredialDatLiq;
 import de.hybris.sdh.core.pojos.requests.CalPredialLiqPriv;
 import de.hybris.sdh.core.pojos.responses.CalPredialErrores;
 import de.hybris.sdh.core.pojos.responses.CalculoPredialLiqPriv;
+import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
 import de.hybris.sdh.core.pojos.responses.DetallePredialResponse;
 import de.hybris.sdh.core.pojos.responses.PredialDatosEconomicos;
 import de.hybris.sdh.core.pojos.responses.PredialDatosFisicos;
@@ -17,6 +18,7 @@ import de.hybris.sdh.core.pojos.responses.PredialEstLiquidacionPrivada;
 import de.hybris.sdh.core.pojos.responses.PredialMarcas;
 import de.hybris.sdh.core.pojos.responses.PredialResponse;
 import de.hybris.sdh.core.pojos.responses.PredialTblErrores;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 
 import java.util.List;
 
@@ -58,7 +60,8 @@ public class PredialForm
 	private String decExencion;
 	private String decExclusion;
 	private String desCalidad;
-
+	private String desDestino;
+	private String retipDeclaracion;
 	//campos para calculo
 	private String numFrom;
 	private CalculoPredialLiqPriv liquidacionPrivada;
@@ -66,6 +69,8 @@ public class PredialForm
 	private CalPredialDatLiq DatosLiquidacion;
 	private CalPredialDatLiq newDatosLiquidacion;
 	private CalPredialLiqPriv calcLiquidacionPrivada;
+	private CalPredialLiqPriv newLiquidacionRequ;
+
 	//campos para request de calculo
 
 	private String tipoDeclaracion;
@@ -83,6 +88,80 @@ public class PredialForm
 	private String aporteVoluntario;
 	private String proyecto;
 	private String chipcalculo;
+
+	private String url;
+	private String caso;
+
+	private String autoavaluo;
+	private String direccionPredio;
+
+	private PredialControlCamposDec controlCampos;
+	private SDHValidaMailRolResponse contribuyenteData;
+	private String representado;
+	private DetallePredial2Response detallePredial2Response;
+	private PredialCatalogos catalogos;
+
+	//bandera para aporte voluntario
+	private boolean mostrarAporteVoluntario;
+	private String caracterizacionPredio;
+	private String propiedadHorizontal;
+
+	//campos para precalculo
+	private String areaConstruida;
+	private String areaTerrenoCatastro;
+
+
+
+	/**
+	 * @return the mostrarAporteVoluntario
+	 */
+	public boolean isMostrarAporteVoluntario()
+	{
+		return mostrarAporteVoluntario;
+	}
+
+	/**
+	 * @param mostrarAporteVoluntario
+	 *           the mostrarAporteVoluntario to set
+	 */
+	public void setMostrarAporteVoluntario(final boolean mostrarAporteVoluntario)
+	{
+		this.mostrarAporteVoluntario = mostrarAporteVoluntario;
+	}
+
+	/**
+	 * @return the caso
+	 */
+	public String getCaso()
+	{
+		return caso;
+	}
+
+	/**
+	 * @param caso
+	 *           the caso to set
+	 */
+	public void setCaso(final String caso)
+	{
+		this.caso = caso;
+	}
+
+	/**
+	 * @return the url
+	 */
+	public String getUrl()
+	{
+		return url;
+	}
+
+	/**
+	 * @param url
+	 *           the url to set
+	 */
+	public void setUrl(final String url)
+	{
+		this.url = url;
+	}
 
 	/**
 	 * @return the detallePredio
@@ -865,6 +944,245 @@ public class PredialForm
 	{
 		this.chipcalculo = chipcalculo;
 	}
+
+	/**
+	 * @return the autoavaluo
+	 */
+	public String getAutoavaluo()
+	{
+		return autoavaluo;
+	}
+
+	/**
+	 * @param autoavaluo
+	 *           the autoavaluo to set
+	 */
+	public void setAutoavaluo(final String autoavaluo)
+	{
+		this.autoavaluo = autoavaluo;
+	}
+
+	/**
+	 * @return the direccionPredio
+	 */
+	public String getDireccionPredio()
+	{
+		return direccionPredio;
+	}
+
+	/**
+	 * @param direccionPredio
+	 *           the direccionPredio to set
+	 */
+	public void setDireccionPredio(final String direccionPredio)
+	{
+		this.direccionPredio = direccionPredio;
+	}
+
+	/**
+	 * @return the desDestino
+	 */
+	public String getDesDestino()
+	{
+		return desDestino;
+	}
+
+	/**
+	 * @param desDestino
+	 *           the desDestino to set
+	 */
+	public void setDesDestino(final String desDestino)
+	{
+		this.desDestino = desDestino;
+	}
+
+	/**
+	 * @return the retipDeclaracion
+	 */
+	public String getRetipDeclaracion()
+	{
+		return retipDeclaracion;
+	}
+
+	/**
+	 * @param retipDeclaracion
+	 *           the retipDeclaracion to set
+	 */
+	public void setRetipDeclaracion(final String retipDeclaracion)
+	{
+		this.retipDeclaracion = retipDeclaracion;
+	}
+
+	/**
+	 * @return the newLiquidacionRequ
+	 */
+	public CalPredialLiqPriv getNewLiquidacionRequ()
+	{
+		return newLiquidacionRequ;
+	}
+
+	/**
+	 * @param newLiquidacionRequ
+	 *           the newLiquidacionRequ to set
+	 */
+	public void setNewLiquidacionRequ(final CalPredialLiqPriv newLiquidacionRequ)
+	{
+		this.newLiquidacionRequ = newLiquidacionRequ;
+	}
+
+	/**
+	 * @return the controlCampos
+	 */
+	public PredialControlCamposDec getControlCampos()
+	{
+		return controlCampos;
+	}
+
+	/**
+	 * @param controlCampos
+	 *           the controlCampos to set
+	 */
+	public void setControlCampos(final PredialControlCamposDec controlCampos)
+	{
+		this.controlCampos = controlCampos;
+	}
+
+	/**
+	 * @return the contribuyenteData
+	 */
+	public SDHValidaMailRolResponse getContribuyenteData()
+	{
+		return contribuyenteData;
+	}
+
+	/**
+	 * @param contribuyenteData
+	 *           the contribuyenteData to set
+	 */
+	public void setContribuyenteData(final SDHValidaMailRolResponse contribuyenteData)
+	{
+		this.contribuyenteData = contribuyenteData;
+	}
+
+	/**
+	 * @return the representado
+	 */
+	public String getRepresentado()
+	{
+		return representado;
+	}
+
+	/**
+	 * @param representado
+	 *           the representado to set
+	 */
+	public void setRepresentado(final String representado)
+	{
+		this.representado = representado;
+	}
+
+	/**
+	 * @return the detallePredial2Response
+	 */
+	public DetallePredial2Response getDetallePredial2Response()
+	{
+		return detallePredial2Response;
+	}
+
+	/**
+	 * @param detallePredial2Response
+	 *           the detallePredial2Response to set
+	 */
+	public void setDetallePredial2Response(final DetallePredial2Response detallePredial2Response)
+	{
+		this.detallePredial2Response = detallePredial2Response;
+	}
+
+	/**
+	 * @return the catalogos
+	 */
+	public PredialCatalogos getCatalogos()
+	{
+		return catalogos;
+	}
+
+	/**
+	 * @param catalogos
+	 *           the catalogos to set
+	 */
+	public void setCatalogos(final PredialCatalogos catalogos)
+	{
+		this.catalogos = catalogos;
+	}
+
+	/**
+	 * @return the caracterizacionPredio
+	 */
+	public String getCaracterizacionPredio()
+	{
+		return caracterizacionPredio;
+	}
+
+	/**
+	 * @param caracterizacionPredio
+	 *           the caracterizacionPredio to set
+	 */
+	public void setCaracterizacionPredio(final String caracterizacionPredio)
+	{
+		this.caracterizacionPredio = caracterizacionPredio;
+	}
+
+	/**
+	 * @return the propiedadHorizontal
+	 */
+	public String getPropiedadHorizontal()
+	{
+		return propiedadHorizontal;
+	}
+
+	/**
+	 * @param propiedadHorizontal
+	 *           the propiedadHorizontal to set
+	 */
+	public void setPropiedadHorizontal(final String propiedadHorizontal)
+	{
+		this.propiedadHorizontal = propiedadHorizontal;
+	}
+
+	/**
+	 * @return the areaConstruida
+	 */
+	public String getAreaConstruida()
+	{
+		return areaConstruida;
+	}
+
+	/**
+	 * @param areaConstruida
+	 *           the areaConstruida to set
+	 */
+	public void setAreaConstruida(final String areaConstruida)
+	{
+		this.areaConstruida = areaConstruida;
+	}
+
+	/**
+	 * @return the areaTerrenoCatastro
+	 */
+	public String getAreaTerrenoCatastro()
+	{
+		return areaTerrenoCatastro;
+	}
+
+	/**
+	 * @param areaTerrenoCatastro
+	 *           the areaTerrenoCatastro to set
+	 */
+	public void setAreaTerrenoCatastro(final String areaTerrenoCatastro)
+	{
+		this.areaTerrenoCatastro = areaTerrenoCatastro;
+	}
+
 
 
 

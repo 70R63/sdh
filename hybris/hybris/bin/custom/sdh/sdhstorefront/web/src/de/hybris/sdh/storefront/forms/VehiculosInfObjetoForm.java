@@ -4,6 +4,7 @@
 package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculosRequest;
+import de.hybris.sdh.core.pojos.responses.CatalogoVehiculosResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleInfoDeclaraVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleJuridicosVehiculos;
 import de.hybris.sdh.core.pojos.responses.DetalleLiquidacionVehiculos;
@@ -117,6 +118,8 @@ public class VehiculosInfObjetoForm
 
 	private String mensajeErrorVeh;
 	private String mensajeVehiculos;
+	private String campo_catalogo;
+	private CatalogoVehiculosResponse catalogo;
 	/**
 	 * @return the numBP
 	 */
@@ -1333,6 +1336,42 @@ public class VehiculosInfObjetoForm
 	{
 		this.mensajeVehiculos = mensajeVehiculos;
 	}
+
+	/**
+	 * @return the campo_catalogo
+	 */
+	public String getCampo_catalogo()
+	{
+		return campo_catalogo;
+	}
+
+	/**
+	 * @param campo_catalogo
+	 *           the campo_catalogo to set
+	 */
+	public void setCampo_catalogo(final String campo_catalogo)
+	{
+		this.campo_catalogo = campo_catalogo;
+	}
+
+	/**
+	 * @return the catalogo
+	 */
+	public CatalogoVehiculosResponse getCatalogo()
+	{
+		return catalogo;
+	}
+
+	/**
+	 * @param catalogo
+	 *           the catalogo to set
+	 */
+	public void setCatalogo(final CatalogoVehiculosResponse catalogo)
+	{
+		this.catalogo = catalogo;
+	}
+
+
 
 
 

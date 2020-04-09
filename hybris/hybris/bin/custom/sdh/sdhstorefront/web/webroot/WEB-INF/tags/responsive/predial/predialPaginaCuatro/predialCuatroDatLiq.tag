@@ -73,19 +73,19 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialcuatro.datliquidacion.destino" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormcua.estrLiquidacionPredial.destinoHacendario}"
+						class="alto form-control" disabled type="text" value="${predialFormcua.desDestino}"
 						maxlength="240"></input>
 				</div>
 			</div>
 				<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialcuatro.datliquidacion.basegrav" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcua.estrLiquidacionPredial.baseGravable}"
+							code="predialcuatro.datliquidacion.basegrav" /></label> <input id="basegrav"
+						name="basegrav" class="newalto form-control" disabled type="text" value="${predialFormcua.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>

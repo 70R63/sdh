@@ -7,6 +7,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+<input type="hidden" value="${predialForm.mostrarAporteVoluntario}" id="mostrarAporteVoluntario"/>
+
+<c:set var="disabledLiquidacionPrivada" value=""/>
+<c:if test="${predialFormocho.controlCampos.liquidacionPrivada == true}">
+	<c:set var="disabledLiquidacionPrivada" value='disabled="disabled"'/>
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
 	<div class="container">
@@ -20,6 +26,21 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-5">
+				<label class="control-label "
+					style="font-weight: 400; text-transform: none !important;"><spring:theme
+						code="predialuno.liquidacionpriv.aceptaFactura" />
+				<input	class="predialNoAceptaFactura"
+					style="visibility: visible !important; left: 0px !important; display: inline-block !important; min-height: 0px; margin-left: 5px !important;"
+					type="checkbox" name="optionSiAceptaFactura" id="predialNoAceptaFactura" value="true" >
+				</label>			
+			</div>
+			
+		</div>
+		
+
 
 		<div class="row">
 			<div class="col-md-3">
@@ -108,10 +129,12 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3">
+				<c:if test="${predialFormocho.controlCampos.liquidacionPrivada != true}">
 				<button style="margin-top: 3px;" id=""
 					class="btn btn-primary btn-lg" type="button" onclick="calculoPredSinAporte()">
 					<spring:theme code="predialocho.liquidacionpriv.calcular" />
 				</button>
+				</c:if>
 			</div>
 		</div>
 	</div>

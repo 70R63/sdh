@@ -32,35 +32,27 @@
 						disabled="disabled">
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.info.captone" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.capacidadTon}" maxlength="30"
-						disabled="disabled">
-				</div>
-			</div>
 	
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.clase" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
+						name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
 						value='<spring:theme code="vehiculos.detalle.clase.${vehiculosFormDeclaracion.clase}"/>'
 						maxlength="30" disabled="disabled">
+						<input id="clase" type="hidden" value="${vehiculosFormDeclaracion.clase}"/>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.carroceria" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
+						name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
 						value='<spring:theme code="vehiculos.detalle.carroceria.${vehiculosFormDeclaracion.carroceria}"/>'
 						maxlength="30" disabled="disabled">
+						<input id="carroceria" type="hidden" value="${vehiculosFormDeclaracion.carroceria}"/>
 				</div>
 			</div>
 		</div>
@@ -70,33 +62,14 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.marca" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
+						id="marca_descripcion" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
 						value='<spring:theme code="vehiculos.detalle.marca.${vehiculosFormDeclaracion.marca}"/>'
 						maxlength="30" disabled="disabled">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.info.cilindra" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.cilindraje}" maxlength="30"
-						disabled="disabled">
+						<input type="hidden" id="marca" value="${vehiculosFormDeclaracion.marca}"/>
 				</div>
 			</div>
 		
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text"
-						value='<spring:theme code="vehiculos.detalle.linea.${vehiculosFormDeclaracion.linea}"/>'
-						maxlength="30" disabled="disabled">
-				</div>
-			</div>
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -114,20 +87,11 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.modelo" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
+						id="modelo" name="numresol" class="newalto form-control"
 						aria-required="true" type="text"
 						value="${vehiculosFormDeclaracion.modelo}" maxlength="30"
 						disabled="disabled">
 				</div>
-				<!-- 			</div> -->
-				<!-- 			<div class="col-md-3"> -->
-				<!-- 				<div class="form-group"> -->
-				<%-- 					<label class="control-label"><spring:theme --%>
-				<%-- 							code="sobre.vehiculo.declaracion.vehiculo.info.avaluo" /></label> <input --%>
-				<!-- 						id="numresol" name="numresol" class="newalto form-control" -->
-				<!-- 						aria-required="true" type="text" value="" maxlength="30" -->
-				<!-- 						disabled="disabled"> -->
-				<!-- 				</div> -->
 			</div>
 	
 			<div class="col-md-3">
@@ -151,16 +115,7 @@
 				</div>
 			</div>
 		
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.info.cappasa" /></label> <input
-						id="numresol" name="numresol" class="newalto form-control"
-						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.capacidadPas}" maxlength="30"
-						disabled="disabled">
-				</div>
-			</div>
+
 			</div>
 
 		<div class="row">

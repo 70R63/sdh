@@ -7,6 +7,7 @@
 <%@ taglib prefix="predial"
 	tagdir="/WEB-INF/tags/responsive/predial/predialPaginaTres"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
+<%@ taglib prefix="declaracion" tagdir="/WEB-INF/tags/responsive/predial/predialInicial"%>
 
 <div class="loader"></div>
 
@@ -14,9 +15,11 @@
 <predial:predialTresDatPredio></predial:predialTresDatPredio>
 <predial:predialTresDatLiq />
 <predial:predialTresLiqPrivada />
-<firmas:generalFirmas />
+<c:url value='contribuyentes/predialunificado_3' var="linkRedirection"/>
+<firmas:generalFirmas firmaContribuyenteRedirection="${linkRedirection}"/>
 <predial:predialTresBotones />
 <div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
+<declaracion:predialDeclaracion/>
 <script>
 
 window.onload = function() {

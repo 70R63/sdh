@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -18,37 +18,90 @@
 			</h2>
 		</div>
 	</div>
-	
-	<div class="row mt-3">
-			<div class="col-md-3">
-				<div class="form-check">
-					<label class="form-check-label"
-						style="text-transform: none !important; font-weight: normal !important"><spring:theme
-							code="Declaración en blanco" /> </label> <label
-						class="form-check-label"
-						style="text-transform: capitalize !important; font-weight: normal !important">
-						<input type="checkbox" name="avaluocheck" id=""
-						class="form-check-input mr-2"
-						style="visibility: visible !important; min-height: 4px !important;"
-						value="avaluo" onclick="habavaluo()"> 
-					</label> 
-				</div>
-			</div>
-			</div>
-			
-<c:set var="avaluoChecked" value=""></c:set>
+
+
+
+	<c:set var="avaluoChecked" value=""></c:set>
 	<c:set var="noChecked" value="" />
 	<c:set var="yesChecked" value="" />
-<%-- 	<c:choose> --%>
-<%-- 		<c:when --%>
-<%--  			test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}">  --%>
-<%--  			<c:set var="yesChecked" value="checked" />  --%>
-<%--  		</c:when>  --%>
-<%--  		<c:otherwise>  --%>
-<%--  			<c:set var="noChecked" value="checked" />  --%>
-<%--  		</c:otherwise>  --%>
-<%--  	</c:choose>  --%>
+	<%-- 	<c:choose> --%>
+	<%-- 		<c:when --%>
+	<%--  			test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}">  --%>
+	<%--  			<c:set var="yesChecked" value="checked" />  --%>
+	<%--  		</c:when>  --%>
+	<%--  		<c:otherwise>  --%>
+	<%--  			<c:set var="noChecked" value="checked" />  --%>
+	<%--  		</c:otherwise>  --%>
+	<%--  	</c:choose>  --%>
 	<form:form action="">
+		<c:set var="flagDisabled_capacidadPas" value='disabled="disabled"' />
+		<c:set var="flagDisabled_capacidadTon" value='disabled="disabled"' />
+		<c:choose>
+			<c:when test="${vehiculosFormDeclaracion.tipoVeh == 6}">
+				<c:set var="flagDisabled_capacidadPas" value='' />
+			</c:when>
+			<c:when test="${vehiculosFormDeclaracion.tipoVeh == 7}">
+				<c:set var="flagDisabled_capacidadTon" value='' />
+			</c:when>
+		</c:choose>
+		<div class="row mt-3">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <select
+						id="linea" class="alto_select form-control" aria-required="true"
+						onchange='actualizarCampo("cilindraje")'></select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.info.captone" /></label> <input
+						id="numresol" name="numresol" class="newalto form-control"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.capacidadTon}" maxlength="30"
+						${flagDisabled_capacidadTon}>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.info.cilindra" /></label> <select
+						id="cilindraje" class="alto_select form-control"
+						aria-required="true" onchange='actualizarCampo("avaluo")'></select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.info.cappasa" /></label> <input
+						id="numresol" name="numresol" class="newalto form-control"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.capacidadPas}" maxlength="30"
+						${flagDisabled_capacidadPas}>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="sobre.vehiculo.declaracion.vehiculo.liq.avalact" /></label> <input
+						id="avaluoAct" name="" class="newalto form-control avaluoAct"
+						aria-required="true" type="text"
+						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30">
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" style="display: none" id="AvaluoMensaje" class="AvaluoMensaje">
+			<div class="alert alert-warning" role="alert">
+				<input disabled id="mensajeAvaluo" name="" type="text" value="" style="border: none !important; background-color: transparent !important; max-width: 200% !important; width: 100% !important">
+			</div>
+		</div>
+		
 		<div class="row mt-3">
 			<div class="col-md-3">
 				<div class="form-check">
@@ -70,19 +123,19 @@
 					</label>
 				</div>
 			</div>
-			
+
 			<c:set var="option01Selected" value="" />
 			<c:set var="projectDisable" value="disabled" />
-<%-- 			<c:choose> --%>
-<%-- 				<c:when test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}"> --%>
-<%-- 					<c:set var="projectDisable" value="" /> --%>
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${fn:trim(vehiculosFormDeclaracion.proyectoAporte) eq '01' or fn:trim(vehiculosFormDeclaracion.proyectoAporte) eq '1'}"> --%>
-<%-- 							<c:set var="option01Selected" value="selected" /> --%>
-<%-- 						</c:when> --%>
-<%-- 					</c:choose> --%>
-<%-- 				</c:when> --%>
-<%-- 			</c:choose> --%>
+			<%-- 			<c:choose> --%>
+			<%-- 				<c:when test="${vehiculosFormDeclaracion.checkAporte.equalsIgnoreCase('X')}"> --%>
+			<%-- 					<c:set var="projectDisable" value="" /> --%>
+			<%-- 					<c:choose> --%>
+			<%-- 						<c:when test="${fn:trim(vehiculosFormDeclaracion.proyectoAporte) eq '01' or fn:trim(vehiculosFormDeclaracion.proyectoAporte) eq '1'}"> --%>
+			<%-- 							<c:set var="option01Selected" value="selected" /> --%>
+			<%-- 						</c:when> --%>
+			<%-- 					</c:choose> --%>
+			<%-- 				</c:when> --%>
+			<%-- 			</c:choose> --%>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -90,13 +143,13 @@
 						id="proyecto" name="proyecto" class="alto_select form-control"
 						aria-required="true" ${projectDisable}>
 						<option value="00">SELECCIONAR</option>
-						<option value="01" ${option01Selected}>FORTALECIMIENTO DE LA SEGURIDAD
-							CIUDADANA</option>
+						<option value="01" ${option01Selected}>FORTALECIMIENTO DE
+							LA SEGURIDAD CIUDADANA</option>
 					</select>
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -109,18 +162,8 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="row mt-3">
-			<div class="col-md-3">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="sobre.vehiculo.declaracion.vehiculo.liq.avalact" /></label> <input
-						id="avaluoAct" name="" class="newalto form-control avaluoAct" aria-required="true"
-						type="text" value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" disabled="disabled">
-				</div>
-			</div>
-		</div>
-		
+
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -133,7 +176,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -146,7 +189,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -159,7 +202,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -172,7 +215,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -185,7 +228,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -211,7 +254,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -224,8 +267,8 @@
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 
 		<input type="hidden" value="${vehiculosFormDeclaracion.numBP}"
 			id="numBPcal" class="numBPcal" />
@@ -289,18 +332,17 @@
 		proyec.disabled = true;
 		proyec.value = "00";
 	}
-	
+
 	function habavaluo() {
 		debugger;
 		var avaluo = document.getElementById('avaluoAct');
-		
-		if(avaluo.disabled == false){
+
+		if (avaluo.disabled == false) {
 			avaluo.disabled = true;
-		}else{
-		avaluo.disabled = false;
+		} else {
+			avaluo.disabled = false;
 		}
 
 	}
-	
 </script>
 

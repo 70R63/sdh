@@ -28,7 +28,7 @@
 							<tr>
 								<td><label class="control-label labeltabletd tableident"><spring:theme
 											code="predial.inicial.liquidacion.base" /></label></td>
-								<td><label class="control-label labeltabletd tablenumiden"><spring:theme
+								<td><label class="control-label labeltabletd"><spring:theme
 											code="predial.inicial.liquidacion.destino" /></label></td>
 								<td><label class="control-label labeltabletd "><spring:theme
 											code="predial.inicial.liquidacion.tarifa" /></label></td>

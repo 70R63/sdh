@@ -15,7 +15,6 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.InfoPreviaPSE;
 import de.hybris.sdh.core.pojos.requests.ObligacionesRequest;
-import de.hybris.sdh.core.pojos.responses.ObligacionesCabeceraPublicidad;
 import de.hybris.sdh.core.pojos.responses.ObligacionesDeliResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesGasolinaResponse;
 import de.hybris.sdh.core.pojos.responses.ObligacionesICAResponse;
@@ -140,7 +139,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 				final ObligacionesDeliResponse obligacionesDeliResponse = mapper.readValue(wsResponse,
 						ObligacionesDeliResponse.class);
 				obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
+						.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
 			}
 
 			wsResponse = sdhObligacionesPredialService.obligacionesRequest(obligacionesRequest);
@@ -149,7 +148,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 				final ObligacionesPredialResponse obligacionesPredResponse = mapper.readValue(wsResponse,
 						ObligacionesPredialResponse.class);
 				obligacionesFormuno.setHeaderPred(obligacionesPredResponse.getHeader().stream()
-					.filter(d -> StringUtils.isNotBlank(d.getAniogravable())).collect(Collectors.toList()));
+						.filter(d -> StringUtils.isNotBlank(d.getAnioGravable())).collect(Collectors.toList()));
 			}
 
 			wsResponse = sdhObligacionesVehiculosService.obligacionesRequest(obligacionesRequest);
@@ -166,37 +165,37 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			{
 				final ObligacionesResponse obligacionesResponse = mapper.readValue(wsResponse, ObligacionesResponse.class);
 
-				for (final ObligacionesCabeceraPublicidad obligaPubli : obligacionesResponse.getHeader())
-				{
-					if ("01".equals(obligaPubli.getOrientacionValla()))
-					{
-						obligaPubli.setOrientacionValla("Comercial");
-					}
-					else if ("02".equals(obligaPubli.getOrientacionValla()))
-					{
-						obligaPubli.setOrientacionValla("Institucional");
-					}
-					else if ("03".equals(obligaPubli.getOrientacionValla()))
-					{
-						obligaPubli.setOrientacionValla("Cultural");
-					}
-					else if ("04".equals(obligaPubli.getOrientacionValla()))
-					{
-						obligaPubli.setOrientacionValla("Política");
-					}
-					else if ("05".equals(obligaPubli.getOrientacionValla()))
-					{
-						obligaPubli.setOrientacionValla("Deportiva");
-					}
-					else if ("06".equals(obligaPubli.getOrientacionValla()))
-					{
-						obligaPubli.setOrientacionValla("Otra");
-					}
-					else
-					{
-						obligaPubli.setOrientacionValla("-");
-					}
-				}
+//				for (final ObligacionesCabeceraPublicidad obligaPubli : obligacionesResponse.getHeader())
+//				{
+//					if ("01".equals(obligaPubli.getOrientacionValla()))
+//					{
+//						obligaPubli.setOrientacionValla("Comercial");
+//					}
+//					else if ("02".equals(obligaPubli.getOrientacionValla()))
+//					{
+//						obligaPubli.setOrientacionValla("Institucional");
+//					}
+//					else if ("03".equals(obligaPubli.getOrientacionValla()))
+//					{
+//						obligaPubli.setOrientacionValla("Cultural");
+//					}
+//					else if ("04".equals(obligaPubli.getOrientacionValla()))
+//					{
+//						obligaPubli.setOrientacionValla("Política");
+//					}
+//					else if ("05".equals(obligaPubli.getOrientacionValla()))
+//					{
+//						obligaPubli.setOrientacionValla("Deportiva");
+//					}
+//					else if ("06".equals(obligaPubli.getOrientacionValla()))
+//					{
+//						obligaPubli.setOrientacionValla("Otra");
+//					}
+//					else
+//					{
+//						obligaPubli.setOrientacionValla("-");
+//					}
+//				}
 				obligacionesFormuno.setHeader(obligacionesResponse.getHeader().stream()
 						.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
 			}

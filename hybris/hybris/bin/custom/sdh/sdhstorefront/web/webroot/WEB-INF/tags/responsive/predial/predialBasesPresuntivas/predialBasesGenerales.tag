@@ -79,11 +79,11 @@
 						maxlength="240"></input>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.generales.opuso" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.opcionuso}"
+						name="" class="alto form-control" disabled type="text" value="${predialFormbases.opcionuso}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.generales.direccion" /></label> <input id=""
-						name="" class="alto form-control" disabled type="text" value=""
+						name="" class="alto form-control" disabled type="text" value="${predialFormbases.direccionPredio}"
 						maxlength="240"></input>
 				</div>
 			</div>

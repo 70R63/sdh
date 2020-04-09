@@ -118,7 +118,7 @@ ACC.vehiculos = {
 	 	        	return;
 	 	        }
 
-	 	       //Confirmation message - sobrevehiculosautomotores
+	 	       // Confirmation message - sobrevehiculosautomotores
 	 	      if(document.getElementById('opcionUso').value == "02"){
                 var r = confirm("Ya tienes una declaraci\u00F3n presentada por este impuesto, a\u00F1o gravable y periodo. Si quieres efectuar una correcci\u00F3n por favor haz clic en -Aceptar- ");
                 if (r == true) {
@@ -251,11 +251,12 @@ ACC.vehiculos = {
 							if (data.errores[0].txtmsj != null && data.errores[0].txtmsj != ""){
 								alert(data.errores[0].txtmsj);
 								
-								//$( "#dialogVehiculos" ).dialog( "open" );
-								//$("#vehiculosDialogContent").html("");
-								//$.each(data.errores, function( index, value ) {
-								//	$("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
-								//});
+								// $( "#dialogVehiculos" ).dialog( "open" );
+								// $("#vehiculosDialogContent").html("");
+								// $.each(data.errores, function( index, value )
+								// {
+								// $("#vehiculosDialogContent").html($("#publicidadExteriorDialogContent").html()+value.txtmsj+"<br>");
+								// });
 								
 								$("#avaluoAct").val("");
 								$("#valimpcar").val("");
@@ -270,7 +271,8 @@ ACC.vehiculos = {
 								$("#numForm").val("");
 							
 								
-		            			//$('#generaDeclaracionButton').prop("disabled", true);
+		            			// $('#generaDeclaracionButton').prop("disabled",
+								// true);
 							}else{
 								$("#avaluoAct").val(data.avaluo);
 								$("#valimpcar").val(data.impuestoCargo);
@@ -302,7 +304,7 @@ ACC.vehiculos = {
 	            			ACC.vehiculos.habilitarBotonPresentarDeclaracion();
 	            			
 	            			
-//	            			$('#generaDeclaracionButton').prop("disabled", false);
+// $('#generaDeclaracionButton').prop("disabled", false);
 	            			
 	            		}
 	 	      		
@@ -323,7 +325,7 @@ ACC.vehiculos = {
 			$("#intereses").val("");
 			$("#totpagvol").val("");
 			$("#numForm").val("");
-//			$("#calculoButton").prop('disabled', false);
+// $("#calculoButton").prop('disabled', false);
         }
     });
     
@@ -568,12 +570,12 @@ ACC.vehiculos = {
 		if (liq != null) {
 			for (var i = 0; i < liq.length; i++) {
 				
-//				var fecjur1 = liq[i].anio;
-//				var mes = fecjur1.slice(4, 6);
-//				var dia = fecjur1.slice(6);
-//				var anio = fecjur1.slice(0, 4);
+// var fecjur1 = liq[i].anio;
+// var mes = fecjur1.slice(4, 6);
+// var dia = fecjur1.slice(6);
+// var anio = fecjur1.slice(0, 4);
 				
-//				liq[i].anio = dia + '/' + mes + '/' + anio;;
+// liq[i].anio = dia + '/' + mes + '/' + anio;;
 
 				$('#tableLiq')
 						.append(
@@ -597,6 +599,142 @@ ACC.vehiculos = {
 									+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="" /></td>');
 		}
 
+	},
+	
+	
+	obtenerCatalogosInicialVehiculos : function(cat_valores_actuales) {
+
+		dataActual = null;
+		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("linea",cat_valores_actuales);
+		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"linea",cat_valores_actuales);
+		dataActual = ACC.vehiculos.determinarInfoInicialParaCatalogo("cilindraje",cat_valores_actuales);
+		ACC.vehiculos.obtenerCatalogosVehiculos(dataActual,"cilindraje",cat_valores_actuales);
+		
+		
+	},
+	
+	
+	obtenerCatalogosVehiculos : function(dataActual, campo_catalogo, cat_valores_actuales) {
+
+		$.ajax({
+			url : ACC.vehiculosCatalogosURL,
+			data : dataActual,
+			type : "GET",
+			success : function(dataResponse) {
+				ACC.vehiculos.updateFromResponse_catalogos(campo_catalogo,cat_valores_actuales,dataActual,dataResponse);					
+			},
+			error : function() {
+				alert("Error al obtener el catalogo de:"+campo_catalogo);
+			}
+		});
+		
+		
+	},
+	
+	
+	updateFromResponse_catalogos : function(campo_catalogo, cat_valores_actuales, infoActual, infoResponse){
+		
+		debugger;
+		if(campo_catalogo == 'linea'){
+			$("#linea").find("option:gt(0)").remove();
+			$("#linea").find("option:eq(0)").remove();
+			
+			$('#linea').append('<option value="">'+ "Seleccionar" + "</option>");
+			$.each(infoResponse.catalogo.vehicularlinearesponse, function (index,value){
+				$('#linea').append('<option value="'+ value.linea +'">'+ value.desc_linea + "</option>");
+			});
+			$("#linea").val(cat_valores_actuales[3]);
+		}else if(campo_catalogo == 'cilindraje'){
+			$("#cilindraje").find("option:gt(0)").remove();
+			$("#cilindraje").find("option:eq(0)").remove();
+			
+			$('#cilindraje').append('<option value="">'+ "Seleccionar" + "</option>");
+			if(cat_valores_actuales == null){
+				$('#cilindraje').append('<option value="">'+ "No se encontraron opciones" + "</option>");
+			}else{
+			$.each(infoResponse.catalogo.vehicularcilindrajeresponse, function (index,value){
+				$('#cilindraje').append('<option value="'+ value.cilindraje +'">'+ value.cilindraje + "</option>");
+			});}
+			var valueSelected = "";
+			if(cat_valores_actuales!=null){
+				valueSelected = cat_valores_actuales[1];
+			}
+			$("#cilindraje").val(valueSelected);
+		}else if(campo_catalogo == 'avaluo'){
+			if(infoResponse.catalogo.avaluoactual  == null || infoResponse.catalogo.avaluoactual == ""){
+				var error = infoResponse.catalogo.errores;
+				var tam = error.length;
+				var showerror = $("#AvaluoMensaje");
+				showerror.style.display = 'block';
+				for(var i = 0; i<=tam; i++){
+				$("#mensajeAvaluo").val(error.txt_msj);
+				}
+			}else{
+				var showerror = $("#AvaluoMensaje");
+				showerror.style.display = 'none';
+			$("#avaluoAct").val(infoResponse.catalogo.avaluoactual);
+			}
+		}
+		
+		
+	},
+	
+	
+	determinarInfoParaCatalogo : function(campo_catalogo){
+		var data = {};
+		
+		data.campo_catalogo = campo_catalogo;
+		if(campo_catalogo == 'linea'){
+			data.marca = ACC.vehiculos.obtenerCampo('marca');
+		}else if(campo_catalogo == 'cilindraje'){
+			data.marca = ACC.vehiculos.obtenerCampo('marca');
+			data.linea = ACC.vehiculos.obtenerCampo('linea');
+			data.modelo = ACC.vehiculos.obtenerCampo('modelo');
+		}else if(campo_catalogo == 'avaluo'){
+			data.clase = ACC.vehiculos.obtenerCampo('clase');
+			data.cilindraje = ACC.vehiculos.obtenerCampo('cilindraje');
+			data.marca = ACC.vehiculos.obtenerCampo('marca');
+			data.linea = ACC.vehiculos.obtenerCampo('linea');
+			data.modelo = ACC.vehiculos.obtenerCampo('modelo');
+			data.carroceria = ACC.vehiculos.obtenerCampo('carroceria');
+		}
+		
+		return data;
+	},
+	
+	
+	determinarInfoInicialParaCatalogo : function(campo_catalogo,cat_valores_actuales){
+		var data = {};
+		
+		data.campo_catalogo = campo_catalogo;
+		if(campo_catalogo == 'linea'){
+			data.marca = cat_valores_actuales[2];
+		}else if(campo_catalogo == 'cilindraje'){
+			data.marca = cat_valores_actuales[2];
+			data.linea = cat_valores_actuales[3];
+			data.modelo = cat_valores_actuales[4];
+		}else if(campo_catalogo == 'avaluo'){
+			data.clase = cat_valores_actuales[0];
+			data.cilindraje = cat_valores_actuales[1];
+			data.marca = cat_valores_actuales[2];
+			data.linea = cat_valores_actuales[3];
+			data.modelo = cat_valores_actuales[4];
+			data.carroceria = cat_valores_actuales[5];
+		}
+		
+		return data;
+	},
+	
+	
+	obtenerCampo : function(nombre_campo){
+		 var campo = document.getElementById(nombre_campo);
+		 var val_campo = "";
+		 
+		 if(campo!=null){
+			 val_campo = campo.value;
+		 }
+		 
+		 return val_campo;
 	}
 
 };

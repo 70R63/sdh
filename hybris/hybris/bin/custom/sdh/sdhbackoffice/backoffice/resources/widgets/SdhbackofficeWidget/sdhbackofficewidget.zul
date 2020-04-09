@@ -3,20 +3,110 @@
 <widget xmlns="http://www.zkoss.org/2005/zul"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:h="http://www.w3.org/1999/xhtml"
+		xmlns:n="native"
 		xmlns:w="http://www.zkoss.org/2005/zk/client"
 		xmlns:zk="http://www.zkoss.org/2005/zk"
-		xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+		xsi:schemaLocation="http://www.zkoss.org/2005/zul
+		http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
  		height="100%">
- 		
-	<div height="100%" style="background: #ccc;">
-		<div>
-			<label id="label" value="${labels.hello} sdhbackoffice" />
-		</div>
-		<div>
-			<image src="${wr}/images/headline_icon.png"/>
-		</div>
-		<div>
-			<label value="${labels.hello} sdhbackoffice" sclass="yw-labelstyle"/>
-		</div>
-	</div>
+
+ 		<script>
+            var ws;
+            function connect(userId, userName, subjectType, content, sessionId) {
+                var frame = document.getElementById("chatSpaceOne").contentWindow;
+                frame.postMessage({
+                        'messageType' : 'pickNewChatSession',
+                        'agentId' : 'agent123123', //Customizar
+                        'agentName' : 'SDH Agente', //Customizar
+                        'sessionId' : sessionId,
+                        'userId': userId,
+                        'userName': userName,
+                        'subjectType': subjectType,
+                        'content': content
+                    },window.location.href);
+            }
+
+            $(window).on('load', function () {
+                var host = document.location.host;
+                ws = new WebSocket("wss://"+host+"/sdhstorefront/chatEndPoint/AGENT/JAIR04/JAIR ROA/HOLA/NO ASUNTO");
+                ws.onmessage = function(event) {
+                    var message = JSON.parse(event.data);
+                    console.log(message);
+                    if(message.contentType == "LIST"){ //Print all actived customer in table
+                        $.each(message.activedCustomer, function (key, value) {
+                            addCustomer(value.from, value.userName, value.subjectType, value.content, key, value.isPicked);
+                        });
+                    }else if(message.contentType == "NEWCUSTM"){ //Print new customer in table
+                        addCustomer(message.from, message.userName, message.subjectType, message.content, message.userSessionId, false);
+                    }else if(message.contentType == "DELCUSTM"){ //Remove cutomer from table
+                        var rowTable = document.getElementById(message.from);
+                        rowTable.parentNode.removeChild(rowTable);
+                     }else if(message.contentType == "BKLCUSTM"){
+                        var button = document.getElementById("btn_"+message.from);
+                        button.disabled = true;
+                     }else if(message.contentType == "UNBKLCUSTM"){
+                        var button = document.getElementById("btn_"+message.from);
+                        button.disabled = false;
+                     }
+                };
+
+                var frame = document.getElementById("chatSpaceOne");
+                var currentUrl = window.location.href;
+                frame.src = currentUrl.replace("backoffice/", "sdhstorefront/chat/customer?userType=AGENT");;
+            });
+
+            function addCustomer(userId, usarName, subjectType, content, sessionId, isPicked){
+                var table = document.getElementById("customerTable");
+                var row = table.insertRow(1);
+                row.className = "scroll";
+                row.id = userId;
+
+                var cell = row.insertCell(0);
+                var cel2 = row.insertCell(1);
+                var cel3 = row.insertCell(2);
+                var cel4 = row.insertCell(3);
+
+                cell.innerHTML = userId;
+                cel2.innerHTML = usarName;
+                cel3.innerHTML = subjectType;
+
+                var btn = document.createElement("BUTTON");
+                var txt = document.createTextNode("TOMAR USUARIO");
+
+                btn.id = "btn_"+userId;
+                if(isPicked){btn.disabled = true;}
+                btn.appendChild(txt);
+                btn.onclick = function() { connect(userId, usarName, subjectType, content, sessionId); };
+
+                cel4.appendChild(btn);
+            }
+
+        </script>
+
+        <splitlayout vflex="1" hflex="1" orient="horizontal" >
+            <div sclass="area" vflex="1" hflex="5" id="contentTable">
+                <html>
+                    <table class="scroll" id="customerTable">
+                        <thead class="scroll" style="text-align: left; height: 41px; background-color: #d9edf7" >
+                            <tr class="scroll">
+                              <th width="25%">Email</th>
+                              <th width="25%">Nombre</th>
+                              <th width="25%">Asunto</th>
+                              <th width="25%">Evento</th>
+                            </tr>
+                        </thead>
+                        <tbody class="scroll" id="customerTbody" style="background-color: white">
+                            <tr class="scroll" >
+                            </tr>
+                        </tbody>
+                    </table>
+                </html>
+            </div>
+            <div sclass="area" vflex="1"  hflex="3">
+                <n:iframe style="width:100%;height:100%"
+                    frameborder="0.5"
+                    id="chatSpaceOne">
+                </n:iframe>
+            </div>
+        </splitlayout>
 </widget>

@@ -6,7 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
- 
+
 <div class="container-fluid">
 	<div class="footer__top">
 		<div class="row">
@@ -72,6 +72,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="copyright footer__bottom">
 	<div class="container">
 		<div class="row">
@@ -83,10 +84,10 @@
 				data-popup="scrollbars=yes">
 				<spring:theme code="chat.box.mobile.title" />
 			</button>
-			<div class="col-sm-4 chat-footer">
+			<div class="col-sm-6 chat-footer">
 				<button type="button"
-					class="btn btn-lg pop-over pop-over-toggle" data-toggle="popover"
-					id="pop-over-toggle" data-placement="top">
+					class="btn btn-lg pop-over pop-over-toggle" onclick="openChatWindow();"
+					id="pop-over-toggle" data-placement="top" >
 					<div class="chat-glyphicon-close">
 						<spring:theme code="chatbox.title" />
 					</div>
@@ -96,26 +97,23 @@
 	</div>
 	<!-- Chat Module -->
 	 <div class="container chat-container popover-content" id="popover-content">
-		 <div
-			class="chat-module active col-xs-12 col-sm-12 col-md-12 col-lg-12 no-space">
-			<div
-				class="chat-module-container col-xs-6 col-sm-5 col-md-5 col-lg-3 no-space"> 
+		 <div class="chat-module active col-xs-12 col-sm-12 col-md-12 col-lg-12 no-space">
+			<div class="chat-module-container col-xs-6 col-sm-5 col-md-5 col-lg-3 no-space">
 				 <div class="chat-module-header">
 					<div>
-						<span tabindex="0" class="chat-glyphicon-open"> <spring:theme
-								code="chatbox.title" />
-						</span> <span>
-						
+						<span tabindex="0" class="chat-glyphicon-open">
+						    <spring:theme code="chatbox.title" />
+						</span>
+						<span>
 						   <spring:theme code="chat.box.close" var="chatClose"></spring:theme>
 						   <spring:theme code="chat.box.new.chat" var="chatWindow"></spring:theme>
-							<button class="close chat-glyphicon" tabindex="0"
-								title="${chatClose}"></button>
-							<button value='<c:url value="/chat/chatWindow"/>'
+						   <button class="close chat-glyphicon" tabindex="0" title="${chatClose}"></button>
+						   <button value='<c:url value="https://publicsector.local:9002/sdhstorefront/chat/customer"/>'
 								class="glyphicon glyphicon-new-window js-newWindow"
 								data-popup="scrollbars=yes" title="${chatWindow}"></button>
 						</span>
 					</div>
-				</div> 
+				</div>
 				<div class="chat-module-content">
 					<div class="form-group ">
 						<label for="chat-name" class="control-label required"> <spring:theme
@@ -133,7 +131,7 @@
 						<label for="chat-message" class="control-label required">
 							<spring:theme code="chatbox.message" />
 						</label>
-						<textarea 
+						<textarea
 							class="chat-text form-control chat-textarea chat-message" name="chat.message"
 							id="chat-message"> </textarea>
 					</div>
@@ -143,5 +141,13 @@
 					<br />
 				</div>
 			  </div>
-		 </div> 
-	</div> 
+		 </div>
+	</div>
+
+	<script>
+        function openChatWindow(){
+           var url = window.location.href;
+           url = url.substring(0, url.indexOf("sdhstorefront")) + "sdhstorefront/chat/customer";
+           myWindow = window.open(url, "", "width=345, height=575");
+        }
+    </script>

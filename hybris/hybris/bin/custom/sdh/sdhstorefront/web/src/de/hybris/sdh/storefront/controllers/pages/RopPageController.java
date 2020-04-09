@@ -10,6 +10,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.session.SessionService;
@@ -93,10 +94,13 @@ public class RopPageController extends AbstractPageController
 	final String error, @ModelAttribute("ropFormRequest")
 	final RopForm ropFormRequest, @RequestParam(value = "obligacion", required = false)
 	final String obligacion, @RequestParam(value = "totalPagar", required = false)
-	final String totalPagar) throws CMSItemNotFoundException
+	final String totalPagar, @RequestParam(value = "objCont", required = false)
+	final String objCont, @RequestParam(value = "clvPer", required = false)
+	final String clvPer, @RequestParam(value = "tpImp", required = false)
+	final String tpImp) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET Generar ROP -------------------------");
-
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final String returnURL = "/";
 
 		final RopForm ropForm = new RopForm();
@@ -106,6 +110,10 @@ public class RopPageController extends AbstractPageController
 		{
 			GlobalMessages.addErrorMessage(model, "mirit.certificacion..error.pdfVacio");
 		}
+		ropFormRequest.setTipoImp(tpImp);
+		ropFormRequest.setClavePeriodo(clvPer);
+		ropFormRequest.setNumObjeto(objCont);
+		ropFormRequest.setNumBP(customerModel.getNumBP());
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ROP_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ROP_CMS_PAGE));
@@ -125,23 +133,25 @@ public class RopPageController extends AbstractPageController
 	@RequireHardLogIn
 	public GeneraDeclaracionResponse roppost(final Model model, final RedirectAttributes redirectModel,
 			@ModelAttribute("ropForm")
-			final RopForm ropFormDatos) throws CMSItemNotFoundException
+			final RopForm ropForm) throws CMSItemNotFoundException
 	{
 
 		final GeneraDeclaracionResponse generaDeclaracionResponse = new GeneraDeclaracionResponse();
+
 
 		System.out.println("------------------Entro al POST de Agentes Generar ROP----------------------");
 		final String returnURL = "/";
 		final RopRequest ropRequest = new RopRequest();
 
-		ropRequest.setTipoImp("06");
-		ropRequest.setNumBP("0000000575");
-		ropRequest.setNumObjeto("60000000000000061");
-		ropRequest.setClavePeriodo("1810");
+		ropRequest.setTipoImp(ropForm.getTipoImp());
+		ropRequest.setNumBP(ropForm.getNumBP());
+		ropRequest.setNumObjeto(ropForm.getNumObjeto());
+		ropRequest.setClavePeriodo(ropForm.getClavePeriodo());
 		ropRequest.setConsulta("");
-		ropRequest.setImporteusuario(ropFormDatos.getImporteusuario());
+		ropRequest.setImporteusuario(ropForm.getImporteusuario());
 
 		System.out.println("Request de infObjeto/rop: " + ropRequest);
+		System.out.println("Request de infObjeto/rop: [" + ropForm.getNumObjeto() +"]");
 		try
 		{
 			final RopForm ropFormRequest = new RopForm();

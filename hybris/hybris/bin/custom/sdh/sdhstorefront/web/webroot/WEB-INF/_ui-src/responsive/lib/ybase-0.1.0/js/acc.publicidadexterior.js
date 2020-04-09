@@ -453,7 +453,6 @@ ACC.publicidadexterior = {
 	    
 	    
 	    bindDataTable_Class: function () {
-	    	debugger;
 	    	if ($.fn.dataTable.isDataTable('.tabPaginacion')) {
 				table = $('.tabPaginacion').DataTable();
 				table.destroy();
@@ -487,7 +486,6 @@ ACC.publicidadexterior = {
 	    },
 	    
 	    bindDataTable_Class_refresh: function () {
-	    	debugger;
 			table = $('.tabPaginacion').DataTable();
 			table.destroy();
 	    	

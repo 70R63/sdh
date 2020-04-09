@@ -18,6 +18,8 @@ public class ErrorEnWS
 	private String txt_msj;
 	private String id;
 	private String mensaje;
+	private String idMsj;
+	private String txtMsj;
 
 	/**
 	 * @return the idmsj
@@ -110,6 +112,40 @@ public class ErrorEnWS
 		this.mensaje = mensaje;
 	}
 
+	/**
+	 * @return the idMsj
+	 */
+	public String getIdMsj()
+	{
+		return idMsj;
+	}
+
+	/**
+	 * @param idMsj
+	 *           the idMsj to set
+	 */
+	public void setIdMsj(final String idMsj)
+	{
+		this.idMsj = idMsj;
+	}
+
+	/**
+	 * @return the txtMsj
+	 */
+	public String getTxtMsj()
+	{
+		return txtMsj;
+	}
+
+	/**
+	 * @param txtMsj
+	 *           the txtMsj to set
+	 */
+	public void setTxtMsj(final String txtMsj)
+	{
+		this.txtMsj = txtMsj;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -119,8 +155,10 @@ public class ErrorEnWS
 	public String toString()
 	{
 		return "ErrorEnWS [idmsj=" + idmsj + ", txtmsj=" + txtmsj + ", id_msj=" + id_msj + ", txt_msj=" + txt_msj + ", id=" + id
-				+ ", mensaje=" + mensaje + "]";
+				+ ", mensaje=" + mensaje + ", idMsj=" + idMsj + ", txtMsj=" + txtMsj + "]";
 	}
+
+
 
 
 }

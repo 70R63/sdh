@@ -7,15 +7,19 @@
 <%@ taglib prefix="predial"
 	tagdir="/WEB-INF/tags/responsive/predial/predialPaginaDos"%>
 <%@ taglib prefix="firmas" tagdir="/WEB-INF/tags/responsive/firmas"%>
+<%@ taglib prefix="declaracion" tagdir="/WEB-INF/tags/responsive/predial/predialInicial"%>
 
 <div class="loader"></div>
 
 <predial:predialDosGenerales />
+<<predial:predialDosDatPredio></predial:predialDosDatPredio>
 <predial:predialDosDatLiq />
 <predial:predialDosLiqPrivada />
-<firmas:generalFirmas />
+<c:url value='contribuyentes/predialunificado_2' var="linkRedirection"/>
+<firmas:generalFirmas firmaContribuyenteRedirection="${linkRedirection}"/>
 <predial:predialDosBotones />
 <div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
+<declaracion:predialDeclaracion/>
 <script>
 
 window.onload = function() {
