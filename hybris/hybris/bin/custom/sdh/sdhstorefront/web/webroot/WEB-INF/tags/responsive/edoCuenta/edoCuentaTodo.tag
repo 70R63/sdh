@@ -51,57 +51,7 @@
 									var="eachPredial">
 									<c:forEach varStatus="loop"
 										items="${eachPredial.detallePredial}" var="eachPredialDetail">
-<<<<<<< HEAD
-										<c:choose>
-											<c:when
-												test="${eachPredial.newCHIP != '' && eachPredial.matrInmobiliaria != ''}">
-												<tr>
-													<td><c:out value="${eachPredial.newCHIP}" /></td>
-													<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
-													<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
-													<td><c:out
-															value="${eachPredialDetail.destinohacendario}" /></td>
-													<td><c:out value="${eachPredialDetail.estado}" /></td>
-													<td><c:out
-															value="${eachPredialDetail.porcParticipacion}" /></td>
-													<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
-													<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
-												</tr>
-											</c:when>
-											<c:when
-												test="${eachPredial.newCHIP != '' && eachPredial.matrInmobiliaria == ''}">
-												<tr>
-													<td><c:out value="${eachPredial.newCHIP}" /></td>
-													<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
-													<td><c:out
-															value="${eachPredialDetail.destinohacendario}" /></td>
-													<td><c:out value="${eachPredialDetail.estado}" /></td>
-													<td><c:out
-															value="${eachPredialDetail.porcParticipacion}" /></td>
-													<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
-													<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
-												</tr>
-											</c:when>
-											<c:when
-												test="${eachPredial.newCHIP == '' && eachPredial.matrInmobiliaria != ''}">
-												<tr>
-													<td><c:out value="${eachPredial.newCHIP}" /></td>
-													<td><c:out value="${eachPredialDetail.anioGravable}" /></td>
-													<td><c:out
-															value="${eachPredialDetail.destinohacendario}" /></td>
-													<td><c:out value="${eachPredialDetail.estado}" /></td>
-													<td><c:out
-															value="${eachPredialDetail.porcParticipacion}" /></td>
-													<td><c:out value="${eachPredialDetail.saldoCargo}" /></td>
-													<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
-												</tr>
-											</c:when>
-											<c:otherwise>
 
-											</c:otherwise>
-										</c:choose>
-
-=======
 										<c:if test="${not empty eachPredial.newCHIP || not empty eachPredial.matrInmobiliaria}">
 										<tr>
 											<td><c:out value="${eachPredial.newCHIP}" /></td>
@@ -116,7 +66,6 @@
 											<td><c:out value="${eachPredialDetail.saldoFavor}" /></td>
 										</tr>
 										</c:if>
->>>>>>> dev-federico
 									</c:forEach>
 								</c:forEach>
 							</tbody>
