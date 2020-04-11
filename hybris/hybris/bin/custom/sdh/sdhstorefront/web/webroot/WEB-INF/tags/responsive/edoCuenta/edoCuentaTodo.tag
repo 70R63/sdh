@@ -124,6 +124,7 @@
 									<c:forEach varStatus="loop"
 										items="${eachVehicular.detalleVehicular}"
 										var="eachVehicularDetail">
+										<c:if test="${not empty eachVehicularDetail.anioGravable && not empty eachVehicularDetail.estado}">
 										<tr>
 											<td><c:out value="${eachVehicular.placa}" /></td>
 											<td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
@@ -131,6 +132,7 @@
 											<td><c:out value="${eachVehicularDetail.saldoCargo}" /></td>
 											<td><c:out value="${eachVehicularDetail.saldoFavor}" /></td>
 										</tr>
+										</c:if>
 									</c:forEach>
 								</c:forEach>
 

@@ -182,7 +182,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialuno.liquidacionpriv.totpag" /></label> <input id=""
+							code="predialuno.liquidacionpriv.totpag" /></label> <input id="TotalAPagar"
 						name="TotalAPagar" class="newalto form-control" disabled
 						type="text"
 						value="${predialForm.estrLiquidacionPrivada.totalPagar}"
