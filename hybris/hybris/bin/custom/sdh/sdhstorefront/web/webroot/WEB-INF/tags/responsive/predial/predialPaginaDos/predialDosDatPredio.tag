@@ -27,14 +27,14 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialdos.datospredio.numcontrato" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.canonArrendamiento}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.contribuyenteData.predial[0].contratoArrenda}"
 						maxlength="240"></input>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialdos.datospredio.arrendamiento" /></label> <input id=""
+							code="predialdos.datospredio.arrendamiento" /></label> <input id="canonArrendamiento"
 						name="" class="newalto form-control" type="text" value="${predialFormdos.canonArrendamiento}"
 						maxlength="240"></input>
 				</div>
