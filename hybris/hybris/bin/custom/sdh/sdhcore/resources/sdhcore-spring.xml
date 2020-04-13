@@ -738,5 +738,7 @@
 	<alias alias="sdhFileConsultaService" name="defaultSDHFileConsultaService"/>
 	<bean name="defaultSDHFileConsultaService" class="de.hybris.sdh.core.services.impl.DefaultSDHFileConsultaService" />
 
+	<alias alias="sdhTrmReportesPDF" name="defaultSDHTrmReportesPDF"/>
+	<bean name="defaultSDHTrmReportesPDF" class="de.hybris.sdh.core.services.impl.DefaultSDHTrmReportesPDF" />
 
 </beans>

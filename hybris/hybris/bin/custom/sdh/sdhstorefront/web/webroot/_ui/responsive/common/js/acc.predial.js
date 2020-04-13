@@ -1,6 +1,6 @@
 ACC.predial = {
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura"],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura", "bindDialogoMensajes"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -57,12 +57,12 @@ ACC.predial = {
 			e.preventDefault();
 			var val = this.value;
 
-			if (val == 'Si') {
+			if (val == '1') {
 				$('#areaconstruccion').prop('disabled', false);
 				;
 				$('#areaterreno').prop('disabled', true);
 				;
-			} else if (val == 'No') {
+			} else if (val == '2') {
 				$('#areaconstruccion').prop('disabled', false);
 				;
 				$('#areaterreno').prop('disabled', false);
@@ -736,6 +736,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 	 
 	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
 
+		ACC.predial.visualizacionBasesDetalle(false);
 		if(ACC.predial.validarAntesSubmit_precalculoBP()){
 			var dataActual = {};	
 		
@@ -755,10 +756,15 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					$("#basegrav").val(dataResponse.baseGravable);
-					var basesDetalle = document.getElementById("BasesDetalle");
-					if(basesDetalle != null){
-						basesDetalle.style.display = 'block';
+					if(dataResponse != null){
+						if(dataResponse.errores.txtMsj.trim() != ""){
+			            	$("#dialogMensajes" ).dialog( "open" );
+							$("#dialogMensajesContent").html("");
+		            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
+						}
+						
+						$("#basegrav").val(dataResponse.baseGravable);
+						ACC.predial.visualizacionBasesDetalle(true);
 					}
 				},
 				error : function() {
@@ -766,6 +772,18 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				}
 			});
 		}
+	 },
+	 
+	 visualizacionBasesDetalle : function (flagVisible){
+		var valDisplay = 'none';
+		var basesDetalle = document.getElementById("BasesDetalle");
+		if(basesDetalle != null){
+			if(flagVisible){
+				valDisplay = 'block';
+			}
+			basesDetalle.style.display = valDisplay;
+		}
+		 
 	 },
 		 
 		 
@@ -781,6 +799,20 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		 
 		 
 		 return flagValidacion;
+	 },
+	 
+	 
+	 bindDialogoMensajes : function (){
+    	$( "#dialogMensajes" ).dialog({ 
+    		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
+    		buttons: {
+    			Ok: function() {
+    				$( this ).dialog( "close" );
+    			}
+    	    } 
+    	});
 	 }
 	 
 };

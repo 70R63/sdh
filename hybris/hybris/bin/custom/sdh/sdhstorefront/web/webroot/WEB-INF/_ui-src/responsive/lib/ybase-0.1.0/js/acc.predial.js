@@ -526,7 +526,7 @@ ACC.predial = {
 		DatosLiquidacion.TarifaLiquidacion = $("#TarifaLiquidacion").val();
 		DatosLiquidacion.DestinoHacendario = $("#DestinoHacendario").val();
 		DatosLiquidacion.BaseGravable = $("#BaseGravable").val();
-		DatosLiquidacion.CanonArrendamiento = $("#CanonArrendamiento").val();
+		DatosLiquidacion.CanonArrendamiento = $("#canonArrendamiento").val();
 		DatosLiquidacion.CalidadSujecion = $("#CalidadSujecion").val();
 		DatosLiquidacion.AvaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
 		DatosLiquidacion.AreaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
@@ -653,7 +653,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		DatosLiquidacion.TarifaLiquidacion = $("#TarifaLiquidacion").val();
 		DatosLiquidacion.DestinoHacendario = $("#DestinoHacendario").val();
 		DatosLiquidacion.BaseGravable = $("#BaseGravable").val();
-		DatosLiquidacion.CanonArrendamiento = $("#CanonArrendamiento").val();
+		DatosLiquidacion.CanonArrendamiento = $("#canonArrendamiento").val();
 		DatosLiquidacion.CalidadSujecion = $("#CalidadSujecion").val();
 		DatosLiquidacion.AvaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
 		DatosLiquidacion.AreaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
@@ -736,6 +736,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 	 
 	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
 
+		ACC.predial.visualizacionBasesDetalle(false);
 		if(ACC.predial.validarAntesSubmit_precalculoBP()){
 			var dataActual = {};	
 		
@@ -755,16 +756,15 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					if(dataResponse.errores.txtMsj.trim() != ""){
-		            	$("#dialogMensajes" ).dialog( "open" );
-						$("#dialogMensajesContent").html("");
-	            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
-					}
-					
-					$("#basegrav").val(dataResponse.baseGravable);
-					var basesDetalle = document.getElementById("BasesDetalle");
-					if(basesDetalle != null){
-						basesDetalle.style.display = 'block';
+					if(dataResponse != null){
+						if(dataResponse.errores.txtMsj.trim() != ""){
+			            	$("#dialogMensajes" ).dialog( "open" );
+							$("#dialogMensajesContent").html("");
+		            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
+						}
+						
+						$("#basegrav").val(dataResponse.baseGravable);
+						ACC.predial.visualizacionBasesDetalle(true);
 					}
 				},
 				error : function() {
@@ -772,6 +772,18 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				}
 			});
 		}
+	 },
+	 
+	 visualizacionBasesDetalle : function (flagVisible){
+		var valDisplay = 'none';
+		var basesDetalle = document.getElementById("BasesDetalle");
+		if(basesDetalle != null){
+			if(flagVisible){
+				valDisplay = 'block';
+			}
+			basesDetalle.style.display = valDisplay;
+		}
+		 
 	 },
 		 
 		 

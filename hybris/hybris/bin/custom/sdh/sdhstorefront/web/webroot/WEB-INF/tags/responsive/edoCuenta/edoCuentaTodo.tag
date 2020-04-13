@@ -51,7 +51,6 @@
 									var="eachPredial">
 									<c:forEach varStatus="loop"
 										items="${eachPredial.detallePredial}" var="eachPredialDetail">
-
 										<c:if test="${not empty eachPredial.newCHIP || not empty eachPredial.matrInmobiliaria}">
 										<tr>
 											<td><c:out value="${eachPredial.newCHIP}" /></td>
@@ -125,6 +124,7 @@
 									<c:forEach varStatus="loop"
 										items="${eachVehicular.detalleVehicular}"
 										var="eachVehicularDetail">
+										<c:if test="${not empty eachVehicularDetail.anioGravable && not empty eachVehicularDetail.estado}">
 										<tr>
 											<td><c:out value="${eachVehicular.placa}" /></td>
 											<td><c:out value="${eachVehicularDetail.anioGravable}" /></td>
@@ -132,6 +132,7 @@
 											<td><c:out value="${eachVehicularDetail.saldoCargo}" /></td>
 											<td><c:out value="${eachVehicularDetail.saldoFavor}" /></td>
 										</tr>
+										</c:if>
 									</c:forEach>
 								</c:forEach>
 
@@ -411,8 +412,7 @@
 										<tr>
 											<td><c:out value="${eachPubli.cabecera.noResolucion}" /></td>
 											<td><c:out value="${eachPubliDetail.anioGravable}" /></td>
-											<td><spring:theme
-													code="destino.idTipValla.${eachPubli.cabecera.tipoValla}" /></td>
+											<td><c:out value="${eachPubli.cabecera.tipoValla}" />	</td>
 											<td><c:out value="${eachPubliDetail.estado}" /></td>
 											<td><c:out value="${eachPubliDetail.saldoCargo}" /></td>
 											<td><c:out value="${eachPubliDetail.saldoFavor}" /></td>
