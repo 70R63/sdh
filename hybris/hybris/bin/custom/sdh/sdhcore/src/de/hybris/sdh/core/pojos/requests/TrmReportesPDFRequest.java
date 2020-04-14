@@ -5,6 +5,7 @@ public class TrmReportesPDFRequest {
     private String impuesto;
     private String reporte;
 
+
     public String getNumBP() {
         return numBP;
     }

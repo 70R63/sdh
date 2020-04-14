@@ -200,6 +200,8 @@
 			<value>/onlinePaymentMatcher/**</value>
 			<value>/infoObject</value>
 			<value>/infoObject/**</value>
+			<value>/trmService</value>
+			<value>/trmService/**</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />

@@ -25,7 +25,7 @@
 
 						<td><spring:theme code="obligacion.inicial.descripcion" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								información.</a></td>
+								informaciï¿½n.</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -43,7 +43,6 @@
 
 	<sf:form>
 		<div class="row">
-		
 			<div class="col-md-6"></div>
 			<div class="col-md-3" id="idImpuesto">
 				<div class="form-group">
@@ -52,11 +51,11 @@
 						class="new_alto form-control " name="impuesto">
 						<option value="0">Seleccionar</option>
 						<option value="1">Predial Unificado</option>
-						<option value="2">Vehículos</option>
+						<option value="2">Vehï¿½culos</option>
 						<option value="3">ICA</option>
 						<option value="4">Publicidad Exterior</option>
 						<option value="5">Sobretasa Gasolina</option>
-						<option value="6">Delineación Urbana</option>
+						<option value="6">Delineaciï¿½n Urbana</option>
 						<option value= "7">Todo</option>
 					</select>
 				</div>
@@ -91,14 +90,13 @@
 				</button>
 
 			</div>
-				<div class="col-md-2">
+			<!-- <div class="col-md-2">
 				<button type="button" class="btn btn-primary btn-lg" id="action"
 					name="action" value="Imprimir" style="margin-top: 3px"
 					onclick="window.location.href ='<c:url value='#' />';">
 					<spring:theme code="obligacion.inicial.imprimir" />
 				</button>
-
-			</div>
+			</div> -->
 			<div class="col-md-3">
 				<div class="form-group ">
 					<button type="button" class="btn btn-primary btn-lg"
@@ -106,7 +104,6 @@
 						style="margin-top: 3px">
 						<spring:theme code="obligacion.inicial.buscar" />
 					</button>
-
 				</div>
 			</div>
 			<!-- 			<div class="col-md-3"> -->

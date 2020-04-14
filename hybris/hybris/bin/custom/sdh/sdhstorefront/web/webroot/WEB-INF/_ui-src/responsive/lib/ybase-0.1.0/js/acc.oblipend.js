@@ -60,6 +60,30 @@ ACC.oblipend = {
 
 	},
 
+	bindTrmPdf : function(impuesto, reporte, reportPdfName) {
+	    var currentUrl = window.location.href;
+	    var baseUrl = currentUrl.substring(0, currentUrl.indexOf("sdhstorefront"));
+	    $.ajax({
+            url     : baseUrl+'sdhstorefront/es/trmService/getPdfString?impuesto='+impuesto+'&reporte='+reporte,
+            method  : 'GET',
+            success : function(pdfResponse){
+                console.log(pdfResponse.pdf);
+                ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
+            },
+            error : function(jqXHR, exception){
+                console.log('Error occured!!');
+            }
+        });
+	},
+
+	bindDownloadPdf : function(stringPdf, reportPdfName){
+	    const linkSource = 'data:application/pdf;base64,' + stringPdf;
+        const downloadLink = document.createElement("a");
+        downloadLink.href = linkSource;
+        downloadLink.download = reportPdfName;
+        downloadLink.click();
+	},
+
 	bindDetalle : function() {
 
 		$(document).on(

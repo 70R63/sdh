@@ -526,7 +526,7 @@ ACC.predial = {
 		DatosLiquidacion.TarifaLiquidacion = $("#TarifaLiquidacion").val();
 		DatosLiquidacion.DestinoHacendario = $("#DestinoHacendario").val();
 		DatosLiquidacion.BaseGravable = $("#BaseGravable").val();
-		DatosLiquidacion.CanonArrendamiento = $("#CanonArrendamiento").val();
+		DatosLiquidacion.CanonArrendamiento = $("#canonArrendamiento").val();
 		DatosLiquidacion.CalidadSujecion = $("#CalidadSujecion").val();
 		DatosLiquidacion.AvaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
 		DatosLiquidacion.AreaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
@@ -653,7 +653,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		DatosLiquidacion.TarifaLiquidacion = $("#TarifaLiquidacion").val();
 		DatosLiquidacion.DestinoHacendario = $("#DestinoHacendario").val();
 		DatosLiquidacion.BaseGravable = $("#BaseGravable").val();
-		DatosLiquidacion.CanonArrendamiento = $("#CanonArrendamiento").val();
+		DatosLiquidacion.CanonArrendamiento = $("#canonArrendamiento").val();
 		DatosLiquidacion.CalidadSujecion = $("#CalidadSujecion").val();
 		DatosLiquidacion.AvaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
 		DatosLiquidacion.AreaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();

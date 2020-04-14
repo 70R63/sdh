@@ -96,6 +96,13 @@
 								</c:forEach>
 							</tbody>
 						</table>
+                        <div class="col-md-3 col-md-offset-8">
+                            <button type="button" class="btn btn-primary btn-lg" id="action"
+                                name="action" value="Imprimir" style="margin-top: 3px"
+                                onclick="ACC.oblipend.bindTrmPdf('01','1','predialReporte.pdf');">
+                                <spring:theme code="obligacion.inicial.imprimir" />
+                            </button>
+                        </div>
 					</div>
 				</div>
 			</c:if>
@@ -184,6 +191,13 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<div class="col-md-3 col-md-offset-8">
+                            <button type="button" class="btn btn-primary btn-lg" id="action"
+                                name="action" value="Imprimir" style="margin-top: 3px"
+                                onclick="ACC.oblipend.bindTrmPdf('02','1','vehicularReporte.pdf');">
+                                <spring:theme code="obligacion.inicial.imprimir" />
+                            </button>
+                        </div>
 					</div>
 				</div>
 			</c:if>
@@ -277,16 +291,23 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<div class="col-md-3 col-md-offset-8">
+                            <button type="button" class="btn btn-primary btn-lg" id="action"
+                                name="action" value="Imprimir" style="margin-top: 3px"
+                                onclick="ACC.oblipend.bindTrmPdf('03','1','icaReporte.pdf');">
+                                <spring:theme code="obligacion.inicial.imprimir" />
+                            </button>
+                        </div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3 col-md-offset-8">
+					<!--<div class="col-md-3 col-md-offset-8">
 						<button type="button" class="btn btn-primary btn-lg" id="action"
 							name="action" value="Imprimir" style="margin-top: 3px"
 							onclick="window.location.href ='<c:url value='#' />';">
 							<spring:theme code="obligacion.inicial.imprimir" />
 						</button>
-					</div>
+					</div>-->
 				</div>
 			</c:if>
 		</div>
@@ -372,6 +393,13 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							<div class="col-md-3 col-md-offset-8">
+                                <button type="button" class="btn btn-primary btn-lg" id="action"
+                                    name="action" value="Imprimir" style="margin-top: 3px"
+                                    onclick="ACC.oblipend.bindTrmPdf('04','1','pubExteriorReporte.pdf');">
+                                    <spring:theme code="obligacion.inicial.imprimir" />
+                                </button>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -474,6 +502,13 @@
 
 								</tbody>
 							</table>
+							<div class="col-md-3 col-md-offset-8">
+                                <button type="button" class="btn btn-primary btn-lg" id="action"
+                                    name="action" value="Imprimir" style="margin-top: 3px"
+                                    onclick="ACC.oblipend.bindTrmPdf('05','1','sobGasolinaReporte.pdf');">
+                                    <spring:theme code="obligacion.inicial.imprimir" />
+                                </button>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -552,6 +587,13 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							<div class="col-md-3 col-md-offset-8">
+                                <button type="button" class="btn btn-primary btn-lg" id="action"
+                                    name="action" value="Imprimir" style="margin-top: 3px"
+                                    onclick="ACC.oblipend.bindTrmPdf('06','1','delUrbanaReporte.pdf');">
+                                    <spring:theme code="obligacion.inicial.imprimir" />
+                                </button>
+                            </div>
 						</div>
 					</div>
 				</div>
