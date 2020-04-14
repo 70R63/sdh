@@ -25,7 +25,7 @@
 
 						<td><spring:theme code="edocuenta.inicial.descripcion" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								información.</a></td>
+								informaciï¿½n.</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -112,11 +112,11 @@
 									onchange="Selected(this)">
 									<option value="0">Todo</option>
 									<option value="1">Predial Unificado</option>
-									<option value="2">Vehículos</option>
+									<option value="2">Vehï¿½culos</option>
 									<option value="3">ICA</option>
 									<option value="4">Publicidad Exterior</option>
 									<option value="5">Sobretasa Gasolina</option>
-									<option value="6">Delineación Urbana</option>
+									<option value="6">Delineaciï¿½n Urbana</option>
 									<option value="7">Obligaciones no tributarias</option>
 								</select>
 							</div>

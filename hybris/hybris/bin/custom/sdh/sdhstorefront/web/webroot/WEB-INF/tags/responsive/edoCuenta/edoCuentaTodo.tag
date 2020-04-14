@@ -74,7 +74,6 @@
 						<table class="table tableedocuenta">
 							<tbody>
 								<tr>
-
 									<td class="td-total" style="width: 264px;"><label
 										class="control-label labeltabletd tableangrav labeltabletd"><spring:theme
 												code="edocuenta.inicial.predio.total" /> </label></td>
@@ -84,6 +83,13 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="col-md-3 col-md-offset-8">
+                        <button type="button" class="btn btn-primary btn-lg" id="action"
+                            name="action" value="Imprimir" style="margin-top: 3px"
+                            onclick="ACC.oblipend.bindTrmPdf('01','2','predialReporte.pdf');">
+                            <spring:theme code="obligacion.inicial.imprimir" />
+                        </button>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -154,6 +160,13 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="col-md-3 col-md-offset-8">
+                        <button type="button" class="btn btn-primary btn-lg" id="action"
+                            name="action" value="Imprimir" style="margin-top: 3px"
+                            onclick="ACC.oblipend.bindTrmPdf('02','2','vehicularReporte.pdf');">
+                            <spring:theme code="obligacion.inicial.imprimir" />
+                        </button>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -230,6 +243,13 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="col-md-3 col-md-offset-8">
+                        <button type="button" class="btn btn-primary btn-lg" id="action"
+                            name="action" value="Imprimir" style="margin-top: 3px"
+                            onclick="ACC.oblipend.bindTrmPdf('03','2','icaReporte.pdf');">
+                            <spring:theme code="obligacion.inicial.imprimir" />
+                        </button>
+                    </div>
 				</div>
 			</div>
 
@@ -299,6 +319,13 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="col-md-3 col-md-offset-8">
+                        <button type="button" class="btn btn-primary btn-lg" id="action"
+                            name="action" value="Imprimir" style="margin-top: 3px"
+                            onclick="ACC.oblipend.bindTrmPdf('06','2','delUrbanaReporte.pdf');">
+                            <spring:theme code="obligacion.inicial.imprimir" />
+                        </button>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -368,6 +395,13 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="col-md-3 col-md-offset-8">
+                        <button type="button" class="btn btn-primary btn-lg" id="action"
+                            name="action" value="Imprimir" style="margin-top: 3px"
+                            onclick="ACC.oblipend.bindTrmPdf('05','2','sobGasolinaReporte.pdf');">
+                            <spring:theme code="obligacion.inicial.imprimir" />
+                        </button>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -438,6 +472,13 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="col-md-3 col-md-offset-8">
+                        <button type="button" class="btn btn-primary btn-lg" id="action"
+                            name="action" value="Imprimir" style="margin-top: 3px"
+                            onclick="ACC.oblipend.bindTrmPdf('04','2','pubExteriorReporte.pdf');">
+                            <spring:theme code="obligacion.inicial.imprimir" />
+                        </button>
+                    </div>
 				</div>
 			</div>
 
