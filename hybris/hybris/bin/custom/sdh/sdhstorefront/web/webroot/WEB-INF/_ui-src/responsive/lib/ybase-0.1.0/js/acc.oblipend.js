@@ -367,7 +367,7 @@ ACC.oblipend = {
 	
 	hayErrores_getPdfString : function (response){
 		var flagValidacion = false;
-		if(response.errores!=null && response.errores.id_msj!=null ){
+		if(response.errores!=null && response.errores.id_msj!=null && response.errores.id_msj.trim()!=""){
 			flagValidacion = true;
 			alert(response.errores.id_msj + " - " + response.errores.txt_msj);
 		}
