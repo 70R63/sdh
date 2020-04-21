@@ -134,6 +134,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
+; ; DescuentoUnoPorCientoLink    ; DESCUENTO UNO POR CIENTO            ; "/contribuyentes/descuentoUnoPorCiento" ;;;;;
 ; ; DescargaFacturaLink          ; DESCARGA FACTURA                    ; "/contribuyentes/descargafactura" ;;;;;
 ; ; ReexpedicionFacturaLink      ; REEXPEDICION FACTURA                ; "/contribuyentes/reexpedicionfactura" ;;;;;
 #->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
@@ -440,7 +441,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
-;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescargaFacturaNavNode,ReexpedicionFacturaNavNode
+;FacturacionNavigationServiceRequestsNavNodeMenu;;Facturacion Service Requests Menu;FacturacionNavigationServiceRequestsNavNodeMenu;DescuentoUnoPorCientoNavNode,DescargaFacturaNavNode,ReexpedicionFacturaNavNode
 #->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
 
 #->INI dev-eduardo Agregar menu DECLARACIONES 04/01/2019
@@ -553,6 +554,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&n
 #->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
+;DescuentoUnoPorCientoNavNode ;;Descuento Uno Por Ciento Link;DescuentoUnoPorCientoNavNode
 ;DescargaFacturaNavNode ;;Descarga Factura Link;DescargaFacturaNavNode
 ;ReexpedicionFacturaNavNode ;;Reexpedicion Factura Link;ReexpedicionFacturaNavNode
 #->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
@@ -683,6 +685,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 #->FIN dev-eduardo Agregar menu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar menu FACTURACION 04/01/2019
+;DescuentoUnoPorCientoNavNodeEntry;;Descuento Uno Por Ciento Navigation Node Entry;DescuentoUnoPorCientoNavNode;DescuentoUnoPorCientoLink
 ;DescargaFacturaNavNodeEntry;;Descarga factura Navigation Node Entry;DescargaFacturaNavNode;DescargaFacturaLink
 ;ReexpedicionFacturaNavNodeEntry;;Reexpedicion factura Navigation Node Entry;ReexpedicionFacturaNavNode;ReexpedicionFacturaLink
 #->FIN dev-eduardo Agregar menu FACTURACION 04/01/2019
