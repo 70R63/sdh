@@ -67,8 +67,10 @@ ACC.oblipend = {
             url     : baseUrl+'sdhstorefront/es/trmService/getPdfString?impuesto='+impuesto+'&reporte='+reporte,
             method  : 'GET',
             success : function(pdfResponse){
-                console.log(pdfResponse.pdf);
-                ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
+            	if(!ACC.oblipend.hayErrores_getPdfString(pdfResponse)){
+	                console.log(pdfResponse.pdf);
+	                ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
+            	}
             },
             error : function(jqXHR, exception){
                 console.log('Error occured!!');
@@ -360,5 +362,16 @@ ACC.oblipend = {
 
 			}
 		});
+	},
+	
+	
+	hayErrores_getPdfString : function (response){
+		var flagValidacion = false;
+		if(response.errores!=null && response.errores.id_msj!=null && response.errores.id_msj.trim()!=""){
+			flagValidacion = true;
+			alert(response.errores.id_msj + " - " + response.errores.txt_msj);
+		}
+		
+		return flagValidacion;
 	}
 };
