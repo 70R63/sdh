@@ -209,7 +209,7 @@
 			<div class="col-md-3">
 				<c:if test="${predialFormbases.controlCampos.liquidacionPrivada != true}">
 				<button style="margin-top: 3px;" id=""
-					class="btn btn-primary btn-lg" type="button">
+					class="btn btn-primary btn-lg" type="button" onclick="calculoPred()">
 					<spring:theme code="predial.basespresun.liquidacionpriv.calcular" />
 				</button>
 				</c:if>

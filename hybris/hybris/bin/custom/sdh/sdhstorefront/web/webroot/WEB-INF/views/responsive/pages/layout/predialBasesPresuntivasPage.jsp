@@ -25,6 +25,7 @@
 <div id="dialogMensajes" title="Predial">
 	<div id="dialogMensajesContent"></div>
 </div>
+<div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
 <script>
 
 window.onload = function() {

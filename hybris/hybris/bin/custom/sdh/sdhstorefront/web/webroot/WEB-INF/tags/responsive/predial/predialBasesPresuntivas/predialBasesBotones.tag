@@ -54,30 +54,30 @@
 
 <div class="container">
 <!-- Campos para calculo -->
- <input type="hidden" value="${predialForm.numBP}" id="NumBP"/>
- <input type="hidden" value="${predialForm.CHIP}" id="CHIP"/>
- <input type="hidden" value="${predialForm.matrInmobiliaria}" id="MatrInmobiliaria"/>
- <input type="hidden" value="${predialForm.anioGravable}" id="AnioGravable"/>
- <input type="hidden" value="${predialForm.opcionuso}" id="OpcionUso"/>
+ <input type="hidden" value="${predialFormbases.numBP}" id="NumBP"/>
+ <input type="hidden" value="${predialFormbases.CHIP}" id="CHIP"/>
+ <input type="hidden" value="${predialFormbases.matrInmobiliaria}" id="MatrInmobiliaria"/>
+ <input type="hidden" value="${predialFormbases.anioGravable}" id="AnioGravable"/>
+ <input type="hidden" value="${predialFormbases.opcionuso}" id="OpcionUso"/>
    <!--  "DatosLiquidacion":-->
- <input type="hidden" value="${predialForm.estrDatosGenerales.tipoDeclaracion}" id="TipoDeclaracion"/>
- <input type="hidden" value="${predialForm.datosJuridicos.porcentajePropiedad}" id="PorcentajePropiedad"/>
+ <input type="hidden" value="${predialFormbases.estrDatosGenerales.tipoDeclaracion}" id="TipoDeclaracion"/>
+ <input type="hidden" value="${predialFormbases.datosJuridicos.porcentajePropiedad}" id="PorcentajePropiedad"/>
  <input type="hidden" value="" id="PorcentajeExclusion"/><!-- Estos datos se toman directamente del campo en la declaración -->
  <input type="hidden" value="" id="PorcentajeExencion"/><!-- Estos datos se toman directamente del campo en la declaración -->
- <input type="hidden" value="${predialForm.estrLiquidacionPredial.tarifaLiquidacion}" id="TarifaLiquidacion"/>
- <input type="hidden" value="${predialForm.estrLiquidacionPredial.destinoHacendario}" id="DestinoHacendario"/>
- <input type="hidden" value="${predialForm.estrLiquidacionPredial.baseGravable}" id="BaseGravable"/>
- <input type="hidden" value="${predialForm.estrDatosGenerales.canonArrendamiento}" id="CanonArrendamiento"/>
+ <input type="hidden" value="${predialFormbases.estrLiquidacionPredial.tarifaLiquidacion}" id="TarifaLiquidacion"/>
+ <input type="hidden" value="${predialFormbases.estrLiquidacionPredial.destinoHacendario}" id="DestinoHacendario"/>
+ <input type="hidden" value="${predialFormbases.estrLiquidacionPredial.baseGravable}" id="BaseGravable"/>
+ <input type="hidden" value="${predialFormbases.estrDatosGenerales.canonArrendamiento}" id="CanonArrendamiento"/>
  <input type="hidden" value="" id="NumeroContratoArrendamiento"/><!-- este campo no se encuentra en el servicio -->
- <input type="hidden" value="${predialForm.datosJuridicos.calidadSujecion}" id="CalidadSujecion"/>
- <input type="hidden" value="${predialForm.estrDatosGenerales.avaluoMatrizMejora}" id="AvaluoMatrizMejora"/>
- <input type="hidden" value="${predialForm.estrDatosGenerales.areaTerrenoMejoraContrib}" id="AreaTerrenoMejoraContribuye"/>
- <input type="hidden" value="${predialForm.estrDatosGenerales.avaluoProrrateado}" id="AvaluoProrrateado"/>
- <input type="hidden" value="${predialForm.estrDatosGenerales.avaluoIndiceEdificabilidad}" id="AvaluoIndiceEdificabilidad"/>
- <input type="hidden" value="${predialForm.estrDatosGenerales.exclusionParcial}" id="ExclusionParcial"/>
+ <input type="hidden" value="${predialFormbases.datosJuridicos.calidadSujecion}" id="CalidadSujecion"/>
+ <input type="hidden" value="${predialFormbases.estrDatosGenerales.avaluoMatrizMejora}" id="AvaluoMatrizMejora"/>
+ <input type="hidden" value="${predialFormbases.estrDatosGenerales.areaTerrenoMejoraContrib}" id="AreaTerrenoMejoraContribuye"/>
+ <input type="hidden" value="${predialFormbases.estrDatosGenerales.avaluoProrrateado}" id="AvaluoProrrateado"/>
+ <input type="hidden" value="${predialFormbases.estrDatosGenerales.avaluoIndiceEdificabilidad}" id="AvaluoIndiceEdificabilidad"/>
+ <input type="hidden" value="${predialFormbases.estrDatosGenerales.exclusionParcial}" id="ExclusionParcial"/>
    <!--  LiquidacionPrivada -->
- <input type="hidden" value="${predialForm.estrLiquidacionPrivada.aporteVoluntario}" id="AporteVoluntario"/>
- <input type="hidden" value="${predialForm.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
+ <input type="hidden" value="${predialFormbases.estrLiquidacionPrivada.aporteVoluntario}" id="AporteVoluntario"/>
+ <input type="hidden" value="${predialFormbases.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
 <!-- Fin de campos para calculo -->
 <input type="hidden" id="numForm" value="${predialFormbases.numFrom}"/>
