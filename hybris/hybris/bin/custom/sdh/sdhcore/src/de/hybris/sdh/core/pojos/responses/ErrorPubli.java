@@ -84,6 +84,17 @@ public class ErrorPubli
 		this.txt_msj = txt_msj;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "ErrorPubli [idmsj=" + idmsj + ", txtmsj=" + txtmsj + ", id_msj=" + id_msj + ", txt_msj=" + txt_msj + "]";
+	}
+
 
 
 

@@ -1,7 +1,5 @@
 package de.hybris.sdh.core.pojos.responses;
 
-import java.util.List;
-
 public class TrmPdfResponse {
     private String pdf;
     private ErrorPubli errores;
@@ -10,7 +8,7 @@ public class TrmPdfResponse {
         return pdf;
     }
 
-    public void setPdf(String pdf) {
+    public void setPdf(final String pdf) {
         this.pdf = pdf;
     }
 
@@ -18,7 +16,20 @@ public class TrmPdfResponse {
         return errores;
     }
 
-    public void setErrores(ErrorPubli errores) {
+    public void setErrores(final ErrorPubli errores) {
         this.errores = errores;
     }
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "TrmPdfResponse [pdf=" + pdf + ", errores=" + errores + "]";
+	}
+
+
 }
