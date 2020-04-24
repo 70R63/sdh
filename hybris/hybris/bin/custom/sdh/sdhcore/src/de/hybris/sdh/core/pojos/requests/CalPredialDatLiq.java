@@ -24,6 +24,8 @@ public class CalPredialDatLiq
 	public String AvaluoProrrateado;
 	public String AvaluoIndiceEdificabilidad;
 	public String ExclusionParcial;
+	public String propiedadHorizontal;
+	public String caracterizacionPredio;
 
 	/**
 	 * @return the tipoDeclaracion
@@ -280,6 +282,41 @@ public class CalPredialDatLiq
 		ExclusionParcial = exclusionParcial;
 	}
 
+
+	/**
+	 * @return the propiedadHorizontal
+	 */
+	public String getPropiedadHorizontal()
+	{
+		return propiedadHorizontal;
+	}
+
+	/**
+	 * @param propiedadHorizontal
+	 *           the propiedadHorizontal to set
+	 */
+	public void setPropiedadHorizontal(final String propiedadHorizontal)
+	{
+		this.propiedadHorizontal = propiedadHorizontal;
+	}
+
+	/**
+	 * @return the caracterizacionPredio
+	 */
+	public String getCaracterizacionPredio()
+	{
+		return caracterizacionPredio;
+	}
+
+	/**
+	 * @param caracterizacionPredio
+	 *           the caracterizacionPredio to set
+	 */
+	public void setCaracterizacionPredio(final String caracterizacionPredio)
+	{
+		this.caracterizacionPredio = caracterizacionPredio;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -321,7 +358,12 @@ public class CalPredialDatLiq
 				? this.getAvaluoIndiceEdificabilidad()
 				: "") + "\",");
 		stringBuilder
-				.append("\"ExclusionParcial\":\"" + (this.getExclusionParcial() != null ? this.getExclusionParcial() : "") + "\"");
+				.append("\"ExclusionParcial\":\"" + (this.getExclusionParcial() != null ? this.getExclusionParcial() : "") + "\",");
+		stringBuilder.append(
+				"\"PropiedadHorizontal\":\"" + (this.getPropiedadHorizontal() != null ? this.getPropiedadHorizontal() : "") + "\",");
+		stringBuilder.append("\"CaracterizacionPredio\":\""
+				+ (this.getCaracterizacionPredio() != null ? this.getCaracterizacionPredio() : "") + "\"");
+
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();

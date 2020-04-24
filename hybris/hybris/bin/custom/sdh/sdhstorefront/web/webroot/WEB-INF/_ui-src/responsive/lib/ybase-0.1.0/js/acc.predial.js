@@ -533,6 +533,8 @@ ACC.predial = {
 		DatosLiquidacion.AvaluoProrrateado = $("#AvaluoProrrateado").val();
 		DatosLiquidacion.AvaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
 		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
+		DatosLiquidacion.propiedadHorizontal = $("#propiedadHorizontal").val();
+		DatosLiquidacion.caracterizacionPredio = $("#caracterizacionPredio").val();
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
 
 		var calcLiquidacionPrivada ={};
