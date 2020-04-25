@@ -163,7 +163,7 @@
 					<div class="col-md-3 col-md-offset-8">
                         <button type="button" class="btn btn-primary btn-lg" id="action"
                             name="action" value="Imprimir" style="margin-top: 3px"
-                            onclick="ACC.oblipend.bindTrmPdf('02','2','vehicularReporte.pdf');">
+                            onclick="ACC.oblipend.bindTrmPdf('03','2','vehicularReporte.pdf');">
                             <spring:theme code="obligacion.inicial.imprimir" />
                         </button>
                     </div>
@@ -246,7 +246,7 @@
 					<div class="col-md-3 col-md-offset-8">
                         <button type="button" class="btn btn-primary btn-lg" id="action"
                             name="action" value="Imprimir" style="margin-top: 3px"
-                            onclick="ACC.oblipend.bindTrmPdf('03','2','icaReporte.pdf');">
+                            onclick="ACC.oblipend.bindTrmPdf('02','2','icaReporte.pdf');">
                             <spring:theme code="obligacion.inicial.imprimir" />
                         </button>
                     </div>
@@ -398,7 +398,7 @@
 					<div class="col-md-3 col-md-offset-8">
                         <button type="button" class="btn btn-primary btn-lg" id="action"
                             name="action" value="Imprimir" style="margin-top: 3px"
-                            onclick="ACC.oblipend.bindTrmPdf('05','2','sobGasolinaReporte.pdf');">
+                            onclick="ACC.oblipend.bindTrmPdf('08','2','sobGasolinaReporte.pdf');">
                             <spring:theme code="obligacion.inicial.imprimir" />
                         </button>
                     </div>
@@ -475,7 +475,7 @@
 					<div class="col-md-3 col-md-offset-8">
                         <button type="button" class="btn btn-primary btn-lg" id="action"
                             name="action" value="Imprimir" style="margin-top: 3px"
-                            onclick="ACC.oblipend.bindTrmPdf('04','2','pubExteriorReporte.pdf');">
+                            onclick="ACC.oblipend.bindTrmPdf('54','2','pubExteriorReporte.pdf');">
                             <spring:theme code="obligacion.inicial.imprimir" />
                         </button>
                     </div>
