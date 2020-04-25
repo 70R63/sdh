@@ -765,7 +765,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
 						}
 						
-						$("#basegrav").val(dataResponse.baseGravable);
+						$("#BaseGravable").val(dataResponse.baseGravable);
 						ACC.predial.visualizacionBasesDetalle(true);
 					}
 				},
