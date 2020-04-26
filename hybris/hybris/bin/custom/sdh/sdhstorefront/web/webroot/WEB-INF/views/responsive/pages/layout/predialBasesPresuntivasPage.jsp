@@ -26,6 +26,10 @@
 	<div id="dialogMensajesContent"></div>
 </div>
 <div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
+<a id="downloadHelper" target="_blank"></a>
+<div id="dialogDeclaracion" title="Declaracion">
+	<div id="declaracionDialogContent"></div>
+</div>
 <script>
 
 window.onload = function() {
