@@ -625,6 +625,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				$("#TotalAPagar").val(result.liquidacionPrivada.totalAPagar);
 				$("#ValorAporteVoluntario").val(result.liquidacionPrivada.valorAporteVoluntario);
 				$("#TotalConPagoVoluntario").val(result.liquidacionPrivada.totalConPagoVoluntario);
+				$("#Tarifa_liquidacion").val(result.liquidacionPrivada.tarifaLiquidacion.trim());
 				
 				
 				if(liq.proyecto == "1"){

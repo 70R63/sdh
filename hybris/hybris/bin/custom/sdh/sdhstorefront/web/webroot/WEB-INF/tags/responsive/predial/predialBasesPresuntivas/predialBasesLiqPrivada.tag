@@ -207,6 +207,17 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3">
+				<div class="form-group">
+					<label class="control-label"><spring:theme
+							code="predial.basespresun.liquidacionpriv.tarifaLiquidacion" /></label> <input
+						id="Tarifa_liquidacion" name="" class="newalto form-control" disabled type="text"
+						value="${predialFormbases.estrLiquidacionPredial.tarifaLiquidacion}"
+						maxlength="240"></input>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
 				<c:if test="${predialFormbases.controlCampos.liquidacionPrivada != true}">
 				<button style="margin-top: 3px;" id=""
 					class="btn btn-primary btn-lg" type="button" onclick="calculoPred()">

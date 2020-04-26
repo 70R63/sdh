@@ -26,6 +26,7 @@ public class CalculoPredialLiqPriv
 	private String totalAPagar;
 	private String valorAporteVoluntario;
 	private String totalConPagoVoluntario;
+	private String tarifaLiquidacion;
 
 	/**
 	 * @return the aporteVoluntario
@@ -277,6 +278,24 @@ public class CalculoPredialLiqPriv
 	public void setTotalConPagoVoluntario(final String totalConPagoVoluntario)
 	{
 		this.totalConPagoVoluntario = totalConPagoVoluntario;
+	}
+
+	/**
+	 * @return the tarifa_liquidacion
+	 */
+	public String getTarifaLiquidacion()
+	{
+		return tarifaLiquidacion;
+	}
+
+	/**
+	 * @param tarifa_liquidacion
+	 *           the tarifa_liquidacion to set
+	 */
+	@JsonProperty("TarifaLiquidacion")
+	public void setTarifaLiquidacion(final String tarifaLiquidacion)
+	{
+		this.tarifaLiquidacion = tarifaLiquidacion;
 	}
 
 
