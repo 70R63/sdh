@@ -65,7 +65,7 @@
  <input type="hidden" value="" id="PorcentajeExclusion"/><!-- Estos datos se toman directamente del campo en la declaración -->
  <input type="hidden" value="" id="PorcentajeExencion"/><!-- Estos datos se toman directamente del campo en la declaración -->
  <input type="hidden" value="${predialFormbases.estrLiquidacionPredial.tarifaLiquidacion}" id="TarifaLiquidacion"/>
- <input type="hidden" value="${predialFormbases.estrLiquidacionPredial.destinoHacendario}" id="DestinoHacendario"/>
+<%--  <input type="hidden" value="${predialFormbases.estrLiquidacionPredial.destinoHacendario}" id="DestinoHacendario"/> --%>
 <%--  <input type="hidden" value="${predialFormbases.estrLiquidacionPredial.baseGravable}" id="BaseGravable"/> --%>
  <input type="hidden" value="${predialFormbases.estrDatosGenerales.canonArrendamiento}" id="CanonArrendamiento"/>
  <input type="hidden" value="" id="NumeroContratoArrendamiento"/><!-- este campo no se encuentra en el servicio -->
