@@ -535,6 +535,8 @@ ACC.predial = {
 		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
 		DatosLiquidacion.propiedadHorizontal = $("#propiedadHorizontal").val(); 
 		DatosLiquidacion.caracterizacionPredio = $("#caracterizacionPredio").val(); 
+		DatosLiquidacion.area_construida = $("#areaconstruccion").val(); 
+		DatosLiquidacion.area_terreno_catastro = $("#areaterreno").val(); 
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
 
 		var calcLiquidacionPrivada ={};

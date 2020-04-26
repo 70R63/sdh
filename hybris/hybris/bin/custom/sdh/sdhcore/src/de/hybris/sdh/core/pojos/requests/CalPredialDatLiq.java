@@ -24,8 +24,10 @@ public class CalPredialDatLiq
 	public String AvaluoProrrateado;
 	public String AvaluoIndiceEdificabilidad;
 	public String ExclusionParcial;
-	public String propiedadHorizontal; 
-	public String caracterizacionPredio; 
+	public String propiedadHorizontal;
+	public String caracterizacionPredio;
+	public String area_construida;
+	public String area_terreno_catastro;
 
 	/**
 	 * @return the tipoDeclaracion
@@ -283,39 +285,74 @@ public class CalPredialDatLiq
 	}
 
 
-	/** 
-	 * @return the propiedadHorizontal 
-	 */ 
-	public String getPropiedadHorizontal() 
-	{ 
-		return propiedadHorizontal; 
-	} 
+	/**
+	 * @return the propiedadHorizontal
+	 */
+	public String getPropiedadHorizontal()
+	{
+		return propiedadHorizontal;
+	}
 
-	/** 
-	 * @param propiedadHorizontal 
-	 *           the propiedadHorizontal to set 
-	 */ 
-	public void setPropiedadHorizontal(final String propiedadHorizontal) 
-	{ 
-		this.propiedadHorizontal = propiedadHorizontal; 
-	} 
+	/**
+	 * @param propiedadHorizontal
+	 *           the propiedadHorizontal to set
+	 */
+	public void setPropiedadHorizontal(final String propiedadHorizontal)
+	{
+		this.propiedadHorizontal = propiedadHorizontal;
+	}
 
-	/** 
-	 * @return the caracterizacionPredio 
-	 */ 
-	public String getCaracterizacionPredio() 
-	{ 
-		return caracterizacionPredio; 
-	} 
+	/**
+	 * @return the caracterizacionPredio
+	 */
+	public String getCaracterizacionPredio()
+	{
+		return caracterizacionPredio;
+	}
 
-	/** 
-	 * @param caracterizacionPredio 
-	 *           the caracterizacionPredio to set 
-	 */ 
-	public void setCaracterizacionPredio(final String caracterizacionPredio) 
-	{ 
-		this.caracterizacionPredio = caracterizacionPredio; 
-	} 
+	/**
+	 * @param caracterizacionPredio
+	 *           the caracterizacionPredio to set
+	 */
+	public void setCaracterizacionPredio(final String caracterizacionPredio)
+	{
+		this.caracterizacionPredio = caracterizacionPredio;
+	}
+
+
+	/**
+	 * @return the area_construida
+	 */
+	public String getArea_construida()
+	{
+		return area_construida;
+	}
+
+	/**
+	 * @param area_construida
+	 *           the area_construida to set
+	 */
+	public void setArea_construida(final String area_construida)
+	{
+		this.area_construida = area_construida;
+	}
+
+	/**
+	 * @return the area_terreno_catastro
+	 */
+	public String getArea_terreno_catastro()
+	{
+		return area_terreno_catastro;
+	}
+
+	/**
+	 * @param area_terreno_catastro
+	 *           the area_terreno_catastro to set
+	 */
+	public void setArea_terreno_catastro(final String area_terreno_catastro)
+	{
+		this.area_terreno_catastro = area_terreno_catastro;
+	}
 
 	@Override
 	public String toString()
@@ -358,11 +395,16 @@ public class CalPredialDatLiq
 				? this.getAvaluoIndiceEdificabilidad()
 				: "") + "\",");
 		stringBuilder
-				.append("\"ExclusionParcial\":\"" + (this.getExclusionParcial() != null ? this.getExclusionParcial() : "") + "\","); 
-		stringBuilder.append( 
-				"\"PropiedadHorizontal\":\"" + (this.getPropiedadHorizontal() != null ? this.getPropiedadHorizontal() : "") + "\","); 
-		stringBuilder.append("\"CaracterizacionPredio\":\"" 
-				+ (this.getCaracterizacionPredio() != null ? this.getCaracterizacionPredio() : "") + "\""); 
+				.append("\"ExclusionParcial\":\"" + (this.getExclusionParcial() != null ? this.getExclusionParcial() : "") + "\",");
+		stringBuilder.append(
+				"\"PropiedadHorizontal\":\"" + (this.getPropiedadHorizontal() != null ? this.getPropiedadHorizontal() : "") + "\",");
+		stringBuilder.append("\"CaracterizacionPredio\":\""
+				+ (this.getCaracterizacionPredio() != null ? this.getCaracterizacionPredio() : "") + "\",");
+		stringBuilder
+				.append("\"Area_construida\":\"" + (this.getArea_construida() != null ? this.getArea_construida() : "") + "\",");
+		stringBuilder.append("\"Area_terreno_catastro\":\""
+				+ (this.getArea_terreno_catastro() != null ? this.getArea_terreno_catastro() : "") + "\"");
+
 
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
