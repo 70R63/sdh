@@ -62,7 +62,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.tarliqui" /></label> <input
-						id="" name="" class="newalto form-control" disabled type="text"
+						id="Tarifa_liquidacion" name="" class="newalto form-control" disabled type="text"
 						value="${predialFormbases.estrLiquidacionPredial.tarifaLiquidacion}" maxlength="240"></input>
 				</div>
 			</div>
