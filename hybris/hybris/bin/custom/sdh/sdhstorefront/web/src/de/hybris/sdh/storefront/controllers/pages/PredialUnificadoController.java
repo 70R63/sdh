@@ -1041,7 +1041,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
-
+			predialFormcua.setTipDoc(predialInfoInicuatro.getTipDoc());
 			predialFormcua.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormcua.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormcua.setIndicadorspac(detallePredialResponse.getIndicadorspac());
