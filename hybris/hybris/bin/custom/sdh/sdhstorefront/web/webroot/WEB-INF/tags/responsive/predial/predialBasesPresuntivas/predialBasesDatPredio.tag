@@ -45,7 +45,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.destino" /></label> 
-						<form:select id="destinoHacendario" path="destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()"></form:select>
+						<form:select id="DestinoHacendario" path="destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()"></form:select>
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -88,7 +88,7 @@ function accionPreCalculo(){
 	var areaTerrenoCatastro = $('#areaterreno').val();
 	var caracterizacionPredio = $('#caracterizacionPredio').val();
 	var propiedadHorizontal = $('#propiedadHorizontal').val();
-	var destinoHacendario = $('#destinoHacendario').val();
+	var destinoHacendario = $('#DestinoHacendario').val();
 	
 	ACC.predial.ejecutarPreCalculoPB(numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario);
 	
@@ -97,9 +97,9 @@ function accionPreCalculo(){
 function accionCat_destinoHacendario(){
 
 	$("#caracterizacionPredio").find("option:gt(0)").remove();	
-	if($("#destinoHacendario").val() != null){
+	if($("#DestinoHacendario").val() != null){
 		for(var i=0;i<cat_predial_caracterizacionPredio.length;i++){
-			if(cat_predial_caracterizacionPredio[i].destinoHacendario == $("#destinoHacendario").val()){
+			if(cat_predial_caracterizacionPredio[i].destinoHacendario == $("#DestinoHacendario").val()){
 				$('#caracterizacionPredio').append('<option value="'+ cat_predial_caracterizacionPredio[i].itemId +'">'+ cat_predial_caracterizacionPredio[i].itemValue + "</option>");
 			}
 		}		
