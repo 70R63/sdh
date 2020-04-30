@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
+
 /**
  * @author Federico Flores Dimas
  *
@@ -173,6 +176,7 @@ public class PredialEstLiquidacionPrivada
 	 * @param valorAPagar
 	 *           the valorAPagar to set
 	 */
+	@JsonProperty("valorApagar")
 	public void setValorAPagar(final String valorAPagar)
 	{
 		this.valorAPagar = valorAPagar;
@@ -282,7 +286,7 @@ public class PredialEstLiquidacionPrivada
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
