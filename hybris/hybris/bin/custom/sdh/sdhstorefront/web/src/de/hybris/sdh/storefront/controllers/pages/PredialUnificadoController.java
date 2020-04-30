@@ -2708,6 +2708,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				if (contribuyenteData.getAgentes() != null && currentUserData != null){
 					controlCampos.setLiquidacionPrivada(true);
 					controlCampos.setLiquidacion(true);
+					controlCampos.setDatosPredio(true);
 
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
 					{
