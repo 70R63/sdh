@@ -2757,6 +2757,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final PredialDatosJuridicos datosJuridicos = new PredialDatosJuridicos();
 			datosJuridicos.setCalidadSujecion(
 					predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getCalidadSujecion());
+			datosJuridicos
+					.setPorcentajePropiedad(predialInfo.getDetallePredial2Response().getLiquidacion().getPorcentajePropiedad());
 			responseRemapeo.setDatosJuridicos(datosJuridicos);
 
 
