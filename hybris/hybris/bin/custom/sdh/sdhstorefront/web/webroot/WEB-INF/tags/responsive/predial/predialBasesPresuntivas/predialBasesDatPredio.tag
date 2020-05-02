@@ -7,6 +7,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+<c:set var="disabledDatosPredio" value="false" />
+<c:if test="${predialFormbases.controlCampos.datosPredio == true}">
+	<c:set var="disabledDatosPredio" value='true' />
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 
@@ -45,14 +49,14 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.destino" /></label> 
-						<form:select id="DestinoHacendario" path="destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()"></form:select>
+						<form:select class="newalto form-control" id="DestinoHacendario" path="estrLiquidacionPredial.destinoHacendario" items="${predialFormbases.catalogos.destinoHacendario}" onclick="accionCat_destinoHacendario()" disabled="${disabledDatosPredio}"></form:select>
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datospredio.prophorizon" /></label> 
-							<form:select class="newalto form-control prophorizontal" id="propiedadHorizontal" path="propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}"></form:select>
+							<form:select class="newalto form-control prophorizontal" id="propiedadHorizontal" path="estrDatosGenerales.propiedadHorizontal" items="${predialFormbases.catalogos.propiedadHorizontal}" disabled="${disabledDatosPredio}"></form:select>
 							
 				</div>
 			</div>
@@ -62,15 +66,17 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datospredio.caracpredio" /></label> 
-						<form:select id="caracterizacionPredio" path="caracterizacionPredio" items="${predialFormbases.catalogos.caracterizacionPredio}"></form:select>
+						<form:select class="newalto form-control" id="caracterizacionPredio" path="estrDatosGenerales.caracterizacionPredio" items="${predialFormbases.catalogos.caracterizacionPredio}" disabled="${disabledDatosPredio}"></form:select>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
+				<c:if test="${predialFormbases.controlCampos.datosPredio != true}">
 				<button id="buttonPrecalculo"
 					class="btn btn-primary btn-lg buttonPrecalculo" type="button" onclick="accionPreCalculo()">
 					<spring:theme code="predial.basespresun.datospredio.precalculo" />
 				</button>
+				</c:if>
 				</div>
 			</div>
 		</div>

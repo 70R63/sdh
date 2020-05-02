@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -735,6 +734,12 @@ public class PSEPaymentController extends AbstractPageController
 
 	private InititalizeTransactionResponse doCredibancoPayment(final PSEPaymentForm psePaymentForm)
 	{
+
+
+		LOG.info("----------- doPsePayment --------------");
+		LOG.info(psePaymentForm);
+		LOG.info("----------- doPsePayment --------------");
+
 
 		final int i_ceros = 14
 				- (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());

@@ -15,7 +15,11 @@
 <predial:predialBasesGenerales />
 <predial:predialBasesDatPredio />
 
-<div class="BasesDetalle" id="BasesDetalle" style="display: none">
+<c:set var="flagDisplay" value="display: none"/>
+<c:if test="${predialFormbases.controlCampos.datosPredio == true}" >
+<c:set var="flagDisplay" value="display: block"/>
+</c:if>
+<div class="BasesDetalle" id="BasesDetalle" style="${flagDisplay}">
 <predial:predialBasesDatLiq />
 	<predial:predialBasesLiqPrivada />
 	<firmas:generalFirmas />
@@ -46,5 +50,8 @@ window.onload = function() {
 		}
 	}
 	$(".loader").fadeOut("slow");
+	accionCat_destinoHacendario();
+	$('#caracterizacionPredio').val("${predialFormbases.estrDatosGenerales.caracterizacionPredio}");
+
 }
 </script>
