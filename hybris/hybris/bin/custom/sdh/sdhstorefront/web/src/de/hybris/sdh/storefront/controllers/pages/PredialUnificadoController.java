@@ -1041,7 +1041,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final DetallePredialResponse detallePredialResponse = mapper
 					.readValue(sdhDetallePredialService.detallePredial(detallePredialRequest), DetallePredialResponse.class);
 
-
+			predialFormcua.setTipDoc(predialInfoInicuatro.getTipDoc());
 			predialFormcua.setFechaInactivacion(detallePredialResponse.getFechaInactivacion());
 			predialFormcua.setOpcionuso(detallePredialResponse.getOpcionuso());
 			predialFormcua.setIndicadorspac(detallePredialResponse.getIndicadorspac());
@@ -2708,6 +2708,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 				if (contribuyenteData.getAgentes() != null && currentUserData != null){
 					controlCampos.setLiquidacionPrivada(true);
 					controlCampos.setLiquidacion(true);
+					controlCampos.setDatosPredio(true);
 
 					for (final ContribAgente infoAgente : contribuyenteData.getAgentes())
 					{
@@ -2756,6 +2757,8 @@ public class PredialUnificadoController extends SDHAbstractPageController
 			final PredialDatosJuridicos datosJuridicos = new PredialDatosJuridicos();
 			datosJuridicos.setCalidadSujecion(
 					predialInfo.getDetallePredial2Response().getInfopredio().getDatosgenerales().getCalidadSujecion());
+			datosJuridicos
+					.setPorcentajePropiedad(predialInfo.getDetallePredial2Response().getLiquidacion().getPorcentajePropiedad());
 			responseRemapeo.setDatosJuridicos(datosJuridicos);
 
 

@@ -38,13 +38,13 @@
                         });
                     }else if(message.contentType == "NEWCUSTM"){ //Print new customer in table
                         addCustomer(message.from, message.userName, message.subjectType, message.content, message.userSessionId, false);
-                    }else if(message.contentType == "DELCUSTM"){ //Remove cutomer from table
+                    }else if(message.contentType == "DELCUSTM"){ //Remove customer from table
                         var rowTable = document.getElementById(message.from);
                         rowTable.parentNode.removeChild(rowTable);
-                     }else if(message.contentType == "BKLCUSTM"){
+                     }else if(message.contentType == "BKLCUSTM"){ //Block picked customer
                         var button = document.getElementById("btn_"+message.from);
                         button.disabled = true;
-                     }else if(message.contentType == "UNBKLCUSTM"){
+                     }else if(message.contentType == "UNBKLCUSTM"){ //Unblock picked customer
                         var button = document.getElementById("btn_"+message.from);
                         button.disabled = false;
                      }

@@ -120,7 +120,7 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predial.basespresun.liquidacionpriv.saldo" /></label> <input id=""
+							code="predial.basespresun.liquidacionpriv.saldo" /></label> <input id="TotalSaldoACargo"
 						name="TotalSaldoACargo" class="newalto form-control" disabled type="text"
 						value="${predialFormbases.estrLiquidacionPrivada.totalSaldoCargo}"
 						maxlength="240"></input>
