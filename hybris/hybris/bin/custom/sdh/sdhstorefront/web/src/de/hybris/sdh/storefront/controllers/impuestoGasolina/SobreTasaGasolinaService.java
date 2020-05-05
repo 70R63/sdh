@@ -72,6 +72,7 @@ import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
+import de.hybris.sdh.storefront.forms.Descuento1PCCatalogos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -145,6 +146,17 @@ public class SobreTasaGasolinaService
 
 		//Consulta estado de cuenta
 		catalogosForm.setTipoConsulta(obtenerListaTipoConsulta());
+
+
+		return catalogosForm;
+	}
+
+	public Descuento1PCCatalogos prepararCatalogosDescuento1PC()
+	{
+
+		final Descuento1PCCatalogos catalogosForm = new Descuento1PCCatalogos();
+
+		catalogosForm.setTipoId(obtenerListaTipoId());
 
 
 		return catalogosForm;
