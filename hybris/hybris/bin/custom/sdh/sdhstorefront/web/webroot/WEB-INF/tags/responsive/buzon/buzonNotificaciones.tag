@@ -28,7 +28,7 @@
 			<div class="row">
 
 				<div class="col-md-7 col-md-offset-3 center">
-					<table class="table table-responsive" id="">
+					<table class="table table-responsive" id="tabPaginacion2">
 						<thead>
 							<tr>
 								<th style="text-align: center;"><label
@@ -84,7 +84,7 @@
 			<div class="row">
 
 				<div class="col-md-7 col-md-offset-3 center">
-					<table class="table table-responsive" id="">
+					<table class="table table-responsive" id="tabPaginacion3">
 						<thead>
 							<tr>
 								<th style="text-align: center"><label
