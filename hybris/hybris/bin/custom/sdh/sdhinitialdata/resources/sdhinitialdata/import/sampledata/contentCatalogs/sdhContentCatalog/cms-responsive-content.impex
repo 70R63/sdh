@@ -79,7 +79,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; EventsLink                      ; EVENTS                             ; http://www.stateofrosebud.com/events ; ; ; newWindow;;
 
 ; ; EscuelaVirtualLink                      ; ESCUELA VIRTUAL                             ; "/escuelavirtual" ; ; ; newWindow;;
-; ; PreguntasFrecuentesLink                      ; PREGUNTAS FRECUENTES                             ; "/preguntasfrecuentes" ; ; ; newWindow;;
+; ; PreguntasFrecuentesLink                      ; PREGUNTAS FRECUENTES                             ; "#" ; ; ; newWindow;;
 
 
 
@@ -2920,23 +2920,3 @@ INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				
 				 					;							;contribuyentesRegistroPageComponent	;contribuyentesRegistroPage Component	;/WEB-INF/views/responsive/pages/layout/contribuyentesRegistroPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;contribuyentesRegistroPageComponent
 #->FIN dev-maria Agregar paginas para Contribuyentes Registro 11/03/2020
 
-#->INI dev-maria Agregar paginas para Preguntas Frecuentes 05/050/2020
-$contentCatalog=sdhContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-
-INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;pregFrecuentesPage 		;Preguntas Frecuentes Page 	;AccountPageTemplate:sdhContentCatalog:Staged	;/preguntasfrecuentes
-
-
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='pregFrecuentesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
-								;						;SideContent-pregFrecuentesPage 		;SideContent				;															;SideContent-pregFrecuentesPage						;;;
-								;						;BodyContent-pregFrecuentesPage		;BodyContent				;															;BodyContent-pregFrecuentesPage						;;;
-
-INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
-			 				;							;SideContent-pregFrecuentesPage 	;Side Content Slot for Preguntas Frecuentes Page 			;true	;								;;;
-							;							;BodyContent-pregFrecuentesPage	;Body Content Slot for Preguntas Frecuentes	Page	;true	;pregFrecuentesPageComponent			;;;
-
-INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
-				 					;							;pregFrecuentesPageComponent	;pregFrecuentesPage Component	;/WEB-INF/views/responsive/pages/layout/pregFrecuentesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;pregFrecuentesPageComponent
-#->FIN dev-maria Agregar paginas para Preguntas Frecuentes 05/05/2020
