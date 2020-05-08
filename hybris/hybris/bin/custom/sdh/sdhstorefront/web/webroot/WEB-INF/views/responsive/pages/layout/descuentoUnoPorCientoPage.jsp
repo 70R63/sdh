@@ -18,7 +18,7 @@
 
 <script type="text/javascript">
 window.onload = function() {
-	
+	alert("Los contribuyentes del predial, pueden obtener un descuento adicional del 1% sobre el valor a pagar del impuesto predial, para la vigencia 2020 si actualizan y reportan su información de contacto y autorizan que los datos registrados puedan ser usados con fines institucionales y para la notificación electrónica. ");
     $(".loader").fadeOut("slow");
 }
 </script>	
