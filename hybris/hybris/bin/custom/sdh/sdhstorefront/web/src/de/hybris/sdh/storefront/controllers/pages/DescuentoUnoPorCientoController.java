@@ -34,7 +34,7 @@ public class DescuentoUnoPorCientoController extends AbstractPageController
 	private static final Logger LOG = Logger.getLogger(DescuentoUnoPorCientoController.class);
 
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
-	private static final String TEXT_ACCOUNT_PROFILE = "Facturacion";
+	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.descuento1pc";
 
 	// CMS Pages
 	private static final String DESCUENTO_UNOPORCIENTO_CMS_PAGE = "descuentoUnoPorCientoPage";
