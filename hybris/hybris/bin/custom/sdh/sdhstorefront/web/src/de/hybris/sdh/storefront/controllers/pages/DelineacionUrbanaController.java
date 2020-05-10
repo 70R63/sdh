@@ -486,6 +486,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		String numObjeto = "";
 		String CDU = "";
 		String cauex = "";
+		String radicado = "";
 
 		final String tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R")
 				? new ControllerPseConstants().getRETENCIONDU()
@@ -518,6 +519,8 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 			gasolinaService.prepararValorcausalExcepDESCRIPCIONDUR(infoDelineacion);
 		}
 
+		radicado = infoDelineacion.getInput().getSelectedRadicado();
+
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
 		infoPreviaPSE.setNumBP(numBP);
@@ -531,6 +534,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
+		infoPreviaPSE.setRadicado(radicado);
 
 
 
@@ -759,6 +763,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		String dv = "";
 		String numObjeto = "";
 		String CDU = "";
+		String radicado = "";
 
 		//		tipoImpuesto = infoDelineacion.getInput().getTipoFlujo().equals("R") ? new ControllerPseConstants().getRETENCIONDU() : new ControllerPseConstants().getDELINEACION();
 		final String anticipo = infoDelineacion.getInput().getTipoFlujo().equals("R") ? "X" : "";
@@ -772,6 +777,8 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		numObjeto = gasolinaService.obtenerNumeroObjetoDU(infoDelineacion);
 		CDU = infoDelineacion.getInput().getSelectedCDU();
 
+		radicado = infoDelineacion.getInput().getSelectedRadicado();
+
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
 		infoPreviaPSE.setNumBP(numBP);
@@ -784,6 +791,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
+		infoPreviaPSE.setRadicado(radicado);
 
 
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
