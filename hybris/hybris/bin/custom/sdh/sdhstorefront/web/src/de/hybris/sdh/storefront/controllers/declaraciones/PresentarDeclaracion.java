@@ -758,9 +758,10 @@ public class PresentarDeclaracion extends AbstractSearchPageController
 			//			obligacionesFormuno.setHeaderdeli(obligacionesDeliResponse.getHeader().stream()
 			//					.filter(d -> StringUtils.isNotBlank(d.getCdu())).collect(Collectors.toList()));
 
-			predial_filtrado = predial_listaInicial.stream().filter(d -> StringUtils.isNotBlank(d.getCHIP()))
-					.collect(Collectors.toList());
-			predial_filtrado = predial_filtrado.stream().filter(d -> infoVista.getAnoGravable().equals(d.getAnioGravable()))
+			//			predial_filtrado = predial_listaInicial.stream().filter(d -> StringUtils.isNotBlank(d.getCHIP()))
+			//					.collect(Collectors.toList());
+
+			predial_filtrado = predial_listaInicial.stream().filter(d -> infoVista.getAnoGravable().equals(d.getAnioGravable()))
 					.collect(Collectors.toList());
 
 			infoVista.setPredial(predial_filtrado);
