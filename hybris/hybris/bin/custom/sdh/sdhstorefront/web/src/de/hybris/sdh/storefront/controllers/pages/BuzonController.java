@@ -6,9 +6,19 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.BuzonTributarioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.BuzonTributarioResponse;
+import de.hybris.sdh.core.services.SDHBuzonTributarioService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiBuzon;
@@ -53,6 +63,25 @@ public class BuzonController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "sdhBuzonTributarioService")
+	SDHBuzonTributarioService sdhBuzonTributarioService;
+
+	@Resource(name = "customerFacade")
+	CustomerFacade customerFacade;
+
+	@Resource(name = "configurationService")
+	private ConfigurationService configurationService;
+
+	@Resource(name = "userService")
+	UserService userService;
+
+	@Resource(name = "modelService")
+	ModelService modelService;
+
+	@Resource(name = "mediaService")
+	MediaService mediaService;
+
+
 	@RequestMapping(value =
 	{ "/contribuyentes/mibuzon_tributario", "/agenteRetenedor/mibuzon_tributario" }, method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -64,8 +93,37 @@ public class BuzonController extends AbstractPageController
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final MiBuzon miBuzon = new MiBuzon();
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		//	final ObjectMapper mapper = new ObjectMapper();
+		final BuzonTributarioRequest buzonrequest = new BuzonTributarioRequest();
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		//	buzonrequest.setNumBP(customerModel.getNumBP());
+		buzonrequest.setNumBP("12345");
+		buzonrequest.setVigencia("2020");
+		buzonrequest.setCheckLectura("x");
+
+		try
+		{
+
+
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final BuzonTributarioResponse buzonTributarioResponse = mapper.readValue(
+					sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioResponse.class);
+
+
+			model.addAttribute("miBuzon", miBuzon);
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+
+		}
+
+		//	mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
