@@ -966,6 +966,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		String numObjeto = "";
 		String CDU = "";
 		String cauex = "";
+		String radicado = "";
 
 
 		final String anticipo = infoImpuesto2Response.getRetencion().equals("X") ? "X" : "";
@@ -1023,6 +1024,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 			gasolinaService.prepararValorcausalExcepDESCRIPCIONDUR(infoDelineacion);
 		}
 
+		radicado = infoDelineacion.getInput().getSelectedRadicado();
 
 		infoPreviaPSE.setTipoImpuesto(tipoImpuesto);
 		infoPreviaPSE.setNumBP(numBP);
@@ -1035,6 +1037,7 @@ public class DelineacionUrbanaController extends SDHAbstractPageController
 		infoPreviaPSE.setNumObjeto(numObjeto);
 		infoPreviaPSE.setCDU(CDU);
 		infoPreviaPSE.setAnticipo(anticipo);
+		infoPreviaPSE.setRadicado(radicado);
 
 
 
