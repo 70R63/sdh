@@ -533,6 +533,10 @@ ACC.predial = {
 		DatosLiquidacion.AvaluoProrrateado = $("#AvaluoProrrateado").val();
 		DatosLiquidacion.AvaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
 		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
+		DatosLiquidacion.propiedadHorizontal = $("#propiedadHorizontal").val(); 
+		DatosLiquidacion.caracterizacionPredio = $("#caracterizacionPredio").val(); 
+		DatosLiquidacion.area_construida = $("#areaconstruccion").val(); 
+		DatosLiquidacion.area_terreno_catastro = $("#areaterreno").val(); 
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
 
 		var calcLiquidacionPrivada ={};
@@ -621,6 +625,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 				$("#TotalAPagar").val(result.liquidacionPrivada.totalAPagar);
 				$("#ValorAporteVoluntario").val(result.liquidacionPrivada.valorAporteVoluntario);
 				$("#TotalConPagoVoluntario").val(result.liquidacionPrivada.totalConPagoVoluntario);
+				$("#Tarifa_liquidacion").val(result.liquidacionPrivada.tarifaLiquidacion.trim());
 				
 				
 				if(liq.proyecto == "1"){
@@ -763,7 +768,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
 						}
 						
-						$("#basegrav").val(dataResponse.baseGravable);
+						$("#BaseGravable").val(dataResponse.baseGravable);
 						ACC.predial.visualizacionBasesDetalle(true);
 					}
 				},

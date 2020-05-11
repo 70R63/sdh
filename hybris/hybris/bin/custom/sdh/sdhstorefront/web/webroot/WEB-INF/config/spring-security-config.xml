@@ -37,6 +37,7 @@
 
 	<security:http pattern="/_ui/**" security="none" />
 	<security:http pattern="/escuelavirtual/**" security="none" />
+	<security:http pattern="/preguntasfrecuentes/**" security="none" />
 	<security:http pattern="/chat/customer/**" security="none" />
 
 	<!--Security config for checkout - it has its own login page-->

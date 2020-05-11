@@ -79,7 +79,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ; EventsLink                      ; EVENTS                             ; http://www.stateofrosebud.com/events ; ; ; newWindow;;
 
 ; ; EscuelaVirtualLink                      ; ESCUELA VIRTUAL                             ; "/escuelavirtual" ; ; ; newWindow;;
-; ; PreguntasFrecuentesLink                      ; PREGUNTAS FRECUENTES                             ; "#" ; ; ; newWindow;;
+; ; PreguntasFrecuentesLink                      ; PREGUNTAS FRECUENTES                             ; "/preguntasfrecuentes" ; ; ; newWindow;;
 
 
 
@@ -98,7 +98,8 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 ; ;ConsultasLink; CONSULTAS LINK    ; "#" ;;;;;
 ; ;ReportantesLink; REPORTANTES LINK    ; "#" ;;;;;
 ; ;ARMiRITLink; MI RIT LINK    ; "/agenteRetenedor/mirit" ;;;;;
-; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
+#; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/registroretenciones" ;;;;;
+; ;RetenedorRegistroLink; REGISTRO LINK	; "/retenedores/cargadocumentos" ;;;;;
 ; ;RetenedorDeclaracionesLink; DECLARACION LINK ; "/retenedores/declaracionesfirmar" ;;;;;
 
 ;;TerceroAutorizadoReportarInformacionLink;REPORTAR INFORMACION;"/terceros/reportar";;;;;
@@ -134,7 +135,7 @@ INSERT_UPDATE PSCMSLinkComponent; $contentCV[unique = true]; uid[unique = true];
 #->FIN dev-eduardo Agregar submenu TRAMITES 04/01/2019
 
 #->INI dev-eduardo Agregar submenu FACTURACION 04/01/2019
-; ; DescuentoUnoPorCientoLink    ; DESCUENTO UNO POR CIENTO            ; "/contribuyentes/descuentoUnoPorCiento" ;;;;;
+; ; DescuentoUnoPorCientoLink    ; DESCUENTO UNO POR CIENTO            ; "/contribuyentes/facturacion/descuentoUnoPorCiento" ;;;;;
 ; ; DescargaFacturaLink          ; DESCARGA FACTURA                    ; "/contribuyentes/descargafactura" ;;;;;
 ; ; ReexpedicionFacturaLink      ; REEXPEDICION FACTURA                ; "/contribuyentes/reexpedicionfactura" ;;;;;
 #->FIN dev-eduardo Agregar submenu FACTURACION 04/01/2019
@@ -2094,7 +2095,7 @@ $contentCatalog=sdhContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
 INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
-			 				;							;retenedoresRegistroPage 		;Retenedores Registro 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/registroretenciones
+			 				;							;retenedoresRegistroPage 		;Retenedores Registro 	;AccountPageTemplate:sdhContentCatalog:Staged	;/retenedores/cargadocumentos
 
 
 
@@ -2918,3 +2919,45 @@ INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name		
 INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
 				 					;							;contribuyentesRegistroPageComponent	;contribuyentesRegistroPage Component	;/WEB-INF/views/responsive/pages/layout/contribuyentesRegistroPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;contribuyentesRegistroPageComponent
 #->FIN dev-maria Agregar paginas para Contribuyentes Registro 11/03/2020
+#->INI dev-maria Agregar paginas de facturacion 
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;descuentoUnoPorCientoPage 		;Descuento uno por ciento	;AccountPageTemplate:sdhContentCatalog:Staged	;/contribuyentes/facturacion/descuentoUnoPorCiento
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='descuentoUnoPorCientoPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-descuentoUnoPorCientoPage 	;SideContent			;																	;SideContent-descuentoUnoPorCientoPage				;;;
+								;						;BodyContent-descuentoUnoPorCientoPage 	;BodyContent			;																	;BodyContent-descuentoUnoPorCientoPage				;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-descuentoUnoPorCientoPage 	;Side Content Slot for Descuento uno por ciento;true	;								;;;
+							;							;BodyContent-descuentoUnoPorCientoPage	;Body Content Slot for Descuento uno por ciento;true	;descuentoUnoPorCientoPageComponent		;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;descuentoUnoPorCientoPageComponent	;descuentoUnoPorCientoPage Component	;/WEB-INF/views/responsive/pages/layout/descuentoUnoPorCientoPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;descuentoUnoPorCientoPageComponent
+
+#->FIN dev-maria Agregar paginas de facturacion
+
+
+#->INI dev-maria Agregar paginas para Preguntas Frecuentes 05/050/2020
+$contentCatalog=sdhContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentPage	;$contentCV[unique=true]	;uid[unique=true]			;name					;masterTemplate(uid,$contentCV)		;label														;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+			 				;							;pregFrecuentesPage 		;Preguntas Frecuentes Page 	;AccountPageTemplate:sdhContentCatalog:Staged	;/preguntasfrecuentes
+
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]				;position[unique=true]		;page(uid,$contentCV)[unique=true][default='pregFrecuentesPage']	;contentSlot(uid,$contentCV)[unique=true]		;;;
+								;						;SideContent-pregFrecuentesPage 		;SideContent				;															;SideContent-pregFrecuentesPage						;;;
+								;						;BodyContent-pregFrecuentesPage		;BodyContent				;															;BodyContent-pregFrecuentesPage						;;;
+
+INSERT_UPDATE ContentSlot	;$contentCV[unique=true]	;uid[unique=true]					;name										;active	;cmsComponents(&componentRef)	;;;
+			 				;							;SideContent-pregFrecuentesPage 	;Side Content Slot for Preguntas Frecuentes Page 			;true	;								;;;
+							;							;BodyContent-pregFrecuentesPage	;Body Content Slot for Preguntas Frecuentes	Page	;true	;pregFrecuentesPageComponent			;;;
+
+INSERT_UPDATE JspIncludeComponent	;$contentCV[unique=true]	;uid[unique=true]				;name							;page																;actions(uid,$contentCV)							;&componentRef
+				 					;							;pregFrecuentesPageComponent	;pregFrecuentesPage Component	;/WEB-INF/views/responsive/pages/layout/pregFrecuentesPage.jsp		;ViewOrderAction:sdhContentCatalog:Staged	;pregFrecuentesPageComponent
+#->FIN dev-maria Agregar paginas para Preguntas Frecuentes 05/05/2020

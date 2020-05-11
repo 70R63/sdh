@@ -698,13 +698,13 @@ public class DefaultResourceBreadcrumbBuilder implements ResourceBreadcrumbBuild
 
 
 		//*->INI AGENTES ESTADO DE CARGAS-----------------------------------------------------------
-		if (resourceKey.equals("Estado de Cargas"))
+		if (resourceKey.equals("breadcrumb.retenedor.carga"))
 		{
 			subTreeMap.clear();
 			subTreeMap.put(1, new CustomBreadcrumb("Roles", "/"));
 			subTreeMap.put(2, new CustomBreadcrumb("Agente Retenedor", "/retenedores"));
-			subTreeMap.put(3, new CustomBreadcrumb("Registro de Retenciones", "/retenedores/registroretenciones"));
-			treeMap.put("Estado de Cargas", subTreeMap);
+			subTreeMap.put(3, new CustomBreadcrumb("Registro de Retenciones", "/retenedores/cargadocumentos"));
+			treeMap.put("breadcrumb.retenedor.carga", subTreeMap);
 		}
 		//*->FIN AGENTES ESTADO DE CARGAS-----------------------------------------------------------
 

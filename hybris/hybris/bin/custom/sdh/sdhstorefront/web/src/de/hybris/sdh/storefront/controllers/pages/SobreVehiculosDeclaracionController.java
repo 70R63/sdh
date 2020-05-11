@@ -623,8 +623,8 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		if (gasolinaService.ocurrioErrorValcont(detalleContribuyente) != true)
 		{
 			infoPreviaPSE.setAnoGravable(anoParaPSE);
-				infoPreviaPSE.setTipoDoc(currentUserData.getDocumentType());
-				infoPreviaPSE.setNumDoc(currentUserData.getDocumentNumber());
+			infoPreviaPSE.setTipoDoc(contribuyenteData.getDocumentType());
+			infoPreviaPSE.setNumDoc(contribuyenteData.getDocumentNumber());
 			infoPreviaPSE.setNumBP(numBP);
 			infoPreviaPSE.setClavePeriodo(gasolinaService.prepararPeriodoAnualPago(anoParaPSE));
 				infoPreviaPSE.setNumObjeto(gasolinaService.prepararNumObjetoVehicular(detalleContribuyente,
