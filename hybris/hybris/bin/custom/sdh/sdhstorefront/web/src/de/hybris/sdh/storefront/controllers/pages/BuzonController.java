@@ -24,6 +24,9 @@ import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.MiBuzon;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -98,9 +101,18 @@ public class BuzonController extends AbstractPageController
 		final BuzonTributarioRequest buzonrequest = new BuzonTributarioRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
-		//	buzonrequest.setNumBP(customerModel.getNumBP());
-		buzonrequest.setNumBP("12345");
-		buzonrequest.setVigencia("2020");
+		Calendar fecha = new GregorianCalendar();
+		int anio = fecha.get(Calendar.YEAR);
+		//	int mes = fecha.get(Calendar.MONTH);
+		//	int dia = fecha.get(Calendar.DAY_OF_MONTH);
+		//	int hora = fecha.get(Calendar.HOUR_OF_DAY);
+		//	int minuto = fecha.get(Calendar.MINUTE);
+		//	int segundo = fecha.get(Calendar.SECOND);
+
+		String anioact = Integer.toString(anio);
+
+		buzonrequest.setNumBP(customerModel.getNumBP());
+		buzonrequest.setVigencia(anioact);
 		buzonrequest.setCheckLectura("x");
 
 		try
@@ -113,6 +125,16 @@ public class BuzonController extends AbstractPageController
 			final BuzonTributarioResponse buzonTributarioResponse = mapper.readValue(
 					sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioResponse.class);
 
+			miBuzon.setIdRadicado(buzonTributarioResponse.getIdRadicado());
+			miBuzon.setAutoridadEmisora(buzonTributarioResponse.getAutoridadEmisora());
+
+			miBuzon.setTipoMensaje(buzonTributarioResponse.getTipoMensaje());
+			miBuzon.setFechaNotificacion(buzonTributarioResponse.getFechaNotificacion());
+			miBuzon.setCheckBoxLectura(buzonTributarioResponse.getCheckBoxLectura());
+			miBuzon.setDocumentos(buzonTributarioResponse.getDocumentos());
+			miBuzon.setErrores(buzonTributarioResponse.getErrores());
+
+
 
 			model.addAttribute("miBuzon", miBuzon);
 
@@ -121,6 +143,7 @@ public class BuzonController extends AbstractPageController
 		{
 			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
 			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+			model.addAttribute("miBuzon", miBuzon);
 
 		}
 
@@ -129,7 +152,7 @@ public class BuzonController extends AbstractPageController
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
-		model.addAttribute("miBuzon", miBuzon);
+
 
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 

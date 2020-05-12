@@ -103,30 +103,32 @@
 			ajustaPeriodo();
 		}
 
-		if (impuestoVal == "3") {
-			//Ingresamos un mensaje a mostrar
-			var mensaje = confirm("Si tienes más de 20 registros a declarar necesitas pasar a ayuda ICA ");
-			//Detectamos si el usuario acepto el mensaje
-			var currentUrl = window.location.href;
-			var targetUrl = "/contribuyentes/registroretenciones";
-			if (mensaje) {
-				
-				if(currentUrl.indexOf('#') != "-1"){
-					
-				}else{
+//SE comenta funcionalidad por petición de usuario.
+//Maria Torres 11/05/2020
+// 	if (impuestoVal == "3") {
+// 			//Ingresamos un mensaje a mostrar
+// 			var mensaje = confirm("Si tienes más de 20 registros a declarar necesitas pasar a ayuda ICA ");
+// 			//Detectamos si el usuario acepto el mensaje
+// 			var currentUrl = window.location.href;
+// 			var targetUrl = "/contribuyentes/registroretenciones";
+// 			if (mensaje) {
 
-				currentUrl_tmp = currentUrl.replace(
-						"/contribuyentes/presentar-declaracion", targetUrl);
-				}
+// 				if (currentUrl.indexOf('#') != "-1") {
 
-				window.location.href = currentUrl_tmp;
+// 				} else {
 
-			}
-			//Detectamos si el usuario denegó el mensaje
-			else {
+// 					currentUrl_tmp = currentUrl.replace(
+// 							"/contribuyentes/presentar-declaracion", targetUrl);
+// 				}
 
-			}
-		}
+// 				window.location.href = currentUrl_tmp;
+
+// 			}
+// 			//Detectamos si el usuario denegó el mensaje
+// 			else {
+
+// 			}
+// 		}
 	}
 
 	function ajustaPeriodo() {
