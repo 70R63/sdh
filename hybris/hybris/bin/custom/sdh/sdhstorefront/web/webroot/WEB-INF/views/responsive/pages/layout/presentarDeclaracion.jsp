@@ -14,7 +14,9 @@
 
 
 <impuestos:listaImpuestos />
-
+<div id="dialogMensajes" title="Predial">
+	<div id="dialogMensajesContent"></div>
+</div>
 
 <script type="text/javascript">
 	window.onload = function() {

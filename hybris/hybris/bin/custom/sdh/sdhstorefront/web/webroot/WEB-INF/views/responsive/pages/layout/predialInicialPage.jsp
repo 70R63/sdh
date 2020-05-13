@@ -26,6 +26,9 @@
 	<predialIni:predialInicialLiquidacion />
 	<predialIni:predialInicialMarcas />
 </div>
+<div id="dialogMensajes" title="Predial">
+	<div id="dialogMensajesContent"></div>
+</div>
 
 <script>
 	window.onload = function() {
