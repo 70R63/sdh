@@ -942,6 +942,10 @@ debugger;
             type : "GET",
             success : function(data) {
             	debugger;
+				ACC.predial.establecerMensajeInfoObjeto(ACC.predial.leerMensajesInfoObjeto(data));
+            	if(ACC.predial.mostrarMensajeInfoObjeto()){
+            		return false;
+            	}
             	//var currentUrl_tmp = "";
             	//var newurl = "";
         	    //var currentUrl = window.location.href;

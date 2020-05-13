@@ -2299,6 +2299,7 @@ public class PredialUnificadoController extends SDHAbstractPageController
 
 			final CustomerData customerData = customerFacade.getCurrentCustomer();
 
+			prediaFormcaldec.setTblErrores(detallePredialResponse.getTblErrores());
 			prediaFormcaldec.setTipDoc(customerData.getDocumentType());
 			prediaFormcaldec.setNumDoc(customerData.getDocumentNumber());
 			prediaFormcaldec.setCompleName(customerData.getCompleteName());

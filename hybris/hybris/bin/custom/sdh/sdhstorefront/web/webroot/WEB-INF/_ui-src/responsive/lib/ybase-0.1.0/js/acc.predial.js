@@ -1,4 +1,5 @@
 ACC.predial = {
+	flagMsjInfoObjeto : {},
 
 	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura", "bindDialogoMensajes"],
 
@@ -103,6 +104,7 @@ ACC.predial = {
 					data : data,
 					type : "GET",
 					success : function(result) {
+						ACC.predial.establecerMensajeInfoObjeto(ACC.predial.leerMensajesInfoObjeto(result));
 						console.log(result);
 						$(".chip").val(result.chip);
 						$("#opcUsoPredialUni").val(result.opcionuso);
@@ -818,6 +820,40 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
     			}
     	    } 
     	});
+	 },
+	 
+	 
+	 leerMensajesInfoObjeto : function(result){
+		var mensaje = "";
+		
+		$.each(result.tblErrores, function (index,value){
+			if(value.descripcionMensajes != null && value.descripcionMensajes != "" ){
+				mensaje += value.descripcionMensajes;
+			}
+		});
+
+		 return mensaje;
+	 },
+	 
+	 
+	 establecerMensajeInfoObjeto :  function(mensaje){
+		if(mensaje.trim() != ""){
+			$("#dialogMensajesContent").html("");
+    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
+    		ACC.predial.flagMsjInfoObjeto = "X";
+		}
+
+	 },
+	 
+	 
+	 mostrarMensajeInfoObjeto :  function(){
+		var flagMensaje = false;
+		if(ACC.predial.flagMsjInfoObjeto == "X"){
+        	$("#dialogMensajes" ).dialog( "open" );
+        	flagMensaje = true;
+		}
+		
+		return flagMensaje;
 	 }
 	 
 };
