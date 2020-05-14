@@ -5,6 +5,8 @@ package de.hybris.sdh.core.pojos.responses;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 
 /**
  * @author hybris
@@ -36,6 +38,7 @@ public class BuzonTributarioResponse
 	 * @param idRadicado
 	 *           the idRadicado to set
 	 */
+	@JsonProperty("id_radicado")
 	public void setIdRadicado(final String idRadicado)
 	{
 		this.idRadicado = idRadicado;
@@ -121,6 +124,7 @@ public class BuzonTributarioResponse
 	 * @param checkBoxLectura
 	 *           the checkBoxLectura to set
 	 */
+	@JsonProperty("checkLectura")
 	public void setCheckBoxLectura(final String checkBoxLectura)
 	{
 		this.checkBoxLectura = checkBoxLectura;
@@ -162,7 +166,7 @@ public class BuzonTributarioResponse
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

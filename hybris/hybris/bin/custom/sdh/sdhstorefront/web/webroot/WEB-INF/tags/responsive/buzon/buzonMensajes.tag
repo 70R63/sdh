@@ -52,9 +52,11 @@
 										style="text-transform: capitalize !important" for="">
 											<spring:theme code="mibuzon.mensajes.fecnoti" />
 									</label></th>
-									<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.notificaciones.anexos" /></label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.notificaciones.anexos" />
+									</label></th>
 									<th style="text-align: center"><label
 										class="control-label"
 										style="text-transform: capitalize !important" for="">
@@ -63,38 +65,72 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="identifi"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="autoridad"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="asunto"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="fechanotificacion"></c:out>"
-										maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-											<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value=""></c:out>"
-										maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><img
-										src="${themeResourcePath}/images/papeleranuevos.png"
-										style="width: 30px"></img></td>
-								</tr>
+								<c:if test="${miBuzon.tipoMensaje == '2'}">
+									<c:forEach items="${miBuzon.documentos}" var="eachDoc">
+										<tr>
+											<td><c:out value="${miBuzon.idRadicado}" /></td>
+											<td><c:out value="${miBuzon.autoridadEmisora}" /></td>
+											<td><c:out value="${eachDoc.nombredocumento}" /></td>
+											<td><c:out value="${miBuzon.fechaNotificacion}" /></td>
+											<td><label class="control-label download"
+												style="text-transform: capitalize !important" for=""
+												data-pdfimprimir="${eachDoc.pdf}" id="download"> <span
+													class="glyphicon glyphicon-download-alt"></span></label></td>
+											<td><img
+												src="${themeResourcePath}/images/papeleranuevos.png"
+												style="width: 30px"></img></td>
+										</tr>
+									</c:forEach>
+								</c:if>
+								<!-- 								<tr> -->
+								<%-- 									<td><c:out value="perro1" /></td> --%>
+								<%-- 									<td><c:out value="cacahuate" /></td> --%>
+								<%-- 									<td><c:out value="miramar" /></td> --%>
+								<%-- 									<td><c:out value="osoapalstado" /></td> --%>
+								<!-- 									<td><label class="control-label download" -->
+								<!-- 										style="text-transform: capitalize !important" for="" -->
+								<%-- 										data-pdfimprimir="${eachDoc.pdf}" data-idRadicado="mil" --%>
+								<!-- 										data-autoridadEmisora="perro2" -->
+								<!-- 										data-fechaNotificacion="mensaje" data-asunto="cacahuate3" -->
+								<!-- 										data-checkBoxLectura="cacahuate4" data-documentos="cacahuate5" -->
+								<!-- 										id="download"> <span -->
+								<!-- 											class="glyphicon glyphicon-download-alt"></span></label></td> -->
+								<!-- 									<td><img -->
+								<%-- 										src="${themeResourcePath}/images/papeleranuevos.png" --%>
+								<!-- 										style="width: 30px"></img></td> -->
+								<!-- 								</tr> -->
+								<!-- 								<tr> -->
+								<%-- 									<td><c:out value="perro2" /></td> --%>
+								<%-- 									<td><c:out value="cacahuate" /></td> --%>
+								<%-- 									<td><c:out value="miramar" /></td> --%>
+								<%-- 									<td><c:out value="osoapalstado" /></td> --%>
+								<!-- 									<td><label class="control-label download" -->
+								<!-- 										style="text-transform: capitalize !important" for="" -->
+								<%-- 										data-pdfimprimir="${eachDoc.pdf}" id="download"> <span --%>
+								<!-- 											class="glyphicon glyphicon-download-alt"></span></label></td> -->
+								<!-- 									<td><img -->
+								<%-- 										src="${themeResourcePath}/images/papeleranuevos.png" --%>
+								<!-- 										style="width: 30px"></img></td> -->
+								<!-- 								</tr> -->
+								<!-- 								<tr> -->
+								<%-- 									<td><c:out value="perro3" /></td> --%>
+								<%-- 									<td><c:out value="cacahuate" /></td> --%>
+								<%-- 									<td><c:out value="miramar" /></td> --%>
+								<%-- 									<td><c:out value="osoapalstado" /></td> --%>
+								<!-- 									<td><label class="control-label download" -->
+								<!-- 										style="text-transform: capitalize !important" for="" -->
+								<%-- 										data-pdfimprimir="${eachDoc.pdf}" id="download"> <span --%>
+								<!-- 											class="glyphicon glyphicon-download-alt"></span></label></td> -->
+								<!-- 									<td><img -->
+								<%-- 										src="${themeResourcePath}/images/papeleranuevos.png" --%>
+								<!-- 										style="width: 30px"></img></td> -->
+								<!-- 								</tr> -->
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
+
 
 
 			<div class="row">
@@ -108,7 +144,8 @@
 				<div class="row">
 
 					<div class="col-md-7 col-md-offset-3 center">
-						<table class="table table-responsive" id="tabPaginacion1">
+						<table class="table table-responsive tabPaginacion1"
+							id="tabPaginacion1">
 							<thead>
 								<tr>
 									<th style="text-align: center"><label
@@ -130,9 +167,11 @@
 										style="text-transform: capitalize !important" for="">
 											<spring:theme code="mibuzon.mensajes.fecnoti" />
 									</label></th>
-												<th style="text-align: center"><label class="control-label"
-									style="text-transform: capitalize !important" for=""> <spring:theme
-											code="mibuzon.notificaciones.anexos" /></label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.notificaciones.anexos" />
+									</label></th>
 									<th style="text-align: center"><label
 										class="control-label"
 										style="text-transform: capitalize !important" for="">
@@ -142,10 +181,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="identifi"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><c:out value="" /></td>
 									<td><input id="" name="" class="inputtextnew"
 										aria-required="true" type="text" readonly="readonly"
 										value="<c:out value="autoridad"></c:out>" maxlength="240"
@@ -159,11 +195,11 @@
 										value="<c:out value="fechanotificacion"></c:out>"
 										maxlength="240"
 										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-											<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value=""></c:out>"
-										maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+									<td><label class="control-label download2"
+										style="text-transform: capitalize !important" for=""
+										id="download2"> <span
+											class="glyphicon glyphicon-download-alt"></span></label></td>
+
 									<td><img
 										src="${themeResourcePath}/images/papeleraleidos.png"
 										style="width: 20px"></img></td>
@@ -175,4 +211,7 @@
 			</div>
 		</div>
 	</sf:form>
+	<div>
+		<a id='dwnldLnk' download='nombrecocumento.pdf' style="display: none;" />
+	</div>
 </div>

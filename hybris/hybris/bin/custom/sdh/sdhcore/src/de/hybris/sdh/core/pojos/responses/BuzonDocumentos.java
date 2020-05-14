@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
+
 /**
  * @author hybris
  *
@@ -24,6 +27,7 @@ public class BuzonDocumentos
 	 * @param nombredocumento
 	 *           the nombredocumento to set
 	 */
+	@JsonProperty("nombreDocumento")
 	public void setNombredocumento(final String nombredocumento)
 	{
 		this.nombredocumento = nombredocumento;

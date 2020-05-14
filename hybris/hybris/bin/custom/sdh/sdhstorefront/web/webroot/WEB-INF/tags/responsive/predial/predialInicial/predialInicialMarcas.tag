@@ -85,6 +85,9 @@
 
 <script type="text/javascript">
     function validateForm() {
+    	if(ACC.predial.mostrarMensajeInfoObjeto()){
+    		return false;
+    	}
         var myform = document.getElementById("myForm");
         var opcUso = document.getElementById("opcUsoPredialUni").value;
         opcUso = opcUso.substring(0, 2);
