@@ -449,9 +449,11 @@ public class TramitesCrearPageController extends AbstractPageController
 				bp = customerModel.getNumBP();
 				canal = "03";
 				mensaje = tramitesCreacionCasoInfo.getMensaje();
-				rolAccion = elementoSeleccionado.getRolAccion().getRolAccion();
-				rolIndicador = elementoSeleccionado.getRolAccion().getRolIndicador();
-
+				if (elementoSeleccionado.getRolAccion() != null)
+				{
+					rolAccion = elementoSeleccionado.getRolAccion().getRolAccion();
+					rolIndicador = elementoSeleccionado.getRolAccion().getRolIndicador();
+				}
 
 				if (elementoSeleccionado.getProcessID() != null && elementoSeleccionado.getCategorizacion() != null)
 				{
