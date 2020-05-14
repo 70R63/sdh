@@ -1,6 +1,6 @@
 ACC.mibuzon = {
 
-	_autoload : [ "bindDescargar","bindDescargarDos","bidPapeleraNuevos"],
+	_autoload : [ "bindDescargar"],
 
 	
 	bindDescargar : function() {
