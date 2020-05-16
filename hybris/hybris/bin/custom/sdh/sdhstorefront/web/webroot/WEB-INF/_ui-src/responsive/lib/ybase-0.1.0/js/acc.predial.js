@@ -616,7 +616,7 @@ var checkAporteRadio = $("input[name='optradio']:checked"). val();
         			var liq = result.liquidacionPrivada;
     			$("#ValorImpuestoACargo").val(liq.valorImpuestoACargo);
 				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.aporteVoluntario);
-				$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoIncrementoDiferencial);
+				$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoPorIncrementoDiferencias);
 				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorImpuestoAjustadoActual);
 				$("#Sancion").val(result.liquidacionPrivada.sancion);
 				$("#TotalSaldoACargo").val(result.liquidacionPrivada.totalSaldoACargo);
