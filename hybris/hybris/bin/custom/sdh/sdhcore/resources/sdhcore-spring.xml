@@ -721,6 +721,21 @@
 	</bean>
 
 
+	<alias alias="sdhFAQsCategoryDao" name="defaultSdhFAQsCategoryDao"/>
+	<bean id="defaultSdhFAQsCategoryDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhFAQsCategoryDao">
+		<constructor-arg value="SdhFAQsCategory"/>
+	</bean>
+
+	<alias alias="sdhFAQsDao" name="defaultSdhFAQsDao"/>
+	<bean id="defaultSdhFAQsDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhFAQsDao">
+		<constructor-arg value="SdhFAQs"/>
+	</bean>
+
+	<alias alias="sdhFAQsService" name="defaultSDHFAQsService"/>
+	<bean id="defaultSDHFAQsService" class="de.hybris.sdh.core.services.impl.DefaultSDHFAQsService">
+		<property name="sdhFAQsDao" ref="sdhFAQsDao"/>
+		<property name="sdhFAQsCategoryDao" ref="sdhFAQsCategoryDao"/>
+	</bean>
 
 	<alias alias="sdhTaxTypeService" name="defaultSDHTaxTypeService"/>
 	<bean name="defaultSDHTaxTypeService" class="de.hybris.sdh.core.services.impl.DefaultSDHTaxTypeService" />

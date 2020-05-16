@@ -17,8 +17,6 @@
 		</div>
 	</div>
 
-
-
 	<div class="row">
 		<div class="col-md-12 col-md-offset-5 headline">
 			<h2>
@@ -31,64 +29,45 @@
 		<div class="col-md-3 col-xs-12 mb-20 no-marginleft Catego"
 			id="categoria">
 			<span class="paso--tres pasos color-sr3 rajdhani">1</span>
-			<h2 class="titulo-caja--ser-rel color-sr3 paso3">Categoría</h2>
-			<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Selecciona la categoría.</p>
+			<h2 class="titulo-caja--ser-rel color-sr3 paso3">Categorï¿½a</h2>
+			<p class="pasoClase3 metrophobic" style="margin-bottom: 0px">Selecciona la categorï¿½a.</p>
 			<div class="caja--ser-rel color-sr3">
-				<select id="categoriaBuscar" class="new_alto form-control "
-					name="categoria">
+				<select id="categoriaBuscar" class="new_alto form-control " name="categoria" onchange="showquestion(this)">
 					<option value="00">Seleccionar</option>
-					<option value="01">Impuesto Predial</option>
-					<option value="02">Dudores morosos</option>
-					<option value="03">Vehicular</option>
-					<option value="04">Medios mágneticos</option>
+                    <c:forEach items="${sdhFAQsCategories}" var="category">
+                        <option value="${category.code}"><c:out value="${category.description}"/></option>
+                    </c:forEach>
 				</select> <br>
 				<button class="btn btn-primary" onclick="showquestion()">Buscar</button>
 			</div>
 		</div>
 
 		<div class="col-md-7 col-xs-12 mb-20 no-marginleft" id="PregPredial"
-			style="margin-left: 50px; display: none; margin-top: 50px">
-			<div class="preguntas">
-				<hr>
-				<div class="preguntas_body">
-					<p class="pregunta">
-						<span><spring:theme code="¿Cuándo puedo pagar mi predial?" /></span>
-					</p>
-					<p class="respuesta">El predial se puede pagar cada inicio de
-						año</p>
-
-					<!-- 					<div class="botones text-right"> -->
-					<!-- 						<a href="#">Responder</a> <a href="#">Editar</a> <a href="#">Borrar</a> -->
-					<!-- 					</div> -->
-
-				</div>
-				<hr>
-				<div class="preguntas_body">
-					<p class="pregunta">
-						<span><spring:theme code="¿Cuándo puedo pagar mi predial?" /></span>
-					</p>
-					<p class="respuesta">El predial se puede pagar cada inicio de
-						año</p>
-
-					<!-- 					<div class="botones text-right"> -->
-					<!-- 						<a href="#">Responder</a> <a href="#">Editar</a> <a href="#">Borrar</a> -->
-					<!-- 					</div> -->
-
-				</div>
+			style="margin-left: 50px; margin-top: 50px">
+			<div id="questionsDiv" class="preguntas">
 			</div>
 		</div>
 	</div>
 
 	<script>
-		function showquestion() {
-			debugger;
-			var cate = document.getElementById('categoriaBuscar').value;
-			var pred = document.getElementById('PregPredial');
+		function showquestion(selection) {
+            var categoryId = selection[selection.selectedIndex].value;
+            document.getElementById("questionsDiv").innerHTML = "";
+			$.ajax({
+                url: "faqs/getByCategory?code="+categoryId,
+                type: 'GET',
+                cache: false,
+                success: function (faqs){
+                    $.each(faqs, function(index, faq) {printFaq(faq); });
+                },error: function (error){
+                    console.log("Error");
+                }
+            });
+		}
 
-			if (cate == "01") {
-				pred.style.display = 'block';
-			} else {
-				pred.style.display = 'none';
-			}
+		function printFaq(faq){
+		    document.getElementById("questionsDiv").innerHTML +=
+		        '<hr><div class=\"preguntas_body\"><p class=\"pregunta\"><span>' +
+		        faq.question + '</span></p>' + faq.answer + '</div><hr>';
 		}
 	</script>

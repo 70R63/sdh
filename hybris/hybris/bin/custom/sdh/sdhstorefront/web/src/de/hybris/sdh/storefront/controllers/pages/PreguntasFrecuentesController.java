@@ -6,14 +6,22 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.sdh.core.constants.ControllerPseConstants;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.model.SdhFAQsCategoryModel;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.core.services.SDHFAQsService;
+import de.hybris.sdh.facades.SDHFAQsFacade;
+import de.hybris.sdh.facades.faqs.data.SDHFaqCategoryData;
+import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
 import de.hybris.sdh.storefront.forms.PreguntasFrecuentesForm;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +31,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,8 +49,6 @@ public class PreguntasFrecuentesController extends AbstractPageController
 	private static final String BREADCRUMBS_ATTR = "breadcrumbs";
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile.preguntasfre";
 
-
-
 	// CMS Pages
 	private static final String PREGUNTAS_CMS_PAGE = "pregFrecuentesPage";
 
@@ -56,9 +63,16 @@ public class PreguntasFrecuentesController extends AbstractPageController
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
 
+	@Resource(name = "sdhFAQsFacade")
+	SDHFAQsFacade sdhFAQsFacade;
+
+	@ModelAttribute("sdhFAQsCategories")
+	public List<SDHFaqCategoryData> getFaqsCategories(){
+		return sdhFAQsFacade.getAllCategories();
+	}
+
 	@RequestMapping(value =
 	{ "/preguntasfrecuentes" }, method = RequestMethod.GET)
-
 	public String preguntasinicial(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		System.out.println("---------------- Hola entro al GET preguntas frecuentes --------------------------");

@@ -203,6 +203,8 @@
 			<value>/infoObject/**</value>
 			<value>/trmService</value>
 			<value>/trmService/**</value>
+			<value>/faqs</value>
+			<value>/faqs/**</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />
