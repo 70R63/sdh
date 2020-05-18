@@ -71,7 +71,7 @@
 											</button>
 										</c:if>
 										--%>	
-										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';msgARImpresion();">
+										<button class="btn btn-secondary btn-lg" type="button" onclick="msgARImpresion(); window.location.href ='<c:url value='/' />';">
 											<spring:theme code="impuestos.Pago.PSE.continuar"/>
 										</button>
 									</div>
