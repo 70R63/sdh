@@ -58,20 +58,9 @@
 							<ycommerce:testId code="login_forgotPasswordSubmit_button">
 								<c:if test = "${disabled eq true}">
 									<div id="continuar">										
-										<c:if test = "${representado eq true}">										
-											<button class="btn btn-secondary btn-lg pagoARResponses" type="button" onclick="msgARImpresion()" >
-												<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
-											</button>
-										</c:if>
-										
-										<c:if test = "${representado eq false}">										
-											<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/contribuyentes/consultas/certipagos' />';">
-												<spring:theme code="impuestos.Pago.PSE.imprimirComprobante"/>
-											</button>
-										</c:if>	
-										<button class="btn btn-secondary btn-lg" type="button" onclick="window.location.href ='<c:url value='/' />';">
-											<spring:theme code="impuestos.Pago.PSE.continuar"/>
-										</button>
+										<button class="btn btn-secondary btn-lg" type="button" onclick="msgImpresion('<c:url value='/' />')">
+												<spring:theme code="impuestos.Pago.PSE.continuar"/>
+									    </button>
 									</div>
 								</c:if>
 							</ycommerce:testId>
@@ -83,8 +72,9 @@
 </div>
 
 <script>
-	function msgARImpresion(){		
-		alert("La impresion de certificado se realiza con usuario del contribuyente o usuario NIT");
+	function msgImpresion(url){
+		alert("La impresion de certificado se realiza con usuario del contribuyente o usuario NIT usando el menu CONSULTAS opcion CERTIFICACION PAGO");
+		window.location = url;		
 	}
 
 	function downloadPDF(pdf) {

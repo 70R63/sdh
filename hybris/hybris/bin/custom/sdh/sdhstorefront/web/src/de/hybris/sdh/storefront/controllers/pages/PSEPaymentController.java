@@ -392,6 +392,17 @@ public class PSEPaymentController extends AbstractPageController
 
 		model.addAttribute("flagSuccessView", flagSuccessView);
 
+
+		final String bpRepresentado = sessionService.getCurrentSession().getAttribute("representado");
+		if (bpRepresentado != null)
+		{
+			model.addAttribute("representado", "true");
+		}
+		else
+		{
+			model.addAttribute("representado", "false");
+		}
+
 		return getViewForPage(model);
 	}
 
