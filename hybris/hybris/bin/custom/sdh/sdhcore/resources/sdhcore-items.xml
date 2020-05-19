@@ -868,10 +868,26 @@
 						<modifiers optional="true" />
 						<persistence type="property"></persistence>
 					</attribute>
-					<attribute qualifier="answer" type="java.lang.String" >
+					<attribute qualifier="answer" type="java.lang.String">
 						<description>FAQ Answer</description>
-						<modifiers optional="true" />
-						<persistence type="property"></persistence>
+						<modifiers read="true" write="true" search="false" optional="true"/>
+						<persistence type="property">
+							<columntype database="sap">
+								<value>nvarchar(5000)</value>
+							</columntype>
+							<columntype database="oracle">
+								<value>varchar2(4000)</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>text</value>
+							</columntype>
+							<columntype database="sqlserver">
+								<value>nvarchar(max)</value>
+							</columntype>
+							<columntype database="hsqldb">
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
 					</attribute>
 				</attributes>
 			</itemtype>
