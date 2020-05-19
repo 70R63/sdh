@@ -18,6 +18,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.BuzonTributarioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.BuzonErrores;
 import de.hybris.sdh.core.pojos.responses.BuzonTributarioResponse;
 import de.hybris.sdh.core.services.SDHBuzonTributarioService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
@@ -125,14 +126,26 @@ public class BuzonController extends AbstractPageController
 			final BuzonTributarioResponse buzonTributarioResponse = mapper.readValue(
 					sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioResponse.class);
 
-			miBuzon.setIdRadicado(buzonTributarioResponse.getIdRadicado());
-			miBuzon.setAutoridadEmisora(buzonTributarioResponse.getAutoridadEmisora());
+			//			miBuzon.setIdRadicado(buzonTributarioResponse.getIdRadicado());
+			//			miBuzon.setAutoridadEmisora(buzonTributarioResponse.getAutoridadEmisora());
+			//
+			//			miBuzon.setTipoMensaje(buzonTributarioResponse.getTipoMensaje());
+			//			miBuzon.setFechaNotificacion(buzonTributarioResponse.getFechaNotificacion());
+			//			miBuzon.setCheckBoxLectura(buzonTributarioResponse.getCheckBoxLectura());
+			//			miBuzon.setDocumentos(buzonTributarioResponse.getDocumentos());
+			//			miBuzon.setErrores(buzonTributarioResponse.getErrores());
 
-			miBuzon.setTipoMensaje(buzonTributarioResponse.getTipoMensaje());
-			miBuzon.setFechaNotificacion(buzonTributarioResponse.getFechaNotificacion());
-			miBuzon.setCheckBoxLectura(buzonTributarioResponse.getCheckBoxLectura());
-			miBuzon.setDocumentos(buzonTributarioResponse.getDocumentos());
-			miBuzon.setErrores(buzonTributarioResponse.getErrores());
+			miBuzon.setMensajes(buzonTributarioResponse.getMensajes());
+
+			BuzonErrores errores = new BuzonErrores();
+
+			errores = buzonTributarioResponse.getMensajes().getErrores();
+
+			if (errores != null)
+			{
+
+				model.addAttribute("errores", errores);
+			}
 
 
 

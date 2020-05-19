@@ -5,6 +5,7 @@ package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.BuzonDocumentos;
 import de.hybris.sdh.core.pojos.responses.BuzonErrores;
+import de.hybris.sdh.core.pojos.responses.BuzonMensajes;
 
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class MiBuzon
 	private String contMsj;
 	private String contNot;
 	private String pdfimprimir;
+
+	private BuzonMensajes mensajes;
 
 
 
@@ -382,6 +385,23 @@ public class MiBuzon
 	public void setContNot(final String contNot)
 	{
 		this.contNot = contNot;
+	}
+
+	/**
+	 * @return the mensajes
+	 */
+	public BuzonMensajes getMensajes()
+	{
+		return mensajes;
+	}
+
+	/**
+	 * @param mensajes
+	 *           the mensajes to set
+	 */
+	public void setMensajes(final BuzonMensajes mensajes)
+	{
+		this.mensajes = mensajes;
 	}
 
 	//*->FIN dev-eduardo ajuste de menu impuestos
