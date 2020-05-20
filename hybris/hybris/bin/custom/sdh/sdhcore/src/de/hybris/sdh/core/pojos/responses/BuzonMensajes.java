@@ -3,9 +3,6 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
-
 /**
  * @author hybris
  *
@@ -15,33 +12,29 @@ public class BuzonMensajes
 	//	@JsonProperty("Proyecto")
 
 
-	private String idRadicado;
-	private String autoridadEmisora;
-	private String tipoMensaje;
-	private String fechaNotificacion;
-	private String asunto;
-	private String checkBoxLectura;
-	//private List<BuzonDocumentos> documentos;
-	private BuzonErrores errores;
-
+	public String id_radicado;
+	public String autoridadEmisora;
+	public String tipoMensaje;
+	public String fechaNotificacion;
+	public String asunto;
+	public String checkLectura;
+	public BuzonErrores errores;
 	/**
-	 * @return the idRadicado
+	 * @return the id_radicado
 	 */
-	public String getIdRadicado()
+	public String getId_radicado()
 	{
-		return idRadicado;
+		return id_radicado;
 	}
-
+	
 	/**
-	 * @param idRadicado
-	 *           the idRadicado to set
+	 * @param id_radicado
+	 *           the id_radicado to set
 	 */
-	@JsonProperty("id_radicado")
-	public void setIdRadicado(final String idRadicado)
+	public void setId_radicado(final String id_radicado)
 	{
-		this.idRadicado = idRadicado;
+		this.id_radicado = id_radicado;
 	}
-
 	/**
 	 * @return the autoridadEmisora
 	 */
@@ -49,7 +42,7 @@ public class BuzonMensajes
 	{
 		return autoridadEmisora;
 	}
-
+	
 	/**
 	 * @param autoridadEmisora
 	 *           the autoridadEmisora to set
@@ -58,7 +51,6 @@ public class BuzonMensajes
 	{
 		this.autoridadEmisora = autoridadEmisora;
 	}
-
 	/**
 	 * @return the tipoMensaje
 	 */
@@ -66,7 +58,7 @@ public class BuzonMensajes
 	{
 		return tipoMensaje;
 	}
-
+	
 	/**
 	 * @param tipoMensaje
 	 *           the tipoMensaje to set
@@ -75,7 +67,6 @@ public class BuzonMensajes
 	{
 		this.tipoMensaje = tipoMensaje;
 	}
-
 	/**
 	 * @return the fechaNotificacion
 	 */
@@ -83,17 +74,15 @@ public class BuzonMensajes
 	{
 		return fechaNotificacion;
 	}
-
+	
 	/**
 	 * @param fechaNotificacion
 	 *           the fechaNotificacion to set
 	 */
-	@JsonProperty("fechaNotificacion")
 	public void setFechaNotificacion(final String fechaNotificacion)
 	{
 		this.fechaNotificacion = fechaNotificacion;
 	}
-
 	/**
 	 * @return the asunto
 	 */
@@ -101,7 +90,7 @@ public class BuzonMensajes
 	{
 		return asunto;
 	}
-
+	
 	/**
 	 * @param asunto
 	 *           the asunto to set
@@ -110,26 +99,22 @@ public class BuzonMensajes
 	{
 		this.asunto = asunto;
 	}
-
 	/**
-	 * @return the checkBoxLectura
+	 * @return the checkLectura
 	 */
-	public String getCheckBoxLectura()
+	public String getCheckLectura()
 	{
-		return checkBoxLectura;
+		return checkLectura;
 	}
-
+	
 	/**
-	 * @param checkBoxLectura
-	 *           the checkBoxLectura to set
+	 * @param checkLectura
+	 *           the checkLectura to set
 	 */
-	@JsonProperty("checkLectura")
-
-	public void setCheckBoxLectura(final String checkBoxLectura)
+	public void setCheckLectura(final String checkLectura)
 	{
-		this.checkBoxLectura = checkBoxLectura;
+		this.checkLectura = checkLectura;
 	}
-
 	/**
 	 * @return the errores
 	 */
@@ -137,7 +122,7 @@ public class BuzonMensajes
 	{
 		return errores;
 	}
-
+	
 	/**
 	 * @param errores
 	 *           the errores to set
@@ -146,7 +131,6 @@ public class BuzonMensajes
 	{
 		this.errores = errores;
 	}
-
 
 
 }

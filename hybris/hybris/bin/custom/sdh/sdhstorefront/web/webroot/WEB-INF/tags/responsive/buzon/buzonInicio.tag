@@ -10,7 +10,18 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <div class="container_new_page">
+
+
 	<div class="row">
+	<c:if test="${not empty errores}">
+<%-- 			<c:forEach items="${errores}" var="msg"> --%>
+				<div class="alert alert-danger alert-dismissable getAccAlert">
+					<button class="close closeAccAlert" aria-hidden="true" data-dismiss="alert" type="button">&times;</button>
+					<spring:theme code="${errores.txt_msj}" arguments="${errores.txt_msj}" htmlEscape="false" var="errorMessages"/>
+					${ycommerce:sanitizeHTML(errorMessages)}
+				</div>
+<%-- 			</c:forEach> --%>
+		</c:if>
 		<div class="col-md-12">
 			<table class="table">
 				<thead>

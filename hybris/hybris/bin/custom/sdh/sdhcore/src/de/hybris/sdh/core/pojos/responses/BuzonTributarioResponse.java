@@ -10,7 +10,7 @@ package de.hybris.sdh.core.pojos.responses;
 public class BuzonTributarioResponse
 {
 	//	@JsonProperty("Proyecto")
-	private BuzonMensajes mensajes;
+	public BuzonMensajes mensajes;
 
 	/**
 	 * @return the mensajes
@@ -29,16 +29,6 @@ public class BuzonTributarioResponse
 		this.mensajes = mensajes;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "BuzonTributarioResponse [mensajes=" + mensajes + "]";
-	}
 
 
 

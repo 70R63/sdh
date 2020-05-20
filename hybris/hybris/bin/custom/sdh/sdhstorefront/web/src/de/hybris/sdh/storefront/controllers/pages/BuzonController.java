@@ -126,6 +126,7 @@ public class BuzonController extends AbstractPageController
 			final BuzonTributarioResponse buzonTributarioResponse = mapper.readValue(
 					sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioResponse.class);
 
+
 			//			miBuzon.setIdRadicado(buzonTributarioResponse.getIdRadicado());
 			//			miBuzon.setAutoridadEmisora(buzonTributarioResponse.getAutoridadEmisora());
 			//
@@ -135,11 +136,13 @@ public class BuzonController extends AbstractPageController
 			//			miBuzon.setDocumentos(buzonTributarioResponse.getDocumentos());
 			//			miBuzon.setErrores(buzonTributarioResponse.getErrores());
 
-			miBuzon.setMensajes(buzonTributarioResponse.getMensajes());
+			//			miBuzon.setMensajes(buzonTributarioResponse.getMensajes());
 
 			BuzonErrores errores = new BuzonErrores();
 
 			errores = buzonTributarioResponse.getMensajes().getErrores();
+
+			//			errores = buzonTributarioResponse.getMensajes().getErrores();
 
 			if (errores != null)
 			{
