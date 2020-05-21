@@ -91,7 +91,12 @@
 								<td><label class="control-label"
 									style="text-transform: capitalize !important"><spring:theme
 											code="mibuzon.inicial.mns" /></label></td>
-								<td><button class="btn mb-2" onclick="myFunction(2)">Mensajes<span class="badge badge-dark">${mibuzon.contMsj}</span></button>
+								<td><input id="notificaciones" name="notificaciones"
+									class="inputtextnew" aria-required="true"
+									readonly="readonly"
+									value="<c:out value="${miBuzon.contMsj}"></c:out>" maxlength="240"
+									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"
+									onclick="myFunction(1)">
 									</td>
 							</tr>
 						</tbody>
