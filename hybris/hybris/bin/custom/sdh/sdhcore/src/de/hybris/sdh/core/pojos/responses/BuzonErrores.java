@@ -9,9 +9,9 @@ package de.hybris.sdh.core.pojos.responses;
  */
 public class BuzonErrores
 {
-	private String id_msj;
-	private String txt_msj;
-	
+	public String id_msj;
+	public String txt_msj;
+
 	/**
 	 * @return the id_msj
 	 */
@@ -19,7 +19,7 @@ public class BuzonErrores
 	{
 		return id_msj;
 	}
-	
+
 	/**
 	 * @param id_msj
 	 *           the id_msj to set
@@ -28,7 +28,7 @@ public class BuzonErrores
 	{
 		this.id_msj = id_msj;
 	}
-	
+
 	/**
 	 * @return the txt_msj
 	 */
@@ -36,7 +36,7 @@ public class BuzonErrores
 	{
 		return txt_msj;
 	}
-	
+
 	/**
 	 * @param txt_msj
 	 *           the txt_msj to set

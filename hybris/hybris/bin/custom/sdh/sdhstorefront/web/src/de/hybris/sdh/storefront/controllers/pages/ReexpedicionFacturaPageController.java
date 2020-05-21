@@ -6,14 +6,26 @@ package de.hybris.sdh.storefront.controllers.pages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.core.GenericSearchConstants.LOG;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.servicelayer.event.EventService;
+import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.DefaultResourceBreadcrumbBuilder;
+import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.SDHValidaMailRolResponse;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
 import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
+import de.hybris.sdh.storefront.forms.FacturacionForm;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,8 +59,23 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 	@Resource(name = "sdhCertificaRITService")
 	SDHCertificaRITService sdhCertificaRITService;
 
+	@Resource(name = "sessionService")
+	SessionService sessionService;
+
+	@Resource(name = "userService")
+	UserService userService;
+
 	@Resource(name = "sdhConsultaContribuyenteBPService")
 	SDHConsultaContribuyenteBPService sdhConsultaContribuyenteBPService;
+
+	@Resource(name = "customerFacade")
+	private CustomerFacade customerFacade;
+
+	@Resource(name = "modelService")
+	private ModelService modelService;
+
+	@Resource(name = "eventService")
+	private EventService eventService;
 
 	@RequestMapping(value = "/contribuyentes/reexpedicionfactura", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -56,6 +83,33 @@ public class ReexpedicionFacturaPageController extends AbstractPageController
 	{
 		System.out.println("---------------- Hola entro al GET REEXPEDICION Factura --------------------------");
 
+		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
+
+		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
+
+		final FacturacionForm facturacionForm = new FacturacionForm();
+
+
+		consultaContribuyenteBPRequest.setNumBP(customerModel.getNumBP());
+		try {
+			final ObjectMapper mapper = new ObjectMapper();
+			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+			final SDHValidaMailRolResponse sdhConsultaContribuyenteBPResponse = mapper.readValue(
+					sdhConsultaContribuyenteBPService.consultaContribuyenteBP(consultaContribuyenteBPRequest),
+					SDHValidaMailRolResponse.class);
+
+			facturacionForm.setPredial(sdhConsultaContribuyenteBPResponse.getPredial());
+			facturacionForm.setVehicular(sdhConsultaContribuyenteBPResponse.getVehicular());
+
+			model.addAttribute("facturacionForm", facturacionForm);
+		}
+		catch (final Exception e)
+		{
+			// XXX Auto-generated catch block
+			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
+			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+		}
 
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(REEXPEDICION_FACTURA_CMS_PAGE));

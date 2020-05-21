@@ -25,7 +25,7 @@
 
 						<td><spring:theme code="obligacion.inicial.descripcion" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								informaci�n.</a></td>
+								informaci&oacuten.</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -51,11 +51,11 @@
 						class="new_alto form-control " name="impuesto">
 						<option value="0">Seleccionar</option>
 						<option value="1">Predial Unificado</option>
-						<option value="2">Veh�culos</option>
+						<option value="2">Veh&iacuteculos</option>
 						<option value="3">ICA</option>
 						<option value="4">Publicidad Exterior</option>
 						<option value="5">Sobretasa Gasolina</option>
-						<option value="6">Delineaci�n Urbana</option>
+						<option value="6">Delineaci&oacuten Urbana</option>
 						<option value= "7">Todo</option>
 					</select>
 				</div>

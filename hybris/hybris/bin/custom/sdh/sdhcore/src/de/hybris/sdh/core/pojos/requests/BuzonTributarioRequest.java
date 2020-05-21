@@ -3,8 +3,6 @@
  */
 package de.hybris.sdh.core.pojos.requests;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * @author Maria Torres
  *
@@ -78,9 +76,9 @@ public class BuzonTributarioRequest
 		final StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("{");
-		stringBuilder.append("\"NumBP\":\"" + this.getNumBP() + "\",");
-		stringBuilder.append("\"Vigencia\":\"" + this.getVigencia() + "\",");
-		stringBuilder.append("\"Checklectura\":\"" + this.getCheckLectura() + "\"");
+		stringBuilder.append("\"numBP\":\"" + this.getNumBP() + "\",");
+		stringBuilder.append("\"vigencia\":\"" + this.getVigencia() + "\",");
+		stringBuilder.append("\"checkLectura\":\"" + this.getCheckLectura() + "\"");
 		stringBuilder.append("}");
 		// XXX Auto-generated method stub
 		return stringBuilder.toString();
