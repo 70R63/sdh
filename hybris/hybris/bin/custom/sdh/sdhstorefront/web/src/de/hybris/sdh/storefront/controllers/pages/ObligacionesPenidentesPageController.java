@@ -132,6 +132,7 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			{
 				final ObligacionesICAResponse obligacionesICAResponse = mapper.readValue(wsResponse, ObligacionesICAResponse.class);
 				obligacionesFormuno.setHeaderica(obligacionesICAResponse.getHeader());
+
 			}
 
 			wsResponse = sdhObligacionesDeliService.obligacionesRequest(obligacionesRequest);
@@ -166,37 +167,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 			{
 				final ObligacionesResponse obligacionesResponse = mapper.readValue(wsResponse, ObligacionesResponse.class);
 
-//				for (final ObligacionesCabeceraPublicidad obligaPubli : obligacionesResponse.getHeader())
-//				{
-//					if ("01".equals(obligaPubli.getOrientacionValla()))
-//					{
-//						obligaPubli.setOrientacionValla("Comercial");
-//					}
-//					else if ("02".equals(obligaPubli.getOrientacionValla()))
-//					{
-//						obligaPubli.setOrientacionValla("Institucional");
-//					}
-//					else if ("03".equals(obligaPubli.getOrientacionValla()))
-//					{
-//						obligaPubli.setOrientacionValla("Cultural");
-//					}
-//					else if ("04".equals(obligaPubli.getOrientacionValla()))
-//					{
-//						obligaPubli.setOrientacionValla("Política");
-//					}
-//					else if ("05".equals(obligaPubli.getOrientacionValla()))
-//					{
-//						obligaPubli.setOrientacionValla("Deportiva");
-//					}
-//					else if ("06".equals(obligaPubli.getOrientacionValla()))
-//					{
-//						obligaPubli.setOrientacionValla("Otra");
-//					}
-//					else
-//					{
-//						obligaPubli.setOrientacionValla("-");
-//					}
-//				}
 				obligacionesFormuno.setHeader(obligacionesResponse.getHeader().stream()
 						.filter(d -> StringUtils.isNotBlank(d.getNumResolucion())).collect(Collectors.toList()));
 			}
@@ -205,8 +175,6 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 		catch (final Exception e)
 		{
 			LOG.error("error generating declaration : " + e.getMessage());
-			//LOG.error("error getting customer info from SAP for Mi RIT Certificado page: " + e.getMessage());
-			//	GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
 		}
 
 		model.addAttribute("obligacionesFormuno", obligacionesFormuno);
@@ -221,6 +189,38 @@ public class ObligacionesPenidentesPageController extends AbstractPageController
 
 		return getViewForPage(model);
 	}
+
+
+	private String obtenerPeriodo(final String sCadena)
+	{
+		String idDestinos = sCadena;
+		if (sCadena.equals("A1"))
+		{
+			return idDestinos = "Enero-Febrero";
+		}
+		else if (sCadena.equals("A2"))
+		{
+				return idDestinos = "Marzo-Abril";
+		}
+		else if (sCadena.equals("A3"))
+		{
+				return idDestinos = "Mayo-Junio";
+		}
+		else if (sCadena.equals("A4"))
+		{
+				return idDestinos = "Julio-Agosto";
+		}
+		else if (sCadena.equals("A5"))
+		{
+				return idDestinos = "Septiembre-Octubre";
+		}
+		else if (sCadena.equals("A6"))
+		{
+				return idDestinos = "Noviembre-Diciembre";
+			}else {
+				return idDestinos = "-";
+			}
+		}
 
 
 

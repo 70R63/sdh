@@ -20,7 +20,7 @@
 	<sf:form>
 		<div style="aling-items: center; justify-content: center">
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3 center headline">
+				<div class="col-md-8 col-md-offset-2 center headline">
 					<h2>
 						<span><spring:theme code="mibuzon.mensajes.nuevos" /></span>
 					</h2>
@@ -28,8 +28,7 @@
 			</div>
 			<div>
 				<div class="row">
-
-					<div class="col-md-7 col-md-offset-3 center">
+					<div class="col-md-8 col-md-offset-2 center">
 						<table class="table table-responsive" id="tabPaginacion0">
 							<thead>
 								<tr>
@@ -66,68 +65,42 @@
 							</thead>
 							<tbody>
 
+								<c:forEach items="${miBuzon.mensajesMsg}" var="eachDoc">
+									<c:if test="${eachDoc.tipoMensaje == '2'}">
+										<tr>
+											<td><c:out value="${eachDoc.id_radicado}" /></td>
+											<td><c:out value="${eachDoc.autoridadEmisora}" /></td>
+											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
+												<c:if test="${echDocumentos.nombreDocumento != null}">
+													<td><c:out
+															value="${echDocumentos.nombreDocumento}" /></td>
 
+													<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
+													<td><label class="control-label download"
+														style="text-transform: capitalize !important" for=""
+														data-pdfimprimir="${echDocumentos.pdf}"
+														data-idRadicado="${eachDoc.id_radicado}"
+														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
+														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
+														data-asunto="${echDocumentos.nombreDocumento}"
+														id="download"> <span
+															class="glyphicon glyphicon-download-alt"></span></label></td>
+													<td><img
+														src="${themeResourcePath}/images/papeleranuevos.png"
+														style="width: 30px" id="papeleraMsg" class="papeleraMsg"
+														onclick="papeleraMsgLeidos(this)"
+														data-pdfimprimir="${echDocumentos.pdf}"
+														data-idRadicado="${eachDoc.id_radicado}"
+														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
+														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
+														data-asunto="${echDocumentos.nombreDocumento}"></img></td>
+												</c:if>
+											</c:forEach>
+										</tr>
 
-<!-- Este es el bueno -->
-<%-- 								<c:if test="${miBuzon.tipoMensaje == '1'}"> --%>
-<%-- 									<c:forEach items="${miBuzon.documentos}" var="eachDoc"> --%>
-<!-- 																<tr> -->
-<%-- 																	<td><c:out value="${miBuzon.idRadicado}" /></td> --%>
-<%-- 																	<td><c:out value="${miBuzon.autoridadEmisora}" /></td> --%>
-<%-- 																	<td><c:out value="${eachDoc.nombredocumento}" /></td> --%>
-<%-- 																	<td><c:out value="${miBuzon.fechaNotificacion}" /></td> --%>
-<!-- 																	<td><label class="control-label download" -->
-<!-- 																		style="text-transform: capitalize !important" for="" -->
-<%-- 																		data-pdfimprimir="${eachDoc.pdf}" data-idRadicado="${miBuzon.idRadicado}" --%>
-<%-- 																		data-autoridadEmisora="${miBuzon.autoridadEmisora}" --%>
-<%-- 																		data-fechaNotificacion="${miBuzon.fechaNotificacion}" data-asunto="${eachDoc.nombredocumento}" --%>
-<!-- 																		id="download"> <span -->
-<!-- 																			class="glyphicon glyphicon-download-alt"></span></label></td> -->
-<!-- 																	<td><img -->
-<%-- 																		src="${themeResourcePath}/images/papeleranuevos.png" --%>
-<%-- 																		style="width: 30px" id="papeleraMsg" class="papeleraMsg" onclick="papeleraMsgLeidos(this)" data-pdfimprimir="${eachDoc.pdf}" data-idRadicado="${miBuzon.idRadicado}" --%>
-<%-- 																		data-autoridadEmisora="${miBuzon.autoridadEmisora}" --%>
-<%-- 																		data-fechaNotificacion="${miBuzon.fechaNotificacion}" data-asunto="${eachDoc.nombredocumento}"></img></td> --%>
-<!-- 																</tr> -->
-<%-- 									</c:forEach> --%>
-<%-- 								</c:if> --%>
+									</c:if>
 
-																<tr>
-																	<td><c:out value="mensaje1" /></td>
-																	<td><c:out value="autoridad1" /></td>
-																	<td><c:out value="asunto1" /></td>
-																	<td><c:out value="fecha1" /></td>
-																	<td><label class="control-label download"
-																		style="text-transform: capitalize !important" for=""
-																		data-pdfimprimir="${eachDoc.pdf}" data-idRadicado="mensaje1"
-																		data-autoridadEmisora="autoridad1"
-																		data-fechaNotificacion="fecha1" data-asunto="asunto1"
-																		id="download"> <span
-																			class="glyphicon glyphicon-download-alt"></span></label></td>
-																	<td><img
-																		src="${themeResourcePath}/images/papeleranuevos.png"
-																		style="width: 30px" id="papeleraMsg" class="papeleraMsg" onclick="papeleraMsgLeidos(this)" data-pdfimprimir="${eachDoc.pdf}" data-idRadicado="mensaje1"
-																		data-autoridadEmisora="autoridad1"
-																		data-fechaNotificacion="fecha1" data-asunto="asunto1"></img></td>
-																</tr>
-																<tr>
-																	<td><c:out value="mensaje2" /></td>
-																	<td><c:out value="autoridad2" /></td>
-																	<td><c:out value="asunto2" /></td>
-																	<td><c:out value="fecha2" /></td>
-																	<td><label class="control-label download"
-																		style="text-transform: capitalize !important" for=""
-																		data-pdfimprimir="${eachDoc.pdf}" data-idRadicado="mensaje2"
-																		data-autoridadEmisora="autoridad1"
-																		data-fechaNotificacion="fecha2" data-asunto="asunto2"
-																		id="download"> <span
-																			class="glyphicon glyphicon-download-alt"></span></label></td>
-																	<td><img
-																		src="${themeResourcePath}/images/papeleranuevos.png"
-																		style="width: 30px" id="papeleraMsg" class="papeleraMsg" onclick="papeleraMsgLeidos(this)" data-pdfimprimir="${eachDoc.pdf}" data-idRadicado="mensaje2"
-																		data-autoridadEmisora="autoridad2"
-																		data-fechaNotificacion="fecha2" data-asunto="asunto2"></img></td>
-																</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -146,7 +119,7 @@
 			<div>
 				<div class="row">
 
-					<div class="col-md-7 col-md-offset-3 center">
+					<div class="col-md-8 col-md-offset-2 center">
 						<table class="table table-responsive tabPaginacion1"
 							id="tabPaginacion1">
 							<thead>
@@ -180,46 +153,9 @@
 										style="text-transform: capitalize !important" for="">
 											<spring:theme code="mibuzon.mensajes.papelera" />
 									</label></th>
-									<th style="visibility:hidden;"> </th>
 								</tr>
 							</thead>
 							<tbody>
-<%-- 							<c:if test="${miBuzon.tipoMensaje == '2'}"> --%>
-<%-- 									<c:forEach items="${miBuzon.documentos}" var="eachDocs"> --%>
-<!-- 							<tr> -->
-<%-- 							<td><c:out value="${miBuzon.idRadicado}" /></td> --%>
-<%-- 							<td><c:out value="${miBuzon.autoridadEmisora}" /></td> --%>
-<%-- 							<td><c:out value="${eachDocs.nombredocumento}" /></td> --%>
-<%-- 							<td><c:out value="${miBuzon.fechaNotificacion}" /></td>			 --%>
-<!-- 						    <td><label class="control-label download2" -->
-<!-- 										style="text-transform: capitalize !important" for="" -->
-<%-- 										id="download2" onclick="downloaddos(this)" data-pdfimprimir="${eachDocs.pdf}"> <span --%>
-<!-- 											class="glyphicon glyphicon-download-alt"></span></label></td> -->
-<!-- 							<td><img -->
-<%-- 										src="${themeResourcePath}/images/papeleraleidos.png" --%>
-<!-- 										style="width: 20px" onclick="eliminarleidos(this)"></img></td> -->
-										
-<!-- 										<td style="visibility: hidden;"></td> -->
-<!-- 								</tr> -->
-<%-- 								</c:forEach> --%>
-<%-- 								</c:if> --%>
-
-							<tr>
-							<td><c:out value="leido1" /></td>
-							<td><c:out value="leido1" /></td>
-							<td><c:out value="leido1" /></td>
-							<td><c:out value="leido1" /></td>			
-						    <td><label class="control-label download2"
-										style="text-transform: capitalize !important" for=""
-										id="download2" onclick="downloaddos(this)" data-pdfimprimir="${eachDocs.pdf}"> <span
-											class="glyphicon glyphicon-download-alt"></span></label></td>
-							<td><img
-										src="${themeResourcePath}/images/papeleraleidos.png"
-										style="width: 20px" onclick="eliminarleidos(this)"></img></td>
-										
-										<td style="visibility: hidden;"></td>
-								</tr>
-
 
 							</tbody>
 						</table>
@@ -228,26 +164,24 @@
 			</div>
 		</div>
 	</sf:form>
-	<div>
-		<a id='dwnldLnk' download='nombrecocumento.pdf' style="display: none;" />
-	</div>
+
 </div>
 
 <script>
- function downloaddos(obdesc){
-	 var objetode = obdesc;
-	ACC.mibuzon.bindDescargar2(objetode);
-}
- 
- function papeleraMsgLeidos(object){
-	 var objectf = object;
-	 ACC.mibuzon.bindPapeleraNuevos(objectf);
-	 objectf.offsetParent.parentNode.remove();
+	function downloaddos(obdesc) {
+		var objetode = obdesc;
+		ACC.mibuzon.bindDescargar2(objetode);
+	}
 
- }
+	function papeleraMsgLeidos(object) {
+		var objectf = object;
+		ACC.mibuzon.bindPapeleraNuevos(objectf);
+		objectf.offsetParent.parentNode.remove();
 
- function eliminarleidos(objectEl){
-	 var objecteliminar = objectEl;
-	 objectEl.offsetParent.parentNode.remove();
- }
+	}
+
+	function eliminarleidos(objectEl) {
+		var objecteliminar = objectEl;
+		objectEl.offsetParent.parentNode.remove();
+	}
 </script>

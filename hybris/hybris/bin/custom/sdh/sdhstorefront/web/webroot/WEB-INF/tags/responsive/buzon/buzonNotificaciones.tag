@@ -27,7 +27,7 @@
 		<div>
 			<div class="row">
 
-				<div class="col-md-7 col-md-offset-3 center">
+				<div class="col-md-8 col-md-offset-2 center">
 					<table class="table table-responsive" id="tabPaginacion2">
 						<thead>
 							<tr>
@@ -50,32 +50,33 @@
 							</tr>
 						</thead>
 						<tbody>
-<%-- 						<c:if test="${miBuzon.tipoMensaje == '1'}"> --%>
-<%-- 									<c:forEach items="${miBuzon.documentos}" var="eachDocs"> --%>
-<!-- 							<tr> -->
-<%-- 								<td><c:out value="${miBuzon.idRadicado}" /></td> --%>
-<%-- 						    	<td><c:out value="${miBuzon.autoridadEmisora}" /></td> --%>
-<%-- 								<td><c:out value="${eachDocs.nombredocumento}" /></td> --%>
-<%-- 								<td><c:out value="${miBuzon.fechaNotificacion}" /></td> --%>
-<!-- 							    <td><label class="control-label downloadNoti" -->
-<%-- 									style="text-transform: capitalize !important" id="downloadNoti" data-pdfimprimir="${eachDocs.pdf}" data-identifi="${miBuzon.idRadicado}" data-autoridad="${miBuzon.autoridadEmisora}" --%>
-<%-- 																		data-asunto="${eachDocs.nombredocumento}" --%>
-<%-- 																		data-fechaNotificacion="${miBuzon.fechaNotificacion}" onclick="downloadNoti1(this)"> <span --%>
-<!-- 										class="glyphicon glyphicon-download-alt"></span></label></td> -->
-<!-- 							</tr> -->
-<%-- 							</c:forEach> --%>
-<%-- 							</c:if> --%>
-								<tr>
-								<td><c:out value="idRadicado1" /></td>
-						    	<td><c:out value="autoridadEmisora1" /></td>
-								<td><c:out value="nombredocumento1" /></td>
-								<td><c:out value="fechaNotificacion1" /></td>
-							    <td><label class="control-label downloadNoti"
-									style="text-transform: capitalize !important" id="downloadNoti" data-pdfimprimir="${eachDocs.pdf}" data-idRadicado="idRadicado1" data-autoridadEmisora="autoridadEmisora1"
-																		data-asunto="nombredocumento1"
-																		data-fechaNotificacion="fechaNotificacion1" onclick="downloadNoti1(this)"> <span
-										class="glyphicon glyphicon-download-alt"></span></label></td>
-							</tr>
+							<c:forEach items="${miBuzon.mensajesMsg}" var="eachDocs">
+								<c:if test="${eachDocs.tipoMensaje == '1'}">
+
+									<tr>
+										<td><c:out value="${eachDocs.id_radicado}" /></td>
+										<td><c:out value="${eachDocs.autoridadEmisora}" /></td>
+										<c:forEach items="${eachDoc.documentos}"
+											var="echDocumentosNot">
+											<c:if test="${echDocumentosNot.nombreDocumento != null}">
+												<td><c:out value="${echDocumentosNot.nombreDocumento}" /></td>
+												<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
+												<td><label class="control-label downloadNoti"
+													style="text-transform: capitalize !important"
+													id="downloadNoti"
+													data-pdfimprimir="${echDocumentosNot.pdf}"
+													data-identifi="${eachDocs.id_radicado}"
+													data-autoridad="${eachDocs.autoridadEmisora}"
+													data-asunto="${echDocumentosNot.nombreDocumento}"
+													data-fechaNotificacion="${eachDocs.fechaNotificacion}"
+													onclick="downloadNoti1(this)"> <span
+														class="glyphicon glyphicon-download-alt"></span></label></td>
+											</c:if>
+										</c:forEach>
+									</tr>
+
+								</c:if>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -93,7 +94,7 @@
 		<div>
 			<div class="row">
 
-				<div class="col-md-7 col-md-offset-3 center">
+				<div class="col-md-8 col-md-offset-2 center">
 					<table class="table table-responsive" id="tabPaginacion3">
 						<thead>
 							<tr>
@@ -116,30 +117,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="identifi"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="autoridad"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="asunto"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="fechanotificacion"></c:out>"
-									maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><label class="control-label downloadNotileidos"
-									style="text-transform: capitalize !important" id="downloadNotiLeidos" data-pdfimprimir="${eachDocs.pdf}" data-identifi="${eachDoc.pdf}" data-autoridad="mil"
-																		data-asunto="perro2"
-																		data-fechaNotificacion="mensaje" data-documento="cacahuate5" onclick="downloaddosNoti(this)"> <span
-										class="glyphicon glyphicon-download-alt"></span></label></td>
-							</tr>
+
 						</tbody>
 					</table>
 				</div>
@@ -149,12 +127,12 @@
 </div>
 
 <script>
- function downloadNoti1(objectnoti1){
-	ACC.mibuzon.descargarNoti(objectnoti1);
-	objectnoti1.offsetParent.parentNode.remove();
-}
- 
- function downloaddosNoti(objectnoti2){
-	 ACC.mibuzon.descargarNoti2(objectnoti2);
- }
- </script>
+	function downloadNoti1(objectnoti1) {
+		ACC.mibuzon.descargarNoti(objectnoti1);
+		objectnoti1.offsetParent.parentNode.remove();
+	}
+
+	function downloaddosNoti(objectnoti2) {
+		ACC.mibuzon.descargarNoti2(objectnoti2);
+	}
+</script>
