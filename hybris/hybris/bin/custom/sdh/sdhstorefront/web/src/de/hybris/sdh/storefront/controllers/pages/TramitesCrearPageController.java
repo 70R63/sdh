@@ -659,14 +659,16 @@ public class TramitesCrearPageController extends AbstractPageController
 		//RIT-Creación-Registro / Rol Tributario - Persona Natural
 		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
 		//		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
-		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZZAGENTE", "X");
-		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZZREPORTANTE", "X");
+		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
+		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
+				"ZZREPORTANTE", "X");
 		//		agregarElementoTramites(elementos, "0101010104", "04", "Terceros Autorizados");
 		//RIT-Actualizacion-Registro / Rol Tributario - Persona Jurídica
 		agregarElementoTramites(elementos, "0101010200", "00", "Seleccionar");
 		//		agregarElementoTramites(elementos, "0101010201", "01", "Contribuyente");
-		agregarElementoTramites_rol(elementos, "0101010202", "02", "Agente Retenedor", "ZZAGENTE", "");
-		agregarElementoTramites_rol(elementos, "0101010203", "03", "Reportante de la Información", "ZZREPORTANTE", "");
+		agregarElementoTramites_rol(elementos, "0101010202", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z066", "ZZAGENTE", "");
+		agregarElementoTramites_rol(elementos, "0101010203", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z066",
+				"ZZREPORTANTE", "");
 		//		agregarElementoTramites(elementos, "0101010204", "04", "Terceros Autorizados");
 		//RIT-Creación-Creación de Calidad Sujeción Pasiva
 		agregarElementoTramites(elementos, "01010200__", "00", "Seleccionar");
@@ -1013,10 +1015,11 @@ public class TramitesCrearPageController extends AbstractPageController
 	}
 
 	private void agregarElementoTramites_rol(final List<TramiteOpcion> elementos, final String claveBusqueda,
-			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String rolAccion, final String rolIndicador)
+			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String processID,
+			final String idCategorizacion, final String rolAccion, final String rolIndicador)
 	{
-		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion),
-				new TramiteRolAccion(rolAccion, rolIndicador)));
+		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion), processID,
+				idCategorizacion, "02", new TramiteRolAccion(rolAccion, rolIndicador)));
 
 	}
 
