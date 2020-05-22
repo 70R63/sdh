@@ -71,7 +71,7 @@
 											<td><c:out value="${eachDoc.id_radicado}" /></td>
 											<td><c:out value="${eachDoc.autoridadEmisora}" /></td>
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
-												<c:if test="${echDocumentos.nombreDocumento != null}">
+												<c:if test="${echDocumentos.nombreDocumento != ''}">
 													<td><c:out
 															value="${echDocumentos.nombreDocumento}" /></td>
 
@@ -83,7 +83,7 @@
 														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
 														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
 														data-asunto="${echDocumentos.nombreDocumento}"
-														id="download"> <span
+														id="download" onclick="descargarNoti(this)"> <span
 															class="glyphicon glyphicon-download-alt"></span></label></td>
 													<td><img
 														src="${themeResourcePath}/images/papeleranuevos.png"
@@ -110,7 +110,7 @@
 
 
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3 headline">
+				<div class="col-md-8 col-md-offset-2 headline">
 					<h2>
 						<span><spring:theme code="mibuzon.mensajes.leidos" /></span>
 					</h2>
@@ -163,11 +163,22 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+	<a id='dwnldLnk' download='nombredocumento.pdf' style="display: none;"/>
+	</div>
 	</sf:form>
+	
 
 </div>
 
 <script>
+
+function descargarNoti(obdesca) {
+	var objetodeN = obdesca;
+	ACC.mibuzon.bindDescargar(objetodeN);
+}
+
 	function downloaddos(obdesc) {
 		var objetode = obdesc;
 		ACC.mibuzon.bindDescargar2(objetode);

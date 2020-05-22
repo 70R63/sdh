@@ -3,15 +3,17 @@ ACC.mibuzon = {
 	_autoload : [ "bindDescargar"],
 
 	
-	bindDescargar : function() {
-		$(document).on("click", ".download", function(e) {
-			e.preventDefault();
+	bindDescargar : function(objetodeN) {
+//		$(document).on("click", ".download", function(e) {
+//			e.preventDefault();
+		
+		
 			debugger;
-			var newpdf = $.trim($(this).attr("data-pdfimprimir"));
-			var identif = $.trim($(this).attr("data-idRadicado")); 
-			var autoridadEmisora= $.trim($(this).attr("data-autoridadEmisora")); 
-			var asunto= $.trim($(this).attr("data-asunto"));
-			var fecnot = $.trim($(this).attr("data-fechaNotificacion"));
+			var newpdf = $.trim($(objetodeN).attr("data-pdfimprimir"));
+			var identif = $.trim($(objetodeN).attr("data-idRadicado")); 
+			var autoridadEmisora= $.trim($(objetodeN).attr("data-autoridadEmisora")); 
+			var asunto= $.trim($(objetodeN).attr("data-asunto"));
+			var fecnot = $.trim($(objetodeN).attr("data-fechaNotificacion"));
 
 				var pdf = 'data:application/newpdf;base64,'+ newpdf;
 				 var dlnk = document.getElementById('dwnldLnk');
@@ -19,13 +21,13 @@ ACC.mibuzon = {
 				  dlnk.click();
 				  
 			
-				  var newtr = $(this).closest('tr');
+				 // var newtr = $(objetodeN).closest('tr');
 				  
 					 $('#tabPaginacion1').append('<tr><td>' + identif + '</td><td>' + autoridadEmisora + '</td><td>' + asunto + '</td><td>' + fecnot + '</td><td><label class="control-label download2" style="text-transform: capitalize !important" data-pdfimprimir='+newpdf+' id="download2" onclick="downloaddos()"> <span class="glyphicon glyphicon-download-alt"></span></label></td><td><img src="/sdhstorefront/_ui/addons/sdhpsaddon/responsive/theme-psalpha/images/papeleraleidos.png" style="width: 20px"  onclick="eliminarleidos(this)" ></img></td><td style="visibility: hidden;">'+ newpdf +'</td</tr>');
 
-					  $(this).closest('tr').remove();	 
+					  $(objetodeN).closest('tr').remove();	 
 				
-		});
+//		});
 
 	},
 	
@@ -70,25 +72,12 @@ ACC.mibuzon = {
 		var fecnot = $.trim($(noti).attr("data-fechaNotificacion"));
 			
 		var pdf = 'data:application/newpdf;base64,'+ newpdf;
-		const downloadLink = document.createElement("a");
-		const fileName = asunto + "Certificación_RIT.pdf";
-		
-		downloadLink.href = pdf;
-		downloadLink.download = fileName;
-		downloadLink.click();
-//		 var dlnk = document.getElementById('dwnldLnk');
-//		  dlnk.href = pdf;
-//		  dlnk.click();
-		  
-		  
-//		  const linkSource = 'data:application/pdf;base64,' + pdf;
-//			const downloadLink = document.createElement("a");
-//			const fileName = "Certificación_RIT.pdf";
-//
-//			downloadLink.href = linkSource;
-//			downloadLink.download = fileName;
-//			downloadLink.click();
 	
+		 var dlnk = document.getElementById('dwnldLnk');
+		  dlnk.href = pdf;
+		  dlnk.click();
+		  
+		  
 	
 		  var newtr = $(this).closest('tr');
 		  
@@ -102,16 +91,10 @@ descargarNoti2 : function(objectNoti2){
 	var noti2 = objectNoti2;
 	var newpdf = $.trim($(noti2).attr("data-pdfimprimir"));
 	var pdf = 'data:application/newpdf;base64,'+ newpdf;
-//	 var dlnk = document.getElementById('dwnldLnk');
-//	  dlnk.href = pdf;
-//	  dlnk.click();
-	
-	const downloadLink = document.createElement("a");
-	const fileName = asunto + "Certificación_RIT.pdf";
-	
-	downloadLink.href = pdf;
-	downloadLink.download = fileName;
-	downloadLink.click();
+	 var dlnk = document.getElementById('dwnldLnk');
+	  dlnk.href = pdf;
+	  dlnk.click();
+
 }
 	
 };
