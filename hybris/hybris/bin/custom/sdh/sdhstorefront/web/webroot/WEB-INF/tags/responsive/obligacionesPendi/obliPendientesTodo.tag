@@ -602,7 +602,7 @@
 				</div>
 			</c:if>
 				<c:if test="${empty obligacionesFormuno.headerdeli}">
-				<label class="control-label">No cuenta con obligaciones pendientes de Delineaci&ocuten Urbana</label> 
+				<label class="control-label">No cuenta con obligaciones pendientes de Delineaci&oacuten Urbana</label> 
 				 
 				</c:if>
 		</div>
