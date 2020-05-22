@@ -25,7 +25,7 @@ ACC.mibuzon = {
 				  
 					 $('#tabPaginacion1').append('<tr><td>' + identif + '</td><td>' + autoridadEmisora + '</td><td>' + asunto + '</td><td>' + fecnot + '</td><td><label class="control-label download2" style="text-transform: capitalize !important" data-pdfimprimir='+newpdf+' id="download2" onclick="downloaddos()"> <span class="glyphicon glyphicon-download-alt"></span></label></td><td><img src="/sdhstorefront/_ui/addons/sdhpsaddon/responsive/theme-psalpha/images/papeleraleidos.png" style="width: 20px"  onclick="eliminarleidos(this)" ></img></td><td style="visibility: hidden;">'+ newpdf +'</td</tr>');
 
-					  $(tobjetodeNhis).closest('tr').remove();	 
+					  $(objetodeN).closest('tr').remove();	 
 				
 //		});
 

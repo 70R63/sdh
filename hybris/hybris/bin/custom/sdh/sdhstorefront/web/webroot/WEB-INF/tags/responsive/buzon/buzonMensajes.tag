@@ -73,7 +73,7 @@
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
 												<c:if test="${echDocumentos.nombreDocumento != ''}">
 													<td><c:out
-															value="${echDocumentos.nombreDocumento}" /></td>
+															value="${eachDoc.asunto}" /></td>
 
 													<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
 													<td><label class="control-label download"
@@ -82,7 +82,7 @@
 														data-idRadicado="${eachDoc.id_radicado}"
 														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
 														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
-														data-asunto="${echDocumentos.nombreDocumento}"
+														data-asunto="${eachDoc.asunto}"
 														id="download" onclick="descargarNoti(this)"> <span
 															class="glyphicon glyphicon-download-alt"></span></label></td>
 													<td><img
@@ -93,7 +93,7 @@
 														data-idRadicado="${eachDoc.id_radicado}"
 														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
 														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
-														data-asunto="${echDocumentos.nombreDocumento}"></img></td>
+														data-asunto="${eachDoc.asunto}"></img></td>
 												</c:if>
 											</c:forEach>
 										</tr>
@@ -177,6 +177,7 @@
 function descargarNoti(obdesca) {
 	var objetodeN = obdesca;
 	ACC.mibuzon.bindDescargar(objetodeN);
+	objetodeN.offsetParent.parentNode.remove();
 }
 
 	function downloaddos(obdesc) {
