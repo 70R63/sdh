@@ -273,7 +273,8 @@
 <%-- 												<td><c:out value="${eachObIca.tipoIdentificacion}" /></td> --%>
 <%-- 												<td><c:out value="${eachObIca.noIdentificacion}" /></td> --%>
 												<td><c:out value="${eachObIca.anioGravable}" /></td>
-												<td><c:out value="${eachObIca.periodo}" /></td>
+<%-- 												<td><c:out value="${eachObIca.periodo}" /></td> --%>
+													<td><c:out value="${eachObIca.periodo}" /></td>
 <%-- 												<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td> --%>
 												<td><c:out value="${eachObIcaDet.estadoObligacion}" /></td>
 												<td><c:out value="${eachObIcaDet.obligacion}" /></td>
