@@ -892,5 +892,23 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
+		<typegroup name="sdhCatalogs">
+			<itemtype generate="true" code="SdhDocumentType" extends="GenericItem" autocreate="true" >
+				<deployment table="SdhDocumentType" typecode="20010" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>SDH Document Type Code</description>
+						<modifiers unique="true"/>
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="description">
+						<description>SDH Document Type Description</description>
+						<modifiers optional="true" />
+						<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
     </itemtypes>
 </items>

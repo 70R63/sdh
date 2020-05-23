@@ -145,7 +145,6 @@ public class PSEPaymentController extends AbstractPageController
 				new SelectAtomValue(ControllerPseConstants.PUBLICIDAD, "Publicidad"),
 				new SelectAtomValue(ControllerPseConstants.VEHICULAR, "Vehicular"),
 				new SelectAtomValue(ControllerPseConstants.RETENCIONDU, "Retención De La Delineación"));
-
 		return tipoDeImpuesto;
 	}
 
