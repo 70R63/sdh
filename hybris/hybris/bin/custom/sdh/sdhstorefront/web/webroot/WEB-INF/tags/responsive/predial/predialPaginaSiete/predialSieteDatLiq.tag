@@ -68,7 +68,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialsiete.datliquidacion.porceexclu" /></label> <input id="porceexclu"
-						name="" class="newalto form-control" disabled type="text" value="${predialForm.decExclusion}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormsiete.decExclusion}"
 						maxlength="240" style="display: inline-block !important;"></input><label
 						class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
