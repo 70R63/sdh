@@ -14,7 +14,6 @@
 
 	<div class="row">
 		<c:if test="${not empty errores}">
-			<%-- 			<c:forEach items="${errores}" var="msg"> --%>
 			<div class="alert alert-danger alert-dismissable getAccAlert">
 				<button class="close closeAccAlert" aria-hidden="true"
 					data-dismiss="alert" type="button">&times;</button>
@@ -23,7 +22,6 @@
 					var="errorMessages" />
 				${ycommerce:sanitizeHTML(errorMessages)}
 			</div>
-			<%-- 			</c:forEach> --%>
 		</c:if>
 		<div class="col-md-12">
 			<table class="table">
@@ -74,17 +72,13 @@
 								<td><label class="control-label"
 									style="text-transform: capitalize !important"><spring:theme
 											code="mibuzon.inicial.noti" /></label></td>
-											
-											<td>
-											
 
-								<input id="notificaciones" name="notificaciones"
-									class="inputtextnew" aria-required="true"
-									readonly="readonly"
-									value="<c:out value="${miBuzon.contNot}"></c:out>" maxlength="240"
+								<td><input id="notificaciones" name="notificaciones"
+									class="inputtextnew" aria-required="true" readonly="readonly"
+									value="<c:out value="${miBuzon.contNot}"></c:out>"
+									maxlength="240"
 									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"
-									onclick="myFunction(1)">
-</td>
+									onclick="myFunction(1)"></td>
 
 							</tr>
 							<tr>
@@ -92,12 +86,11 @@
 									style="text-transform: capitalize !important"><spring:theme
 											code="mibuzon.inicial.mns" /></label></td>
 								<td><input id="notificaciones" name="notificaciones"
-									class="inputtextnew" aria-required="true"
-									readonly="readonly"
-									value="<c:out value="${miBuzon.contMsj}"></c:out>" maxlength="240"
+									class="inputtextnew" aria-required="true" readonly="readonly"
+									value="<c:out value="${miBuzon.contMsj}"></c:out>"
+									maxlength="240"
 									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"
-									onclick="myFunction(1)">
-									</td>
+									onclick="myFunction(2)"></td>
 							</tr>
 						</tbody>
 					</table>

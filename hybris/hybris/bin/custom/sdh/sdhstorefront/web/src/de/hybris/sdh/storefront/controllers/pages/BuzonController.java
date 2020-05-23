@@ -149,17 +149,17 @@ public class BuzonController extends AbstractPageController
 
 				miBuzon.setMensajesMsg(buzonTributarioMsgResponse.getMensajes());
 
-				int Mi = '1';
-				int Ni = '1';
+				int Mi = 1;
+				int Ni = 1;
 
 				for (final BuzonMensajes2 eachTipMensaje : buzonTributarioMsgResponse.getMensajes())
 				{
-					if ("1".equals(eachTipMensaje.getTipoMensaje()))
+					if ("2".equals(eachTipMensaje.getTipoMensaje()))
 					{
 						miBuzon.setContMsj(Mi);
 						Mi++;
 					}
-					else if ("2".equals(eachTipMensaje.getTipoMensaje()))
+					else if ("1".equals(eachTipMensaje.getTipoMensaje()))
 					{
 						miBuzon.setContNot(Ni);
 						Ni++;

@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import java.util.List;
+
+
 /**
  * @author hybris
  *
@@ -18,8 +21,8 @@ public class BuzonMensajes2
 	public String fechaNotificacion;
 	public String asunto;
 	public String checkLectura;
-	public BuzonDocumentos documentos;
-	public BuzonErrores errores;
+	public List<BuzonDocumentos> documentos;
+	public List<BuzonErrores> errores;
 	/**
 	 * @return the id_radicado
 	 */
@@ -116,27 +119,13 @@ public class BuzonMensajes2
 	{
 		this.checkLectura = checkLectura;
 	}
-	/**
-	 * @return the errores
-	 */
-	public BuzonErrores getErrores()
-	{
-		return errores;
-	}
 
-	/**
-	 * @param errores
-	 *           the errores to set
-	 */
-	public void setErrores(final BuzonErrores errores)
-	{
-		this.errores = errores;
-	}
+
 
 	/**
 	 * @return the documentos
 	 */
-	public BuzonDocumentos getDocumentos()
+	public List<BuzonDocumentos> getDocumentos()
 	{
 		return documentos;
 	}
@@ -145,9 +134,26 @@ public class BuzonMensajes2
 	 * @param documentos
 	 *           the documentos to set
 	 */
-	public void setDocumentos(final BuzonDocumentos documentos)
+	public void setDocumentos(final List<BuzonDocumentos> documentos)
 	{
 		this.documentos = documentos;
+	}
+
+	/**
+	 * @return the errores
+	 */
+	public List<BuzonErrores> getErrores()
+	{
+		return errores;
+	}
+
+	/**
+	 * @param errores
+	 *           the errores to set
+	 */
+	public void setErrores(final List<BuzonErrores> errores)
+	{
+		this.errores = errores;
 	}
 
 
