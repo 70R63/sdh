@@ -12,7 +12,6 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
 
-<c:out value="${tercerosAutTable.obligacionesPredios}"/>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
     <div class="row">
@@ -59,11 +58,11 @@
                  <tbody>
                     <c:forEach items="${tercerosAutTable.obligacionesPredios}" var="obligacion">
                         <tr>
-                            <td><c:out value="${tercerosAut.chip}"/></td>
-                            <td><c:out value="${tercerosAut.matriculaInmobiliaria}"/></td>
-                            <td><c:out value="${tercerosAut.direccion}"/></td>
-                            <td><c:out value="${tercerosAut.anoGravable}"/></td>
-                            <td><c:out value="${tercerosAut.estadoObligacion}"/></td>
+                            <td><c:out value="${obligacion.chip}"/></td>
+                            <td><c:out value="${obligacion.matriculaInmobiliaria}"/></td>
+                            <td><c:out value="${obligacion.direccion}"/></td>
+                            <td><c:out value="${obligacion.anoGravable}"/></td>
+                            <td><c:out value="${obligacion.estadoObligacion}"/></td>
                         </tr>
                     </c:forEach>
                  </tbody>
