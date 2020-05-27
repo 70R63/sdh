@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -47,6 +48,9 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         final String updatedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.path");
         final String approvedFilesFolder = configurationService.getConfiguration().getString("gestion.bancaria.certificados.aprobados.path");
         final String autoridadesPath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.autoridades.path");
+		final String approvedAresFilesFolder = configurationService.getConfiguration()
+				.getString("gestion.bancaria.certificados.ArchBancos_Ares.path");
+
 
 		String isValid = null;
         final String nameFile = this.updateFileToServer(multipartFile);
@@ -54,7 +58,8 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 			isValid = this.verifyFile(updatedFilesFolder + nameFile, approvedFilesFolder + nameFile, autoridadesPath);
 			if (isValid == null)
 			{ //Extract .txt file from p7zip if file is valid
-                this.extractAndUpdateTxtFileFrom7zip(approvedFilesFolder + nameFile, approvedFilesFolder);
+				this.extractAndUpdateTxtFileFrom7zip(approvedFilesFolder + nameFile, approvedFilesFolder,
+						approvedAresFilesFolder + nameFile);
             }
             LOG.info("updatedFilesFolder:" + updatedFilesFolder + nameFile);
             LOG.info("approvedFilesFolder:" + approvedFilesFolder + nameFile);
@@ -85,11 +90,24 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-    public void extractAndUpdateTxtFileFrom7zip(final String zipFilePath, final String targetFilePath){
+	public void extractAndUpdateTxtFileFrom7zip(final String zipFilePath, final String targetFilePath, final String aresFilePath)
+	{
         ISevenZipInArchive inArchive = null;
         ISimpleInArchive simpleInArchive = null;
         RandomAccessFile randomAccessFile = null;
         final File zip = null;
+
+		try
+		{
+			final File sourceFile = new File(zipFilePath);
+			final File destFile = new File(aresFilePath);
+			Files.copy(sourceFile.toPath(), destFile.toPath());
+
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Error occurs: " + e);
+		}
 
         try{
             randomAccessFile = new RandomAccessFile(zipFilePath, "r");
