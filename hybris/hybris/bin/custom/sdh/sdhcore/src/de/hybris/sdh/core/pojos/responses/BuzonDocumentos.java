@@ -3,36 +3,31 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
-
 /**
  * @author hybris
  *
  */
 public class BuzonDocumentos
 {
-	private String nombredocumento;
+	private String nombreDocumento;
 	private String pdf;
-
+	
 	/**
-	 * @return the nombredocumento
+	 * @return the nombreDocumento
 	 */
-	public String getNombredocumento()
+	public String getNombreDocumento()
 	{
-		return nombredocumento;
+		return nombreDocumento;
 	}
-
+	
 	/**
-	 * @param nombredocumento
-	 *           the nombredocumento to set
+	 * @param nombreDocumento
+	 *           the nombreDocumento to set
 	 */
-	@JsonProperty("nombreDocumento")
-	public void setNombredocumento(final String nombredocumento)
+	public void setNombreDocumento(final String nombreDocumento)
 	{
-		this.nombredocumento = nombredocumento;
+		this.nombreDocumento = nombreDocumento;
 	}
-
 	/**
 	 * @return the pdf
 	 */
@@ -40,7 +35,7 @@ public class BuzonDocumentos
 	{
 		return pdf;
 	}
-
+	
 	/**
 	 * @param pdf
 	 *           the pdf to set
@@ -49,4 +44,6 @@ public class BuzonDocumentos
 	{
 		this.pdf = pdf;
 	}
+
+
 }

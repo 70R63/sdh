@@ -65,6 +65,7 @@ ACC.tramitesSeleccion = {
 						data : dataActual,
 						type : "GET",
 						success : function(dataResponse) {
+							ACC.tramitesSeleccion.mostrarMensaje(dataResponse);
 							ACC.tramitesSeleccion.updateFromResponse(
 									dataActual, dataResponse);
 						},
@@ -742,6 +743,19 @@ ACC.tramitesSeleccion = {
 		$("#selectNivel4").find("option:gt(0)").remove();
 		$("#selectNivel4").find("option:eq(0)").remove();
 
+	},
+	
+	
+	mostrarMensaje : function(infoResponse){
+		
+		if(infoResponse!= null && 
+				infoResponse.docTramitesResponse!= null && 
+				infoResponse.docTramitesResponse.idmsj!=null && 
+				infoResponse.docTramitesResponse.idmsj.trim() !=""){
+	    	$("#dialogMensajes" ).dialog( "open" );
+			$("#dialogMensajesContent").html("");
+			$("#dialogMensajesContent").html(infoResponse.docTramitesResponse.txtmsj+"<br>");
+		}
 	}
 
 };

@@ -30,6 +30,16 @@
 	</div>
 </div>
 
+<c:if test="${not empty errores}">
+			<c:forEach items="${errores}" var="msg">
+				<div class="alert alert-danger alert-dismissable getAccAlert">
+					<button class="close closeAccAlert" aria-hidden="true" data-dismiss="alert" type="button">&times;</button>
+					<spring:theme code="${msg.id_msj}" arguments="${msg.txt_msj}" htmlEscape="false" var="errorMessages"/>
+<%-- 					${ycommerce:sanitizeHTML(errorMessages)} --%>
+				</div>
+			</c:forEach>
+		</c:if>
+
 <sf:form>
 	<br>
 	<div class="container">

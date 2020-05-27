@@ -45,7 +45,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		
+		
+			<c:choose>
+    <c:when test="${ropFormRequest.tipoImp == '01' || ropFormRequest.tipoImp == '02'}">
+     <div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
@@ -56,6 +60,13 @@
 				</div>
 			</div>
 		</div>
+    </c:when>    
+    <c:otherwise>
+
+    </c:otherwise>
+</c:choose>
+		
+		
 		<div class="row">
 			<div class="col-md-2">
 				<button style="margin-top: 26px; margin-bottom: 15px;" id=""

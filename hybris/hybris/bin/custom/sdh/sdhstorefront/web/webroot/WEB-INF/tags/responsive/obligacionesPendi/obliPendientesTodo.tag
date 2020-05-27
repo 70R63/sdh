@@ -262,6 +262,8 @@
 									value="Septiembre - Octubre" />
 								<c:set target="${peridoDesc}" property="06"
 									value="Noviembre - Diciembre" />
+								<c:set target="${peridoDesc}" property="${peridoDesc}"
+									value="${peridoDesc}" />
 
 								<c:forEach items="${obligacionesFormuno.headerica }"
 									var="eachObIca">
@@ -271,8 +273,9 @@
 <%-- 												<td><c:out value="${eachObIca.tipoIdentificacion}" /></td> --%>
 <%-- 												<td><c:out value="${eachObIca.noIdentificacion}" /></td> --%>
 												<td><c:out value="${eachObIca.anioGravable}" /></td>
-												<!-- <td><c:out value="${eachObIca.periodo}" /></td> -->
-												<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td>
+<%-- 												<td><c:out value="${eachObIca.periodo}" /></td> --%>
+													<td><c:out value="${eachObIca.periodo}" /></td>
+<%-- 												<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td> --%>
 												<td><c:out value="${eachObIcaDet.estadoObligacion}" /></td>
 												<td><c:out value="${eachObIcaDet.obligacion}" /></td>
 												<td><c:out value="${eachObIcaDet.numFormulario}" /></td>
@@ -598,6 +601,10 @@
 					</div>
 				</div>
 			</c:if>
+				<c:if test="${empty obligacionesFormuno.headerdeli}">
+				<label class="control-label">No cuenta con obligaciones pendientes de Delineaci&oacuten Urbana</label> 
+				 
+				</c:if>
 		</div>
 
 
