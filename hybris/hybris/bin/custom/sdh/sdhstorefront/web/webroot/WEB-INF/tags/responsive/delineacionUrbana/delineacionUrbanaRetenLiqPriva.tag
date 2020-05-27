@@ -9,7 +9,10 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 
-
+<c:set var="disabledLiquidacion" value=""/>
+<c:if test="${dataForm.controlCampos.liquidacion == true}">
+	<c:set var="disabledLiquidacion" value='true'/>
+</c:if>
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 headline">
@@ -26,7 +29,7 @@
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totprep" /></label> <input id="totalpresu"
-					name="infObjetoDelineacion.infoDeclara.totalPresupuesto" class="newalto form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240">
+					name="infObjetoDelineacion.infoDeclara.totalPresupuesto" class="newalto form-control" aria-required="true" type="text" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPresupuesto}" maxlength="240"  ${roLiquidacion}>
 			</div>
 		</div>
 	
@@ -57,16 +60,18 @@
 				<label class="control-label"><spring:theme
 						code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
 					name="" class="newalto form-control" aria-required="true" type="text"
-					readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.valorPagar}" maxlength="240">
+					readonly="readonly" value="${dataForm.infObjetoDelineacion.infoDeclara.totalPagar}" maxlength="240">
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-2 col-md-offset-5">
+			<c:if test="${dataForm.controlCampos.liquidacion != true}">
 				<sf:button class="btn btn-primary btn-lg" name="action"
 					id="calcular" value="calcular" disabled="false" onclick="presdecla()">
 					<spring:theme code="delineacion.urbana.dec.liqpriv.calc" />
 				</sf:button>
+			</c:if>
 		</div>
 	</div>
 </div>

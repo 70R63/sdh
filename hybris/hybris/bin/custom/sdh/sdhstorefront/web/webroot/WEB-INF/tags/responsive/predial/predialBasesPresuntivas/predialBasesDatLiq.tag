@@ -7,6 +7,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
+<c:set var="disabledLiquidacion" value="" />
+<c:if test="${predialFormbases.controlCampos.liquidacion == true}">
+	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <form:form>
 	<div class="container">
@@ -31,14 +35,6 @@
 							code="%" /></label>
 				</div>
 			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<label class="control-label"><spring:theme
-							code="predial.basespresun.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormbases.desDestino}"
-						maxlength="240"></input></select>
-				</div>
-			</div>
 		</div>
 
 		<div class="row">
@@ -47,7 +43,7 @@
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.calidad" /></label> <input
 						id="" name="" class="newalto form-control" disabled type="text"
-						value="${predialFormbases.datosJuridicos.calidadSujecion}" maxlength="240"></input>
+						value="${predialFormbases.desCalidad}" maxlength="240"></input>
 				</div>
 			</div>
 
@@ -55,8 +51,8 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.basegrav" /></label> <input
-						id="" name="" class="newalto form-control" type="text" value="${predialFormbases.estrLiquidacionPredial.baseGravable}"
-						maxlength="240"></input>
+						id="BaseGravable" name="basegrav" class="newalto form-control" type="text" value="${predialFormbases.estrLiquidacionPredial.baseGravable}"
+						maxlength="240" ${disabledLiquidacion}></input>
 				</div>
 			</div>
 
@@ -66,7 +62,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predial.basespresun.datliquidacion.tarliqui" /></label> <input
-						id="" name="" class="newalto form-control" disabled type="text"
+						id="Tarifa_liquidacion" name="" class="newalto form-control" disabled type="text"
 						value="${predialFormbases.estrLiquidacionPredial.tarifaLiquidacion}" maxlength="240"></input>
 				</div>
 			</div>

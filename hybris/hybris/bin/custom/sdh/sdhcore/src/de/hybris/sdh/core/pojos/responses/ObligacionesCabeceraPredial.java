@@ -13,25 +13,29 @@ import java.util.List;
 public class ObligacionesCabeceraPredial
 {
 
-	private String aniogravable;
+	private String anioGravable;
 	private String objetoContrato;
 	private List<ObligacionesDetallePredial> details;
 
+
+
+
+
 	/**
-	 * @return the aniogravable
+	 * @return the anioGravable
 	 */
-	public String getAniogravable()
+	public String getAnioGravable()
 	{
-		return aniogravable;
+		return anioGravable;
 	}
 
 	/**
-	 * @param aniogravable
-	 *           the aniogravable to set
+	 * @param anioGravable
+	 *           the anioGravable to set
 	 */
-	public void setAniogravable(final String aniogravable)
+	public void setAnioGravable(final String anioGravable)
 	{
-		this.aniogravable = aniogravable;
+		this.anioGravable = anioGravable;
 	}
 
 	/**

@@ -25,6 +25,7 @@ import de.hybris.sdh.core.services.SDHConsultaContribuyenteBPService;
 import de.hybris.sdh.storefront.forms.UIMenuForm;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -50,6 +51,7 @@ public class ReportantesCargaController extends AbstractPageController
 	private static final String BREADCRUMBS_CARGA_VALUE = "breadcrumb.reportante.carga";
 	private static final String BREADCRUMBS_HISTORICO_VALUE = "breadcrumb.reportante.historico";
 	private static final String BREADCRUMBS_SANCIONES_VALUE = "breadcrumb.reportante.sanciones";
+	private static final String BREADCRUMBS_RETENEDOR_CARGA_VALUE = "breadcrumb.retenedor.carga";
 
 
 
@@ -77,13 +79,16 @@ public class ReportantesCargaController extends AbstractPageController
 	//----------------------------------------------------------------------------------------------------------------------
 	//->Carga de documentos
 	//----------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/reportantes/cargadocumentos", method = RequestMethod.GET)
-	public String showView(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	@RequestMapping(value =
+	{ "/reportantes/cargadocumentos", "/retenedores/cargadocumentos" }, method = RequestMethod.GET)
+	public String showView(final Model model, final RedirectAttributes redirectModel, final HttpServletRequest request)
+			throws CMSItemNotFoundException
 	{
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 		final UIMenuForm uiMenuForm = new UIMenuForm();
+		final String referrer = request.getHeader("referer");
 
 		try
 		{
@@ -108,10 +113,19 @@ public class ReportantesCargaController extends AbstractPageController
 		}
 
 
+		if (referrer.contains("reportantes"))
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_CARGA_VALUE));
+		}
+		else
+		{
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_RETENEDOR_CARGA_VALUE));
+		}
+
+
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(REPORTANTES_CARGA_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(REPORTANTES_CARGA_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(BREADCRUMBS_CARGA_VALUE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);

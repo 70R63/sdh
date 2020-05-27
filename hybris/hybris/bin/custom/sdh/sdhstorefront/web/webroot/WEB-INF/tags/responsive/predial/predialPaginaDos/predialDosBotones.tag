@@ -7,7 +7,25 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
+<c:set var="flagPresentarDeclaracion" value="false" />
+<c:set var="flagPagarEnLinea" value="false" />
+<c:if test="${predialFormdos.controlCampos.btnPresentarDec == false}">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+</c:if>
+<c:if test="${predialFormdos.controlCampos.btnPagarDec == false}">
+	<c:set var="flagPagarEnLinea" value="true" />
+</c:if>
+<c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+	<c:set var="flagPagarEnLinea" value="true" />
+	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
+</c:if>
+
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+
+<spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
+	htmlEscape="false" />
 
 <div class="container">
 <!-- Campos para calculo -->
@@ -37,25 +55,47 @@
  <input type="hidden" value="${predialFormdos.estrLiquidacionPrivada.proyecto}" id="Proyecto"/>
  <input type="hidden" value="" id="Autoavaluo"/><!-- este campo no se encuentra en el servicio -->
 <!-- Fin de campos para calculo -->
+	<input type="hidden" id="numForm" value="${predialFormdos.numFrom}"/>
 	<div class="row" style="marging-top: 5px">
-		<div class="col-md-12 centercol-md-8 text-center">
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button">
-				<spring:theme code="predialdos.firma.presendecla" />
-			</button>
-
-			<button class="btn btn-primary btn-lg" type="submit" id="action"
-				name="pagar" value="pagar">
-				<spring:theme code="predialdos.firma.paglinea" />
-			</button>
+		<sf:form action="${pagarURL}" method="POST" 
+			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 			
-			
-			<button class="btn btn-primary btn-lg" type="submit" id="action"
-				name="pagar" value="pagar">
-				<spring:theme code="predialdos.firma.spac" />
-			</button>
-
-		</div>
+			<div class="col-md-12 centercol-md-8 text-center">
+				<c:if test="${flagPresentarDeclaracion eq true}">
+					<button style="margin-top: 3px;" id="predialGeneraDeclaracionButton" class="btn btn-primary btn-lg GeneraDeclaracionButton"
+						type="button" disabled="disabled">
+						<spring:theme code="predialdos.firma.presendecla" />
+					</button>
+				</c:if>
+				
+				<sf:hidden path="tipoImpuesto"/>
+				<sf:hidden path="numBP"/>
+				<sf:hidden path="numDoc"/>
+				<sf:hidden path="tipoDoc"/>
+				<sf:hidden path="anoGravable"/>
+				<sf:hidden path="periodo"/>
+				<sf:hidden path="clavePeriodo"/>
+				<sf:hidden path="dv"/>
+				<sf:hidden path="numObjeto"/>
+				<sf:hidden path="chip"/>
+				<sf:hidden path="fechaVenc"/>
+				<sf:hidden path="numRef"/>
+				<sf:hidden path="totalPagar"/>
+	
+				<c:if test="${flagPagarEnLinea eq true}">
+					<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit"
+						id="pagar" name="pagar" value="pagar" disabled="true">	
+						<spring:theme code="predialdos.firma.paglinea" />
+					</sf:button>
+				</c:if>
+				
+				<button class="btn btn-primary btn-lg" type="submit" id="action"
+					name="pagar" value="pagar">
+					<spring:theme code="predialdos.firma.spac" />
+				</button>
+	
+			</div>
+		</sf:form>
 	</div>
 </div>
 

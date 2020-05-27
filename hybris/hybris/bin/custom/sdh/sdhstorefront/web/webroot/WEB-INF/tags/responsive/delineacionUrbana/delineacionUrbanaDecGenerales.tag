@@ -8,6 +8,10 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<c:set var="disabledDatosGenerales" value=""/>
+<c:if test="${dataForm.controlCampos.datosGenerales == true}">
+	<c:set var="disabledDatosGenerales" value="true"/>
+</c:if>
 <input type="hidden" value="${tipoMarca}" id="tipoMarca" />
 <div class="container_new_page">
 
@@ -80,7 +84,7 @@
 					<sf:select path="infObjetoDelineacion.infoDeclara.tipoLicencia"
 						id="tipoDeLicencia" items="${dataForm.catalogos.tipoDeLicencia}"
 						referenceData="${dataForm.catalogos.tipoDeLicencia}"
-						class="new_alto form-control">
+						class="new_alto form-control" disabled="${disabledDatosGenerales}">
 					</sf:select>
 				</c:if>
 				<!-- 				<select -->
@@ -98,7 +102,7 @@
 						code="delineacion.urbana.dec.generales.modlicencia" /></label>
 				<sf:select class="new_alto form-control" id="an"
 					path="infObjetoDelineacion.infoDeclara.modalidad"
-					items="${dataForm.catalogos.modalidadLicencia}" onchange="nuevos(this)">
+					items="${dataForm.catalogos.modalidadLicencia}" onchange="nuevos(this)" disabled="${disabledDatosGenerales}">
 				</sf:select>
 				<!-- 								<select -->
 				<!-- 									id="selecmodlicen" class="form-control " name=" " onchange="obranueva(this)"> -->
@@ -125,7 +129,7 @@
 					<sf:select path="infObjetoDelineacion.infoDeclara.objetoLicen"
 						items="${dataForm.catalogos.objetoLicencia}"
 						referenceData="${dataForm.catalogos.objetoLicencia}"
-						class="new_alto form-control"></sf:select>
+						class="new_alto form-control" disabled="${disabledDatosGenerales}"></sf:select>
 				</div>
 
 			</div>

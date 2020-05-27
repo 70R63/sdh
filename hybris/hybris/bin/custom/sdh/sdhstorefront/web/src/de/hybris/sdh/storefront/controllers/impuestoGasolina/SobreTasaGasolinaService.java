@@ -16,6 +16,8 @@ import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
 import de.hybris.sdh.core.pojos.requests.CreaCasosRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleGasolinaRequest;
 import de.hybris.sdh.core.pojos.requests.DetallePagoRequest;
+import de.hybris.sdh.core.pojos.requests.DetallePredial2Request;
+import de.hybris.sdh.core.pojos.requests.DetallePredialBPRequest;
 import de.hybris.sdh.core.pojos.requests.DetalleVehiculos2Request;
 import de.hybris.sdh.core.pojos.requests.DocTramitesRequest;
 import de.hybris.sdh.core.pojos.requests.InfoObjetoDelineacion2Request;
@@ -39,6 +41,8 @@ import de.hybris.sdh.core.pojos.responses.DetGasRepResponse;
 import de.hybris.sdh.core.pojos.responses.DetGasResponse;
 import de.hybris.sdh.core.pojos.responses.DetRadicadosResponse;
 import de.hybris.sdh.core.pojos.responses.DetallePagoResponse;
+import de.hybris.sdh.core.pojos.responses.DetallePredial2Response;
+import de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse;
 import de.hybris.sdh.core.pojos.responses.DetalleVehiculos2Response;
 import de.hybris.sdh.core.pojos.responses.DocTramitesResponse;
 import de.hybris.sdh.core.pojos.responses.ErrorEnWS;
@@ -68,6 +72,7 @@ import de.hybris.sdh.core.services.SDHDetalleGasolina;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacion;
 import de.hybris.sdh.storefront.controllers.pages.InfoDelineacionInput;
 import de.hybris.sdh.storefront.controllers.pages.forms.SelectAtomValue;
+import de.hybris.sdh.storefront.forms.Descuento1PCCatalogos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -141,6 +146,17 @@ public class SobreTasaGasolinaService
 
 		//Consulta estado de cuenta
 		catalogosForm.setTipoConsulta(obtenerListaTipoConsulta());
+
+
+		return catalogosForm;
+	}
+
+	public Descuento1PCCatalogos prepararCatalogosDescuento1PC()
+	{
+
+		final Descuento1PCCatalogos catalogosForm = new Descuento1PCCatalogos();
+
+		catalogosForm.setTipoId(obtenerListaTipoId());
 
 
 		return catalogosForm;
@@ -1931,7 +1947,8 @@ public class SobreTasaGasolinaService
 		String campoDESCRIPCION = "";
 		final String separador = " ";
 
-		if (fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() != null)
+		if (fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() != null
+				&& !fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep().isEmpty())
 		{
 			campoDESCRIPCION = fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep() + separador
 					+ obtenerListaCausalExencion().get(fuente.getInfObjetoDelineacion().getInfoDeclara().getCausalExcep());
@@ -2261,6 +2278,38 @@ public class SobreTasaGasolinaService
 				wsReqMet, LOG, nombreClase);
 
 		return responseInfo;
+	}
+
+
+	public DetallePredial2Response consultaPredial2(final DetallePredial2Request requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		final String confUrl = "sdh.detpredial2.url";
+		final String confUser = "sdh.detpredial2.user";
+		final String confPass = "sdh.detpredial2.password";
+		final String wsNombre = "calculoImp/Predial2";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.DetallePredial2Response";
+
+
+		return (DetallePredial2Response) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre,
+				wsReqMet, LOG, nombreClase);
+	}
+
+
+	public DetallePredialBPResponse consultaPredialBP(final DetallePredialBPRequest requestInfo,
+			final SDHDetalleGasolina sdhConsultaWS, final Logger LOG)
+	{
+		final String confUrl = "sdh.detpredialBP.url";
+		final String confUser = "sdh.detpredialBP.user";
+		final String confPass = "sdh.detpredialBP.password";
+		final String wsNombre = "basespresuntivas";
+		final String wsReqMet = "POST";
+		final String nombreClase = "de.hybris.sdh.core.pojos.responses.DetallePredialBPResponse";
+
+
+		return (DetallePredialBPResponse) llamarWS(requestInfo, sdhConsultaWS, confUrl, confUser, confPass, wsNombre, wsReqMet, LOG,
+				nombreClase);
 	}
 
 

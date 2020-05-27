@@ -48,11 +48,12 @@
 		id="firmas_contribuyente_documentType" />
 </c:if>
 <c:if test="${modo_debug eq 'true'}">
---${contribuyente.documentType}--
---${contribuyente.numBP}--
---${currentUser.numBP}--
---${mostrarBotonesFirmas}--
---${infoPreviaPSE.tipoImpuesto}--
+<div>--contribuyente.documentType:${contribuyente.documentType}--</div>
+<div>--contribuyente.numBP:${contribuyente.numBP}--</div>
+<div>--currentUser.numBP:${currentUser.numBP}--</div>
+<div>--mostrarBotonesFirmas:${mostrarBotonesFirmas}--</div>
+<div>--flagMostrarSoloFirmar:${flagMostrarSoloFirmar}--</div>
+<div>--infoPreviaPSE.tipoImpuesto:${infoPreviaPSE.tipoImpuesto}--</div>
 </c:if>
 
 <div class="container">

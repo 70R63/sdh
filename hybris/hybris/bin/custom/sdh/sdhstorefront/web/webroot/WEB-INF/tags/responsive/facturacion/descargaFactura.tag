@@ -59,8 +59,9 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
-			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg"
-				type="button" onclick="showtable()">
+			<button style="margin-top: 3px;" id="" class="btn btn-primary btn-lg facBuscar"
+				type="button" id="facBuscar">
+				<!-- 				 onclick="showtable()"> -->
 				<spring:theme code="descarga.factura.inicial.buscar" />
 			</button>
 		</div>
@@ -69,9 +70,11 @@
 	<div id="table-predial" style="display: none;">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="tabPaginacion0">
 					<thead style="cellspacing: 10 !important">
 						<tr>
+							<th style="text-align: center"><label class="control-label "
+								for=""><spring:theme code="Año Gravable" /></label></th>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
 										code="descarga.factura.predial.chip" /></label></th>
@@ -88,21 +91,18 @@
 					</thead>
 					<tbody>
 
-						<tr>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="CHIP"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="Matricula"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="Direccion"></c:out>" /></td>
-							<td><input class="inputtextnew"
-								style="visibility: visible !important; width: 15px" type="radio"
-								id="" name="" value=""></td>
+						<c:forEach items="${facturacionForm.predial }" var="eachPredial">
+							<tr>
+								<td><c:out value="${eachPredial.anioGravable}" /></td>
+								<td><c:out value="${eachPredial.CHIP}" /></td>
+								<td><c:out value="${eachPredial.matrInmobiliaria}" /></td>
+								<td><c:out value="${eachPredial.direccionPredio}" /></td>
+								<td><input class="inputtextnew"
+									style="visibility: visible !important; width: 15px"
+									type="radio" id="" name="" value=""></td>
 
-						</tr>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -120,9 +120,11 @@
 	<div id="table-vehiculos" style="display: none;">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<table class="table">
+				<table class="table" id="tabPaginacion1">
 					<thead style="cellspacing: 10 !important">
 						<tr>
+							<th style="text-align: center"><label class="control-label "
+								for=""><spring:theme code="año gravable" /></label></th>
 							<th style="text-align: center"><label class="control-label "
 								for=""><spring:theme
 										code="descarga.factura.vehiculo.placa" /></label></th>
@@ -135,19 +137,19 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${facturacionForm.vehicular }"
+							var="eachVehiculo">
+							<tr>
+								<td><c:out value="${eachVehiculo.anioGravable}" /></td>
+								<td><c:out value="${eachVehiculo.placa}" /></td>
+								<td><label class="labelVerDetVeh "><spring:theme
+											code="vehiculos.detalle.marca.${eachVehiculo.marca}" /></label></td>
+								<td><input class="inputtextnew"
+									style="visibility: visible !important; width: 15px"
+									type="radio" id="" name="" value=""></td>
 
-						<tr>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="PLACA"></c:out>" /></td>
-							<td><input style="width: 100%" class="inputtextnew"
-								maxlength="30" size="30" disabled="disabled" type="text"
-								value="<c:out value="MARCA"></c:out>" /></td>
-							<td><input class="inputtextnew"
-								style="visibility: visible !important; width: 15px" type="radio"
-								id="" name="" value=""></td>
-
-						</tr>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -165,25 +167,25 @@
 </div>
 
 <script>
-function showtable(){
-	debugger;
+	function showtable() {
+		debugger;
 
-	var imp = document.getElementById('impuesto').value;
-	var tabpred = document.getElementById('table-predial');
-	var tabveh = document.getElementById('table-vehiculos');
-	
-	if (imp == '01' ){
-		tabpred.style.display= 'block';
-		tabveh.style.display='none';
-		
-	}else if(imp == '02'){
-		tabpred.style.display='none';
-		tabveh.style.display='block';
-	}else{
-		tabpred.style.display='none';
-		tabveh.style.display='none';
+		var imp = document.getElementById('impuesto').value;
+		var tabpred = document.getElementById('table-predial');
+		var tabveh = document.getElementById('table-vehiculos');
+
+		if (imp == '01') {
+			tabpred.style.display = 'block';
+			tabveh.style.display = 'none';
+
+		} else if (imp == '02') {
+			tabpred.style.display = 'none';
+			tabveh.style.display = 'block';
+		} else {
+			tabpred.style.display = 'none';
+			tabveh.style.display = 'none';
+		}
+
 	}
-	
-}
 </script>
 

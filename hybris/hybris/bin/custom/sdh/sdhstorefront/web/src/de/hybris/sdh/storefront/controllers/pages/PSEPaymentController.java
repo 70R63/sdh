@@ -8,7 +8,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.sdh.core.constants.ControllerPseConstants;
@@ -146,7 +145,6 @@ public class PSEPaymentController extends AbstractPageController
 				new SelectAtomValue(ControllerPseConstants.PUBLICIDAD, "Publicidad"),
 				new SelectAtomValue(ControllerPseConstants.VEHICULAR, "Vehicular"),
 				new SelectAtomValue(ControllerPseConstants.RETENCIONDU, "Retención De La Delineación"));
-
 		return tipoDeImpuesto;
 	}
 
@@ -392,6 +390,17 @@ public class PSEPaymentController extends AbstractPageController
 		}
 
 		model.addAttribute("flagSuccessView", flagSuccessView);
+
+
+		final String bpRepresentado = sessionService.getCurrentSession().getAttribute("representado");
+		if (bpRepresentado != null)
+		{
+			model.addAttribute("representado", "true");
+		}
+		else
+		{
+			model.addAttribute("representado", "false");
+		}
 
 		return getViewForPage(model);
 	}
@@ -735,6 +744,12 @@ public class PSEPaymentController extends AbstractPageController
 
 	private InititalizeTransactionResponse doCredibancoPayment(final PSEPaymentForm psePaymentForm)
 	{
+
+
+		LOG.info("----------- doPsePayment --------------");
+		LOG.info(psePaymentForm);
+		LOG.info("----------- doPsePayment --------------");
+
 
 		final int i_ceros = 14
 				- (psePaymentForm.getTipoDeIdentificacion().length() + psePaymentForm.getNoIdentificacion().length());

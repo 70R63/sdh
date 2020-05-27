@@ -60,6 +60,32 @@ ACC.oblipend = {
 
 	},
 
+	bindTrmPdf : function(impuesto, reporte, reportPdfName) {
+	    var currentUrl = window.location.href;
+	    var baseUrl = currentUrl.substring(0, currentUrl.indexOf("sdhstorefront"));
+	    $.ajax({
+            url     : baseUrl+'sdhstorefront/es/trmService/getPdfString?impuesto='+impuesto+'&reporte='+reporte,
+            method  : 'GET',
+            success : function(pdfResponse){
+            	if(!ACC.oblipend.hayErrores_getPdfString(pdfResponse)){
+	                console.log(pdfResponse.pdf);
+	                ACC.oblipend.bindDownloadPdf(pdfResponse.pdf, reportPdfName);
+            	}
+            },
+            error : function(jqXHR, exception){
+                console.log('Error occured!!');
+            }
+        });
+	},
+
+	bindDownloadPdf : function(stringPdf, reportPdfName){
+	    const linkSource = 'data:application/pdf;base64,' + stringPdf;
+        const downloadLink = document.createElement("a");
+        downloadLink.href = linkSource;
+        downloadLink.download = reportPdfName;
+        downloadLink.click();
+	},
+
 	bindDetalle : function() {
 
 		$(document).on(
@@ -336,5 +362,16 @@ ACC.oblipend = {
 
 			}
 		});
+	},
+	
+	
+	hayErrores_getPdfString : function (response){
+		var flagValidacion = false;
+		if(response.errores!=null && response.errores.id_msj!=null && response.errores.id_msj.trim()!=""){
+			flagValidacion = true;
+			alert(response.errores.id_msj + " - " + response.errores.txt_msj);
+		}
+		
+		return flagValidacion;
 	}
 };

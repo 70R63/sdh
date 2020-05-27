@@ -45,7 +45,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialcuatro.datliquidacion.porcenexe" /></label> <input id="porcenexe"
-						name="" class="newalto form-control" disabled type="text" value="${predialForm.decExencion}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormcua.decExencion}"
 						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
@@ -57,7 +57,7 @@
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialcuatro.datliquidacion.porceexclu" /></label> <input id="porceexclu"
-						name="" class="newalto form-control" disabled type="text" value="${predialForm.decExclusion}"
+						name="" class="newalto form-control" disabled type="text" value="${predialFormcua.decExclusion}"
 						maxlength="240" style="display: inline-block !important;"></input><label class="control-label" style="display: inline-block !important;"><spring:theme
 							code="%" /></label>
 				</div>
@@ -73,19 +73,19 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialcuatro.datliquidacion.destino" /></label> <input id="" name=""
-						class="newalto form-control" disabled type="text" value="${predialFormcua.desDestino}"
+						class="alto form-control" disabled type="text" value="${predialFormcua.desDestino}"
 						maxlength="240"></input>
 				</div>
 			</div>
 				<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialcuatro.datliquidacion.basegrav" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormcua.estrLiquidacionPredial.baseGravable}"
+							code="predialcuatro.datliquidacion.basegrav" /></label> <input id="basegrav"
+						name="basegrav" class="newalto form-control" disabled type="text" value="${predialFormcua.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>

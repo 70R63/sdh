@@ -25,7 +25,7 @@
 
 						<td><spring:theme code="edocuenta.inicial.descripcion" /><a
 							href="http://www.shd.gov.co/shd/" target="_blank"> Mas
-								información.</a></td>
+								informaci&oacuten.</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -68,10 +68,10 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-7">
 							<div class="form-group">
 								<label class="control-label"><spring:theme
-										code="edocuenta.inicial.nom" /></label> <input class="newalto form-control"
+										code="edocuenta.inicial.nom" /></label> <input class="alto form-control"
 									maxlength="30" size="30" disabled="disabled" type="text"
 									value="<c:out value="${ctaForm.compleName}"></c:out>" />
 							</div>
@@ -84,7 +84,7 @@
 										code="edocuenta.inicial.fecgen" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.fechageneracion}"></c:out>" />
 							</div>
 						</div>
 
@@ -94,7 +94,7 @@
 										code="edocuenta.inicial.tasint" /></label> <input
 									class="newalto form-control" maxlength="30" size="30"
 									disabled="disabled" type="text"
-									value="<c:out value=""></c:out>" />
+									value="<c:out value="${ctaForm.tasaInteres}"></c:out>" />
 							</div>
 						</div>
 					</div>
@@ -112,11 +112,11 @@
 									onchange="Selected(this)">
 									<option value="0">Todo</option>
 									<option value="1">Predial Unificado</option>
-									<option value="2">Vehículos</option>
+									<option value="2">Veh&iacuteculos</option>
 									<option value="3">ICA</option>
 									<option value="4">Publicidad Exterior</option>
 									<option value="5">Sobretasa Gasolina</option>
-									<option value="6">Delineación Urbana</option>
+									<option value="6">Delineaci&oacuten Urbana</option>
 									<option value="7">Obligaciones no tributarias</option>
 								</select>
 							</div>

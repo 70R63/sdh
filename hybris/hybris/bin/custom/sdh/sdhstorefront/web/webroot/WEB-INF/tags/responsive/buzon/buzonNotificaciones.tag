@@ -27,8 +27,8 @@
 		<div>
 			<div class="row">
 
-				<div class="col-md-7 col-md-offset-3 center">
-					<table class="table table-responsive" id="">
+				<div class="col-md-8 col-md-offset-2 center">
+					<table class="table table-responsive" id="tabPaginacion2">
 						<thead>
 							<tr>
 								<th style="text-align: center;"><label
@@ -44,28 +44,52 @@
 								<th style="text-align: center"><label class="control-label"
 									style="text-transform: capitalize !important" for=""> <spring:theme
 											code="mibuzon.notificaciones.fecnoti" /></label></th>
+								<th style="text-align: center"><label class="control-label"
+									style="text-transform: capitalize !important" for=""> <spring:theme
+											code="mibuzon.notificaciones.anexos" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="identifi"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="autoridad"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="asunto"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="fechanotificacion"></c:out>"
-									maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							</tr>
+							<c:forEach items="${miBuzon.mensajesMsg}" var="eachDocs">
+								<c:if test="${eachDocs.tipoMensaje == '1'}">
+
+									<tr>
+										<td><c:out value="${eachDocs.id_radicado}" /></td>
+										<td><c:out value="${eachDocs.autoridadEmisora}" /></td>
+										<c:forEach items="${eachDocs.errores}" var="eachError">
+											<c:choose>
+												<c:when
+													test="${eachError.txt_msj != '' && eachError.id_msj == '4'}">
+													<td><c:out value="${eachDocs.asunto}" /></td>
+													<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
+													<td><c:out value="${eachError.txt_msj}" /></td>
+												</c:when>
+
+												<c:otherwise>
+													<c:forEach items="${eachDocs.documentos}"
+														var="echDocumentosNot">
+														<c:if test="${echDocumentosNot.pdf != ''}">
+															<td><c:out value="${eachDocs.asunto}" /></td>
+															<td><c:out value="${eachDocs.fechaNotificacion}" /></td>
+															<td><label class="control-label downloadNoti"
+																style="text-transform: capitalize !important"
+																id="downloadNoti"
+																data-pdfimprimir="${echDocumentosNot.pdf}"
+																data-identifi="${eachDocs.id_radicado}"
+																data-autoridad="${eachDocs.autoridadEmisora}"
+																data-asunto="${eachDocs.asunto}"
+																data-fechaNotificacion="${eachDocs.fechaNotificacion}"
+																onclick="downloadNoti1(this)"> <span
+																	class="glyphicon glyphicon-download-alt"></span></label></td>
+														</c:if>
+													</c:forEach>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</tr>
+
+								</c:if>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -83,8 +107,8 @@
 		<div>
 			<div class="row">
 
-				<div class="col-md-7 col-md-offset-3 center">
-					<table class="table table-responsive" id="">
+				<div class="col-md-8 col-md-offset-2 center">
+					<table class="table table-responsive" id="tabPaginacion3">
 						<thead>
 							<tr>
 								<th style="text-align: center"><label
@@ -100,32 +124,30 @@
 								<th style="text-align: center"><label class="control-label"
 									style="text-transform: capitalize !important" for=""> <spring:theme
 											code="mibuzon.notificaciones.fecnoti" /></label></th>
+								<th style="text-align: center"><label class="control-label"
+									style="text-transform: capitalize !important" for=""> <spring:theme
+											code="mibuzon.notificaciones.anexos" /></label></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="identifi"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="autoridad"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="asunto"></c:out>" maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-								<td><input id="" name="" class="inputtextnew"
-									aria-required="true" type="text" readonly="readonly"
-									value="<c:out value="fechanotificacion"></c:out>"
-									maxlength="240"
-									style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-							</tr>
+
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+
 	</sf:form>
+
 </div>
+
+<script>
+	function downloadNoti1(objectnoti1) {
+		ACC.mibuzon.descargarNoti(objectnoti1);
+		objectnoti1.offsetParent.parentNode.remove();
+	}
+
+	function downloaddosNoti(objectnoti2) {
+		ACC.mibuzon.descargarNoti2(objectnoti2);
+	}
+</script>

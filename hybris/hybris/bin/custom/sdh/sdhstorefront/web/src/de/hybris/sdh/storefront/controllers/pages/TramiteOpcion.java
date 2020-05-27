@@ -180,11 +180,15 @@ public class TramiteOpcion
 		this.urlAccion = url;
 	}
 
-	public TramiteOpcion(final String key, final ItemSelectOption tramiteSelectOpcion, final TramiteRolAccion rolAccion)
+	public TramiteOpcion(final String key, final ItemSelectOption tramiteSelectOpcion, final String processID,
+			final String categorizacion, final String canal, final TramiteRolAccion rolAccion)
 	{
 		super();
 		this.key = key;
 		this.tramiteOpcion = tramiteSelectOpcion;
+		this.processID = processID;
+		this.categorizacion = categorizacion;
+		this.canal = canal;
 		this.rolAccion = rolAccion;
 	}
 

@@ -3,6 +3,9 @@
  */
 package de.hybris.sdh.core.pojos.responses;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
+
 /**
  * @author Federico Flores Dimas
  *
@@ -173,6 +176,7 @@ public class PredialEstLiquidacionPrivada
 	 * @param valorAPagar
 	 *           the valorAPagar to set
 	 */
+	@JsonProperty("valorApagar")
 	public void setValorAPagar(final String valorAPagar)
 	{
 		this.valorAPagar = valorAPagar;
@@ -278,6 +282,23 @@ public class PredialEstLiquidacionPrivada
 	public void setTotalPagoVoluntario(final String totalPagoVoluntario)
 	{
 		this.totalPagoVoluntario = totalPagoVoluntario;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "PredialEstLiquidacionPrivada [tipoRegistro=" + tipoRegistro + ", aporteVoluntario=" + aporteVoluntario
+				+ ", proyecto=" + proyecto + ", valorImpuestoCargo=" + valorImpuestoCargo + ", descuentoIncrementoDiferencial="
+				+ descuentoIncrementoDiferencial + ", valorImpuestoAjustadoActual=" + valorImpuestoAjustadoActual + ", sancion="
+				+ sancion + ", totalSaldoCargo=" + totalSaldoCargo + ", valorAPagar=" + valorAPagar + ", descuentoProntoPago="
+				+ descuentoProntoPago + ", descuentoAdicional=" + descuentoAdicional + ", intereses=" + intereses + ", totalPagar="
+				+ totalPagar + ", valorAporteVoluntario=" + valorAporteVoluntario + ", totalPagoVoluntario=" + totalPagoVoluntario
+				+ "]";
 	}
 
 

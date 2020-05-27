@@ -12,10 +12,23 @@
 <spring:url value="/impuestos/preparaPagoPSE" var="pagarURL"
 	htmlEscape="false" />
 
-
+<c:set var="flagPresentarDeclaracion" value="false" />
+<c:set var="flagPagarEnLinea" value="false" />
+<c:if test="${dataForm.controlCampos.btnPresentarDec == false}">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+</c:if>
+<c:if test="${dataForm.controlCampos.btnPagarDec == false}">
+	<c:set var="flagPagarEnLinea" value="true" />
+</c:if>
+<c:if test="${contribuyente.documentType ne 'NIT' and contribuyente.numBP eq currentUser.numBP }">
+	<c:set var="flagPresentarDeclaracion" value="true" />
+	<c:set var="flagPagarEnLinea" value="true" />
+	<input type="hidden" value="X" id="contribuyenteNoNIT"/>
+</c:if>
 <br>
 <div class="container">
 	<div class="row ">
+		<input type="hidden" id="numForm" value="${dataForm.infObjetoDelineacion.numForm}">
 		<sf:form action="${pagarURL}" method="POST"
 			modelAttribute="infoPreviaPSE" id="infoPreviaPSE">
 
@@ -36,11 +49,13 @@
 
 			<div class="col-md-3">
 				<a id="downloadHelper" target="_blank"></a>
-				<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg" onclick="pagarlinea()">
+				<c:if test="${flagPresentarDeclaracion eq true}">
+				<button id="duGeneraDeclaracionButton" type="button" class="btn btn-primary btn-lg GeneraDeclaracionButton" onclick="pagarlinea()" disabled="disabled">
 					<!--<c:out value='${empty dataForm.infObjetoDelineacion.numForm ? "disabled":""}'/>
 					class="btn btn-primary btn-lg" onclick="pagarlinea()">  Se comenta linea para habilitar botón 19/12/2019 Maria Torres-->
 					<spring:theme code="delineacion.urbana.dec.firm.predec" />
 				</button>
+				</c:if>
 			</div>
 
 			<sf:hidden path="tipoImpuesto" />
@@ -56,10 +71,12 @@
 			<sf:hidden path="anticipo" />
 
 			<div class="col-md-3">
+				<c:if test="${flagPagarEnLinea eq true}">
 				<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit"
 					id="action" name="pagar" value="pagar" disabled="true">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 				</sf:button>
+				</c:if>
 			</div>
 		</sf:form>
 	</div>

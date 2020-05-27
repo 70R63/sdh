@@ -32,11 +32,11 @@
 			</div>
 			</div>
 			<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
 							code="predialdos.datliquidacion.destino" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.desDestino}"
+						name="" class="alto form-control" disabled type="text" value="${predialFormdos.desDestino}"
 						maxlength="240"></input>
 				</div>
 			</div>
@@ -54,8 +54,8 @@
 			<div class="col-md-2">
 				<div class="form-group">
 					<label class="control-label"><spring:theme
-							code="predialdos.datliquidacion.basegrav" /></label> <input id=""
-						name="" class="newalto form-control" disabled type="text" value="${predialFormdos.estrLiquidacionPredial.baseGravable}"
+							code="predialdos.datliquidacion.basegrav" /></label> <input id="basegrav"
+						name="basegrav" class="newalto form-control" disabled type="text" value="${predialFormdos.estrLiquidacionPredial.baseGravable}"
 						maxlength="240"></input>
 				</div>
 			</div>

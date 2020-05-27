@@ -10835,6 +10835,8 @@ fieldset[disabled] .btn-primary.active {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #356ab5;
+  font-size: large;
   color: rgba(255, 255, 255, 0.7);
   font-size: 120px;
   overflow: hidden;
@@ -11610,6 +11612,8 @@ fieldset[disabled] .btn-primary.active {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #356ab5;
+  font-size: large;
 }
 .accordion .panel .panel-heading .accordion-toggle:before {
   content: "\e113";
@@ -25173,4 +25177,16 @@ span.pasos {
 .tablesearch tbody tr td {
   font-size: 12px !important;
   font-family: 'Helvetica', 'Arial', sans-serif !important;
+}
+.form-group .alto_select,
+.alto_select {
+  font-size: 12px !important;
+  padding: 1px !important;
+}
+th {
+  text-align: center !important;
+}
+.glyphicon {
+  color: #356ab5;
+  font-size: large;
 }

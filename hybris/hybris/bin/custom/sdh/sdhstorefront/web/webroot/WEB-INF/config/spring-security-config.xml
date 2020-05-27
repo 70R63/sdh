@@ -37,6 +37,7 @@
 
 	<security:http pattern="/_ui/**" security="none" />
 	<security:http pattern="/escuelavirtual/**" security="none" />
+	<security:http pattern="/preguntasfrecuentes/**" security="none" />
 	<security:http pattern="/chat/customer/**" security="none" />
 
 	<!--Security config for checkout - it has its own login page-->
@@ -200,6 +201,10 @@
 			<value>/onlinePaymentMatcher/**</value>
 			<value>/infoObject</value>
 			<value>/infoObject/**</value>
+			<value>/trmService</value>
+			<value>/trmService/**</value>
+			<value>/faqs</value>
+			<value>/faqs/**</value>
 		</set>
 	</property>
 	<property name="pathMatcher" ref="defaultPathMatcher" />

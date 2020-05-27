@@ -449,9 +449,11 @@ public class TramitesCrearPageController extends AbstractPageController
 				bp = customerModel.getNumBP();
 				canal = "03";
 				mensaje = tramitesCreacionCasoInfo.getMensaje();
-				rolAccion = elementoSeleccionado.getRolAccion().getRolAccion();
-				rolIndicador = elementoSeleccionado.getRolAccion().getRolIndicador();
-
+				if (elementoSeleccionado.getRolAccion() != null)
+				{
+					rolAccion = elementoSeleccionado.getRolAccion().getRolAccion();
+					rolIndicador = elementoSeleccionado.getRolAccion().getRolIndicador();
+				}
 
 				if (elementoSeleccionado.getProcessID() != null && elementoSeleccionado.getCategorizacion() != null)
 				{
@@ -656,16 +658,18 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "01010102__", "02", "Persona Jurídica", "ZT02", "A1ZTRT0004Z065");
 		//RIT-Creación-Registro / Rol Tributario - Persona Natural
 		agregarElementoTramites(elementos, "0101010100", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
-		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZZAGENTE", "X");
-		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZZREPORTANTE", "X");
-		agregarElementoTramites(elementos, "0101010104", "04", "Terceros Autorizados");
+		//		agregarElementoTramites(elementos, "0101010101", "01", "Contribuyente");
+		agregarElementoTramites_rol(elementos, "0101010102", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z065", "ZZAGENTE", "X");
+		agregarElementoTramites_rol(elementos, "0101010103", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z065",
+				"ZZREPORTANTE", "X");
+		//		agregarElementoTramites(elementos, "0101010104", "04", "Terceros Autorizados");
 		//RIT-Actualizacion-Registro / Rol Tributario - Persona Jurídica
 		agregarElementoTramites(elementos, "0101010200", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "0101010201", "01", "Contribuyente");
-		agregarElementoTramites_rol(elementos, "0101010202", "02", "Agente Retenedor", "ZZAGENTE", "");
-		agregarElementoTramites_rol(elementos, "0101010203", "03", "Reportante de la Información", "ZZREPORTANTE", "");
-		agregarElementoTramites(elementos, "0101010204", "04", "Terceros Autorizados");
+		//		agregarElementoTramites(elementos, "0101010201", "01", "Contribuyente");
+		agregarElementoTramites_rol(elementos, "0101010202", "02", "Agente Retenedor", "ZT02", "A1ZTRT0004Z066", "ZZAGENTE", "");
+		agregarElementoTramites_rol(elementos, "0101010203", "03", "Reportante de la Información", "ZT02", "A1ZTRT0004Z066",
+				"ZZREPORTANTE", "");
+		//		agregarElementoTramites(elementos, "0101010204", "04", "Terceros Autorizados");
 		//RIT-Creación-Creación de Calidad Sujeción Pasiva
 		agregarElementoTramites(elementos, "01010200__", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "01010201__", "01", "Predial unificado/ Propietario", "ZT04", "A1ZTRT0004Z067");
@@ -884,17 +888,17 @@ public class TramitesCrearPageController extends AbstractPageController
 		agregarElementoTramites(elementos, "030100____", "00", "Seleccionar");
 		//		agregarElementoTramites(elementos, "030101____", "01", "Descarga de Factura", "ZT06", "A1ZTRT0003Z016");
 		//		agregarElementoTramites(elementos, "030102____", "02", "Descuento adicional del 1%", "ZT06", "A1ZTRT0003Z017");
-		agregarElementoTramites(elementos, "030103____", "03", "Reexpedicion de facturas", "ZT06", "A1ZTRT0003Z018");
+		//		agregarElementoTramites(elementos, "030103____", "03", "Reexpedicion de facturas", "ZT06", "A1ZTRT0003Z018");
 		agregarElementoTramites(elementos, "030104____", "04", "Solicitud de moficación de Factura");
 		agregarElementoTramites(elementos, "030105____", "05", "Solicitud de anulacion de facturas ");
 		//Facturación-Por Predial-Reexpedicion de facturas
-		agregarElementoTramites(elementos, "03010300__", "00", "Seleccionar");
-		agregarElementoTramites(elementos, "03010301__", "01", "Cambio de Nombre", "ZT06", "A1ZTRT0004Z118");
-		agregarElementoTramites(elementos, "03010302__", "02", "Tipo de Documento", "ZT06", "A1ZTRT0004Z119");
-		agregarElementoTramites(elementos, "03010303__", "03", "Número de Documento", "ZT06", "A1ZTRT0004Z120");
-		agregarElementoTramites(elementos, "03010304__", "04", "Dirección de Notificación", "ZT06", "A1ZTRT0004Z121");
-		agregarElementoTramites(elementos, "03010305__", "05", "Teléfono fijo, Celular, Correo electrónico", "ZT06",
-				"A1ZTRT0004Z122");
+		//		agregarElementoTramites(elementos, "03010300__", "00", "Seleccionar");
+		//		agregarElementoTramites(elementos, "03010301__", "01", "Cambio de Nombre", "ZT06", "A1ZTRT0004Z118");
+		//		agregarElementoTramites(elementos, "03010302__", "02", "Tipo de Documento", "ZT06", "A1ZTRT0004Z119");
+		//		agregarElementoTramites(elementos, "03010303__", "03", "Número de Documento", "ZT06", "A1ZTRT0004Z120");
+		//		agregarElementoTramites(elementos, "03010304__", "04", "Dirección de Notificación", "ZT06", "A1ZTRT0004Z121");
+		//		agregarElementoTramites(elementos, "03010305__", "05", "Teléfono fijo, Celular, Correo electrónico", "ZT06",
+		//				"A1ZTRT0004Z122");
 		//Facturación-Por Predial-Solicitud de moficación de Factura
 		agregarElementoTramites(elementos, "03010400__", "00", "Seleccionar");
 		agregarElementoTramites(elementos, "03010401__", "01", "Modificación Avaluó Catastral", "ZT07", "A1ZTRT0004Z047");
@@ -1011,10 +1015,11 @@ public class TramitesCrearPageController extends AbstractPageController
 	}
 
 	private void agregarElementoTramites_rol(final List<TramiteOpcion> elementos, final String claveBusqueda,
-			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String rolAccion, final String rolIndicador)
+			final String idTramiteOpcion, final String descripcionTramiteOpcion, final String processID,
+			final String idCategorizacion, final String rolAccion, final String rolIndicador)
 	{
-		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion),
-				new TramiteRolAccion(rolAccion, rolIndicador)));
+		elementos.add(new TramiteOpcion(claveBusqueda, new ItemSelectOption(idTramiteOpcion, descripcionTramiteOpcion), processID,
+				idCategorizacion, "02", new TramiteRolAccion(rolAccion, rolIndicador)));
 
 	}
 

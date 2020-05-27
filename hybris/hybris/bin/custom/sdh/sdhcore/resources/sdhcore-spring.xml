@@ -696,6 +696,8 @@
 	<bean name="sdhEdoCuentaService" class="de.hybris.sdh.core.services.impl.DefaultSDHEdoCuentaService" />
 	
 	<bean name="sdhCalculoPredialService" class="de.hybris.sdh.core.services.impl.DefaultSDHCalculoPredialService" />
+	
+	<bean name="sdhBuzonTributarioService" class="de.hybris.sdh.core.services.impl.DefaultSDHBuzonTributarioService"/>
 
 
 	<alias alias="sdhTaxTypeDao" name="defaultSDHTaxTypeDao"/>
@@ -719,6 +721,26 @@
 	</bean>
 
 
+	<alias alias="sdhFAQsCategoryDao" name="defaultSdhFAQsCategoryDao"/>
+	<bean id="defaultSdhFAQsCategoryDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhFAQsCategoryDao">
+		<constructor-arg value="SdhFAQsCategory"/>
+	</bean>
+
+	<alias alias="sdhFAQsDao" name="defaultSdhFAQsDao"/>
+	<bean id="defaultSdhFAQsDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhFAQsDao">
+		<constructor-arg value="SdhFAQs"/>
+	</bean>
+
+	<alias alias="sdhDocumentTypeDao" name="defaultSdhDocumentTypeDao"/>
+	<bean id="defaultSdhDocumentTypeDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhDocumentTypeDao">
+		<constructor-arg value="SdhDocumentType"/>
+	</bean>
+
+	<alias alias="sdhFAQsService" name="defaultSDHFAQsService"/>
+	<bean id="defaultSDHFAQsService" class="de.hybris.sdh.core.services.impl.DefaultSDHFAQsService">
+		<property name="sdhFAQsDao" ref="sdhFAQsDao"/>
+		<property name="sdhFAQsCategoryDao" ref="sdhFAQsCategoryDao"/>
+	</bean>
 
 	<alias alias="sdhTaxTypeService" name="defaultSDHTaxTypeService"/>
 	<bean name="defaultSDHTaxTypeService" class="de.hybris.sdh.core.services.impl.DefaultSDHTaxTypeService" />
@@ -738,5 +760,10 @@
 	<alias alias="sdhFileConsultaService" name="defaultSDHFileConsultaService"/>
 	<bean name="defaultSDHFileConsultaService" class="de.hybris.sdh.core.services.impl.DefaultSDHFileConsultaService" />
 
+	<alias alias="sdhTrmReportesPDF" name="defaultSDHTrmReportesPDF"/>
+	<bean name="defaultSDHTrmReportesPDF" class="de.hybris.sdh.core.services.impl.DefaultSDHTrmReportesPDF" />
+
+	<alias alias="sdhTercerosAutService" name="defaultSDHTercerosAutService"/>
+	<bean name="defaultSDHTercerosAutService" class="de.hybris.sdh.core.services.impl.DefaultSDHTercerosAutService" />
 
 </beans>

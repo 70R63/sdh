@@ -6,7 +6,11 @@ ACC.rop = {
 		$(document).on("click", "#generaROPButton", function (e) {
 			e.preventDefault();
 
-			var importeusuario = $("#importeusuario").val().replace(/\./g,'').replace(/\,/g,'.')
+			var importeusuario = $("#importeusuario").val().replace(/\./g,'').replace(/\,/g,'.');
+			var tipoImp = $("#tipoImp").val();
+            var numObjeto = $("#numObjeto").val();
+            var numBP = $("#numBP").val();
+            var clavePeriodo = $("#clavePeriodo").val();
 
 			if(importeusuario != "" && (importeusuario < 1000 || importeusuario % 1000 !== 0))
 			{
@@ -19,10 +23,10 @@ ACC.rop = {
 			var data = {};
 
 			data.importeusuario = importeusuario;
-
-
-
-
+			data.tipoImp = tipoImp;
+            data.numObjeto = numObjeto;
+            data.numBP = numBP;
+            data.clavePeriodo = clavePeriodo;
 
 			$.ajax({
 				url: ACC.generaROPURL,

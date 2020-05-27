@@ -10,7 +10,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.core.GenericSearchConstants.LOG;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -31,6 +30,9 @@ import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaSe
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaTabla;
 import de.hybris.sdh.storefront.forms.EdoCuentaForm;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,8 +48,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
-
 
 /**
  * @author Federico Flores Dimas
@@ -147,8 +147,9 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setPublicidadSaldoFavor(edoCuentaResponse.getNewPublicidadSaldoFavor());
 			if (edoCuentaResponse.getPredial() != null && !edoCuentaResponse.getPredial().isEmpty())
 			{
-				ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
-						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
+//				ctaForm.setPredial(edoCuentaResponse.getPredial().stream()
+//						.filter(eachTax -> StringUtils.isNotBlank(eachTax.getNewCHIP())).collect(Collectors.toList()));
+				ctaForm.setPredial(edoCuentaResponse.getPredial());
 			}
 
 			//ctaForm.setPredial(edoCuentaResponse.getPredial());
@@ -169,6 +170,13 @@ public class ConsultaEstado extends AbstractSearchPageController
 			ctaForm.setTablaGasolina(edoCuentaResponse.getTablaGasolina());
 			ctaForm.setTablaPublicidad(edoCuentaResponse.getTablaPublicidad());
 
+			final Date date = new Date();
+
+			//Caso 2: obtener la fecha y salida por pantalla con formato:
+			final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			System.out.println("Fecha: " + dateFormat.format(date));
+
+			ctaForm.setFechageneracion(dateFormat.format(date));
 
 		}
 		catch (final Exception e)

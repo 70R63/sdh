@@ -9,13 +9,165 @@
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
 -->
-<config xmlns="http://www.hybris.com/cockpit/config">
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris">
 
 	<!-- sdhbackoffice UI configuration should be provided here -->
 
 	<!--<context component="component-code" module="sdhbackoffice">-->
 		<!--Please check documentation for code snippets for specific components-->
 	<!--</context>-->
+
+	<!-- Begin SDH FAQs -->
+	<!-- ExplorerTree -->
+	<context merge-by="module" parent="auto" component="explorer-tree">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc.sdhCustomerSupport">
+				<explorer-tree:type-node code="sdhFAQsCategory" id="SdhFAQsCategory"/>
+				<explorer-tree:type-node code="sdhFAQs" id="SdhFAQs"/>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+
+	<!-- ListViews -->
+	<context merge-by="type" parent="GenericItem" type="SdhFAQsCategory" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code"/>
+			<list-view:column qualifier="description"/>
+		</list-view:list-view>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SdhFAQs" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code"/>
+			<list-view:column qualifier="category"/>
+			<list-view:column qualifier="question"/>
+		</list-view:list-view>
+	</context>
+
+	<!-- Wizards -->
+	<context component="create-wizard" type="SdhFAQsCategory">
+		<wz:flow id="sdhFAQsCategoryTypeWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="sdhFAQsCategoryTypeWizard">
+				<wz:initialize property="newSdhFAQsCategory" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newSdhFAQsCategory">
+						<wz:property qualifier="code"/>
+						<wz:property qualifier="description"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done visible="newSdhFAQsCategory.code != null and newSdhFAQsCategory.description != null">
+						<wz:save property="newSdhFAQsCategory"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	<context component="create-wizard" type="SdhFAQs">
+		<wz:flow id="SdhFAQsTypeWizard" title="create.title(ctx.TYPE_CODE)">
+			<wz:prepare id="SdhFAQsTypeWizard">
+				<wz:initialize property="newSdhFAQs" type="ctx.TYPE_CODE"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.essential.label">
+				<wz:content id="step1.content">
+					<wz:property-list root="newSdhFAQs">
+						<wz:property qualifier="code"/>
+						<wz:property qualifier="category"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:next visible="newSdhFAQs.code != null and newSdhFAQs.category != null"/>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step2" label="create.SdhFAQs.label">
+				<wz:content id="step2.content">
+					<wz:property-list root="newSdhFAQs">
+						<wz:property qualifier="question"/>
+						<wz:property qualifier="answer" editor="com.hybris.cockpitng.editor.wysiwyg"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step2.navigation">
+					<wz:cancel/>
+					<wz:back/>
+					<wz:done>
+						<wz:save property="newSdhFAQs"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<!-- Tabs -->
+	<context merge-by="type"  type="SdhFAQsCategory" component="editor-area" module="sdhbackoffice">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+			<editorArea:tab name="hmc.tab.sdh.properties">
+				<editorArea:section name="hmc.tab.sdh.data">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="description"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+	<context merge-by="type"  type="SdhFAQs" component="editor-area" module="sdhbackoffice">
+		<editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+			<editorArea:tab name="hmc.tab.sdh.properties">
+				<editorArea:section name="hmc.tab.sdh.data">
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="code"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="category"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="question"/>
+					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="answer"
+										  editor="com.hybris.cockpitng.editor.wysiwyg"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<!-- Labels -->
+	<context merge-by="type" type="SdhFAQsCategory" component="base">
+		<y:base>
+			<y:labels>
+				<y:label>'['+code+'] ' + description</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	<context merge-by="type" type="SdhFAQs" component="base">
+		<y:base>
+			<y:labels>
+				<y:label>'['+code+'] ' + question</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<!-- Searches -->
+	<context merge-by="type" parent="GenericItem" type="SdhFAQsCategory" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+						xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+				<advanced-search:field
+						xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="description" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+	<context merge-by="type" parent="GenericItem" type="SdhFAQs" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field
+						xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="code" selected="true"/>
+				<advanced-search:field
+						xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="question" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+
+	<!-- End SDH FAQs -->
+
 	<context merge-by="principal" component="explorer-tree" principal="sdhemployeegroup">
 		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
 			<explorer-tree:navigation-node id="hmc_treenode_catalog" merge-mode="remove">

@@ -6,6 +6,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -37,11 +38,11 @@
 
 			<c:if test="${not empty obligacionesFormuno.headerPred}">
 				<div class="row">
-					<div class="col-md-10">
+					<div class="col-md-11">
 						<table class="tablesearch table" id="tabPaginacion0">
 							<thead style="cellspacing: 10 !important">
 								<tr>
-									<th><label class="control-label labeltabletd"><spring:theme
+									<th style="text-align: center !important"><label class="control-label labeltabletd"><spring:theme
 												code="obligacion.inicial.predio.aniograv" /></label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.chip" />
@@ -54,7 +55,7 @@
 									</label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.numForm" /></label></th>
-									<th><label class="control-label labeltabletd"> <spring:theme
+									<th style="text-align: center !important"><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.numRef" />
 									</label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
@@ -72,27 +73,36 @@
 								<c:forEach items="${obligacionesFormuno.headerPred }"
 									var="eachObPred">
 
-									<c:forEach items="${eachObPred.details }"
-									var="eachObPredDet">
+									<c:forEach items="${eachObPred.details }" var="eachObPredDet">
 										<c:if test="${not empty eachObPredDet.numReferencia }">
 											<tr>
-												<td><c:out value="${eachObPred.aniogravable}" /></td>
+												<td><c:out value="${eachObPred.anioGravable}" /></td>
 												<td><c:out value="${eachObPred.objetoContrato}" /></td>
 												<td><c:out value="${eachObPredDet.estadoObligacion}" /></td>
 												<td><c:out value="${eachObPredDet.obligacion}" /></td>
 												<td><c:out value="${eachObPredDet.numFormulario}" /></td>
 												<td><c:out value="${eachObPredDet.numReferencia}" /></td>
 												<td><c:out value="${eachObPredDet.objetoContrato}" /></td>
-												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}" />">Generar ROP</a></td>
+												<td><a
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObPredDet.obligacion}&totalPagar=${eachObPredDet.obligacion}&objCont=${eachObPredDet.objetoContrato}&clvPer=${fn:substring(eachObPred.anioGravable, 2, 4)}A1&tpImp=01" />">Generar
+														ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												    id="Detalle" onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${current.CHIP}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}' )">Pagar</label></td>											
+													id="Detalle"
+													onclick="pagarEnLinea('5101','${eachObPred.anioGravable}','','${eachObPredDet.objetoContrato}','${current.CHIP}', '${eachObPredDet.fechaVencimiento}', '${eachObPredDet.numReferencia}','${eachObPredDet.obligacion}' )">Pagar</label></td>
 											</tr>
-										</c:if>	
+										</c:if>
 									</c:forEach>
 								</c:forEach>
 							</tbody>
 						</table>
+                        <div class="col-md-3 col-md-offset-8">
+                            <button type="button" class="btn btn-primary btn-lg" id="action"
+                                name="action" value="Imprimir" style="margin-top: 3px"
+                                onclick="ACC.oblipend.bindTrmPdf('01','1','predialReporte.pdf');">
+                                <spring:theme code="obligacion.inicial.imprimir" />
+                            </button>
+                        </div>
 					</div>
 				</div>
 			</c:if>
@@ -110,7 +120,7 @@
 			</div>
 			<c:if test="${not empty obligacionesFormuno.headerVehiculos}">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-11">
 						<table class="tablesearch table" id="tabPaginacion1">
 							<thead>
 								<tr>
@@ -152,31 +162,42 @@
 							<tbody>
 								<c:forEach items="${obligacionesFormuno.headerVehiculos }"
 									var="eachObVehi">
-									
-									<c:forEach items="${eachObVehi.details }"
-									var="eachObVehiDet">
+
+									<c:forEach items="${eachObVehi.details }" var="eachObVehiDet">
 										<c:if test="${ not empty eachObVehiDet.numReferencia}">
 											<tr>
 												<td><c:out value="${eachObVehi.anioGravable}" /></td>
 												<td><c:out value="${eachObVehi.placa}" /></td>
 												<td><c:out value="${eachObVehi.modelo}" /></td>
-												<td><spring:theme code="vehiculos.detalle.marca.${eachObVehi.marca}"/></td>
-												<td><spring:theme code="vehiculos.detalle.linea.${eachObVehi.linea}"/></td>
+												<td><spring:theme
+														code="vehiculos.detalle.marca.${eachObVehi.marca}" /></td>
+												<td><spring:theme
+														code="vehiculos.detalle.linea.${eachObVehi.linea}" /></td>
 												<td><c:out value="${eachObVehiDet.estadoObligacion}" /></td>
 												<td><c:out value="${eachObVehiDet.obligacion}" /></td>
 												<td><c:out value="${eachObVehiDet.numFormulario}" /></td>
 												<td><c:out value="${eachObVehiDet.numReferencia}" /></td>
 												<td><c:out value="${eachObVehiDet.objetoContrato}" /></td>
-												<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}" />">Generar ROP</a></td>
+												<td><a
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObVehiDet.obligacion}&totalPagar=${eachObVehiDet.obligacion}&objCont=${eachObVehiDet.objetoContrato}&clvPer=${fn:substring(eachObVehi.anioGravable, 2, 4)}A1&tpImp=03" />">Generar
+														ROP</a></td>
 												<td><label class="control-label"
 													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-													id="Detalle" onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}' )">Pagar</label></td>
+													id="Detalle"
+													onclick="pagarEnLinea('5103','${eachObVehi.anioGravable}','','${eachObVehiDet.objetoContrato}','', '${eachObVehiDet.fechaVencimiento}', '${eachObVehiDet.numReferencia}','${eachObVehiDet.obligacion}' )">Pagar</label></td>
 											</tr>
 										</c:if>
 									</c:forEach>
 								</c:forEach>
 							</tbody>
 						</table>
+						<div class="col-md-3 col-md-offset-8">
+                            <button type="button" class="btn btn-primary btn-lg" id="action"
+                                name="action" value="Imprimir" style="margin-top: 3px"
+                                onclick="ACC.oblipend.bindTrmPdf('03','1','vehicularReporte.pdf');">
+                                <spring:theme code="obligacion.inicial.imprimir" />
+                            </button>
+                        </div>
 					</div>
 				</div>
 			</c:if>
@@ -197,11 +218,7 @@
 						<table class="tablesearch table" id="tabPaginacion2">
 							<thead>
 								<tr>
-									<th><label class="control-label labeltabletd" for=""><spring:theme
-												code="obligacion.inicial.ica.tipdocu" /></label></th>
-									<th><label class="control-label labeltabletd" for="">
-											<spring:theme code="obligacion.inicial.ica.numdocu" />
-									</label></th>
+
 									<th><label class="control-label labeltabletd" for="">
 											<spring:theme code="obligacion.inicial.ica.aniograv" />
 									</label></th>
@@ -232,32 +249,68 @@
 								</tr>
 							</thead>
 							<tbody>
+								<jsp:useBean id="peridoDesc" class="java.util.HashMap"
+									scope="request" />
+								<c:set target="${peridoDesc}" property="01"
+									value="Enero - Febrero" />
+								<c:set target="${peridoDesc}" property="02"
+									value="Marzo - Abril" />
+								<c:set target="${peridoDesc}" property="03" value="Mayo - Junio" />
+								<c:set target="${peridoDesc}" property="04"
+									value="Julio - Agosto" />
+								<c:set target="${peridoDesc}" property="05"
+									value="Septiembre - Octubre" />
+								<c:set target="${peridoDesc}" property="06"
+									value="Noviembre - Diciembre" />
+								<c:set target="${peridoDesc}" property="${peridoDesc}"
+									value="${peridoDesc}" />
+
 								<c:forEach items="${obligacionesFormuno.headerica }"
 									var="eachObIca">
-									<c:forEach items="${eachObIca.details }"
-									var="eachObIcaDet">
+									<c:forEach items="${eachObIca.details }" var="eachObIcaDet">
 										<c:if test="${not empty eachObIcaDet.numReferencia }">
-										<tr>
-											<td><c:out value="${eachObIca.tipoIdentificacion}" /></td>
-											<td><c:out value="${eachObIca.noIdentificacion}" /></td>
-											<td><c:out value="${eachObIca.anioGravable}" /></td>
-											<td><c:out value="${eachObIca.periodo}" /></td>
-											<td><c:out value="${eachObIcaDet.estadoObligacion}" /></td>
-											<td><c:out value="${eachObIcaDet.obligacion}" /></td>
-											<td><c:out value="${eachObIcaDet.numFormulario}" /></td>
-											<td><c:out value="${eachObIcaDet.numReferencia}" /></td>
-											<td><c:out value="${eachObIcaDet.objetoContrato}" /></td>
-											<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}" />">Generar ROP</a></td>
-											<td><label class="control-label"
-												style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-												id="Detalle" onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}' )">Pagar</label></td>
-										</tr>
+											<tr>
+<%-- 												<td><c:out value="${eachObIca.tipoIdentificacion}" /></td> --%>
+<%-- 												<td><c:out value="${eachObIca.noIdentificacion}" /></td> --%>
+												<td><c:out value="${eachObIca.anioGravable}" /></td>
+<%-- 												<td><c:out value="${eachObIca.periodo}" /></td> --%>
+													<td><c:out value="${eachObIca.periodo}" /></td>
+<%-- 												<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td> --%>
+												<td><c:out value="${eachObIcaDet.estadoObligacion}" /></td>
+												<td><c:out value="${eachObIcaDet.obligacion}" /></td>
+												<td><c:out value="${eachObIcaDet.numFormulario}" /></td>
+												<td><c:out value="${eachObIcaDet.numReferencia}" /></td>
+												<td><c:out value="${eachObIcaDet.objetoContrato}" /></td>
+												<td><a
+													href="<c:url value="/contribuyentes/rop?obligacion=${eachObIcaDet.obligacion}&totalPagar=${eachObIcaDet.obligacion}&tpImp=02&objCont=${eachObIcaDet.objetoContrato}&clvPer=${eachObIca.anioGravable}${eachObIca.periodo}" />">Generar
+														ROP</a></td>
+												<td><label class="control-label"
+													style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
+													id="Detalle"
+													onclick="pagarEnLinea('5102','${eachObIca.anioGravable}','${eachObIca.periodo}','${eachObIcaDet.objetoContrato}','', '${eachObIcaDet.fechaVencimiento}', '${eachObIcaDet.numReferencia}','${eachObIcaDet.obligacion}' )">Pagar</label></td>
+											</tr>
 										</c:if>
-									</c:forEach>	
+									</c:forEach>
 								</c:forEach>
 							</tbody>
 						</table>
+						<div class="col-md-3 col-md-offset-8">
+                            <button type="button" class="btn btn-primary btn-lg" id="action"
+                                name="action" value="Imprimir" style="margin-top: 3px"
+                                onclick="ACC.oblipend.bindTrmPdf('02','1','icaReporte.pdf');">
+                                <spring:theme code="obligacion.inicial.imprimir" />
+                            </button>
+                        </div>
 					</div>
+				</div>
+				<div class="row">
+					<!--<div class="col-md-3 col-md-offset-8">
+						<button type="button" class="btn btn-primary btn-lg" id="action"
+							name="action" value="Imprimir" style="margin-top: 3px"
+							onclick="window.location.href ='<c:url value='#' />';">
+							<spring:theme code="obligacion.inicial.imprimir" />
+						</button>
+					</div>-->
 				</div>
 			</c:if>
 		</div>
@@ -278,7 +331,8 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="table-responsive">
-							<table class="tablesearch table table-bordered" id="tabPaginacion3">
+							<table class="tablesearch table table-bordered"
+								id="tabPaginacion3">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -317,27 +371,38 @@
 									<c:forEach items="${obligacionesFormuno.header}"
 										var="eachPubExtTax">
 										<c:forEach items="${eachPubExtTax.details}"
-										var="eachPubExtTaxDet">
+											var="eachPubExtTaxDet">
 											<c:if test="${ not empty eachPubExtTaxDet.numReferencia }">
 												<tr>
 													<td><c:out value="${eachPubExtTax.anioGravable}" /></td>
 													<td><c:out value="${eachPubExtTax.numResolucion}" /></td>
 													<td><c:out value="${eachPubExtTax.orientacionValla}" /></td>
-													<td><c:out value="${eachPubExtTaxDet.estadoObligacion}" /></td>
+													<td><c:out
+															value="${eachPubExtTaxDet.estadoObligacion}" /></td>
 													<td><c:out value="${eachPubExtTaxDet.obligacion}" /></td>
 													<td><c:out value="${eachPubExtTaxDet.numFormulario}" /></td>
 													<td><c:out value="${eachPubExtTaxDet.numReferencia}" /></td>
 													<td><c:out value="${eachPubExtTaxDet.objetoContrato}" /></td>
-													<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}" />">Generar ROP</a></td>
+													<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachPubExtTaxDet.obligacion}&totalPagar=${eachPubExtTaxDet.obligacion}&objCont=${eachPubExtTaxDet.objetoContrato}&clvPer=${fn:substring(eachPubExtTax.anioGravable, 2, 4)}A1&tpImp=54" />">Generar
+															ROP</a></td>
 													<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle" onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}' )">Pagar</label></td>
+														id="Detalle"
+														onclick="pagarEnLinea('5154','${eachPubExtTax.anioGravable}','','${eachPubExtTaxDet.objetoContrato}','', '${eachPubExtTaxDet.fechaVencimiento}', '${eachPubExtTaxDet.numReferencia}','${eachPubExtTaxDet.obligacion}' )">Pagar</label></td>
 												</tr>
 											</c:if>
-										</c:forEach>	
+										</c:forEach>
 									</c:forEach>
 								</tbody>
 							</table>
+							<div class="col-md-3 col-md-offset-8">
+                                <button type="button" class="btn btn-primary btn-lg" id="action"
+                                    name="action" value="Imprimir" style="margin-top: 3px"
+                                    onclick="ACC.oblipend.bindTrmPdf('54','1','pubExteriorReporte.pdf');">
+                                    <spring:theme code="obligacion.inicial.imprimir" />
+                                </button>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -362,7 +427,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive">
-							<table class="tablesearch table table-bordered" id="tabPaginacion4">
+							<table class="tablesearch table table-bordered"
+								id="tabPaginacion4">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd" for=""><spring:theme
@@ -394,31 +460,58 @@
 									</tr>
 								</thead>
 								<tbody>
+									<jsp:useBean id="peridoMtnDesc" class="java.util.HashMap"
+										scope="request" />
+									<c:set target="${peridoMtnDesc}" property="01" value="Enero" />
+									<c:set target="${peridoMtnDesc}" property="02" value="Febrero" />
+									<c:set target="${peridoMtnDesc}" property="03" value="Marzo" />
+									<c:set target="${peridoMtnDesc}" property="04" value="Abril" />
+									<c:set target="${peridoMtnDesc}" property="05" value="Mayo" />
+									<c:set target="${peridoMtnDesc}" property="06" value="Junio" />
+									<c:set target="${peridoMtnDesc}" property="07" value="Julio" />
+									<c:set target="${peridoMtnDesc}" property="08" value="Agosto" />
+									<c:set target="${peridoMtnDesc}" property="09"
+										value="Septiembre" />
+									<c:set target="${peridoMtnDesc}" property="10" value="Octubre" />
+									<c:set target="${peridoMtnDesc}" property="11"
+										value="Noviembre" />
+									<c:set target="${peridoMtnDesc}" property="12"
+										value="Diciembre " />
 
 									<c:forEach items="${obligacionesFormuno.headergas}"
 										var="eachObGas">
-										<c:forEach items="${eachObGas.details}"
-										var="eachObGasDet">
+										<c:forEach items="${eachObGas.details}" var="eachObGasDet">
 											<c:if test="${not empty eachObGasDet.numReferencia}">
 												<tr>
 													<td><c:out value="${eachObGas.anioGravable}" /></td>
-													<td><c:out value="${eachObGas.periodo}" /></td>
+													<!-- <td><c:out value="${eachObGas.periodo}" /></td> -->
+													<td><c:out value="${peridoMtnDesc[eachObGas.periodo]}" /></td>
 													<td><c:out value="${eachObGasDet.estadoObligacion}" /></td>
 													<td><c:out value="${eachObGasDet.obligacion}" /></td>
 													<td><c:out value="${eachObGasDet.numFormulario}" /></td>
 													<td><c:out value="${eachObGasDet.numReferencia}" /></td>
 													<td><c:out value="${eachObGasDet.objetoContrato}" /></td>
-													<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGasDet.obligacion}" />">Generar ROP</a></td>
+													<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachObGasDet.obligacion}&totalPagar=${eachObGasDet.obligacion}&objCont=${eachObGasDet.objetoContrato}&clvPer=${fn:substring(eachObGas.anioGravable, 2, 4)}${eachObGas.periodo}&tpImp=08" />">Generar
+															ROP</a></td>
 													<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle" onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}', '${eachDeliDet.obligacion}')">Pagar</label></td>																										
+														id="Detalle"
+														onclick="pagarEnLinea('0108','${eachObGas.anioGravable}','${eachObGas.periodo}','${eachObGasDet.objetoContrato}','','${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}', '${eachDeliDet.obligacion}')">Pagar</label></td>
 												</tr>
 											</c:if>
-										</c:forEach>	
+										</c:forEach>
 									</c:forEach>
 
 								</tbody>
 							</table>
+							<div class="col-md-3 col-md-offset-8">
+                                <button type="button" class="btn btn-primary btn-lg" id="action"
+                                    name="action" value="Imprimir" style="margin-top: 3px"
+                                    onclick="ACC.oblipend.bindTrmPdf('08','1','sobGasolinaReporte.pdf');">
+                                    <spring:theme code="obligacion.inicial.imprimir" />
+                                </button>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -441,7 +534,8 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="table-responsive">
-							<table class="tablesearch table table-bordered" id="tabPaginacion5">
+							<table class="tablesearch table table-bordered"
+								id="tabPaginacion5">
 								<thead>
 									<tr>
 										<th><label class="control-label labeltabletd tabledoobli"><spring:theme
@@ -471,8 +565,7 @@
 								<tbody>
 									<c:forEach items="${obligacionesFormuno.headerdeli}"
 										var="eachDeli">
-										<c:forEach items="${eachDeli.details}"
-										var="eachDeliDet">
+										<c:forEach items="${eachDeli.details}" var="eachDeliDet">
 											<c:if test="${not empty eachDeliDet.numReferencia}">
 												<tr>
 													<td><c:out value="${eachDeli.anioGravable}" /></td>
@@ -484,20 +577,34 @@
 													<td><c:out value="${eachDeliDet.numFormulario}" /></td>
 													<td><c:out value="${eachDeliDet.numReferencia}" /></td>
 													<td><c:out value="${eachDeliDet.objetoContrato}" /></td>
-													<td><a href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}" />">Generar ROP</a></td>
+													<td><a
+														href="<c:url value="/contribuyentes/rop?obligacion=${eachDeliDet.obligacion}&totalPagar=${eachDeliDet.obligacion}&objCont=${eachDeliDet.objetoContrato}&clvPer=${eachDeli.anioGravable}&tpImp=06" />">Generar
+															ROP</a></td>
 													<td><label class="control-label"
 														style="visibility: visible !important; width: 100%; text-transform: capitalize; color: #0358d8 !important"
-														id="Detalle" onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}' )">Pagar</label></td>
+														id="Detalle"
+														onclick="pagarEnLinea('5132','${eachDeli.anioGravable}','','${eachDeliDet.objetoContrato}','${eachDeli.chip}', '${eachDeliDet.fechaVencimiento}', '${eachDeliDet.numReferencia}','${eachDeliDet.obligacion}' )">Pagar</label></td>
 												</tr>
-											</c:if>	
-										</c:forEach>	
+											</c:if>
+										</c:forEach>
 									</c:forEach>
 								</tbody>
 							</table>
+							<div class="col-md-3 col-md-offset-8">
+                                <button type="button" class="btn btn-primary btn-lg" id="action"
+                                    name="action" value="Imprimir" style="margin-top: 3px"
+                                    onclick="ACC.oblipend.bindTrmPdf('06','1','delUrbanaReporte.pdf');">
+                                    <spring:theme code="obligacion.inicial.imprimir" />
+                                </button>
+                            </div>
 						</div>
 					</div>
 				</div>
 			</c:if>
+				<c:if test="${empty obligacionesFormuno.headerdeli}">
+				<label class="control-label">No cuenta con obligaciones pendientes de Delineaci&oacuten Urbana</label> 
+				 
+				</c:if>
 		</div>
 
 
@@ -542,7 +649,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledomatri"
@@ -689,7 +796,7 @@
 									<td><input style="width: 100%"
 										class="inputtextnew tableangrav" maxlength="30" size="30"
 										disabled="disabled" type="text"
-										value="<c:out value="Año gravable"></c:out>" /></td>
+										value="<c:out value="Aï¿½o gravable"></c:out>" /></td>
 									<td><input class="inputtextnew tabledoobli"
 										disabled="disabled" value="" type="text" /></td>
 									<td><input class="inputtextnew tabledoobli"

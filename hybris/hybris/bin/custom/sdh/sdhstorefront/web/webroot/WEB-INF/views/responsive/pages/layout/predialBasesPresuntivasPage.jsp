@@ -15,13 +15,25 @@
 <predial:predialBasesGenerales />
 <predial:predialBasesDatPredio />
 
-<div class="BasesDetalle" id="BasesDetalle" style="display: none">
+<c:set var="flagDisplay" value="display: none"/>
+<c:if test="${predialFormbases.controlCampos.datosPredio == true}" >
+<c:set var="flagDisplay" value="display: block"/>
+</c:if>
+<div class="BasesDetalle" id="BasesDetalle" style="${flagDisplay}">
 <predial:predialBasesDatLiq />
 	<predial:predialBasesLiqPrivada />
 	<firmas:generalFirmas />
 	<predial:predialBasesBotones />
 </div>
 
+<div id="dialogMensajes" title="Predial">
+	<div id="dialogMensajesContent"></div>
+</div>
+<div id="dialogICA" title="Predial" ><div id="icaDialogContent"></div></div>
+<a id="downloadHelper" target="_blank"></a>
+<div id="dialogDeclaracion" title="Declaracion">
+	<div id="declaracionDialogContent"></div>
+</div>
 <script>
 
 window.onload = function() {
@@ -38,5 +50,8 @@ window.onload = function() {
 		}
 	}
 	$(".loader").fadeOut("slow");
+	accionCat_destinoHacendario();
+	$('#caracterizacionPredio').val("${predialFormbases.estrDatosGenerales.caracterizacionPredio}");
+
 }
 </script>

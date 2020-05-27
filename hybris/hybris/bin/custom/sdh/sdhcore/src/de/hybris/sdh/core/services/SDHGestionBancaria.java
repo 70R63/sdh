@@ -19,7 +19,7 @@ public interface SDHGestionBancaria
 {
 	String validade7ZipCertificates(MultipartFile multipartFile);
 	String updateFileToServer(MultipartFile multipartFile) throws IOException;
-	void extractAndUpdateTxtFileFrom7zip(String zipFilePath, String targetFilePath);
+	void extractAndUpdateTxtFileFrom7zip(String zipFilePath, String targetFilePath, String aresFilesFolder);
 	String verifyFile(String source, String target, String autoridades);
 	FileConciliaResponse fileConcilia(FileConciliaRequest request);
 }

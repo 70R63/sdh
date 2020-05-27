@@ -155,7 +155,15 @@
 		<property name="numObjeto" type="String"/>
 	</bean>
 
+	<bean class="de.hybris.sdh.facades.faqs.data.SDHFaqData">
+		<property name="code" type="String"/>
+		<property name="question" type="String"/>
+		<property name="answer" type="String"/>
+	</bean>
 
-	
+	<bean class="de.hybris.sdh.facades.faqs.data.SDHFaqCategoryData">
+		<property name="code" type="String"/>
+		<property name="description" type="String"/>
+	</bean>
 	
 </beans>

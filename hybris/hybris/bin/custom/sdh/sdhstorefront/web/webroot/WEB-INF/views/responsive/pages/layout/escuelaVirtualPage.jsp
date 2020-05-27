@@ -7,8 +7,7 @@
 <%@ taglib prefix="virtual" tagdir="/WEB-INF/tags/responsive/escuelavirtual"%>
 
 <div class="loader"></div>
-<virtual:escuelaVirtual/>
-
+<virtual:escuelaVirtualRoles/>
 		<script type="text/javascript">
 window.onload = function() {
 	

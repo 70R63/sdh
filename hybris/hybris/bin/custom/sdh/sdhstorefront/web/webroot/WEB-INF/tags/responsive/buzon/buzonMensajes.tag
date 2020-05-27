@@ -20,7 +20,7 @@
 	<sf:form>
 		<div style="aling-items: center; justify-content: center">
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3 center headline">
+				<div class="col-md-8 col-md-offset-2 center headline">
 					<h2>
 						<span><spring:theme code="mibuzon.mensajes.nuevos" /></span>
 					</h2>
@@ -28,9 +28,8 @@
 			</div>
 			<div>
 				<div class="row">
-
-					<div class="col-md-7 col-md-offset-3 center">
-						<table class="table table-responsive" id="">
+					<div class="col-md-8 col-md-offset-2 center">
+						<table class="table table-responsive" id="tabPaginacion0">
 							<thead>
 								<tr>
 									<th style="text-align: center"><label
@@ -55,33 +54,53 @@
 									<th style="text-align: center"><label
 										class="control-label"
 										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.notificaciones.anexos" />
+									</label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
 											<spring:theme code="mibuzon.mensajes.papelera" />
 									</label></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="identifi"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="autoridad"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="asunto"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="fechanotificacion"></c:out>"
-										maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><img
-										src="${themeResourcePath}/images/papeleranuevos.png"
-										style="width: 30px"></img></td>
-								</tr>
+
+								<c:forEach items="${miBuzon.mensajesMsg}" var="eachDoc">
+									<c:if test="${eachDoc.tipoMensaje == '2'}">
+										<tr>
+											<td><c:out value="${eachDoc.id_radicado}" /></td>
+											<td><c:out value="${eachDoc.autoridadEmisora}" /></td>
+											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
+												<c:if test="${echDocumentos.nombreDocumento != ''}">
+													<td><c:out
+															value="${eachDoc.asunto}" /></td>
+
+													<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
+													<td><label class="control-label download"
+														style="text-transform: capitalize !important" for=""
+														data-pdfimprimir="${echDocumentos.pdf}"
+														data-idRadicado="${eachDoc.id_radicado}"
+														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
+														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
+														data-asunto="${eachDoc.asunto}"
+														id="download" onclick="descargarNoti(this)"> <span
+															class="glyphicon glyphicon-download-alt"></span></label></td>
+													<td><img
+														src="${themeResourcePath}/images/papeleranuevos.png"
+														style="width: 30px" id="papeleraMsg" class="papeleraMsg"
+														onclick="papeleraMsgLeidos(this)"
+														data-pdfimprimir="${echDocumentos.pdf}"
+														data-idRadicado="${eachDoc.id_radicado}"
+														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
+														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
+														data-asunto="${eachDoc.asunto}"></img></td>
+												</c:if>
+											</c:forEach>
+										</tr>
+
+									</c:if>
+
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -89,8 +108,9 @@
 			</div>
 
 
+
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3 headline">
+				<div class="col-md-8 col-md-offset-2 headline">
 					<h2>
 						<span><spring:theme code="mibuzon.mensajes.leidos" /></span>
 					</h2>
@@ -99,8 +119,9 @@
 			<div>
 				<div class="row">
 
-					<div class="col-md-7 col-md-offset-3 center">
-						<table class="table table-responsive" id="">
+					<div class="col-md-8 col-md-offset-2 center">
+						<table class="table table-responsive tabPaginacion1"
+							id="tabPaginacion1">
 							<thead>
 								<tr>
 									<th style="text-align: center"><label
@@ -125,38 +146,54 @@
 									<th style="text-align: center"><label
 										class="control-label"
 										style="text-transform: capitalize !important" for="">
+											<spring:theme code="mibuzon.notificaciones.anexos" />
+									</label></th>
+									<th style="text-align: center"><label
+										class="control-label"
+										style="text-transform: capitalize !important" for="">
 											<spring:theme code="mibuzon.mensajes.papelera" />
 									</label></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="identifi"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="autoridad"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="asunto"></c:out>" maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><input id="" name="" class="inputtextnew"
-										aria-required="true" type="text" readonly="readonly"
-										value="<c:out value="fechanotificacion"></c:out>"
-										maxlength="240"
-										style="width: 100% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
-									<td><img
-										src="${themeResourcePath}/images/papeleraleidos.png"
-										style="width: 20px"></img></td>
-								</tr>
+
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<div class="row">
+	<a id='dwnldLnk' download='nombredocumento.pdf' style="display: none;"/>
+	</div>
 	</sf:form>
+	
+
 </div>
+
+<script>
+
+function descargarNoti(obdesca) {
+	var objetodeN = obdesca;
+	ACC.mibuzon.bindDescargar(objetodeN);
+	objetodeN.offsetParent.parentNode.remove();
+}
+
+	function downloaddos(obdesc) {
+		var objetode = obdesc;
+		ACC.mibuzon.bindDescargar2(objetode);
+	}
+
+	function papeleraMsgLeidos(object) {
+		var objectf = object;
+		ACC.mibuzon.bindPapeleraNuevos(objectf);
+		objectf.offsetParent.parentNode.remove();
+
+	}
+
+	function eliminarleidos(objectEl) {
+		var objecteliminar = objectEl;
+		objectEl.offsetParent.parentNode.remove();
+	}
+</script>

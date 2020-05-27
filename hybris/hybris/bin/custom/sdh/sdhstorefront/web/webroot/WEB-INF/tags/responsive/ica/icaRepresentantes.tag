@@ -88,7 +88,7 @@
 				</button>
 				<%-- 				<button style="margin-top: 3px;" id="" onclick="window.location.href ='<c:url value='/contribuyentes/ica/declaracion?anoGravable=${fn:substring(icaInfObjetoFormResp.icaInfObjetoResponse.fechaIniAct,0,4)}&numObjeto=${numObjeto}' />';" --%>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<div class="form-group">
 					<button style="margin-top: 3px;" id=""
 						onclick="onClick('<c:url value='${numObjeto}' />');"
@@ -98,6 +98,8 @@
 				</div>
 			</div>
 		</div>
+
+
 		<div class="row">
 			<div class="col-md-12"
 				style="background: #d2d2d2; margin-top: 20px !important;">

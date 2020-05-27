@@ -17,7 +17,9 @@
 </sf:form>
 
 
-
+<div id="dialogMensajes" title="Tramites">
+	<div id="dialogMensajesContent"></div>
+</div>
 <script>
 
 window.onload = function() {

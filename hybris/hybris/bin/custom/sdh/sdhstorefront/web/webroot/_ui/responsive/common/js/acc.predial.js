@@ -1,7 +1,7 @@
 ACC.predial = {
+	flagMsjInfoObjeto : {},
 
-	_autoload : [ "bindoptionNo", "bindprophorizontal", "binbuttonPrecalculo",
-			"bindDetallePredial", "bindDeclaracionPredial" ],
+	_autoload : [ "bindoptionNo", "bindprophorizontal","bindGeneraDeclaracionButton_predial", "bindMostrarAporteVolintario", "bindNoAceptaFactura", "bindDialogoMensajes"],
 
 	bindoptionNo : function() {
 		$(document).on("click", ".optradio", function() {
@@ -18,17 +18,52 @@ ACC.predial = {
 		});
 	},
 	
+	bindNoAceptaFactura : function() {
+		$(document).on("click", ".predialNoAceptaFactura", function() {
+			debugger;
+			
+			var valPredialNoAceptaFactura = this.checked;
+			
+			if (valPredialNoAceptaFactura) {
+				$('#basegrav').prop('disabled', false);						
+			} else {
+				$('#basegrav').prop('disabled', true);				
+			}
+		});
+		
+		$(document).on("change", ".basegrav", function() {
+			debugger;
+			var nuevoValor = this.value;
+			$('#BaseGravable').prop('value', nuevoValor);
+		});
+	},
+	
+	
+	bindMostrarAporteVolintario : function(){
+//		debugger;
+		var mostrarAporteVoluntario = document.getElementById('mostrarAporteVoluntario');
+		if (mostrarAporteVoluntario != null && mostrarAporteVoluntario.value == "true"){
+			$('#proyectoLiq').prop('disabled', false);
+			$('#optionSi').prop('disabled', false);
+			$('#optionNo').prop('disabled', false);
+		}else{
+			$('#proyectoLiq').prop('disabled', true);
+			$('#optionSi').prop('disabled', true);
+			$('#optionNo').prop('disabled', true);			
+		}		
+	},	
+	
 	bindprophorizontal : function() {
 		$(document).on("change", ".prophorizontal", function(e) {
 			e.preventDefault();
 			var val = this.value;
 
-			if (val == 'Si') {
+			if (val == '1') {
 				$('#areaconstruccion').prop('disabled', false);
 				;
 				$('#areaterreno').prop('disabled', true);
 				;
-			} else if (val == 'No') {
+			} else if (val == '2') {
 				$('#areaconstruccion').prop('disabled', false);
 				;
 				$('#areaterreno').prop('disabled', false);
@@ -69,6 +104,7 @@ ACC.predial = {
 					data : data,
 					type : "GET",
 					success : function(result) {
+						ACC.predial.establecerMensajeInfoObjeto(ACC.predial.leerMensajesInfoObjeto(result));
 						console.log(result);
 						$(".chip").val(result.chip);
 						$("#opcUsoPredialUni").val(result.opcionuso);
@@ -174,7 +210,7 @@ ACC.predial = {
 												+ '<td><input style="width: 123px !important" class="inputtextnew calidad" disabled="disabled" type="text" size="40" value="'
 												+ datLiq.baseGravable
 												+ '" /></td>'
-												+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
+												+ '<td><input style="width: 403px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
 												+ destino
 												+ '" /></td>'
 												+ '<td><input style="width: 123px !important" class="inputtextnew tablenumiden" disabled="disabled" type="text" size="40" value="'
@@ -186,154 +222,154 @@ ACC.predial = {
 
 						var marc = result.marcas;
 
-						
+						if (marc != null) {
 							for (var i = 0; i < marc.length; i++) {
-								if (marc.marca != null) {
+								
 								
 								var desmarc = "";
-								if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "1") {
+								if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "1") {
 									desmarc = "SALÓN COMUNAL";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "10") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "10") {
 									desmarc = "INSTALACIONES MILITARES Y DE POLICÍA";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "11") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "11") {
 									desmarc = "PARQUES PÚBLICOS";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "13") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "13") {
 									desmarc = "RAMA JUDICIAL";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "16") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "16") {
 									desmarc = "PREDIOS RESIDENCIALES ESTRATO 1  Y 2 NO OBLIG";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "2") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "2") {
 									desmarc = "SSP NO OBLIGADOS";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "4") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "4") {
 									desmarc = "IGLESIA";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "5") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "5") {
 									desmarc = "BIENES DE USO PÚBLICO";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "6") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "6") {
 									desmarc = "DEFENSA CIVIL COLOMBIANA";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "7") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "7") {
 									desmarc = "DISTRITAL";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "8") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "8") {
 									desmarc = "CRUZ ROJA COLOMBIANA";
-								} else if (marc[i].marca == "1"
-										&& marc[i].tipoMarca == "9") {
+								} else if (marc[i].tipoMarca == "1"
+										&& marc[i].marca == "9") {
 									desmarc = "EMBAJADAS";
-								} else if (marc[i].marca == "2"
-										&& marc[i].tipoMarca == "1") {
+								} else if (marc[i].tipoMarca == "2"
+										&& marc[i].marca == "1") {
 									desmarc = "SECUESTRADO";
-								} else if (marc[i].marca == "2"
-										&& marc[i].tipoMarca == "2") {
+								} else if (marc[i].tipoMarca == "2"
+										&& marc[i].marca == "2") {
 									desmarc = "ATENTADO O CATÁSTROFE";
-								} else if (marc[i].marca == "2"
-										&& marc[i].tipoMarca == "3") {
+								} else if (marc[i].tipoMarca == "2"
+										&& marc[i].marca == "3") {
 									desmarc = "BIEN DE INTERÉS CULTURAL";
-								} else if (marc[i].marca == "2"
-										&& marc[i].tipoMarca == "4") {
+								} else if (marc[i].tipoMarca == "2"
+										&& marc[i].marca == "4") {
 									desmarc = "BANCO DE SUELOS DISTRITAL";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "1") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "1") {
 									desmarc = "SIN AVALÚO CATASTRAL";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "10") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "10") {
 									desmarc = "SIN SUJETO VALIDO";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "11") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "11") {
 									desmarc = "PREDIOS INCAUTADOS IMPRODUCTIVOS";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "12") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "12") {
 									desmarc = "PREDIOS INCAUTADOS PRODUCTIVOS";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "2") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "2") {
 									desmarc = "LOTES EN PH SIN CONSTRUIR";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "3") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "3") {
 									desmarc = "AREA CONSTRUIDA 0 Y ÁREA TERRENO 0";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "4") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "4") {
 									desmarc = "DESTINO HACENDARIO 0";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "5") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "5") {
 									desmarc = "INCONSISTENCIA POR ÁREA CONSTRUIDA";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "6") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "6") {
 									desmarc = "INCONSISTENCIA POR USO CATASTRAL";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "7") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "7") {
 									desmarc = "RESIDENCIAL URBANO SIN ESTRATO";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "8") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "8") {
 									desmarc = "SIN DIRECCIÓN DE NOTIFICACIÓN";
-								} else if (marc[i].marca == "3"
-										&& marc[i].tipoMarca == "9") {
+								} else if (marc[i].tipoMarca == "3"
+										&& marc[i].marca == "9") {
 									desmarc = "IMPUESTO CERO";
-								} else if (marc[i].marca == "4"
-										&& marc[i].tipoMarca == "1") {
+								} else if (marc[i].tipoMarca == "4"
+										&& marc[i].marca == "1") {
 									desmarc = "DISTRITO PARCIAL";
-								} else if (marc[i].marca == "4"
-										&& marc[i].tipoMarca == "2") {
+								} else if (marc[i].tipoMarca == "4"
+										&& marc[i].marca == "2") {
 									desmarc = "IGLESIA PARCIAL";
-								} else if (marc[i].marca == "4"
-										&& marc[i].tipoMarca == "3") {
+								} else if (marc[i].tipoMarca == "4"
+										&& marc[i].marca == "3") {
 									desmarc = "SALON PARCIAL";
-								} else if (marc[i].marca == "4"
-										&& marc[i].tipoMarca == "4") {
+								} else if (marc[i].tipoMarca == "4"
+										&& marc[i].marca == "4") {
 									desmarc = "USO PÚBLICO PARCIAL";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "1") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "1") {
 									desmarc = "FINANCIERO";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "10") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "10") {
 									desmarc = "RESIDENCIALES SUELO EXPANSION";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "11") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "11") {
 									desmarc = "DEPÓSITO";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "12") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "12") {
 									desmarc = "RESTRICCIÓN ÍNDICE OCUPACIÓN";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "13") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "13") {
 									desmarc = "ID MEJORA MATRIZ";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "14") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "14") {
 									desmarc = "IMPACTO PREDIO";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "15") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "15") {
 									desmarc = "MUTACION FISICA";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "16") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "16") {
 									desmarc = "OPAIN";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "2") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "2") {
 									desmarc = "ZONA FRANCA";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "3") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "3") {
 									desmarc = "ÁREAS PROTEGIDAS";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "4") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "4") {
 									desmarc = "TENDERO";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "5") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "5") {
 									desmarc = "PREDIOS RESID. TARIFA ESPECIAL";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "6") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "6") {
 									desmarc = "NO URBANIZABLES";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "7") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "7") {
 									desmarc = "PPR-UAF";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "8") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "8") {
 									desmarc = "GARAJES Y DEPOSITOS CON USO 090";
-								} else if (marc[i].marca == "5"
-										&& marc[i].tipoMarca == "9") {
+								} else if (marc[i].tipoMarca == "5"
+										&& marc[i].marca == "9") {
 									desmarc = "ASISTENCIA PÚBLICA";
 								} else {
 									desmarc = "-";
@@ -396,6 +432,8 @@ ACC.predial = {
 						var tipdeclar = result.estrDatosGenerales;
 						$("#retipDeclaracion").val(tipdeclar.tipoDeclaracion);
 
+
+
 					},
 					error : function() {
 						alert("Error al consultar el Detalle del Predio, Intentalo más tarde");
@@ -454,12 +492,33 @@ ACC.predial = {
 	},
 
 	calculoPredial : function() {
+		debugger;
 		var dataForm = {};
 		dataForm.numBP = $("#NumBP").val();
 		dataForm.chipcalculo = $("#CHIP").val();
 		dataForm.matrInmobiliaria = $("#MatrInmobiliaria").val();
 		dataForm.anioGravable = $("#AnioGravable").val();
 		dataForm.opcionuso = $("#OpcionUso").val();
+		
+		var newLiquidacionRequ = {};
+		
+		var checkAporteRadio = $("input[name='optradio']:checked"). val();
+				
+				if(checkAporteRadio == '1')
+				{
+					newLiquidacionRequ.aporteVoluntario="X";
+					
+				
+				}else{
+					newLiquidacionRequ.aporteVoluntario="";
+				}
+				
+				//LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
+				newLiquidacionRequ.proyecto = $("#proyectoLiq").val();
+				
+				dataForm.newLiquidacionRequ = newLiquidacionRequ;
+	
+				
 		
 		var DatosLiquidacion = {};
 		DatosLiquidacion.TipoDeclaracion = $("#TipoDeclaracion").val();
@@ -469,22 +528,26 @@ ACC.predial = {
 		DatosLiquidacion.TarifaLiquidacion = $("#TarifaLiquidacion").val();
 		DatosLiquidacion.DestinoHacendario = $("#DestinoHacendario").val();
 		DatosLiquidacion.BaseGravable = $("#BaseGravable").val();
-		DatosLiquidacion.CanonArrendamiento = $("#CanonArrendamiento").val();
+		DatosLiquidacion.CanonArrendamiento = $("#canonArrendamiento").val();
 		DatosLiquidacion.CalidadSujecion = $("#CalidadSujecion").val();
 		DatosLiquidacion.AvaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
 		DatosLiquidacion.AreaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
 		DatosLiquidacion.AvaluoProrrateado = $("#AvaluoProrrateado").val();
 		DatosLiquidacion.AvaluoIndiceEdificabilidad = $("#AvaluoIndiceEdificabilidad").val();
 		DatosLiquidacion.ExclusionParcial = $("#ExclusionParcial").val();
+		DatosLiquidacion.propiedadHorizontal = $("#propiedadHorizontal").val(); 
+		DatosLiquidacion.caracterizacionPredio = $("#caracterizacionPredio").val(); 
+		DatosLiquidacion.area_construida = $("#areaconstruccion").val(); 
+		DatosLiquidacion.area_terreno_catastro = $("#areaterreno").val(); 
 		dataForm.newDatosLiquidacion = DatosLiquidacion;
 
 		var calcLiquidacionPrivada ={};
-		
+		debugger;
 		var checkAporteRadio = $("input[name='optradio']:checked"). val();
 		
 		if(checkAporteRadio == '1')
-		{
-			calcLiquidacionPrivada.AporteVoluntario="PROYECTO 1";
+		{ 
+			calcLiquidacionPrivada.AporteVoluntario="X";
 			
 		
 		}else{
@@ -492,9 +555,30 @@ ACC.predial = {
 		}
 		
 		//LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
-		calcLiquidacionPrivada.Proyecto = $("#Proyecto").val();
+		calcLiquidacionPrivada.Proyecto = $("#proyectoLiq").val();
 		
 		dataForm.calcLiquidacionPrivada = calcLiquidacionPrivada;
+		
+		var newLiquidacionRequ = {};
+		
+var checkAporteRadio = $("input[name='optradio']:checked"). val();
+		
+		if(checkAporteRadio == '1')
+		{
+			newLiquidacionRequ.AporteVoluntario="X";
+			
+		
+		}else{
+			newLiquidacionRequ.AporteVoluntario="";
+		}
+		
+		//LiquidacionPrivada.AporteVoluntario = $("#AporteVoluntario").val();
+		newLiquidacionRequ.Proyecto = $("#proyectoLiq").val();
+		
+		dataForm.newLiquidacionRequ = newLiquidacionRequ;
+		
+		
+		
 		
 		$.ajax({
 			url : ACC.calculoPredialURL,
@@ -504,13 +588,13 @@ ACC.predial = {
 			 dataType: "json",
 			contentType: "application/json",
 			success : function(result) {
-			
+			    debugger;
 				var actualErrors = [];
             	
             	if(result.errores)
             	{
             		$.each(result.errores, function( index, value ) {
-            			if(value.idError == "0")
+            			if(value.idError != "0" && value.idError != "00" && value.idError != "")
             			actualErrors.push(value);
             		});
             	}
@@ -528,9 +612,11 @@ ACC.predial = {
 				
         			$( "#dialogICA" ).dialog( "open" );
         			$("#icaDialogContent").html("El cálculo se ha realizado exitosamente.");
-    			
-				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorAporteVoluntario);
-				$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoIncrementoDiferencial);
+        			$("#numForm").val(result.numFrom);
+        			var liq = result.liquidacionPrivada;
+    			$("#ValorImpuestoACargo").val(liq.valorImpuestoACargo);
+				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.aporteVoluntario);
+				$("#DescuentoPorIncrementoDiferencias").val(result.liquidacionPrivada.descuentoPorIncrementoDiferencias);
 				$("#ValorImpuestoAjustadoActual").val(result.liquidacionPrivada.valorImpuestoAjustadoActual);
 				$("#Sancion").val(result.liquidacionPrivada.sancion);
 				$("#TotalSaldoACargo").val(result.liquidacionPrivada.totalSaldoACargo);
@@ -541,6 +627,17 @@ ACC.predial = {
 				$("#TotalAPagar").val(result.liquidacionPrivada.totalAPagar);
 				$("#ValorAporteVoluntario").val(result.liquidacionPrivada.valorAporteVoluntario);
 				$("#TotalConPagoVoluntario").val(result.liquidacionPrivada.totalConPagoVoluntario);
+				$("#Tarifa_liquidacion").val(result.liquidacionPrivada.tarifaLiquidacion.trim());
+				
+				
+				if(liq.proyecto == "1"){
+					$("#proyectoLiq").val('01');
+				}else if(liq.proyecto == "2"){
+					$("#proyectoLiq").val('02');
+        		}else{
+        			$("#proyectoLiq").val('00');
+        		}
+        		
         		}
 			},
 			error : function() {
@@ -563,7 +660,7 @@ ACC.predial = {
 		DatosLiquidacion.TarifaLiquidacion = $("#TarifaLiquidacion").val();
 		DatosLiquidacion.DestinoHacendario = $("#DestinoHacendario").val();
 		DatosLiquidacion.BaseGravable = $("#BaseGravable").val();
-		DatosLiquidacion.CanonArrendamiento = $("#CanonArrendamiento").val();
+		DatosLiquidacion.CanonArrendamiento = $("#canonArrendamiento").val();
 		DatosLiquidacion.CalidadSujecion = $("#CalidadSujecion").val();
 		DatosLiquidacion.AvaluoMatrizMejora = $("#AvaluoMatrizMejora").val();
 		DatosLiquidacion.AreaTerrenoMejoraContrib = $("#AreaTerrenoMejoraContribuye").val();
@@ -633,6 +730,130 @@ ACC.predial = {
 			}
 		});
 		
-	}
+	},
+	
+	bindGeneraDeclaracionButton_predial: function () {
+		 $(document).on("click", "#predialGeneraDeclaracionButton", function (e) {
+	 	        e.preventDefault();
+	 	       ACC.opcionDeclaraciones.presentarDeclaracionGenerica();
+	 	       
+		 });
+	 },
+	 
+	 
+	 ejecutarPreCalculoPB : function (numBP,chip,anioGravable,areaConstruida,areaTerrenoCatastro,caracterizacionPredio, propiedadHorizontal, destinoHacendario){
 
+		ACC.predial.visualizacionBasesDetalle(false);
+		if(ACC.predial.validarAntesSubmit_precalculoBP()){
+			var dataActual = {};	
+		
+			
+			dataActual.numBP = numBP;
+			dataActual.CHIP = chip;
+			dataActual.anioGravable = anioGravable;
+			dataActual.areaConstruida = areaConstruida;
+			dataActual.areaTerrenoCatastro = areaTerrenoCatastro;
+			dataActual.caracterizacionPredio = caracterizacionPredio;
+			dataActual.propiedadHorizontal = propiedadHorizontal;
+			dataActual.destinoHacendario = destinoHacendario;
+			
+			
+			$.ajax({
+				url : ACC.precalculoPredialBPURL,
+				data : dataActual,
+				type : "GET",
+				success : function(dataResponse) {
+					if(dataResponse != null){
+						if(dataResponse.errores.txtMsj.trim() != ""){
+			            	$("#dialogMensajes" ).dialog( "open" );
+							$("#dialogMensajesContent").html("");
+		            		$("#dialogMensajesContent").html(dataResponse.errores.txtMsj+"<br>");
+						}
+						
+						$("#BaseGravable").val(dataResponse.baseGravable);
+						ACC.predial.visualizacionBasesDetalle(true);
+					}
+				},
+				error : function() {
+					alert("Error procesar la solicitud de basespresuntivas");	
+				}
+			});
+		}
+	 },
+	 
+	 visualizacionBasesDetalle : function (flagVisible){
+		var valDisplay = 'none';
+		var basesDetalle = document.getElementById("BasesDetalle");
+		if(basesDetalle != null){
+			if(flagVisible){
+				valDisplay = 'block';
+			}
+			basesDetalle.style.display = valDisplay;
+		}
+		 
+	 },
+		 
+		 
+	 validarAntesSubmit_precalculoBP : function (){
+		 var flagValidacion = false;
+		 
+		 if($("#caracterizacionPredio").val()!= null && $("#caracterizacionPredio").val()!= null &&
+				 $("#caracterizacionPredio").val()!= "" && $("#caracterizacionPredio").val()!= ""){
+			 flagValidacion = true;
+		 }else{
+			 alert("Los campos Destino Hacendario y Caracterización del predio son obligatorios");
+		 }
+		 
+		 
+		 return flagValidacion;
+	 },
+	 
+	 
+	 bindDialogoMensajes : function (){
+    	$( "#dialogMensajes" ).dialog({ 
+    		autoOpen: false, 
+    		modal: true,
+			 draggable: false,
+    		buttons: {
+    			Ok: function() {
+    				$( this ).dialog( "close" );
+    			}
+    	    } 
+    	});
+	 },
+	 
+	 
+	 leerMensajesInfoObjeto : function(result){
+		var mensaje = "";
+		
+		$.each(result.tblErrores, function (index,value){
+			if(value.descripcionMensajes != null && value.descripcionMensajes != "" ){
+				mensaje += value.descripcionMensajes;
+			}
+		});
+
+		 return mensaje;
+	 },
+	 
+	 
+	 establecerMensajeInfoObjeto :  function(mensaje){
+		if(mensaje.trim() != ""){
+			$("#dialogMensajesContent").html("");
+    		$("#dialogMensajesContent").html(mensaje.trim()+"<br>");
+    		ACC.predial.flagMsjInfoObjeto = "X";
+		}
+
+	 },
+	 
+	 
+	 mostrarMensajeInfoObjeto :  function(){
+		var flagMensaje = false;
+		if(ACC.predial.flagMsjInfoObjeto == "X"){
+        	$("#dialogMensajes" ).dialog( "open" );
+        	flagMensaje = true;
+		}
+		
+		return flagMensaje;
+	 }
+	 
 };
