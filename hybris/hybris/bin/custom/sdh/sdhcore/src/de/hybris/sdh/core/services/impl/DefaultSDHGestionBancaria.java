@@ -55,6 +55,23 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 		String isValid = null;
         final String nameFile = this.updateFileToServer(multipartFile);
         if(Objects.nonNull(nameFile)){
+
+			try
+			{
+				LOG.error("-----------Copy file to Ares inicio-----------------");
+				final File sourceFile = new File(approvedFilesFolder + nameFile);
+				final File destFile = new File(approvedAresFilesFolder + nameFile);
+				Files.copy(sourceFile.toPath(), destFile.toPath());
+				LOG.error("Copy file source: " + sourceFile.toPath());
+				LOG.error("Copy file destination: " + destFile.toPath());
+				LOG.error("-----------Copy file to Ares fin--------------------");
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("Error occurs: " + e);
+			}
+
 			isValid = this.verifyFile(updatedFilesFolder + nameFile, approvedFilesFolder + nameFile, autoridadesPath);
 			if (isValid == null)
 			{ //Extract .txt file from p7zip if file is valid
@@ -97,21 +114,21 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         RandomAccessFile randomAccessFile = null;
         final File zip = null;
 
-		try
-		{
-			LOG.error("-----------Copy file to Ares inicio-----------------");
-			final File sourceFile = new File(zipFilePath);
-			final File destFile = new File(aresFilePath);
-			Files.copy(sourceFile.toPath(), destFile.toPath());
-			LOG.error("Copy file source: " + sourceFile.toPath());
-			LOG.error("Copy file destination: " + destFile.toPath());
-			LOG.error("-----------Copy file to Ares fin--------------------");
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("Error occurs: " + e);
-		}
+		//		try
+		//		{
+		//			LOG.error("-----------Copy file to Ares inicio-----------------");
+		//			final File sourceFile = new File(zipFilePath);
+		//			final File destFile = new File(aresFilePath);
+		//			Files.copy(sourceFile.toPath(), destFile.toPath());
+		//			LOG.error("Copy file source: " + sourceFile.toPath());
+		//			LOG.error("Copy file destination: " + destFile.toPath());
+		//			LOG.error("-----------Copy file to Ares fin--------------------");
+		//
+		//		}
+		//		catch (final Exception e)
+		//		{
+		//			LOG.error("Error occurs: " + e);
+		//		}
 
         try{
             randomAccessFile = new RandomAccessFile(zipFilePath, "r");
