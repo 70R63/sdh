@@ -209,13 +209,14 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 						vehiculosFormDeclaracion.setLinea(eachVehResponse.getLinea());
 						vehiculosFormDeclaracion.setModelo(eachVehResponse.getModelo());
 						vehiculosFormDeclaracion.setBlindado(eachVehResponse.getBlindado());
+						vehiculosFormDeclaracion
+								.setAvaluo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getAvaluoActual()); //Este campo se seteaba dentro de la validacion de numForm != null, pero por reporte de incidente se removio de la validacion
+
 						if (vehiculosFormDeclaracion.getNumForm() != null && !vehiculosFormDeclaracion.getNumForm().isEmpty())
 						{
 
 								String formas = "";
 							formas = detalleVehiculosResponse.getInfo_declara().getInfoVeh().getNumForm();
-							vehiculosFormDeclaracion
-									.setAvaluo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getAvaluoActual());
 							vehiculosFormDeclaracion
 									.setImpuestoCargo(detalleVehiculosResponse.getInfo_declara().getLiquidacion().getImpuestoCargo());
 								if (formas.equals(numForma))

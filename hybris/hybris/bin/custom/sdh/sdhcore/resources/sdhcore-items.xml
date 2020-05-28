@@ -868,13 +868,47 @@
 						<modifiers optional="true" />
 						<persistence type="property"></persistence>
 					</attribute>
-					<attribute qualifier="answer" type="java.lang.String" >
+					<attribute qualifier="answer" type="java.lang.String">
 						<description>FAQ Answer</description>
+						<modifiers read="true" write="true" search="false" optional="true"/>
+						<persistence type="property">
+							<columntype database="sap">
+								<value>nvarchar(5000)</value>
+							</columntype>
+							<columntype database="oracle">
+								<value>varchar2(4000)</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>text</value>
+							</columntype>
+							<columntype database="sqlserver">
+								<value>nvarchar(max)</value>
+							</columntype>
+							<columntype database="hsqldb">
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		<typegroup name="sdhCatalogs">
+			<itemtype generate="true" code="SdhDocumentType" extends="GenericItem" autocreate="true" >
+				<deployment table="SdhDocumentType" typecode="20010" />
+				<attributes>
+					<attribute type="java.lang.String" qualifier="code">
+						<description>SDH Document Type Code</description>
+						<modifiers unique="true"/>
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="description">
+						<description>SDH Document Type Description</description>
 						<modifiers optional="true" />
 						<persistence type="property"></persistence>
 					</attribute>
 				</attributes>
 			</itemtype>
 		</typegroup>
+
     </itemtypes>
 </items>

@@ -113,6 +113,7 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.vehiculos.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.gestionBancaria.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.mibuzon.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/acc.facturacion.js"></script>
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
 

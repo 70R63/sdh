@@ -18,6 +18,9 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.sdh.core.customBreadcrumbs.ResourceBreadcrumbBuilder;
 import de.hybris.sdh.core.pojos.requests.BuzonTributarioRequest;
 import de.hybris.sdh.core.pojos.requests.ConsultaContribuyenteBPRequest;
+import de.hybris.sdh.core.pojos.responses.BuzonErrores;
+import de.hybris.sdh.core.pojos.responses.BuzonMensajes2;
+import de.hybris.sdh.core.pojos.responses.BuzonTributarioMsgResponse;
 import de.hybris.sdh.core.pojos.responses.BuzonTributarioResponse;
 import de.hybris.sdh.core.services.SDHBuzonTributarioService;
 import de.hybris.sdh.core.services.SDHCertificaRITService;
@@ -97,7 +100,6 @@ public class BuzonController extends AbstractPageController
 
 		final ConsultaContribuyenteBPRequest consultaContribuyenteBPRequest = new ConsultaContribuyenteBPRequest();
 		final MiBuzon miBuzon = new MiBuzon();
-		//	final ObjectMapper mapper = new ObjectMapper();
 		final BuzonTributarioRequest buzonrequest = new BuzonTributarioRequest();
 		final CustomerModel customerModel = (CustomerModel) userService.getCurrentUser();
 
@@ -115,40 +117,66 @@ public class BuzonController extends AbstractPageController
 		buzonrequest.setVigencia(anioact);
 		buzonrequest.setCheckLectura("x");
 
+		final ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+
 		try
 		{
-
-
-			final ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
 			final BuzonTributarioResponse buzonTributarioResponse = mapper.readValue(
 					sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioResponse.class);
 
-			miBuzon.setIdRadicado(buzonTributarioResponse.getIdRadicado());
-			miBuzon.setAutoridadEmisora(buzonTributarioResponse.getAutoridadEmisora());
+			BuzonErrores errores = new BuzonErrores();
 
-			miBuzon.setTipoMensaje(buzonTributarioResponse.getTipoMensaje());
-			miBuzon.setFechaNotificacion(buzonTributarioResponse.getFechaNotificacion());
-			miBuzon.setCheckBoxLectura(buzonTributarioResponse.getCheckBoxLectura());
-			miBuzon.setDocumentos(buzonTributarioResponse.getDocumentos());
-			miBuzon.setErrores(buzonTributarioResponse.getErrores());
+			errores = buzonTributarioResponse.getMensajes().getErrores();
 
+			if (errores != null)
+			{
 
+				model.addAttribute("errores", errores);
+			}
 
 			model.addAttribute("miBuzon", miBuzon);
 
 		}
 		catch (final Exception e)
 		{
-			LOG.error("error getting customer info from SAP for rit page: " + e.getMessage());
-			GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
-			model.addAttribute("miBuzon", miBuzon);
 
+			try
+			{
+				final BuzonTributarioMsgResponse buzonTributarioMsgResponse = mapper
+						.readValue(sdhBuzonTributarioService.buzonTributarioRequest(buzonrequest), BuzonTributarioMsgResponse.class);
+
+				miBuzon.setMensajesMsg(buzonTributarioMsgResponse.getMensajes());
+
+				int Mi = 1;
+				int Ni = 1;
+
+				for (final BuzonMensajes2 eachTipMensaje : buzonTributarioMsgResponse.getMensajes())
+				{
+					if ("2".equals(eachTipMensaje.getTipoMensaje()))
+					{
+						miBuzon.setContMsj(Mi);
+						Mi++;
+					}
+					else if ("1".equals(eachTipMensaje.getTipoMensaje()))
+					{
+						miBuzon.setContNot(Ni);
+						Ni++;
+					}
+				}
+
+				model.addAttribute("miBuzon", miBuzon);
+
+			}
+			catch (final Exception s)
+			{
+
+				LOG.error("error getting customer info from SAP for rit page: " + s.getMessage());
+				GlobalMessages.addErrorMessage(model, "mirit.error.getInfo");
+				model.addAttribute("miBuzon", miBuzon);
+			}
 		}
-
-		//	mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MI_BUZON_CMS_PAGE));

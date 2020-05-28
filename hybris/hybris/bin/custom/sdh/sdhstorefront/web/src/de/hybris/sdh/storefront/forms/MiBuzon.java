@@ -5,6 +5,8 @@ package de.hybris.sdh.storefront.forms;
 
 import de.hybris.sdh.core.pojos.responses.BuzonDocumentos;
 import de.hybris.sdh.core.pojos.responses.BuzonErrores;
+import de.hybris.sdh.core.pojos.responses.BuzonMensajes;
+import de.hybris.sdh.core.pojos.responses.BuzonMensajes2;
 
 import java.util.List;
 
@@ -38,9 +40,13 @@ public class MiBuzon
 	private String vigencia;
 	private String checkLectura;
 
-	private String contMsj;
-	private String contNot;
+	private int contMsj;
+	private int contNot;
 	private String pdfimprimir;
+
+	private BuzonMensajes mensajes;
+
+	private List<BuzonMensajes2> mensajesMsg;
 
 
 
@@ -350,10 +356,11 @@ public class MiBuzon
 		this.checkLectura = checkLectura;
 	}
 
+
 	/**
 	 * @return the contMsj
 	 */
-	public String getContMsj()
+	public int getContMsj()
 	{
 		return contMsj;
 	}
@@ -362,7 +369,7 @@ public class MiBuzon
 	 * @param contMsj
 	 *           the contMsj to set
 	 */
-	public void setContMsj(final String contMsj)
+	public void setContMsj(final int contMsj)
 	{
 		this.contMsj = contMsj;
 	}
@@ -370,7 +377,7 @@ public class MiBuzon
 	/**
 	 * @return the contNot
 	 */
-	public String getContNot()
+	public int getContNot()
 	{
 		return contNot;
 	}
@@ -379,9 +386,43 @@ public class MiBuzon
 	 * @param contNot
 	 *           the contNot to set
 	 */
-	public void setContNot(final String contNot)
+	public void setContNot(final int contNot)
 	{
 		this.contNot = contNot;
+	}
+
+	/**
+	 * @return the mensajes
+	 */
+	public BuzonMensajes getMensajes()
+	{
+		return mensajes;
+	}
+
+	/**
+	 * @param mensajes
+	 *           the mensajes to set
+	 */
+	public void setMensajes(final BuzonMensajes mensajes)
+	{
+		this.mensajes = mensajes;
+	}
+
+	/**
+	 * @return the mensajesMsg
+	 */
+	public List<BuzonMensajes2> getMensajesMsg()
+	{
+		return mensajesMsg;
+	}
+
+	/**
+	 * @param mensajesMsg
+	 *           the mensajesMsg to set
+	 */
+	public void setMensajesMsg(final List<BuzonMensajes2> mensajesMsg)
+	{
+		this.mensajesMsg = mensajesMsg;
 	}
 
 	//*->FIN dev-eduardo ajuste de menu impuestos

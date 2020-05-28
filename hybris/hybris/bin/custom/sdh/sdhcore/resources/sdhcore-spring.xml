@@ -731,6 +731,11 @@
 		<constructor-arg value="SdhFAQs"/>
 	</bean>
 
+	<alias alias="sdhDocumentTypeDao" name="defaultSdhDocumentTypeDao"/>
+	<bean id="defaultSdhDocumentTypeDao" class="de.hybris.sdh.core.dao.impl.DefaultSdhDocumentTypeDao">
+		<constructor-arg value="SdhDocumentType"/>
+	</bean>
+
 	<alias alias="sdhFAQsService" name="defaultSDHFAQsService"/>
 	<bean id="defaultSDHFAQsService" class="de.hybris.sdh.core.services.impl.DefaultSDHFAQsService">
 		<property name="sdhFAQsDao" ref="sdhFAQsDao"/>
@@ -757,5 +762,8 @@
 
 	<alias alias="sdhTrmReportesPDF" name="defaultSDHTrmReportesPDF"/>
 	<bean name="defaultSDHTrmReportesPDF" class="de.hybris.sdh.core.services.impl.DefaultSDHTrmReportesPDF" />
+
+	<alias alias="sdhTercerosAutService" name="defaultSDHTercerosAutService"/>
+	<bean name="defaultSDHTercerosAutService" class="de.hybris.sdh.core.services.impl.DefaultSDHTercerosAutService" />
 
 </beans>

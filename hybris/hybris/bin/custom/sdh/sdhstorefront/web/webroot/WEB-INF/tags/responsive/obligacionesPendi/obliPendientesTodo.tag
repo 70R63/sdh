@@ -42,7 +42,8 @@
 						<table class="tablesearch table" id="tabPaginacion0">
 							<thead style="cellspacing: 10 !important">
 								<tr>
-									<th style="text-align: center !important"><label class="control-label labeltabletd"><spring:theme
+									<th style="text-align: center !important"><label
+										class="control-label labeltabletd"><spring:theme
 												code="obligacion.inicial.predio.aniograv" /></label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.chip" />
@@ -55,7 +56,8 @@
 									</label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.numForm" /></label></th>
-									<th style="text-align: center !important"><label class="control-label labeltabletd"> <spring:theme
+									<th style="text-align: center !important"><label
+										class="control-label labeltabletd"> <spring:theme
 												code="obligacion.inicial.predio.numRef" />
 									</label></th>
 									<th><label class="control-label labeltabletd"> <spring:theme
@@ -96,13 +98,13 @@
 								</c:forEach>
 							</tbody>
 						</table>
-                        <div class="col-md-3 col-md-offset-8">
-                            <button type="button" class="btn btn-primary btn-lg" id="action"
-                                name="action" value="Imprimir" style="margin-top: 3px"
-                                onclick="ACC.oblipend.bindTrmPdf('01','1','predialReporte.pdf');">
-                                <spring:theme code="obligacion.inicial.imprimir" />
-                            </button>
-                        </div>
+						<div class="col-md-3 col-md-offset-8">
+							<button type="button" class="btn btn-primary btn-lg" id="action"
+								name="action" value="Imprimir" style="margin-top: 3px"
+								onclick="ACC.oblipend.bindTrmPdf('01','1','predialReporte.pdf');">
+								<spring:theme code="obligacion.inicial.imprimir" />
+							</button>
+						</div>
 					</div>
 				</div>
 			</c:if>
@@ -192,12 +194,12 @@
 							</tbody>
 						</table>
 						<div class="col-md-3 col-md-offset-8">
-                            <button type="button" class="btn btn-primary btn-lg" id="action"
-                                name="action" value="Imprimir" style="margin-top: 3px"
-                                onclick="ACC.oblipend.bindTrmPdf('03','1','vehicularReporte.pdf');">
-                                <spring:theme code="obligacion.inicial.imprimir" />
-                            </button>
-                        </div>
+							<button type="button" class="btn btn-primary btn-lg" id="action"
+								name="action" value="Imprimir" style="margin-top: 3px"
+								onclick="ACC.oblipend.bindTrmPdf('03','1','vehicularReporte.pdf');">
+								<spring:theme code="obligacion.inicial.imprimir" />
+							</button>
+						</div>
 					</div>
 				</div>
 			</c:if>
@@ -268,11 +270,20 @@
 									<c:forEach items="${eachObIca.details }" var="eachObIcaDet">
 										<c:if test="${not empty eachObIcaDet.numReferencia }">
 											<tr>
-<%-- 												<td><c:out value="${eachObIca.tipoIdentificacion}" /></td> --%>
-<%-- 												<td><c:out value="${eachObIca.noIdentificacion}" /></td> --%>
+												<%-- 												<td><c:out value="${eachObIca.tipoIdentificacion}" /></td> --%>
+												<%-- 												<td><c:out value="${eachObIca.noIdentificacion}" /></td> --%>
+
+												<%-- 												<td><c:out value="${eachObIca.periodo}" /></td> --%>
 												<td><c:out value="${eachObIca.anioGravable}" /></td>
-												<!-- <td><c:out value="${eachObIca.periodo}" /></td> -->
-												<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td>
+												<c:choose>
+													<c:when
+														test="${eachObIca.periodo == '01' || eachObIca.periodo == '02' || eachObIca.periodo == '03' || eachObIca.periodo == '04' || eachObIca.periodo == '05' || eachObIca.periodo == '06' }">
+														<td><c:out value="${peridoDesc[eachObIca.periodo]}" /></td>
+													</c:when>
+													<c:otherwise>
+														<td><c:out value="${eachObIca.periodo}" /></td>
+													</c:otherwise>
+												</c:choose>
 												<td><c:out value="${eachObIcaDet.estadoObligacion}" /></td>
 												<td><c:out value="${eachObIcaDet.obligacion}" /></td>
 												<td><c:out value="${eachObIcaDet.numFormulario}" /></td>
@@ -292,12 +303,12 @@
 							</tbody>
 						</table>
 						<div class="col-md-3 col-md-offset-8">
-                            <button type="button" class="btn btn-primary btn-lg" id="action"
-                                name="action" value="Imprimir" style="margin-top: 3px"
-                                onclick="ACC.oblipend.bindTrmPdf('02','1','icaReporte.pdf');">
-                                <spring:theme code="obligacion.inicial.imprimir" />
-                            </button>
-                        </div>
+							<button type="button" class="btn btn-primary btn-lg" id="action"
+								name="action" value="Imprimir" style="margin-top: 3px"
+								onclick="ACC.oblipend.bindTrmPdf('02','1','icaReporte.pdf');">
+								<spring:theme code="obligacion.inicial.imprimir" />
+							</button>
+						</div>
 					</div>
 				</div>
 				<div class="row">
@@ -394,12 +405,12 @@
 								</tbody>
 							</table>
 							<div class="col-md-3 col-md-offset-8">
-                                <button type="button" class="btn btn-primary btn-lg" id="action"
-                                    name="action" value="Imprimir" style="margin-top: 3px"
-                                    onclick="ACC.oblipend.bindTrmPdf('54','1','pubExteriorReporte.pdf');">
-                                    <spring:theme code="obligacion.inicial.imprimir" />
-                                </button>
-                            </div>
+								<button type="button" class="btn btn-primary btn-lg" id="action"
+									name="action" value="Imprimir" style="margin-top: 3px"
+									onclick="ACC.oblipend.bindTrmPdf('54','1','pubExteriorReporte.pdf');">
+									<spring:theme code="obligacion.inicial.imprimir" />
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -503,12 +514,12 @@
 								</tbody>
 							</table>
 							<div class="col-md-3 col-md-offset-8">
-                                <button type="button" class="btn btn-primary btn-lg" id="action"
-                                    name="action" value="Imprimir" style="margin-top: 3px"
-                                    onclick="ACC.oblipend.bindTrmPdf('08','1','sobGasolinaReporte.pdf');">
-                                    <spring:theme code="obligacion.inicial.imprimir" />
-                                </button>
-                            </div>
+								<button type="button" class="btn btn-primary btn-lg" id="action"
+									name="action" value="Imprimir" style="margin-top: 3px"
+									onclick="ACC.oblipend.bindTrmPdf('08','1','sobGasolinaReporte.pdf');">
+									<spring:theme code="obligacion.inicial.imprimir" />
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -588,15 +599,20 @@
 								</tbody>
 							</table>
 							<div class="col-md-3 col-md-offset-8">
-                                <button type="button" class="btn btn-primary btn-lg" id="action"
-                                    name="action" value="Imprimir" style="margin-top: 3px"
-                                    onclick="ACC.oblipend.bindTrmPdf('06','1','delUrbanaReporte.pdf');">
-                                    <spring:theme code="obligacion.inicial.imprimir" />
-                                </button>
-                            </div>
+								<button type="button" class="btn btn-primary btn-lg" id="action"
+									name="action" value="Imprimir" style="margin-top: 3px"
+									onclick="ACC.oblipend.bindTrmPdf('06','1','delUrbanaReporte.pdf');">
+									<spring:theme code="obligacion.inicial.imprimir" />
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
+			</c:if>
+			<c:if test="${empty obligacionesFormuno.headerdeli}">
+				<label class="control-label">No cuenta con obligaciones
+					pendientes de Delineaci&oacuten Urbana</label>
+
 			</c:if>
 		</div>
 

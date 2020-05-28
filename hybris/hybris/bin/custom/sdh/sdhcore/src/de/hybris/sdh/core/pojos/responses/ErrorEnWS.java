@@ -58,6 +58,7 @@ public class ErrorEnWS
 		return id_msj;
 	}
 
+	@JsonProperty("id_msj")
 	public void setId_msj(final String id_msj) {
 		this.id_msj = id_msj;
 	}
@@ -66,6 +67,7 @@ public class ErrorEnWS
 		return txt_msj;
 	}
 
+	@JsonProperty("txt_msj")
 	public void setTxt_msj(final String txt_msj) {
 		this.txt_msj = txt_msj;
 	}
