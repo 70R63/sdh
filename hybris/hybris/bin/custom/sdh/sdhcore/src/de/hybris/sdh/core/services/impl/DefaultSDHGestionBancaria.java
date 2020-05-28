@@ -102,6 +102,8 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 			final File sourceFile = new File(zipFilePath);
 			final File destFile = new File(aresFilePath);
 			Files.copy(sourceFile.toPath(), destFile.toPath());
+			LOG.error("Copy file source: " + sourceFile.toPath());
+			LOG.error("Copy file destination: " + destFile.toPath());
 
 		}
 		catch (final Exception e)
