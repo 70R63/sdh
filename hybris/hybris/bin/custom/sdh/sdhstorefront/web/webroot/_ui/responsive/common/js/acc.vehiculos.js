@@ -653,10 +653,15 @@ ACC.vehiculos = {
 				$('#cilindraje').append('<option value="">'+ "No se encontraron opciones" + "</option>");
 			}else{
 			$.each(infoResponse.catalogo.vehicularcilindrajeresponse, function (index,value){
-				$('#cilindraje').append('<option value="'+ value.cilindraje +'">'+ value.cilindraje + "</option>");
+				if(value.cilindraje != null && value.cilindraje != ""){
+					$('#cilindraje').append('<option value="'+ value.cilindraje +'">'+ value.cilindraje + "</option>");
+				}
 			});}
 			var valueSelected = "";
 			if(cat_valores_actuales!=null){
+				if($('#cilindraje').length == 1){
+					$('#cilindraje').append('<option value="'+cat_valores_actuales[1]+'">'+ cat_valores_actuales[1] + "</option>");				
+				}
 				valueSelected = cat_valores_actuales[1];
 			}
 			$("#cilindraje").val(valueSelected);
