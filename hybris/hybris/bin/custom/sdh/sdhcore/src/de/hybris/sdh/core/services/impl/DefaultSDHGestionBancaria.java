@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -55,22 +54,6 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 		String isValid = null;
         final String nameFile = this.updateFileToServer(multipartFile);
         if(Objects.nonNull(nameFile)){
-
-			try
-			{
-				LOG.error("-----------Copy file to Ares inicio-----------------");
-				final File sourceFile = new File(approvedFilesFolder + nameFile);
-				final File destFile = new File(approvedAresFilesFolder + nameFile);
-				Files.copy(sourceFile.toPath(), destFile.toPath());
-				LOG.error("Copy file source: " + sourceFile.toPath());
-				LOG.error("Copy file destination: " + destFile.toPath());
-				LOG.error("-----------Copy file to Ares fin--------------------");
-
-			}
-			catch (final Exception e)
-			{
-				LOG.error("Error occurs: " + e);
-			}
 
 			isValid = this.verifyFile(updatedFilesFolder + nameFile, approvedFilesFolder + nameFile, autoridadesPath);
 			if (isValid == null)
