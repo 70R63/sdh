@@ -47,8 +47,8 @@
 		</div>
 		
 		
-			<c:choose>
-    <c:when test="${ropFormRequest.tipoImp == '01' || ropFormRequest.tipoImp == '02'}">
+<%-- 			<c:choose> --%>
+<%--     <c:when test="${ropFormRequest.tipoImp == '01' || ropFormRequest.tipoImp == '02'}"> --%>
      <div class="row">
 			<div class="col-md-2">
 				<div class="form-group">
@@ -60,11 +60,11 @@
 				</div>
 			</div>
 		</div>
-    </c:when>    
-    <c:otherwise>
+<%--     </c:when>     --%>
+<%--     <c:otherwise> --%>
 
-    </c:otherwise>
-</c:choose>
+<%--     </c:otherwise> --%>
+<%-- </c:choose> --%>
 		
 		
 		<div class="row">
