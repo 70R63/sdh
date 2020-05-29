@@ -11,9 +11,7 @@ import de.hybris.sdh.core.pojos.responses.FileConciliaResponse;
 import de.hybris.sdh.core.services.SDHGestionBancaria;
 import de.hybris.sdh.storefront.controllers.pages.forms.ImportConciliacionForm;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Objects;
 
 import javax.annotation.Resource;
@@ -82,23 +80,7 @@ public class GestionBancariaController extends AbstractPageController {
 			LOG.info("getConciliacionFile:" + importConciliacionForm.getConciliacionFile());
 			LOG.info("getTipoArchivo" + importConciliacionForm.getTipoArchivo());
 
-			try
-			{
-				LOG.error("-----------Copy file to Ares inicio-----------------");
-				final File sourceFile = new File(
-						approvedFilesFolder + importConciliacionForm.getConciliacionFile().getOriginalFilename());
-				final File destFile = new File(
-						approvedAresFilesFolder + importConciliacionForm.getConciliacionFile().getOriginalFilename());
-				Files.copy(sourceFile.toPath(), destFile.toPath());
-				LOG.error("Copy file source: " + sourceFile.toPath());
-				LOG.error("Copy file destination: " + destFile.toPath());
-				LOG.error("-----------Copy file to Ares fin--------------------");
 
-			}
-			catch (final Exception e)
-			{
-				LOG.error("Error occurs: " + e);
-			}
 
 			final String pathFiles = configurationService.getConfiguration()
 					.getString("gestion.bancaria.certificados.aprobados.path");

@@ -18,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 public interface SDHGestionBancaria
 {
 	String validade7ZipCertificates(MultipartFile multipartFile);
-	String updateFileToServer(MultipartFile multipartFile) throws IOException;
-	void extractAndUpdateTxtFileFrom7zip(String zipFilePath, String targetFilePath, String aresFilesFolder);
+
+	String updateFileToServer(MultipartFile multipartFile, String aresFilePath) throws IOException;
+
+	void extractAndUpdateTxtFileFrom7zip(String zipFilePath, String targetFilePath);
 	String verifyFile(String source, String target, String autoridades);
 	FileConciliaResponse fileConcilia(FileConciliaRequest request);
 }
