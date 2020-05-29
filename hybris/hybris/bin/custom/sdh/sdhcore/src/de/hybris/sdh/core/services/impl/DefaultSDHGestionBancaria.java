@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -78,10 +79,24 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         try {
             filePath = corePath +  multipartFile.getOriginalFilename();
             multipartFile.transferTo(new File(filePath) );
-			LOG.error("-----------Copy file to Ares inicio-----------------");
-			multipartFile.transferTo(new File(aresFilePath));
-			LOG.error("Copy file destination: " + aresFilePath);
-			LOG.error("-----------Copy file to Ares fin--------------------");
+
+			try
+			{
+				//multipartFile.transferTo(new File(aresFilePath));
+				LOG.error("-----------Copy file to Ares inicio-----------------");
+				final File sourceFile = new File(filePath);
+				final File destFile = new File(aresFilePath);
+				Files.copy(sourceFile.toPath(), destFile.toPath());
+				LOG.error("Copy file source: " + sourceFile.toPath());
+				LOG.error("Copy file destination: " + destFile.toPath());
+				LOG.error("-----------Copy file to Ares fin--------------------");
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("Error occurs: " + e);
+			}
+
             fileName = multipartFile.getOriginalFilename();
         } catch (final IOException e) {
             e.printStackTrace();
