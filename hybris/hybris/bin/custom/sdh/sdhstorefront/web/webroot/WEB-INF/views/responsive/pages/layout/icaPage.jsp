@@ -34,24 +34,25 @@
 			}
 		}	
 		$(".loader").fadeOut("slow");
-		
-		//Ingresamos un mensaje a mostrar
-		var mensaje = confirm("Si tienes más de 20 registros a declarar necesitas pasar a ayuda ICA ");
-		//Detectamos si el usuario acepto el mensaje
-		var currentUrl = window.location.href;  
-		if (mensaje) {
+	
+// 		Se comenta mensaje Maria Torres 01/06/2020
+// 		//Ingresamos un mensaje a mostrar
+// 		var mensaje = confirm("Si tienes más de 20 registros a declarar necesitas pasar a ayuda ICA ");
+// 		//Detectamos si el usuario acepto el mensaje
+// 		var currentUrl = window.location.href;  
+// 		if (mensaje) {
 			  
 			  
-			  var targetUrl = "/contribuyentes/registroretenciones";
-         	 currentUrl_tmp = currentUrl.replace("/contribuyentes/ica",targetUrl);
-              newurl = currentUrl.replace("/contribuyentes/ica#",targetUrl);
-         	 window.location.href =  currentUrl_tmp;
-		//alert("¡Gracias por aceptar!");
-		}
-		//Detectamos si el usuario denegó el mensaje
-		else {
-			//window.location.href =  currentUrl;
-		}
+// 			  var targetUrl = "/contribuyentes/registroretenciones";
+//          	 currentUrl_tmp = currentUrl.replace("/contribuyentes/ica",targetUrl);
+//               newurl = currentUrl.replace("/contribuyentes/ica#",targetUrl);
+//          	 window.location.href =  currentUrl_tmp;
+// 		//alert("¡Gracias por aceptar!");
+// 		}
+// 		//Detectamos si el usuario denegó el mensaje
+// 		else {
+// 			//window.location.href =  currentUrl;
+// 		}
 		
 
 	}
