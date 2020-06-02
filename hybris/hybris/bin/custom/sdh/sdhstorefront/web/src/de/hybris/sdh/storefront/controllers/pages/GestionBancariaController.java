@@ -55,6 +55,11 @@ public class GestionBancariaController extends AbstractPageController {
 			final RedirectAttributes redirectAttributes, final Model model) throws IOException
     {
 
+		final String approvedFilesFolder = configurationService.getConfiguration()
+				.getString("gestion.bancaria.certificados.aprobados.path");
+		final String approvedAresFilesFolder = configurationService.getConfiguration()
+				.getString("gestion.bancaria.certificados.ArchBancos_Ares.path");
+
 		final String extension_origen = ".zip.p7z";
 		final String extension_destino = ".txt";
 
@@ -74,6 +79,8 @@ public class GestionBancariaController extends AbstractPageController {
 			LOG.info("File-reading");
 			LOG.info("getConciliacionFile:" + importConciliacionForm.getConciliacionFile());
 			LOG.info("getTipoArchivo" + importConciliacionForm.getTipoArchivo());
+
+
 
 			final String pathFiles = configurationService.getConfiguration()
 					.getString("gestion.bancaria.certificados.aprobados.path");

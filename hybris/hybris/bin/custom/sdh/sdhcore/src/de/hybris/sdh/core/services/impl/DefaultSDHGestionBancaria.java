@@ -53,13 +53,14 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
 
 
 		String isValid = null;
-        final String nameFile = this.updateFileToServer(multipartFile);
+		final String nameFile = this.updateFileToServer(multipartFile,
+				approvedAresFilesFolder + multipartFile.getOriginalFilename());
         if(Objects.nonNull(nameFile)){
+
 			isValid = this.verifyFile(updatedFilesFolder + nameFile, approvedFilesFolder + nameFile, autoridadesPath);
 			if (isValid == null)
 			{ //Extract .txt file from p7zip if file is valid
-				this.extractAndUpdateTxtFileFrom7zip(approvedFilesFolder + nameFile, approvedFilesFolder,
-						approvedAresFilesFolder + nameFile);
+				this.extractAndUpdateTxtFileFrom7zip(approvedFilesFolder + nameFile, approvedFilesFolder);
             }
             LOG.info("updatedFilesFolder:" + updatedFilesFolder + nameFile);
             LOG.info("approvedFilesFolder:" + approvedFilesFolder + nameFile);
@@ -69,7 +70,8 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-    public String updateFileToServer(final MultipartFile multipartFile){
+	public String updateFileToServer(final MultipartFile multipartFile, final String aresFilePath)
+	{
         String filePath = null;
         String fileName = null;
         final String corePath = configurationService.getConfiguration().getString("gestion.bancaria.certificados.path");
@@ -77,6 +79,24 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
         try {
             filePath = corePath +  multipartFile.getOriginalFilename();
             multipartFile.transferTo(new File(filePath) );
+
+			try
+			{
+				//multipartFile.transferTo(new File(aresFilePath));
+				LOG.error("-----------Copy file to Ares inicio-----------------");
+				final File sourceFile = new File(filePath);
+				final File destFile = new File(aresFilePath);
+				Files.copy(sourceFile.toPath(), destFile.toPath());
+				LOG.error("Copy file source: " + sourceFile.toPath());
+				LOG.error("Copy file destination: " + destFile.toPath());
+				LOG.error("-----------Copy file to Ares fin--------------------");
+
+			}
+			catch (final Exception e)
+			{
+				LOG.error("Error occurs: " + e);
+			}
+
             fileName = multipartFile.getOriginalFilename();
         } catch (final IOException e) {
             e.printStackTrace();
@@ -90,24 +110,12 @@ public class DefaultSDHGestionBancaria implements SDHGestionBancaria {
     }
 
     @Override
-	public void extractAndUpdateTxtFileFrom7zip(final String zipFilePath, final String targetFilePath, final String aresFilePath)
+	public void extractAndUpdateTxtFileFrom7zip(final String zipFilePath, final String targetFilePath)
 	{
         ISevenZipInArchive inArchive = null;
         ISimpleInArchive simpleInArchive = null;
         RandomAccessFile randomAccessFile = null;
         final File zip = null;
-
-		try
-		{
-			final File sourceFile = new File(zipFilePath);
-			final File destFile = new File(aresFilePath);
-			Files.copy(sourceFile.toPath(), destFile.toPath());
-
-		}
-		catch (final Exception e)
-		{
-			LOG.error("Error occurs: " + e);
-		}
 
         try{
             randomAccessFile = new RandomAccessFile(zipFilePath, "r");
