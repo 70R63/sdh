@@ -72,7 +72,7 @@
 									<td><input id="" name="" class="inputtextnew"
 										aria-required="true" type="text" readonly="readonly"
 										value="${delineacion.licenConst}" maxlength="240"
-										style="width: 90% !important; padding-left: 1px !important; padding-right: 1px !important"></td>
+										style="width: 105% !important; padding-left: 0px !important; padding-right: 0px !important"></td>
 									<td><input id="" name="" class="inputtextnew tablefechas"
 										aria-required="true" type="text" readonly="readonly"
 										value="${delineacion.fechaExp}" maxlength="240"></td>
