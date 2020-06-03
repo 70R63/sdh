@@ -40,7 +40,7 @@
 					<c:set var = "deshabilitarPagar" value = "false"/>	
 				</c:otherwise>
 			</c:choose>
-			<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit" id="pagar"
+			<sf:button class="btn btn-primary btn-lg pagarbtn" type="button" onclick="validaBotonPago()" id="pagar"
 				name="action" value="pagar" disabled="${deshabilitarPagar}">
 				<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 			</sf:button>
@@ -63,3 +63,20 @@
 		<div id="gasolinaDialogContent"></div>
 	</div>
 </div>
+
+
+<script>
+
+function validaBotonPago(){
+	debugger;
+	var totPagar = document.getElementById('valorTotalPagar');
+	if(totPagar.value == '0'){
+		alert('El total a pagar debe ser mayor a 0')
+	}else{
+		var form1 = document.getElementById('infoPreviaPSE');
+		form1.submit();		
+	}
+	
+}
+
+</script>

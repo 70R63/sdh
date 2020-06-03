@@ -48,7 +48,7 @@
 				<sf:hidden path="CDU" />
 				<sf:hidden path="anticipo" />
 				<div class="col-md-3">
-					<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit" id="action"
+					<sf:button class="btn btn-primary btn-lg pagarbtn" type="button" onclick="validaBotonPago()" id="action"
 						name="pagar" value="pagar" disabled="true">
 						<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 					</sf:button>
@@ -60,6 +60,19 @@
 </div>
 
 <script>
+
+	function validaBotonPago(){
+		debugger;
+		var totPagar = document.getElementById('totpag');
+		if(totPagar.value == '0'){
+			alert('El total a pagar debe ser mayor a 0')
+		}else{
+			var form1 = document.getElementById('infoPreviaPSE');
+			form1.submit();		
+		}
+		
+	}
+
 	function habradio() {
 		debugger;
 		var hobli = document.getElementById('selectobligado');

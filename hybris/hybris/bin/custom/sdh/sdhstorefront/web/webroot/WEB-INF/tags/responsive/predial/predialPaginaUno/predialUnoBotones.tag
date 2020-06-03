@@ -83,7 +83,7 @@
 				<sf:hidden path="totalPagar"/>
 	
 				<c:if test="${flagPagarEnLinea eq true}">
-					<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit"
+					<sf:button class="btn btn-primary btn-lg pagarbtn" type="button" onclick="validaBotonPago()"
 						id="pagar" name="pagar" value="pagar" disabled="true">	
 						<spring:theme code="predialuno.firma.paglinea" />
 					</sf:button>
@@ -101,4 +101,20 @@
 		</sf:form>
 	</div>
 </div>
+
+<script>
+
+function validaBotonPago(){
+	debugger;
+	var totPagar = document.getElementById('TotalAPagar');
+	if(totPagar.value == '0'){
+		alert('El total a pagar debe ser mayor a 0')
+	}else{
+		var form1 = document.getElementById('infoPreviaPSE');
+		form1.submit();		
+	}
+	
+}
+
+</script>
 
