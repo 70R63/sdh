@@ -72,8 +72,8 @@
 
 			<div class="col-md-3">
 				<c:if test="${flagPagarEnLinea eq true}">
-				<sf:button class="btn btn-primary btn-lg pagarbtn" type="submit"
-					id="action" name="pagar" value="pagar" disabled="true">
+				<sf:button class="btn btn-primary btn-lg pagarbtn" type="button"
+					id="action" name="pagar" value="pagar" disabled="true" onclick="validaBotonPago()">
 					<spring:theme code="impuestos.decGasolina.Pago.Pagar" />
 				</sf:button>
 				</c:if>
@@ -88,6 +88,19 @@
 </div>
 
 <script>
+
+function validaBotonPago(){
+	debugger;
+	var totPagar = document.getElementById('totalPagar');
+	if(totPagar.value == '0'){
+		alert('El total a pagar debe ser mayor a 0')
+	}else{
+		var form1 = document.getElementById('infoPreviaPSE');
+		form1.submit();		
+	}
+	
+}
+
 function goBack4() {
   window.history.back();
 }

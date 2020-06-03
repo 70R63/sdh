@@ -163,7 +163,7 @@
 		<div class="col-md-2">
 			<div class="form-group ">
 				<label class="control-label"><spring:theme
-						code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id=""
+						code="delineacion.urbana.dec.liqpriv.totpag" /></label> <input id="totalPagar"
 					name="" class="newalto form-control" aria-required="true" type="text"
 					readonly="readonly"
 					value="${dataForm.infObjetoDelineacion.infoDeclara.totalPagar}"
