@@ -61,7 +61,7 @@
 				<c:if test="${flagPagarEnLinea eq true}">
 					<button style="margin-top: 3px;"
 	                	id="action" class="btn btn-primary btn-lg pagarbtn"
-	                	type="submit" name="pagar" value="pagar" disabled="disabled">
+	                	type="button" onclick="validaBotonPago()" name="pagar" value="pagar" disabled="disabled">
 	                	<spring:theme code="ica.declaracion.firma.pagliena" />
 	                </button>
 	            </c:if>
@@ -77,6 +77,20 @@
 
 
 <script>
+	
+	function validaBotonPago(){
+		debugger;
+		var totPagar = document.getElementById('totalPagar');
+		if(totPagar.value == '0'){
+			alert('El total a pagar debe ser mayor a 0')
+		}else{
+			var form1 = document.getElementById('infoPreviaPSE');
+			form1.submit();		
+		}
+		
+	}
+	
+
 	function habradio() {
 		debugger;
 		var hobli = document.getElementById('selectobligado');

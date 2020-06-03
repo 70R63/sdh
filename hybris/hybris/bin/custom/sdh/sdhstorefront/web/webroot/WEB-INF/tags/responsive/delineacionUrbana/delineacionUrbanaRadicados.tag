@@ -42,11 +42,11 @@
 
 		<br>
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3 ">
+			<div class="col-md-6 col-md-offset-3">
 				<table class="table" id="duRadicados">
 					<thead>
 						<tr>
-							<th><label class="control-label labeltabletd"><spring:theme
+							<th style="width: 50% !important"><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.radicados" /> </label></th>
 							<th><label class="control-label labeltabletd"><spring:theme
 										code="delineacion.urbana.radicados.fechradicado" /></label></th>
