@@ -122,7 +122,25 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				+ fechaLimiteDePago + " , PagoAdicional=" + pagoAdicional + " , Banco=" + banco + " , ValorAPagar=" + valorAPagar
 				+ " , IsoCurrency=" + isoCurrency + " , TipoDeTarjeta=" + tipoDeTarjeta + "]");
 
-		modelService.saveAll(transactionLogModel);
+		modelService.removeAll(transactionLogModel);
+		try
+		{
+			modelService.saveAll(transactionLogModel);
+		}
+		catch (final Exception e)
+		{
+			LOG.error("Error saveAll transaction");
+			e.printStackTrace();
+
+			modelService.removeAll(transactionLogModel);
+
+			modelService.saveAll(transactionLogModel);
+
+		}
+
+
+
+
 	}
 
 
