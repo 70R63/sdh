@@ -128,14 +128,16 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		}
 		catch (final Exception e)
 		{
-			LOG.error("--------------Error saveAll transaction INICIO---------------");
+			LOG.error("--------------Actualiza reenvio pago INICIO---------------");
 			e.printStackTrace();
 
-			modelService.removeAll(transactionLogModel);
+			final PseTransactionsLogModel pseTransactionsLogModel = pseTransactionsLogDao.getTransaction(numeroDeReferencia);
+			pseTransactionsLogModel.setBanco(banco);
+			pseTransactionsLogModel.setTipoDeTarjeta(tipoDeTarjeta);
 
-			modelService.saveAll(transactionLogModel);
+			modelService.saveAll(pseTransactionsLogModel);
 
-			LOG.error("--------------Error saveAll transaction FIN ---------------");
+			LOG.error("--------------Actualiza reenvio pago FIN ---------------");
 
 		}
 
