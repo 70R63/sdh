@@ -128,12 +128,14 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 		}
 		catch (final Exception e)
 		{
-			LOG.error("Error saveAll transaction");
+			LOG.error("--------------Error saveAll transaction INICIO---------------");
 			e.printStackTrace();
 
 			modelService.removeAll(transactionLogModel);
 
 			modelService.saveAll(transactionLogModel);
+
+			LOG.error("--------------Error saveAll transaction FIN ---------------");
 
 		}
 
