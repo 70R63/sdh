@@ -122,7 +122,28 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				+ fechaLimiteDePago + " , PagoAdicional=" + pagoAdicional + " , Banco=" + banco + " , ValorAPagar=" + valorAPagar
 				+ " , IsoCurrency=" + isoCurrency + " , TipoDeTarjeta=" + tipoDeTarjeta + "]");
 
-		modelService.saveAll(transactionLogModel);
+		try
+		{
+			modelService.saveAll(transactionLogModel);
+		}
+		catch (final Exception e)
+		{
+			LOG.error("--------------Actualiza reenvio pago ACH INICIO---------------");
+			e.printStackTrace();
+
+			final PseTransactionsLogModel pseTransactionsLogModel = pseTransactionsLogDao.getTransaction(numeroDeReferencia);
+			pseTransactionsLogModel.setBanco(banco);
+			pseTransactionsLogModel.setTipoDeTarjeta(tipoDeTarjeta);
+
+			modelService.saveAll(pseTransactionsLogModel);
+
+			LOG.error("--------------Actualiza reenvio pago ACH FIN ---------------");
+
+		}
+
+
+
+
 	}
 
 
@@ -407,7 +428,27 @@ public class DefaultSDHPseTransactionsLogService implements SDHPseTransactionsLo
 				+ tipoDeIdentificacion + " , " + noIdentificacion + " , " + DV + " , " + fechaLimiteDePago + " , " + pagoAdicional
 				+ " , " + banco + " , " + valorAPagar + " , " + isoCurrency + " , " + tipoDeTarjeta + "]");
 
-		modelService.saveAll(transactionLogModel);
+
+		try
+		{
+			modelService.saveAll(transactionLogModel);
+		}
+		catch (final Exception e)
+		{
+			LOG.error("--------------Actualiza reenvio pago Credibanco INICIO---------------");
+			e.printStackTrace();
+
+			final PseTransactionsLogModel pseTransactionsLogModel = pseTransactionsLogDao.getTransaction(numeroDeReferencia);
+			pseTransactionsLogModel.setBanco(banco);
+			pseTransactionsLogModel.setTipoDeTarjeta(tipoDeTarjeta);
+
+			modelService.saveAll(pseTransactionsLogModel);
+
+			LOG.error("--------------Actualiza reenvio pago Credibnaco  FIN ---------------");
+
+		}
+
+
 
 	}
 

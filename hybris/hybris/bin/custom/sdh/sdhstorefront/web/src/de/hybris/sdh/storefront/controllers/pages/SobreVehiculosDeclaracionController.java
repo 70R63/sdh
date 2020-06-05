@@ -48,8 +48,10 @@ import de.hybris.sdh.core.services.SDHDetalleVehiculosService;
 import de.hybris.sdh.core.services.SDHGeneraDeclaracionService;
 import de.hybris.sdh.facades.SDHCustomerFacade;
 import de.hybris.sdh.facades.SDHEnviaFirmasFacade;
+import de.hybris.sdh.facades.questions.data.SDHAgentData;
 import de.hybris.sdh.storefront.controllers.impuestoGasolina.SobreTasaGasolinaService;
 import de.hybris.sdh.storefront.forms.GeneraDeclaracionForm;
+import de.hybris.sdh.storefront.forms.VehiculosControlCamposDec;
 import de.hybris.sdh.storefront.forms.VehiculosInfObjetoForm;
 
 import java.io.ByteArrayInputStream;
@@ -643,6 +645,7 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 		}
 		model.addAttribute("infoPreviaPSE", infoPreviaPSE);
 		//informacion para PSE
+		vehiculosFormDeclaracion.setControlCampos(establecerCamposVehiculosDec("sdh_02", contribuyenteData, currentUserData));
 
 
 		model.addAttribute("vehiculosFormDeclaracion", vehiculosFormDeclaracion);
@@ -741,6 +744,47 @@ public class SobreVehiculosDeclaracionController extends SDHAbstractPageControll
 
 
 		return catalogoRequest;
+	}
+
+
+	private VehiculosControlCamposDec establecerCamposVehiculosDec(final String rol, final CustomerData contribuyenteData,
+			final CustomerData currentUserData)
+	{
+		VehiculosControlCamposDec controlCampos = null;
+		final String strRepresentanteLegalPrincipal = "Repres. Legal Principal";
+
+		switch (rol)
+		{
+			case "sdh_02":
+				controlCampos = new VehiculosControlCamposDec();
+				controlCampos.setLiquidacion(true);
+				controlCampos.setBtnPresentarDec(true);
+				controlCampos.setBtnPagarDec(true);
+
+				if (contribuyenteData.getAgentList() != null)
+				{
+					for (final SDHAgentData infoAgente : contribuyenteData.getAgentList())
+					{
+						if (infoAgente != null)
+						{
+							if (infoAgente.getInternalFunction() != null && infoAgente.getBp() != null
+									&& infoAgente.getBp().equals(currentUserData.getNumBP())
+									&& infoAgente.getInternalFunction().equals(strRepresentanteLegalPrincipal))
+							{
+								controlCampos.setBtnPresentarDec(false);
+								controlCampos.setBtnPagarDec(false);
+							}
+						}
+					}
+				}
+
+				break;
+
+			default:
+				break;
+		}
+
+		return controlCampos;
 	}
 
 

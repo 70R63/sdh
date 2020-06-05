@@ -8,6 +8,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
+<c:set var="disabledLiquidacion" value="" />
+<c:if test="${vehiculosFormDeclaracion.controlCampos.liquidacion == true}">
+	<c:set var="disabledLiquidacion" value='disabled="disabled"' />
+</c:if>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <div class="container">
 	<div class="row">
@@ -50,7 +54,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.linea" /></label> <select
 						id="linea" class="alto_select form-control" aria-required="true"
-						onchange='actualizarCampo("cilindraje")'></select>
+						onchange='actualizarCampo("cilindraje")' ${disabledLiquidacion}></select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -70,7 +74,7 @@
 					<label class="control-label"><spring:theme
 							code="sobre.vehiculo.declaracion.vehiculo.info.cilindra" /></label> <select
 						id="cilindraje" class="alto_select form-control"
-						aria-required="true" onchange='actualizarCampo("avaluo")'></select>
+						aria-required="true" onchange='actualizarCampo("avaluo")' ${disabledLiquidacion}></select>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -91,7 +95,7 @@
 							code="sobre.vehiculo.declaracion.vehiculo.liq.avalact" /></label> <input
 						id="avaluoAct" name="" class="newalto form-control avaluoAct"
 						aria-required="true" type="text"
-						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30">
+						value="${vehiculosFormDeclaracion.avaluo}" maxlength="30" ${disabledLiquidacion}>
 				</div>
 			</div>
 		</div>
@@ -113,13 +117,13 @@
 						<input type="radio" name="aporte" id="aporteSi"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important;"
-						value="si" ${yesChecked} onclick="proyecthabi()"> Si
+						value="si" ${yesChecked} onclick="proyecthabi()" ${disabledLiquidacion}> Si
 					</label> <label class="form-check-label"
 						style="text-transform: capitalize !important; font-weight: normal !important">
 						<input type="radio" name="aporte" id="aporteNo"
 						class="form-check-input mr-2"
 						style="visibility: visible !important; min-height: 4px !important; margin-left: 12px"
-						value="no" ${noChecked} onclick="proyectdeshabi()"> No
+						value="no" ${noChecked} onclick="proyectdeshabi()" ${disabledLiquidacion}> No
 					</label>
 				</div>
 			</div>
