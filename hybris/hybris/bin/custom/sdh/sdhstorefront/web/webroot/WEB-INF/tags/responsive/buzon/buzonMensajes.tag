@@ -66,14 +66,14 @@
 							<tbody>
 
 								<c:forEach items="${miBuzon.mensajesMsg}" var="eachDoc">
-									<c:if test="${eachDoc.tipoMensaje == '2'}">
+									<c:if
+										test="${eachDoc.tipoMensaje == '2' && eachDoc.checkLectura != 'X'}">
 										<tr>
 											<td><c:out value="${eachDoc.id_radicado}" /></td>
 											<td><c:out value="${eachDoc.autoridadEmisora}" /></td>
 											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
 												<c:if test="${echDocumentos.nombreDocumento != ''}">
-													<td><c:out
-															value="${eachDoc.asunto}" /></td>
+													<td><c:out value="${eachDoc.asunto}" /></td>
 
 													<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
 													<td><label class="control-label download"
@@ -82,8 +82,8 @@
 														data-idRadicado="${eachDoc.id_radicado}"
 														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
 														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
-														data-asunto="${eachDoc.asunto}"
-														id="download" onclick="descargarNoti(this)"> <span
+														data-asunto="${eachDoc.asunto}" id="download"
+														onclick="descargarNoti(this)"> <span
 															class="glyphicon glyphicon-download-alt"></span></label></td>
 													<td><img
 														src="${themeResourcePath}/images/papeleranuevos.png"
@@ -156,29 +156,64 @@
 								</tr>
 							</thead>
 							<tbody>
+								<c:forEach items="${miBuzon.mensajesMsg}" var="eachDoc">
+									<c:if
+										test="${eachDoc.tipoMensaje == '2' && eachDoc.checkLectura == 'X'}">
+										<tr>
+											<td><c:out value="${eachDoc.id_radicado}" /></td>
+											<td><c:out value="${eachDoc.autoridadEmisora}" /></td>
+											<c:forEach items="${eachDoc.documentos}" var="echDocumentos">
+												<c:if test="${echDocumentos.nombreDocumento != ''}">
+													<td><c:out value="${eachDoc.asunto}" /></td>
 
+													<td><c:out value="${eachDoc.fechaNotificacion}" /></td>
+													<td><label class="control-label download"
+														style="text-transform: capitalize !important" for=""
+														data-pdfimprimir="${echDocumentos.pdf}"
+														data-idRadicado="${eachDoc.id_radicado}"
+														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
+														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
+														data-asunto="${eachDoc.asunto}" id="download"
+														onclick="descargarNoti(this)"> <span
+															class="glyphicon glyphicon-download-alt"></span></label></td>
+													<td><img
+														src="${themeResourcePath}/images/papeleranuevos.png"
+														style="width: 30px" id="papeleraMsg" class="papeleraMsg"
+														onclick="papeleraMsgLeidos(this)"
+														data-pdfimprimir="${echDocumentos.pdf}"
+														data-idRadicado="${eachDoc.id_radicado}"
+														data-autoridadEmisora="${eachDoc.autoridadEmisora}"
+														data-fechaNotificacion="${eachDoc.fechaNotificacion}"
+														data-asunto="${eachDoc.asunto}"></img></td>
+												</c:if>
+											</c:forEach>
+										</tr>
+
+									</c:if>
+
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="row">
-	<a id='dwnldLnk' download='nombredocumento.pdf' style="display: none;"/>
-	</div>
+			<a id='dwnldLnk' download='nombredocumento.pdf'
+				style="display: none;" />
+		</div>
 	</sf:form>
-	
+
 
 </div>
 
 <script>
-
-function descargarNoti(obdesca) {
-	var objetodeN = obdesca;
-	ACC.mibuzon.bindDescargar(objetodeN);
-	objetodeN.offsetParent.parentNode.remove();
-}
+	function descargarNoti(obdesca) {
+		var objetodeN = obdesca;
+		ACC.mibuzon.bindDescargar(objetodeN);
+		objetodeN.offsetParent.parentNode.remove();
+	}
 
 	function downloaddos(obdesc) {
 		var objetode = obdesc;
