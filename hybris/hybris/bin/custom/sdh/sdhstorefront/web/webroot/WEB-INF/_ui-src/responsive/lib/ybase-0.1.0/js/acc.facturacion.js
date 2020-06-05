@@ -75,29 +75,37 @@ ACC.facturacion = {
 				data : dataActual,
 				type : "GET",
 				success : function(dataResponse) {
-					var descargarFactura = false;
-					if(dataResponse != null && dataResponse.errores != null ){
-		            	$("#dialogMensajes" ).dialog( "open" );
-	            		$.each(dataResponse.errores, function( index, value ) {
-	            			if(value.txt_msj.trim() != ""){
-	            				$("#dialogMensajesContent").html($("#dialogMensajesContent").html()+value.txt_msj+"<br>");
-	            			}
-	            		});
-					}else{
-						if(dataResponse.urlDownload!=null && dataResponse.urlDownload != ""){
-		        			$("#downloadHelper").attr("href",dataResponse.urlDownload);
-		        			
-		        			document.getElementById("downloadHelper").click();
-						}						
-					}
-					
+					ACC.facturacion.manejarRespuesta(dataResponse);
 				}
-			
 			,
 				error : function() {
 					alert("Error procesar la solicitud de descarga de factura");	
 				}
 			});
+		}
+	 },
+	 
+	 
+	 manejarRespuesta : function (dataResponse){
+		var descargarFactura = false;
+		var strMensajeError = "";
+		if(dataResponse != null && dataResponse.errores != null ){
+    		$.each(dataResponse.errores, function( index, value ) {
+    			if(value.txt_msj.trim() != ""){
+    				strMensajeError = strMensajeError + value.txt_msj+"<br>";
+    			}
+    		});
+		}
+		
+		if(strMensajeError != ""){
+			$("#dialogMensajes" ).dialog( "open" );
+			$("#dialogMensajesContent").html(strMensajeError);
+		}else{
+			if(dataResponse.urlDownload!=null && dataResponse.urlDownload != ""){
+    			$("#downloadHelper").attr("href",dataResponse.urlDownload);
+    			
+    			document.getElementById("downloadHelper").click();
+			}
 		}
 	 },
 	 
